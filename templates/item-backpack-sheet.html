@@ -1,0 +1,23 @@
+<form class="dnd5e item-sheet" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{img}}" title="{{name}}" height="64" width="64"/>
+        <h1>{{name}}</h1>
+    </header>
+
+    <ol class="item-details">
+        <li>
+            <label>Quantity</label>
+            <input type="text" name="data.quantity.value" value="{{data.quantity.value}}" data-dtype="{{data.quantity.type}}"/>
+        </li>
+        <li>
+            <label>Weight</label>
+            <input type="text" name="data.weight.value" value="{{data.weight.value}}" data-dtype="{{data.weight.type}}"/>
+        </li>
+        <li>
+            <label>Price</label>
+            <input type="text" name="data.price.value" value="{{data.price.value}}" data-dtype="{{data.price.type}}"/>
+        </li>
+    </ol>
+
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>
+</form>

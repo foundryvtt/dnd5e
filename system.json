@@ -1,0 +1,23 @@
+{
+  "name": "dnd5e",
+  "title": "Dungeons & Dragons 5th Edition",
+  "description": "A comprehensive game system for running games of Dungeons & Dragons 5th Edition in the Foundry VTT environment.",
+  "version": 0.1,
+  "author": "Atropos",
+  "scripts": ["./scripts/actors.js", "./scripts/items.js"],
+  "styles": ["./css/dnd5e.css"],
+  "packs": [
+    {
+      "name": "monsters",
+  		"label": "Monsters",
+      "system": "dnd5e",
+      "module": "dnd5e",
+  		"path": "./packs/monsters.db",
+  		"entity": "Actor"
+    }
+  ],
+  "languages": ["en"],
+  "initiative": "1d20 + @abilities.dex.mod + @attributes.init.value + (@abilities.dex.value / 100)",
+  "gridDistance": 5,
+  "gridUnits": "ft"
+}

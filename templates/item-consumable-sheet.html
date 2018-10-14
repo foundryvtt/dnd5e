@@ -1,0 +1,61 @@
+<form class="dnd5e item-sheet" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{img}}" title="{{name}}" height="64" width="64"/>
+        <h1>{{name}}</h1>
+    </header>
+
+    <ol class="item-details">
+        <li>
+            <label>Quantity</label>
+            <input type="text" name="data.quantity.value" value="{{data.quantity.value}}" data-dtype="{{data.quantity.type}}"/>
+        </li>
+        <li>
+            <label>Weight</label>
+            <input type="text" name="data.weight.value" value="{{data.weight.value}}" data-dtype="{{data.weight.type}}"/>
+        </li>
+        <li>
+            <label>Price</label>
+            <input type="text" name="data.price.value" value="{{data.price.value}}" data-dtype="{{data.price.type}}"/>
+        </li>
+    </ol>
+
+    <div class="form-group">
+        <label>Consumable Name:</label>
+        <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
+    </div>
+
+    <div class="form-group">
+        <label>Consumable Icon</label>
+        <input type="text" name="img" placeholder="Image URL" value="{{img}}" data-dtype="String"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{data.consumableType.label}}</label>
+        <select name="data.consumableType.value" data-dtype="{{data.consumableType.type}}">
+            {{#select data.consumableType.value}}
+            <option value=""></option>
+            {{#each consumableTypes as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="form-group consumable-charges">
+        <label>{{data.charges.label}}</label>
+        <input type="text" name="data.charges.value" value="{{data.charges.value}}" data-dtype="{{data.charges.type}}"/>
+        <input type="text" name="data.charges.max" value="{{data.charges.max}}" data-dtype="{{data.charges.type}}"/>
+    </div>
+
+     <div class="form-group">
+        <label>{{data.autoUse.label}}</label>
+        <input type="checkbox" name="data.autoUse.value" value="1" data-dtype="{{data.autoUse.type}}" {{checked data.autoUse.value}}/>
+    </div>
+
+     <div class="form-group">
+        <label>{{data.autoDestroy.label}}</label>
+        <input type="checkbox" name="data.autoDestroy.value" value="1" data-dtype="{{data.autoDestroy.type}}" {{checked data.autoDestroy.value}}/>
+    </div>
+
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>
+</form>
