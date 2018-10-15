@@ -17,6 +17,17 @@
   flex: 1;
 }
 /* ----------------------------------------- */
+.dnd5e.actor-sheet {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  font-size: 14px;
+  /* Primary Attributes Section */
+}
+.dnd5e.actor-sheet > * {
+  flex: 1;
+}
 .dnd5e.actor-sheet input[type="text"] {
   background: none;
   border: none;
@@ -34,17 +45,9 @@
 .dnd5e.actor-sheet label {
   display: block;
 }
-/* ----------------------------------------- */
-.dnd5e.actor-sheet {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  font-size: 14px;
-  /* Primary Attributes Section */
-}
-.dnd5e.actor-sheet > * {
-  flex: 1;
+.dnd5e.actor-sheet .rollable:hover {
+  color: #000;
+  text-shadow: 0 0 10px red;
 }
 .dnd5e.actor-sheet .sheet-sidebar {
   flex: 0 0 250px;

@@ -39,26 +39,100 @@ class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
+  /**
+   * Return the amount of experience required to gain a certain character level.
+   * @param level {Number}  The desired level
+   * @return {Number}       The XP required
+   */
   getLevelExp(level) {
     const levels = [0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
       120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000];
     return levels[Math.min(level, levels.length - 1)];
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Skill Check
+   * @param skill {String}    The skill id
+   */
+  rollSkill(skillName) {
+    let skl = this.data.data.skills[skillName],
+      abl = this.data.data.abilities[skl.ability],
+      parts = ["1d20", "@mod", "@bonus"],
+      flavor = `${skl.label} Skill Check`;
+
+    // Create the dialog content
+    let content = `
+    <form>
+        <div class="form-group">
+            <label>Formula</label>
+            <input type="text" name="formula" value="1d20 + @mod + @bonus" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Situational Bonus?</label>
+            <input type="text" name="bonus" value="" placeholder="e.g. +1d4"/>
+        </div>
+    </form>
+    `;
+
+    // Create a dialog
+    new Dialog({
+      title: `${skl.label} (${abl.label}) Skill Check`,
+      content: content,
+      buttons: {
+        advantage: {
+          label: "Advantage",
+          callback: () => {
+            parts[0] = "2d20kh";
+            flavor += " (Advantage)"
+          }
+        },
+        normal: {
+          label: "Normal",
+        },
+        disadvantage: {
+          label: "Disadvantage",
+          callback: () => {
+            parts[0] = "2d20kl";
+            flavor += " (Disadvantage)"
+          }
+        }
+      },
+      close: html => {
+        let bonus = html.find('[name="bonus"]').val();
+        new Roll(parts.join(" + "), {mod: skl.mod, bonus: bonus}).toMessage({
+          alias: this.name,
+          flavor: flavor,
+          sound: "sounds/dice.wav"
+        });
+      }
+    }).render(true);
+  }
 }
 
 
 /* -------------------------------------------- */
+/*  Actor Character Sheet                       */
+/* -------------------------------------------- */
 
-
+/**
+ * Extend the basic ActorSheet class to do all the D&D5e things!
+ */
 class Actor5eSheet extends ActorSheet {
 
+  /**
+   * The actor sheet template comes packaged with the system
+   */
   get template() {
     return "public/systems/dnd5e/templates/actor-sheet.html";
   }
 
   /* -------------------------------------------- */
 
+  /**
+   * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
+   */
   getData() {
     let actorData = duplicate(this.actor.data);
 
@@ -165,6 +239,10 @@ class Actor5eSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Activate event listeners using the prepared sheet HTML
+   * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
+   */
 	activateListeners(html) {
 	  super.activateListeners(html);
 
@@ -207,6 +285,11 @@ class Actor5eSheet extends ActorSheet {
       });
     });
 
+
+    /* -------------------------------------------- */
+    /*  Skills
+    /* -------------------------------------------- */
+
     // Toggle Skill Proficiency
     html.find('.skill-proficiency').click(ev => {
       let field = $(ev.currentTarget).siblings(".prof");
@@ -214,6 +297,16 @@ class Actor5eSheet extends ActorSheet {
       let formData = validateForm(field.parents('form')[0]);
       this.actor.update(formData, true);
     });
+
+    // Roll Skill Checks
+    html.find('h3.skill-name').click(ev => {
+      let skl = ev.currentTarget.parentElement.getAttribute("data-skill");
+      this.actor.rollSkill(skl);
+    });
+
+    /* -------------------------------------------- */
+    /*  Inventory
+    /* -------------------------------------------- */
 
     // Create New Item
     html.find('.item-create').click(ev => {
@@ -244,7 +337,6 @@ class Actor5eSheet extends ActorSheet {
 CONFIG.Actor.actorClass = Actor5e;
 CONFIG.Actor.sheetClass = Actor5eSheet;
 CONFIG.Actor5eSheet = {
-  "template": "templates/sheets/dnd5e-actor-sheet.html",
   "width": 720,
   "height": 800
 };

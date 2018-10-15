@@ -29,6 +29,9 @@
 
 
 .dnd5e.actor-sheet {
+  .flexrow();
+  font-size: 14px;
+
   input[type="text"] {
     background: none;
     border: none;
@@ -47,15 +50,12 @@
   span, label {
     display: block;
   }
-}
 
+  .rollable:hover {
+    color: #000;
+    text-shadow: 0 0 10px red;
+  }
 
-/* ----------------------------------------- */
-
-
-.dnd5e.actor-sheet {
-  .flexrow();
-  font-size: 14px;
 
   .sheet-sidebar {
     flex: 0 0 250px;

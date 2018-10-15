@@ -226,13 +226,13 @@
         <!-- SKILLS -->
         <div class="tab skills active" data-tab="skills">
             <ol class="directory-list">
-            {{#each data.skills}}
-                <li class="skill {{@key}}">
-                    <input class="prof" type="hidden" name="data.skills.{{@key}}.value" value="{{this.value}}"/>
-                    <a class="skill-proficiency" title="{{this.hover}}">{{{this.icon}}}</a>
-                    <h3 class="skill-name">{{this.label}}</h3>
-                    <span class="skill-ability">{{this.ability}}</span>
-                    <span class="skill-mod">{{numberFormat this.mod decimals=0 sign=true}}</span>
+            {{#each data.skills as |skill s|}}
+                <li class="skill" data-skill="{{s}}">
+                    <input class="prof" type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}"/>
+                    <a class="skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
+                    <h3 class="skill-name rollable">{{skill.label}}</h3>
+                    <span class="skill-ability">{{skill.ability}}</span>
+                    <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>
             {{/each}}
             </ol>
