@@ -19,13 +19,14 @@ class Actor5e extends Actor {
     data.details.xp.pct = Math.min(Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
     data.attributes.prof.value = Math.floor((data.details.level.value + 7) / 4);
 
-    // Ability modifiers
-    for (let [k, attr] of Object.entries(data.abilities)) {
-      attr.mod = Math.floor((attr.value - 10) / 2);
+    // Ability modifiers and saves
+    for (let abl of Object.values(data.abilities)) {
+      abl.mod = Math.floor((abl.value - 10) / 2);
+      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value);
     }
 
     // Skill modifiers
-    for (let [k, skl] of Object.entries(data.skills)) {
+    for (let skl of Object.values(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.mod = data.abilities[skl.ability].mod + (skl.value * data.attributes.prof.value);
     }
@@ -52,18 +53,8 @@ class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /**
-   * Roll a Skill Check
-   * @param skill {String}    The skill id
-   */
-  rollSkill(skillName) {
-    let skl = this.data.data.skills[skillName],
-      abl = this.data.data.abilities[skl.ability],
-      parts = ["1d20", "@mod", "@bonus"],
-      flavor = `${skl.label} Skill Check`;
-
-    // Create the dialog content
-    let content = `
+  get _skillSaveRollModalHTML() {
+    return `
     <form>
         <div class="form-group">
             <label>Formula</label>
@@ -75,11 +66,25 @@ class Actor5e extends Actor {
         </div>
     </form>
     `;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Skill Check
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param skill {String}    The skill id
+   */
+  rollSkill(skillName) {
+    let skl = this.data.data.skills[skillName],
+      abl = this.data.data.abilities[skl.ability],
+      parts = ["1d20", "@mod", "@bonus"],
+      flavor = `${skl.label} Skill Check`;
 
     // Create a dialog
     new Dialog({
       title: `${skl.label} (${abl.label}) Skill Check`,
-      content: content,
+      content: this._skillSaveRollModalHTML,
       buttons: {
         advantage: {
           label: "Advantage",
@@ -102,6 +107,123 @@ class Actor5e extends Actor {
       close: html => {
         let bonus = html.find('[name="bonus"]').val();
         new Roll(parts.join(" + "), {mod: skl.mod, bonus: bonus}).toMessage({
+          alias: this.name,
+          flavor: flavor,
+          sound: "sounds/dice.wav"
+        });
+      }
+    }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a generic ability test or saving throw.
+   * Prompt the user for input on which variety of roll they want to do.
+   * @param abilityId {String}    The ability id (e.g. "str")
+   */
+  rollAbility(abilityId) {
+    let abl = this.data.data.abilities[abilityId];
+    new Dialog({
+      title: `${abl.label} Ability Check`,
+      content: `<p>What type of ${abl.label} check?</p>`,
+      buttons: {
+        test: {
+          label: "Ability Test",
+          callback: () => this.rollAbilityTest(abilityId)
+        },
+        save: {
+          label: "Saving Throw",
+          callback: () => this.rollAbilitySave(abilityId)
+        }
+      }
+    }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll an Ability Test
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param abilityId {String}    The ability ID (e.g. "str")
+   */
+  rollAbilityTest(abilityId) {
+    let abl = this.data.data.abilities[abilityId],
+        parts = ["1d20", "@mod", "@bonus"],
+        flavor = `${abl.label} Ability Test`;
+
+    // Create a dialog
+    new Dialog({
+      title: flavor,
+      content: this._skillSaveRollModalHTML,
+      buttons: {
+        advantage: {
+          label: "Advantage",
+          callback: () => {
+            parts[0] = "2d20kh";
+            flavor += " (Advantage)"
+          }
+        },
+        normal: {
+          label: "Normal",
+        },
+        disadvantage: {
+          label: "Disadvantage",
+          callback: () => {
+            parts[0] = "2d20kl";
+            flavor += " (Disadvantage)"
+          }
+        }
+      },
+      close: html => {
+        let bonus = html.find('[name="bonus"]').val();
+        new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).toMessage({
+          alias: this.name,
+          flavor: flavor,
+          sound: "sounds/dice.wav"
+        });
+      }
+    }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll an Ability Saving Throw
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param abilityId {String}    The ability ID (e.g. "str")
+   */
+  rollAbilitySave(abilityId) {
+    let abl = this.data.data.abilities[abilityId],
+        parts = ["1d20", "@mod", "@bonus"],
+        flavor = `${abl.label} Saving Throw`;
+
+    // Create a dialog
+    new Dialog({
+      title: flavor,
+      content: this._skillSaveRollModalHTML,
+      buttons: {
+        advantage: {
+          label: "Advantage",
+          callback: () => {
+            parts[0] = "2d20kh";
+            flavor += " (Advantage)"
+          }
+        },
+        normal: {
+          label: "Normal",
+        },
+        disadvantage: {
+          label: "Disadvantage",
+          callback: () => {
+            parts[0] = "2d20kl";
+            flavor += " (Disadvantage)"
+          }
+        }
+      },
+      close: html => {
+        let bonus = html.find('[name="bonus"]').val();
+        new Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).toMessage({
           alias: this.name,
           flavor: flavor,
           sound: "sounds/dice.wav"
@@ -139,11 +261,17 @@ class Actor5eSheet extends ActorSheet {
     // Flag permissions
     actorData.owner = this.actor.owner;
 
+    // Ability proficiency
+    for ( let abl of Object.values(actorData.data.abilities)) {
+      abl.icon = this._getProficiencyIcon(abl.proficient);
+      abl.hover = this._getProficiencyHover(abl.proficient);
+    }
+
     // Update skill labels
-    for ( let [n, skl] of Object.entries(actorData.data.skills)) {
+    for ( let skl of Object.values(actorData.data.skills)) {
       skl.ability = actorData.data.abilities[skl.ability].label.substring(0, 3);
-      skl.icon = this._getSkillIcon(skl.value);
-      skl.hover = this._getSkillHover(skl.value);
+      skl.icon = this._getProficiencyIcon(skl.value);
+      skl.hover = this._getProficiencyHover(skl.value);
     }
 
     // Prepare owned items
@@ -216,10 +344,10 @@ class Actor5eSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _getSkillIcon(level) {
+  _getProficiencyIcon(level) {
     const icons = {
-      0: '<i class="fas fa-ban"></i>',
-      0.5: '<i class="far fa-circle"></i>',
+      0: '<i class="far fa-circle"></i>',
+      0.5: '<i class="fas fa-adjust"></i>',
       1: '<i class="fas fa-check"></i>',
       2: '<i class="fas fa-check-double"></i>'
     };
@@ -228,7 +356,7 @@ class Actor5eSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _getSkillHover(level) {
+  _getProficiencyHover(level) {
     return {
       0: "Not Proficient",
       1: "Proficient",
@@ -287,12 +415,26 @@ class Actor5eSheet extends ActorSheet {
 
 
     /* -------------------------------------------- */
-    /*  Skills
+    /*  Abilities and Skills
     /* -------------------------------------------- */
+
+    // Ability Proficiency
+    html.find('.ability-proficiency').click(ev => {
+      let field = $(ev.currentTarget).siblings('input[type="hidden"]');
+      field.val(1 - field.val());
+      let formData = validateForm(field.parents('form')[0]);
+      this.actor.update(formData, true);
+    });
+
+    // Ability Checks
+    html.find('h3.ability-name').click(ev => {
+      let abl = ev.currentTarget.parentElement.getAttribute("data-ability");
+      this.actor.rollAbility(abl);
+    });
 
     // Toggle Skill Proficiency
     html.find('.skill-proficiency').click(ev => {
-      let field = $(ev.currentTarget).siblings(".prof");
+      let field = $(ev.currentTarget).siblings('input[type="hidden"]');
       field.val(this._cycleSkillProficiency(parseFloat(field.val())));
       let formData = validateForm(field.parents('form')[0]);
       this.actor.update(formData, true);
@@ -343,3 +485,4 @@ CONFIG.Actor5eSheet = {
 
 
 /* -------------------------------------------- */
+

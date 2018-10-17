@@ -47,13 +47,13 @@
     }
   }
 
-  span, label {
-    display: block;
-  }
+  span, label { display: block; }
+  .mce-panel span { display: inherit; }
 
   .rollable:hover {
     color: #000;
     text-shadow: 0 0 10px red;
+    cursor: pointer;
   }
 
 
@@ -265,6 +265,10 @@
     padding-right: 8px;
     overflow-y: scroll;
   }
+
+  .biography body#tinymce {
+    font-size: 14px;
+  }
 }
 
 
@@ -300,25 +304,33 @@
     line-height: 40px;
     border-bottom: 1px solid @borderLight;
 
+    .ability-proficiency {
+      flex: 0 0 24px;
+    }
+
     .ability-name {
       margin: 0;
       font-size: 16px;
     }
 
     .ability-score {
-      flex: 0 0 28px;
-      margin-right: 5px;
+      flex: 0 0 36px;
       > input {
         font-size: 20px;
-        text-align: right;
+        text-align: center;
       }
     }
 
-    .ability-mod {
-      flex: 0 0 28px;
+    .ability-mod,
+    .ability-save {
+      flex: 0 0 24px;
+      margin: 8px 0;
+      line-height: 24px;
       color: #666;
       text-align: center;
     }
+    .ability-mod { border-right: 1px solid @borderLight; }
+    .ability-save { border-left: 1px solid @borderLight; }
   }
 
   .ability:last-child {

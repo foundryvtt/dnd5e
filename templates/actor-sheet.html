@@ -186,13 +186,16 @@
         <!-- ABILITY SCORES -->
         <div class="tab abilities active" data-tab="abilities">
             <ol class="abilities-list directory-list">
-            {{#each data.abilities}}
-                <li class="ability {{@key}}">
-                    <h3 class="ability-name">{{this.label}}</h3>
-                    <span class="ability-score">
-                        <input name="data.abilities.{{@key}}.value" type="text" value="{{this.value}}" placeholder="10"/>
+            {{#each data.abilities as |ability id|}}
+                <li class="ability" data-ability="{{id}}">
+                    <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"/>
+                    <a class="ability-proficiency" title="{{ability.hover}}">{{{ability.icon}}}</a>
+                    <h3 class="ability-name rollable">{{ability.label}}</h3>
+                    <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                    <span class="ability-score" title="Ability Score">
+                        <input name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" placeholder="10"/>
                     </span>
-                    <span class="ability-mod">({{numberFormat this.mod decimals=0 sign=true}})</span>
+                    <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
                 </li>
             {{/each}}
             </ol>
@@ -228,7 +231,7 @@
             <ol class="directory-list">
             {{#each data.skills as |skill s|}}
                 <li class="skill" data-skill="{{s}}">
-                    <input class="prof" type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}"/>
+                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}"/>
                     <a class="skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h3 class="skill-name rollable">{{skill.label}}</h3>
                     <span class="skill-ability">{{skill.ability}}</span>

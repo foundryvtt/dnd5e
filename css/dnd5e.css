@@ -45,9 +45,13 @@
 .dnd5e.actor-sheet label {
   display: block;
 }
+.dnd5e.actor-sheet .mce-panel span {
+  display: inherit;
+}
 .dnd5e.actor-sheet .rollable:hover {
   color: #000;
   text-shadow: 0 0 10px red;
+  cursor: pointer;
 }
 .dnd5e.actor-sheet .sheet-sidebar {
   flex: 0 0 250px;
@@ -266,6 +270,9 @@
   padding-right: 8px;
   overflow-y: scroll;
 }
+.dnd5e.actor-sheet .sheet-body .biography body#tinymce {
+  font-size: 14px;
+}
 /* ----------------------------------------- */
 /* Abilities Sidebar Tab
 /* ----------------------------------------- */
@@ -298,22 +305,33 @@
 .dnd5e .abilities .ability > * {
   flex: 1;
 }
+.dnd5e .abilities .ability .ability-proficiency {
+  flex: 0 0 24px;
+}
 .dnd5e .abilities .ability .ability-name {
   margin: 0;
   font-size: 16px;
 }
 .dnd5e .abilities .ability .ability-score {
-  flex: 0 0 28px;
-  margin-right: 5px;
+  flex: 0 0 36px;
 }
 .dnd5e .abilities .ability .ability-score > input {
   font-size: 20px;
-  text-align: right;
+  text-align: center;
 }
-.dnd5e .abilities .ability .ability-mod {
-  flex: 0 0 28px;
+.dnd5e .abilities .ability .ability-mod,
+.dnd5e .abilities .ability .ability-save {
+  flex: 0 0 24px;
+  margin: 8px 0;
+  line-height: 24px;
   color: #666;
   text-align: center;
+}
+.dnd5e .abilities .ability .ability-mod {
+  border-right: 1px solid #CCC;
+}
+.dnd5e .abilities .ability .ability-save {
+  border-left: 1px solid #CCC;
 }
 .dnd5e .abilities .ability:last-child {
   border-bottom: 1px solid #666;

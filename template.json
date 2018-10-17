@@ -6,37 +6,43 @@
           "type": "Number",
           "label": "Strength",
           "value": 10,
-          "min": 3
+          "min": 3,
+          "proficient": 0
         },
         "dex": {
           "type": "Number",
           "label": "Dexterity",
           "value": 10,
-          "min": 3
+          "min": 3,
+          "proficient": 0
         },
         "con": {
           "type": "Number",
           "label": "Constitution",
           "value": 10,
-          "min": 3
+          "min": 3,
+          "proficient": 0
         },
         "int": {
           "type": "Number",
           "label": "Intelligence",
           "value": 10,
-          "min": 3
+          "min": 3,
+          "proficient": 0
         },
         "wis": {
           "type": "Number",
           "label": "Wisdom",
           "value": 10,
-          "min": 3
+          "min": 3,
+          "proficient": 0
         },
         "cha": {
           "type": "Number",
           "label": "Charisma",
           "value": 10,
-          "min": 3
+          "min": 3,
+          "proficient": 0
         }
       },
       "attributes": {
@@ -45,15 +51,12 @@
           "label": "Armor Class",
           "min": 0
         },
-        "hd": {
-          "type": "Number",
-          "label": "Hit Dice",
-          "min": 0
-        },
         "hp": {
           "type": "Number",
           "label": "Hit Points",
-          "min": 0
+          "value": 10,
+          "min": 0,
+          "max": 10
         },
         "init": {
           "type": "Number",
@@ -76,17 +79,21 @@
         }
       },
       "details": {
-        "race": {
+        "alignment": {
           "type": "String",
-          "label": "Race"
+          "label": "Alignment"
+        },
+        "biography": {
+          "type": "String",
+          "label": "Biography"
         },
         "class": {
           "type": "String",
           "label": "Class"
         },
-        "biography": {
+        "race": {
           "type": "String",
-          "label": "Biography"
+          "label": "Race"
         }
       },
       "skills": {
@@ -235,11 +242,14 @@
       }
     },
     "character": {
+      "attributes": {
+        "hd": {
+          "type": "Number",
+          "label": "Hit Dice",
+          "min": 0
+        }
+      },
       "details": {
-        "alignment": {
-          "type": "String",
-          "label": "Alignment"
-        },
         "background": {
           "type": "String",
           "label": "Background"
@@ -282,6 +292,42 @@
         "secondary": {
           "type": "String",
           "label": "Secondary Resource"
+        }
+      }
+    },
+    "npc": {
+      "details": {
+        "type": {
+          "type": "String",
+          "label": "Creature Type"
+        },
+        "environment": {
+          "type": "String",
+          "label": "Environment"
+        },
+        "cr": {
+          "type": "Number",
+          "label": "Challenge Rating",
+          "value": 1,
+          "min": 0
+        },
+        "xp": {
+          "type": "Number",
+          "label": "Kill Experience"
+        },
+        "source": {
+          "type": "Source",
+          "label": "Source Location"
+        }
+      },
+      "resources": {
+        "legact": {
+          "type": "Number",
+          "label": "Legendary Actions"
+        },
+        "legres": {
+          "type": "Number",
+          "label": "Legendary Resistance"
         }
       }
     }

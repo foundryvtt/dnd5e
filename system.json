@@ -14,6 +14,22 @@
       "module": "dnd5e",
       "path": "./packs/monsters.db",
       "entity": "Actor"
+    },
+    {
+      "name": "items",
+      "label": "Items",
+      "system": "dnd5e",
+      "module": "dnd5e",
+      "path": "./packs/items.db",
+      "entity": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "Spells",
+      "system": "dnd5e",
+      "module": "dnd5e",
+      "path": "./packs/spells.db",
+      "entity": "Item"
     }
   ],
   "languages": ["en"],
