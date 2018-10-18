@@ -19,7 +19,7 @@
                 </div>
                 <div class="experience">
                     <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0"/>
-                    <span class="max"> / {{data.details.xp.max}}</span>
+                    <span class="max" data-wpad="12"> / {{data.details.xp.max}}</span>
                 </div>
             </div>
 
@@ -175,7 +175,7 @@
 
     <!-- SIDEBAR -->
     <section class="sheet-sidebar">
-        <img class="sheet-profile" src="{{img}}" title="{{name}}" height="64" width="64"/>
+        <img class="sheet-profile" src="{{img}}" title="{{name}}" height="64" width="64" data-edit="img"/>
 
         <nav class="sheet-tabs tabs" data-tab-container="sidebar">
             <a class="item active" data-tab="abilities">Abilities</a>

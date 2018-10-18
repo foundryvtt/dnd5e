@@ -374,6 +374,27 @@ class Actor5eSheet extends ActorSheet {
 	activateListeners(html) {
 	  super.activateListeners(html);
 
+	  // Pad field width
+    html.find('[data-wpad]').each((i, e) => {
+      let w = e.innerText.length * parseInt(e.getAttribute("data-wpad")) / 2;
+      e.setAttribute("style", "flex: 0 0 " + w + "px");
+    });
+
+	  // Profile Image Edit
+    html.find('img.sheet-profile').click(ev => {
+      new Dialog({
+        title: `${this.actor.name} Profile Image`,
+        content: `<div class="form-group-stacked"><input type="text" name="img" value="${this.actor.img}" placeholder="Image Path"/></div>`,
+        buttons: {
+          save: {
+            icon: '<i class="fas fa-save"></i>',
+            label: "Save",
+            callback: html => this.actor.update({img: html.find('input[name="img"]').val()}, true)
+          },
+        }
+      }).render(true);
+    });
+
 	  // Activate TinyMCE Editors
 	  html.find(".editor a.editor-edit").click(ev => {
 	    let button = $(ev.currentTarget),

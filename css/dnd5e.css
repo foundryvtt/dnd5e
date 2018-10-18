@@ -156,10 +156,6 @@
   text-align: right;
   height: 20px;
 }
-.dnd5e.actor-sheet .sheet-header .charlevel .experience > .max {
-  flex: 0;
-  min-width: 30%;
-}
 .dnd5e.actor-sheet .sheet-header .details {
   flex: 0 0 100%;
   height: 40px;
@@ -458,9 +454,9 @@
   overflow: hidden;
 }
 .class-list .item {
-  background: rgba(0, 0, 0, 0.05);
-  padding: 4px 8px;
-  border: 1px solid #999;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 3px 6px;
+  border: 1px solid #CCC;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 5px;
