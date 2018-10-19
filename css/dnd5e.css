@@ -375,11 +375,59 @@
 /* ----------------------------------------- */
 /* Inventory Tab
 /* ----------------------------------------- */
+.currency {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 3px 0;
+  border-bottom: 1px solid #CCC;
+}
+.currency > * {
+  flex: 1;
+}
+.currency h4.currency-name {
+  flex: 0;
+  margin: 0;
+  font-weight: 700;
+  padding: 0 5px 0 32px;
+}
+.currency ol.currency-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.currency ol.currency-list > * {
+  flex: 1;
+}
+.currency ol.currency-list li.denomination {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  justify-content: flex-end;
+}
+.currency ol.currency-list li.denomination > * {
+  flex: 1;
+}
+.currency ol.currency-list li.denomination label {
+  text-transform: uppercase;
+  flex: 0 0 30px;
+  font-weight: 700;
+}
+.currency ol.currency-list li.denomination input {
+  text-align: left;
+  max-width: 48px;
+}
 .inventory-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: calc(100% - 40px);
   overflow-y: scroll;
 }
 .inventory-list .item {

@@ -376,7 +376,8 @@ class Actor5eSheet extends ActorSheet {
 
 	  // Pad field width
     html.find('[data-wpad]').each((i, e) => {
-      let w = e.innerText.length * parseInt(e.getAttribute("data-wpad")) / 2;
+      let text = e.tagName === "INPUT" ? e.value : e.innerText,
+          w = text.length * parseInt(e.getAttribute("data-wpad")) / 2;
       e.setAttribute("style", "flex: 0 0 " + w + "px");
     });
 

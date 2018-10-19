@@ -239,6 +239,28 @@
           "type": "String",
           "label": "Condition Immunities"
         }
+      },
+      "currency": {
+        "pp": {
+          "type": "Number",
+          "label": "Platinum",
+          "value": 0
+        },
+        "gp": {
+          "type": "Number",
+          "label": "Gold",
+          "value": 0
+        },
+        "sp": {
+          "type": "Number",
+          "label": "Silver",
+          "value": 0
+        },
+        "cp": {
+          "type": "Number",
+          "label": "Copper",
+          "value": 0
+        }
       }
     },
     "character": {

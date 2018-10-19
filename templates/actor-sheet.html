@@ -27,9 +27,6 @@
                 <li class="character-detail">
                     <input name="data.details.race.value" type="text" value="{{data.details.race.value}}" placeholder="Race"/>
                 </li>
-                <!--<li class="character-detail">-->
-                    <!--<input name="data.details.class.value" type="text" value="{{data.details.class.value}}" placeholder="Class"/>-->
-                <!--</li>-->
                 <li class="character-detail">
                     <input name="data.details.background.value" type="text" value="{{data.details.background.value}}" placeholder="Background"/>
                 </li>
@@ -131,6 +128,18 @@
 
         <!-- INVENTORY -->
         <div class="tab inventory" data-tab="inventory">
+            <div class="currency">
+                <h4 class="currency-name">Currency</h4>
+                <ol class="currency-list">
+                    {{#each data.currency as |c i|}}
+                    <li class="denomination {{i}}">
+                        <label>{{i}}:</label>
+                        <input type="text" name="data.currency.{{i}}.value" value="{{c.value}}" data-dtype="{{c.type}}"/>
+                    </li>
+                    {{/each}}
+                </ol>
+            </div>
+
             <ol class="inventory-list directory-list">
             {{#each inventory as |section sid|}}
                 <li class="item inventory-header">
