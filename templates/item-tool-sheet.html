@@ -1,7 +1,9 @@
 <form class="dnd5e item-sheet" autocomplete="off">
     <header class="sheet-header">
         <img src="{{img}}" title="{{name}}" height="64" width="64"/>
-        <h1>{{name}}</h1>
+        <h1 class="itemname">
+            <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
+        </h1>
     </header>
 
     <ol class="item-details">
@@ -19,30 +21,39 @@
         </li>
     </ol>
 
-    <div class="form-group">
-        <label>Tool Name:</label>
-        <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
+    <nav class="sheet-tabs tabs" data-tab-container="primary">
+        <a class="item active" data-tab="description">Description</a>
+        <a class="item" data-tab="details">Details</a>
+    </nav>
+
+    <div class="tab editor active" data-tab="description">
+        <div class="editor-content" data-edit="data.description.value">
+           {{{data.description.value}}}
+        </div>
+        <a class="editor-edit"><i class="fas fa-edit"></i></a>
     </div>
 
-    <div class="form-group">
-        <label>Tool Icon</label>
-        <input type="text" name="img" placeholder="Image URL" value="{{img}}" data-dtype="String"/>
-    </div>
+    <div class="tab" data-tab="details">
+        <div class="form-group">
+            <label>Tool Icon</label>
+            <input type="text" name="img" placeholder="Image URL" value="{{img}}" data-dtype="String"/>
+        </div>
 
-    <div class="form-group">
-        <label>{{data.ability.label}}</label>
-        <select name="data.ability.value" data-dtype="{{data.ability.type}}">
-            {{#select data.ability.value}}
-            {{#each abilities as |ability a|}}
-            <option value="{{a}}">{{ability.label}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-    </div>
+        <div class="form-group">
+            <label>{{data.ability.label}}</label>
+            <select name="data.ability.value" data-dtype="{{data.ability.type}}">
+                {{#select data.ability.value}}
+                {{#each abilities as |ability a|}}
+                <option value="{{a}}">{{ability.label}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
 
-     <div class="form-group">
-        <label>{{data.proficient.label}}</label>
-        <input type="checkbox" name="data.proficient.value" value="1" data-dtype="{{data.proficient.type}}" {{checked data.proficient.value}}/>
+         <div class="form-group">
+            <label>{{data.proficient.label}}</label>
+            <input type="checkbox" name="data.proficient.value" value="1" data-dtype="{{data.proficient.type}}" {{checked data.proficient.value}}/>
+        </div>
     </div>
 
     <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>

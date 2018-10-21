@@ -28,7 +28,7 @@ class Actor5e extends Actor {
     // Skill modifiers
     for (let skl of Object.values(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
-      skl.mod = data.abilities[skl.ability].mod + (skl.value * data.attributes.prof.value);
+      skl.mod = data.abilities[skl.ability].mod + Math.floor(skl.value * data.attributes.prof.value);
     }
 
     // Attributes
@@ -385,7 +385,9 @@ class Actor5eSheet extends ActorSheet {
     html.find('img.sheet-profile').click(ev => {
       new Dialog({
         title: `${this.actor.name} Profile Image`,
-        content: `<div class="form-group-stacked"><input type="text" name="img" value="${this.actor.img}" placeholder="Image Path"/></div>`,
+        content: `<div class="form-group-stacked">
+                    <input type="text" name="img" value="${this.actor.img}" placeholder="Image Path" autocomplete="off"/>
+                  </div>`,
         buttons: {
           save: {
             icon: '<i class="fas fa-save"></i>',

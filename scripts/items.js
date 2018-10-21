@@ -15,6 +15,33 @@ class Item5eSheet extends ItemSheet {
     let type = this.item.type;
     return `public/systems/dnd5e/templates/item-${type}-sheet.html`;
   }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+
+	  // Activate TinyMCE Editors
+	  html.find(".editor a.editor-edit").click(ev => {
+	    let button = $(ev.currentTarget),
+	        editor = button.siblings(".editor-content");
+	    let mce = createEditor({
+        target: editor[0],
+        height: editor.parent().height() - 40,
+        save_enablewhendirty: true,
+        save_onsavecallback: ed => {
+          let target = editor.attr("data-edit");
+          this.item.update({[target]: ed.getContent()}, true);
+          ed.remove();
+          ed.destroy();
+        }
+      }).then(ed => {
+        button.hide();
+        ed[0].focus();
+      });
+    });
+
+    // Activate tabs
+    html.find('.tabs').each((_, el) => new Tabs(el));
+  }
 }
 
 

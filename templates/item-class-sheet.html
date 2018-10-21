@@ -1,28 +1,39 @@
 <form class="dnd5e item-sheet" autocomplete="off">
     <header class="sheet-header">
         <img src="{{img}}" title="{{name}}" height="64" width="64"/>
-        <h1>{{name}}</h1>
+        <h1 class="itemname">
+            <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
+        </h1>
     </header>
 
-    <div class="form-group">
-        <label>Class Name:</label>
-        <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
+    <nav class="sheet-tabs tabs" data-tab-container="primary">
+        <a class="item active" data-tab="description">Description</a>
+        <a class="item" data-tab="details">Details</a>
+    </nav>
+
+    <div class="tab editor active" data-tab="description">
+        <div class="editor-content" data-edit="data.description.value">
+           {{{data.description.value}}}
+        </div>
+        <a class="editor-edit"><i class="fas fa-edit"></i></a>
     </div>
 
-    <div class="form-group">
-        <label>Class Icon</label>
-        <input type="text" name="img" placeholder="Image URL" value="{{img}}" data-dtype="String"/>
+    <div class="tab" data-tab="details">
+        <div class="form-group">
+            <label>Class Icon</label>
+            <input type="text" name="img" placeholder="Image URL" value="{{img}}" data-dtype="String"/>
+        </div>
+
+        <div class="form-group">
+            <label>{{data.levels.label}}</label>
+            <input type="text" name="data.levels.value" value="{{data.levels.value}}" data-dtype="{{data.levels.type}}"/>
+        </div>
+
+        <div class="form-group">
+            <label>{{data.subclass.label}}</label>
+            <input type="text" name="data.subclass.value" value="{{data.subclass.value}}" data-dtype="{{data.subclass.type}}"/>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label>{{data.levels.label}}</label>
-        <input type="text" name="data.levels.value" value="{{data.levels.value}}" data-dtype="{{data.levels.type}}"/>
-    </div>
-
-    <div class="form-group">
-        <label>{{data.subclass.label}}</label>
-        <input type="text" name="data.subclass.value" value="{{data.subclass.value}}" data-dtype="{{data.subclass.type}}"/>
-    </div>
-    
     <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>
 </form>

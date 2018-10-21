@@ -1,7 +1,9 @@
 <form class="dnd5e item-sheet" autocomplete="off">
     <header class="sheet-header">
         <img src="{{img}}" title="{{name}}" height="64" width="64"/>
-        <h1>{{name}}</h1>
+        <h1 class="itemname">
+            <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
+        </h1>
     </header>
 
     <ol class="item-details">
@@ -18,6 +20,13 @@
             <input type="text" name="data.price.value" value="{{data.price.value}}" data-dtype="{{data.price.type}}"/>
         </li>
     </ol>
+
+    <div class="editor" data-tab="description">
+        <div class="editor-content" data-edit="data.description.value">
+           {{{data.description.value}}}
+        </div>
+        <a class="editor-edit"><i class="fas fa-edit"></i></a>
+    </div>
 
     <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>
 </form>
