@@ -1,6 +1,19 @@
 
-class Item5eSheet extends ItemSheet {
+let _sheet = null;
 
+class Item5eSheet extends ItemSheet {
+  constructor(item) {
+    super(item);
+    this.mce = null;
+    _sheet = this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare item sheet data
+   * Start with the base item data and extending with additional properties for rendering.
+   */
   getData() {
     const data = duplicate(this.item.data);
     data['abilities'] = game.system.template.actor.data.abilities;
@@ -11,11 +24,21 @@ class Item5eSheet extends ItemSheet {
     return data;
   }
 
+  /* -------------------------------------------- */
+  
+  /**
+   * Use a type-specific template for each different item type
+   */
   get template() {
     let type = this.item.type;
     return `public/systems/dnd5e/templates/item-${type}-sheet.html`;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Activate listeners for interactive item sheet events
+   */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -23,7 +46,7 @@ class Item5eSheet extends ItemSheet {
 	  html.find(".editor a.editor-edit").click(ev => {
 	    let button = $(ev.currentTarget),
 	        editor = button.siblings(".editor-content");
-	    let mce = createEditor({
+	    createEditor({
         target: editor[0],
         height: editor.parent().height() - 40,
         save_enablewhendirty: true,
@@ -34,15 +57,30 @@ class Item5eSheet extends ItemSheet {
           ed.destroy();
         }
       }).then(ed => {
+        this.mce = ed[0];
         button.hide();
-        ed[0].focus();
+        this.mce.focus();
       });
     });
 
     // Activate tabs
     html.find('.tabs').each((_, el) => new Tabs(el));
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Customize sheet closing behavior to ensure we clean up the MCE editor
+   */
+  close() {
+    super.close();
+    if ( this.mce ) this.mce.destroy();
+  }
+
 }
+
+
+/* -------------------------------------------- */
 
 
 // Override CONFIG

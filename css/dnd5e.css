@@ -43,6 +43,20 @@
   border: 1px solid #111;
   box-shadow: 0 0 8px red;
 }
+.dnd5e.actor-sheet input:disabled,
+.dnd5e.actor-sheet select:disabled,
+.dnd5e.actor-sheet textarea:disabled {
+  color: #111;
+}
+.dnd5e.actor-sheet input:disabled:hover,
+.dnd5e.actor-sheet select:disabled:hover,
+.dnd5e.actor-sheet textarea:disabled:hover,
+.dnd5e.actor-sheet input:disabled:focus,
+.dnd5e.actor-sheet select:disabled:focus,
+.dnd5e.actor-sheet textarea:disabled:focus {
+  border: 1px solid transparent;
+  box-shadow: none;
+}
 .dnd5e.actor-sheet span,
 .dnd5e.actor-sheet label {
   display: block;
@@ -50,7 +64,7 @@
 .dnd5e.actor-sheet .mce-panel span {
   display: inherit;
 }
-.dnd5e.actor-sheet .rollable:hover {
+.dnd5e.actor-sheet.editable .rollable:hover {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;
@@ -71,9 +85,18 @@
   margin-left: 10px;
   flex: 1;
   order: 2;
+  overflow: hidden;
 }
 .dnd5e.actor-sheet .sheet-body > * {
   flex: 1;
+}
+.dnd5e.actor-sheet .sheet-body .sheet-tabs {
+  flex: 0 0 32px;
+  margin-top: 5px;
+}
+.dnd5e.actor-sheet .sheet-body .tab {
+  flex: 1;
+  margin: 5px 0;
 }
 .dnd5e.actor-sheet .sheet-header {
   flex: 0 0 90px;
@@ -253,22 +276,14 @@
   max-width: none;
   text-align: left;
 }
-.dnd5e.actor-sheet .sheet-body {
-  overflow: hidden;
-}
-.dnd5e.actor-sheet .sheet-body .sheet-tabs {
-  flex: 0 0 32px;
-  margin-top: 5px;
-}
-.dnd5e.actor-sheet .sheet-body .tab {
-  flex: 1;
-  margin: 5px 0;
-}
-.dnd5e.actor-sheet .sheet-body .biography .editor-content {
+/* ----------------------------------------- */
+/* Biography Tab
+/* ----------------------------------------- */
+.dnd5e.actor-sheet .biography .editor-content {
   padding-right: 8px;
   overflow-y: scroll;
 }
-.dnd5e.actor-sheet .sheet-body .biography body#tinymce {
+.dnd5e.actor-sheet .biography body#tinymce {
   font-size: 14px;
 }
 /* ----------------------------------------- */
@@ -364,6 +379,11 @@
 .dnd5e .skills li.skill .skill-mod {
   flex: 0 0 28px;
   text-align: center;
+}
+.dnd5e.locked .ability-proficiency,
+.dnd5e.locked .skill-proficiency {
+  text-shadow: none;
+  cursor: default;
 }
 /* ----------------------------------------- */
 /* Traits Tab

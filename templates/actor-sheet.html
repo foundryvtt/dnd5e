@@ -1,4 +1,4 @@
-<form class="dnd5e actor-sheet" autocomplete="off">
+<form class="dnd5e actor-sheet {{cssClass}}" autocomplete="off">
 
     <!-- BODY -->
     <section class="sheet-body">
@@ -6,7 +6,7 @@
         <!-- HEADER -->
         <header class="sheet-header">
             <h1 class="charname">
-                <input name="name" type="text" value="{{name}}" placeholder="Character Name"/>
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
             </h1>
 
             <div class="charlevel">
@@ -141,12 +141,12 @@
             </div>
 
             <ol class="inventory-list directory-list">
-            {{#each inventory as |section sid|}}
+            {{#each actor.inventory as |section sid|}}
                 <li class="item inventory-header">
                     <h4 class="item-name">{{section.label}}</h4>
                     <span class="item-quantity">Qty.</span>
                     <span class="item-weight">Wt.</span>
-                    {{#if ../owner}}
+                    {{#if actor.owner}}
                     <div class="item-controls">
                         <a class="item-control item-create" title="Create Item" data-item-type="{{sid}}"><i class="fas fa-plus"></i> Add</a>
                     </div>
@@ -184,7 +184,7 @@
 
     <!-- SIDEBAR -->
     <section class="sheet-sidebar">
-        <img class="sheet-profile" src="{{img}}" title="{{name}}" height="64" width="64" data-edit="img"/>
+        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="64" width="64" data-edit="img"/>
 
         <nav class="sheet-tabs tabs" data-tab-container="sidebar">
             <a class="item active" data-tab="abilities">Abilities</a>
@@ -218,7 +218,7 @@
             </header>
 
             <ol class="class-list inventory-list directory-list">
-                {{#each classes}}
+                {{#each actor.classes}}
                 <li class="item" data-item-id="{{this.itemId}}">
                     <h4 class="class-name">{{this.name}}</h4>
                     <span class="class-levels">{{this.data.levels.value}}</span>

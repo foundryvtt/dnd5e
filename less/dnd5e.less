@@ -48,6 +48,19 @@
     }
   }
 
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    color: #111;
+
+    &:hover,
+    &:focus {
+      border: 1px solid transparent;
+      box-shadow: none;
+    }
+  }
+
+
   span, label {
     display: block;
   }
@@ -55,7 +68,7 @@
     display: inherit;
   }
 
-  .rollable:hover {
+  &.editable .rollable:hover {
     color: #000;
     text-shadow: 0 0 10px red;
     cursor: pointer;
@@ -72,11 +85,23 @@
     }
   }
 
+
+
   .sheet-body {
     .flexcol();
     margin-left: 10px;
     flex: 1;
     order: 2;
+    overflow: hidden;
+
+    .sheet-tabs {
+      flex: 0 0 32px;
+      margin-top: 5px;
+    }
+    .tab {
+      flex: 1;
+      margin: 5px 0;
+    }
   }
 
   .sheet-header {
@@ -247,29 +272,21 @@
   }
 }
 
-.dnd5e.actor-sheet .sheet-body {
-  overflow: hidden;
 
-  .sheet-tabs {
-    flex: 0 0 32px;
-    margin-top: 5px;
-  }
-  .tab {
-    flex: 1;
-    margin: 5px 0;
-  }
+/* ----------------------------------------- */
+/* Biography Tab
+/* ----------------------------------------- */
 
-
-  .biography .editor-content {
+.dnd5e.actor-sheet .biography {
+  .editor-content {
     padding-right: 8px;
     overflow-y: scroll;
   }
 
-  .biography body#tinymce {
+  body#tinymce {
     font-size: 14px;
   }
 }
-
 
 
 /* ----------------------------------------- */
@@ -369,6 +386,12 @@
       text-align: center;
     }
   }
+}
+
+.dnd5e.locked .ability-proficiency,
+.dnd5e.locked .skill-proficiency {
+  text-shadow: none;
+  cursor: default;
 }
 
 
