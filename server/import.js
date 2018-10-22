@@ -3,6 +3,10 @@ const fs = require('fs');
 
 
 
+
+
+
+
 class Import5ET {
   constructor() {
     this.monsters = {
@@ -45,10 +49,13 @@ class Import5ET {
     }
 
     // Attributes
+    let ac = data.ac[0];
+    if ( ac instanceof Object ) ac = ac.ac;
     d.attributes.ac.value = data.ac;
     delete data["ac"];
 
     d.attributes.hp.value = data.hp.average;
+    d.attributes.hp.max = data.hp.average;
     d.attributes.hp.formula = data.hp.formula;
     delete data["hp"];
 
@@ -115,6 +122,19 @@ class Import5ET {
     return "../5etools/data/"
   }
 
+  /* ----------------------------------------- */
+
+  static fixAC(e) {
+    if ( e.data.attributes.ac.value instanceof Number ) {
+      console.log("already fixed");
+      return;
+    }
+    let ac = e.data.attributes.ac.value[0];
+    if ( ac instanceof Object ) ac = ac.ac;
+    e.data.attributes.ac.value = ac;
+    e.save();
+    console.log(`Saving entry ${e.name}`);
+  }
 }
 
 

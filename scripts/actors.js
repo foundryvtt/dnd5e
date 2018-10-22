@@ -11,13 +11,9 @@ class Actor5e extends Actor {
     actorData = super.prepareData(actorData);
     const data = actorData.data;
 
-    // Level, experience, and proficiency
-    data.details.level.value = parseInt(data.details.level.value);
-    data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
-    let prior = this.getLevelExp(data.details.level.value - 1 || 0),
-          req = data.details.xp.max - prior;
-    data.details.xp.pct = Math.min(Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
-    data.attributes.prof.value = Math.floor((data.details.level.value + 7) / 4);
+    // Prepare Character data
+    if ( actorData.type === "character" ) this._prepareCharacterData(data);
+    else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
     // Ability modifiers and saves
     for (let abl of Object.values(data.abilities)) {
@@ -41,6 +37,35 @@ class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Prepare Character type specific data
+   */
+  _prepareCharacterData(data) {
+
+    // Level, experience, and proficiency
+    data.details.level.value = parseInt(data.details.level.value);
+    data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
+    let prior = this.getLevelExp(data.details.level.value - 1 || 0),
+          req = data.details.xp.max - prior;
+    data.details.xp.pct = Math.min(Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
+    data.attributes.prof.value = Math.floor((data.details.level.value + 7) / 4);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare NPC type specific data
+   */
+  _prepareNPCData(data) {
+
+    // CR, kill exp, and proficiency
+    data.details.cr.value = parseFloat(data.details.cr.value) || 0;
+    data.details.xp.value = this.getCRExp(data.details.cr.value);
+    data.attributes.prof.value = Math.floor((data.details.cr.value + 7) / 4);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Return the amount of experience required to gain a certain character level.
    * @param level {Number}  The desired level
    * @return {Number}       The XP required
@@ -49,6 +74,21 @@ class Actor5e extends Actor {
     const levels = [0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
       120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000];
     return levels[Math.min(level, levels.length - 1)];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return the amount of experience granted by killing a creature of a certain CR.
+   * @param cr {Number}     The creature's challenge rating
+   * @return {Number}       The amount of experience granted per kill
+   */
+  getCRExp(cr) {
+    if (cr < 1.0) return Math.max(200 * cr, 10);
+    let _ = undefined;
+    const xps = [10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 18000, 20000, 22000,
+        25000, 27500, 30000, 32500, 36500, _, _, _, _, _, 155000];
+    return xps[cr];
   }
 
   /* -------------------------------------------- */
@@ -256,29 +296,27 @@ class Actor5eSheet extends ActorSheet {
    * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
    */
   getData() {
-    let actorData = duplicate(this.actor.data);
-
-    // Flag permissions
-    actorData.owner = this.actor.owner;
+    const sheetData = super.getData();
 
     // Ability proficiency
-    for ( let abl of Object.values(actorData.data.abilities)) {
+    for ( let abl of Object.values(sheetData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = this._getProficiencyHover(abl.proficient);
     }
 
     // Update skill labels
-    for ( let skl of Object.values(actorData.data.skills)) {
-      skl.ability = actorData.data.abilities[skl.ability].label.substring(0, 3);
+    for ( let skl of Object.values(sheetData.data.skills)) {
+      skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = this._getProficiencyHover(skl.value);
     }
 
     // Prepare owned items
-    actorData = this._prepareItems(actorData);
+    this._prepareItems(sheetData.actor);
 
     // Return data to the sheet
-    return actorData;
+    console.log(sheetData);
+    return sheetData;
   }
 
   /* -------------------------------------------- */
@@ -331,7 +369,6 @@ class Actor5eSheet extends ActorSheet {
     actorData.spellbook = spellbook;
     actorData.feats = feats;
     actorData.classes = classes;
-    return actorData;
   }
 
   /* -------------------------------------------- */
@@ -381,6 +418,18 @@ class Actor5eSheet extends ActorSheet {
       e.setAttribute("style", "flex: 0 0 " + w + "px");
     });
 
+    // Activate tabs
+    html.find('.tabs').each((_, el) => {
+      let tabs = $(el),
+          initial = this.actor.data.flags["_sheetTab-"+tabs.attr("data-tab-container")];
+      new Tabs(tabs, initial, clicked => {
+        this.actor.data.flags["_sheetTab-"+clicked.parent().attr("data-tab-container")] = clicked.attr("data-tab");
+      });
+    });
+
+    // Everything below here is only needed if the sheet is editable
+    if ( !this.options.editable ) return;
+
 	  // Profile Image Edit
     html.find('img.sheet-profile').click(ev => {
       new Dialog({
@@ -427,16 +476,6 @@ class Actor5eSheet extends ActorSheet {
         this.actor.update(formData, true);
       }, 50);
     });
-
-    // Activate tabs
-    html.find('.tabs').each((_, el) => {
-      let tabs = $(el),
-          initial = this.actor.data.flags["_sheetTab-"+tabs.attr("data-tab-container")];
-      new Tabs(tabs, initial, clicked => {
-        this.actor.data.flags["_sheetTab-"+clicked.parent().attr("data-tab-container")] = clicked.attr("data-tab");
-      });
-    });
-
 
     /* -------------------------------------------- */
     /*  Abilities and Skills
