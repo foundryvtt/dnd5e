@@ -114,6 +114,20 @@ CONFIG.weaponTypes = {
   "ammo": "Ammunition"
 };
 
+// Weapon Properties
+CONFIG.weaponProperties = {
+  "thr": "Thrown",
+  "amm": "Ammunition",
+  "fir": "Firearm",
+  "rel": "Reload",
+  "two": "Two-Handed",
+  "fin": "Finesse",
+  "lgt": "Light",
+  "ver": "Versatile",
+  "hvy": "Heavy",
+  "rch": "Reach"
+}
+
 // Equipment Types
 CONFIG.armorTypes = {
   "clothing": "Clothing",
