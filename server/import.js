@@ -2,11 +2,6 @@ const path = require('path');
 const fs = require('fs');
 
 
-
-
-
-
-
 class Import5ET {
   constructor() {
     this.monsters = {
@@ -123,18 +118,124 @@ class Import5ET {
   }
 
   /* ----------------------------------------- */
+  /*  Items
+  /* ----------------------------------------- */
 
-  static fixAC(e) {
-    if ( e.data.attributes.ac.value instanceof Number ) {
-      console.log("already fixed");
-      return;
+  importItems(file) {
+    const pack = game.packs['dnd5e.items'];
+
+    // Delete the existing Monsters compendium
+    if ( fs.existsSync(pack.metadata.path) ) fs.unlinkSync(pack.metadata.path);
+
+    // Create new data
+    let data = JSON.parse(fs.readFileSync(path.join(this.path, "items", file))).basicitem;
+    let i = 0;
+    for ( let d of data ) {
+      let item = null;
+      if ( ["R", "A", "M", "SCF", "AF"].includes(d.type) ) {
+        item = this._importWeapon(d);
+      } else {
+        continue;
+      }
+      // else if ( ["LA", "MA", "HA", "S"].includes(data.type) ) {
+      //   item = 1;
+      // }
+
+      // Save
+      setTimeout(() => {
+        let entry = new pack(item);
+        console.log(`Saving entry ${entry.name}`);
+        entry.save();
+      }, 100 * i++);
     }
-    let ac = e.data.attributes.ac.value[0];
-    if ( ac instanceof Object ) ac = ac.ac;
-    e.data.attributes.ac.value = ac;
-    e.save();
-    console.log(`Saving entry ${e.name}`);
   }
+
+  /* ----------------------------------------- */
+
+  _importWeapon(data) {
+
+    // Create the placeholder Item
+    let item = db.Item.create({name: data.name, type: "weapon"});
+    let d = item.data;
+    delete data["name"];
+
+    // Damage
+    if ( data.dmg1 ) {
+      let match = data.dmg1.match("{@dice ([0-9a-z]+)}");
+      d.damage.value = match ? match[1] : undefined;
+      delete data["dmg1"];  
+    }
+
+    if ( data.dmg2 ) {
+      let match = data.dmg2.match("{@dice ([0-9a-z]+)}");
+      d.damage2.value = match ? match[1] : undefined;
+      delete data["dmg2"];  
+    }
+
+    const dtypes = {
+      "P": "piercing",
+      "S": "slashing",
+      "B": "bludgeoning"
+    };
+    d.damageType.value = dtypes[data.dmgType];
+    delete data["dmgType"];
+
+    // Description (maybe)
+    if ( data.entries ) {
+      let ps = data.entries.map(e => `<p>${e}</p>`);
+      d.description.value = ps.join("");
+      delete data["entries"];
+    }
+
+    // Source
+    d.source.value = `${data.source} pg. ${data.page}`;
+    delete data["source"];
+    delete data["page"];
+
+    // Properties
+    const properties = {
+      "T": "Thrown",
+      "A": "Ammunition",
+      "AF": "Firearm",
+      "RLD": "Reload",
+      "2H": "Two-Handed",
+      "F": "Finesse",
+      "L": "Light",
+      "V": "Versatile",
+      "H": "Heavy",
+      "R": "Reach"
+    }
+    let props = data.property || [];
+    d.properties.value = props.join("");
+    delete data["property"];
+
+    // Range
+    if ( data.range ) {
+      d.range.value = data.range;
+      delete data["range"];
+    }
+
+    // Weapon Type
+    if ( data.weaponCategory ) {
+      d.weaponType.value = data.weaponCategory.toLowerCase() + data.type;
+      delete data["weaponCategory"];
+      delete data["type"];
+    }
+
+    // Price
+    if ( data.value ) {
+      d.price.value = parseInt(data.value.match('([0-9,]+)( gp)?')[1]);
+      delete data.value;
+    }
+
+    d.weight.value = parseFloat(data.weight);
+    delete data.weight
+
+    if ( Object.keys(data) > 0 ) throw "FIX THIS ONE!";
+    return item;
+  }
+
+  /* ----------------------------------------- */
 }
 
 
@@ -147,4 +248,4 @@ module.exports = {
 
 // tools = require("./public/systems/dnd5e/server/import").Import5ET
 // t = new tools();
-
+// t.importItems("basicitems.json");

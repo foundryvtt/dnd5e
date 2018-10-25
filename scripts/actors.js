@@ -315,7 +315,6 @@ class Actor5eSheet extends ActorSheet {
     this._prepareItems(sheetData.actor);
 
     // Return data to the sheet
-    console.log(sheetData);
     return sheetData;
   }
 
@@ -539,7 +538,7 @@ class Actor5eSheet extends ActorSheet {
 /* -------------------------------------------- */
 
 
-CONFIG.Actor.actorClass = Actor5e;
+CONFIG.Actor.entityClass = Actor5e;
 CONFIG.Actor.sheetClass = Actor5eSheet;
 CONFIG.Actor5eSheet = {
   "width": 720,
