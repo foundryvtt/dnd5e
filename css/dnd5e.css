@@ -97,6 +97,7 @@
 .dnd5e.actor-sheet .sheet-body .tab {
   flex: 1;
   margin: 5px 0;
+  overflow: hidden;
 }
 .dnd5e.actor-sheet .sheet-header {
   flex: 0 0 90px;
@@ -450,7 +451,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  height: calc(100% - 40px);
+  height: calc(100% - 44px);
   overflow-y: scroll;
 }
 .inventory-list .item {

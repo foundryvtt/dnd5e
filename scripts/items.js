@@ -28,7 +28,6 @@ class Item5eSheet extends ItemSheet {
    */
   get template() {
     let type = this.item.type;
-    console.log(this.item);
     return `public/systems/dnd5e/templates/item-${type}-sheet.html`;
   }
 
@@ -77,7 +76,7 @@ class Item5eSheet extends ItemSheet {
 
     // Update owned items
     if (this.item.isOwned) {
-      itemData["itemId"] = this.item.data.itemId;
+      itemData.id = this.item.data.id;
       this.item.actor.updateOwnedItem(itemData, true);
       this.render(false);
     }
