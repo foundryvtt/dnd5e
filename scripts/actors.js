@@ -32,16 +32,6 @@ class Actor5e extends Actor {
     data.attributes.ac.min = 10 + data.abilities.dex.mod;
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities.int.mod;
 
-    // Inventory encumbrance
-    data.attributes.encumbrance = {
-      max: data.abilities.str.value * 15,
-      value: actorData.items.reduce((total, item) => {
-        if ( !item.data.weight || !item.data.quantity ) return total;
-        let w = (item.data.weight.value || 0) * (item.data.quantity.value || 1);
-        return total + (w || 0);
-      }, 0)
-    }
-
     // Return the prepared Actor data
     return actorData;
   }
@@ -359,6 +349,7 @@ class Actor5eSheet extends ActorSheet {
     const classes = [];
 
     // Iterate through items, allocating to containers
+    let totalWeight = 0;
     for ( let i of actorData.items ) {
       i.img = i.img || DEFAULT_TOKEN;
 
@@ -368,6 +359,7 @@ class Actor5eSheet extends ActorSheet {
         i.data.weight.value = i.data.weight.value || 0;
         i.totalWeight = i.data.quantity.value * i.data.weight.value;
         inventory[i.type].items.push(i);
+        totalWeight += i.totalWeight;
       }
 
       // Class
@@ -383,9 +375,13 @@ class Actor5eSheet extends ActorSheet {
     actorData.feats = feats;
     actorData.classes = classes;
 
-    // Encumbrance percentage
-    let enc = actorData.data.attributes.encumbrance;
+    // Inventory encumbrance
+    let enc = {
+      max: actorData.data.abilities.str.value * 15,
+      value: totalWeight,
+    };
     enc.pct = Math.min(enc.value * 100 / enc.max, 99);
+    actorData.data.attributes.encumbrance = enc;
   }
 
   /* -------------------------------------------- */
@@ -549,7 +545,7 @@ class Actor5eSheet extends ActorSheet {
       let li = $(ev.currentTarget).parents(".item"),
           itemId = Number(li.attr("data-item-id"));
       this.actor.deleteOwnedItem(itemId, true);
-      li.slideUp(200, () => li.remove());
+      li.slideUp(200, () => this.render(false));
     })
   }
 }
