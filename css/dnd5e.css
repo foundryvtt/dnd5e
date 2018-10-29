@@ -445,6 +445,7 @@
   text-align: left;
   max-width: 48px;
 }
+/* Inventory List */
 .inventory-list {
   list-style: none;
   margin: 0;
@@ -498,6 +499,28 @@
 }
 .inventory-header .item-controls a.item-create {
   width: 100%;
+}
+/* Encumbrance Bar */
+.encumbrance {
+  background: rgba(0, 0, 0, 0.1);
+  height: 12px;
+  margin-top: 5px;
+  border: 1px solid #111;
+  border-radius: 3px;
+}
+.encumbrance .encumbrance-bar {
+  background: #782e22;
+  height: 8px;
+  margin: 1px;
+  border: 1px solid #ff6400;
+  border-radius: 3px;
+}
+.encumbrance .encumbrance-label {
+  float: right;
+  text-align: right;
+  padding-right: 5px;
+  font-size: 12px;
+  line-height: 12px;
 }
 /* ----------------------------------------- */
 /* Class List
@@ -616,8 +639,25 @@
 .dnd5e.item-sheet .sheet-tabs {
   margin-top: 5px;
   border-bottom: 2px groove #FFF;
+  font-size: 14px;
 }
 .dnd5e.item-sheet .editor.active {
   display: block;
   min-height: 300px;
+}
+/* ----------------------------------------- */
+/*  NPC Sheet
+/* ----------------------------------------- */
+.dnd5e.npc-sheet .sheet-header .charlevel {
+  flex: 0 0 80px;
+}
+.dnd5e.npc-sheet .sheet-header .charlevel .level {
+  font-size: 28px;
+  flex: 0 0 25px;
+}
+.dnd5e.npc-sheet .sheet-header .charlevel .level > label {
+  margin-right: 5px;
+}
+.dnd5e.npc-sheet .sheet-header .charlevel .level > input[type="text"] {
+  flex: 1;
 }

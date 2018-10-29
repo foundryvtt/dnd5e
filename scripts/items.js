@@ -1,11 +1,9 @@
 
-let _sheet = null;
 
 class Item5eSheet extends ItemSheet {
   constructor(item) {
     super(item);
     this.mce = null;
-    _sheet = this;
   }
 
   /* -------------------------------------------- */
@@ -17,7 +15,6 @@ class Item5eSheet extends ItemSheet {
   getData() {
     const data = duplicate(this.item.data);
     data['abilities'] = game.system.template.actor.data.abilities;
-
     data['damageTypes'] = CONFIG.damageTypes;
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
@@ -31,6 +28,7 @@ class Item5eSheet extends ItemSheet {
    */
   get template() {
     let type = this.item.type;
+    console.log(this.item);
     return `public/systems/dnd5e/templates/item-${type}-sheet.html`;
   }
 
@@ -50,12 +48,7 @@ class Item5eSheet extends ItemSheet {
         target: editor[0],
         height: editor.parent().height() - 40,
         save_enablewhendirty: true,
-        save_onsavecallback: ed => {
-          let target = editor.attr("data-edit");
-          this.item.update({[target]: ed.getContent()}, true);
-          ed.remove();
-          ed.destroy();
-        }
+        save_onsavecallback: ed => this._onSaveMCE(ed, editor.attr("data-edit"))
       }).then(ed => {
         this.mce = ed[0];
         button.hide();
@@ -77,6 +70,28 @@ class Item5eSheet extends ItemSheet {
     if ( this.mce ) this.mce.destroy();
   }
 
+  /* -------------------------------------------- */
+
+  _onSaveMCE(ed, target) {
+    let itemData = {[target]: ed.getContent()};
+
+    // Update owned items
+    if (this.item.isOwned) {
+      itemData["itemId"] = this.item.data.itemId;
+      this.item.actor.updateOwnedItem(itemData, true);
+      this.render(false);
+    }
+
+    // Update unowned items
+    else {
+      this.item.update(itemData, true);
+      this.render(false);
+    }
+
+    // Destroy the editor
+    ed.remove();
+    ed.destroy();
+  }
 }
 
 

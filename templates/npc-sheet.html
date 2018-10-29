@@ -1,4 +1,4 @@
-<form class="dnd5e actor-sheet {{cssClass}}" autocomplete="off">
+<form class="dnd5e actor-sheet npc-sheet {{cssClass}}" autocomplete="off">
 
     <!-- BODY -->
     <section class="sheet-body">
@@ -11,24 +11,20 @@
 
             <div class="charlevel">
                 <div class="level">
-                    <label>Level </label> 
-                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}" placeholder="1"/>
-                </div>
-                <div class="xpbar">
-                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
+                    <label>CR</label> 
+                    <input name="data.details.cr.value" type="text" value="{{data.details.cr.value}}" placeholder="1"/>
                 </div>
                 <div class="experience">
-                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0"/>
-                    <span class="max" data-wpad="12"> / {{data.details.xp.max}}</span>
+                    <span>{{data.details.xp.value}} XP</span>
                 </div>
             </div>
 
             <ul class="details">
                 <li class="character-detail">
-                    <input name="data.details.race.value" type="text" value="{{data.details.race.value}}" placeholder="Race"/>
+                    <input name="data.details.type.value" type="text" value="{{data.details.type.value}}" placeholder="Type"/>
                 </li>
                 <li class="character-detail">
-                    <input name="data.details.background.value" type="text" value="{{data.details.background.value}}" placeholder="Background"/>
+                    <input name="data.details.source.value" type="text" value="{{data.details.source.value}}" placeholder="Source"/>
                 </li>
                 <li class="character-detail">
                     <input name="data.details.alignment.value" type="text" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
@@ -46,11 +42,7 @@
                     <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10"/>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Hit Dice</h4>
-                    <div class="footer-value">
-                        <input name="data.attributes.hd.value" type="text" value="{{data.attributes.hd.value}}" placeholder="1"/>
-                        <span class="flex0"> / {{data.details.level.value}}</span>
-                    </div>
+                    <input name="data.attributes.hp.formula" type="text" value="{{data.attributes.hp.formula}}" placeholder="Forumla"/>
                 </footer>
             </div>
 
@@ -213,31 +205,6 @@
                 </li>
             {{/each}}
             </ol>
-
-            <!-- CLASS LIST -->
-            <header class="class-header">
-                <h3>Class Levels</h3>
-                {{#if owner}}
-                <a class="item-create" data-item-type="class"><i class="fa fa-plus"></i> Add</a>
-                {{/if}}
-            </header>
-
-            <ol class="class-list inventory-list directory-list">
-                {{#each actor.classes}}
-                <li class="item" data-item-id="{{this.id}}">
-                    <h4 class="class-name">{{this.name}}</h4>
-                    <span class="class-levels">{{this.data.levels.value}}</span>
-                    <span class="class-subclass">{{this.data.subclass.value}}</span>
-                    {{#if ../owner}}
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                    {{/if}}
-                </li>
-                {{/each}}
-            </ol>
-
         </div>
 
         <!-- SKILLS -->
