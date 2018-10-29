@@ -25,7 +25,7 @@ class Import5ET {
         let entry = new pack(actor);
         console.log(`Saving entry ${entry.name}`);
         entry.save();
-      }, 100 * i);
+      }, 500 * i);
       i++;
     }
   }
@@ -46,7 +46,7 @@ class Import5ET {
     // Attributes
     let ac = data.ac[0];
     if ( ac instanceof Object ) ac = ac.ac;
-    d.attributes.ac.value = data.ac;
+    d.attributes.ac.value = ac;
     delete data["ac"];
 
     d.attributes.hp.value = data.hp.average;
@@ -98,7 +98,7 @@ class Import5ET {
     delete data["languages"];
     delete data["languageTags"];
 
-    d.traits.perception = data.passive;
+    d.traits.perception.value = data.passive;
     delete data["passive"];
 
     // TODO: Traits and Actions
@@ -134,12 +134,11 @@ class Import5ET {
       let item = null;
       if ( ["R", "A", "M", "SCF", "AF"].includes(d.type) ) {
         item = this._importWeapon(d);
-      } else {
-        continue;
-      }
-      // else if ( ["LA", "MA", "HA", "S"].includes(data.type) ) {
-      //   item = 1;
-      // }
+      } 
+      else if ( ["LA", "MA", "HA", "S"].includes(d.type) ) {
+        item = this._importArmor(d);
+      } 
+      else throw `Type ${d.type} not handled!`;
 
       // Save
       setTimeout(() => {
@@ -236,8 +235,52 @@ class Import5ET {
   }
 
   /* ----------------------------------------- */
-}
 
+  _importArmor(data) {
+
+    // Create the placeholder Item
+    let item = db.Item.create({name: data.name, type: "equipment"});
+    let d = item.data;
+    delete data["name"];
+
+    // Armor class
+    d.armor.value = data.ac;
+    delete data["ac"];
+
+    // Source
+    d.source.value = `${data.source} pg. ${data.page}`;
+    delete data["source"];
+    delete data["page"];
+
+    // Description (maybe)
+    if ( data.entries ) {
+      let ps = data.entries.map(e => `<p>${e}</p>`);
+      d.description.value = ps.join("");
+      delete data["entries"];
+    }
+
+    // Price
+    if ( data.value ) {
+      d.price.value = parseInt(data.value.match('([0-9,]+)( gp)?')[1]);
+      delete data.value;
+    }
+
+    d.weight.value = parseFloat(data.weight);
+    delete data.weight
+
+    // Type
+    const types = {
+      "LA": "light",
+      "MA": "medium",
+      "HA": "heavy",
+      "S": "shield"
+    };
+    d.armorType.value = types[data.type]
+
+    if ( Object.keys(data) > 0 ) throw "FIX THIS ONE!";
+    return item;
+  }
+}
 
 
 module.exports = {
@@ -249,3 +292,4 @@ module.exports = {
 // tools = require("./public/systems/dnd5e/server/import").Import5ET
 // t = new tools();
 // t.importItems("basicitems.json");
+// t.importMonsters("bestiary-mm.json");

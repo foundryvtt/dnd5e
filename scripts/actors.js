@@ -31,6 +31,18 @@ class Actor5e extends Actor {
     data.attributes.init.mod = data.abilities.dex.mod + (data.attributes.init.value || 0);
     data.attributes.ac.min = 10 + data.abilities.dex.mod;
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities.int.mod;
+
+    // Inventory encumbrance
+    data.attributes.encumbrance = {
+      max: data.abilities.str.value * 15,
+      value: actorData.items.reduce((total, item) => {
+        if ( !item.data.weight || !item.data.quantity ) return total;
+        let w = (item.data.weight.value || 0) * (item.data.quantity.value || 1);
+        return total + (w || 0);
+      }, 0)
+    }
+
+    // Return the prepared Actor data
     return actorData;
   }
 
@@ -287,7 +299,9 @@ class Actor5eSheet extends ActorSheet {
    * The actor sheet template comes packaged with the system
    */
   get template() {
-    return "public/systems/dnd5e/templates/actor-sheet.html";
+    if ( this.actor.data.type === "character" ) return "public/systems/dnd5e/templates/actor-sheet.html";
+    else if ( this.actor.data.type === "npc" ) return "public/systems/dnd5e/templates/npc-sheet.html";
+    else throw "Unrecognized Actor type " + this.actor.data.type;
   }
 
   /* -------------------------------------------- */
@@ -368,6 +382,10 @@ class Actor5eSheet extends ActorSheet {
     actorData.spellbook = spellbook;
     actorData.feats = feats;
     actorData.classes = classes;
+
+    // Encumbrance percentage
+    let enc = actorData.data.attributes.encumbrance;
+    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
   }
 
   /* -------------------------------------------- */
@@ -520,15 +538,17 @@ class Actor5eSheet extends ActorSheet {
 
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
-      let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
-      const item = new Item(this.actor.items.find(i => i.itemId === itemId));
+      let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
+      let Item = CONFIG.Item.entityClass;
+      const item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
       item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
-      let li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.attr("data-item-id"), true);
+      let li = $(ev.currentTarget).parents(".item"),
+          itemId = Number(li.attr("data-item-id"));
+      this.actor.deleteOwnedItem(itemId, true);
       li.slideUp(200, () => li.remove());
     })
   }
