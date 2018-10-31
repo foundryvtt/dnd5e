@@ -1,9 +1,7 @@
-<form class="dnd5e item-sheet" autocomplete="off">
+<form class="dnd5e item-sheet {{cssClass}}" autocomplete="off">
     <header class="sheet-header">
-        <img src="{{img}}" title="{{name}}" height="64" width="64"/>
-        <h1 class="itemname">
-            <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
-        </h1>
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
     </header>
 
     <nav class="sheet-tabs tabs" data-tab-container="primary">
@@ -19,11 +17,6 @@
     </div>
 
     <div class="tab" data-tab="details">
-        <div class="form-group">
-            <label>Class Icon</label>
-            <input type="text" name="img" placeholder="Image URL" value="{{img}}" data-dtype="String"/>
-        </div>
-
         <div class="form-group">
             <label>{{data.levels.label}}</label>
             <input type="text" name="data.levels.value" value="{{data.levels.value}}" data-dtype="{{data.levels.type}}"/>

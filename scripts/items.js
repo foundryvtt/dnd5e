@@ -1,8 +1,9 @@
-
-
+/**
+ * Override and extend the basic :class:`ItemSheet` implementation
+ */
 class Item5eSheet extends ItemSheet {
-  constructor(item) {
-    super(item);
+  constructor(item, options) {
+    super(item, options);
     this.mce = null;
   }
 
@@ -13,11 +14,12 @@ class Item5eSheet extends ItemSheet {
    * Start with the base item data and extending with additional properties for rendering.
    */
   getData() {
-    const data = duplicate(this.item.data);
+    const data = super.getData();
     data['abilities'] = game.system.template.actor.data.abilities;
     data['damageTypes'] = CONFIG.damageTypes;
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
+    console.log(data);
     return data;
   }
 

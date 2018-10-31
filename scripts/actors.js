@@ -336,7 +336,7 @@ class Actor5eSheet extends ActorSheet {
     };
 
     // Spellbook
-    const spellbook = {}
+    const spellbook = {};
 
     // Feats
     const feats = {
@@ -443,23 +443,6 @@ class Actor5eSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if ( !this.options.editable ) return;
 
-	  // Profile Image Edit
-    html.find('img.sheet-profile').click(ev => {
-      new Dialog({
-        title: `${this.actor.name} Profile Image`,
-        content: `<div class="form-group-stacked">
-                    <input type="text" name="img" value="${this.actor.img}" placeholder="Image Path" autocomplete="off"/>
-                  </div>`,
-        buttons: {
-          save: {
-            icon: '<i class="fas fa-save"></i>',
-            label: "Save",
-            callback: html => this.actor.update({img: html.find('input[name="img"]').val()}, true)
-          },
-        }
-      }).render(true);
-    });
-
 	  // Activate TinyMCE Editors
 	  html.find(".editor a.editor-edit").click(ev => {
 	    let button = $(ev.currentTarget),
@@ -478,16 +461,6 @@ class Actor5eSheet extends ActorSheet {
         button.hide();
         ed[0].focus();
       });
-    });
-
-	  // Update on remove focus, but only if we have not acquired focus on another element
-    html.find("input").focusout(ev => {
-      setTimeout(() => {
-        if ( $(":focus").length ) return;
-        let input = $(ev.currentTarget),
-            formData = validateForm(input.parents('form')[0]);
-        this.actor.update(formData, true);
-      }, 50);
     });
 
     /* -------------------------------------------- */
@@ -546,7 +519,7 @@ class Actor5eSheet extends ActorSheet {
           itemId = Number(li.attr("data-item-id"));
       this.actor.deleteOwnedItem(itemId, true);
       li.slideUp(200, () => this.render(false));
-    })
+    });
   }
 }
 
