@@ -19,7 +19,6 @@ class Item5eSheet extends ItemSheet {
     data['damageTypes'] = CONFIG.damageTypes;
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
-    console.log(data);
     return data;
   }
 
