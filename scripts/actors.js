@@ -150,8 +150,7 @@ class Actor5e extends Actor {
         let bonus = html.find('[name="bonus"]').val();
         new Roll(parts.join(" + "), {mod: skl.mod, bonus: bonus}).toMessage({
           alias: this.name,
-          flavor: flavor,
-          sound: "sounds/dice.wav"
+          flavor: flavor
         });
       }
     }).render(true);
@@ -221,8 +220,7 @@ class Actor5e extends Actor {
         let bonus = html.find('[name="bonus"]').val();
         new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).toMessage({
           alias: this.name,
-          flavor: flavor,
-          sound: "sounds/dice.wav"
+          flavor: flavor
         });
       }
     }).render(true);
@@ -267,8 +265,7 @@ class Actor5e extends Actor {
         let bonus = html.find('[name="bonus"]').val();
         new Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).toMessage({
           alias: this.name,
-          flavor: flavor,
-          sound: "sounds/dice.wav"
+          flavor: flavor
         });
       }
     }).render(true);
