@@ -17,17 +17,27 @@ class Import5ET {
     if ( fs.existsSync(pack.metadata.path) ) fs.unlinkSync(pack.metadata.path);
 
     // Create new data
-    let data = JSON.parse(fs.readFileSync(path.join(this.path, "bestiary", file))).monster;
+    let data = JSON.parse(fs.readFileSync(path.join(this.path, "bestiary", file)));
+
+    // Filter monsters for those included in the SRD
+    const monsters = data.monster.filter(m => this.monsters.srd.includes(m.name));
+    console.log(monsters.length);
+
+    // Create a new entry every 300ms to avoid database collision
     let i = 0;
-    for ( let m of data) {
-      setTimeout(() => {
-        let actor = this._importMonster(pack, m);
-        let entry = new pack(actor);
-        console.log(`Saving entry ${entry.name}`);
-        entry.save();
-      }, 500 * i);
-      i++;
-    }
+    let ivl = null;
+    ivl = setInterval(() => {
+      if ( i === monsters.length ) {
+        ivl.clearInterval(ivl);
+        console.log("ALL DONE!");
+      }
+      console.log(i);
+      let m = monsters[i++];
+      let actor = this._importMonster(pack, m);
+      let entry = new pack(actor);
+      console.log(`Saving entry ${entry.name}`);
+      entry.save();
+    }, 250);
   }
 
   /* ----------------------------------------- */
@@ -266,7 +276,7 @@ class Import5ET {
     }
 
     d.weight.value = parseFloat(data.weight);
-    delete data.weight
+    delete data.weight;
 
     // Type
     const types = {
@@ -275,7 +285,7 @@ class Import5ET {
       "HA": "heavy",
       "S": "shield"
     };
-    d.armorType.value = types[data.type]
+    d.armorType.value = types[data.type];
 
     if ( Object.keys(data) > 0 ) throw "FIX THIS ONE!";
     return item;
@@ -288,8 +298,7 @@ module.exports = {
 };
 
 
-
-// tools = require("./public/systems/dnd5e/server/import").Import5ET
+// tools = require("../public/systems/dnd5e/server/import").Import5ET;
 // t = new tools();
-// t.importItems("basicitems.json");
 // t.importMonsters("bestiary-mm.json");
+// t.importItems("basicitems.json");
