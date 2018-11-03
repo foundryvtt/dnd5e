@@ -178,6 +178,52 @@
             </div>
         </div>
 
+        <!-- SPELLBOOK -->
+       <div class="tab spellbook" data-tab="spellbook">
+            <ol class="inventory-list directory-list">
+            {{#each actor.spellbook as |section lvl|}}
+                <li class="item inventory-header">
+                    <h4 class="item-name">{{section.label}}</h4>
+
+                    {{#unless section.isCantrip}}
+                    <span class="spell-slots">
+                        <input type="text" name="data.spells.spell{{lvl}}.value" value="{{section.uses}}" placeholder="0"/>
+                    </span>
+                    <span class="flex0"> / </span>
+                    <span class="spell-max">
+                        <input type="text" name="data.spells.spell{{lvl}}.max" value="{{section.slots}}" placeholder="0"/>
+                    </span>
+                    {{else}}
+                    <span class="spell-slots">&infin;</span>
+                    <span class="flex0"> / </span>
+                    <span class="spell-max">&infin;</span>
+                    {{/unless}}
+
+                    {{#if ../owner}}
+                    <div class="item-controls">
+                        <a class="item-control spell-create" title="Create Item" data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
+                    </div>
+                    {{/if}}
+                </li>
+                {{#each section.spells as |item i|}}
+                <li class="item" data-item-id="{{item.id}}">
+                    <div class="item-name">
+                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                        <h4>{{item.name}}</h4>
+                    </div>
+                    {{#if ../../owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            {{/each}}
+            </ol>
+       </div>
+
+
         <!-- BIOGRAPHY -->
         <div class="tab biography active editor" data-tab="biography">
             <div class="editor-content" data-edit="data.details.biography.value">

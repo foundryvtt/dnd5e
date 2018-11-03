@@ -19,6 +19,10 @@ class Item5eSheet extends ItemSheet {
     data['damageTypes'] = CONFIG.damageTypes;
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
+    if ( this.item.type === "spell" ) {
+      data["spellSchools"] = CONFIG.spellSchools;
+      data["spellLevels"] = CONFIG.spellLevels;
+    }
     return data;
   }
 
@@ -141,7 +145,7 @@ CONFIG.weaponProperties = {
   "ver": "Versatile",
   "hvy": "Heavy",
   "rch": "Reach"
-}
+};
 
 // Equipment Types
 CONFIG.armorTypes = {
@@ -161,4 +165,38 @@ CONFIG.consumableTypes = {
   "wand": "Wand",
   "rod": "Rod",
   "trinket": "Trinket"
+};
+
+// Spell Types
+CONFIG.spellTypes = {
+  "attack": "Spell Attack",
+  "save": "Saving Throw",
+  "heal": "Healing",
+  "utility": "Utility"
+};
+
+// Spell Schools
+CONFIG.spellSchools = {
+  "abj": "Abjuration",
+  "con": "Conjuration",
+  "div": "Divination",
+  "enc": "Enchantment",
+  "evo": "Evocation",
+  "ill": "Illusion",
+  "nec": "Necromancy",
+  "trs": "Transmutation",
+};
+
+// Spell Levels
+CONFIG.spellLevels = {
+  0: "Cantrip",
+  1: "1st Level",
+  2: "2nd Level",
+  3: "3rd Level",
+  4: "4th Level",
+  5: "5th Level",
+  6: "6th Level",
+  7: "7th Level",
+  8: "8th Level",
+  9: "9th Level"
 };

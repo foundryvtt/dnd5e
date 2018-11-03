@@ -359,12 +359,26 @@ class Actor5eSheet extends ActorSheet {
         totalWeight += i.totalWeight;
       }
 
+      // Spells
+      if ( i.type === "spell" ) {
+        let lvl = i.data.level.value || 0;
+        spellbook[lvl] = spellbook[lvl] || {
+          isCantrip: lvl === 0,
+          label: CONFIG.spellLevels[lvl],
+          spells: [],
+          uses: actorData.data.spells["spell"+lvl].value || 0,
+          slots: actorData.data.spells["spell"+lvl].max || 0
+        };
+        spellbook[lvl].spells.push(i);
+      }
+
       // Class
       if ( i.type === "class" ) {
         classes.push(i);
         classes.sort((a, b) => b.levels > a.levels);
       }
     }
+    console.log(spellbook);
 
     // Assign and return
     actorData.inventory = inventory;
