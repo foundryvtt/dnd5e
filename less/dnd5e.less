@@ -85,8 +85,6 @@
     }
   }
 
-
-
   .sheet-body {
     .flexcol();
     margin-left: 10px;
@@ -453,7 +451,6 @@
   }
 }
 
-
 /* Inventory List */
 .inventory-list {
   list-style: none;
@@ -538,6 +535,29 @@
     padding-right: 5px;
     font-size: 12px;
     line-height: 12px;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Spellbook Tab
+/* ----------------------------------------- */
+
+.spellbook {
+  .inventory-header {
+    .item-controls a.spell-create {
+      width: 100%;
+    }
+  }
+
+  .spell-slots,
+  .spell-max {
+    flex: 0 0 32px;
+    text-align: center;
+  }
+
+  .spell-max {
+    margin-right: 3px;
+    border-right: 1px solid @borderLight;
   }
 }
 

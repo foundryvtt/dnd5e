@@ -524,6 +524,21 @@
   line-height: 12px;
 }
 /* ----------------------------------------- */
+/*  Spellbook Tab
+/* ----------------------------------------- */
+.spellbook .inventory-header .item-controls a.spell-create {
+  width: 100%;
+}
+.spellbook .spell-slots,
+.spellbook .spell-max {
+  flex: 0 0 32px;
+  text-align: center;
+}
+.spellbook .spell-max {
+  margin-right: 3px;
+  border-right: 1px solid #CCC;
+}
+/* ----------------------------------------- */
 /* Class List
 /* ----------------------------------------- */
 .class-header {

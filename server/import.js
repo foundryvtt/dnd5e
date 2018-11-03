@@ -7,8 +7,22 @@ class Import5ET {
     this.monsters = {
       index: JSON.parse(fs.readFileSync(path.join(this.path, "bestiary", "index.json"))),
       srd: JSON.parse(fs.readFileSync(path.join(this.path, "bestiary", "srd-monsters.json"))).monsters
+    };
+    this.spells = {
+      index: JSON.parse(fs.readFileSync(path.join(this.path, "spells", "index.json"))),
+      srd: JSON.parse(fs.readFileSync(path.join(this.path, "spells", "srd-spells.json"))).spells
     }
   };
+
+  /* ----------------------------------------- */
+
+  get path() {
+    return "../5etools/data/"
+  }
+
+  /* ----------------------------------------- */
+  /*  Monsters                                 */
+  /* ----------------------------------------- */
 
   importMonsters(file) {
     const pack = game.packs['dnd5e.monsters'];
@@ -28,7 +42,7 @@ class Import5ET {
     let ivl = null;
     ivl = setInterval(() => {
       if ( i === monsters.length ) {
-        ivl.clearInterval(ivl);
+        clearInterval(ivl);
         console.log("ALL DONE!");
       }
       console.log(i);
@@ -122,9 +136,90 @@ class Import5ET {
   }
 
   /* ----------------------------------------- */
+  /*  Spells                                   */
+  /* ----------------------------------------- */
 
-  get path() {
-    return "../5etools/data/"
+  importSpells(file) {
+    const pack = game.packs['dnd5e.spells'];
+
+    // Delete the existing Monsters compendium
+    if ( fs.existsSync(pack.metadata.path) ) fs.unlinkSync(pack.metadata.path);
+
+    // Get spell entries for the spells included in the SRD
+    let data = JSON.parse(fs.readFileSync(path.join(this.path, "spells", file)));
+    const spells = data.spell.filter(s => this.spells.srd.includes(s.name));
+    console.log(spells.length);
+
+    // Create a new entry every 250ms to avoid database collision
+    let i = 0;
+    let ivl = null;
+    ivl = setInterval(() => {
+      if ( i === spells.length ) {
+        clearInterval(ivl);
+        console.log("ALL DONE!");
+      }
+      console.log(i);
+      let s = spells[i++];
+      let spell = this._importSpell(pack, s);
+      let entry = new pack(spell);
+      console.log(`Saving entry ${entry.name}`);
+      entry.save();
+    }, 150);
+  }
+
+  /* ----------------------------------------- */
+
+  _importSpell(pack, data) {
+    let s = db.Item.create({name: data.name, type: "spell"});
+    let d = s.data;
+    delete data["name"];
+
+    // Source
+    d.source.value = `${data.source} pg. ${data.page}`;
+    delete data["source"];
+    delete data["page"];
+
+    // Description (maybe)
+    if ( data.entries ) {
+      let ps = data.entries.map(e => `<p>${e}</p>`);
+      d.description.value = ps.join("");
+      delete data["entries"];
+    }
+
+    // Type
+    if ( data.isHeal ) {
+      data.spellType = "heal";
+      delete data["isHeal"];
+    }
+    else if ( data.savingThrow ) {
+      data.spellType = "save";
+      delete data["savingThrow"];
+    }
+    else if ( data.spellAttack ) {
+      data.spellType = "attack";
+      delete data["spellAttack"];
+    } else data.spellType = "utility";
+
+    // Level and school
+    d.level.value = data.level;
+    delete data["level"];
+    const schools = {
+      "A": "abj",
+      "C": "con",
+      "D": "div",
+      "E": "enc",
+      "V": "evo",
+      "I": "ill",
+      "N": "nec",
+      "T": "trs"
+    };
+    d.school.value = schools[data.school];
+    delete data["school"];
+
+    // Make sure there is nothing left over
+    //if ( Object.keys(data).length > 0 ) throw "FIX THIS ONE!";
+    console.log(data);
+    return s;
   }
 
   /* ----------------------------------------- */
@@ -213,7 +308,7 @@ class Import5ET {
       "V": "Versatile",
       "H": "Heavy",
       "R": "Reach"
-    }
+    };
     let props = data.property || [];
     d.properties.value = props.join("");
     delete data["property"];
@@ -238,9 +333,9 @@ class Import5ET {
     }
 
     d.weight.value = parseFloat(data.weight);
-    delete data.weight
+    delete data.weight;
 
-    if ( Object.keys(data) > 0 ) throw "FIX THIS ONE!";
+    if ( Object.keys(data).length > 0 ) throw "FIX THIS ONE!";
     return item;
   }
 
@@ -287,7 +382,7 @@ class Import5ET {
     };
     d.armorType.value = types[data.type];
 
-    if ( Object.keys(data) > 0 ) throw "FIX THIS ONE!";
+    if ( Object.keys(data).length > 0 ) throw "FIX THIS ONE!";
     return item;
   }
 }
@@ -302,3 +397,4 @@ module.exports = {
 // t = new tools();
 // t.importMonsters("bestiary-mm.json");
 // t.importItems("basicitems.json");
+// t.importSpells("spells-phb.json");

@@ -261,6 +261,48 @@
           "label": "Copper",
           "value": 0
         }
+      },
+      "spells": {
+        "spell0": {
+          "type": "Number",
+          "label": "Cantrip"
+        },
+        "spell1": {
+          "type": "Number",
+          "label": "1st Level"
+        },
+        "spell2": {
+          "type": "Number",
+          "label": "2nd Level"
+        },
+        "spell3": {
+          "type": "Number",
+          "label": "3rd Level"
+        },
+        "spell4": {
+          "type": "Number",
+          "label": "4th Level"
+        },
+        "spell5": {
+          "type": "Number",
+          "label": "5th Level"
+        },
+        "spell6": {
+          "type": "Number",
+          "label": "6th Level"
+        },
+        "spell7": {
+          "type": "Number",
+          "label": "7th Level"
+        },
+        "spell8": {
+          "type": "Number",
+          "label": "8th Level"
+        },
+        "spell9": {
+          "type": "Number",
+          "label": "9th Level"
+        }
       }
     },
     "character": {
@@ -545,6 +587,68 @@
       "subclass": {
         "type": "String",
         "label": "Subclass"
+      }
+    },
+    "spell": {
+      "spellType": {
+        "type": "String",
+        "label": "Spell Type"
+      },
+      "level": {
+        "type": "Number",
+        "label": "Spell Level"
+      },
+      "school": {
+        "type": "String",
+        "label": "Spell School"
+      },
+      "components": {
+        "type": "String",
+        "label": "Spell Components"
+      },
+      "materials": {
+        "type": "String",
+        "label": "Materials"
+      },
+      "target": {
+        "type": "String",
+        "label": "Target"
+      },
+      "range": {
+        "type": "String",
+        "label": "Range"
+      },
+      "time": {
+        "type": "String",
+        "label": "Casting Time"
+      },
+      "duration": {
+        "type": "String",
+        "label": "Duration"
+      },
+      "damage": {
+        "type": "String",
+        "label": "Spell Damage"
+      },
+      "damageType": {
+        "type": "String",
+        "label": "Damage Type"
+      },
+      "save": {
+        "type": "String",
+        "label": "Saving Throw"
+      },
+      "concentration": {
+        "type": "Boolean",
+        "label": "Requires Concentration"
+      },
+      "ritual": {
+        "type": "Boolean",
+        "label": "Cast as Ritual"
+      },
+      "ability": {
+        "type": "String",
+        "label": "Spellcasting Ability"
       }
     }
   }
