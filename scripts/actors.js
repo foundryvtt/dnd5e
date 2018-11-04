@@ -378,7 +378,6 @@ class Actor5eSheet extends ActorSheet {
         classes.sort((a, b) => b.levels > a.levels);
       }
     }
-    console.log(spellbook);
 
     // Assign and return
     actorData.inventory = inventory;
