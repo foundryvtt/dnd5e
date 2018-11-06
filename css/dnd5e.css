@@ -95,7 +95,7 @@
   margin-top: 5px;
 }
 .dnd5e.actor-sheet .sheet-body .tab {
-  flex: 1;
+  flex: 1 0 450px;
   margin: 5px 0;
   overflow: hidden;
 }
@@ -529,6 +529,9 @@
 /* ----------------------------------------- */
 .spellbook .inventory-header .item-controls a.spell-create {
   width: 100%;
+}
+.spellbook .inventory-list {
+  height: 100%;
 }
 .spellbook .spell-slots,
 .spellbook .spell-max {
