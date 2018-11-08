@@ -604,6 +604,22 @@
   font-weight: bold;
 }
 /* ----------------------------------------- */
+/*  NPC Sheet
+/* ----------------------------------------- */
+.dnd5e.npc-sheet .sheet-header .charlevel {
+  flex: 0 0 80px;
+}
+.dnd5e.npc-sheet .sheet-header .charlevel .level {
+  font-size: 28px;
+  flex: 0 0 25px;
+}
+.dnd5e.npc-sheet .sheet-header .charlevel .level > label {
+  margin-right: 5px;
+}
+.dnd5e.npc-sheet .sheet-header .charlevel .level > input[type="text"] {
+  flex: 1;
+}
+/* ----------------------------------------- */
 /*  Item Sheet
 /* ----------------------------------------- */
 .dnd5e.item-sheet .item-details {
@@ -650,18 +666,43 @@
   min-height: 300px;
 }
 /* ----------------------------------------- */
-/*  NPC Sheet
+/*  Chat Cards
 /* ----------------------------------------- */
-.dnd5e.npc-sheet .sheet-header .charlevel {
-  flex: 0 0 80px;
+.dnd5e.chat-card {
+  font-style: normal;
 }
-.dnd5e.npc-sheet .sheet-header .charlevel .level {
-  font-size: 28px;
-  flex: 0 0 25px;
+.dnd5e.chat-card .card-header {
+  padding: 3px 0;
+  border-top: 2px groove #FFF;
+  border-bottom: 2px groove #FFF;
 }
-.dnd5e.npc-sheet .sheet-header .charlevel .level > label {
+.dnd5e.chat-card .card-header img {
+  flex: 0 0 36px;
   margin-right: 5px;
 }
-.dnd5e.npc-sheet .sheet-header .charlevel .level > input[type="text"] {
+.dnd5e.chat-card .card-header h3 {
   flex: 1;
+  margin: 0;
+  line-height: 36px;
+  font-weight: bold;
+}
+.dnd5e.chat-card .card-content {
+  margin: 5px 0;
+}
+.dnd5e.chat-card .card-buttons {
+  margin: 5px 0;
+}
+.dnd5e.chat-card .card-buttons button {
+  margin: 2px 0;
+}
+.dnd5e.chat-card .card-footer {
+  padding: 3px 0 0;
+  border-top: 2px groove #FFF;
+}
+.dnd5e.chat-card .card-footer span {
+  border-right: 2px groove #FFF;
+  padding: 0 5px;
+}
+.dnd5e.chat-card .card-footer span:last-child {
+  border-right: none;
 }

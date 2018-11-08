@@ -1,4 +1,164 @@
 /**
+ * Override and extend the basic :class:`Item` implementation
+ */
+class Item5e extends Item {
+  roll() {
+    let data = {};
+    if ( this.type === "weapon" ) data = this._weaponRollData();
+    renderTemplate(data.template, data).then(html => {
+      ChatMessage.create({
+        user: game.user._id,
+        alias: this.actor.name,
+        content: html
+      }, true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  _weaponRollData() {
+    return {
+      template: "public/systems/dnd5e/templates/chat/weapon-card.html",
+      actor: this.actor,
+      item: this.data,
+      data: this.data.data
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  static chatListeners(html) {
+    html.on('click', '.card-buttons button', ev => {
+
+      // Extract card data
+      let button = $(ev.currentTarget),
+          action = button.attr("data-action"),
+          card = button.parents('.chat-card'),
+          actor = game.actors.get(card.attr('data-actor-id')),
+          itemId = Number(card.attr("data-item-id"));
+
+      // Get the item
+      if ( !actor ) return;
+      let itemData = actor.items.find(i => i.id === itemId);
+      if ( !itemData ) return;
+      let item = new Item5e(itemData, actor);
+
+      // Weapon attack
+      if ( action === "weaponAttack" ) item.rollWeaponAttack();
+      else if ( action === "weaponDamage" ) item.rollWeaponDamage();
+      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Weapon Attack
+   */
+  rollWeaponAttack() {
+    if ( this.type !== "weapon" ) throw "Wrong item type!";
+
+    // Get data
+    let abl = this.actor.data.data.abilities[this.data.data.ability.value || "str"],
+      prof = this.actor.data.data.attributes.prof.value,
+      parts = ["1d20", "@mod", "@prof", "@bonus"],
+      flavor = `${this.name} - Attack Roll`;
+
+    // Render modal dialog
+    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
+      new Dialog({
+        title: flavor,
+        content: dlg,
+        buttons: {
+          advantage: {
+            label: "Advantage",
+            callback: () => {
+              parts[0] = "2d20kh";
+              flavor += " (Advantage)"
+            }
+          },
+          normal: {
+            label: "Normal",
+          },
+          disadvantage: {
+            label: "Disadvantage",
+            callback: () => {
+              parts[0] = "2d20kl";
+              flavor += " (Disadvantage)"
+            }
+          }
+        },
+        close: html => {
+          let bonus = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), {mod: abl.mod, prof: prof, bonus: bonus}).toMessage({
+            alias: this.actor.name,
+            flavor: flavor
+          });
+        }
+      }).render(true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll Weapon Damage
+   */
+  rollWeaponDamage(alternate=false) {
+    if ( this.type !== "weapon" ) throw "Wrong item type!";
+
+    // Get data
+    let abl = this.actor.data.data.abilities[this.data.data.ability.value || "str"],
+      dmg = alternate ? this.data.data.damage2.value : this.data.data.damage.value,
+      parts = [dmg, "@mod", "@bonus"],
+      flavor = `${this.name} - Damage Roll`;
+
+    // Render modal dialog
+    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
+      new Dialog({
+        title: flavor,
+        content: dlg,
+        buttons: {
+          advantage: {
+            label: "Critical Hit",
+            callback: () => {
+              parts[0] = Roll.alter(dmg, 0, 2);
+              flavor += " (Critical)"
+            }
+          },
+          normal: {
+            label: "Normal",
+          },
+        },
+        close: html => {
+          let bonus = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).toMessage({
+            alias: this.actor.name,
+            flavor: flavor
+          });
+        }
+      }).render(true);
+    });
+  }
+}
+
+
+/* -------------------------------------------- */
+
+
+// Activate global listeners
+Hooks.on('renderChatLog', html => Item5e.chatListeners(html));
+
+// Assign Item5e class to CONFIG
+CONFIG.Item.entityClass = Item5e;
+
+
+/* -------------------------------------------- */
+
+
+/**
  * Override and extend the basic :class:`ItemSheet` implementation
  */
 class Item5eSheet extends ItemSheet {
@@ -33,7 +193,7 @@ class Item5eSheet extends ItemSheet {
    */
   get template() {
     let type = this.item.type;
-    return `public/systems/dnd5e/templates/item-${type}-sheet.html`;
+    return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
   }
 
   /* -------------------------------------------- */

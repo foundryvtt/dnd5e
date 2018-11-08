@@ -286,8 +286,9 @@ class Actor5eSheet extends ActorSheet {
    * The actor sheet template comes packaged with the system
    */
   get template() {
-    if ( this.actor.data.type === "character" ) return "public/systems/dnd5e/templates/actor-sheet.html";
-    else if ( this.actor.data.type === "npc" ) return "public/systems/dnd5e/templates/npc-sheet.html";
+    const path = "public/systems/dnd5e/templates/actors/";
+    if ( this.actor.data.type === "character" ) return path + "actor-sheet.html";
+    else if ( this.actor.data.type === "npc" ) return path + "npc-sheet.html";
     else throw "Unrecognized Actor type " + this.actor.data.type;
   }
 
@@ -404,6 +405,10 @@ class Actor5eSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Get the font-awesome icon used to display a certain level of skill proficiency
+   * @private
+   */
   _getProficiencyIcon(level) {
     const icons = {
       0: '<i class="far fa-circle"></i>',
@@ -416,6 +421,10 @@ class Actor5eSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Get the hover text used to display a certain level of skill proficiency
+   * @private
+   */
   _getProficiencyHover(level) {
     return {
       0: "Not Proficient",
@@ -503,6 +512,17 @@ class Actor5eSheet extends ActorSheet {
     html.find('h3.skill-name').click(ev => {
       let skl = ev.currentTarget.parentElement.getAttribute("data-skill");
       this.actor.rollSkill(skl);
+    });
+
+    /* -------------------------------------------- */
+    /*  Rollable Items                              */
+    /* -------------------------------------------- */
+
+    html.find('.item .rollable').click(ev => {
+      let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
+          Item = CONFIG.Item.entityClass,
+          item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
+          item.roll();
     });
 
     /* -------------------------------------------- */
