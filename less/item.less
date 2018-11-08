@@ -1,0 +1,45 @@
+@import "variables.less";
+
+/* ----------------------------------------- */
+/*  Item Sheet
+/* ----------------------------------------- */
+
+
+.dnd5e.item-sheet {
+ .item-details {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+    .flexrow();
+    justify-content: space-between;
+    border-bottom: 2px groove #FFF;
+
+    > li {
+      flex: 0 0 30%;
+      .flexrow();
+      font-size: 14px;
+      text-align: center;
+    }
+
+    label {
+      line-height: 20px;
+    }
+  }
+
+  .consumable-charges input {
+    flex: 0 0 64px;
+    margin-left: 5px;
+    text-align: center;
+  }
+
+  .sheet-tabs {
+    margin-top: 5px;
+    border-bottom: 2px groove #FFF;
+    font-size: 14px;
+  }
+
+  .editor.active {
+    display: block;
+    min-height: 300px;
+  }
+}

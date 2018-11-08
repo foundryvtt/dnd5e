@@ -1,0 +1,25 @@
+@import "../../../less/variables.less";
+@borderLight: #CCC;
+@borderDark: #666;
+
+/* Flexbox */
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.flexcol {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  > * {
+    flex: 1;
+  }
+}
