@@ -3,8 +3,12 @@
  */
 class Item5e extends Item {
   roll() {
-    let data = {};
-    if ( this.type === "weapon" ) data = this._weaponRollData();
+    const data = {
+      template: `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`,
+      actor: this.actor,
+      item: this.data,
+      data: this[this.data.type+"ChatData"]()
+    };
     renderTemplate(data.template, data).then(html => {
       ChatMessage.create({
         user: game.user._id,
@@ -16,38 +20,47 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  _weaponRollData() {
-    return {
-      template: "public/systems/dnd5e/templates/chat/weapon-card.html",
-      actor: this.actor,
-      item: this.data,
-      data: this.data.data
-    }
+  equipmentChatData() {
+    const data = duplicate(this.data.data);
+    const properties = [
+      CONFIG.armorTypes[data.armorType.value],
+      data.armor.value + " AC",
+      data.equipped.value ? "Equipped" : null,
+      data.stealth.value ? "Stealth Disadv." : null,
+    ];
+    data.properties = properties.filter(p => p !== null);
+    return data;
   }
 
   /* -------------------------------------------- */
 
-  static chatListeners(html) {
-    html.on('click', '.card-buttons button', ev => {
+  weaponChatData() {
+    return this.data.data;
+  }
 
-      // Extract card data
-      let button = $(ev.currentTarget),
-          action = button.attr("data-action"),
-          card = button.parents('.chat-card'),
-          actor = game.actors.get(card.attr('data-actor-id')),
-          itemId = Number(card.attr("data-item-id"));
+  /* -------------------------------------------- */
 
-      // Get the item
-      if ( !actor ) return;
-      let itemData = actor.items.find(i => i.id === itemId);
-      if ( !itemData ) return;
-      let item = new Item5e(itemData, actor);
+  consumableChatData() {
+    const data = duplicate(this.data.data);
+    data.consumableType.str = CONFIG.consumableTypes[data.consumableType.value];
+    data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
+    return data;
+  }
 
-      // Weapon attack
-      if ( action === "weaponAttack" ) item.rollWeaponAttack();
-      else if ( action === "weaponDamage" ) item.rollWeaponDamage();
-      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(true);
-    });
+  /* -------------------------------------------- */
+
+  toolChatData() {
+    const data = duplicate(this.data.data);
+    let abl = this.actor.data.data.abilities[data.ability.value].label;
+    const properties = [abl, data.proficient.value ? "Proficient" : null];
+    data.properties = properties.filter(p => p !== null);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  backpackChatData() {
+    return duplicate(this.data.data);
   }
 
   /* -------------------------------------------- */
@@ -140,6 +153,100 @@ class Item5e extends Item {
           });
         }
       }).render(true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Use a consumable item
+   */
+  useConsumable() {
+    new Roll(this.data.data.consume.value).toMessage({
+      alias: this.actor.name,
+      flavor: `Uses ${this.name}`
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Tool check
+   */
+  toolCheck() {
+    if ( this.type !== "tool" ) throw "Wrong item type!";
+
+    // Get data
+    let ad = this.actor.data.data,
+      abl = ad.abilities[this.data.data.ability.value],
+      prof = ad.attributes.prof.value * (this.data.data.proficient.value || 0),
+      parts = ["1d20", "@mod", "@prof", "@bonus"],
+      flavor = `${this.name} - Tool Check`;
+
+    // Render modal dialog
+    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
+      new Dialog({
+        title: flavor,
+        content: dlg,
+        buttons: {
+          advantage: {
+            label: "Advantage",
+            callback: () => {
+              parts[0] = "2d20kh";
+              flavor += " (Advantage)"
+            }
+          },
+          normal: {
+            label: "Normal",
+          },
+          disadvantage: {
+            label: "Disadvantage",
+            callback: () => {
+              parts[0] = "2d20kl";
+              flavor += " (Disadvantage)"
+            }
+          }
+        },
+        close: html => {
+          let bonus = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), {mod: abl.mod, prof: prof, bonus: bonus}).toMessage({
+            alias: this.actor.name,
+            flavor: flavor
+          });
+        }
+      }).render(true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  static chatListeners(html) {
+    html.on('click', '.card-buttons button', ev => {
+
+      // Extract card data
+      let button = $(ev.currentTarget),
+          action = button.attr("data-action"),
+          card = button.parents('.chat-card'),
+          actor = game.actors.get(card.attr('data-actor-id')),
+          itemId = Number(card.attr("data-item-id"));
+
+      // Get the item
+      if ( !actor ) return;
+      let itemData = actor.items.find(i => i.id === itemId);
+      if ( !itemData ) return;
+      let item = new Item5e(itemData, actor);
+
+      // Weapon attack
+      if ( action === "weaponAttack" ) item.rollWeaponAttack();
+      else if ( action === "weaponDamage" ) item.rollWeaponDamage();
+      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(true);
+
+      // Consumable usage
+      else if ( action === "consume" ) item.useConsumable();
+
+      // Tool usage
+      else if ( action === "toolCheck" ) item.toolCheck();
     });
   }
 }
@@ -310,11 +417,11 @@ CONFIG.weaponProperties = {
 // Equipment Types
 CONFIG.armorTypes = {
   "clothing": "Clothing",
-  "light": "Light",
-  "medium": "Medium",
-  "heavy": "Heavy",
-  "bonus": "Bonus",
-  "natural": "Natural",
+  "light": "Light Armor",
+  "medium": "Medium Armor",
+  "heavy": "Heavy Armor",
+  "bonus": "Magical Bonus",
+  "natural": "Natural Armor",
   "shield": "Shield"
 };
 

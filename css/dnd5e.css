@@ -625,7 +625,6 @@
 .dnd5e.item-sheet .item-details {
   list-style: none;
   margin: 0;
-  padding: 5px 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -701,8 +700,10 @@
 }
 .dnd5e.chat-card .card-footer span {
   border-right: 2px groove #FFF;
-  padding: 0 5px;
+  padding: 0 5px 0 0;
+  font-size: 12px;
 }
 .dnd5e.chat-card .card-footer span:last-child {
   border-right: none;
+  padding-right: 0;
 }

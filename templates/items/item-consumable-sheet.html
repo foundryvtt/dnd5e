@@ -51,6 +51,12 @@
         </div>
 
          <div class="form-group">
+            <label>{{data.consume.label}}</label>
+            <input type="text" name="data.consume.value" value="{{data.consume.value}}"
+                   data-dtype="{{data.consume.type}}" placeholder="Formula"/>
+        </div>
+
+         <div class="form-group">
             <label>{{data.autoUse.label}}</label>
             <input type="checkbox" name="data.autoUse.value" value="1" data-dtype="{{data.autoUse.type}}" {{checked data.autoUse.value}}/>
         </div>
