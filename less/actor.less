@@ -435,6 +435,7 @@
   height: calc(100% - 44px);
   overflow-y: scroll;
 
+  /* Inventory Item */
   .item {
     .flexrow();
     line-height: 24px;
@@ -454,37 +455,46 @@
       margin: 0;
     }
 
-    .item-quantity,
-    .item-weight {
+    .item-quantity, .item-weight {
       flex: 0 0 32px;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      border-right: 1px solid @borderLight;
     }
 
     .item-controls {
-      flex: 0 0 40px;
+      flex: 0 0 44px;
 
       a {
         display: block;
         float: left;
-        width: 20px;
+        width: 22px;
         font-size: 10px;
         text-align: center;
         color: #666;
       }
     }
   }
-}
 
-.inventory-header {
-  font-weight: 700;
-  border-bottom: 2px groove #FFF;
-
-  .item-name {
+  /* Inventory Header */
+  .inventory-header {
     font-weight: 700;
-    padding-left: 32px;
-  }
+    border-bottom: 2px groove #FFF;
 
-  .item-controls a.item-create {
-    width: 100%;
+    h3 {
+      font-size: 1em;
+      margin: 0;
+      padding-left: 32px;
+    }
+
+    .item-quantity, .item-weight {
+      color: #111;
+    }
+
+    .item-controls a.item-create {
+      width: 100%;
+    }
   }
 }
 
@@ -519,9 +529,13 @@
 /* ----------------------------------------- */
 
 .spellbook {
-  .inventory-header {
-    .item-controls a.spell-create {
-      width: 100%;
+  .spellbook-header {
+    .item-name h3 {
+      padding: 0;
+    }
+
+    .spell-school, .spell-action {
+      color: inherit;
     }
   }
 
@@ -529,14 +543,24 @@
     height: 100%;
   }
 
-  .spell-slots,
-  .spell-max {
+  .item-name {
+    flex: 2;
+  }
+
+  .spell-school, .spell-action {
+    flex: 1;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    border-right: 1px solid @borderLight;
+  }
+
+  .spell-slots, .spell-max {
     flex: 0 0 32px;
     text-align: center;
   }
 
   .spell-max {
-    margin-right: 3px;
     border-right: 1px solid @borderLight;
   }
 }

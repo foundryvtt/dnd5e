@@ -454,6 +454,8 @@
   padding: 0;
   height: calc(100% - 44px);
   overflow-y: scroll;
+  /* Inventory Item */
+  /* Inventory Header */
 }
 .inventory-list .item {
   display: flex;
@@ -479,27 +481,36 @@
 .inventory-list .item .item-quantity,
 .inventory-list .item .item-weight {
   flex: 0 0 32px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #CCC;
 }
 .inventory-list .item .item-controls {
-  flex: 0 0 40px;
+  flex: 0 0 44px;
 }
 .inventory-list .item .item-controls a {
   display: block;
   float: left;
-  width: 20px;
+  width: 22px;
   font-size: 10px;
   text-align: center;
   color: #666;
 }
-.inventory-header {
+.inventory-list .inventory-header {
   font-weight: 700;
   border-bottom: 2px groove #FFF;
 }
-.inventory-header .item-name {
-  font-weight: 700;
+.inventory-list .inventory-header h3 {
+  font-size: 1em;
+  margin: 0;
   padding-left: 32px;
 }
-.inventory-header .item-controls a.item-create {
+.inventory-list .inventory-header .item-quantity,
+.inventory-list .inventory-header .item-weight {
+  color: #111;
+}
+.inventory-list .inventory-header .item-controls a.item-create {
   width: 100%;
 }
 /* Encumbrance Bar */
@@ -527,11 +538,26 @@
 /* ----------------------------------------- */
 /*  Spellbook Tab
 /* ----------------------------------------- */
-.spellbook .inventory-header .item-controls a.spell-create {
-  width: 100%;
+.spellbook .spellbook-header .item-name h3 {
+  padding: 0;
+}
+.spellbook .spellbook-header .spell-school,
+.spellbook .spellbook-header .spell-action {
+  color: inherit;
 }
 .spellbook .inventory-list {
   height: 100%;
+}
+.spellbook .item-name {
+  flex: 2;
+}
+.spellbook .spell-school,
+.spellbook .spell-action {
+  flex: 1;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #CCC;
 }
 .spellbook .spell-slots,
 .spellbook .spell-max {
@@ -539,7 +565,6 @@
   text-align: center;
 }
 .spellbook .spell-max {
-  margin-right: 3px;
   border-right: 1px solid #CCC;
 }
 /* ----------------------------------------- */

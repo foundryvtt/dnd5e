@@ -344,9 +344,17 @@ class Item5eSheet extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Saving and Submission                       */
+  /* -------------------------------------------- */
 
+  /**
+   * Handle using the Save button on the MCE editor
+   * @private
+   */
   _onSaveMCE(ed, target) {
-    let itemData = {[target]: ed.getContent()};
+    const form = this.element.find('.item-sheet')[0];
+    const itemData = validateForm(form);
+    itemData[target] = ed.getContent();
 
     // Update owned items
     if (this.item.isOwned) {
