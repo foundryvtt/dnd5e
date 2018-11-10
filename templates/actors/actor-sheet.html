@@ -143,7 +143,7 @@
             <ol class="inventory-list directory-list">
             {{#each actor.inventory as |section sid|}}
                 <li class="item inventory-header">
-                    <h4 class="item-name">{{section.label}}</h4>
+                    <h3 class="item-name">{{section.label}}</h3>
                     <span class="item-quantity">Qty.</span>
                     <span class="item-weight">Wt.</span>
                     {{#if ../owner}}
@@ -179,38 +179,59 @@
         </div>
 
         <!-- SPELLBOOK -->
-       <div class="tab spellbook" data-tab="spellbook">
+        <div class="tab spellbook" data-tab="spellbook">
+            <div class="form-group spellcasting-ability">
+                <label><h3>Spellcasting Ability</h3></label>
+                <select name="data.attributes.spellcasting.value" data-type="String">
+                    <option value="">None</option>
+                    {{#each data.abilities as |abl a|}}
+                    <option value="{{a}}">{{abl.label}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
             <ol class="inventory-list directory-list">
             {{#each actor.spellbook as |section lvl|}}
-                <li class="item inventory-header">
-                    <h4 class="item-name">{{section.label}}</h4>
+                <li class="item inventory-header spellbook-header">
+                    <div class="item-name flexrow">
+                        <h3>{{section.label}}</h3>
 
-                    {{#unless section.isCantrip}}
-                    <span class="spell-slots">
-                        <input type="text" name="data.spells.spell{{lvl}}.value" value="{{section.uses}}" placeholder="0"/>
-                    </span>
-                    <span class="flex0"> / </span>
-                    <span class="spell-max">
-                        <input type="text" name="data.spells.spell{{lvl}}.max" value="{{section.slots}}" placeholder="0"/>
-                    </span>
-                    {{else}}
-                    <span class="spell-slots">&infin;</span>
-                    <span class="flex0"> / </span>
-                    <span class="spell-max">&infin;</span>
-                    {{/unless}}
+                        {{#unless section.isCantrip}}
+                        <span class="spell-slots">
+                            <input type="text" name="data.spells.spell{{lvl}}.value" value="{{section.uses}}" placeholder="0"/>
+                        </span>
+                        <span class="flex0"> / </span>
+                        <span class="spell-max">
+                            <input type="text" name="data.spells.spell{{lvl}}.max" value="{{section.slots}}" placeholder="0"/>
+                        </span>
+                        {{else}}
+                        <span class="spell-slots">&infin;</span>
+                        <span class="flex0"> / </span>
+                        <span class="spell-max">&infin;</span>
+                        {{/unless}}
+                    </div>
+
+                    <div class="spell-school">School</div>
+                    <div class="spell-action">Action</div>
 
                     {{#if ../owner}}
                     <div class="item-controls">
-                        <a class="item-control spell-create" title="Create Item" data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
+                        <a class="item-control item-create" title="Create Item" data-item-type="spell"
+                           data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
                     </div>
                     {{/if}}
                 </li>
+
                 {{#each section.spells as |item i|}}
                 <li class="item" data-item-id="{{item.id}}">
                     <div class="item-name">
                         <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <h4>{{item.name}}</h4>
                     </div>
+
+                    <div class="spell-school">{{item.data.school.str}}</div>
+                    <div class="spell-action">{{item.data.time.value}}</div>
+
                     {{#if ../../owner}}
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

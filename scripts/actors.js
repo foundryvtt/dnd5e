@@ -300,6 +300,13 @@ class Actor5eSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
+    // Level and CR
+    if ( sheetData.actor.type === "npc" ) {
+      let cr = sheetData.data.details.cr;
+      let crs = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
+      cr.str = (cr.value >= 1) ? String(cr.value) : crs[cr.value] || 0;
+    }
+
     // Ability proficiency
     for ( let abl of Object.values(sheetData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
@@ -370,6 +377,7 @@ class Actor5eSheet extends ActorSheet {
           uses: actorData.data.spells["spell"+lvl].value || 0,
           slots: actorData.data.spells["spell"+lvl].max || 0
         };
+        i.data.school.str = CONFIG.spellSchools[i.data.school.value];
         spellbook[lvl].spells.push(i);
       }
 
@@ -441,32 +449,32 @@ class Actor5eSheet extends ActorSheet {
    * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
    */
 	activateListeners(html) {
-	  super.activateListeners(html);
+    super.activateListeners(html);
 
-	  // Pad field width
+    // Pad field width
     html.find('[data-wpad]').each((i, e) => {
       let text = e.tagName === "INPUT" ? e.value : e.innerText,
-          w = text.length * parseInt(e.getAttribute("data-wpad")) / 2;
+        w = text.length * parseInt(e.getAttribute("data-wpad")) / 2;
       e.setAttribute("style", "flex: 0 0 " + w + "px");
     });
 
     // Activate tabs
     html.find('.tabs').each((_, el) => {
       let tabs = $(el),
-          initial = this.actor.data.flags["_sheetTab-"+tabs.attr("data-tab-container")];
+        initial = this.actor.data.flags["_sheetTab-" + tabs.attr("data-tab-container")];
       new Tabs(tabs, initial, clicked => {
-        this.actor.data.flags["_sheetTab-"+clicked.parent().attr("data-tab-container")] = clicked.attr("data-tab");
+        this.actor.data.flags["_sheetTab-" + clicked.parent().attr("data-tab-container")] = clicked.attr("data-tab");
       });
     });
 
     // Everything below here is only needed if the sheet is editable
-    if ( !this.options.editable ) return;
+    if (!this.options.editable) return;
 
-	  // Activate TinyMCE Editors
-	  html.find(".editor a.editor-edit").click(ev => {
-	    let button = $(ev.currentTarget),
-	        editor = button.siblings(".editor-content");
-	    let mce = createEditor({
+    // Activate TinyMCE Editors
+    html.find(".editor a.editor-edit").click(ev => {
+      let button = $(ev.currentTarget),
+        editor = button.siblings(".editor-content");
+      let mce = createEditor({
         target: editor[0],
         height: editor.parent().height() - 40,
         save_enablewhendirty: true,
@@ -484,7 +492,7 @@ class Actor5eSheet extends ActorSheet {
 
     /* -------------------------------------------- */
     /*  Abilities and Skills
-    /* -------------------------------------------- */
+     /* -------------------------------------------- */
 
     // Ability Proficiency
     html.find('.ability-proficiency').click(ev => {
@@ -520,14 +528,14 @@ class Actor5eSheet extends ActorSheet {
 
     html.find('.item .rollable').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
-          Item = CONFIG.Item.entityClass,
-          item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
-          item.roll();
+        Item = CONFIG.Item.entityClass,
+        item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
+      item.roll();
     });
 
     /* -------------------------------------------- */
     /*  Inventory
-    /* -------------------------------------------- */
+     /* -------------------------------------------- */
 
     // Create New Item
     html.find('.item-create').click(ev => {
@@ -546,10 +554,31 @@ class Actor5eSheet extends ActorSheet {
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       let li = $(ev.currentTarget).parents(".item"),
-          itemId = Number(li.attr("data-item-id"));
+        itemId = Number(li.attr("data-item-id"));
       this.actor.deleteOwnedItem(itemId, true);
       li.slideUp(200, () => this.render(false));
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Customize form submission for 5e actor sheets
+   * @private
+   */
+  _onSubmit(event) {
+
+    // NPC Challenge Rating
+    if (this.actor.data.type === "npc") {
+      let form = $(event.currentTarget),
+        cr = form.find('.level input'),
+        val = cr.val(),
+        crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+      cr.val(crs[val] || val);
+    }
+
+    // Parent submission steps
+    super._onSubmit(event);
   }
 }
 
