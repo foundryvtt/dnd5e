@@ -68,17 +68,19 @@ class Item5e extends Item {
   /**
    * Roll a Weapon Attack
    */
-  rollWeaponAttack() {
+  rollWeaponAttack(ev) {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Get data
     let abl = this.actor.data.data.abilities[this.data.data.ability.value || "str"],
       prof = this.actor.data.data.attributes.prof.value,
-      parts = ["1d20", "@mod", "@prof", "@bonus"],
+      hit = this.data.data.bonus.value || 0,
+      parts = ["1d20", "@hit", "@mod", "@prof", "@bonus"],
       flavor = `${this.name} - Attack Roll`;
 
     // Render modal dialog
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    console.log(ev);
     renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
       new Dialog({
         title: flavor,
@@ -104,12 +106,12 @@ class Item5e extends Item {
         },
         close: html => {
           let bonus = html.find('[name="bonus"]').val();
-          new Roll(parts.join(" + "), {mod: abl.mod, prof: prof, bonus: bonus}).toMessage({
+          new Roll(parts.join(" + "), {hit: hit, mod: abl.mod, prof: prof, bonus: bonus}).toMessage({
             alias: this.actor.name,
             flavor: flavor
           });
         }
-      }).render(true);
+      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
     });
   }
 
@@ -118,7 +120,7 @@ class Item5e extends Item {
   /**
    * Roll Weapon Damage
    */
-  rollWeaponDamage(alternate=false) {
+  rollWeaponDamage(ev, alternate=false) {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Get data
@@ -152,7 +154,7 @@ class Item5e extends Item {
             flavor: flavor
           });
         }
-      }).render(true);
+      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
     });
   }
 
@@ -161,7 +163,7 @@ class Item5e extends Item {
   /**
    * Use a consumable item
    */
-  useConsumable() {
+  useConsumable(ev) {
     new Roll(this.data.data.consume.value).toMessage({
       alias: this.actor.name,
       flavor: `Uses ${this.name}`
@@ -173,7 +175,7 @@ class Item5e extends Item {
   /**
    * Roll a Tool check
    */
-  toolCheck() {
+  toolCheck(ev) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
 
     // Get data
@@ -215,7 +217,7 @@ class Item5e extends Item {
             flavor: flavor
           });
         }
-      }).render(true);
+      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
     });
   }
 
@@ -238,15 +240,15 @@ class Item5e extends Item {
       let item = new Item5e(itemData, actor);
 
       // Weapon attack
-      if ( action === "weaponAttack" ) item.rollWeaponAttack();
-      else if ( action === "weaponDamage" ) item.rollWeaponDamage();
-      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(true);
+      if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
+      else if ( action === "weaponDamage" ) item.rollWeaponDamage(ev);
+      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(ev, true);
 
       // Consumable usage
-      else if ( action === "consume" ) item.useConsumable();
+      else if ( action === "consume" ) item.useConsumable(ev);
 
       // Tool usage
-      else if ( action === "toolCheck" ) item.toolCheck();
+      else if ( action === "toolCheck" ) item.toolCheck(ev);
     });
   }
 }
