@@ -65,6 +65,27 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  spellChatData() {
+    const data = duplicate(this.data.data);
+    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+    data.isSave = data.spellType.value === "save";
+    data.isAttack = data.spellType.value === "attack";
+    const props = [
+      CONFIG.spellSchools[data.school.value],
+      CONFIG.spellLevels[data.level.value],
+      data.components.value + " Components",
+      data.target.value,
+      data.time.value,
+      data.duration.value,
+      data.concentration.value ? "Concentration" : null,
+      data.ritual.value ? "Ritual" : null
+    ];
+    data.properties = props.filter(p => p !== null);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Roll a Weapon Attack
    */
@@ -225,10 +246,18 @@ class Item5e extends Item {
 
   static chatListeners(html) {
     html.on('click', '.card-buttons button', ev => {
+      ev.preventDefault();
 
       // Extract card data
       let button = $(ev.currentTarget),
-          action = button.attr("data-action"),
+          messageId = button.parents('.message').attr("data-message-id"),
+          senderId = game.data.chat.find(m => m._id === messageId).user._id;
+
+      // Confirm roll permission
+      if ( !game.user.isGM && ( game.user._id !== senderId )) return;
+
+      // Extract action data
+      let action = button.attr("data-action"),
           card = button.parents('.chat-card'),
           actor = game.actors.get(card.attr('data-actor-id')),
           itemId = Number(card.attr("data-item-id"));
@@ -396,7 +425,8 @@ CONFIG.damageTypes = {
   "psychic": "Psychic",
   "radiant": "Radiant",
   "slashing": "Slashing",
-  "thunder": "Thunder"
+  "thunder": "Thunder",
+  "healing": "Healing"
 };
 
 // Weapon Types

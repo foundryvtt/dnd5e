@@ -39,7 +39,7 @@
         <!-- ATTRIBUTES -->
         <div class="primary-attributes">
             <div class="attribute">
-                <h3 class="attribute-name">Health</h3>
+                <h4 class="attribute-name">Health</h4>
                 <div class="attribute-value">
                     <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10"/>
                     <span class="flex0"> / </span>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="attribute">
-                <h3 class="attribute-name">Armor Class</h3>
+                <h4 class="attribute-name">Armor Class</h4>
                 <div class="attribute-value">
                     <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}" placeholder="10"/>
                 </div>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="attribute">
-                <h3 class="attribute-name">Proficiency</h3>
+                <h4 class="attribute-name">Proficiency</h4>
                 <div class="attribute-value">
                     <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
                 </div>
@@ -82,9 +82,9 @@
         </div>
         <div class="primary-attributes">
             <div class="attribute">
-                <h3 class="attribute-name">
+                <h4 class="attribute-name">
                     <input name="data.resources.primary.label" type="text" value="{{data.resources.primary.label}}" placeholder="Primary"/>
-                </h3>
+                </h4>
                <div class="attribute-value">
                    <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}" placeholder="1"/>
                    <span class="flex0"> / </span>
@@ -93,9 +93,9 @@
             </div>
             
             <div class="attribute">
-                <h3 class="attribute-name">
+                <h4 class="attribute-name">
                     <input name="data.resources.secondary.label" type="text" value="{{data.resources.secondary.label}}" placeholder="Primary"/>
-                </h3>
+                </h4>
                <div class="attribute-value">
                    <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}" placeholder="1"/>
                    <span class="flex0"> / </span>
@@ -104,7 +104,7 @@
             </div>
 
             <div class="attribute">
-                <h3 class="attribute-name">Initiative</h3>
+                <h4 class="attribute-name">Initiative</h4>
                 <div class="attribute-value">
                     <span>{{numberFormat data.attributes.init.mod decimals=0 sign=true}}</span>
                 </div>
@@ -183,10 +183,12 @@
             <div class="form-group spellcasting-ability">
                 <label><h3>Spellcasting Ability</h3></label>
                 <select name="data.attributes.spellcasting.value" data-type="String">
+                    {{#select data.attributes.spellcasting.value}}
                     <option value="">None</option>
                     {{#each data.abilities as |abl a|}}
                     <option value="{{a}}">{{abl.label}}</option>
                     {{/each}}
+                    {{/select}}
                 </select>
             </div>
 
@@ -226,7 +228,7 @@
                 <li class="item" data-item-id="{{item.id}}">
                     <div class="item-name">
                         <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <h4>{{item.name}}</h4>
+                        <h4 class="rollable">{{item.name}}</h4>
                     </div>
 
                     <div class="spell-school">{{item.data.school.str}}</div>
@@ -274,7 +276,7 @@
                 <li class="ability" data-ability="{{id}}">
                     <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"/>
                     <a class="ability-proficiency" title="{{ability.hover}}">{{{ability.icon}}}</a>
-                    <h3 class="ability-name rollable">{{ability.label}}</h3>
+                    <h4 class="ability-name rollable">{{ability.label}}</h4>
                     <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                     <span class="ability-score" title="Ability Score">
                         <input name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" placeholder="10"/>
@@ -317,7 +319,7 @@
                 <li class="skill" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}"/>
                     <a class="skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
-                    <h3 class="skill-name rollable">{{skill.label}}</h3>
+                    <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>

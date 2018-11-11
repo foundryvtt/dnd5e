@@ -538,6 +538,19 @@
 /* ----------------------------------------- */
 /*  Spellbook Tab
 /* ----------------------------------------- */
+.spellbook .spellcasting-ability {
+  margin: 0 0 4px;
+  padding-bottom: 4px;
+  border-bottom: 2px groove #FFF;
+}
+.spellbook .spellcasting-ability h3 {
+  font-size: 14px;
+  margin: 0;
+}
+.spellbook .spellcasting-ability select {
+  height: 24px;
+  background: rgba(255, 255, 255, 0.5);
+}
 .spellbook .spellbook-header .item-name h3 {
   padding: 0;
 }
@@ -546,7 +559,7 @@
   color: inherit;
 }
 .spellbook .inventory-list {
-  height: 100%;
+  height: calc(100% - 28px);
 }
 .spellbook .item-name {
   flex: 2;
@@ -708,13 +721,18 @@
   flex: 1;
   margin: 0;
   line-height: 36px;
-  font-weight: bold;
 }
 .dnd5e.chat-card .card-content {
   margin: 5px 0;
 }
 .dnd5e.chat-card .card-buttons {
   margin: 5px 0;
+}
+.dnd5e.chat-card .card-buttons span {
+  display: block;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #CCC;
 }
 .dnd5e.chat-card .card-buttons button {
   margin: 2px 0;
