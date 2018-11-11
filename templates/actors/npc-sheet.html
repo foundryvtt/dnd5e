@@ -144,7 +144,7 @@
                 <li class="item" data-item-id="{{item.id}}">
                     <div class="item-name">
                         <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <h4>{{item.name}}</h4>
+                        <h4 class="rollable">{{item.name}}</h4>
                     </div>
                     <span class="item-quantity">{{item.data.quantity.value}}</span>
                     <span class="item-weight">{{item.totalWeight}}</span>
@@ -171,10 +171,12 @@
             <div class="form-group spellcasting-ability">
                 <label><h3>Spellcasting Ability</h3></label>
                 <select name="data.attributes.spellcasting.value" data-type="String">
+                    {{#select data.attributes.spellcasting.value}}
                     <option value="">None</option>
                     {{#each data.abilities as |abl a|}}
                     <option value="{{a}}">{{abl.label}}</option>
                     {{/each}}
+                    {{/select}}
                 </select>
             </div>
 

@@ -182,6 +182,102 @@ class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Roll a Spell Attack
+   */
+  rollSpellAttack(ev) {
+    if ( this.type !== "spell" ) throw "Wrong item type!";
+    let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value;
+
+    // Get data
+    let abl = this.actor.data.data.abilities[ability],
+      prof = this.actor.data.data.attributes.prof.value,
+      parts = ["1d20", "@mod", "@prof", "@bonus"],
+      flavor = `${this.name} - Spell Attack Roll`;
+
+    // Render modal dialog
+    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    console.log(ev);
+    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
+      new Dialog({
+        title: flavor,
+        content: dlg,
+        buttons: {
+          advantage: {
+            label: "Advantage",
+            callback: () => {
+              parts[0] = "2d20kh";
+              flavor += " (Advantage)"
+            }
+          },
+          normal: {
+            label: "Normal",
+          },
+          disadvantage: {
+            label: "Disadvantage",
+            callback: () => {
+              parts[0] = "2d20kl";
+              flavor += " (Disadvantage)"
+            }
+          }
+        },
+        close: html => {
+          let bonus = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), {mod: abl.mod, prof: prof, bonus: bonus}).toMessage({
+            alias: this.actor.name,
+            flavor: flavor
+          });
+        }
+      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll Spell Damage
+   */
+  rollSpellDamage(ev) {
+    if ( this.type !== "spell" ) throw "Wrong item type!";
+    let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value;
+
+    // Get data
+    let abl = this.actor.data.data.abilities[ability],
+      dmg = this.data.data.damage.value,
+      parts = [dmg, "@bonus"],
+      flavor = `${this.name} - Damage Roll`;
+
+    // Render modal dialog
+    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
+      new Dialog({
+        title: flavor,
+        content: dlg,
+        buttons: {
+          advantage: {
+            label: "Critical Hit",
+            callback: () => {
+              parts[0] = Roll.alter(dmg, 0, 2);
+              flavor += " (Critical)"
+            }
+          },
+          normal: {
+            label: "Normal",
+          },
+        },
+        close: html => {
+          let bonus = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).toMessage({
+            alias: this.actor.name,
+            flavor: flavor
+          });
+        }
+      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Use a consumable item
    */
   useConsumable(ev) {
@@ -272,6 +368,10 @@ class Item5e extends Item {
       if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
       else if ( action === "weaponDamage" ) item.rollWeaponDamage(ev);
       else if ( action === "weaponDamage2" ) item.rollWeaponDamage(ev, true);
+
+      // Spell actions
+      else if ( action === "spellAttack" ) item.rollSpellAttack(ev);
+      else if ( action === "spellDamage" ) item.rollSpellDamage(ev);
 
       // Consumable usage
       else if ( action === "consume" ) item.useConsumable(ev);

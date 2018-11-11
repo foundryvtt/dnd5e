@@ -65,7 +65,7 @@ class Actor5e extends Actor {
     // CR, kill exp, and proficiency
     data.details.cr.value = parseFloat(data.details.cr.value) || 0;
     data.details.xp.value = this.getCRExp(data.details.cr.value);
-    data.attributes.prof.value = Math.floor((data.details.cr.value + 7) / 4);
+    data.attributes.prof.value = Math.floor((Math.max(data.details.cr.value, 1) + 7) / 4);
   }
 
   /* -------------------------------------------- */
