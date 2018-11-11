@@ -30,7 +30,10 @@ class Actor5e extends Actor {
     // Attributes
     data.attributes.init.mod = data.abilities.dex.mod + (data.attributes.init.value || 0);
     data.attributes.ac.min = 10 + data.abilities.dex.mod;
-    data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities.int.mod;
+
+    // Spell DC
+    let spellAbl = data.attributes.spellcasting.value || "int";
+    data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod;
 
     // Return the prepared Actor data
     return actorData;
@@ -362,7 +365,7 @@ class Actor5eSheet extends ActorSheet {
       if ( Object.keys(inventory).includes(i.type) ) {
         i.data.quantity.value = i.data.quantity.value || 1;
         i.data.weight.value = i.data.weight.value || 0;
-        i.totalWeight = i.data.quantity.value * i.data.weight.value;
+        i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
         inventory[i.type].items.push(i);
         totalWeight += i.totalWeight;
       }
@@ -397,7 +400,7 @@ class Actor5eSheet extends ActorSheet {
     // Inventory encumbrance
     let enc = {
       max: actorData.data.abilities.str.value * 15,
-      value: totalWeight,
+      value: Math.round(totalWeight * 10) / 10,
     };
     enc.pct = Math.min(enc.value * 100 / enc.max, 99);
     actorData.data.attributes.encumbrance = enc;
@@ -499,6 +502,7 @@ class Actor5eSheet extends ActorSheet {
       let field = $(ev.currentTarget).siblings('input[type="hidden"]');
       field.val(1 - field.val());
       let formData = validateForm(field.parents('form')[0]);
+      console.log(formData);
       this.actor.update(formData, true);
     });
 

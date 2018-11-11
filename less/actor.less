@@ -529,6 +529,21 @@
 /* ----------------------------------------- */
 
 .spellbook {
+  .spellcasting-ability {
+    margin: 0 0 4px;
+    padding-bottom: 4px;
+    border-bottom: 2px groove #FFF;
+
+    h3 {
+      font-size: 14px;
+      margin: 0;
+    }
+    select {
+      height: 24px;
+      background: rgba(255,255,255,0.5);
+    }
+  }
+
   .spellbook-header {
     .item-name h3 {
       padding: 0;
@@ -540,7 +555,7 @@
   }
 
   .inventory-list {
-    height: 100%;
+    height: calc(100% - 28px);
   }
 
   .item-name {
