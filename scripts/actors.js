@@ -507,7 +507,7 @@ class Actor5eSheet extends ActorSheet {
     });
 
     // Ability Checks
-    html.find('h3.ability-name').click(ev => {
+    html.find('.ability-name').click(ev => {
       let abl = ev.currentTarget.parentElement.getAttribute("data-ability");
       this.actor.rollAbility(abl);
     });
@@ -521,7 +521,7 @@ class Actor5eSheet extends ActorSheet {
     });
 
     // Roll Skill Checks
-    html.find('h3.skill-name').click(ev => {
+    html.find('.skill-name').click(ev => {
       let skl = ev.currentTarget.parentElement.getAttribute("data-skill");
       this.actor.rollSkill(skl);
     });
