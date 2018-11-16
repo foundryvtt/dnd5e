@@ -592,10 +592,6 @@ class Actor5eSheet extends ActorSheet {
 
 CONFIG.Actor.entityClass = Actor5e;
 CONFIG.Actor.sheetClass = Actor5eSheet;
-CONFIG.Actor5eSheet = {
-  "width": 720,
-  "height": 800
-};
 
 
 /* -------------------------------------------- */
