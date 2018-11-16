@@ -341,6 +341,8 @@ class Item5e extends Item {
   /* -------------------------------------------- */
 
   static chatListeners(html) {
+
+    // Chat card actions
     html.on('click', '.card-buttons button', ev => {
       ev.preventDefault();
 
@@ -379,6 +381,55 @@ class Item5e extends Item {
       // Tool usage
       else if ( action === "toolCheck" ) item.toolCheck(ev);
     });
+
+    // Dice roll context
+    new ContextMenu(html, ".dice-roll", {
+      "Apply Damage": {
+        icon: '<i class="fas fa-user-minus"></i>',
+        callback: event => this.applyDamage(event, 1)
+      },
+      "Apply Healing": {
+        icon: '<i class="fas fa-user-plus"></i>',
+        callback: event => this.applyDamage(event, -1)
+      },
+      "Double Damage": {
+        icon: '<i class="fas fa-user-injured"></i>',
+        callback: event => this.applyDamage(event, 2)
+
+      },
+      "Half Damage": {
+        icon: '<i class="fas fa-user-shield"></i>',
+        callback: event => this.applyDamage(event, 0.5)
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  static applyDamage(event, multiplier) {
+    let roll = $(event.currentTarget).parents('.dice-roll'),
+        value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+
+    // Get tokens to which damage can be applied
+    const tokens = canvas.tokens.controlledTokens.filter(t => {
+      if ( t.actor && t.data.actorLink ) return true;
+      else if ( t.data.bar1.attribute === "attributes.hp" || t.data.bar2.attribute === "attributes.hp" ) return true;
+      return false;
+    });
+    if ( tokens.length === 0 ) return;
+
+    // Apply damage to all tokens
+    for ( let t of tokens ) {
+      if ( t.actor && t.data.actorLink ) {
+        let hp = parseInt(t.actor.data.data.attributes.hp.value),
+            max = parseInt(t.actor.data.data.attributes.hp.max);
+        t.actor.update({"data.attributes.hp.value": Math.clamped(hp - value, 0, max)}, true);
+      }
+      else {
+        let bar = (t.data.bar1.attribute === "attributes.hp") ? "bar1" : "bar2";
+        t.update({[`${bar}.value`]: Math.clamped(t.data[bar].value - value, 0, t.data[bar].max)}, true);
+      }
+    }
   }
 }
 
@@ -408,6 +459,16 @@ class Item5eSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
+   * Use a type-specific template for each different item type
+   */
+  get template() {
+    let type = this.item.type;
+    return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare item sheet data
    * Start with the base item data and extending with additional properties for rendering.
    */
@@ -422,16 +483,6 @@ class Item5eSheet extends ItemSheet {
       data["spellLevels"] = CONFIG.spellLevels;
     }
     return data;
-  }
-
-  /* -------------------------------------------- */
-  
-  /**
-   * Use a type-specific template for each different item type
-   */
-  get template() {
-    let type = this.item.type;
-    return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
