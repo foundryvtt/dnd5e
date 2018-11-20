@@ -277,6 +277,14 @@
   max-width: none;
   text-align: left;
 }
+.dnd5e.actor-sheet .primary-attributes .attribute .attribute-footer #roll-hp-formula {
+  float: right;
+  margin-right: 5px;
+}
+.dnd5e.actor-sheet .primary-attributes .attribute .attribute-footer #hp-formula {
+  float: left;
+  width: 85%;
+}
 /* ----------------------------------------- */
 /* Biography Tab
 /* ----------------------------------------- */

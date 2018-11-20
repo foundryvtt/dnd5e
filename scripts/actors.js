@@ -273,6 +273,18 @@ class Actor5e extends Actor {
       }
     }).render(true);
   }
+
+
+ /**
+   * Roll and set the HP based on the formula
+   */
+  rollHitPointFormula(){
+      let formula = this.data.data.attributes.hp.formula;
+      let rolledHp = new Roll(formula).total;
+      this.data.data.attributes.hp.max = rolledHp;
+      this.data.data.attributes.hp.value = rolledHp;
+  }
+
 }
 
 
@@ -494,8 +506,18 @@ class Actor5eSheet extends ActorSheet {
     });
 
     /* -------------------------------------------- */
+    /*  Rollable Hitpoints                          */
+    /* -------------------------------------------- */
+
+    // Ability Checks
+    html.find('#roll-hp-formula').click(ev => {
+        this.actor.rollHitPointFormula();
+        this.render(false);
+    });
+
+    /* -------------------------------------------- */
     /*  Abilities and Skills
-     /* -------------------------------------------- */
+    /* -------------------------------------------- */
 
     // Ability Proficiency
     html.find('.ability-proficiency').click(ev => {
@@ -526,9 +548,6 @@ class Actor5eSheet extends ActorSheet {
       this.actor.rollSkill(skl);
     });
 
-    /* -------------------------------------------- */
-    /*  Rollable Items                              */
-    /* -------------------------------------------- */
 
     html.find('.item .rollable').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
