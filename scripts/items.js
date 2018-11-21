@@ -186,7 +186,7 @@ class Item5e extends Item {
    */
   rollSpellAttack(ev) {
     if ( this.type !== "spell" ) throw "Wrong item type!";
-    let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value;
+    let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value || "int";
 
     // Get data
     let abl = this.actor.data.data.abilities[ability],
@@ -238,7 +238,7 @@ class Item5e extends Item {
    */
   rollSpellDamage(ev) {
     if ( this.type !== "spell" ) throw "Wrong item type!";
-    let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value;
+    let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value || "int";
 
     // Get data
     let abl = this.actor.data.data.abilities[ability],
