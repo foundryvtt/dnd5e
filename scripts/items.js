@@ -101,7 +101,6 @@ class Item5e extends Item {
 
     // Render modal dialog
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    console.log(ev);
     renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
       new Dialog({
         title: flavor,
@@ -196,7 +195,6 @@ class Item5e extends Item {
 
     // Render modal dialog
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    console.log(ev);
     renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
       new Dialog({
         title: flavor,
@@ -438,7 +436,7 @@ class Item5e extends Item {
 
 
 // Activate global listeners
-Hooks.on('renderChatLog', html => Item5e.chatListeners(html));
+Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
 
 // Assign Item5e class to CONFIG
 CONFIG.Item.entityClass = Item5e;
