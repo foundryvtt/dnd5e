@@ -93,11 +93,12 @@ class Item5e extends Item {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Get data
-    let abl = this.actor.data.data.abilities[this.data.data.ability.value || "str"],
-      prof = this.actor.data.data.attributes.prof.value,
-      hit = this.data.data.bonus.value || 0,
-      parts = ["1d20", "@hit", "@mod", "@prof", "@bonus"],
-      flavor = `${this.name} - Attack Roll`;
+    let rollData = duplicate(this.actor.data.data),
+        abl = this.actor.data.data.abilities[this.data.data.ability.value || "str"],
+        prof = this.actor.data.data.attributes.prof.value,
+        hit = this.data.data.bonus.value || 0,
+        parts = ["1d20", "@hit", "@mod", "@prof", "@bonus"],
+        flavor = `${this.name} - Attack Roll`;
 
     // Render modal dialog
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
@@ -125,8 +126,8 @@ class Item5e extends Item {
           }
         },
         close: html => {
-          let bonus = html.find('[name="bonus"]').val();
-          new Roll(parts.join(" + "), {hit: hit, mod: abl.mod, prof: prof, bonus: bonus}).toMessage({
+          mergeObject(rollData, {hit: hit, mod: abl.mod, prof: prof, bonus: html.find('[name="bonus"]').val()});
+          new Roll(parts.join(" + "), rollData).toMessage({
             alias: this.actor.name,
             flavor: flavor
           });
@@ -144,10 +145,11 @@ class Item5e extends Item {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Get data
-    let abl = this.actor.data.data.abilities[this.data.data.ability.value || "str"],
-      dmg = alternate ? this.data.data.damage2.value : this.data.data.damage.value,
-      parts = [dmg, "@mod", "@bonus"],
-      flavor = `${this.name} - Damage Roll`;
+    let rollData = duplicate(this.actor.data.data),
+        abl = this.actor.data.data.abilities[this.data.data.ability.value || "str"],
+        dmg = alternate ? this.data.data.damage2.value : this.data.data.damage.value,
+        parts = [dmg, "@mod", "@bonus"],
+        flavor = `${this.name} - Damage Roll`;
 
     // Render modal dialog
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
@@ -168,8 +170,9 @@ class Item5e extends Item {
           },
         },
         close: html => {
-          let bonus = html.find('[name="bonus"]').val();
-          new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).toMessage({
+          rollData['mod'] = abl.mod;
+          rollData['bonus'] = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), rollData).toMessage({
             alias: this.actor.name,
             flavor: flavor
           });
@@ -188,10 +191,11 @@ class Item5e extends Item {
     let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value || "int";
 
     // Get data
-    let abl = this.actor.data.data.abilities[ability],
-      prof = this.actor.data.data.attributes.prof.value,
-      parts = ["1d20", "@mod", "@prof", "@bonus"],
-      flavor = `${this.name} - Spell Attack Roll`;
+    let rollData = duplicate(this.actor.data.data),
+        abl = this.actor.data.data.abilities[ability],
+        prof = this.actor.data.data.attributes.prof.value,
+        parts = ["1d20", "@mod", "@prof", "@bonus"],
+        flavor = `${this.name} - Spell Attack Roll`;
 
     // Render modal dialog
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
@@ -219,8 +223,10 @@ class Item5e extends Item {
           }
         },
         close: html => {
-          let bonus = html.find('[name="bonus"]').val();
-          new Roll(parts.join(" + "), {mod: abl.mod, prof: prof, bonus: bonus}).toMessage({
+          rollData['mod'] = abl.mod;
+          rollData['prof'] = prof;
+          rollData['bonus'] = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), rollData).toMessage({
             alias: this.actor.name,
             flavor: flavor
           });
@@ -239,10 +245,11 @@ class Item5e extends Item {
     let ability = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value || "int";
 
     // Get data
-    let abl = this.actor.data.data.abilities[ability],
-      dmg = this.data.data.damage.value,
-      parts = [dmg, "@bonus"],
-      flavor = `${this.name} - Damage Roll`;
+    let rollData = duplicate(this.actor.data.data),
+        abl = rollData.abilities[ability],
+        dmg = this.data.data.damage.value,
+        parts = [dmg, "@bonus"],
+        flavor = `${this.name} - Damage Roll`;
 
     // Render modal dialog
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
@@ -263,8 +270,9 @@ class Item5e extends Item {
           },
         },
         close: html => {
-          let bonus = html.find('[name="bonus"]').val();
-          new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).toMessage({
+          rollData['mod'] = abl.mod;
+          rollData['bonus'] = html.find('[name="bonus"]').val();
+          new Roll(parts.join(" + "), rollData).toMessage({
             alias: this.actor.name,
             flavor: flavor
           });
