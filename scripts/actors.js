@@ -595,4 +595,3 @@ CONFIG.Actor.sheetClass = Actor5eSheet;
 
 
 /* -------------------------------------------- */
-
