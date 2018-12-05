@@ -544,7 +544,7 @@ class Actor5eSheet extends ActorSheet {
     // Create New Item
     html.find('.item-create').click(ev => {
       let type = ev.currentTarget.getAttribute("data-item-type");
-      this.actor.createOwnedItem({name: "New " + type.capitalize(), type: type}, true);
+      this.actor.createOwnedItem({name: "New " + type.capitalize(), type: type}, true, {renderSheet: true});
     });
 
     // Update Inventory Item
