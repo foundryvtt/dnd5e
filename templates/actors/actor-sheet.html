@@ -12,13 +12,15 @@
             <div class="charlevel">
                 <div class="level">
                     <label>Level </label> 
-                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}" placeholder="1"/>
+                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
+                           data-dtype="Number" placeholder="1"/>
                 </div>
                 <div class="xpbar">
                     <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
                 </div>
                 <div class="experience">
-                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0"/>
+                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
+                           data-dtype="Number" placeholder="0"/>
                     <span class="max" data-wpad="14"> / {{data.details.xp.max}}</span>
                 </div>
             </div>
@@ -41,14 +43,17 @@
             <div class="attribute">
                 <h4 class="attribute-name">Health</h4>
                 <div class="attribute-value">
-                    <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10"/>
+                    <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                           data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
                     <span class="flex0"> / </span>
-                    <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10"/>
+                    <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                           data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
                 </div>
                 <footer class="attribute-footer">
                     <h4 class="footer-label">Hit Dice</h4>
                     <div class="footer-value">
-                        <input name="data.attributes.hd.value" type="text" value="{{data.attributes.hd.value}}" placeholder="1"/>
+                        <input name="data.attributes.hd.value" type="text" value="{{data.attributes.hd.value}}"
+                               data-dtype="{{data.attributes.hd.type}}" placeholder="1"/>
                         <span class="flex0"> / {{data.details.level.value}}</span>
                     </div>
                 </footer>
@@ -57,7 +62,8 @@
             <div class="attribute">
                 <h4 class="attribute-name">Armor Class</h4>
                 <div class="attribute-value">
-                    <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}" placeholder="10"/>
+                    <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                           data-dtype="{{data.attributes.ac.type}}" placeholder="10"/>
                 </div>
                 <footer class="attribute-footer">
                     <h4 class="footer-label">Base AC</h4>
@@ -83,23 +89,29 @@
         <div class="primary-attributes">
             <div class="attribute">
                 <h4 class="attribute-name">
-                    <input name="data.resources.primary.label" type="text" value="{{data.resources.primary.label}}" placeholder="Primary"/>
+                    <input name="data.resources.primary.label" type="text" value="{{data.resources.primary.label}}"
+                           data-dtype="String" placeholder="Primary"/>
                 </h4>
                <div class="attribute-value">
-                   <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}" placeholder="1"/>
+                   <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}"
+                          data-dtype="Number" placeholder="1"/>
                    <span class="flex0"> / </span>
-                   <input name="data.resources.primary.max" type="text" value="{{data.resources.primary.max}}" placeholder="1"/>
+                   <input name="data.resources.primary.max" type="text" value="{{data.resources.primary.max}}"
+                          data-dtype="Number" placeholder="1"/>
                </div>
             </div>
             
             <div class="attribute">
                 <h4 class="attribute-name">
-                    <input name="data.resources.secondary.label" type="text" value="{{data.resources.secondary.label}}" placeholder="Primary"/>
+                    <input name="data.resources.secondary.label" type="text" value="{{data.resources.secondary.label}}"
+                           data-dtype="String" placeholder="Primary"/>
                 </h4>
                <div class="attribute-value">
-                   <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}" placeholder="1"/>
+                   <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}"
+                          data-dtype="Number" placeholder="1"/>
                    <span class="flex0"> / </span>
-                   <input name="data.resources.secondary.max" type="text" value="{{data.resources.secondary.max}}" placeholder="1"/>
+                   <input name="data.resources.secondary.max" type="text" value="{{data.resources.secondary.max}}"
+                          data-dtype="Number" placeholder="1"/>
                </div>
             </div>
 
@@ -274,12 +286,14 @@
             <ol class="abilities-list directory-list">
             {{#each data.abilities as |ability id|}}
                 <li class="ability" data-ability="{{id}}">
-                    <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"/>
+                    <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"
+                           data-dtype="Number"/>
                     <a class="ability-proficiency" title="{{ability.hover}}">{{{ability.icon}}}</a>
                     <h4 class="ability-name rollable">{{ability.label}}</h4>
                     <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                     <span class="ability-score" title="Ability Score">
-                        <input name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" placeholder="10"/>
+                        <input name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}"
+                               data-dtype="Number" placeholder="10"/>
                     </span>
                     <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
                 </li>
@@ -317,7 +331,7 @@
             <ol class="directory-list">
             {{#each data.skills as |skill s|}}
                 <li class="skill" data-skill="{{s}}">
-                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}"/>
+                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
                     <a class="skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
