@@ -1,5 +1,3 @@
-
-
 /**
  * Activate certain behaviors on FVTT ready hook
  */

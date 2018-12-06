@@ -6,8 +6,8 @@
 
 .dnd5e.actor-sheet {
   .flexrow();
-  font-size: 14px;
 
+  /* Form Elements */
   input[type="text"] {
     background: none;
     border: none;
@@ -34,7 +34,6 @@
       box-shadow: none;
     }
   }
-
 
   span, label {
     display: block;
@@ -92,6 +91,7 @@
         height: 40px;
         width: 100%;
         margin: 5px 0;
+        .nodesto();
         font-size: 36px;
       }
     }
@@ -99,14 +99,15 @@
     .charlevel {
       flex: 0 0 150px;
       height: 50px;
-      text-align: right;
       .flexcol();
+      text-align: right;
 
       .level {
         flex: 0 0 22px;
         width: 100%;
         .flexrow();
-        font-size: 22px;
+        .nodesto();
+        font-size: 24px;
         line-height: 22px;
 
         > input[type="text"] {
@@ -159,10 +160,10 @@
       .character-detail {
         width: 33.33%;
         height: 30px;
-        line-height: 30px;
+        float: left;
         margin: 4px -1px 4px 0;
         padding: 0 2px 0 4px;
-        float: left;
+        line-height: 30px;
         border-right: 1px solid @borderLight;
 
         &:last-child {
@@ -170,6 +171,8 @@
         }
 
         > input {
+          .nodesto();
+          font-size: 20px;
           margin: 0 2px;
         }
       }
@@ -196,24 +199,27 @@
       .attribute-name {
         position: relative;
         height: 20px;
-        line-height: 20px;
-        font-size: 14px;
-        text-align: center;
         margin: 0 5px;
+        .nodesto();
+        line-height: 20px;
+        text-align: center;
         border-bottom: 1px solid @borderLight;
 
         .npc-roll-hp {
+          font-size: 14px;
           position: absolute;
           right: 2px;
         }
       }
 
       .attribute-value {
-        height: 36px;
-        line-height: 36px;
-        font-size: 24px;
-        text-align: center;
         .flexrow();
+        height: 36px;
+        .nodesto();
+        font-size: 24px;
+        color: #333;
+        line-height: 36px;
+        text-align: center;
       }
 
       .attribute-footer {
@@ -263,10 +269,6 @@
     padding-right: 8px;
     overflow-y: scroll;
   }
-
-  body#tinymce {
-    font-size: 14px;
-  }
 }
 
 
@@ -295,6 +297,8 @@
 }
 
 .dnd5e .abilities {
+  margin-bottom: 3px;
+
   .ability {
     .flexrow();
     height: 40px;
@@ -306,14 +310,17 @@
     }
 
     .ability-name {
+      .nodesto();
+      font-size: 18px;
       margin: 0;
-      font-size: 16px;
     }
 
     .ability-score {
       flex: 0 0 36px;
       > input {
-        font-size: 20px;
+        .nodesto();
+        font-size: 22px;
+        color: #222;
         text-align: center;
       }
     }
@@ -322,6 +329,7 @@
     .ability-save {
       flex: 0 0 24px;
       margin: 8px 0;
+      .nodesto();
       line-height: 24px;
       color: #666;
       text-align: center;
@@ -343,8 +351,8 @@
 .dnd5e .skills {
   li.skill {
     .flexrow();
-    height: 24px;
-    line-height: 24px;
+    height: 22px;
+    line-height: 22px;
     border-bottom: 1px solid @borderLight;
 
     .skill-name {
@@ -595,22 +603,24 @@
 /* ----------------------------------------- */
 
 .class-header {
+  line-height: 20px;
   position: relative;
   border-bottom: 1px solid @borderLight;
   margin: 0 0 3px;
-  padding-bottom: 5px;
 
   h3 {
     text-align: center;
-    font-weight: 700;
+    .nodesto();
+    font-size: 20px;
+    color: #222;
     margin: 0;
   }
 
   a.item-create {
     position: absolute;
+    top: 0;
     right: 0;
-    top: 2px;
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
   }
 }
@@ -620,50 +630,46 @@
 
   .item {
     background: rgba(0, 0, 0, 0.03);
-    padding: 3px 6px;
+    padding: 5px 5px 0;
     border: 1px solid @borderLight;
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: 5px;
-  }
 
-  .item > * {
+    .class-levels,
+    .item-controls {
+      line-height: 16px;
+      font-size: 12px;
+      text-align: right;
+    }
+    .class-levels {
+      padding-right: 5px;
+      .nodesto();
+      color: #222;
+    }
+
+    > * {
     line-height: 20px;
-  }
+    }
 
-  .class-name,
-  .class-subclass {
-    margin: 0;
-    flex: 1 0 75%;
-  }
+    .class-name,
+    .class-subclass {
+      margin: 0;
+      flex: 1 0 75%;
+    }
 
-  .class-name {
-    font-size: 18px;
-    font-weight: bold;
-  }
+    .class-name {
+      .nodesto();
+      color: #222;
+      font-size: 20px;
+    }
 
-  .class-subclass {
-    font-size: 14px;
-    color: #999;
-  }
-
-  .class-levels,
-  .item-controls {
-    flex: 0 0 40px;
-    text-align: right;
-  }
-
-  .item-controls {
-    font-size: 12px;
-  }
-
-  .class-levels {
-    padding-right: 5px;
-    font-size: 20px;
-    font-weight: bold;
+    .class-subclass {
+      line-height: 16px;
+      color: #999;
+    }
   }
 }
-
 
 
 /* ----------------------------------------- */

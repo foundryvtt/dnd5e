@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Nodesto";
+  src: url('../fonts/NodestoCapsCondensed.otf');
+}
+/* Nodesto Font */
+.nodesto {
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+}
 /* Flexbox */
 .flexrow {
   display: flex;
@@ -24,7 +34,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  font-size: 14px;
+  /* Form Elements */
   /* Primary Attributes Section */
 }
 .dnd5e.actor-sheet > * {
@@ -119,15 +129,18 @@
   height: 40px;
   width: 100%;
   margin: 5px 0;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
   font-size: 36px;
 }
 .dnd5e.actor-sheet .sheet-header .charlevel {
   flex: 0 0 150px;
   height: 50px;
-  text-align: right;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  text-align: right;
 }
 .dnd5e.actor-sheet .sheet-header .charlevel > * {
   flex: 1;
@@ -139,7 +152,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  font-size: 22px;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+  font-size: 24px;
   line-height: 22px;
 }
 .dnd5e.actor-sheet .sheet-header .charlevel .level > * {
@@ -194,16 +210,20 @@
 .dnd5e.actor-sheet .sheet-header .details .character-detail {
   width: 33.33%;
   height: 30px;
-  line-height: 30px;
+  float: left;
   margin: 4px -1px 4px 0;
   padding: 0 2px 0 4px;
-  float: left;
+  line-height: 30px;
   border-right: 1px solid #CCC;
 }
 .dnd5e.actor-sheet .sheet-header .details .character-detail:last-child {
   border-right: none;
 }
 .dnd5e.actor-sheet .sheet-header .details .character-detail > input {
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+  font-size: 20px;
   margin: 0 2px;
 }
 .dnd5e.actor-sheet .primary-attributes {
@@ -230,25 +250,32 @@
 .dnd5e.actor-sheet .primary-attributes .attribute .attribute-name {
   position: relative;
   height: 20px;
-  line-height: 20px;
-  font-size: 14px;
-  text-align: center;
   margin: 0 5px;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+  line-height: 20px;
+  text-align: center;
   border-bottom: 1px solid #CCC;
 }
 .dnd5e.actor-sheet .primary-attributes .attribute .attribute-name .npc-roll-hp {
+  font-size: 14px;
   position: absolute;
   right: 2px;
 }
 .dnd5e.actor-sheet .primary-attributes .attribute .attribute-value {
-  height: 36px;
-  line-height: 36px;
-  font-size: 24px;
-  text-align: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  height: 36px;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+  font-size: 24px;
+  color: #333;
+  line-height: 36px;
+  text-align: center;
 }
 .dnd5e.actor-sheet .primary-attributes .attribute .attribute-value > * {
   flex: 1;
@@ -290,9 +317,6 @@
   padding-right: 8px;
   overflow-y: scroll;
 }
-.dnd5e.actor-sheet .biography body#tinymce {
-  font-size: 14px;
-}
 /* ----------------------------------------- */
 /* Abilities Sidebar Tab
 /* ----------------------------------------- */
@@ -313,6 +337,9 @@
   box-shadow: 0 0 10px inset #ff6400;
   text-shadow: none;
 }
+.dnd5e .abilities {
+  margin-bottom: 3px;
+}
 .dnd5e .abilities .ability {
   display: flex;
   flex-direction: row;
@@ -329,20 +356,29 @@
   flex: 0 0 24px;
 }
 .dnd5e .abilities .ability .ability-name {
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  color: #444;
+  font-size: 18px;
   margin: 0;
-  font-size: 16px;
 }
 .dnd5e .abilities .ability .ability-score {
   flex: 0 0 36px;
 }
 .dnd5e .abilities .ability .ability-score > input {
-  font-size: 20px;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+  font-size: 22px;
+  color: #222;
   text-align: center;
 }
 .dnd5e .abilities .ability .ability-mod,
 .dnd5e .abilities .ability .ability-save {
   flex: 0 0 24px;
   margin: 8px 0;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
   line-height: 24px;
   color: #666;
   text-align: center;
@@ -364,8 +400,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  height: 24px;
-  line-height: 24px;
+  height: 22px;
+  line-height: 22px;
   border-bottom: 1px solid #CCC;
 }
 .dnd5e .skills li.skill > * {
@@ -592,21 +628,25 @@
 /* Class List
 /* ----------------------------------------- */
 .class-header {
+  line-height: 20px;
   position: relative;
   border-bottom: 1px solid #CCC;
   margin: 0 0 3px;
-  padding-bottom: 5px;
 }
 .class-header h3 {
   text-align: center;
-  font-weight: 700;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+  font-size: 20px;
+  color: #222;
   margin: 0;
 }
 .class-header a.item-create {
   position: absolute;
+  top: 0;
   right: 0;
-  top: 2px;
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
 }
 .class-list {
@@ -614,40 +654,43 @@
 }
 .class-list .item {
   background: rgba(0, 0, 0, 0.03);
-  padding: 3px 6px;
+  padding: 5px 5px 0;
   border: 1px solid #CCC;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 5px;
 }
+.class-list .item .class-levels,
+.class-list .item .item-controls {
+  line-height: 16px;
+  font-size: 12px;
+  text-align: right;
+}
+.class-list .item .class-levels {
+  padding-right: 5px;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 18px;
+  color: #444;
+  color: #222;
+}
 .class-list .item > * {
   line-height: 20px;
 }
-.class-list .class-name,
-.class-list .class-subclass {
+.class-list .item .class-name,
+.class-list .item .class-subclass {
   margin: 0;
   flex: 1 0 75%;
 }
-.class-list .class-name {
+.class-list .item .class-name {
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 18px;
-  font-weight: bold;
-}
-.class-list .class-subclass {
-  font-size: 14px;
-  color: #999;
-}
-.class-list .class-levels,
-.class-list .item-controls {
-  flex: 0 0 40px;
-  text-align: right;
-}
-.class-list .item-controls {
-  font-size: 12px;
-}
-.class-list .class-levels {
-  padding-right: 5px;
+  color: #444;
+  color: #222;
   font-size: 20px;
-  font-weight: bold;
+}
+.class-list .item .class-subclass {
+  line-height: 16px;
+  color: #999;
 }
 /* ----------------------------------------- */
 /*  NPC Sheet
