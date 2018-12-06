@@ -230,7 +230,7 @@
 
                     {{#if ../owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Item" data-item-type="spell"
+                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
                            data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
                     </div>
                     {{/if}}
@@ -254,6 +254,15 @@
                     {{/if}}
                 </li>
                 {{/each}}
+            {{else}}
+                <li class="item inventory-header spellbook-header spellbook-empty">
+                    {{#if owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
+                           data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
+                    </div>
+                    {{/if}}
+                </li>
             {{/each}}
             </ol>
        </div>

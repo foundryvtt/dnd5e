@@ -539,7 +539,7 @@ class Actor5eSheet extends ActorSheet {
 
     /* -------------------------------------------- */
     /*  Inventory
-     /* -------------------------------------------- */
+    /* -------------------------------------------- */
 
     // Create New Item
     html.find('.item-create').click(ev => {
@@ -562,6 +562,17 @@ class Actor5eSheet extends ActorSheet {
       this.actor.deleteOwnedItem(itemId, true);
       li.slideUp(200, () => this.render(false));
     });
+
+    /* -------------------------------------------- */
+    /*  Miscellaneous
+    /* -------------------------------------------- */
+
+    html.find('.npc-roll-hp').click(ev => {
+      let ad = this.actor.data.data;
+      let hp = new Roll(ad.attributes.hp.formula).roll().total;
+      Audio.play({src: CONFIG.sounds.dice, volume: 0.8});
+      this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp}, true);
+    })
   }
 
   /* -------------------------------------------- */

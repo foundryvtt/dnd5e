@@ -36,7 +36,10 @@
         <!-- ATTRIBUTES -->
         <div class="primary-attributes">
             <div class="attribute">
-                <h4 class="attribute-name">Health</h4>
+                <h4 class="attribute-name">
+                    Health
+                    <a class="npc-roll-hp" title="Roll Health"><i class="fas fa-dice-d20"></i></a>
+                </h4>
                 <div class="attribute-value">
                     <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10"/>
                     <span class="flex0"> / </span>
@@ -211,7 +214,7 @@
 
                     {{#if ../owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Item" data-item-type="spell"
+                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
                            data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
                     </div>
                     {{/if}}
@@ -235,6 +238,15 @@
                     {{/if}}
                 </li>
                 {{/each}}
+            {{else}}
+                <li class="item inventory-header spellbook-header spellbook-empty">
+                    {{#if owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
+                           data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
+                    </div>
+                    {{/if}}
+                </li>
             {{/each}}
             </ol>
        </div>

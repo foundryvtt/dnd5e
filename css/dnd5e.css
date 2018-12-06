@@ -228,12 +228,17 @@
   margin-right: 0;
 }
 .dnd5e.actor-sheet .primary-attributes .attribute .attribute-name {
+  position: relative;
   height: 20px;
   line-height: 20px;
   font-size: 14px;
   text-align: center;
   margin: 0 5px;
   border-bottom: 1px solid #CCC;
+}
+.dnd5e.actor-sheet .primary-attributes .attribute .attribute-name .npc-roll-hp {
+  position: absolute;
+  right: 2px;
 }
 .dnd5e.actor-sheet .primary-attributes .attribute .attribute-value {
   height: 36px;
@@ -579,6 +584,9 @@
 }
 .spellbook .spell-max {
   border-right: 1px solid #CCC;
+}
+.spellbook .spellbook-empty .item-controls {
+  flex: 1;
 }
 /* ----------------------------------------- */
 /* Class List
