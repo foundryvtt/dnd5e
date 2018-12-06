@@ -194,12 +194,18 @@
       }
 
       .attribute-name {
+        position: relative;
         height: 20px;
         line-height: 20px;
         font-size: 14px;
         text-align: center;
         margin: 0 5px;
         border-bottom: 1px solid @borderLight;
+
+        .npc-roll-hp {
+          position: absolute;
+          right: 2px;
+        }
       }
 
       .attribute-value {
@@ -578,6 +584,8 @@
   .spell-max {
     border-right: 1px solid @borderLight;
   }
+
+  .spellbook-empty .item-controls { flex: 1; }
 }
 
 
