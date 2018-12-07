@@ -17,7 +17,7 @@ Hooks.on("ready", () => {
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
-  canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
+  if ( canvas.ready ) canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
 
   /**
    * Override default Grid measurement
