@@ -546,6 +546,7 @@
   font-size: 1em;
   margin: 0;
   padding-left: 32px;
+  font-weight: bold;
 }
 .inventory-list .inventory-header .item-quantity,
 .inventory-list .inventory-header .item-weight {
@@ -604,6 +605,11 @@
 }
 .spellbook .item-name {
   flex: 2;
+}
+.spellbook .item-name .prepared {
+  color: #666;
+  margin-left: 3px;
+  font-size: 10px;
 }
 .spellbook .spell-school,
 .spellbook .spell-action {

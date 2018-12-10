@@ -657,6 +657,48 @@
       "ability": {
         "type": "String",
         "label": "Spellcasting Ability"
+      },
+      "prepared": {
+        "type": "String",
+        "label": "Prepared Spell"
+      }
+    },
+    "feat": {
+      "featType": {
+        "type": "String",
+        "label": "Feat Type"
+      },
+      "requirements": {
+        "type": "String",
+        "label": "Requirements"
+      },
+      "target": {
+        "type": "String",
+        "label": "Target"
+      },
+      "range": {
+        "type": "String",
+        "label": "Range"
+      },
+      "time": {
+        "type": "String",
+        "label": "Casting Time"
+      },
+      "duration": {
+        "type": "String",
+        "label": "Duration"
+      },
+      "damage": {
+        "type": "String",
+        "label": "Ability Damage"
+      },
+      "damageType": {
+        "type": "String",
+        "label": "Damage Type"
+      },
+      "save": {
+        "type": "String",
+        "label": "Saving Throw"
       }
     }
   }

@@ -133,6 +133,12 @@
                 {{/select}}
             </select>
         </div>
+
+         <div class="form-group">
+            <label>{{data.prepared.label}}</label>
+            <input type="checkbox" name="data.prepared.value" value="1"
+                   data-dtype="{{data.prepared.type}}" {{checked data.prepared.value}}/>
+        </div>
     </div>
 
     <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>
