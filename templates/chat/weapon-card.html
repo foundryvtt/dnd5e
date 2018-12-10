@@ -8,7 +8,7 @@
 
     <div class="card-buttons">
         <button data-action="weaponAttack">Attack</button>
-        <button data-action="weaponDamage">Damage</button>
+        {{#if data.damage.value}}<button data-action="weaponDamage">Damage</button>{{/if}}
         {{#if data.damage2.value}}<button data-action="weaponDamage2">Alt. Damage</button>{{/if}}
     </div>
 

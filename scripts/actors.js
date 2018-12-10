@@ -347,11 +347,7 @@ class Actor5eSheet extends ActorSheet {
     const spellbook = {};
 
     // Feats
-    const feats = {
-      class: { label: "Class", items: [] },
-      feats: { label: "Feats", items: [] },
-      abilities: { label: "Abilities", items: [] },
-    };
+    const feats = [];
 
     // Classes
     const classes = [];
@@ -371,7 +367,7 @@ class Actor5eSheet extends ActorSheet {
       }
 
       // Spells
-      if ( i.type === "spell" ) {
+      else if ( i.type === "spell" ) {
         let lvl = i.data.level.value || 0;
         spellbook[lvl] = spellbook[lvl] || {
           isCantrip: lvl === 0,
@@ -384,11 +380,14 @@ class Actor5eSheet extends ActorSheet {
         spellbook[lvl].spells.push(i);
       }
 
-      // Class
-      if ( i.type === "class" ) {
+      // Classes
+      else if ( i.type === "class" ) {
         classes.push(i);
         classes.sort((a, b) => b.levels > a.levels);
       }
+
+      // Feats
+      else if ( i.type === "feat" ) feats.push(i);
     }
 
     // Assign and return
@@ -572,7 +571,14 @@ class Actor5eSheet extends ActorSheet {
       let hp = new Roll(ad.attributes.hp.formula).roll().total;
       Audio.play({src: CONFIG.sounds.dice, volume: 0.8});
       this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp}, true);
-    })
+    });
+
+    /* Item Dragging */
+    let handler = ev => this._onDragStart(ev);
+    html.find('.item').each((i, li) => {
+      li.setAttribute("draggable", true);
+      li.addEventListener("dragstart", handler, false);
+    });
   }
 
   /* -------------------------------------------- */
@@ -594,6 +600,17 @@ class Actor5eSheet extends ActorSheet {
 
     // Parent submission steps
     super._onSubmit(event);
+  }
+
+  /* -------------------------------------------- */
+
+  _onDragStart(event) {
+    let itemId = Number(event.currentTarget.getAttribute("data-item-id"));
+	  event.dataTransfer.setData("text/plain", JSON.stringify({
+      type: "Item",
+      actorId: this.actor._id,
+      id: itemId
+    }));
   }
 }
 

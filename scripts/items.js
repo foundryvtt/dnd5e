@@ -86,6 +86,27 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  featChatData() {
+    const data = duplicate(this.data.data);
+
+    // Feat button actions
+    data.isSave = data.save.value !== "";
+    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+    data.isAttack = data.featType.value === "attack";
+
+    // Feat properties
+    const props = [
+      data.requirements.value,
+      data.target.value,
+      data.time.value,
+      data.duration.value
+    ];
+    data.properties = props.filter(p => p);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Roll a Weapon Attack
    * Holding SHIFT when the attack is rolled will "fast-forward".
@@ -641,8 +662,10 @@ class Item5eSheet extends ItemSheet {
     // Update owned items
     if (this.item.isOwned) {
       itemData.id = this.item.data.id;
-      this.item.actor.updateOwnedItem(itemData, true);
-      this.render(false);
+      this.item.actor.updateOwnedItem(itemData, true).then(item => {
+        this.item = item;
+        this.render(false);
+      });
     }
 
     // Update unowned items
@@ -759,4 +782,11 @@ CONFIG.spellLevels = {
   7: "7th Level",
   8: "8th Level",
   9: "9th Level"
+};
+
+// Feat Types
+CONFIG.featTypes = {
+  "passive": "Passive Ability",
+  "attack": "Special Attack",
+  "ability": "Active Ability"
 };
