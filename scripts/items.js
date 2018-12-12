@@ -139,7 +139,15 @@ class Item5e extends Item {
         flavor += " (Disadvantage)"
       }
       let formula = parts.join("+");
-      new Roll(formula, rollData).toMessage({ alias: this.actor.name, flavor: flavor});
+
+      // Execute the roll and send it to chat
+      let roll = new Roll(formula, rollData).roll();
+      roll.toMessage({
+        alias: this.actor.name,
+        flavor: flavor,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
     };
 
     // Fast-forward rolls
@@ -273,7 +281,15 @@ class Item5e extends Item {
         flavor += " (Disadvantage)"
       }
       let formula = parts.join("+");
-      new Roll(formula, rollData).toMessage({ alias: this.actor.name, flavor: flavor});
+
+      // Execute the roll and send it to chat
+      let roll = new Roll(formula, rollData).roll();
+      roll.toMessage({
+        alias: this.actor.name,
+        flavor: flavor,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
     };
 
     // Fast-forward rolls
@@ -418,7 +434,15 @@ class Item5e extends Item {
         flavor += " (Disadvantage)"
       }
       let formula = parts.join("+");
-      new Roll(formula, rollData).toMessage({alias: this.actor.name, flavor: flavor});
+
+      // Execute the roll and send it to chat
+      let roll = new Roll(formula, rollData).roll();
+      roll.toMessage({
+        alias: this.actor.name,
+        flavor: flavor,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
     };
 
     // Fast-forward rolls

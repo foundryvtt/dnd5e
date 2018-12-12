@@ -619,7 +619,7 @@ class Actor5eSheet extends ActorSheet {
     });
 
     /* Item Dragging */
-    let handler = ev => this._onDragStart(ev);
+    let handler = ev => this._onDragItemStart(ev);
     html.find('.item').each((i, li) => {
       li.setAttribute("draggable", true);
       li.addEventListener("dragstart", handler, false);
@@ -649,7 +649,7 @@ class Actor5eSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _onDragStart(event) {
+  _onDragItemStart(event) {
     let itemId = Number(event.currentTarget.getAttribute("data-item-id"));
 	  event.dataTransfer.setData("text/plain", JSON.stringify({
       type: "Item",
@@ -810,7 +810,15 @@ class Item5e extends Item {
         flavor += " (Disadvantage)"
       }
       let formula = parts.join("+");
-      new Roll(formula, rollData).toMessage({ alias: this.actor.name, flavor: flavor});
+
+      // Execute the roll and send it to chat
+      let roll = new Roll(formula, rollData).roll();
+      roll.toMessage({
+        alias: this.actor.name,
+        flavor: flavor,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
     };
 
     // Fast-forward rolls
@@ -944,7 +952,15 @@ class Item5e extends Item {
         flavor += " (Disadvantage)"
       }
       let formula = parts.join("+");
-      new Roll(formula, rollData).toMessage({ alias: this.actor.name, flavor: flavor});
+
+      // Execute the roll and send it to chat
+      let roll = new Roll(formula, rollData).roll();
+      roll.toMessage({
+        alias: this.actor.name,
+        flavor: flavor,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
     };
 
     // Fast-forward rolls
@@ -1089,7 +1105,15 @@ class Item5e extends Item {
         flavor += " (Disadvantage)"
       }
       let formula = parts.join("+");
-      new Roll(formula, rollData).toMessage({alias: this.actor.name, flavor: flavor});
+
+      // Execute the roll and send it to chat
+      let roll = new Roll(formula, rollData).roll();
+      roll.toMessage({
+        alias: this.actor.name,
+        flavor: flavor,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
     };
 
     // Fast-forward rolls
