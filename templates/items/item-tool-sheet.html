@@ -45,7 +45,13 @@
 
          <div class="form-group">
             <label>{{data.proficient.label}}</label>
-            <input type="checkbox" name="data.proficient.value" value="1" data-dtype="{{data.proficient.type}}" {{checked data.proficient.value}}/>
+             <select name="data.proficient.value" data-dtype="Number">
+                 {{#select data.proficient.value}}
+                 {{#each proficiencies as |label p|}}
+                 <option value="{{p}}">{{label}}</option>
+                 {{/each}}
+                 {{/select}}
+             </select>
         </div>
     </div>
 

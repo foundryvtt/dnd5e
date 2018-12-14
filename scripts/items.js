@@ -496,7 +496,7 @@ class Item5e extends Item {
       // Extract card data
       let button = $(ev.currentTarget),
           messageId = button.parents('.message').attr("data-message-id"),
-          senderId = game.data.chat.find(m => m._id === messageId).user._id;
+          senderId = game.messages.get(messageId).user._id;
 
       // Confirm roll permission
       if ( !game.user.isGM && ( game.user._id !== senderId )) return;
@@ -625,9 +625,16 @@ class Item5eSheet extends ItemSheet {
     data['damageTypes'] = CONFIG.damageTypes;
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
+
+    // Spell-specific data
     if ( this.item.type === "spell" ) {
       data["spellSchools"] = CONFIG.spellSchools;
       data["spellLevels"] = CONFIG.spellLevels;
+    }
+
+    // Tool-specific data
+    else if ( this.item.type === "tool" ) {
+      data["proficiencies"] = CONFIG.proficiencyLevels;
     }
     return data;
   }
@@ -672,6 +679,20 @@ class Item5eSheet extends ItemSheet {
 
   /* -------------------------------------------- */
   /*  Saving and Submission                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Extend the default Item Sheet submission logic to save the content of any active MCE editor
+   * @private
+   */
+  _onSubmit(ev) {
+    if ( this.mce ) {
+      const content = this.mce.getContent();
+      this.element.find('[data-edit="data.description.value"]').html(content);
+    }
+    super._onSubmit(ev);
+  };
+
   /* -------------------------------------------- */
 
   /**

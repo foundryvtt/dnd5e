@@ -313,14 +313,14 @@ class Actor5eSheet extends ActorSheet {
     // Ability proficiency
     for ( let abl of Object.values(sheetData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
-      abl.hover = this._getProficiencyHover(abl.proficient);
+      abl.hover = CONFIG.proficiencyLevels[abl.proficient];
     }
 
     // Update skill labels
     for ( let skl of Object.values(sheetData.data.skills)) {
       skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
       skl.icon = this._getProficiencyIcon(skl.value);
-      skl.hover = this._getProficiencyHover(skl.value);
+      skl.hover = CONFIG.proficiencyLevels[skl.value];
     }
 
     // Prepare owned items
@@ -432,21 +432,6 @@ class Actor5eSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the hover text used to display a certain level of skill proficiency
-   * @private
-   */
-  _getProficiencyHover(level) {
-    return {
-      0: "Not Proficient",
-      1: "Proficient",
-      0.5: "Jack of all Trades",
-      2: "Expertise"
-    }[level];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Activate event listeners using the prepared sheet HTML
    * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
    */
@@ -487,6 +472,7 @@ class Actor5eSheet extends ActorSheet {
           ed.destroy();
         }
       }).then(ed => {
+        this.mce = ed[0];
         button.hide();
         ed[0].focus();
       });
@@ -584,10 +570,16 @@ class Actor5eSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Customize form submission for 5e actor sheets
+   * Customize form submission for 5e actor sheets to save the content of any active MCE editor
    * @private
    */
   _onSubmit(event) {
+
+    // Save MCE editor content
+    if ( this.mce ) {
+      const content = this.mce.getContent();
+      this.element.find('[data-edit="data.details.biography.value"]').html(content);
+    }
 
     // NPC Challenge Rating
     if (this.actor.data.type === "npc") {
@@ -620,6 +612,17 @@ class Actor5eSheet extends ActorSheet {
 
 CONFIG.Actor.entityClass = Actor5e;
 CONFIG.Actor.sheetClass = Actor5eSheet;
+
+
+/**
+ * Skill Proficiency Levels
+ */
+CONFIG.proficiencyLevels = {
+  0: "Not Proficient",
+  1: "Proficient",
+  0.5: "Jack of all Trades",
+  2: "Expertise"
+};
 
 
 /* -------------------------------------------- */
