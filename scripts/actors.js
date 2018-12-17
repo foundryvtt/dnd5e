@@ -485,10 +485,7 @@ class Actor5eSheet extends ActorSheet {
     // Ability Proficiency
     html.find('.ability-proficiency').click(ev => {
       let field = $(ev.currentTarget).siblings('input[type="hidden"]');
-      field.val(1 - field.val());
-      let formData = validateForm(field.parents('form')[0]);
-      console.log(formData);
-      this.actor.update(formData, true);
+      this.actor.update({[field[0].name]: 1 - parseInt(field[0].value)});
     });
 
     // Ability Checks

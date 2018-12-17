@@ -9,6 +9,8 @@ Hooks.on("ready", () => {
   game.settings.register("dnd5e", "diagonalMovement", {
     name: "Diagonal Movement Rule",
     hint: "Configure which diagonal movement rule should be used for games within this system.",
+    scope: "world",
+    config: true,
     default: "555",
     type: String,
     choices: {
@@ -530,10 +532,7 @@ class Actor5eSheet extends ActorSheet {
     // Ability Proficiency
     html.find('.ability-proficiency').click(ev => {
       let field = $(ev.currentTarget).siblings('input[type="hidden"]');
-      field.val(1 - field.val());
-      let formData = validateForm(field.parents('form')[0]);
-      console.log(formData);
-      this.actor.update(formData, true);
+      this.actor.update({[field[0].name]: 1 - parseInt(field[0].value)});
     });
 
     // Ability Checks
@@ -1207,29 +1206,28 @@ class Item5e extends Item {
     new ContextMenu(html, ".dice-roll", {
       "Apply Damage": {
         icon: '<i class="fas fa-user-minus"></i>',
-        callback: event => this.applyDamage(event, 1)
+        callback: li => this.applyDamage(li, 1)
       },
       "Apply Healing": {
         icon: '<i class="fas fa-user-plus"></i>',
-        callback: event => this.applyDamage(event, -1)
+        callback: li => this.applyDamage(li, -1)
       },
       "Double Damage": {
         icon: '<i class="fas fa-user-injured"></i>',
-        callback: event => this.applyDamage(event, 2)
+        callback: li => this.applyDamage(li, 2)
 
       },
       "Half Damage": {
         icon: '<i class="fas fa-user-shield"></i>',
-        callback: event => this.applyDamage(event, 0.5)
+        callback: li => this.applyDamage(li, 0.5)
       }
     });
   }
 
   /* -------------------------------------------- */
 
-  static applyDamage(event, multiplier) {
-    let roll = $(event.currentTarget).parents('.dice-roll'),
-        value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+  static applyDamage(roll, multiplier) {
+    let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
 
     // Get tokens to which damage can be applied
     const tokens = canvas.tokens.controlledTokens.filter(t => {
@@ -1394,6 +1392,7 @@ class Item5eSheet extends ItemSheet {
     }
 
     // Destroy the editor
+    this.mce = null;
     ed.remove();
     ed.destroy();
   }

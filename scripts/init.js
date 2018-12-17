@@ -9,6 +9,8 @@ Hooks.on("ready", () => {
   game.settings.register("dnd5e", "diagonalMovement", {
     name: "Diagonal Movement Rule",
     hint: "Configure which diagonal movement rule should be used for games within this system.",
+    scope: "world",
+    config: true,
     default: "555",
     type: String,
     choices: {
