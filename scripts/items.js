@@ -44,6 +44,7 @@ class Item5e extends Item {
     const data = duplicate(this.data.data);
     data.consumableType.str = CONFIG.consumableTypes[data.consumableType.value];
     data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
+    data.hasCharges = data.charges.value >= 0;
     return data;
   }
 
@@ -396,10 +397,46 @@ class Item5e extends Item {
    * Use a consumable item
    */
   rollConsumable(ev) {
-    new Roll(this.data.data.consume.value).toMessage({
-      alias: this.actor.name,
-      flavor: `Uses ${this.name}`
-    });
+    let itemData = this.data.data;
+
+    // Submit the roll to chat
+    let cv = itemData['consume'].value,
+        content = `Uses ${this.name}`;
+    if ( cv ) {
+      new Roll(cv).toMessage({
+        alias: this.actor.name,
+        flavor: content
+      });
+    } else {
+      ChatMessage.create({user: game.user._id, alias: this.actor.name, content: content})
+    }
+
+    // Deduct consumed charges from the item
+    if ( itemData['autoUse'].value ) {
+      let qty = itemData['quantity'],
+          chg = itemData['charges'];
+
+      // No charges are remaining
+      if ( itemData['autoDestroy'] && chg.value <= 1 ) {
+
+        // Deduct an item quantity
+        if ( qty.value > 1 ) {
+          this.actor.updateOwnedItem({
+            id: this.data.id,
+            'data.quantity.value': qty.value - 1,
+            'data.charges.value': chg.max
+          }, true);
+        }
+
+        // Destroy the item
+        else this.actor.deleteOwnedItem(this.data.id);
+      }
+
+      // Deduct the remaining charges
+      else {
+        this.actor.updateOwnedItem({id: this.data.id, 'data.charges.value': Math.max(chg.value - 1, 0)}, true);
+      }
+    }
   }
 
   /* -------------------------------------------- */
@@ -553,6 +590,13 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Apply rolled dice damage to the token or tokens which are currently controlled.
+   * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
+   *
+   * @param {HTMLElement} roll    The chat entry which contains the roll data
+   * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
+   */
   static applyDamage(roll, multiplier) {
     let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
 

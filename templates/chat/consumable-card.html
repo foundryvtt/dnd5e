@@ -7,7 +7,11 @@
     <div class="card-content">{{{data.description.value}}}</div>
 
     <div class="card-buttons">
+        {{#if data.hasCharges}}
         <button data-action="consume">Use {{data.consumableType.str}}</button>
+        {{else}}
+        <button disabled>No Charges</button>
+        {{/if}}
     </div>
 
     <footer class="card-footer">

@@ -362,6 +362,7 @@ class Actor5eSheet extends ActorSheet {
         i.data.quantity.value = i.data.quantity.value || 1;
         i.data.weight.value = i.data.weight.value || 0;
         i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
+        i.hasCharges = (i.type === "consumable") && i.data.charges.max > 0;
         inventory[i.type].items.push(i);
         totalWeight += i.totalWeight;
       }

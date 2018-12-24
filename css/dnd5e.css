@@ -510,14 +510,32 @@
 .inventory-list .item > * {
   flex: 1;
 }
+.inventory-list .item .item-name {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.inventory-list .item .item-name > * {
+  flex: 1;
+}
 .inventory-list .item .item-name img {
-  float: left;
+  flex: 0 0 24px;
+  margin-right: 6px;
 }
 .inventory-list .item .item-name h4 {
-  margin-left: 32px;
-}
-.inventory-list .item h4 {
+  flex: 2;
   margin: 0;
+}
+.inventory-list .item .item-name .prepared {
+  color: #666;
+  margin-left: 3px;
+  font-size: 10px;
+}
+.inventory-list .item .item-name .item-charges {
+  color: #666;
+  font-size: 12px;
+  flex: 0;
 }
 .inventory-list .item .item-quantity,
 .inventory-list .item .item-weight {
@@ -605,11 +623,6 @@
 }
 .spellbook .item-name {
   flex: 2;
-}
-.spellbook .item-name .prepared {
-  color: #666;
-  margin-left: 3px;
-  font-size: 10px;
 }
 .spellbook .spell-school,
 .spellbook .spell-action {

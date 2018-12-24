@@ -401,6 +401,7 @@
   font-weight: bold;
 }
 
+
 /* ----------------------------------------- */
 /* Inventory Tab
 /* ----------------------------------------- */
@@ -457,16 +458,29 @@
     border-bottom: 1px solid @borderLight;
 
     .item-name {
-      img {
-        float: left;
-      }
-      h4 {
-        margin-left: 32px;
-      }
-    }
+      .flexrow();
 
-    h4 {
-      margin: 0;
+      img {
+        flex: 0 0 24px;
+        margin-right: 6px;
+      }
+
+      h4 {
+        flex: 2;
+        margin: 0;
+      }
+
+      .prepared {
+        color: #666;
+        margin-left: 3px;
+        font-size: 10px;
+      }
+
+      .item-charges {
+        color: #666;
+        font-size: 12px;
+        flex: 0;
+      }
     }
 
     .item-quantity, .item-weight {
@@ -512,7 +526,6 @@
     }
   }
 }
-
 
 /* Encumbrance Bar */
 .encumbrance {
@@ -575,12 +588,6 @@
 
   .item-name {
     flex: 2;
-
-    .prepared {
-        color: #666;
-        margin-left: 3px;
-        font-size: 10px;
-    }
   }
 
   .spell-school, .spell-action {
