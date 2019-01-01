@@ -45,7 +45,6 @@ Hooks.on("ready", () => {
   }
 });
 
-
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
  */
@@ -144,6 +143,8 @@ class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Rolls                                       */
+  /* -------------------------------------------- */
 
   get _skillSaveRollModalHTML() {
     return `
@@ -197,10 +198,13 @@ class Actor5e extends Actor {
         }
       },
       close: html => {
-        let bonus = html.find('[name="bonus"]').val();
-        new Roll(parts.join(" + "), {mod: skl.mod, bonus: bonus}).toMessage({
+        let bonus = html.find('[name="bonus"]').val(),
+            roll = new Roll(parts.join(" + "), {mod: skl.mod, bonus: bonus}).roll();
+        roll.toMessage({
           alias: this.name,
-          flavor: flavor
+          flavor: flavor,
+          highlightSuccess: roll.parts[0].total === 20,
+          highlightFailure: roll.parts[0].total === 1
         });
       }
     }).render(true);
@@ -267,10 +271,13 @@ class Actor5e extends Actor {
         }
       },
       close: html => {
-        let bonus = html.find('[name="bonus"]').val();
-        new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).toMessage({
+        let bonus = html.find('[name="bonus"]').val(),
+            roll = new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).roll();
+        roll.toMessage({
           alias: this.name,
-          flavor: flavor
+          flavor: flavor,
+          highlightSuccess: roll.parts[0].total === 20,
+          highlightFailure: roll.parts[0].total === 1
         });
       }
     }).render(true);
@@ -312,20 +319,21 @@ class Actor5e extends Actor {
         }
       },
       close: html => {
-        let bonus = html.find('[name="bonus"]').val();
-        new Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).toMessage({
+        let bonus = html.find('[name="bonus"]').val(),
+            roll = Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).roll();
+        roll.toMessage({
           alias: this.name,
-          flavor: flavor
+          flavor: flavor,
+          highlightSuccess: roll.parts[0].total === 20,
+          highlightFailure: roll.parts[0].total === 1
         });
       }
     }).render(true);
   }
 }
 
-
-/* -------------------------------------------- */
-/*  Actor Character Sheet                       */
-/* -------------------------------------------- */
+// Assign the actor class to the CONFIG
+CONFIG.Actor.entityClass = Actor5e;
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
@@ -655,7 +663,6 @@ class Actor5eSheet extends ActorSheet {
 /* -------------------------------------------- */
 
 
-CONFIG.Actor.entityClass = Actor5e;
 CONFIG.Actor.sheetClass = Actor5eSheet;
 
 
@@ -784,39 +791,45 @@ class Item5e extends Item {
 
   /**
    * Roll a Weapon Attack
-   * Holding SHIFT when the attack is rolled will "fast-forward".
-   * This chooses the default options of a normal attack with no bonus
+   * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
+   * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
    */
   rollWeaponAttack(ev) {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Prepare roll data
-    let rollData = duplicate(this.actor.data.data),
-        abl = this.data.data.ability.value || "str",
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
         parts = ["1d20", "@hit", "@mod", "@prof", "@bonus"],
         adv = 0,
-        flavor = `${this.name} - Attack Roll`;
+        title = `${this.name} - Attack Roll`;
     mergeObject(rollData, {
-      hit: this.data.data.bonus.value,
+      hit: itemData.bonus.value,
       mod: rollData.abilities[abl].mod,
-      prof: rollData.attributes.prof.value,
-      bonus: null
+      prof: Number(itemData.proficient.value) * rollData.attributes.prof.value
     });
 
     // Define roll function
     let roll = () => {
+      let flavor;
       if ( adv === 1 ) {
         parts[0] = "2d20kh";
-        flavor += " (Advantage)";
+        flavor = `${title} (Advantage)`;
       }
       else if ( adv === -1 ) {
         parts[0] = "2d20kl";
-        flavor += " (Disadvantage)"
+        flavor = `${title} (Disadvantage)`;
+      } else {
+        parts[0] = "1d20";
+        flavor = title;
       }
-      let formula = parts.join("+");
+
+      // Don't include situational bonus unless it is defined
+      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
 
       // Execute the roll and send it to chat
-      let roll = new Roll(formula, rollData).roll();
+      let roll = new Roll(parts.join("+"), rollData).roll();
       roll.toMessage({
         alias: this.actor.name,
         flavor: flavor,
@@ -826,12 +839,12 @@ class Item5e extends Item {
     };
 
     // Fast-forward rolls
-    if ( keyboard.isDown(KEYS.SHIFT) ) return roll();
-    else if ( keyboard.isDown(KEYS.ALT ) ) {
+    if ( ev.shiftKey ) return roll();
+    else if ( ev.altKey ) {
       adv = 1;
       return roll();
     }
-    else if ( keyboard.isDown(KEYS.CTRL ) ) {
+    else if ( ev.ctrlKey || ev.metaKey ) {
       adv = -1;
       return roll();
     }
@@ -840,7 +853,7 @@ class Item5e extends Item {
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
     renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
       new Dialog({
-        title: flavor,
+        title: title,
         content: dlg,
         buttons: {
           advantage: {
@@ -875,26 +888,35 @@ class Item5e extends Item {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Get data
-    let rollData = duplicate(this.actor.data.data),
-        abl = this.data.data.ability.value || "str",
-        parts = [alternate ? this.data.data.damage2.value : this.data.data.damage.value, "@mod", "@bonus"],
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
+        parts = [alternate ? itemData.damage2.value : itemData.damage.value, "@mod", "@bonus"],
         critical = false,
-        flavor = `${this.name} - Damage Roll`;
+        title = `${this.name} - Damage Roll`;
     mergeObject(rollData, { mod: rollData.abilities[abl].mod, bonus: null });
 
     // Define roll function
     let roll = () => {
+      let flavor = title;
+
+      // Don't include situational bonus unless it is defined
+      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
+
+      // Roll and alter critical hits
       let roll = new Roll(parts.join("+"), rollData);
       if ( critical ) {
         roll.alter(0, 2);
-        flavor += " (Critical)";
+        flavor = `${title} (Critical)`;
       }
+
+      // Dispatch the roll
       roll.toMessage({ alias: this.actor.name, flavor: flavor});
     };
 
     // Fast-forward rolls
-    if ( [KEYS.SHIFT, KEYS.CTRL].some(k => keyboard.isDown(k)) ) return roll();
-    else if ( keyboard.isDown(KEYS.ALT ) ) {
+    if ( ev.shiftKey || ev.ctrlKey || ev.metaKey )  return roll();
+    else if ( ev.altKey ) {
       critical = true;
       return roll();
     }
@@ -903,7 +925,7 @@ class Item5e extends Item {
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
     renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
       new Dialog({
-        title: flavor,
+        title: title,
         content: dlg,
         buttons: {
           advantage: {
@@ -927,18 +949,19 @@ class Item5e extends Item {
 
   /**
    * Roll Spell Damage
-   * Holding SHIFT when the attack is rolled will "fast-forward".
-   * This chooses the default options of a normal damage roll with no damage
+   * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
+   * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
    */
   rollSpellAttack(ev) {
     if ( this.type !== "spell" ) throw "Wrong item type!";
 
     // Prepare roll data
-    let rollData = duplicate(this.actor.data.data),
-        abl = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value || "int",
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
         parts = ["1d20", "@mod", "@prof", "@bonus"],
         adv = 0,
-        flavor = `${this.name} - Spell Attack Roll`;
+        title = `${this.name} - Spell Attack Roll`;
     mergeObject(rollData, {
       mod: rollData.abilities[abl].mod,
       prof: rollData.attributes.prof.value,
@@ -947,18 +970,24 @@ class Item5e extends Item {
 
     // Define roll function
     let roll = () => {
+      let flavor;
       if ( adv === 1 ) {
         parts[0] = "2d20kh";
-        flavor += " (Advantage)";
+        flavor = `${title} (Advantage)`;
       }
       else if ( adv === -1 ) {
         parts[0] = "2d20kl";
-        flavor += " (Disadvantage)"
+        flavor = `${title} (Disadvantage)`;
+      } else {
+        parts[0] = "1d20";
+        flavor = title;
       }
-      let formula = parts.join("+");
+
+      // Don't include situational bonus unless it is defined
+      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
 
       // Execute the roll and send it to chat
-      let roll = new Roll(formula, rollData).roll();
+      let roll = new Roll(parts.join("+"), rollData).roll();
       roll.toMessage({
         alias: this.actor.name,
         flavor: flavor,
@@ -968,12 +997,12 @@ class Item5e extends Item {
     };
 
     // Fast-forward rolls
-    if ( keyboard.isDown(KEYS.SHIFT) ) return roll();
-    else if ( keyboard.isDown(KEYS.ALT ) ) {
+    if ( ev.shiftKey ) return roll();
+    else if ( ev.altKey ) {
       adv = 1;
       return roll();
     }
-    else if ( keyboard.isDown(KEYS.CTRL ) ) {
+    else if ( ev.ctrlKey || ev.metaKey ) {
       adv = -1;
       return roll();
     }
@@ -982,7 +1011,7 @@ class Item5e extends Item {
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
     renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
       new Dialog({
-        title: flavor,
+        title: title,
         content: dlg,
         buttons: {
           advantage: {
@@ -1017,26 +1046,35 @@ class Item5e extends Item {
     if ( this.type !== "spell" ) throw "Wrong item type!";
 
     // Get data
-    let rollData = duplicate(this.actor.data.data),
-        abl = this.data.data.ability.value || this.actor.data.data.attributes.spellcasting.value || "int",
-        parts = [this.data.data.damage.value, "@bonus"],
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
+        parts = [itemData.damage.value],
         critical = false,
-        flavor = `${this.name} - Damage Roll`;
+        title = `${this.name} - Damage Roll`;
     mergeObject(rollData, { mod: rollData.abilities[abl].mod, bonus: null });
 
     // Define roll function
     let roll = () => {
+      let flavor = title;
+
+      // Don't include situational bonus unless it is defined
+      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
+
+      // Roll and alter critical hits
       let roll = new Roll(parts.join("+"), rollData);
       if ( critical ) {
         roll.alter(0, 2);
-        flavor += " (Critical)";
+        flavor = `${title} (Critical)`;
       }
+
+      // Dispatch the roll
       roll.toMessage({ alias: this.actor.name, flavor: flavor});
     };
 
     // Fast-forward rolls
-    if ( [KEYS.SHIFT, KEYS.CTRL].some(k => keyboard.isDown(k)) ) return roll();
-    else if ( keyboard.isDown(KEYS.ALT ) ) {
+    if ( ev.shiftKey || ev.ctrlKey || ev.metaKey )  return roll();
+    else if ( ev.altKey ) {
       critical = true;
       return roll();
     }
@@ -1045,7 +1083,7 @@ class Item5e extends Item {
     let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
     renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
       new Dialog({
-        title: flavor,
+        title: title,
         content: dlg,
         buttons: {
           advantage: {
@@ -1130,24 +1168,29 @@ class Item5e extends Item {
       prof = rollData.attributes.prof.value * (this.data.data.proficient.value || 0),
       parts = ["1d20", "@mod", "@prof", "@bonus"],
       adv = 0,
-      flavor = `${this.name} - Tool Check`;
+      title = `${this.name} - Tool Check`;
     mergeObject(rollData, {mod: ability.mod, prof: prof, bonus: null});
 
     // Define roll function
     let roll = () => {
-      flavor = `${this.name} - ${ability.label}`;
+      let flavor;
       if ( adv === 1 ) {
         parts[0] = "2d20kh";
-        flavor += " (Advantage)";
+        flavor = `${title} (Advantage)`;
       }
       else if ( adv === -1 ) {
         parts[0] = "2d20kl";
-        flavor += " (Disadvantage)"
+        flavor = `${title} (Disadvantage)`;
+      } else {
+        parts[0] = "1d20";
+        flavor = title;
       }
-      let formula = parts.join("+");
+
+      // Don't include situational bonus unless it is defined
+      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
 
       // Execute the roll and send it to chat
-      let roll = new Roll(formula, rollData).roll();
+      let roll = new Roll(parts.join("+"), rollData).roll();
       roll.toMessage({
         alias: this.actor.name,
         flavor: flavor,
@@ -1157,12 +1200,12 @@ class Item5e extends Item {
     };
 
     // Fast-forward rolls
-    if ( keyboard.isDown(KEYS.SHIFT) ) return roll();
-    else if ( keyboard.isDown(KEYS.ALT ) ) {
+    if ( ev.shiftKey ) return roll();
+    else if ( ev.altKey ) {
       adv = 1;
       return roll();
     }
-    else if ( keyboard.isDown(KEYS.CTRL ) ) {
+    else if ( ev.ctrlKey || ev.metaKey ) {
       adv = -1;
       return roll();
     }
@@ -1171,7 +1214,7 @@ class Item5e extends Item {
     let template = "public/systems/dnd5e/templates/chat/tool-roll-dialog.html";
     renderTemplate(template, { formula: parts.join(" + "), ability: abl, abilities: rollData.abilities}).then(dlg => {
       new Dialog({
-        title: flavor,
+        title: title,
         content: dlg,
         buttons: {
           advantage: {
@@ -1189,6 +1232,7 @@ class Item5e extends Item {
         default: "normal",
         close: html => {
           ability = rollData.abilities[html.find('[name="ability"]').val()];
+          title = `${this.name} - ${ability.label} Check`;
           mergeObject(rollData, {bonus: html.find('[name="bonus"]').val(), mod: ability.mod});
           roll();
         }
@@ -1297,19 +1341,8 @@ class Item5e extends Item {
   }
 }
 
-
-/* -------------------------------------------- */
-
-
-// Activate global listeners
-Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
-
 // Assign Item5e class to CONFIG
 CONFIG.Item.entityClass = Item5e;
-
-
-/* -------------------------------------------- */
-
 
 /**
  * Override and extend the basic :class:`ItemSheet` implementation
@@ -1443,9 +1476,8 @@ class Item5eSheet extends ItemSheet {
   }
 }
 
-
-/* -------------------------------------------- */
-
+// Activate global listeners
+Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
 
 // Override CONFIG
 CONFIG.Item.sheetClass = Item5eSheet;
