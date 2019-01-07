@@ -187,6 +187,7 @@ class Actor5eSheet extends ActorSheet {
         save_onsavecallback: ed => {
           let target = editor.attr("data-edit");
           this.actor.update({[target]: ed.getContent()}, true);
+          this.mce = null;
           ed.remove();
           ed.destroy();
         }

@@ -320,7 +320,7 @@ class Actor5e extends Actor {
       },
       close: html => {
         let bonus = html.find('[name="bonus"]').val(),
-            roll = Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).roll();
+            roll = new Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).roll();
         roll.toMessage({
           alias: this.name,
           flavor: flavor,
@@ -524,6 +524,7 @@ class Actor5eSheet extends ActorSheet {
         save_onsavecallback: ed => {
           let target = editor.attr("data-edit");
           this.actor.update({[target]: ed.getContent()}, true);
+          this.mce = null;
           ed.remove();
           ed.destroy();
         }
