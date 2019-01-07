@@ -273,7 +273,7 @@ class Actor5e extends Actor {
       },
       close: html => {
         let bonus = html.find('[name="bonus"]').val(),
-            roll = Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).roll();
+            roll = new Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).roll();
         roll.toMessage({
           alias: this.name,
           flavor: flavor,
