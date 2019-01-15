@@ -56,7 +56,9 @@
           "label": "Hit Points",
           "value": 10,
           "min": 0,
-          "max": 10
+          "max": 10,
+          "temp": 0,
+          "tempmax": 0
         },
         "init": {
           "type": "Number",
@@ -71,7 +73,8 @@
         "speed": {
           "type": "String",
           "label": "Movement Speed",
-          "value": "30 ft"
+          "value": "30 ft",
+          "special": ""
         },
         "spellcasting": {
           "type": "String",
@@ -315,6 +318,22 @@
           "type": "Number",
           "label": "Hit Dice",
           "min": 0
+        },
+        "death": {
+          "type": "Number",
+          "label": "Death Saves",
+          "success": 0,
+          "failure": 0
+        },
+        "exhaustion": {
+          "type": "Number",
+          "label": "Exhaustion Level",
+          "value": 0
+        },
+        "inspiration": {
+          "type": "Boolean",
+          "label": "Inspiration",
+          "value": 0
         }
       },
       "details": {
@@ -355,11 +374,15 @@
       "resources": {
         "primary": {
           "type": "String",
-          "label": "Primary Resource"
+          "label": "Primary Resource",
+          "sr": 0,
+          "lr": 0
         },
         "secondary": {
           "type": "String",
-          "label": "Secondary Resource"
+          "label": "Secondary Resource",
+          "sr": 0,
+          "lr": 0
         }
       }
     },
