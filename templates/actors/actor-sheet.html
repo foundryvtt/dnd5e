@@ -1,42 +1,43 @@
-<form class="dnd5e actor-sheet {{cssClass}}" autocomplete="off">
+<form class="{{cssClass}}" autocomplete="off">
+
+    <!-- HEADER -->
+    <header class="sheet-header">
+        <h1 class="charname">
+            <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
+        </h1>
+
+        <div class="charlevel">
+            <div class="level">
+                <label>Level </label>
+                <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
+                       data-dtype="Number" placeholder="1"/>
+            </div>
+            <div class="xpbar">
+                <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
+            </div>
+            <div class="experience">
+                <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
+                       data-dtype="Number" placeholder="0"/>
+                <span class="max" data-wpad="14"> / {{data.details.xp.max}}</span>
+            </div>
+        </div>
+    </header>
 
     <!-- BODY -->
     <section class="sheet-body">
 
-        <!-- HEADER -->
-        <header class="sheet-header">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
-            </h1>
-
-            <div class="charlevel">
-                <div class="level">
-                    <label>Level </label> 
-                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
-                           data-dtype="Number" placeholder="1"/>
-                </div>
-                <div class="xpbar">
-                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
-                </div>
-                <div class="experience">
-                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
-                           data-dtype="Number" placeholder="0"/>
-                    <span class="max" data-wpad="14"> / {{data.details.xp.max}}</span>
-                </div>
-            </div>
-
-            <ul class="details">
-                <li class="character-detail">
-                    <input name="data.details.race.value" type="text" value="{{data.details.race.value}}" placeholder="Race"/>
-                </li>
-                <li class="character-detail">
-                    <input name="data.details.background.value" type="text" value="{{data.details.background.value}}" placeholder="Background"/>
-                </li>
-                <li class="character-detail">
-                    <input name="data.details.alignment.value" type="text" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
-                </li>
-            </ul>
-        </header>
+        <!-- DETAILS -->
+        <ul class="details">
+            <li class="character-detail">
+                <input name="data.details.race.value" type="text" value="{{data.details.race.value}}" placeholder="Race"/>
+            </li>
+            <li class="character-detail">
+                <input name="data.details.background.value" type="text" value="{{data.details.background.value}}" placeholder="Background"/>
+            </li>
+            <li class="character-detail">
+                <input name="data.details.alignment.value" type="text" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
+            </li>
+        </ul>
 
         <!-- ATTRIBUTES -->
         <div class="primary-attributes">
@@ -50,12 +51,10 @@
                            data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Hit Dice</h4>
-                    <div class="footer-value">
-                        <input name="data.attributes.hd.value" type="text" value="{{data.attributes.hd.value}}"
-                               data-dtype="{{data.attributes.hd.type}}" placeholder="1"/>
-                        <span class="flex0"> / {{data.details.level.value}}</span>
-                    </div>
+                    <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+Temp"
+                           value="{{data.attributes.hp.temp}}" data-dtype="{{data.attributes.hp.type}}"/>
+                    <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+Max"
+                           value="{{data.attributes.hp.tempmax}}" data-dtype="{{data.attributes.hp.type}}"/>
                 </footer>
             </div>
 
@@ -66,10 +65,7 @@
                            data-dtype="{{data.attributes.ac.type}}" placeholder="10"/>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Base AC</h4>
-                    <div class="footer-value">
-                        <span>{{data.attributes.ac.min}}</span>
-                    </div>
+                    <span>Base AC {{data.attributes.ac.min}}</span>
                 </footer>
             </div>
 
@@ -79,40 +75,8 @@
                     <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Spell DC</h4>
-                    <div class="footer-value">
-                        <span>{{data.attributes.spelldc.value}}</span>
-                    </div>
+                    <span>Spell DC {{data.attributes.spelldc.value}}</span>
                 </footer>
-            </div>
-        </div>
-        <div class="primary-attributes">
-            <div class="attribute">
-                <h4 class="attribute-name">
-                    <input name="data.resources.primary.label" type="text" value="{{data.resources.primary.label}}"
-                           data-dtype="String" placeholder="Primary"/>
-                </h4>
-               <div class="attribute-value">
-                   <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}"
-                          data-dtype="Number" placeholder="1"/>
-                   <span class="flex0"> / </span>
-                   <input name="data.resources.primary.max" type="text" value="{{data.resources.primary.max}}"
-                          data-dtype="Number" placeholder="1"/>
-               </div>
-            </div>
-            
-            <div class="attribute">
-                <h4 class="attribute-name">
-                    <input name="data.resources.secondary.label" type="text" value="{{data.resources.secondary.label}}"
-                           data-dtype="String" placeholder="Primary"/>
-                </h4>
-               <div class="attribute-value">
-                   <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}"
-                          data-dtype="Number" placeholder="1"/>
-                   <span class="flex0"> / </span>
-                   <input name="data.resources.secondary.max" type="text" value="{{data.resources.secondary.max}}"
-                          data-dtype="Number" placeholder="1"/>
-               </div>
             </div>
 
             <div class="attribute">
@@ -121,13 +85,113 @@
                     <span>{{numberFormat data.attributes.init.mod decimals=0 sign=true}}</span>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Modifier</h4>
-                    <div class="footer-value">
-                        <input name="data.attributes.init.value" type="text" placeholder="0"
-                               data-dtype="{{data.attributes.init.type}}"
-                               value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
-                    </div>
+                    <span>Modifier</span>
+                    <input name="data.attributes.init.value" type="text" placeholder="0"
+                           data-dtype="{{data.attributes.init.type}}"
+                           value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
                 </footer>
+            </div>
+        </div>
+
+        <div class="primary-attributes">
+            <div class="attribute">
+                <h4 class="attribute-name">Hit Dice</h4>
+                <div class="attribute-value">
+                    <input name="data.attributes.hd.value" type="text" placeholder="1"
+                           value="{{data.attributes.hd.value}}" data-dtype="{{data.attributes.hd.type}}"/>
+                    <span> / </span>
+                    <span>{{data.details.level.value}}</span>
+                </div>
+                <footer class="attribute-footer">
+                    <a class="rest short-rest">S. Rest</a>
+                    <a class="rest long-rest">L. Rest</a>
+                </footer>
+            </div>
+
+            <div class="attribute">
+                <h4 class="attribute-name">
+                    <input name="data.resources.primary.label" type="text" value="{{data.resources.primary.label}}"
+                           data-dtype="String" placeholder="Primary"/>
+                </h4>
+               <div class="attribute-value">
+                   <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}"
+                          data-dtype="Number" placeholder="0"/>
+                   <span class="flex0"> / </span>
+                   <input name="data.resources.primary.max" type="text" value="{{data.resources.primary.max}}"
+                          data-dtype="Number" placeholder="0"/>
+               </div>
+                <footer class="attribute-footer flexrow recharge">
+                    <span>SR</span>
+                    <input name="data.resources.primary.sr" type="checkbox" data-dtype="Boolean"
+                           {{checked data.resources.primary.sr}}/>
+                    <span>LR</span>
+                    <input name="data.resources.primary.lr" type="checkbox" data-dtype="Boolean"
+                           {{checked data.resources.primary.lr}}/>
+                </footer>
+            </div>
+            
+            <div class="attribute">
+                <h4 class="attribute-name">
+                    <input name="data.resources.secondary.label" type="text" value="{{data.resources.secondary.label}}"
+                           data-dtype="String" placeholder="Secondary"/>
+                </h4>
+               <div class="attribute-value">
+                   <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}"
+                          data-dtype="Number" placeholder="0"/>
+                   <span class="flex0"> / </span>
+                   <input name="data.resources.secondary.max" type="text" value="{{data.resources.secondary.max}}"
+                          data-dtype="Number" placeholder="0"/>
+               </div>
+                <footer class="attribute-footer flexrow recharge">
+                    <span>SR</span>
+                    <input name="data.resources.primary.sr" type="checkbox" data-dtype="Boolean"
+                           {{checked data.resources.primary.sr}}/>
+                    <span>LR</span>
+                    <input name="data.resources.primary.lr" type="checkbox" data-dtype="Boolean"
+                           {{checked data.resources.primary.lr}}/>
+                </footer>
+            </div>
+
+            <div class="attribute">
+                <h4 class="attribute-name">Speed</h4>
+                <div class="attribute-value">
+                    <span class="flex0">  </span>
+                    <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
+                           data-dtype="{{data.attributes.speed.type}}" placeholder="0"/>
+                </div>
+                <footer class="attribute-footer">
+                    <input type="text" class="speed" name="data.attributes.speed.special" placeholder="Swim / Fly"
+                           data-dtype="{{data.attributes.speed.type}}" value="{{data.attributes.speed.special}}"/>
+                </footer>
+            </div>
+        </div>
+
+        <!-- STATUS EFFECTS -->
+        <div class="statuses">
+            <div class="status death">
+                <h4>Death Saves</h4>
+                <div class="status-value">
+                    <i class="fas fa-check"></i>
+                    <input type="text" name="data.attributes.death.success" data-dtype="Number" placeholder="0"
+                           value="{{data.attributes.death.success}}"/>
+                    <i class="fas fa-times"></i>
+                    <input type="text" name="data.attributes.death.failure" data-dtype="Number" placeholder="0"
+                           value="{{data.attributes.death.failure}}"/>
+                </div>
+            </div>
+            <div class="status exhaustion">
+                <h4>Exhaustion</h4>
+                <div class="status-value">
+                    <input type="text" name="data.attributes.exhaustion.value" data-dtype="Number" placeholder="0"
+                           value="{{data.attributes.exhaustion.value}}" />
+                </div>
+            </div>
+            <div class="status inspiration">
+                <h4>Inspiration</h4>
+                <div class="status-value">
+                    <input type="checkbox" name="data.attributes.inspiration.value" data-dtype="Boolean"
+                           {{checked data.attributes.inspiration.value}}/>
+                </div>
             </div>
         </div>
 
@@ -334,7 +398,7 @@
 
         <!-- ABILITY SCORES -->
         <div class="tab abilities active" data-tab="abilities">
-            <ol class="abilities-list directory-list">
+            <ol class="abilities-list">
             {{#each data.abilities as |ability id|}}
                 <li class="ability" data-ability="{{id}}">
                     <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"
@@ -399,12 +463,6 @@
                 <label>{{data.traits.size.label}}</label>
                 <input type="text" name="data.traits.size.value" data-dtype="{{data.traits.size.type}}"
                        value="{{data.traits.size.value}}" placeholder="Medium"/>
-            </div>
-
-            <div class="form-group-stacked">
-                <label>{{data.attributes.speed.label}}</label>
-                <input type="text" name="data.attributes.speed.value" data-dtype="{{data.attributes.speed.type}}"
-                       value="{{data.attributes.speed.value}}" placeholder="30 ft."/>
             </div>
 
             <div class="form-group-stacked">

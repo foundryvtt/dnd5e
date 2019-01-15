@@ -4,7 +4,11 @@
 /*  Actor Sheet
 /* ----------------------------------------- */
 
-.dnd5e.actor-sheet {
+.dnd5e.sheet .window-content {
+  padding: 5px;
+}
+
+.dnd5e.sheet form {
   .flexrow();
 
   /* Form Elements */
@@ -48,215 +52,316 @@
     cursor: pointer;
   }
 
-  .sheet-sidebar {
-    flex: 0 0 250px;
+  .sheet-header {
+    flex: 0 0 100%;
+    height: 44px;
     order: 1;
-
-    img.sheet-profile {
-      width: 250px;
-      height: 250px;
-      border: 1px solid @borderDark;
-    }
   }
 
   .sheet-body {
-    .flexcol();
-    margin-left: 10px;
     flex: 1;
-    order: 2;
+    height: calc(100% - 44px);
+    order: 3;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 
-    .sheet-tabs {
-      flex: 0 0 32px;
-      margin-top: 5px;
-    }
     .tab {
-      flex: 1 0 450px;
-      margin: 5px 0;
-      overflow: hidden;
+      margin: 5px 0 5px 10px;
     }
   }
 
-  .sheet-header {
-    flex: 0 0 90px;
-    .flexrow();
+  .sheet-sidebar {
+    flex: 0 0 220px;
+    height: calc(100% - 44px);
+    order: 2;
+    .flexcol();
 
-    .charname {
-      margin: 0 10px 0 0;
-      height: 50px;
-      border: none;
-
-      > input {
-        float: left;
-        height: 40px;
-        width: 100%;
-        margin: 5px 0;
-        .nodesto();
-        font-size: 36px;
-      }
-    }
-
-    .charlevel {
-      flex: 0 0 150px;
-      height: 50px;
-      .flexcol();
-      text-align: right;
-
-      .level {
-        flex: 0 0 22px;
-        width: 100%;
-        .flexrow();
-        .nodesto();
-        font-size: 24px;
-        line-height: 22px;
-
-        > input[type="text"] {
-          flex: 0 0 30px;
-          height: 22px;
-          text-align: center;
-        }
-      }
-
-      .xpbar {
-        width: 100%;
-        flex: 0 0 8px;
-        background: #666;
-        border: 1px solid #000;
-        border-radius: 3px;
-
-        .bar {
-          height: 4px;
-          margin: 1px;
-          display: block;
-          background: #afebff;
-          border: 1px solid #000;
-          border-radius: 2px;
-        }
-      }
-
-      .experience {
-        flex: 0 0 20px;
-        line-height: 20px;
-        .flexrow();
-        justify-content: flex-end;
-
-        > input[type="text"] {
-          flex: 1;
-          text-align: right;
-          height: 20px;
-        }
-      }
-    }
-
-    .details {
-      flex: 0 0 100%;
-      height: 40px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      border-top: 1px solid @borderLight;
-      border-bottom: 1px solid @borderLight;
-
-      .character-detail {
-        width: 33.33%;
-        height: 30px;
-        float: left;
-        margin: 4px -1px 4px 0;
-        padding: 0 2px 0 4px;
-        line-height: 30px;
-        border-right: 1px solid @borderLight;
-
-        &:last-child {
-          border-right: none;
-        }
-
-        > input {
-          .nodesto();
-          font-size: 20px;
-          margin: 0 2px;
-        }
-      }
-    }
-  }
-
-  /* Primary Attributes Section */
-  .primary-attributes {
-    .flexrow();
-    flex: 0 0 80px;
-    padding: 5px 0;
-
-    .attribute {
-      flex: 0 0 calc(33.33% - 4px);
-      height: 75px;
-      margin-right: 6px;
+    img.sheet-profile {
+      width: 220px;
+      height: 220px;
       border: 1px solid @borderLight;
+      border-top: none;
+    }
+  }
+
+  .sheet-tabs {
+    flex: 0 0 28px;
+    margin-top: 2px;
+    padding: 0 2px;
+    border-bottom: 1px solid @borderDark;
+
+    > .item {
+      line-height: 28px;
+      padding: 0 10px;
+      border-radius: 5px 5px 0 0;
+
+      &.active {
+        color: #000;
+        font-weight: 700;
+        border: 1px solid @borderDark;
+        border-bottom: none;
+        box-shadow: 0 0 10px inset @accentColor;
+        text-shadow: none;
+      }
+    }
+  }
+
+  .tab {
+    flex: 1 0 380px;
+    overflow: hidden;
+  }
+}
+
+
+/* ---------------------------------------- */
+/*  Sheet Header                            */
+/* ---------------------------------------- */
+
+.dnd5e.actor-sheet .sheet-header {
+  .flexrow();
+  border-bottom: 1px solid @borderLight;
+
+  .charname {
+    height: 44px;
+    padding: 5px 5px 5px 0;
+    border: none;
+
+    > input {
+      width: 100%;
+      margin: 0;
+      .nodesto();
+      font-size: 36px;
+      border: none;
+    }
+  }
+
+  .charlevel {
+    flex: 0 0 150px;
+    height: 44px;
+    .flexcol();
+    text-align: right;
+
+    .level {
+      flex: 0 0 20px;
+      width: 100%;
+      .flexrow();
+      .nodesto();
+      font-size: 20px;
+      line-height: 20px;
+
+      > input[type="text"] {
+        flex: 0 0 26px;
+        height: 20px;
+        text-align: center;
+      }
+    }
+
+    .xpbar {
+      width: 100%;
+      flex: 0 0 8px;
+      background: #666;
+      border: 1px solid #000;
       border-radius: 3px;
 
-      &:last-child {
-        margin-right: 0;
+      .bar {
+        height: 4px;
+        margin: 1px;
+        display: block;
+        background: #afebff;
+        border: 1px solid #000;
+        border-radius: 2px;
       }
+    }
 
-      .attribute-name {
-        position: relative;
-        height: 20px;
-        margin: 0 5px;
-        .nodesto();
-        line-height: 20px;
-        text-align: center;
-        border-bottom: 1px solid @borderLight;
+    .experience {
+      font-size: 13px;
+      flex: 0 0 16px;
+      .flexrow();
+      justify-content: flex-end;
 
-        .npc-roll-hp {
-          font-size: 14px;
-          position: absolute;
-          right: 2px;
-        }
-      }
-
-      .attribute-value {
-        .flexrow();
-        height: 36px;
-        .nodesto();
-        font-size: 24px;
-        color: #333;
-        line-height: 36px;
-        text-align: center;
-      }
-
-      .attribute-footer {
+      > input[type="text"] {
+        flex: 1;
+        text-align: right;
         height: 16px;
-        text-align: center;
-
-        .footer-label {
-          width: 60%;
-          height: 16px;
-          line-height: 16px;
-          float: left;
-          margin: 0;
-          padding-right: 5px;
-          text-align: right;
-        }
-
-        .footer-value {
-          width: 40%;
-          float: right;
-          > * {
-            float: left;
-            line-height: 16px;
-            height: 16px;
-          }
-          > input {
-            max-width: 24px;
-          }
-
-          input[name="data.attributes.speed.value"] {
-            max-width: none;
-            text-align: left;
-          }
-        }
       }
     }
   }
 }
+
+/* ---------------------------------------- */
+/*  Sheet Body                              */
+/* ---------------------------------------- */
+
+/* Character Details */
+.dnd5e.actor-sheet .sheet-body .details {
+  flex: 0 0 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid @borderLight;
+
+  .character-detail {
+    width: 33.33%;
+    height: 24px;
+    float: left;
+    margin: 3px 0;
+    padding-left: 3px;
+    border-right: 1px solid @borderLight;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    > input {
+      .nodesto();
+      font-size: 20px;
+    }
+  }
+}
+
+/* Primary Attributes */
+.dnd5e.actor-sheet .primary-attributes {
+  .flexrow();
+  flex: 0 0 80px;
+  border-bottom: 1px solid @borderLight;
+
+  .attribute {
+    flex: 0 0 25%;
+    height: 72px;
+    margin: 4px 0;
+    padding: 0 4px;
+    border-right: 1px solid @borderLight;
+
+    &:last-child {
+      margin-right: 0;
+      border-right: none;
+    }
+
+    .attribute-name {
+      position: relative;
+      height: 20px;
+      margin: 0 0 4px;
+      line-height: 22px;
+      .nodesto();
+      text-align: center;
+      border-bottom: 1px solid @borderLight;
+
+      .npc-roll-hp {
+        font-size: 14px;
+        position: absolute;
+        right: 2px;
+      }
+    }
+
+    .attribute-value {
+      .flexrow();
+      height: 32px;
+      .nodesto();
+      font-size: 24px;
+      color: #333;
+      line-height: 32px;
+      text-align: center;
+    }
+
+    .attribute-footer {
+      height: 16px;
+      font-size: 13px;
+      text-align: center;
+
+      span {
+        display: inline-block;
+      }
+
+      input {
+        max-width: 24px;
+      }
+
+      input.temphp {
+        max-width: 45%;
+      }
+
+      input.hit-dice {
+        min-width: 16px;
+        max-width: 16px;
+        text-align: right;
+      }
+
+      input[name="data.attributes.speed.value"] {
+        max-width: none;
+        text-align: left;
+      }
+
+      input.speed {
+        max-width: 90%;
+      }
+
+      a.rest {
+        padding: 0 2px;
+        background: rgba(255, 255, 255, 0.25);
+        border: 1px solid @borderLight;
+        border-radius: 2px;
+      }
+
+      &.recharge input[type="checkbox"]{
+        margin: 1px;
+      }
+    }
+  }
+}
+
+
+/* Status Effects */
+.dnd5e.actor-sheet .statuses {
+  flex: 0 0 26px;
+  margin: 3px 0 0;
+  border-bottom: 1px solid @borderLight;
+  .flexrow();
+
+  .status {
+    padding: 0 6px;
+    border-right: 1px solid @borderLight;
+    font-size: 14px;
+    line-height: 24px;
+    .flexrow();
+
+    &.death {
+      flex: 0 0 50%;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    h4 {
+      flex: 1;
+      margin: 0;
+      font-size: 12px;
+      .nodesto();
+    }
+
+    .status-value {
+      flex: none;
+      > * {
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+      > input[type="text"] {
+        height: 20px;
+        max-width: 20px;
+        margin: 0;
+      }
+
+      > input[type="checkbox"] {
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+}
+
 
 
 /* ----------------------------------------- */
@@ -276,48 +381,37 @@
 /* Abilities Sidebar Tab
 /* ----------------------------------------- */
 
-.dnd5e .sheet-tabs {
-    height: 32px;
-    border-bottom: 1px solid @borderDark;
-
-  > .item {
-    line-height: 32px;
-    padding: 0 10px;
-    border-radius: 5px 5px 0 0;
-
-    &.active {
-      color: #000;
-      font-weight: 700;
-      border: 1px solid @borderDark;
-      border-bottom: none;
-      box-shadow: 0 0 10px inset @accentColor;
-      text-shadow: none;
-    }
-  }
-}
-
 .dnd5e .abilities {
   margin-bottom: 3px;
 
+  .abilities-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
   .ability {
     .flexrow();
-    height: 40px;
-    line-height: 40px;
+    height: 36px;
+    line-height: 36px;
     border-bottom: 1px solid @borderLight;
 
     .ability-proficiency {
       flex: 0 0 24px;
+      i.fa-circle { font-size: 10px; }
     }
 
     .ability-name {
       .nodesto();
-      font-size: 18px;
       margin: 0;
     }
 
     .ability-score {
       flex: 0 0 36px;
       > input {
+        width: 30px;
+        height: 30px;
+        margin: 3px;
         .nodesto();
         font-size: 22px;
         color: #222;
@@ -337,10 +431,6 @@
     .ability-mod { border-right: 1px solid @borderLight; }
     .ability-save { border-left: 1px solid @borderLight; }
   }
-
-  .ability:last-child {
-    border-bottom: 1px solid @borderDark;
-  }
 }
 
 
@@ -351,9 +441,10 @@
 .dnd5e .skills {
   li.skill {
     .flexrow();
-    height: 22px;
-    line-height: 22px;
+    height: 21px;
+    line-height: 21px;
     border-bottom: 1px solid @borderLight;
+    font-size: 13px;
 
     .skill-name {
       margin: 0;
@@ -361,6 +452,7 @@
 
     .skill-proficiency {
       flex: 0 0 24px;
+      i.fa-circle { font-size: 10px; }
     }
 
     .skill-ability {
@@ -408,8 +500,9 @@
 
 .currency {
   .flexrow();
-  padding: 3px 0;
+  padding: 1px 0;
   border-bottom: 1px solid @borderLight;
+  font-size: 13px;
 
   h4.currency-name {
     flex: 0;
@@ -449,12 +542,13 @@
   padding: 0;
   height: calc(100% - 44px);
   overflow-y: scroll;
+  font-size: 13px;
 
   /* Inventory Item */
   .item {
     .flexrow();
     line-height: 24px;
-    padding: 2px 0;
+    padding: 0;
     border-bottom: 1px solid @borderLight;
 
     .item-name {
@@ -619,13 +713,12 @@
 .class-header {
   line-height: 20px;
   position: relative;
-  border-bottom: 1px solid @borderLight;
-  margin: 0 0 3px;
+  margin: 3px 0 1px;
 
   h3 {
     text-align: center;
     .nodesto();
-    font-size: 20px;
+    font-size: 18px;
     color: #222;
     margin: 0;
   }
@@ -634,7 +727,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    font-size: 12px;
+    font-size: 11px;
     color: #666;
   }
 }
@@ -644,16 +737,16 @@
 
   .item {
     background: rgba(0, 0, 0, 0.03);
-    padding: 5px 5px 0;
+    padding: 3px 3px 0;
     border: 1px solid @borderLight;
-    border-radius: 4px;
+    border-radius: 2px;
     overflow: hidden;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 
     .class-levels,
     .item-controls {
       line-height: 16px;
-      font-size: 12px;
+      font-size: 10px;
       text-align: right;
     }
     .class-levels {
@@ -675,11 +768,12 @@
     .class-name {
       .nodesto();
       color: #222;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .class-subclass {
-      line-height: 16px;
+      line-height: 14px;
+      font-size: 13px;
       color: #999;
     }
   }

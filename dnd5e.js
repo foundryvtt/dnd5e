@@ -341,6 +341,19 @@ CONFIG.Actor.entityClass = Actor5e;
 class Actor5eSheet extends ActorSheet {
 
   /**
+   * Extend and override the default options used by the 5e Actor Sheet
+   */
+	static get defaultOptions() {
+	  const options = super.defaultOptions;
+	  options.classes = options.classes.concat(["dnd5e", "actor-sheet"]);
+    options.width = 650;
+    options.height = 720;
+	  return options;
+  }
+
+	/* -------------------------------------------- */
+
+  /**
    * The actor sheet template comes packaged with the system
    */
   get template() {
@@ -377,6 +390,14 @@ class Actor5eSheet extends ActorSheet {
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.proficiencyLevels[skl.value];
     }
+
+    // Clear some values
+    if ( sheetData.data.resources.primary.value === 0 ) delete sheetData.data.resources.primary.value;
+    if ( sheetData.data.resources.primary.max === 0 ) delete sheetData.data.resources.primary.max;
+    if ( sheetData.data.resources.secondary.value === 0 ) delete sheetData.data.resources.secondary.value;
+    if ( sheetData.data.resources.secondary.max === 0 ) delete sheetData.data.resources.secondary.max;
+    if ( sheetData.data.attributes.hp.temp === 0 ) delete sheetData.data.attributes.hp.temp;
+    if ( sheetData.data.attributes.hp.tempmax === 0 ) delete sheetData.data.attributes.hp.tempmax;
 
     // Prepare owned items
     this._prepareItems(sheetData.actor);
@@ -1050,7 +1071,7 @@ class Item5e extends Item {
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
-        parts = [itemData.damage.value],
+        parts = [itemData.damage.value, "@bonus"],
         critical = false,
         title = `${this.name} - Damage Roll`;
     mergeObject(rollData, { mod: rollData.abilities[abl].mod, bonus: null });

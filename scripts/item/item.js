@@ -368,7 +368,7 @@ class Item5e extends Item {
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
-        parts = [itemData.damage.value],
+        parts = [itemData.damage.value, "@bonus"],
         critical = false,
         title = `${this.name} - Damage Roll`;
     mergeObject(rollData, { mod: rollData.abilities[abl].mod, bonus: null });
