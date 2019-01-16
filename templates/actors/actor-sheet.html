@@ -110,8 +110,8 @@
 
             <div class="attribute">
                 <h4 class="attribute-name">
-                    <input name="data.resources.primary.label" type="text" value="{{data.resources.primary.label}}"
-                           data-dtype="String" placeholder="Primary"/>
+                    <input name="data.resources.primary.label" type="text" class="resource-label" placeholder="Primary"
+                           value="{{data.resources.primary.label}}" data-dtype="String" />
                 </h4>
                <div class="attribute-value">
                    <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}"
@@ -132,8 +132,8 @@
             
             <div class="attribute">
                 <h4 class="attribute-name">
-                    <input name="data.resources.secondary.label" type="text" value="{{data.resources.secondary.label}}"
-                           data-dtype="String" placeholder="Secondary"/>
+                    <input name="data.resources.secondary.label" type="text" class="resource-label"
+                           placeholder="Secondary" value="{{data.resources.secondary.label}}" data-dtype="String"/>
                 </h4>
                <div class="attribute-value">
                    <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}"
@@ -144,11 +144,11 @@
                </div>
                 <footer class="attribute-footer flexrow recharge">
                     <span>SR</span>
-                    <input name="data.resources.primary.sr" type="checkbox" data-dtype="Boolean"
-                           {{checked data.resources.primary.sr}}/>
+                    <input name="data.resources.secondary.sr" type="checkbox" data-dtype="Boolean"
+                           {{checked data.resources.secondary.sr}}/>
                     <span>LR</span>
-                    <input name="data.resources.primary.lr" type="checkbox" data-dtype="Boolean"
-                           {{checked data.resources.primary.lr}}/>
+                    <input name="data.resources.secondary.lr" type="checkbox" data-dtype="Boolean"
+                           {{checked data.resources.secondary.lr}}/>
                 </footer>
             </div>
 
@@ -204,17 +204,14 @@
 
         <!-- INVENTORY -->
         <div class="tab inventory" data-tab="inventory">
-            <div class="currency">
-                <h4 class="currency-name">Currency</h4>
-                <ol class="currency-list">
-                    {{#each data.currency as |c i|}}
-                    <li class="denomination {{i}}">
-                        <label>{{i}}:</label>
-                        <input type="text" name="data.currency.{{i}}.value" value="{{c.value}}" data-dtype="{{c.type}}"/>
-                    </li>
-                    {{/each}}
-                </ol>
-            </div>
+            <ol class="currency">
+                {{#each data.currency as |c i|}}
+                <li class="denomination {{i}}">
+                    <label>{{c.label}}:</label>
+                    <input type="text" name="data.currency.{{i}}.value" value="{{c.value}}" data-dtype="{{c.type}}"/>
+                </li>
+                {{/each}}
+            </ol>
 
             <ol class="inventory-list directory-list">
             {{#each actor.inventory as |section sid|}}
@@ -263,7 +260,7 @@
         <!-- SPELLBOOK -->
         <div class="tab spellbook" data-tab="spellbook">
             <div class="form-group spellcasting-ability">
-                <label><h3>Spellcasting Ability</h3></label>
+                <label>Spellcasting Ability</label>
                 <select name="data.attributes.spellcasting.value" data-type="String">
                     {{#select data.attributes.spellcasting.value}}
                     <option value="">None</option>
@@ -388,7 +385,7 @@
 
     <!-- SIDEBAR -->
     <section class="sheet-sidebar">
-        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="64" width="64" data-edit="img"/>
+        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="220" width="220" data-edit="img"/>
 
         <nav class="sheet-tabs tabs" data-tab-container="sidebar">
             <a class="item active" data-tab="abilities">Abilities</a>

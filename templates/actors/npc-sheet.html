@@ -1,37 +1,42 @@
 <form class="dnd5e actor-sheet npc-sheet {{cssClass}}" autocomplete="off">
 
+    <!-- HEADER -->
+    <header class="sheet-header">
+        <h1 class="charname">
+            <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
+        </h1>
+
+        <div class="charlevel">
+            <div class="level">
+                <label>CR</label>
+                <input name="data.details.cr.value" type="text" value="{{data.details.cr.str}}"
+                       data-dtype="Number" placeholder="1"/>
+            </div>
+            <div class="experience">
+                <span>{{data.details.xp.value}} XP</span>
+            </div>
+        </div>
+    </header>
+
     <!-- BODY -->
     <section class="sheet-body">
 
-        <!-- HEADER -->
-        <header class="sheet-header">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
-            </h1>
-
-            <div class="charlevel">
-                <div class="level">
-                    <label>CR</label> 
-                    <input name="data.details.cr.value" type="text" value="{{data.details.cr.str}}"
-                           data-dtype="Number" placeholder="1"/>
-                </div>
-                <div class="experience">
-                    <span>{{data.details.xp.value}} XP</span>
-                </div>
-            </div>
-
-            <ul class="details">
-                <li class="character-detail">
-                    <input name="data.details.type.value" type="text" value="{{data.details.type.value}}" placeholder="Type"/>
-                </li>
-                <li class="character-detail">
-                    <input name="data.details.source.value" type="text" value="{{data.details.source.value}}" placeholder="Source"/>
-                </li>
-                <li class="character-detail">
-                    <input name="data.details.alignment.value" type="text" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
-                </li>
-            </ul>
-        </header>
+        <!-- DETAILS -->
+        <ul class="details">
+            <li class="character-detail">
+                <input type="text" name="data.traits.size.value" data-dtype="{{data.traits.size.type}}"
+                       value="{{data.traits.size.value}}" placeholder="Medium"/>
+            </li>
+            <li class="character-detail">
+                <input name="data.details.type.value" type="text" value="{{data.details.type.value}}" placeholder="Type"/>
+            </li>
+            <li class="character-detail">
+                <input name="data.details.source.value" type="text" value="{{data.details.source.value}}" placeholder="Source"/>
+            </li>
+            <li class="character-detail">
+                <input name="data.details.alignment.value" type="text" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
+            </li>
+        </ul>
 
         <!-- ATTRIBUTES -->
         <div class="primary-attributes">
@@ -41,128 +46,100 @@
                     <a class="npc-roll-hp" title="Roll Health"><i class="fas fa-dice-d20"></i></a>
                 </h4>
                 <div class="attribute-value">
-                    <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10"/>
+                    <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                           data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
                     <span class="flex0"> / </span>
-                    <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10"/>
+                    <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                           data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
                 </div>
                 <footer class="attribute-footer">
-                    <input name="data.attributes.hp.formula" type="text" value="{{data.attributes.hp.formula}}" placeholder="Forumla"/>
+                    <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="Forumla"
+                           value="{{data.attributes.hp.formula}}"/>
                 </footer>
             </div>
 
             <div class="attribute">
                 <h4 class="attribute-name">Armor Class</h4>
                 <div class="attribute-value">
-                    <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}" placeholder="10"/>
+                    <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                           data-dtype="{{data.attributes.ac.type}}" placeholder="10"/>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Base AC</h4>
-                    <div class="footer-value">
-                        <span>{{data.attributes.ac.min}}</span>
-                    </div>
+                    <span>Spell DC {{data.attributes.spelldc.value}}</span>
                 </footer>
             </div>
 
             <div class="attribute">
-                <h3 class="attribute-name">Proficiency</h3>
+                <h4 class="attribute-name">Proficiency</h4>
                 <div class="attribute-value">
                     <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Spell DC</h4>
-                    <div class="footer-value">
-                        <span>{{data.attributes.spelldc.value}}</span>
-                    </div>
+                    <span>Initiative</span>
+                    <input name="data.attributes.init.value" type="text" placeholder="0"
+                           data-dtype="{{data.attributes.init.type}}"
+                           value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
                 </footer>
-            </div>
-        </div>
-        <div class="primary-attributes">
-            <div class="attribute">
-                <h4 class="attribute-name">{{data.resources.legact.label}}</h4>
-                <div class="attribute-value">
-                   <input name="data.resources.legact.value" type="text" value="{{data.resources.legact.value}}"
-                          data-dtype="Number" placeholder="0"/>
-                   <span class="flex0"> / </span>
-                   <input name="data.resources.legact.max" type="text" value="{{data.resources.legact.max}}"
-                          data-dtype="Number" placeholder="0"/>
-                </div>
-            </div>
-            
-            <div class="attribute">
-                <h4 class="attribute-name">{{data.resources.legres.label}}</h4>
-               <div class="attribute-value">
-                   <input name="data.resources.legres.value" type="text" value="{{data.resources.legres.value}}"
-                          data-dtype="Number" placeholder="0"/>
-                   <span class="flex0"> / </span>
-                   <input name="data.resources.legres.max" type="text" value="{{data.resources.legres.max}}"
-                          data-dtype="Number" placeholder="0"/>
-               </div>
             </div>
 
             <div class="attribute">
-                <h4 class="attribute-name">Initiative</h4>
+                <h4 class="attribute-name">Speed</h4>
                 <div class="attribute-value">
-                    <span>{{numberFormat data.attributes.init.mod decimals=0 sign=true}}</span>
+                    <span class="flex0">  </span>
+                    <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
+                           data-dtype="{{data.attributes.speed.type}}" placeholder="0"/>
                 </div>
                 <footer class="attribute-footer">
-                    <h4 class="footer-label">Modifier</h4>
-                    <div class="footer-value">
-                        <input name="data.attributes.init.value" type="text" placeholder="0"
-                               data-dtype="{{data.attributes.init.type}}"
-                               value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
-                    </div>
+                    <input type="text" class="speed" name="data.attributes.speed.special" placeholder="Swim / Fly"
+                           data-dtype="{{data.attributes.speed.type}}" value="{{data.attributes.speed.special}}"/>
                 </footer>
+            </div>
+        </div>
+
+        <!-- STATUS EFFECTS -->
+        <div class="statuses">
+            <div class="status legendary">
+                <h4>Legendary Actions</h4>
+                <div class="status-value">
+                    <input type="text" name="data.resources.legact.value" data-dtype="Number" placeholder="0"
+                           value="{{data.resources.legact.value}}"/>
+                </div>
+            </div>
+            <div class="status legendary">
+                <h4>Legendary Res.</h4>
+                <div class="status-value">
+                    <input type="text" name="data.resources.legres.value" data-dtype="Number" placeholder="0"
+                           value="{{data.resources.legres.value}}"/>
+                </div>
+            </div>
+            <div class="status lair">
+                <h4>Lair Action</h4>
+                <div class="status-value">
+                    <input type="checkbox" name="data.resources.lair.value" data-dtype="Boolean"
+                           {{checked data.resources.lair.value}}/>
+                </div>
             </div>
         </div>
 
         <nav class="sheet-tabs tabs" data-tab-container="primary">
-            <a class="item" data-tab="inventory">Inventory</a>
+            <a class="item" data-tab="features">Features</a>
             <a class="item" data-tab="spellbook">Spellbook</a>
-            <a class="item" data-tab="feats">Feats</a>
             <a class="item active" data-tab="biography">Biography</a>
         </nav>
 
-        <!-- INVENTORY -->
-        <div class="tab inventory" data-tab="inventory">
-            <div class="currency">
-                <h4 class="currency-name">Currency</h4>
-                <ol class="currency-list">
-                    {{#each data.currency as |c i|}}
-                    <li class="denomination {{i}}">
-                        <label>{{i}}:</label>
-                        <input type="text" name="data.currency.{{i}}.value" value="{{c.value}}" data-dtype="{{c.type}}"/>
-                    </li>
-                    {{/each}}
-                </ol>
-            </div>
-
+        <!-- FEATURES -->
+        <div class="tab features" data-tab="features">
             <ol class="inventory-list directory-list">
-            {{#each actor.inventory as |section sid|}}
+            {{#each actor.features as |section sid|}}
                 <li class="item inventory-header">
                     <h3 class="item-name">{{section.label}}</h3>
-                    <span class="item-quantity">Qty.</span>
-                    <span class="item-weight">Wt.</span>
-                    {{#if ../owner}}
-                    <div class="item-controls">
-                        <a class="item-control item-create" title="Create Item" data-item-type="{{sid}}"><i class="fas fa-plus"></i> Add</a>
-                    </div>
-                    {{/if}}
                 </li>
                 {{#each section.items as |item iid|}}
                 <li class="item" data-item-id="{{item.id}}">
                     <div class="item-name">
                         <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <h4 class="rollable">
-                            {{item.name}}
-                            {{#if item.data.attuned.value}}<i class="prepared fas fa-haykal"></i>{{/if}}
-                        </h4>
-                        {{#if item.hasCharges}}
-                        <span class="item-charges">({{item.data.charges.value}}/{{item.data.charges.max}})</span>
-                        {{/if}}
+                        <h4 class="rollable">{{item.name}}</h4>
                     </div>
-                    <span class="item-quantity">{{item.data.quantity.value}}</span>
-                    <span class="item-weight">{{item.totalWeight}}</span>
-
                     {{#if ../../owner}}
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -173,11 +150,6 @@
                 {{/each}}
             {{/each}}
             </ol>
-
-            <div class="encumbrance">
-                <span class="encumbrance-label">{{data.attributes.encumbrance.value}} / {{data.attributes.encumbrance.max}}</span>
-                <span class="encumbrance-bar" style="width:{{data.attributes.encumbrance.pct}}%"></span>
-            </div>
         </div>
 
         <!-- SPELLBOOK -->
@@ -257,43 +229,6 @@
             </ol>
        </div>
 
-        <!-- FEATS -->
-        <div class="tab feats" data-tab="feats">
-            <ol class="inventory-list directory-list">
-                <li class="item inventory-header">
-                    <div class="item-name flexrow">
-                        <h3>Ability Name</h3>
-                    </div>
-                    <div class="ability-req">Requirements</div>
-
-                    {{#if owner}}
-                    <div class="item-controls">
-                        <a class="item-control item-create" title="Create Ability" data-item-type="feat">
-                            <i class="fas fa-plus"></i> Add</a>
-                    </div>
-                    {{/if}}
-                </li>
-
-                {{#each actor.feats as |item i|}}
-                <li class="item" data-item-id="{{item.id}}">
-                    <div class="item-name">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <h4 class="rollable">{{item.name}}</h4>
-                    </div>
-
-                    <div class="ability-req">{{item.data.requirements.value}}</div>
-
-                    {{#if ../owner}}
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Ability"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Ability"><i class="fas fa-trash"></i></a>
-                    </div>
-                    {{/if}}
-                </li>
-                {{/each}}
-            </ol>
-        </div>
-
         <!-- BIOGRAPHY -->
         <div class="tab biography active editor" data-tab="biography">
             <div class="editor-content" data-edit="data.details.biography.value">
@@ -305,7 +240,7 @@
 
     <!-- SIDEBAR -->
     <section class="sheet-sidebar">
-        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="64" width="64" data-edit="img"/>
+        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="220" width="220" data-edit="img"/>
 
         <nav class="sheet-tabs tabs" data-tab-container="sidebar">
             <a class="item active" data-tab="abilities">Abilities</a>
@@ -348,18 +283,6 @@
 
         <!-- TRAITS -->
         <div class="tab traits active" data-tab="traits">
-
-            <div class="form-group-stacked">
-                <label>{{data.traits.size.label}}</label>
-                <input type="text" name="data.traits.size.value" data-dtype="{{data.traits.size.type}}"
-                       value="{{data.traits.size.value}}" placeholder="Medium"/>
-            </div>
-
-            <div class="form-group-stacked">
-                <label>{{data.attributes.speed.label}}</label>
-                <input type="text" name="data.attributes.speed.value" data-dtype="{{data.attributes.speed.type}}"
-                       value="{{data.attributes.speed.value}}" placeholder="30 ft."/>
-            </div>
 
             <div class="form-group-stacked">
                 <label>{{data.traits.perception.label}}</label>
