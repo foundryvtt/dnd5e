@@ -6,6 +6,7 @@
 
 .dnd5e.sheet .window-content {
   padding: 5px;
+  font-size: 13px;
 }
 
 .dnd5e.sheet form {
@@ -18,6 +19,7 @@
     padding: 0;
     width: calc(100% - 2px);
     height: calc(100% - 2px);
+    color: #444;
     border: 1px solid transparent;
 
     &:hover,
@@ -30,7 +32,7 @@
   input:disabled,
   select:disabled,
   textarea:disabled {
-    color: #111;
+    color: #444;
 
     &:hover,
     &:focus {
@@ -66,23 +68,24 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-
-    .tab {
-      margin: 5px 0 5px 10px;
-    }
   }
 
   .sheet-sidebar {
     flex: 0 0 220px;
     height: calc(100% - 44px);
     order: 2;
+    border-right: 1px solid #AAA;
     .flexcol();
 
     img.sheet-profile {
       width: 220px;
       height: 220px;
-      border: 1px solid @borderLight;
-      border-top: none;
+      border: none;
+      border-bottom: 1px solid @borderLight;
+    }
+
+    .tab {
+      padding-right: 3px;
     }
   }
 
@@ -176,7 +179,6 @@
     }
 
     .experience {
-      font-size: 13px;
       flex: 0 0 16px;
       .flexrow();
       justify-content: flex-end;
@@ -220,6 +222,10 @@
     }
   }
 }
+.dnd5e.npc-sheet .sheet-body .details .character-detail {
+  width: 25%;
+}
+
 
 /* Primary Attributes */
 .dnd5e.actor-sheet .primary-attributes {
@@ -241,15 +247,14 @@
 
     .attribute-name {
       position: relative;
-      height: 20px;
-      margin: 0 0 4px;
+      height: 22px;
+      margin: 0 0 2px;
       line-height: 22px;
       .nodesto();
       text-align: center;
       border-bottom: 1px solid @borderLight;
 
       .npc-roll-hp {
-        font-size: 14px;
         position: absolute;
         right: 2px;
       }
@@ -259,15 +264,13 @@
       .flexrow();
       height: 32px;
       .nodesto();
-      font-size: 24px;
-      color: #333;
+      font-size: 20px;
       line-height: 32px;
       text-align: center;
     }
 
     .attribute-footer {
       height: 16px;
-      font-size: 13px;
       text-align: center;
 
       span {
@@ -293,7 +296,8 @@
         text-align: left;
       }
 
-      input.speed {
+      input.speed,
+      input.hpformula {
         max-width: 90%;
       }
 
@@ -363,7 +367,6 @@
 }
 
 
-
 /* ----------------------------------------- */
 /* Biography Tab
 /* ----------------------------------------- */
@@ -371,7 +374,7 @@
 .dnd5e.actor-sheet .biography {
   .editor-content {
     height: 100%;
-    padding-right: 8px;
+    padding: 0 8px;
     overflow-y: scroll;
   }
 }
@@ -414,7 +417,6 @@
         margin: 3px;
         .nodesto();
         font-size: 22px;
-        color: #222;
         text-align: center;
       }
     }
@@ -499,38 +501,32 @@
 /* ----------------------------------------- */
 
 .currency {
-  .flexrow();
-  padding: 1px 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   border-bottom: 1px solid @borderLight;
-  font-size: 13px;
+  .flexrow();
+  font-size: 12px;
+  line-height: 20px;
 
-  h4.currency-name {
-    flex: 0;
-    margin: 0;
-    font-weight: 700;
-    padding: 0 5px 0 32px;
-  }
-
-  ol.currency-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  li.denomination {
     .flexrow();
+    padding: 3px 3px 0;
+    justify-content: flex-end;
+    border-right: 1px solid @borderLight;
 
-    li.denomination {
-      .flexrow();
-      justify-content: flex-end;
+    label {
+      flex: none;
+      margin-right: 3px;
+    }
 
-      label {
-        text-transform: uppercase;
-        flex: 0 0 30px;
-        font-weight: 700;
-      }
+    input {
+      text-align: right;
+      max-width: 48px;
+    }
 
-      input {
-        text-align: left;
-        max-width: 48px;
-      }
+    &:last-child {
+      border-right: none;
     }
   }
 }
@@ -542,7 +538,6 @@
   padding: 0;
   height: calc(100% - 44px);
   overflow-y: scroll;
-  font-size: 13px;
 
   /* Inventory Item */
   .item {
@@ -602,7 +597,8 @@
   /* Inventory Header */
   .inventory-header {
     font-weight: 700;
-    border-bottom: 2px groove #FFF;
+    line-height: 20px;
+    background: rgba(0, 0, 0, 0.05);
 
     h3 {
       font-size: 1em;
@@ -650,27 +646,24 @@
 /*  Spellbook Tab
 /* ----------------------------------------- */
 
-.spellbook {
+.dnd5e.sheet .spellbook {
   .spellcasting-ability {
-    margin: 0 0 4px;
-    padding-bottom: 4px;
-    border-bottom: 2px groove #FFF;
-
-    h3 {
-      font-size: 14px;
-      margin: 0;
+    margin: 0;
+    padding: 3px 3px 0;
+    border-bottom: 1px solid @borderLight;
+    font-size: 12px;
+    label {
+      line-height: 20px;
     }
     select {
-      height: 24px;
+      flex: 1;
+      font-size: 10px;
+      height: 18px;
       background: rgba(255,255,255,0.5);
     }
   }
 
   .spellbook-header {
-    .item-name h3 {
-      padding: 0;
-    }
-
     .spell-school, .spell-action {
       color: inherit;
     }
@@ -693,7 +686,8 @@
   }
 
   .spell-slots, .spell-max {
-    flex: 0 0 32px;
+    flex: 0 0 24px;
+    font-size: 12px;
     text-align: center;
   }
 
@@ -779,21 +773,3 @@
   }
 }
 
-
-/* ----------------------------------------- */
-/*  NPC Sheet
-/* ----------------------------------------- */
-
-.dnd5e.npc-sheet {
-  .sheet-header {
-    .charlevel {
-      flex: 0 0 80px;
-      .level {
-        flex: 0 0 25px;
-
-        > label { margin-right: 5px; }
-        > input[type="text"] { flex: 1; }
-      }
-    }
-  }
-}

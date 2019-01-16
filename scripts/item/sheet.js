@@ -90,10 +90,15 @@ class Item5eSheet extends ItemSheet {
    * @private
    */
   _onSubmit(ev) {
+
+    // Save or discard item description content
+    let desc = this.element.find('[data-edit="data.description.value"]');
     if ( this.mce ) {
       const content = this.mce.getContent();
-      this.element.find('[data-edit="data.description.value"]').html(content);
-    }
+      desc.html(content);
+    } else desc.removeAttr("data-edit");
+
+    // Parent ItemSheet submission steps
     super._onSubmit(ev);
   };
 

@@ -26,6 +26,12 @@ class Actor5eSheet extends ActorSheet {
     else throw "Unrecognized Actor type " + this.actor.data.type;
   }
 
+	/* -------------------------------------------- */
+
+	get actorType() {
+	  return this.actor.data.type;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -55,15 +61,18 @@ class Actor5eSheet extends ActorSheet {
     }
 
     // Clear some values
-    if ( sheetData.data.resources.primary.value === 0 ) delete sheetData.data.resources.primary.value;
-    if ( sheetData.data.resources.primary.max === 0 ) delete sheetData.data.resources.primary.max;
-    if ( sheetData.data.resources.secondary.value === 0 ) delete sheetData.data.resources.secondary.value;
-    if ( sheetData.data.resources.secondary.max === 0 ) delete sheetData.data.resources.secondary.max;
-    if ( sheetData.data.attributes.hp.temp === 0 ) delete sheetData.data.attributes.hp.temp;
-    if ( sheetData.data.attributes.hp.tempmax === 0 ) delete sheetData.data.attributes.hp.tempmax;
+    let res = sheetData.data.resources;
+    if ( res.primary && res.primary.value === 0 ) delete res.primary.value;
+    if ( res.primary && res.primary.max === 0 ) delete res.primary.max;
+    if ( res.secondary && res.secondary.value === 0 ) delete res.secondary.value;
+    if ( res.secondary && res.secondary.max === 0 ) delete res.secondary.max;
+    let hp = sheetData.data.attributes.hp;
+    if ( hp.temp === 0 ) delete hp.temp;
+    if ( hp.tempmax === 0 ) delete hp.tempmax;
 
     // Prepare owned items
-    this._prepareItems(sheetData.actor);
+    if ( this.actorType === "character" ) this._prepareCharacterItems(sheetData.actor);
+    else if ( this.actorType === "npc" ) this._prepareNPCItems(sheetData.actor);
 
     // Return data to the sheet
     return sheetData;
@@ -71,7 +80,11 @@ class Actor5eSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _prepareItems(actorData) {
+  /**
+   * Organize and classify Items for Character sheets
+   * @private
+   */
+  _prepareCharacterItems(actorData) {
 
     // Inventory
     const inventory = {
@@ -143,6 +156,57 @@ class Actor5eSheet extends ActorSheet {
     };
     enc.pct = Math.min(enc.value * 100 / enc.max, 99);
     actorData.data.attributes.encumbrance = enc;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Organize and classify Items for NPC sheets
+   * @private
+   */
+  _prepareNPCItems(actorData) {
+
+    // Actions
+    const features = {
+      weapons: {label: "Weapons", items: [], type: "weapon" },
+      actions: { label: "Actions", items: [], type: "feat" },
+      passive: { label: "Features", items: [], type: "feat" },
+      equipment: { label: "Equipment", items: [], type: "armor" }
+    };
+
+    // Spellbook
+    const spellbook = {};
+
+    // Iterate through items, allocating to containers
+    for ( let i of actorData.items ) {
+      i.img = i.img || DEFAULT_TOKEN;
+
+      // Spells
+      if ( i.type === "spell" ) {
+        let lvl = i.data.level.value || 0;
+        spellbook[lvl] = spellbook[lvl] || {
+          isCantrip: lvl === 0,
+          label: CONFIG.spellLevels[lvl],
+          spells: [],
+          uses: actorData.data.spells["spell"+lvl].value || 0,
+          slots: actorData.data.spells["spell"+lvl].max || 0
+        };
+        i.data.school.str = CONFIG.spellSchools[i.data.school.value];
+        spellbook[lvl].spells.push(i);
+      }
+
+      // Features
+      else if ( i.type === "weapon" ) features.weapons.items.push(i);
+      else if ( i.type === "feat" ) {
+        if ( i.data.featType.value === "passive" ) features.passive.items.push(i);
+        else features.actions.items.push(i);
+      }
+      else if (["equipment", "consumable", "tool", "backpack"].includes(i.type)) features.equipment.items.push(i);
+    }
+
+    // Assign and return
+    actorData.features = features;
+    actorData.spellbook = spellbook;
   }
 
   /* -------------------------------------------- */
@@ -290,6 +354,19 @@ class Actor5eSheet extends ActorSheet {
     /*  Miscellaneous
     /* -------------------------------------------- */
 
+    /* Short Rest */
+    html.find('.short-rest').click(ev => {
+      ev.preventDefault();
+      ui.notifications.info("Short Rest functionality not yet implemented, just testing the button!");
+    });
+
+    /* Short Rest */
+    html.find('.long-rest').click(ev => {
+      ev.preventDefault();
+      ui.notifications.info("Long Rest functionality not yet implemented, just testing the button!");
+    });
+
+    /* Roll NPC HP */
     html.find('.npc-roll-hp').click(ev => {
       let ad = this.actor.data.data;
       let hp = new Roll(ad.attributes.hp.formula).roll().total;
@@ -306,6 +383,8 @@ class Actor5eSheet extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Saving and Submission                       */
+  /* -------------------------------------------- */
 
   /**
    * Customize form submission for 5e actor sheets to save the content of any active MCE editor
@@ -313,11 +392,12 @@ class Actor5eSheet extends ActorSheet {
    */
   _onSubmit(event) {
 
-    // Save MCE editor content
+    // Save or discard biography content
+    let bio = this.element.find('[data-edit="data.details.biography.value"]');
     if ( this.mce ) {
       const content = this.mce.getContent();
-      this.element.find('[data-edit="data.details.biography.value"]').html(content);
-    }
+      bio.html(content);
+    } else bio.removeAttr("data-edit");
 
     // NPC Challenge Rating
     if (this.actor.data.type === "npc") {
@@ -328,7 +408,7 @@ class Actor5eSheet extends ActorSheet {
       cr.val(crs[val] || val);
     }
 
-    // Parent submission steps
+    // Parent ActorSheet submission steps
     super._onSubmit(event);
   }
 
