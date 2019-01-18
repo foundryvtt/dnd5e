@@ -241,6 +241,6 @@ CONFIG.spellLevels = {
 // Feat Types
 CONFIG.featTypes = {
   "passive": "Passive Ability",
-  "attack": "Special Attack",
-  "ability": "Active Ability"
+  "attack": "Ability Attack",
+  "ability": "Generic Action"
 };
