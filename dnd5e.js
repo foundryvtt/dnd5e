@@ -1,3 +1,169 @@
+class Dice5e {
+
+  /**
+   * A standardized helper function for managing core 5e "d20 rolls"
+   *
+   * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
+   * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
+   *
+   * @param {Event} event           The triggering event which initiated the roll
+   * @param {Array} parts           The dice roll component parts, excluding the initial d20
+   * @param {Object} data           Actor or item data against which to parse the roll
+   * @param {String} template       The HTML template used to render the roll dialog
+   * @param {String} title          The dice roll UI window title
+   * @param {String} alias          The alias with which to post to chat
+   * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
+   * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
+   * @param {Boolean} situational   Allow for an arbitrary situational bonus field
+   * @param {Boolean} highlight     Highlight critical successes and failures
+   * @param {Boolean} fastForward   Allow fast-forward advantage selection
+   * @param {Function} onClose      Callback for actions to take when the dialog form is closed
+   * @param {Object} dialogOptions  Modal dialog options
+   */
+  static d20Roll({event, parts, data, template, title, alias, flavor, advantage=true, situational=true,
+                  highlight=true, fastForward=true, onClose, dialogOptions}) {
+
+    // Inner roll function
+    let roll = () => {
+      let flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
+      if (adv === 1) {
+        parts[0] = ["2d20kh"];
+        flav = `${title} (Advantage)`;
+      }
+      else if (adv === -1) {
+        parts[0] = ["2d20kl"];
+        flav = `${title} (Disadvantage)`;
+      }
+
+      // Don't include situational bonus unless it is defined
+      if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
+
+      // Execute the roll and send it to chat
+      let roll = new Roll(parts.join("+"), data).roll();
+      roll.toMessage({
+        alias: alias,
+        flavor: flav,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
+    };
+
+    // Modify the roll and handle fast-forwarding
+    let adv = 0;
+    parts = ["1d20"].concat(parts);
+    if ( event.shiftKey ) return roll();
+    else if ( event.altKey ) {
+      adv = 1;
+      return roll();
+    }
+    else if ( event.ctrlKey || event.metaKey ) {
+      adv = -1;
+      return roll();
+    } else parts = parts.concat(["@bonus"]);
+
+    // Render modal dialog
+    template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    renderTemplate(template, {formula: parts.join(" + "), data: data}).then(dlg => {
+      new Dialog({
+          title: title,
+          content: dlg,
+          buttons: {
+            advantage: {
+              label: "Advantage",
+              callback: () => adv = 1
+            },
+            normal: {
+              label: "Normal",
+            },
+            disadvantage: {
+              label: "Disadvantage",
+              callback: () => adv = -1
+            }
+          },
+          default: "normal",
+          close: html => {
+            if ( onClose ) onClose(html, parts, data);
+            data['bonus'] = html.find('[name="bonus"]').val();
+            roll()
+          }
+        }, dialogOptions).render(true);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A standardized helper function for managing core 5e "d20 rolls"
+   *
+   * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
+   * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
+   *
+   * @param {Event} event           The triggering event which initiated the roll
+   * @param {Array} parts           The dice roll component parts, excluding the initial d20
+   * @param {Object} data           Actor or item data against which to parse the roll
+   * @param {String} template       The HTML template used to render the roll dialog
+   * @param {String} title          The dice roll UI window title
+   * @param {String} alias          The alias with which to post to chat
+   * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
+   * @param {Boolean} critical      Allow critical hits to be chosen
+   * @param {Boolean} situational   Allow for an arbitrary situational bonus field
+   * @param {Boolean} fastForward   Allow fast-forward advantage selection
+   * @param {Function} onClose      Callback for actions to take when the dialog form is closed
+   * @param {Object} dialogOptions  Modal dialog options
+   */
+  static damageRoll({event, parts, data, template, title, alias, flavor, critical=true, situational=true,
+                     fastForward=true, onClose, dialogOptions}) {
+
+    // Inner roll function
+    let roll = () => {
+      let roll = new Roll(parts.join("+"), data),
+          flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
+      if ( crit ) {
+        roll.alter(0, 2);
+        flav = `${title} (Critical)`;
+      }
+
+      // Execute the roll and send it to chat
+      roll.toMessage({
+        alias: alias,
+        flavor: flav
+      });
+    };
+
+    // Modify the roll and handle fast-forwarding
+    let crit = 0;
+    if ( event.shiftKey || event.ctrlKey || event.metaKey )  return roll();
+    else if ( event.altKey ) {
+      crit = 1;
+      return roll();
+    }
+    else parts = parts.concat(["@bonus"]);
+
+    // Render modal dialog
+    template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    renderTemplate(template, {formula: parts.join(" + "), data: data}).then(dlg => {
+      new Dialog({
+          title: title,
+          content: dlg,
+          buttons: {
+            critical: {
+              label: "Critical Hit",
+              callback: () => critical = true
+            },
+            normal: {
+              label: "Normal",
+            },
+          },
+          default: "normal",
+          close: html => {
+            if ( onClose ) onClose(html, parts, data);
+            data['bonus'] = html.find('[name="bonus"]').val();
+            roll()
+          }
+        }, dialogOptions).render(true);
+    });
+  }
+}
 /**
  * Activate certain behaviors on FVTT ready hook
  */
@@ -870,6 +1036,9 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare chat card data for items of the "Feat" type
+   */
   featChatData() {
     const data = duplicate(this.data.data);
 
@@ -882,6 +1051,7 @@ class Item5e extends Item {
     const props = [
       data.requirements.value,
       data.target.value,
+      data.range.value,
       data.time.value,
       data.duration.value
     ];
@@ -893,89 +1063,32 @@ class Item5e extends Item {
 
   /**
    * Roll a Weapon Attack
-   * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
-   * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
    */
-  rollWeaponAttack(ev) {
+  rollWeaponAttack(event) {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Prepare roll data
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
-        parts = ["1d20", "@hit", "@mod", "@prof", "@bonus"],
-        adv = 0,
+        parts = ["@item.bonus.value", `@abilities.${abl}.mod`, "@attributes.prof.value"],
         title = `${this.name} - Attack Roll`;
-    mergeObject(rollData, {
-      hit: itemData.bonus.value,
-      mod: rollData.abilities[abl].mod,
-      prof: Number(itemData.proficient.value) * rollData.attributes.prof.value
-    });
+    rollData.item = itemData;
+    if ( !itemData.proficient.value ) parts.pop();
 
-    // Define roll function
-    let roll = () => {
-      let flavor;
-      if ( adv === 1 ) {
-        parts[0] = "2d20kh";
-        flavor = `${title} (Advantage)`;
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      alias: this.actor.name,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
       }
-      else if ( adv === -1 ) {
-        parts[0] = "2d20kl";
-        flavor = `${title} (Disadvantage)`;
-      } else {
-        parts[0] = "1d20";
-        flavor = title;
-      }
-
-      // Don't include situational bonus unless it is defined
-      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
-
-      // Execute the roll and send it to chat
-      let roll = new Roll(parts.join("+"), rollData).roll();
-      roll.toMessage({
-        alias: this.actor.name,
-        flavor: flavor,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
-      });
-    };
-
-    // Fast-forward rolls
-    if ( ev.shiftKey ) return roll();
-    else if ( ev.altKey ) {
-      adv = 1;
-      return roll();
-    }
-    else if ( ev.ctrlKey || ev.metaKey ) {
-      adv = -1;
-      return roll();
-    }
-
-    // Render modal dialog
-    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
-      new Dialog({
-        title: title,
-        content: dlg,
-        buttons: {
-          advantage: {
-            label: "Advantage",
-            callback: () => adv = 1
-          },
-          normal: {
-            label: "Normal",
-          },
-          disadvantage: {
-            label: "Disadvantage",
-            callback: () => adv = -1
-          }
-        },
-        default: "normal",
-        close: html => {
-          rollData['bonus'] = html.find('[name="bonus"]').val();
-          roll();
-        }
-      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
     });
   }
 
@@ -983,67 +1096,31 @@ class Item5e extends Item {
 
   /**
    * Roll Weapon Damage
-   * Holding SHIFT when the attack is rolled will "fast-forward".
-   * This chooses the default options of a normal damage roll with no bonus damage
+   * Rely upon the Dice5e.damageRoll logic for the core implementation
    */
-  rollWeaponDamage(ev, alternate=false) {
+  rollWeaponDamage(event, alternate=false) {
     if ( this.type !== "weapon" ) throw "Wrong item type!";
 
     // Get data
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
-        parts = [alternate ? itemData.damage2.value : itemData.damage.value, "@mod", "@bonus"],
-        critical = false,
+        parts = [alternate ? itemData.damage2.value : itemData.damage.value, `@abilities.${abl}.mod`],
         title = `${this.name} - Damage Roll`;
-    mergeObject(rollData, { mod: rollData.abilities[abl].mod, bonus: null });
+    rollData.item = itemData;
 
-    // Define roll function
-    let roll = () => {
-      let flavor = title;
-
-      // Don't include situational bonus unless it is defined
-      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
-
-      // Roll and alter critical hits
-      let roll = new Roll(parts.join("+"), rollData);
-      if ( critical ) {
-        roll.alter(0, 2);
-        flavor = `${title} (Critical)`;
+    // Call the roll helper utility
+    Dice5e.damageRoll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      alias: this.actor.name,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
       }
-
-      // Dispatch the roll
-      roll.toMessage({ alias: this.actor.name, flavor: flavor});
-    };
-
-    // Fast-forward rolls
-    if ( ev.shiftKey || ev.ctrlKey || ev.metaKey )  return roll();
-    else if ( ev.altKey ) {
-      critical = true;
-      return roll();
-    }
-
-    // Render modal dialog
-    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
-      new Dialog({
-        title: title,
-        content: dlg,
-        buttons: {
-          advantage: {
-            label: "Critical Hit",
-            callback: () => critical = true
-          },
-          normal: {
-            label: "Normal",
-          },
-        },
-        default: "normal",
-        close: html => {
-          rollData['bonus'] = html.find('[name="bonus"]').val();
-          roll();
-        }
-      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
     });
   }
 
@@ -1051,89 +1128,30 @@ class Item5e extends Item {
 
   /**
    * Roll Spell Damage
-   * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
-   * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
    */
-  rollSpellAttack(ev) {
+  rollSpellAttack(event) {
     if ( this.type !== "spell" ) throw "Wrong item type!";
 
     // Prepare roll data
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
-        parts = ["1d20", "@mod", "@prof", "@bonus"],
-        adv = 0,
+        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
         title = `${this.name} - Spell Attack Roll`;
-    mergeObject(rollData, {
-      mod: rollData.abilities[abl].mod,
-      prof: rollData.attributes.prof.value,
-      bonus: null
-    });
 
-    // Define roll function
-    let roll = () => {
-      let flavor;
-      if ( adv === 1 ) {
-        parts[0] = "2d20kh";
-        flavor = `${title} (Advantage)`;
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      alias: this.actor.name,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
       }
-      else if ( adv === -1 ) {
-        parts[0] = "2d20kl";
-        flavor = `${title} (Disadvantage)`;
-      } else {
-        parts[0] = "1d20";
-        flavor = title;
-      }
-
-      // Don't include situational bonus unless it is defined
-      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
-
-      // Execute the roll and send it to chat
-      let roll = new Roll(parts.join("+"), rollData).roll();
-      roll.toMessage({
-        alias: this.actor.name,
-        flavor: flavor,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
-      });
-    };
-
-    // Fast-forward rolls
-    if ( ev.shiftKey ) return roll();
-    else if ( ev.altKey ) {
-      adv = 1;
-      return roll();
-    }
-    else if ( ev.ctrlKey || ev.metaKey ) {
-      adv = -1;
-      return roll();
-    }
-
-    // Render modal dialog
-    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
-      new Dialog({
-        title: title,
-        content: dlg,
-        buttons: {
-          advantage: {
-            label: "Advantage",
-            callback: () => adv = 1
-          },
-          normal: {
-            label: "Normal",
-          },
-          disadvantage: {
-            label: "Disadvantage",
-            callback: () => adv = -1
-          }
-        },
-        default: "normal",
-        close: html => {
-          rollData['bonus'] = html.find('[name="bonus"]').val();
-          roll();
-        }
-      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
     });
   }
 
@@ -1141,67 +1159,32 @@ class Item5e extends Item {
 
   /**
    * Roll Spell Damage
-   * Holding SHIFT when the attack is rolled will "fast-forward".
-   * This chooses the default options of a normal damage roll with no bonus damage
+   * Rely upon the Dice5e.damageRoll logic for the core implementation
    */
-  rollSpellDamage(ev) {
+  rollSpellDamage(event) {
     if ( this.type !== "spell" ) throw "Wrong item type!";
 
     // Get data
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
-        parts = [itemData.damage.value, "@bonus"],
-        critical = false,
+        abl = itemData.ability.value || "str",
+        parts = [itemData.damage.value],
         title = `${this.name} - Damage Roll`;
-    mergeObject(rollData, { mod: rollData.abilities[abl].mod, bonus: null });
+    rollData["mod"] = rollData.abilities[abl].mod;
+    rollData.item = itemData;
 
-    // Define roll function
-    let roll = () => {
-      let flavor = title;
-
-      // Don't include situational bonus unless it is defined
-      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
-
-      // Roll and alter critical hits
-      let roll = new Roll(parts.join("+"), rollData);
-      if ( critical ) {
-        roll.alter(0, 2);
-        flavor = `${title} (Critical)`;
+    // Call the roll helper utility
+    Dice5e.damageRoll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      alias: this.actor.name,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
       }
-
-      // Dispatch the roll
-      roll.toMessage({ alias: this.actor.name, flavor: flavor});
-    };
-
-    // Fast-forward rolls
-    if ( ev.shiftKey || ev.ctrlKey || ev.metaKey )  return roll();
-    else if ( ev.altKey ) {
-      critical = true;
-      return roll();
-    }
-
-    // Render modal dialog
-    let template = "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    renderTemplate(template, {formula: parts.join(" + ")}).then(dlg => {
-      new Dialog({
-        title: title,
-        content: dlg,
-        buttons: {
-          advantage: {
-            label: "Critical Hit",
-            callback: () => critical = true
-          },
-          normal: {
-            label: "Normal",
-          },
-        },
-        default: "normal",
-        close: html => {
-          rollData['bonus'] = html.find('[name="bonus"]').val();
-          roll();
-        }
-      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
     });
   }
 
@@ -1257,88 +1240,111 @@ class Item5e extends Item {
 
   /**
    * Roll a Tool Check
-   * Holding SHIFT when the attack is rolled will "fast-forward".
-   * This chooses the default options with no advantage and no bonus
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
    */
-  rollToolCheck(ev) {
+  rollToolCheck(event) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
 
     // Prepare roll data
     let rollData = duplicate(this.actor.data.data),
       abl = this.data.data.ability.value || "int",
       ability = rollData.abilities[abl],
-      prof = rollData.attributes.prof.value * (this.data.data.proficient.value || 0),
-      parts = ["1d20", "@mod", "@prof", "@bonus"],
-      adv = 0,
+      parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
       title = `${this.name} - Tool Check`;
-    mergeObject(rollData, {mod: ability.mod, prof: prof, bonus: null});
+    rollData["ability"] = abl;
+    if ( !this.data.data.proficient.value ) parts.pop();
 
-    // Define roll function
-    let roll = () => {
-      let flavor;
-      if ( adv === 1 ) {
-        parts[0] = "2d20kh";
-        flavor = `${title} (Advantage)`;
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
+      title: title,
+      alias: this.actor.name,
+      flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710,
+      },
+      onClose: (html, parts, data) => {
+        abl = html.find('[name="ability"]').val();
+        data.ability = abl;
+        parts[1] = `@abilities.${abl}.mod`;
       }
-      else if ( adv === -1 ) {
-        parts[0] = "2d20kl";
-        flavor = `${title} (Disadvantage)`;
-      } else {
-        parts[0] = "1d20";
-        flavor = title;
-      }
-
-      // Don't include situational bonus unless it is defined
-      if ( !rollData.bonus && parts.indexOf("@bonus") !== -1 ) parts.pop();
-
-      // Execute the roll and send it to chat
-      let roll = new Roll(parts.join("+"), rollData).roll();
+    }).then(roll => {
       roll.toMessage({
-        alias: this.actor.name,
+        alias: alias,
         flavor: flavor,
         highlightSuccess: roll.parts[0].total === 20,
         highlightFailure: roll.parts[0].total === 1
       });
-    };
+    });
+  }
 
-    // Fast-forward rolls
-    if ( ev.shiftKey ) return roll();
-    else if ( ev.altKey ) {
-      adv = 1;
-      return roll();
-    }
-    else if ( ev.ctrlKey || ev.metaKey ) {
-      adv = -1;
-      return roll();
-    }
+  /* -------------------------------------------- */
 
-    // Render modal dialog
-    let template = "public/systems/dnd5e/templates/chat/tool-roll-dialog.html";
-    renderTemplate(template, { formula: parts.join(" + "), ability: abl, abilities: rollData.abilities}).then(dlg => {
-      new Dialog({
-        title: title,
-        content: dlg,
-        buttons: {
-          advantage: {
-            label: "Advantage",
-            callback: () => adv = 1
-          },
-          normal: {
-            label: "Normal",
-          },
-          disadvantage: {
-            label: "Disadvantage",
-            callback: () => adv = -1
-          }
-        },
-        default: "normal",
-        close: html => {
-          ability = rollData.abilities[html.find('[name="ability"]').val()];
-          title = `${this.name} - ${ability.label} Check`;
-          mergeObject(rollData, {bonus: html.find('[name="bonus"]').val(), mod: ability.mod});
-          roll();
-        }
-      }, { width: 400, top: ev.clientY - 80, left: window.innerWidth - 710 }).render(true);
+  /**
+   * Roll a Feat Attack
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   */
+  rollFeatAttack(event) {
+    if ( this.type !== "feat" ) throw "Wrong item type!";
+
+    // Prepare roll data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
+        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
+        title = `${this.name} - Attack Roll`;
+    rollData.item = itemData;
+
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      alias: this.actor.name,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll Feat Damage
+   * Rely upon the Dice5e.damageRoll logic for the core implementation
+   */
+  rollFeatDamage(event) {
+    if ( this.type !== "feat" ) throw "Wrong item type!";
+
+    // Get data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
+        parts = [itemData.damage.value],
+        title = `${this.name} - Damage Roll`;
+    rollData["mod"] = rollData.abilities[abl].mod;
+    rollData.item = itemData;
+
+    // Call the roll helper utility
+    Dice5e.damageRoll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      alias: this.actor.name,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
     });
   }
 
@@ -1378,6 +1384,10 @@ class Item5e extends Item {
       // Spell actions
       else if ( action === "spellAttack" ) item.rollSpellAttack(ev);
       else if ( action === "spellDamage" ) item.rollSpellDamage(ev);
+
+      // Feat actions
+      else if ( action === "featAttack" ) item.rollFeatAttack(ev);
+      else if ( action === "featDamage" ) item.rollFeatDamage(ev);
 
       // Consumable usage
       else if ( action === "consume" ) item.rollConsumable(ev);
@@ -1689,6 +1699,6 @@ CONFIG.spellLevels = {
 // Feat Types
 CONFIG.featTypes = {
   "passive": "Passive Ability",
-  "attack": "Special Attack",
-  "ability": "Active Ability"
+  "attack": "Ability Attack",
+  "ability": "Generic Action"
 };

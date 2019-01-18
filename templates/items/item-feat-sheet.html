@@ -38,6 +38,18 @@
         </div>
 
         <div class="form-group">
+            <label>{{data.ability.label}}</label>
+            <select name="data.ability.value" data-dtype="{{data.ability.type}}">
+                {{#select data.ability.value}}
+                <option value=""></option>
+                {{#each abilities as |ability a|}}
+                <option value="{{a}}">{{ability.label}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+
+        <div class="form-group">
             <label>{{data.damage.label}}</label>
             <input type="text" name="data.damage.value" value="{{data.damage.value}}" data-dtype="{{data.damage.type}}"/>
         </div>
