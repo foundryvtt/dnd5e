@@ -148,7 +148,7 @@ class Dice5e {
           buttons: {
             critical: {
               label: "Critical Hit",
-              callback: () => critical = true
+              callback: () => crit = 1
             },
             normal: {
               label: "Normal",
