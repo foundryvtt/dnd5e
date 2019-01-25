@@ -133,7 +133,15 @@
             {{#each actor.features as |section sid|}}
                 <li class="item inventory-header">
                     <h3 class="item-name">{{section.label}}</h3>
+                    {{#if ../owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create Item" data-item-type="{{section.type}}">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
+                    {{/if}}
                 </li>
+
                 {{#each section.items as |item iid|}}
                 <li class="item" data-item-id="{{item.id}}">
                     <div class="item-name">
