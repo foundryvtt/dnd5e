@@ -873,7 +873,7 @@ class Actor5eSheet extends ActorSheet {
     html.find('.npc-roll-hp').click(ev => {
       let ad = this.actor.data.data;
       let hp = new Roll(ad.attributes.hp.formula).roll().total;
-      Audio.play({src: CONFIG.sounds.dice, volume: 0.8});
+      AudioHelper.play({src: CONFIG.sounds.dice, volume: 0.8});
       this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp}, true);
     });
 
