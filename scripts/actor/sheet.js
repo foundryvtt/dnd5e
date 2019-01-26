@@ -261,28 +261,6 @@ class Actor5eSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
-    // Activate TinyMCE Editors
-    html.find(".editor a.editor-edit").click(ev => {
-      let button = $(ev.currentTarget),
-        editor = button.siblings(".editor-content");
-      let mce = createEditor({
-        target: editor[0],
-        height: editor.parent().height() - 40,
-        save_enablewhendirty: true,
-        save_onsavecallback: ed => {
-          let target = editor.attr("data-edit");
-          this.actor.update({[target]: ed.getContent()}, true);
-          this.mce = null;
-          ed.remove();
-          ed.destroy();
-        }
-      }).then(ed => {
-        this.mce = ed[0];
-        button.hide();
-        ed[0].focus();
-      });
-    });
-
     /* -------------------------------------------- */
     /*  Abilities and Skills
      /* -------------------------------------------- */
@@ -387,31 +365,27 @@ class Actor5eSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Customize form submission for 5e actor sheets to save the content of any active MCE editor
+   * This method is called upon form submission after form data is validated
+   * @param event {Event}       The initial triggering submission event
+   * @param formData {Object}   The object of validated form data with which to update the object
    * @private
    */
-  _onSubmit(event) {
+  _updateObject(event, formData) {
 
-    // Save or discard biography content
-    let bio = this.element.find('[data-edit="data.details.biography.value"]');
-    if ( this.mce ) {
-      const content = this.mce.getContent();
-      bio.html(content);
-    } else bio.removeAttr("data-edit");
-
-    // NPC Challenge Rating
+    // Format NPC Challenge Rating
     if (this.actor.data.type === "npc") {
-      let form = $(event.currentTarget),
-        cr = form.find('.level input'),
+        let cr = this.form.find('.level input'),
         val = cr.val(),
         crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
       cr.val(crs[val] || val);
     }
 
-    // Parent ActorSheet submission steps
-    super._onSubmit(event);
+    // Parent ActorSheet update steps
+    super._updateObject(event, formData);
   }
 
+  /* -------------------------------------------- */
+  /*  Drag and Drop                               */
   /* -------------------------------------------- */
 
   _onDragItemStart(event) {
