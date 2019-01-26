@@ -10,11 +10,8 @@
     </nav>
 
     <!-- Ability Description -->
-    <div class="tab editor active" data-tab="description">
-        <div class="editor-content" data-edit="data.description.value">
-           {{{data.description.value}}}
-        </div>
-        <a class="editor-edit"><i class="fas fa-edit"></i></a>
+    <div class="tab active" data-tab="description">
+        {{editor content=data.description.value target="data.description.value" button=true}}
     </div>
 
     <!-- Ability Details -->
@@ -97,8 +94,5 @@
             <label>{{data.duration.label}}</label>
             <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="{{data.duration.type}}"/>
         </div>
-
     </div>
-
-    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>
 </form>

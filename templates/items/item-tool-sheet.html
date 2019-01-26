@@ -24,11 +24,8 @@
         <a class="item" data-tab="details">Details</a>
     </nav>
 
-    <div class="tab editor active" data-tab="description">
-        <div class="editor-content" data-edit="data.description.value">
-           {{{data.description.value}}}
-        </div>
-        <a class="editor-edit"><i class="fas fa-edit"></i></a>
+    <div class="tab active" data-tab="description">
+        {{editor content=data.description.value target="data.description.value" button=true}}
     </div>
 
     <div class="tab" data-tab="details">
@@ -54,6 +51,4 @@
              </select>
         </div>
     </div>
-
-    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> Save Changes</button>
 </form>

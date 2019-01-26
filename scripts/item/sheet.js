@@ -51,87 +51,8 @@ class Item5eSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-	  // Activate TinyMCE Editors
-	  html.find(".editor a.editor-edit").click(ev => {
-	    let button = $(ev.currentTarget),
-	        editor = button.siblings(".editor-content");
-	    createEditor({
-        target: editor[0],
-        height: editor.parent().height() - 40,
-        save_enablewhendirty: true,
-        save_onsavecallback: ed => this._onSaveMCE(ed, editor.attr("data-edit"))
-      }).then(ed => {
-        this.mce = ed[0];
-        button.hide();
-        this.mce.focus();
-      });
-    });
-
     // Activate tabs
     html.find('.tabs').each((_, el) => new Tabs(el));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Customize sheet closing behavior to ensure we clean up the MCE editor
-   */
-  close() {
-    super.close();
-    if ( this.mce ) this.mce.destroy();
-  }
-
-  /* -------------------------------------------- */
-  /*  Saving and Submission                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Extend the default Item Sheet submission logic to save the content of any active MCE editor
-   * @private
-   */
-  _onSubmit(ev) {
-
-    // Save or discard item description content
-    let desc = this.element.find('[data-edit="data.description.value"]');
-    if ( this.mce ) {
-      const content = this.mce.getContent();
-      desc.html(content);
-    } else desc.removeAttr("data-edit");
-
-    // Parent ItemSheet submission steps
-    super._onSubmit(ev);
-  };
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle using the Save button on the MCE editor
-   * @private
-   */
-  _onSaveMCE(ed, target) {
-    const form = this.element.find('.item-sheet')[0];
-    const itemData = validateForm(form);
-    itemData[target] = ed.getContent();
-
-    // Update owned items
-    if (this.item.isOwned) {
-      itemData.id = this.item.data.id;
-      this.item.actor.updateOwnedItem(itemData, true).then(item => {
-        this.item = item;
-        this.render(false);
-      });
-    }
-
-    // Update unowned items
-    else {
-      this.item.update(itemData, true);
-      this.render(false);
-    }
-
-    // Destroy the editor
-    this.mce = null;
-    ed.remove();
-    ed.destroy();
   }
 }
 

@@ -239,10 +239,7 @@
 
         <!-- BIOGRAPHY -->
         <div class="tab biography active editor" data-tab="biography">
-            <div class="editor-content" data-edit="data.details.biography.value">
-               {{{data.details.biography.value}}}
-            </div>
-            <a class="editor-edit"><i class="fas fa-edit"></i></a>
+            {{editor content=data.details.biography.value target="data.details.biography.value" button=true}}
         </div>
     </section>
 
