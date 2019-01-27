@@ -110,8 +110,7 @@
   flex: 1;
 }
 .dnd5e.sheet form .sheet-sidebar img.sheet-profile {
-  width: 220px;
-  height: 220px;
+  flex: 0 0 220px;
   border: none;
   border-bottom: 1px solid #CCC;
 }
@@ -410,10 +409,9 @@
 /* ----------------------------------------- */
 /* Biography Tab
 /* ----------------------------------------- */
-.dnd5e.actor-sheet .biography .editor-content {
-  height: 100%;
+.dnd5e.actor-sheet .biography .editor {
+  height: 380px;
   padding: 0 8px;
-  overflow-y: scroll;
 }
 /* ----------------------------------------- */
 /* Abilities Sidebar Tab
