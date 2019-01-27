@@ -937,7 +937,7 @@ class Item5e extends Item {
         user: game.user._id,
         alias: this.actor.name,
         content: html
-      }, true);
+      }, {displaySheet: false});
     });
   }
 
