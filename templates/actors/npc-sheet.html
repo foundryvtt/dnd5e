@@ -121,14 +121,14 @@
             </div>
         </div>
 
-        <nav class="sheet-tabs tabs" data-tab-container="primary">
+        <nav class="sheet-tabs tabs" data-group="primary">
             <a class="item" data-tab="features">Features</a>
             <a class="item" data-tab="spellbook">Spellbook</a>
             <a class="item active" data-tab="biography">Biography</a>
         </nav>
 
         <!-- FEATURES -->
-        <div class="tab features" data-tab="features">
+        <div class="tab features" data-group="primary" data-tab="features">
             <ol class="inventory-list directory-list">
             {{#each actor.features as |section sid|}}
                 <li class="item inventory-header">
@@ -161,7 +161,7 @@
         </div>
 
         <!-- SPELLBOOK -->
-        <div class="tab spellbook" data-tab="spellbook">
+        <div class="tab spellbook" data-group="primary" data-tab="spellbook">
             <div class="form-group spellcasting-ability">
                 <label><h3>Spellcasting Ability</h3></label>
                 <select name="data.attributes.spellcasting.value" data-type="String">
@@ -238,7 +238,7 @@
        </div>
 
         <!-- BIOGRAPHY -->
-        <div class="tab biography active" data-tab="biography">
+        <div class="tab biography" data-group="primary" data-tab="biography">
             {{editor content=data.details.biography.value target="data.details.biography.value" button=true}}
         </div>
     </section>
@@ -247,14 +247,14 @@
     <section class="sheet-sidebar">
         <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="220" width="220" data-edit="img"/>
 
-        <nav class="sheet-tabs tabs" data-tab-container="sidebar">
+        <nav class="sheet-tabs tabs" data-group="sidebar">
             <a class="item active" data-tab="abilities">Abilities</a>
             <a class="item" data-tab="skills">Skills</a>
             <a class="item" data-tab="traits">Traits</a>
         </nav>
 
         <!-- ABILITY SCORES -->
-        <div class="tab abilities active" data-tab="abilities">
+        <div class="tab abilities" data-group="sidebar" data-tab="abilities">
             <ol class="abilities-list directory-list">
             {{#each data.abilities as |ability id|}}
                 <li class="ability" data-ability="{{id}}">
@@ -272,7 +272,7 @@
         </div>
 
         <!-- SKILLS -->
-        <div class="tab skills active" data-tab="skills">
+        <div class="tab skills" data-group="sidebar" data-tab="skills">
             <ol class="directory-list">
             {{#each data.skills as |skill s|}}
                 <li class="skill" data-skill="{{s}}">
@@ -287,7 +287,7 @@
         </div>
 
         <!-- TRAITS -->
-        <div class="tab traits active" data-tab="traits">
+        <div class="tab traits" data-group="sidebar" data-tab="traits">
 
             <div class="form-group-stacked">
                 <label>{{data.traits.perception.label}}</label>

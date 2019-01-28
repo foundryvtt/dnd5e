@@ -52,7 +52,7 @@ class Item5eSheet extends ItemSheet {
     super.activateListeners(html);
 
     // Activate tabs
-    html.find('.tabs').each((_, el) => new Tabs(el));
+    new Tabs(html.find(".tabs"));
   }
 }
 
