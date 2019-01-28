@@ -755,9 +755,11 @@ class Actor5eSheet extends ActorSheet {
     // Activate tabs
     html.find('.tabs').each((_, el) => {
       let tabs = $(el),
-        initial = this.actor.data.flags["_sheetTab-" + tabs.attr("data-tab-container")];
-      new Tabs(tabs, initial, clicked => {
-        this.actor.data.flags["_sheetTab-" + clicked.parent().attr("data-tab-container")] = clicked.attr("data-tab");
+        group = el.getAttribute("data-group"),
+        initial = this.actor.data.flags[`_sheetTab-${group}`];
+      new Tabs(tabs, {
+        initial: initial,
+        callback: clicked => this.actor.data.flags[`_sheetTab-${group}`] = clicked.attr("data-tab")
       });
     });
 
@@ -877,10 +879,10 @@ class Actor5eSheet extends ActorSheet {
 
     // Format NPC Challenge Rating
     if (this.actor.data.type === "npc") {
-        let cr = this.form.find('.level input'),
-        val = cr.val(),
-        crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-      cr.val(crs[val] || val);
+      let cr = this.form["data.details.cr.value"],
+      val = cr.value,
+      crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+      cr.value = crs[val] || val;
     }
 
     // Parent ActorSheet update steps
@@ -1484,7 +1486,7 @@ class Item5eSheet extends ItemSheet {
     super.activateListeners(html);
 
     // Activate tabs
-    html.find('.tabs').each((_, el) => new Tabs(el));
+    new Tabs(html.find(".tabs"));
   }
 }
 
