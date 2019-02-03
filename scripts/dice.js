@@ -24,6 +24,7 @@ class Dice5e {
                   highlight=true, fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
+    let rollMode = "roll";
     let roll = () => {
       let flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if (adv === 1) {
@@ -43,6 +44,7 @@ class Dice5e {
       roll.toMessage({
         alias: alias,
         flavor: flav,
+        rollMode: rollMode,
         highlightSuccess: roll.parts[0].total === 20,
         highlightFailure: roll.parts[0].total === 1
       });
@@ -63,7 +65,12 @@ class Dice5e {
 
     // Render modal dialog
     template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    renderTemplate(template, {formula: parts.join(" + "), data: data}).then(dlg => {
+    let dialogData = {
+      formula: parts.join(" + "),
+      data: data,
+      rollModes: CONFIG.rollModes
+    };
+    renderTemplate(template, dialogData).then(dlg => {
       new Dialog({
           title: title,
           content: dlg,
@@ -83,6 +90,7 @@ class Dice5e {
           default: "normal",
           close: html => {
             if ( onClose ) onClose(html, parts, data);
+            rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
             roll()
           }
