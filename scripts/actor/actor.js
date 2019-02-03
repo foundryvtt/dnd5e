@@ -99,23 +99,6 @@ class Actor5e extends Actor {
   /*  Rolls                                       */
   /* -------------------------------------------- */
 
-  get _skillSaveRollModalHTML() {
-    return `
-    <form>
-        <div class="form-group">
-            <label>Formula</label>
-            <input type="text" name="formula" value="1d20 + @mod + @bonus" disabled/>
-        </div>
-        <div class="form-group">
-            <label>Situational Bonus?</label>
-            <input type="text" name="bonus" value="" placeholder="e.g. +1d4"/>
-        </div>
-    </form>
-    `;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
@@ -123,44 +106,17 @@ class Actor5e extends Actor {
    */
   rollSkill(skillName) {
     let skl = this.data.data.skills[skillName],
-      abl = this.data.data.abilities[skl.ability],
-      parts = ["1d20", "@mod", "@bonus"],
+      parts = ["@mod"],
       flavor = `${skl.label} Skill Check`;
 
-    // Create a dialog
-    new Dialog({
-      title: `${skl.label} (${abl.label}) Skill Check`,
-      content: this._skillSaveRollModalHTML,
-      buttons: {
-        advantage: {
-          label: "Advantage",
-          callback: () => {
-            parts[0] = "2d20kh";
-            flavor += " (Advantage)"
-          }
-        },
-        normal: {
-          label: "Normal",
-        },
-        disadvantage: {
-          label: "Disadvantage",
-          callback: () => {
-            parts[0] = "2d20kl";
-            flavor += " (Disadvantage)"
-          }
-        }
-      },
-      close: html => {
-        let bonus = html.find('[name="bonus"]').val(),
-            roll = new Roll(parts.join(" + "), {mod: skl.mod, bonus: bonus}).roll();
-        roll.toMessage({
-          alias: this.name,
-          flavor: flavor,
-          highlightSuccess: roll.parts[0].total === 20,
-          highlightFailure: roll.parts[0].total === 1
-        });
-      }
-    }).render(true);
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: {mod: skl.mod},
+      title: flavor,
+      alias: this.actor,
+    });
   }
 
   /* -------------------------------------------- */
@@ -197,43 +153,17 @@ class Actor5e extends Actor {
    */
   rollAbilityTest(abilityId) {
     let abl = this.data.data.abilities[abilityId],
-        parts = ["1d20", "@mod", "@bonus"],
+        parts = ["@mod"],
         flavor = `${abl.label} Ability Test`;
 
-    // Create a dialog
-    new Dialog({
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: {mod: abl.mod},
       title: flavor,
-      content: this._skillSaveRollModalHTML,
-      buttons: {
-        advantage: {
-          label: "Advantage",
-          callback: () => {
-            parts[0] = "2d20kh";
-            flavor += " (Advantage)"
-          }
-        },
-        normal: {
-          label: "Normal",
-        },
-        disadvantage: {
-          label: "Disadvantage",
-          callback: () => {
-            parts[0] = "2d20kl";
-            flavor += " (Disadvantage)"
-          }
-        }
-      },
-      close: html => {
-        let bonus = html.find('[name="bonus"]').val(),
-            roll = new Roll(parts.join(" + "), {mod: abl.mod, bonus: bonus}).roll();
-        roll.toMessage({
-          alias: this.name,
-          flavor: flavor,
-          highlightSuccess: roll.parts[0].total === 20,
-          highlightFailure: roll.parts[0].total === 1
-        });
-      }
-    }).render(true);
+      alias: this.actor,
+    });
   }
 
   /* -------------------------------------------- */
