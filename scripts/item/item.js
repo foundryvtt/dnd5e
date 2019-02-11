@@ -52,8 +52,9 @@ class Item5e extends Item {
 
   toolChatData() {
     const data = duplicate(this.data.data);
-    let abl = this.actor.data.data.abilities[data.ability.value].label;
-    const properties = [abl, data.proficient.value ? "Proficient" : null];
+    let abl = this.actor.data.data.abilities[data.ability.value].label,
+        prof = data.proficient.value || 0;
+    const properties = [abl, CONFIG.proficiencyLevels[prof]];
     data.properties = properties.filter(p => p !== null);
     return data;
   }
@@ -70,6 +71,7 @@ class Item5e extends Item {
     const data = duplicate(this.data.data);
     data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
     data.isSave = data.spellType.value === "save";
+    data.damageLabel = data.spellType.value === "heal" ? "Healing" : "Damage";
     data.isAttack = data.spellType.value === "attack";
     const props = [
       CONFIG.spellSchools[data.school.value],
@@ -220,7 +222,7 @@ class Item5e extends Item {
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
         parts = [itemData.damage.value],
-        title = `${this.name} - Damage Roll`;
+        title = this.name + (itemData.spellType.value === "heal" ? " - Healing Amount" : " - Damage Roll");
     rollData["mod"] = rollData.abilities[abl].mod;
     rollData.item = itemData;
 
@@ -300,10 +302,10 @@ class Item5e extends Item {
     let rollData = duplicate(this.actor.data.data),
       abl = this.data.data.ability.value || "int",
       ability = rollData.abilities[abl],
-      parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
+      parts = [`@abilities.${abl}.mod`, "@proficiency"],
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
-    if ( !this.data.data.proficient.value ) parts.pop();
+    rollData["proficiency"] = (this.data.data.proficient.value || 0) * rollData.attributes.prof.value;
 
     // Call the roll helper utility
     Dice5e.d20Roll({

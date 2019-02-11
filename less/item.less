@@ -6,10 +6,15 @@
 
 
 .dnd5e.item-sheet {
+  .item-details,
+  .sheet-tabs {
+    flex: 0 0 30px;
+    padding: 5px 0;
+    margin: 0;
+  }
+
   .item-details {
     list-style: none;
-    margin: 5px 0;
-    padding: 0;
     .flexrow();
     justify-content: space-between;
 
@@ -32,7 +37,6 @@
   }
 
   .sheet-tabs {
-    padding: 5px 0;
     border-top: 1px solid #CCC;
     border-bottom: 1px solid #CCC;
     font-size: 14px;
@@ -44,6 +48,5 @@
 
   .editor {
     height: 300px;
-    overflow-y: scroll;
   }
 }
