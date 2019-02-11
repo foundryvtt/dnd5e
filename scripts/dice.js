@@ -136,6 +136,9 @@ class Dice5e {
         alias: alias,
         flavor: flav
       });
+
+      // Return the Roll object
+      return roll;
     };
 
     // Modify the roll and handle fast-forwarding
@@ -147,28 +150,38 @@ class Dice5e {
     }
     else parts = parts.concat(["@bonus"]);
 
-    // Render modal dialog
+    // Construct dialog data
     template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
-    renderTemplate(template, {formula: parts.join(" + "), data: data}).then(dlg => {
-      new Dialog({
+    let dialogData = {
+      formula: parts.join(" + "),
+      data: data,
+      rollModes: CONFIG.rollModes
+    };
+
+    // Render modal dialog
+    return new Promise(resolve => {
+      renderTemplate(template, dialogData).then(dlg => {
+        new Dialog({
           title: title,
           content: dlg,
           buttons: {
             critical: {
+              condition: critical,
               label: "Critical Hit",
               callback: () => crit = 1
             },
             normal: {
-              label: "Normal",
+              label: critical ? "Normal" : "Roll",
             },
           },
           default: "normal",
           close: html => {
-            if ( onClose ) onClose(html, parts, data);
+            if (onClose) onClose(html, parts, data);
             data['bonus'] = html.find('[name="bonus"]').val();
-            roll()
+            resolve(roll());
           }
         }, dialogOptions).render(true);
+      });
     });
   }
 }

@@ -95,7 +95,7 @@
     border-bottom: 1px solid @borderDark;
 
     > .item {
-      line-height: 28px;
+      line-height: 26px;
       padding: 0 10px;
       border-radius: 5px 5px 0 0;
 
@@ -314,10 +314,10 @@
   }
 }
 
-
 /* Status Effects */
 .dnd5e.actor-sheet .statuses {
-  flex: 0 0 27px;
+  flex: 0 0 29px;
+  margin: 0;
   border-bottom: 1px solid @borderLight;
   .flexrow();
 
@@ -325,7 +325,7 @@
     padding: 0 6px;
     border-right: 1px solid @borderLight;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 28px;
     .flexrow();
 
     &.death {
@@ -780,6 +780,23 @@
       font-size: 13px;
       color: #999;
     }
+  }
+}
+
+
+/* ----------------------------------------- */
+/* Rest Buttons
+/* ----------------------------------------- */
+
+#short-rest-hd {
+  label {
+    flex: 0 0 60px;
+    line-height: 24px;
+  }
+
+  #roll-hd {
+    line-height: 24px;
+    margin-left: 6px;
   }
 }
 

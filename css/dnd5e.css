@@ -124,7 +124,7 @@
   border-bottom: 1px solid #666;
 }
 .dnd5e.sheet form .sheet-tabs > .item {
-  line-height: 28px;
+  line-height: 26px;
   padding: 0 10px;
   border-radius: 5px 5px 0 0;
 }
@@ -352,7 +352,8 @@
 }
 /* Status Effects */
 .dnd5e.actor-sheet .statuses {
-  flex: 0 0 27px;
+  flex: 0 0 29px;
+  margin: 0;
   border-bottom: 1px solid #CCC;
   display: flex;
   flex-direction: row;
@@ -366,7 +367,7 @@
   padding: 0 6px;
   border-right: 1px solid #CCC;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 28px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -799,12 +800,27 @@
   color: #999;
 }
 /* ----------------------------------------- */
+/* Rest Buttons
+/* ----------------------------------------- */
+#short-rest-hd label {
+  flex: 0 0 60px;
+  line-height: 24px;
+}
+#short-rest-hd #roll-hd {
+  line-height: 24px;
+  margin-left: 6px;
+}
+/* ----------------------------------------- */
 /*  Item Sheet
 /* ----------------------------------------- */
+.dnd5e.item-sheet .item-details,
+.dnd5e.item-sheet .sheet-tabs {
+  flex: 0 0 30px;
+  padding: 5px 0;
+  margin: 0;
+}
 .dnd5e.item-sheet .item-details {
   list-style: none;
-  margin: 5px 0;
-  padding: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -835,7 +851,6 @@
   text-align: center;
 }
 .dnd5e.item-sheet .sheet-tabs {
-  padding: 5px 0;
   border-top: 1px solid #CCC;
   border-bottom: 1px solid #CCC;
   font-size: 14px;
@@ -846,7 +861,6 @@
 }
 .dnd5e.item-sheet .editor {
   height: 300px;
-  overflow-y: scroll;
 }
 /* ----------------------------------------- */
 /*  Chat Cards
