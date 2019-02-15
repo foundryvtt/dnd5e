@@ -68,11 +68,20 @@ class Item5e extends Item {
   /* -------------------------------------------- */
 
   spellChatData() {
-    const data = duplicate(this.data.data);
-    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+    const data = duplicate(this.data.data),
+          ad = this.actor.data.data;
+
+    // Spell saving throw text and DC
     data.isSave = data.spellType.value === "save";
+    if ( data.ability.value ) data.save.dc = 8 + ad.abilities[data.ability.value].mod + ad.attributes.prof.value;
+    else data.save.dc = ad.attributes.spelldc.value;
+    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+
+    // Spell attack labels
     data.damageLabel = data.spellType.value === "heal" ? "Healing" : "Damage";
     data.isAttack = data.spellType.value === "attack";
+
+    // Combine properties
     const props = [
       CONFIG.spellSchools[data.school.value],
       CONFIG.spellLevels[data.level.value],

@@ -123,6 +123,7 @@ class Dice5e {
                      fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
+    let rollMode = "roll";
     let roll = () => {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
@@ -134,7 +135,8 @@ class Dice5e {
       // Execute the roll and send it to chat
       roll.toMessage({
         alias: alias,
-        flavor: flav
+        flavor: flav,
+        rollMode: rollMode
       });
 
       // Return the Roll object
@@ -177,6 +179,7 @@ class Dice5e {
           default: "normal",
           close: html => {
             if (onClose) onClose(html, parts, data);
+            rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
             resolve(roll());
           }
@@ -458,7 +461,7 @@ class Actor5e extends Actor {
 
     // Prepare roll data
     let parts = [formula, "@abilities.con.mod"],
-        title = `Rolls a ${formula} Hit Die`,
+        title = `Roll Hit Die`,
         rollData = duplicate(this.data.data);
 
     // Confirm the actor has HD available
@@ -516,7 +519,7 @@ class Actor5e extends Actor {
     update["data.attributes.hp.value"] = data.attributes.hp.max;
 
     // Recover hit dice
-    let dhd = Math.min(data.details.level.value - Math.floor(data.details.level.value / 2), 0);
+    let dhd = Math.min(Math.floor(data.details.level.value / 2), data.details.level.value - data.attributes.hd.value);
     update["data.attributes.hd.value"] = data.attributes.hd.value + dhd;
 
     // Recover resources
@@ -950,6 +953,8 @@ class Actor5eSheet extends ActorSheet {
    */
   _onShortRest(event) {
     event.preventDefault();
+    let hd0 = this.actor.data.data.attributes.hd.value,
+        hp0 = this.actor.data.data.attributes.hp.value;
     renderTemplate("public/systems/dnd5e/templates/chat/short-rest.html").then(html => {
       new ShortRestDialog(this.actor, {
         title: "Short Rest",
@@ -959,8 +964,10 @@ class Actor5eSheet extends ActorSheet {
             icon: '<i class="fas fa-bed"></i>',
             label: "Rest",
             callback: dlg => {
-              let update = this.actor.longRest();
-              let msg = `${this.actor.name} takes a long rest and recovers ${update.dhp} Hit Points and ${update.dhd} Hit Dice.`;
+              this.actor.shortRest();
+              let dhd = hd0 - this.actor.data.data.attributes.hd.value,
+                  dhp = this.actor.data.data.attributes.hp.value - hp0;
+              let msg = `${this.actor.name} takes a short rest spending ${dhd} Hit Dice to recover ${dhp} Hit Points.`;
               ChatMessage.create({
                 user: game.user._id,
                 alias: this.actor.name,
@@ -986,7 +993,7 @@ class Actor5eSheet extends ActorSheet {
    */
   _onLongRest(event) {
     event.preventDefault();
-    new Dialog(this.actor, {
+    new Dialog({
       title: "Long Rest",
       content: '<p>Take a long rest?</p><p>On a long rest you will recover hit points, half your maximum hit dice, ' +
         'primary or secondary resources, and spell slots per day.</p>',
@@ -1027,7 +1034,9 @@ class ShortRestDialog extends Dialog {
     super(dialogData, options);
     this.actor = actor;
   }
+
   activateListeners(html) {
+    super.activateListeners(html);
     let btn = html.find("#roll-hd");
     if ( this.actor.data.data.attributes.hd.value === 0 ) btn[0].disabled = true;
     btn.click(ev => {
@@ -1130,11 +1139,20 @@ class Item5e extends Item {
   /* -------------------------------------------- */
 
   spellChatData() {
-    const data = duplicate(this.data.data);
-    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+    const data = duplicate(this.data.data),
+          ad = this.actor.data.data;
+
+    // Spell saving throw text and DC
     data.isSave = data.spellType.value === "save";
+    if ( data.ability.value ) data.save.dc = 8 + ad.abilities[data.ability.value].mod + ad.attributes.prof.value;
+    else data.save.dc = ad.attributes.spelldc.value;
+    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+
+    // Spell attack labels
     data.damageLabel = data.spellType.value === "heal" ? "Healing" : "Damage";
     data.isAttack = data.spellType.value === "attack";
+
+    // Combine properties
     const props = [
       CONFIG.spellSchools[data.school.value],
       CONFIG.spellLevels[data.level.value],

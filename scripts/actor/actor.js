@@ -224,7 +224,7 @@ class Actor5e extends Actor {
 
     // Prepare roll data
     let parts = [formula, "@abilities.con.mod"],
-        title = `Rolls a ${formula} Hit Die`,
+        title = `Roll Hit Die`,
         rollData = duplicate(this.data.data);
 
     // Confirm the actor has HD available
@@ -282,7 +282,7 @@ class Actor5e extends Actor {
     update["data.attributes.hp.value"] = data.attributes.hp.max;
 
     // Recover hit dice
-    let dhd = Math.min(data.details.level.value - Math.floor(data.details.level.value / 2), 0);
+    let dhd = Math.min(Math.floor(data.details.level.value / 2), data.details.level.value - data.attributes.hd.value);
     update["data.attributes.hd.value"] = data.attributes.hd.value + dhd;
 
     // Recover resources
