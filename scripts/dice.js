@@ -123,6 +123,7 @@ class Dice5e {
                      fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
+    let rollMode = "roll";
     let roll = () => {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
@@ -134,7 +135,8 @@ class Dice5e {
       // Execute the roll and send it to chat
       roll.toMessage({
         alias: alias,
-        flavor: flav
+        flavor: flav,
+        rollMode: rollMode
       });
 
       // Return the Roll object
@@ -177,6 +179,7 @@ class Dice5e {
           default: "normal",
           close: html => {
             if (onClose) onClose(html, parts, data);
+            rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
             resolve(roll());
           }

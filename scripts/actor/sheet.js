@@ -401,6 +401,8 @@ class Actor5eSheet extends ActorSheet {
    */
   _onShortRest(event) {
     event.preventDefault();
+    let hd0 = this.actor.data.data.attributes.hd.value,
+        hp0 = this.actor.data.data.attributes.hp.value;
     renderTemplate("public/systems/dnd5e/templates/chat/short-rest.html").then(html => {
       new ShortRestDialog(this.actor, {
         title: "Short Rest",
@@ -410,8 +412,10 @@ class Actor5eSheet extends ActorSheet {
             icon: '<i class="fas fa-bed"></i>',
             label: "Rest",
             callback: dlg => {
-              let update = this.actor.longRest();
-              let msg = `${this.actor.name} takes a long rest and recovers ${update.dhp} Hit Points and ${update.dhd} Hit Dice.`;
+              this.actor.shortRest();
+              let dhd = hd0 - this.actor.data.data.attributes.hd.value,
+                  dhp = this.actor.data.data.attributes.hp.value - hp0;
+              let msg = `${this.actor.name} takes a short rest spending ${dhd} Hit Dice to recover ${dhp} Hit Points.`;
               ChatMessage.create({
                 user: game.user._id,
                 alias: this.actor.name,
@@ -437,7 +441,7 @@ class Actor5eSheet extends ActorSheet {
    */
   _onLongRest(event) {
     event.preventDefault();
-    new Dialog(this.actor, {
+    new Dialog({
       title: "Long Rest",
       content: '<p>Take a long rest?</p><p>On a long rest you will recover hit points, half your maximum hit dice, ' +
         'primary or secondary resources, and spell slots per day.</p>',
@@ -478,7 +482,9 @@ class ShortRestDialog extends Dialog {
     super(dialogData, options);
     this.actor = actor;
   }
+
   activateListeners(html) {
+    super.activateListeners(html);
     let btn = html.find("#roll-hd");
     if ( this.actor.data.data.attributes.hd.value === 0 ) btn[0].disabled = true;
     btn.click(ev => {
