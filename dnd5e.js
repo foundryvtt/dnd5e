@@ -188,10 +188,11 @@ class Dice5e {
     });
   }
 }
+
 /**
  * Activate certain behaviors on FVTT ready hook
  */
-Hooks.on("ready", () => {
+Hooks.on("init", () => {
 
   /**
    * Register diagonal movement rule setting
@@ -209,13 +210,22 @@ Hooks.on("ready", () => {
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
-  if ( canvas.ready ) canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
+});
+
+
+/**
+ * Activate certain behaviors on Canvas Initialization hook
+ */
+Hooks.on("canvasInit", () => {
+
+  // Apply the current setting
+  canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
 
   /**
    * Override default Grid measurement
    */
   GridLayer.prototype.measureDistance = function(p0, p1) {
-    let gs = this.dimensions.size,
+    let gs = canvas.dimensions.size,
         ray = new Ray(p0, p1),
         nx = Math.abs(Math.ceil(ray.dx / gs)),
         ny = Math.abs(Math.ceil(ray.dy / gs));
