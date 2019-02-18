@@ -24,7 +24,7 @@ class Dice5e {
                   highlight=true, fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
-    let rollMode = "roll";
+    let rollMode = game.settings.get("core", "rollMode");
     let roll = () => {
       let flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if (adv === 1) {
@@ -68,6 +68,7 @@ class Dice5e {
     let dialogData = {
       formula: parts.join(" + "),
       data: data,
+      rollMode: rollMode,
       rollModes: CONFIG.rollModes
     };
     renderTemplate(template, dialogData).then(dlg => {
@@ -123,7 +124,7 @@ class Dice5e {
                      fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
-    let rollMode = "roll";
+    let rollMode = game.settings.get("core", "rollMode");
     let roll = () => {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
@@ -157,6 +158,7 @@ class Dice5e {
     let dialogData = {
       formula: parts.join(" + "),
       data: data,
+      rollMode: rollMode,
       rollModes: CONFIG.rollModes
     };
 
