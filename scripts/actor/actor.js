@@ -308,6 +308,40 @@ class Actor5e extends Actor {
       dhd: dhd
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply rolled dice damage to the token or tokens which are currently controlled.
+   * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
+   *
+   * @param {HTMLElement} roll    The chat entry which contains the roll data
+   * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
+   */
+  static applyDamage(roll, multiplier) {
+    let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
+
+    // Filter tokens to which damage can be applied
+    canvas.tokens.controlledTokens.filter(t => {
+      if ( t.actor && t.data.actorLink ) return true;
+      else if ( t.data.bar1.attribute === "attributes.hp" || t.data.bar2.attribute === "attributes.hp" ) return true;
+      return false;
+    }).forEach(t => {
+
+      // Linked Tokens - update Actor
+      if ( t.actor && t.data.actorLink ) {
+        let hp = parseInt(t.actor.data.data.attributes.hp.value),
+            max = parseInt(t.actor.data.data.attributes.hp.max);
+        t.actor.update({"data.attributes.hp.value": Math.clamped(hp - value, 0, max)});
+      }
+
+      // Unlinked Tokens - update Token directly
+      else {
+        let bar = (t.data.bar1.attribute === "attributes.hp") ? "bar1" : "bar2";
+        t.update(canvas.id, {[`${bar}.value`]: Math.clamped(t.data[bar].value - value, 0, t.data[bar].max)});
+      }
+    });
+  }
 }
 
 // Assign the actor class to the CONFIG
