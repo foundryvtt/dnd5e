@@ -297,12 +297,7 @@ class Actor5eSheet extends ActorSheet {
     /*  Rollable Items                              */
     /* -------------------------------------------- */
 
-    html.find('.item .rollable').click(ev => {
-      let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
-        Item = CONFIG.Item.entityClass,
-        item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
-      item.roll();
-    });
+    html.find('.item .rollable').click(event => this._onRollItemCard(event));
 
     /* -------------------------------------------- */
     /*  Inventory
@@ -391,6 +386,20 @@ class Actor5eSheet extends ActorSheet {
       actorId: this.actor._id,
       id: itemId
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * @private
+   */
+  _onRollItemCard(event) {
+    event.preventDefault();
+    let itemId = Number($(event.currentTarget).parents(".item").attr("data-item-id")),
+        Item = CONFIG.Item.entityClass,
+        item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
+    item.roll();
   }
 
   /* -------------------------------------------- */
