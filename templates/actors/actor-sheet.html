@@ -221,7 +221,7 @@
                     <span class="item-weight">Wt.</span>
                     {{#if ../owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Item" data-item-type="{{sid}}"><i class="fas fa-plus"></i> Add</a>
+                        <a class="item-control item-create" title="Create Item" data-type="{{sid}}"><i class="fas fa-plus"></i> Add</a>
                     </div>
                     {{/if}}
                 </li>
@@ -297,8 +297,8 @@
 
                     {{#if ../owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
-                           data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
+                        <a class="item-control item-create" title="Create Spell" data-type="spell"
+                           data-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
                     </div>
                     {{/if}}
                 </li>
@@ -328,8 +328,8 @@
                 <li class="item inventory-header spellbook-header spellbook-empty">
                     {{#if owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
-                           data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
+                        <a class="item-control item-create" title="Create Spell" data-type="spell"
+                           data-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
                     </div>
                     {{/if}}
                 </li>
@@ -348,7 +348,7 @@
 
                     {{#if owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Ability" data-item-type="feat">
+                        <a class="item-control item-create" title="Create Ability" data-type="feat" data-featType="passive">
                             <i class="fas fa-plus"></i> Add</a>
                     </div>
                     {{/if}}
@@ -413,7 +413,7 @@
             <header class="class-header">
                 <h3>Class Levels</h3>
                 {{#if owner}}
-                <a class="item-create" data-item-type="class"><i class="fa fa-plus"></i> Add</a>
+                <a class="item-create" data-type="class" data-levels="1"><i class="fa fa-plus"></i> Add</a>
                 {{/if}}
             </header>
 

@@ -119,11 +119,18 @@ class Item5e extends Item {
    * Prepare chat card data for items of the "Feat" type
    */
   featChatData() {
-    const data = duplicate(this.data.data);
+    const data = duplicate(this.data.data),
+          ad = this.actor.data.data;
 
     // Feat button actions
     data.isSave = data.save.value !== "";
-    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+    if ( data.isSave ) {
+      let abl = data.ability.value || ad.attributes.spellcasting.value || "str";
+      data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
+      data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+    }
+
+    // Feat attack attributes
     data.isAttack = data.featType.value === "attack";
 
     // Feat properties
@@ -185,10 +192,14 @@ class Item5e extends Item {
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
         parts = [alternate ? itemData.damage2.value : itemData.damage.value, `@abilities.${abl}.mod`],
-        title = `${this.name} - Damage Roll`;
-    rollData.item = itemData;
+        dtype = CONFIG.damageTypes[alternate ? itemData.damage2Type.value : itemData.damageType.value];
+
+    // Append damage type to title
+    let title = `${this.name} - Damage`;
+    if ( dtype ) title += ` (${dtype})`;
 
     // Call the roll helper utility
+    rollData.item = itemData;
     Dice5e.damageRoll({
       event: event,
       parts: parts,
@@ -248,7 +259,14 @@ class Item5e extends Item {
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
         parts = [itemData.damage.value],
-        title = this.name + (itemData.spellType.value === "heal" ? " - Healing Amount" : " - Damage Roll");
+        isHeal = itemData.spellType.value === "heal",
+        dtype = CONFIG.damageTypes[itemData.damageType.value];
+
+    // Append damage type to title
+    let title = this.name + (isHeal ? " - Healing" : " - Damage");
+    if ( dtype && !isHeal ) title += ` (${dtype})`;
+
+    // Add item to roll data
     rollData["mod"] = rollData.abilities[abl].mod;
     rollData.item = itemData;
 
@@ -408,7 +426,13 @@ class Item5e extends Item {
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
         parts = [itemData.damage.value],
-        title = `${this.name} - Damage Roll`;
+        dtype = CONFIG.damageTypes[itemData.damageType.value];
+
+    // Append damage type to title
+    let title = `${this.name} - Damage`;
+    if ( dtype ) title += ` (${dtype})`;
+
+    // Add item data to roll
     rollData["mod"] = rollData.abilities[abl].mod;
     rollData.item = itemData;
 
