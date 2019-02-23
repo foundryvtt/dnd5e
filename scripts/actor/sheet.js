@@ -171,7 +171,7 @@ class Actor5eSheet extends ActorSheet {
       weapons: {label: "Weapons", items: [], type: "weapon" },
       actions: { label: "Actions", items: [], type: "feat" },
       passive: { label: "Features", items: [], type: "feat" },
-      equipment: { label: "Equipment", items: [], type: "armor" }
+      equipment: { label: "Equipment", items: [], type: "equipment" }
     };
 
     // Spellbook
@@ -304,10 +304,7 @@ class Actor5eSheet extends ActorSheet {
     /* -------------------------------------------- */
 
     // Create New Item
-    html.find('.item-create').click(ev => {
-      let type = ev.currentTarget.getAttribute("data-item-type");
-      this.actor.createOwnedItem({name: "New " + type.capitalize(), type: type}, true, {renderSheet: true});
-    });
+    html.find('.item-create').click(ev => this._onItemCreate(ev));
 
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
@@ -475,6 +472,20 @@ class Actor5eSheet extends ActorSheet {
       },
       default: 'rest'
     }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+   * @private
+   */
+  _onItemCreate(event) {
+    event.preventDefault();
+    let header = event.currentTarget,
+        data = duplicate(header.dataset);
+    data["name"] = `New ${data.type.capitalize()}`;
+    this.actor.createOwnedItem(data, true, {renderSheet: true});
   }
 }
 

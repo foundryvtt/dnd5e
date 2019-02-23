@@ -135,7 +135,7 @@
                     <h3 class="item-name">{{section.label}}</h3>
                     {{#if ../owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Item" data-item-type="{{section.type}}">
+                        <a class="item-control item-create" title="Create Item" data-type="{{section.type}}">
                             <i class="fas fa-plus"></i> Add
                         </a>
                     </div>
@@ -200,8 +200,8 @@
 
                     {{#if ../owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
-                           data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
+                        <a class="item-control item-create" title="Create Spell" data-type="spell"
+                           data-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
                     </div>
                     {{/if}}
                 </li>
@@ -228,8 +228,8 @@
                 <li class="item inventory-header spellbook-header spellbook-empty">
                     {{#if owner}}
                     <div class="item-controls">
-                        <a class="item-control item-create" title="Create Spell" data-item-type="spell"
-                           data-spell-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
+                        <a class="item-control item-create" title="Create Spell" data-type="spell"
+                           data-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
                     </div>
                     {{/if}}
                 </li>
