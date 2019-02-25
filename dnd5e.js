@@ -424,43 +424,17 @@ class Actor5e extends Actor {
    */
   rollAbilitySave(abilityId) {
     let abl = this.data.data.abilities[abilityId],
-        parts = ["1d20", "@mod", "@bonus"],
+        parts = ["@mod"],
         flavor = `${abl.label} Saving Throw`;
 
-    // Create a dialog
-    new Dialog({
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: {mod: abl.save},
       title: flavor,
-      content: this._skillSaveRollModalHTML,
-      buttons: {
-        advantage: {
-          label: "Advantage",
-          callback: () => {
-            parts[0] = "2d20kh";
-            flavor += " (Advantage)"
-          }
-        },
-        normal: {
-          label: "Normal",
-        },
-        disadvantage: {
-          label: "Disadvantage",
-          callback: () => {
-            parts[0] = "2d20kl";
-            flavor += " (Disadvantage)"
-          }
-        }
-      },
-      close: html => {
-        let bonus = html.find('[name="bonus"]').val(),
-            roll = new Roll(parts.join(" + "), {mod: abl.save, bonus: bonus}).roll();
-        roll.toMessage({
-          alias: this.name,
-          flavor: flavor,
-          highlightSuccess: roll.parts[0].total === 20,
-          highlightFailure: roll.parts[0].total === 1
-        });
-      }
-    }).render(true);
+      alias: this.actor,
+    });
   }
 
   /* -------------------------------------------- */
