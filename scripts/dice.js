@@ -115,13 +115,10 @@ class Dice5e {
    * @param {String} alias          The alias with which to post to chat
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} critical      Allow critical hits to be chosen
-   * @param {Boolean} situational   Allow for an arbitrary situational bonus field
-   * @param {Boolean} fastForward   Allow fast-forward advantage selection
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static damageRoll({event, parts, data, template, title, alias, flavor, critical=true, situational=true,
-                     fastForward=true, onClose, dialogOptions}) {
+  static damageRoll({event={}, parts, data, template, title, alias, flavor, critical=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
