@@ -731,6 +731,9 @@
 /* ----------------------------------------- */
 /*  Feats Tab
 /* ----------------------------------------- */
+.dnd5e.sheet .feats .feats-list {
+  height: 100%;
+}
 .dnd5e.sheet .feats .feats-list .item-name {
   flex: 2;
 }

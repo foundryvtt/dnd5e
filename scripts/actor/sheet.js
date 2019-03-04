@@ -274,9 +274,10 @@ class Actor5eSheet extends ActorSheet {
     });
 
     // Ability Checks
-    html.find('.ability-name').click(ev => {
-      let abl = ev.currentTarget.parentElement.getAttribute("data-ability");
-      this.actor.rollAbility(abl);
+    html.find('.ability-name').click(event => {
+      event.preventDefault();
+      let ability = event.currentTarget.parentElement.getAttribute("data-ability");
+      this.actor.rollAbility(ability, {event: event});
     });
 
     // Toggle Skill Proficiency

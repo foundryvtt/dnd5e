@@ -115,13 +115,10 @@ class Dice5e {
    * @param {String} alias          The alias with which to post to chat
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} critical      Allow critical hits to be chosen
-   * @param {Boolean} situational   Allow for an arbitrary situational bonus field
-   * @param {Boolean} fastForward   Allow fast-forward advantage selection
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static damageRoll({event, parts, data, template, title, alias, flavor, critical=true, situational=true,
-                     fastForward=true, onClose, dialogOptions}) {
+  static damageRoll({event={}, parts, data, template, title, alias, flavor, critical=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -373,9 +370,10 @@ class Actor5e extends Actor {
   /**
    * Roll a generic ability test or saving throw.
    * Prompt the user for input on which variety of roll they want to do.
-   * @param abilityId {String}    The ability id (e.g. "str")
+   * @param {String}abilityId     The ability id (e.g. "str")
+   * @param {Object} options      Options which configure how ability tests or saving throws are rolled
    */
-  rollAbility(abilityId) {
+  rollAbility(abilityId, options) {
     let abl = this.data.data.abilities[abilityId];
     new Dialog({
       title: `${abl.label} Ability Check`,
@@ -383,11 +381,11 @@ class Actor5e extends Actor {
       buttons: {
         test: {
           label: "Ability Test",
-          callback: () => this.rollAbilityTest(abilityId)
+          callback: () => this.rollAbilityTest(abilityId, options)
         },
         save: {
           label: "Saving Throw",
-          callback: () => this.rollAbilitySave(abilityId)
+          callback: () => this.rollAbilitySave(abilityId, options)
         }
       }
     }).render(true);
@@ -398,16 +396,17 @@ class Actor5e extends Actor {
   /**
    * Roll an Ability Test
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param abilityId {String}    The ability ID (e.g. "str")
+   * @param {String} abilityId    The ability ID (e.g. "str")
+   * @param {Object} options      Options which configure how ability tests are rolled
    */
-  rollAbilityTest(abilityId) {
+  rollAbilityTest(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
         parts = ["@mod"],
         flavor = `${abl.label} Ability Test`;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
-      event: event,
+      event: options.event,
       parts: parts,
       data: {mod: abl.mod},
       title: flavor,
@@ -420,16 +419,17 @@ class Actor5e extends Actor {
   /**
    * Roll an Ability Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param abilityId {String}    The ability ID (e.g. "str")
+   * @param {String} abilityId    The ability ID (e.g. "str")
+   * @param {Object} options      Options which configure how ability tests are rolled
    */
-  rollAbilitySave(abilityId) {
+  rollAbilitySave(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
         parts = ["@mod"],
         flavor = `${abl.label} Saving Throw`;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
-      event: event,
+      event: options.event,
       parts: parts,
       data: {mod: abl.save},
       title: flavor,
@@ -846,9 +846,10 @@ class Actor5eSheet extends ActorSheet {
     });
 
     // Ability Checks
-    html.find('.ability-name').click(ev => {
-      let abl = ev.currentTarget.parentElement.getAttribute("data-ability");
-      this.actor.rollAbility(abl);
+    html.find('.ability-name').click(event => {
+      event.preventDefault();
+      let ability = event.currentTarget.parentElement.getAttribute("data-ability");
+      this.actor.rollAbility(ability, {event: event});
     });
 
     // Toggle Skill Proficiency

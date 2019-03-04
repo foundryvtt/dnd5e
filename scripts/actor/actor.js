@@ -124,9 +124,10 @@ class Actor5e extends Actor {
   /**
    * Roll a generic ability test or saving throw.
    * Prompt the user for input on which variety of roll they want to do.
-   * @param abilityId {String}    The ability id (e.g. "str")
+   * @param {String}abilityId     The ability id (e.g. "str")
+   * @param {Object} options      Options which configure how ability tests or saving throws are rolled
    */
-  rollAbility(abilityId) {
+  rollAbility(abilityId, options) {
     let abl = this.data.data.abilities[abilityId];
     new Dialog({
       title: `${abl.label} Ability Check`,
@@ -134,11 +135,11 @@ class Actor5e extends Actor {
       buttons: {
         test: {
           label: "Ability Test",
-          callback: () => this.rollAbilityTest(abilityId)
+          callback: () => this.rollAbilityTest(abilityId, options)
         },
         save: {
           label: "Saving Throw",
-          callback: () => this.rollAbilitySave(abilityId)
+          callback: () => this.rollAbilitySave(abilityId, options)
         }
       }
     }).render(true);
@@ -149,16 +150,17 @@ class Actor5e extends Actor {
   /**
    * Roll an Ability Test
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param abilityId {String}    The ability ID (e.g. "str")
+   * @param {String} abilityId    The ability ID (e.g. "str")
+   * @param {Object} options      Options which configure how ability tests are rolled
    */
-  rollAbilityTest(abilityId) {
+  rollAbilityTest(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
         parts = ["@mod"],
         flavor = `${abl.label} Ability Test`;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
-      event: event,
+      event: options.event,
       parts: parts,
       data: {mod: abl.mod},
       title: flavor,
@@ -171,16 +173,17 @@ class Actor5e extends Actor {
   /**
    * Roll an Ability Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param abilityId {String}    The ability ID (e.g. "str")
+   * @param {String} abilityId    The ability ID (e.g. "str")
+   * @param {Object} options      Options which configure how ability tests are rolled
    */
-  rollAbilitySave(abilityId) {
+  rollAbilitySave(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
         parts = ["@mod"],
         flavor = `${abl.label} Saving Throw`;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
-      event: event,
+      event: options.event,
       parts: parts,
       data: {mod: abl.save},
       title: flavor,
