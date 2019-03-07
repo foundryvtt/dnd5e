@@ -115,7 +115,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: skl.mod},
       title: flavor,
-      alias: this.actor,
+      alias: this.name
     });
   }
 
@@ -164,7 +164,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.mod},
       title: flavor,
-      alias: this.actor,
+      alias: this.name
     });
   }
 
@@ -187,7 +187,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.save},
       title: flavor,
-      alias: this.actor,
+      alias: this.name
     });
   }
 
