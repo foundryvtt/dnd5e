@@ -2,7 +2,7 @@
 /**
  * Activate certain behaviors on FVTT ready hook
  */
-Hooks.on("init", () => {
+Hooks.once("init", () => {
 
   /**
    * Register diagonal movement rule setting

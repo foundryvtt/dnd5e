@@ -191,7 +191,7 @@ class Dice5e {
 /**
  * Activate certain behaviors on FVTT ready hook
  */
-Hooks.on("init", () => {
+Hooks.once("init", () => {
 
   /**
    * Register diagonal movement rule setting
@@ -361,7 +361,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: skl.mod},
       title: flavor,
-      alias: this.actor,
+      alias: this.name
     });
   }
 
@@ -410,7 +410,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.mod},
       title: flavor,
-      alias: this.actor,
+      alias: this.name
     });
   }
 
@@ -433,7 +433,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.save},
       title: flavor,
-      alias: this.actor,
+      alias: this.name
     });
   }
 
