@@ -235,8 +235,9 @@ Hooks.on("canvasInit", () => {
 
     // Alternative DMG Movement
     if ( this.diagonalRule === "5105" ) {
-      let nd10 = Math.floor((nDiagonal + 1) / 3);
-      return ((nd10 * 2) + nDiagonal - nd10 + nStraight) * canvas.dimensions.distance;
+      let nd10 = Math.floor(nDiagonal / 2);
+      let spaces = (nd10 * 2) + (nDiagonal - nd10) + nStraight;
+      return spaces * canvas.dimensions.distance;
     }
 
     // Standard PHB Movement
@@ -336,8 +337,8 @@ class Actor5e extends Actor {
   getCRExp(cr) {
     if (cr < 1.0) return Math.max(200 * cr, 10);
     let _ = undefined;
-    const xps = [10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 18000, 20000, 22000,
-        25000, 27500, 30000, 32500, 36500, _, _, _, _, _, 155000];
+    const xps = [10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000,
+                 15000, 18000, 20000, 22000, 25000, 30000, 41000, 50000, 62000, 75000, 90000, _, _, _, 155000];
     return xps[cr];
   }
 
@@ -909,7 +910,7 @@ class Actor5eSheet extends ActorSheet {
     html.find('.npc-roll-hp').click(ev => {
       let ad = this.actor.data.data;
       let hp = new Roll(ad.attributes.hp.formula).roll().total;
-      AudioHelper.play({src: CONFIG.sounds.dice, volume: 0.8});
+      AudioHelper.play({src: CONFIG.sounds.dice});
       this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp}, true);
     });
 
@@ -936,9 +937,8 @@ class Actor5eSheet extends ActorSheet {
     // Format NPC Challenge Rating
     if (this.actor.data.type === "npc") {
       let cr = this.form["data.details.cr.value"],
-      val = cr.value,
-      crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-      cr.value = crs[val] || val;
+         crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+      formData["data.details.cr.value"] = crs[cr.value] || parseInt(cr.value);
     }
 
     // Parent ActorSheet update steps

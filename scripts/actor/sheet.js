@@ -337,7 +337,7 @@ class Actor5eSheet extends ActorSheet {
     html.find('.npc-roll-hp').click(ev => {
       let ad = this.actor.data.data;
       let hp = new Roll(ad.attributes.hp.formula).roll().total;
-      AudioHelper.play({src: CONFIG.sounds.dice, volume: 0.8});
+      AudioHelper.play({src: CONFIG.sounds.dice});
       this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp}, true);
     });
 
@@ -364,9 +364,8 @@ class Actor5eSheet extends ActorSheet {
     // Format NPC Challenge Rating
     if (this.actor.data.type === "npc") {
       let cr = this.form["data.details.cr.value"],
-      val = cr.value,
-      crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-      cr.value = crs[val] || val;
+         crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+      formData["data.details.cr.value"] = crs[cr.value] || parseInt(cr.value);
     }
 
     // Parent ActorSheet update steps

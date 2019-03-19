@@ -46,8 +46,9 @@ Hooks.on("canvasInit", () => {
 
     // Alternative DMG Movement
     if ( this.diagonalRule === "5105" ) {
-      let nd10 = Math.floor((nDiagonal + 1) / 3);
-      return ((nd10 * 2) + nDiagonal - nd10 + nStraight) * canvas.dimensions.distance;
+      let nd10 = Math.floor(nDiagonal / 2);
+      let spaces = (nd10 * 2) + (nDiagonal - nd10) + nStraight;
+      return spaces * canvas.dimensions.distance;
     }
 
     // Standard PHB Movement
