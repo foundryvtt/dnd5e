@@ -582,8 +582,10 @@ class Actor5eSheet extends ActorSheet {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  options.classes = options.classes.concat(["dnd5e", "actor-sheet"]);
-    options.width = 650;
-    options.height = 720;
+      options.width = 650;
+      options.height = 720;
+      // specificly initialize this options so that it won't hide unprepared spells by default (since undefined gets interpreted as false)
+      options.showUnpreparedSpells = true;
 	  return options;
   }
 
@@ -888,13 +890,29 @@ class Actor5eSheet extends ActorSheet {
       item.sheet.render(true);
     });
 
+    // Change prepared value of Spell
+    html.find('.item-prepare').click(ev => {
+        let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
+        let item = this.actor.items.find(i => { return i.id === itemId });
+        item.data.prepared.value = !item.data.prepared.value;
+        this.actor.updateOwnedItem(item, true);
+    });
+
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       let li = $(ev.currentTarget).parents(".item"),
         itemId = Number(li.attr("data-item-id"));
       this.actor.deleteOwnedItem(itemId, true);
       li.slideUp(200, () => this.render(false));
+        });
+
+    // Toggle visibility of unprepared Spells
+    html.find('.prepared-toggle').click(ev => {
+        this.options.showUnpreparedSpells = !this.options.showUnpreparedSpells;
+        this._applySpellVisibility(html);
     });
+    // this has to be called once. this makes sure that spells stay hidden after toggling their individual prepared status
+    this._applySpellVisibility(html);
 
     /* -------------------------------------------- */
     /*  Miscellaneous
@@ -1059,7 +1077,30 @@ class Actor5eSheet extends ActorSheet {
         data = duplicate(header.dataset);
     data["name"] = `New ${data.type.capitalize()}`;
     this.actor.createOwnedItem(data, true, {renderSheet: true});
-  }
+    }
+
+    /**
+      * Apply a filter to hide Item entrys in the Spellbook using the prepared value and an option
+      * @private
+      */ 
+    _applySpellVisibility(html) {
+        // get the list of all the spell entrys, ignoring the inventory headers
+        let spellElements = html.find('.spellbook .item:not(.inventory-header)');
+        for (let element of spellElements) {
+            // load the item so we can determin the prepared value and find out if its a cantrip
+            let item = this.actor.items.find(i => { return i.id === Number(element.dataset.itemId) });
+            // newly created items often have level.value undefined, but not always, hence the double checking
+            // cantrips are always prepared, thats why they get treated the same as prepared spells
+            let alwaysShowItem = item.data.prepared.value || item.data.level.value == 0 || item.data.level.value === undefined;
+
+            // apply the visibility
+            if (this.options.showUnpreparedSpells || alwaysShowItem) {
+                $(element).show();
+            } else {
+                $(element).hide();
+            }
+        }
+    }
 }
 
 
