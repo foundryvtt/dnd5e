@@ -898,6 +898,22 @@ class Actor5eSheet extends ActorSheet {
         this.actor.updateOwnedItem(item, true);
     });
 
+    // Change spell-slot ammount
+    html.find('.spellslot-modifier').click(ev => {
+        // find input that stores the spell-slots and get the value
+        let spellSlotInput = $(ev.target.parentElement).find('.spell-slots input');
+        let newSlotCount = Number(spellSlotInput.val());
+
+        // change the value depending on which button was pressed, without going below 0
+        if (ev.target.dataset.mod === '+') {
+            newSlotCount++;
+        } else {
+            if (newSlotCount > 0) newSlotCount--;
+            }
+        // set the new value and submit it
+        spellSlotInput.val(newSlotCount).trigger('submit');
+    });
+
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       let li = $(ev.currentTarget).parents(".item"),

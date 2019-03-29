@@ -279,6 +279,8 @@
                         <h3>{{section.label}}</h3>
 
                         {{#unless section.isCantrip}}
+                        <a class="spellslot-modifier flex0" data-mod="+">&#9650</a>
+                        <a class="spellslot-modifier flex0" data-mod="-">&#9660</a>
                         <span class="spell-slots">
                             <input type="text" name="data.spells.spell{{lvl}}.value" value="{{section.uses}}" placeholder="0"/>
                         </span>
