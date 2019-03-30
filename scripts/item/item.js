@@ -257,7 +257,7 @@ class Item5e extends Item {
     // Get data
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
+        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
         parts = [itemData.damage.value],
         isHeal = itemData.spellType.value === "heal",
         dtype = CONFIG.damageTypes[itemData.damageType.value];

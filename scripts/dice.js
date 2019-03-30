@@ -15,13 +15,12 @@ class Dice5e {
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
    * @param {Boolean} situational   Allow for an arbitrary situational bonus field
-   * @param {Boolean} highlight     Highlight critical successes and failures
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
   static d20Roll({event, parts, data, template, title, alias, flavor, advantage=true, situational=true,
-                  highlight=true, fastForward=true, onClose, dialogOptions}) {
+                  fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -44,9 +43,7 @@ class Dice5e {
       roll.toMessage({
         alias: alias,
         flavor: flav,
-        rollMode: rollMode,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
+        rollMode: rollMode
       });
     };
 
@@ -187,3 +184,13 @@ class Dice5e {
     });
   }
 }
+
+/**
+ * Highlight critical success or failure on d20 rolls
+ */
+Hooks.on("renderChatMessage", (message, data, html) => {
+  if ( !message.isRoll || message.roll.parts[0].faces !== 20 ) return;
+  let d20 = message.roll.parts[0].total;
+  if ( d20 === 20 ) html.find(".dice-total").addClass("success");
+  else if ( d20 === 1 ) html.find(".dice-total").addClass("failure");
+});

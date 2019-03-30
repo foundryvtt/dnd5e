@@ -15,13 +15,12 @@ class Dice5e {
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
    * @param {Boolean} situational   Allow for an arbitrary situational bonus field
-   * @param {Boolean} highlight     Highlight critical successes and failures
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
   static d20Roll({event, parts, data, template, title, alias, flavor, advantage=true, situational=true,
-                  highlight=true, fastForward=true, onClose, dialogOptions}) {
+                  fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -44,9 +43,7 @@ class Dice5e {
       roll.toMessage({
         alias: alias,
         flavor: flav,
-        rollMode: rollMode,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
+        rollMode: rollMode
       });
     };
 
@@ -189,6 +186,17 @@ class Dice5e {
 }
 
 /**
+ * Highlight critical success or failure on d20 rolls
+ */
+Hooks.on("renderChatMessage", (message, data, html) => {
+  if ( !message.isRoll || message.roll.parts[0].faces !== 20 ) return;
+  let d20 = message.roll.parts[0].total;
+  if ( d20 === 20 ) html.find(".dice-total").addClass("success");
+  else if ( d20 === 1 ) html.find(".dice-total").addClass("failure");
+});
+
+
+/**
  * Activate certain behaviors on FVTT ready hook
  */
 Hooks.once("init", () => {
@@ -223,7 +231,7 @@ Hooks.on("canvasInit", () => {
   /**
    * Override default Grid measurement
    */
-  GridLayer.prototype.measureDistance = function(p0, p1) {
+  SquareGrid.prototype.measureDistance = function(p0, p1) {
     let gs = canvas.dimensions.size,
         ray = new Ray(p0, p1),
         nx = Math.abs(Math.ceil(ray.dx / gs)),
@@ -575,17 +583,24 @@ CONFIG.Actor.entityClass = Actor5e;
  * Extend the basic ActorSheet class to do all the D&D5e things!
  */
 class Actor5eSheet extends ActorSheet {
+  constructor(...args) {
+    super(...args);
+
+    // Add additional class options
+    this.options.classes.push(`${this.actorType}-sheet`);
+  }
+
+	/* -------------------------------------------- */
 
   /**
    * Extend and override the default options used by the 5e Actor Sheet
    */
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
-	  options.classes = options.classes.concat(["dnd5e", "actor-sheet"]);
-      options.width = 650;
-      options.height = 720;
-      // specificly initialize this options so that it won't hide unprepared spells by default (since undefined gets interpreted as false)
-      options.showUnpreparedSpells = true;
+	  options.classes = options.classes.concat(["dnd5e", "actor"]);
+    options.width = 650;
+    options.height = 720;
+    options.showUnpreparedSpells = true;
 	  return options;
   }
 
@@ -695,18 +710,7 @@ class Actor5eSheet extends ActorSheet {
       }
 
       // Spells
-      else if ( i.type === "spell" ) {
-        let lvl = i.data.level.value || 0;
-        spellbook[lvl] = spellbook[lvl] || {
-          isCantrip: lvl === 0,
-          label: CONFIG.spellLevels[lvl],
-          spells: [],
-          uses: actorData.data.spells["spell"+lvl].value || 0,
-          slots: actorData.data.spells["spell"+lvl].max || 0
-        };
-        i.data.school.str = CONFIG.spellSchools[i.data.school.value];
-        spellbook[lvl].spells.push(i);
-      }
+      else if ( i.type === "spell" ) this._prepareSpell(actorData, spellbook, i);
 
       // Classes
       else if ( i.type === "class" ) {
@@ -757,18 +761,7 @@ class Actor5eSheet extends ActorSheet {
       i.img = i.img || DEFAULT_TOKEN;
 
       // Spells
-      if ( i.type === "spell" ) {
-        let lvl = i.data.level.value || 0;
-        spellbook[lvl] = spellbook[lvl] || {
-          isCantrip: lvl === 0,
-          label: CONFIG.spellLevels[lvl],
-          spells: [],
-          uses: actorData.data.spells["spell"+lvl].value || 0,
-          slots: actorData.data.spells["spell"+lvl].max || 0
-        };
-        i.data.school.str = CONFIG.spellSchools[i.data.school.value];
-        spellbook[lvl].spells.push(i);
-      }
+      if ( i.type === "spell" ) this._prepareSpell(actorData, spellbook, i);
 
       // Features
       else if ( i.type === "weapon" ) features.weapons.items.push(i);
@@ -782,6 +775,37 @@ class Actor5eSheet extends ActorSheet {
     // Assign and return
     actorData.features = features;
     actorData.spellbook = spellbook;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Insert a spell into the spellbook object when rendering the character sheet
+   * @param {Object} actorData    The Actor data being prepared
+   * @param {Object} spellbook    The spellbook data being prepared
+   * @param {Object} spell        The spell data being prepared
+   * @private
+   */
+  _prepareSpell(actorData, spellbook, spell) {
+    let lvl = spell.data.level.value || 0,
+        isNPC = this.actorType === "npc";
+
+    // Determine whether to show the spell
+    let showSpell = this.options.showUnpreparedSpells || isNPC || spell.data.prepared.value || (lvl === 0);
+    if ( !showSpell ) return;
+
+    // Extend the Spellbook level
+    spellbook[lvl] = spellbook[lvl] || {
+      isCantrip: lvl === 0,
+      label: CONFIG.spellLevels[lvl],
+      spells: [],
+      uses: actorData.data.spells["spell"+lvl].value || 0,
+      slots: actorData.data.spells["spell"+lvl].max || 0
+    };
+
+    // Add the spell to the spellbook at the appropriate level
+    spell.data.school.str = CONFIG.spellSchools[spell.data.school.value];
+    spellbook[lvl].spells.push(spell);
   }
 
   /* -------------------------------------------- */
@@ -808,6 +832,8 @@ class Actor5eSheet extends ActorSheet {
     return icons[level];
   }
 
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers
   /* -------------------------------------------- */
 
   /**
@@ -890,45 +916,27 @@ class Actor5eSheet extends ActorSheet {
       item.sheet.render(true);
     });
 
-    // Change prepared value of Spell
-    html.find('.item-prepare').click(ev => {
-        let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
-        let item = this.actor.items.find(i => { return i.id === itemId });
-        item.data.prepared.value = !item.data.prepared.value;
-        this.actor.updateOwnedItem(item, true);
-    });
-
-    // Change spell-slot ammount
-    html.find('.spellslot-modifier').click(ev => {
-        // find input that stores the spell-slots and get the value
-        let spellSlotInput = $(ev.target.parentElement).find('.spell-slots input');
-        let newSlotCount = Number(spellSlotInput.val());
-
-        // change the value depending on which button was pressed, without going below 0
-        if (ev.target.dataset.mod === '+') {
-            newSlotCount++;
-        } else {
-            if (newSlotCount > 0) newSlotCount--;
-            }
-        // set the new value and submit it
-        spellSlotInput.val(newSlotCount).trigger('submit');
-    });
-
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       let li = $(ev.currentTarget).parents(".item"),
         itemId = Number(li.attr("data-item-id"));
       this.actor.deleteOwnedItem(itemId, true);
       li.slideUp(200, () => this.render(false));
-        });
-
-    // Toggle visibility of unprepared Spells
-    html.find('.prepared-toggle').click(ev => {
-        this.options.showUnpreparedSpells = !this.options.showUnpreparedSpells;
-        this._applySpellVisibility(html);
     });
-    // this has to be called once. this makes sure that spells stay hidden after toggling their individual prepared status
-    this._applySpellVisibility(html);
+
+    // Toggle Spell prepared value
+    html.find('.item-prepare').click(ev => {
+      let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
+          item = this.actor.items.find(i => { return i.id === itemId });
+      item.data['prepared'].value = !item.data['prepared'].value;
+      this.actor.updateOwnedItem(item, true);
+    });
+
+    // Re-render the sheet when toggling visibility of spells
+    html.find('.prepared-toggle').click(ev => {
+      this.options.showUnpreparedSpells = !this.options.showUnpreparedSpells;
+      this.render()
+    });
 
     /* -------------------------------------------- */
     /*  Miscellaneous
@@ -1093,30 +1101,7 @@ class Actor5eSheet extends ActorSheet {
         data = duplicate(header.dataset);
     data["name"] = `New ${data.type.capitalize()}`;
     this.actor.createOwnedItem(data, true, {renderSheet: true});
-    }
-
-    /**
-      * Apply a filter to hide Item entrys in the Spellbook using the prepared value and an option
-      * @private
-      */ 
-    _applySpellVisibility(html) {
-        // get the list of all the spell entrys, ignoring the inventory headers
-        let spellElements = html.find('.spellbook .item:not(.inventory-header)');
-        for (let element of spellElements) {
-            // load the item so we can determin the prepared value and find out if its a cantrip
-            let item = this.actor.items.find(i => { return i.id === Number(element.dataset.itemId) });
-            // newly created items often have level.value undefined, but not always, hence the double checking
-            // cantrips are always prepared, thats why they get treated the same as prepared spells
-            let alwaysShowItem = item.data.prepared.value || item.data.level.value == 0 || item.data.level.value === undefined;
-
-            // apply the visibility
-            if (this.options.showUnpreparedSpells || alwaysShowItem) {
-                $(element).show();
-            } else {
-                $(element).hide();
-            }
-        }
-    }
+  }
 }
 
 
@@ -1426,7 +1411,7 @@ class Item5e extends Item {
     // Get data
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
+        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
         parts = [itemData.damage.value],
         isHeal = itemData.spellType.value === "heal",
         dtype = CONFIG.damageTypes[itemData.damageType.value];
