@@ -34,7 +34,7 @@ Hooks.on("canvasInit", () => {
   /**
    * Override default Grid measurement
    */
-  GridLayer.prototype.measureDistance = function(p0, p1) {
+  SquareGrid.prototype.measureDistance = function(p0, p1) {
     let gs = canvas.dimensions.size,
         ray = new Ray(p0, p1),
         nx = Math.abs(Math.ceil(ray.dx / gs)),

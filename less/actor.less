@@ -1,7 +1,7 @@
 @import "./variables.less";
 
 /* ----------------------------------------- */
-/*  Actor Sheet
+/*  Generic Sheet Styling
 /* ----------------------------------------- */
 
 .dnd5e.sheet .window-content {
@@ -116,689 +116,697 @@
     overflow: hidden;
   }
 }
+.dnd5e.actor {
 
-
-/* ---------------------------------------- */
-/*  Sheet Header                            */
-/* ---------------------------------------- */
-
-.dnd5e.actor-sheet .sheet-header {
-  .flexrow();
-  border-bottom: 1px solid @borderLight;
-
-  .charname {
-    height: 44px;
-    padding: 5px 5px 5px 0;
-    border: none;
-
-    > input {
-      width: 100%;
-      margin: 0;
-      .nodesto();
-      font-size: 36px;
-      border: none;
-    }
-  }
-
-  .charlevel {
-    flex: 0 0 150px;
-    height: 44px;
-    .flexcol();
-    text-align: right;
-
-    .level {
-      flex: 0 0 20px;
-      width: 100%;
-      .flexrow();
-      .nodesto();
-      font-size: 20px;
-      line-height: 20px;
-
-      > input[type="text"] {
-        flex: 0 0 26px;
-        height: 20px;
-        text-align: center;
-      }
-    }
-
-    .xpbar {
-      width: 100%;
-      flex: 0 0 8px;
-      background: #666;
-      border: 1px solid #000;
-      border-radius: 3px;
-
-      .bar {
-        height: 4px;
-        margin: 1px;
-        display: block;
-        background: #afebff;
-        border: 1px solid #000;
-        border-radius: 2px;
-      }
-    }
-
-    .experience {
-      flex: 0 0 16px;
-      .flexrow();
-      justify-content: flex-end;
-
-      > input[type="text"] {
-        flex: 1;
-        text-align: right;
-        height: 16px;
-      }
-    }
-  }
-}
-
-/* ---------------------------------------- */
-/*  Sheet Body                              */
-/* ---------------------------------------- */
-
-/* Character Details */
-.dnd5e.actor-sheet .sheet-body .details {
-  flex: 0 0 30px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid @borderLight;
-
-  .character-detail {
-    width: 33.33%;
-    height: 24px;
-    float: left;
-    margin: 3px 0;
-    padding-left: 3px;
-    border-right: 1px solid @borderLight;
-
-    &:last-child {
-      border-right: none;
-    }
-
-    > input {
-      .nodesto();
-      font-size: 20px;
-    }
-  }
-}
-.dnd5e.npc-sheet .sheet-body .details .character-detail {
-  width: 25%;
-}
-
-
-/* Primary Attributes */
-.dnd5e.actor-sheet .primary-attributes {
-  .flexrow();
-  flex: 0 0 80px;
-  border-bottom: 1px solid @borderLight;
-
-  .attribute {
-    flex: 0 0 25%;
-    height: 72px;
-    margin: 4px 0;
-    padding: 0 4px;
-    border-right: 1px solid @borderLight;
-
-    &:last-child {
-      margin-right: 0;
-      border-right: none;
-    }
-
-    .attribute-name {
-      position: relative;
-      height: 22px;
-      margin: 0 0 2px;
-      line-height: 22px;
-      .nodesto();
-      text-align: center;
-      border-bottom: 1px solid @borderLight;
-
-      .npc-roll-hp {
-        position: absolute;
-        right: 2px;
-      }
-    }
-
-    .attribute-value {
-      .flexrow();
-      height: 32px;
-      .nodesto();
-      font-size: 20px;
-      line-height: 32px;
-      text-align: center;
-    }
-
-    .attribute-footer {
-      height: 16px;
-      text-align: center;
-
-      span {
-        display: inline-block;
-      }
-
-      input {
-        max-width: 24px;
-      }
-
-      input.temphp {
-        max-width: 45%;
-      }
-
-      input.hit-dice {
-        min-width: 16px;
-        max-width: 16px;
-        text-align: right;
-      }
-
-      input[name="data.attributes.speed.value"] {
-        max-width: none;
-        text-align: left;
-      }
-
-      input.speed,
-      input.hpformula {
-        max-width: 90%;
-      }
-
-      a.rest {
-        padding: 0 2px;
-        background: rgba(255, 255, 255, 0.25);
-        border: 1px solid @borderLight;
-        border-radius: 2px;
-      }
-
-      &.recharge input[type="checkbox"]{
-        margin: 1px;
-      }
-    }
-  }
-}
-
-/* Status Effects */
-.dnd5e.actor-sheet .statuses {
-  flex: 0 0 29px;
-  margin: 0;
-  border-bottom: 1px solid @borderLight;
-  .flexrow();
-
-  .status {
-    padding: 0 6px;
-    border-right: 1px solid @borderLight;
-    font-size: 14px;
-    line-height: 28px;
+  /* ---------------------------------------- */
+  /*  Sheet Header
+  /* ---------------------------------------- */
+  .sheet-header {
     .flexrow();
+    border-bottom: 1px solid @borderLight;
 
-    &.death {
-      flex: 0 0 50%;
-    }
+    .charname {
+      height: 44px;
+      padding: 5px 5px 5px 0;
+      border: none;
 
-    &:last-child {
-      border-right: none;
-    }
-
-    h4 {
-      flex: 1;
-      margin: 0;
-      font-size: 12px;
-      .nodesto();
-    }
-
-    .status-value {
-      flex: none;
-      > * {
-        display: inline-block;
-        margin-right: 5px;
-      }
-
-      > input[type="text"] {
-        height: 20px;
-        max-width: 20px;
+      > input {
+        width: 100%;
         margin: 0;
+        .nodesto();
+        font-size: 36px;
+        border: none;
+      }
+    }
+
+    .charlevel {
+      flex: 0 0 150px;
+      height: 44px;
+      .flexcol();
+      text-align: right;
+
+      .level {
+        flex: 0 0 20px;
+        width: 100%;
+        .flexrow();
+        .nodesto();
+        font-size: 20px;
+        line-height: 20px;
+
+        > input[type="text"] {
+          flex: 0 0 26px;
+          height: 20px;
+          text-align: center;
+        }
       }
 
-      > input[type="checkbox"] {
-        position: relative;
-        top: 2px;
+      .xpbar {
+        width: 100%;
+        flex: 0 0 8px;
+        background: #666;
+        border: 1px solid #000;
+        border-radius: 3px;
+
+        .bar {
+          height: 4px;
+          margin: 1px;
+          display: block;
+          background: #afebff;
+          border: 1px solid #000;
+          border-radius: 2px;
+        }
+      }
+
+      .experience {
+        flex: 0 0 16px;
+        .flexrow();
+        justify-content: flex-end;
+
+        > input[type="text"] {
+          flex: 1;
+          text-align: right;
+          height: 16px;
+        }
       }
     }
   }
-}
 
+  /* ---------------------------------------- */
+  /*  Sheet Body                              */
+  /* ---------------------------------------- */
 
-/* ----------------------------------------- */
-/* Biography Tab
-/* ----------------------------------------- */
-
-.dnd5e.actor-sheet .biography {
-  .editor {
-    height: 380px;
-    padding-left: 8px;
-  }
-}
-.dnd5e.npc-sheet .biography .editor {
-  height: 465px;
-}
-
-/* ----------------------------------------- */
-/* Abilities Sidebar Tab
-/* ----------------------------------------- */
-
-.dnd5e .abilities {
-  margin-bottom: 3px;
-
-  .abilities-list {
+  /* Character Details */
+  .sheet-body .details {
+    flex: 0 0 30px;
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-
-  .ability {
-    .flexrow();
-    height: 36px;
-    line-height: 36px;
     border-bottom: 1px solid @borderLight;
 
-    .ability-proficiency {
-      flex: 0 0 24px;
-      i.fa-circle { font-size: 10px; }
-    }
+    .character-detail {
+      width: 33.33%;
+      height: 24px;
+      float: left;
+      margin: 3px 0;
+      padding-left: 3px;
+      border-right: 1px solid @borderLight;
 
-    .ability-name {
-      .nodesto();
-      margin: 0;
-    }
+      &:last-child {
+        border-right: none;
+      }
 
-    .ability-score {
-      flex: 0 0 36px;
       > input {
-        width: 30px;
-        height: 30px;
-        margin: 3px;
         .nodesto();
-        font-size: 22px;
-        text-align: center;
+        font-size: 20px;
       }
     }
-
-    .ability-mod,
-    .ability-save {
-      flex: 0 0 24px;
-      margin: 8px 0;
-      .nodesto();
-      line-height: 24px;
-      color: #666;
-      text-align: center;
-    }
-    .ability-mod { border-right: 1px solid @borderLight; }
-    .ability-save { border-left: 1px solid @borderLight; }
   }
-}
+  &.npc-sheet .sheet-body .details .character-detail {
+    width: 25%;
+  }
 
 
-/* ----------------------------------------- */
-/* Skills Tab
-/* ----------------------------------------- */
-
-.dnd5e .skills {
-  li.skill {
+  /* Primary Attributes */
+  .primary-attributes {
     .flexrow();
-    height: 21px;
-    line-height: 21px;
-    border-bottom: 1px solid @borderLight;
-    font-size: 13px;
-
-    .skill-name {
-      margin: 0;
-    }
-
-    .skill-proficiency {
-      flex: 0 0 24px;
-      i.fa-circle { font-size: 10px; }
-    }
-
-    .skill-ability {
-      flex: 0 0 36px;
-      color: #666;
-      text-align: right;
-      margin-right: 4px;
-    }
-
-    .skill-mod {
-      flex: 0 0 28px;
-      text-align: center;
-    }
-  }
-}
-
-.dnd5e.locked .ability-proficiency,
-.dnd5e.locked .skill-proficiency {
-  text-shadow: none;
-  cursor: default;
-}
-
-
-
-/* ----------------------------------------- */
-/* Traits Tab
-/* ----------------------------------------- */
-
-.traits {
-  .form-group {
-    label {
-      flex: 0 0 50%;
-    }
-  }
-}
-
-.traits label {
-  font-weight: bold;
-}
-
-
-/* ----------------------------------------- */
-/* Inventory Tab
-/* ----------------------------------------- */
-
-.currency {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid @borderLight;
-  .flexrow();
-  font-size: 12px;
-  line-height: 20px;
-
-  li.denomination {
-    .flexrow();
-    padding: 3px 3px 0;
-    justify-content: flex-end;
-    border-right: 1px solid @borderLight;
-
-    label {
-      flex: none;
-      margin-right: 3px;
-    }
-
-    input {
-      text-align: right;
-      max-width: 48px;
-    }
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-}
-
-/* Inventory List */
-.inventory-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  height: calc(100% - 44px);
-  overflow-y: scroll;
-
-  /* Inventory Item */
-  .item {
-    .flexrow();
-    line-height: 24px;
-    padding: 0;
+    flex: 0 0 80px;
     border-bottom: 1px solid @borderLight;
 
-    .item-name {
+    .attribute {
+      flex: 0 0 25%;
+      height: 72px;
+      margin: 4px 0;
+      padding: 0 4px;
+      border-right: 1px solid @borderLight;
+
+      &:last-child {
+        margin-right: 0;
+        border-right: none;
+      }
+
+      .attribute-name {
+        position: relative;
+        height: 22px;
+        margin: 0 0 2px;
+        line-height: 22px;
+        .nodesto();
+        text-align: center;
+        border-bottom: 1px solid @borderLight;
+
+        .npc-roll-hp {
+          position: absolute;
+          right: 2px;
+        }
+      }
+
+      .attribute-value {
+        .flexrow();
+        height: 32px;
+        .nodesto();
+        font-size: 20px;
+        line-height: 32px;
+        text-align: center;
+      }
+
+      .attribute-footer {
+        height: 16px;
+        text-align: center;
+
+        span {
+          display: inline-block;
+        }
+
+        input {
+          max-width: 24px;
+        }
+
+        input.temphp {
+          max-width: 45%;
+        }
+
+        input.hit-dice {
+          min-width: 16px;
+          max-width: 16px;
+          text-align: right;
+        }
+
+        input[name="data.attributes.speed.value"] {
+          max-width: none;
+          text-align: left;
+        }
+
+        input.speed,
+        input.hpformula {
+          max-width: 90%;
+        }
+
+        a.rest {
+          padding: 0 2px;
+          background: rgba(255, 255, 255, 0.25);
+          border: 1px solid @borderLight;
+          border-radius: 2px;
+        }
+
+        &.recharge input[type="checkbox"]{
+          margin: 1px;
+        }
+      }
+    }
+  }
+
+  /* Status Effects */
+  .statuses {
+    flex: 0 0 29px;
+    margin: 0;
+    border-bottom: 1px solid @borderLight;
+    .flexrow();
+
+    .status {
+      padding: 0 6px;
+      border-right: 1px solid @borderLight;
+      font-size: 14px;
+      line-height: 28px;
       .flexrow();
 
-      img {
-        flex: 0 0 24px;
-        margin-right: 6px;
+      &.death {
+        flex: 0 0 50%;
+      }
+
+      &:last-child {
+        border-right: none;
       }
 
       h4 {
-        flex: 2;
+        flex: 1;
+        margin: 0;
+        font-size: 12px;
+        .nodesto();
+      }
+
+      .status-value {
+        flex: none;
+        > * {
+          display: inline-block;
+          margin-right: 5px;
+        }
+
+        > input[type="text"] {
+          height: 20px;
+          max-width: 20px;
+          margin: 0;
+        }
+
+        > input[type="checkbox"] {
+          position: relative;
+          top: 2px;
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /* Biography Tab
+  /* ----------------------------------------- */
+
+  .biography {
+    .editor {
+      height: 380px;
+      padding-left: 8px;
+    }
+  }
+  &.npc-sheet .biography .editor {
+    height: 465px;
+  }
+
+  /* ----------------------------------------- */
+  /* Abilities Sidebar Tab
+  /* ----------------------------------------- */
+
+  .abilities {
+    margin-bottom: 3px;
+
+    .abilities-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ability {
+      .flexrow();
+      height: 36px;
+      line-height: 36px;
+      border-bottom: 1px solid @borderLight;
+
+      .ability-proficiency {
+        flex: 0 0 24px;
+        i.fa-circle { font-size: 10px; }
+      }
+
+      .ability-name {
+        .nodesto();
         margin: 0;
       }
 
-      .prepared {
-        color: #666;
-        margin-left: 3px;
-        font-size: 10px;
+      .ability-score {
+        flex: 0 0 36px;
+        > input {
+          width: 30px;
+          height: 30px;
+          margin: 3px;
+          .nodesto();
+          font-size: 22px;
+          text-align: center;
+        }
       }
 
-      .item-charges {
+      .ability-mod,
+      .ability-save {
+        flex: 0 0 24px;
+        margin: 8px 0;
+        .nodesto();
+        line-height: 24px;
         color: #666;
-        font-size: 12px;
-        flex: 0;
-      }
-    }
-
-    .item-quantity, .item-weight {
-      flex: 0 0 32px;
-      font-size: 12px;
-      color: #666;
-      text-align: center;
-      border-right: 1px solid @borderLight;
-    }
-
-    .item-controls {
-      flex: 0 0 44px;
-
-      a {
-        display: block;
-        float: left;
-        width: 22px;
-        font-size: 10px;
         text-align: center;
+      }
+      .ability-mod { border-right: 1px solid @borderLight; }
+      .ability-save { border-left: 1px solid @borderLight; }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /* Skills Tab
+  /* ----------------------------------------- */
+
+  .skills {
+    .skill {
+      .flexrow();
+      height: 21px;
+      line-height: 21px;
+      border-bottom: 1px solid @borderLight;
+      font-size: 13px;
+
+      .skill-name {
+        margin: 0;
+      }
+
+      .skill-proficiency {
+        flex: 0 0 24px;
+        i.fa-circle { font-size: 10px; }
+      }
+
+      .skill-ability {
+        flex: 0 0 36px;
         color: #666;
+        text-align: right;
+        margin-right: 4px;
+      }
+
+      .skill-mod {
+        flex: 0 0 28px;
+        text-align: center;
       }
     }
   }
 
-  /* Inventory Header */
-  .inventory-header {
-    font-weight: 700;
+  &.locked .ability-proficiency,
+  &.locked .skill-proficiency {
+    text-shadow: none;
+    cursor: default;
+  }
+
+  /* ----------------------------------------- */
+  /* Traits Tab
+  /* ----------------------------------------- */
+
+  .traits {
+    .form-group {
+      label {
+        flex: 0 0 50%;
+      }
+    }
+  }
+
+  .traits label {
+    font-weight: bold;
+  }
+
+  /* ----------------------------------------- */
+  /* Inventory Tab
+  /* ----------------------------------------- */
+
+  .currency {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid @borderLight;
+    .flexrow();
+    font-size: 12px;
     line-height: 20px;
-    background: rgba(0, 0, 0, 0.05);
+
+    li.denomination {
+      .flexrow();
+      padding: 3px 3px 0;
+      justify-content: flex-end;
+      border-right: 1px solid @borderLight;
+
+      label {
+        flex: none;
+        margin-right: 3px;
+      }
+
+      input {
+        text-align: right;
+        max-width: 48px;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  /* Inventory List */
+  .inventory-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: calc(100% - 44px);
+    overflow-y: scroll;
+
+    /* Inventory Item */
+    .item {
+      .flexrow();
+      line-height: 24px;
+      padding: 0;
+      border-bottom: 1px solid @borderLight;
+
+      .item-name {
+        .flexrow();
+
+        img {
+          flex: 0 0 24px;
+          margin-right: 6px;
+        }
+
+        h4 {
+          flex: 2;
+          margin: 0;
+        }
+
+        .prepared {
+          color: #666;
+          margin-left: 3px;
+          font-size: 10px;
+        }
+
+        .item-charges {
+          color: #666;
+          font-size: 12px;
+          flex: 0;
+        }
+      }
+
+      .item-quantity, .item-weight {
+        flex: 0 0 32px;
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+        border-right: 1px solid @borderLight;
+      }
+
+      .item-controls {
+        flex: 0 0 44px;
+
+        a {
+          display: block;
+          float: left;
+          width: 22px;
+          font-size: 10px;
+          text-align: center;
+          color: #666;
+        }
+      }
+    }
+
+    /* Inventory Header */
+    .inventory-header {
+      font-weight: 700;
+      line-height: 20px;
+      background: rgba(0, 0, 0, 0.05);
+
+      h3 {
+        font-size: 1em;
+        margin: 0;
+        padding-left: 32px;
+        font-weight: bold;
+      }
+
+      .item-quantity, .item-weight {
+        color: #111;
+      }
+
+      .item-controls a.item-create {
+        width: 100%;
+      }
+    }
+  }
+
+  /* Encumbrance Bar */
+  .encumbrance {
+    background: rgba(0,0,0,0.1);
+    height: 12px;
+    margin-top: 5px;
+    border: 1px solid #111;
+    border-radius: 3px;
+
+    .encumbrance-bar {
+      background: @accentDark;
+      height: 8px;
+      margin: 1px;
+      border: 1px solid @accentColor;
+      border-radius: 3px;
+    }
+
+    .encumbrance-label {
+      float: right;
+      text-align: right;
+      padding-right: 5px;
+      font-size: 12px;
+      line-height: 12px;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Spellbook Tab
+  /* ----------------------------------------- */
+
+  .spellbook {
+    .spellcasting-ability {
+      margin: 0;
+      padding: 3px 3px 0;
+      border-bottom: 1px solid @borderLight;
+      font-size: 12px;
+      label {
+        line-height: 20px;
+      }
+      select {
+        flex: 1;
+        font-size: 10px;
+        height: 18px;
+        background: rgba(255,255,255,0.5);
+      }
+    }
+
+    .spellbook-header {
+      .spell-school, .spell-action {
+        color: inherit;
+      }
+    }
+
+    .prepared-toggle {
+      flex: 0 0 20px;
+      line-height: 20px;
+      margin-left: 5px;
+    }
+
+    // Spellbook spell list
+    .inventory-list {
+      height: calc(100% - 28px);
+    }
+
+    // Individual spell items
+    .item {
+      .item-name {
+        flex: 2;
+      }
+
+      .spell-school, .spell-action {
+        flex: 1;
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+        border-right: 1px solid @borderLight;
+      }
+
+      .spell-slots, .spell-max {
+        flex: 0 0 24px;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .spell-max {
+        border-right: 1px solid @borderLight;
+      }
+    }
+
+    // Empty spellbook controls
+    .spellbook-empty .item-controls { flex: 1; }
+  }
+
+  // Extended Actor Sheet spellbook controls
+  &.character-sheet .spellbook .item-controls { flex: 0 0 66px; }
+
+
+  /* ----------------------------------------- */
+  /*  Feats Tab
+  /* ----------------------------------------- */
+
+  .feats {
+    .feats-list {
+      height: 100%;
+      .item-name {
+        flex: 2;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /* Class List
+  /* ----------------------------------------- */
+
+  .class-header {
+    line-height: 20px;
+    position: relative;
+    margin: 3px 0 1px;
 
     h3 {
-      font-size: 1em;
-      margin: 0;
-      padding-left: 32px;
-      font-weight: bold;
-    }
-
-    .item-quantity, .item-weight {
-      color: #111;
-    }
-
-    .item-controls a.item-create {
-      width: 100%;
-    }
-  }
-}
-
-/* Encumbrance Bar */
-.encumbrance {
-  background: rgba(0,0,0,0.1);
-  height: 12px;
-  margin-top: 5px;
-  border: 1px solid #111;
-  border-radius: 3px;
-
-  .encumbrance-bar {
-    background: @accentDark;
-    height: 8px;
-    margin: 1px;
-    border: 1px solid @accentColor;
-    border-radius: 3px;
-  }
-
-  .encumbrance-label {
-    float: right;
-    text-align: right;
-    padding-right: 5px;
-    font-size: 12px;
-    line-height: 12px;
-  }
-}
-
-/* ----------------------------------------- */
-/*  Spellbook Tab
-/* ----------------------------------------- */
-
-.dnd5e.sheet .spellbook {
-  .spellcasting-ability {
-    margin: 0;
-    padding: 3px 3px 0;
-    border-bottom: 1px solid @borderLight;
-    font-size: 12px;
-    label {
-      line-height: 20px;
-    }
-    select {
-      flex: 1;
-      font-size: 10px;
-      height: 18px;
-      background: rgba(255,255,255,0.5);
-    }
-  }
-
-  .spellbook-header {
-    .spell-school, .spell-action {
-      color: inherit;
-    }
-  }
-
-  .inventory-list {
-    height: calc(100% - 28px);
-  }
-
-  .item-name {
-    flex: 2;
-  }
-
-  .spell-school, .spell-action {
-    flex: 1;
-    font-size: 12px;
-    color: #666;
-    text-align: center;
-    border-right: 1px solid @borderLight;
-  }
-
-  .spell-slots, .spell-max {
-    flex: 0 0 24px;
-    font-size: 12px;
-    text-align: center;
-  }
-
-  .spell-max {
-    border-right: 1px solid @borderLight;
-  }
-
-  .spellbook-empty .item-controls { flex: 1; }
-}
-
-
-/* ----------------------------------------- */
-/*  Feats Tab
-/* ----------------------------------------- */
-
-.dnd5e.sheet .feats {
-  .feats-list {
-    height: 100%;
-    .item-name {
-      flex: 2;
-    }
-  }
-}
-
-/* ----------------------------------------- */
-/* Class List
-/* ----------------------------------------- */
-
-.class-header {
-  line-height: 20px;
-  position: relative;
-  margin: 3px 0 1px;
-
-  h3 {
-    text-align: center;
-    .nodesto();
-    font-size: 18px;
-    color: #222;
-    margin: 0;
-  }
-
-  a.item-create {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 11px;
-    color: #666;
-  }
-}
-
-.class-list {
-  overflow: hidden;
-
-  .item {
-    background: rgba(0, 0, 0, 0.03);
-    padding: 3px 3px 0;
-    border: 1px solid @borderLight;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 3px;
-
-    .class-levels,
-    .item-controls {
-      line-height: 16px;
-      font-size: 10px;
-      text-align: right;
-    }
-    .class-levels {
-      padding-right: 5px;
+      text-align: center;
       .nodesto();
-      color: #222;
-    }
-
-    > * {
-    line-height: 20px;
-    }
-
-    .class-name,
-    .class-subclass {
-      margin: 0;
-      flex: 1 0 75%;
-    }
-
-    .class-name {
-      .nodesto();
-      color: #222;
       font-size: 18px;
+      color: #222;
+      margin: 0;
     }
 
-    .class-subclass {
-      line-height: 14px;
-      font-size: 13px;
-      color: #999;
+    a.item-create {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 11px;
+      color: #666;
     }
   }
-}
 
+  .class-list {
+    overflow: hidden;
 
-/* ----------------------------------------- */
-/* Rest Buttons
-/* ----------------------------------------- */
+    .item {
+      background: rgba(0, 0, 0, 0.03);
+      padding: 3px 3px 0;
+      border: 1px solid @borderLight;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 3px;
 
-#short-rest-hd {
-  label {
-    flex: 0 0 60px;
-    line-height: 24px;
+      .class-levels,
+      .item-controls {
+        line-height: 16px;
+        font-size: 10px;
+        text-align: right;
+      }
+      .class-levels {
+        padding-right: 5px;
+        .nodesto();
+        color: #222;
+      }
+
+      > * {
+        line-height: 20px;
+      }
+
+      .class-name,
+      .class-subclass {
+        margin: 0;
+        flex: 1 0 75%;
+      }
+
+      .class-name {
+        .nodesto();
+        color: #222;
+        font-size: 18px;
+      }
+
+      .class-subclass {
+        line-height: 14px;
+        font-size: 13px;
+        color: #999;
+      }
+    }
   }
 
-  #roll-hd {
-    line-height: 24px;
-    margin-left: 6px;
+  /* ----------------------------------------- */
+  /* Rest Buttons
+  /* ----------------------------------------- */
+
+  #short-rest-hd {
+    label {
+      flex: 0 0 60px;
+      line-height: 24px;
+    }
+
+    #roll-hd {
+      line-height: 24px;
+      margin-left: 6px;
+    }
   }
 }
 

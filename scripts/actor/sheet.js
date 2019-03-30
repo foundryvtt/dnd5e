@@ -2,15 +2,24 @@
  * Extend the basic ActorSheet class to do all the D&D5e things!
  */
 class Actor5eSheet extends ActorSheet {
+  constructor(...args) {
+    super(...args);
+
+    // Add additional class options
+    this.options.classes.push(`${this.actorType}-sheet`);
+  }
+
+	/* -------------------------------------------- */
 
   /**
    * Extend and override the default options used by the 5e Actor Sheet
    */
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
-	  options.classes = options.classes.concat(["dnd5e", "actor-sheet"]);
+	  options.classes = options.classes.concat(["dnd5e", "actor"]);
     options.width = 650;
     options.height = 720;
+    options.showUnpreparedSpells = true;
 	  return options;
   }
 
@@ -120,18 +129,7 @@ class Actor5eSheet extends ActorSheet {
       }
 
       // Spells
-      else if ( i.type === "spell" ) {
-        let lvl = i.data.level.value || 0;
-        spellbook[lvl] = spellbook[lvl] || {
-          isCantrip: lvl === 0,
-          label: CONFIG.spellLevels[lvl],
-          spells: [],
-          uses: actorData.data.spells["spell"+lvl].value || 0,
-          slots: actorData.data.spells["spell"+lvl].max || 0
-        };
-        i.data.school.str = CONFIG.spellSchools[i.data.school.value];
-        spellbook[lvl].spells.push(i);
-      }
+      else if ( i.type === "spell" ) this._prepareSpell(actorData, spellbook, i);
 
       // Classes
       else if ( i.type === "class" ) {
@@ -182,18 +180,7 @@ class Actor5eSheet extends ActorSheet {
       i.img = i.img || DEFAULT_TOKEN;
 
       // Spells
-      if ( i.type === "spell" ) {
-        let lvl = i.data.level.value || 0;
-        spellbook[lvl] = spellbook[lvl] || {
-          isCantrip: lvl === 0,
-          label: CONFIG.spellLevels[lvl],
-          spells: [],
-          uses: actorData.data.spells["spell"+lvl].value || 0,
-          slots: actorData.data.spells["spell"+lvl].max || 0
-        };
-        i.data.school.str = CONFIG.spellSchools[i.data.school.value];
-        spellbook[lvl].spells.push(i);
-      }
+      if ( i.type === "spell" ) this._prepareSpell(actorData, spellbook, i);
 
       // Features
       else if ( i.type === "weapon" ) features.weapons.items.push(i);
@@ -207,6 +194,37 @@ class Actor5eSheet extends ActorSheet {
     // Assign and return
     actorData.features = features;
     actorData.spellbook = spellbook;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Insert a spell into the spellbook object when rendering the character sheet
+   * @param {Object} actorData    The Actor data being prepared
+   * @param {Object} spellbook    The spellbook data being prepared
+   * @param {Object} spell        The spell data being prepared
+   * @private
+   */
+  _prepareSpell(actorData, spellbook, spell) {
+    let lvl = spell.data.level.value || 0,
+        isNPC = this.actorType === "npc";
+
+    // Determine whether to show the spell
+    let showSpell = this.options.showUnpreparedSpells || isNPC || spell.data.prepared.value || (lvl === 0);
+    if ( !showSpell ) return;
+
+    // Extend the Spellbook level
+    spellbook[lvl] = spellbook[lvl] || {
+      isCantrip: lvl === 0,
+      label: CONFIG.spellLevels[lvl],
+      spells: [],
+      uses: actorData.data.spells["spell"+lvl].value || 0,
+      slots: actorData.data.spells["spell"+lvl].max || 0
+    };
+
+    // Add the spell to the spellbook at the appropriate level
+    spell.data.school.str = CONFIG.spellSchools[spell.data.school.value];
+    spellbook[lvl].spells.push(spell);
   }
 
   /* -------------------------------------------- */
@@ -233,6 +251,8 @@ class Actor5eSheet extends ActorSheet {
     return icons[level];
   }
 
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers
   /* -------------------------------------------- */
 
   /**
@@ -321,6 +341,20 @@ class Actor5eSheet extends ActorSheet {
         itemId = Number(li.attr("data-item-id"));
       this.actor.deleteOwnedItem(itemId, true);
       li.slideUp(200, () => this.render(false));
+    });
+
+    // Toggle Spell prepared value
+    html.find('.item-prepare').click(ev => {
+      let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
+          item = this.actor.items.find(i => { return i.id === itemId });
+      item.data['prepared'].value = !item.data['prepared'].value;
+      this.actor.updateOwnedItem(item, true);
+    });
+
+    // Re-render the sheet when toggling visibility of spells
+    html.find('.prepared-toggle').click(ev => {
+      this.options.showUnpreparedSpells = !this.options.showUnpreparedSpells;
+      this.render()
     });
 
     /* -------------------------------------------- */
