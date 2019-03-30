@@ -698,9 +698,14 @@
   height: 18px;
   background: rgba(255, 255, 255, 0.5);
 }
+.dnd5e.sheet .spellbook .prepared-toggle {
+    flex: 0 0 20px;
+    line-height: 20px;
+    margin-left: 5px;
+}
 .dnd5e.sheet .spellbook .spellbook-header .spell-school,
 .dnd5e.sheet .spellbook .spellbook-header .spell-action {
-  color: inherit;
+    color: inherit;
 }
 .dnd5e.sheet .spellbook .inventory-list {
   height: calc(100% - 28px);
@@ -725,8 +730,13 @@
 .dnd5e.sheet .spellbook .spell-max {
   border-right: 1px solid #CCC;
 }
+
+.dnd5e.sheet .spellbook .item-controls {
+    flex: 0 0 66px;
+}
+
 .dnd5e.sheet .spellbook .spellbook-empty .item-controls {
-  flex: 1;
+    flex: 1;
 }
 /* ----------------------------------------- */
 /*  Feats Tab
