@@ -259,7 +259,8 @@ class Actor5e extends Actor {
     update["data.attributes.hp.value"] = data.attributes.hp.max;
 
     // Recover hit dice
-    let dhd = Math.min(Math.floor(data.details.level.value / 2), data.details.level.value - data.attributes.hd.value);
+    let recover_hd = Math.max(Math.floor(data.details.level.value/2), 1),
+        dhd = Math.min(recover_hd, data.details.level.value - data.attributes.hd.value);
     update["data.attributes.hd.value"] = data.attributes.hd.value + dhd;
 
     // Recover resources
@@ -305,14 +306,18 @@ class Actor5e extends Actor {
       return false;
     }).forEach(t => {
 
-      // Linked Tokens - update Actor
+      // For linked Tokens, update the Actor first deducting from the temporary hit point pool
       if ( t.actor && t.data.actorLink ) {
-        let hp = parseInt(t.actor.data.data.attributes.hp.value),
-            max = parseInt(t.actor.data.data.attributes.hp.max);
-        t.actor.update({"data.attributes.hp.value": Math.clamped(hp - value, 0, max)});
+        let hp = t.actor.data.data.attributes.hp,
+            tmp = parseInt(hp["temp"]),
+            dt = Math.min(tmp, value);
+        t.actor.update({
+          "data.attributes.hp.temp": tmp - dt,
+          "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
+        });
       }
 
-      // Unlinked Tokens - update Token directly
+      // For unlinked Tokens, just update the resource bar directly
       else {
         let bar = (t.data.bar1.attribute === "attributes.hp") ? "bar1" : "bar2";
         t.update(canvas.id, {[`${bar}.value`]: Math.clamped(t.data[bar].value - value, 0, t.data[bar].max)});
@@ -323,3 +328,20 @@ class Actor5e extends Actor {
 
 // Assign the actor class to the CONFIG
 CONFIG.Actor.entityClass = Actor5e;
+
+
+/**
+ * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
+ * TODO: This should probably be replaced with a formal Token class extension
+ * @private
+ */
+const _drawBar = Token.prototype._drawBar;
+Token.prototype._drawBar = function(number, bar, data) {
+  if ( data.attribute === "attributes.hp" ) {
+    data = duplicate(data);
+    data.value += parseInt(data['temp'] || 0);
+    data.max += parseInt(data['tempmax'] || 0);
+  }
+  _drawBar.bind(this)(number, bar, data);
+};
+

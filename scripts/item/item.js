@@ -310,20 +310,18 @@ class Item5e extends Item {
       let qty = itemData['quantity'],
           chg = itemData['charges'];
 
-      // No charges are remaining
-      if ( itemData['autoDestroy'] && chg.value <= 1 ) {
+      // Deduct an item quantity
+      if ( chg.value <= 1 && qty.value > 1 ) {
+        this.actor.updateOwnedItem({
+          id: this.data.id,
+          'data.quantity.value': Math.max(qty.value - 1, 0),
+          'data.charges.value': chg.max
+        }, true);
+      }
 
-        // Deduct an item quantity
-        if ( qty.value > 1 ) {
-          this.actor.updateOwnedItem({
-            id: this.data.id,
-            'data.quantity.value': qty.value - 1,
-            'data.charges.value': chg.max
-          }, true);
-        }
-
-        // Destroy the item
-        else this.actor.deleteOwnedItem(this.data.id);
+      // Optionally destroy the item
+      else if ( chg.value <= 1 && qty.value <= 1 && itemData['autoDestroy'].value ) {
+        this.actor.deleteOwnedItem(this.data.id);
       }
 
       // Deduct the remaining charges
