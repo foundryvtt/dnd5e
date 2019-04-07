@@ -45,7 +45,7 @@ Hooks.on("canvasInit", () => {
         nStraight = Math.abs(ny - nx);
 
     // Alternative DMG Movement
-    if ( this.diagonalRule === "5105" ) {
+    if ( this.parent.diagonalRule === "5105" ) {
       let nd10 = Math.floor(nDiagonal / 2);
       let spaces = (nd10 * 2) + (nDiagonal - nd10) + nStraight;
       return spaces * canvas.dimensions.distance;
