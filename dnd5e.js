@@ -242,7 +242,7 @@ Hooks.on("canvasInit", () => {
         nStraight = Math.abs(ny - nx);
 
     // Alternative DMG Movement
-    if ( this.diagonalRule === "5105" ) {
+    if ( this.parent.diagonalRule === "5105" ) {
       let nd10 = Math.floor(nDiagonal / 2);
       let spaces = (nd10 * 2) + (nDiagonal - nd10) + nStraight;
       return spaces * canvas.dimensions.distance;
@@ -565,7 +565,7 @@ class Actor5e extends Actor {
       if ( t.actor && t.data.actorLink ) {
         let hp = t.actor.data.data.attributes.hp,
             tmp = parseInt(hp["temp"]),
-            dt = Math.min(tmp, value);
+            dt = value > 0 ? Math.min(tmp, value) : 0;
         t.actor.update({
           "data.attributes.hp.temp": tmp - dt,
           "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
