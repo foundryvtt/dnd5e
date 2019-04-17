@@ -217,6 +217,36 @@ Hooks.once("init", () => {
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
+
+
+  /**
+   * Register Initiative formula setting
+   */
+  function _set5eInitiative(tiebreaker) {
+    const base = "1d20 + @abilities.dex.mod + @attributes.init.value",
+          dex = "1d20 + @abilities.dex.mod + @attributes.init.value + (@abilities.dex.value / 100)";
+    if ( tiebreaker ) {
+      CONFIG.initiative = {
+        formula: dex,
+        decimals: 2
+      }
+    } else {
+      CONFIG.initiative = {
+        formula: base,
+        decimals: 0
+      }
+    }
+  }
+  game.settings.register("dnd5e", "initiativeDexTiebreaker", {
+    name: "Initiative Dexterity Tiebreaker",
+    hint: "Append the raw Dexterity ability score to break ties in Initiative.",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: enable => _set5eInitiative(enable)
+  });
+  _set5eInitiative(game.settings.get("dnd5e", "initiativeDexTiebreaker"));
 });
 
 
@@ -227,6 +257,8 @@ Hooks.on("canvasInit", () => {
 
   // Apply the current setting
   canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
+
+  /* -------------------------------------------- */
 
   /**
    * Override default Grid measurement
