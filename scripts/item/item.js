@@ -14,7 +14,7 @@ class Item5e extends Item {
     const templateData = {
       actor: this.actor,
       item: this.data,
-      data: this[this.data.type+"ChatData"]()
+      data: this.getChatData()
     };
 
     // Basic chat message data
@@ -36,8 +36,16 @@ class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+  /*  Chat Card Data
+  /* -------------------------------------------- */
 
-  equipmentChatData() {
+  getChatData() {
+    return this[`_${this.data.type}ChatData`]();
+  }
+
+  /* -------------------------------------------- */
+
+  _equipmentChatData() {
     const data = duplicate(this.data.data);
     const properties = [
       CONFIG.armorTypes[data.armorType.value],
@@ -51,13 +59,20 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  weaponChatData() {
-    return this.data.data;
+  _weaponChatData() {
+    const data = duplicate(this.data.data);
+    const properties = [
+      data.range.value,
+      CONFIG.weaponTypes[data.weaponType.value],
+      data.proficient.value ? "" : "Not Proficient"
+    ];
+    data.properties = properties.filter(p => !!p);
+    return data;
   }
 
   /* -------------------------------------------- */
 
-  consumableChatData() {
+  _consumableChatData() {
     const data = duplicate(this.data.data);
     data.consumableType.str = CONFIG.consumableTypes[data.consumableType.value];
     data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
@@ -67,7 +82,7 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  toolChatData() {
+  _toolChatData() {
     const data = duplicate(this.data.data);
     let abl = this.actor.data.data.abilities[data.ability.value].label,
         prof = data.proficient.value || 0;
@@ -78,13 +93,13 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  backpackChatData() {
+  _backpackChatData() {
     return duplicate(this.data.data);
   }
 
   /* -------------------------------------------- */
 
-  spellChatData() {
+  _spellChatData() {
     const data = duplicate(this.data.data),
           ad = this.actor.data.data;
 
@@ -118,7 +133,7 @@ class Item5e extends Item {
   /**
    * Prepare chat card data for items of the "Feat" type
    */
-  featChatData() {
+  _featChatData() {
     const data = duplicate(this.data.data),
           ad = this.actor.data.data;
 
@@ -145,6 +160,8 @@ class Item5e extends Item {
     return data;
   }
 
+  /* -------------------------------------------- */
+  /*  Roll Attacks
   /* -------------------------------------------- */
 
   /**

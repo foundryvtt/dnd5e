@@ -53,7 +53,7 @@ class Actor5eSheet extends ActorSheet {
     if ( sheetData.actor.type === "npc" ) {
       let cr = sheetData.data.details.cr;
       let crs = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-      cr.str = (cr.value >= 1) ? String(cr.value) : crs[cr.value] || 0;
+      cr["str"] = (cr.value >= 1) ? String(cr.value) : crs[cr.value] || 0;
     }
 
     // Ability proficiency
@@ -318,7 +318,8 @@ class Actor5eSheet extends ActorSheet {
     /*  Rollable Items                              */
     /* -------------------------------------------- */
 
-    html.find('.item .rollable').click(event => this._onRollItemCard(event));
+    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+    html.find('.item .item-image').click(event => this._onItemRoll(event));
 
     /* -------------------------------------------- */
     /*  Inventory
@@ -425,12 +426,38 @@ class Actor5eSheet extends ActorSheet {
    * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
    * @private
    */
-  _onRollItemCard(event) {
+  _onItemRoll(event) {
     event.preventDefault();
     let itemId = Number($(event.currentTarget).parents(".item").attr("data-item-id")),
-        Item = CONFIG.Item.entityClass,
-        item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
+        item = this.actor.getOwnedItem(itemId);
     item.roll();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * @private
+   */
+  _onItemSummary(event) {
+    event.preventDefault();
+    let li = $(event.currentTarget).parents(".item"),
+        item = this.actor.getOwnedItem(Number(li.attr("data-item-id"))),
+        chatData = item.getChatData();
+
+    // Toggle summary
+    if ( li.hasClass("expanded") ) {
+      let summary = li.children(".item-summary");
+      summary.slideUp(200, () => summary.remove());
+    } else {
+      let div = $(`<div class="item-summary">${item.data.data.description.value}</div>`);
+      let props = $(`<div class="item-properties"></div>`);
+      chatData.properties.forEach(p => props.append(`<span>${p}</span>`));
+      div.append(props);
+      li.append(div.hide());
+      div.slideDown(200);
+    }
+    li.toggleClass("expanded");
   }
 
   /* -------------------------------------------- */

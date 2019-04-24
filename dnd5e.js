@@ -688,7 +688,7 @@ class Actor5eSheet extends ActorSheet {
     if ( sheetData.actor.type === "npc" ) {
       let cr = sheetData.data.details.cr;
       let crs = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-      cr.str = (cr.value >= 1) ? String(cr.value) : crs[cr.value] || 0;
+      cr["str"] = (cr.value >= 1) ? String(cr.value) : crs[cr.value] || 0;
     }
 
     // Ability proficiency
@@ -953,7 +953,8 @@ class Actor5eSheet extends ActorSheet {
     /*  Rollable Items                              */
     /* -------------------------------------------- */
 
-    html.find('.item .rollable').click(event => this._onRollItemCard(event));
+    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+    html.find('.item .item-image').click(event => this._onItemRoll(event));
 
     /* -------------------------------------------- */
     /*  Inventory
@@ -1060,12 +1061,38 @@ class Actor5eSheet extends ActorSheet {
    * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
    * @private
    */
-  _onRollItemCard(event) {
+  _onItemRoll(event) {
     event.preventDefault();
     let itemId = Number($(event.currentTarget).parents(".item").attr("data-item-id")),
-        Item = CONFIG.Item.entityClass,
-        item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
+        item = this.actor.getOwnedItem(itemId);
     item.roll();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * @private
+   */
+  _onItemSummary(event) {
+    event.preventDefault();
+    let li = $(event.currentTarget).parents(".item"),
+        item = this.actor.getOwnedItem(Number(li.attr("data-item-id"))),
+        chatData = item.getChatData();
+
+    // Toggle summary
+    if ( li.hasClass("expanded") ) {
+      let summary = li.children(".item-summary");
+      summary.slideUp(200, () => summary.remove());
+    } else {
+      let div = $(`<div class="item-summary">${item.data.data.description.value}</div>`);
+      let props = $(`<div class="item-properties"></div>`);
+      chatData.properties.forEach(p => props.append(`<span>${p}</span>`));
+      div.append(props);
+      li.append(div.hide());
+      div.slideDown(200);
+    }
+    li.toggleClass("expanded");
   }
 
   /* -------------------------------------------- */
@@ -1222,7 +1249,7 @@ class Item5e extends Item {
     const templateData = {
       actor: this.actor,
       item: this.data,
-      data: this[this.data.type+"ChatData"]()
+      data: this.getChatData()
     };
 
     // Basic chat message data
@@ -1244,8 +1271,16 @@ class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+  /*  Chat Card Data
+  /* -------------------------------------------- */
 
-  equipmentChatData() {
+  getChatData() {
+    return this[`_${this.data.type}ChatData`]();
+  }
+
+  /* -------------------------------------------- */
+
+  _equipmentChatData() {
     const data = duplicate(this.data.data);
     const properties = [
       CONFIG.armorTypes[data.armorType.value],
@@ -1259,13 +1294,20 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  weaponChatData() {
-    return this.data.data;
+  _weaponChatData() {
+    const data = duplicate(this.data.data);
+    const properties = [
+      data.range.value,
+      CONFIG.weaponTypes[data.weaponType.value],
+      data.proficient.value ? "" : "Not Proficient"
+    ];
+    data.properties = properties.filter(p => !!p);
+    return data;
   }
 
   /* -------------------------------------------- */
 
-  consumableChatData() {
+  _consumableChatData() {
     const data = duplicate(this.data.data);
     data.consumableType.str = CONFIG.consumableTypes[data.consumableType.value];
     data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
@@ -1275,7 +1317,7 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  toolChatData() {
+  _toolChatData() {
     const data = duplicate(this.data.data);
     let abl = this.actor.data.data.abilities[data.ability.value].label,
         prof = data.proficient.value || 0;
@@ -1286,13 +1328,13 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  backpackChatData() {
+  _backpackChatData() {
     return duplicate(this.data.data);
   }
 
   /* -------------------------------------------- */
 
-  spellChatData() {
+  _spellChatData() {
     const data = duplicate(this.data.data),
           ad = this.actor.data.data;
 
@@ -1326,7 +1368,7 @@ class Item5e extends Item {
   /**
    * Prepare chat card data for items of the "Feat" type
    */
-  featChatData() {
+  _featChatData() {
     const data = duplicate(this.data.data),
           ad = this.actor.data.data;
 
@@ -1353,6 +1395,8 @@ class Item5e extends Item {
     return data;
   }
 
+  /* -------------------------------------------- */
+  /*  Roll Attacks
   /* -------------------------------------------- */
 
   /**
