@@ -13,7 +13,8 @@
     </div>
 
     <footer class="card-footer">
-        <span>{{data.range.value}}</span>
-        <span>{{data.properties.value}}</span>
+        {{#each data.properties}}
+        <span>{{this}}</span>
+        {{/each}}
     </footer>
 </div>

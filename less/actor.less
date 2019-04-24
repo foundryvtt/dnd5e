@@ -542,10 +542,13 @@
 
       .item-name {
         .flexrow();
+        cursor: pointer;
 
-        img {
+        .item-image {
           flex: 0 0 24px;
           margin-right: 6px;
+          background-size: 24px;
+          background-repeat: no-repeat;
         }
 
         h4 {
@@ -563,6 +566,13 @@
           color: #666;
           font-size: 12px;
           flex: 0;
+        }
+
+        &:hover .item-image {
+          background-image: url("/icons/svg/d20-grey.svg") !important;
+        }
+        .item-image:hover {
+          background-image: url("/icons/svg/d20-black.svg") !important;
         }
       }
 
@@ -584,6 +594,25 @@
           font-size: 10px;
           text-align: center;
           color: #666;
+        }
+      }
+
+      /* Item Dropdown Summary */
+      .item-summary {
+        flex: 0 0 100%;
+        font-size: 12px;
+        line-height: 16px;
+        padding: 0.25em 0.5em;
+        border-top: 1px solid #CCC;
+
+        .item-properties span {
+          float: left;
+          padding: 1px 3px;
+          font-size: 11px;
+          background: rgba(0, 0, 0, 0.10);
+          margin: 0 2px 2px 0;
+          border: 1px solid #999;
+          border-radius: 3px;
         }
       }
     }

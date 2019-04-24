@@ -227,9 +227,9 @@
                 </li>
                 {{#each section.items as |item iid|}}
                 <li class="item" data-item-id="{{item.id}}">
-                    <div class="item-name">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <h4 class="rollable">
+                    <div class="item-name rollable">
+                        <div class="item-image" style="background-image: url({{item.img}})"></div>
+                        <h4>
                             {{item.name}}
                             {{#if item.data.attuned.value}}<i class="prepared fas fa-haykal"></i>{{/if}}
                         </h4>
@@ -306,11 +306,9 @@
 
                 {{#each section.spells as |item i|}}
                 <li class="item" data-item-id="{{item.id}}">
-                    <div class="item-name">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <h4 class="rollable">
-                            {{item.name}}
-                        </h4>
+                    <div class="item-name rollable">
+                        <div class="item-image" style="background-image: url({{item.img}})"></div>
+                        <h4>{{item.name}}</h4>
                     </div>
 
                     <div class="spell-school">{{item.data.school.str}}</div>
@@ -363,9 +361,9 @@
 
                 {{#each actor.feats as |item i|}}
                 <li class="item" data-item-id="{{item.id}}">
-                    <div class="item-name">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                        <h4 class="rollable">{{item.name}}</h4>
+                    <div class="item-name rollable">
+                        <div class="item-image" style="background-image: url({{item.img}})"></div>
+                        <h4>{{item.name}}</h4>
                     </div>
 
                     <div class="ability-req">{{item.data.requirements.value}}</div>
