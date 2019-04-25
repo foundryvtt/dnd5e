@@ -255,81 +255,17 @@
 
         <!-- ABILITY SCORES -->
         <div class="tab abilities" data-group="sidebar" data-tab="abilities">
-            <ol class="abilities-list directory-list">
-            {{#each data.abilities as |ability id|}}
-                <li class="ability" data-ability="{{id}}">
-                    <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"/>
-                    <a class="ability-proficiency" title="{{ability.hover}}">{{{ability.icon}}}</a>
-                    <h4 class="ability-name rollable">{{ability.label}}</h4>
-                    <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                    <span class="ability-score" title="Ability Score">
-                        <input name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" placeholder="10"/>
-                    </span>
-                    <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
-                </li>
-            {{/each}}
-            </ol>
+            {{> public/systems/dnd5e/templates/actors/actor-abilities.html}}
         </div>
 
         <!-- SKILLS -->
         <div class="tab skills" data-group="sidebar" data-tab="skills">
-            <ol class="directory-list">
-            {{#each data.skills as |skill s|}}
-                <li class="skill" data-skill="{{s}}">
-                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
-                    <a class="skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
-                    <h4 class="skill-name rollable">{{skill.label}}</h4>
-                    <span class="skill-ability">{{skill.ability}}</span>
-                    <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
-                </li>
-            {{/each}}
-            </ol>
+            {{> public/systems/dnd5e/templates/actors/actor-skills.html}}
         </div>
 
         <!-- TRAITS -->
         <div class="tab traits" data-group="sidebar" data-tab="traits">
-
-            <div class="form-group-stacked">
-                <label>{{data.traits.perception.label}}</label>
-                <input type="text" name="data.traits.perception.value" data-dtype="{{data.traits.perception.type}}"
-                       value="{{data.traits.perception.value}}" placeholder="Value"/>
-            </div>
-
-            <div class="form-group-stacked">
-                <label>{{data.traits.senses.label}}</label>
-                <input type="text" name="data.traits.senses.value" data-dtype="{{data.traits.senses.type}}"
-                       value="{{data.traits.senses.value}}" placeholder="None"/>
-            </div>
-
-            <div class="form-group-stacked">
-                <label>{{data.traits.languages.label}}</label>
-                <input type="text" name="data.traits.languages.value" data-dtype="{{data.traits.languages.type}}"
-                       value="{{data.traits.languages.value}}" placeholder="Common"/>
-            </div>
-
-            <div class="form-group-stacked">
-                <label>{{data.traits.di.label}}</label>
-                <input type="text" name="data.traits.di.value" data-dtype="{{data.traits.di.type}}"
-                       value="{{data.traits.di.value}}" placeholder="None"/>
-            </div>
-            
-            <div class="form-group-stacked">
-                <label>{{data.traits.dr.label}}</label>
-                <input type="text" name="data.traits.dr.value" data-dtype="{{data.traits.dr.type}}"
-                       value="{{data.traits.dr.value}}" placeholder="None"/>
-            </div>
-            
-            <div class="form-group-stacked">
-                <label>{{data.traits.dv.label}}</label>
-                <input type="text" name="data.traits.dv.value" data-dtype="{{data.traits.dv.type}}"
-                       value="{{data.traits.dv.value}}" placeholder="None"/>
-            </div>
-            
-            <div class="form-group-stacked">
-                <label>{{data.traits.ci.label}}</label>
-                <input type="text" name="data.traits.ci.value" data-dtype="{{data.traits.ci.type}}"
-                       value="{{data.traits.ci.value}}" placeholder="None"/>
-            </div>
+            {{> public/systems/dnd5e/templates/actors/actor-traits.html}}
         </div>
     </section>
 </form>

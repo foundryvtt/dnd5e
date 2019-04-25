@@ -26,6 +26,46 @@
 .flexcol > * {
   flex: 1;
 }
+/* Damage Tags */
+.tag.acid {
+  background: #66a961;
+}
+.tag.bludgeoning {
+  background: #dad3cf;
+}
+.tag.cold {
+  background: #b2ebff;
+}
+.tag.fire {
+  background: #b65750;
+}
+.tag.force {
+  background: #eecbff;
+}
+.tag.lightning {
+  background: #fff1a6;
+}
+.tag.necrotic {
+  background: #8c5e72;
+}
+.tag.piercing {
+  background: #b8cacf;
+}
+.tag.poison {
+  background: #afc175;
+}
+.tag.psychic {
+  background: #52c1b8;
+}
+.tag.radiant {
+  background: #f3d182;
+}
+.tag.slashing {
+  background: #e1f3e5;
+}
+.tag.thunder {
+  background: #68889d;
+}
 /* ----------------------------------------- */
 /*  Generic Sheet Styling
 /* ----------------------------------------- */
@@ -40,16 +80,18 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   /* Form Elements */
+  /* Select Fields */
+  /* Tags */
 }
 .dnd5e.sheet form > * {
   flex: 1;
 }
 .dnd5e.sheet form input[type="text"] {
-  background: none;
-  border: none;
-  padding: 0;
   width: calc(100% - 2px);
   height: calc(100% - 2px);
+  background: none;
+  padding: 0;
+  margin: 1px 0;
   color: #444;
   border: 1px solid transparent;
 }
@@ -57,6 +99,11 @@
 .dnd5e.sheet form input[type="text"]:focus {
   border: 1px solid #111;
   box-shadow: 0 0 8px red;
+}
+.dnd5e.sheet form select {
+  font-size: 10px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.5);
 }
 .dnd5e.sheet form input:disabled,
 .dnd5e.sheet form select:disabled,
@@ -113,15 +160,15 @@
 .dnd5e.sheet form .sheet-sidebar img.sheet-profile {
   flex: 0 0 220px;
   border: none;
-  border-bottom: 1px solid #CCC;
 }
 .dnd5e.sheet form .sheet-sidebar .tab {
-  padding-right: 3px;
+  padding: 3px 3px 3px 0;
 }
 .dnd5e.sheet form .sheet-tabs {
   flex: 0 0 28px;
   margin-top: 2px;
-  padding: 0 2px;
+  padding: 2px 2px 0;
+  border-top: 1px solid #CCC;
   border-bottom: 1px solid #666;
 }
 .dnd5e.sheet form .sheet-tabs > .item {
@@ -140,6 +187,15 @@
 .dnd5e.sheet form .tab {
   flex: 1 0 380px;
   overflow: hidden;
+}
+.dnd5e.sheet form .tag {
+  float: left;
+  margin: 0 2px 2px 0;
+  padding: 0 3px;
+  font-size: 10px;
+  line-height: 16px;
+  border: 1px solid #111;
+  border-radius: 3px;
 }
 .dnd5e.actor {
   /* ---------------------------------------- */
@@ -277,10 +333,9 @@
 }
 .dnd5e.actor .sheet-body .details .character-detail {
   width: 33.33%;
-  height: 24px;
+  height: 29px;
   float: left;
-  margin: 3px 0;
-  padding-left: 3px;
+  padding: 3px;
   border-right: 1px solid #CCC;
 }
 .dnd5e.actor .sheet-body .details .character-detail:last-child {
@@ -308,9 +363,8 @@
 }
 .dnd5e.actor .primary-attributes .attribute {
   flex: 0 0 25%;
-  height: 72px;
-  margin: 4px 0;
-  padding: 0 4px;
+  height: 79px;
+  padding: 4px;
   border-right: 1px solid #CCC;
 }
 .dnd5e.actor .primary-attributes .attribute:last-child {
@@ -384,9 +438,8 @@
   margin: 1px;
 }
 .dnd5e.actor .statuses {
-  flex: 0 0 29px;
+  flex: 0 0 30px;
   margin: 0;
-  border-bottom: 1px solid #CCC;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -396,10 +449,10 @@
   flex: 1;
 }
 .dnd5e.actor .statuses .status {
+  line-height: 29px;
   padding: 0 6px;
   border-right: 1px solid #CCC;
   font-size: 14px;
-  line-height: 28px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -544,11 +597,26 @@
   text-shadow: none;
   cursor: default;
 }
-.dnd5e.actor .traits .form-group label {
-  flex: 0 0 50%;
-}
 .dnd5e.actor .traits label {
   font-weight: bold;
+}
+.dnd5e.actor .traits select {
+  margin: 2px 0;
+}
+.dnd5e.actor .traits .trait-perception > input {
+  flex: 0 0 32px;
+  text-align: center;
+}
+.dnd5e.actor .traits .trait-selector {
+  float: right;
+  color: #999;
+  font-size: 10px;
+  line-height: 16px;
+}
+.dnd5e.actor .traits .traits-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .dnd5e.actor .currency {
   list-style: none;
@@ -672,14 +740,8 @@
   padding: 0.25em 0.5em;
   border-top: 1px solid #CCC;
 }
-.dnd5e.actor .inventory-list .item .item-summary .item-properties span {
-  float: left;
-  padding: 1px 3px;
-  font-size: 11px;
-  background: rgba(0, 0, 0, 0.1);
-  margin: 0 2px 2px 0;
-  border: 1px solid #999;
-  border-radius: 3px;
+.dnd5e.actor .inventory-list .item .item-summary .item-properties .tag {
+  background: rgba(0, 0, 0, 0.05);
 }
 .dnd5e.actor .inventory-list .inventory-header {
   font-weight: 700;
@@ -731,9 +793,6 @@
 }
 .dnd5e.actor .spellbook .spellcasting-ability select {
   flex: 1;
-  font-size: 10px;
-  height: 18px;
-  background: rgba(255, 255, 255, 0.5);
 }
 .dnd5e.actor .spellbook .spellbook-header .spell-school,
 .dnd5e.actor .spellbook .spellbook-header .spell-action {
@@ -851,13 +910,21 @@
   margin-left: 6px;
 }
 /* ----------------------------------------- */
+/* Trait Selector
+/* ----------------------------------------- */
+#trait-selector .trait-list {
+  list-style: none;
+  margin: 0 0 0.5em;
+  padding: 0;
+}
+/* ----------------------------------------- */
 /*  Item Sheet
 /* ----------------------------------------- */
 .dnd5e.item-sheet .item-details,
 .dnd5e.item-sheet .sheet-tabs {
   flex: 0 0 30px;
   padding: 5px 0;
-  margin: 0;
+  margin: 0 0 5px;
 }
 .dnd5e.item-sheet .item-details {
   list-style: none;

@@ -21,7 +21,6 @@ Hooks.once("init", () => {
     onChange: rule => canvas.grid.diagonalRule = rule
   });
 
-
   /**
    * Register Initiative formula setting
    */
@@ -50,6 +49,27 @@ Hooks.once("init", () => {
     onChange: enable => _set5eInitiative(enable)
   });
   _set5eInitiative(game.settings.get("dnd5e", "initiativeDexTiebreaker"));
+
+  /**
+   * Require Currency Carrying Weight
+   */
+  game.settings.register("dnd5e", "currencyWeight", {
+    name: "Apply Currency Weight",
+    hint: "Carried currency affects character encumbrance following the rules on PHB pg. 143.",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
+  // Pre-load templates
+  loadTemplates([
+    "public/systems/dnd5e/templates/actors/actor-attributes.html",
+    "public/systems/dnd5e/templates/actors/actor-abilities.html",
+    "public/systems/dnd5e/templates/actors/actor-skills.html",
+    "public/systems/dnd5e/templates/actors/actor-traits.html",
+    "public/systems/dnd5e/templates/actors/actor-classes.html"
+  ]);
 });
 
 

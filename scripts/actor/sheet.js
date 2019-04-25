@@ -49,6 +49,9 @@ class Actor5eSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
+    // Config data
+    sheetData["actorSizes"] = CONFIG.actorSizes;
+
     // Level and CR
     if ( sheetData.actor.type === "npc" ) {
       let cr = sheetData.data.details.cr;
@@ -68,6 +71,9 @@ class Actor5eSheet extends ActorSheet {
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.proficiencyLevels[skl.value];
     }
+
+    // Update traits
+    this._prepareTraits(sheetData.data["traits"]);
 
     // Clear some values
     let res = sheetData.data.resources;
@@ -147,6 +153,11 @@ class Actor5eSheet extends ActorSheet {
     actorData.feats = feats;
     actorData.classes = classes;
 
+    // Currency weight
+    if ( game.settings.get("dnd5e", "currencyWeight") ) {
+      totalWeight += this._computeCurrencyWeight(actorData.data.currency);
+    }
+
     // Inventory encumbrance
     let enc = {
       max: actorData.data.abilities.str.value * 15,
@@ -154,6 +165,21 @@ class Actor5eSheet extends ActorSheet {
     };
     enc.pct = Math.min(enc.value * 100 / enc.max, 99);
     actorData.data.attributes.encumbrance = enc;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute the weight of carried currency across all denominations by applying the standard rule from the
+   * PHB pg. 143
+   *
+   * @param {Object} currency   An object describing the amount of currency carried by denomination
+   * @return {Number}           The total weight of carried currency
+   * @private
+   */
+  _computeCurrencyWeight(currency) {
+    const numCoins = Object.values(currency).reduce((val, denom) => val += denom.value, 0);
+    return numCoins / 50;
   }
 
   /* -------------------------------------------- */
@@ -194,6 +220,23 @@ class Actor5eSheet extends ActorSheet {
     // Assign and return
     actorData.features = features;
     actorData.spellbook = spellbook;
+  }
+
+  /* -------------------------------------------- */
+
+  _prepareTraits(traits) {
+    const map = {
+      "dr": CONFIG.damageTypes,
+      "di": CONFIG.damageTypes,
+      "dv": CONFIG.damageTypes,
+      "ci": CONFIG.conditionTypes,
+    };
+    for ( let [t, choices] of Object.entries(map) ) {
+      traits[t].selected = traits[t].value.reduce((obj, t) => {
+        obj[t] = choices[t];
+        return obj;
+      }, {});
+    }
   }
 
   /* -------------------------------------------- */
@@ -359,6 +402,12 @@ class Actor5eSheet extends ActorSheet {
     });
 
     /* -------------------------------------------- */
+    /*  Traits
+    /* -------------------------------------------- */
+
+    html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
+
+    /* -------------------------------------------- */
     /*  Miscellaneous
     /* -------------------------------------------- */
 
@@ -382,6 +431,9 @@ class Actor5eSheet extends ActorSheet {
       li.setAttribute("draggable", true);
       li.addEventListener("dragstart", handler, false);
     });
+
+
+
   }
 
   /* -------------------------------------------- */
@@ -452,7 +504,7 @@ class Actor5eSheet extends ActorSheet {
     } else {
       let div = $(`<div class="item-summary">${item.data.data.description.value}</div>`);
       let props = $(`<div class="item-properties"></div>`);
-      chatData.properties.forEach(p => props.append(`<span>${p}</span>`));
+      chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
       div.append(props);
       li.append(div.hide());
       div.slideDown(200);
@@ -548,6 +600,19 @@ class Actor5eSheet extends ActorSheet {
     data["name"] = `New ${data.type.capitalize()}`;
     this.actor.createOwnedItem(data, true, {renderSheet: true});
   }
+
+  /* -------------------------------------------- */
+
+  _onTraitSelector(event) {
+    event.preventDefault();
+    let a = $(event.currentTarget);
+    const options = {
+      name: a.parents("label").attr("for"),
+      title: a.parent().text().trim(),
+      choices: CONFIG[a.attr("data-options")]
+    };
+    new TraitSelector5e(this.actor, options).render(true)
+  }
 }
 
 
@@ -578,22 +643,5 @@ class ShortRestDialog extends Dialog {
   }
 }
 
-
-/* -------------------------------------------- */
-
-
 CONFIG.Actor.sheetClass = Actor5eSheet;
 
-
-/**
- * Skill Proficiency Levels
- */
-CONFIG.proficiencyLevels = {
-  0: "Not Proficient",
-  1: "Proficient",
-  0.5: "Jack of all Trades",
-  2: "Expertise"
-};
-
-
-/* -------------------------------------------- */

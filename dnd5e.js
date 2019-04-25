@@ -1,3 +1,145 @@
+// Damage Types
+CONFIG.damageTypes = {
+  "acid": "Acid",
+  "bludgeoning": "Bludgeoning",
+  "cold": "Cold",
+  "fire": "Fire",
+  "force": "Force",
+  "lightning": "Lightning",
+  "necrotic": "Necrotic",
+  "piercing": "Piercing",
+  "poison": "Poison",
+  "psychic": "Psychic",
+  "radiant": "Radiant",
+  "slashing": "Slashing",
+  "thunder": "Thunder"
+};
+
+// Weapon Types
+CONFIG.weaponTypes = {
+  "simpleM": "Simple Melee",
+  "simpleR": "Simple Ranged",
+  "martialM": "Martial Melee",
+  "martialR": "Martial Ranged",
+  "natural": "Natural",
+  "improv": "Improvised",
+  "ammo": "Ammunition"
+};
+
+// Weapon Properties
+CONFIG.weaponProperties = {
+  "thr": "Thrown",
+  "amm": "Ammunition",
+  "fir": "Firearm",
+  "rel": "Reload",
+  "two": "Two-Handed",
+  "fin": "Finesse",
+  "lgt": "Light",
+  "ver": "Versatile",
+  "hvy": "Heavy",
+  "rch": "Reach"
+};
+
+// Equipment Types
+CONFIG.armorTypes = {
+  "clothing": "Clothing",
+  "light": "Light Armor",
+  "medium": "Medium Armor",
+  "heavy": "Heavy Armor",
+  "bonus": "Magical Bonus",
+  "natural": "Natural Armor",
+  "shield": "Shield"
+};
+
+// Consumable Types
+CONFIG.consumableTypes = {
+  "potion": "Potion",
+  "poison": "Poison",
+  "scroll": "Scroll",
+  "wand": "Wand",
+  "rod": "Rod",
+  "trinket": "Trinket"
+};
+
+// Spell Types
+CONFIG.spellTypes = {
+  "attack": "Spell Attack",
+  "save": "Saving Throw",
+  "heal": "Healing",
+  "utility": "Utility"
+};
+
+// Spell Schools
+CONFIG.spellSchools = {
+  "abj": "Abjuration",
+  "con": "Conjuration",
+  "div": "Divination",
+  "enc": "Enchantment",
+  "evo": "Evocation",
+  "ill": "Illusion",
+  "nec": "Necromancy",
+  "trs": "Transmutation",
+};
+
+// Spell Levels
+CONFIG.spellLevels = {
+  0: "Cantrip",
+  1: "1st Level",
+  2: "2nd Level",
+  3: "3rd Level",
+  4: "4th Level",
+  5: "5th Level",
+  6: "6th Level",
+  7: "7th Level",
+  8: "8th Level",
+  9: "9th Level"
+};
+
+// Feat Types
+CONFIG.featTypes = {
+  "passive": "Passive Ability",
+  "attack": "Ability Attack",
+  "ability": "Generic Action"
+};
+
+// Proficiency Multipliers
+CONFIG.proficiencyLevels = {
+  0: "Not Proficient",
+  1: "Proficient",
+  0.5: "Jack of all Trades",
+  2: "Expertise"
+};
+
+// Creature Sizes
+CONFIG.actorSizes = {
+  "tiny": "Tiny",
+  "sm": "Small",
+  "med": "Medium",
+  "lg": "Large",
+  "huge": "Huge",
+  "grg": "Gargantuan"
+};
+
+// Condition Types
+CONFIG.conditionTypes = {
+  "blinded": "Blinded",
+  "charmed": "Charmed",
+  "deafened": "Deafened",
+  "fatigued": "Fatigued",
+  "frightened": "Frightened",
+  "grappled": "Grappled",
+  "incapacitated": "Inacapacitated",
+  "invisible": "Invisible",
+  "paralyzed": "Paralyzed",
+  "petrified": "Petrified",
+  "poisoned": "Poisoned",
+  "prone": "Prone",
+  "restrained": "Restrained",
+  "stunned": "Stunned",
+  "unconscious": "Unconscious",
+  "exhaustion": "Exhaustion"
+};
+
 class Dice5e {
 
   /**
@@ -218,7 +360,6 @@ Hooks.once("init", () => {
     onChange: rule => canvas.grid.diagonalRule = rule
   });
 
-
   /**
    * Register Initiative formula setting
    */
@@ -247,6 +388,27 @@ Hooks.once("init", () => {
     onChange: enable => _set5eInitiative(enable)
   });
   _set5eInitiative(game.settings.get("dnd5e", "initiativeDexTiebreaker"));
+
+  /**
+   * Require Currency Carrying Weight
+   */
+  game.settings.register("dnd5e", "currencyWeight", {
+    name: "Apply Currency Weight",
+    hint: "Carried currency affects character encumbrance following the rules on PHB pg. 143.",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
+  // Pre-load templates
+  loadTemplates([
+    "public/systems/dnd5e/templates/actors/actor-attributes.html",
+    "public/systems/dnd5e/templates/actors/actor-abilities.html",
+    "public/systems/dnd5e/templates/actors/actor-skills.html",
+    "public/systems/dnd5e/templates/actors/actor-traits.html",
+    "public/systems/dnd5e/templates/actors/actor-classes.html"
+  ]);
 });
 
 
@@ -320,6 +482,17 @@ class Actor5e extends Actor {
     // Spell DC
     let spellAbl = data.attributes.spellcasting.value || "int";
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod;
+
+    // TODO: Migrate trait storage format
+    for ( let t of ["dr", "di", "dv"] ) {
+      let trait = data.traits[t];
+      if (!( trait.value instanceof Array )) {
+        trait.value = TraitSelector5e._backCompat(trait.value, CONFIG.damageTypes);
+      }
+      if (!(data.traits.ci.value instanceof Array )) {
+        data.traits.ci.value = TraitSelector5e._backCompat(data.traits.ci.value, CONFIG.conditionTypes);
+      }
+    }
 
     // Return the prepared Actor data
     return actorData;
@@ -684,6 +857,9 @@ class Actor5eSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
+    // Config data
+    sheetData["actorSizes"] = CONFIG.actorSizes;
+
     // Level and CR
     if ( sheetData.actor.type === "npc" ) {
       let cr = sheetData.data.details.cr;
@@ -703,6 +879,9 @@ class Actor5eSheet extends ActorSheet {
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.proficiencyLevels[skl.value];
     }
+
+    // Update traits
+    this._prepareTraits(sheetData.data["traits"]);
 
     // Clear some values
     let res = sheetData.data.resources;
@@ -782,6 +961,11 @@ class Actor5eSheet extends ActorSheet {
     actorData.feats = feats;
     actorData.classes = classes;
 
+    // Currency weight
+    if ( game.settings.get("dnd5e", "currencyWeight") ) {
+      totalWeight += this._computeCurrencyWeight(actorData.data.currency);
+    }
+
     // Inventory encumbrance
     let enc = {
       max: actorData.data.abilities.str.value * 15,
@@ -789,6 +973,21 @@ class Actor5eSheet extends ActorSheet {
     };
     enc.pct = Math.min(enc.value * 100 / enc.max, 99);
     actorData.data.attributes.encumbrance = enc;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute the weight of carried currency across all denominations by applying the standard rule from the
+   * PHB pg. 143
+   *
+   * @param {Object} currency   An object describing the amount of currency carried by denomination
+   * @return {Number}           The total weight of carried currency
+   * @private
+   */
+  _computeCurrencyWeight(currency) {
+    const numCoins = Object.values(currency).reduce((val, denom) => val += denom.value, 0);
+    return numCoins / 50;
   }
 
   /* -------------------------------------------- */
@@ -829,6 +1028,23 @@ class Actor5eSheet extends ActorSheet {
     // Assign and return
     actorData.features = features;
     actorData.spellbook = spellbook;
+  }
+
+  /* -------------------------------------------- */
+
+  _prepareTraits(traits) {
+    const map = {
+      "dr": CONFIG.damageTypes,
+      "di": CONFIG.damageTypes,
+      "dv": CONFIG.damageTypes,
+      "ci": CONFIG.conditionTypes,
+    };
+    for ( let [t, choices] of Object.entries(map) ) {
+      traits[t].selected = traits[t].value.reduce((obj, t) => {
+        obj[t] = choices[t];
+        return obj;
+      }, {});
+    }
   }
 
   /* -------------------------------------------- */
@@ -994,6 +1210,12 @@ class Actor5eSheet extends ActorSheet {
     });
 
     /* -------------------------------------------- */
+    /*  Traits
+    /* -------------------------------------------- */
+
+    html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
+
+    /* -------------------------------------------- */
     /*  Miscellaneous
     /* -------------------------------------------- */
 
@@ -1017,6 +1239,9 @@ class Actor5eSheet extends ActorSheet {
       li.setAttribute("draggable", true);
       li.addEventListener("dragstart", handler, false);
     });
+
+
+
   }
 
   /* -------------------------------------------- */
@@ -1087,7 +1312,7 @@ class Actor5eSheet extends ActorSheet {
     } else {
       let div = $(`<div class="item-summary">${item.data.data.description.value}</div>`);
       let props = $(`<div class="item-properties"></div>`);
-      chatData.properties.forEach(p => props.append(`<span>${p}</span>`));
+      chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
       div.append(props);
       li.append(div.hide());
       div.slideDown(200);
@@ -1183,6 +1408,19 @@ class Actor5eSheet extends ActorSheet {
     data["name"] = `New ${data.type.capitalize()}`;
     this.actor.createOwnedItem(data, true, {renderSheet: true});
   }
+
+  /* -------------------------------------------- */
+
+  _onTraitSelector(event) {
+    event.preventDefault();
+    let a = $(event.currentTarget);
+    const options = {
+      name: a.parents("label").attr("for"),
+      title: a.parent().text().trim(),
+      choices: CONFIG[a.attr("data-options")]
+    };
+    new TraitSelector5e(this.actor, options).render(true)
+  }
 }
 
 
@@ -1213,25 +1451,93 @@ class ShortRestDialog extends Dialog {
   }
 }
 
-
-/* -------------------------------------------- */
-
-
 CONFIG.Actor.sheetClass = Actor5eSheet;
 
 
 /**
- * Skill Proficiency Levels
+ * A specialized form used to select damage or condition types which apply to an Actor
+ * @type {FormApplication}
  */
-CONFIG.proficiencyLevels = {
-  0: "Not Proficient",
-  1: "Proficient",
-  0.5: "Jack of all Trades",
-  2: "Expertise"
-};
+class TraitSelector5e extends FormApplication {
+	static get defaultOptions() {
+	  const options = super.defaultOptions;
+	  options.id = "trait-selector";
+	  options.classes = ["dnd5e"];
+	  options.title = "Actor Trait Selection";
+	  options.template = "public/systems/dnd5e/templates/actors/trait-selector.html";
+	  options.width = 200;
+	  return options;
+  }
 
+  /* -------------------------------------------- */
 
-/* -------------------------------------------- */
+  /**
+   * Return a reference to the target attribute
+   * @type {String}
+   */
+  get attribute() {
+	  return this.options.name;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Provide data to the HTML template for rendering
+   * @type {Object}
+   */
+  getData() {
+
+    // Get current values
+    let current = getProperty(this.object.data, this.attribute);
+	  if ( typeof current === "string" ) current = this.constructor._backCompat(current, this.options.choices);
+
+	  // Populate choices
+    const choices = duplicate(this.options.choices);
+    for ( let [k, v] of Object.entries(choices) ) {
+      choices[k] = {
+        label: v,
+        chosen: current.includes(k)
+      }
+    }
+
+    // Return data
+	  const data = {
+	    choices: choices
+    };
+	  return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Support backwards compatibility for old-style string separated traits
+   * @private
+   */
+  static _backCompat(current, choices) {
+    if ( !current || current.length === 0 ) return [];
+	  current = current.split(/[\s,]/).filter(t => !!t);
+    return current.map(val => {
+      for ( let [k, v] of Object.entries(choices) ) {
+        if ( val === v ) return k;
+        }
+      return null;
+    }).filter(val => !!val);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the Actor object with new trait data processed from the form
+   * @private
+   */
+  _updateObject(event, formData) {
+    const choices = [];
+    for ( let [k, v] of Object.entries(formData) ) {
+      if ( v ) choices.push(k);
+    }
+    this.object.update({[this.attribute]: choices});
+  }
+}
 
 /**
  * Override and extend the basic :class:`Item` implementation
@@ -1856,106 +2162,3 @@ Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
 // Override CONFIG
 CONFIG.Item.sheetClass = Item5eSheet;
 
-// Standard D&D Damage Types
-CONFIG.damageTypes = {
-  "acid": "Acid",
-  "bludgeoning": "Bludgeoning",
-  "cold": "Cold",
-  "fire": "Fire",
-  "force": "Force",
-  "lightning": "Lightning",
-  "necrotic": "Necrotic",
-  "piercing": "Piercing",
-  "poison": "Poison",
-  "psychic": "Psychic",
-  "radiant": "Radiant",
-  "slashing": "Slashing",
-  "thunder": "Thunder",
-  "healing": "Healing"
-};
-
-// Weapon Types
-CONFIG.weaponTypes = {
-  "simpleM": "Simple Melee",
-  "simpleR": "Simple Ranged",
-  "martialM": "Martial Melee",
-  "martialR": "Martial Ranged",
-  "natural": "Natural",
-  "improv": "Improvised",
-  "ammo": "Ammunition"
-};
-
-// Weapon Properties
-CONFIG.weaponProperties = {
-  "thr": "Thrown",
-  "amm": "Ammunition",
-  "fir": "Firearm",
-  "rel": "Reload",
-  "two": "Two-Handed",
-  "fin": "Finesse",
-  "lgt": "Light",
-  "ver": "Versatile",
-  "hvy": "Heavy",
-  "rch": "Reach"
-};
-
-// Equipment Types
-CONFIG.armorTypes = {
-  "clothing": "Clothing",
-  "light": "Light Armor",
-  "medium": "Medium Armor",
-  "heavy": "Heavy Armor",
-  "bonus": "Magical Bonus",
-  "natural": "Natural Armor",
-  "shield": "Shield"
-};
-
-// Consumable Types
-CONFIG.consumableTypes = {
-  "potion": "Potion",
-  "scroll": "Scroll",
-  "wand": "Wand",
-  "rod": "Rod",
-  "trinket": "Trinket"
-};
-
-// Spell Types
-CONFIG.spellTypes = {
-  "attack": "Spell Attack",
-  "save": "Saving Throw",
-  "heal": "Healing",
-  "utility": "Utility"
-};
-
-// Spell Schools
-CONFIG.spellSchools = {
-  "abj": "Abjuration",
-  "con": "Conjuration",
-  "div": "Divination",
-  "enc": "Enchantment",
-  "evo": "Evocation",
-  "ill": "Illusion",
-  "nec": "Necromancy",
-  "trs": "Transmutation",
-};
-
-// Spell Levels
-CONFIG.spellLevels = {
-  0: "Cantrip",
-  1: "1st Level",
-  2: "2nd Level",
-  3: "3rd Level",
-  4: "4th Level",
-  5: "5th Level",
-  6: "6th Level",
-  7: "7th Level",
-  8: "8th Level",
-  9: "9th Level"
-};
-
-// Feat Types
-CONFIG.featTypes = {
-  "passive": "Passive Ability",
-  "attack": "Ability Attack",
-  "ability": "Generic Action"
-};
