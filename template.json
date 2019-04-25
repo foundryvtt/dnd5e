@@ -216,7 +216,8 @@
       "traits": {
         "size": {
           "type": "String",
-          "label": "Size"
+          "label": "Size",
+          "value": "med"
         },
         "senses": {
           "type": "String",
@@ -231,19 +232,19 @@
           "label": "Known Languages"
         },
         "di": {
-          "type": "String",
+          "type": "Array",
           "label": "Damage Immunities"
         },
         "dr": {
-          "type": "String",
+          "type": "Array",
           "label": "Damage Resistances"
         },
         "dv": {
-          "type": "String",
+          "type": "Array",
           "label": "Damage Vulnerabilities"
         },
         "ci": {
-          "type": "String",
+          "type": "Array",
           "label": "Condition Immunities"
         }
       },

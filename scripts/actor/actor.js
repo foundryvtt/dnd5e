@@ -34,6 +34,17 @@ class Actor5e extends Actor {
     let spellAbl = data.attributes.spellcasting.value || "int";
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod;
 
+    // TODO: Migrate trait storage format
+    for ( let t of ["dr", "di", "dv"] ) {
+      let trait = data.traits[t];
+      if (!( trait.value instanceof Array )) {
+        trait.value = TraitSelector5e._backCompat(trait.value, CONFIG.damageTypes);
+      }
+      if (!(data.traits.ci.value instanceof Array )) {
+        data.traits.ci.value = TraitSelector5e._backCompat(data.traits.ci.value, CONFIG.conditionTypes);
+      }
+    }
+
     // Return the prepared Actor data
     return actorData;
   }
