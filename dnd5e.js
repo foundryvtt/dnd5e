@@ -140,6 +140,34 @@ CONFIG.conditionTypes = {
   "exhaustion": "Exhaustion"
 };
 
+// Languages
+CONFIG.languages = {
+  "common": "Common",
+  "aarakocra": "Aarakocra",
+  "abyssal": "Abyssal",
+  "aquan": "Aquan",
+  "auran": "Auran",
+  "celestial": "Celestial",
+  "deep": "Deep Speech",
+  "draconic": "Draconic",
+  "druidic": "Druidic",
+  "dwarvish": "Dwarvish",
+  "elvish": "Elvish",
+  "giant": "Giant",
+  "gith": "Gith",
+  "gnomish": "Gnomish",
+  "goblin": "Goblin",
+  "gnoll": "Gnoll",
+  "halfling": "Halfling",
+  "ignan": "Ignan",
+  "infernal": "Infernal",
+  "orc": "Orc",
+  "primordial": "Primordial",
+  "sylvan": "Sylvan",
+  "terran": "Terran",
+  "cant": "Thieves' Cant",
+  "undercommon": "Undercommon"
+};
 class Dice5e {
 
   /**
@@ -484,13 +512,17 @@ class Actor5e extends Actor {
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod;
 
     // TODO: Migrate trait storage format
-    for ( let t of ["dr", "di", "dv"] ) {
+    const map = {
+      "dr": CONFIG.damageTypes,
+      "di": CONFIG.damageTypes,
+      "dv": CONFIG.damageTypes,
+      "ci": CONFIG.conditionTypes,
+      "languages": CONFIG.languages
+    };
+    for ( let [t, choices] of Object.entries(map) ) {
       let trait = data.traits[t];
       if (!( trait.value instanceof Array )) {
-        trait.value = TraitSelector5e._backCompat(trait.value, CONFIG.damageTypes);
-      }
-      if (!(data.traits.ci.value instanceof Array )) {
-        data.traits.ci.value = TraitSelector5e._backCompat(data.traits.ci.value, CONFIG.conditionTypes);
+        trait.value = TraitSelector5e._backCompat(trait.value, choices);
       }
     }
 
@@ -1038,12 +1070,17 @@ class Actor5eSheet extends ActorSheet {
       "di": CONFIG.damageTypes,
       "dv": CONFIG.damageTypes,
       "ci": CONFIG.conditionTypes,
+      "languages": CONFIG.languages
     };
     for ( let [t, choices] of Object.entries(map) ) {
-      traits[t].selected = traits[t].value.reduce((obj, t) => {
+      const trait = traits[t];
+      trait.selected = trait.value.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
       }, {});
+
+      // Add custom entry
+      if ( trait.custom ) trait.selected["custom"] = trait.custom;
     }
   }
 
@@ -1131,6 +1168,9 @@ class Actor5eSheet extends ActorSheet {
       });
     });
 
+    // Item summaries
+    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
@@ -1169,7 +1209,6 @@ class Actor5eSheet extends ActorSheet {
     /*  Rollable Items                              */
     /* -------------------------------------------- */
 
-    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
     html.find('.item .item-image').click(event => this._onItemRoll(event));
 
     /* -------------------------------------------- */
@@ -1239,9 +1278,6 @@ class Actor5eSheet extends ActorSheet {
       li.setAttribute("draggable", true);
       li.addEventListener("dragstart", handler, false);
     });
-
-
-
   }
 
   /* -------------------------------------------- */
@@ -1488,23 +1524,23 @@ class TraitSelector5e extends FormApplication {
   getData() {
 
     // Get current values
-    let current = getProperty(this.object.data, this.attribute);
-	  if ( typeof current === "string" ) current = this.constructor._backCompat(current, this.options.choices);
+    let attr = getProperty(this.object.data, this.attribute);
+	  if ( typeof attr.value === "string" ) attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
 	  // Populate choices
     const choices = duplicate(this.options.choices);
     for ( let [k, v] of Object.entries(choices) ) {
       choices[k] = {
         label: v,
-        chosen: current.includes(k)
+        chosen: attr.value.includes(k)
       }
     }
 
     // Return data
-	  const data = {
-	    choices: choices
-    };
-	  return data;
+	  return {
+	    choices: choices,
+      custom: attr.custom
+    }
   }
 
   /* -------------------------------------------- */
@@ -1535,7 +1571,10 @@ class TraitSelector5e extends FormApplication {
     for ( let [k, v] of Object.entries(formData) ) {
       if ( v ) choices.push(k);
     }
-    this.object.update({[this.attribute]: choices});
+    this.object.update({
+      [`${this.attribute}.value`]: choices,
+      [`${this.attribute}.custom`]: formData.custom
+    });
   }
 }
 
