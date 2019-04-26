@@ -27,45 +27,6 @@
   flex: 1;
 }
 /* Damage Tags */
-.tag.acid {
-  background: #66a961;
-}
-.tag.bludgeoning {
-  background: #dad3cf;
-}
-.tag.cold {
-  background: #b2ebff;
-}
-.tag.fire {
-  background: #b65750;
-}
-.tag.force {
-  background: #eecbff;
-}
-.tag.lightning {
-  background: #fff1a6;
-}
-.tag.necrotic {
-  background: #8c5e72;
-}
-.tag.piercing {
-  background: #b8cacf;
-}
-.tag.poison {
-  background: #afc175;
-}
-.tag.psychic {
-  background: #52c1b8;
-}
-.tag.radiant {
-  background: #f3d182;
-}
-.tag.slashing {
-  background: #e1f3e5;
-}
-.tag.thunder {
-  background: #68889d;
-}
 /* ----------------------------------------- */
 /*  Generic Sheet Styling
 /* ----------------------------------------- */
@@ -194,8 +155,9 @@
   padding: 0 3px;
   font-size: 10px;
   line-height: 16px;
-  border: 1px solid #111;
+  border: 1px solid #999;
   border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
 }
 .dnd5e.actor {
   /* ---------------------------------------- */
@@ -739,9 +701,6 @@
   line-height: 16px;
   padding: 0.25em 0.5em;
   border-top: 1px solid #CCC;
-}
-.dnd5e.actor .inventory-list .item .item-summary .item-properties .tag {
-  background: rgba(0, 0, 0, 0.05);
 }
 .dnd5e.actor .inventory-list .inventory-header {
   font-weight: 700;

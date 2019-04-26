@@ -32,23 +32,23 @@ class TraitSelector5e extends FormApplication {
   getData() {
 
     // Get current values
-    let current = getProperty(this.object.data, this.attribute);
-	  if ( typeof current === "string" ) current = this.constructor._backCompat(current, this.options.choices);
+    let attr = getProperty(this.object.data, this.attribute);
+	  if ( typeof attr.value === "string" ) attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
 	  // Populate choices
     const choices = duplicate(this.options.choices);
     for ( let [k, v] of Object.entries(choices) ) {
       choices[k] = {
         label: v,
-        chosen: current.includes(k)
+        chosen: attr.value.includes(k)
       }
     }
 
     // Return data
-	  const data = {
-	    choices: choices
-    };
-	  return data;
+	  return {
+	    choices: choices,
+      custom: attr.custom
+    }
   }
 
   /* -------------------------------------------- */
@@ -79,6 +79,9 @@ class TraitSelector5e extends FormApplication {
     for ( let [k, v] of Object.entries(formData) ) {
       if ( v ) choices.push(k);
     }
-    this.object.update({[this.attribute]: choices});
+    this.object.update({
+      [`${this.attribute}.value`]: choices,
+      [`${this.attribute}.custom`]: formData.custom
+    });
   }
 }

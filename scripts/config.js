@@ -139,3 +139,32 @@ CONFIG.conditionTypes = {
   "unconscious": "Unconscious",
   "exhaustion": "Exhaustion"
 };
+
+// Languages
+CONFIG.languages = {
+  "common": "Common",
+  "aarakocra": "Aarakocra",
+  "abyssal": "Abyssal",
+  "aquan": "Aquan",
+  "auran": "Auran",
+  "celestial": "Celestial",
+  "deep": "Deep Speech",
+  "draconic": "Draconic",
+  "druidic": "Druidic",
+  "dwarvish": "Dwarvish",
+  "elvish": "Elvish",
+  "giant": "Giant",
+  "gith": "Gith",
+  "gnomish": "Gnomish",
+  "goblin": "Goblin",
+  "gnoll": "Gnoll",
+  "halfling": "Halfling",
+  "ignan": "Ignan",
+  "infernal": "Infernal",
+  "orc": "Orc",
+  "primordial": "Primordial",
+  "sylvan": "Sylvan",
+  "terran": "Terran",
+  "cant": "Thieves' Cant",
+  "undercommon": "Undercommon"
+};

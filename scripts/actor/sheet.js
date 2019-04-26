@@ -230,12 +230,17 @@ class Actor5eSheet extends ActorSheet {
       "di": CONFIG.damageTypes,
       "dv": CONFIG.damageTypes,
       "ci": CONFIG.conditionTypes,
+      "languages": CONFIG.languages
     };
     for ( let [t, choices] of Object.entries(map) ) {
-      traits[t].selected = traits[t].value.reduce((obj, t) => {
+      const trait = traits[t];
+      trait.selected = trait.value.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
       }, {});
+
+      // Add custom entry
+      if ( trait.custom ) trait.selected["custom"] = trait.custom;
     }
   }
 
@@ -323,6 +328,9 @@ class Actor5eSheet extends ActorSheet {
       });
     });
 
+    // Item summaries
+    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
@@ -361,7 +369,6 @@ class Actor5eSheet extends ActorSheet {
     /*  Rollable Items                              */
     /* -------------------------------------------- */
 
-    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
     html.find('.item .item-image').click(event => this._onItemRoll(event));
 
     /* -------------------------------------------- */
@@ -431,9 +438,6 @@ class Actor5eSheet extends ActorSheet {
       li.setAttribute("draggable", true);
       li.addEventListener("dragstart", handler, false);
     });
-
-
-
   }
 
   /* -------------------------------------------- */
