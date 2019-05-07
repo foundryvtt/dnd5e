@@ -121,6 +121,7 @@
 .dnd5e.sheet form .sheet-sidebar img.sheet-profile {
   flex: 0 0 220px;
   border: none;
+  object-fit: contain;
 }
 .dnd5e.sheet form .sheet-sidebar .tab {
   padding: 3px 3px 3px 0;
@@ -308,9 +309,6 @@
   font-size: 18px;
   color: #444;
   font-size: 20px;
-}
-.dnd5e.actor.npc-sheet .sheet-body .details .character-detail {
-  width: 25%;
 }
 .dnd5e.actor .primary-attributes {
   display: flex;

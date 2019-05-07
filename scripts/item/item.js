@@ -94,7 +94,9 @@ class Item5e extends Item {
   /* -------------------------------------------- */
 
   _backpackChatData() {
-    return duplicate(this.data.data);
+    const data = duplicate(this.data.data);
+    data.properties = [];
+    return data;
   }
 
   /* -------------------------------------------- */

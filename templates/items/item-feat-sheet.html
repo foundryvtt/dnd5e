@@ -1,18 +1,12 @@
 <form class="dnd5e item-sheet spell-sheet {{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-    </header>
+    {{> public/systems/dnd5e/templates/items/item-header.html}}
 
     <nav class="sheet-tabs tabs" data-tab-container="primary">
         <a class="item active" data-tab="description">Description</a>
         <a class="item" data-tab="details">Details</a>
     </nav>
 
-    <!-- Ability Description -->
-    <div class="tab active" data-tab="description">
-        {{editor content=data.description.value target="data.description.value" button=true}}
-    </div>
+    {{> public/systems/dnd5e/templates/items/item-description.html}}
 
     <!-- Ability Details -->
     <div class="tab" data-tab="details">
