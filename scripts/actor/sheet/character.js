@@ -4,13 +4,24 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  mergeObject(options, {
-	    template: "public/systems/dnd5e/templates/actors/actor-sheet.html",
       classes: options.classes.concat(["dnd5e", "actor", "character-sheet"]),
       width: 650,
       height: 720,
       showUnpreparedSpells: true
     });
 	  return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the correct HTML template path to use for rendering this particular sheet
+   * @type {String}
+   */
+  get template() {
+    const path = "public/systems/dnd5e/templates/actors/";
+    if ( this.actor.limited ) return path + "limited-sheet.html";
+    return path + "actor-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -223,6 +234,9 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 }
 
 // Register Character Sheet
-Actors.registerSheet("dnd5e", ActorSheet5eCharacter, "character");
+Actors.registerSheet("dnd5e", ActorSheet5eCharacter, {
+  types: ["character"],
+  makeDefault: true
+});
 
 

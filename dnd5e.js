@@ -15,6 +15,12 @@ CONFIG.damageTypes = {
   "thunder": "Thunder"
 };
 
+// Healing Types
+CONFIG.healingTypes = {
+  "healing": "Healing",
+  "temphp": "Healing (Temporary)"
+};
+
 // Weapon Types
 CONFIG.weaponTypes = {
   "simpleM": "Simple Melee",
@@ -137,7 +143,8 @@ CONFIG.conditionTypes = {
   "restrained": "Restrained",
   "stunned": "Stunned",
   "unconscious": "Unconscious",
-  "exhaustion": "Exhaustion"
+  "exhaustion": "Exhaustion",
+  "diseased": "Diseased"
 };
 
 // Languages
@@ -433,9 +440,12 @@ Hooks.once("init", () => {
   loadTemplates([
     "public/systems/dnd5e/templates/actors/actor-attributes.html",
     "public/systems/dnd5e/templates/actors/actor-abilities.html",
+    "public/systems/dnd5e/templates/actors/actor-biography.html",
     "public/systems/dnd5e/templates/actors/actor-skills.html",
     "public/systems/dnd5e/templates/actors/actor-traits.html",
-    "public/systems/dnd5e/templates/actors/actor-classes.html"
+    "public/systems/dnd5e/templates/actors/actor-classes.html",
+    "public/systems/dnd5e/templates/items/item-header.html",
+    "public/systems/dnd5e/templates/items/item-description.html",
   ]);
 });
 
@@ -1022,7 +1032,9 @@ class Item5e extends Item {
   /* -------------------------------------------- */
 
   _backpackChatData() {
-    return duplicate(this.data.data);
+    const data = duplicate(this.data.data);
+    data.properties = [];
+    return data;
   }
 
   /* -------------------------------------------- */
@@ -1513,7 +1525,13 @@ class Item5eSheet extends ItemSheet {
   getData() {
     const data = super.getData();
     data['abilities'] = game.system.template.actor.data.abilities;
-    data['damageTypes'] = CONFIG.damageTypes;
+
+    // Damage types
+    let dt = duplicate(CONFIG.damageTypes);
+    if ( ["spell", "feat"].includes(this.item.type) ) mergeObject(dt, CONFIG.healingTypes);
+    data['damageTypes'] = dt;
+
+    // Item types
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
 
@@ -1540,6 +1558,9 @@ class Item5eSheet extends ItemSheet {
 
     // Activate tabs
     new Tabs(html.find(".tabs"));
+
+    // Checkbox changes
+    html.find('input[type="checkbox"]').change(event => this._onSubmit(event));
   }
 }
 
@@ -1916,13 +1937,24 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  mergeObject(options, {
-	    template: "public/systems/dnd5e/templates/actors/actor-sheet.html",
       classes: options.classes.concat(["dnd5e", "actor", "character-sheet"]),
       width: 650,
       height: 720,
       showUnpreparedSpells: true
     });
 	  return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the correct HTML template path to use for rendering this particular sheet
+   * @type {String}
+   */
+  get template() {
+    const path = "public/systems/dnd5e/templates/actors/";
+    if ( this.actor.limited ) return path + "limited-sheet.html";
+    return path + "actor-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -2135,7 +2167,10 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 }
 
 // Register Character Sheet
-Actors.registerSheet("dnd5e", ActorSheet5eCharacter, "character");
+Actors.registerSheet("dnd5e", ActorSheet5eCharacter, {
+  types: ["character"],
+  makeDefault: true
+});
 
 
 
@@ -2145,13 +2180,24 @@ class ActorSheet5eNPC extends ActorSheet5e {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  mergeObject(options, {
-	    template: "public/systems/dnd5e/templates/actors/npc-sheet.html",
       classes: options.classes.concat(["dnd5e", "actor", "npc-sheet"]),
       width: 650,
       height: 720,
       showUnpreparedSpells: true
     });
 	  return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the correct HTML template path to use for rendering this particular sheet
+   * @type {String}
+   */
+  get template() {
+    const path = "public/systems/dnd5e/templates/actors/";
+    if ( this.actor.limited ) return path + "limited-sheet.html";
+    return path + "npc-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -2245,9 +2291,11 @@ class ActorSheet5eNPC extends ActorSheet5e {
 
     // Format NPC Challenge Rating
     if (this.actor.data.type === "npc") {
-      let cr = this.form["data.details.cr.value"],
-         crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-      formData["data.details.cr.value"] = crs[cr.value] || parseInt(cr.value);
+      let cr = formData["data.details.cr.value"];
+      if ( cr ) {
+        let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+        formData["data.details.cr.value"] = crs[cr] || parseInt(cr);
+      }
     }
 
     // Parent ActorSheet update steps
@@ -2256,4 +2304,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
 }
 
 // Register NPC Sheet
-Actors.registerSheet("dnd5e", ActorSheet5eNPC, "npc");
+Actors.registerSheet("dnd5e", ActorSheet5eNPC, {
+  types: ["npc"],
+  makeDefault: true
+});

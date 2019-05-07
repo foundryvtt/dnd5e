@@ -10,7 +10,7 @@
             <div class="level">
                 <label>CR</label>
                 <input name="data.details.cr.value" type="text" value="{{data.details.cr.str}}"
-                       data-dtype="Number" placeholder="1"/>
+                       data-dtype="String" placeholder="1"/>
             </div>
             <div class="experience">
                 <span>{{data.details.xp.value}} XP</span>
@@ -23,10 +23,6 @@
 
         <!-- DETAILS -->
         <ul class="details">
-            <li class="character-detail">
-                <input type="text" name="data.traits.size.value" data-dtype="{{data.traits.size.type}}"
-                       value="{{data.traits.size.value}}" placeholder="Medium"/>
-            </li>
             <li class="character-detail">
                 <input name="data.details.type.value" type="text" value="{{data.details.type.value}}" placeholder="Type"/>
             </li>
@@ -43,7 +39,9 @@
             <div class="attribute">
                 <h4 class="attribute-name">
                     Health
+                    {{# if editable}}
                     <a class="npc-roll-hp" title="Roll Health"><i class="fas fa-dice-d20"></i></a>
+                    {{/if}}
                 </h4>
                 <div class="attribute-value">
                     <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
@@ -238,9 +236,7 @@
        </div>
 
         <!-- BIOGRAPHY -->
-        <div class="tab biography" data-group="primary" data-tab="biography">
-            {{editor content=data.details.biography.value target="data.details.biography.value" button=true}}
-        </div>
+        {{> public/systems/dnd5e/templates/actors/actor-biography.html}}
     </section>
 
     <!-- SIDEBAR -->

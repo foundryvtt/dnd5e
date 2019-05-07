@@ -15,6 +15,12 @@ CONFIG.damageTypes = {
   "thunder": "Thunder"
 };
 
+// Healing Types
+CONFIG.healingTypes = {
+  "healing": "Healing",
+  "temphp": "Healing (Temporary)"
+};
+
 // Weapon Types
 CONFIG.weaponTypes = {
   "simpleM": "Simple Melee",
@@ -137,7 +143,8 @@ CONFIG.conditionTypes = {
   "restrained": "Restrained",
   "stunned": "Stunned",
   "unconscious": "Unconscious",
-  "exhaustion": "Exhaustion"
+  "exhaustion": "Exhaustion",
+  "diseased": "Diseased"
 };
 
 // Languages

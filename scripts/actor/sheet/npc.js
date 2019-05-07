@@ -4,13 +4,24 @@ class ActorSheet5eNPC extends ActorSheet5e {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  mergeObject(options, {
-	    template: "public/systems/dnd5e/templates/actors/npc-sheet.html",
       classes: options.classes.concat(["dnd5e", "actor", "npc-sheet"]),
       width: 650,
       height: 720,
       showUnpreparedSpells: true
     });
 	  return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the correct HTML template path to use for rendering this particular sheet
+   * @type {String}
+   */
+  get template() {
+    const path = "public/systems/dnd5e/templates/actors/";
+    if ( this.actor.limited ) return path + "limited-sheet.html";
+    return path + "npc-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -104,9 +115,11 @@ class ActorSheet5eNPC extends ActorSheet5e {
 
     // Format NPC Challenge Rating
     if (this.actor.data.type === "npc") {
-      let cr = this.form["data.details.cr.value"],
-         crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-      formData["data.details.cr.value"] = crs[cr.value] || parseInt(cr.value);
+      let cr = formData["data.details.cr.value"];
+      if ( cr ) {
+        let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+        formData["data.details.cr.value"] = crs[cr] || parseInt(cr);
+      }
     }
 
     // Parent ActorSheet update steps
@@ -115,4 +128,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
 }
 
 // Register NPC Sheet
-Actors.registerSheet("dnd5e", ActorSheet5eNPC, "npc");
+Actors.registerSheet("dnd5e", ActorSheet5eNPC, {
+  types: ["npc"],
+  makeDefault: true
+});

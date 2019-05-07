@@ -26,7 +26,13 @@ class Item5eSheet extends ItemSheet {
   getData() {
     const data = super.getData();
     data['abilities'] = game.system.template.actor.data.abilities;
-    data['damageTypes'] = CONFIG.damageTypes;
+
+    // Damage types
+    let dt = duplicate(CONFIG.damageTypes);
+    if ( ["spell", "feat"].includes(this.item.type) ) mergeObject(dt, CONFIG.healingTypes);
+    data['damageTypes'] = dt;
+
+    // Item types
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
 
@@ -53,6 +59,9 @@ class Item5eSheet extends ItemSheet {
 
     // Activate tabs
     new Tabs(html.find(".tabs"));
+
+    // Checkbox changes
+    html.find('input[type="checkbox"]').change(event => this._onSubmit(event));
   }
 }
 

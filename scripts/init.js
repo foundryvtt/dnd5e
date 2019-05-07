@@ -66,9 +66,12 @@ Hooks.once("init", () => {
   loadTemplates([
     "public/systems/dnd5e/templates/actors/actor-attributes.html",
     "public/systems/dnd5e/templates/actors/actor-abilities.html",
+    "public/systems/dnd5e/templates/actors/actor-biography.html",
     "public/systems/dnd5e/templates/actors/actor-skills.html",
     "public/systems/dnd5e/templates/actors/actor-traits.html",
-    "public/systems/dnd5e/templates/actors/actor-classes.html"
+    "public/systems/dnd5e/templates/actors/actor-classes.html",
+    "public/systems/dnd5e/templates/items/item-header.html",
+    "public/systems/dnd5e/templates/items/item-description.html",
   ]);
 });
 

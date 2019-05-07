@@ -1,8 +1,5 @@
 <form class="dnd5e item-sheet {{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-    </header>
+    {{> public/systems/dnd5e/templates/items/item-header.html}}
 
     <ol class="item-details">
         <li>
@@ -24,9 +21,7 @@
         <a class="item" data-tab="details">Details</a>
     </nav>
 
-    <div class="tab active" data-tab="description">
-        {{editor content=data.description.value target="data.description.value" button=true}}
-    </div>
+    {{> public/systems/dnd5e/templates/items/item-description.html}}
 
     <div class="tab" data-tab="details">
         <div class="form-group">
