@@ -39,8 +39,10 @@ class Item5e extends Item {
   /*  Chat Card Data
   /* -------------------------------------------- */
 
-  getChatData() {
-    return this[`_${this.data.type}ChatData`]();
+  getChatData(htmlOptions) {
+    const data = this[`_${this.data.type}ChatData`]();
+    data.description.value = enrichHTML(data.description.value, htmlOptions);
+    return data;
   }
 
   /* -------------------------------------------- */

@@ -1,7 +1,7 @@
 /**
  * Override and extend the basic :class:`ItemSheet` implementation
  */
-class Item5eSheet extends ItemSheet {
+class ItemSheet5e extends ItemSheet {
   constructor(item, options) {
     super(item, options);
     this.mce = null;
@@ -69,5 +69,4 @@ class Item5eSheet extends ItemSheet {
 Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
 
 // Override CONFIG
-CONFIG.Item.sheetClass = Item5eSheet;
-
+CONFIG.Item.sheetClass = ItemSheet5e;
