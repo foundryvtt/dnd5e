@@ -280,14 +280,14 @@ class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
         item = this.actor.getOwnedItem(Number(li.attr("data-item-id"))),
-        chatData = item.getChatData();
+        chatData = item.getChatData({secrets: this.actor.owner});
 
     // Toggle summary
     if ( li.hasClass("expanded") ) {
       let summary = li.children(".item-summary");
       summary.slideUp(200, () => summary.remove());
     } else {
-      let div = $(`<div class="item-summary">${item.data.data.description.value}</div>`);
+      let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
       let props = $(`<div class="item-properties"></div>`);
       chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
       div.append(props);

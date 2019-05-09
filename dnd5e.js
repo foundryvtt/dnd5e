@@ -977,8 +977,10 @@ class Item5e extends Item {
   /*  Chat Card Data
   /* -------------------------------------------- */
 
-  getChatData() {
-    return this[`_${this.data.type}ChatData`]();
+  getChatData(htmlOptions) {
+    const data = this[`_${this.data.type}ChatData`]();
+    data.description.value = enrichHTML(data.description.value, htmlOptions);
+    return data;
   }
 
   /* -------------------------------------------- */
@@ -1500,7 +1502,7 @@ Hooks.on("getChatLogEntryContext", (html, options) => {
 /**
  * Override and extend the basic :class:`ItemSheet` implementation
  */
-class Item5eSheet extends ItemSheet {
+class ItemSheet5e extends ItemSheet {
   constructor(item, options) {
     super(item, options);
     this.mce = null;
@@ -1568,8 +1570,7 @@ class Item5eSheet extends ItemSheet {
 Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
 
 // Override CONFIG
-CONFIG.Item.sheetClass = Item5eSheet;
-
+CONFIG.Item.sheetClass = ItemSheet5e;
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
@@ -1853,14 +1854,14 @@ class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
         item = this.actor.getOwnedItem(Number(li.attr("data-item-id"))),
-        chatData = item.getChatData();
+        chatData = item.getChatData({secrets: this.actor.owner});
 
     // Toggle summary
     if ( li.hasClass("expanded") ) {
       let summary = li.children(".item-summary");
       summary.slideUp(200, () => summary.remove());
     } else {
-      let div = $(`<div class="item-summary">${item.data.data.description.value}</div>`);
+      let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
       let props = $(`<div class="item-properties"></div>`);
       chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
       div.append(props);
