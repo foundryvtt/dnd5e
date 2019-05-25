@@ -1,49 +1,52 @@
-<form class="dnd5e item-sheet {{cssClass}}" autocomplete="off">
+<form class="{{cssClass}}" autocomplete="off">
     {{> public/systems/dnd5e/templates/items/item-header.html}}
 
-    <ol class="item-details">
-        <li>
-            <label>Quantity</label>
-            <input type="text" name="data.quantity.value" value="{{data.quantity.value}}" data-dtype="{{data.quantity.type}}"/>
-        </li>
-        <li>
-            <label>Weight</label>
-            <input type="text" name="data.weight.value" value="{{data.weight.value}}" data-dtype="{{data.weight.type}}"/>
-        </li>
-        <li>
-            <label>Price</label>
-            <input type="text" name="data.price.value" value="{{data.price.value}}" data-dtype="{{data.price.type}}"/>
-        </li>
-    </ol>
+    <!-- BODY -->
+    <section class="sheet-body">
+        <ol class="item-details">
+            <li>
+                <label>Quantity</label>
+                <input type="text" name="data.quantity.value" value="{{data.quantity.value}}" data-dtype="{{data.quantity.type}}"/>
+            </li>
+            <li>
+                <label>Weight</label>
+                <input type="text" name="data.weight.value" value="{{data.weight.value}}" data-dtype="{{data.weight.type}}"/>
+            </li>
+            <li>
+                <label>Price</label>
+                <input type="text" name="data.price.value" value="{{data.price.value}}" data-dtype="{{data.price.type}}"/>
+            </li>
+        </ol>
 
-    <nav class="sheet-tabs tabs" data-tab-container="primary">
-        <a class="item active" data-tab="description">Description</a>
-        <a class="item" data-tab="details">Details</a>
-    </nav>
+        <nav class="sheet-tabs tabs" data-tab-container="primary">
+            <a class="item active" data-tab="description">Description</a>
+            <a class="item" data-tab="details">Details</a>
+        </nav>
 
-    {{> public/systems/dnd5e/templates/items/item-description.html}}
+        {{> public/systems/dnd5e/templates/items/item-description.html}}
 
-    <div class="tab" data-tab="details">
-        <div class="form-group">
-            <label>{{data.ability.label}}</label>
-            <select name="data.ability.value" data-dtype="{{data.ability.type}}">
-                {{#select data.ability.value}}
-                {{#each abilities as |ability a|}}
-                <option value="{{a}}">{{ability.label}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
+        <div class="tab" data-tab="details">
+            <div class="form-group">
+                <label>{{data.ability.label}}</label>
+                <select name="data.ability.value" data-dtype="{{data.ability.type}}">
+                    {{#select data.ability.value}}
+                    {{#each abilities as |ability a|}}
+                    <option value="{{a}}">{{ability.label}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+             <div class="form-group">
+                <label>{{data.proficient.label}}</label>
+                 <select name="data.proficient.value" data-dtype="Number">
+                     {{#select data.proficient.value}}
+                     {{#each proficiencies as |label p|}}
+                     <option value="{{p}}">{{label}}</option>
+                     {{/each}}
+                     {{/select}}
+                 </select>
+            </div>
         </div>
-
-         <div class="form-group">
-            <label>{{data.proficient.label}}</label>
-             <select name="data.proficient.value" data-dtype="Number">
-                 {{#select data.proficient.value}}
-                 {{#each proficiencies as |label p|}}
-                 <option value="{{p}}">{{label}}</option>
-                 {{/each}}
-                 {{/select}}
-             </select>
-        </div>
-    </div>
+    </section>
 </form>

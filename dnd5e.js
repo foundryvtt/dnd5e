@@ -67,6 +67,14 @@ CONFIG.consumableTypes = {
   "trinket": "Trinket"
 };
 
+
+// Spell Components
+CONFIG.spellComponents = {
+  "V": "Verbal",
+  "S": "Somatic",
+  "M": "Material"
+};
+
 // Spell Types
 CONFIG.spellTypes = {
   "attack": "Spell Attack",
@@ -444,8 +452,9 @@ Hooks.once("init", () => {
     "public/systems/dnd5e/templates/actors/actor-skills.html",
     "public/systems/dnd5e/templates/actors/actor-traits.html",
     "public/systems/dnd5e/templates/actors/actor-classes.html",
-    "public/systems/dnd5e/templates/items/item-header.html",
-    "public/systems/dnd5e/templates/items/item-description.html",
+
+    "public/systems/dnd5e/templates/items/spell-sidebar.html",
+    "public/systems/dnd5e/templates/items/spell-details.html",
   ]);
 });
 
@@ -1503,9 +1512,13 @@ Hooks.on("getChatLogEntryContext", (html, options) => {
  * Override and extend the basic :class:`ItemSheet` implementation
  */
 class ItemSheet5e extends ItemSheet {
-  constructor(item, options) {
-    super(item, options);
-    this.mce = null;
+	static get defaultOptions() {
+	  const options = super.defaultOptions;
+	  options.width = 520;
+	  options.height = 460;
+	  options.classes = options.classes.concat(["dnd5e", "item"]);
+	  options.resizable = false;
+	  return options;
   }
 
   /* -------------------------------------------- */
@@ -1515,7 +1528,8 @@ class ItemSheet5e extends ItemSheet {
    */
   get template() {
     let type = this.item.type;
-    return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
+    // return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
+    return `public/systems/dnd5e/templates/items/item-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -1528,6 +1542,24 @@ class ItemSheet5e extends ItemSheet {
     const data = super.getData();
     data['abilities'] = game.system.template.actor.data.abilities;
 
+    // Sheet display details
+    mergeObject(data, {
+      type: this.item.type,
+      hasSidebar: true,
+      sidebarTemplate: () => `public/systems/dnd5e/templates/items/${this.item.type}-sidebar.html`,
+      hasDetails: true,
+      detailsTemplate: () => `public/systems/dnd5e/templates/items/${this.item.type}-details.html`
+    });
+
+    // Spell Data
+    if ( this.item.type === "spell" ) {
+      mergeObject(data, {
+        spellSchools: CONFIG.spellSchools,
+        spellLevels: CONFIG.spellLevels,
+        spellComponents: this._formatSpellComponents(data.data)
+      });
+    }
+
     // Damage types
     let dt = duplicate(CONFIG.damageTypes);
     if ( ["spell", "feat"].includes(this.item.type) ) mergeObject(dt, CONFIG.healingTypes);
@@ -1537,17 +1569,19 @@ class ItemSheet5e extends ItemSheet {
     let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
     data[types] = CONFIG[types];
 
-    // Spell-specific data
-    if ( this.item.type === "spell" ) {
-      data["spellSchools"] = CONFIG.spellSchools;
-      data["spellLevels"] = CONFIG.spellLevels;
-    }
-
     // Tool-specific data
-    else if ( this.item.type === "tool" ) {
+    if ( this.item.type === "tool" ) {
       data["proficiencies"] = CONFIG.proficiencyLevels;
     }
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _formatSpellComponents(data) {
+    let comps = data.components.value.split(",").map(c => CONFIG.spellComponents[c.trim()] || c.trim());
+    if ( data.materials.value ) comps.push(data.materials.value);
+    return comps;
   }
 
   /* -------------------------------------------- */
@@ -1559,7 +1593,10 @@ class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
 
     // Activate tabs
-    new Tabs(html.find(".tabs"));
+    new Tabs(html.find(".tabs"), {
+      initial: this.item.data.flags["_sheetTab"],
+      callback: clicked => this.item.data.flags["_sheetTab"] = clicked.attr("data-tab")
+    });
 
     // Checkbox changes
     html.find('input[type="checkbox"]').change(event => this._onSubmit(event));

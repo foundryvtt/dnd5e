@@ -70,8 +70,9 @@ Hooks.once("init", () => {
     "public/systems/dnd5e/templates/actors/actor-skills.html",
     "public/systems/dnd5e/templates/actors/actor-traits.html",
     "public/systems/dnd5e/templates/actors/actor-classes.html",
-    "public/systems/dnd5e/templates/items/item-header.html",
-    "public/systems/dnd5e/templates/items/item-description.html",
+
+    "public/systems/dnd5e/templates/items/spell-sidebar.html",
+    "public/systems/dnd5e/templates/items/spell-details.html",
   ]);
 });
 

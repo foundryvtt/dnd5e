@@ -4,14 +4,7 @@
 /*  Generic Sheet Styling
 /* ----------------------------------------- */
 
-.dnd5e.sheet .window-content {
-  padding: 5px;
-  font-size: 13px;
-  overflow-y: hidden;
-}
-
 .dnd5e.sheet form {
-  .flexrow();
 
   /* Form Elements */
   input[type="text"] {
@@ -62,20 +55,53 @@
     cursor: pointer;
   }
 
-  .sheet-header {
-    flex: 0 0 100%;
-    height: 44px;
-    order: 1;
+  /* Sheet Tabs */
+  .sheet-tabs {
+    flex: 0 0 @tabHeight;
+
+    > .item {
+      line-height: @tabHeight - 4px;
+      padding: 4px 8px 0;
+
+      &.active {
+        color: #000;
+        font-weight: 700;
+      }
+    }
   }
 
-  .sheet-body {
+  .tab {
     flex: 1;
-    height: calc(100% - 44px);
-    order: 3;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+  }
+
+  /* Tags */
+  .tag {
+    float: left;
+    margin: 0 2px 2px 0;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 16px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+
+/* ---------------------------------------- */
+/*  Actor Sheet
+/* ---------------------------------------- */
+
+.dnd5e.actor {
+  min-width: 650px;
+  min-height: 650px;
+
+  .sheet-header { order: 1; }
+  .sheet-sidebar { order: 2; }
+  .sheet-body {
+    order: 3;
+    flex: 1;
   }
 
   .sheet-sidebar {
@@ -96,63 +122,19 @@
     }
   }
 
-  .sheet-tabs {
-    flex: 0 0 28px;
-    margin-top: 2px;
-    padding: 2px 2px 0;
-    border-top: 1px solid @borderLight;
-    border-bottom: 1px solid @borderDark;
 
-    > .item {
-      line-height: 26px;
-      padding: 0 10px;
-      border-radius: 5px 5px 0 0;
-
-      &.active {
-        color: #000;
-        font-weight: 700;
-        border: 1px solid @borderDark;
-        border-bottom: none;
-        box-shadow: 0 0 10px inset @accentColor;
-        text-shadow: none;
-      }
-    }
-  }
-
-  .tab {
-    flex: 1 0 380px;
-    overflow: hidden;
-  }
-
-  /* Tags */
-  .tag {
-    float: left;
-    margin: 0 2px 2px 0;
-    padding: 0 3px;
-    font-size: 10px;
-    line-height: 16px;
-    border: 1px solid #999;
-    border-radius: 3px;
-    background: rgba(0, 0, 0, 0.05);
-  }
-}
-.dnd5e.actor {
-
-  /* ---------------------------------------- */
-  /*  Sheet Header
-  /* ---------------------------------------- */
+  // Sheet Header
   .sheet-header {
-    .flexrow();
     border-bottom: 1px solid @borderLight;
 
-    .charname {
-      height: 44px;
-      padding: 5px 5px 5px 0;
+    h1 {
+      margin: 0;
       border: none;
 
       > input {
+        height: 40px;
         width: 100%;
-        margin: 0;
+        margin: 2px;
         .nodesto();
         font-size: 36px;
         border: none;
@@ -214,6 +196,29 @@
   /* ---------------------------------------- */
   /*  Sheet Body                              */
   /* ---------------------------------------- */
+
+  .sheet-body {
+    order: 3;
+  }
+
+  /* Actor Sheet Tabs */
+  .sheet-tabs {
+    margin-top: 2px;
+    border-top: 1px solid @borderLight;
+    border-bottom: 1px solid @borderDark;
+
+    > .item {
+      border-radius: 5px 5px 0 0;
+
+      &.active {
+        border: 1px solid @borderDark;
+        border-bottom: none;
+        box-shadow: 0 0 10px inset @accentColor;
+        text-shadow: none;
+      }
+    }
+  }
+
 
   /* Character Details */
   .sheet-body .details {
@@ -463,6 +468,7 @@
       }
 
       .skill-proficiency {
+        text-align: center;
         flex: 0 0 24px;
         i.fa-circle { font-size: 10px; }
       }
@@ -558,7 +564,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    height: calc(100% - 44px);
+    height: 100%;
     overflow-y: scroll;
 
     /* Inventory Item */
