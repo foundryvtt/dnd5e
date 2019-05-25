@@ -33,16 +33,27 @@ class ItemSheet5e extends ItemSheet {
     data['abilities'] = game.system.template.actor.data.abilities;
 
     // Sheet display details
+    const type = this.item.type;
     mergeObject(data, {
-      type: this.item.type,
+      type: type,
       hasSidebar: true,
-      sidebarTemplate: () => `public/systems/dnd5e/templates/items/${this.item.type}-sidebar.html`,
-      hasDetails: true,
-      detailsTemplate: () => `public/systems/dnd5e/templates/items/${this.item.type}-details.html`
+      sidebarTemplate: () => `public/systems/dnd5e/templates/items/${type}-sidebar.html`,
+      hasDetails: ["consumable", "equipment", "feat", "spell", "weapon"].includes(type),
+      detailsTemplate: () => `public/systems/dnd5e/templates/items/${type}-details.html`
     });
 
+    // Damage types
+    let dt = duplicate(CONFIG.damageTypes);
+    if ( ["spell", "feat"].includes(type) ) mergeObject(dt, CONFIG.healingTypes);
+    data['damageTypes'] = dt;
+
+    // Consumable Data
+    if ( type === "consumable" ) {
+      data.consumableTypes = CONFIG.consumableTypes
+    }
+
     // Spell Data
-    if ( this.item.type === "spell" ) {
+    else if ( type === "spell" ) {
       mergeObject(data, {
         spellSchools: CONFIG.spellSchools,
         spellLevels: CONFIG.spellLevels,
@@ -50,18 +61,28 @@ class ItemSheet5e extends ItemSheet {
       });
     }
 
-    // Damage types
-    let dt = duplicate(CONFIG.damageTypes);
-    if ( ["spell", "feat"].includes(this.item.type) ) mergeObject(dt, CONFIG.healingTypes);
-    data['damageTypes'] = dt;
+    // Weapon Data
+    else if ( this.item.type === "weapon" ) {
+      data.weaponProperties = data.data.properties.value.split(",").map(p => p.trim());
+    }
 
-    // Item types
-    let types = (this.item.type === "equipment") ? "armorTypes" : this.item.type + "Types";
-    data[types] = CONFIG[types];
+    // Feat types
+    else if ( type === "feat" ) {
+      data.featTypes = CONFIG.featTypes;
+      data.featTags = [
+        data.data.target.value,
+        data.data.time.value
+      ].filter(t => !!t);
+    }
+
+    // Equipment data
+    else if ( type === "equipment" ) {
+      data.armorTypes = CONFIG.armorTypes;
+    }
 
     // Tool-specific data
-    if ( this.item.type === "tool" ) {
-      data["proficiencies"] = CONFIG.proficiencyLevels;
+    else if ( type === "tool" ) {
+      data.proficiencies = CONFIG.proficiencyLevels;
     }
     return data;
   }

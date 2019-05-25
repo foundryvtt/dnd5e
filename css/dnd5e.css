@@ -954,6 +954,10 @@
 /* ----------------------------------------- */
 /*  Item Sheet Style
 /* ----------------------------------------- */
+.dnd5e.item form .form-group {
+  height: 24px;
+  margin: 2px 0;
+}
 .dnd5e.item form .sheet-header {
   border-bottom: 1px solid #CCC;
 }
@@ -997,11 +1001,23 @@
   width: 100%;
   text-align: center;
 }
+.dnd5e.item form .sheet-sidebar .inventory-details {
+  flex: 0;
+}
+.dnd5e.item form .sheet-sidebar .inventory-details label {
+  font-weight: bold;
+}
+.dnd5e.item form .sheet-sidebar .inventory-details .form-group input {
+  text-align: right;
+}
 .dnd5e.item form .sheet-tabs {
   border-bottom: 1px solid #CCC;
 }
 .dnd5e.item form .sheet-tabs .active {
   text-decoration: underline;
+}
+.dnd5e.item form .editor {
+  height: 100%;
 }
 .dnd5e.item form .item-details {
   padding: 8px 8px 0;
@@ -1015,10 +1031,40 @@
   font-size: 12px;
   height: 24px;
 }
+.dnd5e.item form .consumable-details {
+  flex: 0 0 24px;
+}
+.dnd5e.item form .consumable-details label {
+  font-weight: bold;
+}
+.dnd5e.item form .consumable-details input {
+  flex: 0 0 24px;
+  margin-right: 6px;
+  text-align: right;
+}
+.dnd5e.item form .consumable-details span {
+  line-height: 24px;
+}
+.dnd5e.item form .consumable-details .max-charges {
+  flex: 0 0 16px;
+  text-align: center;
+}
+.dnd5e.item form .consumable-charges label {
+  flex: 0 0 144px;
+}
 .dnd5e.item form .consumable-charges input {
   flex: 0 0 64px;
-  margin-left: 5px;
   text-align: center;
+}
+.dnd5e.item form .consumable-charges span.flex0 {
+  line-height: 24px;
+}
+.dnd5e.item form .tool-details {
+  border-top: 1px solid #CCC;
+  padding-top: 10px;
+}
+.dnd5e.item form .tool-details .form-group-stacked {
+  margin-bottom: 8px;
 }
 /* ----------------------------------------- */
 /*  Chat Cards
