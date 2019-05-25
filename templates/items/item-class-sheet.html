@@ -1,22 +1,25 @@
-<form class="dnd5e item-sheet {{cssClass}}" autocomplete="off">
+<form class="{{cssClass}}" autocomplete="off">
     {{> public/systems/dnd5e/templates/items/item-header.html}}
 
-    <nav class="sheet-tabs tabs" data-tab-container="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="details">Details</a>
-    </nav>
+    <!-- BODY -->
+    <section class="sheet-body">
+        <nav class="sheet-tabs tabs" data-tab-container="primary">
+            <a class="item" data-tab="description">Description</a>
+            <a class="item" data-tab="details">Details</a>
+        </nav>
 
-    {{> public/systems/dnd5e/templates/items/item-description.html}}
+        {{> public/systems/dnd5e/templates/items/item-description.html}}
 
-    <div class="tab" data-tab="details">
-        <div class="form-group">
-            <label>{{data.levels.label}}</label>
-            <input type="text" name="data.levels.value" value="{{data.levels.value}}" data-dtype="{{data.levels.type}}"/>
+        <div class="tab" data-tab="details">
+            <div class="form-group">
+                <label>{{data.levels.label}}</label>
+                <input type="text" name="data.levels.value" value="{{data.levels.value}}" data-dtype="{{data.levels.type}}"/>
+            </div>
+
+            <div class="form-group">
+                <label>{{data.subclass.label}}</label>
+                <input type="text" name="data.subclass.value" value="{{data.subclass.value}}" data-dtype="{{data.subclass.type}}"/>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>{{data.subclass.label}}</label>
-            <input type="text" name="data.subclass.value" value="{{data.subclass.value}}" data-dtype="{{data.subclass.type}}"/>
-        </div>
-    </div>
+    </section>
 </form>

@@ -1,32 +1,110 @@
 @import "variables.less";
 
 /* ----------------------------------------- */
-/*  Item Sheet
+/*  Item Sheet Structure
 /* ----------------------------------------- */
 
+.dnd5e.item form {
+  .flexcol();
 
-.dnd5e.item-sheet {
-  .item-details,
-  .sheet-tabs {
-    flex: 0 0 30px;
-    padding: 5px 0;
-    margin: 0 0 5px;
+  .sheet-header {
+    flex: 0 0 70px;
+    width: 100%;
+    padding-bottom: 6px;
   }
 
-  .item-details {
-    list-style: none;
+  .sheet-content {
+    flex: 1;
+    width: 100%;
     .flexrow();
-    justify-content: space-between;
 
-    > li {
-      flex: 0 0 30%;
-      .flexrow();
-      font-size: 14px;
-      text-align: center;
+    .sheet-sidebar {
+      flex: 0 0 120px;
+      height: 350px;
     }
 
+    .sheet-body {
+      flex: 1;
+      height: 350px;
+    }
+  }
+
+  .tab {
+    padding-left: 10px;
+  }
+}
+
+
+/* ----------------------------------------- */
+/*  Item Sheet Style
+/* ----------------------------------------- */
+
+.dnd5e.item form {
+
+  // Sheet Header
+  .sheet-header {
+    border-bottom: 1px solid @borderLight;
+
+    img {
+      flex: 0 0 64px;
+      margin-right: 6px;
+    }
+  }
+
+  // Sheet Sidebar
+  .sheet-sidebar {
+    .flexcol();
+
+    .sidebar-summary {
+      flex: 0 0 @tabHeight;
+      line-height: @tabHeight;
+      margin: 0 0 0.5em;
+      text-align: center;
+      border-bottom: 1px solid @borderLight;
+    }
+
+    .item-summary {
+      flex: 0 0 28px;
+      line-height: 28px;
+      text-align: center;
+      .nodesto();
+    }
+
+    .item-tags {
+      flex: 0;
+      list-style: none;
+      margin: 0;
+      padding: 8px 0 6px;
+      border-top: 1px solid @borderLight;
+
+      .tag {
+        display: block;
+        float: none;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  // Sheet Tabs
+  .sheet-tabs {
+    border-bottom: 1px solid @borderLight;
+    .active { text-decoration: underline; }
+  }
+
+  // Details Tab
+  .item-details {
+    padding: 8px 8px 0;
+    overflow-y: scroll;
+
     label {
-      line-height: 20px;
+      color: #888;
+      font-weight: bold;
+    }
+
+    select {
+      font-size: 12px;
+      height: 24px;
     }
   }
 
@@ -34,19 +112,5 @@
     flex: 0 0 64px;
     margin-left: 5px;
     text-align: center;
-  }
-
-  .sheet-tabs {
-    border-top: 1px solid #CCC;
-    border-bottom: 1px solid #CCC;
-    font-size: 14px;
-    font-weight: bold;
-    .active {
-      text-decoration: underline;
-    }
-  }
-
-  .editor {
-    height: 300px;
   }
 }

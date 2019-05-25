@@ -67,6 +67,14 @@ CONFIG.consumableTypes = {
   "trinket": "Trinket"
 };
 
+
+// Spell Components
+CONFIG.spellComponents = {
+  "V": "Verbal",
+  "S": "Somatic",
+  "M": "Material"
+};
+
 // Spell Types
 CONFIG.spellTypes = {
   "attack": "Spell Attack",
