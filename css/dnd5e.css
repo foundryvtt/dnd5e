@@ -108,6 +108,7 @@
 .dnd5e.sheet form select:disabled,
 .dnd5e.sheet form textarea:disabled {
   color: #444;
+  border: none;
 }
 .dnd5e.sheet form input:disabled:hover,
 .dnd5e.sheet form select:disabled:hover,
@@ -115,7 +116,7 @@
 .dnd5e.sheet form input:disabled:focus,
 .dnd5e.sheet form select:disabled:focus,
 .dnd5e.sheet form textarea:disabled:focus {
-  border: 1px solid transparent;
+  border: none;
   box-shadow: none;
 }
 .dnd5e.sheet form span,
@@ -243,7 +244,6 @@
   font-size: 18px;
   color: #444;
   font-size: 36px;
-  border: none;
 }
 .dnd5e.actor .sheet-header .charlevel {
   flex: 0 0 150px;
@@ -557,6 +557,11 @@
 }
 .dnd5e.actor .abilities .ability .ability-save {
   border-left: 1px solid #CCC;
+}
+.dnd5e.actor .skills .skills-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .dnd5e.actor .skills .skill {
   display: flex;

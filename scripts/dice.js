@@ -11,7 +11,7 @@ class Dice5e {
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
-   * @param {String} alias          The alias with which to post to chat
+   * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
    * @param {Boolean} situational   Allow for an arbitrary situational bonus field
@@ -19,7 +19,7 @@ class Dice5e {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static d20Roll({event, parts, data, template, title, alias, flavor, advantage=true, situational=true,
+  static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
                   fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
@@ -41,7 +41,7 @@ class Dice5e {
       // Execute the roll and send it to chat
       let roll = new Roll(parts.join("+"), data).roll();
       roll.toMessage({
-        alias: alias,
+        speaker: speaker,
         flavor: flav,
         rollMode: rollMode
       });
@@ -109,13 +109,13 @@ class Dice5e {
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
-   * @param {String} alias          The alias with which to post to chat
+   * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} critical      Allow critical hits to be chosen
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static damageRoll({event={}, parts, data, template, title, alias, flavor, critical=true, onClose, dialogOptions}) {
+  static damageRoll({event={}, parts, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -129,7 +129,7 @@ class Dice5e {
 
       // Execute the roll and send it to chat
       roll.toMessage({
-        alias: alias,
+        speaker: speaker,
         flavor: flav,
         rollMode: rollMode
       });

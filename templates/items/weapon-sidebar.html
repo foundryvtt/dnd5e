@@ -17,11 +17,13 @@
     </div>
 </div>
 
+{{#if weaponProperties.length }}
 <ol class="item-tags">
 {{#each weaponProperties}}
     <li class="tag">{{this}}</li>
 {{/each}}
 </ol>
+{{/if}}
 
 <ol class="item-tags">
     {{#if data.proficient.value}}

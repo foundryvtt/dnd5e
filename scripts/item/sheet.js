@@ -55,6 +55,7 @@ class ItemSheet5e extends ItemSheet {
     // Spell Data
     else if ( type === "spell" ) {
       mergeObject(data, {
+        spellTypes: CONFIG.spellTypes,
         spellSchools: CONFIG.spellSchools,
         spellLevels: CONFIG.spellLevels,
         spellComponents: this._formatSpellComponents(data.data)
@@ -63,7 +64,8 @@ class ItemSheet5e extends ItemSheet {
 
     // Weapon Data
     else if ( this.item.type === "weapon" ) {
-      data.weaponProperties = data.data.properties.value.split(",").map(p => p.trim());
+      data.weaponTypes = CONFIG.weaponTypes;
+      data.weaponProperties = this._formatWeaponProperties(data.data);
     }
 
     // Feat types
@@ -90,9 +92,17 @@ class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   _formatSpellComponents(data) {
+    if ( !data.components.value ) return [];
     let comps = data.components.value.split(",").map(c => CONFIG.spellComponents[c.trim()] || c.trim());
     if ( data.materials.value ) comps.push(data.materials.value);
     return comps;
+  }
+
+  /* -------------------------------------------- */
+
+  _formatWeaponProperties(data) {
+    if ( !data.properties.value ) return [];
+    return data.properties.value.split(",").map(p => p.trim());
   }
 
   /* -------------------------------------------- */

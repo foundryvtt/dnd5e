@@ -130,7 +130,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: skl.mod},
       title: flavor,
-      alias: this.name
+      speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
 
@@ -179,7 +179,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.mod},
       title: flavor,
-      alias: this.name
+      speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
 
@@ -202,7 +202,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.save},
       title: flavor,
-      alias: this.name
+      speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
 
@@ -228,7 +228,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.name,
+      speaker: ChatMessage.getSpeaker({actor: this}),
       critical: false,
       dialogOptions: {width: 350}
     }).then(roll => {
