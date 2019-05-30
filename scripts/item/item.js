@@ -20,7 +20,10 @@ class Item5e extends Item {
     // Basic chat message data
     const chatData = {
       user: game.user._id,
-      alias: this.actor.name,
+      speaker: {
+        actor: this.actor._id,
+        alias: this.actor.name
+      }
     };
 
     // Toggle default roll mode
@@ -190,7 +193,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -226,7 +229,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -257,7 +260,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -297,7 +300,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -319,11 +322,15 @@ class Item5e extends Item {
         content = `Uses ${this.name}`;
     if ( cv ) {
       new Roll(cv).toMessage({
-        alias: this.actor.name,
+        speaker: ChatMessage.getSpeaker({actor: this.actor}),
         flavor: content
       });
     } else {
-      ChatMessage.create({user: game.user._id, alias: this.actor.name, content: content})
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: ChatMessage.getSpeaker({actor: this.actor}),
+        content: content
+      })
     }
 
     // Deduct consumed charges from the item
@@ -364,11 +371,10 @@ class Item5e extends Item {
     // Prepare roll data
     let rollData = duplicate(this.actor.data.data),
       abl = this.data.data.ability.value || "int",
-      ability = rollData.abilities[abl],
       parts = [`@abilities.${abl}.mod`, "@proficiency"],
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
-    rollData["proficiency"] = (this.data.data.proficient.value || 0) * rollData.attributes.prof.value;
+    rollData["proficiency"] = Math.floor((this.data.data.proficient.value || 0) * rollData.attributes.prof.value);
 
     // Call the roll helper utility
     Dice5e.d20Roll({
@@ -377,7 +383,7 @@ class Item5e extends Item {
       data: rollData,
       template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
       dialogOptions: {
         width: 400,
@@ -391,7 +397,6 @@ class Item5e extends Item {
       }
     }).then(roll => {
       roll.toMessage({
-        alias: alias,
         flavor: flavor,
         highlightSuccess: roll.parts[0].total === 20,
         highlightFailure: roll.parts[0].total === 1
@@ -422,7 +427,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -461,7 +466,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,

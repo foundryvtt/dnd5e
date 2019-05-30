@@ -34,10 +34,10 @@
   select:disabled,
   textarea:disabled {
     color: #444;
-
+    border: none;
     &:hover,
     &:focus {
-      border: 1px solid transparent;
+      border: none;
       box-shadow: none;
     }
   }
@@ -130,14 +130,12 @@
     h1 {
       margin: 0;
       border: none;
-
       > input {
         height: 40px;
         width: 100%;
         margin: 2px;
         .nodesto();
         font-size: 36px;
-        border: none;
       }
     }
 
@@ -456,6 +454,11 @@
   /* ----------------------------------------- */
 
   .skills {
+    .skills-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
     .skill {
       .flexrow();
       height: 21px;

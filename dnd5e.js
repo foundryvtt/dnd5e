@@ -113,7 +113,9 @@ CONFIG.spellLevels = {
 CONFIG.featTypes = {
   "passive": "Passive Ability",
   "attack": "Ability Attack",
-  "ability": "Generic Action"
+  "ability": "Generic Action",
+  "legendary": "Legendary Action",
+  "lair": "Lair Action"
 };
 
 // Proficiency Multipliers
@@ -196,7 +198,7 @@ class Dice5e {
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
-   * @param {String} alias          The alias with which to post to chat
+   * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
    * @param {Boolean} situational   Allow for an arbitrary situational bonus field
@@ -204,7 +206,7 @@ class Dice5e {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static d20Roll({event, parts, data, template, title, alias, flavor, advantage=true, situational=true,
+  static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
                   fastForward=true, onClose, dialogOptions}) {
 
     // Inner roll function
@@ -226,7 +228,7 @@ class Dice5e {
       // Execute the roll and send it to chat
       let roll = new Roll(parts.join("+"), data).roll();
       roll.toMessage({
-        alias: alias,
+        speaker: speaker,
         flavor: flav,
         rollMode: rollMode
       });
@@ -294,13 +296,13 @@ class Dice5e {
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
-   * @param {String} alias          The alias with which to post to chat
+   * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
    * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
    * @param {Boolean} critical      Allow critical hits to be chosen
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static damageRoll({event={}, parts, data, template, title, alias, flavor, critical=true, onClose, dialogOptions}) {
+  static damageRoll({event={}, parts, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -314,7 +316,7 @@ class Dice5e {
 
       // Execute the roll and send it to chat
       roll.toMessage({
-        alias: alias,
+        speaker: speaker,
         flavor: flav,
         rollMode: rollMode
       });
@@ -640,7 +642,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: skl.mod},
       title: flavor,
-      alias: this.name
+      speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
 
@@ -689,7 +691,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.mod},
       title: flavor,
-      alias: this.name
+      speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
 
@@ -712,7 +714,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: {mod: abl.save},
       title: flavor,
-      alias: this.name
+      speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
 
@@ -738,7 +740,7 @@ class Actor5e extends Actor {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.name,
+      speaker: ChatMessage.getSpeaker({actor: this}),
       critical: false,
       dialogOptions: {width: 350}
     }).then(roll => {
@@ -981,7 +983,10 @@ class Item5e extends Item {
     // Basic chat message data
     const chatData = {
       user: game.user._id,
-      alias: this.actor.name,
+      speaker: {
+        actor: this.actor._id,
+        alias: this.actor.name
+      }
     };
 
     // Toggle default roll mode
@@ -1151,7 +1156,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -1187,7 +1192,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -1218,7 +1223,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -1258,7 +1263,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -1280,11 +1285,15 @@ class Item5e extends Item {
         content = `Uses ${this.name}`;
     if ( cv ) {
       new Roll(cv).toMessage({
-        alias: this.actor.name,
+        speaker: ChatMessage.getSpeaker({actor: this.actor}),
         flavor: content
       });
     } else {
-      ChatMessage.create({user: game.user._id, alias: this.actor.name, content: content})
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: ChatMessage.getSpeaker({actor: this.actor}),
+        content: content
+      })
     }
 
     // Deduct consumed charges from the item
@@ -1325,11 +1334,10 @@ class Item5e extends Item {
     // Prepare roll data
     let rollData = duplicate(this.actor.data.data),
       abl = this.data.data.ability.value || "int",
-      ability = rollData.abilities[abl],
       parts = [`@abilities.${abl}.mod`, "@proficiency"],
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
-    rollData["proficiency"] = (this.data.data.proficient.value || 0) * rollData.attributes.prof.value;
+    rollData["proficiency"] = Math.floor((this.data.data.proficient.value || 0) * rollData.attributes.prof.value);
 
     // Call the roll helper utility
     Dice5e.d20Roll({
@@ -1338,7 +1346,7 @@ class Item5e extends Item {
       data: rollData,
       template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
       dialogOptions: {
         width: 400,
@@ -1352,7 +1360,6 @@ class Item5e extends Item {
       }
     }).then(roll => {
       roll.toMessage({
-        alias: alias,
         flavor: flavor,
         highlightSuccess: roll.parts[0].total === 20,
         highlightFailure: roll.parts[0].total === 1
@@ -1383,7 +1390,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -1422,7 +1429,7 @@ class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      alias: this.actor.name,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -1579,6 +1586,7 @@ class ItemSheet5e extends ItemSheet {
     // Spell Data
     else if ( type === "spell" ) {
       mergeObject(data, {
+        spellTypes: CONFIG.spellTypes,
         spellSchools: CONFIG.spellSchools,
         spellLevels: CONFIG.spellLevels,
         spellComponents: this._formatSpellComponents(data.data)
@@ -1587,7 +1595,8 @@ class ItemSheet5e extends ItemSheet {
 
     // Weapon Data
     else if ( this.item.type === "weapon" ) {
-      data.weaponProperties = data.data.properties.value.split(",").map(p => p.trim());
+      data.weaponTypes = CONFIG.weaponTypes;
+      data.weaponProperties = this._formatWeaponProperties(data.data);
     }
 
     // Feat types
@@ -1614,9 +1623,17 @@ class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   _formatSpellComponents(data) {
+    if ( !data.components.value ) return [];
     let comps = data.components.value.split(",").map(c => CONFIG.spellComponents[c.trim()] || c.trim());
     if ( data.materials.value ) comps.push(data.materials.value);
     return comps;
+  }
+
+  /* -------------------------------------------- */
+
+  _formatWeaponProperties(data) {
+    if ( !data.properties.value ) return [];
+    return data.properties.value.split(",").map(p => p.trim());
   }
 
   /* -------------------------------------------- */
@@ -2188,7 +2205,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
               let msg = `${this.actor.name} takes a short rest spending ${dhd} Hit Dice to recover ${dhp} Hit Points.`;
               ChatMessage.create({
                 user: game.user._id,
-                alias: this.actor.name,
+                speaker: ChatMessage.getSpeaker({actor: this.actor}),
                 content: msg
               });
             }
@@ -2224,7 +2241,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
             let msg = `${this.actor.name} takes a long rest and recovers ${update.dhp} Hit Points and ${update.dhd} Hit Dice.`;
             ChatMessage.create({
               user: game.user._id,
-              alias: this.actor.name,
+              speaker: ChatMessage.getSpeaker({actor: this.actor}),
               content: msg
             });
           }
