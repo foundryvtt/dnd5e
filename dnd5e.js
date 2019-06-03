@@ -2205,7 +2205,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
               let msg = `${this.actor.name} takes a short rest spending ${dhd} Hit Dice to recover ${dhp} Hit Points.`;
               ChatMessage.create({
                 user: game.user._id,
-                speaker: ChatMessage.getSpeaker({actor: this.actor}),
+                speaker: {actor: this.actor, alias: this.actor.name},
                 content: msg
               });
             }
@@ -2241,7 +2241,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
             let msg = `${this.actor.name} takes a long rest and recovers ${update.dhp} Hit Points and ${update.dhd} Hit Dice.`;
             ChatMessage.create({
               user: game.user._id,
-              speaker: ChatMessage.getSpeaker({actor: this.actor}),
+              speaker: {actor: this.actor, alias: this.actor.name},
               content: msg
             });
           }
