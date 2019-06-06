@@ -20,7 +20,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
    */
   get template() {
     const path = "public/systems/dnd5e/templates/actors/";
-    if ( this.actor.limited ) return path + "limited-sheet.html";
+    if ( !game.user.isGM && this.actor.limited ) return path + "limited-sheet.html";
     return path + "npc-sheet.html";
   }
 
