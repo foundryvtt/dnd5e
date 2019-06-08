@@ -30,6 +30,30 @@
       "module": "dnd5e",
       "path": "./packs/spells.db",
       "entity": "Item"
+    },
+    {
+      "name": "classes",
+      "label": "Classes (SRD)",
+      "system": "dnd5e",
+      "module": "dnd5e",
+      "path": "./packs/classes.db",
+      "entity": "Item"
+    },
+    {
+      "name": "classfeatures",
+      "label": "Class Features (SRD)",
+      "system": "dnd5e",
+      "module": "dnd5e",
+      "path": "./packs/classfeatures.db",
+      "entity": "Item"
+    },
+    {
+      "name": "adventure",
+      "label": "Adventuring Gear",
+      "system": "dnd5e",
+      "module": "dnd5e",
+      "path": "./packs/adventure.db",
+      "entity": "Item"
     }
   ],
   "languages": ["en"],
