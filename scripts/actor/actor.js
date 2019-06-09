@@ -111,6 +111,19 @@ class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Owned Item Management
+  /* -------------------------------------------- */
+
+  /**
+   * Extend OwnedItem creation logic for the 5e system to make weapons proficient by default when dropped on a NPC sheet
+   * See the base Actor class for API documentation of this method
+   */
+  async createOwnedItem(itemData, options) {
+    if ( !this.isPC && itemData.type === "weapon" ) itemData.data.proficient.value = true;
+    return super.createOwnedItem(itemData, options);
+  }
+
+  /* -------------------------------------------- */
   /*  Rolls                                       */
   /* -------------------------------------------- */
 

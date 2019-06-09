@@ -108,33 +108,50 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     actorData.feats = feats;
     actorData.classes = classes;
 
-    // Currency weight
-    if ( game.settings.get("dnd5e", "currencyWeight") ) {
-      totalWeight += this._computeCurrencyWeight(actorData.data.currency);
-    }
-
     // Inventory encumbrance
-    let enc = {
-      max: actorData.data.abilities.str.value * 15,
-      value: Math.round(totalWeight * 10) / 10,
-    };
-    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-    actorData.data.attributes.encumbrance = enc;
+    actorData.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, actorData);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Compute the weight of carried currency across all denominations by applying the standard rule from the
-   * PHB pg. 143
+   * Compute the level and percentage of encumbrance for an Actor.
    *
-   * @param {Object} currency   An object describing the amount of currency carried by denomination
-   * @return {Number}           The total weight of carried currency
+   * Optionally include the weight of carried currency across all denominations by applying the standard rule
+   * from the PHB pg. 143
+   *
+   * @param {Number} totalWeight    The cumulative item weight from inventory items
+   * @param {Object} actorData      The data object for the Actor being rendered
+   * @return {Object}               An object describing the character's encumbrance level
    * @private
    */
-  _computeCurrencyWeight(currency) {
-    const numCoins = Object.values(currency).reduce((val, denom) => val += denom.value, 0);
-    return numCoins / 50;
+  _computeEncumbrance(totalWeight, actorData) {
+
+    // Encumbrance classes
+    const mod = {
+      tiny: 0.5,
+      sm: 1,
+      med: 1,
+      lg: 2,
+      huge: 4,
+      grg: 8
+    }[actorData.data.traits.size.value] || 1;
+
+    // Add Currency Weight
+    if ( game.settings.get("dnd5e", "currencyWeight") ) {
+      const currency = actorData.data.currency;
+      const numCoins = Object.values(currency).reduce((val, denom) => val += denom.value, 0);
+      totalWeight += numCoins / 50;
+    }
+
+    // Compute Encumbrance percentage
+    const enc = {
+      max: actorData.data.abilities.str.value * 15 * mod,
+      value: Math.round(totalWeight * 10) / 10,
+    };
+    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
+    enc.encumbered = enc.pct > (2/3);
+    return enc;
   }
 
   /* -------------------------------------------- */

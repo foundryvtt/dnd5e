@@ -141,7 +141,6 @@ CONFIG.conditionTypes = {
   "blinded": "Blinded",
   "charmed": "Charmed",
   "deafened": "Deafened",
-  "fatigued": "Fatigued",
   "frightened": "Frightened",
   "grappled": "Grappled",
   "incapacitated": "Inacapacitated",
@@ -620,6 +619,19 @@ class Actor5e extends Actor {
     const xps = [10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000,
                  15000, 18000, 20000, 22000, 25000, 30000, 41000, 50000, 62000, 75000, 90000, _, _, _, 155000];
     return xps[cr];
+  }
+
+  /* -------------------------------------------- */
+  /*  Owned Item Management
+  /* -------------------------------------------- */
+
+  /**
+   * Extend OwnedItem creation logic for the 5e system to make weapons proficient by default when dropped on a NPC sheet
+   * See the base Actor class for API documentation of this method
+   */
+  async createOwnedItem(itemData, options) {
+    if ( !this.isPC && itemData.type === "weapon" ) itemData.data.proficient.value = true;
+    return super.createOwnedItem(itemData, options);
   }
 
   /* -------------------------------------------- */
@@ -2131,33 +2143,50 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     actorData.feats = feats;
     actorData.classes = classes;
 
-    // Currency weight
-    if ( game.settings.get("dnd5e", "currencyWeight") ) {
-      totalWeight += this._computeCurrencyWeight(actorData.data.currency);
-    }
-
     // Inventory encumbrance
-    let enc = {
-      max: actorData.data.abilities.str.value * 15,
-      value: Math.round(totalWeight * 10) / 10,
-    };
-    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-    actorData.data.attributes.encumbrance = enc;
+    actorData.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, actorData);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Compute the weight of carried currency across all denominations by applying the standard rule from the
-   * PHB pg. 143
+   * Compute the level and percentage of encumbrance for an Actor.
    *
-   * @param {Object} currency   An object describing the amount of currency carried by denomination
-   * @return {Number}           The total weight of carried currency
+   * Optionally include the weight of carried currency across all denominations by applying the standard rule
+   * from the PHB pg. 143
+   *
+   * @param {Number} totalWeight    The cumulative item weight from inventory items
+   * @param {Object} actorData      The data object for the Actor being rendered
+   * @return {Object}               An object describing the character's encumbrance level
    * @private
    */
-  _computeCurrencyWeight(currency) {
-    const numCoins = Object.values(currency).reduce((val, denom) => val += denom.value, 0);
-    return numCoins / 50;
+  _computeEncumbrance(totalWeight, actorData) {
+
+    // Encumbrance classes
+    const mod = {
+      tiny: 0.5,
+      sm: 1,
+      med: 1,
+      lg: 2,
+      huge: 4,
+      grg: 8
+    }[actorData.data.traits.size.value] || 1;
+
+    // Add Currency Weight
+    if ( game.settings.get("dnd5e", "currencyWeight") ) {
+      const currency = actorData.data.currency;
+      const numCoins = Object.values(currency).reduce((val, denom) => val += denom.value, 0);
+      totalWeight += numCoins / 50;
+    }
+
+    // Compute Encumbrance percentage
+    const enc = {
+      max: actorData.data.abilities.str.value * 15 * mod,
+      value: Math.round(totalWeight * 10) / 10,
+    };
+    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
+    enc.encumbered = enc.pct > (2/3);
+    return enc;
   }
 
   /* -------------------------------------------- */

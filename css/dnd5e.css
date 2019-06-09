@@ -762,26 +762,61 @@
 .dnd5e.actor .inventory-list .inventory-header .item-controls a.item-create {
   width: 100%;
 }
+.dnd5e.actor.character-sheet .inventory-list {
+  height: calc(100% - 42px);
+}
 .dnd5e.actor .encumbrance {
   background: rgba(0, 0, 0, 0.1);
   height: 12px;
   margin-top: 5px;
   border: 1px solid #111;
   border-radius: 3px;
+  position: relative;
 }
 .dnd5e.actor .encumbrance .encumbrance-bar {
-  background: #782e22;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: #a59b89;
   height: 8px;
-  margin: 1px;
-  border: 1px solid #ff6400;
+  border: 1px solid #6f5439;
   border-radius: 3px;
 }
 .dnd5e.actor .encumbrance .encumbrance-label {
-  float: right;
-  text-align: right;
-  padding-right: 5px;
-  font-size: 12px;
-  line-height: 12px;
+  position: absolute;
+  top: -3px;
+  height: 16px;
+  font-size: 16px;
+  line-height: 16px;
+  color: #000;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 0 3px;
+}
+.dnd5e.actor .encumbrance .encumbrance-breakpoint {
+  position: absolute;
+  left: 66%;
+}
+.dnd5e.actor .encumbrance .arrow-up {
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #666;
+}
+.dnd5e.actor .encumbrance .arrow-down {
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #666;
+}
+.dnd5e.actor .encumbrance.encumbered .arrow-up {
+  border-bottom: 4px solid #000;
+}
+.dnd5e.actor .encumbrance.encumbered .arrow-down {
+  border-top: 4px solid #000;
 }
 .dnd5e.actor .spellbook .spellcasting-ability {
   margin: 0;
@@ -962,6 +997,11 @@
 .dnd5e.item form .form-group {
   height: 24px;
   margin: 2px 0;
+}
+.dnd5e.item form .sheet-body input[type="text"] {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #AAA;
+  padding: 3px;
 }
 .dnd5e.item form .sheet-header {
   border-bottom: 1px solid #CCC;
