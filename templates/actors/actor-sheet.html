@@ -200,10 +200,14 @@
             {{/each}}
             </ol>
 
-            <div class="encumbrance">
-                <span class="encumbrance-label">{{data.attributes.encumbrance.value}} / {{data.attributes.encumbrance.max}}</span>
-                <span class="encumbrance-bar" style="width:{{data.attributes.encumbrance.pct}}%"></span>
+            {{#with data.attributes.encumbrance}}
+            <div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
+                <span class="encumbrance-bar" style="width:{{pct}}%"></span>
+                <span class="encumbrance-label">{{value}} / {{max}}</span>
+                <div class="encumbrance-breakpoint arrow-up"></div>
+                <div class="encumbrance-breakpoint arrow-down"></div>
             </div>
+            {{/with}}
         </div>
 
         <!-- SPELLBOOK -->

@@ -141,7 +141,6 @@ CONFIG.conditionTypes = {
   "blinded": "Blinded",
   "charmed": "Charmed",
   "deafened": "Deafened",
-  "fatigued": "Fatigued",
   "frightened": "Frightened",
   "grappled": "Grappled",
   "incapacitated": "Inacapacitated",
