@@ -48,7 +48,9 @@
       "entity": "Item"
     }
   ],
-  "languages": ["en"],
+  "languages": {
+    "en": "lang/en.json"
+  },
   "socket": true,
   "initiative": "1d20 + @abilities.dex.mod + @attributes.init.value + (@abilities.dex.value / 100)",
   "gridDistance": 5,
