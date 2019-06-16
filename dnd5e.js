@@ -630,7 +630,7 @@ class Actor5e extends Actor {
    * See the base Actor class for API documentation of this method
    */
   async createOwnedItem(itemData, options) {
-    if ( !this.isPC && itemData.type === "weapon" ) itemData.data.proficient.value = true;
+    if ( !this.isPC && itemData.type === "weapon" ) mergeObject(itemData, {"data.proficient.value": true});
     return super.createOwnedItem(itemData, options);
   }
 
