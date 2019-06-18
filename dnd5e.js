@@ -391,15 +391,15 @@ Hooks.once("init", () => {
    * Register diagonal movement rule setting
    */
   game.settings.register("dnd5e", "diagonalMovement", {
-    name: "Diagonal Movement Rule",
-    hint: "Configure which diagonal movement rule should be used for games within this system.",
+    name: "SETTINGS.5eDiagN",
+    hint: "SETTINGS.5eDiagL",
     scope: "world",
     config: true,
     default: "555",
     type: String,
     choices: {
-      "555": "Player's Handbook (5/5/5)",
-      "5105": "Dungeon Master's Guide (5/10/5)"
+      "555": "SETTINGS.5eDiagPHB",
+      "5105": "SETTINGS.5eDiagDMG"
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
@@ -423,8 +423,8 @@ Hooks.once("init", () => {
     }
   }
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
-    name: "Initiative Dexterity Tiebreaker",
-    hint: "Append the raw Dexterity ability score to break ties in Initiative.",
+    name: "SETTINGS.5eInitTBN",
+    hint: "SETTINGS.5eInitTBL",
     scope: "world",
     config: true,
     default: true,
@@ -437,8 +437,8 @@ Hooks.once("init", () => {
    * Require Currency Carrying Weight
    */
   game.settings.register("dnd5e", "currencyWeight", {
-    name: "Apply Currency Weight",
-    hint: "Carried currency affects character encumbrance following the rules on PHB pg. 143.",
+    name: "SETTINGS.5eCurWtN",
+    hint: "SETTINGS.5eCurWtL",
     scope: "world",
     config: true,
     default: true,
