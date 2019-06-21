@@ -954,6 +954,18 @@
   padding: 0;
 }
 /* ----------------------------------------- */
+/* Special Traits and Flags
+/* ----------------------------------------- */
+#actor-flags h3.flags-section {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 3px;
+  margin: 0;
+  font-weight: bold;
+  font-size: inherit;
+}
+/* ----------------------------------------- */
 /*  Item Sheet Structure
 /* ----------------------------------------- */
 .dnd5e.item form {

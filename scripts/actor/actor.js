@@ -32,7 +32,8 @@ class Actor5e extends Actor {
 
     // Spell DC
     let spellAbl = data.attributes.spellcasting.value || "int";
-    data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod;
+    let bonusDC = getProperty(actorData.flags, "dnd5e.spellDCBonus") || 0;
+    data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod + bonusDC;
 
     // TODO: Migrate trait storage format
     const map = {
