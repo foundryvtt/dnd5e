@@ -194,6 +194,7 @@ class Dice5e {
    *
    * @param {Event} event           The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
+   * @param {Actor} actor           The Actor making the d20 roll
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
@@ -292,6 +293,7 @@ class Dice5e {
    *
    * @param {Event} event           The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
+   * @param {Actor} actor           The Actor making the damage roll
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
@@ -301,7 +303,7 @@ class Dice5e {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static damageRoll({event={}, parts, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
+  static damageRoll({event={}, parts, actor, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -309,7 +311,10 @@ class Dice5e {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if ( crit ) {
-        roll.alter(0, 2);
+        console.log(data);
+        let add = actor && actor.getFlag("dnd5e", "savageAttacks") ? 1 : 0;
+        let mult = 2;
+        roll.alter(add, mult);
         flav = `${title} (Critical)`;
       }
 
@@ -408,19 +413,8 @@ Hooks.once("init", () => {
    * Register Initiative formula setting
    */
   function _set5eInitiative(tiebreaker) {
-    const base = "1d20 + @abilities.dex.mod + @attributes.init.value",
-          dex = "1d20 + @abilities.dex.mod + @attributes.init.value + (@abilities.dex.value / 100)";
-    if ( tiebreaker ) {
-      CONFIG.initiative = {
-        formula: dex,
-        decimals: 2
-      }
-    } else {
-      CONFIG.initiative = {
-        formula: base,
-        decimals: 0
-      }
-    }
+    CONFIG.initiative.tiebreaker = tiebreaker;
+    CONFIG.initiative.decimals = tiebreaker ? 2 : 0;
   }
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",
@@ -471,6 +465,36 @@ Hooks.once("init", () => {
     "public/systems/dnd5e/templates/items/weapon-details.html",
     "public/systems/dnd5e/templates/items/weapon-sidebar.html"
   ]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Override the default Initiative formula to customize special behaviors of the D&D5e system.
+   * Apply advantage, proficiency, or bonuses where appropriate
+   * Apply the dexterity score as a decimal tiebreaker if requested
+   * See Combat._getInitiativeFormula for more detail.
+   * @private
+   */
+  Combat.prototype._getInitiativeFormula = function(combatant) {
+    const actor = combatant.actor,
+          data = actor.data.data,
+          parts = ["1d20", data.abilities.dex.mod];
+
+    // Advantage on Initiative
+    if ( actor.getFlag("dnd5e", "initiativeAdv") ) parts[0] = "2d20kh";
+
+    // Half-Proficiency to Initiative
+    if ( actor.getFlag("dnd5e", "initiativeHalfProf") ) {
+      parts.push(Math.floor(0.5 * actor.data.data.attributes.prof.value))
+    }
+
+    // Alert Bonus to Initiative
+    if ( actor.getFlag("dnd5e", "initiativeAlert") ) parts.push(5);
+
+    // Dexterity tiebreaker
+    if ( CONFIG.initiative.tiebreaker ) parts.push(data.abilities.dex.value / 100);
+    return parts.join("+");
+  }
 });
 
 
@@ -510,6 +534,712 @@ Hooks.on("canvasInit", () => {
 });
 
 /**
+ * Override and extend the basic :class:`Item` implementation
+ */
+class Item5e extends Item {
+
+  /**
+   * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
+   * @return {Promise}
+   */
+  async roll() {
+
+    // Basic template rendering data
+    const template = `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`;
+    const templateData = {
+      actor: this.actor,
+      item: this.data,
+      data: this.getChatData()
+    };
+
+    // Basic chat message data
+    const chatData = {
+      user: game.user._id,
+      speaker: {
+        actor: this.actor._id,
+        alias: this.actor.name
+      }
+    };
+
+    // Toggle default roll mode
+    let rollMode = game.settings.get("core", "rollMode");
+    if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData["whisper"] = ChatMessage.getWhisperIDs("GM");
+    if ( rollMode === "blindroll" ) chatData["blind"] = true;
+
+    // Render the template
+    chatData["content"] = await renderTemplate(template, templateData);
+
+    // Create the chat message
+    return ChatMessage.create(chatData, {displaySheet: false});
+  }
+
+  /* -------------------------------------------- */
+  /*  Chat Card Data
+  /* -------------------------------------------- */
+
+  getChatData(htmlOptions) {
+    const data = this[`_${this.data.type}ChatData`]();
+    data.description.value = enrichHTML(data.description.value, htmlOptions);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _equipmentChatData() {
+    const data = duplicate(this.data.data);
+    const properties = [
+      CONFIG.armorTypes[data.armorType.value],
+      data.armor.value + " AC",
+      data.equipped.value ? "Equipped" : null,
+      data.stealth.value ? "Stealth Disadv." : null,
+    ];
+    data.properties = properties.filter(p => p !== null);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _weaponChatData() {
+    const data = duplicate(this.data.data);
+    const properties = [
+      data.range.value,
+      CONFIG.weaponTypes[data.weaponType.value],
+      data.proficient.value ? "" : "Not Proficient"
+    ];
+    data.properties = properties.filter(p => !!p);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _consumableChatData() {
+    const data = duplicate(this.data.data);
+    data.consumableType.str = CONFIG.consumableTypes[data.consumableType.value];
+    data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
+    data.hasCharges = data.charges.value >= 0;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _toolChatData() {
+    const data = duplicate(this.data.data);
+    let abl = this.actor.data.data.abilities[data.ability.value].label,
+        prof = data.proficient.value || 0;
+    const properties = [abl, CONFIG.proficiencyLevels[prof]];
+    data.properties = properties.filter(p => p !== null);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _backpackChatData() {
+    const data = duplicate(this.data.data);
+    data.properties = [];
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _spellChatData() {
+    const data = duplicate(this.data.data),
+          ad = this.actor.data.data;
+
+    // Spell saving throw text and DC
+    data.isSave = data.spellType.value === "save";
+    if ( data.ability.value ) data.save.dc = 8 + ad.abilities[data.ability.value].mod + ad.attributes.prof.value;
+    else data.save.dc = ad.attributes.spelldc.value;
+    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+
+    // Spell attack labels
+    data.damageLabel = data.spellType.value === "heal" ? "Healing" : "Damage";
+    data.isAttack = data.spellType.value === "attack";
+
+    // Combine properties
+    const props = [
+      CONFIG.spellSchools[data.school.value],
+      CONFIG.spellLevels[data.level.value],
+      data.components.value + " Components",
+      data.target.value,
+      data.time.value,
+      data.duration.value,
+      data.concentration.value ? "Concentration" : null,
+      data.ritual.value ? "Ritual" : null
+    ];
+    data.properties = props.filter(p => p !== null);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare chat card data for items of the "Feat" type
+   */
+  _featChatData() {
+    const data = duplicate(this.data.data),
+          ad = this.actor.data.data;
+
+    // Feat button actions
+    data.isSave = data.save.value !== "";
+    if ( data.isSave ) {
+      let abl = data.ability.value || ad.attributes.spellcasting.value || "str";
+      data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
+      data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
+    }
+
+    // Feat attack attributes
+    data.isAttack = data.featType.value === "attack";
+
+    // Feat properties
+    const props = [
+      data.requirements.value,
+      data.target.value,
+      data.range.value,
+      data.time.value,
+      data.duration.value
+    ];
+    data.properties = props.filter(p => p);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+  /*  Roll Attacks
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Weapon Attack
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   */
+  rollWeaponAttack(event) {
+    if ( this.type !== "weapon" ) throw "Wrong item type!";
+
+    // Prepare roll data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
+        parts = ["@item.bonus.value", `@abilities.${abl}.mod`, "@attributes.prof.value"],
+        title = `${this.name} - Attack Roll`;
+    rollData.item = itemData;
+    if ( !itemData.proficient.value ) parts.pop();
+
+    // TODO: Incorporate Elven Accuracy
+
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      actor: this.actor,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll Weapon Damage
+   * Rely upon the Dice5e.damageRoll logic for the core implementation
+   */
+  rollWeaponDamage(event, alternate=false) {
+    if ( this.type !== "weapon" ) throw "Wrong item type!";
+
+    // Get data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
+        parts = [alternate ? itemData.damage2.value : itemData.damage.value, `@abilities.${abl}.mod`],
+        dtype = CONFIG.damageTypes[alternate ? itemData.damage2Type.value : itemData.damageType.value];
+
+    // Append damage type to title
+    let title = `${this.name} - Damage`;
+    if ( dtype ) title += ` (${dtype})`;
+
+    // Call the roll helper utility
+    rollData.item = itemData;
+    Dice5e.damageRoll({
+      event: event,
+      parts: parts,
+      actor: this.actor,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll Spell Damage
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   */
+  rollSpellAttack(event) {
+    if ( this.type !== "spell" ) throw "Wrong item type!";
+
+    // Prepare roll data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
+        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
+        title = `${this.name} - Spell Attack Roll`;
+
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll Spell Damage
+   * Rely upon the Dice5e.damageRoll logic for the core implementation
+   */
+  rollSpellDamage(event) {
+    if ( this.type !== "spell" ) throw "Wrong item type!";
+
+    // Get data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
+        parts = [itemData.damage.value],
+        isHeal = itemData.spellType.value === "heal",
+        dtype = CONFIG.damageTypes[itemData.damageType.value];
+
+    // Append damage type to title
+    let title = this.name + (isHeal ? " - Healing" : " - Damage");
+    if ( dtype && !isHeal ) title += ` (${dtype})`;
+
+    // Add item to roll data
+    rollData["mod"] = rollData.abilities[abl].mod;
+    rollData.item = itemData;
+
+    // Call the roll helper utility
+    Dice5e.damageRoll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      actor: this.actor,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Use a consumable item
+   */
+  rollConsumable(ev) {
+    let itemData = this.data.data;
+
+    // Submit the roll to chat
+    let cv = itemData['consume'].value,
+        content = `Uses ${this.name}`;
+    if ( cv ) {
+      new Roll(cv).toMessage({
+        speaker: ChatMessage.getSpeaker({actor: this.actor}),
+        flavor: content
+      });
+    } else {
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: ChatMessage.getSpeaker({actor: this.actor}),
+        content: content
+      })
+    }
+
+    // Deduct consumed charges from the item
+    if ( itemData['autoUse'].value ) {
+      let qty = itemData['quantity'],
+          chg = itemData['charges'];
+
+      // Deduct an item quantity
+      if ( chg.value <= 1 && qty.value > 1 ) {
+        this.actor.updateOwnedItem({
+          id: this.data.id,
+          'data.quantity.value': Math.max(qty.value - 1, 0),
+          'data.charges.value': chg.max
+        }, true);
+      }
+
+      // Optionally destroy the item
+      else if ( chg.value <= 1 && qty.value <= 1 && itemData['autoDestroy'].value ) {
+        this.actor.deleteOwnedItem(this.data.id);
+      }
+
+      // Deduct the remaining charges
+      else {
+        this.actor.updateOwnedItem({id: this.data.id, 'data.charges.value': Math.max(chg.value - 1, 0)}, true);
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Tool Check
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   */
+  rollToolCheck(event) {
+    if ( this.type !== "tool" ) throw "Wrong item type!";
+
+    // Prepare roll data
+    let rollData = duplicate(this.actor.data.data),
+      abl = this.data.data.ability.value || "int",
+      parts = [`@abilities.${abl}.mod`, "@proficiency"],
+      title = `${this.name} - Tool Check`;
+    rollData["ability"] = abl;
+    rollData["proficiency"] = Math.floor((this.data.data.proficient.value || 0) * rollData.attributes.prof.value);
+
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710,
+      },
+      onClose: (html, parts, data) => {
+        abl = html.find('[name="ability"]').val();
+        data.ability = abl;
+        parts[1] = `@abilities.${abl}.mod`;
+      }
+    }).then(roll => {
+      roll.toMessage({
+        flavor: flavor,
+        highlightSuccess: roll.parts[0].total === 20,
+        highlightFailure: roll.parts[0].total === 1
+      });
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Feat Attack
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   */
+  rollFeatAttack(event) {
+    if ( this.type !== "feat" ) throw "Wrong item type!";
+
+    // Prepare roll data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
+        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
+        title = `${this.name} - Attack Roll`;
+    rollData.item = itemData;
+
+    // Call the roll helper utility
+    Dice5e.d20Roll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll Feat Damage
+   * Rely upon the Dice5e.damageRoll logic for the core implementation
+   */
+  rollFeatDamage(event) {
+    if ( this.type !== "feat" ) throw "Wrong item type!";
+
+    // Get data
+    let itemData = this.data.data,
+        rollData = duplicate(this.actor.data.data),
+        abl = itemData.ability.value || "str",
+        parts = [itemData.damage.value],
+        dtype = CONFIG.damageTypes[itemData.damageType.value];
+
+    // Append damage type to title
+    let title = `${this.name} - Damage`;
+    if ( dtype ) title += ` (${dtype})`;
+
+    // Add item data to roll
+    rollData["mod"] = rollData.abilities[abl].mod;
+    rollData.item = itemData;
+
+    // Call the roll helper utility
+    Dice5e.damageRoll({
+      event: event,
+      parts: parts,
+      data: rollData,
+      actor: this.actor,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event.clientY - 80,
+        left: window.innerWidth - 710
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  static chatListeners(html) {
+
+    // Chat card actions
+    html.on('click', '.card-buttons button', ev => {
+      ev.preventDefault();
+
+      // Extract card data
+      let button = $(ev.currentTarget),
+          messageId = button.parents('.message').attr("data-message-id"),
+          senderId = game.messages.get(messageId).user._id;
+
+      // Confirm roll permission
+      if ( !game.user.isGM && ( game.user._id !== senderId )) return;
+
+      // Extract action data
+      let action = button.attr("data-action"),
+          card = button.parents('.chat-card'),
+          actor = game.actors.get(card.attr('data-actor-id')),
+          itemId = Number(card.attr("data-item-id"));
+
+      // Get the item
+      if ( !actor ) return;
+      let itemData = actor.items.find(i => i.id === itemId);
+      if ( !itemData ) return;
+      let item = new Item5e(itemData, actor);
+
+      // Weapon attack
+      if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
+      else if ( action === "weaponDamage" ) item.rollWeaponDamage(ev);
+      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(ev, true);
+
+      // Spell actions
+      else if ( action === "spellAttack" ) item.rollSpellAttack(ev);
+      else if ( action === "spellDamage" ) item.rollSpellDamage(ev);
+
+      // Feat actions
+      else if ( action === "featAttack" ) item.rollFeatAttack(ev);
+      else if ( action === "featDamage" ) item.rollFeatDamage(ev);
+
+      // Consumable usage
+      else if ( action === "consume" ) item.rollConsumable(ev);
+
+      // Tool usage
+      else if ( action === "toolCheck" ) item.rollToolCheck(ev);
+    });
+  }
+}
+
+// Assign Item5e class to CONFIG
+CONFIG.Item.entityClass = Item5e;
+
+
+/**
+ * Hook into chat log context menu to add damage application options
+ */
+Hooks.on("getChatLogEntryContext", (html, options) => {
+
+  // Condition
+  let canApply = li => canvas.tokens.controlledTokens.length && li.find(".dice-roll").length;
+
+  // Apply Damage to Token
+  options["Apply Damage"] = {
+    icon: '<i class="fas fa-user-minus"></i>',
+    condition: canApply,
+    callback: li => Actor5e.applyDamage(li, 1)
+  };
+
+  // Apply Healing to Token
+  options["Apply Healing"] = {
+    icon: '<i class="fas fa-user-plus"></i>',
+    condition: canApply,
+    callback: li => Actor5e.applyDamage(li, -1)
+  };
+
+  // Apply Double-Damage
+  options["Double Damage"] = {
+    icon: '<i class="fas fa-user-injured"></i>',
+    condition: canApply,
+    callback: li => Actor5e.applyDamage(li, 2)
+  };
+
+  // Apply Half-Damage
+  options["Half Damage"] = {
+    icon: '<i class="fas fa-user-shield"></i>',
+    condition: canApply,
+    callback: li => Actor5e.applyDamage(li, 0.5)
+  }
+});
+
+/**
+ * Override and extend the basic :class:`ItemSheet` implementation
+ */
+class ItemSheet5e extends ItemSheet {
+	static get defaultOptions() {
+	  const options = super.defaultOptions;
+	  options.width = 520;
+	  options.height = 460;
+	  options.classes = options.classes.concat(["dnd5e", "item"]);
+	  options.resizable = false;
+	  return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Use a type-specific template for each different item type
+   */
+  get template() {
+    let type = this.item.type;
+    // return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
+    return `public/systems/dnd5e/templates/items/item-sheet.html`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare item sheet data
+   * Start with the base item data and extending with additional properties for rendering.
+   */
+  getData() {
+    const data = super.getData();
+    data['abilities'] = game.system.template.actor.data.abilities;
+
+    // Sheet display details
+    const type = this.item.type;
+    mergeObject(data, {
+      type: type,
+      hasSidebar: true,
+      sidebarTemplate: () => `public/systems/dnd5e/templates/items/${type}-sidebar.html`,
+      hasDetails: ["consumable", "equipment", "feat", "spell", "weapon"].includes(type),
+      detailsTemplate: () => `public/systems/dnd5e/templates/items/${type}-details.html`
+    });
+
+    // Damage types
+    let dt = duplicate(CONFIG.damageTypes);
+    if ( ["spell", "feat"].includes(type) ) mergeObject(dt, CONFIG.healingTypes);
+    data['damageTypes'] = dt;
+
+    // Consumable Data
+    if ( type === "consumable" ) {
+      data.consumableTypes = CONFIG.consumableTypes
+    }
+
+    // Spell Data
+    else if ( type === "spell" ) {
+      mergeObject(data, {
+        spellTypes: CONFIG.spellTypes,
+        spellSchools: CONFIG.spellSchools,
+        spellLevels: CONFIG.spellLevels,
+        spellComponents: this._formatSpellComponents(data.data)
+      });
+    }
+
+    // Weapon Data
+    else if ( this.item.type === "weapon" ) {
+      data.weaponTypes = CONFIG.weaponTypes;
+      data.weaponProperties = this._formatWeaponProperties(data.data);
+    }
+
+    // Feat types
+    else if ( type === "feat" ) {
+      data.featTypes = CONFIG.featTypes;
+      data.featTags = [
+        data.data.target.value,
+        data.data.time.value
+      ].filter(t => !!t);
+    }
+
+    // Equipment data
+    else if ( type === "equipment" ) {
+      data.armorTypes = CONFIG.armorTypes;
+    }
+
+    // Tool-specific data
+    else if ( type === "tool" ) {
+      data.proficiencies = CONFIG.proficiencyLevels;
+    }
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  _formatSpellComponents(data) {
+    if ( !data.components.value ) return [];
+    let comps = data.components.value.split(",").map(c => CONFIG.spellComponents[c.trim()] || c.trim());
+    if ( data.materials.value ) comps.push(data.materials.value);
+    return comps;
+  }
+
+  /* -------------------------------------------- */
+
+  _formatWeaponProperties(data) {
+    if ( !data.properties.value ) return [];
+    return data.properties.value.split(",").map(p => p.trim());
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Activate listeners for interactive item sheet events
+   */
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    // Activate tabs
+    new Tabs(html.find(".tabs"), {
+      initial: this.item.data.flags["_sheetTab"],
+      callback: clicked => this.item.data.flags["_sheetTab"] = clicked.attr("data-tab")
+    });
+
+    // Checkbox changes
+    html.find('input[type="checkbox"]').change(event => this._onSubmit(event));
+  }
+}
+
+// Activate global listeners
+Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
+
+// Override CONFIG
+CONFIG.Item.sheetClass = ItemSheet5e;
+
+/**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
  */
 class Actor5e extends Actor {
@@ -543,7 +1273,8 @@ class Actor5e extends Actor {
 
     // Spell DC
     let spellAbl = data.attributes.spellcasting.value || "int";
-    data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod;
+    let bonusDC = getProperty(actorData.flags, "dnd5e.spellDCBonus") || 0;
+    data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod + bonusDC;
 
     // TODO: Migrate trait storage format
     const map = {
@@ -972,706 +1703,6 @@ class TraitSelector5e extends FormApplication {
     });
   }
 }
-
-/**
- * Override and extend the basic :class:`Item` implementation
- */
-class Item5e extends Item {
-
-  /**
-   * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
-   * @return {Promise}
-   */
-  async roll() {
-
-    // Basic template rendering data
-    const template = `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`;
-    const templateData = {
-      actor: this.actor,
-      item: this.data,
-      data: this.getChatData()
-    };
-
-    // Basic chat message data
-    const chatData = {
-      user: game.user._id,
-      speaker: {
-        actor: this.actor._id,
-        alias: this.actor.name
-      }
-    };
-
-    // Toggle default roll mode
-    let rollMode = game.settings.get("core", "rollMode");
-    if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData["whisper"] = ChatMessage.getWhisperIDs("GM");
-    if ( rollMode === "blindroll" ) chatData["blind"] = true;
-
-    // Render the template
-    chatData["content"] = await renderTemplate(template, templateData);
-
-    // Create the chat message
-    return ChatMessage.create(chatData, {displaySheet: false});
-  }
-
-  /* -------------------------------------------- */
-  /*  Chat Card Data
-  /* -------------------------------------------- */
-
-  getChatData(htmlOptions) {
-    const data = this[`_${this.data.type}ChatData`]();
-    data.description.value = enrichHTML(data.description.value, htmlOptions);
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  _equipmentChatData() {
-    const data = duplicate(this.data.data);
-    const properties = [
-      CONFIG.armorTypes[data.armorType.value],
-      data.armor.value + " AC",
-      data.equipped.value ? "Equipped" : null,
-      data.stealth.value ? "Stealth Disadv." : null,
-    ];
-    data.properties = properties.filter(p => p !== null);
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  _weaponChatData() {
-    const data = duplicate(this.data.data);
-    const properties = [
-      data.range.value,
-      CONFIG.weaponTypes[data.weaponType.value],
-      data.proficient.value ? "" : "Not Proficient"
-    ];
-    data.properties = properties.filter(p => !!p);
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  _consumableChatData() {
-    const data = duplicate(this.data.data);
-    data.consumableType.str = CONFIG.consumableTypes[data.consumableType.value];
-    data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
-    data.hasCharges = data.charges.value >= 0;
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  _toolChatData() {
-    const data = duplicate(this.data.data);
-    let abl = this.actor.data.data.abilities[data.ability.value].label,
-        prof = data.proficient.value || 0;
-    const properties = [abl, CONFIG.proficiencyLevels[prof]];
-    data.properties = properties.filter(p => p !== null);
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  _backpackChatData() {
-    const data = duplicate(this.data.data);
-    data.properties = [];
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  _spellChatData() {
-    const data = duplicate(this.data.data),
-          ad = this.actor.data.data;
-
-    // Spell saving throw text and DC
-    data.isSave = data.spellType.value === "save";
-    if ( data.ability.value ) data.save.dc = 8 + ad.abilities[data.ability.value].mod + ad.attributes.prof.value;
-    else data.save.dc = ad.attributes.spelldc.value;
-    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
-
-    // Spell attack labels
-    data.damageLabel = data.spellType.value === "heal" ? "Healing" : "Damage";
-    data.isAttack = data.spellType.value === "attack";
-
-    // Combine properties
-    const props = [
-      CONFIG.spellSchools[data.school.value],
-      CONFIG.spellLevels[data.level.value],
-      data.components.value + " Components",
-      data.target.value,
-      data.time.value,
-      data.duration.value,
-      data.concentration.value ? "Concentration" : null,
-      data.ritual.value ? "Ritual" : null
-    ];
-    data.properties = props.filter(p => p !== null);
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare chat card data for items of the "Feat" type
-   */
-  _featChatData() {
-    const data = duplicate(this.data.data),
-          ad = this.actor.data.data;
-
-    // Feat button actions
-    data.isSave = data.save.value !== "";
-    if ( data.isSave ) {
-      let abl = data.ability.value || ad.attributes.spellcasting.value || "str";
-      data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
-      data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
-    }
-
-    // Feat attack attributes
-    data.isAttack = data.featType.value === "attack";
-
-    // Feat properties
-    const props = [
-      data.requirements.value,
-      data.target.value,
-      data.range.value,
-      data.time.value,
-      data.duration.value
-    ];
-    data.properties = props.filter(p => p);
-    return data;
-  }
-
-  /* -------------------------------------------- */
-  /*  Roll Attacks
-  /* -------------------------------------------- */
-
-  /**
-   * Roll a Weapon Attack
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
-   */
-  rollWeaponAttack(event) {
-    if ( this.type !== "weapon" ) throw "Wrong item type!";
-
-    // Prepare roll data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
-        parts = ["@item.bonus.value", `@abilities.${abl}.mod`, "@attributes.prof.value"],
-        title = `${this.name} - Attack Roll`;
-    rollData.item = itemData;
-    if ( !itemData.proficient.value ) parts.pop();
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Roll Weapon Damage
-   * Rely upon the Dice5e.damageRoll logic for the core implementation
-   */
-  rollWeaponDamage(event, alternate=false) {
-    if ( this.type !== "weapon" ) throw "Wrong item type!";
-
-    // Get data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
-        parts = [alternate ? itemData.damage2.value : itemData.damage.value, `@abilities.${abl}.mod`],
-        dtype = CONFIG.damageTypes[alternate ? itemData.damage2Type.value : itemData.damageType.value];
-
-    // Append damage type to title
-    let title = `${this.name} - Damage`;
-    if ( dtype ) title += ` (${dtype})`;
-
-    // Call the roll helper utility
-    rollData.item = itemData;
-    Dice5e.damageRoll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Roll Spell Damage
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
-   */
-  rollSpellAttack(event) {
-    if ( this.type !== "spell" ) throw "Wrong item type!";
-
-    // Prepare roll data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
-        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
-        title = `${this.name} - Spell Attack Roll`;
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Roll Spell Damage
-   * Rely upon the Dice5e.damageRoll logic for the core implementation
-   */
-  rollSpellDamage(event) {
-    if ( this.type !== "spell" ) throw "Wrong item type!";
-
-    // Get data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
-        parts = [itemData.damage.value],
-        isHeal = itemData.spellType.value === "heal",
-        dtype = CONFIG.damageTypes[itemData.damageType.value];
-
-    // Append damage type to title
-    let title = this.name + (isHeal ? " - Healing" : " - Damage");
-    if ( dtype && !isHeal ) title += ` (${dtype})`;
-
-    // Add item to roll data
-    rollData["mod"] = rollData.abilities[abl].mod;
-    rollData.item = itemData;
-
-    // Call the roll helper utility
-    Dice5e.damageRoll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Use a consumable item
-   */
-  rollConsumable(ev) {
-    let itemData = this.data.data;
-
-    // Submit the roll to chat
-    let cv = itemData['consume'].value,
-        content = `Uses ${this.name}`;
-    if ( cv ) {
-      new Roll(cv).toMessage({
-        speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        flavor: content
-      });
-    } else {
-      ChatMessage.create({
-        user: game.user._id,
-        speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        content: content
-      })
-    }
-
-    // Deduct consumed charges from the item
-    if ( itemData['autoUse'].value ) {
-      let qty = itemData['quantity'],
-          chg = itemData['charges'];
-
-      // Deduct an item quantity
-      if ( chg.value <= 1 && qty.value > 1 ) {
-        this.actor.updateOwnedItem({
-          id: this.data.id,
-          'data.quantity.value': Math.max(qty.value - 1, 0),
-          'data.charges.value': chg.max
-        }, true);
-      }
-
-      // Optionally destroy the item
-      else if ( chg.value <= 1 && qty.value <= 1 && itemData['autoDestroy'].value ) {
-        this.actor.deleteOwnedItem(this.data.id);
-      }
-
-      // Deduct the remaining charges
-      else {
-        this.actor.updateOwnedItem({id: this.data.id, 'data.charges.value': Math.max(chg.value - 1, 0)}, true);
-      }
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Roll a Tool Check
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
-   */
-  rollToolCheck(event) {
-    if ( this.type !== "tool" ) throw "Wrong item type!";
-
-    // Prepare roll data
-    let rollData = duplicate(this.actor.data.data),
-      abl = this.data.data.ability.value || "int",
-      parts = [`@abilities.${abl}.mod`, "@proficiency"],
-      title = `${this.name} - Tool Check`;
-    rollData["ability"] = abl;
-    rollData["proficiency"] = Math.floor((this.data.data.proficient.value || 0) * rollData.attributes.prof.value);
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710,
-      },
-      onClose: (html, parts, data) => {
-        abl = html.find('[name="ability"]').val();
-        data.ability = abl;
-        parts[1] = `@abilities.${abl}.mod`;
-      }
-    }).then(roll => {
-      roll.toMessage({
-        flavor: flavor,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
-      });
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Roll a Feat Attack
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
-   */
-  rollFeatAttack(event) {
-    if ( this.type !== "feat" ) throw "Wrong item type!";
-
-    // Prepare roll data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
-        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
-        title = `${this.name} - Attack Roll`;
-    rollData.item = itemData;
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Roll Feat Damage
-   * Rely upon the Dice5e.damageRoll logic for the core implementation
-   */
-  rollFeatDamage(event) {
-    if ( this.type !== "feat" ) throw "Wrong item type!";
-
-    // Get data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
-        parts = [itemData.damage.value],
-        dtype = CONFIG.damageTypes[itemData.damageType.value];
-
-    // Append damage type to title
-    let title = `${this.name} - Damage`;
-    if ( dtype ) title += ` (${dtype})`;
-
-    // Add item data to roll
-    rollData["mod"] = rollData.abilities[abl].mod;
-    rollData.item = itemData;
-
-    // Call the roll helper utility
-    Dice5e.damageRoll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  static chatListeners(html) {
-
-    // Chat card actions
-    html.on('click', '.card-buttons button', ev => {
-      ev.preventDefault();
-
-      // Extract card data
-      let button = $(ev.currentTarget),
-          messageId = button.parents('.message').attr("data-message-id"),
-          senderId = game.messages.get(messageId).user._id;
-
-      // Confirm roll permission
-      if ( !game.user.isGM && ( game.user._id !== senderId )) return;
-
-      // Extract action data
-      let action = button.attr("data-action"),
-          card = button.parents('.chat-card'),
-          actor = game.actors.get(card.attr('data-actor-id')),
-          itemId = Number(card.attr("data-item-id"));
-
-      // Get the item
-      if ( !actor ) return;
-      let itemData = actor.items.find(i => i.id === itemId);
-      if ( !itemData ) return;
-      let item = new Item5e(itemData, actor);
-
-      // Weapon attack
-      if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
-      else if ( action === "weaponDamage" ) item.rollWeaponDamage(ev);
-      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(ev, true);
-
-      // Spell actions
-      else if ( action === "spellAttack" ) item.rollSpellAttack(ev);
-      else if ( action === "spellDamage" ) item.rollSpellDamage(ev);
-
-      // Feat actions
-      else if ( action === "featAttack" ) item.rollFeatAttack(ev);
-      else if ( action === "featDamage" ) item.rollFeatDamage(ev);
-
-      // Consumable usage
-      else if ( action === "consume" ) item.rollConsumable(ev);
-
-      // Tool usage
-      else if ( action === "toolCheck" ) item.rollToolCheck(ev);
-    });
-  }
-}
-
-// Assign Item5e class to CONFIG
-CONFIG.Item.entityClass = Item5e;
-
-
-/**
- * Hook into chat log context menu to add damage application options
- */
-Hooks.on("getChatLogEntryContext", (html, options) => {
-
-  // Condition
-  let canApply = li => canvas.tokens.controlledTokens.length && li.find(".dice-roll").length;
-
-  // Apply Damage to Token
-  options["Apply Damage"] = {
-    icon: '<i class="fas fa-user-minus"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 1)
-  };
-
-  // Apply Healing to Token
-  options["Apply Healing"] = {
-    icon: '<i class="fas fa-user-plus"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, -1)
-  };
-
-  // Apply Double-Damage
-  options["Double Damage"] = {
-    icon: '<i class="fas fa-user-injured"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 2)
-  };
-
-  // Apply Half-Damage
-  options["Half Damage"] = {
-    icon: '<i class="fas fa-user-shield"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 0.5)
-  }
-});
-
-/**
- * Override and extend the basic :class:`ItemSheet` implementation
- */
-class ItemSheet5e extends ItemSheet {
-	static get defaultOptions() {
-	  const options = super.defaultOptions;
-	  options.width = 520;
-	  options.height = 460;
-	  options.classes = options.classes.concat(["dnd5e", "item"]);
-	  options.resizable = false;
-	  return options;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Use a type-specific template for each different item type
-   */
-  get template() {
-    let type = this.item.type;
-    // return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
-    return `public/systems/dnd5e/templates/items/item-sheet.html`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare item sheet data
-   * Start with the base item data and extending with additional properties for rendering.
-   */
-  getData() {
-    const data = super.getData();
-    data['abilities'] = game.system.template.actor.data.abilities;
-
-    // Sheet display details
-    const type = this.item.type;
-    mergeObject(data, {
-      type: type,
-      hasSidebar: true,
-      sidebarTemplate: () => `public/systems/dnd5e/templates/items/${type}-sidebar.html`,
-      hasDetails: ["consumable", "equipment", "feat", "spell", "weapon"].includes(type),
-      detailsTemplate: () => `public/systems/dnd5e/templates/items/${type}-details.html`
-    });
-
-    // Damage types
-    let dt = duplicate(CONFIG.damageTypes);
-    if ( ["spell", "feat"].includes(type) ) mergeObject(dt, CONFIG.healingTypes);
-    data['damageTypes'] = dt;
-
-    // Consumable Data
-    if ( type === "consumable" ) {
-      data.consumableTypes = CONFIG.consumableTypes
-    }
-
-    // Spell Data
-    else if ( type === "spell" ) {
-      mergeObject(data, {
-        spellTypes: CONFIG.spellTypes,
-        spellSchools: CONFIG.spellSchools,
-        spellLevels: CONFIG.spellLevels,
-        spellComponents: this._formatSpellComponents(data.data)
-      });
-    }
-
-    // Weapon Data
-    else if ( this.item.type === "weapon" ) {
-      data.weaponTypes = CONFIG.weaponTypes;
-      data.weaponProperties = this._formatWeaponProperties(data.data);
-    }
-
-    // Feat types
-    else if ( type === "feat" ) {
-      data.featTypes = CONFIG.featTypes;
-      data.featTags = [
-        data.data.target.value,
-        data.data.time.value
-      ].filter(t => !!t);
-    }
-
-    // Equipment data
-    else if ( type === "equipment" ) {
-      data.armorTypes = CONFIG.armorTypes;
-    }
-
-    // Tool-specific data
-    else if ( type === "tool" ) {
-      data.proficiencies = CONFIG.proficiencyLevels;
-    }
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  _formatSpellComponents(data) {
-    if ( !data.components.value ) return [];
-    let comps = data.components.value.split(",").map(c => CONFIG.spellComponents[c.trim()] || c.trim());
-    if ( data.materials.value ) comps.push(data.materials.value);
-    return comps;
-  }
-
-  /* -------------------------------------------- */
-
-  _formatWeaponProperties(data) {
-    if ( !data.properties.value ) return [];
-    return data.properties.value.split(",").map(p => p.trim());
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Activate listeners for interactive item sheet events
-   */
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Activate tabs
-    new Tabs(html.find(".tabs"), {
-      initial: this.item.data.flags["_sheetTab"],
-      callback: clicked => this.item.data.flags["_sheetTab"] = clicked.attr("data-tab")
-    });
-
-    // Checkbox changes
-    html.find('input[type="checkbox"]').change(event => this._onSubmit(event));
-  }
-}
-
-// Activate global listeners
-Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
-
-// Override CONFIG
-CONFIG.Item.sheetClass = ItemSheet5e;
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
@@ -2163,7 +2194,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
   _computeEncumbrance(totalWeight, actorData) {
 
     // Encumbrance classes
-    const mod = {
+    let mod = {
       tiny: 0.5,
       sm: 1,
       med: 1,
@@ -2171,6 +2202,9 @@ class ActorSheet5eCharacter extends ActorSheet5e {
       huge: 4,
       grg: 8
     }[actorData.data.traits.size.value] || 1;
+
+    // Apply Powerful Build feat
+    if ( this.actor.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
 
     // Add Currency Weight
     if ( game.settings.get("dnd5e", "currencyWeight") ) {
@@ -2201,12 +2235,22 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.options.editable ) return;
 
+    // Short and Long Rest
+    html.find('.short-rest').click(this._onShortRest.bind(this));
+    html.find('.long-rest').click(this._onLongRest.bind(this));
+    
+    // Configure Special Flags
+    html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+  }
 
-    /* Short Rest */
-    html.find('.short-rest').click(ev => this._onShortRest(ev));
+  /* -------------------------------------------- */
 
-    // Long Rest
-    html.find('.long-rest').click(ev => this._onLongRest(ev));
+  /**
+   * Handle click events for the Traits tab button to configure special Character Flags
+   */
+  _onConfigureFlags(event) {
+    event.preventDefault();
+    new ActorSheetFlags(this.actor).render(true);
   }
 
   /* -------------------------------------------- */
@@ -2292,6 +2336,132 @@ Actors.registerSheet("dnd5e", ActorSheet5eCharacter, {
 });
 
 
+
+
+class ActorSheetFlags extends BaseEntitySheet {
+  static get defaultOptions() {
+    const options = super.defaultOptions;
+    return mergeObject(options, {
+      id: "actor-flags",
+      template: "public/systems/dnd5e/templates/actors/actor-flags.html",
+      width: 500,
+      closeOnSubmit: true
+    });
+  }
+
+  /* -------------------------------------------- */
+  
+  /**
+   * Configure the title of the special traits selection window to include the Actor name
+   * @type {String}
+   */
+  get title() {
+    return `${game.il8n.localize('DND5E.FlagsTitle')}: ${this.object.name}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data used to render the special Actor traits selection UI
+   * @return {Object}
+   */
+  getData() {
+    const data = super.getData();
+    data.flags = this._getFlags();
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an object of flags data which groups flags by section
+   * Add some additional data for rendering
+   * @return {Object}
+   */
+  _getFlags() {
+    const flags = {};
+    for ( let [k, v] of Object.entries(CONFIG.Actor.characterFlags) ) {
+      if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
+      let flag = duplicate(v);
+      flag.type = v.type.name;
+      flag.isCheckbox = v.type === Boolean;
+      flag.isSelect = v.hasOwnProperty('choices');
+      flag.value = this.entity.getFlag("dnd5e", k);
+      flags[v.section][k] = flag;
+    }
+    return flags;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the Actor using the configured flags
+   * Remove/unset any flags which are no longer configured
+   */
+  _updateObject(event, formData) {
+    const actor = this.object;
+    const flags = duplicate(actor.data.flags.dnd5e || {});
+
+    // Iterate over the flags which may be configured
+    for ( let [k, v] of Object.entries(CONFIG.Actor.characterFlags) ) {
+      if ( [undefined, null, "", false].includes(formData[k]) ) delete flags[k];
+      else flags[k] = formData[k];
+    }
+
+    // Set the new flags in bulk
+    actor.update({'flags.dnd5e': flags});
+  }
+}
+
+
+/* -------------------------------------------- */
+
+
+CONFIG.Actor.characterFlags = {
+  "powerfulBuild": {
+    name: "Powerful Build",
+    hint: "Provides increased carrying capacity.",
+    section: "Racial Traits",
+    type: Boolean
+  },
+  "savageAttacks": {
+    name: "Savage Attacks",
+    hint: "Adds extra critical hit weapon dice.",
+    section: "Racial Traits",
+    type: Boolean
+  },
+  "elvenAccuracy": {
+    name: "Elven Accuracy",
+    hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
+    section: "Feats",
+    type: Boolean
+  },
+  "initiativeAdv": {
+    name: "Advantage on Initiative",
+    hint: "Provided by feats or magical items.",
+    section: "Feats",
+    type: Boolean
+  },
+  "initiativeHalfProf": {
+    name: "Half-Proficiency to Initiative",
+    hint: "Provided by Jack of All Trades or Remarkable Athlete.",
+    section: "Feats",
+    type: Boolean
+  },
+  "initiativeAlert": {
+    name: "Alert Feat",
+    hint: "Provides +5 to Initiative.",
+    section: "Feats",
+    type: Boolean
+  },
+  "spellDCBonus": {
+    name: "Spell DC Bonus",
+    hint: "Modifies normal spellcasting DC.",
+    section: "Feats",
+    type: Number,
+    placeholder: "+0"
+  }
+};
 
 
 

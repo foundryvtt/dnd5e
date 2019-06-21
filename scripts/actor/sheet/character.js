@@ -128,7 +128,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
   _computeEncumbrance(totalWeight, actorData) {
 
     // Encumbrance classes
-    const mod = {
+    let mod = {
       tiny: 0.5,
       sm: 1,
       med: 1,
@@ -136,6 +136,9 @@ class ActorSheet5eCharacter extends ActorSheet5e {
       huge: 4,
       grg: 8
     }[actorData.data.traits.size.value] || 1;
+
+    // Apply Powerful Build feat
+    if ( this.actor.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
 
     // Add Currency Weight
     if ( game.settings.get("dnd5e", "currencyWeight") ) {
@@ -166,12 +169,22 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.options.editable ) return;
 
+    // Short and Long Rest
+    html.find('.short-rest').click(this._onShortRest.bind(this));
+    html.find('.long-rest').click(this._onLongRest.bind(this));
+    
+    // Configure Special Flags
+    html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+  }
 
-    /* Short Rest */
-    html.find('.short-rest').click(ev => this._onShortRest(ev));
+  /* -------------------------------------------- */
 
-    // Long Rest
-    html.find('.long-rest').click(ev => this._onLongRest(ev));
+  /**
+   * Handle click events for the Traits tab button to configure special Character Flags
+   */
+  _onConfigureFlags(event) {
+    event.preventDefault();
+    new ActorSheetFlags(this.actor).render(true);
   }
 
   /* -------------------------------------------- */

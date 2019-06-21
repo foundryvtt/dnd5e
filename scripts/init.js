@@ -25,19 +25,8 @@ Hooks.once("init", () => {
    * Register Initiative formula setting
    */
   function _set5eInitiative(tiebreaker) {
-    const base = "1d20 + @abilities.dex.mod + @attributes.init.value",
-          dex = "1d20 + @abilities.dex.mod + @attributes.init.value + (@abilities.dex.value / 100)";
-    if ( tiebreaker ) {
-      CONFIG.initiative = {
-        formula: dex,
-        decimals: 2
-      }
-    } else {
-      CONFIG.initiative = {
-        formula: base,
-        decimals: 0
-      }
-    }
+    CONFIG.initiative.tiebreaker = tiebreaker;
+    CONFIG.initiative.decimals = tiebreaker ? 2 : 0;
   }
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",
@@ -88,6 +77,36 @@ Hooks.once("init", () => {
     "public/systems/dnd5e/templates/items/weapon-details.html",
     "public/systems/dnd5e/templates/items/weapon-sidebar.html"
   ]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Override the default Initiative formula to customize special behaviors of the D&D5e system.
+   * Apply advantage, proficiency, or bonuses where appropriate
+   * Apply the dexterity score as a decimal tiebreaker if requested
+   * See Combat._getInitiativeFormula for more detail.
+   * @private
+   */
+  Combat.prototype._getInitiativeFormula = function(combatant) {
+    const actor = combatant.actor,
+          data = actor.data.data,
+          parts = ["1d20", data.abilities.dex.mod];
+
+    // Advantage on Initiative
+    if ( actor.getFlag("dnd5e", "initiativeAdv") ) parts[0] = "2d20kh";
+
+    // Half-Proficiency to Initiative
+    if ( actor.getFlag("dnd5e", "initiativeHalfProf") ) {
+      parts.push(Math.floor(0.5 * actor.data.data.attributes.prof.value))
+    }
+
+    // Alert Bonus to Initiative
+    if ( actor.getFlag("dnd5e", "initiativeAlert") ) parts.push(5);
+
+    // Dexterity tiebreaker
+    if ( CONFIG.initiative.tiebreaker ) parts.push(data.abilities.dex.value / 100);
+    return parts.join("+");
+  }
 });
 
 

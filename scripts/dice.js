@@ -8,6 +8,7 @@ class Dice5e {
    *
    * @param {Event} event           The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
+   * @param {Actor} actor           The Actor making the d20 roll
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
@@ -106,6 +107,7 @@ class Dice5e {
    *
    * @param {Event} event           The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
+   * @param {Actor} actor           The Actor making the damage roll
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
@@ -115,7 +117,7 @@ class Dice5e {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static damageRoll({event={}, parts, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
+  static damageRoll({event={}, parts, actor, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -123,7 +125,10 @@ class Dice5e {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if ( crit ) {
-        roll.alter(0, 2);
+        console.log(data);
+        let add = actor && actor.getFlag("dnd5e", "savageAttacks") ? 1 : 0;
+        let mult = 2;
+        roll.alter(add, mult);
         flav = `${title} (Critical)`;
       }
 

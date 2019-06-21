@@ -187,10 +187,13 @@ class Item5e extends Item {
     rollData.item = itemData;
     if ( !itemData.proficient.value ) parts.pop();
 
+    // TODO: Incorporate Elven Accuracy
+
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: event,
       parts: parts,
+      actor: this.actor,
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
@@ -227,6 +230,7 @@ class Item5e extends Item {
     Dice5e.damageRoll({
       event: event,
       parts: parts,
+      actor: this.actor,
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
@@ -299,6 +303,7 @@ class Item5e extends Item {
       event: event,
       parts: parts,
       data: rollData,
+      actor: this.actor,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
@@ -465,6 +470,7 @@ class Item5e extends Item {
       event: event,
       parts: parts,
       data: rollData,
+      actor: this.actor,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
