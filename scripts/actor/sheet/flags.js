@@ -91,12 +91,12 @@ CONFIG.Actor.characterFlags = {
     section: "Racial Traits",
     type: Boolean
   },
-  "elvenAccuracy": {
-    name: "Elven Accuracy",
-    hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
-    section: "Feats",
-    type: Boolean
-  },
+  // "elvenAccuracy": {
+  //   name: "Elven Accuracy",
+  //   hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
+  //   section: "Feats",
+  //   type: Boolean
+  // },
   "initiativeAdv": {
     name: "Advantage on Initiative",
     hint: "Provided by feats or magical items.",

@@ -99,7 +99,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
       let ad = this.actor.data.data;
       let hp = new Roll(ad.attributes.hp.formula).roll().total;
       AudioHelper.play({src: CONFIG.sounds.dice});
-      this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp}, true);
+      this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp});
     });
   }
 

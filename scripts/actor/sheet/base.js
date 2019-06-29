@@ -196,7 +196,7 @@ class ActorSheet5e extends ActorSheet {
     html.find('.item-delete').click(ev => {
       let li = $(ev.currentTarget).parents(".item"),
         itemId = Number(li.attr("data-item-id"));
-      this.actor.deleteOwnedItem(itemId, true);
+      this.actor.deleteOwnedItem(itemId);
       li.slideUp(200, () => this.render(false));
     });
 
@@ -205,7 +205,7 @@ class ActorSheet5e extends ActorSheet {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
           item = this.actor.items.find(i => { return i.id === itemId });
       item.data['prepared'].value = !item.data['prepared'].value;
-      this.actor.updateOwnedItem(item, true);
+      this.actor.updateOwnedItem(item);
     });
 
     // Item Dragging
@@ -309,7 +309,7 @@ class ActorSheet5e extends ActorSheet {
     let header = event.currentTarget,
         data = duplicate(header.dataset);
     data["name"] = `New ${data.type.capitalize()}`;
-    this.actor.createOwnedItem(data, true, {renderSheet: true});
+    this.actor.createOwnedItem(data, {renderSheet: true});
   }
 
   /* -------------------------------------------- */

@@ -359,7 +359,7 @@ class Item5e extends Item {
 
       // Deduct the remaining charges
       else {
-        this.actor.updateOwnedItem({id: this.data.id, 'data.charges.value': Math.max(chg.value - 1, 0)}, true);
+        this.actor.updateOwnedItem({id: this.data.id, 'data.charges.value': Math.max(chg.value - 1, 0)});
       }
     }
   }
