@@ -7,19 +7,9 @@ class ItemSheet5e extends ItemSheet {
 	  options.width = 520;
 	  options.height = 460;
 	  options.classes = options.classes.concat(["dnd5e", "item"]);
+	  options.template = `public/systems/dnd5e/templates/items/item-sheet.html`;
 	  options.resizable = false;
 	  return options;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Use a type-specific template for each different item type
-   */
-  get template() {
-    let type = this.item.type;
-    // return `public/systems/dnd5e/templates/items/item-${type}-sheet.html`;
-    return `public/systems/dnd5e/templates/items/item-sheet.html`;
   }
 
   /* -------------------------------------------- */

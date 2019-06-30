@@ -884,6 +884,11 @@
 .dnd5e.actor .feats .feats-list .item-name {
   flex: 2;
 }
+.dnd5e.actor .feat-uses {
+  display: inline;
+  font-size: 11px;
+  color: #444;
+}
 .dnd5e.actor .class-header {
   line-height: 20px;
   position: relative;
@@ -1132,6 +1137,20 @@
 }
 .dnd5e.item form .tool-details .form-group-stacked {
   margin-bottom: 8px;
+}
+.dnd5e.item form .feat-uses select {
+  flex: 2;
+  margin-right: 5px;
+}
+.dnd5e.item form .feat-uses input {
+  flex: 1;
+  text-align: center;
+}
+.dnd5e.item form .feat-uses span.sep {
+  flex: 0 0 16px;
+  line-height: 24px;
+  font-size: 14px;
+  text-align: center;
 }
 /* ----------------------------------------- */
 /*  Chat Cards

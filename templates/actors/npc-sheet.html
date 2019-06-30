@@ -144,7 +144,7 @@
                 <li class="item" data-item-id="{{item.id}}">
                     <div class="item-name rollable">
                         <div class="item-image" style="background-image: url({{item.img}})"></div>
-                        <h4>{{item.name}}</h4>
+                        <h4>{{item.name}}{{#if item.data.uses.max}} <span class="feat-uses">({{item.data.uses.value}} / {{item.data.uses.max}}){{/if}}</span></h4>
                     </div>
                     {{#if ../../owner}}
                     <div class="item-controls">
