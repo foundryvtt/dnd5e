@@ -194,7 +194,7 @@ class Dice5e {
  * Highlight critical success or failure on d20 rolls
  */
 Hooks.on("renderChatMessage", (message, data, html) => {
-  if ( !message.isRoll || message.roll.parts[0].faces !== 20 ) return;
+  if ( !message.isRoll || message.roll.parts.length == 0 || message.roll.parts[0].faces !== 20 ) return;
   let d20 = message.roll.parts[0].total;
   if ( d20 === 20 ) html.find(".dice-total").addClass("success");
   else if ( d20 === 1 ) html.find(".dice-total").addClass("failure");
