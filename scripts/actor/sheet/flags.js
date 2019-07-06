@@ -17,7 +17,7 @@ class ActorSheetFlags extends BaseEntitySheet {
    * @type {String}
    */
   get title() {
-    return `${game.il8n.localize('DND5E.FlagsTitle')}: ${this.object.name}`;
+    return `${game.i18n.localize('DND5E.FlagsTitle')}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
