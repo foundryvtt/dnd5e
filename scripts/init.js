@@ -90,7 +90,7 @@ Hooks.once("init", () => {
   Combat.prototype._getInitiativeFormula = function(combatant) {
     const actor = combatant.actor,
           data = actor.data.data,
-          parts = ["1d20", data.abilities.dex.mod];
+          parts = ["1d20", data.attributes.init.mod];
 
     // Advantage on Initiative
     if ( actor.getFlag("dnd5e", "initiativeAdv") ) parts[0] = "2d20kh";

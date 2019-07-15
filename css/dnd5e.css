@@ -227,7 +227,8 @@
   object-fit: contain;
 }
 .dnd5e.actor .sheet-sidebar .tab {
-  padding: 3px 3px 3px 0;
+  padding: 3px 3px 0 0;
+  overflow-y: auto;
 }
 .dnd5e.actor .sheet-header {
   border-bottom: 1px solid #CCC;
@@ -517,7 +518,9 @@
   flex: 1;
 }
 .dnd5e.actor .abilities .ability .ability-proficiency {
-  flex: 0 0 24px;
+  flex: 0 0 20px;
+  text-align: left;
+  padding-left: 3px;
 }
 .dnd5e.actor .abilities .ability .ability-proficiency i.fa-circle {
   font-size: 10px;
@@ -558,6 +561,9 @@
 .dnd5e.actor .abilities .ability .ability-save {
   border-left: 1px solid #CCC;
 }
+.dnd5e.actor .abilities .class-list {
+  height: 130px;
+}
 .dnd5e.actor .skills .skills-list {
   margin: 0;
   padding: 0;
@@ -580,8 +586,9 @@
   margin: 0;
 }
 .dnd5e.actor .skills .skill .skill-proficiency {
-  text-align: center;
-  flex: 0 0 24px;
+  text-align: left;
+  flex: 0 0 20px;
+  padding-left: 3px;
 }
 .dnd5e.actor .skills .skill .skill-proficiency i.fa-circle {
   font-size: 10px;
@@ -675,7 +682,7 @@
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   /* Inventory Item */
   /* Inventory Header */
 }
@@ -772,7 +779,7 @@
 .dnd5e.actor .inventory-list .inventory-header .item-controls a.item-create {
   width: 100%;
 }
-.dnd5e.actor.character-sheet .inventory-list {
+.dnd5e.actor.character-sheet .sheet-body .inventory-list {
   height: calc(100% - 42px);
 }
 .dnd5e.actor .encumbrance {
@@ -1093,7 +1100,7 @@
 }
 .dnd5e.item form .item-details {
   padding: 8px 8px 0;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .dnd5e.item form .item-details label {
   color: #888;

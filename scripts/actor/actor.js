@@ -324,34 +324,22 @@ class Actor5e extends Actor {
    *
    * @param {HTMLElement} roll    The chat entry which contains the roll data
    * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
+   * @return {Promise}
    */
-  static applyDamage(roll, multiplier) {
+  static async applyDamage(roll, multiplier) {
     let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
-
-    // Filter tokens to which damage can be applied
-    canvas.tokens.controlledTokens.filter(t => {
-      if ( t.actor && t.data.actorLink ) return true;
-      else if ( t.data.bar1.attribute === "attributes.hp" || t.data.bar2.attribute === "attributes.hp" ) return true;
-      return false;
-    }).forEach(t => {
-
-      // For linked Tokens, update the Actor first deducting from the temporary hit point pool
-      if ( t.actor && t.data.actorLink ) {
-        let hp = t.actor.data.data.attributes.hp,
-            tmp = parseInt(hp["temp"]),
-            dt = value > 0 ? Math.min(tmp, value) : 0;
-        t.actor.update({
-          "data.attributes.hp.temp": tmp - dt,
-          "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
-        });
-      }
-
-      // For unlinked Tokens, just update the resource bar directly
-      else {
-        let bar = (t.data.bar1.attribute === "attributes.hp") ? "bar1" : "bar2";
-        t.update(canvas.id, {[`${bar}.value`]: Math.clamped(t.data[bar].value - value, 0, t.data[bar].max)});
-      }
-    });
+    const promises = [];
+    for ( let t of canvas.tokens.controlled ) {
+      let a = t.actor,
+          hp = a.data.data.attributes.hp,
+          tmp = parseInt(hp.temp),
+          dt = value > 0 ? Math.min(tmp, value) : 0;
+      promises.push(t.actor.update({
+        "data.attributes.hp.temp": tmp - dt,
+        "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
+      }));
+    }
+    return Promise.all(promises);
   }
 }
 

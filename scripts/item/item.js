@@ -507,7 +507,7 @@ class Item5e extends Item {
       if ( !actor ) return;
       let itemData = actor.items.find(i => i.id === itemId);
       if ( !itemData ) return;
-      let item = new Item5e(itemData, actor);
+      let item = new CONFIG.Item.entityClass(itemData, {actor: actor});
 
       // Weapon attack
       if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);

@@ -480,7 +480,7 @@ Hooks.once("init", () => {
   Combat.prototype._getInitiativeFormula = function(combatant) {
     const actor = combatant.actor,
           data = actor.data.data,
-          parts = ["1d20", data.abilities.dex.mod];
+          parts = ["1d20", data.attributes.init.mod];
 
     // Advantage on Initiative
     if ( actor.getFlag("dnd5e", "initiativeAdv") ) parts[0] = "2d20kh";
@@ -861,34 +861,22 @@ class Actor5e extends Actor {
    *
    * @param {HTMLElement} roll    The chat entry which contains the roll data
    * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
+   * @return {Promise}
    */
-  static applyDamage(roll, multiplier) {
+  static async applyDamage(roll, multiplier) {
     let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
-
-    // Filter tokens to which damage can be applied
-    canvas.tokens.controlledTokens.filter(t => {
-      if ( t.actor && t.data.actorLink ) return true;
-      else if ( t.data.bar1.attribute === "attributes.hp" || t.data.bar2.attribute === "attributes.hp" ) return true;
-      return false;
-    }).forEach(t => {
-
-      // For linked Tokens, update the Actor first deducting from the temporary hit point pool
-      if ( t.actor && t.data.actorLink ) {
-        let hp = t.actor.data.data.attributes.hp,
-            tmp = parseInt(hp["temp"]),
-            dt = value > 0 ? Math.min(tmp, value) : 0;
-        t.actor.update({
-          "data.attributes.hp.temp": tmp - dt,
-          "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
-        });
-      }
-
-      // For unlinked Tokens, just update the resource bar directly
-      else {
-        let bar = (t.data.bar1.attribute === "attributes.hp") ? "bar1" : "bar2";
-        t.update(canvas.id, {[`${bar}.value`]: Math.clamped(t.data[bar].value - value, 0, t.data[bar].max)});
-      }
-    });
+    const promises = [];
+    for ( let t of canvas.tokens.controlled ) {
+      let a = t.actor,
+          hp = a.data.data.attributes.hp,
+          tmp = parseInt(hp.temp),
+          dt = value > 0 ? Math.min(tmp, value) : 0;
+      promises.push(t.actor.update({
+        "data.attributes.hp.temp": tmp - dt,
+        "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
+      }));
+    }
+    return Promise.all(promises);
   }
 }
 
@@ -1509,7 +1497,7 @@ class Item5e extends Item {
       if ( !actor ) return;
       let itemData = actor.items.find(i => i.id === itemId);
       if ( !itemData ) return;
-      let item = new Item5e(itemData, actor);
+      let item = new CONFIG.Item.entityClass(itemData, {actor: actor});
 
       // Weapon attack
       if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
@@ -1886,7 +1874,7 @@ class ActorSheet5e extends ActorSheet {
     html.find('.item-edit').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
       let Item = CONFIG.Item.entityClass;
-      const item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
+      const item = new Item(this.actor.items.find(i => i.id === itemId), {actor: this.actor});
       item.sheet.render(true);
     });
 
