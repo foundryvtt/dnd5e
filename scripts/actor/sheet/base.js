@@ -188,7 +188,7 @@ class ActorSheet5e extends ActorSheet {
     html.find('.item-edit').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
       let Item = CONFIG.Item.entityClass;
-      const item = new Item(this.actor.items.find(i => i.id === itemId), this.actor);
+      const item = new Item(this.actor.items.find(i => i.id === itemId), {actor: this.actor});
       item.sheet.render(true);
     });
 
