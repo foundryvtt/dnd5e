@@ -1,10 +1,21 @@
 @import "./variables.less";
 
+@headerHeight: 48px;
+@sidebarWidth: 220px;
+@showcaseHeight: 220px;
+@detailHeight: 30px;
+@attributeHeight: 80px;
+@navigationHeight: 32px;
+@abilityHeight: 36px;
+
 /* ----------------------------------------- */
 /*  Generic Sheet Styling
 /* ----------------------------------------- */
 
 .dnd5e.sheet form {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 
   /* Form Elements */
   input[type="text"] {
@@ -97,34 +108,88 @@
   min-width: 650px;
   min-height: 650px;
 
-  .sheet-header { order: 1; }
-  .sheet-sidebar { order: 2; }
-  .sheet-body {
-    order: 3;
-    flex: 1;
+  .sidebar {
+    float: left;
+    width: @sidebarWidth;
+  }
+
+  .content {
+    float: right;
+    width: calc(100% - @sidebarWidth);
+  }
+
+  .sheet-upper {
+    width: 100%;
+    height: @headerHeight + @showcaseHeight;
+
+    .sheet-header {
+      height: @headerHeight;
+    }
+
+    .sheet-profile {
+      height: @showcaseHeight;
+    }
+
+    .sheet-showcase {
+      height: @showcaseHeight;
+    }
+  }
+
+  .sheet-navigation {
+    height: @navigationHeight;
+    width: 100%;
+  }
+
+  .sheet-lower {
+    width: 100%;
+    height: calc(100% - @headerHeight - @showcaseHeight - @navigationHeight);
+
+    .sheet-content {
+      height: 100%;
+    }
   }
 
   .sheet-sidebar {
-    flex: 0 0 220px;
-    height: calc(100% - 44px);
-    order: 2;
-    border-right: 1px solid #AAA;
+    height: 100%;
     .flexcol();
+  }
 
-    img.sheet-profile {
-      flex: 0 0 220px;
-      border: none;
-      object-fit: contain;
+  /* NPC Sheet Adjustments */
+  &.npc-sheet {
+    .sheet-upper {
+      height: @showcaseHeight;
+      .sheet-showcase {
+        height: calc(@showcaseHeight - @headerHeight)
+      }
     }
-
-    .tab {
-      padding: 3px 3px 0 0;
-      overflow-y: auto;
+    .sheet-lower {
+      height: calc(100% - @showcaseHeight - @navigationHeight);
     }
   }
 
+  /* ---------------------------------------- */
+  /*  Navigation Tabs
+  /* ---------------------------------------- */
 
-  // Sheet Header
+  .sheet-navigation {
+    border-top: 1px solid @borderLight;
+    border-bottom: 1px solid @borderDark;
+
+    .sheet-tabs > .item {
+      border-radius: 5px 5px 0 0;
+      &.active {
+        border: 1px solid @borderDark;
+        border-bottom: none;
+        box-shadow: 0 0 10px inset @accentColor;
+        text-shadow: none;
+      }
+    }
+  }
+
+  /* ---------------------------------------- */
+  /*  Header Content
+  /* ---------------------------------------- */
+
   .sheet-header {
     border-bottom: 1px solid @borderLight;
 
@@ -193,35 +258,12 @@
   }
 
   /* ---------------------------------------- */
-  /*  Sheet Body                              */
+  /*  Showcase Content
   /* ---------------------------------------- */
 
-  .sheet-body {
-    order: 3;
-  }
-
-  /* Actor Sheet Tabs */
-  .sheet-tabs {
-    margin-top: 2px;
-    border-top: 1px solid @borderLight;
-    border-bottom: 1px solid @borderDark;
-
-    > .item {
-      border-radius: 5px 5px 0 0;
-
-      &.active {
-        border: 1px solid @borderDark;
-        border-bottom: none;
-        box-shadow: 0 0 10px inset @accentColor;
-        text-shadow: none;
-      }
-    }
-  }
-
-
   /* Character Details */
-  .sheet-body .details {
-    flex: 0 0 30px;
+  .details {
+    height: @detailHeight;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -229,7 +271,7 @@
 
     .character-detail {
       width: 33.33%;
-      height: 29px;
+      height: @detailHeight;
       float: left;
       padding: 3px;
       border-right: 1px solid @borderLight;
@@ -247,8 +289,9 @@
 
   /* Primary Attributes */
   .primary-attributes {
+    height: @attributeHeight;
+    width: 100%;
     .flexrow();
-    flex: 0 0 80px;
     border-bottom: 1px solid @borderLight;
 
     .attribute {
@@ -334,12 +377,13 @@
 
   /* Status Effects */
   .statuses {
-    flex: 0 0 30px;
+    width: 100%;
+    height: @detailHeight;
     margin: 0;
     .flexrow();
 
     .status {
-      line-height: 29px;
+      line-height: @detailHeight;
       padding: 0 6px;
       border-right: 1px solid @borderLight;
       font-size: 14px;
@@ -381,27 +425,32 @@
     }
   }
 
-  /* ----------------------------------------- */
-  /* Biography Tab
-  /* ----------------------------------------- */
+  /* ---------------------------------------- */
+  /*  Sidebar Content
+  /* ---------------------------------------- */
 
-  .biography {
-    .editor {
-      height: 380px;
-      padding-left: 8px;
+  // Profile Image
+  img.sheet-profile {
+    border: none;
+    border-right: 1px solid @borderLight;
+    object-fit: contain;
+  }
+
+  // Sidebar Tabs
+  .sheet-sidebar {
+    border-right: 1px solid #AAA;
+    .tab {
+      height: 100%;
+      padding-top: 2px;
+      overflow-y: auto;
     }
   }
-  &.npc-sheet .biography .editor {
-    height: 465px;
-  }
 
-  /* ----------------------------------------- */
-  /* Abilities Sidebar Tab
-  /* ----------------------------------------- */
+  /* ---------------------------------------- */
+  /*  Abilities Tab
+  /* ---------------------------------------- */
 
   .abilities {
-    margin-bottom: 3px;
-
     .abilities-list {
       list-style: none;
       margin: 0;
@@ -410,12 +459,13 @@
 
     .ability {
       .flexrow();
-      height: 36px;
-      line-height: 36px;
+      height: @abilityHeight;
+      line-height: @abilityHeight;
       border-bottom: 1px solid @borderLight;
 
       .ability-proficiency {
         flex: 0 0 20px;
+        height: 100%;
         text-align: left;
         padding-left: 3px;
         i.fa-circle { font-size: 10px; }
@@ -428,6 +478,7 @@
 
       .ability-score {
         flex: 0 0 36px;
+        height: @abilityHeight;
         > input {
           width: 30px;
           height: 30px;
@@ -441,24 +492,99 @@
       .ability-mod,
       .ability-save {
         flex: 0 0 24px;
-        margin: 8px 0;
         .nodesto();
-        line-height: 24px;
+        line-height: @abilityHeight;
         color: #666;
         text-align: center;
       }
       .ability-mod { border-right: 1px solid @borderLight; }
       .ability-save { border-left: 1px solid @borderLight; }
     }
-
-    .class-list {
-      height: 130px;
-    }
   }
 
   /* ----------------------------------------- */
-  /* Skills Tab
+  /* Class List
   /* ----------------------------------------- */
+
+  .class-levels {
+    margin: 2px;
+    height: 156px;
+    overflow: hidden;
+
+    .class-header {
+      line-height: 20px;
+      position: relative;
+      margin: 3px 0 1px;
+
+      h3 {
+        text-align: center;
+        .nodesto();
+        font-size: 18px;
+        color: #222;
+        margin: 0;
+      }
+
+      a.item-create {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 11px;
+        color: #666;
+      }
+    }
+
+    .class-list {
+      overflow-y: hidden;
+
+      .item {
+        height: 44px;
+        background: rgba(0, 0, 0, 0.03);
+        padding: 2px;
+        border: 1px solid @borderLight;
+        border-radius: 2px;
+        margin-bottom: 2px;
+
+        h4, h5 {
+          width: calc(100% - 44px);
+          float: left;
+          margin: 0;
+          line-height: 20px;
+          font-weight: strong;
+        }
+
+        .item-header {
+          flex: 0 0 100%;
+          height: 20px;
+
+          .class-levels {
+            width: 44px;
+            height: 100%;
+            float: right;
+            margin: 0;
+            font-size: 10px;
+            text-align: right;
+            .nodesto();
+            color: #222;
+          }
+        }
+
+        .class-subclass {
+          flex: 0 0 100%;
+          height: 20px;
+
+          .item-controls {
+            width: 44px;
+            float: right;
+            a { text-align: right };
+          }
+        }
+      }
+    }
+  }
+
+  /* ---------------------------------------- */
+  /*  Skills Tab
+  /* ---------------------------------------- */
 
   .skills {
     .skills-list {
@@ -523,6 +649,7 @@
 
     .trait-selector {
       float: right;
+      margin-right: 3px;
       color: #999;
       font-size: 10px;
       line-height: 16px;
@@ -536,6 +663,7 @@
 
     .configure-flags i.fas {
       float: right;
+      margin-right: 3px;
       text-align: right;
       color: #999;
       line-height: 24px;
@@ -548,6 +676,21 @@
   }
 
   /* ----------------------------------------- */
+  /*  Main Content Tabs
+  /* ----------------------------------------- */
+
+  /* Biography */
+  .biography {
+    .editor {
+      height: 380px;
+      padding-left: 8px;
+    }
+  }
+  &.npc-sheet .biography .editor {
+    height: 465px;
+  }
+
+  /* ----------------------------------------- */
   /* Inventory Tab
   /* ----------------------------------------- */
 
@@ -557,6 +700,7 @@
     padding: 0;
     border-bottom: 1px solid @borderLight;
     .flexrow();
+    height: 24px;
     font-size: 12px;
     line-height: 20px;
 
@@ -687,7 +831,7 @@
     }
   }
 
-  &.character-sheet .sheet-body .inventory-list {
+  &.character-sheet .inventory-list {
     height: calc(100% - 42px);
   }
 
@@ -835,79 +979,6 @@
     display: inline;
     font-size: 11px;
     color: #444;
-  }
-
-  /* ----------------------------------------- */
-  /* Class List
-  /* ----------------------------------------- */
-
-  .class-header {
-    line-height: 20px;
-    position: relative;
-    margin: 3px 0 1px;
-
-    h3 {
-      text-align: center;
-      .nodesto();
-      font-size: 18px;
-      color: #222;
-      margin: 0;
-    }
-
-    a.item-create {
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 11px;
-      color: #666;
-    }
-  }
-
-  .class-list {
-    overflow: hidden;
-
-    .item {
-      background: rgba(0, 0, 0, 0.03);
-      padding: 3px 3px 0;
-      border: 1px solid @borderLight;
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 3px;
-
-      .class-levels,
-      .item-controls {
-        line-height: 16px;
-        font-size: 10px;
-        text-align: right;
-      }
-      .class-levels {
-        padding-right: 5px;
-        .nodesto();
-        color: #222;
-      }
-
-      > * {
-        line-height: 20px;
-      }
-
-      .class-name,
-      .class-subclass {
-        margin: 0;
-        flex: 1 0 75%;
-      }
-
-      .class-name {
-        .nodesto();
-        color: #222;
-        font-size: 18px;
-      }
-
-      .class-subclass {
-        line-height: 14px;
-        font-size: 13px;
-        color: #999;
-      }
-    }
   }
 
   /* ----------------------------------------- */

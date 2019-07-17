@@ -27,6 +27,7 @@ Hooks.once("init", () => {
   function _set5eInitiative(tiebreaker) {
     CONFIG.initiative.tiebreaker = tiebreaker;
     CONFIG.initiative.decimals = tiebreaker ? 2 : 0;
+    if ( ui.combat && ui.combat._rendered ) ui.combat.render();
   }
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",
@@ -88,8 +89,9 @@ Hooks.once("init", () => {
    * @private
    */
   Combat.prototype._getInitiativeFormula = function(combatant) {
-    const actor = combatant.actor,
-          data = actor.data.data,
+    const actor = combatant.actor;
+    if ( !actor ) return "1d20";
+    const data = actor ? actor.data.data : {},
           parts = ["1d20", data.attributes.init.mod];
 
     // Advantage on Initiative
@@ -97,7 +99,7 @@ Hooks.once("init", () => {
 
     // Half-Proficiency to Initiative
     if ( actor.getFlag("dnd5e", "initiativeHalfProf") ) {
-      parts.push(Math.floor(0.5 * actor.data.data.attributes.prof.value))
+      parts.push(Math.floor(0.5 * data.attributes.prof.value))
     }
 
     // Alert Bonus to Initiative
