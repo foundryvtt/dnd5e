@@ -126,7 +126,7 @@
   cursor: pointer;
 }
 .dnd5e.sheet form .sheet-tabs {
-  flex: 0 0 28px;
+  height: 32px;
 }
 .dnd5e.sheet form .sheet-tabs > .item {
   line-height: 24px;
@@ -587,7 +587,7 @@
   border-left: 1px solid #CCC;
 }
 .dnd5e.actor .class-levels {
-  margin: 2px;
+  margin: 0 5px 0 0;
   height: 156px;
   overflow: hidden;
 }
