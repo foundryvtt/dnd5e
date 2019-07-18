@@ -10,9 +10,11 @@ class Item5e extends Item {
   async roll() {
 
     // Basic template rendering data
-    const template = `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`;
+    const template = `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`
+    const token = this.actor.token;
     const templateData = {
       actor: this.actor,
+      tokenId: token ? `${token.scene._id}.${token.id}` : null,
       item: this.data,
       data: this.getChatData()
     };
@@ -22,6 +24,7 @@ class Item5e extends Item {
       user: game.user._id,
       speaker: {
         actor: this.actor._id,
+        token: this.actor.token,
         alias: this.actor.name
       }
     };
@@ -490,24 +493,40 @@ class Item5e extends Item {
       ev.preventDefault();
 
       // Extract card data
-      let button = $(ev.currentTarget),
-          messageId = button.parents('.message').attr("data-message-id"),
-          senderId = game.messages.get(messageId).user._id;
+      const button = $(ev.currentTarget),
+            messageId = button.parents('.message').attr("data-message-id"),
+            senderId = game.messages.get(messageId).user._id,
+            card = button.parents('.chat-card');
 
       // Confirm roll permission
       if ( !game.user.isGM && ( game.user._id !== senderId )) return;
 
-      // Extract action data
-      let action = button.attr("data-action"),
-          card = button.parents('.chat-card'),
-          actor = game.actors.get(card.attr('data-actor-id')),
-          itemId = Number(card.attr("data-item-id"));
+      // Get the Actor from a synthetic Token
+      let actor;
+      const tokenKey = card.attr("data-token-id");
+      if ( tokenKey ) {
+        const [sceneId, tokenId] = tokenKey.split(".");
+        let token;
+        if ( sceneId === canvas.scene._id ) token = canvas.tokens.get(tokenId);
+        else {
+          const scene = game.scenes.get(sceneId);
+          if ( !scene ) return;
+          let tokenData = scene.data.tokens.find(t => t.id === Number(tokenId));
+          if ( tokenData ) token = new Token(tokenData);
+        }
+        if ( !token ) return;
+        actor = Actor.fromToken(token);
+      } else actor = game.actors.get(card.attr('data-actor-id'));
 
-      // Get the item
+      // Get the Item
       if ( !actor ) return;
+      const itemId = Number(card.attr("data-item-id"));
       let itemData = actor.items.find(i => i.id === itemId);
       if ( !itemData ) return;
-      let item = new CONFIG.Item.entityClass(itemData, {actor: actor});
+      const item = new CONFIG.Item.entityClass(itemData, {actor: actor});
+
+      // Get the Action
+      const action = button.attr("data-action");
 
       // Weapon attack
       if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
