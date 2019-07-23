@@ -270,7 +270,15 @@ class Actor5e extends Actor {
         update[`data.resources.${r}.value`] = res.max;
       }
     }
-
+    
+    // Recover uses
+    for (let item of this.data.items) {
+      if (item.data.uses !== undefined && item.data.uses.type === 'sr') {
+        item.data.uses.value = item.data.uses.max;
+        this.updateOwnedItem(item);
+      }
+    }
+    
     // Update the actor
     this.update(update);
   }
@@ -298,6 +306,14 @@ class Actor5e extends Actor {
       let res = data.resources[r];
       if ( res.max && (res.lr || res.sr ) ) {
         update[`data.resources.${r}.value`] = res.max;
+      }
+    }
+
+    // Recover uses
+    for (let item of this.data.items) {
+      if (item.data.uses !== undefined && item.data.uses.type === 'lr') {
+        item.data.uses.value = item.data.uses.max;
+        this.updateOwnedItem(item);
       }
     }
 
