@@ -259,9 +259,10 @@ class Actor5e extends Actor {
   /**
    * Take a short rest, recovering resources and possibly rolling Hit Dice
    */
-  shortRest() {
+  async shortRest() {
     const data = this.data.data,
-          update = {};
+          update = {},
+          updatePromises = [];
 
     // Recover resources
     for ( let r of ["primary", "secondary"] ) {
@@ -272,15 +273,14 @@ class Actor5e extends Actor {
     }
     
     // Recover uses
-    for (let item of this.data.items) {
-      if (item.data.uses !== undefined && item.data.uses.type === 'sr') {
-        item.data.uses.value = item.data.uses.max;
-        this.updateOwnedItem(item);
-      }
+    for (let item of this.data.items.filter(item => item.data.uses.type === 'sr')) {
+      item.data.uses.value = item.data.uses.max;
+      updatePromises.push(this.updateOwnedItem(item));
     }
     
     // Update the actor
-    this.update(update);
+    updatePromises.push(this.update(update));
+    return Promise.all(updatePromises);
   }
 
   /* -------------------------------------------- */
@@ -288,9 +288,10 @@ class Actor5e extends Actor {
   /**
    * Take a long rest, recovering HP, HD, resources, and spell slots
    */
-  longRest() {
+  async longRest() {
     const data = this.data.data,
           update = {};
+          updatePromises = [];
 
     // Recover hit points
     let dhp = data.attributes.hp.max - data.attributes.hp.value;
@@ -310,11 +311,9 @@ class Actor5e extends Actor {
     }
 
     // Recover uses
-    for (let item of this.data.items) {
-      if (item.data.uses !== undefined && item.data.uses.type === 'lr') {
-        item.data.uses.value = item.data.uses.max;
-        this.updateOwnedItem(item);
-      }
+    for (let item of this.data.items.filter(item => (item.data.uses.type === 'lr' || item.data.uses.type === 'sr'))) {
+      item.data.uses.value = item.data.uses.max;
+      updatePromises.push(this.updateOwnedItem(item));
     }
 
     // Recover spell slots
@@ -324,12 +323,13 @@ class Actor5e extends Actor {
     }
 
     // Update the actor
-    this.update(update);
+    updatePromises.push(this.update(update));
 
     // Return some update data for logging
     return {
       dhp: dhp,
-      dhd: dhd
+      dhd: dhd,
+      promises: Promise.all(updatePromises)
     }
   }
 
