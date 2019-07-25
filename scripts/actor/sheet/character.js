@@ -243,8 +243,8 @@ class ActorSheet5eCharacter extends ActorSheet5e {
         rest: {
           icon: '<i class="fas fa-bed"></i>',
           label: "Rest",
-          callback: dlg => {
-            let update = this.actor.longRest();
+          callback: async dlg => {
+            const update = await this.actor.longRest();
             let msg = `${this.actor.name} takes a long rest and recovers ${update.dhp} Hit Points and ${update.dhd} Hit Dice.`;
             ChatMessage.create({
               user: game.user._id,
