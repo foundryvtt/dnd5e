@@ -747,14 +747,15 @@ class Actor5e extends Actor {
    */
   rollAbilitySave(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
-        parts = ["@mod"],
+	saveMod = this.data.flags.dnd5e ? this.data.flags.dnd5e.saveMod : 0,
+        parts = ["@mod", "@savemod"],
         flavor = `${abl.label} Saving Throw`;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: options.event,
       parts: parts,
-      data: {mod: abl.save},
+      data: {mod: abl.save, savemod: saveMod},
       title: flavor,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
@@ -2479,7 +2480,14 @@ CONFIG.Actor.characterFlags = {
     section: "Feats",
     type: Number,
     placeholder: "+0"
-  }
+   },
+   "saveMod": {
+     name: "Save Modfier",
+     hint: "Modifier to all saving throws (e.g. 1d4)",
+     section: "Feats",
+     type: String,
+     placeholder: "0"
+    }
 };
 
 
