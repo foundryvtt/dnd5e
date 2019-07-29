@@ -205,9 +205,11 @@ class Dice5e {
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
+   * @param {Number} highlightSuccess d20 roll >= this will be highlighted in green
+   * @param {Number} highlightFailure d20 roll <= this will be highlighted in red 
    */
   static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
-                  fastForward=true, onClose, dialogOptions}) {
+                  fastForward=true, onClose, dialogOptions, highlightSuccess=20, highlightFailure=1}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -227,6 +229,10 @@ class Dice5e {
 
       // Execute the roll and send it to chat
       let roll = new Roll(parts.join("+"), data).roll();
+      if (roll.parts[0].total >= highlightSuccess) {roll.highlightResult = "success"}
+      else if (roll.parts[0].total <= highlightFailure) {roll.highlightResult = "failure"}
+      else {roll.highlightResults = "none"}
+
       roll.toMessage({
         speaker: speaker,
         flavor: flav,
@@ -383,8 +389,9 @@ Hooks.on("renderChatMessage", (message, data, html) => {
   if ( !message.isRoll || !message.roll.parts.length ) return;
   let d = message.roll.parts[0];
   if ( d instanceof Die && d.faces === 20 ) {
-    if (d.total === 20) html.find(".dice-total").addClass("success");
-    else if (d.total === 1) html.find(".dice-total").addClass("failure");
+    html.find(".dice-total").addClass(message.roll.highlightResult);
+//    if (message.roll.highlightResult == "success") html.find(".dice-total").addClass("success");
+//    else if (message.roll.highlightResult == "failure") html.find(".dice-total").addClass("failure");
   }
 });
 
@@ -747,14 +754,14 @@ class Actor5e extends Actor {
    */
   rollAbilitySave(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
-	saveMod = this.data.flags.dnd5e ? this.data.flags.dnd5e.saveMod : 0,
+	      saveMod = this.data.flags.dnd5e ? this.data.flags.dnd5e.saveMod : 0,
         parts = ["@mod", "@savemod"],
         flavor = `${abl.label} Saving Throw`;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: options.event,
-      parts: parts,
+      parts: parts, 
       data: {mod: abl.save, savemod: saveMod},
       title: flavor,
       speaker: ChatMessage.getSpeaker({actor: this}),
@@ -1394,40 +1401,38 @@ class Item5e extends Item {
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
     rollData["proficiency"] = Math.floor((this.data.data.proficient.value || 0) * rollData.attributes.prof.value);
-
+    
     // Call the roll helper utility
-    Dice5e.d20Roll({
-      event: event,
-      parts: parts,
-      data: rollData,
-      template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710,
-      },
-      onClose: (html, parts, data) => {
-        abl = html.find('[name="ability"]').val();
-        data.ability = abl;
-        parts[1] = `@abilities.${abl}.mod`;
-      }
-    }).then(roll => {
-      roll.toMessage({
-        flavor: flavor,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
+	    Dice5e.d20Roll({
+	      event: event,
+	      parts: parts,
+	      data: rollData,
+	      template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
+	      title: title,
+	      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+//	      flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
+	      dialogOptions: {
+		width: 400,
+		top: event.clientY - 80,
+		left: window.innerWidth - 710,
+	      },
+	      onClose: (html, parts, data) => {
+		abl = html.find('[name="ability"]').val();
+		data.ability = abl;
+    parts[1] = `@abilities.${abl}.mod`;
+        }
+	    }).then(roll => {
+        roll.toMessage({
+          flavor: flavor
+        });
       });
-    });
-  }
+    }
 
-  /* -------------------------------------------- */
+	  /* -------------------------------------------- */
 
-  /**
-   * Roll a Feat Attack
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
+	  /**
+	   * Roll a Feat Attack
+	   * Rely upon the Dice5e.d20Roll logic for the core implementation
    */
   rollFeatAttack(event) {
     if ( this.type !== "feat" ) throw "Wrong item type!";
