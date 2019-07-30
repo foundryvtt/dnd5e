@@ -133,8 +133,8 @@
 
                 <ol class="inventory-list directory-list">
                 {{#each actor.inventory as |section sid|}}
-                    <li class="item inventory-header">
-                        <h3 class="item-name">{{section.label}}</h3>
+                    <li class="item flexrow inventory-header">
+                        <h3 class="item-name flexrow">{{section.label}}</h3>
                         <span class="item-quantity">Qty.</span>
                         <span class="item-weight">Wt.</span>
                         {{#if ../owner}}
@@ -144,8 +144,8 @@
                         {{/if}}
                     </li>
                     {{#each section.items as |item iid|}}
-                    <li class="item" data-item-id="{{item.id}}">
-                        <div class="item-name rollable">
+                    <li class="item flexrow" data-item-id="{{item.id}}">
+                        <div class="item-name flexrow rollable">
                             <div class="item-image" style="background-image: url({{item.img}})"></div>
                             <h4>
                                 {{item.name}}
@@ -196,7 +196,7 @@
 
                 <ol class="inventory-list directory-list">
                 {{#each actor.spellbook as |section lvl|}}
-                    <li class="item inventory-header spellbook-header">
+                    <li class="item flexrow inventory-header spellbook-header">
                         <div class="item-name flexrow">
                             <h3>{{section.label}}</h3>
 
@@ -227,8 +227,8 @@
                     </li>
 
                     {{#each section.spells as |item i|}}
-                    <li class="item" data-item-id="{{item.id}}">
-                        <div class="item-name rollable">
+                    <li class="item flexrow" data-item-id="{{item.id}}">
+                        <div class="item-name flexrow rollable">
                             <div class="item-image" style="background-image: url({{item.img}})"></div>
                             <h4>{{item.name}}</h4>
                         </div>
@@ -252,7 +252,7 @@
                     </li>
                     {{/each}}
                 {{else}}
-                    <li class="item inventory-header spellbook-header spellbook-empty">
+                    <li class="item flexrow inventory-header spellbook-header spellbook-empty">
                         {{#if owner}}
                         <div class="item-controls">
                             <a class="item-control item-create" title="Create Spell" data-type="spell"
@@ -267,7 +267,7 @@
             <!-- FEATS -->
             <div class="tab feats" data-group="primary" data-tab="feats">
                 <ol class="feats-list inventory-list directory-list">
-                    <li class="item inventory-header">
+                    <li class="item flexrow inventory-header">
                         <div class="item-name flexrow">
                             <h3>Ability Name</h3>
                         </div>
@@ -282,8 +282,8 @@
                     </li>
 
                     {{#each actor.feats as |item i|}}
-                    <li class="item" data-item-id="{{item.id}}">
-                        <div class="item-name rollable">
+                    <li class="item flexrow" data-item-id="{{item.id}}">
+                        <div class="item-name flexrow rollable">
                             <div class="item-image" style="background-image: url({{item.img}})"></div>
                             <h4>{{item.name}}{{#if item.data.uses.max}} <span class="feat-uses">({{item.data.uses.value}} / {{item.data.uses.max}}){{/if}}</span></h4>
                         </div>

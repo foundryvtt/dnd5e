@@ -1,7 +1,7 @@
 <div class="primary-attributes">
     <div class="attribute">
         <h4 class="attribute-name">Health</h4>
-        <div class="attribute-value">
+        <div class="attribute-value flexrow">
             <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
                    data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
             <span class="flex0"> / </span>
@@ -18,7 +18,7 @@
 
     <div class="attribute">
         <h4 class="attribute-name">Armor Class</h4>
-        <div class="attribute-value">
+        <div class="attribute-value flexrow">
             <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
                    data-dtype="{{data.attributes.ac.type}}" placeholder="10"/>
         </div>
@@ -29,7 +29,7 @@
 
     <div class="attribute">
         <h4 class="attribute-name">Proficiency</h4>
-        <div class="attribute-value">
+        <div class="attribute-value flexrow">
             <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
         </div>
         <footer class="attribute-footer">
@@ -39,7 +39,7 @@
 
     <div class="attribute">
         <h4 class="attribute-name">Initiative</h4>
-        <div class="attribute-value">
+        <div class="attribute-value flexrow">
             <span>{{numberFormat data.attributes.init.mod decimals=0 sign=true}}</span>
         </div>
         <footer class="attribute-footer">
@@ -54,7 +54,7 @@
 <div class="primary-attributes">
     <div class="attribute">
         <h4 class="attribute-name">Hit Dice</h4>
-        <div class="attribute-value">
+        <div class="attribute-value flexrow">
             <input name="data.attributes.hd.value" type="text" placeholder="1"
                    value="{{data.attributes.hd.value}}" data-dtype="{{data.attributes.hd.type}}"/>
             <span class="flex0"> / </span>
@@ -71,7 +71,7 @@
             <input name="data.resources.primary.label" type="text" class="resource-label" placeholder="Primary"
                    value="{{data.resources.primary.label}}" data-dtype="String" />
         </h4>
-       <div class="attribute-value">
+       <div class="attribute-value flexrow">
            <input name="data.resources.primary.value" type="text" value="{{data.resources.primary.value}}"
                   data-dtype="Number" placeholder="0"/>
            <span class="flex0"> / </span>
@@ -93,7 +93,7 @@
             <input name="data.resources.secondary.label" type="text" class="resource-label"
                    placeholder="Secondary" value="{{data.resources.secondary.label}}" data-dtype="String"/>
         </h4>
-       <div class="attribute-value">
+       <div class="attribute-value flexrow">
            <input name="data.resources.secondary.value" type="text" value="{{data.resources.secondary.value}}"
                   data-dtype="Number" placeholder="0"/>
            <span class="flex0"> / </span>
@@ -112,7 +112,7 @@
 
     <div class="attribute">
         <h4 class="attribute-name">Speed</h4>
-        <div class="attribute-value">
+        <div class="attribute-value flexrow">
             <span class="flex0">  </span>
             <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
                    data-dtype="{{data.attributes.speed.type}}" placeholder="0"/>

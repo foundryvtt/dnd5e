@@ -53,7 +53,7 @@
     }
   }
 
-  span, label {
+  label {
     display: block;
   }
   .mce-panel span {
@@ -321,7 +321,6 @@
       }
 
       .attribute-value {
-        .flexrow();
         height: 32px;
         .nodesto();
         font-size: 20px;
@@ -736,13 +735,11 @@
 
     /* Inventory Item */
     .item {
-      .flexrow();
       line-height: 24px;
       padding: 0;
       border-bottom: 1px solid @borderLight;
 
       .item-name {
-        .flexrow();
         cursor: pointer;
 
         .item-image {
@@ -815,6 +812,7 @@
       background: rgba(0, 0, 0, 0.05);
 
       h3 {
+        flex: 2;
         font-size: 1em;
         margin: 0;
         padding-left: 32px;
