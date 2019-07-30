@@ -113,7 +113,6 @@
   border: none;
   box-shadow: none;
 }
-.dnd5e.sheet form span,
 .dnd5e.sheet form label {
   display: block;
 }
@@ -406,10 +405,6 @@
   right: 2px;
 }
 .dnd5e.actor .primary-attributes .attribute .attribute-value {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   height: 32px;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 18px;
@@ -417,9 +412,6 @@
   font-size: 20px;
   line-height: 32px;
   text-align: center;
-}
-.dnd5e.actor .primary-attributes .attribute .attribute-value > * {
-  flex: 1;
 }
 .dnd5e.actor .primary-attributes .attribute .attribute-footer {
   height: 16px;
@@ -790,27 +782,13 @@
   /* Inventory Header */
 }
 .dnd5e.actor .inventory-list .item {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   line-height: 24px;
   padding: 0;
   border-bottom: 1px solid #CCC;
   /* Item Dropdown Summary */
 }
-.dnd5e.actor .inventory-list .item > * {
-  flex: 1;
-}
 .dnd5e.actor .inventory-list .item .item-name {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   cursor: pointer;
-}
-.dnd5e.actor .inventory-list .item .item-name > * {
-  flex: 1;
 }
 .dnd5e.actor .inventory-list .item .item-name .item-image {
   flex: 0 0 24px;
@@ -870,6 +848,7 @@
   background: rgba(0, 0, 0, 0.05);
 }
 .dnd5e.actor .inventory-list .inventory-header h3 {
+  flex: 2;
   font-size: 1em;
   margin: 0;
   padding-left: 32px;
