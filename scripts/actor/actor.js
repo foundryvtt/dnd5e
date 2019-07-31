@@ -15,9 +15,10 @@ class Actor5e extends Actor {
     else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
     // Ability modifiers and saves
+    let saveBonus = getProperty(actorData.flags, "dnd5e.saveBonus") || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value);
+      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value) + saveBonus;
     }
 
     // Skill modifiers
@@ -209,13 +210,21 @@ class Actor5e extends Actor {
   rollAbilitySave(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
         parts = ["@mod"],
+        data = {mod: abl.save},
         flavor = `${abl.label} Saving Throw`;
+
+    // Support global save bonus
+    const saveBonus = this.data.flags.dnd5e && this.data.flags.dnd5e.saveBonus;
+    if ( Number.isFinite(saveBonus) && parseInt(saveBonus) !== 0 ) {
+      parts.push("@savebonus");
+      data["savebonus"] = saveBonus;
+    }
 
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: options.event,
       parts: parts,
-      data: {mod: abl.save},
+      data: data,
       title: flavor,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
