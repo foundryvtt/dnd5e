@@ -754,15 +754,23 @@ class Actor5e extends Actor {
    */
   rollAbilitySave(abilityId, options={}) {
     let abl = this.data.data.abilities[abilityId],
-	      saveMod = this.data.flags.dnd5e ? this.data.flags.dnd5e.saveMod : 0,
-        parts = ["@mod", "@savemod"],
-        flavor = `${abl.label} Saving Throw`;
+    rollData = {mod: abl.save},
+    rollParts = ["@mod"],
+    flavor = `${abl.label} Saving Throw`;
+
+    // Add a savveMod to the roll if present
+    if (this.data.flags.dnd5e
+         && this.data.flags.dnd5e.saveMod 
+         && this.data.flags.dnd5e.saveMod != 0) {
+      rollData.savemod = this.data.flags.dnd5e.saveMod;
+      rollParts.push("@savemod");
+    }
 
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: options.event,
-      parts: parts, 
-      data: {mod: abl.save, savemod: saveMod},
+      parts: rollParts, 
+      data: rollData,
       title: flavor,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
