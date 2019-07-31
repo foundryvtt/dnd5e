@@ -115,6 +115,13 @@ CONFIG.Actor.characterFlags = {
     section: "Feats",
     type: Boolean
   },
+  "saveBonus": {
+    name: "Saving Throw Bonus",
+    hint: "Bonus modifier to all saving throws (e.g. +1 or 1d4)",
+    section: "Feats",
+    type: Number,
+    placeholder: "+0"
+  },
   "spellDCBonus": {
     name: "Spell DC Bonus",
     hint: "Modifies normal spellcasting DC.",
