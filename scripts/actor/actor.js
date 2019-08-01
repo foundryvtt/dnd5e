@@ -17,8 +17,13 @@ class Actor5e extends Actor {
     // Ability modifiers and saves
     let saveBonus = getProperty(actorData.flags, "dnd5e.saveBonus") || 0;
     for (let abl of Object.values(data.abilities)) {
-      abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value) + saveBonus;
+      // do not overwrite mod/save, if already calculated and valid numbers
+      if (!abl.hasOwnProperty('mod') || !Number.isInteger(abl.mod)) {
+        abl.mod = Math.floor((abl.value - 10) / 2);
+      }
+      if (!abl.hasOwnProperty('save') || !Number.isInteger(abl.save)) {
+        abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value) + saveBonus;
+      }
     }
 
     // Skill modifiers
