@@ -128,7 +128,7 @@
   height: 32px;
 }
 .dnd5e.sheet form .sheet-tabs > .item {
-  line-height: 24px;
+  line-height: 28px;
   padding: 4px 8px 0;
 }
 .dnd5e.sheet form .sheet-tabs > .item.active {
@@ -728,6 +728,8 @@
 }
 .dnd5e.actor .biography .editor {
   height: 380px;
+}
+.dnd5e.actor .biography .editor .editor-content {
   padding-left: 8px;
 }
 .dnd5e.actor.npc-sheet .biography .editor {
@@ -1041,9 +1043,6 @@
   flex: 1;
   height: 350px;
 }
-.dnd5e.item form .tab {
-  padding-left: 10px;
-}
 /* ----------------------------------------- */
 /*  Item Sheet Style
 /* ----------------------------------------- */
@@ -1072,8 +1071,9 @@
   flex: 1;
 }
 .dnd5e.item form .sheet-sidebar .sidebar-summary {
-  flex: 0 0 28px;
-  line-height: 28px;
+  flex: 0 0 32px;
+  line-height: 24px;
+  padding-top: 6px;
   margin: 0 0 0.5em;
   text-align: center;
   border-bottom: 1px solid #CCC;
@@ -1109,6 +1109,8 @@
   text-align: right;
 }
 .dnd5e.item form .sheet-tabs {
+  height: 32px;
+  line-height: 32px;
   border-bottom: 1px solid #CCC;
 }
 .dnd5e.item form .sheet-tabs .active {
@@ -1116,6 +1118,9 @@
 }
 .dnd5e.item form .editor {
   height: 100%;
+}
+.dnd5e.item form .editor .editor-content {
+  padding-left: 8px;
 }
 .dnd5e.item form .item-details {
   padding: 8px 8px 0;

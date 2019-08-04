@@ -249,11 +249,11 @@ class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   _onDragItemStart(event) {
-    let itemId = Number(event.currentTarget.getAttribute("data-item-id"));
+    const itemId = Number(event.currentTarget.getAttribute("data-item-id"));
+    const item = this.actor.getOwnedItem(itemId);
 	  event.dataTransfer.setData("text/plain", JSON.stringify({
       type: "Item",
-      actorId: this.actor._id,
-      id: itemId
+      data: item.data
     }));
   }
 

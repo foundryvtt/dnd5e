@@ -117,5 +117,6 @@ class ItemSheet5e extends ItemSheet {
 // Activate global listeners
 Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
 
-// Override CONFIG
-CONFIG.Item.sheetClass = ItemSheet5e;
+// Register Item Sheet
+Items.unregisterSheet("core", ItemSheet);
+Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
