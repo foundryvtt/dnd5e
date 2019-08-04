@@ -1,4 +1,5 @@
 @import "variables.less";
+@tabHeight: 32px;
 
 /* ----------------------------------------- */
 /*  Item Sheet Structure
@@ -27,10 +28,6 @@
       flex: 1;
       height: 350px;
     }
-  }
-
-  .tab {
-    padding-left: 10px;
   }
 }
 
@@ -67,7 +64,8 @@
 
     .sidebar-summary {
       flex: 0 0 @tabHeight;
-      line-height: @tabHeight;
+      line-height: 24px;
+      padding-top: 6px;
       margin: 0 0 0.5em;
       text-align: center;
       border-bottom: 1px solid @borderLight;
@@ -108,6 +106,8 @@
 
   // Sheet Tabs
   .sheet-tabs {
+    height: @tabHeight;
+    line-height: @tabHeight;
     border-bottom: 1px solid @borderLight;
     .active { text-decoration: underline; }
   }
@@ -115,6 +115,9 @@
   // Description Tab
   .editor {
     height: 100%;
+    .editor-content {
+      padding-left: 8px;
+    }
   }
 
   // Details Tab

@@ -312,7 +312,7 @@ class Dice5e {
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if ( crit ) {
         console.log(data);
-        let add = actor && actor.getFlag("dnd5e", "savageAttacks") ? 1 : 0;
+        let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
         roll.alter(add, mult);
         flav = `${title} (Critical)`;
@@ -1249,8 +1249,9 @@ class ItemSheet5e extends ItemSheet {
 // Activate global listeners
 Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
 
-// Override CONFIG
-CONFIG.Item.sheetClass = ItemSheet5e;
+// Register Item Sheet
+Items.unregisterSheet("core", ItemSheet);
+Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
@@ -1983,11 +1984,11 @@ class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   _onDragItemStart(event) {
-    let itemId = Number(event.currentTarget.getAttribute("data-item-id"));
+    const itemId = Number(event.currentTarget.getAttribute("data-item-id"));
+    const item = this.actor.getOwnedItem(itemId);
 	  event.dataTransfer.setData("text/plain", JSON.stringify({
       type: "Item",
-      actorId: this.actor._id,
-      id: itemId
+      data: item.data
     }));
   }
 
@@ -2484,7 +2485,7 @@ CONFIG.Actor.characterFlags = {
   },
   "saveBonus": {
     name: "Saving Throw Bonus",
-    hint: "Bonus modifier to all saving throws (e.g. +1 or 1d4)",
+    hint: "Bonus modifier to all saving throws (e.g. +1)",
     section: "Feats",
     type: Number,
     placeholder: "+0"
