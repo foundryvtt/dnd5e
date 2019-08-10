@@ -92,7 +92,8 @@
         },
         "biography": {
           "type": "String",
-          "label": "Biography"
+          "label": "Biography",
+          "value": ""
         },
         "class": {
           "type": "String",
@@ -433,7 +434,8 @@
     "data": {
       "description": {
         "type": "String",
-        "label": "Description"
+        "label": "Description",
+        "value": ""
       },
       "source": {
         "type": "String",
