@@ -1912,6 +1912,9 @@ class ActorSheet5e extends ActorSheet {
     // Trait Selector
     html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
 
+    // Configure Special Flags
+    html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+
     /* -------------------------------------------- */
     /*  Inventory
     /* -------------------------------------------- */
@@ -1962,6 +1965,16 @@ class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle click events for the Traits tab button to configure special Character Flags
+   */
+  _onConfigureFlags(event) {
+    event.preventDefault();
+    new ActorSheetFlags(this.actor).render(true);
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -2267,19 +2280,6 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
-    
-    // Configure Special Flags
-    html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle click events for the Traits tab button to configure special Character Flags
-   */
-  _onConfigureFlags(event) {
-    event.preventDefault();
-    new ActorSheetFlags(this.actor).render(true);
   }
 
   /* -------------------------------------------- */

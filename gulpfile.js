@@ -6,9 +6,9 @@ const less = require('gulp-less');
 /*  Concatenate JavaScript
 /* ----------------------------------------- */
 
-const DND5EScripts = ["scripts/**/*.js"];
+const DND5E_SCRIPTS = ["scripts/**/*.js"];
 function concatScripts() {
-  return gulp.src(DND5EScripts)
+  return gulp.src(DND5E_SCRIPTS)
     .pipe(concat('dnd5e.js'))
     .pipe(gulp.dest('./'));
 }
@@ -18,7 +18,7 @@ const js = gulp.series(concatScripts);
 /*  Compile LESS
 /* ----------------------------------------- */
 
-const DND5eLess = ["less/*.less"];
+const DND5E_LESS = ["less/*.less"];
 function compileLESS() {
   return gulp.src("less/dnd5e.less")
     .pipe(less())
@@ -31,8 +31,8 @@ const css = gulp.series(compileLESS);
 /* ----------------------------------------- */
 
 function watchUpdates() {
-  const targets = DND5EScripts.concat(DND5eLess);
-  gulp.watch(targets, gulp.parallel(js, css));
+  gulp.watch(DND5E_SCRIPTS, js);
+  gulp.watch(DND5E_LESS, css);
 }
 
 /* ----------------------------------------- */

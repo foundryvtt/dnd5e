@@ -177,6 +177,9 @@ class ActorSheet5e extends ActorSheet {
     // Trait Selector
     html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
 
+    // Configure Special Flags
+    html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+
     /* -------------------------------------------- */
     /*  Inventory
     /* -------------------------------------------- */
@@ -227,6 +230,16 @@ class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle click events for the Traits tab button to configure special Character Flags
+   */
+  _onConfigureFlags(event) {
+    event.preventDefault();
+    new ActorSheetFlags(this.actor).render(true);
+  }
+
   /* -------------------------------------------- */
 
   /**

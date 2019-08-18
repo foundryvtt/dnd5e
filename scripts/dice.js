@@ -125,7 +125,6 @@ class Dice5e {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if ( crit ) {
-        console.log(data);
         let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
         roll.alter(add, mult);
