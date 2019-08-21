@@ -137,37 +137,29 @@
   }
 
   // Consumable details
-  .consumable-details {
-    flex: 0 0 24px;
-    label {
-      font-weight: bold;
-    }
+  .consumable-charges {
     input {
-      flex: 0 0 24px;
-      margin-right: 6px;
-      text-align: right;
+      flex: 0 0 36px;
+      text-align: center;
     }
-    span {
+    .flex0 {
+      flex: 0;
+      margin: 0 6px;
       line-height: 24px;
     }
-    .max-charges {
-      flex: 0 0 16px;
-      text-align: center;
+  }
+  .consumable-details {
+    label {
+      float: left;
+      font-weight: bold;
+    }
+    span {
+      display: block;
+      float: right;
+      text-align: right;
     }
   }
 
-  .consumable-charges {
-    label {
-      flex: 0 0 144px;
-    }
-    input {
-      flex: 0 0 64px;
-      text-align: center;
-    }
-    span.flex0 {
-      line-height: 24px;
-    }
-  }
 
   // Tool details
   .tool-details {

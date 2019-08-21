@@ -1135,33 +1135,23 @@
   font-size: 12px;
   height: 24px;
 }
-.dnd5e.item form .consumable-details {
-  flex: 0 0 24px;
+.dnd5e.item form .consumable-charges input {
+  flex: 0 0 36px;
+  text-align: center;
+}
+.dnd5e.item form .consumable-charges .flex0 {
+  flex: 0;
+  margin: 0 6px;
+  line-height: 24px;
 }
 .dnd5e.item form .consumable-details label {
+  float: left;
   font-weight: bold;
 }
-.dnd5e.item form .consumable-details input {
-  flex: 0 0 24px;
-  margin-right: 6px;
-  text-align: right;
-}
 .dnd5e.item form .consumable-details span {
-  line-height: 24px;
-}
-.dnd5e.item form .consumable-details .max-charges {
-  flex: 0 0 16px;
-  text-align: center;
-}
-.dnd5e.item form .consumable-charges label {
-  flex: 0 0 144px;
-}
-.dnd5e.item form .consumable-charges input {
-  flex: 0 0 64px;
-  text-align: center;
-}
-.dnd5e.item form .consumable-charges span.flex0 {
-  line-height: 24px;
+  display: block;
+  float: right;
+  text-align: right;
 }
 .dnd5e.item form .tool-details {
   border-top: 1px solid #CCC;
