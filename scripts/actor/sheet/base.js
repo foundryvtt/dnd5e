@@ -261,17 +261,6 @@ class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _onDragItemStart(event) {
-    const itemId = Number(event.currentTarget.getAttribute("data-item-id"));
-    const item = this.actor.getOwnedItem(itemId);
-	  event.dataTransfer.setData("text/plain", JSON.stringify({
-      type: "Item",
-      data: item.data
-    }));
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
    * @private

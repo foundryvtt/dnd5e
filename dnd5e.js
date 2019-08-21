@@ -311,7 +311,6 @@ class Dice5e {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if ( crit ) {
-        console.log(data);
         let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
         roll.alter(add, mult);
@@ -1992,17 +1991,6 @@ class ActorSheet5e extends ActorSheet {
     // Update the field value and save the form
     field.val(newLevel);
     this._onSubmit(event);
-  }
-
-  /* -------------------------------------------- */
-
-  _onDragItemStart(event) {
-    const itemId = Number(event.currentTarget.getAttribute("data-item-id"));
-    const item = this.actor.getOwnedItem(itemId);
-	  event.dataTransfer.setData("text/plain", JSON.stringify({
-      type: "Item",
-      data: item.data
-    }));
   }
 
   /* -------------------------------------------- */

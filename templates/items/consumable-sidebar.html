@@ -21,9 +21,7 @@
     <li class="tag">{{lookup consumableTypes data.consumableType.value}}</li>
 </ol>
 
-<div class="form-group consumable-details">
+<div class="consumable-details">
     <label>{{data.charges.label}}</label>
-    <input type="text" name="data.charges.value" value="{{data.charges.value}}" data-dtype="{{data.charges.type}}"/>
-    <span class="flex0">/</span>
-    <span class="max-charges">{{data.charges.max}}</span>
+    <span>{{data.charges.value}} / {{data.charges.max}}</span>
 </div>
