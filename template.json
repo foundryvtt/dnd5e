@@ -677,21 +677,24 @@
         "type": "String",
         "label": "Saving Throw"
       },
-      "concentration": {
-        "type": "Boolean",
-        "label": "Requires Concentration"
-      },
-      "ritual": {
-        "type": "Boolean",
-        "label": "Cast as Ritual"
-      },
       "ability": {
         "type": "String",
         "label": "Spellcasting Ability"
       },
+      "concentration": {
+        "type": "Boolean",
+        "label": "Requires Concentration",
+        "value": false
+      },
+      "ritual": {
+        "type": "Boolean",
+        "label": "Cast as Ritual",
+        "value": false
+      },
       "prepared": {
-        "type": "String",
-        "label": "Prepared Spell"
+        "type": "Boolean",
+        "label": "Prepared Spell",
+        "value": false
       }
     },
     "feat": {
