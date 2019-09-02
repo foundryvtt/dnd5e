@@ -359,7 +359,7 @@ class Actor5e extends Actor {
     for ( let t of canvas.tokens.controlled ) {
       let a = t.actor,
           hp = a.data.data.attributes.hp,
-          tmp = parseInt(hp.temp),
+          tmp = parseInt(hp.temp) || 0,
           dt = value > 0 ? Math.min(tmp, value) : 0;
       promises.push(t.actor.update({
         "data.attributes.hp.temp": tmp - dt,
