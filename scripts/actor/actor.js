@@ -28,7 +28,10 @@ class Actor5e extends Actor {
     }
 
     // Attributes
+    let addInitiativeHalfProf = (getProperty(actorData.flags, "dnd5e.initiativeHalfProf") && Math.floor(0.5 * data.attributes.prof.value)) || 0;
+    let addInitiativeAlert = (getProperty(actorData.flags, "dnd5e.initiativeAlert") && 5) || 0;
     data.attributes.init.mod = data.abilities.dex.mod + (data.attributes.init.value || 0);
+    data.attributes.init.effectiveMod = data.attributes.init.mod + addInitiativeHalfProf + addInitiativeAlert;
     data.attributes.ac.min = 10 + data.abilities.dex.mod;
 
     // Spell DC
