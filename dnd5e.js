@@ -207,7 +207,7 @@ class Dice5e {
    * @param {Object} dialogOptions  Modal dialog options
    */
   static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
-                  fastForward=true, onClose, dialogOptions}) {
+                  fastForward=true, onClose, dialogOptions, critical = 20, fumble = 1}) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
@@ -225,8 +225,11 @@ class Dice5e {
       // Don't include situational bonus unless it is defined
       if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
-      // Execute the roll and send it to chat
       let roll = new Roll(parts.join("+"), data).roll();
+      roll.parts[0].options.critical = critical;
+      roll.parts[0].options.fumble = fumble;
+
+      // Execute the roll and send it to chat
       roll.toMessage({
         speaker: speaker,
         flavor: flav,
@@ -382,8 +385,8 @@ Hooks.on("renderChatMessage", (message, data, html) => {
   if ( !message.isRoll || !message.roll.parts.length ) return;
   let d = message.roll.parts[0];
   if ( d instanceof Die && d.faces === 20 ) {
-    if (d.total === 20) html.find(".dice-total").addClass("success");
-    else if (d.total === 1) html.find(".dice-total").addClass("failure");
+    if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
+    else if (d.total <= (d.options.Funble || 1)) html.find(".dice-total").addClass("failure");
   }
 });
 
@@ -897,7 +900,7 @@ class Actor5e extends Actor {
     for ( let t of canvas.tokens.controlled ) {
       let a = t.actor,
           hp = a.data.data.attributes.hp,
-          tmp = parseInt(hp.temp) || 0,
+          tmp = parseInt(hp.temp),
           dt = value > 0 ? Math.min(tmp, value) : 0;
       promises.push(t.actor.update({
         "data.attributes.hp.temp": tmp - dt,
@@ -1208,6 +1211,12 @@ class Item5e extends Item {
     rollData.item = itemData;
     if ( !itemData.proficient.value ) parts.pop();
 
+    let criticalRoll = 20;
+    if (this.actor.data.items) {
+      if (this.actor.data.items.find(p => {return p.name === "Improved Critical"})) criticalRoll = 19;
+      if (this.actor.data.items.find(p => {return p.name === "Superior Critical"})) criticalRoll = 18;
+    }
+
     // TODO: Incorporate Elven Accuracy
 
     // Call the roll helper utility
@@ -1222,7 +1231,8 @@ class Item5e extends Item {
         width: 400,
         top: event.clientY - 80,
         left: window.innerWidth - 710
-      }
+      },
+      critical: criticalRoll
     });
   }
 
@@ -1423,9 +1433,7 @@ class Item5e extends Item {
       }
     }).then(roll => {
       roll.toMessage({
-        flavor: flavor,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
+        flavor: flavor
       });
     });
   }
