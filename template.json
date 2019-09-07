@@ -492,13 +492,20 @@
         "type": "Boolean",
         "label": "Proficient"
       },
+      "ability": {
+        "type": "String",
+        "label": "Offensive Ability"
+      },
       "attuned": {
         "type": "Boolean",
         "label": "Attuned"
       },
-      "ability": {
-        "type": "String",
-        "label": "Offensive Ability"
+      "equipped": {
+        "type": "Boolean",
+        "label": "Equipped"
+      },
+      "rarity": {
+        "label": "Rarity"
       }
     },
     "equipment": {
@@ -542,6 +549,9 @@
       "equipped": {
         "type": "Boolean",
         "label": "Equipped"
+      },
+      "rarity": {
+        "label": "Rarity"
       }
     },
     "consumable": {
@@ -577,6 +587,17 @@
       "autoDestroy": {
         "type": "Boolean",
         "label": "Destroy on Empty"
+      },
+      "attuned": {
+        "type": "Boolean",
+        "label": "Attuned"
+      },
+      "equipped": {
+        "type": "Boolean",
+        "label": "Equipped"
+      },
+      "rarity": {
+        "label": "Rarity"
       }
     },
     "tool": {
@@ -615,6 +636,17 @@
       "price": {
         "type": "String",
         "label": "Price"
+      },
+      "attuned": {
+        "type": "Boolean",
+        "label": "Attuned"
+      },
+      "equipped": {
+        "type": "Boolean",
+        "label": "Equipped"
+      },
+      "rarity": {
+        "label": "Rarity"
       }
     },
     "class": {

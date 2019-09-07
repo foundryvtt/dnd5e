@@ -9,13 +9,14 @@ class Actor5e extends Actor {
   prepareData(actorData) {
     actorData = super.prepareData(actorData);
     const data = actorData.data;
+    const flags = actorData.flags;
 
     // Prepare Character data
     if ( actorData.type === "character" ) this._prepareCharacterData(data);
     else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
     // Ability modifiers and saves
-    let saveBonus = getProperty(actorData.flags, "dnd5e.saveBonus") || 0;
+    let saveBonus = getProperty(flags, "dnd5e.saveBonus") || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value) + saveBonus;
@@ -27,13 +28,19 @@ class Actor5e extends Actor {
       skl.mod = data.abilities[skl.ability].mod + Math.floor(skl.value * data.attributes.prof.value);
     }
 
-    // Attributes
-    data.attributes.init.mod = data.abilities.dex.mod + (data.attributes.init.value || 0);
+    // Initiative
+    const init = data.attributes.init;
+    init.mod = data.abilities.dex.mod
+    init.prof = getProperty(flags, "dnd5e.initiativeHalfProf") ? Math.floor(0.5 * data.attributes.prof.value) : 0;
+    init.bonus = init.value + (getProperty(flags, "dnd5e.initiativeAlert") ? 5 : 0);
+    init.total = init.mod + init.prof + init.bonus;
+
+    // Armor Class formula // TODO: Allow this to be configurable in the future
     data.attributes.ac.min = 10 + data.abilities.dex.mod;
 
     // Spell DC
     let spellAbl = data.attributes.spellcasting.value || "int";
-    let bonusDC = getProperty(actorData.flags, "dnd5e.spellDCBonus") || 0;
+    let bonusDC = getProperty(flags, "dnd5e.spellDCBonus") || 0;
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod + bonusDC;
 
     // TODO: Migrate trait storage format

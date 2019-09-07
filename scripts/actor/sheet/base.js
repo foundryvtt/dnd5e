@@ -166,7 +166,7 @@ class ActorSheet5e extends ActorSheet {
     });
 
     // Toggle Skill Proficiency
-    html.find('.skill-proficiency').click(ev => this._onCycleSkillProficiency(ev));
+    html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
     // Roll Skill Checks
     html.find('.skill-name').click(ev => {
@@ -244,18 +244,26 @@ class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle cycling proficiency in a Skill
+   * @param {Event} event   A click or contextmenu event which triggered the handler
    * @private
    */
   _onCycleSkillProficiency(event) {
     event.preventDefault();
-    let field = $(event.currentTarget).siblings('input[type="hidden"]');
-    let level = parseFloat(field.val());
+    const field = $(event.currentTarget).siblings('input[type="hidden"]');
+
+    // Get the current level and the array of levels
+    const level = parseFloat(field.val());
     const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(level),
-        newLevel = levels[(idx === levels.length - 1) ? 0 : idx + 1];
+    let idx = levels.indexOf(level);
+
+    // Toggle next level - forward on click, backwards on right
+    if ( event.type === "click" ) {
+      field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
+    } else if ( event.type === "contextmenu" ) {
+      field.val(levels[(idx === 0) ? levels.length - 1 : idx - 1]);
+    }
 
     // Update the field value and save the form
-    field.val(newLevel);
     this._onSubmit(event);
   }
 

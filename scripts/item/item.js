@@ -109,6 +109,11 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Render a chat card for Spell type data
+   * @return {Object}
+   * @private
+   */
   _spellChatData() {
     const data = duplicate(this.data.data),
           ad = this.actor.data.data;
@@ -127,16 +132,18 @@ class Item5e extends Item {
     const props = [
       CONFIG.spellSchools[data.school.value],
       CONFIG.spellLevels[data.level.value],
-      data.components.value + " Components",
+      data.components.value,
       data.target.value,
+      data.range.value,
       data.time.value,
       data.duration.value,
       data.concentration.value ? "Concentration" : null,
       data.ritual.value ? "Ritual" : null
     ];
-    data.properties = props.filter(p => p !== null);
+    data.properties = props.filter(p => !!p);
     return data;
   }
+
 
   /* -------------------------------------------- */
 
@@ -190,6 +197,9 @@ class Item5e extends Item {
     rollData.item = itemData;
     if ( !itemData.proficient.value ) parts.pop();
 
+    // Allow for expanded critical range
+    let critThreshold = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
+
     // TODO: Incorporate Elven Accuracy
 
     // Call the roll helper utility
@@ -200,6 +210,7 @@ class Item5e extends Item {
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      critical: critThreshold,
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -403,13 +414,7 @@ class Item5e extends Item {
         data.ability = abl;
         parts[1] = `@abilities.${abl}.mod`;
       }
-    }).then(roll => {
-      roll.toMessage({
-        flavor: flavor,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
-      });
-    });
+    }).then(roll => roll.toMessage({flavor}));
   }
 
   /* -------------------------------------------- */
