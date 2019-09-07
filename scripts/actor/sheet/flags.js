@@ -66,9 +66,10 @@ class ActorSheetFlags extends BaseEntitySheet {
     // Iterate over the flags which may be configured
     for ( let [k, v] of Object.entries(CONFIG.Actor.characterFlags) ) {
       if ( [undefined, null, "", false].includes(formData[k]) ) delete flags[k];
+      else if ( (v.type === Number) && (formData[k] === 0) ) delete flags[k];
       else flags[k] = formData[k];
     }
-
+    
     // Set the new flags in bulk
     actor.update({'flags.dnd5e': flags});
   }
@@ -79,6 +80,13 @@ class ActorSheetFlags extends BaseEntitySheet {
 
 
 CONFIG.Actor.characterFlags = {
+  "weaponCriticalThreshold": {
+    name: "Weapon Critical Hit Threshold",
+    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
+    section: "Feats",
+    type: Number,
+    placeholder: 20
+  },
   "powerfulBuild": {
     name: "Powerful Build",
     hint: "Provides increased carrying capacity.",

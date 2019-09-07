@@ -17,15 +17,17 @@ class Dice5e {
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
    * @param {Boolean} situational   Allow for an arbitrary situational bonus field
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
+   * @param {Number} critical       The value of d20 result which represents a critical success
+   * @param {Number} fumble         The value of d20 result which represents a critical failure
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
   static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
-                  fastForward=true, onClose, dialogOptions}) {
+                  fastForward=true, critical=20, fumble=1, onClose, dialogOptions, }) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
-    let roll = () => {
+    let roll = (parts, adv) => {
       let flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if (adv === 1) {
         parts[0] = ["2d20kh"];
@@ -39,8 +41,15 @@ class Dice5e {
       // Don't include situational bonus unless it is defined
       if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
-      // Execute the roll and send it to chat
+      // Execute the roll
       let roll = new Roll(parts.join("+"), data).roll();
+
+      // Flag critical thresholds
+      let d20 = roll.parts[0];
+      d20.options.critical = critical;
+      d20.options.fumble = fumble;
+
+      // Convert the roll to a chat message
       roll.toMessage({
         speaker: speaker,
         flavor: flav,
@@ -49,17 +58,11 @@ class Dice5e {
     };
 
     // Modify the roll and handle fast-forwarding
-    let adv = 0;
     parts = ["1d20"].concat(parts);
-    if ( event.shiftKey ) return roll();
-    else if ( event.altKey ) {
-      adv = 1;
-      return roll();
-    }
-    else if ( event.ctrlKey || event.metaKey ) {
-      adv = -1;
-      return roll();
-    } else parts = parts.concat(["@bonus"]);
+    if ( event.shiftKey ) return roll(parts, 0);
+    else if ( event.altKey ) return roll(parts, 1);
+    else if ( event.ctrlKey || event.metaKey ) return roll(parts, -1);
+    else parts = parts.concat(["@bonus"]);
 
     // Render modal dialog
     template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
@@ -121,10 +124,10 @@ class Dice5e {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
-    let roll = () => {
+    let roll = crit => {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
-      if ( crit ) {
+      if ( crit === true ) {
         let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
         roll.alter(add, mult);
@@ -143,12 +146,7 @@ class Dice5e {
     };
 
     // Modify the roll and handle fast-forwarding
-    let crit = 0;
-    if ( event.shiftKey || event.ctrlKey || event.metaKey )  return roll();
-    else if ( event.altKey ) {
-      crit = 1;
-      return roll();
-    }
+    if ( event.shiftKey || event.ctrlKey || event.metaKey || event.altKey )  return roll(event.altKey);
     else parts = parts.concat(["@bonus"]);
 
     // Construct dialog data
@@ -196,7 +194,7 @@ Hooks.on("renderChatMessage", (message, data, html) => {
   if ( !message.isRoll || !message.roll.parts.length ) return;
   let d = message.roll.parts[0];
   if ( d instanceof Die && d.faces === 20 ) {
-    if (d.total === 20) html.find(".dice-total").addClass("success");
-    else if (d.total === 1) html.find(".dice-total").addClass("failure");
+    if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
+    else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
   }
 });

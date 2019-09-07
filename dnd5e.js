@@ -203,15 +203,17 @@ class Dice5e {
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
    * @param {Boolean} situational   Allow for an arbitrary situational bonus field
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
+   * @param {Number} critical       The value of d20 result which represents a critical success
+   * @param {Number} fumble         The value of d20 result which represents a critical failure
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
   static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
-                  fastForward=true, onClose, dialogOptions}) {
+                  fastForward=true, critical=20, fumble=1, onClose, dialogOptions, }) {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
-    let roll = () => {
+    let roll = (parts, adv) => {
       let flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if (adv === 1) {
         parts[0] = ["2d20kh"];
@@ -225,8 +227,15 @@ class Dice5e {
       // Don't include situational bonus unless it is defined
       if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
-      // Execute the roll and send it to chat
+      // Execute the roll
       let roll = new Roll(parts.join("+"), data).roll();
+
+      // Flag critical thresholds
+      let d20 = roll.parts[0];
+      d20.options.critical = critical;
+      d20.options.fumble = fumble;
+
+      // Convert the roll to a chat message
       roll.toMessage({
         speaker: speaker,
         flavor: flav,
@@ -235,17 +244,11 @@ class Dice5e {
     };
 
     // Modify the roll and handle fast-forwarding
-    let adv = 0;
     parts = ["1d20"].concat(parts);
-    if ( event.shiftKey ) return roll();
-    else if ( event.altKey ) {
-      adv = 1;
-      return roll();
-    }
-    else if ( event.ctrlKey || event.metaKey ) {
-      adv = -1;
-      return roll();
-    } else parts = parts.concat(["@bonus"]);
+    if ( event.shiftKey ) return roll(parts, 0);
+    else if ( event.altKey ) return roll(parts, 1);
+    else if ( event.ctrlKey || event.metaKey ) return roll(parts, -1);
+    else parts = parts.concat(["@bonus"]);
 
     // Render modal dialog
     template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
@@ -307,10 +310,10 @@ class Dice5e {
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
-    let roll = () => {
+    let roll = crit => {
       let roll = new Roll(parts.join("+"), data),
           flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
-      if ( crit ) {
+      if ( crit === true ) {
         let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
         roll.alter(add, mult);
@@ -329,12 +332,7 @@ class Dice5e {
     };
 
     // Modify the roll and handle fast-forwarding
-    let crit = 0;
-    if ( event.shiftKey || event.ctrlKey || event.metaKey )  return roll();
-    else if ( event.altKey ) {
-      crit = 1;
-      return roll();
-    }
+    if ( event.shiftKey || event.ctrlKey || event.metaKey || event.altKey )  return roll(event.altKey);
     else parts = parts.concat(["@bonus"]);
 
     // Construct dialog data
@@ -382,8 +380,8 @@ Hooks.on("renderChatMessage", (message, data, html) => {
   if ( !message.isRoll || !message.roll.parts.length ) return;
   let d = message.roll.parts[0];
   if ( d instanceof Die && d.faces === 20 ) {
-    if (d.total === 20) html.find(".dice-total").addClass("success");
-    else if (d.total === 1) html.find(".dice-total").addClass("failure");
+    if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
+    else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
   }
 });
 
@@ -480,23 +478,11 @@ Hooks.once("init", () => {
   Combat.prototype._getInitiativeFormula = function(combatant) {
     const actor = combatant.actor;
     if ( !actor ) return "1d20";
-    const data = actor ? actor.data.data : {},
-          parts = ["1d20", data.attributes.init.mod];
-
-    // Advantage on Initiative
+    const init = actor.data.data.attributes.init;
+    const parts = ["1d20", init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
     if ( actor.getFlag("dnd5e", "initiativeAdv") ) parts[0] = "2d20kh";
-
-    // Half-Proficiency to Initiative
-    if ( actor.getFlag("dnd5e", "initiativeHalfProf") ) {
-      parts.push(Math.floor(0.5 * data.attributes.prof.value))
-    }
-
-    // Alert Bonus to Initiative
-    if ( actor.getFlag("dnd5e", "initiativeAlert") ) parts.push(5);
-
-    // Dexterity tiebreaker
-    if ( CONFIG.initiative.tiebreaker ) parts.push(data.abilities.dex.value / 100);
-    return parts.join("+");
+    if ( CONFIG.initiative.tiebreaker ) parts.push(actor.data.data.abilities.dex.value / 100);
+    return parts.filter(p => p !== null).join(" + ");
   }
 });
 
@@ -547,13 +533,14 @@ class Actor5e extends Actor {
   prepareData(actorData) {
     actorData = super.prepareData(actorData);
     const data = actorData.data;
+    const flags = actorData.flags;
 
     // Prepare Character data
     if ( actorData.type === "character" ) this._prepareCharacterData(data);
     else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
     // Ability modifiers and saves
-    let saveBonus = getProperty(actorData.flags, "dnd5e.saveBonus") || 0;
+    let saveBonus = getProperty(flags, "dnd5e.saveBonus") || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value) + saveBonus;
@@ -565,13 +552,19 @@ class Actor5e extends Actor {
       skl.mod = data.abilities[skl.ability].mod + Math.floor(skl.value * data.attributes.prof.value);
     }
 
-    // Attributes
-    data.attributes.init.mod = data.abilities.dex.mod + (data.attributes.init.value || 0);
+    // Initiative
+    const init = data.attributes.init;
+    init.mod = data.abilities.dex.mod
+    init.prof = getProperty(flags, "dnd5e.initiativeHalfProf") ? Math.floor(0.5 * data.attributes.prof.value) : 0;
+    init.bonus = init.value + (getProperty(flags, "dnd5e.initiativeAlert") ? 5 : 0);
+    init.total = init.mod + init.prof + init.bonus;
+
+    // Armor Class formula // TODO: Allow this to be configurable in the future
     data.attributes.ac.min = 10 + data.abilities.dex.mod;
 
     // Spell DC
     let spellAbl = data.attributes.spellcasting.value || "int";
-    let bonusDC = getProperty(actorData.flags, "dnd5e.spellDCBonus") || 0;
+    let bonusDC = getProperty(flags, "dnd5e.spellDCBonus") || 0;
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod + bonusDC;
 
     // TODO: Migrate trait storage format
@@ -1127,6 +1120,11 @@ class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Render a chat card for Spell type data
+   * @return {Object}
+   * @private
+   */
   _spellChatData() {
     const data = duplicate(this.data.data),
           ad = this.actor.data.data;
@@ -1145,16 +1143,18 @@ class Item5e extends Item {
     const props = [
       CONFIG.spellSchools[data.school.value],
       CONFIG.spellLevels[data.level.value],
-      data.components.value + " Components",
+      data.components.value,
       data.target.value,
+      data.range.value,
       data.time.value,
       data.duration.value,
       data.concentration.value ? "Concentration" : null,
       data.ritual.value ? "Ritual" : null
     ];
-    data.properties = props.filter(p => p !== null);
+    data.properties = props.filter(p => !!p);
     return data;
   }
+
 
   /* -------------------------------------------- */
 
@@ -1208,6 +1208,9 @@ class Item5e extends Item {
     rollData.item = itemData;
     if ( !itemData.proficient.value ) parts.pop();
 
+    // Allow for expanded critical range
+    let critThreshold = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
+
     // TODO: Incorporate Elven Accuracy
 
     // Call the roll helper utility
@@ -1218,6 +1221,7 @@ class Item5e extends Item {
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      critical: critThreshold,
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -1421,13 +1425,7 @@ class Item5e extends Item {
         data.ability = abl;
         parts[1] = `@abilities.${abl}.mod`;
       }
-    }).then(roll => {
-      roll.toMessage({
-        flavor: flavor,
-        highlightSuccess: roll.parts[0].total === 20,
-        highlightFailure: roll.parts[0].total === 1
-      });
-    });
+    }).then(roll => roll.toMessage({flavor}));
   }
 
   /* -------------------------------------------- */
@@ -1900,7 +1898,7 @@ class ActorSheet5e extends ActorSheet {
     });
 
     // Toggle Skill Proficiency
-    html.find('.skill-proficiency').click(ev => this._onCycleSkillProficiency(ev));
+    html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
     // Roll Skill Checks
     html.find('.skill-name').click(ev => {
@@ -1978,18 +1976,26 @@ class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle cycling proficiency in a Skill
+   * @param {Event} event   A click or contextmenu event which triggered the handler
    * @private
    */
   _onCycleSkillProficiency(event) {
     event.preventDefault();
-    let field = $(event.currentTarget).siblings('input[type="hidden"]');
-    let level = parseFloat(field.val());
+    const field = $(event.currentTarget).siblings('input[type="hidden"]');
+
+    // Get the current level and the array of levels
+    const level = parseFloat(field.val());
     const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(level),
-        newLevel = levels[(idx === levels.length - 1) ? 0 : idx + 1];
+    let idx = levels.indexOf(level);
+
+    // Toggle next level - forward on click, backwards on right
+    if ( event.type === "click" ) {
+      field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
+    } else if ( event.type === "contextmenu" ) {
+      field.val(levels[(idx === 0) ? levels.length - 1 : idx - 1]);
+    }
 
     // Update the field value and save the form
-    field.val(newLevel);
     this._onSubmit(event);
   }
 
@@ -2422,9 +2428,10 @@ class ActorSheetFlags extends BaseEntitySheet {
     // Iterate over the flags which may be configured
     for ( let [k, v] of Object.entries(CONFIG.Actor.characterFlags) ) {
       if ( [undefined, null, "", false].includes(formData[k]) ) delete flags[k];
+      else if ( (v.type === Number) && (formData[k] === 0) ) delete flags[k];
       else flags[k] = formData[k];
     }
-
+    
     // Set the new flags in bulk
     actor.update({'flags.dnd5e': flags});
   }
@@ -2435,6 +2442,13 @@ class ActorSheetFlags extends BaseEntitySheet {
 
 
 CONFIG.Actor.characterFlags = {
+  "weaponCriticalThreshold": {
+    name: "Weapon Critical Hit Threshold",
+    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
+    section: "Feats",
+    type: Number,
+    placeholder: 20
+  },
   "powerfulBuild": {
     name: "Powerful Build",
     hint: "Provides increased carrying capacity.",
