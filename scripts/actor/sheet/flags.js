@@ -69,7 +69,7 @@ class ActorSheetFlags extends BaseEntitySheet {
       else if ( (v.type === Number) && (formData[k] === 0) ) delete flags[k];
       else flags[k] = formData[k];
     }
-    
+
     // Set the new flags in bulk
     actor.update({'flags.dnd5e': flags});
   }
