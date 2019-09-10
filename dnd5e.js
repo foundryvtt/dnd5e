@@ -258,6 +258,7 @@ class Dice5e {
       rollMode: rollMode,
       rollModes: CONFIG.rollModes
     };
+    let adv = 0;
     renderTemplate(template, dialogData).then(dlg => {
       new Dialog({
           title: title,
@@ -280,7 +281,7 @@ class Dice5e {
             if ( onClose ) onClose(html, parts, data);
             rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
-            roll()
+            roll(parts, adv);
           }
         }, dialogOptions).render(true);
     });
@@ -1033,6 +1034,7 @@ class Item5e extends Item {
     // Basic chat message data
     const chatData = {
       user: game.user._id,
+      type: CHAT_MESSAGE_TYPES.OTHER,
       speaker: {
         actor: this.actor._id,
         token: this.actor.token,
@@ -2302,7 +2304,8 @@ class ActorSheet5eCharacter extends ActorSheet5e {
               ChatMessage.create({
                 user: game.user._id,
                 speaker: {actor: this.actor, alias: this.actor.name},
-                content: msg
+                content: msg,
+                type: CHAT_MESSAGE_TYPES.ROLL
               });
             }
           },
@@ -2431,7 +2434,7 @@ class ActorSheetFlags extends BaseEntitySheet {
       else if ( (v.type === Number) && (formData[k] === 0) ) delete flags[k];
       else flags[k] = formData[k];
     }
-    
+
     // Set the new flags in bulk
     actor.update({'flags.dnd5e': flags});
   }

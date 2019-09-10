@@ -72,6 +72,7 @@ class Dice5e {
       rollMode: rollMode,
       rollModes: CONFIG.rollModes
     };
+    let adv = 0;
     renderTemplate(template, dialogData).then(dlg => {
       new Dialog({
           title: title,
@@ -94,7 +95,7 @@ class Dice5e {
             if ( onClose ) onClose(html, parts, data);
             rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
-            roll()
+            roll(parts, adv);
           }
         }, dialogOptions).render(true);
     });
