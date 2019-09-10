@@ -22,6 +22,7 @@ class Item5e extends Item {
     // Basic chat message data
     const chatData = {
       user: game.user._id,
+      type: CHAT_MESSAGE_TYPES.OTHER,
       speaker: {
         actor: this.actor._id,
         token: this.actor.token,
