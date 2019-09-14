@@ -160,6 +160,7 @@ class Dice5e {
     };
 
     // Render modal dialog
+    let crit = false;
     return new Promise(resolve => {
       renderTemplate(template, dialogData).then(dlg => {
         new Dialog({
@@ -169,7 +170,7 @@ class Dice5e {
             critical: {
               condition: critical,
               label: "Critical Hit",
-              callback: () => crit = 1
+              callback: () => crit = true
             },
             normal: {
               label: critical ? "Normal" : "Roll",
@@ -180,7 +181,8 @@ class Dice5e {
             if (onClose) onClose(html, parts, data);
             rollMode = html.find('[name="rollMode"]').val();
             data['bonus'] = html.find('[name="bonus"]').val();
-            resolve(roll());
+            let r = roll(crit);
+            resolve(r);
           }
         }, dialogOptions).render(true);
       });
