@@ -220,13 +220,6 @@ class Actor5e extends Actor {
         data = {mod: abl.save},
         flavor = `${abl.label} Saving Throw`;
 
-    // Support global save bonus
-    const saveBonus = this.data.flags.dnd5e && this.data.flags.dnd5e.saveBonus;
-    if ( Number.isFinite(saveBonus) && parseInt(saveBonus) !== 0 ) {
-      parts.push("@savebonus");
-      data["savebonus"] = saveBonus;
-    }
-
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: options.event,
@@ -289,7 +282,7 @@ class Actor5e extends Actor {
     }
     
     // Recover uses
-    for (let item of this.data.items.filter(item => item.data.uses.type === 'sr')) {
+    for (let item of this.data.items.filter(item => getProperty(item, "data.uses.type") === 'sr')) {
       item.data.uses.value = item.data.uses.max;
       promises.push(this.updateOwnedItem(item));
     }
