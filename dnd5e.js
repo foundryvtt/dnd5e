@@ -747,13 +747,6 @@ class Actor5e extends Actor {
         data = {mod: abl.save},
         flavor = `${abl.label} Saving Throw`;
 
-    // Support global save bonus
-    const saveBonus = this.data.flags.dnd5e && this.data.flags.dnd5e.saveBonus;
-    if ( Number.isFinite(saveBonus) && parseInt(saveBonus) !== 0 ) {
-      parts.push("@savebonus");
-      data["savebonus"] = saveBonus;
-    }
-
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: options.event,
@@ -816,7 +809,7 @@ class Actor5e extends Actor {
     }
     
     // Recover uses
-    for (let item of this.data.items.filter(item => item.data.uses.type === 'sr')) {
+    for (let item of this.data.items.filter(item => getProperty(item, "data.uses.type") === 'sr')) {
       item.data.uses.value = item.data.uses.max;
       promises.push(this.updateOwnedItem(item));
     }
@@ -1429,7 +1422,7 @@ class Item5e extends Item {
         data.ability = abl;
         parts[1] = `@abilities.${abl}.mod`;
       }
-    }).then(roll => roll.toMessage({flavor}));
+    });
   }
 
   /* -------------------------------------------- */
@@ -2187,7 +2180,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Inventory
       if ( Object.keys(inventory).includes(i.type) ) {
-        i.data.quantity.value = i.data.quantity.value || 1;
+        i.data.quantity.value = i.data.quantity.value || 0;
         i.data.weight.value = i.data.weight.value || 0;
         i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
         i.hasCharges = (i.type === "consumable") && i.data.charges.max > 0;

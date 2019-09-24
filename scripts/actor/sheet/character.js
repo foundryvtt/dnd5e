@@ -81,7 +81,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Inventory
       if ( Object.keys(inventory).includes(i.type) ) {
-        i.data.quantity.value = i.data.quantity.value || 1;
+        i.data.quantity.value = i.data.quantity.value || 0;
         i.data.weight.value = i.data.weight.value || 0;
         i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
         i.hasCharges = (i.type === "consumable") && i.data.charges.max > 0;

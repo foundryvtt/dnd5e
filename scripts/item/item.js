@@ -415,7 +415,7 @@ class Item5e extends Item {
         data.ability = abl;
         parts[1] = `@abilities.${abl}.mod`;
       }
-    }).then(roll => roll.toMessage({flavor}));
+    });
   }
 
   /* -------------------------------------------- */
