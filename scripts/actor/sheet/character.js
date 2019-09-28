@@ -201,7 +201,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
                 user: game.user._id,
                 speaker: {actor: this.actor, alias: this.actor.name},
                 content: msg,
-                type: CHAT_MESSAGE_TYPES.ROLL
+                type: CHAT_MESSAGE_TYPES.OTHER
               });
             }
           },
