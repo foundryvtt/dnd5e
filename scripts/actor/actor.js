@@ -379,13 +379,12 @@ CONFIG.Actor.entityClass = Actor5e;
  * TODO: This should probably be replaced with a formal Token class extension
  * @private
  */
-const _drawBar = Token.prototype._drawBar;
-Token.prototype._drawBar = function(number, bar, data) {
+const getBarAttributeOriginal = Token.prototype.getBarAttribute;
+Token.prototype.getBarAttribute = function(barName) {
+  const data = getBarAttributeOriginal.bind(this)(barName);
   if ( data.attribute === "attributes.hp" ) {
-    data = duplicate(data);
     data.value += parseInt(data['temp'] || 0);
     data.max += parseInt(data['tempmax'] || 0);
   }
-  _drawBar.bind(this)(number, bar, data);
+  return data;
 };
-
