@@ -40,6 +40,9 @@ class ActorSheet5e extends ActorSheet {
     // Prepare owned items
     this._prepareItems(sheetData.actor);
 
+    // Templates disable XP bars if we're using milestone leveling
+    sheetData["milestoneLeveling"] = game.settings.get("dnd5e", "milestoneLeveling");
+
     // Return data to the sheet
     return sheetData;
   }

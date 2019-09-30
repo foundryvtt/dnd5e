@@ -52,6 +52,19 @@ Hooks.once("init", () => {
     type: Boolean
   });
 
+  /**
+   * If milestone leveling is used, do not show XP bar anywhere.
+   */
+  game.settings.register("dnd5e", "milestoneLeveling", {
+    name: "SETTINGS.5eMilestoneN",
+    hint: "SETTINGS.5eMilestoneL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+  });
+
+
   // Pre-load templates
   loadTemplates([
 

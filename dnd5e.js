@@ -442,6 +442,19 @@ Hooks.once("init", () => {
     type: Boolean
   });
 
+  /**
+   * If milestone leveling is used, do not show XP bar anywhere.
+   */
+  game.settings.register("dnd5e", "milestoneLeveling", {
+    name: "SETTINGS.5eMilestoneN",
+    hint: "SETTINGS.5eMilestoneL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+  });
+
+
   // Pre-load templates
   loadTemplates([
 
@@ -1767,6 +1780,9 @@ class ActorSheet5e extends ActorSheet {
 
     // Prepare owned items
     this._prepareItems(sheetData.actor);
+
+    // Templates disable XP bars if we're using milestone leveling
+    sheetData["milestoneLeveling"] = game.settings.get("dnd5e", "milestoneLeveling");
 
     // Return data to the sheet
     return sheetData;
