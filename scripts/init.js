@@ -53,11 +53,11 @@ Hooks.once("init", () => {
   });
 
   /**
-   * If milestone leveling is used, do not show XP bar anywhere.
+   * Option to disable XP bar for session-based or story-based advancement.
    */
-  game.settings.register("dnd5e", "milestoneLeveling", {
-    name: "SETTINGS.5eMilestoneN",
-    hint: "SETTINGS.5eMilestoneL",
+  game.settings.register("dnd5e", "noXpTracking", {
+    name: "SETTINGS.5eNoXpN",
+    hint: "SETTINGS.5eNoXpL",
     scope: "world",
     config: true,
     default: false,
