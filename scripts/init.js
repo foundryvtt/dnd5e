@@ -52,6 +52,19 @@ Hooks.once("init", () => {
     type: Boolean
   });
 
+  /**
+   * Option to disable XP bar for session-based or story-based advancement.
+   */
+  game.settings.register("dnd5e", "noXpTracking", {
+    name: "SETTINGS.5eNoXpN",
+    hint: "SETTINGS.5eNoXpL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+  });
+
+
   // Pre-load templates
   loadTemplates([
 

@@ -15,14 +15,16 @@
                     <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
                            data-dtype="Number" placeholder="1"/>
                 </div>
-                <div class="xpbar">
-                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
-                </div>
-                <div class="experience">
-                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
-                           data-dtype="Number" placeholder="0"/>
-                    <span class="max" data-wpad="14"> / {{data.details.xp.max}}</span>
-                </div>
+                {{#unless noXpTracking}}
+                    <div class="xpbar">
+                        <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
+                    </div>
+                    <div class="experience">
+                        <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
+                               data-dtype="Number" placeholder="0"/>
+                        <span class="max" data-wpad="14"> / {{data.details.xp.max}}</span>
+                    </div>
+                {{/unless}}
             </div>
         </header>
 
