@@ -40,9 +40,6 @@ class ActorSheet5e extends ActorSheet {
     // Prepare owned items
     this._prepareItems(sheetData.actor);
 
-    // Templates disable XP bars if GM wants that
-    sheetData["noXpTracking"] = game.settings.get("dnd5e", "noXpTracking");
-
     // Return data to the sheet
     return sheetData;
   }

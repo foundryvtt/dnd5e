@@ -44,6 +44,9 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     if (res.secondary && res.secondary.value === 0) delete res.secondary.value;
     if (res.secondary && res.secondary.max === 0) delete res.secondary.max;
 
+    // Experience Tracking
+    sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
+
     // Return data for rendering
     return sheetData;
   }
