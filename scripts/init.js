@@ -55,9 +55,9 @@ Hooks.once("init", () => {
   /**
    * Option to disable XP bar for session-based or story-based advancement.
    */
-  game.settings.register("dnd5e", "noXpTracking", {
-    name: "SETTINGS.5eNoXpN",
-    hint: "SETTINGS.5eNoXpL",
+  game.settings.register("dnd5e", "disableExperienceTracking", {
+    name: "SETTINGS.5eNoExpN",
+    hint: "SETTINGS.5eNoExpL",
     scope: "world",
     config: true,
     default: false,

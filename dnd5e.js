@@ -445,9 +445,9 @@ Hooks.once("init", () => {
   /**
    * Option to disable XP bar for session-based or story-based advancement.
    */
-  game.settings.register("dnd5e", "noXpTracking", {
-    name: "SETTINGS.5eNoXpN",
-    hint: "SETTINGS.5eNoXpL",
+  game.settings.register("dnd5e", "disableExperienceTracking", {
+    name: "SETTINGS.5eNoExpN",
+    hint: "SETTINGS.5eNoExpL",
     scope: "world",
     config: true,
     default: false,
@@ -1781,9 +1781,6 @@ class ActorSheet5e extends ActorSheet {
     // Prepare owned items
     this._prepareItems(sheetData.actor);
 
-    // Templates disable XP bars if GM wants that
-    sheetData["noXpTracking"] = game.settings.get("dnd5e", "noXpTracking");
-
     // Return data to the sheet
     return sheetData;
   }
@@ -2157,6 +2154,9 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     if (res.primary && res.primary.max === 0) delete res.primary.max;
     if (res.secondary && res.secondary.value === 0) delete res.secondary.value;
     if (res.secondary && res.secondary.max === 0) delete res.secondary.max;
+
+    // Experience Tracking
+    sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
 
     // Return data for rendering
     return sheetData;
