@@ -10,7 +10,7 @@
             </h1>
 
             <div class="charlevel">
-                <div class="level">
+                <div class="level {{#if disableExperience}}noxp{{/if}}">
                     <label>Level </label>
                     <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
                            data-dtype="Number" placeholder="1"/>

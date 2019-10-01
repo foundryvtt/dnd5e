@@ -220,10 +220,21 @@
         font-size: 20px;
         line-height: 20px;
 
-        > input[type="text"] {
+        > input {
           flex: 0 0 26px;
           height: 20px;
           text-align: center;
+        }
+
+        /* If the Experience Bar is disabled */
+        &.noxp {
+          flex: 0 0 44px;
+          font-size: 32px;
+          line-height: 44px;
+          > input {
+            flex: 0 0 40px;
+            height: 44px;
+          }
         }
       }
 

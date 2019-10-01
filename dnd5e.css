@@ -305,14 +305,24 @@
   color: #444;
   font-size: 20px;
   line-height: 20px;
+  /* If the Experience Bar is disabled */
 }
 .dnd5e.actor .sheet-header .charlevel .level > * {
   flex: 1;
 }
-.dnd5e.actor .sheet-header .charlevel .level > input[type="text"] {
+.dnd5e.actor .sheet-header .charlevel .level > input {
   flex: 0 0 26px;
   height: 20px;
   text-align: center;
+}
+.dnd5e.actor .sheet-header .charlevel .level.noxp {
+  flex: 0 0 44px;
+  font-size: 32px;
+  line-height: 44px;
+}
+.dnd5e.actor .sheet-header .charlevel .level.noxp > input {
+  flex: 0 0 40px;
+  height: 44px;
 }
 .dnd5e.actor .sheet-header .charlevel .xpbar {
   width: 100%;
