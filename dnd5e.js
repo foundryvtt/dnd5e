@@ -442,6 +442,19 @@ Hooks.once("init", () => {
     type: Boolean
   });
 
+  /**
+   * Option to disable XP bar for session-based or story-based advancement.
+   */
+  game.settings.register("dnd5e", "noXpTracking", {
+    name: "SETTINGS.5eNoXpN",
+    hint: "SETTINGS.5eNoXpL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+  });
+
+
   // Pre-load templates
   loadTemplates([
 
@@ -1767,6 +1780,9 @@ class ActorSheet5e extends ActorSheet {
 
     // Prepare owned items
     this._prepareItems(sheetData.actor);
+
+    // Templates disable XP bars if GM wants that
+    sheetData["noXpTracking"] = game.settings.get("dnd5e", "noXpTracking");
 
     // Return data to the sheet
     return sheetData;
