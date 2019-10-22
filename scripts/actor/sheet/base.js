@@ -38,7 +38,7 @@ class ActorSheet5e extends ActorSheet {
     this._prepareTraits(sheetData.data["traits"]);
 
     // Prepare owned items
-    this._prepareItems(sheetData.actor);
+    this._prepareItems(sheetData);
 
     // Return data to the sheet
     return sheetData;

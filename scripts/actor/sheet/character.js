@@ -57,7 +57,8 @@ class ActorSheet5eCharacter extends ActorSheet5e {
    * Organize and classify Items for Character sheets
    * @private
    */
-  _prepareItems(actorData) {
+  _prepareItems(sheetData) {
+    const actorData = sheetData.actor;
 
     // Inventory
     const inventory = {
@@ -79,7 +80,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Iterate through items, allocating to containers
     let totalWeight = 0;
-    for ( let i of actorData.items ) {
+    for ( let i of sheetData.items ) {
       i.img = i.img || DEFAULT_TOKEN;
 
       // Inventory
@@ -98,7 +99,6 @@ class ActorSheet5eCharacter extends ActorSheet5e {
       // Classes
       else if ( i.type === "class" ) {
         classes.push(i);
-        classes.sort((a, b) => b.levels > a.levels);
       }
 
       // Feats
@@ -109,6 +109,9 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     actorData.inventory = inventory;
     actorData.spellbook = spellbook;
     actorData.feats = feats;
+
+    // Class levels
+    classes.sort((a, b) => b.levels - a.levels);
     actorData.classes = classes;
 
     // Inventory encumbrance

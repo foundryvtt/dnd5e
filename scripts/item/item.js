@@ -564,35 +564,32 @@ CONFIG.Item.entityClass = Item5e;
  * Hook into chat log context menu to add damage application options
  */
 Hooks.on("getChatLogEntryContext", (html, options) => {
-
-  // Condition
   let canApply = li => canvas.tokens.controlledTokens.length && li.find(".dice-roll").length;
-
-  // Apply Damage to Token
-  options["Apply Damage"] = {
-    icon: '<i class="fas fa-user-minus"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 1)
-  };
-
-  // Apply Healing to Token
-  options["Apply Healing"] = {
-    icon: '<i class="fas fa-user-plus"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, -1)
-  };
-
-  // Apply Double-Damage
-  options["Double Damage"] = {
-    icon: '<i class="fas fa-user-injured"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 2)
-  };
-
-  // Apply Half-Damage
-  options["Half Damage"] = {
-    icon: '<i class="fas fa-user-shield"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 0.5)
-  }
+  options.push(
+    {
+      name: "Apply Damage",
+      icon: '<i class="fas fa-user-minus"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, 1)
+    },
+    {
+      name: "Apply Healing",
+      icon: '<i class="fas fa-user-plus"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, -1)
+    },
+    {
+      name: "Double Damage",
+      icon: '<i class="fas fa-user-injured"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, 2)
+    },
+    {
+      name: "Half Damage",
+      icon: '<i class="fas fa-user-shield"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, 0.5)
+    }
+  );
+  return options;
 });

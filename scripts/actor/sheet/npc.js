@@ -47,7 +47,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
    * Organize and classify Items for NPC sheets
    * @private
    */
-  _prepareItems(actorData) {
+  _prepareItems(sheetData) {
 
     // Actions
     const features = {
@@ -61,7 +61,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
     const spellbook = {};
 
     // Iterate through items, allocating to containers
-    for ( let i of actorData.items ) {
+    for ( let i of sheetData.items ) {
       i.img = i.img || DEFAULT_TOKEN;
 
       // Spells
@@ -77,8 +77,8 @@ class ActorSheet5eNPC extends ActorSheet5e {
     }
 
     // Assign and return
-    actorData.features = features;
-    actorData.spellbook = spellbook;
+    sheetData.actorData.features = features;
+    sheetData.actorData.spellbook = spellbook;
   }
 
 

@@ -195,8 +195,10 @@ class Dice5e {
  */
 Hooks.on("renderChatMessage", (message, data, html) => {
   if ( !message.isRoll || !message.roll.parts.length ) return;
+
+  // Highlight rolls where the first part is a d20 roll
   let d = message.roll.parts[0];
-  if ( d instanceof Die && d.faces === 20 ) {
+  if ( d instanceof Die && (d.faces === 20) && (d.results.length === 1) ) {
     if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
     else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
   }

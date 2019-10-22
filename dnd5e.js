@@ -381,8 +381,10 @@ class Dice5e {
  */
 Hooks.on("renderChatMessage", (message, data, html) => {
   if ( !message.isRoll || !message.roll.parts.length ) return;
+
+  // Highlight rolls where the first part is a d20 roll
   let d = message.roll.parts[0];
-  if ( d instanceof Die && d.faces === 20 ) {
+  if ( d instanceof Die && (d.faces === 20) && (d.results.length === 1) ) {
     if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
     else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
   }
@@ -1583,37 +1585,34 @@ CONFIG.Item.entityClass = Item5e;
  * Hook into chat log context menu to add damage application options
  */
 Hooks.on("getChatLogEntryContext", (html, options) => {
-
-  // Condition
   let canApply = li => canvas.tokens.controlledTokens.length && li.find(".dice-roll").length;
-
-  // Apply Damage to Token
-  options["Apply Damage"] = {
-    icon: '<i class="fas fa-user-minus"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 1)
-  };
-
-  // Apply Healing to Token
-  options["Apply Healing"] = {
-    icon: '<i class="fas fa-user-plus"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, -1)
-  };
-
-  // Apply Double-Damage
-  options["Double Damage"] = {
-    icon: '<i class="fas fa-user-injured"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 2)
-  };
-
-  // Apply Half-Damage
-  options["Half Damage"] = {
-    icon: '<i class="fas fa-user-shield"></i>',
-    condition: canApply,
-    callback: li => Actor5e.applyDamage(li, 0.5)
-  }
+  options.push(
+    {
+      name: "Apply Damage",
+      icon: '<i class="fas fa-user-minus"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, 1)
+    },
+    {
+      name: "Apply Healing",
+      icon: '<i class="fas fa-user-plus"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, -1)
+    },
+    {
+      name: "Double Damage",
+      icon: '<i class="fas fa-user-injured"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, 2)
+    },
+    {
+      name: "Half Damage",
+      icon: '<i class="fas fa-user-shield"></i>',
+      condition: canApply,
+      callback: li => Actor5e.applyDamage(li, 0.5)
+    }
+  );
+  return options;
 });
 
 /**
@@ -1779,7 +1778,7 @@ class ActorSheet5e extends ActorSheet {
     this._prepareTraits(sheetData.data["traits"]);
 
     // Prepare owned items
-    this._prepareItems(sheetData.actor);
+    this._prepareItems(sheetData);
 
     // Return data to the sheet
     return sheetData;
@@ -2168,7 +2167,8 @@ class ActorSheet5eCharacter extends ActorSheet5e {
    * Organize and classify Items for Character sheets
    * @private
    */
-  _prepareItems(actorData) {
+  _prepareItems(sheetData) {
+    const actorData = sheetData.actor;
 
     // Inventory
     const inventory = {
@@ -2190,7 +2190,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Iterate through items, allocating to containers
     let totalWeight = 0;
-    for ( let i of actorData.items ) {
+    for ( let i of sheetData.items ) {
       i.img = i.img || DEFAULT_TOKEN;
 
       // Inventory
@@ -2209,7 +2209,6 @@ class ActorSheet5eCharacter extends ActorSheet5e {
       // Classes
       else if ( i.type === "class" ) {
         classes.push(i);
-        classes.sort((a, b) => b.levels > a.levels);
       }
 
       // Feats
@@ -2220,6 +2219,9 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     actorData.inventory = inventory;
     actorData.spellbook = spellbook;
     actorData.feats = feats;
+
+    // Class levels
+    classes.sort((a, b) => b.levels - a.levels);
     actorData.classes = classes;
 
     // Inventory encumbrance
@@ -2563,7 +2565,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
    * Organize and classify Items for NPC sheets
    * @private
    */
-  _prepareItems(actorData) {
+  _prepareItems(sheetData) {
 
     // Actions
     const features = {
@@ -2577,7 +2579,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
     const spellbook = {};
 
     // Iterate through items, allocating to containers
-    for ( let i of actorData.items ) {
+    for ( let i of sheetData.items ) {
       i.img = i.img || DEFAULT_TOKEN;
 
       // Spells
@@ -2593,8 +2595,8 @@ class ActorSheet5eNPC extends ActorSheet5e {
     }
 
     // Assign and return
-    actorData.features = features;
-    actorData.spellbook = spellbook;
+    sheetData.actorData.features = features;
+    sheetData.actorData.spellbook = spellbook;
   }
 
 
