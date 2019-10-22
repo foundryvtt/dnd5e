@@ -2566,6 +2566,7 @@ class ActorSheet5eNPC extends ActorSheet5e {
    * @private
    */
   _prepareItems(sheetData) {
+    const actorData = sheetData.actor;
 
     // Actions
     const features = {
@@ -2595,8 +2596,8 @@ class ActorSheet5eNPC extends ActorSheet5e {
     }
 
     // Assign and return
-    sheetData.actorData.features = features;
-    sheetData.actorData.spellbook = spellbook;
+    actorData.features = features;
+    actorData.spellbook = spellbook;
   }
 
 
