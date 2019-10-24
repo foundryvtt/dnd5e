@@ -500,7 +500,7 @@ class Item5e extends Item {
 
       // Extract card data
       const button = $(ev.currentTarget),
-            messageId = button.parents('.message').attr("data-message-id"),
+            messageId = button.parents('.message').data("messageId"),
             senderId = game.messages.get(messageId).user._id,
             card = button.parents('.chat-card');
 
@@ -509,7 +509,7 @@ class Item5e extends Item {
 
       // Get the Actor from a synthetic Token
       let actor;
-      const tokenKey = card.attr("data-token-id");
+      const tokenKey = card.data("tokenId");
       if ( tokenKey ) {
         const [sceneId, tokenId] = tokenKey.split(".");
         let token;
@@ -522,17 +522,15 @@ class Item5e extends Item {
         }
         if ( !token ) return;
         actor = Actor.fromToken(token);
-      } else actor = game.actors.get(card.attr('data-actor-id'));
+      } else actor = game.actors.get(card.data('actorId'));
 
       // Get the Item
       if ( !actor ) return;
-      const itemId = Number(card.attr("data-item-id"));
-      let itemData = actor.items.find(i => i.id === itemId);
-      if ( !itemData ) return;
-      const item = new CONFIG.Item.entityClass(itemData, {actor: actor});
+      const itemId = Number(card.data("itemId"));
+      const item = actor.getOwnedItem(itemId);
 
       // Get the Action
-      const action = button.attr("data-action");
+      const action = button.data("action");
 
       // Weapon attack
       if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);

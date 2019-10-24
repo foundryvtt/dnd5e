@@ -190,8 +190,7 @@ class ActorSheet5e extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
-      let Item = CONFIG.Item.entityClass;
-      const item = new Item(this.actor.items.find(i => i.id === itemId), {actor: this.actor});
+      const item = this.actor.getOwnedItem(itemId);
       item.sheet.render(true);
     });
 
@@ -206,7 +205,7 @@ class ActorSheet5e extends ActorSheet {
     // Toggle Spell prepared value
     html.find('.item-prepare').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
-          item = this.actor.items.find(i => { return i.id === itemId });
+          item = this.actor.getOwnedItem(itemId);
       item.data['prepared'].value = !item.data['prepared'].value;
       this.actor.updateOwnedItem(item);
     });

@@ -1,3 +1,6 @@
+// Namespace D&D5e Configuration Values
+CONFIG.DND5E = {};
+
 // Damage Types
 CONFIG.damageTypes = {
   "acid": "Acid",
@@ -184,6 +187,18 @@ CONFIG.languages = {
   "cant": "Thieves' Cant",
   "undercommon": "Undercommon"
 };
+
+// Character Level XP Requirements
+CONFIG.DND5E.CHARACTER_EXP_LEVELS =  [
+  0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
+  120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000]
+;
+
+// Challenge Rating XP Levels
+CONFIG.DND5E.CR_EXP_LEVELS = [
+  10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
+  20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
+];
 class Dice5e {
 
   /**
@@ -641,8 +656,7 @@ class Actor5e extends Actor {
    * @return {Number}       The XP required
    */
   getLevelExp(level) {
-    const levels = [0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
-      120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000];
+    const levels = CONFIG.DND5E.CHARACTER_EXP_LEVELS;
     return levels[Math.min(level, levels.length - 1)];
   }
 
@@ -655,11 +669,7 @@ class Actor5e extends Actor {
    */
   getCRExp(cr) {
     if (cr < 1.0) return Math.max(200 * cr, 10);
-    const xps = [
-      10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
-      20000, 22000, 25000, 30000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
-    ];
-    return xps[cr];
+    return CONFIG.DND5E.CR_EXP_LEVELS[cr];
   }
 
   /* -------------------------------------------- */
@@ -1521,7 +1531,7 @@ class Item5e extends Item {
 
       // Extract card data
       const button = $(ev.currentTarget),
-            messageId = button.parents('.message').attr("data-message-id"),
+            messageId = button.parents('.message').data("messageId"),
             senderId = game.messages.get(messageId).user._id,
             card = button.parents('.chat-card');
 
@@ -1530,7 +1540,7 @@ class Item5e extends Item {
 
       // Get the Actor from a synthetic Token
       let actor;
-      const tokenKey = card.attr("data-token-id");
+      const tokenKey = card.data("tokenId");
       if ( tokenKey ) {
         const [sceneId, tokenId] = tokenKey.split(".");
         let token;
@@ -1543,17 +1553,15 @@ class Item5e extends Item {
         }
         if ( !token ) return;
         actor = Actor.fromToken(token);
-      } else actor = game.actors.get(card.attr('data-actor-id'));
+      } else actor = game.actors.get(card.data('actorId'));
 
       // Get the Item
       if ( !actor ) return;
-      const itemId = Number(card.attr("data-item-id"));
-      let itemData = actor.items.find(i => i.id === itemId);
-      if ( !itemData ) return;
-      const item = new CONFIG.Item.entityClass(itemData, {actor: actor});
+      const itemId = Number(card.data("itemId"));
+      const item = actor.getOwnedItem(itemId);
 
       // Get the Action
-      const action = button.attr("data-action");
+      const action = button.data("action");
 
       // Weapon attack
       if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
@@ -1930,8 +1938,7 @@ class ActorSheet5e extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
-      let Item = CONFIG.Item.entityClass;
-      const item = new Item(this.actor.items.find(i => i.id === itemId), {actor: this.actor});
+      const item = this.actor.getOwnedItem(itemId);
       item.sheet.render(true);
     });
 
@@ -1946,7 +1953,7 @@ class ActorSheet5e extends ActorSheet {
     // Toggle Spell prepared value
     html.find('.item-prepare').click(ev => {
       let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
-          item = this.actor.items.find(i => { return i.id === itemId });
+          item = this.actor.getOwnedItem(itemId);
       item.data['prepared'].value = !item.data['prepared'].value;
       this.actor.updateOwnedItem(item);
     });

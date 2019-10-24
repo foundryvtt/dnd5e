@@ -1,3 +1,6 @@
+// Namespace D&D5e Configuration Values
+CONFIG.DND5E = {};
+
 // Damage Types
 CONFIG.damageTypes = {
   "acid": "Acid",
@@ -184,3 +187,15 @@ CONFIG.languages = {
   "cant": "Thieves' Cant",
   "undercommon": "Undercommon"
 };
+
+// Character Level XP Requirements
+CONFIG.DND5E.CHARACTER_EXP_LEVELS =  [
+  0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
+  120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000]
+;
+
+// Challenge Rating XP Levels
+CONFIG.DND5E.CR_EXP_LEVELS = [
+  10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
+  20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
+];
