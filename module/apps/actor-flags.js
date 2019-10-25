@@ -1,5 +1,4 @@
-
-class ActorSheetFlags extends BaseEntitySheet {
+export class ActorSheetFlags extends BaseEntitySheet {
   static get defaultOptions() {
     const options = super.defaultOptions;
     return mergeObject(options, {
@@ -11,7 +10,7 @@ class ActorSheetFlags extends BaseEntitySheet {
   }
 
   /* -------------------------------------------- */
-  
+
   /**
    * Configure the title of the special traits selection window to include the Actor name
    * @type {String}
@@ -41,7 +40,7 @@ class ActorSheetFlags extends BaseEntitySheet {
    */
   _getFlags() {
     const flags = {};
-    for ( let [k, v] of Object.entries(CONFIG.Actor.characterFlags) ) {
+    for ( let [k, v] of Object.entries(CONFIG.DND5E.characterFlags) ) {
       if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
       let flag = duplicate(v);
       flag.type = v.type.name;
@@ -64,7 +63,7 @@ class ActorSheetFlags extends BaseEntitySheet {
     const flags = duplicate(actor.data.flags.dnd5e || {});
 
     // Iterate over the flags which may be configured
-    for ( let [k, v] of Object.entries(CONFIG.Actor.characterFlags) ) {
+    for ( let [k, v] of Object.entries(CONFIG.DND5E.characterFlags) ) {
       if ( [undefined, null, "", false].includes(formData[k]) ) delete flags[k];
       else if ( (v.type === Number) && (formData[k] === 0) ) delete flags[k];
       else flags[k] = formData[k];
@@ -74,67 +73,3 @@ class ActorSheetFlags extends BaseEntitySheet {
     actor.update({'flags.dnd5e': flags});
   }
 }
-
-
-/* -------------------------------------------- */
-
-
-CONFIG.Actor.characterFlags = {
-  "weaponCriticalThreshold": {
-    name: "Weapon Critical Hit Threshold",
-    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
-    section: "Feats",
-    type: Number,
-    placeholder: 20
-  },
-  "powerfulBuild": {
-    name: "Powerful Build",
-    hint: "Provides increased carrying capacity.",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "savageAttacks": {
-    name: "Savage Attacks",
-    hint: "Adds extra critical hit weapon dice.",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  // "elvenAccuracy": {
-  //   name: "Elven Accuracy",
-  //   hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
-  //   section: "Feats",
-  //   type: Boolean
-  // },
-  "initiativeAdv": {
-    name: "Advantage on Initiative",
-    hint: "Provided by feats or magical items.",
-    section: "Feats",
-    type: Boolean
-  },
-  "initiativeHalfProf": {
-    name: "Half-Proficiency to Initiative",
-    hint: "Provided by Jack of All Trades or Remarkable Athlete.",
-    section: "Feats",
-    type: Boolean
-  },
-  "initiativeAlert": {
-    name: "Alert Feat",
-    hint: "Provides +5 to Initiative.",
-    section: "Feats",
-    type: Boolean
-  },
-  "saveBonus": {
-    name: "Saving Throw Bonus",
-    hint: "Bonus modifier to all saving throws (e.g. +1)",
-    section: "Feats",
-    type: Number,
-    placeholder: "+0"
-  },
-  "spellDCBonus": {
-    name: "Spell DC Bonus",
-    hint: "Modifies normal spellcasting DC.",
-    section: "Feats",
-    type: Number,
-    placeholder: "+0"
-  }
-};

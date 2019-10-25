@@ -1,8 +1,13 @@
+import { ActorTraitSelector } from "../../apps/trait-selector.js";
+import { ActorSheetFlags } from "../../apps/actor-flags.js";
+
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
  * This sheet is an Abstract layer which is not used.
+ *
+ * @type {ActorSheet}
  */
-class ActorSheet5e extends ActorSheet {
+export class ActorSheet5e extends ActorSheet {
 
   /**
    * Return the type of the current Actor
@@ -23,18 +28,18 @@ class ActorSheet5e extends ActorSheet {
     // Ability proficiency
     for ( let abl of Object.values(sheetData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
-      abl.hover = CONFIG.proficiencyLevels[abl.proficient];
+      abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
     }
 
     // Update skill labels
     for ( let skl of Object.values(sheetData.data.skills)) {
       skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
       skl.icon = this._getProficiencyIcon(skl.value);
-      skl.hover = CONFIG.proficiencyLevels[skl.value];
+      skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
     }
 
     // Update traits
-    sheetData["actorSizes"] = CONFIG.actorSizes;
+    sheetData["actorSizes"] = CONFIG.DND5E.actorSizes;
     this._prepareTraits(sheetData.data["traits"]);
 
     // Prepare owned items
@@ -48,15 +53,16 @@ class ActorSheet5e extends ActorSheet {
 
   _prepareTraits(traits) {
     const map = {
-      "dr": CONFIG.damageTypes,
-      "di": CONFIG.damageTypes,
-      "dv": CONFIG.damageTypes,
-      "ci": CONFIG.conditionTypes,
-      "languages": CONFIG.languages
+      "dr": CONFIG.DND5E.damageTypes,
+      "di": CONFIG.DND5E.damageTypes,
+      "dv": CONFIG.DND5E.damageTypes,
+      "ci": CONFIG.DND5E.conditionTypes,
+      "languages": CONFIG.DND5E.languages
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
-      trait.selected = trait.value.reduce((obj, t) => {
+      const values = trait.value || [];
+      trait.selected = values.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
       }, {});
@@ -86,14 +92,14 @@ class ActorSheet5e extends ActorSheet {
     // Extend the Spellbook level
     spellbook[lvl] = spellbook[lvl] || {
       isCantrip: lvl === 0,
-      label: CONFIG.spellLevels[lvl],
+      label: CONFIG.DND5E.spellLevels[lvl],
       spells: [],
       uses: actorData.data.spells["spell"+lvl].value || 0,
       slots: actorData.data.spells["spell"+lvl].max || 0
     };
 
     // Add the spell to the spellbook at the appropriate level
-    spell.data.school.str = CONFIG.spellSchools[spell.data.school.value];
+    spell.data.school.str = CONFIG.DND5E.spellSchools[spell.data.school.value];
     spellbook[lvl].spells.push(spell);
   }
 
@@ -318,7 +324,7 @@ class ActorSheet5e extends ActorSheet {
     let header = event.currentTarget,
         data = duplicate(header.dataset);
     data["name"] = `New ${data.type.capitalize()}`;
-    this.actor.createOwnedItem(data, {renderSheet: true});
+    return this.actor.createOwnedItem(data);
   }
 
   /* -------------------------------------------- */
@@ -329,40 +335,8 @@ class ActorSheet5e extends ActorSheet {
     const options = {
       name: a.parents("label").attr("for"),
       title: a.parent().text().trim(),
-      choices: CONFIG[a.attr("data-options")]
+      choices: CONFIG.DND5E[a.attr("data-options")]
     };
-    new TraitSelector5e(this.actor, options).render(true)
+    new ActorTraitSelector(this.actor, options).render(true)
   }
 }
-
-Actors.unregisterSheet("core", ActorSheet);
-
-
-
-/* -------------------------------------------- */
-
-
-/**
- * A helper Dialog subclass for rolling Hit Dice on short rest
- * @type {Dialog}
- */
-class ShortRestDialog extends Dialog {
-  constructor(actor, dialogData, options) {
-    super(dialogData, options);
-    this.actor = actor;
-  }
-
-  activateListeners(html) {
-    super.activateListeners(html);
-    let btn = html.find("#roll-hd");
-    if ( this.actor.data.data.attributes.hd.value === 0 ) btn[0].disabled = true;
-    btn.click(ev => {
-      event.preventDefault();
-      let fml = ev.target.form.hd.value;
-      this.actor.rollHitDie(fml).then(roll => {
-        if ( this.actor.data.data.attributes.hd.value === 0 ) btn[0].disabled = true;
-      });
-    })
-  }
-}
-

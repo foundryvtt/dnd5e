@@ -1,6 +1,7 @@
+import { ActorSheet5e } from "./base.js";
 
 
-class ActorSheet5eNPC extends ActorSheet5e {
+export class ActorSheet5eNPC extends ActorSheet5e {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  mergeObject(options, {
@@ -82,7 +83,6 @@ class ActorSheet5eNPC extends ActorSheet5e {
     actorData.spellbook = spellbook;
   }
 
-
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers
   /* -------------------------------------------- */
@@ -127,9 +127,3 @@ class ActorSheet5eNPC extends ActorSheet5e {
     super._updateObject(event, formData);
   }
 }
-
-// Register NPC Sheet
-Actors.registerSheet("dnd5e", ActorSheet5eNPC, {
-  types: ["npc"],
-  makeDefault: true
-});

@@ -1,6 +1,8 @@
+import { ActorSheet5e } from "./base.js";
+import { ShortRestDialog } from "../../apps/short-rest.js";
 
 
-class ActorSheet5eCharacter extends ActorSheet5e {
+export class ActorSheet5eCharacter extends ActorSheet5e {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  mergeObject(options, {
@@ -256,11 +258,3 @@ class ActorSheet5eCharacter extends ActorSheet5e {
     }).render(true);
   }
 }
-
-// Register Character Sheet
-Actors.registerSheet("dnd5e", ActorSheet5eCharacter, {
-  types: ["character"],
-  makeDefault: true
-});
-
-

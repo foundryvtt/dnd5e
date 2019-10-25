@@ -1,4 +1,4 @@
-class Dice5e {
+export class Dice5e {
 
   /**
    * A standardized helper function for managing core 5e "d20 rolls"
@@ -193,7 +193,7 @@ class Dice5e {
 /**
  * Highlight critical success or failure on d20 rolls
  */
-Hooks.on("renderChatMessage", (message, data, html) => {
+export const highlightCriticalSuccessFailure = function(message, data, html) {
   if ( !message.isRoll || !message.roll.parts.length ) return;
 
   // Highlight rolls where the first part is a d20 roll
@@ -202,4 +202,4 @@ Hooks.on("renderChatMessage", (message, data, html) => {
     if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
     else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
   }
-});
+};

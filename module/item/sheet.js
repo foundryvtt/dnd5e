@@ -1,7 +1,7 @@
 /**
  * Override and extend the basic :class:`ItemSheet` implementation
  */
-class ItemSheet5e extends ItemSheet {
+export class ItemSheet5e extends ItemSheet {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  options.width = 520;
@@ -33,34 +33,34 @@ class ItemSheet5e extends ItemSheet {
     });
 
     // Damage types
-    let dt = duplicate(CONFIG.damageTypes);
-    if ( ["spell", "feat"].includes(type) ) mergeObject(dt, CONFIG.healingTypes);
+    let dt = duplicate(CONFIG.DND5E.damageTypes);
+    if ( ["spell", "feat"].includes(type) ) mergeObject(dt, CONFIG.DND5E.healingTypes);
     data['damageTypes'] = dt;
 
     // Consumable Data
     if ( type === "consumable" ) {
-      data.consumableTypes = CONFIG.consumableTypes
+      data.consumableTypes = CONFIG.DND5E.consumableTypes
     }
 
     // Spell Data
     else if ( type === "spell" ) {
       mergeObject(data, {
-        spellTypes: CONFIG.spellTypes,
-        spellSchools: CONFIG.spellSchools,
-        spellLevels: CONFIG.spellLevels,
+        spellTypes: CONFIG.DND5E.spellTypes,
+        spellSchools: CONFIG.DND5E.spellSchools,
+        spellLevels: CONFIG.DND5E.spellLevels,
         spellComponents: this._formatSpellComponents(data.data)
       });
     }
 
     // Weapon Data
     else if ( this.item.type === "weapon" ) {
-      data.weaponTypes = CONFIG.weaponTypes;
+      data.weaponTypes = CONFIG.DND5E.weaponTypes;
       data.weaponProperties = this._formatWeaponProperties(data.data);
     }
 
     // Feat types
     else if ( type === "feat" ) {
-      data.featTypes = CONFIG.featTypes;
+      data.featTypes = CONFIG.DND5E.featTypes;
       data.featTags = [
         data.data.target.value,
         data.data.time.value
@@ -69,12 +69,12 @@ class ItemSheet5e extends ItemSheet {
 
     // Equipment data
     else if ( type === "equipment" ) {
-      data.armorTypes = CONFIG.armorTypes;
+      data.armorTypes = CONFIG.DND5E.armorTypes;
     }
 
     // Tool-specific data
     else if ( type === "tool" ) {
-      data.proficiencies = CONFIG.proficiencyLevels;
+      data.proficiencies = CONFIG.DND5E.proficiencyLevels;
     }
     return data;
   }
@@ -83,7 +83,7 @@ class ItemSheet5e extends ItemSheet {
 
   _formatSpellComponents(data) {
     if ( !data.components.value ) return [];
-    let comps = data.components.value.split(",").map(c => CONFIG.spellComponents[c.trim()] || c.trim());
+    let comps = data.components.value.split(",").map(c => CONFIG.DND5E.spellComponents[c.trim()] || c.trim());
     if ( data.materials.value ) comps.push(data.materials.value);
     return comps;
   }
@@ -113,10 +113,3 @@ class ItemSheet5e extends ItemSheet {
     html.find('input[type="checkbox"]').change(event => this._onSubmit(event));
   }
 }
-
-// Activate global listeners
-Hooks.on('renderChatLog', (log, html, data) => Item5e.chatListeners(html));
-
-// Register Item Sheet
-Items.unregisterSheet("core", ItemSheet);
-Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});

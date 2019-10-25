@@ -1,7 +1,9 @@
+import { Dice5e } from "../dice.js";
+
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
  */
-class Actor5e extends Actor {
+export class Actor5e extends Actor {
 
   /**
    * Augment the basic actor data with additional dynamic data.
@@ -42,21 +44,6 @@ class Actor5e extends Actor {
     let spellAbl = data.attributes.spellcasting.value || "int";
     let bonusDC = getProperty(flags, "dnd5e.spellDCBonus") || 0;
     data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod + bonusDC;
-
-    // TODO: Migrate trait storage format
-    const map = {
-      "dr": CONFIG.damageTypes,
-      "di": CONFIG.damageTypes,
-      "dv": CONFIG.damageTypes,
-      "ci": CONFIG.conditionTypes,
-      "languages": CONFIG.languages
-    };
-    for ( let [t, choices] of Object.entries(map) ) {
-      let trait = data.traits[t];
-      if (!( trait.value instanceof Array )) {
-        trait.value = TraitSelector5e._backCompat(trait.value, choices);
-      }
-    }
 
     // Return the prepared Actor data
     return actorData;
@@ -275,13 +262,13 @@ class Actor5e extends Actor {
         update[`data.resources.${r}.value`] = res.max;
       }
     }
-    
+
     // Recover uses
     for (let item of this.data.items.filter(item => getProperty(item, "data.uses.type") === 'sr')) {
       item.data.uses.value = item.data.uses.max;
       promises.push(this.updateOwnedItem(item));
     }
-    
+
     // Update the actor
     promises.push(this.update(update));
     return Promise.all(promises);
@@ -365,21 +352,3 @@ class Actor5e extends Actor {
   }
 }
 
-// Assign the actor class to the CONFIG
-CONFIG.Actor.entityClass = Actor5e;
-
-
-/**
- * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
- * TODO: This should probably be replaced with a formal Token class extension
- * @private
- */
-const getBarAttributeOriginal = Token.prototype.getBarAttribute;
-Token.prototype.getBarAttribute = function(barName) {
-  const data = getBarAttributeOriginal.bind(this)(barName);
-  if ( data.attribute === "attributes.hp" ) {
-    data.value += parseInt(data['temp'] || 0);
-    data.max += parseInt(data['tempmax'] || 0);
-  }
-  return data;
-};

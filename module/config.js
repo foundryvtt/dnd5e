@@ -1,8 +1,18 @@
 // Namespace D&D5e Configuration Values
-CONFIG.DND5E = {};
+export const DND5E = {};
+
+// ASCII Artwork
+DND5E.ASCII = `_______________________________
+______      ______ _____ _____ 
+|  _  \\___  |  _  \\  ___|  ___|
+| | | ( _ ) | | | |___ \\| |__  
+| | | / _ \\/\\ | | |   \\ \\  __| 
+| |/ / (_>  < |/ //\\__/ / |___ 
+|___/ \\___/\\/___/ \\____/\\____/
+_______________________________`;
 
 // Equipment Types
-CONFIG.armorTypes = {
+DND5E.armorTypes = {
   "clothing": "Clothing",
   "light": "Light Armor",
   "medium": "Medium Armor",
@@ -13,7 +23,7 @@ CONFIG.armorTypes = {
 };
 
 // Consumable Types
-CONFIG.consumableTypes = {
+DND5E.consumableTypes = {
   "potion": "Potion",
   "poison": "Poison",
   "scroll": "Scroll",
@@ -24,7 +34,7 @@ CONFIG.consumableTypes = {
 
 
 // Damage Types
-CONFIG.damageTypes = {
+DND5E.damageTypes = {
   "acid": "Acid",
   "bludgeoning": "Bludgeoning",
   "cold": "Cold",
@@ -41,13 +51,13 @@ CONFIG.damageTypes = {
 };
 
 // Healing Types
-CONFIG.healingTypes = {
+DND5E.healingTypes = {
   "healing": "Healing",
   "temphp": "Healing (Temporary)"
 };
 
 // Weapon Types
-CONFIG.weaponTypes = {
+DND5E.weaponTypes = {
   "simpleM": "Simple Melee",
   "simpleR": "Simple Ranged",
   "martialM": "Martial Melee",
@@ -58,7 +68,7 @@ CONFIG.weaponTypes = {
 };
 
 // Weapon Properties
-CONFIG.weaponProperties = {
+DND5E.weaponProperties = {
   "thr": "Thrown",
   "amm": "Ammunition",
   "fir": "Firearm",
@@ -73,14 +83,14 @@ CONFIG.weaponProperties = {
 
 
 // Spell Components
-CONFIG.spellComponents = {
+DND5E.spellComponents = {
   "V": "Verbal",
   "S": "Somatic",
   "M": "Material"
 };
 
 // Spell Types
-CONFIG.spellTypes = {
+DND5E.spellTypes = {
   "attack": "Spell Attack",
   "save": "Saving Throw",
   "heal": "Healing",
@@ -88,7 +98,7 @@ CONFIG.spellTypes = {
 };
 
 // Spell Schools
-CONFIG.spellSchools = {
+DND5E.spellSchools = {
   "abj": "Abjuration",
   "con": "Conjuration",
   "div": "Divination",
@@ -100,7 +110,7 @@ CONFIG.spellSchools = {
 };
 
 // Spell Levels
-CONFIG.spellLevels = {
+DND5E.spellLevels = {
   0: "Cantrip",
   1: "1st Level",
   2: "2nd Level",
@@ -114,7 +124,7 @@ CONFIG.spellLevels = {
 };
 
 // Feat Types
-CONFIG.featTypes = {
+DND5E.featTypes = {
   "passive": "Passive Ability",
   "attack": "Ability Attack",
   "ability": "Generic Action",
@@ -123,7 +133,7 @@ CONFIG.featTypes = {
 };
 
 // Proficiency Multipliers
-CONFIG.proficiencyLevels = {
+DND5E.proficiencyLevels = {
   0: "Not Proficient",
   1: "Proficient",
   0.5: "Jack of all Trades",
@@ -131,7 +141,7 @@ CONFIG.proficiencyLevels = {
 };
 
 // Creature Sizes
-CONFIG.actorSizes = {
+DND5E.actorSizes = {
   "tiny": "Tiny",
   "sm": "Small",
   "med": "Medium",
@@ -141,7 +151,7 @@ CONFIG.actorSizes = {
 };
 
 // Condition Types
-CONFIG.conditionTypes = {
+DND5E.conditionTypes = {
   "blinded": "Blinded",
   "charmed": "Charmed",
   "deafened": "Deafened",
@@ -161,7 +171,7 @@ CONFIG.conditionTypes = {
 };
 
 // Languages
-CONFIG.languages = {
+DND5E.languages = {
   "common": "Common",
   "aarakocra": "Aarakocra",
   "abyssal": "Abyssal",
@@ -190,13 +200,74 @@ CONFIG.languages = {
 };
 
 // Character Level XP Requirements
-CONFIG.DND5E.CHARACTER_EXP_LEVELS =  [
+DND5E.CHARACTER_EXP_LEVELS =  [
   0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
   120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000]
 ;
 
 // Challenge Rating XP Levels
-CONFIG.DND5E.CR_EXP_LEVELS = [
+DND5E.CR_EXP_LEVELS = [
   10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
   20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
 ];
+
+// Configure Optional Character Flags
+DND5E.characterFlags = {
+  "weaponCriticalThreshold": {
+    name: "Weapon Critical Hit Threshold",
+    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
+    section: "Feats",
+    type: Number,
+    placeholder: 20
+  },
+  "powerfulBuild": {
+    name: "Powerful Build",
+    hint: "Provides increased carrying capacity.",
+    section: "Racial Traits",
+    type: Boolean
+  },
+  "savageAttacks": {
+    name: "Savage Attacks",
+    hint: "Adds extra critical hit weapon dice.",
+    section: "Racial Traits",
+    type: Boolean
+  },
+  // "elvenAccuracy": {
+  //   name: "Elven Accuracy",
+  //   hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
+  //   section: "Feats",
+  //   type: Boolean
+  // },
+  "initiativeAdv": {
+    name: "Advantage on Initiative",
+    hint: "Provided by feats or magical items.",
+    section: "Feats",
+    type: Boolean
+  },
+  "initiativeHalfProf": {
+    name: "Half-Proficiency to Initiative",
+    hint: "Provided by Jack of All Trades or Remarkable Athlete.",
+    section: "Feats",
+    type: Boolean
+  },
+  "initiativeAlert": {
+    name: "Alert Feat",
+    hint: "Provides +5 to Initiative.",
+    section: "Feats",
+    type: Boolean
+  },
+  "saveBonus": {
+    name: "Saving Throw Bonus",
+    hint: "Bonus modifier to all saving throws (e.g. +1)",
+    section: "Feats",
+    type: Number,
+    placeholder: "+0"
+  },
+  "spellDCBonus": {
+    name: "Spell DC Bonus",
+    hint: "Modifies normal spellcasting DC.",
+    section: "Feats",
+    type: Number,
+    placeholder: "+0"
+  }
+};

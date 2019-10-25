@@ -1,5 +1,8 @@
-
-const DND5E_TEMPLATE_METADATA = {
+/**
+ * Define metadata associated with the elements of the D&D5E system template data model
+ * @type {Object}
+ */
+export const TEMPLATE_METADATA = {
   "actor": {
     "data": {
       "abilities": {

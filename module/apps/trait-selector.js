@@ -2,7 +2,7 @@
  * A specialized form used to select damage or condition types which apply to an Actor
  * @type {FormApplication}
  */
-class TraitSelector5e extends FormApplication {
+export class ActorTraitSelector extends FormApplication {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  options.id = "trait-selector";

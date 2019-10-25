@@ -1,7 +1,9 @@
+import { Dice5e } from "../dice.js";
+
 /**
  * Override and extend the basic :class:`Item` implementation
  */
-class Item5e extends Item {
+export class Item5e extends Item {
 
   /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
@@ -57,7 +59,7 @@ class Item5e extends Item {
   _equipmentChatData() {
     const data = duplicate(this.data.data);
     const properties = [
-      CONFIG.armorTypes[data.armorType.value],
+      CONFIG.DND5E.armorTypes[data.armorType.value],
       data.armor.value + " AC",
       data.equipped.value ? "Equipped" : null,
       data.stealth.value ? "Stealth Disadv." : null,
@@ -72,7 +74,7 @@ class Item5e extends Item {
     const data = duplicate(this.data.data);
     const properties = [
       data.range.value,
-      CONFIG.weaponTypes[data.weaponType.value],
+      CONFIG.DND5E.weaponTypes[data.weaponType.value],
       data.proficient.value ? "" : "Not Proficient"
     ];
     data.properties = properties.filter(p => !!p);
@@ -83,7 +85,7 @@ class Item5e extends Item {
 
   _consumableChatData() {
     const data = duplicate(this.data.data);
-    data.consumableType.str = CONFIG.consumableTypes[data.consumableType.value];
+    data.consumableType.str = CONFIG.DND5E.consumableTypes[data.consumableType.value];
     data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
     data.hasCharges = data.charges.value >= 0;
     return data;
@@ -95,7 +97,7 @@ class Item5e extends Item {
     const data = duplicate(this.data.data);
     let abl = this.actor.data.data.abilities[data.ability.value].label,
         prof = data.proficient.value || 0;
-    const properties = [abl, CONFIG.proficiencyLevels[prof]];
+    const properties = [abl, CONFIG.DND5E.proficiencyLevels[prof]];
     data.properties = properties.filter(p => p !== null);
     return data;
   }
@@ -131,8 +133,8 @@ class Item5e extends Item {
 
     // Combine properties
     const props = [
-      CONFIG.spellSchools[data.school.value],
-      CONFIG.spellLevels[data.level.value],
+      CONFIG.DND5E.spellSchools[data.school.value],
+      CONFIG.DND5E.spellLevels[data.level.value],
       data.components.value,
       data.target.value,
       data.range.value,
@@ -234,7 +236,7 @@ class Item5e extends Item {
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
         parts = [alternate ? itemData.damage2.value : itemData.damage.value, `@abilities.${abl}.mod`],
-        dtype = CONFIG.damageTypes[alternate ? itemData.damage2Type.value : itemData.damageType.value];
+        dtype = CONFIG.DND5E.damageTypes[alternate ? itemData.damage2Type.value : itemData.damageType.value];
 
     // Append damage type to title
     let title = `${this.name} - Damage`;
@@ -303,7 +305,7 @@ class Item5e extends Item {
         abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
         parts = [itemData.damage.value],
         isHeal = itemData.spellType.value === "heal",
-        dtype = CONFIG.damageTypes[itemData.damageType.value];
+        dtype = CONFIG.DND5E.damageTypes[itemData.damageType.value];
 
     // Append damage type to title
     let title = this.name + (isHeal ? " - Healing" : " - Damage");
@@ -464,7 +466,7 @@ class Item5e extends Item {
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
         parts = [itemData.damage.value],
-        dtype = CONFIG.damageTypes[itemData.damageType.value];
+        dtype = CONFIG.DND5E.damageTypes[itemData.damageType.value];
 
     // Append damage type to title
     let title = `${this.name} - Damage`;
@@ -553,41 +555,3 @@ class Item5e extends Item {
     });
   }
 }
-
-// Assign Item5e class to CONFIG
-CONFIG.Item.entityClass = Item5e;
-
-
-/**
- * Hook into chat log context menu to add damage application options
- */
-Hooks.on("getChatLogEntryContext", (html, options) => {
-  let canApply = li => canvas.tokens.controlledTokens.length && li.find(".dice-roll").length;
-  options.push(
-    {
-      name: "Apply Damage",
-      icon: '<i class="fas fa-user-minus"></i>',
-      condition: canApply,
-      callback: li => Actor5e.applyDamage(li, 1)
-    },
-    {
-      name: "Apply Healing",
-      icon: '<i class="fas fa-user-plus"></i>',
-      condition: canApply,
-      callback: li => Actor5e.applyDamage(li, -1)
-    },
-    {
-      name: "Double Damage",
-      icon: '<i class="fas fa-user-injured"></i>',
-      condition: canApply,
-      callback: li => Actor5e.applyDamage(li, 2)
-    },
-    {
-      name: "Half Damage",
-      icon: '<i class="fas fa-user-shield"></i>',
-      condition: canApply,
-      callback: li => Actor5e.applyDamage(li, 0.5)
-    }
-  );
-  return options;
-});
