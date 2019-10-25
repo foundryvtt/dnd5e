@@ -3,43 +3,31 @@
     "data": {
       "abilities": {
         "str": {
-          "type": "Number",
-          "label": "Strength",
           "value": 10,
           "min": 3,
           "proficient": 0
         },
         "dex": {
-          "type": "Number",
-          "label": "Dexterity",
           "value": 10,
           "min": 3,
           "proficient": 0
         },
         "con": {
-          "type": "Number",
-          "label": "Constitution",
           "value": 10,
           "min": 3,
           "proficient": 0
         },
         "int": {
-          "type": "Number",
-          "label": "Intelligence",
           "value": 10,
           "min": 3,
           "proficient": 0
         },
         "wis": {
-          "type": "Number",
-          "label": "Wisdom",
           "value": 10,
           "min": 3,
           "proficient": 0
         },
         "cha": {
-          "type": "Number",
-          "label": "Charisma",
           "value": 10,
           "min": 3,
           "proficient": 0
@@ -47,13 +35,9 @@
       },
       "attributes": {
         "ac": {
-          "type": "Number",
-          "label": "Armor Class",
           "min": 0
         },
         "hp": {
-          "type": "Number",
-          "label": "Hit Points",
           "value": 10,
           "min": 0,
           "max": 10,
@@ -61,334 +45,246 @@
           "tempmax": 0
         },
         "init": {
-          "type": "Number",
-          "label": "Initiative Modifier",
           "value": 0
         },
         "prof": {
-          "type": "Number",
-          "label": "Proficiency",
           "value": 0
         },
         "speed": {
-          "type": "String",
-          "label": "Movement Speed",
           "value": "30 ft",
           "special": ""
         },
         "spellcasting": {
-          "type": "String",
-          "label": "Spellcasting Ability"
+          "value": "int"
         },
         "spelldc": {
-          "type": "String",
-          "label": "Spell DC"
+          "value": 0
         }
       },
       "details": {
         "alignment": {
-          "type": "String",
-          "label": "Alignment"
+          "value": "True Neutral"
         },
         "biography": {
-          "type": "String",
-          "label": "Biography",
           "value": ""
         },
-        "class": {
-          "type": "String",
-          "label": "Class"
-        },
         "race": {
-          "type": "String",
-          "label": "Race"
+          "value": "Human"
         }
       },
       "skills": {
         "acr": {
-          "type": "Number",
-          "label": "Acrobatics",
           "value": 0,
           "ability": "dex"
         },
         "ani": {
-          "type": "Number",
-          "label": "Animal Handling",
           "value": 0,
           "ability": "wis"
         },
         "arc": {
-          "type": "Number",
-          "label": "Arcana",
           "value": 0,
           "ability": "int"
         },
         "ath": {
-          "type": "Number",
-          "label": "Athletics",
           "value": 0,
           "ability": "str"
         },
         "dec": {
-          "type": "Number",
-          "label": "Deception",
           "value": 0,
           "ability": "cha"
         },
         "his": {
-          "type": "Number",
-          "label": "History",
           "value": 0,
           "ability": "int"
         },
         "ins": {
-          "type": "Number",
-          "label": "Insight",
           "value": 0,
           "ability": "wis"
         },
         "itm": {
-          "type": "Number",
-          "label": "Intimidation",
           "value": 0,
           "ability": "cha"
         },
         "inv": {
-          "type": "Number",
-          "label": "Investigation",
           "value": 0,
           "ability": "int"
         },
         "med": {
-          "type": "Number",
-          "label": "Medicine",
           "value": 0,
           "ability": "wis"
         },
         "nat": {
-          "type": "Number",
-          "label": "Nature",
           "value": 0,
           "ability": "int"
         },
         "prc": {
-          "type": "Number",
-          "label": "Perception",
           "value": 0,
           "ability": "wis"
         },
         "prf": {
-          "type": "Number",
-          "label": "Performance",
           "value": 0,
           "ability": "cha"
         },
         "per": {
-          "type": "Number",
-          "label": "Persuasion",
           "value": 0,
           "ability": "cha"
         },
         "rel": {
-          "type": "Number",
-          "label": "Religion",
           "value": 0,
           "ability": "int"
         },
         "slt": {
-          "type": "Number",
-          "label": "Sleight of Hand",
           "value": 0,
           "ability": "dex"
         },
         "ste": {
-          "type": "Number",
-          "label": "Stealth",
           "value": 0,
           "ability": "dex"
         },
         "sur": {
-          "type": "Number",
-          "label": "Survival",
           "value": 0,
           "ability": "wis"
         }
       },
       "traits": {
         "size": {
-          "type": "String",
-          "label": "Size",
           "value": "med"
         },
         "senses": {
-          "type": "String",
-          "label": "Senses"
+          "value": ""
         },
         "perception": {
-          "type": "Number",
-          "label": "Passive Perception"
+          "value": 10
         },
         "languages": {
-          "type": "String",
-          "label": "Known Languages"
+          "value": ""
         },
         "di": {
-          "type": "Array",
-          "label": "Damage Immunities"
+          "value": []
         },
         "dr": {
-          "type": "Array",
-          "label": "Damage Resistances"
+          "value": []
         },
         "dv": {
-          "type": "Array",
-          "label": "Damage Vulnerabilities"
+          "value": []
         },
         "ci": {
-          "type": "Array",
-          "label": "Condition Immunities"
+          "value": []
         }
       },
       "currency": {
         "pp": {
-          "type": "Number",
-          "label": "Platinum",
           "value": 0
         },
         "gp": {
-          "type": "Number",
-          "label": "Gold",
           "value": 0
         },
         "ep": {
-          "type": "Number",
-          "label": "Electrum",
           "value": 0
         },
         "sp": {
-          "type": "Number",
-          "label": "Silver",
           "value": 0
         },
         "cp": {
-          "type": "Number",
-          "label": "Copper",
           "value": 0
         }
       },
       "spells": {
         "spell0": {
-          "type": "Number",
-          "label": "Cantrip"
+          "value": 0,
+          "max": 0
         },
         "spell1": {
-          "type": "Number",
-          "label": "1st Level"
+          "value": 0,
+          "max": 0
         },
         "spell2": {
-          "type": "Number",
-          "label": "2nd Level"
+          "value": 0,
+          "max": 0
         },
         "spell3": {
-          "type": "Number",
-          "label": "3rd Level"
+          "value": 0,
+          "max": 0
         },
         "spell4": {
-          "type": "Number",
-          "label": "4th Level"
+          "value": 0,
+          "max": 0
         },
         "spell5": {
-          "type": "Number",
-          "label": "5th Level"
+          "value": 0,
+          "max": 0
         },
         "spell6": {
-          "type": "Number",
-          "label": "6th Level"
+          "value": 0,
+          "max": 0
         },
         "spell7": {
-          "type": "Number",
-          "label": "7th Level"
+          "value": 0,
+          "max": 0
         },
         "spell8": {
-          "type": "Number",
-          "label": "8th Level"
+          "value": 0,
+          "max": 0
         },
         "spell9": {
-          "type": "Number",
-          "label": "9th Level"
+          "value": 0,
+          "max": 0
         }
       }
     },
     "character": {
       "attributes": {
         "hd": {
-          "type": "Number",
-          "label": "Hit Dice",
           "value": 1,
           "min": 0
         },
         "death": {
-          "type": "Number",
-          "label": "Death Saves",
           "success": 0,
           "failure": 0
         },
         "exhaustion": {
-          "type": "Number",
-          "label": "Exhaustion Level",
           "value": 0
         },
         "inspiration": {
-          "type": "Boolean",
-          "label": "Inspiration",
-          "value": 0
+          "value": 1
         }
       },
       "details": {
         "background": {
-          "type": "String",
-          "label": "Background"
+          "value":  ""
         },
         "level": {
-          "type": "Number",
-          "label": "Character Level",
           "value": 1,
           "min": 1
         },
         "xp": {
-          "type": "Number",
-          "label": "Experience Points",
           "value": 0,
           "min": 0,
           "max": 300
         },
         "trait": {
-          "type": "String",
-          "label": "Trait"
+          "value": ""
         },
         "ideal": {
-          "type": "String",
-          "label": "Ideal"
+          "value": ""
         },
         "bond": {
-          "type": "String",
-          "label": "Bond"
+          "value": ""
         },
         "flaw": {
-          "type": "String",
-          "label": "Flaw"
+          "value": ""
         }
       },
       "resources": {
         "primary": {
-          "type": "String",
-          "label": "Primary Resource",
+          "value": 0,
+          "max": 0,
           "sr": 0,
           "lr": 0
         },
         "secondary": {
-          "type": "String",
-          "label": "Secondary Resource",
+          "value": 0,
+          "max": 0,
           "sr": 0,
           "lr": 0
         }
@@ -397,40 +293,35 @@
     "npc": {
       "details": {
         "type": {
-          "type": "String",
-          "label": "Creature Type"
+          "value": ""
         },
         "environment": {
-          "type": "String",
-          "label": "Environment"
+          "value": ""
         },
         "cr": {
-          "type": "Number",
-          "label": "Challenge Rating",
           "value": 1,
           "min": 0
         },
         "xp": {
-          "type": "Number",
-          "label": "Kill Experience"
+          "value": 10
         },
         "source": {
-          "type": "Source",
-          "label": "Source Location"
+          "value": ""
         }
       },
       "resources": {
         "legact": {
-          "type": "Number",
-          "label": "Legendary Actions"
+          "value": 0,
+          "max": 0
         },
         "legres": {
-          "type": "Number",
-          "label": "Legendary Resistance"
+          "value": 0,
+          "max": 0
         },
         "lair": {
-          "type": "Boolean",
-          "label": "Lair Action"
+          "value": 0,
+          "max": 0,
+          "initiative": 0
         }
       }
     }
@@ -438,348 +329,262 @@
   "item": {
     "data": {
       "description": {
-        "type": "String",
-        "label": "Description",
         "value": ""
       },
       "source": {
-        "type": "String",
-        "label": "Source"
+        "value": ""
       }
     },
     "weapon": {
       "quantity": {
-        "type": "Number",
-        "label": "Quantity",
         "value": 1
       },
       "weight": {
-        "type": "Number",
-        "label": "Weight"
+        "value": 0
       },
       "price": {
-        "type": "String",
-        "label": "Price"
+        "value": 0
       },
       "weaponType": {
-        "type": "String",
-        "label": "Weapon Type"
+        "value": "simpleM"
       },
       "bonus": {
-        "type": "String",
-        "label": "Weapon Bonus"
+        "value": 0
       },
       "damage": {
-        "type": "String",
-        "label": "Damage Formula"
+        "value": "1d6"
       },
       "damageType": {
-        "type": "String",
-        "label": "Damage Type"
+        "value": "slashing"
       },
       "damage2": {
-        "type": "String",
-        "label": "Alternate Damage"
+        "value": ""
       },
       "damage2Type": {
-        "type": "String",
-        "label": "Alternate Type"
+        "value": ""
       },
       "range": {
-        "type": "String",
-        "label": "Weapon Range"
+        "value": "5 ft"
       },
       "properties": {
-        "type": "String",
-        "label": "Weapon Properties"
+        "value": ""
       },
       "proficient": {
-        "type": "Boolean",
-        "label": "Proficient"
+        "value": true
       },
       "ability": {
-        "type": "String",
-        "label": "Offensive Ability"
+        "value": "str"
       },
       "attuned": {
-        "type": "Boolean",
-        "label": "Attuned"
+        "value": false
       },
       "equipped": {
-        "type": "Boolean",
-        "label": "Equipped"
+        "value": false
       },
       "rarity": {
-        "label": "Rarity"
+        "value": ""
       }
     },
     "equipment": {
       "quantity": {
-        "type": "Number",
-        "label": "Quantity",
         "value": 1
       },
       "weight": {
-        "type": "Number",
-        "label": "Weight"
+        "value": 0
       },
       "price": {
-        "type": "String",
-        "label": "Price"
+        "value": 0
       },
       "armor": {
-        "type": "Number",
-        "label": "Armor Value"
+        "value": 10
       },
       "armorType": {
-        "type": "String",
-        "label": "Armor Type"
+        "value": "light"
       },
       "strength": {
-        "type": "String",
-        "label": "Required Strength"
+        "value": 0
       },
       "stealth": {
-        "type": "Boolean",
-        "label": "Stealth Disadvantage"
+        "value": false
       },
       "proficient": {
-        "type": "Boolean",
-        "label": "Proficient"
+        "value": true
       },
       "attuned": {
-        "type": "Boolean",
-        "label": "Attuned"
+        "value": false
       },
       "equipped": {
-        "type": "Boolean",
-        "label": "Equipped"
+        "value": false
       },
       "rarity": {
-        "label": "Rarity"
+        "value": ""
       }
     },
     "consumable": {
       "quantity": {
-        "type": "Number",
-        "label": "Quantity",
         "value": 1
       },
       "weight": {
-        "type": "Number",
-        "label": "Weight"
+        "value": 0
       },
       "price": {
-        "type": "String",
-        "label": "Price"
+        "value": 0
       },
       "consumableType": {
-        "type": "String",
-        "label": "Consumable Type"
+        "value": "potion"
       },
       "charges": {
-        "type": "Number",
-        "label": "Charges",
         "value": 1,
         "max": 1
       },
       "consume": {
-        "type": "String",
-        "label": "Roll on Consume"
+        "value": ""
       },
       "autoUse": {
-        "type": "Boolean",
-        "label": "Consume on Use"
+        "value": true
       },
       "autoDestroy": {
-        "type": "Boolean",
-        "label": "Destroy on Empty"
+        "value": true
       },
       "attuned": {
-        "type": "Boolean",
-        "label": "Attuned"
+        "value": false
       },
       "equipped": {
-        "type": "Boolean",
-        "label": "Equipped"
+        "value": false
       },
       "rarity": {
-        "label": "Rarity"
+        "value": ""
       }
     },
     "tool": {
       "quantity": {
-        "type": "Number",
-        "label": "Quantity",
         "value": 1
       },
       "weight": {
-        "type": "Number",
-        "label": "Weight"
+        "value": 0
       },
       "price": {
-        "type": "String",
-        "label": "Price"
+        "value": 0
       },
       "ability": {
-        "type": "String",
-        "label": "Default Ability"
+        "value": "int"
       },
       "proficient": {
-        "type": "Number",
-        "label": "Proficiency"
+        "value": 0
       }
     },
     "backpack": {
       "quantity": {
-        "type": "Number",
-        "label": "Quantity",
         "value": 1
       },
       "weight": {
-        "type": "Number",
-        "label": "Weight"
+        "value": 0
       },
       "price": {
-        "type": "String",
-        "label": "Price"
+        "value": 0
       },
       "attuned": {
-        "type": "Boolean",
-        "label": "Attuned"
+        "value": false
       },
       "equipped": {
-        "type": "Boolean",
-        "label": "Equipped"
+        "value": false
       },
       "rarity": {
-        "label": "Rarity"
+        "value": ""
       }
     },
     "class": {
       "levels": {
-        "type": "String",
-        "label": "Class Levels",
         "value": 1
       },
       "subclass": {
-        "type": "String",
-        "label": "Subclass"
+        "value": ""
       }
     },
     "spell": {
       "spellType": {
-        "type": "String",
-        "label": "Spell Type"
+        "value": "utility"
       },
       "level": {
-        "type": "Number",
-        "label": "Spell Level"
+        "value": 1
       },
       "school": {
-        "type": "String",
-        "label": "Spell School"
+        "value": ""
       },
       "components": {
-        "type": "String",
-        "label": "Spell Components"
+        "value": ""
       },
       "materials": {
-        "type": "String",
-        "label": "Materials"
+        "value": ""
       },
       "target": {
-        "type": "String",
-        "label": "Target"
+        "value": ""
       },
       "range": {
-        "type": "String",
-        "label": "Range"
+        "value": ""
       },
       "time": {
-        "type": "String",
-        "label": "Casting Time"
+        "value": ""
       },
       "duration": {
-        "type": "String",
-        "label": "Duration"
+        "value": ""
       },
       "damage": {
-        "type": "String",
-        "label": "Spell Damage"
+        "value": ""
       },
       "damageType": {
-        "type": "String",
-        "label": "Damage Type"
+        "value": ""
       },
       "save": {
-        "type": "String",
-        "label": "Saving Throw"
+        "value": ""
       },
       "ability": {
-        "type": "String",
-        "label": "Spellcasting Ability"
+        "value": ""
       },
       "concentration": {
-        "type": "Boolean",
-        "label": "Requires Concentration",
         "value": false
       },
       "ritual": {
-        "type": "Boolean",
-        "label": "Cast as Ritual",
         "value": false
       },
       "prepared": {
-        "type": "Boolean",
-        "label": "Prepared Spell",
         "value": false
       }
     },
     "feat": {
       "featType": {
-        "type": "String",
-        "label": "Feat Type"
+        "value": "passive"
       },
       "requirements": {
-        "type": "String",
-        "label": "Requirements"
+        "value": ""
       },
       "ability": {
-        "type": "String",
-        "label": "Ability Modifier"
+        "value": ""
       },
       "target": {
-        "type": "String",
-        "label": "Target"
+        "value": ""
       },
       "range": {
-        "type": "String",
-        "label": "Range"
+        "value": ""
       },
       "time": {
-        "type": "String",
-        "label": "Casting Time"
+        "value": ""
       },
       "duration": {
-        "type": "String",
-        "label": "Duration"
+        "value": ""
       },
       "damage": {
-        "type": "String",
-        "label": "Ability Damage"
+        "value": ""
       },
       "damageType": {
-        "type": "String",
-        "label": "Damage Type"
+        "value": ""
       },
       "save": {
-        "type": "String",
-        "label": "Saving Throw"
+        "value": ""
       },
       "uses": {
-        "type": "Number",
-        "label": "Limited Uses"
+        "value": 0,
+        "max": 0
       }
     }
   }

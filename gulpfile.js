@@ -9,7 +9,7 @@ const less = require('gulp-less');
 const DND5E_SCRIPTS = ["scripts/**/*.js"];
 function concatScripts() {
   return gulp.src(DND5E_SCRIPTS)
-    .pipe(concat('dnd5e.js'))
+    .pipe(concat('dnd5e-old.js'))
     .pipe(gulp.dest('./'));
 }
 const js = gulp.series(concatScripts);

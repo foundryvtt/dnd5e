@@ -1,6 +1,28 @@
 // Namespace D&D5e Configuration Values
 CONFIG.DND5E = {};
 
+// Equipment Types
+CONFIG.armorTypes = {
+  "clothing": "Clothing",
+  "light": "Light Armor",
+  "medium": "Medium Armor",
+  "heavy": "Heavy Armor",
+  "bonus": "Magical Bonus",
+  "natural": "Natural Armor",
+  "shield": "Shield"
+};
+
+// Consumable Types
+CONFIG.consumableTypes = {
+  "potion": "Potion",
+  "poison": "Poison",
+  "scroll": "Scroll",
+  "wand": "Wand",
+  "rod": "Rod",
+  "trinket": "Trinket"
+};
+
+
 // Damage Types
 CONFIG.damageTypes = {
   "acid": "Acid",
@@ -47,27 +69,6 @@ CONFIG.weaponProperties = {
   "ver": "Versatile",
   "hvy": "Heavy",
   "rch": "Reach"
-};
-
-// Equipment Types
-CONFIG.armorTypes = {
-  "clothing": "Clothing",
-  "light": "Light Armor",
-  "medium": "Medium Armor",
-  "heavy": "Heavy Armor",
-  "bonus": "Magical Bonus",
-  "natural": "Natural Armor",
-  "shield": "Shield"
-};
-
-// Consumable Types
-CONFIG.consumableTypes = {
-  "potion": "Potion",
-  "poison": "Poison",
-  "scroll": "Scroll",
-  "wand": "Wand",
-  "rod": "Rod",
-  "trinket": "Trinket"
 };
 
 
