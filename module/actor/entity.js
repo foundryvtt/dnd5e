@@ -28,6 +28,7 @@ export class Actor5e extends Actor {
     for (let skl of Object.values(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.mod = data.abilities[skl.ability].mod + Math.floor(skl.value * data.attributes.prof.value);
+      skl.passive = 10 + skl.mod;
     }
 
     // Initiative

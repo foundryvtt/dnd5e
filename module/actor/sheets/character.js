@@ -177,9 +177,26 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.options.editable ) return;
 
+    // Spell Preparation
+    html.find('.item-prepare').click(this._onPrepareItem.bind(this));
+
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the prepared status of an Owned Item within the Actor
+   * @param {Event} event   The triggering click event
+   * @private
+   */
+  _onPrepareItem(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    return item.update({"data.prepared.value": !item.data.data.prepared.value});
   }
 
   /* -------------------------------------------- */

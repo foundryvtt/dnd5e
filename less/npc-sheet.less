@@ -1,0 +1,347 @@
+@colorDark: #191813;
+@colorBeige: #b5b3a4;
+@colorTan: #7a7971;
+@colorOlive: #4b4a44;
+@borderGroove: 2px groove #eeede0;
+
+.dnd5e.sheet.actor.npc {
+  min-width: 620px;
+  min-height: 710px;
+
+  .window-content {
+    background: url("ui/parchment.jpg") repeat;
+    color: @colorDark;
+  }
+
+  label {
+    display: inline;   // TODO: Undo a dirty hack in the 5e sheet
+  }
+
+  input {
+    color: @colorDark;
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  .npc-sheet-header {
+    flex: 0 0 100px;
+    border-bottom: @borderGroove;
+    .nodesto();
+
+    .profile {
+      flex: 0 0 100px;
+      border: none;
+      border-right: @borderGroove;
+    }
+
+    .charname {
+      flex: 1;
+      border-bottom: none;
+      height: 60px;
+      margin: 0;
+      padding-left: 5px;
+
+      input {
+        height: 50px;
+        margin: 5px 0;
+        font-size: 36px;
+      }
+    }
+
+    .charlevel {
+      flex: 0 0 160px;
+      height: 60px;
+      margin: 0;
+      text-align: right;
+
+      .level {
+        width: 100%;
+        height: 30px;
+        margin-top: 5px;
+        font-size: 20px;
+        line-height: 30px;
+
+        label {
+          display: inline;
+          font-size: 24px;
+          text-align: right;
+        }
+
+        input {
+          display: inline;
+          width: 26px;
+          font-size: 24px;
+          text-align: center;
+        }
+      }
+
+      .experience {
+        width: 100%;
+        height: 20px;
+        margin-bottom: 5px;
+        padding-right: 8px;
+        font-size: 16px;
+        color: @colorOlive;
+      }
+    }
+
+    .details {
+      flex: 0 0 100%;
+      height: 40px;
+      border-top: @borderGroove;
+      border-bottom: none;
+
+      li {
+        width: 33.33%;
+        float: left;
+        height: 34px;
+        margin: 2px 0;
+        border-right: @borderGroove;
+        &:last-child { border-right: none; }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+  .npc-sheet-navigation {
+    flex: 0 0 30px;
+    margin-bottom: 10px;
+    .nodesto();
+
+    .item {
+      height: 30px;
+      line-height: 36px;
+      margin: 0 24px;
+      border-bottom: 3px solid @colorBeige;
+      &.active { border-bottom: 3px solid #44191A; }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Ability Scores                           */
+  /* ----------------------------------------- */
+
+  .ability-scores {
+    flex: 0 0 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    .nodesto();
+
+    .ability {
+      margin: 0 5px;
+      text-align: center;
+      border: @borderGroove;
+      border-radius: 4px;
+
+      h4.ability-name {
+        height: 20px;
+        line-height: 20px;
+        margin: 4px 16px 0;
+        font-size: 18px;
+        border-bottom: 1px solid @colorBeige;
+      }
+
+      input.ability-score {
+        height: 30px;
+        width: 50px;
+        margin: 0 auto;
+        line-height: 32px;
+        font-size: 24px;
+      }
+
+      .ability-modifiers {
+        height: 24px;
+        margin: -10px 0 0;
+
+        span.ability-mod,
+        span.ability-save {
+          flex: 0 0 24px;
+          height: 24px;
+          border-top: @borderGroove;
+        }
+
+        span.ability-mod {
+          border-right: @borderGroove;
+        }
+
+        span.ability-save {
+          border-left: @borderGroove;
+        }
+
+        .ability-proficiency {
+          flex: 1;
+          color: @colorBeige;
+          font-size: 12px;
+          line-height: 30px;
+        }
+      }
+
+      &.proficient .ability-modifiers .ability-proficiency {
+        color: @colorOlive;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Skills                                   */
+  /* ----------------------------------------- */
+
+  ul.skills-list {
+    flex: 0 0 200px;
+    list-style: none;
+    margin: 10px 5px;
+    padding: 2px 2px 0;
+    border: @borderGroove;
+
+    li.skill {
+      height: 24px;
+      padding: 3px;
+
+      .skill-proficiency {
+        flex: 0 0 16px;
+        font-size: 12px;
+        line-height: 18px;
+        color: @colorBeige;
+      }
+      &.proficient .skill-proficiency {
+        color: @colorOlive;
+      }
+
+      .skill-ability {
+        flex: 0 0 28px;
+      }
+
+      .skill-mod,
+      .skill-passive {
+        flex: 0 0 20px;
+      }
+
+      .skill-passive {
+        text-align: center;
+        color: @colorTan;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Attributes                               */
+  /* ----------------------------------------- */
+
+  ul.attributes {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+
+    li.attribute {
+      height: 90px;
+      margin: 0 5px;
+      border: @borderGroove;
+      border-radius: 4px;
+
+      .attribute-name {
+        flex: 0 0 20px;
+        margin: 5px 12px;
+        border-bottom: 1px solid @colorBeige;
+        .nodesto();
+        font-size: 18px;
+        line-height: 20px;
+        text-align: center;
+      }
+
+      .attribute-value {
+        flex: 0 0 30px;
+        .nodesto();
+        text-align: center;
+        line-height: 30px;
+
+        input {
+          display: inline;
+          max-width: 80%;
+          margin: 0;
+          font-size: 24px;
+        }
+
+        span.sep {
+          display: inline;
+          position: relative;
+          top: 2px;
+          font-size: 28px;
+          color: @colorTan;
+        }
+
+        &.multiple {
+          input {
+            max-width: 40%;
+          }
+        }
+      }
+
+      .attribute-footer {
+        flex: 0 0 20px;
+        line-height: 20px;
+        margin: 0 0 5px;
+        text-align: center;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Statuses                                 */
+  /* ----------------------------------------- */
+
+  .statuses {
+    flex: 0 0 100%;
+    border-bottom: @borderGroove;
+    margin-bottom: 5px;
+
+    .status {
+      border: none;
+
+      h4 {
+        font-size: 16px;
+      }
+
+      input[type="text"] {
+        text-align: center;
+      }
+
+      span.sep {
+        margin: 0 -2px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Traits                                   */
+  /* ----------------------------------------- */
+
+  .traits {
+    margin: 0 5px;
+
+    .form-group, .form-group-stacked {
+      margin: 0 0 4px 0;
+    }
+
+    label {
+      line-height: 20px;
+      margin: 0;
+    }
+
+    input {
+      text-align: right;
+    }
+
+    select {
+      background: transparent;
+    }
+
+    .inactive {
+      color: @colorTan;
+    }
+  }
+}

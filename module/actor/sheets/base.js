@@ -69,6 +69,7 @@ export class ActorSheet5e extends ActorSheet {
 
       // Add custom entry
       if ( trait.custom ) trait.selected["custom"] = trait.custom;
+      trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
   }
 
@@ -138,13 +139,12 @@ export class ActorSheet5e extends ActorSheet {
     });
 
     // Activate tabs
-    html.find('.tabs').each((_, el) => {
-      let tabs = $(el),
-        group = el.getAttribute("data-group"),
-        initial = this.actor.data.flags[`_sheetTab-${group}`];
+    html.find('.tabs').each((_, tabs) => {
+      const group = tabs.dataset.group;
+      const initial = this[`_sheetTab-${group}`];
       new Tabs(tabs, {
         initial: initial,
-        callback: clicked => this.actor.data.flags[`_sheetTab-${group}`] = clicked.attr("data-tab")
+        callback: clicked => this[`_sheetTab-${group}`] = clicked.data("tab")
       });
     });
 
@@ -159,10 +159,7 @@ export class ActorSheet5e extends ActorSheet {
      /* -------------------------------------------- */
 
     // Ability Proficiency
-    html.find('.ability-proficiency').click(ev => {
-      let field = $(ev.currentTarget).siblings('input[type="hidden"]');
-      this.actor.update({[field[0].name]: 1 - parseInt(field[0].value)});
-    });
+    html.find('.ability-proficiency').click(this._onToggleAbilityProficiency.bind(this));
 
     // Ability Checks
     html.find('.ability-name').click(event => {
@@ -206,14 +203,6 @@ export class ActorSheet5e extends ActorSheet {
         itemId = Number(li.attr("data-item-id"));
       this.actor.deleteOwnedItem(itemId);
       li.slideUp(200, () => this.render(false));
-    });
-
-    // Toggle Spell prepared value
-    html.find('.item-prepare').click(ev => {
-      let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id")),
-          item = this.actor.getOwnedItem(itemId);
-      item.data['prepared'].value = !item.data['prepared'].value;
-      this.actor.updateOwnedItem(item);
     });
 
     // Item Dragging
@@ -325,6 +314,19 @@ export class ActorSheet5e extends ActorSheet {
         data = duplicate(header.dataset);
     data["name"] = `New ${data.type.capitalize()}`;
     return this.actor.createOwnedItem(data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling Ability score proficiency level
+   * @param {Event} event     The originating click event
+   * @private
+   */
+  _onToggleAbilityProficiency(event) {
+    event.preventDefault();
+    const field = event.currentTarget.previousElementSibling;
+    this.actor.update({[field.name]: 1 - parseInt(field.value)});
   }
 
   /* -------------------------------------------- */

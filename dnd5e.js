@@ -20,6 +20,7 @@ import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
 import { Item5e } from "./module/item/entity.js";
 import { ItemSheet5e } from "./module/item/sheet.js";
+import { ActorNPCSheet5e } from "./module/actor/sheets2/npc.js";
 
 
 /* -------------------------------------------- */
@@ -55,7 +56,7 @@ Hooks.once("ready", async function() {
   // Register Entity Sheets
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", ActorSheet5eCharacter, { types: ["character"], makeDefault: true });
-  Actors.registerSheet("dnd5e", ActorSheet5eNPC, { types: ["npc"], makeDefault: true });
+  Actors.registerSheet("dnd5e", ActorNPCSheet5e, { types: ["npc"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
 });
