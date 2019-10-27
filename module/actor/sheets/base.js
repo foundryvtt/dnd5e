@@ -25,17 +25,19 @@ export class ActorSheet5e extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
-    // Ability proficiency
-    for ( let abl of Object.values(sheetData.data.abilities)) {
+    // Ability Scores
+    for ( let [a, abl] of Object.entries(sheetData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
+      abl.label = CONFIG.DND5E.abilities[a];
     }
 
     // Update skill labels
-    for ( let skl of Object.values(sheetData.data.skills)) {
+    for ( let [s, skl] of Object.entries(sheetData.data.skills)) {
       skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
+      skl.label = CONFIG.DND5E.skills[s];
     }
 
     // Update traits

@@ -4,6 +4,9 @@
 @colorOlive: #4b4a44;
 @borderGroove: 2px groove #eeede0;
 
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
 .dnd5e.sheet.actor.npc {
   min-width: 620px;
   min-height: 710px;
@@ -12,22 +15,6 @@
     background: url("ui/parchment.jpg") repeat;
     color: @colorDark;
   }
-
-  label {
-    display: inline; // TODO: Undo a dirty hack in the 5e sheet
-  }
-
-  input {
-    color: @colorDark;
-  }
-
-  select {
-    background: transparent;
-  }
-
-  /* ----------------------------------------- */
-  /*  Basic Structure                          */
-  /* ----------------------------------------- */
 
   .npc-sheet-header {
     flex: 0 0 100px;
@@ -40,6 +27,40 @@
   .npc-sheet-body {
     flex: 1;
     overflow: hidden;
+  }
+
+  /* ----------------------------------------- */
+  /*  General Styles                           */
+  /* ----------------------------------------- */
+
+  label {
+    display: inline; // TODO: Undo a dirty hack in the 5e sheet
+  }
+
+  input {
+    color: @colorDark;
+  }
+
+  select {
+    background: transparent;
+    flex: 1;
+  }
+
+  /* Box Headers */
+  h4.box-title {
+    line-height: 16px;
+    margin: 4px 16px 2px;
+    font-size: 18px;
+    border-bottom: 1px solid @colorBeige;
+  }
+
+  /* Proficiency Toggle Buttons */
+  .proficiency-toggle {
+    color: @colorBeige;
+    font-size: 12px;
+  }
+  .proficient .proficiency-toggle {
+    color: @colorOlive;
   }
 
   /* ----------------------------------------- */
@@ -164,14 +185,6 @@
       border: @borderGroove;
       border-radius: 4px;
 
-      h4.ability-name {
-        height: 20px;
-        line-height: 20px;
-        margin: 4px 16px 0;
-        font-size: 18px;
-        border-bottom: 1px solid @colorBeige;
-      }
-
       input.ability-score {
         height: 30px;
         width: 50px;
@@ -195,20 +208,18 @@
           border-right: @borderGroove;
         }
 
+        .ability-proficiency {
+          line-height: 30px;
+        }
+
         span.ability-save {
           border-left: @borderGroove;
         }
-
-        .ability-proficiency {
-          flex: 1;
-          color: @colorBeige;
-          font-size: 12px;
-          line-height: 30px;
-        }
       }
 
-      &.proficient .ability-modifiers .ability-proficiency {
-        color: @colorOlive;
+      /* Hide modifier box on hover */
+      input.ability-score:hover + .ability-modifiers {
+        visibility: hidden;
       }
     }
   }
@@ -230,13 +241,7 @@
 
       .skill-proficiency {
         flex: 0 0 16px;
-        font-size: 12px;
         line-height: 18px;
-        color: @colorBeige;
-      }
-
-      &.proficient .skill-proficiency {
-        color: @colorOlive;
       }
 
       .skill-ability {
@@ -265,25 +270,19 @@
     padding: 0;
 
     li.attribute {
-      height: 90px;
+      height: 80px;
       margin: 0 5px;
       border: @borderGroove;
       border-radius: 4px;
+      .nodesto();
+      text-align: center;
 
       .attribute-name {
-        flex: 0 0 20px;
-        margin: 5px 12px;
-        border-bottom: 1px solid @colorBeige;
-        .nodesto();
-        font-size: 18px;
-        line-height: 20px;
-        text-align: center;
+        flex: 0 0 18px;
       }
 
       .attribute-value {
         flex: 0 0 30px;
-        .nodesto();
-        text-align: center;
         line-height: 30px;
 
         input {
@@ -311,8 +310,10 @@
       .attribute-footer {
         flex: 0 0 20px;
         line-height: 20px;
-        margin: 0 0 5px;
-        text-align: center;
+        margin: -3px 0 5px;
+        font-family: "Signika", "Palatino Linotype", serif;
+        font-size: 14px;
+        input { margin: 0; }
       }
     }
   }

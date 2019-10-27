@@ -36,10 +36,10 @@
 
     {{!-- NPC Sheet Navigation --}}
     <nav class="npc-sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">Attributes</a>
-        <a class="item" data-tab="features">Features</a>
-        <a class="item" data-tab="spellbook">Spellbook</a>
-        <a class="item" data-tab="biography">Biography</a>
+        <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
+        <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "DND5E.Spellbook" }}</a>
+        <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
     </nav>
 
     {{!-- NPC Sheet Body --}}
@@ -51,12 +51,12 @@
             <ul class="ability-scores flexrow">
             {{#each data.abilities as |ability id|}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}">
-                    <h4 class="ability-name rollable">{{ability.label}}</h4>
+                    <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" data-dtype="Number" placeholder="10"/>
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                         <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
-                        <a class="ability-proficiency" title="Proficiency">{{{ability.icon}}}</a>
+                        <a class="proficiency-toggle ability-proficiency" title="Proficiency">{{{ability.icon}}}</a>
                         <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
                 </li>
@@ -68,7 +68,7 @@
             {{#each data.skills as |skill s|}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
-                    <a class="skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
+                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
@@ -82,41 +82,41 @@
                 {{!-- Attributes --}}
                 <ul class="attributes flexrow">
                     <li class="attribute flexcol">
-                        <h4 class="attribute-name">Health</h4>
+                        <h4 class="attribute-name box-title">{{ localize "DND5E.Health" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
-                                   data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
+                                   data-dtype="Number" placeholder="10"/>
                             <span class="sep"> / </span>
                             <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                                   data-dtype="{{data.attributes.hp.type}}" placeholder="10"/>
+                                   data-dtype="Number" placeholder="10"/>
                         </div>
                         <footer class="attribute-footer">
-                            <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="Formula"
+                            <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="{{ localize 'DND5E.HealthFormula' }}"
                                    value="{{data.attributes.hp.formula}}"/>
                         </footer>
                     </li>
 
                     <li class="attribute">
-                        <h4 class="attribute-name">Armor Class</h4>
+                        <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
                         <div class="attribute-value">
                             <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
-                                   data-dtype="{{data.attributes.ac.type}}" placeholder="10"/>
+                                   data-dtype="Number" placeholder="10"/>
                         </div>
                         <footer class="attribute-footer">
-                            <span>Proficiency</span>
+                            <span>{{ localize "DND5E.Proficiency" }}</span>
                             <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
                         </footer>
                     </li>
 
                     <li class="attribute">
-                        <h4 class="attribute-name">Speed</h4>
+                        <h4 class="attribute-name box-title">{{ localize "DND5E.Speed" }}</h4>
                         <div class="attribute-value">
-                            <input name="data.attributes.speed.value" type="text" value="{{data.attributes.speed.value}}"
-                                   data-dtype="{{data.attributes.speed.type}}" placeholder="0"/>
+                            <input name="data.attributes.speed.value" type="text"
+                                   value="{{data.attributes.speed.value}}" placeholder="0"/>
                         </div>
                         <footer class="attribute-footer">
-                            <input type="text" class="speed" name="data.attributes.speed.special" placeholder="Special Movement"
-                                   data-dtype="{{data.attributes.speed.type}}" value="{{data.attributes.speed.special}}"/>
+                            <input type="text" class="speed" name="data.attributes.speed.special"
+                                   value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
                         </footer>
                     </li>
                 </ul>
@@ -124,7 +124,7 @@
                 {{!-- Legendary Actions --}}
                 <div class="statuses flexrow">
                     <div class="status legendary">
-                        <h4>Leg. Actions</h4>
+                        <h4>{{ localize "DND5E.LegAct" }}</h4>
                         <div class="status-value">
                             <input type="text" name="data.resources.legact.value" data-dtype="Number" placeholder="0"
                                    value="{{data.resources.legact.value}}"/>
@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div class="status legendary">
-                        <h4>Leg. Resistance</h4>
+                        <h4>{{ localize "DND5E.LegRes" }}</h4>
                         <div class="status-value">
                             <input type="text" name="data.resources.legres.value" data-dtype="Number" placeholder="0"
                                    value="{{data.resources.legres.value}}"/>
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                     <div class="status lair">
-                        <h4>Lair Action</h4>
+                        <h4>{{ localize "DND5E.LairAct" }}</h4>
                         <div class="status-value">
                             <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
                                    data-dtype="Boolean" {{checked data.resources.lair.value}}/>
@@ -158,8 +158,8 @@
                 {{!-- Traits --}}
                 <div class="traits">
                     <div class="form-group trait-size">
-                        <label>{{data.traits.size.label}}</label>
-                        <select name="data.traits.size.value" data-dtype="{{data.traits.size.type}}">
+                        <label>{{localize "DND5E.Size"}}</label>
+                        <select name="data.traits.size.value">
                             {{#select data.traits.size.value}}
                             {{#each actorSizes as |label size|}}
                                 <option value="{{size}}">{{label}}</option>
@@ -169,14 +169,12 @@
                     </div>
 
                     <div class="form-group {{#unless data.traits.senses.value}}inactive{{/unless}}">
-                        <label>{{data.traits.senses.label}}</label>
-                        <input type="text" name="data.traits.senses.value" data-dtype="{{data.traits.senses.type}}"
-                               value="{{data.traits.senses.value}}" placeholder="None"/>
+                        <label>{{localize "DND5E.Senses"}}</label>
+                        <input type="text" name="data.traits.senses.value" value="{{data.traits.senses.value}}" placeholder="None"/>
                     </div>
 
                     <div class="form-group-stacked {{data.traits.languages.cssClass}}">
-                        <label for="data.traits.languages">
-                            {{data.traits.languages.label}}
+                        <label for="data.traits.languages">{{localize "DND5E.Languages"}}
                             <a class="trait-selector" data-options="languages"><i class="fas fa-edit"></i></a>
                         </label>
                         <ul class="traits-list">
@@ -187,8 +185,7 @@
                     </div>
 
                     <div class="form-group-stacked {{data.traits.di.cssClass}}">
-                        <label for="data.traits.di">
-                            {{data.traits.di.label}}
+                        <label for="data.traits.di">{{localize "DND5E.DamImm"}}
                             <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
                         </label>
                         <ul class="traits-list">
@@ -199,8 +196,7 @@
                     </div>
 
                     <div class="form-group-stacked {{data.traits.dr.cssClass}}">
-                        <label for="data.traits.dr">
-                            {{data.traits.dr.label}}
+                        <label for="data.traits.dr">{{localize "DND5E.DamRes"}}
                             <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
                         </label>
                         <ul class="traits-list">
@@ -211,8 +207,7 @@
                     </div>
 
                     <div class="form-group-stacked {{data.traits.dv.cssClass}}">
-                        <label for="data.traits.dv">
-                            {{data.traits.dv.label}}
+                        <label for="data.traits.dv">{{localize "DND5E.DamVuln"}}
                             <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
                         </label>
                         <ul class="traits-list">
@@ -223,8 +218,7 @@
                     </div>
 
                     <div class="form-group-stacked {{data.traits.ci.cssClass}}">
-                        <label for="data.traits.ci">
-                            {{data.traits.ci.label}}
+                        <label for="data.traits.ci">{{localize "DND5E.ConImm"}}
                             <a class="trait-selector" data-options="conditionTypes"><i class="fas fa-edit"></i></a>
                         </label>
                         <ul class="traits-list">
@@ -235,7 +229,7 @@
                     </div>
 
                     <div class="form-group configure-flags">
-                        <label>Special Traits</label>
+                        <label>{{localize "DND5E.SpecialTraits"}}</label>
                         <i class="fas fa-cog"></i>
                     </div>
                 </div>

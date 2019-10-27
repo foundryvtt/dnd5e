@@ -1,238 +1,242 @@
 {
-  "actor": {
-    "data": {
-      "abilities": {
-        "str": {
-          "value": 10,
-          "min": 3,
-          "proficient": 0
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "common": {
+        "abilities": {
+          "str": {
+            "value": 10,
+            "min": 3,
+            "proficient": 0
+          },
+          "dex": {
+            "value": 10,
+            "min": 3,
+            "proficient": 0
+          },
+          "con": {
+            "value": 10,
+            "min": 3,
+            "proficient": 0
+          },
+          "int": {
+            "value": 10,
+            "min": 3,
+            "proficient": 0
+          },
+          "wis": {
+            "value": 10,
+            "min": 3,
+            "proficient": 0
+          },
+          "cha": {
+            "value": 10,
+            "min": 3,
+            "proficient": 0
+          }
         },
-        "dex": {
-          "value": 10,
-          "min": 3,
-          "proficient": 0
+        "attributes": {
+          "ac": {
+            "min": 0
+          },
+          "hp": {
+            "value": 10,
+            "min": 0,
+            "max": 10,
+            "temp": 0,
+            "tempmax": 0
+          },
+          "init": {
+            "value": 0
+          },
+          "prof": {
+            "value": 0
+          },
+          "speed": {
+            "value": "30 ft",
+            "special": ""
+          },
+          "spellcasting": {
+            "value": "int"
+          },
+          "spelldc": {
+            "value": 0
+          }
         },
-        "con": {
-          "value": 10,
-          "min": 3,
-          "proficient": 0
+        "details": {
+          "alignment": {
+            "value": "True Neutral"
+          },
+          "biography": {
+            "value": ""
+          },
+          "race": {
+            "value": "Human"
+          }
         },
-        "int": {
-          "value": 10,
-          "min": 3,
-          "proficient": 0
+        "skills": {
+          "acr": {
+            "value": 0,
+            "ability": "dex"
+          },
+          "ani": {
+            "value": 0,
+            "ability": "wis"
+          },
+          "arc": {
+            "value": 0,
+            "ability": "int"
+          },
+          "ath": {
+            "value": 0,
+            "ability": "str"
+          },
+          "dec": {
+            "value": 0,
+            "ability": "cha"
+          },
+          "his": {
+            "value": 0,
+            "ability": "int"
+          },
+          "ins": {
+            "value": 0,
+            "ability": "wis"
+          },
+          "itm": {
+            "value": 0,
+            "ability": "cha"
+          },
+          "inv": {
+            "value": 0,
+            "ability": "int"
+          },
+          "med": {
+            "value": 0,
+            "ability": "wis"
+          },
+          "nat": {
+            "value": 0,
+            "ability": "int"
+          },
+          "prc": {
+            "value": 0,
+            "ability": "wis"
+          },
+          "prf": {
+            "value": 0,
+            "ability": "cha"
+          },
+          "per": {
+            "value": 0,
+            "ability": "cha"
+          },
+          "rel": {
+            "value": 0,
+            "ability": "int"
+          },
+          "slt": {
+            "value": 0,
+            "ability": "dex"
+          },
+          "ste": {
+            "value": 0,
+            "ability": "dex"
+          },
+          "sur": {
+            "value": 0,
+            "ability": "wis"
+          }
         },
-        "wis": {
-          "value": 10,
-          "min": 3,
-          "proficient": 0
+        "traits": {
+          "size": {
+            "value": "med"
+          },
+          "senses": {
+            "value": ""
+          },
+          "perception": {
+            "value": 10
+          },
+          "languages": {
+            "value": ""
+          },
+          "di": {
+            "value": []
+          },
+          "dr": {
+            "value": []
+          },
+          "dv": {
+            "value": []
+          },
+          "ci": {
+            "value": []
+          }
         },
-        "cha": {
-          "value": 10,
-          "min": 3,
-          "proficient": 0
-        }
-      },
-      "attributes": {
-        "ac": {
-          "min": 0
+        "currency": {
+          "pp": {
+            "value": 0
+          },
+          "gp": {
+            "value": 0
+          },
+          "ep": {
+            "value": 0
+          },
+          "sp": {
+            "value": 0
+          },
+          "cp": {
+            "value": 0
+          }
         },
-        "hp": {
-          "value": 10,
-          "min": 0,
-          "max": 10,
-          "temp": 0,
-          "tempmax": 0
-        },
-        "init": {
-          "value": 0
-        },
-        "prof": {
-          "value": 0
-        },
-        "speed": {
-          "value": "30 ft",
-          "special": ""
-        },
-        "spellcasting": {
-          "value": "int"
-        },
-        "spelldc": {
-          "value": 0
-        }
-      },
-      "details": {
-        "alignment": {
-          "value": "True Neutral"
-        },
-        "biography": {
-          "value": ""
-        },
-        "race": {
-          "value": "Human"
-        }
-      },
-      "skills": {
-        "acr": {
-          "value": 0,
-          "ability": "dex"
-        },
-        "ani": {
-          "value": 0,
-          "ability": "wis"
-        },
-        "arc": {
-          "value": 0,
-          "ability": "int"
-        },
-        "ath": {
-          "value": 0,
-          "ability": "str"
-        },
-        "dec": {
-          "value": 0,
-          "ability": "cha"
-        },
-        "his": {
-          "value": 0,
-          "ability": "int"
-        },
-        "ins": {
-          "value": 0,
-          "ability": "wis"
-        },
-        "itm": {
-          "value": 0,
-          "ability": "cha"
-        },
-        "inv": {
-          "value": 0,
-          "ability": "int"
-        },
-        "med": {
-          "value": 0,
-          "ability": "wis"
-        },
-        "nat": {
-          "value": 0,
-          "ability": "int"
-        },
-        "prc": {
-          "value": 0,
-          "ability": "wis"
-        },
-        "prf": {
-          "value": 0,
-          "ability": "cha"
-        },
-        "per": {
-          "value": 0,
-          "ability": "cha"
-        },
-        "rel": {
-          "value": 0,
-          "ability": "int"
-        },
-        "slt": {
-          "value": 0,
-          "ability": "dex"
-        },
-        "ste": {
-          "value": 0,
-          "ability": "dex"
-        },
-        "sur": {
-          "value": 0,
-          "ability": "wis"
-        }
-      },
-      "traits": {
-        "size": {
-          "value": "med"
-        },
-        "senses": {
-          "value": ""
-        },
-        "perception": {
-          "value": 10
-        },
-        "languages": {
-          "value": ""
-        },
-        "di": {
-          "value": []
-        },
-        "dr": {
-          "value": []
-        },
-        "dv": {
-          "value": []
-        },
-        "ci": {
-          "value": []
-        }
-      },
-      "currency": {
-        "pp": {
-          "value": 0
-        },
-        "gp": {
-          "value": 0
-        },
-        "ep": {
-          "value": 0
-        },
-        "sp": {
-          "value": 0
-        },
-        "cp": {
-          "value": 0
-        }
-      },
-      "spells": {
-        "spell0": {
-          "value": 0,
-          "max": 0
-        },
-        "spell1": {
-          "value": 0,
-          "max": 0
-        },
-        "spell2": {
-          "value": 0,
-          "max": 0
-        },
-        "spell3": {
-          "value": 0,
-          "max": 0
-        },
-        "spell4": {
-          "value": 0,
-          "max": 0
-        },
-        "spell5": {
-          "value": 0,
-          "max": 0
-        },
-        "spell6": {
-          "value": 0,
-          "max": 0
-        },
-        "spell7": {
-          "value": 0,
-          "max": 0
-        },
-        "spell8": {
-          "value": 0,
-          "max": 0
-        },
-        "spell9": {
-          "value": 0,
-          "max": 0
+        "spells": {
+          "spell0": {
+            "value": 0,
+            "max": 0
+          },
+          "spell1": {
+            "value": 0,
+            "max": 0
+          },
+          "spell2": {
+            "value": 0,
+            "max": 0
+          },
+          "spell3": {
+            "value": 0,
+            "max": 0
+          },
+          "spell4": {
+            "value": 0,
+            "max": 0
+          },
+          "spell5": {
+            "value": 0,
+            "max": 0
+          },
+          "spell6": {
+            "value": 0,
+            "max": 0
+          },
+          "spell7": {
+            "value": 0,
+            "max": 0
+          },
+          "spell8": {
+            "value": 0,
+            "max": 0
+          },
+          "spell9": {
+            "value": 0,
+            "max": 0
+          }
         }
       }
     },
     "character": {
+      "templates": ["common"],
       "attributes": {
         "hd": {
           "value": 1,
@@ -291,6 +295,7 @@
       }
     },
     "npc": {
+      "templates": ["common"],
       "details": {
         "type": {
           "value": ""
@@ -325,7 +330,8 @@
       }
     }
   },
-  "item": {
+  "Item": {
+    "types": ["weapon", "equipment", "consumable", "tool", "backpack", "class", "spell", "feat"],
     "data": {
       "description": {
         "value": ""

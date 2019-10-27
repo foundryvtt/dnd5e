@@ -11,6 +11,41 @@ ______      ______ _____ _____
 |___/ \\___/\\/___/ \\____/\\____/
 _______________________________`;
 
+
+/**
+ * The set of Ability Scores used within the system
+ * @type {Object}
+ */
+DND5E.abilities = {
+  "str": "DND5E.AbilityStr",
+  "dex": "DND5E.AbilityDex",
+  "con": "DND5E.AbilityCon",
+  "int": "DND5E.AbilityInt",
+  "wis": "DND5E.AbilityWis",
+  "cha": "DND5E.AbilityCha"
+};
+
+/* -------------------------------------------- */
+
+/**
+ * This describes the ways that an ability can be activated
+ * @type {Object}
+ */
+DND5E.abilityActivationTypes = {
+  "none": "None",
+  "action": "Action",
+  "bonus": "Bonus Action",
+  "reaction": "Reaction",
+  "minute": "Minute",
+  "hour": "Hour",
+  "day": "Day",
+  "special": "Special",
+  "legendary": "Legendary",
+  "lair": "Lair"
+};
+
+/* -------------------------------------------- */
+
 // Equipment Types
 DND5E.armorTypes = {
   "clothing": "Clothing",
@@ -55,6 +90,37 @@ DND5E.healingTypes = {
   "healing": "Healing",
   "temphp": "Healing (Temporary)"
 };
+
+/* -------------------------------------------- */
+
+
+/**
+ * The set of skill which can be trained in D&D5e
+ * @type {Object}
+ */
+DND5E.skills = {
+  "acr": "DND5E.SkillAcr",
+  "ani": "DND5E.SkillAni",
+  "arc": "DND5E.SkillArc",
+  "ath": "DND5E.SkillAth",
+  "dec": "DND5E.SkillDec",
+  "his": "DND5E.SkillHis",
+  "ins": "DND5E.SkillIns",
+  "itm": "DND5E.SkillItm",
+  "inv": "DND5E.SkillInv",
+  "med": "DND5E.SkillMed",
+  "nat": "DND5E.SkillNat",
+  "prc": "DND5E.SkillPrc",
+  "prf": "DND5E.SkillPrf",
+  "per": "DND5E.SkillPer",
+  "rel": "DND5E.SkillRel",
+  "slt": "DND5E.SkillSlt",
+  "ste": "DND5E.SkillSte",
+  "sur": "DND5E.SkillSur"
+};
+
+
+/* -------------------------------------------- */
 
 // Weapon Types
 DND5E.weaponTypes = {

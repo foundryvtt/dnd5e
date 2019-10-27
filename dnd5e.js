@@ -30,7 +30,7 @@ import { ActorNPCSheet5e } from "./module/actor/sheets2/npc.js";
 Hooks.once("init", async function() {
   console.log(`D&D5e | Initializing Dungeons & Dragons 5th Edition System\n${DND5E.ASCII}`);
 
-  // Record and Update CONFIG Values
+  // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.TEMPLATE_METADATA = TEMPLATE_METADATA;
   CONFIG.Actor.entityClass = Actor5e;
@@ -53,6 +53,14 @@ Hooks.once("init", async function() {
 
 Hooks.once("ready", async function() {
 
+  // Localize CONFIG objects once up-front
+  const toLocalize = ["abilities", "skills"];
+  for ( let o of toLocalize ) {
+    CONFIG.DND5E[o] = Object.fromEntries(Object.entries(CONFIG.DND5E[o]).map(e => {
+      e[1] = game.i18n.localize(e[1]);
+      return e;
+    }));
+  }
   // Register Entity Sheets
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", ActorSheet5eCharacter, { types: ["character"], makeDefault: true });
