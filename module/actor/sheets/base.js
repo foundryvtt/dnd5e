@@ -61,7 +61,10 @@ export class ActorSheet5e extends ActorSheet {
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
-      const values = trait.value || [];
+      let values = [];
+      if ( trait.value ) {
+        values = trait.value instanceof Array ? trait.value : [trait.value];
+      }
       trait.selected = values.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
@@ -207,7 +210,7 @@ export class ActorSheet5e extends ActorSheet {
 
     // Item Dragging
     let handler = ev => this._onDragItemStart(ev);
-    html.find('.item').each((i, li) => {
+    html.find('li.item').each((i, li) => {
       li.setAttribute("draggable", true);
       li.addEventListener("dragstart", handler, false);
     });
@@ -301,7 +304,6 @@ export class ActorSheet5e extends ActorSheet {
     li.toggleClass("expanded");
   }
 
-
   /* -------------------------------------------- */
 
   /**
@@ -310,10 +312,14 @@ export class ActorSheet5e extends ActorSheet {
    */
   _onItemCreate(event) {
     event.preventDefault();
-    let header = event.currentTarget,
-        data = duplicate(header.dataset);
-    data["name"] = `New ${data.type.capitalize()}`;
-    return this.actor.createOwnedItem(data);
+    const header = event.currentTarget;
+    const type = header.dataset.type;
+    const itemData = {
+      name: `New ${type.capitalize()}`,
+      type: type
+    };
+    if ( header.dataset.subtype ) itemData[`data.${type}Type.value`] = header.dataset.subtype;
+    return this.actor.createOwnedItem(itemData);
   }
 
   /* -------------------------------------------- */

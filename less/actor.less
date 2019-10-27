@@ -275,13 +275,15 @@
 
   /* Character Details */
   .details {
+    flex: 0 0 100%;
     height: @detailHeight;
     list-style: none;
     margin: 0;
     padding: 0;
     border-bottom: 1px solid @borderLight;
+    .nodesto();
 
-    .character-detail {
+    li {
       width: 33.33%;
       height: @detailHeight;
       float: left;
@@ -752,71 +754,71 @@
       line-height: 24px;
       padding: 0;
       border-bottom: 1px solid @borderLight;
+    }
 
-      .item-name {
-        cursor: pointer;
+    .item-name {
+      cursor: pointer;
 
-        .item-image {
-          flex: 0 0 24px;
-          margin-right: 6px;
-          background-size: 24px;
-          background-repeat: no-repeat;
-        }
-
-        h4 {
-          flex: 2;
-          margin: 0;
-        }
-
-        .prepared {
-          color: #666;
-          margin-left: 3px;
-          font-size: 10px;
-        }
-
-        .item-charges {
-          color: #666;
-          font-size: 12px;
-          flex: 0;
-        }
-
-        &:hover .item-image {
-          background-image: url("/icons/svg/d20-grey.svg") !important;
-        }
-        .item-image:hover {
-          background-image: url("/icons/svg/d20-black.svg") !important;
-        }
+      h4 {
+        flex: 2;
+        margin: 0;
       }
 
-      .item-quantity, .item-weight {
-        flex: 0 0 32px;
-        font-size: 12px;
+      .prepared {
         color: #666;
-        text-align: center;
-        border-right: 1px solid @borderLight;
+        margin-left: 3px;
+        font-size: 10px;
       }
 
-      .item-controls {
-        flex: 0 0 44px;
-
-        a {
-          display: block;
-          float: left;
-          width: 22px;
-          font-size: 10px;
-          text-align: center;
-          color: #666;
-        }
-      }
-
-      /* Item Dropdown Summary */
-      .item-summary {
-        flex: 0 0 100%;
+      .item-charges {
+        color: #666;
         font-size: 12px;
-        line-height: 16px;
-        padding: 0.25em 0.5em;
-        border-top: 1px solid #CCC;
+        flex: 0;
       }
+
+      &:hover .item-image {
+        background-image: url("/icons/svg/d20-grey.svg") !important;
+      }
+      .item-image:hover {
+        background-image: url("/icons/svg/d20-black.svg") !important;
+      }
+    }
+
+    .item-image {
+      flex: 0 0 24px;
+      margin-right: 6px;
+      background-size: 24px;
+      background-repeat: no-repeat;
+    }
+
+    .item-quantity, .item-weight {
+      flex: 0 0 32px;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      border-right: 1px solid @borderLight;
+    }
+
+    .item-controls {
+      flex: 0 0 44px;
+
+      a {
+        display: block;
+        float: left;
+        width: 22px;
+        font-size: 10px;
+        text-align: center;
+        color: #666;
+      }
+    }
+
+    /* Item Dropdown Summary */
+    .item-summary {
+      flex: 0 0 100%;
+      font-size: 12px;
+      line-height: 16px;
+      padding: 0.25em 0.5em;
+      border-top: 1px solid #CCC;
     }
 
     /* Inventory Header */

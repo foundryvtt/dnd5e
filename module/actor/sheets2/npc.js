@@ -41,6 +41,38 @@ export class ActorNPCSheet5e extends ActorSheet5e {
    * @private
    */
   _prepareItems(sheetData) {
+    const actorData = sheetData.actor;
+
+    // Categorize Items as Features and Spells
+    const features = {
+      weapons: {label: "Attacks", items: [], type: "weapon", subtype: "" },
+      actions: { label: "Actions", items: [], type: "feat", subtype: "ability" },
+      passive: { label: "Features", items: [], type: "feat", subtype: "passive" },
+      equipment: { label: "Inventory", items: [], type: "backpack", subtype: "" }
+    };
+
+    // Spellbook
+    const spellbook = {};
+
+    // Iterate through items, allocating to containers
+    for ( let i of sheetData.items ) {
+      i.img = i.img || DEFAULT_TOKEN;
+
+      // Spells
+      if ( i.type === "spell" ) this._prepareSpell(actorData, spellbook, i);
+
+      // Features
+      else if ( i.type === "weapon" ) features.weapons.items.push(i);
+      else if ( i.type === "feat" ) {
+        if ( i.data.featType.value === "passive" ) features.passive.items.push(i);
+        else features.actions.items.push(i);
+      }
+      else if (["equipment", "consumable", "tool", "backpack"].includes(i.type)) features.equipment.items.push(i);
+    }
+
+    // Assign and return
+    actorData.features = features;
+    actorData.spellbook = spellbook;
   }
 
   /* -------------------------------------------- */

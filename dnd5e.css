@@ -351,23 +351,26 @@
   height: 16px;
 }
 .dnd5e.actor .details {
+  flex: 0 0 100%;
   height: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
   border-bottom: 1px solid #CCC;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 20px;
 }
-.dnd5e.actor .details .character-detail {
+.dnd5e.actor .details li {
   width: 33.33%;
   height: 30px;
   float: left;
   padding: 3px;
   border-right: 1px solid #CCC;
 }
-.dnd5e.actor .details .character-detail:last-child {
+.dnd5e.actor .details li:last-child {
   border-right: none;
 }
-.dnd5e.actor .details .character-detail > input {
+.dnd5e.actor .details li > input {
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 20px;
 }
@@ -777,55 +780,55 @@
   height: 100%;
   overflow-y: auto;
   /* Inventory Item */
+  /* Item Dropdown Summary */
   /* Inventory Header */
 }
 .dnd5e.actor .inventory-list .item {
   line-height: 24px;
   padding: 0;
   border-bottom: 1px solid #CCC;
-  /* Item Dropdown Summary */
 }
-.dnd5e.actor .inventory-list .item .item-name {
+.dnd5e.actor .inventory-list .item-name {
   cursor: pointer;
 }
-.dnd5e.actor .inventory-list .item .item-name .item-image {
+.dnd5e.actor .inventory-list .item-name h4 {
+  flex: 2;
+  margin: 0;
+}
+.dnd5e.actor .inventory-list .item-name .prepared {
+  color: #666;
+  margin-left: 3px;
+  font-size: 10px;
+}
+.dnd5e.actor .inventory-list .item-name .item-charges {
+  color: #666;
+  font-size: 12px;
+  flex: 0;
+}
+.dnd5e.actor .inventory-list .item-name:hover .item-image {
+  background-image: url("/icons/svg/d20-grey.svg") !important;
+}
+.dnd5e.actor .inventory-list .item-name .item-image:hover {
+  background-image: url("/icons/svg/d20-black.svg") !important;
+}
+.dnd5e.actor .inventory-list .item-image {
   flex: 0 0 24px;
   margin-right: 6px;
   background-size: 24px;
   background-repeat: no-repeat;
 }
-.dnd5e.actor .inventory-list .item .item-name h4 {
-  flex: 2;
-  margin: 0;
-}
-.dnd5e.actor .inventory-list .item .item-name .prepared {
-  color: #666;
-  margin-left: 3px;
-  font-size: 10px;
-}
-.dnd5e.actor .inventory-list .item .item-name .item-charges {
-  color: #666;
-  font-size: 12px;
-  flex: 0;
-}
-.dnd5e.actor .inventory-list .item .item-name:hover .item-image {
-  background-image: url("/icons/svg/d20-grey.svg") !important;
-}
-.dnd5e.actor .inventory-list .item .item-name .item-image:hover {
-  background-image: url("/icons/svg/d20-black.svg") !important;
-}
-.dnd5e.actor .inventory-list .item .item-quantity,
-.dnd5e.actor .inventory-list .item .item-weight {
+.dnd5e.actor .inventory-list .item-quantity,
+.dnd5e.actor .inventory-list .item-weight {
   flex: 0 0 32px;
   font-size: 12px;
   color: #666;
   text-align: center;
   border-right: 1px solid #CCC;
 }
-.dnd5e.actor .inventory-list .item .item-controls {
+.dnd5e.actor .inventory-list .item-controls {
   flex: 0 0 44px;
 }
-.dnd5e.actor .inventory-list .item .item-controls a {
+.dnd5e.actor .inventory-list .item-controls a {
   display: block;
   float: left;
   width: 22px;
@@ -833,7 +836,7 @@
   text-align: center;
   color: #666;
 }
-.dnd5e.actor .inventory-list .item .item-summary {
+.dnd5e.actor .inventory-list .item-summary {
   flex: 0 0 100%;
   font-size: 12px;
   line-height: 16px;
@@ -1220,6 +1223,9 @@
   min-width: 620px;
   min-height: 710px;
   /* ----------------------------------------- */
+  /*  Basic Structure                          */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1240,6 +1246,12 @@
   /* ----------------------------------------- */
   /*  Traits                                   */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Items and Spells                         */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Biography                                */
+  /* ----------------------------------------- */
 }
 .dnd5e.sheet.actor.npc .window-content {
   background: url("ui/parchment.jpg") repeat;
@@ -1251,8 +1263,20 @@
 .dnd5e.sheet.actor.npc input {
   color: #191813;
 }
+.dnd5e.sheet.actor.npc select {
+  background: transparent;
+}
 .dnd5e.sheet.actor.npc .npc-sheet-header {
   flex: 0 0 100px;
+}
+.dnd5e.sheet.actor.npc .npc-sheet-navigation {
+  flex: 0 0 30px;
+}
+.dnd5e.sheet.actor.npc .npc-sheet-body {
+  flex: 1;
+  overflow: hidden;
+}
+.dnd5e.sheet.actor.npc .npc-sheet-header {
   border-bottom: 2px groove #eeede0;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 20px;
@@ -1323,7 +1347,6 @@
   border-right: none;
 }
 .dnd5e.sheet.actor.npc .npc-sheet-navigation {
-  flex: 0 0 30px;
   margin-bottom: 10px;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 20px;
@@ -1503,9 +1526,58 @@
 .dnd5e.sheet.actor.npc .traits input {
   text-align: right;
 }
-.dnd5e.sheet.actor.npc .traits select {
-  background: transparent;
-}
 .dnd5e.sheet.actor.npc .traits .inactive {
   color: #7a7971;
+}
+.dnd5e.sheet.actor.npc .inventory-list {
+  padding: 0 5px;
+}
+.dnd5e.sheet.actor.npc .inventory-list .inventory-header {
+  margin: 2px 0;
+  border: 2px groove #eeede0;
+}
+.dnd5e.sheet.actor.npc .inventory-list .inventory-header h3 {
+  padding-left: 5px;
+}
+.dnd5e.sheet.actor.npc .inventory-list .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dnd5e.sheet.actor.npc .inventory-list .item-list .item {
+  line-height: 30px;
+}
+.dnd5e.sheet.actor.npc .inventory-list .item-list .item:last-child {
+  border-bottom: none;
+}
+.dnd5e.sheet.actor.npc .inventory-list .item-list .item-image {
+  flex: 0 0 30px;
+  background-size: 30px;
+}
+.dnd5e.sheet.actor.npc .inventory-list .item-list .item-properties {
+  margin-top: 3px;
+}
+.dnd5e.sheet.actor.npc .spellbook .inventory-list {
+  height: calc(100% - 28px);
+}
+.dnd5e.sheet.actor.npc .spellbook-header .spell-slots,
+.dnd5e.sheet.actor.npc .spellbook-header .spell-max {
+  text-align: center;
+}
+.dnd5e.sheet.actor.npc .spellcasting-ability {
+  margin: 0 8px;
+}
+.dnd5e.sheet.actor.npc .spellcasting-ability h3 {
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-size: 18px;
+  margin: 0;
+}
+.dnd5e.sheet.actor.npc .biography .editor {
+  height: 100%;
+  padding: 0 5px;
+}
+.dnd5e.sheet.actor.npc .biography .editor .tox-toolbar-overlord,
+.dnd5e.sheet.actor.npc .biography .editor .tox-toolbar__primary {
+  background: none;
 }

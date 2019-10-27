@@ -57,6 +57,7 @@ Hooks.once("ready", async function() {
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", ActorSheet5eCharacter, { types: ["character"], makeDefault: true });
   Actors.registerSheet("dnd5e", ActorNPCSheet5e, { types: ["npc"], makeDefault: true });
+  Actors.registerSheet("dnd5e", ActorSheet5eNPC, { types: ["npc"], makeDefault: false });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
 });
