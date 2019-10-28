@@ -85,6 +85,59 @@ DND5E.damageTypes = {
   "thunder": "Thunder"
 };
 
+/* -------------------------------------------- */
+
+DND5E.distanceUnits = {
+  "none": "DND5E.None",
+  "touch": "DND5E.DistTouch",
+  "ft": "DND5E.DistFt",
+  "mi": "DND5E.DistMi",
+  "spec": "DND5E.Special"
+};
+
+/* -------------------------------------------- */
+
+/**
+ * This Object defines the types of single or area targets which can be applied in D&D5e
+ * @type {Object}
+ */
+DND5E.targetTypes = {
+  "none": "DND5E.None",
+  "self": "DND5E.TargetSelf",
+  "creature": "DND5E.TargetCreature",
+  "ally": "DND5E.TargetAlly",
+  "enemy": "DND5E.TargetEnemy",
+  "object": "DND5E.TargetObject",
+  "space": "DND5E.TargetSpace",
+  "radius": "DND5E.TargetRadius",
+  "sphere": "DND5E.TargetSphere",
+  "cone": "DND5E.TargetCone",
+  "cube": "DND5E.TargetCube",
+  "ray": "DND5E.TargetRay",
+  "wall": "DND5E.TargetWall"
+};
+
+/* -------------------------------------------- */
+
+/**
+ * This Object defines the various lengths of time which can occur in D&D5e
+ * @type {Object}
+ */
+DND5E.timePeriods = {
+  "inst": "DND5E.TimeInst",
+  "turn": "DND5E.TimeTurn",
+  "round": "DND5E.TimeRound",
+  "minute": "DND5E.TimeMinute",
+  "hour": "DND5E.TimeHour",
+  "day": "DND5E.TimeDay",
+  "month": "DND5E.TimeMonth",
+  "year": "DND5E.TimeYear",
+  "perm": "DND5E.TimePerm",
+  "spec": "DND5E.Special"
+};
+
+/* -------------------------------------------- */
+
 // Healing Types
 DND5E.healingTypes = {
   "healing": "Healing",

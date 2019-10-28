@@ -2,6 +2,7 @@
 @colorBeige: #b5b3a4;
 @colorTan: #7a7971;
 @colorOlive: #4b4a44;
+@colorCrimson: #44191A;
 @borderGroove: 2px groove #eeede0;
 
 /* ----------------------------------------- */
@@ -163,7 +164,39 @@
       border-bottom: 3px solid @colorBeige;
 
       &.active {
-        border-bottom: 3px solid #44191A;
+        border-bottom: 3px solid @colorCrimson;
+      }
+    }
+  }
+
+  /**
+   * Inventory Filter Lists
+   */
+  .filter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 16px;
+
+    .filter-title {
+      flex: 4;
+      .nodesto();
+      font-size: 18px;
+    }
+
+    .filter-item {
+      text-align: center;
+      font-size: 12px;
+      margin: 0 6px;
+      border-bottom: 3px solid @colorBeige;
+
+      &:hover {
+        text-shadow: 0 0 4px red;
+        border-bottom: 3px solid @colorTan;
+      }
+
+      &.active {
+        border-bottom: 3px solid @colorCrimson;
       }
     }
   }
@@ -412,8 +445,12 @@
 
   .spellbook {
     .inventory-list {
-      height: calc(100% - 28px);
+      height: calc(100% - 50px);
     }
+  }
+
+  .spellbook-filters {
+    margin: 5px 8px 0;
   }
 
   .spellbook-header {

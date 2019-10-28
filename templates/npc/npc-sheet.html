@@ -271,6 +271,7 @@
             </ol>
         </div>
 
+        {{!-- Spellbook Tab --}}
         <div class="tab spellbook" data-group="primary" data-tab="spellbook">
             <div class="form-group spellcasting-ability">
                 <label><h3>Spellcasting Ability</h3></label>
@@ -283,6 +284,16 @@
                     {{/select}}
                 </select>
             </div>
+
+            <ul class="spellbook-filters filter-list flexrow">
+                <li class="filter-title">Usage Filter</li>
+                <li class="filter-item" data-filter="action">Action</li>
+                <li class="filter-item" data-filter="bonus">Bonus</li>
+                <li class="filter-item" data-filter="reaction">Reaction</li>
+                <li class="filter-item" data-filter="concentration">Conc.</li>
+                <li class="filter-item" data-filter="ritual">Ritual</li>
+                <li class="filter-item" data-filter="prepared">Prepared</li>
+            </ul>
 
             <ol class="inventory-list">
             {{#each actor.spellbook as |section lvl|}}
@@ -305,8 +316,8 @@
                         {{/unless}}
                     </div>
 
-                    <div class="spell-school">School</div>
-                    <div class="spell-action">Action</div>
+                    <div class="spell-school">Spell School</div>
+                    <div class="spell-action">Spell Usage</div>
 
                     {{#if ../owner}}
                     <div class="item-controls">
@@ -325,7 +336,7 @@
                         </div>
 
                         <div class="spell-school">{{item.data.school.str}}</div>
-                        <div class="spell-action">{{item.data.time.value}}</div>
+                        <div class="spell-action">{{item.data.activation.str}}</div>
 
                         {{#if ../../owner}}
                         <div class="item-controls">

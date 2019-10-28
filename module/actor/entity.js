@@ -112,7 +112,12 @@ export class Actor5e extends Actor {
    * See the base Actor class for API documentation of this method
    */
   async createOwnedItem(itemData, options) {
-    if ( !this.isPC && itemData.type === "weapon" ) mergeObject(itemData, {"data.proficient.value": true});
+
+    // Assume NPCs are always proficient with weapons and always have spells prepared
+    if ( !this.isPC ) {
+      if ( itemData.type === "weapon" ) mergeObject(itemData, {"data.proficient.value": true});
+      if ( itemData.type === "spell" ) mergeObject(itemData, {"data.prepared.value": true});
+    }
     return super.createOwnedItem(itemData, options);
   }
 

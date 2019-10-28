@@ -70,24 +70,68 @@
     <input type="text" name="data.materials.value" value="{{data.materials.value}}" data-dtype="{{data.materials.type}}"/>
 </div>
 
-<div class="form-group">
-    <label>{{data.target.label}}</label>
-    <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="{{data.target.type}}"/>
+{{!-- Ability Target --}}
+<div class="form-group input-select-select">
+    <label>Ability Target</label>
+    <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
+    <select name="data.target.units">
+        {{#select data.target.units}}
+        <option value=""></option>
+        {{#each distanceUnits as |name key|}}
+        <option value="{{key}}">{{name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
+    <select name="data.target.type">
+        {{#select data.target.type}}
+        <option value=""></option>
+        {{#each targetTypes as |name key|}}
+        <option value="{{key}}">{{name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
 </div>
 
-<div class="form-group">
-    <label>{{data.range.label}}</label>
-    <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="{{data.range.type}}"/>
+{{!-- Ability Range --}}
+<div class="form-group input-select">
+    <label>Ability Range</label>
+    <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="-"/>
+    <select name="data.range.units">
+        {{#select data.range.units}}
+        <option value=""></option>
+        {{#each distanceUnits as |name key|}}
+        <option value="{{key}}">{{name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
 </div>
 
-<div class="form-group">
-    <label>{{data.time.label}}</label>
-    <input type="text" name="data.time.value" value="{{data.time.value}}" data-dtype="{{data.time.type}}"/>
+{{!-- Activation Cost --}}
+<div class="form-group input-select">
+    <label>Activation Cost</label>
+    <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="-"/>
+    <select name="data.activation.type">
+        {{#select data.activation.type}}
+        <option value=""></option>
+        {{#each activationTypes as |name key|}}
+        <option value="{{key}}">{{name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
 </div>
 
-<div class="form-group">
-    <label>{{data.duration.label}}</label>
-    <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="{{data.duration.type}}"/>
+{{!-- Effect Duration --}}
+<div class="form-group input-select">
+    <label>Effect Duration</label>
+    <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
+    <select name="data.duration.units">
+        {{#select data.duration.units}}
+        <option value=""></option>
+        {{#each timePeriods as |name key|}}
+        <option value="{{key}}">{{name}}</option>
+        {{/each}}
+        {{/select}}
+    </select>
 </div>
 
 <div class="form-group">

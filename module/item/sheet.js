@@ -48,7 +48,11 @@ export class ItemSheet5e extends ItemSheet {
         spellTypes: CONFIG.DND5E.spellTypes,
         spellSchools: CONFIG.DND5E.spellSchools,
         spellLevels: CONFIG.DND5E.spellLevels,
-        spellComponents: this._formatSpellComponents(data.data)
+        spellComponents: this._formatSpellComponents(data.data),
+        activationTypes: CONFIG.DND5E.abilityActivationTypes,
+        distanceUnits: CONFIG.DND5E.distanceUnits,
+        targetTypes: CONFIG.DND5E.targetTypes,
+        timePeriods: CONFIG.DND5E.timePeriods,
       });
     }
 

@@ -21,6 +21,7 @@ import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
 import { Item5e } from "./module/item/entity.js";
 import { ItemSheet5e } from "./module/item/sheet.js";
 import { ActorNPCSheet5e } from "./module/actor/sheets2/npc.js";
+import { migrateSystem } from "./module/migration.js";
 
 
 /* -------------------------------------------- */
@@ -44,6 +45,12 @@ Hooks.once("init", async function() {
 
   // Patch Core Functions
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+
+  // Maybe apply a system migration
+  const NEEDS_MIGRATION_VERSION = 0.7;
+  let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
+  needMigration = true;
+  if ( needMigration ) await migrateSystem();
 });
 
 
@@ -54,7 +61,7 @@ Hooks.once("init", async function() {
 Hooks.once("ready", async function() {
 
   // Localize CONFIG objects once up-front
-  const toLocalize = ["abilities", "skills"];
+  const toLocalize = ["abilities", "distanceUnits", "skills", "targetTypes", "timePeriods"];
   for ( let o of toLocalize ) {
     CONFIG.DND5E[o] = Object.fromEntries(Object.entries(CONFIG.DND5E[o]).map(e => {
       e[1] = game.i18n.localize(e[1]);

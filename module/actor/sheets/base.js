@@ -8,6 +8,15 @@ import { ActorSheetFlags } from "../../apps/actor-flags.js";
  * @type {ActorSheet}
  */
 export class ActorSheet5e extends ActorSheet {
+  constructor(...args) {
+    super(...args);
+
+    /**
+     * Track the set of spellbook filters which are applied
+     * @type {Set}
+     */
+    this._spellbookFilters = new Set(["prepared"]);
+  }
 
   /**
    * Return the type of the current Actor
@@ -91,6 +100,9 @@ export class ActorSheet5e extends ActorSheet {
     let lvl = spell.data.level.value || 0,
         isNPC = this.actorType === "npc";
 
+    // Determine whether the spell is filtered
+    if ( this._isSpellFiltered(spell) ) return;
+
     // Determine whether to show the spell
     let showSpell = this.options.showUnpreparedSpells || isNPC || spell.data.prepared.value || (lvl === 0);
     if ( !showSpell ) return;
@@ -104,9 +116,32 @@ export class ActorSheet5e extends ActorSheet {
       slots: actorData.data.spells["spell"+lvl].max || 0
     };
 
-    // Add the spell to the spellbook at the appropriate level
+    // Extend Spell information
     spell.data.school.str = CONFIG.DND5E.spellSchools[spell.data.school.value];
+
+    // Spell Usage
+    let act = spell.data.activation;
+    act.str = [act.cost, CONFIG.DND5E.abilityActivationTypes[act.type]].filter(p => !!p).join(" ");
     spellbook[lvl].spells.push(spell);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether a spell in the spellbook will be shown based on the current set of filters
+   * @return {boolean}
+   * @private
+   */
+  _isSpellFiltered(spell) {
+    const filters = this._spellbookFilters;
+    for ( let f of ["action", "bonus", "reaction"] ) {
+      if ( filters.has(f) && (spell.data.activation.type !== f) ) return true;
+    }
+    if ( filters.has("ritual") && (spell.data.ritual.value === false) ) return true;
+    if ( filters.has("concentration") && (spell.data.concentration.value === false) ) return true;
+    let isCantrip = spell.data.level.value === 0;
+    if ( filters.has("prepared") && (spell.data.prepared.value === false) && !isCantrip ) return true;
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -152,6 +187,11 @@ export class ActorSheet5e extends ActorSheet {
         callback: clicked => this[`_sheetTab-${group}`] = clicked.data("tab")
       });
     });
+
+    // Activate Filters
+    html.find(".spellbook-filters .filter-item").each((i, li) => {
+      if ( this._spellbookFilters.has(li.dataset.filter) ) li.classList.add("active");
+    }).click(this._onToggleSpellbookFilter.bind(this));
 
     // Item summaries
     html.find('.item .item-name h4').click(event => this._onItemSummary(event));
@@ -221,6 +261,7 @@ export class ActorSheet5e extends ActorSheet {
     html.find('.item .item-image').click(event => this._onItemRoll(event));
 
     // Re-render the sheet when toggling visibility of spells
+    // TODO: Deprecate this for spellbook filters
     html.find('.prepared-toggle').click(ev => {
       this.options.showUnpreparedSpells = !this.options.showUnpreparedSpells;
       this.render()
@@ -335,6 +376,21 @@ export class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
     this.actor.update({[field.name]: 1 - parseInt(field.value)});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling of spellbook filters to display a different set of spells
+   * @param {Event} event     The click event which triggered the toggle
+   * @private
+   */
+  _onToggleSpellbookFilter(event) {
+    event.preventDefault();
+    let filter = event.currentTarget.dataset.filter;
+    if ( this._spellbookFilters.has(filter) ) this._spellbookFilters.delete(filter);
+    else this._spellbookFilters.add(filter);
+    this.render();
   }
 
   /* -------------------------------------------- */

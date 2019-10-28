@@ -332,24 +332,62 @@
   },
   "Item": {
     "types": ["weapon", "equipment", "consumable", "tool", "backpack", "class", "spell", "feat"],
-    "data": {
-      "description": {
-        "value": ""
+    "templates": {
+      "itemDescription": {
+        "description": {
+          "value": "",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": {
+          "value": ""
+        }
       },
-      "source": {
-        "value": ""
+      "physicalItem": {
+        "quantity": {
+          "value": 1
+        },
+        "weight": {
+          "value": 0
+        },
+        "price": {
+          "value": 0
+        },
+        "attuned": {
+          "value": false
+        },
+        "equipped": {
+          "value": false
+        },
+        "rarity": {
+          "value": ""
+        },
+        "identified": {
+          "value": true
+        }
+      },
+      "activatedEffect": {
+        "activation": {
+          "type": "none",
+          "cost": 0
+        },
+        "duration": {
+          "value": 0,
+          "units": "inst"
+        },
+        "target": {
+          "value": 0,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 5,
+          "units": "ft"
+        }
       }
     },
     "weapon": {
-      "quantity": {
-        "value": 1
-      },
-      "weight": {
-        "value": 0
-      },
-      "price": {
-        "value": 0
-      },
+      "templates": ["itemDescription", "physicalItem"],
       "weaponType": {
         "value": "simpleM"
       },
@@ -379,27 +417,10 @@
       },
       "ability": {
         "value": "str"
-      },
-      "attuned": {
-        "value": false
-      },
-      "equipped": {
-        "value": false
-      },
-      "rarity": {
-        "value": ""
       }
     },
     "equipment": {
-      "quantity": {
-        "value": 1
-      },
-      "weight": {
-        "value": 0
-      },
-      "price": {
-        "value": 0
-      },
+      "templates": ["itemDescription", "physicalItem"],
       "armor": {
         "value": 10
       },
@@ -414,27 +435,10 @@
       },
       "proficient": {
         "value": true
-      },
-      "attuned": {
-        "value": false
-      },
-      "equipped": {
-        "value": false
-      },
-      "rarity": {
-        "value": ""
       }
     },
     "consumable": {
-      "quantity": {
-        "value": 1
-      },
-      "weight": {
-        "value": 0
-      },
-      "price": {
-        "value": 0
-      },
+      "templates": ["itemDescription", "physicalItem"],
       "consumableType": {
         "value": "potion"
       },
@@ -450,27 +454,10 @@
       },
       "autoDestroy": {
         "value": true
-      },
-      "attuned": {
-        "value": false
-      },
-      "equipped": {
-        "value": false
-      },
-      "rarity": {
-        "value": ""
       }
     },
     "tool": {
-      "quantity": {
-        "value": 1
-      },
-      "weight": {
-        "value": 0
-      },
-      "price": {
-        "value": 0
-      },
+      "templates": ["itemDescription", "physicalItem"],
       "ability": {
         "value": "int"
       },
@@ -479,26 +466,10 @@
       }
     },
     "backpack": {
-      "quantity": {
-        "value": 1
-      },
-      "weight": {
-        "value": 0
-      },
-      "price": {
-        "value": 0
-      },
-      "attuned": {
-        "value": false
-      },
-      "equipped": {
-        "value": false
-      },
-      "rarity": {
-        "value": ""
-      }
+      "templates": ["itemDescription", "physicalItem"]
     },
     "class": {
+      "templates": ["itemDescription"],
       "levels": {
         "value": 1
       },
@@ -507,6 +478,7 @@
       }
     },
     "spell": {
+      "templates": ["itemDescription", "activatedEffect"],
       "spellType": {
         "value": "utility"
       },
@@ -522,17 +494,9 @@
       "materials": {
         "value": ""
       },
-      "target": {
-        "value": ""
-      },
-      "range": {
-        "value": ""
-      },
       "time": {
-        "value": ""
-      },
-      "duration": {
-        "value": ""
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
       },
       "damage": {
         "value": ""
@@ -557,6 +521,7 @@
       }
     },
     "feat": {
+      "templates": ["itemDescription", "activatedEffect"],
       "featType": {
         "value": "passive"
       },
