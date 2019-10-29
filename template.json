@@ -368,21 +368,21 @@
       },
       "activatedEffect": {
         "activation": {
-          "type": "none",
+          "type": "",
           "cost": 0
         },
         "duration": {
           "value": 0,
-          "units": "inst"
+          "units": ""
         },
         "target": {
           "value": 0,
           "units": "",
-          "type": "creature"
+          "type": ""
         },
         "range": {
-          "value": 5,
-          "units": "ft"
+          "value": 0,
+          "units": ""
         }
       }
     },
@@ -518,6 +518,15 @@
       },
       "prepared": {
         "value": false
+      },
+      "innate": {
+        "mode": null,
+        "uses": 0,
+        "max": 0
+      },
+      "upcast": {
+        "mode": null,
+        "damage": null
       }
     },
     "feat": {

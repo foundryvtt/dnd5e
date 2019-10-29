@@ -1,18 +1,26 @@
-import { ActorSheet5e } from "./base.js";
+import { ActorSheet5e } from "../sheets/base.js";
 
-
+/**
+ * An Actor sheet for NPC type characters in the D&D5E system.
+ * Extends the base ActorSheet5e class.
+ * @type {ActorSheet5e}
+ */
 export class ActorSheet5eNPC extends ActorSheet5e {
+
+  /**
+   * Define default rendering options for the NPC sheet
+   * @return {Object}
+   */
 	static get defaultOptions() {
-	  const options = super.defaultOptions;
-	  mergeObject(options, {
-      classes: options.classes.concat(["dnd5e", "actor", "npc-sheet"]),
-      width: 650,
-      height: 680,
-      showUnpreparedSpells: true
+	  return mergeObject(super.defaultOptions, {
+      classes: ["dnd5e", "sheet", "actor", "npc"],
+      width: 620,
+      height: 710
     });
-	  return options;
   }
 
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /**
@@ -20,43 +28,25 @@ export class ActorSheet5eNPC extends ActorSheet5e {
    * @type {String}
    */
   get template() {
-    const path = "public/systems/dnd5e/templates/actors/";
-    if ( !game.user.isGM && this.actor.limited ) return path + "limited-sheet.html";
-    return path + "npc-sheet.html";
+    if ( !game.user.isGM && this.actor.limited ) return "public/systems/dnd5e/templates/actors/limited-sheet.html";
+    return "public/systems/dnd5e/templates/npc/npc-sheet.html";
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
-   */
-  getData() {
-    const sheetData = super.getData();
-
-    // Level and CR
-    let cr = sheetData.data.details.cr;
-    let crs = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    cr["str"] = (cr.value >= 1) ? String(cr.value) : crs[cr.value] || 0;
-
-    // Return data for rendering
-    return sheetData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Organize and classify Items for NPC sheets
+   * Organize Owned Items for rendering the NPC sheet
    * @private
    */
   _prepareItems(sheetData) {
     const actorData = sheetData.actor;
 
-    // Actions
+    // Categorize Items as Features and Spells
     const features = {
-      weapons: {label: "Weapons", items: [], type: "weapon" },
-      actions: { label: "Actions", items: [], type: "feat" },
-      passive: { label: "Features", items: [], type: "feat" },
-      equipment: { label: "Equipment", items: [], type: "equipment" }
+      weapons: {label: "Attacks", items: [], type: "weapon", subtype: "" },
+      actions: { label: "Actions", items: [], type: "feat", subtype: "ability" },
+      passive: { label: "Features", items: [], type: "feat", subtype: "passive" },
+      equipment: { label: "Inventory", items: [], type: "backpack", subtype: "" }
     };
 
     // Spellbook
@@ -84,7 +74,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners and Handlers
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
@@ -93,37 +83,24 @@ export class ActorSheet5eNPC extends ActorSheet5e {
    */
 	activateListeners(html) {
     super.activateListeners(html);
-    if ( !this.options.editable ) return;
 
-    /* Roll NPC HP */
-    html.find('.npc-roll-hp').click(ev => {
-      let ad = this.actor.data.data;
-      let hp = new Roll(ad.attributes.hp.formula).roll().total;
-      AudioHelper.play({src: CONFIG.sounds.dice});
-      this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp});
-    });
+    // Rollable Health Formula
+    html.find(".health .rollable").click(this._onRollHealthFormula.bind(this));
   }
 
   /* -------------------------------------------- */
 
   /**
-   * This method is called upon form submission after form data is validated
-   * @param event {Event}       The initial triggering submission event
-   * @param formData {Object}   The object of validated form data with which to update the object
+   * Handle rolling NPC health values using the provided formula
+   * @param {Event} event     The original click event
    * @private
    */
-  _updateObject(event, formData) {
-
-    // Format NPC Challenge Rating
-    if (this.actor.data.type === "npc") {
-      let cr = formData["data.details.cr.value"];
-      if ( cr ) {
-        let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-        formData["data.details.cr.value"] = crs[cr] || parseInt(cr);
-      }
-    }
-
-    // Parent ActorSheet update steps
-    super._updateObject(event, formData);
+  _onRollHealthFormula(event) {
+    event.preventDefault();
+    const formula = this.actor.data.data.attributes.hp.formula;
+    if ( !formula ) return;
+    const hp = new Roll(formula).roll().total;
+    AudioHelper.play({src: CONFIG.sounds.dice});
+    this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp});
   }
 }

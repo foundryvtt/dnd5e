@@ -1,0 +1,345 @@
+@import "./variables.less";
+.dnd5e.sheet.actor {
+
+  /* ----------------------------------------- */
+  /*  Ability Scores                           */
+  /* ----------------------------------------- */
+
+  .ability-scores {
+    flex: 0 0 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    .nodesto();
+
+    .ability {
+      margin: 0 5px;
+      text-align: center;
+      border: @borderGroove;
+      border-radius: 4px;
+
+      input.ability-score {
+        height: 30px;
+        width: 50px;
+        margin: 0 auto;
+        line-height: 32px;
+        font-size: 24px;
+      }
+
+      .ability-modifiers {
+        height: 24px;
+        margin: -10px 0 0;
+
+        span.ability-mod,
+        span.ability-save {
+          flex: 0 0 24px;
+          height: 24px;
+          border-top: @borderGroove;
+        }
+
+        span.ability-mod {
+          border-right: @borderGroove;
+        }
+
+        .ability-proficiency {
+          line-height: 30px;
+        }
+
+        span.ability-save {
+          border-left: @borderGroove;
+        }
+      }
+
+      /* Hide modifier box on hover */
+
+      input.ability-score:hover + .ability-modifiers {
+        visibility: hidden;
+      }
+    }
+  }
+
+  // Proficiency Toggle Buttons
+  .proficiency-toggle {
+    color: @colorBeige;
+    font-size: 12px;
+  }
+  .proficient .proficiency-toggle {
+    color: @colorOlive;
+  }
+
+  .locked .proficiency-toggle {
+    color: @colorBeige;
+    text-shadow: none;
+    cursor: default;
+  }
+
+  /* ----------------------------------------- */
+  /*  Skills                                   */
+  /* ----------------------------------------- */
+
+  ul.skills-list {
+    flex: 0 0 200px;
+    list-style: none;
+    margin: 10px 5px;
+    padding: 2px 2px 0;
+    border: @borderGroove;
+
+    li.skill {
+      height: 24px;
+      padding: 3px;
+
+      h4 {
+        flex: 0 0 100px;
+        margin: 0;
+      }
+
+      .skill-proficiency {
+        flex: 0 0 16px;
+        line-height: 18px;
+      }
+
+      .skill-ability {
+        flex: 0 0 26px;
+      }
+
+      .skill-mod {
+        flex: 0 0 20px;
+      }
+
+      .skill-passive {
+        text-align: center;
+        color: @colorTan;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Traits                                   */
+  /* ----------------------------------------- */
+
+  .traits {
+    margin: 0 5px;
+
+    .form-group, .form-group-stacked {
+      margin: 0 0 4px 0;
+    }
+
+    .trait-selector {
+      float: right;
+      color: #999;
+      font-size: 10px;
+    }
+
+    .traits-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    label {
+      line-height: 20px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    input {
+      text-align: right;
+    }
+
+    i.fas {
+      float: right;
+      margin-right: 3px;
+      text-align: right;
+      color: #999;
+
+      &:hover {
+        color: #111;
+        text-shadow: 0 0 10px red;
+      }
+    }
+
+    .inactive {
+      color: @colorTan;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Inventory Lists                          */
+  /* ----------------------------------------- */
+
+  .inventory-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 5px;
+    height: 100%;
+    overflow-y: auto;
+
+    // Inventory Item
+    .item {
+      line-height: 30px;
+      padding: 0 2px; // to align with the header border
+      border-bottom: 1px solid @colorFaint;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      // Item Header Name
+      .item-name {
+        cursor: pointer;
+
+        h4 {
+          flex: 2;
+          margin: 0;
+        }
+
+        .item-charges {
+          color: #666;
+          font-size: 12px;
+          flex: 0;
+        }
+
+        &:hover .item-image {
+          background-image: url("/icons/svg/d20-grey.svg") !important;
+        }
+
+        .item-image:hover {
+          background-image: url("/icons/svg/d20-black.svg") !important;
+        }
+      }
+
+      // Item Image
+      .item-image {
+        flex: 0 0 30px;
+        background-size: 30px;
+        margin-right: 5px;
+      }
+
+      // Item Dropdown Properties
+      .item-properties {
+        margin-top: 3px;
+      }
+    }
+
+    // Inventory Header
+    .inventory-header {
+      margin: 2px 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.05);
+      border: @borderGroove;
+      font-weight: bold;
+      line-height: 24px;
+
+      h3 {
+        flex: 2;
+        margin: 0;
+        padding-left: 5px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .item-controls a.item-create {
+        width: 100%;
+      }
+    }
+
+    .item-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    // Item Control Buttons
+    .item-controls {
+      flex: 0 0 44px;
+
+      a {
+        display: block;
+        float: left;
+        width: 22px;
+        font-size: 10px;
+        text-align: center;
+        color: #666;
+      }
+    }
+
+    // Item Dropdown Summary
+    .item-summary {
+      flex: 0 0 100%;
+      font-size: 12px;
+      line-height: 16px;
+      padding: 0.25em 0.5em;
+      border-top: 1px solid @colorFaint;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Spellbook                                */
+  /* ----------------------------------------- */
+
+  .spellbook {
+    .inventory-list {
+      height: calc(100% - 50px);
+    }
+  }
+
+  .spellbook-filters {
+    margin: 5px 8px 0;
+  }
+
+  .spell-slots,
+  .spell-comps {
+    flex: 0 0 80px;
+    font-size: 12px;
+    text-align: right;
+    color: @colorTan;
+    border-right: 1px solid @colorFaint;
+  }
+
+  .spell-slots {
+    input, span.sep {
+      display: inline;
+      max-width: 20px;
+      text-align: center;
+    }
+  }
+
+  .spell-comps {
+    padding-right: 8px;
+  }
+
+  .spell-school, .spell-action {
+    flex: 0 0 120px;
+    font-size: 12px;
+    color: @colorTan;
+    text-align: center;
+    border-right: 1px solid @colorFaint;
+  }
+
+  .spellcasting-ability,
+  .spellbook-filters {
+    margin: 0 8px 4px;
+    h3 {
+      .nodesto();
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+
+  // Empty spellbook controls
+  .spellbook-empty .item-controls { flex: 1; }
+
+  /* ----------------------------------------- */
+  /*  Biography                                */
+  /* ----------------------------------------- */
+
+  .biography .editor {
+    height: 100%;
+    padding: 0 5px;
+
+    .tox-toolbar-overlord,
+    .tox-toolbar__primary {
+      background: none;
+    }
+  }
+}

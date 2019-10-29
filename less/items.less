@@ -1,0 +1,44 @@
+@import "./variables.less";
+.dnd5e.sheet.item {
+
+  .sheet-header {
+    .item-subtitle {
+      flex: 0 0 80px;
+      height: 60px;
+      margin: 0;
+      padding: 5px;
+      text-align: right;
+      color: @colorTan;
+
+      .item-type {
+        font-size: 24px;
+        line-height: 26px;
+        margin: 0;
+      }
+
+      .item-status {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  .sheet-body {
+    .item-properties {
+      flex: 0 0 120px;
+      list-style: none;
+      margin: 0 10px 0 5px;
+      padding: 0;
+
+      li {
+        margin: 5px 0;
+        padding: 2px;
+        background: rgba(0, 0, 0, 0.05);
+        border: @borderGroove;
+        text-align: center;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}

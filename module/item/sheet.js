@@ -1,5 +1,6 @@
 /**
- * Override and extend the basic :class:`ItemSheet` implementation
+ * Override and extend the basic ItemSheet implementation for the D&D5E system.
+ * This base item sheet handles several item types and is extended by other sheets for other types.
  */
 export class ItemSheet5e extends ItemSheet {
 	static get defaultOptions() {

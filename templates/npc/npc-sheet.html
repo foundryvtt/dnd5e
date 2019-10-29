@@ -1,8 +1,8 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
 
     {{!-- NPC Sheet Header --}}
-    <header class="npc-sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" height="100" width="100" data-edit="img"/>
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
 
         <div class="header-details flexrow">
             <h1 class="charname">
@@ -25,17 +25,17 @@
                     <input type="text" name="data.details.type.value" value="{{data.details.type.value}}" placeholder="Type"/>
                 </li>
                 <li class="character-detail">
-                    <input type="text" name="data.details.source.value" value="{{data.details.source.value}}" placeholder="Source"/>
+                    <input type="text" name="data.details.alignment.value" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
                 </li>
                 <li class="character-detail">
-                    <input type="text" name="data.details.alignment.value" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
+                    <input type="text" name="data.details.source.value" value="{{data.details.source.value}}" placeholder="Source"/>
                 </li>
             </ul>
         </div>
     </header>
 
     {{!-- NPC Sheet Navigation --}}
-    <nav class="npc-sheet-navigation tabs" data-group="primary">
+    <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
         <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
         <a class="item" data-tab="spellbook">{{ localize "DND5E.Spellbook" }}</a>
@@ -43,7 +43,7 @@
     </nav>
 
     {{!-- NPC Sheet Body --}}
-    <section class="npc-sheet-body">
+    <section class="sheet-body">
 
         <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
 
@@ -81,8 +81,8 @@
 
                 {{!-- Attributes --}}
                 <ul class="attributes flexrow">
-                    <li class="attribute flexcol">
-                        <h4 class="attribute-name box-title">{{ localize "DND5E.Health" }}</h4>
+                    <li class="attribute health flexcol">
+                        <h4 class="attribute-name box-title rollable">{{ localize "DND5E.Health" }}</h4>
                         <div class="attribute-value multiple">
                             <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
                                    data-dtype="Number" placeholder="10"/>
@@ -122,8 +122,8 @@
                 </ul>
 
                 {{!-- Legendary Actions --}}
-                <div class="statuses flexrow">
-                    <div class="status legendary">
+                <div class="resources flexrow">
+                    <div class="resource legendary">
                         <h4>{{ localize "DND5E.LegAct" }}</h4>
                         <div class="status-value">
                             <input type="text" name="data.resources.legact.value" data-dtype="Number" placeholder="0"
@@ -133,7 +133,7 @@
                                    value="{{data.resources.legact.max}}"/>
                         </div>
                     </div>
-                    <div class="status legendary">
+                    <div class="resource legendary">
                         <h4>{{ localize "DND5E.LegRes" }}</h4>
                         <div class="status-value">
                             <input type="text" name="data.resources.legres.value" data-dtype="Number" placeholder="0"
@@ -143,7 +143,7 @@
                                    value="{{data.resources.legres.max}}"/>
                         </div>
                     </div>
-                    <div class="status lair">
+                    <div class="resource lair">
                         <h4>{{ localize "DND5E.LairAct" }}</h4>
                         <div class="status-value">
                             <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
@@ -229,8 +229,7 @@
                     </div>
 
                     <div class="form-group configure-flags">
-                        <label>{{localize "DND5E.SpecialTraits"}}</label>
-                        <i class="fas fa-cog"></i>
+                        <label>{{localize "DND5E.SpecialTraits"}}<i class="fas fa-cog"></i></label>
                     </div>
                 </div>
             </section>
@@ -300,20 +299,16 @@
                 <li class="item flexrow inventory-header spellbook-header">
                     <div class="item-name flexrow">
                         <h3>{{section.label}}</h3>
+                    </div>
 
+                    <div class="spell-slots">
                         {{#unless section.isCantrip}}
-                        <span class="spell-slots">
-                            <input type="text" name="data.spells.spell{{lvl}}.value" value="{{section.uses}}" placeholder="0"/>
-                        </span>
-                        <span class="flex0"> / </span>
-                        <span class="spell-max">
-                            <input type="text" name="data.spells.spell{{lvl}}.max" value="{{section.slots}}" placeholder="0"/>
-                        </span>
-                        {{else}}
-                        <span class="spell-slots">&infin;</span>
-                        <span class="flex0"> / </span>
-                        <span class="spell-max">&infin;</span>
-                        {{/unless}}
+                        <input type="text" name="data.spells.spell{{lvl}}.value" value="{{section.uses}}" placeholder="0"/>
+                        {{else}}<span class="spell-slots">&infin;</span>{{/unless}}
+                        <span class="sep"> / </span>
+                        {{#unless section.isCantrip}}
+                        <input type="text" name="data.spells.spell{{lvl}}.max" value="{{section.slots}}" placeholder="0"/>
+                        {{else}}<span class="spell-max">&infin;</span>{{/unless}}
                     </div>
 
                     <div class="spell-school">Spell School</div>
@@ -335,6 +330,7 @@
                             <h4>{{item.name}}</h4>
                         </div>
 
+                        <div class="spell-comps">{{item.data.components.str}}</div>
                         <div class="spell-school">{{item.data.school.str}}</div>
                         <div class="spell-action">{{item.data.activation.str}}</div>
 

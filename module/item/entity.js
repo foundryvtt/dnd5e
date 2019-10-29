@@ -6,6 +6,50 @@ import { Dice5e } from "../dice.js";
 export class Item5e extends Item {
 
   /**
+   * Augment the basic Item data model with additional dynamic data.
+   */
+  prepareData(item) {
+    super.prepareData(item);
+    if ( item.type === "spell" ) this._prepareSpellData(item);
+    return item;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare dynamic data for Spell type items
+   * @param {Object} item     The original Item data
+   * @private
+   */
+  _prepareSpellData(item) {
+    const C = CONFIG.DND5E;
+
+    // Spell Level Label
+    item.data.spellType.label = C.spellTypes[item.data.spellType.value];
+
+    // Ability Activation Label
+    let act = item.data.activation;
+    if ( act ) act.label = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
+
+    // Spell Target Label
+    let tgt = item.data.target;
+    if ( ["none", "touch"].includes(tgt.units) ) tgt.value = null;
+    tgt.label = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+
+    // Spell Range Label
+    let rng = item.data.range;
+    if ( ["none", "touch"].includes(rng.units) ) rng.value = null;
+    rng.label = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
+
+    // Spell Duration Label
+    let dur = item.data.duration;
+    if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
+    dur.label = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
    * @return {Promise}
    */

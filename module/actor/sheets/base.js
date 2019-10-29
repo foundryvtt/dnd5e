@@ -119,6 +119,13 @@ export class ActorSheet5e extends ActorSheet {
     // Extend Spell information
     spell.data.school.str = CONFIG.DND5E.spellSchools[spell.data.school.value];
 
+    // Spell Components
+    const comps = spell.data.components;
+    let str = comps.value ? comps.value.split(",") : [];
+    if ( spell.data.ritual.value ) str.push("R");
+    if ( spell.data.concentration.value ) str.push("C");
+    comps.str = str.join(" ");
+
     // Spell Usage
     let act = spell.data.activation;
     act.str = [act.cost, CONFIG.DND5E.abilityActivationTypes[act.type]].filter(p => !!p).join(" ");

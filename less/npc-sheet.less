@@ -1,9 +1,4 @@
-@colorDark: #191813;
-@colorBeige: #b5b3a4;
-@colorTan: #7a7971;
-@colorOlive: #4b4a44;
-@colorCrimson: #44191A;
-@borderGroove: 2px groove #eeede0;
+@import "./variables.less";
 
 /* ----------------------------------------- */
 /*  Basic Structure                          */
@@ -11,24 +6,6 @@
 .dnd5e.sheet.actor.npc {
   min-width: 620px;
   min-height: 710px;
-
-  .window-content {
-    background: url("ui/parchment.jpg") repeat;
-    color: @colorDark;
-  }
-
-  .npc-sheet-header {
-    flex: 0 0 100px;
-  }
-
-  .npc-sheet-navigation {
-    flex: 0 0 30px;
-  }
-
-  .npc-sheet-body {
-    flex: 1;
-    overflow: hidden;
-  }
 
   /* ----------------------------------------- */
   /*  General Styles                           */
@@ -42,11 +19,6 @@
     color: @colorDark;
   }
 
-  select {
-    background: transparent;
-    flex: 1;
-  }
-
   /* Box Headers */
   h4.box-title {
     line-height: 16px;
@@ -55,53 +27,21 @@
     border-bottom: 1px solid @colorBeige;
   }
 
-  /* Proficiency Toggle Buttons */
-  .proficiency-toggle {
-    color: @colorBeige;
-    font-size: 12px;
-  }
-  .proficient .proficiency-toggle {
-    color: @colorOlive;
-  }
-
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
 
-  .npc-sheet-header {
-    border-bottom: @borderGroove;
-    .nodesto();
-
-    .profile {
-      flex: 0 0 100px;
-      border: none;
-      border-right: @borderGroove;
-    }
-
-    .charname {
-      flex: 1;
-      border-bottom: none;
-      height: 60px;
-      margin: 0;
-      padding-left: 5px;
-
-      input {
-        height: 50px;
-        margin: 5px 0;
-        font-size: 36px;
-      }
-    }
-
+  .sheet-header {
     .charlevel {
       flex: 0 0 160px;
       height: 60px;
       margin: 0;
+      padding: 5px;
       text-align: right;
 
       .level {
         width: 100%;
         height: 30px;
-        margin-top: 5px;
         font-size: 20px;
         line-height: 30px;
 
@@ -122,173 +62,9 @@
       .experience {
         width: 100%;
         height: 20px;
-        margin-bottom: 5px;
         padding-right: 8px;
         font-size: 16px;
         color: @colorOlive;
-      }
-    }
-
-    .details {
-      flex: 0 0 100%;
-      height: 40px;
-      border-top: @borderGroove;
-      border-bottom: none;
-
-      li {
-        width: 33.33%;
-        float: left;
-        height: 34px;
-        margin: 2px 0;
-        border-right: @borderGroove;
-
-        &:last-child {
-          border-right: none;
-        }
-      }
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Sheet Navigation                         */
-  /* ----------------------------------------- */
-
-  .npc-sheet-navigation {
-    margin-bottom: 10px;
-    .nodesto();
-
-    .item {
-      height: 30px;
-      line-height: 36px;
-      margin: 0 24px;
-      border-bottom: 3px solid @colorBeige;
-
-      &.active {
-        border-bottom: 3px solid @colorCrimson;
-      }
-    }
-  }
-
-  /**
-   * Inventory Filter Lists
-   */
-  .filter-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    line-height: 16px;
-
-    .filter-title {
-      flex: 4;
-      .nodesto();
-      font-size: 18px;
-    }
-
-    .filter-item {
-      text-align: center;
-      font-size: 12px;
-      margin: 0 6px;
-      border-bottom: 3px solid @colorBeige;
-
-      &:hover {
-        text-shadow: 0 0 4px red;
-        border-bottom: 3px solid @colorTan;
-      }
-
-      &.active {
-        border-bottom: 3px solid @colorCrimson;
-      }
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Ability Scores                           */
-  /* ----------------------------------------- */
-
-  .ability-scores {
-    flex: 0 0 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    .nodesto();
-
-    .ability {
-      margin: 0 5px;
-      text-align: center;
-      border: @borderGroove;
-      border-radius: 4px;
-
-      input.ability-score {
-        height: 30px;
-        width: 50px;
-        margin: 0 auto;
-        line-height: 32px;
-        font-size: 24px;
-      }
-
-      .ability-modifiers {
-        height: 24px;
-        margin: -10px 0 0;
-
-        span.ability-mod,
-        span.ability-save {
-          flex: 0 0 24px;
-          height: 24px;
-          border-top: @borderGroove;
-        }
-
-        span.ability-mod {
-          border-right: @borderGroove;
-        }
-
-        .ability-proficiency {
-          line-height: 30px;
-        }
-
-        span.ability-save {
-          border-left: @borderGroove;
-        }
-      }
-
-      /* Hide modifier box on hover */
-      input.ability-score:hover + .ability-modifiers {
-        visibility: hidden;
-      }
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Skills                                   */
-  /* ----------------------------------------- */
-
-  ul.skills-list {
-    flex: 0 0 200px;
-    list-style: none;
-    margin: 10px 5px;
-    padding: 2px 2px 0;
-    border: @borderGroove;
-
-    li.skill {
-      height: 24px;
-      padding: 3px;
-
-      .skill-proficiency {
-        flex: 0 0 16px;
-        line-height: 18px;
-      }
-
-      .skill-ability {
-        flex: 0 0 28px;
-      }
-
-      .skill-mod,
-      .skill-passive {
-        flex: 0 0 20px;
-      }
-
-      .skill-passive {
-        text-align: center;
-        color: @colorTan;
       }
     }
   }
@@ -355,20 +131,40 @@
   /*  Statuses                                 */
   /* ----------------------------------------- */
 
-  .statuses {
+  .resources {
     flex: 0 0 100%;
     border-bottom: @borderGroove;
     margin-bottom: 5px;
 
-    .status {
-      border: none;
+    .resource {
+      padding: 0 6px;
+      line-height: 32px;
 
       h4 {
+        display: inline-block;
+        margin: 0;
+        .nodesto();
         font-size: 16px;
       }
 
+      .status-value {
+        display: inline-block;
+        float: right;
+        > * {
+          display: inline;
+        }
+      }
+
       input[type="text"] {
+        height: 20px;
+        max-width: 20px;
+        margin: 0;
         text-align: center;
+      }
+
+      input[type="checkbox"] {
+        position: relative;
+        top: 2px;
       }
 
       span.sep {
@@ -378,108 +174,4 @@
     }
   }
 
-  /* ----------------------------------------- */
-  /*  Traits                                   */
-  /* ----------------------------------------- */
-
-  .traits {
-    margin: 0 5px;
-
-    .form-group, .form-group-stacked {
-      margin: 0 0 4px 0;
-    }
-
-    label {
-      line-height: 20px;
-      margin: 0;
-    }
-
-    input {
-      text-align: right;
-    }
-
-    .inactive {
-      color: @colorTan;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Items and Spells                         */
-  /* ----------------------------------------- */
-
-  .inventory-list {
-    padding: 0 5px;
-
-    .inventory-header {
-      margin: 2px 0;
-      border: @borderGroove;
-
-      h3 {
-        padding-left: 5px;
-      }
-    }
-
-    .item-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-
-      .item {
-        line-height: 30px;
-
-        &:last-child {
-          border-bottom: none;
-        }
-      }
-
-      .item-image {
-        flex: 0 0 30px;
-        background-size: 30px;
-      }
-
-      .item-properties {
-        margin-top: 3px;
-      }
-    }
-  }
-
-  .spellbook {
-    .inventory-list {
-      height: calc(100% - 50px);
-    }
-  }
-
-  .spellbook-filters {
-    margin: 5px 8px 0;
-  }
-
-  .spellbook-header {
-    .spell-slots,
-    .spell-max {
-      text-align: center;
-    }
-  }
-
-  .spellcasting-ability {
-    margin: 0 8px;
-    h3 {
-      .nodesto();
-      font-size: 18px;
-      margin: 0;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Biography                                */
-  /* ----------------------------------------- */
-
-  .biography .editor {
-    height: 100%;
-    padding: 0 5px;
-
-    .tox-toolbar-overlord,
-    .tox-toolbar__primary {
-      background: none;
-    }
-  }
 }

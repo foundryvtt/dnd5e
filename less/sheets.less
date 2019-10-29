@@ -1,48 +1,198 @@
 @import "./variables.less";
 
-
-@headerHeight: 44px;
-
-
-/* ----------------------------------------- */
-/*  Sheet Structure
-/* ----------------------------------------- */
+@navHeight: 30px;
+@headerHeight: 100px;
+@detailsHeight: 40px;
 
 .dnd5e.sheet {
   .window-content {
-    padding: 5px;
-    font-size: 13px;
     overflow-y: hidden;
+    padding: 5px;
+    background: @sheetBackground;
+    font-size: 13px;
+    color: @colorDark;
+
+    form {
+      height: 100%;
+      overflow: hidden;
+    }
   }
 
-  // Header structure
+  input, select {
+    margin: 0;
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
   .sheet-header {
-    .flexrow();
-    flex: 0 0 100%;
-    height: @headerHeight;
+    flex: 0 0 @headerHeight;
+    border-bottom: @borderGroove;
+    .nodesto();
 
+    /* Character Name */
     h1 {
+      flex: 1;
+      border-bottom: none;
+      height: 60px;
       margin: 0;
-      border: none;
+      padding: 5px;
 
-      > input {
-        height: @headerHeight - 4px;
-        width: 100%;
-        margin: 2px;
-        .nodesto();
+      input {
+        height: 50px;
         font-size: 36px;
-        border: none;
+      }
+    }
+
+    /* Profile Image */
+    img.profile {
+      flex: 0 0 @headerHeight;
+      height: @headerHeight;
+      object-fit: cover;
+      border: none;
+      border-right: @borderGroove;
+    }
+
+    /* Sheet Details */
+    .details {
+      flex: 0 0 100%;
+      height: @detailsHeight;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: @borderGroove;
+      border-bottom: none;
+
+      li {
+        width: 33.33%;
+        float: left;
+        height: @detailsHeight - 6px;
+        margin: 2px 0;
+        padding: 0 3px;
+        border-right: @borderGroove;
+        line-height: 34px;
+        color: @colorOlive;
+
+        &:last-child {
+          border-right: none;
+        }
       }
     }
   }
 
-  // Body structure
-  .sheet-body {
-    height: calc(100% - @headerHeight);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+  /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+
+  .sheet-navigation {
+    flex: 0 0 @navHeight;
+    margin-bottom: 10px;
+    .nodesto();
+
+    .item {
+      height: 30px;
+      line-height: 36px;
+      margin: 0 24px;
+      border-bottom: 3px solid @colorBeige;
+
+      &.active {
+        border-bottom: 3px solid @colorCrimson;
+      }
+    }
   }
 
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+
+  .sheet-body {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+
+  // Input Fields
+  input[type="text"] {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    background: none;
+    color: #444;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+      border: 1px solid #111;
+      box-shadow: 0 0 8px red;
+    }
+  }
+
+  // Select Fields
+  select {
+    flex: 1;
+    margin: 0;
+    font-size: 10px;
+    height: 18px;
+    background: transparent;
+  }
+
+  // Disabled Fields
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    color: #444;
+    border: none;
+    &:hover,
+    &:focus {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  /* Tags */
+  .tag {
+    float: left;
+    margin: 0 2px 2px 0;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 16px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  /* ----------------------------------------- */
+  /*  List Filters                             */
+  /* ----------------------------------------- */
+
+  .filter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 16px;
+
+    .filter-title {
+      flex: 4;
+      .nodesto();
+      font-size: 18px;
+    }
+
+    .filter-item {
+      text-align: center;
+      font-size: 12px;
+      margin: 0 6px;
+      border-bottom: 3px solid @colorBeige;
+
+      &:hover {
+        text-shadow: 0 0 4px red;
+        border-bottom: 3px solid @colorTan;
+      }
+
+      &.active {
+        border-bottom: 3px solid @colorCrimson;
+      }
+    }
+  }
 }

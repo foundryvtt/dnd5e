@@ -1,6 +1,6 @@
 @import "./variables.less";
 
-@headerHeight: 48px;
+@actorHeaderHeight: 48px;
 @sidebarWidth: 220px;
 @showcaseHeight: 220px;
 @detailHeight: 30px;
@@ -17,41 +17,6 @@
   height: 100%;
   overflow: hidden;
 
-  /* Form Elements */
-  input[type="text"] {
-    width: calc(100% - 2px);
-    height: calc(100% - 2px);
-    background: none;
-    padding: 0;
-    margin: 1px 0;
-    color: #444;
-    border: 1px solid transparent;
-
-    &:hover,
-    &:focus {
-      border: 1px solid #111;
-      box-shadow: 0 0 8px red;
-    }
-  }
-
-  /* Select Fields */
-  select {
-    font-size: 10px;
-    height: 18px;
-    background: rgba(255,255,255,0.5);
-  }
-
-  input:disabled,
-  select:disabled,
-  textarea:disabled {
-    color: #444;
-    border: none;
-    &:hover,
-    &:focus {
-      border: none;
-      box-shadow: none;
-    }
-  }
 
   label {
     display: block;
@@ -86,18 +51,6 @@
     flex: 1;
     overflow: hidden;
   }
-
-  /* Tags */
-  .tag {
-    float: left;
-    margin: 0 2px 2px 0;
-    padding: 0 3px;
-    font-size: 10px;
-    line-height: 16px;
-    border: 1px solid #999;
-    border-radius: 3px;
-    background: rgba(0, 0, 0, 0.05);
-  }
 }
 
 
@@ -105,7 +58,7 @@
 /*  Actor Sheet
 /* ---------------------------------------- */
 
-.dnd5e.actor {
+.dnd5e.actor.character {
   min-width: 650px;
   min-height: 650px;
 
@@ -121,10 +74,10 @@
 
   .sheet-upper {
     width: 100%;
-    height: @headerHeight + @showcaseHeight;
+    height: @actorHeaderHeight + @showcaseHeight;
 
     .sheet-header {
-      height: @headerHeight;
+      height: @actorHeaderHeight;
     }
 
     .sheet-profile {
@@ -136,14 +89,9 @@
     }
   }
 
-  .sheet-navigation {
-    height: @navigationHeight;
-    width: 100%;
-  }
-
   .sheet-lower {
     width: 100%;
-    height: calc(100% - @headerHeight - @showcaseHeight - @navigationHeight);
+    height: calc(100% - @actorHeaderHeight - @showcaseHeight - @navigationHeight);
 
     .sheet-content {
       height: 100%;
@@ -160,7 +108,7 @@
     .sheet-upper {
       height: @showcaseHeight;
       .sheet-showcase {
-        height: calc(@showcaseHeight - @headerHeight)
+        height: calc(@showcaseHeight - @actorHeaderHeight)
       }
     }
     .sheet-lower {
@@ -169,43 +117,10 @@
   }
 
   /* ---------------------------------------- */
-  /*  Navigation Tabs
-  /* ---------------------------------------- */
-
-  .sheet-navigation {
-    border-top: 1px solid @borderLight;
-    border-bottom: 1px solid @borderDark;
-
-    .sheet-tabs > .item {
-      border-radius: 5px 5px 0 0;
-      &.active {
-        border: 1px solid @borderDark;
-        border-bottom: none;
-        box-shadow: 0 0 10px inset @accentColor;
-        text-shadow: none;
-      }
-    }
-  }
-
-  /* ---------------------------------------- */
   /*  Header Content
   /* ---------------------------------------- */
 
   .sheet-header {
-    border-bottom: 1px solid @borderLight;
-
-    h1 {
-      margin: 0;
-      border: none;
-      > input {
-        height: 40px;
-        width: 100%;
-        margin: 2px;
-        .nodesto();
-        font-size: 36px;
-      }
-    }
-
     .charlevel {
       flex: 0 0 150px;
       height: 44px;
@@ -272,34 +187,6 @@
   /* ---------------------------------------- */
   /*  Showcase Content
   /* ---------------------------------------- */
-
-  /* Character Details */
-  .details {
-    flex: 0 0 100%;
-    height: @detailHeight;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid @borderLight;
-    .nodesto();
-
-    li {
-      width: 33.33%;
-      height: @detailHeight;
-      float: left;
-      padding: 3px;
-      border-right: 1px solid @borderLight;
-
-      &:last-child {
-        border-right: none;
-      }
-
-      > input {
-        .nodesto();
-        font-size: 20px;
-      }
-    }
-  }
 
   /* Primary Attributes */
   .primary-attributes {
@@ -418,7 +305,7 @@
       }
 
       .status-value {
-        flex: none;
+        flex: 0 0 40px;
         > * {
           display: inline-block;
           margin-right: 5px;
@@ -599,44 +486,6 @@
   /*  Skills Tab
   /* ---------------------------------------- */
 
-  .skills {
-    .skills-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .skill {
-      .flexrow();
-      height: 21px;
-      line-height: 21px;
-      border-bottom: 1px solid @borderLight;
-      font-size: 13px;
-
-      .skill-name {
-        margin: 0;
-      }
-
-      .skill-proficiency {
-        text-align: left;
-        flex: 0 0 20px;
-        padding-left: 3px;
-        i.fa-circle { font-size: 10px; }
-      }
-
-      .skill-ability {
-        flex: 0 0 36px;
-        color: #666;
-        text-align: right;
-        margin-right: 4px;
-      }
-
-      .skill-mod {
-        flex: 0 0 28px;
-        text-align: center;
-      }
-    }
-  }
-
   &.locked .ability-proficiency,
   &.locked .skill-proficiency {
     text-shadow: none;
@@ -683,7 +532,7 @@
 
       &:hover {
         color: #111;
-        text-shadow: 0 0 10px @accentColor;
+        text-shadow: 0 0 10px red;
       }
     }
   }
@@ -700,9 +549,6 @@
         padding-left: 8px;
       }
     }
-  }
-  &.npc-sheet .biography .editor {
-    height: 465px;
   }
 
   /* ----------------------------------------- */
@@ -749,41 +595,6 @@
     height: 100%;
     overflow-y: auto;
 
-    /* Inventory Item */
-    .item {
-      line-height: 24px;
-      padding: 0;
-      border-bottom: 1px solid @borderLight;
-    }
-
-    .item-name {
-      cursor: pointer;
-
-      h4 {
-        flex: 2;
-        margin: 0;
-      }
-
-      .prepared {
-        color: #666;
-        margin-left: 3px;
-        font-size: 10px;
-      }
-
-      .item-charges {
-        color: #666;
-        font-size: 12px;
-        flex: 0;
-      }
-
-      &:hover .item-image {
-        background-image: url("/icons/svg/d20-grey.svg") !important;
-      }
-      .item-image:hover {
-        background-image: url("/icons/svg/d20-black.svg") !important;
-      }
-    }
-
     .item-image {
       flex: 0 0 24px;
       margin-right: 6px;
@@ -799,48 +610,11 @@
       border-right: 1px solid @borderLight;
     }
 
-    .item-controls {
-      flex: 0 0 44px;
-
-      a {
-        display: block;
-        float: left;
-        width: 22px;
-        font-size: 10px;
-        text-align: center;
-        color: #666;
-      }
-    }
-
-    /* Item Dropdown Summary */
-    .item-summary {
-      flex: 0 0 100%;
-      font-size: 12px;
-      line-height: 16px;
-      padding: 0.25em 0.5em;
-      border-top: 1px solid #CCC;
-    }
 
     /* Inventory Header */
     .inventory-header {
-      font-weight: 700;
-      line-height: 20px;
-      background: rgba(0, 0, 0, 0.05);
-
-      h3 {
-        flex: 2;
-        font-size: 1em;
-        margin: 0;
-        padding-left: 32px;
-        font-weight: bold;
-      }
-
       .item-quantity, .item-weight {
         color: #111;
-      }
-
-      .item-controls a.item-create {
-        width: 100%;
       }
     }
   }
@@ -913,50 +687,11 @@
   /* ----------------------------------------- */
 
   .spellbook {
-    .spellbook-header {
-      .spell-school, .spell-action {
-        color: inherit;
-      }
-    }
-
-    .prepared-toggle {
-      flex: 0 0 20px;
-      line-height: 20px;
-      margin-left: 5px;
-    }
 
     // Spellbook spell list
     .inventory-list {
       height: calc(100% - 28px);
     }
-
-    // Individual spell items
-    .item {
-      .item-name {
-        flex: 2;
-      }
-
-      .spell-school, .spell-action {
-        flex: 1;
-        font-size: 12px;
-        color: #666;
-        text-align: center;
-        border-right: 1px solid @borderLight;
-      }
-
-      .spell-slots, .spell-max {
-        flex: 0 0 24px;
-        font-size: 12px;
-        text-align: center;
-      }
-
-      .spell-max {
-        border-right: 1px solid @borderLight;
-      }
-    }
-
-    // Empty spellbook controls
-    .spellbook-empty .item-controls { flex: 1; }
   }
 
   // Extended Actor Sheet spellbook controls
