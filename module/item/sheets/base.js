@@ -2,12 +2,30 @@
  * Override and extend the basic :class:`ItemSheet` implementation
  */
 export class ItemSheet5e extends ItemSheet {
+  constructor(...args) {
+    super(...args);
+
+    /**
+     * The tab being browsed
+     * @type {string}
+     */
+    this._sheetTab = null;
+
+    /**
+     * The scroll position on the active tab
+     * @type {number}
+     */
+    this._scrollTab = 100;
+  }
+
+  /* -------------------------------------------- */
+
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       width: 520,
       height: 460,
       classes: ["dnd5e", "sheet", "item"],
-      template: `public/systems/dnd5e/templates/items/item-sheet-v2.html`,
+      template: `public/systems/dnd5e/templates/items-v2/item-sheet.html`,
       resizable: false
     });
   }
@@ -78,5 +96,15 @@ export class ItemSheet5e extends ItemSheet {
    */
   activateListeners(html) {
     super.activateListeners(html);
+
+    // Activate tabs
+    new Tabs(html.find(".tabs"), {
+      initial: this["_sheetTab"],
+      callback: clicked => this["_sheetTab"] = clicked.data("tab")
+    });
+
+    // Save scroll position
+    html.find(".tab.active")[0].scrollTop = this._scrollTab;
+    html.find(".tab").scroll(ev => this._scrollTab = ev.currentTarget.scrollTop);
   }
 }

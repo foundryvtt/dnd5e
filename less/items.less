@@ -24,10 +24,14 @@
   }
 
   .sheet-body {
+    .tab {
+      padding: 0 5px;
+    }
+
     .item-properties {
       flex: 0 0 120px;
       list-style: none;
-      margin: 0 10px 0 5px;
+      margin: 0 5px 0 0;
       padding: 0;
 
       li {
@@ -38,6 +42,51 @@
         text-align: center;
         font-size: 12px;
         line-height: 16px;
+      }
+    }
+  }
+
+  .tab.details {
+    label {
+      color: @colorOlive;
+      font-weight: bold;
+    }
+    .form-group label { flex: 3; }
+
+    select, input {
+      height: 22px;
+      margin: 1px 0;
+      border: 1px solid @colorTan;
+    }
+
+    .form-group.input-select {
+      input { flex: 1}
+      select {
+        flex: 1.8;
+        margin-left: 5px;
+      }
+    }
+
+    .form-group.input-select-select {
+      input { flex: 0.65}
+      select {
+        flex: 1;
+        margin-left: 5px;
+      }
+    }
+
+    .spell-components {
+      .component {
+        flex: auto;
+        margin: 0;
+        line-height: 16px;
+        font-size: 11px;
+        input[type="checkbox"] {
+          height: 16px;
+          margin: 0 5px 0;
+          position: relative;
+          top: 4px;
+        }
       }
     }
   }

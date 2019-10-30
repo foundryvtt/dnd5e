@@ -47,6 +47,7 @@ const migrateItem = function(item) {
     _migrateDuration(item, updateData);
     _migrateRange(item, updateData);
     _migrateTarget(item, updateData);
+    _migrateSpellComponents(item, updateData);
   }
 
   // Return the migrated update data
@@ -98,7 +99,6 @@ const _migrateRange = function(item, updateData) {
   }
 };
 
-
 /* -------------------------------------------- */
 
 const _migrateTarget = function(item, updateData) {
@@ -126,5 +126,19 @@ const _migrateTarget = function(item, updateData) {
     let match = target.value.match(/([\d]+)([\w\s]+)?/);
     if ( match ) value = Number(match[1]);
     updateData["data.target"] = {type, units, value};
+  }
+};
+
+/* -------------------------------------------- */
+
+const _migrateSpellComponents = function(item, updateData) {
+  const components = item.data.data.components;
+  if ( !components.value ) return;
+  let comps = components.value.toUpperCase().replace(/\s/g, "").split(",");
+  updateData["data.components"] = {
+    value: "",
+    vocal: comps.includes("V"),
+    somatic: comps.includes("M"),
+    material: comps.includes("S")
   }
 };
