@@ -2,6 +2,10 @@
 .dnd5e.sheet.item {
 
   .sheet-header {
+    img.profile {
+      border: 2px solid #000;
+    }
+
     .item-subtitle {
       flex: 0 0 80px;
       height: 60px;
@@ -23,6 +27,13 @@
     }
   }
 
+  .sheet-navigation {
+    margin-bottom: 5px;
+    .item {
+      font-size: 18px;
+    }
+  }
+
   .sheet-body {
     .tab {
       padding: 0 5px;
@@ -31,7 +42,7 @@
     .item-properties {
       flex: 0 0 120px;
       list-style: none;
-      margin: 0 5px 0 0;
+      margin: 0 10px 0 0;
       padding: 0;
 
       li {
@@ -57,6 +68,20 @@
       height: 22px;
       margin: 1px 0;
       border: 1px solid @colorTan;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    label.checkbox {
+      flex: auto;
+      margin: 0;
+      line-height: 16px;
+      font-size: 11px;
+      input[type="checkbox"] {
+        height: 16px;
+        margin: 0 5px 0;
+        position: relative;
+        top: 4px;
+      }
     }
 
     .form-group.input-select {
@@ -75,19 +100,23 @@
       }
     }
 
-    .spell-components {
-      .component {
-        flex: auto;
-        margin: 0;
-        line-height: 16px;
-        font-size: 11px;
-        input[type="checkbox"] {
-          height: 16px;
-          margin: 0 5px 0;
-          position: relative;
-          top: 4px;
-        }
+    .form-group.uses-per {
+      input {
+        flex: 0 0 32px;
       }
+      span {
+        text-align: center;
+        flex: 0 0 24px;
+        line-height: 24px;
+      }
+      select {
+        flex: 1.5;
+      }
+    }
+
+    .prepared {
+      text-align: right;
+      padding-right: 10px;
     }
   }
 }

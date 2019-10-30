@@ -175,6 +175,15 @@ DND5E.skills = {
 
 /* -------------------------------------------- */
 
+DND5E.spellPreparationModes = {
+  "always": "Always Available",
+  "prepared": "Prepared Spell",
+  "innate": "Innate Spellcasting",
+  "pact": "Pact Magic"
+};
+
+/* -------------------------------------------- */
+
 // Weapon Types
 DND5E.weaponTypes = {
   "simpleM": "Simple Melee",

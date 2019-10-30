@@ -31,6 +31,10 @@ export class Item5e extends Item {
     let act = item.data.activation;
     if ( act ) act.label = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
+    // Spell Components Label
+    let comps = item.data.components;
+    comps.label = Object.entries(comps).map(c => c[1] === true ? c[0].titleCase().slice(0,1) : null).filterJoin(",");
+
     // Spell Target Label
     let tgt = item.data.target;
     if ( ["none", "touch"].includes(tgt.units) ) tgt.value = null;
@@ -39,12 +43,18 @@ export class Item5e extends Item {
     // Spell Range Label
     let rng = item.data.range;
     if ( ["none", "touch"].includes(rng.units) ) rng.value = null;
+    else if ( rng.value === 0 ) rng.units = null;
     rng.label = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
 
     // Spell Duration Label
     let dur = item.data.duration;
     if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
     dur.label = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
+
+    // Save DC
+    let save = item.data.save;
+    if ( !save.ability ) save.dc = null;
+    save.label = save.ability ? `DC ${save.dc} ${C.abilities[save.ability]}` : "";
   }
 
   /* -------------------------------------------- */

@@ -485,6 +485,9 @@
 .dnd5e.sheet.actor .biography .editor .tox-toolbar__primary {
   background: none;
 }
+.dnd5e.sheet.item .sheet-header img.profile {
+  border: 2px solid #000;
+}
 .dnd5e.sheet.item .sheet-header .item-subtitle {
   flex: 0 0 80px;
   height: 60px;
@@ -502,13 +505,19 @@
   font-size: 16px;
   line-height: 24px;
 }
+.dnd5e.sheet.item .sheet-navigation {
+  margin-bottom: 5px;
+}
+.dnd5e.sheet.item .sheet-navigation .item {
+  font-size: 18px;
+}
 .dnd5e.sheet.item .sheet-body .tab {
   padding: 0 5px;
 }
 .dnd5e.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
   list-style: none;
-  margin: 0 5px 0 0;
+  margin: 0 10px 0 0;
   padding: 0;
 }
 .dnd5e.sheet.item .sheet-body .item-properties li {
@@ -532,6 +541,19 @@
   height: 22px;
   margin: 1px 0;
   border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
+.dnd5e.sheet.item .tab.details label.checkbox {
+  flex: auto;
+  margin: 0;
+  line-height: 16px;
+  font-size: 11px;
+}
+.dnd5e.sheet.item .tab.details label.checkbox input[type="checkbox"] {
+  height: 16px;
+  margin: 0 5px 0;
+  position: relative;
+  top: 4px;
 }
 .dnd5e.sheet.item .tab.details .form-group.input-select input {
   flex: 1;
@@ -547,17 +569,20 @@
   flex: 1;
   margin-left: 5px;
 }
-.dnd5e.sheet.item .tab.details .spell-components .component {
-  flex: auto;
-  margin: 0;
-  line-height: 16px;
-  font-size: 11px;
+.dnd5e.sheet.item .tab.details .form-group.uses-per input {
+  flex: 0 0 32px;
 }
-.dnd5e.sheet.item .tab.details .spell-components .component input[type="checkbox"] {
-  height: 16px;
-  margin: 0 5px 0;
-  position: relative;
-  top: 4px;
+.dnd5e.sheet.item .tab.details .form-group.uses-per span {
+  text-align: center;
+  flex: 0 0 24px;
+  line-height: 24px;
+}
+.dnd5e.sheet.item .tab.details .form-group.uses-per select {
+  flex: 1.5;
+}
+.dnd5e.sheet.item .tab.details .prepared {
+  text-align: right;
+  padding-right: 10px;
 }
 /* ----------------------------------------- */
 /*  Chat Cards

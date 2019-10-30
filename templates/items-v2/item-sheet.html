@@ -50,6 +50,8 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Spell Level --}}
             <div class="form-group">
                 <label>{{data.level.label}}</label>
                 <select name="data.level.value" data-dtype="{{data.level.type}}">
@@ -61,6 +63,7 @@
                 </select>
             </div>
 
+            {{!-- Spell School --}}
             <div class="form-group">
                 <label>{{data.school.label}}</label>
                 <select name="data.school.value" data-dtype="{{data.school.type}}">
@@ -86,9 +89,15 @@
                 </select>
             </div>
 
+            {{!-- Activation Condition --}}
+            <div class="form-group">
+                <label>Activation Condition</label>
+                <input type="text" name="data.activation.condition" value="{{data.activation.condition}}"/>
+            </div>
+
             {{!-- Ability Target --}}
             <div class="form-group input-select-select">
-                <label>Ability Target</label>
+                <label>Spell Target</label>
                 <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
                 <select name="data.target.units">
                     {{#select data.target.units}}
@@ -110,7 +119,7 @@
 
             {{!-- Ability Range --}}
             <div class="form-group input-select">
-                <label>Ability Range</label>
+                <label>Spell Range</label>
                 <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="-"/>
                 <select name="data.range.units">
                     {{#select data.range.units}}
@@ -124,7 +133,7 @@
 
             {{!-- Effect Duration --}}
             <div class="form-group input-select">
-                <label>Effect Duration</label>
+                <label>Spell Duration</label>
                 <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
                 <select name="data.duration.units">
                     {{#select data.duration.units}}
@@ -139,22 +148,57 @@
             {{!-- Spell Components --}}
             <div class="spell-components form-group-stacked">
                 <label>Spell Components</label>
-                <label class="component"><input type="checkbox" name="data.components.vocal" {{checked data.components.vocal}}/> Vocal</label>
-                <label class="component"><input type="checkbox" name="data.components.somatic" {{checked data.components.somatic}}/> Somatic</label>
-                <label class="component"><input type="checkbox" name="data.components.material" {{checked data.components.material}}/> Material</label>
-                <label class="component"><input type="checkbox" name="data.concentration.value" {{checked data.concentration.value}}/> Concentration</label>
-                <label class="component"><input type="checkbox" name="data.ritual.value" {{checked data.ritual.value}}/> Ritual</label>
+                <label class="checkbox"><input type="checkbox" name="data.components.vocal" {{checked data.components.vocal}}/> Vocal</label>
+                <label class="checkbox"><input type="checkbox" name="data.components.somatic" {{checked data.components.somatic}}/> Somatic</label>
+                <label class="checkbox"><input type="checkbox" name="data.components.material" {{checked data.components.material}}/> Material</label>
+                <label class="checkbox"><input type="checkbox" name="data.concentration.value" {{checked data.concentration.value}}/> Concentration</label>
+                <label class="checkbox"><input type="checkbox" name="data.ritual.value" {{checked data.ritual.value}}/> Ritual</label>
             </div>
 
+            {{!-- Material Components --}}
             <div class="form-group-stacked">
-                <label>{{data.materials.label}}</label>
-                <input type="text" name="data.materials.value" value="{{data.materials.value}}" data-dtype="{{data.materials.type}}"/>
+                <label>Spellcasting Materials</label>
+                <input type="text" name="data.materials.value" value="{{data.materials.value}}"/>
             </div>
         </div>
 
         {{!-- Actions Tab --}}
         <div class="tab details" data-group="primary" data-tab="actions">
 
+            {{!-- Preparation Mode --}}
+            <div class="form-group input-select">
+                <label>Spell Preparation Mode</label>
+                <label class="checkbox prepared">
+                    Prepared <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>
+                </label>
+                <select name="data.preparation.mode">
+                    {{#select data.preparation.mode}}
+                    <option value=""></option>
+                    {{#each preparationModes as |name key|}}
+                    <option value="{{key}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Limited Spell Uses --}}
+            <div class="form-group uses-per">
+                <label>Limited Spell Uses</label>
+                <input type="text" name="data.preparation.uses" value="{{data.preparation.uses}}" data-dtype="Number"/>
+                <span class="sep"> of </span>
+                <input type="text" name="data.preparation.max" value="{{data.preparation.max}}" data-dtype="Number"/>
+                <span class="sep"> per </span>
+                <select name="data.preparation.per">
+                    {{#select data.preparation.per}}
+                    <option value=""></option>
+                    <option value="sr">Short Rest</option>
+                    <option value="lr">Long Rest</option>
+                    <option value="day">Day</option>
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Spellcasting Ability --}}
             <div class="form-group">
                 <label>{{data.ability.label}}</label>
                 <select name="data.ability.value" data-dtype="{{data.ability.type}}">
@@ -167,13 +211,9 @@
                 </select>
             </div>
 
-             <div class="form-group">
-                <label>{{data.prepared.label}}</label>
-                <input type="checkbox" name="data.prepared.value" value="1" data-dtype="Boolean" {{checked data.prepared.value}}/>
-            </div>
-
+            {{!-- Spell Action Type --}}
             <div class="form-group">
-                <label>{{data.spellType.label}}</label>
+                <label>Spell Action Type</label>
                 <select name="data.spellType.value" data-dtype="{{data.spellType.type}}">
                     {{#select data.spellType.value}}
                     {{#each spellTypes as |name type|}}
@@ -200,10 +240,11 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label>{{data.save.label}}</label>
+            <div class="form-group input-select">
+                <label>Saving Throw</label>
+                <input type="text" name="data.save.dc" value="{{data.save.dc}}" data-dtype="Number" placeholder="DC"/>
                 <select name="data.save.value" data-dtype="{{data.save.type}}">
-                    {{#select data.save.value}}
+                    {{#select data.save.ability}}
                     <option value=""></option>
                     {{#each abilities as |ability a|}}
                     <option value="{{a}}">{{ability.label}}</option>

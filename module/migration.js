@@ -48,6 +48,7 @@ const migrateItem = function(item) {
     _migrateRange(item, updateData);
     _migrateTarget(item, updateData);
     _migrateSpellComponents(item, updateData);
+    _migrateSpellSave(item, updateData);
   }
 
   // Return the migrated update data
@@ -139,6 +140,21 @@ const _migrateSpellComponents = function(item, updateData) {
     value: "",
     vocal: comps.includes("V"),
     somatic: comps.includes("M"),
-    material: comps.includes("S")
+    material: comps.includes("S"),
+    concentration: item.data.data.concentration.value === true,
+    ritual: item.data.data.ritual.value === true
+  };
+  updateData["data.concentration.value"] = null;
+  updateData["data.ritual.value"] = null;
+};
+
+/* -------------------------------------------- */
+
+const _migrateSpellSave = function(item, updateData) {
+  const save = item.data.data.save;
+  if ( !save.value ) return;
+  updateData["data.save"] = {
+    ability: save.value,
+    value: ""
   }
 };

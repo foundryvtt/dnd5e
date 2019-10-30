@@ -57,7 +57,16 @@ export class ItemSheet5e extends ItemSheet {
       data.spellTypes = CONFIG.DND5E.spellTypes;
       data.spellSchools = CONFIG.DND5E.spellSchools;
       data.spellLevels = CONFIG.DND5E.spellLevels;
+      data.preparationModes = CONFIG.DND5E.spellPreparationModes;
+
+      // Spell DC
+      let save = data.item.data.save;
+      if ( this.item.isOwned && (save.ability && !save.dc) ) {
+        save.dc = this.item.actor.data.data.attributes.spelldc.value;
+      }
     }
+
+
 
     return data;
   }
@@ -75,15 +84,14 @@ export class ItemSheet5e extends ItemSheet {
     const props = [];
     if ( item.type === "spell" ) {
       props.push(
-        item.data.spellType.label,
         item.data.activation.label,
         item.data.range.label,
         item.data.target.label,
         item.data.duration.label,
-        item.data.components.value,
+        item.data.components.label,
         item.data.materials.value,
-        item.data.concentration.value ? "Concentration" : null,
-        item.data.ritual.value ? "Ritual" : null
+        item.data.components.concentration ? "Concentration" : null,
+        item.data.components.ritual ? "Ritual" : null
       )
     }
     return props.filter(p => !!p);
