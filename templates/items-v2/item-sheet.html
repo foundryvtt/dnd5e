@@ -16,10 +16,10 @@
 
             <ul class="details">
                 <li class="item-detail">
-                    {{lookup spellLevels data.level.value}}
+                    {{lookup config.spellLevels data.level.value}}
                 </li>
                 <li class="item-detail">
-                    {{lookup spellSchools data.school.value}}
+                    {{lookup config.spellSchools data.school.value}}
                 </li>
                 <li class="item-detail">
                     <input type="text" name="data.source.value" value="{{data.source.value}}" placeholder="Source"/>
@@ -56,7 +56,7 @@
                 <label>{{data.level.label}}</label>
                 <select name="data.level.value" data-dtype="{{data.level.type}}">
                     {{#select data.level.value}}
-                    {{#each spellLevels as |name lvl|}}
+                    {{#each config.spellLevels as |name lvl|}}
                     <option value="{{lvl}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -68,7 +68,7 @@
                 <label>{{data.school.label}}</label>
                 <select name="data.school.value" data-dtype="{{data.school.type}}">
                     {{#select data.school.value}}
-                    {{#each spellSchools as |name sch|}}
+                    {{#each config.spellSchools as |name sch|}}
                     <option value="{{sch}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -82,7 +82,7 @@
                 <select name="data.activation.type">
                     {{#select data.activation.type}}
                     <option value=""></option>
-                    {{#each activationTypes as |name key|}}
+                    {{#each config.abilityActivationTypes as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -102,7 +102,7 @@
                 <select name="data.target.units">
                     {{#select data.target.units}}
                     <option value=""></option>
-                    {{#each distanceUnits as |name key|}}
+                    {{#each config.distanceUnits as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -110,7 +110,7 @@
                 <select name="data.target.type">
                     {{#select data.target.type}}
                     <option value=""></option>
-                    {{#each targetTypes as |name key|}}
+                    {{#each config.targetTypes as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -124,7 +124,7 @@
                 <select name="data.range.units">
                     {{#select data.range.units}}
                     <option value=""></option>
-                    {{#each distanceUnits as |name key|}}
+                    {{#each config.distanceUnits as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -138,7 +138,7 @@
                 <select name="data.duration.units">
                     {{#select data.duration.units}}
                     <option value=""></option>
-                    {{#each timePeriods as |name key|}}
+                    {{#each config.timePeriods as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -174,7 +174,7 @@
                 <select name="data.preparation.mode">
                     {{#select data.preparation.mode}}
                     <option value=""></option>
-                    {{#each preparationModes as |name key|}}
+                    {{#each config.spellPreparationModes as |name key|}}
                     <option value="{{key}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -198,12 +198,24 @@
                 </select>
             </div>
 
-            {{!-- Spellcasting Ability --}}
-            <div class="form-group">
-                <label>{{data.ability.label}}</label>
-                <select name="data.ability.value" data-dtype="{{data.ability.type}}">
-                    {{#select data.ability.value}}
-                    <option value=""></option>
+            {{!-- Action Type --}}
+            <div class="form-group select">
+                <label>Action Type</label>
+                <select name="data.actionType">
+                    {{#select data.actionType}}
+                    {{#each config.itemActionTypes as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Ability Modifier --}}
+            <div class="form-group select">
+                <label>Ability Modifier</label>
+                <select name="data.ability">
+                    {{#select data.ability}}
+                    <option value="Default"></option>
                     {{#each abilities as |ability a|}}
                     <option value="{{a}}">{{ability.label}}</option>
                     {{/each}}
@@ -211,39 +223,39 @@
                 </select>
             </div>
 
-            {{!-- Spell Action Type --}}
+            {{!-- Attack Roll Bonus --}}
             <div class="form-group">
-                <label>Spell Action Type</label>
-                <select name="data.spellType.value" data-dtype="{{data.spellType.type}}">
-                    {{#select data.spellType.value}}
-                    {{#each spellTypes as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
+                <label>Attack Roll Bonus</label>
+                <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" data-dtype="Number"/>
             </div>
 
-            <div class="form-group">
-                <label>{{data.damage.label}}</label>
-                <input type="text" name="data.damage.value" value="{{data.damage.value}}" data-dtype="{{data.damage.type}}"/>
-            </div>
+            {{!-- Damage Formula --}}
+            <h4 class="damage-header">Damage Formula<a class="damage-control add-damage"><i class="fas fa-plus"></i></a></h4>
+            <ol class="damage-parts">
+                {{#each data.damage as |part i| }}
+                <li class="damage-part flexrow" data-damage-part="{{i}}">
+                    <input type="text" name="data.damage.{{i}}.0" value="{{lookup this "0"}}"/>
+                    <select name="data.damage.{{i}}.1">
+                        {{#select (lookup this "1") }}
+                        <option value="">None</option>
+                        {{#each ../config.damageTypes as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{#each ../config.healingTypes as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <a class="damage-control delete-damage"><i class="fas fa-trash"></i></a>
+                </li>
+                {{/each}}
+            </ol>
 
-            <div class="form-group">
-                <label>{{data.damageType.label}}</label>
-                <select name="data.damageType.value" data-dtype="{{data.damageType.type}}">
-                    {{#select data.damageType.value}}
-                    <option value=""></option>
-                    {{#each damageTypes as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </div>
-
+            {{!-- Saving Throw --}}
             <div class="form-group input-select">
                 <label>Saving Throw</label>
                 <input type="text" name="data.save.dc" value="{{data.save.dc}}" data-dtype="Number" placeholder="DC"/>
-                <select name="data.save.value" data-dtype="{{data.save.type}}">
+                <select name="data.save.ability">
                     {{#select data.save.ability}}
                     <option value=""></option>
                     {{#each abilities as |ability a|}}
@@ -251,6 +263,12 @@
                     {{/each}}
                     {{/select}}
                 </select>
+            </div>
+
+            {{!-- Chat Message Flavor --}}
+            <div class="form-group-stacked">
+                <label>Chat Message Flavor</label>
+                <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
             </div>
         </div>
     </section>

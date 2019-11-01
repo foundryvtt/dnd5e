@@ -74,6 +74,30 @@ export class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
+  /*  Object Updates                              */
+  /* -------------------------------------------- */
+
+  /**
+   * This method is called upon form submission after form data is validated
+   * @param event {Event}       The initial triggering submission event
+   * @param formData {Object}   The object of validated form data with which to update the object
+   * @private
+   */
+  _updateObject(event, formData) {
+
+    // Format NPC Challenge Rating
+    let crv = "data.details.cr.value";
+    let cr = formData[crv];
+    if ( cr ) {
+        let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
+        formData[crv] = crs[cr] || parseInt(cr);
+    }
+
+    // Parent ActorSheet update steps
+    super._updateObject(event, formData);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 

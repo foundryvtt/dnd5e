@@ -46,6 +46,24 @@ DND5E.abilityActivationTypes = {
 
 /* -------------------------------------------- */
 
+/**
+ * Classification types for item action types
+ * @type {Object}
+ */
+DND5E.itemActionTypes = {
+  "matk": "Melee Weapon Attack",
+  "ratk": "Ranged Weapon Attack",
+  "satk": "Spell Attack",
+  "save": "Saving Throw",
+  "heal": "Healing",
+  "abil": "Ability Test",
+  "util": "Utility",
+  "other": "Other"
+};
+
+
+/* -------------------------------------------- */
+
 // Equipment Types
 DND5E.armorTypes = {
   "clothing": "Clothing",

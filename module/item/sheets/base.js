@@ -39,25 +39,17 @@ export class ItemSheet5e extends ItemSheet {
   getData() {
     const data = super.getData();
 
+    // Include CONFIG values
+    data.config = CONFIG.DND5E;
+    data.abilities = CONFIG.TEMPLATE_METADATA.actor.data.abilities;
+
     // Item Type, Status, and Details
     data.itemType = data.item.type.titleCase();
     data.itemStatus = this._getItemStatus(data.item);
     data.itemProperties = this._getItemProperties(data.item);
 
-    // Include commonly resourced enumerations
-    data.abilities = CONFIG.TEMPLATE_METADATA.actor.data.abilities;
-    data.activationTypes = CONFIG.DND5E.abilityActivationTypes;
-    data.damageTypes = CONFIG.DND5E.damageTypes;
-    data.distanceUnits = CONFIG.DND5E.distanceUnits;
-    data.targetTypes = CONFIG.DND5E.targetTypes;
-    data.timePeriods = CONFIG.DND5E.timePeriods;
-
     // Spell-specific data
     if ( data.item.type === "spell" ) {
-      data.spellTypes = CONFIG.DND5E.spellTypes;
-      data.spellSchools = CONFIG.DND5E.spellSchools;
-      data.spellLevels = CONFIG.DND5E.spellLevels;
-      data.preparationModes = CONFIG.DND5E.spellPreparationModes;
 
       // Spell DC
       let save = data.item.data.save;
@@ -65,8 +57,6 @@ export class ItemSheet5e extends ItemSheet {
         save.dc = this.item.actor.data.data.attributes.spelldc.value;
       }
     }
-
-
 
     return data;
   }

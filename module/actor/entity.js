@@ -73,9 +73,16 @@ export class Actor5e extends Actor {
    */
   _prepareNPCData(data) {
 
-    // CR, kill exp, and proficiency
-    data.details.cr.value = parseFloat(data.details.cr.value) || 0;
+    // Challenge Rating
+    const cr = data.details.cr;
+    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
+    cr.value = parseFloat(cr.value || 0);
+    cr.label = cr.value >= 1 ? String(cr.value) : crLabels[cr.value] || 1;
+
+    // Kill Experience
     data.details.xp.value = this.getCRExp(data.details.cr.value);
+
+    // Proficiency
     data.attributes.prof.value = Math.floor((Math.max(data.details.cr.value, 1) + 7) / 4);
   }
 

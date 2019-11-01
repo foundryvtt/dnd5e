@@ -385,6 +385,20 @@
           "value": 0,
           "units": ""
         }
+      },
+      "action": {
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": [],
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null
+        },
+        "versatile": ""
       }
     },
     "weapon": {
@@ -479,10 +493,7 @@
       }
     },
     "spell": {
-      "templates": ["itemDescription", "activatedEffect"],
-      "spellType": {
-        "value": "utility"
-      },
+      "templates": ["itemDescription", "activatedEffect", "action"],
       "level": {
         "value": 1
       },
@@ -500,36 +511,6 @@
       "materials": {
         "value": ""
       },
-      "time": {
-        "value": "",
-        "note": "DEPRECATED 0.4.0"
-      },
-      "damage": {
-        "value": ""
-      },
-      "damageType": {
-        "value": ""
-      },
-      "save": {
-        "value": "",
-        "ability": "",
-        "dc": null
-      },
-      "ability": {
-        "value": ""
-      },
-      "concentration": {
-        "value": false,
-        "note": "DEPRECATED 0.4.0"
-      },
-      "ritual": {
-        "value": false,
-        "note": "DEPRECATED 0.4.0"
-      },
-      "prepared": {
-        "value": false,
-        "note": "DEPRECATED 0.4.0"
-      },
       "preparation": {
         "mode": null,
         "prepared": false,
@@ -540,6 +521,42 @@
       "upcast": {
         "mode": null,
         "damage": null
+      },
+      "spellType": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "time": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "damage": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "damageType": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "save": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "ability": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "concentration": {
+        "value": null,
+        "note": "DEPRECATED 0.4.0"
+      },
+      "ritual": {
+        "value": null,
+        "note": "DEPRECATED 0.4.0"
+      },
+      "prepared": {
+        "value": null,
+        "note": "DEPRECATED 0.4.0"
       }
     },
     "feat": {

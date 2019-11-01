@@ -18,7 +18,8 @@ const migrateItems = async function() {
     const updateData = migrateItem(i);
     if ( !isObjectEmpty(updateData) ) {
       console.log(`Updating Item entity ${i.name}`);
-      await i.update(updateData);
+      // mergeObject(i.data, updateData, {inplace: false});
+      await i.update(updateData, {enforceTypes: false});
     }
   }
 
@@ -41,6 +42,10 @@ const migrateItems = async function() {
 const migrateItem = function(item) {
   const updateData = {};
 
+  // Migrate all items
+  _migrateAbility(item, updateData);
+  _migrateDamage(item, updateData);
+
   // Migrate Spell items
   if (item.data.type === "spell") {
     _migrateSpellTime(item, updateData);
@@ -57,6 +62,26 @@ const migrateItem = function(item) {
 
 /* -------------------------------------------- */
 
+const _migrateAbility = function(item, updateData) {
+  const ability = item.data.data.ability;
+  if ( ability && (ability.value !== undefined) ) {
+    updateData["data.ability"] = item.data.data.ability.value;
+  }
+};
+
+/* -------------------------------------------- */
+
+const _migrateDamage = function(item, updateData) {
+  let damage = item.data.data.damage;
+  if ( !damage || !damage.value ) return;
+  const type = item.data.data.damageType.value;
+  const formula = damage.value.replace(/[\-\*\/]/g, "+");
+  updateData["data.damage"] = formula.split("+").map(s => s.trim()).map(p => [p, type || null]);
+  updateData["data.-=damageType"] = null;
+};
+
+/* -------------------------------------------- */
+
 const _migrateSpellTime = function(item, updateData) {
   const value = getProperty(item.data, "data.time.value");
   if ( !value ) return;
@@ -67,7 +92,7 @@ const _migrateSpellTime = function(item, updateData) {
   let cost = match[1] ? Number(match[1]) : 0;
   if ( type === "none" ) cost = 0;
   updateData["data.activation"] = {type, cost};
-  updateData["data.time.value"] = null;
+  updateData["data.-=time"] = null;
 };
 
 /* -------------------------------------------- */
@@ -144,8 +169,8 @@ const _migrateSpellComponents = function(item, updateData) {
     concentration: item.data.data.concentration.value === true,
     ritual: item.data.data.ritual.value === true
   };
-  updateData["data.concentration.value"] = null;
-  updateData["data.ritual.value"] = null;
+  updateData["data.-=concentration"] = null;
+  updateData["data.-=ritual"] = null;
 };
 
 /* -------------------------------------------- */

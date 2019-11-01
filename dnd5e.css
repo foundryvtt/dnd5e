@@ -173,8 +173,8 @@
   box-shadow: none;
 }
 .dnd5e.sheet .tag {
-  float: left;
-  margin: 0 2px 2px 0;
+  display: inline-block;
+  margin: 0 2px 0 0;
   padding: 0 3px;
   font-size: 10px;
   line-height: 16px;
@@ -485,6 +485,11 @@
 .dnd5e.sheet.actor .biography .editor .tox-toolbar__primary {
   background: none;
 }
+.dnd5e.sheet.item {
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+}
 .dnd5e.sheet.item .sheet-header img.profile {
   border: 2px solid #000;
 }
@@ -555,6 +560,9 @@
   position: relative;
   top: 4px;
 }
+.dnd5e.sheet.item .tab.details .form-group.select select {
+  flex: 3;
+}
 .dnd5e.sheet.item .tab.details .form-group.input-select input {
   flex: 1;
 }
@@ -583,6 +591,36 @@
 .dnd5e.sheet.item .tab.details .prepared {
   text-align: right;
   padding-right: 10px;
+}
+.dnd5e.sheet.item h4.damage-header {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  line-height: 24px;
+  color: #4b4a44;
+}
+.dnd5e.sheet.item .damage-parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dnd5e.sheet.item .damage-parts .damage-part {
+  padding: 0;
+}
+.dnd5e.sheet.item .damage-parts .damage-part input {
+  flex: 3;
+  margin-right: 5px;
+}
+.dnd5e.sheet.item .damage-parts .damage-part select {
+  flex: 2;
+}
+.dnd5e.sheet.item .damage-control {
+  width: 20px;
+  flex: 0 0 20px;
+  line-height: 24px;
+  float: right;
+  text-align: right;
+  color: #7a7971;
 }
 /* ----------------------------------------- */
 /*  Chat Cards
@@ -684,7 +722,7 @@
 }
 .dnd5e.sheet.actor.npc .sheet-header .charlevel .level input {
   display: inline;
-  width: 26px;
+  width: 36px;
   font-size: 24px;
   text-align: center;
 }
