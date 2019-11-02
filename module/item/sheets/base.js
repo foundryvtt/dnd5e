@@ -23,11 +23,22 @@ export class ItemSheet5e extends ItemSheet {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       width: 520,
-      height: 460,
+      height: 470,
       classes: ["dnd5e", "sheet", "item"],
-      template: `public/systems/dnd5e/templates/items-v2/item-sheet.html`,
       resizable: false
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return a dynamic reference to the HTML template path used to render this Item Sheet
+   * @return {string}
+   */
+  get template() {
+    const path = "public/systems/dnd5e/templates/items-v2/";
+    if ( this.item.data.type === "weapon" ) return path + "weapon.html";
+    else return path + "item-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -48,16 +59,17 @@ export class ItemSheet5e extends ItemSheet {
     data.itemStatus = this._getItemStatus(data.item);
     data.itemProperties = this._getItemProperties(data.item);
 
+    // Action Details
+    data.hasAttackRoll = ["matk", "ratk", "satk"].includes(data.item.data.actionType);
+    data.isHealing = data.item.data.actionType === "heal";
+
     // Spell-specific data
     if ( data.item.type === "spell" ) {
-
-      // Spell DC
       let save = data.item.data.save;
       if ( this.item.isOwned && (save.ability && !save.dc) ) {
         save.dc = this.item.actor.data.data.attributes.spelldc.value;
       }
     }
-
     return data;
   }
 
@@ -72,12 +84,24 @@ export class ItemSheet5e extends ItemSheet {
 
   _getItemProperties(item) {
     const props = [];
-    if ( item.type === "spell" ) {
+
+    if ( ["weapon", "spell"].includes(item.type) ) {
       props.push(
         item.data.activation.label,
         item.data.range.label,
         item.data.target.label,
         item.data.duration.label,
+      )
+    }
+
+    if ( item.type === "weapon" ) {
+      props.push(...Object.entries(item.data.properties)
+        .filter(e => e[1] === true)
+        .map(e => CONFIG.DND5E.weaponProperties[e[0]]));
+    }
+
+    if ( item.type === "spell" ) {
+      props.push(
         item.data.components.label,
         item.data.materials.value,
         item.data.components.concentration ? "Concentration" : null,
@@ -85,6 +109,29 @@ export class ItemSheet5e extends ItemSheet {
       )
     }
     return props.filter(p => !!p);
+  }
+
+  /* -------------------------------------------- */
+  /*  Form Submission                             */
+	/* -------------------------------------------- */
+
+  /**
+   * Extend the parent class _updateObject method to ensure that damage ends up in an Array
+   * @private
+   */
+  _updateObject(event, formData) {
+
+    // Handle Damage Array
+    let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage"));
+    formData["data.damage"] = damage.reduce((arr, entry) => {
+      let [i, j] = entry[0].split(".").slice(2);
+      if ( !arr[i] ) arr[i] = [];
+      arr[i][j] = entry[1];
+      return arr;
+    }, []);
+
+    // Update the Item
+    super._updateObject(event, formData);
   }
 
   /* -------------------------------------------- */
@@ -104,5 +151,37 @@ export class ItemSheet5e extends ItemSheet {
     // Save scroll position
     html.find(".tab.active")[0].scrollTop = this._scrollTab;
     html.find(".tab").scroll(ev => this._scrollTab = ev.currentTarget.scrollTop);
+
+    // Modify damage formula
+    html.find(".damage-control").click(this._onDamageControl.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add or remove a damage part from the damage formula
+   * @param {Event} event     The original click event
+   * @return {Promise}
+   * @private
+   */
+  async _onDamageControl(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+
+    // Add new damage component
+    if ( a.classList.contains("add-damage") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const damage = this.item.data.data.damage;
+      return this.item.update({"data.damage": damage.concat([["", ""]])});
+    }
+
+    // Remove a damage component
+    if ( a.classList.contains("delete-damage") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const li = a.closest(".damage-part");
+      const damage = duplicate(this.item.data.data.damage);
+      damage.splice(Number(li.dataset.damagePart), 1);
+      return this.item.update({"data.damage": damage});
+    }
   }
 }

@@ -10,51 +10,51 @@ export class Item5e extends Item {
    */
   prepareData(item) {
     super.prepareData(item);
-    if ( item.type === "spell" ) this._prepareSpellData(item);
-    return item;
-  }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare dynamic data for Spell type items
-   * @param {Object} item     The original Item data
-   * @private
-   */
-  _prepareSpellData(item) {
     const C = CONFIG.DND5E;
+    if ( item.type === "spell" ) {
 
-    // Spell Level Label
-    item.data.spellType.label = C.spellTypes[item.data.spellType.value];
+      // Spell Level and School
+      item.data.level.label = C.spellLevels[item.data.level.value];
+      item.data.school.label = C.spellSchools[item.data.school.value];
 
-    // Ability Activation Label
-    let act = item.data.activation;
-    if ( act ) act.label = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
+      // Spell Components Label
+      let comps = item.data.components;
+      comps.label = Object.entries(comps).map(c => c[1] === true ? c[0].titleCase().slice(0,1) : null).filterJoin(",");
+    }
 
-    // Spell Components Label
-    let comps = item.data.components;
-    comps.label = Object.entries(comps).map(c => c[1] === true ? c[0].titleCase().slice(0,1) : null).filterJoin(",");
+    if ( ["spell", "weapon"].includes(item.type) ) {
 
-    // Spell Target Label
-    let tgt = item.data.target;
-    if ( ["none", "touch"].includes(tgt.units) ) tgt.value = null;
-    tgt.label = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
+      // Ability Activation Label
+      let act = item.data.activation || {};
+      if ( act ) act.label = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
-    // Spell Range Label
-    let rng = item.data.range;
-    if ( ["none", "touch"].includes(rng.units) ) rng.value = null;
-    else if ( rng.value === 0 ) rng.units = null;
-    rng.label = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
+      // Target Label
+      let tgt = item.data.target || {};
+      if ( ["none", "touch"].includes(tgt.units) ) tgt.value = null;
+      tgt.label = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
-    // Spell Duration Label
-    let dur = item.data.duration;
-    if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
-    dur.label = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
+      // Range Label
+      let rng = item.data.range || {};
+      if ( ["none", "touch"].includes(rng.units) ) rng.value = null;
+      else if ( rng.value === 0 ) rng.units = null;
+      rng.label = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
 
-    // Save DC
-    let save = item.data.save;
-    if ( !save.ability ) save.dc = null;
-    save.label = save.ability ? `DC ${save.dc} ${C.abilities[save.ability]}` : "";
+      // Duration Label
+      let dur = item.data.duration || {};
+      if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
+      dur.label = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
+
+      // Save DC
+      let save = item.data.save || {};
+      if ( !save.ability ) save.dc = null;
+      save.label = save.ability ? `DC ${save.dc} ${C.abilities[save.ability]}` : "";
+
+      // Damage
+      let dam = item.data.damage || {};
+      if ( !(dam instanceof Array) && (dam[0] !== undefined) ) dam = [Object.values(dam[0])];
+    }
+    return item;
   }
 
   /* -------------------------------------------- */

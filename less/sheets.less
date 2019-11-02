@@ -23,8 +23,33 @@
     }
   }
 
-  input, select {
-    margin: 0;
+  /* ----------------------------------------- */
+  /*  Sheet Forms                              */
+  /* ----------------------------------------- */
+
+  .form-group {
+    label {
+      flex: 2;
+      color: @colorOlive;
+      font-weight: bold;
+    }
+    &.stacked label {
+      flex: 0 0 100%;
+    }
+
+    input[type="text"], select {
+      height: 22px;
+      border: 1px solid @colorTan;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .form-fields {
+      .flexrow();
+      > * {
+        margin: 0 3px 0 0;
+        &:last-child { margin-right: 0; }
+      }
+    }
   }
 
   /* ----------------------------------------- */

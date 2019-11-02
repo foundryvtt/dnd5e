@@ -235,9 +235,9 @@
         </div>
 
         {{!-- Features Tab --}}
-        <div class="tab features" data-group="primary" data-tab="features">
+        <div class="tab features flexcol" data-group="primary" data-tab="features">
             <ol class="inventory-list">
-            {{#each actor.features as |section sid|}}
+            {{#each features as |section sid|}}
                 <li class="inventory-header flexrow">
                     <h3 class="item-name flexrow">{{section.label}}</h3>
                     {{#if ../owner}}
@@ -270,7 +270,7 @@
         </div>
 
         {{!-- Spellbook Tab --}}
-        <div class="tab spellbook" data-group="primary" data-tab="spellbook">
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
             <div class="form-group spellcasting-ability">
                 <label><h3>Spellcasting Ability</h3></label>
                 <select name="data.attributes.spellcasting.value" data-type="String">
@@ -294,7 +294,7 @@
             </ul>
 
             <ol class="inventory-list">
-            {{#each actor.spellbook as |section lvl|}}
+            {{#each spellbook as |section lvl|}}
                 <li class="item flexrow inventory-header spellbook-header">
                     <div class="item-name flexrow">
                         <h3>{{section.label}}</h3>
@@ -329,9 +329,9 @@
                             <h4>{{item.name}}</h4>
                         </div>
 
-                        <div class="spell-comps">{{item.data.components.str}}</div>
-                        <div class="spell-school">{{item.data.school.str}}</div>
-                        <div class="spell-action">{{item.data.activation.str}}</div>
+                        <div class="spell-comps">{{item.data.components.label}}</div>
+                        <div class="spell-school">{{item.data.school.label}}</div>
+                        <div class="spell-action">{{item.data.activation.label}}</div>
 
                         {{#if ../../owner}}
                         <div class="item-controls">
@@ -356,7 +356,7 @@
         </div>
 
         {{!-- Biography Tab --}}
-        <div class="tab biography" data-group="primary" data-tab="biography">
+        <div class="tab biography flexcol" data-group="primary" data-tab="biography">
             {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
         </div>
     </section>

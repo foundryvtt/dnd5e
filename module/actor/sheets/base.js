@@ -32,32 +32,47 @@ export class ActorSheet5e extends ActorSheet {
    * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
    */
   getData() {
-    const sheetData = super.getData();
+
+    // Basic data
+    let isOwner = this.entity.owner;
+    const data = {
+      owner: isOwner,
+      limited: this.entity.limited,
+      options: this.options,
+      editable: this.isEditable,
+      cssClass: isOwner ? "editable" : "locked"
+    };
+
+    // The Actor and its Items
+    data.actor = duplicate(this.actor.data);
+    data.items = this.actor.items.map(i => i.data);
+    data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    data.data = data.actor.data;
 
     // Ability Scores
-    for ( let [a, abl] of Object.entries(sheetData.data.abilities)) {
+    for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
     }
 
     // Update skill labels
-    for ( let [s, skl] of Object.entries(sheetData.data.skills)) {
-      skl.ability = sheetData.data.abilities[skl.ability].label.substring(0, 3);
+    for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
+      skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
       skl.label = CONFIG.DND5E.skills[s];
     }
 
     // Update traits
-    sheetData["actorSizes"] = CONFIG.DND5E.actorSizes;
-    this._prepareTraits(sheetData.data["traits"]);
+    data["actorSizes"] = CONFIG.DND5E.actorSizes;
+    this._prepareTraits(data.actor.data.traits);
 
     // Prepare owned items
-    this._prepareItems(sheetData);
+    this._prepareItems(data);
 
     // Return data to the sheet
-    return sheetData;
+    return data
   }
 
   /* -------------------------------------------- */
@@ -97,17 +112,12 @@ export class ActorSheet5e extends ActorSheet {
    * @private
    */
   _prepareSpell(actorData, spellbook, spell) {
-    let lvl = spell.data.level.value || 0,
-        isNPC = this.actorType === "npc";
 
     // Determine whether the spell is filtered
     if ( this._isSpellFiltered(spell) ) return;
 
-    // Determine whether to show the spell
-    let showSpell = this.options.showUnpreparedSpells || isNPC || spell.data.prepared.value || (lvl === 0);
-    if ( !showSpell ) return;
-
     // Extend the Spellbook level
+    let lvl = spell.data.level.value || 0;
     spellbook[lvl] = spellbook[lvl] || {
       isCantrip: lvl === 0,
       label: CONFIG.DND5E.spellLevels[lvl],
@@ -115,20 +125,6 @@ export class ActorSheet5e extends ActorSheet {
       uses: actorData.data.spells["spell"+lvl].value || 0,
       slots: actorData.data.spells["spell"+lvl].max || 0
     };
-
-    // Extend Spell information
-    spell.data.school.str = CONFIG.DND5E.spellSchools[spell.data.school.value];
-
-    // Spell Components
-    const comps = spell.data.components;
-    let str = comps.value ? comps.value.split(",") : [];
-    if ( spell.data.ritual.value ) str.push("R");
-    if ( spell.data.concentration.value ) str.push("C");
-    comps.str = str.join(" ");
-
-    // Spell Usage
-    let act = spell.data.activation;
-    act.str = [act.cost, CONFIG.DND5E.abilityActivationTypes[act.type]].filter(p => !!p).join(" ");
     spellbook[lvl].spells.push(spell);
   }
 
@@ -144,11 +140,10 @@ export class ActorSheet5e extends ActorSheet {
     for ( let f of ["action", "bonus", "reaction"] ) {
       if ( filters.has(f) && (spell.data.activation.type !== f) ) return true;
     }
-    if ( filters.has("ritual") && (spell.data.ritual.value === false) ) return true;
-    if ( filters.has("concentration") && (spell.data.concentration.value === false) ) return true;
+    if ( filters.has("ritual") && (spell.data.components.ritual !== true) ) return true;
+    if ( filters.has("concentration") && (spell.data.components.concentration !== true) ) return true;
     let isCantrip = spell.data.level.value === 0;
-    if ( filters.has("prepared") && (spell.data.prepared.value === false) && !isCantrip ) return true;
-    return false;
+    return ( filters.has("prepared") && !(spell.data.preparation.prepared || isCantrip ) );
   }
 
   /* -------------------------------------------- */

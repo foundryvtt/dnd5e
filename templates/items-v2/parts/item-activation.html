@@ -1,0 +1,81 @@
+{{!-- Activation Cost --}}
+<div class="form-group input-select">
+    <label>Activation Cost</label>
+    <div class="form-fields">
+        <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="-"/>
+        <select name="data.activation.type">
+            {{#select data.activation.type}}
+            <option value=""></option>
+            {{#each config.abilityActivationTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{!-- Activation Condition --}}
+<div class="form-group">
+    <label>Activation Condition</label>
+    <div class="form-fields">
+        <input type="text" name="data.activation.condition" value="{{data.activation.condition}}"/>
+    </div>
+</div>
+
+{{!-- Ability Target --}}
+<div class="form-group input-select-select">
+    <label>Target</label>
+    <div class="form-fields">
+        <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
+        <select name="data.target.units">
+            {{#select data.target.units}}
+            <option value=""></option>
+            {{#each config.distanceUnits as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <select name="data.target.type">
+            {{#select data.target.type}}
+            <option value=""></option>
+            {{#each config.targetTypes as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{!-- Ability Range --}}
+<div class="form-group input-select">
+    <label>Range</label>
+    <div class="form-fields">
+        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="Normal"/>
+        <span class="sep">/</span>
+        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="Max"/>
+        <select name="data.range.units">
+            {{#select data.range.units}}
+            <option value=""></option>
+            {{#each config.distanceUnits as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+
+{{!-- Effect Duration --}}
+<div class="form-group input-select">
+    <label>Duration</label>
+    <div class="form-fields">
+        <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
+        <select name="data.duration.units">
+            {{#select data.duration.units}}
+            <option value=""></option>
+            {{#each config.timePeriods as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>

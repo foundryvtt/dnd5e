@@ -16,7 +16,7 @@ export const preloadHandlebarsTemplates = async function() {
     "public/systems/dnd5e/templates/actors/actor-traits.html",
     "public/systems/dnd5e/templates/actors/actor-classes.html",
 
-    // Item Sheet Partials
+    // Old Item Sheet Partials
     "public/systems/dnd5e/templates/items/backpack-sidebar.html",
     "public/systems/dnd5e/templates/items/class-sidebar.html",
     "public/systems/dnd5e/templates/items/consumable-details.html",
@@ -29,7 +29,11 @@ export const preloadHandlebarsTemplates = async function() {
     "public/systems/dnd5e/templates/items/spell-sidebar.html",
     "public/systems/dnd5e/templates/items/tool-sidebar.html",
     "public/systems/dnd5e/templates/items/weapon-details.html",
-    "public/systems/dnd5e/templates/items/weapon-sidebar.html"
+    "public/systems/dnd5e/templates/items/weapon-sidebar.html",
+
+    // Item Sheet Partials
+    "public/systems/dnd5e/templates/items-v2/parts/item-action.html",
+    "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"
   ];
 
   // Load the template parts

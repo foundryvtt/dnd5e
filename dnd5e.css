@@ -25,6 +25,18 @@
 .flexrow > * {
   flex: 1;
 }
+.flexrow .flex1 {
+  flex: 1;
+}
+.flexrow .flex2 {
+  flex: 2;
+}
+.flexrow .flex3 {
+  flex: 3;
+}
+.flexrow .flex4 {
+  flex: 4;
+}
 .flexcol {
   display: flex;
   flex-direction: column;
@@ -33,7 +45,22 @@
 .flexcol > * {
   flex: 1;
 }
+.flexcol .flex1 {
+  flex: 1;
+}
+.flexcol .flex2 {
+  flex: 2;
+}
+.flexcol .flex3 {
+  flex: 3;
+}
+.flexcol .flex4 {
+  flex: 4;
+}
 .dnd5e.sheet {
+  /* ----------------------------------------- */
+  /*  Sheet Forms                              */
+  /* ----------------------------------------- */
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -66,9 +93,46 @@
   height: 100%;
   overflow-y: auto;
 }
-.dnd5e.sheet input,
-.dnd5e.sheet select {
-  margin: 0;
+.dnd5e.sheet .form-group label {
+  flex: 2;
+  color: #4b4a44;
+  font-weight: bold;
+}
+.dnd5e.sheet .form-group.stacked label {
+  flex: 0 0 100%;
+}
+.dnd5e.sheet .form-group input[type="text"],
+.dnd5e.sheet .form-group select {
+  height: 22px;
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
+.dnd5e.sheet .form-group .form-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.dnd5e.sheet .form-group .form-fields > * {
+  flex: 1;
+}
+.dnd5e.sheet .form-group .form-fields .flex1 {
+  flex: 1;
+}
+.dnd5e.sheet .form-group .form-fields .flex2 {
+  flex: 2;
+}
+.dnd5e.sheet .form-group .form-fields .flex3 {
+  flex: 3;
+}
+.dnd5e.sheet .form-group .form-fields .flex4 {
+  flex: 4;
+}
+.dnd5e.sheet .form-group .form-fields > * {
+  margin: 0 3px 0 0;
+}
+.dnd5e.sheet .form-group .form-fields > *:last-child {
+  margin-right: 0;
 }
 .dnd5e.sheet .sheet-header {
   flex: 0 0 100px;
@@ -354,16 +418,12 @@
   list-style: none;
   margin: 0;
   padding: 0 5px;
-  height: 100%;
   overflow-y: auto;
 }
 .dnd5e.sheet.actor .inventory-list .item {
   line-height: 30px;
   padding: 0 2px;
   border-bottom: 1px solid #c9c7b8;
-}
-.dnd5e.sheet.actor .inventory-list .item:last-child {
-  border-bottom: none;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name {
   cursor: pointer;
@@ -465,6 +525,7 @@
 }
 .dnd5e.sheet.actor .spellcasting-ability,
 .dnd5e.sheet.actor .spellbook-filters {
+  flex: 0 0 24px;
   margin: 0 8px 4px;
 }
 .dnd5e.sheet.actor .spellcasting-ability h3,
@@ -478,7 +539,6 @@
   flex: 1;
 }
 .dnd5e.sheet.actor .biography .editor {
-  height: 100%;
   padding: 0 5px;
 }
 .dnd5e.sheet.actor .biography .editor .tox-toolbar-overlord,
@@ -486,6 +546,9 @@
   background: none;
 }
 .dnd5e.sheet.item {
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
   /* ----------------------------------------- */
   /*  Item Actions                             */
   /* ----------------------------------------- */
@@ -534,61 +597,42 @@
   font-size: 12px;
   line-height: 16px;
 }
-.dnd5e.sheet.item .tab.details label {
-  color: #4b4a44;
-  font-weight: bold;
-}
-.dnd5e.sheet.item .tab.details .form-group label {
-  flex: 3;
-}
-.dnd5e.sheet.item .tab.details select,
-.dnd5e.sheet.item .tab.details input {
-  height: 22px;
-  margin: 1px 0;
-  border: 1px solid #7a7971;
-  background: rgba(0, 0, 0, 0.05);
-}
-.dnd5e.sheet.item .tab.details label.checkbox {
-  flex: auto;
-  margin: 0;
-  line-height: 16px;
-  font-size: 11px;
-}
-.dnd5e.sheet.item .tab.details label.checkbox input[type="checkbox"] {
-  height: 16px;
-  margin: 0 5px 0;
-  position: relative;
-  top: 4px;
-}
-.dnd5e.sheet.item .tab.details .form-group.select select {
-  flex: 3;
-}
-.dnd5e.sheet.item .tab.details .form-group.input-select input {
-  flex: 1;
-}
-.dnd5e.sheet.item .tab.details .form-group.input-select select {
+.dnd5e.sheet.item .tab .form-group.input-select select {
   flex: 1.8;
-  margin-left: 5px;
 }
-.dnd5e.sheet.item .tab.details .form-group.input-select-select input {
-  flex: 0.65;
+.dnd5e.sheet.item .tab .form-group.input-select-select select {
+  flex: 1.5;
 }
-.dnd5e.sheet.item .tab.details .form-group.input-select-select select {
-  flex: 1;
-  margin-left: 5px;
+.dnd5e.sheet.item .tab .form-group.uses-per input {
+  flex: 0 0 34px;
 }
-.dnd5e.sheet.item .tab.details .form-group.uses-per input {
-  flex: 0 0 32px;
-}
-.dnd5e.sheet.item .tab.details .form-group.uses-per span {
+.dnd5e.sheet.item .tab .form-group.uses-per span {
   text-align: center;
   flex: 0 0 24px;
   line-height: 24px;
 }
-.dnd5e.sheet.item .tab.details .form-group.uses-per select {
+.dnd5e.sheet.item .tab .form-group.uses-per select {
   flex: 1.5;
 }
-.dnd5e.sheet.item .tab.details .prepared {
+.dnd5e.sheet.item .tab label.checkbox {
+  flex: auto;
+  margin: 0;
+  line-height: 18px;
+  font-size: 11px;
+}
+.dnd5e.sheet.item .tab label.checkbox input[type="checkbox"] {
+  height: 16px;
+  margin: 0 5px 0;
+  position: relative;
+  top: 5px;
+}
+.dnd5e.sheet.item .tab span.sep {
+  flex: 0 0 8px;
+  line-height: 24px;
+  text-align: center;
+}
+.dnd5e.sheet.item .tab .prepared {
+  flex: 1.3 !important;
   text-align: right;
   padding-right: 10px;
 }
@@ -605,22 +649,26 @@
   padding: 0;
 }
 .dnd5e.sheet.item .damage-parts .damage-part {
+  flex: 0 0 100%;
   padding: 0;
 }
 .dnd5e.sheet.item .damage-parts .damage-part input {
   flex: 3;
-  margin-right: 5px;
 }
 .dnd5e.sheet.item .damage-parts .damage-part select {
-  flex: 2;
+  margin-left: 5px;
+  flex: 1;
 }
 .dnd5e.sheet.item .damage-control {
-  width: 20px;
-  flex: 0 0 20px;
+  width: 18px;
+  flex: 0 0 18px;
   line-height: 24px;
   float: right;
   text-align: right;
   color: #7a7971;
+}
+.dnd5e.sheet.item .weapon-properties label.checkbox {
+  flex: 0 0 98px;
 }
 /* ----------------------------------------- */
 /*  Chat Cards

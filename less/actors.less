@@ -171,7 +171,6 @@
     list-style: none;
     margin: 0;
     padding: 0 5px;
-    height: 100%;
     overflow-y: auto;
 
     // Inventory Item
@@ -179,10 +178,6 @@
       line-height: 30px;
       padding: 0 2px; // to align with the header border
       border-bottom: 1px solid @colorFaint;
-
-      &:last-child {
-        border-bottom: none;
-      }
 
       // Item Header Name
       .item-name {
@@ -318,6 +313,7 @@
 
   .spellcasting-ability,
   .spellbook-filters {
+    flex: 0 0 24px;
     margin: 0 8px 4px;
     h3 {
       .nodesto();
@@ -334,7 +330,6 @@
   /* ----------------------------------------- */
 
   .biography .editor {
-    height: 100%;
     padding: 0 5px;
 
     .tox-toolbar-overlord,

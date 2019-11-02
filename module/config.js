@@ -213,18 +213,27 @@ DND5E.weaponTypes = {
   "ammo": "Ammunition"
 };
 
-// Weapon Properties
+
+/* -------------------------------------------- */
+
+/**
+ * Define the set of weapon property flags which can exist on a weapon
+ * @type {Object}
+ */
 DND5E.weaponProperties = {
-  "thr": "Thrown",
   "amm": "Ammunition",
-  "fir": "Firearm",
-  "rel": "Reload",
-  "two": "Two-Handed",
-  "fin": "Finesse",
-  "lgt": "Light",
-  "ver": "Versatile",
   "hvy": "Heavy",
-  "rch": "Reach"
+  "fin": "Finesse",
+  "fir": "Firearm",
+  "foc": "Focus",
+  "lgt": "Light",
+  "rch": "Reach",
+  "rel": "Reload",
+  "ret": "Returning",
+  "spc": "Special",
+  "thr": "Thrown",
+  "two": "Two-Handed",
+  "ver": "Versatile"
 };
 
 

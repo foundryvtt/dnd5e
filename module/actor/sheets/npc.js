@@ -38,8 +38,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
    * Organize Owned Items for rendering the NPC sheet
    * @private
    */
-  _prepareItems(sheetData) {
-    const actorData = sheetData.actor;
+  _prepareItems(data) {
 
     // Categorize Items as Features and Spells
     const features = {
@@ -48,16 +47,14 @@ export class ActorSheet5eNPC extends ActorSheet5e {
       passive: { label: "Features", items: [], type: "feat", subtype: "passive" },
       equipment: { label: "Inventory", items: [], type: "backpack", subtype: "" }
     };
-
-    // Spellbook
     const spellbook = {};
 
     // Iterate through items, allocating to containers
-    for ( let i of sheetData.items ) {
+    for ( let i of data.items ) {
       i.img = i.img || DEFAULT_TOKEN;
 
       // Spells
-      if ( i.type === "spell" ) this._prepareSpell(actorData, spellbook, i);
+      if ( i.type === "spell" ) this._prepareSpell(data.actor, spellbook, i);
 
       // Features
       else if ( i.type === "weapon" ) features.weapons.items.push(i);
@@ -69,8 +66,8 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     }
 
     // Assign and return
-    actorData.features = features;
-    actorData.spellbook = spellbook;
+    data.features = features;
+    data.spellbook = spellbook;
   }
 
   /* -------------------------------------------- */

@@ -373,16 +373,17 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": 0,
+          "value": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": 0,
+          "value": null,
+          "long": null,
           "units": ""
         }
       },
@@ -398,40 +399,33 @@
           "ability": "",
           "dc": null
         },
-        "versatile": ""
+        "versatileDamage": ""
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem"],
+      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action"],
       "weaponType": {
         "value": "simpleM"
       },
-      "bonus": {
-        "value": 0
-      },
-      "damage": {
-        "value": "1d6"
-      },
-      "damageType": {
-        "value": "slashing"
-      },
-      "damage2": {
-        "value": ""
-      },
-      "damage2Type": {
-        "value": ""
-      },
-      "range": {
-        "value": "5 ft"
-      },
-      "properties": {
-        "value": ""
-      },
+      "properties": {},
       "proficient": {
         "value": true
       },
-      "ability": {
-        "value": "str"
+      "bonus": {
+        "value": 0,
+        "note": "DEPRECATED 0.4.0"
+      },
+      "damageType": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "damage2": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
+      },
+      "damage2Type": {
+        "value": "",
+        "note": "DEPRECATED 0.4.0"
       }
     },
     "equipment": {
@@ -527,10 +521,6 @@
         "note": "DEPRECATED 0.4.0"
       },
       "time": {
-        "value": "",
-        "note": "DEPRECATED 0.4.0"
-      },
-      "damage": {
         "value": "",
         "note": "DEPRECATED 0.4.0"
       },

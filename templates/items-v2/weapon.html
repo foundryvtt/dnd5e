@@ -1,0 +1,103 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="details">
+                <li class="item-detail">
+                    {{lookup config.weaponTypes data.weaponType.value }}
+                </li>
+                <li class="item-detail">
+                    <input type="text" name="data.rarity.value" value="{{data.rarity.value}}" placeholder="Rarity"/>
+                </li>
+                <li class="item-detail">
+                    <input type="text" name="data.source.value" value="{{data.source.value}}" placeholder="Source"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+        <a class="item" data-tab="action">{{ localize "DND5E.Action" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab flexrow active" data-group="primary" data-tab="description">
+            <ol class="item-properties">
+                {{#each itemProperties}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ol>
+            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Weapon Type --}}
+            <div class="form-group">
+                <label>Weapon Type</label>
+                <select name="data.weaponType.value" data-dtype="{{data.weaponType.type}}">
+                    {{#select data.weaponType.value}}
+                    {{#each config.weaponTypes as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Equipment Status --}}
+            <div class="form-group stacked">
+                <label>Equipment Status</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficient.value" {{checked data.proficient.value}}/> Proficient
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.equipped.value" {{checked data.equipped.value}}/> Equipped
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.identified.value" {{checked data.identified.value}}/> Identified
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.attuned.value" {{checked data.attuned.value}}/> Attuned
+                </label>
+            </div>
+
+            {{!-- Item Activation Template --}}
+            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
+
+            {{!-- Weapon Properties --}}
+            <div class="form-group stacked weapon-properties">
+                <label>Weapon Properties</label>
+                {{#each config.weaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
+                </label>
+                {{/each}}
+            </div>
+        </div>
+
+        {{!-- Actions Tab --}}
+        <div class="tab details" data-group="primary" data-tab="action">
+            {{!-- Item Action Template --}}
+            {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}
+        </div>
+    </section>
+</form>
