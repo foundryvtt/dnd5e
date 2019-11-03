@@ -15,15 +15,7 @@ export class ActorSheet5e extends ActorSheet {
      * Track the set of spellbook filters which are applied
      * @type {Set}
      */
-    this._spellbookFilters = new Set(["prepared"]);
-  }
-
-  /**
-   * Return the type of the current Actor
-   * @type {String}
-   */
-	get actorType() {
-	  return this.actor.data.type;
+    this._spellbookFilters = new Set();
   }
 
   /* -------------------------------------------- */

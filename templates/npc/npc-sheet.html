@@ -156,9 +156,9 @@
 
                 {{!-- Traits --}}
                 <div class="traits">
-                    <div class="form-group trait-size">
+                    <div class="form-group">
                         <label>{{localize "DND5E.Size"}}</label>
-                        <select name="data.traits.size.value">
+                        <select class="actor-size" name="data.traits.size.value">
                             {{#select data.traits.size.value}}
                             {{#each actorSizes as |label size|}}
                                 <option value="{{size}}">{{label}}</option>

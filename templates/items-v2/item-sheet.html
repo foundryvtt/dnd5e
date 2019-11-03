@@ -147,6 +147,21 @@
 
             {{!-- Item Action Template --}}
             {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}
+
+            {{!-- Spell Level Scaling --}}
+            <div class="form-group">
+                <label>Level Scaling</label>
+                <div class="form-fields">
+                    <select name="data.scaling.mode">
+                        {{#select data.scaling.mode}}
+                        {{#each config.spellScalingModes as |name key|}}
+                        <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="Scaling Formula"/>
+                </div>
+            </div>
         </div>
     </section>
 </form>

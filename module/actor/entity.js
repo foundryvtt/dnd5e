@@ -111,7 +111,31 @@ export class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Owned Item Management
+  /*  Socket Listeners and Handlers
+  /* -------------------------------------------- */
+
+  /**
+   * Extend the default update method to enhance data before submission.
+   * See the parent Entity.update method for full details.
+   *
+   * @param {Object} data     The data with which to update the Actor
+   * @param {Object} options  Additional options which customize the update workflow
+   * @return {Promise}        A Promise which resolves to the updated Entity
+   */
+  async update(data, options={}) {
+
+    // Apply changes in Actor size to Token width/height
+    if ( data["data.traits.size.value"] ) {
+      let size = CONFIG.DND5E.tokenSizes[data["data.traits.size.value"]];
+      if ( this.isToken ) this.token.update(this.token.scene._id, {height: size, width: size});
+      else {
+        setProperty(data, "token.height", size);
+        setProperty(data, "token.width", size);
+      }
+    }
+    return super.update(data, options);
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -122,8 +146,12 @@ export class Actor5e extends Actor {
 
     // Assume NPCs are always proficient with weapons and always have spells prepared
     if ( !this.isPC ) {
-      if ( itemData.type === "weapon" ) mergeObject(itemData, {"data.proficient.value": true});
-      if ( itemData.type === "spell" ) mergeObject(itemData, {"data.prepared.value": true});
+      let t = itemData.type;
+      let initial = {};
+      if ( t === "weapon" ) initial["data.proficient.value"] = true;
+      if ( ["weapon", "equipment"].includes(t) ) initial["data.equipped.value"] = true;
+      if ( t === "spell" ) initial["data.prepared.value"] = true;
+      mergeObject(itemData, initial);
     }
     return super.createOwnedItem(itemData, options);
   }

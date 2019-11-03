@@ -46,6 +46,27 @@ DND5E.abilityActivationTypes = {
 
 /* -------------------------------------------- */
 
+// Creature Sizes
+DND5E.actorSizes = {
+  "tiny": "Tiny",
+  "sm": "Small",
+  "med": "Medium",
+  "lg": "Large",
+  "huge": "Huge",
+  "grg": "Gargantuan"
+};
+
+DND5E.tokenSizes = {
+  "tiny": 1,
+  "sm": 1,
+  "med": 1,
+  "lg": 2,
+  "huge": 3,
+  "grg": 4
+};
+
+/* -------------------------------------------- */
+
 /**
  * Classification types for item action types
  * @type {Object}
@@ -202,6 +223,19 @@ DND5E.spellPreparationModes = {
 
 /* -------------------------------------------- */
 
+/**
+ * The available choices for how spell damage scaling may be computed
+ * @type {Object}
+ */
+DND5E.spellScalingModes = {
+  "none": "None",
+  "cantrip": "Cantrip",
+  "level": "Spell Level"
+};
+
+
+/* -------------------------------------------- */
+
 // Weapon Types
 DND5E.weaponTypes = {
   "simpleM": "Simple Melee",
@@ -295,15 +329,6 @@ DND5E.proficiencyLevels = {
   2: "Expertise"
 };
 
-// Creature Sizes
-DND5E.actorSizes = {
-  "tiny": "Tiny",
-  "sm": "Small",
-  "med": "Medium",
-  "lg": "Large",
-  "huge": "Huge",
-  "grg": "Gargantuan"
-};
 
 // Condition Types
 DND5E.conditionTypes = {

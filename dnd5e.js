@@ -49,7 +49,7 @@ Hooks.once("init", async function() {
   const NEEDS_MIGRATION_VERSION = 0.7;
   let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
   needMigration = true;
-  if ( needMigration ) await migrateSystem();
+  if ( needMigration && game.user.isGM ) await migrateSystem();
 });
 
 

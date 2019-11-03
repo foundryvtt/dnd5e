@@ -2,6 +2,9 @@
 export const migrateSystem = async function() {
   console.log(`Applying D&D5E System Migration for version ${game.system.data.version}`);
 
+  // Migrate Actors
+  await migrateActors();
+
   // Migrate Items
   await migrateItems();
 
@@ -11,14 +14,41 @@ export const migrateSystem = async function() {
 
 /* -------------------------------------------- */
 
+const migrateActors = async function() {
+
+  // Actor Entities
+  for ( let a of game.actors.entities ) {
+    const updateData = {};
+
+    // Owned Items
+    let hasItemUpdates = false;
+    const items = a.items.map(i => {
+      let itemUpdate = migrateItem(i);
+      if ( !isObjectEmpty(itemUpdate) ) hasItemUpdates = true;
+      return mergeObject(i.data, itemUpdate, {enforceTypes: false, inplace: false});
+    });
+    if ( hasItemUpdates ) updateData.items = items;
+
+    // Perform the Update
+    if ( !isObjectEmpty(updateData) ) {
+      console.log(`Migrating Actor entity ${a.name}`);
+      await a.update(updateData, {enforceTypes: false});
+    }
+  }
+
+  // TODO: Actor Compendia
+};
+
+
+/* -------------------------------------------- */
+
 const migrateItems = async function() {
 
   // Item Entities
   for ( let i of game.items.entities ) {
     const updateData = migrateItem(i);
     if ( !isObjectEmpty(updateData) ) {
-      console.log(`Updating Item entity ${i.name}`);
-      // mergeObject(i.data, updateData, {inplace: false});
+      console.log(`Migrating Item entity ${i.name}`);
       await i.update(updateData, {enforceTypes: false});
     }
   }
@@ -73,7 +103,7 @@ const _migrateAbility = function(item, updateData) {
 
 const _migrateDamage = function(item, updateData) {
   let damage = item.data.data.damage;
-  if ( !damage || !damage.value ) return;
+  if ( (damage instanceof Array) || !damage ) return;
   const type = item.data.data.damageType.value;
   const formula = damage.value.replace(/[\-\*\/]/g, "+");
   updateData["data.damage"] = formula.split("+").map(s => s.trim()).map(p => [p, type || null]);
@@ -129,7 +159,7 @@ const _migrateRange = function(item, updateData) {
 
 const _migrateTarget = function(item, updateData) {
   const target = item.data.data.target;
-  if ( target.value && !target.units ) {
+  if ( target.value && !(target.units || target.type) ) {
 
     // Target Type
     let type = null;

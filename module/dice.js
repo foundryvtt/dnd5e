@@ -193,8 +193,8 @@ export class Dice5e {
 /**
  * Highlight critical success or failure on d20 rolls
  */
-export const highlightCriticalSuccessFailure = function(message, data, html) {
-  if ( !message.isRoll || !message.roll.parts.length ) return;
+export const highlightCriticalSuccessFailure = function(message, html, data) {
+  if ( !message.isRoll || !message.isRollVisible || !message.roll.parts.length ) return;
 
   // Highlight rolls where the first part is a d20 roll
   let d = message.roll.parts[0];
