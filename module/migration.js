@@ -54,17 +54,17 @@ const migrateItems = async function() {
   }
 
   // Item Compendia
-  const packs = game.packs.filter(p => p.entity === "Item");
-  for ( let p of packs ) {
-    const content = await p.getContent();
-    for ( let i of content ) {
-      const updateData = migrateItem(i);
-      if ( !isObjectEmpty(updateData) ) {
-        //console.log(`Updating Compendium entry ${i.name}`);
-        //await p.updateEntity(mergeObject(updateData, {_id: i._id}));
-      }
-    }
-  }
+  // const packs = game.packs.filter(p => p.entity === "Item");
+  // for ( let p of packs ) {
+  //   const content = await p.getContent();
+  //   for ( let i of content ) {
+  //     const updateData = migrateItem(i);
+  //     if ( !isObjectEmpty(updateData) ) {
+  //       console.log(`Updating Compendium entry ${i.name}`);
+  //       await p.updateEntity(mergeObject(updateData, {_id: i._id}));
+  //     }
+  //   }
+  // }
 };
 
 /* -------------------------------------------- */
@@ -86,6 +86,14 @@ const migrateItem = function(item) {
     _migrateSpellSave(item, updateData);
   }
 
+  // Migrate Equipment items
+  else if ( item.data.type === "equipment" ) {
+    _migrateArmor(item, updateData);
+  }
+
+  // Remove deprecated fields
+  _migrateRemoveDeprecated(item, updateData);
+
   // Return the migrated update data
   return updateData;
 };
@@ -96,6 +104,16 @@ const _migrateAbility = function(item, updateData) {
   const ability = item.data.data.ability;
   if ( ability && (ability.value !== undefined) ) {
     updateData["data.ability"] = item.data.data.ability.value;
+  }
+};
+
+/* -------------------------------------------- */
+
+const _migrateArmor = function(item, updateData) {
+  const armor = item.data.data.armor;
+  if ( armor && item.data.data.armorType ) {
+    updateData["data.armor.type"] = item.data.data.armorType.value;
+    updateData["data.-=armorType"] = null;
   }
 };
 
@@ -152,6 +170,30 @@ const _migrateRange = function(item, updateData) {
     else if ( /touch/i.test(match[2]) ) units = "touch";
     let value = Number(match[1]) || null;
     updateData["data.range"] = {units, value};
+  }
+};
+
+/* -------------------------------------------- */
+
+
+/**
+ * A general migration to remove all fields from the data model which are flagged with a _deprecated tag
+ * @private
+ */
+const _migrateRemoveDeprecated = function(item, updateData) {
+  for ( let [k, v] of Object.entries(item.data.data) ) {
+    if ( getType(v) !== "Object" ) continue;
+
+    // Deprecate the entire object
+    if ( v._deprecated === true ) {
+      updateData[`data.-=${k}`] = null;
+      continue;
+    }
+
+    // Remove type and label
+    const dtypes = ["Number", "String", "Boolean", "Array", "Object"];
+    if ( dtypes.includes(v.type) ) updateData[`data.${k}.-=type`] = null;
+    if ( v.label ) updateData[`data.${k}.-=label`] = null;
   }
 };
 

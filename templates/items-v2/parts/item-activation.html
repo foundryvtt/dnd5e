@@ -13,6 +13,7 @@
         </select>
     </div>
 </div>
+{{#if data.activation.type}}
 
 {{!-- Activation Condition --}}
 <div class="form-group">
@@ -21,6 +22,7 @@
         <input type="text" name="data.activation.condition" value="{{data.activation.condition}}"/>
     </div>
 </div>
+
 
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
@@ -79,3 +81,22 @@
         </select>
     </div>
 </div>
+
+{{!-- Limited Uses --}}
+<div class="form-group uses-per">
+    <label>Limited Uses</label>
+    <div class="form-fields">
+        <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number"/>
+        <span class="sep"> of </span>
+        <input type="text" name="data.uses.max" value="{{data.uses.max}}" data-dtype="Number"/>
+        <select name="data.uses.per">
+            {{#select data.uses.per}}
+            <option value=""></option>
+            {{#each config.limitedUsePeriods as |name key|}}
+            <option value="{{key}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+{{/if}}

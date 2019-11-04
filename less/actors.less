@@ -167,6 +167,22 @@
   /*  Inventory Lists                          */
   /* ----------------------------------------- */
 
+  /* Inventory List Filters */
+  .inventory-filters {
+    margin: 0 8px;
+    flex: 0 0 20px;
+    h3, .filter-title {
+      .nodesto();
+      color: @colorOlive;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    &.spellbook-filters {
+      flex: 0 0 40px;
+    }
+  }
+
   .inventory-list {
     list-style: none;
     margin: 0;
@@ -178,6 +194,7 @@
       line-height: 30px;
       padding: 0 2px; // to align with the header border
       border-bottom: 1px solid @colorFaint;
+      &:last-child { border-bottom: none; }
 
       // Item Header Name
       .item-name {
@@ -208,6 +225,14 @@
         flex: 0 0 30px;
         background-size: 30px;
         margin-right: 5px;
+      }
+
+      .item-detail {
+        flex: 0 0 100px;
+        font-size: 12px;
+        color: @colorTan;
+        text-align: center;
+        border-right: 1px solid @colorFaint;
       }
 
       // Item Dropdown Properties
@@ -278,10 +303,6 @@
     }
   }
 
-  .spellbook-filters {
-    margin: 5px 8px 0;
-  }
-
   .spell-slots,
   .spell-comps {
     flex: 0 0 80px;
@@ -309,17 +330,6 @@
     color: @colorTan;
     text-align: center;
     border-right: 1px solid @colorFaint;
-  }
-
-  .spellcasting-ability,
-  .spellbook-filters {
-    flex: 0 0 24px;
-    margin: 0 8px 4px;
-    h3 {
-      .nodesto();
-      font-size: 18px;
-      margin: 0;
-    }
   }
 
   // Empty spellbook controls

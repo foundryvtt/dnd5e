@@ -141,15 +141,14 @@
       line-height: 32px;
 
       h4 {
-        display: inline-block;
+        flex: auto;
         margin: 0;
         .nodesto();
-        font-size: 16px;
+        font-size: 14px;
       }
 
       .status-value {
-        display: inline-block;
-        float: right;
+        flex: 0 0 50px;
         > * {
           display: inline;
         }
@@ -163,8 +162,15 @@
       }
 
       input[type="checkbox"] {
+        transform: scale(1.2);
         position: relative;
-        top: 2px;
+        margin: 0;
+        top: 6px;
+      }
+
+      &.lair input[type="text"] {
+        width: 32px;
+        max-width: 32px;
       }
 
       span.sep {

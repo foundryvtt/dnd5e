@@ -49,6 +49,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="item-details-header">Spell Details</h3>
 
             {{!-- Spell Level --}}
             <div class="form-group">
@@ -74,9 +75,6 @@
                 </select>
             </div>
 
-            {{!-- Item Activation Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
-
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
                 <label>Spell Components</label>
@@ -100,7 +98,17 @@
             {{!-- Material Components --}}
             <div class="form-group stacked">
                 <label>Spellcasting Materials</label>
-                <input type="text" name="data.materials.value" value="{{data.materials.value}}"/>
+                <input class="materials" type="text" name="data.materials.value" value="{{data.materials.value}}"/>
+                {{#if data.materials.value}}
+                <div class="spell-materials flexrow">
+                    <label>Supply</label>
+                    <input type="text" name="data.materials.supply" value="{{data.materials.supply}}" data-dtype="Number" Placeholder="0"/>
+                    <label>Cost (GP)</label>
+                    <input type="text" name="data.materials.cost" value="{{data.materials.cost}}" data-dtype="Number" Placeholder="-"/>
+                    <label>Consumed</label>
+                    <input type="checkbox" name="data.materials.consumed" {{checked data.materials.consumed}}/>
+                </div>
+                {{/if}}
             </div>
 
             {{!-- Preparation Mode --}}
@@ -121,24 +129,12 @@
                 </div>
             </div>
 
-            {{!-- Limited Spell Uses --}}
-            <div class="form-group uses-per">
-                <label>Limited Spell Uses</label>
-                <div class="form-fields">
-                    <input type="text" name="data.preparation.uses" value="{{data.preparation.uses}}" data-dtype="Number"/>
-                    <span class="sep"> of </span>
-                    <input type="text" name="data.preparation.max" value="{{data.preparation.max}}" data-dtype="Number"/>
-                    <span class="sep"> per </span>
-                    <select name="data.preparation.per">
-                        {{#select data.preparation.per}}
-                        <option value=""></option>
-                        <option value="sr">Short Rest</option>
-                        <option value="lr">Long Rest</option>
-                        <option value="day">Day</option>
-                        {{/select}}
-                    </select>
-                </div>
-            </div>
+            <h3 class="item-details-header">Spell Casting</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
+
+            <h3 class="item-details-header">Spell Effects</h3>
 
             {{!-- Item Action Template --}}
             {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}

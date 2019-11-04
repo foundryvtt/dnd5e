@@ -122,7 +122,7 @@
 
                 {{!-- Legendary Actions --}}
                 <div class="resources flexrow">
-                    <div class="resource legendary">
+                    <div class="resource flexrow legendary">
                         <h4>{{ localize "DND5E.LegAct" }}</h4>
                         <div class="status-value">
                             <input type="text" name="data.resources.legact.value" data-dtype="Number" placeholder="0"
@@ -132,7 +132,7 @@
                                    value="{{data.resources.legact.max}}"/>
                         </div>
                     </div>
-                    <div class="resource legendary">
+                    <div class="resource flexrow legendary">
                         <h4>{{ localize "DND5E.LegRes" }}</h4>
                         <div class="status-value">
                             <input type="text" name="data.resources.legres.value" data-dtype="Number" placeholder="0"
@@ -142,14 +142,13 @@
                                    value="{{data.resources.legres.max}}"/>
                         </div>
                     </div>
-                    <div class="resource lair">
+                    <div class="resource flexrow lair">
                         <h4>{{ localize "DND5E.LairAct" }}</h4>
                         <div class="status-value">
                             <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
                                    data-dtype="Boolean" {{checked data.resources.lair.value}}/>
-                            <span class="sep">Init.</span>
                             <input name="data.resources.lair.initiative" type="text" value="{{data.resources.lair.initiative}}"
-                                   data-dtype="Number" placeholder="0"/>
+                                   data-dtype="Number" placeholder="Init."/>
                         </div>
                     </div>
                 </div>
@@ -236,6 +235,16 @@
 
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
+            <div class="inventory-filters">
+                <ul class="filter-list flexrow" data-filter="features">
+                    <li class="filter-title">Filter</li>
+                    <li class="filter-item" data-filter="action">Action</li>
+                    <li class="filter-item" data-filter="bonus">Bonus</li>
+                    <li class="filter-item" data-filter="reaction">Reaction</li>
+                    <li class="filter-item" data-filter="equipped">Equipped</li>
+                </ul>
+            </div>
+
             <ol class="inventory-list">
             {{#each features as |section sid|}}
                 <li class="inventory-header flexrow">
@@ -254,8 +263,17 @@
                     <li class="item flexrow" data-item-id="{{item.id}}">
                         <div class="item-name flexrow rollable">
                             <div class="item-image" style="background-image: url({{item.img}})"></div>
-                            <h4>{{item.name}}{{#if item.data.uses.max}} <span class="feat-uses">({{item.data.uses.value}} / {{item.data.uses.max}}){{/if}}</span></h4>
+                            <h4>{{item.name}}</h4>
                         </div>
+
+                        {{#if item.data.activation.type }}
+                        <div class="item-detail">{{item.data.activation.label}}</div>
+                        {{/if}}
+
+                        {{#if item.data.uses.value }}
+                        <div class="item-detail">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                        {{/if}}
+
                         {{#if ../../owner}}
                         <div class="item-controls">
                             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -271,27 +289,29 @@
 
         {{!-- Spellbook Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            <div class="form-group spellcasting-ability">
-                <label><h3>Spellcasting Ability</h3></label>
-                <select name="data.attributes.spellcasting.value" data-type="String">
-                    {{#select data.attributes.spellcasting.value}}
-                    <option value="">None</option>
-                    {{#each data.abilities as |abl a|}}
-                    <option value="{{a}}">{{abl.label}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </div>
+            <div class="inventory-filters spellbook-filters">
+                <div class="form-group spellcasting-ability">
+                    <label><h3>Spellcasting Ability</h3></label>
+                    <select name="data.attributes.spellcasting.value" data-type="String">
+                        {{#select data.attributes.spellcasting.value}}
+                        <option value="">None</option>
+                        {{#each data.abilities as |abl a|}}
+                        <option value="{{a}}">{{abl.label}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
 
-            <ul class="spellbook-filters filter-list flexrow">
-                <li class="filter-title">Usage Filter</li>
-                <li class="filter-item" data-filter="action">Action</li>
-                <li class="filter-item" data-filter="bonus">Bonus</li>
-                <li class="filter-item" data-filter="reaction">Reaction</li>
-                <li class="filter-item" data-filter="concentration">Conc.</li>
-                <li class="filter-item" data-filter="ritual">Ritual</li>
-                <li class="filter-item" data-filter="prepared">Prepared</li>
-            </ul>
+                <ul class="filter-list flexrow" data-filter="spellbook">
+                    <li class="filter-title">Filter</li>
+                    <li class="filter-item" data-filter="action">Action</li>
+                    <li class="filter-item" data-filter="bonus">Bonus</li>
+                    <li class="filter-item" data-filter="reaction">Reaction</li>
+                    <li class="filter-item" data-filter="concentration">Conc.</li>
+                    <li class="filter-item" data-filter="ritual">Ritual</li>
+                    <li class="filter-item" data-filter="prepared">Prepared</li>
+                </ul>
+            </div>
 
             <ol class="inventory-list">
             {{#each spellbook as |section lvl|}}

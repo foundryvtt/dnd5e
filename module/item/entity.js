@@ -10,8 +10,9 @@ export class Item5e extends Item {
    */
   prepareData(item) {
     super.prepareData(item);
-
     const C = CONFIG.DND5E;
+
+    // Spell Items
     if ( item.type === "spell" ) {
 
       // Spell Level and School
@@ -23,27 +24,47 @@ export class Item5e extends Item {
       comps.label = Object.entries(comps).map(c => c[1] === true ? c[0].titleCase().slice(0,1) : null).filterJoin(",");
     }
 
-    if ( ["spell", "weapon"].includes(item.type) ) {
+    // Feat Items
+    else if ( item.type === "feat" ) {
+      if ( item.data.activation.type === C.abilityActivationTypes.legendary ) item.data.featType = "Legendary Action";
+      else if ( item.data.activation.type === C.abilityActivationTypes.lair ) item.data.featType = "Lair Action";
+      else if ( item.data.activation.type ) {
+        item.data.featType = item.data.damage.length ? "Attack" : "Action";
+      }
+      else item.data.featType = "Passive";
+    }
+
+    // Equipment Items
+    else if ( item.type === "equipment" ) {
+      item.data.armor.label = item.data.armor.value ? `${item.data.armor.value} AC` : "";
+    }
+
+    // Activated Items
+    if ( item.data.hasOwnProperty("activation") ) {
 
       // Ability Activation Label
       let act = item.data.activation || {};
-      if ( act ) act.label = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
+      if (act) act.label = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
       // Target Label
       let tgt = item.data.target || {};
-      if ( ["none", "touch"].includes(tgt.units) ) tgt.value = null;
+      if (["none", "touch"].includes(tgt.units)) tgt.value = null;
       tgt.label = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
       // Range Label
       let rng = item.data.range || {};
-      if ( ["none", "touch"].includes(rng.units) ) rng.value = null;
-      else if ( rng.value === 0 ) rng.units = null;
+      if (["none", "touch"].includes(rng.units)) rng.value = null;
+      else if (rng.value === 0) rng.units = null;
       rng.label = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
 
       // Duration Label
       let dur = item.data.duration || {};
-      if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
+      if (["inst", "perm"].includes(dur.units)) dur.value = null;
       dur.label = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
+    }
+
+    // Item Actions
+    if ( item.data.hasOwnProperty("actionType") ) {
 
       // Save DC
       let save = item.data.save || {};
@@ -53,6 +74,7 @@ export class Item5e extends Item {
       // Damage
       let dam = item.data.damage || {};
       if ( !(dam instanceof Array) && (dam[0] !== undefined) ) dam = [Object.values(dam[0])];
+      item.data.damageFormula = item.data.damage.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
     }
     return item;
   }

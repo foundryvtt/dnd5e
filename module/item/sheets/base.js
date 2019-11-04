@@ -23,7 +23,8 @@ export class ItemSheet5e extends ItemSheet {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       width: 520,
-      height: 420,
+      height: 400,
+      detailHeight: 720,
       classes: ["dnd5e", "sheet", "item"],
       resizable: false
     });
@@ -37,8 +38,7 @@ export class ItemSheet5e extends ItemSheet {
    */
   get template() {
     const path = "public/systems/dnd5e/templates/items-v2/";
-    if ( this.item.data.type === "weapon" ) return path + "weapon.html";
-    else return path + "item-sheet.html";
+    return `${path}/${this.item.data.type}.html`;
   }
 
   /* -------------------------------------------- */
@@ -76,7 +76,7 @@ export class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   _getItemStatus(item) {
-    if ( item.type === "spell" ) return item.data.prepared.value ? "Prepared" : "Unprepared";
+    if ( item.type === "spell" ) return item.data.preparation.prepared ? "Prepared" : "Unprepared";
     else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped.value ? "Equipped" : "Unequipped";
   }
 
@@ -145,7 +145,13 @@ export class ItemSheet5e extends ItemSheet {
     // Activate tabs
     new Tabs(html.find(".tabs"), {
       initial: this["_sheetTab"],
-      callback: clicked => this["_sheetTab"] = clicked.data("tab")
+      callback: clicked => {
+        const tab = clicked.data("tab");
+        this["_sheetTab"] = clicked.data("tab");
+        if ( tab === "details" ) {
+          this.setPosition({width: this.options.width, height: this.options.detailHeight});
+        } else this.setPosition({width: this.options.width, height: this.options.height});
+      }
     });
 
     // Save scroll position

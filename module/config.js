@@ -82,19 +82,39 @@ DND5E.itemActionTypes = {
   "other": "Other"
 };
 
+/* -------------------------------------------- */
+
+
+/**
+ * Enumerate the lengths of time over which an item can have limited use ability
+ * @type {Object}
+ */
+DND5E.limitedUsePeriods = {
+  "sr": "Short Rest",
+  "lr": "Long Rest",
+  "day": "Day",
+  "charges": "Charges"
+};
+
 
 /* -------------------------------------------- */
 
 // Equipment Types
-DND5E.armorTypes = {
-  "clothing": "Clothing",
+DND5E.equipmentTypes = {
   "light": "Light Armor",
   "medium": "Medium Armor",
   "heavy": "Heavy Armor",
   "bonus": "Magical Bonus",
   "natural": "Natural Armor",
-  "shield": "Shield"
+  "shield": "Shield",
+  "clothing": "Clothing",
+  "trinket": "Trinket"
 };
+DND5E.armorTypes = DND5E.equipmentTypes;
+
+
+/* -------------------------------------------- */
+
 
 // Consumable Types
 DND5E.consumableTypes = {

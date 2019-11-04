@@ -57,7 +57,19 @@
     }
   }
 
-  .tab {
+  /* ----------------------------------------- */
+  /*  Item Details Form                        */
+  /* ----------------------------------------- */
+
+  .details {
+    .item-details-header {
+      margin: 0 0 0.25em 0;
+      .nodesto();
+      font-size: 24px;
+      border-top: @borderGroove;
+      border-bottom: @borderGroove;
+    }
+
     .form-group.input-select {
       select {
         flex: 1.8;
@@ -72,15 +84,15 @@
 
     .form-group.uses-per {
       input {
-        flex: 0 0 34px;
+        flex: 1;
       }
       span {
         text-align: center;
-        flex: 0 0 24px;
+        flex: 0 0 16px;
         line-height: 24px;
       }
       select {
-        flex: 1.5;
+        flex: 3;
       }
     }
 
@@ -107,6 +119,24 @@
       flex: 1.3 !important;
       text-align: right;
       padding-right: 10px;
+    }
+
+    // Spell Materials
+    .spell-materials {
+      flex: 0 0 100%;
+      margin: 0.25em 0;
+      justify-content: flex-end;
+      label {
+        flex: 0 0 64px;
+        text-align: right;
+        margin-right: 5px;
+        font-size: 12px;
+        line-height: 22px;
+      }
+      input[type="text"] {
+        flex: 0 0 48px;
+        margin-right: 10px;
+      }
     }
   }
 
@@ -147,6 +177,17 @@
     float: right;
     text-align: right;
     color: @colorTan;
+  }
+
+  .recharge {
+    span {
+      line-height: 24px;
+      flex: 0 0 80px;
+    }
+    label.checkbox {
+      flex: 0 0 80px;
+      text-align: right;
+    }
   }
 
   /* ----------------------------------------- */

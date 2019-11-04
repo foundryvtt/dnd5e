@@ -47,22 +47,43 @@ export class ActorSheet5eNPC extends ActorSheet5e {
       passive: { label: "Features", items: [], type: "feat", subtype: "passive" },
       equipment: { label: "Inventory", items: [], type: "backpack", subtype: "" }
     };
-    const spellbook = {};
 
-    // Iterate through items, allocating to containers
-    for ( let i of data.items ) {
-      i.img = i.img || DEFAULT_TOKEN;
+    // Start by classifying items into groups for rendering
+    let [spells, other] = data.items.reduce((arr, item) => {
+      item.img = item.img || DEFAULT_TOKEN;
+      if ( item.type === "spell" ) arr[0].push(item);
+      else arr[1].push(item);
+      return arr;
+    }, [[], []]);
 
-      // Spells
-      if ( i.type === "spell" ) this._prepareSpell(data.actor, spellbook, i);
+    // Apply item filters
+    spells = this._filterItems(spells, this._filters.spellbook);
+    other = this._filterItems(other, this._filters.features);
 
-      // Features
-      else if ( i.type === "weapon" ) features.weapons.items.push(i);
-      else if ( i.type === "feat" ) {
-        if ( i.data.featType.value === "passive" ) features.passive.items.push(i);
-        else features.actions.items.push(i);
+    // Organize Spellbook
+    const spellbook = spells.reduce((spellbook, spell) => {
+      let lvl = spell.data.level.value || 0;
+      spellbook[lvl] = spellbook[lvl] || {
+        isCantrip: lvl === 0,
+        label: CONFIG.DND5E.spellLevels[lvl],
+        spells: [],
+        uses: data.data.spells["spell"+lvl].value || 0,
+        slots: data.data.spells["spell"+lvl].max || 0
+      };
+      spellbook[lvl].spells.push(spell);
+      return spellbook;
+    }, {});
+
+    // Organize Features
+    for ( let item of other ) {
+      if ( item.type === "weapon" ) features.weapons.items.push(item);
+      else if ( item.type === "feat" ) {
+        if ( item.data.featType === "Passive" ) features.passive.items.push(item);
+        else features.actions.items.push(item);
       }
-      else if (["equipment", "consumable", "tool", "backpack"].includes(i.type)) features.equipment.items.push(i);
+      else if (["equipment", "consumable", "tool", "backpack"].includes(item.type)) {
+        features.equipment.items.push(item);
+      }
     }
 
     // Assign and return

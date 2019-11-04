@@ -12,10 +12,14 @@ export class ActorSheet5e extends ActorSheet {
     super(...args);
 
     /**
-     * Track the set of spellbook filters which are applied
+     * Track the set of item filters which are applied
      * @type {Set}
      */
-    this._spellbookFilters = new Set();
+    this._filters = {
+      inventory: new Set(),
+      spellbook: new Set(),
+      features: new Set()
+    };
   }
 
   /* -------------------------------------------- */
@@ -105,9 +109,6 @@ export class ActorSheet5e extends ActorSheet {
    */
   _prepareSpell(actorData, spellbook, spell) {
 
-    // Determine whether the spell is filtered
-    if ( this._isSpellFiltered(spell) ) return;
-
     // Extend the Spellbook level
     let lvl = spell.data.level.value || 0;
     spellbook[lvl] = spellbook[lvl] || {
@@ -123,19 +124,38 @@ export class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Determine whether a spell in the spellbook will be shown based on the current set of filters
+   * Determine whether an Owned Item will be shown based on the current set of filters
    * @return {boolean}
    * @private
    */
-  _isSpellFiltered(spell) {
-    const filters = this._spellbookFilters;
-    for ( let f of ["action", "bonus", "reaction"] ) {
-      if ( filters.has(f) && (spell.data.activation.type !== f) ) return true;
-    }
-    if ( filters.has("ritual") && (spell.data.components.ritual !== true) ) return true;
-    if ( filters.has("concentration") && (spell.data.components.concentration !== true) ) return true;
-    let isCantrip = spell.data.level.value === 0;
-    return ( filters.has("prepared") && !(spell.data.preparation.prepared || isCantrip ) );
+  _filterItems(items, filters) {
+    return items.filter(item => {
+      const data = item.data;
+
+      // Action usage
+      for ( let f of ["action", "bonus", "reaction"] ) {
+        if ( filters.has(f) ) {
+          if ((data.activation && (data.activation.type !== f))) return false;
+        }
+      }
+
+      // Spell-specific filters
+      if ( filters.has("ritual") ) {
+        if (data.components.ritual !== true) return false;
+      }
+      if ( filters.has("concentration") ) {
+        if (data.components.concentration !== true) return false;
+      }
+      if ( filters.has("prepared") ) {
+        if (!(data.preparation.prepared || (data.level.value === 0))) return false;
+      }
+
+      // Equipment-specific filters
+      if ( filters.has("equipped") ) {
+        if (data.equipped && data.equipped.value !== true) return false;
+      }
+      return true;
+    });
   }
 
   /* -------------------------------------------- */
@@ -182,10 +202,14 @@ export class ActorSheet5e extends ActorSheet {
       });
     });
 
-    // Activate Filters
-    html.find(".spellbook-filters .filter-item").each((i, li) => {
-      if ( this._spellbookFilters.has(li.dataset.filter) ) li.classList.add("active");
-    }).click(this._onToggleSpellbookFilter.bind(this));
+    // Activate Item Filters
+    html.find(".filter-list").each((i, ul) => {
+      const set = this._filters[ul.dataset.filter];
+      const filters = ul.querySelectorAll(".filter-item");
+      for ( let li of filters ) {
+        if ( set.has(li.dataset.filter) ) li.classList.add("active");
+      }
+    }).on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
     html.find('.item .item-name h4').click(event => this._onItemSummary(event));
@@ -253,13 +277,6 @@ export class ActorSheet5e extends ActorSheet {
 
     // Item Rolling
     html.find('.item .item-image').click(event => this._onItemRoll(event));
-
-    // Re-render the sheet when toggling visibility of spells
-    // TODO: Deprecate this for spellbook filters
-    html.find('.prepared-toggle').click(ev => {
-      this.options.showUnpreparedSpells = !this.options.showUnpreparedSpells;
-      this.render()
-    });
   }
 
   /* -------------------------------------------- */
@@ -375,15 +392,17 @@ export class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling of spellbook filters to display a different set of spells
+   * Handle toggling of filters to display a different set of owned items
    * @param {Event} event     The click event which triggered the toggle
    * @private
    */
-  _onToggleSpellbookFilter(event) {
+  _onToggleFilter(event) {
     event.preventDefault();
-    let filter = event.currentTarget.dataset.filter;
-    if ( this._spellbookFilters.has(filter) ) this._spellbookFilters.delete(filter);
-    else this._spellbookFilters.add(filter);
+    const li = event.currentTarget;
+    const set = this._filters[li.parentElement.dataset.filter];
+    const filter = li.dataset.filter;
+    if ( set.has(filter) ) set.delete(filter);
+    else set.add(filter);
     this.render();
   }
 
