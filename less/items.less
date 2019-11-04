@@ -1,6 +1,7 @@
 @import "./variables.less";
 .dnd5e.sheet.item {
 
+  // Sheet Header
   .sheet-header {
     img.profile {
       border: 2px solid #000;
@@ -70,6 +71,13 @@
       border-bottom: @borderGroove;
     }
 
+    // Item Sheet form fields
+    input[type="text"], select {
+      height: 22px;
+      border: 1px solid @colorTan;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
     .form-group.input-select {
       select {
         flex: 1.8;
@@ -99,7 +107,7 @@
     label.checkbox {
       flex: auto;
       margin: 0;
-      line-height: 18px;
+      line-height: 20px;
       font-size: 11px;
       input[type="checkbox"] {
         height: 16px;
@@ -131,7 +139,7 @@
         text-align: right;
         margin-right: 5px;
         font-size: 12px;
-        line-height: 22px;
+        line-height: 24px;
       }
       input[type="text"] {
         flex: 0 0 48px;

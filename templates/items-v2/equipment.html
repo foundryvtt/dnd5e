@@ -14,14 +14,14 @@
                 <span class="item-status">{{itemStatus}}</span>
             </div>
 
-            <ul class="details">
-                <li class="item-detail">
+            <ul class="summary">
+                <li>
                     {{lookup config.equipmentTypes data.armor.type }}
                 </li>
-                <li class="item-detail">
+                <li>
                     <input type="text" name="data.rarity.value" value="{{data.rarity.value}}" placeholder="Rarity"/>
                 </li>
-                <li class="item-detail">
+                <li>
                     <input type="text" name="data.source.value" value="{{data.source.value}}" placeholder="Source"/>
                 </li>
             </ul>

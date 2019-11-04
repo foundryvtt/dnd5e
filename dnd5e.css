@@ -101,12 +101,6 @@
 .dnd5e.sheet .form-group.stacked label {
   flex: 0 0 100%;
 }
-.dnd5e.sheet .form-group input[type="text"],
-.dnd5e.sheet .form-group select {
-  height: 22px;
-  border: 1px solid #7a7971;
-  background: rgba(0, 0, 0, 0.05);
-}
 .dnd5e.sheet .form-group .form-fields {
   display: flex;
   flex-direction: row;
@@ -141,7 +135,7 @@
   font-size: 20px;
   /* Character Name */
   /* Profile Image */
-  /* Sheet Details */
+  /* Header Summary Details */
 }
 .dnd5e.sheet .sheet-header h1 {
   flex: 1;
@@ -161,7 +155,7 @@
   border: none;
   border-right: 2px groove #eeede0;
 }
-.dnd5e.sheet .sheet-header .details {
+.dnd5e.sheet .sheet-header .summary {
   flex: 0 0 100%;
   height: 40px;
   margin: 0;
@@ -170,7 +164,7 @@
   border-top: 2px groove #eeede0;
   border-bottom: none;
 }
-.dnd5e.sheet .sheet-header .details li {
+.dnd5e.sheet .sheet-header .summary li {
   width: 33.33%;
   float: left;
   height: 34px;
@@ -180,7 +174,7 @@
   line-height: 34px;
   color: #4b4a44;
 }
-.dnd5e.sheet .sheet-header .details li:last-child {
+.dnd5e.sheet .sheet-header .summary li:last-child {
   border-right: none;
 }
 .dnd5e.sheet .sheet-navigation {
@@ -616,6 +610,12 @@
   border-top: 2px groove #eeede0;
   border-bottom: 2px groove #eeede0;
 }
+.dnd5e.sheet.item .details input[type="text"],
+.dnd5e.sheet.item .details select {
+  height: 22px;
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
 .dnd5e.sheet.item .details .form-group.input-select select {
   flex: 1.8;
 }
@@ -636,7 +636,7 @@
 .dnd5e.sheet.item .details label.checkbox {
   flex: auto;
   margin: 0;
-  line-height: 18px;
+  line-height: 20px;
   font-size: 11px;
 }
 .dnd5e.sheet.item .details label.checkbox input[type="checkbox"] {
@@ -665,7 +665,7 @@
   text-align: right;
   margin-right: 5px;
   font-size: 12px;
-  line-height: 22px;
+  line-height: 24px;
 }
 .dnd5e.sheet.item .details .spell-materials input[type="text"] {
   flex: 0 0 48px;
@@ -900,7 +900,6 @@
   text-align: center;
 }
 .dnd5e.sheet.actor.npc .resources .resource input[type="checkbox"] {
-  transform: scale(1.2);
   position: relative;
   margin: 0;
   top: 6px;
