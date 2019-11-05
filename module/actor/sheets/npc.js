@@ -45,12 +45,13 @@ export class ActorSheet5eNPC extends ActorSheet5e {
       weapons: {label: "Attacks", items: [], type: "weapon", subtype: "" },
       actions: { label: "Actions", items: [], type: "feat", subtype: "ability" },
       passive: { label: "Features", items: [], type: "feat", subtype: "passive" },
-      equipment: { label: "Inventory", items: [], type: "backpack", subtype: "" }
+      equipment: { label: "Inventory", items: [], type: "loot", subtype: "" }
     };
 
     // Start by classifying items into groups for rendering
     let [spells, other] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
+      item.isStack = item.data.quantity ? item.data.quantity.value > 1 : false;
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
@@ -81,7 +82,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
         if ( item.data.featType === "Passive" ) features.passive.items.push(item);
         else features.actions.items.push(item);
       }
-      else if (["equipment", "consumable", "tool", "backpack"].includes(item.type)) {
+      else if (["equipment", "consumable", "tool", "loot"].includes(item.type)) {
         features.equipment.items.push(item);
       }
     }

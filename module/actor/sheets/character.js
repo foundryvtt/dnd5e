@@ -68,7 +68,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
       equipment: { label: "Equipment", items: [] },
       consumable: { label: "Consumables", items: [] },
       tool: { label: "Tools", items: [] },
-      backpack: { label: "Backpack", items: [] },
+      loot: { label: "Loot", items: [] },
     };
 
     // Spellbook

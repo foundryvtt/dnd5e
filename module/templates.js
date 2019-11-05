@@ -33,7 +33,8 @@ export const preloadHandlebarsTemplates = async function() {
 
     // Item Sheet Partials
     "public/systems/dnd5e/templates/items-v2/parts/item-action.html",
-    "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"
+    "public/systems/dnd5e/templates/items-v2/parts/item-activation.html",
+    "public/systems/dnd5e/templates/items-v2/parts/item-description.html"
   ];
 
   // Load the template parts

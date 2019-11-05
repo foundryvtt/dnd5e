@@ -21,7 +21,6 @@ export class ItemSheet5e extends ItemSheet {
    */
   getData() {
     const data = super.getData();
-    data['abilities'] = CONFIG.TEMPLATE_METADATA.actor.data.abilities;
 
     // Sheet display details
     const type = this.item.type;

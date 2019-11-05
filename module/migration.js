@@ -76,6 +76,11 @@ const migrateItem = function(item) {
   _migrateAbility(item, updateData);
   _migrateDamage(item, updateData);
 
+  // Migrate backpack to loot
+  if ( item.data.type === "backpack" ) {
+    _migrateBackpackLoot(item, updateData);
+  }
+
   // Migrate Spell items
   if (item.data.type === "spell") {
     _migrateSpellTime(item, updateData);
@@ -96,6 +101,13 @@ const migrateItem = function(item) {
 
   // Return the migrated update data
   return updateData;
+};
+
+/* -------------------------------------------- */
+
+const _migrateBackpackLoot = function(item, updateData) {
+  updateData["type"] = "loot";
+  updateData["data.-=deprecationWarning"] = null;
 };
 
 /* -------------------------------------------- */

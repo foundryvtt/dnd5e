@@ -557,6 +557,9 @@
   /* ----------------------------------------- */
   /*  Item Actions                             */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Loot Sheet (No Tabs)                     */
+  /* ----------------------------------------- */
 }
 .dnd5e.sheet.item .sheet-header img.profile {
   border: 2px solid #000;
@@ -589,18 +592,32 @@
 }
 .dnd5e.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
+  margin: 5px 5px 5px 0;
+  padding-right: 5px;
+  border-right: 2px groove #eeede0;
+}
+.dnd5e.sheet.item .sheet-body .item-properties .form-group {
+  margin: 0;
+}
+.dnd5e.sheet.item .sheet-body .item-properties .form-group label {
+  line-height: 20px;
+}
+.dnd5e.sheet.item .sheet-body .item-properties .form-group input {
+  text-align: right;
+}
+.dnd5e.sheet.item .sheet-body .item-properties .properties-list {
   list-style: none;
-  margin: 0 10px 0 0;
+  margin: 0;
   padding: 0;
 }
-.dnd5e.sheet.item .sheet-body .item-properties li {
-  margin: 5px 0;
-  padding: 2px;
+.dnd5e.sheet.item .sheet-body .item-properties .properties-list li {
+  margin: 3px 0;
+  padding: 0 2px;
   background: rgba(0, 0, 0, 0.05);
   border: 2px groove #eeede0;
   text-align: center;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 18px;
 }
 .dnd5e.sheet.item .details .item-details-header {
   margin: 0 0 0.25em 0;
@@ -712,6 +729,9 @@
 }
 .dnd5e.sheet.item .weapon-properties label.checkbox {
   flex: 0 0 98px;
+}
+.dnd5e.sheet.item .loot-header {
+  margin-bottom: 10px;
 }
 /* ----------------------------------------- */
 /*  Chat Cards

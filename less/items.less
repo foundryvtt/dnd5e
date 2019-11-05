@@ -42,18 +42,34 @@
 
     .item-properties {
       flex: 0 0 120px;
-      list-style: none;
-      margin: 0 10px 0 0;
-      padding: 0;
+      margin: 5px 5px 5px 0;
+      padding-right: 5px;
+      border-right: @borderGroove;
 
-      li {
-        margin: 5px 0;
-        padding: 2px;
-        background: rgba(0, 0, 0, 0.05);
-        border: @borderGroove;
-        text-align: center;
-        font-size: 12px;
-        line-height: 16px;
+      .form-group {
+        margin: 0;
+        label {
+          line-height: 20px;
+        }
+        input {
+          text-align: right;
+        }
+      }
+
+      .properties-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          margin: 3px 0;
+          padding: 0 2px;
+          background: rgba(0, 0, 0, 0.05);
+          border: @borderGroove;
+          text-align: center;
+          font-size: 12px;
+          line-height: 18px;
+        }
       }
     }
   }
@@ -204,5 +220,13 @@
 
   .weapon-properties label.checkbox {
     flex: 0 0 98px;
+  }
+
+  /* ----------------------------------------- */
+  /*  Loot Sheet (No Tabs)                     */
+  /* ----------------------------------------- */
+
+  .loot-header {
+    margin-bottom: 10px;
   }
 }

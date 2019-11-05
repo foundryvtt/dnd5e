@@ -18,8 +18,8 @@
     <select name="data.ability">
         {{#select data.ability}}
         <option value="Default"></option>
-        {{#each abilities as |ability a|}}
-        <option value="{{a}}">{{ability.label}}</option>
+        {{#each config.abilities as |ability a|}}
+        <option value="{{a}}">{{ability}}</option>
         {{/each}}
         {{/select}}
     </select>
@@ -86,8 +86,8 @@
         <select name="data.save.ability">
             {{#select data.save.ability}}
             <option value=""></option>
-            {{#each abilities as |ability a|}}
-            <option value="{{a}}">{{ability.label}}</option>
+            {{#each config.abilities as |ability a|}}
+            <option value="{{a}}">{{ability}}</option>
             {{/each}}
             {{/select}}
         </select>

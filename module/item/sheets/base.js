@@ -52,7 +52,6 @@ export class ItemSheet5e extends ItemSheet {
 
     // Include CONFIG values
     data.config = CONFIG.DND5E;
-    data.abilities = CONFIG.TEMPLATE_METADATA.actor.data.abilities;
 
     // Item Type, Status, and Details
     data.itemType = data.item.type.titleCase();
@@ -85,27 +84,37 @@ export class ItemSheet5e extends ItemSheet {
   _getItemProperties(item) {
     const props = [];
 
-    if ( ["weapon", "spell"].includes(item.type) ) {
-      props.push(
-        item.data.activation.label,
-        item.data.range.label,
-        item.data.target.label,
-        item.data.duration.label,
-      )
-    }
-
     if ( item.type === "weapon" ) {
       props.push(...Object.entries(item.data.properties)
         .filter(e => e[1] === true)
         .map(e => CONFIG.DND5E.weaponProperties[e[0]]));
     }
 
-    if ( item.type === "spell" ) {
+    else if ( item.type === "spell" ) {
       props.push(
         item.data.components.label,
         item.data.materials.value,
         item.data.components.concentration ? "Concentration" : null,
         item.data.components.ritual ? "Ritual" : null
+      )
+    }
+
+    else if ( item.type === "equipment" ) {
+      props.push(CONFIG.DND5E.equipmentTypes[item.data.armor.type]);
+      props.push(item.data.armor.label);
+    }
+
+    else if ( item.type === "feat" ) {
+      props.push(item.data.featType);
+    }
+
+    // Action usage
+    if ( item.data.activation && !isObjectEmpty(item.data.activation) ) {
+      props.push(
+        item.data.activation.label,
+        item.data.range.label,
+        item.data.target.label,
+        item.data.duration.label,
       )
     }
     return props.filter(p => !!p);

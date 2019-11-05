@@ -38,14 +38,7 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        <div class="tab flexrow active" data-group="primary" data-tab="description">
-            <ol class="item-properties">
-                {{#each itemProperties}}
-                <li>{{this}}</li>
-                {{/each}}
-            </ol>
-            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
-        </div>
+        {{> "public/systems/dnd5e/templates/items-v2/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">

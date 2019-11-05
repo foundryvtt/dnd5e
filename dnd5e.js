@@ -9,7 +9,6 @@
 
 // Import Modules
 import { DND5E } from "./module/config.js";
-import { TEMPLATE_METADATA } from "./module/metadata.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
@@ -32,7 +31,6 @@ Hooks.once("init", async function() {
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
-  CONFIG.TEMPLATE_METADATA = TEMPLATE_METADATA;
   CONFIG.Actor.entityClass = Actor5e;
   CONFIG.Item.entityClass = Item5e;
 
@@ -44,6 +42,10 @@ Hooks.once("init", async function() {
 
   // Patch Core Functions
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+
+  // TODO - suppress the "backpack" type item. Remove this later
+  let backpackIndex = game.system.entityTypes.Item.findIndex(t => t === "backpack");
+  if ( backpackIndex !== -1 ) game.system.entityTypes.Item.splice(backpackIndex, 1);
 
   // Maybe apply a system migration
   const NEEDS_MIGRATION_VERSION = 0.7;

@@ -331,7 +331,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "backpack", "class", "spell", "feat"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -408,6 +408,10 @@
       }
     },
     "backpack": {
+      "templates": ["itemDescription", "physicalItem"],
+      "deprecationWarning": "THIS ITEM TYPE IS DEPRECATED AND MOVED TO LOOT"
+    },
+    "loot": {
       "templates": ["itemDescription", "physicalItem"]
     },
     "class": {
@@ -439,7 +443,7 @@
       }
     },
     "equipment": {
-      "templates": ["itemDescription", "physicalItem"],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
       "armor": {
         "type": "light",
         "value": 10,
