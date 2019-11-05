@@ -73,8 +73,7 @@ export class Item5e extends Item {
 
       // Damage
       let dam = item.data.damage || {};
-      if ( !(dam instanceof Array) && (dam[0] !== undefined) ) dam = [Object.values(dam[0])];
-      item.data.damageFormula = item.data.damage.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
+      if ( dam.parts ) dam.label = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
     }
     return item;
   }

@@ -341,13 +341,21 @@ DND5E.featTypes = {
   "lair": "Lair Action"
 };
 
-// Proficiency Multipliers
+/* -------------------------------------------- */
+
+/**
+ * Skill, ability, and tool proficiency levels
+ * Each level provides a proficiency multiplier
+ * @type {Object}
+ */
 DND5E.proficiencyLevels = {
   0: "Not Proficient",
   1: "Proficient",
   0.5: "Jack of all Trades",
   2: "Expertise"
 };
+
+/* -------------------------------------------- */
 
 
 // Condition Types

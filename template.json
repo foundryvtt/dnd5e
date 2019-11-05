@@ -339,32 +339,16 @@
           "chat": "",
           "unidentified": ""
         },
-        "source": {
-          "value": ""
-        }
+        "source": ""
       },
       "physicalItem": {
-        "quantity": {
-          "value": 1
-        },
-        "weight": {
-          "value": 0
-        },
-        "price": {
-          "value": 0
-        },
-        "attuned": {
-          "value": false
-        },
-        "equipped": {
-          "value": false
-        },
-        "rarity": {
-          "value": ""
-        },
-        "identified": {
-          "value": true
-        }
+        "quantity": 1,
+        "weight": 0,
+        "price": 0,
+        "attuned": false,
+        "equipped": false,
+        "rarity": "",
+        "identified": true
       },
       "activatedEffect": {
         "activation": {
@@ -398,30 +382,25 @@
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": null,
-        "damage": [],
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
         "formula": "",
         "save": {
           "ability": "",
           "dc": null
-        },
-        "versatileDamage": ""
+        }
       }
     },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "deprecationWarning": "THIS ITEM TYPE IS DEPRECATED AND MOVED TO LOOT"
     },
-    "loot": {
-      "templates": ["itemDescription", "physicalItem"]
-    },
     "class": {
       "templates": ["itemDescription"],
-      "levels": {
-        "value": 1
-      },
-      "subclass": {
-        "value": ""
-      }
+      "levels": 1,
+      "subclass": ""
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem"],
@@ -449,12 +428,9 @@
         "value": 10,
         "dex": null
       },
-      "strength": {
-        "value": 0
-      },
-      "stealth": {
-        "value": false
-      },
+      "strength": 0,
+      "stealth": false,
+      "proficient": true,
       "armorType": {
         "value": "",
         "_deprecated": true
@@ -466,9 +442,7 @@
         "value": "",
         "_deprecated": true
       },
-      "requirements": {
-        "value": ""
-      },
+      "requirements": "",
       "recharge": {
         "value": null,
         "charged": false
@@ -482,14 +456,14 @@
         "_deprecated": true
       }
     },
+    "loot": {
+      "templates": ["itemDescription", "physicalItem"]
+    },
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
-      "ability": {
-        "value": "int"
-      },
-      "proficient": {
-        "value": 0
-      }
+      "ability": "int",
+      "chatFlavor": "",
+      "proficient": 0
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
@@ -552,9 +526,7 @@
         "value": "simpleM"
       },
       "properties": {},
-      "proficient": {
-        "value": true
-      },
+      "proficient": true,
       "bonus": {
         "value": 0,
         "_deprecated": true

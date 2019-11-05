@@ -16,12 +16,6 @@
 
             <ul class="summary">
                 <li>
-                    {{data.featType}}
-                </li>
-                <li>
-                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="Requirements"/>
-                </li>
-                <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
                 </li>
             </ul>
@@ -38,35 +32,31 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "public/systems/dnd5e/templates/items-v2/parts/item-description.html"}}
+        <div class="tab flexrow active" data-group="primary" data-tab="description">
+            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+        </div>
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="item-details-header">Feature Usage</h3>
-
-            {{!-- Item Activation Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
-
-            {{!-- Recharge Requirement --}}
-            {{#if data.activation.type}}
-            <div class="form-group recharge">
-                <label>Action Recharge</label>
+            {{!-- Class Levels --}}
+            <div class="form-group">
+                <label>Class Levels</label>
                 <div class="form-fields">
-                    <span>Recharge On</span>
-                    <input type="text" name="data.recharge.value" value="{{data.recharge.value}}" placeholder="1d6 Result"/>
-                    <label class="checkbox">
-                        Charged
-                        <input type="checkbox" name="data.recharge.charged" {{checked data.recharge.charged}}/>
-                    </label>
+                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number"/>
                 </div>
             </div>
-            {{/if}}
 
-            <h3 class="item-details-header">Feature Attack</h3>
+            {{!-- Subclass Name --}}
+            <div class="form-group">
+                <label>Subclass Name</label>
+                <div class="form-fields">
+                    <input type="text" name="data.subclass" value="{{data.subclass}}"/>
+                </div>
+            </div>
 
-            {{!-- Item Action Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}
+            <h3 class="item-details-header">Granted Abilities</h3>
+            <p class="notification warning">This is still to-do</p>
         </div>
     </section>
 </form>

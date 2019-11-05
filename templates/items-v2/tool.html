@@ -16,10 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    {{data.featType}}
-                </li>
-                <li>
-                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="Requirements"/>
+                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="Rarity"/>
                 </li>
                 <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
@@ -43,30 +40,35 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="item-details-header">Feature Usage</h3>
-
-            {{!-- Item Activation Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
-
-            {{!-- Recharge Requirement --}}
-            {{#if data.activation.type}}
-            <div class="form-group recharge">
-                <label>Action Recharge</label>
-                <div class="form-fields">
-                    <span>Recharge On</span>
-                    <input type="text" name="data.recharge.value" value="{{data.recharge.value}}" placeholder="1d6 Result"/>
-                    <label class="checkbox">
-                        Charged
-                        <input type="checkbox" name="data.recharge.charged" {{checked data.recharge.charged}}/>
-                    </label>
-                </div>
+            {{!-- Tool Proficiency --}}
+            <div class="form-group">
+                <label>Tool Proficiency</label>
+                 <select name="data.proficient" data-dtype="Number">
+                     {{#select data.proficient.value}}
+                     {{#each config.proficiencyLevels as |label p|}}
+                     <option value="{{p}}">{{label}}</option>
+                     {{/each}}
+                     {{/select}}
+                 </select>
             </div>
-            {{/if}}
 
-            <h3 class="item-details-header">Feature Attack</h3>
+            {{!-- Ability Check --}}
+            <div class="form-group">
+                <label>Default Ability Check</label>
+                <select name="data.ability">
+                    {{#select data.ability}}
+                    {{#each config.abilities as |name a|}}
+                    <option value="{{a}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
 
-            {{!-- Item Action Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}
+            {{!-- Chat Message Flavor --}}
+            <div class="form-group stacked">
+                <label>Chat Message Flavor</label>
+                <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
+            </div>
         </div>
     </section>
 </form>

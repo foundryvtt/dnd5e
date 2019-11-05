@@ -1,4 +1,7 @@
-
+/**
+ * Perform a system migration when called, applying migrations for both Actors and Items
+ * @return {Promise}      A Promise which resolves once the migration is completed
+ */
 export const migrateSystem = async function() {
   console.log(`Applying D&D5E System Migration for version ${game.system.data.version}`);
 
@@ -14,6 +17,9 @@ export const migrateSystem = async function() {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate all Actor entities
+ */
 const migrateActors = async function() {
 
   // Actor Entities
@@ -42,6 +48,9 @@ const migrateActors = async function() {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate all Item entities
+ */
 const migrateItems = async function() {
 
   // Item Entities
@@ -53,27 +62,24 @@ const migrateItems = async function() {
     }
   }
 
-  // Item Compendia
-  // const packs = game.packs.filter(p => p.entity === "Item");
-  // for ( let p of packs ) {
-  //   const content = await p.getContent();
-  //   for ( let i of content ) {
-  //     const updateData = migrateItem(i);
-  //     if ( !isObjectEmpty(updateData) ) {
-  //       console.log(`Updating Compendium entry ${i.name}`);
-  //       await p.updateEntity(mergeObject(updateData, {_id: i._id}));
-  //     }
-  //   }
-  // }
+  // TODO: Item Compendia
 };
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate a single Item entity to incorporate latest data model changes
+ * @param item
+ */
 const migrateItem = function(item) {
   const updateData = {};
 
+  // Flatten values
+  const toFlatten = ["ability", "attuned", "equipped", "identified", "quantity", "levels", "price", "proficient",
+    "rarity", "requirements", "stealth", "strength", "source", "subclass", "weight", "weaponType"];
+  _migrateFlattenValues(item, updateData, toFlatten);
+
   // Migrate all items
-  _migrateAbility(item, updateData);
   _migrateDamage(item, updateData);
 
   // Migrate backpack to loot
@@ -96,6 +102,11 @@ const migrateItem = function(item) {
     _migrateArmor(item, updateData);
   }
 
+  // Migrate Weapon Items
+  else if ( item.data.type === "weapon" ) {
+    _migrateWeaponProperties(item, updateData);
+  }
+
   // Remove deprecated fields
   _migrateRemoveDeprecated(item, updateData);
 
@@ -105,6 +116,10 @@ const migrateItem = function(item) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate from a "backpack" item subtype to a "loot" item subtype for more coherent naming
+ * @private
+ */
 const _migrateBackpackLoot = function(item, updateData) {
   updateData["type"] = "loot";
   updateData["data.-=deprecationWarning"] = null;
@@ -112,15 +127,11 @@ const _migrateBackpackLoot = function(item, updateData) {
 
 /* -------------------------------------------- */
 
-const _migrateAbility = function(item, updateData) {
-  const ability = item.data.data.ability;
-  if ( ability && (ability.value !== undefined) ) {
-    updateData["data.ability"] = item.data.data.ability.value;
-  }
-};
-
-/* -------------------------------------------- */
-
+/**
+ * Migrate from a string based armor class like "14" and a separate string armorType to a single armor object which
+ * tracks both armor value and type.
+ * @private
+ */
 const _migrateArmor = function(item, updateData) {
   const armor = item.data.data.armor;
   if ( armor && item.data.data.armorType ) {
@@ -131,17 +142,42 @@ const _migrateArmor = function(item, updateData) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate from a string based damage formula like "2d6 + 4 + 1d4" and a single string damage type like "slash" to
+ * separated damage parts with associated damage type per part.
+ * @private
+ */
 const _migrateDamage = function(item, updateData) {
   let damage = item.data.data.damage;
-  if ( (damage instanceof Array) || !damage ) return;
-  const type = item.data.data.damageType.value;
+  if ( !damage || (damage.parts instanceof Array) || !damage.value ) return;
+  const type = item.data.data.damageType ? item.data.data.damageType.value : "";
   const formula = damage.value.replace(/[\-\*\/]/g, "+");
-  updateData["data.damage"] = formula.split("+").map(s => s.trim()).map(p => [p, type || null]);
+  updateData["data.damage.parts"] = formula.split("+").map(s => s.trim()).map(p => [p, type || null]);
+  updateData["data.damage.-=value"] =  null;
   updateData["data.-=damageType"] = null;
 };
 
 /* -------------------------------------------- */
 
+
+/**
+ * Flatten several attributes which currently have an unnecessarily nested {value} object
+ * @private
+ */
+const _migrateFlattenValues = function(item, updateData, toFlatten) {
+  for ( let a of toFlatten ) {
+    if ( item.data.data[a] instanceof Object ) {
+      updateData["data."+a] = item.data.data[a].value;
+    }
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate from a string spell casting time like "1 Bonus Action" to separate fields for activation type and numeric cost
+ * @private
+ */
 const _migrateSpellTime = function(item, updateData) {
   const value = getProperty(item.data, "data.time.value");
   if ( !value ) return;
@@ -157,6 +193,10 @@ const _migrateSpellTime = function(item, updateData) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate from a string duration field like "1 Minute" to separate fields for duration units and numeric value
+ * @private
+ */
 const _migrateDuration = function(item, updateData) {
   const TIME = Object.fromEntries(Object.entries(CONFIG.DND5E.timePeriods).map(e => e.reverse()));
   const dur = item.data.data.duration;
@@ -171,6 +211,10 @@ const _migrateDuration = function(item, updateData) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate from a string range field like "150 ft." to separate fields for units and numeric distance value
+ * @private
+ */
 const _migrateRange = function(item, updateData) {
   const range = item.data.data.range;
   if ( range.value && !range.units ) {
@@ -211,6 +255,10 @@ const _migrateRemoveDeprecated = function(item, updateData) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate from a target string like "15 ft. Radius" to a more explicit data model with a value, units, and type
+ * @private
+ */
 const _migrateTarget = function(item, updateData) {
   const target = item.data.data.target;
   if ( target.value && !(target.units || target.type) ) {
@@ -241,6 +289,11 @@ const _migrateTarget = function(item, updateData) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate from string based components like "V,S,M" to boolean flags for each component
+ * Move concentration and ritual flags into the components object
+ * @private
+ */
 const _migrateSpellComponents = function(item, updateData) {
   const components = item.data.data.components;
   if ( !components.value ) return;
@@ -259,11 +312,31 @@ const _migrateSpellComponents = function(item, updateData) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate from a simple object with save.value to an expanded object where the DC is also configured
+ * @private
+ */
 const _migrateSpellSave = function(item, updateData) {
   const save = item.data.data.save;
   if ( !save.value ) return;
   updateData["data.save"] = {
     ability: save.value,
-    value: ""
+    dc: null
   }
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate from a string based weapon properties like "Heavy, Two-Handed" to an object of boolean flags
+ * @private
+ */
+const _migrateWeaponProperties = function(item, updateData) {
+  const props = item.data.data.properties;
+  if ( !props.value ) return;
+  const labels = Object.fromEntries(Object.entries(CONFIG.DND5E.weaponProperties).map(e => e.reverse()));
+  for ( let k of props.value.split(",").map(p => p.trim()) ) {
+    if ( labels[k] ) updateData[`data.properties.${labels[k]}`] = true;
+  }
+  updateData["data.properties.-=value"] = null;
 };

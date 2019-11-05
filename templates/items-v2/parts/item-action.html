@@ -41,10 +41,10 @@
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
-    {{#each data.damage as |part i| }}
+    {{#each data.damage.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-        <input type="text" name="data.damage.{{i}}.0" value="{{lookup this "0"}}"/>
-        <select name="data.damage.{{i}}.1">
+        <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+        <select name="data.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
             <option value="">None</option>
             {{#each ../config.damageTypes as |name type|}}
@@ -61,11 +61,11 @@
 </ol>
 
 {{!-- Versatile Damage --}}
-{{#if data.damage.length }}
+{{#if data.damage.parts.length }}
 <div class="form-group">
     <label>Versatile Damage</label>
     <div class="form-fields">
-        <input type="text" name="data.versatileDamage" value="{{data.versatileDamage}}" placeholder="Formula"/>
+        <input type="text" name="data.damage.versatile" value="{{data.damage.versatile}}" placeholder="Formula"/>
     </div>
 </div>
 {{/if}}

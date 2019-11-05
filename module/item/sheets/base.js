@@ -57,6 +57,7 @@ export class ItemSheet5e extends ItemSheet {
     data.itemType = data.item.type.titleCase();
     data.itemStatus = this._getItemStatus(data.item);
     data.itemProperties = this._getItemProperties(data.item);
+    data.isPhysical = data.item.data.hasOwnProperty("quantity");
 
     // Action Details
     data.hasAttackRoll = ["matk", "ratk", "satk"].includes(data.item.data.actionType);
@@ -77,6 +78,7 @@ export class ItemSheet5e extends ItemSheet {
   _getItemStatus(item) {
     if ( item.type === "spell" ) return item.data.preparation.prepared ? "Prepared" : "Unprepared";
     else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped.value ? "Equipped" : "Unequipped";
+    else if ( item.type === "tool" ) return item.data.proficient ? "Proficient" : "Not Proficient";
   }
 
   /* -------------------------------------------- */
@@ -131,9 +133,9 @@ export class ItemSheet5e extends ItemSheet {
   _updateObject(event, formData) {
 
     // Handle Damage Array
-    let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage"));
-    formData["data.damage"] = damage.reduce((arr, entry) => {
-      let [i, j] = entry[0].split(".").slice(2);
+    let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage.parts"));
+    formData["data.damage.parts"] = damage.reduce((arr, entry) => {
+      let [i, j] = entry[0].split(".").slice(3);
       if ( !arr[i] ) arr[i] = [];
       arr[i][j] = entry[1];
       return arr;
@@ -187,7 +189,7 @@ export class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const damage = this.item.data.data.damage;
-      return this.item.update({"data.damage": damage.concat([["", ""]])});
+      return this.item.update({"data.damage.parts": damage.parts.concat([["", ""]])});
     }
 
     // Remove a damage component
@@ -195,8 +197,8 @@ export class ItemSheet5e extends ItemSheet {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".damage-part");
       const damage = duplicate(this.item.data.data.damage);
-      damage.splice(Number(li.dataset.damagePart), 1);
-      return this.item.update({"data.damage": damage});
+      damage.parts.splice(Number(li.dataset.damagePart), 1);
+      return this.item.update({"data.damage.parts": damage.parts});
     }
   }
 }

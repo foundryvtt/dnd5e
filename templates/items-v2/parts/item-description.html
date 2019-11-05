@@ -1,20 +1,20 @@
 <div class="tab flexrow active" data-group="primary" data-tab="description">
 
     <div class="item-properties">
-        {{#if data.quantity}}
+        {{#if isPhysical}}
         <div class="form-group">
             <label>Quantity</label>
-            <input type="text" name="data.quantity.value" value="{{data.quantity.value}}" data-dtype="Number"/>
+            <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
         </div>
 
         <div class="form-group">
             <label>Weight</label>
-            <input type="text" name="data.weight.value" value="{{data.weight.value}}" data-dtype="Number"/>
+            <input type="text" name="data.weight" value="{{data.weight}}" data-dtype="Number"/>
         </div>
 
         <div class="form-group">
             <label>Price</label>
-            <input type="text" name="data.price.value" value="{{data.price.value}}" data-dtype="Number"/>
+            <input type="text" name="data.price" value="{{data.price}}" data-dtype="Number"/>
         </div>
         {{/if}}
 
