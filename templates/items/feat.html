@@ -38,15 +38,15 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "public/systems/dnd5e/templates/items-v2/parts/item-description.html"}}
+        {{> "public/systems/dnd5e/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="item-details-header">Feature Usage</h3>
+            <h3 class="form-header">Feature Usage</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-activation.html"}}
 
             {{!-- Recharge Requirement --}}
             {{#if data.activation.type}}
@@ -63,10 +63,10 @@
             </div>
             {{/if}}
 
-            <h3 class="item-details-header">Feature Attack</h3>
+            <h3 class="form-header">Feature Attack</h3>
 
             {{!-- Item Action Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-action.html"}}
         </div>
     </section>
 </form>

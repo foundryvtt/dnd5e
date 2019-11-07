@@ -1,16 +1,45 @@
 /**
- * Override and extend the basic ItemSheet implementation for the D&D5E system.
- * This base item sheet handles several item types and is extended by other sheets for other types.
+ * Override and extend the core ItemSheet implementation to handle D&D5E specific item types
+ * @type {ItemSheet}
  */
 export class ItemSheet5e extends ItemSheet {
+  constructor(...args) {
+    super(...args);
+
+    /**
+     * The tab being browsed
+     * @type {string}
+     */
+    this._sheetTab = null;
+
+    /**
+     * The scroll position on the active tab
+     * @type {number}
+     */
+    this._scrollTab = 100;
+  }
+
+  /* -------------------------------------------- */
+
 	static get defaultOptions() {
-	  const options = super.defaultOptions;
-	  options.width = 520;
-	  options.height = 460;
-	  options.classes = options.classes.concat(["dnd5e", "item"]);
-	  options.template = `public/systems/dnd5e/templates/items/item-sheet.html`;
-	  options.resizable = false;
-	  return options;
+	  return mergeObject(super.defaultOptions, {
+      width: 520,
+      height: 400,
+      detailHeight: 720,
+      classes: ["dnd5e", "sheet", "item"],
+      resizable: false
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return a dynamic reference to the HTML template path used to render this Item Sheet
+   * @return {string}
+   */
+  get template() {
+    const path = "public/systems/dnd5e/templates/items/";
+    return `${path}/${this.item.data.type}.html`;
   }
 
   /* -------------------------------------------- */
@@ -22,81 +51,114 @@ export class ItemSheet5e extends ItemSheet {
   getData() {
     const data = super.getData();
 
-    // Sheet display details
-    const type = this.item.type;
-    mergeObject(data, {
-      type: type,
-      hasSidebar: true,
-      sidebarTemplate: () => `public/systems/dnd5e/templates/items/${type}-sidebar.html`,
-      hasDetails: ["consumable", "equipment", "feat", "spell", "weapon"].includes(type),
-      detailsTemplate: () => `public/systems/dnd5e/templates/items/${type}-details.html`
-    });
+    // Include CONFIG values
+    data.config = CONFIG.DND5E;
 
-    // Damage types
-    let dt = duplicate(CONFIG.DND5E.damageTypes);
-    if ( ["spell", "feat"].includes(type) ) mergeObject(dt, CONFIG.DND5E.healingTypes);
-    data['damageTypes'] = dt;
+    // Item Type, Status, and Details
+    data.itemType = data.item.type.titleCase();
+    data.itemStatus = this._getItemStatus(data.item);
+    data.itemProperties = this._getItemProperties(data.item);
+    data.isPhysical = data.item.data.hasOwnProperty("quantity");
 
-    // Consumable Data
-    if ( type === "consumable" ) {
-      data.consumableTypes = CONFIG.DND5E.consumableTypes
-    }
+    // Action Details
+    data.hasAttackRoll = ["matk", "ratk", "satk"].includes(data.item.data.actionType);
+    data.isHealing = data.item.data.actionType === "heal";
 
-    // Spell Data
-    else if ( type === "spell" ) {
-      mergeObject(data, {
-        spellTypes: CONFIG.DND5E.spellTypes,
-        spellSchools: CONFIG.DND5E.spellSchools,
-        spellLevels: CONFIG.DND5E.spellLevels,
-        spellComponents: this._formatSpellComponents(data.data),
-        activationTypes: CONFIG.DND5E.abilityActivationTypes,
-        distanceUnits: CONFIG.DND5E.distanceUnits,
-        targetTypes: CONFIG.DND5E.targetTypes,
-        timePeriods: CONFIG.DND5E.timePeriods,
-      });
-    }
-
-    // Weapon Data
-    else if ( this.item.type === "weapon" ) {
-      data.weaponTypes = CONFIG.DND5E.weaponTypes;
-      data.weaponProperties = this._formatWeaponProperties(data.data);
-    }
-
-    // Feat types
-    else if ( type === "feat" ) {
-      data.featTypes = CONFIG.DND5E.featTypes;
-      data.featTags = [
-        data.data.target.value,
-        data.data.time.value
-      ].filter(t => !!t);
-    }
-
-    // Equipment data
-    else if ( type === "equipment" ) {
-      data.armorTypes = CONFIG.DND5E.armorTypes;
-    }
-
-    // Tool-specific data
-    else if ( type === "tool" ) {
-      data.proficiencies = CONFIG.DND5E.proficiencyLevels;
+    // Spell-specific data
+    if ( data.item.type === "spell" ) {
+      let save = data.item.data.save;
+      if ( this.item.isOwned && (save.ability && !save.dc) ) {
+        save.dc = this.item.actor.data.data.attributes.spelldc.value;
+      }
     }
     return data;
   }
 
   /* -------------------------------------------- */
 
-  _formatSpellComponents(data) {
-    if ( !data.components.value ) return [];
-    let comps = data.components.value.split(",").map(c => CONFIG.DND5E.spellComponents[c.trim()] || c.trim());
-    if ( data.materials.value ) comps.push(data.materials.value);
-    return comps;
+  /**
+   * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
+   * @return {string}
+   * @private
+   */
+  _getItemStatus(item) {
+    if ( item.type === "spell" ) return item.data.preparation.prepared ? "Prepared" : "Unprepared";
+    else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped.value ? "Equipped" : "Unequipped";
+    else if ( item.type === "tool" ) return item.data.proficient ? "Proficient" : "Not Proficient";
   }
 
   /* -------------------------------------------- */
 
-  _formatWeaponProperties(data) {
-    if ( !data.properties.value ) return [];
-    return data.properties.value.split(",").map(p => p.trim());
+  /**
+   * Get the Array of item properties which are used in the small sidebar of the description tab
+   * @return {Array}
+   * @private
+   */
+  _getItemProperties(item) {
+    const props = [];
+
+    if ( item.type === "weapon" ) {
+      props.push(...Object.entries(item.data.properties)
+        .filter(e => e[1] === true)
+        .map(e => CONFIG.DND5E.weaponProperties[e[0]]));
+    }
+
+    else if ( item.type === "spell" ) {
+      props.push(
+        item.data.components.label,
+        item.data.materials.value,
+        item.data.components.concentration ? "Concentration" : null,
+        item.data.components.ritual ? "Ritual" : null
+      )
+    }
+
+    else if ( item.type === "equipment" ) {
+      props.push(CONFIG.DND5E.equipmentTypes[item.data.armor.type]);
+      props.push(item.data.armor.label);
+    }
+
+    else if ( item.type === "feat" ) {
+      props.push(item.data.featType);
+    }
+
+    // Action type
+    if ( item.data.actionType ) {
+      props.push(CONFIG.DND5E.itemActionTypes[item.data.actionType]);
+    }
+
+    // Action usage
+    if ( (item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation) ) {
+      props.push(
+        item.data.activation.label,
+        item.data.range.label,
+        item.data.target.label,
+        item.data.duration.label,
+      )
+    }
+    return props.filter(p => !!p);
+  }
+
+  /* -------------------------------------------- */
+  /*  Form Submission                             */
+	/* -------------------------------------------- */
+
+  /**
+   * Extend the parent class _updateObject method to ensure that damage ends up in an Array
+   * @private
+   */
+  _updateObject(event, formData) {
+
+    // Handle Damage Array
+    let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage.parts"));
+    formData["data.damage.parts"] = damage.reduce((arr, entry) => {
+      let [i, j] = entry[0].split(".").slice(3);
+      if ( !arr[i] ) arr[i] = [];
+      arr[i][j] = entry[1];
+      return arr;
+    }, []);
+
+    // Update the Item
+    super._updateObject(event, formData);
   }
 
   /* -------------------------------------------- */
@@ -109,11 +171,50 @@ export class ItemSheet5e extends ItemSheet {
 
     // Activate tabs
     new Tabs(html.find(".tabs"), {
-      initial: this.item.data.flags["_sheetTab"],
-      callback: clicked => this.item.data.flags["_sheetTab"] = clicked.attr("data-tab")
+      initial: this["_sheetTab"],
+      callback: clicked => {
+        const tab = clicked.data("tab");
+        this["_sheetTab"] = clicked.data("tab");
+        if ( tab === "details" ) {
+          this.setPosition({width: this.options.width, height: this.options.detailHeight});
+        } else this.setPosition({width: this.options.width, height: this.options.height});
+      }
     });
 
-    // Checkbox changes
-    html.find('input[type="checkbox"]').change(event => this._onSubmit(event));
+    // Save scroll position
+    html.find(".tab.active")[0].scrollTop = this._scrollTab;
+    html.find(".tab").scroll(ev => this._scrollTab = ev.currentTarget.scrollTop);
+
+    // Modify damage formula
+    html.find(".damage-control").click(this._onDamageControl.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add or remove a damage part from the damage formula
+   * @param {Event} event     The original click event
+   * @return {Promise}
+   * @private
+   */
+  async _onDamageControl(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+
+    // Add new damage component
+    if ( a.classList.contains("add-damage") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const damage = this.item.data.data.damage;
+      return this.item.update({"data.damage.parts": damage.parts.concat([["", ""]])});
+    }
+
+    // Remove a damage component
+    if ( a.classList.contains("delete-damage") ) {
+      await this._onSubmit(event);  // Submit any unsaved changes
+      const li = a.closest(".damage-part");
+      const damage = duplicate(this.item.data.data.damage);
+      damage.parts.splice(Number(li.dataset.damagePart), 1);
+      return this.item.update({"data.damage.parts": damage.parts});
+    }
   }
 }

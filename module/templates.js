@@ -16,25 +16,10 @@ export const preloadHandlebarsTemplates = async function() {
     "public/systems/dnd5e/templates/actors/actor-traits.html",
     "public/systems/dnd5e/templates/actors/actor-classes.html",
 
-    // Old Item Sheet Partials
-    "public/systems/dnd5e/templates/items/backpack-sidebar.html",
-    "public/systems/dnd5e/templates/items/class-sidebar.html",
-    "public/systems/dnd5e/templates/items/consumable-details.html",
-    "public/systems/dnd5e/templates/items/consumable-sidebar.html",
-    "public/systems/dnd5e/templates/items/equipment-details.html",
-    "public/systems/dnd5e/templates/items/equipment-sidebar.html",
-    "public/systems/dnd5e/templates/items/feat-details.html",
-    "public/systems/dnd5e/templates/items/feat-sidebar.html",
-    "public/systems/dnd5e/templates/items/spell-details.html",
-    "public/systems/dnd5e/templates/items/spell-sidebar.html",
-    "public/systems/dnd5e/templates/items/tool-sidebar.html",
-    "public/systems/dnd5e/templates/items/weapon-details.html",
-    "public/systems/dnd5e/templates/items/weapon-sidebar.html",
-
     // Item Sheet Partials
-    "public/systems/dnd5e/templates/items-v2/parts/item-action.html",
-    "public/systems/dnd5e/templates/items-v2/parts/item-activation.html",
-    "public/systems/dnd5e/templates/items-v2/parts/item-description.html"
+    "public/systems/dnd5e/templates/items/parts/item-action.html",
+    "public/systems/dnd5e/templates/items/parts/item-activation.html",
+    "public/systems/dnd5e/templates/items/parts/item-description.html"
   ];
 
   // Load the template parts

@@ -16,7 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    {{lookup config.equipmentTypes data.armor.type }}
+                    {{lookup config.weaponTypes data.weaponType }}
                 </li>
                 <li>
                     <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="Rarity"/>
@@ -38,18 +38,18 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "public/systems/dnd5e/templates/items-v2/parts/item-description.html"}}
+        {{> "public/systems/dnd5e/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="item-details-header">Equipment Details</h3>
+            <h3 class="form-header">Weapon Details</h3>
 
-            {{!-- Equipment Type --}}
+            {{!-- Weapon Type --}}
             <div class="form-group">
-                <label>Equipment Type</label>
-                <select name="data.armor.type">
-                    {{#select data.armor.type}}
-                    {{#each config.armorTypes as |name type|}}
+                <label>Weapon Type</label>
+                <select name="data.weaponType">
+                    {{#select data.weaponType}}
+                    {{#each config.weaponTypes as |name type|}}
                     <option value="{{type}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
@@ -73,45 +73,25 @@
                 </label>
             </div>
 
-            {{!-- Armor Class --}}
-            <div class="form-group">
-                <label>Armor Class</label>
-                <div class="form-fields">
-                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
-                </div>
+            {{!-- Weapon Properties --}}
+            <div class="form-group stacked weapon-properties">
+                <label>Weapon Properties</label>
+                {{#each config.weaponProperties as |name prop|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
+                </label>
+                {{/each}}
             </div>
 
-            {{!-- Dexterity Modifier --}}
-            <div class="form-group">
-                <label>Max. Dexterity Modifier</label>
-                <div class="form-fields">
-                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="Unlimited"/>
-                </div>
-            </div>
-
-            {{!-- Required Strength --}}
-            <div class="form-group">
-                <label>Required Strength</label>
-                <div class="form-fields">
-                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="None"/>
-                </div>
-            </div>
-
-            {{!-- Stealth Disadvantage --}}
-            <div class="form-group">
-                <label>Imposes Stealth Disadvantage</label>
-                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
-            </div>
-
-            <h3 class="item-details-header">Equipment Usage</h3>
+            <h3 class="form-header">Weapon Usage</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-activation.html"}}
 
-            <h3 class="item-details-header">Equipment Action</h3>
+            <h3 class="form-header">Weapon Attack</h3>
 
             {{!-- Item Action Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-action.html"}}
         </div>
     </section>
 </form>

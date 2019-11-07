@@ -1,0 +1,117 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary">
+                <li>
+                    {{lookup config.equipmentTypes data.armor.type }}
+                </li>
+                <li>
+                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="Rarity"/>
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "public/systems/dnd5e/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">Equipment Details</h3>
+
+            {{!-- Equipment Type --}}
+            <div class="form-group">
+                <label>Equipment Type</label>
+                <select name="data.armor.type">
+                    {{#select data.armor.type}}
+                    {{#each config.armorTypes as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Equipment Status --}}
+            <div class="form-group stacked">
+                <label>Equipment Status</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> Proficient
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
+                </label>
+            </div>
+
+            {{!-- Armor Class --}}
+            <div class="form-group">
+                <label>Armor Class</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Dexterity Modifier --}}
+            <div class="form-group">
+                <label>Max. Dexterity Modifier</label>
+                <div class="form-fields">
+                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="Unlimited"/>
+                </div>
+            </div>
+
+            {{!-- Required Strength --}}
+            <div class="form-group">
+                <label>Required Strength</label>
+                <div class="form-fields">
+                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="None"/>
+                </div>
+            </div>
+
+            {{!-- Stealth Disadvantage --}}
+            <div class="form-group">
+                <label>Imposes Stealth Disadvantage</label>
+                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
+            </div>
+
+            <h3 class="form-header">Equipment Usage</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">Equipment Action</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-action.html"}}
+        </div>
+    </section>
+</form>

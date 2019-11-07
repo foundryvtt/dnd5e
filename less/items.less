@@ -1,7 +1,10 @@
 @import "./variables.less";
 .dnd5e.sheet.item {
 
-  // Sheet Header
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
   .sheet-header {
     img.profile {
       border: 2px solid #000;
@@ -79,17 +82,9 @@
   /* ----------------------------------------- */
 
   .details {
-    .item-details-header {
-      margin: 0 0 0.25em 0;
-      .nodesto();
-      font-size: 24px;
-      border-top: @borderGroove;
-      border-bottom: @borderGroove;
-    }
 
     // Item Sheet form fields
     input[type="text"], select {
-      height: 22px;
       border: 1px solid @colorTan;
       background: rgba(0, 0, 0, 0.05);
     }
@@ -117,19 +112,6 @@
       }
       select {
         flex: 3;
-      }
-    }
-
-    label.checkbox {
-      flex: auto;
-      margin: 0;
-      line-height: 20px;
-      font-size: 11px;
-      input[type="checkbox"] {
-        height: 16px;
-        margin: 0 5px 0;
-        position: relative;
-        top: 5px;
       }
     }
 

@@ -75,8 +75,8 @@ const migrateItem = function(item) {
   const updateData = {};
 
   // Flatten values
-  const toFlatten = ["ability", "attuned", "equipped", "identified", "quantity", "levels", "price", "proficient",
-    "rarity", "requirements", "stealth", "strength", "source", "subclass", "weight", "weaponType"];
+  const toFlatten = ["ability", "attuned", "consumableType", "equipped", "identified", "quantity", "levels", "price",
+    "proficient", "rarity", "requirements", "stealth", "strength", "source", "subclass", "weight", "weaponType"];
   _migrateFlattenValues(item, updateData, toFlatten);
 
   // Migrate all items

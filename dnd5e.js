@@ -17,7 +17,7 @@ import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { Actor5e } from "./module/actor/entity.js";
 import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { Item5e } from "./module/item/entity.js";
-import { ItemSheet5e } from "./module/item/sheets/base.js";
+import { ItemSheet5e } from "./module/item/sheet.js";
 import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
 import { migrateSystem } from "./module/migration.js";
 

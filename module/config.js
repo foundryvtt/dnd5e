@@ -115,8 +115,10 @@ DND5E.armorTypes = DND5E.equipmentTypes;
 
 /* -------------------------------------------- */
 
-
-// Consumable Types
+/**
+ * Enumerate the valid consumable types which are recognized by the system
+ * @type {Object}
+ */
 DND5E.consumableTypes = {
   "potion": "Potion",
   "poison": "Poison",
@@ -125,6 +127,8 @@ DND5E.consumableTypes = {
   "rod": "Rod",
   "trinket": "Trinket"
 };
+
+/* -------------------------------------------- */
 
 
 // Damage Types

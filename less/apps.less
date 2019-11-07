@@ -4,6 +4,123 @@
 @headerHeight: 100px;
 @detailsHeight: 40px;
 
+/* ----------------------------------------- */
+/*  All D&D5e Apps                           */
+/* ----------------------------------------- */
+
+.dnd5e {
+  .window-content {
+    background: @sheetBackground;
+    font-size: 13px;
+    color: @colorDark
+  }
+
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+
+  // Item Sheet form fields
+  input[type="text"], select {
+    height: calc(100% - 2px);
+    border: 1px solid @colorTan;
+    background: rgba(0, 0, 0, 0.05);
+    color: @colorDark;
+  }
+
+  // Hovered Fields
+  input[type="text"] {
+    &:hover,
+    &:focus {
+      border: 1px solid #111;
+      box-shadow: 0 0 8px red;
+    }
+  }
+
+  // Disabled Fields
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    color: @colorOlive;
+    border: none;
+    &:hover,
+    &:focus {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  // Buttons
+  button {
+    background: rgba(0, 0, 0, 0.10);
+    border: @borderGroove;
+  }
+
+  // Checkbox Labels
+  label.checkbox {
+    flex: auto;
+    margin: 0;
+    line-height: 20px;
+    font-size: 11px;
+    text-align: right;
+    input[type="checkbox"] {
+      height: 16px;
+      margin: 0 5px 0;
+      position: relative;
+      top: 5px;
+    }
+  }
+  .form-group.stacked label.checkbox {
+    text-align: left;
+  }
+
+  /* Form Groups */
+  .form-group {
+    label {
+      flex: 2;
+      color: @colorOlive;
+      font-weight: bold;
+    }
+    &.stacked label {
+      flex: 0 0 100%;
+    }
+
+    .form-fields {
+      .flexrow();
+      > * {
+        margin: 0 3px 0 0;
+        &:last-child { margin-right: 0; }
+      }
+    }
+  }
+
+  // Form Headers
+  .form-header {
+    margin: 0 0 0.25em 0;
+    padding: 0 2px;
+    .nodesto();
+    font-size: 24px;
+    border-top: @borderGroove;
+    border-bottom: @borderGroove;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    margin: 0 2px 0 0;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 16px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+
+/* ----------------------------------------- */
+/*  Entity Sheets Specifically               */
+/* ----------------------------------------- */
+
 .dnd5e.sheet {
   .window-content {
     overflow-y: hidden;
@@ -24,26 +141,25 @@
   }
 
   /* ----------------------------------------- */
-  /*  Sheet Forms                              */
+  /*  Element Styles                           */
   /* ----------------------------------------- */
 
-  .form-group {
-    label {
-      flex: 2;
-      color: @colorOlive;
-      font-weight: bold;
+  // Input Fields
+  input[type="text"] {
+    background: none;
+    border: 1px solid transparent;
+    &:hover,
+    &:focus {
+      border: 1px solid #111;
     }
-    &.stacked label {
-      flex: 0 0 100%;
-    }
+  }
 
-    .form-fields {
-      .flexrow();
-      > * {
-        margin: 0 3px 0 0;
-        &:last-child { margin-right: 0; }
-      }
-    }
+  // Select Fields
+  select {
+    flex: 1;
+    font-size: 12px;
+    height: 22px;
+    background: transparent;
   }
 
   /* ----------------------------------------- */
@@ -135,59 +251,6 @@
   }
 
   /* ----------------------------------------- */
-  /*  Element Styles                           */
-  /* ----------------------------------------- */
-
-  // Input Fields
-  input[type="text"] {
-    width: calc(100% - 2px);
-    height: calc(100% - 2px);
-    background: none;
-    color: #444;
-    border: 1px solid transparent;
-
-    &:hover,
-    &:focus {
-      border: 1px solid #111;
-      box-shadow: 0 0 8px red;
-    }
-  }
-
-  // Select Fields
-  select {
-    flex: 1;
-    margin: 0;
-    font-size: 12px;
-    height: 22px;
-    background: transparent;
-  }
-
-  // Disabled Fields
-  input:disabled,
-  select:disabled,
-  textarea:disabled {
-    color: #444;
-    border: none;
-    &:hover,
-    &:focus {
-      border: none;
-      box-shadow: none;
-    }
-  }
-
-  /* Tags */
-  .tag {
-    display: inline-block;
-    margin: 0 2px 0 0;
-    padding: 0 3px;
-    font-size: 10px;
-    line-height: 16px;
-    border: 1px solid #999;
-    border-radius: 3px;
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  /* ----------------------------------------- */
   /*  List Filters                             */
   /* ----------------------------------------- */
 
@@ -216,5 +279,23 @@
         border-bottom: 3px solid @colorCrimson;
       }
     }
+  }
+}
+
+
+/* ----------------------------------------- */
+/* Trait Selector
+/* ----------------------------------------- */
+
+#trait-selector {
+  .trait-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  input[type="text"] {
+    height: 24px;
+    margin: 2px;
   }
 }

@@ -16,7 +16,7 @@
 
             <ul class="summary">
                 <li>
-                    {{lookup config.weaponTypes data.weaponType }}
+                    {{lookup config.consumableTypes data.consumableType }}
                 </li>
                 <li>
                     <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="Rarity"/>
@@ -38,60 +38,46 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "public/systems/dnd5e/templates/items-v2/parts/item-description.html"}}
+        {{> "public/systems/dnd5e/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="item-details-header">Weapon Details</h3>
+            <h3 class="form-header">Consumable Details</h3>
 
-            {{!-- Weapon Type --}}
+            {{!-- Consumable Type --}}
             <div class="form-group">
-                <label>Weapon Type</label>
-                <select name="data.weaponType">
-                    {{#select data.weaponType}}
-                    {{#each config.weaponTypes as |name type|}}
+                <label>Consumable Type</label>
+                <select name="data.armor.type">
+                    {{#select data.consumableType}}
+                    {{#each config.consumableTypes as |name type|}}
                     <option value="{{type}}">{{name}}</option>
                     {{/each}}
                     {{/select}}
                 </select>
             </div>
 
-            {{!-- Equipment Status --}}
-            <div class="form-group stacked">
-                <label>Equipment Status</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> Proficient
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> Equipped
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> Identified
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> Attuned
-                </label>
-            </div>
-
-            {{!-- Weapon Properties --}}
-            <div class="form-group stacked weapon-properties">
-                <label>Weapon Properties</label>
-                {{#each config.weaponProperties as |name prop|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="data.properties.{{prop}}" {{checked (lookup ../data.properties prop)}}/> {{ name }}
-                </label>
-                {{/each}}
-            </div>
-
-            <h3 class="item-details-header">Weapon Usage</h3>
+            <h3 class="form-header">Consumable Usage</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-activation.html"}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-activation.html"}}
 
-            <h3 class="item-details-header">Weapon Attack</h3>
+            {{!-- Consumable Usage --}}
+            {{#if data.activation.type}}
+            <div class="form-group">
+                <label>Consumable Usage</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.uses.autoUse" {{checked data.uses.autoUse}}/> Consume on Use
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" name="data.uses.autoDestroy" {{checked data.uses.autoDestroy}}/> Destroy on Empty
+                </label>
+            </div>
+            {{/if}}
+
+            <h3 class="form-header">Consumable Action</h3>
 
             {{!-- Item Action Template --}}
-            {{> "public/systems/dnd5e/templates/items-v2/parts/item-action.html"}}
+            {{> "public/systems/dnd5e/templates/items/parts/item-action.html"}}
         </div>
     </section>
 </form>
