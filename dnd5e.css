@@ -88,7 +88,6 @@
 .dnd5e select:disabled,
 .dnd5e textarea:disabled {
   color: #4b4a44;
-  border: none;
 }
 .dnd5e input:disabled:hover,
 .dnd5e select:disabled:hover,
@@ -96,7 +95,6 @@
 .dnd5e input:disabled:focus,
 .dnd5e select:disabled:focus,
 .dnd5e textarea:disabled:focus {
-  border: none !important;
   box-shadow: none !important;
 }
 .dnd5e button {
