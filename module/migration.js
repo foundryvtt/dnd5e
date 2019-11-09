@@ -85,7 +85,7 @@ export const migrateCompendium = async function(pack) {
  * @param {Actor} actor   The actor to Update
  * @return {Object}       The updateData to apply
  */
-const migrateActorData = async function(actor) {
+export const migrateActorData = function(actor) {
   const updateData = {};
 
   // TODO: Actor Data Updates
