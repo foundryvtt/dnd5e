@@ -49,6 +49,7 @@
                 <label>Equipment Type</label>
                 <select name="data.armor.type">
                     {{#select data.armor.type}}
+                    <option value=""></option>
                     {{#each config.armorTypes as |name type|}}
                     <option value="{{type}}">{{name}}</option>
                     {{/each}}

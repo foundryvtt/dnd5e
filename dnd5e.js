@@ -19,7 +19,7 @@ import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { Item5e } from "./module/item/entity.js";
 import { ItemSheet5e } from "./module/item/sheet.js";
 import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
-import { migrateSystem } from "./module/migration.js";
+import * as migrations from "./module/migration.js";
 
 
 /* -------------------------------------------- */
@@ -28,6 +28,11 @@ import { migrateSystem } from "./module/migration.js";
 
 Hooks.once("init", async function() {
   console.log(`D&D5e | Initializing Dungeons & Dragons 5th Edition System\n${DND5E.ASCII}`);
+
+  // Create a D&D5E namespace within the game global
+  game.dnd5e = {
+    migrations: migrations
+  };
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -50,8 +55,7 @@ Hooks.once("init", async function() {
   // Maybe apply a system migration
   const NEEDS_MIGRATION_VERSION = 0.7;
   let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
-  needMigration = true;
-  if ( needMigration && game.user.isGM ) await migrateSystem();
+  if ( needMigration && game.user.isGM ) await migrations.migrateWorld();
 });
 
 

@@ -16,10 +16,10 @@
 
             <ul class="summary">
                 <li>
-                    {{lookup config.spellLevels data.level}}
+                    {{data.level.label}}
                 </li>
                 <li>
-                    {{lookup config.spellSchools data.school}}
+                    {{data.school.label}}
                 </li>
                 <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>

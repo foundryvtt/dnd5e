@@ -1,68 +1,104 @@
 /**
- * Perform a system migration when called, applying migrations for both Actors and Items
+ * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
-export const migrateSystem = async function() {
-  console.log(`Applying D&D5E System Migration for version ${game.system.data.version}`);
+export const migrateWorld = async function() {
+  ui.notifications.info(`Applying D&D5E System Migration for version ${game.system.data.version}. Please stand by.`);
 
-  // Migrate Actors
-  await migrateActors();
+  // Migrate World Actors
+  for ( let a of game.actors.entities ) {
+    try {
+      const updateData = migrateActorData(a);
+      if ( !isObjectEmpty(updateData) ) {
+        console.log(`Migrating Actor entity ${a.name}`);
+        await a.update(updateData, {enforceTypes: false});
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  }
 
-  // Migrate Items
-  await migrateItems();
+  // Migrate World Items
+  for ( let i of game.items.entities ) {
+    try {
+      const updateData = migrateItemData(i);
+      if ( !isObjectEmpty(updateData) ) {
+        console.log(`Migrating Item entity ${i.name}`);
+        await i.update(updateData, {enforceTypes: false});
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+  // Migrate World Compendium Packs
+  const packs = game.packs.filter(p => {
+    return (p.metadata.package === "world") && ["Actor", "Item"].includes(p.metadata.entity)
+  });
+  for ( let p of packs ) {
+    await migrateCompendium(p);
+  }
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.data.version);
+  ui.notifications.info(`D&D5E System Migration to version ${game.system.data.version} succeeded!`);
 };
 
 /* -------------------------------------------- */
 
 /**
- * Migrate all Actor entities
+ * Apply migration rules to all Entities within a single Compendium pack
+ * @param pack
+ * @return {Promise}
  */
-const migrateActors = async function() {
+export const migrateCompendium = async function(pack) {
+  const entity = pack.metadata.entity;
+  if ( !["Actor", "Item"].includes(entity) ) return;
 
-  // Actor Entities
-  for ( let a of game.actors.entities ) {
-    const updateData = {};
+  // Begin by requesting server-side data model migration and get the migrated content
+  await pack.migrate();
+  const content = await pack.getContent();
 
-    // Owned Items
-    let hasItemUpdates = false;
-    const items = a.items.map(i => {
-      let itemUpdate = migrateItem(i);
-      if ( !isObjectEmpty(itemUpdate) ) hasItemUpdates = true;
-      return mergeObject(i.data, itemUpdate, {enforceTypes: false, inplace: false});
-    });
-    if ( hasItemUpdates ) updateData.items = items;
-
-    // Perform the Update
-    if ( !isObjectEmpty(updateData) ) {
-      console.log(`Migrating Actor entity ${a.name}`);
-      await a.update(updateData, {enforceTypes: false});
+  // Iterate over compendium entries - applying fine-tuned migration functions
+  for ( let ent of content ) {
+    try {
+      let updateData = null;
+      if (entity === "Item") updateData = migrateItemData(ent);
+      else if (entity === "Actor") updateData = migrateActorData(ent);
+      if (!isObjectEmpty(updateData)) {
+        updateData["_id"] = ent._id;
+        await pack.updateEntity(updateData);
+        console.log(`Migrated ${entity} entity ${ent.name} in Compendium ${pack.collection}`);
+      }
+    } catch(err) {
+      console.error(err);
     }
   }
-
-  // TODO: Actor Compendia
+  console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
 };
-
 
 /* -------------------------------------------- */
 
 /**
- * Migrate all Item entities
+ * Migrate a single Actor entity to incorporate latest data model changes
+ * Return an Object of updateData to be applied
+ * @param {Actor} actor   The actor to Update
+ * @return {Object}       The updateData to apply
  */
-const migrateItems = async function() {
+const migrateActorData = async function(actor) {
+  const updateData = {};
 
-  // Item Entities
-  for ( let i of game.items.entities ) {
-    const updateData = migrateItem(i);
-    if ( !isObjectEmpty(updateData) ) {
-      console.log(`Migrating Item entity ${i.name}`);
-      await i.update(updateData, {enforceTypes: false});
-    }
-  }
+  // TODO: Actor Data Updates
 
-  // TODO: Item Compendia
+  // Owned Item Updates
+  let hasItemUpdates = false;
+  const items = actor.items.map(i => {
+    let itemUpdate = migrateItemData(i);
+    if ( !isObjectEmpty(itemUpdate) ) hasItemUpdates = true;
+    return mergeObject(i.data, itemUpdate, {enforceTypes: false, inplace: false});
+  });
+  if ( hasItemUpdates ) updateData.items = items;
+  return updateData;
 };
 
 /* -------------------------------------------- */
@@ -71,13 +107,8 @@ const migrateItems = async function() {
  * Migrate a single Item entity to incorporate latest data model changes
  * @param item
  */
-const migrateItem = function(item) {
+export const migrateItemData = function(item) {
   const updateData = {};
-
-  // Flatten values
-  const toFlatten = ["ability", "attuned", "consumableType", "equipped", "identified", "quantity", "levels", "price",
-    "proficient", "rarity", "requirements", "stealth", "strength", "source", "subclass", "weight", "weaponType"];
-  _migrateFlattenValues(item, updateData, toFlatten);
 
   // Migrate all items
   _migrateDamage(item, updateData);
@@ -95,6 +126,7 @@ const migrateItem = function(item) {
     _migrateTarget(item, updateData);
     _migrateSpellComponents(item, updateData);
     _migrateSpellSave(item, updateData);
+    _migrateSpellPreparation(item, updateData);
   }
 
   // Migrate Equipment items
@@ -104,11 +136,21 @@ const migrateItem = function(item) {
 
   // Migrate Weapon Items
   else if ( item.data.type === "weapon" ) {
+    _migrateRange(item, updateData);
     _migrateWeaponProperties(item, updateData);
   }
 
-  // Remove deprecated fields
-  _migrateRemoveDeprecated(item, updateData);
+  // Migrate Consumable Items
+  else if ( item.data.type === "consumable" ) {
+    _migrateConsumableUsage(item, updateData);
+    _migrateDuration(item, updateData);
+  }
+
+  // Flatten values and remove deprecated fields
+  const toFlatten = ["ability", "attuned", "consumableType", "equipped", "identified", "quantity", "levels", "price",
+    "proficient", "rarity", "requirements", "stealth", "strength", "source", "subclass", "weight", "weaponType"];
+  _migrateFlattenValues(item, updateData, toFlatten);
+  _migrateRemoveDeprecated(item, updateData, toFlatten);
 
   // Return the migrated update data
   return updateData;
@@ -123,6 +165,29 @@ const migrateItem = function(item) {
 const _migrateBackpackLoot = function(item, updateData) {
   updateData["type"] = "loot";
   updateData["data.-=deprecationWarning"] = null;
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate consumable items to have
+ * @param item
+ * @param updateData
+ * @private
+ */
+const _migrateConsumableUsage = function(item, updateData) {
+  const data = item.data.data;
+  if ( data.hasOwnProperty("charges") ) {
+    updateData["data.uses.value"] = data.charges.value;
+    updateData["data.uses.max"] = data.charges.max;
+    updateData["data.uses.per"] = "charges";
+    updateData["data.uses.autoUse"] = data.autoUse ? data.autoUse.value : false;
+    updateData["data.uses.autoDestroy"] = data.autoDestroy ? data.autoDestroy.value : false;
+
+    // Set default activation mode for potions
+    updateData["data.activation"] = {type: "action", cost: 1};
+    updateData["data.target.type"] = "self";
+  }
 };
 
 /* -------------------------------------------- */
@@ -166,8 +231,9 @@ const _migrateDamage = function(item, updateData) {
  */
 const _migrateFlattenValues = function(item, updateData, toFlatten) {
   for ( let a of toFlatten ) {
-    if ( item.data.data[a] instanceof Object ) {
-      updateData["data."+a] = item.data.data[a].value;
+    const attr = item.data.data[a];
+    if ( attr instanceof Object ) {
+      updateData["data."+a] = attr.hasOwnProperty("value") ? attr.value : null;
     }
   }
 };
@@ -218,14 +284,20 @@ const _migrateDuration = function(item, updateData) {
 const _migrateRange = function(item, updateData) {
   const range = item.data.data.range;
   if ( range.value && !range.units ) {
-    let match = range.value.match(/([\d]+\s)?([\w\s]+)/);
+    let match = range.value.match(/([\d\/]+)?(?:[\s]+)?([\w\s]+)?/);
     if ( !match ) return;
     let units = "none";
     if ( /ft/i.test(match[2]) ) units = "ft";
     else if ( /mi/i.test(match[2]) ) units = "mi";
     else if ( /touch/i.test(match[2]) ) units = "touch";
-    let value = Number(match[1]) || null;
-    updateData["data.range"] = {units, value};
+    updateData["data.range.units"] = units;
+
+    // Range value
+    if ( match[1] ) {
+      let value = match[1].split("/").map(Number);
+      updateData["data.range.value"] = value[0];
+      if ( value[1] ) updateData["data.range.long"] = value[1];
+    }
   }
 };
 
@@ -236,8 +308,9 @@ const _migrateRange = function(item, updateData) {
  * A general migration to remove all fields from the data model which are flagged with a _deprecated tag
  * @private
  */
-const _migrateRemoveDeprecated = function(item, updateData) {
+const _migrateRemoveDeprecated = function(item, updateData, toFlatten) {
   for ( let [k, v] of Object.entries(item.data.data) ) {
+    if ( toFlatten.includes(k) ) continue;
     if ( getType(v) !== "Object" ) continue;
 
     // Deprecate the entire object
@@ -248,8 +321,12 @@ const _migrateRemoveDeprecated = function(item, updateData) {
 
     // Remove type and label
     const dtypes = ["Number", "String", "Boolean", "Array", "Object"];
-    if ( dtypes.includes(v.type) ) updateData[`data.${k}.-=type`] = null;
-    if ( v.label ) updateData[`data.${k}.-=label`] = null;
+    if ( dtypes.includes(v.type) && !updateData.hasOwnProperty(`data.${k}.type`) ) {
+      updateData[`data.${k}.-=type`] = null;
+    }
+    if ( v.label && !updateData.hasOwnProperty(`data.${k}.label`) ) {
+      updateData[`data.${k}.-=label`] = null;
+    }
   }
 };
 
@@ -261,7 +338,7 @@ const _migrateRemoveDeprecated = function(item, updateData) {
  */
 const _migrateTarget = function(item, updateData) {
   const target = item.data.data.target;
-  if ( target.value && !(target.units || target.type) ) {
+  if ( target.value && !Number.isNumeric(target.value) ) {
 
     // Target Type
     let type = null;
@@ -279,10 +356,11 @@ const _migrateTarget = function(item, updateData) {
     else if ( /mi/i.test(target.value) ) units = "mi";
     else if ( /touch/i.test(target.value) ) units = "touch";
 
-    // Target Distance
+    // Target Value
     let value = null;
     let match = target.value.match(/([\d]+)([\w\s]+)?/);
     if ( match ) value = Number(match[1]);
+    else if ( /one/i.test(target.value) ) value = 1;
     updateData["data.target"] = {type, units, value};
   }
 };
@@ -328,15 +406,34 @@ const _migrateSpellSave = function(item, updateData) {
 /* -------------------------------------------- */
 
 /**
+ * Migrate spell preparation data to the new preparation object
+ * @private
+ */
+const _migrateSpellPreparation = function(item, updateData) {
+  const prep = item.data.data.preparation;
+  if ( !prep.mode ) {
+    updateData["data.preparation.mode"] = "prepared";
+    updateData["data.preparation.prepared"] = item.data.data.prepared ? Boolean(item.data.data.prepared.value) : false;
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Migrate from a string based weapon properties like "Heavy, Two-Handed" to an object of boolean flags
  * @private
  */
 const _migrateWeaponProperties = function(item, updateData) {
   const props = item.data.data.properties;
   if ( !props.value ) return;
+
+  // Map weapon property strings to boolean flags
   const labels = Object.fromEntries(Object.entries(CONFIG.DND5E.weaponProperties).map(e => e.reverse()));
   for ( let k of props.value.split(",").map(p => p.trim()) ) {
     if ( labels[k] ) updateData[`data.properties.${labels[k]}`] = true;
   }
   updateData["data.properties.-=value"] = null;
+
+  // Set default activation mode for weapons
+  updateData["data.activation"] = {type: "action", cost: 1};
 };
