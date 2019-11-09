@@ -62,18 +62,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     other = this._filterItems(other, this._filters.features);
 
     // Organize Spellbook
-    const spellbook = spells.reduce((spellbook, spell) => {
-      let lvl = spell.data.level.value || 0;
-      spellbook[lvl] = spellbook[lvl] || {
-        isCantrip: lvl === 0,
-        label: CONFIG.DND5E.spellLevels[lvl],
-        spells: [],
-        uses: data.data.spells["spell"+lvl].value || 0,
-        slots: data.data.spells["spell"+lvl].max || 0
-      };
-      spellbook[lvl].spells.push(spell);
-      return spellbook;
-    }, {});
+    const spellbook = this._prepareSpellbook(data, spells);
 
     // Organize Features
     for ( let item of other ) {

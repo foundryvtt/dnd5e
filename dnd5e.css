@@ -384,11 +384,13 @@
   text-align: center;
 }
 .dnd5e.sheet.actor .sheet-header .charlevel .level.noxp {
-  flex: 0 0 44px;
+  margin-top: 10px;
+}
+.dnd5e.sheet.actor .sheet-header .charlevel .level.noxp > label {
   font-size: 32px;
-  line-height: 44px;
 }
 .dnd5e.sheet.actor .sheet-header .charlevel .level.noxp > input {
+  font-size: 32px;
   flex: 0 0 40px;
   height: 44px;
 }
@@ -709,7 +711,7 @@
   font-weight: bold;
 }
 .dnd5e.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
-  width: 100%;
+  flex: 0 0 100%;
 }
 .dnd5e.sheet.actor .inventory-list .item-list {
   list-style: none;
@@ -718,11 +720,29 @@
 }
 .dnd5e.sheet.actor .inventory-list .item-controls {
   flex: 0 0 44px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  justify-content: flex-end;
+}
+.dnd5e.sheet.actor .inventory-list .item-controls > * {
+  flex: 1;
+}
+.dnd5e.sheet.actor .inventory-list .item-controls .flex1 {
+  flex: 1;
+}
+.dnd5e.sheet.actor .inventory-list .item-controls .flex2 {
+  flex: 2;
+}
+.dnd5e.sheet.actor .inventory-list .item-controls .flex3 {
+  flex: 3;
+}
+.dnd5e.sheet.actor .inventory-list .item-controls .flex4 {
+  flex: 4;
 }
 .dnd5e.sheet.actor .inventory-list .item-controls a {
-  display: block;
-  float: left;
-  width: 22px;
+  flex: 0 0 22px;
   font-size: 10px;
   text-align: center;
   color: #666;
@@ -739,9 +759,9 @@
 }
 .dnd5e.sheet.actor .spell-slots,
 .dnd5e.sheet.actor .spell-comps {
-  flex: 0 0 80px;
+  flex: 0 0 60px;
   font-size: 12px;
-  text-align: right;
+  text-align: center;
   color: #7a7971;
   border-right: 1px solid #c9c7b8;
 }
@@ -751,8 +771,9 @@
   max-width: 20px;
   text-align: center;
 }
-.dnd5e.sheet.actor .spell-comps {
+.dnd5e.sheet.actor .spell-uses {
   padding-right: 8px;
+  text-align: right !important;
 }
 .dnd5e.sheet.actor .spell-school,
 .dnd5e.sheet.actor .spell-action {
@@ -1000,6 +1021,9 @@
   /* ----------------------------------------- */
   /*  Sheet Body                               */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Spellbook                                */
+  /* ----------------------------------------- */
 }
 .dnd5e.sheet.actor.character .sheet-header img.profile {
   flex: 0 0 180px;
@@ -1091,6 +1115,15 @@
 }
 .dnd5e.sheet.actor.character .counters .death-saves .counter-value {
   flex: 0 0 120px;
+}
+.dnd5e.sheet.actor.character .spellbook .item-controls {
+  flex: 0 0 68px;
+}
+.dnd5e.sheet.actor.character .spellbook .item-controls .toggle-prepared {
+  color: #b5b3a4;
+}
+.dnd5e.sheet.actor.character .spellbook .item-controls .toggle-prepared.prepared {
+  color: #4b4a44;
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */

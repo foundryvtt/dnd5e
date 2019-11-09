@@ -34,10 +34,12 @@
 
         // If the Experience Bar is disabled
         &.noxp {
-          flex: 0 0 44px;
-          font-size: 32px;
-          line-height: 44px;
+          margin-top: 10px;
+          > label {
+            font-size: 32px;
+          }
           > input {
+            font-size: 32px;
             flex: 0 0 40px;
             height: 44px;
           }
@@ -455,7 +457,7 @@
       }
 
       .item-controls a.item-create {
-        width: 100%;
+        flex: 0 0 100%;
       }
     }
 
@@ -468,11 +470,11 @@
     // Item Control Buttons
     .item-controls {
       flex: 0 0 44px;
+      .flexrow();
+      justify-content: flex-end;
 
       a {
-        display: block;
-        float: left;
-        width: 22px;
+        flex: 0 0 22px;
         font-size: 10px;
         text-align: center;
         color: #666;
@@ -501,9 +503,9 @@
 
   .spell-slots,
   .spell-comps {
-    flex: 0 0 80px;
+    flex: 0 0 60px;
     font-size: 12px;
-    text-align: right;
+    text-align: center;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
   }
@@ -516,8 +518,9 @@
     }
   }
 
-  .spell-comps {
+  .spell-uses {
     padding-right: 8px;
+    text-align: right !important;
   }
 
   .spell-school, .spell-action {

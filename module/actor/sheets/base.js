@@ -109,23 +109,58 @@ export class ActorSheet5e extends ActorSheet {
 
   /**
    * Insert a spell into the spellbook object when rendering the character sheet
-   * @param {Object} actorData    The Actor data being prepared
-   * @param {Object} spellbook    The spellbook data being prepared
-   * @param {Object} spell        The spell data being prepared
+   * @param {Object} data     The Actor data being prepared
+   * @param {Array} spells    The spell data being prepared
    * @private
    */
-  _prepareSpell(actorData, spellbook, spell) {
+  _prepareSpellbook(data, spells) {
+    const owner = this.actor.owner;
 
-    // Extend the Spellbook level
-    let lvl = spell.data.level.value || 0;
-    spellbook[lvl] = spellbook[lvl] || {
-      isCantrip: lvl === 0,
-      label: CONFIG.DND5E.spellLevels[lvl],
-      spells: [],
-      uses: actorData.data.spells["spell"+lvl].value || 0,
-      slots: actorData.data.spells["spell"+lvl].max || 0
+    // Define some mappings
+    const levels = {
+      "always": -30,
+      "innate": -20,
+      "pact": -10
     };
-    spellbook[lvl].spells.push(spell);
+
+    // Label spell slot uses headers
+    const useLabels = {
+      "-30": "-",
+      "-20": "-",
+      "-10": "-",
+      "0": "&infin;"
+    };
+
+    // Reduce spells to the nested spellbook structure
+    let spellbook = spells.reduce((sb, spell) => {
+
+      // Define the numeric spell level for sorting
+      const mode = spell.data.preparation.mode || "prepared";
+      const lvl = levels[mode] || spell.data.level.value || 0;
+
+      // Prepare a new Spellbook level
+      if ( !sb[lvl] ) {
+        sb[lvl] = {
+          level: lvl,
+          usesSlots: lvl > 0,
+          canCreate: owner && (lvl >= 0),
+          canPrepare: (data.actor.type === "character") && (lvl > 0),
+          label: lvl >= 0 ? CONFIG.DND5E.spellLevels[lvl] : CONFIG.DND5E.spellPreparationModes[mode],
+          spells: [],
+          uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
+          slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0
+        };
+      }
+
+      // Add the spell to the section
+      sb[lvl].spells.push(spell);
+      return sb;
+    }, {});
+
+    // Sort the spellbook by section order
+    spellbook = Object.values(spellbook);
+    spellbook.sort((a, b) => a.level - b.level);
+    return spellbook;
   }
 
   /* -------------------------------------------- */
@@ -154,7 +189,8 @@ export class ActorSheet5e extends ActorSheet {
         if (data.components.concentration !== true) return false;
       }
       if ( filters.has("prepared") ) {
-        if (!(data.preparation.prepared || (data.level.value === 0))) return false;
+        if ( data.level.value === 0 || ["pact", "innate"].includes(data.preparation.mode) ) return true;
+        return data.preparation.prepared;
       }
 
       // Equipment-specific filters

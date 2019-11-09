@@ -26,9 +26,10 @@ export class Item5e extends Item {
 
     // Feat Items
     else if ( item.type === "feat" ) {
-      if ( item.data.activation.type === C.abilityActivationTypes.legendary ) item.data.featType = "Legendary Action";
-      else if ( item.data.activation.type === C.abilityActivationTypes.lair ) item.data.featType = "Lair Action";
-      else if ( item.data.activation.type ) {
+      const act = item.data.activation;
+      if ( act && (act.type === C.abilityActivationTypes.legendary) ) item.data.featType = "Legendary Action";
+      else if ( act && (act.type === C.abilityActivationTypes.lair) ) item.data.featType = "Lair Action";
+      else if ( act && act.type ) {
         item.data.featType = item.data.damage.length ? "Attack" : "Action";
       }
       else item.data.featType = "Passive";

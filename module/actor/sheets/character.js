@@ -66,69 +66,60 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Organize and classify Items for Character sheets
+   * Organize and classify Owned Items for Character sheets
    * @private
    */
-  _prepareItems(sheetData) {
-    return sheetData.items; // TODO
-    const actorData = sheetData.actor;
+  _prepareItems(data) {
 
-    // Inventory
+    // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
-      weapon: { label: "Weapons", items: [] },
-      equipment: { label: "Equipment", items: [] },
-      consumable: { label: "Consumables", items: [] },
-      tool: { label: "Tools", items: [] },
-      loot: { label: "Loot", items: [] },
+      weapon: { label: "Weapons", items: [], type: "weapon" },
+      equipment: { label: "Equipment", items: [], type: "equipment" },
+      consumable: { label: "Consumables", items: [], type: "consumable" },
+      tool: { label: "Tools", items: [], type: "tool" },
+      loot: { label: "Loot", items: [], type: "loot" },
     };
 
-    // Spellbook
-    const spellbook = {};
-
-    // Feats
-    const feats = [];
-
-    // Classes
-    const classes = [];
-
-    // Iterate through items, allocating to containers
+    // Track cumulative encumbrance
     let totalWeight = 0;
-    for ( let i of sheetData.items ) {
-      i.img = i.img || DEFAULT_TOKEN;
 
-      // Inventory
-      if ( Object.keys(inventory).includes(i.type) ) {
-        i.data.quantity.value = i.data.quantity.value || 0;
-        i.data.weight.value = i.data.weight.value || 0;
-        i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
-        i.hasCharges = (i.type === "consumable") && i.data.charges.max > 0;
-        inventory[i.type].items.push(i);
-        totalWeight += i.totalWeight;
-      }
+    // Partition items by category
+    let [inventoryItems, spells, features, classes] = data.items.reduce((arr, item) => {
+      item.img = item.img || DEFAULT_TOKEN;
+      item.isStack = item.data.quantity ? item.data.quantity.value > 1 : false;
+      if ( item.type === "spell" ) arr[1].push(item);
+      else if ( item.type === "feature" ) arr[2].push(item);
+      else if ( item.type === "class" ) arr[3].push(item);
+      else if ( Object.keys(inventory).includes(item.type ) ) arr[0].push(item);
+      return arr;
+    }, [[], [], [], []]);
 
-      // Spells
-      else if ( i.type === "spell" ) this._prepareSpell(actorData, spellbook, i);
+    // Apply active item filters
+    inventoryItems = this._filterItems(inventoryItems, this._filters.inventory);
+    spells = this._filterItems(spells, this._filters.spellbook);
+    features = this._filterItems(features, this._filters.features);
 
-      // Classes
-      else if ( i.type === "class" ) {
-        classes.push(i);
-      }
+    // Organize Spellbook
+    const spellbook = this._prepareSpellbook(data, spells);
 
-      // Feats
-      else if ( i.type === "feat" ) feats.push(i);
+    // Organize Inventory
+    for ( let i of inventoryItems ) {
+      i.data.quantity.value = i.data.quantity.value || 0;
+      i.data.weight.value = i.data.weight.value || 0;
+      i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
+      inventory[i.type].items.push(i);
+      totalWeight += i.totalWeight;
     }
+    data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+
+    // Organize Classes (by level)
+    classes.sort((a, b) => b.levels - a.levels);
 
     // Assign and return
-    actorData.inventory = inventory;
-    actorData.spellbook = spellbook;
-    actorData.feats = feats;
-
-    // Class levels
-    classes.sort((a, b) => b.levels - a.levels);
-    actorData.classes = classes;
-
-    // Inventory encumbrance
-    actorData.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, actorData);
+    data.inventory = inventory;
+    data.spellbook = spellbook;
+    data.feats = features;
+    data.classes = classes;
   }
 
   /* -------------------------------------------- */
@@ -189,7 +180,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     if ( !this.options.editable ) return;
 
     // Spell Preparation
-    html.find('.item-prepare').click(this._onPrepareItem.bind(this));
+    html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
 
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
@@ -207,7 +198,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.getOwnedItem(itemId);
-    return item.update({"data.prepared.value": !item.data.data.prepared.value});
+    return item.update({"data.preparation.prepared": !item.data.data.preparation.prepared});
   }
 
   /* -------------------------------------------- */

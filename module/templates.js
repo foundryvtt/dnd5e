@@ -10,6 +10,7 @@ export const preloadHandlebarsTemplates = async function() {
 
     // Actor Sheet Partials
     "public/systems/dnd5e/templates/actors/parts/actor-traits.html",
+    "public/systems/dnd5e/templates/actors/parts/actor-spellbook.html",
 
     // Actor Partials - OLD
     "public/systems/dnd5e/templates/actors/actor-attributes.html",
