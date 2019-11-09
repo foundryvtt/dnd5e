@@ -46,8 +46,9 @@
 
         <div class="item-controls">
             {{#if section.canCreate}}
-            <a class="item-control item-create" title="Create Spell" data-type="spell"
-               data-level="{{section.level}}"><i class="fas fa-plus"></i> Add</a>
+            <a class="item-control item-create" title="Create Spell" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> Add
+            </a>
             {{/if}}
         </div>
     </li>
@@ -70,7 +71,6 @@
             {{#if ../../owner}}
             <div class="item-controls">
                 {{#if section.canPrepare}}
-                {{log item.data.preparation}}
                 <a class="item-control toggle-prepared {{#if item.data.preparation.prepared}}prepared{{/if}}" title="Toggle Prepared"><i class="fas fa-sun"></i></a>
                 {{/if}}
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

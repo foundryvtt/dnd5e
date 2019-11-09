@@ -160,59 +160,7 @@
 
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            <div class="inventory-filters">
-                <ul class="filter-list flexrow" data-filter="features">
-                    <li class="filter-title">Filter</li>
-                    <li class="filter-item" data-filter="action">Action</li>
-                    <li class="filter-item" data-filter="bonus">Bonus</li>
-                    <li class="filter-item" data-filter="reaction">Reaction</li>
-                    <li class="filter-item" data-filter="equipped">Equipped</li>
-                </ul>
-            </div>
-
-            <ol class="inventory-list">
-            {{#each features as |section sid|}}
-                <li class="inventory-header flexrow">
-                    <h3 class="item-name flexrow">{{section.label}}</h3>
-                    {{#if ../owner}}
-                    <div class="item-controls">
-                        <a class="item-control item-create" title="Create Item" data-type="{{section.type}}" data-subtype="{{section.subtype}}">
-                            <i class="fas fa-plus"></i> Add
-                        </a>
-                    </div>
-                    {{/if}}
-                </li>
-
-                <ol class="item-list">
-                {{#each section.items as |item iid|}}
-                    <li class="item flexrow" data-item-id="{{item.id}}">
-                        <div class="item-name flexrow rollable">
-                            <div class="item-image" style="background-image: url({{item.img}})"></div>
-                            <h4>
-                                {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
-                                {{item.name~}}
-                            </h4>
-                        </div>
-
-                        {{#if item.data.activation.type }}
-                        <div class="item-detail">{{item.data.activation.label}}</div>
-                        {{/if}}
-
-                        {{#if item.data.uses.value }}
-                        <div class="item-detail">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
-                        {{/if}}
-
-                        {{#if ../../owner}}
-                        <div class="item-controls">
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                        </div>
-                        {{/if}}
-                    </li>
-                {{/each}}
-                </ol>
-            {{/each}}
-            </ol>
+            {{> "public/systems/dnd5e/templates/actors/parts/actor-inventory.html" sections=features}}
         </div>
 
         {{!-- Spellbook Tab --}}

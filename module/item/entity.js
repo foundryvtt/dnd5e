@@ -411,6 +411,7 @@ export class Item5e extends Item {
 
   /**
    * Use a consumable item
+   * TODO THIS NEEDS REFACTOR
    */
   rollConsumable(ev) {
     let itemData = this.data.data;

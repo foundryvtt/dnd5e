@@ -73,11 +73,11 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
-      weapon: { label: "Weapons", items: [], type: "weapon" },
-      equipment: { label: "Equipment", items: [], type: "equipment" },
-      consumable: { label: "Consumables", items: [], type: "consumable" },
-      tool: { label: "Tools", items: [], type: "tool" },
-      loot: { label: "Loot", items: [], type: "loot" },
+      weapon: { label: "Weapons", items: [], dataset: {type: "weapon"} },
+      equipment: { label: "Equipment", items: [], dataset: {type: "equipment"} },
+      consumable: { label: "Consumables", items: [], dataset: {type: "consumable"} },
+      tool: { label: "Tools", items: [], dataset: {type: "tool"} },
+      loot: { label: "Loot", items: [], dataset: {type: "loot"} },
     };
 
     // Track cumulative encumbrance
@@ -86,7 +86,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Partition items by category
     let [inventoryItems, spells, features, classes] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
-      item.isStack = item.data.quantity ? item.data.quantity.value > 1 : false;
+      item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
       if ( item.type === "spell" ) arr[1].push(item);
       else if ( item.type === "feature" ) arr[2].push(item);
       else if ( item.type === "class" ) arr[3].push(item);
@@ -104,9 +104,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Inventory
     for ( let i of inventoryItems ) {
-      i.data.quantity.value = i.data.quantity.value || 0;
-      i.data.weight.value = i.data.weight.value || 0;
-      i.totalWeight = Math.round(i.data.quantity.value * i.data.weight.value * 10) / 10;
+      i.data.quantity = i.data.quantity || 0;
+      i.data.weight = i.data.weight || 0;
+      i.totalWeight = Math.round(i.data.quantity * i.data.weight * 10) / 10;
       inventory[i.type].items.push(i);
       totalWeight += i.totalWeight;
     }
@@ -116,7 +116,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     classes.sort((a, b) => b.levels - a.levels);
 
     // Assign and return
-    data.inventory = inventory;
+    data.inventory = Object.values(inventory);
     data.spellbook = spellbook;
     data.feats = features;
     data.classes = classes;
@@ -179,6 +179,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.options.editable ) return;
 
+    // Inventory Functions
+    html.find(".currency-convert").click(this._onConvertCurrency.bind(this));
+
     // Spell Preparation
     html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
 
@@ -225,5 +228,25 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
+  }
+
+  /* -------------------------------------------- */
+
+  async _onConvertCurrency(event) {
+    event.preventDefault();
+    const curr = duplicate(this.actor.data.data.currency);
+    console.log(curr);
+    const convert = {
+      cp: {into: "sp", each: 10},
+      sp: {into: "ep", each: 5 },
+      ep: {into: "gp", each: 2 },
+      gp: {into: "pp", each: 10}
+    };
+    for ( let [c, t] of Object.entries(convert) ) {
+      let change = Math.floor(curr[c].value / t.each);
+      curr[c].value -= (change * t.each);
+      curr[t.into].value += change;
+    }
+    return this.actor.update({"data.currency": curr});
   }
 }

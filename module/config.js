@@ -367,15 +367,6 @@ DND5E.spellLevels = {
   9: "9th Level"
 };
 
-// Feat Types
-DND5E.featTypes = {
-  "passive": "Passive Ability",
-  "attack": "Ability Attack",
-  "ability": "Generic Action",
-  "legendary": "Legendary Action",
-  "lair": "Lair Action"
-};
-
 /* -------------------------------------------- */
 
 /**

@@ -23,8 +23,8 @@ export class ItemSheet5e extends ItemSheet {
 
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      width: 520,
-      height: 400,
+      width: 560,
+      height: 420,
       detailHeight: 720,
       classes: ["dnd5e", "sheet", "item"],
       resizable: false

@@ -379,6 +379,27 @@
     &.spellbook-filters {
       flex: 0 0 40px;
     }
+
+    .currency {
+      list-style: none;
+      margin: 4px 0 8px;
+      padding: 0;
+      font-size: 12px;
+
+      label {
+        flex: 0;
+        margin-left: 8px;
+        text-align: right;
+        line-height: 20px;
+        color: @colorTan;
+      }
+      input[type="text"] {
+        flex: 0 0 48px;
+        text-align: center;
+        margin-left: 8px;
+        border-bottom: @borderGroove;
+      }
+    }
   }
 
   .inventory-list {
@@ -398,15 +419,14 @@
       .item-name {
         cursor: pointer;
 
-        h4 {
-          flex: 2;
-          margin: 0;
+        .item-image {
+          flex: 0 0 30px;
+          background-size: 30px;
+          margin-right: 5px;
         }
 
-        .item-charges {
-          color: #666;
-          font-size: 12px;
-          flex: 0;
+        h4 {
+          margin: 0;
         }
 
         &:hover .item-image {
@@ -416,21 +436,6 @@
         .item-image:hover {
           background-image: url("/icons/svg/d20-black.svg") !important;
         }
-      }
-
-      // Item Image
-      .item-image {
-        flex: 0 0 30px;
-        background-size: 30px;
-        margin-right: 5px;
-      }
-
-      .item-detail {
-        flex: 0 0 100px;
-        font-size: 12px;
-        color: @colorTan;
-        text-align: center;
-        border-right: 1px solid @colorFaint;
       }
 
       // Item Dropdown Properties
@@ -449,8 +454,7 @@
       line-height: 24px;
 
       h3 {
-        flex: 2;
-        margin: 0;
+        margin: 0 -5px 0 0;
         padding-left: 5px;
         font-size: 13px;
         font-weight: bold;
@@ -459,6 +463,22 @@
       .item-controls a.item-create {
         flex: 0 0 100%;
       }
+    }
+
+    // Item Detail Sections
+    .item-detail {
+      flex: 0 0 80px;
+      font-size: 12px;
+      color: @colorTan;
+      text-align: center;
+      border-right: 1px solid @colorFaint;
+      &:last-child { border-right: none; }
+    }
+
+    .item-weight {
+      flex: 0 0 60px;
+      border-left: 1px solid @colorFaint;
+      border-right: 1px solid @colorFaint;
     }
 
     .item-list {
@@ -535,15 +555,10 @@
   .spellbook-empty .item-controls { flex: 1; }
 
   /* ----------------------------------------- */
-  /*  Biography                                */
+  /*  TinyMCE                                  */
   /* ----------------------------------------- */
 
-  .biography .editor {
-    padding: 0 5px;
-
-    .tox-toolbar-overlord,
-    .tox-toolbar__primary {
-      background: none;
-    }
+  .editor {
+    padding: 0 8px;
   }
 }

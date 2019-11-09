@@ -42,16 +42,16 @@ export class ActorSheet5eNPC extends ActorSheet5e {
 
     // Categorize Items as Features and Spells
     const features = {
-      weapons: {label: "Attacks", items: [], type: "weapon", subtype: "" },
-      actions: { label: "Actions", items: [], type: "feat", subtype: "ability" },
-      passive: { label: "Features", items: [], type: "feat", subtype: "passive" },
-      equipment: { label: "Inventory", items: [], type: "loot", subtype: "" }
+      weapons: { label: "Attacks", items: [] , dataset: {type: "weapon", "weapon-type": "natural"} },
+      actions: { label: "Actions", items: [] , dataset: {type: "feat", "activation.cost": "action"} },
+      passive: { label: "Features", items: [], dataset: {type: "feat"} },
+      equipment: { label: "Inventory", items: [], dataset: {type: "loot"}}
     };
 
     // Start by classifying items into groups for rendering
     let [spells, other] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
-      item.isStack = item.data.quantity ? item.data.quantity.value > 1 : false;
+      item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
@@ -77,7 +77,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     }
 
     // Assign and return
-    data.features = features;
+    data.features = Object.values(features);
     data.spellbook = spellbook;
   }
 

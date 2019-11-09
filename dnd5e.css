@@ -182,6 +182,9 @@
   /*  Element Styles                           */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -223,6 +226,13 @@
   font-size: 12px;
   height: 22px;
   background: transparent;
+}
+.dnd5e.sheet .editor {
+  height: 100%;
+}
+.dnd5e.sheet .editor .tox-toolbar-overlord,
+.dnd5e.sheet .editor .tox-toolbar__primary {
+  background: none;
 }
 .dnd5e.sheet .sheet-header {
   flex: 0 0 100px;
@@ -356,7 +366,7 @@
   /*  Spellbook                                */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
-  /*  Biography                                */
+  /*  TinyMCE                                  */
   /* ----------------------------------------- */
 }
 .dnd5e.sheet.actor .sheet-header .charlevel {
@@ -648,6 +658,25 @@
 .dnd5e.sheet.actor .inventory-filters.spellbook-filters {
   flex: 0 0 40px;
 }
+.dnd5e.sheet.actor .inventory-filters .currency {
+  list-style: none;
+  margin: 4px 0 8px;
+  padding: 0;
+  font-size: 12px;
+}
+.dnd5e.sheet.actor .inventory-filters .currency label {
+  flex: 0;
+  margin-left: 8px;
+  text-align: right;
+  line-height: 20px;
+  color: #7a7971;
+}
+.dnd5e.sheet.actor .inventory-filters .currency input[type="text"] {
+  flex: 0 0 48px;
+  text-align: center;
+  margin-left: 8px;
+  border-bottom: 2px groove #eeede0;
+}
 .dnd5e.sheet.actor .inventory-list {
   list-style: none;
   margin: 0;
@@ -665,32 +694,19 @@
 .dnd5e.sheet.actor .inventory-list .item .item-name {
   cursor: pointer;
 }
-.dnd5e.sheet.actor .inventory-list .item .item-name h4 {
-  flex: 2;
-  margin: 0;
+.dnd5e.sheet.actor .inventory-list .item .item-name .item-image {
+  flex: 0 0 30px;
+  background-size: 30px;
+  margin-right: 5px;
 }
-.dnd5e.sheet.actor .inventory-list .item .item-name .item-charges {
-  color: #666;
-  font-size: 12px;
-  flex: 0;
+.dnd5e.sheet.actor .inventory-list .item .item-name h4 {
+  margin: 0;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name:hover .item-image {
   background-image: url("/icons/svg/d20-grey.svg") !important;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name .item-image:hover {
   background-image: url("/icons/svg/d20-black.svg") !important;
-}
-.dnd5e.sheet.actor .inventory-list .item .item-image {
-  flex: 0 0 30px;
-  background-size: 30px;
-  margin-right: 5px;
-}
-.dnd5e.sheet.actor .inventory-list .item .item-detail {
-  flex: 0 0 100px;
-  font-size: 12px;
-  color: #7a7971;
-  text-align: center;
-  border-right: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-properties {
   margin-top: 3px;
@@ -704,14 +720,28 @@
   line-height: 24px;
 }
 .dnd5e.sheet.actor .inventory-list .inventory-header h3 {
-  flex: 2;
-  margin: 0;
+  margin: 0 -5px 0 0;
   padding-left: 5px;
   font-size: 13px;
   font-weight: bold;
 }
 .dnd5e.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
   flex: 0 0 100%;
+}
+.dnd5e.sheet.actor .inventory-list .item-detail {
+  flex: 0 0 80px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+.dnd5e.sheet.actor .inventory-list .item-detail:last-child {
+  border-right: none;
+}
+.dnd5e.sheet.actor .inventory-list .item-weight {
+  flex: 0 0 60px;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.actor .inventory-list .item-list {
   list-style: none;
@@ -786,12 +816,8 @@
 .dnd5e.sheet.actor .spellbook-empty .item-controls {
   flex: 1;
 }
-.dnd5e.sheet.actor .biography .editor {
-  padding: 0 5px;
-}
-.dnd5e.sheet.actor .biography .editor .tox-toolbar-overlord,
-.dnd5e.sheet.actor .biography .editor .tox-toolbar__primary {
-  background: none;
+.dnd5e.sheet.actor .editor {
+  padding: 0 8px;
 }
 .dnd5e.sheet.item {
   /* ----------------------------------------- */
@@ -1022,6 +1048,10 @@
   /*  Sheet Body                               */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Inventory                                */
+  /* ----------------------------------------- */
+  /* Encumbrance Bar */
+  /* ----------------------------------------- */
   /*  Spellbook                                */
   /* ----------------------------------------- */
 }
@@ -1115,6 +1145,61 @@
 }
 .dnd5e.sheet.actor.character .counters .death-saves .counter-value {
   flex: 0 0 120px;
+}
+.dnd5e.sheet.actor.character .encumbrance {
+  flex: 0 0 12px;
+  background: #7a7971;
+  margin: 1px 20px 5px 5px;
+  border: 1px solid #191813;
+  border-radius: 3px;
+  position: relative;
+}
+.dnd5e.sheet.actor.character .encumbrance .encumbrance-bar {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: #6c8aa5;
+  height: 8px;
+  border: 1px solid #cde4ff;
+  border-radius: 2px;
+}
+.dnd5e.sheet.actor.character .encumbrance .encumbrance-label {
+  height: 10px;
+  padding: 0 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  line-height: 12px;
+  text-align: right;
+  color: #EEE;
+  text-shadow: 0 0 5px #000;
+}
+.dnd5e.sheet.actor.character .encumbrance .encumbrance-breakpoint {
+  position: absolute;
+  left: 66%;
+}
+.dnd5e.sheet.actor.character .encumbrance .arrow-up {
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #666;
+}
+.dnd5e.sheet.actor.character .encumbrance .arrow-down {
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #666;
+}
+.dnd5e.sheet.actor.character .encumbrance.encumbered .arrow-up {
+  border-bottom: 4px solid #000;
+}
+.dnd5e.sheet.actor.character .encumbrance.encumbered .arrow-down {
+  border-top: 4px solid #000;
 }
 .dnd5e.sheet.actor.character .spellbook .item-controls {
   flex: 0 0 68px;

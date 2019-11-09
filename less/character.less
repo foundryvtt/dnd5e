@@ -140,6 +140,71 @@
   }
 
   /* ----------------------------------------- */
+  /*  Inventory                                */
+  /* ----------------------------------------- */
+
+  /* Encumbrance Bar */
+  .encumbrance {
+    flex: 0 0 12px;
+    background: @colorTan;
+    margin: 1px 20px 5px 5px;
+    border: 1px solid @colorDark;
+    border-radius: 3px;
+    position: relative;
+
+    .encumbrance-bar {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      background: #6c8aa5;
+      height: 8px;
+      border: 1px solid #cde4ff;
+      border-radius: 2px;
+    }
+
+    .encumbrance-label {
+      height: 10px;
+      padding: 0 5px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 13px;
+      line-height: 12px;
+      text-align: right;
+      color: #EEE;
+      text-shadow: 0 0 5px #000;
+    }
+
+    .encumbrance-breakpoint {
+      position: absolute;
+      left: 66%;
+    }
+
+    .arrow-up {
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 4px solid #666;
+    }
+
+    .arrow-down {
+      top: 0;
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid #666;
+    }
+
+    &.encumbered {
+      .arrow-up { border-bottom: 4px solid #000; }
+      .arrow-down { border-top: 4px solid #000; }
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Spellbook                                */
   /* ----------------------------------------- */
 
@@ -155,4 +220,5 @@
       }
     }
   }
+
 }

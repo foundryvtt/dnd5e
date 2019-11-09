@@ -16,10 +16,10 @@
 
             <ul class="summary">
                 <li>
-                    {{lookup config.spellLevels data.level.value}}
+                    {{lookup config.spellLevels data.level}}
                 </li>
                 <li>
-                    {{lookup config.spellSchools data.school.value}}
+                    {{lookup config.spellSchools data.school}}
                 </li>
                 <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
@@ -47,7 +47,7 @@
             {{!-- Spell Level --}}
             <div class="form-group">
                 <label>Spell Level</label>
-                <select name="data.level.value" data-dtype="{{data.level.type}}">
+                <select name="data.level.value">
                     {{#select data.level.value}}
                     {{#each config.spellLevels as |name lvl|}}
                     <option value="{{lvl}}">{{name}}</option>
@@ -59,7 +59,7 @@
             {{!-- Spell School --}}
             <div class="form-group">
                 <label>Spell School</label>
-                <select name="data.school.value" data-dtype="{{data.school.type}}">
+                <select name="data.school.value">
                     {{#select data.school.value}}
                     {{#each config.spellSchools as |name sch|}}
                     <option value="{{sch}}">{{name}}</option>
@@ -81,10 +81,10 @@
                     <input type="checkbox" name="data.components.material" {{checked data.components.material}}/> Material
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.concentration.value" {{checked data.concentration.value}}/> Concentration
+                    <input type="checkbox" name="data.components.concentration" {{checked data.components.concentration}}/> Concentration
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.ritual.value" {{checked data.ritual.value}}/> Ritual
+                    <input type="checkbox" name="data.components.ritual" {{checked data.components.ritual}}/> Ritual
                 </label>
             </div>
 

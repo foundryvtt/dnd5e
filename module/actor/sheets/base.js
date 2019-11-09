@@ -148,7 +148,8 @@ export class ActorSheet5e extends ActorSheet {
           label: lvl >= 0 ? CONFIG.DND5E.spellLevels[lvl] : CONFIG.DND5E.spellPreparationModes[mode],
           spells: [],
           uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
-          slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0
+          slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,
+          dataset: {"type": "spell", "level.value": lvl}
         };
       }
 
@@ -190,6 +191,7 @@ export class ActorSheet5e extends ActorSheet {
       }
       if ( filters.has("prepared") ) {
         if ( data.level.value === 0 || ["pact", "innate"].includes(data.preparation.mode) ) return true;
+        if ( this.actor.data.type === "npc" ) return true;
         return data.preparation.prepared;
       }
 
@@ -413,9 +415,10 @@ export class ActorSheet5e extends ActorSheet {
     const type = header.dataset.type;
     const itemData = {
       name: `New ${type.capitalize()}`,
-      type: type
+      type: type,
+      data: duplicate(header.dataset)
     };
-    if ( header.dataset.subtype ) itemData[`data.${type}Type.value`] = header.dataset.subtype;
+    delete itemData.data["type"];
     return this.actor.createOwnedItem(itemData);
   }
 

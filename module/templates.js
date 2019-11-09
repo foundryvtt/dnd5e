@@ -10,15 +10,8 @@ export const preloadHandlebarsTemplates = async function() {
 
     // Actor Sheet Partials
     "public/systems/dnd5e/templates/actors/parts/actor-traits.html",
+    "public/systems/dnd5e/templates/actors/parts/actor-inventory.html",
     "public/systems/dnd5e/templates/actors/parts/actor-spellbook.html",
-
-    // Actor Partials - OLD
-    "public/systems/dnd5e/templates/actors/actor-attributes.html",
-    "public/systems/dnd5e/templates/actors/actor-abilities.html",
-    "public/systems/dnd5e/templates/actors/actor-biography.html",
-    "public/systems/dnd5e/templates/actors/actor-skills.html",
-    "public/systems/dnd5e/templates/actors/actor-traits.html",
-    "public/systems/dnd5e/templates/actors/actor-classes.html",
 
     // Item Sheet Partials
     "public/systems/dnd5e/templates/items/parts/item-action.html",
