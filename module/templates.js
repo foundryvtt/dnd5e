@@ -9,6 +9,9 @@ export const preloadHandlebarsTemplates = async function() {
   const templatePaths = [
 
     // Actor Sheet Partials
+    "public/systems/dnd5e/templates/actors/parts/actor-traits.html",
+
+    // Actor Partials - OLD
     "public/systems/dnd5e/templates/actors/actor-attributes.html",
     "public/systems/dnd5e/templates/actors/actor-abilities.html",
     "public/systems/dnd5e/templates/actors/actor-biography.html",

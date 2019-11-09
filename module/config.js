@@ -28,6 +28,37 @@ DND5E.abilities = {
 /* -------------------------------------------- */
 
 /**
+ * The set of Armor Proficiencies which a character may have
+ * @type {Object}
+ */
+DND5E.armorProficiencies = {
+  "lgt": "Light Armor",
+  "med": "Medium Armor",
+  "hvy": "Heavy Armor",
+  "shl": "Shields"
+};
+
+DND5E.weaponProficiencies = {
+  "sim": "Simple Weapons",
+  "mar": "Martial Weapons"
+};
+
+DND5E.toolProficiencies = {
+  "art": "Artisan's Tools",
+  "disg": "Disguise Kit",
+  "forg": "Forgery Kit",
+  "game": "Gaming Set",
+  "herb": "Herbalism Kit",
+  "music": "Musical Instrument",
+  "navg": "Navigator's Tools",
+  "pois": "Poisoner's Kit",
+  "thief": "Thieves' Tools",
+  "vehicle": "Vehicle (Land or Water)"
+};
+
+/* -------------------------------------------- */
+
+/**
  * This describes the ways that an ability can be activated
  * @type {Object}
  */

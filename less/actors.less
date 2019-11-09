@@ -2,6 +2,132 @@
 .dnd5e.sheet.actor {
 
   /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
+  .sheet-header {
+    .charlevel {
+      flex: 0 0 160px;
+      height: 60px;
+      margin: 0;
+      padding: 5px;
+      text-align: right;
+
+      .level {
+        width: 100%;
+        height: 30px;
+        font-size: 20px;
+        line-height: 30px;
+
+        label {
+          display: inline;
+          font-size: 24px;
+          text-align: right;
+        }
+
+        input {
+          display: inline;
+          width: 36px;
+          font-size: 24px;
+          text-align: center;
+        }
+
+        // If the Experience Bar is disabled
+        &.noxp {
+          flex: 0 0 44px;
+          font-size: 32px;
+          line-height: 44px;
+          > input {
+            flex: 0 0 40px;
+            height: 44px;
+          }
+        }
+
+      }
+
+      .experience {
+        width: 100%;
+        height: 20px;
+        padding-right: 5px;
+        font-size: 16px;
+        color: @colorOlive;
+      }
+    }
+  }
+
+  .attributes {
+    input.temphp {
+      width: 48%;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  General Styles                           */
+  /* ----------------------------------------- */
+
+  // Box Headers
+  h4.box-title {
+    line-height: 16px;
+    margin: 4px 8px 2px;
+    font-size: 18px;
+    border-bottom: 1px solid @colorBeige;
+  }
+
+  /* ----------------------------------------- */
+  /*  Attributes                               */
+  /* ----------------------------------------- */
+
+  ul.attributes {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+
+    li.attribute {
+      height: 80px;
+      margin: 0 5px;
+      border: @borderGroove;
+      border-radius: 4px;
+      .nodesto();
+      text-align: center;
+
+      .attribute-name {
+        flex: 0 0 18px;
+      }
+
+      .attribute-value {
+        flex: 0 0 30px;
+        line-height: 30px;
+
+        input {
+          display: inline;
+          max-width: 80%;
+          margin: 0;
+          font-size: 24px;
+        }
+
+        span.sep {
+          display: inline;
+          position: relative;
+          top: 2px;
+          font-size: 28px;
+          color: @colorTan;
+        }
+
+        &.multiple {
+          input { max-width: 40%; }
+        }
+      }
+
+      .attribute-footer {
+        flex: 0 0 20px;
+        line-height: 20px;
+        font-family: "Signika", "Palatino Linotype", serif;
+        font-size: 12px;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Ability Scores                           */
   /* ----------------------------------------- */
 
@@ -13,10 +139,11 @@
     .nodesto();
 
     .ability {
+      height: 70px;
       margin: 0 5px;
       text-align: center;
       border: @borderGroove;
-      border-radius: 4px;
+      border-radius: 3px;
 
       input.ability-score {
         height: 30px;
@@ -78,19 +205,22 @@
   /* ----------------------------------------- */
 
   ul.skills-list {
-    flex: 0 0 200px;
+    flex: 0 0 192px;
     list-style: none;
     margin: 10px 5px 0;
     padding: 2px 2px 0;
     border: @borderGroove;
+    border-radius: 3px;
 
     li.skill {
       height: 24px;
-      padding: 3px;
+      padding: 3px 0;
 
       h4 {
-        flex: 0 0 100px;
+        flex: 1px;
         margin: 0;
+        font-size: 12px;
+        line-height: 18px;
       }
 
       .skill-proficiency {
@@ -107,8 +237,62 @@
       }
 
       .skill-passive {
+        flex: 0 0 26px;
         text-align: center;
         color: @colorTan;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Statuses                                 */
+  /* ----------------------------------------- */
+
+  .counters {
+    flex: 0 0 100%;
+    border-bottom: @borderGroove;
+    margin-bottom: 5px;
+
+    .counter {
+      padding: 0 6px;
+      line-height: 32px;
+
+      h4 {
+        flex: auto;
+        margin: 0;
+        .nodesto();
+        font-size: 14px;
+      }
+
+      .counter-value {
+        flex: 0 0 50px;
+        text-align: right;
+        > * {
+          display: inline;
+        }
+      }
+
+      input[type="text"] {
+        height: 20px;
+        max-width: 20px;
+        margin: 0;
+        text-align: center;
+      }
+
+      input[type="checkbox"] {
+        position: relative;
+        margin: 0;
+        top: 6px;
+      }
+
+      &.lair input[type="text"] {
+        width: 32px;
+        max-width: 32px;
+      }
+
+      span.sep {
+        margin: 0 -2px;
+        font-size: 12px;
       }
     }
   }
@@ -122,21 +306,33 @@
 
     .form-group, .form-group-stacked {
       margin: 0 0 4px 0;
+      justify-content: space-between;
     }
 
     .trait-selector {
-      float: right;
+      flex: 0 0 16px;
+      padding: 2px 0;
       color: #999;
       font-size: 10px;
+    }
+
+    .configure-flags {
+      flex: 1;
     }
 
     .traits-list {
       list-style: none;
       margin: 0;
       padding: 0;
+      text-align: right;
+    }
+
+    .actor-size {
+      flex: 0 0 150px;
     }
 
     label {
+      flex: 0 0 150px;
       line-height: 20px;
       font-weight: bold;
       margin: 0;

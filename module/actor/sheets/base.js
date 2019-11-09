@@ -36,7 +36,8 @@ export class ActorSheet5e extends ActorSheet {
       limited: this.entity.limited,
       options: this.options,
       editable: this.isEditable,
-      cssClass: isOwner ? "editable" : "locked"
+      cssClass: isOwner ? "editable" : "locked",
+      isCharacter: this.entity.data.type === "character"
     };
 
     // The Actor and its Items
@@ -79,10 +80,14 @@ export class ActorSheet5e extends ActorSheet {
       "di": CONFIG.DND5E.damageTypes,
       "dv": CONFIG.DND5E.damageTypes,
       "ci": CONFIG.DND5E.conditionTypes,
-      "languages": CONFIG.DND5E.languages
+      "languages": CONFIG.DND5E.languages,
+      "armorProf": CONFIG.DND5E.armorProficiencies,
+      "weaponProf": CONFIG.DND5E.weaponProficiencies,
+      "toolProf": CONFIG.DND5E.toolProficiencies
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
+      if ( !trait ) continue;
       let values = [];
       if ( trait.value ) {
         values = trait.value instanceof Array ? trait.value : [trait.value];
@@ -93,7 +98,9 @@ export class ActorSheet5e extends ActorSheet {
       }, {});
 
       // Add custom entry
-      if ( trait.custom ) trait.selected["custom"] = trait.custom;
+      if ( trait.custom ) {
+        trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
+      }
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
   }
@@ -241,7 +248,7 @@ export class ActorSheet5e extends ActorSheet {
     });
 
     // Trait Selector
-    html.find('.trait-selector').click(ev => this._onTraitSelector(ev));
+    html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
     // Configure Special Flags
     html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
@@ -408,13 +415,19 @@ export class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Handle spawning the ActorTraitSelector application which allows a checkbox of multiple trait options
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
   _onTraitSelector(event) {
     event.preventDefault();
-    let a = $(event.currentTarget);
+    const a = event.currentTarget;
+    const label = a.parentElement.querySelector("label");
     const options = {
-      name: a.parents("label").attr("for"),
-      title: a.parent().text().trim(),
-      choices: CONFIG.DND5E[a.attr("data-options")]
+      name: label.getAttribute("for"),
+      title: label.innerText,
+      choices: CONFIG.DND5E[a.dataset.options]
     };
     new ActorTraitSelector(this.actor, options).render(true)
   }

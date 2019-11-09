@@ -121,10 +121,10 @@
                 </ul>
 
                 {{!-- Legendary Actions --}}
-                <div class="resources flexrow">
-                    <div class="resource flexrow legendary">
+                <div class="counters flexrow">
+                    <div class="counter flexrow legendary">
                         <h4>{{ localize "DND5E.LegAct" }}</h4>
-                        <div class="status-value">
+                        <div class="counter-value">
                             <input type="text" name="data.resources.legact.value" data-dtype="Number" placeholder="0"
                                    value="{{data.resources.legact.value}}"/>
                             <span class="sep">/</span>
@@ -132,9 +132,9 @@
                                    value="{{data.resources.legact.max}}"/>
                         </div>
                     </div>
-                    <div class="resource flexrow legendary">
+                    <div class="counter flexrow legendary">
                         <h4>{{ localize "DND5E.LegRes" }}</h4>
-                        <div class="status-value">
+                        <div class="counter-value">
                             <input type="text" name="data.resources.legres.value" data-dtype="Number" placeholder="0"
                                    value="{{data.resources.legres.value}}"/>
                             <span class="sep">/</span>
@@ -142,9 +142,9 @@
                                    value="{{data.resources.legres.max}}"/>
                         </div>
                     </div>
-                    <div class="resource flexrow lair">
+                    <div class="counter flexrow lair">
                         <h4>{{ localize "DND5E.LairAct" }}</h4>
-                        <div class="status-value">
+                        <div class="counter-value">
                             <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
                                    data-dtype="Boolean" {{checked data.resources.lair.value}}/>
                             <input name="data.resources.lair.initiative" type="text" value="{{data.resources.lair.initiative}}"
@@ -154,82 +154,7 @@
                 </div>
 
                 {{!-- Traits --}}
-                <div class="traits">
-                    <div class="form-group">
-                        <label>{{localize "DND5E.Size"}}</label>
-                        <select class="actor-size" name="data.traits.size.value">
-                            {{#select data.traits.size.value}}
-                            {{#each actorSizes as |label size|}}
-                                <option value="{{size}}">{{label}}</option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
-                    </div>
-
-                    <div class="form-group {{#unless data.traits.senses.value}}inactive{{/unless}}">
-                        <label>{{localize "DND5E.Senses"}}</label>
-                        <input type="text" name="data.traits.senses.value" value="{{data.traits.senses.value}}" placeholder="None"/>
-                    </div>
-
-                    <div class="form-group-stacked {{data.traits.languages.cssClass}}">
-                        <label for="data.traits.languages">{{localize "DND5E.Languages"}}
-                            <a class="trait-selector" data-options="languages"><i class="fas fa-edit"></i></a>
-                        </label>
-                        <ul class="traits-list">
-                        {{#each data.traits.languages.selected as |v k|}}
-                            <li class="tag {{k}}">{{v}}</li>
-                        {{/each}}
-                        </ul>
-                    </div>
-
-                    <div class="form-group-stacked {{data.traits.di.cssClass}}">
-                        <label for="data.traits.di">{{localize "DND5E.DamImm"}}
-                            <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
-                        </label>
-                        <ul class="traits-list">
-                        {{#each data.traits.di.selected as |v k|}}
-                            <li class="tag {{k}}">{{v}}</li>
-                        {{/each}}
-                        </ul>
-                    </div>
-
-                    <div class="form-group-stacked {{data.traits.dr.cssClass}}">
-                        <label for="data.traits.dr">{{localize "DND5E.DamRes"}}
-                            <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
-                        </label>
-                        <ul class="traits-list">
-                        {{#each data.traits.dr.selected as |v k|}}
-                            <li class="tag {{k}}">{{v}}</li>
-                        {{/each}}
-                        </ul>
-                    </div>
-
-                    <div class="form-group-stacked {{data.traits.dv.cssClass}}">
-                        <label for="data.traits.dv">{{localize "DND5E.DamVuln"}}
-                            <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
-                        </label>
-                        <ul class="traits-list">
-                        {{#each data.traits.dv.selected as |v k|}}
-                            <li class="tag {{k}}">{{v}}</li>
-                        {{/each}}
-                        </ul>
-                    </div>
-
-                    <div class="form-group-stacked {{data.traits.ci.cssClass}}">
-                        <label for="data.traits.ci">{{localize "DND5E.ConImm"}}
-                            <a class="trait-selector" data-options="conditionTypes"><i class="fas fa-edit"></i></a>
-                        </label>
-                        <ul class="traits-list">
-                        {{#each data.traits.ci.selected as |v k|}}
-                            <li class="tag {{k}}">{{v}}</li>
-                        {{/each}}
-                        </ul>
-                    </div>
-
-                    <div class="form-group configure-flags">
-                        <label>{{localize "DND5E.SpecialTraits"}}<i class="fas fa-cog"></i></label>
-                    </div>
-                </div>
+                {{> "public/systems/dnd5e/templates/actors/parts/actor-traits.html"}}
             </section>
         </div>
 

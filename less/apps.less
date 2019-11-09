@@ -44,8 +44,8 @@
     border: none;
     &:hover,
     &:focus {
-      border: none;
-      box-shadow: none;
+      border: none !important;
+      box-shadow: none !important;
     }
   }
 
@@ -63,14 +63,11 @@
     font-size: 11px;
     text-align: right;
     input[type="checkbox"] {
-      height: 16px;
+      height: auto;
       margin: 0 5px 0;
       position: relative;
-      top: 5px;
+      top: 3px;
     }
-  }
-  .form-group.stacked label.checkbox {
-    text-align: left;
   }
 
   /* Form Groups */
@@ -80,16 +77,23 @@
       color: @colorOlive;
       font-weight: bold;
     }
-    &.stacked label {
-      flex: 0 0 100%;
-    }
-
     .form-fields {
       .flexrow();
       > * {
         margin: 0 3px 0 0;
         &:last-child { margin-right: 0; }
       }
+    }
+  }
+
+  // Stacked Groups
+  .form-group.stacked {
+    label {
+      flex: 0 0 100%;
+    }
+    label.checkbox {
+      flex: auto;
+      text-align: left;
     }
   }
 
@@ -137,6 +141,7 @@
     .tab {
       height: 100%;
       overflow-y: auto;
+      align-content: flex-start;
     }
   }
 

@@ -1,4 +1,6 @@
 import { Dice5e } from "../dice.js";
+import { ShortRestDialog } from "../apps/short-rest.js";
+
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
@@ -289,81 +291,135 @@ export class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Take a short rest, recovering resources and possibly rolling Hit Dice
+   * Cause this Actor to take a Short Rest
+   * During a Short Rest resources and limited item uses may be recovered
+   * @param {boolean} dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
+   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @return {Promise}        A Promise which resolves once the short rest workflow has completed
    */
-  async shortRest() {
-    const data = this.data.data,
-          update = {},
-          promises = [];
+  async shortRest({dialog=true, chat=true}={}) {
+    const data = this.data.data;
 
-    // Recover resources
-    for ( let r of ["primary", "secondary"] ) {
-      let res = data.resources[r];
-      if ( res.max && res.sr ) {
-        update[`data.resources.${r}.value`] = res.max;
+    // Take note of the initial hit points and hit dice the Actor has
+    const hd0 = data.attributes.hd.value;
+    const hp0 = data.attributes.hp.value;
+
+    // Display a Dialog for rolling hit dice
+    if ( dialog ) await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+
+    // Note the change in HP and HD which occurred
+    const dhd = data.attributes.hd.value - hd0;
+    const dhp = data.attributes.hp.value - hp0;
+
+    // Recover character resources
+    const updateData = {};
+    for ( let [k, r] of Object.entries(data.resources) ) {
+      if ( r.max && r.sr ) {
+        updateData[`data.resources.${k}.value`] = r.max;
       }
     }
+    await this.update(updateData);
 
-    // Recover uses
-    for (let item of this.data.items.filter(item => getProperty(item, "data.uses.type") === 'sr')) {
-      item.data.uses.value = item.data.uses.max;
-      promises.push(this.updateOwnedItem(item));
+    // Recover item uses
+    const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
+    const updateItems = items.map(item => {
+      return {
+        "id": item.data.id,
+        "data.uses.value": item.data.data.uses.max
+      }
+    });
+    await this.updateManyOwnedItem(updateItems);
+
+    // Display a Chat Message summarizing the rest effects
+    if ( chat ) {
+      let msg = `${this.name} takes a short rest spending ${-dhd} Hit Dice to recover ${dhp} Hit Points.`;
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: {actor: this, alias: this.name},
+        content: msg,
+        type: CHAT_MESSAGE_TYPES.OTHER
+      });
     }
 
-    // Update the actor
-    promises.push(this.update(update));
-    return Promise.all(promises);
+    // Return data summarizing the rest effects
+    return {
+      dhd: dhd,
+      dhp: dhp,
+      updateData: updateData,
+      updateItems: updateItems
+    }
   }
 
   /* -------------------------------------------- */
 
   /**
    * Take a long rest, recovering HP, HD, resources, and spell slots
-   * @return {Promise}    A Promise which resolves to an object containing details of the rest outcome
+   * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
+   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @return {Promise}        A Promise which resolves once the long rest workflow has completed
    */
-  async longRest() {
-    const data = this.data.data,
-          update = {},
-          promises = [];
+  async longRest({dialog=true, chat=true}={}) {
+    const data = this.data.data;
+    const updateData = {};
 
-    // Recover hit points
-    let dhp = data.attributes.hp.max - data.attributes.hp.value;
-    update["data.attributes.hp.value"] = data.attributes.hp.max;
-
-    // Recover hit dice
-    let recover_hd = Math.max(Math.floor(data.details.level.value/2), 1),
-        dhd = Math.min(recover_hd, data.details.level.value - data.attributes.hd.value);
-    update["data.attributes.hd.value"] = data.attributes.hd.value + dhd;
-
-    // Recover resources
-    for ( let r of ["primary", "secondary"] ) {
-      let res = data.resources[r];
-      if ( res.max && (res.lr || res.sr ) ) {
-        update[`data.resources.${r}.value`] = res.max;
+    // Maybe present a confirmation dialog
+    if ( dialog ) {
+      try {
+        await ShortRestDialog.longRestDialog(this);
+      } catch(err) {
+        return;
       }
     }
 
-    // Recover uses
-    const items = this.data.items.filter(i => i.data.uses && ["sr", "lr"].includes(i.data.uses.type));
-    for (let item of items) {
-      item.data.uses.value = item.data.uses.max;
-      promises.push(this.updateOwnedItem(item));
+    // Recover HP and one-half HD
+    let dhp = data.attributes.hp.max - data.attributes.hp.value;
+    let recover_hd = Math.max(Math.floor(data.details.level.value/2), 1);
+    let dhd = Math.min(recover_hd, data.details.level.value - data.attributes.hd.value);
+    updateData["data.attributes.hp.value"] = data.attributes.hp.max;
+    updateData["data.attributes.hd.value"] = data.attributes.hd.value + dhd;
+
+    // Recover character resources
+    for ( let [k, r] of Object.entries(data.resources) ) {
+      if ( r.max && (r.sr || r.lr) ) {
+        updateData[`data.resources.${k}.value`] = r.max;
+      }
     }
 
     // Recover spell slots
     for ( let [k, v] of Object.entries(data.spells) ) {
       if ( !v.max ) continue;
-      update[`data.spells.${k}.value`] = v.max;
+      updateData[`data.spells.${k}.value`] = v.max;
     }
 
-    // Update the actor and return some update data for logging
-    promises.push(this.update(update));
-    return Promise.all(promises).then(() => {
+    // Recover limited item uses
+    const items = this.items.filter(i => i.data.data.uses && ["sr", "lr"].includes(i.data.data.uses.type));
+    const updateItems = items.map(item => {
       return {
-        dhp: dhp,
-        dhd: dhd
+        "id": item.data.id,
+        "data.uses.value": item.data.data.uses.max
       }
     });
+
+    // Perform the updates
+    await this.update(updateData);
+    await this.updateManyOwnedItem(updateItems);
+
+    // Display a Chat Message summarizing the rest effects
+    if ( chat ) {
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: {actor: this, alias: this.name},
+        content: `${this.name} takes a long rest and recovers ${dhp} Hit Points and ${dhd} Hit Dice.`
+      });
+    }
+
+    // Return data summarizing the rest effects
+    return {
+      dhd: dhd,
+      dhp: dhp,
+      updateData: updateData,
+      updateItems: updateItems
+    }
   }
 
   /* -------------------------------------------- */

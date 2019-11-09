@@ -1,0 +1,372 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
+            </h1>
+
+            <div class="charlevel">
+                <div class="level {{#if disableExperience}}noxp{{/if}}">
+                    <label>Level </label>
+                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
+                           data-dtype="Number" placeholder="1"/>
+                </div>
+                {{#unless disableExperience}}
+                    <div class="experience">
+                        <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
+                               data-dtype="Number" placeholder="0"/>
+                        <span class="max" data-wpad="14"> / {{data.details.xp.max}}</span>
+                    </div>
+                    <div class="xpbar">
+                        <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
+                    </div>
+                {{/unless}}
+            </div>
+
+            {{!-- Character Summary --}}
+            <ul class="summary">
+                <li>
+                    <input type="text" name="data.details.race.value" value="{{data.details.race.value}}" placeholder="Race"/>
+                </li>
+                <li>
+                    <input type="text" name="data.details.background.value" value="{{data.details.background.value}}" placeholder="Background"/>
+                </li>
+                <li>
+                    <input type="text" name="data.details.alignment.value" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
+                </li>
+            </ul>
+
+            {{!-- Header Attributes --}}
+            <ul class="attributes flexrow">
+                <li class="attribute health flexcol">
+                    <h4 class="attribute-name box-title rollable">{{ localize "DND5E.Health" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                               data-dtype="Number" placeholder="10"/>
+                        <span class="sep"> / </span>
+                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                               data-dtype="Number" placeholder="10"/>
+                    </div>
+                    <footer class="attribute-footer">
+                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+Temp"
+                               value="{{data.attributes.hp.temp}}" data-dtype="{{data.attributes.hp.type}}"/>
+                        <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+Max"
+                               value="{{data.attributes.hp.tempmax}}" data-dtype="{{data.attributes.hp.type}}"/>
+                    </footer>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                               data-dtype="Number" placeholder="10"/>
+                    </div>
+                    <footer class="attribute-footer">
+                        <span>{{ localize "DND5E.Proficiency" }}</span>
+                        <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
+                    </footer>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "DND5E.Speed" }}</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.speed.value" type="text"
+                               value="{{data.attributes.speed.value}}" placeholder="0"/>
+                    </div>
+                    <footer class="attribute-footer">
+                        <input type="text" class="speed" name="data.attributes.speed.special"
+                               value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
+                    </footer>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "DND5E.HitDice" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="data.attributes.hd.value" type="text" value="{{data.attributes.hd.value}}"
+                               placeholder="1" data-dtype="Number"/>
+                        <span class="sep"> / </span>
+                        <input type="text" value="{{data.details.level.value}}" disabled/>
+                    </div>
+                    <footer class="attribute-footer">
+                        <a class="rest short-rest">{{ localize "DND5E.RestS" }}</a>
+                        <a class="rest long-rest">{{ localize "DND5E.RestL" }}</a>
+                    </footer>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- NPC Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "DND5E.Inventory" }}</a>
+        <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
+        <a class="item" data-tab="spellbook">{{ localize "DND5E.Spellbook" }}</a>
+        <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
+    </nav>
+
+    {{!-- NPC Sheet Body --}}
+    <section class="sheet-body">
+
+        <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+
+            {{!-- Ability Scores --}}
+            <ul class="ability-scores flexrow">
+            {{#each data.abilities as |ability id|}}
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}">
+                    <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
+                    <input class="ability-score" name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" data-dtype="Number" placeholder="10"/>
+                    <div class="ability-modifiers flexrow">
+                        <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
+                        <a class="proficiency-toggle ability-proficiency" title="Proficiency">{{{ability.icon}}}</a>
+                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
+                    </div>
+                </li>
+            {{/each}}
+            </ul>
+
+            {{!-- Skills --}}
+            <ul class="skills-list">
+            {{#each data.skills as |skill s|}}
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
+                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
+                    <h4 class="skill-name rollable">{{skill.label}}</h4>
+                    <span class="skill-ability">{{skill.ability}}</span>
+                    <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
+                    <span class="skill-passive">({{skill.passive}})</span>
+                </li>
+            {{/each}}
+            </ul>
+
+            <section class="center-pane">
+
+                {{!-- Body Attributes --}}
+                <ul class="attributes flexrow">
+                    {{#each resources as |res|}}
+                    <li class="attribute resource">
+                        <h4 class="attribute-name box-title">
+                            <input name="data.resources.{{res.name}}.label" type="text" value="{{res.label}}"
+                                   placeholder="{{res.placeholder}}" />
+                        </h4>
+                        <div class="attribute-value multiple">
+                            <input name="data.resources.{{res.name}}.value" type="text" value="{{res.value}}"
+                                   data-dtype="Number" placeholder="0"/>
+                            <span class="sep"> / </span>
+                           <input name="data.resources.{{res.name}}.max" type="text" value="{{res.max}}"
+                                  data-dtype="Number" placeholder="0"/>
+                        </div>
+                        <footer class="attribute-footer">
+                            <label class="checkbox">
+                                SR <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
+                            </label>
+                            <label class="checkbox">
+                                LR <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
+                            </label>
+                        </footer>
+                    </li>
+                    {{/each}}
+
+                    <li class="attribute initiative">
+                        <h4 class="attribute-name box-title">Initiative</h4>
+                        <div class="attribute-value">
+                            <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <span>Modifier</span>
+                            <input name="data.attributes.init.value" type="text" placeholder="0" data-dtype="Number"
+                                   value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
+                        </footer>
+                    </li>
+                </ul>
+
+                {{!-- Counters --}}
+                <div class="counters flexrow">
+                    <div class="counter flexrow death-saves">
+                        <h4>{{ localize "DND5E.DeathSave" }}</h4>
+                        <div class="counter-value">
+                            <i class="fas fa-check"></i>
+                            <input type="text" name="data.attributes.death.success" data-dtype="Number" placeholder="0"
+                                   value="{{data.attributes.death.success}}"/>
+                            <i class="fas fa-times"></i>
+                            <input type="text" name="data.attributes.death.failure" data-dtype="Number" placeholder="0"
+                                   value="{{data.attributes.death.failure}}"/>
+                        </div>
+                    </div>
+                    <div class="counter flexrow">
+                        <h4>{{ localize "DND5E.Exhaustion" }}</h4>
+                        <div class="counter-value">
+                            <input type="text" name="data.attributes.exhaustion.value" data-dtype="Number" placeholder="0"
+                                   value="{{data.attributes.exhaustion.value}}" />
+                        </div>
+                    </div>
+                    <div class="counter flexrow">
+                        <h4>{{ localize "DND5E.Inspiration" }}</h4>
+                        <div class="counter-value">
+                            <input type="checkbox" name="data.attributes.inspiration.value" data-dtype="Boolean"
+                                   {{checked data.attributes.inspiration.value}}/>
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- Traits --}}
+                {{> "public/systems/dnd5e/templates/actors/parts/actor-traits.html"}}
+            </section>
+        </div>
+
+        {{!-- Features Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="features">
+            <div class="inventory-filters">
+                <ul class="filter-list flexrow" data-filter="features">
+                    <li class="filter-title">Filter</li>
+                    <li class="filter-item" data-filter="action">Action</li>
+                    <li class="filter-item" data-filter="bonus">Bonus</li>
+                    <li class="filter-item" data-filter="reaction">Reaction</li>
+                    <li class="filter-item" data-filter="equipped">Equipped</li>
+                </ul>
+            </div>
+
+            <ol class="inventory-list">
+            {{#each features as |section sid|}}
+                <li class="inventory-header flexrow">
+                    <h3 class="item-name flexrow">{{section.label}}</h3>
+                    {{#if ../owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create Item" data-type="{{section.type}}" data-subtype="{{section.subtype}}">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                {{#each section.items as |item iid|}}
+                    <li class="item flexrow" data-item-id="{{item.id}}">
+                        <div class="item-name flexrow rollable">
+                            <div class="item-image" style="background-image: url({{item.img}})"></div>
+                            <h4>
+                                {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
+                                {{item.name~}}
+                            </h4>
+                        </div>
+
+                        {{#if item.data.activation.type }}
+                        <div class="item-detail">{{item.data.activation.label}}</div>
+                        {{/if}}
+
+                        {{#if item.data.uses.value }}
+                        <div class="item-detail">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                        {{/if}}
+
+                        {{#if ../../owner}}
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                        {{/if}}
+                    </li>
+                {{/each}}
+                </ol>
+            {{/each}}
+            </ol>
+        </div>
+
+        {{!-- Spellbook Tab --}}
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
+            <div class="inventory-filters spellbook-filters">
+                <div class="form-group spellcasting-ability">
+                    <label><h3>Spellcasting Ability</h3></label>
+                    <select name="data.attributes.spellcasting.value" data-type="String">
+                        {{#select data.attributes.spellcasting.value}}
+                        <option value="">None</option>
+                        {{#each data.abilities as |abl a|}}
+                        <option value="{{a}}">{{abl.label}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+
+                <ul class="filter-list flexrow" data-filter="spellbook">
+                    <li class="filter-title">Filter</li>
+                    <li class="filter-item" data-filter="action">Action</li>
+                    <li class="filter-item" data-filter="bonus">Bonus</li>
+                    <li class="filter-item" data-filter="reaction">Reaction</li>
+                    <li class="filter-item" data-filter="concentration">Conc.</li>
+                    <li class="filter-item" data-filter="ritual">Ritual</li>
+                    <li class="filter-item" data-filter="prepared">Prepared</li>
+                </ul>
+            </div>
+
+            <ol class="inventory-list">
+            {{#each spellbook as |section lvl|}}
+                <li class="item flexrow inventory-header spellbook-header">
+                    <div class="item-name flexrow">
+                        <h3>{{section.label}}</h3>
+                    </div>
+
+                    <div class="spell-slots">
+                        {{#unless section.isCantrip}}
+                        <input type="text" name="data.spells.spell{{lvl}}.value" value="{{section.uses}}" placeholder="0"/>
+                        {{else}}<span class="spell-slots">&infin;</span>{{/unless}}
+                        <span class="sep"> / </span>
+                        {{#unless section.isCantrip}}
+                        <input type="text" name="data.spells.spell{{lvl}}.max" value="{{section.slots}}" placeholder="0"/>
+                        {{else}}<span class="spell-max">&infin;</span>{{/unless}}
+                    </div>
+
+                    <div class="spell-school">Spell School</div>
+                    <div class="spell-action">Spell Usage</div>
+
+                    {{#if ../owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create Spell" data-type="spell"
+                           data-level="{{lvl}}"><i class="fas fa-plus"></i> Add</a>
+                    </div>
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                {{#each section.spells as |item i|}}
+                    <li class="item flexrow" data-item-id="{{item.id}}">
+                        <div class="item-name flexrow rollable">
+                            <div class="item-image" style="background-image: url({{item.img}})"></div>
+                            <h4>{{item.name}}</h4>
+                        </div>
+
+                        <div class="spell-comps">{{item.data.components.label}}</div>
+                        <div class="spell-school">{{item.data.school.label}}</div>
+                        <div class="spell-action">{{item.data.activation.label}}</div>
+
+                        {{#if ../../owner}}
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                        {{/if}}
+                    </li>
+                {{/each}}
+                </ol>
+            {{else}}
+                <li class="item flexrow inventory-header spellbook-header spellbook-empty">
+                    {{#if owner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="Create Spell" data-type="spell"
+                           data-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
+                    </div>
+                    {{/if}}
+                </li>
+            {{/each}}
+            </ol>
+        </div>
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography flexcol" data-group="primary" data-tab="biography">
+            {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
+        </div>
+    </section>
+</form>

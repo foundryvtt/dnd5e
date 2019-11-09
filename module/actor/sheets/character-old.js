@@ -1,27 +1,19 @@
 import { ActorSheet5e } from "./base.js";
+import { ShortRestDialog } from "../../apps/short-rest.js";
 
 
-/**
- * An Actor sheet for player character type actors in the D&D5E system.
- * Extends the base ActorSheet5e class.
- * @type {ActorSheet5e}
- */
 export class ActorSheet5eCharacter extends ActorSheet5e {
-
-  /**
-   * Define default rendering options for the NPC sheet
-   * @return {Object}
-   */
 	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "character"],
-      width: 720,
-      height: 785
+	  const options = super.defaultOptions;
+	  mergeObject(options, {
+      classes: options.classes.concat(["dnd5e", "actor", "character-sheet"]),
+      width: 650,
+      height: 720,
+      showUnpreparedSpells: true
     });
+	  return options;
   }
 
-  /* -------------------------------------------- */
-  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /**
@@ -29,8 +21,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
    * @type {String}
    */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "public/systems/dnd5e/templates/actors/limited-sheet.html";
-    return "public/systems/dnd5e/templates/actors/character-sheet.html";
+    const path = "public/systems/dnd5e/templates/actors/";
+    if ( !game.user.isGM && this.actor.limited ) return path + "limited-sheet.html";
+    return path + "actor-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -47,14 +40,11 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     if (hp.tempmax === 0) delete hp.tempmax;
 
     // Resources
-    sheetData["resources"] = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
-      const res = sheetData.data.resources[r] || {};
-      res.name = r;
-      res.placeholder = game.i18n.localize("DND5E.Resource"+r.titleCase());
-      if (res && res.value === 0) delete res.value;
-      if (res && res.max === 0) delete res.max;
-      return arr.concat([res]);
-    }, []);
+    let res = sheetData.data.resources;
+    if (res.primary && res.primary.value === 0) delete res.primary.value;
+    if (res.primary && res.primary.max === 0) delete res.primary.max;
+    if (res.secondary && res.secondary.value === 0) delete res.secondary.value;
+    if (res.secondary && res.secondary.max === 0) delete res.secondary.max;
 
     // Experience Tracking
     sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
@@ -70,7 +60,6 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
    * @private
    */
   _prepareItems(sheetData) {
-    return sheetData.items; // TODO
     const actorData = sheetData.actor;
 
     // Inventory
@@ -214,25 +203,75 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Take a short rest, calling the relevant function on the Actor instance
-   * @param {Event} event   The triggering click event
    * @private
    */
-  async _onShortRest(event) {
+  _onShortRest(event) {
     event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.shortRest();
+    let hd0 = this.actor.data.data.attributes.hd.value,
+        hp0 = this.actor.data.data.attributes.hp.value;
+    renderTemplate("public/systems/dnd5e/templates/chat/short-rest.html").then(html => {
+      new ShortRestDialog(this.actor, {
+        title: "Short Rest",
+        content: html,
+        buttons: {
+          rest: {
+            icon: '<i class="fas fa-bed"></i>',
+            label: "Rest",
+            callback: dlg => {
+              this.actor.shortRest();
+              let dhd = hd0 - this.actor.data.data.attributes.hd.value,
+                  dhp = this.actor.data.data.attributes.hp.value - hp0;
+              let msg = `${this.actor.name} takes a short rest spending ${dhd} Hit Dice to recover ${dhp} Hit Points.`;
+              ChatMessage.create({
+                user: game.user._id,
+                speaker: {actor: this.actor, alias: this.actor.name},
+                content: msg,
+                type: CHAT_MESSAGE_TYPES.OTHER
+              });
+            }
+          },
+          cancel: {
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancel"
+          },
+        },
+        default: 'rest'
+      }).render(true);
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
    * Take a long rest, calling the relevant function on the Actor instance
-   * @param {Event} event   The triggering click event
    * @private
    */
-  async _onLongRest(event) {
+  _onLongRest(event) {
     event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.longRest();
+    new Dialog({
+      title: "Long Rest",
+      content: '<p>Take a long rest?</p><p>On a long rest you will recover hit points, half your maximum hit dice, ' +
+        'primary or secondary resources, and spell slots per day.</p>',
+      buttons: {
+        rest: {
+          icon: '<i class="fas fa-bed"></i>',
+          label: "Rest",
+          callback: async dlg => {
+            const update = await this.actor.longRest();
+            let msg = `${this.actor.name} takes a long rest and recovers ${update.dhp} Hit Points and ${update.dhd} Hit Dice.`;
+            ChatMessage.create({
+              user: game.user._id,
+              speaker: {actor: this.actor, alias: this.actor.name},
+              content: msg
+            });
+          }
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "Cancel"
+        },
+      },
+      default: 'rest'
+    }).render(true);
   }
 }

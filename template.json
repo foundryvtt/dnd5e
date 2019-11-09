@@ -159,19 +159,24 @@
             "value": 10
           },
           "languages": {
-            "value": ""
+            "value": [],
+            "custom": ""
           },
           "di": {
-            "value": []
+            "value": [],
+            "custom": ""
           },
           "dr": {
-            "value": []
+            "value": [],
+            "custom": ""
           },
           "dv": {
-            "value": []
+            "value": [],
+            "custom": ""
           },
           "ci": {
-            "value": []
+            "value": [],
+            "custom": ""
           }
         },
         "currency": {
@@ -291,6 +296,26 @@
           "max": 0,
           "sr": 0,
           "lr": 0
+        },
+        "tertiary": {
+          "value": 0,
+          "max": 0,
+          "sr": 0,
+          "lr": 0
+        }
+      },
+      "traits": {
+        "weaponProf": {
+          "value": [],
+          "custom": ""
+        },
+        "armorProf": {
+          "value": [],
+          "custom": ""
+        },
+        "toolProf": {
+          "value": [],
+          "custom": ""
         }
       }
     },

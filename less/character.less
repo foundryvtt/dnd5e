@@ -1,0 +1,142 @@
+@import "./variables.less";
+
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.dnd5e.sheet.actor.character {
+  min-width: 720px;
+  min-height: 785px;
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
+  .sheet-header {
+
+    // Character Profile image (larger than usual)
+    img.profile {
+      flex: 0 0 180px;
+      height: 180px;
+    }
+
+    // Character level and experience bar
+    .charlevel {
+      flex: 0 0 180px;
+      padding: 0 5px 2px;
+
+      .level {
+        height: 28px;
+      }
+
+      .experience {
+        input[type="text"] {
+          width: auto;
+        }
+      }
+
+      .xpbar {
+        width: 100%;
+        flex: 0 0 8px;
+        background: #666;
+        border: 1px solid #000;
+        border-radius: 3px;
+
+        .bar {
+          height: 4px;
+          margin: 1px;
+          display: block;
+          background: #afebff;
+          border: 1px solid #000;
+          border-radius: 2px;
+        }
+      }
+    }
+
+    // Character Summary
+    .summary {
+      border-bottom: @borderGroove;
+    }
+
+    // Primary Attributes
+    .attributes {
+      margin: 0;
+
+      .attribute {
+        margin: 0;
+        border: none;
+        border-right: @borderGroove;
+        border-radius: 0;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        .attribute-name {
+          margin-top: 6px;
+        }
+
+        .attribute-footer {
+          margin-bottom: 2px;
+        }
+      }
+
+      a.rest {
+        border: 1px solid @colorBeige;
+        border-radius: 2px;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 1px 3px;
+        margin: 0 6px;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+
+  .attributes {
+    .resource {
+      .attribute-name {
+        margin: 0 8px;
+        input[type="text"] {
+          height: 20px;
+          margin: 2px 0 -2px;
+          line-height: 24px;
+        }
+      }
+      label.checkbox {
+        margin: 0 6px;
+        input[type="checkbox"] {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    .initiative .attribute-footer input {
+      width: 32px;
+    }
+  }
+
+  ul.skills-list {
+    flex: 0 0 226px;
+
+    li.skill {
+      padding: 3px;
+      h4 {
+        flex: 1px;
+        margin: 0;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .counters {
+    .death-saves {
+      flex: 2;
+      .counter-value {
+        flex: 0 0 120px;
+      }
+
+    }
+  }
+}

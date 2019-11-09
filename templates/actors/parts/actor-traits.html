@@ -1,0 +1,104 @@
+<div class="traits">
+    <div class="form-group">
+        <label>{{localize "DND5E.Size"}}</label>
+        <select class="actor-size" name="data.traits.size.value">
+            {{#select data.traits.size.value}}
+            {{#each actorSizes as |label size|}}
+                <option value="{{size}}">{{label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+
+    <div class="form-group {{#unless data.traits.senses.value}}inactive{{/unless}}">
+        <label>{{localize "DND5E.Senses"}}</label>
+        <input type="text" name="data.traits.senses.value" value="{{data.traits.senses.value}}" placeholder="None"/>
+    </div>
+
+    <div class="form-group {{data.traits.languages.cssClass}}">
+        <label for="data.traits.languages">{{localize "DND5E.Languages"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.languages.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="languages"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.di.cssClass}}">
+        <label for="data.traits.di">{{localize "DND5E.DamImm"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.di.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.dr.cssClass}}">
+        <label for="data.traits.dr">{{localize "DND5E.DamRes"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.dr.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.dv.cssClass}}">
+        <label for="data.traits.dv">{{localize "DND5E.DamVuln"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.dv.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="damageTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.ci.cssClass}}">
+        <label for="data.traits.ci">{{localize "DND5E.ConImm"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.ci.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="conditionTypes"><i class="fas fa-edit"></i></a>
+    </div>
+
+    {{#if isCharacter}}
+    <div class="form-group {{data.traits.weaponProf.cssClass}}">
+        <label for="data.traits.weaponProf">{{localize "DND5E.TraitWeaponProf"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.weaponProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="weaponProficiencies"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.armorProf.cssClass}}">
+        <label for="data.traits.armorProf">{{localize "DND5E.TraitArmorProf"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.armorProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="armorProficiencies"><i class="fas fa-edit"></i></a>
+    </div>
+
+    <div class="form-group {{data.traits.toolProf.cssClass}}">
+        <label for="data.traits.toolProf">{{localize "DND5E.TraitToolProf"}}</label>
+        <ul class="traits-list">
+        {{#each data.traits.toolProf.selected as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
+        <a class="trait-selector" data-options="toolProficiencies"><i class="fas fa-edit"></i></a>
+    </div>
+    {{/if}}
+
+    <div class="form-group ">
+        <label>{{localize "DND5E.SpecialTraits"}}</label>
+        <a class="configure-flags"><i class="fas fa-cog"></i></a>
+    </div>
+</div>

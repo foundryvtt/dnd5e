@@ -15,7 +15,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
 	  return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "npc"],
       width: 620,
-      height: 710
+      height: 705
     });
   }
 
@@ -29,7 +29,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
    */
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "public/systems/dnd5e/templates/actors/limited-sheet.html";
-    return "public/systems/dnd5e/templates/npc/npc-sheet.html";
+    return "public/systems/dnd5e/templates/actors/npc-sheet.html";
   }
 
   /* -------------------------------------------- */
