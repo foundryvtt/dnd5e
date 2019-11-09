@@ -11,6 +11,7 @@ export const preloadHandlebarsTemplates = async function() {
     // Actor Sheet Partials
     "public/systems/dnd5e/templates/actors/parts/actor-traits.html",
     "public/systems/dnd5e/templates/actors/parts/actor-inventory.html",
+    "public/systems/dnd5e/templates/actors/parts/actor-features.html",
     "public/systems/dnd5e/templates/actors/parts/actor-spellbook.html",
 
     // Item Sheet Partials

@@ -42,8 +42,8 @@ export class ActorSheet5eNPC extends ActorSheet5e {
 
     // Categorize Items as Features and Spells
     const features = {
-      weapons: { label: "Attacks", items: [] , dataset: {type: "weapon", "weapon-type": "natural"} },
-      actions: { label: "Actions", items: [] , dataset: {type: "feat", "activation.cost": "action"} },
+      weapons: { label: "Attacks", items: [] , hasActions: true, dataset: {type: "weapon", "weapon-type": "natural"} },
+      actions: { label: "Actions", items: [] , hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
       passive: { label: "Features", items: [], dataset: {type: "feat"} },
       equipment: { label: "Inventory", items: [], dataset: {type: "loot"}}
     };

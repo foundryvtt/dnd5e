@@ -15,7 +15,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "character"],
-      width: 720,
+      width: 700,
       height: 785
     });
   }
@@ -84,26 +84,26 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     let totalWeight = 0;
 
     // Partition items by category
-    let [inventoryItems, spells, features, classes] = data.items.reduce((arr, item) => {
+    let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
       if ( item.type === "spell" ) arr[1].push(item);
-      else if ( item.type === "feature" ) arr[2].push(item);
+      else if ( item.type === "feat" ) arr[2].push(item);
       else if ( item.type === "class" ) arr[3].push(item);
       else if ( Object.keys(inventory).includes(item.type ) ) arr[0].push(item);
       return arr;
     }, [[], [], [], []]);
 
     // Apply active item filters
-    inventoryItems = this._filterItems(inventoryItems, this._filters.inventory);
+    items = this._filterItems(items, this._filters.inventory);
     spells = this._filterItems(spells, this._filters.spellbook);
-    features = this._filterItems(features, this._filters.features);
+    feats = this._filterItems(feats, this._filters.features);
 
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(data, spells);
 
     // Organize Inventory
-    for ( let i of inventoryItems ) {
+    for ( let i of items ) {
       i.data.quantity = i.data.quantity || 0;
       i.data.weight = i.data.weight || 0;
       i.totalWeight = Math.round(i.data.quantity * i.data.weight * 10) / 10;
@@ -112,14 +112,23 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     }
     data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
 
-    // Organize Classes (by level)
+    // Organize Features
+    const features = {
+      classes: { label: "Class Levels", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
+      active: { label: "Active", items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
+      passive: { label: "Passive", items: [], hasActions: false, dataset: {type: "feat"} }
+    };
+    for ( let f of feats ) {
+      if ( f.data.activation.type ) features.active.items.push(f);
+      else features.passive.items.push(f);
+    }
     classes.sort((a, b) => b.levels - a.levels);
+    features.classes.items = classes;
 
     // Assign and return
     data.inventory = Object.values(inventory);
     data.spellbook = spellbook;
-    data.feats = features;
-    data.classes = classes;
+    data.features = Object.values(features);
   }
 
   /* -------------------------------------------- */
