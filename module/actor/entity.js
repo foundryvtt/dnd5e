@@ -150,9 +150,9 @@ export class Actor5e extends Actor {
     if ( !this.isPC ) {
       let t = itemData.type;
       let initial = {};
-      if ( t === "weapon" ) initial["data.proficient.value"] = true;
-      if ( ["weapon", "equipment"].includes(t) ) initial["data.equipped.value"] = true;
-      if ( t === "spell" ) initial["data.prepared.value"] = true;
+      if ( t === "weapon" ) initial["data.proficient"] = true;
+      if ( ["weapon", "equipment"].includes(t) ) initial["data.equipped"] = true;
+      if ( t === "spell" ) initial["data.prepared"] = true;
       mergeObject(itemData, initial);
     }
     return super.createOwnedItem(itemData, options);

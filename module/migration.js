@@ -46,6 +46,14 @@ export const migrateWorld = async function() {
 
 /* -------------------------------------------- */
 
+export const migrate5eCompendia = async function() {
+  for ( let pack of game.packs.filter(p => p.metadata.package === "dnd5e") ) {
+    await game.dnd5e.migrations.migrateCompendium(pack);
+  }
+};
+
+/* -------------------------------------------- */
+
 /**
  * Apply migration rules to all Entities within a single Compendium pack
  * @param pack
@@ -90,10 +98,21 @@ export const migrateActorData = function(actor) {
 
   // TODO: Actor Data Updates
 
-  // Owned Item Updates
+  // Migrate Owned Items
   let hasItemUpdates = false;
   const items = actor.items.map(i => {
+
+    // Migrate the Owned Item
     let itemUpdate = migrateItemData(i);
+
+    // Prepared, Equipped, and Proficient for NPC actors
+    if ( actor.data.type === "npc" ) {
+      if (i.data.data.hasOwnProperty("preparation")) itemUpdate["data.preparation.prepared"] = true;
+      if (i.data.data.hasOwnProperty("equipped")) itemUpdate["data.equipped"] = true;
+      if (i.data.data.hasOwnProperty("proficient")) itemUpdate["data.proficient"] = true;
+    }
+
+    // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) hasItemUpdates = true;
     return mergeObject(i.data, itemUpdate, {enforceTypes: false, inplace: false});
   });
@@ -110,9 +129,6 @@ export const migrateActorData = function(actor) {
 export const migrateItemData = function(item) {
   const updateData = {};
 
-  // Migrate all items
-  _migrateDamage(item, updateData);
-
   // Migrate backpack to loot
   if ( item.data.type === "backpack" ) {
     _migrateBackpackLoot(item, updateData);
@@ -121,12 +137,10 @@ export const migrateItemData = function(item) {
   // Migrate Spell items
   if (item.data.type === "spell") {
     _migrateSpellTime(item, updateData);
-    _migrateDuration(item, updateData);
-    _migrateRange(item, updateData);
     _migrateTarget(item, updateData);
     _migrateSpellComponents(item, updateData);
-    _migrateSpellSave(item, updateData);
     _migrateSpellPreparation(item, updateData);
+    _migrateSpellAction(item, updateData);
   }
 
   // Migrate Equipment items
@@ -136,15 +150,19 @@ export const migrateItemData = function(item) {
 
   // Migrate Weapon Items
   else if ( item.data.type === "weapon" ) {
-    _migrateRange(item, updateData);
     _migrateWeaponProperties(item, updateData);
   }
 
   // Migrate Consumable Items
   else if ( item.data.type === "consumable" ) {
     _migrateConsumableUsage(item, updateData);
-    _migrateDuration(item, updateData);
   }
+
+  // Migrate General Properties
+  _migrateRange(item, updateData);
+  _migrateDuration(item, updateData);
+  _migrateDamage(item, updateData);
+  _migrateRarity(item, updateData);
 
   // Flatten values and remove deprecated fields
   const toFlatten = ["ability", "attuned", "consumableType", "equipped", "identified", "quantity", "levels", "price",
@@ -207,23 +225,6 @@ const _migrateArmor = function(item, updateData) {
 
 /* -------------------------------------------- */
 
-/**
- * Migrate from a string based damage formula like "2d6 + 4 + 1d4" and a single string damage type like "slash" to
- * separated damage parts with associated damage type per part.
- * @private
- */
-const _migrateDamage = function(item, updateData) {
-  let damage = item.data.data.damage;
-  if ( !damage || (damage.parts instanceof Array) || !damage.value ) return;
-  const type = item.data.data.damageType ? item.data.data.damageType.value : "";
-  const formula = damage.value.replace(/[\-\*\/]/g, "+");
-  updateData["data.damage.parts"] = formula.split("+").map(s => s.trim()).map(p => [p, type || null]);
-  updateData["data.damage.-=value"] =  null;
-  updateData["data.-=damageType"] = null;
-};
-
-/* -------------------------------------------- */
-
 
 /**
  * Flatten several attributes which currently have an unnecessarily nested {value} object
@@ -232,7 +233,7 @@ const _migrateDamage = function(item, updateData) {
 const _migrateFlattenValues = function(item, updateData, toFlatten) {
   for ( let a of toFlatten ) {
     const attr = item.data.data[a];
-    if ( attr instanceof Object ) {
+    if ( attr instanceof Object && !updateData.hasOwnProperty("data."+a) ) {
       updateData["data."+a] = attr.hasOwnProperty("value") ? attr.value : null;
     }
   }
@@ -258,6 +259,36 @@ const _migrateSpellTime = function(item, updateData) {
 };
 
 /* -------------------------------------------- */
+/*  General Migrations                          */
+/* -------------------------------------------- */
+
+/**
+ * Migrate from a string based damage formula like "2d6 + 4 + 1d4" and a single string damage type like "slash" to
+ * separated damage parts with associated damage type per part.
+ * @private
+ */
+const _migrateDamage = function(item, updateData) {
+
+  // Regular Damage
+  let damage = item.data.data.damage;
+  if ( damage && damage.value ) {
+    let type = item.data.data.damageType ? item.data.data.damageType.value : "";
+    let formula = damage.value.replace(/[\-\*\/]/g, "+");
+    updateData["data.damage.parts"] = formula.split("+").map(s => s.trim()).map(p => [p, type || null]);
+    updateData["data.damage.-=value"] = null;
+    updateData["data.-=damageType"] = null;
+  }
+
+  // Versatile Damage
+  const d2 = item.data.data.damage2;
+  if ( d2 && d2.value ) {
+    let formula = d2.value.replace(/[\-\*\/]/g, "+");
+    updateData["data.damage.versatile"] = formula.split("+").shift();
+    updateData["data.-=damage2"] = null;
+  }
+};
+
+/* -------------------------------------------- */
 
 /**
  * Migrate from a string duration field like "1 Minute" to separate fields for duration units and numeric value
@@ -266,7 +297,7 @@ const _migrateSpellTime = function(item, updateData) {
 const _migrateDuration = function(item, updateData) {
   const TIME = Object.fromEntries(Object.entries(CONFIG.DND5E.timePeriods).map(e => e.reverse()));
   const dur = item.data.data.duration;
-  if ( dur.value && !dur.units ) {
+  if ( dur && dur.value && !dur.units ) {
     let match = dur.value.match(/([\d]+\s)?([\w\s]+)/);
     if ( !match ) return;
     let units = TIME[match[2]] || "inst";
@@ -282,8 +313,9 @@ const _migrateDuration = function(item, updateData) {
  * @private
  */
 const _migrateRange = function(item, updateData) {
+  if ( updateData["data.range"] ) return;
   const range = item.data.data.range;
-  if ( range.value && !range.units ) {
+  if ( range && range.value && !range.units ) {
     let match = range.value.match(/([\d\/]+)?(?:[\s]+)?([\w\s]+)?/);
     if ( !match ) return;
     let units = "none";
@@ -299,6 +331,14 @@ const _migrateRange = function(item, updateData) {
       if ( value[1] ) updateData["data.range.long"] = value[1];
     }
   }
+};
+
+/* -------------------------------------------- */
+
+const _migrateRarity = function(item, updateData) {
+  const rar = item.data.data.rarity;
+  if ( (rar instanceof Object) && !rar.value ) updateData["data.rarity"] = "Common";
+  else if ( (typeof rar === "string") && (rar === "") ) updateData["data.rarity"] = "Common";
 };
 
 /* -------------------------------------------- */
@@ -394,7 +434,17 @@ const _migrateSpellComponents = function(item, updateData) {
  * Migrate from a simple object with save.value to an expanded object where the DC is also configured
  * @private
  */
-const _migrateSpellSave = function(item, updateData) {
+const _migrateSpellAction = function(item, updateData) {
+
+  // Set default action type for spells
+  updateData["data.actionType"] = {
+    "attack": "satk",
+    "save": "save",
+    "heal": "heal",
+    "utility": "util",
+  }[item.data.data.spellType.value] || "util";
+
+  // Spell saving throw
   const save = item.data.data.save;
   if ( !save.value ) return;
   updateData["data.save"] = {
@@ -436,4 +486,23 @@ const _migrateWeaponProperties = function(item, updateData) {
 
   // Set default activation mode for weapons
   updateData["data.activation"] = {type: "action", cost: 1};
+
+  // Set default action type for weapons
+  updateData["data.actionType"] = {
+    "simpleM": "matk",
+    "simpleR": "ratk",
+    "martialM": "matk",
+    "martialR": "ratk",
+    "natural": "matk",
+    "improv": "matk",
+    "ammo": "ratk"
+  }[item.data.data.weaponType.value] || "matk";
+
+  // Set default melee weapon range
+  if ( updateData["data.actionType"] === "matk" ) {
+    updateData["data.range"] = {
+      value: updateData["data.properties.rch"] ? 10 : 5,
+      units: "ft"
+    }
+  }
 };

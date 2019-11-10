@@ -44,7 +44,7 @@
             <div class="form-group">
                 <label>Tool Proficiency</label>
                  <select name="data.proficient" data-dtype="Number">
-                     {{#select data.proficient.value}}
+                     {{#select data.proficient}}
                      {{#each config.proficiencyLevels as |label p|}}
                      <option value="{{p}}">{{label}}</option>
                      {{/each}}

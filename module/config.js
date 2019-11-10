@@ -205,9 +205,10 @@ DND5E.targetTypes = {
   "space": "DND5E.TargetSpace",
   "radius": "DND5E.TargetRadius",
   "sphere": "DND5E.TargetSphere",
+  "cylinder": "DND5E.TargetCylinder",
   "cone": "DND5E.TargetCone",
   "cube": "DND5E.TargetCube",
-  "ray": "DND5E.TargetRay",
+  "line": "DND5E.TargetLine",
   "wall": "DND5E.TargetWall"
 };
 
@@ -331,14 +332,6 @@ DND5E.spellComponents = {
   "V": "Verbal",
   "S": "Somatic",
   "M": "Material"
-};
-
-// Spell Types
-DND5E.spellTypes = {
-  "attack": "Spell Attack",
-  "save": "Saving Throw",
-  "heal": "Healing",
-  "utility": "Utility"
 };
 
 // Spell Schools

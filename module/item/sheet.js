@@ -83,7 +83,7 @@ export class ItemSheet5e extends ItemSheet {
    */
   _getItemStatus(item) {
     if ( item.type === "spell" ) return item.data.preparation.prepared ? "Prepared" : "Unprepared";
-    else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped.value ? "Equipped" : "Unequipped";
+    else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
     else if ( item.type === "tool" ) return item.data.proficient ? "Proficient" : "Not Proficient";
   }
 

@@ -137,7 +137,7 @@ export class Item5e extends Item {
     const properties = [
       CONFIG.DND5E.armorTypes[data.armorType.value],
       data.armor.value + " AC",
-      data.equipped.value ? "Equipped" : null,
+      data.equipped ? "Equipped" : null,
       data.stealth.value ? "Stealth Disadv." : null,
     ];
     data.properties = properties.filter(p => p !== null);
@@ -151,7 +151,7 @@ export class Item5e extends Item {
     const properties = [
       data.range.value,
       CONFIG.DND5E.weaponTypes[data.weaponType.value],
-      data.proficient.value ? "" : "Not Proficient"
+      data.proficient ? "" : "Not Proficient"
     ];
     data.properties = properties.filter(p => !!p);
     return data;
@@ -171,8 +171,8 @@ export class Item5e extends Item {
 
   _toolChatData() {
     const data = duplicate(this.data.data);
-    let abl = this.actor.data.data.abilities[data.ability.value].label,
-        prof = data.proficient.value || 0;
+    let abl = this.actor.data.data.abilities[data.ability.value].label;
+    let prof = data.proficient || 0;
     const properties = [abl, CONFIG.DND5E.proficiencyLevels[prof]];
     data.properties = properties.filter(p => p !== null);
     return data;
@@ -274,7 +274,7 @@ export class Item5e extends Item {
         parts = ["@item.bonus.value", `@abilities.${abl}.mod`, "@attributes.prof.value"],
         title = `${this.name} - Attack Roll`;
     rollData.item = itemData;
-    if ( !itemData.proficient.value ) parts.pop();
+    if ( !itemData.proficient ) parts.pop();
 
     // Allow for expanded critical range
     let critThreshold = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
@@ -473,7 +473,7 @@ export class Item5e extends Item {
       parts = [`@abilities.${abl}.mod`, "@proficiency"],
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
-    rollData["proficiency"] = Math.floor((this.data.data.proficient.value || 0) * rollData.attributes.prof.value);
+    rollData["proficiency"] = Math.floor((this.data.data.proficient || 0) * rollData.attributes.prof.value);
 
     // Call the roll helper utility
     Dice5e.d20Roll({

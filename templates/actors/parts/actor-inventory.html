@@ -27,15 +27,13 @@
     <li class="inventory-header flexrow">
         <h3 class="item-name flexrow">{{section.label}}</h3>
 
-            {{#if ../isCharacter}}
-            <div class="item-detail item-weight">Weight</div>
+        {{#if ../isCharacter}}
+        <div class="item-detail item-weight">Weight</div>
+        <div class="item-detail item-equipped">Equipped</div>
+        {{/if}}
 
-            <div class="item-detail item-equipped">Equipped</div>
-            {{/if}}
-
-            <div class="item-detail item-action">Usage</div>
-
-            <div class="item-detail item-uses">Charges</div>
+        <div class="item-detail item-uses">Charges</div>
+        <div class="item-detail item-action">Usage</div>
 
         {{#if ../owner}}
         <div class="item-controls">
@@ -72,15 +70,15 @@
             </div>
             {{/if}}
 
-            <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.data.activation.label}}
-                {{/if}}
-            </div>
-
             <div class="item-detail item-uses">
                 {{#if item.data.uses.value }}
                 {{item.data.uses.value}} / {{item.data.uses.max}}
+                {{/if}}
+            </div>
+
+            <div class="item-detail item-action">
+                {{#if item.data.activation.type }}
+                {{item.data.activation.label}}
                 {{/if}}
             </div>
 

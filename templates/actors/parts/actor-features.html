@@ -13,8 +13,8 @@
         <h3 class="item-name flexrow">{{section.label}}</h3>
 
         {{#if section.hasActions}}
-        <div class="item-detail item-action">Usage</div>
         <div class="item-detail item-uses">Charges</div>
+        <div class="item-detail item-action">Usage</div>
         {{/if}}
 
         {{#if ../owner}}
@@ -35,16 +35,17 @@
             </div>
 
             {{#if section.hasActions}}
-            <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.data.activation.label}}
-                {{/if}}
-            </div>
             <div class="item-detail item-uses">
                 {{#if item.data.uses.value }}
                 {{item.data.uses.value}} / {{item.data.uses.max}}
                 {{/if}}
             </div>
+            <div class="item-detail item-action">
+                {{#if item.data.activation.type }}
+                {{item.data.activation.label}}
+                {{/if}}
+            </div>
+
 
             {{else if section.isClass}}
             <div class="item-detail">
