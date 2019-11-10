@@ -174,7 +174,7 @@ export class ItemSheet5e extends ItemSheet {
       initial: this["_sheetTab"],
       callback: clicked => {
         const tab = clicked.data("tab");
-        this["_sheetTab"] = clicked.data("tab");
+        this["_sheetTab"] = tab;
         if ( tab === "details" ) {
           this.setPosition({width: this.options.width, height: this.options.detailHeight});
         } else this.setPosition({width: this.options.width, height: this.options.height});

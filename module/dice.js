@@ -42,7 +42,7 @@ export class Dice5e {
       if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
       // Execute the roll
-      let roll = new Roll(parts.join("+"), data).roll();
+      let roll = new Roll(parts.join(" + "), data).roll();
 
       // Flag critical thresholds
       let d20 = roll.parts[0];

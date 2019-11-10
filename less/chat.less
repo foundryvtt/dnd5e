@@ -6,6 +6,7 @@
 
 .dnd5e.chat-card {
   font-style: normal;
+  font-size: 12px;
 
   .card-header {
     padding: 3px 0;
@@ -21,11 +22,20 @@
       flex: 1;
       margin: 0;
       line-height: 36px;
+      .nodesto();
+      color: @colorOlive;
     }
   }
 
   .card-content {
     margin: 5px 0;
+
+    h3 {
+      font-size: 12px;
+      margin: 0;
+      font-weight: bold;
+    }
+
   }
 
   .card-buttons {
@@ -39,6 +49,9 @@
     }
 
     button {
+      font-size: 12px;
+      height: 24px;
+      line-height: 20px;
       margin: 2px 0;
     }
   }
@@ -50,7 +63,7 @@
     span {
       border-right: 2px groove #FFF;
       padding: 0 5px 0 0;
-      font-size: 12px;
+      font-size: 10px;
 
       &:last-child {
         border-right: none;

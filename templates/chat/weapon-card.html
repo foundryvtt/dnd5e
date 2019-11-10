@@ -7,9 +7,10 @@
     <div class="card-content">{{{data.description.value}}}</div>
 
     <div class="card-buttons">
-        <button data-action="weaponAttack">Attack</button>
-        {{#if data.damage.value}}<button data-action="weaponDamage">Damage</button>{{/if}}
-        {{#if data.damage2.value}}<button data-action="weaponDamage2">Alt. Damage</button>{{/if}}
+        {{#if hasAttack}}<button data-action="attack">Attack</button>{{/if}}
+        {{#if hasDamage}}<button data-action="damage">Damage</button>{{/if}}
+        {{#if isVersatile}}<button data-action="versatile">Versatile</button>{{/if}}
+        {{#if hasSave}}<button data-action="save" disabled>Save {{data.save.label}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

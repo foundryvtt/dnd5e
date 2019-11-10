@@ -5,6 +5,24 @@ import { Dice5e } from "../dice.js";
  */
 export class Item5e extends Item {
 
+  get hasAttack() {
+    return ["matk", "ratk", "satk"].includes(this.data.data.actionType)
+  }
+
+  get hasDamage() {
+    return !!(this.data.data.damage && this.data.data.damage.parts.length);
+  }
+
+  get isVersatile() {
+    return !!(this.hasDamage && this.data.data.damage.versatile);
+  }
+
+  get hasSave() {
+    return !!(this.data.data.save && this.data.data.save.ability);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
@@ -70,7 +88,7 @@ export class Item5e extends Item {
       // Save DC
       let save = item.data.save || {};
       if ( !save.ability ) save.dc = null;
-      save.label = save.ability ? `DC ${save.dc} ${C.abilities[save.ability]}` : "";
+      save.label = save.ability ? `DC ${save.dc || ""} ${C.abilities[save.ability]}` : "";
 
       // Damage
       let dam = item.data.damage || {};
@@ -88,13 +106,17 @@ export class Item5e extends Item {
   async roll() {
 
     // Basic template rendering data
-    const template = `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`
+    const template = `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`;
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
       item: this.data,
-      data: this.getChatData()
+      data: this.getChatData(),
+      hasAttack: this.hasAttack,
+      hasDamage: this.hasDamage,
+      isVersatile: this.isVersatile,
+      hasSave: this.hasSave
     };
 
     // Basic chat message data
@@ -132,13 +154,18 @@ export class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare chat card data for equipment type items
+   * @private
+   */
   _equipmentChatData() {
     const data = duplicate(this.data.data);
     const properties = [
-      CONFIG.DND5E.armorTypes[data.armorType.value],
-      data.armor.value + " AC",
-      data.equipped ? "Equipped" : null,
-      data.stealth.value ? "Stealth Disadv." : null,
+      CONFIG.DND5E.armorTypes[data.armor.type],
+      data.armor.label || null,
+      data.equipped ? "Equipped" : "Not Equipped",
+      data.proficient ? "Proficient": "Not Proficient",
+      data.stealth.value ? "Stealth Disadvantage" : null,
     ];
     data.properties = properties.filter(p => p !== null);
     return data;
@@ -146,12 +173,17 @@ export class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare chat card data for weapon type items
+   * @private
+   */
   _weaponChatData() {
     const data = duplicate(this.data.data);
     const properties = [
-      data.range.value,
-      CONFIG.DND5E.weaponTypes[data.weaponType.value],
-      data.proficient ? "" : "Not Proficient"
+      CONFIG.DND5E.weaponTypes[data.weaponType],
+      data.activation.label,
+      data.range.label,
+      data.proficient ? "Proficient" : "Not Proficient"
     ];
     data.properties = properties.filter(p => !!p);
     return data;
@@ -159,30 +191,48 @@ export class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare chat card data for consumable type items
+   * @private
+   */
   _consumableChatData() {
     const data = duplicate(this.data.data);
-    data.consumableType.str = CONFIG.DND5E.consumableTypes[data.consumableType.value];
-    data.properties = [data.consumableType.str, data.charges.value + "/" + data.charges.max + " Charges"];
+    data.properties = [
+      CONFIG.DND5E.consumableTypes[data.consumableType],
+      data.charges.value + "/" + data.charges.max + " Charges"
+    ];
     data.hasCharges = data.charges.value >= 0;
     return data;
   }
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare chat card data for tool type items
+   * @private
+   */
   _toolChatData() {
     const data = duplicate(this.data.data);
-    let abl = this.actor.data.data.abilities[data.ability.value].label;
-    let prof = data.proficient || 0;
-    const properties = [abl, CONFIG.DND5E.proficiencyLevels[prof]];
+    const properties = [
+      CONFIG.DND5E.abilities[data.ability] || null,
+      CONFIG.DND5E.proficiencyLevels[data.proficient || 0]
+    ];
     data.properties = properties.filter(p => p !== null);
     return data;
   }
 
   /* -------------------------------------------- */
 
-  _backpackChatData() {
+  /**
+   * Prepare chat card data for tool type items
+   * @private
+   */
+  _lootChatData() {
     const data = duplicate(this.data.data);
-    data.properties = [];
+    data.properties = [
+      "Loot",
+      data.weight ? data.weight + " lbs." : null
+    ].filter(p => !!p);
     return data;
   }
 
@@ -194,30 +244,22 @@ export class Item5e extends Item {
    * @private
    */
   _spellChatData() {
-    const data = duplicate(this.data.data),
-          ad = this.actor.data.data;
+    const data = duplicate(this.data.data);
+    const ad = this.actor.data.data;
 
-    // Spell saving throw text and DC
-    data.isSave = data.spellType.value === "save";
-    if ( data.ability.value ) data.save.dc = 8 + ad.abilities[data.ability.value].mod + ad.attributes.prof.value;
-    else data.save.dc = ad.attributes.spelldc.value;
-    data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
-
-    // Spell attack labels
-    data.damageLabel = data.spellType.value === "heal" ? "Healing" : "Damage";
-    data.isAttack = data.spellType.value === "attack";
+    // Spell saving throw text
+    const abl = data.ability || ad.attributes.spellcasting.value || "int";
+    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
+    data.save.label = `DC ${data.save.dc} ${CONFIG.DND5E.abilities[data.save.ability]}`;
 
     // Combine properties
     const props = [
-      CONFIG.DND5E.spellSchools[data.school.value],
-      CONFIG.DND5E.spellLevels[data.level.value],
-      data.components.value,
-      data.target.value,
-      data.range.value,
-      data.time.value,
-      data.duration.value,
-      data.concentration.value ? "Concentration" : null,
-      data.ritual.value ? "Ritual" : null
+      data.level.label,
+      data.components.label,
+      data.target.label,
+      data.activation.label,
+      data.range.label,
+      data.duration.label,
     ];
     data.properties = props.filter(p => !!p);
     return data;
@@ -230,56 +272,58 @@ export class Item5e extends Item {
    * Prepare chat card data for items of the "Feat" type
    */
   _featChatData() {
-    const data = duplicate(this.data.data),
-          ad = this.actor.data.data;
+    const data = duplicate(this.data.data);
+    const ad = this.actor.data.data;
 
-    // Feat button actions
-    data.isSave = data.save.value !== "";
-    if ( data.isSave ) {
-      let abl = data.ability.value || ad.attributes.spellcasting.value || "str";
-      data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
-      data.save.str = data.save.value ? this.actor.data.data.abilities[data.save.value].label : "";
-    }
-
-    // Feat attack attributes
-    data.isAttack = data.featType.value === "attack";
+    // Spell saving throw text
+    const abl = data.ability || ad.attributes.spellcasting.value || "str";
+    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
+    data.save.label = `DC ${data.save.dc} ${CONFIG.DND5E.abilities[data.save.ability]}`;
 
     // Feat properties
     const props = [
-      data.requirements.value,
-      data.target.value,
-      data.range.value,
-      data.time.value,
-      data.duration.value
+      data.requirements,
+      data.target.label,
+      data.activation.label,
+      data.range.label,
+      data.duration.label,
     ];
     data.properties = props.filter(p => p);
     return data;
   }
 
   /* -------------------------------------------- */
-  /*  Roll Attacks
+  /*  Item Rolls - Attack, Damage, Saves, Checks  */
   /* -------------------------------------------- */
 
   /**
-   * Roll a Weapon Attack
+   * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.d20Roll logic for the core implementation
    */
-  rollWeaponAttack(event) {
-    if ( this.type !== "weapon" ) throw "Wrong item type!";
+  rollAttack(event) {
+    const itemData = this.data.data;
+    const actorData = this.actor.data.data;
+    if ( !["matk", "ratk", "satk"].includes(itemData.actionType) ) {
+      throw new Error("You may not place an Attack Roll with this Item.");
+    }
 
-    // Prepare roll data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
-        parts = ["@item.bonus.value", `@abilities.${abl}.mod`, "@attributes.prof.value"],
-        title = `${this.name} - Attack Roll`;
+    // Determine ability score modifier
+    let abl = itemData.ability;
+    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting.value || "int";
+    else if ( !abl ) abl = "str";
+
+    // Define Roll parts
+    const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.prof.value"];
+    if ( (this.data.type === "weapon") && !itemData.proficient ) parts.pop();
+
+    // Define Critical threshold
+    let crit = 20;
+    if ( this.data.type === "weapon" ) crit = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
+
+    // Define Roll Data
+    const rollData = duplicate(actorData);
     rollData.item = itemData;
-    if ( !itemData.proficient ) parts.pop();
-
-    // Allow for expanded critical range
-    let critThreshold = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
-
-    // TODO: Incorporate Elven Accuracy
+    const title = `${this.name} - Attack Roll`;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
@@ -289,7 +333,7 @@ export class Item5e extends Item {
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      critical: critThreshold,
+      critical: crit,
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -301,60 +345,38 @@ export class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Roll Weapon Damage
+   * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.damageRoll logic for the core implementation
    */
-  rollWeaponDamage(event, alternate=false) {
-    if ( this.type !== "weapon" ) throw "Wrong item type!";
+  rollDamage(event, {versatile=false}={}) {
+    const itemData = this.data.data;
+    const actorData = this.actor.data.data;
+    if ( !itemData.damage || (itemData.damage.length === 0) ) {
+      throw new Error("You may not make a Damage Roll with this Item.");
+    }
 
-    // Get data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || "str",
-        parts = [alternate ? itemData.damage2.value : itemData.damage.value, `@abilities.${abl}.mod`],
-        dtype = CONFIG.DND5E.damageTypes[alternate ? itemData.damage2Type.value : itemData.damageType.value];
+    // Determine ability score modifier
+    let abl = itemData.ability;
+    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting.value || "int";
+    else if ( !abl ) abl = "str";
 
-    // Append damage type to title
-    let title = `${this.name} - Damage`;
-    if ( dtype ) title += ` (${dtype})`;
+    // Define Roll parts
+    const parts = itemData.damage.parts.map(d => d[0]);
+    if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
+
+    // Define Roll Data
+    const rollData = mergeObject(duplicate(actorData), {
+      item: itemData,
+      mod: actorData.abilities[abl].mod,
+      prof: actorData.attributes.prof.value
+    });
+    const title = `${this.name} - Damage Roll`;
 
     // Call the roll helper utility
-    rollData.item = itemData;
     Dice5e.damageRoll({
       event: event,
       parts: parts,
       actor: this.actor,
-      data: rollData,
-      title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event.clientY - 80,
-        left: window.innerWidth - 710
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Roll Spell Damage
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
-   */
-  rollSpellAttack(event) {
-    if ( this.type !== "spell" ) throw "Wrong item type!";
-
-    // Prepare roll data
-    let itemData = this.data.data,
-        rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
-        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
-        title = `${this.name} - Spell Attack Roll`;
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
-      event: event,
-      parts: parts,
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
@@ -411,49 +433,47 @@ export class Item5e extends Item {
 
   /**
    * Use a consumable item
-   * TODO THIS NEEDS REFACTOR
    */
-  rollConsumable(ev) {
+  rollConsumable(event) {
     let itemData = this.data.data;
+    const formula = itemData.damage ? itemData.damage.label : itemData.formula;
 
     // Submit the roll to chat
-    let cv = itemData['consume'].value,
-        content = `Uses ${this.name}`;
-    if ( cv ) {
-      new Roll(cv).toMessage({
+    if ( formula ) {
+      new Roll(formula).toMessage({
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        flavor: content
+        flavor: `Consumes ${this.name}`
       });
     } else {
       ChatMessage.create({
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        content: content
+        content: `Consumes ${this.name}`
       })
     }
 
     // Deduct consumed charges from the item
-    if ( itemData['autoUse'].value ) {
-      let qty = itemData['quantity'],
-          chg = itemData['charges'];
+    if ( itemData.uses.autoUse ) {
+      let q = itemData.quantity;
+      let c = itemData.uses.value;
 
       // Deduct an item quantity
-      if ( chg.value <= 1 && qty.value > 1 ) {
+      if ( c <= 1 && q > 1 ) {
         this.actor.updateOwnedItem({
           id: this.data.id,
-          'data.quantity.value': Math.max(qty.value - 1, 0),
-          'data.charges.value': chg.max
+          'data.quantity': Math.max(q - 1, 0),
+          'data.uses.value': itemData.uses.max
         }, true);
       }
 
       // Optionally destroy the item
-      else if ( chg.value <= 1 && qty.value <= 1 && itemData['autoDestroy'].value ) {
+      else if ( c <= 1 && q <= 1 && itemData.uses.autoDestroy ) {
         this.actor.deleteOwnedItem(this.data.id);
       }
 
       // Deduct the remaining charges
       else {
-        this.actor.updateOwnedItem({id: this.data.id, 'data.charges.value': Math.max(chg.value - 1, 0)});
+        this.actor.updateOwnedItem({id: this.data.id, 'data.uses.value': Math.max(c - 1, 0)});
       }
     }
   }
@@ -466,14 +486,15 @@ export class Item5e extends Item {
    */
   rollToolCheck(event) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
+    const itemData = this.data.data;
 
     // Prepare roll data
     let rollData = duplicate(this.actor.data.data),
-      abl = this.data.data.ability.value || "int",
+      abl = itemData.ability || "int",
       parts = [`@abilities.${abl}.mod`, "@proficiency"],
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
-    rollData["proficiency"] = Math.floor((this.data.data.proficient || 0) * rollData.attributes.prof.value);
+    rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof.value);
 
     // Call the roll helper utility
     Dice5e.d20Roll({
@@ -483,7 +504,7 @@ export class Item5e extends Item {
       template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: (parts, data) => `${this.name} - ${data.abilities[data.ability].label} Check`,
+      flavor: (parts, data) => `${this.name} - ${CONFIG.DND5E.abilities[abl]} Check`,
       dialogOptions: {
         width: 400,
         top: event.clientY - 80,
@@ -611,18 +632,11 @@ export class Item5e extends Item {
       // Get the Action
       const action = button.data("action");
 
-      // Weapon attack
-      if ( action === "weaponAttack" ) item.rollWeaponAttack(ev);
-      else if ( action === "weaponDamage" ) item.rollWeaponDamage(ev);
-      else if ( action === "weaponDamage2" ) item.rollWeaponDamage(ev, true);
-
-      // Spell actions
-      else if ( action === "spellAttack" ) item.rollSpellAttack(ev);
-      else if ( action === "spellDamage" ) item.rollSpellDamage(ev);
-
-      // Feat actions
-      else if ( action === "featAttack" ) item.rollFeatAttack(ev);
-      else if ( action === "featDamage" ) item.rollFeatDamage(ev);
+      // Attack and Damage Rolls
+      // TODO these action tags should be collapsed
+      if ( ["attack", "spellAttack", "featAttack"].includes(action ) ) item.rollAttack(ev);
+      if ( ["damage", "spellDamage", "featDamage"].includes(action) ) item.rollDamage(ev);
+      else if ( action === "versatile" ) item.rollDamage(ev, {versatile: true});
 
       // Consumable usage
       else if ( action === "consume" ) item.rollConsumable(ev);

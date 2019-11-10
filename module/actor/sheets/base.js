@@ -230,31 +230,18 @@ export class ActorSheet5e extends ActorSheet {
 	activateListeners(html) {
     super.activateListeners(html);
 
-    // Pad field width
-    html.find('[data-wpad]').each((i, e) => {
-      let text = e.tagName === "INPUT" ? e.value : e.innerText,
-        w = text.length * parseInt(e.getAttribute("data-wpad")) / 2;
-      e.setAttribute("style", "flex: 0 0 " + w + "px");
-    });
-
     // Activate tabs
-    html.find('.tabs').each((_, tabs) => {
-      const group = tabs.dataset.group;
-      const initial = this[`_sheetTab-${group}`];
-      new Tabs(tabs, {
-        initial: initial,
-        callback: clicked => this[`_sheetTab-${group}`] = clicked.data("tab")
-      });
+    new Tabs(html.find(".tabs"), {
+      initial: this["_sheetTab"],
+      callback: clicked => {
+        this["_sheetTab"] = clicked.data("tab");
+      }
     });
 
     // Activate Item Filters
-    html.find(".filter-list").each((i, ul) => {
-      const set = this._filters[ul.dataset.filter];
-      const filters = ul.querySelectorAll(".filter-item");
-      for ( let li of filters ) {
-        if ( set.has(li.dataset.filter) ) li.classList.add("active");
-      }
-    }).on("click", ".filter-item", this._onToggleFilter.bind(this));
+    const filterLists = html.find(".filter-list");
+    filterLists.each(this._initializeFilterItemList.bind(this));
+    filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
     html.find('.item .item-name h4').click(event => this._onItemSummary(event));
@@ -270,11 +257,7 @@ export class ActorSheet5e extends ActorSheet {
     html.find('.ability-proficiency').click(this._onToggleAbilityProficiency.bind(this));
 
     // Ability Checks
-    html.find('.ability-name').click(event => {
-      event.preventDefault();
-      let ability = event.currentTarget.parentElement.getAttribute("data-ability");
-      this.actor.rollAbility(ability, {event: event});
-    });
+    html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
 
     // Toggle Skill Proficiency
     html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
@@ -322,6 +305,20 @@ export class ActorSheet5e extends ActorSheet {
 
     // Item Rolling
     html.find('.item .item-image').click(event => this._onItemRoll(event));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Iinitialize Item list filters by activating the set of filters which are currently applied
+   * @private
+   */
+  _initializeFilterItemList(i, ul) {
+    const set = this._filters[ul.dataset.filter];
+    const filters = ul.querySelectorAll(".filter-item");
+    for ( let li of filters ) {
+      if ( set.has(li.dataset.filter) ) li.classList.add("active");
+    }
   }
 
   /* -------------------------------------------- */
@@ -420,6 +417,19 @@ export class ActorSheet5e extends ActorSheet {
     };
     delete itemData.data["type"];
     return this.actor.createOwnedItem(itemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling an Ability check, either a test or a saving throw
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onRollAbilityTest(event) {
+    event.preventDefault();
+    let ability = event.currentTarget.parentElement.dataset.ability;
+    this.actor.rollAbility(ability, {event: event});
   }
 
   /* -------------------------------------------- */

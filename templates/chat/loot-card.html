@@ -5,4 +5,10 @@
     </header>
 
     <div class="card-content">{{{data.description.value}}}</div>
+
+    <footer class="card-footer">
+        {{#each data.properties}}
+        <span>{{this}}</span>
+        {{/each}}
+    </footer>
 </div>

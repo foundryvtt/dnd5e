@@ -9,9 +9,10 @@
     </div>
 
     <div class="card-buttons">
-        {{#if data.isSave}}<span>Save DC {{data.save.dc}} ({{data.save.str}})</span>{{/if}}
-        {{#if data.isAttack}}<button data-action="featAttack">Attack</button>{{/if}}
-        {{#if data.damage.value}}<button data-action="featDamage">Damage</button>{{/if}}
+        {{#if hasAttack}}<button data-action="attack">Attack</button>{{/if}}
+        {{#if hasDamage}}<button data-action="damage">Damage</button>{{/if}}
+        {{#if isVersatile}}<button data-action="versatile">Versatile</button>{{/if}}
+        {{#if hasSave}}<button data-action="save" data-ability="{{data.save.ability}}" disabled>Save {{data.save.label}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

@@ -225,6 +225,11 @@
   height: 22px;
   background: transparent;
 }
+.dnd5e.sheet .editable .rollable:hover {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
 .dnd5e.sheet .editor {
   height: 100%;
 }
@@ -990,6 +995,7 @@
 /* ----------------------------------------- */
 .dnd5e.chat-card {
   font-style: normal;
+  font-size: 12px;
 }
 .dnd5e.chat-card .card-header {
   padding: 3px 0;
@@ -1004,9 +1010,17 @@
   flex: 1;
   margin: 0;
   line-height: 36px;
+  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-size: 20px;
+  color: #4b4a44;
 }
 .dnd5e.chat-card .card-content {
   margin: 5px 0;
+}
+.dnd5e.chat-card .card-content h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: bold;
 }
 .dnd5e.chat-card .card-buttons {
   margin: 5px 0;
@@ -1018,6 +1032,9 @@
   border: 1px solid #CCC;
 }
 .dnd5e.chat-card .card-buttons button {
+  font-size: 12px;
+  height: 24px;
+  line-height: 20px;
   margin: 2px 0;
 }
 .dnd5e.chat-card .card-footer {
@@ -1027,7 +1044,7 @@
 .dnd5e.chat-card .card-footer span {
   border-right: 2px groove #FFF;
   padding: 0 5px 0 0;
-  font-size: 12px;
+  font-size: 10px;
 }
 .dnd5e.chat-card .card-footer span:last-child {
   border-right: none;
@@ -1143,6 +1160,11 @@
 }
 .dnd5e.sheet.actor.character .counters .death-saves .counter-value {
   flex: 0 0 120px;
+}
+.dnd5e.sheet.actor.character .item-detail.player-class {
+  flex: 0 0 180px;
+  text-align: right;
+  padding-right: 10px;
 }
 .dnd5e.sheet.actor.character .encumbrance {
   flex: 0 0 12px;
