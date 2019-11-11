@@ -74,6 +74,7 @@ export const migrateCompendium = async function(pack) {
       if (entity === "Item") updateData = migrateItemData(ent.data);
       else if (entity === "Actor") updateData = migrateActorData(ent.data);
       if (!isObjectEmpty(updateData)) {
+        expandObject(updateData);
         updateData["_id"] = ent._id;
         await pack.updateEntity(updateData);
         console.log(`Migrated ${entity} entity ${ent.name} in Compendium ${pack.collection}`);
@@ -313,8 +314,9 @@ const _migrateDamage = function(item, updateData) {
   let damage = item.data.damage;
   if ( damage && damage.value ) {
     let type = item.data.damageType ? item.data.damageType.value : "";
-    let formula = damage.value.replace(/[\-\*\/]/g, "+");
-    updateData["data.damage.parts"] = formula.split("+").map(s => s.trim()).map(p => [p, type || null]);
+    const parts = damage.value.split("+").map(s => s.trim()).map(p => [p, type || null]);
+    if ( item.type === "weapon" && parts.length ) parts[0][0] += " + @mod";
+    updateData["data.damage.parts"] = parts;
     updateData["data.damage.-=value"] = null;
     updateData["data.-=damageType"] = null;
   }
@@ -323,7 +325,7 @@ const _migrateDamage = function(item, updateData) {
   const d2 = item.data.damage2;
   if ( d2 && d2.value ) {
     let formula = d2.value.replace(/[\-\*\/]/g, "+");
-    updateData["data.damage.versatile"] = formula.split("+").shift();
+    updateData["data.damage.versatile"] = formula.split("+").shift() + " + @mod";
     updateData["data.-=damage2"] = null;
   }
 };
@@ -391,11 +393,14 @@ const _migrateRarity = function(item, updateData) {
 const _migrateRemoveDeprecated = function(ent, updateData, toFlatten) {
   const flat = flattenObject(ent.data);
   for ( let [k, v] of Object.entries(flat) ) {
-    if ( toFlatten.includes(k) ) continue;
+    if ( toFlatten.some(f => k.startsWith(f)) ) continue;
 
     // Deprecate the entire object
     if ( k.endsWith("_deprecated") ) {
-      updateData[`data.-=${k.replace("._deprecated", "")}`] = null;
+      let ks = k.split(".");
+      ks.pop();
+      ks[ks.length - 1] = "-="+ks[ks.length - 1];
+      updateData[`data.${ks.join(".")}`] = null;
       continue;
     }
 
