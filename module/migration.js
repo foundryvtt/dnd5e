@@ -96,7 +96,8 @@ export const migrateCompendium = async function(pack) {
 export const migrateActorData = function(actor) {
   const updateData = {};
 
-  // TODO: Actor Data Updates
+  // Actor Data Updates
+  _migrateActorTraits(actor, updateData);
 
   // Migrate Owned Items
   let hasItemUpdates = false;
@@ -136,8 +137,6 @@ export const migrateItemData = function(item) {
 
   // Migrate Spell items
   if (item.data.type === "spell") {
-    _migrateSpellTime(item, updateData);
-    _migrateTarget(item, updateData);
     _migrateSpellComponents(item, updateData);
     _migrateSpellPreparation(item, updateData);
     _migrateSpellAction(item, updateData);
@@ -158,6 +157,12 @@ export const migrateItemData = function(item) {
     _migrateConsumableUsage(item, updateData);
   }
 
+  // Spell and Feat cast times
+  if (["spell", "feat"].includes(item.data.type)) {
+    _migrateCastTime(item, updateData);
+    _migrateTarget(item, updateData);
+  }
+
   // Migrate General Properties
   _migrateRange(item, updateData);
   _migrateDuration(item, updateData);
@@ -172,6 +177,29 @@ export const migrateItemData = function(item) {
 
   // Return the migrated update data
   return updateData;
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate string format traits with a comma separator to an array of strings
+ * @private
+ */
+const _migrateActorTraits = function(actor, updateData) {
+  const dt = Object.fromEntries(Object.entries(CONFIG.DND5E.damageTypes).map(e => e.reverse()));
+  const map = {
+    "dr": dt,
+    "di": dt,
+    "dv": dt,
+    "ci": Object.fromEntries(Object.entries(CONFIG.DND5E.conditionTypes).map(e => e.reverse())),
+    "languages": Object.fromEntries(Object.entries(CONFIG.DND5E.languages).map(e => e.reverse()))
+  };
+  for ( let [t, choices] of Object.entries(map) ) {
+    const trait = actor.data.data.traits[t];
+    if ( typeof trait.value === "string" ) {
+      updateData[`data.traits.${t}.value`] = trait.value.split(",").map(t => choices[t.trim()]).filter(t => !!t);
+    }
+  }
 };
 
 /* -------------------------------------------- */
@@ -245,7 +273,7 @@ const _migrateFlattenValues = function(item, updateData, toFlatten) {
  * Migrate from a string spell casting time like "1 Bonus Action" to separate fields for activation type and numeric cost
  * @private
  */
-const _migrateSpellTime = function(item, updateData) {
+const _migrateCastTime = function(item, updateData) {
   const value = getProperty(item.data, "data.time.value");
   if ( !value ) return;
   const ATS = Object.fromEntries(Object.entries(CONFIG.DND5E.abilityActivationTypes).map(e => e.reverse()));
@@ -437,12 +465,14 @@ const _migrateSpellComponents = function(item, updateData) {
 const _migrateSpellAction = function(item, updateData) {
 
   // Set default action type for spells
-  updateData["data.actionType"] = {
-    "attack": "satk",
-    "save": "save",
-    "heal": "heal",
-    "utility": "util",
-  }[item.data.data.spellType.value] || "util";
+  if ( item.data.data.spellType ) {
+    updateData["data.actionType"] = {
+      "attack": "satk",
+      "save": "save",
+      "heal": "heal",
+      "utility": "util",
+    }[item.data.data.spellType.value] || "util";
+  }
 
   // Spell saving throw
   const save = item.data.data.save;
@@ -461,7 +491,7 @@ const _migrateSpellAction = function(item, updateData) {
  */
 const _migrateSpellPreparation = function(item, updateData) {
   const prep = item.data.data.preparation;
-  if ( !prep.mode ) {
+  if ( prep && !prep.mode ) {
     updateData["data.preparation.mode"] = "prepared";
     updateData["data.preparation.prepared"] = item.data.data.prepared ? Boolean(item.data.data.prepared.value) : false;
   }

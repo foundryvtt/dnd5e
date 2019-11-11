@@ -183,6 +183,7 @@ DND5E.damageTypes = {
 
 DND5E.distanceUnits = {
   "none": "DND5E.None",
+  "self": "DND5E.DistSelf",
   "touch": "DND5E.DistTouch",
   "ft": "DND5E.DistFt",
   "mi": "DND5E.DistMi",
