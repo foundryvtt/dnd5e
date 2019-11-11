@@ -12,7 +12,7 @@
             <div class="charlevel">
                 <div class="level">
                     <label>CR</label>
-                    <input name="data.details.cr.value" type="text" value="{{data.details.cr.label}}" placeholder="1"/>
+                    <input name="data.details.cr" type="text" value="{{crLabel}}" placeholder="1"/>
                 </div>
                 <div class="experience">
                     <span>{{data.details.xp.value}} XP</span>
@@ -21,13 +21,13 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.details.type.value" value="{{data.details.type.value}}" placeholder="Type"/>
+                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="Type"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment.value" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="Alignment"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.source.value" value="{{data.details.source.value}}" placeholder="Source"/>
+                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="Source"/>
                 </li>
             </ul>
         </div>
@@ -102,7 +102,7 @@
                         </div>
                         <footer class="attribute-footer">
                             <span>{{ localize "DND5E.Proficiency" }}</span>
-                            <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
+                            <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
                         </footer>
                     </li>
 

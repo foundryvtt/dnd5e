@@ -1,8 +1,8 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
         <label><h3>Spellcasting Ability</h3></label>
-        <select name="data.attributes.spellcasting.value" data-type="String">
-            {{#select data.attributes.spellcasting.value}}
+        <select name="data.attributes.spellcasting" data-type="String">
+            {{#select data.attributes.spellcasting}}
             <option value="">None</option>
             {{#each data.abilities as |abl a|}}
             <option value="{{a}}">{{abl.label}}</option>

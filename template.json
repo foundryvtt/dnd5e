@@ -47,32 +47,26 @@
             "tempmax": 0
           },
           "init": {
-            "value": 0
+            "value": 2,
+            "mod": 0,
+            "bonus": 0,
+            "total": 0
           },
-          "prof": {
-            "value": 0
-          },
+          "prof": 2,
           "speed": {
             "value": "30 ft",
             "special": ""
           },
-          "spellcasting": {
-            "value": "int"
-          },
-          "spelldc": {
-            "value": 0
-          }
+          "spellcasting": "int",
+          "spelldc": 10
         },
         "details": {
-          "alignment": {
-            "value": "True Neutral"
-          },
+          "alignment": "True Neutral",
           "biography": {
-            "value": ""
+            "value": "",
+            "public": ""
           },
-          "race": {
-            "value": "Human"
-          }
+          "race": "Human"
         },
         "skills": {
           "acr": {
@@ -149,15 +143,8 @@
           }
         },
         "traits": {
-          "size": {
-            "value": "med"
-          },
-          "senses": {
-            "value": ""
-          },
-          "perception": {
-            "value": 10
-          },
+          "size": "med",
+          "senses": "",
           "languages": {
             "value": [],
             "custom": ""
@@ -177,24 +164,17 @@
           "ci": {
             "value": [],
             "custom": ""
+          },
+          "perception": {
+            "_deprecated": true
           }
         },
         "currency": {
-          "pp": {
-            "value": 0
-          },
-          "gp": {
-            "value": 0
-          },
-          "ep": {
-            "value": 0
-          },
-          "sp": {
-            "value": 0
-          },
-          "cp": {
-            "value": 0
-          }
+          "pp": 0,
+          "gp": 0,
+          "ep": 0,
+          "sp": 0,
+          "cp": 0
         },
         "spells": {
           "spell0": {
@@ -251,17 +231,11 @@
           "success": 0,
           "failure": 0
         },
-        "exhaustion": {
-          "value": 0
-        },
-        "inspiration": {
-          "value": 1
-        }
+        "exhaustion": 0,
+        "inspiration": 0
       },
       "details": {
-        "background": {
-          "value":  ""
-        },
+        "background": "",
         "level": {
           "value": 1,
           "min": 1
@@ -271,18 +245,10 @@
           "min": 0,
           "max": 300
         },
-        "trait": {
-          "value": ""
-        },
-        "ideal": {
-          "value": ""
-        },
-        "bond": {
-          "value": ""
-        },
-        "flaw": {
-          "value": ""
-        }
+        "trait": "",
+        "ideal": "",
+        "bond": "",
+        "flaw": ""
       },
       "resources": {
         "primary": {
@@ -322,22 +288,13 @@
     "npc": {
       "templates": ["common"],
       "details": {
-        "type": {
-          "value": ""
-        },
-        "environment": {
-          "value": ""
-        },
-        "cr": {
-          "value": 1,
-          "min": 0
-        },
+        "type": "",
+        "environment": "",
+        "cr": 1,
         "xp": {
           "value": 10
         },
-        "source": {
-          "value": ""
-        }
+        "source": ""
       },
       "resources": {
         "legact": {

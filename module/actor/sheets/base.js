@@ -37,7 +37,8 @@ export class ActorSheet5e extends ActorSheet {
       options: this.options,
       editable: this.isEditable,
       cssClass: isOwner ? "editable" : "locked",
-      isCharacter: this.entity.data.type === "character"
+      isCharacter: this.entity.data.type === "character",
+      config: CONFIG.DND5E
     };
 
     // The Actor and its Items
@@ -62,7 +63,6 @@ export class ActorSheet5e extends ActorSheet {
     }
 
     // Update traits
-    data["actorSizes"] = CONFIG.DND5E.actorSizes;
     this._prepareTraits(data.actor.data.traits);
 
     // Prepare owned items

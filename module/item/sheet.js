@@ -68,7 +68,7 @@ export class ItemSheet5e extends ItemSheet {
     if ( data.item.type === "spell" ) {
       let save = data.item.data.save;
       if ( this.item.isOwned && (save.ability && !save.dc) ) {
-        save.dc = this.item.actor.data.data.attributes.spelldc.value;
+        save.dc = this.item.actor.data.data.attributes.spelldc;
       }
     }
     return data;

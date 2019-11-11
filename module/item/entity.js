@@ -106,7 +106,6 @@ export class Item5e extends Item {
   async roll() {
 
     // Basic template rendering data
-    const template = `public/systems/dnd5e/templates/chat/${this.data.type}-card.html`;
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
@@ -119,10 +118,16 @@ export class Item5e extends Item {
       hasSave: this.hasSave
     };
 
+    // Render the chat card template
+    const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
+    const template = `public/systems/dnd5e/templates/chat/${templateType}-card.html`;
+    const html = await renderTemplate(template, templateData);
+
     // Basic chat message data
     const chatData = {
       user: game.user._id,
       type: CHAT_MESSAGE_TYPES.OTHER,
+      content: html,
       speaker: {
         actor: this.actor._id,
         token: this.actor.token,
@@ -134,9 +139,6 @@ export class Item5e extends Item {
     let rollMode = game.settings.get("core", "rollMode");
     if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData["whisper"] = ChatMessage.getWhisperIDs("GM");
     if ( rollMode === "blindroll" ) chatData["blind"] = true;
-
-    // Render the template
-    chatData["content"] = await renderTemplate(template, templateData);
 
     // Create the chat message
     return ChatMessage.create(chatData, {displaySheet: false});
@@ -248,8 +250,8 @@ export class Item5e extends Item {
     const ad = this.actor.data.data;
 
     // Spell saving throw text
-    const abl = data.ability || ad.attributes.spellcasting.value || "int";
-    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
+    const abl = data.ability || ad.attributes.spellcasting || "int";
+    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
     data.save.label = `DC ${data.save.dc} ${CONFIG.DND5E.abilities[data.save.ability]}`;
 
     // Combine properties
@@ -276,8 +278,8 @@ export class Item5e extends Item {
     const ad = this.actor.data.data;
 
     // Spell saving throw text
-    const abl = data.ability || ad.attributes.spellcasting.value || "str";
-    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof.value;
+    const abl = data.ability || ad.attributes.spellcasting || "str";
+    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
     data.save.label = `DC ${data.save.dc} ${CONFIG.DND5E.abilities[data.save.ability]}`;
 
     // Feat properties
@@ -309,11 +311,11 @@ export class Item5e extends Item {
 
     // Determine ability score modifier
     let abl = itemData.ability;
-    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting.value || "int";
+    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting || "int";
     else if ( !abl ) abl = "str";
 
     // Define Roll parts
-    const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.prof.value"];
+    const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.prof"];
     if ( (this.data.type === "weapon") && !itemData.proficient ) parts.pop();
 
     // Define Critical threshold
@@ -357,7 +359,7 @@ export class Item5e extends Item {
 
     // Determine ability score modifier
     let abl = itemData.ability;
-    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting.value || "int";
+    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting || "int";
     else if ( !abl ) abl = "str";
 
     // Define Roll parts
@@ -368,7 +370,7 @@ export class Item5e extends Item {
     const rollData = mergeObject(duplicate(actorData), {
       item: itemData,
       mod: actorData.abilities[abl].mod,
-      prof: actorData.attributes.prof.value
+      prof: actorData.attributes.prof
     });
     const title = `${this.name} - Damage Roll`;
 
@@ -400,7 +402,7 @@ export class Item5e extends Item {
     // Get data
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
-        abl = itemData.ability.value || rollData.attributes.spellcasting.value || "int",
+        abl = itemData.ability.value || rollData.attributes.spellcasting || "int",
         parts = [itemData.damage.value],
         isHeal = itemData.spellType.value === "heal",
         dtype = CONFIG.DND5E.damageTypes[itemData.damageType.value];
@@ -494,7 +496,7 @@ export class Item5e extends Item {
       parts = [`@abilities.${abl}.mod`, "@proficiency"],
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
-    rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof.value);
+    rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
 
     // Call the roll helper utility
     Dice5e.d20Roll({
@@ -531,7 +533,7 @@ export class Item5e extends Item {
     let itemData = this.data.data,
         rollData = duplicate(this.actor.data.data),
         abl = itemData.ability.value || "str",
-        parts = [`@abilities.${abl}.mod`, "@attributes.prof.value"],
+        parts = [`@abilities.${abl}.mod`, "@attributes.prof"],
         title = `${this.name} - Attack Roll`;
     rollData.item = itemData;
 

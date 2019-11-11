@@ -6,17 +6,19 @@
 
     <div class="card-content">
         {{{data.description.value}}}
-
         {{#if data.materials.value}}
-        <p><strong>Required Materials.</strong> {{data.materials.value}}</p>
+        <p><strong>{{ localize "DND5E.ChatReqMats" }}.</strong> {{data.materials.value}}</p>
         {{/if}}
     </div>
 
     <div class="card-buttons">
-        {{#if hasAttack}}<button data-action="attack">Attack</button>{{/if}}
-        {{#if hasDamage}}<button data-action="damage">Damage</button>{{/if}}
-        {{#if isVersatile}}<button data-action="versatile">Versatile</button>{{/if}}
-        {{#if hasSave}}<button data-action="save" data-ability="{{data.save.ability}}" disabled>Save {{data.save.label}}</button>{{/if}}
+        {{#if hasAttack}}<button data-action="attack">{{ localize "DND5E.Attack" }}</button>{{/if}}
+        {{#if hasDamage}}<button data-action="damage">{{ localize "DND5E.Damage" }}</button>{{/if}}
+        {{#if isVersatile}}<button data-action="versatile">{{ localize "DND5E.Versatile" }}</button>{{/if}}
+        {{#if hasSave}}
+        <button data-action="save" data-ability="{{data.save.ability}}" disabled>
+            {{ localize "DND5E.Save" }} {{data.save.label}}
+        </button>{{/if}}
     </div>
 
     <footer class="card-footer">

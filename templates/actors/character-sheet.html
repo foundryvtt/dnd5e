@@ -30,13 +30,13 @@
             {{!-- Character Summary --}}
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.details.race.value" value="{{data.details.race.value}}" placeholder="Race"/>
+                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="Race"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.background.value" value="{{data.details.background.value}}" placeholder="Background"/>
+                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="Background"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment.value" value="{{data.details.alignment.value}}" placeholder="Alignment"/>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="Alignment"/>
                 </li>
             </ul>
 
@@ -67,7 +67,7 @@
                     </div>
                     <footer class="attribute-footer">
                         <span>{{ localize "DND5E.Proficiency" }}</span>
-                        <span>{{numberFormat data.attributes.prof.value decimals=0 sign=true}}</span>
+                        <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
                     </footer>
                 </li>
 
@@ -201,15 +201,15 @@
                     <div class="counter flexrow">
                         <h4>{{ localize "DND5E.Exhaustion" }}</h4>
                         <div class="counter-value">
-                            <input type="text" name="data.attributes.exhaustion.value" data-dtype="Number" placeholder="0"
-                                   value="{{data.attributes.exhaustion.value}}" />
+                            <input type="text" name="data.attributes.exhaustion" data-dtype="Number" placeholder="0"
+                                   value="{{data.attributes.exhaustion}}" />
                         </div>
                     </div>
                     <div class="counter flexrow">
                         <h4>{{ localize "DND5E.Inspiration" }}</h4>
                         <div class="counter-value">
-                            <input type="checkbox" name="data.attributes.inspiration.value" data-dtype="Boolean"
-                                   {{checked data.attributes.inspiration.value}}/>
+                            <input type="checkbox" name="data.attributes.inspiration" data-dtype="Boolean"
+                                   {{checked data.attributes.inspiration}}/>
                         </div>
                     </div>
                 </div>

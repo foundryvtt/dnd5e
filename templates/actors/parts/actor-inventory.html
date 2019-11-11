@@ -6,9 +6,9 @@
             Currency
             <a class="currency-convert" title="Convert Currency"><i class="fas fa-coins"></i></a>
         </h3>
-        {{#each data.currency as |c i|}}
-        <label class="denomination {{i}}">{{c.label}}:</label>
-        <input type="text" name="data.currency.{{i}}.value" value="{{c.value}}" data-dtype="Number"/>
+        {{#each data.currency as |v k|}}
+        <label class="denomination {{k}}">{{ lookup config.currencies k }}</label>
+        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>
     {{/if}}

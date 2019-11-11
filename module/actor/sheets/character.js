@@ -154,7 +154,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
       lg: 2,
       huge: 4,
       grg: 8
-    }[actorData.data.traits.size.value] || 1;
+    }[actorData.data.traits.size] || 1;
 
     // Apply Powerful Build feat
     if ( this.actor.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);

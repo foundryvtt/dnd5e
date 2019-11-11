@@ -94,7 +94,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
   _updateObject(event, formData) {
 
     // Format NPC Challenge Rating
-    let crv = "data.details.cr.value";
+    let crv = "data.details.cr";
     let cr = formData[crv];
     if ( cr ) {
         let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};

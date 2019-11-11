@@ -161,6 +161,20 @@ DND5E.consumableTypes = {
 
 /* -------------------------------------------- */
 
+/**
+ * The valid currency denominations supported by the 5e system
+ * @type {Object}
+ */
+DND5E.currencies = {
+  "pp": "DND5E.currencyPP",
+  "gp": "DND5E.currencyGP",
+  "ep": "DND5E.currencyEP",
+  "sp": "DND5E.currencySP",
+  "cp": "DND5E.currencyCP",
+};
+
+/* -------------------------------------------- */
+
 
 // Damage Types
 DND5E.damageTypes = {

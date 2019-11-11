@@ -23,20 +23,20 @@ export class Actor5e extends Actor {
     let saveBonus = getProperty(flags, "dnd5e.saveBonus") || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof.value) + saveBonus;
+      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof) + saveBonus;
     }
 
     // Skill modifiers
     for (let skl of Object.values(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
-      skl.mod = data.abilities[skl.ability].mod + Math.floor(skl.value * data.attributes.prof.value);
+      skl.mod = data.abilities[skl.ability].mod + Math.floor(skl.value * data.attributes.prof);
       skl.passive = 10 + skl.mod;
     }
 
     // Initiative
     const init = data.attributes.init;
     init.mod = data.abilities.dex.mod;
-    init.prof = getProperty(flags, "dnd5e.initiativeHalfProf") ? Math.floor(0.5 * data.attributes.prof.value) : 0;
+    init.prof = getProperty(flags, "dnd5e.initiativeHalfProf") ? Math.floor(0.5 * data.attributes.prof) : 0;
     init.bonus = init.value + (getProperty(flags, "dnd5e.initiativeAlert") ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
@@ -44,9 +44,9 @@ export class Actor5e extends Actor {
     data.attributes.ac.min = 10 + data.abilities.dex.mod;
 
     // Spell DC
-    let spellAbl = data.attributes.spellcasting.value || "int";
+    let spellAbl = data.abilities[data.attributes.spellcasting || "int"];
     let bonusDC = getProperty(flags, "dnd5e.spellDCBonus") || 0;
-    data.attributes.spelldc.value = 8 + data.attributes.prof.value + data.abilities[spellAbl].mod + bonusDC;
+    data.attributes.spelldc = 8 + data.attributes.prof + (spellAbl ? spellAbl.mod : 0) + bonusDC;
 
     // Return the prepared Actor data
     return actorData;
@@ -65,7 +65,7 @@ export class Actor5e extends Actor {
     let prior = this.getLevelExp(data.details.level.value - 1 || 0),
           req = data.details.xp.max - prior;
     data.details.xp.pct = Math.min(Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
-    data.attributes.prof.value = Math.floor((data.details.level.value + 7) / 4);
+    data.attributes.prof = Math.floor((data.details.level.value + 7) / 4);
   }
 
   /* -------------------------------------------- */
@@ -76,16 +76,15 @@ export class Actor5e extends Actor {
   _prepareNPCData(data) {
 
     // Challenge Rating
-    const cr = data.details.cr;
+    const cr = parseFloat(data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    cr.value = parseFloat(cr.value || 0);
-    cr.label = cr.value >= 1 ? String(cr.value) : crLabels[cr.value] || 1;
+    data.crLabel = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Kill Experience
-    data.details.xp.value = this.getCRExp(data.details.cr.value);
+    data.details.xp.value = this.getCRExp(data.details.cr);
 
     // Proficiency
-    data.attributes.prof.value = Math.floor((Math.max(data.details.cr.value, 1) + 7) / 4);
+    data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
   }
 
   /* -------------------------------------------- */
@@ -127,8 +126,8 @@ export class Actor5e extends Actor {
   async update(data, options={}) {
 
     // Apply changes in Actor size to Token width/height
-    if ( data["data.traits.size.value"] ) {
-      let size = CONFIG.DND5E.tokenSizes[data["data.traits.size.value"]];
+    if ( data["data.traits.size"] ) {
+      let size = CONFIG.DND5E.tokenSizes[data["data.traits.size"]];
       if ( this.isToken ) this.token.update(this.token.scene._id, {height: size, width: size});
       else {
         setProperty(data, "token.height", size);

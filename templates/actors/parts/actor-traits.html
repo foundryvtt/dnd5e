@@ -1,18 +1,18 @@
 <div class="traits">
     <div class="form-group">
         <label>{{localize "DND5E.Size"}}</label>
-        <select class="actor-size" name="data.traits.size.value">
-            {{#select data.traits.size.value}}
-            {{#each actorSizes as |label size|}}
+        <select class="actor-size" name="data.traits.size">
+            {{#select data.traits.size}}
+            {{#each config.actorSizes as |label size|}}
                 <option value="{{size}}">{{label}}</option>
             {{/each}}
             {{/select}}
         </select>
     </div>
 
-    <div class="form-group {{#unless data.traits.senses.value}}inactive{{/unless}}">
+    <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
         <label>{{localize "DND5E.Senses"}}</label>
-        <input type="text" name="data.traits.senses.value" value="{{data.traits.senses.value}}" placeholder="None"/>
+        <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="None"/>
     </div>
 
     <div class="form-group {{data.traits.languages.cssClass}}">
