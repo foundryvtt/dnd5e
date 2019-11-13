@@ -29,7 +29,8 @@ export class Actor5e extends Actor {
     // Skill modifiers
     for (let skl of Object.values(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
-      skl.mod = data.abilities[skl.ability].mod + Math.floor(skl.value * data.attributes.prof);
+      skl.bonus = parseInt(skl.bonus || 0);
+      skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.floor(skl.value * data.attributes.prof);
       skl.passive = 10 + skl.mod;
     }
 
@@ -78,7 +79,7 @@ export class Actor5e extends Actor {
     // Challenge Rating
     const cr = parseFloat(data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    data.crLabel = cr >= 1 ? String(cr) : crLabels[cr] || 1;
+    data.details.crLabel = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Kill Experience
     data.details.xp.value = this.getCRExp(data.details.cr);

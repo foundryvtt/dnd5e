@@ -52,6 +52,9 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     let [spells, other] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+      item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
+      const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
+      item.isCharged = !unusable;
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
@@ -98,7 +101,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     let cr = formData[crv];
     if ( cr ) {
         let crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
-        formData[crv] = crs[cr] || parseInt(cr);
+        formData[crv] = crs[cr] || parseFloat(cr) < 1 ? parseFloat(cr) : parseInt(cr);
     }
 
     // Parent ActorSheet update steps

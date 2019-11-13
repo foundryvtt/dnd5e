@@ -54,7 +54,8 @@
                 <label>Action Recharge</label>
                 <div class="form-fields">
                     <span>Recharge On</span>
-                    <input type="text" name="data.recharge.value" value="{{data.recharge.value}}" placeholder="1d6 Result"/>
+                    <input type="text" name="data.recharge.value" value="{{data.recharge.value}}"
+                           data-dtype="Number" placeholder="1d6 Result"/>
                     <label class="checkbox">
                         Charged
                         <input type="checkbox" name="data.recharge.charged" {{checked data.recharge.charged}}/>

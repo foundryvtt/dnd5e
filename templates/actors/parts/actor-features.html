@@ -28,7 +28,7 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        <li class="item flexrow" data-item-id="{{item.id}}">
+        <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>{{item.name}}</h4>
@@ -36,8 +36,14 @@
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
-                {{#if item.data.uses.value }}
+                {{#if item.data.uses.value}}
                 {{item.data.uses.value}} / {{item.data.uses.max}}
+                {{else if item.data.recharge.value}}
+                {{#if item.isOnCooldown}}
+                <a class="item-recharge rollable">{{item.data.recharge.label}}</a>
+                {{else}}
+                {{localize "DND5E.Charged"}}
+                {{/if}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">
@@ -45,7 +51,6 @@
                 {{item.data.activation.label}}
                 {{/if}}
             </div>
-
 
             {{else if section.isClass}}
             <div class="item-detail player-class">

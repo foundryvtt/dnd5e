@@ -52,10 +52,12 @@ Hooks.once("init", async function() {
   let backpackIndex = game.system.entityTypes.Item.findIndex(t => t === "backpack");
   if ( backpackIndex !== -1 ) game.system.entityTypes.Item.splice(backpackIndex, 1);
 
-  // Maybe apply a system migration
-  const NEEDS_MIGRATION_VERSION = 0.7;
-  let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
-  if ( needMigration && game.user.isGM ) await migrations.migrateWorld();
+  // Register sheet application classes
+  Actors.unregisterSheet("core", ActorSheet);
+  Actors.registerSheet("dnd5e", ActorSheet5eCharacter, { types: ["character"], makeDefault: true });
+  Actors.registerSheet("dnd5e", ActorSheet5eNPC, { types: ["npc"], makeDefault: true });
+  Items.unregisterSheet("core", ItemSheet);
+  Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
 });
 
 
@@ -63,6 +65,9 @@ Hooks.once("init", async function() {
 /*  Foundry VTT Setup                           */
 /* -------------------------------------------- */
 
+/**
+ * This function runs after game data has been requested and loaded from the servers, so entities exist
+ */
 Hooks.once("setup", function() {
 
   // Localize CONFIG objects once up-front
@@ -75,17 +80,16 @@ Hooks.once("setup", function() {
   }
 });
 
-
 /* -------------------------------------------- */
 
+/**
+ * Once the entire VTT framework is initialized, check to see if we should perform a data migration
+ */
 Hooks.once("ready", function() {
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("dnd5e", ActorSheet5eCharacter, { types: ["character"], makeDefault: true });
-  Actors.registerSheet("dnd5e", ActorSheet5eNPC, { types: ["npc"], makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
+  const NEEDS_MIGRATION_VERSION = 0.7;
+  let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
+  if ( needMigration && game.user.isGM ) migrations.migrateWorld();
 });
-
 
 /* -------------------------------------------- */
 /*  Canvas Initialization                       */

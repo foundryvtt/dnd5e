@@ -714,6 +714,12 @@
 .dnd5e.sheet.actor .inventory-list .item .item-properties {
   margin-top: 3px;
 }
+.dnd5e.sheet.actor .inventory-list .item .item-recharge {
+  flex: 0 0 80px;
+  text-align: right;
+  font-size: 11px;
+  color: #7a7971;
+}
 .dnd5e.sheet.actor .inventory-list .inventory-header {
   margin: 2px 0;
   padding: 0;
@@ -1082,7 +1088,7 @@
   height: 28px;
 }
 .dnd5e.sheet.actor.character .sheet-header .charlevel .experience input[type="text"] {
-  width: auto;
+  width: 100px;
 }
 .dnd5e.sheet.actor.character .sheet-header .charlevel .xpbar {
   width: 100%;

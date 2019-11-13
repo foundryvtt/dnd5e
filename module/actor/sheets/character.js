@@ -87,6 +87,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+      item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
+      const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
+      item.isCharged = !unusable;
       if ( item.type === "spell" ) arr[1].push(item);
       else if ( item.type === "feat" ) arr[2].push(item);
       else if ( item.type === "class" ) arr[3].push(item);

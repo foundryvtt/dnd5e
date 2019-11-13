@@ -80,6 +80,10 @@ export class Item5e extends Item {
       let dur = item.data.duration || {};
       if (["inst", "perm"].includes(dur.units)) dur.value = null;
       dur.label = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
+
+      // Recharge Label
+      let chg = item.data.recharge || {};
+      chg.label = chg.value ? (parseInt(chg.value) === 6 ? `Recharge [6]` : `Recharge [${chg.value}-6]`) : "";
     }
 
     // Item Actions
@@ -365,6 +369,10 @@ export class Item5e extends Item {
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
     if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
+    if ( (this.data.type === "spell") && (itemData.scaling.mode === "cantrip") ) {
+      const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
+      this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
+    }
 
     // Define Roll Data
     const rollData = mergeObject(duplicate(actorData), {
@@ -388,6 +396,22 @@ export class Item5e extends Item {
         left: window.innerWidth - 710
       }
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust a cantrip damage formula to scale it for higher level characters and monsters
+   * @private
+   */
+  _scaleCantripDamage(parts, level, scale) {
+    const add = Math.floor((level + 1) / 6);
+    if ( add === 0 ) return;
+    if ( scale && (scale !== parts[0]) ) {
+      parts[0] = parts[0] + " + " + scale.replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${add}d${d}`);
+    } else {
+      parts[0] = parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd)+add}d${d}`);
+    }
   }
 
   /* -------------------------------------------- */
@@ -478,6 +502,38 @@ export class Item5e extends Item {
         this.actor.updateOwnedItem({id: this.data.id, 'data.uses.value': Math.max(c - 1, 0)});
       }
     }
+  }
+
+  /* -------------------------------------------- */
+
+  async rollRecharge() {
+    const data = this.data.data;
+    if ( !data.recharge.value ) return;
+
+    // Roll the check
+    const roll = new Roll("1d6").roll();
+    const success = roll.total >= parseInt(data.recharge.value);
+
+    // Display a Chat Message
+    const rollMode = game.settings.get("core", "rollMode");
+    const chatData = {
+      user: game.user._id,
+      type: CHAT_MESSAGE_TYPES.ROLL,
+      flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
+      whisper: ( ["gmroll", "blindroll"].includes(rollMode) ) ? ChatMessage.getWhisperIDs("GM") : null,
+      blind: rollMode === "blindroll",
+      roll: roll,
+      speaker: {
+        actor: this.actor._id,
+        token: this.actor.token,
+        alias: this.actor.name
+      }
+    };
+
+    // Update the Item data
+    const promises = [ChatMessage.create(chatData)];
+    if ( success ) promises.push(this.update({"data.recharge.charged": true}));
+    return Promise.all(promises);
   }
 
   /* -------------------------------------------- */

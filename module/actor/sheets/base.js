@@ -305,6 +305,9 @@ export class ActorSheet5e extends ActorSheet {
 
     // Item Rolling
     html.find('.item .item-image').click(event => this._onItemRoll(event));
+
+    // Item Recharging
+    html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
   }
 
   /* -------------------------------------------- */
@@ -368,10 +371,24 @@ export class ActorSheet5e extends ActorSheet {
    */
   _onItemRoll(event) {
     event.preventDefault();
-    let itemId = Number($(event.currentTarget).parents(".item").attr("data-item-id")),
-        item = this.actor.getOwnedItem(itemId);
-    item.roll();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    return item.roll();
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle attempting to recharge an item usage by rolling a recharge check
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onItemRecharge(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    return item.rollRecharge();
+  };
 
   /* -------------------------------------------- */
 
