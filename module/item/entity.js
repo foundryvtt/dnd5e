@@ -130,7 +130,7 @@ export class Item5e extends Item {
     // Basic chat message data
     const chatData = {
       user: game.user._id,
-      type: CHAT_MESSAGE_TYPES.OTHER,
+      type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       speaker: {
         actor: this.actor._id,
@@ -518,7 +518,7 @@ export class Item5e extends Item {
     const rollMode = game.settings.get("core", "rollMode");
     const chatData = {
       user: game.user._id,
-      type: CHAT_MESSAGE_TYPES.ROLL,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
       whisper: ( ["gmroll", "blindroll"].includes(rollMode) ) ? ChatMessage.getWhisperIDs("GM") : null,
       blind: rollMode === "blindroll",

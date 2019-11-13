@@ -337,7 +337,7 @@ export class Actor5e extends Actor {
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
         content: msg,
-        type: CHAT_MESSAGE_TYPES.OTHER
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER
       });
     }
 

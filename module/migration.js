@@ -287,7 +287,7 @@ const _migrateFlattenValues = function(ent, updateData, toFlatten) {
  * @private
  */
 const _migrateCastTime = function(item, updateData) {
-  const value = getProperty(item.data, "data.time.value");
+  const value = getProperty(item.data, "time.value");
   if ( !value ) return;
   const ATS = Object.fromEntries(Object.entries(CONFIG.DND5E.abilityActivationTypes).map(e => e.reverse()));
   let match = value.match(/([\d]+\s)?([\w\s]+)/);
