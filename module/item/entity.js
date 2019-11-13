@@ -67,13 +67,19 @@ export class Item5e extends Item {
 
       // Target Label
       let tgt = item.data.target || {};
-      if (["none", "touch"].includes(tgt.units)) tgt.value = null;
+      if (["none", "touch", "self"].includes(tgt.units)) tgt.value = null;
+      if (["none", "self"].includes(tgt.type)) {
+        tgt.value = null;
+        tgt.units = null;
+      }
       tgt.label = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
       // Range Label
       let rng = item.data.range || {};
-      if (["none", "touch"].includes(rng.units)) rng.value = null;
-      else if (rng.value === 0) rng.units = null;
+      if (["none", "touch", "self"].includes(rng.units) || (rng.value === 0)) {
+        rng.value = null;
+        rng.long = null;
+      }
       rng.label = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
 
       // Duration Label
