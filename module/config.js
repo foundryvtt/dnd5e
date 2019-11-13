@@ -201,7 +201,8 @@ DND5E.distanceUnits = {
   "touch": "DND5E.DistTouch",
   "ft": "DND5E.DistFt",
   "mi": "DND5E.DistMi",
-  "spec": "DND5E.Special"
+  "spec": "DND5E.Special",
+  "any": "DND5E.DistAny"
 };
 
 /* -------------------------------------------- */
