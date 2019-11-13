@@ -46,6 +46,18 @@ DND5E.alignments = {
 /* -------------------------------------------- */
 
 /**
+ * Character senses options
+ */
+DND5E.senses = {
+  "bs": "DND5E.SenseBlindsight",
+  "dv": "DND5E.SenseDarkvision",
+  "ts": "DND5E.SenseTremorsense",
+  "tr": "DND5E.SenseTruesight"
+};
+
+/* -------------------------------------------- */
+
+/**
  * The set of Armor Proficiencies which a character may have
  * @type {Object}
  */
