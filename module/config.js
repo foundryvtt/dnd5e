@@ -27,6 +27,36 @@ DND5E.abilities = {
 
 /* -------------------------------------------- */
 
+/** 
+ * Character alignment options
+ */
+
+DND5E.alignments = {
+  'lg': "DND5E.AlignmentLawfulGood",
+  'ng': "DND5E.AlignmentNeutralGood",
+  'cg': "DND5E.AlignmentChaoticGood", 
+  'ln': "DND5E.AlignmentLawfulNeutral",
+  'tn': "DND5E.AlignmentTrueNeutral",
+  'cn': "DND5E.AlignmentChaoticNeutral",
+  'le': "DND5E.AlignmentLawfulEvil",
+  'ne': "DND5E.AlignmentNeutralEvil",
+  'ce': "DND5E.AlignmentChaoticEvil"
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Character senses options
+ */
+DND5E.senses = {
+  "bs": "DND5E.SenseBlindsight",
+  "dv": "DND5E.SenseDarkvision",
+  "ts": "DND5E.SenseTremorsense",
+  "tr": "DND5E.SenseTruesight"
+};
+
+/* -------------------------------------------- */
+
 /**
  * The set of Armor Proficiencies which a character may have
  * @type {Object}
