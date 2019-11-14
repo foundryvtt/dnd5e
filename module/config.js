@@ -223,6 +223,7 @@ DND5E.targetTypes = {
   "sphere": "DND5E.TargetSphere",
   "cylinder": "DND5E.TargetCylinder",
   "cone": "DND5E.TargetCone",
+  "square": "DND5E.TargetSquare",
   "cube": "DND5E.TargetCube",
   "line": "DND5E.TargetLine",
   "wall": "DND5E.TargetWall"
