@@ -38,7 +38,7 @@ export class ItemSheet5e extends ItemSheet {
    * @return {string}
    */
   get template() {
-    const path = "public/systems/dnd5e/templates/items/";
+    const path = "systems/dnd5e/templates/items/";
     return `${path}/${this.item.data.type}.html`;
   }
 

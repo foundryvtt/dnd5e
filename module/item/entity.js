@@ -130,7 +130,7 @@ export class Item5e extends Item {
 
     // Render the chat card template
     const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
-    const template = `public/systems/dnd5e/templates/chat/${templateType}-card.html`;
+    const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
 
     // Basic chat message data
@@ -565,7 +565,7 @@ export class Item5e extends Item {
       event: event,
       parts: parts,
       data: rollData,
-      template: "public/systems/dnd5e/templates/chat/tool-roll-dialog.html",
+      template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: (parts, data) => `${this.name} - ${CONFIG.DND5E.abilities[abl]} Check`,

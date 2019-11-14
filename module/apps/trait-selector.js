@@ -8,7 +8,7 @@ export class ActorTraitSelector extends FormApplication {
 	  options.id = "trait-selector";
 	  options.classes = ["dnd5e"];
 	  options.title = "Actor Trait Selection";
-	  options.template = "public/systems/dnd5e/templates/apps/trait-selector.html";
+	  options.template = "systems/dnd5e/templates/apps/trait-selector.html";
 	  options.width = 320;
 	  options.height = "auto";
 	  return options;

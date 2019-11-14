@@ -48,7 +48,7 @@ export class ShortRestDialog extends Dialog {
    * @return {Promise}
    */
   static async shortRestDialog({actor, canRoll=true}={}) {
-    const html = await renderTemplate("public/systems/dnd5e/templates/apps/short-rest.html");
+    const html = await renderTemplate("systems/dnd5e/templates/apps/short-rest.html");
     await new Promise(resolve => {
       const dlg = new this(actor, {
         title: "Short Rest",

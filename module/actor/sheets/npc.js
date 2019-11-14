@@ -28,8 +28,8 @@ export class ActorSheet5eNPC extends ActorSheet5e {
    * @type {String}
    */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "public/systems/dnd5e/templates/actors/limited-sheet.html";
-    return "public/systems/dnd5e/templates/actors/npc-sheet.html";
+    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
+    return "systems/dnd5e/templates/actors/npc-sheet.html";
   }
 
   /* -------------------------------------------- */

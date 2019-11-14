@@ -38,7 +38,7 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "public/systems/dnd5e/templates/items/parts/item-description.html"}}
+        {{> "systems/dnd5e/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
@@ -59,7 +59,7 @@
             <h3 class="form-header">Consumable Usage</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "public/systems/dnd5e/templates/items/parts/item-activation.html"}}
+            {{> "systems/dnd5e/templates/items/parts/item-activation.html"}}
 
             {{!-- Consumable Usage --}}
             {{#if data.activation.type}}
@@ -77,7 +77,7 @@
             <h3 class="form-header">Consumable Action</h3>
 
             {{!-- Item Action Template --}}
-            {{> "public/systems/dnd5e/templates/items/parts/item-action.html"}}
+            {{> "systems/dnd5e/templates/items/parts/item-action.html"}}
         </div>
     </section>
 </form>

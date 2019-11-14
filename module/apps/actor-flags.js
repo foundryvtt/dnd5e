@@ -4,7 +4,7 @@ export class ActorSheetFlags extends BaseEntitySheet {
     return mergeObject(options, {
       id: "actor-flags",
 	    classes: ["dnd5e"],
-      template: "public/systems/dnd5e/templates/apps/actor-flags.html",
+      template: "systems/dnd5e/templates/apps/actor-flags.html",
       width: 500,
       closeOnSubmit: true
     });

@@ -65,7 +65,7 @@ export class Dice5e {
     else parts = parts.concat(["@bonus"]);
 
     // Render modal dialog
-    template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
     let dialogData = {
       formula: parts.join(" + "),
       data: data,
@@ -151,7 +151,7 @@ export class Dice5e {
     else parts = parts.concat(["@bonus"]);
 
     // Construct dialog data
-    template = template || "public/systems/dnd5e/templates/chat/roll-dialog.html";
+    template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
     let dialogData = {
       formula: parts.join(" + "),
       data: data,

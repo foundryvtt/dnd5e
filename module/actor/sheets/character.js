@@ -29,8 +29,8 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
    * @type {String}
    */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "public/systems/dnd5e/templates/actors/limited-sheet.html";
-    return "public/systems/dnd5e/templates/actors/character-sheet.html";
+    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
+    return "systems/dnd5e/templates/actors/character-sheet.html";
   }
 
   /* -------------------------------------------- */
