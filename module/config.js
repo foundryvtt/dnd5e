@@ -103,14 +103,15 @@ DND5E.tokenSizes = {
  * @type {Object}
  */
 DND5E.itemActionTypes = {
-  "matk": "Melee Weapon Attack",
-  "ratk": "Ranged Weapon Attack",
-  "satk": "Spell Attack",
-  "save": "Saving Throw",
-  "heal": "Healing",
-  "abil": "Ability Test",
-  "util": "Utility",
-  "other": "Other"
+  "mwak": "DND5E.ActionMWAK",
+  "rwak": "DND5E.ActionRWAK",
+  "msak": "DND5E.ActionMSAK",
+  "rsak": "DND5E.ActionRSAK",
+  "save": "DND5E.ActionSave",
+  "heal": "DND5E.ActionHeal",
+  "abil": "DND5E.ActionAbil",
+  "util": "DND5E.ActionUtil",
+  "other": "DND5E.ActionOther"
 };
 
 /* -------------------------------------------- */

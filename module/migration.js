@@ -512,7 +512,7 @@ const _migrateSpellAction = function(item, updateData) {
   // Set default action type for spells
   if ( item.data.spellType ) {
     updateData["data.actionType"] = {
-      "attack": "satk",
+      "attack": "rsak",
       "save": "save",
       "heal": "heal",
       "utility": "util",
