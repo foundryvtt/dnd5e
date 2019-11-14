@@ -31,6 +31,28 @@ export const migrateWorld = async function() {
     }
   }
 
+  // Migrate Actor Override Tokens
+  for ( let s of game.scenes.entities ) {
+    const tokens = s.data.tokens.map(t => {
+      if ( !t.actorLink && !isObjectEmpty(t.actorData) ) {
+        const token = new Token(t);
+        const originalActor = game.actors.get(token.actor.id);
+        const updateData = migrateActorData(token.actor.data);
+        const actorData = mergeObject(originalActor.data, updateData, {inplace: false});
+        t.actorData = diffObject(originalActor.data, actorData);
+        console.log(t.actorData);
+      }
+      return t;
+    });
+    try {
+      console.log(`Migrating Token overrides for Scene ${s.name}`);
+      await s.update({tokens});
+    } catch(err) {
+      console.error(err);
+    }
+  }
+  canvas.draw();
+
   // Migrate World Compendium Packs
   const packs = game.packs.filter(p => {
     return (p.metadata.package === "world") && ["Actor", "Item"].includes(p.metadata.entity)
@@ -46,7 +68,11 @@ export const migrateWorld = async function() {
 
 /* -------------------------------------------- */
 
-export const migrate5eCompendia = async function() {
+/**
+ * A private function used to migrate 5e bundled compendium packs
+ * @return {Promise}
+ */
+const _migrate5eCompendia = async function() {
   for ( let pack of game.packs.filter(p => p.metadata.package === "dnd5e") ) {
     await game.dnd5e.migrations.migrateCompendium(pack);
   }
