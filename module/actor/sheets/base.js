@@ -137,7 +137,7 @@ export class ActorSheet5e extends ActorSheet {
 
       // Define the numeric spell level for sorting
       const mode = spell.data.preparation.mode || "prepared";
-      const lvl = levels[mode] || spell.data.level.value || 0;
+      const lvl = levels[mode] || spell.data.level || 0;
 
       // Prepare a new Spellbook level
       if ( !sb[lvl] ) {
@@ -150,7 +150,7 @@ export class ActorSheet5e extends ActorSheet {
           spells: [],
           uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
           slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,
-          dataset: {"type": "spell", "level.value": lvl}
+          dataset: {"type": "spell", "level": lvl}
         };
       }
 
@@ -191,7 +191,7 @@ export class ActorSheet5e extends ActorSheet {
         if (data.components.concentration !== true) return false;
       }
       if ( filters.has("prepared") ) {
-        if ( data.level.value === 0 || ["pact", "innate"].includes(data.preparation.mode) ) return true;
+        if ( data.level === 0 || ["pact", "innate"].includes(data.preparation.mode) ) return true;
         if ( this.actor.data.type === "npc" ) return true;
         return data.preparation.prepared;
       }

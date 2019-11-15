@@ -37,8 +37,8 @@ export class Item5e extends Item {
 
     // Spell Level,  School, and Components
     if ( item.type === "spell" ) {
-      labels.level = C.spellLevels[item.data.level.value];
-      labels.school = C.spellSchools[item.data.school.value];
+      labels.level = C.spellLevels[item.data.level];
+      labels.school = C.spellSchools[item.data.school];
       labels.components = Object.entries(item.data.components).map(c => {
         c[1] === true ? c[0].titleCase().slice(0,1) : null
       }).filterJoin(",");

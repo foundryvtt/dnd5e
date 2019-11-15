@@ -40,7 +40,6 @@ export const migrateWorld = async function() {
         const updateData = migrateActorData(token.actor.data);
         const actorData = mergeObject(originalActor.data, updateData, {inplace: false});
         t.actorData = diffObject(originalActor.data, actorData);
-        console.log(t.actorData);
       }
       return t;
     });
@@ -210,7 +209,9 @@ export const migrateItemData = function(item) {
 
   // Flatten values and remove deprecated fields
   const toFlatten = ["ability", "attuned", "consumableType", "equipped", "identified", "quantity", "levels", "price",
-    "proficient", "rarity", "requirements", "stealth", "strength", "source", "subclass", "weight", "weaponType"];
+    "proficient", "rarity", "requirements", "stealth", "strength", "source", "subclass", "weight", "weaponType",
+    "school", "level"
+  ];
   _migrateFlattenValues(item, updateData, toFlatten);
   _migrateRemoveDeprecated(item, updateData, toFlatten);
 

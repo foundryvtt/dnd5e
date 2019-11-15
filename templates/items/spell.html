@@ -47,8 +47,8 @@
             {{!-- Spell Level --}}
             <div class="form-group">
                 <label>Spell Level</label>
-                <select name="data.level.value" data-dtype="Number">
-                    {{#select data.level.value}}
+                <select name="data.level" data-dtype="Number">
+                    {{#select data.level}}
                     {{#each config.spellLevels as |name lvl|}}
                     <option value="{{lvl}}">{{name}}</option>
                     {{/each}}
@@ -59,8 +59,8 @@
             {{!-- Spell School --}}
             <div class="form-group">
                 <label>Spell School</label>
-                <select name="data.school.value">
-                    {{#select data.school.value}}
+                <select name="data.school">
+                    {{#select data.school}}
                     {{#each config.spellSchools as |name sch|}}
                     <option value="{{sch}}">{{name}}</option>
                     {{/each}}
