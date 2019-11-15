@@ -68,18 +68,6 @@ export const migrateWorld = async function() {
 /* -------------------------------------------- */
 
 /**
- * A private function used to migrate 5e bundled compendium packs
- * @return {Promise}
- */
-const _migrate5eCompendia = async function() {
-  for ( let pack of game.packs.filter(p => p.metadata.package === "dnd5e") ) {
-    await game.dnd5e.migrations.migrateCompendium(pack);
-  }
-};
-
-/* -------------------------------------------- */
-
-/**
  * Apply migration rules to all Entities within a single Compendium pack
  * @param pack
  * @return {Promise}

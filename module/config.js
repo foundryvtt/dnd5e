@@ -167,11 +167,11 @@ DND5E.consumableTypes = {
  * @type {Object}
  */
 DND5E.currencies = {
-  "pp": "DND5E.currencyPP",
-  "gp": "DND5E.currencyGP",
-  "ep": "DND5E.currencyEP",
-  "sp": "DND5E.currencySP",
-  "cp": "DND5E.currencyCP",
+  "pp": "DND5E.CurrencyPP",
+  "gp": "DND5E.CurrencyGP",
+  "ep": "DND5E.CurrencyEP",
+  "sp": "DND5E.CurrencySP",
+  "cp": "DND5E.CurrencyCP",
 };
 
 /* -------------------------------------------- */

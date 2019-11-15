@@ -71,7 +71,7 @@ Hooks.once("init", async function() {
 Hooks.once("setup", function() {
 
   // Localize CONFIG objects once up-front
-  const toLocalize = ["abilities", "distanceUnits", "itemActionTypes", "skills", "targetTypes", "timePeriods"];
+  const toLocalize = ["abilities", "currencies", "distanceUnits", "itemActionTypes", "skills", "targetTypes", "timePeriods"];
   for ( let o of toLocalize ) {
     CONFIG.DND5E[o] = Object.fromEntries(Object.entries(CONFIG.DND5E[o]).map(e => {
       e[1] = game.i18n.localize(e[1]);
