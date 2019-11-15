@@ -80,9 +80,6 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
       loot: { label: "Loot", items: [], dataset: {type: "loot"} },
     };
 
-    // Track cumulative encumbrance
-    let totalWeight = 0;
-
     // Partition items by category
     let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
@@ -106,6 +103,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     const spellbook = this._prepareSpellbook(data, spells);
 
     // Organize Inventory
+    let totalWeight = 0;
     for ( let i of items ) {
       i.data.quantity = i.data.quantity || 0;
       i.data.weight = i.data.weight || 0;
@@ -165,7 +163,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Add Currency Weight
     if ( game.settings.get("dnd5e", "currencyWeight") ) {
       const currency = actorData.data.currency;
-      const numCoins = Object.values(currency).reduce((val, denom) => val += denom.value, 0);
+      const numCoins = Object.values(currency).reduce((val, denom) => val += denom, 0);
       totalWeight += numCoins / 50;
     }
 
