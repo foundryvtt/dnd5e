@@ -38,7 +38,7 @@ export class ActorSheet5e extends ActorSheet {
       editable: this.isEditable,
       cssClass: isOwner ? "editable" : "locked",
       isCharacter: this.entity.data.type === "character",
-      config: CONFIG.DND5E
+      config: CONFIG.DND5E,
     };
 
     // The Actor and its Items
@@ -46,7 +46,7 @@ export class ActorSheet5e extends ActorSheet {
     data.items = this.actor.items.map(i => i.data);
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
     data.data = data.actor.data;
-    data.labels = this.actor.labels;
+    data.labels = this.actor.labels || {};
 
     // Ability Scores
     for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
