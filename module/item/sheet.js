@@ -50,6 +50,7 @@ export class ItemSheet5e extends ItemSheet {
    */
   getData() {
     const data = super.getData();
+    data.labels = this.item.labels;
 
     // Include CONFIG values
     data.config = CONFIG.DND5E;
@@ -61,7 +62,7 @@ export class ItemSheet5e extends ItemSheet {
     data.isPhysical = data.item.data.hasOwnProperty("quantity");
 
     // Action Details
-    data.hasAttackRoll = ["matk", "ratk", "satk"].includes(data.item.data.actionType);
+    data.hasAttackRoll = this.item.hasAttack;
     data.isHealing = data.item.data.actionType === "heal";
 
     // Spell-specific data
@@ -96,6 +97,7 @@ export class ItemSheet5e extends ItemSheet {
    */
   _getItemProperties(item) {
     const props = [];
+    const labels = this.item.labels;
 
     if ( item.type === "weapon" ) {
       props.push(...Object.entries(item.data.properties)
@@ -105,8 +107,8 @@ export class ItemSheet5e extends ItemSheet {
 
     else if ( item.type === "spell" ) {
       props.push(
-        item.data.components.label,
-        item.data.materials.value,
+        labels.components,
+        labels.materials,
         item.data.components.concentration ? "Concentration" : null,
         item.data.components.ritual ? "Ritual" : null
       )
@@ -114,11 +116,11 @@ export class ItemSheet5e extends ItemSheet {
 
     else if ( item.type === "equipment" ) {
       props.push(CONFIG.DND5E.equipmentTypes[item.data.armor.type]);
-      props.push(item.data.armor.label);
+      props.push(labels.armor);
     }
 
     else if ( item.type === "feat" ) {
-      props.push(item.data.featType);
+      props.push(labels.featType);
     }
 
     // Action type
@@ -129,10 +131,10 @@ export class ItemSheet5e extends ItemSheet {
     // Action usage
     if ( (item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation) ) {
       props.push(
-        item.data.activation.label,
-        item.data.range.label,
-        item.data.target.label,
-        item.data.duration.label,
+        labels.activation,
+        labels.range,
+        labels.target,
+        labels.duration
       )
     }
     return props.filter(p => !!p);

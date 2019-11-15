@@ -71,8 +71,8 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     for ( let item of other ) {
       if ( item.type === "weapon" ) features.weapons.items.push(item);
       else if ( item.type === "feat" ) {
-        if ( item.data.featType === "Passive" ) features.passive.items.push(item);
-        else features.actions.items.push(item);
+        if ( item.data.activation.type ) features.actions.items.push(item);
+        else features.passive.items.push(item);
       }
       else if (["equipment", "consumable", "tool", "loot"].includes(item.type)) {
         features.equipment.items.push(item);
@@ -82,6 +82,22 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     // Assign and return
     data.features = Object.values(features);
     data.spellbook = spellbook;
+  }
+
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
+   */
+  getData() {
+    const data = super.getData();
+
+    // Challenge Rating
+    const cr = parseFloat(data.data.details.cr || 0);
+    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
+    data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
+    return data;
   }
 
   /* -------------------------------------------- */

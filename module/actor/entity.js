@@ -41,9 +41,6 @@ export class Actor5e extends Actor {
     init.bonus = init.value + (getProperty(flags, "dnd5e.initiativeAlert") ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
-    // Armor Class formula // TODO: Allow this to be configurable in the future
-    data.attributes.ac.min = 10 + data.abilities.dex.mod;
-
     // Spell DC
     let spellAbl = data.abilities[data.attributes.spellcasting || "int"];
     let bonusDC = getProperty(flags, "dnd5e.spellDCBonus") || 0;
@@ -75,11 +72,6 @@ export class Actor5e extends Actor {
    * Prepare NPC type specific data
    */
   _prepareNPCData(data) {
-
-    // Challenge Rating
-    const cr = parseFloat(data.details.cr || 0);
-    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    data.details.crLabel = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Kill Experience
     data.details.xp.value = this.getCRExp(data.details.cr);
