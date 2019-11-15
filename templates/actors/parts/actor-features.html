@@ -40,7 +40,7 @@
                 {{item.data.uses.value}} / {{item.data.uses.max}}
                 {{else if item.data.recharge.value}}
                 {{#if item.isOnCooldown}}
-                <a class="item-recharge rollable">{{../../labels.recharge}}</a>
+                <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                 {{else}}
                 {{localize "DND5E.Charged"}}
                 {{/if}}
@@ -48,7 +48,7 @@
             </div>
             <div class="item-detail item-action">
                 {{#if item.data.activation.type }}
-                {{../../labels.activation}}
+                {{item.labels.activation}}
                 {{/if}}
             </div>
 

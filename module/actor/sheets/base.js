@@ -43,7 +43,10 @@ export class ActorSheet5e extends ActorSheet {
 
     // The Actor and its Items
     data.actor = duplicate(this.actor.data);
-    data.items = this.actor.items.map(i => i.data);
+    data.items = this.actor.items.map(i => {
+      i.data.labels = i.labels;
+      return i.data;
+    });
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
     data.data = data.actor.data;
     data.labels = this.actor.labels || {};
