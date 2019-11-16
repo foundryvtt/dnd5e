@@ -253,9 +253,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
       gp: {into: "pp", each: 10}
     };
     for ( let [c, t] of Object.entries(convert) ) {
-      let change = Math.floor(curr[c].value / t.each);
-      curr[c].value -= (change * t.each);
-      curr[t.into].value += change;
+      let change = Math.floor(curr[c] / t.each);
+      curr[c] -= (change * t.each);
+      curr[t.into] += change;
     }
     return this.actor.update({"data.currency": curr});
   }
