@@ -560,17 +560,17 @@ const _migrateWeaponProperties = function(item, updateData) {
 
   // Set default action type for weapons
   updateData["data.actionType"] = {
-    "simpleM": "matk",
-    "simpleR": "ratk",
-    "martialM": "matk",
-    "martialR": "ratk",
-    "natural": "matk",
-    "improv": "matk",
-    "ammo": "ratk"
-  }[item.data.weaponType.value] || "matk";
+    "simpleM": "mwak",
+    "simpleR": "rwak",
+    "martialM": "mwak",
+    "martialR": "rwak",
+    "natural": "mwak",
+    "improv": "mwak",
+    "ammo": "rwak"
+  }[item.data.weaponType.value] || "mwak";
 
   // Set default melee weapon range
-  if ( updateData["data.actionType"] === "matk" ) {
+  if ( updateData["data.actionType"] === "mwak" ) {
     updateData["data.range"] = {
       value: updateData["data.properties.rch"] ? 10 : 5,
       units: "ft"

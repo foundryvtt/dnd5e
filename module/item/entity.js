@@ -125,6 +125,7 @@ export class Item5e extends Item {
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
       item: this.data,
       data: this.getChatData(),
+      labels: this.labels,
       hasAttack: this.hasAttack,
       hasDamage: this.hasDamage,
       isVersatile: this.isVersatile,
@@ -543,55 +544,94 @@ export class Item5e extends Item {
   /* -------------------------------------------- */
 
   static chatListeners(html) {
+    html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
+  }
 
-    // Chat card actions
-    html.on('click', '.card-buttons button', ev => {
-      ev.preventDefault();
+  /* -------------------------------------------- */
 
-      // Extract card data
-      const button = $(ev.currentTarget),
-            messageId = button.parents('.message').data("messageId"),
-            senderId = game.messages.get(messageId).user._id,
-            card = button.parents('.chat-card');
+  static async _onChatCardAction(event) {
+    event.preventDefault();
 
-      // Confirm roll permission
-      if ( !game.user.isGM && ( game.user._id !== senderId )) return;
+    // Extract card data
+    const button = event.currentTarget;
+    button.disabled = true;
+    const card = button.closest(".chat-card");
+    const messageId = card.closest(".message").dataset.messageId;
+    const message =  game.messages.get(messageId);
+    const action = button.dataset.action;
 
-      // Get the Actor from a synthetic Token
-      let actor;
-      const tokenKey = card.data("tokenId");
-      if ( tokenKey ) {
-        const [sceneId, tokenId] = tokenKey.split(".");
-        let token;
-        if ( sceneId === canvas.scene._id ) token = canvas.tokens.get(tokenId);
-        else {
-          const scene = game.scenes.get(sceneId);
-          if ( !scene ) return;
-          let tokenData = scene.data.tokens.find(t => t.id === Number(tokenId));
-          if ( tokenData ) token = new Token(tokenData);
-        }
-        if ( !token ) return;
-        actor = Actor.fromToken(token);
-      } else actor = game.actors.get(card.data('actorId'));
+    // Validate permission to proceed with the roll
+    const isTargetted = action === "save";
+    if ( !( isTargetted || game.user.isGM || message.isAuthor ) ) return;
 
-      // Get the Item
-      if ( !actor ) return;
-      const itemId = Number(card.data("itemId"));
-      const item = actor.getOwnedItem(itemId);
+    // Get the Actor from a synthetic Token
+    const actor = this._getChatCardActor(card);
+    if ( !actor ) return;
 
-      // Get the Action
-      const action = button.data("action");
+    // Get the Item
+    const item = actor.getOwnedItem(card.dataset.itemId);
 
-      // Attack and Damage Rolls
-      if ( action === "attack" ) item.rollAttack(ev);
-      else if ( action === "damage" ) item.rollDamage(ev);
-      else if ( action === "versatile" ) item.rollDamage(ev, {versatile: true});
+    // Get the target
+    const target = isTargetted ? this._getChatCardTarget(card) : null;
 
-      // Consumable usage
-      else if ( action === "consume" ) item.rollConsumable(ev);
+    // Attack and Damage Rolls
+    if ( action === "attack" ) await item.rollAttack(event);
+    else if ( action === "damage" ) await item.rollDamage(event);
+    else if ( action === "versatile" ) await item.rollDamage(event, {versatile: true});
 
-      // Tool usage
-      else if ( action === "toolCheck" ) item.rollToolCheck(ev);
-    });
+    // Saving Throw
+    else if ( action === "save" ) await target.rollAbilitySave(button.dataset.ability, {event});
+
+    // Consumable usage
+    else if ( action === "consume" ) await item.rollConsumable(event);
+
+    // Tool usage
+    else if ( action === "toolCheck" ) await item.rollToolCheck(event);
+
+    // Re-enable the button
+    button.disabled = false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the Actor which is the author of a chat card
+   * @param {HTMLElement} card    The chat card being used
+   * @return {Actor|null}         The Actor entity or null
+   * @private
+   */
+  static _getChatCardActor(card) {
+
+    // Case 1 - a synthetic actor from a Token
+    const tokenKey = card.dataset.tokenId;
+    if (tokenKey) {
+      const [sceneId, tokenId] = tokenKey.split(".");
+      const scene = game.scenes.get(sceneId);
+      if (!scene) return null;
+      const tokenData = scene.getEmbeddedEntity("tokens", tokenId);
+      if (!tokenData) return null;
+      const token = new Token(tokenData);
+      return token.actor;
+    }
+
+    // Case 2 - use Actor ID directory
+    const actorId = card.dataset.actorId;
+    return game.actors.get(actorId) || null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the Actor which is the author of a chat card
+   * @param {HTMLElement} card    The chat card being used
+   * @return {Actor|null}         The Actor entity or null
+   * @private
+   */
+  static _getChatCardTarget(card) {
+    const character = game.user.character;
+    const controlled = canvas.tokens.controlled;
+    if ( controlled.length === 0 ) return character || null;
+    if ( controlled.length === 1 ) return controlled[0].actor;
+    else throw new Error(`You must designate a specific Token as the roll target`);
   }
 }
