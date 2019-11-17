@@ -12,6 +12,7 @@ export const migrateWorld = async function() {
       if ( !isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
+        a.items = a._getItems(); // TODO - Temporary Hack
       }
     } catch(err) {
       console.error(err);
@@ -37,9 +38,14 @@ export const migrateWorld = async function() {
       if ( !t.actorLink && !isObjectEmpty(t.actorData) ) {
         const token = new Token(t);
         const originalActor = game.actors.get(token.actor.id);
-        const updateData = migrateActorData(token.actor.data);
-        const actorData = mergeObject(originalActor.data, updateData, {inplace: false});
-        t.actorData = diffObject(originalActor.data, actorData);
+        if ( !originalActor ) {
+          delete t.actorId;
+          delete t.actorData;
+        } else {
+          const updateData = migrateActorData(token.actor.data);
+          const actorData = mergeObject(originalActor.data, updateData, {inplace: false});
+          t.actorData = diffObject(originalActor.data, actorData);
+        }
       }
       return t;
     });

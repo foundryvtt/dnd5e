@@ -157,19 +157,16 @@ export class Actor5e extends Actor {
   /**
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param skill {String}    The skill id
+   * @param {string} skillId      The skill id (e.g. "ins")
+   * @param {Object} options      Options which configure how the skill check is rolled
    */
-  rollSkill(event, skillName) {
-    let skl = this.data.data.skills[skillName],
-      parts = ["@mod"],
-      flavor = `${skl.label} Skill Check`;
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
-      event: event,
-      parts: parts,
+  rollSkill(skillId, options) {
+    const skl = this.data.data.skills[skillId];
+    return Dice5e.d20Roll({
+      event: options.event,
+      parts: ["@mod"],
       data: {mod: skl.mod},
-      title: flavor,
+      title: `${CONFIG.DND5E.skills[skillId]} Skill Check`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
@@ -183,10 +180,10 @@ export class Actor5e extends Actor {
    * @param {Object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options) {
-    let abl = this.data.data.abilities[abilityId];
+    const label = CONFIG.DND5E.abilities[abilityId];
     new Dialog({
-      title: `${abl.label} Ability Check`,
-      content: `<p>What type of ${abl.label} check?</p>`,
+      title: `${label} Ability Check`,
+      content: `<p>What type of ${label} check?</p>`,
       buttons: {
         test: {
           label: "Ability Test",
@@ -209,16 +206,13 @@ export class Actor5e extends Actor {
    * @param {Object} options      Options which configure how ability tests are rolled
    */
   rollAbilityTest(abilityId, options={}) {
-    let abl = this.data.data.abilities[abilityId],
-        parts = ["@mod"],
-        flavor = `${abl.label} Ability Test`;
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
+    const label = CONFIG.DND5E.abilities[abilityId];
+    const abl = this.data.data.abilities[abilityId];
+    return Dice5e.d20Roll({
       event: options.event,
-      parts: parts,
+      parts: ["@mod"],
       data: {mod: abl.mod},
-      title: flavor,
+      title: `${label} Ability Test`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }
@@ -232,17 +226,13 @@ export class Actor5e extends Actor {
    * @param {Object} options      Options which configure how ability tests are rolled
    */
   rollAbilitySave(abilityId, options={}) {
-    let abl = this.data.data.abilities[abilityId],
-        parts = ["@mod"],
-        data = {mod: abl.save},
-        flavor = `${abl.label} Saving Throw`;
-
-    // Call the roll helper utility
-    Dice5e.d20Roll({
+    const label = CONFIG.DND5E.abilities[abilityId];
+    const abl = this.data.data.abilities[abilityId];
+    return Dice5e.d20Roll({
       event: options.event,
-      parts: parts,
-      data: data,
-      title: flavor,
+      parts: ["@mod"],
+      data: {mod: abl.save},
+      title: `${label} Saving Throw`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
   }

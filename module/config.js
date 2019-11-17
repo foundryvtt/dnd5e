@@ -28,6 +28,24 @@ DND5E.abilities = {
 /* -------------------------------------------- */
 
 /**
+ * Character alignment options
+ * @type {Object}
+ */
+DND5E.alignments = {
+  'lg': "DND5E.AlignmentLG",
+  'ng': "DND5E.AlignmentNG",
+  'cg': "DND5E.AlignmentCG",
+  'ln': "DND5E.AlignmentLN",
+  'tn': "DND5E.AlignmentTN",
+  'cn': "DND5E.AlignmentCN",
+  'le': "DND5E.AlignmentLE",
+  'ne': "DND5E.AlignmentNE",
+  'ce': "DND5E.AlignmentCE"
+};
+
+/* -------------------------------------------- */
+
+/**
  * The set of Armor Proficiencies which a character may have
  * @type {Object}
  */
@@ -259,6 +277,19 @@ DND5E.healingTypes = {
 
 /* -------------------------------------------- */
 
+/**
+ * Character senses options
+ * @type {Object}
+ */
+DND5E.senses = {
+  "bs": "DND5E.SenseBS",
+  "dv": "DND5E.SenseDV",
+  "ts": "DND5E.SenseTS",
+  "tr": "DND5E.SenseTR"
+};
+
+
+/* -------------------------------------------- */
 
 /**
  * The set of skill which can be trained in D&D5e

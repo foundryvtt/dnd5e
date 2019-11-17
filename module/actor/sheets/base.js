@@ -267,10 +267,7 @@ export class ActorSheet5e extends ActorSheet {
     html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
     // Roll Skill Checks
-    html.find('.skill-name').click(ev => {
-      let skl = ev.currentTarget.parentElement.getAttribute("data-skill");
-      this.actor.rollSkill(ev, skl);
-    });
+    html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
     // Trait Selector
     html.find('.trait-selector').click(this._onTraitSelector.bind(this));
@@ -451,6 +448,19 @@ export class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     let ability = event.currentTarget.parentElement.dataset.ability;
     this.actor.rollAbility(ability, {event: event});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling a Skill check
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onRollSkillCheck(event) {
+    event.preventDefault();
+    const skill = event.currentTarget.parentElement.dataset.skill;
+    this.actor.rollSkill(skill, {event: event});
   }
 
   /* -------------------------------------------- */
