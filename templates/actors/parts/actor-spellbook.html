@@ -18,7 +18,7 @@
         <li class="filter-item" data-filter="reaction">Reaction</li>
         <li class="filter-item" data-filter="concentration">Conc.</li>
         <li class="filter-item" data-filter="ritual">Ritual</li>
-        <li class="filter-item" data-filter="prepared">Prepared</li>
+        <li class="filter-item" data-filter="prepared">Prepared{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
     </ul>
 </div>
 
@@ -81,13 +81,17 @@
     {{/each}}
     </ol>
 {{else}}
+    {{#if owner}}
+    {{#if filters.spellbook.size}}
+    <li class="item flexrow"><p class="notes">No spells found for this set of filters.</p></li>
+    {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
-        {{#if owner}}
         <div class="item-controls">
             <a class="item-control item-create" title="Create Spell" data-type="spell"
                data-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
         </div>
-        {{/if}}
+    {{/if}}
+    {{/if}}
     </li>
 {{/each}}
 </ol>

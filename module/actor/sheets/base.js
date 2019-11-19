@@ -50,6 +50,7 @@ export class ActorSheet5e extends ActorSheet {
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
     data.data = data.actor.data;
     data.labels = this.actor.labels || {};
+    data.filters = this._filters;
 
     // Ability Scores
     for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {

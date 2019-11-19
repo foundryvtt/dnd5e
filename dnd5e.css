@@ -312,13 +312,14 @@
   line-height: 16px;
 }
 .dnd5e.sheet .filter-list .filter-title {
-  flex: 4;
+  flex: 3;
 }
 .dnd5e.sheet .filter-list .filter-item {
   text-align: center;
   font-size: 12px;
   margin: 0 6px;
   border-bottom: 3px solid #b5b3a4;
+  white-space: nowrap;
 }
 .dnd5e.sheet .filter-list .filter-item:hover {
   text-shadow: 0 0 4px red;

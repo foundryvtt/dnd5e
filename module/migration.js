@@ -1,4 +1,16 @@
 /**
+ * A temporary shim to invert an object, flipping keys and values
+ * Migrate to core object helper
+ */
+function _invertObject(obj) {
+	return Object.entries(obj).reduce((inverted, entry) => {
+		let [k, v] = entry;
+		inverted[v] = k;
+		return inverted;
+	}, {})
+}
+
+/**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
@@ -34,29 +46,27 @@ export const migrateWorld = async function() {
 
   // Migrate Actor Override Tokens
   for ( let s of game.scenes.entities ) {
-    const tokens = s.data.tokens.map(t => {
-      if ( !t.actorLink && !isObjectEmpty(t.actorData) ) {
-        const token = new Token(t);
-        const originalActor = game.actors.get(token.actor.id);
-        if ( !originalActor ) {
-          delete t.actorId;
-          delete t.actorData;
-        } else {
-          const updateData = migrateActorData(token.actor.data);
-          const actorData = mergeObject(originalActor.data, updateData, {inplace: false});
-          t.actorData = diffObject(originalActor.data, actorData);
-        }
+    const tokens = duplicate(s.data.tokens);
+    const tokenUpdates = tokens.map(t => {
+      if ( t.actorLink || !t.actorData.data ) return t;
+      const token = new Token(t);
+      const originalActor = game.actors.get(token.actor.id);
+      if ( !originalActor ) {
+        delete t.actorId;
+        delete t.actorData;
+      } else {
+        const updateData = migrateActorData(token.data.actorData);
+        t.actorData = mergeObject(token.data.actorData, updateData);
       }
       return t;
     });
     try {
       console.log(`Migrating Token overrides for Scene ${s.name}`);
-      await s.update({tokens});
+      await s.update({tokens: tokenUpdates}, {enforceTypes: false});
     } catch(err) {
       console.error(err);
     }
   }
-  canvas.draw();
 
   // Migrate World Compendium Packs
   const packs = game.packs.filter(p => {
@@ -130,6 +140,7 @@ export const migrateActorData = function(actor) {
   _migrateRemoveDeprecated(actor, updateData, toFlatten);
 
   // Migrate Owned Items
+  if ( !actor.items ) return updateData;
   let hasItemUpdates = false;
   const items = actor.items.map(i => {
 
@@ -220,17 +231,18 @@ export const migrateItemData = function(item) {
  * @private
  */
 const _migrateActorTraits = function(actor, updateData) {
-  const dt = Object.fromEntries(Object.entries(CONFIG.DND5E.damageTypes).map(e => e.reverse()));
+  if ( !actor.data.traits ) return;
+  const dt = _invertObject(CONFIG.DND5E.damageTypes);
   const map = {
     "dr": dt,
     "di": dt,
     "dv": dt,
-    "ci": Object.fromEntries(Object.entries(CONFIG.DND5E.conditionTypes).map(e => e.reverse())),
-    "languages": Object.fromEntries(Object.entries(CONFIG.DND5E.languages).map(e => e.reverse()))
+    "ci": _invertObject(CONFIG.DND5E.conditionTypes),
+    "languages": _invertObject(CONFIG.DND5E.languages)
   };
   for ( let [t, choices] of Object.entries(map) ) {
     const trait = actor.data.traits[t];
-    if ( typeof trait.value === "string" ) {
+    if ( trait && (typeof trait.value === "string") ) {
       updateData[`data.traits.${t}.value`] = trait.value.split(",").map(t => choices[t.trim()]).filter(t => !!t);
     }
   }
@@ -310,7 +322,7 @@ const _migrateFlattenValues = function(ent, updateData, toFlatten) {
 const _migrateCastTime = function(item, updateData) {
   const value = getProperty(item.data, "time.value");
   if ( !value ) return;
-  const ATS = Object.fromEntries(Object.entries(CONFIG.DND5E.abilityActivationTypes).map(e => e.reverse()));
+  const ATS = _invertObject(CONFIG.DND5E.abilityActivationTypes);
   let match = value.match(/([\d]+\s)?([\w\s]+)/);
   if ( !match ) return;
   let type = ATS[match[2]] || "none";
@@ -358,7 +370,7 @@ const _migrateDamage = function(item, updateData) {
  * @private
  */
 const _migrateDuration = function(item, updateData) {
-  const TIME = Object.fromEntries(Object.entries(CONFIG.DND5E.timePeriods).map(e => e.reverse()));
+  const TIME = _invertObject(CONFIG.DND5E.timePeriods);
   const dur = item.data.duration;
   if ( dur && dur.value && !dur.units ) {
     let match = dur.value.match(/([\d]+\s)?([\w\s]+)/);
@@ -549,7 +561,7 @@ const _migrateWeaponProperties = function(item, updateData) {
   if ( !props.value ) return;
 
   // Map weapon property strings to boolean flags
-  const labels = Object.fromEntries(Object.entries(CONFIG.DND5E.weaponProperties).map(e => e.reverse()));
+  const labels = _invertObject(CONFIG.DND5E.weaponProperties);
   for ( let k of props.value.split(",").map(p => p.trim()) ) {
     if ( labels[k] ) updateData[`data.properties.${labels[k]}`] = true;
   }

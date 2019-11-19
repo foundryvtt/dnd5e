@@ -52,6 +52,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
     let [spells, other] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+      item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
       item.isCharged = !unusable;

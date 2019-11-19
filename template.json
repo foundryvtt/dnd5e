@@ -223,7 +223,7 @@
       "attributes": {
         "hd": {
           "value": 1,
-          "min": 0
+          "max": 0
         },
         "death": {
           "success": 0,
@@ -236,7 +236,8 @@
         "background": "",
         "level": {
           "value": 1,
-          "min": 1
+          "min": 1,
+          "max": 20
         },
         "xp": {
           "value": 0,

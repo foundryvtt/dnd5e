@@ -84,6 +84,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+      item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
       item.isCharged = !unusable;
@@ -101,6 +102,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(data, spells);
+    const nPrepared = spells.filter(s => {
+      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
+    }).length;
 
     // Organize Inventory
     let totalWeight = 0;
@@ -129,6 +133,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Assign and return
     data.inventory = Object.values(inventory);
     data.spellbook = spellbook;
+    data.preparedSpells = nPrepared;
     data.features = Object.values(features);
   }
 

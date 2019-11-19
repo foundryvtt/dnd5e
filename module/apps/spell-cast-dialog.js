@@ -48,7 +48,7 @@ export class SpellCastDialog extends Dialog {
     // Determine the levels which are feasible
     const spellLevels = Object.values(ad.spells).map((l, i) => {
       if ( !canUpcast ) return { canCast: false }
-      const label = (lvl > 0) ? `${CONFIG.DND5E.spellLevels[i]} (${l.value} Slot)` : CONFIG.DND5E.spellLevels[i];
+      const label = (lvl > 0) ? `${CONFIG.DND5E.spellLevels[i]} (${l.value} Slots)` : CONFIG.DND5E.spellLevels[i];
       return {
         level: i,
         label: label,

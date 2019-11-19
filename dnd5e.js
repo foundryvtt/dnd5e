@@ -76,10 +76,10 @@ Hooks.once("setup", function() {
     "timePeriods"
   ];
   for ( let o of toLocalize ) {
-    CONFIG.DND5E[o] = Object.fromEntries(Object.entries(CONFIG.DND5E[o]).map(e => {
-      e[1] = game.i18n.localize(e[1]);
-      return e;
-    }));
+    CONFIG.DND5E[o] = Object.entries(CONFIG.DND5E[o]).reduce((obj, e) => {
+      obj[e[0]] = game.i18n.localize(e[1]);
+      return obj;
+    }, {});
   }
 });
 
@@ -92,6 +92,10 @@ Hooks.once("ready", function() {
   const NEEDS_MIGRATION_VERSION = 0.7;
   let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
   if ( needMigration && game.user.isGM ) migrations.migrateWorld();
+});
+
+Hooks.on("ready", () => {
+  console.log(CONFIG.Actor.sheetClasses.character);
 });
 
 /* -------------------------------------------- */
