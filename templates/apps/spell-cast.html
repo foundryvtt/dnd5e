@@ -1,0 +1,27 @@
+<form id="spell-config-form">
+    <p>Configure how you would like to cast the <strong>{{item.name}}</strong> spell.</p>
+
+    {{#unless canCast}}
+    <p type="note">You are not able to cast this spell as you have no available spell slots.</p>
+    {{else}}
+
+    <div class="form-group">
+        <label>Cast at Level</label>
+        <div class="form-fields">
+            <select name="level">
+                {{#select item.data.level}}
+                {{#each spellLevels as |l|}}
+                <option value="{{l.level}}" {{#unless l.canCast}}disabled{{/unless}}>{{l.label}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+
+    {{#if canUpcast}}
+    <div class="form-group">
+        <label class="checkbox">Consume Spell Slot? <input type="checkbox" name="consume" {{checked consume}}/></label>
+    </div>
+    {{/if}}
+    {{/unless}}
+</form>

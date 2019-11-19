@@ -9,22 +9,46 @@ export class Item5e extends Item {
   /*  Item Properties                             */
   /* -------------------------------------------- */
 
+  /**
+   * Does the Item implement an attack roll as part of its usage
+   * @type {boolean}
+   */
   get hasAttack() {
     return ["mwak", "rwak", "msak", "rsak"].includes(this.data.data.actionType);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a damage roll as part of its usage
+   * @type {boolean}
+   */
   get hasDamage() {
     return !!(this.data.data.damage && this.data.data.damage.parts.length);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a versatile damage roll as part of its usage
+   * @type {boolean}
+   */
   get isVersatile() {
     return !!(this.hasDamage && this.data.data.damage.versatile);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item implement a saving throw as part of its usage
+   * @type {boolean}
+   */
   get hasSave() {
     return !!(this.data.data.save && this.data.data.save.ability);
   }
 
+  /* -------------------------------------------- */
+  /*	Data Preparation														*/
   /* -------------------------------------------- */
 
   /**
@@ -159,7 +183,7 @@ export class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
-  /*  Chat Card Data
+  /*  Chat Cards																	*/
   /* -------------------------------------------- */
 
   getChatData(htmlOptions) {

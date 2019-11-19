@@ -1,6 +1,6 @@
 import { Dice5e } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
-
+import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
@@ -152,6 +152,43 @@ export class Actor5e extends Actor {
 
   /* -------------------------------------------- */
   /*  Rolls                                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Cast a Spell, consuming a spell slot of a certain level
+   * @param {Item5e} item   The spell being cast by the actor
+   * @param {Event} event   The originating user interaction which triggered the cast 
+   */
+  async useSpell(item, {configureDialog=true}={}) {
+    if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
+
+    // Determine if the spell uses slots
+    let lvl = item.data.data.level;
+    const usesSlots = (lvl > 0) && item.data.data.preparation.mode === "prepared";
+    if ( !usesSlots ) return item.roll();
+
+    // Configure the casting level and whether to consume a spell slot
+    let consume = true
+    if ( configureDialog ) {
+      const spellFormData = await SpellCastDialog.create(this, item);
+      lvl = parseInt(spellFormData.get("level"));
+      consume = Boolean(spellFormData.get("consume"));
+      if ( lvl !== item.data.data.level ) {
+        item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
+      } 
+    }
+
+    // Update Actor data
+    if ( consume && (lvl > 0) ) {
+      await this.update({
+        [`data.spells.spell${lvl}.value`]: Math.max(parseInt(this.data.data.spells["spell"+lvl].value) - 1, 0)
+      });
+    } 
+
+    // Invoke the Item roll
+    return item.roll();
+  }
+
   /* -------------------------------------------- */
 
   /**
