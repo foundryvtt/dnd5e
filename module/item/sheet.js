@@ -25,7 +25,6 @@ export class ItemSheet5e extends ItemSheet {
 	  return mergeObject(super.defaultOptions, {
       width: 560,
       height: 420,
-      detailHeight: 720,
       classes: ["dnd5e", "sheet", "item"],
       resizable: false
     });
@@ -141,6 +140,13 @@ export class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+
+  setPosition(position={}) {
+    if ( this._sheetTab === "details" ) position.height = "auto";
+    return super.setPosition(position);
+  }
+
+  /* -------------------------------------------- */
   /*  Form Submission                             */
 	/* -------------------------------------------- */
 
@@ -175,11 +181,8 @@ export class ItemSheet5e extends ItemSheet {
     new Tabs(html.find(".tabs"), {
       initial: this["_sheetTab"],
       callback: clicked => {
-        const tab = clicked.data("tab");
-        this["_sheetTab"] = tab;
-        if ( tab === "details" ) {
-          this.setPosition({width: this.options.width, height: this.options.detailHeight});
-        } else this.setPosition({width: this.options.width, height: this.options.height});
+        this["_sheetTab"] = clicked.data("tab");
+        this.setPosition();
       }
     });
 

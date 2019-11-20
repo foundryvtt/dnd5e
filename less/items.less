@@ -1,5 +1,6 @@
 @import "./variables.less";
 .dnd5e.sheet.item {
+  min-height: 420px;
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -39,8 +40,11 @@
   }
 
   .sheet-body {
+    overflow: hidden scroll;
+
     .tab {
       padding: 0 5px;
+      overflow: hidden;
     }
 
     .item-properties {

@@ -94,10 +94,6 @@ Hooks.once("ready", function() {
   if ( needMigration && game.user.isGM ) migrations.migrateWorld();
 });
 
-Hooks.on("ready", () => {
-  console.log(CONFIG.Actor.sheetClasses.character);
-});
-
 /* -------------------------------------------- */
 /*  Canvas Initialization                       */
 /* -------------------------------------------- */

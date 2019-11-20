@@ -830,6 +830,7 @@
   padding: 0 8px;
 }
 .dnd5e.sheet.item {
+  min-height: 420px;
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -872,8 +873,12 @@
 .dnd5e.sheet.item .sheet-navigation .item {
   font-size: 18px;
 }
+.dnd5e.sheet.item .sheet-body {
+  overflow: hidden scroll;
+}
 .dnd5e.sheet.item .sheet-body .tab {
   padding: 0 5px;
+  overflow: hidden;
 }
 .dnd5e.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
@@ -1028,6 +1033,12 @@
   font-size: 12px;
   margin: 0;
   font-weight: bold;
+}
+.dnd5e.chat-card .card-content > * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 .dnd5e.chat-card .card-buttons {
   margin: 5px 0;

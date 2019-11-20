@@ -48,7 +48,7 @@ export const migrateWorld = async function() {
   for ( let s of game.scenes.entities ) {
     const tokens = duplicate(s.data.tokens);
     const tokenUpdates = tokens.map(t => {
-      if ( t.actorLink || !t.actorData.data ) return t;
+      if ( !t.actorId || t.actorLink || !t.actorData.data ) return t;
       const token = new Token(t);
       const originalActor = game.actors.get(token.actor.id);
       if ( !originalActor ) {
@@ -291,7 +291,7 @@ const _migrateConsumableUsage = function(item, updateData) {
  */
 const _migrateArmor = function(item, updateData) {
   const armor = item.data.armor;
-  if ( armor && item.data.armorType ) {
+  if ( armor && item.data.armorType && item.data.armorType.value ) {
     updateData["data.armor.type"] = item.data.armorType.value;
     updateData["data.-=armorType"] = null;
   }
@@ -426,7 +426,10 @@ const _migrateRarity = function(item, updateData) {
 const _migrateRemoveDeprecated = function(ent, updateData, toFlatten) {
   const flat = flattenObject(ent.data);
   for ( let [k, v] of Object.entries(flat) ) {
+
+    // Skip any fields which have already been touched by other migrations
     if ( toFlatten.some(f => k.startsWith(f)) ) continue;
+    if ( updateData.hasOwnProperty(k) ) continue;
 
     // Deprecate the entire object
     if ( k.endsWith("_deprecated") ) {
@@ -444,7 +447,7 @@ const _migrateRemoveDeprecated = function(ent, updateData, toFlatten) {
     }
 
     // Remove string label
-    else if ( k.endsWith("label") && !updateData.hasOwnProperty(k) ) {
+    else if ( k.endsWith("label") ) {
       updateData[`data.${k.replace(".label", ".-=label")}`] = null;
     }
   }
