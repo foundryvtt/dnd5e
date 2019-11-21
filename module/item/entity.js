@@ -196,14 +196,14 @@ export class Item5e extends Item {
     // Item type specific properties
     const props = [];
     const fn = this[`_${this.data.type}ChatData`];
-    if ( fn ) fn(data, labels, props);
+    if ( fn ) fn.bind(this)(data, labels, props);
 
     // General equipment properties
     if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.data.type) ) {
       props.push(
         data.equipped ? "Equipped" : "Not Equipped",
         data.proficient ? "Proficient": "Not Proficient",
-      )
+      );
     }
 
     // Ability activation properties
@@ -213,7 +213,7 @@ export class Item5e extends Item {
         labels.activation,
         labels.range,
         labels.duration
-      )
+      );
     }
 
     // Filter properties and return
@@ -336,7 +336,7 @@ export class Item5e extends Item {
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.d20Roll logic for the core implementation
    */
-  rollAttack(event) {
+  rollAttack(options={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
     if ( !this.hasAttack ) {
@@ -363,7 +363,7 @@ export class Item5e extends Item {
 
     // Call the roll helper utility
     Dice5e.d20Roll({
-      event: event,
+      event: options.event,
       parts: parts,
       actor: this.actor,
       data: rollData,
@@ -372,7 +372,7 @@ export class Item5e extends Item {
       critical: crit,
       dialogOptions: {
         width: 400,
-        top: event.clientY - 80,
+        top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       }
     });
@@ -384,7 +384,7 @@ export class Item5e extends Item {
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.damageRoll logic for the core implementation
    */
-  rollDamage(event, {versatile=false}={}) {
+  rollDamage({event, versatile=false}={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
     if ( !this.hasDamage ) {
@@ -422,7 +422,7 @@ export class Item5e extends Item {
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
-        top: event.clientY - 80,
+        top: event ? event.clientY - 80 : null,
         left: window.innerWidth - 710
       }
     });
@@ -449,7 +449,7 @@ export class Item5e extends Item {
   /**
    * Use a consumable item
    */
-  rollConsumable(event) {
+  rollConsumable(options={}) {
     let itemData = this.data.data;
     const labels = this.labels;
     const formula = itemData.damage ? labels.damage : itemData.formula;
@@ -496,7 +496,11 @@ export class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  async rollRecharge() {
+  /**
+   * Perform an ability recharge test for an item which uses the d6 recharge mechanic
+   * @prarm {Object} options
+   */
+  async rollRecharge(options={}) {
     const data = this.data.data;
     if ( !data.recharge.value ) return;
 
@@ -532,7 +536,7 @@ export class Item5e extends Item {
    * Roll a Tool Check
    * Rely upon the Dice5e.d20Roll logic for the core implementation
    */
-  rollToolCheck(event) {
+  rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
     const itemData = this.data.data;
 
@@ -546,7 +550,7 @@ export class Item5e extends Item {
 
     // Call the roll helper utility
     Dice5e.d20Roll({
-      event: event,
+      event: options.event,
       parts: parts,
       data: rollData,
       template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
@@ -555,7 +559,7 @@ export class Item5e extends Item {
       flavor: (parts, data) => `${this.name} - ${CONFIG.DND5E.abilities[abl]} Check`,
       dialogOptions: {
         width: 400,
-        top: event.clientY - 80,
+        top: options.event ? event.clientY - 80 : null,
         left: window.innerWidth - 710,
       },
       onClose: (html, parts, data) => {
@@ -600,18 +604,18 @@ export class Item5e extends Item {
     const target = isTargetted ? this._getChatCardTarget(card) : null;
 
     // Attack and Damage Rolls
-    if ( action === "attack" ) await item.rollAttack(event);
-    else if ( action === "damage" ) await item.rollDamage(event);
-    else if ( action === "versatile" ) await item.rollDamage(event, {versatile: true});
+    if ( action === "attack" ) await item.rollAttack({event});
+    else if ( action === "damage" ) await item.rollDamage({event});
+    else if ( action === "versatile" ) await item.rollDamage({event, versatile: true});
 
     // Saving Throw
     else if ( action === "save" ) await target.rollAbilitySave(button.dataset.ability, {event});
 
     // Consumable usage
-    else if ( action === "consume" ) await item.rollConsumable(event);
+    else if ( action === "consume" ) await item.rollConsumable({event});
 
     // Tool usage
-    else if ( action === "toolCheck" ) await item.rollToolCheck(event);
+    else if ( action === "toolCheck" ) await item.rollToolCheck({event});
 
     // Re-enable the button
     button.disabled = false;

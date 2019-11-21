@@ -168,7 +168,7 @@ export class Actor5e extends Actor {
     if ( !usesSlots ) return item.roll();
 
     // Configure the casting level and whether to consume a spell slot
-    let consume = true
+    let consume = true;
     if ( configureDialog ) {
       const spellFormData = await SpellCastDialog.create(this, item);
       lvl = parseInt(spellFormData.get("level"));
@@ -197,7 +197,7 @@ export class Actor5e extends Actor {
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {Object} options      Options which configure how the skill check is rolled
    */
-  rollSkill(skillId, options) {
+  rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
     return Dice5e.d20Roll({
       event: options.event,
@@ -216,7 +216,7 @@ export class Actor5e extends Actor {
    * @param {String}abilityId     The ability id (e.g. "str")
    * @param {Object} options      Options which configure how ability tests or saving throws are rolled
    */
-  rollAbility(abilityId, options) {
+  rollAbility(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     new Dialog({
       title: `${label} Ability Check`,
