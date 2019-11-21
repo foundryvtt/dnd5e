@@ -4,8 +4,8 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .dnd5e.sheet.actor.character {
-  min-width: 700px;
-  min-height: 785px;
+  min-width: 672px;
+  min-height: 736px;
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -59,9 +59,11 @@
 
     // Primary Attributes
     .attributes {
+      height: 80px;
       margin: 0;
 
       .attribute {
+        height: 80px;
         margin: 0;
         border: none;
         border-right: @borderGroove;
@@ -69,6 +71,12 @@
 
         &:last-child {
           border-right: none;
+        }
+
+        .attribute-value {
+          margin: 5px 0 0;
+          height: 32px;
+          line-height: 32px;
         }
 
         .attribute-name {
@@ -118,7 +126,7 @@
   }
 
   ul.skills-list {
-    flex: 0 0 226px;
+    flex: 0 0 212px;
 
     li.skill {
       padding: 3px;
@@ -134,7 +142,7 @@
     .death-saves {
       flex: 2;
       .counter-value {
-        flex: 0 0 120px;
+        flex: 0 0 90px;
       }
     }
   }
@@ -153,7 +161,7 @@
   .encumbrance {
     flex: 0 0 12px;
     background: @colorTan;
-    margin: 1px 20px 5px 5px;
+    margin: 1px 15px 0 1px;
     border: 1px solid @colorDark;
     border-radius: 3px;
     position: relative;

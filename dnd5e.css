@@ -288,13 +288,13 @@
 }
 .dnd5e.sheet .sheet-navigation {
   flex: 0 0 30px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 20px;
 }
 .dnd5e.sheet .sheet-navigation .item {
   height: 30px;
-  line-height: 36px;
+  line-height: 32px;
   margin: 0 24px;
   border-bottom: 3px solid #b5b3a4;
 }
@@ -426,11 +426,11 @@
 }
 .dnd5e.sheet.actor ul.attributes {
   list-style: none;
-  margin: 10px 0 0;
+  margin: 5px 0 0;
   padding: 0;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute {
-  height: 80px;
+  height: 70px;
   margin: 0 5px;
   border: 2px groove #eeede0;
   border-radius: 4px;
@@ -442,12 +442,13 @@
   flex: 0 0 18px;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value {
-  flex: 0 0 30px;
-  line-height: 30px;
+  height: 28px;
+  line-height: 28px;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value input {
   display: inline;
   max-width: 80%;
+  height: 28px;
   margin: 0;
   font-size: 24px;
 }
@@ -459,11 +460,12 @@
   color: #7a7971;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
-  max-width: 40%;
+  max-width: 33%;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-footer {
-  flex: 0 0 20px;
-  line-height: 20px;
+  flex: 0 0 18px;
+  margin-top: -1px;
+  line-height: 18px;
   font-family: "Signika", "Palatino Linotype", serif;
   font-size: 12px;
 }
@@ -527,19 +529,19 @@
 .dnd5e.sheet.actor ul.skills-list {
   flex: 0 0 192px;
   list-style: none;
-  margin: 10px 5px 0;
+  margin: 5px 5px 0;
   padding: 2px 2px 0;
   border: 2px groove #eeede0;
   border-radius: 3px;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill {
-  height: 24px;
+  height: 22px;
   padding: 3px 0;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill h4 {
   flex: 1px;
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 18px;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-proficiency {
@@ -1072,8 +1074,8 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .dnd5e.sheet.actor.character {
-  min-width: 700px;
-  min-height: 785px;
+  min-width: 672px;
+  min-height: 736px;
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -1121,9 +1123,11 @@
   border-bottom: 2px groove #eeede0;
 }
 .dnd5e.sheet.actor.character .sheet-header .attributes {
+  height: 80px;
   margin: 0;
 }
 .dnd5e.sheet.actor.character .sheet-header .attributes .attribute {
+  height: 80px;
   margin: 0;
   border: none;
   border-right: 2px groove #eeede0;
@@ -1131,6 +1135,11 @@
 }
 .dnd5e.sheet.actor.character .sheet-header .attributes .attribute:last-child {
   border-right: none;
+}
+.dnd5e.sheet.actor.character .sheet-header .attributes .attribute .attribute-value {
+  margin: 5px 0 0;
+  height: 32px;
+  line-height: 32px;
 }
 .dnd5e.sheet.actor.character .sheet-header .attributes .attribute .attribute-name {
   margin-top: 6px;
@@ -1163,7 +1172,7 @@
   width: 32px;
 }
 .dnd5e.sheet.actor.character ul.skills-list {
-  flex: 0 0 226px;
+  flex: 0 0 212px;
 }
 .dnd5e.sheet.actor.character ul.skills-list li.skill {
   padding: 3px;
@@ -1177,7 +1186,7 @@
   flex: 2;
 }
 .dnd5e.sheet.actor.character .counters .death-saves .counter-value {
-  flex: 0 0 120px;
+  flex: 0 0 90px;
 }
 .dnd5e.sheet.actor.character .item-detail.player-class {
   flex: 0 0 180px;
@@ -1187,7 +1196,7 @@
 .dnd5e.sheet.actor.character .encumbrance {
   flex: 0 0 12px;
   background: #7a7971;
-  margin: 1px 20px 5px 5px;
+  margin: 1px 15px 0 1px;
   border: 1px solid #191813;
   border-radius: 3px;
   position: relative;
@@ -1252,6 +1261,6 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .dnd5e.sheet.actor.npc {
-  min-width: 620px;
-  min-height: 705px;
+  min-width: 600px;
+  min-height: 658px;
 }

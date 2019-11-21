@@ -195,7 +195,8 @@ export class Item5e extends Item {
 
     // Item type specific properties
     const props = [];
-    this[`_${this.data.type}ChatData`](data, labels, props);
+    const fn = this[`_${this.data.type}ChatData`];
+    if ( fn ) fn(data, labels, props);
 
     // General equipment properties
     if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.data.type) ) {

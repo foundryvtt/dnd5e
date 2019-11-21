@@ -81,11 +81,11 @@
 
   ul.attributes {
     list-style: none;
-    margin: 10px 0 0;
+    margin: 5px 0 0;
     padding: 0;
 
     li.attribute {
-      height: 80px;
+      height: 70px;
       margin: 0 5px;
       border: @borderGroove;
       border-radius: 4px;
@@ -97,12 +97,13 @@
       }
 
       .attribute-value {
-        flex: 0 0 30px;
-        line-height: 30px;
+        height: 28px;
+        line-height: 28px;
 
         input {
           display: inline;
           max-width: 80%;
+          height: 28px;
           margin: 0;
           font-size: 24px;
         }
@@ -116,13 +117,14 @@
         }
 
         &.multiple {
-          input { max-width: 40%; }
+          input { max-width: 33%; }
         }
       }
 
       .attribute-footer {
-        flex: 0 0 20px;
-        line-height: 20px;
+        flex: 0 0 18px;
+        margin-top: -1px;
+        line-height: 18px;
         font-family: "Signika", "Palatino Linotype", serif;
         font-size: 12px;
       }
@@ -209,19 +211,19 @@
   ul.skills-list {
     flex: 0 0 192px;
     list-style: none;
-    margin: 10px 5px 0;
+    margin: 5px 5px 0;
     padding: 2px 2px 0;
     border: @borderGroove;
     border-radius: 3px;
 
     li.skill {
-      height: 24px;
+      height: 22px;
       padding: 3px 0;
 
       h4 {
         flex: 1px;
         margin: 0;
-        font-size: 12px;
+        font-size: 11px;
         line-height: 18px;
       }
 

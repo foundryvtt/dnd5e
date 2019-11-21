@@ -1,16 +1,4 @@
 /**
- * A temporary shim to invert an object, flipping keys and values
- * Migrate to core object helper
- */
-function _invertObject(obj) {
-	return Object.entries(obj).reduce((inverted, entry) => {
-		let [k, v] = entry;
-		inverted[v] = k;
-		return inverted;
-	}, {})
-}
-
-/**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
@@ -46,23 +34,12 @@ export const migrateWorld = async function() {
 
   // Migrate Actor Override Tokens
   for ( let s of game.scenes.entities ) {
-    const tokens = duplicate(s.data.tokens);
-    const tokenUpdates = tokens.map(t => {
-      if ( !t.actorId || t.actorLink || !t.actorData.data ) return t;
-      const token = new Token(t);
-      const originalActor = game.actors.get(token.actor.id);
-      if ( !originalActor ) {
-        delete t.actorId;
-        delete t.actorData;
-      } else {
-        const updateData = migrateActorData(token.data.actorData);
-        t.actorData = mergeObject(token.data.actorData, updateData);
-      }
-      return t;
-    });
     try {
-      console.log(`Migrating Token overrides for Scene ${s.name}`);
-      await s.update({tokens: tokenUpdates}, {enforceTypes: false});
+      const updateData = migrateSceneData(s.data);
+      if ( !isObjectEmpty(updateData) ) {
+        console.log(`Migrating Scene entity ${s.name}`);
+        await s.update(updateData, {enforceTypes: false});
+      }
     } catch(err) {
       console.error(err);
     }
@@ -70,7 +47,7 @@ export const migrateWorld = async function() {
 
   // Migrate World Compendium Packs
   const packs = game.packs.filter(p => {
-    return (p.metadata.package === "world") && ["Actor", "Item"].includes(p.metadata.entity)
+    return (p.metadata.package === "world") && ["Actor", "Item", "Scene"].includes(p.metadata.entity)
   });
   for ( let p of packs ) {
     await migrateCompendium(p);
@@ -90,7 +67,7 @@ export const migrateWorld = async function() {
  */
 export const migrateCompendium = async function(pack) {
   const entity = pack.metadata.entity;
-  if ( !["Actor", "Item"].includes(entity) ) return;
+  if ( !["Actor", "Item", "Scene"].includes(entity) ) return;
 
   // Begin by requesting server-side data model migration and get the migrated content
   await pack.migrate();
@@ -102,6 +79,7 @@ export const migrateCompendium = async function(pack) {
       let updateData = null;
       if (entity === "Item") updateData = migrateItemData(ent.data);
       else if (entity === "Actor") updateData = migrateActorData(ent.data);
+      else if ( entity === "Scene" ) updateData = migrateSceneData(ent.data);
       if (!isObjectEmpty(updateData)) {
         expandObject(updateData);
         updateData["_id"] = ent._id;
@@ -115,6 +93,8 @@ export const migrateCompendium = async function(pack) {
   console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
 };
 
+/* -------------------------------------------- */
+/*  Entity Type Migration Helpers               */
 /* -------------------------------------------- */
 
 /**
@@ -227,18 +207,54 @@ export const migrateItemData = function(item) {
 /* -------------------------------------------- */
 
 /**
+ * Migrate a single Scene entity to incorporate changes to the data model of it's actor data overrides
+ * Return an Object of updateData to be applied
+ * @param {Object} scene  The Scene data to Update
+ * @return {Object}       The updateData to apply
+ */
+export const migrateSceneData = function(scene) {
+  const tokens = duplicate(scene.tokens);
+  return {
+    tokens: tokens.map(t => {
+      if (!t.actorId || t.actorLink || !t.actorData.data) {
+        t.actorData = {};
+        return t;
+      }
+      const token = new Token(t);
+      if ( !token.actor ) {
+        t.actorId = null;
+        t.actorData = {};
+      }
+      const originalActor = game.actors.get(token.actor.id);
+      if (!originalActor) {
+        t.actorId = null;
+        t.actorData = {};
+      } else {
+        const updateData = migrateActorData(token.data.actorData);
+        t.actorData = mergeObject(token.data.actorData, updateData);
+      }
+      return t;
+    })
+  };
+};
+
+/* -------------------------------------------- */
+/*  Low level migration utilities
+/* -------------------------------------------- */
+
+/**
  * Migrate string format traits with a comma separator to an array of strings
  * @private
  */
 const _migrateActorTraits = function(actor, updateData) {
   if ( !actor.data.traits ) return;
-  const dt = _invertObject(CONFIG.DND5E.damageTypes);
+  const dt = invertObject(CONFIG.DND5E.damageTypes);
   const map = {
     "dr": dt,
     "di": dt,
     "dv": dt,
-    "ci": _invertObject(CONFIG.DND5E.conditionTypes),
-    "languages": _invertObject(CONFIG.DND5E.languages)
+    "ci": invertObject(CONFIG.DND5E.conditionTypes),
+    "languages": invertObject(CONFIG.DND5E.languages)
   };
   for ( let [t, choices] of Object.entries(map) ) {
     const trait = actor.data.traits[t];
@@ -293,7 +309,6 @@ const _migrateArmor = function(item, updateData) {
   const armor = item.data.armor;
   if ( armor && item.data.armorType && item.data.armorType.value ) {
     updateData["data.armor.type"] = item.data.armorType.value;
-    updateData["data.-=armorType"] = null;
   }
 };
 
@@ -322,14 +337,13 @@ const _migrateFlattenValues = function(ent, updateData, toFlatten) {
 const _migrateCastTime = function(item, updateData) {
   const value = getProperty(item.data, "time.value");
   if ( !value ) return;
-  const ATS = _invertObject(CONFIG.DND5E.abilityActivationTypes);
+  const ATS = invertObject(CONFIG.DND5E.abilityActivationTypes);
   let match = value.match(/([\d]+\s)?([\w\s]+)/);
   if ( !match ) return;
   let type = ATS[match[2]] || "none";
   let cost = match[1] ? Number(match[1]) : 0;
   if ( type === "none" ) cost = 0;
   updateData["data.activation"] = {type, cost};
-  updateData["data.-=time"] = null;
 };
 
 /* -------------------------------------------- */
@@ -351,7 +365,6 @@ const _migrateDamage = function(item, updateData) {
     if ( item.type === "weapon" && parts.length ) parts[0][0] += " + @mod";
     updateData["data.damage.parts"] = parts;
     updateData["data.damage.-=value"] = null;
-    updateData["data.-=damageType"] = null;
   }
 
   // Versatile Damage
@@ -359,7 +372,6 @@ const _migrateDamage = function(item, updateData) {
   if ( d2 && d2.value ) {
     let formula = d2.value.replace(/[\-\*\/]/g, "+");
     updateData["data.damage.versatile"] = formula.split("+").shift() + " + @mod";
-    updateData["data.-=damage2"] = null;
   }
 };
 
@@ -370,7 +382,7 @@ const _migrateDamage = function(item, updateData) {
  * @private
  */
 const _migrateDuration = function(item, updateData) {
-  const TIME = _invertObject(CONFIG.DND5E.timePeriods);
+  const TIME = invertObject(CONFIG.DND5E.timePeriods);
   const dur = item.data.duration;
   if ( dur && dur.value && !dur.units ) {
     let match = dur.value.match(/([\d]+\s)?([\w\s]+)/);
@@ -507,8 +519,6 @@ const _migrateSpellComponents = function(item, updateData) {
     concentration: item.data.concentration.value === true,
     ritual: item.data.ritual.value === true
   };
-  updateData["data.-=concentration"] = null;
-  updateData["data.-=ritual"] = null;
 };
 
 /* -------------------------------------------- */
@@ -560,15 +570,6 @@ const _migrateSpellPreparation = function(item, updateData) {
  * @private
  */
 const _migrateWeaponProperties = function(item, updateData) {
-  const props = item.data.properties;
-  if ( !props.value ) return;
-
-  // Map weapon property strings to boolean flags
-  const labels = _invertObject(CONFIG.DND5E.weaponProperties);
-  for ( let k of props.value.split(",").map(p => p.trim()) ) {
-    if ( labels[k] ) updateData[`data.properties.${labels[k]}`] = true;
-  }
-  updateData["data.properties.-=value"] = null;
 
   // Set default activation mode for weapons
   updateData["data.activation"] = {type: "action", cost: 1};
@@ -590,5 +591,15 @@ const _migrateWeaponProperties = function(item, updateData) {
       value: updateData["data.properties.rch"] ? 10 : 5,
       units: "ft"
     }
+  }
+
+  // Map weapon property strings to boolean flags
+  const props = item.data.properties;
+  if ( props.value ) {
+    const labels = invertObject(CONFIG.DND5E.weaponProperties);
+    for (let k of props.value.split(",").map(p => p.trim())) {
+      if (labels[k]) updateData[`data.properties.${labels[k]}`] = true;
+    }
+    updateData["data.properties.-=value"] = null;
   }
 };
