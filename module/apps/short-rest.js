@@ -49,21 +49,22 @@ export class ShortRestDialog extends Dialog {
    */
   static async shortRestDialog({actor, canRoll=true}={}) {
     const html = await renderTemplate("systems/dnd5e/templates/apps/short-rest.html");
-    await new Promise(resolve => {
+    return new Promise(resolve => {
       const dlg = new this(actor, {
         title: "Short Rest",
         content: html,
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
-            label: "Rest"
+            label: "Rest",
+            callback: () => resolve(true)
           },
           cancel: {
             icon: '<i class="fas fa-times"></i>',
-            label: "Cancel"
+            label: "Cancel",
+            callback: () => resolve(false)
           }
         },
-        close: resolve,
         canRoll: canRoll
       });
       dlg.render(true);
@@ -81,7 +82,7 @@ export class ShortRestDialog extends Dialog {
   static async longRestDialog({actor}={}) {
     const content = `<p>Take a long rest?</p><p>On a long rest you will recover hit points, half your maximum hit dice, 
         class resources, limited use item charges, and spell slots.</p>`;
-    await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       new Dialog({
         title: "Long Rest",
         content: content,

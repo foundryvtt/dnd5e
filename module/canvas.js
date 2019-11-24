@@ -1,12 +1,14 @@
 /**
- * Override the default Grid measurement function to add additional distance for subsequent diagonal moves
+ * Measure the distance between two pixel coordinates
  * See BaseGrid.measureDistance for more details
  *
- * @param p0 {Object}     The starting position
- * @param p1 {Object}     The ending position
- * @returns {Number}      The traveled distance for the move
+ * @param {Object} p0           The origin coordinate {x, y}
+ * @param {Object} p1           The destination coordinate {x, y}
+ * @param {boolean} gridSpaces  Enforce grid distance (if true) vs. direct point-to-point (if false)
+ * @return {number}             The distance between p1 and p0
  */
-export const measureDistance = function(p0, p1) {
+export const measureDistance = function(p0, p1, {gridSpaces=true}={}) {
+  if ( !gridSpaces ) return BaseGrid.prototype.measureDistance.bind(this)(p0, p1, {gridSpaces});
   let gs = canvas.dimensions.size,
       ray = new Ray(p0, p1),
       nx = Math.abs(Math.ceil(ray.dx / gs)),

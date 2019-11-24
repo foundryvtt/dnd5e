@@ -324,7 +324,10 @@ export class Actor5e extends Actor {
     const hp0 = data.attributes.hp.value;
 
     // Display a Dialog for rolling hit dice
-    if ( dialog ) await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+    if ( dialog ) {
+      const rested = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      if ( !rested ) return;
+    }
 
     // Note the change in HP and HD which occurred
     const dhd = data.attributes.hd.value - hd0;

@@ -19,6 +19,7 @@
         <button data-action="save" data-ability="{{data.save.ability}}" disabled>
             {{ localize "DND5E.Save" }} {{labels.save}}
         </button>{{/if}}
+        {{#if data.formula}}<button data-action="formula">{{ localize "DND5E.ChatOtherFormula"}}</button>{{/if}}
     </div>
 
     <footer class="card-footer">

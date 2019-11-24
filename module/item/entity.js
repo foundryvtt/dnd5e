@@ -447,6 +447,32 @@ export class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Place an attack roll using an item (weapon, feat, spell, or equipment)
+   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   */
+  async rollFormula(options={}) {
+    const itemData = this.data.data;
+    const actorData = this.actor.data.data;
+    if ( !itemData.formula ) {
+      throw new Error("This Item does not have a formula to roll!");
+    }
+
+    // Define Roll Data
+    const rollData = duplicate(actorData);
+    rollData.item = itemData;
+    const title = `${this.name} - Other Formula`;
+
+    const roll = new Roll(itemData.formula, rollData).roll();
+    return roll.toMessage({
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      flavor: itemData.chatFlavor || title,
+      rollMode: game.settings.get("core", "rollMode")
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Use a consumable item
    */
   rollConsumable(options={}) {
@@ -607,6 +633,7 @@ export class Item5e extends Item {
     if ( action === "attack" ) await item.rollAttack({event});
     else if ( action === "damage" ) await item.rollDamage({event});
     else if ( action === "versatile" ) await item.rollDamage({event, versatile: true});
+    else if ( action === "formula" ) await item.rollFormula({event});
 
     // Saving Throw
     else if ( action === "save" ) await target.rollAbilitySave(button.dataset.ability, {event});
