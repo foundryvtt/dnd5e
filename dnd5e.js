@@ -48,10 +48,6 @@ Hooks.once("init", async function() {
   // Patch Core Functions
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
 
-  // TODO - suppress the "backpack" type item. Remove this later
-  let backpackIndex = game.system.entityTypes.Item.findIndex(t => t === "backpack");
-  if ( backpackIndex !== -1 ) game.system.entityTypes.Item.splice(backpackIndex, 1);
-
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", ActorSheet5eCharacter, { types: ["character"], makeDefault: true });
