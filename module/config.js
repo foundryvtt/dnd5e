@@ -134,6 +134,12 @@ DND5E.itemActionTypes = {
 
 /* -------------------------------------------- */
 
+DND5E.itemCapacityTypes = {
+  "items": "DND5E.ItemContainerCapacityItems",
+  "weight": "DND5E.ItemContainerCapacityWeight"
+};
+
+/* -------------------------------------------- */
 
 /**
  * Enumerate the lengths of time over which an item can have limited use ability
@@ -162,13 +168,6 @@ DND5E.equipmentTypes = {
 };
 DND5E.armorTypes = DND5E.equipmentTypes;
 
-
-/* -------------------------------------------- */
-
-DND5E.capacityTypes = {
-  "items": "DND5E.ItemContainerCapacityItems",
-  "weight": "DND5E.ItemContainerCapacityWeight"
-};
 
 /* -------------------------------------------- */
 
