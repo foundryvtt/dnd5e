@@ -379,9 +379,11 @@
     },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
-      "weightlessContents": false,
-      "capacity": 0,
-      "capacityType": "weight",
+      "capacity": {
+        "type": "weight",
+        "value": 0,
+        "weightless": false
+      },
       "currency": {
         "cp": 0,
         "sp": 0,

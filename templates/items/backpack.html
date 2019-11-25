@@ -15,9 +15,7 @@
 			</div>
 
 			<ul class="summary">
-				<li>
-					{{lookup config.consumableTypes data.consumableType }}
-				</li>
+				<li></li>
 				<li>
 					<input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="Rarity"/>
 				</li>
@@ -42,31 +40,32 @@
 
 		{{!-- Details Tab --}}
 		<div class="tab details" data-group="primary" data-tab="details">
-			<h3 class="form-header">{{localize 'DND5E.ContainerDetails'}}</h3>
+			<h3 class="form-header">{{localize 'DND5E.ItemContainerDetails'}}</h3>
 
 			<div class="form-group">
-				<label>{{localize 'DND5E.Capacity'}}</label>
+				<label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
 				<div class="form-fields">
-					<input type="text" name="data.capacity" value="{{data.capacity}}" data-dtype="Number"
-					       placeholder="-">
+					<input type="text" name="data.capacity.value" value="{{data.capacity.value}}"
+					       data-dtype="Number" placeholder="-">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label>{{localize 'DND5E.CapacityType'}}</label>
+				<label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
 				<select name="data.capacityType">
 					{{#select data.capacityType}}
-						<option value="weight">{{localize 'DND5E.CapacityWeight'}}</option>
-						<option value="items">{{localize 'DND5E.CapacityItems'}}</option>
+						{{#each config.capacityTypes}}
+							<option value="{{@key}}">{{localize this}}</option>
+						{{/each}}
 					{{/select}}
 				</select>
 			</div>
 
 			<div class="form-group stacked">
-				<label>{{localize 'DND5E.ContainerProperties'}}</label>
+				<label>{{localize 'DND5E.ItemContainerProperties'}}</label>
 				<label class="checkbox">
-					<input type="checkbox" name="data.weightlessContents" {{checked data.weightlessContents}}>
-					{{localize 'DND5E.WeightlessContents'}}
+					<input type="checkbox" name="data.capacity.weightless" {{checked data.capacity.weightless}}>
+					{{localize 'DND5E.ItemContainerWeightless'}}
 				</label>
 			</div>
 	</section>

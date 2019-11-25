@@ -165,6 +165,13 @@ DND5E.armorTypes = DND5E.equipmentTypes;
 
 /* -------------------------------------------- */
 
+DND5E.capacityTypes = {
+  "items": "DND5E.ItemContainerCapacityItems",
+  "weight": "DND5E.ItemContainerCapacityWeight"
+};
+
+/* -------------------------------------------- */
+
 /**
  * Enumerate the valid consumable types which are recognized by the system
  * @type {Object}
