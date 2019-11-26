@@ -77,7 +77,8 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
       equipment: { label: "Equipment", items: [], dataset: {type: "equipment"} },
       consumable: { label: "Consumables", items: [], dataset: {type: "consumable"} },
       tool: { label: "Tools", items: [], dataset: {type: "tool"} },
-      loot: { label: "Loot", items: [], dataset: {type: "loot"} },
+      backpack: { label: game.i18n.localize("DND5E.ItemContainerHeader"), items: [], dataset: {type: "backpack"} },
+      loot: { label: "Loot", items: [], dataset: {type: "loot"} }
     };
 
     // Partition items by category

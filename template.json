@@ -379,7 +379,18 @@
     },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
-      "deprecationWarning": "THIS ITEM TYPE IS DEPRECATED AND MOVED TO LOOT"
+      "capacity": {
+        "type": "weight",
+        "value": 0,
+        "weightless": false
+      },
+      "currency": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 0,
+        "pp": 0
+      }
     },
     "class": {
       "templates": ["itemDescription"],
