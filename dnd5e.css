@@ -649,6 +649,11 @@
 .dnd5e.sheet.actor .traits .inactive {
   color: #7a7971;
 }
+.dnd5e.sheet.actor .tab.features,
+.dnd5e.sheet.actor .tab.inventory,
+.dnd5e.sheet.actor .tab.spellbook {
+  overflow-y: hidden;
+}
 .dnd5e.sheet.actor .inventory-filters {
   margin: 0 8px;
   flex: 0 0 20px;
@@ -795,9 +800,6 @@
   line-height: 16px;
   padding: 0.25em 0.5em;
   border-top: 1px solid #c9c7b8;
-}
-.dnd5e.sheet.actor .spellbook .inventory-list {
-  height: calc(100% - 50px);
 }
 .dnd5e.sheet.actor .spell-slots,
 .dnd5e.sheet.actor .spell-comps {

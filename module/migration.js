@@ -437,20 +437,28 @@ const _migrateRarity = function(item, updateData) {
  */
 const _migrateRemoveDeprecated = function(ent, updateData, toFlatten) {
   const flat = flattenObject(ent.data);
+
+  // Deprecate entire objects
+  const toDeprecate = Object.entries.flat().filter(e => e[0].endsWith("_deprecated") && (e[1] === true)).map(e => {
+    let parent = e[0].split(".");
+    parent.pop();
+    return parent.join(".");
+  });
+  for ( let k of toDeprecate ) {
+    let parts = k.split(".");
+    parts[parts.length-1] = "-=" + parts[parts.length-1];
+    updateData[`data.${parts.join(".")}`] = null;
+  }
+
+  // Deprecate types and labels
   for ( let [k, v] of Object.entries(flat) ) {
+    let parts = k.split(".");
+    parts.pop();
 
     // Skip any fields which have already been touched by other migrations
+    if ( toDeprecate.some(f => k.startsWith(f) ) ) continue;
     if ( toFlatten.some(f => k.startsWith(f)) ) continue;
-    if ( updateData.hasOwnProperty(k) ) continue;
-
-    // Deprecate the entire object
-    if ( k.endsWith("_deprecated") ) {
-      let ks = k.split(".");
-      ks.pop();
-      ks[ks.length - 1] = "-="+ks[ks.length - 1];
-      updateData[`data.${ks.join(".")}`] = null;
-      continue;
-    }
+    if ( updateData.hasOwnProperty(`data.${k}`) ) continue;
 
     // Remove the data type field
     const dtypes = ["Number", "String", "Boolean", "Array", "Object"];

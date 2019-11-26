@@ -367,6 +367,12 @@
   /*  Inventory Lists                          */
   /* ----------------------------------------- */
 
+  .tab.features,
+  .tab.inventory,
+  .tab.spellbook {
+    overflow-y: hidden;
+  }
+
   /* Inventory List Filters */
   .inventory-filters {
     margin: 0 8px;
@@ -524,12 +530,6 @@
   /* ----------------------------------------- */
   /*  Spellbook                                */
   /* ----------------------------------------- */
-
-  .spellbook {
-    .inventory-list {
-      height: calc(100% - 50px);
-    }
-  }
 
   .spell-slots,
   .spell-comps {
