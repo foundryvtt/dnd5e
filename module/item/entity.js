@@ -104,7 +104,7 @@ export class Item5e extends Item {
         rng.value = null;
         rng.long = null;
       }
-      labels.range = [rng.value, C.distanceUnits[rng.units]].filterJoin(" ");
+      labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
 
       // Duration Label
       let dur = item.data.duration || {};

@@ -439,7 +439,7 @@ const _migrateRemoveDeprecated = function(ent, updateData, toFlatten) {
   const flat = flattenObject(ent.data);
 
   // Deprecate entire objects
-  const toDeprecate = Object.entries.flat().filter(e => e[0].endsWith("_deprecated") && (e[1] === true)).map(e => {
+  const toDeprecate = Object.entries(flat).filter(e => e[0].endsWith("_deprecated") && (e[1] === true)).map(e => {
     let parent = e[0].split(".");
     parent.pop();
     return parent.join(".");

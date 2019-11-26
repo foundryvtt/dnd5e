@@ -34,7 +34,6 @@ export class ActorTraitSelector extends FormApplication {
 
     // Get current values
     let attr = getProperty(this.object.data, this.attribute);
-	  if ( typeof attr.value === "string" ) attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
 	  // Populate choices
     const choices = duplicate(this.options.choices);
@@ -50,23 +49,6 @@ export class ActorTraitSelector extends FormApplication {
 	    choices: choices,
       custom: attr.custom
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Support backwards compatibility for old-style string separated traits
-   * @private
-   */
-  static _backCompat(current, choices) {
-    if ( !current || current.length === 0 ) return [];
-	  current = current.split(/[\s,]/).filter(t => !!t);
-    return current.map(val => {
-      for ( let [k, v] of Object.entries(choices) ) {
-        if ( val === v ) return k;
-        }
-      return null;
-    }).filter(val => !!val);
   }
 
   /* -------------------------------------------- */

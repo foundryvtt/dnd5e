@@ -565,7 +565,7 @@
   margin-bottom: 5px;
 }
 .dnd5e.sheet.actor .counters .counter {
-  padding: 0 6px;
+  padding: 0 3px;
   line-height: 32px;
 }
 .dnd5e.sheet.actor .counters .counter h4 {
@@ -586,16 +586,13 @@
   height: 20px;
   max-width: 20px;
   margin: 0;
+  padding: 0;
   text-align: center;
 }
 .dnd5e.sheet.actor .counters .counter input[type="checkbox"] {
   position: relative;
   margin: 0;
   top: 6px;
-}
-.dnd5e.sheet.actor .counters .counter.lair input[type="text"] {
-  width: 32px;
-  max-width: 32px;
 }
 .dnd5e.sheet.actor .counters .counter span.sep {
   margin: 0 -2px;
