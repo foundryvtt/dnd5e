@@ -24,18 +24,18 @@ export class Dice5e {
    */
   static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
                   fastForward=true, critical=20, fumble=1, onClose, dialogOptions, }) {
+    flavor = flavor || title;
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
     let roll = (parts, adv) => {
-      let flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
       if (adv === 1) {
         parts[0] = ["2d20kh"];
-        flav = `${title} (Advantage)`;
+        flavor = `${title} (Advantage)`;
       }
       else if (adv === -1) {
         parts[0] = ["2d20kl"];
-        flav = `${title} (Disadvantage)`;
+        flavor = `${title} (Disadvantage)`;
       }
 
       // Don't include situational bonus unless it is defined
@@ -52,7 +52,7 @@ export class Dice5e {
       // Convert the roll to a chat message
       roll.toMessage({
         speaker: speaker,
-        flavor: flav,
+        flavor: flavor,
         rollMode: rollMode
       });
     };
@@ -122,23 +122,23 @@ export class Dice5e {
    * @param {Object} dialogOptions  Modal dialog options
    */
   static damageRoll({event={}, parts, actor, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
+    flavor = flavor || title;
 
     // Inner roll function
     let rollMode = game.settings.get("core", "rollMode");
     let roll = crit => {
-      let roll = new Roll(parts.join("+"), data),
-          flav = ( flavor instanceof Function ) ? flavor(parts, data) : title;
+      let roll = new Roll(parts.join("+"), data);
       if ( crit === true ) {
         let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
         roll.alter(add, mult);
-        flav = `${title} (Critical)`;
+        flavor = `${flavor} (Critical)`;
       }
 
       // Execute the roll and send it to chat
       roll.toMessage({
         speaker: speaker,
-        flavor: flav,
+        flavor: flavor,
         rollMode: rollMode
       });
 

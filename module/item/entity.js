@@ -40,6 +40,16 @@ export class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Does the item provide an amount of healing instead of conventional damage?
+   * @return {boolean}
+   */
+  get isHealing() {
+    return (this.data.data.actionType === "heal") && this.data.data.damage.parts.length;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement a saving throw as part of its usage
    * @type {boolean}
    */
@@ -126,7 +136,10 @@ export class Item5e extends Item {
 
       // Damage
       let dam = item.data.damage || {};
-      if ( dam.parts ) labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
+      if ( dam.parts ) {
+        labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
+        labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
+      }
     }
 
     // Assign labels and return the Item
@@ -151,6 +164,7 @@ export class Item5e extends Item {
       data: this.getChatData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
+      isHealing: this.isHealing,
       hasDamage: this.hasDamage,
       isVersatile: this.isVersatile,
       hasSave: this.hasSave
@@ -411,6 +425,7 @@ export class Item5e extends Item {
       prof: actorData.attributes.prof
     });
     const title = `${this.name} - Damage Roll`;
+    const flavor = this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title;
 
     // Call the roll helper utility
     Dice5e.damageRoll({
@@ -419,6 +434,7 @@ export class Item5e extends Item {
       actor: this.actor,
       data: rollData,
       title: title,
+      flavor: flavor,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
@@ -582,7 +598,7 @@ export class Item5e extends Item {
       template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: (parts, data) => `${this.name} - ${CONFIG.DND5E.abilities[abl]} Check`,
+      flavor: `${this.name} - ${CONFIG.DND5E.abilities[abl]} Check`,
       dialogOptions: {
         width: 400,
         top: options.event ? event.clientY - 80 : null,
@@ -626,8 +642,8 @@ export class Item5e extends Item {
     // Get the Item
     const item = actor.getOwnedItem(card.dataset.itemId);
 
-    // Get the target
-    const target = isTargetted ? this._getChatCardTarget(card) : null;
+    // Get card targets
+    const targets = isTargetted ? this._getChatCardTargets(card) : [];
 
     // Attack and Damage Rolls
     if ( action === "attack" ) await item.rollAttack({event});
@@ -635,8 +651,12 @@ export class Item5e extends Item {
     else if ( action === "versatile" ) await item.rollDamage({event, versatile: true});
     else if ( action === "formula" ) await item.rollFormula({event});
 
-    // Saving Throw
-    else if ( action === "save" ) await target.rollAbilitySave(button.dataset.ability, {event});
+    // Saving Throws for card targets
+    else if ( action === "save" ) {
+      for ( let t of targets ) {
+        await t.rollAbilitySave(button.dataset.ability, {event});
+      }
+    }
 
     // Consumable usage
     else if ( action === "consume" ) await item.rollConsumable({event});
@@ -680,14 +700,15 @@ export class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @return {Actor|null}         The Actor entity or null
+   * @return {Array.<Actor>}      The Actor entity or null
    * @private
    */
-  static _getChatCardTarget(card) {
+  static _getChatCardTargets(card) {
     const character = game.user.character;
     const controlled = canvas.tokens.controlled;
-    if ( controlled.length === 0 ) return character || null;
-    if ( controlled.length === 1 ) return controlled[0].actor;
-    else throw new Error(`You must designate a specific Token as the roll target`);
+    const targets = controlled.reduce((arr, t) => t.actor ? arr.concat([t.actor]) : arr, []);
+    if ( character && (controlled.length === 0) ) targets.push(character);
+    if ( !targets.length ) throw new Error(`You must designate a specific Token as the roll target`);
+    return targets;
   }
 }
