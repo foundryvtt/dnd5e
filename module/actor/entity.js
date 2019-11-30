@@ -414,7 +414,7 @@ export class Actor5e extends Actor {
     }
 
     // Recover limited item uses
-    const items = this.items.filter(i => i.data.data.uses && ["sr", "lr"].includes(i.data.data.uses.type));
+    const items = this.items.filter(i => i.data.data.uses && ["sr", "lr"].includes(i.data.data.uses.per));
     const updateItems = items.map(item => {
       return {
         "id": item.data.id,
