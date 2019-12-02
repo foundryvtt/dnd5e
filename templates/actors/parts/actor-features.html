@@ -1,33 +1,31 @@
 <div class="inventory-filters">
     <ul class="filter-list flexrow" data-filter="features">
-        <li class="filter-title">Filter</li>
-        <li class="filter-item" data-filter="action">Action</li>
-        <li class="filter-item" data-filter="bonus">Bonus</li>
-        <li class="filter-item" data-filter="reaction">Reaction</li>
+        <li class="filter-title">{{localize "DND5E.Filter"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.Bonus"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
     </ul>
 </div>
 
 <ol class="inventory-list">
-{{#each sections as |section sid|}}
+    {{#each sections as |section sid|}}
     <li class="inventory-header flexrow">
         <h3 class="item-name flexrow">{{section.label}}</h3>
 
         {{#if section.hasActions}}
-        <div class="item-detail item-uses">Charges</div>
-        <div class="item-detail item-action">Usage</div>
-        {{/if}}
-
-        {{#if ../owner}}
+        <div class="item-detail item-uses">{{localize "DND5E.Charge"}}</div>
+        <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
+        {{/if}} {{#if ../owner}}
         <div class="item-controls">
-            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> Add
+            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
         </div>
         {{/if}}
     </li>
 
     <ol class="item-list">
-    {{#each section.items as |item iid|}}
+        {{#each section.items as |item iid|}}
         <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
@@ -36,20 +34,11 @@
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
-                {{#if item.data.uses.value}}
-                {{item.data.uses.value}} / {{item.data.uses.max}}
-                {{else if item.data.recharge.value}}
-                {{#if item.isOnCooldown}}
-                <a class="item-recharge rollable">{{item.labels.recharge}}</a>
-                {{else}}
-                {{localize "DND5E.Charged"}}
-                {{/if}}
-                {{/if}}
+                {{#if item.data.uses.value}} {{item.data.uses.value}} / {{item.data.uses.max}} {{else if item.data.recharge.value}} {{#if item.isOnCooldown}}
+                <a class="item-recharge rollable">{{item.labels.recharge}}</a> {{else}} {{localize "DND5E.Charged"}} {{/if}} {{/if}}
             </div>
             <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.labels.activation}}
-                {{/if}}
+                {{#if item.data.activation.type }} {{item.labels.activation}} {{/if}}
             </div>
 
             {{else if section.isClass}}
@@ -59,16 +48,14 @@
             <div class="item-detail">
                 Level {{item.data.levels}}
             </div>
-            {{/if}}
-
-            {{#if ../../owner}}
+            {{/if}} {{#if ../../owner}}
             <div class="item-controls">
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
             {{/if}}
         </li>
-    {{/each}}
+        {{/each}}
     </ol>
-{{/each}}
+    {{/each}}
 </ol>
