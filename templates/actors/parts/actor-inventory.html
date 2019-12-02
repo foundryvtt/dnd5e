@@ -3,55 +3,53 @@
     {{#if isCharacter}}
     <ol class="currency flexrow">
         <h3>
-            Currency
+            {{localize "DND5E.Curency"}}
             <a class="currency-convert" title="Convert Currency"><i class="fas fa-coins"></i></a>
         </h3>
         {{#each data.currency as |v k|}}
         <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
-        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
-        {{/each}}
+        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number" /> {{/each}}
     </ol>
     {{/if}}
 
     <ul class="filter-list flexrow" data-filter="features">
-        <li class="filter-title">Filter</li>
-        <li class="filter-item" data-filter="action">Action</li>
-        <li class="filter-item" data-filter="bonus">Bonus</li>
-        <li class="filter-item" data-filter="reaction">Reaction</li>
-        <li class="filter-item" data-filter="equipped">Equipped</li>
+        <li class="filter-title">{{localize "DND5E.Filter"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.Bonus"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
+        <li class="filter-item" data-filter="equipped">{{localize "DND5E.Equipped"}}</li>
     </ul>
 </div>
 
 <ol class="inventory-list">
-{{#each sections as |section sid|}}
+    {{#each sections as |section sid|}}
     <li class="inventory-header flexrow">
         <h3 class="item-name flexrow">{{section.label}}</h3>
 
         {{#if ../isCharacter}}
-        <div class="item-detail item-weight">Weight</div>
-        <div class="item-detail item-equipped">Equipped</div>
+        <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
+        <div class="item-detail item-equipped">{{localize "DND5E.Equipped"}}</div>
         {{/if}}
 
-        <div class="item-detail item-uses">Charges</div>
-        <div class="item-detail item-action">Usage</div>
+        <div class="item-detail item-uses">{{localize "DND5E.Charge"}}</div>
+        <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
 
         {{#if ../owner}}
         <div class="item-controls">
-            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> Add
+            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
         </div>
         {{/if}}
     </li>
 
     <ol class="item-list">
-    {{#each section.items as |item iid|}}
+        {{#each section.items as |item iid|}}
         <li class="item flexrow" data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
-                    {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
-                    {{item.name~}}
+                    {{~#if item.isStack}}({{item.data.quantity}}) {{/if}} {{item.name~}}
                 </h4>
             </div>
 
@@ -65,21 +63,16 @@
             </div>
 
             <div class="item-detail item-equipped">
-            {{#if item.data.equipped }} Equipped
-            {{/if}}
+                {{#if item.data.equipped }} {{localize "DND5E.Equipped"}} {{/if}}
             </div>
             {{/if}}
 
             <div class="item-detail item-uses">
-                {{#if item.hasUses }}
-                {{item.data.uses.value}} / {{item.data.uses.max}}
-                {{/if}}
+                {{#if item.hasUses }} {{item.data.uses.value}} / {{item.data.uses.max}} {{/if}}
             </div>
 
             <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.labels.activation}}
-                {{/if}}
+                {{#if item.data.activation.type }} {{item.labels.activation}} {{/if}}
             </div>
 
             {{#if ../../owner}}
@@ -89,19 +82,17 @@
             </div>
             {{/if}}
         </li>
-    {{/each}}
+        {{/each}}
     </ol>
-{{/each}}
+    {{/each}}
 </ol>
 
 
-{{#if isCharacter }}
-{{#with data.attributes.encumbrance}}
+{{#if isCharacter }} {{#with data.attributes.encumbrance}}
 <div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
     <span class="encumbrance-bar" style="width:{{pct}}%"></span>
     <span class="encumbrance-label">{{value}} / {{max}}</span>
     <div class="encumbrance-breakpoint arrow-up"></div>
     <div class="encumbrance-breakpoint arrow-down"></div>
 </div>
-{{/with}}
-{{/if}}
+{{/with}} {{/if}}
