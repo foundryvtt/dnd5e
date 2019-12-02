@@ -1,65 +1,68 @@
 {
-  "name": "dnd5e",
-  "title": "Dungeons & Dragons 5th Edition",
-  "description": "A comprehensive game system for running games of Dungeons & Dragons 5th Edition in the Foundry VTT environment.",
-  "version": 0.72,
-  "author": "Atropos",
-  "templateVersion": 2,
-  "scripts": [],
-  "esmodules": ["dnd5e.js"],
-  "styles": ["dnd5e.css"],
-  "packs": [
-    {
-      "name": "monsters",
-      "label": "Monsters (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/monsters.db",
-      "entity": "Actor"
-    },
-    {
-      "name": "items",
-      "label": "Items (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/items.db",
-      "entity": "Item"
-    },
-    {
-      "name": "spells",
-      "label": "Spells (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/spells.db",
-      "entity": "Item"
-    },
-    {
-      "name": "classes",
-      "label": "Classes (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/classes.db",
-      "entity": "Item"
-    },
-    {
-      "name": "classfeatures",
-      "label": "Class Features (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/classfeatures.db",
-      "entity": "Item"
-    }
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    }
-  ],
-  "socket": true,
-  "initiative": "1d20 + @abilities.dex.mod + @attributes.init.value + (@abilities.dex.value / 100)",
-  "gridDistance": 5,
-  "gridUnits": "ft",
-  "primaryTokenAttribute": "attributes.hp",
-  "secondaryTokenAttribute": null,
-  "minimumCoreVersion": "0.4.1",
-  "url": "https://gitlab.com/foundrynet/dnd5e",
-  "manifest": "https://gitlab.com/foundrynet/dnd5e/raw/master/system.json",
-  "download": "https://gitlab.com/foundrynet/dnd5e/-/archive/master/dnd5e-master.zip"
+    "name": "dnd5e",
+    "title": "Dungeons & Dragons 5th Edition",
+    "description": "A comprehensive game system for running games of Dungeons & Dragons 5th Edition in the Foundry VTT environment.",
+    "version": 0.72,
+    "author": "Atropos",
+    "templateVersion": 2,
+    "scripts": [],
+    "esmodules": ["dnd5e.js"],
+    "styles": ["dnd5e.css"],
+    "packs": [{
+            "name": "monsters",
+            "label": "Monsters (SRD)",
+            "system": "dnd5e",
+            "path": "./packs/monsters.db",
+            "entity": "Actor"
+        },
+        {
+            "name": "items",
+            "label": "Items (SRD)",
+            "system": "dnd5e",
+            "path": "./packs/items.db",
+            "entity": "Item"
+        },
+        {
+            "name": "spells",
+            "label": "Spells (SRD)",
+            "system": "dnd5e",
+            "path": "./packs/spells.db",
+            "entity": "Item"
+        },
+        {
+            "name": "classes",
+            "label": "Classes (SRD)",
+            "system": "dnd5e",
+            "path": "./packs/classes.db",
+            "entity": "Item"
+        },
+        {
+            "name": "classfeatures",
+            "label": "Class Features (SRD)",
+            "system": "dnd5e",
+            "path": "./packs/classfeatures.db",
+            "entity": "Item"
+        }
+    ],
+    "languages": [{
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        },
+        {
+            "lang": "fr",
+            "name": "français",
+            "path": "lang/fr.json"
+        }
+    ],
+    "socket": true,
+    "initiative": "1d20 + @abilities.dex.mod + @attributes.init.value + (@abilities.dex.value / 100)",
+    "gridDistance": 5,
+    "gridUnits": "ft",
+    "primaryTokenAttribute": "attributes.hp",
+    "secondaryTokenAttribute": null,
+    "minimumCoreVersion": "0.4.1",
+    "url": "https://gitlab.com/foundrynet/dnd5e",
+    "manifest": "https://gitlab.com/foundrynet/dnd5e/raw/master/system.json",
+    "download": "https://gitlab.com/foundrynet/dnd5e/-/archive/master/dnd5e-master.zip"
 }
