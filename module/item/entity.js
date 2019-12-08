@@ -64,43 +64,48 @@ export class Item5e extends Item {
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
-  prepareData(item) {
-    super.prepareData(item);
+  prepareData() {
+    super.prepareData();
+
+    // Get the Item's data
+    const itemData = this.data;
+    const actorData = this.actor ? this.actor.data : {};
+    const data = itemData.data;
     const C = CONFIG.DND5E;
     const labels = {};
 
     // Spell Level,  School, and Components
-    if ( item.type === "spell" ) {
-      labels.level = C.spellLevels[item.data.level];
-      labels.school = C.spellSchools[item.data.school];
-      labels.components = Object.entries(item.data.components).map(c => {
+    if ( itemData.type === "spell" ) {
+      labels.level = C.spellLevels[data.level];
+      labels.school = C.spellSchools[data.school];
+      labels.components = Object.entries(data.components).map(c => {
         c[1] === true ? c[0].titleCase().slice(0,1) : null
       }).filterJoin(",");
     }
 
     // Feat Items
-    else if ( item.type === "feat" ) {
-      const act = item.data.activation;
+    else if ( itemData.type === "feat" ) {
+      const act = data.activation;
       if ( act && (act.type === C.abilityActivationTypes.legendary) ) labels.featType = "Legendary Action";
       else if ( act && (act.type === C.abilityActivationTypes.lair) ) labels.featType = "Lair Action";
-      else if ( act && act.type ) labels.featType = item.data.damage.length ? "Attack" : "Action";
+      else if ( act && act.type ) labels.featType = data.damage.length ? "Attack" : "Action";
       else labels.featType = "Passive";
     }
 
     // Equipment Items
-    else if ( item.type === "equipment" ) {
-      labels.armor = item.data.armor.value ? `${item.data.armor.value} AC` : "";
+    else if ( itemData.type === "equipment" ) {
+      labels.armor = data.armor.value ? `${data.armor.value} AC` : "";
     }
 
     // Activated Items
-    if ( item.data.hasOwnProperty("activation") ) {
+    if ( data.hasOwnProperty("activation") ) {
 
       // Ability Activation Label
-      let act = item.data.activation || {};
+      let act = data.activation || {};
       if ( act ) labels.activation = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
       // Target Label
-      let tgt = item.data.target || {};
+      let tgt = data.target || {};
       if (["none", "touch", "self"].includes(tgt.units)) tgt.value = null;
       if (["none", "self"].includes(tgt.type)) {
         tgt.value = null;
@@ -109,7 +114,7 @@ export class Item5e extends Item {
       labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
       // Range Label
-      let rng = item.data.range || {};
+      let rng = data.range || {};
       if (["none", "touch", "self"].includes(rng.units) || (rng.value === 0)) {
         rng.value = null;
         rng.long = null;
@@ -117,34 +122,36 @@ export class Item5e extends Item {
       labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
 
       // Duration Label
-      let dur = item.data.duration || {};
+      let dur = data.duration || {};
       if (["inst", "perm"].includes(dur.units)) dur.value = null;
       labels.duration = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
 
       // Recharge Label
-      let chg = item.data.recharge || {};
+      let chg = data.recharge || {};
       labels.recharge = chg.value ? (parseInt(chg.value) === 6 ? `Recharge [6]` : `Recharge [${chg.value}-6]`) : "";
     }
 
     // Item Actions
-    if ( item.data.hasOwnProperty("actionType") ) {
+    if ( data.hasOwnProperty("actionType") ) {
 
       // Save DC
-      let save = item.data.save || {};
+      let save = data.save || {};
       if ( !save.ability ) save.dc = null;
+      if ( this.isOwned && (save.ability && !save.dc) ) {
+        save.dc = actorData.data.attributes.spelldc;
+      }
       labels.save = save.ability ? `DC ${save.dc || ""} ${C.abilities[save.ability]}` : "";
 
       // Damage
-      let dam = item.data.damage || {};
+      let dam = data.damage || {};
       if ( dam.parts ) {
         labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
         labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
       }
     }
 
-    // Assign labels and return the Item
+    // Assign labels
     this.labels = labels;
-    return item;
   }
 
   /* -------------------------------------------- */
@@ -205,7 +212,7 @@ export class Item5e extends Item {
     const labels = this.labels;
 
     // Rich text description
-    data.description.value = enrichHTML(data.description.value, htmlOptions);
+    data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
 
     // Item type specific properties
     const props = [];
@@ -309,14 +316,6 @@ export class Item5e extends Item {
    * @private
    */
   _spellChatData(data, labels, props) {
-    const ad = this.actor.data.data;
-
-    // Spell saving throw text
-    const abl = data.ability || ad.attributes.spellcasting || "int";
-    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
-    labels.save = `DC ${data.save.dc} ${CONFIG.DND5E.abilities[data.save.ability]}`;
-
-    // Spell properties
     props.push(
       labels.level,
       labels.components,
@@ -329,14 +328,6 @@ export class Item5e extends Item {
    * Prepare chat card data for items of the "Feat" type
    */
   _featChatData(data, labels, props) {
-    const ad = this.actor.data.data;
-
-    // Spell saving throw text
-    const abl = data.ability || ad.attributes.spellcasting || "str";
-    if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
-    labels.save = `DC ${data.save.dc} ${CONFIG.DND5E.abilities[data.save.ability]}`;
-
-    // Feat properties
     props.push(
       data.requirements
     );

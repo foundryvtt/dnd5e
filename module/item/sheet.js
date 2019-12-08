@@ -63,14 +63,6 @@ export class ItemSheet5e extends ItemSheet {
     // Action Details
     data.hasAttackRoll = this.item.hasAttack;
     data.isHealing = data.item.data.actionType === "heal";
-
-    // Spell-specific data
-    if ( data.item.type === "spell" ) {
-      let save = data.item.data.save;
-      if ( this.item.isOwned && (save.ability && !save.dc) ) {
-        save.dc = this.item.actor.data.data.attributes.spelldc;
-      }
-    }
     return data;
   }
 

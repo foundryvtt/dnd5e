@@ -10,8 +10,11 @@ export class Actor5e extends Actor {
   /**
    * Augment the basic actor data with additional dynamic data.
    */
-  prepareData(actorData) {
-    actorData = super.prepareData(actorData);
+  prepareData() {
+    super.prepareData();
+
+    // Get the Actor's data object
+    const actorData = this.data;
     const data = actorData.data;
     const flags = actorData.flags;
 
@@ -45,9 +48,6 @@ export class Actor5e extends Actor {
     let spellAbl = data.abilities[data.attributes.spellcasting || "int"];
     let bonusDC = getProperty(flags, "dnd5e.spellDCBonus") || 0;
     data.attributes.spelldc = 8 + data.attributes.prof + (spellAbl ? spellAbl.mod : 0) + bonusDC;
-
-    // Return the prepared Actor data
-    return actorData;
   }
 
   /* -------------------------------------------- */
