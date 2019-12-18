@@ -232,7 +232,7 @@ export class ActorSheet5e extends ActorSheet {
    * Activate event listeners using the prepared sheet HTML
    * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
    */
-	activateListeners(html) {
+  activateListeners(html) {
     super.activateListeners(html);
 
     // Activate tabs
@@ -313,6 +313,13 @@ export class ActorSheet5e extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * @private
+   */
+  _findActiveList () {
+    return this.element.find('.tab.active .inventory-list');
+  }
 
   /**
    * Iinitialize Item list filters by activating the set of filters which are currently applied
@@ -518,5 +525,34 @@ export class ActorSheet5e extends ActorSheet {
       choices: CONFIG.DND5E[a.dataset.options]
     };
     new ActorTraitSelector(this.actor, options).render(true)
+  }
+
+  /**
+   * @private
+   */
+  async _render (force = false, options = {}) {
+    this._saveScrollPositions();
+    await super._render(force, options);
+    this._restoreScrollPositions();
+  }
+
+  /**
+   * @private
+   */
+  _restoreScrollPositions () {
+    const activeList = this._findActiveList();
+    if (activeList.length && this._scroll != null) {
+      activeList.prop('scrollTop', this._scroll);
+    }
+  }
+
+  /**
+   * @private
+   */
+  _saveScrollPositions () {
+    const activeList = this._findActiveList();
+    if (activeList.length) {
+      this._scroll = activeList.prop('scrollTop');
+    }
   }
 }
