@@ -146,10 +146,10 @@ DND5E.itemCapacityTypes = {
  * @type {Object}
  */
 DND5E.limitedUsePeriods = {
-  "sr": "Short Rest",
-  "lr": "Long Rest",
-  "day": "Day",
-  "charges": "Charges"
+  "sr": "DND5E.LimitedUseSR",
+  "lr": "DND5E.LimitedUseLR",
+  "day": "DND5E.LimitedUseDay",
+  "charges": "DND5E.LimitedUseCharges"
 };
 
 
@@ -157,14 +157,14 @@ DND5E.limitedUsePeriods = {
 
 // Equipment Types
 DND5E.equipmentTypes = {
-  "light": "Light Armor",
-  "medium": "Medium Armor",
-  "heavy": "Heavy Armor",
-  "bonus": "Magical Bonus",
-  "natural": "Natural Armor",
-  "shield": "Shield",
-  "clothing": "Clothing",
-  "trinket": "Trinket"
+  "light": "DND5E.EquipmentLight",
+  "medium": "DND5E.EquipmentMedium",
+  "heavy": "DND5E.EquipmentHeavy",
+  "bonus": "DND5E.EquipmentBonus",
+  "natural": "DND5E.EquipmentNatural",
+  "shield": "DND5E.EquipmentShield",
+  "clothing": "DND5E.EquipmentClothing",
+  "trinket": "DND5E.EquipmentTrinket"
 };
 DND5E.armorTypes = DND5E.equipmentTypes;
 
@@ -176,12 +176,12 @@ DND5E.armorTypes = DND5E.equipmentTypes;
  * @type {Object}
  */
 DND5E.consumableTypes = {
-  "potion": "Potion",
-  "poison": "Poison",
-  "scroll": "Scroll",
-  "wand": "Wand",
-  "rod": "Rod",
-  "trinket": "Trinket"
+  "potion": "DND5E.ConsumablePotion",
+  "poison": "DND5E.ConsumablePoison",
+  "scroll": "DND5E.ConsumableScroll",
+  "wand": "DND5E.ConsumableWand",
+  "rod": "DND5E.ConsumableRod",
+  "trinket": "DND5E.ConsumableTrinket"
 };
 
 /* -------------------------------------------- */
@@ -203,19 +203,19 @@ DND5E.currencies = {
 
 // Damage Types
 DND5E.damageTypes = {
-  "acid": "Acid",
-  "bludgeoning": "Bludgeoning",
-  "cold": "Cold",
-  "fire": "Fire",
-  "force": "Force",
-  "lightning": "Lightning",
-  "necrotic": "Necrotic",
-  "piercing": "Piercing",
-  "poison": "Poison",
-  "psychic": "Psychic",
-  "radiant": "Radiant",
-  "slashing": "Slashing",
-  "thunder": "Thunder"
+  "acid": "DND5E.DamageAcid",
+  "bludgeoning": "DND5E.DamageBludgeoning",
+  "cold": "DND5E.DamageCold",
+  "fire": "DND5E.DamageFire",
+  "force": "DND5E.DamageForce",
+  "lightning": "DND5E.DamageLightning",
+  "necrotic": "DND5E.DamageNecrotic",
+  "piercing": "DND5E.DamagePiercing",
+  "poison": "DND5E.DamagePoison",
+  "psychic": "DND5E.DamagePsychic",
+  "radiant": "DND5E.DamageRadiant",
+  "slashing": "DND5E.DamageSlashing",
+  "thunder": "DND5E.DamageThunder"
 };
 
 /* -------------------------------------------- */
@@ -277,8 +277,8 @@ DND5E.timePeriods = {
 
 // Healing Types
 DND5E.healingTypes = {
-  "healing": "Healing",
-  "temphp": "Healing (Temporary)"
+  "healing": "DND5E.Healing",
+  "temphp": "DND5E.HealingTemp"
 };
 
 /* -------------------------------------------- */
@@ -326,10 +326,10 @@ DND5E.skills = {
 /* -------------------------------------------- */
 
 DND5E.spellPreparationModes = {
-  "always": "Always Available",
-  "prepared": "Prepared Spell",
-  "innate": "Innate Spellcasting",
-  "pact": "Pact Magic"
+  "always": "DND5E.SpellPrepAlways",
+  "prepared": "DND5E.SpellPrepPrepared",
+  "innate": "DND5E.SpellPrepInnate",
+  "pact": "DND5E.SpellPrepPact"
 };
 
 /* -------------------------------------------- */
@@ -339,9 +339,9 @@ DND5E.spellPreparationModes = {
  * @type {Object}
  */
 DND5E.spellScalingModes = {
-  "none": "None",
-  "cantrip": "Cantrip",
-  "level": "Spell Level"
+  "none": "DND5E.SpellNone",
+  "cantrip": "DND5E.SpellCantrip",
+  "level": "DND5E.SpellLevel"
 };
 
 
@@ -349,13 +349,13 @@ DND5E.spellScalingModes = {
 
 // Weapon Types
 DND5E.weaponTypes = {
-  "simpleM": "Simple Melee",
-  "simpleR": "Simple Ranged",
-  "martialM": "Martial Melee",
-  "martialR": "Martial Ranged",
-  "natural": "Natural",
-  "improv": "Improvised",
-  "ammo": "Ammunition"
+  "simpleM": "DND5E.WeaponSimpleM",
+  "simpleR": "DND5E.WeaponSimpleR",
+  "martialM": "DND5E.WeaponMartialM",
+  "martialR": "DND5E.WeaponMartialR",
+  "natural": "DND5E.WeaponNatural",
+  "improv": "DND5E.WeaponImprov",
+  "ammo": "DND5E.WeaponAmmo"
 };
 
 
@@ -366,53 +366,53 @@ DND5E.weaponTypes = {
  * @type {Object}
  */
 DND5E.weaponProperties = {
-  "amm": "Ammunition",
-  "hvy": "Heavy",
-  "fin": "Finesse",
-  "fir": "Firearm",
-  "foc": "Focus",
-  "lgt": "Light",
-  "rch": "Reach",
-  "rel": "Reload",
-  "ret": "Returning",
-  "spc": "Special",
-  "thr": "Thrown",
-  "two": "Two-Handed",
-  "ver": "Versatile"
+  "amm": "DND5E.WeaponPropertiesAmm",
+  "hvy": "DND5E.WeaponPropertiesHvy",
+  "fin": "DND5E.WeaponPropertiesFin",
+  "fir": "DND5E.WeaponPropertiesFir",
+  "foc": "DND5E.WeaponPropertiesFoc",
+  "lgt": "DND5E.WeaponPropertiesLgt",
+  "rch": "DND5E.WeaponPropertiesRch",
+  "rel": "DND5E.WeaponPropertiesRel",
+  "ret": "DND5E.WeaponPropertiesRet",
+  "spc": "DND5E.WeaponPropertiesSpc",
+  "thr": "DND5E.WeaponPropertiesThr",
+  "two": "DND5E.WeaponPropertiesTwo",
+  "ver": "DND5E.WeaponPropertiesVer"
 };
 
 
 // Spell Components
 DND5E.spellComponents = {
-  "V": "Verbal",
-  "S": "Somatic",
-  "M": "Material"
+  "V": "DND5E.ComponentVerbal",
+  "S": "DND5E.ComponentSomatic",
+  "M": "DND5E.ComponentMaterial"
 };
 
 // Spell Schools
 DND5E.spellSchools = {
-  "abj": "Abjuration",
-  "con": "Conjuration",
-  "div": "Divination",
-  "enc": "Enchantment",
-  "evo": "Evocation",
-  "ill": "Illusion",
-  "nec": "Necromancy",
-  "trs": "Transmutation",
+  "abj": "DND5E.SchoolAbj",
+  "con": "DND5E.SchoolCon",
+  "div": "DND5E.SchoolDiv",
+  "enc": "DND5E.SchoolEnc",
+  "evo": "DND5E.SchoolEvo",
+  "ill": "DND5E.SchoolIll",
+  "nec": "DND5E.SchoolNec",
+  "trs": "DND5E.SchoolTrs"
 };
 
 // Spell Levels
 DND5E.spellLevels = {
-  0: "Cantrip",
-  1: "1st Level",
-  2: "2nd Level",
-  3: "3rd Level",
-  4: "4th Level",
-  5: "5th Level",
-  6: "6th Level",
-  7: "7th Level",
-  8: "8th Level",
-  9: "9th Level"
+  0: "DND5E.SpellLevel0",
+  1: "DND5E.SpellLevel1",
+  2: "DND5E.SpellLevel2",
+  3: "DND5E.SpellLevel3",
+  4: "DND5E.SpellLevel4",
+  5: "DND5E.SpellLevel5",
+  6: "DND5E.SpellLevel6",
+  7: "DND5E.SpellLevel7",
+  8: "DND5E.SpellLevel8",
+  9: "DND5E.SpellLevel9"
 };
 
 /* -------------------------------------------- */
@@ -434,22 +434,22 @@ DND5E.proficiencyLevels = {
 
 // Condition Types
 DND5E.conditionTypes = {
-  "blinded": "Blinded",
-  "charmed": "Charmed",
-  "deafened": "Deafened",
-  "frightened": "Frightened",
-  "grappled": "Grappled",
-  "incapacitated": "Inacapacitated",
-  "invisible": "Invisible",
-  "paralyzed": "Paralyzed",
-  "petrified": "Petrified",
-  "poisoned": "Poisoned",
-  "prone": "Prone",
-  "restrained": "Restrained",
-  "stunned": "Stunned",
-  "unconscious": "Unconscious",
-  "exhaustion": "Exhaustion",
-  "diseased": "Diseased"
+  "blinded": "DND5E.ConBlinded",
+  "charmed": "DND5E.ConCharmed",
+  "deafened": "DND5E.ConDeafened",
+  "frightened": "DND5E.ConFrightened",
+  "grappled": "DND5E.ConGrappled",
+  "incapacitated": "DND5E.ConIncapacitated",
+  "invisible": "DND5E.ConInvisible",
+  "paralyzed": "DND5E.ConParalyzed",
+  "petrified": "DND5E.ConPetrified",
+  "poisoned": "DND5E.ConPoisoned",
+  "prone": "DND5E.ConProne",
+  "restrained": "DND5E.ConRestrained",
+  "stunned": "DND5E.ConStunned",
+  "unconscious": "DND5E.ConUnconscious",
+  "exhaustion": "DND5E.ConExhaustion",
+  "diseased": "DND5E.ConDiseased"
 };
 
 // Languages
