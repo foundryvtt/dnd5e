@@ -413,7 +413,6 @@ DND5E.spellLevels = {
   7: "DND5E.SpellLevel7",
   8: "DND5E.SpellLevel8",
   9: "DND5E.SpellLevel9"
-  
 };
 
 /* -------------------------------------------- */
