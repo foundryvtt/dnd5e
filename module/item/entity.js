@@ -355,8 +355,12 @@ export class Item5e extends Item {
 
     // Define Roll parts
     const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.prof"];
+ 
     if ( (this.data.type === "weapon") && !itemData.proficient ) parts.pop();
-
+ 
+    if (this.actor.data.flags.dnd5e[itemData.actionType + "Bonus"]) {
+      parts.push(`@dnd5e.${itemData.actionType + "Bonus"}`);
+    }
     // Define Critical threshold
     let crit = 20;
     if ( this.data.type === "weapon" ) crit = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
@@ -364,6 +368,7 @@ export class Item5e extends Item {
     // Define Roll Data
     const rollData = duplicate(actorData);
     rollData.item = itemData;
+    rollData.dnd5e = this.actor.data.flags.dnd5e;
     const title = `${this.name} - Attack Roll`;
 
     // Call the roll helper utility
@@ -409,10 +414,14 @@ export class Item5e extends Item {
       this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
     }
 
+    if (["mwak", "rwak", "msak", "rsak"].includes(this.data.data.actionType) && this.actor.data.flags.dnd5e.damageBonus) {
+        parts.push(`@dnd5e.damageBonus`);
+    }
     // Define Roll Data
     const rollData = mergeObject(duplicate(actorData), {
       item: itemData,
       mod: actorData.abilities[abl].mod,
+      dnd5e: this.actor.data.flags.dnd5e,
       prof: actorData.attributes.prof
     });
     const title = `${this.name} - Damage Roll`;
