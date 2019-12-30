@@ -545,6 +545,41 @@ DND5E.characterFlags = {
     type: Number,
     placeholder: "+0"
   },
+  "mwakBonus": {
+    name: "Melee Weapon Attack Bonus",
+    hint: "Bonus to all melee weapon attacks",
+    section: "Combat Bonus",
+    type:  String,
+    placeholder: "0"
+  },
+  "rwakBonus": {
+    name: "Ranged Weapon Attack Bonus",
+    hint: "Bonus to all ranged weapon attacks",
+    section: "Combat Bonus",
+    type:  String,
+    placeholder: "0"
+  },
+  "msakBonus": {
+    name: "Melee Spell Attack Bonus",
+    hint: "Bonus to all melee spell attacks",
+    section: "Combat Bonus",
+    type:  String,
+    placeholder: "0"
+  },
+  "rsakBonus": {
+    name: "Ranged Spell Attack Bonus",
+    hint: "Bonus to all ranged spell attacks",
+    section: "Combat Bonus",
+    type:  String,
+    placeholder: "0"
+  },
+  "damageBonus": {
+    name: "Damage Bonus",
+    hint: "Damage Bonus to all melee damage rolls.",
+    section: "Combat Bonus",
+    type: String,
+    placeholder: "+0"
+  },
   "spellDCBonus": {
     name: "Spell DC Bonus",
     hint: "Modifies normal spellcasting DC.",
@@ -553,3 +588,15 @@ DND5E.characterFlags = {
     placeholder: "+0"
   }
 };
+
+DND5E.ActorBonusTypes = {
+  "mwak": "DND5E.ActionMWAK",
+  "rwak": "DND5E.ActionRWAK",
+  "msak": "DND5E.ActionMSAK",
+  "rsak": "DND5E.ActionRSAK",
+  "damage": "DND5E.BonusDamage",
+  "abilitySave": "DND5E.BonusSave",
+  "abilityCheck": "DND5E.BonusAbility",
+  "skillCheck": "DND5E.BonusSkill",
+  "spellDC": "DND5E.BonusSpellDC"
+}

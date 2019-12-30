@@ -23,10 +23,9 @@ export class Actor5e extends Actor {
     else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
     // Ability modifiers and saves
-    let saveBonus = getProperty(flags, "dnd5e.saveBonus") || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof) + saveBonus;
+      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof);
     }
 
     // Skill modifiers
@@ -199,10 +198,14 @@ export class Actor5e extends Actor {
    */
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
+    const parts = ["@mod"];
+    if (hasProperty(this.data.data, "bonuses.skillCheck")) {
+      parts.push("@skillBonus");
+    }
     return Dice5e.d20Roll({
       event: options.event,
-      parts: ["@mod"],
-      data: {mod: skl.mod},
+      parts: parts,
+      data: {mod: skl.mod, skillBonus: getProperty(this.data.data, "bonuses.skillCheck")},
       title: `${CONFIG.DND5E.skills[skillId]} Skill Check`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
@@ -245,10 +248,14 @@ export class Actor5e extends Actor {
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
+    const parts = ["@mod"];
+    if (hasProperty(this.data.data, "bonuses.abilityCheck")) {
+      parts.push("@checkBonus")
+    }
     return Dice5e.d20Roll({
       event: options.event,
-      parts: ["@mod"],
-      data: {mod: abl.mod},
+      parts: parts,
+      data: {mod: abl.mod, checkBonus: getProperty(this.data.data, "bonuses.abilityCheck")},
       title: `${label} Ability Test`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
@@ -265,10 +272,14 @@ export class Actor5e extends Actor {
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
+    const parts = ["@mod"];
+    if (hasProperty(this.data.data, "bonuses.abilitySave")) {
+      parts.push("@saveBonus")
+    }
     return Dice5e.d20Roll({
       event: options.event,
-      parts: ["@mod"],
-      data: {mod: abl.save},
+      parts: parts,
+      data: {mod: abl.save, saveBonus: getProperty(this.data.data, "bonuses.abilitySave")},
       title: `${label} Saving Throw`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
