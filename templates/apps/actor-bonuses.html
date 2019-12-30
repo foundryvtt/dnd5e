@@ -1,0 +1,16 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<p class="notes">{{localize 'DND5E.BonusesInstructions'}}</p>
+
+    {{#each bonuses as | bonus key|}}
+    <div class="form-group">
+        <label>{{localize bonus.label}}</label>
+
+        <input type="text" name="{{key}}" value="{{bonus.value}}" placeholder="" data-dtype="String"/>
+
+    </div>
+    {{/each}}
+
+    <button type="submit" name="submit">
+        <i class="far fa-save"></i> {{localize 'DND5E.BonusSaveForm'}}
+    </button>
+</form>

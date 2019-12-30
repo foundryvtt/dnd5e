@@ -1,5 +1,6 @@
 import { ActorTraitSelector } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import { ActorSheetBonuses } from "../../apps/actor-bonuses.js";
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
@@ -276,6 +277,9 @@ export class ActorSheet5e extends ActorSheet {
     // Configure Special Flags
     html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
 
+    // Configure Special Flags
+    html.find('.configure-bonuses').click(this._onConfigureBonuses.bind(this));
+
     /* -------------------------------------------- */
     /*  Inventory
     /* -------------------------------------------- */
@@ -343,6 +347,14 @@ export class ActorSheet5e extends ActorSheet {
   _onConfigureFlags(event) {
     event.preventDefault();
     new ActorSheetFlags(this.actor).render(true);
+  }
+
+  /**
+   * Handle click events for the Traits tab button to configure Character Bonuses
+   */
+  _onConfigureBonuses(event) {
+    event.preventDefault();
+    new ActorSheetBonuses(this.actor).render(true);
   }
 
   /* -------------------------------------------- */
