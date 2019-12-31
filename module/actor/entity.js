@@ -22,13 +22,18 @@ export class Actor5e extends Actor {
     if ( actorData.type === "character" ) this._prepareCharacterData(data);
     else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
+    // Ranged Weapon/Melee Weapon/Ranged Spell/Melee Spell attack bonuses are added when rolled since they are not a fixed value.
+    // Damage bonus added when rolled since not a fixed value.
+
     // Ability modifiers and saves
+    // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof);
     }
 
     // Skill modifiers
+    // Characteer All Skill Bonus added when rolled since not a fixed value.
     for (let skl of Object.values(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
@@ -199,13 +204,18 @@ export class Actor5e extends Actor {
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
     const parts = ["@mod"];
-    if (hasProperty(this.data.data, "bonuses.skillCheck")) {
+    var data = {mod: skl.mod};
+
+    const sklBonus = getProperty(this.data.data, "bonuses.skillCheck");
+    if (![undefined, "", "0"].includes(sklBonus)) {
       parts.push("@skillBonus");
+      data.skillBonus = sklBonus;
     }
+
     return Dice5e.d20Roll({
       event: options.event,
       parts: parts,
-      data: {mod: skl.mod, skillBonus: getProperty(this.data.data, "bonuses.skillCheck")},
+      data: data,
       title: `${CONFIG.DND5E.skills[skillId]} Skill Check`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
@@ -249,13 +259,18 @@ export class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
-    if (hasProperty(this.data.data, "bonuses.abilityCheck")) {
+    const data = {mod: abl.mod};
+    const checkBonus = getProperty(this.data.data, "bonuses.abilityCheck");
+
+    if (![undefined, "", "0"].includes(checkBonus)) {
       parts.push("@checkBonus")
+      data.checkBonus = checkBonus;
     }
+
     return Dice5e.d20Roll({
       event: options.event,
       parts: parts,
-      data: {mod: abl.mod, checkBonus: getProperty(this.data.data, "bonuses.abilityCheck")},
+      data: data,
       title: `${label} Ability Test`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
@@ -273,13 +288,18 @@ export class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
-    if (hasProperty(this.data.data, "bonuses.abilitySave")) {
+    const data = {mod: abl.save};
+    const saveBonus = getProperty(this.data.data, "bonuses.abilitySave");
+
+    if (![undefined, "", "0"].includes(saveBonus)) {
       parts.push("@saveBonus")
+      data.saveBonus = saveBonus;
     }
+    
     return Dice5e.d20Roll({
       event: options.event,
       parts: parts,
-      data: {mod: abl.save, saveBonus: getProperty(this.data.data, "bonuses.abilitySave")},
+      data: data,
       title: `${label} Saving Throw`,
       speaker: ChatMessage.getSpeaker({actor: this}),
     });
