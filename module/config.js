@@ -372,6 +372,7 @@ DND5E.weaponProperties = {
   "fir": "DND5E.WeaponPropertiesFir",
   "foc": "DND5E.WeaponPropertiesFoc",
   "lgt": "DND5E.WeaponPropertiesLgt",
+  "lod": "DND5E.WeaponPropertiesLod",
   "rch": "DND5E.WeaponPropertiesRch",
   "rel": "DND5E.WeaponPropertiesRel",
   "ret": "DND5E.WeaponPropertiesRet",
