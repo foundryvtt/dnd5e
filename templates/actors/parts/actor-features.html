@@ -28,7 +28,7 @@
 
     <ol class="item-list">
     {{#each section.items as |item iid|}}
-        <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item.id}}">
+        <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>{{item.name}}</h4>
