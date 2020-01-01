@@ -355,6 +355,7 @@ export class Item5e extends Item {
 
     // Define Roll parts
     const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.prof"];
+ 
     if ( (this.data.type === "weapon") && !itemData.proficient ) parts.pop();
 
     // Define Critical threshold
@@ -364,8 +365,15 @@ export class Item5e extends Item {
     // Define Roll Data
     const rollData = duplicate(actorData);
     rollData.item = itemData;
-    const title = `${this.name} - Attack Roll`;
 
+    // assumes this.hasAttack implies ["rwak", "mwak", "rask", "msak"].includes(actorData.actionType)
+    const attBonus = getProperty(actorData, `bonuses.${itemData.actionType}`)
+    if (![undefined, "", "0"].includes(attBonus)) {
+      parts.push(`@attBonus`);
+      rollData.attBonus = attBonus;
+    }
+
+      const title = `${this.name} - Attack Roll`;
     // Call the roll helper utility
     Dice5e.d20Roll({
       event: options.event,
@@ -413,8 +421,16 @@ export class Item5e extends Item {
     const rollData = mergeObject(duplicate(actorData), {
       item: itemData,
       mod: actorData.abilities[abl].mod,
-      prof: actorData.attributes.prof
+      prof: actorData.attributes.prof,
     });
+
+    // damage bonus only applies to melee/ranged weapons not spells.
+    const damageBonus = getProperty(actorData, "bonuses.damage");
+    if (["mwak", "rwak"].includes(itemData.actionType) && ![undefined, "", "0"].includes(damageBonus)) {
+      parts.push(`@damageBonus`);
+      rollData.damageBonus = damageBonus;
+    }
+
     const title = `${this.name} - Damage Roll`;
     const flavor = this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title;
 
