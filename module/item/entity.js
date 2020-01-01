@@ -524,21 +524,20 @@ export class Item5e extends Item {
 
       // Deduct an item quantity
       if ( c <= 1 && q > 1 ) {
-        this.actor.updateOwnedItem({
-          id: this.data.id,
+        this.update({
           'data.quantity': Math.max(q - 1, 0),
           'data.uses.value': itemData.uses.max
-        }, true);
+        });
       }
 
       // Optionally destroy the item
       else if ( c <= 1 && q <= 1 && itemData.uses.autoDestroy ) {
-        this.actor.deleteOwnedItem(this.data.id);
+        this.actor.deleteOwnedItem(this.id);
       }
 
       // Deduct the remaining charges
       else {
-        this.actor.updateOwnedItem({id: this.data.id, 'data.uses.value': Math.max(c - 1, 0)});
+        this.update({'data.uses.value': Math.max(c - 1, 0)});
       }
     }
   }

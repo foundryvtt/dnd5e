@@ -280,23 +280,10 @@ export class ActorSheet5e extends ActorSheet {
     /*  Inventory
     /* -------------------------------------------- */
 
-    // Create New Item
-    html.find('.item-create').click(ev => this._onItemCreate(ev));
-
-    // Update Inventory Item
-    html.find('.item-edit').click(ev => {
-      let itemId = Number($(ev.currentTarget).parents(".item").attr("data-item-id"));
-      const item = this.actor.getOwnedItem(itemId);
-      item.sheet.render(true);
-    });
-
-    // Delete Inventory Item
-    html.find('.item-delete').click(ev => {
-      let li = $(ev.currentTarget).parents(".item"),
-        itemId = Number(li.attr("data-item-id"));
-      this.actor.deleteOwnedItem(itemId);
-      li.slideUp(200, () => this.render(false));
-    });
+    // Owned Item management
+    html.find('.item-create').click(this._onItemCreate.bind(this));
+    html.find('.item-edit').click(this._onItemEdit.bind(this));
+    html.find('.item-delete').click(this._onItemDelete.bind(this));
 
     // Item Dragging
     let handler = ev => this._onDragItemStart(ev);
@@ -307,8 +294,6 @@ export class ActorSheet5e extends ActorSheet {
 
     // Item Rolling
     html.find('.item .item-image').click(event => this._onItemRoll(event));
-
-    // Item Recharging
     html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
   }
 
@@ -437,6 +422,7 @@ export class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+   * @param {Event} event   The originating click event
    * @private
    */
   _onItemCreate(event) {
@@ -450,6 +436,33 @@ export class ActorSheet5e extends ActorSheet {
     };
     delete itemData.data["type"];
     return this.actor.createOwnedItem(itemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing an existing Owned Item for the Actor
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onItemEdit(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item");
+    const item = this.actor.getOwnedItem(li.dataset.itemId);
+    item.sheet.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting an existing Owned Item for the Actor
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  _onItemDelete(event) {
+    event.preventDefault();
+    const li = event.currentTarget.closest(".item");
+    this.actor.deleteOwnedItem(li.dataset.itemId);
   }
 
   /* -------------------------------------------- */
@@ -527,16 +540,19 @@ export class ActorSheet5e extends ActorSheet {
     new ActorTraitSelector(this.actor, options).render(true)
   }
 
-  /**
-   * @private
-   */
+  /* -------------------------------------------- */
+
+  /** @extends {ActorSheet._render} */
   async _render (force = false, options = {}) {
     this._saveScrollPositions();
     await super._render(force, options);
     this._restoreScrollPositions();
   }
 
+  /* -------------------------------------------- */
+
   /**
+   * Reset item list scroll positions after re-rendering the sheet
    * @private
    */
   _restoreScrollPositions () {
@@ -546,7 +562,10 @@ export class ActorSheet5e extends ActorSheet {
     }
   }
 
+  /* -------------------------------------------- */
+
   /**
+   * Record item list scroll positions before re-rendering the sheet
    * @private
    */
   _saveScrollPositions () {
