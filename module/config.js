@@ -554,3 +554,15 @@ DND5E.characterFlags = {
     placeholder: "+0"
   }
 };
+
+DND5E.ActorBonusTypes = {
+  "mwak": "DND5E.ActionMWAK",
+  "rwak": "DND5E.ActionRWAK",
+  "msak": "DND5E.ActionMSAK",
+  "rsak": "DND5E.ActionRSAK",
+  "damage": "DND5E.BonusDamage",
+  "abilitySave": "DND5E.BonusSave",
+  "abilityCheck": "DND5E.BonusAbility",
+  "skillCheck": "DND5E.BonusSkill",
+  "spellDC": "DND5E.BonusSpellDC"
+}
