@@ -394,7 +394,7 @@ export class Actor5e extends Actor {
 
     // Recover item uses
     const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
-    const updateItems = items.map(item => {return { _id: item.id, "data.uses.value": item.data.data.uses.max}});
+    const updateItems = items.map(item => {return { _id: item._id, "data.uses.value": item.data.data.uses.max}});
     await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
@@ -460,7 +460,7 @@ export class Actor5e extends Actor {
 
     // Recover limited item uses
     const items = this.items.filter(i => i.data.data.uses && ["sr", "lr"].includes(i.data.data.uses.per));
-    const updateItems = items.map(item => { return {_id: item.id, "data.uses.value": item.data.data.uses.max} });
+    const updateItems = items.map(item => { return {_id: item._id, "data.uses.value": item.data.data.uses.max} });
 
     // Perform the updates
     await this.update(updateData);
