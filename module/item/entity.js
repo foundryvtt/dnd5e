@@ -634,6 +634,19 @@ export class Item5e extends Item {
 
   static chatListeners(html) {
     html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
+
+    html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  static chatMessageListeners(app, html) {
+    const collapseItemCards = game.settings.get("dnd5e", "autoCollapseItemCards");
+
+    if (collapseItemCards) {
+      html.find(".card-content").hide();
+    }
+
   }
 
   /* -------------------------------------------- */
@@ -685,6 +698,21 @@ export class Item5e extends Item {
 
     // Re-enable the button
     button.disabled = false;
+  }
+
+  /* -------------------------------------------- */
+
+  static _onChatCardToggleContent(event) {
+    event.preventDefault();
+
+    // Extract card data
+    const header = event.currentTarget;
+    const card = header.closest(".chat-card");
+    const messageId = card.closest(".message").dataset.messageId;
+    const message =  game.messages.get(messageId);
+    const cardContent = $(card).find(".card-content");
+
+    cardContent.toggle();
   }
 
   /* -------------------------------------------- */

@@ -111,5 +111,6 @@ Hooks.on("canvasInit", function() {
 /* -------------------------------------------- */
 
 Hooks.on("renderChatMessage", highlightCriticalSuccessFailure);
+Hooks.on("renderChatMessage", (app, html, data) => Item5e.chatMessageListeners(app, html));
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
