@@ -59,8 +59,77 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Experience Tracking
     sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
 
+    // Automate Player Level & HD based on Class Features
+    sheetData["useClassLevels"] = game.settings.get("dnd5e", "useClassLevels");
+    
+    if (sheetData["useClassLevels"])
+    {
+      sheetData.data.calculatedLevel = this._totalClassLevels(sheetData.items);
+      sheetData["hdRemaining"] = this._hitdiceRemaining(sheetData);
+    }
+
     // Return data for rendering
     return sheetData;
+  }
+
+  
+  /**
+   * Calculate the character's level based on their classes
+   * @param {Actor Items} items
+   * @returns {Number}            Total number of levels we found within Items of type Class
+   */
+  _totalClassLevels(items) {
+    if (items) {
+      return items.reduce((totalLevels, item) => {
+        if (item.type === "class") {
+          if (item.data && item.data.levels > 0) {
+            return Number(totalLevels) + Number(item.data.levels);
+          }
+        }
+        return 0;
+      }, []);
+    }
+    return 0;
+  }
+
+  /**
+   * Loads a list of remaining hit dice based on the characters Class Features/Levels combined with "hdUsed"
+   * @param {Object<ActorSheet5eCharacter} actorData 
+   * @returns {Array} 
+   */
+  _hitdiceRemaining(actorData){
+    if (!Array.isArray(actorData.data.attributes.hdUsed)) {
+      // Field has not been initialized, let's do this now
+      actorData.data.attributes.hdUsed = [];
+    }
+    
+    return this._hitdiceAvailable(actorData).length;
+  }
+
+  /**
+   * 
+   * @param {Object<ActorSheet5eCharacter>} actorData 
+   * @returns {Array}   strings that should be in dice format
+   */
+  _hitdiceAvailable(actorData) {
+    if (!actorData || !actorData.items) {
+      return [];
+    }
+
+    let classes = actorData.items.filter(item => item.type === "class");
+
+    if (classes.length == 0) { return []; }
+
+    let hd = [];
+
+    // for each class with levels, push an appropriate amount of HD into the array
+    classes.forEach(element => {
+      for (let i = 0; i < element.data.levels; i++) {
+        hd.push(element.data.hitdice)
+      }
+    });
+
+    return hd;
   }
 
   /* -------------------------------------------- */
