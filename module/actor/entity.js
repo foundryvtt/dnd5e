@@ -45,9 +45,7 @@ export class Actor5e extends Actor {
     init.total = init.mod + init.prof + init.bonus;
 
     // Spell DC
-    let spellAbl = data.abilities[data.attributes.spellcasting || "int"];
-    let bonusDC = getProperty(flags, "dnd5e.spellDCBonus") || 0;
-    data.attributes.spelldc = 8 + data.attributes.prof + (spellAbl ? spellAbl.mod : 0) + bonusDC;
+    data.attributes.spelldc = this.getSpellDC(data.attributes.spellcasting);
   }
 
   /* -------------------------------------------- */
@@ -62,7 +60,7 @@ export class Actor5e extends Actor {
     data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
     let prior = this.getLevelExp(data.details.level.value - 1 || 0),
           req = data.details.xp.max - prior;
-    data.details.xp.pct = Math.min(Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
+    data.details.xp.pct = Math.clamped(0, Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
     data.attributes.prof = Math.floor((data.details.level.value + 7) / 4);
   }
 
@@ -105,27 +103,48 @@ export class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Return the spell DC for this actor using a certain ability score
+   * @param {string} ability    The ability score, i.e. "str"
+   * @return {number}           The spell DC
+   */
+  getSpellDC(ability) {
+    const bonus = this.getFlag("dnd5e", "spellDCBonus") || 0;
+    ability = this.data.data.abilities[ability];
+    const prof = this.data.data.attributes.prof;
+    return 8 + (ability ? ability.mod : 0) + prof + bonus;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Listeners and Handlers
   /* -------------------------------------------- */
 
-  /**
-   * Extend the default update method to enhance data before submission.
-   * See the parent Entity.update method for full details.
-   *
-   * @param {Object} data     The data with which to update the Actor
-   * @param {Object} options  Additional options which customize the update workflow
-   * @return {Promise}        A Promise which resolves to the updated Entity
-   */
+  /** @override */
+  static async create(data, options={}) {
+    data.token = data.token || {};
+    if ( data.type === "character" ) {
+      mergeObject(data.token, {
+        vision: true,
+        dimSight: 30,
+        brightSight: 0,
+        actorLink: true,
+        disposition: 1
+      }, {overwrite: false});
+    }
+    return super.create(data, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async update(data, options={}) {
 
     // Apply changes in Actor size to Token width/height
-    if ( data["data.traits.size"] ) {
+    if ( data["data.traits.size"] !== getProperty(this.data, "data.traits.size") ) {
       let size = CONFIG.DND5E.tokenSizes[data["data.traits.size"]];
       if ( this.isToken ) this.token.update(this.token.scene._id, {height: size, width: size});
-      else {
-        setProperty(data, "token.height", size);
-        setProperty(data, "token.width", size);
-      }
+      else mergeObject(data, {"token.height": size, "token.width": size});
     }
     return super.update(data, options);
   }

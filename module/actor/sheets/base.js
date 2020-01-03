@@ -301,6 +301,7 @@ export class ActorSheet5e extends ActorSheet {
     // Item Dragging
     let handler = ev => this._onDragItemStart(ev);
     html.find('li.item').each((i, li) => {
+      if ( li.classList.contains("inventory-header") ) return;
       li.setAttribute("draggable", true);
       li.addEventListener("dragstart", handler, false);
     });

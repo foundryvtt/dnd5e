@@ -12,13 +12,13 @@
     </div>
 
     <ul class="filter-list flexrow" data-filter="spellbook">
-        <li class="filter-title">Filter</li>
-        <li class="filter-item" data-filter="action">Action</li>
-        <li class="filter-item" data-filter="bonus">Bonus</li>
-        <li class="filter-item" data-filter="reaction">Reaction</li>
-        <li class="filter-item" data-filter="concentration">Conc.</li>
-        <li class="filter-item" data-filter="ritual">Ritual</li>
-        <li class="filter-item" data-filter="prepared">Prepared{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
+        <li class="filter-title">{{localize "DND5E.FilterTitle"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "DND5E.FilterAction"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.FilterBonus"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.FilterReaction"}}</li>
+        <li class="filter-item" data-filter="concentration">{{localize "DND5E.FilterConcentration"}}</li>
+        <li class="filter-item" data-filter="ritual">{{localize "DND5E.FilterRitual"}}</li>
+        <li class="filter-item" data-filter="prepared">{{localize "DND5E.FilterPrepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
     </ul>
 </div>
 
@@ -41,13 +41,13 @@
             {{/if}}
         </div>
 
-        <div class="spell-school">Spell School</div>
-        <div class="spell-action">Spell Usage</div>
+        <div class="spell-school">{{localize "DND5E.SpellSchool"}}</div>
+        <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
 
         <div class="item-controls">
             {{#if section.canCreate}}
             <a class="item-control item-create" title="Create Spell" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> Add
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
             {{/if}}
         </div>
@@ -83,12 +83,12 @@
 {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">No spells found for this set of filters.</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls">
             <a class="item-control item-create" title="Create Spell" data-type="spell"
-               data-level="{{lvl}}"><i class="fas fa-plus"></i> Add Spell</a>
+               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}</a>
         </div>
     {{/if}}
     {{/if}}
