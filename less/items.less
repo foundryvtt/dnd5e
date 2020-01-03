@@ -89,8 +89,16 @@
 
     // Item Sheet form fields
     input[type="text"], select {
+      height: 24px;
       border: 1px solid @colorTan;
       background: rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      span {
+        text-align: center;
+        line-height: 24px;
+      }
     }
 
     .form-group.input-select {
@@ -110,9 +118,7 @@
         flex: 1;
       }
       span {
-        text-align: center;
         flex: 0 0 16px;
-        line-height: 24px;
       }
       select {
         flex: 3;
@@ -121,8 +127,6 @@
 
     span.sep {
       flex: 0 0 8px;
-      line-height: 24px;
-      text-align: center;
     }
 
     .prepared {
@@ -191,7 +195,6 @@
 
   .recharge {
     span {
-      line-height: 24px;
       flex: 0 0 80px;
     }
     label.checkbox {

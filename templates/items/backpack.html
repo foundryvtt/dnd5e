@@ -52,8 +52,8 @@
 
 			<div class="form-group">
 				<label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
-				<select name="data.capacityType">
-					{{#select data.capacityType}}
+				<select name="data.capacity.type">
+					{{#select data.capacity.type}}
 						{{#each config.itemCapacityTypes}}
 							<option value="{{@key}}">{{localize this}}</option>
 						{{/each}}

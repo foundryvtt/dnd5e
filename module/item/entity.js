@@ -137,8 +137,11 @@ export class Item5e extends Item {
       // Save DC
       let save = data.save || {};
       if ( !save.ability ) save.dc = null;
-      if ( this.isOwned && (save.ability && !save.dc) ) {
-        save.dc = actorData.data.attributes.spelldc;
+      else if ( this.isOwned ) { // Actor owned items
+        if ( save.scaling === "spell" ) save.dc = actorData.data.attributes.spelldc;
+        else if ( save.scaling !== "flat" ) save.dc = this.actor.getSpellDC(save.scaling);
+      } else { // Un-owned items
+        if ( save.scaling !== "flat" ) save.dc = null;
       }
       labels.save = save.ability ? `DC ${save.dc || ""} ${C.abilities[save.ability]}` : "";
 
@@ -174,6 +177,7 @@ export class Item5e extends Item {
       isHealing: this.isHealing,
       hasDamage: this.hasDamage,
       isVersatile: this.isVersatile,
+      isSpell: this.data.type === "spell",
       hasSave: this.hasSave
     };
 
@@ -397,7 +401,7 @@ export class Item5e extends Item {
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.damageRoll logic for the core implementation
    */
-  rollDamage({event, versatile=false}={}) {
+  rollDamage({event, spellLevel=null, versatile=false}={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
     if ( !this.hasDamage ) {
@@ -412,9 +416,14 @@ export class Item5e extends Item {
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
     if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
-    if ( (this.data.type === "spell") && (itemData.scaling.mode === "cantrip") ) {
-      const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
-      this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
+    if ( (this.data.type === "spell") ) {
+      if ( (itemData.scaling.mode === "cantrip") ) {
+        const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
+        this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
+      } else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
+        this._scaleSpellDamage(parts, itemData.level, spellLevel, itemData.scaling.formula );
+      }
+
     }
 
     // Define Roll Data
@@ -465,6 +474,24 @@ export class Item5e extends Item {
     } else {
       parts[0] = parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd)+add}d${d}`);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust the spell damage formula to scale it for spell level up-casting
+   * @param {Array} parts         The original damage parts
+   * @param {number} baseLevel    The default spell level
+   * @param {number} spellLevel   The casted spell level
+   * @param {string} formula      The scaling formula
+   * @private
+   */
+  _scaleSpellDamage(parts, baseLevel, spellLevel, formula) {
+    const upcastLevels = Math.max(spellLevel - baseLevel, 0);
+    if ( upcastLevels === 0 ) return parts;
+    const bonus = new Roll(formula).alter(0, upcastLevels);
+    parts.push(bonus.formula);
+    return parts;
   }
 
   /* -------------------------------------------- */
@@ -650,11 +677,12 @@ export class Item5e extends Item {
 
     // Get card targets
     const targets = isTargetted ? this._getChatCardTargets(card) : [];
+    const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
     // Attack and Damage Rolls
     if ( action === "attack" ) await item.rollAttack({event});
-    else if ( action === "damage" ) await item.rollDamage({event});
-    else if ( action === "versatile" ) await item.rollDamage({event, versatile: true});
+    else if ( action === "damage" ) await item.rollDamage({event, spellLevel});
+    else if ( action === "versatile" ) await item.rollDamage({event, spellLevel, versatile: true});
     else if ( action === "formula" ) await item.rollFormula({event});
 
     // Saving Throws for card targets
