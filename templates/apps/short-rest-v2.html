@@ -1,0 +1,18 @@
+<form id="short-rest-hd">
+    <p>{{ localize "DND5E.DIALOG.SHORTREST.Prompt" }}</p>
+    <div class="form-group">
+        <label>{{ localize "DND5E.DIALOG.SHORTREST.Select" }}</label>
+        <div class="form-fields">
+            {{#if hdRemaining}}
+            <select name="hd">
+                {{#each this.hdRemaining}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+            <button id="roll-hd"><i class="fas fa-dice-d20"></i> Roll</button>
+            {{else}}
+            <div>{{ localize "DND5E.DIALOG.SHORTREST.NoHd" }}</div>
+            {{/if}}
+        </div>
+    </div>
+</form>

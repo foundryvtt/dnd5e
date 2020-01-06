@@ -94,7 +94,7 @@
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitDice" }}</h4>
                     {{#if useClassLevels}}
                     <div class="attribute-value multiple">
-                        <input type="text" value="{{hdRemaining}}" placeholder="1" disabled/>
+                        <input type="text" value="{{hdRemainingCount}}" placeholder="1" disabled/>
                         <span class="sep"> / </span>
                         <input type="text" value="{{data.calculatedLevel}}" disabled/>
                     </div>
@@ -107,7 +107,11 @@
                     </div>
                     {{/if}}
                     <footer class="attribute-footer">
+                        {{#if useClassLevels}}
+                        <a class="rest short-rest-v2">{{ localize "DND5E.RestS" }}</a>
+                        {{else}}
                         <a class="rest short-rest">{{ localize "DND5E.RestS" }}</a>
+                        {{/if}}
                         <a class="rest long-rest">{{ localize "DND5E.RestL" }}</a>
                     </footer>
                 </li>

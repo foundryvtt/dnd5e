@@ -1,5 +1,5 @@
 import { ActorSheet5e } from "./base.js";
-
+import { ClassHelper } from "../class-helper.js";
 
 /**
  * An Actor sheet for player character type actors in the D&D5E system.
@@ -64,72 +64,12 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     
     if (sheetData["useClassLevels"])
     {
-      sheetData.data.calculatedLevel = this._totalClassLevels(sheetData.items);
-      sheetData["hdRemaining"] = this._hitdiceRemaining(sheetData);
+      sheetData.data.calculatedLevel = ClassHelper.getLevelByClasses(sheetData.actor); // this._totalClassLevels(sheetData.items);
+      sheetData["hdRemainingCount"] = ClassHelper.hitdiceRemaining(sheetData).length;
     }
 
     // Return data for rendering
     return sheetData;
-  }
-
-  
-  /**
-   * Calculate the character's level based on their classes
-   * @param {Actor Items} items
-   * @returns {Number}            Total number of levels we found within Items of type Class
-   */
-  _totalClassLevels(items) {
-    if (items) {
-      return items.reduce((totalLevels, item) => {
-        if (item.type === "class") {
-          if (item.data && item.data.levels > 0) {
-            return Number(totalLevels) + Number(item.data.levels);
-          }
-        }
-        return 0;
-      }, []);
-    }
-    return 0;
-  }
-
-  /**
-   * Loads a list of remaining hit dice based on the characters Class Features/Levels combined with "hdUsed"
-   * @param {Object<ActorSheet5eCharacter} actorData 
-   * @returns {Array} 
-   */
-  _hitdiceRemaining(actorData){
-    if (!Array.isArray(actorData.data.attributes.hdUsed)) {
-      // Field has not been initialized, let's do this now
-      actorData.data.attributes.hdUsed = [];
-    }
-    
-    return this._hitdiceAvailable(actorData).length;
-  }
-
-  /**
-   * 
-   * @param {Object<ActorSheet5eCharacter>} actorData 
-   * @returns {Array}   strings that should be in dice format
-   */
-  _hitdiceAvailable(actorData) {
-    if (!actorData || !actorData.items) {
-      return [];
-    }
-
-    let classes = actorData.items.filter(item => item.type === "class");
-
-    if (classes.length == 0) { return []; }
-
-    let hd = [];
-
-    // for each class with levels, push an appropriate amount of HD into the array
-    classes.forEach(element => {
-      for (let i = 0; i < element.data.levels; i++) {
-        hd.push(element.data.hitdice)
-      }
-    });
-
-    return hd;
   }
 
   /* -------------------------------------------- */
@@ -273,6 +213,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
+    html.find('.short-rest-v2').click(this._onShortRestV2.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
   }
 
@@ -302,6 +243,18 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     await this._onSubmit(event);
     return this.actor.shortRest();
   }
+
+  /**
+   * Take a short rest with HD, calling the relevant function on the Actor instance
+   * @param {Event} event   The triggering click event
+   * @private
+   */
+  async _onShortRestV2(event) {
+    event.preventDefault();
+    await this._onSubmit(event);
+    return this.actor.shortRestV2();
+  }
+
 
   /* -------------------------------------------- */
 

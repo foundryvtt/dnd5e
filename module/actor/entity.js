@@ -1,8 +1,10 @@
 import { Dice5e } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
+import { ShortRestV2Dialog } from "../apps/short-rest-v2.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AbilityTemplate } from "../pixi/ability-template.js";
 
+import { ClassHelper } from "./class-helper.js";
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
@@ -392,6 +394,45 @@ export class Actor5e extends Actor {
     })
   }
 
+  /**
+   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
+   * Mark this die as "used" from the players pool of hit die.
+   * @param {String} formula    The hit die type to roll
+   */
+  rollSpecificHitDie(formula) {
+
+    // Prepare roll data
+    let parts = [formula, "@abilities.con.mod"],
+        title = `Roll Hit Die`,
+        rollData = duplicate(this.data.data);
+
+
+    let hdRemaining = ClassHelper.hitdiceRemaining(this.data);
+
+    // Confirm the actor has HD available
+    if ( hdRemaining.length === 0 ) throw new Error(`${this.name} has no Hit Dice remaining!`);
+
+    // Call the roll helper utility
+    return Dice5e.damageRoll({
+      event: new Event("hitDie"),
+      parts: parts,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this}),
+      critical: false,
+      dialogOptions: {width: 350}
+    }).then(roll => {
+      let hp = this.data.data.attributes.hp,
+          dhp = Math.min(hp.max - hp.value, roll.total);
+      this.update({"data.attributes.hp.value": hp.value + dhp});
+      let newHdUsed = duplicate(this.data.data.attributes.hdUsed);
+      newHdUsed.push(formula);
+      this.update({"data.attributes.hdUsed": newHdUsed});
+
+      return true;
+    })
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -431,6 +472,69 @@ export class Actor5e extends Actor {
     const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
     const updateItems = items.map(item => {return { _id: item._id, "data.uses.value": item.data.data.uses.max}});
     await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
+
+    // Display a Chat Message summarizing the rest effects
+    if ( chat ) {
+      let msg = `${this.name} takes a short rest spending ${-dhd} Hit Dice to recover ${dhp} Hit Points.`;
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: {actor: this, alias: this.name},
+        content: msg,
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER
+      });
+    }
+
+    // Return data summarizing the rest effects
+    return {
+      dhd: dhd,
+      dhp: dhp,
+      updateData: updateData,
+      updateItems: updateItems
+    }
+  }
+
+  /**
+   * Cause this Actor to take a Short Rest, present Hit Dice based on the Class levels
+   * During a Short Rest resources and limited item uses may be recovered
+   * @param {boolean} dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
+   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @return {Promise}        A Promise which resolves once the short rest workflow has completed
+   */
+  async shortRestV2({dialog=true, chat=true}={}) {
+    const data = this.data.data;
+
+    // Take note of the initial hit points and hit dice the Actor has
+    const hd0 = ClassHelper.hitdiceRemaining(this.data).length;
+    const hp0 = data.attributes.hp.value;
+
+    // Display a Dialog for rolling hit dice
+    if ( dialog ) {
+      const rested = await ShortRestV2Dialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      if ( !rested ) return;
+    }
+
+    // Note the change in HP and HD which occurred
+    const dhd = ClassHelper.hitdiceRemaining(this.data).length - hd0;
+    const dhp = data.attributes.hp.value - hp0;
+
+    // Recover character resources
+    const updateData = {};
+    for ( let [k, r] of Object.entries(data.resources) ) {
+      if ( r.max && r.sr ) {
+        updateData[`data.resources.${k}.value`] = r.max;
+      }
+    }
+    await this.update(updateData);
+
+    // Recover item uses
+    const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
+    const updateItems = items.map(item => {
+      return {
+        "id": item.data.id,
+        "data.uses.value": item.data.data.uses.max
+      }
+    });
+    await this.updateManyOwnedItem(updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
