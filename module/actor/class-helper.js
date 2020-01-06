@@ -19,19 +19,14 @@ export class ClassHelper {
     return 0;
   }
 
-    /**
+  /**
    * Loads a list of remaining hit dice based on the characters Class Features/Levels combined with "hdUsed"
    * @param {Object<ActorSheet5eCharacter>} actorData 
    * @returns {Array} 
    */
    static hitdiceRemaining = function(actorData){
-    if (!Array.isArray(actorData.data.attributes.hdUsed)) {
-      // Field has not been initialized, let's do this now
-      actorData.data.attributes.hdUsed = [];
-    }
-    
+    let hdUsed = this.hitdiceUsed(actorData);
     let hdAvailable = this.hitdiceAvailable(actorData);
-    let hdUsed = actorData.data.attributes.hdUsed;
 
     hdUsed.forEach(element => {
       var index = hdAvailable.indexOf(element);
@@ -42,6 +37,21 @@ export class ClassHelper {
     });
 
     return hdAvailable;
+  }
+
+  /**
+   * Load the list of hit dice that have already been used.
+   * @param {Object<ActorSheet5eCharacter>} actorData
+   * @returns {Array}
+   */
+
+  static hitdiceUsed = function(actorData){
+    if (!Array.isArray(actorData.data.attributes.hdUsed)) {
+      // Field has not been initialized, let's do this now
+      actorData.data.attributes.hdUsed = [];
+    }
+
+    return actorData.data.attributes.hdUsed;
   }
 
   /**

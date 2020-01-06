@@ -215,6 +215,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     html.find('.short-rest').click(this._onShortRest.bind(this));
     html.find('.short-rest-v2').click(this._onShortRestV2.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
+    html.find('.long-rest-v2').click(this._onLongRestV2.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -267,6 +268,17 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
+  }
+
+  /**
+   * Take a long rest with HD, calling the relevant function on the Actor instance
+   * @param {Event} event   The triggering click event
+   * @private
+   */
+  async _onLongRestV2(event) {
+    event.preventDefault();
+    await this._onSubmit(event);
+    return this.actor.longRestV2();
   }
 
   /* -------------------------------------------- */

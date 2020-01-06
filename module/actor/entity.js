@@ -556,6 +556,87 @@ export class Actor5e extends Actor {
     }
   }
 
+  /**
+   * Take a long rest, recovering HP, HD, resources, and spell slots
+   * Base the HD on their class levels
+   * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
+   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @return {Promise}        A Promise which resolves once the long rest workflow has completed
+   */
+  async longRestV2({dialog=true, chat=true}={}) {
+    const data = this.data.data;
+    const updateData = {};
+
+    // Maybe present a confirmation dialog
+    if ( dialog ) {
+      try {
+        await ShortRestDialog.longRestDialog(this);
+      } catch(err) {
+        return;
+      }
+    }
+
+    // Recover HP to full
+    let dhp = data.attributes.hp.max - data.attributes.hp.value;
+    updateData["data.attributes.hp.value"] = data.attributes.hp.max;
+
+    // Recover HD to one-half level (rounded up)
+    // Recover them in the order they were used
+    let level = ClassHelper.getLevelByClasses(this.data);
+    let recover_hd = Math.max(Math.floor(level/2), 1);
+    let hitdiceUsed = duplicate(ClassHelper.hitdiceUsed(this.data));
+    let dhd = Math.min(recover_hd, level - hitdiceUsed.length);
+
+    for (let i = 0; i < recover_hd; i++) {
+      hitdiceUsed.shift();
+    }
+    updateData["data.attributes.hdUsed"] = hitdiceUsed;
+
+    // Recover character resources
+    for ( let [k, r] of Object.entries(data.resources) ) {
+      if ( r.max && (r.sr || r.lr) ) {
+        updateData[`data.resources.${k}.value`] = r.max;
+      }
+    }
+
+    // Recover spell slots
+    for ( let [k, v] of Object.entries(data.spells) ) {
+      if ( !v.max ) continue;
+      updateData[`data.spells.${k}.value`] = v.max;
+    }
+
+    // Recover limited item uses
+    const items = this.items.filter(i => i.data.data.uses && ["sr", "lr"].includes(i.data.data.uses.per));
+    const updateItems = items.map(item => {
+      return {
+        "id": item.data.id,
+        "data.uses.value": item.data.data.uses.max
+      }
+    });
+
+    // Perform the updates
+    await this.update(updateData);
+    await this.updateManyOwnedItem(updateItems);
+
+    // Display a Chat Message summarizing the rest effects
+    if ( chat ) {
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: {actor: this, alias: this.name},
+        content: `${this.name} takes a long rest and recovers ${dhp} Hit Points and ${dhd} Hit Dice.`
+      });
+    }
+
+    // Return data summarizing the rest effects
+    return {
+      dhd: dhd,
+      dhp: dhp,
+      updateData: updateData,
+      updateItems: updateItems
+    }
+  }
+
+
   /* -------------------------------------------- */
 
   /**
