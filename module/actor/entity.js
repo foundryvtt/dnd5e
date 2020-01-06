@@ -23,7 +23,7 @@ export class Actor5e extends Actor {
     const flags = actorData.flags;
 
     // Prepare Character data
-    if ( actorData.type === "character" ) this._prepareCharacterData(data);
+    if ( actorData.type === "character" ) this._prepareCharacterData(actorData);
     else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
     // Ranged Weapon/Melee Weapon/Ranged Spell/Melee Spell attack bonuses are added when rolled since they are not a fixed value.
@@ -61,15 +61,17 @@ export class Actor5e extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(data) {
+  _prepareCharacterData(actorData) {
+
+    let level = game.settings.get("dnd5e", "useClassLevels") ? ClassHelper.getLevelByClasses(actorData) : actorData.data.details.level.value;
 
     // Level, experience, and proficiency
-    data.details.level.value = parseInt(data.details.level.value);
-    data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
-    let prior = this.getLevelExp(data.details.level.value - 1 || 0),
-          req = data.details.xp.max - prior;
-    data.details.xp.pct = Math.clamped(0, Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
-    data.attributes.prof = Math.floor((data.details.level.value + 7) / 4);
+    //data.details.level.value = parseInt(data.details.level.value);
+    actorData.data.details.xp.max = this.getLevelExp(level || 1);
+    let prior = this.getLevelExp(level - 1 || 0),
+          req = actorData.data.details.xp.max - prior;
+    actorData.data.details.xp.pct = Math.clamped(0, Math.round((actorData.data.details.xp.value -prior) * 100 / req), 99.5);
+    actorData.data.attributes.prof = Math.floor((level + 7) / 4);
   }
 
   /* -------------------------------------------- */
