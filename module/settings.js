@@ -70,4 +70,19 @@ export const registerSystemSettings = function() {
     default: false,
     type: Boolean,
   });
+
+  /**
+   * Option to automatically collapse Item Card descriptions
+   */
+  game.settings.register("dnd5e", "autoCollapseItemCards", {
+    name: "SETTINGS.5eAutoCollapseCardN",
+    hint: "SETTINGS.5eAutoCollapseCardL",
+    scope: "client",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: s => {
+      ui.chat.render();
+    }
+  });
 };
