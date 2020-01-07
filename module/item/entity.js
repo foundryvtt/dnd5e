@@ -655,7 +655,7 @@ export class Item5e extends Item {
 
   /* -------------------------------------------- */
 
-  static chatMessageListeners(app, html) {
+  static setMessageContentVisibility(app, html, data) {
     const collapseItemCards = game.settings.get("dnd5e", "autoCollapseItemCards");
 
     if (collapseItemCards) {
@@ -725,9 +725,10 @@ export class Item5e extends Item {
     const card = header.closest(".chat-card");
     const messageId = card.closest(".message").dataset.messageId;
     const message =  game.messages.get(messageId);
-    const cardContent = $(card).find(".card-content");
+    const content = card.querySelector(".card-content");
+    
+    content.style.display = content.style.display === "none" ? "block" : "none";
 
-    cardContent.toggle();
   }
 
   /* -------------------------------------------- */
