@@ -147,8 +147,11 @@ export class Actor5e extends Actor {
     // Apply changes in Actor size to Token width/height
     if ( data["data.traits.size"] !== getProperty(this.data, "data.traits.size") ) {
       let size = CONFIG.DND5E.tokenSizes[data["data.traits.size"]];
-      if ( this.isToken ) this.token.update(this.token.scene._id, {height: size, width: size});
-      else mergeObject(data, {"token.height": size, "token.width": size});
+      if ( this.isToken ) this.token.update({height: size, width: size});
+      else {
+        data["token.height"] = size;
+        data["token.width"] = size;
+      }
     }
     return super.update(data, options);
   }
