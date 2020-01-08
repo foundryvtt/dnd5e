@@ -58,6 +58,27 @@ export class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+
+   /**
+   * Does the Item have a target
+   * @type {boolean}
+   */
+  get hasTarget() {
+    return !!(this.data.data.target && ["touch","creature"].includes(this.data.data.target.type));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item have an area of effect target
+   * @type {boolean}
+   */
+  get hasAreaTarget() {
+    return !!(this.data.data.target && ["cone","cube","cylinder","line","radius","sphere","square","wall"].includes(this.data.data.target.type));
+  }
+
+
+  /* -------------------------------------------- */
   /*	Data Preparation														*/
   /* -------------------------------------------- */
 
