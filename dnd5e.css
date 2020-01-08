@@ -1032,6 +1032,10 @@
   font-size: 20px;
   color: #4b4a44;
 }
+.dnd5e.chat-card .card-header h3:hover {
+  color: #111;
+  text-shadow: 0 0 10px red;
+}
 .dnd5e.chat-card .card-content {
   margin: 5px 0;
 }

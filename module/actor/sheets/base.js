@@ -401,7 +401,7 @@ export class ActorSheet5e extends ActorSheet {
   _onItemSummary(event) {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
-        item = this.actor.getOwnedItem(Number(li.attr("data-item-id"))),
+        item = this.actor.getOwnedItem(li.data("item-id")),
         chatData = item.getChatData({secrets: this.actor.owner});
 
     // Toggle summary
