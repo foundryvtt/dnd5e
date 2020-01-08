@@ -43,6 +43,7 @@
 
         <div class="spell-school">{{localize "DND5E.SpellSchool"}}</div>
         <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
+        <div class="spell-target">{{localize "DND5E.SpellTarget"}}</div>
 
         <div class="item-controls">
             {{#if section.canCreate}}
@@ -67,6 +68,17 @@
             <div class="spell-comps">{{labels.components}}</div>
             <div class="spell-school">{{labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
+            <div class="spell-target">
+                {{#if labels.target}}
+                {{#if item.hasAreaTarget}}
+                <i class="fas fa-ruler-combined"></i> {{labels.target}}</a>
+                {{else}}
+                <i class="fas fa-bullseye"></i> {{labels.target}}
+                {{/if}}
+                {{else}}None
+                {{/if}}
+            </div>
+
 
             {{#if ../../owner}}
             <div class="item-controls">
