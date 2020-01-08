@@ -375,9 +375,7 @@ export class ActorSheet5e extends ActorSheet {
         const item = this.actor.getOwnedItem(itemId);
         const updateObj = {};
         updateObj[event.target.name] = event.target.value;
-        console.log(updateObj);
         return item.update(updateObj);
-        //return item.update({ "data.preparation.prepared": !item.data.data.preparation.prepared });
     }
     
   /* -------------------------------------------- */
