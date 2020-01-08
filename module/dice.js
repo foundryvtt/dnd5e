@@ -22,7 +22,7 @@ export class Dice5e {
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    */
-  static d20Roll({event, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
+  static d20Roll({event={}, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
                   fastForward=true, critical=20, fumble=1, onClose, dialogOptions, }) {
     flavor = flavor || title;
 

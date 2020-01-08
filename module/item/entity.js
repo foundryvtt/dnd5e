@@ -423,7 +423,6 @@ export class Item5e extends Item {
       } else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
         this._scaleSpellDamage(parts, itemData.level, spellLevel, itemData.scaling.formula );
       }
-
     }
 
     // Define Roll Data
