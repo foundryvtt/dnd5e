@@ -1,5 +1,6 @@
 import { Dice5e } from "../dice.js";
 import { AbilityTemplate } from "../pixi/ability-template.js";
+import { ClassHelper } from "../actor/class-helper.js";
 
 /**
  * Override and extend the basic :class:`Item` implementation
@@ -448,7 +449,7 @@ export class Item5e extends Item {
     if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
     if ( (this.data.type === "spell") ) {
       if ( (itemData.scaling.mode === "cantrip") ) {
-        const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
+        const lvl = this.actor.data.type === "character" ? ClassHelper.getLevelByClasses(this.actor.data) : actorData.details.cr;
         this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
       } else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
         this._scaleSpellDamage(parts, itemData.level, spellLevel, itemData.scaling.formula );

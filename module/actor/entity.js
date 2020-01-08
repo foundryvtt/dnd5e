@@ -63,10 +63,9 @@ export class Actor5e extends Actor {
    */
   _prepareCharacterData(actorData) {
 
-    let level = game.settings.get("dnd5e", "useClassLevels") ? ClassHelper.getLevelByClasses(actorData) : actorData.data.details.level.value;
+    let level = ClassHelper.getLevelByClasses(actorData);
 
     // Level, experience, and proficiency
-    //data.details.level.value = parseInt(data.details.level.value);
     actorData.data.details.xp.max = this.getLevelExp(level || 1);
     let prior = this.getLevelExp(level - 1 || 0),
           req = actorData.data.details.xp.max - prior;

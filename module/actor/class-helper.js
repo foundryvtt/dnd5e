@@ -6,6 +6,13 @@ export class ClassHelper {
    * @returns {Number}            Total number of levels we found within Items of type Class
    */
   static getLevelByClasses = function(actor) {
+
+    // manually entered level
+    if (!game.settings.get("dnd5e", "useClassLevels")) {
+      return actor.data.details.level.value
+    } 
+
+    // level calculated by Class Features
     if ( !actor.items.length) { return 0; }
 
     return actor.items.reduce((totalLevels, item) => {
@@ -14,7 +21,7 @@ export class ClassHelper {
           return Number(totalLevels) + Number(item.data.levels);
         }
       }
-      return 0;
+      return totalLevels;
     }, []);
   }
 
