@@ -409,7 +409,7 @@ export class Actor5e extends Actor {
         rollData = duplicate(this.data.data);
 
 
-    let hdRemaining = ClassHelper.hitdiceRemaining(this.data);
+    let hdRemaining = ClassHelper.hitDiceRemaining(this.data);
 
     // Confirm the actor has HD available
     if ( hdRemaining.length === 0 ) throw new Error(`${this.name} has no Hit Dice remaining!`);
@@ -506,7 +506,7 @@ export class Actor5e extends Actor {
     const data = this.data.data;
 
     // Take note of the initial hit points and hit dice the Actor has
-    const hd0 = ClassHelper.hitdiceRemaining(this.data).length;
+    const hd0 = ClassHelper.hitDiceRemaining(this.data).length;
     const hp0 = data.attributes.hp.value;
 
     // Display a Dialog for rolling hit dice
@@ -516,7 +516,7 @@ export class Actor5e extends Actor {
     }
 
     // Note the change in HP and HD which occurred
-    const dhd = ClassHelper.hitdiceRemaining(this.data).length - hd0;
+    const dhd = ClassHelper.hitDiceRemaining(this.data).length - hd0;
     const dhp = data.attributes.hp.value - hp0;
 
     // Recover character resources
@@ -586,13 +586,13 @@ export class Actor5e extends Actor {
     // Recover them in the order they were used
     let level = ClassHelper.getLevelByClasses(this.data);
     let recover_hd = Math.max(Math.floor(level/2), 1);
-    let hitdiceUsed = duplicate(ClassHelper.hitdiceUsed(this.data));
-    let dhd = Math.min(recover_hd, level - hitdiceUsed.length);
+    let hitDiceUsed = duplicate(ClassHelper.hitDiceUsed(this.data));
+    let dhd = Math.min(recover_hd, level - hitDiceUsed.length);
 
     for (let i = 0; i < recover_hd; i++) {
-      hitdiceUsed.shift();
+      hitDiceUsed.shift();
     }
-    updateData["data.attributes.hdUsed"] = hitdiceUsed;
+    updateData["data.attributes.hdUsed"] = hitDiceUsed;
 
     // Recover character resources
     for ( let [k, r] of Object.entries(data.resources) ) {

@@ -61,8 +61,8 @@ export class ShortRestV2Dialog extends Dialog {
   static async shortRestDialog({actor, canRoll=true}={}) {
     let actorType = typeof(actor);
 
-    let hdAvailable = ClassHelper.hitdiceAvailable(actor.data);
-    let hdRemaining = ClassHelper.hitdiceRemaining(actor.data);
+    let hdAvailable = ClassHelper.hitDiceAvailable(actor.data);
+    let hdRemaining = ClassHelper.hitDiceRemaining(actor.data);
     let hdUsed =  actor.data.data.attributes.hdUsed !== null ? actor.data.data.attributes.hdUsed : [];
 
     const html = await renderTemplate("systems/dnd5e/templates/apps/short-rest-v2.html", {

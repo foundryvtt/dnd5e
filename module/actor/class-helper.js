@@ -24,9 +24,9 @@ export class ClassHelper {
    * @param {Object<ActorSheet5eCharacter>} actorData 
    * @returns {Array} 
    */
-   static hitdiceRemaining = function(actorData){
-    let hdUsed = this.hitdiceUsed(actorData);
-    let hdAvailable = this.hitdiceAvailable(actorData);
+   static hitDiceRemaining = function(actorData){
+    let hdUsed = this.hitDiceUsed(actorData);
+    let hdAvailable = this.hitDiceAvailable(actorData);
 
     hdUsed.forEach(element => {
       var index = hdAvailable.indexOf(element);
@@ -45,7 +45,7 @@ export class ClassHelper {
    * @returns {Array}
    */
 
-  static hitdiceUsed = function(actorData){
+  static hitDiceUsed = function(actorData){
     if (!Array.isArray(actorData.data.attributes.hdUsed)) {
       // Field has not been initialized, let's do this now
       actorData.data.attributes.hdUsed = [];
@@ -59,7 +59,7 @@ export class ClassHelper {
    * @param {Object<ActorSheet5eCharacter>} actorData 
    * @returns {Array}   strings that should be in dice format
    */
-  static hitdiceAvailable = function(actorData) {
+  static hitDiceAvailable = function(actorData) {
     if (!actorData || !actorData.items) {
       return [];
     }
@@ -73,7 +73,7 @@ export class ClassHelper {
     // for each class with levels, push an appropriate amount of HD into the array
     classes.forEach(element => {
       for (let i = 0; i < element.data.levels; i++) {
-        hd.push(element.data.hitdice)
+        hd.push(element.data.hitDice)
       }
     });
 

@@ -65,7 +65,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     if (sheetData["useClassLevels"])
     {
       sheetData.data.calculatedLevel = ClassHelper.getLevelByClasses(sheetData.actor); // this._totalClassLevels(sheetData.items);
-      sheetData["hdRemainingCount"] = ClassHelper.hitdiceRemaining(sheetData).length;
+      sheetData["hdRemainingCount"] = ClassHelper.hitDiceRemaining(sheetData).length;
     }
 
     // Return data for rendering
