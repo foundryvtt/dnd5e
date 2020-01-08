@@ -37,7 +37,9 @@
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
                 {{#if item.data.uses.value}}
-                {{item.data.uses.value}} / {{item.data.uses.max}}
+                    <input type="text" name="data.uses.value" value="{{item.data.uses.value}}" placeholder="0"/>
+                    <span class="sep"> / </span>
+                    <input type="text" name="data.uses.max" value="{{item.data.uses.max}}" placeholder="0"/>
                 {{else if item.data.recharge.value}}
                 {{#if item.isOnCooldown}}
                 <a class="item-recharge rollable">{{item.labels.recharge}}</a>
