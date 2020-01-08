@@ -6,17 +6,16 @@ export class ClassHelper {
    * @returns {Number}            Total number of levels we found within Items of type Class
    */
   static getLevelByClasses = function(actor) {
-    if (actor.items) {
-      return actor.items.reduce((totalLevels, item) => {
-        if (item.type === "class") {
-          if (item.data && item.data.levels > 0) {
-            return Number(totalLevels) + Number(item.data.levels);
-          }
+    if ( !actor.items.length) { return 0; }
+
+    return actor.items.reduce((totalLevels, item) => {
+      if (item.type === "class") {
+        if (item.data && item.data.levels > 0) {
+          return Number(totalLevels) + Number(item.data.levels);
         }
-        return 0;
-      }, []);
-    }
-    return 0;
+      }
+      return 0;
+    }, []);
   }
 
   /**
