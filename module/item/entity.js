@@ -211,6 +211,11 @@ export class Item5e extends Item {
   /*  Chat Cards																	*/
   /* -------------------------------------------- */
 
+  /**
+   * Prepare an object of chat data used to display a card for the Item in the chat log
+   * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
+   * @return {Object}               An object of chat data to render
+   */
   getChatData(htmlOptions) {
     const data = duplicate(this.data.data);
     const labels = this.labels;
@@ -330,6 +335,7 @@ export class Item5e extends Item {
 
   /**
    * Prepare chat card data for items of the "Feat" type
+   * @private
    */
   _featChatData(data, labels, props) {
     props.push(
@@ -525,22 +531,30 @@ export class Item5e extends Item {
    * Use a consumable item
    */
   rollConsumable(options={}) {
-    let itemData = this.data.data;
+    const itemData = this.data.data;
     const labels = this.labels;
     const formula = itemData.damage ? labels.damage : itemData.formula;
+    const flavor = `Consumes ${this.name}`;
 
-    // Submit the roll to chat
+    // Roll a formula to chat
     if ( formula ) {
-      new Roll(formula).toMessage({
+      const rollData = duplicate(this.actor.data.data);
+      rollData.item = itemData;
+      rollData.mod = rollData.abilities[itemData.ability].mod;
+      const roll = new Roll(formula, rollData).roll();
+      roll.toMessage({
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        flavor: `Consumes ${this.name}`
+        flavor: flavor
       });
-    } else {
+    }
+
+    // Otherwise just display a message
+    else {
       ChatMessage.create({
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
         content: `Consumes ${this.name}`
-      })
+      });
     }
 
     // Deduct consumed charges from the item
@@ -633,7 +647,7 @@ export class Item5e extends Item {
       flavor: `${this.name} - ${CONFIG.DND5E.abilities[abl]} Check`,
       dialogOptions: {
         width: 400,
-        top: options.event ? event.clientY - 80 : null,
+        top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
       },
       onClose: (html, parts, data) => {
@@ -648,23 +662,17 @@ export class Item5e extends Item {
 
   static chatListeners(html) {
     html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
-
     html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
   }
 
   /* -------------------------------------------- */
 
-  static setMessageContentVisibility(app, html, data) {
-    const collapseItemCards = game.settings.get("dnd5e", "autoCollapseItemCards");
-
-    if (collapseItemCards) {
-      html.find(".card-content").hide();
-    }
-
-  }
-
-  /* -------------------------------------------- */
-
+  /**
+   * Handle execution of a chat card action via a click event on one of the card buttons
+   * @param {Event} event       The originating click event
+   * @returns {Promise}         A promise which resolves once the handler workflow is complete
+   * @private
+   */
   static async _onChatCardAction(event) {
     event.preventDefault();
 
@@ -716,18 +724,17 @@ export class Item5e extends Item {
 
   /* -------------------------------------------- */
 
+  /**
+   * Handle toggling the visibility of chat card content when the name is clicked
+   * @param {Event} event   The originating click event
+   * @private
+   */
   static _onChatCardToggleContent(event) {
     event.preventDefault();
-
-    // Extract card data
     const header = event.currentTarget;
     const card = header.closest(".chat-card");
-    const messageId = card.closest(".message").dataset.messageId;
-    const message =  game.messages.get(messageId);
     const content = card.querySelector(".card-content");
-    
     content.style.display = content.style.display === "none" ? "block" : "none";
-
   }
 
   /* -------------------------------------------- */

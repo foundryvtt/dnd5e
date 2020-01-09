@@ -286,7 +286,7 @@ export class ActorSheet5e extends ActorSheet {
     html.find('.item-delete').click(this._onItemDelete.bind(this));
     
     // Item Uses
-    html.find('.item-uses input').change(this._onUsesChange.bind(this));
+    html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
 
     // Item Dragging
     let handler = ev => this._onDragItemStart(ev);

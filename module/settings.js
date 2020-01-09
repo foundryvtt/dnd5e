@@ -41,7 +41,7 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.5eInitTBL",
     scope: "world",
     config: true,
-    default: true,
+    default: false,
     type: Boolean,
     onChange: enable => _set5eInitiative(enable)
   });

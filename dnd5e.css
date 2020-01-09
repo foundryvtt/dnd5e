@@ -721,6 +721,10 @@
 .dnd5e.sheet.actor .inventory-list .item .item-name i.attuned {
   color: #7a7971;
 }
+.dnd5e.sheet.actor .inventory-list .item .item-uses input {
+  width: 24px;
+  text-align: center;
+}
 .dnd5e.sheet.actor .inventory-list .item .item-properties {
   margin-top: 3px;
 }
@@ -748,7 +752,7 @@
   flex: 0 0 100%;
 }
 .dnd5e.sheet.actor .inventory-list .item-detail {
-  flex: 0 0 80px;
+  flex: 0 0 70px;
   font-size: 12px;
   color: #7a7971;
   text-align: center;
@@ -756,6 +760,9 @@
 }
 .dnd5e.sheet.actor .inventory-list .item-detail:last-child {
   border-right: none;
+}
+.dnd5e.sheet.actor .inventory-list .item-detail.item-action {
+  flex: 0 0 100px;
 }
 .dnd5e.sheet.actor .inventory-list .item-weight {
   flex: 0 0 60px;
@@ -822,8 +829,9 @@
   text-align: right !important;
 }
 .dnd5e.sheet.actor .spell-school,
-.dnd5e.sheet.actor .spell-action {
-  flex: 0 0 120px;
+.dnd5e.sheet.actor .spell-action,
+.dnd5e.sheet.actor .spell-target {
+  flex: 0 0 100px;
   font-size: 12px;
   color: #7a7971;
   text-align: center;

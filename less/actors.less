@@ -444,13 +444,12 @@
         i.attuned {
           color: @colorTan;
         }
-          
-        // uses input  
-        input {
-          display: inline;
-          max-width: 20px;
-          text-align: center;
-        }
+      }
+
+      // Item uses
+      .item-uses input {
+        width: 24px;
+        text-align: center;
       }
 
       // Item Dropdown Properties
@@ -490,12 +489,13 @@
 
     // Item Detail Sections
     .item-detail {
-      flex: 0 0 80px;
+      flex: 0 0 70px;
       font-size: 12px;
       color: @colorTan;
       text-align: center;
       border-right: 1px solid @colorFaint;
       &:last-child { border-right: none; }
+      &.item-action {flex: 0 0 100px}
     }
 
     .item-weight {
@@ -561,7 +561,7 @@
   }
 
   .spell-school, .spell-action, .spell-target {
-    flex: 0 0 120px;
+    flex: 0 0 100px;
     font-size: 12px;
     color: @colorTan;
     text-align: center;

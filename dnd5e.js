@@ -19,6 +19,7 @@ import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { Item5e } from "./module/item/entity.js";
 import { ItemSheet5e } from "./module/item/sheet.js";
 import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
+import { Dice5e } from "./module/dice.js";
 import * as migrations from "./module/migration.js";
 
 
@@ -31,7 +32,11 @@ Hooks.once("init", async function() {
 
   // Create a D&D5E namespace within the game global
   game.dnd5e = {
-    migrations: migrations
+    Actor5e,
+    Dice5e,
+    Item5e,
+    migrations,
+    rollItemMacro,
   };
 
   // Record Configuration Values
@@ -111,8 +116,61 @@ Hooks.on("canvasInit", function() {
 /* -------------------------------------------- */
 
 Hooks.on("renderChatMessage", (app, html, data) => {
+
+  // Highlight critical success or failure die
   highlightCriticalSuccessFailure(app, html, data);
-  Item5e.setMessageContentVisibility(app, html, data);
+
+  // Optionally collapse the content
+  if (game.settings.get("dnd5e", "autoCollapseItemCards")) html.find(".card-content").hide();
 });
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
+
+
+/* -------------------------------------------- */
+/*  Hotbar Macros                               */
+/* -------------------------------------------- */
+
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+  if ( data.type !== "Item" ) return;
+  createItemMacro(data.data, slot);
+  return false;
+});
+
+/**
+ * Create a Macro from an Item drop.
+ * Get an existing item macro if one exists, otherwise create a new one.
+ * @param {Object} item     The item data
+ * @param {number} slot     The hotbar slot to use
+ * @returns {Promise}
+ */
+async function createItemMacro(item, slot) {
+  const command = `game.dnd5e.rollItemMacro("${item.name}");`;
+  let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+  if ( !macro ) {
+    macro = await Macro.create({
+      name: item.name,
+      type: "script",
+      img: item.img,
+      command: command,
+      flags: {"dnd5e.itemMacro": true}
+    }, {displaySheet: false});
+  }
+  game.user.assignHotbarMacro(macro, slot);
+}
+
+/**
+ * Create a Macro from an Item drop.
+ * Get an existing item macro if one exists, otherwise create a new one.
+ * @param {string} itemName
+ * @return {Promise}
+ */
+function rollItemMacro(itemName) {
+  const speaker = ChatMessage.getSpeaker();
+  let actor;
+  if ( speaker.token ) actor = game.actors.tokens[speaker.token];
+  if ( !actor ) actor = game.actors.get(speaker.actor);
+  const item = actor ? actor.items.find(i => i.name === itemName) : null;
+  if ( !item ) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+  return item.roll();
+}
