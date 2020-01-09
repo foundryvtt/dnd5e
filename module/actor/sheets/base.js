@@ -284,6 +284,9 @@ export class ActorSheet5e extends ActorSheet {
     html.find('.item-create').click(this._onItemCreate.bind(this));
     html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
+    
+    // Item Uses
+    html.find('.item-uses input').change(this._onUsesChange.bind(this));
 
     // Item Dragging
     let handler = ev => this._onDragItemStart(ev);
@@ -358,6 +361,22 @@ export class ActorSheet5e extends ActorSheet {
     this._onSubmit(event);
   }
 
+  /* -------------------------------------------- */
+
+    /**
+     * Change the uses amount of an Owned Item within the Actor
+     * @param {Event} event   The triggering click event
+     * @private
+     */
+    async _onUsesChange(event) {
+        event.preventDefault();
+        const itemId = event.currentTarget.closest(".item").dataset.itemId;
+        const item = this.actor.getOwnedItem(itemId);
+        const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
+        event.target.value = uses;
+        return item.update({ 'data.uses.value': uses });
+    }
+    
   /* -------------------------------------------- */
 
   /**
