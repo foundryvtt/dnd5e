@@ -370,12 +370,11 @@ export class ActorSheet5e extends ActorSheet {
      */
     async _onUsesChange(event) {
         event.preventDefault();
-        event.stopPropagation();
         const itemId = event.currentTarget.closest(".item").dataset.itemId;
         const item = this.actor.getOwnedItem(itemId);
-        const updateObj = {};
-        updateObj[event.target.name] = event.target.value;
-        return item.update(updateObj);
+        const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
+        event.target.value = uses;
+        return item.update({ 'data.uses.value': uses });
     }
     
   /* -------------------------------------------- */
