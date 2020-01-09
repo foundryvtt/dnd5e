@@ -6,14 +6,14 @@ export class Dice5e {
    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
    * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
    *
-   * @param {Event} event           The triggering event which initiated the roll
+   * @param {Event|object} event    The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
    * @param {Actor} actor           The Actor making the d20 roll
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
    * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
-   * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
+   * @param {string} flavor         Flavor text to use in the posted chat message
    * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
    * @param {Boolean} situational   Allow for an arbitrary situational bonus field
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
@@ -21,47 +21,53 @@ export class Dice5e {
    * @param {Number} fumble         The value of d20 result which represents a critical failure
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
+   *
+   * @return {Promise}              A Promise which resolves once the roll workflow has completed
    */
-  static d20Roll({event={}, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
-                  fastForward=true, critical=20, fumble=1, onClose, dialogOptions, }) {
-    flavor = flavor || title;
+  static async d20Roll({event={}, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
+                         fastForward=true, critical=20, fumble=1, onClose, dialogOptions, }) {
 
-    // Inner roll function
-    let rollMode = game.settings.get("core", "rollMode");
-    let roll = (parts, adv) => {
+    // Handle input arguments
+    flavor = flavor || title;
+    const rollMode = game.settings.get("core", "rollMode");
+    let rolled = false;
+
+    // Define inner roll function
+    const _roll = function(parts, adv, form) {
+
+      // Modify d20 for advantage or disadvantage
       if (adv === 1) {
         parts[0] = ["2d20kh"];
         flavor = `${title} (Advantage)`;
-      }
-      else if (adv === -1) {
+      } else if (adv === -1) {
         parts[0] = ["2d20kl"];
         flavor = `${title} (Disadvantage)`;
       }
 
-      // Don't include situational bonus unless it is defined
+      // Optionally include a situational bonus
+      data['bonus'] = form ? form.find('[name="bonus"]').val() : 0;
       if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
-      // Execute the roll
+      // Execute the roll and flag critical thresholds on the d20
       let roll = new Roll(parts.join(" + "), data).roll();
-
-      // Flag critical thresholds
-      let d20 = roll.parts[0];
+      const d20 = roll.parts[0];
       d20.options.critical = critical;
       d20.options.fumble = fumble;
 
       // Convert the roll to a chat message
-      roll.toMessage({
+      rolled = true;
+      return roll.toMessage({
         speaker: speaker,
         flavor: flavor,
-        rollMode: rollMode
+        rollMode: form ? form.find('[name="rollMode"]').val() : rollMode
       });
     };
 
     // Modify the roll and handle fast-forwarding
     parts = ["1d20"].concat(parts);
-    if ( event.shiftKey ) return roll(parts, 0);
-    else if ( event.altKey ) return roll(parts, 1);
-    else if ( event.ctrlKey || event.metaKey ) return roll(parts, -1);
+    if (event.shiftKey) return _roll(parts, 0);
+    else if (event.altKey) return _roll(parts, 1);
+    else if (event.ctrlKey || event.metaKey) return _roll(parts, -1);
     else parts = parts.concat(["@bonus"]);
 
     // Render modal dialog
@@ -72,33 +78,35 @@ export class Dice5e {
       rollMode: rollMode,
       rollModes: CONFIG.rollModes
     };
-    let adv = 0;
-    renderTemplate(template, dialogData).then(dlg => {
+    const html = await renderTemplate(template, dialogData);
+
+    // Create the Dialog window
+    let roll;
+    return new Promise(resolve => {
       new Dialog({
-          title: title,
-          content: dlg,
-          buttons: {
-            advantage: {
-              label: "Advantage",
-              callback: () => adv = 1
-            },
-            normal: {
-              label: "Normal",
-            },
-            disadvantage: {
-              label: "Disadvantage",
-              callback: () => adv = -1
-            }
+        title: title,
+        content: html,
+        buttons: {
+          advantage: {
+            label: "Advantage",
+            callback: html => roll = _roll(parts, 1, html)
           },
-          default: "normal",
-          close: html => {
-            if ( onClose ) onClose(html, parts, data);
-            rollMode = html.find('[name="rollMode"]').val();
-            data['bonus'] = html.find('[name="bonus"]').val();
-            roll(parts, adv);
+          normal: {
+            label: "Normal",
+            callback: html => roll = _roll(parts, 0, html)
+          },
+          disadvantage: {
+            label: "Disadvantage",
+            callback: html => roll = _roll(parts, -1, html)
           }
-        }, dialogOptions).render(true);
-    });
+        },
+        default: "normal",
+        close: html => {
+          if (onClose) onClose(html, parts, data);
+          resolve(rolled ? roll : false)
+        }
+      }, dialogOptions).render(true);
+    })
   }
 
   /* -------------------------------------------- */
@@ -109,25 +117,33 @@ export class Dice5e {
    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
    * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
    *
-   * @param {Event} event           The triggering event which initiated the roll
+   * @param {Event|object} event    The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
    * @param {Actor} actor           The Actor making the damage roll
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
    * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
-   * @param {Function} flavor       A callable function for determining the chat message flavor given parts and data
+   * @param {string} flavor         Flavor text to use in the posted chat message
    * @param {Boolean} critical      Allow critical hits to be chosen
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
+   *
+   * @return {Promise}              A Promise which resolves once the roll workflow has completed
    */
-  static damageRoll({event={}, parts, actor, data, template, title, speaker, flavor, critical=true, onClose, dialogOptions}) {
-    flavor = flavor || title;
+  static async damageRoll({event={}, parts, actor, data, template, title, speaker, flavor, critical=true, onClose,
+                            dialogOptions}) {
 
-    // Inner roll function
-    let rollMode = game.settings.get("core", "rollMode");
-    let roll = crit => {
+    // Handle input arguments
+    flavor = flavor || title;
+    const rollMode = game.settings.get("core", "rollMode");
+    let rolled = false;
+
+    // Define inner roll function
+    const _roll = function(parts, crit, form) {
       let roll = new Roll(parts.join("+"), data);
+
+      // Modify the damage formula for critical hits
       if ( crit === true ) {
         let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
@@ -135,22 +151,23 @@ export class Dice5e {
         flavor = `${flavor} (Critical)`;
       }
 
-      // Execute the roll and send it to chat
-      roll.toMessage({
+      // Include bonus
+      data['bonus'] = form ? form.find('[name="bonus"]').val() : 0;
+
+      // Convert the roll to a chat message
+      rolled = true;
+      return roll.toMessage({
         speaker: speaker,
         flavor: flavor,
-        rollMode: rollMode
+        rollMode: form ? form.find('[name="rollMode"]').val() : rollMode
       });
-
-      // Return the Roll object
-      return roll;
     };
 
     // Modify the roll and handle fast-forwarding
-    if ( event.shiftKey || event.ctrlKey || event.metaKey || event.altKey )  return roll(event.altKey);
+    if ( event.shiftKey || event.ctrlKey || event.metaKey || event.altKey ) return _roll(parts, event.altKey);
     else parts = parts.concat(["@bonus"]);
 
-    // Construct dialog data
+    // Render modal dialog
     template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
     let dialogData = {
       formula: parts.join(" + "),
@@ -158,34 +175,31 @@ export class Dice5e {
       rollMode: rollMode,
       rollModes: CONFIG.rollModes
     };
+    const html = await renderTemplate(template, dialogData);
 
-    // Render modal dialog
-    let crit = false;
+    // Create the Dialog window
+    let roll;
     return new Promise(resolve => {
-      renderTemplate(template, dialogData).then(dlg => {
-        new Dialog({
-          title: title,
-          content: dlg,
-          buttons: {
-            critical: {
-              condition: critical,
-              label: "Critical Hit",
-              callback: () => crit = true
-            },
-            normal: {
-              label: critical ? "Normal" : "Roll",
-            },
+      new Dialog({
+        title: title,
+        content: html,
+        buttons: {
+          critical: {
+            condition: critical,
+            label: "Critical Hit",
+            callback: html => roll = _roll(parts, true, html)
           },
-          default: "normal",
-          close: html => {
-            if (onClose) onClose(html, parts, data);
-            rollMode = html.find('[name="rollMode"]').val();
-            data['bonus'] = html.find('[name="bonus"]').val();
-            let r = roll(crit);
-            resolve(r);
-          }
-        }, dialogOptions).render(true);
-      });
+          normal: {
+            label: critical ? "Normal" : "Roll",
+            callback: html => roll = _roll(parts, false, html)
+          },
+        },
+        default: "normal",
+        close: html => {
+          if (onClose) onClose(html, parts, data);
+          resolve(rolled ? roll : false);
+        }
+      }, dialogOptions).render(true);
     });
   }
 }
