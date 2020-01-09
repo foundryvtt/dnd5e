@@ -68,13 +68,9 @@
             <div class="spell-comps">{{labels.components}}</div>
             <div class="spell-school">{{labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
-            <div class="spell-target">
+            <div class="spell-target" title="Range: {{labels.range}}">
                 {{#if labels.target}}
-                {{#if item.hasAreaTarget}}
-                <i class="fas fa-ruler-combined"></i> {{labels.target}}</a>
-                {{else}}
-                <i class="fas fa-bullseye"></i> {{labels.target}}
-                {{/if}}
+                {{labels.target}}
                 {{else}}None
                 {{/if}}
             </div>
