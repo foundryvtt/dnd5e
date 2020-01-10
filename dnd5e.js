@@ -172,5 +172,8 @@ function rollItemMacro(itemName) {
   if ( !actor ) actor = game.actors.get(speaker.actor);
   const item = actor ? actor.items.find(i => i.name === itemName) : null;
   if ( !item ) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+
+  // Trigger the item roll
+  if ( item.data.type === "spell" ) return actor.useSpell(item);
   return item.roll();
 }

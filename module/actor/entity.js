@@ -285,7 +285,7 @@ export class Actor5e extends Actor {
     const checkBonus = getProperty(this.data.data, "bonuses.abilityCheck");
 
     if (![undefined, "", "0"].includes(checkBonus)) {
-      parts.push("@checkBonus")
+      parts.push("@checkBonus");
       data.checkBonus = checkBonus;
     }
 

@@ -753,7 +753,7 @@ export class Item5e extends Item {
       const [sceneId, tokenId] = tokenKey.split(".");
       const scene = game.scenes.get(sceneId);
       if (!scene) return null;
-      const tokenData = scene.getEmbeddedEntity("tokens", tokenId);
+      const tokenData = scene.getEmbeddedEntity("Token", tokenId);
       if (!tokenData) return null;
       const token = new Token(tokenData);
       return token.actor;
