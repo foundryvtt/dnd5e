@@ -199,7 +199,7 @@ export class Item5e extends Item {
       isVersatile: this.isVersatile,
       isSpell: this.data.type === "spell",
       hasSave: this.hasSave,
-      hasAreaTarget: this.hasAreaTarget
+      hasAreaTarget: game.user.isTrusted ? this.hasAreaTarget : null
     };
 
     // Render the chat card template
