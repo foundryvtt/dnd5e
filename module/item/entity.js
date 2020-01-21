@@ -1,4 +1,5 @@
 import { Dice5e } from "../dice.js";
+import { MeasuredTemplateSpell5e } from "../measured-template.js";
 
 /**
  * Override and extend the basic :class:`Item` implementation
@@ -57,6 +58,25 @@ export class Item5e extends Item {
     return !!(this.data.data.save && this.data.data.save.ability);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item have a target
+   * @type {boolean}
+   */
+  get hasTarget() {
+    return !!(this.data.data.target && !["none",""].includes(this.data.data.target.type));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does the Item have an area of effect target
+   * @type {boolean}
+   */
+  get hasAreaTarget() {
+    return !!(this.data.data.target && ["cone","cube","cylinder","line","radius","sphere","square","wall"].includes(this.data.data.target.type));
+  }
   /* -------------------------------------------- */
   /*	Data Preparation														*/
   /* -------------------------------------------- */
@@ -178,7 +198,8 @@ export class Item5e extends Item {
       hasDamage: this.hasDamage,
       isVersatile: this.isVersatile,
       isSpell: this.data.type === "spell",
-      hasSave: this.hasSave
+      hasSave: this.hasSave,
+      hasAreaTarget: this.hasAreaTarget
     };
 
     // Render the chat card template
@@ -718,6 +739,13 @@ export class Item5e extends Item {
     // Tool usage
     else if ( action === "toolCheck" ) await item.rollToolCheck({event});
 
+    // Spell Template Creation
+    else if ( action === "placeTemplate") {
+      const templateData = await MeasuredTemplateSpell5e.prepareData(item.data);
+      const spellTemplate = await new MeasuredTemplateSpell5e(templateData);
+    
+      spellTemplate.createPreview(event);
+    }
     // Re-enable the button
     button.disabled = false;
   }
