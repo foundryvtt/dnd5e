@@ -558,13 +558,14 @@ export class Item5e extends Item {
     const itemData = this.data.data;
     const labels = this.labels;
     const formula = itemData.damage ? labels.damage : itemData.formula;
-    const flavor = `Consumes ${this.name}`;
+    const flavor = `${this.actor.name} uses ${this.name}`;
 
     // Roll a formula to chat
     if ( formula ) {
       const rollData = duplicate(this.actor.data.data);
       rollData.item = itemData;
-      rollData.mod = rollData.abilities[itemData.ability].mod;
+      const ability = rollData.abilities[itemData.ability];
+      rollData.mod = ability ? ability.mod : 0;
       const roll = new Roll(formula, rollData).roll();
       roll.toMessage({
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
@@ -577,7 +578,7 @@ export class Item5e extends Item {
       ChatMessage.create({
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        content: `Consumes ${this.name}`
+        content: flavor
       });
     }
 

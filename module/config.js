@@ -178,6 +178,7 @@ DND5E.armorTypes = DND5E.equipmentTypes;
 DND5E.consumableTypes = {
   "potion": "DND5E.ConsumablePotion",
   "poison": "DND5E.ConsumablePoison",
+  "food": "DND5E.ConsumableFood",
   "scroll": "DND5E.ConsumableScroll",
   "wand": "DND5E.ConsumableWand",
   "rod": "DND5E.ConsumableRod",

@@ -54,13 +54,14 @@ export class Dice5e {
       d20.options.critical = critical;
       d20.options.fumble = fumble;
 
-      // Convert the roll to a chat message
-      rolled = true;
-      return roll.toMessage({
+      // Convert the roll to a chat message and return the roll
+      roll.toMessage({
         speaker: speaker,
         flavor: flavor,
         rollMode: form ? form.find('[name="rollMode"]').val() : rollMode
       });
+      rolled = true;
+      return roll;
     };
 
     // Modify the roll and handle fast-forwarding
@@ -141,6 +142,7 @@ export class Dice5e {
 
     // Define inner roll function
     const _roll = function(parts, crit, form) {
+      data['bonus'] = form ? form.find('[name="bonus"]').val() : 0;
       let roll = new Roll(parts.join("+"), data);
 
       // Modify the damage formula for critical hits
@@ -151,16 +153,14 @@ export class Dice5e {
         flavor = `${flavor} (Critical)`;
       }
 
-      // Include bonus
-      data['bonus'] = form ? form.find('[name="bonus"]').val() : 0;
-
       // Convert the roll to a chat message
-      rolled = true;
-      return roll.toMessage({
+      roll.toMessage({
         speaker: speaker,
         flavor: flavor,
         rollMode: form ? form.find('[name="rollMode"]').val() : rollMode
       });
+      rolled = true;
+      return roll;
     };
 
     // Modify the roll and handle fast-forwarding
@@ -212,7 +212,9 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
 
   // Highlight rolls where the first part is a d20 roll
   let d = message.roll.parts[0];
-  if ( d instanceof Die && (d.faces === 20) && (d.results.length === 1) ) {
+  const isD20Roll = d instanceof Die && (d.faces === 20) && (d.results.length === 1);
+  const isModifiedRoll = ("success" in d.rolls[0]) || d.options.marginSuccess || d.options.marginFailure;
+  if ( isD20Roll && !isModifiedRoll ) {
     if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
     else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
   }

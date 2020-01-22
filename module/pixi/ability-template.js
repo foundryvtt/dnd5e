@@ -29,6 +29,9 @@ export class AbilityTemplate extends MeasuredTemplate {
 
     // Additional type-specific data
     switch ( templateShape ) {
+      case "cone": // 5e cone RAW should be 53.13 degrees
+        templateData.angle = 53.13;
+        break;
       case "rect": // 5e rectangular AoEs are always cubes
         templateData.width = target.value;
         templateData.direction = 45;
@@ -62,7 +65,7 @@ export class AbilityTemplate extends MeasuredTemplate {
 
   /**
    * Activate listeners for the template preview
-   * @param {CanvasLayer}   The initially active CanvasLayer to re-activate after the workflow is complete
+   * @param {CanvasLayer} initialLayer  The initially active CanvasLayer to re-activate after the workflow is complete
    */
   activatePreviewListeners(initialLayer) {
     const handlers = {};

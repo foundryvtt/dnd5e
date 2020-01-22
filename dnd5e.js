@@ -27,7 +27,7 @@ import * as migrations from "./module/migration.js";
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 
-Hooks.once("init", async function() {
+Hooks.once("init", function() {
   console.log(`D&D5e | Initializing Dungeons & Dragons 5th Edition System\n${DND5E.ASCII}`);
 
   // Create a D&D5E namespace within the game global
@@ -47,9 +47,6 @@ Hooks.once("init", async function() {
   // Register System Settings
   registerSystemSettings();
 
-  // Preload Handlebars Templates
-  await preloadHandlebarsTemplates();
-
   // Patch Core Functions
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
 
@@ -59,6 +56,9 @@ Hooks.once("init", async function() {
   Actors.registerSheet("dnd5e", ActorSheet5eNPC, { types: ["npc"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
+
+  // Preload Handlebars Templates
+  preloadHandlebarsTemplates();
 });
 
 

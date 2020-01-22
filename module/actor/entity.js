@@ -147,10 +147,11 @@ export class Actor5e extends Actor {
   async update(data, options={}) {
 
     // Apply changes in Actor size to Token width/height
-    if ( data["data.traits.size"] !== getProperty(this.data, "data.traits.size") ) {
-      let size = CONFIG.DND5E.tokenSizes[data["data.traits.size"]];
+    const newSize = data["data.traits.size"];
+    if ( newSize !== getProperty(this.data, "data.traits.size") ) {
+      let size = CONFIG.DND5E.tokenSizes[newSize];
       if ( this.isToken ) this.token.update({height: size, width: size});
-      else {
+      else if ( !data["token.width"] && !hasProperty(data, "token.width") ) {
         data["token.height"] = size;
         data["token.width"] = size;
       }
@@ -160,10 +161,7 @@ export class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /**
-   * Extend OwnedItem creation logic for the 5e system to make weapons proficient by default when dropped on a NPC sheet
-   * See the base Actor class for API documentation of this method
-   */
+  /** @override */
   async createOwnedItem(itemData, options) {
 
     // Assume NPCs are always proficient with weapons and always have spells prepared
@@ -176,6 +174,28 @@ export class Actor5e extends Actor {
       mergeObject(itemData, initial);
     }
     return super.createOwnedItem(itemData, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async modifyTokenAttribute(attribute, value, isDelta) {
+    if ( attribute !== "attributes.hp" ) return super.modifyTokenAttribute(attribute, value, isDelta);
+
+    // Get current and delta HP
+    const hp = getProperty(this.data.data, attribute);
+    const tmp = parseInt(hp.temp) || 0;
+    const current = hp.value + tmp;
+    const max = hp.max + (parseInt(hp.tempmax) || 0);
+    const delta = isDelta ? value : value - current;
+
+    // For negative changes, deduct from temp HP
+    let dtmp = delta < 0 ? Math.max(-1*tmp, delta) : 0;
+    let dhp = delta - dtmp;
+    return this.update({
+      "data.attributes.hp.temp": tmp + dtmp,
+      "data.attributes.hp.value": Math.clamped(hp.value + dhp, 0, max)
+    });
   }
 
   /* -------------------------------------------- */
