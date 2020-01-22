@@ -254,6 +254,27 @@ DND5E.targetTypes = {
   "wall": "DND5E.TargetWall"
 };
 
+
+/* -------------------------------------------- */
+
+
+/**
+ * Map the subset of target types which produce a template area of effect
+ * The keys are DND5E target types and the values are MeasuredTemplate shape types
+ * @type {Object}
+ */
+DND5E.areaTargetTypes = {
+  cone: "cone",
+  cube: "rect",
+  cylinder: "cone",
+  line: "ray",
+  radius: "circle",
+  sphere: "circle",
+  square: "rect",
+  wall: "ray"
+};
+
+
 /* -------------------------------------------- */
 
 /**

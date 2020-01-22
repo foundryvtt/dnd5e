@@ -1,7 +1,8 @@
 import { Dice5e } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
-import { MeasuredTemplateSpell5e } from "../measured-template.js";
+import { AbilityTemplate } from "../pixi/ability-template.js";
+
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
@@ -202,7 +203,7 @@ export class Actor5e extends Actor {
       const spellFormData = await SpellCastDialog.create(this, item);
       lvl = parseInt(spellFormData.get("level"));
       consume = Boolean(spellFormData.get("consume"));
-      placeTemplate = Boolean(spellFormData.get("template"));
+      placeTemplate = Boolean(spellFormData.get("placeTemplate"));
       if ( lvl !== item.data.data.level ) {
         item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
       } 
@@ -213,17 +214,13 @@ export class Actor5e extends Actor {
       await this.update({
         [`data.spells.spell${lvl}.value`]: Math.max(parseInt(this.data.data.spells["spell"+lvl].value) - 1, 0)
       });
-    } 
+    }
 
-    // Initiate template placement workflow if selected
+    // Initiate ability template placement workflow if selected
     if (item.hasAreaTarget && placeTemplate) {
-      const templateData = await MeasuredTemplateSpell5e.prepareData(item.data);
-      const spellTemplate = await new MeasuredTemplateSpell5e(templateData);
-    
-      spellTemplate.createPreview(event);
-      if (!this.sheet.minimized) {
-        this.sheet.minimize();
-      }
+      const template = AbilityTemplate.fromItem(item);
+      if ( template ) template.drawPreview(event);
+      if (this.sheet) this.sheet.minimize();
     }
 
     // Invoke the Item roll

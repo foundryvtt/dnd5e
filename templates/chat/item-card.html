@@ -14,17 +14,28 @@
 
     <div class="card-buttons">
         {{#if hasAttack}}<button data-action="attack">{{ localize "DND5E.Attack" }}</button>{{/if}}
+
         {{#if hasDamage}}
         <button data-action="damage">
             {{#if isHealing}}{{ localize "DND5E.Healing" }}
             {{else}}{{localize "DND5E.Damage" }}{{/if}}
-        </button>{{/if}}
-        {{#if isVersatile}}<button data-action="versatile">{{ localize "DND5E.Versatile" }}</button>{{/if}}
+        </button>
+        {{/if}}
+
+        {{#if isVersatile}}
+        <button data-action="versatile">{{ localize "DND5E.Versatile" }}</button>
+        {{/if}}
+
         {{#if hasSave}}
         <button data-action="save" data-ability="{{data.save.ability}}" disabled>
             {{ localize "DND5E.Save" }} {{labels.save}}
-        </button>{{/if}}
-        {{#if data.formula}}<button data-action="formula">{{ localize "DND5E.ChatOtherFormula"}}</button>{{/if}}
+        </button>
+        {{/if}}
+
+        {{#if data.formula}}
+        <button data-action="formula">{{ localize "DND5E.ChatOtherFormula"}}</button>
+        {{/if}}
+
         {{#if hasAreaTarget}}
         <button data-action="placeTemplate">{{ localize "DND5E.ChatPlaceTemplate" }}</button>
         {{/if}}

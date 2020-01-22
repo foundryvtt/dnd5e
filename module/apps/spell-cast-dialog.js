@@ -57,20 +57,14 @@ export class SpellCastDialog extends Dialog {
       }
     }).filter(l => l.canCast && (lvl <= l.level));
 
-    // Determine whether the spell may be cast at all
-    const canCast = spellLevels.some(l => l.hasSlots);
-
-    // Determine if the user has Always Create Templates set
-    const alwaysTemplate = game.settings.get("dnd5e", "alwaysPlaceSpellTemplate");
-
     // Render the Spell casting template
     const html = await renderTemplate("systems/dnd5e/templates/apps/spell-cast.html", {
       item: item.data,
-      canCast,
+      canCast: spellLevels.some(l => l.hasSlots),
       canUpcast,
       consume: canUpcast,
       spellLevels,
-      alwaysTemplate
+      hasPlaceableTemplate: game.user.isTrusted && item.hasAreaTarget
     });
 
     // Create the Dialog and return as a Promise

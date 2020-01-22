@@ -18,15 +18,20 @@
         </div>
     </div>
 
-    {{#if canUpcast}}
     <div class="form-group">
+
+        {{#if canUpcast}}
         <label class="checkbox">Consume Spell Slot? <input type="checkbox" name="consume" {{checked consume}}/></label>
+        {{/if}}
+
+        {{#if hasPlaceableTemplate}}
+        <div class="form-group">
+            <label class="checkbox">{{ localize "DND5E.ChatPlaceTemplate" }}
+                <input type="checkbox" name="placeTemplate" checked/>
+            </label>
+        </div>
+        {{/if}}
+
     </div>
-    {{/if}}
     {{/unless}}
-    {{#if item.hasAreaTarget}}
-    <div class="form-group">
-        <label class="checkbox">{{ localize "DND5E.ChatPlaceTemplate" }}? <input type="checkbox" name="template" {{checked alwaysTemplate}}/></label>
-    </div>
-    {{/if}}
 </form>

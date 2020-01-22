@@ -82,6 +82,7 @@ export const registerSystemSettings = function() {
     default: false,
     type: Boolean
   });
+
   /**
    * Option to automatically collapse Item Card descriptions
    */

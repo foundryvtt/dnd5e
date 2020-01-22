@@ -1,5 +1,5 @@
 import { Dice5e } from "../dice.js";
-import { MeasuredTemplateSpell5e } from "../measured-template.js";
+import { AbilityTemplate } from "../pixi/ability-template.js";
 
 /**
  * Override and extend the basic :class:`Item` implementation
@@ -65,7 +65,8 @@ export class Item5e extends Item {
    * @type {boolean}
    */
   get hasTarget() {
-    return !!(this.data.data.target && !["none",""].includes(this.data.data.target.type));
+    const target = this.data.data.target;
+    return target && !["none",""].includes(target.type);
   }
 
   /* -------------------------------------------- */
@@ -75,8 +76,10 @@ export class Item5e extends Item {
    * @type {boolean}
    */
   get hasAreaTarget() {
-    return !!(this.data.data.target && ["cone","cube","cylinder","line","radius","sphere","square","wall"].includes(this.data.data.target.type));
+    const target = this.data.data.target;
+    return target && (target.type in CONFIG.DND5E.areaTargetTypes);
   }
+
   /* -------------------------------------------- */
   /*	Data Preparation														*/
   /* -------------------------------------------- */
@@ -199,7 +202,7 @@ export class Item5e extends Item {
       isVersatile: this.isVersatile,
       isSpell: this.data.type === "spell",
       hasSave: this.hasSave,
-      hasAreaTarget: game.user.isTrusted ? this.hasAreaTarget : null
+      hasAreaTarget: this.hasAreaTarget
     };
 
     // Render the chat card template
@@ -656,6 +659,7 @@ export class Item5e extends Item {
       title = `${this.name} - Tool Check`;
     rollData["ability"] = abl;
     rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
+    rollData["abilities"] = CONFIG.DND5E.abilities;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
@@ -741,11 +745,10 @@ export class Item5e extends Item {
 
     // Spell Template Creation
     else if ( action === "placeTemplate") {
-      const templateData = await MeasuredTemplateSpell5e.prepareData(item.data);
-      const spellTemplate = await new MeasuredTemplateSpell5e(templateData);
-    
-      spellTemplate.createPreview(event);
+      const template = AbilityTemplate.fromItem(item);
+      if ( template ) template.drawPreview(event);
     }
+
     // Re-enable the button
     button.disabled = false;
   }
