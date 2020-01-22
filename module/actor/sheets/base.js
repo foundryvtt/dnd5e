@@ -1,5 +1,6 @@
 import { ActorTraitSelector } from "../../apps/trait-selector.js";
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import { MeasuredTemplateSpell5e } from "../../measured-template.js"
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
@@ -593,5 +594,33 @@ export class ActorSheet5e extends ActorSheet {
     if (activeList.length) {
       this._scroll = activeList.prop('scrollTop');
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating a correctly-sized MeasuredTemplate based on a Spell item
+   * @param {Event} event   The click event which originated template create
+   * @private
+   */
+  async _onSpellTemplateCreate(event) {
+    event.preventDefault();
+    await this.minimize();
+    const button = event.currentTarget;
+
+    if (!button.dataset.itemId) {
+      return;
+    }
+
+    const spell = this.actor.getOwnedItem(button.dataset.itemId);
+
+    if (!spell) {
+      return;
+    }
+    
+    const templateData = await MeasuredTemplateSpell5e.prepareData(spell.data);
+    const spellTemplate = await new MeasuredTemplateSpell5e(templateData);
+    
+    spellTemplate.createPreview(event);
   }
 }

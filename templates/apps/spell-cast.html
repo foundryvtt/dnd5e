@@ -24,4 +24,9 @@
     </div>
     {{/if}}
     {{/unless}}
+    {{#if item.hasAreaTarget}}
+    <div class="form-group">
+        <label class="checkbox">{{ localize "DND5E.ChatPlaceTemplate" }}? <input type="checkbox" name="template" {{checked alwaysTemplate}}/></label>
+    </div>
+    {{/if}}
 </form>

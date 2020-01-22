@@ -25,6 +25,9 @@
             {{ localize "DND5E.Save" }} {{labels.save}}
         </button>{{/if}}
         {{#if data.formula}}<button data-action="formula">{{ localize "DND5E.ChatOtherFormula"}}</button>{{/if}}
+        {{#if hasAreaTarget}}
+        <button data-action="placeTemplate">{{ localize "DND5E.ChatPlaceTemplate" }}</button>
+        {{/if}}
     </div>
 
     <footer class="card-footer">

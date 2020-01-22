@@ -60,13 +60,17 @@ export class SpellCastDialog extends Dialog {
     // Determine whether the spell may be cast at all
     const canCast = spellLevels.some(l => l.hasSlots);
 
+    // Determine if the user has Always Create Templates set
+    const alwaysTemplate = game.settings.get("dnd5e", "alwaysPlaceSpellTemplate");
+
     // Render the Spell casting template
     const html = await renderTemplate("systems/dnd5e/templates/apps/spell-cast.html", {
       item: item.data,
       canCast,
       canUpcast,
       consume: canUpcast,
-      spellLevels
+      spellLevels,
+      alwaysTemplate
     });
 
     // Create the Dialog and return as a Promise
