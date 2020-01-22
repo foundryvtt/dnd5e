@@ -401,7 +401,8 @@
       "templates": ["itemDescription"],
       "levels": 1,
       "subclass": "",
-      "hitDice": "d6"
+      "hitDice": "d6",
+      "hitDiceUsed": 0
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
