@@ -1,0 +1,26 @@
+<form id="ability-use-form">
+    <p>Configure how you would like to use the <strong>{{item.name}}</strong> ability.</p>
+
+    <p type="note">
+    {{#if recharges}}
+    This ability uses a recharge mechanic and is currently <strong>{{#if isCharged}}charged{{else}}depleted{{/if}}</strong>.</p>
+    {{else}}
+    This ability has <strong>{{uses.value}} of {{uses.max}}</strong> available uses per {{perLabel}}.
+    {{/if}}
+    {{#unless canUse}}
+    You are not currently able to use this ability!
+    {{/unless}}
+    </p>
+
+    <div class="form-group">
+        <label class="checkbox">Consume Available Usage? <input type="checkbox" name="consume" {{checked consume}}/></label>
+
+        {{#if hasPlaceableTemplate}}
+        <div class="form-group">
+            <label class="checkbox">{{ localize "DND5E.ChatPlaceTemplate" }}
+                <input type="checkbox" name="placeTemplate" checked/>
+            </label>
+        </div>
+        {{/if}}
+    </div>
+</form>

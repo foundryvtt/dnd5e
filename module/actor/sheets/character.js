@@ -96,8 +96,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
       item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-      const unusable = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-      item.isCharged = !unusable;
+      item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
       item.hasTarget = !!item.data.target && !(["none",""].includes(item.data.target.type));
       if ( item.type === "spell" ) arr[1].push(item);
       else if ( item.type === "feat" ) arr[2].push(item);
