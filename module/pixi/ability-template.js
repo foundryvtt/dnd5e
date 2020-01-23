@@ -69,14 +69,19 @@ export class AbilityTemplate extends MeasuredTemplate {
    */
   activatePreviewListeners(initialLayer) {
     const handlers = {};
+    let moveTime = 0;
 
     // Update placement (mouse-move)
     handlers.mm = event => {
       event.stopPropagation();
+      let now = Date.now(); // Apply a 20ms throttle
+      if ( now - moveTime <= 20 ) return;
       const center = event.data.getLocalPosition(this.layer);
-      this.data.x = center.x;
-      this.data.y = center.y;
+      const snapped = canvas.grid.getSnappedPosition(center.x, center.y, 2);
+      this.data.x = snapped.x;
+      this.data.y = snapped.y;
       this.refresh();
+      moveTime = now;
     };
 
     // Cancel the workflow (right-click)

@@ -56,12 +56,13 @@ export class SpellCastDialog extends Dialog {
         hasSlots: (parseInt(l.max) > 0) && (parseInt(l.value) > 0)
       }
     }).filter(l => l.canCast && (lvl <= l.level));
+    const canCast = spellLevels.some(l => l.hasSlots);
 
     // Render the Spell casting template
     const html = await renderTemplate("systems/dnd5e/templates/apps/spell-cast.html", {
       item: item.data,
-      canCast: spellLevels.some(l => l.hasSlots),
-      canUpcast,
+      canCast: canCast,
+      canUpcast: canCast && canUpcast,
       consume: canUpcast,
       spellLevels,
       hasPlaceableTemplate: game.user.isTrusted && item.hasAreaTarget
