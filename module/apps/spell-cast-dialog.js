@@ -47,11 +47,11 @@ export class SpellCastDialog extends Dialog {
       if ( hasSlots ) lmax = i;
       return {
         level: i,
-        label: i > 0 ? `${CONFIG.DND5E.spellLevels[i]} (${l.value} Slots)` : CONFIG.DND5E.spellLevels[i],
-        canCast: canUpcast && (parseInt(l.max) > 0),
-        hasSlots: hasSlots
-      };
-    }).filter((l, i) => i <= lmax);
+        label: label,
+        canCast: parseInt(l.max) > 0,
+        hasSlots: (parseInt(l.max) > 0) && (parseInt(l.value) > 0)
+      }
+    }).filter(l => l.canCast && (lvl <= l.level));
     const canCast = spellLevels.some(l => l.hasSlots);
 
     // Render the Spell casting template
