@@ -1281,3 +1281,11 @@
   min-width: 600px;
   min-height: 658px;
 }
+.dnd5e.sheet.actor.npc .spellcasting-level {
+  flex: 1.5;
+  margin-right: 10px;
+}
+.dnd5e.sheet.actor.npc .spellcasting-level input {
+  flex: 0 0 32px;
+  text-align: center;
+}

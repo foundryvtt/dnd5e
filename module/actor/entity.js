@@ -37,7 +37,6 @@ export class Actor5e extends Actor {
     }
 
     // Skill modifiers
-    // Characteer All Skill Bonus added when rolled since not a fixed value.
     for (let skl of Object.values(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
@@ -66,11 +65,12 @@ export class Actor5e extends Actor {
     let level = ClassHelper.getLevelByClasses(actorData);
 
     // Level, experience, and proficiency
-    actorData.data.details.xp.max = this.getLevelExp(level || 1);
-    let prior = this.getLevelExp(level - 1 || 0),
-          req = actorData.data.details.xp.max - prior;
-    actorData.data.details.xp.pct = Math.clamped(0, Math.round((actorData.data.details.xp.value -prior) * 100 / req), 99.5);
-    actorData.data.attributes.prof = Math.floor((level + 7) / 4);
+    actorData.details.level.value = level;;
+    actorData.details.xp.max = this.getLevelExp(level || 1);
+    const prior = this.getLevelExp(level - 1 || 0);
+    const req = actorData.details.xp.max - prior;
+    actorData.details.xp.pct = Math.clamped(0, Math.round((actorData.details.xp.value -prior) * 100 / req), 99.5);
+    actorData.attributes.prof = Math.floor((actorData.details.level.value + 7) / 4);
   }
 
   /* -------------------------------------------- */
@@ -85,6 +85,11 @@ export class Actor5e extends Actor {
 
     // Proficiency
     data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
+
+    // Spellcaster Level
+    if ( data.attributes.spellcasting && !data.details.spellLevel ) {
+      data.details.spellLevel = Math.max(data.details.cr, 1);
+    }
   }
 
   /* -------------------------------------------- */
