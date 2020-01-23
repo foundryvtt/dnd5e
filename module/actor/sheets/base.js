@@ -38,6 +38,7 @@ export class ActorSheet5e extends ActorSheet {
       editable: this.isEditable,
       cssClass: isOwner ? "editable" : "locked",
       isCharacter: this.entity.data.type === "character",
+      isNPC: this.entity.data.type === "npc",
       config: CONFIG.DND5E,
     };
 
@@ -233,7 +234,6 @@ export class ActorSheet5e extends ActorSheet {
    * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
    */
   activateListeners(html) {
-    super.activateListeners(html);
 
     // Activate tabs
     new Tabs(html.find(".tabs"), {
@@ -253,6 +253,9 @@ export class ActorSheet5e extends ActorSheet {
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
+
+    // Relative updates for numeric fields
+    html.find('input[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
     /* -------------------------------------------- */
     /*  Abilities, Skills, and Traits
@@ -299,6 +302,9 @@ export class ActorSheet5e extends ActorSheet {
     // Item Rolling
     html.find('.item .item-image').click(event => this._onItemRoll(event));
     html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+
+    // Handle default listeners last so system listeners are triggered first
+    super.activateListeners(html);
   }
 
   /* -------------------------------------------- */
@@ -324,6 +330,24 @@ export class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs
+   * @param event
+   * @private
+   */
+  _onChangeInputDelta(event) {
+    const input = event.target;
+    const value = input.value;
+    if ( ["+", "-"].includes(value[0]) ) {
+      let delta = parseFloat(value);
+      input.value = getProperty(this.actor.data, input.name) + delta;
+    } else if ( value[0] === "=" ) {
+      input.value = value.slice(1);
+    }
+  }
+
   /* -------------------------------------------- */
 
   /**

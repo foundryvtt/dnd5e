@@ -448,7 +448,7 @@ export class Item5e extends Item {
     if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
     if ( (this.data.type === "spell") ) {
       if ( (itemData.scaling.mode === "cantrip") ) {
-        const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.cr;
+        const lvl = this.actor.data.type === "character" ? actorData.details.level.value : actorData.details.spellLevel;
         this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
       } else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
         this._scaleSpellDamage(parts, itemData.level, spellLevel, itemData.scaling.formula );

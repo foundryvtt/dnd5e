@@ -11,17 +11,16 @@
 import { DND5E } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
-import { _getInitiativeFormula, addChatMessageContextOptions } from "./module/combat.js";
+import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistance, getBarAttribute } from "./module/canvas.js";
-import { highlightCriticalSuccessFailure } from "./module/dice.js";
 import { Actor5e } from "./module/actor/entity.js";
 import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { Item5e } from "./module/item/entity.js";
 import { ItemSheet5e } from "./module/item/sheet.js";
 import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
 import { Dice5e } from "./module/dice.js";
+import * as chat from "./module/chat.js";
 import * as migrations from "./module/migration.js";
-
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -117,13 +116,16 @@ Hooks.on("canvasInit", function() {
 
 Hooks.on("renderChatMessage", (app, html, data) => {
 
+  // Display action buttons
+  chat.displayChatActionButtons(app, html, data);
+
   // Highlight critical success or failure die
-  highlightCriticalSuccessFailure(app, html, data);
+  chat.highlightCriticalSuccessFailure(app, html, data);
 
   // Optionally collapse the content
   if (game.settings.get("dnd5e", "autoCollapseItemCards")) html.find(".card-content").hide();
 });
-Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
+Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 
 

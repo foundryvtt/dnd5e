@@ -1,5 +1,12 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
+        {{#if isNPC}}
+        <div class="spellcasting-level flexrow">
+            <label><h3>Spellcasting Level</h3></label>
+            <input class="spellcasting-level" type="text" name="data.details.spellLevel"
+                   value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
+        </div>
+        {{/if}}
         <label><h3>Spellcasting Ability</h3></label>
         <select name="data.attributes.spellcasting" data-type="String">
             {{#select data.attributes.spellcasting}}
