@@ -221,8 +221,7 @@ export class Item5e extends Item {
 
     // For feature items, optionally show an ability usage dialog
     if (this.data.type === "feat") {
-      let configured = await this._rollFeat(configureDialog);
-      if ( configured === false ) return;
+      await this._rollFeat(configureDialog);
     }
 
     // Render the chat card template
@@ -256,33 +255,27 @@ export class Item5e extends Item {
   /**
    * Additional rolling steps when rolling a feat-type item
    * @private
-   * @return {boolean} whether the roll should be prevented
    */
   async _rollFeat(configureDialog) {
     if ( this.data.type !== "feat" ) throw new Error("Wrong Item type");
 
     // Configure whether to consume a limited use or to place a template
     const usesRecharge = !!this.data.data.recharge.value;
-    const uses = this.data.data.uses;
-    let usesCharges = !!uses.per && (uses.max > 0);
+    let consume = true;
     let placeTemplate = false;
-    let consume = usesRecharge || usesCharges;
 
     // Determine whether the feat uses charges
-    configureDialog = configureDialog && (consume || this.hasAreaTarget);
     if ( configureDialog ) {
-      const usage = await AbilityUseDialog.create(this);
-      if ( usage === null ) return false;
-      consume = Boolean(usage.get("consume"));
-      placeTemplate = Boolean(usage.get("placeTemplate"));
+      const usageData = await AbilityUseDialog.create(this);
+      consume = Boolean(usageData.get("consume"));
+      placeTemplate = Boolean(usageData.get("placeTemplate"));
     }
 
     // Update Item data
     const current = getProperty(this.data, "data.uses.value") || 0;
     if ( consume && usesRecharge ) {
       await this.update({"data.recharge.charged": false});
-    }
-    else if ( consume && usesCharges ) {
+    } else if ( consume ) {
       await this.update({"data.uses.value": Math.max(current - 1, 0)});
     }
 
@@ -292,7 +285,6 @@ export class Item5e extends Item {
       if ( template ) template.drawPreview(event);
       if ( this.owner && this.owner.sheet ) this.owner.sheet.minimize();
     }
-    return true;
   }
 
   /* -------------------------------------------- */

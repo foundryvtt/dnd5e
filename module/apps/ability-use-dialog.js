@@ -43,8 +43,7 @@ export class AbilityUseDialog extends Dialog {
     });
 
     // Create the Dialog and return as a Promise
-    return new Promise((resolve) => {
-      let formData = null;
+    return new Promise((resolve, reject) => {
       const dlg = new this(item, {
         title: `${item.name}: Ability Configuration`,
         content: html,
@@ -52,11 +51,11 @@ export class AbilityUseDialog extends Dialog {
           use: {
             icon: '<i class="fas fa-fist-raised"></i>',
             label: "Use Ability",
-            callback: html => formData = new FormData(html[0].querySelector("#ability-use-form"))
+            callback: html => resolve(new FormData(html[0].querySelector("#ability-use-form")))
           }
         },
         default: "use",
-        close: () => resolve(formData)
+        close: reject
       });
       dlg.render(true);
     });
