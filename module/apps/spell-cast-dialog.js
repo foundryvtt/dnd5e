@@ -24,12 +24,6 @@ export class SpellCastDialog extends Dialog {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  activateListeners(html) {
-    super.activateListeners(html);
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.

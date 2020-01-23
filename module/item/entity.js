@@ -1,4 +1,5 @@
 import { Dice5e } from "../dice.js";
+import { AbilityUseDialog } from "../apps/ability-use-dialog.js";
 import { AbilityTemplate } from "../pixi/ability-template.js";
 
 /**
@@ -186,7 +187,7 @@ export class Item5e extends Item {
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
    * @return {Promise}
    */
-  async roll() {
+  async roll({configureDialog=true}={}) {
 
     // Basic template rendering data
     const token = this.actor.token;
@@ -204,6 +205,11 @@ export class Item5e extends Item {
       hasSave: this.hasSave,
       hasAreaTarget: this.hasAreaTarget
     };
+
+    // For feature items, optionally show an ability usage dialog
+    if (this.data.type === "feat") {
+      await this._rollFeat(configureDialog);
+    }
 
     // Render the chat card template
     const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
@@ -229,6 +235,43 @@ export class Item5e extends Item {
 
     // Create the chat message
     return ChatMessage.create(chatData, {displaySheet: false});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Additional rolling steps when rolling a feat-type item
+   * @private
+   */
+  async _rollFeat(configureDialog) {
+    if ( this.data.type !== "feat" ) throw new Error("Wrong Item type");
+
+    // Configure whether to consume a limited use or to place a template
+    const usesRecharge = !!this.data.data.recharge.value;
+    let consume = true;
+    let placeTemplate = false;
+
+    // Determine whether the feat uses charges
+    if ( configureDialog ) {
+      const usageData = await AbilityUseDialog.create(this);
+      consume = Boolean(usageData.get("consume"));
+      placeTemplate = Boolean(usageData.get("placeTemplate"));
+    }
+
+    // Update Item data
+    const current = getProperty(this.data, "data.uses.value") || 0;
+    if ( consume && usesRecharge ) {
+      await this.update({"data.recharge.charged": false});
+    } else if ( consume ) {
+      await this.update({"data.uses.value": Math.max(current - 1, 0)});
+    }
+
+    // Maybe initiate template placement workflow
+    if ( this.hasAreaTarget && placeTemplate ) {
+      const template = AbilityTemplate.fromItem(this);
+      if ( template ) template.drawPreview(event);
+      if ( this.owner && this.owner.sheet ) this.owner.sheet.minimize();
+    }
   }
 
   /* -------------------------------------------- */
@@ -622,23 +665,12 @@ export class Item5e extends Item {
     const success = roll.total >= parseInt(data.recharge.value);
 
     // Display a Chat Message
-    const rollMode = game.settings.get("core", "rollMode");
-    const chatData = {
-      user: game.user._id,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    const promises = [roll.toMessage({
       flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
-      whisper: ( ["gmroll", "blindroll"].includes(rollMode) ) ? ChatMessage.getWhisperIDs("GM") : null,
-      blind: rollMode === "blindroll",
-      roll: roll,
-      speaker: {
-        actor: this.actor._id,
-        token: this.actor.token,
-        alias: this.actor.name
-      }
-    };
+      speaker: ChatMessage.getSpeaker({actor: this.actor, token: this.actor.token})
+    })];
 
     // Update the Item data
-    const promises = [ChatMessage.create(chatData)];
     if ( success ) promises.push(this.update({"data.recharge.charged": true}));
     return Promise.all(promises);
   }
