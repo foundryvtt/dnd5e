@@ -17,9 +17,9 @@
             </select>
         </div>
     </div>
+    {{/unless}}
 
     <div class="form-group">
-
         {{#if canUpcast}}
         <label class="checkbox">Consume Spell Slot? <input type="checkbox" name="consume" {{checked consume}}/></label>
         {{/if}}
@@ -31,7 +31,5 @@
             </label>
         </div>
         {{/if}}
-
     </div>
-    {{/unless}}
 </form>
