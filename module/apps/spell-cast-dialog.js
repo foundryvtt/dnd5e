@@ -40,16 +40,18 @@ export class SpellCastDialog extends Dialog {
     const canUpcast = (lvl > 0) && (id.preparation.mode === "prepared");
 
     // Determine the levels which are feasible
-    const spellLevels = Object.values(ad.spells).map((l, i) => {
-      if ( !canUpcast ) return { canCast: false }
-      const label = (lvl > 0) ? `${CONFIG.DND5E.spellLevels[i]} (${l.value} Slots)` : CONFIG.DND5E.spellLevels[i];
+    let lmax = 0;
+    const spellLevels = Array.fromRange(10).map(i => {
+      const l = ad.spells["spell"+i] || {max: 0};
+      let hasSlots = (parseInt(l.max) > 0) && (parseInt(l.value) > 0);
+      if ( hasSlots ) lmax = i;
       return {
         level: i,
-        label: label,
-        canCast: parseInt(l.max) > 0,
-        hasSlots: (parseInt(l.max) > 0) && (parseInt(l.value) > 0)
-      }
-    }).filter(l => l.canCast && (lvl <= l.level));
+        label: i > 0 ? `${CONFIG.DND5E.spellLevels[i]} (${l.value} Slots)` : CONFIG.DND5E.spellLevels[i],
+        canCast: canUpcast && (parseInt(l.max) > 0),
+        hasSlots: hasSlots
+      };
+    }).filter((l, i) => i <= lmax);
     const canCast = spellLevels.some(l => l.hasSlots);
 
     // Render the Spell casting template
