@@ -389,6 +389,7 @@ export class Actor5e extends Actor {
       critical: false,
       dialogOptions: {width: 350}
     }).then(roll => {
+      if ( !roll ) return;
       let hp = this.data.data.attributes.hp,
           dhp = Math.min(hp.max - hp.value, roll.total),
           hd = Math.max(this.data.data.attributes.hd.value - 1, 0);

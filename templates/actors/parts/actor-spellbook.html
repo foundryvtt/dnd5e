@@ -38,9 +38,9 @@
 
         <div class="spell-slots">
             {{#if section.usesSlots}}
-            <input type="text" name="data.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"/>
+            <input type="text" name="data.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0" data-dtype="Number"/>
             <span class="sep"> / </span>
-            <input type="text" name="data.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
+            <input type="text" name="data.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0" data-dtype="Number"/>
             {{ else }}
             <span class="spell-slots">{{{section.uses}}}</span>
             <span class="sep"> / </span>
