@@ -263,10 +263,13 @@ export class Item5e extends Item {
 
     // Configure whether to consume a limited use or to place a template
     const usesRecharge = !!this.data.data.recharge.value;
-    let consume = true;
+    const uses = this.data.data.uses;
+    let usesCharges = !!uses.per && (uses.max > 0);
     let placeTemplate = false;
+    let consume = usesRecharge || usesCharges;
 
     // Determine whether the feat uses charges
+    configureDialog = configureDialog && (consume || this.hasAreaTarget);
     if ( configureDialog ) {
       const usage = await AbilityUseDialog.create(this);
       if ( usage === null ) return false;
@@ -278,7 +281,8 @@ export class Item5e extends Item {
     const current = getProperty(this.data, "data.uses.value") || 0;
     if ( consume && usesRecharge ) {
       await this.update({"data.recharge.charged": false});
-    } else if ( consume ) {
+    }
+    else if ( consume && usesCharges ) {
       await this.update({"data.uses.value": Math.max(current - 1, 0)});
     }
 
