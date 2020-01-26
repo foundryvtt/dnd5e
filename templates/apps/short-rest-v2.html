@@ -5,8 +5,8 @@
         <div class="form-fields">
             {{#if hdRemaining}}
             <select name="hd">
-                {{#each this.hdRemaining}}
-                <option value="{{this}}">{{this}}</option>
+                {{#each this.displayHitDice}}
+                <option value="{{this.hitDice}}" data-featureId="{{this.featureId}}">{{this.hitDice}} ({{this.className}})</option>
                 {{/each}}
             </select>
             <button id="roll-hd"><i class="fas fa-dice-d20"></i> Roll</button>

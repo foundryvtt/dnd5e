@@ -26,51 +26,16 @@ export class ClassHelper {
   }
 
   /**
-   * Loads a list of remaining hit dice based on the characters Class Features/Levels combined with "hdUsed"
-   * @param {Object<ActorSheet5eCharacter>} actorData 
-   * @returns {Array} 
-   */
-   static hitDiceRemaining = function(actorData){
-    let hdUsed = this.hitDiceUsed(actorData);
-    let hdAvailable = this.hitDiceAvailable(actorData);
-
-    hdUsed.forEach(element => {
-      var index = hdAvailable.indexOf(element);
- 
-      if (index > -1) {
-        hdAvailable.splice(index, 1);
-      }
-    });
-
-    return hdAvailable;
-  }
-
-  /**
-   * Load the list of hit dice that have already been used.
-   * @param {Object<ActorSheet5eCharacter>} actorData
-   * @returns {Array}
-   */
-
-  static hitDiceUsed = function(actorData){
-    if (!Array.isArray(actorData.data.attributes.hdUsed)) {
-      // Field has not been initialized, let's do this now
-      actorData.data.attributes.hdUsed = [];
-    }
-
-    return actorData.data.attributes.hdUsed;
-  }
-
-  /**
    * 
    * @param {Object<ActorSheet5eCharacter>} actorData 
-   * @returns {Array}   strings that should be in dice format
+   * @returns {Array<ClassHitDice>}   list of details for the hit dice of each class on the actor
    */
-  static hitDiceAvailable = function(actorData) {
+  static listClassHitDice = function(actorData) {
     if (!actorData || !actorData.items) {
       return [];
     }
 
-    let classes = actorData.items.filter(item => item.type === "class");
+    let classes = this.listClasses(actorData);
 
     if (classes.length == 0) { return []; }
 
@@ -78,11 +43,62 @@ export class ClassHelper {
 
     // for each class with levels, push an appropriate amount of HD into the array
     classes.forEach(element => {
-      for (let i = 0; i < element.data.levels; i++) {
-        hd.push(element.data.hitDice)
-      }
+      let featureId = element._id;
+      let className = element.name;
+      let classLevels = element.data.levels ? Number(element.data.levels) : 0;
+      let hitDice = element.data.hitDice;
+      let hitDiceUsed = element.data.hitDiceUsed ? Number(element.data.hitDiceUsed) : 0;
+
+      hd.push(new ClassHitDice(featureId, className, classLevels, hitDice, hitDiceUsed));
     });
 
     return hd;
+  }
+
+  static hitDiceRemainingCount = function(actorData) {
+    let list = this.listClassHitDice(actorData);
+
+    return list.reduce((totalLevels, item) => {
+      if (item && item.level > 0 && item.hitDiceUsed >= 0) {
+        return Number(totalLevels) + Number(item.level) - Number(item.hitDiceUsed);
+      }
+
+      return totalLevels;
+    }, []);
+  }
+
+  static listClasses = function(actorData) {
+    let classes = actorData.items.filter(item => item.type === "class")
+    return classes;
+  }
+}
+
+export class ClassHitDice {
+  constructor(featureId, className, level, hitDice, hitDiceUsed){
+    this._featureId = featureId;
+    this._className = className;
+    this._level = level;
+    this._hitDice = hitDice;
+    this._hitDiceUsed = hitDiceUsed;
+  }
+
+  get featureId() {
+    return this._featureId;
+  }
+
+  get className() {
+    return this._className;
+  }
+
+  get level() {
+    return this._level;
+  }
+
+  get hitDice() {
+    return this._hitDice;
+  }
+  
+  get hitDiceUsed(){
+    return this._hitDiceUsed;
   }
 }

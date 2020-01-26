@@ -35,8 +35,9 @@ export class ShortRestV2Dialog extends Dialog {
   async _onRollHitDie(event) {
     event.preventDefault();
     const btn = event.currentTarget;
-    let fml = btn.form.hd.value;
-    let rollCompleted = await this.actor.rollSpecificHitDie(fml);
+    let formula = btn.form.hd.value;
+    let featureId = btn.form.hd.selectedOptions[0].dataset.featureid;
+    let rollCompleted = await this.actor.rollSpecificHitDie(formula, featureId);
 
     if (rollCompleted) {
       // remove the die we just clicked
@@ -61,14 +62,30 @@ export class ShortRestV2Dialog extends Dialog {
   static async shortRestDialog({actor, canRoll=true}={}) {
     let actorType = typeof(actor);
 
-    let hdAvailable = ClassHelper.hitDiceAvailable(actor.data);
-    let hdRemaining = ClassHelper.hitDiceRemaining(actor.data);
-    let hdUsed =  actor.data.data.attributes.hdUsed !== null ? actor.data.data.attributes.hdUsed : [];
+    let classHitDice = ClassHelper.listClassHitDice(actor.data);
+
+    let displayHitDice = [];
+    classHitDice.forEach(item => {
+      if (item.level > 0 && item.hitDiceUsed >= 0){
+        for (let i = 0; i < item.level - item.hitDiceUsed; i++){
+          displayHitDice.push(
+            {
+              "featureId": item.featureId,
+              "className": item.className,
+              "hitDice": item.hitDice
+            }
+          );
+        }
+      }
+    });
+
+    let hdRemaining = ClassHelper.hitDiceRemainingCount(actor.data);
+    // let hdAvailable = ClassHelper.hitDiceAvailable(actor.data);
+    // let hdUsed =  actor.data.data.attributes.hdUsed !== null ? actor.data.data.attributes.hdUsed : [];
 
     const html = await renderTemplate("systems/dnd5e/templates/apps/short-rest-v2.html", {
-      "hdAvailable": hdAvailable,
       "hdRemaining": hdRemaining,
-      "hdUsed": hdUsed
+      "displayHitDice": displayHitDice
     });
     return new Promise(resolve => {
       const dlg = new this(actor, {

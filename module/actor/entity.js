@@ -399,19 +399,20 @@ export class Actor5e extends Actor {
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
    * Mark this die as "used" from the players pool of hit die.
    * @param {String} formula    The hit die type to roll
+   * @param {String} featureId  The featureId of the class we are rolling
    */
-  rollSpecificHitDie(formula) {
+  async rollSpecificHitDie(formula, featureId) {
 
     // Prepare roll data
     let parts = [formula, "@abilities.con.mod"],
         title = `Roll Hit Die`,
         rollData = duplicate(this.data.data);
+    rollData.featureId = featureId;
 
-
-    let hdRemaining = ClassHelper.hitDiceRemaining(this.data);
+    let hitDiceRemainingCount = ClassHelper.hitDiceRemainingCount(this.data);
 
     // Confirm the actor has HD available
-    if ( hdRemaining.length === 0 ) throw new Error(`${this.name} has no Hit Dice remaining!`);
+    if ( hitDiceRemainingCount === 0 ) throw new Error(`${this.name} has no Hit Dice remaining!`);
 
     // Call the roll helper utility
     return Dice5e.damageRoll({
@@ -424,11 +425,26 @@ export class Actor5e extends Actor {
       dialogOptions: {width: 350}
     }).then(roll => {
       let hp = this.data.data.attributes.hp,
-          dhp = Math.min(hp.max - hp.value, roll.total);
-      this.update({"data.attributes.hp.value": hp.value + dhp});
-      let newHdUsed = duplicate(this.data.data.attributes.hdUsed);
-      newHdUsed.push(formula);
-      this.update({"data.attributes.hdUsed": newHdUsed});
+          dhp = Math.min(hp.max - hp.value, roll.total),
+          updateData = {};
+      
+      updateData["data.attributes.hp.value"] = hp.value + dhp;
+
+      this.update(updateData);
+
+      let activeClass = this.data.items.filter(item => item.type === "class" && item._id === roll.data.featureId);
+      
+      if (activeClass.length == 1) {
+        let newHdUsed = Number(activeClass[0].data.hitDiceUsed) + 1;
+        let id = activeClass[0]._id;
+
+        let updateClass = [{
+          "_id": id,
+          "data.hitDiceUsed": newHdUsed
+        }];
+
+        this.updateManyEmbeddedEntities("OwnedItem", updateClass);
+      }
 
       return true;
     })
@@ -505,7 +521,7 @@ export class Actor5e extends Actor {
     const data = this.data.data;
 
     // Take note of the initial hit points and hit dice the Actor has
-    const hd0 = ClassHelper.hitDiceRemaining(this.data).length;
+    const hd0 = ClassHelper.hitDiceRemainingCount(this.data);
     const hp0 = data.attributes.hp.value;
 
     // Display a Dialog for rolling hit dice
@@ -515,7 +531,7 @@ export class Actor5e extends Actor {
     }
 
     // Note the change in HP and HD which occurred
-    const dhd = ClassHelper.hitDiceRemaining(this.data).length - hd0;
+    const dhd = ClassHelper.hitDiceRemainingCount(this.data) - hd0;
     const dhp = data.attributes.hp.value - hp0;
 
     // Recover character resources
@@ -535,7 +551,7 @@ export class Actor5e extends Actor {
         "data.uses.value": item.data.data.uses.max
       }
     });
-    await this.updateManyOwnedItem(updateItems);
+    await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
@@ -582,16 +598,43 @@ export class Actor5e extends Actor {
     updateData["data.attributes.hp.value"] = data.attributes.hp.max;
 
     // Recover HD to one-half level (rounded up)
-    // Recover them in the order they were used
+    let hitDiceRecovery = [];
+    let dhd = 0;
     let level = ClassHelper.getLevelByClasses(this.data);
-    let recover_hd = Math.max(Math.floor(level/2), 1);
-    let hitDiceUsed = duplicate(ClassHelper.hitDiceUsed(this.data));
-    let dhd = Math.min(recover_hd, level - hitDiceUsed.length);
+    let numberOfHitDiceToRecover = Math.max(Math.ceil(level / 2), 1);
+    let classList = ClassHelper.listClasses(this.data);
+    
+    classList.forEach(item => {
 
-    for (let i = 0; i < recover_hd; i++) {
-      hitDiceUsed.shift();
-    }
-    updateData["data.attributes.hdUsed"] = hitDiceUsed;
+      if (numberOfHitDiceToRecover <= 0){
+        return;
+      }
+
+      var hdUsed = item.data.hitDiceUsed;
+
+      // We have enough remaining HD to recover everything
+      if (numberOfHitDiceToRecover >= hdUsed){
+        hitDiceRecovery.push({
+          "_id": item._id,
+          "data.hitDiceUsed": 0
+        });
+
+        dhd += hdUsed;
+        numberOfHitDiceToRecover -= hdUsed;
+      }
+      // We don't have enough remaining HD, just recover what we can.
+      else {
+        let newHdUsed = hdUsed - numberOfHitDiceToRecover;
+        hitDiceRecovery.push({
+          "_id": item._id,
+          "data.hitDiceUsed": newHdUsed
+        });
+
+        dhd += numberOfHitDiceToRecover;
+        numberOfHitDiceToRecover = 0
+      }
+
+    });
 
     // Recover character resources
     for ( let [k, r] of Object.entries(data.resources) ) {
@@ -617,7 +660,8 @@ export class Actor5e extends Actor {
 
     // Perform the updates
     await this.update(updateData);
-    await this.updateManyOwnedItem(updateItems);
+    await this.updateManyEmbeddedEntities("OwnedItem", hitDiceRecovery);
+    await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
