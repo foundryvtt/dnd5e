@@ -267,7 +267,7 @@ DND5E.targetTypes = {
 DND5E.areaTargetTypes = {
   cone: "cone",
   cube: "rect",
-  cylinder: "cone",
+  cylinder: "circle",
   line: "ray",
   radius: "circle",
   sphere: "circle",
