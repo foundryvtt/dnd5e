@@ -107,10 +107,11 @@ export class AbilityTemplate extends MeasuredTemplate {
       canvas.scene.createEmbeddedEntity("MeasuredTemplate", this.data);
     };
 
-    // Rotate the template (mouse-wheel)
+    // Rotate the template by 3 degree increments (mouse-wheel)
     handlers.mw = event => {
+      if ( event.ctrlKey ) event.preventDefault(); // Avoid zooming the browser window
       event.stopPropagation();
-      this.data.direction += event.deltaY * 0.1;
+      this.data.direction += (event.deltaY * (Math.PI / 60));
       this.refresh();
     };
 
