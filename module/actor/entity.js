@@ -1,8 +1,10 @@
 import { Dice5e } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
+import { ShortRestV2Dialog } from "../apps/short-rest-v2.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AbilityTemplate } from "../pixi/ability-template.js";
 
+import { ClassHelper } from "./class-helper.js";
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
@@ -21,7 +23,7 @@ export class Actor5e extends Actor {
     const flags = actorData.flags;
 
     // Prepare Character data
-    if ( actorData.type === "character" ) this._prepareCharacterData(data);
+    if ( actorData.type === "character" ) this._prepareCharacterData(actorData);
     else if ( actorData.type === "npc" ) this._prepareNPCData(data);
 
     // Ranged Weapon/Melee Weapon/Ranged Spell/Melee Spell attack bonuses are added when rolled since they are not a fixed value.
@@ -58,15 +60,17 @@ export class Actor5e extends Actor {
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(data) {
+  _prepareCharacterData(actorData) {
+
+    let level = ClassHelper.getLevelByClasses(actorData);
 
     // Level, experience, and proficiency
-    data.details.level.value = parseInt(data.details.level.value);
-    data.details.xp.max = this.getLevelExp(data.details.level.value || 1);
-    const prior = this.getLevelExp(data.details.level.value - 1 || 0);
-    const req = data.details.xp.max - prior;
-    data.details.xp.pct = Math.clamped(0, Math.round((data.details.xp.value -prior) * 100 / req), 99.5);
-    data.attributes.prof = Math.floor((data.details.level.value + 7) / 4);
+    actorData.data.details.level.value = level;;
+    actorData.data.details.xp.max = this.getLevelExp(level || 1);
+    const prior = this.getLevelExp(level - 1 || 0);
+    const req = actorData.data.details.xp.max - prior;
+    actorData.data.details.xp.pct = Math.clamped(0, Math.round((actorData.data.details.xp.value -prior) * 100 / req), 99.5);
+    actorData.data.attributes.prof = Math.floor((actorData.data.details.level.value + 7) / 4);
   }
 
   /* -------------------------------------------- */
@@ -397,6 +401,61 @@ export class Actor5e extends Actor {
     })
   }
 
+  /**
+   * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
+   * Mark this die as "used" from the players pool of hit die.
+   * @param {String} formula    The hit die type to roll
+   * @param {String} featureId  The featureId of the class we are rolling
+   */
+  async rollSpecificHitDie(formula, featureId) {
+
+    // Prepare roll data
+    let parts = [formula, "@abilities.con.mod"],
+        title = `Roll Hit Die`,
+        rollData = duplicate(this.data.data);
+    rollData.featureId = featureId;
+
+    let hitDiceRemainingCount = ClassHelper.hitDiceRemainingCount(this.data);
+
+    // Confirm the actor has HD available
+    if ( hitDiceRemainingCount === 0 ) throw new Error(`${this.name} has no Hit Dice remaining!`);
+
+    // Call the roll helper utility
+    return Dice5e.damageRoll({
+      event: new Event("hitDie"),
+      parts: parts,
+      data: rollData,
+      title: title,
+      speaker: ChatMessage.getSpeaker({actor: this}),
+      critical: false,
+      dialogOptions: {width: 350}
+    }).then(roll => {
+      let hp = this.data.data.attributes.hp,
+          dhp = Math.min(hp.max - hp.value, roll.total),
+          updateData = {};
+      
+      updateData["data.attributes.hp.value"] = hp.value + dhp;
+
+      this.update(updateData);
+
+      let activeClass = this.data.items.filter(item => item.type === "class" && item._id === roll.data.featureId);
+      
+      if (activeClass.length == 1) {
+        let newHdUsed = Number(activeClass[0].data.hitDiceUsed) + 1;
+        let id = activeClass[0]._id;
+
+        let updateClass = [{
+          "_id": id,
+          "data.hitDiceUsed": newHdUsed
+        }];
+
+        this.updateManyEmbeddedEntities("OwnedItem", updateClass);
+      }
+
+      return true;
+    })
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -456,6 +515,178 @@ export class Actor5e extends Actor {
       updateItems: updateItems
     }
   }
+
+  /**
+   * Cause this Actor to take a Short Rest, present Hit Dice based on the Class levels
+   * During a Short Rest resources and limited item uses may be recovered
+   * @param {boolean} dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
+   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @return {Promise}        A Promise which resolves once the short rest workflow has completed
+   */
+  async shortRestV2({dialog=true, chat=true}={}) {
+    const data = this.data.data;
+
+    // Take note of the initial hit points and hit dice the Actor has
+    const hd0 = ClassHelper.hitDiceRemainingCount(this.data);
+    const hp0 = data.attributes.hp.value;
+
+    // Display a Dialog for rolling hit dice
+    if ( dialog ) {
+      const rested = await ShortRestV2Dialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      if ( !rested ) return;
+    }
+
+    // Note the change in HP and HD which occurred
+    const dhd = ClassHelper.hitDiceRemainingCount(this.data) - hd0;
+    const dhp = data.attributes.hp.value - hp0;
+
+    // Recover character resources
+    const updateData = {};
+    for ( let [k, r] of Object.entries(data.resources) ) {
+      if ( r.max && r.sr ) {
+        updateData[`data.resources.${k}.value`] = r.max;
+      }
+    }
+    await this.update(updateData);
+
+    // Recover item uses
+    const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
+    const updateItems = items.map(item => {
+      return {
+        "id": item.data.id,
+        "data.uses.value": item.data.data.uses.max
+      }
+    });
+    await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
+
+    // Display a Chat Message summarizing the rest effects
+    if ( chat ) {
+      let msg = `${this.name} takes a short rest spending ${-dhd} Hit Dice to recover ${dhp} Hit Points.`;
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: {actor: this, alias: this.name},
+        content: msg,
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER
+      });
+    }
+
+    // Return data summarizing the rest effects
+    return {
+      dhd: dhd,
+      dhp: dhp,
+      updateData: updateData,
+      updateItems: updateItems
+    }
+  }
+
+  /**
+   * Take a long rest, recovering HP, HD, resources, and spell slots
+   * Base the HD on their class levels
+   * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
+   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @return {Promise}        A Promise which resolves once the long rest workflow has completed
+   */
+  async longRestV2({dialog=true, chat=true}={}) {
+    const data = this.data.data;
+    const updateData = {};
+
+    // Maybe present a confirmation dialog
+    if ( dialog ) {
+      try {
+        await ShortRestDialog.longRestDialog(this);
+      } catch(err) {
+        return;
+      }
+    }
+
+    // Recover HP to full
+    let dhp = data.attributes.hp.max - data.attributes.hp.value;
+    updateData["data.attributes.hp.value"] = data.attributes.hp.max;
+
+    // Recover HD to one-half level (rounded up)
+    let hitDiceRecovery = [];
+    let dhd = 0;
+    let level = ClassHelper.getLevelByClasses(this.data);
+    let numberOfHitDiceToRecover = Math.max(Math.ceil(level / 2), 1);
+    let classList = ClassHelper.listClasses(this.data);
+    
+    classList.forEach(item => {
+
+      if (numberOfHitDiceToRecover <= 0){
+        return;
+      }
+
+      var hdUsed = item.data.hitDiceUsed;
+
+      // We have enough remaining HD to recover everything
+      if (numberOfHitDiceToRecover >= hdUsed){
+        hitDiceRecovery.push({
+          "_id": item._id,
+          "data.hitDiceUsed": 0
+        });
+
+        dhd += hdUsed;
+        numberOfHitDiceToRecover -= hdUsed;
+      }
+      // We don't have enough remaining HD, just recover what we can.
+      else {
+        let newHdUsed = hdUsed - numberOfHitDiceToRecover;
+        hitDiceRecovery.push({
+          "_id": item._id,
+          "data.hitDiceUsed": newHdUsed
+        });
+
+        dhd += numberOfHitDiceToRecover;
+        numberOfHitDiceToRecover = 0
+      }
+
+    });
+
+    // Recover character resources
+    for ( let [k, r] of Object.entries(data.resources) ) {
+      if ( r.max && (r.sr || r.lr) ) {
+        updateData[`data.resources.${k}.value`] = r.max;
+      }
+    }
+
+    // Recover spell slots
+    for ( let [k, v] of Object.entries(data.spells) ) {
+      if ( !v.max ) continue;
+      updateData[`data.spells.${k}.value`] = v.max;
+    }
+
+    // Recover limited item uses
+    const items = this.items.filter(i => i.data.data.uses && ["sr", "lr"].includes(i.data.data.uses.per));
+    const updateItems = items.map(item => {
+      return {
+        "id": item.data.id,
+        "data.uses.value": item.data.data.uses.max
+      }
+    });
+
+    // Perform the updates
+    await this.update(updateData);
+    await this.updateManyEmbeddedEntities("OwnedItem", hitDiceRecovery);
+    await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
+
+    // Display a Chat Message summarizing the rest effects
+    if ( chat ) {
+      ChatMessage.create({
+        user: game.user._id,
+        speaker: {actor: this, alias: this.name},
+        content: `${this.name} takes a long rest and recovers ${dhp} Hit Points and ${dhd} Hit Dice.`
+      });
+    }
+
+    // Return data summarizing the rest effects
+    return {
+      dhd: dhd,
+      dhp: dhp,
+      updateData: updateData,
+      updateItems: updateItems
+    }
+  }
+
 
   /* -------------------------------------------- */
 
