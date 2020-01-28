@@ -57,18 +57,26 @@
 
             {{!-- Class Hit Dice --}}
             <div class="form-group">
-                <label>Hit Dice</label>
+                <label>{{localize "DND5E.HitDice"}}</label>
                 <div class="form-fields">
-                    <input type="text" placeholder="d6" name="data.hitDice" value="{{data.hitDice}}"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Hit Dice Used</label>
-                <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.hitDiceUsed" value="{{data.hitDiceUsed}}"/>
+                    <select name="data.hitDice">
+                        {{#select data.hitDice}}
+                        {{#each config.hitDieTypes}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
                 </div>
             </div>
 
+            <div class="form-group">
+                <label>{{localize "DND5E.HitDiceUsed"}}</label>
+                <div class="form-fields">
+                    <input type="text" placeholder="0" name="data.hitDiceUsed" value="{{data.hitDiceUsed}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Granted Abilities (TODO) --}}
             <h3 class="form-header">Granted Abilities</h3>
             <p class="notification warning">This is still to-do</p>
         </div>

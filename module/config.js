@@ -303,6 +303,17 @@ DND5E.healingTypes = {
   "temphp": "DND5E.HealingTemp"
 };
 
+
+/* -------------------------------------------- */
+
+
+/**
+ * Enumerate the denominations of hit dice which can apply to classes in the D&D5E system
+ * @type {Array.<string>}
+ */
+DND5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
+
+
 /* -------------------------------------------- */
 
 /**

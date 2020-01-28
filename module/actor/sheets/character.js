@@ -1,5 +1,4 @@
 import { ActorSheet5e } from "./base.js";
-import { ClassHelper } from "../class-helper.js";
 
 /**
  * An Actor sheet for player character type actors in the D&D5E system.
@@ -58,15 +57,6 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Experience Tracking
     sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
-
-    // Automate Player Level & HD based on Class Features
-    sheetData["useClassLevels"] = game.settings.get("dnd5e", "useClassLevels");
-    
-    if (sheetData["useClassLevels"])
-    {
-      sheetData.data.calculatedLevel = ClassHelper.getLevelByClasses(sheetData.actor); // this._totalClassLevels(sheetData.items);
-      sheetData["hdRemainingCount"] = ClassHelper.hitDiceRemainingCount(sheetData);
-    }
 
     // Return data for rendering
     return sheetData;
@@ -212,9 +202,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
-    html.find('.short-rest-v2').click(this._onShortRestV2.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
-    html.find('.long-rest-v2').click(this._onLongRestV2.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -244,18 +232,6 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     return this.actor.shortRest();
   }
 
-  /**
-   * Take a short rest with HD, calling the relevant function on the Actor instance
-   * @param {Event} event   The triggering click event
-   * @private
-   */
-  async _onShortRestV2(event) {
-    event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.shortRestV2();
-  }
-
-
   /* -------------------------------------------- */
 
   /**
@@ -267,17 +243,6 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
-  }
-
-  /**
-   * Take a long rest with HD, calling the relevant function on the Actor instance
-   * @param {Event} event   The triggering click event
-   * @private
-   */
-  async _onLongRestV2(event) {
-    event.preventDefault();
-    await this._onSubmit(event);
-    return this.actor.longRestV2();
   }
 
   /* -------------------------------------------- */

@@ -1,15 +1,26 @@
-<form id="short-rest-hd">
+<form id="short-rest-hd" class="dialog-content" onsubmit="event.preventDefault();">
     <p>Take a short rest? On a short rest you may spend remaining Hit Dice and recover primary or secondary resources.</p>
     <div class="form-group">
         <label>Roll Hit Die</label>
         <div class="form-fields">
             <select name="hd">
-                <option value="d6">d6</option>
-                <option value="d8">d8</option>
-                <option value="d10">d10</option>
-                <option value="d12">d12</option>
+                {{#select denomination}}
+                {{#each availableHD as |num denom|}}
+                <option value="{{denom}}">{{denom}} ({{num}} available)</option>
+                {{/each}}
+                {{/select}}
             </select>
-            <button id="roll-hd"><i class="fas fa-dice-d20"></i> Roll</button>
+            <button id="roll-hd" {{#unless canRoll}}disabled{{/unless}}>
+                <i class="fas fa-dice-d20"></i> Roll
+            </button>
         </div>
+    </div>
+    <div class="dialog-buttons">
+        {{#each buttons as |button id|}}
+        <button class="dialog-button" data-button="{{id}}">
+            {{{button.icon}}}
+            {{{button.label}}}
+        </button>
+        {{/each}}
     </div>
 </form>

@@ -10,27 +10,18 @@
             </h1>
 
             <div class="charlevel">
-                {{#if useClassLevels}}
                 <div class="level {{#if disableExperience}}noxp{{/if}}">
-                    <label>Level </label>
-                    <input type="text" value="{{data.calculatedLevel}}" disabled/>
+                    <label>Level {{data.details.level}}</label>
                 </div>
-                {{else}}
-                <div class="level {{#if disableExperience}}noxp{{/if}}">
-                    <label>Level </label>
-                    <input name="data.details.level.value" type="text" value="{{data.details.level.value}}"
-                           data-dtype="Number" placeholder="1"/>
-                </div>
-                {{/if}}
                 {{#unless disableExperience}}
-                    <div class="experience">
-                        <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
-                               data-dtype="Number" placeholder="0"/>
-                        <span class="max"> / {{data.details.xp.max}}</span>
-                    </div>
-                    <div class="xpbar">
-                        <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
-                    </div>
+                <div class="experience">
+                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
+                           data-dtype="Number" placeholder="0"/>
+                    <span class="max"> / {{data.details.xp.max}}</span>
+                </div>
+                <div class="xpbar">
+                    <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
+                </div>
                 {{/unless}}
             </div>
 
@@ -92,28 +83,12 @@
 
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitDice" }}</h4>
-                    {{#if useClassLevels}}
                     <div class="attribute-value multiple">
-                        <input type="text" value="{{hdRemainingCount}}" placeholder="1" disabled/>
-                        <span class="sep"> / </span>
-                        <input type="text" value="{{data.calculatedLevel}}" disabled/>
+                        <label class="hit-dice">{{data.attributes.hd}} / {{data.details.level}}</label>
                     </div>
-                    {{else}}
-                    <div class="attribute-value multiple">
-                        <input name="data.attributes.hd.value" type="text" value="{{data.attributes.hd.value}}"
-                            placeholder="1" data-dtype="Number"/>
-                        <span class="sep"> / </span>
-                        <input type="text" value="{{data.details.level.value}}" disabled/>
-                    </div>
-                    {{/if}}
                     <footer class="attribute-footer">
-                        {{#if useClassLevels}}
-                        <a class="rest short-rest-v2">{{ localize "DND5E.RestS" }}</a>
-                        <a class="rest long-rest-v2">{{ localize "DND5E.RestL" }}</a>
-                        {{else}}
                         <a class="rest short-rest">{{ localize "DND5E.RestS" }}</a>
                         <a class="rest long-rest">{{ localize "DND5E.RestL" }}</a>
-                        {{/if}}
                     </footer>
                 </li>
             </ul>

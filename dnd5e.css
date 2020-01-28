@@ -888,11 +888,11 @@
   font-size: 18px;
 }
 .dnd5e.sheet.item .sheet-body {
-  overflow: hidden scroll;
+  overflow: hidden;
 }
 .dnd5e.sheet.item .sheet-body .tab {
   padding: 0 5px;
-  overflow: hidden;
+  overflow: hidden auto;
 }
 .dnd5e.sheet.item .sheet-body .item-properties {
   flex: 0 0 120px;
@@ -1170,6 +1170,9 @@
   background: rgba(0, 0, 0, 0.05);
   padding: 1px 3px;
   margin: 0 6px;
+}
+.dnd5e.sheet.actor.character .sheet-header .attributes .hit-dice {
+  font-size: 24px;
 }
 .dnd5e.sheet.actor.character .attributes .resource .attribute-name {
   margin: 0 8px;

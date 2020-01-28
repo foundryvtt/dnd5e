@@ -228,10 +228,6 @@
     "character": {
       "templates": ["common"],
       "attributes": {
-        "hd": {
-          "value": 1,
-          "max": 0
-        },
         "death": {
           "success": 0,
           "failure": 0
@@ -241,11 +237,6 @@
       },
       "details": {
         "background": "",
-        "level": {
-          "value": 1,
-          "min": 1,
-          "max": 20
-        },
         "xp": {
           "value": 0,
           "min": 0,
@@ -254,7 +245,13 @@
         "trait": "",
         "ideal": "",
         "bond": "",
-        "flaw": ""
+        "flaw": "",
+        "level": {
+          "_deprecated": true
+        },
+        "hd": {
+          "_deprecated": true
+        }
       },
       "resources": {
         "primary": {

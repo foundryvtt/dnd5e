@@ -97,16 +97,4 @@ export const registerSystemSettings = function() {
       ui.chat.render();
     }
   });
-  
-  /**
-   * Option to enforce class levels for the top level and the calculation of hit dice.
-   */
-  game.settings.register("dnd5e", "useClassLevels", {
-    name: "SETTINGS.5eClassLevelsN",
-    hint: "SETTINGS.5eClassLevelsH",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-  });
 };

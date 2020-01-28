@@ -5,21 +5,57 @@
 export class ShortRestDialog extends Dialog {
   constructor(actor, dialogData={}, options={}) {
     super(dialogData, options);
-    this.options.classes = ["dnd5e", "dialog"];
 
     /**
      * Store a reference to the Actor entity which is resting
      * @type {Actor}
      */
     this.actor = actor;
+
+    /**
+     * Track the most recently used HD denomination for re-rendering the form
+     * @type {string}
+     */
+    this._denom = null;
   }
 
   /* -------------------------------------------- */
 
+  /** @override */
+	static get defaultOptions() {
+	  return mergeObject(super.defaultOptions, {
+	    template: "systems/dnd5e/templates/apps/short-rest.html",
+      classes: ["dnd5e", "dialog"]
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getData() {
+    const data = super.getData();
+    data.availableHD = this.actor.data.items.reduce((hd, item) => {
+      if ( item.type === "class" ) {
+        const d = item.data;
+        const denom = d.hitDice || "d6";
+        const available = parseInt(d.levels || 1) - parseInt(d.hitDiceUsed || 0);
+        hd[denom] = denom in hd ? hd[denom] + available : available;
+      }
+      return hd;
+    }, {});
+    data.canRoll = this.actor.data.data.attributes.hd > 0;
+    data.denomination = this._denom;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+
+  /** @override */
   activateListeners(html) {
+    super.activateListeners(html);
     let btn = html.find("#roll-hd");
-    if ( this.data.canRoll ) btn.click(this._onRollHitDie.bind(this));
-    else btn[0].disabled = true;
+    btn.click(this._onRollHitDie.bind(this));
     super.activateListeners(html);
   }
 
@@ -33,9 +69,9 @@ export class ShortRestDialog extends Dialog {
   async _onRollHitDie(event) {
     event.preventDefault();
     const btn = event.currentTarget;
-    let fml = btn.form.hd.value;
-    await this.actor.rollHitDie(fml);
-    if ( this.actor.data.data.attributes.hd.value === 0 ) btn.disabled = true;
+    this._denom = btn.form.hd.value;
+    await this.actor.rollHitDie(this._denom);
+    this.render();
   }
 
   /* -------------------------------------------- */
@@ -44,15 +80,12 @@ export class ShortRestDialog extends Dialog {
    * A helper constructor function which displays the Short Rest dialog and returns a Promise once it's workflow has
    * been resolved.
    * @param {Actor5e} actor
-   * @param {boolean} canRoll
    * @return {Promise}
    */
-  static async shortRestDialog({actor, canRoll=true}={}) {
-    const html = await renderTemplate("systems/dnd5e/templates/apps/short-rest.html");
+  static async shortRestDialog({actor}={}) {
     return new Promise(resolve => {
       const dlg = new this(actor, {
         title: "Short Rest",
-        content: html,
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
@@ -64,8 +97,7 @@ export class ShortRestDialog extends Dialog {
             label: "Cancel",
             callback: () => resolve(false)
           }
-        },
-        canRoll: canRoll
+        }
       });
       dlg.render(true);
     });
