@@ -134,8 +134,9 @@ export class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
+  /** @override */
   setPosition(position={}) {
-    if ( this._sheetTab === "details" ) position.height = "auto";
+    position.height = this._sheetTab === "details" ? "auto" : this.options.height;
     return super.setPosition(position);
   }
 
