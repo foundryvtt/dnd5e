@@ -11,12 +11,6 @@ export class ItemSheet5e extends ItemSheet {
      * @type {string}
      */
     this._sheetTab = null;
-
-    /**
-     * The scroll position on the active tab
-     * @type {number}
-     */
-    this._scrollTab = 100;
   }
 
   /* -------------------------------------------- */
@@ -26,7 +20,8 @@ export class ItemSheet5e extends ItemSheet {
       width: 560,
       height: 420,
       classes: ["dnd5e", "sheet", "item"],
-      resizable: false
+      resizable: false,
+      scrollY: [".tab.details"]
     });
   }
 
@@ -179,10 +174,6 @@ export class ItemSheet5e extends ItemSheet {
         this.setPosition();
       }
     });
-
-    // Save scroll position
-    html.find(".tab.active")[0].scrollTop = this._scrollTab;
-    html.find(".tab").scroll(ev => this._scrollTab = ev.currentTarget.scrollTop);
 
     // Modify damage formula
     html.find(".damage-control").click(this._onDamageControl.bind(this));
