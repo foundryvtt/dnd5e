@@ -9,11 +9,15 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
   // Highlight rolls where the first part is a d20 roll
   let d = message.roll.parts[0];
   const isD20Roll = d instanceof Die && (d.faces === 20) && (d.results.length === 1);
+  if ( !isD20Roll ) return;
+
+  // Ensure it is not a modified roll
   const isModifiedRoll = ("success" in d.rolls[0]) || d.options.marginSuccess || d.options.marginFailure;
-  if ( isD20Roll && !isModifiedRoll ) {
-    if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
-    else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
-  }
+  if ( isModifiedRoll ) return;
+
+  // Highlight successes and failures
+  if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
+  else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
 };
 
 /* -------------------------------------------- */

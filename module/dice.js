@@ -48,6 +48,14 @@ export class Dice5e {
       data['bonus'] = form ? form.find('[name="bonus"]').val() : 0;
       if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
+      // Optionally include an ability score selection (used for tool checks)
+      const ability = form.find('[name="ability"]');
+      if ( ability.length && ability.val() ) {
+        data.ability = ability.val();
+        const abl = data.abilities[data.ability];
+        if ( abl ) data.mod = abl.mod;
+      }
+
       // Execute the roll and flag critical thresholds on the d20
       let roll = new Roll(parts.join(" + "), data).roll();
       const d20 = roll.parts[0];
@@ -77,7 +85,8 @@ export class Dice5e {
       formula: parts.join(" + "),
       data: data,
       rollMode: rollMode,
-      rollModes: CONFIG.rollModes
+      rollModes: CONFIG.rollModes,
+      config: CONFIG.DND5E
     };
     const html = await renderTemplate(template, dialogData);
 

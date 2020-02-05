@@ -29,9 +29,10 @@ export class Actor5e extends Actor {
 
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
+    const saveBonus = this.getFlag("dnd5e", "saveBonus") || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof);
+      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof) + saveBonus;
     }
 
     // Skill modifiers
@@ -261,7 +262,7 @@ export class Actor5e extends Actor {
     if (item.hasAreaTarget && placeTemplate) {
       const template = AbilityTemplate.fromItem(item);
       if ( template ) template.drawPreview(event);
-      if (this.sheet) this.sheet.minimize();
+      if ( this.sheet.rendered ) this.sheet.minimize();
     }
 
     // Invoke the Item roll

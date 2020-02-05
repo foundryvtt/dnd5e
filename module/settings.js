@@ -32,8 +32,8 @@ export const registerSystemSettings = function() {
    * Register Initiative formula setting
    */
   function _set5eInitiative(tiebreaker) {
-    CONFIG.initiative.tiebreaker = tiebreaker;
-    CONFIG.initiative.decimals = tiebreaker ? 2 : 0;
+    CONFIG.Combat.initiative.tiebreaker = tiebreaker;
+    CONFIG.Combat.initiative.decimals = tiebreaker ? 2 : 0;
     if ( ui.combat && ui.combat._rendered ) ui.combat.render();
   }
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {

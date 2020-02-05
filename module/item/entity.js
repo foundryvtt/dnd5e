@@ -464,7 +464,7 @@ export class Item5e extends Item {
     rollData.item = itemData;
 
     // assumes this.hasAttack implies ["rwak", "mwak", "rask", "msak"].includes(actorData.actionType)
-    const attBonus = getProperty(actorData, `bonuses.${itemData.actionType}`)
+    const attBonus = getProperty(actorData, `bonuses.${itemData.actionType}`);
     if (![undefined, "", "0"].includes(attBonus)) {
       parts.push(`@attBonus`);
       rollData.attBonus = attBonus;
@@ -706,13 +706,13 @@ export class Item5e extends Item {
     const itemData = this.data.data;
 
     // Prepare roll data
-    let rollData = duplicate(this.actor.data.data),
-      abl = itemData.ability || "int",
-      parts = [`@abilities.${abl}.mod`, "@proficiency"],
-      title = `${this.name} - Tool Check`;
-    rollData["ability"] = abl;
+    let rollData = duplicate(this.actor.data.data);
+    const parts = [`@mod`, "@proficiency"];
+    const title = `${this.name} - Tool Check`;
+    const abl = itemData.ability || "int";
+    const ability = rollData.abilities[abl];
+    rollData["mod"] = ability.mod || 0;
     rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
-    rollData["abilities"] = CONFIG.DND5E.abilities;
 
     // Call the roll helper utility
     Dice5e.d20Roll({
@@ -722,16 +722,11 @@ export class Item5e extends Item {
       template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${this.name} - ${CONFIG.DND5E.abilities[abl]} Check`,
+      flavor: `${this.name} - Tool Check`,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
-      },
-      onClose: (html, parts, data) => {
-        abl = html.find('[name="ability"]').val();
-        data.ability = abl;
-        parts[1] = `@abilities.${abl}.mod`;
       }
     });
   }
