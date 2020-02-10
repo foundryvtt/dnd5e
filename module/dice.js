@@ -49,8 +49,8 @@ export class Dice5e {
       if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
 
       // Optionally include an ability score selection (used for tool checks)
-      const ability = form.find('[name="ability"]');
-      if ( ability.length && ability.val() ) {
+      const ability = form ? form.find('[name="ability"]') : null;
+      if ( ability && ability.length && ability.val() ) {
         data.ability = ability.val();
         const abl = data.abilities[data.ability];
         if ( abl ) data.mod = abl.mod;

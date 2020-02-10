@@ -588,40 +588,4 @@ export class ActorSheet5e extends ActorSheet {
     };
     new ActorTraitSelector(this.actor, options).render(true)
   }
-
-
-  /* -------------------------------------------- */
-
-  /**
-   * TODO REMOVE THIS ASAP
-   * @override
-   */
-  _onSortItem(event, itemData) {
-
-    // TODO - for now, don't allow sorting for Token Actor ovrrides
-    if (this.actor.isToken) return;
-
-    // Get the drag source and its siblings
-    const source = this.actor.getOwnedItem(itemData._id);
-    const siblings = this._getSortSiblings(source);
-
-    // Get the drop target
-    const dropTarget = event.target.closest(".item");
-    const targetId = dropTarget ? dropTarget.dataset.itemId : null;
-    const target = siblings.find(s => s.data._id === targetId);
-
-    // Ensure we are only sorting like-types
-    if (target && (source.data.type !== target.data.type)) return;
-
-    // Perform the sort
-    const sortUpdates = SortingHelpers.performIntegerSort(source, {target: target, siblings});
-    const updateData = sortUpdates.map(u => {
-      const update = u.update;
-      update._id = u.target.data._id;
-      return update;
-    });
-
-    // Perform the update
-    return this.actor.updateManyEmbeddedEntities("OwnedItem", updateData);
-  }
 }
