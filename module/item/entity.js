@@ -247,7 +247,7 @@ export class Item5e extends Item {
     if ( rollMode === "blindroll" ) chatData["blind"] = true;
 
     // Create the chat message
-    return ChatMessage.create(chatData, {displaySheet: false});
+    return ChatMessage.create(chatData);
   }
 
   /* -------------------------------------------- */

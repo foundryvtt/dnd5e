@@ -156,7 +156,7 @@ async function createItemMacro(item, slot) {
       img: item.img,
       command: command,
       flags: {"dnd5e.itemMacro": true}
-    }, {displaySheet: false});
+    });
   }
   game.user.assignHotbarMacro(macro, slot);
 }
