@@ -425,9 +425,7 @@ export class Item5e extends Item {
    * @private
    */
   _featChatData(data, labels, props) {
-    props.push(
-      data.requirements
-    );
+    props.push(data.requirements);
   }
 
   /* -------------------------------------------- */
@@ -437,6 +435,8 @@ export class Item5e extends Item {
   /**
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.d20Roll logic for the core implementation
+   *
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollAttack(options={}) {
     const itemData = this.data.data;
@@ -445,14 +445,8 @@ export class Item5e extends Item {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
 
-    // Determine ability score modifier
-    let abl = itemData.ability;
-    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting || "int";
-    else if ( !abl ) abl = "str";
-
     // Define Roll parts
-    const parts = ["@item.attackBonus", `@abilities.${abl}.mod`, "@attributes.prof"];
- 
+    const parts = ["@atk", `@mod`, "@prof"];
     if ( (this.data.type === "weapon") && !itemData.proficient ) parts.pop();
 
     // Define Critical threshold
@@ -460,19 +454,13 @@ export class Item5e extends Item {
     if ( this.data.type === "weapon" ) crit = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
 
     // Define Roll Data
-    const rollData = duplicate(actorData);
-    rollData.item = itemData;
+    const rollData = this._getRollData();
+    const actorBonus = actorData.bonuses[itemData.actionType] || {};
+    rollData["atk"] = parseInt(itemData.attackBonus) + parseInt(actorBonus.attack);
 
-    // assumes this.hasAttack implies ["rwak", "mwak", "rask", "msak"].includes(actorData.actionType)
-    const attBonus = getProperty(actorData, `bonuses.${itemData.actionType}`);
-    if (![undefined, "", "0"].includes(attBonus)) {
-      parts.push(`@attBonus`);
-      rollData.attBonus = attBonus;
-    }
-
-      const title = `${this.name} - Attack Roll`;
     // Call the roll helper utility
-    Dice5e.d20Roll({
+    const title = `${this.name} - Attack Roll`;
+    return Dice5e.d20Roll({
       event: options.event,
       parts: parts,
       actor: this.actor,
@@ -493,6 +481,8 @@ export class Item5e extends Item {
   /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.damageRoll logic for the core implementation
+   *
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollDamage({event, spellLevel=null, versatile=false}={}) {
     const itemData = this.data.data;
@@ -500,11 +490,6 @@ export class Item5e extends Item {
     if ( !this.hasDamage ) {
       throw new Error("You may not make a Damage Roll with this Item.");
     }
-
-    // Determine ability score modifier
-    let abl = itemData.ability;
-    if ( !abl && (this.data.type === "spell") ) abl = actorData.attributes.spellcasting || "int";
-    else if ( !abl ) abl = "str";
 
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
@@ -519,24 +504,17 @@ export class Item5e extends Item {
     }
 
     // Define Roll Data
-    const rollData = mergeObject(duplicate(actorData), {
-      item: itemData,
-      mod: actorData.abilities[abl].mod,
-      prof: actorData.attributes.prof,
-    });
-
-    // damage bonus only applies to melee/ranged weapons not spells.
-    const damageBonus = getProperty(actorData, "bonuses.damage");
-    if (["mwak", "rwak"].includes(itemData.actionType) && ![undefined, "", "0"].includes(damageBonus)) {
-      parts.push(`@damageBonus`);
-      rollData.damageBonus = damageBonus;
+    const rollData = this._getRollData();
+    const actorBonus = actorData.bonuses[itemData.actionType] || {};
+    if ( actorBonus.damage && (actorBonus.damage !== 0) ) {
+      parts.push("@dmg");
+      rollData["dmg"] = parseInt(actorBonus.damage);
     }
 
+    // Call the roll helper utility
     const title = `${this.name} - Damage Roll`;
     const flavor = this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title;
-
-    // Call the roll helper utility
-    Dice5e.damageRoll({
+    return Dice5e.damageRoll({
       event: event,
       parts: parts,
       actor: this.actor,
@@ -591,59 +569,52 @@ export class Item5e extends Item {
   /**
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.d20Roll logic for the core implementation
+   *
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollFormula(options={}) {
-    const itemData = this.data.data;
-    const actorData = this.actor.data.data;
-    if ( !itemData.formula ) {
+    if ( !this.data.data.formula ) {
       throw new Error("This Item does not have a formula to roll!");
     }
 
     // Define Roll Data
-    const rollData = duplicate(actorData);
-    rollData.item = itemData;
+    const rollData = this._getRollData();
     const title = `${this.name} - Other Formula`;
 
+    // Invoke the roll and submit it to chat
     const roll = new Roll(itemData.formula, rollData).roll();
-    return roll.toMessage({
+    roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: itemData.chatFlavor || title,
       rollMode: game.settings.get("core", "rollMode")
     });
+    return roll;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Use a consumable item
+   * Use a consumable item, deducting from the quantity or charges of the item.
+   *
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance or null
    */
-  rollConsumable(options={}) {
+  async rollConsumable(options={}) {
     const itemData = this.data.data;
     const labels = this.labels;
     const formula = itemData.damage ? labels.damage : itemData.formula;
+    const speaker = ChatMessage.getSpeaker({actor: this.actor});
     const flavor = `${this.actor.name} uses ${this.name}`;
 
-    // Roll a formula to chat
+    // Create a dice roll if necessary
+    let roll = null;
     if ( formula ) {
-      const rollData = duplicate(this.actor.data.data);
-      rollData.item = itemData;
-      const ability = rollData.abilities[itemData.ability];
-      rollData.mod = ability ? ability.mod : 0;
-      const roll = new Roll(formula, rollData).roll();
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        flavor: flavor
-      });
+      const rollData = this._getRollData();
+      roll = new Roll(formula, rollData).roll();
     }
 
-    // Otherwise just display a message
-    else {
-      ChatMessage.create({
-        user: game.user._id,
-        speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        content: flavor
-      });
-    }
+    // Create a chat message
+    const message = roll ? roll.toMessage({speaker, flavor}) :
+      ChatMessage.create({user: game.user._id, speaker, flavor});
 
     // Deduct consumed charges from the item
     if ( itemData.uses.autoUse ) {
@@ -652,7 +623,7 @@ export class Item5e extends Item {
 
       // Deduct an item quantity
       if ( c <= 1 && q > 1 ) {
-        this.update({
+        await this.update({
           'data.quantity': Math.max(q - 1, 0),
           'data.uses.value': itemData.uses.max
         });
@@ -660,14 +631,15 @@ export class Item5e extends Item {
 
       // Optionally destroy the item
       else if ( c <= 1 && q <= 1 && itemData.uses.autoDestroy ) {
-        this.actor.deleteOwnedItem(this.id);
+        await this.actor.deleteOwnedItem(this.id);
       }
 
       // Deduct the remaining charges
       else {
-        this.update({'data.uses.value': Math.max(c - 1, 0)});
+        await this.update({'data.uses.value': Math.max(c - 1, 0)});
       }
     }
+    return roll;
   }
 
   /* -------------------------------------------- */
@@ -675,6 +647,8 @@ export class Item5e extends Item {
   /**
    * Perform an ability recharge test for an item which uses the d6 recharge mechanic
    * @prarm {Object} options
+   *
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge(options={}) {
     const data = this.data.data;
@@ -692,7 +666,7 @@ export class Item5e extends Item {
 
     // Update the Item data
     if ( success ) promises.push(this.update({"data.recharge.charged": true}));
-    return Promise.all(promises);
+    return Promise.all(promises).then(() => roll);
   }
 
   /* -------------------------------------------- */
@@ -700,22 +674,19 @@ export class Item5e extends Item {
   /**
    * Roll a Tool Check
    * Rely upon the Dice5e.d20Roll logic for the core implementation
+   *
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
-    const itemData = this.data.data;
 
     // Prepare roll data
-    let rollData = duplicate(this.actor.data.data);
-    const parts = [`@mod`, "@proficiency"];
+    let rollData = this._getRollData();
+    const parts = [`@mod`, "@prof"];
     const title = `${this.name} - Tool Check`;
-    const abl = itemData.ability || "int";
-    const ability = rollData.abilities[abl];
-    rollData["mod"] = ability.mod || 0;
-    rollData["proficiency"] = Math.floor((itemData.proficient || 0) * rollData.attributes.prof);
 
     // Call the roll helper utility
-    Dice5e.d20Roll({
+    return Dice5e.d20Roll({
       event: options.event,
       parts: parts,
       data: rollData,
@@ -731,6 +702,42 @@ export class Item5e extends Item {
     });
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a data object which is passed to any Roll formulas which are created related to this Item
+   * @private
+   */
+  _getRollData() {
+    if ( !this.actor ) return null;
+    const type = this.data.type;
+    const itemData = duplicate(this.data.data);
+    const actorData = duplicate(this.actor.data.data);
+
+    // Prepare Actor and Item data
+    const rollData = actorData;
+    rollData.item = itemData;
+
+    // Include an ability score modifier if one exists
+    if ( "ability" in itemData ) {
+      let abl = itemData.ability;
+      if ( !abl ) {
+        if ( type === "spell" ) abl = actorData.attributes.spellcasting || "int";
+        else if ( type === "tool" ) abl = "int";
+        else abl = "str";
+      }
+      const ability = actorData.abilities[abl];
+      rollData["mod"] = ability.mod || 0;
+    }
+
+    // Include a proficiency score
+    const prof = "proficient" in itemData ? (itemData.proficient || 0) : 1;
+    rollData["prof"] = Math.floor(prof * actorData.attributes.prof);
+    return rollData;
+  }
+
+  /* -------------------------------------------- */
+  /*  Chat Message Helpers                        */
   /* -------------------------------------------- */
 
   static chatListeners(html) {

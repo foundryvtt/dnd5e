@@ -276,18 +276,21 @@ export class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {Object} options      Options which configure how the skill check is rolled
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
     const parts = ["@mod"];
-    var data = {mod: skl.mod};
+    const data = {mod: skl.mod};
 
-    const sklBonus = getProperty(this.data.data, "bonuses.skillCheck");
-    if (![undefined, "", "0"].includes(sklBonus)) {
+    // Include a global actor skill bonus
+    const actorBonus = getProperty(this.data.data.bonuses, "skills.check");
+    if ( !!actorBonus ) {
       parts.push("@skillBonus");
-      data.skillBonus = sklBonus;
+      data.skillBonus = parseInt(actorBonus);
     }
 
+    // Roll and return
     return Dice5e.d20Roll({
       event: options.event,
       parts: parts,
@@ -330,19 +333,22 @@ export class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {String} abilityId    The ability ID (e.g. "str")
    * @param {Object} options      Options which configure how ability tests are rolled
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
     const data = {mod: abl.mod};
-    const checkBonus = getProperty(this.data.data, "bonuses.abilityCheck");
 
-    if (![undefined, "", "0"].includes(checkBonus)) {
+    // Include a global actor ability check bonus
+    const actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
+    if ( !!actorBonus ) {
       parts.push("@checkBonus");
-      data.checkBonus = checkBonus;
+      data.checkBonus = parseInt(actorBonus);
     }
 
+    // Roll and return
     return Dice5e.d20Roll({
       event: options.event,
       parts: parts,
@@ -359,19 +365,22 @@ export class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {String} abilityId    The ability ID (e.g. "str")
    * @param {Object} options      Options which configure how ability tests are rolled
+   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
     const data = {mod: abl.save};
-    const saveBonus = getProperty(this.data.data, "bonuses.abilitySave");
 
-    if (![undefined, "", "0"].includes(saveBonus)) {
-      parts.push("@saveBonus")
-      data.saveBonus = saveBonus;
+    // Include a global actor ability save bonus
+    const actorBonus = getProperty(this.data.data.bonuses, "abilities.save");
+    if ( !!actorBonus ) {
+      parts.push("@saveBonus");
+      data.saveBonus = parseInt(actorBonus);
     }
-    
+
+    // Roll and return
     return Dice5e.d20Roll({
       event: options.event,
       parts: parts,

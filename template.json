@@ -214,14 +214,29 @@
           }
         },
         "bonuses": {
-          "mwak": "",
-          "rwak": "",
-          "msak": "",
-          "rsak": "",
-          "damage": "",
-          "abilityCheck": "",
-          "abilitySave": "",
-          "skillCheck": ""
+          "mwak": {
+            "attack": "",
+            "damage": ""
+          },
+          "rwak": {
+            "attack": "",
+            "damage": ""
+          },
+          "msak": {
+            "attack": "",
+            "damage": ""
+          },
+          "rsak": {
+            "attack": "",
+            "damage": ""
+          },
+          "abilities": {
+            "check": "",
+            "save": ""
+          },
+          "skills": {
+            "check": ""
+          }
         }
       }
     },
@@ -527,9 +542,7 @@
     },
     "weapon": {
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action"],
-      "weaponType": {
-        "value": "simpleM"
-      },
+      "weaponType": "simpleM",
       "properties": {},
       "proficient": true,
       "bonus": {
