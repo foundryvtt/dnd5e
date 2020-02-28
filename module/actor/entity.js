@@ -201,8 +201,8 @@ export class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /** @override */
-  async modifyTokenAttribute(attribute, value, isDelta) {
-    if ( attribute !== "attributes.hp" ) return super.modifyTokenAttribute(attribute, value, isDelta);
+  async modifyTokenAttribute(attribute, value, isDelta, isBar) {
+    if ( attribute !== "attributes.hp" ) return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
 
     // Get current and delta HP
     const hp = getProperty(this.data.data, attribute);
