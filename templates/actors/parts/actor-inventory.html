@@ -29,7 +29,6 @@
 
         {{#if ../isCharacter}}
         <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
-        <div class="item-detail item-equipped">{{localize "DND5E.Equipped"}}</div>
         {{/if}}
 
         <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
@@ -37,7 +36,7 @@
 
         {{#if ../owner}}
         <div class="item-controls">
-            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <a class="item-control item-create" title='{{localize "DND5E.ItemCreate"}}' {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
         </div>
@@ -64,11 +63,6 @@
                 </div>
                 {{/if}}
             </div>
-
-            <div class="item-detail item-equipped">
-            {{#if item.data.equipped }} {{localize "DND5E.Equipped"}}
-            {{/if}}
-            </div>
             {{/if}}
 
             <div class="item-detail item-uses">
@@ -86,8 +80,13 @@
 
             {{#if ../../owner}}
             <div class="item-controls">
-                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                {{#if item.data.equipped}}
+                <a class="item-control toggle-equipped equipped" title='{{localize "DND5E.Equipped"}}'><i class="fas fa-toggle-on"></i></a>
+                {{else}}
+                <a class="item-control toggle-equipped equipped" title='{{localize "DND5E.NotEquipped"}}'><i class="fas fa-toggle-off"></i></a>
+                {{/if}}
+                <a class="item-control item-edit" title='{{localize "DND5E.ItemEdit"}}'><i class="fas fa-edit"></i></a>
+                <a class="item-control item-delete" title='{{localize "DND5E.ItemDelete"}}'><i class="fas fa-trash"></i></a>
             </div>
             {{/if}}
         </li>
