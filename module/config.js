@@ -471,6 +471,8 @@ DND5E.conditionTypes = {
   "blinded": "DND5E.ConBlinded",
   "charmed": "DND5E.ConCharmed",
   "deafened": "DND5E.ConDeafened",
+  "diseased": "DND5E.ConDiseased",
+  "exhaustion": "DND5E.ConExhaustion",
   "frightened": "DND5E.ConFrightened",
   "grappled": "DND5E.ConGrappled",
   "incapacitated": "DND5E.ConIncapacitated",
@@ -481,9 +483,7 @@ DND5E.conditionTypes = {
   "prone": "DND5E.ConProne",
   "restrained": "DND5E.ConRestrained",
   "stunned": "DND5E.ConStunned",
-  "unconscious": "DND5E.ConUnconscious",
-  "exhaustion": "DND5E.ConExhaustion",
-  "diseased": "DND5E.ConDiseased"
+  "unconscious": "DND5E.ConUnconscious"
 };
 
 // Languages

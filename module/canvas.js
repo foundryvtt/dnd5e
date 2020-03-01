@@ -36,8 +36,8 @@ export const measureDistance = function(p0, p1, {gridSpaces=true}={}) {
  * TODO: This should probably be replaced with a formal Token class extension
  */
 const _TokenGetBarAttribute = Token.prototype.getBarAttribute;
-export const getBarAttribute = function(barName) {
-  const data = _TokenGetBarAttribute.bind(this)(barName);
+export const getBarAttribute = function(...args) {
+  const data = _TokenGetBarAttribute.bind(this)(...args);
   if ( data && (data.attribute === "attributes.hp") ) {
     data.value += parseInt(data['temp'] || 0);
     data.max += parseInt(data['tempmax'] || 0);
