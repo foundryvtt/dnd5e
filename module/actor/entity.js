@@ -393,6 +393,56 @@ export class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Perform a death saving throw, rolling a d20 plus any global save bonuses
+   * @param {Object} options      Additional options which modify the roll
+   * @return {Promise<Roll>}      A Promise which resolves to the Roll instance
+   */
+  async rollDeathSave(options={}) {
+    const bonus = getProperty(this.data.data.bonuses, "abilities.save");
+    const parts = !!bonus ? ["@saveBonus"] : [];
+    const speaker = ChatMessage.getSpeaker({actor: this});
+    const roll = await Dice5e.d20Roll({
+      event: options.event,
+      parts: parts,
+      data: {saveBonus: parseInt(bonus)},
+      title: `Death Saving Throw`,
+      speaker: speaker
+    });
+
+    // Take action depending on the result
+    const success = roll.total >= 10;
+    const death = this.data.data.attributes.death;
+    
+    // Save success
+    if ( success ) {
+      let successes = (death.success || 0) + (roll.total === 20 ? 2 : 1);
+      if ( successes === 3 ) {      // Survival
+        await this.update({
+          "data.attributes.death.success": 0,
+          "data.attributes.death.failure": 0,
+          "data.attributes.hp.value": 1
+        });
+        await ChatMessage.create({content: `${this.name} has survived with 3 death save successes!`, speaker});
+      }
+      else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
+    } 
+    
+    // Save failure
+    else {
+      let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
+      await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
+      if ( failures === 3 ) {       // Death
+        await ChatMessage.create({content: `${this.name} has died with 3 death save failures!`, speaker});
+      }
+    }
+
+    // Return the rolled result
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
    * @param {string} formula    The hit die type to roll. Example "d8"
    */

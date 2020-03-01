@@ -230,6 +230,21 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
+
+    // Death saving throws
+    html.find('.death-save').click(this._onDeathSave.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling a death saving throw for the Character
+   * @param {MouseEvent} event    The originating click event
+   * @private
+   */
+  _onDeathSave(event) {
+    event.preventDefault();
+    return this.actor.rollDeathSave({event: event});
   }
 
   /* -------------------------------------------- */
