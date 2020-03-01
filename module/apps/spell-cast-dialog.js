@@ -41,25 +41,27 @@ export class SpellCastDialog extends Dialog {
 
     // Determine the levels which are feasible
     let lmax = 0;
-    const spellLevels = Array.fromRange(10).map(i => {
+    const spellLevels = Array.fromRange(10).reduce((arr, i) => {
+      if ( i < lvl ) return arr;
       const l = ad.spells["spell"+i] || {max: 0};
-      let hasSlots = (parseInt(l.max) > 0) && (parseInt(l.value) > 0);
-      if ( hasSlots ) lmax = i;
-      return {
+      let max = parseInt(l.max || 0);
+      let slots = Math.clamped(parseInt(l.value || 0), 0, max);
+      if ( max > 0 ) lmax = i;
+      arr.push({
         level: i,
-        label: i > 0 ? `${CONFIG.DND5E.spellLevels[i]} (${l.value} Slots)` : CONFIG.DND5E.spellLevels[i],
-        canCast: canUpcast && (parseInt(l.max) > 0),
-        hasSlots: hasSlots
-      };
-    }).filter((l, i) => i <= lmax);
+        label: i > 0 ? `${CONFIG.DND5E.spellLevels[i]} (${slots} Slots)` : CONFIG.DND5E.spellLevels[i],
+        canCast: canUpcast && (max > 0),
+        hasSlots: slots > 0
+      });
+      return arr;
+    }, []).filter(sl => sl.level <= lmax);
     const canCast = spellLevels.some(l => l.hasSlots);
 
     // Render the Spell casting template
     const html = await renderTemplate("systems/dnd5e/templates/apps/spell-cast.html", {
       item: item.data,
       canCast: canCast,
-      canUpcast: canCast && canUpcast,
-      consume: canUpcast,
+      canUpcast: canUpcast,
       spellLevels,
       hasPlaceableTemplate: game.user.isTrusted && item.hasAreaTarget
     });

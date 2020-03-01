@@ -2,8 +2,8 @@
     <p>Configure how you would like to cast the <strong>{{item.name}}</strong> spell.</p>
 
     {{#unless canCast}}
-    <p type="note">You are not able to cast this spell as you have no available spell slots.</p>
-    {{else}}
+    <p class="notification error">You have no available spell slots to cast this spell</p>
+    {{/unless}}
 
     <div class="form-group">
         <label>Cast at Level</label>
@@ -17,11 +17,10 @@
             </select>
         </div>
     </div>
-    {{/unless}}
 
     <div class="form-group">
         {{#if canUpcast}}
-        <label class="checkbox">Consume Spell Slot? <input type="checkbox" name="consume" {{checked consume}}/></label>
+        <label class="checkbox">Consume Spell Slot? <input type="checkbox" name="consume" {{checked canCast}}/></label>
         {{/if}}
 
         {{#if hasPlaceableTemplate}}

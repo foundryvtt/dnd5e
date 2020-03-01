@@ -7,7 +7,7 @@
     <div class="form-group">
         <label>Ability Modifier</label>
         <select name="ability">
-        {{#select data.ability}}
+        {{#select data.item.ability}}
         {{#each config.abilities as |ability a|}}
         <option value="{{a}}">{{ability}}</option>
         {{/each}}

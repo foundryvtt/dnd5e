@@ -33,6 +33,7 @@ export class AbilityTemplate extends MeasuredTemplate {
         templateData.angle = 53.13;
         break;
       case "rect": // 5e rectangular AoEs are always cubes
+        templateData.distance = Math.hypot(target.value, target.value);
         templateData.width = target.value;
         templateData.direction = 45;
         break;
