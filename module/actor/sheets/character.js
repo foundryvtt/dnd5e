@@ -82,12 +82,21 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Partition items by category
     let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
+
+      // Item details
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+
+      // Item usage
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
       item.hasTarget = !!item.data.target && !(["none",""].includes(item.data.target.type));
+
+      // Item toggle state
+      this._prepareItemToggleState(item);
+
+      // Classify items into types
       if ( item.type === "spell" ) arr[1].push(item);
       else if ( item.type === "feat" ) arr[2].push(item);
       else if ( item.type === "class" ) arr[3].push(item);
@@ -135,6 +144,24 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     data.spellbook = spellbook;
     data.preparedSpells = nPrepared;
     data.features = Object.values(features);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A helper method to establish the displayed preparation state for an item
+   * @param {Item} item
+   * @private
+   */
+  _prepareItemToggleState(item) {
+    const attr = item.type === "spell" ? "preparation.prepared" : "equipped";
+    const isActive = getProperty(item.data, attr);
+    item.toggleClass = isActive ? "active" : "";
+    if ( item.type === "spell" ) {
+      item.toggleTitle = game.i18n.localize(isActive ? "DND5E.SpellPrepared" : "DND5E.SpellUnprepared");
+    } else {
+      item.toggleTitle = game.i18n.localize(isActive ? "DND5E.Equipped" : "DND5E.Unequipped");
+    }
   }
 
   /* -------------------------------------------- */
@@ -197,11 +224,8 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Inventory Functions
     html.find(".currency-convert").click(this._onConvertCurrency.bind(this));
 
-    // Item Equipping
-    html.find('.toggle-equipped').click(this._onEquipItem.bind(this));
-
-    // Spell Preparation
-    html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
+    // Item State Toggling
+    html.find('.item-toggle').click(this._onToggleItem.bind(this));
 
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
@@ -210,28 +234,18 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /**
-   * Handle toggle the equipped status of an Owned Item within the Actor
-   * @param {Event} event 
-   */
-  _onEquipItem(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
-    return item.update({"data.equipped": !item.data.data.equipped});
-  }
-
 
   /**
-   * Handle toggling the prepared status of an Owned Item within the Actor
+   * Handle toggling the state of an Owned Item within the Actor
    * @param {Event} event   The triggering click event
    * @private
    */
-  _onPrepareItem(event) {
+  _onToggleItem(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.getOwnedItem(itemId);
-    return item.update({"data.preparation.prepared": !item.data.data.preparation.prepared});
+    const attr = item.data.type === "spell" ? "data.preparation.prepared" : "data.equipped";
+    return item.update({[attr]: !getProperty(item.data, attr)});
   }
 
   /* -------------------------------------------- */

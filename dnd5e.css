@@ -751,12 +751,6 @@
 .dnd5e.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
   flex: 0 0 100%;
 }
-.dnd5e.sheet.actor .inventory-list .item-controls .toggle-equipped {
-  color: #b5b3a4;
-}
-.dnd5e.sheet.actor .inventory-list .item-controls .toggle-equipped.equipped {
-  color: #4b4a44;
-}
 .dnd5e.sheet.actor .inventory-list .item-detail {
   flex: 0 0 70px;
   font-size: 12px;
@@ -781,7 +775,7 @@
   padding: 0;
 }
 .dnd5e.sheet.actor .inventory-list .item-controls {
-  flex: 0 0 68px;
+  flex: 0 0 44px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1109,7 +1103,7 @@
   /* ----------------------------------------- */
   /* Encumbrance Bar */
   /* ----------------------------------------- */
-  /*  Spellbook                                */
+  /*  Item Controls                            */
   /* ----------------------------------------- */
 }
 .dnd5e.sheet.actor.character .sheet-header img.profile {
@@ -1274,13 +1268,16 @@
 .dnd5e.sheet.actor.character .encumbrance.encumbered .arrow-down {
   border-top: 4px solid #000;
 }
+.dnd5e.sheet.actor.character .inventory .item-controls,
 .dnd5e.sheet.actor.character .spellbook .item-controls {
   flex: 0 0 68px;
 }
-.dnd5e.sheet.actor.character .spellbook .item-controls .toggle-prepared {
+.dnd5e.sheet.actor.character .inventory .item-controls .item-toggle,
+.dnd5e.sheet.actor.character .spellbook .item-controls .item-toggle {
   color: #b5b3a4;
 }
-.dnd5e.sheet.actor.character .spellbook .item-controls .toggle-prepared.prepared {
+.dnd5e.sheet.actor.character .inventory .item-controls .item-toggle.active,
+.dnd5e.sheet.actor.character .spellbook .item-controls .item-toggle.active {
   color: #4b4a44;
 }
 /* ----------------------------------------- */
