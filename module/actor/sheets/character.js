@@ -197,6 +197,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Inventory Functions
     html.find(".currency-convert").click(this._onConvertCurrency.bind(this));
 
+    // Item Equipping
+    html.find('.toggle-equipped').click(this._onEquipItem.bind(this));
+
     // Spell Preparation
     html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
 
@@ -206,6 +209,18 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Handle toggle the equipped status of an Owned Item within the Actor
+   * @param {Event} event 
+   */
+  _onEquipItem(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    return item.update({"data.equipped": !item.data.data.equipped});
+  }
+
 
   /**
    * Handle toggling the prepared status of an Owned Item within the Actor
