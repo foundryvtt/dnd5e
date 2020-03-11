@@ -25,8 +25,8 @@ export class Item5e extends Item {
     // Case 2 - inferred from a parent actor
     else if ( this.actor ) {
       const actorData = this.actor.data.data;
-      if ( type === "spell" ) return actorData.attributes.spellcasting || "int";
-      else if ( type === "tool" ) return "int";
+      if ( this.data.type === "spell" ) return actorData.attributes.spellcasting || "int";
+      else if ( this.data.type === "tool" ) return "int";
       else return "str";
     }
 
@@ -466,6 +466,7 @@ export class Item5e extends Item {
   rollAttack(options={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
+    const flags = this.actor.data.flags.dnd5e || {};
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
@@ -499,21 +500,20 @@ export class Item5e extends Item {
       }
     };
 
-    // Special flags for weapon attacks
-    const flags = this.actor.data.flags.dnd5e || {};
-    if ( this.data.type === "weapon" ) {
+    // Expanded weapon critical threshold
+    if (( this.data.type === "weapon" ) && flags.weaponCriticalThreshold) {
+      rollConfig.critical = parseInt(flags.weaponCriticalThreshold);
+    }
 
-      // Expand Critical threshold
-      if ( flags.weaponCriticalThreshold ) rollConfig.critical = parseInt(flags.weaponCriticalThreshold);
-
-      // Apply Elven Accuracy
-      if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
+    // Elven Accuracy
+    if ( ["weapon", "spell"].includes(this.data.type) ) {
+      if (flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod)) {
         rollConfig.elvenAccuracy = true;
       }
-
-      // Apply Halfling Lucky
-      if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
     }
+
+    // Apply Halfling Lucky
+    if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
 
     // Invoke the d20 roll helper
     return Dice5e.d20Roll(rollConfig);
