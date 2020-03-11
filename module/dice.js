@@ -6,47 +6,61 @@ export class Dice5e {
    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
    * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
    *
-   * @param {Event|object} event    The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
-   * @param {Actor} actor           The Actor making the d20 roll
    * @param {Object} data           Actor or item data against which to parse the roll
-   * @param {String} template       The HTML template used to render the roll dialog
-   * @param {String} title          The dice roll UI window title
+   * @param {Event|object} event    The triggering event which initiated the roll
+   * @param {string|null} template  The HTML template used to render the roll dialog
+   * @param {string|null} title     The dice roll UI window title
    * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
-   * @param {string} flavor         Flavor text to use in the posted chat message
-   * @param {Boolean} advantage     Allow rolling with advantage (and therefore also with disadvantage)
-   * @param {Boolean} situational   Allow for an arbitrary situational bonus field
+   * @param {string|null} flavor    Flavor text to use in the posted chat message
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
-   * @param {Number} critical       The value of d20 result which represents a critical success
-   * @param {Number} fumble         The value of d20 result which represents a critical failure
+   * @param {number} critical       The value of d20 result which represents a critical success
+   * @param {number} fumble         The value of d20 result which represents a critical failure
+   * @param {boolean} elvenAccuracy Allow Elven Accuracy to modify this roll?
+   * @param {boolean} halflingLucky Allow Halfling Luck to modify this roll?
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    *
    * @return {Promise}              A Promise which resolves once the roll workflow has completed
    */
-  static async d20Roll({event={}, parts, data, template, title, speaker, flavor, advantage=true, situational=true,
-                         fastForward=true, critical=20, fumble=1, onClose, dialogOptions, }) {
+  static async d20Roll({parts=[], data={}, event={}, template=null, title=null, speaker=null, flavor=null,
+                         fastForward=true, critical=20, fumble=1, elvenAccuracy=false, halflingLucky=false,
+                         onClose, dialogOptions}={}) {
 
     // Handle input arguments
     flavor = flavor || title;
+    speaker = speaker || ChatMessage.getSpeaker();
     const rollMode = game.settings.get("core", "rollMode");
+    parts = parts.concat(["@bonus"]);
     let rolled = false;
 
     // Define inner roll function
-    const _roll = function(parts, adv, form) {
+    const _roll = function(parts, adv, form=null) {
 
-      // Modify d20 for advantage or disadvantage
-      if (adv === 1) {
-        parts[0] = ["2d20kh"];
-        flavor = `${title} (Advantage)`;
-      } else if (adv === -1) {
-        parts[0] = ["2d20kl"];
-        flavor = `${title} (Disadvantage)`;
+      // Determine the d20 roll and modifiers
+      let nd = 1;
+      let mods = halflingLucky ? "r=1" : "";
+
+      // Handle advantage
+      if ( adv === 1 ) {
+        nd = elvenAccuracy ? 3 : 2;
+        flavor += " (Advantage)";
+        mods += "kh";
       }
 
+      // Handle disadvantage
+      else if ( adv === -1 ) {
+        nd = 2;
+        flavor += " (Disadvantage)";
+        mods += "kl";
+      }
+
+      // Include the d20 roll
+      parts.unshift(`${nd}d20${mods}`);
+
       // Optionally include a situational bonus
-      data['bonus'] = form ? form.find('[name="bonus"]').val() : 0;
-      if (!data.bonus && parts.indexOf("@bonus") !== -1) parts.pop();
+      if ( form !== null ) data['bonus'] = form.find('[name="bonus"]').val();
+      if ( !data["bonus"] ) parts.pop();
 
       // Optionally include an ability score selection (used for tool checks)
       const ability = form ? form.find('[name="ability"]') : null;
@@ -72,12 +86,12 @@ export class Dice5e {
       return roll;
     };
 
-    // Modify the roll and handle fast-forwarding
-    parts = ["1d20"].concat(parts);
-    if (event.shiftKey) return _roll(parts, 0);
-    else if (event.altKey) return _roll(parts, 1);
-    else if (event.ctrlKey || event.metaKey) return _roll(parts, -1);
-    else parts = parts.concat(["@bonus"]);
+    // Optionally allow fast-forwarding to specify advantage or disadvantage
+    if ( fastForward ) {
+      if (event.shiftKey) return _roll(parts, 0);
+      else if (event.altKey) return _roll(parts, 1);
+      else if (event.ctrlKey || event.metaKey) return _roll(parts, -1);
+    }
 
     // Render modal dialog
     template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
@@ -146,6 +160,7 @@ export class Dice5e {
 
     // Handle input arguments
     flavor = flavor || title;
+    speaker = speaker || ChatMessage.getSpeaker();
     const rollMode = game.settings.get("core", "rollMode");
     let rolled = false;
 

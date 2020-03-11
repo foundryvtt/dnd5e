@@ -29,7 +29,7 @@ export class Actor5e extends Actor {
 
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
-    const saveBonus = this.getFlag("dnd5e", "saveBonus") || 0;
+    const saveBonus = parseInt(data.bonuses.abilities.save) || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof) + saveBonus;
@@ -138,9 +138,10 @@ export class Actor5e extends Actor {
    * @return {number}           The spell DC
    */
   getSpellDC(ability) {
-    const bonus = this.getFlag("dnd5e", "spellDCBonus") || 0;
-    ability = this.data.data.abilities[ability];
-    const prof = this.data.data.attributes.prof;
+    const actorData = this.data.data;
+    const bonus = parseInt(getProperty(actorData, "bonuses.spell.dc")) || 0;
+    ability = actorData.abilities[ability];
+    const prof = actorData.attributes.prof;
     return 8 + (ability ? ability.mod : 0) + prof + bonus;
   }
 
@@ -284,10 +285,10 @@ export class Actor5e extends Actor {
     const data = {mod: skl.mod};
 
     // Include a global actor skill bonus
-    const actorBonus = getProperty(this.data.data.bonuses, "skills.check");
+    const actorBonus = getProperty(this.data.data.bonuses, "abilities.skill");
     if ( !!actorBonus ) {
       parts.push("@skillBonus");
-      data.skillBonus = parseInt(actorBonus);
+      data.skillBonus = actorBonus;
     }
 
     // Roll and return
@@ -297,6 +298,7 @@ export class Actor5e extends Actor {
       data: data,
       title: `${CONFIG.DND5E.skills[skillId]} Skill Check`,
       speaker: ChatMessage.getSpeaker({actor: this}),
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     });
   }
 
@@ -345,7 +347,7 @@ export class Actor5e extends Actor {
     const actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
     if ( !!actorBonus ) {
       parts.push("@checkBonus");
-      data.checkBonus = parseInt(actorBonus);
+      data.checkBonus = actorBonus;
     }
 
     // Roll and return
@@ -355,6 +357,7 @@ export class Actor5e extends Actor {
       data: data,
       title: `${label} Ability Test`,
       speaker: ChatMessage.getSpeaker({actor: this}),
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     });
   }
 
@@ -377,7 +380,7 @@ export class Actor5e extends Actor {
     const actorBonus = getProperty(this.data.data.bonuses, "abilities.save");
     if ( !!actorBonus ) {
       parts.push("@saveBonus");
-      data.saveBonus = parseInt(actorBonus);
+      data.saveBonus = actorBonus;
     }
 
     // Roll and return
@@ -387,6 +390,7 @@ export class Actor5e extends Actor {
       data: data,
       title: `${label} Saving Throw`,
       speaker: ChatMessage.getSpeaker({actor: this}),
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     });
   }
 
@@ -394,10 +398,12 @@ export class Actor5e extends Actor {
 
   /**
    * Perform a death saving throw, rolling a d20 plus any global save bonuses
-   * @param {Object} options      Additional options which modify the roll
-   * @return {Promise<Roll>}      A Promise which resolves to the Roll instance
+   * @param {Object} options        Additional options which modify the roll
+   * @return {Promise<Roll|null>}   A Promise which resolves to the Roll instance
    */
   async rollDeathSave(options={}) {
+
+    // Execute the d20 roll dialog
     const bonus = getProperty(this.data.data.bonuses, "abilities.save");
     const parts = !!bonus ? ["@saveBonus"] : [];
     const speaker = ChatMessage.getSpeaker({actor: this});
@@ -406,8 +412,10 @@ export class Actor5e extends Actor {
       parts: parts,
       data: {saveBonus: parseInt(bonus)},
       title: `Death Saving Throw`,
-      speaker: speaker
+      speaker: speaker,
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     });
+    if ( !roll ) return null;
 
     // Take action depending on the result
     const success = roll.total >= 10;

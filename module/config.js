@@ -529,13 +529,6 @@ DND5E.CR_EXP_LEVELS = [
 
 // Configure Optional Character Flags
 DND5E.characterFlags = {
-  "weaponCriticalThreshold": {
-    name: "Weapon Critical Hit Threshold",
-    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
-    section: "Feats",
-    type: Number,
-    placeholder: 20
-  },
   "powerfulBuild": {
     name: "Powerful Build",
     hint: "Provides increased carrying capacity.",
@@ -548,21 +541,21 @@ DND5E.characterFlags = {
     section: "Racial Traits",
     type: Boolean
   },
-  // "elvenAccuracy": {
-  //   name: "Elven Accuracy",
-  //   hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
-  //   section: "Feats",
-  //   type: Boolean
-  // },
+  "elvenAccuracy": {
+    name: "Elven Accuracy",
+    hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
+    section: "Racial Traits",
+    type: Boolean
+  },
+  "halflingLucky": {
+    name: "Halfling Lucky",
+    hint: "Reroll ones when rolling d20 checks.",
+    section: "Racial Traits",
+    type: Boolean
+  },
   "initiativeAdv": {
     name: "Advantage on Initiative",
     hint: "Provided by feats or magical items.",
-    section: "Feats",
-    type: Boolean
-  },
-  "initiativeHalfProf": {
-    name: "Half-Proficiency to Initiative",
-    hint: "Provided by Jack of All Trades or Remarkable Athlete.",
     section: "Feats",
     type: Boolean
   },
@@ -572,30 +565,17 @@ DND5E.characterFlags = {
     section: "Feats",
     type: Boolean
   },
-  "saveBonus": {
-    name: "Saving Throw Bonus",
-    hint: "Bonus modifier to all saving throws (e.g. +1)",
+  "initiativeHalfProf": {
+    name: "Half-Proficiency to Initiative",
+    hint: "Provided by Jack of All Trades or Remarkable Athlete.",
     section: "Feats",
-    type: Number,
-    placeholder: "+0"
+    type: Boolean
   },
-  "spellDCBonus": {
-    name: "Spell DC Bonus",
-    hint: "Modifies normal spellcasting DC.",
+  "weaponCriticalThreshold": {
+    name: "Critical Hit Threshold",
+    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
     section: "Feats",
     type: Number,
-    placeholder: "+0"
+    placeholder: 20
   }
 };
-
-DND5E.ActorBonusTypes = {
-  "mwak": "DND5E.ActionMWAK",
-  "rwak": "DND5E.ActionRWAK",
-  "msak": "DND5E.ActionMSAK",
-  "rsak": "DND5E.ActionRSAK",
-  "damage": "DND5E.BonusDamage",
-  "abilitySave": "DND5E.BonusSave",
-  "abilityCheck": "DND5E.BonusAbility",
-  "skillCheck": "DND5E.BonusSkill",
-  "spellDC": "DND5E.BonusSpellDC"
-}

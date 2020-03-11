@@ -28,7 +28,9 @@ export class ActorSheetFlags extends BaseEntitySheet {
    */
   getData() {
     const data = super.getData();
+    data.actor = this.object;
     data.flags = this._getFlags();
+    data.bonuses = this._getBonuses();
     return data;
   }
 
@@ -48,9 +50,37 @@ export class ActorSheetFlags extends BaseEntitySheet {
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');
       flag.value = this.entity.getFlag("dnd5e", k);
-      flags[v.section][k] = flag;
+      flags[v.section][`flags.dnd5e.${k}`] = flag;
     }
     return flags;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the bonuses fields and their localization strings
+   * @return {Array}
+   * @private
+   */
+  _getBonuses() {
+    const bonuses = [
+      {name: "data.bonuses.mwak.attack", label: "DND5E.BonusMWAttack"},
+      {name: "data.bonuses.mwak.damage", label: "DND5E.BonusMWDamage"},
+      {name: "data.bonuses.rwak.attack", label: "DND5E.BonusRWAttack"},
+      {name: "data.bonuses.rwak.damage", label: "DND5E.BonusRWDamage"},
+      {name: "data.bonuses.msak.attack", label: "DND5E.BonusMSAttack"},
+      {name: "data.bonuses.msak.damage", label: "DND5E.BonusMSDamage"},
+      {name: "data.bonuses.rsak.attack", label: "DND5E.BonusRSAttack"},
+      {name: "data.bonuses.rsak.damage", label: "DND5E.BonusRSDamage"},
+      {name: "data.bonuses.abilities.check", label: "DND5E.BonusAbilityCheck"},
+      {name: "data.bonuses.abilities.save", label: "DND5E.BonusAbilitySave"},
+      {name: "data.bonuses.abilities.skill", label: "DND5E.BonusAbilitySkill"},
+      {name: "data.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
+    ];
+    for ( let b of bonuses ) {
+      b.value = getProperty(this.object.data, b.name) || "";
+    }
+    return bonuses;
   }
 
   /* -------------------------------------------- */
@@ -61,16 +91,18 @@ export class ActorSheetFlags extends BaseEntitySheet {
    */
   _updateObject(event, formData) {
     const actor = this.object;
+    const updateData = expandObject(formData);
 
-    // Iterate over the flags which may be configured
-    const updateData = {};
-    for ( let [k, v] of Object.entries(CONFIG.DND5E.characterFlags) ) {
-      if ( [undefined, null, "", false].includes(formData[k]) ) updateData[`-=${k}`] = null;
-      else if ( (v.type === Number) && (formData[k] === 0) ) updateData[`-=${k}`] = null;
-      else updateData[k] = formData[k];
+    // Unset any flags which are "false"
+    const flags = updateData.flags.dnd5e;
+    for ( let [k, v] of Object.entries(flags) ) {
+      if ( [undefined, null, "", false, 0].includes(v) ) {
+        delete flags[k];
+        flags[`-=${k}`] = null;
+      }
     }
 
-    // Set the new flags in bulk
-    actor.update({'flags.dnd5e': updateData});
+    // Apply the changes
+    return actor.update(updateData);
   }
 }

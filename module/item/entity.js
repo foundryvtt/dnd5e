@@ -12,6 +12,31 @@ export class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Determine which ability score modifier is used by this item
+   * @type {string|null}
+   */
+  get abilityMod() {
+    const itemData = this.data.data;
+    if (!("ability" in itemData)) return null;
+
+    // Case 1 - defined directly by the item
+    if ( itemData.ability ) return itemData.ability;
+
+    // Case 2 - inferred from a parent actor
+    else if ( this.actor ) {
+      const actorData = this.actor.data.data;
+      if ( type === "spell" ) return actorData.attributes.spellcasting || "int";
+      else if ( type === "tool" ) return "int";
+      else return "str";
+    }
+
+    // Case 3 - unknown
+    return null
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement an attack roll as part of its usage
    * @type {boolean}
    */
@@ -444,36 +469,54 @@ export class Item5e extends Item {
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
-
-    // Define Roll parts
-    const parts = ["@atk", `@mod`, "@prof"];
-    if ( (this.data.type === "weapon") && !itemData.proficient ) parts.pop();
-
-    // Define Critical threshold
-    let crit = 20;
-    if ( this.data.type === "weapon" ) crit = this.actor.getFlag("dnd5e", "weaponCriticalThreshold") || 20;
-
-    // Define Roll Data
     const rollData = this._getRollData();
-    const actorBonus = actorData.bonuses[itemData.actionType] || {};
-    rollData["atk"] = parseInt(itemData.attackBonus) + parseInt(actorBonus.attack);
 
-    // Call the roll helper utility
-    const title = `${this.name} - Attack Roll`;
-    return Dice5e.d20Roll({
+    // Define Roll bonuses
+    const parts = [`@mod`];
+    if ( itemData.proficient === true ) {
+      parts.push("@prof");
+    }
+
+    // Attack Bonus
+    const actorBonus = actorData.bonuses[itemData.actionType] || {};
+    if ( itemData.attackBonus || actorBonus.attack ) {
+      parts.push("@atk");
+      rollData["atk"] = [itemData.attackBonus, actorBonus.attack].filterJoin(" + ");
+    }
+
+    // Compose roll options
+    const rollConfig = {
       event: options.event,
       parts: parts,
       actor: this.actor,
       data: rollData,
-      title: title,
+      title: `${this.name} - Attack Roll`,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      critical: crit,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       }
-    });
+    };
+
+    // Special flags for weapon attacks
+    const flags = this.actor.data.flags.dnd5e || {};
+    if ( this.data.type === "weapon" ) {
+
+      // Expand Critical threshold
+      if ( flags.weaponCriticalThreshold ) rollConfig.critical = parseInt(flags.weaponCriticalThreshold);
+
+      // Apply Elven Accuracy
+      if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
+        rollConfig.elvenAccuracy = true;
+      }
+
+      // Apply Halfling Lucky
+      if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
+    }
+
+    // Invoke the d20 roll helper
+    return Dice5e.d20Roll(rollConfig);
   }
 
   /* -------------------------------------------- */
@@ -506,9 +549,9 @@ export class Item5e extends Item {
     // Define Roll Data
     const rollData = this._getRollData();
     const actorBonus = actorData.bonuses[itemData.actionType] || {};
-    if ( actorBonus.damage && (actorBonus.damage !== 0) ) {
+    if ( actorBonus.damage && parseInt(actorBonus.damage) !== 0 ) {
       parts.push("@dmg");
-      rollData["dmg"] = parseInt(actorBonus.damage);
+      rollData["dmg"] = actorBonus.damage;
     }
 
     // Call the roll helper utility
@@ -698,7 +741,8 @@ export class Item5e extends Item {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
-      }
+      },
+      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false
     });
   }
 
@@ -710,7 +754,6 @@ export class Item5e extends Item {
    */
   _getRollData() {
     if ( !this.actor ) return null;
-    const type = this.data.type;
     const itemData = duplicate(this.data.data);
     const actorData = duplicate(this.actor.data.data);
 
@@ -719,13 +762,8 @@ export class Item5e extends Item {
     rollData.item = itemData;
 
     // Include an ability score modifier if one exists
-    if ( "ability" in itemData ) {
-      let abl = itemData.ability;
-      if ( !abl ) {
-        if ( type === "spell" ) abl = actorData.attributes.spellcasting || "int";
-        else if ( type === "tool" ) abl = "int";
-        else abl = "str";
-      }
+    const abl = this.abilityMod;
+    if ( abl ) {
       const ability = actorData.abilities[abl];
       rollData["mod"] = ability.mod || 0;
     }
