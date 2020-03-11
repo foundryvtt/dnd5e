@@ -12,7 +12,6 @@ export const migrateWorld = async function() {
       if ( !isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
-        a.items = a._getItems(); // TODO - Temporary Hack
       }
     } catch(err) {
       console.error(err);
@@ -107,6 +106,7 @@ export const migrateActorData = function(actor) {
   const updateData = {};
 
   // Actor Data Updates
+  _migrateActorBonuses(actor, updateData);
   _migrateActorTraits(actor, updateData);
 
   // Flatten values and remove deprecated fields
@@ -224,12 +224,7 @@ export const migrateSceneData = function(scene) {
       if ( !token.actor ) {
         t.actorId = null;
         t.actorData = {};
-      }
-      const originalActor = game.actors.get(token.actor.id);
-      if (!originalActor) {
-        t.actorId = null;
-        t.actorData = {};
-      } else {
+      } else if ( !t.actorLink ) {
         const updateData = migrateActorData(token.data.actorData);
         t.actorData = mergeObject(token.data.actorData, updateData);
       }
@@ -240,6 +235,20 @@ export const migrateSceneData = function(scene) {
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
+/* -------------------------------------------- */
+
+/**
+ * Migrate the actor bonuses object
+ * @private
+ */
+function _migrateActorBonuses(actor, updateData) {
+  const b = game.system.model.Actor.character.bonuses;
+  for ( let k of Object.keys(actor.data.bonuses || {}) ) {
+    if ( k in b ) updateData[`data.bonuses.${k}`] = b[k];
+    else updateData[`data.bonuses.-=${k}`] = null;
+  }
+}
+
 /* -------------------------------------------- */
 
 /**
@@ -522,8 +531,8 @@ const _migrateSpellComponents = function(item, updateData) {
   updateData["data.components"] = {
     value: "",
     vocal: comps.includes("V"),
-    somatic: comps.includes("M"),
-    material: comps.includes("S"),
+    somatic: comps.includes("S"),
+    material: comps.includes("M"),
     concentration: item.data.concentration.value === true,
     ritual: item.data.ritual.value === true
   };

@@ -90,7 +90,7 @@ Hooks.once("setup", function() {
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
-  const NEEDS_MIGRATION_VERSION = 0.7;
+  const NEEDS_MIGRATION_VERSION = 0.84;
   let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
   if ( needMigration && game.user.isGM ) migrations.migrateWorld();
 
