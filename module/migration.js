@@ -153,11 +153,6 @@ export const migrateActorData = function(actor) {
 export const migrateItemData = function(item) {
   const updateData = {};
 
-  // Migrate backpack to loot
-  if ( item.type === "backpack" ) {
-    _migrateBackpackLoot(item, updateData);
-  }
-
   // Migrate Spell items
   if (item.type === "spell") {
     _migrateSpellComponents(item, updateData);
@@ -271,17 +266,6 @@ const _migrateActorTraits = function(actor, updateData) {
       updateData[`data.traits.${t}.value`] = trait.value.split(",").map(t => choices[t.trim()]).filter(t => !!t);
     }
   }
-};
-
-/* -------------------------------------------- */
-
-/**
- * Migrate from a "backpack" item subtype to a "loot" item subtype for more coherent naming
- * @private
- */
-const _migrateBackpackLoot = function(item, updateData) {
-  updateData["type"] = "loot";
-  updateData["data.-=deprecationWarning"] = null;
 };
 
 /* -------------------------------------------- */
