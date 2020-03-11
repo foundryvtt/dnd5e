@@ -526,12 +526,13 @@ const _migrateSpellComponents = function(item, updateData) {
 
 /**
  * Migrate from a simple object with save.value to an expanded object where the DC is also configured
+ * @deprecated in 0.5.2
  * @private
  */
 const _migrateSpellAction = function(item, updateData) {
 
   // Set default action type for spells
-  if ( item.data.spellType ) {
+  if ( item.data.spellType && !item.data.actionType ) {
     updateData["data.actionType"] = {
       "attack": "rsak",
       "save": "save",
@@ -554,6 +555,7 @@ const _migrateSpellAction = function(item, updateData) {
 
 /**
  * Migrate spell preparation data to the new preparation object
+ * @deprecated in 0.5.2
  * @private
  */
 const _migrateSpellPreparation = function(item, updateData) {
