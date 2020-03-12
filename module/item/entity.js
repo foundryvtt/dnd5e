@@ -474,7 +474,7 @@ export class Item5e extends Item {
 
     // Define Roll bonuses
     const parts = [`@mod`];
-    if ( itemData.proficient === true ) {
+    if ( (this.data.type !== "weapon") || itemData.proficient ) {
       parts.push("@prof");
     }
 
@@ -628,7 +628,7 @@ export class Item5e extends Item {
     const roll = new Roll(itemData.formula, rollData).roll();
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: itemData.chatFlavor || title,
+      flavor: this.data.data.chatFlavor || title,
       rollMode: game.settings.get("core", "rollMode")
     });
     return roll;
