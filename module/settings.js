@@ -97,4 +97,13 @@ export const registerSystemSettings = function() {
       ui.chat.render();
     }
   });
+
+  game.settings.register('dnd5e', 'allowPolymorphing', {
+    name: 'SETTINGS.5eAllowPolymorphingN',
+    hint: 'SETTINGS.5eAllowPolymorphingL',
+    scope: 'world',
+    config: true,
+    default: false,
+    type: Boolean
+  });
 };
