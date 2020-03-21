@@ -442,28 +442,6 @@ const _migrateRemoveDeprecated = function(ent, updateData, toFlatten) {
     parts[parts.length-1] = "-=" + parts[parts.length-1];
     updateData[`data.${parts.join(".")}`] = null;
   }
-
-  // Deprecate types and labels
-  for ( let [k, v] of Object.entries(flat) ) {
-    let parts = k.split(".");
-    parts.pop();
-
-    // Skip any fields which have already been touched by other migrations
-    if ( toDeprecate.some(f => k.startsWith(f) ) ) continue;
-    if ( toFlatten.some(f => k.startsWith(f)) ) continue;
-    if ( updateData.hasOwnProperty(`data.${k}`) ) continue;
-
-    // Remove the data type field
-    const dtypes = ["Number", "String", "Boolean", "Array", "Object"];
-    if ( k.endsWith("type") && dtypes.includes(v) ) {
-      updateData[`data.${k.replace(".type", ".-=type")}`] = null;
-    }
-
-    // Remove string label
-    else if ( k.endsWith("label") ) {
-      updateData[`data.${k.replace(".label", ".-=label")}`] = null;
-    }
-  }
 };
 
 /* -------------------------------------------- */
@@ -575,25 +553,21 @@ const _migrateSpellPreparation = function(item, updateData) {
 const _migrateWeaponProperties = function(item, updateData) {
 
   // Set default activation mode for weapons
-  updateData["data.activation"] = {type: "action", cost: 1};
+  if ( !item.data.activation ) {
+    updateData["data.activation"] = {type: "action", cost: 1};
+  }
 
   // Set default action type for weapons
-  updateData["data.actionType"] = {
-    "simpleM": "mwak",
-    "simpleR": "rwak",
-    "martialM": "mwak",
-    "martialR": "rwak",
-    "natural": "mwak",
-    "improv": "mwak",
-    "ammo": "rwak"
-  }[item.data.weaponType.value] || "mwak";
-
-  // Set default melee weapon range
-  if ( updateData["data.actionType"] === "mwak" ) {
-    updateData["data.range"] = {
-      value: updateData["data.properties.rch"] ? 10 : 5,
-      units: "ft"
-    }
+  if ( !item.data.actionType ) {
+    updateData["data.actionType"] = {
+      "simpleM": "mwak",
+      "simpleR": "rwak",
+      "martialM": "mwak",
+      "martialR": "rwak",
+      "natural": "mwak",
+      "improv": "mwak",
+      "ammo": "rwak"
+    }[item.data.weaponType.value] || "mwak";
   }
 
   // Map weapon property strings to boolean flags

@@ -29,7 +29,7 @@ export class Actor5e extends Actor {
 
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
-    const saveBonus = parseInt(data.bonuses.abilities.save) || 0;
+    const saveBonus = parseInt(getProperty(data, "bonuses.abilities.save")) || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof) + saveBonus;
@@ -374,7 +374,7 @@ export class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
-    const data = {mod: abl.save};
+    const data = {mod: abl.mod};
 
     // Include a global actor ability save bonus
     const actorBonus = getProperty(this.data.data.bonuses, "abilities.save");
