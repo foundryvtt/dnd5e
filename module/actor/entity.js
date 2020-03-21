@@ -2,6 +2,7 @@ import { Dice5e } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AbilityTemplate } from "../pixi/ability-template.js";
+import {DND5E} from '../config.js';
 
 
 /**
@@ -228,7 +229,7 @@ export class Actor5e extends Actor {
   /**
    * Cast a Spell, consuming a spell slot of a certain level
    * @param {Item5e} item   The spell being cast by the actor
-   * @param {Event} event   The originating user interaction which triggered the cast 
+   * @param {Event} event   The originating user interaction which triggered the cast
    */
   async useSpell(item, {configureDialog=true}={}) {
     if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
@@ -241,7 +242,7 @@ export class Actor5e extends Actor {
     // Configure the casting level and whether to consume a spell slot
     let consume = true;
     let placeTemplate = false;
-        
+
     if ( configureDialog ) {
       const spellFormData = await SpellCastDialog.create(this, item);
       lvl = parseInt(spellFormData.get("level"));
@@ -249,7 +250,7 @@ export class Actor5e extends Actor {
       placeTemplate = Boolean(spellFormData.get("placeTemplate"));
       if ( lvl !== item.data.data.level ) {
         item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
-      } 
+      }
     }
 
     // Update Actor data
@@ -420,7 +421,7 @@ export class Actor5e extends Actor {
     // Take action depending on the result
     const success = roll.total >= 10;
     const death = this.data.data.attributes.death;
-    
+
     // Save success
     if ( success ) {
       let successes = (death.success || 0) + (roll.total === 20 ? 2 : 1);
@@ -433,8 +434,8 @@ export class Actor5e extends Actor {
         await ChatMessage.create({content: `${this.name} has survived with 3 death save successes!`, speaker});
       }
       else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
-    } 
-    
+    }
+
     // Save failure
     else {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
@@ -649,6 +650,226 @@ export class Actor5e extends Actor {
       updateData: updateData,
       updateItems: updateItems
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Restore this Actor from a previously transformed state.
+   */
+  restore () {
+    if (!this.getFlag('dnd5e', 'isPolymorphed')) {
+      return;
+    }
+
+    const original = JSON.parse(this.getFlag('dnd5e', 'originalData'));
+    const current = this.data;
+
+    for (const token of
+          canvas.tokens.ownedTokens.filter(token => token.data.actorId === original._id))
+    {
+      let originalTokenData;
+      if (getProperty(token, 'data.flags.dnd5e.originalTokenData')) {
+        originalTokenData = token.data.flags.dnd5e.originalTokenData;
+      } else {
+        originalTokenData = original.token;
+      }
+
+      delete originalTokenData.x;
+      delete originalTokenData.y;
+      token.update(originalTokenData);
+    }
+
+    if (current.type === 'character') {
+      original.data.attributes.exhaustion = current.data.attributes.exhaustion;
+      original.data.attributes.inspiration = current.data.attributes.inspiration;
+    }
+
+    if (!original.flags.dnd5e) {
+      original.flags.dnd5e = {};
+    }
+
+    original.flags.dnd5e.isPolymorphed = false;
+    original.flags.dnd5e['-=originalData'] = null;
+
+    for (const category in original.data) {
+      for (const attr in original.data[category]) {
+        const val = original.data[category][attr];
+        if (typeof val === 'object') {
+          if (val === null) {
+            original.data[category][attr] = '';
+          } else if (val.value === undefined) {
+            val.value = '';
+          }
+        }
+
+        if (['languages', 'di', 'dr', 'dv', 'ci'].includes(attr) && val.custom === undefined) {
+          val.custom = '';
+        }
+      }
+    }
+
+    this.update(original);
+  }
+
+  /**
+   * Transform this Actor into another one.
+   * @param {Object} target The target Actor's data.
+   * @param {Object} options
+   */
+  transformInto (target, options = {}) {
+    if (options.wildshape) {
+      options = DND5E.polymorphWildShape;
+    }
+
+    options = mergeObject(DND5E.polymorphDefaults, options, {inplace: false});
+    const raw = duplicate(target);
+    const original = this.data;
+
+    if (!original.flags.dnd5e) {
+      original.flags.dnd5e = {};
+    }
+
+    if (raw.flags.dnd5e) {
+      delete raw.flags.dnd5e.isPolymorphed;
+      delete raw.flags.dnd5e.originalData;
+    }
+
+    const newData = {
+      data: raw.data,
+      items: raw.items,
+      token: raw.token,
+      img: raw.img,
+      flags: raw.flags
+    };
+
+    newData.token.actorId = original.token.actorId;
+    newData.token.actorLink = original.token.actorLink;
+    newData.token.name = original.token.name;
+
+    for (const trait in newData.data.traits) {
+      if (['languages', 'di', 'dr', 'dv', 'ci'].includes(trait)
+          && newData.data.traits[trait].custom === undefined)
+      {
+        newData.data.traits[trait].custom = '';
+      }
+    }
+
+    if (!newData.flags.dnd5e) {
+      newData.flags.dnd5e = {};
+    }
+
+    if (newData.type === 'character') {
+      newData.data.attributes.exhaustion = original.data.attributes.exhaustion;
+      newData.data.attributes.inspiration = original.data.attributes.inspiration;
+    }
+
+    if (options.keepPhysical) {
+      ['str', 'dex', 'con'].forEach(abl =>
+          newData.data.abilities[abl] = original.data.abilities[abl]);
+    }
+
+    if (options.keepMental) {
+      ['int', 'wis', 'cha'].forEach(abl =>
+          newData.data.abilities[abl] = original.data.abilities[abl]);
+    }
+
+    if (options.keepSaves) {
+      Object.keys(newData.data.abilities).forEach(abl =>
+          newData.data.abilities[abl].proficient = original.data.abilities[abl].proficient);
+    }
+
+    if (options.keepSkills) {
+      newData.data.skills = original.data.skills;
+    }
+
+    if (options.mergeSaves) {
+      Object.entries(newData.data.abilities).forEach(([key, abl]) => {
+        if (original.data.abilities[key].proficient > abl.proficient) {
+          abl.proficient = original.data.abilities[key].proficient;
+        }
+      });
+    }
+
+    if (options.mergeSkills) {
+      Object.entries(newData.data.skills).forEach(([key, newSkill]) => {
+        const originalSkill = original.data.skills[key];
+        if (originalSkill.value < newSkill.value) {
+          return;
+        }
+
+        newSkill.value = originalSkill.value;
+        if (options.keepClass) {
+          return;
+        }
+
+        const oldProf = original.data.attributes.prof * originalSkill.value;
+        const newProf =
+            newData.data.attributes.prof * Math.max(newSkill.value, originalSkill.value);
+        newSkill.bonus = oldProf - newProf;
+      });
+    }
+
+    if (options.keepClass) {
+      newData.items.push(...original.items.filter(item => item.type === 'class'));
+    } else if (newData.data.details.cr) {
+      newData.items.push({
+        type: 'class',
+        name: game.i18n.localize('DND5E.PolymorphTmpClass'),
+        data: { levels: newData.data.details.cr }
+      });
+    }
+
+    if (options.keepFeats) {
+      newData.items.push(...original.items.filter(item => item.type === 'feat'));
+    }
+
+    if (options.keepSpells) {
+      newData.items.push(...original.items.filter(item => item.type === 'spell'));
+    }
+
+    if (options.keepItems) {
+      newData.items.push(...original.items.filter(item =>
+          !['class', 'feat', 'spell'].includes(item.type)));
+    }
+
+    if (options.keepBio) {
+      newData.data.details.biography = original.data.details.biography;
+    }
+
+    if (options.keepVision) {
+      newData.data.traits.senses = original.data.traits.senses;
+      ['dimSight', 'brightSight', 'dimLight', 'brightLight'].forEach(vision =>
+          newData.token[vision] = original.token[vision]);
+    }
+
+    for (const token of
+          canvas.tokens.ownedTokens.filter(token => token.data.actorId === original._id))
+    {
+      const newTokenData = duplicate(newData.token);
+      const originalTokenData = duplicate(token.data);
+
+      if (!newTokenData.flags.dnd5e) {
+        newTokenData.flags.dnd5e = {};
+      }
+
+      if (!original.flags.dnd5e.isPolymorphed) {
+        newTokenData.flags.dnd5e.originalTokenData = originalTokenData;
+      }
+
+      delete newTokenData.x;
+      delete newTokenData.y;
+      delete newTokenData.displayName;
+      delete newTokenData.displayBars;
+      token.update(newTokenData);
+    }
+
+    if (!original.flags.dnd5e.isPolymorphed) {
+      newData.flags.dnd5e.isPolymorphed = true;
+      newData.flags.dnd5e.originalData = JSON.stringify(original);
+    }
+
+    return this.update(newData);
   }
 
   /* -------------------------------------------- */

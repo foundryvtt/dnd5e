@@ -451,6 +451,46 @@ DND5E.spellLevels = {
 
 /* -------------------------------------------- */
 
+// Polymorph options.
+DND5E.polymorphSettings = {
+  keepPhysical: 'DND5E.PolymorphKeepPhysical',
+  keepMental: 'DND5E.PolymorphKeepMental',
+  keepSaves: 'DND5E.PolymorphKeepSaves',
+  keepSkills: 'DND5E.PolymorphKeepSkills',
+  mergeSaves: 'DND5E.PolymorphMergeSaves',
+  mergeSkills: 'DND5E.PolymorphMergeSkills',
+  keepClass: 'DND5E.PolymorphKeepClass',
+  keepFeats: 'DND5E.PolymorphKeepFeats',
+  keepSpells: 'DND5E.PolymorphKeepSpells',
+  keepItems: 'DND5E.PolymorphKeepItems',
+  keepBio: 'DND5E.PolymorphKeepBio',
+  keepVision: 'DND5E.PolymorphKeepVision'
+};
+
+// Wild Shaping.
+DND5E.polymorphWildShape = {
+  keepMental: true,
+  mergeSaves: true,
+  mergeSkills: true
+};
+
+DND5E.polymorphDefaults = {
+  keepPhysical: false,
+  keepMental: false,
+  keepSaves: false,
+  keepSkills: false,
+  mergeSaves: false,
+  mergeSkills: false,
+  keepClass: false,
+  keepFeats: false,
+  keepSpells: false,
+  keepItems: false,
+  keepBio: false,
+  keepVision: false
+};
+
+/* -------------------------------------------- */
+
 /**
  * Skill, ability, and tool proficiency levels
  * Each level provides a proficiency multiplier

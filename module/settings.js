@@ -98,6 +98,9 @@ export const registerSystemSettings = function() {
     }
   });
 
+  /**
+   * Option to allow GMs to restrict polymorphing to GMs only.
+   */
   game.settings.register('dnd5e', 'allowPolymorphing', {
     name: 'SETTINGS.5eAllowPolymorphingN',
     hint: 'SETTINGS.5eAllowPolymorphingL',
@@ -105,5 +108,26 @@ export const registerSystemSettings = function() {
     config: true,
     default: false,
     type: Boolean
+  });
+
+  /**
+   * Remember last-used polymorph settings.
+   */
+  game.settings.register('dnd5e', 'polymorphSettings', {
+    scope: 'client',
+    default: {
+      keepPhysical: false,
+      keepMental: false,
+      keepSaves: false,
+      keepSkills: false,
+      mergeSaves: false,
+      mergeSkills: false,
+      keepClass: false,
+      keepFeats: false,
+      keepSpells: false,
+      keepItems: false,
+      keepBio: false,
+      keepVision: false
+    }
   });
 };

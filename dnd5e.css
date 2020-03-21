@@ -1295,28 +1295,3 @@
   flex: 0 0 32px;
   text-align: center;
 }
-.polymorpher {
-  width: auto;
-}
-.polymorpher ul {
-  width: 100%;
-}
-.polymorpher li {
-  display: flex;
-}
-.polymorpher h3 {
-  display: flex;
-  flex-grow: 1;
-  padding-top: 4px;
-}
-.polymorpher .export,
-.polymorpher .restore,
-.polymorpher .delete {
-  flex: 0 0 90px;
-  border: 1px solid grey;
-  border-radius: 3px;
-  margin: 0 1px;
-}
-.polymorpher .delete {
-  flex: 0 0 20px;
-}

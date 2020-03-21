@@ -21,7 +21,6 @@ import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
 import { Dice5e } from "./module/dice.js";
 import * as chat from "./module/chat.js";
 import * as migrations from "./module/migration.js";
-import {Polymorpher} from './module/polymorpher.js';
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -29,7 +28,6 @@ import {Polymorpher} from './module/polymorpher.js';
 
 Hooks.once("init", function() {
   console.log(`D&D5e | Initializing Dungeons & Dragons 5th Edition System\n${DND5E.ASCII}`);
-  const polymorpher = new Polymorpher();
 
   // Create a D&D5E namespace within the game global
   game.dnd5e = {
@@ -37,8 +35,7 @@ Hooks.once("init", function() {
     Dice5e,
     Item5e,
     migrations,
-    rollItemMacro,
-    polymorpher
+    rollItemMacro
   };
 
   // Record Configuration Values
