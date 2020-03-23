@@ -657,17 +657,15 @@ export class Actor5e extends Actor {
   /**
    * Restore this Actor from a previously transformed state.
    */
-  restore () {
-    if (!this.getFlag('dnd5e', 'isPolymorphed')) {
+  revertOriginalForm () {
+    if (!this.getFlag('dnd5e', 'isPolymorphed') || !this.owner) {
       return;
     }
 
     const original = JSON.parse(this.getFlag('dnd5e', 'originalData'));
     const current = this.data;
 
-    for (const token of
-          canvas.tokens.ownedTokens.filter(token => token.data.actorId === original._id))
-    {
+    for (const token of this.getActiveTokens()) {
       let originalTokenData;
       if (getProperty(token, 'data.flags.dnd5e.originalTokenData')) {
         originalTokenData = token.data.flags.dnd5e.originalTokenData;
@@ -675,12 +673,15 @@ export class Actor5e extends Actor {
         originalTokenData = original.token;
       }
 
+      // Don't jump to the old token's position.
       delete originalTokenData.x;
       delete originalTokenData.y;
       token.update(originalTokenData);
     }
 
     if (current.type === 'character') {
+      // If the Actor currently has inspiration or exhaustion, it's retained
+      // after reverting.
       original.data.attributes.exhaustion = current.data.attributes.exhaustion;
       original.data.attributes.inspiration = current.data.attributes.inspiration;
     }
@@ -714,16 +715,35 @@ export class Actor5e extends Actor {
 
   /**
    * Transform this Actor into another one.
-   * @param {Object} target The target Actor's data.
-   * @param {Object} options
+   * @param {Actor} target The target Actor.
+   * @param {Boolean} [keepPhysical] Keep physical abilities (str, dex, con)
+   * @param {Boolean} [keepMental] Keep mental abilities (int, wis, cha)
+   * @param {Boolean} [keepSaves] Keep saving throw proficiencies
+   * @param {Boolean} [keepSkills] Keep skill proficiencies
+   * @param {Boolean} [mergeSaves] Take the maximum of the save proficiencies
+   * @param {Boolean} [mergeSkills] Take the maximum of the skill proficiencies
+   * @param {Boolean} [keepClass] Keep proficiency bonus
+   * @param {Boolean} [keepFeats] Keep features
+   * @param {Boolean} [keepSpells] Keep spells
+   * @param {Boolean} [keepItems] Keep items
+   * @param {Boolean} [keepBio] Keep biography
+   * @param {Boolean} [keepVision] Keep vision (character and token)
    */
-  transformInto (target, options = {}) {
-    if (options.wildshape) {
-      options = DND5E.polymorphWildShape;
-    }
-
-    options = mergeObject(DND5E.polymorphDefaults, options, {inplace: false});
-    const raw = duplicate(target);
+  transformInto (target, {
+    keepPhysical = false,
+    keepMental = false,
+    keepSaves = false,
+    keepSkills = false,
+    mergeSaves = false,
+    mergeSkills = false,
+    keepClass = false,
+    keepFeats = false,
+    keepSpells = false,
+    keepItems = false,
+    keepBio = false,
+    keepVision = false
+  } = {}) {
+    const raw = duplicate(target.data);
     const original = this.data;
 
     if (!original.flags.dnd5e) {
@@ -764,26 +784,26 @@ export class Actor5e extends Actor {
       newData.data.attributes.inspiration = original.data.attributes.inspiration;
     }
 
-    if (options.keepPhysical) {
+    if (keepPhysical) {
       ['str', 'dex', 'con'].forEach(abl =>
           newData.data.abilities[abl] = original.data.abilities[abl]);
     }
 
-    if (options.keepMental) {
+    if (keepMental) {
       ['int', 'wis', 'cha'].forEach(abl =>
           newData.data.abilities[abl] = original.data.abilities[abl]);
     }
 
-    if (options.keepSaves) {
+    if (keepSaves) {
       Object.keys(newData.data.abilities).forEach(abl =>
           newData.data.abilities[abl].proficient = original.data.abilities[abl].proficient);
     }
 
-    if (options.keepSkills) {
+    if (keepSkills) {
       newData.data.skills = original.data.skills;
     }
 
-    if (options.mergeSaves) {
+    if (mergeSaves) {
       Object.entries(newData.data.abilities).forEach(([key, abl]) => {
         if (original.data.abilities[key].proficient > abl.proficient) {
           abl.proficient = original.data.abilities[key].proficient;
@@ -791,7 +811,7 @@ export class Actor5e extends Actor {
       });
     }
 
-    if (options.mergeSkills) {
+    if (mergeSkills) {
       Object.entries(newData.data.skills).forEach(([key, newSkill]) => {
         const originalSkill = original.data.skills[key];
         if (originalSkill.value < newSkill.value) {
@@ -799,7 +819,7 @@ export class Actor5e extends Actor {
         }
 
         newSkill.value = originalSkill.value;
-        if (options.keepClass) {
+        if (keepClass) {
           return;
         }
 
@@ -810,7 +830,7 @@ export class Actor5e extends Actor {
       });
     }
 
-    if (options.keepClass) {
+    if (keepClass) {
       newData.items.push(...original.items.filter(item => item.type === 'class'));
     } else if (newData.data.details.cr) {
       newData.items.push({
@@ -820,32 +840,30 @@ export class Actor5e extends Actor {
       });
     }
 
-    if (options.keepFeats) {
+    if (keepFeats) {
       newData.items.push(...original.items.filter(item => item.type === 'feat'));
     }
 
-    if (options.keepSpells) {
+    if (keepSpells) {
       newData.items.push(...original.items.filter(item => item.type === 'spell'));
     }
 
-    if (options.keepItems) {
+    if (keepItems) {
       newData.items.push(...original.items.filter(item =>
           !['class', 'feat', 'spell'].includes(item.type)));
     }
 
-    if (options.keepBio) {
+    if (keepBio) {
       newData.data.details.biography = original.data.details.biography;
     }
 
-    if (options.keepVision) {
+    if (keepVision) {
       newData.data.traits.senses = original.data.traits.senses;
       ['dimSight', 'brightSight', 'dimLight', 'brightLight'].forEach(vision =>
           newData.token[vision] = original.token[vision]);
     }
 
-    for (const token of
-          canvas.tokens.ownedTokens.filter(token => token.data.actorId === original._id))
-    {
+    for (const token of this.getActiveTokens()) {
       const newTokenData = duplicate(newData.token);
       const originalTokenData = duplicate(token.data);
 

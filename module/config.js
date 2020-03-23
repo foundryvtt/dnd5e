@@ -467,28 +467,6 @@ DND5E.polymorphSettings = {
   keepVision: 'DND5E.PolymorphKeepVision'
 };
 
-// Wild Shaping.
-DND5E.polymorphWildShape = {
-  keepMental: true,
-  mergeSaves: true,
-  mergeSkills: true
-};
-
-DND5E.polymorphDefaults = {
-  keepPhysical: false,
-  keepMental: false,
-  keepSaves: false,
-  keepSkills: false,
-  mergeSaves: false,
-  mergeSkills: false,
-  keepClass: false,
-  keepFeats: false,
-  keepSpells: false,
-  keepItems: false,
-  keepBio: false,
-  keepVision: false
-};
-
 /* -------------------------------------------- */
 
 /**

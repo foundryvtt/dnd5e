@@ -93,22 +93,6 @@ export class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _getHeaderButtons () {
-    let buttons = super._getHeaderButtons();
-    if (this.actor.getFlag('dnd5e', 'isPolymorphed')) {
-      buttons = [{
-        label: game.i18n.localize('DND5E.PolymorphRestore'),
-        class: 'restore-actor',
-        icon: 'fas fa-backward',
-        onclick: () => this.actor.restore()
-      }].concat(buttons);
-    }
-
-    return buttons;
-  }
-
-  /* -------------------------------------------- */
-
   _prepareTraits(traits) {
     const map = {
       "dr": CONFIG.DND5E.damageTypes,
@@ -439,9 +423,7 @@ export class ActorSheet5e extends ActorSheet {
       targetActor = game.actors.get(data.id);
     }
 
-    if (targetActor) {
-      targetActor = targetActor.data;
-    } else {
+    if (!targetActor) {
       return super._onDrop(event);
     }
 
@@ -468,7 +450,11 @@ export class ActorSheet5e extends ActorSheet {
         wildshape: {
           icon: '<i class="fas fa-paw"></i>',
           label: game.i18n.localize('DND5E.PolymorphWildShape'),
-          callback: () => this.actor.transformInto(targetActor, {wildshape: true})
+          callback: () => this.actor.transformInto(targetActor, {
+            keepMental: true,
+            mergeSaves: true,
+            mergeSkills: true
+          })
         },
         polymorph: {
           icon: '<i class="fas fa-pastafarianism"></i>',
