@@ -655,15 +655,21 @@ export class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Restore this Actor from a previously transformed state.
+   * If this actor was transformed with transformTokens enabled, then its
+   * active tokens need to be returned to their original state. If not, then
+   * we can safely just delete this actor.
    */
   revertOriginalForm () {
     if (!this.getFlag('dnd5e', 'isPolymorphed') || !this.owner) {
       return;
     }
 
-    const original = JSON.parse(this.getFlag('dnd5e', 'originalData'));
+    const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
     const current = this.data;
+
+    if (!original) {
+      return;
+    }
 
     for (const token of this.getActiveTokens()) {
       let originalTokenData;
@@ -682,35 +688,13 @@ export class Actor5e extends Actor {
     if (current.type === 'character') {
       // If the Actor currently has inspiration or exhaustion, it's retained
       // after reverting.
-      original.data.attributes.exhaustion = current.data.attributes.exhaustion;
-      original.data.attributes.inspiration = current.data.attributes.inspiration;
+      original.update({
+        'data.attributes.exhaustion': current.data.attributes.exhaustion,
+        'data.attributes.inspiration': current.data.attributes.inspiration
+      });
     }
 
-    if (!original.flags.dnd5e) {
-      original.flags.dnd5e = {};
-    }
-
-    original.flags.dnd5e.isPolymorphed = false;
-    original.flags.dnd5e['-=originalData'] = null;
-
-    for (const category in original.data) {
-      for (const attr in original.data[category]) {
-        const val = original.data[category][attr];
-        if (typeof val === 'object') {
-          if (val === null) {
-            original.data[category][attr] = '';
-          } else if (val.value === undefined) {
-            val.value = '';
-          }
-        }
-
-        if (['languages', 'di', 'dr', 'dv', 'ci'].includes(attr) && val.custom === undefined) {
-          val.custom = '';
-        }
-      }
-    }
-
-    this.update(original);
+    this.delete();
   }
 
   /**
@@ -727,9 +711,10 @@ export class Actor5e extends Actor {
    * @param {Boolean} [keepSpells] Keep spells
    * @param {Boolean} [keepItems] Keep items
    * @param {Boolean} [keepBio] Keep biography
-   * @param {Boolean} [keepVision] Keep vision (character and token)
+   * @param {Boolean} [keepVision] Keep vision
+   * @param {Boolean} [transformTokens] Transform active tokens too
    */
-  transformInto (target, {
+  async transformInto (target, {
     keepPhysical = false,
     keepMental = false,
     keepSaves = false,
@@ -741,7 +726,8 @@ export class Actor5e extends Actor {
     keepSpells = false,
     keepItems = false,
     keepBio = false,
-    keepVision = false
+    keepVision = false,
+    transformTokens = false
   } = {}) {
     const raw = duplicate(target.data);
     const original = this.data;
@@ -752,7 +738,7 @@ export class Actor5e extends Actor {
 
     if (raw.flags.dnd5e) {
       delete raw.flags.dnd5e.isPolymorphed;
-      delete raw.flags.dnd5e.originalData;
+      delete raw.flags.dnd5e.originalActor;
     }
 
     const newData = {
@@ -763,7 +749,7 @@ export class Actor5e extends Actor {
       flags: raw.flags
     };
 
-    newData.token.actorId = original.token.actorId;
+    delete newData.token.actorId;
     newData.token.actorLink = original.token.actorLink;
     newData.token.name = original.token.name;
 
@@ -863,31 +849,38 @@ export class Actor5e extends Actor {
           newData.token[vision] = original.token[vision]);
     }
 
-    for (const token of this.getActiveTokens()) {
-      const newTokenData = duplicate(newData.token);
-      const originalTokenData = duplicate(token.data);
-
-      if (!newTokenData.flags.dnd5e) {
-        newTokenData.flags.dnd5e = {};
-      }
-
-      if (!original.flags.dnd5e.isPolymorphed) {
-        newTokenData.flags.dnd5e.originalTokenData = originalTokenData;
-      }
-
-      delete newTokenData.x;
-      delete newTokenData.y;
-      delete newTokenData.displayName;
-      delete newTokenData.displayBars;
-      token.update(newTokenData);
-    }
-
     if (!original.flags.dnd5e.isPolymorphed) {
       newData.flags.dnd5e.isPolymorphed = true;
-      newData.flags.dnd5e.originalData = JSON.stringify(original);
+      newData.flags.dnd5e.originalActor = original._id;
     }
 
-    return this.update(newData);
+    const newActor = await Actor.create({
+      type: original.type,
+      name: `${original.name} (${raw.name})`,
+      ...newData
+    }, {renderSheet: true});
+
+    if (transformTokens) {
+      for (const token of this.getActiveTokens()) {
+        const newTokenData = duplicate(newData.token);
+        const originalTokenData = duplicate(token.data);
+
+        if (!newTokenData.flags.dnd5e) {
+          newTokenData.flags.dnd5e = {};
+        }
+
+        if (!original.flags.dnd5e.isPolymorphed) {
+          newTokenData.flags.dnd5e.originalTokenData = originalTokenData;
+        }
+
+        delete newTokenData.x;
+        delete newTokenData.y;
+        delete newTokenData.displayName;
+        delete newTokenData.displayBars;
+        newTokenData.actorId = newActor.data._id;
+        token.update(newTokenData);
+      }
+    }
   }
 
   /* -------------------------------------------- */

@@ -1,8 +1,15 @@
-{{#each options}}
+{{#each i18n}}
 	<div>
 		<label class="checkbox" for="{{@key}}">
-			<input type="checkbox" name="{{@key}}" {{checked this}}>
-			{{localize (lookup ../i18n @key)}}
+			<input type="checkbox" name="{{@key}}" {{checked (lookup ../options @key)}}>
+			{{localize this}}
 		</label>
 	</div>
 {{/each}}
+<hr>
+<div>
+	<label class="checkbox" for="transformTokens">
+		<input type="checkbox" name="transformTokens" {{checked options.transformTokens}}>
+		{{localize 'DND5E.PolymorphTokens'}}
+	</label>
+</div>

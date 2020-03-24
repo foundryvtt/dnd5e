@@ -1,5 +1,5 @@
-import { ActorTraitSelector } from "../../apps/trait-selector.js";
-import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import {ActorTraitSelector} from "../../apps/trait-selector.js";
+import {ActorSheetFlags} from "../../apps/actor-flags.js";
 import {DND5E} from '../../config.js';
 
 /**
@@ -432,6 +432,13 @@ export class ActorSheet5e extends ActorSheet {
       i18n: DND5E.polymorphSettings
     });
 
+    const rememberOptions = html => {
+      const options = {};
+      html.find('input').each((i, el) => options[el.name] = el.checked);
+      game.settings.set('dnd5e', 'polymorphSettings', options);
+      return options;
+    };
+
     new Dialog({
       title: game.i18n.localize('DND5E.PolymorphPromptTitle'),
       content: dlg,
@@ -440,26 +447,24 @@ export class ActorSheet5e extends ActorSheet {
         accept: {
           icon: '<i class="fas fa-check"></i>',
           label: game.i18n.localize('DND5E.PolymorphAcceptSettings'),
-          callback: html => {
-            const options = {};
-            html.find('input').each((i, el) => options[el.name] = el.checked);
-            game.settings.set('dnd5e', 'polymorphSettings', options);
-            this.actor.transformInto(targetActor, options);
-          }
+          callback: html => this.actor.transformInto(targetActor, rememberOptions(html))
         },
         wildshape: {
           icon: '<i class="fas fa-paw"></i>',
           label: game.i18n.localize('DND5E.PolymorphWildShape'),
-          callback: () => this.actor.transformInto(targetActor, {
+          callback: html => this.actor.transformInto(targetActor, {
             keepMental: true,
             mergeSaves: true,
-            mergeSkills: true
+            mergeSkills: true,
+            transformTokens: rememberOptions(html).transformTokens
           })
         },
         polymorph: {
           icon: '<i class="fas fa-pastafarianism"></i>',
           label: game.i18n.localize('DND5E.Polymorph'),
-          callback: () => this.actor.transformInto(targetActor)
+          callback: html => this.actor.transformInto(targetActor, {
+            transformTokens: rememberOptions(html).transformTokens
+          })
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
