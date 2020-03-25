@@ -679,9 +679,14 @@ export class Actor5e extends Actor {
         originalTokenData = original.token;
       }
 
+      if (!originalTokenData) {
+        continue;
+      }
+
       // Don't jump to the old token's position.
       delete originalTokenData.x;
       delete originalTokenData.y;
+      originalTokenData['-=flags.dnd5e.originalTokenData'] = null;
       token.update(originalTokenData);
     }
 
@@ -752,6 +757,7 @@ export class Actor5e extends Actor {
     delete newData.token.actorId;
     newData.token.actorLink = original.token.actorLink;
     newData.token.name = original.token.name;
+    newData.folder = original.folder;
 
     for (const trait in newData.data.traits) {
       if (['languages', 'di', 'dr', 'dv', 'ci'].includes(trait)
@@ -843,14 +849,18 @@ export class Actor5e extends Actor {
       newData.data.details.biography = original.data.details.biography;
     }
 
+    const visionProperties =
+        ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'];
+
     if (keepVision) {
       newData.data.traits.senses = original.data.traits.senses;
-      ['dimSight', 'brightSight', 'dimLight', 'brightLight'].forEach(vision =>
-          newData.token[vision] = original.token[vision]);
+      visionProperties.forEach(vision => newData.token[vision] = original.token[vision]);
     }
 
-    if (!original.flags.dnd5e.isPolymorphed) {
-      newData.flags.dnd5e.isPolymorphed = true;
+    newData.flags.dnd5e.isPolymorphed = true;
+    if (original.flags.dnd5e.isPolymorphed) {
+      newData.flags.dnd5e.originalActor = original.flags.dnd5e.originalActor;
+    } else {
       newData.flags.dnd5e.originalActor = original._id;
     }
 
@@ -877,6 +887,11 @@ export class Actor5e extends Actor {
         delete newTokenData.y;
         delete newTokenData.displayName;
         delete newTokenData.displayBars;
+
+        if (keepVision) {
+          visionProperties.forEach(vision => newTokenData[vision] = originalTokenData[vision]);
+        }
+
         newTokenData.actorId = newActor.data._id;
         token.update(newTokenData);
       }

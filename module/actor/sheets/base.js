@@ -434,7 +434,10 @@ export class ActorSheet5e extends ActorSheet {
 
     const rememberOptions = html => {
       const options = {};
-      html.find('input').each((i, el) => options[el.name] = el.checked);
+      html.find('input').each((i, el) => {
+        options[el.name] = el.checked;
+      });
+
       game.settings.set('dnd5e', 'polymorphSettings', options);
       return options;
     };
