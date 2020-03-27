@@ -1,5 +1,6 @@
-import { ActorTraitSelector } from "../../apps/trait-selector.js";
-import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import {ActorTraitSelector} from "../../apps/trait-selector.js";
+import {ActorSheetFlags} from "../../apps/actor-flags.js";
+import {DND5E} from '../../config.js';
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
@@ -299,7 +300,7 @@ export class ActorSheet5e extends ActorSheet {
     html.find('.item-create').click(this._onItemCreate.bind(this));
     html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
-    
+
     // Item Uses
     html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
 
@@ -392,6 +393,96 @@ export class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Handle dropping another Actor onto this one, potentially transforming
+   * them into the dropped Actor.
+   * @private
+   * @param {DragEvent} event
+   */
+  async _onDrop (event) {
+    event.preventDefault();
+
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
+    } catch (err) {
+      return false;
+    }
+
+    if (!data || data.type !== 'Actor'
+        || (!game.user.isGM && !game.settings.get('dnd5e', 'allowPolymorphing')))
+    {
+      return super._onDrop(event);
+    }
+
+    let targetActor;
+    if (data.pack) {
+      const pack = game.packs.find(p => p.collection === data.pack);
+      targetActor = await pack.getEntity(data.id);
+    } else {
+      targetActor = game.actors.get(data.id);
+    }
+
+    if (!targetActor) {
+      return super._onDrop(event);
+    }
+
+    const dlg = await renderTemplate('systems/dnd5e/templates/apps/polymorph-prompt.html', {
+      options: game.settings.get('dnd5e', 'polymorphSettings'),
+      i18n: DND5E.polymorphSettings,
+      isToken: this.actor.isToken
+    });
+
+    const rememberOptions = html => {
+      const options = {};
+      html.find('input').each((i, el) => {
+        options[el.name] = el.checked;
+      });
+
+      const oldSettings = game.settings.get('dnd5e', 'polymorphSettings');
+      game.settings.set('dnd5e', 'polymorphSettings',
+          mergeObject(oldSettings, options, {inplace: false}));
+
+      return options;
+    };
+
+    new Dialog({
+      title: game.i18n.localize('DND5E.PolymorphPromptTitle'),
+      content: dlg,
+      default: 'accept',
+      buttons: {
+        accept: {
+          icon: '<i class="fas fa-check"></i>',
+          label: game.i18n.localize('DND5E.PolymorphAcceptSettings'),
+          callback: html => this.actor.transformInto(targetActor, rememberOptions(html))
+        },
+        wildshape: {
+          icon: '<i class="fas fa-paw"></i>',
+          label: game.i18n.localize('DND5E.PolymorphWildShape'),
+          callback: html => this.actor.transformInto(targetActor, {
+            keepMental: true,
+            mergeSaves: true,
+            mergeSkills: true,
+            transformTokens: rememberOptions(html).transformTokens
+          })
+        },
+        polymorph: {
+          icon: '<i class="fas fa-pastafarianism"></i>',
+          label: game.i18n.localize('DND5E.Polymorph'),
+          callback: html => this.actor.transformInto(targetActor, {
+            transformTokens: rememberOptions(html).transformTokens
+          })
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize('DND5E.cancel')
+        }
+      }
+    }, {classes: ['dialog', 'dnd5e']}).render(true);
+  }
+
+  /* -------------------------------------------- */
+
     /**
      * Change the uses amount of an Owned Item within the Actor
      * @param {Event} event   The triggering click event
@@ -405,7 +496,7 @@ export class ActorSheet5e extends ActorSheet {
         event.target.value = uses;
         return item.update({ 'data.uses.value': uses });
     }
-    
+
   /* -------------------------------------------- */
 
   /**
@@ -587,5 +678,16 @@ export class ActorSheet5e extends ActorSheet {
       choices: CONFIG.DND5E[a.dataset.options]
     };
     new ActorTraitSelector(this.actor, options).render(true)
+  }
+
+  async _render (...args) {
+    await super._render(...args);
+    this.element.find('.restore-transform').remove();
+    if (this.actor.getFlag('dnd5e', 'isPolymorphed')) {
+      $('<a class="restore-transform"><i class="fas fa-backward"></i>'
+        + game.i18n.localize('DND5E.PolymorphRestoreTransformation') + '</a>')
+        .insertAfter(this.element.find('.window-title'))
+        .click(() => this.actor.revertOriginalForm());
+    }
   }
 }

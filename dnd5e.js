@@ -35,7 +35,7 @@ Hooks.once("init", function() {
     Dice5e,
     Item5e,
     migrations,
-    rollItemMacro,
+    rollItemMacro
   };
 
   // Record Configuration Values
@@ -130,7 +130,20 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 });
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
-
+Hooks.on('getActorDirectoryEntryContext', (html, entryOptions) => {
+  entryOptions.push({
+    name: 'DND5E.PolymorphRestoreTransformation',
+    icon: '<i class="fas fa-backward"></i>',
+    callback: li => {
+      const actor = game.actors.get(li.data('entityId'));
+      actor.revertOriginalForm();
+    },
+    condition: li => {
+      const actor = game.actors.get(li.data('entityId'));
+      return actor && actor.getFlag('dnd5e', 'isPolymorphed');
+    }
+  });
+});
 
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */
