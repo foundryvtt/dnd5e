@@ -659,19 +659,28 @@ export class Actor5e extends Actor {
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
    */
-  revertOriginalForm () {
+  async revertOriginalForm () {
     if (!this.getFlag('dnd5e', 'isPolymorphed') || !this.owner) {
       return;
     }
 
     const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
     const current = this.data;
+    const exhaustion = current.data.attributes.exhaustion;
+    const inspiration = current.data.attributes.inspiration;
 
-    if (!original) {
+    if (!original && !this.isToken) {
       return;
     }
 
-    for (const token of this.getActiveTokens()) {
+    const tokens = [];
+    if (this.isToken) {
+      tokens.push(this.token);
+    } else {
+      tokens.push(...this.getActiveTokens(true));
+    }
+
+    for (const token of tokens) {
       let originalTokenData;
       if (getProperty(token, 'data.flags.dnd5e.originalTokenData')) {
         originalTokenData = token.data.flags.dnd5e.originalTokenData;
@@ -687,19 +696,27 @@ export class Actor5e extends Actor {
       delete originalTokenData.x;
       delete originalTokenData.y;
       originalTokenData['-=flags.dnd5e.originalTokenData'] = null;
+
+      if (this.isToken) {
+        // Clear out the old data so the merge doesn't leave it around.
+        await token.update({'-=actorData': null});
+        originalTokenData['actorData.data.attributes.exhaustion'] = exhaustion;
+        originalTokenData['actorData.data.attributes.inspiration'] = inspiration;
+      }
+
       token.update(originalTokenData);
     }
 
-    if (current.type === 'character') {
+    if (!this.isToken) {
       // If the Actor currently has inspiration or exhaustion, it's retained
       // after reverting.
       original.update({
-        'data.attributes.exhaustion': current.data.attributes.exhaustion,
-        'data.attributes.inspiration': current.data.attributes.inspiration
+        'data.attributes.exhaustion': exhaustion,
+        'data.attributes.inspiration': inspiration
       });
-    }
 
-    this.delete();
+      this.delete();
+    }
   }
 
   /**
@@ -717,7 +734,7 @@ export class Actor5e extends Actor {
    * @param {Boolean} [keepItems] Keep items
    * @param {Boolean} [keepBio] Keep biography
    * @param {Boolean} [keepVision] Keep vision
-   * @param {Boolean} [transformTokens] Transform active tokens too
+   * @param {Boolean} [transformTokens] Transform linked tokens too
    */
   async transformInto (target, {
     keepPhysical = false,
@@ -735,7 +752,7 @@ export class Actor5e extends Actor {
     transformTokens = false
   } = {}) {
     const raw = duplicate(target.data);
-    const original = this.data;
+    const original = duplicate(this.data);
 
     if (!original.flags.dnd5e) {
       original.flags.dnd5e = {};
@@ -771,10 +788,8 @@ export class Actor5e extends Actor {
       newData.flags.dnd5e = {};
     }
 
-    if (newData.type === 'character') {
-      newData.data.attributes.exhaustion = original.data.attributes.exhaustion;
-      newData.data.attributes.inspiration = original.data.attributes.inspiration;
-    }
+    newData.data.attributes.exhaustion = original.data.attributes.exhaustion;
+    newData.data.attributes.inspiration = original.data.attributes.inspiration;
 
     if (keepPhysical) {
       ['str', 'dex', 'con'].forEach(abl =>
@@ -864,16 +879,31 @@ export class Actor5e extends Actor {
       newData.flags.dnd5e.originalActor = original._id;
     }
 
-    const newActor = await Actor.create({
-      type: original.type,
-      name: `${original.name} (${raw.name})`,
-      ...newData
-    }, {renderSheet: true});
+    let newActor, originalTokenData;
+    if (this.isToken) {
+      originalTokenData = duplicate(this.token.data);
+      await this.update(newData);
+    } else {
+      newActor = await Actor.create({
+        type: original.type,
+        name: `${original.name} (${raw.name})`,
+        ...newData
+      }, {renderSheet: true});
+    }
 
-    if (transformTokens) {
-      for (const token of this.getActiveTokens()) {
+    if (this.isToken || transformTokens) {
+      const tokens = [];
+      if (this.isToken) {
+        tokens.push(this.token);
+      } else {
+        tokens.push(...this.getActiveTokens(true));
+      }
+
+      for (const token of tokens) {
         const newTokenData = duplicate(newData.token);
-        const originalTokenData = duplicate(token.data);
+        if (!originalTokenData) {
+          originalTokenData = duplicate(token.data);
+        }
 
         if (!newTokenData.flags.dnd5e) {
           newTokenData.flags.dnd5e = {};
@@ -892,7 +922,12 @@ export class Actor5e extends Actor {
           visionProperties.forEach(vision => newTokenData[vision] = originalTokenData[vision]);
         }
 
-        newTokenData.actorId = newActor.data._id;
+        if (!this.isToken) {
+          newTokenData.name = newActor.data.name;
+          newTokenData.actorId = newActor.data._id;
+          newTokenData.actorLink = true;
+        }
+
         token.update(newTokenData);
       }
     }

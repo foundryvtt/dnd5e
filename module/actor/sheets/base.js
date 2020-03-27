@@ -429,7 +429,8 @@ export class ActorSheet5e extends ActorSheet {
 
     const dlg = await renderTemplate('systems/dnd5e/templates/apps/polymorph-prompt.html', {
       options: game.settings.get('dnd5e', 'polymorphSettings'),
-      i18n: DND5E.polymorphSettings
+      i18n: DND5E.polymorphSettings,
+      isToken: this.actor.isToken
     });
 
     const rememberOptions = html => {
@@ -438,7 +439,10 @@ export class ActorSheet5e extends ActorSheet {
         options[el.name] = el.checked;
       });
 
-      game.settings.set('dnd5e', 'polymorphSettings', options);
+      const oldSettings = game.settings.get('dnd5e', 'polymorphSettings');
+      game.settings.set('dnd5e', 'polymorphSettings',
+          mergeObject(oldSettings, options, {inplace: false}));
+
       return options;
     };
 
@@ -674,5 +678,16 @@ export class ActorSheet5e extends ActorSheet {
       choices: CONFIG.DND5E[a.dataset.options]
     };
     new ActorTraitSelector(this.actor, options).render(true)
+  }
+
+  async _render (...args) {
+    await super._render(...args);
+    this.element.find('.restore-transform').remove();
+    if (this.actor.getFlag('dnd5e', 'isPolymorphed')) {
+      $('<a class="restore-transform"><i class="fas fa-backward"></i>'
+        + game.i18n.localize('DND5E.PolymorphRestoreTransformation') + '</a>')
+        .insertAfter(this.element.find('.window-title'))
+        .click(() => this.actor.revertOriginalForm());
+    }
   }
 }

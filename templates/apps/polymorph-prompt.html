@@ -6,6 +6,7 @@
 		</label>
 	</div>
 {{/each}}
+{{#unless isToken}}
 <hr>
 <div>
 	<label class="checkbox" for="transformTokens">
@@ -14,3 +15,4 @@
 		{{localize 'DND5E.PolymorphTokens'}}
 	</label>
 </div>
+{{/unless}}
