@@ -146,6 +146,21 @@ export class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  getRollData() {
+    const data = super.getRollData();
+    data.classes = this.data.items.reduce((obj, i) => {
+      if ( i.type === "class" ) {
+        obj[i.name.slugify({strict: true})] = i.data;
+      }
+      return obj;
+    }, {});
+    data.prof = this.data.data.attributes.prof;
+    return data;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Listeners and Handlers
   /* -------------------------------------------- */
 
@@ -649,6 +664,30 @@ export class Actor5e extends Actor {
       updateData: updateData,
       updateItems: updateItems
     }
+  }
+
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being
+   * carried by an Actor.
+   * @return {Promise<Actor5e>}
+   */
+  convertCurrency() {
+    const curr = duplicate(this.data.data.currency);
+    const convert = {
+      cp: {into: "sp", each: 10},
+      sp: {into: "ep", each: 5 },
+      ep: {into: "gp", each: 2 },
+      gp: {into: "pp", each: 10}
+    };
+    for ( let [c, t] of Object.entries(convert) ) {
+      let change = Math.floor(curr[c] / t.each);
+      curr[c] -= (change * t.each);
+      curr[t.into] += change;
+    }
+    return this.update({"data.currency": curr});
   }
 
   /* -------------------------------------------- */

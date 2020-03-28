@@ -30,8 +30,8 @@ export class Dice5e {
     // Handle input arguments
     flavor = flavor || title;
     speaker = speaker || ChatMessage.getSpeaker();
-    const rollMode = game.settings.get("core", "rollMode");
     parts = parts.concat(["@bonus"]);
+    let rollMode = game.settings.get("core", "rollMode");
     let rolled = false;
 
     // Define inner roll function
@@ -59,15 +59,18 @@ export class Dice5e {
       parts.unshift(`${nd}d20${mods}`);
 
       // Optionally include a situational bonus
-      if ( form !== null ) data['bonus'] = form.find('[name="bonus"]').val();
+      if ( form !== null ) data['bonus'] = form.bonus.value;
       if ( !data["bonus"] ) parts.pop();
 
       // Optionally include an ability score selection (used for tool checks)
-      const ability = form ? form.find('[name="ability"]') : null;
-      if ( ability && ability.length && ability.val() ) {
-        data.ability = ability.val();
+      const ability = form ? form.ability : null;
+      if ( ability && ability.value ) {
+        data.ability = ability.value;
         const abl = data.abilities[data.ability];
-        if ( abl ) data.mod = abl.mod;
+        if ( abl ) {
+          data.mod = abl.mod;
+          flavor += ` (${CONFIG.DND5E.abilities[data.ability]})`;
+        }
       }
 
       // Execute the roll and flag critical thresholds on the d20
@@ -77,11 +80,11 @@ export class Dice5e {
       d20.options.fumble = fumble;
 
       // Convert the roll to a chat message and return the roll
+      rollMode = form ? form.rollMode.value : rollMode;
       roll.toMessage({
         speaker: speaker,
-        flavor: flavor,
-        rollMode: form ? form.find('[name="rollMode"]').val() : rollMode
-      });
+        flavor: flavor
+      }, { rollMode });
       rolled = true;
       return roll;
     };
@@ -113,15 +116,15 @@ export class Dice5e {
         buttons: {
           advantage: {
             label: "Advantage",
-            callback: html => roll = _roll(parts, 1, html)
+            callback: html => roll = _roll(parts, 1, html[0].children[0])
           },
           normal: {
             label: "Normal",
-            callback: html => roll = _roll(parts, 0, html)
+            callback: html => roll = _roll(parts, 0, html[0].children[0])
           },
           disadvantage: {
             label: "Disadvantage",
-            callback: html => roll = _roll(parts, -1, html)
+            callback: html => roll = _roll(parts, -1, html[0].children[0])
           }
         },
         default: "normal",
@@ -161,12 +164,12 @@ export class Dice5e {
     // Handle input arguments
     flavor = flavor || title;
     speaker = speaker || ChatMessage.getSpeaker();
-    const rollMode = game.settings.get("core", "rollMode");
+    let rollMode = game.settings.get("core", "rollMode");
     let rolled = false;
 
     // Define inner roll function
     const _roll = function(parts, crit, form) {
-      data['bonus'] = form ? form.find('[name="bonus"]').val() : 0;
+      data['bonus'] = form ? form.bonus.value : 0;
       let roll = new Roll(parts.join("+"), data);
 
       // Modify the damage formula for critical hits
@@ -178,11 +181,11 @@ export class Dice5e {
       }
 
       // Convert the roll to a chat message
+      rollMode = form ? form.rollMode.value : rollMode;
       roll.toMessage({
         speaker: speaker,
-        flavor: flavor,
-        rollMode: form ? form.find('[name="rollMode"]').val() : rollMode
-      });
+        flavor: flavor
+      }, { rollMode });
       rolled = true;
       return roll;
     };
@@ -211,11 +214,11 @@ export class Dice5e {
           critical: {
             condition: critical,
             label: "Critical Hit",
-            callback: html => roll = _roll(parts, true, html)
+            callback: html => roll = _roll(parts, true, html[0].children[0])
           },
           normal: {
             label: critical ? "Normal" : "Roll",
-            callback: html => roll = _roll(parts, false, html)
+            callback: html => roll = _roll(parts, false, html[0].children[0])
           },
         },
         default: "normal",

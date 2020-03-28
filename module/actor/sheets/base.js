@@ -31,7 +31,8 @@ export class ActorSheet5e extends ActorSheet {
         ".inventory .inventory-list",
         ".features .inventory-list",
         ".spellbook .inventory-list"
-      ]
+      ],
+      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
     });
   }
 
@@ -247,14 +248,6 @@ export class ActorSheet5e extends ActorSheet {
    */
   activateListeners(html) {
 
-    // Activate tabs
-    new Tabs(html.find(".tabs"), {
-      initial: this["_sheetTab"],
-      callback: clicked => {
-        this["_sheetTab"] = clicked.data("tab");
-      }
-    });
-
     // Activate Item Filters
     const filterLists = html.find(".filter-list");
     filterLists.each(this._initializeFilterItemList.bind(this));
@@ -263,57 +256,53 @@ export class ActorSheet5e extends ActorSheet {
     // Item summaries
     html.find('.item .item-name h4').click(event => this._onItemSummary(event));
 
-    // Everything below here is only needed if the sheet is editable
-    if (!this.options.editable) return;
+    // Editable Only Listeners
+    if ( this.isEditable ) {
 
-    // Relative updates for numeric fields
-    html.find('input[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
+      // Relative updates for numeric fields
+      html.find('input[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
-    /* -------------------------------------------- */
-    /*  Abilities, Skills, and Traits
-     /* -------------------------------------------- */
+      // Ability Proficiency
+      html.find('.ability-proficiency').click(this._onToggleAbilityProficiency.bind(this));
 
-    // Ability Proficiency
-    html.find('.ability-proficiency').click(this._onToggleAbilityProficiency.bind(this));
+      // Toggle Skill Proficiency
+      html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
-    // Ability Checks
-    html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
+      // Trait Selector
+      html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
-    // Toggle Skill Proficiency
-    html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
+      // Configure Special Flags
+      html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
 
-    // Roll Skill Checks
-    html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+      // Owned Item management
+      html.find('.item-create').click(this._onItemCreate.bind(this));
+      html.find('.item-edit').click(this._onItemEdit.bind(this));
+      html.find('.item-delete').click(this._onItemDelete.bind(this));
+      html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+    }
 
-    // Trait Selector
-    html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+    // Owner Only Listeners
+    if ( this.actor.owner ) {
 
-    // Configure Special Flags
-    html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+      // Ability Checks
+      html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
 
-    /* -------------------------------------------- */
-    /*  Inventory
-    /* -------------------------------------------- */
 
-    // Owned Item management
-    html.find('.item-create').click(this._onItemCreate.bind(this));
-    html.find('.item-edit').click(this._onItemEdit.bind(this));
-    html.find('.item-delete').click(this._onItemDelete.bind(this));
-    
-    // Item Uses
-    html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+      // Roll Skill Checks
+      html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
-    // Item Dragging
-    let handler = ev => this._onDragItemStart(ev);
-    html.find('li.item').each((i, li) => {
-      if ( li.classList.contains("inventory-header") ) return;
-      li.setAttribute("draggable", true);
-      li.addEventListener("dragstart", handler, false);
-    });
+      // Item Dragging
+      let handler = ev => this._onDragItemStart(ev);
+      html.find('li.item').each((i, li) => {
+        if ( li.classList.contains("inventory-header") ) return;
+        li.setAttribute("draggable", true);
+        li.addEventListener("dragstart", handler, false);
+      });
 
-    // Item Rolling
-    html.find('.item .item-image').click(event => this._onItemRoll(event));
-    html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+      // Item Rolling
+      html.find('.item .item-image').click(event => this._onItemRoll(event));
+      html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+    }
 
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);

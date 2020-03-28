@@ -3,34 +3,22 @@
  * @type {ItemSheet}
  */
 export class ItemSheet5e extends ItemSheet {
-  constructor(...args) {
-    super(...args);
 
-    /**
-     * The tab being browsed
-     * @type {string}
-     */
-    this._sheetTab = null;
-  }
-
-  /* -------------------------------------------- */
-
+  /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       width: 560,
       height: 420,
       classes: ["dnd5e", "sheet", "item"],
       resizable: false,
-      scrollY: [".tab.details"]
+      scrollY: [".tab.details"],
+      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
     });
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Return a dynamic reference to the HTML template path used to render this Item Sheet
-   * @return {string}
-   */
+  /** @override */
   get template() {
     const path = "systems/dnd5e/templates/items/";
     return `${path}/${this.item.data.type}.html`;
@@ -38,10 +26,7 @@ export class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare item sheet data
-   * Start with the base item data and extending with additional properties for rendering.
-   */
+  /** @override */
   getData() {
     const data = super.getData();
     data.labels = this.item.labels;
@@ -131,7 +116,7 @@ export class ItemSheet5e extends ItemSheet {
 
   /** @override */
   setPosition(position={}) {
-    position.height = this._sheetTab === "details" ? "auto" : this.options.height;
+    position.height = this._tabs[0].active === "details" ? "auto" : this.options.height;
     return super.setPosition(position);
   }
 
@@ -139,10 +124,7 @@ export class ItemSheet5e extends ItemSheet {
   /*  Form Submission                             */
 	/* -------------------------------------------- */
 
-  /**
-   * Extend the parent class _updateObject method to ensure that damage ends up in an Array
-   * @private
-   */
+  /** @override */
   _updateObject(event, formData) {
 
     // Handle Damage Array
@@ -160,22 +142,9 @@ export class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Activate listeners for interactive item sheet events
-   */
+  /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-
-    // Activate tabs
-    new Tabs(html.find(".tabs"), {
-      initial: this["_sheetTab"],
-      callback: clicked => {
-        this["_sheetTab"] = clicked.data("tab");
-        this.setPosition();
-      }
-    });
-
-    // Modify damage formula
     html.find(".damage-control").click(this._onDamageControl.bind(this));
   }
 

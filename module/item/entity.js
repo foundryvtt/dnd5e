@@ -470,7 +470,7 @@ export class Item5e extends Item {
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
-    const rollData = this._getRollData();
+    const rollData = this.getRollData();
 
     // Define Roll bonuses
     const parts = [`@mod`];
@@ -547,7 +547,7 @@ export class Item5e extends Item {
     }
 
     // Define Roll Data
-    const rollData = this._getRollData();
+    const rollData = this.getRollData();
     const actorBonus = actorData.bonuses[itemData.actionType] || {};
     if ( actorBonus.damage && parseInt(actorBonus.damage) !== 0 ) {
       parts.push("@dmg");
@@ -621,11 +621,11 @@ export class Item5e extends Item {
     }
 
     // Define Roll Data
-    const rollData = this._getRollData();
+    const rollData = this.getRollData();
     const title = `${this.name} - Other Formula`;
 
     // Invoke the roll and submit it to chat
-    const roll = new Roll(itemData.formula, rollData).roll();
+    const roll = new Roll(rollData.item.formula, rollData).roll();
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: this.data.data.chatFlavor || title,
@@ -651,7 +651,7 @@ export class Item5e extends Item {
     // Create a dice roll if necessary
     let roll = null;
     if ( formula ) {
-      const rollData = this._getRollData();
+      const rollData = this.getRollData();
       roll = new Roll(formula, rollData).roll();
     }
 
@@ -724,7 +724,7 @@ export class Item5e extends Item {
     if ( this.type !== "tool" ) throw "Wrong item type!";
 
     // Prepare roll data
-    let rollData = this._getRollData();
+    let rollData = this.getRollData();
     const parts = [`@mod`, "@prof"];
     const title = `${this.name} - Tool Check`;
 
@@ -752,7 +752,7 @@ export class Item5e extends Item {
    * Prepare a data object which is passed to any Roll formulas which are created related to this Item
    * @private
    */
-  _getRollData() {
+  getRollData() {
     if ( !this.actor ) return null;
     const itemData = duplicate(this.data.data);
     const actorData = duplicate(this.actor.data.data);
@@ -812,10 +812,17 @@ export class Item5e extends Item {
 
     // Get the Item
     const item = actor.getOwnedItem(card.dataset.itemId);
+    const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
     // Get card targets
-    const targets = isTargetted ? this._getChatCardTargets(card) : [];
-    const spellLevel = parseInt(card.dataset.spellLevel) || null;
+    let targets = [];
+    if ( isTargetted ) {
+      targets = this._getChatCardTargets(card);
+      if ( !targets.length ) {
+        ui.notifications.warn(`You must have one or more controlled Tokens in order to use this option.`);
+        return button.disabled = false;
+      }
+    }
 
     // Attack and Damage Rolls
     if ( action === "attack" ) await item.rollAttack({event});
@@ -893,7 +900,7 @@ export class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @return {Array.<Actor>}      The Actor entity or null
+   * @return {Array.<Actor>}      An Array of Actor entities, if any
    * @private
    */
   static _getChatCardTargets(card) {
@@ -901,7 +908,6 @@ export class Item5e extends Item {
     const controlled = canvas.tokens.controlled;
     const targets = controlled.reduce((arr, t) => t.actor ? arr.concat([t.actor]) : arr, []);
     if ( character && (controlled.length === 0) ) targets.push(character);
-    if ( !targets.length ) throw new Error(`You must designate a specific Token as the roll target`);
     return targets;
   }
 }

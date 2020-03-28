@@ -291,21 +291,17 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
+  /**
+   * Handle mouse click events to convert currency to the highest possible denomination
+   * @param {MouseEvent} event    The originating click event
+   * @private
+   */
   async _onConvertCurrency(event) {
     event.preventDefault();
-    const curr = duplicate(this.actor.data.data.currency);
-    console.log(curr);
-    const convert = {
-      cp: {into: "sp", each: 10},
-      sp: {into: "ep", each: 5 },
-      ep: {into: "gp", each: 2 },
-      gp: {into: "pp", each: 10}
-    };
-    for ( let [c, t] of Object.entries(convert) ) {
-      let change = Math.floor(curr[c] / t.each);
-      curr[c] -= (change * t.each);
-      curr[t.into] += change;
-    }
-    return this.actor.update({"data.currency": curr});
+    return Dialog.confirm({
+      title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
+      content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
+      yes: () => this.actor.convertCurrency()
+    });
   }
 }

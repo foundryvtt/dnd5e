@@ -3,15 +3,18 @@
  * @type {FormApplication}
  */
 export class ActorTraitSelector extends FormApplication {
+
+  /** @override */
 	static get defaultOptions() {
-	  const options = super.defaultOptions;
-	  options.id = "trait-selector";
-	  options.classes = ["dnd5e"];
-	  options.title = "Actor Trait Selection";
-	  options.template = "systems/dnd5e/templates/apps/trait-selector.html";
-	  options.width = 320;
-	  options.height = "auto";
-	  return options;
+	  return mergeObject(super.defaultOptions, {
+	    id: "trait-selector",
+      classes: ["dnd5e"],
+      title: "Actor Trait Selection",
+      template: "systems/dnd5e/templates/apps/trait-selector.html",
+      width: 320,
+      height: "auto",
+      choices: {}
+    });
   }
 
   /* -------------------------------------------- */

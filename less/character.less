@@ -195,8 +195,10 @@
     }
 
     .encumbrance-breakpoint {
+      display: block;
       position: absolute;
-      left: 66%;
+      &.encumbrance-33 { left: 33% }
+      &.encumbrance-66 { left: 66% }
     }
 
     .arrow-up {
