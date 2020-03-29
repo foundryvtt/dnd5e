@@ -2,7 +2,7 @@
   "name": "dnd5e",
   "title": "Dungeons & Dragons 5th Edition",
   "description": "A comprehensive game system for running games of Dungeons & Dragons 5th Edition in the Foundry VTT environment.",
-  "version": 0.84,
+  "version": 0.85,
   "author": "Atropos",
   "scripts": [],
   "esmodules": ["dnd5e.js"],
@@ -64,9 +64,9 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
   "secondaryTokenAttribute": null,
-  "minimumCoreVersion": "0.5.0",
-  "compatibleCoreVersion": "0.5.1",
+  "minimumCoreVersion": "0.5.2",
+  "compatibleCoreVersion": "0.5.3",
   "url": "https://gitlab.com/foundrynet/dnd5e",
   "manifest": "https://gitlab.com/foundrynet/dnd5e/raw/master/system.json",
-  "download": "https://gitlab.com/foundrynet/dnd5e/-/archive/release-0.8.4/dnd5e-release-0.8.4.zip"
+  "download": "https://gitlab.com/foundrynet/dnd5e/-/archive/release-0.8.5/dnd5e-release-0.8.5.zip"
 }
