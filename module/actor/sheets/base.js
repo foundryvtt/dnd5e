@@ -425,13 +425,6 @@ export class ActorSheet5e extends ActorSheet {
     }
     if ( !sourceActor ) return;
 
-    // Display the polymorph configuration dialog
-    const html = await renderTemplate('systems/dnd5e/templates/apps/polymorph-prompt.html', {
-      options: game.settings.get('dnd5e', 'polymorphSettings'),
-      i18n: DND5E.polymorphSettings,
-      isToken: this.actor.isToken
-    });
-
     // Define a function to record polymorph settings for future use
     const rememberOptions = html => {
       const options = {};
@@ -446,7 +439,11 @@ export class ActorSheet5e extends ActorSheet {
     // Create and render the Dialog
     return new Dialog({
       title: game.i18n.localize('DND5E.PolymorphPromptTitle'),
-      content: html,
+      content: {
+        options: game.settings.get('dnd5e', 'polymorphSettings'),
+        i18n: DND5E.polymorphSettings,
+        isToken: this.actor.isToken
+      },
       default: 'accept',
       buttons: {
         accept: {
@@ -476,7 +473,11 @@ export class ActorSheet5e extends ActorSheet {
           label: game.i18n.localize('Cancel')
         }
       }
-    }, {classes: ['dialog', 'dnd5e']}).render(true);
+    }, {
+      classes: ['dialog', 'dnd5e'],
+      width: 600,
+      template: 'systems/dnd5e/templates/apps/polymorph-prompt.html'
+    }).render(true);
   }
 
   /* -------------------------------------------- */
@@ -685,7 +686,7 @@ export class ActorSheet5e extends ActorSheet {
     let buttons = super._getHeaderButtons();
 
     // Add button to revert polymorph
-    if ( !this.actor.isPolymorphed ) return buttons;
+    if ( !this.actor.isPolymorphed || this.actor.isToken ) return buttons;
     buttons.unshift({
       label: 'DND5E.PolymorphRestoreTransformation',
       class: "restore-transformation",

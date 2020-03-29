@@ -130,7 +130,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 });
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
-Hooks.on('getActorDirectoryEntryContext', (html, entryOptions) => Actor5e.addDirectoryContextOptions);
+Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
 
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */

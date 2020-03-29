@@ -15,7 +15,7 @@ export class Actor5e extends Actor {
    * @return {boolean}
    */
   get isPolymorphed() {
-    return !!this.data.flags.dnd5e.isPolymorphed;
+    return this.getFlag("dnd5e", "isPolymorphed") || false;
   }
 
   /* -------------------------------------------- */
@@ -704,73 +704,6 @@ export class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * If this actor was transformed with transformTokens enabled, then its
-   * active tokens need to be returned to their original state. If not, then
-   * we can safely just delete this actor.
-   */
-  async revertOriginalForm () {
-    if ( !this.isPolymorphed ) return;
-    if ( !this.owner ) {
-      return ui.notifications.warn(`You do not have permission to revert this Actor's polymorphed state.`);
-    }
-
-    // Obtain a reference to the original actor
-    const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
-    if ( !original && !this.isToken ) return;
-
-    // Obtain the current polymorphed data as some attributes should carry back to the original
-    const current = this.data;
-    const exhaustion = current.data.attributes.exhaustion;
-    const inspiration = current.data.attributes.inspiration;
-
-    // Get the Tokens which represent this actor
-    const tokens = this.isToken ? [this.token] : this.getActiveTokens(true);
-
-
-
-
-    for (const token of tokens) {
-      let originalTokenData;
-      if (getProperty(token, 'data.flags.dnd5e.originalTokenData')) {
-        originalTokenData = token.data.flags.dnd5e.originalTokenData;
-      } else {
-        originalTokenData = original.token;
-      }
-
-      if (!originalTokenData) {
-        continue;
-      }
-
-      // Don't jump to the old token's position.
-      delete originalTokenData.x;
-      delete originalTokenData.y;
-      originalTokenData['-=flags.dnd5e.originalTokenData'] = null;
-
-      if (this.isToken) {
-        // Clear out the old data so the merge doesn't leave it around.
-        await token.update({'-=actorData': null});
-        originalTokenData['actorData.data.attributes.exhaustion'] = exhaustion;
-        originalTokenData['actorData.data.attributes.inspiration'] = inspiration;
-      }
-
-      token.update(originalTokenData);
-    }
-
-    if (!this.isToken) {
-      // If the Actor currently has inspiration or exhaustion, it's retained
-      // after reverting.
-      original.update({
-        'data.attributes.exhaustion': exhaustion,
-        'data.attributes.inspiration': inspiration
-      });
-
-      this.delete();
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Transform this Actor into another one.
    *
    * @param {Actor} target The target Actor.
@@ -788,9 +721,9 @@ export class Actor5e extends Actor {
    * @param {boolean} [keepVision] Keep vision
    * @param {boolean} [transformTokens] Transform linked tokens too
    */
-  async transformInto (target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
+  async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
-    keepItems=false, keepBio=false, keepVision=false, transformTokens=false}={}) {
+    keepItems=false, keepBio=false, keepVision=false, transformTokens=true}={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -835,6 +768,9 @@ export class Actor5e extends Actor {
 
     // Keep Token configurations
     const tokenConfig = ["displayName", "vision", "actorLink", "disposition", "displayBars", "bar1", "bar2"];
+    if ( keepVision ) {
+      tokenConfig.push(...['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle']);
+    }
     for ( let c of tokenConfig ) {
       d.token[c] = o.token[c];
     }
@@ -870,11 +806,7 @@ export class Actor5e extends Actor {
     if (keepBio) d.data.details.biography = o.data.details.biography;
 
     // Keep senses
-    if (keepVision) {
-      const visionProperties = ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'];
-      d.data.traits.senses = o.data.traits.senses;
-      visionProperties.forEach(vision => d.token[vision] = o.token[vision]);
-    }
+    if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
     // Set new data flags
     d.flags.dnd5e.isPolymorphed = true;
@@ -882,28 +814,70 @@ export class Actor5e extends Actor {
     else d.flags.dnd5e.originalActor = o._id;
 
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
-    let newActor = null;
     if (this.isToken) {
-      await this.update(d);
-      newActor = this;
+      const tokenData = d.token;
+      tokenData.actorData = d;
+      delete tokenData.actorData.token;
+      return this.token.update(tokenData);
     }
 
     // Update regular Actors by creating a new Actor with the Polymorphed data
-    else {
-      await this.sheet.close();
-      newActor = await Actor.create(d, {renderSheet: true});
-    }
+    await this.sheet.close();
+    const newActor = await Actor.create(d, {renderSheet: true});
 
     // Update placed Token instances
     if ( !transformTokens ) return;
-    const tokens = this.isToken ? [this.token] : this.getActiveTokens(true);
+    const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
       const newTokenData = duplicate(d.token);
       if ( !t.data.actorLink ) newTokenData.actorData = newActor.data;
       newTokenData._id = t.data._id;
+      newTokenData.actorId = newActor.id;
       return newTokenData;
     });
     return canvas.scene.updateManyEmbeddedEntities("Token", updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * If this actor was transformed with transformTokens enabled, then its
+   * active tokens need to be returned to their original state. If not, then
+   * we can safely just delete this actor.
+   */
+  async revertOriginalForm() {
+    if ( !this.isPolymorphed ) return;
+    if ( !this.owner ) {
+      return ui.notifications.warn(`You do not have permission to revert this Actor's polymorphed state.`);
+    }
+
+    // If we are reverting an unlinked token, simply replace it with the base actor prototype
+    if ( this.isToken ) {
+      const baseActor = game.actors.get(this.token.data.actorId);
+      const prototypeTokenData = duplicate(baseActor.token);
+      prototypeTokenData.actorData = null;
+      return this.token.update(prototypeTokenData);
+    }
+
+    // Obtain a reference to the original actor
+    const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
+    if ( !original ) return;
+
+    // Get the Tokens which represent this actor
+    const tokens = this.getActiveTokens(true);
+    const tokenUpdates = tokens.map(t => {
+      const tokenData = duplicate(original.data.token);
+      tokenData._id = t.id;
+      tokenData.actorId = original.id;
+      return tokenData;
+    });
+    canvas.scene.updateManyEmbeddedEntities("Token", tokenUpdates);
+
+    // Delete the polymorphed Actor and maybe re-render the original sheet
+    const isRendered = this.sheet.rendered;
+    await this.delete();
+    original.sheet.render(isRendered);
+    return original;
   }
 
   /* -------------------------------------------- */

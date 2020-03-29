@@ -127,8 +127,8 @@ export const registerSystemSettings = function() {
       keepSpells: false,
       keepItems: false,
       keepBio: false,
-      keepVision: false,
-      transformTokens: false
+      keepVision: true,
+      transformTokens: true
     }
   });
 };
