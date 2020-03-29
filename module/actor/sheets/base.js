@@ -1,5 +1,6 @@
-import { ActorTraitSelector } from "../../apps/trait-selector.js";
-import { ActorSheetFlags } from "../../apps/actor-flags.js";
+import {ActorTraitSelector} from "../../apps/trait-selector.js";
+import {ActorSheetFlags} from "../../apps/actor-flags.js";
+import {DND5E} from '../../config.js';
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
@@ -381,20 +382,119 @@ export class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-    /**
-     * Change the uses amount of an Owned Item within the Actor
-     * @param {Event} event   The triggering click event
-     * @private
-     */
-    async _onUsesChange(event) {
-        event.preventDefault();
-        const itemId = event.currentTarget.closest(".item").dataset.itemId;
-        const item = this.actor.getOwnedItem(itemId);
-        const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
-        event.target.value = uses;
-        return item.update({ 'data.uses.value': uses });
+  /** @override */
+  async _onDrop (event) {
+    event.preventDefault();
+
+    // Get dropped data
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
+    } catch (err) {
+      return false;
     }
-    
+
+    // Handle a polymorph
+    if (data && (data.type === "Actor")) {
+      if (game.user.isGM || (game.settings.get('dnd5e', 'allowPolymorphing') && this.owner)) {
+        return this._onDropPolymorph(event, data);
+      }
+    }
+
+    // Call parent on drop logic
+    return super._onDrop(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping an Actor on the sheet to trigger a Polymorph workflow
+   * @param {DragEvent} event   The drop event
+   * @param {Object} data       The data transfer
+   * @private
+   */
+  async _onDropPolymorph(event, data) {
+
+    // Get the target actor
+    let sourceActor = null;
+    if (data.pack) {
+      const pack = game.packs.find(p => p.collection === data.pack);
+      sourceActor = await pack.getEntity(data.id);
+    } else {
+      sourceActor = game.actors.get(data.id);
+    }
+    if ( !sourceActor ) return;
+
+    // Display the polymorph configuration dialog
+    const html = await renderTemplate('systems/dnd5e/templates/apps/polymorph-prompt.html', {
+      options: game.settings.get('dnd5e', 'polymorphSettings'),
+      i18n: DND5E.polymorphSettings,
+      isToken: this.actor.isToken
+    });
+
+    // Define a function to record polymorph settings for future use
+    const rememberOptions = html => {
+      const options = {};
+      html.find('input').each((i, el) => {
+        options[el.name] = el.checked;
+      });
+      const settings = mergeObject(game.settings.get('dnd5e', 'polymorphSettings') || {}, options);
+      game.settings.set('dnd5e', 'polymorphSettings', settings);
+      return settings;
+    };
+
+    // Create and render the Dialog
+    return new Dialog({
+      title: game.i18n.localize('DND5E.PolymorphPromptTitle'),
+      content: html,
+      default: 'accept',
+      buttons: {
+        accept: {
+          icon: '<i class="fas fa-check"></i>',
+          label: game.i18n.localize('DND5E.PolymorphAcceptSettings'),
+          callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
+        },
+        wildshape: {
+          icon: '<i class="fas fa-paw"></i>',
+          label: game.i18n.localize('DND5E.PolymorphWildShape'),
+          callback: html => this.actor.transformInto(sourceActor, {
+            keepMental: true,
+            mergeSaves: true,
+            mergeSkills: true,
+            transformTokens: rememberOptions(html).transformTokens
+          })
+        },
+        polymorph: {
+          icon: '<i class="fas fa-pastafarianism"></i>',
+          label: game.i18n.localize('DND5E.Polymorph'),
+          callback: html => this.actor.transformInto(sourceActor, {
+            transformTokens: rememberOptions(html).transformTokens
+          })
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize('Cancel')
+        }
+      }
+    }, {classes: ['dialog', 'dnd5e']}).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Change the uses amount of an Owned Item within the Actor
+   * @param {Event} event   The triggering click event
+   * @private
+   */
+  async _onUsesChange(event) {
+      event.preventDefault();
+      const itemId = event.currentTarget.closest(".item").dataset.itemId;
+      const item = this.actor.getOwnedItem(itemId);
+      const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
+      event.target.value = uses;
+      return item.update({ 'data.uses.value': uses });
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -576,5 +676,22 @@ export class ActorSheet5e extends ActorSheet {
       choices: CONFIG.DND5E[a.dataset.options]
     };
     new ActorTraitSelector(this.actor, options).render(true)
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getHeaderButtons() {
+    let buttons = super._getHeaderButtons();
+
+    // Add button to revert polymorph
+    if ( !this.actor.isPolymorphed ) return buttons;
+    buttons.unshift({
+      label: 'DND5E.PolymorphRestoreTransformation',
+      class: "restore-transformation",
+      icon: "fas fa-backward",
+      onclick: ev => this.actor.revertOriginalForm()
+    });
+    return buttons;
   }
 }

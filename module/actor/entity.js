@@ -2,12 +2,23 @@ import { Dice5e } from "../dice.js";
 import { ShortRestDialog } from "../apps/short-rest.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
 import { AbilityTemplate } from "../pixi/ability-template.js";
+import {DND5E} from '../config.js';
 
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
  */
 export class Actor5e extends Actor {
+
+  /**
+   * Is this Actor currently polymorphed into some other creature?
+   * @return {boolean}
+   */
+  get isPolymorphed() {
+    return !!this.data.flags.dnd5e.isPolymorphed;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Augment the basic actor data with additional dynamic data.
@@ -243,7 +254,7 @@ export class Actor5e extends Actor {
   /**
    * Cast a Spell, consuming a spell slot of a certain level
    * @param {Item5e} item   The spell being cast by the actor
-   * @param {Event} event   The originating user interaction which triggered the cast 
+   * @param {Event} event   The originating user interaction which triggered the cast
    */
   async useSpell(item, {configureDialog=true}={}) {
     if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
@@ -256,7 +267,7 @@ export class Actor5e extends Actor {
     // Configure the casting level and whether to consume a spell slot
     let consume = true;
     let placeTemplate = false;
-        
+
     if ( configureDialog ) {
       const spellFormData = await SpellCastDialog.create(this, item);
       lvl = parseInt(spellFormData.get("level"));
@@ -264,7 +275,7 @@ export class Actor5e extends Actor {
       placeTemplate = Boolean(spellFormData.get("placeTemplate"));
       if ( lvl !== item.data.data.level ) {
         item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
-      } 
+      }
     }
 
     // Update Actor data
@@ -435,7 +446,7 @@ export class Actor5e extends Actor {
     // Take action depending on the result
     const success = roll.total >= 10;
     const death = this.data.data.attributes.death;
-    
+
     // Save success
     if ( success ) {
       let successes = (death.success || 0) + (roll.total === 20 ? 2 : 1);
@@ -448,8 +459,8 @@ export class Actor5e extends Actor {
         await ChatMessage.create({content: `${this.name} has survived with 3 death save successes!`, speaker});
       }
       else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
-    } 
-    
+    }
+
     // Save failure
     else {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
@@ -693,6 +704,211 @@ export class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * If this actor was transformed with transformTokens enabled, then its
+   * active tokens need to be returned to their original state. If not, then
+   * we can safely just delete this actor.
+   */
+  async revertOriginalForm () {
+    if ( !this.isPolymorphed ) return;
+    if ( !this.owner ) {
+      return ui.notifications.warn(`You do not have permission to revert this Actor's polymorphed state.`);
+    }
+
+    // Obtain a reference to the original actor
+    const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
+    if ( !original && !this.isToken ) return;
+
+    // Obtain the current polymorphed data as some attributes should carry back to the original
+    const current = this.data;
+    const exhaustion = current.data.attributes.exhaustion;
+    const inspiration = current.data.attributes.inspiration;
+
+    // Get the Tokens which represent this actor
+    const tokens = this.isToken ? [this.token] : this.getActiveTokens(true);
+
+
+
+
+    for (const token of tokens) {
+      let originalTokenData;
+      if (getProperty(token, 'data.flags.dnd5e.originalTokenData')) {
+        originalTokenData = token.data.flags.dnd5e.originalTokenData;
+      } else {
+        originalTokenData = original.token;
+      }
+
+      if (!originalTokenData) {
+        continue;
+      }
+
+      // Don't jump to the old token's position.
+      delete originalTokenData.x;
+      delete originalTokenData.y;
+      originalTokenData['-=flags.dnd5e.originalTokenData'] = null;
+
+      if (this.isToken) {
+        // Clear out the old data so the merge doesn't leave it around.
+        await token.update({'-=actorData': null});
+        originalTokenData['actorData.data.attributes.exhaustion'] = exhaustion;
+        originalTokenData['actorData.data.attributes.inspiration'] = inspiration;
+      }
+
+      token.update(originalTokenData);
+    }
+
+    if (!this.isToken) {
+      // If the Actor currently has inspiration or exhaustion, it's retained
+      // after reverting.
+      original.update({
+        'data.attributes.exhaustion': exhaustion,
+        'data.attributes.inspiration': inspiration
+      });
+
+      this.delete();
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Transform this Actor into another one.
+   *
+   * @param {Actor} target The target Actor.
+   * @param {boolean} [keepPhysical] Keep physical abilities (str, dex, con)
+   * @param {boolean} [keepMental] Keep mental abilities (int, wis, cha)
+   * @param {boolean} [keepSaves] Keep saving throw proficiencies
+   * @param {boolean} [keepSkills] Keep skill proficiencies
+   * @param {boolean} [mergeSaves] Take the maximum of the save proficiencies
+   * @param {boolean} [mergeSkills] Take the maximum of the skill proficiencies
+   * @param {boolean} [keepClass] Keep proficiency bonus
+   * @param {boolean} [keepFeats] Keep features
+   * @param {boolean} [keepSpells] Keep spells
+   * @param {boolean} [keepItems] Keep items
+   * @param {boolean} [keepBio] Keep biography
+   * @param {boolean} [keepVision] Keep vision
+   * @param {boolean} [transformTokens] Transform linked tokens too
+   */
+  async transformInto (target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
+    mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
+    keepItems=false, keepBio=false, keepVision=false, transformTokens=false}={}) {
+
+    // Ensure the player is allowed to polymorph
+    const allowed = game.settings.get("dnd5e", "allowPolymorphing");
+    if ( !allowed && !game.user.isGM ) {
+      return ui.notifications.warn(`You are not allowed to polymorph this actor!`);
+    }
+
+    // Get the original Actor data
+    const o = duplicate(this.data);
+    o.flags.dnd5e = o.flags.dnd5e || {};
+
+    // Get the source Actor data
+    const source = duplicate(target.data);
+    source.flags.dnd5e = source.flags.dnd5e || {};
+    delete source.flags.dnd5e.isPolymorphed;
+    delete source.flags.dnd5e.originalActor;
+
+    // Prepare new data to merge from the source
+    const d = {
+      name: `${o.name} (${source.name})`,
+      data: source.data,
+      items: source.items,
+      token: source.token,
+      img: source.img,
+      flags: source.flags
+    };
+    delete d.data.resources;
+    delete d.data.currency;
+    delete d.data.bonuses;
+    delete d.token.actorId;
+
+    // Merge original data
+    mergeObject(d, {
+      "type": o.type, // The new actor must be of the same type
+      "token.actorLink": o.token.actorLink,
+      "token.name": d.name,
+      "folder": o.folder,
+      "data.details.alignment": o.data.details.alignment,
+      "data.attributes.exhaustion": o.data.attributes.exhaustion,
+      "data.attributes.inspiration": o.data.attributes.inspiration
+    });
+
+    // Keep Token configurations
+    const tokenConfig = ["displayName", "vision", "actorLink", "disposition", "displayBars", "bar1", "bar2"];
+    for ( let c of tokenConfig ) {
+      d.token[c] = o.token[c];
+    }
+
+    // Transfer ability scores
+    const abilities = d.data.abilities;
+    for ( let k of Object.keys(abilities) ) {
+      const oa = o.data.abilities[k];
+      if ( keepPhysical && ["str", "dex", "con"].includes(k) ) abilities[k] = oa;
+      else if ( keepMental && ["int", "wis", "con"].includes(k) ) abilities[k] = oa;
+      if ( keepSaves ) abilities[k].proficient = oa.proficient;
+      else if ( mergeSaves ) abilities[k].proficient = Math.max(abilities[k].proficient, oa.proficient)
+    }
+
+    // Transfer skills
+    const skills = d.data.skills;
+    if ( keepSkills ) d.data.skills = o.data.skills;
+    else if ( mergeSkills ) {
+      for ( let [k, s] of Object.entries(skills) ) {
+        s.value = Math.max(s.proficient, o.data.skills[k].value);
+      }
+    }
+
+    // Keep specific items from the original data
+    d.items = d.items.concat(o.items.filter(i => {
+      if ( i.type === "class" ) return true; // Always keep class levels
+      else if ( i.type === "feat" ) return keepFeats;
+      else if ( i.type === "spell" ) return keepSpells;
+      else return keepItems;
+    }));
+
+    // Keep biography
+    if (keepBio) d.data.details.biography = o.data.details.biography;
+
+    // Keep senses
+    if (keepVision) {
+      const visionProperties = ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'];
+      d.data.traits.senses = o.data.traits.senses;
+      visionProperties.forEach(vision => d.token[vision] = o.token[vision]);
+    }
+
+    // Set new data flags
+    d.flags.dnd5e.isPolymorphed = true;
+    if (o.flags.dnd5e.isPolymorphed) d.flags.dnd5e.originalActor = o.flags.dnd5e.originalActor;
+    else d.flags.dnd5e.originalActor = o._id;
+
+    // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
+    let newActor = null;
+    if (this.isToken) {
+      await this.update(d);
+      newActor = this;
+    }
+
+    // Update regular Actors by creating a new Actor with the Polymorphed data
+    else {
+      await this.sheet.close();
+      newActor = await Actor.create(d, {renderSheet: true});
+    }
+
+    // Update placed Token instances
+    if ( !transformTokens ) return;
+    const tokens = this.isToken ? [this.token] : this.getActiveTokens(true);
+    const updates = tokens.map(t => {
+      const newTokenData = duplicate(d.token);
+      if ( !t.data.actorLink ) newTokenData.actorData = newActor.data;
+      newTokenData._id = t.data._id;
+      return newTokenData;
+    });
+    return canvas.scene.updateManyEmbeddedEntities("Token", updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Apply rolled dice damage to the token or tokens which are currently controlled.
    * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
    *
@@ -715,5 +931,28 @@ export class Actor5e extends Actor {
     }
     return Promise.all(promises);
   }
-}
 
+  /* -------------------------------------------- */
+
+  /**
+   * Add additional system-specific sidebar directory context menu options for D&D5e Actor entities
+   * @param {jQuery} html         The sidebar HTML
+   * @param {Array} entryOptions  The default array of context menu options
+   */
+  static addDirectoryContextOptions(html, entryOptions) {
+    entryOptions.push({
+      name: 'DND5E.PolymorphRestoreTransformation',
+      icon: '<i class="fas fa-backward"></i>',
+      callback: li => {
+        const actor = game.actors.get(li.data('entityId'));
+        return actor.revertOriginalForm();
+      },
+      condition: li => {
+        const allowed = game.settings.get("dnd5e", "allowPolymorphing");
+        if ( !allowed && !game.user.isGM ) return false;
+        const actor = game.actors.get(li.data('entityId'));
+        return actor && actor.isPolymorphed;
+      }
+    });
+  }
+}

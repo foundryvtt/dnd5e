@@ -35,7 +35,7 @@ Hooks.once("init", function() {
     Dice5e,
     Item5e,
     migrations,
-    rollItemMacro,
+    rollItemMacro
   };
 
   // Record Configuration Values
@@ -130,7 +130,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 });
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
-
+Hooks.on('getActorDirectoryEntryContext', (html, entryOptions) => Actor5e.addDirectoryContextOptions);
 
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */
