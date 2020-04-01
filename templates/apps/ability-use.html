@@ -1,19 +1,19 @@
 <form id="ability-use-form">
-    <p>Configure how you would like to use the <strong>{{item.name}}</strong> ability.</p>
+    <p>{{ localize "DND5E.DIALOG.ABILITYUSE.Prompt" }} <strong>{{item.name}}</strong> {{ localize "DND5E.ability" }}.</p>
 
     <p type="note">
     {{#if recharges}}
-    This ability uses a recharge mechanic and is currently <strong>{{#if isCharged}}charged{{else}}depleted{{/if}}</strong>.</p>
+    {{ localize "DND5E.DIALOG.ABILITYUSE.Recharge.Prompt" }} <strong>{{#if isCharged}}{{ localize "DND5E.DIALOG.ABILITYUSE.Recharge.charged" }}{{else}}{{ localize "DND5E.DIALOG.ABILITYUSE.Recharge.depleted" }}{{/if}}</strong>.</p>
     {{else}}
-    This ability has <strong>{{uses.value}} of {{uses.max}}</strong> available uses per {{perLabel}}.
+    {{ localize "DND5E.DIALOG.ABILITYUSE.MessageStart" }} <strong>{{uses.value}} {{ localize "DND5E.DIALOG.ABILITYUSE.of" }} {{uses.max}}</strong> {{ localize "DND5E.DIALOG.ABILITYUSE.MessageEnd" }} {{perLabel}}.
     {{/if}}
     {{#unless canUse}}
-    You are not currently able to use this ability!
+    {{ localize "DND5E.DIALOG.ABILITYUSE.CantUse" }}
     {{/unless}}
     </p>
 
     <div class="form-group">
-        <label class="checkbox">Consume Available Usage? <input type="checkbox" name="consume" {{checked consume}}/></label>
+        <label class="checkbox">{{ localize "DND5E.DIALOG.ABILITYUSE.ConsumeUsage" }} <input type="checkbox" name="consume" {{checked consume}}/></label>
 
         {{#if hasPlaceableTemplate}}
         <div class="form-group">

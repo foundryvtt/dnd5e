@@ -1,12 +1,12 @@
 <form id="spell-config-form">
-    <p>Configure how you would like to cast the <strong>{{item.name}}</strong> spell.</p>
+    <p>{{ localize "DND5E.DIALOG.SPELLCAST.Prompt" }} <strong>{{item.name}}</strong> {{ localize "DND5E.DIALOG.SPELLCAST.PromptEnd" }}.</p>
 
     {{#unless canCast}}
-    <p class="notification error">You have no available spell slots to cast this spell</p>
+    <p class="notification error">{{ localize "DND5E.DIALOG.SPELLCAST.CantCast" }}</p>
     {{/unless}}
 
     <div class="form-group">
-        <label>Cast at Level</label>
+        <label>{{ localize "DND5E.DIALOG.SPELLCAST.CastLevel" }}</label>
         <div class="form-fields">
             <select name="level">
                 {{#select item.data.level}}
@@ -20,7 +20,7 @@
 
     <div class="form-group">
         {{#if canUpcast}}
-        <label class="checkbox">Consume Spell Slot? <input type="checkbox" name="consume" {{checked canCast}}/></label>
+        <label class="checkbox">{{ localize "DND5E.DIALOG.SPELLCAST.ConsumeSlot" }} <input type="checkbox" name="consume" {{checked canCast}}/></label>
         {{/if}}
 
         {{#if hasPlaceableTemplate}}
