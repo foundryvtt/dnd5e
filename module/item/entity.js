@@ -754,23 +754,19 @@ export class Item5e extends Item {
    */
   getRollData() {
     if ( !this.actor ) return null;
-    const itemData = duplicate(this.data.data);
-    const actorData = duplicate(this.actor.data.data);
-
-    // Prepare Actor and Item data
-    const rollData = actorData;
-    rollData.item = itemData;
+    const rollData = this.actor.getRollData();
+    rollData.item = duplicate(this.data.data);
 
     // Include an ability score modifier if one exists
     const abl = this.abilityMod;
     if ( abl ) {
-      const ability = actorData.abilities[abl];
+      const ability = rollData.abilities[abl];
       rollData["mod"] = ability.mod || 0;
     }
 
     // Include a proficiency score
-    const prof = "proficient" in itemData ? (itemData.proficient || 0) : 1;
-    rollData["prof"] = Math.floor(prof * actorData.attributes.prof);
+    const prof = "proficient" in rollData.item ? (rollData.item.proficient || 0) : 1;
+    rollData["prof"] = Math.floor(prof * rollData.attributes.prof);
     return rollData;
   }
 
