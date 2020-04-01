@@ -1,17 +1,17 @@
 <form id="short-rest-hd" class="dialog-content" onsubmit="event.preventDefault();">
-    <p>Take a short rest? On a short rest you may spend remaining Hit Dice and recover primary or secondary resources.</p>
+    <p>{{ localize "DND5E.DIALOG.SHORTREST.Prompt" }}</p>
     <div class="form-group">
-        <label>Roll Hit Die</label>
+        <label>{{ localize "DND5E.DIALOG.SHORTREST.Roll" }}</label>
         <div class="form-fields">
             <select name="hd">
                 {{#select denomination}}
                 {{#each availableHD as |num denom|}}
-                <option value="{{denom}}">{{denom}} ({{num}} available)</option>
+                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "DND5E.available" }})</option>
                 {{/each}}
                 {{/select}}
             </select>
             <button id="roll-hd" {{#unless canRoll}}disabled{{/unless}}>
-                <i class="fas fa-dice-d20"></i> Roll
+                <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}
             </button>
         </div>
     </div>
