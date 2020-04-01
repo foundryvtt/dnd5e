@@ -6,7 +6,7 @@
 
 		<div class="header-details flexrow">
 			<h1 class="charname">
-				<input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+				<input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.PlaceholderItemName' }}"/>
 			</h1>
 
 			<div class="item-subtitle">
@@ -17,10 +17,10 @@
 			<ul class="summary">
 				<li></li>
 				<li>
-					<input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="Rarity"/>
+					<input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'DND5E.PlaceholderRarity' }}"/>
 				</li>
 				<li>
-					<input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+					<input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.PlaceholderSource' }}"/>
 				</li>
 			</ul>
 		</div>
