@@ -8,9 +8,9 @@
 
     <div class="card-buttons">
         {{#if data.hasCharges}}
-        <button data-action="consume">Use {{data.consumableType.str}}</button>
+        <button data-action="consume">{{ localize "DND5E.Use" }} {{data.consumableType.str}}</button>
         {{else}}
-        <button disabled>No Charges</button>
+        <button disabled>{{ localize "DND5E.NoCharges" }}</button>
         {{/if}}
     </div>
 
