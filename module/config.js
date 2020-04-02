@@ -50,28 +50,28 @@ DND5E.alignments = {
  * @type {Object}
  */
 DND5E.armorProficiencies = {
-  "lgt": "Light Armor",
-  "med": "Medium Armor",
-  "hvy": "Heavy Armor",
-  "shl": "Shields"
+  "lgt": DND5E.equipmentTypes.light,
+  "med": DND5E.equipmentTypes.medium,
+  "hvy": DND5E.equipmentTypes.heavy,
+  "shl": "DND5E.EquipmentShieldProficiency"
 };
 
 DND5E.weaponProficiencies = {
-  "sim": "Simple Weapons",
-  "mar": "Martial Weapons"
+  "sim": "DND5E.WeaponSimpleProficiency",
+  "mar": "DND5E.WeaponMartialProficiency"
 };
 
 DND5E.toolProficiencies = {
-  "art": "Artisan's Tools",
-  "disg": "Disguise Kit",
-  "forg": "Forgery Kit",
-  "game": "Gaming Set",
-  "herb": "Herbalism Kit",
-  "music": "Musical Instrument",
-  "navg": "Navigator's Tools",
-  "pois": "Poisoner's Kit",
-  "thief": "Thieves' Tools",
-  "vehicle": "Vehicle (Land or Water)"
+  "art": "DND5E.ToolArtisansProficiency",
+  "disg": "DND5E.ToolDesguiseKitProficiency",
+  "forg": "DND5E.ToolForgeryKitProficiency",
+  "game": "DND5E.ToolGamingSetProficiency",
+  "herb": "DND5E.ToolHerbalismKitProficiency",
+  "music": "DND5E.ToolMusicalInstrumentProficiency",
+  "navg": "DND5E.ToolNavigatorsProficiency",
+  "pois": "DND5E.ToolPoisonersKitProficiency",
+  "thief": "DND5E.ToolThievesProficiency",
+  "vehicle": "DND5E.ToolVehicleProficiency"
 };
 
 /* -------------------------------------------- */
@@ -81,28 +81,28 @@ DND5E.toolProficiencies = {
  * @type {Object}
  */
 DND5E.abilityActivationTypes = {
-  "none": "None",
-  "action": "Action",
-  "bonus": "Bonus Action",
-  "reaction": "Reaction",
-  "minute": "Minute",
-  "hour": "Hour",
-  "day": "Day",
-  "special": "Special",
-  "legendary": "Legendary",
-  "lair": "Lair"
+  "none": "DND5E.None",
+  "action": "DND5E.Action",
+  "bonus": "DND5E.BonusAction",
+  "reaction": "DND5E.Reaction",
+  "minute": DND5E.timePeriods.minute,
+  "hour": DND5E.timePeriods.hour,
+  "day": DND5E.timePeriods.day,
+  "special": DND5E.timePeriods.spec,
+  "legendary": "DND5E.LegAct",
+  "lair": "DND5E.LairAct"
 };
 
 /* -------------------------------------------- */
 
 // Creature Sizes
 DND5E.actorSizes = {
-  "tiny": "Tiny",
-  "sm": "Small",
-  "med": "Medium",
-  "lg": "Large",
-  "huge": "Huge",
-  "grg": "Gargantuan"
+  "tiny": "DND5E.SizeTiny",
+  "sm": "DND5E.SizeSmall",
+  "med": "DND5E.SizeMedium",
+  "lg": "DND5E.SizeLarge",
+  "huge": "DND5E.SizeHuge",
+  "grg": "DND5E.SizeGargantuan"
 };
 
 DND5E.tokenSizes = {
@@ -475,10 +475,10 @@ DND5E.polymorphSettings = {
  * @type {Object}
  */
 DND5E.proficiencyLevels = {
-  0: "Not Proficient",
-  1: "Proficient",
-  0.5: "Jack of all Trades",
-  2: "Expertise"
+  0: "DND5E.NotProficient",
+  1: "DND5E.Proficient",
+  0.5: "DND5E.JackOfAllTrades",
+  2: "DND5E.Expertise"
 };
 
 /* -------------------------------------------- */
