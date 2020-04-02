@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.PlaceholderItemName' }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -19,10 +19,10 @@
                     {{labels.featType}}
                 </li>
                 <li>
-                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="Requirements"/>
+                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="{{ localize 'DND5E.PlaceholderRequirements' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="Source"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.PlaceholderSource' }}"/>
                 </li>
             </ul>
         </div>
@@ -43,7 +43,7 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <h3 class="form-header">Feature Usage</h3>
+            <h3 class="form-header">{{ localize "DND5E.FeatureUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
             {{> "systems/dnd5e/templates/items/parts/item-activation.html"}}
@@ -51,20 +51,20 @@
             {{!-- Recharge Requirement --}}
             {{#if data.activation.type}}
             <div class="form-group recharge">
-                <label>Action Recharge</label>
+                <label>{{ localize "DND5E.FeatureActionRecharge" }}</label>
                 <div class="form-fields">
-                    <span>Recharge On</span>
+                    <span>{{ localize "DND5E.FeatureRechargeOn" }}</span>
                     <input type="text" name="data.recharge.value" value="{{data.recharge.value}}"
                            data-dtype="Number" placeholder="1d6 Result"/>
                     <label class="checkbox">
-                        Charged
+                        {{ localize "DND5E.Charged" }}
                         <input type="checkbox" name="data.recharge.charged" {{checked data.recharge.charged}}/>
                     </label>
                 </div>
             </div>
             {{/if}}
 
-            <h3 class="form-header">Feature Attack</h3>
+            <h3 class="form-header">{{ localize "DND5E.FeatureAttack" }}</h3>
 
             {{!-- Item Action Template --}}
             {{> "systems/dnd5e/templates/items/parts/item-action.html"}}

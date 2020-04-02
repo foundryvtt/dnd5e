@@ -6,12 +6,12 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.PlaceholderName' }}"/>
             </h1>
 
             <div class="charlevel">
                 <div class="level">
-                    <label>CR</label>
+                    <label>{{ localize "DND5E.AbbreviationCR" }}</label>
                     <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1"/>
                 </div>
                 <div class="experience">
@@ -21,13 +21,13 @@
 
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="Type"/>
+                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{ localize 'DND5E.PlaceholderType' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="Alignment"/>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.PlaceholderAlignment' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="Source"/>
+                    <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{ localize 'DND5E.PlaceholderSource' }}"/>
                 </li>
             </ul>
         </div>
