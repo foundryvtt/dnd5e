@@ -400,7 +400,7 @@ export class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
-    const data = {mod: abl.mod};
+    const data = {mod: abl.save};
 
     // Include a global actor ability save bonus
     const actorBonus = getProperty(this.data.data.bonuses, "abilities.save");
