@@ -19,8 +19,8 @@
 
         {{#if ../owner}}
         <div class="item-controls">
-            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> Add
+            <a class="item-control item-create" title="{{localize 'DND5E.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
         </div>
         {{/if}}
