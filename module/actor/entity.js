@@ -43,7 +43,8 @@ export class Actor5e extends Actor {
     const saveBonus = parseInt(getProperty(data, "bonuses.abilities.save")) || 0;
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.save = abl.mod + ((abl.proficient || 0) * data.attributes.prof) + saveBonus;
+      abl.prof = (abl.proficient || 0) * data.attributes.prof;
+      abl.save = abl.mod + abl.prof + saveBonus;
     }
 
     // Skill modifiers
@@ -401,6 +402,12 @@ export class Actor5e extends Actor {
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
     const data = {mod: abl.mod};
+
+    // Include proficiency bonus
+    if ( abl.prof > 0 ) {
+      parts.push("@prof");
+      data.prof = abl.prof;
+    }
 
     // Include a global actor ability save bonus
     const actorBonus = getProperty(this.data.data.bonuses, "abilities.save");

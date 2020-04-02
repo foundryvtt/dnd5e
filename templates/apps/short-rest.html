@@ -1,7 +1,7 @@
 <form id="short-rest-hd" class="dialog-content" onsubmit="event.preventDefault();">
-    <p>{{ localize "DND5E.DIALOG.SHORTREST.Prompt" }}</p>
+    <p>{{ localize "DND5E.ShortRestHint" }}</p>
     <div class="form-group">
-        <label>{{ localize "DND5E.DIALOG.SHORTREST.Roll" }}</label>
+        <label>{{ localize "DND5E.ShortRestSelect" }}</label>
         <div class="form-fields">
             <select name="hd">
                 {{#select denomination}}
@@ -11,9 +11,12 @@
                 {{/select}}
             </select>
             <button id="roll-hd" {{#unless canRoll}}disabled{{/unless}}>
-                <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}
+                <i class="fas fa-dice-d20"></i> {{ localize "Roll" }}
             </button>
         </div>
+        {{#unless canRoll}}
+        <p class="notes">{{ localize "DND5E.ShortRestNoHD" }}</p>
+        {{/unless}}
     </div>
     <div class="dialog-buttons">
         {{#each buttons as |button id|}}
