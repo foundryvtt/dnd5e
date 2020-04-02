@@ -74,7 +74,8 @@ Hooks.once("setup", function() {
   const toLocalize = [
     "abilities", "alignments", "conditionTypes", "consumableTypes", "currencies", "damageTypes", "distanceUnits", "equipmentTypes",
     "healingTypes", "itemActionTypes", "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes",
-    "spellSchools", "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages"
+    "spellSchools", "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages", "armorProficiencies",
+    "weaponProficiencies", "toolProficiencies", "abilityActivationTypes", "actorSizes", "polymorphSettings", "proficiencyLevels"
   ];
   for ( let o of toLocalize ) {
     CONFIG.DND5E[o] = Object.entries(CONFIG.DND5E[o]).reduce((obj, e) => {
