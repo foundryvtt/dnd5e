@@ -62,16 +62,16 @@ DND5E.weaponProficiencies = {
 };
 
 DND5E.toolProficiencies = {
-  "art": "DND5E.ToolArtisansProficiency",
-  "disg": "DND5E.ToolDesguiseKitProficiency",
-  "forg": "DND5E.ToolForgeryKitProficiency",
-  "game": "DND5E.ToolGamingSetProficiency",
-  "herb": "DND5E.ToolHerbalismKitProficiency",
-  "music": "DND5E.ToolMusicalInstrumentProficiency",
-  "navg": "DND5E.ToolNavigatorsProficiency",
-  "pois": "DND5E.ToolPoisonersKitProficiency",
-  "thief": "DND5E.ToolThievesProficiency",
-  "vehicle": "DND5E.ToolVehicleProficiency"
+  "art": "DND5E.ToolArtisans",
+  "disg": "DND5E.ToolDisguiseKit",
+  "forg": "DND5E.ToolForgeryKit",
+  "game": "DND5E.ToolGamingSet",
+  "herb": "DND5E.ToolHerbalismKit",
+  "music": "DND5E.ToolMusicalInstrument",
+  "navg": "DND5E.ToolNavigators",
+  "pois": "DND5E.ToolPoisonersKit",
+  "thief": "DND5E.ToolThieves",
+  "vehicle": "DND5E.ToolVehicle"
 };
 
 /* -------------------------------------------- */
