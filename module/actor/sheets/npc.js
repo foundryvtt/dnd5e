@@ -75,9 +75,7 @@ export class ActorSheet5eNPC extends ActorSheet5e {
         if ( item.data.activation.type ) features.actions.items.push(item);
         else features.passive.items.push(item);
       }
-      else if (["equipment", "consumable", "tool", "loot"].includes(item.type)) {
-        features.equipment.items.push(item);
-      }
+      else features.equipment.items.push(item);
     }
 
     // Assign and return

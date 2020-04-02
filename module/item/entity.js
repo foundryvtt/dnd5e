@@ -139,9 +139,11 @@ export class Item5e extends Item {
     if ( itemData.type === "spell" ) {
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
-      labels.components = Object.entries(data.components).map(c => {
-        c[1] === true ? c[0].titleCase().slice(0,1) : null
-      }).filterJoin(",");
+      labels.components = Object.entries(data.components).reduce((arr, c) => {
+        if ( c[1] !== true ) return arr;
+        arr.push(c[0].titleCase().slice(0, 1));
+        return arr;
+      }, []);
     }
 
     // Feat Items

@@ -731,40 +731,34 @@ export class Actor5e extends Actor {
       return ui.notifications.warn(`You are not allowed to polymorph this actor!`);
     }
 
-    // Get the original Actor data
+    // Get the original Actor data and the new source data
     const o = duplicate(this.data);
     o.flags.dnd5e = o.flags.dnd5e || {};
-
-    // Get the source Actor data
     const source = duplicate(target.data);
-    source.flags.dnd5e = source.flags.dnd5e || {};
-    delete source.flags.dnd5e.isPolymorphed;
-    delete source.flags.dnd5e.originalActor;
 
     // Prepare new data to merge from the source
     const d = {
-      name: `${o.name} (${source.name})`,
-      data: source.data,
-      items: source.items,
-      token: source.token,
-      img: source.img,
-      flags: source.flags
+      type: o.type, // Remain the same actor type
+      name: `${o.name} (${source.name})`, // Append the new shape to your old name
+      data: source.data, // Get the data model of your new form
+      items: source.items, // Get the items of your new form
+      token: source.token, // New token configuration
+      img: source.img, // New appearance
+      permission: o.permission, // Use the original actor permissions
+      folder: o.folder, // Be displayed in the same sidebar folder
+      flags: o.flags // Use the original actor flags
     };
-    delete d.data.resources;
-    delete d.data.currency;
-    delete d.data.bonuses;
-    delete d.token.actorId;
 
-    // Merge original data
-    mergeObject(d, {
-      "type": o.type, // The new actor must be of the same type
-      "token.actorLink": o.token.actorLink,
-      "token.name": d.name,
-      "folder": o.folder,
-      "data.details.alignment": o.data.details.alignment,
-      "data.attributes.exhaustion": o.data.attributes.exhaustion,
-      "data.attributes.inspiration": o.data.attributes.inspiration
-    });
+    // Additional adjustments
+    delete d.data.resources; // Don't change your resource pools
+    delete d.data.currency; // Don't lose currency
+    delete d.data.bonuses; // Don't lose global bonuses
+    delete d.token.actorId; // Don't reference the old actor ID
+    d.token.actorLink = o.token.actorLink; // Keep your actor link
+    d.token.name = d.name; // Token name same as actor name
+    d.data.details.alignment = o.data.details.alignment; // Don't change alignment
+    d.data.attributes.exhaustion = o.data.attributes.exhaustion; // Keep your prior exhaustion level
+    d.data.attributes.inspiration = o.data.attributes.inspiration; // Keep inspiration
 
     // Keep Token configurations
     const tokenConfig = ["displayName", "vision", "actorLink", "disposition", "displayBars", "bar1", "bar2"];
@@ -809,9 +803,8 @@ export class Actor5e extends Actor {
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
     // Set new data flags
+    if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
     d.flags.dnd5e.isPolymorphed = true;
-    if (o.flags.dnd5e.isPolymorphed) d.flags.dnd5e.originalActor = o.flags.dnd5e.originalActor;
-    else d.flags.dnd5e.originalActor = o._id;
 
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if (this.isToken) {
@@ -875,7 +868,7 @@ export class Actor5e extends Actor {
 
     // Delete the polymorphed Actor and maybe re-render the original sheet
     const isRendered = this.sheet.rendered;
-    await this.delete();
+    if ( game.user.isGM ) await this.delete();
     original.sheet.render(isRendered);
     return original;
   }

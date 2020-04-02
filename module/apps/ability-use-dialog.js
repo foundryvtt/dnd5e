@@ -38,7 +38,7 @@ export class AbilityUseDialog extends Dialog {
       uses: uses,
       recharges: !!recharge.value,
       isCharged: recharge.charged,
-      hasPlaceableTemplate: game.user.isTrusted && item.hasAreaTarget,
+      hasPlaceableTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
       perLabel: CONFIG.DND5E.limitedUsePeriods[uses.per]
     });
 

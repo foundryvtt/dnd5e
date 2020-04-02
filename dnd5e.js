@@ -74,7 +74,7 @@ Hooks.once("setup", function() {
   const toLocalize = [
     "abilities", "alignments", "conditionTypes", "consumableTypes", "currencies", "damageTypes", "distanceUnits", "equipmentTypes",
     "healingTypes", "itemActionTypes", "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes",
-    "spellSchools", "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages"
+    "spellSchools", "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages", "polymorphSettings"
   ];
   for ( let o of toLocalize ) {
     CONFIG.DND5E[o] = Object.entries(CONFIG.DND5E[o]).reduce((obj, e) => {
@@ -90,9 +90,21 @@ Hooks.once("setup", function() {
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
+
+  // Determine whether a system migration is required and feasible
+  const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = 0.84;
-  let needMigration = game.settings.get("dnd5e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
-  if ( needMigration && game.user.isGM ) migrations.migrateWorld();
+  const COMPATIBLE_MIGRATION_VERSION = 0.80;
+  let needMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
+  const canMigrate = currentVersion >= COMPATIBLE_MIGRATION_VERSION;
+
+  // Perform the migration
+  if ( needMigration && game.user.isGM ) {
+    if ( !canMigrate ) {
+      ui.notifications.error(`Your D&D5E system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`, {permanent: true});
+    }
+    migrations.migrateWorld();
+  }
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => create5eMacro(data, slot));

@@ -714,11 +714,11 @@
 .dnd5e.sheet.actor .inventory-list .item .item-name h4 {
   margin: 0;
 }
-.dnd5e.sheet.actor .inventory-list .item .item-name:hover .item-image {
-  background-image: url("/icons/svg/d20-grey.svg") !important;
-}
-.dnd5e.sheet.actor .inventory-list .item .item-name .item-image:hover {
+.dnd5e.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
   background-image: url("/icons/svg/d20-black.svg") !important;
+}
+.dnd5e.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
+  background-image: url("/icons/svg/d20-grey.svg") !important;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name i.attuned {
   color: #7a7971;
@@ -855,6 +855,19 @@
   color: #7a7971;
   text-align: center;
   border-right: 1px solid #c9c7b8;
+}
+.dnd5e.sheet.actor .spell-component {
+  line-height: 14px;
+}
+.dnd5e.sheet.actor .spell-component.C,
+.dnd5e.sheet.actor .spell-component.R {
+  display: inline-block;
+  padding-top: 1px;
+  width: 16px;
+  color: #c9c7b8;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid transparent;
+  border-radius: 8px;
 }
 .dnd5e.sheet.actor .spellbook-empty .item-controls {
   flex: 1;

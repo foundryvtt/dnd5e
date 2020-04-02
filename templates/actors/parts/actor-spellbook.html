@@ -71,7 +71,11 @@
                 {{/if}}
             </div>
 
-            <div class="spell-comps">{{labels.components}}</div>
+            <div class="spell-comps">
+                {{#each labels.components}}
+                <span class="spell-component {{this}}">{{this}}</span>
+                {{/each}}
+            </div>
             <div class="spell-school">{{labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
             <div class="spell-target" title="Range: {{labels.range}}">

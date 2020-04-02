@@ -305,6 +305,11 @@ export class ActorSheet5e extends ActorSheet {
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
     }
 
+    // Otherwise remove rollable classes
+    else {
+      html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
+    }
+
     // Handle default listeners last so system listeners are triggered first
     super.activateListeners(html);
   }
@@ -396,7 +401,7 @@ export class ActorSheet5e extends ActorSheet {
 
     // Handle a polymorph
     if (data && (data.type === "Actor")) {
-      if (game.user.isGM || (game.settings.get('dnd5e', 'allowPolymorphing') && this.owner)) {
+      if (game.user.isGM || (game.settings.get('dnd5e', 'allowPolymorphing') && this.actor.owner)) {
         return this._onDropPolymorph(event, data);
       }
     }

@@ -433,12 +433,11 @@
           margin: 0;
         }
 
-        &:hover .item-image {
-          background-image: url("/icons/svg/d20-grey.svg") !important;
-        }
-
-        .item-image:hover {
+        &.rollable .item-image:hover {
           background-image: url("/icons/svg/d20-black.svg") !important;
+        }
+        &.rollable:hover .item-image {
+          background-image: url("/icons/svg/d20-grey.svg") !important;
         }
 
         i.attuned {
@@ -585,6 +584,19 @@
     color: @colorTan;
     text-align: center;
     border-right: 1px solid @colorFaint;
+  }
+
+  .spell-component {
+    line-height: 14px;
+    &.C, &.R {
+      display: inline-block;
+      padding-top: 1px;
+      width: 16px;
+      color: @colorFaint;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid transparent;
+      border-radius: 8px;
+    }
   }
 
   // Empty spellbook controls

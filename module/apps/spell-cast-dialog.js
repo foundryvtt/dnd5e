@@ -63,7 +63,7 @@ export class SpellCastDialog extends Dialog {
       canCast: canCast,
       canUpcast: canUpcast,
       spellLevels,
-      hasPlaceableTemplate: game.user.isTrusted && item.hasAreaTarget
+      hasPlaceableTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget
     });
 
     // Create the Dialog and return as a Promise

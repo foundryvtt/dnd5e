@@ -3,7 +3,7 @@
 		<div>
 			<label class="checkbox" for="{{@key}}">
 				<input type="checkbox" id="{{@key}}" name="{{@key}}" {{checked (lookup ../content.options @key)}}>
-				{{localize this}}
+				{{this}}
 			</label>
 		</div>
 	{{/each}}
