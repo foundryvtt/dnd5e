@@ -1,9 +1,9 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
-        <h3>Spellcasting Ability</h3>
+        <h3>{{localize "DND5E.SpellAbility"}}</h3>
         <select name="data.attributes.spellcasting" data-type="String">
             {{#select data.attributes.spellcasting}}
-            <option value="">None</option>
+            <option value="">{{localize "DND5E.None"}}</option>
             {{#each data.abilities as |abl a|}}
             <option value="{{a}}">{{abl.label}}</option>
             {{/each}}
@@ -14,14 +14,14 @@
         <input class="spellcasting-level" type="text" name="data.details.spellLevel"
                value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
         {{/if}}
-        <h3 class="spell-dc">Spell DC {{data.attributes.spelldc}}</h3>
+        <h3 class="spell-dc">{{localize "DND5E.SpellDC"}} {{data.attributes.spelldc}}</h3>
     </div>
 
     <ul class="filter-list flexrow" data-filter="spellbook">
         <li class="filter-title">{{localize "DND5E.FilterTitle"}}</li>
-        <li class="filter-item" data-filter="action">{{localize "DND5E.FilterAction"}}</li>
-        <li class="filter-item" data-filter="bonus">{{localize "DND5E.FilterBonus"}}</li>
-        <li class="filter-item" data-filter="reaction">{{localize "DND5E.FilterReaction"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
         <li class="filter-item" data-filter="concentration">{{localize "DND5E.FilterConcentration"}}</li>
         <li class="filter-item" data-filter="ritual">{{localize "DND5E.FilterRitual"}}</li>
         <li class="filter-item" data-filter="prepared">{{localize "DND5E.FilterPrepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
@@ -53,7 +53,7 @@
 
         <div class="item-controls">
             {{#if section.canCreate}}
-            <a class="item-control item-create" title="Create Spell" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <a class="item-control item-create" title="{{localize 'DND5E.SpellCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
             {{/if}}
@@ -74,7 +74,7 @@
             <div class="spell-comps">{{labels.components}}</div>
             <div class="spell-school">{{labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>
-            <div class="spell-target" title="Range: {{labels.range}}">
+            <div class="spell-target" title="{{localize 'DND5E.Range'}}: {{labels.range}}">
                 {{#if labels.target}}
                 {{labels.target}}
                 {{else}}None
@@ -101,7 +101,7 @@
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls">
-            <a class="item-control item-create" title="Create Spell" data-type="spell"
+            <a class="item-control item-create" title="{{localize 'DND5E.SpellCreate'}}" data-type="spell"
                data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}</a>
         </div>
     {{/if}}
