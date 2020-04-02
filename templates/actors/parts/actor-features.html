@@ -1,9 +1,9 @@
 <div class="inventory-filters">
     <ul class="filter-list flexrow" data-filter="features">
         <li class="filter-title">{{localize "DND5E.FilterTitle"}}</li>
-        <li class="filter-item" data-filter="action">{{localize "DND5E.FilterAction"}}</li>
-        <li class="filter-item" data-filter="bonus">{{localize "DND5E.FilterBonus"}}</li>
-        <li class="filter-item" data-filter="reaction">{{localize "DND5E.FilterReaction"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
     </ul>
 </div>
 
@@ -19,8 +19,8 @@
 
         {{#if ../owner}}
         <div class="item-controls">
-            <a class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                <i class="fas fa-plus"></i> Add
+            <a class="item-control item-create" title="{{localize 'DND5E.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
         </div>
         {{/if}}
