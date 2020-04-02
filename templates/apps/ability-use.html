@@ -1,19 +1,19 @@
 <form id="ability-use-form">
-    <p>{{ localize "DND5E.DIALOG.ABILITYUSE.Prompt" }} <strong>{{item.name}}</strong> {{ localize "DND5E.ability" }}.</p>
+    <p>{{ localize "DND5E.AbilityUseHint" }} <strong>{{item.name}}</strong> {{ localize "DND5E.ability" }}.</p>
 
     <p type="note">
     {{#if recharges}}
-    {{ localize "DND5E.DIALOG.ABILITYUSE.Recharge.Prompt" }} <strong>{{#if isCharged}}{{ localize "DND5E.DIALOG.ABILITYUSE.Recharge.charged" }}{{else}}{{ localize "DND5E.DIALOG.ABILITYUSE.Recharge.depleted" }}{{/if}}</strong>.</p>
+    {{ localize "DND5E.AbilityUseRechargeHint" }} <strong>{{#if isCharged}}{{ localize "DND5E.AbilityUseCharged" }}{{else}}{{ localize "DND5E.AbilityUseDepleted" }}{{/if}}</strong>.</p>
     {{else}}
-    {{ localize "DND5E.DIALOG.ABILITYUSE.MessageStart" }} <strong>{{uses.value}} {{ localize "DND5E.DIALOG.ABILITYUSE.of" }} {{uses.max}}</strong> {{ localize "DND5E.DIALOG.ABILITYUSE.MessageEnd" }} {{perLabel}}.
+    {{ localize "DND5E.AbilityUseWarnStart" }} <strong>{{uses.value}} {{ localize "DND5E.of" }} {{uses.max}}</strong> {{ localize "DND5E.AbilityUseWarnEnd" }} {{perLabel}}.
     {{/if}}
     {{#unless canUse}}
-    {{ localize "DND5E.DIALOG.ABILITYUSE.CantUse" }}
+    {{ localize "DND5E.AbilityUseCantUse" }}
     {{/unless}}
     </p>
 
     <div class="form-group">
-        <label class="checkbox">{{ localize "DND5E.DIALOG.ABILITYUSE.ConsumeUsage" }} <input type="checkbox" name="consume" {{checked consume}}/></label>
+        <label class="checkbox">{{ localize "DND5E.AbilityUseConsume" }} <input type="checkbox" name="consume" {{checked consume}}/></label>
 
         {{#if hasPlaceableTemplate}}
         <div class="form-group">

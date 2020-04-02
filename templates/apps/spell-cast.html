@@ -1,12 +1,12 @@
 <form id="spell-config-form">
-    <p>{{ localize "DND5E.DIALOG.SPELLCAST.Prompt" }} <strong>{{item.name}}</strong> {{ localize "DND5E.DIALOG.SPELLCAST.PromptEnd" }}.</p>
+    <p>{{ localize "DND5E.SpellCastHint" }} <strong>{{item.name}}</strong> {{ localize "DND5E.spell" }}.</p>
 
     {{#unless canCast}}
-    <p class="notification error">{{ localize "DND5E.DIALOG.SPELLCAST.CantCast" }}</p>
+    <p class="notification error">{{ localize "DND5E.SpellCastNoSlots" }}</p>
     {{/unless}}
 
     <div class="form-group">
-        <label>{{ localize "DND5E.DIALOG.SPELLCAST.CastLevel" }}</label>
+        <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
         <div class="form-fields">
             <select name="level">
                 {{#select item.data.level}}
@@ -20,7 +20,7 @@
 
     <div class="form-group">
         {{#if canUpcast}}
-        <label class="checkbox">{{ localize "DND5E.DIALOG.SPELLCAST.ConsumeSlot" }} <input type="checkbox" name="consume" {{checked canCast}}/></label>
+        <label class="checkbox">{{ localize "DND5E.SpellCastConsume" }} <input type="checkbox" name="consume" {{checked canCast}}/></label>
         {{/if}}
 
         {{#if hasPlaceableTemplate}}
