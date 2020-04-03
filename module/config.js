@@ -50,9 +50,9 @@ DND5E.alignments = {
  * @type {Object}
  */
 DND5E.armorProficiencies = {
-  "lgt": DND5E.equipmentTypes.light,
-  "med": DND5E.equipmentTypes.medium,
-  "hvy": DND5E.equipmentTypes.heavy,
+  "lgt": "DND5E.equipmentTypes.light",
+  "med": "DND5E.equipmentTypes.medium",
+  "hvy": "DND5E.equipmentTypes.heavy",
   "shl": "DND5E.EquipmentShieldProficiency"
 };
 
@@ -85,10 +85,10 @@ DND5E.abilityActivationTypes = {
   "action": "DND5E.Action",
   "bonus": "DND5E.BonusAction",
   "reaction": "DND5E.Reaction",
-  "minute": DND5E.timePeriods.minute,
-  "hour": DND5E.timePeriods.hour,
-  "day": DND5E.timePeriods.day,
-  "special": DND5E.timePeriods.spec,
+  "minute": "DND5E.timePeriods.minute",
+  "hour": "DND5E.timePeriods.hour",
+  "day": "DND5E.timePeriods.day",
+  "special": "DND5E.timePeriods.spec",
   "legendary": "DND5E.LegAct",
   "lair": "DND5E.LairAct"
 };
