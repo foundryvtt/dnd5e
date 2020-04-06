@@ -6,12 +6,12 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.PlaceholderName' }}"/>
             </h1>
 
             <div class="charlevel">
                 <div class="level {{#if disableExperience}}noxp{{/if}}">
-                    <label>Level {{data.details.level}}</label>
+                    <label>{{ localize "DND5E.Level" }} {{data.details.level}}</label>
                 </div>
                 {{#unless disableExperience}}
                 <div class="experience">
@@ -28,13 +28,13 @@
             {{!-- Character Summary --}}
             <ul class="summary">
                 <li>
-                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="Race"/>
+                    <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'DND5E.PlaceholderRace' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="Background"/>
+                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'DND5E.PlaceholderBackground' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="Alignment"/>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.PlaceholderAlignment' }}"/>
                 </li>
             </ul>
 
@@ -158,10 +158,10 @@
                         </div>
                         <footer class="attribute-footer">
                             <label class="checkbox">
-                                SR <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
+                                {{ localize "DND5E.AbbreviationSR" }} <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
                             </label>
                             <label class="checkbox">
-                                LR <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
+                                {{ localize "DND5E.AbbreviationLR" }} <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
                             </label>
                         </footer>
                     </li>
@@ -173,7 +173,7 @@
                             <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                         </div>
                         <footer class="attribute-footer">
-                            <span>Modifier</span>
+                            <span>{{ localize "DND5E.Modifier" }}</span>
                             <input name="data.attributes.init.value" type="text" placeholder="0" data-dtype="Number"
                                    value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
                         </footer>

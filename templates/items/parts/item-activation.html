@@ -1,6 +1,6 @@
 {{!-- Activation Cost --}}
 <div class="form-group input-select">
-    <label>Activation Cost</label>
+    <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
         <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="-"/>
         <select name="data.activation.type">
@@ -17,7 +17,7 @@
 
 {{!-- Activation Condition --}}
 <div class="form-group">
-    <label>Activation Condition</label>
+    <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
     <div class="form-fields">
         <input type="text" name="data.activation.condition" value="{{data.activation.condition}}"/>
     </div>
@@ -26,7 +26,7 @@
 
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
-    <label>Target</label>
+    <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
         <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
         <select name="data.target.units">
@@ -50,11 +50,11 @@
 
 {{!-- Ability Range --}}
 <div class="form-group input-select">
-    <label>Range</label>
+    <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="Normal"/>
+        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Normal' }}"/>
         <span class="sep">/</span>
-        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="Max"/>
+        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
         <select name="data.range.units">
             {{#select data.range.units}}
             <option value=""></option>
@@ -68,7 +68,7 @@
 
 {{!-- Effect Duration --}}
 <div class="form-group input-select">
-    <label>Duration</label>
+    <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
         <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
         <select name="data.duration.units">
@@ -84,7 +84,7 @@
 
 {{!-- Limited Uses --}}
 <div class="form-group uses-per">
-    <label>Limited Uses</label>
+    <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
         <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number"/>
         <span class="sep"> of </span>
