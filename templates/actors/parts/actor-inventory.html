@@ -3,7 +3,7 @@
     {{#if isCharacter}}
     <ol class="currency flexrow">
         <h3>
-            Currency
+            {{localize "DND5E.CurrencyLabel"}}
             <a class="currency-convert" title="Convert Currency"><i class="fas fa-coins"></i></a>
         </h3>
         {{#each data.currency as |v k|}}
@@ -15,9 +15,9 @@
 
     <ul class="filter-list flexrow" data-filter="inventory">
         <li class="filter-title">{{localize "DND5E.FilterTitle"}}</li>
-        <li class="filter-item" data-filter="action">{{localize "DND5E.FilterAction"}}</li>
-        <li class="filter-item" data-filter="bonus">{{localize "DND5E.FilterBonus"}}</li>
-        <li class="filter-item" data-filter="reaction">{{localize "DND5E.FilterReaction"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
         <li class="filter-item" data-filter="equipped">{{localize "DND5E.FilterEquipped"}}</li>
     </ul>
 </div>
@@ -59,7 +59,7 @@
             <div class="item-detail item-weight">
                 {{#if item.totalWeight}}
                 <div class="item-detail">
-                    {{ item.totalWeight }} lbs.
+                    {{ item.totalWeight }} {{localize "DND5E.WeightUnit"}}
                 </div>
                 {{/if}}
             </div>

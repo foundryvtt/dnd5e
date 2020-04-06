@@ -6,7 +6,7 @@
             <select name="hd">
                 {{#select denomination}}
                 {{#each availableHD as |num denom|}}
-                <option value="{{denom}}">{{denom}} ({{num}} available)</option>
+                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "DND5E.available" }})</option>
                 {{/each}}
                 {{/select}}
             </select>
