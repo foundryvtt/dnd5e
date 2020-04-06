@@ -1,8 +1,8 @@
 /**
- * A specialized form used to select damage or condition types which apply to an Actor
- * @type {FormApplication}
+ * A specialized form used to select from a checklist of attributes, traits, or properties
+ * @extends {FormApplication}
  */
-export class ActorTraitSelector extends FormApplication {
+export class TraitSelector extends FormApplication {
 
   /** @override */
 	static get defaultOptions() {
@@ -13,7 +13,10 @@ export class ActorTraitSelector extends FormApplication {
       template: "systems/dnd5e/templates/apps/trait-selector.html",
       width: 320,
       height: "auto",
-      choices: {}
+      choices: {},
+      allowCustom: true,
+      minimum: 0,
+      maximum: null
     });
   }
 
@@ -29,45 +32,57 @@ export class ActorTraitSelector extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /**
-   * Provide data to the HTML template for rendering
-   * @type {Object}
-   */
+  /** @override */
   getData() {
 
     // Get current values
-    let attr = getProperty(this.object.data, this.attribute);
+    let attr = getProperty(this.object.data, this.attribute) || {};
+    attr.value = attr.value || [];
 
 	  // Populate choices
     const choices = duplicate(this.options.choices);
     for ( let [k, v] of Object.entries(choices) ) {
       choices[k] = {
         label: v,
-        chosen: attr.value.includes(k)
+        chosen: attr ? attr.value.includes(k) : false
       }
     }
 
     // Return data
 	  return {
+      allowCustom: this.options.allowCustom,
 	    choices: choices,
-      custom: attr.custom
+      custom: attr ? attr.custom : ""
     }
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Update the Actor object with new trait data processed from the form
-   * @private
-   */
+  /** @override */
   _updateObject(event, formData) {
-    const choices = [];
+    const updateData = {};
+
+    // Obtain choices
+    const chosen = [];
     for ( let [k, v] of Object.entries(formData) ) {
-      if ( (k !== "custom") && v ) choices.push(k);
+      if ( (k !== "custom") && v ) chosen.push(k);
     }
-    this.object.update({
-      [`${this.attribute}.value`]: choices,
-      [`${this.attribute}.custom`]: formData.custom
-    });
+    updateData[`${this.attribute}.value`] = chosen;
+
+    // Validate the number chosen
+    if ( this.options.minimum && (chosen.length < this.options.minimum) ) {
+      return ui.notifications.error(`You must choose at least ${this.options.minimum} options`);
+    }
+    if ( this.options.maximum && (chosen.length > this.options.maximum) ) {
+      return ui.notifications.error(`You may choose no more than ${this.options.maximum} options`);
+    }
+
+    // Include custom
+    if ( this.options.allowCustom ) {
+      updateData[`${this.attribute}.custom`] = formData.custom;
+    }
+
+    // Update the object
+    this.object.update(updateData);
   }
 }

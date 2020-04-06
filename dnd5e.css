@@ -197,6 +197,9 @@
   /* ----------------------------------------- */
   /*  List Filters                             */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Trait Lists                              */
+  /* ----------------------------------------- */
 }
 .dnd5e.sheet .window-content {
   overflow-y: hidden;
@@ -331,6 +334,19 @@
 }
 .dnd5e.sheet .filter-list .filter-item.active {
   border-bottom: 3px solid #44191A;
+}
+.dnd5e.sheet .trait-selector {
+  flex: 0 0 16px;
+  padding: 2px 0;
+  color: #999;
+  font-size: 10px;
+}
+.dnd5e.sheet .traits-list {
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
 }
 /* ----------------------------------------- */
 /* Trait Selector
@@ -610,20 +626,8 @@
   margin: 0 0 4px 0;
   justify-content: space-between;
 }
-.dnd5e.sheet.actor .traits .trait-selector {
-  flex: 0 0 16px;
-  padding: 2px 0;
-  color: #999;
-  font-size: 10px;
-}
 .dnd5e.sheet.actor .traits .configure-flags {
   flex: 1;
-}
-.dnd5e.sheet.actor .traits .traits-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  text-align: right;
 }
 .dnd5e.sheet.actor .traits .actor-size {
   flex: 0 0 150px;

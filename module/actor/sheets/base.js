@@ -1,4 +1,4 @@
-import {ActorTraitSelector} from "../../apps/trait-selector.js";
+import {TraitSelector} from "../../apps/trait-selector.js";
 import {ActorSheetFlags} from "../../apps/actor-flags.js";
 import {DND5E} from '../../config.js';
 
@@ -668,7 +668,7 @@ export class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the ActorTraitSelector application which allows a checkbox of multiple trait options
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
    * @param {Event} event   The click event which originated the selection
    * @private
    */
@@ -681,7 +681,7 @@ export class ActorSheet5e extends ActorSheet {
       title: label.innerText,
       choices: CONFIG.DND5E[a.dataset.options]
     };
-    new ActorTraitSelector(this.actor, options).render(true)
+    new TraitSelector(this.actor, options).render(true)
   }
 
   /* -------------------------------------------- */

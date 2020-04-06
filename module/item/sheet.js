@@ -1,3 +1,6 @@
+import { TraitSelector } from "../apps/trait-selector.js";
+
+
 /**
  * Override and extend the core ItemSheet implementation to handle D&D5E specific item types
  * @type {ItemSheet}
@@ -146,6 +149,9 @@ export class ItemSheet5e extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".damage-control").click(this._onDamageControl.bind(this));
+
+    // Activate any Trait Selectors
+    html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -175,5 +181,32 @@ export class ItemSheet5e extends ItemSheet {
       damage.parts.splice(Number(li.dataset.damagePart), 1);
       return this.item.update({"data.damage.parts": damage.parts});
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
+  _onConfigureClassSkills(event) {
+    event.preventDefault();
+    const skills = this.item.data.data.skills;
+    const choices = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
+    const a = event.currentTarget;
+    const label = a.parentElement.querySelector("label") ?? a.parentElement;
+
+    // Render the Trait Selector dialog
+    new TraitSelector(this.item, {
+      name: a.dataset.edit,
+      title: label.innerText,
+      choices: Object.entries(CONFIG.DND5E.skills).reduce((obj, e) => {
+        if ( choices.includes(e[0] ) ) obj[e[0]] = e[1];
+        return obj;
+      }, {}),
+      minimum: skills.number,
+      maximum: skills.number
+    }).render(true)
   }
 }

@@ -410,7 +410,12 @@
       "levels": 1,
       "subclass": "",
       "hitDice": "d6",
-      "hitDiceUsed": 0
+      "hitDiceUsed": 0,
+      "skills": {
+        "number": 2,
+        "choices": [],
+        "value": []
+      }
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
