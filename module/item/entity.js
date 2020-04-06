@@ -373,7 +373,7 @@ export class Item5e extends Item {
    */
   _equipmentChatData(data, labels, props) {
     props.push(
-      CONFIG.DND5E.armorTypes[data.armor.type],
+      CONFIG.DND5E.equipmentTypes[data.armor.type],
       labels.armor || null,
       data.stealth.value ? "Stealth Disadvantage" : null,
     );

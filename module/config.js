@@ -155,16 +155,19 @@ DND5E.itemCapacityTypes = {
  * @type {Object}
  */
 DND5E.limitedUsePeriods = {
-  "sr": "DND5E.LimitedUseSR",
-  "lr": "DND5E.LimitedUseLR",
-  "day": "DND5E.LimitedUseDay",
-  "charges": "DND5E.LimitedUseCharges"
+  "sr": "DND5E.ShortRest",
+  "lr": "DND5E.LongRest",
+  "day": "DND5E.Day",
+  "charges": "DND5E.Charges"
 };
 
 
 /* -------------------------------------------- */
 
-// Equipment Types
+/**
+ * The set of equipment types for armor, clothing, and other objects which can ber worn by the character
+ * @type {Object}
+ */
 DND5E.equipmentTypes = {
   "light": "DND5E.EquipmentLight",
   "medium": "DND5E.EquipmentMedium",
@@ -175,7 +178,7 @@ DND5E.equipmentTypes = {
   "clothing": "DND5E.EquipmentClothing",
   "trinket": "DND5E.EquipmentTrinket"
 };
-DND5E.armorTypes = DND5E.equipmentTypes;
+
 
 /* -------------------------------------------- */
 

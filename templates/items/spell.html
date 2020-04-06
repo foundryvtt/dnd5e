@@ -6,7 +6,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.PlaceholderSpellName' }}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.SpellName' }}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -22,7 +22,7 @@
                     {{labels.school}}
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.PlaceholderSource' }}"/>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -143,7 +143,7 @@
                         {{/each}}
                         {{/select}}
                     </select>
-                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'DND5E.PlaceholderScalingFormula' }}"/>
+                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
                 </div>
             </div>
         </div>
