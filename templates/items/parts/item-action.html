@@ -1,6 +1,6 @@
 {{!-- Action Type --}}
 <div class="form-group select">
-    <label>Action Type</label>
+    <label>{{ localize "DND5E.ItemActionType" }}</label>
     <select name="data.actionType">
         {{#select data.actionType}}
         <option value=""></option>
@@ -14,10 +14,10 @@
 
 {{!-- Ability Modifier --}}
 <div class="form-group select">
-    <label>Ability Modifier</label>
+    <label>{{ localize "DND5E.AbilityModifier" }}</label>
     <select name="data.ability">
         {{#select data.ability}}
-        <option value="">Default</option>
+        <option value="">{{ localize "DND5E.Default" }}</option>
         {{#each config.abilities as |ability a|}}
         <option value="{{a}}">{{ability}}</option>
         {{/each}}
@@ -28,7 +28,7 @@
 {{!-- Attack Roll Bonus --}}
 {{#if hasAttackRoll }}
 <div class="form-group">
-    <label>Attack Roll Bonus</label>
+    <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
     <div class="form-fields">
         <input type="text" name="data.attackBonus" value="{{data.attackBonus}}" data-dtype="Number"/>
     </div>
@@ -37,7 +37,7 @@
 
 {{!-- Damage Formula --}}
 <h4 class="damage-header">
-    {{#unless isHealing }}Damage{{ else }}Healing{{/unless}} Formula
+    {{#unless isHealing }}{{ localize "DND5E.Damage" }}{{ else }}{{ localize "DND5E.Healing" }}{{/unless}} {{ localize "DND5E.Formula" }}
     <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
 </h4>
 <ol class="damage-parts form-group">
@@ -46,7 +46,7 @@
         <input type="text" name="data.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
         <select name="data.damage.parts.{{i}}.1">
             {{#select (lookup this "1") }}
-            <option value="">None</option>
+            <option value="">{{ localize "DND5E.None" }}</option>
             {{#each ../config.damageTypes as |name type|}}
             <option value="{{type}}">{{name}}</option>
             {{/each}}
@@ -63,24 +63,24 @@
 {{!-- Versatile Damage --}}
 {{#if data.damage.parts.length }}
 <div class="form-group">
-    <label>Versatile Damage</label>
+    <label>{{ localize "DND5E.VersatileDamage" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.damage.versatile" value="{{data.damage.versatile}}" placeholder="Formula"/>
+        <input type="text" name="data.damage.versatile" value="{{data.damage.versatile}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
     </div>
 </div>
 {{/if}}
 
 {{!-- Other Formula --}}
 <div class="form-group">
-    <label>Other Formula</label>
+    <label>{{ localize "DND5E.OtherFormula" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.formula" value="{{data.formula}}" placeholder="Formula"/>
+        <input type="text" name="data.formula" value="{{data.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
     </div>
 </div>
 
 {{!-- Saving Throw --}}
 <div class="form-group input-select">
-    <label>Saving Throw</label>
+    <label>{{ localize "DND5E.ActionSave" }}</label>
     <div class="form-fields">
         <select name="data.save.ability">
             {{#select data.save.ability}}
@@ -90,15 +90,15 @@
             {{/each}}
             {{/select}}
         </select>
-        <span>vs. DC</span>
-        <input type="text" name="data.save.dc" value="{{#if data.save.dc}}{{data.save.dc}}{{/if}}" data-dtype="Number" placeholder="DC" {{#unless isFlatDC}}disabled{{/unless}}/>
+        <span>{{ localize "DND5E.VsDC" }}</span>
+        <input type="text" name="data.save.dc" value="{{#if data.save.dc}}{{data.save.dc}}{{/if}}" data-dtype="Number" placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}/>
         <select name="data.save.scaling">
             {{#select data.save.scaling}}
             <option value="spell">Spellcasting</option>
             {{#each config.abilities as |ability a|}}
             <option value="{{a}}">{{ability}}</option>
             {{/each}}
-            <option value="flat">Flat</option>
+            <option value="flat">{{ localize "DND5E.Flat" }}</option>
             {{/select}}
         </select>
     </div>
@@ -106,7 +106,7 @@
 
 {{!-- Chat Message Flavor --}}
 <div class="form-group stacked">
-    <label>Chat Message Flavor</label>
+    <label>{{ localize "DND5E.ChatFlavor" }}</label>
     <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
 </div>
 {{/if}}
