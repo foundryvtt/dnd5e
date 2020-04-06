@@ -43,18 +43,6 @@ DND5E.alignments = {
   'ce': "DND5E.AlignmentCE"
 };
 
-/* -------------------------------------------- */
-
-/**
- * The set of Armor Proficiencies which a character may have
- * @type {Object}
- */
-DND5E.armorProficiencies = {
-  "lgt": DND5E.equipmentTypes.light,
-  "med": DND5E.equipmentTypes.medium,
-  "hvy": DND5E.equipmentTypes.heavy,
-  "shl": "DND5E.EquipmentShieldProficiency"
-};
 
 DND5E.weaponProficiencies = {
   "sim": "DND5E.WeaponSimpleProficiency",
@@ -73,6 +61,27 @@ DND5E.toolProficiencies = {
   "thief": "DND5E.ToolThieves",
   "vehicle": "DND5E.ToolVehicle"
 };
+
+
+/* -------------------------------------------- */
+
+/**
+ * This Object defines the various lengths of time which can occur in D&D5e
+ * @type {Object}
+ */
+DND5E.timePeriods = {
+  "inst": "DND5E.TimeInst",
+  "turn": "DND5E.TimeTurn",
+  "round": "DND5E.TimeRound",
+  "minute": "DND5E.TimeMinute",
+  "hour": "DND5E.TimeHour",
+  "day": "DND5E.TimeDay",
+  "month": "DND5E.TimeMonth",
+  "year": "DND5E.TimeYear",
+  "perm": "DND5E.TimePerm",
+  "spec": "DND5E.Special"
+};
+
 
 /* -------------------------------------------- */
 
@@ -167,6 +176,19 @@ DND5E.equipmentTypes = {
   "trinket": "DND5E.EquipmentTrinket"
 };
 DND5E.armorTypes = DND5E.equipmentTypes;
+
+/* -------------------------------------------- */
+
+/**
+ * The set of Armor Proficiencies which a character may have
+ * @type {Object}
+ */
+DND5E.armorProficiencies = {
+  "lgt": DND5E.equipmentTypes.light,
+  "med": DND5E.equipmentTypes.medium,
+  "hvy": DND5E.equipmentTypes.heavy,
+  "shl": "DND5E.EquipmentShieldProficiency"
+};
 
 
 /* -------------------------------------------- */
@@ -275,25 +297,6 @@ DND5E.areaTargetTypes = {
   wall: "ray"
 };
 
-
-/* -------------------------------------------- */
-
-/**
- * This Object defines the various lengths of time which can occur in D&D5e
- * @type {Object}
- */
-DND5E.timePeriods = {
-  "inst": "DND5E.TimeInst",
-  "turn": "DND5E.TimeTurn",
-  "round": "DND5E.TimeRound",
-  "minute": "DND5E.TimeMinute",
-  "hour": "DND5E.TimeHour",
-  "day": "DND5E.TimeDay",
-  "month": "DND5E.TimeMonth",
-  "year": "DND5E.TimeYear",
-  "perm": "DND5E.TimePerm",
-  "spec": "DND5E.Special"
-};
 
 /* -------------------------------------------- */
 
