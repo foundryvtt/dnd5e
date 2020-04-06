@@ -1,3 +1,6 @@
+import { ActorTraitSelector } from "../apps/trait-selector.js";
+
+
 /**
  * Override and extend the core ItemSheet implementation to handle D&D5E specific item types
  * @type {ItemSheet}
@@ -33,6 +36,10 @@ export class ItemSheet5e extends ItemSheet {
 
     // Include CONFIG values
     data.config = CONFIG.DND5E;
+
+    // Include Actor information
+    data.isGM = game.user.isGM;
+    data.isTrusted = game.user.isTrusted;
 
     // Item Type, Status, and Details
     data.itemType = data.item.type.titleCase();
@@ -146,6 +153,9 @@ export class ItemSheet5e extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".damage-control").click(this._onDamageControl.bind(this));
+
+    // Activate any Trait Selectors
+    html.find('.trait-selector').click(this._onTraitSelector.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -175,5 +185,22 @@ export class ItemSheet5e extends ItemSheet {
       damage.parts.splice(Number(li.dataset.damagePart), 1);
       return this.item.update({"data.damage.parts": damage.parts});
     }
+  }
+
+    /**
+   * Handle spawning the ActorTraitSelector application which allows a checkbox of multiple trait options
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
+  _onTraitSelector(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const label = a.parentElement.querySelector("label") ?? a.parentElement;
+    const options = {
+      name: label.getAttribute("for"),
+      title: label.innerText,
+      choices: CONFIG.DND5E[a.dataset.options]
+    };
+    new ActorTraitSelector(this.item, options).render(true)
   }
 }

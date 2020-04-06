@@ -76,6 +76,33 @@
                 </div>
             </div>
 
+            {{!-- Level 1 skills --}}
+            <div class="form-group {{data.traits.skills.cssClass}}">
+                <label for="data.skills.available">
+                    {{localize "DND5E.SkillsAtFirst"}}
+                    {{#if isGM }}
+                    <a class="trait-selector" data-options="skills"><i class="fas fa-edit"></i></a>
+                    {{else}}
+                        {{#if isTrusted }}
+                        <a class="trait-selector" data-options="skills"><i class="fas fa-edit"></i></a>
+                        {{/if}}
+                    {{/if}}
+                </label>
+                <div>
+                    <ul class="traits-list">
+                        {{#each data.skills.available.value}}
+                            <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "DND5E.NumberSkillsAtFirst"}}</label>
+                <div class="form-fields">
+                    <input type="text" placeholder="0" name="data.skills.number" value="{{data.skills.number}}" data-dtype="Number"/>
+                </div>
+            </div>
+
             {{!-- Granted Abilities (TODO) --}}
             <h3 class="form-header">Granted Abilities</h3>
             <p class="notification warning">This is still to-do</p>

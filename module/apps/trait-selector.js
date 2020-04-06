@@ -43,14 +43,14 @@ export class ActorTraitSelector extends FormApplication {
     for ( let [k, v] of Object.entries(choices) ) {
       choices[k] = {
         label: v,
-        chosen: attr.value.includes(k)
+        chosen: attr ? attr.value.includes(k) : false
       }
     }
 
     // Return data
 	  return {
 	    choices: choices,
-      custom: attr.custom
+      custom: attr ? attr.custom : ""
     }
   }
 
