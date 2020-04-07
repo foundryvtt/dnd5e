@@ -372,6 +372,15 @@ DND5E.spellPreparationModes = {
   "prepared": "DND5E.SpellPrepPrepared"
 };
 
+DND5E.spellProgression = {
+  "none": "DND5E.SpellNone",
+  "full": "DND5E.SpellProgFull",
+  "half": "DND5E.SpellProgHalf",
+  "third": "DND5E.SpellProgThird",
+  "pact": "DND5E.SpellProgPact",
+  "artificer": "DND5E.SpellProgArt"
+};
+
 /* -------------------------------------------- */
 
 /**
@@ -455,6 +464,29 @@ DND5E.spellLevels = {
   8: "DND5E.SpellLevel8",
   9: "DND5E.SpellLevel9"
 };
+
+DND5E.SPELL_SLOT_TABLE = [
+  [2],
+  [3],
+  [4, 2],
+  [4, 3],
+  [4, 3, 2],
+  [4, 3, 3],
+  [4, 3, 3, 1],
+  [4, 3, 3, 2],
+  [4, 3, 3, 3, 1],
+  [4, 3, 3, 3, 2],
+  [4, 3, 3, 3, 2, 1],
+  [4, 3, 3, 3, 2, 1],
+  [4, 3, 3, 3, 2, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1, 1],
+  [4, 3, 3, 3, 3, 1, 1, 1, 1],
+  [4, 3, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 3, 2, 2, 1, 1]
+];
 
 /* -------------------------------------------- */
 

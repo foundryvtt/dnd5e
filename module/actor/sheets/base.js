@@ -151,32 +151,54 @@ export class ActorSheet5e extends ActorSheet {
       "0": "&infin;"
     };
 
-    // Reduce spells to the nested spellbook structure
-    let spellbook = spells.reduce((sb, spell) => {
+    const spellbookEntry = lvl => {
+      return {
+        level: lvl,
+        usesSlots: lvl > 0,
+        canCreate: owner && (lvl >= 0),
+        canPrepare: (data.actor.type === "character") && (lvl > 0),
+        spells: [],
+        uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
+        slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,
+        dataset: {"type": "spell", "level": lvl},
+        prop: `spell${lvl}`
+      };
+    };
 
+    let spellbook = {};
+    for (let lvl = 0; lvl < 10; lvl++) {
+      const entry = spellbookEntry(lvl);
+      spellbook[lvl] = entry;
+      entry.label = CONFIG.DND5E.spellLevels[lvl];
+      entry.override = data.data.spells[`spell${lvl}`].override || 0;
+    }
+
+    const pact = data.data.spells.pact;
+    if (pact.level) {
+      const entry = spellbookEntry(levels.pact);
+      spellbook[levels.pact] = entry;
+      entry.label = CONFIG.DND5E.spellPreparationModes.pact;
+      entry.usesSlots = true;
+      entry.canCreate = owner;
+      entry.uses = pact.value || 0;
+      entry.slots = pact.max || 0;
+      entry.override = pact.override || 0;
+      entry.prop = 'pact';
+    }
+
+    spells.forEach(spell => {
       // Define the numeric spell level for sorting
       const mode = spell.data.preparation.mode || "prepared";
       const lvl = levels[mode] || spell.data.level || 0;
 
-      // Prepare a new Spellbook level
-      if ( !sb[lvl] ) {
-        sb[lvl] = {
-          level: lvl,
-          usesSlots: lvl > 0,
-          canCreate: owner && (lvl >= 0),
-          canPrepare: (data.actor.type === "character") && (lvl > 0),
-          label: lvl >= 0 ? CONFIG.DND5E.spellLevels[lvl] : CONFIG.DND5E.spellPreparationModes[mode],
-          spells: [],
-          uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
-          slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,
-          dataset: {"type": "spell", "level": lvl}
-        };
+      if (!spellbook[lvl]) {
+        const entry = spellbookEntry(lvl);
+        spellbook[lvl] = entry;
+        entry.label = CONFIG.DND5E.spellPreparationModes[mode];
       }
 
-      // Add the spell to the section
-      sb[lvl].spells.push(spell);
-      return sb;
-    }, {});
+      spellbook[lvl].spells.push(spell);
+    });
 
     // Sort the spellbook by section order
     spellbook = Object.values(spellbook);
@@ -280,6 +302,7 @@ export class ActorSheet5e extends ActorSheet {
       html.find('.item-edit').click(this._onItemEdit.bind(this));
       html.find('.item-delete').click(this._onItemDelete.bind(this));
       html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+      html.find('.slot-max-override').click(this._onEditSlotOverride.bind(this));
     }
 
     // Owner Only Listeners
@@ -486,6 +509,47 @@ export class ActorSheet5e extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * @param {JQuery.TriggeredEvent} event
+   * @private
+   */
+  async _onEditSlotOverride (event) {
+    const prop = event.currentTarget.dataset.prop;
+    const override = this.actor.data.data.spells[prop].override || '';
+    const dlg = await renderTemplate('systems/dnd5e/templates/actors/parts/slot-override.html', {
+      override: override
+    });
+
+    new Dialog({
+      title: game.i18n.localize('DND5E.SpellProgOverride'),
+      content: dlg,
+      default: 'accept',
+      buttons: {
+        accept: {
+          icon: '<i class="fas fa-save"></i>',
+          label: game.i18n.localize('Update'),
+          callback: html => {
+            let override = html.find('input').val();
+            if (override === '') {
+              override = null;
+            } else {
+              override = Number(override);
+            }
+
+            this.actor.update({[`data.spells.${prop}.override`]: override});
+          }
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize('Cancel')
+        }
+      },
+    }, {
+      classes: ['dialog', 'dnd5e'],
+      width: 250
+    }).render(true);
+  }
 
   /**
    * Change the uses amount of an Owned Item within the Actor

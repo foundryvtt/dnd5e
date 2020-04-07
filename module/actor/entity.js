@@ -80,6 +80,7 @@ export class Actor5e extends Actor {
 
     // Spell DC
     data.attributes.spelldc = this.getSpellDC(data.attributes.spellcasting);
+    this._prepareSpellcasting(actorData);
   }
 
   /* -------------------------------------------- */
@@ -186,6 +187,74 @@ export class Actor5e extends Actor {
     }, {});
     data.prof = this.data.data.attributes.prof;
     return data;
+  }
+
+  /**
+   * @private
+   */
+  _prepareSpellcasting (actorData) {
+    const spells = actorData.data.spells;
+
+    // Keep track of the last seen caster in case we're in a single-caster
+    // situation.
+    let caster = null;
+
+    // Keep track of the total number of caster classes we have.
+    let totalCasters = 0;
+
+    // The total caster level this character is considered to be according to
+    // the multiclassing rules.
+    let slotLevel = 0;
+
+    // And separate tracking for pact levels.
+    let pactLevel = 0;
+
+    for (const item of actorData.items) {
+      if (item.type !== 'class' || item.data.spellcasting === 'none') {
+        continue;
+      }
+
+      const levels = item.data.levels;
+      const progression = item.data.spellcasting;
+
+      if (progression !== 'pact') {
+        caster = item;
+        totalCasters++;
+      }
+
+      switch (progression) {
+        case 'third': slotLevel += Math.floor(levels / 3); break;
+        case 'half': slotLevel += Math.floor(levels / 2); break;
+        case 'full': slotLevel += levels; break;
+        case 'artificer': slotLevel += Math.ceil(levels / 2); break;
+        case 'pact': pactLevel += levels; break;
+      }
+    }
+
+    slotLevel = Math.clamped(slotLevel, 0, 20);
+    if (slotLevel > 0) {
+      if (totalCasters === 1 && ['half', 'third'].includes(caster.data.spellcasting)) {
+        // Single-classed non-full-casters round up instead of down when
+        // determining their level on the spell slot table.
+        const divisor = caster.data.spellcasting === 'third' ? 3 : 2;
+        slotLevel = Math.ceil(caster.data.levels / divisor);
+      }
+
+      const slots = DND5E.SPELL_SLOT_TABLE[slotLevel - 1];
+      slots.forEach((n, i) => spells[`spell${i + 1}`].max = n);
+    }
+
+    if (pactLevel > 0) {
+      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2);
+
+      // Breakpoints from the Warlock spell slots table.
+      spells.pact.max = Math.max(
+          1,
+          Math.min(pactLevel, 2),
+          Math.min(pactLevel - 8, 3),
+          Math.min(pactLevel - 13, 4)
+      );
+    }
   }
 
   /* -------------------------------------------- */
@@ -579,6 +648,10 @@ export class Actor5e extends Actor {
         updateData[`data.resources.${k}.value`] = r.max;
       }
     }
+
+    // Recover pact slots.
+    const pact = data.spells.pact;
+    updateData['data.spells.pact.value'] = pact.override || pact.max;
     await this.update(updateData);
 
     // Recover item uses
@@ -648,10 +721,13 @@ export class Actor5e extends Actor {
 
     // Recover spell slots
     for ( let [k, v] of Object.entries(data.spells) ) {
-      if ( !v.max ) continue;
-      updateData[`data.spells.${k}.value`] = v.max;
+      if ( !v.max && !v.override ) continue;
+      updateData[`data.spells.${k}.value`] = v.override || v.max;
     }
 
+    // Recover pact slots.
+    const pact = data.spells.pact;
+    updateData['data.spells.pact.value'] = pact.override || pact.max;
 
     // Determine the number of hit dice which may be recovered
     let recoverHD = Math.max(Math.floor(data.details.level / 2), 1);

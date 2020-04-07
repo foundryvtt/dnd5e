@@ -39,7 +39,17 @@
             {{#if section.usesSlots}}
             <input type="text" name="data.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0" data-dtype="Number"/>
             <span class="sep"> / </span>
-            <input type="text" name="data.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0" data-dtype="Number"/>
+            <span class="spell-max">{{#if section.override~}}
+	            {{~section.override~}}
+            {{~else~}}
+	            {{~section.slots~}}
+            {{~/if}}</span>
+            {{#if section.canCreate}}
+            <a class="slot-max-override" title="{{localize 'DND5E.SpellProgOverride'}}"
+               data-prop="{{section.prop}}">
+	            <i class="fas fa-edit"></i>
+            </a>
+            {{/if}}
             {{ else }}
             <span class="spell-slots">{{{section.uses}}}</span>
             <span class="sep"> / </span>

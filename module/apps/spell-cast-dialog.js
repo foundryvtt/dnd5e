@@ -43,8 +43,8 @@ export class SpellCastDialog extends Dialog {
     let lmax = 0;
     const spellLevels = Array.fromRange(10).reduce((arr, i) => {
       if ( i < lvl ) return arr;
-      const l = ad.spells["spell"+i] || {max: 0};
-      let max = parseInt(l.max || 0);
+      const l = ad.spells["spell"+i] || {max: 0, override: null};
+      let max = parseInt(l.override || l.max || 0);
       let slots = Math.clamped(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
       arr.push({
@@ -55,6 +55,19 @@ export class SpellCastDialog extends Dialog {
       });
       return arr;
     }, []).filter(sl => sl.level <= lmax);
+
+    const pact = ad.spells.pact;
+    if (pact.level) {
+      spellLevels.push({
+        level: pact.level,
+        label: game.i18n.localize('DND5E.SpellLevelPact')
+          + ` (${game.i18n.localize('DND5E.Level')} ${pact.level}) `
+          + `(${pact.value} ${game.i18n.localize('DND5E.Slots')})`,
+        canCast: canUpcast,
+        hasSlots: pact.value > 0
+      });
+    }
+
     const canCast = spellLevels.some(l => l.hasSlots);
 
     // Render the Spell casting template
