@@ -351,13 +351,25 @@ export class Actor5e extends Actor {
     if ( !usesSlots ) return item.roll();
 
     // Configure the casting level and whether to consume a spell slot
-    let consume = true;
+    let consume = `spell${lvl}`;
     let placeTemplate = false;
 
     if ( configureDialog ) {
       const spellFormData = await SpellCastDialog.create(this, item);
-      lvl = parseInt(spellFormData.get("level"));
-      consume = Boolean(spellFormData.get("consume"));
+      const isPact = spellFormData.get('level') === 'pact';
+
+      if (isPact) {
+        lvl = this.data.data.spells.pact.level;
+      } else {
+        lvl = parseInt(spellFormData.get("level"));
+      }
+
+      if (Boolean(spellFormData.get("consume"))) {
+        consume = isPact ? 'pact' : `spell${lvl}`;
+      } else {
+        consume = false;
+      }
+
       placeTemplate = Boolean(spellFormData.get("placeTemplate"));
       if ( lvl !== item.data.data.level ) {
         item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
@@ -367,7 +379,7 @@ export class Actor5e extends Actor {
     // Update Actor data
     if ( consume && (lvl > 0) ) {
       await this.update({
-        [`data.spells.spell${lvl}.value`]: Math.max(parseInt(this.data.data.spells["spell"+lvl].value) - 1, 0)
+        [`data.spells.${consume}.value`]: Math.max(parseInt(this.data.data.spells[consume].value) - 1, 0)
       });
     }
 

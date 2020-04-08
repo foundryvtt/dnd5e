@@ -368,7 +368,6 @@ DND5E.spellPreparationModes = {
   "always": "DND5E.SpellPrepAlways",
   "atwill": "DND5E.SpellPrepAtWill",
   "innate": "DND5E.SpellPrepInnate",
-  "pact": "DND5E.SpellPrepPact",
   "prepared": "DND5E.SpellPrepPrepared"
 };
 

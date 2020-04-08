@@ -59,7 +59,7 @@ export class SpellCastDialog extends Dialog {
     const pact = ad.spells.pact;
     if (pact.level) {
       spellLevels.push({
-        level: pact.level,
+        level: 'pact',
         label: game.i18n.localize('DND5E.SpellLevelPact')
           + ` (${game.i18n.localize('DND5E.Level')} ${pact.level}) `
           + `(${pact.value} ${game.i18n.localize('DND5E.Slots')})`,

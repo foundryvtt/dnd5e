@@ -139,15 +139,13 @@ export class ActorSheet5e extends ActorSheet {
     // Define some mappings
     const levels = {
       "atwill": -30,
-      "innate": -20,
-      "pact": -10
+      "innate": -20
     };
 
     // Label spell slot uses headers
     const useLabels = {
       "-30": "-",
       "-20": "-",
-      "-10": "-",
       "0": "&infin;"
     };
 
@@ -171,19 +169,6 @@ export class ActorSheet5e extends ActorSheet {
       spellbook[lvl] = entry;
       entry.label = CONFIG.DND5E.spellLevels[lvl];
       entry.override = data.data.spells[`spell${lvl}`].override || 0;
-    }
-
-    const pact = data.data.spells.pact;
-    if (pact.level) {
-      const entry = spellbookEntry(levels.pact);
-      spellbook[levels.pact] = entry;
-      entry.label = CONFIG.DND5E.spellPreparationModes.pact;
-      entry.usesSlots = true;
-      entry.canCreate = owner;
-      entry.uses = pact.value || 0;
-      entry.slots = pact.max || 0;
-      entry.override = pact.override || 0;
-      entry.prop = 'pact';
     }
 
     spells.forEach(spell => {
@@ -232,7 +217,7 @@ export class ActorSheet5e extends ActorSheet {
         if (data.components.concentration !== true) return false;
       }
       if ( filters.has("prepared") ) {
-        if ( data.level === 0 || ["pact", "innate","always"].includes(data.preparation.mode) ) return true;
+        if ( data.level === 0 || ["innate", "always"].includes(data.preparation.mode) ) return true;
         if ( this.actor.data.type === "npc" ) return true;
         return data.preparation.prepared;
       }
