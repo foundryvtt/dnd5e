@@ -57,7 +57,9 @@ export class SpellCastDialog extends Dialog {
     }, []).filter(sl => sl.level <= lmax);
 
     const pact = ad.spells.pact;
-    if (pact.level) {
+    if (pact.level >= lvl) {
+      // If this character has pact slots, present them as an option for
+      // casting the spell.
       spellLevels.push({
         level: 'pact',
         label: game.i18n.localize('DND5E.SpellLevelPact')
