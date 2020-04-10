@@ -194,6 +194,7 @@ export class Actor5e extends Actor {
    */
   _prepareSpellcasting (actorData) {
     const spells = actorData.data.spells;
+    const isNPC = actorData.type === 'npc';
 
     // Keep track of the last seen caster in case we're in a single-caster
     // situation.
@@ -232,14 +233,20 @@ export class Actor5e extends Actor {
     }
 
     slotLevel = Math.clamped(slotLevel, 0, 20);
-    if (slotLevel > 0) {
-      if (totalCasters === 1 && ['half', 'third'].includes(caster.data.spellcasting)) {
-        // Single-classed non-full-casters round up instead of down when
-        // determining their level on the spell slot table.
-        const divisor = caster.data.spellcasting === 'third' ? 3 : 2;
-        slotLevel = Math.ceil(caster.data.levels / divisor);
-      }
+    if (!isNPC && totalCasters === 1 && ['half', 'third'].includes(caster.data.spellcasting)) {
+      // Single-classed non-full-casters round up instead of down when
+      // determining their level on the spell slot table.
+      const divisor = caster.data.spellcasting === 'third' ? 3 : 2;
+      slotLevel = Math.ceil(caster.data.levels / divisor);
+    }
 
+    if (isNPC && actorData.data.details.spellLevel) {
+      // If this NPC has a spellcaster level, it should override any
+      // calculations from class levels.
+      slotLevel = actorData.data.details.spellLevel;
+    }
+
+    if (slotLevel > 0) {
       const slots = DND5E.SPELL_SLOT_TABLE[slotLevel - 1];
       slots.forEach((n, i) => spells[`spell${i + 1}`].max = n);
     }
