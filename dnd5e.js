@@ -101,7 +101,7 @@ Hooks.once("ready", function() {
 
   // Perform the migration
   if ( needMigration && game.user.isGM ) {
-    if ( !canMigrate ) {
+    if ( currentVersion && (currentVersion < COMPATIBLE_MIGRATION_VERSION) ) {
       ui.notifications.error(`Your D&D5E system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`, {permanent: true});
     }
     migrations.migrateWorld();
