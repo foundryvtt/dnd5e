@@ -72,12 +72,12 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
-      weapon: { label: "Weapons", items: [], dataset: {type: "weapon"} },
-      equipment: { label: "Equipment", items: [], dataset: {type: "equipment"} },
-      consumable: { label: "Consumables", items: [], dataset: {type: "consumable"} },
-      tool: { label: "Tools", items: [], dataset: {type: "tool"} },
+      weapon: { label: game.i18n.localize("DND5E.ItemWeaponsHeader"), items: [], dataset: {type: "weapon"} },
+      equipment: { label: game.i18n.localize("DND5E.ItemEquipmentHeader"), items: [], dataset: {type: "equipment"} },
+      consumable: { label: game.i18n.localize("DND5E.ItemConsumablesHeader"), items: [], dataset: {type: "consumable"} },
+      tool: { label: game.i18n.localize("DND5E.ItemToolsHeader"), items: [], dataset: {type: "tool"} },
       backpack: { label: game.i18n.localize("DND5E.ItemContainerHeader"), items: [], dataset: {type: "backpack"} },
-      loot: { label: "Loot", items: [], dataset: {type: "loot"} }
+      loot: { label: game.i18n.localize("DND5E.ItemLootHeader"), items: [], dataset: {type: "loot"} }
     };
 
     // Partition items by category
@@ -128,9 +128,9 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Features
     const features = {
-      classes: { label: "Class Levels", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
-      active: { label: "Active", items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
-      passive: { label: "Passive", items: [], hasActions: false, dataset: {type: "feat"} }
+      classes: { label: game.i18n.localize("DND5E.FeatureClassLevelsHeader"), items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
+      active: { label: game.i18n.localize("DND5E.FeatureActiveHeader"), items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
+      passive: { label: game.i18n.localize("DND5E.FeaturePassiveHeader"), items: [], hasActions: false, dataset: {type: "feat"} }
     };
     for ( let f of feats ) {
       if ( f.data.activation.type ) features.active.items.push(f);
