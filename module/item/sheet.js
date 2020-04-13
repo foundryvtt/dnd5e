@@ -195,7 +195,7 @@ export class ItemSheet5e extends ItemSheet {
     const skills = this.item.data.data.skills;
     const choices = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
     const a = event.currentTarget;
-    const label = a.parentElement.querySelector("label") ?? a.parentElement;
+    const label = a.parentElement;
 
     // Render the Trait Selector dialog
     new TraitSelector(this.item, {
