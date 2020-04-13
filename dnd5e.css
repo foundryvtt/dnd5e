@@ -835,9 +835,10 @@
 }
 .dnd5e.sheet.actor .spell-slots,
 .dnd5e.sheet.actor .spell-comps {
-  flex: 0 0 60px;
+  flex: 0 0 72px;
+  padding-right: 5px;
+  text-align: right;
   font-size: 12px;
-  text-align: center;
   color: #7a7971;
   border-right: 1px solid #c9c7b8;
 }
@@ -866,6 +867,7 @@
 .dnd5e.sheet.actor .spell-component.C,
 .dnd5e.sheet.actor .spell-component.R {
   display: inline-block;
+  text-align: center;
   padding-top: 1px;
   width: 16px;
   color: #c9c7b8;

@@ -810,6 +810,9 @@ export class Item5e extends Item {
 
     // Get the Item
     const item = actor.getOwnedItem(card.dataset.itemId);
+    if ( !item ) {
+      return ui.notifications.error(`The requested item ${card.dataset.itemId} no longer exists on Actor ${actor.name}`)
+    }
     const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
     // Get card targets

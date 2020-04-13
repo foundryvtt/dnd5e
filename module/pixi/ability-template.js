@@ -112,7 +112,9 @@ export class AbilityTemplate extends MeasuredTemplate {
     handlers.mw = event => {
       if ( event.ctrlKey ) event.preventDefault(); // Avoid zooming the browser window
       event.stopPropagation();
-      this.data.direction += (event.deltaY * (Math.PI / 60));
+      let delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
+      let snap = event.shiftKey ? delta : 5;
+      this.data.direction += (snap * Math.sign(event.deltaY));
       this.refresh();
     };
 

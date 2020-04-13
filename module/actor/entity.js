@@ -823,7 +823,7 @@ export class Actor5e extends Actor {
 
     // Update regular Actors by creating a new Actor with the Polymorphed data
     await this.sheet.close();
-    const newActor = await Actor.create(d, {renderSheet: true});
+    const newActor = await this.constructor.create(d, {renderSheet: true});
 
     // Update placed Token instances
     if ( !transformTokens ) return;
