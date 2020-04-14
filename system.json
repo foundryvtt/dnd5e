@@ -2,12 +2,19 @@
   "name": "dnd5e",
   "title": "Dungeons & Dragons 5th Edition",
   "description": "A comprehensive game system for running games of Dungeons & Dragons 5th Edition in the Foundry VTT environment.",
-  "version": 0.87,
+  "version": 0.86,
   "author": "Atropos",
   "scripts": [],
   "esmodules": ["dnd5e.js"],
   "styles": ["dnd5e.css"],
   "packs": [
+    {
+      "name": "heroes",
+      "label": "Starter Heroes",
+      "system": "dnd5e",
+      "path": "./packs/heroes.db",
+      "entity": "Actor"
+    },
     {
       "name": "monsters",
       "label": "Monsters (SRD)",
