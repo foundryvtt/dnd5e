@@ -49,8 +49,8 @@
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
-                    {{~#if item.isStack}}({{item.data.quantity}}) {{/if}}
                     {{item.name~}}
+                    {{~#if item.isStack}}&nbsp;({{item.data.quantity}})&nbsp;{{/if}}
                     {{~#if item.data.attuned}} <i class="fas fa-sun attuned" title={{localize "DND5E.Attuned"}}></i>{{/if}}
                 </h4>
             </div>
