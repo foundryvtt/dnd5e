@@ -52,7 +52,8 @@ export class Actor5e extends Actor {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
       skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.floor(skl.value * data.attributes.prof);
-      skl.passive = 10 + skl.mod;
+      const passiveBonus = (getProperty(flags, "dnd5e.observantFeat") && DND5E.characterFlags.observantFeat.skills.find(s => s === skl.label)) ? 5 : 0;
+      skl.passive = 10 + skl.mod + passiveBonus;
     }
 
     // Initiative
