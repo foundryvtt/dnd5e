@@ -598,7 +598,7 @@ DND5E.characterFlags = {
   "observantFeat": {
     name: "Observant Feat",
     hint: "Provides a +5 to passive Perception and Investigation.",
-    skills: ['Perception','Investigation'],
+    skills: ['prc','inv'],
     section: "Feats",
     type: Boolean
   },
