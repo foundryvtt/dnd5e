@@ -51,15 +51,25 @@ export class Actor5e extends Actor {
     for (let [sklID, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
-      skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.floor(skl.value * data.attributes.prof);
-      const passiveBonus = (getProperty(flags, "dnd5e.observantFeat") && DND5E.characterFlags.observantFeat.skills.find(s => s === sklID)) ? 5 : 0;
+      if (getProperty(flags, "dnd5e.remarkableAthlete") && DND5E.characterFlags.remarkableAthlete.abilities.find(a => a === skl.ability)) {
+        skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.ceil(skl.value * data.attributes.prof);
+      } else {
+        skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.floor(skl.value * data.attributes.prof);
+      }
+      const passiveBonus = (getProperty(flags, "dnd5e.observantFeat") && DND5E.characterFlags.observantFeat.skills.find(s => s === skl.sklID)) ? 5 : 0;
       skl.passive = 10 + skl.mod + passiveBonus;
     }
 
     // Initiative
     const init = data.attributes.init;
     init.mod = data.abilities.dex.mod;
-    init.prof = getProperty(flags, "dnd5e.initiativeHalfProf") ? Math.floor(0.5 * data.attributes.prof) : 0;
+    if (getProperty(flags, "dnd5e.remarkableAthlete")) {
+      init.prof = Math.ceil(0.5 * data.attributes.prof);
+    } else if(getProperty(flags, "dnd5e.initiativeHalfProf")) {
+      init.prof = Math.floor(0.5 * data.attributes.prof);
+    } else {
+      init.prof = 0;
+    }
     init.bonus = init.value + (getProperty(flags, "dnd5e.initiativeAlert") ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
@@ -370,12 +380,18 @@ export class Actor5e extends Actor {
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
     const data = {mod: abl.mod};
+    const attributes = this.data.attributes;
+    const flags = this.data.flags;
 
     // Include a global actor ability check bonus
     const actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
     if ( !!actorBonus ) {
       parts.push("@checkBonus");
       data.checkBonus = actorBonus;
+    }
+    if (getProperty(flags, "dnd5e.remarkableAthlete") && DND5E.characterFlags.remarkableAthlete.abilities.find(a => a === abl)) {
+      parts.push("@checkBonus");
+      data.checkBonus += Math.ceil(0.5 * attributes.prof);
     }
 
     // Roll and return
