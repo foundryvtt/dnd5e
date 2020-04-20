@@ -46,31 +46,38 @@ export class Actor5e extends Actor {
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
       abl.save = abl.mod + abl.prof + saveBonus;
     }
-
+    
     // Skill modifiers
-    for (let [sklID, skl] of Object.entries(data.skills)) {
+    const feats = DND5E.characterFlags;
+    const athlete = flags.remarkableAthlete;
+    const observant = flags.observantFeat;
+    let round = Math.floor;
+    for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
-      if (getProperty(flags, "dnd5e.remarkableAthlete") && DND5E.characterFlags.remarkableAthlete.abilities.find(a => a === skl.ability)) {
-        skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.ceil(skl.value * data.attributes.prof);
-      } else {
-        skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.floor(skl.value * data.attributes.prof);
+
+      // Apply remarkable athlete
+      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
+        skl.value = 0.5;
+        round = Math.ceil;
       }
-      const passiveBonus = (getProperty(flags, "dnd5e.observantFeat") && DND5E.characterFlags.observantFeat.skills.find(s => s === skl.sklID)) ? 5 : 0;
-      skl.passive = 10 + skl.mod + passiveBonus;
+
+      // Compute modifier
+      skl.mod = data.abilities[skl.ability].mod + skl.bonus + round(skl.value * data.attributes.prof);
+
+      // Compute passive bonus
+      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
+      skl.passive = 10 + skl.mod + passive;
     }
 
-    // Initiative
+    // Determine Initiative Modifier
     const init = data.attributes.init;
+    const joat = flags.initiativeHalfProf;
     init.mod = data.abilities.dex.mod;
-    if (getProperty(flags, "dnd5e.remarkableAthlete")) {
-      init.prof = Math.ceil(0.5 * data.attributes.prof);
-    } else if(getProperty(flags, "dnd5e.initiativeHalfProf")) {
-      init.prof = Math.floor(0.5 * data.attributes.prof);
-    } else {
-      init.prof = 0;
-    }
-    init.bonus = init.value + (getProperty(flags, "dnd5e.initiativeAlert") ? 5 : 0);
+    let prof = (joat || athlete ) ? 0.5 : 0;
+    round = athlete ? Math.ceil : Math.floor;
+    init.prof = round(prof * data.attributes.prof);
+    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
     // Spell DC

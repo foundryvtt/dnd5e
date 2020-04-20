@@ -609,6 +609,13 @@ DND5E.characterFlags = {
     section: "Feats",
     type: Boolean
   },
+  "observantFeat": {
+    name: "Observant Feat",
+    hint: "Provides a +5 to passive Perception and Investigation.",
+    skills: ['prc','inv'],
+    section: "Feats",
+    type: Boolean
+  },
   "weaponCriticalThreshold": {
     name: "Critical Hit Threshold",
     hint: "Allow for expanded critical range; for example Improved or Superior Critical",
