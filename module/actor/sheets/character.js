@@ -112,7 +112,7 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(data, spells);
     const nPrepared = spells.filter(s => {
-      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
+      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;  // note that we don't count "always prepared".
     }).length;
 
     // Organize Inventory
@@ -154,13 +154,19 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
    * @private
    */
   _prepareItemToggleState(item) {
-    const attr = item.type === "spell" ? "preparation.prepared" : "equipped";
-    const isActive = getProperty(item.data, attr);
-    item.toggleClass = isActive ? "active" : "";
-    if ( item.type === "spell" ) {
-      item.toggleTitle = game.i18n.localize(isActive ? "DND5E.SpellPrepared" : "DND5E.SpellUnprepared");
-    } else {
+    if (item.type === "spell") {
+      const isAlwaysPrepared =  getProperty(item.data, "preparation")?.mode === "alwaysprepared"
+      const isPrepared =  getProperty(item.data, "preparation.prepared");
+      item.toggleClass = isAlwaysPrepared ? "fixed" 
+                          : (isPrepared ? "active" : "");
+      item.toggleTitle = game.i18n.localize(isAlwaysPrepared ? "DND5E.SpellPrepAlwaysPrepared" :
+        isPrepared ? "DND5E.SpellPrepared" : "DND5E.SpellUnprepared");
+    }
+    else {
+      const isActive = getProperty(item.data, "equipped");
+      item.toggleClass = isActive ? "active" : "";
       item.toggleTitle = game.i18n.localize(isActive ? "DND5E.Equipped" : "DND5E.Unequipped");
+ 
     }
   }
 
