@@ -44,14 +44,14 @@ export class Dice5e {
       // Handle advantage
       if ( adv === 1 ) {
         nd = elvenAccuracy ? 3 : 2;
-        flavor += " ("+game.i18n.localize("DND5E.Advantage")+")";
+        flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
         mods += "kh";
       }
 
       // Handle disadvantage
       else if ( adv === -1 ) {
         nd = 2;
-        flavor += " ("+game.i18n.localize("DND5E.Disadvantage")+")";
+        flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
         mods += "kl";
       }
 
@@ -217,7 +217,7 @@ export class Dice5e {
             callback: html => roll = _roll(parts, true, html[0].children[0])
           },
           normal: {
-            label: critical ? game.i18n.localize("DND5E.Normal") : game.i18n.localize("DND5E.Roll"),
+            label: game.i18n.localize(critical ? "DND5E.Normal" : "DND5E.Roll"),
             callback: html => roll = _roll(parts, false, html[0].children[0])
           },
         },
