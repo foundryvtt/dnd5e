@@ -210,7 +210,7 @@ export class ActorSheet5e extends ActorSheet {
         if (data.components.concentration !== true) return false;
       }
       if ( filters.has("prepared") ) {
-        if ( data.level === 0 || ["pact", "innate"].includes(data.preparation.mode) ) return true;
+        if ( data.level === 0 || ["pact", "innate","alwaysprepared"].includes(data.preparation.mode) ) return true;
         if ( this.actor.data.type === "npc" ) return true;
         return data.preparation.prepared;
       }

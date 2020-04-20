@@ -262,7 +262,7 @@ export class Actor5e extends Actor {
 
     // Determine if the spell uses slots
     let lvl = item.data.data.level;
-    const usesSlots = (lvl > 0) && item.data.data.preparation.mode === "prepared";
+    const usesSlots = (lvl > 0) && ["alwaysprepared", "prepared"].includes(item.data.data.preparation.mode);
     if ( !usesSlots ) return item.roll();
 
     // Configure the casting level and whether to consume a spell slot

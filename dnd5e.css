@@ -1322,6 +1322,10 @@
 .dnd5e.sheet.actor.character .spellbook .item-controls .item-toggle.active {
   color: #4b4a44;
 }
+.dnd5e.sheet.actor.character .inventory .item-controls .item-toggle.fixed,
+.dnd5e.sheet.actor.character .spellbook .item-controls .item-toggle.fixed {
+  color: #44191A;
+}
 /* ----------------------------------------- */
 /*  Basic Structure                          */
 /* ----------------------------------------- */
