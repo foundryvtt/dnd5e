@@ -58,25 +58,25 @@ export const addChatMessageContextOptions = function(html, options) {
   let canApply = li => canvas.tokens.controlledTokens.length && li.find(".dice-roll").length;
   options.push(
     {
-      name: "Apply Damage",
+      name: game.i18n.localize("DND5E.ChatContextDamage"),
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApply,
       callback: li => Actor5e.applyDamage(li, 1)
     },
     {
-      name: "Apply Healing",
+      name: game.i18n.localize("DND5E.ChatContextHealing"),
       icon: '<i class="fas fa-user-plus"></i>',
       condition: canApply,
       callback: li => Actor5e.applyDamage(li, -1)
     },
     {
-      name: "Double Damage",
+      name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
       icon: '<i class="fas fa-user-injured"></i>',
       condition: canApply,
       callback: li => Actor5e.applyDamage(li, 2)
     },
     {
-      name: "Half Damage",
+      name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
       icon: '<i class="fas fa-user-shield"></i>',
       condition: canApply,
       callback: li => Actor5e.applyDamage(li, 0.5)
