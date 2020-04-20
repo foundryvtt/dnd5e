@@ -44,14 +44,14 @@ export class Dice5e {
       // Handle advantage
       if ( adv === 1 ) {
         nd = elvenAccuracy ? 3 : 2;
-        flavor += " (Advantage)";
+        flavor += " ("+game.i18n.localize("DND5E.Advantage")+")";
         mods += "kh";
       }
 
       // Handle disadvantage
       else if ( adv === -1 ) {
         nd = 2;
-        flavor += " (Disadvantage)";
+        flavor += " ("+game.i18n.localize("DND5E.Disadvantage")+")";
         mods += "kl";
       }
 
@@ -115,15 +115,15 @@ export class Dice5e {
         content: html,
         buttons: {
           advantage: {
-            label: "Advantage",
+            label: game.i18n.localize("DND5E.Advantage"),
             callback: html => roll = _roll(parts, 1, html[0].children[0])
           },
           normal: {
-            label: "Normal",
+            label: game.i18n.localize("DND5E.Normal"),
             callback: html => roll = _roll(parts, 0, html[0].children[0])
           },
           disadvantage: {
-            label: "Disadvantage",
+            label: game.i18n.localize("DND5E.Disadvantage"),
             callback: html => roll = _roll(parts, -1, html[0].children[0])
           }
         },
@@ -177,7 +177,7 @@ export class Dice5e {
         let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
         let mult = 2;
         roll.alter(add, mult);
-        flavor = `${flavor} (Critical)`;
+        flavor = `${flavor} (${game.i18n.localize("DND5E.Critical")})`;
       }
 
       // Convert the roll to a chat message
@@ -213,11 +213,11 @@ export class Dice5e {
         buttons: {
           critical: {
             condition: critical,
-            label: "Critical Hit",
+            label: game.i18n.localize("DND5E.CriticalHit"),
             callback: html => roll = _roll(parts, true, html[0].children[0])
           },
           normal: {
-            label: critical ? "Normal" : "Roll",
+            label: critical ? game.i18n.localize("DND5E.Normal") : game.i18n.localize("DND5E.Roll"),
             callback: html => roll = _roll(parts, false, html[0].children[0])
           },
         },
