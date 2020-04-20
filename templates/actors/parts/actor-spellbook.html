@@ -10,7 +10,7 @@
             {{/select}}
         </select>
         {{#if isNPC}}
-        <h3>Spellcaster Level</h3>
+        <h3>{{localize "DND5E.SpellcasterLevel"}}</h3>
         <input class="spellcasting-level" type="text" name="data.details.spellLevel"
                value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
         {{/if}}
@@ -101,7 +101,7 @@
 {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "DND5E.NoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls">
