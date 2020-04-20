@@ -109,10 +109,10 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     spells = this._filterItems(spells, this._filters.spellbook);
     feats = this._filterItems(feats, this._filters.features);
 
-    // Organize Spellbook
+    // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
     const spellbook = this._prepareSpellbook(data, spells);
     const nPrepared = spells.filter(s => {
-      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;  // note that we don't count "always prepared".
+      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
 
     // Organize Inventory
@@ -155,18 +155,18 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
    */
   _prepareItemToggleState(item) {
     if (item.type === "spell") {
-      const isAlwaysPrepared =  getProperty(item.data, "preparation")?.mode === "alwaysprepared"
+      const isAlways = getProperty(item.data, "preparation.mode") === "always";
       const isPrepared =  getProperty(item.data, "preparation.prepared");
-      item.toggleClass = isAlwaysPrepared ? "fixed" 
-                          : (isPrepared ? "active" : "");
-      item.toggleTitle = game.i18n.localize(isAlwaysPrepared ? "DND5E.SpellPrepAlwaysPrepared" :
-        isPrepared ? "DND5E.SpellPrepared" : "DND5E.SpellUnprepared");
+      item.toggleClass = isPrepared ? "active" : "";
+      if ( isAlways ) item.toggleClass = "fixed";
+      if ( isAlways ) item.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
+      else if ( isPrepared ) item.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared;
+      else item.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
     }
     else {
       const isActive = getProperty(item.data, "equipped");
       item.toggleClass = isActive ? "active" : "";
       item.toggleTitle = game.i18n.localize(isActive ? "DND5E.Equipped" : "DND5E.Unequipped");
- 
     }
   }
 

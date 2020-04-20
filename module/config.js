@@ -366,10 +366,10 @@ DND5E.skills = {
 
 DND5E.spellPreparationModes = {
   "always": "DND5E.SpellPrepAlways",
-  "prepared": "DND5E.SpellPrepPrepared",
+  "atwill": "DND5E.SpellPrepAtWill",
   "innate": "DND5E.SpellPrepInnate",
   "pact": "DND5E.SpellPrepPact",
-  "alwaysprepared": "DND5E.SpellPrepAlwaysPrepared"
+  "prepared": "DND5E.SpellPrepPrepared"
 };
 
 /* -------------------------------------------- */

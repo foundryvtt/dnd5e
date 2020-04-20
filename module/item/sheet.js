@@ -58,9 +58,15 @@ export class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemStatus(item) {
-    if ( item.type === "spell" ) return ["alwaysprepared", "prepared"].includes(item.data.preparation) ? "Prepared" : "Unprepared";
-    else if ( ["weapon", "equipment"].includes(item.type) ) return item.data.equipped ? "Equipped" : "Unequipped";
-    else if ( item.type === "tool" ) return item.data.proficient ? "Proficient" : "Not Proficient";
+    if ( item.type === "spell" ) {
+      return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
+    }
+    else if ( ["weapon", "equipment"].includes(item.type) ) {
+      return item.data.equipped ? "Equipped" : "Unequipped";
+    }
+    else if ( item.type === "tool" ) {
+      return item.data.proficient ? "Proficient" : "Not Proficient";
+    }
   }
 
   /* -------------------------------------------- */

@@ -1328,6 +1328,10 @@
 .dnd5e.sheet.actor.character .spellbook .item-controls .item-toggle.fixed {
   color: #44191A;
 }
+.dnd5e.sheet.actor.character .inventory .item-controls .item-toggle.fixed:hover,
+.dnd5e.sheet.actor.character .spellbook .item-controls .item-toggle.fixed:hover {
+  text-shadow: none;
+}
 /* ----------------------------------------- */
 /*  Basic Structure                          */
 /* ----------------------------------------- */
