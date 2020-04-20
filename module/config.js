@@ -483,7 +483,7 @@ DND5E.polymorphSettings = {
 DND5E.proficiencyLevels = {
   0: "DND5E.NotProficient",
   1: "DND5E.Proficient",
-  0.5: "DND5E.JackOfAllTrades",
+  0.5: "DND5E.HalfProficient",
   2: "DND5E.Expertise"
 };
 
@@ -591,7 +591,21 @@ DND5E.characterFlags = {
   },
   "initiativeHalfProf": {
     name: "Half-Proficiency to Initiative",
-    hint: "Provided by Jack of All Trades or Remarkable Athlete.",
+    hint: "Provided by Jack of All Trades.",
+    section: "Feats",
+    type: Boolean
+  },
+  "observantFeat": {
+    name: "Observant Feat",
+    hint: "Provides a +5 to passive Perception and Investigation.",
+    skills: ['prc','inv'],
+    section: "Feats",
+    type: Boolean
+  },
+  "remarkableAthlete": {
+    name: "Half-Proficiency (rounded-up) to physical Ability Checks and Initiative.",
+    hint: "Remarkable Athlete.",
+    abilities: ['str','dex','con'],
     section: "Feats",
     type: Boolean
   },
