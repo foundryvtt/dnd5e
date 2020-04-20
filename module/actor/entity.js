@@ -48,12 +48,14 @@ export class Actor5e extends Actor {
     }
 
     // Skill modifiers
-    for (let [sklID, skl] of Object.entries(data.skills)) {
+    const athlete = this.getFlag("dnd5e", "remarkableAthlete");
+    const observant = this.getFlag("dnd5e", "observantFeat");
+    for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
       skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.floor(skl.value * data.attributes.prof);
-      const passiveBonus = (getProperty(flags, "dnd5e.observantFeat") && DND5E.characterFlags.observantFeat.skills.find(s => s === sklID)) ? 5 : 0;
-      skl.passive = 10 + skl.mod + passiveBonus;
+      const passive = observant && (DND5E.characterFlags.observantFeat.skills.includes(id)) ? 5 : 0;
+      skl.passive = 10 + skl.mod + passive;
     }
 
     // Initiative
