@@ -46,23 +46,38 @@ export class Actor5e extends Actor {
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
       abl.save = abl.mod + abl.prof + saveBonus;
     }
-
+    
     // Skill modifiers
-    const athlete = this.getFlag("dnd5e", "remarkableAthlete");
-    const observant = this.getFlag("dnd5e", "observantFeat");
+    const feats = DND5E.characterFlags;
+    const athlete = flags.remarkableAthlete;
+    const observant = flags.observantFeat;
+    let round = Math.floor;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
-      skl.mod = data.abilities[skl.ability].mod + skl.bonus + Math.floor(skl.value * data.attributes.prof);
-      const passive = observant && (DND5E.characterFlags.observantFeat.skills.includes(id)) ? 5 : 0;
+
+      // Apply remarkable athlete
+      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
+        skl.value = 0.5;
+        round = Math.ceil;
+      }
+
+      // Compute modifier
+      skl.mod = data.abilities[skl.ability].mod + skl.bonus + round(skl.value * data.attributes.prof);
+
+      // Compute passive bonus
+      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
       skl.passive = 10 + skl.mod + passive;
     }
 
-    // Initiative
+    // Determine Initiative Modifier
     const init = data.attributes.init;
+    const joat = flags.initiativeHalfProf;
     init.mod = data.abilities.dex.mod;
-    init.prof = getProperty(flags, "dnd5e.initiativeHalfProf") ? Math.floor(0.5 * data.attributes.prof) : 0;
-    init.bonus = init.value + (getProperty(flags, "dnd5e.initiativeAlert") ? 5 : 0);
+    let prof = (joat || athlete ) ? 0.5 : 0;
+    round = athlete ? Math.ceil : Math.floor;
+    init.prof = round(prof * data.attributes.prof);
+    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
     // Spell DC
@@ -372,12 +387,18 @@ export class Actor5e extends Actor {
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
     const data = {mod: abl.mod};
+    const attributes = this.data.attributes;
+    const flags = this.data.flags;
 
     // Include a global actor ability check bonus
     const actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
     if ( !!actorBonus ) {
       parts.push("@checkBonus");
       data.checkBonus = actorBonus;
+    }
+    if (getProperty(flags, "dnd5e.remarkableAthlete") && DND5E.characterFlags.remarkableAthlete.abilities.find(a => a === abl)) {
+      parts.push("@checkBonus");
+      data.checkBonus += Math.ceil(0.5 * attributes.prof);
     }
 
     // Roll and return
