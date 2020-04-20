@@ -409,6 +409,8 @@
       // Item Header Name
       .item-name {
         cursor: pointer;
+        max-height: 30px;
+        overflow: hidden;
 
         .item-image {
           flex: 0 0 30px;
@@ -418,6 +420,8 @@
 
         h4 {
           margin: 0;
+          white-space: nowrap;
+          overflow-x: hidden;
         }
 
         &.rollable .item-image:hover {

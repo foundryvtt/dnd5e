@@ -25,7 +25,7 @@
 <ol class="inventory-list">
 {{#each sections as |section sid|}}
     <li class="inventory-header flexrow">
-        <h3 class="item-name flexrow">{{section.label}}</h3>
+        <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if ../isCharacter}}
         <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
@@ -50,7 +50,7 @@
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{item.name~}}
-                    {{~#if item.isStack}}&nbsp;({{item.data.quantity}})&nbsp;{{/if}}
+                    {{~#if item.isStack}} ({{item.data.quantity}}){{/if}}
                     {{~#if item.data.attuned}} <i class="fas fa-sun attuned" title={{localize "DND5E.Attuned"}}></i>{{/if}}
                 </h4>
             </div>

@@ -10,7 +10,7 @@
 <ol class="inventory-list">
 {{#each sections as |section sid|}}
     <li class="inventory-header flexrow">
-        <h3 class="item-name flexrow">{{section.label}}</h3>
+        <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if section.hasActions}}
         <div class="item-detail item-uses">{{localize "DND5E.Uses"}}</div>
