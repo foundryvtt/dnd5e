@@ -603,16 +603,9 @@ DND5E.characterFlags = {
     type: Boolean
   },
   "remarkableAthlete": {
-    name: "Half-Proficiency (rounded-up) to physical Ability Checks and Initiative.",
-    hint: "Remarkable Athlete.",
+    name: "Remarkable Athlete.",
+    hint: "Half-Proficiency (rounded-up) to physical Ability Checks and Initiative.",
     abilities: ['str','dex','con'],
-    section: "Feats",
-    type: Boolean
-  },
-  "observantFeat": {
-    name: "Observant Feat",
-    hint: "Provides a +5 to passive Perception and Investigation.",
-    skills: ['prc','inv'],
     section: "Feats",
     type: Boolean
   },

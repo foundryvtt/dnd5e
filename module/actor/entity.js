@@ -29,14 +29,11 @@ export class Actor5e extends Actor {
     // Get the Actor's data object
     const actorData = this.data;
     const data = actorData.data;
-    const flags = actorData.flags;
+    const flags = actorData.flags.dnd5e || {};
 
     // Prepare Character data
     if ( actorData.type === "character" ) this._prepareCharacterData(actorData);
     else if ( actorData.type === "npc" ) this._prepareNPCData(actorData);
-
-    // Ranged Weapon/Melee Weapon/Ranged Spell/Melee Spell attack bonuses are added when rolled since they are not a fixed value.
-    // Damage bonus added when rolled since not a fixed value.
 
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
@@ -57,13 +54,14 @@ export class Actor5e extends Actor {
       skl.bonus = parseInt(skl.bonus || 0);
 
       // Apply remarkable athlete
+      let multi = skl.value;
       if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
-        skl.value = 0.5;
+        multi = 0.5;
         round = Math.ceil;
       }
 
       // Compute modifier
-      skl.mod = data.abilities[skl.ability].mod + skl.bonus + round(skl.value * data.attributes.prof);
+      skl.mod = data.abilities[skl.ability].mod + skl.bonus + round(multi * data.attributes.prof);
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
@@ -74,9 +72,9 @@ export class Actor5e extends Actor {
     const init = data.attributes.init;
     const joat = flags.initiativeHalfProf;
     init.mod = data.abilities.dex.mod;
-    let prof = (joat || athlete ) ? 0.5 : 0;
-    round = athlete ? Math.ceil : Math.floor;
-    init.prof = round(prof * data.attributes.prof);
+    if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
+    else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
+    else init.prof = 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
@@ -387,18 +385,18 @@ export class Actor5e extends Actor {
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
     const data = {mod: abl.mod};
-    const attributes = this.data.attributes;
-    const flags = this.data.flags;
+    const flags = this.data.flags || {};
 
     // Include a global actor ability check bonus
-    const actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
+    const athlete = flags.dnd5e.remarkableAthlete;
+    if ( athlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
+      parts.push("@proficiency");
+      data.proficiency = Math.ceil(0.5 * this.data.data.attributes.prof);
+    }
+    let actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
     if ( !!actorBonus ) {
       parts.push("@checkBonus");
       data.checkBonus = actorBonus;
-    }
-    if (getProperty(flags, "dnd5e.remarkableAthlete") && DND5E.characterFlags.remarkableAthlete.abilities.find(a => a === abl)) {
-      parts.push("@checkBonus");
-      data.checkBonus += Math.ceil(0.5 * attributes.prof);
     }
 
     // Roll and return
