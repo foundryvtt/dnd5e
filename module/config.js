@@ -258,6 +258,13 @@ DND5E.distanceUnits = {
 
 /* -------------------------------------------- */
 
+DND5E.emcubranceValues = {
+  "currencytounit": 50,
+  "multiplier": 15
+};
+
+/* -------------------------------------------- */
+
 /**
  * This Object defines the types of single or area targets which can be applied in D&D5e
  * @type {Object}
