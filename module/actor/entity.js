@@ -43,7 +43,7 @@ export class Actor5e extends Actor {
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
       abl.save = abl.mod + abl.prof + saveBonus;
     }
-    
+
     // Skill modifiers
     const feats = DND5E.characterFlags;
     const athlete = flags.remarkableAthlete;
@@ -232,7 +232,6 @@ export class Actor5e extends Actor {
       }
     }
 
-    slotLevel = Math.clamped(slotLevel, 0, 20);
     if (!isNPC && totalCasters === 1 && ['half', 'third'].includes(caster.data.spellcasting)) {
       // Single-classed non-full-casters round up instead of down when
       // determining their level on the spell slot table.
@@ -246,6 +245,7 @@ export class Actor5e extends Actor {
       slotLevel = actorData.data.details.spellLevel;
     }
 
+    slotLevel = Math.clamped(slotLevel, 0, 20);
     if (slotLevel > 0) {
       const slots = DND5E.SPELL_SLOT_TABLE[slotLevel - 1];
       slots.forEach((n, i) => spells[`spell${i + 1}`].max = n);
