@@ -7,7 +7,8 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
   if ( !message.isRoll || !message.isRollVisible || !message.roll.parts.length ) return;
 
   // Highlight rolls where the first part is a d20 roll
-  let d = message.roll.parts[0];
+  const roll = message.roll;
+  let d = roll.parts[0];
   const isD20Roll = d instanceof Die && (d.faces === 20) && (d.results.length === 1);
   if ( !isD20Roll ) return;
 
@@ -16,8 +17,12 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
   if ( isModifiedRoll ) return;
 
   // Highlight successes and failures
-  if (d.total >= (d.options.critical || 20)) html.find(".dice-total").addClass("success");
-  else if (d.total <= (d.options.fumble || 1)) html.find(".dice-total").addClass("failure");
+  if ( d.options.critical && (d.total > d.options.critical) ) html.find(".dice-total").addClass("critical");
+  else if ( d.options.fumble && (d.total <= d.options.fumble) ) html.find(".dice-total").addClass("fumble");
+  else if ( d.options.target ) {
+    if ( roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
+    else html.find(".dice-total").addClass("failure");
+  }
 };
 
 /* -------------------------------------------- */

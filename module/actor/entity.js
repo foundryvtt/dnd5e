@@ -47,18 +47,20 @@ export class Actor5e extends Actor {
     // Skill modifiers
     const feats = DND5E.characterFlags;
     const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
     let round = Math.floor;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
       skl.bonus = parseInt(skl.bonus || 0);
 
-      // Apply remarkable athlete
+      // Apply Remarkable Athlete or Jack of all Trades
       let multi = skl.value;
       if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
         multi = 0.5;
         round = Math.ceil;
       }
+      if ( joat && (skl.value === 0 ) ) multi = 0.5;
 
       // Compute modifier
       skl.mod = data.abilities[skl.ability].mod + skl.bonus + round(multi * data.attributes.prof);
@@ -70,7 +72,6 @@ export class Actor5e extends Actor {
 
     // Determine Initiative Modifier
     const init = data.attributes.init;
-    const joat = flags.initiativeHalfProf;
     init.mod = data.abilities.dex.mod;
     if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
     else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
@@ -423,14 +424,13 @@ export class Actor5e extends Actor {
     }
 
     // Roll and return
-    return Dice5e.d20Roll({
-      event: options.event,
+    return Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
       title: `${CONFIG.DND5E.skills[skillId]} Skill Check`,
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
-    });
+    }));
   }
 
   /* -------------------------------------------- */
@@ -475,12 +475,17 @@ export class Actor5e extends Actor {
     const data = {mod: abl.mod};
     const flags = this.data.flags || {};
 
-    // Include a global actor ability check bonus
-    const athlete = flags.dnd5e.remarkableAthlete;
-    if ( athlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
+    // Add feat-related proficiency bonuses
+    if ( flags.dnd5e.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
       parts.push("@proficiency");
       data.proficiency = Math.ceil(0.5 * this.data.data.attributes.prof);
     }
+    else if ( flags.dnd5e.jackOfAllTrades ) {
+      parts.push("@proficiency");
+      data.proficiency = Math.floor(0.5 * this.data.data.attributes.prof);
+    }
+
+    // Add global actor bonus
     let actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
     if ( !!actorBonus ) {
       parts.push("@checkBonus");
@@ -488,14 +493,13 @@ export class Actor5e extends Actor {
     }
 
     // Roll and return
-    return Dice5e.d20Roll({
-      event: options.event,
+    return Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
       title: `${label} Ability Test`,
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
-    });
+    }));
   }
 
   /* -------------------------------------------- */
@@ -527,14 +531,14 @@ export class Actor5e extends Actor {
     }
 
     // Roll and return
-    return Dice5e.d20Roll({
+    return Dice5e.d20Roll(mergeObject(options, {
       event: options.event,
       parts: parts,
       data: data,
       title: `${label} Saving Throw`,
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
-    });
+    }));
   }
 
   /* -------------------------------------------- */
@@ -546,18 +550,25 @@ export class Actor5e extends Actor {
    */
   async rollDeathSave(options={}) {
 
-    // Execute the d20 roll dialog
-    const bonus = getProperty(this.data.data.bonuses, "abilities.save");
-    const parts = !!bonus ? ["@saveBonus"] : [];
+    // Evaluate a global saving throw bonus
     const speaker = ChatMessage.getSpeaker({actor: this});
-    const roll = await Dice5e.d20Roll({
-      event: options.event,
+    const parts = [];
+    const data = {};
+    const bonus = getProperty(this.data.data.bonuses, "abilities.save");
+    if ( bonus ) {
+      parts.push("@saveBonus");
+      data["saveBonus"] = bonus;
+    }
+
+    // Evaluate the roll
+    const roll = await Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
-      data: {saveBonus: parseInt(bonus)},
+      data: data,
       title: `Death Saving Throw`,
       speaker: speaker,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
-    });
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      targetValue: 10
+    }));
     if ( !roll ) return null;
 
     // Take action depending on the result
@@ -622,7 +633,7 @@ export class Actor5e extends Actor {
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this}),
-      critical: false,
+      allowcritical: false,
       dialogOptions: {width: 350}
     });
     if ( !roll ) return;
@@ -883,6 +894,12 @@ export class Actor5e extends Actor {
     d.data.details.alignment = o.data.details.alignment; // Don't change alignment
     d.data.attributes.exhaustion = o.data.attributes.exhaustion; // Keep your prior exhaustion level
     d.data.attributes.inspiration = o.data.attributes.inspiration; // Keep inspiration
+
+    // Handle wildcard
+    if ( source.token.randomImg ) {
+      const images = await target.getTokenImages();
+      d.token.img = images[0];
+    }
 
     // Keep Token configurations
     const tokenConfig = ["displayName", "vision", "actorLink", "disposition", "displayBars", "bar1", "bar2"];
