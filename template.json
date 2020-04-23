@@ -154,9 +154,6 @@
           "ci": {
             "value": [],
             "custom": ""
-          },
-          "perception": {
-            "_deprecated": true
           }
         },
         "currency": {
@@ -266,13 +263,7 @@
         "trait": "",
         "ideal": "",
         "bond": "",
-        "flaw": "",
-        "level": {
-          "_deprecated": true
-        },
-        "hd": {
-          "_deprecated": true
-        }
+        "flaw": ""
       },
       "resources": {
         "primary": {
@@ -438,23 +429,6 @@
         "per": null,
         "autoUse": true,
         "autoDestroy": true
-      },
-      "charges": {
-        "value": 1,
-        "max": 1,
-        "_deprecated": true
-      },
-      "consume": {
-        "value": "",
-        "_deprecated": true
-      },
-      "autoUse": {
-        "value": true,
-        "_deprecated": true
-      },
-      "autoDestroy": {
-        "value": true,
-        "_deprecated": true
       }
     },
     "equipment": {
@@ -466,30 +440,14 @@
       },
       "strength": 0,
       "stealth": false,
-      "proficient": true,
-      "armorType": {
-        "value": "",
-        "_deprecated": true
-      }
+      "proficient": true
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
-      "featType": {
-        "value": "",
-        "_deprecated": true
-      },
       "requirements": "",
       "recharge": {
         "value": null,
         "charged": false
-      },
-      "time": {
-        "value": "",
-        "_deprecated": true
-      },
-      "damageType": {
-        "value": "",
-        "_deprecated": true
       }
     },
     "loot": {
@@ -526,53 +484,13 @@
       "scaling": {
         "mode": null,
         "formula": null
-      },
-      "spellType": {
-        "value": "",
-        "_deprecated": true
-      },
-      "time": {
-        "value": "",
-        "_deprecated": true
-      },
-      "damageType": {
-        "value": "",
-        "_deprecated": true
-      },
-      "concentration": {
-        "value": null,
-        "_deprecated": true
-      },
-      "ritual": {
-        "value": null,
-        "_deprecated": true
-      },
-      "prepared": {
-        "value": null,
-        "_deprecated": true
       }
     },
     "weapon": {
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action"],
       "weaponType": "simpleM",
       "properties": {},
-      "proficient": true,
-      "bonus": {
-        "value": 0,
-        "_deprecated": true
-      },
-      "damageType": {
-        "value": "",
-        "_deprecated": true
-      },
-      "damage2": {
-        "value": "",
-        "_deprecated": true
-      },
-      "damage2Type": {
-        "value": "",
-        "_deprecated": true
-      }
+      "proficient": true
     }
   }
 }
