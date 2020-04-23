@@ -590,9 +590,9 @@ DND5E.characterFlags = {
     section: "Feats",
     type: Boolean
   },
-  "initiativeHalfProf": {
-    name: "Half-Proficiency to Initiative",
-    hint: "Provided by Jack of All Trades.",
+  "jackOfAllTrades": {
+    name: "Jack of All Trades",
+    hint: "Half-Proficiency to Ability Checks in which you are not already Proficient.",
     section: "Feats",
     type: Boolean
   },

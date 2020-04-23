@@ -177,6 +177,8 @@ async function create5eMacro(data, slot) {
   return false;
 }
 
+/* -------------------------------------------- */
+
 /**
  * Create a Macro from an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
@@ -188,8 +190,15 @@ function rollItemMacro(itemName) {
   let actor;
   if ( speaker.token ) actor = game.actors.tokens[speaker.token];
   if ( !actor ) actor = game.actors.get(speaker.actor);
-  const item = actor ? actor.items.find(i => i.name === itemName) : null;
-  if ( !item ) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+
+  // Get matching items
+  const items = actor ? actor.items.filter(i => i.name === itemName) : [];
+  if ( items.length > 1 ) {
+    ui.notifications.warn(`Your controlled Actor ${actor.name} has more than one Item with name ${itemName}. The first matched item will be chosen.`);
+  } else if ( items.length === 0 ) {
+    return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+  }
+  const item = items[0];
 
   // Trigger the item roll
   if ( item.data.type === "spell" ) return actor.useSpell(item);

@@ -9,29 +9,34 @@ export class Dice5e {
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
    * @param {Object} data           Actor or item data against which to parse the roll
    * @param {Event|object} event    The triggering event which initiated the roll
+   * @param {string} rollMode       A specific roll mode to apply as the default for the resulting roll
    * @param {string|null} template  The HTML template used to render the roll dialog
    * @param {string|null} title     The dice roll UI window title
    * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
    * @param {string|null} flavor    Flavor text to use in the posted chat message
    * @param {Boolean} fastForward   Allow fast-forward advantage selection
-   * @param {number} critical       The value of d20 result which represents a critical success
-   * @param {number} fumble         The value of d20 result which represents a critical failure
-   * @param {boolean} elvenAccuracy Allow Elven Accuracy to modify this roll?
-   * @param {boolean} halflingLucky Allow Halfling Luck to modify this roll?
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
+   * @param {boolean} advantage     Apply advantage to the roll (unless otherwise specified)
+   * @param {boolean} disadvantage  Apply disadvantage to the roll (unless otherwise specified)
+   * @param {number} critical       The value of d20 result which represents a critical success
+   * @param {number} fumble         The value of d20 result which represents a critical failure
+   * @param {number} targetValue    Assign a target value against which the result of this roll should be compared
+   * @param {boolean} elvenAccuracy Allow Elven Accuracy to modify this roll?
+   * @param {boolean} halflingLucky Allow Halfling Luck to modify this roll?
    *
    * @return {Promise}              A Promise which resolves once the roll workflow has completed
    */
-  static async d20Roll({parts=[], data={}, event={}, template=null, title=null, speaker=null, flavor=null,
-                         fastForward=true, critical=20, fumble=1, elvenAccuracy=false, halflingLucky=false,
-                         onClose, dialogOptions}={}) {
+  static async d20Roll({parts=[], data={}, event={}, rollMode=null, template=null, title=null, speaker=null,
+                        flavor=null, fastForward=null, onClose, dialogOptions,
+                        advantage=null, disadvantage=null, critical=20, fumble=1, targetValue=null,
+                        elvenAccuracy=false, halflingLucky=false}={}) {
 
     // Handle input arguments
     flavor = flavor || title;
     speaker = speaker || ChatMessage.getSpeaker();
     parts = parts.concat(["@bonus"]);
-    let rollMode = game.settings.get("core", "rollMode");
+    rollMode = rollMode || game.settings.get("core", "rollMode");
     let rolled = false;
 
     // Define inner roll function
@@ -78,6 +83,7 @@ export class Dice5e {
       const d20 = roll.parts[0];
       d20.options.critical = critical;
       d20.options.fumble = fumble;
+      if ( targetValue ) d20.options.target = targetValue;
 
       // Convert the roll to a chat message and return the roll
       rollMode = form ? form.rollMode.value : rollMode;
@@ -89,11 +95,16 @@ export class Dice5e {
       return roll;
     };
 
+    // Determine whether the roll can be fast-forward
+    if ( fastForward === null ) {
+      fastForward = event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey);
+    }
+
     // Optionally allow fast-forwarding to specify advantage or disadvantage
     if ( fastForward ) {
-      if (event.shiftKey) return _roll(parts, 0);
-      else if (event.altKey) return _roll(parts, 1);
-      else if (event.ctrlKey || event.metaKey) return _roll(parts, -1);
+      if ( advantage || event.altKey ) return _roll(parts, 1);
+      else if ( disadvantage || event.ctrlKey || event.metaKey ) return _roll(parts, -1);
+      else return _roll(parts, 0);
     }
 
     // Render modal dialog
@@ -144,27 +155,30 @@ export class Dice5e {
    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
    * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
    *
-   * @param {Event|object} event    The triggering event which initiated the roll
    * @param {Array} parts           The dice roll component parts, excluding the initial d20
    * @param {Actor} actor           The Actor making the damage roll
    * @param {Object} data           Actor or item data against which to parse the roll
+   * @param {Event|object}[event    The triggering event which initiated the roll
+   * @param {string} rollMode       A specific roll mode to apply as the default for the resulting roll
    * @param {String} template       The HTML template used to render the roll dialog
    * @param {String} title          The dice roll UI window title
    * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
    * @param {string} flavor         Flavor text to use in the posted chat message
-   * @param {Boolean} critical      Allow critical hits to be chosen
+   * @param {boolean} allowCritical Allow the opportunity for a critical hit to be rolled
+   * @param {Boolean} critical      Flag this roll as a critical hit for the purposes of fast-forward rolls
+   * @param {Boolean} fastForward   Allow fast-forward advantage selection
    * @param {Function} onClose      Callback for actions to take when the dialog form is closed
    * @param {Object} dialogOptions  Modal dialog options
    *
    * @return {Promise}              A Promise which resolves once the roll workflow has completed
    */
-  static async damageRoll({event={}, parts, actor, data, template, title, speaker, flavor, critical=true, onClose,
-                            dialogOptions}) {
+  static async damageRoll({parts, actor, data, event={}, rollMode=null, template, title, speaker, flavor,
+                           allowCritical=true, critical=false, fastForward=null, onClose, dialogOptions}) {
 
     // Handle input arguments
     flavor = flavor || title;
     speaker = speaker || ChatMessage.getSpeaker();
-    let rollMode = game.settings.get("core", "rollMode");
+    rollMode = game.settings.get("core", "rollMode");
     let rolled = false;
 
     // Define inner roll function
@@ -190,8 +204,13 @@ export class Dice5e {
       return roll;
     };
 
+    // Determine whether the roll can be fast-forward
+    if ( fastForward === null ) {
+      fastForward = event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey);
+    }
+
     // Modify the roll and handle fast-forwarding
-    if ( event.shiftKey || event.ctrlKey || event.metaKey || event.altKey ) return _roll(parts, event.altKey);
+    if ( fastForward ) return _roll(parts, critical || event.altKey);
     else parts = parts.concat(["@bonus"]);
 
     // Render modal dialog
@@ -212,12 +231,12 @@ export class Dice5e {
         content: html,
         buttons: {
           critical: {
-            condition: critical,
+            condition: allowCritical,
             label: game.i18n.localize("DND5E.CriticalHit"),
             callback: html => roll = _roll(parts, true, html[0].children[0])
           },
           normal: {
-            label: game.i18n.localize(critical ? "DND5E.Normal" : "DND5E.Roll"),
+            label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
             callback: html => roll = _roll(parts, false, html[0].children[0])
           },
         },

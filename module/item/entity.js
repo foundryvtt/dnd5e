@@ -135,6 +135,11 @@ export class Item5e extends Item {
     const C = CONFIG.DND5E;
     const labels = {};
 
+    // Classes
+    if ( itemData.type === "class" ) {
+      data.levels = Math.clamped(data.levels, 1, 20);
+    }
+
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
       labels.level = C.spellLevels[data.level];
@@ -535,6 +540,8 @@ export class Item5e extends Item {
     if ( !this.hasDamage ) {
       throw new Error("You may not make a Damage Roll with this Item.");
     }
+    const rollData = this.getRollData();
+    if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
@@ -549,7 +556,6 @@ export class Item5e extends Item {
     }
 
     // Define Roll Data
-    const rollData = this.getRollData();
     const actorBonus = actorData.bonuses[itemData.actionType] || {};
     if ( actorBonus.damage && parseInt(actorBonus.damage) !== 0 ) {
       parts.push("@dmg");
