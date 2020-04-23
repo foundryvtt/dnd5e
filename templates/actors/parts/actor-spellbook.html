@@ -17,26 +17,6 @@
         <h3 class="spell-dc">{{localize "DND5E.SpellDC"}} {{data.attributes.spelldc}}</h3>
     </div>
 
-    {{#if data.spells.pact.level}}
-    <div class="form-group pact-slots">
-        <h3>{{localize 'DND5E.PactSlots'}}</h3>
-        <input class="pact-slots" type="text" name="data.spells.pact.value"
-               value="{{data.spells.pact.value}}" data-dtype="Number" placeholder="0">
-        <span class="sep"> &sol; </span>
-        <span class="spell-max">
-        {{~#if data.spells.pact.override~}}
-            {{~data.spells.pact.override~}}
-        {{~else~}}
-            {{~data.spells.pact.max~}}
-        {{~/if~}}
-        </span>
-        <a class="slot-max-override" title="{{localize 'DND5E.SpellProgOverride'}}"
-           data-prop="pact">
-            <i class="fas fa-edit"></i>
-        </a>
-    </div>
-    {{/if}}
-
     <ul class="filter-list flexrow" data-filter="spellbook">
         <li class="filter-title">{{localize "DND5E.Filter"}}</li>
         <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
@@ -60,19 +40,13 @@
             <input type="text" name="data.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"
                    data-dtype="Number"/>
             <span class="sep"> / </span>
-            <span class="spell-max">
-            {{~#if section.override~}}
-                {{~section.override~}}
-            {{~else~}}
-                {{~section.slots~}}
-            {{~/if~}}
-            </span>
-            {{#if section.canCreate}}
-            <a class="slot-max-override" title="{{localize 'DND5E.SpellProgOverride'}}"
-               data-prop="{{section.prop}}">
-                <i class="fas fa-edit"></i>
-            </a>
-            {{/if}}
+            <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
+                {{{section.slots}}}
+                {{#if ../editable}}
+                <a class="slot-max-override" title="{{localize 'DND5E.SpellProgOverride'}}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                {{/if}}
             {{ else }}
             <span class="spell-slots">{{{section.uses}}}</span>
             <span class="sep"> / </span>
@@ -134,15 +108,16 @@
 {{else}}
     {{#if owner}}
     {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">{{localize "DND5E.NoSpells"}}</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls">
             <a class="item-control item-create" title="{{localize 'DND5E.SpellCreate'}}" data-type="spell"
                data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}</a>
         </div>
-    {{/if}}
-    {{/if}}
     </li>
+    <li class="item flexrow"><p class="notes">{{localize "DND5E.NoSpellLevels"}}</p></li>
+    {{/if}}
+    {{/if}}
 {{/each}}
 </ol>

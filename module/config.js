@@ -368,6 +368,7 @@ DND5E.spellPreparationModes = {
   "always": "DND5E.SpellPrepAlways",
   "atwill": "DND5E.SpellPrepAtWill",
   "innate": "DND5E.SpellPrepInnate",
+  "pact": "DND5E.PactMagic",
   "prepared": "DND5E.SpellPrepPrepared"
 };
 
@@ -464,6 +465,11 @@ DND5E.spellLevels = {
   9: "DND5E.SpellLevel9"
 };
 
+/**
+ * Define the standard slot progression by character level.
+ * The entries of this array represent the spell slot progression for a full spell-caster.
+ * @type {Array[]}
+ */
 DND5E.SPELL_SLOT_TABLE = [
   [2],
   [3],

@@ -79,9 +79,12 @@ export class Actor5e extends Actor {
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
-    // Spell DC
+    // Prepare spell-casting data
     data.attributes.spelldc = this.getSpellDC(data.attributes.spellcasting);
-    this._prepareSpellcasting(actorData);
+    // TODO: Only do this IF we have already processed item types (see Entity#initialize)
+    if ( this.items ) {
+      this._computeSpellcastingProgression(actorData);
+    }
   }
 
   /* -------------------------------------------- */
@@ -139,6 +142,79 @@ export class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Prepare data related to the spell-casting capabilities of the Actor
+   * @private
+   */
+  _computeSpellcastingProgression (actorData) {
+    const spells = actorData.data.spells;
+    const isNPC = actorData.type === 'npc';
+
+    // Translate the list of classes into spell-casting progression
+    const progression = {
+      total: 0,
+      slot: 0,
+      pact: 0
+    };
+
+    // Keep track of the last seen caster in case we're in a single-caster situation.
+    let caster = null;
+
+    // Tabulate the total spell-casting progression
+    const classes = this.data.items.filter(i => i.type === "class");
+    for ( let cls of classes ) {
+      const d = cls.data;
+      if ( d.spellcasting === "none" ) continue;
+      const levels = d.levels;
+      const prog = d.spellcasting;
+
+      // Accumulate levels
+      if ( prog !== "pact" ) {
+        caster = cls;
+        progression.total++;
+      }
+      switch (prog) {
+        case 'third': progression.slot += Math.floor(levels / 3); break;
+        case 'half': progression.slot += Math.floor(levels / 2); break;
+        case 'full': progression.slot += levels; break;
+        case 'artificer': progression.slot += Math.ceil(levels / 2); break;
+        case 'pact': progression.pact += levels; break;
+      }
+    }
+
+    // EXCEPTION: single-classed non-full progression rounds up, rather than down
+    if (!isNPC && (progression.total === 1) && ['half', 'third'].includes(caster.data.spellcasting) ) {
+      const denom = caster.data.spellcasting === 'third' ? 3 : 2;
+      progression.slot = Math.ceil(caster.data.levels / denom);
+    }
+
+    // EXCEPTION: NPC with an explicit spellcaster level
+    if (isNPC && actorData.data.details.spellLevel) {
+      progression.slot = actorData.data.details.spellLevel;
+    }
+
+    // Look up the number of slots per level from the progression table
+    const levels = Math.clamped(progression.slot, 0, 20);
+    const slots = DND5E.SPELL_SLOT_TABLE[levels - 1] || [];
+    for ( let [n, lvl] of Object.entries(spells) ) {
+      let i = parseInt(n.slice(-1));
+      if ( lvl.override ) lvl.max = parseInt(lvl.override) || 0;
+      else lvl.max = slots[i-1] || 0;
+      lvl.value = lvl.value !== undefined ? Math.min(parseInt(lvl.value), lvl.max) : lvl.max;
+    }
+
+    // Determine the number of Warlock pact slots per level
+    const pactLevel = Math.clamped(progression.pact, 0, 20);
+    if ( pactLevel > 0) {
+      spells.pact = spells.pact || {};
+      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2);
+      spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel-8, 3), Math.min(pactLevel-13, 4));
+      spells.pact.value = spells.pact.value !== undefined ? spells.pact.value : spells.pact.max;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Return the amount of experience required to gain a certain character level.
    * @param level {Number}  The desired level
    * @return {Number}       The XP required
@@ -188,81 +264,6 @@ export class Actor5e extends Actor {
     }, {});
     data.prof = this.data.data.attributes.prof;
     return data;
-  }
-
-  /**
-   * @private
-   */
-  _prepareSpellcasting (actorData) {
-    const spells = actorData.data.spells;
-    const isNPC = actorData.type === 'npc';
-
-    // Keep track of the last seen caster in case we're in a single-caster
-    // situation.
-    let caster = null;
-
-    // Keep track of the total number of caster classes we have.
-    let totalCasters = 0;
-
-    // The total caster level this character is considered to be according to
-    // the multiclassing rules.
-    let slotLevel = 0;
-
-    // And separate tracking for pact levels.
-    let pactLevel = 0;
-
-    for (const item of actorData.items) {
-      if (item.type !== 'class' || item.data.spellcasting === 'none') {
-        continue;
-      }
-
-      const levels = item.data.levels;
-      const progression = item.data.spellcasting;
-
-      if (progression !== 'pact') {
-        caster = item;
-        totalCasters++;
-      }
-
-      switch (progression) {
-        case 'third': slotLevel += Math.floor(levels / 3); break;
-        case 'half': slotLevel += Math.floor(levels / 2); break;
-        case 'full': slotLevel += levels; break;
-        case 'artificer': slotLevel += Math.ceil(levels / 2); break;
-        case 'pact': pactLevel += levels; break;
-      }
-    }
-
-    if (!isNPC && totalCasters === 1 && ['half', 'third'].includes(caster.data.spellcasting)) {
-      // Single-classed non-full-casters round up instead of down when
-      // determining their level on the spell slot table.
-      const divisor = caster.data.spellcasting === 'third' ? 3 : 2;
-      slotLevel = Math.ceil(caster.data.levels / divisor);
-    }
-
-    if (isNPC && actorData.data.details.spellLevel) {
-      // If this NPC has a spellcaster level, it should override any
-      // calculations from class levels.
-      slotLevel = actorData.data.details.spellLevel;
-    }
-
-    slotLevel = Math.clamped(slotLevel, 0, 20);
-    if (slotLevel > 0) {
-      const slots = DND5E.SPELL_SLOT_TABLE[slotLevel - 1];
-      slots.forEach((n, i) => spells[`spell${i + 1}`].max = n);
-    }
-
-    if (pactLevel > 0) {
-      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2);
-
-      // Breakpoints from the Warlock spell slots table.
-      spells.pact.max = Math.max(
-          1,
-          Math.min(pactLevel, 2),
-          Math.min(pactLevel - 8, 3),
-          Math.min(pactLevel - 13, 4)
-      );
-    }
   }
 
   /* -------------------------------------------- */
@@ -362,23 +363,19 @@ export class Actor5e extends Actor {
     let consume = `spell${lvl}`;
     let placeTemplate = false;
 
+    // Configure spell slot consumption and measured template placement from the form
     if ( configureDialog ) {
       const spellFormData = await SpellCastDialog.create(this, item);
       const isPact = spellFormData.get('level') === 'pact';
-
-      if (isPact) {
-        lvl = this.data.data.spells.pact.level;
-      } else {
-        lvl = parseInt(spellFormData.get("level"));
-      }
-
+      const lvl = isPact ? this.data.data.spells.pact.level : parseInt(spellFormData.get("level"));
       if (Boolean(spellFormData.get("consume"))) {
         consume = isPact ? 'pact' : `spell${lvl}`;
       } else {
         consume = false;
       }
-
       placeTemplate = Boolean(spellFormData.get("placeTemplate"));
+
+      // Create a temporary owned item to approximate the spell at a higher level
       if ( lvl !== item.data.data.level ) {
         item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
       }

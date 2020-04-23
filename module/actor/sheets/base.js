@@ -135,60 +135,86 @@ export class ActorSheet5e extends ActorSheet {
    */
   _prepareSpellbook(data, spells) {
     const owner = this.actor.owner;
+    const levels = data.data.spells;
+    const spellbook = {};
 
     // Define some mappings
-    const levels = {
-      "atwill": -30,
-      "innate": -20
+    const sections = {
+      "atwill": -20,
+      "innate": -10,
+      "pact": 0.5
     };
 
     // Label spell slot uses headers
     const useLabels = {
-      "-30": "-",
       "-20": "-",
+      "-10": "-",
       "0": "&infin;"
     };
 
-    const spellbookEntry = lvl => {
-      return {
-        level: lvl,
-        usesSlots: lvl > 0,
-        canCreate: owner && (lvl >= 0),
-        canPrepare: (data.actor.type === "character") && (lvl > 0),
+    // Format a spellbook entry for a certain indexed level
+    const registerSection = (sl, i, label, level={}) => {
+      spellbook[i] = {
+        order: i,
+        label: label,
+        usesSlots: i > 0,
+        canCreate: owner && (i >= 1),
+        canPrepare: (data.actor.type === "character") && (i >= 1),
         spells: [],
-        uses: useLabels[lvl] || data.data.spells["spell"+lvl].value || 0,
-        slots: useLabels[lvl] || data.data.spells["spell"+lvl].max || 0,
-        dataset: {"type": "spell", "level": lvl},
-        prop: `spell${lvl}`
+        uses: useLabels[i] || level.value || 0,
+        slots: useLabels[i] || level.max || 0,
+        override: level.override || 0,
+        dataset: {"type": "spell", "level": i},
+        prop: sl
       };
     };
 
-    let spellbook = {};
-    for (let lvl = 0; lvl < 10; lvl++) {
-      const entry = spellbookEntry(lvl);
-      spellbook[lvl] = entry;
-      entry.label = CONFIG.DND5E.spellLevels[lvl];
-      entry.override = data.data.spells[`spell${lvl}`].override || 0;
+
+    // Determine the maximum spell level which has a slot
+    const maxLevel = Array.fromRange(10).reduce((max, i) => {
+      const level = levels[`spell${i}`];
+      if ( (level.max || level.override) && ( i > max ) ) max = i;
+      return max;
+    }, 0);
+
+    // Structure the spellbook for every level up to the maximum which has a slot
+    if ( maxLevel > 0 ) {
+      for (let lvl = 0; lvl <= maxLevel; lvl++) {
+        const sl = `spell${lvl}`;
+        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
+      }
+    }
+    if ( levels.pact && levels.pact.max ) {
+      registerSection("pact", sections.pact, CONFIG.DND5E.spellPreparationModes.pact, levels.pact);
     }
 
+    // Iterate over every spell item, adding spells to the spellbook by section
     spells.forEach(spell => {
-      // Define the numeric spell level for sorting
       const mode = spell.data.preparation.mode || "prepared";
-      const lvl = levels[mode] || spell.data.level || 0;
+      let s = spell.data.level || 0;
+      const sl = `spell${s}`;
 
-      if (!spellbook[lvl]) {
-        const entry = spellbookEntry(lvl);
-        spellbook[lvl] = entry;
-        entry.label = CONFIG.DND5E.spellPreparationModes[mode];
+      // Spellcasting mode specific headings
+      if ( mode in sections ) {
+        s = sections[mode];
+        if ( !spellbook[s] ){
+          registerSection(sl, s, CONFIG.DND5E.spellPreparationModes[mode], levels[mode]);
+        }
       }
 
-      spellbook[lvl].spells.push(spell);
+      // Higher-level spell headings
+      else if ( !spellbook[s] ) {
+        registerSection(sl, s, CONFIG.DND5E.spellLevels[s], levels[sl]);
+      }
+
+      // Add the spell to the relevant heading
+      spellbook[s].spells.push(spell);
     });
 
-    // Sort the spellbook by section order
-    spellbook = Object.values(spellbook);
-    spellbook.sort((a, b) => a.level - b.level);
-    return spellbook;
+    // Sort the spellbook by section level
+    const sorted = Object.values(spellbook);
+    sorted.sort((a, b) => a.order - b.order);
+    return sorted;
   }
 
   /* -------------------------------------------- */
@@ -287,7 +313,7 @@ export class ActorSheet5e extends ActorSheet {
       html.find('.item-edit').click(this._onItemEdit.bind(this));
       html.find('.item-delete').click(this._onItemDelete.bind(this));
       html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
-      html.find('.slot-max-override').click(this._onEditSlotOverride.bind(this));
+      html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
     }
 
     // Owner Only Listeners
@@ -496,45 +522,28 @@ export class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * @param {JQuery.TriggeredEvent} event
+   * Handle enabling editing for a spell slot override value
+   * @param {MouseEvent} event    The originating click event
    * @private
    */
-  async _onEditSlotOverride (event) {
-    const prop = event.currentTarget.dataset.prop;
-    const override = this.actor.data.data.spells[prop].override || '';
-    const dlg = await renderTemplate('systems/dnd5e/templates/actors/parts/slot-override.html', {
-      override: override
-    });
+  async _onSpellSlotOverride (event) {
+    const span = event.currentTarget.parentElement;
+    const level = span.dataset.level;
+    const override = this.actor.data.data.spells[level].override || span.dataset.slots;
+    const input = document.createElement("INPUT");
+    input.type = "text";
+    input.name = `data.spells.${level}.override`;
+    input.value = override;
+    input.placeholder = span.dataset.slots;
+    input.dataset.dtype = "Number";
 
-    new Dialog({
-      title: game.i18n.localize('DND5E.SpellProgOverride'),
-      content: dlg,
-      default: 'accept',
-      buttons: {
-        accept: {
-          icon: '<i class="fas fa-save"></i>',
-          label: game.i18n.localize('Update'),
-          callback: html => {
-            let override = html.find('input').val();
-            if (override === '') {
-              override = null;
-            } else {
-              override = Number(override);
-            }
-
-            this.actor.update({[`data.spells.${prop}.override`]: override});
-          }
-        },
-        cancel: {
-          icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize('Cancel')
-        }
-      },
-    }, {
-      classes: ['dialog', 'dnd5e'],
-      width: 250
-    }).render(true);
+    // Replace the HTML
+    const parent = span.parentElement;
+    parent.removeChild(span);
+    parent.appendChild(input);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Change the uses amount of an Owned Item within the Actor
