@@ -258,9 +258,14 @@ DND5E.distanceUnits = {
 
 /* -------------------------------------------- */
 
-DND5E.emcubranceValues = {
-  "currencytounit": 50,
-  "multiplier": 15
+
+/**
+ * Configure aspects of encumbrance calculation so that it could be configured by modules
+ * @type {Object}
+ */
+DND5E.encumbrance = {
+  currencyPerWeight: 50,
+  strMultiplier: 15
 };
 
 /* -------------------------------------------- */

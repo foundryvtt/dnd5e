@@ -202,12 +202,12 @@ export class ActorSheet5eCharacter extends ActorSheet5e {
     if ( game.settings.get("dnd5e", "currencyWeight") ) {
       const currency = actorData.data.currency;
       const numCoins = Object.values(currency).reduce((val, denom) => val += denom, 0);
-      totalWeight += numCoins / CONFIG.DND5E.emcubranceValues.currencytounit;
+      totalWeight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
     }
 
     // Compute Encumbrance percentage
     const enc = {
-      max: actorData.data.abilities.str.value * CONFIG.DND5E.emcubranceValues.multiplier * mod,
+      max: actorData.data.abilities.str.value * CONFIG.DND5E.encumbrance.strMultiplier * mod,
       value: Math.round(totalWeight * 10) / 10,
     };
     enc.pct = Math.min(enc.value * 100 / enc.max, 99);
