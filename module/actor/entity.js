@@ -182,7 +182,8 @@ export class Actor5e extends Actor {
     }
 
     // EXCEPTION: single-classed non-full progression rounds up, rather than down
-    if (!isNPC && (progression.total === 1) && ['half', 'third'].includes(caster.data.spellcasting) ) {
+    const isSingleClass = (progression.total === 1) && (progression.slot > 0);
+    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.data.spellcasting) ) {
       const denom = caster.data.spellcasting === 'third' ? 3 : 2;
       progression.slot = Math.ceil(caster.data.levels / denom);
     }

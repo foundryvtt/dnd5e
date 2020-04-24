@@ -169,22 +169,24 @@ export class ActorSheet5e extends ActorSheet {
       };
     };
 
-
     // Determine the maximum spell level which has a slot
     const maxLevel = Array.fromRange(10).reduce((max, i) => {
+      if ( i === 0 ) return max;
       const level = levels[`spell${i}`];
-      if ( (level.max || level.override) && ( i > max ) ) max = i;
+      if ( (level.max || level.override ) && ( i > max ) ) max = i;
       return max;
     }, 0);
 
     // Structure the spellbook for every level up to the maximum which has a slot
     if ( maxLevel > 0 ) {
-      for (let lvl = 0; lvl <= maxLevel; lvl++) {
+      registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
+      for (let lvl = 1; lvl <= maxLevel; lvl++) {
         const sl = `spell${lvl}`;
         registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
       }
     }
     if ( levels.pact && levels.pact.max ) {
+      registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       registerSection("pact", sections.pact, CONFIG.DND5E.spellPreparationModes.pact, levels.pact);
     }
 
