@@ -651,21 +651,17 @@ export class Item5e extends Item {
    */
   async rollConsumable(options={}) {
     const itemData = this.data.data;
-    const labels = this.labels;
-    const formula = itemData.damage ? labels.damage : itemData.formula;
-    const speaker = ChatMessage.getSpeaker({actor: this.actor});
-    const flavor = `${this.actor.name} uses ${this.name}`;
 
-    // Create a dice roll if necessary
+    // Dispatch a damage roll
     let roll = null;
-    if ( formula ) {
-      const rollData = this.getRollData();
-      roll = new Roll(formula, rollData).roll();
+    if ( itemData.damage.parts.length ) {
+      roll = await this.rollDamage(options);
     }
 
-    // Create a chat message
-    const message = roll ? roll.toMessage({speaker, flavor}) :
-      ChatMessage.create({user: game.user._id, speaker, flavor});
+    // Dispatch an other formula
+    if ( itemData.formula ) {
+      roll = await this.rollFormula(options);
+    }
 
     // Deduct consumed charges from the item
     if ( itemData.uses.autoUse ) {
