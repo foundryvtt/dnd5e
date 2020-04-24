@@ -384,6 +384,9 @@ DND5E.spellPreparationModes = {
   "prepared": "DND5E.SpellPrepPrepared"
 };
 
+DND5E.spellUpcastModes = ["always", "pact", "prepared"];
+
+
 DND5E.spellProgression = {
   "none": "DND5E.SpellNone",
   "full": "DND5E.SpellProgFull",
@@ -404,7 +407,6 @@ DND5E.spellScalingModes = {
   "cantrip": "DND5E.SpellCantrip",
   "level": "DND5E.SpellLevel"
 };
-
 
 /* -------------------------------------------- */
 

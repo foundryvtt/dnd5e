@@ -37,7 +37,7 @@ export class SpellCastDialog extends Dialog {
 
     // Determine whether the spell may be upcast
     const lvl = id.level;
-    const canUpcast = (lvl > 0) && ["always", "prepared"].includes(id.preparation.mode);
+    const canUpcast = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(id.preparation.mode);
 
     // Determine the levels which are feasible
     let lmax = 0;

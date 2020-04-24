@@ -198,9 +198,10 @@ export class Actor5e extends Actor {
     const slots = DND5E.SPELL_SLOT_TABLE[levels - 1] || [];
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
+      if ( Number.isNaN(i) ) continue;
       if ( lvl.override ) lvl.max = parseInt(lvl.override) || 0;
       else lvl.max = slots[i-1] || 0;
-      lvl.value = lvl.value !== undefined ? Math.min(parseInt(lvl.value), lvl.max) : lvl.max;
+      lvl.value = Math.min(parseInt(lvl.value), lvl.max);
     }
 
     // Determine the number of Warlock pact slots per level
@@ -209,7 +210,7 @@ export class Actor5e extends Actor {
       spells.pact = spells.pact || {};
       spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2);
       spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel-8, 3), Math.min(pactLevel-13, 4));
-      spells.pact.value = spells.pact.value !== undefined ? spells.pact.value : spells.pact.max;
+      spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     }
   }
 
@@ -357,7 +358,7 @@ export class Actor5e extends Actor {
 
     // Determine if the spell uses slots
     let lvl = item.data.data.level;
-    const usesSlots = (lvl > 0) && ["always", "prepared"].includes(item.data.data.preparation.mode);
+    const usesSlots = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(item.data.data.preparation.mode);
     if ( !usesSlots ) return item.roll();
 
     // Configure the casting level and whether to consume a spell slot
