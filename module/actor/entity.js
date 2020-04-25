@@ -199,17 +199,18 @@ export class Actor5e extends Actor {
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
       if ( Number.isNaN(i) ) continue;
-      if ( lvl.override ) lvl.max = parseInt(lvl.override) || 0;
+      if ( Number.isNumeric(lvl.override) ) lvl.max = Math.max(parseInt(lvl.override), 1);
       else lvl.max = slots[i-1] || 0;
       lvl.value = Math.min(parseInt(lvl.value), lvl.max);
     }
 
     // Determine the number of Warlock pact slots per level
-    const pactLevel = Math.clamped(progression.pact, 0, 20);
-    if ( pactLevel > 0) {
+    const pl = Math.clamped(progression.pact, 0, 20);
+    if ( pl > 0) {
       spells.pact = spells.pact || {};
-      spells.pact.level = Math.ceil(Math.min(10, pactLevel) / 2);
-      spells.pact.max = Math.max(1, Math.min(pactLevel, 2), Math.min(pactLevel-8, 3), Math.min(pactLevel-13, 4));
+      spells.pact.level = Math.ceil(Math.min(10, pl) / 2);
+      if ( Number.isNumeric(spells.pact.override) ) spells.pact.max = Math.max(parseInt(spells.pact.override), 1);
+      else spells.pact.max = Math.max(1, Math.min(pl, 2), Math.min(pl - 8, 3), Math.min(pl - 13, 4));
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     }
   }
@@ -465,21 +466,21 @@ export class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {String} abilityId    The ability ID (e.g. "str")
    * @param {Object} options      Options which configure how ability tests are rolled
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
     const parts = ["@mod"];
     const data = {mod: abl.mod};
-    const flags = this.data.flags || {};
+    const feats = this.data.flags.dnd5e || {};
 
     // Add feat-related proficiency bonuses
-    if ( flags.dnd5e.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
+    if ( feats.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
       parts.push("@proficiency");
       data.proficiency = Math.ceil(0.5 * this.data.data.attributes.prof);
     }
-    else if ( flags.dnd5e.jackOfAllTrades ) {
+    else if ( feats.jackOfAllTrades ) {
       parts.push("@proficiency");
       data.proficiency = Math.floor(0.5 * this.data.data.attributes.prof);
     }
@@ -497,7 +498,7 @@ export class Actor5e extends Actor {
       data: data,
       title: `${label} Ability Test`,
       speaker: ChatMessage.getSpeaker({actor: this}),
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
+      halflingLucky: feats.halflingLucky
     }));
   }
 
@@ -508,7 +509,7 @@ export class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {String} abilityId    The ability ID (e.g. "str")
    * @param {Object} options      Options which configure how ability tests are rolled
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
