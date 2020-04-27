@@ -532,7 +532,6 @@ export class Actor5e extends Actor {
 
     // Roll and return
     return Dice5e.d20Roll(mergeObject(options, {
-      event: options.event,
       parts: parts,
       data: data,
       title: `${label} Saving Throw`,

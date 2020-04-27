@@ -17,7 +17,7 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
   if ( isModifiedRoll ) return;
 
   // Highlight successes and failures
-  if ( d.options.critical && (d.total > d.options.critical) ) html.find(".dice-total").addClass("critical");
+  if ( d.options.critical && (d.total >= d.options.critical) ) html.find(".dice-total").addClass("critical");
   else if ( d.options.fumble && (d.total <= d.options.fumble) ) html.find(".dice-total").addClass("fumble");
   else if ( d.options.target ) {
     if ( roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
