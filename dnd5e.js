@@ -12,7 +12,7 @@ import { DND5E } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
-import { measureDistance, getBarAttribute } from "./module/canvas.js";
+import { measureDistances, getBarAttribute } from "./module/canvas.js";
 import { Actor5e } from "./module/actor/entity.js";
 import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { Item5e } from "./module/item/entity.js";
@@ -119,7 +119,7 @@ Hooks.on("canvasInit", function() {
 
   // Extend Diagonal Measurement
   canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
-  SquareGrid.prototype.measureDistance = measureDistance;
+  SquareGrid.prototype.measureDistances = measureDistances;
 
   // Extend Token Resource Bars
   Token.prototype.getBarAttribute = getBarAttribute;

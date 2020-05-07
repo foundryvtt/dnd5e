@@ -328,14 +328,6 @@ export class ActorSheet5e extends ActorSheet {
       // Roll Skill Checks
       html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
-      // Item Dragging
-      let handler = ev => this._onDragItemStart(ev);
-      html.find('li.item').each((i, li) => {
-        if ( li.classList.contains("inventory-header") ) return;
-        li.setAttribute("draggable", true);
-        li.addEventListener("dragstart", handler, false);
-      });
-
       // Item Rolling
       html.find('.item .item-image').click(event => this._onItemRoll(event));
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
