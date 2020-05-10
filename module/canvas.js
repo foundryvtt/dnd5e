@@ -1,6 +1,6 @@
 /** @override */
 export const measureDistances = function(segments, options={}) {
-  if ( !options.gridSpaces ) return BaseGrid.prototype.measureDistance.call(this, segments, options);
+  if ( !options.gridSpaces ) return BaseGrid.prototype.measureDistances.call(this, segments, options);
 
   // Track the total number of diagonals
   let nDiagonal = 0;
