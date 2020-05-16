@@ -259,7 +259,7 @@
 
     .counter {
       padding: 0 3px;
-      line-height: 32px;
+      line-height: 28px;
 
       h4 {
         flex: auto;
@@ -286,8 +286,10 @@
 
       input[type="checkbox"] {
         position: relative;
+        width: 16px;
+        height: 16px;
         margin: 0;
-        top: 6px;
+        top: 4px;
       }
 
       span.sep {
@@ -305,14 +307,13 @@
     margin: 0 5px;
 
     .form-group, .form-group-stacked {
-      margin: 0 0 4px 0;
+      margin: 0 0 3px 0;
       justify-content: space-between;
     }
 
     .configure-flags {
       flex: 1;
     }
-
 
     .actor-size {
       flex: 0 0 150px;
@@ -453,6 +454,7 @@
         text-align: right;
         font-size: 11px;
         color: @colorTan;
+        white-space: nowrap;
       }
     }
 

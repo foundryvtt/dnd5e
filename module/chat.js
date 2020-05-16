@@ -4,15 +4,16 @@ import {Actor5e} from "./actor/entity.js";
  * Highlight critical success or failure on d20 rolls
  */
 export const highlightCriticalSuccessFailure = function(message, html, data) {
-  if ( !message.isRoll || !message.isContentVisible || !message.roll.parts.length ) return;
+  if ( !message.isRoll || !message.isContentVisible ) return;
 
   // Highlight rolls where the first part is a d20 roll
   const roll = message.roll;
-  let d = roll.parts[0];
-  const isD20Roll = d instanceof Die && (d.faces === 20) && (d.results.length === 1);
-  if ( !isD20Roll ) return;
+  if ( !roll.dice.length ) return;
+  const d = roll.dice[0];
 
-  // Ensure it is not a modified roll
+  // Ensure it is an un-modified d20 roll
+  const isD20 = (d.faces === 20) && ( d.results.length === 1 );
+  if ( !isD20 ) return;
   const isModifiedRoll = ("success" in d.rolls[0]) || d.options.marginSuccess || d.options.marginFailure;
   if ( isModifiedRoll ) return;
 

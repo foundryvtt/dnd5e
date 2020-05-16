@@ -61,13 +61,10 @@ export class Dice5e {
         mods += "kl";
       }
 
-      // Include the d20 roll
-      if (reliableTalent) {
-        parts.unshift(`{${nd}d20${mods},10}kh`);
-        flavor += ` (${game.i18n.localize("DND5E.ReliableTalent")})`;
-      } else {
-        parts.unshift(`${nd}d20${mods}`);
-      }
+      // Prepend the d20 roll
+      let formula = `${nd}d20${mods}`;
+      if (reliableTalent) formula = `{${nd}d20${mods},10}kh`;
+      parts.unshift(formula);
 
       // Optionally include a situational bonus
       if ( form !== null ) data['bonus'] = form.bonus.value;
@@ -86,20 +83,19 @@ export class Dice5e {
 
       // Execute the roll and flag critical thresholds on the d20
       let roll = new Roll(parts.join(" + "), data).roll();
-      const d20 = roll.parts[0];
-  
-      if (d20.constructor.name === "DicePool") {
-        d20.rolls.forEach(roll => {
-          if (roll.dice.length > 0) {
-            roll.parts[0].options.critical = critical;
-            roll.parts[0].options.fumble = fumble;
-            if ( targetValue ) roll.parts[0].options.target = targetValue;
-          }
-        })
-      } else {
-        d20.options.critical = critical;
-        d20.options.fumble = fumble;
-        if ( targetValue ) d20.options.target = targetValue;
+
+      // Flag d20 options for any 20-sided dice in the roll
+      for ( let d of roll.dice ) {
+        if (d.faces === 20 ) {
+          d.options.critical = critical;
+          d.options.fumble = fumble;
+          if ( targetValue ) d.options.target = targetValue;
+        }
+      }
+
+      // If reliable talent was applied, add it to the flavor text
+      if ( reliableTalent && roll.dice[0].total < 10 ) {
+        flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
       }
 
       // Convert the roll to a chat message and return the roll

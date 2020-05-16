@@ -423,8 +423,7 @@ export class Actor5e extends Actor {
       data.skillBonus = actorBonus;
     }
 
-    // Reliable Talent applies to any skill we can add our proficieny mod to
-    // Does not include Jack of All Trades/ Remarkable Athlete
+    // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return

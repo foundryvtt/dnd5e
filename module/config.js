@@ -606,70 +606,70 @@ DND5E.CR_EXP_LEVELS = [
 // Configure Optional Character Flags
 DND5E.characterFlags = {
   "powerfulBuild": {
-    name: "Powerful Build",
-    hint: "Provides increased carrying capacity.",
+    name: "DND5E.FlagsPowerfulBuild",
+    hint: "DND5E.FlagsPowerfulBuildHint",
     section: "Racial Traits",
     type: Boolean
   },
   "savageAttacks": {
-    name: "Savage Attacks",
-    hint: "Adds extra critical hit weapon dice.",
+    name: "DND5E.FlagsSavageAttacks",
+    hint: "DND5E.FlagsSavageAttacksHint",
     section: "Racial Traits",
     type: Boolean
   },
   "elvenAccuracy": {
-    name: "Elven Accuracy",
-    hint: "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
+    name: "DND5E.FlagsElvenAccuracy",
+    hint: "DND5E.FlagsElvenAccuracyHint",
     section: "Racial Traits",
     type: Boolean
   },
   "halflingLucky": {
-    name: "Halfling Lucky",
-    hint: "Reroll ones when rolling d20 checks.",
+    name: "DND5E.FlagsHalflingLucky",
+    hint: "DND5E.FlagsHalflingLuckyHint",
     section: "Racial Traits",
     type: Boolean
   },
   "initiativeAdv": {
-    name: "Advantage on Initiative",
-    hint: "Provided by feats or magical items.",
+    name: "DND5E.FlagsInitiativeAdv",
+    hint: "DND5E.FlagsInitiativeAdvHint",
     section: "Feats",
     type: Boolean
   },
   "initiativeAlert": {
-    name: "Alert Feat",
-    hint: "Provides +5 to Initiative.",
+    name: "DND5E.FlagsAlert",
+    hint: "DND5E.FlagsAlertHint",
     section: "Feats",
     type: Boolean
   },
   "jackOfAllTrades": {
-    name: "Jack of All Trades",
-    hint: "Half-Proficiency to Ability Checks in which you are not already Proficient.",
+    name: "DND5E.FlagsJOAT",
+    hint: "DND5E.FlagsJOATHint",
     section: "Feats",
     type: Boolean
   },
   "observantFeat": {
-    name: "Observant Feat",
-    hint: "Provides a +5 to passive Perception and Investigation.",
+    name: "DND5E.FlagsObservant",
+    hint: "DND5E.FlagsObservantHint",
     skills: ['prc','inv'],
     section: "Feats",
     type: Boolean
   },
   "reliableTalent": {
-    name: "Reliable Talent",
-    hint: "Rogues Reliable Talent Feature.",
+    name: "DND5E.FlagsReliableTalent",
+    hint: "DND5E.FlagsReliableTalentHint",
     section: "Feats",
     type: Boolean
   },
   "remarkableAthlete": {
-    name: "Remarkable Athlete.",
-    hint: "Half-Proficiency (rounded-up) to physical Ability Checks and Initiative.",
+    name: "DND5E.FlagsRemarkableAthlete",
+    hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ['str','dex','con'],
     section: "Feats",
     type: Boolean
   },
   "weaponCriticalThreshold": {
-    name: "Critical Hit Threshold",
-    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
+    name: "DND5E.FlagsCritThreshold",
+    hint: "DND5E.FlagsCritThresholdHint",
     section: "Feats",
     type: Number,
     placeholder: 20
