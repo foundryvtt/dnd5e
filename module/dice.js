@@ -6,31 +6,32 @@ export class Dice5e {
    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
    * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
    *
-   * @param {Array} parts           The dice roll component parts, excluding the initial d20
-   * @param {Object} data           Actor or item data against which to parse the roll
-   * @param {Event|object} event    The triggering event which initiated the roll
-   * @param {string} rollMode       A specific roll mode to apply as the default for the resulting roll
-   * @param {string|null} template  The HTML template used to render the roll dialog
-   * @param {string|null} title     The dice roll UI window title
-   * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
-   * @param {string|null} flavor    Flavor text to use in the posted chat message
-   * @param {Boolean} fastForward   Allow fast-forward advantage selection
-   * @param {Function} onClose      Callback for actions to take when the dialog form is closed
-   * @param {Object} dialogOptions  Modal dialog options
-   * @param {boolean} advantage     Apply advantage to the roll (unless otherwise specified)
-   * @param {boolean} disadvantage  Apply disadvantage to the roll (unless otherwise specified)
-   * @param {number} critical       The value of d20 result which represents a critical success
-   * @param {number} fumble         The value of d20 result which represents a critical failure
-   * @param {number} targetValue    Assign a target value against which the result of this roll should be compared
-   * @param {boolean} elvenAccuracy Allow Elven Accuracy to modify this roll?
-   * @param {boolean} halflingLucky Allow Halfling Luck to modify this roll?
+   * @param {Array} parts            The dice roll component parts, excluding the initial d20
+   * @param {Object} data            Actor or item data against which to parse the roll
+   * @param {Event|object} event     The triggering event which initiated the roll
+   * @param {string} rollMode        A specific roll mode to apply as the default for the resulting roll
+   * @param {string|null} template   The HTML template used to render the roll dialog
+   * @param {string|null} title      The dice roll UI window title
+   * @param {Object} speaker         The ChatMessage speaker to pass when creating the chat
+   * @param {string|null} flavor     Flavor text to use in the posted chat message
+   * @param {Boolean} fastForward    Allow fast-forward advantage selection
+   * @param {Function} onClose       Callback for actions to take when the dialog form is closed
+   * @param {Object} dialogOptions   Modal dialog options
+   * @param {boolean} advantage      Apply advantage to the roll (unless otherwise specified)
+   * @param {boolean} disadvantage   Apply disadvantage to the roll (unless otherwise specified)
+   * @param {number} critical        The value of d20 result which represents a critical success
+   * @param {number} fumble          The value of d20 result which represents a critical failure
+   * @param {number} targetValue     Assign a target value against which the result of this roll should be compared
+   * @param {boolean} elvenAccuracy  Allow Elven Accuracy to modify this roll?
+   * @param {boolean} halflingLucky  Allow Halfling Luck to modify this roll?
+   * @param {boolean} reliableTalent Allow Reliable Talent to modify this roll?
    *
    * @return {Promise}              A Promise which resolves once the roll workflow has completed
    */
   static async d20Roll({parts=[], data={}, event={}, rollMode=null, template=null, title=null, speaker=null,
                         flavor=null, fastForward=null, onClose, dialogOptions,
                         advantage=null, disadvantage=null, critical=20, fumble=1, targetValue=null,
-                        elvenAccuracy=false, halflingLucky=false}={}) {
+                        elvenAccuracy=false, halflingLucky=false, reliableTalent=false}={}) {
 
     // Handle input arguments
     flavor = flavor || title;
@@ -61,7 +62,12 @@ export class Dice5e {
       }
 
       // Include the d20 roll
-      parts.unshift(`${nd}d20${mods}`);
+      if (reliableTalent) {
+        parts.unshift(`{${nd}d20${mods},10}kh`);
+        flavor += ` (${game.i18n.localize("DND5E.ReliableTalent")})`;
+      } else {
+        parts.unshift(`${nd}d20${mods}`);
+      }
 
       // Optionally include a situational bonus
       if ( form !== null ) data['bonus'] = form.bonus.value;
@@ -81,9 +87,20 @@ export class Dice5e {
       // Execute the roll and flag critical thresholds on the d20
       let roll = new Roll(parts.join(" + "), data).roll();
       const d20 = roll.parts[0];
-      d20.options.critical = critical;
-      d20.options.fumble = fumble;
-      if ( targetValue ) d20.options.target = targetValue;
+  
+      if (d20.constructor.name === "DicePool") {
+        d20.rolls.forEach(roll => {
+          if (roll.dice.length > 0) {
+            roll.parts[0].options.critical = critical;
+            roll.parts[0].options.fumble = fumble;
+            if ( targetValue ) roll.parts[0].options.target = targetValue;
+          }
+        })
+      } else {
+        d20.options.critical = critical;
+        d20.options.fumble = fumble;
+        if ( targetValue ) d20.options.target = targetValue;
+      }
 
       // Convert the roll to a chat message and return the roll
       rollMode = form ? form.rollMode.value : rollMode;
