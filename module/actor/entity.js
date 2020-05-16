@@ -423,13 +423,18 @@ export class Actor5e extends Actor {
       data.skillBonus = actorBonus;
     }
 
+    // Reliable Talent applies to any skill we can add our proficieny mod to
+    // Does not include Jack of All Trades/ Remarkable Athlete
+    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+
     // Roll and return
     return Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
       title: `${CONFIG.DND5E.skills[skillId]} Skill Check`,
       speaker: ChatMessage.getSpeaker({actor: this}),
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      reliableTalent: reliableTalent
     }));
   }
 

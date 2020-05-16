@@ -654,6 +654,12 @@ DND5E.characterFlags = {
     section: "Feats",
     type: Boolean
   },
+  "reliableTalent": {
+    name: "Reliable Talent",
+    hint: "Rogues Reliable Talent Feature.",
+    section: "Feats",
+    type: Boolean
+  },
   "remarkableAthlete": {
     name: "Remarkable Athlete.",
     hint: "Half-Proficiency (rounded-up) to physical Ability Checks and Initiative.",
