@@ -427,7 +427,7 @@ export class Actor5e extends Actor {
     return Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
-      title: `${CONFIG.DND5E.skills[skillId]} Skill Check`,
+      title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     }));
@@ -444,15 +444,15 @@ export class Actor5e extends Actor {
   rollAbility(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     new Dialog({
-      title: `${label} Ability Check`,
-      content: `<p>What type of ${label} check?</p>`,
+      title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
+      content: `<p>${game.i18n.format("DND5E.AbilityPromptText", {ability: label})}</p>`,
       buttons: {
         test: {
-          label: "Ability Test",
+          label: game.i18n.localize("DND5E.ActionAbil"),
           callback: () => this.rollAbilityTest(abilityId, options)
         },
         save: {
-          label: "Saving Throw",
+          label: game.i18n.localize("DND5E.ActionSave"),
           callback: () => this.rollAbilitySave(abilityId, options)
         }
       }
@@ -496,7 +496,7 @@ export class Actor5e extends Actor {
     return Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
-      title: `${label} Ability Test`,
+      title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: feats.halflingLucky
     }));
@@ -534,7 +534,7 @@ export class Actor5e extends Actor {
     return Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
-      title: `${label} Saving Throw`,
+      title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     }));
@@ -563,7 +563,7 @@ export class Actor5e extends Actor {
     const roll = await Dice5e.d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
-      title: `Death Saving Throw`,
+      title: game.i18n.localize("DND5E.DeathSavingThrow"),
       speaker: speaker,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10
@@ -583,7 +583,7 @@ export class Actor5e extends Actor {
           "data.attributes.death.failure": 0,
           "data.attributes.hp.value": 1
         });
-        await ChatMessage.create({content: `${this.name} has survived with 3 death save successes!`, speaker});
+        await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveSuccess", {name: this.name}), speaker});
       }
       else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
     }
@@ -593,7 +593,7 @@ export class Actor5e extends Actor {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
       await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
       if ( failures === 3 ) {       // Death
-        await ChatMessage.create({content: `${this.name} has died with 3 death save failures!`, speaker});
+        await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveFailure", {name: this.name}), speaker});
       }
     }
 
@@ -617,12 +617,12 @@ export class Actor5e extends Actor {
 
     // If no class is available, display an error notification
     if ( !cls ) {
-      return ui.notifications.error(`${this.name} has no available ${formula} Hit Dice remaining!`);
+      return ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: formula}));
     }
 
     // Prepare roll data
     const parts = [formula, "@abilities.con.mod"];
-    const title = `Roll Hit Die`;
+    const title = game.i18n.localize("DND5E.HitDiceRoll");
     const rollData = duplicate(this.data.data);
 
     // Call the roll helper utility
@@ -695,7 +695,7 @@ export class Actor5e extends Actor {
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
-      let msg = `${this.name} takes a short rest spending ${-dhd} Hit Dice to recover ${dhp} Hit Points.`;
+      let msg = game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp});
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
@@ -798,7 +798,7 @@ export class Actor5e extends Actor {
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
-        content: `${this.name} takes a long rest and recovers ${dhp} Hit Points and ${dhd} Hit Dice.`
+        content: game.i18n.format("DND5E.LongRestResult", {name: this.name, health: dhp, dice: dhd})
       });
     }
 
@@ -862,7 +862,7 @@ export class Actor5e extends Actor {
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      return ui.notifications.warn(`You are not allowed to polymorph this actor!`);
+      return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphWarn"));
     }
 
     // Get the original Actor data and the new source data
@@ -981,7 +981,7 @@ export class Actor5e extends Actor {
   async revertOriginalForm() {
     if ( !this.isPolymorphed ) return;
     if ( !this.owner ) {
-      return ui.notifications.warn(`You do not have permission to revert this Actor's polymorphed state.`);
+      return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
     }
 
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
