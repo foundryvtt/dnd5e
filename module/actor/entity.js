@@ -35,16 +35,41 @@ export default class Actor5e extends Actor {
     if ( actorData.type === "character" ) this._prepareCharacterData(actorData);
     else if ( actorData.type === "npc" ) this._prepareNPCData(actorData);
 
+    let originalSaves = null;
+    let originalSkills = null;
+
+    // If we are a polymorphed actor, retrieve the skills and saves data from
+    // the original actor for later merging.
+    if (this.isPolymorphed) {
+      const transformOptions = this.getFlag('dnd5e', 'transformOptions');
+      const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
+
+      if (original) {
+        if (transformOptions.mergeSaves) {
+          originalSaves = original.data.data.abilities;
+        }
+
+        if (transformOptions.mergeSkills) {
+          originalSkills = original.data.data.skills;
+        }
+      }
+    }
+
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
     const saveBonus = parseInt(bonuses.save || 0);
     const checkBonus = parseInt(bonuses.check || 0);
-    for (let abl of Object.values(data.abilities)) {
+    for (let [id, abl] of Object.entries(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
       abl.saveBonus = saveBonus;
       abl.checkBonus = checkBonus;
       abl.save = abl.mod + abl.prof + abl.saveBonus;
+
+      // If we merged saves when transforming, take the highest bonus here.
+      if (originalSaves && abl.proficient) {
+        abl.save = Math.max(abl.save, originalSaves[id].save);
+      }
     }
 
     // Skill modifiers
@@ -70,6 +95,11 @@ export default class Actor5e extends Actor {
       skl.mod = data.abilities[skl.ability].mod;
       skl.prof = round(multi * data.attributes.prof);
       skl.total = skl.mod + skl.prof + skl.bonus;
+
+      // If we merged skills when transforming, take the highest bonus here.
+      if (originalSkills && skl.value > 0.5) {
+        skl.total = Math.max(skl.total, originalSkills[id].total);
+      }
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
@@ -892,6 +922,7 @@ export default class Actor5e extends Actor {
     // Get the original Actor data and the new source data
     const o = duplicate(this.data);
     o.flags.dnd5e = o.flags.dnd5e || {};
+    o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
     const source = duplicate(target.data);
 
     // Prepare new data to merge from the source
@@ -944,21 +975,28 @@ export default class Actor5e extends Actor {
     }
 
     // Transfer skills
-    const skills = d.data.skills;
     if ( keepSkills ) d.data.skills = o.data.skills;
     else if ( mergeSkills ) {
-      for ( let [k, s] of Object.entries(skills) ) {
-        s.value = Math.max(s.proficient, o.data.skills[k].value);
+      for ( let [k, s] of Object.entries(d.data.skills) ) {
+        s.value = Math.max(s.value, o.data.skills[k].value);
       }
     }
 
     // Keep specific items from the original data
     d.items = d.items.concat(o.items.filter(i => {
-      if ( i.type === "class" ) return true; // Always keep class levels
+      if ( i.type === "class" ) return keepClass;
       else if ( i.type === "feat" ) return keepFeats;
       else if ( i.type === "spell" ) return keepSpells;
       else return keepItems;
     }));
+
+    if (!keepClass && d.data.details.cr) {
+      d.items.push({
+        type: 'class',
+        name: game.i18n.localize('DND5E.PolymorphTmpClass'),
+        data: { levels: d.data.details.cr }
+      });
+    }
 
     // Keep biography
     if (keepBio) d.data.details.biography = o.data.details.biography;
