@@ -61,7 +61,8 @@ Hooks.once("init", function() {
       Actor5e,
       Item5e,
     },
-    migrations: migrations
+    migrations: migrations,
+    rollItemMacro
   };
 
   // Record Configuration Values
@@ -102,7 +103,7 @@ Hooks.once("setup", function() {
     "equipmentTypes", "healingTypes", "itemActionTypes", "limitedUsePeriods", "senses", "skills", "spellComponents",
     "spellLevels", "spellPreparationModes", "spellSchools", "spellScalingModes", "targetTypes", "timePeriods",
     "weaponProperties", "weaponTypes", "languages", "polymorphSettings", "armorProficiencies", "weaponProficiencies",
-    "toolProficiencies", "abilityActivationTypes", "actorSizes", "proficiencyLevels"
+    "toolProficiencies", "abilityActivationTypes", "abilityConsumptionTypes", "actorSizes", "proficiencyLevels"
   ];
 
   // Exclude some from sorting where the default order matters

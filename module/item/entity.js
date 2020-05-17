@@ -259,6 +259,10 @@ export class Item5e extends Item {
       if ( configured === false ) return;
     }
 
+    // For items which consume a resource, handle that here
+    const allowed = await this._handleResourceConsumption({isCard: true, isAttack: false});
+    if ( allowed === false ) return;
+
     // Render the chat card template
     const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
     const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
@@ -283,6 +287,83 @@ export class Item5e extends Item {
 
     // Create the chat message
     return ChatMessage.create(chatData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * For items which consume a resource, handle the consumption of that resource when the item is used.
+   * There are four types of ability consumptions which are handled:
+   * 1. Ammunition (on attack rolls)
+   * 2. Attributes (on card usage)
+   * 3. Materials (on card usage)
+   * 4. Item Charges (on card usage)
+   *
+   * @param {boolean} isCard      Is the item card being played?
+   * @param {boolean} isAttack    Is an attack roll being made?
+   * @return {Promise<boolean>}   Can the item card or attack roll be allowed to proceed?
+   * @private
+   */
+  async _handleResourceConsumption({isCard=false, isAttack=false}={}) {
+    const itemData = this.data.data;
+    const consume = itemData.consume || {};
+    if ( !consume.type ) return true;
+    const actor = this.actor;
+    const typeLabel = CONFIG.DND5E.abilityConsumptionTypes[consume.type];
+    const amount = parseInt(consume.amount || 1);
+
+    // Only handle certain types for certain actions
+    if ( ((consume.type === "ammo") && !isAttack ) || ((consume.type !== "ammo") && !isCard) ) return false;
+
+    // No consumed target set
+    if ( !consume.target ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
+      return false;
+    }
+
+    // Identify the consumed resource and it's quantity
+    let consumed = null;
+    let quantity = 0;
+    switch ( consume.type ) {
+      case "attribute":
+        consumed = getProperty(actor.data.data, consume.target);
+        quantity = consumed || 0;
+        break;
+      case "ammo":
+      case "material":
+        consumed = actor.items.get(consume.target);
+        quantity = consumed ? consumed.data.data.quantity : 0;
+        break;
+      case "charges":
+        consumed = actor.items.get(consume.target);
+        quantity = consumed ? consumed.data.data.uses.value : 0;
+        break;
+    }
+
+    // Verify that the consumed resource is available
+    if ( [null, undefined].includes(consumed) ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
+      return false;
+    }
+    if ( !quantity || (quantity - amount < 0) ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
+      return false;
+    }
+
+    // Update the consumed resource
+    const remaining = Math.max(quantity - amount, 0);
+    switch ( consume.type ) {
+      case "attribute":
+        await this.actor.update({[`data.${consume.target}`]: remaining});
+        break;
+      case "ammo":
+      case "material":
+        await consumed.update({"data.quantity": remaining});
+        break;
+      case "charges":
+        await consumed.update({"data.uses.value": remaining});
+    }
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -471,9 +552,9 @@ export class Item5e extends Item {
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the Dice5e.d20Roll logic for the core implementation
    *
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * @return {Promise.<Roll|null>}   A Promise which resolves to the created Roll instance
    */
-  rollAttack(options={}) {
+  async rollAttack(options={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
     const flags = this.actor.data.flags.dnd5e || {};
@@ -524,6 +605,10 @@ export class Item5e extends Item {
 
     // Apply Halfling Lucky
     if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
+
+    // For items which consume a resource, handle that here (asynchronously)
+    const allowed = await this._handleResourceConsumption({isCard: false, isAttack: true});
+    if ( allowed === false ) return null;
 
     // Invoke the d20 roll helper
     return Dice5e.d20Roll(rollConfig);

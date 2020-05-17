@@ -43,11 +43,71 @@ export class ItemSheet5e extends ItemSheet {
     data.itemProperties = this._getItemProperties(data.item);
     data.isPhysical = data.item.data.hasOwnProperty("quantity");
 
+    // Potential consumption targets
+    data.abilityConsumptionTargets = this._getItemConsumptionTargets(data.item);
+
     // Action Details
     data.hasAttackRoll = this.item.hasAttack;
     data.isHealing = data.item.data.actionType === "heal";
     data.isFlatDC = getProperty(data.item.data, "save.scaling") === "flat";
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the valid item consumption targets which exist on the actor
+   * @param {Object} item         Item data for the item being displayed
+   * @return {{string: string}}   An object of potential consumption targets
+   * @private
+   */
+  _getItemConsumptionTargets(item) {
+    const consume = item.data.consume || {};
+    if ( !consume.type ) return [];
+    const actor = this.item.actor;
+    if ( !actor ) return {};
+
+    // Ammunition
+    if ( consume.type === "ammo" ) {
+      return actor.itemTypes.weapon.reduce((ammo, i) =>  {
+        if ( i.data.data.weaponType === "ammo" ) {
+          ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
+        }
+        return ammo;
+      }, {});
+    }
+
+    // Attributes
+    else if ( consume.type === "attribute" ) {
+      const attributes = CombatTrackerConfig.prototype.getAttributeChoices()["Attribute Bars"] // Bit of a hack
+      return attributes.reduce((obj, a) => {
+        obj[a] = a;
+        return obj;
+      }, {});
+    }
+
+    // Materials
+    else if ( consume.type === "material" ) {
+      return actor.items.reduce((obj, i) => {
+        if ( ["consumable", "loot"].includes(i.data.type) && !i.data.data.activation ) {
+          obj[i.id] = `${i.name} (${i.data.data.quantity})`;
+        }
+        return obj;
+      }, {});
+    }
+
+    // Charges
+    else if ( consume.type === "charges" ) {
+      return actor.items.reduce((obj, i) => {
+        const uses = i.data.data.uses || {};
+        if ( uses.per && uses.max ) {
+          const label = uses.per === "charges" ? ` (${uses.value} Charges)` : ` (${uses.max} per ${uses.per})`;
+          obj[i.id] = i.name + label;
+        }
+        return obj;
+      }, {})
+    }
+    else return {};
   }
 
   /* -------------------------------------------- */

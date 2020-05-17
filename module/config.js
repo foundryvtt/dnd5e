@@ -104,6 +104,17 @@ DND5E.abilityActivationTypes = {
 
 /* -------------------------------------------- */
 
+
+DND5E.abilityConsumptionTypes = {
+  "ammo": "DND5E.ConsumeAmmunition",
+  "attribute": "DND5E.ConsumeAttribute",
+  "material": "DND5E.ConsumeMaterial",
+  "charges": "DND5E.ConsumeCharges"
+};
+
+
+/* -------------------------------------------- */
+
 // Creature Sizes
 DND5E.actorSizes = {
   "tiny": "DND5E.SizeTiny",
@@ -675,3 +686,8 @@ DND5E.characterFlags = {
     placeholder: 20
   }
 };
+
+// Configure allowed status flags
+DND5E.allowedActorFlags = [
+  "isPolymorphed", "originalActor"
+].concat(Object.keys(DND5E.characterFlags));
