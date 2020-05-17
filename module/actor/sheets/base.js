@@ -200,7 +200,7 @@ export class ActorSheet5e extends ActorSheet {
       if ( mode in sections ) {
         s = sections[mode];
         if ( !spellbook[s] ){
-          registerSection(sl, s, CONFIG.DND5E.spellPreparationModes[mode], levels[mode]);
+          registerSection(mode, s, CONFIG.DND5E.spellPreparationModes[mode], levels[mode]);
         }
       }
 

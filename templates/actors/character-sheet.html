@@ -133,7 +133,7 @@
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">{{skill.label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
-                    <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
+                    <span class="skill-mod">{{numberFormat skill.total decimals=0 sign=true}}</span>
                     <span class="skill-passive">({{skill.passive}})</span>
                 </li>
             {{/each}}

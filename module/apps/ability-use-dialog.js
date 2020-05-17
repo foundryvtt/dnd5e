@@ -26,8 +26,8 @@ export class AbilityUseDialog extends Dialog {
    */
   static async create(item) {
 
-    const uses = item.data.data.uses;
-    const recharge = item.data.data.recharge;
+    const uses = item.data.data.uses || {};
+    const recharge = item.data.data.recharge || {};
     const recharges = !!recharge.value;
 
     // Render the ability usage template

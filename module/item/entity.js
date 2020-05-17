@@ -254,10 +254,13 @@ export class Item5e extends Item {
     if (this.data.type === "feat") {
       let configured = await this._rollFeat(configureDialog);
       if ( configured === false ) return;
+    } else if ( this.data.type === "consumable" ) {
+      let configured = await this._rollConsumable(configureDialog);
+      if ( configured === false ) return;
     }
 
     // Render the chat card template
-    const templateType = ["tool", "consumable"].includes(this.data.type) ? this.data.type : "item";
+    const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
     const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
 
@@ -646,47 +649,54 @@ export class Item5e extends Item {
 
   /**
    * Use a consumable item, deducting from the quantity or charges of the item.
-   *
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance or null
+   * @param {boolean} configureDialog   Whether to show a configuration dialog
+   * @return {boolean}                  Whether further execution should be prevented
+   * @private
    */
-  async rollConsumable(options={}) {
+  async _rollConsumable(configureDialog) {
+    if ( this.data.type !== "consumable" ) throw new Error("Wrong Item type");
     const itemData = this.data.data;
 
-    // Dispatch a damage roll
-    let roll = null;
-    if ( itemData.damage.parts.length ) {
-      roll = await this.rollDamage(options);
+    // Determine whether to deduct uses of the item
+    const uses = itemData.uses || {};
+    let usesCharges = !!uses.per && (uses.max > 0);
+    const recharge = itemData.recharge || {};
+    const usesRecharge = !!recharge.value;
+
+    // If no usages remain, display a warning
+    const current = uses.value || 0;
+    if ( current <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+
+    // Display a configuration dialog to confirm the usage
+    let placeTemplate = false;
+    let consume = uses.autoUse || true;
+    if ( configureDialog ) {
+      const usage = await AbilityUseDialog.create(this);
+      if ( usage === null ) return false;
+      consume = Boolean(usage.get("consume"));
+      placeTemplate = Boolean(usage.get("placeTemplate"));
     }
 
-    // Dispatch an other formula
-    if ( itemData.formula ) {
-      roll = await this.rollFormula(options);
-    }
-
-    // Deduct consumed charges from the item
-    if ( itemData.uses.autoUse ) {
-      let q = itemData.quantity;
-      let c = itemData.uses.value;
-
-      // Deduct an item quantity
-      if ( c <= 1 && q > 1 ) {
-        await this.update({
-          'data.quantity': Math.max(q - 1, 0),
-          'data.uses.value': itemData.uses.max
-        });
-      }
-
-      // Optionally destroy the item
-      else if ( c <= 1 && q <= 1 && itemData.uses.autoDestroy ) {
-        await this.actor.deleteOwnedItem(this.id);
-      }
-
-      // Deduct the remaining charges
+    // Update Item data
+    if ( consume ) {
+      const remaining = usesCharges ? Math.max(current - 1, 0) : current;
+      if ( usesRecharge ) await this.update({"data.recharge.charged": false});
       else {
-        await this.update({'data.uses.value': Math.max(c - 1, 0)});
+        const q = itemData.quantity || 1;
+        if ( ( remaining === 0 ) && (q > 1) ) {
+          await this.update({"data.quantity": q - 1, "data.uses.value": uses.max || 1});
+        }
+        else await this.update({"data.uses.value": remaining});
       }
     }
-    return roll;
+
+    // Maybe initiate template placement workflow
+    if ( this.hasAreaTarget && placeTemplate ) {
+      const template = AbilityTemplate.fromItem(this);
+      if ( template ) template.drawPreview(event);
+      if ( this.owner && this.owner.sheet ) this.owner.sheet.minimize();
+    }
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -839,9 +849,6 @@ export class Item5e extends Item {
         await t.rollAbilitySave(button.dataset.ability, {event});
       }
     }
-
-    // Consumable usage
-    else if ( action === "consume" ) await item.rollConsumable({event});
 
     // Tool usage
     else if ( action === "toolCheck" ) await item.rollToolCheck({event});

@@ -30,6 +30,7 @@ export class Actor5e extends Actor {
     const actorData = this.data;
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
+    const bonuses = getProperty(data, "bonuses.abilities") || {};
 
     // Prepare Character data
     if ( actorData.type === "character" ) this._prepareCharacterData(actorData);
@@ -37,11 +38,14 @@ export class Actor5e extends Actor {
 
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
-    const saveBonus = parseInt(getProperty(data, "bonuses.abilities.save")) || 0;
+    const saveBonus = parseInt(bonuses.save || 0);
+    const checkBonus = parseInt(bonuses.check || 0);
     for (let abl of Object.values(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
-      abl.save = abl.mod + abl.prof + saveBonus;
+      abl.saveBonus = saveBonus;
+      abl.checkBonus = checkBonus;
+      abl.save = abl.mod + abl.prof + abl.saveBonus;
     }
 
     // Skill modifiers
@@ -49,10 +53,10 @@ export class Actor5e extends Actor {
     const athlete = flags.remarkableAthlete;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
+    const skillBonus = parseInt(bonuses.skill || 0);
     let round = Math.floor;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
-      skl.bonus = parseInt(skl.bonus || 0);
 
       // Apply Remarkable Athlete or Jack of all Trades
       let multi = skl.value;
@@ -63,11 +67,14 @@ export class Actor5e extends Actor {
       if ( joat && (skl.value === 0 ) ) multi = 0.5;
 
       // Compute modifier
-      skl.mod = data.abilities[skl.ability].mod + skl.bonus + round(multi * data.attributes.prof);
+      skl.bonus = checkBonus + skillBonus;
+      skl.mod = data.abilities[skl.ability].mod;
+      skl.prof = round(multi * data.attributes.prof);
+      skl.total = skl.mod + skl.prof + skl.bonus;
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      skl.passive = 10 + skl.mod + passive;
+      skl.passive = 10 + skl.total + passive;
     }
 
     // Determine Initiative Modifier
@@ -204,14 +211,20 @@ export class Actor5e extends Actor {
       lvl.value = Math.min(parseInt(lvl.value), lvl.max);
     }
 
+    // Determine the Actor's pact magic level (if any)
+    let pl = Math.clamped(progression.pact, 0, 20);
+    spells.pact = spells.pact || {};
+    if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = actorData.data.details.spellLevel;
+
     // Determine the number of Warlock pact slots per level
-    const pl = Math.clamped(progression.pact, 0, 20);
     if ( pl > 0) {
-      spells.pact = spells.pact || {};
       spells.pact.level = Math.ceil(Math.min(10, pl) / 2);
       if ( Number.isNumeric(spells.pact.override) ) spells.pact.max = Math.max(parseInt(spells.pact.override), 1);
       else spells.pact.max = Math.max(1, Math.min(pl, 2), Math.min(pl - 8, 3), Math.min(pl - 13, 4));
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
+    } else {
+      spells.pact.level = 0;
+      spells.pact.max = 0;
     }
   }
 
@@ -356,18 +369,17 @@ export class Actor5e extends Actor {
    */
   async useSpell(item, {configureDialog=true}={}) {
     if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
+    const itemData = item.data.data;
 
-    // Determine if the spell uses slots
-    let lvl = item.data.data.level;
-    const usesSlots = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(item.data.data.preparation.mode);
-    if ( !usesSlots ) return item.roll();
-
-    // Configure the casting level and whether to consume a spell slot
+    // Configure spellcasting data
+    let lvl = itemData.level;
+    const usesSlots = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(itemData.preparation.mode);
+    const limitedUses = !!itemData.uses.per;
     let consume = `spell${lvl}`;
     let placeTemplate = false;
 
     // Configure spell slot consumption and measured template placement from the form
-    if ( configureDialog ) {
+    if ( usesSlots && configureDialog ) {
       const spellFormData = await SpellCastDialog.create(this, item);
       const isPact = spellFormData.get('level') === 'pact';
       const lvl = isPact ? this.data.data.spells.pact.level : parseInt(spellFormData.get("level"));
@@ -385,14 +397,21 @@ export class Actor5e extends Actor {
     }
 
     // Update Actor data
-    if ( consume && (lvl > 0) ) {
+    if ( usesSlots && consume && (lvl > 0) ) {
       await this.update({
         [`data.spells.${consume}.value`]: Math.max(parseInt(this.data.data.spells[consume].value) - 1, 0)
       });
     }
 
+    // Update Item data
+    if ( limitedUses ) {
+      const uses = parseInt(itemData.uses.value || 0);
+      if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
+      await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
+    }
+
     // Initiate ability template placement workflow if selected
-    if (item.hasAreaTarget && placeTemplate) {
+    if ( placeTemplate && item.hasAreaTarget ) {
       const template = AbilityTemplate.fromItem(item);
       if ( template ) template.drawPreview(event);
       if ( this.sheet.rendered ) this.sheet.minimize();
@@ -413,14 +432,13 @@ export class Actor5e extends Actor {
    */
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
-    const parts = ["@mod"];
-    const data = {mod: skl.mod};
 
-    // Include a global actor skill bonus
-    const actorBonus = getProperty(this.data.data.bonuses, "abilities.skill");
-    if ( !!actorBonus ) {
+    // Compose roll parts and data
+    const parts = ["@mod"];
+    const data = {mod: skl.mod + skl.prof};
+    if ( skl.bonus ) {
+      data["skillBonus"] = skl.bonus;
       parts.push("@skillBonus");
-      data.skillBonus = actorBonus;
     }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
@@ -729,9 +747,10 @@ export class Actor5e extends Actor {
     const data = this.data.data;
 
     // Maybe present a confirmation dialog
+    let newDay = false;
     if ( dialog ) {
       try {
-        await ShortRestDialog.longRestDialog(this);
+        newDay = await ShortRestDialog.longRestDialog(this);
       } catch(err) {
         return;
       }
@@ -783,9 +802,10 @@ export class Actor5e extends Actor {
     }, []);
 
     // Iterate over owned items, restoring uses per day and recovering Hit Dice
+    const recovery = newDay ? ["sr", "lr", "day"] : ["sr", "lr"];
     for ( let item of this.items ) {
       const d = item.data.data;
-      if ( d.uses && ["sr", "lr"].includes(d.uses.per) ) {
+      if ( d.uses && recovery.includes(d.uses.per) ) {
         updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
       }
       else if ( d.recharge && d.recharge.value ) {
@@ -802,6 +822,7 @@ export class Actor5e extends Actor {
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
+        flavor: game.i18n.localize(newDay ? "DND5E.OvernightRest" : "DND5E.LongRest"),
         content: game.i18n.format("DND5E.LongRestResult", {name: this.name, health: dhp, dice: dhd})
       });
     }

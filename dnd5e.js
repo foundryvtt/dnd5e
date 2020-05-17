@@ -13,13 +13,23 @@ import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances, getBarAttribute } from "./module/canvas.js";
+
+// Import Entities
 import { Actor5e } from "./module/actor/entity.js";
-import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { Item5e } from "./module/item/entity.js";
-import { ItemSheet5e } from "./module/item/sheet.js";
+
+// Import Applications
+import { AbilityTemplate } from "./module/pixi/ability-template.js";
+import { ActorSheetFlags } from "./module/apps/actor-flags.js";
+import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
 import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
-import { Dice5e } from "./module/dice.js";
+import { ItemSheet5e } from "./module/item/sheet.js";
+import { ShortRestDialog } from "./module/apps/short-rest.js";
+import { TraitSelector } from "./module/apps/trait-selector.js";
+
+// Import Helpers
 import * as chat from "./module/chat.js";
+import { Dice5e } from "./module/dice.js";
 import * as migrations from "./module/migration.js";
 
 /* -------------------------------------------- */
@@ -31,11 +41,27 @@ Hooks.once("init", function() {
 
   // Create a D&D5E namespace within the game global
   game.dnd5e = {
-    Actor5e,
-    Dice5e,
-    Item5e,
-    migrations,
-    rollItemMacro
+    applications: {
+      ActorSheetFlags,
+      ActorSheet5eCharacter,
+      ActorSheet5eNPC,
+      ItemSheet5e,
+      ShortRestDialog,
+      TraitSelector
+    },
+    canvas: {
+      AbilityTemplate
+    },
+    config: DND5E,
+    dice: {
+      Dice5e,
+      rollItemMacro
+    },
+    entities: {
+      Actor5e,
+      Item5e,
+    },
+    migrations: migrations
   };
 
   // Record Configuration Values
@@ -72,14 +98,27 @@ Hooks.once("setup", function() {
 
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    "abilities", "alignments", "conditionTypes", "consumableTypes", "currencies", "damageTypes", "distanceUnits", "equipmentTypes",
-    "healingTypes", "itemActionTypes", "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes",
-    "spellSchools", "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages", "polymorphSettings",
-    "armorProficiencies", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes", "actorSizes", "proficiencyLevels"
+    "abilities", "alignments", "conditionTypes", "consumableTypes", "currencies", "damageTypes", "distanceUnits",
+    "equipmentTypes", "healingTypes", "itemActionTypes", "limitedUsePeriods", "senses", "skills", "spellComponents",
+    "spellLevels", "spellPreparationModes", "spellSchools", "spellScalingModes", "targetTypes", "timePeriods",
+    "weaponProperties", "weaponTypes", "languages", "polymorphSettings", "armorProficiencies", "weaponProficiencies",
+    "toolProficiencies", "abilityActivationTypes", "actorSizes", "proficiencyLevels"
   ];
+
+  // Exclude some from sorting where the default order matters
+  const noSort = [
+    "abilities", "alignments", "currencies", "distanceUnits", "itemActionTypes", "proficiencyLevels",
+    "limitedUsePeriods", "spellComponents", "spellLevels", "weaponTypes"
+  ];
+
+  // Localize and sort CONFIG objects
   for ( let o of toLocalize ) {
-    CONFIG.DND5E[o] = Object.entries(CONFIG.DND5E[o]).reduce((obj, e) => {
-      obj[e[0]] = game.i18n.localize(e[1]);
+    const localized = Object.entries(CONFIG.DND5E[o]).map(e => {
+      return [e[0], game.i18n.localize(e[1])];
+    });
+    if ( !noSort.includes(o) ) localized.sort((a, b) => a[1].localeCompare(b[1]));
+    CONFIG.DND5E[o] = localized.reduce((obj, e) => {
+      obj[e[0]] = e[1];
       return obj;
     }, {});
   }
@@ -97,7 +136,6 @@ Hooks.once("ready", function() {
   const NEEDS_MIGRATION_VERSION = 0.84;
   const COMPATIBLE_MIGRATION_VERSION = 0.80;
   let needMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
-  const canMigrate = currentVersion >= COMPATIBLE_MIGRATION_VERSION;
 
   // Perform the migration
   if ( needMigration && game.user.isGM ) {

@@ -74,19 +74,6 @@
             {{!-- Item Activation Template --}}
             {{> "systems/dnd5e/templates/items/parts/item-activation.html"}}
 
-            {{!-- Consumable Usage --}}
-            {{#if data.activation.type}}
-            <div class="form-group">
-                <label>{{ localize "DND5E.ItemConsumableUsage" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.uses.autoUse" {{checked data.uses.autoUse}}/> {{ localize "DND5E.ItemConsumeOnUse" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.uses.autoDestroy" {{checked data.uses.autoDestroy}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
-                </label>
-            </div>
-            {{/if}}
-
             <h3 class="form-header">{{ localize "DND5E.ItemConsumableActivation" }}</h3>
 
             {{!-- Item Action Template --}}

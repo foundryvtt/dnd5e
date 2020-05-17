@@ -1,7 +1,7 @@
 <form id="ability-use-form">
     <p>{{ localize "DND5E.AbilityUseHint" }} <strong>{{item.name}}</strong> {{ localize "DND5E.Ability" }}.</p>
 
-    <p type="note">
+    <p class="notes">
     {{#if recharges}}
     {{ localize "DND5E.AbilityUseRechargeHint" }} <strong>{{#if isCharged}}{{ localize "DND5E.AbilityUseCharged" }}{{else}}{{ localize "DND5E.AbilityUseDepleted" }}{{/if}}</strong>.</p>
     {{else}}

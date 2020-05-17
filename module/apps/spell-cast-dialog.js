@@ -69,7 +69,6 @@ export class SpellCastDialog extends Dialog {
         hasSlots: pact.value > 0
       });
     }
-
     const canCast = spellLevels.some(l => l.hasSlots);
 
     // Render the Spell casting template

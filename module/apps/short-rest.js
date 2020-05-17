@@ -112,8 +112,8 @@ export class ShortRestDialog extends Dialog {
    * @return {Promise}
    */
   static async longRestDialog({actor}={}) {
-    const content = `<p>Take a long rest?</p><p>On a long rest you will recover hit points, half your maximum hit dice, 
-        class resources, limited use item charges, and spell slots.</p>`;
+    const template = "systems/dnd5e/templates/apps/long-rest.html";
+    const content = await renderTemplate(template);
     return new Promise((resolve, reject) => {
       new Dialog({
         title: "Long Rest",
@@ -122,7 +122,10 @@ export class ShortRestDialog extends Dialog {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
             label: "Rest",
-            callback: resolve
+            callback: html => {
+              const newDay = html.find('input[name="newDay"]')[0].checked;
+              resolve(newDay);
+            }
           },
           cancel: {
             icon: '<i class="fas fa-times"></i>',
