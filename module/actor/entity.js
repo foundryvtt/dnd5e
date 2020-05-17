@@ -388,7 +388,26 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Rolls                                       */
+  /*  Gameplay Mechanics                          */
+  /* -------------------------------------------- */
+
+  /**
+   * Apply a certain amount of damage or healing to the health pool for Actor
+   * @param {number} amount       An amount of damage (positive) or healing (negative) to sustain
+   * @param {number} multiplier   A multiplier which allows for resistance, vulnerability, or healing
+   * @return {Promise<Actor>}     A Promise which resolves once the damage has been applied
+   */
+  async applyDamage(amount=0, multiplier=1) {
+    amount = Math.floor(parseInt(amount) * multiplier);
+    const hp = this.data.data.attributes.hp;
+    const tmp = parseInt(hp.temp) || 0;
+    const dt = amount > 0 ? Math.min(tmp, amount) : 0;
+    return this.update({
+      "data.attributes.hp.temp": tmp - dt,  // Deduct damage from temp HP first
+      "data.attributes.hp.value": Math.clamped(hp.value - (amount - dt), 0, hp.max) // Remaining goes to health
+    });
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -865,7 +884,6 @@ export default class Actor5e extends Actor {
     }
   }
 
-
   /* -------------------------------------------- */
 
   /**
@@ -1073,32 +1091,6 @@ export default class Actor5e extends Actor {
     if ( game.user.isGM ) await this.delete();
     original.sheet.render(isRendered);
     return original;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Apply rolled dice damage to the token or tokens which are currently controlled.
-   * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
-   *
-   * @param {HTMLElement} roll    The chat entry which contains the roll data
-   * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
-   * @return {Promise}
-   */
-  static async applyDamage(roll, multiplier) {
-    let value = Math.floor(parseFloat(roll.find('.dice-total').text()) * multiplier);
-    const promises = [];
-    for ( let t of canvas.tokens.controlled ) {
-      let a = t.actor,
-          hp = a.data.data.attributes.hp,
-          tmp = parseInt(hp.temp) || 0,
-          dt = value > 0 ? Math.min(tmp, value) : 0;
-      promises.push(t.actor.update({
-        "data.attributes.hp.temp": tmp - dt,
-        "data.attributes.hp.value": Math.clamped(hp.value - (value - dt), 0, hp.max)
-      }));
-    }
-    return Promise.all(promises);
   }
 
   /* -------------------------------------------- */

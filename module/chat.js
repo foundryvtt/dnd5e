@@ -67,26 +67,46 @@ export const addChatMessageContextOptions = function(html, options) {
       name: game.i18n.localize("DND5E.ChatContextDamage"),
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApply,
-      callback: li => Actor5e.applyDamage(li, 1)
+      callback: li => applyChatCardDamage(li, 1)
     },
     {
       name: game.i18n.localize("DND5E.ChatContextHealing"),
       icon: '<i class="fas fa-user-plus"></i>',
       condition: canApply,
-      callback: li => Actor5e.applyDamage(li, -1)
+      callback: li => applyChatCardDamage(li, -1)
     },
     {
       name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
       icon: '<i class="fas fa-user-injured"></i>',
       condition: canApply,
-      callback: li => Actor5e.applyDamage(li, 2)
+      callback: li => applyChatCardDamage(li, 2)
     },
     {
       name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
       icon: '<i class="fas fa-user-shield"></i>',
       condition: canApply,
-      callback: li => Actor5e.applyDamage(li, 0.5)
+      callback: li => applyChatCardDamage(li, 0.5)
     }
   );
   return options;
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Apply rolled dice damage to the token or tokens which are currently controlled.
+ * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
+ *
+ * @param {HTMLElement} roll    The chat entry which contains the roll data
+ * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
+ * @return {Promise}
+ */
+function applyChatCardDamage(roll, multiplier) {
+  const amount = roll.find('.dice-total').text();
+  return Promise.all(canvas.tokens.controlled.map(t => {
+    const a = t.actor;
+    return a.applyDamage(amount, multiplier);
+  }));
+}
+
+/* -------------------------------------------- */
