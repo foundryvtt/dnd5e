@@ -1,8 +1,8 @@
 /**
  * A helper Dialog subclass for rolling Hit Dice on short rest
- * @type {Dialog}
+ * @extends {Dialog}
  */
-export class ShortRestDialog extends Dialog {
+export default class ShortRestDialog extends Dialog {
   constructor(actor, dialogData={}, options={}) {
     super(dialogData, options);
 

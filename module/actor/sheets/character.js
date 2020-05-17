@@ -1,11 +1,11 @@
-import { ActorSheet5e } from "./base.js";
+import ActorSheet5e from "./base.js";
 
 /**
  * An Actor sheet for player character type actors in the D&D5E system.
  * Extends the base ActorSheet5e class.
  * @type {ActorSheet5e}
  */
-export class ActorSheet5eCharacter extends ActorSheet5e {
+export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Define default rendering options for the NPC sheet

@@ -490,6 +490,20 @@ DND5E.spellLevels = {
   9: "DND5E.SpellLevel9"
 };
 
+// Spell Scroll Compendium UUIDs
+DND5E.spellScrollIds = {
+  0: 'Compendium.dnd5e.items.rQ6sO7HDWzqMhSI3',
+  1: 'Compendium.dnd5e.items.9GSfMg0VOA2b4uFN',
+  2: 'Compendium.dnd5e.items.XdDp6CKh9qEvPTuS',
+  3: 'Compendium.dnd5e.items.hqVKZie7x9w3Kqds',
+  4: 'Compendium.dnd5e.items.DM7hzgL836ZyUFB1',
+  5: 'Compendium.dnd5e.items.wa1VF8TXHmkrrR35',
+  6: 'Compendium.dnd5e.items.tI3rWx4bxefNCexS',
+  7: 'Compendium.dnd5e.items.mtyw4NS1s7j2EJaD',
+  8: 'Compendium.dnd5e.items.aOrinPg7yuDZEuWr',
+  9: 'Compendium.dnd5e.items.O4YbkJkLlnsgUszZ'
+};
+
 /**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.

@@ -1,4 +1,8 @@
-export class ActorSheetFlags extends BaseEntitySheet {
+/**
+ * An application class which provides advanced configuration for special character flags which modify an Actor
+ * @extends {BaseEntitySheet}
+ */
+export default class ActorSheetFlags extends BaseEntitySheet {
   static get defaultOptions() {
     const options = super.defaultOptions;
     return mergeObject(options, {

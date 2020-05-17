@@ -1,14 +1,14 @@
-import {TraitSelector} from "../../apps/trait-selector.js";
-import {ActorSheetFlags} from "../../apps/actor-flags.js";
+import Item5e from "../../item/entity.js";
+import TraitSelector from "../../apps/trait-selector.js";
+import ActorSheetFlags from "../../apps/actor-flags.js";
 import {DND5E} from '../../config.js';
 
 /**
  * Extend the basic ActorSheet class to do all the D&D5e things!
  * This sheet is an Abstract layer which is not used.
- *
- * @type {ActorSheet}
+ * @extends {ActorSheet}
  */
-export class ActorSheet5e extends ActorSheet {
+export default class ActorSheet5e extends ActorSheet {
   constructor(...args) {
     super(...args);
 
@@ -426,16 +426,17 @@ export class ActorSheet5e extends ActorSheet {
     } catch (err) {
       return false;
     }
+    if ( !data ) return false;
 
-    // Handle a polymorph
-    if (data && (data.type === "Actor")) {
-      if (game.user.isGM || (game.settings.get('dnd5e', 'allowPolymorphing') && this.actor.owner)) {
-        return this._onDropPolymorph(event, data);
-      }
+    // Case 1 - Dropped Item
+    if ( data.type === "Item" ) {
+      return this._onDropItem(event, data);
     }
 
-    // Call parent on drop logic
-    return super._onDrop(event);
+    // Case 2 - Dropped Actor
+    if ( data.type === "Actor" ) {
+      return this._onDropActor(event, data);
+    }
   }
 
   /* -------------------------------------------- */
@@ -446,7 +447,9 @@ export class ActorSheet5e extends ActorSheet {
    * @param {Object} data       The data transfer
    * @private
    */
-  async _onDropPolymorph(event, data) {
+  async _onDropActor(event, data) {
+    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('dnd5e', 'allowPolymorphing'));
+    if ( !canPolymorph ) return false;
 
     // Get the target actor
     let sourceActor = null;
@@ -511,6 +514,66 @@ export class ActorSheet5e extends ActorSheet {
       width: 600,
       template: 'systems/dnd5e/templates/apps/polymorph-prompt.html'
     }).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping of an item reference or item data onto an Actor Sheet
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
+   * @return {Object}             OwnedItem data to create
+   * @private
+   */
+  async _onDropItem(event, data) {
+    if ( !this.actor.owner ) return false;
+    let itemData = await this._getItemDropData(event, data);
+
+    // Create a spell scroll from a spell item
+    if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
+      const scroll = await Item5e.createScrollFromSpell(itemData);
+      itemData = scroll.data;
+    }
+
+    // Create the owned item
+    return this.actor.createEmbeddedEntity("OwnedItem", itemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * TODO: A temporary shim method until Item.getDropData() is implemented
+   * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
+   * @private
+   */
+  async _getItemDropData(event, data) {
+    let itemData = null;
+
+    // Case 1 - Import from a Compendium pack
+    const actor = this.actor;
+    if (data.pack) {
+      const pack = game.packs.get(collection);
+      if (pack.metadata.entity !== "Item") return;
+      itemData = await pack.getEntry(data.id);
+    }
+
+    // Case 2 - Data explicitly provided
+    else if (data.data) {
+      let sameActor = data.actorId === actor._id;
+      if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
+      if (sameActor) return this._onSortItem(event, data.data); // Sort existing items
+      itemData = data.data;
+    }
+
+    // Case 3 - Import from World entity
+    else {
+      let item = game.items.get(data.id);
+      if (!item) return;
+      itemData = item.data;
+    }
+
+    // Return a copy of the extracted data
+    return duplicate(itemData);
   }
 
   /* -------------------------------------------- */

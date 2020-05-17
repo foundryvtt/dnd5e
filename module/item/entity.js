@@ -1,11 +1,11 @@
-import { Dice5e } from "../dice.js";
-import { AbilityUseDialog } from "../apps/ability-use-dialog.js";
-import { AbilityTemplate } from "../pixi/ability-template.js";
+import {d20Roll, damageRoll} from "../dice.js";
+import AbilityUseDialog from "../apps/ability-use-dialog.js";
+import AbilityTemplate from "../pixi/ability-template.js";
 
 /**
  * Override and extend the basic :class:`Item` implementation
  */
-export class Item5e extends Item {
+export default class Item5e extends Item {
 
   /* -------------------------------------------- */
   /*  Item Properties                             */
@@ -550,7 +550,7 @@ export class Item5e extends Item {
 
   /**
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   * Rely upon the d20Roll logic for the core implementation
    *
    * @return {Promise.<Roll|null>}   A Promise which resolves to the created Roll instance
    */
@@ -611,14 +611,14 @@ export class Item5e extends Item {
     if ( allowed === false ) return null;
 
     // Invoke the d20 roll helper
-    return Dice5e.d20Roll(rollConfig);
+    return d20Roll(rollConfig);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the Dice5e.damageRoll logic for the core implementation
+   * Rely upon the damageRoll logic for the core implementation
    *
    * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
@@ -653,7 +653,7 @@ export class Item5e extends Item {
     // Call the roll helper utility
     const title = `${this.name} - Damage Roll`;
     const flavor = this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title;
-    return Dice5e.damageRoll({
+    return damageRoll({
       event: event,
       parts: parts,
       actor: this.actor,
@@ -707,7 +707,7 @@ export class Item5e extends Item {
 
   /**
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   * Rely upon the d20Roll logic for the core implementation
    *
    * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
@@ -815,7 +815,7 @@ export class Item5e extends Item {
 
   /**
    * Roll a Tool Check
-   * Rely upon the Dice5e.d20Roll logic for the core implementation
+   * Rely upon the d20Roll logic for the core implementation
    *
    * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
@@ -828,7 +828,7 @@ export class Item5e extends Item {
     const title = `${this.name} - Tool Check`;
 
     // Call the roll helper utility
-    return Dice5e.d20Roll({
+    return d20Roll({
       event: options.event,
       parts: parts,
       data: rollData,
@@ -1004,5 +1004,56 @@ export class Item5e extends Item {
     const targets = controlled.reduce((arr, t) => t.actor ? arr.concat([t.actor]) : arr, []);
     if ( character && (controlled.length === 0) ) targets.push(character);
     return targets;
+  }
+
+  /* -------------------------------------------- */
+  /*  Factory Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Create a consumable spell scroll Item from a spell Item.
+   * @param {Item5e} spell      The spell to be made into a scroll
+   * @return {Item5e}           The created scroll consumable item
+   * @private
+   */
+  static async createScrollFromSpell(spell) {
+
+    // Get spell data
+    const itemData = spell instanceof Item5e ? spell.data : spell;
+    const {description, source, activation, duration, target, range, damage, save, level} = itemData.data;
+
+    // Get scroll data
+    const scrollUuid = CONFIG.DND5E.spellScrollIds[level];
+    const scrollItem = await fromUuid(scrollUuid);
+    const scrollData = scrollItem.data;
+    delete scrollData._id;
+
+    // Split the scroll description into an intro paragraph and the remaining details
+    const scrollDescription = scrollData.data.description.value;
+    const pdel = '</p>';
+    const scrollIntroEnd = scrollDescription.indexOf(pdel);
+    const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
+    const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
+
+    // Create a composite description from the scroll description and the spell details
+    const desc = `${scrollIntro}<hr/><h3>${itemData.name} (Level ${level})</h3><hr/>${description.value}<hr/><h3>Scroll Details</h3><hr/>${scrollDetails}`;
+
+    // Create the spell scroll data
+    const spellScrollData = mergeObject(scrollData, {
+      name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
+      img: itemData.img,
+      data: {
+        "description.value": desc.trim(),
+        source,
+        activation,
+        duration,
+        target,
+        range,
+        damage,
+        save,
+        level
+      }
+    });
+    return new this(spellScrollData);
   }
 }

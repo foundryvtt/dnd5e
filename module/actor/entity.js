@@ -1,14 +1,13 @@
-import { Dice5e } from "../dice.js";
-import { ShortRestDialog } from "../apps/short-rest.js";
-import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
-import { AbilityTemplate } from "../pixi/ability-template.js";
+import { d20Roll, damageRoll } from "../dice.js";
+import ShortRestDialog from "../apps/short-rest.js";
+import SpellCastDialog from "../apps/spell-cast-dialog.js";
+import AbilityTemplate from "../pixi/ability-template.js";
 import {DND5E} from '../config.js';
-
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
  */
-export class Actor5e extends Actor {
+export default class Actor5e extends Actor {
 
   /**
    * Is this Actor currently polymorphed into some other creature?
@@ -445,7 +444,7 @@ export class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    return Dice5e.d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
@@ -515,7 +514,7 @@ export class Actor5e extends Actor {
     }
 
     // Roll and return
-    return Dice5e.d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
@@ -553,7 +552,7 @@ export class Actor5e extends Actor {
     }
 
     // Roll and return
-    return Dice5e.d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
@@ -582,7 +581,7 @@ export class Actor5e extends Actor {
     }
 
     // Evaluate the roll
-    const roll = await Dice5e.d20Roll(mergeObject(options, {
+    const roll = await d20Roll(mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
@@ -648,7 +647,7 @@ export class Actor5e extends Actor {
     const rollData = duplicate(this.data.data);
 
     // Call the roll helper utility
-    const roll = await Dice5e.damageRoll({
+    const roll = await damageRoll({
       event: new Event("hitDie"),
       parts: parts,
       data: rollData,

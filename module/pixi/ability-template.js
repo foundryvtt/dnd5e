@@ -4,7 +4,7 @@ import { DND5E } from "../config.js";
  * A helper class for building MeasuredTemplates for 5e spells and abilities
  * @extends {MeasuredTemplate}
  */
-export class AbilityTemplate extends MeasuredTemplate {
+export default class AbilityTemplate extends MeasuredTemplate {
 
   /**
    * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance

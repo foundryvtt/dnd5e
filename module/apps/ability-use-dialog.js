@@ -2,7 +2,7 @@
  * A specialized Dialog subclass for ability usage
  * @type {Dialog}
  */
-export class AbilityUseDialog extends Dialog {
+export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog"];

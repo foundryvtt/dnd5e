@@ -15,21 +15,23 @@ import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances, getBarAttribute } from "./module/canvas.js";
 
 // Import Entities
-import { Actor5e } from "./module/actor/entity.js";
-import { Item5e } from "./module/item/entity.js";
+import Actor5e from "./module/actor/entity.js";
+import Item5e from "./module/item/entity.js";
 
 // Import Applications
-import { AbilityTemplate } from "./module/pixi/ability-template.js";
-import { ActorSheetFlags } from "./module/apps/actor-flags.js";
-import { ActorSheet5eCharacter } from "./module/actor/sheets/character.js";
-import { ActorSheet5eNPC } from "./module/actor/sheets/npc.js";
-import { ItemSheet5e } from "./module/item/sheet.js";
-import { ShortRestDialog } from "./module/apps/short-rest.js";
-import { TraitSelector } from "./module/apps/trait-selector.js";
+import AbilityTemplate from "./module/pixi/ability-template.js";
+import ActorSheetFlags from "./module/apps/actor-flags.js";
+import ActorSheet5eCharacter from "./module/actor/sheets/character.js";
+import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
+import ItemSheet5e from "./module/item/sheet.js";
+import ShortRestDialog from "./module/apps/short-rest.js";
+import SpellCastDialog from "./module/apps/spell-cast-dialog.js";
+import TraitSelector from "./module/apps/trait-selector.js";
 
 // Import Helpers
 import * as chat from "./module/chat.js";
-import { Dice5e } from "./module/dice.js";
+import * as dice from "./module/dice.js";
+import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
 
 /* -------------------------------------------- */
@@ -47,22 +49,21 @@ Hooks.once("init", function() {
       ActorSheet5eNPC,
       ItemSheet5e,
       ShortRestDialog,
+      SpellCastDialog,
       TraitSelector
     },
     canvas: {
       AbilityTemplate
     },
     config: DND5E,
-    dice: {
-      Dice5e,
-      rollItemMacro
-    },
+    dice: dice,
     entities: {
       Actor5e,
       Item5e,
     },
+    macros: macros,
     migrations: migrations,
-    rollItemMacro
+    rollItemMacro: macros.rollItemMacro
   };
 
   // Record Configuration Values
@@ -147,7 +148,7 @@ Hooks.once("ready", function() {
   }
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => create5eMacro(data, slot));
+  Hooks.on("hotbarDrop", (bar, data, slot) => macros.create5eMacro(data, slot));
 });
 
 /* -------------------------------------------- */
@@ -183,63 +184,3 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
-
-/* -------------------------------------------- */
-/*  Hotbar Macros                               */
-/* -------------------------------------------- */
-
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {Object} data     The dropped data
- * @param {number} slot     The hotbar slot to use
- * @returns {Promise}
- */
-async function create5eMacro(data, slot) {
-  if ( data.type !== "Item" ) return;
-  if (!( "data" in data ) ) return ui.notifications.warn("You can only create macro buttons for owned Items");
-  const item = data.data;
-
-  // Create the macro command
-  const command = `game.dnd5e.rollItemMacro("${item.name}");`;
-  let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
-  if ( !macro ) {
-    macro = await Macro.create({
-      name: item.name,
-      type: "script",
-      img: item.img,
-      command: command,
-      flags: {"dnd5e.itemMacro": true}
-    });
-  }
-  game.user.assignHotbarMacro(macro, slot);
-  return false;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {string} itemName
- * @return {Promise}
- */
-function rollItemMacro(itemName) {
-  const speaker = ChatMessage.getSpeaker();
-  let actor;
-  if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-  if ( !actor ) actor = game.actors.get(speaker.actor);
-
-  // Get matching items
-  const items = actor ? actor.items.filter(i => i.name === itemName) : [];
-  if ( items.length > 1 ) {
-    ui.notifications.warn(`Your controlled Actor ${actor.name} has more than one Item with name ${itemName}. The first matched item will be chosen.`);
-  } else if ( items.length === 0 ) {
-    return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
-  }
-  const item = items[0];
-
-  // Trigger the item roll
-  if ( item.data.type === "spell" ) return actor.useSpell(item);
-  return item.roll();
-}

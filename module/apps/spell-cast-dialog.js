@@ -1,8 +1,8 @@
 /**
  * A specialized Dialog subclass for casting a spell item at a certain level
- * @type {Dialog}
+ * @extends {Dialog}
  */
-export class SpellCastDialog extends Dialog {
+export default class SpellCastDialog extends Dialog {
   constructor(actor, item, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog"];

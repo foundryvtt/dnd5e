@@ -14,13 +14,10 @@
 
     <div class="form-group">
         <label class="checkbox">{{ localize "DND5E.AbilityUseConsume" }} <input type="checkbox" name="consume" {{checked consume}}/></label>
-
         {{#if hasPlaceableTemplate}}
-        <div class="form-group">
-            <label class="checkbox">{{ localize "DND5E.PlaceTemplate" }}
-                <input type="checkbox" name="placeTemplate" checked/>
-            </label>
-        </div>
+        <label class="checkbox">{{ localize "DND5E.PlaceTemplate" }}
+            <input type="checkbox" name="placeTemplate" checked/>
+        </label>
         {{/if}}
     </div>
 </form>

@@ -2,7 +2,7 @@
  * A specialized form used to select from a checklist of attributes, traits, or properties
  * @extends {FormApplication}
  */
-export class TraitSelector extends FormApplication {
+export default class TraitSelector extends FormApplication {
 
   /** @override */
 	static get defaultOptions() {

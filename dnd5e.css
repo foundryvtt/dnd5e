@@ -106,15 +106,15 @@
 .dnd5e label.checkbox {
   flex: auto;
   margin: 0;
-  line-height: 20px;
+  height: 22px;
+  line-height: 22px;
   font-size: 11px;
   text-align: right;
 }
 .dnd5e label.checkbox input[type="checkbox"] {
-  height: auto;
   margin: 0 5px 0;
   position: relative;
-  top: 3px;
+  top: 5px;
 }
 .dnd5e .form-group label {
   flex: 2;
@@ -745,6 +745,7 @@
   text-align: right;
   font-size: 11px;
   color: #7a7971;
+  white-space: nowrap;
 }
 .dnd5e.sheet.actor .inventory-list .inventory-header {
   margin: 2px 0;
@@ -1246,7 +1247,10 @@
   margin: 0 3px;
 }
 .dnd5e.sheet.actor.character .attributes .resource label.checkbox input[type="checkbox"] {
+  height: 16px;
+  width: 16px;
   margin: 0;
+  top: 3px;
 }
 .dnd5e.sheet.actor.character .attributes .initiative .attribute-footer input {
   width: 32px;
