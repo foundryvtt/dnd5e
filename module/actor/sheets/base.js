@@ -552,7 +552,7 @@ export default class ActorSheet5e extends ActorSheet {
     // Case 1 - Import from a Compendium pack
     const actor = this.actor;
     if (data.pack) {
-      const pack = game.packs.get(collection);
+      const pack = game.packs.get(data.pack);
       if (pack.metadata.entity !== "Item") return;
       itemData = await pack.getEntry(data.id);
     }
