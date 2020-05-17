@@ -313,7 +313,7 @@ export default class Item5e extends Item {
     const amount = parseInt(consume.amount || 1);
 
     // Only handle certain types for certain actions
-    if ( ((consume.type === "ammo") && !isAttack ) || ((consume.type !== "ammo") && !isCard) ) return false;
+    if ( ((consume.type === "ammo") && !isAttack ) || ((consume.type !== "ammo") && !isCard) ) return true;
 
     // No consumed target set
     if ( !consume.target ) {
