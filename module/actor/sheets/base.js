@@ -529,6 +529,11 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !this.actor.owner ) return false;
     let itemData = await this._getItemDropData(event, data);
 
+    // Handle item sorting within the same Actor
+    const actor = this.actor;
+    let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
+    if (sameActor) return this._onSortItem(event, itemData);
+
     // Create a spell scroll from a spell item
     if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
@@ -550,7 +555,6 @@ export default class ActorSheet5e extends ActorSheet {
     let itemData = null;
 
     // Case 1 - Import from a Compendium pack
-    const actor = this.actor;
     if (data.pack) {
       const pack = game.packs.get(data.pack);
       if (pack.metadata.entity !== "Item") return;
@@ -559,9 +563,6 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Case 2 - Data explicitly provided
     else if (data.data) {
-      let sameActor = data.actorId === actor._id;
-      if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-      if (sameActor) return this._onSortItem(event, data.data); // Sort existing items
       itemData = data.data;
     }
 
