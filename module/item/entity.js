@@ -606,12 +606,15 @@ export default class Item5e extends Item {
     // Apply Halfling Lucky
     if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
 
-    // For items which consume a resource, handle that here (asynchronously)
-    const allowed = await this._handleResourceConsumption({isCard: false, isAttack: true});
-    if ( allowed === false ) return null;
 
     // Invoke the d20 roll helper
-    return d20Roll(rollConfig);
+    const roll = await d20Roll(rollConfig);
+    if ( roll === false ) return null;
+
+    // Handle resource consumption if the attack roll was made
+    const allowed = await this._handleResourceConsumption({isCard: false, isAttack: true});
+    if ( allowed === false ) return null;
+    return roll;
   }
 
   /* -------------------------------------------- */

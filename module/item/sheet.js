@@ -78,7 +78,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attributes = CombatTrackerConfig.prototype.getAttributeChoices()["Attribute Bars"] // Bit of a hack
+      const attributes = Object.values(CombatTrackerConfig.prototype.getAttributeChoices())[0]; // Bit of a hack
       return attributes.reduce((obj, a) => {
         obj[a] = a;
         return obj;
