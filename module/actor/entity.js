@@ -42,7 +42,7 @@ export default class Actor5e extends Actor {
     // the original actor for later merging.
     if (this.isPolymorphed) {
       const transformOptions = this.getFlag('dnd5e', 'transformOptions');
-      const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
+      const original = game.actors?.get(this.getFlag('dnd5e', 'originalActor'));
 
       if (original) {
         if (transformOptions.mergeSaves) {
