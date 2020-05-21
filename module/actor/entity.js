@@ -986,10 +986,11 @@ export default class Actor5e extends Actor {
     const abilities = d.data.abilities;
     for ( let k of Object.keys(abilities) ) {
       const oa = o.data.abilities[k];
+      const prof = abilities[k].proficient;
       if ( keepPhysical && ["str", "dex", "con"].includes(k) ) abilities[k] = oa;
       else if ( keepMental && ["int", "wis", "cha"].includes(k) ) abilities[k] = oa;
       if ( keepSaves ) abilities[k].proficient = oa.proficient;
-      else if ( mergeSaves ) abilities[k].proficient = Math.max(abilities[k].proficient, oa.proficient)
+      else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
     }
 
     // Transfer skills
