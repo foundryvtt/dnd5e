@@ -761,7 +761,7 @@ export default class Actor5e extends Actor {
         "data.uses.value": item.data.data.uses.max
       };
     });
-    await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
+    await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
@@ -863,7 +863,7 @@ export default class Actor5e extends Actor {
 
     // Perform the updates
     await this.update(updateData);
-    if ( updateItems.length ) await this.updateManyEmbeddedEntities("OwnedItem", updateItems);
+    if ( updateItems.length ) await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
@@ -1048,7 +1048,7 @@ export default class Actor5e extends Actor {
       newTokenData.actorId = newActor.id;
       return newTokenData;
     });
-    return canvas.scene.updateManyEmbeddedEntities("Token", updates);
+    return canvas.scene.updateEmbeddedEntity("Token", updates);
   }
 
   /* -------------------------------------------- */
@@ -1084,7 +1084,7 @@ export default class Actor5e extends Actor {
       tokenData.actorId = original.id;
       return tokenData;
     });
-    canvas.scene.updateManyEmbeddedEntities("Token", tokenUpdates);
+    canvas.scene.updateEmbeddedEntity("Token", tokenUpdates);
 
     // Delete the polymorphed Actor and maybe re-render the original sheet
     const isRendered = this.sheet.rendered;

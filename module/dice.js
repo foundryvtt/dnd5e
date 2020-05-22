@@ -124,7 +124,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     formula: parts.join(" + "),
     data: data,
     rollMode: rollMode,
-    rollModes: CONFIG.rollModes,
+    rollModes: CONFIG.Dice.rollModes,
     config: CONFIG.DND5E
   };
   const html = await renderTemplate(template, dialogData);
@@ -230,7 +230,7 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
     formula: parts.join(" + "),
     data: data,
     rollMode: rollMode,
-    rollModes: CONFIG.rollModes
+    rollModes: CONFIG.Dice.rollModes
   };
   const html = await renderTemplate(template, dialogData);
 

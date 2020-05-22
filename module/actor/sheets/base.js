@@ -252,7 +252,7 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Equipment-specific filters
       if ( filters.has("equipped") ) {
-        if (data.equipped && data.equipped !== true) return false;
+        if ( data.equipped !== true ) return false;
       }
       return true;
     });
