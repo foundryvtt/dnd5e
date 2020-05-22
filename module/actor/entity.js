@@ -42,7 +42,7 @@ export default class Actor5e extends Actor {
     // the original actor for later merging.
     if (this.isPolymorphed) {
       const transformOptions = this.getFlag('dnd5e', 'transformOptions');
-      const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
+      const original = game.actors?.get(this.getFlag('dnd5e', 'originalActor'));
 
       if (original) {
         if (transformOptions.mergeSaves) {
@@ -986,10 +986,11 @@ export default class Actor5e extends Actor {
     const abilities = d.data.abilities;
     for ( let k of Object.keys(abilities) ) {
       const oa = o.data.abilities[k];
+      const prof = abilities[k].proficient;
       if ( keepPhysical && ["str", "dex", "con"].includes(k) ) abilities[k] = oa;
       else if ( keepMental && ["int", "wis", "cha"].includes(k) ) abilities[k] = oa;
       if ( keepSaves ) abilities[k].proficient = oa.proficient;
-      else if ( mergeSaves ) abilities[k].proficient = Math.max(abilities[k].proficient, oa.proficient)
+      else if ( mergeSaves ) abilities[k].proficient = Math.max(prof, oa.proficient);
     }
 
     // Transfer skills
@@ -1036,6 +1037,10 @@ export default class Actor5e extends Actor {
 
     // Update regular Actors by creating a new Actor with the Polymorphed data
     await this.sheet.close();
+    Hooks.callAll('dnd5e.transformActor', this, target, d, {
+      keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
+    });
     const newActor = await this.constructor.create(d, {renderSheet: true});
 
     // Update placed Token instances
