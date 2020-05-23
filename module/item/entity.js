@@ -27,6 +27,10 @@ export default class Item5e extends Item {
       const actorData = this.actor.data.data;
       if ( this.data.type === "spell" ) return actorData.attributes.spellcasting || "int";
       else if ( this.data.type === "tool" ) return "int";
+      else if ( this.data.type === "weapon" && this.data.data.properties.fin === true ) {
+        if ( actorData.abilities["str"].mod >= actorData.abilities["dex"].mod ) return "str";
+        else return "dex";
+      }
       else return "str";
     }
 
