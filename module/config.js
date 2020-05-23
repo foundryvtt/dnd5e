@@ -213,6 +213,7 @@ DND5E.armorProficiencies = {
  */
 DND5E.consumableTypes = {
   "potion": "DND5E.ConsumablePotion",
+  "ammo": "DND5E.WeaponAmmo",
   "poison": "DND5E.ConsumablePoison",
   "food": "DND5E.ConsumableFood",
   "scroll": "DND5E.ConsumableScroll",
@@ -428,8 +429,7 @@ DND5E.weaponTypes = {
   "martialM": "DND5E.WeaponMartialM",
   "martialR": "DND5E.WeaponMartialR",
   "natural": "DND5E.WeaponNatural",
-  "improv": "DND5E.WeaponImprov",
-  "ammo": "DND5E.WeaponAmmo"
+  "improv": "DND5E.WeaponImprov"
 };
 
 

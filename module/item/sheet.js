@@ -68,8 +68,8 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Ammunition
     if ( consume.type === "ammo" ) {
-      return actor.itemTypes.weapon.reduce((ammo, i) =>  {
-        if ( i.data.data.weaponType === "ammo" ) {
+      return actor.itemTypes.consumable.reduce((ammo, i) =>  {
+        if ( i.data.data.consumableType === "ammo" ) {
           ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
         }
         return ammo;
