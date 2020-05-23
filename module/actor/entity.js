@@ -650,8 +650,7 @@ export default class Actor5e extends Actor {
       if ( successes === 3 ) {      // Survival
         await this.update({
           "data.attributes.death.success": 0,
-          "data.attributes.death.failure": 0,
-          "data.attributes.hp.value": 1
+          "data.attributes.death.failure": 0
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveSuccess", {name: this.name}), speaker});
       }
