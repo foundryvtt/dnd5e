@@ -646,8 +646,16 @@ export default class Actor5e extends Actor {
 
     // Save success
     if ( success ) {
-      let successes = (death.success || 0) + (roll.total === 20 ? 2 : 1);
-      if ( successes === 3 ) {      // Survival
+      let successes = (death.success || 0) + 1;
+      
+      if ( roll.total === 20 ) {
+        await this.update({
+          "data.attributes.death.success": 0,
+          "data.attributes.death.failure": 0,
+          "data.attributes.hp.value": 1
+        });
+        await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveCriticalSuccess", {name: this.name}), speaker});
+      } else if ( successes === 3 ) {      // Survival
         await this.update({
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
@@ -656,14 +664,17 @@ export default class Actor5e extends Actor {
       }
       else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
     }
-
     // Save failure
     else {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
-      await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
       if ( failures === 3 ) {       // Death
+        await this.update({
+          "data.attributes.death.success": 0,
+          "data.attributes.death.failure": 0
+        });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveFailure", {name: this.name}), speaker});
       }
+      else await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
     }
 
     // Return the rolled result
