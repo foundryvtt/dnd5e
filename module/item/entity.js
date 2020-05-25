@@ -25,26 +25,28 @@ export default class Item5e extends Item {
     // Case 2 - inferred from a parent actor
     else if (this.actor) {
       const actorData = this.actor.data.data;
+
+      // Spells - Use Actor spellcasting modifier
       if (this.data.type === "spell") return actorData.attributes.spellcasting || "int";
+
+      // Tools - default to Intelligence
       else if (this.data.type === "tool") return "int";
+
+      // Weapons
       else if (this.data.type === "weapon") {
-        //Melee weapons
-        if (itemData.weaponType === "simpleM" || itemData.weaponType === "martialM") {
-          //Finesse weapons use the higher of the user's Strength and Dexterity modifier (PH p.147)
-          if (itemData.properties.fin === true) {
-            if (actorData.abilities["str"].mod >= actorData.abilities["dex"].mod) return "str";
-            else return "dex";
+        const wt = itemData.weaponType;
+
+        // Melee weapons - Str or Dex if Finesse (PHB pg. 147)
+        if ( ["simpleM", "martialM"].includes(wt) ) {
+          if (itemData.properties.fin === true) {   // Finesse weapons
+            return (actorData.abilities["dex"].mod >= actorData.abilities["str"].mod) ? "dex" : "str";
           }
           return "str";
         }
-        //Ranged weapons use the Dexterity modifier (PH p.194)
-        else if (itemData.weaponType === "simpleR" || itemData.weaponType === "martialR") {
-          return "dex";
-        }
-        //All other weapons use the Strength modifier
-        return "str";
+
+        // Ranged weapons - Dex (PH p.194)
+        else if ( ["simpleR", "martialR"].includes(wt) ) return "dex";
       }
-      //Default to Strength if we can't figure it out
       return "str";
     }
 
