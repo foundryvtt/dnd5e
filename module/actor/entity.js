@@ -647,7 +647,8 @@ export default class Actor5e extends Actor {
     // Save success
     if ( success ) {
       let successes = (death.success || 0) + 1;
-      
+
+      // Critical Success = revive with 1hp
       if ( roll.total === 20 ) {
         await this.update({
           "data.attributes.death.success": 0,
@@ -655,25 +656,35 @@ export default class Actor5e extends Actor {
           "data.attributes.hp.value": 1
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveCriticalSuccess", {name: this.name}), speaker});
-      } else if ( successes === 3 ) {      // Survival
+      }
+
+      // 3 Successes = survive and reset checks
+      else if ( successes === 3 ) {
         await this.update({
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveSuccess", {name: this.name}), speaker});
       }
+
+      // Increment successes
       else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
     }
+
     // Save failure
     else {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
-      if ( failures === 3 ) {       // Death
+
+      // 3 Failures = death
+      if ( failures === 3 ) {
         await this.update({
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveFailure", {name: this.name}), speaker});
       }
+
+      // Increment failures
       else await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
     }
 
