@@ -20,18 +20,32 @@ export default class Item5e extends Item {
     if (!("ability" in itemData)) return null;
 
     // Case 1 - defined directly by the item
-    if ( itemData.ability ) return itemData.ability;
+    if (itemData.ability) return itemData.ability;
 
     // Case 2 - inferred from a parent actor
-    else if ( this.actor ) {
+    else if (this.actor) {
       const actorData = this.actor.data.data;
-      if ( this.data.type === "spell" ) return actorData.attributes.spellcasting || "int";
-      else if ( this.data.type === "tool" ) return "int";
-      else if ( this.data.type === "weapon" && this.data.data.properties.fin === true ) {
-        if ( actorData.abilities["str"].mod >= actorData.abilities["dex"].mod ) return "str";
-        else return "dex";
+      if (this.data.type === "spell") return actorData.attributes.spellcasting || "int";
+      else if (this.data.type === "tool") return "int";
+      else if (this.data.type === "weapon") {
+        //Melee weapons
+        if (itemData.weaponType === "simpleM" || itemData.weaponType === "martialM") {
+          //Finesse weapons use the higher of the user's Strength and Dexterity modifier (PH p.147)
+          if (itemData.properties.fin === true) {
+            if (actorData.abilities["str"].mod >= actorData.abilities["dex"].mod) return "str";
+            else return "dex";
+          }
+          return "str";
+        }
+        //Ranged weapons use the Dexterity modifier (PH p.194)
+        else if (itemData.weaponType === "simpleR" || itemData.weaponType === "martialR") {
+          return "dex";
+        }
+        //All other weapons use the Strength modifier
+        return "str";
       }
-      else return "str";
+      //Default to Strength if we can't figure it out
+      return "str";
     }
 
     // Case 3 - unknown
