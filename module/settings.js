@@ -24,7 +24,7 @@ export const registerSystemSettings = function() {
     choices: {
       "555": "SETTINGS.5eDiagPHB",
       "5105": "SETTINGS.5eDiagDMG",
-      "Euclid": "SETTINGS.5eDiagEuclidean",
+      "EUCL": "SETTINGS.5eDiagEuclidean",
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
