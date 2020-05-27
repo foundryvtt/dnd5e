@@ -212,6 +212,7 @@ DND5E.armorProficiencies = {
  * @type {Object}
  */
 DND5E.consumableTypes = {
+  "ammo": "DND5E.ConsumableAmmunition",
   "potion": "DND5E.ConsumablePotion",
   "poison": "DND5E.ConsumablePoison",
   "food": "DND5E.ConsumableFood",
@@ -421,15 +422,18 @@ DND5E.spellScalingModes = {
 
 /* -------------------------------------------- */
 
-// Weapon Types
+
+/**
+ * Define the set of types which a weapon item can take
+ * @type {Object}
+ */
 DND5E.weaponTypes = {
   "simpleM": "DND5E.WeaponSimpleM",
   "simpleR": "DND5E.WeaponSimpleR",
   "martialM": "DND5E.WeaponMartialM",
   "martialR": "DND5E.WeaponMartialR",
   "natural": "DND5E.WeaponNatural",
-  "improv": "DND5E.WeaponImprov",
-  "ammo": "DND5E.WeaponAmmo"
+  "improv": "DND5E.WeaponImprov"
 };
 
 
