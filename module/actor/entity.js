@@ -404,7 +404,7 @@ export default class Actor5e extends Actor {
     const dt = amount > 0 ? Math.min(tmp, amount) : 0;
     return this.update({
       "data.attributes.hp.temp": tmp - dt,  // Deduct damage from temp HP first
-      "data.attributes.hp.value": Math.clamped(hp.value - (amount - dt), 0, hp.max) // Remaining goes to health
+      "data.attributes.hp.value": Math.clamped(hp.value - (amount - dt), 0, hp.max + (parseInt(hp.tempmax) || 0)) // Remaining goes to health
     });
   }
 
