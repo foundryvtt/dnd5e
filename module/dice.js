@@ -200,8 +200,12 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
     // Modify the damage formula for critical hits
     if ( crit === true ) {
       let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
-      let mult = 2;
-      roll.alter(add, mult);
+      roll.alter(add, 2);
+
+      if (data.item.critical) {
+        roll.formula += ` + ${data.item.critical}`;
+      }
+
       flavor = `${flavor} (${game.i18n.localize("DND5E.Critical")})`;
     }
 

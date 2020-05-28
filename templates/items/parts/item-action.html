@@ -70,6 +70,14 @@
 </div>
 {{/if}}
 
+{{!-- Critical Formula --}}
+<div class="form-group">
+    <label>{{ localize "DND5E.Critical" }}</label>
+    <div class="form-fields">
+        <input type="text" name="data.critical" value="{{data.critical}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+    </div>
+</div>
+
 {{!-- Other Formula --}}
 <div class="form-group">
     <label>{{ localize "DND5E.OtherFormula" }}</label>
