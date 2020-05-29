@@ -45,6 +45,10 @@ export default class ShortRestDialog extends Dialog {
     }, {});
     data.canRoll = this.actor.data.data.attributes.hd > 0;
     data.denomination = this._denom;
+    data.newDay = false;
+    if (game.settings.get("dnd5e", "restVariant") === "gritty")
+      data.newDay = true;
+
     return data;
   }
 
@@ -83,21 +87,27 @@ export default class ShortRestDialog extends Dialog {
    * @return {Promise}
    */
   static async shortRestDialog({actor}={}) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
         title: "Short Rest",
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
             label: "Rest",
-            callback: () => resolve(true)
+            callback: html => {
+              let newDay = false;
+              if (game.settings.get("dnd5e", "restVariant") === "gritty")
+                newDay = html.find('input[name="newDay"]')[0].checked;
+              resolve(newDay);
+            }
           },
           cancel: {
             icon: '<i class="fas fa-times"></i>',
             label: "Cancel",
-            callback: () => resolve(false)
+            callback: reject
           }
-        }
+        },
+        close: reject
       });
       dlg.render(true);
     });
