@@ -812,7 +812,8 @@ export default class Actor5e extends Actor {
       dhd: dhd,
       dhp: dhp,
       updateData: updateData,
-      updateItems: updateItems
+      updateItems: updateItems,
+      newDay: newDay
     }
   }
 
@@ -920,7 +921,8 @@ export default class Actor5e extends Actor {
       dhd: dhd,
       dhp: dhp,
       updateData: updateData,
-      updateItems: updateItems
+      updateItems: updateItems,
+      newDay: newDay
     }
   }
 
