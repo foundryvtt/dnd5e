@@ -445,9 +445,9 @@ export default class Actor5e extends Actor {
     }
 
     // Update Actor data
-    if ( usesSlots && consume && (lvl > 0) ) {
+    if ( consume && (lvl > 0) ) {
       await this.update({
-        [`data.spells.${consume}.value`]: Math.max(parseInt(this.data.data.spells[consume].value) - 1, 0)
+        [`data.resources.primary.value`]: Math.max(parseInt(this.data.data.resources.primary.value) - lvl, 0)
       });
     }
 
