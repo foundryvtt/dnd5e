@@ -432,6 +432,8 @@ DND5E.weaponTypes = {
   "simpleR": "DND5E.WeaponSimpleR",
   "martialM": "DND5E.WeaponMartialM",
   "martialR": "DND5E.WeaponMartialR",
+  "simpleL": "DND5E.WeaponSimpleL",
+  "martialL": "DND5E.WeaponMartialL",
   "natural": "DND5E.WeaponNatural",
   "improv": "DND5E.WeaponImprov"
 };

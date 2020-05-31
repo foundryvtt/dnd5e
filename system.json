@@ -1,70 +1,13 @@
 {
-  "name": "dnd5e",
-  "title": "Dungeons & Dragons 5th Edition",
-  "description": "A comprehensive game system for running games of Dungeons & Dragons 5th Edition in the Foundry VTT environment.",
+  "name": "sw5e",
+  "title": "Star Wars 5e",
+  "description": "A comprehensive game system for running games of Star Wars 5th Edition in the Foundry VTT environment.",
   "version": 0.92,
-  "author": "Atropos",
+  "author": "Atropos + Raavi Arda",
   "scripts": [],
   "esmodules": ["dnd5e.js"],
   "styles": ["dnd5e.css"],
-  "packs": [
-    {
-      "name": "heroes",
-      "label": "Starter Heroes",
-      "system": "dnd5e",
-      "path": "./packs/heroes.db",
-      "entity": "Actor"
-    },
-    {
-      "name": "monsters",
-      "label": "Monsters (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/monsters.db",
-      "entity": "Actor"
-    },
-    {
-      "name": "items",
-      "label": "Items (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/items.db",
-      "entity": "Item"
-    },
-    {
-      "name": "tradegoods",
-      "label": "Trade Goods (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/tradegoods.db",
-      "entity": "Item"
-    },
-    {
-      "name": "spells",
-      "label": "Spells (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/spells.db",
-      "entity": "Item"
-    },
-    {
-      "name": "classes",
-      "label": "Classes (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/classes.db",
-      "entity": "Item"
-    },
-    {
-      "name": "classfeatures",
-      "label": "Class Features (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/classfeatures.db",
-      "entity": "Item"
-    },
-    {
-      "name": "monsterfeatures",
-      "label": "Monster Features (SRD)",
-      "system": "dnd5e",
-      "path": "./packs/monsterfeatures.db",
-      "entity": "Item"
-    }
-  ],
+  "packs": [],
   "languages": [
     {
       "lang": "en",
@@ -80,7 +23,7 @@
   "secondaryTokenAttribute": null,
   "minimumCoreVersion": "0.5.6",
   "compatibleCoreVersion": "0.6.1",
-  "url": "https://gitlab.com/foundrynet/dnd5e",
-  "manifest": "https://gitlab.com/foundrynet/dnd5e/raw/master/system.json",
-  "download": "https://gitlab.com/foundrynet/dnd5e/-/archive/release-0.9.2/dnd5e-release-0.9.2.zip"
+  "url": "https://gitlab.com/raavi.arda/sw5e",
+  "manifest": "https://gitlab.com/raavi.arda/sw5e/raw/master/system.json",
+  "download": "https://gitlab.com/raavi.arda/sw5e/-/archive/release-0.9.2/sw5e-release-0.9.2.zip"
 }

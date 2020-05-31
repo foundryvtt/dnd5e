@@ -45,30 +45,20 @@ export default class SpellCastDialog extends Dialog {
       if ( i < lvl ) return arr;
       const l = ad.spells["spell"+i] || {max: 0, override: null};
       let max = parseInt(l.override || l.max || 0);
-      let slots = Math.clamped(parseInt(l.value || 0), 0, max);
+	  let prim = ad.resources.primary.value;
+	  let cost = prim - i;
       if ( max > 0 ) lmax = i;
-      arr.push({
-        level: i,
-        label: i > 0 ? `${CONFIG.DND5E.spellLevels[i]} (${slots} Slots)` : CONFIG.DND5E.spellLevels[i],
-        canCast: canUpcast && (max > 0),
-        hasSlots: slots > 0
-      });
+	  if (cost >= 0)  {
+		  arr.push({
+			level: i,
+			label: i > 0 ? `${CONFIG.DND5E.spellLevels[i]}` : CONFIG.SW5E.spellLevels[i],
+			canCast: canUpcast && (max > 0),
+			hasSlots: cost >= 0
+		  });
+	  }
       return arr;
     }, []).filter(sl => sl.level <= lmax);
 
-    const pact = ad.spells.pact;
-    if (pact.level >= lvl) {
-      // If this character has pact slots, present them as an option for
-      // casting the spell.
-      spellLevels.push({
-        level: 'pact',
-        label: game.i18n.localize('DND5E.SpellLevelPact')
-          + ` (${game.i18n.localize('DND5E.Level')} ${pact.level}) `
-          + `(${pact.value} ${game.i18n.localize('DND5E.Slots')})`,
-        canCast: canUpcast,
-        hasSlots: pact.value > 0
-      });
-    }
     const canCast = spellLevels.some(l => l.hasSlots);
 
     // Render the Spell casting template
