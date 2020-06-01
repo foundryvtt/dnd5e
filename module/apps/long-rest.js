@@ -5,7 +5,6 @@
 export default class LongRestDialog extends Dialog {
   constructor(actor, dialogData = {}, options = {}) {
     super(dialogData, options);
-
     this.actor = actor;
   }
 
@@ -24,10 +23,7 @@ export default class LongRestDialog extends Dialog {
   /** @override */
   getData() {
     const data = super.getData();
-    data.newDay = false;
-    if (game.settings.get("dnd5e", "restVariant") === "normal")
-      data.newDay = true;
-
+    data.newDay = game.settings.get("dnd5e", "restVariant") === "normal";
     return data;
   }
 
