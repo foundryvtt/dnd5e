@@ -1,3 +1,5 @@
+import LongRestDialog from "./long-rest.js";
+
 /**
  * A helper Dialog subclass for rolling Hit Dice on short rest
  * @extends {Dialog}
@@ -45,6 +47,10 @@ export default class ShortRestDialog extends Dialog {
     }, {});
     data.canRoll = this.actor.data.data.attributes.hd > 0;
     data.denomination = this._denom;
+    data.newDay = false;
+    if (game.settings.get("dnd5e", "restVariant") === "gritty")
+      data.newDay = true;
+
     return data;
   }
 
@@ -83,21 +89,27 @@ export default class ShortRestDialog extends Dialog {
    * @return {Promise}
    */
   static async shortRestDialog({actor}={}) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
         title: "Short Rest",
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
             label: "Rest",
-            callback: () => resolve(true)
+            callback: html => {
+              let newDay = false;
+              if (game.settings.get("dnd5e", "restVariant") === "gritty")
+                newDay = html.find('input[name="newDay"]')[0].checked;
+              resolve(newDay);
+            }
           },
           cancel: {
             icon: '<i class="fas fa-times"></i>',
             label: "Cancel",
-            callback: () => resolve(false)
+            callback: reject
           }
-        }
+        },
+        close: reject
       });
       dlg.render(true);
     });
@@ -108,34 +120,12 @@ export default class ShortRestDialog extends Dialog {
   /**
    * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
    * workflow has been resolved.
+   * @deprecated
    * @param {Actor5e} actor
    * @return {Promise}
    */
   static async longRestDialog({actor}={}) {
-    const template = "systems/dnd5e/templates/apps/long-rest.html";
-    const content = await renderTemplate(template);
-    return new Promise((resolve, reject) => {
-      new Dialog({
-        title: "Long Rest",
-        content: content,
-        buttons: {
-          rest: {
-            icon: '<i class="fas fa-bed"></i>',
-            label: "Rest",
-            callback: html => {
-              const newDay = html.find('input[name="newDay"]')[0].checked;
-              resolve(newDay);
-            }
-          },
-          cancel: {
-            icon: '<i class="fas fa-times"></i>',
-            label: "Cancel",
-            callback: reject
-          },
-        },
-        default: 'rest',
-        close: reject
-      }, {classes: ["dnd5e", "dialog"]}).render(true);
-    });
+    console.warn("WARNING! ShortRestDialog.longRestDialog has been deprecated, use LongRestDialog.longRestDialog instead.");
+    return LongRestDialog.longRestDialog(...arguments);
   }
 }
