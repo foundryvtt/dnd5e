@@ -18,6 +18,13 @@
         <p class="notes">{{ localize "DND5E.ShortRestNoHD" }}</p>
         {{/unless}}
     </div>
+    {{#if newDay}}
+    <div class="form-group">
+        <label>Is New Day?</label>
+        <input type="checkbox" name="newDay"/>
+        <p class="hint">Recover limited use abilities which recharge "per day"?</p>
+    </div>
+    {{/if}}
     <div class="dialog-buttons">
         {{#each buttons as |button id|}}
         <button class="dialog-button" data-button="{{id}}">

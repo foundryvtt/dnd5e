@@ -1,5 +1,6 @@
 import { d20Roll, damageRoll } from "../dice.js";
 import ShortRestDialog from "../apps/short-rest.js";
+import LongRestDialog from "../apps/long-rest.js";
 import SpellCastDialog from "../apps/spell-cast-dialog.js";
 import AbilityTemplate from "../pixi/ability-template.js";
 import {DND5E} from '../config.js';
@@ -752,9 +753,13 @@ export default class Actor5e extends Actor {
     const hp0 = data.attributes.hp.value;
 
     // Display a Dialog for rolling hit dice
+    let newDay = false;
     if ( dialog ) {
-      const rested = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
-      if ( !rested ) return;
+      try {
+        newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      } catch(err) {
+        return;
+      }
     }
 
     // Note the change in HP and HD which occurred
@@ -775,7 +780,8 @@ export default class Actor5e extends Actor {
     await this.update(updateData);
 
     // Recover item uses
-    const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
+    const recovery = newDay ? ["sr", "day"] : ["sr"];
+    const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
     const updateItems = items.map(item => {
       return {
         _id: item._id,
@@ -785,13 +791,19 @@ export default class Actor5e extends Actor {
     await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
+    let restFlavor;
+    switch (game.settings.get("dnd5e", "restVariant")) {
+      case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
+      case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
+      case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
+    }
+
     if ( chat ) {
-      let msg = game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp});
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
-        content: msg,
-        type: CONST.CHAT_MESSAGE_TYPES.OTHER
+        flavor: restFlavor,
+        content: game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp})
       });
     }
 
@@ -800,7 +812,8 @@ export default class Actor5e extends Actor {
       dhd: dhd,
       dhp: dhp,
       updateData: updateData,
-      updateItems: updateItems
+      updateItems: updateItems,
+      newDay: newDay
     }
   }
 
@@ -819,7 +832,7 @@ export default class Actor5e extends Actor {
     let newDay = false;
     if ( dialog ) {
       try {
-        newDay = await ShortRestDialog.longRestDialog(this);
+        newDay = await LongRestDialog.longRestDialog(this);
       } catch(err) {
         return;
       }
@@ -887,11 +900,18 @@ export default class Actor5e extends Actor {
     if ( updateItems.length ) await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
+    let restFlavor;
+    switch (game.settings.get("dnd5e", "restVariant")) {
+      case 'normal': restFlavor = game.i18n.localize(newDay ? "DND5E.LongRestOvernight" : "DND5E.LongRestNormal"); break;
+      case 'gritty': restFlavor = game.i18n.localize("DND5E.LongRestGritty"); break;
+      case 'epic':  restFlavor = game.i18n.localize("DND5E.LongRestEpic"); break;
+    }
+
     if ( chat ) {
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
-        flavor: game.i18n.localize(newDay ? "DND5E.OvernightRest" : "DND5E.LongRest"),
+        flavor: restFlavor,
         content: game.i18n.format("DND5E.LongRestResult", {name: this.name, health: dhp, dice: dhd})
       });
     }
@@ -901,7 +921,8 @@ export default class Actor5e extends Actor {
       dhd: dhd,
       dhp: dhp,
       updateData: updateData,
-      updateItems: updateItems
+      updateItems: updateItems,
+      newDay: newDay
     }
   }
 
