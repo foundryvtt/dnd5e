@@ -12,6 +12,23 @@ export const registerSystemSettings = function() {
   });
 
   /**
+   * Register resting variants
+   */
+  game.settings.register("dnd5e", "restVariant", {
+    name: "SETTINGS.5eRestN",
+    hint: "SETTINGS.5eRestL",
+    scope: "world",
+    config: true,
+    default: "normal",
+    type: String,
+    choices: {
+      "normal": "SETTINGS.5eRestPHB",
+      "gritty": "SETTINGS.5eRestGritty",
+      "epic": "SETTINGS.5eRestEpic",
+    }
+  });
+
+  /**
    * Register diagonal movement rule setting
    */
   game.settings.register("dnd5e", "diagonalMovement", {
