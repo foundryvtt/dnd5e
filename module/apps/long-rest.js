@@ -24,7 +24,7 @@ export default class LongRestDialog extends Dialog {
   getData() {
     const data = super.getData();
     const variant = game.settings.get("dnd5e", "restVariant");
-    data.promptNewDay = variant !== "gritty";     // It's always a new day when resting 1 week
+    data.promptNewDay = variant === "normal";     // Only show "New Day" checkbox when resting normally (As it is always a new day when resting for 1 week, and never when resting for an hour).
     data.newDay = variant === "normal";           // It's probably a new day when resting normally (8 hours)
     return data;
   }
