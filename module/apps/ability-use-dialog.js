@@ -26,14 +26,20 @@ export default class AbilityUseDialog extends Dialog {
    */
   static async create(item) {
 
-    const uses = item.data.data.uses || {};
-    const recharge = item.data.data.recharge || {};
+    const itemData = item.data.data;
+    const uses = itemData.uses || {};
+    const quantity = itemData.quantity || 0;
+    const recharge = itemData.recharge || {};
     const recharges = !!recharge.value;
+    const consumable = item.type == "consumable";
 
     // Render the ability usage template
     const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.html", {
       item: item.data,
-      canUse: recharges ? recharge.charged : uses.value > 0,
+      consumable: consumable,
+      useCharges: !!uses.per && (uses.max > 0),
+      lastCharge: uses.value == 1 && quantity > 0,
+      canUse: recharges ? recharge.charged : (quantity > 0 && !uses.value) || uses.value > 0,
       consume: true,
       uses: uses,
       recharges: !!recharge.value,
@@ -46,12 +52,12 @@ export default class AbilityUseDialog extends Dialog {
     return new Promise((resolve) => {
       let formData = null;
       const dlg = new this(item, {
-        title: `${item.name}: Ability Configuration`,
+        title: `${item.name}: Usage Configuration`,
         content: html,
         buttons: {
           use: {
             icon: '<i class="fas fa-fist-raised"></i>',
-            label: "Use Ability",
+            label: "Use",
             callback: html => formData = new FormData(html[0].querySelector("#ability-use-form"))
           }
         },

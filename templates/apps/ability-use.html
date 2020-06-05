@@ -4,8 +4,15 @@
     <p class="notes">
     {{#if recharges}}
     {{ localize "DND5E.AbilityUseRechargeHint" }} <strong>{{#if isCharged}}{{ localize "DND5E.AbilityUseCharged" }}{{else}}{{ localize "DND5E.AbilityUseDepleted" }}{{/if}}</strong>.</p>
+    {{else if consumable}}
+    {{#if useCharges}}
+    {{ localize "DND5E.ConsumableUseWarnStart" }} <strong>{{uses.value}} {{ localize "DND5E.of" }} {{uses.max}}</strong> {{ localize "DND5E.AbilityUseWarnEnd" }} {{perLabel}} {{ localize "DND5E.ConsumableUseWarnEnd" }}. {{#if lastCharge}}{{ localize "DND5E.ConsumableLastChargeWarn" }}.{{/if}}</p>
+    <p class="notes"><strong>{{quantity}}</strong> {{ localize "DND5E.ConsumableUnitWarn" }}.</p>
     {{else}}
-    {{ localize "DND5E.AbilityUseWarnStart" }} <strong>{{uses.value}} {{ localize "DND5E.of" }} {{uses.max}}</strong> {{ localize "DND5E.AbilityUseWarnEnd" }} {{perLabel}}.
+    {{ localize "DND5E.ConsumableUseWarnStart" }} <strong>{{quantity}}</strong> {{ localize "DND5E.ConsumableWithoutCharges" }}.</p>
+    {{/if}}
+    {{else}}
+    {{ localize "DND5E.AbilityUseWarnStart" }} <strong>{{uses.value}} {{ localize "DND5E.of" }} {{uses.max}}</strong> {{ localize "DND5E.AbilityUseWarnEnd" }} {{perLabel}}.</p>
     {{/if}}
     {{#unless canUse}}
     {{ localize "DND5E.AbilityUseCantUse" }}
