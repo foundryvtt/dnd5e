@@ -767,13 +767,10 @@ export default class Item5e extends Item {
 
     // Determine whether to deduct uses of the item
     const uses = itemData.uses || {};
+    const autoDestroy = uses.autoDestroy;
     let usesCharges = !!uses.per && (uses.max > 0);
     const recharge = itemData.recharge || {};
     const usesRecharge = !!recharge.value;
-
-    // If no usages remain, display a warning
-    const current = uses.value || 0;
-    if ( current <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
 
     // Display a configuration dialog to confirm the usage
     let placeTemplate = false;
@@ -787,14 +784,31 @@ export default class Item5e extends Item {
 
     // Update Item data
     if ( consume ) {
+      const current = uses.value || 0;
       const remaining = usesCharges ? Math.max(current - 1, 0) : current;
       if ( usesRecharge ) await this.update({"data.recharge.charged": false});
       else {
-        const q = itemData.quantity || 1;
-        if ( ( remaining === 0 ) && (q > 1) ) {
-          await this.update({"data.quantity": q - 1, "data.uses.value": uses.max || 1});
+        const q = itemData.quantity;
+        // Case 1, reduce charges
+        if ( remaining ) {
+          await this.update({"data.uses.value": remaining});
         }
-        else await this.update({"data.uses.value": remaining});
+        // Case 2, reduce quantity
+        else if ( q > 1 ) {
+          await this.update({"data.quantity": q - 1, "data.uses.value": uses.max || 0});
+        }
+        // Case 3, destroy the item
+        else if ( (q === 1) && autoDestroy ) {
+          await this.actor.deleteOwnedItem(this.id);
+        }
+        // Case 4, reduce item to 0 quantity and 0 charges
+        else if ( (q === 1) ) {
+          await this.update({"data.quantity": q - 1, "data.uses.value": 0});
+        }
+        // Case 5, item unusable, display warning and do nothing
+        else {
+          ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+        }
       }
     }
 

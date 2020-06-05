@@ -427,7 +427,15 @@
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
-      "consumableType": "potion"
+      "consumableType": "potion",
+      "activatedEffect": {
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null,
+          "autoDestroy": false
+        }
+      }
     },
     "equipment": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
