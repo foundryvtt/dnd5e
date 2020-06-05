@@ -52,7 +52,7 @@ export default class ShortRestDialog extends Dialog {
 
     // Determine rest type
     const variant = game.settings.get("dnd5e", "restVariant");
-    data.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute
+    data.promptNewDay = variant === "gritty";   // Only show checkbox when gritty is set (As it is never a new day when resting for 5 min, or for an hour).
     data.newDay = false;                        // It may be a new day, but not by default
     return data;
   }
