@@ -798,7 +798,7 @@ export default class Item5e extends Item {
           await this.update({"data.quantity": q - 1, "data.uses.value": uses.max || 0});
         }
         // Case 3, destroy the item
-        else if ( (q === 1) && autoDestroy ) {
+        else if ( (q <= 1) && autoDestroy ) {
           await this.actor.deleteOwnedItem(this.id);
         }
         // Case 4, reduce item to 0 quantity and 0 charges

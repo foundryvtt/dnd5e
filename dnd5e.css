@@ -724,11 +724,11 @@
   white-space: nowrap;
   overflow-x: hidden;
 }
-.dnd5e.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
-  background-image: url("/icons/svg/d20-black.svg") !important;
-}
 .dnd5e.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
   background-image: url("/icons/svg/d20-grey.svg") !important;
+}
+.dnd5e.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
+  background-image: url("/icons/svg/d20-black.svg") !important;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name i.attuned {
   color: #7a7971;
