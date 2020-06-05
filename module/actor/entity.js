@@ -685,7 +685,7 @@ export default class Actor5e extends Actor {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
 
       // 3 Failures = death
-      if ( failures === 3 ) {
+      if ( failures >= 3 ) {
         await this.update({
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
