@@ -720,7 +720,7 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
     const options = {
-      name: label.getAttribute("for"),
+      name: a.dataset.target,
       title: label.innerText,
       choices: CONFIG.DND5E[a.dataset.options]
     };
