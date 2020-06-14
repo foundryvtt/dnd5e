@@ -420,37 +420,6 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDrop (event) {
-    event.preventDefault();
-
-    // Get dropped data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData('text/plain'));
-    } catch (err) {
-      return false;
-    }
-    if ( !data ) return false;
-
-    // Case 1 - Dropped Item
-    if ( data.type === "Item" ) {
-      return this._onDropItem(event, data);
-    }
-
-    // Case 2 - Dropped Actor
-    if ( data.type === "Actor" ) {
-      return this._onDropActor(event, data);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle dropping an Actor on the sheet to trigger a Polymorph workflow
-   * @param {DragEvent} event   The drop event
-   * @param {Object} data       The data transfer
-   * @private
-   */
   async _onDropActor(event, data) {
     const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('dnd5e', 'allowPolymorphing'));
     if ( !canPolymorph ) return false;
@@ -522,63 +491,17 @@ export default class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Handle dropping of an item reference or item data onto an Actor Sheet
-   * @param {DragEvent} event     The concluding DragEvent which contains drop data
-   * @param {Object} data         The data transfer extracted from the event
-   * @return {Object}             OwnedItem data to create
-   * @private
-   */
-  async _onDropItem(event, data) {
-    if ( !this.actor.owner ) return false;
-    let itemData = await this._getItemDropData(event, data);
+  /** @override */
+  async _onDropItemCreate(itemData) {
 
-    // Handle item sorting within the same Actor
-    const actor = this.actor;
-    let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
-    if (sameActor) return this._onSortItem(event, itemData);
-
-    // Create a spell scroll from a spell item
+    // Create a Consumable spell scroll on the Inventory tab
     if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
       itemData = scroll.data;
     }
 
-    // Create the owned item
-    return this.actor.createEmbeddedEntity("OwnedItem", itemData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * TODO: A temporary shim method until Item.getDropData() is implemented
-   * https://gitlab.com/foundrynet/foundryvtt/-/issues/2866
-   * @private
-   */
-  async _getItemDropData(event, data) {
-    let itemData = null;
-
-    // Case 1 - Import from a Compendium pack
-    if (data.pack) {
-      const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== "Item") return;
-      itemData = await pack.getEntry(data.id);
-    }
-
-    // Case 2 - Data explicitly provided
-    else if (data.data) {
-      itemData = data.data;
-    }
-
-    // Case 3 - Import from World entity
-    else {
-      let item = game.items.get(data.id);
-      if (!item) return;
-      itemData = item.data;
-    }
-
-    // Return a copy of the extracted data
-    return duplicate(itemData);
+    // Create the owned item as normal
+    return super._onDropItemCreate(itemData);
   }
 
   /* -------------------------------------------- */
