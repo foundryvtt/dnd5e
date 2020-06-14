@@ -4,33 +4,79 @@
     <header class="sheet-header flexrow">
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
 
-        <div class="header-details flexrow">
+        <section class="header-details flexrow">
             <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
             </h1>
 
-            <div class="charlevel">
-                <div class="level">
+            <aside class="header-exp flexcol">
+                <div class="cr">
                     <label>{{ localize "DND5E.AbbreviationCR" }}</label>
                     <input name="data.details.cr" type="text" value="{{labels.cr}}" placeholder="1"/>
                 </div>
                 <div class="experience">
                     <span>{{data.details.xp.value}} XP</span>
                 </div>
-            </div>
+            </aside>
 
-            <ul class="summary">
+            {{!-- Character Summary --}}
+            <ul class="summary flexrow">
                 <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{ localize 'DND5E.Type' }}"/>
+                    <span>{{lookup config.actorSizes data.traits.size}}</span>
                 </li>
                 <li>
                     <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
                 </li>
                 <li>
+                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{ localize 'DND5E.Type' }}"/>
+                </li>
+                <li>
                     <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
-        </div>
+
+            {{!-- Header Attributes --}}
+            <ul class="attributes flexrow">
+               <li class="attribute health">
+                    <h4 class="attribute-name box-title rollable">{{ localize "DND5E.Health" }}</h4>
+                    <div class="attribute-value multiple">
+                        <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
+                               data-dtype="Number" placeholder="10"/>
+                        <span class="sep"> / </span>
+                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
+                               data-dtype="Number" placeholder="10"/>
+                    </div>
+                    <footer class="attribute-footer">
+                        <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="{{ localize 'DND5E.HealthFormula' }}"
+                               value="{{data.attributes.hp.formula}}"/>
+                    </footer>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
+                               data-dtype="Number" placeholder="10"/>
+                    </div>
+                    <footer class="attribute-footer">
+                        <span>{{ localize "DND5E.Proficiency" }}</span>
+                        <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                    </footer>
+                </li>
+
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{ localize "DND5E.Speed" }}</h4>
+                    <div class="attribute-value">
+                        <input name="data.attributes.speed.value" type="text"
+                               value="{{data.attributes.speed.value}}" placeholder="0"/>
+                    </div>
+                    <footer class="attribute-footer">
+                        <input type="text" class="speed" name="data.attributes.speed.special"
+                               value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
+                    </footer>
+                </li>
+            </ul>
+        </section>
     </header>
 
     {{!-- NPC Sheet Navigation --}}
@@ -76,48 +122,6 @@
             </ul>
 
             <section class="center-pane">
-
-                {{!-- Attributes --}}
-                <ul class="attributes flexrow">
-                    <li class="attribute health">
-                        <h4 class="attribute-name box-title rollable">{{ localize "DND5E.Health" }}</h4>
-                        <div class="attribute-value multiple">
-                            <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
-                                   data-dtype="Number" placeholder="10"/>
-                            <span class="sep"> / </span>
-                            <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                                   data-dtype="Number" placeholder="10"/>
-                        </div>
-                        <footer class="attribute-footer">
-                            <input name="data.attributes.hp.formula" class="hpformula" type="text" placeholder="{{ localize 'DND5E.HealthFormula' }}"
-                                   value="{{data.attributes.hp.formula}}"/>
-                        </footer>
-                    </li>
-
-                    <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
-                        <div class="attribute-value">
-                            <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
-                                   data-dtype="Number" placeholder="10"/>
-                        </div>
-                        <footer class="attribute-footer">
-                            <span>{{ localize "DND5E.Proficiency" }}</span>
-                            <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
-                        </footer>
-                    </li>
-
-                    <li class="attribute">
-                        <h4 class="attribute-name box-title">{{ localize "DND5E.Speed" }}</h4>
-                        <div class="attribute-value">
-                            <input name="data.attributes.speed.value" type="text"
-                                   value="{{data.attributes.speed.value}}" placeholder="0"/>
-                        </div>
-                        <footer class="attribute-footer">
-                            <input type="text" class="speed" name="data.attributes.speed.special"
-                                   value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
-                        </footer>
-                    </li>
-                </ul>
 
                 {{!-- Legendary Actions --}}
                 <div class="counters flexrow">

@@ -236,6 +236,15 @@
   text-shadow: 0 0 10px red;
   cursor: pointer;
 }
+.dnd5e.sheet span.sep {
+  flex: none;
+  margin: 0 1px;
+  display: inline;
+  position: relative;
+  top: 2px;
+  font-size: 28px;
+  color: #7a7971;
+}
 .dnd5e.sheet .editor {
   height: 100%;
 }
@@ -260,8 +269,10 @@
   padding: 5px;
 }
 .dnd5e.sheet .sheet-header h1 input {
+  display: block;
   height: 50px;
-  font-size: 36px;
+  font-size: 32px;
+  margin: 0;
 }
 .dnd5e.sheet .sheet-header img.profile {
   flex: 0 0 100px;
@@ -281,11 +292,10 @@
   border-bottom: none;
 }
 .dnd5e.sheet .sheet-header .summary li {
-  width: 33.33%;
+  height: calc(100% - 6px);
   float: left;
-  height: 34px;
   margin: 2px 0;
-  padding: 0 3px;
+  padding: 0;
   border-right: 2px groove #eeede0;
   line-height: 34px;
   color: #4b4a44;
@@ -393,94 +403,99 @@
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
 }
-.dnd5e.sheet.actor .sheet-header .charlevel {
+.dnd5e.sheet.actor .sheet-header img.profile {
   flex: 0 0 160px;
+  max-width: 160px;
+  height: 160px;
+}
+.dnd5e.sheet.actor .sheet-header h1.charname {
+  flex: 1;
   height: 60px;
-  margin: 0;
-  padding: 5px;
+  padding: 0;
+}
+.dnd5e.sheet.actor .sheet-header h1.charname input {
+  height: 40px;
+  margin: 10px 0;
+}
+.dnd5e.sheet.actor .sheet-header .header-exp {
+  flex: 0 0 150px;
+  height: 60px;
+  justify-content: flex-end;
   text-align: right;
 }
-.dnd5e.sheet.actor .sheet-header .charlevel .level {
-  width: 100%;
+.dnd5e.sheet.actor .sheet-header .summary {
   height: 30px;
-  font-size: 20px;
+  border-bottom: 2px groove #eeede0;
+  font-size: 18px;
+}
+.dnd5e.sheet.actor .sheet-header .summary input,
+.dnd5e.sheet.actor .sheet-header .summary span {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+}
+.dnd5e.sheet.actor .sheet-header .attributes {
+  flex: 0 0 100%;
+  margin: 0;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .attribute {
+  height: 70px;
+  margin: 0;
+  border: none;
+  border-right: 2px groove #eeede0;
+  border-radius: 0;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .attribute:last-child {
+  border-right: none;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .attribute .attribute-value {
+  height: 30px;
   line-height: 30px;
-}
-.dnd5e.sheet.actor .sheet-header .charlevel .level label {
-  display: inline;
-  font-size: 24px;
-  text-align: right;
-}
-.dnd5e.sheet.actor .sheet-header .charlevel .level input {
-  display: inline;
-  width: 36px;
-  font-size: 24px;
-  text-align: center;
-}
-.dnd5e.sheet.actor .sheet-header .charlevel .level.noxp {
-  margin-top: 10px;
-}
-.dnd5e.sheet.actor .sheet-header .charlevel .level.noxp > label {
-  font-size: 32px;
-}
-.dnd5e.sheet.actor .sheet-header .charlevel .level.noxp > input {
-  font-size: 32px;
-  flex: 0 0 40px;
-  height: 44px;
-}
-.dnd5e.sheet.actor .sheet-header .charlevel .experience {
-  width: 100%;
-  height: 20px;
-  padding-right: 5px;
-  font-size: 16px;
-  color: #4b4a44;
 }
 .dnd5e.sheet.actor .attributes input.temphp {
   width: 48%;
 }
 .dnd5e.sheet.actor h4.box-title {
+  height: 18px;
   line-height: 16px;
   margin: 4px 8px 2px;
   font-size: 18px;
-  border-bottom: 1px solid #b5b3a4;
+  color: #4b4a44;
+  border-bottom: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.actor ul.attributes {
+  flex: 0 0 60px;
   list-style: none;
-  margin: 5px 0 0;
+  margin: 0;
   padding: 0;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute {
-  height: 70px;
-  margin: 0 5px;
+  height: 60px;
+  margin: 0 5px 0 0;
   border: 2px groove #eeede0;
   border-radius: 4px;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 20px;
   text-align: center;
 }
-.dnd5e.sheet.actor ul.attributes li.attribute .attribute-name {
-  flex: 0 0 18px;
-}
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 28px;
   line-height: 28px;
+}
+.dnd5e.sheet.actor ul.attributes li.attribute .attribute-value > * {
+  font-size: 24px;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value input {
   display: inline;
   max-width: 80%;
   height: 28px;
   margin: 0;
-  font-size: 24px;
-}
-.dnd5e.sheet.actor ul.attributes li.attribute .attribute-value span.sep {
-  display: inline;
-  position: relative;
-  top: 2px;
-  font-size: 28px;
-  color: #7a7971;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
-  max-width: 33%;
+  flex: 0 0 33%;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-footer {
   flex: 0 0 18px;
@@ -490,20 +505,24 @@
   font-size: 12px;
 }
 .dnd5e.sheet.actor .ability-scores {
-  flex: 0 0 100%;
+  flex: 0 0 100px;
   list-style: none;
   margin: 0;
   padding: 0;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
   font-size: 20px;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
 }
 .dnd5e.sheet.actor .ability-scores .ability {
   height: 70px;
-  margin: 0 5px;
   text-align: center;
-  border: 2px groove #eeede0;
-  border-radius: 3px;
+  border-bottom: 2px groove #eeede0;
   /* Hide modifier box on hover */
+}
+.dnd5e.sheet.actor .ability-scores .ability:last-child {
+  border-bottom: none;
+  margin-bottom: -2px;
 }
 .dnd5e.sheet.actor .ability-scores .ability input.ability-score {
   height: 30px;
@@ -547,16 +566,19 @@
   cursor: default;
 }
 .dnd5e.sheet.actor ul.skills-list {
-  flex: 0 0 192px;
+  flex: 0 0 180px;
   list-style: none;
-  margin: 5px 5px 0;
-  padding: 2px 2px 0;
+  margin: 0 5px 0;
+  padding: 0;
   border: 2px groove #eeede0;
   border-radius: 3px;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill {
-  height: 22px;
+  height: 24px;
   padding: 3px 0;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill:nth-child(even) {
+  background: rgba(0, 0, 0, 0.05);
 }
 .dnd5e.sheet.actor ul.skills-list li.skill h4 {
   flex: 1px;
@@ -580,23 +602,25 @@
   color: #7a7971;
 }
 .dnd5e.sheet.actor .counters {
-  flex: 0 0 100%;
+  flex: none;
+  padding: 5px 0;
+  margin: 0;
   border-bottom: 2px groove #eeede0;
-  margin-bottom: 5px;
 }
 .dnd5e.sheet.actor .counters .counter {
   padding: 0 3px;
-  line-height: 28px;
+  height: 20px;
+  line-height: 20px;
 }
 .dnd5e.sheet.actor .counters .counter h4 {
   flex: auto;
   margin: 0;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
-  font-size: 20px;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #4b4a44;
 }
 .dnd5e.sheet.actor .counters .counter .counter-value {
-  flex: 0 0 50px;
+  flex: none;
   text-align: right;
 }
 .dnd5e.sheet.actor .counters .counter .counter-value > * {
@@ -621,7 +645,7 @@
   font-size: 12px;
 }
 .dnd5e.sheet.actor .traits {
-  margin: 0 5px;
+  margin: 5px;
 }
 .dnd5e.sheet.actor .traits .form-group,
 .dnd5e.sheet.actor .traits .form-group-stacked {
@@ -1151,8 +1175,8 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .dnd5e.sheet.actor.character {
-  min-width: 672px;
-  min-height: 736px;
+  min-width: 720px;
+  min-height: 680px;
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -1168,28 +1192,36 @@
   /* ----------------------------------------- */
 }
 .dnd5e.sheet.actor.character .sheet-header img.profile {
-  flex: 0 0 180px;
-  max-width: 180px;
-  height: 180px;
+  flex: 0 0 160px;
+  max-width: 160px;
+  height: 160px;
 }
 .dnd5e.sheet.actor.character .sheet-header .charlevel {
-  flex: 0 0 180px;
-  padding: 0 5px 2px;
+  flex: 0 0 20px;
+  height: 20px;
+  font-size: 18px;
+  color: #7a7971;
 }
-.dnd5e.sheet.actor.character .sheet-header .charlevel .level {
-  height: 28px;
+.dnd5e.sheet.actor.character .sheet-header .experience {
+  flex: 0 0 32px;
+  margin-bottom: -5px;
+  align-items: center;
+  font-size: 18px;
 }
-.dnd5e.sheet.actor.character .sheet-header .charlevel .experience input[type="text"] {
-  width: 100px;
+.dnd5e.sheet.actor.character .sheet-header .experience span.max {
+  color: #7a7971;
+  flex: none;
+  margin-left: 3px;
 }
-.dnd5e.sheet.actor.character .sheet-header .charlevel .xpbar {
-  width: 100%;
+.dnd5e.sheet.actor.character .sheet-header .xpbar {
   flex: 0 0 8px;
-  background: #666;
+  width: 100%;
+  margin-bottom: 5px;
+  background: #7a7971;
   border: 1px solid #000;
   border-radius: 3px;
 }
-.dnd5e.sheet.actor.character .sheet-header .charlevel .xpbar .bar {
+.dnd5e.sheet.actor.character .sheet-header .xpbar .bar {
   height: 4px;
   margin: 1px;
   display: block;
@@ -1197,63 +1229,34 @@
   border: 1px solid #000;
   border-radius: 2px;
 }
-.dnd5e.sheet.actor.character .sheet-header .summary {
-  border-bottom: 2px groove #eeede0;
-}
-.dnd5e.sheet.actor.character .sheet-header .attributes {
-  height: 80px;
-  margin: 0;
-}
-.dnd5e.sheet.actor.character .sheet-header .attributes .attribute {
-  height: 80px;
-  margin: 0;
-  border: none;
-  border-right: 2px groove #eeede0;
-  border-radius: 0;
-}
-.dnd5e.sheet.actor.character .sheet-header .attributes .attribute:last-child {
-  border-right: none;
-}
-.dnd5e.sheet.actor.character .sheet-header .attributes .attribute .attribute-value {
-  margin: 5px 0 0;
-  height: 32px;
-  line-height: 32px;
-}
-.dnd5e.sheet.actor.character .sheet-header .attributes .attribute .attribute-name {
-  margin-top: 6px;
-}
-.dnd5e.sheet.actor.character .sheet-header .attributes .attribute .attribute-footer {
-  margin-bottom: 2px;
-}
 .dnd5e.sheet.actor.character .sheet-header .attributes a.rest {
   border: 1px solid #b5b3a4;
   border-radius: 2px;
   background: rgba(0, 0, 0, 0.05);
-  padding: 1px 3px;
-  margin: 0 6px;
+  padding: 0 3px;
+  margin: 0 3px;
 }
 .dnd5e.sheet.actor.character .sheet-header .attributes .hit-dice {
   font-size: 24px;
 }
-.dnd5e.sheet.actor.character .attributes .resource .attribute-name {
-  margin: 0 8px;
-}
-.dnd5e.sheet.actor.character .attributes .resource .attribute-name input[type="text"] {
-  height: 20px;
-  margin: 2px 0 -2px;
-  line-height: 24px;
-}
-.dnd5e.sheet.actor.character .attributes .resource label.checkbox {
-  margin: 0 3px;
-}
-.dnd5e.sheet.actor.character .attributes .resource label.checkbox input[type="checkbox"] {
-  height: 16px;
-  width: 16px;
-  margin: 0;
-  top: 3px;
-}
-.dnd5e.sheet.actor.character .attributes .initiative .attribute-footer input {
+.dnd5e.sheet.actor.character .sheet-header .attributes .initiative .attribute-footer input {
   width: 32px;
+}
+.dnd5e.sheet.actor.character .resource .attribute-value input {
+  flex: 0 0 25%;
+}
+.dnd5e.sheet.actor.character .resource .attribute-value label.recharge {
+  height: 32px;
+  position: relative;
+  font-size: 13px;
+  text-align: center;
+  color: #4b4a44;
+}
+.dnd5e.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {
+  height: 14px;
+  width: 14px;
+  margin: 0;
+  top: -6px;
 }
 .dnd5e.sheet.actor.character ul.skills-list {
   flex: 0 0 212px;
@@ -1265,12 +1268,6 @@
   flex: 1px;
   margin: 0;
   font-size: 13px;
-}
-.dnd5e.sheet.actor.character .counters .death-saves {
-  flex: 2;
-}
-.dnd5e.sheet.actor.character .counters .death-saves .counter-value {
-  flex: 0 0 90px;
 }
 .dnd5e.sheet.actor.character .item-detail.player-class {
   flex: 0 0 180px;
@@ -1364,4 +1361,27 @@
 .dnd5e.sheet.actor.npc {
   min-width: 600px;
   min-height: 658px;
+}
+.dnd5e.sheet.actor.npc .header-exp {
+  flex: 0 0 80px;
+  justify-content: center;
+}
+.dnd5e.sheet.actor.npc .header-exp .cr {
+  flex: 0 0 32px;
+  line-height: 28px;
+  margin-bottom: -5px;
+  font-size: 24px;
+}
+.dnd5e.sheet.actor.npc .header-exp .cr input {
+  width: 32px;
+  padding: 0;
+  text-align: center;
+}
+.dnd5e.sheet.actor.npc .header-exp .experience {
+  flex: 0 0 18px;
+  color: #7a7971;
+  font-size: 16px;
+}
+.dnd5e.sheet.actor.npc .summary {
+  font-size: 18px;
 }

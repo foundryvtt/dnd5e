@@ -6,4 +6,30 @@
 .dnd5e.sheet.actor.npc {
   min-width: 600px;
   min-height: 658px;
+
+  .header-exp {
+    flex: 0 0 80px;
+    justify-content: center;
+    .cr {
+      flex: 0 0 32px;
+      line-height: 28px;
+      margin-bottom: -5px;
+      font-size: 24px;
+      input {
+        width: 32px;
+        padding: 0;
+        text-align: center;
+      }
+    }
+    .experience {
+      flex: 0 0 18px;
+      color: @colorTan;
+      font-size: 16px;
+    }
+  }
+
+  .summary {
+    font-size: 18px;
+  }
+
 }

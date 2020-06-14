@@ -1,58 +1,72 @@
 @import "./variables.less";
+
+@actorNameHeight: 60px;
+
 .dnd5e.sheet.actor {
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
-
   .sheet-header {
-    .charlevel {
+
+    // Portrait Artwork
+    img.profile {
       flex: 0 0 160px;
-      height: 60px;
-      margin: 0;
-      padding: 5px;
-      text-align: right;
+      max-width: 160px;
+      height: 160px;
+    }
 
-      .level {
-        width: 100%;
-        height: 30px;
-        font-size: 20px;
-        line-height: 30px;
-
-        label {
-          display: inline;
-          font-size: 24px;
-          text-align: right;
-        }
-
-        input {
-          display: inline;
-          width: 36px;
-          font-size: 24px;
-          text-align: center;
-        }
-
-        // If the Experience Bar is disabled
-        &.noxp {
-          margin-top: 10px;
-          > label {
-            font-size: 32px;
-          }
-          > input {
-            font-size: 32px;
-            flex: 0 0 40px;
-            height: 44px;
-          }
-        }
-
+    // Character Name
+    h1.charname {
+      flex: 1;
+      height: @actorNameHeight;
+      padding: 0;
+      input {
+        height: @actorNameHeight - 20px;
+        margin: 10px 0;
       }
+    }
 
-      .experience {
-        width: 100%;
-        height: 20px;
-        padding-right: 5px;
-        font-size: 16px;
-        color: @colorOlive;
+    // Character Level
+    .header-exp {
+      flex: 0 0 150px;
+      height: @actorNameHeight;
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    // Character Summary
+    .summary {
+      height: 30px;
+      border-bottom: @borderGroove;
+      font-size: 18px;
+      input, span {
+        display: block;
+        height: 24px;
+        line-height: 24px;
+      }
+    }
+
+    // Primary Attributes
+    .attributes {
+      flex: 0 0 100%;
+      margin: 0;
+
+      .attribute {
+        height: 70px;
+        margin: 0;
+        border: none;
+        border-right: @borderGroove;
+        border-radius: 0;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        .attribute-value {
+          height: 30px;
+          line-height: 30px;
+        }
       }
     }
   }
@@ -69,10 +83,12 @@
 
   // Box Headers
   h4.box-title {
+    height: 18px;
     line-height: 16px;
     margin: 4px 8px 2px;
     font-size: 18px;
-    border-bottom: 1px solid @colorBeige;
+    color: @colorOlive;
+    border-bottom: 1px solid @colorFaint;
   }
 
   /* ----------------------------------------- */
@@ -80,44 +96,39 @@
   /* ----------------------------------------- */
 
   ul.attributes {
+    flex: 0 0 60px;
     list-style: none;
-    margin: 5px 0 0;
+    margin: 0;
     padding: 0;
 
     li.attribute {
-      height: 70px;
-      margin: 0 5px;
+      height: 60px;
+      margin: 0 5px 0 0;
       border: @borderGroove;
       border-radius: 4px;
       .nodesto();
       text-align: center;
 
-      .attribute-name {
-        flex: 0 0 18px;
-      }
-
       .attribute-value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 28px;
         line-height: 28px;
+
+        > * {
+          font-size: 24px;
+        }
 
         input {
           display: inline;
           max-width: 80%;
           height: 28px;
           margin: 0;
-          font-size: 24px;
         }
 
-        span.sep {
-          display: inline;
-          position: relative;
-          top: 2px;
-          font-size: 28px;
-          color: @colorTan;
-        }
-
-        &.multiple {
-          input { max-width: 33%; }
+        &.multiple input {
+          flex: 0 0 33%;
         }
       }
 
@@ -136,18 +147,22 @@
   /* ----------------------------------------- */
 
   .ability-scores {
-    flex: 0 0 100%;
+    flex: 0 0 100px;
     list-style: none;
     margin: 0;
     padding: 0;
     .nodesto();
+    border: @borderGroove;
+    border-radius: 3px;
 
     .ability {
       height: 70px;
-      margin: 0 5px;
       text-align: center;
-      border: @borderGroove;
-      border-radius: 3px;
+      border-bottom: @borderGroove;
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: -2px;
+      }
 
       input.ability-score {
         height: 30px;
@@ -209,16 +224,20 @@
   /* ----------------------------------------- */
 
   ul.skills-list {
-    flex: 0 0 192px;
+    flex: 0 0 180px;
     list-style: none;
-    margin: 5px 5px 0;
-    padding: 2px 2px 0;
+    margin: 0 5px 0;
+    padding: 0;
     border: @borderGroove;
     border-radius: 3px;
 
     li.skill {
-      height: 22px;
+      height: 24px;
       padding: 3px 0;
+
+      &:nth-child(even) {
+        background: rgba(0, 0, 0, 0.05);
+      }
 
       h4 {
         flex: 1px;
@@ -253,23 +272,26 @@
   /* ----------------------------------------- */
 
   .counters {
-    flex: 0 0 100%;
+    flex: none;
+    padding: 5px 0;
+    margin: 0;
     border-bottom: @borderGroove;
-    margin-bottom: 5px;
 
     .counter {
       padding: 0 3px;
-      line-height: 28px;
+      height: 20px;
+      line-height: 20px;
 
       h4 {
         flex: auto;
         margin: 0;
-        .nodesto();
-        font-size: 14px;
+        font-size: 13px;
+        font-weight: bold;
+        color: @colorOlive;
       }
 
       .counter-value {
-        flex: 0 0 50px;
+        flex: none;
         text-align: right;
         > * {
           display: inline;
@@ -304,7 +326,7 @@
   /* ----------------------------------------- */
 
   .traits {
-    margin: 0 5px;
+    margin: 5px;
 
     .form-group, .form-group-stacked {
       margin: 0 0 3px 0;

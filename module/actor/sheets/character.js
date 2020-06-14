@@ -14,8 +14,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "character"],
-      width: 672,
-      height: 736
+      width: 720,
+      height: 680
     });
   }
 
@@ -57,6 +57,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Experience Tracking
     sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
+    sheetData["classLabels"] = this.actor.itemTypes.class.map(c => c.name).join(", ");
 
     // Return data for rendering
     return sheetData;
