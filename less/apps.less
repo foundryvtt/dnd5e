@@ -12,7 +12,7 @@
   .window-content {
     background: @sheetBackground;
     font-size: 13px;
-    color: @colorDark
+    color: @colorDark;
   }
 
   /* ----------------------------------------- */
@@ -181,9 +181,8 @@
     margin: 0 1px;
     display: inline;
     position: relative;
-    top: 2px;
-    font-size: 28px;
     color: @colorTan;
+    font-weight: normal;
   }
 
   /* ----------------------------------------- */
@@ -298,17 +297,24 @@
     margin: 0;
     padding: 0;
     line-height: 16px;
+    max-width: 70%;
 
-    .filter-title {
-      flex: 3;
+    .filter-icon {
+      flex: none;
+      font-size: 14px;
+      color: @colorTan;
     }
 
     .filter-item {
       text-align: center;
       font-size: 12px;
-      margin: 0 6px;
+      margin: 0 6px 0 0;
       border-bottom: 3px solid @colorBeige;
       white-space: nowrap;
+
+      &:last-child {
+        margin: 0;
+      }
 
       &:hover {
         text-shadow: 0 0 4px red;
@@ -325,19 +331,23 @@
   /*  Trait Lists                              */
   /* ----------------------------------------- */
 
-  .trait-selector {
-    flex: 0 0 16px;
-    padding: 2px 0;
-    color: #999;
-    font-size: 10px;
-  }
+  .traits {
+    margin: 5px 0 0;
 
-  .traits-list {
-    line-height: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: right;
+    .trait-selector {
+      flex: 0 0 16px;
+      padding: 2px 0;
+      color: #999;
+      font-size: 10px;
+    }
+
+    .traits-list {
+      flex: 0 0 100%;
+      line-height: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 }
 

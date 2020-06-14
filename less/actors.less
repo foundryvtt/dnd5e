@@ -30,6 +30,7 @@
     // Character Level
     .header-exp {
       flex: 0 0 150px;
+      margin-right: 3px;
       height: @actorNameHeight;
       justify-content: flex-end;
       text-align: right;
@@ -95,6 +96,10 @@
   /*  Attributes                               */
   /* ----------------------------------------- */
 
+  .tab.attributes {
+    overflow: hidden;
+  }
+
   ul.attributes {
     flex: 0 0 60px;
     list-style: none;
@@ -109,6 +114,10 @@
       .nodesto();
       text-align: center;
 
+      &:last-child {
+        margin: 0;
+      }
+
       .attribute-value {
         display: flex;
         justify-content: center;
@@ -118,13 +127,6 @@
 
         > * {
           font-size: 24px;
-        }
-
-        input {
-          display: inline;
-          max-width: 80%;
-          height: 28px;
-          margin: 0;
         }
 
         &.multiple input {
@@ -148,6 +150,7 @@
 
   .ability-scores {
     flex: 0 0 100px;
+    height: 440px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -159,14 +162,15 @@
       height: 70px;
       text-align: center;
       border-bottom: @borderGroove;
+
       &:last-child {
         border-bottom: none;
-        margin-bottom: -2px;
+        margin-bottom: -3px;
       }
 
       input.ability-score {
         height: 30px;
-        width: 50px;
+        width: 36px;
         margin: 0 auto;
         line-height: 32px;
         font-size: 24px;
@@ -174,12 +178,14 @@
 
       .ability-modifiers {
         height: 24px;
-        margin: -10px 0 0;
+        margin: -8px 0 0;
 
         span.ability-mod,
         span.ability-save {
           flex: 0 0 24px;
-          height: 24px;
+          height: 22px;
+          line-height: 22px;
+          font-size: 16px;
           border-top: @borderGroove;
         }
 
@@ -194,12 +200,6 @@
         span.ability-save {
           border-left: @borderGroove;
         }
-      }
-
-      /* Hide modifier box on hover */
-
-      input.ability-score:hover + .ability-modifiers {
-        visibility: hidden;
       }
     }
   }
@@ -225,15 +225,16 @@
 
   ul.skills-list {
     flex: 0 0 180px;
+    height: 440px;
     list-style: none;
     margin: 0 5px 0;
-    padding: 0;
+    padding: 3px 0 2px;
     border: @borderGroove;
     border-radius: 3px;
 
     li.skill {
       height: 24px;
-      padding: 3px 0;
+      padding: 3px 2px;
 
       &:nth-child(even) {
         background: rgba(0, 0, 0, 0.05);
@@ -278,7 +279,6 @@
     border-bottom: @borderGroove;
 
     .counter {
-      padding: 0 3px;
       height: 20px;
       line-height: 20px;
 
@@ -315,7 +315,6 @@
       }
 
       span.sep {
-        margin: 0 -2px;
         font-size: 12px;
       }
     }
@@ -325,27 +324,31 @@
   /*  Traits                                   */
   /* ----------------------------------------- */
 
-  .traits {
-    margin: 5px;
+  .center-pane {
+    height: 100%;
+    padding: 0 5px 0 3px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
 
+  .traits {
     .form-group, .form-group-stacked {
       margin: 0 0 3px 0;
       justify-content: space-between;
     }
-
     .configure-flags {
       flex: 1;
     }
 
-    .actor-size {
-      flex: 0 0 150px;
-    }
-
     label {
-      flex: 0 0 150px;
+      flex: none;
       line-height: 20px;
       font-weight: bold;
-      margin: 0;
+      margin: 0 10px 0 0;
+    }
+
+    select {
+      max-width: 200px;
     }
 
     input {
@@ -383,18 +386,10 @@
   .inventory-filters {
     margin: 0 8px;
     flex: 0 0 20px;
-    h3, .filter-title {
-      .nodesto();
-      color: @colorOlive;
-      font-size: 18px;
-      margin: 0;
-    }
-
-    &.spellbook-filters {
-      flex: 0 0 40px;
-    }
+    justify-content: flex-end;
 
     .currency {
+      flex: 0 0 100%;
       list-style: none;
       margin: 4px 0 8px;
       padding: 0;
@@ -421,6 +416,7 @@
     margin: 0;
     padding: 0 5px;
     overflow-y: auto;
+    scrollbar-width: thin;
 
     // Inventory Item
     .item {
@@ -508,6 +504,10 @@
       color: @colorTan;
       text-align: center;
       border-right: 1px solid @colorFaint;
+      word-break: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+
       &:last-child { border-right: none; }
       &.item-action {flex: 0 0 100px}
     }
@@ -553,10 +553,9 @@
   /* ----------------------------------------- */
 
   .spellcasting-ability {
-    h3 {
-      flex: none;
-      margin-right: 5px;
-    }
+    flex: 0 0 240px;
+    margin: 0;
+
     input, span {
       flex: 0 0 32px;
       text-align: center;
@@ -582,10 +581,13 @@
   }
 
   .spell-slots {
-    input, span.sep {
+    input {
       display: inline;
       max-width: 20px;
-      text-align: center;
+    }
+    .sep {
+      font-size: 13px;
+      font-weight: normal;
     }
   }
 

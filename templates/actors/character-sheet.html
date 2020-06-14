@@ -39,6 +39,9 @@
                 <li>
                     <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
                 </li>
+                <li class="proficiency">
+                    <span>{{ localize "DND5E.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                </li>
             </ul>
 
             {{!-- Header Attributes --}}
@@ -63,7 +66,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitDice" }}</h4>
                     <div class="attribute-value multiple">
-                        <label class="hit-dice">{{data.attributes.hd}} / {{data.details.level}}</label>
+                        <label class="hit-dice">{{data.attributes.hd}} <span class="sep"> / </span> {{data.details.level}}</label>
                     </div>
                     <footer class="attribute-footer">
                         <a class="rest short-rest">{{ localize "DND5E.RestS" }}</a>
@@ -78,8 +81,7 @@
                                data-dtype="Number" placeholder="10"/>
                     </div>
                     <footer class="attribute-footer">
-                        <span>{{ localize "DND5E.Proficiency" }}</span>
-                        <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                        <span class="spell-dc">{{localize "DND5E.SpellDC"}} {{data.attributes.spelldc}}</span>
                     </footer>
                 </li>
 

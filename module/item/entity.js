@@ -1057,7 +1057,7 @@ export default class Item5e extends Item {
 
     // Get spell data
     const itemData = spell instanceof Item5e ? spell.data : spell;
-    const {description, source, activation, duration, target, range, damage, save, level} = itemData.data;
+    const {actionType, description, source, activation, duration, target, range, damage, save, level} = itemData.data;
 
     // Get scroll data
     const scrollUuid = CONFIG.DND5E.spellScrollIds[level];
@@ -1082,6 +1082,7 @@ export default class Item5e extends Item {
       data: {
         "description.value": desc.trim(),
         source,
+        actionType,
         activation,
         duration,
         target,

@@ -58,8 +58,8 @@ export default class Actor5e extends Actor {
 
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
-    const saveBonus = parseInt(bonuses.save || 0);
-    const checkBonus = parseInt(bonuses.check || 0);
+    const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
+    const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
     for (let [id, abl] of Object.entries(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
@@ -78,7 +78,7 @@ export default class Actor5e extends Actor {
     const athlete = flags.remarkableAthlete;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
-    const skillBonus = parseInt(bonuses.skill || 0);
+    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     let round = Math.floor;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
@@ -291,7 +291,8 @@ export default class Actor5e extends Actor {
    */
   getSpellDC(ability) {
     const actorData = this.data.data;
-    const bonus = parseInt(getProperty(actorData, "bonuses.spell.dc")) || 0;
+    let bonus = getProperty(actorData, "bonuses.spell.dc");
+    bonus = Number.isNumeric(bonus) ? parseInt(bonus) : 0;
     ability = actorData.abilities[ability];
     const prof = actorData.attributes.prof;
     return 8 + (ability ? ability.mod : 0) + prof + bonus;
@@ -436,7 +437,7 @@ export default class Actor5e extends Actor {
     let placeTemplate = false;
 
     // Configure spell slot consumption and measured template placement from the form
-    if ( usesSlots && configureDialog ) {
+    if ( configureDialog && (usesSlots || item.hasAreaTarget || limitedUses) ) {
       const spellFormData = await SpellCastDialog.create(this, item);
       const isPact = spellFormData.get('level') === 'pact';
       const lvl = isPact ? this.data.data.spells.pact.level : parseInt(spellFormData.get("level"));
@@ -489,12 +490,21 @@ export default class Actor5e extends Actor {
    */
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
     // Compose roll parts and data
     const parts = ["@mod"];
     const data = {mod: skl.mod + skl.prof};
-    if ( skl.bonus ) {
-      data["skillBonus"] = skl.bonus;
+
+    // Ability test bonus
+    if ( bonuses.check ) {
+      data["checkBonus"] = bonuses.check;
+      parts.push("@checkBonus");
+    }
+
+    // Skill check bonus
+    if ( bonuses.skill ) {
+      data["skillBonus"] = bonuses.skill;
       parts.push("@skillBonus");
     }
 
@@ -550,11 +560,13 @@ export default class Actor5e extends Actor {
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
+
+    // Construct parts
     const parts = ["@mod"];
     const data = {mod: abl.mod};
-    const feats = this.data.flags.dnd5e || {};
 
     // Add feat-related proficiency bonuses
+    const feats = this.data.flags.dnd5e || {};
     if ( feats.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
       parts.push("@proficiency");
       data.proficiency = Math.ceil(0.5 * this.data.data.attributes.prof);
@@ -565,10 +577,10 @@ export default class Actor5e extends Actor {
     }
 
     // Add global actor bonus
-    let actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
-    if ( !!actorBonus ) {
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = actorBonus;
+      data.checkBonus = bonuses.check;
     }
 
     // Roll and return
@@ -593,6 +605,8 @@ export default class Actor5e extends Actor {
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
+
+    // Construct parts
     const parts = ["@mod"];
     const data = {mod: abl.mod};
 
@@ -603,10 +617,10 @@ export default class Actor5e extends Actor {
     }
 
     // Include a global actor ability save bonus
-    const actorBonus = getProperty(this.data.data.bonuses, "abilities.save");
-    if ( !!actorBonus ) {
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = actorBonus;
+      data.saveBonus = bonuses.save;
     }
 
     // Roll and return
@@ -632,10 +646,12 @@ export default class Actor5e extends Actor {
     const speaker = ChatMessage.getSpeaker({actor: this});
     const parts = [];
     const data = {};
-    const bonus = getProperty(this.data.data.bonuses, "abilities.save");
-    if ( bonus ) {
+
+    // Include a global actor ability save bonus
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data["saveBonus"] = bonus;
+      data.saveBonus = bonuses.save;
     }
 
     // Evaluate the roll
@@ -705,14 +721,14 @@ export default class Actor5e extends Actor {
 
   /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
-   * @param {string} formula    The hit die type to roll. Example "d8"
+   * @param {string} denomination    The hit denomination of hit die to roll. Example "d8"
    */
-  async rollHitDie(formula) {
+  async rollHitDie(denomination) {
 
     // Find a class (if any) which has an available hit die of the requested denomination
     const cls = this.items.find(i => {
       const d = i.data.data;
-      return (d.hitDice === formula) && ((d.levels || 1) - (d.hitDiceUsed || 0) > 0);
+      return (d.hitDice === denomination) && ((d.levels || 1) - (d.hitDiceUsed || 0) > 0);
     });
 
     // If no class is available, display an error notification
@@ -721,7 +737,7 @@ export default class Actor5e extends Actor {
     }
 
     // Prepare roll data
-    const parts = [formula, "@abilities.con.mod"];
+    const parts = [`1${denomination}`, "@abilities.con.mod"];
     const title = game.i18n.localize("DND5E.HitDiceRoll");
     const rollData = duplicate(this.data.data);
 

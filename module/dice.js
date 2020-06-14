@@ -138,15 +138,15 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
       buttons: {
         advantage: {
           label: game.i18n.localize("DND5E.Advantage"),
-          callback: html => roll = _roll(parts, 1, html[0].children[0])
+          callback: html => roll = _roll(parts, 1, html[0].querySelector("form"))
         },
         normal: {
           label: game.i18n.localize("DND5E.Normal"),
-          callback: html => roll = _roll(parts, 0, html[0].children[0])
+          callback: html => roll = _roll(parts, 0, html[0].querySelector("form"))
         },
         disadvantage: {
           label: game.i18n.localize("DND5E.Disadvantage"),
-          callback: html => roll = _roll(parts, -1, html[0].children[0])
+          callback: html => roll = _roll(parts, -1, html[0].querySelector("form"))
         }
       },
       default: "normal",
@@ -244,11 +244,11 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
         critical: {
           condition: allowCritical,
           label: game.i18n.localize("DND5E.CriticalHit"),
-          callback: html => roll = _roll(parts, true, html[0].children[0])
+          callback: html => roll = _roll(parts, true, html[0].querySelector("form"))
         },
         normal: {
           label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
-          callback: html => roll = _roll(parts, false, html[0].children[0])
+          callback: html => roll = _roll(parts, false, html[0].querySelector("form"))
         },
       },
       default: "normal",
