@@ -715,6 +715,7 @@ export default class Actor5e extends Actor {
       // Increment successes
       else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
     }
+
     // Save failure
     else {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
