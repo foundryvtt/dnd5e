@@ -1,58 +1,73 @@
 @import "./variables.less";
+
+@actorNameHeight: 60px;
+
 .dnd5e.sheet.actor {
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
-
   .sheet-header {
-    .charlevel {
+
+    // Portrait Artwork
+    img.profile {
       flex: 0 0 160px;
-      height: 60px;
-      margin: 0;
-      padding: 5px;
-      text-align: right;
+      max-width: 160px;
+      height: 160px;
+    }
 
-      .level {
-        width: 100%;
-        height: 30px;
-        font-size: 20px;
-        line-height: 30px;
-
-        label {
-          display: inline;
-          font-size: 24px;
-          text-align: right;
-        }
-
-        input {
-          display: inline;
-          width: 36px;
-          font-size: 24px;
-          text-align: center;
-        }
-
-        // If the Experience Bar is disabled
-        &.noxp {
-          margin-top: 10px;
-          > label {
-            font-size: 32px;
-          }
-          > input {
-            font-size: 32px;
-            flex: 0 0 40px;
-            height: 44px;
-          }
-        }
-
+    // Character Name
+    h1.charname {
+      flex: 1;
+      height: @actorNameHeight;
+      padding: 0;
+      input {
+        height: @actorNameHeight - 20px;
+        margin: 10px 0;
       }
+    }
 
-      .experience {
-        width: 100%;
-        height: 20px;
-        padding-right: 5px;
-        font-size: 16px;
-        color: @colorOlive;
+    // Character Level
+    .header-exp {
+      flex: 0 0 150px;
+      margin-right: 3px;
+      height: @actorNameHeight;
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    // Character Summary
+    .summary {
+      height: 30px;
+      border-bottom: @borderGroove;
+      font-size: 18px;
+      input, span {
+        display: block;
+        height: 24px;
+        line-height: 24px;
+      }
+    }
+
+    // Primary Attributes
+    .attributes {
+      flex: 0 0 100%;
+      margin: 0;
+
+      .attribute {
+        height: 70px;
+        margin: 0;
+        border: none;
+        border-right: @borderGroove;
+        border-radius: 0;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        .attribute-value {
+          height: 30px;
+          line-height: 30px;
+        }
       }
     }
   }
@@ -69,55 +84,53 @@
 
   // Box Headers
   h4.box-title {
+    height: 18px;
     line-height: 16px;
     margin: 4px 8px 2px;
     font-size: 18px;
-    border-bottom: 1px solid @colorBeige;
+    color: @colorOlive;
+    border-bottom: 1px solid @colorFaint;
   }
 
   /* ----------------------------------------- */
   /*  Attributes                               */
   /* ----------------------------------------- */
 
+  .tab.attributes {
+    overflow: hidden;
+  }
+
   ul.attributes {
+    flex: 0 0 60px;
     list-style: none;
-    margin: 5px 0 0;
+    margin: 0;
     padding: 0;
 
     li.attribute {
-      height: 70px;
-      margin: 0 5px;
+      height: 60px;
+      margin: 0 5px 0 0;
       border: @borderGroove;
       border-radius: 4px;
       .nodesto();
       text-align: center;
 
-      .attribute-name {
-        flex: 0 0 18px;
+      &:last-child {
+        margin: 0;
       }
 
       .attribute-value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 28px;
         line-height: 28px;
 
-        input {
-          display: inline;
-          max-width: 80%;
-          height: 28px;
-          margin: 0;
+        > * {
           font-size: 24px;
         }
 
-        span.sep {
-          display: inline;
-          position: relative;
-          top: 2px;
-          font-size: 28px;
-          color: @colorTan;
-        }
-
-        &.multiple {
-          input { max-width: 33%; }
+        &.multiple input {
+          flex: 0 0 33%;
         }
       }
 
@@ -136,22 +149,28 @@
   /* ----------------------------------------- */
 
   .ability-scores {
-    flex: 0 0 100%;
+    flex: 0 0 100px;
+    height: 440px;
     list-style: none;
     margin: 0;
     padding: 0;
     .nodesto();
+    border: @borderGroove;
+    border-radius: 3px;
 
     .ability {
       height: 70px;
-      margin: 0 5px;
       text-align: center;
-      border: @borderGroove;
-      border-radius: 3px;
+      border-bottom: @borderGroove;
+
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: -3px;
+      }
 
       input.ability-score {
         height: 30px;
-        width: 50px;
+        width: 36px;
         margin: 0 auto;
         line-height: 32px;
         font-size: 24px;
@@ -159,12 +178,14 @@
 
       .ability-modifiers {
         height: 24px;
-        margin: -10px 0 0;
+        margin: -8px 0 0;
 
         span.ability-mod,
         span.ability-save {
           flex: 0 0 24px;
-          height: 24px;
+          height: 22px;
+          line-height: 22px;
+          font-size: 16px;
           border-top: @borderGroove;
         }
 
@@ -179,12 +200,6 @@
         span.ability-save {
           border-left: @borderGroove;
         }
-      }
-
-      /* Hide modifier box on hover */
-
-      input.ability-score:hover + .ability-modifiers {
-        visibility: hidden;
       }
     }
   }
@@ -209,16 +224,21 @@
   /* ----------------------------------------- */
 
   ul.skills-list {
-    flex: 0 0 192px;
+    flex: 0 0 180px;
+    height: 440px;
     list-style: none;
-    margin: 5px 5px 0;
-    padding: 2px 2px 0;
+    margin: 0 5px 0;
+    padding: 3px 0 2px;
     border: @borderGroove;
     border-radius: 3px;
 
     li.skill {
-      height: 22px;
-      padding: 3px 0;
+      height: 24px;
+      padding: 3px 2px;
+
+      &:nth-child(even) {
+        background: rgba(0, 0, 0, 0.05);
+      }
 
       h4 {
         flex: 1px;
@@ -253,23 +273,25 @@
   /* ----------------------------------------- */
 
   .counters {
-    flex: 0 0 100%;
+    flex: none;
+    padding: 5px 0;
+    margin: 0;
     border-bottom: @borderGroove;
-    margin-bottom: 5px;
 
     .counter {
-      padding: 0 3px;
-      line-height: 28px;
+      height: 20px;
+      line-height: 20px;
 
       h4 {
         flex: auto;
         margin: 0;
-        .nodesto();
-        font-size: 14px;
+        font-size: 13px;
+        font-weight: bold;
+        color: @colorOlive;
       }
 
       .counter-value {
-        flex: 0 0 50px;
+        flex: none;
         text-align: right;
         > * {
           display: inline;
@@ -293,7 +315,6 @@
       }
 
       span.sep {
-        margin: 0 -2px;
         font-size: 12px;
       }
     }
@@ -303,27 +324,31 @@
   /*  Traits                                   */
   /* ----------------------------------------- */
 
-  .traits {
-    margin: 0 5px;
+  .center-pane {
+    height: 100%;
+    padding: 0 5px 0 3px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
 
+  .traits {
     .form-group, .form-group-stacked {
       margin: 0 0 3px 0;
       justify-content: space-between;
     }
-
     .configure-flags {
       flex: 1;
     }
 
-    .actor-size {
-      flex: 0 0 150px;
-    }
-
     label {
-      flex: 0 0 150px;
+      flex: none;
       line-height: 20px;
       font-weight: bold;
-      margin: 0;
+      margin: 0 10px 0 0;
+    }
+
+    select {
+      max-width: 200px;
     }
 
     input {
@@ -361,18 +386,10 @@
   .inventory-filters {
     margin: 0 8px;
     flex: 0 0 20px;
-    h3, .filter-title {
-      .nodesto();
-      color: @colorOlive;
-      font-size: 18px;
-      margin: 0;
-    }
-
-    &.spellbook-filters {
-      flex: 0 0 40px;
-    }
+    justify-content: flex-end;
 
     .currency {
+      flex: 0 0 100%;
       list-style: none;
       margin: 4px 0 8px;
       padding: 0;
@@ -399,6 +416,7 @@
     margin: 0;
     padding: 0 5px;
     overflow-y: auto;
+    scrollbar-width: thin;
 
     // Inventory Item
     .item {
@@ -425,11 +443,11 @@
           overflow-x: hidden;
         }
 
-        &.rollable .item-image:hover {
-          background-image: url("/icons/svg/d20-black.svg") !important;
-        }
         &.rollable:hover .item-image {
           background-image: url("/icons/svg/d20-grey.svg") !important;
+        }
+        &.rollable .item-image:hover {
+          background-image: url("/icons/svg/d20-black.svg") !important;
         }
 
         i.attuned {
@@ -486,6 +504,10 @@
       color: @colorTan;
       text-align: center;
       border-right: 1px solid @colorFaint;
+      word-break: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+
       &:last-child { border-right: none; }
       &.item-action {flex: 0 0 100px}
     }
@@ -531,10 +553,9 @@
   /* ----------------------------------------- */
 
   .spellcasting-ability {
-    h3 {
-      flex: none;
-      margin-right: 5px;
-    }
+    flex: 0 0 240px;
+    margin: 0;
+
     input, span {
       flex: 0 0 32px;
       text-align: center;
@@ -560,10 +581,13 @@
   }
 
   .spell-slots {
-    input, span.sep {
+    input {
       display: inline;
       max-width: 20px;
-      text-align: center;
+    }
+    .sep {
+      font-size: 13px;
+      font-weight: normal;
     }
   }
 

@@ -1,5 +1,6 @@
 import { d20Roll, damageRoll } from "../dice.js";
 import ShortRestDialog from "../apps/short-rest.js";
+import LongRestDialog from "../apps/long-rest.js";
 import SpellCastDialog from "../apps/spell-cast-dialog.js";
 import AbilityTemplate from "../pixi/ability-template.js";
 import {DND5E} from '../config.js';
@@ -57,8 +58,8 @@ export default class Actor5e extends Actor {
 
     // Ability modifiers and saves
     // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
-    const saveBonus = parseInt(bonuses.save || 0);
-    const checkBonus = parseInt(bonuses.check || 0);
+    const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
+    const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
     for (let [id, abl] of Object.entries(data.abilities)) {
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
@@ -77,7 +78,7 @@ export default class Actor5e extends Actor {
     const athlete = flags.remarkableAthlete;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
-    const skillBonus = parseInt(bonuses.skill || 0);
+    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     let round = Math.floor;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = parseFloat(skl.value || 0);
@@ -290,7 +291,8 @@ export default class Actor5e extends Actor {
    */
   getSpellDC(ability) {
     const actorData = this.data.data;
-    const bonus = parseInt(getProperty(actorData, "bonuses.spell.dc")) || 0;
+    let bonus = getProperty(actorData, "bonuses.spell.dc");
+    bonus = Number.isNumeric(bonus) ? parseInt(bonus) : 0;
     ability = actorData.abilities[ability];
     const prof = actorData.attributes.prof;
     return 8 + (ability ? ability.mod : 0) + prof + bonus;
@@ -400,11 +402,19 @@ export default class Actor5e extends Actor {
   async applyDamage(amount=0, multiplier=1) {
     amount = Math.floor(parseInt(amount) * multiplier);
     const hp = this.data.data.attributes.hp;
+
+    // Deduct damage from temp HP first
     const tmp = parseInt(hp.temp) || 0;
     const dt = amount > 0 ? Math.min(tmp, amount) : 0;
+
+    // Remaining goes to health
+    const tmpMax = parseInt(hp.tempmax) || 0;
+    const dh = Math.clamped(hp.value - (amount - dt), 0, hp.max + tmpMax);
+
+    // Update the Actor
     return this.update({
-      "data.attributes.hp.temp": tmp - dt,  // Deduct damage from temp HP first
-      "data.attributes.hp.value": Math.clamped(hp.value - (amount - dt), 0, hp.max) // Remaining goes to health
+      "data.attributes.hp.temp": tmp - dt,
+      "data.attributes.hp.value": dh
     });
   }
 
@@ -427,7 +437,7 @@ export default class Actor5e extends Actor {
     let placeTemplate = false;
 
     // Configure spell slot consumption and measured template placement from the form
-    if ( usesSlots && configureDialog ) {
+    if ( configureDialog && (usesSlots || item.hasAreaTarget || limitedUses) ) {
       const spellFormData = await SpellCastDialog.create(this, item);
       const isPact = spellFormData.get('level') === 'pact';
       const lvl = isPact ? this.data.data.spells.pact.level : parseInt(spellFormData.get("level"));
@@ -480,12 +490,21 @@ export default class Actor5e extends Actor {
    */
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
     // Compose roll parts and data
     const parts = ["@mod"];
     const data = {mod: skl.mod + skl.prof};
-    if ( skl.bonus ) {
-      data["skillBonus"] = skl.bonus;
+
+    // Ability test bonus
+    if ( bonuses.check ) {
+      data["checkBonus"] = bonuses.check;
+      parts.push("@checkBonus");
+    }
+
+    // Skill check bonus
+    if ( bonuses.skill ) {
+      data["skillBonus"] = bonuses.skill;
       parts.push("@skillBonus");
     }
 
@@ -541,11 +560,13 @@ export default class Actor5e extends Actor {
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
+
+    // Construct parts
     const parts = ["@mod"];
     const data = {mod: abl.mod};
-    const feats = this.data.flags.dnd5e || {};
 
     // Add feat-related proficiency bonuses
+    const feats = this.data.flags.dnd5e || {};
     if ( feats.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
       parts.push("@proficiency");
       data.proficiency = Math.ceil(0.5 * this.data.data.attributes.prof);
@@ -556,10 +577,10 @@ export default class Actor5e extends Actor {
     }
 
     // Add global actor bonus
-    let actorBonus = getProperty(this.data.data.bonuses, "abilities.check");
-    if ( !!actorBonus ) {
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = actorBonus;
+      data.checkBonus = bonuses.check;
     }
 
     // Roll and return
@@ -584,6 +605,8 @@ export default class Actor5e extends Actor {
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
+
+    // Construct parts
     const parts = ["@mod"];
     const data = {mod: abl.mod};
 
@@ -594,10 +617,10 @@ export default class Actor5e extends Actor {
     }
 
     // Include a global actor ability save bonus
-    const actorBonus = getProperty(this.data.data.bonuses, "abilities.save");
-    if ( !!actorBonus ) {
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = actorBonus;
+      data.saveBonus = bonuses.save;
     }
 
     // Roll and return
@@ -623,10 +646,12 @@ export default class Actor5e extends Actor {
     const speaker = ChatMessage.getSpeaker({actor: this});
     const parts = [];
     const data = {};
-    const bonus = getProperty(this.data.data.bonuses, "abilities.save");
-    if ( bonus ) {
+
+    // Include a global actor ability save bonus
+    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data["saveBonus"] = bonus;
+      data.saveBonus = bonuses.save;
     }
 
     // Evaluate the roll
@@ -647,7 +672,8 @@ export default class Actor5e extends Actor {
     // Save success
     if ( success ) {
       let successes = (death.success || 0) + 1;
-      
+
+      // Critical Success = revive with 1hp
       if ( roll.total === 20 ) {
         await this.update({
           "data.attributes.death.success": 0,
@@ -655,25 +681,34 @@ export default class Actor5e extends Actor {
           "data.attributes.hp.value": 1
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveCriticalSuccess", {name: this.name}), speaker});
-      } else if ( successes === 3 ) {      // Survival
+      }
+
+      // 3 Successes = survive and reset checks
+      else if ( successes === 3 ) {
         await this.update({
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveSuccess", {name: this.name}), speaker});
       }
+
+      // Increment successes
       else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
     }
     // Save failure
     else {
       let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
-      if ( failures === 3 ) {       // Death
+
+      // 3 Failures = death
+      if ( failures >= 3 ) {
         await this.update({
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveFailure", {name: this.name}), speaker});
       }
+
+      // Increment failures
       else await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
     }
 
@@ -685,14 +720,14 @@ export default class Actor5e extends Actor {
 
   /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
-   * @param {string} formula    The hit die type to roll. Example "d8"
+   * @param {string} denomination    The hit denomination of hit die to roll. Example "d8"
    */
-  async rollHitDie(formula) {
+  async rollHitDie(denomination) {
 
     // Find a class (if any) which has an available hit die of the requested denomination
     const cls = this.items.find(i => {
       const d = i.data.data;
-      return (d.hitDice === formula) && ((d.levels || 1) - (d.hitDiceUsed || 0) > 0);
+      return (d.hitDice === denomination) && ((d.levels || 1) - (d.hitDiceUsed || 0) > 0);
     });
 
     // If no class is available, display an error notification
@@ -701,7 +736,7 @@ export default class Actor5e extends Actor {
     }
 
     // Prepare roll data
-    const parts = [formula, "@abilities.con.mod"];
+    const parts = [`1${denomination}`, "@abilities.con.mod"];
     const title = game.i18n.localize("DND5E.HitDiceRoll");
     const rollData = duplicate(this.data.data);
 
@@ -741,9 +776,13 @@ export default class Actor5e extends Actor {
     const hp0 = data.attributes.hp.value;
 
     // Display a Dialog for rolling hit dice
+    let newDay = false;
     if ( dialog ) {
-      const rested = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
-      if ( !rested ) return;
+      try {
+        newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+      } catch(err) {
+        return;
+      }
     }
 
     // Note the change in HP and HD which occurred
@@ -764,7 +803,8 @@ export default class Actor5e extends Actor {
     await this.update(updateData);
 
     // Recover item uses
-    const items = this.items.filter(item => item.data.data.uses && (item.data.data.uses.per === "sr"));
+    const recovery = newDay ? ["sr", "day"] : ["sr"];
+    const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
     const updateItems = items.map(item => {
       return {
         _id: item._id,
@@ -774,13 +814,19 @@ export default class Actor5e extends Actor {
     await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
+    let restFlavor;
+    switch (game.settings.get("dnd5e", "restVariant")) {
+      case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
+      case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
+      case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
+    }
+
     if ( chat ) {
-      let msg = game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp});
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
-        content: msg,
-        type: CONST.CHAT_MESSAGE_TYPES.OTHER
+        flavor: restFlavor,
+        content: game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp})
       });
     }
 
@@ -789,7 +835,8 @@ export default class Actor5e extends Actor {
       dhd: dhd,
       dhp: dhp,
       updateData: updateData,
-      updateItems: updateItems
+      updateItems: updateItems,
+      newDay: newDay
     }
   }
 
@@ -808,7 +855,7 @@ export default class Actor5e extends Actor {
     let newDay = false;
     if ( dialog ) {
       try {
-        newDay = await ShortRestDialog.longRestDialog(this);
+        newDay = await LongRestDialog.longRestDialog(this);
       } catch(err) {
         return;
       }
@@ -876,11 +923,18 @@ export default class Actor5e extends Actor {
     if ( updateItems.length ) await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
+    let restFlavor;
+    switch (game.settings.get("dnd5e", "restVariant")) {
+      case 'normal': restFlavor = game.i18n.localize(newDay ? "DND5E.LongRestOvernight" : "DND5E.LongRestNormal"); break;
+      case 'gritty': restFlavor = game.i18n.localize("DND5E.LongRestGritty"); break;
+      case 'epic':  restFlavor = game.i18n.localize("DND5E.LongRestEpic"); break;
+    }
+
     if ( chat ) {
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
-        flavor: game.i18n.localize(newDay ? "DND5E.OvernightRest" : "DND5E.LongRest"),
+        flavor: restFlavor,
         content: game.i18n.format("DND5E.LongRestResult", {name: this.name, health: dhp, dice: dhd})
       });
     }
@@ -890,7 +944,8 @@ export default class Actor5e extends Actor {
       dhd: dhd,
       dhp: dhp,
       updateData: updateData,
-      updateItems: updateItems
+      updateItems: updateItems,
+      newDay: newDay
     }
   }
 

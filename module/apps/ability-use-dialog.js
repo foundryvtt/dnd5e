@@ -26,32 +26,31 @@ export default class AbilityUseDialog extends Dialog {
    */
   static async create(item) {
 
-    const uses = item.data.data.uses || {};
-    const recharge = item.data.data.recharge || {};
+    const itemData = item.data.data;
+    const uses = itemData.uses || {};
+    const quantity = itemData.quantity || 0;
+    const recharge = itemData.recharge || {};
     const recharges = !!recharge.value;
 
     // Render the ability usage template
     const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.html", {
       item: item.data,
-      canUse: recharges ? recharge.charged : uses.value > 0,
-      consume: true,
-      uses: uses,
-      recharges: !!recharge.value,
-      isCharged: recharge.charged,
+      title: game.i18n.format("DND5E.AbilityUseHint", item.data),
+      note: this._getAbilityUseNote(item.data, uses, recharge),
+      canUse: recharges ? recharge.charged : (quantity > 0 && !uses.value) || uses.value > 0,
       hasPlaceableTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
-      perLabel: CONFIG.DND5E.limitedUsePeriods[uses.per]
     });
 
     // Create the Dialog and return as a Promise
     return new Promise((resolve) => {
       let formData = null;
       const dlg = new this(item, {
-        title: `${item.name}: Ability Configuration`,
+        title: `${item.name}: Usage Configuration`,
         content: html,
         buttons: {
           use: {
             icon: '<i class="fas fa-fist-raised"></i>',
-            label: "Use Ability",
+            label: "Use",
             callback: html => formData = new FormData(html[0].querySelector("#ability-use-form"))
           }
         },
@@ -60,5 +59,47 @@ export default class AbilityUseDialog extends Dialog {
       });
       dlg.render(true);
     });
+  }
+
+  /* -------------------------------------------- */
+
+  static _getAbilityUseNote(item, uses, recharge) {
+
+    // Zero quantity
+    const quantity = item.data.quantity;
+    if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
+
+    // Abilities which use Recharge
+    if ( !!recharge.value ) {
+      return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
+        type: item.type,
+      })
+    }
+
+    // Does not use any resource
+    if ( !uses.per || !uses.max ) return "";
+
+    // Consumables
+    if ( item.type === "consumable" ) {
+      let str = "DND5E.AbilityUseNormalHint";
+      if ( uses.value > 1 ) str = "DND5E.AbilityUseConsumableChargeHint";
+      else if ( item.data.quantity === 1 && uses.autoDestroy ) str = "DND5E.AbilityUseConsumableDestroyHint";
+      else if ( item.data.quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
+      return game.i18n.format(str, {
+        type: item.data.consumableType,
+        value: uses.value,
+        quantity: item.data.quantity,
+      });
+    }
+
+    // Other Items
+    else {
+      return game.i18n.format("DND5E.AbilityUseNormalHint", {
+        type: item.type,
+        value: uses.value,
+        max: uses.max,
+        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
+      });
+    }
   }
 }

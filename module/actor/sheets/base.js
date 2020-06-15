@@ -295,8 +295,12 @@ export default class ActorSheet5e extends ActorSheet {
     // Editable Only Listeners
     if ( this.isEditable ) {
 
+      // Select data on click
+      const inputs = html.find("input");
+      inputs.focus(ev => ev.currentTarget.select());
+
       // Relative updates for numeric fields
-      html.find('input[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
+      inputs.find('input[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
       html.find('.ability-proficiency').click(this._onToggleAbilityProficiency.bind(this));
@@ -793,7 +797,7 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
     const options = {
-      name: label.getAttribute("for"),
+      name: a.dataset.target,
       title: label.innerText,
       choices: CONFIG.DND5E[a.dataset.options]
     };

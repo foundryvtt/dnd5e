@@ -20,18 +20,34 @@ export default class Item5e extends Item {
     if (!("ability" in itemData)) return null;
 
     // Case 1 - defined directly by the item
-    if ( itemData.ability ) return itemData.ability;
+    if (itemData.ability) return itemData.ability;
 
     // Case 2 - inferred from a parent actor
-    else if ( this.actor ) {
+    else if (this.actor) {
       const actorData = this.actor.data.data;
-      if ( this.data.type === "spell" ) return actorData.attributes.spellcasting || "int";
-      else if ( this.data.type === "tool" ) return "int";
-      else if ( this.data.type === "weapon" && this.data.data.properties.fin === true ) {
-        if ( actorData.abilities["str"].mod >= actorData.abilities["dex"].mod ) return "str";
-        else return "dex";
+
+      // Spells - Use Actor spellcasting modifier
+      if (this.data.type === "spell") return actorData.attributes.spellcasting || "int";
+
+      // Tools - default to Intelligence
+      else if (this.data.type === "tool") return "int";
+
+      // Weapons
+      else if (this.data.type === "weapon") {
+        const wt = itemData.weaponType;
+
+        // Melee weapons - Str or Dex if Finesse (PHB pg. 147)
+        if ( ["simpleM", "martialM"].includes(wt) ) {
+          if (itemData.properties.fin === true) {   // Finesse weapons
+            return (actorData.abilities["dex"].mod >= actorData.abilities["str"].mod) ? "dex" : "str";
+          }
+          return "str";
+        }
+
+        // Ranged weapons - Dex (PH p.194)
+        else if ( ["simpleR", "martialR"].includes(wt) ) return "dex";
       }
-      else return "str";
+      return "str";
     }
 
     // Case 3 - unknown
@@ -751,13 +767,10 @@ export default class Item5e extends Item {
 
     // Determine whether to deduct uses of the item
     const uses = itemData.uses || {};
+    const autoDestroy = uses.autoDestroy;
     let usesCharges = !!uses.per && (uses.max > 0);
     const recharge = itemData.recharge || {};
     const usesRecharge = !!recharge.value;
-
-    // If no usages remain, display a warning
-    const current = uses.value || 0;
-    if ( current <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
 
     // Display a configuration dialog to confirm the usage
     let placeTemplate = false;
@@ -771,14 +784,31 @@ export default class Item5e extends Item {
 
     // Update Item data
     if ( consume ) {
+      const current = uses.value || 0;
       const remaining = usesCharges ? Math.max(current - 1, 0) : current;
       if ( usesRecharge ) await this.update({"data.recharge.charged": false});
       else {
-        const q = itemData.quantity || 1;
-        if ( ( remaining === 0 ) && (q > 1) ) {
-          await this.update({"data.quantity": q - 1, "data.uses.value": uses.max || 1});
+        const q = itemData.quantity;
+        // Case 1, reduce charges
+        if ( remaining ) {
+          await this.update({"data.uses.value": remaining});
         }
-        else await this.update({"data.uses.value": remaining});
+        // Case 2, reduce quantity
+        else if ( q > 1 ) {
+          await this.update({"data.quantity": q - 1, "data.uses.value": uses.max || 0});
+        }
+        // Case 3, destroy the item
+        else if ( (q <= 1) && autoDestroy ) {
+          await this.actor.deleteOwnedItem(this.id);
+        }
+        // Case 4, reduce item to 0 quantity and 0 charges
+        else if ( (q === 1) ) {
+          await this.update({"data.quantity": q - 1, "data.uses.value": 0});
+        }
+        // Case 5, item unusable, display warning and do nothing
+        else {
+          ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+        }
       }
     }
 
@@ -1027,7 +1057,7 @@ export default class Item5e extends Item {
 
     // Get spell data
     const itemData = spell instanceof Item5e ? spell.data : spell;
-    const {description, source, activation, duration, target, range, damage, save, level} = itemData.data;
+    const {actionType, description, source, activation, duration, target, range, damage, save, level} = itemData.data;
 
     // Get scroll data
     const scrollUuid = CONFIG.DND5E.spellScrollIds[level];
@@ -1052,6 +1082,7 @@ export default class Item5e extends Item {
       data: {
         "description.value": desc.trim(),
         source,
+        actionType,
         activation,
         duration,
         target,

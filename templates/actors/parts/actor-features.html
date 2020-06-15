@@ -1,6 +1,5 @@
-<div class="inventory-filters">
+<div class="inventory-filters flexrow">
     <ul class="filter-list flexrow" data-filter="features">
-        <li class="filter-title">{{localize "DND5E.Filter"}}</li>
         <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
         <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
         <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
@@ -56,7 +55,7 @@
             <div class="item-detail player-class">
                 {{item.data.subclass}}
             </div>
-            <div class="item-detail">
+            <div class="item-detail item-action">
                 Level {{item.data.levels}}
             </div>
             {{/if}}

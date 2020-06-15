@@ -27,6 +27,11 @@ export const measureDistances = function(segments, options={}) {
       return spaces * canvas.dimensions.distance;
     }
 
+    // Euclidean Measurement
+    else if (rule === "EUCL") {
+      return Math.round(Math.hypot(nx, ny) * canvas.scene.data.gridDistance);
+    }
+
     // Standard PHB Movement
     else return (ns + nd) * canvas.scene.data.gridDistance;
   });

@@ -4,8 +4,8 @@
 /*  Basic Structure                          */
 /* ----------------------------------------- */
 .dnd5e.sheet.actor.character {
-  min-width: 672px;
-  min-height: 736px;
+  min-width: 720px;
+  min-height: 680px;
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -13,93 +13,72 @@
 
   .sheet-header {
 
-    // Character Profile image (larger than usual)
+    // Character Profile image (larger)
     img.profile {
-      flex: 0 0 180px;
-      max-width: 180px;
-      height: 180px;
+      flex: 0 0 160px;
+      max-width: 160px;
+      height: 160px;
     }
 
-    // Character level and experience bar
+    // Character Level
     .charlevel {
-      flex: 0 0 180px;
-      padding: 0 5px 2px;
+      flex: 0 0 20px;
+      height: 20px;
+      font-size: 18px;
+      color: @colorTan;
+    }
 
-      .level {
-        height: 28px;
+    // Experience Tracking
+    .experience {
+      flex: 0 0 32px;
+      margin-bottom: -5px;
+      align-items: center;
+      font-size: 18px;
+      span.max {
+        color: @colorTan;
+        flex: none;
+        margin-left: 3px;
       }
-
-      .experience {
-        input[type="text"] {
-          width: 100px;
-        }
-      }
-
-      .xpbar {
-        width: 100%;
-        flex: 0 0 8px;
-        background: #666;
+    }
+    .xpbar {
+      flex: 0 0 8px;
+      width: 100%;
+      margin-bottom: 5px;
+      background: @colorTan;
+      border: 1px solid #000;
+      border-radius: 3px;
+      .bar {
+        height: 4px;
+        margin: 1px;
+        display: block;
+        background: #afebff;
         border: 1px solid #000;
-        border-radius: 3px;
-
-        .bar {
-          height: 4px;
-          margin: 1px;
-          display: block;
-          background: #afebff;
-          border: 1px solid #000;
-          border-radius: 2px;
-        }
+        border-radius: 2px;
       }
     }
 
-    // Character Summary
-    .summary {
-      border-bottom: @borderGroove;
-    }
-
-    // Primary Attributes
+    // Header Attributes
     .attributes {
-      height: 80px;
-      margin: 0;
-
-      .attribute {
-        height: 80px;
-        margin: 0;
-        border: none;
-        border-right: @borderGroove;
-        border-radius: 0;
-
-        &:last-child {
-          border-right: none;
-        }
-
-        .attribute-value {
-          margin: 5px 0 0;
-          height: 32px;
-          line-height: 32px;
-        }
-
-        .attribute-name {
-          margin-top: 6px;
-        }
-
-        .attribute-footer {
-          margin-bottom: 2px;
-        }
-      }
-
       a.rest {
         border: 1px solid @colorBeige;
         border-radius: 2px;
         background: rgba(0, 0, 0, 0.05);
-        padding: 1px 3px;
-        margin: 0 6px;
+        padding: 0 3px;
+        margin: 0 3px;
       }
 
       .hit-dice {
         font-size: 24px;
       }
+
+      .initiative .attribute-footer input {
+        width: 32px;
+      }
+    }
+
+    .summary .proficiency {
+      text-align: right;
+      padding-right: 5px;
     }
   }
 
@@ -107,29 +86,23 @@
   /*  Sheet Body                               */
   /* ----------------------------------------- */
 
-  .attributes {
-    .resource {
-      .attribute-name {
-        margin: 0 8px;
-        input[type="text"] {
-          height: 20px;
-          margin: 2px 0 -2px;
-          line-height: 24px;
-        }
-      }
-      label.checkbox {
-        margin: 0 3px;
-        input[type="checkbox"] {
-          height: 16px;
-          width: 16px;
-          margin: 0;
-          top: 3px;
-        }
-      }
+  // Custom Resources
+  .resource .attribute-value {
+    input {
+      flex: 0 0 25%;
     }
-
-    .initiative .attribute-footer input {
-      width: 32px;
+    label.recharge {
+      height: 32px;
+      position: relative;
+      font-size: 13px;
+      text-align: center;
+      color: @colorOlive;
+      input[type="checkbox"] {
+        height: 14px;
+        width: 14px;
+        margin: 0;
+        top: -6px;
+      }
     }
   }
 
@@ -142,15 +115,6 @@
         flex: 1px;
         margin: 0;
         font-size: 13px;
-      }
-    }
-  }
-
-  .counters {
-    .death-saves {
-      flex: 2;
-      .counter-value {
-        flex: 0 0 90px;
       }
     }
   }

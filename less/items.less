@@ -193,13 +193,22 @@
     color: @colorTan;
   }
 
-  .recharge {
+  .recharge.form-group {
     span {
-      flex: 0 0 80px;
+      text-align: right;
+      padding-right: 3px;
+    }
+    input[type="text"] {
+      flex: 0 0 32px;
+      text-align: center;
     }
     label.checkbox {
-      flex: 0 0 80px;
-      text-align: right;
+      flex: none;
+      input {
+        width: 16px;
+        height: 16px;
+        top: 4px;
+      }
     }
   }
 
