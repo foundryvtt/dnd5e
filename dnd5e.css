@@ -3,11 +3,12 @@
 /*  Fonts                                    */
 /* ----------------------------------------- */
 @font-face {
-  font-family: "Nodesto";
-  src: url("fonts/NodestoCapsCondensed.otf");
+  font-family: 'Modesto';
+  font-style: normal;
+  src: url('/fonts/modesto/modestobold.woff2') format('woff2');
 }
-.nodesto {
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+.modesto {
+  font-family: "Modesto", "Palatino Linotype", serif;
   font-size: 20px;
 }
 /* ----------------------------------------- */
@@ -159,7 +160,7 @@
 .dnd5e .form-header {
   margin: 0 0 0.25em 0;
   padding: 0 2px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto", "Palatino Linotype", serif;
   font-size: 20px;
   font-size: 24px;
   border-top: 2px groove #eeede0;
@@ -254,7 +255,7 @@
 .dnd5e.sheet .sheet-header {
   flex: 0 0 100px;
   border-bottom: 2px groove #eeede0;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto", "Palatino Linotype", serif;
   font-size: 20px;
   /* Character Name */
   /* Profile Image */
@@ -305,7 +306,7 @@
 .dnd5e.sheet .sheet-navigation {
   flex: 0 0 30px;
   margin-bottom: 5px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto", "Palatino Linotype", serif;
   font-size: 20px;
 }
 .dnd5e.sheet .sheet-navigation .item {
@@ -486,7 +487,7 @@
   margin: 0 5px 0 0;
   border: 2px groove #eeede0;
   border-radius: 4px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto", "Palatino Linotype", serif;
   font-size: 20px;
   text-align: center;
 }
@@ -519,7 +520,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto", "Palatino Linotype", serif;
   font-size: 20px;
   border: 2px groove #eeede0;
   border-radius: 3px;
@@ -1121,7 +1122,7 @@
   flex: 1;
   margin: 0;
   line-height: 36px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto", "Palatino Linotype", serif;
   font-size: 20px;
   color: #4b4a44;
 }
