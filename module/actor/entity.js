@@ -486,11 +486,9 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {Object} options      Options which configure how the skill check is rolled
-   * @param {Array} [extraParts]  Additional roll component parts to include in the roll
-   * @param {Object} [extraData]  Additional roll component values
    * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
    */
-  rollSkill(skillId, options={}, { extraParts=[], extraData={} }={}) {
+  rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
@@ -510,9 +508,10 @@ export default class Actor5e extends Actor {
       parts.push("@skillBonus");
     }
 
-    // Add provided extra roll parts
-    parts.push(...extraParts);
-    Object.assign(data, extraData);
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
@@ -535,10 +534,8 @@ export default class Actor5e extends Actor {
    * Prompt the user for input on which variety of roll they want to do.
    * @param {String}abilityId     The ability id (e.g. "str")
    * @param {Object} options      Options which configure how ability tests or saving throws are rolled
-   * @param {Array} [extraParts]  Additional roll component parts to include in the roll
-   * @param {Object} [extraData]  Additional roll component values
    */
-  rollAbility(abilityId, options={}, { extraParts=[], extraData={} }={}) {
+  rollAbility(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     new Dialog({
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
@@ -546,11 +543,11 @@ export default class Actor5e extends Actor {
       buttons: {
         test: {
           label: game.i18n.localize("DND5E.ActionAbil"),
-          callback: () => this.rollAbilityTest(abilityId, options, { extraParts, extraData })
+          callback: () => this.rollAbilityTest(abilityId, options)
         },
         save: {
           label: game.i18n.localize("DND5E.ActionSave"),
-          callback: () => this.rollAbilitySave(abilityId, options, { extraParts, extraData })
+          callback: () => this.rollAbilitySave(abilityId, options)
         }
       }
     }).render(true);
@@ -563,11 +560,9 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {String} abilityId    The ability ID (e.g. "str")
    * @param {Object} options      Options which configure how ability tests are rolled
-   * @param {Array} [extraParts]  Additional roll component parts to include in the roll
-   * @param {Object} [extraData]  Additional roll component values
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
-  rollAbilityTest(abilityId, options={}, { extraParts=[], extraData={} }={}) {
+  rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
@@ -593,9 +588,10 @@ export default class Actor5e extends Actor {
       data.checkBonus = bonuses.check;
     }
 
-    // Add provided extra roll parts
-    parts.push(...extraParts);
-    Object.assign(data, extraData);
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
 
     // Roll and return
     return d20Roll(mergeObject(options, {
@@ -614,11 +610,9 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {String} abilityId    The ability ID (e.g. "str")
    * @param {Object} options      Options which configure how ability tests are rolled
-   * @param {Array} [extraParts]  Additional roll component parts to include in the roll
-   * @param {Object} [extraData]  Additional roll component values
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
-  rollAbilitySave(abilityId, options={}, { extraParts=[], extraData={} }={}) {
+  rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
@@ -639,9 +633,10 @@ export default class Actor5e extends Actor {
       data.saveBonus = bonuses.save;
     }
 
-    // Add provided extra roll parts
-    parts.push(...extraParts);
-    Object.assign(data, extraData);
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
 
     // Roll and return
     return d20Roll(mergeObject(options, {
