@@ -508,6 +508,11 @@ export default class Actor5e extends Actor {
       parts.push("@skillBonus");
     }
 
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
+
     // Reliable Talent applies to any skill check we have full or better proficiency in
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
@@ -583,6 +588,11 @@ export default class Actor5e extends Actor {
       data.checkBonus = bonuses.check;
     }
 
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
+    }
+
     // Roll and return
     return d20Roll(mergeObject(options, {
       parts: parts,
@@ -621,6 +631,11 @@ export default class Actor5e extends Actor {
     if ( bonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = bonuses.save;
+    }
+
+    // Add provided extra roll parts now because they will get clobbered by mergeObject below
+    if (options.parts?.length > 0) {
+      parts.push(...options.parts);
     }
 
     // Roll and return
