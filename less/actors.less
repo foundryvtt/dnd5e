@@ -87,6 +87,7 @@
     height: 18px;
     line-height: 16px;
     margin: 4px 8px 2px;
+    .modesto();
     font-size: 18px;
     color: @colorOlive;
     border-bottom: 1px solid @colorFaint;
@@ -111,7 +112,6 @@
       margin: 0 5px 0 0;
       border: @borderGroove;
       border-radius: 4px;
-      .modesto();
       text-align: center;
 
       &:last-child {
@@ -124,8 +124,10 @@
         align-items: center;
         height: 28px;
         line-height: 28px;
+        .modesto();
 
         > * {
+          font-weight: 400;
           font-size: 24px;
         }
 
@@ -138,8 +140,9 @@
         flex: 0 0 18px;
         margin-top: -1px;
         line-height: 18px;
-        font-family: "Signika", "Palatino Linotype", serif;
+        font-family: "Signika", sans-serif;
         font-size: 12px;
+        font-weight: 400;
       }
     }
   }
@@ -488,8 +491,8 @@
       h3 {
         margin: 0 -5px 0 0;
         padding-left: 5px;
-        font-size: 13px;
-        font-weight: bold;
+        .modesto();
+        font-size: 16px;
       }
 
       .item-controls a.item-create {

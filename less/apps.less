@@ -56,19 +56,26 @@
   }
 
   // Checkbox Labels
+  // TODO: THIS CAN BE MOSTLY REMOVED NOW THAT IT IS IN CORE, see core forms.less
   label.checkbox {
     flex: auto;
+    padding: 0;
     margin: 0;
     height: 22px;
     line-height: 22px;
     font-size: 11px;
-    text-align: right;
-    input[type="checkbox"] {
-      margin: 0 5px 0;
+    > input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin: 0 2px 0 0;
       position: relative;
-      top: 5px;
+      top: 4px;
+    }
+    &.right > input[type="checkbox"] {
+      margin: 0 0 0 2px;
     }
   }
+
 
   /* Form Groups */
   .form-group {
@@ -101,11 +108,10 @@
   // Form Headers
   .form-header {
     margin: 0 0 0.25em 0;
-    padding: 0 2px;
-    .modesto();
-    font-size: 24px;
+    padding: 2px 0;
     border-top: @borderGroove;
     border-bottom: @borderGroove;
+    .modesto();
   }
 
   /* Tags */
@@ -204,7 +210,10 @@
   .sheet-header {
     flex: 0 0 @headerHeight;
     border-bottom: @borderGroove;
-    .modesto();
+
+    .header-details {
+      .modesto();
+    }
 
     /* Character Name */
     h1 {
