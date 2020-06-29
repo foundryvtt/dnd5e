@@ -8,6 +8,10 @@ under the Open Gaming License v1.0a.
 The [Systems Reference Document (SRD)](http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf) for included
 content is available in full from Wizards of the Coast.
 
+The Foundry 5e system is unofficial Fan Content permitted under the Fan Content Policy and is not approved or 
+endorsed by Wizards of the Coast. Portions of the materials used are property of 
+[Wizards of the Coast](https://dnd.wizards.com/). ©Wizards of the Coast LLC.
+
 ## Installation Instructions
 
 To install the D&D5E system for Foundry Virtual Tabletop, simply paste the following URL into the **Install System**
