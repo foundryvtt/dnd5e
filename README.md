@@ -1,20 +1,21 @@
-# Foundry VTT 5th Edition
+# Foundry Virtual Tabletop - DnD5e Game System
 
-This game system for [Foundry Virtual Tabletop](http://foundryvtt.com) provides character sheet and game support
-for the Dungeons & Dragons 5th Edition game system by [Wizards of the Coast](https://dnd.wizards.com/). 
-©Wizards of the Coast LLC. This system may be used under the terms of the Open Gaming License v1.0a and its accompanying
-[Systems Reference Document (SRD)](http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf).
+This game system for [Foundry Virtual Tabletop](http://foundryvtt.com) provides character sheet and game system 
+support for the Fifth Edition of the world's most popular roleplaying game.
 
-This is not the full Dungeons & Dragons game. The character sheet component is provided as unofficial Fan Content 
-which is not endorsed by Wizards of the Coast. Additional text content and rules are provided under the Open Gaming 
-License v1.0a. 
+This system is offered and may be used under the terms of the Open Gaming License v1.0a and its accompanying
+[Systems Reference Document 5.1 (SRD5)](http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf).
+
+This system provides character sheet support for Actors and Items, mechanical support for dice and rules necessary to
+play games of 5th Edition, and compendium content for Monsters, Heroes, Items, Spells, Class Features, Monster 
+Features, and more!
 
 The software component of this system is distributed under the GNUv3 license.
 
 ## Installation Instructions
 
-To install and use the Foundry VTT 5th Edition system for Foundry Virtual Tabletop, simply paste the following URL 
-into the **Install System** dialog on the Setup menu of the application.
+To install and use the DnD5e system for Foundry Virtual Tabletop, simply paste the following URL into the 
+**Install System** dialog on the Setup menu of the application.
 
 https://gitlab.com/foundrynet/dnd5e/raw/master/system.json
 
