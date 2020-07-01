@@ -1,7 +1,7 @@
 import ActorSheet5e from "./base.js";
 
 /**
- * An Actor sheet for player character type actors in the D&D5E system.
+ * An Actor sheet for player character type actors.
  * Extends the base ActorSheet5e class.
  * @type {ActorSheet5e}
  */

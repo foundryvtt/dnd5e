@@ -1,5 +1,6 @@
 /**
- * The Dungeons & Dragons 5th Edition game system for Foundry Virtual Tabletop
+ * The DnD5e game system for Foundry Virtual Tabletop
+ * A system for playing the fifth edition of the worlds most popular roleplaying game.
  * Author: Atropos
  * Software License: GNU GPLv3
  * Content License: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
@@ -39,9 +40,9 @@ import * as migrations from "./module/migration.js";
 /* -------------------------------------------- */
 
 Hooks.once("init", function() {
-  console.log(`D&D5e | Initializing Dungeons & Dragons 5th Edition System\n${DND5E.ASCII}`);
+  console.log(`DnD5e | Initializing the DnD5e Game System\n${DND5E.ASCII}`);
 
-  // Create a D&D5E namespace within the game global
+  // Create a namespace within the game global
   game.dnd5e = {
     applications: {
       ActorSheetFlags,
@@ -142,7 +143,7 @@ Hooks.once("ready", function() {
   // Perform the migration
   if ( needMigration && game.user.isGM ) {
     if ( currentVersion && (currentVersion < COMPATIBLE_MIGRATION_VERSION) ) {
-      ui.notifications.error(`Your D&D5E system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`, {permanent: true});
+      ui.notifications.error(`Your DnD5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`, {permanent: true});
     }
     migrations.migrateWorld();
   }

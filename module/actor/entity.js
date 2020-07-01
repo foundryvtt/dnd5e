@@ -6,7 +6,7 @@ import AbilityTemplate from "../pixi/ability-template.js";
 import {DND5E} from '../config.js';
 
 /**
- * Extend the base Actor class to implement additional logic specialized for D&D5e.
+ * Extend the base Actor class to implement additional system-specific logic.
  */
 export default class Actor5e extends Actor {
 
@@ -1182,7 +1182,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Add additional system-specific sidebar directory context menu options for D&D5e Actor entities
+   * Add additional system-specific sidebar directory context menu options for Actor entities
    * @param {jQuery} html         The sidebar HTML
    * @param {Array} entryOptions  The default array of context menu options
    */

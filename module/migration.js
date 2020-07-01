@@ -3,7 +3,7 @@
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
-  ui.notifications.info(`Applying D&D5E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
+  ui.notifications.info(`Applying DnD5E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   // Migrate World Actors
   for ( let a of game.actors.entities ) {
@@ -54,7 +54,7 @@ export const migrateWorld = async function() {
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.data.version);
-  ui.notifications.info(`D&D5E System Migration to version ${game.system.data.version} completed!`, {permanent: true});
+  ui.notifications.info(`DnD5E System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 };
 
 /* -------------------------------------------- */
