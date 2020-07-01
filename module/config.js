@@ -1,4 +1,4 @@
-// Namespace D&D5e Configuration Values
+// Namespace Configuration Values
 export const DND5E = {};
 
 // ASCII Artwork
@@ -66,7 +66,7 @@ DND5E.toolProficiencies = {
 /* -------------------------------------------- */
 
 /**
- * This Object defines the various lengths of time which can occur in D&D5e
+ * This Object defines the various lengths of time which can occur
  * @type {Object}
  */
 DND5E.timePeriods = {
@@ -283,7 +283,7 @@ DND5E.encumbrance = {
 /* -------------------------------------------- */
 
 /**
- * This Object defines the types of single or area targets which can be applied in D&D5e
+ * This Object defines the types of single or area targets which can be applied
  * @type {Object}
  */
 DND5E.targetTypes = {
@@ -338,7 +338,7 @@ DND5E.healingTypes = {
 
 
 /**
- * Enumerate the denominations of hit dice which can apply to classes in the D&D5E system
+ * Enumerate the denominations of hit dice which can apply to classes
  * @type {Array.<string>}
  */
 DND5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
@@ -361,7 +361,7 @@ DND5E.senses = {
 /* -------------------------------------------- */
 
 /**
- * The set of skill which can be trained in D&D5e
+ * The set of skill which can be trained
  * @type {Object}
  */
 DND5E.skills = {
