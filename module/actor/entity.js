@@ -517,14 +517,14 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    return d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: reliableTalent
-    }));
+    }, options));
   }
 
   /* -------------------------------------------- */
@@ -594,13 +594,13 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    return d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: feats.halflingLucky
-    }));
+    }, options));
   }
 
   /* -------------------------------------------- */
@@ -639,13 +639,13 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    return d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
-    }));
+    }, options));
   }
 
   /* -------------------------------------------- */
@@ -670,14 +670,14 @@ export default class Actor5e extends Actor {
     }
 
     // Evaluate the roll
-    const roll = await d20Roll(mergeObject(options, {
+    const roll = await d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
       speaker: speaker,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10
-    }));
+    }, options));
     if ( !roll ) return null;
 
     // Take action depending on the result
