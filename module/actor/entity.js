@@ -73,42 +73,14 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Skill modifiers
-    const feats = DND5E.characterFlags;
-    const athlete = flags.remarkableAthlete;
-    const joat = flags.jackOfAllTrades;
-    const observant = flags.observantFeat;
-    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
-    let round = Math.floor;
-    for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = parseFloat(skl.value || 0);
-
-      // Apply Remarkable Athlete or Jack of all Trades
-      let multi = skl.value;
-      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
-        multi = 0.5;
-        round = Math.ceil;
-      }
-      if ( joat && (skl.value === 0 ) ) multi = 0.5;
-
-      // Compute modifier
-      skl.bonus = checkBonus + skillBonus;
-      skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = round(multi * data.attributes.prof);
-      skl.total = skl.mod + skl.prof + skl.bonus;
-
-      // If we merged skills when transforming, take the highest bonus here.
-      if (originalSkills && skl.value > 0.5) {
-        skl.total = Math.max(skl.total, originalSkills[id].total);
-      }
-
-      // Compute passive bonus
-      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      skl.passive = 10 + skl.total + passive;
+    if ( actorData.type !== 'vehicle' ) {
+      this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
     }
 
     // Determine Initiative Modifier
     const init = data.attributes.init;
+    const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
     init.mod = data.abilities.dex.mod;
     if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
     else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
@@ -119,7 +91,7 @@ export default class Actor5e extends Actor {
     // Prepare spell-casting data
     data.attributes.spelldc = this.getSpellDC(data.attributes.spellcasting);
     // TODO: Only do this IF we have already processed item types (see Entity#initialize)
-    if ( this.items ) {
+    if ( this.items && actorData.type !== 'vehicle' ) {
       this._computeSpellcastingProgression(actorData);
     }
   }
@@ -173,6 +145,45 @@ export default class Actor5e extends Actor {
     // Spellcaster Level
     if ( data.attributes.spellcasting && !data.details.spellLevel ) {
       data.details.spellLevel = Math.max(data.details.cr, 1);
+    }
+  }
+
+  _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
+    const data = actorData.data;
+    const flags = actorData.flags.dnd5e || {};
+
+    // Skill modifiers
+    const feats = DND5E.characterFlags;
+    const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
+    const observant = flags.observantFeat;
+    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
+    let round = Math.floor;
+    for (let [id, skl] of Object.entries(data.skills)) {
+      skl.value = parseFloat(skl.value || 0);
+
+      // Apply Remarkable Athlete or Jack of all Trades
+      let multi = skl.value;
+      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
+        multi = 0.5;
+        round = Math.ceil;
+      }
+      if ( joat && (skl.value === 0 ) ) multi = 0.5;
+
+      // Compute modifier
+      skl.bonus = checkBonus + skillBonus;
+      skl.mod = data.abilities[skl.ability].mod;
+      skl.prof = round(multi * data.attributes.prof);
+      skl.total = skl.mod + skl.prof + skl.bonus;
+
+      // If we merged skills when transforming, take the highest bonus here.
+      if (originalSkills && skl.value > 0.5) {
+        skl.total = Math.max(skl.total, originalSkills[id].total);
+      }
+
+      // Compute passive bonus
+      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
+      skl.passive = 10 + skl.total + passive;
     }
   }
 

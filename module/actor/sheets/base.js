@@ -53,6 +53,7 @@ export default class ActorSheet5e extends ActorSheet {
       cssClass: isOwner ? "editable" : "locked",
       isCharacter: this.entity.data.type === "character",
       isNPC: this.entity.data.type === "npc",
+      isVehicle: this.entity.data.type === 'vehicle',
       config: CONFIG.DND5E,
     };
 
@@ -74,12 +75,14 @@ export default class ActorSheet5e extends ActorSheet {
       abl.label = CONFIG.DND5E.abilities[a];
     }
 
-    // Update skill labels
-    for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
-      skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
-      skl.icon = this._getProficiencyIcon(skl.value);
-      skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
-      skl.label = CONFIG.DND5E.skills[s];
+    if (!data.isVehicle) {
+      // Update skill labels
+      for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
+        skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);
+        skl.icon = this._getProficiencyIcon(skl.value);
+        skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
+        skl.label = CONFIG.DND5E.skills[s];
+      }
     }
 
     // Update traits

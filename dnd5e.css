@@ -58,7 +58,7 @@
   flex: 4;
 }
 /* ----------------------------------------- */
-/*  All D&D5e Apps                           */
+/*  All DnD5e Apps                           */
 /* ----------------------------------------- */
 .dnd5e {
   /* ----------------------------------------- */
@@ -1217,6 +1217,7 @@
   height: 20px;
   font-size: 18px;
   color: #7a7971;
+  white-space: nowrap;
 }
 .dnd5e.sheet.actor.character .sheet-header .experience {
   flex: 0 0 32px;
@@ -1407,4 +1408,18 @@
 }
 .dnd5e.sheet.actor.npc .spellcasting-ability label {
   flex: none;
+}
+.dnd5e.sheet.actor.vehicle .attribute.health .attribute-footer {
+  display: flex;
+}
+.dnd5e.sheet.actor.vehicle .counters .counter.creature-cap .counter-value {
+  flex: 1;
+}
+.dnd5e.sheet.actor.vehicle .counters .counter.creature-cap input {
+  max-width: none;
+  text-align: right;
+}
+.dnd5e.sheet.actor.vehicle .counters .counter.cargo-cap input {
+  max-width: 40px;
+  text-align: right;
 }
