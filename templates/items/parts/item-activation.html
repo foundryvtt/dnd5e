@@ -23,6 +23,21 @@
     </div>
 </div>
 
+{{#if isCrewed}}
+<div class="form-group">
+    <label>{{localize 'DND5E.Cover'}}</label>
+    <div class="form-fields">
+        <select name="data.cover" data-dtype="Number">
+            {{#select data.cover}}
+                <option value="">&mdash;</option>
+                {{#each config.cover}}
+                    <option value="{{@key}}">{{this}}</option>
+                {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</div>
+{{/if}}
 
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">

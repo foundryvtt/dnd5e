@@ -49,6 +49,10 @@ export default class ItemSheet5e extends ItemSheet {
     data.hasAttackRoll = this.item.hasAttack;
     data.isHealing = data.item.data.actionType === "heal";
     data.isFlatDC = getProperty(data.item.data, "save.scaling") === "flat";
+
+    // Vehicles
+    data.isCrewed = data.item.data.activation.type === 'crew';
+    data.isObject = this._isItemAnObject(data.item);
     return data;
   }
 
@@ -178,6 +182,12 @@ export default class ItemSheet5e extends ItemSheet {
       )
     }
     return props.filter(p => !!p);
+  }
+
+  _isItemAnObject(item) {
+    const data = item.data;
+    return (item.type === 'weapon' && data.weaponType === 'siege')
+      || (item.type === 'equipment' && data.armor.type === 'vehicle');
   }
 
   /* -------------------------------------------- */

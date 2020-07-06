@@ -1,10 +1,15 @@
 .dnd5e.sheet.actor.vehicle {
-  .attribute.health {
-    .attribute-footer {
-      display: flex;
+  .features {
+    .item-controls {
+      flex: 0 0 68px;
+      .item-toggle {
+        color: #b5b3a4;
+        &.active {
+          color: #4b4a44;
+        }
+      }
     }
   }
-
   .counters {
     .counter.creature-cap {
       .counter-value {

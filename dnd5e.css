@@ -1409,8 +1409,14 @@
 .dnd5e.sheet.actor.npc .spellcasting-ability label {
   flex: none;
 }
-.dnd5e.sheet.actor.vehicle .attribute.health .attribute-footer {
-  display: flex;
+.dnd5e.sheet.actor.vehicle .features .item-controls {
+  flex: 0 0 68px;
+}
+.dnd5e.sheet.actor.vehicle .features .item-controls .item-toggle {
+  color: #b5b3a4;
+}
+.dnd5e.sheet.actor.vehicle .features .item-controls .item-toggle.active {
+  color: #4b4a44;
 }
 .dnd5e.sheet.actor.vehicle .counters .counter.creature-cap .counter-value {
   flex: 1;

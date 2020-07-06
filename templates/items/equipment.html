@@ -57,6 +57,7 @@
                 </select>
             </div>
 
+            {{#unless isObject}}
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemEquipmentStatus" }}</label>
@@ -73,6 +74,7 @@
                     <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "DND5E.Attuned" }}
                 </label>
             </div>
+            {{/unless}}
 
             {{!-- Armor Class --}}
             <div class="form-group">
@@ -82,6 +84,7 @@
                 </div>
             </div>
 
+            {{#unless isObject}}
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
@@ -103,6 +106,21 @@
                 <label>{{ localize "DND5E.ItemEquipmentStealthDisav" }}</label>
                 <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
             </div>
+            {{/unless}}
+
+            {{#if isObject}}
+            {{> 'systems/dnd5e/templates/items/parts/item-object.html'}}
+            <div class="form-group">
+                <label>{{localize 'DND5E.Speed'}}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.speed.value" value="{{data.speed.value}}"
+                           placeholder="0" data-dtype="Number">
+                    <span class="sep">{{localize 'DND5E.FeetAbbr'}}</span>
+                    <input type="text" name="data.speed.conditions"
+                           value="{{data.speed.conditions}}">
+                </div>
+            </div>
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemEquipmentUsage" }}</h3>
 

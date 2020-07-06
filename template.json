@@ -354,6 +354,7 @@
           "motionless": ""
         },
         "actions": {
+          "stations": false,
           "value": 0,
           "thresholds": {
             "2": null,
@@ -456,6 +457,17 @@
           "dc": null,
           "scaling": "spell"
         }
+      },
+      "object": {
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        }
       }
     },
     "backpack": {
@@ -494,11 +506,15 @@
       }
     },
     "equipment": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "object"],
       "armor": {
         "type": "light",
         "value": 10,
         "dex": null
+      },
+      "speed": {
+        "value": null,
+        "conditions": ""
       },
       "strength": 0,
       "stealth": false,
@@ -549,7 +565,7 @@
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action"],
+      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "object"],
       "weaponType": "simpleM",
       "properties": {},
       "proficient": true
