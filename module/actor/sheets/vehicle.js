@@ -40,46 +40,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     return item.update({'data.hp.value': hp});
   }
 
-  async _onItemCreate(event) {
-    if (event.currentTarget.dataset.type === 'equipment') {
-      const createData = {
-        name: game.i18n.localize('DND5E.NewEquipment'),
-        type: 'equipment',
-        'data.armor.type': 'vehicle',
-        'data.weaponType': 'siege'
-      };
-
-      const equipment = game.i18n.localize('DND5E.VehicleEquipment');
-      const templateData = {
-        upper: equipment,
-        lower: equipment.toLowerCase(),
-        types: ['equipment', 'weapon']
-      };
-
-      const dlg = await renderTemplate('templates/sidebar/entity-create.html', templateData);
-      new Dialog({
-        title: game.i18n.localize('DND5E.CreateVehicleEquipment'),
-        content: dlg,
-        buttons: {
-          create: {
-            icon: '<i class="fas fa-check"></i>',
-            label: game.i18n.localize('DND5E.CreateEquipment'),
-            callback: html => {
-              const form = html[0].querySelector('form');
-              this.actor.createEmbeddedEntity(
-                'OwnedItem', mergeObject(createData, validateForm(form)), {renderSheet: false});
-            }
-          }
-        },
-        default: 'create'
-      }).render(true);
-
-      return;
-    }
-
-    return super._onItemCreate(event);
-  }
-
   _onToggleItem(event) {
     event.preventDefault();
     const itemID = event.currentTarget.closest('.item').dataset.itemId;
@@ -108,6 +68,25 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   }
 
   _prepareItems(data) {
+    const equipmentColumns = [{
+      label: game.i18n.localize('DND5E.Quantity'),
+      css: 'item-qty',
+      property: 'data.quantity'
+    }, {
+      label: game.i18n.localize('DND5E.AC'),
+      css: 'item-ac',
+      property: 'data.armor.value'
+    }, {
+      label: game.i18n.localize('DND5E.HP'),
+      css: 'item-hp',
+      property: 'data.hp.value',
+      editable: 'Number'
+    }, {
+      label: game.i18n.localize('DND5E.Threshold'),
+      css: 'item-threshold',
+      property: 'threshold'
+    }];
+
     const features = {
       actions: {
         label: game.i18n.localize('DND5E.ActionPl'),
@@ -128,25 +107,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         label: game.i18n.localize('DND5E.ItemTypeEquipment'),
         items: [],
         crewable: true,
-        dataset: {type: 'equipment'},
-        columns: [{
-          label: game.i18n.localize('DND5E.Quantity'),
-          css: 'item-qty',
-          property: 'data.quantity'
-        }, {
-          label: game.i18n.localize('DND5E.AC'),
-          css: 'item-ac',
-          property: 'data.armor.value'
-        }, {
-          label: game.i18n.localize('DND5E.HP'),
-          css: 'item-hp',
-          property: 'data.hp.value',
-          editable: 'Number'
-        }, {
-          label: game.i18n.localize('DND5E.Threshold'),
-          css: 'item-threshold',
-          property: 'threshold'
-        }]
+        dataset: {type: 'equipment', 'armor.type': 'vehicle'},
+        columns: equipmentColumns
       },
       passive: {
         label: game.i18n.localize('DND5E.Features'),
@@ -157,12 +119,20 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         label: game.i18n.localize('DND5E.ReactionPl'),
         items: [],
         dataset: {type: 'feat', 'activation.type': 'reaction'}
+      },
+      weapons: {
+        label: game.i18n.localize('DND5E.ItemTypeWeaponPl'),
+        items: [],
+        crewable: true,
+        dataset: {type: 'weapon', 'weapon-type': 'siege'},
+        columns: equipmentColumns
       }
     };
 
     for (const item of data.items) {
       this._prepareCrewedItem(item);
-      if (item.type === 'weapon' || item.type === 'equipment') features.equipment.items.push(item);
+      if (item.type === 'weapon') features.weapons.items.push(item);
+      else if (item.type === 'equipment') features.equipment.items.push(item);
       else if (item.type === 'feat') {
         if (!item.data.activation.type || item.data.activation.type === 'none') {
           features.passive.items.push(item);
