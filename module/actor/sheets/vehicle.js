@@ -4,7 +4,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "vehicle"],
-      width: 600,
+      width: 605,
       height: 680
     });
   }
@@ -26,9 +26,86 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       .click(evt => evt.target.select())
       .change(this._onHPChange.bind(this));
 
+    html.find('.item:not(.cargo-row) input[data-property]')
+      .click(evt => evt.target.select())
+      .change(this._onEditInSheet.bind(this));
+
+    html.find('.cargo-row input')
+      .click(evt => evt.target.select())
+      .change(this._onCargoRowChange.bind(this));
+
     if (this.actor.data.data.attributes.actions.stations) {
       html.find('.counter.actions, .counter.action-thresholds').hide();
     }
+  }
+
+  _computeEncumbrance(totalWeight, data) {
+    const totalCoins = Object.values(data.data.currency).reduce((acc, denom) => acc + denom, 0);
+    totalWeight += totalCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
+
+    // Vehicle weights are in tons so we divide the total weight by 2000.
+    totalWeight /= 2000;
+
+    const enc = {
+      max: data.data.attributes.capacity.cargo,
+      value: Math.round(totalWeight * 10) / 10
+    };
+
+    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
+    return enc;
+  }
+
+  _onCargoRowChange(event) {
+    event.preventDefault();
+    const target = event.currentTarget;
+    const row = target.closest('.item');
+    const idx = Number(row.dataset.itemId);
+    const property = row.classList.contains('crew') ? 'crew' : 'passengers';
+    const cargo = duplicate(this.actor.data.data.cargo[property]);
+    const entry = cargo[idx];
+
+    if (!entry) return;
+
+    const key = target.dataset.property || 'name';
+    const type = target.dataset.dtype;
+    let value = target.value;
+
+    if (type === 'Number') {
+      value = Number(value);
+    }
+
+    entry[key] = value;
+    return this.actor.update({[`data.cargo.${property}`]: cargo});
+  }
+
+  _onEditInSheet(event) {
+    event.preventDefault();
+    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const item = this.actor.items.get(itemID);
+    const property = event.currentTarget.dataset.property;
+    const type = event.currentTarget.dataset.dtype;
+    let value = event.currentTarget.value;
+
+    switch (type) {
+      case 'Number': value = parseInt(value); break;
+      case 'Boolean': value = value === 'true'; break;
+    }
+
+    return item.update({[`${property}`]: value});
+  }
+
+  _onItemCreate(event) {
+    event.preventDefault();
+    const target = event.currentTarget;
+    const type = target.dataset.type;
+
+    if (type === 'crew' || type === 'passengers') {
+      const cargo = duplicate(this.actor.data.data.cargo[type]);
+      cargo.push(this.actor.constructor.newCargo());
+      return this.actor.update({[`data.cargo.${type}`]: cargo});
+    }
+
+    return super._onItemCreate(event);
   }
 
   _onHPChange(event) {
@@ -68,6 +145,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   }
 
   _prepareItems(data) {
+    const cargoColumns = [{
+      label: game.i18n.localize('DND5E.Quantity'),
+      css: 'item-qty',
+      property: 'quantity',
+      editable: 'Number'
+    }];
+
     const equipmentColumns = [{
       label: game.i18n.localize('DND5E.Quantity'),
       css: 'item-qty',
@@ -129,18 +213,66 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       }
     };
 
+    const cargo = {
+      crew: {
+        label: game.i18n.localize('DND5E.Crew'),
+        items: data.data.cargo.crew,
+        css: 'cargo-row crew',
+        editableName: true,
+        dataset: {type: 'crew'},
+        columns: cargoColumns
+      },
+      passengers: {
+        label: game.i18n.localize('DND5E.Passengers'),
+        items: data.data.cargo.passengers,
+        css: 'cargo-row passengers',
+        editableName: true,
+        dataset: {type: 'passengers'},
+        columns: cargoColumns
+      },
+      cargo: {
+        label: game.i18n.localize('DND5E.Cargo'),
+        items: [],
+        dataset: {type: 'loot'},
+        columns: [{
+          label: game.i18n.localize('DND5E.Quantity'),
+          css: 'item-qty',
+          property: 'data.quantity',
+          editable: 'Number'
+        }, {
+          label: game.i18n.localize('DND5E.Price'),
+          css: 'item-price',
+          property: 'data.price',
+          editable: 'Number'
+        }, {
+          label: game.i18n.localize('DND5E.Weight'),
+          css: 'item-weight',
+          property: 'data.weight',
+          editable: 'Number'
+        }]
+      }
+    };
+
+    let totalWeight = 0;
     for (const item of data.items) {
       this._prepareCrewedItem(item);
       if (item.type === 'weapon') features.weapons.items.push(item);
       else if (item.type === 'equipment') features.equipment.items.push(item);
+      else if (item.type === 'loot') {
+        totalWeight += item.data.weight || 0;
+        cargo.cargo.items.push(item);
+      }
       else if (item.type === 'feat') {
         if (!item.data.activation.type || item.data.activation.type === 'none') {
           features.passive.items.push(item);
-        } else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
+        }
+        else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
         else features.actions.items.push(item);
       }
     }
 
     data.features = Object.values(features);
+    data.cargo = Object.values(cargo);
+    data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
   }
 };

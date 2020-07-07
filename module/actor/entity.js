@@ -1213,4 +1213,14 @@ export default class Actor5e extends Actor {
       }
     });
   }
+
+  /**
+   * Creates a new cargo entry for a vehicle Actor.
+   */
+  static newCargo() {
+    return {
+      name: '',
+      quantity: 1
+    };
+  }
 }

@@ -51,7 +51,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.isFlatDC = getProperty(data.item.data, "save.scaling") === "flat";
 
     // Vehicles
-    data.isCrewed = data.item.data.activation.type === 'crew';
+    data.isCrewed = data.item.data.activation?.type === 'crew';
     data.isObject = this._isItemAnObject(data.item);
     return data;
   }
