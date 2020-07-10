@@ -81,7 +81,7 @@ export default class ActorSheet5e extends ActorSheet {
       abl.label = CONFIG.DND5E.abilities[a];
     }
 
-    if (!data.isVehicle) {
+    if (data.actor.data.skills) {
       // Update skill labels
       for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
         skl.ability = data.actor.data.abilities[skl.ability].label.substring(0, 3);

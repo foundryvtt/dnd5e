@@ -43,10 +43,6 @@
           "init": {
             "value": 0,
             "bonus": 0
-          },
-          "speed": {
-            "value": "30 ft",
-            "special": ""
           }
         },
         "details": {
@@ -84,7 +80,11 @@
       },
       "creature": {
         "attributes": {
-          "spellcasting": "int"
+          "spellcasting": "int",
+          "speed": {
+            "value": "30 ft",
+            "special": ""
+          }
         },
         "details": {
           "alignment": "",
@@ -372,10 +372,7 @@
           "creature": "",
           "cargo": 0
         },
-        "speed": {
-          "value": "—",
-          "pace": null
-        }
+        "speed": ""
       },
       "traits": {
         "size": "lg",
