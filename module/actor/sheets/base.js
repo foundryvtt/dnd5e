@@ -37,6 +37,12 @@ export default class ActorSheet5e extends ActorSheet {
     });
   }
 
+  /* -------------------------------------------- */
+
+  get template() {
+    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
+    return `systems/dnd5e/templates/actors/${this.actor.data.type}-sheet.html`;
+  }
 
   /* -------------------------------------------- */
 

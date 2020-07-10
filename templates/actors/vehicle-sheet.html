@@ -40,7 +40,7 @@
                                placeholder="{{localize 'DND5E.Threshold'}}"
                                value="{{data.attributes.hp.dt}}" data-dtype="Number">
                         <input name="data.attributes.hp.mt" type="text" class="temphp"
-                               placeholder="{{localize 'DND5E.Mishap'}}"
+                               placeholder="{{localize 'DND5E.VehicleMishap'}}"
                                value="{{data.attributes.hp.mt}}" data-dtype="Number">
                     </footer>
                 </li>
@@ -69,7 +69,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{localize 'DND5E.Attributes'}}</a>
         <a class="item" data-tab="features">{{localize 'DND5E.Features'}}</a>
-        <a class="item" data-tab="cargo">{{localize 'DND5E.CargoCrew'}}</a>
+        <a class="item" data-tab="cargo">{{localize 'DND5E.VehicleCargoCrew'}}</a>
         <a class="item" data-tab="biography">{{localize 'DND5E.Description'}}</a>
     </nav>
 
@@ -92,7 +92,7 @@
             <section class="center-pane flexcol">
                 <div class="counters">
                     <div class="counter flexrow creature-cap">
-                        <h4>{{localize 'DND5E.CreatureCapacity'}}</h4>
+                        <h4>{{localize 'DND5E.VehicleCreatureCapacity'}}</h4>
                         <div class="counter-value">
                             <input type="text" placeholder="&mdash;"
                                    name="data.attributes.capacity.creature"
@@ -100,21 +100,21 @@
                         </div>
                     </div>
                     <div class="counter flexrow cargo-cap">
-                        <h4>{{localize 'DND5E.CargoCapacity'}}</h4>
+                        <h4>{{localize 'DND5E.VehicleCargoCapacity'}}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.attributes.capacity.cargo" placeholder="0"
                                    data-dtype="Number" value="{{data.attributes.capacity.cargo}}">
                         </div>
                     </div>
                     <div class="counter flexrow pace">
-                        <h4>{{localize 'DND5E.TravelPace'}}</h4>
+                        <h4>{{localize 'DND5E.VehicleTravelPace'}}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.attributes.speed.pace" data-dtype="Number"
                                    placeholder="&mdash;" value="{{data.attributes.speed.pace}}">
                         </div>
                     </div>
                     <div class="counter flexrow stations">
-                        <h4>{{localize 'DND5E.ActionStations'}}</h4>
+                        <h4>{{localize 'DND5E.VehicleActionStations'}}</h4>
                         <div class="counter-value">
                             <input name="data.attributes.actions.stations" type="checkbox"
                                    data-dtype="Boolean" value="{{data.attributes.actions.stations}}"
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="counter flexrow action-thresholds">
-                        <h4>{{localize 'DND5E.ActionThresholds'}}</h4>
+                        <h4>{{localize 'DND5E.VehicleActionThresholds'}}</h4>
                         <div class="counter-value">
                             <span class="sep">&lt;</span>
                             <input type="text" placeholder="&mdash;" data-dtype="Number"

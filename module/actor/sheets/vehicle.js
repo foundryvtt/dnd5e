@@ -1,6 +1,15 @@
 import ActorSheet5e from "./base.js";
 
+/**
+ * An Actor sheet for Vehicle type actors.
+ * Extends the base ActorSheet5e class.
+ * @type {ActorSheet5e}
+ */
 export default class ActorSheet5eVehicle extends ActorSheet5e {
+  /**
+   * Define default rendering options for the Vehicle sheet.
+   * @returns {Object}
+   */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "vehicle"],
@@ -9,29 +18,19 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     });
   }
 
-  get template() {
-    if (!game.user.isGM && this.actor.limited) {
-      return 'systems/dnd5e/templates/actors/limited-sheet.html';
-    }
+  /* -------------------------------------------- */
 
-    return 'systems/dnd5e/templates/actors/vehicle-sheet.html';
-  }
-
-  activateListeners(html) {
-    super.activateListeners(html);
-    if (!this.options.editable) return;
-
-    if (this.actor.data.data.attributes.actions.stations) {
-      html.find('.counter.actions, .counter.action-thresholds').hide();
-    }
-  }
-
+  /**
+   * Compute the total weight of the vehicle's cargo.
+   * @returns {{max: number, value: number, pct: number}}
+   * @private
+   */
   _computeEncumbrance(totalWeight, data) {
     const totalCoins = Object.values(data.data.currency).reduce((acc, denom) => acc + denom, 0);
     totalWeight += totalCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
 
-    // Vehicle weights are in tons so we divide the total weight by 2000.
-    totalWeight /= 2000;
+    // Vehicle weights are an order of magnitude greater.
+    totalWeight /= CONFIG.DND5E.encumbrance.vehicleWeightMultiplier;
 
     const enc = {
       max: data.data.attributes.capacity.cargo,
@@ -42,6 +41,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     return enc;
   }
 
+  /**
+   * Organize Owned Items for rendering the Vehicle sheet.
+   * @private
+   */
   _prepareItems(data) {
     const features = {
       actions: {
@@ -73,7 +76,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     const cargo = {
       cargo: {
-        label: game.i18n.localize('DND5E.Cargo'),
+        label: game.i18n.localize('DND5E.VehicleCargo'),
         items: [],
         dataset: {type: 'loot'}
       }
@@ -99,5 +102,23 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     data.features = Object.values(features);
     data.cargo = Object.values(cargo);
     data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Activate event listeners using the prepared sheet HTML.
+   * @param html {JQuery} The prepared HTML object ready to be rendered into
+   *                      the DOM.
+   */
+  activateListeners(html) {
+    super.activateListeners(html);
+    if (!this.options.editable) return;
+
+    if (this.actor.data.data.attributes.actions.stations) {
+      html.find('.counter.actions, .counter.action-thresholds').hide();
+    }
   }
 };

@@ -30,8 +30,8 @@
         <select name="data.cover" data-dtype="Number">
             {{#select data.cover}}
                 <option value="">&mdash;</option>
-                {{#each config.cover}}
-                    <option value="{{@key}}">{{this}}</option>
+                {{#each config.cover as |v k|}}
+                    <option value="{{k}}">{{v}}</option>
                 {{/each}}
             {{/select}}
         </select>

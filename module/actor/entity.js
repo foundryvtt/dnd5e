@@ -73,9 +73,7 @@ export default class Actor5e extends Actor {
       }
     }
 
-    if ( actorData.type !== 'vehicle' ) {
-      this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
-    }
+    this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
     // Determine Initiative Modifier
     const init = data.attributes.init;
@@ -91,7 +89,7 @@ export default class Actor5e extends Actor {
     // Prepare spell-casting data
     data.attributes.spelldc = this.getSpellDC(data.attributes.spellcasting);
     // TODO: Only do this IF we have already processed item types (see Entity#initialize)
-    if ( this.items && actorData.type !== 'vehicle' ) {
+    if ( this.items ) {
       this._computeSpellcastingProgression(actorData);
     }
   }
@@ -148,7 +146,17 @@ export default class Actor5e extends Actor {
     }
   }
 
+  /**
+   * Prepare skill checks.
+   * @param actorData
+   * @param bonuses Global bonus data.
+   * @param checkBonus Ability check specific bonus.
+   * @param originalSkills A transformed actor's original actor's skills.
+   * @private
+   */
   _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
+    if (actorData.type === 'vehicle') return;
+
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
 
@@ -194,6 +202,8 @@ export default class Actor5e extends Actor {
    * @private
    */
   _computeSpellcastingProgression (actorData) {
+    if (actorData.type === 'vehicle') return;
+
     const spells = actorData.data.spells;
     const isNPC = actorData.type === 'npc';
 

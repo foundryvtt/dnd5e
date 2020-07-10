@@ -184,6 +184,12 @@ export default class ItemSheet5e extends ItemSheet {
     return props.filter(p => !!p);
   }
 
+  /**
+   * Is this a large object with its own specific HP and AC?
+   * @param item
+   * @returns {boolean}
+   * @private
+   */
   _isItemAnObject(item) {
     const data = item.data;
     return (item.type === 'weapon' && data.weaponType === 'siege')

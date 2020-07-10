@@ -100,7 +100,7 @@ DND5E.abilityActivationTypes = {
   "special": DND5E.timePeriods.spec,
   "legendary": "DND5E.LegAct",
   "lair": "DND5E.LairAct",
-  "crew": "DND5E.CrewAction"
+  "crew": "DND5E.VehicleCrewAction"
 };
 
 /* -------------------------------------------- */
@@ -279,7 +279,8 @@ DND5E.distanceUnits = {
  */
 DND5E.encumbrance = {
   currencyPerWeight: 50,
-  strMultiplier: 15
+  strMultiplier: 15,
+  vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
 };
 
 /* -------------------------------------------- */

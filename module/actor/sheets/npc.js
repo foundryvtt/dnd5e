@@ -20,19 +20,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
-
-  /**
-   * Get the correct HTML template path to use for rendering this particular sheet
-   * @type {String}
-   */
-  get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
-    return "systems/dnd5e/templates/actors/npc-sheet.html";
-  }
-
-  /* -------------------------------------------- */
 
   /**
    * Organize Owned Items for rendering the NPC sheet
