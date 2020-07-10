@@ -171,7 +171,7 @@ export default class Actor5e extends Actor {
     data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
 
     // Spellcaster Level
-    if ( data.attributes.spellcasting && !data.details.spellLevel ) {
+    if ( data.attributes.spellcasting && data.details.spellLevel == null ) {
       data.details.spellLevel = Math.max(data.details.cr, 1);
     }
   }
