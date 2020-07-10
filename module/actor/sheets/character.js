@@ -20,19 +20,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
-
-  /**
-   * Get the correct HTML template path to use for rendering this particular sheet
-   * @type {String}
-   */
-  get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
-    return "systems/dnd5e/templates/actors/character-sheet.html";
-  }
-
-  /* -------------------------------------------- */
 
   /**
    * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.

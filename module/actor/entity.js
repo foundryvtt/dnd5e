@@ -73,42 +73,12 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Skill modifiers
-    const feats = DND5E.characterFlags;
-    const athlete = flags.remarkableAthlete;
-    const joat = flags.jackOfAllTrades;
-    const observant = flags.observantFeat;
-    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
-    let round = Math.floor;
-    for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = parseFloat(skl.value || 0);
-
-      // Apply Remarkable Athlete or Jack of all Trades
-      let multi = skl.value;
-      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
-        multi = 0.5;
-        round = Math.ceil;
-      }
-      if ( joat && (skl.value === 0 ) ) multi = 0.5;
-
-      // Compute modifier
-      skl.bonus = checkBonus + skillBonus;
-      skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = round(multi * data.attributes.prof);
-      skl.total = skl.mod + skl.prof + skl.bonus;
-
-      // If we merged skills when transforming, take the highest bonus here.
-      if (originalSkills && skl.value > 0.5) {
-        skl.total = Math.max(skl.total, originalSkills[id].total);
-      }
-
-      // Compute passive bonus
-      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      skl.passive = 10 + skl.total + passive;
-    }
+    this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
     // Determine Initiative Modifier
     const init = data.attributes.init;
+    const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
     init.mod = data.abilities.dex.mod;
     if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
     else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
@@ -176,6 +146,55 @@ export default class Actor5e extends Actor {
     }
   }
 
+  /**
+   * Prepare skill checks.
+   * @param actorData
+   * @param bonuses Global bonus data.
+   * @param checkBonus Ability check specific bonus.
+   * @param originalSkills A transformed actor's original actor's skills.
+   * @private
+   */
+  _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
+    if (actorData.type === 'vehicle') return;
+
+    const data = actorData.data;
+    const flags = actorData.flags.dnd5e || {};
+
+    // Skill modifiers
+    const feats = DND5E.characterFlags;
+    const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
+    const observant = flags.observantFeat;
+    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
+    let round = Math.floor;
+    for (let [id, skl] of Object.entries(data.skills)) {
+      skl.value = parseFloat(skl.value || 0);
+
+      // Apply Remarkable Athlete or Jack of all Trades
+      let multi = skl.value;
+      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
+        multi = 0.5;
+        round = Math.ceil;
+      }
+      if ( joat && (skl.value === 0 ) ) multi = 0.5;
+
+      // Compute modifier
+      skl.bonus = checkBonus + skillBonus;
+      skl.mod = data.abilities[skl.ability].mod;
+      skl.prof = round(multi * data.attributes.prof);
+      skl.total = skl.mod + skl.prof + skl.bonus;
+
+      // If we merged skills when transforming, take the highest bonus here.
+      if (originalSkills && skl.value > 0.5) {
+        skl.total = Math.max(skl.total, originalSkills[id].total);
+      }
+
+      // Compute passive bonus
+      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
+      skl.passive = 10 + skl.total + passive;
+    }
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -183,6 +202,8 @@ export default class Actor5e extends Actor {
    * @private
    */
   _computeSpellcastingProgression (actorData) {
+    if (actorData.type === 'vehicle') return;
+
     const spells = actorData.data.spells;
     const isNPC = actorData.type === 'npc';
 

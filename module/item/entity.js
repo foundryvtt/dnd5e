@@ -590,7 +590,7 @@ export default class Item5e extends Item {
     }
 
     // Attack Bonus
-    const actorBonus = actorData.bonuses[itemData.actionType] || {};
+    const actorBonus = getProperty(actorData, `bonuses.${itemData.actionType}`) || {};
     if ( itemData.attackBonus || actorBonus.attack ) {
       parts.push("@atk");
       rollData["atk"] = [itemData.attackBonus, actorBonus.attack].filterJoin(" + ");
@@ -667,7 +667,7 @@ export default class Item5e extends Item {
     }
 
     // Define Roll Data
-    const actorBonus = actorData.bonuses[itemData.actionType] || {};
+    const actorBonus = getProperty(actorData, `bonuses.${itemData.actionType}`) || {};
     if ( actorBonus.damage && parseInt(actorBonus.damage) !== 0 ) {
       parts.push("@dmg");
       rollData["dmg"] = actorBonus.damage;
