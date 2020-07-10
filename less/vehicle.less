@@ -1,0 +1,32 @@
+.dnd5e.sheet.actor.vehicle {
+  .features {
+    .item-controls {
+      flex: 0 0 68px;
+      .item-toggle {
+        color: #b5b3a4;
+        &.active {
+          color: #4b4a44;
+        }
+      }
+    }
+  }
+  .counters {
+    .counter.creature-cap {
+      .counter-value {
+        flex: 1;
+      }
+
+      input {
+        max-width: none;
+        text-align: right;
+      }
+    }
+
+    .counter.cargo-cap {
+      input {
+        max-width: 40px;
+        text-align: right;
+      }
+    }
+  }
+}

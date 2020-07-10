@@ -73,42 +73,12 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Skill modifiers
-    const feats = DND5E.characterFlags;
-    const athlete = flags.remarkableAthlete;
-    const joat = flags.jackOfAllTrades;
-    const observant = flags.observantFeat;
-    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
-    let round = Math.floor;
-    for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = parseFloat(skl.value || 0);
-
-      // Apply Remarkable Athlete or Jack of all Trades
-      let multi = skl.value;
-      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
-        multi = 0.5;
-        round = Math.ceil;
-      }
-      if ( joat && (skl.value === 0 ) ) multi = 0.5;
-
-      // Compute modifier
-      skl.bonus = checkBonus + skillBonus;
-      skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = round(multi * data.attributes.prof);
-      skl.total = skl.mod + skl.prof + skl.bonus;
-
-      // If we merged skills when transforming, take the highest bonus here.
-      if (originalSkills && skl.value > 0.5) {
-        skl.total = Math.max(skl.total, originalSkills[id].total);
-      }
-
-      // Compute passive bonus
-      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      skl.passive = 10 + skl.total + passive;
-    }
+    this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
     // Determine Initiative Modifier
     const init = data.attributes.init;
+    const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
     init.mod = data.abilities.dex.mod;
     if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
     else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
@@ -171,8 +141,57 @@ export default class Actor5e extends Actor {
     data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
 
     // Spellcaster Level
-    if ( data.attributes.spellcasting && !data.details.spellLevel ) {
+    if ( data.attributes.spellcasting && !Number.isNumeric(data.details.spellLevel) ) {
       data.details.spellLevel = Math.max(data.details.cr, 1);
+    }
+  }
+
+  /**
+   * Prepare skill checks.
+   * @param actorData
+   * @param bonuses Global bonus data.
+   * @param checkBonus Ability check specific bonus.
+   * @param originalSkills A transformed actor's original actor's skills.
+   * @private
+   */
+  _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
+    if (actorData.type === 'vehicle') return;
+
+    const data = actorData.data;
+    const flags = actorData.flags.dnd5e || {};
+
+    // Skill modifiers
+    const feats = DND5E.characterFlags;
+    const athlete = flags.remarkableAthlete;
+    const joat = flags.jackOfAllTrades;
+    const observant = flags.observantFeat;
+    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
+    let round = Math.floor;
+    for (let [id, skl] of Object.entries(data.skills)) {
+      skl.value = parseFloat(skl.value || 0);
+
+      // Apply Remarkable Athlete or Jack of all Trades
+      let multi = skl.value;
+      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
+        multi = 0.5;
+        round = Math.ceil;
+      }
+      if ( joat && (skl.value === 0 ) ) multi = 0.5;
+
+      // Compute modifier
+      skl.bonus = checkBonus + skillBonus;
+      skl.mod = data.abilities[skl.ability].mod;
+      skl.prof = round(multi * data.attributes.prof);
+      skl.total = skl.mod + skl.prof + skl.bonus;
+
+      // If we merged skills when transforming, take the highest bonus here.
+      if (originalSkills && skl.value > 0.5) {
+        skl.total = Math.max(skl.total, originalSkills[id].total);
+      }
+
+      // Compute passive bonus
+      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
+      skl.passive = 10 + skl.total + passive;
     }
   }
 
@@ -183,6 +202,8 @@ export default class Actor5e extends Actor {
    * @private
    */
   _computeSpellcastingProgression (actorData) {
+    if (actorData.type === 'vehicle') return;
+
     const spells = actorData.data.spells;
     const isNPC = actorData.type === 'npc';
 
@@ -517,14 +538,14 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    return d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: reliableTalent
-    }));
+    }, options));
   }
 
   /* -------------------------------------------- */
@@ -594,13 +615,13 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    return d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: feats.halflingLucky
-    }));
+    }, options));
   }
 
   /* -------------------------------------------- */
@@ -639,13 +660,13 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    return d20Roll(mergeObject(options, {
+    return d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
       speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
-    }));
+    }, options));
   }
 
   /* -------------------------------------------- */
@@ -670,14 +691,14 @@ export default class Actor5e extends Actor {
     }
 
     // Evaluate the roll
-    const roll = await d20Roll(mergeObject(options, {
+    const roll = await d20Roll(mergeObject({
       parts: parts,
       data: data,
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
       speaker: speaker,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10
-    }));
+    }, options));
     if ( !roll ) return null;
 
     // Take action depending on the result

@@ -56,6 +56,7 @@
                 </select>
             </div>
 
+            {{#unless isObject}}
             {{!-- Weapon Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemWeaponStatus" }}</label>
@@ -74,6 +75,7 @@
                     </label>
                 </div>
             </div>
+            {{/unless}}
 
             {{!-- Weapon Properties --}}
             <div class="form-group stacked weapon-properties">
@@ -84,6 +86,18 @@
                 </label>
                 {{/each}}
             </div>
+
+            {{#if isObject}}
+            <div class="form-group">
+                <label>{{localize 'DND5E.ArmorClass'}}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.armor.value" value="{{data.armor.value}}"
+                           data-dtype="Number">
+                </div>
+            </div>
+
+            {{> 'systems/dnd5e/templates/items/parts/item-object.html'}}
+            {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemWeaponUsage" }}</h3>
 

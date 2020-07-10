@@ -24,6 +24,7 @@ import AbilityTemplate from "./module/pixi/ability-template.js";
 import ActorSheetFlags from "./module/apps/actor-flags.js";
 import ActorSheet5eCharacter from "./module/actor/sheets/character.js";
 import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
+import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
 import ItemSheet5e from "./module/item/sheet.js";
 import ShortRestDialog from "./module/apps/short-rest.js";
 import SpellCastDialog from "./module/apps/spell-cast-dialog.js";
@@ -48,6 +49,7 @@ Hooks.once("init", function() {
       ActorSheetFlags,
       ActorSheet5eCharacter,
       ActorSheet5eNPC,
+      ActorSheet5eVehicle,
       ItemSheet5e,
       ShortRestDialog,
       SpellCastDialog,
@@ -82,6 +84,7 @@ Hooks.once("init", function() {
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("dnd5e", ActorSheet5eCharacter, { types: ["character"], makeDefault: true });
   Actors.registerSheet("dnd5e", ActorSheet5eNPC, { types: ["npc"], makeDefault: true });
+  Actors.registerSheet('dnd5e', ActorSheet5eVehicle, {types: ['vehicle'], makeDefault: true});
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("dnd5e", ItemSheet5e, {makeDefault: true});
 
@@ -105,7 +108,8 @@ Hooks.once("setup", function() {
     "equipmentTypes", "healingTypes", "itemActionTypes", "limitedUsePeriods", "senses", "skills", "spellComponents",
     "spellLevels", "spellPreparationModes", "spellSchools", "spellScalingModes", "targetTypes", "timePeriods",
     "weaponProperties", "weaponTypes", "languages", "polymorphSettings", "armorProficiencies", "weaponProficiencies",
-    "toolProficiencies", "abilityActivationTypes", "abilityConsumptionTypes", "actorSizes", "proficiencyLevels"
+    "toolProficiencies", "abilityActivationTypes", "abilityConsumptionTypes", "actorSizes", "proficiencyLevels",
+    "cover"
   ];
 
   // Exclude some from sorting where the default order matters
@@ -185,3 +189,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
+
+Handlebars.registerHelper('getProperty', function (data, property) {
+  return getProperty(data, property);
+});
