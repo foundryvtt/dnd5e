@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc"],
+    "types": ["character", "npc", "vehicle"],
     "templates": {
       "common": {
         "abilities": {
@@ -47,15 +47,47 @@
           "speed": {
             "value": "30 ft",
             "special": ""
+          }
+        },
+        "details": {
+          "biography": {
+            "value": "",
+            "public": ""
+          }
+        },
+        "traits": {
+          "size": "med",
+          "di": {
+            "value": [],
+            "custom": ""
           },
+          "dr": {
+            "value": [],
+            "custom": ""
+          },
+          "dv": {
+            "value": [],
+            "custom": ""
+          },
+          "ci": {
+            "value": [],
+            "custom": ""
+          }
+        },
+        "currency": {
+          "pp": 0,
+          "gp": 0,
+          "ep": 0,
+          "sp": 0,
+          "cp": 0
+        }
+      },
+      "creature": {
+        "attributes": {
           "spellcasting": "int"
         },
         "details": {
           "alignment": "",
-          "biography": {
-            "value": "",
-            "public": ""
-          },
           "race": ""
         },
         "skills": {
@@ -133,35 +165,11 @@
           }
         },
         "traits": {
-          "size": "med",
           "senses": "",
           "languages": {
             "value": [],
             "custom": ""
-          },
-          "di": {
-            "value": [],
-            "custom": ""
-          },
-          "dr": {
-            "value": [],
-            "custom": ""
-          },
-          "dv": {
-            "value": [],
-            "custom": ""
-          },
-          "ci": {
-            "value": [],
-            "custom": ""
           }
-        },
-        "currency": {
-          "pp": 0,
-          "gp": 0,
-          "ep": 0,
-          "sp": 0,
-          "cp": 0
         },
         "spells": {
           "spell1": {
@@ -244,7 +252,7 @@
       }
     },
     "character": {
-      "templates": ["common"],
+      "templates": ["common", "creature"],
       "attributes": {
         "death": {
           "success": 0,
@@ -301,7 +309,7 @@
       }
     },
     "npc": {
-      "templates": ["common"],
+      "templates": ["common", "creature"],
       "details": {
         "type": "",
         "environment": "",
@@ -325,6 +333,64 @@
           "value": 0,
           "initiative": 0
         }
+      }
+    },
+    "vehicle": {
+      "templates": ["common"],
+      "abilities": {
+        "int": {
+          "value": 0
+        },
+        "wis": {
+          "value": 0
+        },
+        "cha": {
+          "value": 0
+        }
+      },
+      "attributes": {
+        "ac": {
+          "value": null,
+          "motionless": ""
+        },
+        "actions": {
+          "stations": false,
+          "value": 0,
+          "thresholds": {
+            "2": null,
+            "1": null,
+            "0": null
+          }
+        },
+        "hp": {
+          "value": null,
+          "max": null,
+          "dt": null,
+          "mt": null
+        },
+        "capacity": {
+          "creature": "",
+          "cargo": 0
+        },
+        "speed": {
+          "value": "—",
+          "pace": null
+        }
+      },
+      "traits": {
+        "size": "lg",
+        "dimensions": "",
+        "di": {
+          "value": ["poison", "psychic"]
+        },
+        "ci": {
+          "value": ["blinded", "charmed", "deafened", "frightened", "paralyzed", "petrified", "poisoned", "stunned",
+            "unconscious"]
+        }
+      },
+      "cargo": {
+        "crew": [],
+        "passengers": []
       }
     }
   },
@@ -395,6 +461,17 @@
           "dc": null,
           "scaling": "spell"
         }
+      },
+      "object": {
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        }
       }
     },
     "backpack": {
@@ -433,11 +510,15 @@
       }
     },
     "equipment": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "object"],
       "armor": {
         "type": "light",
         "value": 10,
         "dex": null
+      },
+      "speed": {
+        "value": null,
+        "conditions": ""
       },
       "strength": 0,
       "stealth": false,
@@ -488,7 +569,7 @@
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action"],
+      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "object"],
       "weaponType": "simpleM",
       "properties": {},
       "proficient": true

@@ -99,7 +99,8 @@ DND5E.abilityActivationTypes = {
   "day": DND5E.timePeriods.day,
   "special": DND5E.timePeriods.spec,
   "legendary": "DND5E.LegAct",
-  "lair": "DND5E.LairAct"
+  "lair": "DND5E.LairAct",
+  "crew": "DND5E.VehicleCrewAction"
 };
 
 /* -------------------------------------------- */
@@ -187,7 +188,8 @@ DND5E.equipmentTypes = {
   "natural": "DND5E.EquipmentNatural",
   "shield": "DND5E.EquipmentShield",
   "clothing": "DND5E.EquipmentClothing",
-  "trinket": "DND5E.EquipmentTrinket"
+  "trinket": "DND5E.EquipmentTrinket",
+  "vehicle": "DND5E.EquipmentVehicle"
 };
 
 
@@ -277,7 +279,8 @@ DND5E.distanceUnits = {
  */
 DND5E.encumbrance = {
   currencyPerWeight: 50,
-  strMultiplier: 15
+  strMultiplier: 15,
+  vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
 };
 
 /* -------------------------------------------- */
@@ -433,7 +436,8 @@ DND5E.weaponTypes = {
   "martialM": "DND5E.WeaponMartialM",
   "martialR": "DND5E.WeaponMartialR",
   "natural": "DND5E.WeaponNatural",
-  "improv": "DND5E.WeaponImprov"
+  "improv": "DND5E.WeaponImprov",
+  "siege": "DND5E.WeaponSiege"
 };
 
 
@@ -567,6 +571,15 @@ DND5E.proficiencyLevels = {
   0.5: "DND5E.HalfProficient",
   2: "DND5E.Expertise"
 };
+
+/* -------------------------------------------- */
+
+DND5E.cover = {
+  0: 'DND5E.None',
+  .5: 'DND5E.CoverHalf',
+  .75: 'DND5E.CoverThreeQuarters',
+  1: 'DND5E.CoverTotal'
+}
 
 /* -------------------------------------------- */
 

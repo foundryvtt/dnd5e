@@ -1,3 +1,4 @@
+{{#unless isVehicle}}
 <div class="inventory-filters flexrow">
     <ul class="filter-list flexrow" data-filter="features">
         <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
@@ -5,6 +6,7 @@
         <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
     </ul>
 </div>
+{{/unless}}
 
 <ol class="inventory-list">
 {{#each sections as |section sid|}}

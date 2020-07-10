@@ -10,6 +10,7 @@
         </select>
     </div>
 
+    {{#unless isVehicle}}
     <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
         <label>{{localize "DND5E.Senses"}}</label>
         <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="{{ localize 'DND5E.None' }}"/>
@@ -26,6 +27,7 @@
         {{/each}}
         </ul>
     </div>
+    {{/unless}}
 
     <div class="form-group {{data.traits.di.cssClass}}">
         <label>{{localize "DND5E.DamImm"}}</label>
@@ -113,8 +115,10 @@
     </div>
     {{/if}}
 
+    {{#unless isVehicle}}
     <div class="form-group ">
         <label>{{localize "DND5E.SpecialTraits"}}</label>
         <a class="configure-flags"><i class="fas fa-cog"></i></a>
     </div>
+    {{/unless}}
 </div>
