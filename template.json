@@ -459,7 +459,7 @@
           "scaling": "spell"
         }
       },
-      "object": {
+      "mountable": {
         "armor": {
           "value": 10
         },
@@ -507,7 +507,7 @@
       }
     },
     "equipment": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "object"],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
       "armor": {
         "type": "light",
         "value": 10,
@@ -566,7 +566,7 @@
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "object"],
+      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
       "properties": {},
       "proficient": true
