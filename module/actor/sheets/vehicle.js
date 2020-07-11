@@ -41,76 +41,11 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     return enc;
   }
 
-  _onCargoRowChange(event) {
-    event.preventDefault();
-    const target = event.currentTarget;
-    const row = target.closest('.item');
-    const idx = Number(row.dataset.itemId);
-    const property = row.classList.contains('crew') ? 'crew' : 'passengers';
-    const cargo = duplicate(this.actor.data.data.cargo[property]);
-    const entry = cargo[idx];
-
-    if (!entry) return;
-
-    const key = target.dataset.property || 'name';
-    const type = target.dataset.dtype;
-    let value = target.value;
-
-    if (type === 'Number') {
-      value = Number(value);
-    }
-
-    entry[key] = value;
-    return this.actor.update({[`data.cargo.${property}`]: cargo});
-  }
-
-  _onEditInSheet(event) {
-    event.preventDefault();
-    const itemID = event.currentTarget.closest('.item').dataset.itemId;
-    const item = this.actor.items.get(itemID);
-    const property = event.currentTarget.dataset.property;
-    const type = event.currentTarget.dataset.dtype;
-    let value = event.currentTarget.value;
-
-    switch (type) {
-      case 'Number': value = parseInt(value); break;
-      case 'Boolean': value = value === 'true'; break;
-    }
-
-    return item.update({[`${property}`]: value});
-  }
-
-  _onItemCreate(event) {
-    event.preventDefault();
-    const target = event.currentTarget;
-    const type = target.dataset.type;
-
-    if (type === 'crew' || type === 'passengers') {
-      const cargo = duplicate(this.actor.data.data.cargo[type]);
-      cargo.push(this.actor.constructor.newCargo());
-      return this.actor.update({[`data.cargo.${type}`]: cargo});
-    }
-
-    return super._onItemCreate(event);
-  }
-
-  _onHPChange(event) {
-    event.preventDefault();
-    const itemID = event.currentTarget.closest('.item').dataset.itemId;
-    const item = this.actor.items.get(itemID);
-    const hp = Math.clamped(0, parseInt(event.currentTarget.value), item.data.data.hp.max);
-    event.currentTarget.value = hp;
-    return item.update({'data.hp.value': hp});
-  }
-
-  _onToggleItem(event) {
-    event.preventDefault();
-    const itemID = event.currentTarget.closest('.item').dataset.itemId;
-    const item = this.actor.items.get(itemID);
-    const crewed = !!item.data.data.crewed;
-    return item.update({'data.crewed': !crewed});
-  }
-
+  /**
+   * Prepare items that are mounted to a vehicle and require one or more crew
+   * to operate.
+   * @private
+   */
   _prepareCrewedItem(item) {
     const isCrewed = item.data.crewed;
     item.toggleClass = isCrewed ? 'active' : '';
@@ -168,7 +103,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         crewable: true,
         dataset: {type: 'feat', 'activation.type': 'crew'},
         columns: [{
-          label: game.i18n.localize('DND5E.Crew'),
+          label: game.i18n.localize('DND5E.VehicleCrew'),
           css: 'item-crew',
           property: 'crew'
         }, {
@@ -205,7 +140,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     const cargo = {
       crew: {
-        label: game.i18n.localize('DND5E.Crew'),
+        label: game.i18n.localize('DND5E.VehicleCrew'),
         items: data.data.cargo.crew,
         css: 'cargo-row crew',
         editableName: true,
@@ -213,7 +148,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: cargoColumns
       },
       passengers: {
-        label: game.i18n.localize('DND5E.Passengers'),
+        label: game.i18n.localize('DND5E.VehiclePassengers'),
         items: data.data.cargo.passengers,
         css: 'cargo-row passengers',
         editableName: true,
@@ -295,5 +230,102 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     if (this.actor.data.data.attributes.actions.stations) {
       html.find('.counter.actions, .counter.action-thresholds').hide();
     }
+  }
+
+  /**
+   * Handle saving a cargo row (i.e. crew or passenger) in-sheet.
+   * @param event {Event}
+   * @returns {Promise<Actor>|undefined}
+   * @private
+   */
+  _onCargoRowChange(event) {
+    event.preventDefault();
+    const target = event.currentTarget;
+    const row = target.closest('.item');
+    const idx = Number(row.dataset.itemId);
+    const property = row.classList.contains('crew') ? 'crew' : 'passengers';
+    const cargo = duplicate(this.actor.data.data.cargo[property]);
+    const entry = cargo[idx];
+
+    if (!entry) return;
+
+    const key = target.dataset.property || 'name';
+    const type = target.dataset.dtype;
+    let value = target.value;
+    if (type === 'Number') value = Number(value);
+
+    entry[key] = value;
+    return this.actor.update({[`data.cargo.${property}`]: cargo});
+  }
+
+  /**
+   * Handle editing certain values like quantity, price, and weight in-sheet.
+   * @param event {Event}
+   * @returns {Promise<Item>}
+   * @private
+   */
+  _onEditInSheet(event) {
+    event.preventDefault();
+    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const item = this.actor.items.get(itemID);
+    const property = event.currentTarget.dataset.property;
+    const type = event.currentTarget.dataset.dtype;
+    let value = event.currentTarget.value;
+
+    switch (type) {
+      case 'Number': value = parseInt(value); break;
+      case 'Boolean': value = value === 'true'; break;
+    }
+
+    return item.update({[`${property}`]: value});
+  }
+
+  /**
+   * Handle creating a new crew or passenger row.
+   * @param event {Event}
+   * @returns {Promise<Actor|Item>}
+   * @private
+   */
+  _onItemCreate(event) {
+    event.preventDefault();
+    const target = event.currentTarget;
+    const type = target.dataset.type;
+
+    if (type === 'crew' || type === 'passengers') {
+      const cargo = duplicate(this.actor.data.data.cargo[type]);
+      cargo.push(this.actor.constructor.newCargo());
+      return this.actor.update({[`data.cargo.${type}`]: cargo});
+    }
+
+    return super._onItemCreate(event);
+  }
+
+  /**
+   * Special handling for editing HP to clamp it within appropriate range.
+   * @param event {Event}
+   * @returns {Promise<Item>}
+   * @private
+   */
+  _onHPChange(event) {
+    event.preventDefault();
+    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const item = this.actor.items.get(itemID);
+    const hp = Math.clamped(0, parseInt(event.currentTarget.value), item.data.data.hp.max);
+    event.currentTarget.value = hp;
+    return item.update({'data.hp.value': hp});
+  }
+
+  /**
+   * Handle toggling an item's crewed status.
+   * @param event {Event}
+   * @returns {Promise<Item>}
+   * @private
+   */
+  _onToggleItem(event) {
+    event.preventDefault();
+    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const item = this.actor.items.get(itemID);
+    const crewed = !!item.data.data.crewed;
+    return item.update({'data.crewed': !crewed});
   }
 };
