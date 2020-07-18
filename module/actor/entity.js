@@ -507,7 +507,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {Object} options      Options which configure how the skill check is rolled
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
@@ -538,14 +538,15 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    return d20Roll(mergeObject({
+    const rollData = mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
-      speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: reliableTalent
-    }, options));
+    });
+    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+    return d20Roll(rollData);
   }
 
   /* -------------------------------------------- */
@@ -615,13 +616,14 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    return d20Roll(mergeObject({
+    const rollData = mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
-      speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: feats.halflingLucky
-    }, options));
+    });
+    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+    return d20Roll(rollData);
   }
 
   /* -------------------------------------------- */
@@ -660,13 +662,14 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    return d20Roll(mergeObject({
+    const rollData = mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
-      speaker: ChatMessage.getSpeaker({actor: this}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
-    }, options));
+    });
+    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+    return d20Roll(rollData);
   }
 
   /* -------------------------------------------- */
@@ -679,9 +682,9 @@ export default class Actor5e extends Actor {
   async rollDeathSave(options={}) {
 
     // Evaluate a global saving throw bonus
-    const speaker = ChatMessage.getSpeaker({actor: this});
     const parts = [];
     const data = {};
+    const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Include a global actor ability save bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
@@ -691,14 +694,16 @@ export default class Actor5e extends Actor {
     }
 
     // Evaluate the roll
-    const roll = await d20Roll(mergeObject({
+    const rollData = mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
       speaker: speaker,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10
-    }, options));
+    });
+    rollData.speaker = speaker;
+    const roll = await d20Roll(rollData);
     if ( !roll ) return null;
 
     // Take action depending on the result

@@ -60,18 +60,20 @@
             {{!-- Weapon Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemWeaponStatus" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "DND5E.Proficient" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "DND5E.Equipped" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "DND5E.Identified" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "DND5E.Attuned" }}
-                </label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "DND5E.Proficient" }}
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "DND5E.Equipped" }}
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "DND5E.Identified" }}
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "DND5E.Attuned" }}
+                    </label>
+                </div>
             </div>
             {{/unless}}
 

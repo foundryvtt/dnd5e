@@ -3,12 +3,21 @@
 /*  Fonts                                    */
 /* ----------------------------------------- */
 @font-face {
-  font-family: "Nodesto";
-  src: url("fonts/NodestoCapsCondensed.otf");
+  font-family: 'Modesto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/modesto-condensed/modesto-condensed.woff2') format('woff2');
 }
-.nodesto {
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+@font-face {
+  font-family: 'Modesto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/modesto-condensed/modesto-condensed-bold.woff2') format('woff2');
+}
+.modesto {
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
+  font-weight: 700;
 }
 /* ----------------------------------------- */
 /*  Sheet Styles                             */
@@ -105,16 +114,21 @@
 }
 .dnd5e label.checkbox {
   flex: auto;
+  padding: 0;
   margin: 0;
   height: 22px;
   line-height: 22px;
   font-size: 11px;
-  text-align: right;
 }
-.dnd5e label.checkbox input[type="checkbox"] {
-  margin: 0 5px 0;
+.dnd5e label.checkbox > input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0 2px 0 0;
   position: relative;
-  top: 5px;
+  top: 4px;
+}
+.dnd5e label.checkbox.right > input[type="checkbox"] {
+  margin: 0 0 0 2px;
 }
 .dnd5e .form-group label {
   flex: 2;
@@ -158,12 +172,12 @@
 }
 .dnd5e .form-header {
   margin: 0 0 0.25em 0;
-  padding: 0 2px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
-  font-size: 20px;
-  font-size: 24px;
+  padding: 2px 0;
   border-top: 2px groove #eeede0;
   border-bottom: 2px groove #eeede0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
 }
 .dnd5e .tag {
   display: inline-block;
@@ -254,11 +268,14 @@
 .dnd5e.sheet .sheet-header {
   flex: 0 0 100px;
   border-bottom: 2px groove #eeede0;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
-  font-size: 20px;
   /* Character Name */
   /* Profile Image */
   /* Header Summary Details */
+}
+.dnd5e.sheet .sheet-header .header-details {
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
 }
 .dnd5e.sheet .sheet-header h1 {
   flex: 1;
@@ -305,8 +322,9 @@
 .dnd5e.sheet .sheet-navigation {
   flex: 0 0 30px;
   margin-bottom: 5px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
+  font-weight: 700;
 }
 .dnd5e.sheet .sheet-navigation .item {
   height: 30px;
@@ -469,6 +487,9 @@
   height: 18px;
   line-height: 16px;
   margin: 4px 8px 2px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
   font-size: 18px;
   color: #4b4a44;
   border-bottom: 1px solid #c9c7b8;
@@ -487,8 +508,6 @@
   margin: 0 5px 0 0;
   border: 2px groove #eeede0;
   border-radius: 4px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
-  font-size: 20px;
   text-align: center;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute:last-child {
@@ -500,8 +519,12 @@
   align-items: center;
   height: 28px;
   line-height: 28px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value > * {
+  font-weight: 400;
   font-size: 24px;
 }
 .dnd5e.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
@@ -511,8 +534,9 @@
   flex: 0 0 18px;
   margin-top: -1px;
   line-height: 18px;
-  font-family: "Signika", "Palatino Linotype", serif;
+  font-family: "Signika", sans-serif;
   font-size: 12px;
+  font-weight: 400;
 }
 .dnd5e.sheet.actor .ability-scores {
   flex: 0 0 100px;
@@ -520,8 +544,9 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
+  font-weight: 700;
   border: 2px groove #eeede0;
   border-radius: 3px;
 }
@@ -785,8 +810,10 @@
 .dnd5e.sheet.actor .inventory-list .inventory-header h3 {
   margin: 0 -5px 0 0;
   padding-left: 5px;
-  font-size: 13px;
-  font-weight: bold;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-size: 16px;
 }
 .dnd5e.sheet.actor .inventory-list .inventory-header .item-controls a.item-create {
   flex: 0 0 100%;
@@ -1183,8 +1210,9 @@
   flex: 1;
   margin: 0;
   line-height: 36px;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
+  font-weight: 700;
   color: #4b4a44;
 }
 .dnd5e.chat-card .card-header h3:hover {
@@ -1327,7 +1355,8 @@
 .dnd5e.sheet.actor.character .resource .attribute-value label.recharge {
   height: 32px;
   position: relative;
-  font-size: 13px;
+  font-family: "Signika", sans-serif;
+  font-size: 11px;
   text-align: center;
   color: #4b4a44;
 }
