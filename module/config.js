@@ -574,6 +574,11 @@ DND5E.proficiencyLevels = {
 
 /* -------------------------------------------- */
 
+/**
+ * The amount of cover provided by an object.
+ * In cases where multiple pieces of cover are
+ * in play, we take the highest value.
+ */
 DND5E.cover = {
   0: 'DND5E.None',
   .5: 'DND5E.CoverHalf',
