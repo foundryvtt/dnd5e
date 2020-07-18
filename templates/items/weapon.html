@@ -56,7 +56,7 @@
                 </select>
             </div>
 
-            {{#unless isObject}}
+            {{#unless isMountable}}
             {{!-- Weapon Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemWeaponStatus" }}</label>
@@ -85,7 +85,7 @@
                 {{/each}}
             </div>
 
-            {{#if isObject}}
+            {{#if isMountable}}
             <div class="form-group">
                 <label>{{localize 'DND5E.ArmorClass'}}</label>
                 <div class="form-fields">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            {{> 'systems/dnd5e/templates/items/parts/item-object.html'}}
+            {{> 'systems/dnd5e/templates/items/parts/item-mountable.html'}}
             {{/if}}
 
             <h3 class="form-header">{{ localize "DND5E.ItemWeaponUsage" }}</h3>

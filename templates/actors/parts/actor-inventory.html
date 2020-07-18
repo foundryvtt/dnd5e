@@ -28,14 +28,18 @@
     <li class="inventory-header flexrow">
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
-        {{#if ../isCharacter}}
-        <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
-        {{/if}}
+        {{#if section.columns}}
+            {{#each section.columns}}
+                <div class="item-detail {{css}}">{{label}}</div>
+            {{/each}}
+        {{else}}
+            {{#if ../isCharacter}}
+                <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
+            {{/if}}
 
-        {{#unless ../isVehicle}}
-        <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
-        <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
-        {{/unless}}
+            <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
+            <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
+        {{/if}}
 
         {{#if ../owner}}
         <div class="item-controls">
@@ -52,45 +56,64 @@
         <li class="item flexrow {{section.css}}"
             data-item-id="{{#if section.editableName}}{{iid}}{{else}}{{item._id}}{{/if}}">
             <div class="item-name flexrow rollable">
+                {{#if section.editableName}}
+                <input type="text" value="{{item.name}}">
+                {{else}}
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{item.name~}}
                     {{~#if item.isStack}} ({{item.data.quantity}}){{/if}}
                     {{~#if item.data.attuned}} <i class="fas fa-sun attuned" title={{localize "DND5E.Attuned"}}></i>{{/if}}
                 </h4>
+                {{/if}}
             </div>
 
-            {{#if @root.isCharacter}}
-                <div class="item-detail item-weight">
-                    {{#if item.totalWeight}}
-                        <div class="item-detail">
-                            {{ item.totalWeight }} {{localize "DND5E.AbbreviationLbs"}}
-                        </div>
+            {{#if section.columns}}
+                {{#each section.columns}}
+                    <div class="item-detail {{css}}">
+                        {{#with (getProperty item property)}}
+                            {{#if ../editable}}
+                                <input type="text" value="{{this}}" placeholder="&mdash;"
+                                       data-dtype="{{../editable}}" data-property="{{../property}}">
+                            {{else}}
+                                {{this}}
+                            {{/if}}
+                        {{/with}}
+                    </div>
+                {{/each}}
+            {{else}}
+                {{#if ../../isCharacter}}
+                    <div class="item-detail item-weight">
+                        {{#if item.totalWeight}}
+                            <div class="item-detail">
+                                {{ item.totalWeight }} {{localize "DND5E.AbbreviationLbs"}}
+                            </div>
+                        {{/if}}
+                    </div>
+                {{/if}}
+
+                <div class="item-detail item-uses">
+                    {{#if item.hasUses }}
+                        <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>
+                        / {{item.data.uses.max}}
+                    {{/if}}
+                </div>
+
+                <div class="item-detail item-action">
+                    {{#if item.data.activation.type }}
+                        {{item.labels.activation}}
                     {{/if}}
                 </div>
             {{/if}}
-
-            {{#unless @root.isVehicle}}
-            <div class="item-detail item-uses">
-                {{#if item.hasUses }}
-                    <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>
-                    / {{item.data.uses.max}}
-                {{/if}}
-            </div>
-
-            <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                    {{item.labels.activation}}
-                {{/if}}
-            </div>
-            {{/unless}}
 
             {{#if ../../owner}}
             <div class="item-controls">
                 {{#unless @root.isVehicle}}
                 <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>
                 {{/unless}}
+                {{#unless section.editableName}}
                 <a class="item-control item-edit" title='{{localize "DND5E.ItemEdit"}}'><i class="fas fa-edit"></i></a>
+                {{/unless}}
                 <a class="item-control item-delete" title='{{localize "DND5E.ItemDelete"}}'><i class="fas fa-trash"></i></a>
             </div>
             {{/if}}

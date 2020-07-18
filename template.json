@@ -43,10 +43,6 @@
           "init": {
             "value": 0,
             "bonus": 0
-          },
-          "speed": {
-            "value": "30 ft",
-            "special": ""
           }
         },
         "details": {
@@ -84,7 +80,11 @@
       },
       "creature": {
         "attributes": {
-          "spellcasting": "int"
+          "spellcasting": "int",
+          "speed": {
+            "value": "30 ft",
+            "special": ""
+          }
         },
         "details": {
           "alignment": "",
@@ -372,10 +372,7 @@
           "creature": "",
           "cargo": 0
         },
-        "speed": {
-          "value": "—",
-          "pace": null
-        }
+        "speed": ""
       },
       "traits": {
         "size": "lg",
@@ -462,7 +459,7 @@
           "scaling": "spell"
         }
       },
-      "object": {
+      "mountable": {
         "armor": {
           "value": 10
         },
@@ -510,7 +507,7 @@
       }
     },
     "equipment": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "object"],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
       "armor": {
         "type": "light",
         "value": 10,
@@ -569,7 +566,7 @@
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "object"],
+      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
       "properties": {},
       "proficient": true

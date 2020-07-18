@@ -57,7 +57,7 @@
                 </select>
             </div>
 
-            {{#unless isObject}}
+            {{#unless isMountable}}
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemEquipmentStatus" }}</label>
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            {{#unless isObject}}
+            {{#unless isMountable}}
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
@@ -108,8 +108,8 @@
             </div>
             {{/unless}}
 
-            {{#if isObject}}
-            {{> 'systems/dnd5e/templates/items/parts/item-object.html'}}
+            {{#if isMountable}}
+            {{> 'systems/dnd5e/templates/items/parts/item-mountable.html'}}
             <div class="form-group">
                 <label>{{localize 'DND5E.Speed'}}</label>
                 <div class="form-fields">
