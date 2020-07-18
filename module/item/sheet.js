@@ -52,7 +52,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Vehicles
     data.isCrewed = data.item.data.activation?.type === 'crew';
-    data.isObject = this._isItemAnObject(data.item);
+    data.isMountable = this._isItemMountable(data.item);
     return data;
   }
 
@@ -187,12 +187,14 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /**
-   * Is this a large object with its own specific HP and AC?
+   * Is this item a separate large object like a siege engine or vehicle
+   * component that is usually mounted on fixtures rather than equipped, and
+   * has its own AC and HP.
    * @param item
    * @returns {boolean}
    * @private
    */
-  _isItemAnObject(item) {
+  _isItemMountable(item) {
     const data = item.data;
     return (item.type === 'weapon' && data.weaponType === 'siege')
       || (item.type === 'equipment' && data.armor.type === 'vehicle');
