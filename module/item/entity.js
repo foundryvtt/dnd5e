@@ -581,6 +581,7 @@ export default class Item5e extends Item {
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
+    let title = `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`;
     const rollData = this.getRollData();
 
     // Define Roll bonuses
@@ -590,10 +591,27 @@ export default class Item5e extends Item {
     }
 
     // Attack Bonus
-    const actorBonus = getProperty(actorData, `bonuses.${itemData.actionType}`) || {};
+    const actorBonus = actorData?.bonuses?.[itemData.actionType] || {};
     if ( itemData.attackBonus || actorBonus.attack ) {
       parts.push("@atk");
       rollData["atk"] = [itemData.attackBonus, actorBonus.attack].filterJoin(" + ");
+    }
+
+    // Ammunition Bonus
+    delete this._ammo;
+    const consume = itemData.consume;
+    if ( consume?.type === "ammo" ) {
+      const ammo = this.actor.items.get(consume.target);
+      const q = ammo.data.data.quantity;
+      if ( q && (q - consume.amount >= 0) ) {
+        let ammoBonus = ammo.data.data.attackBonus;
+        if ( ammoBonus ) {
+          parts.push("@ammo");
+          rollData["ammo"] = ammoBonus;
+          title += ` [${ammo.name}]`;
+          this._ammo = ammo;
+        }
+      }
     }
 
     // Compose roll options
@@ -602,7 +620,7 @@ export default class Item5e extends Item {
       parts: parts,
       actor: this.actor,
       data: rollData,
-      title: `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`,
+      title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
@@ -625,7 +643,6 @@ export default class Item5e extends Item {
 
     // Apply Halfling Lucky
     if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
-
 
     // Invoke the d20 roll helper
     const roll = await d20Roll(rollConfig);
@@ -651,8 +668,14 @@ export default class Item5e extends Item {
     if ( !this.hasDamage ) {
       throw new Error("You may not make a Damage Roll with this Item.");
     }
+
+    // Get roll data
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
+
+    // Get message labels
+    const title = `${this.name} - ${game.i18n.localize("DND5E.DamageRoll")}`;
+    let flavor = this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title;
 
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
@@ -673,9 +696,15 @@ export default class Item5e extends Item {
       rollData["dmg"] = actorBonus.damage;
     }
 
+    // Ammunition Damage
+    if ( this._ammo ) {
+      parts.push("@ammo");
+      rollData["ammo"] = this._ammo.data.data.damage.parts.map(p => p[0]).join("+");
+      flavor += ` [${this._ammo.name}]`;
+      delete this._ammo;
+    }
+
     // Call the roll helper utility
-    const title = `${this.name} - ${game.i18n.localize("DND5E.DamageRoll")}`;
-    const flavor = this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title;
     return damageRoll({
       event: event,
       parts: parts,

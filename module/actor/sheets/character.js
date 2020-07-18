@@ -168,7 +168,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    *
    * @param {Number} totalWeight    The cumulative item weight from inventory items
    * @param {Object} actorData      The data object for the Actor being rendered
-   * @return {Object}               An object describing the character's encumbrance level
+   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
    */
   _computeEncumbrance(totalWeight, actorData) {
