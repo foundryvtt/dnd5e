@@ -319,10 +319,31 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const type = target.dataset.type;
     if (type === 'crew' || type === 'passengers') {
       const cargo = duplicate(this.actor.data.data.cargo[type]);
-      cargo.push(this.constructor.newCargo);
+      cargo.push(this.constructor.newCargo());
       return this.actor.update({[`data.cargo.${type}`]: cargo});
     }
     return super._onItemCreate(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting a crew or passenger row.
+   * @param event {Event}
+   * @returns {Promise<Actor|Item>}
+   * @private
+   */
+  _onItemDelete(event) {
+    event.preventDefault();
+    const row = event.currentTarget.closest('.item');
+    if (row.classList.contains('cargo-row')) {
+      const idx = Number(row.dataset.itemId);
+      const type = row.classList.contains('crew') ? 'crew' : 'passengers';
+      const cargo = duplicate(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
+      return this.actor.update({[`data.cargo.${type}`]: cargo});
+    }
+
+    return super._onItemDelete(event);
   }
 
   /* -------------------------------------------- */
