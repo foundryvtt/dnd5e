@@ -750,7 +750,14 @@ export default class Item5e extends Item {
   _scaleSpellDamage(parts, baseLevel, spellLevel, formula) {
     const upcastLevels = Math.max(spellLevel - baseLevel, 0);
     if ( upcastLevels === 0 ) return parts;
-    const bonus = new Roll(formula).alter(0, upcastLevels);
+
+    // Determine scaling bonus
+    const bonus = new Roll(formula);
+    // TODO Backwards compatibility - REMOVE LATER
+    if (isNewerVersion(game.data.version, "0.6.5")) bonus.alter(upcastLevels, 0);
+    else bonus.alter(0, upcastLevels);
+
+    // Add scaling bonus to roll
     parts.push(bonus.formula);
     return parts;
   }

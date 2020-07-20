@@ -23,7 +23,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Creates a new cargo entry for a vehicle Actor.
    */
-  static newCargo() {
+  static get newCargo() {
     return {
       name: '',
       quantity: 1
@@ -319,7 +319,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const type = target.dataset.type;
     if (type === 'crew' || type === 'passengers') {
       const cargo = duplicate(this.actor.data.data.cargo[type]);
-      cargo.push(this.constructor.newCargo());
+      cargo.push(this.constructor.newCargo);
       return this.actor.update({[`data.cargo.${type}`]: cargo});
     }
     return super._onItemCreate(event);
