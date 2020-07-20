@@ -169,6 +169,7 @@ export default class Item5e extends Item {
         arr.push(c[0].titleCase().slice(0, 1));
         return arr;
       }, []);
+      labels.materials = getProperty(data, "materials.value") ? `(${data.materials.value})` : null;
     }
 
     // Feat Items
@@ -551,6 +552,7 @@ export default class Item5e extends Item {
     props.push(
       labels.level,
       labels.components,
+      labels.materials
     );
   }
 
