@@ -366,13 +366,13 @@ export default class Item5e extends Item {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
       return false;
     }
-    if ( !quantity || (quantity - amount < 0) ) {
+    const remaining = Math.max(quantity - amount, 0);
+    if ( remaining === 0 ) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
       return false;
     }
 
     // Update the consumed resource
-    const remaining = Math.max(quantity - amount, 0);
     switch ( consume.type ) {
       case "attribute":
         await this.actor.update({[`data.${consume.target}`]: remaining});

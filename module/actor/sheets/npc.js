@@ -3,14 +3,11 @@ import ActorSheet5e from "../sheets/base.js";
 /**
  * An Actor sheet for NPC type characters.
  * Extends the base ActorSheet5e class.
- * @type {ActorSheet5e}
+ * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eNPC extends ActorSheet5e {
 
-  /**
-   * Define default rendering options for the NPC sheet
-   * @return {Object}
-   */
+  /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "npc"],
@@ -38,7 +35,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Start by classifying items into groups for rendering
     let [spells, other] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
-      item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+      item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
@@ -73,9 +70,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /**
-   * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
-   */
+  /** @override */
   getData() {
     const data = super.getData();
 
@@ -90,12 +85,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /*  Object Updates                              */
   /* -------------------------------------------- */
 
-  /**
-   * This method is called upon form submission after form data is validated
-   * @param event {Event}       The initial triggering submission event
-   * @param formData {Object}   The object of validated form data with which to update the object
-   * @private
-   */
+  /** @override */
   _updateObject(event, formData) {
 
     // Format NPC Challenge Rating
@@ -113,15 +103,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
-  /**
-   * Activate event listeners using the prepared sheet HTML
-   * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
-   */
+  /** @override */
 	activateListeners(html) {
     super.activateListeners(html);
-
-    // Rollable Health Formula
-    html.find(".health .rollable").click(this._onRollHealthFormula.bind(this));
+    html.find(".health .rollable").click(this._onRollHPFormula.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -131,7 +116,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
    * @param {Event} event     The original click event
    * @private
    */
-  _onRollHealthFormula(event) {
+  _onRollHPFormula(event) {
     event.preventDefault();
     const formula = this.actor.data.data.attributes.hp.formula;
     if ( !formula ) return;

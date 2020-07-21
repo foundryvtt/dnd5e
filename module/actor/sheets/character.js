@@ -73,7 +73,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Item details
       item.img = item.img || DEFAULT_TOKEN;
-      item.isStack = item.data.quantity ? item.data.quantity > 1 : false;
+      item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
 
       // Item usage
       item.hasUses = item.data.uses && (item.data.uses.max > 0);

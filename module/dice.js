@@ -79,8 +79,14 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
       }
     }
 
-    // Execute the roll and flag critical thresholds on the d20
-    let roll = new Roll(parts.join(" + "), data).roll();
+    // Execute the roll
+    let roll = new Roll(parts.join(" + "), data);
+    try {
+      roll.roll();
+    } catch(err) {
+      console.error(err);
+      return ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    }
 
     // Flag d20 options for any 20-sided dice in the roll
     for ( let d of roll.dice ) {
@@ -205,6 +211,14 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
       if (isNewerVersion(game.data.version, "0.6.5")) roll.alter(mult, add);
       else roll.alter(add, mult);
       flavor = `${flavor} (${game.i18n.localize("DND5E.Critical")})`;
+    }
+
+    // Execute the roll
+    try {
+      roll.roll();
+    } catch(err) {
+      console.error(err);
+      return ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
     }
 
     // Convert the roll to a chat message

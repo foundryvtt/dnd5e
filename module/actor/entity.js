@@ -477,6 +477,10 @@ export default class Actor5e extends Actor {
 
     // Update Actor data
     if ( usesSlots && consume && (lvl > 0) ) {
+      const slots = parseInt(this.data.data.spells[consume].value);
+      if ( slots === 0 || Number.isNaN(slots) ) {
+        return ui.notifications.error(game.i18n.localize("DND5E.SpellCastNoSlots"));
+      }
       await this.update({
         [`data.spells.${consume}.value`]: Math.max(parseInt(this.data.data.spells[consume].value) - 1, 0)
       });
@@ -1073,6 +1077,7 @@ export default class Actor5e extends Actor {
     d.data.details.alignment = o.data.details.alignment; // Don't change alignment
     d.data.attributes.exhaustion = o.data.attributes.exhaustion; // Keep your prior exhaustion level
     d.data.attributes.inspiration = o.data.attributes.inspiration; // Keep inspiration
+    d.data.spells = o.data.spells; // Keep spell slots
 
     // Handle wildcard
     if ( source.token.randomImg ) {
@@ -1116,6 +1121,7 @@ export default class Actor5e extends Actor {
       else return keepItems;
     }));
 
+    // Transfer classes for NPCs
     if (!keepClass && d.data.details.cr) {
       d.items.push({
         type: 'class',
