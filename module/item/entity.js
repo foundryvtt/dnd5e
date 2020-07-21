@@ -366,8 +366,8 @@ export default class Item5e extends Item {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
       return false;
     }
-    const remaining = Math.max(quantity - amount, 0);
-    if ( remaining === 0 ) {
+    let remaining = quantity - amount;
+    if ( remaining < 0) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
       return false;
     }
