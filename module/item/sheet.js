@@ -2,9 +2,19 @@ import TraitSelector from "../apps/trait-selector.js";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types
- * @type {ItemSheet}
+ * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
+  constructor(...args) {
+    super(...args);
+    if ( this.object.data.type === "class" ) {
+      this.options.resizable = true;
+      this.options.width =  600;
+      this.options.height = 640;
+    }
+  }
+
+  /* -------------------------------------------- */
 
   /** @override */
 	static get defaultOptions() {
@@ -12,7 +22,7 @@ export default class ItemSheet5e extends ItemSheet {
       width: 560,
       height: 420,
       classes: ["dnd5e", "sheet", "item"],
-      resizable: false,
+      resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
     });
@@ -186,6 +196,8 @@ export default class ItemSheet5e extends ItemSheet {
     return props.filter(p => !!p);
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Is this item a separate large object like a siege engine or vehicle
    * component that is usually mounted on fixtures rather than equipped, and
@@ -234,8 +246,6 @@ export default class ItemSheet5e extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".damage-control").click(this._onDamageControl.bind(this));
-
-    // Activate any Trait Selectors
     html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
   }
 
