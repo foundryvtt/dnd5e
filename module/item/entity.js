@@ -681,12 +681,17 @@ export default class Item5e extends Item {
 
     // Define Roll parts
     const parts = itemData.damage.parts.map(d => d[0]);
+
+    // Adjust damage from versatile usage
     if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
+
+    // Scale damage from up-casting spells
     if ( (this.data.type === "spell") ) {
       if ( (itemData.scaling.mode === "cantrip") ) {
-        const lvl = this.actor.data.type === "character" ? actorData.details.level : actorData.details.spellLevel;
-        this._scaleCantripDamage(parts, lvl, itemData.scaling.formula );
-      } else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
+        const level = this.actor.data.type === "character" ? actorData.details.level : actorData.details.spellLevel;
+        this._scaleCantripDamage(parts, itemData.scaling.formula, level);
+      }
+      else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
         this._scaleSpellDamage(parts, itemData.level, spellLevel, itemData.scaling.formula );
       }
     }
@@ -729,13 +734,24 @@ export default class Item5e extends Item {
    * Adjust a cantrip damage formula to scale it for higher level characters and monsters
    * @private
    */
-  _scaleCantripDamage(parts, level, scale) {
+  _scaleCantripDamage(parts, scale, level) {
     const add = Math.floor((level + 1) / 6);
     if ( add === 0 ) return;
-    if ( scale && (scale !== parts[0]) ) {
-      parts[0] = parts[0] + " + " + scale.replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${add}d${d}`);
-    } else {
-      parts[0] = parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd)+add}d${d}`);
+
+    // FUTURE SOLUTION - 0.7.0 AND LATER
+    if (isNewerVersion(game.data.version, "0.6.5")) {
+      this._scaleDamage(parts, scale || parts.join(" + "), add)
+
+    }
+
+    // LEGACY SOLUTION - 0.6.5 AND OLDER
+    // TODO: Deprecate the legacy solution one FVTT 0.7.x is RELEASE
+    else {
+      if ( scale && (scale !== parts[0]) ) {
+        parts[0] = parts[0] + " + " + scale.replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${add}d${d}`);
+      } else {
+        parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd)+add}d${d}`)
+      }
     }
   }
 
@@ -753,14 +769,52 @@ export default class Item5e extends Item {
     const upcastLevels = Math.max(spellLevel - baseLevel, 0);
     if ( upcastLevels === 0 ) return parts;
 
-    // Determine scaling bonus
-    const bonus = new Roll(formula);
-    // TODO Backwards compatibility - REMOVE LATER
-    if (isNewerVersion(game.data.version, "0.6.5")) bonus.alter(upcastLevels, 0);
-    else bonus.alter(0, upcastLevels);
+    // FUTURE SOLUTION - 0.7.0 AND LATER
+    if (isNewerVersion(game.data.version, "0.6.5")) {
+      this._scaleDamage(parts, formula, upcastLevels);
+    }
 
-    // Add scaling bonus to roll
-    parts.push(bonus.formula);
+    // LEGACY SOLUTION - 0.6.5 AND OLDER
+    // TODO: Deprecate the legacy solution one FVTT 0.7.x is RELEASE
+    else {
+      const bonus = new Roll(formula);
+      bonus.alter(0, upcastLevels);
+      parts.push(bonus.formula);
+    }
+    return parts;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Scale an array of damage parts according to a provided scaling formula and scaling multiplier
+   * @param {string[]} parts  Initial roll parts
+   * @param {string} scaling  A scaling formula
+   * @param {number} times    A number of times to apply the scaling formula
+   * @return {string[]}      The scaled roll parts
+   * @private
+   */
+  _scaleDamage(parts, scaling, times) {
+    if ( times <= 0 ) return parts;
+    const p0 = new Roll(parts[0]);
+    const s = new Roll(scaling).alter(times);
+
+    // Attempt to simplify by combining like dice terms
+    let simplified = false;
+    if ( (s.terms[0] instanceof Die) && (s.terms.length === 1) ) {
+      const d0 = p0.terms[0];
+      const s0 = s.terms[0];
+      if ( (d0 instanceof Die) && (d0.faces === s0.faces) && d0.modifiers.equals(s0.modifiers) ) {
+        d0.number += s0.number;
+        parts[0] = p0.formula;
+        simplified = true;
+      }
+    }
+
+    // Otherwise add to the first part
+    if ( !simplified ) {
+      parts[0] = `${parts[0]} + ${s.formula}`;
+    }
     return parts;
   }
 
