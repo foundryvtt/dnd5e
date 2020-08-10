@@ -95,7 +95,7 @@ export default class ActorSheetFlags extends BaseEntitySheet {
    */
   async _updateObject(event, formData) {
     const actor = this.object;
-    const updateData = expandObject(formData);
+    let updateData = expandObject(formData);
 
     // Unset any flags which are "false"
     let unset = false;
@@ -110,7 +110,11 @@ export default class ActorSheetFlags extends BaseEntitySheet {
       }
     }
 
-    // Apply the changes
+    // Diff the data against any applied overrides and apply
+    // TODO: Remove this logical gate once 0.7.x is release channel
+    if ( !isNewerVersion("0.7.1", game.data.version) ){
+      updateData.data = diffObject(this.object.overrides, updateData.data);
+    }
     await actor.update(updateData, {diff: false});
   }
 }

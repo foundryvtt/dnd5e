@@ -61,7 +61,10 @@ export const displayChatActionButtons = function(message, html, data) {
  * @return {Array}              The extended options Array including new context choices
  */
 export const addChatMessageContextOptions = function(html, options) {
-  let canApply = li => canvas.tokens.controlled.length && li.find(".dice-roll").length;
+  let canApply = li => {
+    const message = game.messages.get(li.data("messageId"));
+    return message.isRoll && message.isContentVisible && canvas.tokens.controlled.length;
+  };
   options.push(
     {
       name: game.i18n.localize("DND5E.ChatContextDamage"),

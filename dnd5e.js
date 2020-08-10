@@ -74,10 +74,12 @@ Hooks.once("init", function() {
   CONFIG.Actor.entityClass = Actor5e;
   CONFIG.Item.entityClass = Item5e;
 
+
   // Register System Settings
   registerSystemSettings();
 
   // Patch Core Functions
+  CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
 
   // Register sheet application classes

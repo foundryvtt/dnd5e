@@ -21,35 +21,67 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Augment the basic actor data with additional dynamic data.
+   * @override
+   * @deprecated after 0.7.1
    */
   prepareData() {
-    super.prepareData();
+    this.data = duplicate(this._data);
+    if (!this.data.img) this.data.img = CONST.DEFAULT_TOKEN;
+    if ( !this.data.name ) this.data.name = "New " + this.entity;
+    this.prepareBaseData();
+    this.prepareEmbeddedEntities();
+    if ( !isNewerVersion("0.7.1", game.data.version) ) this.applyActiveEffects();
+    this.prepareDerivedData();
+  }
 
-    // Get the Actor's data object
+  /* -------------------------------------------- */
+
+  /** @override */
+  prepareBaseData() {
+
+    // Compute initial ability score modifiers in base data since these may be referenced
+    for (let abl of Object.values(this.data.data.abilities)) {
+      abl.mod = Math.floor((abl.value - 10) / 2);
+    }
+
+    // Type-specific base data preparation
+    switch ( this.data.type ) {
+      case "character":
+        return this._prepareCharacterData(this.data);
+      case "npc":
+        return this._prepareNPCData(this.data);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A temporary shim for the addition of active effects in 0.7.1
+   * @deprecated after 0.7.1
+   */
+  applyActiveEffects() {
+    if (!isNewerVersion("0.7.1", game.data.version)) return super.applyActiveEffects();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  prepareDerivedData() {
     const actorData = this.data;
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
     const bonuses = getProperty(data, "bonuses.abilities") || {};
 
-    // Prepare Character data
-    if ( actorData.type === "character" ) this._prepareCharacterData(actorData);
-    else if ( actorData.type === "npc" ) this._prepareNPCData(actorData);
-
+    // Retrieve data for polymorphed actors
     let originalSaves = null;
     let originalSkills = null;
-
-    // If we are a polymorphed actor, retrieve the skills and saves data from
-    // the original actor for later merging.
     if (this.isPolymorphed) {
       const transformOptions = this.getFlag('dnd5e', 'transformOptions');
       const original = game.actors?.get(this.getFlag('dnd5e', 'originalActor'));
-
       if (original) {
         if (transformOptions.mergeSaves) {
           originalSaves = original.data.data.abilities;
         }
-
         if (transformOptions.mergeSkills) {
           originalSkills = original.data.data.skills;
         }
@@ -57,7 +89,6 @@ export default class Actor5e extends Actor {
     }
 
     // Ability modifiers and saves
-    // Character All Ability Check" and All Ability Save bonuses added when rolled since not a fixed value.
     const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
     const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
     for (let [id, abl] of Object.entries(data.abilities)) {
@@ -72,7 +103,6 @@ export default class Actor5e extends Actor {
         abl.save = Math.max(abl.save, originalSaves[id].save);
       }
     }
-
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
     // Determine Initiative Modifier
@@ -88,12 +118,66 @@ export default class Actor5e extends Actor {
 
     // Prepare spell-casting data
     data.attributes.spelldc = this.getSpellDC(data.attributes.spellcasting);
-    // TODO: Only do this IF we have already processed item types (see Entity#initialize)
-    if ( this.items ) {
-      this._computeSpellcastingProgression(actorData);
-    }
+    this._computeSpellcastingProgression(this.data);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Return the amount of experience required to gain a certain character level.
+   * @param level {Number}  The desired level
+   * @return {Number}       The XP required
+   */
+  getLevelExp(level) {
+    const levels = CONFIG.DND5E.CHARACTER_EXP_LEVELS;
+    return levels[Math.min(level, levels.length - 1)];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return the amount of experience granted by killing a creature of a certain CR.
+   * @param cr {Number}     The creature's challenge rating
+   * @return {Number}       The amount of experience granted per kill
+   */
+  getCRExp(cr) {
+    if (cr < 1.0) return Math.max(200 * cr, 10);
+    return CONFIG.DND5E.CR_EXP_LEVELS[cr];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return the spell DC for this actor using a certain ability score
+   * @param {string} ability    The ability score, i.e. "str"
+   * @return {number}           The spell DC
+   */
+  getSpellDC(ability) {
+    const actorData = this.data.data;
+    let bonus = getProperty(actorData, "bonuses.spell.dc");
+    bonus = Number.isNumeric(bonus) ? parseInt(bonus) : 0;
+    ability = actorData.abilities[ability];
+    const prof = actorData.attributes.prof;
+    return 8 + (ability ? ability.mod : 0) + prof + bonus;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getRollData() {
+    const data = super.getRollData();
+    data.classes = this.data.items.reduce((obj, i) => {
+      if ( i.type === "class" ) {
+        obj[i.name.slugify({strict: true})] = i.data;
+      }
+      return obj;
+    }, {});
+    data.prof = this.data.data.attributes.prof;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation Helpers                    */
   /* -------------------------------------------- */
 
   /**
@@ -145,6 +229,8 @@ export default class Actor5e extends Actor {
       data.details.spellLevel = Math.max(data.details.cr, 1);
     }
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Prepare skill checks.
@@ -203,7 +289,6 @@ export default class Actor5e extends Actor {
    */
   _computeSpellcastingProgression (actorData) {
     if (actorData.type === 'vehicle') return;
-
     const spells = actorData.data.spells;
     const isNPC = actorData.type === 'npc';
 
@@ -277,61 +362,6 @@ export default class Actor5e extends Actor {
       spells.pact.level = 0;
       spells.pact.max = 0;
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the amount of experience required to gain a certain character level.
-   * @param level {Number}  The desired level
-   * @return {Number}       The XP required
-   */
-  getLevelExp(level) {
-    const levels = CONFIG.DND5E.CHARACTER_EXP_LEVELS;
-    return levels[Math.min(level, levels.length - 1)];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the amount of experience granted by killing a creature of a certain CR.
-   * @param cr {Number}     The creature's challenge rating
-   * @return {Number}       The amount of experience granted per kill
-   */
-  getCRExp(cr) {
-    if (cr < 1.0) return Math.max(200 * cr, 10);
-    return CONFIG.DND5E.CR_EXP_LEVELS[cr];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the spell DC for this actor using a certain ability score
-   * @param {string} ability    The ability score, i.e. "str"
-   * @return {number}           The spell DC
-   */
-  getSpellDC(ability) {
-    const actorData = this.data.data;
-    let bonus = getProperty(actorData, "bonuses.spell.dc");
-    bonus = Number.isNumeric(bonus) ? parseInt(bonus) : 0;
-    ability = actorData.abilities[ability];
-    const prof = actorData.attributes.prof;
-    return 8 + (ability ? ability.mod : 0) + prof + bonus;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  getRollData() {
-    const data = super.getRollData();
-    data.classes = this.data.items.reduce((obj, i) => {
-      if ( i.type === "class" ) {
-        obj[i.name.slugify({strict: true})] = i.data;
-      }
-      return obj;
-    }, {});
-    data.prof = this.data.data.attributes.prof;
-    return data;
   }
 
   /* -------------------------------------------- */

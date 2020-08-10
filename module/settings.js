@@ -49,21 +49,14 @@ export const registerSystemSettings = function() {
   /**
    * Register Initiative formula setting
    */
-  function _set5eInitiative(tiebreaker) {
-    CONFIG.Combat.initiative.tiebreaker = tiebreaker;
-    CONFIG.Combat.initiative.decimals = tiebreaker ? 2 : 0;
-    if ( ui.combat && ui.combat._rendered ) ui.combat.render();
-  }
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",
     hint: "SETTINGS.5eInitTBL",
     scope: "world",
     config: true,
     default: false,
-    type: Boolean,
-    onChange: enable => _set5eInitiative(enable)
+    type: Boolean
   });
-  _set5eInitiative(game.settings.get("dnd5e", "initiativeDexTiebreaker"));
 
   /**
    * Require Currency Carrying Weight
