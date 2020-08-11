@@ -208,7 +208,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       if (item.type === 'weapon') features.weapons.items.push(item);
       else if (item.type === 'equipment') features.equipment.items.push(item);
       else if (item.type === 'loot') {
-        totalWeight += item.data.weight || 0;
+        totalWeight += (item.data.weight || 0) * item.data.quantity;
         cargo.cargo.items.push(item);
       }
       else if (item.type === 'feat') {
