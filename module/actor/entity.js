@@ -434,30 +434,21 @@ export default class Actor5e extends Actor {
     return super.createOwnedItem(itemData, options);
   }
 
+
+  /* -------------------------------------------- */
+  /*  Gameplay Mechanics                          */
   /* -------------------------------------------- */
 
   /** @override */
   async modifyTokenAttribute(attribute, value, isDelta, isBar) {
-    if ( attribute !== "attributes.hp" ) return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
-
-    // Get current and delta HP
-    const hp = getProperty(this.data.data, attribute);
-    const tmp = parseInt(hp.temp) || 0;
-    const current = hp.value + tmp;
-    const max = hp.max + (parseInt(hp.tempmax) || 0);
-    const delta = isDelta ? value : value - current;
-
-    // For negative changes, deduct from temp HP
-    let dtmp = delta < 0 ? Math.max(-1*tmp, delta) : 0;
-    let dhp = delta - dtmp;
-    return this.update({
-      "data.attributes.hp.temp": tmp + dtmp,
-      "data.attributes.hp.value": Math.clamped(hp.value + dhp, 0, max)
-    });
+    if ( attribute === "attributes.hp" ) {
+      const hp = getProperty(this.data.data, attribute);
+      const delta = isDelta ? (-1 * value) : (hp.value + hp.temp) - value;
+      return this.applyDamage(delta);
+    }
+    return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
   }
 
-  /* -------------------------------------------- */
-  /*  Gameplay Mechanics                          */
   /* -------------------------------------------- */
 
   /**
@@ -479,10 +470,15 @@ export default class Actor5e extends Actor {
     const dh = Math.clamped(hp.value - (amount - dt), 0, hp.max + tmpMax);
 
     // Update the Actor
-    return this.update({
+    const updates = {
       "data.attributes.hp.temp": tmp - dt,
       "data.attributes.hp.value": dh
-    });
+    };
+    if ( (hp.value <= 0) && (dh > 0) ) {
+      updates["data.attributes.death.success"] = 0;
+      updates["data.attributes.death.failure"] = 0;
+    }
+    return this.update(updates);
   }
 
   /* -------------------------------------------- */
