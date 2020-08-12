@@ -227,14 +227,12 @@ export default class ItemSheet5e extends ItemSheet {
   /** @override */
   _updateObject(event, formData) {
 
+    // TODO: This can be removed once 0.7.x is release channel
+    if ( !formData.data ) formData = expandObject(formData);
+
     // Handle Damage Array
-    let damage = Object.entries(formData).filter(e => e[0].startsWith("data.damage.parts"));
-    formData["data.damage.parts"] = damage.reduce((arr, entry) => {
-      let [i, j] = entry[0].split(".").slice(3);
-      if ( !arr[i] ) arr[i] = [];
-      arr[i][j] = entry[1];
-      return arr;
-    }, []);
+    const damage = formData.data?.damage;
+    if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
     // Update the Item
     super._updateObject(event, formData);

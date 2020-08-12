@@ -22,16 +22,42 @@ export default class Actor5e extends Actor {
 
   /**
    * @override
-   * @deprecated after 0.7.1
+   * TODO: This becomes unnecessary after 0.7.x is released
+   */
+  initialize() {
+    try {
+      this.prepareData();
+    } catch(err) {
+      console.error(`Failed to initialize data for ${this.constructor.name} ${this.id}:`);
+      console.error(err);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @override
+   * TODO: This becomes unnecessary after 0.7.x is released
    */
   prepareData() {
-    this.data = duplicate(this._data);
+    const is07x = !isNewerVersion("0.7.1", game.data.version);
+    if ( is07x ) this.data = duplicate(this._data);
     if (!this.data.img) this.data.img = CONST.DEFAULT_TOKEN;
     if ( !this.data.name ) this.data.name = "New " + this.entity;
     this.prepareBaseData();
     this.prepareEmbeddedEntities();
-    if ( !isNewerVersion("0.7.1", game.data.version) ) this.applyActiveEffects();
+    if ( is07x ) this.applyActiveEffects();
     this.prepareDerivedData();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @override
+   * TODO: This becomes unnecessary after 0.7.x is released
+   */
+  applyActiveEffects() {
+    if (!isNewerVersion("0.7.1", game.data.version)) return super.applyActiveEffects();
   }
 
   /* -------------------------------------------- */
@@ -51,16 +77,6 @@ export default class Actor5e extends Actor {
       case "npc":
         return this._prepareNPCData(this.data);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * A temporary shim for the addition of active effects in 0.7.1
-   * @deprecated after 0.7.1
-   */
-  applyActiveEffects() {
-    if (!isNewerVersion("0.7.1", game.data.version)) return super.applyActiveEffects();
   }
 
   /* -------------------------------------------- */
