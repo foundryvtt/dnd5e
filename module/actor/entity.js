@@ -712,6 +712,7 @@ export default class Actor5e extends Actor {
 
     // Take action depending on the result
     const success = roll.total >= 10;
+    const d20Result = roll.dice.find((die) => die.faces === 20).rolls.find((roll) => !roll.discarded).roll;
     const death = this.data.data.attributes.death;
 
     // Save success
@@ -719,7 +720,7 @@ export default class Actor5e extends Actor {
       let successes = (death.success || 0) + 1;
 
       // Critical Success = revive with 1hp
-      if ( roll.total === 20 ) {
+      if ( d20Result === 20 ) {
         await this.update({
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0,
@@ -743,7 +744,7 @@ export default class Actor5e extends Actor {
 
     // Save failure
     else {
-      let failures = (death.failure || 0) + (roll.total === 1 ? 2 : 1);
+      let failures = (death.failure || 0) + (d20Result === 1 ? 2 : 1);
 
       // 3 Failures = death
       if ( failures >= 3 ) {
