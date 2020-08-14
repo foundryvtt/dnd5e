@@ -169,7 +169,7 @@ export default class Item5e extends Item {
         arr.push(c[0].titleCase().slice(0, 1));
         return arr;
       }, []);
-      labels.materials = getProperty(data, "materials.value") ? `(${data.materials.value})` : null;
+      labels.materials = data?.materials?.value ?? null;
     }
 
     // Feat Items
@@ -463,8 +463,8 @@ export default class Item5e extends Item {
     // Ability activation properties
     if ( data.hasOwnProperty("activation") ) {
       props.push(
+        labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
         labels.target,
-        labels.activation,
         labels.range,
         labels.duration
       );
@@ -485,7 +485,7 @@ export default class Item5e extends Item {
     props.push(
       CONFIG.DND5E.equipmentTypes[data.armor.type],
       labels.armor || null,
-      data.stealth.value ? game.i18n.localize("DND5E.StealthDisadvantage") : null,
+      data.stealth.value ? game.i18n.localize("DND5E.StealthDisadvantage") : null
     );
   }
 
@@ -551,8 +551,7 @@ export default class Item5e extends Item {
   _spellChatData(data, labels, props) {
     props.push(
       labels.level,
-      labels.components,
-      labels.materials
+      labels.components + (labels.materials ? ` (${labels.materials})` : "")
     );
   }
 
@@ -628,8 +627,10 @@ export default class Item5e extends Item {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
-      }
+      },
+      messageData: {"flags.dnd5e.roll": {type: "attack", itemId: this.id }}
     }, options);
+    rollConfig.event = options.event;
 
     // Expanded weapon critical threshold
     if (( this.data.type === "weapon" ) && flags.weaponCriticalThreshold) {
@@ -662,7 +663,7 @@ export default class Item5e extends Item {
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the damageRoll logic for the core implementation
    *
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollDamage({event, spellLevel=null, versatile=false}={}) {
     const itemData = this.data.data;
@@ -670,6 +671,7 @@ export default class Item5e extends Item {
     if ( !this.hasDamage ) {
       throw new Error("You may not make a Damage Roll with this Item.");
     }
+    const messageData = {"flags.dnd5e.roll": {type: "damage", itemId: this.id }};
 
     // Get roll data
     const rollData = this.getRollData();
@@ -683,7 +685,10 @@ export default class Item5e extends Item {
     const parts = itemData.damage.parts.map(d => d[0]);
 
     // Adjust damage from versatile usage
-    if ( versatile && itemData.damage.versatile ) parts[0] = itemData.damage.versatile;
+    if ( versatile && itemData.damage.versatile ) {
+      parts[0] = itemData.damage.versatile;
+      messageData["flags.dnd5e.roll"].versatile = true;
+    }
 
     // Scale damage from up-casting spells
     if ( (this.data.type === "spell") ) {
@@ -724,7 +729,8 @@ export default class Item5e extends Item {
         width: 400,
         top: event ? event.clientY - 80 : null,
         left: window.innerWidth - 710
-      }
+      },
+      messageData
     });
   }
 
@@ -840,7 +846,8 @@ export default class Item5e extends Item {
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: this.data.data.chatFlavor || title,
-      rollMode: game.settings.get("core", "rollMode")
+      rollMode: game.settings.get("core", "rollMode"),
+      messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id }}
     });
     return roll;
   }
@@ -966,8 +973,10 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
       },
-      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false
+      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
+      messageData: {"flags.dnd5e.roll": {type: "tool", itemId: this.id }}
     }, options);
+    rollConfig.event = options.event;
 
     // Call the roll helper utility
     return d20Roll(rollConfig);

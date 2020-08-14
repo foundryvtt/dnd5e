@@ -649,7 +649,8 @@ export default class Actor5e extends Actor {
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent: reliableTalent
+      reliableTalent: reliableTalent,
+      messageData: {"flags.dnd5e.roll": {type: "skill", skillId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -726,7 +727,8 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
-      halflingLucky: feats.halflingLucky
+      halflingLucky: feats.halflingLucky,
+      messageData: {"flags.dnd5e.roll": {type: "ability", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -772,7 +774,8 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      messageData: {"flags.dnd5e.roll": {type: "save", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -806,7 +809,8 @@ export default class Actor5e extends Actor {
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
       speaker: speaker,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      targetValue: 10
+      targetValue: 10,
+      messageData: {"flags.dnd5e.roll": {type: "death"}}
     });
     rollData.speaker = speaker;
 
@@ -893,7 +897,8 @@ export default class Actor5e extends Actor {
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this}),
       allowcritical: false,
-      dialogOptions: {width: 350}
+      dialogOptions: {width: 350},
+      messageData: {"flags.dnd5e.roll": {type: "hitDie"}}
     });
     if ( !roll ) return;
 
