@@ -97,22 +97,19 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     spells = this._filterItems(spells, this._filters.spellbook);
     feats = this._filterItems(feats, this._filters.features);
 
-    // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
-    const spellbook = this._prepareSpellbook(data, spells);
-    const nPrepared = spells.filter(s => {
-      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
-    }).length;
-
-    // Organize Inventory
-    let totalWeight = 0;
+    // Organize items
     for ( let i of items ) {
       i.data.quantity = i.data.quantity || 0;
       i.data.weight = i.data.weight || 0;
       i.totalWeight = Math.round(i.data.quantity * i.data.weight * 10) / 10;
       inventory[i.type].items.push(i);
-      totalWeight += i.totalWeight;
     }
-    data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+
+    // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
+    const spellbook = this._prepareSpellbook(data, spells);
+    const nPrepared = spells.filter(s => {
+      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
+    }).length;
 
     // Organize Features
     const features = {
@@ -156,51 +153,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       item.toggleClass = isActive ? "active" : "";
       item.toggleTitle = game.i18n.localize(isActive ? "DND5E.Equipped" : "DND5E.Unequipped");
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Compute the level and percentage of encumbrance for an Actor.
-   *
-   * Optionally include the weight of carried currency across all denominations by applying the standard rule
-   * from the PHB pg. 143
-   *
-   * @param {Number} totalWeight    The cumulative item weight from inventory items
-   * @param {Object} actorData      The data object for the Actor being rendered
-   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
-   * @private
-   */
-  _computeEncumbrance(totalWeight, actorData) {
-
-    // Encumbrance classes
-    let mod = {
-      tiny: 0.5,
-      sm: 1,
-      med: 1,
-      lg: 2,
-      huge: 4,
-      grg: 8
-    }[actorData.data.traits.size] || 1;
-
-    // Apply Powerful Build feat
-    if ( this.actor.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
-
-    // Add Currency Weight
-    if ( game.settings.get("dnd5e", "currencyWeight") ) {
-      const currency = actorData.data.currency;
-      const numCoins = Object.values(currency).reduce((val, denom) => val += denom, 0);
-      totalWeight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
-    }
-
-    // Compute Encumbrance percentage
-    const enc = {
-      max: actorData.data.abilities.str.value * CONFIG.DND5E.encumbrance.strMultiplier * mod,
-      value: Math.round(totalWeight * 10) / 10,
-    };
-    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-    enc.encumbered = enc.pct > (2/3);
-    return enc;
   }
 
   /* -------------------------------------------- */

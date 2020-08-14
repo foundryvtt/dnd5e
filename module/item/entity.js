@@ -574,7 +574,8 @@ export default class Item5e extends Item {
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the d20Roll logic for the core implementation
    *
-   * @return {Promise.<Roll|null>}   A Promise which resolves to the created Roll instance
+   * @param {object} options        Roll options which are configured and provided to the d20Roll function
+   * @return {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollAttack(options={}) {
     const itemData = this.data.data;
@@ -617,8 +618,7 @@ export default class Item5e extends Item {
     }
 
     // Compose roll options
-    const rollConfig = {
-      event: options.event,
+    const rollConfig = mergeObject({
       parts: parts,
       actor: this.actor,
       data: rollData,
@@ -629,7 +629,7 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       }
-    };
+    }, options);
 
     // Expanded weapon critical threshold
     if (( this.data.type === "weapon" ) && flags.weaponCriticalThreshold) {
@@ -917,11 +917,9 @@ export default class Item5e extends Item {
 
   /**
    * Perform an ability recharge test for an item which uses the d6 recharge mechanic
-   * @prarm {Object} options
-   *
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
-  async rollRecharge(options={}) {
+  async rollRecharge() {
     const data = this.data.data;
     if ( !data.recharge.value ) return;
 
@@ -943,10 +941,9 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Roll a Tool Check
-   * Rely upon the d20Roll logic for the core implementation
-   *
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation
+   * @prarm {Object} options   Roll configuration options provided to the d20Roll function
+   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
@@ -956,9 +953,8 @@ export default class Item5e extends Item {
     const parts = [`@mod`, "@prof"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
 
-    // Call the roll helper utility
-    return d20Roll({
-      event: options.event,
+    // Compose the roll data
+    const rollConfig = mergeObject({
       parts: parts,
       data: rollData,
       template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
@@ -971,7 +967,10 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710,
       },
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false
-    });
+    }, options);
+
+    // Call the roll helper utility
+    return d20Roll(rollConfig);
   }
 
   /* -------------------------------------------- */

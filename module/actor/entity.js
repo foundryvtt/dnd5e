@@ -76,6 +76,8 @@ export default class Actor5e extends Actor {
         return this._prepareCharacterData(this.data);
       case "npc":
         return this._prepareNPCData(this.data);
+      case "vehicle":
+        return this._prepareVehicleData(this.data);
     }
   }
 
@@ -224,6 +226,9 @@ export default class Actor5e extends Actor {
     const required = xp.max - prior;
     const pct = Math.round((xp.value - prior) * 100 / required);
     xp.pct = Math.clamped(pct, 0, 100);
+
+    // Inventory encumbrance
+    data.attributes.encumbrance = this._computeEncumbrance(actorData);
   }
 
   /* -------------------------------------------- */
@@ -245,6 +250,15 @@ export default class Actor5e extends Actor {
       data.details.spellLevel = Math.max(data.details.cr, 1);
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare vehicle type-specific data
+   * @param actorData
+   * @private
+   */
+  _prepareVehicleData(actorData) {}
 
   /* -------------------------------------------- */
 
@@ -378,6 +392,52 @@ export default class Actor5e extends Actor {
       spells.pact.level = 0;
       spells.pact.max = 0;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute the level and percentage of encumbrance for an Actor.
+   *
+   * Optionally include the weight of carried currency across all denominations by applying the standard rule
+   * from the PHB pg. 143
+   * @param {Object} actorData      The data object for the Actor being rendered
+   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
+   * @private
+   */
+  _computeEncumbrance(actorData) {
+
+    // Get the total weight from items
+    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
+    let weight = actorData.items.reduce((weight, i) => {
+      if ( !physicalItems.includes(i.type) ) return weight;
+      const q = i.data.quantity || 0;
+      const w = i.data.weight || 0;
+      return weight + Math.round(q * w * 10) / 10;
+    }, 0);
+
+    // [Optional] add Currency Weight
+    if ( game.settings.get("dnd5e", "currencyWeight") ) {
+      const currency = actorData.data.currency;
+      const numCoins = Object.values(currency).reduce((val, denom) => val += denom, 0);
+      weight += Math.round((numCoins * 10) / CONFIG.DND5E.encumbrance.currencyPerWeight) / 10;
+    }
+
+    // Determine the encumbrance size class
+    let mod = {
+      tiny: 0.5,
+      sm: 1,
+      med: 1,
+      lg: 2,
+      huge: 4,
+      grg: 8
+    }[actorData.data.traits.size] || 1;
+    if ( this.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
+
+    // Compute Encumbrance percentage
+    const max = actorData.data.abilities.str.value * CONFIG.DND5E.encumbrance.strMultiplier * mod;
+    const pct = Math.clamped((weight* 100) / max, 0, 100);
+    return { value: weight, max, pct, encumbered: pct > (2/3) };
   }
 
   /* -------------------------------------------- */

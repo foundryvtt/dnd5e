@@ -774,6 +774,10 @@ export default class ActorSheet5e extends ActorSheet {
     }
     if ( !data ) return false;
 
+    // Handle the drop with a Hooked function
+    const allowed = Hooks.call("dropActorSheetData", this.actor, this, data);
+    if ( allowed === false ) return;
+
     // Case 1 - Dropped Item
     if ( data.type === "Item" ) {
       return this._onDropItem(event, data);
