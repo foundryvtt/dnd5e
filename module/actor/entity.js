@@ -809,13 +809,17 @@ export default class Actor5e extends Actor {
       targetValue: 10
     });
     rollData.speaker = speaker;
+
+    // Don't make the roll if three failures have already been achieved.
+    const death = this.data.data.attributes.death;
+    if (death.failure == 3) return null;
+
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
 
     // Take action depending on the result
     const success = roll.total >= 10;
-    const d20 = roll.dice[0].total;
-    const death = this.data.data.attributes.death;
+    const d20 = roll.dice[0].total;    
 
     // Save success
     if ( success ) {
@@ -851,8 +855,7 @@ export default class Actor5e extends Actor {
       // 3 Failures = death
       if ( failures >= 3 ) {
         await this.update({
-          "data.attributes.death.success": 0,
-          "data.attributes.death.failure": 0
+          "data.attributes.death.failure": 3
         });
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveFailure", {name: this.name}), speaker});
       }
