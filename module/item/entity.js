@@ -1058,8 +1058,9 @@ export default class Item5e extends Item {
 
     // Saving Throws for card targets
     else if ( action === "save" ) {
-      for ( let t of targets ) {
-        await t.rollAbilitySave(button.dataset.ability, {event});
+      for ( let a of targets ) {
+        const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: a.token});
+        await a.rollAbilitySave(button.dataset.ability, { event, speaker });
       }
     }
 

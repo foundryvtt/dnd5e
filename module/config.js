@@ -25,6 +25,15 @@ DND5E.abilities = {
   "cha": "DND5E.AbilityCha"
 };
 
+DND5E.abilityAbbreviations = {
+  "str": "DND5E.AbilityStrAbbr",
+  "dex": "DND5E.AbilityDexAbbr",
+  "con": "DND5E.AbilityConAbbr",
+  "int": "DND5E.AbilityIntAbbr",
+  "wis": "DND5E.AbilityWisAbbr",
+  "cha": "DND5E.AbilityChaAbbr"
+};
+
 /* -------------------------------------------- */
 
 /**

@@ -1,4 +1,3 @@
-import Actor5e from "./actor/entity.js";
 
 /**
  * Highlight critical success or failure on d20 rolls

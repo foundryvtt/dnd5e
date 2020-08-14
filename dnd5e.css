@@ -627,6 +627,7 @@
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-ability {
   flex: 0 0 26px;
+  text-transform: capitalize;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-mod {
   flex: 0 0 20px;

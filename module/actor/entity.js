@@ -812,7 +812,7 @@ export default class Actor5e extends Actor {
 
     // Don't make the roll if three failures have already been achieved.
     const death = this.data.data.attributes.death;
-    if (death.failure == 3) return null;
+    if ( death.failure === 3 ) return null;
 
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
@@ -851,17 +851,10 @@ export default class Actor5e extends Actor {
     // Save failure
     else {
       let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
-
-      // 3 Failures = death
-      if ( failures >= 3 ) {
-        await this.update({
-          "data.attributes.death.failure": 3
-        });
+      await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
+      if ( failures >= 3 ) {  // 3 Failures = death
         await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveFailure", {name: this.name}), speaker});
       }
-
-      // Increment failures
-      else await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
     }
 
     // Return the rolled result
