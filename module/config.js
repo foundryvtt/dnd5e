@@ -267,6 +267,12 @@ DND5E.damageTypes = {
   "thunder": "DND5E.DamageThunder"
 };
 
+// Damage Resistance Types
+DND5E.damageResistanceTypes = mergeObject(duplicate(DND5E.damageTypes), {
+  "physical": "DND5E.DamagePhysical"
+});
+
+
 /* -------------------------------------------- */
 
 DND5E.distanceUnits = {
@@ -593,7 +599,7 @@ DND5E.cover = {
   .5: 'DND5E.CoverHalf',
   .75: 'DND5E.CoverThreeQuarters',
   1: 'DND5E.CoverTotal'
-}
+};
 
 /* -------------------------------------------- */
 

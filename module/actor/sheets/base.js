@@ -106,9 +106,9 @@ export default class ActorSheet5e extends ActorSheet {
 
   _prepareTraits(traits) {
     const map = {
-      "dr": CONFIG.DND5E.damageTypes,
-      "di": CONFIG.DND5E.damageTypes,
-      "dv": CONFIG.DND5E.damageTypes,
+      "dr": CONFIG.DND5E.damageResistanceTypes,
+      "di": CONFIG.DND5E.damageResistanceTypes,
+      "dv": CONFIG.DND5E.damageResistanceTypes,
       "ci": CONFIG.DND5E.conditionTypes,
       "languages": CONFIG.DND5E.languages,
       "armorProf": CONFIG.DND5E.armorProficiencies,
@@ -736,11 +736,8 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
-    const options = {
-      name: a.dataset.target,
-      title: label.innerText,
-      choices: CONFIG.DND5E[a.dataset.options]
-    };
+    const choices = CONFIG.DND5E[a.dataset.options];
+    const options = { name: a.dataset.target, title: label.innerText, choices };
     new TraitSelector(this.actor, options).render(true)
   }
 

@@ -107,8 +107,8 @@ Hooks.once("setup", function() {
   // Localize CONFIG objects once up-front
   const toLocalize = [
     "abilities", "abilityAbbreviations", "alignments", "conditionTypes", "consumableTypes", "currencies",
-    "damageTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes", "limitedUsePeriods",
-    "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellSchools",
+    "damageTypes", "damageResistanceTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes",
+    "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellSchools",
     "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
     "polymorphSettings", "armorProficiencies", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
     "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
