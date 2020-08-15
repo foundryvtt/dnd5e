@@ -545,10 +545,6 @@ export default class Actor5e extends Actor {
       "data.attributes.hp.temp": tmp - dt,
       "data.attributes.hp.value": dh
     };
-    if ( (hp.value <= 0) && (dh > 0) ) {
-      updates["data.attributes.death.success"] = 0;
-      updates["data.attributes.death.failure"] = 0;
-    }
     return this.update(updates);
   }
 
@@ -806,6 +802,13 @@ export default class Actor5e extends Actor {
    */
   async rollDeathSave(options={}) {
 
+    // Display a warning if we are not at zero HP or if we already have reached 3
+    const death = this.data.data.attributes.death;
+    if ( (this.data.data.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
+      ui.notifications.warn(game.i18n.localize("DND5E.DeathSaveUnnecessary"));
+      return null;
+    }
+
     // Evaluate a global saving throw bonus
     const parts = [];
     const data = {};
@@ -829,11 +832,6 @@ export default class Actor5e extends Actor {
       messageData: {"flags.dnd5e.roll": {type: "death"}}
     });
     rollData.speaker = speaker;
-
-    // Don't make the roll if three failures have already been achieved.
-    const death = this.data.data.attributes.death;
-    if ( death.failure === 3 ) return null;
-
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
 
