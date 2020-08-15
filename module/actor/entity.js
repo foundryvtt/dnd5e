@@ -464,8 +464,11 @@ export default class Actor5e extends Actor {
   /** @override */
   async update(data, options={}) {
 
+    // TODO: 0.7.1 compatibility - remove when stable
+    if ( !data.hasOwnProperty("data") ) data = expandObject(data);
+
     // Apply changes in Actor size to Token width/height
-    const newSize = data["data.traits.size"];
+    const newSize = getProperty(data, "data.traits.size");
     if ( newSize && (newSize !== getProperty(this.data, "data.traits.size")) ) {
       let size = CONFIG.DND5E.tokenSizes[newSize];
       if ( this.isToken ) this.token.update({height: size, width: size});
@@ -474,6 +477,14 @@ export default class Actor5e extends Actor {
         data["token.width"] = size;
       }
     }
+
+    // Reset death save counters
+    if ( (this.data.data.attributes.hp.value <= 0) && (getProperty(data, "data.attributes.hp.value") > 0) ) {
+      setProperty(data, "data.attributes.death.success", 0);
+      setProperty(data, "data.attributes.death.failure", 0);
+    }
+
+    // Perform the update
     return super.update(data, options);
   }
 
@@ -570,16 +581,16 @@ export default class Actor5e extends Actor {
       consumeUse = Boolean(usage.get("consumeUse"));
       placeTemplate = Boolean(usage.get("placeTemplate"));
 
-      // Spell slot consumption and up-casting
-      if ( consumeSlot ) {
-        const isPact = usage.get('level') === 'pact';
-        const lvl = isPact ? this.data.data.spells.pact.level : parseInt(usage.get("level"));
-        if ( lvl !== item.data.data.level ) {
-          const upcastData = mergeObject(item.data, {"data.level": lvl}, {inplace: false});
-          item = item.constructor.createOwned(upcastData, this);
-        }
-        consumeSlot = isPact ? "pact" : `spell${lvl}`;
+      // Determine the cast spell level
+      const isPact = usage.get('level') === 'pact';
+      const lvl = isPact ? this.data.data.spells.pact.level : parseInt(usage.get("level"));
+      if ( lvl !== item.data.data.level ) {
+        const upcastData = mergeObject(item.data, {"data.level": lvl}, {inplace: false});
+        item = item.constructor.createOwned(upcastData, this);
       }
+
+      // Denote the spell slot being consumed
+      if ( consumeSlot ) consumeSlot = isPact ? "pact" : `spell${lvl}`;
     }
 
     // Update Actor data
