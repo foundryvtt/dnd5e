@@ -1,7 +1,7 @@
 import { d20Roll, damageRoll } from "../dice.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
-import SpellCastDialog from "../apps/spell-cast-dialog.js";
+import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import AbilityTemplate from "../pixi/ability-template.js";
 import {DND5E} from '../config.js';
 
@@ -556,40 +556,45 @@ export default class Actor5e extends Actor {
     let lvl = itemData.level;
     const usesSlots = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(itemData.preparation.mode);
     const limitedUses = !!itemData.uses.per;
-    let consume = `spell${lvl}`;
+    let consumeSlot = `spell${lvl}`;
+    let consumeUse = false;
     let placeTemplate = false;
 
     // Configure spell slot consumption and measured template placement from the form
     if ( configureDialog && (usesSlots || item.hasAreaTarget || limitedUses) ) {
-      const spellFormData = await SpellCastDialog.create(this, item);
-      const isPact = spellFormData.get('level') === 'pact';
-      const lvl = isPact ? this.data.data.spells.pact.level : parseInt(spellFormData.get("level"));
-      if (Boolean(spellFormData.get("consume"))) {
-        consume = isPact ? 'pact' : `spell${lvl}`;
-      } else {
-        consume = false;
-      }
-      placeTemplate = Boolean(spellFormData.get("placeTemplate"));
+      const usage = await AbilityUseDialog.create(item);
+      if ( usage === null ) return;
 
-      // Create a temporary owned item to approximate the spell at a higher level
-      if ( lvl !== item.data.data.level ) {
-        item = item.constructor.createOwned(mergeObject(item.data, {"data.level": lvl}, {inplace: false}), this);
+      // Determine consumption preferences
+      consumeSlot = Boolean(usage.get("consumeSlot"));
+      consumeUse = Boolean(usage.get("consumeUse"));
+      placeTemplate = Boolean(usage.get("placeTemplate"));
+
+      // Spell slot consumption and up-casting
+      if ( consumeSlot ) {
+        const isPact = usage.get('level') === 'pact';
+        const lvl = isPact ? this.data.data.spells.pact.level : parseInt(usage.get("level"));
+        if ( lvl !== item.data.data.level ) {
+          const upcastData = mergeObject(item.data, {"data.level": lvl}, {inplace: false});
+          item = item.constructor.createOwned(upcastData, this);
+        }
+        consumeSlot = isPact ? "pact" : `spell${lvl}`;
       }
     }
 
     // Update Actor data
-    if ( usesSlots && consume && (lvl > 0) ) {
-      const slots = parseInt(this.data.data.spells[consume].value);
+    if ( usesSlots && consumeSlot && (lvl > 0) ) {
+      const slots = parseInt(this.data.data.spells[consumeSlot].value);
       if ( slots === 0 || Number.isNaN(slots) ) {
         return ui.notifications.error(game.i18n.localize("DND5E.SpellCastNoSlots"));
       }
       await this.update({
-        [`data.spells.${consume}.value`]: Math.max(parseInt(this.data.data.spells[consume].value) - 1, 0)
+        [`data.spells.${consumeSlot}.value`]: Math.max(parseInt(this.data.data.spells[consumeSlot].value) - 1, 0)
       });
     }
 
     // Update Item data
-    if ( limitedUses ) {
+    if ( limitedUses && consumeUse ) {
       const uses = parseInt(itemData.uses.value || 0);
       if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
       await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})

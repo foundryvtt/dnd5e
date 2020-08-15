@@ -398,27 +398,35 @@ export default class Item5e extends Item {
     if ( this.data.type !== "feat" ) throw new Error("Wrong Item type");
 
     // Configure whether to consume a limited use or to place a template
-    const usesRecharge = !!this.data.data.recharge.value;
+    const charge = this.data.data.recharge;
     const uses = this.data.data.uses;
     let usesCharges = !!uses.per && (uses.max > 0);
     let placeTemplate = false;
-    let consume = usesRecharge || usesCharges;
+    let consume = charge.value || usesCharges;
 
     // Determine whether the feat uses charges
     configureDialog = configureDialog && (consume || this.hasAreaTarget);
     if ( configureDialog ) {
       const usage = await AbilityUseDialog.create(this);
       if ( usage === null ) return false;
-      consume = Boolean(usage.get("consume"));
+      consume = Boolean(usage.get("consumeUse"));
       placeTemplate = Boolean(usage.get("placeTemplate"));
     }
 
     // Update Item data
     const current = getProperty(this.data, "data.uses.value") || 0;
-    if ( consume && usesRecharge ) {
-      await this.update({"data.recharge.charged": false});
+    if ( consume && charge.value ) {
+      if ( !charge.charged ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+        return false;
+      }
+      else await this.update({"data.recharge.charged": false});
     }
     else if ( consume && usesCharges ) {
+      if ( uses.value <= 0 ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+        return false;
+      }
       await this.update({"data.uses.value": Math.max(current - 1, 0)});
     }
 
@@ -877,7 +885,7 @@ export default class Item5e extends Item {
     if ( configureDialog ) {
       const usage = await AbilityUseDialog.create(this);
       if ( usage === null ) return false;
-      consume = Boolean(usage.get("consume"));
+      consume = Boolean(usage.get("consumeUse"));
       placeTemplate = Boolean(usage.get("placeTemplate"));
     }
 

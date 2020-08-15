@@ -21,13 +21,13 @@ import Item5e from "./module/item/entity.js";
 
 // Import Applications
 import AbilityTemplate from "./module/pixi/ability-template.js";
+import AbilityUseDialog from "./module/apps/ability-use-dialog.js";
 import ActorSheetFlags from "./module/apps/actor-flags.js";
 import ActorSheet5eCharacter from "./module/actor/sheets/character.js";
 import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
 import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
 import ItemSheet5e from "./module/item/sheet.js";
 import ShortRestDialog from "./module/apps/short-rest.js";
-import SpellCastDialog from "./module/apps/spell-cast-dialog.js";
 import TraitSelector from "./module/apps/trait-selector.js";
 
 // Import Helpers
@@ -46,13 +46,13 @@ Hooks.once("init", function() {
   // Create a namespace within the game global
   game.dnd5e = {
     applications: {
+      AbilityUseDialog,
       ActorSheetFlags,
       ActorSheet5eCharacter,
       ActorSheet5eNPC,
       ActorSheet5eVehicle,
       ItemSheet5e,
       ShortRestDialog,
-      SpellCastDialog,
       TraitSelector
     },
     canvas: {

@@ -508,6 +508,13 @@ export default class ActorSheet5e extends ActorSheet {
       itemData = scroll.data;
     }
 
+    // Upgrade the number of class levels a character has
+    if ( (itemData.type === "class") && ( this.actor.itemTypes.class.find(c => c.name === itemData.name)) ) {
+      const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
+      const lvl = cls.data.data.levels;
+      return cls.update({"data.levels": Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level)})
+    }
+
     // Create the owned item as normal
     // TODO remove conditional logic in 0.7.x
     if (isNewerVersion(game.data.version, "0.6.5")) return super._onDropItemCreate(itemData);
