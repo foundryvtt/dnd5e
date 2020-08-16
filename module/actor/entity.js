@@ -883,19 +883,33 @@ export default class Actor5e extends Actor {
 
   /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
-   * @param {string} denomination    The hit denomination of hit die to roll. Example "d8"
+   * @param {string} [denomination]   The hit denomination of hit die to roll. Example "d8".
+   *                                  If no denomination is provided, the first available HD will be used
+   * @param {boolean} [dialog]        Show a dialog prompt for configuring the hit die roll?
+   * @return {Promise<Roll|null>}     The created Roll instance, or null if no hit die was rolled
    */
-  async rollHitDie(denomination) {
+  async rollHitDie(denomination, {dialog=true}={}) {
 
-    // Find a class (if any) which has an available hit die of the requested denomination
-    const cls = this.items.find(i => {
-      const d = i.data.data;
-      return (d.hitDice === denomination) && ((d.levels || 1) - (d.hitDiceUsed || 0) > 0);
-    });
+    // If no denomination was provided, choose the first available
+    let cls = null;
+    if ( !denomination ) {
+      cls = this.itemTypes.class.find(c => c.data.data.hitDiceUsed < c.data.data.levels);
+      if ( !cls ) return null;
+      denomination = cls.data.data.hitDice;
+    }
+
+    // Otherwise locate a class (if any) which has an available hit die of the requested denomination
+    else {
+      cls = this.items.find(i => {
+        const d = i.data.data;
+        return (d.hitDice === denomination) && ((d.hitDiceUsed || 0) < (d.levels || 1));
+      });
+    }
 
     // If no class is available, display an error notification
     if ( !cls ) {
-      return ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: formula}));
+      ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: denomination}));
+      return null;
     }
 
     // Prepare roll data
@@ -911,16 +925,18 @@ export default class Actor5e extends Actor {
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this}),
       allowcritical: false,
+      fastForward: !dialog,
       dialogOptions: {width: 350},
       messageData: {"flags.dnd5e.roll": {type: "hitDie"}}
     });
-    if ( !roll ) return;
+    if ( !roll ) return null;
 
     // Adjust actor data
     await cls.update({"data.hitDiceUsed": cls.data.data.hitDiceUsed + 1});
     const hp = this.data.data.attributes.hp;
     const dhp = Math.min(hp.max - hp.value, roll.total);
-    return this.update({"data.attributes.hp.value": hp.value + dhp});
+    await this.update({"data.attributes.hp.value": hp.value + dhp});
+    return roll;
   }
 
   /* -------------------------------------------- */
@@ -930,17 +946,19 @@ export default class Actor5e extends Actor {
    * During a Short Rest resources and limited item uses may be recovered
    * @param {boolean} dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
    * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @param {boolean} autoHD  Automatically spend Hit Dice if you are missing 3 or more hit points
+   * @param {boolean} autoHDThreshold   A number of missing hit points which would trigger an automatic HD roll
    * @return {Promise}        A Promise which resolves once the short rest workflow has completed
    */
-  async shortRest({dialog=true, chat=true}={}) {
-    const data = this.data.data;
+  async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
 
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hd0 = data.attributes.hd;
-    const hp0 = data.attributes.hp.value;
+    const hp = this.data.data.attributes.hp;
+    const hd0 = this.data.data.attributes.hd;
+    const hp0 = hp.value;
+    let newDay = false;
 
     // Display a Dialog for rolling hit dice
-    let newDay = false;
     if ( dialog ) {
       try {
         newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
@@ -949,20 +967,28 @@ export default class Actor5e extends Actor {
       }
     }
 
+    // Automatically spend hit dice
+    else if ( autoHD ) {
+      while ( (hp.value + autoHDThreshold) <= hp.max ) {
+        const r = await this.rollHitDie(undefined, {dialog: false});
+        if ( r === null ) break;
+      }
+    }
+
     // Note the change in HP and HD which occurred
-    const dhd = data.attributes.hd - hd0;
-    const dhp = data.attributes.hp.value - hp0;
+    const dhd = this.data.data.attributes.hd - hd0;
+    const dhp = this.data.data.attributes.hp.value - hp0;
 
     // Recover character resources
     const updateData = {};
-    for ( let [k, r] of Object.entries(data.resources) ) {
+    for ( let [k, r] of Object.entries(this.data.data.resources) ) {
       if ( r.max && r.sr ) {
         updateData[`data.resources.${k}.value`] = r.max;
       }
     }
 
     // Recover pact slots.
-    const pact = data.spells.pact;
+    const pact = this.data.data.spells.pact;
     updateData['data.spells.pact.value'] = pact.override || pact.max;
     await this.update(updateData);
 
