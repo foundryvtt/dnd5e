@@ -110,6 +110,13 @@ export default class ActorSheetFlags extends BaseEntitySheet {
       }
     }
 
+    // Clear any bonuses which are whitespace only
+    for ( let b of Object.values(updateData.data.bonuses ) ) {
+      for ( let [k, v] of Object.entries(b) ) {
+        b[k] = v.trim();
+      }
+    }
+
     // Diff the data against any applied overrides and apply
     // TODO: Remove this logical gate once 0.7.x is release channel
     if ( !isNewerVersion("0.7.1", game.data.version) ){

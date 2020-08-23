@@ -1045,7 +1045,7 @@ export default class Actor5e extends Actor {
     let newDay = false;
     if ( dialog ) {
       try {
-        newDay = await LongRestDialog.longRestDialog(this);
+        newDay = await LongRestDialog.longRestDialog({actor: this});
       } catch(err) {
         return;
       }
@@ -1148,12 +1148,7 @@ export default class Actor5e extends Actor {
    */
   convertCurrency() {
     const curr = duplicate(this.data.data.currency);
-    const convert = {
-      cp: {into: "sp", each: 10},
-      sp: {into: "ep", each: 5 },
-      ep: {into: "gp", each: 2 },
-      gp: {into: "pp", each: 10}
-    };
+    const convert = CONFIG.DND5E.currencyConversion;
     for ( let [c, t] of Object.entries(convert) ) {
       let change = Math.floor(curr[c] / t.each);
       curr[c] -= (change * t.each);

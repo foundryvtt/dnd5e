@@ -707,10 +707,11 @@ export default class Item5e extends Item {
     if ( (this.data.type === "spell") ) {
       if ( (itemData.scaling.mode === "cantrip") ) {
         const level = this.actor.data.type === "character" ? actorData.details.level : actorData.details.spellLevel;
-        this._scaleCantripDamage(parts, itemData.scaling.formula, level);
+        this._scaleCantripDamage(parts, itemData.scaling.formula, level, rollData);
       }
       else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
-        this._scaleSpellDamage(parts, itemData.level, spellLevel, itemData.scaling.formula );
+        const scaling = itemData.scaling.formula;
+        this._scaleSpellDamage(parts, itemData.level, spellLevel, scaling, rollData);
       }
     }
 
@@ -753,13 +754,13 @@ export default class Item5e extends Item {
    * Adjust a cantrip damage formula to scale it for higher level characters and monsters
    * @private
    */
-  _scaleCantripDamage(parts, scale, level) {
+  _scaleCantripDamage(parts, scale, level, rollData) {
     const add = Math.floor((level + 1) / 6);
     if ( add === 0 ) return;
 
     // FUTURE SOLUTION - 0.7.0 AND LATER
     if (isNewerVersion(game.data.version, "0.6.9")) {
-      this._scaleDamage(parts, scale || parts.join(" + "), add)
+      this._scaleDamage(parts, scale || parts.join(" + "), add, rollData)
 
     }
 
@@ -769,7 +770,7 @@ export default class Item5e extends Item {
       if ( scale && (scale !== parts[0]) ) {
         parts[0] = parts[0] + " + " + scale.replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${add}d${d}`);
       } else {
-        parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd)+add}d${d}`)
+        parts[0] = parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd)+add}d${d}`);
       }
     }
   }
@@ -782,15 +783,17 @@ export default class Item5e extends Item {
    * @param {number} baseLevel    The default spell level
    * @param {number} spellLevel   The casted spell level
    * @param {string} formula      The scaling formula
+   * @param {object} rollData     A data object that should be applied to the scaled damage roll
+   * @return {string[]}           The scaled roll parts
    * @private
    */
-  _scaleSpellDamage(parts, baseLevel, spellLevel, formula) {
+  _scaleSpellDamage(parts, baseLevel, spellLevel, formula, rollData) {
     const upcastLevels = Math.max(spellLevel - baseLevel, 0);
     if ( upcastLevels === 0 ) return parts;
 
     // FUTURE SOLUTION - 0.7.0 AND LATER
     if (isNewerVersion(game.data.version, "0.6.9")) {
-      this._scaleDamage(parts, formula, upcastLevels);
+      this._scaleDamage(parts, formula, upcastLevels, rollData);
     }
 
     // LEGACY SOLUTION - 0.6.x AND OLDER
@@ -807,16 +810,17 @@ export default class Item5e extends Item {
 
   /**
    * Scale an array of damage parts according to a provided scaling formula and scaling multiplier
-   * @param {string[]} parts  Initial roll parts
-   * @param {string} scaling  A scaling formula
-   * @param {number} times    A number of times to apply the scaling formula
-   * @return {string[]}      The scaled roll parts
+   * @param {string[]} parts    Initial roll parts
+   * @param {string} scaling    A scaling formula
+   * @param {number} times      A number of times to apply the scaling formula
+   * @param {object} rollData   A data object that should be applied to the scaled damage roll
+   * @return {string[]}         The scaled roll parts
    * @private
    */
-  _scaleDamage(parts, scaling, times) {
+  _scaleDamage(parts, scaling, times, rollData) {
     if ( times <= 0 ) return parts;
-    const p0 = new Roll(parts[0]);
-    const s = new Roll(scaling).alter(times);
+    const p0 = new Roll(parts[0], rollData);
+    const s = new Roll(scaling, rollData).alter(times);
 
     // Attempt to simplify by combining like dice terms
     let simplified = false;
@@ -852,6 +856,7 @@ export default class Item5e extends Item {
 
     // Define Roll Data
     const rollData = this.getRollData();
+    if ( options.spellLevel ) rollData.item.level = options.spellLevel;
     const title = `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`;
 
     // Invoke the roll and submit it to chat
@@ -1076,7 +1081,7 @@ export default class Item5e extends Item {
     if ( action === "attack" ) await item.rollAttack({event});
     else if ( action === "damage" ) await item.rollDamage({event, spellLevel});
     else if ( action === "versatile" ) await item.rollDamage({event, spellLevel, versatile: true});
-    else if ( action === "formula" ) await item.rollFormula({event});
+    else if ( action === "formula" ) await item.rollFormula({event, spellLevel});
 
     // Saving Throws for card targets
     else if ( action === "save" ) {
