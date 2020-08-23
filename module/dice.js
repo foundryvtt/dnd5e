@@ -231,7 +231,7 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
       let add = (actor && actor.getFlag("dnd5e", "savageAttacks")) ? 1 : 0;
       let mult = 2;
       // TODO Backwards compatibility - REMOVE LATER
-      if (isNewerVersion(game.data.version, "0.6.5")) roll.alter(mult, add);
+      if (isNewerVersion(game.data.version, "0.6.9")) roll.alter(mult, add);
       else roll.alter(add, mult);
       messageData.flavor += ` (${game.i18n.localize("DND5E.Critical")})`;
       if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].critical = true;

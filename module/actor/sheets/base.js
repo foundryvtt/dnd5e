@@ -517,7 +517,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Create the owned item as normal
     // TODO remove conditional logic in 0.7.x
-    if (isNewerVersion(game.data.version, "0.6.5")) return super._onDropItemCreate(itemData);
+    if (isNewerVersion(game.data.version, "0.6.9")) return super._onDropItemCreate(itemData);
     else return this.actor.createEmbeddedEntity("OwnedItem", itemData);
   }
 

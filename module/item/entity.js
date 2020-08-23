@@ -250,9 +250,13 @@ export default class Item5e extends Item {
 
   /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
+   * @param {boolean} [configureDialog]     Display a configuration dialog for the item roll, if applicable?
+   * @param {string} [rollMode]             The roll display mode with which to display (or not) the card
+   * @param {boolean} [createMessage]       Whether to automatically create a chat message (if true) or simply return
+   *                                        the prepared chat message data (if false).
    * @return {Promise}
    */
-  async roll({configureDialog=true}={}) {
+  async roll({configureDialog=true, rollMode=null, createMessage=true}={}) {
 
     // Basic template rendering data
     const token = this.actor.token;
@@ -302,12 +306,13 @@ export default class Item5e extends Item {
     };
 
     // Toggle default roll mode
-    let rollMode = game.settings.get("core", "rollMode");
+    rollMode = rollMode || game.settings.get("core", "rollMode");
     if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
     if ( rollMode === "blindroll" ) chatData["blind"] = true;
 
     // Create the chat message
-    return ChatMessage.create(chatData);
+    if ( createMessage ) return ChatMessage.create(chatData);
+    else return chatData;
   }
 
   /* -------------------------------------------- */
@@ -448,7 +453,7 @@ export default class Item5e extends Item {
    * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
    * @return {Object}               An object of chat data to render
    */
-  getChatData(htmlOptions) {
+  getChatData(htmlOptions={}) {
     const data = duplicate(this.data.data);
     const labels = this.labels;
 
@@ -753,12 +758,12 @@ export default class Item5e extends Item {
     if ( add === 0 ) return;
 
     // FUTURE SOLUTION - 0.7.0 AND LATER
-    if (isNewerVersion(game.data.version, "0.6.5")) {
+    if (isNewerVersion(game.data.version, "0.6.9")) {
       this._scaleDamage(parts, scale || parts.join(" + "), add)
 
     }
 
-    // LEGACY SOLUTION - 0.6.5 AND OLDER
+    // LEGACY SOLUTION - 0.6.x AND OLDER
     // TODO: Deprecate the legacy solution one FVTT 0.7.x is RELEASE
     else {
       if ( scale && (scale !== parts[0]) ) {
@@ -784,11 +789,11 @@ export default class Item5e extends Item {
     if ( upcastLevels === 0 ) return parts;
 
     // FUTURE SOLUTION - 0.7.0 AND LATER
-    if (isNewerVersion(game.data.version, "0.6.5")) {
+    if (isNewerVersion(game.data.version, "0.6.9")) {
       this._scaleDamage(parts, formula, upcastLevels);
     }
 
-    // LEGACY SOLUTION - 0.6.5 AND OLDER
+    // LEGACY SOLUTION - 0.6.x AND OLDER
     // TODO: Deprecate the legacy solution one FVTT 0.7.x is RELEASE
     else {
       const bonus = new Roll(formula);
