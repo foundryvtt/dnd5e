@@ -33,6 +33,7 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
 export const displayChatActionButtons = function(message, html, data) {
   const chatCard = html.find(".dnd5e.chat-card");
   if ( chatCard.length > 0 ) {
+    html.find(".flavor-text").remove();
 
     // If the user is the message author or the actor owner, proceed
     let actor = game.actors.get(data.message.speaker.actor);

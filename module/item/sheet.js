@@ -216,7 +216,9 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   setPosition(position={}) {
-    position.height = this._tabs[0].active === "details" ? "auto" : this.options.height;
+    if ( !this._minimized ) {
+      position.height = this._tabs[0].active === "details" ? "auto" : this.options.height;
+    }
     return super.setPosition(position);
   }
 

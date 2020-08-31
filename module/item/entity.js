@@ -298,11 +298,13 @@ export default class Item5e extends Item {
       user: game.user._id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
+      flavor: this.name,
       speaker: {
         actor: this.actor._id,
         token: this.actor.token,
         alias: this.actor.name
-      }
+      },
+      flags: {"core.canPopout": true}
     };
 
     // Toggle default roll mode
@@ -847,7 +849,7 @@ export default class Item5e extends Item {
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the d20Roll logic for the core implementation
    *
-   * @return {Promise.<Roll>}   A Promise which resolves to the created Roll instance
+   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollFormula(options={}) {
     if ( !this.data.data.formula ) {
