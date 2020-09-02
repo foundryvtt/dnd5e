@@ -195,6 +195,64 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Return the features which a character is awarded for each class level
+   * @param cls {Object}    Data object for class, equivalent to Item5e.data or raw compendium entry
+   * @return {Promise<Item5e[]>}     Array of Item5e entities
+   */
+  static async getClassFeatures(cls) {
+    const level = cls.data.levels;
+    const className = cls.name.toLowerCase();
+
+    const clsConfig = CONFIG.DND5E.classFeatures[className];
+    let featureIDs = clsConfig["features"][level] || [];
+    const subclassName = cls.data.subclass.toLowerCase().slugify();
+    if ( subclassName != "" ) {
+      const subclassConfig = clsConfig["subclasses"][subclassName];
+      if ( subclassConfig != undefined ) {
+        const subclassFeatureIDs = subclassConfig["features"][level];
+        if ( subclassFeatureIDs ) {
+          featureIDs = featureIDs.concat(subclassFeatureIDs);
+        }
+      }
+      else {
+        console.warn("Invalid subclass: " + subclassName);
+      }
+    }
+    const features = await Promise.all(featureIDs.map(id => fromUuid(id)));
+
+    return features;
+  }
+
+
+  /* -------------------------------------------- */
+  /** Add appropriate features if a subclass has been added or modified */
+  /** @override */
+  async _onUpdateEmbeddedEntity(embeddedName, child, updateData, options, userId) {
+    if ( child.type === "class" && (updateData.data.subclass || updateData.data.levels) ) {
+      const features = await Actor5e.getClassFeatures(child);
+      this.createEmbeddedEntity("OwnedItem", features);
+    }
+
+    super._onUpdateEmbeddedEntity(embeddedName, child, updateData, options, userId);
+  }
+
+  /**
+   * Return the features which a character is awarded for each subclass level
+   * @param subclassName {string}  Name of subclass
+   * @param level {number}  The desired level
+   * @return {[Item5e]}       Array of Item5e entities
+   */
+  static async getSubclassFeatures(subclassName, level) {
+    const featureIDs = CONFIG.DND5E.characterFeaturesBySubclass[subclassName.toLowerCase()][level];
+    const features = await Promise.all(featureIDs.map(id => fromUuid(id)));
+    return features;
+  }
+
+  /* -------------------------------------------- */
+
+  /* -------------------------------------------- */
   /*  Data Preparation Helpers                    */
   /* -------------------------------------------- */
 
@@ -837,7 +895,7 @@ export default class Actor5e extends Actor {
 
     // Take action depending on the result
     const success = roll.total >= 10;
-    const d20 = roll.dice[0].total;    
+    const d20 = roll.dice[0].total;
 
     // Save success
     if ( success ) {
