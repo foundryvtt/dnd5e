@@ -222,9 +222,17 @@ export default class Actor5e extends Actor {
     }
     const features = await Promise.all(featureIDs.map(id => fromUuid(id)));
 
+    // Class spells should always be prepared
+    for ( const feature of features ) {
+      if ( feature.type === "spell" ) {
+        const preparation = feature.data.data.preparation;
+        preparation.mode = "always";
+        preparation.prepared = true;
+      }
+    }
+
     return features;
   }
-
 
   /* -------------------------------------------- */
   /** Add appropriate features if a subclass has been added or modified */
@@ -237,20 +245,6 @@ export default class Actor5e extends Actor {
 
     super._onUpdateEmbeddedEntity(embeddedName, child, updateData, options, userId);
   }
-
-  /**
-   * Return the features which a character is awarded for each subclass level
-   * @param subclassName {string}  Name of subclass
-   * @param level {number}  The desired level
-   * @return {[Item5e]}       Array of Item5e entities
-   */
-  static async getSubclassFeatures(subclassName, level) {
-    const featureIDs = CONFIG.DND5E.characterFeaturesBySubclass[subclassName.toLowerCase()][level];
-    const features = await Promise.all(featureIDs.map(id => fromUuid(id)));
-    return features;
-  }
-
-  /* -------------------------------------------- */
 
   /* -------------------------------------------- */
   /*  Data Preparation Helpers                    */
