@@ -73,7 +73,7 @@ Hooks.once("init", function() {
   CONFIG.DND5E = DND5E;
   CONFIG.Actor.entityClass = Actor5e;
   CONFIG.Item.entityClass = Item5e;
-
+  CONFIG.time.roundTime = 6000;
 
   // Register System Settings
   registerSystemSettings();

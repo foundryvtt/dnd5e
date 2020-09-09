@@ -529,9 +529,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Create the owned item as normal
-    // TODO remove conditional logic in 0.7.x
-    if (isNewerVersion(game.data.version, "0.6.9")) return super._onDropItemCreate(itemData);
-    else return this.actor.createEmbeddedEntity("OwnedItem", itemData);
+    return super._onDropItemCreate(itemData);
   }
 
   /* -------------------------------------------- */
@@ -769,91 +767,5 @@ export default class ActorSheet5e extends ActorSheet {
       onclick: ev => this.actor.revertOriginalForm()
     });
     return buttons;
-  }
-
-  /* -------------------------------------------- */
-  /*  DEPRECATED                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * TODO: Remove once 0.7.x is release
-   * @deprecated since 0.7.0
-   */
-  async _onDrop (event) {
-    event.preventDefault();
-
-    // Get dropped data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData('text/plain'));
-    } catch (err) {
-      return false;
-    }
-    if ( !data ) return false;
-
-    // Handle the drop with a Hooked function
-    const allowed = Hooks.call("dropActorSheetData", this.actor, this, data);
-    if ( allowed === false ) return;
-
-    // Case 1 - Dropped Item
-    if ( data.type === "Item" ) {
-      return this._onDropItem(event, data);
-    }
-
-    // Case 2 - Dropped Actor
-    if ( data.type === "Actor" ) {
-      return this._onDropActor(event, data);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * TODO: Remove once 0.7.x is release
-   * @deprecated since 0.7.0
-   */
-  async _onDropItem(event, data) {
-    if ( !this.actor.owner ) return false;
-    let itemData = await this._getItemDropData(event, data);
-
-    // Handle item sorting within the same Actor
-    const actor = this.actor;
-    let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
-    if (sameActor) return this._onSortItem(event, itemData);
-
-    // Create a new item
-    this._onDropItemCreate(itemData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * TODO: Remove once 0.7.x is release
-   * @deprecated since 0.7.0
-   */
-  async _getItemDropData(event, data) {
-    let itemData = null;
-
-    // Case 1 - Import from a Compendium pack
-    if (data.pack) {
-      const pack = game.packs.get(data.pack);
-      if (pack.metadata.entity !== "Item") return;
-      itemData = await pack.getEntry(data.id);
-    }
-
-    // Case 2 - Data explicitly provided
-    else if (data.data) {
-      itemData = data.data;
-    }
-
-    // Case 3 - Import from World entity
-    else {
-      let item = game.items.get(data.id);
-      if (!item) return;
-      itemData = item.data;
-    }
-
-    // Return a copy of the extracted data
-    return duplicate(itemData);
   }
 }
