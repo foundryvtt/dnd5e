@@ -235,15 +235,17 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /** Add appropriate features if a subclass has been added or modified */
+
   /** @override */
-  async _onUpdateEmbeddedEntity(embeddedName, child, updateData, options, userId) {
-    if ( child.type === "class" && (updateData.data.subclass || updateData.data.levels) ) {
-      const features = await Actor5e.getClassFeatures(child);
+  async updateEmbeddedEntity(embeddedName, data, options={}) {
+    super.updateEmbeddedEntity(embeddedName, data, options);
+
+    // Add class / subclass features
+    const item = this.data.items.find(i => i._id === data._id);
+    if ( item.type === "class" && (item.data.subclass != data.data.subclass || item.data.levels != data.data.levels) ) {
+      const features = await Actor5e.getClassFeatures(data);
       this.createEmbeddedEntity("OwnedItem", features);
     }
-
-    super._onUpdateEmbeddedEntity(embeddedName, child, updateData, options, userId);
   }
 
   /* -------------------------------------------- */

@@ -1,7 +1,6 @@
 import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
-import Actor5e from "../entity.js";
 import {DND5E} from '../../config.js';
 
 /**
@@ -507,25 +506,6 @@ export default class ActorSheet5e extends ActorSheet {
     if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
       itemData = scroll.data;
-    }
-
-    // Upgrade the number of class levels a character has
-    if ( itemData.type === "class" ) {
-      const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
-      const classWasAlreadyPresent = !!cls;
-
-      // Add new features for class level
-      if ( !classWasAlreadyPresent ) {
-        Actor5e.getClassFeatures(itemData).then(features => {
-          this.actor.createEmbeddedEntity("OwnedItem", features);
-        });
-      }
-
-      // If the actor already has the class, increment the level instead of creating a new item
-      if ( classWasAlreadyPresent ) {
-        const lvl = cls.data.data.levels;
-        return cls.update({"data.levels": Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level)})
-      }
     }
 
     // Create the owned item as normal
