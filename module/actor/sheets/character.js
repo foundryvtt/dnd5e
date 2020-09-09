@@ -1,4 +1,5 @@
 import ActorSheet5e from "./base.js";
+import Actor5e from "../entity.js";
 
 /**
  * An Actor sheet for player character type actors.
@@ -249,5 +250,33 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
       yes: () => this.actor.convertCurrency()
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(itemData) {
+
+    // Upgrade the number of class levels a character has
+    // and add features
+    if ( itemData.type === "class" ) {
+      const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
+      const classWasAlreadyPresent = !!cls;
+
+      // Add new features for class level
+      if ( !classWasAlreadyPresent ) {
+        Actor5e.getClassFeatures(itemData).then(features => {
+          this.actor.createEmbeddedEntity("OwnedItem", features);
+        });
+      }
+
+      // If the actor already has the class, increment the level instead of creating a new item
+      if ( classWasAlreadyPresent ) {
+        const lvl = cls.data.data.levels;
+        return cls.update({"data.levels": Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level)})
+      }
+    }
+
+    super._onDropItemCreate(itemData);
   }
 }
