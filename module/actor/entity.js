@@ -473,7 +473,7 @@ export default class Actor5e extends Actor {
     // [Optional] add Currency Weight
     if ( game.settings.get("dnd5e", "currencyWeight") ) {
       const currency = actorData.data.currency;
-      const numCoins = Object.values(currency).reduce((val, denom) => val += denom, 0);
+      const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
       weight += Math.round((numCoins * 10) / CONFIG.DND5E.encumbrance.currencyPerWeight) / 10;
     }
 
