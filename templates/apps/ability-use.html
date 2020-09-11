@@ -5,7 +5,7 @@
     <p class="notification error">{{localize this}}</p>
     {{/each}}
 
-    {{#if hasSpellSlots}}
+    {{#if canUpcast}}
     <div class="form-group">
         <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
         <div class="form-fields">
@@ -19,11 +19,9 @@
         </div>
     </div>
 
-    {{#if canUpcast}}
     <div class="form-group">
         <label class="checkbox"><input type="checkbox" name="consumeSlot" checked/>{{ localize "DND5E.SpellCastConsume" }}</label>
     </div>
-    {{/if}}
     {{/if}}
 
     {{#if hasLimitedUses}}
