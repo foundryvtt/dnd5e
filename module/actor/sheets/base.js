@@ -163,18 +163,18 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // Format a spellbook entry for a certain indexed level
-    const registerSection = (sl, i, label, level={}) => {
+    const registerSection = (sl, i, label, {prepMode="prepared", level={}}={}) => {
       spellbook[i] = {
         order: i,
         label: label,
         usesSlots: i > 0,
-        canCreate: owner && (i >= 1),
+        canCreate: owner,
         canPrepare: (data.actor.type === "character") && (i >= 1),
         spells: [],
         uses: useLabels[i] || level.value || 0,
         slots: useLabels[i] || level.max || 0,
         override: level.override || 0,
-        dataset: {"type": "spell", "level": i},
+        dataset: {"type": "spell", "level": prepMode in sections ? 1 : i, "preparation.mode": prepMode},
         prop: sl
       };
     };
@@ -192,12 +192,12 @@ export default class ActorSheet5e extends ActorSheet {
       registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       for (let lvl = 1; lvl <= maxLevel; lvl++) {
         const sl = `spell${lvl}`;
-        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
+        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], {levels: levels[sl]});
       }
     }
     if ( levels.pact && levels.pact.max ) {
       registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      registerSection("pact", sections.pact, CONFIG.DND5E.spellPreparationModes.pact, levels.pact);
+      registerSection("pact", sections.pact, CONFIG.DND5E.spellPreparationModes.pact, {prepMode: "pact", levels: levels.pact});
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
@@ -210,13 +210,13 @@ export default class ActorSheet5e extends ActorSheet {
       if ( mode in sections ) {
         s = sections[mode];
         if ( !spellbook[s] ){
-          registerSection(mode, s, CONFIG.DND5E.spellPreparationModes[mode], levels[mode]);
+          registerSection(mode, s, CONFIG.DND5E.spellPreparationModes[mode], {prepMode: mode, levels: levels[mode]});
         }
       }
 
       // Higher-level spell headings
       else if ( !spellbook[s] ) {
-        registerSection(sl, s, CONFIG.DND5E.spellLevels[s], levels[sl]);
+        registerSection(sl, s, CONFIG.DND5E.spellLevels[s], {levels: levels[sl]});
       }
 
       // Add the spell to the relevant heading
