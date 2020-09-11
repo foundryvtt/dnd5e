@@ -9,8 +9,17 @@ export const _getInitiativeFormula = function(combatant) {
   const actor = combatant.actor;
   if ( !actor ) return "1d20";
   const init = actor.data.data.attributes.init;
-  const parts = ["1d20", init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
-  if ( actor.getFlag("dnd5e", "initiativeAdv") ) parts[0] = "2d20kh";
+
+  let nd = 1;
+  let mods = "";
+  
+  if (actor.getFlag("dnd5e", "halflingLucky")) mods += "r=1";
+  if (actor.getFlag("dnd5e", "initiativeAdv")) {
+    nd = 2;
+    mods += "kh";
+  }
+
+  const parts = [`${nd}d20${mods}`, init.mod, (init.prof !== 0) ? init.prof : null, (init.bonus !== 0) ? init.bonus : null];
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
