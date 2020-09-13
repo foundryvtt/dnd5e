@@ -645,12 +645,12 @@ export default class Actor5e extends Actor {
 
     // Update Actor data
     if ( usesSlots && consumeSlot && (lvl > 0) ) {
-      const slots = parseInt(this.data.data.spells[consumeSlot].value);
+      const slots = parseInt(this.data.data.spells[consumeSlot]?.value);
       if ( slots === 0 || Number.isNaN(slots) ) {
         return ui.notifications.error(game.i18n.localize("DND5E.SpellCastNoSlots"));
       }
       await this.update({
-        [`data.spells.${consumeSlot}.value`]: Math.max(parseInt(this.data.data.spells[consumeSlot].value) - 1, 0)
+        [`data.spells.${consumeSlot}.value`]: Math.max(slots - 1, 0)
       });
     }
 
