@@ -619,15 +619,20 @@ export default class Item5e extends Item {
     const consume = itemData.consume;
     if ( consume?.type === "ammo" ) {
       const ammo = this.actor.items.get(consume.target);
-      const q = ammo.data.data.quantity;
-      if ( q && (q - consume.amount >= 0) ) {
-        let ammoBonus = ammo.data.data.attackBonus;
-        if ( ammoBonus ) {
-          parts.push("@ammo");
-          rollData["ammo"] = ammoBonus;
-          title += ` [${ammo.name}]`;
-          this._ammo = ammo;
+      if(ammo?.data){
+        const q = ammo.data.data.quantity;
+        const consumeAmount = consume.amount ?? 0;
+        if ( q && (q - consumeAmount >= 0) ) {
+          let ammoBonus = ammo.data.data.attackBonus;
+          if ( ammoBonus ) {
+            parts.push("@ammo");
+            rollData["ammo"] = ammoBonus;
+            title += ` [${ammo.name}]`;
+            this._ammo = ammo;
+          }
         }
+      }else{
+        ui.notifications.error(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
       }
     }
 

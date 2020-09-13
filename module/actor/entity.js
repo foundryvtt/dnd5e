@@ -235,15 +235,17 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /** Add appropriate features if a subclass has been added or modified */
+
   /** @override */
-  async _onUpdateEmbeddedEntity(embeddedName, child, updateData, options, userId) {
-    if ( child.type === "class" && (updateData.data.subclass || updateData.data.levels) ) {
-      const features = await Actor5e.getClassFeatures(child);
+  async updateEmbeddedEntity(embeddedName, data, options={}) {
+    super.updateEmbeddedEntity(embeddedName, data, options);
+
+    // Add class / subclass features
+    const item = this.data.items.find(i => i._id === data._id);
+    if ( item.type === "class" && (item.data.subclass != data.data.subclass || item.data.levels != data.data.levels) ) {
+      const features = await Actor5e.getClassFeatures(data);
       this.createEmbeddedEntity("OwnedItem", features);
     }
-
-    super._onUpdateEmbeddedEntity(embeddedName, child, updateData, options, userId);
   }
 
   /* -------------------------------------------- */
@@ -471,7 +473,7 @@ export default class Actor5e extends Actor {
     // [Optional] add Currency Weight
     if ( game.settings.get("dnd5e", "currencyWeight") ) {
       const currency = actorData.data.currency;
-      const numCoins = Object.values(currency).reduce((val, denom) => val += denom, 0);
+      const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
       weight += Math.round((numCoins * 10) / CONFIG.DND5E.encumbrance.currencyPerWeight) / 10;
     }
 
@@ -643,12 +645,12 @@ export default class Actor5e extends Actor {
 
     // Update Actor data
     if ( usesSlots && consumeSlot && (lvl > 0) ) {
-      const slots = parseInt(this.data.data.spells[consumeSlot].value);
+      const slots = parseInt(this.data.data.spells[consumeSlot]?.value);
       if ( slots === 0 || Number.isNaN(slots) ) {
         return ui.notifications.error(game.i18n.localize("DND5E.SpellCastNoSlots"));
       }
       await this.update({
-        [`data.spells.${consumeSlot}.value`]: Math.max(parseInt(this.data.data.spells[consumeSlot].value) - 1, 0)
+        [`data.spells.${consumeSlot}.value`]: Math.max(slots - 1, 0)
       });
     }
 
