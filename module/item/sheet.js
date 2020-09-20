@@ -8,9 +8,7 @@ export default class ItemSheet5e extends ItemSheet {
   constructor(...args) {
     super(...args);
     if ( this.object.data.type === "class" ) {
-      this.options.resizable = true;
       this.options.width =  600;
-      this.options.height = 640;
     }
   }
 
@@ -20,7 +18,7 @@ export default class ItemSheet5e extends ItemSheet {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       width: 560,
-      height: 420,
+      height: "auto",
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
