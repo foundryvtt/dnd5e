@@ -242,9 +242,18 @@ export default class Actor5e extends Actor {
 
     // Add class / subclass features
     const item = this.data.items.find(i => i._id === data._id);
-    if ( item.type === "class" && (item.data.subclass != data.data.subclass || item.data.levels != data.data.levels) ) {
-      const features = await Actor5e.getClassFeatures(data);
-      this.createEmbeddedEntity("OwnedItem", features);
+    if ( item.type === "class" ){
+      // Class was dragged onto the character sheet
+      if ( data.hasOwnProperty("data.levels") ) {
+        item.data.levels = data["data.levels"];
+        const features = await Actor5e.getClassFeatures(item);
+        this.createEmbeddedEntity("OwnedItem", features);
+      }
+      // Class was edited via the details dialog
+      else if ( item.data.subclass != data.data.subclass || item.data.levels != data.data.levels ) {
+        const features = await Actor5e.getClassFeatures(data);
+        this.createEmbeddedEntity("OwnedItem", features);
+      }
     }
   }
 
@@ -1090,13 +1099,13 @@ export default class Actor5e extends Actor {
    * Take a long rest, recovering HP, HD, resources, and spell slots
    * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
    * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
+   * @param {boolean} newDay  Whether the long rest carries over to a new day
    * @return {Promise}        A Promise which resolves once the long rest workflow has completed
    */
-  async longRest({dialog=true, chat=true}={}) {
+  async longRest({dialog=true, chat=true, newDay=true}={}) {
     const data = this.data.data;
 
     // Maybe present a confirmation dialog
-    let newDay = false;
     if ( dialog ) {
       try {
         newDay = await LongRestDialog.longRestDialog({actor: this});
