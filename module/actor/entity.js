@@ -241,20 +241,26 @@ export default class Actor5e extends Actor {
     super.updateEmbeddedEntity(embeddedName, data, options);
 
     // Add class / subclass features
-    const item = this.data.items.find(i => i._id === data._id);
-    if ( item.type === "class" ){
+    data = Array.isArray(data) ? data : [data];
+    const dataById = new Map(data.map(datum => [datum._id, datum]));
+    const ids = new Set(dataById.keys());
+    const classes = this.data.items.filter(i => ids.has(i._id) && i.type === 'class');
+    const features = [];
+
+    for (const cls of classes) {
+      const update = dataById.get(cls._id);
       // Class was dragged onto the character sheet
-      if ( data.hasOwnProperty("data.levels") ) {
-        item.data.levels = data["data.levels"];
-        const features = await Actor5e.getClassFeatures(item);
-        this.createEmbeddedEntity("OwnedItem", features);
+      if (update.hasOwnProperty('data.levels')) {
+        cls.data.levels = update['data.levels'];
+        features.push(...await Actor5e.getClassFeatures(cls));
       }
       // Class was edited via the details dialog
-      else if ( item.data.subclass != data.data.subclass || item.data.levels != data.data.levels ) {
-        const features = await Actor5e.getClassFeatures(data);
-        this.createEmbeddedEntity("OwnedItem", features);
+      else if (cls.data.subclass !== update.data.subclass || cls.data.levels !== update.data.levels) {
+        features.push(...await Actor5e.getClassFeatures(cls));
       }
     }
+
+    this.createEmbeddedEntity('OwnedItem', features);
   }
 
   /* -------------------------------------------- */
