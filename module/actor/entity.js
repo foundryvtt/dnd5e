@@ -239,21 +239,21 @@ export default class Actor5e extends Actor {
   /** @override */
   async updateEmbeddedEntity(embeddedName, data, options={}) {
     super.updateEmbeddedEntity(embeddedName, data, options);
-
-    // Add class / subclass features
+    if ( embeddedName !== "OwnedItem" ) return;
     const item = this.data.items.find(i => i._id === data._id);
-    if ( item.type === "class" ){
-      // Class was dragged onto the character sheet
-      if ( data.hasOwnProperty("data.levels") ) {
-        item.data.levels = data["data.levels"];
-        const features = await Actor5e.getClassFeatures(item);
-        this.createEmbeddedEntity("OwnedItem", features);
-      }
-      // Class was edited via the details dialog
-      else if ( item.data.subclass != data.data.subclass || item.data.levels != data.data.levels ) {
-        const features = await Actor5e.getClassFeatures(data);
-        this.createEmbeddedEntity("OwnedItem", features);
-      }
+    if ( item.type !== "class" ) return;
+
+    // Class was dragged onto the character sheet
+    if ( data.hasOwnProperty("data.levels") ) {
+      item.data.levels = data["data.levels"];
+      const features = await Actor5e.getClassFeatures(item);
+      this.createEmbeddedEntity("OwnedItem", features);
+    }
+
+    // Class was edited via the details dialog
+    else if ( item.data.subclass != data.data.subclass || item.data.levels != data.data.levels ) {
+      const features = await Actor5e.getClassFeatures(data);
+      this.createEmbeddedEntity("OwnedItem", features);
     }
   }
 
