@@ -238,23 +238,38 @@ export default class Actor5e extends Actor {
 
   /** @override */
   async updateEmbeddedEntity(embeddedName, data, options={}) {
-    super.updateEmbeddedEntity(embeddedName, data, options);
-    if ( embeddedName !== "OwnedItem" ) return;
-    const item = this.data.items.find(i => i._id === data._id);
-    if ( item.type !== "class" ) return;
+    let updated = await super.updateEmbeddedEntity(embeddedName, data, options);
+    if ( embeddedName === "OwnedItem" ) this._createClassFeatures(updated);
+    return updated;
+  }
 
-    // Class was dragged onto the character sheet
-    if ( data.hasOwnProperty("data.levels") ) {
-      item.data.levels = data["data.levels"];
-      const features = await Actor5e.getClassFeatures(item);
-      this.createEmbeddedEntity("OwnedItem", features);
-    }
+  /* -------------------------------------------- */
 
-    // Class was edited via the details dialog
-    else if ( item.data.subclass != data.data.subclass || item.data.levels != data.data.levels ) {
-      const features = await Actor5e.getClassFeatures(data);
-      this.createEmbeddedEntity("OwnedItem", features);
+  /**
+   * Create additional class features in the Actor when a class item is updated.
+   * @private
+   */
+  async _createClassFeatures(updated) {
+    const toCreate = [];
+    for (let u of updated instanceof Array ? updated : [updated]) {
+      const item = this.data.items.find(i => i._id === data._id);
+      if (item.type !== "class") continue;
+
+      // Class was dragged onto the character sheet
+      if (data.hasOwnProperty("data.levels")) {
+        item.data.levels = data["data.levels"];
+        const features = await Actor5e.getClassFeatures(item);
+        toCreate.push(...features);
+      }
+
+      // Class was edited via the details dialog
+      else if ((item.data.subclass !== data.data.subclass) || (item.data.levels !== data.data.levels)) {
+        const features = await Actor5e.getClassFeatures(data);
+        toCreate.push(...features);
+      }
     }
+    if ( !toCreate.length ) return;
+    return this.createEmbeddedEntity("OwnedItem", toCreate);
   }
 
   /* -------------------------------------------- */
