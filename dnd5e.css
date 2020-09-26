@@ -82,6 +82,7 @@
   color: #191813;
 }
 .dnd5e input[type="text"],
+.dnd5e input[type="number"],
 .dnd5e select {
   height: calc(100% - 2px);
   border: 1px solid #7a7971;
@@ -89,7 +90,9 @@
   color: #191813;
 }
 .dnd5e input[type="text"]:hover,
-.dnd5e input[type="text"]:focus {
+.dnd5e input[type="number"]:hover,
+.dnd5e input[type="text"]:focus,
+.dnd5e input[type="number"]:focus {
   border: 1px solid #111;
   box-shadow: 0 0 8px red;
 }
@@ -231,12 +234,15 @@
   overflow-y: auto;
   align-content: flex-start;
 }
-.dnd5e.sheet input[type="text"] {
+.dnd5e.sheet input[type="text"],
+.dnd5e.sheet input[type="number"] {
   background: none;
   border: 1px solid transparent;
 }
 .dnd5e.sheet input[type="text"]:hover,
-.dnd5e.sheet input[type="text"]:focus {
+.dnd5e.sheet input[type="number"]:hover,
+.dnd5e.sheet input[type="text"]:focus,
+.dnd5e.sheet input[type="number"]:focus {
   border: 1px solid #111;
 }
 .dnd5e.sheet select {
@@ -661,7 +667,8 @@
 .dnd5e.sheet.actor .counters .counter .counter-value > * {
   display: inline;
 }
-.dnd5e.sheet.actor .counters .counter input[type="text"] {
+.dnd5e.sheet.actor .counters .counter input[type="text"],
+.dnd5e.sheet.actor .counters .counter input[type="number"] {
   height: 20px;
   max-width: 20px;
   margin: 0;
@@ -1090,6 +1097,7 @@
   line-height: 18px;
 }
 .dnd5e.sheet.item .details input[type="text"],
+.dnd5e.sheet.item .details input[type="number"],
 .dnd5e.sheet.item .details select {
   height: 24px;
   border: 1px solid #7a7971;

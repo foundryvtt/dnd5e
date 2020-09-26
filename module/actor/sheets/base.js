@@ -199,9 +199,14 @@ export default class ActorSheet5e extends ActorSheet {
     // Pact magic users have cantrips and a pact magic section
     if ( levels.pact && levels.pact.max ) {
       if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      const {value, max, override} = levels.pact;
+      const l = levels.pact;
       const config = CONFIG.DND5E.spellPreparationModes.pact;
-      registerSection("pact", sections.pact, config, {prepMode: "pact", value, max, override});
+      registerSection("pact", sections.pact, config, {
+        prepMode: "pact",
+        value: l.value,
+        max: l.max,
+        override: l.override
+      });
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
@@ -214,9 +219,14 @@ export default class ActorSheet5e extends ActorSheet {
       if ( mode in sections ) {
         s = sections[mode];
         if ( !spellbook[s] ){
-          const {value, max, override} = levels[mode];
+          const l = levels[mode] || {};
           const config = CONFIG.DND5E.spellPreparationModes[mode];
-          registerSection(mode, s, config, {prepMode: mode, value, max, override});
+          registerSection(mode, s, config, {
+            prepMode: mode,
+            value: l.value,
+            max: l.max,
+            override: l.override
+          });
         }
       }
 

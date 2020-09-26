@@ -17,8 +17,7 @@
 
                 {{#unless disableExperience}}
                 <div class="experience flexrow">
-                    <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}"
-                           data-dtype="Number" placeholder="0"/>
+                    <input name="data.details.xp.value" type="number" value="{{data.details.xp.value}}" placeholder="0"/>
                     <span class="sep">/</span>
                     <span class="max">{{data.details.xp.max}}</span>
                 </div>
@@ -49,17 +48,15 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}"
-                               data-dtype="Number" placeholder="10"/>
+                        <input name="data.attributes.hp.value" type="number" value="{{data.attributes.hp.value}}" placeholder="10"/>
                         <span class="sep"> / </span>
-                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}"
-                               data-dtype="Number" placeholder="10"/>
+                        <input name="data.attributes.hp.max" type="number" value="{{data.attributes.hp.max}}" placeholder="10"/>
                     </div>
                     <footer class="attribute-footer">
-                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'DND5E.Temp' }}"
-                               value="{{data.attributes.hp.temp}}" data-dtype="{{data.attributes.hp.type}}"/>
-                        <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+{{ localize 'DND5E.Max' }}"
-                               value="{{data.attributes.hp.tempmax}}" data-dtype="{{data.attributes.hp.type}}"/>
+                        <input name="data.attributes.hp.temp" type="number" class="temphp" placeholder="+{{ localize 'DND5E.Temp' }}"
+                               value="{{data.attributes.hp.temp}}"/>
+                        <input name="data.attributes.hp.tempmax" type="number" class="temphp" placeholder="+{{ localize 'DND5E.Max' }}"
+                               value="{{data.attributes.hp.tempmax}}"/>
                     </footer>
                 </li>
 
@@ -77,8 +74,7 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}"
-                               data-dtype="Number" placeholder="10"/>
+                        <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
                     </div>
                     <footer class="attribute-footer">
                         <span class="spell-dc">{{localize "DND5E.SpellDC"}} {{data.attributes.spelldc}}</span>
@@ -104,7 +100,7 @@
                     </div>
                     <footer class="attribute-footer">
                         <span>{{ localize "DND5E.Modifier" }}</span>
-                        <input name="data.attributes.init.value" type="text" placeholder="0" data-dtype="Number"
+                        <input name="data.attributes.init.value" type="number" placeholder="0"
                                value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}"/>
                     </footer>
                 </li>
@@ -131,7 +127,7 @@
             {{#each data.abilities as |ability id|}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                    <input class="ability-score" name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}" data-dtype="Number" placeholder="10"/>
+                    <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
                         <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
@@ -171,11 +167,9 @@
                                 {{ localize "DND5E.AbbreviationSR" }} <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
                             </label>
 
-                            <input name="data.resources.{{res.name}}.value" type="text" value="{{res.value}}"
-                                   data-dtype="Number" placeholder="0"/>
+                            <input name="data.resources.{{res.name}}.value" type="number" value="{{res.value}}" placeholder="0"/>
                             <span class="sep"> / </span>
-                            <input name="data.resources.{{res.name}}.max" type="text" value="{{res.max}}"
-                                  data-dtype="Number" placeholder="0"/>
+                            <input name="data.resources.{{res.name}}.max" type="number" value="{{res.max}}" placeholder="0"/>
 
                             <label class="recharge checkbox">
                                 {{ localize "DND5E.AbbreviationLR" }} <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
@@ -191,17 +185,17 @@
                         <h4 class="death-save rollable">{{ localize "DND5E.DeathSave" }}</h4>
                         <div class="counter-value">
                             <i class="fas fa-check"></i>
-                            <input type="text" name="data.attributes.death.success" data-dtype="Number" placeholder="0"
+                            <input name="data.attributes.death.success" type="number" placeholder="0"
                                    value="{{data.attributes.death.success}}"/>
                             <i class="fas fa-times"></i>
-                            <input type="text" name="data.attributes.death.failure" data-dtype="Number" placeholder="0"
+                            <input name="data.attributes.death.failure" type="number" placeholder="0"
                                    value="{{data.attributes.death.failure}}"/>
                         </div>
                     </div>
                     <div class="counter flexrow exhaustion">
                         <h4>{{ localize "DND5E.Exhaustion" }}</h4>
                         <div class="counter-value">
-                            <input type="text" name="data.attributes.exhaustion" data-dtype="Number" placeholder="0"
+                            <input name="data.attributes.exhaustion" type="number" placeholder="0"
                                    value="{{data.attributes.exhaustion}}" />
                         </div>
                     </div>
