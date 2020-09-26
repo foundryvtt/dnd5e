@@ -205,21 +205,24 @@ export default class Actor5e extends Actor {
     const level = cls.data.levels;
     const className = cls.name.toLowerCase();
 
+    // Get the configuration of features which may be added
     const clsConfig = CONFIG.DND5E.classFeatures[className];
     let featureIDs = clsConfig["features"][level] || [];
     const subclassName = cls.data.subclass.toLowerCase().slugify();
-    if ( subclassName != "" ) {
+
+    // Identify subclass features
+    if ( subclassName !== "" ) {
       const subclassConfig = clsConfig["subclasses"][subclassName];
-      if ( subclassConfig != undefined ) {
+      if ( subclassConfig !== undefined ) {
         const subclassFeatureIDs = subclassConfig["features"][level];
         if ( subclassFeatureIDs ) {
           featureIDs = featureIDs.concat(subclassFeatureIDs);
         }
       }
-      else {
-        console.warn("Invalid subclass: " + subclassName);
-      }
+      else console.warn("Invalid subclass: " + subclassName);
     }
+
+    // Load item data for all identified features
     const features = await Promise.all(featureIDs.map(id => fromUuid(id)));
 
     // Class spells should always be prepared
@@ -230,7 +233,6 @@ export default class Actor5e extends Actor {
         preparation.prepared = true;
       }
     }
-
     return features;
   }
 
@@ -238,8 +240,9 @@ export default class Actor5e extends Actor {
 
   /** @override */
   async updateEmbeddedEntity(embeddedName, data, options={}) {
+    const createItems = embeddedName === "OwnedItem" ? await this._createClassFeatures(data) : [];
     let updated = await super.updateEmbeddedEntity(embeddedName, data, options);
-    if ( embeddedName === "OwnedItem" ) this._createClassFeatures(updated);
+    if ( createItems.length ) await this.createEmbeddedEntity("OwnedItem", createItems);
     return updated;
   }
 
@@ -250,26 +253,40 @@ export default class Actor5e extends Actor {
    * @private
    */
   async _createClassFeatures(updated) {
-    const toCreate = [];
+    let toCreate = [];
     for (let u of updated instanceof Array ? updated : [updated]) {
-      const item = this.data.items.find(i => i._id === data._id);
-      if (item.type !== "class") continue;
+      const item = this.items.get(u._id);
+      if (!item || (item.data.type !== "class")) continue;
+      const classData = duplicate(item.data);
+      let changed = false;
 
-      // Class was dragged onto the character sheet
-      if (data.hasOwnProperty("data.levels")) {
-        item.data.levels = data["data.levels"];
-        const features = await Actor5e.getClassFeatures(item);
-        toCreate.push(...features);
+      // Get and create features for an increased class level
+      const newLevels = getProperty(u, "data.levels");
+      if (newLevels && (newLevels > item.data.data.levels)) {
+        classData.data.levels = newLevels;
+        changed = true;
       }
 
-      // Class was edited via the details dialog
-      else if ((item.data.subclass !== data.data.subclass) || (item.data.levels !== data.data.levels)) {
-        const features = await Actor5e.getClassFeatures(data);
-        toCreate.push(...features);
+      // Get features for a newly changed subclass
+      const newSubclass = getProperty(u, "data.subclass");
+      if (newSubclass && (newSubclass !== item.data.data.subclass)) {
+        classData.data.subclass = newSubclass;
+        changed = true;
+      }
+
+      // Get the new features
+      if ( changed ) {
+        const features = await Actor5e.getClassFeatures(classData);
+        if ( features.length ) toCreate.push(...features);
       }
     }
-    if ( !toCreate.length ) return;
-    return this.createEmbeddedEntity("OwnedItem", toCreate);
+
+    // De-dupe created items with ones that already exist (by name)
+    if ( toCreate.length ) {
+      const existing = new Set(this.items.map(i => i.name));
+      toCreate = toCreate.filter(c => !existing.has(c.name));
+    }
+    return toCreate
   }
 
   /* -------------------------------------------- */

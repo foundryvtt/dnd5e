@@ -163,7 +163,7 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // Format a spellbook entry for a certain indexed level
-    const registerSection = (sl, i, label, {prepMode="prepared", level={}}={}) => {
+    const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {
       spellbook[i] = {
         order: i,
         label: label,
@@ -171,9 +171,9 @@ export default class ActorSheet5e extends ActorSheet {
         canCreate: owner,
         canPrepare: (data.actor.type === "character") && (i >= 1),
         spells: [],
-        uses: useLabels[i] || level.value || 0,
-        slots: useLabels[i] || level.max || 0,
-        override: level.override || 0,
+        uses: useLabels[i] || value || 0,
+        slots: useLabels[i] || max || 0,
+        override: override || 0,
         dataset: {"type": "spell", "level": prepMode in sections ? 1 : i, "preparation.mode": prepMode},
         prop: sl
       };
@@ -187,17 +187,21 @@ export default class ActorSheet5e extends ActorSheet {
       return max;
     }, 0);
 
-    // Structure the spellbook for every level up to the maximum which has a slot
+    // Level-based spellcasters have cantrips and leveled slots
     if ( maxLevel > 0 ) {
       registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       for (let lvl = 1; lvl <= maxLevel; lvl++) {
         const sl = `spell${lvl}`;
-        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], {levels: levels[sl]});
+        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
       }
     }
+
+    // Pact magic users have cantrips and a pact magic section
     if ( levels.pact && levels.pact.max ) {
-      registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      registerSection("pact", sections.pact, CONFIG.DND5E.spellPreparationModes.pact, {prepMode: "pact", levels: levels.pact});
+      if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
+      const {value, max, override} = levels.pact;
+      const config = CONFIG.DND5E.spellPreparationModes.pact;
+      registerSection("pact", sections.pact, config, {prepMode: "pact", value, max, override});
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
@@ -206,15 +210,17 @@ export default class ActorSheet5e extends ActorSheet {
       let s = spell.data.level || 0;
       const sl = `spell${s}`;
 
-      // Spellcasting mode specific headings
+      // Specialized spellcasting modes (if they exist)
       if ( mode in sections ) {
         s = sections[mode];
         if ( !spellbook[s] ){
-          registerSection(mode, s, CONFIG.DND5E.spellPreparationModes[mode], {prepMode: mode, levels: levels[mode]});
+          const {value, max, override} = levels[mode];
+          const config = CONFIG.DND5E.spellPreparationModes[mode];
+          registerSection(mode, s, config, {prepMode: mode, value, max, override});
         }
       }
 
-      // Higher-level spell headings
+      // Sections for higher-level spells which the caster "should not" have, but spell items exist for
       else if ( !spellbook[s] ) {
         registerSection(sl, s, CONFIG.DND5E.spellLevels[s], {levels: levels[sl]});
       }
