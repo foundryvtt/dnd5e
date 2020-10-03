@@ -265,13 +265,22 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Add new features for class level
       if ( !classWasAlreadyPresent ) {
+        // Set level 1 HP
+        if ( this.actor.data.data.details.level === 0 ) {
+          const hitDie = Number(itemData.data.hitDice.substr(1));
+          const hillDwarfMod = this.actor.items.find(i => i.name === "Hill Dwarf") ? 1 : 0;
+          const hpPerLevel = this.actor.data.data.abilities.con.mod + hillDwarfMod;
+
+          await this.actor.update({"data.attributes.hp.max": hitDie + hpPerLevel})
+        }
+
         Actor5e.getClassFeatures(itemData).then(features => {
           this.actor.createEmbeddedEntity("OwnedItem", features);
         });
       }
 
       // If the actor already has the class, increment the level instead of creating a new item
-      if ( classWasAlreadyPresent ) {
+      else {
         const lvl = cls.data.data.levels;
         return cls.update({"data.levels": Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level)})
       }
