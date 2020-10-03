@@ -1,5 +1,6 @@
 import ActorSheet5e from "./base.js";
 import Actor5e from "../entity.js";
+import LevelUpDialog from "../../apps/level-up.js";
 
 /**
  * An Actor sheet for player character type actors.
@@ -263,7 +264,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
       const classWasAlreadyPresent = !!cls;
 
+
       // Set max HP
+      const currentMaxHP = this.actor.data.data.attributes.hp.max;
       const hillDwarfMod = this.actor.items.find(i => i.name === "Hill Dwarf") ? 1 : 0;
       const conMod = this.actor.data.data.abilities.con.mod;
       const hpModifier = conMod + hillDwarfMod;
@@ -273,15 +276,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         await this.actor.update({"data.attributes.hp.max": hitDie + hpModifier})
       }
       else {
-        // TODO Prompt user if they want to use average or roll for HP
-        const useAverageHP = false;
-        if ( useAverageHP ) {
-          await this.actor.update({"data.attributes.hp.max": (hitDie / 2) + 1 + hpModifier});
+        // Prompt user for level up preferences
+        const levelUpOptions = await LevelUpDialog.create(itemData, this.actor.data.data);
+        if ( levelUpOptions.get("hpMethod") === "useAverageHP" ) {
+          await this.actor.update({"data.attributes.hp.max": currentMaxHP + (hitDie / 2) + 1 + hpModifier});
         }
         else {
           const r = new Roll(itemData.data.hitDice + " + @conMod + @hillDwarf", {conMod: conMod, hillDwarf: hillDwarfMod});
           r.toMessage();
-          await this.actor.update({"data.attributes.hp.max": this.actor.data.data.attributes.hp.max + r.total});
+          await this.actor.update({"data.attributes.hp.max": currentMaxHP + r.total});
         }
       }
 
