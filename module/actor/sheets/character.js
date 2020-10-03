@@ -277,7 +277,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }
       else {
         // Prompt user for level up preferences
-        const levelUpOptions = await LevelUpDialog.create(itemData, this.actor.data.data);
+        const levelUpOptions = await LevelUpDialog.create();
         if ( levelUpOptions.get("hpMethod") === "useAverageHP" ) {
           await this.actor.update({"data.attributes.hp.max": currentMaxHP + (hitDie / 2) + 1 + hpModifier});
         }
