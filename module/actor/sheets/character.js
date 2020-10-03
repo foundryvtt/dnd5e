@@ -263,17 +263,30 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
       const classWasAlreadyPresent = !!cls;
 
+      // Set max HP
+      const hillDwarfMod = this.actor.items.find(i => i.name === "Hill Dwarf") ? 1 : 0;
+      const conMod = this.actor.data.data.abilities.con.mod;
+      const hpModifier = conMod + hillDwarfMod;
+      const hitDie = Number(itemData.data.hitDice.substr(1));
+
+      if ( this.actor.data.data.details.level === 0 ) {
+        await this.actor.update({"data.attributes.hp.max": hitDie + hpModifier})
+      }
+      else {
+        // TODO Prompt user if they want to use average or roll for HP
+        const useAverageHP = false;
+        if ( useAverageHP ) {
+          await this.actor.update({"data.attributes.hp.max": (hitDie / 2) + 1 + hpModifier});
+        }
+        else {
+          const r = new Roll(itemData.data.hitDice + " + @conMod + @hillDwarf", {conMod: conMod, hillDwarf: hillDwarfMod});
+          r.toMessage();
+          await this.actor.update({"data.attributes.hp.max": this.actor.data.data.attributes.hp.max + r.total});
+        }
+      }
+
       // Add new features for class level
       if ( !classWasAlreadyPresent ) {
-        // Set level 1 HP
-        if ( this.actor.data.data.details.level === 0 ) {
-          const hitDie = Number(itemData.data.hitDice.substr(1));
-          const hillDwarfMod = this.actor.items.find(i => i.name === "Hill Dwarf") ? 1 : 0;
-          const hpPerLevel = this.actor.data.data.abilities.con.mod + hillDwarfMod;
-
-          await this.actor.update({"data.attributes.hp.max": hitDie + hpPerLevel})
-        }
-
         Actor5e.getClassFeatures(itemData).then(features => {
           this.actor.createEmbeddedEntity("OwnedItem", features);
         });
