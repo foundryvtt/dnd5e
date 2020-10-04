@@ -1011,12 +1011,19 @@ export default class Actor5e extends Actor {
       case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
     }
 
+    var shortRestResultMessage = "";
+    if(dhd != 0 && dhp != 0) {
+      shortRestResultMessage =  game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp});
+    } else {
+      shortRestResultMessage =  game.i18n.format("DND5E.ShortRestResultShort", {name: this.name});
+    }
+
     if ( chat ) {
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
-        content: game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp})
+        content: shortRestResultMessage
       });
     }
 
@@ -1120,12 +1127,23 @@ export default class Actor5e extends Actor {
       case 'epic':  restFlavor = game.i18n.localize("DND5E.LongRestEpic"); break;
     }
 
+    var longRestResultMessage = "";
+    if(dhp != 0 && dhd != 0) {
+      longRestResultMessage =  game.i18n.format("DND5E.LongRestResult", {name: this.name, health: dhp, dice: dhd})
+    } else if(dhp != 0 && dhd == 0) {
+      longRestResultMessage =  game.i18n.format("DND5E.LongRestResultHitPoints", {name: this.name, health: dhp})
+    } else if(dhp == 0 && dhd != 0) {
+      longRestResultMessage =  game.i18n.format("DND5E.LongRestResultHitDice", {name: this.name, dice: dhd})
+    } else {
+      longRestResultMessage =  game.i18n.format("DND5E.LongRestResultShort", {name: this.name})
+    }
+
     if ( chat ) {
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
-        content: game.i18n.format("DND5E.LongRestResult", {name: this.name, health: dhp, dice: dhd})
+        content: longRestResultMessage
       });
     }
 
