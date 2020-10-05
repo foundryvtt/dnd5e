@@ -1103,26 +1103,26 @@ export default class Actor5e extends Actor {
     await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
     // Display a Chat Message summarizing the rest effects
-    let restFlavor;
-    switch (game.settings.get("dnd5e", "restVariant")) {
-      case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
-      case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
-      case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
-    }
-
-    var shortRestResultMessage = "";
-    if(dhd != 0 && dhp != 0) {
-      shortRestResultMessage =  game.i18n.format("DND5E.ShortRestResult", {name: this.name, dice: -dhd, health: dhp});
-    } else {
-      shortRestResultMessage =  game.i18n.format("DND5E.ShortRestResultShort", {name: this.name});
-    }
-
     if ( chat ) {
+
+      // Summarize the rest duration
+      let restFlavor;
+      switch (game.settings.get("dnd5e", "restVariant")) {
+        case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
+        case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
+        case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
+      }
+
+      // Summarize the health effects
+      let srMessage = "DND5E.ShortRestResultShort";
+      if ((dhd !== 0) && (dhp !== 0)) srMessage = "DND5E.ShortRestResult";
+
+      // Create a chat message
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
-        content: shortRestResultMessage
+        content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
       });
     }
 
@@ -1226,23 +1226,17 @@ export default class Actor5e extends Actor {
       case 'epic':  restFlavor = game.i18n.localize("DND5E.LongRestEpic"); break;
     }
 
-    var longRestResultMessage = "";
-    if(dhp != 0 && dhd != 0) {
-      longRestResultMessage =  game.i18n.format("DND5E.LongRestResult", {name: this.name, health: dhp, dice: dhd})
-    } else if(dhp != 0 && dhd == 0) {
-      longRestResultMessage =  game.i18n.format("DND5E.LongRestResultHitPoints", {name: this.name, health: dhp})
-    } else if(dhp == 0 && dhd != 0) {
-      longRestResultMessage =  game.i18n.format("DND5E.LongRestResultHitDice", {name: this.name, dice: dhd})
-    } else {
-      longRestResultMessage =  game.i18n.format("DND5E.LongRestResultShort", {name: this.name})
-    }
-
+    // Determine the chat message to display
     if ( chat ) {
+      let lrMessage = "DND5E.LongRestResultShort";
+      if((dhp !== 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResult";
+      else if ((dhp !== 0) && (dhd === 0)) lrMessage = "DND5E.LongRestResultHitPoints";
+      else if ((dhp === 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResultHitDice";
       ChatMessage.create({
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
-        content: longRestResultMessage
+        content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
       });
     }
 
