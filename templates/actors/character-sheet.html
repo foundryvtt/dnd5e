@@ -229,8 +229,22 @@
         </div>
 
         {{!-- Biography Tab --}}
-        <div class="tab biography flexcol" data-group="primary" data-tab="biography">
-            {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
+        <div class="tab flexrow" data-group="primary" data-tab="biography">
+            <div class="characteristics flexcol">
+                <label>Appearance</label>
+                <textarea name="data.details.appearance">{{data.details.appearance}}</textarea>
+                <label>Personality Traits</label>
+                <textarea name="data.details.trait">{{data.details.trait}}</textarea>
+                <label>Ideals</label>
+                <textarea name="data.details.ideal">{{data.details.ideal}}</textarea>
+                <label>Bonds</label>
+                <textarea name="data.details.bond">{{data.details.bond}}</textarea>
+                <label>Flaws</label>
+                <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>
+            </div>
+            <div class="biography">
+                {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
+            </div>
         </div>
     </section>
 </form>

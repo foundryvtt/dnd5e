@@ -785,10 +785,10 @@
   overflow-x: hidden;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name.rollable:hover .item-image {
-  background-image: url("/icons/svg/d20-grey.svg") !important;
+  background-image: url("../../icons/svg/d20-grey.svg") !important;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name.rollable .item-image:hover {
-  background-image: url("/icons/svg/d20-black.svg") !important;
+  background-image: url("../../icons/svg/d20-black.svg") !important;
 }
 .dnd5e.sheet.actor .inventory-list .item .item-name i.attuned {
   color: #7a7971;
@@ -1301,6 +1301,9 @@
   /* ----------------------------------------- */
   /*  Item Controls                            */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Biography                                */
+  /* ----------------------------------------- */
 }
 .dnd5e.sheet.actor.character .sheet-header img.profile {
   flex: 0 0 160px;
@@ -1410,6 +1413,26 @@
 .dnd5e.sheet.actor.character .inventory .item-controls .item-toggle.fixed:hover,
 .dnd5e.sheet.actor.character .spellbook .item-controls .item-toggle.fixed:hover {
   text-shadow: none;
+}
+.dnd5e.sheet.actor.character .characteristics {
+  flex: 0 0 180px;
+  height: 100%;
+  padding: 0 3px 3px;
+}
+.dnd5e.sheet.actor.character .characteristics label {
+  flex: 0 0 20px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 20px;
+  text-align: center;
+}
+.dnd5e.sheet.actor.character .characteristics textarea {
+  font-family: "Signika", serif;
+  border: 1px solid #c9c7b8;
+  resize: none;
 }
 /* ----------------------------------------- */
 /*  Basic Structure                          */
