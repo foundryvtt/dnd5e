@@ -59,7 +59,7 @@
                 {{#if section.editableName}}
                 <input type="text" value="{{item.name}}">
                 {{else}}
-                <div class="item-image" style="background-image: url({{item.img}})"></div>
+                <div class="item-image" style="background-image: url('{{item.img}}')"></div>
                 <h4>
                     {{item.name~}}
                     {{~#if item.isStack}} ({{item.data.quantity}}){{/if}}

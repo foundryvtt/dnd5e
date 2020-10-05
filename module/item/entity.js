@@ -150,7 +150,6 @@ export default class Item5e extends Item {
 
     // Get the Item's data
     const itemData = this.data;
-    const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
     const C = CONFIG.DND5E;
     const labels = {};
@@ -223,16 +222,12 @@ export default class Item5e extends Item {
     // Item Actions
     if ( data.hasOwnProperty("actionType") ) {
 
-      // Save DC
-      let save = data.save || {};
-      if ( !save.ability ) save.dc = null;
-      else if ( this.isOwned ) { // Actor owned items
-        if ( save.scaling === "spell" ) save.dc = actorData.data.attributes.spelldc;
-        else if ( save.scaling !== "flat" ) save.dc = this.actor.getSpellDC(save.scaling);
-      } else { // Un-owned items
+      // Saving throws for unowned items
+      const save = data.save;
+      if ( save?.ability && !this.isOwned ) {
         if ( save.scaling !== "flat" ) save.dc = null;
+        labels.save = game.i18n.format("DND5E.SaveDC", {dc: save.dc || "", ability: C.abilities[save.ability]});
       }
-      labels.save = save.ability ? `${game.i18n.localize("DND5E.AbbreviationDC")} ${save.dc || ""} ${C.abilities[save.ability]}` : "";
 
       // Damage
       let dam = data.damage || {};
@@ -306,6 +301,11 @@ export default class Item5e extends Item {
       },
       flags: {"core.canPopout": true}
     };
+
+    // If the consumable was destroyed in the process - embed the item data in the surviving message
+    if ( (this.data.type === "consumable") && !this.actor.items.has(this.id) ) {
+      chatData.flags["dnd5e.itemData"] = this.data;
+    }
 
     // Toggle default roll mode
     rollMode = rollMode || game.settings.get("core", "rollMode");
@@ -440,7 +440,7 @@ export default class Item5e extends Item {
     // Maybe initiate template placement workflow
     if ( this.hasAreaTarget && placeTemplate ) {
       const template = AbilityTemplate.fromItem(this);
-      if ( template ) template.drawPreview(event);
+      if ( template ) template.drawPreview();
       if ( this.owner && this.owner.sheet ) this.owner.sheet.minimize();
     }
     return true;
@@ -631,8 +631,6 @@ export default class Item5e extends Item {
             this._ammo = ammo;
           }
         }
-      }else{
-        ui.notifications.error(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
       }
     }
 
@@ -939,7 +937,7 @@ export default class Item5e extends Item {
     // Maybe initiate template placement workflow
     if ( this.hasAreaTarget && placeTemplate ) {
       const template = AbilityTemplate.fromItem(this);
-      if ( template ) template.drawPreview(event);
+      if ( template ) template.drawPreview();
       if ( this.owner && this.owner.sheet ) this.owner.sheet.minimize();
     }
     return true;
@@ -1063,12 +1061,13 @@ export default class Item5e extends Item {
     const isTargetted = action === "save";
     if ( !( isTargetted || game.user.isGM || message.isAuthor ) ) return;
 
-    // Get the Actor from a synthetic Token
+    // Recover the actor for the chat card
     const actor = this._getChatCardActor(card);
     if ( !actor ) return;
 
-    // Get the Item
-    const item = actor.getOwnedItem(card.dataset.itemId);
+    // Get the Item from stored flag data or by the item ID on the Actor
+    const storedData = message.getFlag("dnd5e", "itemData");
+    const item = storedData ? this.createOwned(storedData, actor) : actor.getOwnedItem(card.dataset.itemId);
     if ( !item ) {
       return ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name}))
     }
@@ -1095,7 +1094,7 @@ export default class Item5e extends Item {
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
         const template = AbilityTemplate.fromItem(item);
-        if ( template ) template.drawPreview(event);
+        if ( template ) template.drawPreview();
         break;
     }
 

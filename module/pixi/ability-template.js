@@ -52,9 +52,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
   /**
    * Creates a preview of the spell template
-   * @param {Event} event   The initiating click event
    */
-  drawPreview(event) {
+  drawPreview() {
     const initialLayer = canvas.activeLayer;
     this.draw();
     this.layer.activate();

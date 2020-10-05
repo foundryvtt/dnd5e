@@ -64,13 +64,6 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
-
-    // Compute initial ability score modifiers in base data since these may be referenced
-    for (let abl of Object.values(this.data.data.abilities)) {
-      abl.mod = Math.floor((abl.value - 10) / 2);
-    }
-
-    // Type-specific base data preparation
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
@@ -107,6 +100,7 @@ export default class Actor5e extends Actor {
     }
 
     // Ability modifiers and saves
+    const dcBonus = Number.isNumeric(data.bonuses.spell.dc) ? parseInt(data.bonuses.spell.dc) : 0;
     const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
     const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
     for (let [id, abl] of Object.entries(data.abilities)) {
@@ -115,6 +109,7 @@ export default class Actor5e extends Actor {
       abl.saveBonus = saveBonus;
       abl.checkBonus = checkBonus;
       abl.save = abl.mod + abl.prof + abl.saveBonus;
+      abl.dc = 8 + abl.mod + abl.prof + dcBonus;
 
       // If we merged saves when transforming, take the highest bonus here.
       if (originalSaves && abl.proficient) {
@@ -135,7 +130,7 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.prof + init.bonus;
 
     // Prepare spell-casting data
-    data.attributes.spelldc = this.getSpellDC(data.attributes.spellcasting);
+    this._computeSpellcastingDC(this.data);
     this._computeSpellcastingProgression(this.data);
   }
 
@@ -161,22 +156,6 @@ export default class Actor5e extends Actor {
   getCRExp(cr) {
     if (cr < 1.0) return Math.max(200 * cr, 10);
     return CONFIG.DND5E.CR_EXP_LEVELS[cr];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the spell DC for this actor using a certain ability score
-   * @param {string} ability    The ability score, i.e. "str"
-   * @return {number}           The spell DC
-   */
-  getSpellDC(ability) {
-    const actorData = this.data.data;
-    let bonus = getProperty(actorData, "bonuses.spell.dc");
-    bonus = Number.isNumeric(bonus) ? parseInt(bonus) : 0;
-    ability = actorData.abilities[ability];
-    const prof = actorData.attributes.prof;
-    return 8 + (ability ? ability.mod : 0) + prof + bonus;
   }
 
   /* -------------------------------------------- */
@@ -403,6 +382,31 @@ export default class Actor5e extends Actor {
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
       skl.passive = 10 + skl.total + passive;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute the spellcasting DC for all item abilities which use spell DC scaling
+   * @param {object} actorData    The actor data being prepared
+   * @private
+   */
+  _computeSpellcastingDC(actorData) {
+
+    // Compute the spellcasting DC
+    const data = actorData.data;
+    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
+
+    // Apply spellcasting DC to any spell items which use it
+    for ( let i of this.items ) {
+      const save = i.data.data.save;
+      if ( save?.ability ) {
+        if ( save.scaling === "spell" ) save.dc = data.attributes.spelldc;
+        else if ( save.scaling !== "flat" ) save.dc = data.abilities[save.scaling]?.dc ?? 10;
+        const ability = CONFIG.DND5E.abilities[save.ability];
+        i.labels.save = game.i18n.format("DND5E.SaveDC", {dc: save.dc || "", ability});
+      }
     }
   }
 
@@ -705,7 +709,7 @@ export default class Actor5e extends Actor {
     // Initiate ability template placement workflow if selected
     if ( placeTemplate && item.hasAreaTarget ) {
       const template = AbilityTemplate.fromItem(item);
-      if ( template ) template.drawPreview(event);
+      if ( template ) template.drawPreview();
       if ( this.sheet.rendered ) this.sheet.minimize();
     }
 
@@ -1467,5 +1471,17 @@ export default class Actor5e extends Actor {
         return actor && actor.isPolymorphed;
       }
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  DEPRECATED METHODS                          */
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since dnd5e 0.97
+   */
+  getSpellDC(ability) {
+    console.warn(`The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc`);
+    return this.data.data.abilities[ability]?.dc;
   }
 }
