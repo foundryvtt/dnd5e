@@ -1,0 +1,28 @@
+<ol class="inventory-list">
+{{#each effects as |section sid|}}
+    <li class="inventory-header flexrow">
+        <h3 class="effect-name flexrow">{{localize section.label}}</h3>
+        <div class="effect-source">Source</div>
+        <div class="effect-source">Duration</div>
+        <div class="effect-controls"></div>
+    </li>
+
+    <ol class="effects-list item-list">
+    {{#each section.effects as |effect|}}
+        <li class="effect flexrow" data-effect-id="{{effect.id}}">
+            <div class="effect-name flexrow">
+                <img class="effect-icon" src="{{effect.data.icon}}"/>
+                <h4>{{effect.data.label}}</h4>
+            </div>
+            <div class="effect-source">{{effect.sourceName}}</div>
+            <div class="effect-duration">{{effect.duration.label}}</div>
+            <div class="effect-controls">
+                <a class="effect-control" data-action="toggle"><i class="fas fa-circle-notch"></i></a>
+                <a class="effect-control" data-action="edit"><i class="fas fa-edit"></i></a>
+                <a class="effect-control" data-action="delete"><i class="fas fa-trash"></i></a>
+            </div>
+        </li>
+    {{/each}}
+    </ol>
+{{/each}}
+</ol>

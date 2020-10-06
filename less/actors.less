@@ -420,6 +420,7 @@
     padding: 0 5px;
     overflow-y: auto;
     scrollbar-width: thin;
+    color: @colorTan;
 
     // Inventory Item
     .item {
@@ -483,6 +484,7 @@
     .inventory-header {
       margin: 2px 0;
       padding: 0;
+      align-items: center;
       background: rgba(0, 0, 0, 0.05);
       border: @borderGroove;
       font-weight: bold;
@@ -498,6 +500,11 @@
       .item-controls a.item-create {
         flex: 0 0 100%;
       }
+    }
+
+    // Item names
+    .item-name {
+      color: @colorDark;
     }
 
     // Item Detail Sections
@@ -686,6 +693,44 @@
 
   // Empty spellbook controls
   .spellbook-empty .item-controls { flex: 1; }
+
+  /* ----------------------------------------- */
+  /*  Active Effects                           */
+  /* ----------------------------------------- */
+
+  .effects {
+    .effect-name{
+      flex: 2;
+      align-items: center;
+      color: @colorDark;
+      h4 { margin: 0; }
+    }
+
+    .effect-icon {
+      flex: 0 0 30px;
+      height: 30px;
+      margin-right: 5px;
+      border: none;
+    }
+
+    .effect-source,
+    .effect-duration {
+      text-align: center;
+      border-left: 1px solid @colorFaint;
+      border-right: 1px solid @colorFaint;
+    }
+
+    .effect-controls {
+      flex: 0 0 60px;
+      text-align: right;
+    }
+
+    .effect {
+      align-items: center;
+      border-bottom: 1px solid @colorFaint;
+      &:last-child { border-bottom: none; }
+    }
+  }
 
   /* ----------------------------------------- */
   /*  TinyMCE                                  */
