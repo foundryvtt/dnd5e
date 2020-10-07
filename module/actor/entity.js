@@ -100,7 +100,7 @@ export default class Actor5e extends Actor {
     }
 
     // Ability modifiers and saves
-    const dcBonus = Number.isNumeric(data.bonuses.spell.dc) ? parseInt(data.bonuses.spell.dc) : 0;
+    const dcBonus = Number.isNumeric(data.bonuses.spell?.dc) ? parseInt(data.bonuses.spell.dc) : 0;
     const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
     const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
     for (let [id, abl] of Object.entries(data.abilities)) {
