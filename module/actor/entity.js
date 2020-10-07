@@ -109,7 +109,7 @@ export default class Actor5e extends Actor {
       abl.saveBonus = saveBonus;
       abl.checkBonus = checkBonus;
       abl.save = abl.mod + data.attributes.prof + abl.saveBonus;
-      abl.dc = 8 + abl.mod + abl.prof + dcBonus;
+      abl.dc = 8 + abl.mod + data.attributes.prof + dcBonus;
 
       // If we merged saves when transforming, take the highest bonus here.
       if (originalSaves && abl.proficient) {
