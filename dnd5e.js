@@ -73,7 +73,7 @@ Hooks.once("init", function() {
   CONFIG.DND5E = DND5E;
   CONFIG.Actor.entityClass = Actor5e;
   CONFIG.Item.entityClass = Item5e;
-  CONFIG.time.roundTime = 6;
+  if ( CONFIG.time ) CONFIG.time.roundTime = 6; // TODO remove conditional after 0.7.x
 
   // Register System Settings
   registerSystemSettings();

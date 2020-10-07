@@ -250,3 +250,33 @@ const _migrateRemoveDeprecated = function(ent, updateData) {
     updateData[`data.${parts.join(".")}`] = null;
   }
 };
+
+
+/* -------------------------------------------- */
+
+
+/**
+ * A general tool to purge flags from all entities in a Compendium pack.
+ * @param {Compendium} pack   The compendium pack to clean
+ * @private
+ */
+export async function purgeFlags(pack) {
+  const cleanFlags = (flags) => {
+    const flags5e = flags.dnd5e || null;
+    return flags5e ? {dnd5e: flags5e} : {};
+  };
+  await pack.configure({locked: false});
+  const content = await pack.getContent();
+  for ( let entity of content ) {
+    const update = {_id: entity.id, flags: cleanFlags(entity.data.flags)};
+    if ( pack.entity === "Actor" ) {
+      update.items = entity.data.items.map(i => {
+        i.flags = cleanFlags(i.flags);
+        return i;
+      })
+    }
+    await pack.updateEntity(update, {recursive: false});
+    console.log(`Purged flags from ${entity.name}`);
+  }
+  await pack.configure({locked: true});
+}
