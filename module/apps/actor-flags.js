@@ -120,7 +120,7 @@ export default class ActorSheetFlags extends BaseEntitySheet {
     // Diff the data against any applied overrides and apply
     // TODO: Remove this logical gate once 0.7.x is release channel
     if ( !isNewerVersion("0.7.1", game.data.version) ){
-      updateData.data = diffObject(this.object.overrides.data || {}, updateData.data);
+      updateData = diffObject(this.object.data, updateData);
     }
     await actor.update(updateData, {diff: false});
   }

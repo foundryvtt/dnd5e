@@ -101,7 +101,8 @@ export default class ActorSheet5e extends ActorSheet {
     this._prepareItems(data);
 
     // Prepare active effects
-    this._prepareEffects(data);
+    // TODO Disabled until 0.7.5 release
+    // this._prepareEffects(data);
 
     // Return data to the sheet
     return data
