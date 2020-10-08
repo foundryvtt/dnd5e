@@ -271,9 +271,18 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }
 
       // If the actor already has the class, increment the level instead of creating a new item
+      // then add new features as long as level increases
       if ( classWasAlreadyPresent ) {
         const lvl = cls.data.data.levels;
-        return cls.update({"data.levels": Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level)})
+        const newLvl = Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level);
+        if ( !(lvl === newLvl) ) {
+          cls.update({"data.levels": newLvl});
+          itemData.data.levels = newLvl;
+          Actor5e.getClassFeatures(itemData).then(features => {
+            this.actor.createEmbeddedEntity("OwnedItem", features);
+          });
+        }
+        return
       }
     }
 
