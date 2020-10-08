@@ -257,8 +257,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /** @override */
   async _onDropItemCreate(itemData) {
 
-    // Upgrade the number of class levels a character has
-    // and add features
+    // Upgrade the number of class levels a character has and add features
     if ( itemData.type === "class" ) {
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
       const classWasAlreadyPresent = !!cls;
