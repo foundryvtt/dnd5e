@@ -434,6 +434,7 @@
         cursor: pointer;
         max-height: 30px;
         overflow: hidden;
+        color: @colorDark;
 
         .item-image {
           flex: 0 0 30px;
@@ -475,7 +476,6 @@
         flex: 0 0 80px;
         text-align: right;
         font-size: 11px;
-        color: @colorTan;
         white-space: nowrap;
       }
     }
@@ -502,22 +502,15 @@
       }
     }
 
-    // Item names
-    .item-name {
-      color: @colorDark;
-    }
-
     // Item Detail Sections
     .item-detail {
       flex: 0 0 70px;
       font-size: 12px;
-      color: @colorTan;
       text-align: center;
       border-right: 1px solid @colorFaint;
       word-break: break-word;
       white-space: nowrap;
       overflow: hidden;
-
       &:last-child { border-right: none; }
       &.item-action {flex: 0 0 100px}
     }
@@ -539,12 +532,10 @@
       flex: 0 0 44px;
       .flexrow();
       justify-content: flex-end;
-
       a {
         flex: 0 0 22px;
         font-size: 12px;
         text-align: center;
-        color: @colorTan;
       }
     }
 
@@ -554,6 +545,7 @@
       font-size: 12px;
       line-height: 16px;
       padding: 0.25em 0.5em;
+      color: @colorDark;
       border-top: 1px solid @colorFaint;
     }
   }
