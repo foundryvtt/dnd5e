@@ -63,6 +63,16 @@
     </div>
 </div>
 
+{{!-- Ability Target Width --}}
+{{#if isLine}}
+<div class="form-group input-select-select">
+    <label>{{ localize "DND5E.TargetWidth" }}</label>
+    <div class="form-fields">
+        <input type="text" name="data.target.width" value="{{data.target.width}}" data-dtype="Number" placeholder="-"/>
+    </div>
+</div>
+{{/if}}
+
 {{!-- Ability Range --}}
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>

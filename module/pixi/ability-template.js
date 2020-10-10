@@ -38,7 +38,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
         templateData.direction = 45;
         break;
       case "ray": // 5e rays are most commonly 1 square (5 ft) in width
-        templateData.width = canvas.dimensions.distance;
+        templateData.width = target.width ?? canvas.dimensions.distance;
         break;
       default:
         break;

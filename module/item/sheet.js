@@ -50,6 +50,9 @@ export default class ItemSheet5e extends ItemSheet {
     data.itemProperties = this._getItemProperties(data.item);
     data.isPhysical = data.item.data.hasOwnProperty("quantity");
 
+    // Item Area Target
+    data.isLine = ["line", "wall"].includes(data.item.data.target.type);
+
     // Potential consumption targets
     data.abilityConsumptionTargets = this._getItemConsumptionTargets(data.item);
 
