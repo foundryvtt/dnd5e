@@ -186,6 +186,7 @@ export default class Actor5e extends Actor {
 
     // Get the configuration of features which may be added
     const clsConfig = CONFIG.DND5E.classFeatures[className];
+    if (!clsConfig) return [];
     let featureIDs = clsConfig["features"][level] || [];
     const subclassName = cls.data.subclass.toLowerCase().slugify();
 
