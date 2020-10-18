@@ -101,8 +101,7 @@ export default class ActorSheet5e extends ActorSheet {
     this._prepareItems(data);
 
     // Prepare active effects
-    // TODO Disabled until 0.7.5 release
-    // this._prepareEffects(data);
+    this._prepareEffects(data);
 
     // Return data to the sheet
     return data
@@ -176,7 +175,7 @@ export default class ActorSheet5e extends ActorSheet {
       e._getSourceName(); // Trigger a lookup for the source name
       if ( e.data.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
-      else categories.inactive.push(e);
+      else categories.passive.effects.push(e);
     }
 
     // Add the prepared categories of effects to the rendering data
@@ -744,7 +743,7 @@ export default class ActorSheet5e extends ActorSheet {
     const effect = this.actor.effects.get(li.dataset.effectId);
     switch ( a.dataset.action ) {
       case "edit":
-        return new ActiveEffectConfig(effect).render(true);
+        return effect.sheet.render(true);
       case "delete":
         return effect.delete();
       case "toggle":

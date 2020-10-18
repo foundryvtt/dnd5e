@@ -13,7 +13,7 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
   // Ensure it is an un-modified d20 roll
   const isD20 = (d.faces === 20) && ( d.results.length === 1 );
   if ( !isD20 ) return;
-  const isModifiedRoll = ("success" in d.rolls[0]) || d.options.marginSuccess || d.options.marginFailure;
+  const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
   if ( isModifiedRoll ) return;
 
   // Highlight successes and failures
