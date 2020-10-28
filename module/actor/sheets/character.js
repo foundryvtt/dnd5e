@@ -102,7 +102,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     for ( let i of items ) {
       i.data.quantity = i.data.quantity || 0;
       i.data.weight = i.data.weight || 0;
-      i.totalWeight = Math.round(i.data.quantity * i.data.weight * 10) / 10;
+      i.totalWeight = (i.data.quantity * i.data.weight).toNearest(0.1);
       inventory[i.type].items.push(i);
     }
 

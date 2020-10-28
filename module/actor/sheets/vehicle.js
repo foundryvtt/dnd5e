@@ -49,12 +49,9 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     totalWeight /= CONFIG.DND5E.encumbrance.vehicleWeightMultiplier;
 
     // Compute overall encumbrance
-    const enc = {
-      max: actorData.data.attributes.capacity.cargo,
-      value: Math.round(totalWeight * 10) / 10
-    };
-    enc.pct = Math.min(enc.value * 100 / enc.max, 99);
-    return enc;
+    const max = actorData.data.attributes.capacity.cargo;
+    const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
+    return {value: totalWeight.toNearest(0.1), max, pct};
   }
 
   /* -------------------------------------------- */

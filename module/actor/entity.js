@@ -514,14 +514,14 @@ export default class Actor5e extends Actor {
       if ( !physicalItems.includes(i.type) ) return weight;
       const q = i.data.quantity || 0;
       const w = i.data.weight || 0;
-      return weight + Math.round(q * w * 10) / 10;
+      return weight + (q * w);
     }, 0);
 
     // [Optional] add Currency Weight
     if ( game.settings.get("dnd5e", "currencyWeight") ) {
       const currency = actorData.data.currency;
       const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
-      weight += Math.round((numCoins * 10) / CONFIG.DND5E.encumbrance.currencyPerWeight) / 10;
+      weight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
     }
 
     // Determine the encumbrance size class
@@ -536,9 +536,10 @@ export default class Actor5e extends Actor {
     if ( this.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
 
     // Compute Encumbrance percentage
+    weight = weight.toNearest(0.1);
     const max = actorData.data.abilities.str.value * CONFIG.DND5E.encumbrance.strMultiplier * mod;
-    const pct = Math.clamped((weight* 100) / max, 0, 100);
-    return { value: weight, max, pct, encumbered: pct > (2/3) };
+    const pct = Math.clamped((weight * 100) / max, 0, 100);
+    return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
 
   /* -------------------------------------------- */
