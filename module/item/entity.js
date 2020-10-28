@@ -683,7 +683,7 @@ export default class Item5e extends Item {
    *
    * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
-  rollDamage({event, spellLevel=null, versatile=false}={}) {
+  rollDamage({event, spellLevel=null, versatile=false}={}, options={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
     if ( !this.hasDamage ) {
@@ -736,7 +736,7 @@ export default class Item5e extends Item {
     }
 
     // Call the roll helper utility
-    return damageRoll({
+    return damageRoll(mergeObject({
       event: event,
       parts: parts,
       actor: this.actor,
@@ -750,7 +750,7 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       messageData
-    });
+    }, options));
   }
 
   /* -------------------------------------------- */
