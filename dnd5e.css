@@ -1469,6 +1469,9 @@
   border: 1px solid #c9c7b8;
   resize: none;
 }
+.dnd5e.sheet.actor.character .biography {
+  max-width: calc(100% - 180px);
+}
 /* ----------------------------------------- */
 /*  Basic Structure                          */
 /* ----------------------------------------- */

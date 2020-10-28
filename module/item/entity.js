@@ -679,11 +679,14 @@ export default class Item5e extends Item {
 
   /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the damageRoll logic for the core implementation
-   *
-   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * Rely upon the damageRoll logic for the core implementation.
+   * @param {MouseEvent} [event]    An event which triggered this roll, if any
+   * @param {number} [spellLevel]   If the item is a spell, override the level for damage scaling
+   * @param {boolean} [versatile]   If the item is a weapon, roll damage using the versatile formula
+   * @param {object} [options]      Additional options passed to the damageRoll function
+   * @return {Promise<Roll>}        A Promise which resolves to the created Roll instance
    */
-  rollDamage({event, spellLevel=null, versatile=false}={}, options={}) {
+  rollDamage({event, spellLevel=null, versatile=false, options={}}={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
     if ( !this.hasDamage ) {

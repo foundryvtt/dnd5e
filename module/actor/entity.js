@@ -126,6 +126,7 @@ export default class Actor5e extends Actor {
     if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
     else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
     else init.prof = 0;
+    init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 

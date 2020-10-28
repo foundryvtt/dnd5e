@@ -256,35 +256,31 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /** @override */
   async _onDropItemCreate(itemData) {
+    let addLevel = false;
 
     // Upgrade the number of class levels a character has and add features
     if ( itemData.type === "class" ) {
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
-      const classWasAlreadyPresent = !!cls;
+      const hasClass = !!cls;
 
-      // Add new features for class level
-      if ( !classWasAlreadyPresent ) {
-        Actor5e.getClassFeatures(itemData).then(features => {
-          this.actor.createEmbeddedEntity("OwnedItem", features);
-        });
+      // Increment levels instead of creating a new item
+      if ( hasClass ) {
+        const lvl = cls.data.data.levels;
+        const next = Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level);
+        if ( next > lvl ) {
+          await cls.update({"data.levels": next});
+          addLevel = true;
+        }
       }
 
-      // If the actor already has the class, increment the level instead of creating a new item
-      // then add new features as long as level increases
-      if ( classWasAlreadyPresent ) {
-        const lvl = cls.data.data.levels;
-        const newLvl = Math.min(lvl + 1, 20 + lvl - this.actor.data.data.details.level);
-        if ( !(lvl === newLvl) ) {
-          cls.update({"data.levels": newLvl});
-          itemData.data.levels = newLvl;
-          Actor5e.getClassFeatures(itemData).then(features => {
-            this.actor.createEmbeddedEntity("OwnedItem", features);
-          });
-        }
-        return
+      // Add class features
+      if ( !hasClass || addLevel ) {
+        const features = await Actor5e.getClassFeatures(itemData);
+        await this.actor.createEmbeddedEntity("OwnedItem", features);
       }
     }
 
-    super._onDropItemCreate(itemData);
+    // Default drop handling if levels were not added
+    if ( !addLevel ) super._onDropItemCreate(itemData);
   }
 }
