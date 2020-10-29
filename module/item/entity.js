@@ -608,11 +608,9 @@ export default class Item5e extends Item {
     }
 
     // Attack Bonus
+    if ( itemData.attackBonus ) parts.push(itemData.attackBonus);
     const actorBonus = actorData?.bonuses?.[itemData.actionType] || {};
-    if ( itemData.attackBonus || actorBonus.attack ) {
-      parts.push("@atk");
-      rollData["atk"] = [itemData.attackBonus, actorBonus.attack].filterJoin(" + ");
-    }
+    if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
     // Ammunition Bonus
     delete this._ammo;
@@ -650,9 +648,11 @@ export default class Item5e extends Item {
     }, options);
     rollConfig.event = options.event;
 
-    // Expanded weapon critical threshold
+    // Expanded critical hit thresholds
     if (( this.data.type === "weapon" ) && flags.weaponCriticalThreshold) {
       rollConfig.critical = parseInt(flags.weaponCriticalThreshold);
+    } else if (( this.data.type === "spell" ) && flags.spellCriticalThreshold) {
+      rollConfig.critical = parseInt(flags.spellCriticalThreshold);
     }
 
     // Elven Accuracy
@@ -687,23 +687,33 @@ export default class Item5e extends Item {
    * @return {Promise<Roll>}        A Promise which resolves to the created Roll instance
    */
   rollDamage({event, spellLevel=null, versatile=false, options={}}={}) {
+    if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
-    if ( !this.hasDamage ) {
-      throw new Error("You may not make a Damage Roll with this Item.");
-    }
     const messageData = {"flags.dnd5e.roll": {type: "damage", itemId: this.id }};
 
     // Get roll data
+    const parts = itemData.damage.parts.map(d => d[0]);
     const rollData = this.getRollData();
     if ( spellLevel ) rollData.item.level = spellLevel;
 
-    // Get message labels
+    // Configure the damage roll
     const title = `${this.name} - ${game.i18n.localize("DND5E.DamageRoll")}`;
-    let flavor = this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title;
-
-    // Define Roll parts
-    const parts = itemData.damage.parts.map(d => d[0]);
+    const rollConfig = {
+      event: event,
+      parts: parts,
+      actor: this.actor,
+      data: rollData,
+      title: title,
+      flavor: this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title,
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      dialogOptions: {
+        width: 400,
+        top: event ? event.clientY - 80 : null,
+        left: window.innerWidth - 710
+      },
+      messageData: messageData
+    };
 
     // Adjust damage from versatile usage
     if ( versatile && itemData.damage.versatile ) {
@@ -723,37 +733,27 @@ export default class Item5e extends Item {
       }
     }
 
-    // Define Roll Data
+    // Add damage bonus formula
     const actorBonus = getProperty(actorData, `bonuses.${itemData.actionType}`) || {};
-    if ( actorBonus.damage && parseInt(actorBonus.damage) !== 0 ) {
-      parts.push("@dmg");
-      rollData["dmg"] = actorBonus.damage;
+    if ( actorBonus.damage && (parseInt(actorBonus.damage) !== 0) ) {
+      parts.push(actorBonus.damage);
     }
 
-    // Ammunition Damage
+    // Add ammunition damage
     if ( this._ammo ) {
       parts.push("@ammo");
       rollData["ammo"] = this._ammo.data.data.damage.parts.map(p => p[0]).join("+");
-      flavor += ` [${this._ammo.name}]`;
+      rollConfig.flavor += ` [${this._ammo.name}]`;
       delete this._ammo;
     }
 
+    // Scale melee critical hit damage
+    if ( itemData.actionType === "mwak" ) {
+      rollConfig.criticalBonusDice = this.actor.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
+    }
+
     // Call the roll helper utility
-    return damageRoll(mergeObject({
-      event: event,
-      parts: parts,
-      actor: this.actor,
-      data: rollData,
-      title: title,
-      flavor: flavor,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      dialogOptions: {
-        width: 400,
-        top: event ? event.clientY - 80 : null,
-        left: window.innerWidth - 710
-      },
-      messageData
-    }, options));
+    return damageRoll(mergeObject(rollConfig, options));
   }
 
   /* -------------------------------------------- */

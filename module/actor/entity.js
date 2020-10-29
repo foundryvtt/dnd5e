@@ -116,6 +116,11 @@ export default class Actor5e extends Actor {
         abl.save = Math.max(abl.save, originalSaves[id].save);
       }
     }
+
+    // Inventory encumbrance
+    data.attributes.encumbrance = this._computeEncumbrance(actorData);
+
+    // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
     // Determine Initiative Modifier
@@ -178,33 +183,35 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the features which a character is awarded for each class level
-   * @param cls {Object}    Data object for class, equivalent to Item5e.data or raw compendium entry
+   * @param {string} className        The class name being added
+   * @param {string} subclassName     The subclass of the class being added, if any
+   * @param {number} level            The number of levels in the added class
+   * @param {number} priorLevel       The previous level of the added class
    * @return {Promise<Item5e[]>}     Array of Item5e entities
    */
-  static async getClassFeatures(cls) {
-    const level = cls.data.levels;
-    const className = cls.name.toLowerCase();
+  static async getClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
+    className = className.toLowerCase();
+    subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
     const clsConfig = CONFIG.DND5E.classFeatures[className];
     if (!clsConfig) return [];
-    let featureIDs = clsConfig["features"][level] || [];
-    const subclassName = cls.data.subclass.toLowerCase().slugify();
 
-    // Identify subclass features
-    if ( subclassName !== "" ) {
-      const subclassConfig = clsConfig["subclasses"][subclassName];
-      if ( subclassConfig !== undefined ) {
-        const subclassFeatureIDs = subclassConfig["features"][level];
-        if ( subclassFeatureIDs ) {
-          featureIDs = featureIDs.concat(subclassFeatureIDs);
-        }
-      }
-      else console.warn("Invalid subclass: " + subclassName);
+    // Acquire class features
+    let ids = [];
+    for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
+      l = parseInt(l);
+      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
     }
 
+    // Acquire subclass features
+    const subConfig = clsConfig.subclasses[subclassName] || {};
+    for ( let [l, f] of Object.entries(subConfig.features || {}) ) {
+      l = parseInt(l);
+      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
+    }
     // Load item data for all identified features
-    const features = await Promise.all(featureIDs.map(id => fromUuid(id)));
+    const features = await Promise.all(ids.map(id => fromUuid(id)));
 
     // Class spells should always be prepared
     for ( const feature of features ) {
@@ -255,9 +262,14 @@ export default class Actor5e extends Actor {
         changed = true;
       }
 
-      // Get the new features
+      // Get features to create
       if ( changed ) {
-        const features = await Actor5e.getClassFeatures(classData);
+        const features = await Actor5e.getClassFeatures({
+          className: classData.data.name,
+          subclassName: classData.data.data.subclass,
+          level: classData.data.data.levels,
+          priorLevel: item ? item.data.data.levels : 0
+        });
         if ( features.length ) toCreate.push(...features);
       }
     }
@@ -302,9 +314,6 @@ export default class Actor5e extends Actor {
     const required = xp.max - prior;
     const pct = Math.round((xp.value - prior) * 100 / required);
     xp.pct = Math.clamped(pct, 0, 100);
-
-    // Inventory encumbrance
-    data.attributes.encumbrance = this._computeEncumbrance(actorData);
   }
 
   /* -------------------------------------------- */

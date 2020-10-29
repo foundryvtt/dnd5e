@@ -690,12 +690,6 @@ DND5E.characterFlags = {
     section: "Racial Traits",
     type: Boolean
   },
-  "savageAttacks": {
-    name: "DND5E.FlagsSavageAttacks",
-    hint: "DND5E.FlagsSavageAttacksHint",
-    section: "Racial Traits",
-    type: Boolean
-  },
   "elvenAccuracy": {
     name: "DND5E.FlagsElvenAccuracy",
     hint: "DND5E.FlagsElvenAccuracyHint",
@@ -747,12 +741,26 @@ DND5E.characterFlags = {
     type: Boolean
   },
   "weaponCriticalThreshold": {
-    name: "DND5E.FlagsCritThreshold",
-    hint: "DND5E.FlagsCritThresholdHint",
+    name: "DND5E.FlagsWeaponCritThreshold",
+    hint: "DND5E.FlagsWeaponCritThresholdHint",
     section: "Feats",
     type: Number,
     placeholder: 20
-  }
+  },
+  "spellCriticalThreshold": {
+    name: "DND5E.FlagsSpellCritThreshold",
+    hint: "DND5E.FlagsSpellCritThresholdHint",
+    section: "Feats",
+    type: Number,
+    placeholder: 20
+  },
+  "meleeCriticalDamageDice": {
+    name: "DND5E.FlagsMeleeCriticalDice",
+    hint: "DND5E.FlagsMeleeCriticalDiceHint",
+    section: "Feats",
+    type: Number,
+    placeholder: 0
+  },
 };
 
 // Configure allowed status flags

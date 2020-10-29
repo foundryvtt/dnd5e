@@ -83,18 +83,6 @@ export const registerSystemSettings = function() {
   });
 
   /**
-   * Option to automatically create Spell Measured Template on roll
-   */
-  game.settings.register("dnd5e", "alwaysPlaceSpellTemplate", {
-    name: "SETTINGS.5eAutoSpellTemplateN",
-    hint: "SETTINGS.5eAutoSpellTemplateL",
-    scope: "client",
-    config: true,
-    default: false,
-    type: Boolean
-  });
-
-  /**
    * Option to automatically collapse Item Card descriptions
    */
   game.settings.register("dnd5e", "autoCollapseItemCards", {
