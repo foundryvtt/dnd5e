@@ -104,6 +104,7 @@ export default class Actor5e extends Actor {
     const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
     const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
     for (let [id, abl] of Object.entries(data.abilities)) {
+      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
       abl.prof = (abl.proficient || 0) * data.attributes.prof;
       abl.saveBonus = saveBonus;
@@ -471,7 +472,7 @@ export default class Actor5e extends Actor {
       progression.slot = Math.ceil(caster.data.levels / denom);
     }
 
-    // EXCEPTION: NPC with an explicit spellcaster level
+    // EXCEPTION: NPC with an explicit spell-caster level
     if (isNPC && actorData.data.details.spellLevel) {
       progression.slot = actorData.data.details.spellLevel;
     }
@@ -499,8 +500,8 @@ export default class Actor5e extends Actor {
       else spells.pact.max = Math.max(1, Math.min(pl, 2), Math.min(pl - 8, 3), Math.min(pl - 13, 4));
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     } else {
-      spells.pact.level = 0;
-      spells.pact.max = 0;
+      spells.pact.max = parseInt(spells.pact.override) || 0
+      spells.pact.level = spells.pact.max > 0 ? 1 : 0;
     }
   }
 
@@ -924,6 +925,12 @@ export default class Actor5e extends Actor {
     const parts = [];
     const data = {};
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+
+    // Diamond Soul adds proficiency
+    if ( this.getFlag("dnd5e", "diamondSoul") ) {
+      parts.push("@prof");
+      data.prof = this.data.data.attributes.prof;
+    }
 
     // Include a global actor ability save bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};

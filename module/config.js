@@ -684,10 +684,10 @@ DND5E.classFeatures = ClassFeatures;
 
 // Configure Optional Character Flags
 DND5E.characterFlags = {
-  "powerfulBuild": {
-    name: "DND5E.FlagsPowerfulBuild",
-    hint: "DND5E.FlagsPowerfulBuildHint",
-    section: "Racial Traits",
+  "diamondSoul": {
+    name: "DND5E.FlagsDiamondSoul",
+    hint: "DND5E.FlagsDiamondSoulHint",
+    section: "Feats",
     type: Boolean
   },
   "elvenAccuracy": {
@@ -727,6 +727,12 @@ DND5E.characterFlags = {
     section: "Feats",
     type: Boolean
   },
+  "powerfulBuild": {
+    name: "DND5E.FlagsPowerfulBuild",
+    hint: "DND5E.FlagsPowerfulBuildHint",
+    section: "Racial Traits",
+    type: Boolean
+  },
   "reliableTalent": {
     name: "DND5E.FlagsReliableTalent",
     hint: "DND5E.FlagsReliableTalentHint",
@@ -764,6 +770,4 @@ DND5E.characterFlags = {
 };
 
 // Configure allowed status flags
-DND5E.allowedActorFlags = [
-  "isPolymorphed", "originalActor"
-].concat(Object.keys(DND5E.characterFlags));
+DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));

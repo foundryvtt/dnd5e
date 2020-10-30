@@ -1051,8 +1051,21 @@
 .dnd5e.sheet.actor .editor {
   padding: 0 8px;
 }
+#actor-flags .window-content {
+  overflow-y: hidden;
+}
+#actor-flags form {
+  height: 100%;
+}
+#actor-flags .form-body {
+  height: calc(100% - 40px);
+  padding-right: 8px;
+  margin-bottom: 4px;
+  overflow-y: auto;
+}
 .dnd5e.sheet.item {
-  min-height: 420px;
+  min-height: 400px;
+  max-height: 95%;
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -1073,7 +1086,7 @@
   border: 2px solid #000;
 }
 .dnd5e.sheet.item .sheet-header .item-subtitle {
-  flex: 0 0 80px;
+  flex: 0 0 100px;
   height: 60px;
   margin: 0;
   padding: 5px;

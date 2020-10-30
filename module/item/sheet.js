@@ -7,8 +7,11 @@ import TraitSelector from "../apps/trait-selector.js";
 export default class ItemSheet5e extends ItemSheet {
   constructor(...args) {
     super(...args);
+
+    // Expand size of the class sheet
     if ( this.object.data.type === "class" ) {
       this.options.width =  600;
+      this.options.height = "auto";
     }
   }
 
@@ -18,7 +21,7 @@ export default class ItemSheet5e extends ItemSheet {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       width: 560,
-      height: "auto",
+      height: 400,
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
@@ -43,7 +46,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.config = CONFIG.DND5E;
 
     // Item Type, Status, and Details
-    data.itemType = data.item.type.titleCase();
+    data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
     data.itemStatus = this._getItemStatus(data.item);
     data.itemProperties = this._getItemProperties(data.item);
     data.isPhysical = data.item.data.hasOwnProperty("quantity");
@@ -213,7 +216,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   setPosition(position={}) {
-    if ( !this._minimized ) {
+    if ( !(this._minimized  || position.height) ) {
       position.height = this._tabs[0].active === "details" ? "auto" : this.options.height;
     }
     return super.setPosition(position);

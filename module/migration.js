@@ -280,3 +280,24 @@ export async function purgeFlags(pack) {
   }
   await pack.configure({locked: true});
 }
+
+/* -------------------------------------------- */
+
+
+/**
+ * Purge the data model of any inner objects which have been flagged as _deprecated.
+ * @param {object} data   The data to clean
+ * @private
+ */
+export function removeDeprecatedObjects(data) {
+  for ( let [k, v] of Object.entries(data) ) {
+    if ( getType(v) === "Object" ) {
+      if (v._deprecated === true) {
+        console.log(`Deleting deprecated object key ${k}`);
+        delete data[k];
+      }
+      else removeDeprecatedObjects(v);
+    }
+  }
+  return data;
+}

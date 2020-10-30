@@ -1,44 +1,48 @@
 <form class="{{cssClass}}" autocomplete="off">
-	<p class="notes">{{localize 'DND5E.FlagsInstructions'}}</p>
+    <section class="form-body">
+	    <p class="notes">{{localize 'DND5E.FlagsInstructions'}}</p>
 
-    {{#each flags as |fs section|}}
-    <h3 class="form-header">{{localize section}}</h3>
-    {{#each fs as |flag key|}}
+        {{#each flags as |fs section|}}
+        <h3 class="form-header">{{localize section}}</h3>
+        {{#each fs as |flag key|}}
 
-    <div class="form-group">
-        <label>{{localize flag.name}}</label>
+        <div class="form-group">
+            <label>{{localize flag.name}}</label>
 
-        {{#if flag.isCheckbox}}
-        <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked flag.value}}/>
+            {{#if flag.isCheckbox}}
+            <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked flag.value}}/>
 
-        {{else if flag.isSelect}}
-        <select name="{{key}}" data-dtype="{{flag.type}}">
-            {{#select flag.value}}
-            {{#each flag.choices as |v k|}}
-            <option value="{{k}}">{{localize v}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+            {{else if flag.isSelect}}
+            <select name="{{key}}" data-dtype="{{flag.type}}">
+                {{#select flag.value}}
+                {{#each flag.choices as |v k|}}
+                <option value="{{k}}">{{localize v}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
 
-        {{else}}
-        <input type="text" name="{{key}}" value="{{flag.value}}" placeholder="{{flag.placeholder}}" data-dtype="{{flag.type}}"/>
-        {{/if}}
+            {{else}}
+            <input type="text" name="{{key}}" value="{{flag.value}}" placeholder="{{flag.placeholder}}" data-dtype="{{flag.type}}"/>
+            {{/if}}
 
-        <p class="notes">{{localize flag.hint}}</p>
-    </div>
-    {{/each}}
-    {{/each}}
+            <p class="notes">{{localize flag.hint}}</p>
+        </div>
+        {{/each}}
+        {{/each}}
 
-    <h3 class="form-header">{{localize "DND5E.Bonuses"}}</h3>
-    <p class="notes">{{localize "DND5E.BonusesHint"}}</p>
-    {{#each bonuses as |b|}}
-    <div class="form-group">
-        <label>{{localize b.label}}</label>
-        <input type="text" name="{{b.name}}" value="{{b.value}}"/>
-    </div>
-    {{/each}}
+        <h3 class="form-header">{{localize "DND5E.Bonuses"}}</h3>
+        <p class="notes">{{localize "DND5E.BonusesHint"}}</p>
+        {{#each bonuses as |b|}}
+        <div class="form-group">
+            <label>{{localize b.label}}</label>
+            <input type="text" name="{{b.name}}" value="{{b.value}}"/>
+        </div>
+        {{/each}}
+    </section>
 
-    <button type="submit" name="submit">
-        <i class="far fa-save"></i> {{localize 'DND5E.FlagsSave'}}
-    </button>
+    <footer class="form-footer">
+        <button type="submit" name="submit">
+            <i class="far fa-save"></i> {{localize 'DND5E.FlagsSave'}}
+        </button>
+    </footer>
 </form>
