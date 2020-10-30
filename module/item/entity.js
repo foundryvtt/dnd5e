@@ -765,22 +765,7 @@ export default class Item5e extends Item {
   _scaleCantripDamage(parts, scale, level, rollData) {
     const add = Math.floor((level + 1) / 6);
     if ( add === 0 ) return;
-
-    // FUTURE SOLUTION - 0.7.0 AND LATER
-    if (isNewerVersion(game.data.version, "0.6.9")) {
-      this._scaleDamage(parts, scale || parts.join(" + "), add, rollData)
-
-    }
-
-    // LEGACY SOLUTION - 0.6.x AND OLDER
-    // TODO: Deprecate the legacy solution one FVTT 0.7.x is RELEASE
-    else {
-      if ( scale && (scale !== parts[0]) ) {
-        parts[0] = parts[0] + " + " + scale.replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${add}d${d}`);
-      } else {
-        parts[0] = parts[0].replace(new RegExp(Roll.diceRgx, "g"), (match, nd, d) => `${parseInt(nd)+add}d${d}`);
-      }
-    }
+    this._scaleDamage(parts, scale || parts.join(" + "), add, rollData);
   }
 
   /* -------------------------------------------- */
@@ -798,20 +783,7 @@ export default class Item5e extends Item {
   _scaleSpellDamage(parts, baseLevel, spellLevel, formula, rollData) {
     const upcastLevels = Math.max(spellLevel - baseLevel, 0);
     if ( upcastLevels === 0 ) return parts;
-
-    // FUTURE SOLUTION - 0.7.0 AND LATER
-    if (isNewerVersion(game.data.version, "0.6.9")) {
-      this._scaleDamage(parts, formula, upcastLevels, rollData);
-    }
-
-    // LEGACY SOLUTION - 0.6.x AND OLDER
-    // TODO: Deprecate the legacy solution one FVTT 0.7.x is RELEASE
-    else {
-      const bonus = new Roll(formula);
-      bonus.alter(0, upcastLevels);
-      parts.push(bonus.formula);
-    }
-    return parts;
+    this._scaleDamage(parts, formula, upcastLevels, rollData);
   }
 
   /* -------------------------------------------- */

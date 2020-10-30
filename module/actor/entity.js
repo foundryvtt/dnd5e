@@ -20,48 +20,6 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /**
-   * @override
-   * TODO: This becomes unnecessary after 0.7.x is released
-   */
-  initialize() {
-    try {
-      this.prepareData();
-    } catch(err) {
-      console.error(`Failed to initialize data for ${this.constructor.name} ${this.id}:`);
-      console.error(err);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @override
-   * TODO: This becomes unnecessary after 0.7.x is released
-   */
-  prepareData() {
-    const is07x = !isNewerVersion("0.7.1", game.data.version);
-    if ( is07x ) this.data = duplicate(this._data);
-    if (!this.data.img) this.data.img = CONST.DEFAULT_TOKEN;
-    if ( !this.data.name ) this.data.name = "New " + this.entity;
-    this.prepareBaseData();
-    this.prepareEmbeddedEntities();
-    if ( is07x ) this.applyActiveEffects();
-    this.prepareDerivedData();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @override
-   * TODO: This becomes unnecessary after 0.7.x is released
-   */
-  applyActiveEffects() {
-    if (!isNewerVersion("0.7.1", game.data.version)) return super.applyActiveEffects();
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   prepareBaseData() {
     switch ( this.data.type ) {
@@ -575,9 +533,6 @@ export default class Actor5e extends Actor {
 
   /** @override */
   async update(data, options={}) {
-
-    // TODO: 0.7.1 compatibility - remove when stable
-    if ( !data.hasOwnProperty("data") ) data = expandObject(data);
 
     // Apply changes in Actor size to Token width/height
     const newSize = getProperty(data, "data.traits.size");

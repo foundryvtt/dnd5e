@@ -229,9 +229,6 @@ export default class ItemSheet5e extends ItemSheet {
   /** @override */
   _updateObject(event, formData) {
 
-    // TODO: This can be removed once 0.7.x is release channel
-    if ( !formData.data ) formData = expandObject(formData);
-
     // Handle Damage Array
     const damage = formData.data?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
