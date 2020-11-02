@@ -227,14 +227,20 @@ export default class ItemSheet5e extends ItemSheet {
 	/* -------------------------------------------- */
 
   /** @override */
-  _updateObject(event, formData) {
+  _getSubmitData(updateData={}) {
 
-    // Handle Damage Array
-    const damage = formData.data?.damage;
+    // Create the expanded update data object
+    const fd = new FormDataExtended(this.form, {editors: this.editors});
+    let data = fd.toObject();
+    if ( updateData ) data = mergeObject(data, updateData);
+    else data = expandObject(data);
+
+    // Handle Damage array
+    const damage = data.data?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
-    // Update the Item
-    super._updateObject(event, formData);
+    // Return the flattened submission data
+    return flattenObject(data);
   }
 
   /* -------------------------------------------- */
