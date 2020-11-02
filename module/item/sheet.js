@@ -1,4 +1,5 @@
 import TraitSelector from "../apps/trait-selector.js";
+import {onManageActiveEffect, prepareActiveEffectCategories} from "../effects.js";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types
@@ -63,6 +64,9 @@ export default class ItemSheet5e extends ItemSheet {
     // Vehicles
     data.isCrewed = data.item.data.activation?.type === 'crew';
     data.isMountable = this._isItemMountable(data.item);
+
+    // Prepare Active Effects
+    data.effects = prepareActiveEffectCategories(this.entity.effects);
     return data;
   }
 
@@ -248,8 +252,11 @@ export default class ItemSheet5e extends ItemSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-    html.find(".damage-control").click(this._onDamageControl.bind(this));
-    html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
+    if ( this.isEditable ) {
+      html.find(".damage-control").click(this._onDamageControl.bind(this));
+      html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
+      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.item));
+    }
   }
 
   /* -------------------------------------------- */

@@ -2,6 +2,7 @@ import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import {DND5E} from '../../config.js';
+import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -101,7 +102,7 @@ export default class ActorSheet5e extends ActorSheet {
     this._prepareItems(data);
 
     // Prepare active effects
-    this._prepareEffects(data);
+    data.effects = prepareActiveEffectCategories(this.entity.effects);
 
     // Return data to the sheet
     return data
@@ -143,43 +144,6 @@ export default class ActorSheet5e extends ActorSheet {
       }
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare the data structure for Active Effects which are currently applied to the Actor.
-   * @param {object} data       The object of rendering data which is being prepared
-   * @private
-   */
-  _prepareEffects(data) {
-
-    // Define effect header categories
-    const categories = {
-      temporary: {
-        label: "Temporary Effects",
-        effects: []
-      },
-      passive: {
-        label: "Passive Effects",
-        effects: []
-      },
-      inactive: {
-        label: "Inactive Effects",
-        effects: []
-      }
-    };
-
-    // Iterate over active effects, classifying them into categories
-    for ( let e of this.actor.effects ) {
-      e._getSourceName(); // Trigger a lookup for the source name
-      if ( e.data.disabled ) categories.inactive.effects.push(e);
-      else if ( e.isTemporary ) categories.temporary.effects.push(e);
-      else categories.passive.effects.push(e);
-    }
-
-    // Add the prepared categories of effects to the rendering data
-    return data.effects = categories;
   }
 
   /* -------------------------------------------- */
@@ -393,8 +357,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
-      html.find(".effect-control").click(this._onManageActiveEffect.bind(this));
-
+      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.entity));
     }
 
     // Owner Only Listeners
@@ -725,28 +688,6 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
     this.actor.deleteOwnedItem(li.dataset.itemId);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Manage Active Effect instances through the Actor Sheet via effect control buttons.
-   * @param {MouseEvent} event     The left-click event on the effect control
-   * @private
-   */
-  _onManageActiveEffect(event) {
-    event.preventDefault();
-    const a = event.currentTarget;
-    const li = a.closest(".effect");
-    const effect = this.actor.effects.get(li.dataset.effectId);
-    switch ( a.dataset.action ) {
-      case "edit":
-        return effect.sheet.render(true);
-      case "delete":
-        return effect.delete();
-      case "toggle":
-        return effect.update({disabled: !effect.data.disabled});
-    }
   }
 
   /* -------------------------------------------- */

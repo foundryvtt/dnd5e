@@ -4,7 +4,9 @@
     <ol class="currency flexrow">
         <h3>
             {{localize "DND5E.Currency"}}
-            <a class="currency-convert" title="Convert Currency"><i class="fas fa-coins"></i></a>
+            <a class="currency-convert rollable" data-action="convertCurrency" title="Convert Currency">
+                <i class="fas fa-coins"></i>
+            </a>
         </h3>
         {{#each data.currency as |v k|}}
         <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
@@ -23,9 +25,9 @@
     {{/unless}}
 </div>
 
-<ol class="inventory-list">
+<ol class="items-list inventory-list">
 {{#each sections as |section sid|}}
-    <li class="inventory-header flexrow">
+    <li class="items-header flexrow">
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if section.columns}}
@@ -42,7 +44,7 @@
         {{/if}}
 
         {{#if ../owner}}
-        <div class="item-controls">
+        <div class="item-controls flexrow">
             <a class="item-control item-create" title='{{localize "DND5E.ItemCreate"}}'
                {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
@@ -107,7 +109,7 @@
             {{/if}}
 
             {{#if ../../owner}}
-            <div class="item-controls">
+            <div class="item-controls flexrow">
                 {{#unless @root.isVehicle}}
                 <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>
                 {{/unless}}

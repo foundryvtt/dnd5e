@@ -27,12 +27,10 @@
     </ul>
 </div>
 
-<ol class="inventory-list">
+<ol class="items-list inventory-list">
 {{#each spellbook as |section|}}
-    <li class="item flexrow inventory-header spellbook-header">
-        <div class="item-name flexrow">
-            <h3>{{section.label}}</h3>
-        </div>
+    <li class="items-header spellbook-header flexrow">
+        <h3 class="item-name flexrow">{{section.label}}</h3>
 
         <div class="spell-slots">
             {{#if section.usesSlots}}
@@ -46,6 +44,7 @@
                     <i class="fas fa-edit"></i>
                 </a>
                 {{/if}}
+            </span>
             {{ else }}
             <span>{{{section.uses}}}</span>
             <span class="sep"> / </span>
@@ -57,7 +56,7 @@
         <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
         <div class="spell-target">{{localize "DND5E.SpellTarget"}}</div>
 
-        <div class="item-controls">
+        <div class="item-controls flexrow">
             {{#if section.canCreate}}
             <a class="item-control item-create" title="{{localize 'DND5E.SpellCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
@@ -91,9 +90,8 @@
                 {{/if}}
             </div>
 
-
             {{#if ../../owner}}
-            <div class="item-controls">
+            <div class="item-controls flexrow">
                 {{#if section.canPrepare}}
                 <a class="item-control item-toggle {{item.toggleClass}}" title="{{item.toggleTitle}}"><i class="fas fa-sun"></i></a>
                 {{/if}}
@@ -110,7 +108,7 @@
     <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
-        <div class="item-controls">
+        <div class="item-controls flexrow">
             <a class="item-control item-create" title="{{localize 'DND5E.SpellCreate'}}" data-type="spell"
                data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}</a>
         </div>

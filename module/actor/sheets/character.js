@@ -168,9 +168,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.options.editable ) return;
 
-    // Inventory Functions
-    html.find(".currency-convert").click(this._onConvertCurrency.bind(this));
-
     // Item State Toggling
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
 
@@ -178,24 +175,35 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     html.find('.short-rest').click(this._onShortRest.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
 
-    // Death saving throws
-    html.find('.death-save').click(this._onDeathSave.bind(this));
+    // Rollable sheet actions
+    html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling a death saving throw for the Character
+   * Handle mouse click events for character sheet actions
    * @param {MouseEvent} event    The originating click event
    * @private
    */
-  _onDeathSave(event) {
+  _onSheetAction(event) {
     event.preventDefault();
-    return this.actor.rollDeathSave({event: event});
+    const button = event.currentTarget;
+    switch( button.dataset.action ) {
+      case "convertCurrency":
+        return Dialog.confirm({
+          title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
+          content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
+          yes: () => this.actor.convertCurrency()
+        });
+      case "rollDeathSave":
+        return this.actor.rollDeathSave({event: event});
+      case "rollInitiative":
+        return this.actor.rollInitiative({createCombatants: true});
+    }
   }
 
   /* -------------------------------------------- */
-
 
   /**
    * Handle toggling the state of an Owned Item within the Actor
@@ -234,22 +242,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle mouse click events to convert currency to the highest possible denomination
-   * @param {MouseEvent} event    The originating click event
-   * @private
-   */
-  async _onConvertCurrency(event) {
-    event.preventDefault();
-    return Dialog.confirm({
-      title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
-      content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
-      yes: () => this.actor.convertCurrency()
-    });
   }
 
   /* -------------------------------------------- */

@@ -94,7 +94,7 @@
                 </li>
 
                 <li class="attribute initiative">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.Initiative" }}</h4>
+                    <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "DND5E.Initiative" }}</h4>
                     <div class="attribute-value">
                         <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                     </div>
@@ -108,7 +108,7 @@
         </section>
     </header>
 
-    {{!-- NPC Sheet Navigation --}}
+    {{!-- Character Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
         <a class="item" data-tab="inventory">{{ localize "DND5E.Inventory" }}</a>
@@ -118,7 +118,7 @@
         <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
     </nav>
 
-    {{!-- NPC Sheet Body --}}
+    {{!-- Character Sheet Body --}}
     <section class="sheet-body">
 
         <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
@@ -183,7 +183,7 @@
                 {{!-- Counters --}}
                 <div class="counters">
                     <div class="counter flexrow death-saves">
-                        <h4 class="death-save rollable">{{ localize "DND5E.DeathSave" }}</h4>
+                        <h4 class="rollable" data-action="rollDeathSave">{{ localize "DND5E.DeathSave" }}</h4>
                         <div class="counter-value">
                             <i class="fas fa-check"></i>
                             <input name="data.attributes.death.success" type="number" placeholder="0"
@@ -231,7 +231,7 @@
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/dnd5e/templates/actors/parts/actor-effects.html"}}
+            {{> "systems/dnd5e/templates/actors/parts/active-effects.html"}}
         </div>
 
         {{!-- Biography Tab --}}

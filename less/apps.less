@@ -362,6 +362,108 @@
       padding: 0;
     }
   }
+
+  /* ----------------------------------------- */
+  /*  Items Lists                              */
+  /* ----------------------------------------- */
+
+  .items-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    color: @colorTan;
+
+    // Child lists
+    .item-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    // Individual Item
+    .item {
+      align-items: center;
+      padding: 0 2px; // to align with the header border
+      border-bottom: 1px solid @colorFaint;
+      &:last-child { border-bottom: none; }
+
+      .item-name {
+        color: @colorDark;
+        .item-image {
+          flex: 0 0 30px;
+          height: 30px;
+          background-size: 30px;
+          border: none;
+          margin-right: 5px;
+        }
+        h4 {
+          margin: 0;
+          white-space: nowrap;
+          overflow-x: hidden;
+        }
+      }
+    }
+
+    // Section Header
+    .items-header {
+      height: 28px;
+      margin: 2px 0;
+      padding: 0;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.05);
+      border: @borderGroove;
+      font-weight: bold;
+      > * {
+        font-size: 12px;
+        text-align: center;
+      }
+      .item-name {
+        padding-left: 5px;
+        .modesto();
+        font-size: 16px;
+      }
+    }
+
+    // Item Name
+    .item-name {
+      flex: 2;
+      margin: 0;
+      overflow: hidden;
+      font-size: 13px;
+      text-align: left;
+      align-items: center;
+    }
+
+    // Control Buttons
+    .item-controls {
+      flex: 0 0 60px;
+      justify-content: space-between;
+      a {
+        font-size: 12px;
+        text-align: center;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Active Effects                           */
+  /* ----------------------------------------- */
+
+  .effects .item {
+    .effect-source,
+    .effect-duration,
+    .effect-controls {
+      text-align: center;
+      border-left: 1px solid @colorFaint;
+      border-right: 1px solid @colorFaint;
+      font-size: 12px;
+    }
+    .effect-controls {
+      border: none;
+    }
+  }
 }
 
 

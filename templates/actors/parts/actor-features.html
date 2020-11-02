@@ -8,9 +8,9 @@
 </div>
 {{/unless}}
 
-<ol class="inventory-list">
+<ol class="items-list inventory-list">
 {{#each sections as |section sid|}}
-    <li class="inventory-header flexrow">
+    <li class="items-header flexrow">
         <h3 class="item-name flexrow">{{localize section.label}}</h3>
 
         {{#if section.hasActions}}
@@ -25,7 +25,7 @@
         {{/if}}
 
         {{#if ../owner}}
-        <div class="item-controls">
+        <div class="item-controls flexrow">
             <a class="item-control item-create" title="{{localize 'DND5E.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
@@ -84,7 +84,7 @@
             {{/if}}
 
             {{#if ../../owner}}
-            <div class="item-controls">
+            <div class="item-controls flexrow">
                 {{#if section.crewable}}
                 <a class="item-control item-toggle {{item.toggleClass}}"
                    title="{{item.toggleTitle}}">

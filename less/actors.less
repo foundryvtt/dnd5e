@@ -414,47 +414,18 @@
     }
   }
 
+  // Inventory item lists
   .inventory-list {
-    list-style: none;
-    margin: 0;
     padding: 0 5px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    color: @colorTan;
-
-    // Inventory Item
     .item {
-      line-height: 30px;
-      padding: 0 2px; // to align with the header border
-      border-bottom: 1px solid @colorFaint;
-      &:last-child { border-bottom: none; }
-
-      // Item Header Name
       .item-name {
         cursor: pointer;
-        max-height: 30px;
-        overflow: hidden;
-        color: @colorDark;
-
-        .item-image {
-          flex: 0 0 30px;
-          background-size: 30px;
-          margin-right: 5px;
-        }
-
-        h4 {
-          margin: 0;
-          white-space: nowrap;
-          overflow-x: hidden;
-        }
-
         &.rollable:hover .item-image {
           background-image: url("../../icons/svg/d20-grey.svg") !important;
         }
         &.rollable .item-image:hover {
           background-image: url("../../icons/svg/d20-black.svg") !important;
         }
-
         i.attuned {
           color: @colorTan;
         }
@@ -482,21 +453,6 @@
 
     // Inventory Header
     .inventory-header {
-      margin: 2px 0;
-      padding: 0;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.05);
-      border: @borderGroove;
-      font-weight: bold;
-      line-height: 24px;
-
-      h3 {
-        margin: 0 -5px 0 0;
-        padding-left: 5px;
-        .modesto();
-        font-size: 16px;
-      }
-
       .item-controls a.item-create {
         flex: 0 0 100%;
       }
@@ -521,22 +477,9 @@
       border-right: 1px solid @colorFaint;
     }
 
-    .item-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
     // Item Control Buttons
     .item-controls {
       flex: 0 0 44px;
-      .flexrow();
-      justify-content: flex-end;
-      a {
-        flex: 0 0 22px;
-        font-size: 12px;
-        text-align: center;
-      }
     }
 
     // Item Dropdown Summary
@@ -685,44 +628,6 @@
 
   // Empty spellbook controls
   .spellbook-empty .item-controls { flex: 1; }
-
-  /* ----------------------------------------- */
-  /*  Active Effects                           */
-  /* ----------------------------------------- */
-
-  .effects {
-    .effect-name{
-      flex: 2;
-      align-items: center;
-      color: @colorDark;
-      h4 { margin: 0; }
-    }
-
-    .effect-icon {
-      flex: 0 0 30px;
-      height: 30px;
-      margin-right: 5px;
-      border: none;
-    }
-
-    .effect-source,
-    .effect-duration {
-      text-align: center;
-      border-left: 1px solid @colorFaint;
-      border-right: 1px solid @colorFaint;
-    }
-
-    .effect-controls {
-      flex: 0 0 60px;
-      text-align: right;
-    }
-
-    .effect {
-      align-items: center;
-      border-bottom: 1px solid @colorFaint;
-      &:last-child { border-bottom: none; }
-    }
-  }
 
   /* ----------------------------------------- */
   /*  TinyMCE                                  */
