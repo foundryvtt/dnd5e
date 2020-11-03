@@ -1,6 +1,7 @@
 import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
+import MovementConfig from "../../apps/movement-config.js";
 import {DND5E} from '../../config.js';
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
 
@@ -93,6 +94,20 @@ export default class ActorSheet5e extends ActorSheet {
         skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
         skl.label = CONFIG.DND5E.skills[s];
       }
+    }
+
+    // Movement speeds
+    const movement = data.actor.data.attributes.movement;
+    const speeds = [
+      [movement.walk, `${movement.walk} (${movement.hover ? game.i18n.localize("DND5E.MovementHover") : game.i18n.localize("DND5E.MovementWalk")})`],
+      [movement.burrow, `${movement.burrow} (${game.i18n.localize("DND5E.MovementBurrow")})`],
+      [movement.climb, `${movement.climb}  (${game.i18n.localize("DND5E.MovementClimb")})`],
+      [movement.fly, `${movement.fly}  (${game.i18n.localize("DND5E.MovementFly")})`],
+      [movement.swim, `${movement.swim} (${game.i18n.localize("DND5E.MovementSwim")})`]
+    ].filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
+    data.movement = {
+      primary: speeds[0] ? speeds[0][1] : "",
+      special: speeds.length > 1 ? speeds.slice(1).map(s => s[1]).join(", ") : ""
     }
 
     // Update traits
@@ -347,6 +362,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
+      html.find('.configure-movement').click(this._onMovementConfig.bind(this));
       html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
 
       // Owned Item management
@@ -760,6 +776,18 @@ export default class ActorSheet5e extends ActorSheet {
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
     new TraitSelector(this.actor, options).render(true)
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
+  _onMovementConfig(event) {
+    event.preventDefault();
+    new MovementConfig(this.object).render(true);
   }
 
   /* -------------------------------------------- */

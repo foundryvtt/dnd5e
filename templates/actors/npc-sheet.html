@@ -62,14 +62,14 @@
                 </li>
 
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.Speed" }}</h4>
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.Speed" }} ({{data.attributes.movement.units}})
+                    </h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.speed.value" type="text"
-                               value="{{data.attributes.speed.value}}" placeholder="0"/>
+                        <span>{{movement.primary}}</span>
                     </div>
                     <footer class="attribute-footer">
-                        <input type="text" class="speed" name="data.attributes.speed.special"
-                               value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
+                        <span>{{movement.special}}</span>
                     </footer>
                 </li>
             </ul>

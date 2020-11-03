@@ -293,7 +293,7 @@ export default class Item5e extends Item {
       user: game.user._id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
-      flavor: this.name,
+      flavor: this.data.data.chatFlavor || this.name,
       speaker: {
         actor: this.actor._id,
         token: this.actor.token,
@@ -638,6 +638,7 @@ export default class Item5e extends Item {
       actor: this.actor,
       data: rollData,
       title: title,
+      flavor: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
@@ -843,7 +844,7 @@ export default class Item5e extends Item {
     const roll = new Roll(rollData.item.formula, rollData).roll();
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: this.data.data.chatFlavor || title,
+      flavor: title,
       rollMode: game.settings.get("core", "rollMode"),
       messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id }}
     });
@@ -965,7 +966,7 @@ export default class Item5e extends Item {
       template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`,
+      flavor: title,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,

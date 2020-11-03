@@ -29,6 +29,7 @@ import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
 import ItemSheet5e from "./module/item/sheet.js";
 import ShortRestDialog from "./module/apps/short-rest.js";
 import TraitSelector from "./module/apps/trait-selector.js";
+import MovementConfig from "./module/apps/movement-config.js";
 
 // Import Helpers
 import * as chat from "./module/chat.js";
@@ -53,7 +54,8 @@ Hooks.once("init", function() {
       ActorSheet5eVehicle,
       ItemSheet5e,
       ShortRestDialog,
-      TraitSelector
+      TraitSelector,
+      MovementConfig
     },
     canvas: {
       AbilityTemplate
@@ -157,7 +159,7 @@ Hooks.once("ready", function() {
 
   // Determine whether a system migration is required and feasible
   const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = 0.84;
+  const NEEDS_MIGRATION_VERSION = 0.99;
   const COMPATIBLE_MIGRATION_VERSION = 0.80;
   let needMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
 

@@ -107,9 +107,7 @@ export const migrateActorData = function(actor) {
 
   // Actor Data Updates
   _migrateActorBonuses(actor, updateData);
-
-  // Remove deprecated fields
-  _migrateRemoveDeprecated(actor, updateData);
+  _migrateActorMovement(actor, updateData);
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -172,11 +170,6 @@ function cleanActorData(actorData) {
  */
 export const migrateItemData = function(item) {
   const updateData = {};
-
-  // Remove deprecated fields
-  _migrateRemoveDeprecated(item, updateData);
-
-  // Return the migrated update data
   return updateData;
 };
 
@@ -225,31 +218,17 @@ function _migrateActorBonuses(actor, updateData) {
   }
 }
 
-
 /* -------------------------------------------- */
 
-
 /**
- * A general migration to remove all fields from the data model which are flagged with a _deprecated tag
+ * Migrate the actor bonuses object
  * @private
  */
-const _migrateRemoveDeprecated = function(ent, updateData) {
-  const flat = flattenObject(ent.data);
-
-  // Identify objects to deprecate
-  const toDeprecate = Object.entries(flat).filter(e => e[0].endsWith("_deprecated") && (e[1] === true)).map(e => {
-    let parent = e[0].split(".");
-    parent.pop();
-    return parent.join(".");
-  });
-
-  // Remove them
-  for ( let k of toDeprecate ) {
-    let parts = k.split(".");
-    parts[parts.length-1] = "-=" + parts[parts.length-1];
-    updateData[`data.${parts.join(".")}`] = null;
-  }
-};
+function _migrateActorMovement(actor, updateData) {
+  if ( !actor.data.attributes.speed?.value ) return;
+  const s = actor.data.attributes.speed.value.split(" ");
+  if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
+}
 
 
 /* -------------------------------------------- */
@@ -300,4 +279,13 @@ export function removeDeprecatedObjects(data) {
     }
   }
   return data;
+}
+
+
+export function migrateSpeedValues(a) {
+  const speed = a.data.data.attributes.speed;
+  if ( speed.special ) {
+    console.log(speed);
+    debugger;
+  }
 }

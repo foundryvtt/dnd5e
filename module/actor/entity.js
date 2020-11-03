@@ -338,16 +338,16 @@ export default class Actor5e extends Actor {
       }
       if ( joat && (skl.value === 0 ) ) multi = 0.5;
 
+      // Retain the maximum skill proficiency when skill proficiencies are merged
+      if ( originalSkills ) {
+        skl.value = Math.max(skl.value, originalSkills[id].value);
+      }
+
       // Compute modifier
       skl.bonus = checkBonus + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
       skl.prof = round(multi * data.attributes.prof);
       skl.total = skl.mod + skl.prof + skl.bonus;
-
-      // If we merged skills when transforming, take the highest bonus here.
-      if (originalSkills && skl.value > 0.5) {
-        skl.total = Math.max(skl.total, originalSkills[id].total);
-      }
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
