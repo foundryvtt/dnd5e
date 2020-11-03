@@ -280,12 +280,3 @@ export function removeDeprecatedObjects(data) {
   }
   return data;
 }
-
-
-export function migrateSpeedValues(a) {
-  const speed = a.data.data.attributes.speed;
-  if ( speed.special ) {
-    console.log(speed);
-    debugger;
-  }
-}
