@@ -588,6 +588,7 @@
   font-size: 18px;
   color: #4b4a44;
   border-bottom: 1px solid #c9c7b8;
+  white-space: nowrap;
 }
 .dnd5e.sheet.actor .tab.attributes {
   overflow: hidden;
@@ -1049,6 +1050,7 @@
 .dnd5e.sheet.item {
   min-height: 400px;
   max-height: 95%;
+  min-width: 480px;
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */

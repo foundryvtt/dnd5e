@@ -231,7 +231,11 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
 
     // Modify the damage formula for critical hits
     if ( crit === true ) {
-      roll.alter(criticalMultiplier, criticalBonusDice);
+      roll.alter(criticalMultiplier, 0);      // Multiply all dice
+      if ( roll.terms[0] instanceof Die ) {   // Add bonus dice for only the main dice term
+        roll.terms[0].alter(1, criticalBonusDice);
+        roll._formula = roll.formula;
+      }
       messageData.flavor += ` (${game.i18n.localize("DND5E.Critical")})`;
       if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].critical = true;
     }
