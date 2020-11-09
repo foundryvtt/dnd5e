@@ -354,7 +354,7 @@ export default class ActorSheet5e extends ActorSheet {
     filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
-    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+    html.find('.item .item-name.rollable h4').click(event => this._onItemSummary(event));
 
     // Editable Only Listeners
     if ( this.isEditable ) {

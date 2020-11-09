@@ -1419,14 +1419,16 @@ export default class Actor5e extends Actor {
     if ( !original ) return;
 
     // Get the Tokens which represent this actor
-    const tokens = this.getActiveTokens(true);
-    const tokenUpdates = tokens.map(t => {
-      const tokenData = duplicate(original.data.token);
-      tokenData._id = t.id;
-      tokenData.actorId = original.id;
-      return tokenData;
-    });
-    canvas.scene.updateEmbeddedEntity("Token", tokenUpdates);
+    if ( canvas.ready ) {
+      const tokens = this.getActiveTokens(true);
+      const tokenUpdates = tokens.map(t => {
+        const tokenData = duplicate(original.data.token);
+        tokenData._id = t.id;
+        tokenData.actorId = original.id;
+        return tokenData;
+      });
+      canvas.scene.updateEmbeddedEntity("Token", tokenUpdates);
+    }
 
     // Delete the polymorphed Actor and maybe re-render the original sheet
     const isRendered = this.sheet.rendered;
