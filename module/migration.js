@@ -246,7 +246,7 @@ function _migrateActorBonuses(actor, updateData) {
  * @private
  */
 function _migrateActorMovement(actor, updateData) {
-  if ( !actor.data.attributes.speed?.value ) return;
+  if ( actor.data.attributes?.movement?.walk !== undefined ) return;
   const s = actor.data.attributes.speed.value.split(" ");
   if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
 }
