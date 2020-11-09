@@ -123,15 +123,14 @@ export default class ActorSheet5e extends ActorSheet {
   _getMovementSpeed(actorData) {
     const movement = actorData.data.attributes.movement;
     const speeds = [
-      [movement.walk, `${movement.walk} (${movement.hover ? game.i18n.localize("DND5E.MovementHover") : game.i18n.localize("DND5E.MovementWalk")})`],
-      [movement.burrow, `${movement.burrow} (${game.i18n.localize("DND5E.MovementBurrow")})`],
-      [movement.climb, `${movement.climb}  (${game.i18n.localize("DND5E.MovementClimb")})`],
-      [movement.fly, `${movement.fly}  (${game.i18n.localize("DND5E.MovementFly")})`],
-      [movement.swim, `${movement.swim} (${game.i18n.localize("DND5E.MovementSwim")})`]
+      [movement.burrow, `${game.i18n.localize("DND5E.MovementBurrow")} ${movement.burrow}`],
+      [movement.climb, `${game.i18n.localize("DND5E.MovementClimb")} ${movement.climb}`],
+      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : "")],
+      [movement.swim, `${game.i18n.localize("DND5E.MovementSwim")} ${movement.swim}`]
     ].filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
     return {
-      primary: speeds[0] ? speeds[0][1] : "",
-      special: speeds.length > 1 ? speeds.slice(1).map(s => s[1]).join(", ") : ""
+      primary: `${movement.walk || 0} ${movement.units}`,
+      special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
     }
   }
 

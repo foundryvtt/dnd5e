@@ -123,17 +123,17 @@ Hooks.once("setup", function() {
 
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    "abilities", "abilityAbbreviations", "alignments", "conditionTypes", "consumableTypes", "currencies",
-    "damageTypes", "damageResistanceTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes",
-    "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellSchools",
-    "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
-    "polymorphSettings", "armorProficiencies", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
-    "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
+    "abilities", "abilityAbbreviations", "abilityActivationTypes", "abilityConsumptionTypes", "actorSizes", "alignments",
+    "armorProficiencies", "conditionTypes", "consumableTypes", "cover", "currencies", "damageResistanceTypes",
+    "damageTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes", "languages",
+    "limitedUsePeriods", "movementUnits", "polymorphSettings", "proficiencyLevels", "senses", "skills",
+    "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools", "targetTypes",
+    "timePeriods", "toolProficiencies", "weaponProficiencies", "weaponProperties", "weaponTypes"
   ];
 
   // Exclude some from sorting where the default order matters
   const noSort = [
-    "abilities", "alignments", "currencies", "distanceUnits", "itemActionTypes", "proficiencyLevels",
+    "abilities", "alignments", "currencies", "distanceUnits", "movementUnits", "itemActionTypes", "proficiencyLevels",
     "limitedUsePeriods", "spellComponents", "spellLevels", "weaponTypes"
   ];
 

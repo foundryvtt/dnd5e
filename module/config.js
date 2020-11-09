@@ -289,15 +289,32 @@ DND5E.damageResistanceTypes = mergeObject(duplicate(DND5E.damageTypes), {
 
 /* -------------------------------------------- */
 
+
+/**
+ * The valid units of measure for movement distances in the game system.
+ * By default this uses the imperial units of feet and miles.
+ * @type {Object<string,string>}
+ */
+DND5E.movementUnits = {
+  "ft": "DND5E.DistFt",
+  "mi": "DND5E.DistMi"
+}
+
+/**
+ * The valid units of measure for the range of an action or effect.
+ * This object automatically includes the movement units from DND5E.movementUnits
+ * @type {Object<string,string>}
+ */
 DND5E.distanceUnits = {
   "none": "DND5E.None",
   "self": "DND5E.DistSelf",
   "touch": "DND5E.DistTouch",
-  "ft": "DND5E.DistFt",
-  "mi": "DND5E.DistMi",
   "spec": "DND5E.Special",
   "any": "DND5E.DistAny"
 };
+for ( let [k, v] of Object.entries(DND5E.movementUnits) ) {
+  DND5E.distanceUnits[k] = v;
+}
 
 /* -------------------------------------------- */
 

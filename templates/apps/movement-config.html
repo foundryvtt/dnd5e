@@ -2,28 +2,28 @@
     <p class="notes">{{localize "DND5E.MovementConfigHint"}}</p>
     <div class="form-group">
         <label>{{localize "DND5E.MovementWalk"}}</label>
-        <input name="data.attributes.movement.walk" type="number" value="{{movement.walk}}"/>
+        <input name="data.attributes.movement.walk" type="number" step="0.1" value="{{movement.walk}}"/>
     </div>
     <div class="form-group">
         <label>{{localize "DND5E.MovementBurrow"}}</label>
-        <input name="data.attributes.movement.burrow" type="number" value="{{movement.burrow}}"/>
+        <input name="data.attributes.movement.burrow" type="number" step="0.1" value="{{movement.burrow}}"/>
     </div>
     <div class="form-group">
         <label>{{localize "DND5E.MovementClimb"}}</label>
-        <input name="data.attributes.movement.climb" type="number" value="{{movement.climb}}"/>
+        <input name="data.attributes.movement.climb" type="number" step="0.1" value="{{movement.climb}}"/>
     </div>
     <div class="form-group">
         <label>{{localize "DND5E.MovementFly"}}</label>
-        <input name="data.attributes.movement.fly" type="number" value="{{movement.fly}}"/>
+        <input name="data.attributes.movement.fly" type="number" step="0.1" value="{{movement.fly}}"/>
     </div>
     <div class="form-group">
         <label>{{localize "DND5E.MovementSwim"}}</label>
-        <input name="data.attributes.movement.swim" type="number" value="{{movement.swim}}"/>
+        <input name="data.attributes.movement.swim" type="number" step="0.1" value="{{movement.swim}}"/>
     </div>
     <div class="form-group">
         <label>{{localize "DND5E.MovementUnits"}}</label>
         <select name="data.attributes.movement.units">
-            {{selectOptions distanceUnits selected=movement.units}}
+            {{selectOptions units selected=movement.units}}
         </select>
     </div>
     <div class="form-group">

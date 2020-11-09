@@ -9,10 +9,10 @@ export default class ItemSheet5e extends ItemSheet {
   constructor(...args) {
     super(...args);
 
-    // Expand size of the class sheet
+    // Expand the default size of the class sheet
     if ( this.object.data.type === "class" ) {
-      this.options.width =  600;
-      this.options.height = "auto";
+      this.options.width = this.position.width =  600;
+      this.options.height = this.position.height = 680;
     }
   }
 
@@ -220,8 +220,9 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   setPosition(position={}) {
+    debugger;
     if ( !(this._minimized  || position.height) ) {
-      position.height = this._tabs[0].active === "details" ? "auto" : this.options.height;
+      position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
     }
     return super.setPosition(position);
   }

@@ -1000,8 +1000,8 @@ export default class Item5e extends Item {
     }
 
     // Include a proficiency score
-    const prof = "proficient" in rollData.item ? (rollData.item.proficient || 0) : 1;
-    rollData["prof"] = Math.floor(prof * rollData.attributes.prof);
+    const prof = ("proficient" in rollData.item) ? (rollData.item.proficient || 0) : 1;
+    rollData["prof"] = Math.floor(prof * (rollData.attributes.prof || 0));
     return rollData;
   }
 

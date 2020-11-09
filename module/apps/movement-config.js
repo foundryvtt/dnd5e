@@ -7,6 +7,7 @@ export default class MovementConfig extends BaseEntitySheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
+	    title: "DND5E.MovementConfig",
       classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/movement-config.html",
       width: 240,
@@ -16,17 +17,16 @@ export default class MovementConfig extends BaseEntitySheet {
 
   /* -------------------------------------------- */
 
-  get title() {
-    return game.i18n.localize("DND5E.MovementConfig");
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
-  getData() {
-    const data = super.getData();
-    data.movement = data.entity.data.attributes.movement;
-    data.distanceUnits = CONFIG.DND5E.distanceUnits;
+  getData(options) {
+    const data = {
+      movement: duplicate(this.entity._data.data.attributes.movement),
+      units: CONFIG.DND5E.movementUnits
+    }
+    for ( let [k, v] of Object.entries(data.movement) ) {
+      if ( ["units", "hover"].includes(k) ) continue;
+      data.movement[k] = Number.isNumeric(v) ? v.toNearest(0.1) : 0;
+    }
     return data;
   }
 }

@@ -14,6 +14,7 @@ export const migrateWorld = async function() {
         await a.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
+      err.message = `Failed dnd5e system migration for Actor ${a.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -27,6 +28,7 @@ export const migrateWorld = async function() {
         await i.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
+      err.message = `Failed dnd5e system migration for Item ${i.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -40,15 +42,15 @@ export const migrateWorld = async function() {
         await s.update(updateData, {enforceTypes: false});
       }
     } catch(err) {
+      err.message = `Failed dnd5e system migration for Scene ${s.name}: ${err.message}`;
       console.error(err);
     }
   }
 
   // Migrate World Compendium Packs
-  const packs = game.packs.filter(p => {
-    return (p.metadata.package === "world") && ["Actor", "Item", "Scene"].includes(p.metadata.entity)
-  });
-  for ( let p of packs ) {
+  for ( let p of game.packs ) {
+    if ( p.metadata.package !== "world" ) continue;
+    if ( !["Actor", "Item", "Scene"].includes(p.metadata.entity) ) continue;
     await migrateCompendium(p);
   }
 
@@ -72,23 +74,42 @@ export const migrateCompendium = async function(pack) {
   await pack.migrate();
   const content = await pack.getContent();
 
+  // Unlock the pack for editing
+  const wasLocked = pack.locked;
+  await pack.configure({locked: false});
+
   // Iterate over compendium entries - applying fine-tuned migration functions
   for ( let ent of content ) {
+    let updateData = {};
     try {
-      let updateData = null;
-      if (entity === "Item") updateData = migrateItemData(ent.data);
-      else if (entity === "Actor") updateData = migrateActorData(ent.data);
-      else if ( entity === "Scene" ) updateData = migrateSceneData(ent.data);
-      if (!isObjectEmpty(updateData)) {
-        expandObject(updateData);
-        updateData["_id"] = ent._id;
-        await pack.updateEntity(updateData);
-        console.log(`Migrated ${entity} entity ${ent.name} in Compendium ${pack.collection}`);
+      switch (entity) {
+        case "Actor":
+          updateData = migrateActorData(ent.data);
+          break;
+        case "Item":
+          updateData = migrateItemData(ent.data);
+          break;
+        case "Scene":
+          updateData = migrateSceneData(ent.data);
+          break;
       }
-    } catch(err) {
+      if ( isObjectEmpty(updateData) ) continue;
+
+      // Save the entry, if data was changed
+      updateData["_id"] = ent._id;
+      await pack.updateEntity(updateData);
+      console.log(`Migrated ${entity} entity ${ent.name} in Compendium ${pack.collection}`);
+    }
+
+    // Handle migration failures
+    catch(err) {
+      err.message = `Failed dnd5e system migration for entity ${ent.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
+
+  // Apply the original locked status for the pack
+  pack.configure({locked: wasLocked});
   console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
 };
 
