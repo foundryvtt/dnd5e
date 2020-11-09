@@ -438,15 +438,14 @@ DND5E.skills = {
 /* -------------------------------------------- */
 
 DND5E.spellPreparationModes = {
+  "prepared": "DND5E.SpellPrepPrepared",
+  "pact": "DND5E.PactMagic",
   "always": "DND5E.SpellPrepAlways",
   "atwill": "DND5E.SpellPrepAtWill",
-  "innate": "DND5E.SpellPrepInnate",
-  "pact": "DND5E.PactMagic",
-  "prepared": "DND5E.SpellPrepPrepared"
+  "innate": "DND5E.SpellPrepInnate"
 };
 
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
-
 
 DND5E.spellProgression = {
   "none": "DND5E.SpellNone",

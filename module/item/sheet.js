@@ -41,8 +41,8 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    const data = super.getData();
+  async getData(options) {
+    const data = super.getData(options);
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
 
@@ -116,6 +116,8 @@ export default class ItemSheet5e extends ItemSheet {
     // Charges
     else if ( consume.type === "charges" ) {
       return actor.items.reduce((obj, i) => {
+
+        // Limited-use items
         const uses = i.data.data.uses || {};
         if ( uses.per && uses.max ) {
           const label = uses.per === "charges" ?
@@ -123,6 +125,10 @@ export default class ItemSheet5e extends ItemSheet {
             ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
           obj[i.id] = i.name + label;
         }
+
+        // Recharging items
+        const recharge = i.data.data.recharge || {};
+        if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("DND5E.Recharge")})`;
         return obj;
       }, {})
     }
@@ -220,7 +226,6 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   setPosition(position={}) {
-    debugger;
     if ( !(this._minimized  || position.height) ) {
       position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
     }
@@ -317,5 +322,13 @@ export default class ItemSheet5e extends ItemSheet {
       minimum: skills.number,
       maximum: skills.number
     }).render(true)
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onSubmit(...args) {
+    if ( this._tabs[0].active === "details" ) this.position.height = "auto";
+    await super._onSubmit(...args);
   }
 }

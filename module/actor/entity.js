@@ -204,39 +204,27 @@ export default class Actor5e extends Actor {
     for (let u of updated instanceof Array ? updated : [updated]) {
       const item = this.items.get(u._id);
       if (!item || (item.data.type !== "class")) continue;
-      const classData = duplicate(item.data);
-      let changed = false;
+      const updateData = expandObject(u);
+      const config = {
+        className: updateData.name || item.data.name,
+        subclassName: updateData.data.subclass || item.data.data.subclass,
+        level: getProperty(updateData, "data.levels"),
+        priorLevel: item ? item.data.data.levels : 0
+      }
 
       // Get and create features for an increased class level
-      const newLevels = getProperty(u, "data.levels");
-      if (newLevels && (newLevels > item.data.data.levels)) {
-        classData.data.levels = newLevels;
-        changed = true;
-      }
-
-      // Get features for a newly changed subclass
-      const newSubclass = getProperty(u, "data.subclass");
-      if (newSubclass && (newSubclass !== item.data.data.subclass)) {
-        classData.data.subclass = newSubclass;
-        changed = true;
-      }
+      let changed = false;
+      if ( config.level && (config.level > config.priorLevel)) changed = true;
+      if ( config.subclassName !== item.data.data.subclass ) changed = true;
 
       // Get features to create
       if ( changed ) {
-        const features = await Actor5e.getClassFeatures({
-          className: classData.name,
-          subclassName: classData.data.subclass,
-          level: classData.data.levels,
-          priorLevel: item ? item.data.data.levels : 0
-        });
-        if ( features.length ) toCreate.push(...features);
+        const existing = new Set(this.items.map(i => i.name));
+        const features = await Actor5e.getClassFeatures(config);
+        for ( let f of features ) {
+          if ( !existing.has(f.name) ) toCreate.push(f);
+        }
       }
-    }
-
-    // De-dupe created items with ones that already exist (by name)
-    if ( toCreate.length ) {
-      const existing = new Set(this.items.map(i => i.name));
-      toCreate = toCreate.filter(c => !existing.has(c.name));
     }
     return toCreate
   }

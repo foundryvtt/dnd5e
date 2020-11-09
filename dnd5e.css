@@ -1146,14 +1146,15 @@
 .dnd5e.sheet.item .details .form-group.input-select-select select {
   flex: 1.5;
 }
+.dnd5e.sheet.item .details .form-group.uses-per .form-fields {
+  flex-wrap: nowrap;
+}
 .dnd5e.sheet.item .details .form-group.uses-per input {
-  flex: 1;
+  flex: 0 0 32px;
 }
 .dnd5e.sheet.item .details .form-group.uses-per span {
   flex: 0 0 16px;
-}
-.dnd5e.sheet.item .details .form-group.uses-per select {
-  flex: 3;
+  margin: 0 4px 0 0;
 }
 .dnd5e.sheet.item .details span.sep {
   flex: 0 0 8px;

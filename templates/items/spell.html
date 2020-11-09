@@ -113,12 +113,7 @@
                         {{ localize "DND5E.SpellPrepared" }} <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>
                     </label>
                     <select name="data.preparation.mode">
-                        {{#select data.preparation.mode}}
-                        <option value=""></option>
-                        {{#each config.spellPreparationModes as |name key|}}
-                        <option value="{{key}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{ selectOptions config.spellPreparationModes selected=data.preparation.mode }}
                     </select>
                 </div>
             </div>

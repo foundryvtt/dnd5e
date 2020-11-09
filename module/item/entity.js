@@ -161,6 +161,7 @@ export default class Item5e extends Item {
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
+      data.preparation.mode ||= "prepared";
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
       labels.components = Object.entries(data.components).reduce((arr, c) => {
@@ -338,7 +339,6 @@ export default class Item5e extends Item {
     if ( !consume.type ) return true;
     const actor = this.actor;
     const typeLabel = CONFIG.DND5E.abilityConsumptionTypes[consume.type];
-    const amount = parseInt(consume.amount || 1);
 
     // Only handle certain types for certain actions
     if ( ((consume.type === "ammo") && !isAttack ) || ((consume.type !== "ammo") && !isCard) ) return true;
@@ -351,6 +351,7 @@ export default class Item5e extends Item {
 
     // Identify the consumed resource and it's quantity
     let consumed = null;
+    let amount = parseInt(consume.amount || 1);
     let quantity = 0;
     switch ( consume.type ) {
       case "attribute":
@@ -364,7 +365,13 @@ export default class Item5e extends Item {
         break;
       case "charges":
         consumed = actor.items.get(consume.target);
-        quantity = consumed ? consumed.data.data.uses.value : 0;
+        if ( !consumed ) break;
+        const uses = consumed.data.data.uses;
+        if ( uses.per && uses.max ) quantity = uses.value;
+        else if ( consumed.data.data.recharge?.value ) {
+          quantity = consumed.data.data.recharge.charged ? 1 : 0;
+          amount = 1;
+        }
         break;
     }
 
@@ -389,7 +396,11 @@ export default class Item5e extends Item {
         await consumed.update({"data.quantity": remaining});
         break;
       case "charges":
-        await consumed.update({"data.uses.value": remaining});
+        const uses = consumed.data.data.uses || {};
+        const recharge = consumed.data.data.recharge || {};
+        if ( uses.per && uses.max ) await consumed.update({"data.uses.value": remaining});
+        else if ( recharge.value ) await consumed.update({"data.recharge.charged": false});
+        break;
     }
     return true;
   }
@@ -407,7 +418,7 @@ export default class Item5e extends Item {
     // Configure whether to consume a limited use or to place a template
     const charge = this.data.data.recharge;
     const uses = this.data.data.uses;
-    let usesCharges = !!uses.per && (uses.max > 0);
+    let usesCharges = !!uses.per && !!uses.max;
     let placeTemplate = false;
     let consume = charge.value || usesCharges;
 
