@@ -161,7 +161,7 @@ export default class Item5e extends Item {
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
-      data.preparation.mode ||= "prepared";
+      data.preparation.mode = data.preparation.mode || "prepared";
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
       labels.components = Object.entries(data.components).reduce((arr, c) => {

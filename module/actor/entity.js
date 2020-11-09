@@ -169,6 +169,7 @@ export default class Actor5e extends Actor {
       l = parseInt(l);
       if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
     }
+
     // Load item data for all identified features
     const features = await Promise.all(ids.map(id => fromUuid(id)));
 
