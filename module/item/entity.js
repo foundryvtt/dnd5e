@@ -621,12 +621,12 @@ export default class Item5e extends Item {
         const q = ammo.data.data.quantity;
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
+          this._ammo = ammo;
           let ammoBonus = ammo.data.data.attackBonus;
           if ( ammoBonus ) {
             parts.push("@ammo");
             rollData["ammo"] = ammoBonus;
             title += ` [${ammo.name}]`;
-            this._ammo = ammo;
           }
         }
       }

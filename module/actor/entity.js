@@ -224,9 +224,9 @@ export default class Actor5e extends Actor {
       // Get features to create
       if ( changed ) {
         const features = await Actor5e.getClassFeatures({
-          className: classData.data.name,
-          subclassName: classData.data.data.subclass,
-          level: classData.data.data.levels,
+          className: classData.name,
+          subclassName: classData.data.subclass,
+          level: classData.data.levels,
           priorLevel: item ? item.data.data.levels : 0
         });
         if ( features.length ) toCreate.push(...features);
