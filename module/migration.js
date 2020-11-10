@@ -70,13 +70,13 @@ export const migrateCompendium = async function(pack) {
   const entity = pack.metadata.entity;
   if ( !["Actor", "Item", "Scene"].includes(entity) ) return;
 
-  // Begin by requesting server-side data model migration and get the migrated content
-  await pack.migrate();
-  const content = await pack.getContent();
-
   // Unlock the pack for editing
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
+
+  // Begin by requesting server-side data model migration and get the migrated content
+  await pack.migrate();
+  const content = await pack.getContent();
 
   // Iterate over compendium entries - applying fine-tuned migration functions
   for ( let ent of content ) {
@@ -247,7 +247,7 @@ function _migrateActorBonuses(actor, updateData) {
  */
 function _migrateActorMovement(actor, updateData) {
   if ( actor.data.attributes?.movement?.walk !== undefined ) return;
-  const s = actor.data.attributes.speed.value.split(" ");
+  const s = (actor.data.attributes?.speed?.value || "").split(" ");
   if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
 }
 
