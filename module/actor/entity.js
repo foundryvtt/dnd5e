@@ -550,7 +550,7 @@ export default class Actor5e extends Actor {
   async createOwnedItem(itemData, options) {
 
     // Assume NPCs are always proficient with weapons and always have spells prepared
-    if ( !this.isPC ) {
+    if ( !this.hasPlayerOwner ) {
       let t = itemData.type;
       let initial = {};
       if ( t === "weapon" ) initial["data.proficient"] = true;
