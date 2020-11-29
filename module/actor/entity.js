@@ -996,7 +996,7 @@ export default class Actor5e extends Actor {
     // Adjust actor data
     await cls.update({"data.hitDiceUsed": cls.data.data.hitDiceUsed + 1});
     const hp = this.data.data.attributes.hp;
-    const dhp = Math.min(hp.max - hp.value, roll.total);
+    const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
     await this.update({"data.attributes.hp.value": hp.value + dhp});
     return roll;
   }
