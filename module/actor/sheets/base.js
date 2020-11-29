@@ -121,7 +121,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _getMovementSpeed(actorData) {
-    const movement = actorData.data.attributes.movement;
+    const movement = actorData.data.attributes.movement || {};
     const speeds = [
       [movement.burrow, `${game.i18n.localize("DND5E.MovementBurrow")} ${movement.burrow}`],
       [movement.climb, `${game.i18n.localize("DND5E.MovementClimb")} ${movement.climb}`],

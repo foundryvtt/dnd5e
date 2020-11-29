@@ -249,6 +249,7 @@
         }
       }
     },
+    "htmlFields": ["details.biography.value", "details.biography.public"],
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
@@ -475,6 +476,7 @@
         }
       }
     },
+    "htmlFields": ["description.value", "description.chat", "description.unidentified"],
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
