@@ -208,7 +208,7 @@ export default class Actor5e extends Actor {
       const updateData = expandObject(u);
       const config = {
         className: updateData.name || item.data.name,
-        subclassName: updateData.data.subclass || item.data.data.subclass,
+        subclassName: getProperty(updateData, "data.subclass") || item.data.data.subclass,
         level: getProperty(updateData, "data.levels"),
         priorLevel: item ? item.data.data.levels : 0
       }
@@ -357,16 +357,8 @@ export default class Actor5e extends Actor {
     const data = actorData.data;
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
 
-    // Apply spellcasting DC to any spell items which use it
-    for ( let i of this.items ) {
-      const save = i.data.data.save;
-      if ( save?.ability ) {
-        if ( save.scaling === "spell" ) save.dc = data.attributes.spelldc;
-        else if ( save.scaling !== "flat" ) save.dc = data.abilities[save.scaling]?.dc ?? 10;
-        const ability = CONFIG.DND5E.abilities[save.ability];
-        i.labels.save = game.i18n.format("DND5E.SaveDC", {dc: save.dc || "", ability});
-      }
-    }
+    // Compute ability save DCs that depend on the calling actor
+    this.items.forEach(i => i.getSaveDC());
   }
 
   /* -------------------------------------------- */
@@ -601,7 +593,16 @@ export default class Actor5e extends Actor {
       "data.attributes.hp.temp": tmp - dt,
       "data.attributes.hp.value": dh
     };
-    return this.update(updates);
+
+    // Delegate damage application to a hook
+    // TODO replace this in the future with a better modifyTokenAttribute function in the core
+    const allowed = Hooks.call("modifyTokenAttribute", {
+      attribute: "attributes.hp",
+      value: amount,
+      isDelta: false,
+      isBar: true
+    }, updates);
+    return allowed !== false ? this.update(updates) : this;
   }
 
   /* -------------------------------------------- */

@@ -529,6 +529,8 @@ export default class ActorSheet5e extends ActorSheet {
           icon: '<i class="fas fa-paw"></i>',
           label: game.i18n.localize('DND5E.PolymorphWildShape'),
           callback: html => this.actor.transformInto(sourceActor, {
+            keepBio: true,
+            keepClass: true,
             keepMental: true,
             mergeSaves: true,
             mergeSkills: true,
