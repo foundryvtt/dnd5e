@@ -301,7 +301,8 @@ export default class Item5e extends Item {
     }
 
     // For items which consume a resource, handle that here
-    const allowed = await this._handleResourceConsumption({isCard: true, isAttack: false});
+    // Spells are "special" and manage their consumption directly from their parent caller
+    const allowed = this.data.type === "spell" ? true : await this._handleResourceConsumption({isCard: true, isAttack: false});
     if ( allowed === false ) return;
 
     // Render the chat card template
