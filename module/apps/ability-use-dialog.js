@@ -34,14 +34,18 @@ export default class AbilityUseDialog extends Dialog {
     const quantity = itemData.quantity || 0;
     const recharge = itemData.recharge || {};
     const recharges = !!recharge.value;
-
+    const consumeResource = !!itemData.consume.target
+    const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0; 
+    
+    
     // Prepare dialog form data
     const data = {
       item: item.data,
       title: game.i18n.format("DND5E.AbilityUseHint", item.data),
       note: this._getAbilityUseNote(item.data, uses, recharge),
       hasLimitedUses: uses.max || recharges,
-      canUse: recharges ? recharge.charged : (quantity > 0 && !uses.value) || uses.value > 0,
+      hasResourceConsumption: consumeResource,
+      canUse: recharges ? recharge.charged : sufficientUses,
       hasPlaceableTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
       errors: []
     };
