@@ -623,6 +623,7 @@ export default class Actor5e extends Actor {
     let consumeSlot = `spell${lvl}`;
     let consumeUse = false;
     let placeTemplate = false;
+    let consumeResource = false;
 
     // Configure spell slot consumption and measured template placement from the form
     if ( configureDialog && (usesSlots || item.hasAreaTarget || limitedUses) ) {
@@ -633,6 +634,7 @@ export default class Actor5e extends Actor {
       consumeSlot = Boolean(usage.get("consumeSlot"));
       consumeUse = Boolean(usage.get("consumeUse"));
       placeTemplate = Boolean(usage.get("placeTemplate"));
+      consumeResource = Boolean(usage.get("consumeResource"))
 
       // Determine the cast spell level
       const isPact = usage.get('level') === 'pact';
@@ -663,7 +665,11 @@ export default class Actor5e extends Actor {
       if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
       await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
     }
-
+    
+    // Handle resource consumption
+    // tr@todo does this need to be propogated anywhere?
+    const consumeSuccess = consumeResource ? await item._handleResourceConsumption({ isCard: true, isAttack: false }) : true;
+    
     // Initiate ability template placement workflow if selected
     if ( placeTemplate && item.hasAreaTarget ) {
       const template = AbilityTemplate.fromItem(item);
