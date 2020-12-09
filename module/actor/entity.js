@@ -1,8 +1,6 @@
 import { d20Roll, damageRoll } from "../dice.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
-import AbilityUseDialog from "../apps/ability-use-dialog.js";
-import AbilityTemplate from "../pixi/ability-template.js";
 import {DND5E} from '../config.js';
 
 /**
@@ -539,10 +537,10 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /** @override */
-  async createOwnedItem(itemData, options) {
+  async createEmbeddedEntity(embeddedName, itemData, options={}) {
 
     // Assume NPCs are always proficient with weapons and always have spells prepared
-    if ( !this.hasPlayerOwner ) {
+    if ( (embeddedName === "OwnedItem") && !this.hasPlayerOwner ) {
       let t = itemData.type;
       let initial = {};
       if ( t === "weapon" ) initial["data.proficient"] = true;
@@ -550,9 +548,10 @@ export default class Actor5e extends Actor {
       if ( t === "spell" ) initial["data.prepared"] = true;
       mergeObject(itemData, initial);
     }
-    return super.createOwnedItem(itemData, options);
-  }
 
+    // Standard embedded entity creation
+    return super.createEmbeddedEntity(embeddedName, itemData, options);
+  }
 
   /* -------------------------------------------- */
   /*  Gameplay Mechanics                          */
@@ -603,82 +602,6 @@ export default class Actor5e extends Actor {
       isBar: true
     }, updates);
     return allowed !== false ? this.update(updates) : this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Cast a Spell, consuming a spell slot of a certain level
-   * @param {Item5e} item   The spell being cast by the actor
-   * @param {Event} event   The originating user interaction which triggered the cast
-   */
-  async useSpell(item, {configureDialog=true}={}) {
-    if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
-    const itemData = item.data.data;
-
-    // Configure spellcasting data
-    let lvl = itemData.level;
-    const usesSlots = (lvl > 0) && CONFIG.DND5E.spellUpcastModes.includes(itemData.preparation.mode);
-    const limitedUses = !!itemData.uses.per;
-    let consumeSlot = `spell${lvl}`;
-    let consumeUse = false;
-    let placeTemplate = false;
-    let consumeResource = false;
-
-    // Configure spell slot consumption and measured template placement from the form
-    if ( configureDialog && (usesSlots || item.hasAreaTarget || limitedUses) ) {
-      const usage = await AbilityUseDialog.create(item);
-      if ( usage === null ) return;
-
-      // Determine consumption preferences
-      consumeSlot = Boolean(usage.get("consumeSlot"));
-      consumeUse = Boolean(usage.get("consumeUse"));
-      placeTemplate = Boolean(usage.get("placeTemplate"));
-      consumeResource = Boolean(usage.get("consumeResource"))
-
-      // Determine the cast spell level
-      const isPact = usage.get('level') === 'pact';
-      const lvl = isPact ? this.data.data.spells.pact.level : parseInt(usage.get("level"));
-      if ( lvl !== item.data.data.level ) {
-        const upcastData = mergeObject(item.data, {"data.level": lvl}, {inplace: false});
-        item = item.constructor.createOwned(upcastData, this);
-      }
-
-      // Denote the spell slot being consumed
-      if ( consumeSlot ) consumeSlot = isPact ? "pact" : `spell${lvl}`;
-    }
-
-    // Update Actor data
-    if ( usesSlots && consumeSlot && (lvl > 0) ) {
-      const slots = parseInt(this.data.data.spells[consumeSlot]?.value);
-      if ( slots === 0 || Number.isNaN(slots) ) {
-        return ui.notifications.error(game.i18n.localize("DND5E.SpellCastNoSlots"));
-      }
-      await this.update({
-        [`data.spells.${consumeSlot}.value`]: Math.max(slots - 1, 0)
-      });
-    }
-
-    // Update Item data
-    if ( limitedUses && consumeUse ) {
-      const uses = parseInt(itemData.uses.value || 0);
-      if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
-      await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
-    }
-    
-    // Handle resource consumption
-    // tr@todo does this need to be propogated anywhere?
-    const consumeSuccess = consumeResource ? await item._handleResourceConsumption({ isCard: true, isAttack: false }) : true;
-    
-    // Initiate ability template placement workflow if selected
-    if ( placeTemplate && item.hasAreaTarget ) {
-      const template = AbilityTemplate.fromItem(item);
-      if ( template ) template.drawPreview();
-      if ( this.sheet.rendered ) this.sheet.minimize();
-    }
-
-    // Invoke the Item roll
-    return item.roll();
   }
 
   /* -------------------------------------------- */
@@ -1467,5 +1390,19 @@ export default class Actor5e extends Actor {
   getSpellDC(ability) {
     console.warn(`The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc`);
     return this.data.data.abilities[ability]?.dc;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Cast a Spell, consuming a spell slot of a certain level
+   * @param {Item5e} item   The spell being cast by the actor
+   * @param {Event} event   The originating user interaction which triggered the cast
+   * @deprecated since dnd5e 1.2.0
+   */
+  async useSpell(item, {configureDialog=true}={}) {
+    console.warn(`The Actor5e#useSpell method has been deprecated in favor of Item5e#roll`);
+    if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
+    return item.roll();
   }
 }

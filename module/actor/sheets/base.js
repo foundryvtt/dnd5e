@@ -621,14 +621,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.getOwnedItem(itemId);
-
-    // Roll spells through the actor
-    if ( item.data.type === "spell" ) {
-      return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
-    }
-
-    // Otherwise roll the Item directly
-    else return item.roll();
+    return item.roll();
   }
 
   /* -------------------------------------------- */
@@ -689,7 +682,7 @@ export default class ActorSheet5e extends ActorSheet {
       data: duplicate(header.dataset)
     };
     delete itemData.data["type"];
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedEntity("OwnedItem", itemData);
   }
 
   /* -------------------------------------------- */

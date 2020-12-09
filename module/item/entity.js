@@ -270,9 +270,251 @@ export default class Item5e extends Item {
    * @param {string} [rollMode]             The roll display mode with which to display (or not) the card
    * @param {boolean} [createMessage]       Whether to automatically create a chat message (if true) or simply return
    *                                        the prepared chat message data (if false).
-   * @return {Promise}
+   * @return {Promise<ChatMessage|object|void>}
    */
-  async roll({configureDialog=true, rollMode=null, createMessage=true}={}) {
+  async roll({configureDialog=true, rollMode, createMessage=true}={}) {
+    let item = this;
+    const actor = this.actor;
+
+    // Reference aspects of the item data necessary for usage
+    const id = this.data.data;                // Item data
+    const hasArea = this.hasAreaTarget;       // Is the ability usage an AoE?
+    const resource = id.consume || {};        // Resource consumption
+    const recharge = id.recharge || {};       // Recharge mechanic
+    const uses = id?.uses ?? {};              // Limited uses
+    const isSpell = this.type === "spell";    // Does the item require a spell slot?
+    const requireSpellSlot = isSpell && (id.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(id.preparation.mode);
+
+    // Define follow-up actions resulting from the item usage
+    let createMeasuredTemplate = hasArea;       // Trigger a template creation
+    let consumeRecharge = !!recharge.value;     // Consume recharge
+    let consumeResource = !!resource.target && (resource.type !== "ammo") // Consume a linked (non-ammo) resource
+    let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
+    let consumeUsage = !!uses.per;              // Consume limited uses
+    let consumeQuantity = uses.autoDestroy;     // Consume quantity of the item in lieu of uses
+
+    // Display a configuration dialog to customize the usage
+    const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
+    if (configureDialog && needsConfiguration) {
+      const configuration = await AbilityUseDialog.create(this);
+      if (!configuration) return;
+
+      // Determine consumption preferences
+      createMeasuredTemplate = Boolean(configuration.placeTemplate);
+      consumeUsage = Boolean(configuration.consumeUse);
+      consumeRecharge = Boolean(configuration.consumeRecharge);
+      consumeResource = Boolean(configuration.consumeResource);
+      consumeSpellSlot = Boolean(configuration.consumeSlot);
+
+      // Handle spell upcasting
+      if ( requireSpellSlot ) {
+        const slotLevel = configuration.level;
+        const spellLevel = slotLevel === "pact" ? actor.data.data.spells.pact.level : parseInt(slotLevel);
+        if (spellLevel !== id.level) {
+          const upcastData = mergeObject(this.data, {"data.level": spellLevel}, {inplace: false});
+          item = this.constructor.createOwned(upcastData, actor);  // Replace the item with an upcast version
+        }
+        if ( consumeSpellSlot ) consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
+      }
+    }
+
+    // Determine whether the item can be used by testing for resource consumption
+    const usage = item._getUsageUpdates({consumeRecharge, consumeResource, consumeSpellSlot, consumeUsage, consumeQuantity});
+    if ( !usage ) return;
+    const {actorUpdates, itemUpdates, resourceUpdates} = usage;
+
+    // Commit pending data updates
+    if ( !isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
+    if ( consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
+    if ( !isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
+    if ( !isObjectEmpty(resourceUpdates) ) {
+      const resource = actor.items.get(id.consume?.target);
+      if ( resource ) await resource.update(resourceUpdates);
+    }
+
+    // Initiate measured template creation
+    if ( createMeasuredTemplate ) {
+      const template = AbilityTemplate.fromItem(item);
+      if ( template ) template.drawPreview();
+    }
+
+    // Create or return the Chat Message data
+    return item.displayCard({rollMode, createMessage});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Verify that the consumed resources used by an Item are available.
+   * Otherwise display an error and return false.
+   * @param {boolean} consumeQuantity     Consume quantity of the item if other consumption modes are not available?
+   * @param {boolean} consumeRecharge     Whether the item consumes the recharge mechanic
+   * @param {boolean} consumeResource     Whether the item consumes a limited resource
+   * @param {string|boolean} consumeSpellSlot   A level of spell slot consumed, or false
+   * @param {boolean} consumeUsage        Whether the item consumes a limited usage
+   * @returns {object|boolean}            A set of data changes to apply when the item is used, or false
+   * @private
+   */
+  _getUsageUpdates({consumeQuantity=false, consumeRecharge=false, consumeResource=false, consumeSpellSlot=false, consumeUsage=false}) {
+
+    // Reference item data
+    const id = this.data.data;
+    const actorUpdates = {};
+    const itemUpdates = {};
+    const resourceUpdates = {};
+
+    // Consume Recharge
+    if ( consumeRecharge ) {
+      const recharge = id.recharge || {};
+      if ( recharge.charged === false ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+        return false;
+      }
+      itemUpdates["data.recharge.charged"] = false;
+    }
+
+    // Consume Limited Resource
+    if ( consumeResource ) {
+      const canConsume = this._handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates);
+      if ( canConsume === false ) return false;
+    }
+
+    // Consume Spell Slots
+    if ( consumeSpellSlot ) {
+      const level = this.actor?.data.data.spells[consumeSpellSlot];
+      const spells = Number(level?.value ?? 0);
+      if ( spells === 0 ) {
+        const label = game.i18n.localize(consumeSpellSlot === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${id.level}`);
+        ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
+        return false;
+      }
+      actorUpdates[`data.spells.${consumeSpellSlot}.value`] = Math.max(spells - 1, 0);
+    }
+
+    // Consume Limited Usage
+    if ( consumeUsage ) {
+      const uses = id.uses || {};
+      const available = Number(uses.value ?? 0);
+      let used = false;
+
+      // Reduce usages
+      const remaining = Math.max(available - 1, 0);
+      if ( available >= 1 ) {
+        used = true;
+        itemUpdates["data.uses.value"] = remaining;
+      }
+
+      // Otherwise reduce quantity
+      if ( consumeQuantity && !used ) {
+        const q = Number(id.quantity ?? 1);
+        if ( q >= 1 ) {
+          used = true;
+          itemUpdates["data.quantity"] = Math.max(q - 1, 0);
+          itemUpdates["data.uses.value"] = uses.max ?? 1;
+        }
+      }
+
+      // If the item was not used, return a warning
+      if ( !used ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
+        return false;
+      }
+    }
+
+    // Return the configured usage
+    return {itemUpdates, actorUpdates, resourceUpdates};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle update actions required when consuming an external resource
+   * @param {object} itemUpdates        An object of data updates applied to this item
+   * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
+   * @param {object} resourceUpdates    An object of data updates applied to a different resource item (Item)
+   * @return {boolean|void}             Return false to block further progress, or return nothing to continue
+   * @private
+   */
+  _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
+    const actor = this.actor;
+    const itemData = this.data.data;
+    const consume = itemData.consume || {};
+    if ( !consume.type ) return;
+
+    // No consumed target
+    const typeLabel = CONFIG.DND5E.abilityConsumptionTypes[consume.type];
+    if ( !consume.target ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
+      return false;
+    }
+
+    // Identify the consumed resource and its current quantity
+    let resource = null;
+    let amount = Number(consume.amount ?? 1);
+    let quantity = 0;
+    switch ( consume.type ) {
+      case "attribute":
+        resource = getProperty(actor.data.data, consume.target);
+        quantity = resource || 0;
+        break;
+      case "ammo":
+      case "material":
+        resource = actor.items.get(consume.target);
+        quantity = resource ? resource.data.data.quantity : 0;
+        break;
+      case "charges":
+        resource = actor.items.get(consume.target);
+        if ( !resource ) break;
+        const uses = resource.data.data.uses;
+        if ( uses.per && uses.max ) quantity = uses.value;
+        else if ( resource.data.data.recharge?.value ) {
+          quantity = resource.data.data.recharge.charged ? 1 : 0;
+          amount = 1;
+        }
+        break;
+    }
+
+    // Verify that a consumed resource is available
+    if ( !resource ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
+      return false;
+    }
+
+    // Verify that the required quantity is available
+    let remaining = quantity - amount;
+    if ( remaining < 0 ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
+      return false;
+    }
+
+    // Define updates to provided data objects
+    switch ( consume.type ) {
+      case "attribute":
+        actorUpdates[`data.${consume.target}`] = remaining;
+        break;
+      case "ammo":
+      case "material":
+        resourceUpdates["data.quantity"] = remaining;
+        break;
+      case "charges":
+        const uses = resource.data.data.uses || {};
+        const recharge = resource.data.data.recharge || {};
+        if ( uses.per && uses.max ) resourceUpdates["data.uses.value"] = remaining;
+        else if ( recharge.value ) resourceUpdates["data.recharge.charged"] = false;
+        break;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the chat card for an Item as a Chat Message
+   * @param {object} options          Options which configure the display of the item chat card
+   * @param {string} rollMode         The message visibility mode to apply to the created card
+   * @param {boolean} createMessage   Whether to automatically create a ChatMessage entity (if true), or only return
+   *                                  the prepared message data (if false)
+   */
+  async displayCard({rollMode, createMessage=true}={}) {
 
     // Basic template rendering data
     const token = this.actor.token;
@@ -291,187 +533,31 @@ export default class Item5e extends Item {
       hasAreaTarget: this.hasAreaTarget
     };
 
-    // For feature items, optionally show an ability usage dialog
-    if (this.data.type === "feat") {
-      let configured = await this._rollFeat(configureDialog);
-      if ( configured === false ) return;
-    } else if ( this.data.type === "consumable" ) {
-      let configured = await this._rollConsumable(configureDialog);
-      if ( configured === false ) return;
-    }
-
-    // For items which consume a resource, handle that here
-    // Spells are "special" and manage their consumption directly from their parent caller
-    const allowed = this.data.type === "spell" ? true : await this._handleResourceConsumption({isCard: true, isAttack: false});
-    if ( allowed === false ) return;
-
     // Render the chat card template
     const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
     const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
 
-    // Basic chat message data
+    // Create the ChatMessage data object
     const chatData = {
       user: game.user._id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       flavor: this.data.data.chatFlavor || this.name,
-      speaker: {
-        actor: this.actor._id,
-        token: this.actor.token,
-        alias: this.actor.name
-      },
+      speaker: ChatMessage.getSpeaker({actor: this.actor, token}),
       flags: {"core.canPopout": true}
     };
 
-    // If the consumable was destroyed in the process - embed the item data in the surviving message
+    // If the Item was destroyed in the process of displaying its card - embed the item data in the chat message
     if ( (this.data.type === "consumable") && !this.actor.items.has(this.id) ) {
       chatData.flags["dnd5e.itemData"] = this.data;
     }
 
-    // Create the Chat Message
+    // Apply the roll mode to adjust message visibility
     ChatMessage.applyRollMode(chatData, rollMode || game.settings.get("core", "rollMode"));
-    if ( createMessage ) return ChatMessage.create(chatData, {rollMode});
-    else return chatData;
-  }
 
-  /* -------------------------------------------- */
-
-  /**
-   * For items which consume a resource, handle the consumption of that resource when the item is used.
-   * There are four types of ability consumptions which are handled:
-   * 1. Ammunition (on attack rolls)
-   * 2. Attributes (on card usage)
-   * 3. Materials (on card usage)
-   * 4. Item Charges (on card usage)
-   *
-   * @param {boolean} isCard      Is the item card being played?
-   * @param {boolean} isAttack    Is an attack roll being made?
-   * @return {Promise<boolean>}   Can the item card or attack roll be allowed to proceed?
-   * @private
-   */
-  async _handleResourceConsumption({isCard=false, isAttack=false}={}) {
-    const itemData = this.data.data;
-    const consume = itemData.consume || {};
-    if ( !consume.type ) return true;
-    const actor = this.actor;
-    const typeLabel = CONFIG.DND5E.abilityConsumptionTypes[consume.type];
-
-    // Only handle certain types for certain actions
-    if ( ((consume.type === "ammo") && !isAttack ) || ((consume.type !== "ammo") && !isCard) ) return true;
-
-    // No consumed target set
-    if ( !consume.target ) {
-      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoResource", {name: this.name, type: typeLabel}));
-      return false;
-    }
-
-    // Identify the consumed resource and it's quantity
-    let consumed = null;
-    let amount = parseInt(consume.amount || 1);
-    let quantity = 0;
-    switch ( consume.type ) {
-      case "attribute":
-        consumed = getProperty(actor.data.data, consume.target);
-        quantity = consumed || 0;
-        break;
-      case "ammo":
-      case "material":
-        consumed = actor.items.get(consume.target);
-        quantity = consumed ? consumed.data.data.quantity : 0;
-        break;
-      case "charges":
-        consumed = actor.items.get(consume.target);
-        if ( !consumed ) break;
-        const uses = consumed.data.data.uses;
-        if ( uses.per && uses.max ) quantity = uses.value;
-        else if ( consumed.data.data.recharge?.value ) {
-          quantity = consumed.data.data.recharge.charged ? 1 : 0;
-          amount = 1;
-        }
-        break;
-    }
-
-    // Verify that the consumed resource is available
-    if ( [null, undefined].includes(consumed) ) {
-      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
-      return false;
-    }
-    let remaining = quantity - amount;
-    if ( remaining < 0) {
-      ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoQuantity", {name: this.name, type: typeLabel}));
-      return false;
-    }
-
-    // Update the consumed resource
-    switch ( consume.type ) {
-      case "attribute":
-        await this.actor.update({[`data.${consume.target}`]: remaining});
-        break;
-      case "ammo":
-      case "material":
-        await consumed.update({"data.quantity": remaining});
-        break;
-      case "charges":
-        const uses = consumed.data.data.uses || {};
-        const recharge = consumed.data.data.recharge || {};
-        if ( uses.per && uses.max ) await consumed.update({"data.uses.value": remaining});
-        else if ( recharge.value ) await consumed.update({"data.recharge.charged": false});
-        break;
-    }
-    return true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Additional rolling steps when rolling a feat-type item
-   * @private
-   * @return {boolean} whether the roll should be prevented
-   */
-  async _rollFeat(configureDialog) {
-    if ( this.data.type !== "feat" ) throw new Error("Wrong Item type");
-
-    // Configure whether to consume a limited use or to place a template
-    const charge = this.data.data.recharge;
-    const uses = this.data.data.uses;
-    let usesCharges = !!uses.per && !!uses.max;
-    let placeTemplate = false;
-    let consume = charge.value || usesCharges;
-
-    // Determine whether the feat uses charges
-    configureDialog = configureDialog && (consume || this.hasAreaTarget);
-    if ( configureDialog ) {
-      const usage = await AbilityUseDialog.create(this);
-      if ( usage === null ) return false;
-      consume = Boolean(usage.get("consumeUse"));
-      placeTemplate = Boolean(usage.get("placeTemplate"));
-    }
-
-    // Update Item data
-    const current = getProperty(this.data, "data.uses.value") || 0;
-    if ( consume && charge.value ) {
-      if ( !charge.charged ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
-      else await this.update({"data.recharge.charged": false});
-    }
-    else if ( consume && usesCharges ) {
-      if ( uses.value <= 0 ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        return false;
-      }
-      await this.update({"data.uses.value": Math.max(current - 1, 0)});
-    }
-
-    // Maybe initiate template placement workflow
-    if ( this.hasAreaTarget && placeTemplate ) {
-      const template = AbilityTemplate.fromItem(this);
-      if ( template ) template.drawPreview();
-      if ( this.owner && this.owner.sheet ) this.owner.sheet.minimize();
-    }
-    return true;
+    // Create the Chat Message or return its data
+    return createMessage ? ChatMessage.create(chatData) : chatData;
   }
 
   /* -------------------------------------------- */
@@ -642,9 +728,11 @@ export default class Item5e extends Item {
 
     // Ammunition Bonus
     delete this._ammo;
+    let ammo = null;
+    let ammoUpdate = null;
     const consume = itemData.consume;
     if ( consume?.type === "ammo" ) {
-      const ammo = this.actor.items.get(consume.target);
+      ammo = this.actor.items.get(consume.target);
       if(ammo?.data){
         const q = ammo.data.data.quantity;
         const consumeAmount = consume.amount ?? 0;
@@ -658,6 +746,11 @@ export default class Item5e extends Item {
           }
         }
       }
+
+      // Get pending ammunition update
+      const usage = this._getUsageUpdates({consumeResource: true});
+      if ( usage === false ) return null;
+      ammoUpdate = usage.resourceUpdates || {};
     }
 
     // Compose roll options
@@ -698,9 +791,8 @@ export default class Item5e extends Item {
     const roll = await d20Roll(rollConfig);
     if ( roll === false ) return null;
 
-    // Handle resource consumption if the attack roll was made
-    const allowed = await this._handleResourceConsumption({isCard: false, isAttack: true});
-    if ( allowed === false ) return null;
+    // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
+    if ( ammo && !isObjectEmpty(ammoUpdate) ) await ammo.update(ammoUpdate);
     return roll;
   }
 
@@ -877,74 +969,6 @@ export default class Item5e extends Item {
       messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id }}
     });
     return roll;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Use a consumable item, deducting from the quantity or charges of the item.
-   * @param {boolean} configureDialog   Whether to show a configuration dialog
-   * @return {boolean}                  Whether further execution should be prevented
-   * @private
-   */
-  async _rollConsumable(configureDialog) {
-    if ( this.data.type !== "consumable" ) throw new Error("Wrong Item type");
-    const itemData = this.data.data;
-
-    // Determine whether to deduct uses of the item
-    const uses = itemData.uses || {};
-    const autoDestroy = uses.autoDestroy;
-    let usesCharges = !!uses.per && (uses.max > 0);
-    const recharge = itemData.recharge || {};
-    const usesRecharge = !!recharge.value;
-
-    // Display a configuration dialog to confirm the usage
-    let placeTemplate = false;
-    let consume = uses.autoUse || true;
-    if ( configureDialog ) {
-      const usage = await AbilityUseDialog.create(this);
-      if ( usage === null ) return false;
-      consume = Boolean(usage.get("consumeUse"));
-      placeTemplate = Boolean(usage.get("placeTemplate"));
-    }
-
-    // Update Item data
-    if ( consume ) {
-      const current = uses.value || 0;
-      const remaining = usesCharges ? Math.max(current - 1, 0) : current;
-      if ( usesRecharge ) await this.update({"data.recharge.charged": false});
-      else {
-        const q = itemData.quantity;
-        // Case 1, reduce charges
-        if ( remaining ) {
-          await this.update({"data.uses.value": remaining});
-        }
-        // Case 2, reduce quantity
-        else if ( q > 1 ) {
-          await this.update({"data.quantity": q - 1, "data.uses.value": uses.max || 0});
-        }
-        // Case 3, destroy the item
-        else if ( (q <= 1) && autoDestroy ) {
-          await this.actor.deleteOwnedItem(this.id);
-        }
-        // Case 4, reduce item to 0 quantity and 0 charges
-        else if ( (q === 1) ) {
-          await this.update({"data.quantity": q - 1, "data.uses.value": 0});
-        }
-        // Case 5, item unusable, display warning and do nothing
-        else {
-          ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
-        }
-      }
-    }
-
-    // Maybe initiate template placement workflow
-    if ( this.hasAreaTarget && placeTemplate ) {
-      const template = AbilityTemplate.fromItem(this);
-      if ( template ) template.drawPreview();
-      if ( this.owner && this.owner.sheet ) this.owner.sheet.minimize();
-    }
-    return true;
   }
 
   /* -------------------------------------------- */

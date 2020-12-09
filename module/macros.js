@@ -55,6 +55,5 @@ export function rollItemMacro(itemName) {
   const item = items[0];
 
   // Trigger the item roll
-  if ( item.data.type === "spell" ) return actor.useSpell(item);
   return item.roll();
 }
