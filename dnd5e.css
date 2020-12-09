@@ -258,9 +258,12 @@
   background: transparent;
 }
 .dnd5e.sheet .editable .rollable:hover {
+  cursor: pointer;
+}
+.dnd5e.sheet .editable h4.rollable:hover,
+.dnd5e.sheet .editable .rollable:hover > h4 {
   color: #000;
   text-shadow: 0 0 10px red;
-  cursor: pointer;
 }
 .dnd5e.sheet span.sep {
   flex: none;
@@ -409,6 +412,28 @@
   margin: 0;
   padding: 0;
 }
+.dnd5e.sheet .items-list .item-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-align: left;
+  align-items: center;
+}
+.dnd5e.sheet .items-list .item-name h3,
+.dnd5e.sheet .items-list .item-name h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.dnd5e.sheet .items-list .item-controls {
+  flex: 0 0 60px;
+  justify-content: space-between;
+}
+.dnd5e.sheet .items-list .item-controls a {
+  font-size: 12px;
+  text-align: center;
+}
 .dnd5e.sheet .items-list .item {
   align-items: center;
   padding: 0 2px;
@@ -427,11 +452,6 @@
   border: none;
   margin-right: 5px;
 }
-.dnd5e.sheet .items-list .item .item-name h4 {
-  margin: 0;
-  white-space: nowrap;
-  overflow-x: hidden;
-}
 .dnd5e.sheet .items-list .items-header {
   height: 28px;
   margin: 2px 0;
@@ -445,28 +465,13 @@
   font-size: 12px;
   text-align: center;
 }
-.dnd5e.sheet .items-list .items-header .item-name {
+.dnd5e.sheet .items-list .items-header h3 {
   padding-left: 5px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
   font-weight: 700;
-  font-size: 16px;
-}
-.dnd5e.sheet .items-list .item-name {
-  flex: 2;
-  margin: 0;
-  overflow: hidden;
-  font-size: 13px;
   text-align: left;
-  align-items: center;
-}
-.dnd5e.sheet .items-list .item-controls {
-  flex: 0 0 60px;
-  justify-content: space-between;
-}
-.dnd5e.sheet .items-list .item-controls a {
-  font-size: 12px;
-  text-align: center;
+  font-size: 16px;
 }
 .dnd5e.sheet .effects .item .effect-source,
 .dnd5e.sheet .effects .item .effect-duration,
@@ -575,7 +580,21 @@
   height: 30px;
   line-height: 30px;
 }
-.dnd5e.sheet.actor .attributes input.temphp {
+.dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name {
+  position: relative;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .movement .configure-movement {
+  position: absolute;
+  display: none;
+  right: 0;
+  top: 1px;
+  font-size: 12px;
+  font-weight: normal;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .configure-movement {
+  display: block;
+}
+.dnd5e.sheet.actor .sheet-header .attributes input.temphp {
   width: 48%;
 }
 .dnd5e.sheet.actor h4.box-title {
@@ -987,9 +1006,8 @@
 }
 .dnd5e.sheet.actor .spell-slots,
 .dnd5e.sheet.actor .spell-comps {
-  flex: 0 0 75px;
-  padding-right: 5px;
-  text-align: right;
+  flex: none;
+  padding: 0 5px;
   font-size: 12px;
   color: #7a7971;
   border-right: 1px solid #c9c7b8;
@@ -1002,9 +1020,10 @@
   font-size: 13px;
   font-weight: normal;
 }
-.dnd5e.sheet.actor .spell-uses {
-  padding-right: 8px;
-  text-align: right !important;
+.dnd5e.sheet.actor .spellbook .spell-uses {
+  padding-right: 5px;
+  text-align: right;
+  color: #7a7971;
 }
 .dnd5e.sheet.actor .spell-school,
 .dnd5e.sheet.actor .spell-action,

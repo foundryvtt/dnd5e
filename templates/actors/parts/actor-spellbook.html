@@ -30,28 +30,28 @@
 <ol class="items-list inventory-list">
 {{#each spellbook as |section|}}
     <li class="items-header spellbook-header flexrow">
-        <h3 class="item-name flexrow">{{section.label}}</h3>
-
-        <div class="spell-slots">
-            {{#if section.usesSlots}}
-            <input type="text" name="data.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
-                   data-dtype="Number"/>
-            <span class="sep"> / </span>
-            <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
-                {{{section.slots}}}
-                {{#if ../editable}}
-                <a class="slot-max-override" title="{{localize 'DND5E.SpellProgOverride'}}">
-                    <i class="fas fa-edit"></i>
-                </a>
+        <div class="item-name flexrow">
+            <h3>{{section.label}}</h3>
+            <div class="spell-slots">
+                {{#if section.usesSlots}}
+                <input type="text" name="data.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
+                       data-dtype="Number"/>
+                <span class="sep"> / </span>
+                <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
+                    {{{section.slots}}}
+                    {{#if ../editable}}
+                    <a class="slot-max-override" title="{{localize 'DND5E.SpellProgOverride'}}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </span>
+                {{ else }}
+                <span>{{{section.uses}}}</span>
+                <span class="sep"> / </span>
+                <span class="spell-max">{{{section.slots}}}</span>
                 {{/if}}
-            </span>
-            {{ else }}
-            <span>{{{section.uses}}}</span>
-            <span class="sep"> / </span>
-            <span class="spell-max">{{{section.slots}}}</span>
-            {{/if}}
+            </div>
         </div>
-
         <div class="spell-school">{{localize "DND5E.SpellSchool"}}</div>
         <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
         <div class="spell-target">{{localize "DND5E.SpellTarget"}}</div>
@@ -74,12 +74,11 @@
                 {{#if item.data.uses.per }}
                 <div class="item-detail spell-uses">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
                 {{/if}}
-            </div>
-
-            <div class="spell-comps">
-                {{#each labels.components}}
-                <span class="spell-component {{this}}">{{this}}</span>
-                {{/each}}
+                <div class="spell-comps">
+                    {{#each labels.components}}
+                    <span class="spell-component {{this}}">{{this}}</span>
+                    {{/each}}
+                </div>
             </div>
             <div class="spell-school">{{labels.school}}</div>
             <div class="spell-action">{{labels.activation}}</div>

@@ -69,12 +69,29 @@
           line-height: 30px;
         }
       }
-    }
-  }
 
-  .attributes {
-    input.temphp {
-      width: 48%;
+      // Movement Configuration
+      .movement {
+        h4.attribute-name {
+          position: relative;
+        }
+        .configure-movement {
+          position: absolute;
+          display: none;
+          right: 0;
+          top: 1px;
+          font-size: 12px;
+          font-weight: normal;
+        }
+        &:hover .configure-movement {
+          display: block;
+        }
+      }
+
+      // Temporary HP
+      input.temphp {
+        width: 48%;
+      }
     }
   }
 
@@ -582,9 +599,8 @@
 
   .spell-slots,
   .spell-comps {
-    flex: 0 0 75px;
-    padding-right: 5px;
-    text-align: right;
+    flex: none;
+    padding: 0 5px;
     font-size: 12px;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
@@ -601,9 +617,10 @@
     }
   }
 
-  .spell-uses {
-    padding-right: 8px;
-    text-align: right !important;
+  .spellbook .spell-uses {
+    padding-right: 5px;
+    text-align: right;
+    color: @colorTan;
   }
 
   .spell-school, .spell-action, .spell-target {

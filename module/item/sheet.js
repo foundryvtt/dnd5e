@@ -313,7 +313,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Render the Trait Selector dialog
     new TraitSelector(this.item, {
-      name: a.dataset.edit,
+      name: a.dataset.target,
       title: label.innerText,
       choices: Object.entries(CONFIG.DND5E.skills).reduce((obj, e) => {
         if ( choices.includes(e[0] ) ) obj[e[0]] = e[1];
