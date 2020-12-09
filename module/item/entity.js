@@ -101,8 +101,8 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasSave() {
-    const save = this.data.data?.save;
-    return !!save?.scaling;
+    const save = this.data.data?.save || {};
+    return !!(save.ability && save.scaling);
   }
 
   /* -------------------------------------------- */
