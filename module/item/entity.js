@@ -233,6 +233,16 @@ export default class Item5e extends Item {
         labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
         labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
       }
+
+      // Limited Uses
+      if ( this.isOwned && !!data.uses?.max ) {
+        let max = data.uses.max;
+        if ( !Number.isNumeric(max) ) {
+          max = Roll.replaceFormulaData(max, this.actor.getRollData());
+          if ( Roll.MATH_PROXY.safeEval ) max = Roll.MATH_PROXY.safeEval(max);
+        }
+        data.uses.max = Number(max);
+      }
     }
   }
 

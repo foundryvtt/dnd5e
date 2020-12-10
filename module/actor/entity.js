@@ -539,18 +539,64 @@ export default class Actor5e extends Actor {
   /** @override */
   async createEmbeddedEntity(embeddedName, itemData, options={}) {
 
-    // Assume NPCs are always proficient with weapons and always have spells prepared
-    if ( (embeddedName === "OwnedItem") && !this.hasPlayerOwner ) {
-      let t = itemData.type;
-      let initial = {};
-      if ( t === "weapon" ) initial["data.proficient"] = true;
-      if ( ["weapon", "equipment"].includes(t) ) initial["data.equipped"] = true;
-      if ( t === "spell" ) initial["data.prepared"] = true;
-      mergeObject(itemData, initial);
-    }
+    // Pre-creation steps for owned items
+    if ( embeddedName === "OwnedItem" ) this._preCreateOwnedItem(itemData, options);
 
     // Standard embedded entity creation
     return super.createEmbeddedEntity(embeddedName, itemData, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A temporary shim function which will eventually (in core fvtt version 0.8.0+) be migrated to the new abstraction layer
+   * @param itemData
+   * @param options
+   * @private
+   */
+  _preCreateOwnedItem(itemData, options) {
+    if ( this.data.type === "vehicle" ) return;
+    const isNPC = this.data.type === 'npc';
+    let initial = {};
+    switch ( itemData.type ) {
+      case "weapon":
+        initial["data.equipped"] = isNPC;         // NPCs automatically equip weapons
+        let hasWeaponProf = isNPC;                // NPCs automatically have weapon proficiency
+        if ( !isNPC ) {
+          const weaponProf = {
+            "natural": true,
+            "simpleM": "sim",
+            "simpleR": "sim",
+            "martialM": "mar",
+            "martialR": "mar"
+          }[itemData.data?.weaponType];
+          const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
+          hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+        }
+        initial["data.proficient"] = hasWeaponProf;
+        break;
+      case "equipment":
+        initial["data.equipped"] = isNPC;         // NPCs automatically equip equipment
+        let hasEquipmentProf = isNPC;             // NPCs automatically have equipment proficiency
+        if ( !isNPC ) {
+          const armorProf = {
+            "natural": true,
+            "clothing": true,
+            "light": "lgt",
+            "medium": "med",
+            "heavy": "hvy",
+            "shield": "shl"
+          }[itemData.data?.armor?.type];
+          const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
+          hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
+        }
+        initial["data.proficient"] = hasEquipmentProf;
+        break;
+      case "spell":
+        initial["data.prepared"] = true;          // NPCs automatically prepare spells
+        break;
+    }
+    mergeObject(itemData, initial);
   }
 
   /* -------------------------------------------- */

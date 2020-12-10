@@ -21,8 +21,9 @@
             <div class="effect-source">{{effect.sourceName}}</div>
             <div class="effect-duration">{{effect.duration.label}}</div>
             <div class="item-controls effect-controls flexrow">
+                {{log effect}}
                 <a class="effect-control" data-action="toggle" title="{{localize 'DND5E.EffectToggle'}}">
-                    <i class="fas fa-circle-notch"></i>
+                    <i class="fas {{#if effect.data.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
                 </a>
                 <a class="effect-control" data-action="edit" title="{{localize 'DND5E.EffectEdit'}}">
                     <i class="fas fa-edit"></i>

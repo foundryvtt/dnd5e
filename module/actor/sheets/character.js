@@ -248,37 +248,21 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /** @override */
   async _onDropItemCreate(itemData) {
-    let addLevel = false;
 
-    // Upgrade the number of class levels a character has and add features
+    // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
       let priorLevel = cls?.data.data.levels ?? 0;
-      const hasClass = !!cls;
-
-      // Increment levels instead of creating a new item
-      if ( hasClass ) {
+      if ( !!cls ) {
         const next = Math.min(priorLevel + 1, 20 + priorLevel - this.actor.data.data.details.level);
         if ( next > priorLevel ) {
           itemData.levels = next;
-          await cls.update({"data.levels": next});
-          addLevel = true;
+          return cls.update({"data.levels": next});
         }
-      }
-
-      // Add class features
-      if ( !hasClass || addLevel ) {
-        const features = await Actor5e.getClassFeatures({
-          className: itemData.name,
-          subclassName: itemData.data.subclass,
-          level: itemData.levels,
-          priorLevel: priorLevel
-        });
-        await this.actor.createEmbeddedEntity("OwnedItem", features);
       }
     }
 
     // Default drop handling if levels were not added
-    if ( !addLevel ) super._onDropItemCreate(itemData);
+    super._onDropItemCreate(itemData);
   }
 }

@@ -355,6 +355,7 @@
   overflow: hidden;
 }
 .dnd5e.sheet .filter-list {
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -991,18 +992,17 @@
   flex: 0 0 240px;
   margin: 0;
 }
-.dnd5e.sheet.actor .spellcasting-ability input,
+.dnd5e.sheet.actor .spellcasting-ability label,
 .dnd5e.sheet.actor .spellcasting-ability span {
-  flex: 0 0 32px;
+  flex: none;
+}
+.dnd5e.sheet.actor .spellcasting-ability input {
+  flex: 0 0 28px;
   text-align: center;
 }
 .dnd5e.sheet.actor .spellcasting-ability select {
   margin: 0 5px;
-  flex: 0 0 150px;
-}
-.dnd5e.sheet.actor .spellcasting-ability h3.spell-dc {
-  flex: 1;
-  text-align: right;
+  flex: 0 0 120px;
 }
 .dnd5e.sheet.actor .spell-slots,
 .dnd5e.sheet.actor .spell-comps {
@@ -1520,9 +1520,6 @@
 }
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
-}
-.dnd5e.sheet.actor.npc .spellcasting-ability label {
-  flex: none;
 }
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;
