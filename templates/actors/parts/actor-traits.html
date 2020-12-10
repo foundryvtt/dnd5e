@@ -11,9 +11,14 @@
     </div>
 
     {{#unless isVehicle}}
-    <div class="form-group {{#unless data.traits.senses}}inactive{{/unless}}">
+    <div class="form-group">
         <label>{{localize "DND5E.Senses"}}</label>
-        <input type="text" name="data.traits.senses" value="{{data.traits.senses}}" placeholder="{{ localize 'DND5E.None' }}"/>
+        <a class="config-button" data-action="senses" title="{{localize 'DND5E.MovementConfig'}}"><i class="fas fa-cog"></i></a>
+        <ul class="traits-list">
+        {{#each senses as |v k|}}
+            <li class="tag {{k}}">{{v}}</li>
+        {{/each}}
+        </ul>
     </div>
 
     <div class="form-group {{data.traits.languages.cssClass}}">
@@ -118,7 +123,7 @@
     {{#unless isVehicle}}
     <div class="form-group ">
         <label>{{localize "DND5E.SpecialTraits"}}</label>
-        <a class="configure-flags"><i class="fas fa-cog"></i></a>
+        <a class="config-button" data-action="flags" title="{{localize 'DND5E.SpecialTraits'}}"><i class="fas fa-cog"></i></a>
     </div>
     {{/unless}}
 </div>

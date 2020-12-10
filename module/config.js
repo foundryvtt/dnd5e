@@ -396,16 +396,15 @@ DND5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
 /* -------------------------------------------- */
 
 /**
- * Character senses options
- * @type {Object}
+ * The set of possible sensory perception types which an Actor may have
+ * @type {object}
  */
 DND5E.senses = {
-  "bs": "DND5E.SenseBS",
-  "dv": "DND5E.SenseDV",
-  "ts": "DND5E.SenseTS",
-  "tr": "DND5E.SenseTR"
+  "blindsight": "DND5E.SenseBlindsight",
+  "darkvision": "DND5E.SenseDarkvision",
+  "tremorsense": "DND5E.SenseTremorsense",
+  "truesight": "DND5E.SenseTruesight"
 };
-
 
 /* -------------------------------------------- */
 

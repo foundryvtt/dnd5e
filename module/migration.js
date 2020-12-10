@@ -127,8 +127,8 @@ export const migrateActorData = function(actor) {
   const updateData = {};
 
   // Actor Data Updates
-  _migrateActorBonuses(actor, updateData);
   _migrateActorMovement(actor, updateData);
+  _migrateActorSenses(actor, updateData);
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -228,29 +228,43 @@ export const migrateSceneData = function(scene) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the actor bonuses object
+ * Migrate the actor speed string to movement object
  * @private
  */
-function _migrateActorBonuses(actor, updateData) {
-  const b = game.system.model.Actor.character.bonuses;
-  for ( let k of Object.keys(actor.data.bonuses || {}) ) {
-    if ( k in b ) updateData[`data.bonuses.${k}`] = b[k];
-    else updateData[`data.bonuses.-=${k}`] = null;
-  }
+function _migrateActorMovement(actor, updateData) {
+  const ad = actor.data;
+  const old = ad?.attributes?.speed?.value;
+  if ( old === undefined ) return;
+  const s = (old || "").split(" ");
+  if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
+  updateData["data.attributes.-=speed"] = null;
+  return updateData
 }
 
 /* -------------------------------------------- */
 
 /**
- * Migrate the actor bonuses object
+ * Migrate the actor traits.senses string to attributes.senses object
  * @private
  */
-function _migrateActorMovement(actor, updateData) {
-  if ( actor.data.attributes?.movement?.walk !== undefined ) return;
-  const s = (actor.data.attributes?.speed?.value || "").split(" ");
-  if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
+function _migrateActorSenses(actor, updateData) {
+  const ad = actor.data;
+  if ( ad?.traits?.senses === undefined ) return;
+  const old = (ad.traits.senses || "").split(",").map(s => s.trim());
+  const obj = ad.attributes.senses || {};
+  const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/
+  for ( let s of old ) {
+    const match = s.match(pattern);
+    if ( !match ) continue;
+    const type = match[1].toLowerCase();
+    const value = Number(match[2]).toNearest(0.5);
+    if ( type in obj ) {
+      updateData[`data.attributes.senses.${type}`] = value;
+    }
+  }
+  updateData["data.traits.-=senses"] = null;
+  return updateData;
 }
-
 
 /* -------------------------------------------- */
 

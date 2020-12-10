@@ -1,7 +1,8 @@
 import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
-import MovementConfig from "../../apps/movement-config.js";
+import ActorMovementConfig from "../../apps/movement-config.js";
+import ActorSensesConfig from "../../apps/senses-config.js";
 import {DND5E} from '../../config.js';
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
 
@@ -99,6 +100,9 @@ export default class ActorSheet5e extends ActorSheet {
     // Movement speeds
     data.movement = this._getMovementSpeed(data.actor);
 
+    // Senses
+    data.senses = this._getSenses(data.actor);
+
     // Update traits
     this._prepareTraits(data.actor.data.traits);
 
@@ -132,6 +136,21 @@ export default class ActorSheet5e extends ActorSheet {
       primary: `${movement.walk || 0} ${movement.units}`,
       special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
     }
+  }
+
+  /* -------------------------------------------- */
+
+  _getSenses(actorData) {
+    const senses = actorData.data.attributes.senses || {};
+    const tags = {};
+    for ( let [k, v] of Object.entries(senses) ) {
+      if ( Number.isNumeric(v) && (v > 0) ) {
+        const name = game.i18n.localize(`DND5E.Sense${k.titleCase()}`);
+        const label = `${name} ${v} ${senses.units}`;
+        tags[k] = label;
+      }
+    }
+    return tags;
   }
 
   /* -------------------------------------------- */
@@ -373,8 +392,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
-      html.find('.configure-movement').click(this._onMovementConfig.bind(this));
-      html.find('.configure-flags').click(this._onConfigureFlags.bind(this));
+      html.find('.config-button').click(this._onConfigMenu.bind(this));
 
       // Owned Item management
       html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -448,11 +466,24 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle click events for the Traits tab button to configure special Character Flags
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
+   * @param {Event} event   The click event which originated the selection
+   * @private
    */
-  _onConfigureFlags(event) {
+  _onConfigMenu(event) {
     event.preventDefault();
-    new ActorSheetFlags(this.actor).render(true);
+    const button = event.currentTarget;
+    switch ( button.dataset.action ) {
+      case "movement":
+        new ActorMovementConfig(this.object).render(true);
+        break;
+      case "flags":
+        new ActorSheetFlags(this.object).render(true);
+        break;
+      case "senses":
+        new ActorSensesConfig(this.object).render(true);
+        break;
+    }
   }
 
   /* -------------------------------------------- */
@@ -782,18 +813,6 @@ export default class ActorSheet5e extends ActorSheet {
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
     new TraitSelector(this.actor, options).render(true)
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
-   * @param {Event} event   The click event which originated the selection
-   * @private
-   */
-  _onMovementConfig(event) {
-    event.preventDefault();
-    new MovementConfig(this.object).render(true);
   }
 
   /* -------------------------------------------- */

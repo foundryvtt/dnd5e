@@ -89,10 +89,14 @@
             "units": "ft",
             "hover": false
           },
-          "spellcasting": "int",
-          "speed": {
-            "_deprecated": true
-          }
+          "senses": {
+            "darkvision": 0,
+            "blindsight": 0,
+            "tremorsense": 0,
+            "truesight": 0,
+            "units": "ft"
+          },
+          "spellcasting": "int"
         },
         "details": {
           "alignment": "",
@@ -173,7 +177,6 @@
           }
         },
         "traits": {
-          "senses": "",
           "languages": {
             "value": [],
             "custom": ""

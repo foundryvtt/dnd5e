@@ -583,7 +583,7 @@
 .dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name {
   position: relative;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement .configure-movement {
+.dnd5e.sheet.actor .sheet-header .attributes .movement .config-button {
   position: absolute;
   display: none;
   right: 0;
@@ -591,7 +591,7 @@
   font-size: 12px;
   font-weight: normal;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .configure-movement {
+.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .config-button {
   display: block;
 }
 .dnd5e.sheet.actor .sheet-header .attributes input.temphp {
@@ -806,7 +806,7 @@
   margin: 0 0 3px 0;
   justify-content: space-between;
 }
-.dnd5e.sheet.actor .traits .configure-flags {
+.dnd5e.sheet.actor .traits .config-button {
   flex: 1;
 }
 .dnd5e.sheet.actor .traits label {
