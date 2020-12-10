@@ -191,6 +191,7 @@ function cleanActorData(actorData) {
  */
 export const migrateItemData = function(item) {
   const updateData = {};
+  _migrateItemAttunement(item, updateData);
   return updateData;
 };
 
@@ -280,6 +281,20 @@ function _migrateActorSenses(actor, updateData) {
 
 /* -------------------------------------------- */
 
+/**
+ * Migrate the old item.attuned boolean to the new item.attunement state
+ * @private
+ */
+function _migrateItemAttunement(item, updateData) {
+  const id = item.data;
+  if ( id.attuned === undefined ) return;
+  updateData["data.attunement"] = 2;
+  updateData["data.-=attuned"] = null;
+  return updateData;
+}
+
+
+/* -------------------------------------------- */
 
 /**
  * A general tool to purge flags from all entities in a Compendium pack.

@@ -75,6 +75,18 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // Item details
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
+      item.attunement = {
+        1: {
+          icon: "fa-sun",
+          cls: "not-attuned",
+          title: "DND5E.AttunementRequired"
+        },
+        2: {
+          icon: "fa-sun",
+          cls: "attuned",
+          title: "DND5E.AttunementAttuned"
+        }
+      }[item.data.attunement];
 
       // Item usage
       item.hasUses = item.data.uses && (item.data.uses.max > 0);

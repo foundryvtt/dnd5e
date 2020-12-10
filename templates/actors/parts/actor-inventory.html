@@ -65,8 +65,12 @@
                 <h4>
                     {{item.name~}}
                     {{~#if item.isStack}} ({{item.data.quantity}}){{/if}}
-                    {{~#if item.data.attuned}} <i class="fas fa-sun attuned" title={{localize "DND5E.Attuned"}}></i>{{/if}}
                 </h4>
+                {{#if item.attunement}}
+                <div class="item-detail attunement">
+                    <i class="fas {{item.attunement.icon}} {{item.attunement.cls}}" title="{{localize item.attunement.title}}"></i>
+                </div>
+                {{/if}}
                 {{/if}}
             </div>
 

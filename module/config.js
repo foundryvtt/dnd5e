@@ -54,6 +54,20 @@ DND5E.alignments = {
   'ce': "DND5E.AlignmentCE"
 };
 
+/* -------------------------------------------- */
+
+/**
+ * An enumeration of item attunement states
+ * @type {{"0": string, "1": string, "2": string}}
+ */
+DND5E.attunements = {
+  0: "DND5E.AttunementNone",
+  1: "DND5E.AttunementRequired",
+  2: "DND5E.AttunementAttuned"
+};
+
+/* -------------------------------------------- */
+
 
 DND5E.weaponProficiencies = {
   "sim": "DND5E.WeaponSimpleProficiency",

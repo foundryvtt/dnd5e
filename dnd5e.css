@@ -880,6 +880,9 @@
 .dnd5e.sheet.actor .inventory-list .item .item-name i.attuned {
   color: #7a7971;
 }
+.dnd5e.sheet.actor .inventory-list .item .item-name i.not-attuned {
+  color: #44191A;
+}
 .dnd5e.sheet.actor .inventory-list .item .item-uses input {
   width: 24px;
   text-align: center;
@@ -910,6 +913,9 @@
 }
 .dnd5e.sheet.actor .inventory-list .item-detail.item-action {
   flex: 0 0 100px;
+}
+.dnd5e.sheet.actor .inventory-list .item-detail.attunement {
+  flex: 0 0 24px;
 }
 .dnd5e.sheet.actor .inventory-list .item-weight {
   flex: 0 0 60px;

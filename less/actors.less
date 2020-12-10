@@ -445,9 +445,8 @@
         &.rollable .item-image:hover {
           background-image: url("../../icons/svg/d20-black.svg") !important;
         }
-        i.attuned {
-          color: @colorTan;
-        }
+        i.attuned { color: @colorTan; }
+        i.not-attuned { color: @colorCrimson; }
       }
 
       // Item uses
@@ -488,6 +487,7 @@
       overflow: hidden;
       &:last-child { border-right: none; }
       &.item-action {flex: 0 0 100px}
+      &.attunement {flex: 0 0 24px}
     }
 
     .item-weight {
