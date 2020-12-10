@@ -94,7 +94,7 @@ export default class ItemSheet5e extends ItemSheet {
           ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
         }
         return ammo;
-      }, {});
+      }, {[item._id]: `${item.name} (${item.data.quantity})`});
     }
 
     // Attributes

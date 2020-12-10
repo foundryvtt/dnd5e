@@ -812,12 +812,13 @@ export default class Item5e extends Item {
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the damageRoll logic for the core implementation.
    * @param {MouseEvent} [event]    An event which triggered this roll, if any
+   * @param {boolean} [critical]    Should damage be rolled as a critical hit?
    * @param {number} [spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {boolean} [versatile]   If the item is a weapon, roll damage using the versatile formula
    * @param {object} [options]      Additional options passed to the damageRoll function
    * @return {Promise<Roll>}        A Promise which resolves to the created Roll instance
    */
-  rollDamage({event, spellLevel=null, versatile=false, options={}}={}) {
+  rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
@@ -831,10 +832,12 @@ export default class Item5e extends Item {
     // Configure the damage roll
     const title = `${this.name} - ${game.i18n.localize("DND5E.DamageRoll")}`;
     const rollConfig = {
-      event: event,
-      parts: parts,
       actor: this.actor,
+      critical: critical ?? event?.altKey ?? false,
       data: rollData,
+      event: event,
+      fastForward: event ? event.shiftKey || event.altKey || event.ctrlKey || event.metaKey : false,
+      parts: parts,
       title: title,
       flavor: this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
@@ -1116,9 +1119,14 @@ export default class Item5e extends Item {
       case "attack":
         await item.rollAttack({event}); break;
       case "damage":
-        await item.rollDamage({event, spellLevel}); break;
       case "versatile":
-        await item.rollDamage({event, spellLevel, versatile: true}); break;
+        await item.rollDamage({
+          critical: event.altKey,
+          event: event,
+          spellLevel: spellLevel,
+          versatile: action === "versatile"
+        });
+        break;
       case "formula":
         await item.rollFormula({event, spellLevel}); break;
       case "save":

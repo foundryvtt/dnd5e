@@ -214,7 +214,6 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
   messageData.speaker = speaker || ChatMessage.getSpeaker();
   const messageOptions = {rollMode: rollMode || game.settings.get("core", "rollMode")};
   parts = parts.concat(["@bonus"]);
-  fastForward = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
 
   // Define inner roll function
   const _roll = function(parts, crit, form) {
@@ -236,6 +235,7 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
         roll.terms[0].alter(1, criticalBonusDice);
         roll._formula = roll.formula;
       }
+      roll.dice.forEach(d => d.options.critical = true);
       messageData.flavor += ` (${game.i18n.localize("DND5E.Critical")})`;
       if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].critical = true;
     }
@@ -251,7 +251,7 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
   };
 
   // Create the Roll instance
-  const roll = fastForward ? _roll(parts, critical || event.altKey) : await _damageRollDialog({
+  const roll = fastForward ? _roll(parts, critical) : await _damageRollDialog({
     template, title, parts, data, allowCritical, rollMode: messageOptions.rollMode, dialogOptions, roll: _roll
   });
 
