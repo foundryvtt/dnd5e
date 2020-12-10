@@ -591,8 +591,9 @@ export default class Item5e extends Item {
     const fn = this[`_${this.data.type}ChatData`];
     if ( fn ) fn.bind(this)(data, labels, props);
 
-    // General equipment properties
+    // Equipment properties
     if ( data.hasOwnProperty("equipped") && !["loot", "tool"].includes(this.data.type) ) {
+      if ( data.attunement === 1 ) props.push(game.i18n.localize(CONFIG.DND5E.attunements[1]));
       props.push(
         game.i18n.localize(data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
         game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient"),

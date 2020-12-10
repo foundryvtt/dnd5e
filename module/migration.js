@@ -282,13 +282,12 @@ function _migrateActorSenses(actor, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the old item.attuned boolean to the new item.attunement state
+ * Delete the old data.attuned boolean
  * @private
  */
 function _migrateItemAttunement(item, updateData) {
-  const id = item.data;
-  if ( id.attuned === undefined ) return;
-  updateData["data.attunement"] = 2;
+  if ( item.data.attuned === undefined ) return;
+  updateData["data.attunement"] = 0;
   updateData["data.-=attuned"] = null;
   return updateData;
 }
