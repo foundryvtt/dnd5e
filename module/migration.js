@@ -250,18 +250,30 @@ function _migrateActorMovement(actor, updateData) {
 function _migrateActorSenses(actor, updateData) {
   const ad = actor.data;
   if ( ad?.traits?.senses === undefined ) return;
-  const old = (ad.traits.senses || "").split(",").map(s => s.trim());
-  const obj = ad.attributes.senses || {};
+  const original = ad.traits.senses || "";
+
+  // Try to match old senses with the format like "Darkvision 60 ft, Blindsight 30 ft"
   const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/
-  for ( let s of old ) {
+  let wasMatched = false;
+
+  // Match each comma-separated term
+  for ( let s of original.split(",") ) {
+    s = s.trim();
     const match = s.match(pattern);
     if ( !match ) continue;
     const type = match[1].toLowerCase();
-    const value = Number(match[2]).toNearest(0.5);
-    if ( type in obj ) {
-      updateData[`data.attributes.senses.${type}`] = value;
+    if ( type in CONFIG.DND5E.senses ) {
+      updateData[`data.attributes.senses.${type}`] = Number(match[2]).toNearest(0.5);
+      wasMatched = true;
     }
   }
+
+  // If nothing was matched, but there was an old string - put the whole thing in "special"
+  if ( !wasMatched && !!original ) {
+    updateData["data.attributes.senses.special"] = original;
+  }
+
+  // Remove the old traits.senses string once the migration is complete
   updateData["data.traits.-=senses"] = null;
   return updateData;
 }

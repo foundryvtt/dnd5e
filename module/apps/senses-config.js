@@ -26,7 +26,11 @@ export default class ActorSensesConfig extends BaseEntitySheet {
   /** @override */
   getData(options) {
     const senses = this.entity._data.data.attributes?.senses ?? {};
-    const data = { senses: {}, units: senses.units, movementUnits: CONFIG.DND5E.movementUnits };
+    const data = {
+      senses: {},
+      special: senses.special ?? "",
+      units: senses.units, movementUnits: CONFIG.DND5E.movementUnits
+    };
     for ( let [name, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[name];
       data.senses[name] = {

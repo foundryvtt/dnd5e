@@ -12,5 +12,9 @@
             {{selectOptions movementUnits selected=units}}
         </select>
     </div>
+    <div class="form-group">
+        <label>{{localize "DND5E.SenseSpecial"}}</label>
+        <input type="text" name="data.attributes.senses.special" value="{{special}}"/>
+    </div>
     <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
 </form>

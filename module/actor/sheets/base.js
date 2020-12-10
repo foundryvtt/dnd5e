@@ -143,13 +143,12 @@ export default class ActorSheet5e extends ActorSheet {
   _getSenses(actorData) {
     const senses = actorData.data.attributes.senses || {};
     const tags = {};
-    for ( let [k, v] of Object.entries(senses) ) {
-      if ( Number.isNumeric(v) && (v > 0) ) {
-        const name = game.i18n.localize(`DND5E.Sense${k.titleCase()}`);
-        const label = `${name} ${v} ${senses.units}`;
-        tags[k] = label;
-      }
+    for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
+      const v = senses[k] ?? 0
+      if ( v === 0 ) continue;
+      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
     }
+    if ( !!senses.special ) tags["special"] = senses.special;
     return tags;
   }
 
