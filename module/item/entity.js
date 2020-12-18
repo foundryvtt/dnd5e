@@ -1139,7 +1139,7 @@ export default class Item5e extends Item {
       case "toolCheck":
         await item.rollToolCheck({event}); break;
       case "placeTemplate":
-        const template = game.dnd5e.canvas.AbilityTemplatep.fromItem(item);
+        const template = game.dnd5e.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();
         break;
     }
