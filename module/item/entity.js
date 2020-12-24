@@ -170,6 +170,18 @@ export default class Item5e extends Item {
         return arr;
       }, []);
       labels.materials = data?.materials?.value ?? null;
+      if (data?.scaling?.mode === 'manual') {
+        data.scaling.manual = data.scaling.manual || {};
+        const baseScaling = JSON.parse(JSON.stringify(data));
+        for (let lvl = data.level + 1; lvl <= 9; lvl++) {
+          data.scaling.manual[lvl] = mergeObject((data.scaling.manual[lvl] || {}), baseScaling);
+          data.scaling.manual[lvl].levelLabel = C.spellLevels[lvl];
+          
+          delete data.scaling.manual[lvl].scaling;
+          delete data.scaling.manual[lvl].level;
+          delete data.scaling.manual[lvl].description;
+        }
+      }
     }
 
     // Feat Items
@@ -857,6 +869,7 @@ export default class Item5e extends Item {
 
     // Scale damage from up-casting spells
     if ( (this.data.type === "spell") ) {
+      console.log(spellLevel, itemData.scaling);
       if ( (itemData.scaling.mode === "cantrip") ) {
         const level = this.actor.data.type === "character" ? actorData.details.level : actorData.details.spellLevel;
         this._scaleCantripDamage(parts, itemData.scaling.formula, level, rollData);
@@ -864,6 +877,9 @@ export default class Item5e extends Item {
       else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
         const scaling = itemData.scaling.formula;
         this._scaleSpellDamage(parts, itemData.level, spellLevel, scaling, rollData);
+      }
+      else if ( spellLevel && (itemData.scaling.mode === "manual") && itemData.scaling.manual ) {
+        this._scaleManualDamage(parts, itemData.scaling.manual, spellLevel);
       }
     }
 
@@ -918,6 +934,27 @@ export default class Item5e extends Item {
     const upcastLevels = Math.max(spellLevel - baseLevel, 0);
     if ( upcastLevels === 0 ) return parts;
     this._scaleDamage(parts, formula, upcastLevels, rollData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust the spell damage formula with the manual configuration
+   * @param {Array} parts          The original damage parts
+   * @param {object} manualConfig  The manual scaling config
+   * @param {number} spellLevel    The casted spell level
+   * @private
+   */
+  _scaleManualDamage(parts, manualConfig, spellLevel) {
+    for (let i = 0; i < parts.length; i++) {
+      delete parts[i];
+    }
+
+    const manualParts = manualConfig[spellLevel].damage.parts.map(d => d[0])
+
+    for (let i = 0; i < manualParts.length; i++) {
+      parts[i] = manualParts[i];
+    }
   }
 
   /* -------------------------------------------- */

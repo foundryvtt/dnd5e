@@ -478,7 +478,8 @@ DND5E.spellProgression = {
 DND5E.spellScalingModes = {
   "none": "DND5E.SpellNone",
   "cantrip": "DND5E.SpellCantrip",
-  "level": "DND5E.SpellLevel"
+  "level": "DND5E.SpellLevel",
+  "manual": "DND5E.Manual"
 };
 
 /* -------------------------------------------- */
