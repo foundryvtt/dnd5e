@@ -26,7 +26,10 @@ export default class ItemSheet5e extends ItemSheet {
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [
+        {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
+        {navSelector: ".manual-scaling-navigation", contentSelector: ".sheet-body", initial: this.item ? `${this.item.data.level + 1}` : 0}
+      ]
     });
   }
 
@@ -279,7 +282,6 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
         onManageActiveEffect(ev, this.item)
       });
-      new Tabs({navSelector: ".manual-scaling-navigation", contentSelector: ".sheet-body", initial: `${this.item.data.level + 1}`, callback: () => {}}).bind(html[0]);
     }
   }
 
