@@ -252,13 +252,13 @@ export default class ItemSheet5e extends ItemSheet {
     const damage = data.data?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
-    const manual = data.data?.scaling?.manual;
-    if (manual) {
-      for (const key in manual) {
-        if (manual.hasOwnProperty(key)) {
-          const manualData = manual[key];
-          const manualDamage = manualData?.damage;
-          if ( manualDamage ) manualDamage.parts = Object.values(manualDamage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+    const parsedScaling = data.data?.scaling?.parsed;
+    if (data.data?.scaling?.mode === "manual" && parsedScaling) {
+      for (const key in parsedScaling) {
+        if (parsedScaling.hasOwnProperty(key)) {
+          const parsedData = parsedScaling[key];
+          const parsedDamage = parsedData?.damage;
+          if ( parsedDamage ) parsedDamage.parts = Object.values(parsedDamage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
         }
       }
     }
