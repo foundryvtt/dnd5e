@@ -331,25 +331,6 @@
                         </div>
                     </div>
 
-                    {{!-- Limited Uses --}}
-                    <div class="form-group uses-per">
-                        <label>{{ localize "DND5E.LimitedUses" }}</label>
-                        <div class="form-fields">
-                            <input type="text" name="data.scaling.parsed.{{lvl}}.uses.value" value="{{parsedData.uses.value}}" data-dtype="Number"/>
-                            <span class="sep">{{ localize "DND5E.of" }}</span>
-                            <input type="text" name="data.scaling.parsed.{{lvl}}.uses.max" value="{{parsedData.uses.max}}"/>
-                            <span class="sep">{{ localize "DND5E.per" }}</span>
-                            <select name="data.scaling.parsed.{{lvl}}.uses.per">
-                                {{#select parsedData.uses.per}}
-                                <option value=""></option>
-                                {{#each @root.config.limitedUsePeriods as |name key|}}
-                                <option value="{{key}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                    </div>
-
                     {{!-- Consumption --}}
                     <div class="form-group uses-per">
                         <label>{{ localize "DND5E.ConsumeTitle" }}</label>

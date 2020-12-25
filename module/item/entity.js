@@ -178,8 +178,10 @@ export default class Item5e extends Item {
             data.scaling.parsed[lvl] = duplicate(data);
           }
           data.scaling.parsed[lvl].levelLabel = C.spellLevels[lvl];
-          data.scaling.parsed[lvl].scaling = {mode: 'none'};
           data.scaling.parsed[lvl].level = lvl;
+          // not supported for scaling
+          data.scaling.parsed[lvl].scaling = {mode: 'none'};
+          data.scaling.parsed[lvl].uses = { value: 0, max: 0, per: "" };
         }
       }
     }
