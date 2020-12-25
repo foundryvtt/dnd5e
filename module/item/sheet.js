@@ -253,7 +253,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
     const parsedScaling = data.data?.scaling?.parsed;
-    if (data.data?.scaling?.mode === "manual" && parsedScaling) {
+    if (data.data?.scaling?.mode === "manual-spell-level" && parsedScaling) {
       for (const key in parsedScaling) {
         if (parsedScaling.hasOwnProperty(key)) {
           const parsedData = parsedScaling[key];

@@ -139,7 +139,7 @@
                         {{/each}}
                         {{/select}}
                     </select>
-                    {{#if (ne data.scaling.mode "manual")}}
+                    {{#if (ne data.scaling.mode "manual-spell-level")}}
                         <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
                     {{/if}}
                 </div>
@@ -147,7 +147,7 @@
                 
                 
             {{!-- Manual level scaling --}}
-            {{#if (eq data.scaling.mode "manual")}}
+            {{#if (eq data.scaling.mode "manual-spell-level")}}
                 <h3 class="form-header">{{ localize "DND5E.SpellDetails" }}</h3>
                 
                 {{!-- Level Navigation --}}

@@ -479,7 +479,7 @@ DND5E.spellScalingModes = {
   "none": "DND5E.SpellNone",
   "cantrip": "DND5E.SpellCantrip",
   "level": "DND5E.SpellLevel",
-  "manual": "DND5E.Manual"
+  "manual-spell-level": "DND5E.ManualSpellLevel"
 };
 
 /* -------------------------------------------- */

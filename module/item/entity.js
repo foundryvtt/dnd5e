@@ -170,7 +170,9 @@ export default class Item5e extends Item {
         return arr;
       }, []);
       labels.materials = data?.materials?.value ?? null;
-      if (data?.scaling?.mode === 'manual') {
+      // TODO manual-spell-level
+      //      manual-character-level
+      if (data?.scaling?.mode === 'manual-spell-level') {
         data.scaling.parsed = data.scaling.parsed || {};
         const baseScaling = JSON.parse(JSON.stringify(data));
         for (let lvl = data.level + 1; lvl <= 9; lvl++) {
@@ -877,8 +879,8 @@ export default class Item5e extends Item {
         const scaling = itemData.scaling.formula;
         this._scaleSpellDamage(parts, itemData.level, spellLevel, scaling, rollData);
       }
-      else if ( spellLevel !== itemData.level && (itemData.scaling.mode === "manual") && itemData.scaling.parsed ) {
-        this._scaleManualDamage(parts, itemData.scaling.parsed, spellLevel);
+      else if ( spellLevel !== itemData.level && (itemData.scaling.mode === "manual-spell-level") && itemData.scaling.parsed ) {
+        this._scaleManualSpellLevelDamage(parts, itemData.scaling.parsed, spellLevel);
       }
     }
 
@@ -938,13 +940,13 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Adjust the spell damage formula with the manual configuration
+   * Adjust the spell damage formula with the manual-spell-level configuration
    * @param {Array} parts          The original damage parts
-   * @param {object} manualConfig  The manual scaling config
+   * @param {object} manualConfig  The manual spell level scaling config
    * @param {number} spellLevel    The casted spell level
    * @private
    */
-  _scaleManualDamage(parts, manualConfig, spellLevel) {
+  _scaleManualSpellLevelDamage(parts, manualConfig, spellLevel) {
     for (let i = 0; i < parts.length; i++) {
       delete parts[i];
     }
