@@ -86,13 +86,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _getMovementSpeed(actorData) {
-    return {primary: "", special: ""};
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Organize Owned Items for rendering the Vehicle sheet.
    * @private

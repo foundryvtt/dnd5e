@@ -234,7 +234,7 @@ export const migrateSceneData = function(scene) {
  */
 function _migrateActorMovement(actor, updateData) {
   const ad = actor.data;
-  const old = ad?.attributes?.speed?.value;
+  const old = actor.type === 'vehicle' ? ad?.attributes?.speed : ad?.attributes?.speed?.value;
   if ( old === undefined ) return;
   const s = (old || "").split(" ");
   if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;

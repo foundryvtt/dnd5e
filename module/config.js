@@ -303,6 +303,18 @@ DND5E.damageResistanceTypes = mergeObject(duplicate(DND5E.damageTypes), {
 
 /* -------------------------------------------- */
 
+/**
+ * The valid units of measure for movement distances in the game system.
+ * By default this uses the imperial units of feet and miles.
+ * @type {Object<string,string>}
+ */
+DND5E.movementTypes = {
+  "burrow": "DND5E.MovementBurrow",
+  "climb": "DND5E.MovementClimb",
+  "fly": "DND5E.MovementFly",
+  "swim": "DND5E.MovementSwim",
+  "walk": "DND5E.MovementWalk",
+}
 
 /**
  * The valid units of measure for movement distances in the game system.

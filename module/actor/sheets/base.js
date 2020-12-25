@@ -119,22 +119,61 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Returns a properly localized string of this Actor's speed for the provided movementType
+   * 
+   * @param {string} movementType
+   * @returns {string}
+   */
+  _formatSpeedString(movementType) {
+    const movement = actorData.data.attributes.movement || {};
+    const relevantSpeed = movement[movementType];
+
+    if (movementType === 'fly') {
+      // fly speed string has to check for hover as well
+      const flySpeed = `${game.i18n.localize(DND5E.movementTypes[movementType])} ${relevantSpeed}`;
+      const hoverLabel = movement.hover ? `(${game.i18n.localize("DND5E.MovementHover")})` : '';
+    
+      return [flySpeed, hoverLabel].filterJoin(' ');
+    } else {
+      return `${game.i18n.localize(DND5E.movementTypes[movementType])} ${relevantSpeed}`
+    }
+  }
+
+  /**
    * Prepare the display of movement speed data for the Actor
+   * If this Actor is a vehicle, the highest speed will be the primary,
+   * otherwise walking speed is.
+   * 
    * @param {object} actorData
    * @returns {{primary: string, special: string}}
    * @private
    */
   _getMovementSpeed(actorData) {
     const movement = actorData.data.attributes.movement || {};
-    const speeds = [
-      [movement.burrow, `${game.i18n.localize("DND5E.MovementBurrow")} ${movement.burrow}`],
-      [movement.climb, `${game.i18n.localize("DND5E.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : "")],
-      [movement.swim, `${game.i18n.localize("DND5E.MovementSwim")} ${movement.swim}`]
-    ].filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
+    const primaryMovementType = !this.entity.data.type === 'vehicle' ? 'walk' : undefined;
+
+    /**
+     * Sort actor's available non-zero movementTypes in order from highest to lowest.
+     * If primaryMovementType is defined, that movementType will be filtered out.
+     * @type {Array<string>}
+     */
+    const sortedMovementTypes = Object.keys(DND5E.movementTypes)
+      .filter((movementType) => movementType !== primaryMovementType && movement[movementType] > 0)
+      .sort((movementTypeA, movementTypeB) => movement[movementTypeB] - movement[movementTypeA]);
+
+    /**
+     * The Actor's primary movement speed.
+     * If primaryMovementType is defined, use that, otherwise take the top movementType off sortedMovementTypes
+     * Mutates sortedMovementTypes
+     * @type {Number}
+     */
+    const primaryMovementSpeed = movement[primaryMovementType ?? sortedMovementTypes.shift()] || 0;
+
+    const secondaryMovementSpeedStrings = sortedMovementTypes.map(this._formatSpeedString);
+
     return {
-      primary: `${movement.walk || 0} ${movement.units}`,
-      special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
+      primary: `${primaryMovementSpeed} ${movement.units}`,
+      special: secondaryMovementSpeedStrings.join(', ')
     }
   }
 
