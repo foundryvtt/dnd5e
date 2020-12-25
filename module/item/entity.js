@@ -174,7 +174,7 @@ export default class Item5e extends Item {
         data.scaling.manual = data.scaling.manual || {};
         const baseScaling = JSON.parse(JSON.stringify(data));
         for (let lvl = data.level + 1; lvl <= 9; lvl++) {
-          data.scaling.manual[lvl] = mergeObject((data.scaling.manual[lvl] || {}), baseScaling);
+          data.scaling.manual[lvl] = mergeObject((data.scaling.manual[lvl] || {}), baseScaling, {overwrite: false});
           data.scaling.manual[lvl].levelLabel = C.spellLevels[lvl];
           
           delete data.scaling.manual[lvl].scaling;
