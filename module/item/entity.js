@@ -170,15 +170,14 @@ export default class Item5e extends Item {
         return arr;
       }, []);
       labels.materials = data?.materials?.value ?? null;
-      // TODO manual-spell-level
-      //      manual-character-level
+      // TODO manual-character-level
       if (data?.scaling?.mode === 'manual-spell-level') {
         data.scaling.parsed = data.scaling.parsed || {};
-        const baseScaling = JSON.parse(JSON.stringify(data));
         for (let lvl = data.level + 1; lvl <= 9; lvl++) {
-          data.scaling.parsed[lvl] = mergeObject((data.scaling.parsed[lvl] || {}), baseScaling, {overwrite: false});
+          if (!data.scaling.parsed[lvl]) {
+            data.scaling.parsed[lvl] = duplicate(data);
+          }
           data.scaling.parsed[lvl].levelLabel = C.spellLevels[lvl];
-          
           data.scaling.parsed[lvl].scaling = {mode: 'none'};
           data.scaling.parsed[lvl].level = lvl;
         }
