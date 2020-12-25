@@ -1155,6 +1155,22 @@
   font-size: 12px;
   line-height: 18px;
 }
+.dnd5e.sheet.item .sheet-body .manual-scaling-navigation .item {
+  font-size: 18px;
+  margin: 0 5px;
+  border-bottom: 3px solid #b5b3a4;
+}
+.dnd5e.sheet.item .sheet-body .manual-scaling-navigation .item.active {
+  border-bottom: 3px solid #44191A;
+}
+.dnd5e.sheet.item .sheet-body .manual-scaling {
+  padding-left: 1em;
+  background-color: #6a696966;
+  display: none;
+}
+.dnd5e.sheet.item .sheet-body .manual-scaling.active {
+  display: block;
+}
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],
 .dnd5e.sheet.item .details select {
@@ -1323,7 +1339,7 @@
 }
 .dnd5e.chat-card .card-footer span {
   border-right: 2px groove #FFF;
-  padding: 0 5px 0 0;
+  padding: 0 3px 0 0;
   font-size: 10px;
 }
 .dnd5e.chat-card .card-footer span:last-child {
