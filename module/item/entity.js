@@ -179,9 +179,8 @@ export default class Item5e extends Item {
           data.scaling.parsed[lvl] = mergeObject((data.scaling.parsed[lvl] || {}), baseScaling, {overwrite: false});
           data.scaling.parsed[lvl].levelLabel = C.spellLevels[lvl];
           
-          delete data.scaling.parsed[lvl].scaling;
-          delete data.scaling.parsed[lvl].level;
-          delete data.scaling.parsed[lvl].description;
+          data.scaling.parsed[lvl].scaling = {mode: 'none'};
+          data.scaling.parsed[lvl].level = lvl;
         }
       }
     }
