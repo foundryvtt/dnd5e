@@ -869,7 +869,6 @@ export default class Item5e extends Item {
 
     // Scale damage from up-casting spells
     if ( (this.data.type === "spell") ) {
-      console.log(spellLevel, itemData.scaling);
       if ( (itemData.scaling.mode === "cantrip") ) {
         const level = this.actor.data.type === "character" ? actorData.details.level : actorData.details.spellLevel;
         this._scaleCantripDamage(parts, itemData.scaling.formula, level, rollData);
@@ -878,7 +877,7 @@ export default class Item5e extends Item {
         const scaling = itemData.scaling.formula;
         this._scaleSpellDamage(parts, itemData.level, spellLevel, scaling, rollData);
       }
-      else if ( spellLevel && (itemData.scaling.mode === "manual") && itemData.scaling.manual ) {
+      else if ( spellLevel !== itemData.level && (itemData.scaling.mode === "manual") && itemData.scaling.manual ) {
         this._scaleManualDamage(parts, itemData.scaling.manual, spellLevel);
       }
     }
