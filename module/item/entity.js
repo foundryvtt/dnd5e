@@ -751,7 +751,8 @@ export default class Item5e extends Item {
           let ammoBonus = ammo.data.data.attackBonus;
           if ( ammoBonus ) {
             parts.push("@ammo");
-            if (this._ammo.data.type === "consumable") {
+            // only add the ammoBonus to the roll if the ammution is a consumable with type 'ammo'
+            if (this._ammo.data.type === "consumable" && this._ammo.data.consumableType === "ammo") {
               rollData["ammo"] = ammoBonus;
             } else {
               rollData["ammo"] = ''
@@ -877,10 +878,11 @@ export default class Item5e extends Item {
       parts.push(actorBonus.damage);
     }
 
-    // Add ammunition damage
+    // Ammunition Damage
     if ( this._ammo ) {
       parts.push("@ammo");
-      if (this._ammo.data.type === "consumable") {
+      // only add the ammunition damage if the ammution is a consumable with type 'ammo'
+      if (this._ammo.data.type === "consumable" && this._ammo.data.consumableType === "ammo") {
         rollData["ammo"] = this._ammo.data.data.damage.parts.map(p => p[0]).join("+");
       } else {
         rollData["ammo"] = ''
