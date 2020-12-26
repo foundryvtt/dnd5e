@@ -1164,9 +1164,10 @@
   border-bottom: 3px solid #44191A;
 }
 .dnd5e.sheet.item .sheet-body .manual-scaling {
-  padding-left: 1em;
-  background-color: #6a696966;
+  padding: 0 0.5em;
   display: none;
+  border: 3px #6a696966 solid;
+  margin-top: 3px;
 }
 .dnd5e.sheet.item .sheet-body .manual-scaling.active {
   display: block;
