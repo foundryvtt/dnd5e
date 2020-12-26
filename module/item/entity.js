@@ -853,7 +853,7 @@ export default class Item5e extends Item {
    */
   getScaledData({spellLevel=null} = {}) {
     const actorData = this.actor.data.data;
-    let itemData = JSON.parse(JSON.stringify(this.data.data));
+    let itemData = duplicate(this.data.data);
     
     if (this.data.type === "spell") {
       if (itemData.scaling.mode === "manual-spell-level" && itemData.scaling.parsed[spellLevel]) {
@@ -864,7 +864,6 @@ export default class Item5e extends Item {
         const versatileParts = [itemData.damage.versatile];
         const rollData = this.getRollData();
 
-        // TODO check if the roll data can be omitted here
         this._scaleCantripDamage(damageParts, itemData.scaling.formula, level, rollData);
         this._scaleCantripDamage(versatileParts, itemData.scaling.formula, level, rollData);
 
@@ -878,7 +877,6 @@ export default class Item5e extends Item {
         const versatileParts = [itemData.damage.versatile];
         const rollData = this.getRollData();
 
-        // TODO check if the roll data can be omitted here
         this._scaleSpellDamage(damageParts, itemData.level, spellLevel, scaling, rollData);
         this._scaleSpellDamage(versatileParts, itemData.level, spellLevel, scaling, rollData);
         
