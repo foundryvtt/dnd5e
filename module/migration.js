@@ -287,7 +287,7 @@ function _migrateActorSenses(actor, updateData) {
  */
 function _migrateItemAttunement(item, updateData) {
   if ( item.data.attuned === undefined ) return;
-  updateData["data.attunement"] = 0;
+  updateData["data.attunement"] = CONFIG.DND5E.attunementTypes.NONE;
   updateData["data.-=attuned"] = null;
   return updateData;
 }
