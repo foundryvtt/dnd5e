@@ -146,8 +146,8 @@ export default class ActorSheet5e extends ActorSheet {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: primary.length ? primary[1] : `0 ${movement.units}`,
-        special: speeds.join(", ")
+        primary: `${primary ? primary[1] : "0"} ${movement.units}`,
+        special: speeds.map(s => s[1]).join(", ")
       }
     }
 

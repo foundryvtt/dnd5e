@@ -56,6 +56,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  _getMovementSpeed(actorData, largestPrimary=true) {
+    return super._getMovementSpeed(actorData, largestPrimary);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Prepare items that are mounted to a vehicle and require one or more crew
    * to operate.
