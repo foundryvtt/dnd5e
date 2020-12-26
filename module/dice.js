@@ -1,3 +1,58 @@
+
+function isUnsupportedTerm(term) {
+  const diceTerm = term instanceof DiceTerm;
+  const operator = ["+", "-"].includes(term);
+  const number   = !isNaN(Number(term));
+
+  return !(diceTerm || operator || number);
+}
+
+/**
+ * A standardized helper function for condensing a multipart roll formula into a human readable string
+ *
+ * @param {Array} parts             The dice roll component parts, excluding the initial d20
+ * @param {Object} data             Actor or item data against which to parse the roll
+ *
+ * @return {string}                 A Promise which resolves once the roll workflow has completed
+ */
+export function condenseRollFormula (formula, data) {
+
+  const roll = new Roll(Roll.replaceFormulaData(formula, data));
+  const terms = roll.terms;
+
+  // there are many possible dice terms that this condensation cannot support
+  if (terms.some(isUnsupportedTerm)) return roll.formula;
+
+  const rollableTerms = [];
+  const constantTerms = [];
+  let operators = [];
+
+  for (let term of terms) {
+    if (["+", "-"].includes(term)) {
+      operators.push(term);
+    } else {
+      if (term instanceof DiceTerm) {
+        rollableTerms.push(...operators);
+        rollableTerms.push(term);
+      }
+      else {
+        constantTerms.push(...operators);
+        constantTerms.push(term);
+      }
+      operators = [];
+    }
+  }
+
+  const constantFormula = Roll.cleanFormula(constantTerms);
+  const rollableFormula = Roll.cleanFormula(rollableTerms);
+
+  const constantPart = roll._safeEval(constantFormula);
+
+  return new Roll(`${rollableFormula} + ${constantPart}`).formula;
+
+}
+
+
 /**
  * A standardized helper function for managing core 5e "d20 rolls"
  *
