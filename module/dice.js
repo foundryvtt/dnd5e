@@ -10,12 +10,14 @@ function isUnsupportedTerm(term) {
 /**
  * A standardized helper function for condensing a multipart roll formula
  *
- * @param {string} formula          The original Roll formula
- * @param {Object} data             Actor or item data against which to parse the roll
+ * @param {string} formula                 The original Roll formula
+ * @param {Object} data                    Actor or item data against which to parse the roll
+ * @param {Object} options                 Formatting options
+ * @param {Object} options.constantFirst   Puts the constants before the dice terms in the resulting formula
  *
- * @return {string}                 The resulting condensed formula
+ * @return {string}                        The resulting condensed formula
  */
-export function condenseRollFormula(formula, data) {
+export function condenseRollFormula(formula, data, {constantFirst = true} = {}) {
 
   const roll = new Roll(Roll.replaceFormulaData(formula, data));
   const terms = roll.terms;
@@ -48,7 +50,8 @@ export function condenseRollFormula(formula, data) {
 
   const constantPart = roll._safeEval(constantFormula);
 
-  return new Roll([rollableFormula, constantPart].filterJoin(" + ")).formula;
+  const parts = constantFirst ? [constantPart, rollableFormula] : [rollableFormula, constantPart];
+  return new Roll(parts.filterJoin(" + ")).formula;
 }
 
 
