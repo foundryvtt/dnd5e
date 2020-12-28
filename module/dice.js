@@ -8,14 +8,14 @@ function isUnsupportedTerm(term) {
 }
 
 /**
- * A standardized helper function for condensing a multipart roll formula into a human readable string
+ * A standardized helper function for condensing a multipart roll formula
  *
- * @param {Array} parts             The dice roll component parts, excluding the initial d20
+ * @param {string} formula          The original Roll formula
  * @param {Object} data             Actor or item data against which to parse the roll
  *
- * @return {string}                 A Promise which resolves once the roll workflow has completed
+ * @return {string}                 The resulting condensed formula
  */
-export function condenseRollFormula (formula, data) {
+export function condenseRollFormula(formula, data) {
 
   const roll = new Roll(Roll.replaceFormulaData(formula, data));
   const terms = roll.terms;
@@ -48,8 +48,7 @@ export function condenseRollFormula (formula, data) {
 
   const constantPart = roll._safeEval(constantFormula);
 
-  return new Roll(`${rollableFormula} + ${constantPart}`).formula;
-
+  return new Roll([rollableFormula, constantPart].filterJoin(" + ")).formula;
 }
 
 
