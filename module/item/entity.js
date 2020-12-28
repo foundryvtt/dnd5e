@@ -1038,6 +1038,7 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710,
       },
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
+      reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
       messageData: {"flags.dnd5e.roll": {type: "tool", itemId: this.id }}
     }, options);
     rollConfig.event = options.event;
