@@ -743,13 +743,17 @@ export default class Item5e extends Item {
     const consume = itemData.consume;
     if ( consume?.type === "ammo" ) {
       ammo = this.actor.items.get(consume.target);
-      if(ammo?.data){
+
+      if ( ammo?.data ) {
         const q = ammo.data.data.quantity;
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
           this._ammo = ammo;
-          let ammoBonus = ammo.data.data.attackBonus;
-          if ( ammoBonus ) {
+          const ammoData = this._ammo.data;
+          const ammoBonus = ammoData.data.attackBonus;
+
+          // only add the ammoBonus to the roll if the ammution is a consumable with type 'ammo' and that ammo has a bonus
+          if ( ammoBonus && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
             parts.push("@ammo");
             rollData["ammo"] = ammoBonus;
             title += ` [${ammo.name}]`;
@@ -873,10 +877,13 @@ export default class Item5e extends Item {
       parts.push(actorBonus.damage);
     }
 
-    // Add ammunition damage
-    if ( this._ammo ) {
+    // Handle ammunition damage
+    const ammoData = this._ammo.data;
+
+    // only add the ammunition damage if the ammution is a consumable with type 'ammo'
+    if ( this._ammo && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
       parts.push("@ammo");
-      rollData["ammo"] = this._ammo.data.data.damage.parts.map(p => p[0]).join("+");
+      rollData["ammo"] = ammoData.data.damage.parts.map(p => p[0]).join("+");
       rollConfig.flavor += ` [${this._ammo.name}]`;
       delete this._ammo;
     }
