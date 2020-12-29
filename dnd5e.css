@@ -1204,6 +1204,13 @@
   flex: 0 0 16px;
   margin: 0 4px 0 0;
 }
+.dnd5e.sheet.item .details .form-group.uses-per .use-limits {
+  flex-wrap: unset;
+  flex: 0.55;
+}
+.dnd5e.sheet.item .details .form-group.uses-per .use-per-select {
+  flex: 1.5;
+}
 .dnd5e.sheet.item .details span.sep {
   flex: 0 0 8px;
   align-self: flex-end;
