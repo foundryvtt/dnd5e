@@ -53,7 +53,7 @@
             {{#if (lookup config.areaTargetTypes data.target.type)}}
                 {{ localize "DND5E.Measurement" }}
             {{else}}
-                {{ localize "DND5E.Quantity" }}
+                {{ localize "DND5E.Number" }}
             {{/if}}
             </label>
             <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
@@ -130,15 +130,28 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
-        <select name="data.duration.units">
-            {{#select data.duration.units}}
-            <option value=""></option>
-            {{#each config.timePeriods as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+        <div class="labeled-field">
+        {{#unless (or 
+            (eq data.duration.units "inst")
+            (eq data.duration.units "perm")
+            (eq data.duration.units "spec")
+            (eq data.duration.units "")
+        )}}
+            <label>{{ localize "DND5E.Number" }}</label>
+            <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
+        {{/unless}}
+        </div>
+        <div class="labeled-field">
+            <label>{{ localize "DND5E.Duration" }}</label>
+            <select name="data.duration.units">
+                {{#select data.duration.units}}
+                <option value=""></option>
+                {{#each config.timePeriods as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
     </div>
 </div>
 
