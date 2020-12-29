@@ -42,7 +42,35 @@
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
-    <div class="form-fields">
+    <div class="form-fields target-fields">
+        {{#unless (or 
+            (eq data.target.type "self")
+            (eq data.target.type "none")
+            (eq data.target.type "")
+        )}}
+        <div class="labeled-field">
+            <label>
+            {{#if (lookup config.areaTargetTypes data.target.type)}}
+                {{ localize "DND5E.Measurement" }}
+            {{else}}
+                {{ localize "DND5E.Quantity" }}
+            {{/if}}
+            </label>
+            <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
+        </div>
+        {{/unless}}
+        {{#if (lookup config.areaTargetTypes data.target.type)}}
+        <div class="labeled-field">
+            <label>{{ localize "DND5E.Unit" }}</label>
+            <select name="data.target.units">
+                {{#select data.target.units}}
+                {{#each config.movementUnits as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+        {{/if}}
         <div class="labeled-field">
             <label>{{ localize "DND5E.Type" }}</label>
             <select name="data.target.type">
@@ -53,34 +81,6 @@
                 {{/each}}
                 {{/select}}
             </select>
-        </div>
-        <div class="labeled-field">
-        {{#unless (or 
-            (eq data.target.type "self")
-            (eq data.target.type "none")
-            (eq data.target.type "")
-        )}}
-            <label>
-            {{#if (lookup config.areaTargetTypes data.target.type)}}
-                {{ localize "DND5E.Measurement" }}
-            {{else}}
-                {{ localize "DND5E.Quantity" }}
-            {{/if}}
-            </label>
-            <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
-        {{/unless}}
-        </div>
-        <div class="labeled-field">
-        {{#if (lookup config.areaTargetTypes data.target.type)}}
-            <label>{{ localize "DND5E.Units" }}</label>
-            <select name="data.target.units">
-                {{#select data.target.units}}
-                {{#each config.movementUnits as |name key|}}
-                <option value="{{key}}">{{name}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-        {{/if}}
         </div>
     </div>
 </div>
@@ -99,17 +99,6 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        <div class="labeled-field">
-            <label>{{ localize "DND5E.Type" }}</label>
-            <select name="data.range.units">
-                {{#select data.range.units}}
-                <option value=""></option>
-                {{#each config.distanceUnits as |name key|}}
-                <option value="{{key}}">{{name}}</option>
-                {{/each}}
-                {{/select}}
-            </select>
-        </div>
         <div class="flexrow">
         {{#if (lookup config.movementUnits data.range.units)}}
             <div class="labeled-field">
@@ -122,6 +111,17 @@
                 <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
             </div>
         {{/if}}
+        </div>
+        <div class="labeled-field">
+            <label>{{ localize "DND5E.Type" }}</label>
+            <select name="data.range.units">
+                {{#select data.range.units}}
+                <option value=""></option>
+                {{#each config.distanceUnits as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
         </div>
     </div>
 </div>
