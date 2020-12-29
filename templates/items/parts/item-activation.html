@@ -178,23 +178,36 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.ConsumeTitle" }}</label>
     <div class="form-fields">
-        <select name="data.consume.type">
-            {{#select data.consume.type}}
-            <option value=""></option>
-            {{#each config.abilityConsumptionTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <select name="data.consume.target">
-            {{#select data.consume.target}}
-            <option value=""></option>
-            {{#each abilityConsumptionTargets as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <input type="text" name="data.consume.amount" value="{{data.consume.amount}}" data-dtype="Number"/>
+        <div class="labeled-field use-amount">
+        {{#if (and data.consume.target data.consume.type)}}
+            <label>{{ localize "DND5E.Amount" }}</label>
+            <input type="text" name="data.consume.amount" value="{{data.consume.amount}}" data-dtype="Number"/>
+        {{/if}}
+        </div>
+        <div class="labeled-field">
+        {{#if data.consume.type}}
+            <label>{{ localize "DND5E.Resource" }}</label>
+            <select name="data.consume.target">
+                {{#select data.consume.target}}
+                <option value=""></option>
+                {{#each abilityConsumptionTargets as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        {{/if}}
+        </div>
+        <div class="labeled-field">
+            <label>{{ localize "DND5E.Type" }}</label>
+            <select name="data.consume.type">
+                {{#select data.consume.type}}
+                <option value=""></option>
+                {{#each config.abilityConsumptionTypes as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
     </div>
 </div>
 {{/if}}
