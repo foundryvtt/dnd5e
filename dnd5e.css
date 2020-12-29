@@ -1175,7 +1175,8 @@
   text-align: center;
   line-height: 24px;
 }
-.dnd5e.sheet.item .details .form-group.input-select select {
+.dnd5e.sheet.item .details .form-group.input-select select,
+.dnd5e.sheet.item .details .form-group.input-select .type-select {
   flex: 1.8;
 }
 .dnd5e.sheet.item .details .form-group.input-select-select select {
