@@ -99,17 +99,30 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Normal' }}"/>
-        <span class="sep">/</span>
-        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
-        <select name="data.range.units">
-            {{#select data.range.units}}
-            <option value=""></option>
-            {{#each config.distanceUnits as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+        <div class="labeled-field">
+            <label>{{ localize "DND5E.Type" }}</label>
+            <select name="data.range.units">
+                {{#select data.range.units}}
+                <option value=""></option>
+                {{#each config.distanceUnits as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+        <div class="flexrow">
+        {{#if (lookup config.movementUnits data.range.units)}}
+            <div class="labeled-field">
+                <label>{{ localize "DND5E.Normal" }}</label>
+                <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Normal' }}"/>
+            </div>
+            <span class="sep">/</span>
+            <div class="labeled-field">
+                <label>{{ localize "DND5E.Max" }}</label>
+                <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
+            </div>
+        {{/if}}
+        </div>
     </div>
 </div>
 
