@@ -1193,6 +1193,7 @@
 }
 .dnd5e.sheet.item .details span.sep {
   flex: 0 0 8px;
+  align-self: flex-end;
 }
 .dnd5e.sheet.item .details .prepared {
   flex: 1.3 !important;
