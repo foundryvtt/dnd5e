@@ -1175,6 +1175,9 @@
   text-align: center;
   line-height: 24px;
 }
+.dnd5e.sheet.item .details .form-group.label-gap {
+  margin-top: 1.25em;
+}
 .dnd5e.sheet.item .details .form-group.input-select select,
 .dnd5e.sheet.item .details .form-group.input-select .type-select {
   flex: 1.8;
@@ -1187,9 +1190,6 @@
 }
 .dnd5e.sheet.item .details .form-fields.target-fields div {
   flex: calc(1/3);
-}
-.dnd5e.sheet.item .details .form-group.uses-per {
-  margin-top: 1.25em;
 }
 .dnd5e.sheet.item .details .form-group.uses-per .form-fields {
   flex-wrap: nowrap;
