@@ -43,23 +43,45 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
-        <select name="data.target.units">
-            {{#select data.target.units}}
-            <option value=""></option>
-            {{#each config.distanceUnits as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
-        <select name="data.target.type">
-            {{#select data.target.type}}
-            <option value=""></option>
-            {{#each config.targetTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+        <div class="labeled-field">
+            <label>{{ localize "DND5E.Type" }}</label>
+            <select name="data.target.type">
+                {{#select data.target.type}}
+                <option value=""></option>
+                {{#each config.targetTypes as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+        <div class="labeled-field">
+        {{#unless (or 
+            (eq data.target.type "self")
+            (eq data.target.type "none")
+            (eq data.target.type "")
+        )}}
+            <label>
+            {{#if (lookup config.areaTargetTypes data.target.type)}}
+                {{ localize "DND5E.Measurement" }}
+            {{else}}
+                {{ localize "DND5E.Quantity" }}
+            {{/if}}
+            </label>
+            <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
+        {{/unless}}
+        </div>
+        <div class="labeled-field">
+        {{#if (lookup config.areaTargetTypes data.target.type)}}
+            <label>{{ localize "DND5E.Units" }}</label>
+            <select name="data.target.units">
+                {{#select data.target.units}}
+                {{#each config.movementUnits as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        {{/if}}
+        </div>
     </div>
 </div>
 
