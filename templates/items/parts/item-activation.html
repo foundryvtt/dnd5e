@@ -158,18 +158,24 @@
 <div class="form-group uses-per label-gap">
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number"/>
-        <span class="sep">{{ localize "DND5E.of" }}</span>
-        <input type="text" name="data.uses.max" value="{{data.uses.max}}"/>
-        <span class="sep">{{ localize "DND5E.per" }}</span>
-        <select name="data.uses.per">
-            {{#select data.uses.per}}
-            <option value=""></option>
-            {{#each config.limitedUsePeriods as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+        <div class="flexrow use-limits">
+        {{#if data.uses.per}}
+            <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number"/>
+            <span class="sep">{{ localize "DND5E.of" }}</span>
+            <input type="text" name="data.uses.max" value="{{data.uses.max}}"/>
+        {{/if}}
+        </div>
+        <div class="flexrow use-per-select">
+            <span class="sep">{{ localize "DND5E.per" }}</span>
+            <select name="data.uses.per">
+                {{#select data.uses.per}}
+                <option value=""></option>
+                {{#each config.limitedUsePeriods as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
     </div>
 </div>
 
