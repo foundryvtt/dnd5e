@@ -3,13 +3,10 @@
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
         <div class="labeled-field">
-        {{#unless (or
-            (eq data.activation.type "none")
-            (eq data.activation.type "")
-        )}}
+        {{#if hasActivationType}}
             <label>{{ localize "DND5E.Number" }}</label>
             <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="-"/>
-        {{/unless}}
+        {{/if}}
         </div>
         <div class="labeled-field type-select">
             <label>{{ localize "DND5E.Type" }}</label>
@@ -54,11 +51,7 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields target-fields">
-        {{#unless (or 
-            (eq data.target.type "self")
-            (eq data.target.type "none")
-            (eq data.target.type "")
-        )}}
+        {{#unless isNonScalerTarget}}
         <div class="labeled-field">
             <label>
             {{#if (lookup config.areaTargetTypes data.target.type)}}
@@ -142,12 +135,7 @@
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
         <div class="labeled-field">
-        {{#unless (or 
-            (eq data.duration.units "inst")
-            (eq data.duration.units "perm")
-            (eq data.duration.units "spec")
-            (eq data.duration.units "")
-        )}}
+        {{#unless isNonScalerDuration}}
             <label>{{ localize "DND5E.Number" }}</label>
             <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
         {{/unless}}

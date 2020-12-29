@@ -61,6 +61,10 @@ export default class ItemSheet5e extends ItemSheet {
     data.isFlatDC = getProperty(data.item.data, "save.scaling") === "flat";
     data.isLine = ["line", "wall"].includes(data.item.data.target?.type);
 
+    data.hasActivationType = !["", "none"].includes(data.item.data.activation?.type);
+    data.isNonScalerTarget = ["", "none", "self"].includes(data.item.data.target?.type);
+    data.isNonScalerDuration = ["", "inst", "perm"].includes(data.item.data.duration?.units);
+
     // Original maximum uses formula
     if ( this.item._data.data?.uses?.max ) data.data.uses.max = this.item._data.data.uses.max;
 
