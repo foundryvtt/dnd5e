@@ -1181,6 +1181,12 @@
 .dnd5e.sheet.item .details .form-group.input-select-select select {
   flex: 1.5;
 }
+.dnd5e.sheet.item .details .form-fields.target-fields {
+  justify-content: flex-end;
+}
+.dnd5e.sheet.item .details .form-fields.target-fields div {
+  flex: calc(1/3);
+}
 .dnd5e.sheet.item .details .form-group.uses-per .form-fields {
   flex-wrap: nowrap;
 }
