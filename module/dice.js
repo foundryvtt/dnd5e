@@ -17,9 +17,9 @@ function isUnsupportedTerm(term) {
  *
  * @return {string}                        The resulting condensed formula
  */
-export function condenseRollFormula(formula, data, {constantFirst = true} = {}) {
+export function simplifyRollFormula(formula, data, {constantFirst = true} = {}) {
 
-  const roll = new Roll(Roll.replaceFormulaData(formula, data));
+  const roll = new Roll(formula, data);
   const terms = roll.terms;
 
   // there are many possible dice terms that this condensation cannot support
