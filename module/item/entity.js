@@ -878,7 +878,7 @@ export default class Item5e extends Item {
     }
 
     // Handle ammunition damage
-    const ammoData = this._ammo.data;
+    const ammoData = this._ammo?.data;
 
     // only add the ammunition damage if the ammution is a consumable with type 'ammo'
     if ( this._ammo && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
