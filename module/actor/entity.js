@@ -93,8 +93,14 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.prof + init.bonus;
 
     // Prepare spell-casting data
-    this._computeSpellcastingDC(this.data);
+    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
+
+    // Compute owned item attributes which depend on prepared Actor data
+    this.items.forEach(item => {
+      item.getSaveDC();
+      item.getAttackToHit();
+    });
   }
 
   /* -------------------------------------------- */
@@ -345,23 +351,6 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Compute the spellcasting DC for all item abilities which use spell DC scaling
-   * @param {object} actorData    The actor data being prepared
-   * @private
-   */
-  _computeSpellcastingDC(actorData) {
-
-    // Compute the spellcasting DC
-    const data = actorData.data;
-    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
-
-    // Compute ability save DCs that depend on the calling actor
-    this.items.forEach(i => i.getSaveDC());
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare data related to the spell-casting capabilities of the Actor
    * @private
    */
@@ -420,7 +409,7 @@ export default class Actor5e extends Actor {
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
       if ( Number.isNaN(i) ) continue;
-      if ( Number.isNumeric(lvl.override) ) lvl.max = Math.max(parseInt(lvl.override), 1);
+      if ( Number.isNumeric(lvl.override) ) lvl.max = Math.max(parseInt(lvl.override), 0);
       else lvl.max = slots[i-1] || 0;
       lvl.value = Math.min(parseInt(lvl.value), lvl.max);
     }
