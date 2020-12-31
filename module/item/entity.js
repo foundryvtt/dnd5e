@@ -226,6 +226,9 @@ export default class Item5e extends Item {
       // Saving throws
       this.getSaveDC();
 
+      // To Hit
+      this.getAttackToHit();
+
       // Damage
       let dam = data.damage || {};
       if ( dam.parts ) {
@@ -269,6 +272,82 @@ export default class Item5e extends Item {
     const abl = CONFIG.DND5E.abilities[save.ability];
     this.labels.save = game.i18n.format("DND5E.SaveDC", {dc: save.dc || "", ability: abl});
     return save.dc;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update a label to the Item detailing its total to hit bonus.
+   * Sources:
+   * - item entity's innate attack bonus
+   * - item's actor's proficiency bonus if applicable
+   * - item's actor's global bonuses to the given item type
+   * - item's ammunition if applicable
+   * 
+   * @returns {Object} returns `rollData` and `parts` to be used in the item's Attack roll
+   */
+  getAttackToHit() {
+    const itemData = this.data.data;
+    if ( !this.hasAttack || !itemData ) return;
+    const rollData = this.getRollData();
+
+    // Define Roll bonuses
+    const parts = [];
+
+    // add the item's innate attack bonus
+    if ( itemData.attackBonus ) {
+      parts.push(itemData.attackBonus)
+
+      // Set toHit label to be the innate attack bonus
+      this.labels.toHit = itemData.attackBonus;
+    };
+
+    // if the item is an owned item get some more info from the actor
+    if (this.isOwned) {
+
+      // add the ability score modifier
+      parts.push(`@mod`);
+
+      // add prof if proficient or 
+      // if this attack comes from an item type that isn't a weapon or consumable (e.g. spell, class feature)
+      if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
+        parts.push("@prof");
+      }
+
+      // add the actor's bonus to attacks with this item's actionType (Weapon Type)
+      const actorBonus = this.actor.data.data.bonuses?.[itemData.actionType] || {};
+      if ( actorBonus.attack ) parts.push(actorBonus.attack);
+
+      // check for an ammo bonus
+      if ( itemData.consume.type === 'ammo' && !!this.actor.items ) {
+        const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
+
+        const ammoItemQuantity = ammoItemData?.data.quantity;
+        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
+        const ammoItemAttackBonus = ammoItemData?.data.attackBonus;
+        const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
+
+        // only add the ammoBonus to the attack roll if 
+        // the ammution is a consumable with type 'ammo' 
+        // AND that ammo has a bonus
+        // AND the actor has enough ammo to use
+        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+          parts.push("@ammo");
+          rollData["ammo"] = ammoItemAttackBonus;
+        }
+      }
+
+      let toHitLabel = new Roll(parts.join('+'), rollData).formula.trim();
+
+      if (toHitLabel.charAt(0) !== '-') {
+        toHitLabel = '+ ' + toHitLabel
+      }
+
+      // Update labels
+      this.labels.toHit = toHitLabel;
+    }
+
+    return {rollData, parts};
   }
 
   /* -------------------------------------------- */
@@ -717,47 +796,28 @@ export default class Item5e extends Item {
    */
   async rollAttack(options={}) {
     const itemData = this.data.data;
-    const actorData = this.actor.data.data;
     const flags = this.actor.data.flags.dnd5e || {};
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
     let title = `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`;
-    const rollData = this.getRollData();
 
-    // Define Roll bonuses
-    const parts = [`@mod`];
-    if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
-      parts.push("@prof");
-    }
+    // get the parts and rollData for this item's attack
+    const {parts, rollData} = this.getAttackToHit();
 
-    // Attack Bonus
-    if ( itemData.attackBonus ) parts.push(itemData.attackBonus);
-    const actorBonus = actorData?.bonuses?.[itemData.actionType] || {};
-    if ( actorBonus.attack ) parts.push(actorBonus.attack);
-
-    // Ammunition Bonus
+    // Handle ammunition consumption
     delete this._ammo;
     let ammo = null;
     let ammoUpdate = null;
     const consume = itemData.consume;
     if ( consume?.type === "ammo" ) {
       ammo = this.actor.items.get(consume.target);
-
-      if ( ammo?.data ) {
+      if (ammo?.data) {
         const q = ammo.data.data.quantity;
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
           this._ammo = ammo;
-          const ammoData = this._ammo.data;
-          const ammoBonus = ammoData.data.attackBonus;
-
-          // only add the ammoBonus to the roll if the ammution is a consumable with type 'ammo' and that ammo has a bonus
-          if ( ammoBonus && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
-            parts.push("@ammo");
-            rollData["ammo"] = ammoBonus;
-            title += ` [${ammo.name}]`;
-          }
+          title += ` [${this._ammo.name}]`;
         }
       }
 

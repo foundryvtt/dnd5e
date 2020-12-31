@@ -93,8 +93,17 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.prof + init.bonus;
 
     // Prepare spell-casting data
-    this._computeSpellcastingDC(this.data);
+    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
+
+    // recompute item labels now that the actor has data
+    this.items.forEach(item => {
+      // Compute ability save DCs that depend on the calling actor
+      item.getSaveDC();
+
+      // Compute item toHits that depend on the calling actor
+      item.getAttackToHit();
+    });
   }
 
   /* -------------------------------------------- */
@@ -340,23 +349,6 @@ export default class Actor5e extends Actor {
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
       skl.passive = 10 + skl.total + passive;
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Compute the spellcasting DC for all item abilities which use spell DC scaling
-   * @param {object} actorData    The actor data being prepared
-   * @private
-   */
-  _computeSpellcastingDC(actorData) {
-
-    // Compute the spellcasting DC
-    const data = actorData.data;
-    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
-
-    // Compute ability save DCs that depend on the calling actor
-    this.items.forEach(i => i.getSaveDC());
   }
 
   /* -------------------------------------------- */
