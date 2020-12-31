@@ -96,12 +96,9 @@ export default class Actor5e extends Actor {
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
 
-    // recompute item labels now that the actor has data
+    // Compute owned item attributes which depend on prepared Actor data
     this.items.forEach(item => {
-      // Compute ability save DCs that depend on the calling actor
       item.getSaveDC();
-
-      // Compute item toHits that depend on the calling actor
       item.getAttackToHit();
     });
   }

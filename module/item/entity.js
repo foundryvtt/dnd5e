@@ -294,59 +294,48 @@ export default class Item5e extends Item {
     // Define Roll bonuses
     const parts = [];
 
-    // add the item's innate attack bonus
+    // Include the item's innate attack bonus as the initial value and label
     if ( itemData.attackBonus ) {
       parts.push(itemData.attackBonus)
-
-      // Set toHit label to be the innate attack bonus
       this.labels.toHit = itemData.attackBonus;
-    };
-
-    // if the item is an owned item get some more info from the actor
-    if (this.isOwned) {
-
-      // add the ability score modifier
-      parts.push(`@mod`);
-
-      // add prof if proficient or 
-      // if this attack comes from an item type that isn't a weapon or consumable (e.g. spell, class feature)
-      if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
-        parts.push("@prof");
-      }
-
-      // add the actor's bonus to attacks with this item's actionType (Weapon Type)
-      const actorBonus = this.actor.data.data.bonuses?.[itemData.actionType] || {};
-      if ( actorBonus.attack ) parts.push(actorBonus.attack);
-
-      // check for an ammo bonus
-      if ( itemData.consume.type === 'ammo' && !!this.actor.items ) {
-        const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
-
-        const ammoItemQuantity = ammoItemData?.data.quantity;
-        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
-        const ammoItemAttackBonus = ammoItemData?.data.attackBonus;
-        const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
-
-        // only add the ammoBonus to the attack roll if 
-        // the ammution is a consumable with type 'ammo' 
-        // AND that ammo has a bonus
-        // AND the actor has enough ammo to use
-        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-          parts.push("@ammo");
-          rollData["ammo"] = ammoItemAttackBonus;
-        }
-      }
-
-      let toHitLabel = new Roll(parts.join('+'), rollData).formula.trim();
-
-      if (toHitLabel.charAt(0) !== '-') {
-        toHitLabel = '+ ' + toHitLabel
-      }
-
-      // Update labels
-      this.labels.toHit = toHitLabel;
     }
 
+    // Take no further action for un-owned items
+    if ( !this.isOwned ) return {rollData, parts};
+
+    // Ability score modifier
+    parts.push(`@mod`);
+
+    // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
+    if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
+      parts.push("@prof");
+    }
+
+    // Actor-level global bonus to attack rolls
+    const actorBonus = this.actor.data.data.bonuses?.[itemData.actionType] || {};
+    if ( actorBonus.attack ) parts.push(actorBonus.attack);
+
+    // One-time bonus provided by consumed ammunition
+    if ( itemData.consume.type === 'ammo' && !!this.actor.items ) {
+      const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
+      const ammoItemQuantity = ammoItemData?.data.quantity;
+      const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
+      const ammoItemAttackBonus = ammoItemData?.data.attackBonus;
+      const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
+      if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+        parts.push("@ammo");
+        rollData["ammo"] = ammoItemAttackBonus;
+      }
+    }
+
+    // Condense the resulting attack bonus formula into a simplified label
+    let toHitLabel = new Roll(parts.join('+'), rollData).formula.trim();
+    if (toHitLabel.charAt(0) !== '-') {
+      toHitLabel = '+ ' + toHitLabel
+    }
+    this.labels.toHit = toHitLabel;
+
+    // Update labels and return the prepared roll data
     return {rollData, parts};
   }
 
@@ -817,7 +806,7 @@ export default class Item5e extends Item {
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
           this._ammo = ammo;
-          title += ` [${this._ammo.name}]`;
+          title += ` [${ammo.name}]`;
         }
       }
 
