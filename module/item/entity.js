@@ -481,8 +481,8 @@ export default class Item5e extends Item {
         itemUpdates["data.uses.value"] = remaining;
       }
 
-      // Otherwise reduce quantity
-      if ( consumeQuantity && !used ) {
+      // Reduce quantity if not reducing usages or if usages hit 0 and we are set to consumeQuantity
+      if ( consumeQuantity && (!used || (remaining === 0)) ) {
         const q = Number(id.quantity ?? 1);
         if ( q >= 1 ) {
           used = true;
