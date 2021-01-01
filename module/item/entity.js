@@ -1,4 +1,4 @@
-import {d20Roll, damageRoll} from "../dice.js";
+import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 
 /**
@@ -329,7 +329,7 @@ export default class Item5e extends Item {
     }
 
     // Condense the resulting attack bonus formula into a simplified label
-    let toHitLabel = new Roll(parts.join('+'), rollData).formula.trim();
+    let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
     if (toHitLabel.charAt(0) !== '-') {
       toHitLabel = '+ ' + toHitLabel
     }
