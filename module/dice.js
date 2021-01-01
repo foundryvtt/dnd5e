@@ -53,7 +53,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
     // Determine the d20 roll and modifiers
     let nd = 1;
-    let mods = halflingLucky ? "r=1" : "";
+    let mods = halflingLucky ? "r1=1" : "";
 
     // Handle advantage
     if (adv === 1) {
