@@ -1030,11 +1030,11 @@ export default class Actor5e extends Actor {
 		  };
 		} else { 
 			let tRoll = new Roll(item.data.data.uses.recharge);
-			tRoll.roll();
+			tRoll.evaluate();
 			
 		  return {
 			_id: item._id,
-			"data.uses.value": Math.min((Number(item.data.data.uses.value)+Number(tRoll.result)), item.data.data.uses.max)
+			"data.uses.value": Math.min((Number(item.data.data.uses.value)+Number(tRoll.total)), item.data.data.uses.max)
 		  };
 		}
 
@@ -1151,8 +1151,8 @@ export default class Actor5e extends Actor {
 			  updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
 		  } else {
 			  let tRoll = new Roll(d.uses.recharge);
-			  tRoll.roll();
-			  updateItems.push({_id: item.id, "data.uses.value": Math.min((Number(d.uses.value)+Number(tRoll.result)),d.uses.max)}) ;
+			  tRoll.evaluate();
+			  updateItems.push({_id: item.id, "data.uses.value": Math.min((Number(d.uses.value)+Number(tRoll.total)),d.uses.max)}) ;
 		  }
       }
       else if ( d.recharge && d.recharge.value ) {
