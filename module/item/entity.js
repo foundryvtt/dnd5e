@@ -228,6 +228,26 @@ export default class Item5e extends Item {
       if ( dam.parts ) {
         labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
         labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
+
+        if (this.isOwned) {
+          const rollData = this.getRollData();
+
+          labels.totalDamage = dam.parts.reduce((acc, damagePart) => {
+            const rawFormula = damagePart[0];
+            const rawDamageType = damagePart[1];
+
+            const simplifiedFormula = simplifyRollFormula(rawFormula, rollData, { constantFirst: false });
+            const formattedDamageType = C.damageTypes[rawDamageType];
+
+            const totalDamageLabelPart = {
+              formula: simplifiedFormula,
+              damageType: formattedDamageType,
+            }
+
+            acc.push(totalDamageLabelPart);
+            return acc;
+          }, []);
+        }
       }
     }
 
