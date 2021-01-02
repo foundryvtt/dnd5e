@@ -1021,22 +1021,36 @@ export default class Actor5e extends Actor {
 
     // Recover item uses
     const recovery = newDay ? ["sr", "day"] : ["sr"];
+	let itemsRecovered = []; 
+	
     const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
     const updateItems = items.map(item => {
-		if (item.data.data.uses.recharge=="") {
+        if (item.data.data.uses.dailyRecovery==="") {
+          return {
+            _id: item._id,
+            "data.uses.value": item.data.data.uses.max
+          };
+        } else { 
+		  const d = item.data.data;
+          let tRoll = new Roll(item.data.data.uses.dailyRecovery);
+          tRoll.evaluate();
+		  
+		  if ((Number(d.uses.value)+Number(tRoll.total)) > d.uses.max)
+		  {
+			//Exceeded max
+			itemsRecovered.push({name: item.name, recovered: tRoll.total, capped: true, formula: d.uses.dailyRecovery});
 			return {
-			_id: item._id,
-			"data.uses.value": item.data.data.uses.max
-		  };
-		} else { 
-			let tRoll = new Roll(item.data.data.uses.recharge);
-			tRoll.evaluate();
-			
-		  return {
-			_id: item._id,
-			"data.uses.value": Math.min((Number(item.data.data.uses.value)+Number(tRoll.total)), item.data.data.uses.max)
-		  };
-		}
+            _id: item._id,
+            "data.uses.value": item.data.data.uses.max
+          };
+		  } else {
+			itemsRecovered.push({name: item.name, recovered: tRoll.total, capped: false, formula: d.uses.dailyRecovery});
+			return {
+            _id: item._id,
+            "data.uses.value": (Number(item.data.data.uses.value)+Number(tRoll.total))
+          };
+		  }
+        }
 
     });
     await this.updateEmbeddedEntity("OwnedItem", updateItems);
@@ -1051,6 +1065,12 @@ export default class Actor5e extends Actor {
         case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
         case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
       }
+	  
+	  let irMessage = "";
+      for (let i = 0; i < itemsRecovered.length; i++) {
+        irMessage += game.i18n.format("DND5E.RestResultItemRecovery", {item: itemsRecovered[i].name, recovery: itemsRecovered[i].recovered, formula: itemsRecovered[i].formula});
+        //"DND5E.RestResultItemRecovery": "\r\n{item} regains {recovery} charges ({formula})",
+      }
 
       // Summarize the health effects
       let srMessage = "DND5E.ShortRestResultShort";
@@ -1061,7 +1081,7 @@ export default class Actor5e extends Actor {
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
-        content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
+        content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp}) + irMessage
       });
     }
 
@@ -1143,17 +1163,28 @@ export default class Actor5e extends Actor {
 
     // Iterate over owned items, restoring uses per day and recovering Hit Dice
     const recovery = newDay ? ["sr", "lr", "day"] : ["sr", "lr"];
-	
+    
+    let itemsRecovered = []; 
+    
     for ( let item of this.items ) {
       const d = item.data.data;
       if ( d.uses && recovery.includes(d.uses.per) ) {
-		  if (d.uses.recharge=="") {
-			  updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
-		  } else {
-			  let tRoll = new Roll(d.uses.recharge);
-			  tRoll.evaluate();
-			  updateItems.push({_id: item.id, "data.uses.value": Math.min((Number(d.uses.value)+Number(tRoll.total)),d.uses.max)}) ;
-		  }
+          if (d.uses.dailyRecovery==="") {
+              updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
+          } else {
+              let tRoll = new Roll(d.uses.dailyRecovery);
+              tRoll.evaluate();
+              if ((Number(d.uses.value)+Number(tRoll.total)) > d.uses.max)
+              {
+                //Exceeded max
+                updateItems.push({_id: item.id, "data.uses.value": d.uses.max}) ;
+                itemsRecovered.push({name: item.name, recovered: tRoll.total, capped: true, formula: d.uses.dailyRecovery});
+              } else {
+                updateItems.push({_id: item.id, "data.uses.value": (Number(d.uses.value)+Number(tRoll.total))}) ;
+                itemsRecovered.push({name: item.name, recovered: tRoll.total, capped: false, formula: d.uses.dailyRecovery});
+              }
+              
+          }
       }
       else if ( d.recharge && d.recharge.value ) {
         updateItems.push({_id: item.id, "data.recharge.charged": true});
@@ -1174,6 +1205,11 @@ export default class Actor5e extends Actor {
 
     // Determine the chat message to display
     if ( chat ) {
+      let irMessage = "";
+      for (let i = 0; i < itemsRecovered.length; i++) {
+        irMessage += game.i18n.format("DND5E.RestResultItemRecovery", {item: itemsRecovered[i].name, recovery: itemsRecovered[i].recovered, formula: itemsRecovered[i].formula});
+        //"DND5E.RestResultItemRecovery": "\r\n{item} regains {recovery} charges ({formula})",
+      }
       let lrMessage = "DND5E.LongRestResultShort";
       if((dhp !== 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResult";
       else if ((dhp !== 0) && (dhd === 0)) lrMessage = "DND5E.LongRestResultHitPoints";
@@ -1182,7 +1218,7 @@ export default class Actor5e extends Actor {
         user: game.user._id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
-        content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
+        content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd}) + irMessage
       });
     }
 
