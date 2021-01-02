@@ -984,15 +984,15 @@ export default class Actor5e extends Actor {
     const hd0 = this.data.data.attributes.hd;
     const hp0 = hp.value;
     let newDay = false;
-	let rollDailyRecovery = false;
+    let rollDailyRecovery = false;
 
     // Display a Dialog for rolling hit dice
     if ( dialog ) {
       try {
-		let dialogOps = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
-		rollDailyRecovery = dialogOps['rollDailyRecovery'];
+        let dialogOps = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+        rollDailyRecovery = dialogOps['rollDailyRecovery'];
         newDay = dialogOps['newDay'];
-		this.setFlag("dnd5e", "rollDailyRecovery", rollDailyRecovery);
+        this.setFlag("dnd5e", "rollDailyRecovery", rollDailyRecovery);
       } catch(err) {
         return;
       }
@@ -1025,7 +1025,7 @@ export default class Actor5e extends Actor {
 
     // Recover item uses
     const recovery = newDay ? ["sr", "day"] : ["sr"];
-	
+    
     let itemsRecovered = []; 
     
     const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
@@ -1111,15 +1111,15 @@ export default class Actor5e extends Actor {
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
     const data = this.data.data;
-	let rollDailyRecovery = false;
+    let rollDailyRecovery = false;
 
     // Maybe present a confirmation dialog
     if ( dialog ) {
       try {
-		let dialogOps = await LongRestDialog.longRestDialog({actor: this});
-		rollDailyRecovery = dialogOps['rollDailyRecovery'];
+        let dialogOps = await LongRestDialog.longRestDialog({actor: this});
+        rollDailyRecovery = dialogOps['rollDailyRecovery'];
         newDay = dialogOps['newDay'];
-		this.setFlag("dnd5e", "rollDailyRecovery", rollDailyRecovery);
+        this.setFlag("dnd5e", "rollDailyRecovery", rollDailyRecovery);
       } catch(err) {
         return;
       }

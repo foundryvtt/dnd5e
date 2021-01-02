@@ -26,7 +26,7 @@ export default class LongRestDialog extends Dialog {
     const variant = game.settings.get("dnd5e", "restVariant");
     data.promptNewDay = variant !== "gritty";     // It's always a new day when resting 1 week
     data.newDay = variant === "normal";           // It's probably a new day when resting normally (8 hours)
-	data.rollDailyRecovery = this.actor.getFlag("dnd5e", "rollDailyRecovery");           // Check if actor has roll Daily Recovery enabled
+    data.rollDailyRecovery = this.actor.getFlag("dnd5e", "rollDailyRecovery");           // Check if actor has roll Daily Recovery enabled
     return data;
   }
 
@@ -48,12 +48,12 @@ export default class LongRestDialog extends Dialog {
             label: "Rest",
             callback: html => {
               let newDay = false;
-			  let rollDailyRecovery = false;
+              let rollDailyRecovery = false;
               if (game.settings.get("dnd5e", "restVariant") === "normal")
                 newDay = html.find('input[name="newDay"]')[0].checked;
               else if(game.settings.get("dnd5e", "restVariant") === "gritty")
                 newDay = true;
-			  rollDailyRecovery = html.find('input[name="rollDailyRecovery"]')[0].checked;
+              rollDailyRecovery = html.find('input[name="rollDailyRecovery"]')[0].checked;
               resolve({"newDay":newDay,"rollDailyRecovery":rollDailyRecovery});
             }
           },
