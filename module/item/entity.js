@@ -318,13 +318,16 @@ export default class Item5e extends Item {
     // One-time bonus provided by consumed ammunition
     if ( itemData.consume.type === 'ammo' && !!this.actor.items ) {
       const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
-      const ammoItemQuantity = ammoItemData?.data.quantity;
-      const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
-      const ammoItemAttackBonus = ammoItemData?.data.attackBonus;
-      const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
-      if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-        parts.push("@ammo");
-        rollData["ammo"] = ammoItemAttackBonus;
+
+      if (ammoItemData) {
+        const ammoItemQuantity = ammoItemData.data.quantity;
+        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
+        const ammoItemAttackBonus = ammoItemData.data.attackBonus;
+        const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
+        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+          parts.push("@ammo");
+          rollData["ammo"] = ammoItemAttackBonus;
+        }
       }
     }
 
