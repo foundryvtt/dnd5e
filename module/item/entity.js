@@ -232,7 +232,7 @@ export default class Item5e extends Item {
         if (this.isOwned) {
           const rollData = this.getRollData();
 
-          labels.totalDamage = dam.parts.reduce((acc, damagePart) => {
+          labels.totalDamages = dam.parts.reduce((acc, damagePart) => {
             const rawFormula = damagePart[0];
             const rawDamageType = damagePart[1];
 
