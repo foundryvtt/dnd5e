@@ -49,9 +49,10 @@ export default class LongRestDialog extends Dialog {
             callback: html => {
               let newDay = false;
               let rollDailyRecovery = false;
-              if (game.settings.get("dnd5e", "restVariant") === "normal")
-                newDay = html.find('input[name="newDay"]')[0].checked;
-              else if(game.settings.get("dnd5e", "restVariant") === "gritty")
+              let newDayBox = html.find('input[name="newDay"]')[0];
+              if (newDayBox!==undefined)
+                newDay = newDayBox.checked;
+              else if (game.settings.get("dnd5e", "restVariant") === "gritty")
                 newDay = true;
               rollDailyRecovery = html.find('input[name="rollDailyRecovery"]')[0].checked;
               resolve({"newDay":newDay,"rollDailyRecovery":rollDailyRecovery});

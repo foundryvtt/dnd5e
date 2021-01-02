@@ -102,7 +102,11 @@ export default class ShortRestDialog extends Dialog {
             callback: html => {
               let newDay = false;
               let rollDailyRecovery = false;
-              newDay = html.find('input[name="newDay"]')[0].checked;
+              
+              let newDayBox = html.find('input[name="newDay"]')[0];
+              if (newDayBox!==undefined)
+                newDay = newDayBox.checked;
+            
               rollDailyRecovery = html.find('input[name="rollDailyRecovery"]')[0].checked;
               resolve({"newDay":newDay,"rollDailyRecovery":rollDailyRecovery});
             }
