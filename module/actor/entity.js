@@ -1023,10 +1023,21 @@ export default class Actor5e extends Actor {
     const recovery = newDay ? ["sr", "day"] : ["sr"];
     const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
     const updateItems = items.map(item => {
-      return {
-        _id: item._id,
-        "data.uses.value": item.data.data.uses.max
-      };
+		if (item.data.data.uses.recharge=="") {
+			return {
+			_id: item._id,
+			"data.uses.value": item.data.data.uses.max
+		  };
+		} else { 
+			let tRoll = new Roll(item.data.data.uses.recharge);
+			tRoll.roll();
+			
+		  return {
+			_id: item._id,
+			"data.uses.value": Math.min((Number(item.data.data.uses.value)+Number(tRoll.result)), item.data.data.uses.max)
+		  };
+		}
+
     });
     await this.updateEmbeddedEntity("OwnedItem", updateItems);
 
@@ -1132,10 +1143,17 @@ export default class Actor5e extends Actor {
 
     // Iterate over owned items, restoring uses per day and recovering Hit Dice
     const recovery = newDay ? ["sr", "lr", "day"] : ["sr", "lr"];
+	
     for ( let item of this.items ) {
       const d = item.data.data;
       if ( d.uses && recovery.includes(d.uses.per) ) {
-        updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
+		  if (d.uses.recharge=="") {
+			  updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
+		  } else {
+			  let tRoll = new Roll(d.uses.recharge);
+			  tRoll.roll();
+			  updateItems.push({_id: item.id, "data.uses.value": Math.min((Number(d.uses.value)+Number(tRoll.result)),d.uses.max)}) ;
+		  }
       }
       else if ( d.recharge && d.recharge.value ) {
         updateItems.push({_id: item.id, "data.recharge.charged": true});
