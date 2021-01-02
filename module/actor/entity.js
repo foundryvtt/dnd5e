@@ -984,11 +984,15 @@ export default class Actor5e extends Actor {
     const hd0 = this.data.data.attributes.hd;
     const hp0 = hp.value;
     let newDay = false;
+	let rollDailyRecovery = false;
 
     // Display a Dialog for rolling hit dice
     if ( dialog ) {
       try {
-        newDay = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+		let dialogOps = await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0});
+		rollDailyRecovery = dialogOps['rollDailyRecovery'];
+        newDay = dialogOps['newDay'];
+		this.setFlag("dnd5e", "rollDailyRecovery", rollDailyRecovery);
       } catch(err) {
         return;
       }
@@ -1021,11 +1025,12 @@ export default class Actor5e extends Actor {
 
     // Recover item uses
     const recovery = newDay ? ["sr", "day"] : ["sr"];
+	
     let itemsRecovered = []; 
     
     const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
     const updateItems = items.map(item => {
-      if (item.data.data.uses.dailyRecovery==="") {
+      if (item.data.data.uses.dailyRecovery==="" || !rollDailyRecovery) {
         return {
           _id: item._id,
           "data.uses.value": item.data.data.uses.max
@@ -1106,11 +1111,15 @@ export default class Actor5e extends Actor {
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
     const data = this.data.data;
+	let rollDailyRecovery = false;
 
     // Maybe present a confirmation dialog
     if ( dialog ) {
       try {
-        newDay = await LongRestDialog.longRestDialog({actor: this});
+		let dialogOps = await LongRestDialog.longRestDialog({actor: this});
+		rollDailyRecovery = dialogOps['rollDailyRecovery'];
+        newDay = dialogOps['newDay'];
+		this.setFlag("dnd5e", "rollDailyRecovery", rollDailyRecovery);
       } catch(err) {
         return;
       }
@@ -1169,7 +1178,7 @@ export default class Actor5e extends Actor {
     for ( let item of this.items ) {
       const d = item.data.data;
       if ( d.uses && recovery.includes(d.uses.per) ) {
-        if (d.uses.dailyRecovery==="") {
+        if (d.uses.dailyRecovery==="" || !rollDailyRecovery) {
           updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
         } else {
           let tRoll = new Roll(d.uses.dailyRecovery);

@@ -54,6 +54,7 @@ export default class ShortRestDialog extends Dialog {
     const variant = game.settings.get("dnd5e", "restVariant");
     data.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute
     data.newDay = false;                        // It may be a new day, but not by default
+	data.rollDailyRecovery = this.actor.getFlag("dnd5e", "rollDailyRecovery");           // Check if actor has roll Daily Recovery enabled
     return data;
   }
 
@@ -100,9 +101,10 @@ export default class ShortRestDialog extends Dialog {
             label: "Rest",
             callback: html => {
               let newDay = false;
-              
+			  let rollDailyRecovery = false;
               newDay = html.find('input[name="newDay"]')[0].checked;
-              resolve(newDay);
+			  rollDailyRecovery = html.find('input[name="rollDailyRecovery"]')[0].checked;
+              resolve({"newDay":newDay,"rollDailyRecovery":rollDailyRecovery});
             }
           },
           cancel: {

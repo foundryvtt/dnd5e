@@ -26,6 +26,12 @@
         <p class="hint">Recover limited use abilities which recharge "per day"?</p>
     </div>
     {{/if}}
+	
+	<div class="form-group">
+        <label>Roll Item Recharge formulas?</label>
+        <input type="checkbox" name="rollDailyRecovery" {{checked rollDailyRecovery}}/>
+        <p class="hint">Roll formulas for items that recharge on Short Rest{{#if promptNewDay}}/Per Day (if checked above){{/if}}?</p>
+    </div>
 
     <div class="dialog-buttons">
         {{#each buttons as |button id|}}
