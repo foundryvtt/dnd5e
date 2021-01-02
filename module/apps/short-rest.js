@@ -100,7 +100,7 @@ export default class ShortRestDialog extends Dialog {
             label: "Rest",
             callback: html => {
               let newDay = false;
-              if (game.settings.get("dnd5e", "restVariant") === "gritty")
+              
                 newDay = html.find('input[name="newDay"]')[0].checked;
               resolve(newDay);
             }
