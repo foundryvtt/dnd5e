@@ -232,21 +232,10 @@ export default class Item5e extends Item {
         if (this.isOwned) {
           const rollData = this.getRollData();
 
-          labels.totalDamages = dam.parts.reduce((acc, damagePart) => {
-            const rawFormula = damagePart[0];
-            const rawDamageType = damagePart[1];
-
-            const simplifiedFormula = simplifyRollFormula(rawFormula, rollData, { constantFirst: false });
-            const formattedDamageType = C.damageTypes[rawDamageType];
-
-            const totalDamageLabelPart = {
-              formula: simplifiedFormula,
-              damageType: formattedDamageType,
-            }
-
-            acc.push(totalDamageLabelPart);
-            return acc;
-          }, []);
+          labels.totalDamages = dam.parts.map((damagePart) => ({
+            formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
+            damageType: C.damageTypes[damagePart[1]],
+          }));
         }
       }
     }
