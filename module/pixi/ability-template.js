@@ -29,8 +29,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
     // Additional type-specific data
     switch ( templateShape ) {
-      case "cone": // 5e cone RAW should be 53.13 degrees
-        templateData.angle = 53.13;
+      case "cone":
+        templateData.angle = CONFIG.MeasuredTemplate.defaults.angle;
         break;
       case "rect": // 5e rectangular AoEs are always cubes
         templateData.distance = Math.hypot(target.value, target.value);
