@@ -139,9 +139,340 @@
                         {{/each}}
                         {{/select}}
                     </select>
-                    <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
+                    {{#if (ne data.scaling.mode "manual-spell-level")}}
+                        <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
+                    {{/if}}
                 </div>
             </div>
+                
+                
+            {{!-- Manual level scaling --}}
+            {{#if (eq data.scaling.mode "manual-spell-level")}}
+                
+                {{!-- Level Navigation --}}
+                <nav class="manual-scaling-navigation tabs" data-group="manual-scaling">
+                    {{#each data.scaling.parsed as |parsedData lvl|}}
+                    <a class="item {{#if @first}}active{{/if}}" data-tab="{{lvl}}">{{ parsedData.levelLabel }}</a>
+                    {{/each}}
+                </nav>
+                
+                {{!-- Manual scaling --}}
+                {{#each data.scaling.parsed as |parsedData lvl|}}
+                <div class="manual-scaling" data-group="manual-scaling" data-tab="{{lvl}}">
+                    {{!-- Spell School --}}
+                    <div class="form-group">
+                        <label>{{ localize "DND5E.SpellSchool" }}</label>
+                        <select name="data.scaling.parsed.{{lvl}}.school">
+                            {{#select parsedData.school}}
+                            {{#each @root.config.spellSchools as |name sch|}}
+                            <option value="{{sch}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+
+                    {{!-- Spell Components --}}
+                    <div class="spell-components form-group stacked">
+                        <label>{{ localize "DND5E.SpellComponents" }}</label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="data.scaling.parsed.{{lvl}}.components.vocal" {{checked parsedData.components.vocal}}/> {{ localize "DND5E.ComponentVerbal" }}
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="data.scaling.parsed.{{lvl}}.components.somatic" {{checked parsedData.components.somatic}}/> {{ localize "DND5E.ComponentSomatic" }}
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="data.scaling.parsed.{{lvl}}.components.material" {{checked parsedData.components.material}}/> {{ localize "DND5E.ComponentMaterial" }}
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="data.scaling.parsed.{{lvl}}.components.concentration" {{checked parsedData.components.concentration}}/> {{ localize "DND5E.Concentration" }}
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="data.scaling.parsed.{{lvl}}.components.ritual" {{checked parsedData.components.ritual}}/> {{ localize "DND5E.Ritual" }}
+                        </label>
+                    </div>
+
+                    {{!-- Material Components --}}
+                    <div class="form-group stacked">
+                        <label>{{ localize "DND5E.SpellMaterials" }}</label>
+                        <input class="materials" type="text" name="data.scaling.parsed.{{lvl}}.materials.value" value="{{data.materials.value}}"/>
+                        {{#if parsedData.materials.value}}
+                        <div class="spell-materials flexrow">
+                            <label>{{ localize "DND5E.Supply" }}</label>
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.materials.supply" value="{{parsedData.materials.supply}}" data-dtype="Number" Placeholder="0"/>
+                            <label>{{ localize "DND5E.CostGP" }}</label>
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.materials.cost" value="{{parsedData.materials.cost}}" data-dtype="Number" Placeholder="-"/>
+                            <label>{{ localize "DND5E.Consumed" }}</label>
+                            <input type="checkbox" name="data.scaling.parsed.{{lvl}}.materials.consumed" {{checked parsedData.materials.consumed}}/>
+                        </div>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Preparation Mode --}}
+                    <div class="form-group input-select">
+                        <label>{{ localize "DND5E.SpellPreparationMode" }}</label>
+                        <div class="form-fields">
+                            <label class="checkbox prepared">
+                                {{ localize "DND5E.SpellPrepared" }} <input type="checkbox" name="data.scaling.parsed.{{lvl}}.preparation.prepared" {{checked parsedData.preparation.prepared}}/>
+                            </label>
+                            <select name="data.scaling.parsed.{{lvl}}.preparation.mode">
+                                {{ selectOptions @root.config.spellPreparationModes selected=parsedData.preparation.mode }}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h3 class="form-header">{{ localize "DND5E.SpellCastingHeader" }}</h3>
+                    {{!-- Activation Cost --}}
+                    <div class="form-group input-select">
+                        <label>{{ localize "DND5E.ItemActivationCost" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.activation.cost" value="{{parsedData.activation.cost}}" data-dtype="Number" placeholder="-"/>
+                            <select name="data.scaling.parsed.{{lvl}}.activation.type">
+                                {{#select parsedData.activation.type}}
+                                <option value=""></option>
+                                {{#each @root.config.abilityActivationTypes as |name key|}}
+                                <option value="{{key}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    {{#if parsedData.activation.type}}
+
+                    {{!-- Activation Condition --}}
+                    <div class="form-group">
+                        <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.activation.condition" value="{{parsedData.activation.condition}}"/>
+                        </div>
+                    </div>
+
+                    {{#if isCrewed}}
+                    <div class="form-group">
+                        <label>{{localize 'DND5E.Cover'}}</label>
+                        <div class="form-fields">
+                            <select name="data.scaling.parsed.{{lvl}}.cover" data-dtype="Number">
+                                {{#select parsedData.cover}}
+                                    <option value="">&mdash;</option>
+                                    {{#each @root.config.cover as |v k|}}
+                                        <option value="{{k}}">{{v}}</option>
+                                    {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{!-- Ability Target --}}
+                    <div class="form-group input-select-select">
+                        <label>{{ localize "DND5E.Target" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.target.value" value="{{parsedData.target.value}}" data-dtype="Number" placeholder="-"/>
+                            <select name="data.scaling.parsed.{{lvl}}.target.units">
+                                {{#select parsedData.target.units}}
+                                <option value=""></option>
+                                {{#each @root.config.distanceUnits as |name key|}}
+                                <option value="{{key}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            <select name="data.scaling.parsed.{{lvl}}.target.type">
+                                {{#select parsedData.target.type}}
+                                <option value=""></option>
+                                {{#each @root.config.targetTypes as |name key|}}
+                                <option value="{{key}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+
+                    {{!-- Ability Target Width --}}
+                    {{#if isLine}}
+                    <div class="form-group input-select-select">
+                        <label>{{ localize "DND5E.TargetWidth" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.target.width" value="{{parsedData.target.width}}" data-dtype="Number" placeholder="-"/>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{!-- Ability Range --}}
+                    <div class="form-group input-select">
+                        <label>{{ localize "DND5E.Range" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.range.value" value="{{parsedData.range.value}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Normal' }}"/>
+                            <span class="sep">/</span>
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.range.long" value="{{parsedData.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
+                            <select name="data.scaling.parsed.{{lvl}}.range.units">
+                                {{#select parsedData.range.units}}
+                                <option value=""></option>
+                                {{#each @root.config.distanceUnits as |name key|}}
+                                <option value="{{key}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+
+                    {{!-- Effect Duration --}}
+                    <div class="form-group input-select">
+                        <label>{{ localize "DND5E.Duration" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.duration.value" value="{{parsedData.duration.value}}" data-dtype="Number" placeholder="-"/>
+                            <select name="data.scaling.parsed.{{lvl}}.duration.units">
+                                {{#select parsedData.duration.units}}
+                                <option value=""></option>
+                                {{#each @root.config.timePeriods as |name key|}}
+                                <option value="{{key}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+
+                    {{!-- Consumption --}}
+                    <div class="form-group uses-per">
+                        <label>{{ localize "DND5E.ConsumeTitle" }}</label>
+                        <div class="form-fields">
+                            <select name="data.scaling.parsed.{{lvl}}.consume.type">
+                                {{#select parsedData.consume.type}}
+                                <option value=""></option>
+                                {{#each @root.config.abilityConsumptionTypes as |name key|}}
+                                <option value="{{key}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            <select name="data.scaling.parsed.{{lvl}}.consume.target">
+                                {{#select parsedData.consume.target}}
+                                <option value=""></option>
+                                {{#each @root.abilityConsumptionTargets as |name key|}}
+                                <option value="{{key}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.consume.amount" value="{{parsedData.consume.amount}}" data-dtype="Number"/>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    <h3 class="form-header">{{ localize "DND5E.SpellEffects" }}</h3>
+                    {{!-- Action Type --}}
+                    <div class="form-group select">
+                        <label>{{ localize "DND5E.ItemActionType" }}</label>
+                        <select name="data.scaling.parsed.{{lvl}}.actionType">
+                            {{#select parsedData.actionType}}
+                            <option value=""></option>
+                            {{#each @root.config.itemActionTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                    {{#if parsedData.actionType}}
+
+                    {{!-- Ability Modifier --}}
+                    <div class="form-group select">
+                        <label>{{ localize "DND5E.AbilityModifier" }}</label>
+                        <select name="data.scaling.parsed.{{lvl}}.ability">
+                            {{#select parsedData.ability}}
+                            <option value="">{{ localize "DND5E.Default" }}</option>
+                            {{#each @root.config.abilities as |ability a|}}
+                            <option value="{{a}}">{{ability}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+
+                    {{!-- Attack Roll Bonus --}}
+                    {{#if hasAttackRoll }}
+                    <div class="form-group">
+                        <label>{{ localize "DND5E.ItemAttackBonus" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.attackBonus" value="{{parsedData.attackBonus}}"/>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{!-- Damage Formula --}}
+                    <h4 class="damage-header">
+                        {{#unless isHealing }}{{ localize "DND5E.Damage" }}{{ else }}{{ localize "DND5E.Healing" }}{{/unless}} {{ localize "DND5E.Formula" }}
+                        <a class="damage-control add-damage" data-path-prefix="data.scaling.parsed.{{lvl}}"><i class="fas fa-plus"></i></a>
+                    </h4>
+                    <ol class="damage-parts form-group">
+                        {{#each parsedData.damage.parts as |part i| }}
+                        <li class="damage-part flexrow" data-damage-part="{{i}}">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.damage.parts.{{i}}.0" value="{{lookup this "0"}}"/>
+                            <select name="data.scaling.parsed.{{lvl}}.damage.parts.{{i}}.1">
+                                {{#select (lookup this "1") }}
+                                <option value="">{{ localize "DND5E.None" }}</option>
+                                {{#each @root.config.damageTypes as |name type|}}
+                                <option value="{{type}}">{{name}}</option>
+                                {{/each}}
+                                {{#each @root.config.healingTypes as |name type|}}
+                                <option value="{{type}}">{{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            <a class="damage-control delete-damage" data-path-prefix="data.scaling.parsed.{{lvl}}"><i class="fas fa-minus"></i></a>
+                        </li>
+                        {{/each}}
+                    </ol>
+
+                    {{!-- Versatile Damage --}}
+                    {{#if parsedData.damage.parts.length }}
+                    <div class="form-group">
+                        <label>{{ localize "DND5E.VersatileDamage" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.damage.versatile" value="{{parsedData.damage.versatile}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{!-- Other Formula --}}
+                    <div class="form-group">
+                        <label>{{ localize "DND5E.OtherFormula" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.formula" value="{{parsedData.formula}}" placeholder="{{ localize 'DND5E.Formula' }}"/>
+                        </div>
+                    </div>
+
+                    {{!-- Saving Throw --}}
+                    <div class="form-group input-select">
+                        <label>{{ localize "DND5E.ActionSave" }}</label>
+                        <div class="form-fields">
+                            <select name="data.scaling.parsed.{{lvl}}.save.ability">
+                                {{#select parsedData.save.ability}}
+                                <option value=""></option>
+                                {{#each @root.config.abilities as |ability a|}}
+                                <option value="{{a}}">{{ability}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                            <span>{{ localize "DND5E.VsDC" }}</span>
+                            <input type="text" name="data.scaling.parsed.{{lvl}}.save.dc" value="{{#if parsedData.save.dc}}{{parsedData.save.dc}}{{/if}}" data-dtype="Number" placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless (eq parsedData.save.scaling "flat")}}disabled{{/unless}}/>
+                            <select name="data.scaling.parsed.{{lvl}}.save.scaling">
+                                {{#select parsedData.save.scaling}}
+                                <option value="spell">{{ localize "DND5E.Spellcasting" }}</option>
+                                {{#each @root.config.abilities as |ability a|}}
+                                <option value="{{a}}">{{ability}}</option>
+                                {{/each}}
+                                <option value="flat">{{ localize "DND5E.Flat" }}</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+
+                    {{!-- Chat Message Flavor --}}
+                    <div class="form-group stacked">
+                        <label>{{ localize "DND5E.ChatFlavor" }}</label>
+                        <input type="text" name="data.scaling.parsed.{{lvl}}.chatFlavor" value="{{parsedData.chatFlavor}}"/>
+                    </div>
+                    {{/if}}
+
+                </div>
+                {{/each}}
+
+            {{/if}}
         </div>
 
         {{!-- Effects Tab --}}

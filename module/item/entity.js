@@ -170,6 +170,20 @@ export default class Item5e extends Item {
         return arr;
       }, []);
       labels.materials = data?.materials?.value ?? null;
+      // TODO manual-character-level
+      if (data?.scaling?.mode === 'manual-spell-level') {
+        data.scaling.parsed = data.scaling.parsed || {};
+        for (let lvl = data.level + 1; lvl <= 9; lvl++) {
+          if (!data.scaling.parsed[lvl]) {
+            data.scaling.parsed[lvl] = duplicate(data);
+          }
+          data.scaling.parsed[lvl].levelLabel = C.spellLevels[lvl];
+          data.scaling.parsed[lvl].level = lvl;
+          // not supported for scaling
+          data.scaling.parsed[lvl].scaling = {mode: 'none'};
+          data.scaling.parsed[lvl].uses = { value: 0, max: 0, per: "" };
+        }
+      }
     }
 
     // Feat Items
@@ -356,70 +370,95 @@ export default class Item5e extends Item {
     let item = this;
     const actor = this.actor;
 
-    // Reference aspects of the item data necessary for usage
-    const id = this.data.data;                // Item data
-    const hasArea = this.hasAreaTarget;       // Is the ability usage an AoE?
-    const resource = id.consume || {};        // Resource consumption
-    const recharge = id.recharge || {};       // Recharge mechanic
-    const uses = id?.uses ?? {};              // Limited uses
-    const isSpell = this.type === "spell";    // Does the item require a spell slot?
-    const requireSpellSlot = isSpell && (id.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(id.preparation.mode);
-
+    let refData = Item5e._getRollReferenceData({item: item});
+    
     // Define follow-up actions resulting from the item usage
-    let createMeasuredTemplate = hasArea;       // Trigger a template creation
-    let consumeRecharge = !!recharge.value;     // Consume recharge
-    let consumeResource = !!resource.target && (resource.type !== "ammo") // Consume a linked (non-ammo) resource
-    let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
-    let consumeUsage = !!uses.per;              // Consume limited uses
-    let consumeQuantity = uses.autoDestroy;     // Consume quantity of the item in lieu of uses
+    refData.createMeasuredTemplate = refData.hasArea;       // Trigger a template creation
+    refData.consumeRecharge = !!refData.recharge.value;     // Consume recharge
+    refData.consumeResource = !!refData.resource.target && (refData.resource.type !== "ammo") // Consume a linked (non-ammo) resource
+    refData.consumeSpellSlot = refData.requireSpellSlot;    // Consume a spell slot
+    refData.consumeUsage = !!refData.uses.per;              // Consume limited uses
+    refData.consumeQuantity = refData.uses.autoDestroy;     // Consume quantity of the item in lieu of uses
 
     // Display a configuration dialog to customize the usage
-    const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
+    const needsConfiguration = refData.createMeasuredTemplate || refData.consumeRecharge || refData.consumeResource || refData.consumeSpellSlot || refData.consumeUsage;
     if (configureDialog && needsConfiguration) {
-      const configuration = await AbilityUseDialog.create(this);
+      const configuration = await AbilityUseDialog.create(item);
       if (!configuration) return;
 
       // Determine consumption preferences
-      createMeasuredTemplate = Boolean(configuration.placeTemplate);
-      consumeUsage = Boolean(configuration.consumeUse);
-      consumeRecharge = Boolean(configuration.consumeRecharge);
-      consumeResource = Boolean(configuration.consumeResource);
-      consumeSpellSlot = Boolean(configuration.consumeSlot);
+      refData.createMeasuredTemplate = Boolean(configuration.placeTemplate);
+      refData.consumeUsage = Boolean(configuration.consumeUse);
+      refData.consumeRecharge = Boolean(configuration.consumeRecharge);
+      refData.consumeResource = Boolean(configuration.consumeResource);
+      refData.consumeSpellSlot = Boolean(configuration.consumeSlot);
 
       // Handle spell upcasting
-      if ( requireSpellSlot ) {
+      if ( refData.requireSpellSlot ) {
         const slotLevel = configuration.level;
         const spellLevel = slotLevel === "pact" ? actor.data.data.spells.pact.level : parseInt(slotLevel);
-        if (spellLevel !== id.level) {
-          const upcastData = mergeObject(this.data, {"data.level": spellLevel}, {inplace: false});
-          item = this.constructor.createOwned(upcastData, actor);  // Replace the item with an upcast version
+        if (spellLevel !== refData.id.level) {
+          const upcastData = mergeObject(item.data, {"data": item.getScaledData({spellLevel: spellLevel})}, {inplace: false});
+          item = item.constructor.createOwned(upcastData, actor);  // Replace the item with an upcast version
+          refData = mergeObject(refData, Item5e._getRollReferenceData({item: item}));
         }
-        if ( consumeSpellSlot ) consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
+        if ( refData.consumeSpellSlot ) refData.consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
       }
     }
 
     // Determine whether the item can be used by testing for resource consumption
-    const usage = item._getUsageUpdates({consumeRecharge, consumeResource, consumeSpellSlot, consumeUsage, consumeQuantity});
+    const usage = item._getUsageUpdates({
+      consumeRecharge: refData.consumeRecharge, 
+      consumeResource: refData.consumeResource, 
+      consumeSpellSlot: refData.consumeSpellSlot,
+      consumeUsage: refData.consumeUsage, 
+      consumeQuantity: refData.consumeQuantity
+    });
     if ( !usage ) return;
     const {actorUpdates, itemUpdates, resourceUpdates} = usage;
 
     // Commit pending data updates
     if ( !isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
+    if ( refData.consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
     if ( !isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
     if ( !isObjectEmpty(resourceUpdates) ) {
-      const resource = actor.items.get(id.consume?.target);
+      const resource = actor.items.get(refData.id.consume?.target);
       if ( resource ) await resource.update(resourceUpdates);
     }
 
     // Initiate measured template creation
-    if ( createMeasuredTemplate ) {
+    if ( refData.createMeasuredTemplate ) {
       const template = game.dnd5e.canvas.AbilityTemplate.fromItem(item);
       if ( template ) template.drawPreview();
     }
 
     // Create or return the Chat Message data
     return item.displayCard({rollMode, createMessage});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create reference aspects of the item data necessary for usage
+   * @param {object} [item]     Consume quantity of the item if other consumption modes are not available?
+   * @returns {object}          The reference data
+   * @private
+   */
+  static _getRollReferenceData({item: item}={}) {
+    if (!item) {
+      throw new Error('item is required');
+    }
+    const referenceData = {};
+
+    referenceData.id = item.data.data;                // Item data
+    referenceData.hasArea = item.hasAreaTarget;       // Is the ability usage an AoE?
+    referenceData.resource = referenceData.id.consume || {};        // Resource consumption
+    referenceData.recharge = referenceData.id.recharge || {};       // Recharge mechanic
+    referenceData.uses = referenceData.id?.uses ?? {};              // Limited uses
+    referenceData.isSpell = item.type === "spell";    // Does the item require a spell slot?
+    referenceData.requireSpellSlot = referenceData.isSpell && (referenceData.id.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(referenceData.id.preparation.mode);
+
+    return referenceData;
   }
 
   /* -------------------------------------------- */
@@ -865,6 +904,53 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Scale damage from up-casting spells
+   * @param {object} spellLevel If the item is a spell, override the level for damage scaling
+   */
+  getScaledData({spellLevel=null} = {}) {
+    const actorData = this.actor.data.data;
+    let itemData = duplicate(this.data.data);
+    
+    if (this.data.type === "spell") {
+      if (itemData.scaling.mode === "manual-spell-level" && itemData.scaling.parsed[spellLevel]) {
+        itemData = itemData.scaling.parsed[spellLevel];
+      } else if ( (itemData.scaling.mode === "cantrip") ) {
+        const level = this.actor.data.type === "character" ? actorData.details.level : actorData.details.spellLevel;
+        const damageParts = itemData.damage.parts.map(d => d[0]);
+        const versatileParts = [itemData.damage.versatile];
+        const rollData = this.getRollData();
+
+        this._scaleCantripDamage(damageParts, itemData.scaling.formula, level, rollData);
+        this._scaleCantripDamage(versatileParts, itemData.scaling.formula, level, rollData);
+
+        for(let i = 0; i < damageParts.length; i++) {
+          itemData.damage.parts[i][0] = damageParts[i];
+        }
+        itemData.damage.versatile = versatileParts[0];
+      } else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
+        const scaling = itemData.scaling.formula;
+        const damageParts = itemData.damage.parts.map(d => d[0]);
+        const versatileParts = [itemData.damage.versatile];
+        const rollData = this.getRollData();
+
+        this._scaleSpellDamage(damageParts, itemData.level, spellLevel, scaling, rollData);
+        this._scaleSpellDamage(versatileParts, itemData.level, spellLevel, scaling, rollData);
+        
+        for(let i = 0; i < damageParts.length; i++) {
+          itemData.damage.parts[i][0] = damageParts[i];
+        }
+        itemData.damage.versatile = versatileParts[0];
+      }
+    }
+
+    itemData.scaling = {mode: 'none'};
+
+    return itemData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the damageRoll logic for the core implementation.
    * @param {MouseEvent} [event]    An event which triggered this roll, if any
@@ -876,7 +962,7 @@ export default class Item5e extends Item {
    */
   rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
-    const itemData = this.data.data;
+    const itemData = this.getScaledData({spellLevel: spellLevel});
     const actorData = this.actor.data.data;
     const messageData = {"flags.dnd5e.roll": {type: "damage", itemId: this.id }};
 
@@ -909,18 +995,6 @@ export default class Item5e extends Item {
     if ( versatile && itemData.damage.versatile ) {
       parts[0] = itemData.damage.versatile;
       messageData["flags.dnd5e.roll"].versatile = true;
-    }
-
-    // Scale damage from up-casting spells
-    if ( (this.data.type === "spell") ) {
-      if ( (itemData.scaling.mode === "cantrip") ) {
-        const level = this.actor.data.type === "character" ? actorData.details.level : actorData.details.spellLevel;
-        this._scaleCantripDamage(parts, itemData.scaling.formula, level, rollData);
-      }
-      else if ( spellLevel && (itemData.scaling.mode === "level") && itemData.scaling.formula ) {
-        const scaling = itemData.scaling.formula;
-        this._scaleSpellDamage(parts, itemData.level, spellLevel, scaling, rollData);
-      }
     }
 
     // Add damage bonus formula

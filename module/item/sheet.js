@@ -26,7 +26,10 @@ export default class ItemSheet5e extends ItemSheet {
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [
+        {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
+        {navSelector: ".manual-scaling-navigation", contentSelector: ".sheet-body", initial: this.item ? `${this.item.data.level + 1}` : 0}
+      ]
     });
   }
 
@@ -252,6 +255,17 @@ export default class ItemSheet5e extends ItemSheet {
     const damage = data.data?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
+    const parsedScaling = data.data?.scaling?.parsed;
+    if (data.data?.scaling?.mode === "manual-spell-level" && parsedScaling) {
+      for (const key in parsedScaling) {
+        if (parsedScaling.hasOwnProperty(key)) {
+          const parsedData = parsedScaling[key];
+          const parsedDamage = parsedData?.damage;
+          if ( parsedDamage ) parsedDamage.parts = Object.values(parsedDamage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+        }
+      }
+    }
+
     // Return the flattened submission data
     return flattenObject(data);
   }
@@ -283,20 +297,26 @@ export default class ItemSheet5e extends ItemSheet {
     event.preventDefault();
     const a = event.currentTarget;
 
+    const prefix = a.dataset.pathPrefix || "data";
+
     // Add new damage component
     if ( a.classList.contains("add-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
-      const damage = this.item.data.data.damage;
-      return this.item.update({"data.damage.parts": damage.parts.concat([["", ""]])});
+      const damage = getProperty(this.item.data, prefix).damage;
+      const updateObj = {};
+      updateObj[`${prefix}.damage.parts`] = damage.parts.concat([["", ""]]);
+      return this.item.update(updateObj);
     }
 
     // Remove a damage component
     if ( a.classList.contains("delete-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".damage-part");
-      const damage = duplicate(this.item.data.data.damage);
+      const damage = duplicate(getProperty(this.item.data, prefix).damage);
       damage.parts.splice(Number(li.dataset.damagePart), 1);
-      return this.item.update({"data.damage.parts": damage.parts});
+      const updateObj = {};
+      updateObj[`${prefix}.damage.parts`] = damage.parts;
+      return this.item.update(updateObj);
     }
   }
 
