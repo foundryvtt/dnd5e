@@ -411,7 +411,7 @@ export default class Actor5e extends Actor {
       if ( Number.isNaN(i) ) continue;
       if ( Number.isNumeric(lvl.override) ) lvl.max = Math.max(parseInt(lvl.override), 0);
       else lvl.max = slots[i-1] || 0;
-      lvl.value = Math.min(parseInt(lvl.value), lvl.max);
+      lvl.value = parseInt(lvl.value);
     }
 
     // Determine the Actor's pact magic level (if any)
@@ -1102,8 +1102,7 @@ export default class Actor5e extends Actor {
 
     // Recover spell slots
     for ( let [k, v] of Object.entries(data.spells) ) {
-      if ( !v.max && !v.override ) continue;
-      updateData[`data.spells.${k}.value`] = v.override || v.max;
+      updateData[`data.spells.${k}.value`] = !Number.isNaN(v.override) ? v.override : (v.max ?? 0);
     }
 
     // Recover pact slots.
