@@ -1102,8 +1102,7 @@ export default class Actor5e extends Actor {
 
     // Recover spell slots
     for ( let [k, v] of Object.entries(data.spells) ) {
-      if ( !v.max && !v.override ) continue;
-      updateData[`data.spells.${k}.value`] = v.override || v.max;
+      updateData[`data.spells.${k}.value`] = v.override ?? v.max ?? 0;
     }
 
     // Recover pact slots.
