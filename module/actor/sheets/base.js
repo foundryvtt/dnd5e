@@ -374,7 +374,7 @@ export default class ActorSheet5e extends ActorSheet {
       1: '<i class="fas fa-check"></i>',
       2: '<i class="fas fa-check-double"></i>'
     };
-    return icons[level];
+    return icons[level] || icons[0];
   }
 
   /* -------------------------------------------- */

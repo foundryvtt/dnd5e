@@ -14,7 +14,7 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
 
   // Some terms are "too complicated" for this algorithm to simplify
   // In this case, the original formula is returned.
-  if (terms.some(isUnsupportedTerm)) return roll.formula;
+  if (terms.some(_isUnsupportedTerm)) return roll.formula;
 
   const rollableTerms = []; // Terms that are non-constant, and their associated operators
   const constantTerms = []; // Terms that are constant, and their associated operators
@@ -47,21 +47,22 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
   return new Roll(parts.filterJoin(" + ")).formula;
 }
 
+/* -------------------------------------------- */
+
 /**
- * Only some terms are supported by simplifyRollFormula,
- * this method returns true when the term is not supported.
- *
- * @static
+ * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
  * @param {*} term - A single Dice term to check support on
  * @return {Boolean} True when unsupported, false if supported 
  */
-function isUnsupportedTerm(term) {
+function _isUnsupportedTerm(term) {
 	const diceTerm = term instanceof DiceTerm;
 	const operator = ["+", "-"].includes(term);
 	const number   = !isNaN(Number(term));
 
 	return !(diceTerm || operator || number);
 }
+
+/* -------------------------------------------- */
 
 /**
  * A standardized helper function for managing core 5e "d20 rolls"
@@ -174,6 +175,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
       if (d.faces === 20) {
         d.options.critical = critical;
         d.options.fumble = fumble;
+        if ( adv === 1 ) d.options.advantage = true;
+        else if ( adv === -1 ) d.options.disadvantage = true;
         if (targetValue) d.options.target = targetValue;
       }
     }
@@ -195,7 +198,6 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 }
 
 /* -------------------------------------------- */
-
 
 /**
  * Present a Dialog form which creates a d20 roll once submitted
@@ -239,7 +241,6 @@ async function _d20RollDialog({template, title, parts, data, rollMode, dialogOpt
     }, dialogOptions).render(true);
   });
 }
-
 
 /* -------------------------------------------- */
 
@@ -300,14 +301,15 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
         roll.terms[0].alter(1, criticalBonusDice);
         roll._formula = roll.formula;
       }
-      roll.dice.forEach(d => d.options.critical = true);
       messageData.flavor += ` (${game.i18n.localize("DND5E.Critical")})`;
       if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].critical = true;
     }
 
     // Execute the roll
     try {
-      return roll.roll();
+      roll.evaluate()
+      if ( crit ) roll.dice.forEach(d => d.options.critical = true); // TODO workaround core bug which wipes Roll#options on roll
+      return roll;
     } catch(err) {
       console.error(err);
       ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);

@@ -127,10 +127,13 @@ export default class AbilityUseDialog extends Dialog {
       });
     }
     const canCast = spellLevels.some(l => l.hasSlots);
+    if ( !canCast ) data.errors.push(game.i18n.format("DND5E.SpellCastNoSlots", {
+      level: CONFIG.DND5E.spellLevels[lvl],
+      name: data.item.name
+    }));
 
-    // Return merged data
-    data = mergeObject(data, { isSpell: true, consumeSpellSlot, spellLevels });
-    if ( !canCast ) data.errors.push("DND5E.SpellCastNoSlots");
+    // Merge spell casting data
+    return mergeObject(data, { isSpell: true, consumeSpellSlot, spellLevels });
   }
 
   /* -------------------------------------------- */
