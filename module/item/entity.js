@@ -316,7 +316,7 @@ export default class Item5e extends Item {
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
     // One-time bonus provided by consumed ammunition
-    if ( !!itemData.consume && (itemData.consume.type === 'ammo') && !!this.actor.items ) {
+    if ( (itemData.consume?.type === 'ammo') && !!this.actor.items ) {
       const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
 
       if (ammoItemData) {
