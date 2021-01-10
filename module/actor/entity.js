@@ -1108,7 +1108,7 @@ export default class Actor5e extends Actor {
 
     // Recover spell slots
     for ( let [k, v] of Object.entries(data.spells) ) {
-      updateData[`data.spells.${k}.value`] = !Number.isNaN(parseInt(v.override)) ? v.override : (v.max ?? 0);
+      updateData[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
     }
 
     // Recover pact slots.
