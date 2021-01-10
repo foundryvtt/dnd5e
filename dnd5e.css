@@ -193,6 +193,20 @@
   background: rgba(0, 0, 0, 0.05);
 }
 /* ----------------------------------------- */
+/*  Hit Dice Config Sheet Specifically       */
+/* ----------------------------------------- */
+.dnd5e.hd-config .form-group button.increment,
+.dnd5e.hd-config .form-group button.decrement {
+  flex: 0 0 1rem;
+  line-height: 1rem;
+}
+.dnd5e.hd-config .form-group input {
+  flex: 0 0 2rem;
+  text-align: center;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+/* ----------------------------------------- */
 /*  Entity Sheets Specifically               */
 /* ----------------------------------------- */
 .dnd5e.sheet {
@@ -581,10 +595,12 @@
   height: 30px;
   line-height: 30px;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name {
+.dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name,
+.dnd5e.sheet.actor .sheet-header .attributes .hit-dice h4.attribute-name {
   position: relative;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .movement .config-button,
+.dnd5e.sheet.actor .sheet-header .attributes .hit-dice .config-button {
   position: absolute;
   display: none;
   right: 0;
@@ -592,7 +608,8 @@
   font-size: 12px;
   font-weight: normal;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .config-button,
+.dnd5e.sheet.actor .sheet-header .attributes .hit-dice:hover .config-button {
   display: block;
 }
 .dnd5e.sheet.actor .sheet-header .attributes input.temphp {

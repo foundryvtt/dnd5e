@@ -1,0 +1,16 @@
+<form autocomplete="off">
+    <p>Here's some text</p>
+    {{#each classes}}
+        <div class="form-group">
+            <label>{{this.name}} ({{this.diceDenom}})</label>
+            <button class="decrement" type="button">-</button>
+            <input title="{{ localize 'DND5E.HitDiceRemaining' }}" class="current" name="{{this.classItemId}}" type="number" value="{{this.currentHitDice}}" />/
+            <input title="{{ localize 'DND5E.HitDiceMax' }}" class="max" type="number" value="{{this.maxHitDice}}" disabled />
+            <button class="increment" type="button">+</button>
+        </div>
+    {{/each}}
+    <div class="dialog-buttons">
+        <button type="reset" name="reset">{{ localize "SETTINGS.5eReset" }}</button>
+        <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+    </div>
+</form>
