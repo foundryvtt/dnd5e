@@ -168,6 +168,8 @@ export default class AbilityUseDialog extends Dialog {
         type: item.data.consumableType,
         value: uses.value,
         quantity: item.data.quantity,
+        max: uses.max,
+        per: CONFIG.DND5E.limitedUsePeriods[uses.per]
       });
     }
 
