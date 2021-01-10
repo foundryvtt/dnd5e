@@ -1266,7 +1266,7 @@ export default class Actor5e extends Actor {
     // Handle wildcard
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
-      d.token.img = images[0];
+      d.token.img = images[Math.floor(Math.random() * images.length)];
     }
 
     // Keep Token configurations
