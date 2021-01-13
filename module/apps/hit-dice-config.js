@@ -90,6 +90,8 @@ export default class ActorHitDiceConfig extends BaseEntitySheet {
         return this.object.updateOwnedItem(formData);
     }
 
+    /* -------------------------------------------- */
+
     async _onRollHitDie(event) {
         event.preventDefault();
         const button = event.currentTarget;
