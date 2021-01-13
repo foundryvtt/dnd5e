@@ -9,7 +9,7 @@ export default class ActorHitDiceConfig extends BaseEntitySheet {
         return mergeObject(super.defaultOptions, {
             classes: ["dnd5e", "hd-config", "dialog"],
             template: "systems/dnd5e/templates/apps/hit-dice-config.html",
-            width: 300,
+            width: 400,
             height: "auto"
         });
     }
@@ -35,6 +35,7 @@ export default class ActorHitDiceConfig extends BaseEntitySheet {
                 diceDenom: i.data.hitDice,
                 currentHitDice: i.data.levels - i.data.hitDiceUsed,
                 maxHitDice: i.data.levels,
+                canRoll: (i.data.levels - i.data.hitDiceUsed) > 0,
             })),
         };
     }
@@ -59,6 +60,8 @@ export default class ActorHitDiceConfig extends BaseEntitySheet {
             const newVal = oldVal + 1 > maxVal ? maxVal : oldVal + 1;
             el.siblings("input.current").val(newVal);
         });
+
+        html.find("button.roll-hd").click(this._onRollHitDie.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -85,5 +88,13 @@ export default class ActorHitDiceConfig extends BaseEntitySheet {
     /** @override */
     async _updateObject(event, formData) {
         return this.object.updateOwnedItem(formData);
+    }
+
+    async _onRollHitDie(event) {
+        event.preventDefault();
+        const button = event.currentTarget;
+        const hdDenom = button.dataset.hdDenom;
+        await this.object.rollHitDie(hdDenom);
+        this.render();
     }
 }

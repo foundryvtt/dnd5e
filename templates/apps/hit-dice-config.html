@@ -3,10 +3,16 @@
     {{#each classes}}
         <div class="form-group">
             <label>{{this.name}} ({{this.diceDenom}})</label>
-            <button class="decrement" type="button">-</button>
-            <input title="{{ localize 'DND5E.HitDiceRemaining' }}" class="current" name="{{this.classItemId}}" type="number" value="{{this.currentHitDice}}" />/
-            <input title="{{ localize 'DND5E.HitDiceMax' }}" class="max" type="number" value="{{this.maxHitDice}}" disabled />
-            <button class="increment" type="button">+</button>
+            <div class="form-fields">
+                <button class="decrement" type="button">-</button>
+                <input title="{{ localize 'DND5E.HitDiceRemaining' }}" class="current" name="{{this.classItemId}}" type="number" value="{{this.currentHitDice}}" />/
+                <input title="{{ localize 'DND5E.HitDiceMax' }}" class="max" type="number" value="{{this.maxHitDice}}" disabled />
+                <button class="increment" type="button">+</button>
+
+                <button class="roll-hd" data-hd-denom="{{this.diceDenom}}" {{#unless this.canRoll}}disabled{{/unless}}>
+                    <i class="fas fa-dice-d20"></i> {{ localize "Roll" }}
+                </button>
+            </div>
         </div>
     {{/each}}
     <div class="dialog-buttons">
