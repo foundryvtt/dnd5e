@@ -285,7 +285,7 @@ export default class Item5e extends Item {
    * - item's actor's proficiency bonus if applicable
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
-   * 
+   *
    * @returns {Object} returns `rollData` and `parts` to be used in the item's Attack roll
    */
   getAttackToHit() {
@@ -888,7 +888,10 @@ export default class Item5e extends Item {
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
-    const title = `${this.name} - ${game.i18n.localize("DND5E.DamageRoll")}`;
+    const actionFlavor = itemData.actionType === "heal"
+        ? game.i18n.localize("DND5E.Healing")
+        : game.i18n.localize("DND5E.DamageRoll");
+    const title = `${this.name} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,
       critical: critical ?? event?.altKey ?? false,
