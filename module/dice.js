@@ -42,7 +42,7 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
 
   const parts = constantFirst ? // Order the rollable and constant terms, either constant first or second depending on the optional argumen
     [constantPart, rollableFormula] : [rollableFormula, constantPart];
-  
+
   // Join the parts with a + sign, pass them to `Roll` once again to clean up the formula
   return new Roll(parts.filterJoin(" + ")).formula;
 }
@@ -52,7 +52,7 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
 /**
  * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
  * @param {*} term - A single Dice term to check support on
- * @return {Boolean} True when unsupported, false if supported 
+ * @return {Boolean} True when unsupported, false if supported
  */
 function _isUnsupportedTerm(term) {
 	const diceTerm = term instanceof DiceTerm;
@@ -110,8 +110,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   let adv = 0;
   fastForward = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   if (fastForward) {
-    if ( advantage || event.altKey ) adv = 1;
-    else if ( disadvantage || event.ctrlKey || event.metaKey ) adv = -1;
+    if ( advantage ?? event.altKey ) adv = 1;
+    else if ( disadvantage ?? (event.ctrlKey || event.metaKey) ) adv = -1;
   }
 
   // Define the inner roll function
