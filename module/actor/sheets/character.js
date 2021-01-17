@@ -123,8 +123,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
     const spellbook = this._prepareSpellbook(data, spells);
-    const nPrepared = spells.filter(s => {
-      return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
+    const nPrepared = spells.filter(spell => {
+      if (!(spell.data.level > 0)) {
+        return false;
+      }
+
+      const isPrepared = (spell.data.preparation.mode === "prepared") && spell.data.preparation.prepared;
+      const alwaysPrepared = spell.data.preparation.mode === "always";
+
+      return isPrepared || alwaysPrepared;
     }).length;
 
     // Organize Features
