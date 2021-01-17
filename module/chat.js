@@ -108,7 +108,10 @@ export const addChatMessageContextOptions = function(html, options) {
  * @return {Promise}
  */
 function applyChatCardDamage(roll, multiplier) {
-  const amount = roll.find('.dice-total').text();
+  let amount = 0;
+  roll.find('.dice-total').each(function() {
+    amount += parseInt(this.innerText);
+  });
   return Promise.all(canvas.tokens.controlled.map(t => {
     const a = t.actor;
     return a.applyDamage(amount, multiplier);
