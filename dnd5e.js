@@ -74,8 +74,8 @@ Hooks.once("init", function() {
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
-  CONFIG.Actor.entityClass = Actor5e;
-  CONFIG.Item.entityClass = Item5e;
+  CONFIG.Actor.documentClass = Actor5e;
+  CONFIG.Item.documentClass = Item5e;
   CONFIG.time.roundTime = 6;
 
   // 5e cone RAW should be 53.13 degrees

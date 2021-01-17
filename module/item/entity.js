@@ -145,8 +145,8 @@ export default class Item5e extends Item {
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
-  prepareData() {
-    super.prepareData();
+  prepareDerivedData() {
+    super.prepareDerivedData();
 
     // Get the Item's data
     const itemData = this.data;
