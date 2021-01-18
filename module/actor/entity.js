@@ -1350,7 +1350,7 @@ export default class Actor5e extends Actor {
       newTokenData.actorId = newActor.id;
       return newTokenData;
     });
-    return canvas.scene.updateEmbeddedEntity("Token", updates);
+    return canvas.scene?.updateEmbeddedEntity("Token", updates);
   }
 
   /* -------------------------------------------- */
