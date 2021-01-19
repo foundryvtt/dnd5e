@@ -1247,10 +1247,10 @@ export default class Actor5e extends Actor {
     }
 
     // Get the original Actor data and the new source data
-    const o = this.toJSON();
+    const o = duplicate(this.toJSON());
     o.flags.dnd5e = o.flags.dnd5e || {};
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
-    const source = target.toJSON();
+    const source = duplicate(target.toJSON());
 
     // Prepare new data to merge from the source
     const d = {
