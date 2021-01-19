@@ -888,9 +888,7 @@ export default class Item5e extends Item {
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
-    const actionFlavor = itemData.actionType === "heal"
-        ? game.i18n.localize("DND5E.Healing")
-        : game.i18n.localize("DND5E.DamageRoll");
+    const actionFlavor = game.i18n.localize(itemData.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
     const title = `${this.name} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,

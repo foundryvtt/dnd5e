@@ -554,44 +554,56 @@ export default class Actor5e extends Actor {
     const isNPC = this.data.type === 'npc';
     let initial = {};
     switch ( itemData.type ) {
+
       case "weapon":
-        initial["data.equipped"] = isNPC;         // NPCs automatically equip weapons
-        let hasWeaponProf = isNPC;                // NPCs automatically have weapon proficiency
-        if ( !isNPC ) {
-          const weaponProf = {
-            "natural": true,
-            "simpleM": "sim",
-            "simpleR": "sim",
-            "martialM": "mar",
-            "martialR": "mar"
-          }[itemData.data?.weaponType];
-          const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
-          hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+        if ( getProperty(initial, "data.equipped") === undefined ) {
+          initial["data.equipped"] = isNPC;       // NPCs automatically equip weapons
         }
-        initial["data.proficient"] = hasWeaponProf;
+        if ( getProperty(initial, "data.proficient") === undefined ) {
+          if ( isNPC ) {
+            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
+          } else {
+            const weaponProf = {
+              "natural": true,
+              "simpleM": "sim",
+              "simpleR": "sim",
+              "martialM": "mar",
+              "martialR": "mar"
+            }[itemData.data?.weaponType];         // Player characters check proficiency
+            const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
+            const hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+            initial["data.proficient"] = hasWeaponProf;
+          }
+        }
         break;
+
       case "equipment":
-        let hasEquipmentProf = isNPC;    // NPCs automatically have equipment proficiency
-
-        if ( isNPC ) {
-          initial["data.equipped"] = true;        // NPCs automatically equip equipment
-        } else {
-          const armorProf = {
-            "natural": true,
-            "clothing": true,
-            "light": "lgt",
-            "medium": "med",
-            "heavy": "hvy",
-            "shield": "shl",
-          }[itemData.data?.armor?.type];
-          const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
-          hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
+        if ( getProperty(initial, "data.equipped") === undefined ) {
+          initial["data.equipped"] = isNPC;       // NPCs automatically equip equipment
         }
-
-        initial["data.proficient"] = hasEquipmentProf;
+        if ( getProperty(initial, "data.proficient") === undefined ) {
+          if ( isNPC ) {
+            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
+          } else {
+            const armorProf = {
+              "natural": true,
+              "clothing": true,
+              "light": "lgt",
+              "medium": "med",
+              "heavy": "hvy",
+              "shield": "shl"
+            }[itemData.data?.armor?.type];        // Player characters check proficiency
+            const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
+            const hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
+            initial["data.proficient"] = hasEquipmentProf;
+          }
+        }
         break;
+
       case "spell":
-        initial["data.prepared"] = true;          // NPCs automatically prepare spells
+        if ( getProperty(initial, "data.proficient") === undefined ) {
+          initial["data.prepared"] = isNPC;       // NPCs automatically prepare spells
+        }
         break;
     }
     mergeObject(itemData, initial);
