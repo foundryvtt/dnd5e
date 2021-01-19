@@ -571,20 +571,23 @@ export default class Actor5e extends Actor {
         initial["data.proficient"] = hasWeaponProf;
         break;
       case "equipment":
-        initial["data.equipped"] = isNPC;         // NPCs automatically equip equipment
-        let hasEquipmentProf = isNPC;             // NPCs automatically have equipment proficiency
-        if ( !isNPC ) {
+        let hasEquipmentProf = isNPC;    // NPCs automatically have equipment proficiency
+
+        if ( isNPC ) {
+          initial["data.equipped"] = true;        // NPCs automatically equip equipment
+        } else {
           const armorProf = {
             "natural": true,
             "clothing": true,
             "light": "lgt",
             "medium": "med",
             "heavy": "hvy",
-            "shield": "shl"
+            "shield": "shl",
           }[itemData.data?.armor?.type];
           const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
           hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
         }
+
         initial["data.proficient"] = hasEquipmentProf;
         break;
       case "spell":
