@@ -459,11 +459,8 @@ export default class Actor5e extends Actor {
       return weight + (q * w);
     }, 0);
 
-    // [Optional] add Currency Weight
-    if (
-        game.settings.get("dnd5e", "currencyWeight")
-        && actorData.data.currency // Currency data is not present for transformed actors
-    ) {
+    // [Optional] add Currency Weight (for non-transformed actors)
+    if ( game.settings.get("dnd5e", "currencyWeight") && actorData.data.currency ) {
       const currency = actorData.data.currency;
       const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
       weight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
@@ -559,10 +556,10 @@ export default class Actor5e extends Actor {
     switch ( itemData.type ) {
 
       case "weapon":
-        if ( getProperty(initial, "data.equipped") === undefined ) {
+        if ( getProperty(itemData, "data.equipped") === undefined ) {
           initial["data.equipped"] = isNPC;       // NPCs automatically equip weapons
         }
-        if ( getProperty(initial, "data.proficient") === undefined ) {
+        if ( getProperty(itemData, "data.proficient") === undefined ) {
           if ( isNPC ) {
             initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
           } else {
@@ -581,10 +578,10 @@ export default class Actor5e extends Actor {
         break;
 
       case "equipment":
-        if ( getProperty(initial, "data.equipped") === undefined ) {
+        if ( getProperty(itemData, "data.equipped") === undefined ) {
           initial["data.equipped"] = isNPC;       // NPCs automatically equip equipment
         }
-        if ( getProperty(initial, "data.proficient") === undefined ) {
+        if ( getProperty(itemData, "data.proficient") === undefined ) {
           if ( isNPC ) {
             initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
           } else {
@@ -604,7 +601,7 @@ export default class Actor5e extends Actor {
         break;
 
       case "spell":
-        if ( getProperty(initial, "data.proficient") === undefined ) {
+        if ( getProperty(itemData, "data.proficient") === undefined ) {
           initial["data.prepared"] = isNPC;       // NPCs automatically prepare spells
         }
         break;
