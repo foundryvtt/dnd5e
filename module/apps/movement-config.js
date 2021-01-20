@@ -26,7 +26,7 @@ export default class ActorMovementConfig extends BaseEntitySheet {
   /** @override */
   getData(options) {
     const data = {
-      movement: duplicate(this.entity._data.data.attributes.movement),
+      movement: foundry.utils.deepClone(this.entity._data.data.attributes.movement),
       units: CONFIG.DND5E.movementUnits
     }
     for ( let [k, v] of Object.entries(data.movement) ) {

@@ -948,7 +948,7 @@ export default class Actor5e extends Actor {
     // Prepare roll data
     const parts = [`1${denomination}`, "@abilities.con.mod"];
     const title = game.i18n.localize("DND5E.HitDiceRoll");
-    const rollData = duplicate(this.data.data);
+    const rollData = foundry.utils.deepClone(this.data.data);
 
     // Call the roll helper utility
     const roll = await damageRoll({
@@ -1191,7 +1191,7 @@ export default class Actor5e extends Actor {
    * @return {Promise<Actor5e>}
    */
   convertCurrency() {
-    const curr = duplicate(this.data.data.currency);
+    const curr = foundry.utils.deepClone(this.data.data.currency);
     const convert = CONFIG.DND5E.currencyConversion;
     for ( let [c, t] of Object.entries(convert) ) {
       let change = Math.floor(curr[c] / t.each);
@@ -1344,7 +1344,7 @@ export default class Actor5e extends Actor {
     if ( !transformTokens ) return;
     const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
-      const newTokenData = duplicate(d.token);
+      const newTokenData = foundry.utils.deepClone(d.token);
       if ( !t.data.actorLink ) newTokenData.actorData = newActor.data;
       newTokenData._id = t.data._id;
       newTokenData.actorId = newActor.id;
@@ -1369,7 +1369,7 @@ export default class Actor5e extends Actor {
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
     if ( this.isToken ) {
       const baseActor = game.actors.get(this.token.data.actorId);
-      const prototypeTokenData = duplicate(baseActor.token);
+      const prototypeTokenData = baseActor.data.token.toJSON();
       prototypeTokenData.actorData = null;
       return this.token.update(prototypeTokenData);
     }
@@ -1382,7 +1382,7 @@ export default class Actor5e extends Actor {
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
       const tokenUpdates = tokens.map(t => {
-        const tokenData = duplicate(original.data.token);
+        const tokenData = original.data.token.toJSON();
         tokenData._id = t.id;
         tokenData.actorId = original.id;
         return tokenData;

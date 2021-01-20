@@ -70,7 +70,7 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // The Actor and its Items
-    data.actor = duplicate(this.actor.data);
+    data.actor = foundry.utils.deepClone(this.actor.data);
     data.items = this.actor.items.map(i => {
       i.data.labels = i.labels;
       return i.data;
@@ -731,7 +731,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: type.capitalize()}),
       type: type,
-      data: duplicate(header.dataset)
+      data: foundry.utils.deepClone(header.dataset)
     };
     delete itemData.data["type"];
     return this.actor.createEmbeddedEntity("OwnedItem", itemData);

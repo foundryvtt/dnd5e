@@ -43,33 +43,34 @@ export default class ItemSheet5e extends ItemSheet {
   /** @override */
   async getData(options) {
     const data = super.getData(options);
+    const itemData = this.item.data;
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
-    data.itemStatus = this._getItemStatus(data.item);
-    data.itemProperties = this._getItemProperties(data.item);
+    data.itemStatus = this._getItemStatus(itemData);
+    data.itemProperties = this._getItemProperties(itemData);
     data.isPhysical = data.item.data.hasOwnProperty("quantity");
 
     // Potential consumption targets
-    data.abilityConsumptionTargets = this._getItemConsumptionTargets(data.item);
+    data.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
 
     // Action Details
     data.hasAttackRoll = this.item.hasAttack;
     data.isHealing = data.item.data.actionType === "heal";
-    data.isFlatDC = getProperty(data.item.data, "save.scaling") === "flat";
-    data.isLine = ["line", "wall"].includes(data.item.data.target?.type);
+    data.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
+    data.isLine = ["line", "wall"].includes(itemData.data.target?.type);
 
     // Original maximum uses formula
-    if ( this.item._data.data?.uses?.max ) data.data.uses.max = this.item._data.data.uses.max;
+    if ( this.item.data._source.data?.uses?.max ) data.data.uses.max = this.item.data._source.data.uses.max;
 
     // Vehicles
-    data.isCrewed = data.item.data.activation?.type === 'crew';
-    data.isMountable = this._isItemMountable(data.item);
+    data.isCrewed = itemData.data.activation?.type === 'crew';
+    data.isMountable = this._isItemMountable(itemData);
 
     // Prepare Active Effects
-    data.effects = prepareActiveEffectCategories(this.entity.effects);
+    data.effects = prepareActiveEffectCategories(this.item.effects);
     return data;
   }
 
@@ -294,7 +295,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( a.classList.contains("delete-damage") ) {
       await this._onSubmit(event);  // Submit any unsaved changes
       const li = a.closest(".damage-part");
-      const damage = duplicate(this.item.data.data.damage);
+      const damage = foundry.utils.deepClone(this.item.data.data.damage);
       damage.parts.splice(Number(li.dataset.damagePart), 1);
       return this.item.update({"data.damage.parts": damage.parts});
     }

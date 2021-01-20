@@ -272,7 +272,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const property = row.classList.contains('crew') ? 'crew' : 'passengers';
 
     // Get the cargo entry
-    const cargo = duplicate(this.actor.data.data.cargo[property]);
+    const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[property]);
     const entry = cargo[idx];
     if (!entry) return null;
 
@@ -322,7 +322,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const target = event.currentTarget;
     const type = target.dataset.type;
     if (type === 'crew' || type === 'passengers') {
-      const cargo = duplicate(this.actor.data.data.cargo[type]);
+      const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]);
       cargo.push(this.constructor.newCargo);
       return this.actor.update({[`data.cargo.${type}`]: cargo});
     }
@@ -343,7 +343,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     if (row.classList.contains('cargo-row')) {
       const idx = Number(row.dataset.itemId);
       const type = row.classList.contains('crew') ? 'crew' : 'passengers';
-      const cargo = duplicate(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
+      const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
       return this.actor.update({[`data.cargo.${type}`]: cargo});
     }
 
