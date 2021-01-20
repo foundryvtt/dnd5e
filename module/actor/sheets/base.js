@@ -619,6 +619,11 @@ export default class ActorSheet5e extends ActorSheet {
       itemData = scroll.data;
     }
 
+    // Ignore certain statuses
+    if ( itemData.data ) {
+      ["attunement", "equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+    }
+
     // Create the owned item as normal
     return super._onDropItemCreate(itemData);
   }
