@@ -234,6 +234,11 @@ export const migrateSceneData = function(scene) {
  */
 function _migrateActorMovement(actor, updateData) {
   const ad = actor.data;
+
+  if (ad?.attributes?.movement?.walk !== undefined) {
+    return;
+  }
+
   const old = actor.type === 'vehicle' ? ad?.attributes?.speed : ad?.attributes?.speed?.value;
   if ( typeof old !== "string" ) return;
   const s = (old || "").split(" ");
