@@ -56,16 +56,16 @@ export default class ActorSheet5e extends ActorSheet {
   getData() {
 
     // Basic data
-    let isOwner = this.entity.owner;
+    let isOwner = this.actor.isOwner;
     const data = {
       owner: isOwner,
-      limited: this.entity.limited,
+      limited: this.actor.limited,
       options: this.options,
       editable: this.isEditable,
       cssClass: isOwner ? "editable" : "locked",
-      isCharacter: this.entity.data.type === "character",
-      isNPC: this.entity.data.type === "npc",
-      isVehicle: this.entity.data.type === 'vehicle',
+      isCharacter: this.actor.type === "character",
+      isNPC: this.actor.type === "npc",
+      isVehicle: this.actor.type === 'vehicle',
       config: CONFIG.DND5E,
     };
 
@@ -110,7 +110,7 @@ export default class ActorSheet5e extends ActorSheet {
     this._prepareItems(data);
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.entity.effects);
+    data.effects = prepareActiveEffectCategories(this.actor.effects);
 
     // Return data to the sheet
     return data
@@ -221,7 +221,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _prepareSpellbook(data, spells) {
-    const owner = this.actor.owner;
+    const owner = this.actor.isOwner;
     const levels = data.data.spells;
     const spellbook = {};
 
@@ -423,11 +423,11 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
-      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.entity));
+      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
     }
 
     // Owner Only Listeners
-    if ( this.actor.owner ) {
+    if ( this.actor.isOwner ) {
 
       // Ability Checks
       html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
@@ -538,7 +538,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('dnd5e', 'allowPolymorphing'));
+    const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get('dnd5e', 'allowPolymorphing'));
     if ( !canPolymorph ) return false;
 
     // Get the target actor
@@ -705,7 +705,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
         item = this.actor.getOwnedItem(li.data("item-id")),
-        chatData = item.getChatData({secrets: this.actor.owner});
+        chatData = item.getChatData({secrets: this.actor.isOwner});
 
     // Toggle summary
     if ( li.hasClass("expanded") ) {

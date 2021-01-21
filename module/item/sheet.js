@@ -18,9 +18,9 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
 	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+	  return foundry.utils.mergeObject(super.defaultOptions, {
       width: 560,
       height: 400,
       classes: ["dnd5e", "sheet", "item"],
@@ -32,7 +32,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   get template() {
     const path = "systems/dnd5e/templates/items/";
     return `${path}/${this.item.data.type}.html`;
@@ -43,7 +43,7 @@ export default class ItemSheet5e extends ItemSheet {
   /** @override */
   async getData(options) {
     const data = super.getData(options);
-    const itemData = this.item.data;
+    const itemData = data.data;
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
 
@@ -51,19 +51,20 @@ export default class ItemSheet5e extends ItemSheet {
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
     data.itemStatus = this._getItemStatus(itemData);
     data.itemProperties = this._getItemProperties(itemData);
-    data.isPhysical = data.item.data.hasOwnProperty("quantity");
+    data.isPhysical = itemData.data.hasOwnProperty("quantity");
 
     // Potential consumption targets
     data.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
 
     // Action Details
     data.hasAttackRoll = this.item.hasAttack;
-    data.isHealing = data.item.data.actionType === "heal";
+    data.isHealing = itemData.data.actionType === "heal";
     data.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
     data.isLine = ["line", "wall"].includes(itemData.data.target?.type);
 
     // Original maximum uses formula
-    if ( this.item.data._source.data?.uses?.max ) data.data.uses.max = this.item.data._source.data.uses.max;
+    const sourceMax = foundry.utils.getProperty(this.item.data._source, "data.uses.max");
+    if ( sourceMax ) itemData.data.uses.max = sourceMax;
 
     // Vehicles
     data.isCrewed = itemData.data.activation?.type === 'crew';
@@ -71,6 +72,10 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Prepare Active Effects
     data.effects = prepareActiveEffectCategories(this.item.effects);
+
+    // Re-define the template data references (backwards compatible)
+    data.item = itemData;
+    data.data = itemData.data;
     return data;
   }
 
@@ -228,7 +233,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   setPosition(position={}) {
     if ( !(this._minimized  || position.height) ) {
       position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
@@ -240,7 +245,7 @@ export default class ItemSheet5e extends ItemSheet {
   /*  Form Submission                             */
 	/* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   _getSubmitData(updateData={}) {
 
     // Create the expanded update data object
@@ -259,7 +264,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
     if ( this.isEditable ) {
@@ -330,7 +335,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   async _onSubmit(...args) {
     if ( this._tabs[0].active === "details" ) this.position.height = "auto";
     await super._onSubmit(...args);

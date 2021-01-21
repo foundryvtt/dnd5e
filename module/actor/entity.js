@@ -1377,7 +1377,7 @@ export default class Actor5e extends Actor {
    */
   async revertOriginalForm() {
     if ( !this.isPolymorphed ) return;
-    if ( !this.owner ) {
+    if ( !this.isOwner ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
     }
 
