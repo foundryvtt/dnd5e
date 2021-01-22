@@ -103,13 +103,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   const messageOptions = {};
   prepareD20MessageData(messageOptions, rollArgs);
 
-  // Handle fast-forward events
-  let adv = 0;
-  fastForward = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  if (fastForward) {
-    if ( advantage ?? event.altKey ) adv = 1;
-    else if ( disadvantage ?? (event.ctrlKey || event.metaKey) ) adv = -1;
-  }
+  let { ff, adv } = determineD20FastForward(rollArgs);
 
   // Define the inner roll function
   const _roll = (parts, adv, form) => {
@@ -208,6 +202,26 @@ function prepareD20MessageData(messageOptions, rollArgs) {
   messageData.speaker = speaker || ChatMessage.getSpeaker();
   messageOptions.rollMode = rollMode || game.settings.get("core", "rollMode");
   parts.push("@bonus");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * @param {Object} rollArgs                The options passed into the original call to d20Roll
+ * @returns {{ff: boolean, adv: number}}
+ */
+function determineD20FastForward(rollArgs) {
+  let { fastForward, advantage, disadvantage, event } = rollArgs;
+
+  let adv = 0;
+  const ff = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+  if (ff) {
+    if ( advantage ?? event.altKey ) adv = 1;
+    else if ( disadvantage ?? (event.ctrlKey || event.metaKey) ) adv = -1;
+  }
+
+  return { adv, ff };
 }
 
 /* -------------------------------------------- */
