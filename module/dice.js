@@ -245,12 +245,12 @@ async function _d20RollDialog({template, title, parts, data, rollMode, dialogOpt
 /* -------------------------------------------- */
 
 /**
- * A standardized helper function for managing core 5e "d20 rolls"
+ * A standardized helper function for managing core 5e "damage rolls"
  *
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
  *
- * @param {Array} parts           The dice roll component parts, excluding the initial d20
+ * @param {Array} parts           The dice roll component parts
  * @param {Actor} actor           The Actor making the damage roll
  * @param {Object} data           Actor or item data against which to parse the roll
  * @param {Event|object}[event    The triggering event which initiated the roll
