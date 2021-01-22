@@ -115,16 +115,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     const roll = evaluateD20Roll(parts, rollArgs);
     if ( !roll ) return null;
 
-    // Flag d20 options for any 20-sided dice in the roll
-    for (let d of roll.dice) {
-      if (d.faces === 20) {
-        d.options.critical = critical;
-        d.options.fumble = fumble;
-        if ( adv === 1 ) d.options.advantage = true;
-        else if ( adv === -1 ) d.options.disadvantage = true;
-        if (targetValue) d.options.target = targetValue;
-      }
-    }
+    applyRollOptions(roll, parts, adv, form, messageOptions, rollArgs);
 
     // If reliable talent was applied, add it to the flavor text
     if (reliableTalent && roll.dice[0].total < 10) {
@@ -271,6 +262,34 @@ function evaluateD20Roll(parts, rollArgs) {
 
   return roll;
 }
+
+/* -------------------------------------------- */
+
+/**
+ * Applies appropriate options to the evaluated Roll instance
+ * @param roll                      The rolled d20 Roll instance
+ * @param {String[]} parts          An array of roll parts
+ * @param {number} adv              A number indicating the advantage state of the roll. 1 == ADV, -1 == DISADV, 0 == NORMAL
+ * @param {Object} form             The form data from the d20 roll dialog
+ * @param {Object} messageOptions   Options for the resulting ChatMessage
+ * @param {Object} rollArgs         Options passed into the original call to d20Roll
+ */
+function applyRollOptions(roll, parts, adv, form, messageOptions, rollArgs) {
+  let { critical, fumble, targetValue } = rollArgs;
+
+  for (let d of roll.dice) {
+    if ( d.faces !== 20 ) continue;
+
+    d.options.critical = critical;
+    d.options.fumble = fumble;
+    if ( adv === 1 ) {
+      d.options.advantage = true;
+    } else if ( adv === -1 ) d.options.disadvantage = true;
+    if (targetValue) d.options.target = targetValue;
+  }
+}
+
+/* -------------------------------------------- */
 
 /**
  * Present a Dialog form which creates a d20 roll once submitted
