@@ -107,7 +107,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
   const _innerRoll = (parts, adv, form) => {
     // Create the appropriate d20 formula and prepend it to the array of roll parts
-    const formula = determineD20Formula(parts, adv, form, messageOptions, rollArgs);
+    const formula = createD20Formula(parts, adv, form, messageOptions, rollArgs);
     parts.unshift(formula);
 
     if ( form ) applyD20FormData(parts, adv, form, messageOptions, rollArgs);
@@ -180,10 +180,18 @@ function determineD20FastForward(rollArgs) {
 
 /* -------------------------------------------- */
 
-function determineD20Formula(parts, adv, form, messageOptions, rollArgs) {
+/**
+ * Creates the formula string for the base d20 part of the d20 roll
+ * @param {string[]} parts           An array of roll parts
+ * @param {number} adv               A number indicating the advantage state of the roll. 1 == ADV, -1 == DISADV, 0 == NORMAL
+ * @param {Object} form              The form data from the d20 roll dialog
+ * @param {Object} messageOptions    Options for the resulting ChatMessage
+ * @param {Object} rollArgs          Options passed into the original call to d20Roll
+ * @returns {string}
+ */
+function createD20Formula(parts, adv, form, messageOptions, rollArgs) {
   let { halflingLucky, elvenAccuracy, reliableTalent, messageData } = rollArgs;
 
-  // Determine the d20 roll and modifiers
   let nd = 1;
   let mods = halflingLucky ? "r1=1" : "";
 
@@ -203,7 +211,6 @@ function determineD20Formula(parts, adv, form, messageOptions, rollArgs) {
     mods += "kl";
   }
 
-  // Prepend the d20 roll
   let formula = `${nd}d20${mods}`;
   if ( reliableTalent ) formula = `{${nd}d20${mods},10}kh`;
 
