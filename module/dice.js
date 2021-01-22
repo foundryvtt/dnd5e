@@ -112,7 +112,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     const formula = createD20Formula(parts, adv, form, messageOptions, rollArgs);
     parts.unshift(formula);
 
-    if ( form ) applyD20FormData(parts, adv, form, messageOptions, rollArgs);
+    applyD20FormData(parts, adv, form, messageOptions, rollArgs);
 
     const roll = evaluateD20Roll(parts, rollArgs);
     if ( !roll ) return null;
@@ -125,7 +125,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   };
 
   // Create the Roll instance
-  const roll = fastForward ? _innerRoll(parts, adv)
+  const roll = ff ? _innerRoll(parts, adv)
     : await _d20RollDialog({template, title, parts, data, rollMode: messageOptions.rollMode, dialogOptions, roll: _innerRoll});
 
   // Create a Chat Message
@@ -146,6 +146,8 @@ function prepareD20MessageData(messageOptions, rollArgs) {
   messageData.flavor = flavor || title;
   messageData.speaker = speaker || ChatMessage.getSpeaker();
   messageOptions.rollMode = rollMode || game.settings.get("core", "rollMode");
+
+  // Add situational bonus roll part
   parts.push("@bonus");
 }
 
@@ -222,18 +224,18 @@ function applyD20FormData(parts, adv, form, messageOptions, rollArgs) {
   let { messageData, data } = rollArgs;
 
   // Optionally include a situational bonus
-  data["bonus"] = form.bonus.value;
-  if (!data["bonus"]) parts.findSplice(p => p === "@bonus");
+  data["bonus"] = form?.bonus.value;
+  if ( !data["bonus"]?.length ) parts.findSplice(p => p === "@bonus");
 
   // Use roll mode provided by form data
-  messageOptions.rollMode = form.rollMode.value;
+  messageOptions.rollMode = form?.rollMode.value;
 
   // Optionally include an ability score selection (used for tool checks)
-  const ability = form ? form.ability : null;
-  if (ability?.value) {
+  const ability = form?.ability ?? null;
+  if ( ability?.value ) {
     data.ability = ability.value;
     const abl = data.abilities[data.ability];
-    if (abl) {
+    if ( abl ) {
       data.mod = abl.mod;
       messageData.flavor += ` (${CONFIG.DND5E.abilities[data.ability]})`;
     }
@@ -351,6 +353,18 @@ async function _d20RollDialog({template, title, parts, data, rollMode, dialogOpt
       close: () => resolve(null)
     }, dialogOptions).render(true);
   });
+}
+
+/* -------------------------------------------- */
+
+export const d20RollComponents = {
+  prepareD20MessageData,
+  determineD20FastForward,
+  createD20Formula,
+  applyD20FormData,
+  evaluateD20Roll,
+  applyRollOptions,
+  applyExtraFlavorText
 }
 
 /* -------------------------------------------- */
