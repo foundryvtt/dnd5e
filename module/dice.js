@@ -117,16 +117,14 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
     applyRollOptions(roll, parts, adv, form, messageOptions, rollArgs);
 
-    // If reliable talent was applied, add it to the flavor text
-    if (reliableTalent && roll.dice[0].total < 10) {
-      messageData.flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
-    }
+    applyExtraFlavorText(roll, parts, adv, form, messageOptions, rollArgs);
+
     return roll;
   };
 
   // Create the Roll instance
-  const roll = fastForward ? _innerRoll(parts, adv) :
-    await _d20RollDialog({template, title, parts, data, rollMode: messageOptions.rollMode, dialogOptions, roll: _innerRoll});
+  const roll = fastForward ? _innerRoll(parts, adv)
+    : await _d20RollDialog({template, title, parts, data, rollMode: messageOptions.rollMode, dialogOptions, roll: _innerRoll});
 
   // Create a Chat Message
   if ( roll && chatMessage ) roll.toMessage(messageData, messageOptions);
@@ -290,6 +288,23 @@ function applyRollOptions(roll, parts, adv, form, messageOptions, rollArgs) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Apply any last minute flavor text additions for the resulting ChatMessage
+ * @param roll                      The rolled d20 Roll instance
+ * @param {String[]} parts          An array of roll parts
+ * @param {number} adv              A number indicating the advantage state of the roll. 1 == ADV, -1 == DISADV, 0 == NORMAL
+ * @param {Object} form             The form data from the d20 roll dialog
+ * @param {Object} messageOptions   Options for the resulting ChatMessage
+ * @param {Object} rollArgs         Options passed into the original call to d20Roll
+ */
+function applyExtraFlavorText(roll, parts, adv, form, messageOptions, rollArgs) {
+  let { reliableTalent, messageData } = rollArgs;
+
+  if (reliableTalent && roll.dice[0].total < 10) {
+    messageData.flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
+  }
+}
 
 /**
  * Present a Dialog form which creates a d20 roll once submitted
