@@ -63,6 +63,8 @@ function _isUnsupportedTerm(term) {
 }
 
 /* -------------------------------------------- */
+/* D20 Roll                                     */
+/* -------------------------------------------- */
 
 /**
  * A standardized helper function for managing core 5e "d20 rolls"
@@ -306,6 +308,8 @@ function applyExtraFlavorText(roll, parts, adv, form, messageOptions, rollArgs) 
   }
 }
 
+/* -------------------------------------------- */
+
 /**
  * Present a Dialog form which creates a d20 roll once submitted
  * @return {Promise<Roll>}
@@ -349,6 +353,8 @@ async function _d20RollDialog({template, title, parts, data, rollMode, dialogOpt
   });
 }
 
+/* -------------------------------------------- */
+/* Damage Roll                                  */
 /* -------------------------------------------- */
 
 /**
