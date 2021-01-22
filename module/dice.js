@@ -99,12 +99,9 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   advantage=null, disadvantage=null, critical=20, fumble=1, targetValue=null,
   elvenAccuracy=false, halflingLucky=false, reliableTalent=false,
   chatMessage=true, messageData={}}={}) {
-
-  // Prepare Message Data
-  messageData.flavor = flavor || title;
-  messageData.speaker = speaker || ChatMessage.getSpeaker();
-  const messageOptions = {rollMode: rollMode || game.settings.get("core", "rollMode")};
-  parts = parts.concat(["@bonus"]);
+  const rollArgs = arguments[0];
+  const messageOptions = {};
+  prepareD20MessageData(messageOptions, rollArgs);
 
   // Handle fast-forward events
   let adv = 0;
@@ -195,6 +192,20 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   // Create a Chat Message
   if ( roll && chatMessage ) roll.toMessage(messageData, messageOptions);
   return roll;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Sets up some initial message data and options for a call to d20Roll
+ * @param {Object} messageOptions     Options to be passed to `ChatMessage.create` later
+ * @param {Object} rollArgs           The options passed into the original call to d20Roll
+ */
+function prepareD20MessageData(messageOptions, rollArgs) {
+  rollArgs.messageData.flavor = rollArgs.flavor || rollArgs.title;
+  rollArgs.messageData.speaker = rollArgs.speaker || ChatMessage.getSpeaker();
+  messageOptions.rollMode = rollArgs.rollMode || game.settings.get("core", "rollMode");
+  rollArgs.parts.push("@bonus");
 }
 
 /* -------------------------------------------- */
