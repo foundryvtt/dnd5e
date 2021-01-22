@@ -15,7 +15,7 @@ const ADV_MODE = {
 /**
  * A type of Roll specific to a d20 based check, save, or attack roll in the 5e system
  *
- * @param {String} formula                The string formula to parse
+ * @param {String} formula                The string formula to parse, *not including the d20 term*
  * @param {Object} data                   The data object against which to parse attributes within the formula
  * @param {ADV_MODE} advantageMode        What advantage modifier to apply to the roll (none, advantage, disadvantage)
  * @param {number} critical               The value of d20 result which represents a critical success
