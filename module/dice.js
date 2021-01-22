@@ -105,22 +105,15 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
   let { ff, adv } = determineD20FastForward(rollArgs);
 
-  // Define the inner roll function
-  const _roll = (parts, adv, form) => {
+  const _innerRoll = (parts, adv, form) => {
+    // Create the appropriate d20 formula and prepend it to the array of roll parts
     const formula = determineD20Formula(parts, adv, form, messageOptions, rollArgs);
     parts.unshift(formula);
 
     if ( form ) applyD20FormData(parts, adv, form, messageOptions, rollArgs);
 
-    // Execute the roll
-    let roll = new Roll(parts.join(" + "), data);
-    try {
-      roll.roll();
-    } catch (err) {
-      console.error(err);
-      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-      return null;
-    }
+    const roll = evaluateD20Roll(parts, rollArgs);
+    if ( !roll ) return null;
 
     // Flag d20 options for any 20-sided dice in the roll
     for (let d of roll.dice) {
@@ -141,8 +134,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   };
 
   // Create the Roll instance
-  const roll = fastForward ? _roll(parts, adv) :
-    await _d20RollDialog({template, title, parts, data, rollMode: messageOptions.rollMode, dialogOptions, roll: _roll});
+  const roll = fastForward ? _innerRoll(parts, adv) :
+    await _d20RollDialog({template, title, parts, data, rollMode: messageOptions.rollMode, dialogOptions, roll: _innerRoll});
 
   // Create a Chat Message
   if ( roll && chatMessage ) roll.toMessage(messageData, messageOptions);
@@ -250,6 +243,27 @@ function applyD20FormData(parts, adv, form, messageOptions, rollArgs) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Takes the parts of the roll and actually performs the roll
+ * @param parts           The parts of the d20 roll
+ * @param rollArgs        Options passed into the original call to d20Roll
+ * @returns {Roll|null}   A Roll instance if successful, or null if an error occurred
+ */
+function evaluateD20Roll(parts, rollArgs) {
+  let { data } = rollArgs;
+
+  let roll = new Roll(parts.join(" + "), data);
+  try {
+    roll.roll();
+  } catch (err) {
+    console.error(err);
+    ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    return null;
+  }
+
+  return roll;
+}
 
 /**
  * Present a Dialog form which creates a d20 roll once submitted
