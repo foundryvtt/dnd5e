@@ -107,30 +107,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
   // Define the inner roll function
   const _roll = (parts, adv, form) => {
-
-    // Determine the d20 roll and modifiers
-    let nd = 1;
-    let mods = halflingLucky ? "r1=1" : "";
-
-    // Handle advantage
-    if (adv === 1) {
-      nd = elvenAccuracy ? 3 : 2;
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
-      if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].advantage = true;
-      mods += "kh";
-    }
-
-    // Handle disadvantage
-    else if (adv === -1) {
-      nd = 2;
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
-      if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].disadvantage = true;
-      mods += "kl";
-    }
-
-    // Prepend the d20 roll
-    let formula = `${nd}d20${mods}`;
-    if (reliableTalent) formula = `{${nd}d20${mods},10}kh`;
+    const formula = determineD20Formula(parts, adv, form, messageOptions, rollArgs);
     parts.unshift(formula);
 
     if ( form ) applyD20FormData(parts, adv, form, messageOptions, rollArgs);
@@ -206,6 +183,38 @@ function determineD20FastForward(rollArgs) {
   }
 
   return { adv, ff };
+}
+
+/* -------------------------------------------- */
+
+function determineD20Formula(parts, adv, form, messageOptions, rollArgs) {
+  let { halflingLucky, elvenAccuracy, reliableTalent, messageData } = rollArgs;
+
+  // Determine the d20 roll and modifiers
+  let nd = 1;
+  let mods = halflingLucky ? "r1=1" : "";
+
+  // Handle advantage
+  if ( adv === 1 ) {
+    nd = elvenAccuracy ? 3 : 2;
+    messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
+    if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].advantage = true;
+    mods += "kh";
+  }
+
+  // Handle disadvantage
+  else if ( adv === -1 ) {
+    nd = 2;
+    messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
+    if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].disadvantage = true;
+    mods += "kl";
+  }
+
+  // Prepend the d20 roll
+  let formula = `${nd}d20${mods}`;
+  if ( reliableTalent ) formula = `{${nd}d20${mods},10}kh`;
+
+  return formula;
 }
 
 /* -------------------------------------------- */
