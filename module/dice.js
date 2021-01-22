@@ -202,10 +202,12 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
  * @param {Object} rollArgs           The options passed into the original call to d20Roll
  */
 function prepareD20MessageData(messageOptions, rollArgs) {
-  rollArgs.messageData.flavor = rollArgs.flavor || rollArgs.title;
-  rollArgs.messageData.speaker = rollArgs.speaker || ChatMessage.getSpeaker();
-  messageOptions.rollMode = rollArgs.rollMode || game.settings.get("core", "rollMode");
-  rollArgs.parts.push("@bonus");
+  let { parts, flavor, title, speaker, rollMode, messageData } = rollArgs;
+
+  messageData.flavor = flavor || title;
+  messageData.speaker = speaker || ChatMessage.getSpeaker();
+  messageOptions.rollMode = rollMode || game.settings.get("core", "rollMode");
+  parts.push("@bonus");
 }
 
 /* -------------------------------------------- */
