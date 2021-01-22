@@ -103,23 +103,23 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   chatMessage=true, messageData={}}={}) {
   const rollArgs = arguments[0];
   const messageOptions = {};
-  prepareD20MessageData(messageOptions, rollArgs);
+  d20RollComponents.prepareD20MessageData(messageOptions, rollArgs);
 
-  let { ff, adv } = determineD20FastForward(rollArgs);
+  let { ff, adv } = d20RollComponents.determineD20FastForward(rollArgs);
 
   const _innerRoll = (parts, adv, form) => {
     // Create the appropriate d20 formula and prepend it to the array of roll parts
-    const formula = createD20Formula(parts, adv, form, messageOptions, rollArgs);
+    const formula = d20RollComponents.createD20Formula(parts, adv, form, messageOptions, rollArgs);
     parts.unshift(formula);
 
-    applyD20FormData(parts, adv, form, messageOptions, rollArgs);
+    d20RollComponents.applyD20FormData(parts, adv, form, messageOptions, rollArgs);
 
-    const roll = evaluateD20Roll(parts, rollArgs);
+    const roll = d20RollComponents.evaluateD20Roll(parts, rollArgs);
     if ( !roll ) return null;
 
-    applyRollOptions(roll, parts, adv, form, messageOptions, rollArgs);
+    d20RollComponents.applyRollOptions(roll, parts, adv, form, messageOptions, rollArgs);
 
-    applyExtraFlavorText(roll, parts, adv, form, messageOptions, rollArgs);
+    d20RollComponents.applyExtraFlavorText(roll, parts, adv, form, messageOptions, rollArgs);
 
     return roll;
   };
