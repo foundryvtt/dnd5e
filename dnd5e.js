@@ -14,6 +14,7 @@ import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances, getBarAttribute } from "./module/canvas.js";
+import D20Roll from "./module/dice/d20Roll.js";
 
 // Import Entities
 import Actor5e from "./module/actor/entity.js";
@@ -87,6 +88,9 @@ Hooks.once("init", function() {
   // Patch Core Functions
   CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+
+  // Register Roll Extensions
+  CONFIG.Dice.rolls.push(D20Roll);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);

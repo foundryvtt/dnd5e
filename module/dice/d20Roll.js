@@ -1,16 +1,4 @@
-/**
- * Advantage mode of a 5e d20 roll
- * @enum {{
- *     numberOfDice: number,
- *     mod: string
- * }}
- * @readonly
- */
-const ADV_MODE = {
-    NORMAL: { numberOfDice: 1, mod: "" },
-    ADV: { numberOfDice: 2, mod: "kh" },
-    DISADV: { numberOfDice: 2, mod: "kl" },
-}
+
 
 /**
  * A type of Roll specific to a d20 based check, save, or attack roll in the 5e system
@@ -25,15 +13,21 @@ const ADV_MODE = {
  * @param {boolean} halflingLucky         Allow Halfling Luck to modify this roll?
  * @param {boolean} reliableTalent        Allow Reliable Talent to modify this roll?
  */
-class D20Roll extends Roll {
-    constructor(formula, data, { advantageMode=ADV_MODE.NORMAL, critical=20, fumble=1,
+export default class D20Roll extends Roll {
+    constructor(formula, data, { advantageMode=D20Roll.ADV_MODE.NORMAL, critical=20, fumble=1,
         targetValue=null,  elvenAccuracy=false, halflingLucky=false, reliableTalent=false }={}) {
 
-        let d20Options = arguments[2];
-        const d20Term = D20Roll._createD20FormulaTerm(d20Options);
-        formula = `${d20Term} + ${formula}`;
-
         super(formula, data);
+
+        const d20Options = { advantageMode, critical, fumble, targetValue, elvenAccuracy, halflingLucky, reliableTalent };
+
+        // If there is not already a d20 term, add one
+        if ( !(this.terms[0] instanceof Die) || this.terms[0].faces !== 20 ) {
+            const d20Term = D20Roll._createD20FormulaTerm(d20Options);
+            formula = `${d20Term} + ${this._formula}`;
+            this.terms = this._identifyTerms(formula, {step: 0});
+            this._formula = this.constructor.cleanFormula(this.terms);
+        }
 
         /**
          * 5e d20 check options
@@ -51,17 +45,39 @@ class D20Roll extends Roll {
         this._d20Options = d20Options;
     }
 
+    /**
+     * Advantage mode of a 5e d20 roll
+     * @enum {number}
+     * @readonly
+     */
+    static ADV_MODE = {
+        NORMAL: 0,
+        ADV: 1,
+        DISADV: -1,
+    }
+
+    /**
+     * @enum {{ numberOfDice: number, mod: string }}
+     * @private
+     * @readonly
+     */
+    static _ADV_MODE_LOOKUP = {
+        [D20Roll.ADV_MODE.NORMAL]: { numberOfDice: 1, mod: "" },
+        [D20Roll.ADV_MODE.ADV]: { numberOfDice: 2, mod: "kh" },
+        [D20Roll.ADV_MODE.DISADV]: { numberOfDice: 2, mod: "kl" }
+    }
+
     /** @private */
     static _createD20FormulaTerm(d20Options) {
         let { advantageMode, halflingLucky, elvenAccuracy, reliableTalent } = d20Options;
 
         // Set number of dice and modifiers based on advantage mode and halfling lucky feature
-        let numberOfDice = advantageMode.numberOfDice;
+        let numberOfDice = D20Roll._ADV_MODE_LOOKUP[advantageMode].numberOfDice;
         let mods = halflingLucky ? "r1=1" : "";
-        mods += advantageMode.mod;
+        mods += D20Roll._ADV_MODE_LOOKUP[advantageMode].mod;
 
         // Account for elven accuracy feat when rolling with advantage
-        if ( elvenAccuracy && advantageMode === ADV_MODE.ADV ) numberOfDice++;
+        if ( elvenAccuracy && advantageMode === D20Roll.ADV_MODE.ADV ) numberOfDice++;
 
         let d20Term = `${numberOfDice}d20${mods}`;
 
@@ -83,8 +99,8 @@ class D20Roll extends Roll {
             d.options.fumble = this._d20Options.fumble;
 
             switch (this._d20Options.advantageMode) {
-                case ADV_MODE.ADV: d.options.advantage = true; break;
-                case ADV_MODE.DISADV: d.options.disadvantage = true; break;
+                case D20Roll.ADV_MODE.ADV: d.options.advantage = true; break;
+                case D20Roll.ADV_MODE.DISADV: d.options.disadvantage = true; break;
                 default: break;
             }
 
@@ -101,11 +117,11 @@ class D20Roll extends Roll {
 
         // Add appropriate advantage mode message flavor and dnd5e roll flags
         switch (this._d20Options.advantageMode) {
-            case ADV_MODE.ADV:
+            case D20Roll.ADV_MODE.ADV:
                 messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
                 if (hasRollFlags) messageData[rollFlagsKey].advantage = true;
                 break;
-            case ADV_MODE.DISADV:
+            case D20Roll.ADV_MODE.DISADV:
                 messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
                 if (hasRollFlags) messageData[rollFlagsKey].disadvantage = true;
                 break;
