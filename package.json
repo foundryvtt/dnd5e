@@ -32,7 +32,9 @@
     "setupFiles": [
       "./tests/setup.js"
     ],
-    "transform": {}
+    "transform": {},
+    "testMatch": ["**/?(*.)+(spec|test).[jt]s?(x)"],
+    "moduleFileExtensions": ["js"]
   },
   "type": "module",
   "dependencies": {}

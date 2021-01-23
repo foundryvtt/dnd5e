@@ -1,0 +1,7010 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actor5e#applyDamage apply 3 damage 1`] = `
+Object {
+  "max": 14,
+  "min": 0,
+  "temp": null,
+  "tempmax": null,
+  "value": 14,
+}
+`;
+
+exports[`Actor5e#applyDamage apply 3 damage 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "modifyTokenAttribute",
+      Object {
+        "attribute": "attributes.hp",
+        "isBar": true,
+        "isDelta": false,
+        "value": 3,
+      },
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.value": 11,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Actor5e#applyDamage apply 3 damage 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.value": 11,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.value": 11,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Actor5e#applyDamage apply 3 damage with a multiplier of two 1`] = `
+Object {
+  "max": 14,
+  "min": 0,
+  "temp": null,
+  "tempmax": null,
+  "value": 14,
+}
+`;
+
+exports[`Actor5e#applyDamage apply 3 damage with a multiplier of two 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "modifyTokenAttribute",
+      Object {
+        "attribute": "attributes.hp",
+        "isBar": true,
+        "isDelta": false,
+        "value": 3,
+      },
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.value": 11,
+      },
+    ],
+    Array [
+      "modifyTokenAttribute",
+      Object {
+        "attribute": "attributes.hp",
+        "isBar": true,
+        "isDelta": false,
+        "value": 6,
+      },
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.value": 8,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Actor5e#applyDamage apply 3 damage with a multiplier of two 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.value": 8,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.value": 8,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Actor5e#getRollData getRollData snapshot 1`] = `
+Object {
+  "abilities": Object {
+    "cha": Object {
+      "checkBonus": 0,
+      "dc": 12,
+      "mod": 2,
+      "prof": 0,
+      "proficient": 0,
+      "save": 2,
+      "saveBonus": 0,
+      "value": 14,
+    },
+    "con": Object {
+      "checkBonus": 0,
+      "dc": 12,
+      "mod": 2,
+      "prof": 2,
+      "proficient": 1,
+      "save": 4,
+      "saveBonus": 0,
+      "value": 15,
+    },
+    "dex": Object {
+      "checkBonus": 0,
+      "dc": 12,
+      "mod": 2,
+      "prof": 0,
+      "proficient": 0,
+      "save": 2,
+      "saveBonus": 0,
+      "value": 14,
+    },
+    "int": Object {
+      "checkBonus": 0,
+      "dc": 9,
+      "mod": -1,
+      "prof": 0,
+      "proficient": 0,
+      "save": -1,
+      "saveBonus": 0,
+      "value": 8,
+    },
+    "str": Object {
+      "checkBonus": 0,
+      "dc": 12,
+      "mod": 2,
+      "prof": 2,
+      "proficient": 1,
+      "save": 4,
+      "saveBonus": 0,
+      "value": 14,
+    },
+    "wis": Object {
+      "checkBonus": 0,
+      "dc": 10,
+      "mod": 0,
+      "prof": 0,
+      "proficient": 0,
+      "save": 0,
+      "saveBonus": 0,
+      "value": 10,
+    },
+  },
+  "attributes": Object {
+    "ac": Object {
+      "min": 0,
+      "value": 14,
+    },
+    "death": Object {
+      "failure": 0,
+      "success": 0,
+    },
+    "encumbrance": Object {
+      "encumbered": true,
+      "max": 210,
+      "pct": 38.095238095238095,
+      "value": 80,
+    },
+    "exhaustion": 0,
+    "hd": 1,
+    "hp": Object {
+      "max": 14,
+      "min": 0,
+      "temp": null,
+      "tempmax": null,
+      "value": 14,
+    },
+    "init": Object {
+      "bonus": 0,
+      "mod": 2,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "inspiration": false,
+    "movement": Object {
+      "burrow": 0,
+      "climb": 0,
+      "fly": 0,
+      "hover": false,
+      "swim": 0,
+      "units": "ft",
+      "walk": 25,
+    },
+    "prof": 2,
+    "senses": Object {
+      "blindsight": 0,
+      "darkvision": 0,
+      "special": "",
+      "tremorsense": 0,
+      "truesight": 0,
+      "units": "ft",
+    },
+    "spellcasting": "int",
+    "spelldc": 9,
+  },
+  "bonuses": Object {
+    "abilities": Object {
+      "check": "",
+      "save": "",
+      "skill": "",
+    },
+    "msak": Object {
+      "attack": "",
+      "damage": "",
+    },
+    "mwak": Object {
+      "attack": "",
+      "damage": "",
+    },
+    "rsak": Object {
+      "attack": "",
+      "damage": "",
+    },
+    "rwak": Object {
+      "attack": "",
+      "damage": "",
+    },
+    "spell": Object {
+      "dc": "",
+    },
+  },
+  "classes": Object {
+    "[object Object]": Object {
+      "attunement": 0,
+      "damage": Object {
+        "parts": Array [],
+      },
+      "description": Object {
+        "chat": "",
+        "unidentified": "",
+        "value": "<p>As a barbarian, you gain the following class features.</p>
+<h3>Hit Points</h3>
+<p><strong>Hit Dice:</strong> 1d12 per barbarian level<br><strong>Hit Points at 1st Level:</strong> 12 + your Constitution modifier<br><strong>Hit Points at Higher Levels:</strong> 1d12 (or 7) + your Constitution modifier per barbarian level after 1st</p>
+<h3>Proficiencies</h3>
+<p><strong>Armor:</strong> Light armor, medium armor, shields<br><strong>Weapons:</strong> Simple weapons, martial weapons<br><strong>Tools:</strong> None<br><strong>Saving Throws:</strong> Strength, Constitution<br><strong>Skills:</strong> Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival</p>
+<h3>Equipment</h3>
+<p>You start with the following equipment, in addition to the equipment granted by your background:</p>
+<ul>
+<li>(a) a greataxe or (b) any martial melee weapon</li>
+<li>(a) two handaxes or (b) any simple weapon</li>
+<li>An explorer’s pack and four javelins</li>
+</ul>
+<h1>Barbarian Advancement</h1>
+<table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\">
+<thead>
+<tr>
+<td height=\\"17\\">Level</td>
+<td>Proficiency Bonus</td>
+<td>Features</td>
+<td>Rages</td>
+<td>Rage Damage</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td height=\\"17\\">1st</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.VoR0SUrNX5EJVPIO]{Rage}, @Compendium[dnd5e.classfeatures.SZbsNbaxFFGwBpNK]{Unarmored Defense}</td>
+<td>2</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">2nd</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.SCVjqRdlZ9cvHVSR]{Reckless Attack}, @Compendium[dnd5e.classfeatures.vt31lWAULygEl7yk]{Danger Sense}</td>
+<td>2</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">3rd</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.TH1QAf6YNGSeBVjT]{Primal Path}</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">4th</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">5th</td>
+<td>+3</td>
+<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.Kl6zifJ5OmdHlOi2]{Fast Movement}</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">6th</td>
+<td>+3</td>
+<td>Path feature</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">7th</td>
+<td>+3</td>
+<td>@Compendium[dnd5e.classfeatures.NlXslw4yAqmKZWtN]{Feral Instinct}</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">8th</td>
+<td>+3</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">9th</td>
+<td>+4</td>
+<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (1 die)}</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">10th</td>
+<td>+4</td>
+<td>Path feature</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">11th</td>
+<td>+4</td>
+<td>@Compendium[dnd5e.classfeatures.FqfmbPgxiyrWzhYk]{Relentless Rage}</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">12th</td>
+<td>+4</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">13th</td>
+<td>+5</td>
+<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (2 dice)}</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">14th</td>
+<td>+5</td>
+<td>Path feature</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">15th</td>
+<td>+5</td>
+<td>@Compendium[dnd5e.classfeatures.l8tUhZ5Pecm9wz7I]{Persistent Rage}</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">16th</td>
+<td>+5</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>5</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">17th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (3 dice)}</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">18th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.Q1exex5ALteprrPo]{Indomitable Might}</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">19th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">20th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.jVU4AgqfrFaqgXns]{Primal Champion}</td>
+<td>Unlimited</td>
+<td>+4</td>
+</tr>
+</tbody>
+</table>
+<h1>Primal Paths</h1>
+<h2>Path of the Berserker</h2>
+<p>For some barbarians, rage is a means to an end— that end being violence. The Path of the Berserker is a path of untrammeled fury, slick with blood. As you enter the berserker’s rage, you thrill in the chaos of battle, heedless of your own health or well-being.</p>
+<h3>Path of the Berserker Features</h3>
+<p>3rd Level: @Compendium[dnd5e.classfeatures.CkbbAckeCtyHXEnL]{Frenzy}</p><p>6th Level: @Compendium[dnd5e.classfeatures.0Jgf8fYY2ExwgQpN]{Mindless Rage}</p><p>10th Level: @Compendium[dnd5e.classfeatures.M6VSMzVtKPhh8B0i]{Intimidating Presence}</p><p>14th Level: @Compendium[dnd5e.classfeatures.xzD9zlRP6dUxCtCl]{Retaliation}</p>",
+      },
+      "hitDice": "d12",
+      "hitDiceUsed": 0,
+      "levels": 1,
+      "skills": Object {
+        "choices": Array [
+          "ani",
+          "ath",
+          "itm",
+          "nat",
+          "prc",
+          "sur",
+        ],
+        "number": 2,
+        "value": Array [],
+      },
+      "source": "",
+      "spellcasting": "none",
+      "subclass": "",
+    },
+  },
+  "currency": Object {
+    "cp": 0,
+    "ep": 0,
+    "gp": 2,
+    "pp": 0,
+    "sp": 0,
+  },
+  "details": Object {
+    "alignment": "Chaotic Good",
+    "appearance": "",
+    "background": "Vigilante",
+    "biography": Object {
+      "public": "",
+      "value": "<p>Merric was once a vigilante, due to her innate sense of street justice. Though her small size may not seem like much in combat, she more than makes up for it with her violent outbursts of anger.</p>
+<blockquote>Actor artwork provided by <a href=\\"https://www.forgotten-adventures.net/\\" target=\\"_blank\\" rel=\\"noopener\\">Forgotten Adventures</a></blockquote>",
+    },
+    "bond": "",
+    "flaw": "",
+    "hd": Object {
+      "_deprecated": true,
+    },
+    "ideal": "",
+    "level": 1,
+    "race": "Lightfoot Halfling",
+    "trait": "",
+    "xp": Object {
+      "max": 300,
+      "min": 0,
+      "pct": 0,
+      "value": 0,
+    },
+  },
+  "foo": "bar",
+  "prof": 2,
+  "resources": Object {
+    "primary": Object {
+      "label": "",
+      "lr": false,
+      "max": null,
+      "sr": false,
+      "value": null,
+    },
+    "secondary": Object {
+      "label": "",
+      "lr": false,
+      "max": null,
+      "sr": false,
+      "value": null,
+    },
+    "tertiary": Object {
+      "label": "",
+      "lr": false,
+      "max": null,
+      "sr": false,
+      "value": null,
+    },
+  },
+  "skills": Object {
+    "acr": Object {
+      "ability": "dex",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 12,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "ani": Object {
+      "ability": "wis",
+      "bonus": 0,
+      "mod": 0,
+      "passive": 12,
+      "prof": 2,
+      "total": 2,
+      "value": 1,
+    },
+    "arc": Object {
+      "ability": "int",
+      "bonus": 0,
+      "mod": -1,
+      "passive": 9,
+      "prof": 0,
+      "total": -1,
+      "value": 0,
+    },
+    "ath": Object {
+      "ability": "str",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 14,
+      "prof": 2,
+      "total": 4,
+      "value": 1,
+    },
+    "dec": Object {
+      "ability": "cha",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 12,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "his": Object {
+      "ability": "int",
+      "bonus": 0,
+      "mod": -1,
+      "passive": 9,
+      "prof": 0,
+      "total": -1,
+      "value": 0,
+    },
+    "ins": Object {
+      "ability": "wis",
+      "bonus": 0,
+      "mod": 0,
+      "passive": 12,
+      "prof": 2,
+      "total": 2,
+      "value": 1,
+    },
+    "inv": Object {
+      "ability": "int",
+      "bonus": 0,
+      "mod": -1,
+      "passive": 11,
+      "prof": 2,
+      "total": 1,
+      "value": 1,
+    },
+    "itm": Object {
+      "ability": "cha",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 12,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "med": Object {
+      "ability": "wis",
+      "bonus": 0,
+      "mod": 0,
+      "passive": 10,
+      "prof": 0,
+      "total": 0,
+      "value": 0,
+    },
+    "nat": Object {
+      "ability": "int",
+      "bonus": 0,
+      "mod": -1,
+      "passive": 9,
+      "prof": 0,
+      "total": -1,
+      "value": 0,
+    },
+    "per": Object {
+      "ability": "cha",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 12,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "prc": Object {
+      "ability": "wis",
+      "bonus": 0,
+      "mod": 0,
+      "passive": 12,
+      "prof": 2,
+      "total": 2,
+      "value": 1,
+    },
+    "prf": Object {
+      "ability": "cha",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 12,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "rel": Object {
+      "ability": "int",
+      "bonus": 0,
+      "mod": -1,
+      "passive": 9,
+      "prof": 0,
+      "total": -1,
+      "value": 0,
+    },
+    "slt": Object {
+      "ability": "dex",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 12,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "ste": Object {
+      "ability": "dex",
+      "bonus": 0,
+      "mod": 2,
+      "passive": 12,
+      "prof": 0,
+      "total": 2,
+      "value": 0,
+    },
+    "sur": Object {
+      "ability": "wis",
+      "bonus": 0,
+      "mod": 0,
+      "passive": 10,
+      "prof": 0,
+      "total": 0,
+      "value": 0,
+    },
+  },
+  "spells": Object {
+    "pact": Object {
+      "level": 0,
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell0": Object {
+      "_deprecated": true,
+      "max": 0,
+      "value": null,
+    },
+    "spell1": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell2": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell3": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell4": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell5": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell6": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell7": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell8": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+    "spell9": Object {
+      "max": 0,
+      "override": null,
+      "value": 0,
+    },
+  },
+  "traits": Object {
+    "armorProf": Object {
+      "custom": "",
+      "value": Array [
+        "lgt",
+        "med",
+        "shl",
+      ],
+    },
+    "ci": Object {
+      "custom": "Advantage against being frightened",
+      "value": Array [],
+    },
+    "di": Object {
+      "custom": "",
+      "value": Array [],
+    },
+    "dr": Object {
+      "custom": "",
+      "value": Array [],
+    },
+    "dv": Object {
+      "custom": "",
+      "value": Array [],
+    },
+    "languages": Object {
+      "custom": "",
+      "value": Array [
+        "common",
+        "halfling",
+      ],
+    },
+    "perception": Object {
+      "_deprecated": true,
+    },
+    "size": "sm",
+    "toolProf": Object {
+      "custom": "",
+      "value": Array [],
+    },
+    "weaponProf": Object {
+      "custom": "",
+      "value": Array [
+        "sim",
+        "mar",
+      ],
+    },
+  },
+}
+`;
+
+exports[`Actor5e#longRest long rest restores spell slots 1`] = `
+Object {
+  "pact": Object {
+    "level": 0,
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell0": Object {
+    "_deprecated": true,
+    "max": 0,
+    "value": null,
+  },
+  "spell1": Object {
+    "max": 2,
+    "override": null,
+    "value": 0,
+  },
+  "spell2": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell3": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell4": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell5": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell6": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell7": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell8": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell9": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+}
+`;
+
+exports[`Actor5e#longRest long rest restores spell slots 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.tempmax": 0,
+        "data.attributes.hp.value": 8,
+        "data.spells.pact.value": 0,
+        "data.spells.spell0.value": 0,
+        "data.spells.spell1.value": 2,
+        "data.spells.spell2.value": 0,
+        "data.spells.spell3.value": 0,
+        "data.spells.spell4.value": 0,
+        "data.spells.spell5.value": 0,
+        "data.spells.spell6.value": 0,
+        "data.spells.spell7.value": 0,
+        "data.spells.spell8.value": 0,
+        "data.spells.spell9.value": 0,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.tempmax": 0,
+        "data.attributes.hp.value": 8,
+        "data.spells.pact.value": 0,
+        "data.spells.spell0.value": 0,
+        "data.spells.spell1.value": 2,
+        "data.spells.spell2.value": 0,
+        "data.spells.spell3.value": 0,
+        "data.spells.spell4.value": 0,
+        "data.spells.spell5.value": 0,
+        "data.spells.spell6.value": 0,
+        "data.spells.spell7.value": 0,
+        "data.spells.spell8.value": 0,
+        "data.spells.spell9.value": 0,
+      },
+    },
+  ],
+}
+`;
+
+exports[`hero db Merric should exist 1`] = `
+Object {
+  "_id": "1tAXamEdCqcLQwpM",
+  "data": Object {
+    "abilities": Object {
+      "cha": Object {
+        "checkBonus": 0,
+        "dc": 12,
+        "mod": 2,
+        "prof": 0,
+        "proficient": 0,
+        "save": 2,
+        "saveBonus": 0,
+        "value": 14,
+      },
+      "con": Object {
+        "checkBonus": 0,
+        "dc": 12,
+        "mod": 2,
+        "prof": 2,
+        "proficient": 1,
+        "save": 4,
+        "saveBonus": 0,
+        "value": 15,
+      },
+      "dex": Object {
+        "checkBonus": 0,
+        "dc": 12,
+        "mod": 2,
+        "prof": 0,
+        "proficient": 0,
+        "save": 2,
+        "saveBonus": 0,
+        "value": 14,
+      },
+      "int": Object {
+        "checkBonus": 0,
+        "dc": 9,
+        "mod": -1,
+        "prof": 0,
+        "proficient": 0,
+        "save": -1,
+        "saveBonus": 0,
+        "value": 8,
+      },
+      "str": Object {
+        "checkBonus": 0,
+        "dc": 12,
+        "mod": 2,
+        "prof": 2,
+        "proficient": 1,
+        "save": 4,
+        "saveBonus": 0,
+        "value": 14,
+      },
+      "wis": Object {
+        "checkBonus": 0,
+        "dc": 10,
+        "mod": 0,
+        "prof": 0,
+        "proficient": 0,
+        "save": 0,
+        "saveBonus": 0,
+        "value": 10,
+      },
+    },
+    "attributes": Object {
+      "ac": Object {
+        "min": 0,
+        "value": 14,
+      },
+      "death": Object {
+        "failure": 0,
+        "success": 0,
+      },
+      "encumbrance": Object {
+        "encumbered": true,
+        "max": 210,
+        "pct": 38.095238095238095,
+        "value": 80,
+      },
+      "exhaustion": 0,
+      "hd": 1,
+      "hp": Object {
+        "max": 14,
+        "min": 0,
+        "temp": null,
+        "tempmax": null,
+        "value": 14,
+      },
+      "init": Object {
+        "bonus": 0,
+        "mod": 2,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "inspiration": false,
+      "movement": Object {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "hover": false,
+        "swim": 0,
+        "units": "ft",
+        "walk": 25,
+      },
+      "prof": 2,
+      "senses": Object {
+        "blindsight": 0,
+        "darkvision": 0,
+        "special": "",
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+      },
+      "spellcasting": "int",
+      "spelldc": 9,
+    },
+    "bonuses": Object {
+      "abilities": Object {
+        "check": "",
+        "save": "",
+        "skill": "",
+      },
+      "msak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "mwak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "rsak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "rwak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "spell": Object {
+        "dc": "",
+      },
+    },
+    "currency": Object {
+      "cp": 0,
+      "ep": 0,
+      "gp": 2,
+      "pp": 0,
+      "sp": 0,
+    },
+    "details": Object {
+      "alignment": "Chaotic Good",
+      "appearance": "",
+      "background": "Vigilante",
+      "biography": Object {
+        "public": "",
+        "value": "<p>Merric was once a vigilante, due to her innate sense of street justice. Though her small size may not seem like much in combat, she more than makes up for it with her violent outbursts of anger.</p>
+<blockquote>Actor artwork provided by <a href=\\"https://www.forgotten-adventures.net/\\" target=\\"_blank\\" rel=\\"noopener\\">Forgotten Adventures</a></blockquote>",
+      },
+      "bond": "",
+      "flaw": "",
+      "hd": Object {
+        "_deprecated": true,
+      },
+      "ideal": "",
+      "level": 1,
+      "race": "Lightfoot Halfling",
+      "trait": "",
+      "xp": Object {
+        "max": 300,
+        "min": 0,
+        "pct": 0,
+        "value": 0,
+      },
+    },
+    "resources": Object {
+      "primary": Object {
+        "label": "",
+        "lr": false,
+        "max": null,
+        "sr": false,
+        "value": null,
+      },
+      "secondary": Object {
+        "label": "",
+        "lr": false,
+        "max": null,
+        "sr": false,
+        "value": null,
+      },
+      "tertiary": Object {
+        "label": "",
+        "lr": false,
+        "max": null,
+        "sr": false,
+        "value": null,
+      },
+    },
+    "skills": Object {
+      "acr": Object {
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "ani": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2,
+        "value": 1,
+      },
+      "arc": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1,
+        "value": 0,
+      },
+      "ath": Object {
+        "ability": "str",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 14,
+        "prof": 2,
+        "total": 4,
+        "value": 1,
+      },
+      "dec": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "his": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1,
+        "value": 0,
+      },
+      "ins": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2,
+        "value": 1,
+      },
+      "inv": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 11,
+        "prof": 2,
+        "total": 1,
+        "value": 1,
+      },
+      "itm": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "med": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0,
+        "value": 0,
+      },
+      "nat": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1,
+        "value": 0,
+      },
+      "per": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "prc": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2,
+        "value": 1,
+      },
+      "prf": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "rel": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1,
+        "value": 0,
+      },
+      "slt": Object {
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "ste": Object {
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2,
+        "value": 0,
+      },
+      "sur": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0,
+        "value": 0,
+      },
+    },
+    "spells": Object {
+      "pact": Object {
+        "level": 0,
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell0": Object {
+        "_deprecated": true,
+        "max": 0,
+        "value": null,
+      },
+      "spell1": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell2": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell3": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell4": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell5": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell6": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell7": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell8": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell9": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+    },
+    "traits": Object {
+      "armorProf": Object {
+        "custom": "",
+        "value": Array [
+          "lgt",
+          "med",
+          "shl",
+        ],
+      },
+      "ci": Object {
+        "custom": "Advantage against being frightened",
+        "value": Array [],
+      },
+      "di": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "dr": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "dv": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "languages": Object {
+        "custom": "",
+        "value": Array [
+          "common",
+          "halfling",
+        ],
+      },
+      "perception": Object {
+        "_deprecated": true,
+      },
+      "size": "sm",
+      "toolProf": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "weaponProf": Object {
+        "custom": "",
+        "value": Array [
+          "sim",
+          "mar",
+        ],
+      },
+    },
+  },
+  "effects": Array [],
+  "flags": Object {
+    "dnd5e": Object {
+      "halflingLucky": true,
+    },
+  },
+  "folder": "pK61u9wafV1nLfmS",
+  "img": "systems/dnd5e/tokens/heroes/BarbarianMaul.png",
+  "items": Array [
+    Object {
+      "_id": "U69Wo1zpr7xpWBdH",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<ul>
+<li>Skill Proficiencies: Insight, Investigation, Perception</li>
+<li>Equipment: Explorer's Pack, 2 gp</li>
+</ul>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": "",
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "passive",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": "",
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": "",
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/fire_07.jpg",
+      "name": "Background: Vigilante",
+      "sort": 4650000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "jw7Uw44HPUAf5Bhq",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "armor": Object {
+          "dex": null,
+          "type": "natural",
+          "value": 14,
+        },
+        "armorType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "attackBonus": 1,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": 0,
+        },
+        "equipped": true,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 0,
+        "proficient": true,
+        "quantity": 1,
+        "range": Object {
+          "long": 0,
+          "units": "",
+          "value": 5,
+        },
+        "rarity": "",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "",
+        "speed": Object {
+          "conditions": "",
+          "value": null,
+        },
+        "stealth": false,
+        "strength": null,
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": 0,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weight": 0,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/red_01.jpg",
+      "name": "Unarmored Defense",
+      "sort": 100000,
+      "type": "equipment",
+    },
+    Object {
+      "_id": "PRWrxqFZEBsYGcMt",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "bonus",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor:</p>
+<ul>
+<li>
+<p>You have advantage on Strength checks and Strength saving throws.</p>
+</li>
+<li>
+<p>When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.</p>
+</li>
+<li>
+<p>You have resistance to bludgeoning, piercing, and slashing damage.</p>
+</li>
+</ul>
+<p>If you are able to cast spells, you can't cast them or concentrate on them while raging. </p><p>Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action. </p><p>Once you have raged the number of times shown for your barbarian level in the Rages column in the table below, you must finish a long rest before you can rage again.</p><p><em>**Foundry note: Note the limited uses is set to the base default of 2. Please manually adjust as required.</em></p>
+<table border=\\"1\\">
+<tbody>
+<tr>
+<td><strong>Barbarian Level</strong></td>
+<td><strong>Rages</strong></td>
+<td><strong>Rage Damage</strong></td>
+</tr>
+<tr>
+<td>1st</td>
+<td>2</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>2nd</td>
+<td>2</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>3rd</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>4th</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>5th</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>6th</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>7th</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>8th</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>9th</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>10th</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>11th</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>12th</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>13th</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>14th</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>15th</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>16th</td>
+<td>5</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>17th</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>18th</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>19th</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>20th</td>
+<td>Unlimited</td>
+<td>+4</td>
+</tr>
+</tbody>
+</table>
+",
+        },
+        "duration": Object {
+          "units": "minute",
+          "value": 1,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "self",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Barbarian 1",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 48",
+        "target": Object {
+          "type": "self",
+          "units": null,
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 2,
+          "per": "lr",
+          "type": "lr",
+          "value": 2,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/red_10.jpg",
+      "name": "Rage",
+      "sort": 4400000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "6S2Nwqwk9GQCcfmg",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Barbarian 1",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 48",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/blue_35.jpg",
+      "name": "Unarmored Defense (Barbarian)",
+      "sort": 4550000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "l87HKTUcZRp0PohR",
+      "data": Object {
+        "ability": "",
+        "actionType": "mwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "armor": Object {
+          "value": 10,
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d6 + @mod",
+              "piercing",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": 0,
+        },
+        "equipped": false,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 0.5,
+        "proficient": true,
+        "properties": Object {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": true,
+          "two": false,
+          "ver": false,
+        },
+        "quantity": 1,
+        "range": Object {
+          "long": 120,
+          "units": "ft",
+          "value": 30,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 149",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": 0,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weaponType": "simpleM",
+        "weight": 0,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/bolt.png",
+      "name": "Javelin (melee)",
+      "sort": 225000,
+      "type": "weapon",
+    },
+    Object {
+      "_id": "bvHyCpcudXZ2bN7i",
+      "data": Object {
+        "ability": "",
+        "actionType": "rwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "armor": Object {
+          "value": 10,
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": 1,
+          "target": "acFqo6BnGivxj5lE",
+          "type": "ammo",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d6 + @mod",
+              "piercing",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": 0,
+        },
+        "equipped": false,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 0.5,
+        "proficient": true,
+        "properties": Object {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": true,
+          "two": false,
+          "ver": false,
+        },
+        "quantity": 1,
+        "range": Object {
+          "long": 120,
+          "units": "ft",
+          "value": 30,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 149",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": 0,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weaponType": "simpleR",
+        "weight": 0,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/bolt.png",
+      "name": "Javelin (thrown)",
+      "sort": 250000,
+      "type": "weapon",
+    },
+    Object {
+      "_id": "acFqo6BnGivxj5lE",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "ammo",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 0.5,
+        "quantity": 5,
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 149",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": false,
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+        "weight": 2,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/bolt.png",
+      "name": "Javelin",
+      "sort": 100001,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "kccU0cngRTiFlfLu",
+      "data": Object {
+        "ability": "",
+        "actionType": "mwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "armor": Object {
+          "value": 10,
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d12 + @mod",
+              "slashing",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This enormous axe features two twin crescent blades mounted on either side of a tall spiked shaft. Designed to be wielded with two hands and cleave foes in twain.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": true,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 30,
+        "proficient": true,
+        "properties": Object {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": true,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": true,
+          "ver": false,
+        },
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "ft",
+          "value": 5,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 149",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weaponType": "martialM",
+        "weight": 7,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/greataxe.jpg",
+      "name": "Greataxe",
+      "sort": 200000,
+      "type": "weapon",
+    },
+    Object {
+      "_id": "9hY5bOuPFqGubCEw",
+      "data": Object {
+        "attunement": 0,
+        "capacity": Object {
+          "type": "weight",
+          "value": 30,
+          "weightless": false,
+        },
+        "currency": Object {
+          "cp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0,
+          "sp": 0,
+        },
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 2,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 153",
+        "weight": 5,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/backpack.jpg",
+      "name": "Backpack",
+      "sort": 100000,
+      "type": "backpack",
+    },
+    Object {
+      "_id": "86aiVMgc7XPJ1z8C",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 1,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 150",
+        "weight": 7,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/cloth-blue.jpg",
+      "name": "Bedroll",
+      "sort": 800000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "SHXoXJMWZywkU7aV",
+      "data": Object {
+        "ability": "",
+        "actionType": "abil",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "trinket",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 1,
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "str",
+          "dc": 17,
+          "scaling": "flat",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": false,
+          "autoUse": true,
+          "max": 1,
+          "per": "charges",
+          "value": 1,
+        },
+        "weight": 10,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/rope.jpg",
+      "name": "Hempen Rope (50 ft.)",
+      "sort": 1000000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "pIYHCVrKJLq0D2Jc",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "food",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": 0,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 0.5,
+        "quantity": 10,
+        "range": Object {
+          "long": null,
+          "units": "touch",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "creature",
+          "units": "",
+          "value": 1,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": true,
+          "autoUse": true,
+          "max": 1,
+          "per": "charges",
+          "value": 1,
+        },
+        "weight": 2,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/meat.jpg",
+      "name": "Rations",
+      "sort": 1800000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "j8eiLPd8bbBYNyC1",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.2,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 152",
+        "weight": 1,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/fork.jpg",
+      "name": "Mess Kit",
+      "sort": 900000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "bHPIk24Cq3Z5FO86",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.5,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 153",
+        "weight": 1,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/torch.jpg",
+      "name": "Tinderbox",
+      "sort": 1400000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "YyXrE0aRDWy4AtwB",
+      "data": Object {
+        "ability": "str",
+        "actionType": "mwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "trinket",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1",
+              "fire",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
+        },
+        "duration": Object {
+          "units": "hour",
+          "value": 1,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 0.01,
+        "quantity": 10,
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "radius",
+          "units": "ft",
+          "value": 40,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": true,
+          "autoUse": true,
+          "max": 1,
+          "per": "charges",
+          "value": 1,
+        },
+        "weight": 1,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/torch.jpg",
+      "name": "Torch",
+      "sort": 4700000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "YvaZVAmilJd26Bfq",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "food",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": 0,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 0.2,
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "touch",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": 0,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": false,
+          "autoUse": true,
+          "max": 4,
+          "per": "charges",
+          "value": 4,
+        },
+        "weight": 5,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/waterskin.jpg",
+      "name": "Waterskin",
+      "sort": 500000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "3hJ5vLP7E424pEo4",
+      "data": Object {
+        "ability": "",
+        "actionType": "mwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "armor": Object {
+          "value": 10,
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d6 + @mod",
+              "slashing",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": false,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 5,
+        "proficient": true,
+        "properties": Object {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": true,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": true,
+          "two": false,
+          "ver": false,
+        },
+        "quantity": 1,
+        "range": Object {
+          "long": 60,
+          "units": "ft",
+          "value": 20,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 149",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weaponType": "simpleM",
+        "weight": 2,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/handaxe.jpg",
+      "name": "Handaxe",
+      "sort": 287500,
+      "type": "weapon",
+    },
+    Object {
+      "_id": "uWLF3Gr976X8vd7n",
+      "data": Object {
+        "ability": "",
+        "actionType": "mwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "armor": Object {
+          "value": 10,
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d6",
+              "slashing",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": false,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 5,
+        "proficient": true,
+        "properties": Object {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": true,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": true,
+          "two": false,
+          "ver": false,
+        },
+        "quantity": 1,
+        "range": Object {
+          "long": 60,
+          "units": "ft",
+          "value": 20,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 149",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weaponType": "simpleM",
+        "weight": 2,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/handaxe.jpg",
+      "name": "Handaxe (offhand)",
+      "sort": 325000,
+      "type": "weapon",
+    },
+    Object {
+      "_id": "CgqeiBQNhmG1B1MW",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>As a barbarian, you gain the following class features.</p>
+<h3>Hit Points</h3>
+<p><strong>Hit Dice:</strong> 1d12 per barbarian level<br><strong>Hit Points at 1st Level:</strong> 12 + your Constitution modifier<br><strong>Hit Points at Higher Levels:</strong> 1d12 (or 7) + your Constitution modifier per barbarian level after 1st</p>
+<h3>Proficiencies</h3>
+<p><strong>Armor:</strong> Light armor, medium armor, shields<br><strong>Weapons:</strong> Simple weapons, martial weapons<br><strong>Tools:</strong> None<br><strong>Saving Throws:</strong> Strength, Constitution<br><strong>Skills:</strong> Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival</p>
+<h3>Equipment</h3>
+<p>You start with the following equipment, in addition to the equipment granted by your background:</p>
+<ul>
+<li>(a) a greataxe or (b) any martial melee weapon</li>
+<li>(a) two handaxes or (b) any simple weapon</li>
+<li>An explorer’s pack and four javelins</li>
+</ul>
+<h1>Barbarian Advancement</h1>
+<table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\">
+<thead>
+<tr>
+<td height=\\"17\\">Level</td>
+<td>Proficiency Bonus</td>
+<td>Features</td>
+<td>Rages</td>
+<td>Rage Damage</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td height=\\"17\\">1st</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.VoR0SUrNX5EJVPIO]{Rage}, @Compendium[dnd5e.classfeatures.SZbsNbaxFFGwBpNK]{Unarmored Defense}</td>
+<td>2</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">2nd</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.SCVjqRdlZ9cvHVSR]{Reckless Attack}, @Compendium[dnd5e.classfeatures.vt31lWAULygEl7yk]{Danger Sense}</td>
+<td>2</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">3rd</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.TH1QAf6YNGSeBVjT]{Primal Path}</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">4th</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">5th</td>
+<td>+3</td>
+<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.Kl6zifJ5OmdHlOi2]{Fast Movement}</td>
+<td>3</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">6th</td>
+<td>+3</td>
+<td>Path feature</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">7th</td>
+<td>+3</td>
+<td>@Compendium[dnd5e.classfeatures.NlXslw4yAqmKZWtN]{Feral Instinct}</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">8th</td>
+<td>+3</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>4</td>
+<td>+2</td>
+</tr>
+<tr>
+<td height=\\"17\\">9th</td>
+<td>+4</td>
+<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (1 die)}</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">10th</td>
+<td>+4</td>
+<td>Path feature</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">11th</td>
+<td>+4</td>
+<td>@Compendium[dnd5e.classfeatures.FqfmbPgxiyrWzhYk]{Relentless Rage}</td>
+<td>4</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">12th</td>
+<td>+4</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">13th</td>
+<td>+5</td>
+<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (2 dice)}</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">14th</td>
+<td>+5</td>
+<td>Path feature</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">15th</td>
+<td>+5</td>
+<td>@Compendium[dnd5e.classfeatures.l8tUhZ5Pecm9wz7I]{Persistent Rage}</td>
+<td>5</td>
+<td>+3</td>
+</tr>
+<tr>
+<td height=\\"17\\">16th</td>
+<td>+5</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>5</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">17th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (3 dice)}</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">18th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.Q1exex5ALteprrPo]{Indomitable Might}</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">19th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+<td>6</td>
+<td>+4</td>
+</tr>
+<tr>
+<td height=\\"17\\">20th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.jVU4AgqfrFaqgXns]{Primal Champion}</td>
+<td>Unlimited</td>
+<td>+4</td>
+</tr>
+</tbody>
+</table>
+<h1>Primal Paths</h1>
+<h2>Path of the Berserker</h2>
+<p>For some barbarians, rage is a means to an end— that end being violence. The Path of the Berserker is a path of untrammeled fury, slick with blood. As you enter the berserker’s rage, you thrill in the chaos of battle, heedless of your own health or well-being.</p>
+<h3>Path of the Berserker Features</h3>
+<p>3rd Level: @Compendium[dnd5e.classfeatures.CkbbAckeCtyHXEnL]{Frenzy}</p><p>6th Level: @Compendium[dnd5e.classfeatures.0Jgf8fYY2ExwgQpN]{Mindless Rage}</p><p>10th Level: @Compendium[dnd5e.classfeatures.M6VSMzVtKPhh8B0i]{Intimidating Presence}</p><p>14th Level: @Compendium[dnd5e.classfeatures.xzD9zlRP6dUxCtCl]{Retaliation}</p>",
+        },
+        "hitDice": "d12",
+        "hitDiceUsed": 0,
+        "levels": 1,
+        "skills": Object {
+          "choices": Array [
+            "ani",
+            "ath",
+            "itm",
+            "nat",
+            "prc",
+            "sur",
+          ],
+          "number": 2,
+          "value": Array [],
+        },
+        "source": "",
+        "spellcasting": "none",
+        "subclass": "",
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/weapon_01.jpg",
+      "name": "Barbarian",
+      "sort": 4800000,
+      "type": "class",
+    },
+    Object {
+      "_id": "vb4ylO4gijpYubVK",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "You have advantage on saving throws against being frightened.",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You have advantage on saving throws against being frightened.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "ability",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Halfling",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 28",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": null,
+          "per": "",
+          "type": "lr",
+          "value": null,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/yellow_08.jpg",
+      "name": "Brave",
+      "sort": 5100000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "EEbqVNmOskEeXbAn",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><p><em><strong>Foundry Note:</strong> Enable this feature in the Special Traits section of the character sheet.</em></p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Halfling",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 28",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/dice.jpg",
+      "name": "Lucky",
+      "sort": 5200000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "mdahmK0Ttr26qhV7",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": "",
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "ability",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": "",
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Lightfoot",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 28",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": "",
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/shadow_17.jpg",
+      "name": "Naturally Stealthy",
+      "sort": 5300000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "XUuKHz75EISEhNjB",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You can move through the space of any creature that is of a size larger than yours.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": "",
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "passive",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": "",
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Halfling",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 28",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": "",
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/armor_01.jpg",
+      "name": "Halfling Nimbleness",
+      "sort": 5400000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "DPsowmMZwV6S2dpt",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<div title=\\"Page 4\\">
+<div>
+<div>
+<p><em>Your halfling character has a number of traits in common with all other halflings. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Dexterity score increases by 2.</p><p><em><strong>Age.</strong></em> A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.</p><p><em><strong>Alignment.</strong></em> Most halflings are lawful good. As a rule, they are good-­hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.</p><p><em><strong>Size.</strong></em> Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.</p><p><em><strong>Speed. </strong></em>Your base walking speed is 25 feet.</p><p><em><strong>Lucky.</strong></em> @Compendium[dnd5e.races.LOMdcNAGWh5xpfm4]{Lucky} When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.</p><p><em><strong>Brave.</strong></em> @Compendium[dnd5e.races.7Yoo9hG0hfPSmBoC]{Brave} You have advantage on saving throws against being frightened.</p>
+</div>
+</div>
+</div>
+<div title=\\"Page 5\\">
+<div>
+<div>
+<p><em><strong>Halfling Nimbleness.</strong></em> @Compendium[dnd5e.races.PqxZgcJzp1VVgP8t]{Halfling Nimbleness} You can move through the space of any creature that is of a size larger than yours.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Halfling. The Halfling language isn’t secret, but halflings are loath to share it with others. They write very little, so they don’t have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.</p>
+</div>
+</div>
+</div>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 28",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/lightning-jade-2.jpg",
+      "name": "Halfling",
+      "sort": 4875000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "1Vk6iVodEGrj12vH",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<div title=\\"Page 5\\">
+<div>
+<div>
+<p><em>As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You’re inclined to be affable and get along well with others. </em></p>
+<em> </em>
+<p><em>Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 1.</p><p><strong><em>Naturally Stealthy.</em></strong> @Compendium[dnd5e.races.GWPjKFeIthBBeCFJ]{Naturally Stealthy} You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>
+</div>
+</div>
+</div>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Halfling",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 28",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
+      "name": "Lightfoot",
+      "sort": 4987500,
+      "type": "feat",
+    },
+  ],
+  "name": "Merric (Halfling Barbarian)",
+  "permission": Object {
+    "default": 0,
+  },
+  "sort": 193750,
+  "token": Object {
+    "actorId": "1tAXamEdCqcLQwpM",
+    "actorLink": true,
+    "bar1": Object {
+      "attribute": "attributes.hp",
+    },
+    "bar2": Object {
+      "attribute": "attributes.ac.value",
+    },
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 5,
+    "displayBars": 40,
+    "displayName": 30,
+    "disposition": 1,
+    "flags": Object {},
+    "height": 1,
+    "img": "systems/dnd5e/tokens/heroes/BarbarianMaul.png",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": Object {
+      "intensity": 5,
+      "speed": 5,
+    },
+    "lightColor": "",
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "name": "Merric",
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 0.8,
+    "sightAngle": 360,
+    "tint": "",
+    "vision": true,
+    "width": 1,
+  },
+  "type": "character",
+}
+`;
+
+exports[`hero db Zanna should exist 1`] = `
+Object {
+  "_id": "p6FusMkGMOMBTDkt",
+  "data": Object {
+    "abilities": Object {
+      "cha": Object {
+        "checkBonus": 0,
+        "dc": 10,
+        "mod": 0,
+        "prof": 0,
+        "proficient": 0,
+        "save": 0,
+        "saveBonus": 0,
+        "value": 10,
+      },
+      "con": Object {
+        "checkBonus": 0,
+        "dc": 12,
+        "mod": 2,
+        "prof": 0,
+        "proficient": 0,
+        "save": 2,
+        "saveBonus": 0,
+        "value": 15,
+      },
+      "dex": Object {
+        "checkBonus": 0,
+        "dc": 11,
+        "mod": 1,
+        "prof": 0,
+        "proficient": 0,
+        "save": 1,
+        "saveBonus": 0,
+        "value": 12,
+      },
+      "int": Object {
+        "checkBonus": 0,
+        "dc": 13,
+        "mod": 3,
+        "prof": 2,
+        "proficient": 1,
+        "save": 5,
+        "saveBonus": 0,
+        "value": 17,
+      },
+      "str": Object {
+        "checkBonus": 0,
+        "dc": 9,
+        "mod": -1,
+        "prof": 0,
+        "proficient": 0,
+        "save": -1,
+        "saveBonus": 0,
+        "value": 8,
+      },
+      "wis": Object {
+        "checkBonus": 0,
+        "dc": 11,
+        "mod": 1,
+        "prof": 2,
+        "proficient": 1,
+        "save": 3,
+        "saveBonus": 0,
+        "value": 13,
+      },
+    },
+    "attributes": Object {
+      "ac": Object {
+        "min": 0,
+        "value": 11,
+      },
+      "death": Object {
+        "failure": 0,
+        "success": 0,
+      },
+      "encumbrance": Object {
+        "encumbered": true,
+        "max": 120,
+        "pct": 65.66666666666667,
+        "value": 78.8,
+      },
+      "exhaustion": 0,
+      "hd": 1,
+      "hp": Object {
+        "max": 8,
+        "min": 0,
+        "temp": null,
+        "tempmax": null,
+        "value": 8,
+      },
+      "init": Object {
+        "bonus": "0",
+        "mod": 1,
+        "prof": 0,
+        "total": "10",
+        "value": null,
+      },
+      "inspiration": false,
+      "movement": Object {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "hover": false,
+        "swim": 0,
+        "units": "ft",
+        "walk": 25,
+      },
+      "prof": 2,
+      "senses": Object {
+        "blindsight": 0,
+        "darkvision": 60,
+        "special": "",
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+      },
+      "spellcasting": "int",
+      "spelldc": 13,
+    },
+    "bonuses": Object {
+      "abilities": Object {
+        "check": "",
+        "save": "",
+        "skill": "",
+      },
+      "msak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "mwak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "rsak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "rwak": Object {
+        "attack": "",
+        "damage": "",
+      },
+      "spell": Object {
+        "dc": "",
+      },
+    },
+    "currency": Object {
+      "cp": 0,
+      "ep": 0,
+      "gp": 10,
+      "pp": 0,
+      "sp": 0,
+    },
+    "details": Object {
+      "alignment": "Chaotic Good",
+      "appearance": "",
+      "background": "Scholar",
+      "biography": Object {
+        "public": "",
+        "value": "<p>Always interested in tinkering, Zanna set out for adventure in order to find more spells for her spellbook, and perhaps one day create some of her own.</p>
+<blockquote>Actor artwork provided by <a href=\\"https://www.forgotten-adventures.net/\\" target=\\"_blank\\" rel=\\"noopener\\">Forgotten Adventures</a></blockquote>",
+      },
+      "bond": "",
+      "flaw": "",
+      "hd": Object {
+        "_deprecated": true,
+      },
+      "ideal": "",
+      "level": 1,
+      "race": "Rock Gnome",
+      "trait": "",
+      "xp": Object {
+        "max": 300,
+        "min": 0,
+        "pct": 0,
+        "value": 0,
+      },
+    },
+    "resources": Object {
+      "primary": Object {
+        "label": "",
+        "lr": false,
+        "max": null,
+        "sr": false,
+        "value": null,
+      },
+      "secondary": Object {
+        "label": "",
+        "lr": false,
+        "max": null,
+        "sr": false,
+        "value": null,
+      },
+      "tertiary": Object {
+        "label": "",
+        "lr": false,
+        "max": null,
+        "sr": false,
+        "value": null,
+      },
+    },
+    "skills": Object {
+      "acr": Object {
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1,
+        "value": 0,
+      },
+      "ani": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1,
+        "value": 0,
+      },
+      "arc": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": 3,
+        "passive": 15,
+        "prof": 2,
+        "total": 5,
+        "value": 1,
+      },
+      "ath": Object {
+        "ability": "str",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1,
+        "value": 0,
+      },
+      "dec": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0,
+        "value": 0,
+      },
+      "his": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": 3,
+        "passive": 15,
+        "prof": 2,
+        "total": 5,
+        "value": 1,
+      },
+      "ins": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1,
+        "value": 0,
+      },
+      "inv": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": 3,
+        "passive": 13,
+        "prof": 0,
+        "total": 3,
+        "value": 0,
+      },
+      "itm": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0,
+        "value": 0,
+      },
+      "med": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 13,
+        "prof": 2,
+        "total": 3,
+        "value": 1,
+      },
+      "nat": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": 3,
+        "passive": 13,
+        "prof": 0,
+        "total": 3,
+        "value": 0,
+      },
+      "per": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2,
+        "value": 1,
+      },
+      "prc": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1,
+        "value": 0,
+      },
+      "prf": Object {
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0,
+        "value": 0,
+      },
+      "rel": Object {
+        "ability": "int",
+        "bonus": 0,
+        "mod": 3,
+        "passive": 13,
+        "prof": 0,
+        "total": 3,
+        "value": 0,
+      },
+      "slt": Object {
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1,
+        "value": 0,
+      },
+      "ste": Object {
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1,
+        "value": 0,
+      },
+      "sur": Object {
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1,
+        "value": 0,
+      },
+    },
+    "spells": Object {
+      "pact": Object {
+        "level": 0,
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell0": Object {
+        "_deprecated": true,
+        "max": 0,
+        "value": null,
+      },
+      "spell1": Object {
+        "max": 2,
+        "override": null,
+        "value": 2,
+      },
+      "spell2": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell3": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell4": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell5": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell6": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell7": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell8": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+      "spell9": Object {
+        "max": 0,
+        "override": null,
+        "value": 0,
+      },
+    },
+    "traits": Object {
+      "armorProf": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "ci": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "di": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "dr": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "dv": Object {
+        "custom": "",
+        "value": Array [],
+      },
+      "languages": Object {
+        "custom": "",
+        "value": Array [
+          "common",
+          "dwarvish",
+          "giant",
+          "gnomish",
+        ],
+      },
+      "perception": Object {
+        "_deprecated": true,
+      },
+      "size": "sm",
+      "toolProf": Object {
+        "custom": "Tinkerer's Tools",
+        "value": Array [],
+      },
+      "weaponProf": Object {
+        "custom": "Daggers; Darts; Slings; Quarterstaffs; Light Crossbows",
+        "value": Array [],
+      },
+    },
+  },
+  "effects": Array [],
+  "flags": Object {
+    "exportSource": Object {
+      "coreVersion": "0.6.6",
+      "system": "dnd5e",
+      "systemVersion": 0.98,
+      "world": "fresh",
+    },
+  },
+  "folder": "pK61u9wafV1nLfmS",
+  "img": "systems/dnd5e/tokens/heroes/WizardTome.png",
+  "items": Array [
+    Object {
+      "_id": "C4l8C6wVfQABKmv3",
+      "data": Object {
+        "ability": "",
+        "actionType": null,
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p><p>For example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": "",
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "passive",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": "",
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Wizard 1",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": null,
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": "",
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "entityorder": Object {
+          "order": 45,
+        },
+      },
+      "img": "systems/dnd5e/icons/skills/green_11.jpg",
+      "name": "Arcane Recovery",
+      "sort": 4700000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "8cNEEgRY0og0XzQ2",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<ul>
+<li>
+<p>Skill Proficiencies: History, plus your choice of one from among Arcana, Nature, and Religion</p>
+</li>
+<li>
+<p>Languages: Two of your choice</p>
+</li>
+<li>
+<p>Equipment: Scholar's robes, a writing kit, a book of lore, and a pouch containing 10 gp</p>
+</li>
+</ul>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": "",
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "passive",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": "",
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": "",
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "entityorder": Object {
+          "order": 130,
+        },
+      },
+      "img": "systems/dnd5e/icons/skills/light_08.jpg",
+      "name": "Background: Scholar",
+      "sort": 4800000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "mI6E2POYgwiy7cSM",
+      "data": Object {
+        "ability": "",
+        "actionType": "rsak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": false,
+          "ritual": false,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d10",
+              "fire",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.</p><p>This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).</p>",
+        },
+        "duration": Object {
+          "units": "inst",
+          "value": null,
+        },
+        "formula": "",
+        "level": 0,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": 0,
+          "units": "ft",
+          "value": 120,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "cantrip",
+        },
+        "school": "evo",
+        "source": "PHB pg. 242",
+        "target": Object {
+          "type": "creature",
+          "units": "",
+          "value": 1,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/fireball-red-1.jpg",
+      "name": "Fire Bolt",
+      "sort": 100001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "uhYFSEVzD5tg6uMC",
+      "data": Object {
+        "ability": "",
+        "actionType": "save",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": true,
+          "ritual": false,
+          "somatic": false,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
+        },
+        "duration": Object {
+          "units": "hour",
+          "value": 1,
+        },
+        "formula": "",
+        "level": 0,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "A firefly or phosphorescent moss.",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": null,
+          "units": "touch",
+          "value": null,
+        },
+        "save": Object {
+          "ability": "dex",
+          "dc": 13,
+          "scaling": "spell",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "none",
+        },
+        "school": "evo",
+        "source": "PHB pg. 255",
+        "target": Object {
+          "type": "object",
+          "units": "",
+          "value": 1,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
+      "name": "Light",
+      "sort": 100001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "oCcyf3P0IaxCdugZ",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": false,
+          "ritual": false,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
+        },
+        "duration": Object {
+          "units": "minute",
+          "value": 1,
+        },
+        "formula": "",
+        "level": 0,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": 0,
+          "units": "ft",
+          "value": 30,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "none",
+        },
+        "school": "con",
+        "source": "PHB pg. 256",
+        "target": Object {
+          "type": "space",
+          "units": "",
+          "value": 1,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/ice_16.jpg",
+      "name": "Mage Hand",
+      "sort": 100001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "84Oawi5HPhBOGDx8",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "minute",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": true,
+          "ritual": true,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is mental or audible.</p><p>A mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.</p><p>An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.</p>",
+        },
+        "duration": Object {
+          "units": "hour",
+          "value": 8,
+        },
+        "formula": "",
+        "level": 1,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "A tiny bell and a piece of fine silver wire.",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": 0,
+          "units": "ft",
+          "value": 30,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "none",
+        },
+        "school": "abj",
+        "source": "PHB pg. 211",
+        "target": Object {
+          "type": "cube",
+          "units": "ft",
+          "value": 20,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/runes-royal-1.jpg",
+      "name": "Alarm",
+      "sort": 100001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "ozEbNmFadEK91WFj",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "Which you take when you are hit by an attack or targeted by the magic missile spell",
+          "cost": 1,
+          "type": "reaction",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": false,
+          "ritual": false,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.</p>",
+        },
+        "duration": Object {
+          "units": "round",
+          "value": 1,
+        },
+        "formula": "",
+        "level": 1,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": null,
+          "units": "self",
+          "value": null,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "none",
+        },
+        "school": "abj",
+        "source": "PHB pg. 275",
+        "target": Object {
+          "type": "self",
+          "units": null,
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "_sheetTab": "description",
+      },
+      "img": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
+      "name": "Shield",
+      "sort": 200001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "cxE63DW0jdz0CHOp",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "hour",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": true,
+          "ritual": false,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Your familiar acts independently of you, but it always obeys your commands. In combat, it rolls its own initiative and acts on its own turn. A familiar can’t attack, but it can take other actions as normal.</p><p>When the familiar drops to 0 hit points, it disappears, leaving behind no physical form. It reappears after you cast this spell again.</p><p>While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar’s eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are deaf and blind with regard to your own senses.</p><p>As an action, you can temporarily dismiss your familiar. It disappears into a pocket dimension where it awaits your summons. Alternatively, you can dismiss it forever. As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you.</p><p>You can’t have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature.</p><p>Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your action modifier for the roll.</p>",
+        },
+        "duration": Object {
+          "units": "inst",
+          "value": null,
+        },
+        "formula": "",
+        "level": 1,
+        "materials": Object {
+          "consumed": true,
+          "cost": 10,
+          "supply": 0,
+          "value": "10 gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": 0,
+          "units": "ft",
+          "value": 10,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "none",
+        },
+        "school": "con",
+        "source": "PHB pg. 240",
+        "target": Object {
+          "type": "space",
+          "units": "any",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/wild-eerie-2.jpg",
+      "name": "Find Familiar",
+      "sort": 100001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "WQ4CgSHqsc96egKZ",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": true,
+          "ritual": false,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.</p>",
+        },
+        "duration": Object {
+          "units": "hour",
+          "value": 8,
+        },
+        "formula": "",
+        "level": 1,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "A piece of cured leather",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": null,
+          "units": "touch",
+          "value": null,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "none",
+        },
+        "school": "abj",
+        "source": "PHB pg. 256",
+        "target": Object {
+          "type": "creature",
+          "units": "",
+          "value": 1,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "_sheetTab": "details",
+      },
+      "img": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
+      "name": "Mage Armor",
+      "sort": 100001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "7nXQ8YWKiZZ2NUwa",
+      "data": Object {
+        "ability": "",
+        "actionType": "rsak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": true,
+          "ritual": false,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "5d8",
+              "",
+            ],
+          ],
+          "value": "",
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature’s hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected.</p><p>Undead and creatures immune to being charmed aren’t affected by this spell.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
+        },
+        "duration": Object {
+          "units": "minute",
+          "value": 1,
+        },
+        "formula": "",
+        "level": 1,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "A pinch of fine sand, rose petals, or a cricket.",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": 0,
+          "units": "ft",
+          "value": 90,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "2d8",
+          "mode": "level",
+        },
+        "school": "enc",
+        "source": "PHB pg. 276",
+        "target": Object {
+          "type": "sphere",
+          "units": "ft",
+          "value": 20,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/light-magenta-1.jpg",
+      "name": "Sleep",
+      "sort": 300001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "c5L1mF7UQa5kzg5F",
+      "data": Object {
+        "ability": "",
+        "actionType": "other",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "components": Object {
+          "concentration": false,
+          "material": false,
+          "ritual": false,
+          "somatic": true,
+          "value": "",
+          "vocal": true,
+        },
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d4 + 1",
+              "force",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
+        },
+        "duration": Object {
+          "units": "inst",
+          "value": null,
+        },
+        "formula": "",
+        "level": 1,
+        "materials": Object {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": "",
+        },
+        "preparation": Object {
+          "mode": "prepared",
+          "prepared": false,
+        },
+        "range": Object {
+          "long": 0,
+          "units": "ft",
+          "value": 120,
+        },
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "scaling": Object {
+          "formula": "",
+          "mode": "level",
+        },
+        "school": "evo",
+        "source": "PHB pg. 257",
+        "target": Object {
+          "type": "creature",
+          "units": "",
+          "value": 1,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/fire-arrows-magenta-1.jpg",
+      "name": "Magic Missile",
+      "sort": 100001,
+      "type": "spell",
+    },
+    Object {
+      "_id": "ZTaGDK3lSy8a5T1l",
+      "data": Object {
+        "ability": null,
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "ammo",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": true,
+        "formula": "",
+        "identified": true,
+        "price": 25,
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 151",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": false,
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weight": 2,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/satchel-leather.jpg",
+      "name": "Component Pouch",
+      "sort": 400000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "EPiw1vnn3pDOdO1m",
+      "data": Object {
+        "ability": "",
+        "actionType": "mwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "armor": Object {
+          "value": 10,
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1d6 + @mod",
+              "bludgeoning",
+            ],
+          ],
+          "versatile": "1d8 + @mod",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A thick shaft of wood wrapped with a sturdy grip makes a highly functional weapon in addition to a stout walking stick.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": true,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 0.2,
+        "proficient": true,
+        "properties": Object {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": true,
+        },
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "ft",
+          "value": 5,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 149",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weaponType": "simpleM",
+        "weight": 4,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/quarterstaff.jpg",
+      "name": "Quarterstaff",
+      "sort": 2500000,
+      "type": "weapon",
+    },
+    Object {
+      "_id": "aJZGeP8AiFrEwgWX",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "none",
+        },
+        "armor": Object {
+          "dex": null,
+          "type": "clothing",
+          "value": null,
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Simple or ceremonial wear, often used by priests and other religious figures.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": true,
+        "formula": "",
+        "hp": Object {
+          "conditions": "",
+          "dt": null,
+          "max": 0,
+          "value": 0,
+        },
+        "identified": true,
+        "price": 1,
+        "proficient": true,
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 150",
+        "speed": Object {
+          "conditions": "",
+          "value": null,
+        },
+        "stealth": false,
+        "strength": 0,
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "value": 0,
+        },
+        "weight": 4,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/armor/robe.jpg",
+      "name": "Robes",
+      "sort": 3800000,
+      "type": "equipment",
+    },
+    Object {
+      "_id": "wIPWkO6CHUrTw13Y",
+      "data": Object {
+        "attunement": 0,
+        "capacity": Object {
+          "type": "weight",
+          "value": 30,
+          "weightless": false,
+        },
+        "currency": Object {
+          "cp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0,
+          "sp": 0,
+        },
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 2,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 153",
+        "weight": 5,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/backpack.jpg",
+      "name": "Backpack",
+      "sort": 100000,
+      "type": "backpack",
+    },
+    Object {
+      "_id": "4rrQYmSFohtbkBwH",
+      "data": Object {
+        "attunement": 0,
+        "capacity": Object {
+          "type": "weight",
+          "value": 6,
+          "weightless": false,
+        },
+        "currency": Object {
+          "cp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0,
+          "sp": 0,
+        },
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.5,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 153",
+        "weight": 1,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/pouch.jpg",
+      "name": "Pouch",
+      "sort": 600000,
+      "type": "backpack",
+    },
+    Object {
+      "_id": "eYEelIdlbOvIRDkK",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 1,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 150",
+        "weight": 7,
+      },
+      "effects": Array [],
+      "flags": Object {
+        "adnd5e": Object {
+          "itemInfo": Object {
+            "idx": 6,
+            "type": "item",
+          },
+        },
+      },
+      "img": "systems/dnd5e/icons/items/inventory/cloth-blue.jpg",
+      "name": "Bedroll",
+      "sort": 800000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "Ps3a8zDFtNoUfJDZ",
+      "data": Object {
+        "ability": "",
+        "actionType": "abil",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "trinket",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 1,
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "str",
+          "dc": 17,
+          "scaling": "flat",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": false,
+          "autoUse": true,
+          "max": 1,
+          "per": "charges",
+          "value": 1,
+        },
+        "weight": 10,
+      },
+      "effects": Array [],
+      "flags": Object {
+        "adnd5e": Object {
+          "itemInfo": Object {
+            "idx": 8,
+            "type": "item",
+          },
+        },
+      },
+      "img": "systems/dnd5e/icons/items/inventory/rope.jpg",
+      "name": "Hempen Rope (50 ft.)",
+      "sort": 1000000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "rsSr1FRdaAKl6fpc",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.2,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 152",
+        "weight": 1,
+      },
+      "effects": Array [],
+      "flags": Object {
+        "adnd5e": Object {
+          "itemInfo": Object {
+            "idx": 4,
+            "type": "item",
+          },
+        },
+      },
+      "img": "systems/dnd5e/icons/items/inventory/fork.jpg",
+      "name": "Mess Kit",
+      "sort": 900000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "FQpJpWjX9bsPZvDo",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "food",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": 0,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 0.5,
+        "quantity": 10,
+        "range": Object {
+          "long": null,
+          "units": "touch",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "creature",
+          "units": "",
+          "value": 1,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": true,
+          "autoUse": true,
+          "max": 1,
+          "per": "charges",
+          "value": 1,
+        },
+        "weight": 2,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/meat.jpg",
+      "name": "Rations",
+      "sort": 1800000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "zthIyDRa8OLDoBId",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.5,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 153",
+        "weight": 1,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/torch.jpg",
+      "name": "Tinderbox",
+      "sort": 1400000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "rTQEtliS3CqxnBPg",
+      "data": Object {
+        "ability": "str",
+        "actionType": "mwak",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "trinket",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [
+            Array [
+              "1",
+              "fire",
+            ],
+          ],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
+        },
+        "duration": Object {
+          "units": "hour",
+          "value": 1,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 0.01,
+        "quantity": 10,
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "radius",
+          "units": "ft",
+          "value": 40,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": true,
+          "autoUse": true,
+          "max": 1,
+          "per": "charges",
+          "value": 1,
+        },
+        "weight": 1,
+      },
+      "effects": Array [],
+      "flags": Object {
+        "adnd5e": Object {
+          "itemInfo": Object {
+            "idx": 7,
+            "type": "item",
+          },
+        },
+      },
+      "img": "systems/dnd5e/icons/items/inventory/torch.jpg",
+      "name": "Torch",
+      "sort": 4700000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "xxVyo2I5EYUi3cla",
+      "data": Object {
+        "ability": "",
+        "actionType": "util",
+        "activation": Object {
+          "condition": "",
+          "cost": 1,
+          "type": "action",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consumableType": "food",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": 0,
+        },
+        "equipped": false,
+        "formula": "",
+        "identified": true,
+        "price": 0.2,
+        "quantity": 1,
+        "range": Object {
+          "long": null,
+          "units": "touch",
+          "value": null,
+        },
+        "rarity": "Common",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 153",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": 0,
+          "width": null,
+        },
+        "uses": Object {
+          "autoDestroy": false,
+          "autoUse": true,
+          "max": 4,
+          "per": "charges",
+          "value": 4,
+        },
+        "weight": 5,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/waterskin.jpg",
+      "name": "Waterskin",
+      "sort": 500000,
+      "type": "consumable",
+    },
+    Object {
+      "_id": "gIJ6Vm16khwtSS0q",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A small bottle of ink for writing upon parchment.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 10,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 150",
+        "weight": 0.06,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/bottle-empty.jpg",
+      "name": "Ink Bottle",
+      "sort": 3600000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "EuWal2U6WQwbDmAL",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A deviced used in combination with ink to write or draw on a sheet of paper.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.02,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 150",
+        "weight": 0,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/feather-red.jpg",
+      "name": "Ink Pen",
+      "sort": 3700000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "MNtWDpVTu3jHk8be",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A single sheet of heavier parchment paper.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.1,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 150",
+        "weight": 0,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/parchment.jpg",
+      "name": "Parchment",
+      "sort": 3900000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "i3YAIUu7sNkJUPTU",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A book containing historical accounts, information pertaining to a particular field of lore, myth, or legend.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 25,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 151",
+        "weight": 5,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/book-orange.jpg",
+      "name": "Book of Lore",
+      "sort": 4000000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "23NorZLPXATDYptB",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p>",
+        },
+        "details": Object {
+          "description": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p><p>The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library. </p><p><strong>Copying a Spell into the Book</strong></p><p>When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it. Copying that spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation. For each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells. </p><p><strong>Replacing the Book</strong> </p><p>You can copy a spell from your own spellbook into another book - for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell. </p><p>If you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place. The Book's Appearance. Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library, or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 50,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 153",
+        "weight": 3,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/inventory/book-purple.jpg",
+      "name": "Spellbook",
+      "sort": 700000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "rjlTBnXJGxoodrM3",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>A blunt knife used by the scholarly to open letters and correspondence.</p>",
+        },
+        "equipped": false,
+        "identified": true,
+        "price": 0.5,
+        "quantity": 1,
+        "rarity": "Common",
+        "source": "PHB pg. 151",
+        "weight": 0.5,
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/items/weapons/dagger.jpg",
+      "name": "Small Knife",
+      "sort": 4600000,
+      "type": "loot",
+    },
+    Object {
+      "_id": "XvD7omvVaqEaaW5p",
+      "data": Object {
+        "attunement": 0,
+        "damage": Object {
+          "parts": Array [],
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>As a wizard, you gain the following class features.</p>
+<h3>Hit Points</h3>
+<p><strong>Hit Dice:</strong> 1d6 per wizard level<br><strong>Hit Points at 1st Level:</strong> 6 + your Constitution modifier<br><strong>Hit Points at Higher Levels:</strong> 1d6 (or 4) + your Constitution modifier per wizard level after 1st</p>
+<h3>Proficiencies</h3>
+<p><strong>Armor:</strong> None<br><strong>Weapons:</strong> Daggers, darts, slings, quarterstaffs, light crossbows<br><strong>Tools:</strong> None<br><strong>Saving Throws:</strong> Intelligence, Wisdom<br><strong>Skills:</strong> Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion</p>
+<h3>Equipment</h3>
+<p>You start with the following equipment, in addition to the equipment granted by your background:</p>
+<ul>
+<li>(a) a quarterstaff or (b) a dagger</li>
+<li>(a) a component pouch or (b) an arcane focus</li>
+<li>(a) a scholar’s pack or (b) an explorer’s pack</li>
+<li>A spellbook</li>
+</ul>
+<h1>Wizard Advancement</h1>
+<table>
+<thead>
+<tr>
+<td>Level</td>
+<td>Proficiency Bonus</td>
+<td>Features</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1st</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.gbNo5eVPaqr8IVKL]{Spellcasting}, @Compendium[dnd5e.classfeatures.e0uTcFPpgxjIyUW9]{Arcane Recovery}</td>
+</tr>
+<tr>
+<td>2nd</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.AEWr9EMxy5gj4ZFT]{Arcane Tradition}</td>
+</tr>
+<tr>
+<td>3rd</td>
+<td>+2</td>
+<td>2nd Level Spell Slot</td>
+</tr>
+<tr>
+<td>4th</td>
+<td>+2</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+</tr>
+<tr>
+<td>5th</td>
+<td>+3</td>
+<td>3rd Level Spell Slot</td>
+</tr>
+<tr>
+<td>6th</td>
+<td>+3</td>
+<td>Arcane Tradition feature</td>
+</tr>
+<tr>
+<td>7th</td>
+<td>+3</td>
+<td>4th Level Spell Slot</td>
+</tr>
+<tr>
+<td>8th</td>
+<td>+3</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+</tr>
+<tr>
+<td>9th</td>
+<td>+4</td>
+<td>5th Level Spell Slot</td>
+</tr>
+<tr>
+<td>10th</td>
+<td>+4</td>
+<td>Arcane Tradition feature</td>
+</tr>
+<tr>
+<td>11th</td>
+<td>+4</td>
+<td>6 Level Spell Slot</td>
+</tr>
+<tr>
+<td>12th</td>
+<td>+4</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+</tr>
+<tr>
+<td>13th</td>
+<td>+5</td>
+<td>7th Level Spell Slot</td>
+</tr>
+<tr>
+<td>14th</td>
+<td>+5</td>
+<td>Arcane Tradition feature</td>
+</tr>
+<tr>
+<td>15th</td>
+<td>+5</td>
+<td>8th Level Spell Slot</td>
+</tr>
+<tr>
+<td>16th</td>
+<td>+5</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+</tr>
+<tr>
+<td>17th</td>
+<td>+6</td>
+<td>9 Level Spell Slot</td>
+</tr>
+<tr>
+<td>18th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.JfFfHTeIszx1hNRx]{Spell Mastery}</td>
+</tr>
+<tr>
+<td>19th</td>
+<td>+6</td>
+<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>
+</tr>
+<tr>
+<td>20th</td>
+<td>+6</td>
+<td>
+<p>@Compendium[dnd5e.classfeatures.nUrZDi6QN1YjwAr6]{Signature Spells (First Spell)}</p><p>@Compendium[dnd5e.classfeatures.31bKbWe9ZGVLEns6]{Signature Spells (Second Spell)}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Your Spellbook</h3>
+<p>The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard’s chest, for example, or in a dusty tome in an ancient library.</p><p><em><strong>Copying a Spell into the Book.</strong></em> When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.</p><p>Copying that spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation.</p><p>For each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.</p><p><em><strong>Replacing the Book.</strong></em> You can copy a spell from your own spellbook into another book—for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell.</p><p>If you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place.</p><p><em><strong>The Book’s Appearance.</strong></em> Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library, or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap.</p>
+<h1>Arcane Traditions</h1>
+<p>The study of wizardry is ancient, stretching back to the earliest mortal discoveries of magic. It is firmly established in fantasy gaming worlds, with various traditions dedicated to its complex study.</p><p>The most common arcane traditions in the multiverse revolve around the schools of magic. Wizards through the ages have cataloged thousands of spells, grouping them into eight categories called schools. In some places, these traditions are literally schools. In other institutions, the schools are more like academic departments, with rival faculties competing for students and funding. Even wizards who train apprentices in the solitude of their own towers use the division of magic into schools as a learning device, since the spells of each school require mastery of different techniques.</p>
+<h2>School of Evocation</h2>
+<p>You focus your study on magic that creates powerful elemental effects such as bitter cold, searing flame, rolling thunder, crackling lightning, and burning acid. Some evokers find employment in military forces, serving as artillery to blast enemy armies from afar. Others use their spectacular power to protect the weak, while some seek their own gain as bandits, adventurers, or aspiring tyrants.</p>
+<h3>School of Evocation Features</h3>
+<p>2nd Level: @Compendium[dnd5e.classfeatures.7uzJ2JkmsdRGLra3]{Evocation Savant} @Compendium[dnd5e.classfeatures.6VBXkjjBgjSpNElh]{Sculpt Spells}</p><p>6th Level: @Compendium[dnd5e.classfeatures.evEWCpE5MYgr5RRW]{Potent Cantrip}</p><p>10th Level: @Compendium[dnd5e.classfeatures.7O85kj6uDEG5NzUE]{Empowered Evocation}</p><p>14th Level: @Compendium[dnd5e.classfeatures.VUtSLeCzFubGXmGx]{Overchannel}</p>",
+        },
+        "hitDice": "d6",
+        "hitDiceUsed": 0,
+        "levels": 1,
+        "skills": Object {
+          "choices": Array [
+            "arc",
+            "his",
+            "ins",
+            "inv",
+            "med",
+            "rel",
+          ],
+          "number": 2,
+          "value": Array [],
+        },
+        "source": "",
+        "spellcasting": "full",
+        "subclass": "",
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/skills/blue_13.jpg",
+      "name": "Wizard",
+      "sort": 4900000,
+      "type": "class",
+    },
+    Object {
+      "_id": "xRQDu0GrQB9EpCYM",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>As a student of arcane magic, you have a spellbook containing spells that show the first glimmerings of your true power.</p>
+<h3>Cantrips</h3>
+<p>At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.</p>
+<h3>Spellbook</h3>
+<p>At 1st level, you have a spellbook containing six 1stlevel wizard spells of your choice. Your spellbook is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.</p>
+<h3>Preparing and Casting Spells</h3>
+<p>The Wizard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell’s level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your spellbook equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you’re a 3rd-level wizard, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination, chosen from your spellbook. If you prepare the 1st-level spell magic missile, you can cast it using a 1st-level or a 2nd-level slot. Casting the spell doesn’t remove it from your list of prepared spells.</p><p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your spellbook and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.</p>
+<table border=\\"0\\" cellspacing=\\"0\\">
+<thead>
+<tr>
+<td rowspan=\\"2\\">Level</td>
+<td rowspan=\\"2\\">Cantrips Known</td>
+<td colspan=\\"9\\">—Spell Slots per Spell Level—</td>
+</tr>
+<tr>
+<td>1st</td>
+<td>2nd</td>
+<td>3rd</td>
+<td>4th</td>
+<td>5th</td>
+<td>6th</td>
+<td>7th</td>
+<td>8th</td>
+<td>9th</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1st</td>
+<td>3</td>
+<td>2</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2nd</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3rd</td>
+<td>3</td>
+<td>4</td>
+<td>2</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>4th</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>5th</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>6th</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>7th</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>8th</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>9th</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>10th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>11th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>12th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>13th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>14th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>15th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>16th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>17th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>18th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>19th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>20th</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h3>Spellcasting Ability</h3>
+<p>Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Intelligence modifier</p><p><strong>Spell attack modifier </strong>= your proficiency bonus + your Intelligence modifier</p>
+<h3>Ritual Casting</h3>
+<p>You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your spellbook. You don’t need to have the spell prepared.</p>
+<h3>Spellcasting Focus</h3>
+<p>You can use an arcane focus as a spellcasting focus for your wizard spells.</p>
+<h3>Learning Spells of 1st Level and Higher</h3>
+<p>Each time you gain a wizard level, you can add two wizard spells of your choice to your spellbook for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your spellbook (see the “Your Spellbook” sidebar).</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Wizard 1",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "exportSource": Object {
+          "coreVersion": "0.6.5",
+          "system": "dnd5e",
+          "systemVersion": 0.94,
+          "world": "srd-rules",
+        },
+      },
+      "img": "systems/dnd5e/icons/skills/fire_06.jpg",
+      "name": "Spellcasting (Wizard)",
+      "sort": 0,
+      "type": "feat",
+    },
+    Object {
+      "_id": "hAOdlcKJP3W7zD0p",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": "",
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "passive",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": "",
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Rock Gnome",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 37",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": "",
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "_sheetTab": "description",
+        "entityorder": Object {
+          "order": 98,
+        },
+      },
+      "img": "systems/dnd5e/icons/skills/mech_5.jpg",
+      "name": "Artificer's Lore",
+      "sort": 5200000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "z0AzZRlDE0RiB0Vp",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": "",
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "passive",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": "",
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Gnome",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 37",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": "",
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "_sheetTab": "description",
+        "entityorder": Object {
+          "order": 141,
+        },
+      },
+      "img": "systems/dnd5e/icons/skills/yellow_09.jpg",
+      "name": "Gnome Cunning",
+      "sort": 5300000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "5hEbhdZm1ozQ3B2g",
+      "data": Object {
+        "ability": "",
+        "actionType": "",
+        "activation": Object {
+          "condition": "Expend 10 gp worth of materials",
+          "cost": 1,
+          "type": "hour",
+        },
+        "attackBonus": 0,
+        "attributes": Object {
+          "spelldc": 10,
+        },
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": "",
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "value": "",
+          "versatile": "",
+        },
+        "damageType": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<p>You have proficiency with artisan’s tools (tinker’s tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options:</p><p><em>Clockwork Toy:</em> This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p><p><em>Fire Starter:</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p><p><em>Music Box:</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song’s end or when it is closed.</p>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "featType": Object {
+          "_deprecated": true,
+          "label": "Feat Type",
+          "type": "String",
+          "value": "passive",
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Rock Gnome",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": "",
+        },
+        "source": "PHB pg. 37",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "time": Object {
+          "_deprecated": true,
+          "value": "",
+        },
+        "uses": Object {
+          "max": 0,
+          "per": "",
+          "type": "",
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {
+        "entityorder": Object {
+          "order": 222,
+        },
+      },
+      "img": "systems/dnd5e/icons/skills/mech_8.jpg",
+      "name": "Tinker",
+      "sort": 5400000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "zb2ggSgTNtBj8HWl",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<div title=\\"Page 6\\">
+<div>
+<div>
+<p><em>Your gnome character has certain characteristics in common with all other gnomes. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 2.</p><p><em><strong>Age.</strong></em> Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.</p><p><em><strong>Alignment.</strong></em> Gnomes are most often good. Those who tend toward law are sages, engineers, researchers, scholars, investigators, or inventors. Those who tend toward chaos are minstrels, tricksters, wanderers, or fanciful jewelers. Gnomes are good-­‐‑hearted, and even the tricksters among them are more playful than vicious.</p><p><em><strong>Size. </strong></em>Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small. Speed. Your base walking speed is 25 feet.</p><p><em><strong>Darkvision. </strong></em>Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.</p><p><em><strong>Gnome Cunning. </strong></em>@Compendium[dnd5e.races.EHhr9umJ5kxJFCQH]{Gnome Cunning} You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.</p>
+</div>
+</div>
+</div>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 36",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/fire-arrows-royal-2.jpg",
+      "name": "Gnome",
+      "sort": 5000000,
+      "type": "feat",
+    },
+    Object {
+      "_id": "PaLpYN8wbP0MyP2w",
+      "data": Object {
+        "ability": null,
+        "actionType": "",
+        "activation": Object {
+          "condition": "",
+          "cost": 0,
+          "type": "",
+        },
+        "attackBonus": 0,
+        "attunement": 0,
+        "chatFlavor": "",
+        "consume": Object {
+          "amount": null,
+          "target": null,
+          "type": "",
+        },
+        "critical": null,
+        "damage": Object {
+          "parts": Array [],
+          "versatile": "",
+        },
+        "description": Object {
+          "chat": "",
+          "unidentified": "",
+          "value": "<div>
+<div>
+<p><em>As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.</em></p>
+</div>
+</div>
+<div title=\\"Page 6\\">
+<div>
+<div>
+<p><em><strong>Ability Score Increase. </strong></em>Your Constitution score increases by 1.</p><p><em><strong>Artificer’s Lore.</strong></em> @Compendium[dnd5e.races.OQA1sHxKnSJq01dL]{Artificer's Lore} Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.</p><p><em><strong>Tinker.</strong></em> @Compendium[dnd5e.races.koRPOLtj8XAFMwnW]{Tinker} You have proficiency with artisan’s tools (tinker’s tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time.</p><p>When you create a device, choose one of the following options:</p><p><em>Clockwork Toy. </em>This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, dragon, or soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes noises as appropriate to the creature it represents.</p><p><em>Fire Starter.</em> The device produces a miniature flame, which you can use to light a candle, torch, or campfire. Using the device requires your action.</p><p><em>Music Box.</em> When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song’s end or when it is closed.</p>
+</div>
+</div>
+</div>",
+        },
+        "duration": Object {
+          "units": "",
+          "value": null,
+        },
+        "formula": "",
+        "range": Object {
+          "long": null,
+          "units": "",
+          "value": null,
+        },
+        "recharge": Object {
+          "charged": false,
+          "value": null,
+        },
+        "requirements": "Gnome",
+        "save": Object {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+        },
+        "source": "PHB pg. 36",
+        "target": Object {
+          "type": "",
+          "units": "",
+          "value": null,
+          "width": null,
+        },
+        "uses": Object {
+          "max": 0,
+          "per": null,
+          "value": 0,
+        },
+      },
+      "effects": Array [],
+      "flags": Object {},
+      "img": "systems/dnd5e/icons/spells/fire-arrows-royal-1.jpg",
+      "name": "Rock Gnome",
+      "sort": 5100000,
+      "type": "feat",
+    },
+  ],
+  "name": "Zanna (Gnome Wizard)",
+  "permission": Object {
+    "default": 0,
+  },
+  "sort": 700000,
+  "token": Object {
+    "actorId": "p6FusMkGMOMBTDkt",
+    "actorLink": true,
+    "bar1": Object {
+      "attribute": "attributes.hp",
+    },
+    "bar2": Object {
+      "attribute": "attributes.ac.value",
+    },
+    "brightLight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "dimSight": 60,
+    "displayBars": 40,
+    "displayName": 30,
+    "disposition": 1,
+    "flags": Object {},
+    "height": 1,
+    "img": "systems/dnd5e/tokens/heroes/WizardTome.png",
+    "lightAlpha": 1,
+    "lightAngle": 360,
+    "lightAnimation": Object {
+      "intensity": 5,
+      "speed": 5,
+    },
+    "lightColor": "",
+    "lockRotation": false,
+    "mirrorX": false,
+    "mirrorY": false,
+    "name": "Zanna",
+    "randomImg": false,
+    "rotation": 0,
+    "scale": 0.7,
+    "sightAngle": 360,
+    "tint": "",
+    "vision": true,
+    "width": 1,
+  },
+  "type": "character",
+}
+`;
