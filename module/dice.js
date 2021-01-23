@@ -123,7 +123,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
     // If user canceled the roll dialog, quit early
     if (!formData) return;
-    applyD20DialogData(formData, messageOptions, arguments[0]);
+    applyD20DialogData(formData, messageOptions, rollArgs);
     advantageMode = formData.buttonSelection ?? advantageMode;
   }
 
