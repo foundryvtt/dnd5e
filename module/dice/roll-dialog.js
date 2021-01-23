@@ -1,19 +1,22 @@
 import D20Roll from "./d20Roll.js";
 
-async function d20Dialog({ title, formula, rollMode, template }, dialogOptions) {
-    return rollDialog({ title, formula, rollMode, template }, dialogOptions, generateD20Buttons);
+async function d20Dialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions) {
+    return rollDialog(...arguments, generateD20Buttons);
 }
 
-async function damageDialog({ title, formula, rollMode, template }, dialogOptions) {
-    return rollDialog({ title, formula, rollMode, template }, dialogOptions, generateDamageButtons);
+async function damageDialog({ title, formula, defaultRollMode, template }, dialogOptions) {
+    return rollDialog(...arguments, generateDamageButtons);
 }
 
-async function rollDialog({ title, formula, rollMode, template, buttons }, dialogOptions, buttonGenerator) {
+async function rollDialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions, buttonGenerator) {
     template = template ?? "systems/dnd5e/templates/chat/roll-dialog.html";
     const templateData = {
         formula,
-        rollMode,
-        rollModes: CONFIG.Dice.rollModes
+        defaultRollMode,
+        rollModes: CONFIG.Dice.rollModes,
+        // used for tool checks
+        defaultAbility,
+        abilities: CONFIG.DND5E.abilities
     }
     const content = await renderTemplate(template, templateData);
 

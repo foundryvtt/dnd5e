@@ -10,7 +10,7 @@
     <div class="form-group">
         <label>{{ localize "DND5E.RollMode" }}</label>
         <select name="rollMode">
-        {{#select rollMode}}
+        {{#select defaultRollMode}}
         {{#each rollModes as |label mode|}}
             <option value="{{mode}}">{{localize label}}</option>
         {{/each}}

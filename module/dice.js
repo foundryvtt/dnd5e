@@ -116,7 +116,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     let formData = await RollDialog.d20Dialog({
       title,
       formula: parts.join(" + "),
-      rollMode: messageOptions.rollMode,
+      defaultRollMode: messageOptions.rollMode,
+      defaultAbility: data?.item?.ability,
       template
     }, dialogOptions);
 
@@ -177,12 +178,13 @@ function applyD20DialogData(formData, messageOptions, rollArgs) {
 
   // Optionally include a situational bonus
   data.bonus = formData.bonus;
+
+  // Set roll mode override
   messageOptions.rollMode = formData.rollMode;
 
   // Optionally include an ability score selection (used for tool checks)
-  const ability = formData.ability;
-  if (ability && ability.value) {
-    data.ability = ability.value;
+  if (formData.ability) {
+    data.ability = formData.ability;
     const abl = data.abilities[data.ability];
     if (abl) {
       data.mod = abl.mod;
