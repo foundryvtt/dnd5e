@@ -124,7 +124,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
     // If user canceled the roll dialog, quit early
     if (!formData) return;
     applyD20DialogData(formData, messageOptions, rollArgs);
-    advantageMode = formData.buttonSelection ?? advantageMode;
+    advantageMode = determineDialogAdvantageMode(formData, rollArgs) ?? advantageMode;
   }
 
   // If no situational bonus was provided, remove the @bonus part from the formula
@@ -145,10 +145,12 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
  * @param {Object} rollArgs           The options passed into the original call to d20Roll
  */
 function prepareD20MessageData(messageOptions, rollArgs) {
-  rollArgs.messageData.flavor = rollArgs.flavor || rollArgs.title;
-  rollArgs.messageData.speaker = rollArgs.speaker || ChatMessage.getSpeaker();
-  messageOptions.rollMode = rollArgs.rollMode || game.settings.get("core", "rollMode");
-  rollArgs.parts.push("@bonus");
+  let { messageData, flavor, title, speaker, rollMode, parts } = rollArgs;
+
+  messageData.flavor = flavor || title;
+  messageData.speaker = speaker || ChatMessage.getSpeaker();
+  messageOptions.rollMode = rollMode || game.settings.get("core", "rollMode");
+  parts.push("@bonus");
 }
 
 /* -------------------------------------------- */
@@ -173,6 +175,13 @@ function determineD20FastForward(rollArgs) {
 
 /* -------------------------------------------- */
 
+/**
+ * Applies the results from the provided d20 roll dialog form data to the roll data and messageData.
+ * @param {Object} formData         The form data from the d20 roll dialog
+ * @param {Object} messageOptions   Options for the resulting ChatMessage
+ * @param {Object} rollArgs         Options passed into the original call to d20Roll
+
+ */
 function applyD20DialogData(formData, messageOptions, rollArgs) {
   let { data, messageData } = rollArgs;
 
@@ -191,6 +200,12 @@ function applyD20DialogData(formData, messageOptions, rollArgs) {
       messageData.flavor += ` (${CONFIG.DND5E.abilities[data.ability]})`;
     }
   }
+}
+
+/* -------------------------------------------- */
+
+function determineDialogAdvantageMode(formData, rollArgs) {
+  return formData.buttonSelection;
 }
 
 /* -------------------------------------------- */
