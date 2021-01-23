@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -22,10 +22,10 @@
   "devDependencies": {
     "jest": "^26.6.3",
     "nedb": "^1.8.0",
-    "nedb-async": "^0.1.6",
     "nedb-promises": "^4.1.1"
   },
   "jest": {
+    "testEnvironment": "node",
     "modulePaths": [
       "<rootDir>"
     ],
@@ -34,5 +34,6 @@
     ],
     "transform": {}
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {}
 }

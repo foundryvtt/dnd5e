@@ -1,3 +1,6 @@
+import {jest} from '@jest/globals';
+
+
 function getType(token) {
   const tof = typeof token;
   if (tof === 'object') {
@@ -34,6 +37,8 @@ function setProperty(object, key, value) {
 function duplicate(original) {
   return JSON.parse(JSON.stringify(original));
 }
+
+global.duplicate = duplicate;
 
 function expandObject(obj, _d = 0) {
   const expanded = {};
@@ -147,7 +152,7 @@ function mergeObject(
   return original;
 }
 
-globalThis.mergeObject = mergeObject;
+global.mergeObject = mergeObject;
 
 Math.clamped = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -157,7 +162,17 @@ class Actor {
     this.data = this._data;
   }
 
+  getRollData() {
+    return {}
+  }
+
   update = jest.fn(x => x)
 }
 
-globalThis.Actor = Actor
+global.Actor = Actor;
+
+class Dialog {}
+
+global.Dialog = Dialog;
+
+String.prototype.slugify = (x) => x;

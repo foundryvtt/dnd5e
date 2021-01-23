@@ -1,10 +1,12 @@
-import { expect, test } from '@jest/globals';
 import Datastore from 'nedb-promises';
-import Actor5e from '../../module/actor/entity';
+import Actor5e from 'module/actor/entity';
+import { DND5E } from 'module/config.js'
 
 let db;
 
 beforeAll(async () => {
+  global.DND5E = DND5E;
+
   db = await new Datastore({filename: 'packs/heroes.db', autoload: true});
 });
 
@@ -33,14 +35,26 @@ describe('hero entity', () => {
 
     const heroActor = new Actor5e(hero);
 
-    // heroActor.update = jest.fn(x => x);
-
-    console.log('hero actor', heroActor);
-
     heroActor.update('foo');
 
-    expect(heroActor.update).toHaveBeenCalled();
+    expect(heroActor.update).toHaveBeenCalledWith('foo');
 
-    expect(heroActor).toBeDefined();
-  })
+
+    // want to test any other method and see if `heroActor.update` was called with a consistent set of arguments (snapshot test those)
+
+  });
+
+  test('getRollData snapshot', async () => {
+
+    const dbQuery = await db.find({ _id: '1tAXamEdCqcLQwpM' });
+    const hero = dbQuery[0];
+
+    const heroActor = new Actor5e(hero);
+
+    const rollData = heroActor.getRollData();
+
+    console.log('rollData', rollData)
+
+    expect(rollData).toMatchSnapshot();
+  });
 })
