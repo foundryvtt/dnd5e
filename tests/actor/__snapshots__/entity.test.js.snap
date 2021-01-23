@@ -807,6 +807,72 @@ Object {
 }
 `;
 
+exports[`Actor5e#longRest long rest restores hp 1`] = `
+Object {
+  "max": 8,
+  "min": 0,
+  "temp": null,
+  "tempmax": null,
+  "value": 1,
+}
+`;
+
+exports[`Actor5e#longRest long rest restores hp 2`] = `
+Object {
+  "max": 8,
+  "min": 0,
+  "temp": null,
+  "tempmax": null,
+  "value": 1,
+}
+`;
+
+exports[`Actor5e#longRest long rest restores hp 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.tempmax": 0,
+        "data.attributes.hp.value": 8,
+        "data.spells.pact.value": 0,
+        "data.spells.spell0.value": 0,
+        "data.spells.spell1.value": 2,
+        "data.spells.spell2.value": 0,
+        "data.spells.spell3.value": 0,
+        "data.spells.spell4.value": 0,
+        "data.spells.spell5.value": 0,
+        "data.spells.spell6.value": 0,
+        "data.spells.spell7.value": 0,
+        "data.spells.spell8.value": 0,
+        "data.spells.spell9.value": 0,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.tempmax": 0,
+        "data.attributes.hp.value": 8,
+        "data.spells.pact.value": 0,
+        "data.spells.spell0.value": 0,
+        "data.spells.spell1.value": 2,
+        "data.spells.spell2.value": 0,
+        "data.spells.spell3.value": 0,
+        "data.spells.spell4.value": 0,
+        "data.spells.spell5.value": 0,
+        "data.spells.spell6.value": 0,
+        "data.spells.spell7.value": 0,
+        "data.spells.spell8.value": 0,
+        "data.spells.spell9.value": 0,
+      },
+    },
+  ],
+}
+`;
+
 exports[`Actor5e#longRest long rest restores spell slots 1`] = `
 Object {
   "pact": Object {
@@ -900,6 +966,113 @@ exports[`Actor5e#longRest long rest restores spell slots 2`] = `
         "data.spells.pact.value": 0,
         "data.spells.spell0.value": 0,
         "data.spells.spell1.value": 2,
+        "data.spells.spell2.value": 0,
+        "data.spells.spell3.value": 0,
+        "data.spells.spell4.value": 0,
+        "data.spells.spell5.value": 0,
+        "data.spells.spell6.value": 0,
+        "data.spells.spell7.value": 0,
+        "data.spells.spell8.value": 0,
+        "data.spells.spell9.value": 0,
+      },
+    },
+  ],
+}
+`;
+
+exports[`Actor5e#longRest long rest restores spell slots up to max 1`] = `
+Object {
+  "pact": Object {
+    "level": 0,
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell0": Object {
+    "_deprecated": true,
+    "max": 0,
+    "value": null,
+  },
+  "spell1": Object {
+    "max": 2,
+    "override": 100,
+    "value": 2,
+  },
+  "spell2": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell3": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell4": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell5": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell6": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell7": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell8": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+  "spell9": Object {
+    "max": 0,
+    "override": null,
+    "value": 0,
+  },
+}
+`;
+
+exports[`Actor5e#longRest long rest restores spell slots up to max 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.tempmax": 0,
+        "data.attributes.hp.value": 8,
+        "data.spells.pact.value": 0,
+        "data.spells.spell0.value": 0,
+        "data.spells.spell1.value": 100,
+        "data.spells.spell2.value": 0,
+        "data.spells.spell3.value": 0,
+        "data.spells.spell4.value": 0,
+        "data.spells.spell5.value": 0,
+        "data.spells.spell6.value": 0,
+        "data.spells.spell7.value": 0,
+        "data.spells.spell8.value": 0,
+        "data.spells.spell9.value": 0,
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Object {
+        "data.attributes.hp.temp": 0,
+        "data.attributes.hp.tempmax": 0,
+        "data.attributes.hp.value": 8,
+        "data.spells.pact.value": 0,
+        "data.spells.spell0.value": 0,
+        "data.spells.spell1.value": 100,
         "data.spells.spell2.value": 0,
         "data.spells.spell3.value": 0,
         "data.spells.spell4.value": 0,

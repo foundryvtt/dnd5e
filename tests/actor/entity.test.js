@@ -44,6 +44,28 @@ describe('Actor5e#longRest', () => {
     expect(actor5eCharacter.data.data.spells).toMatchSnapshot();
     expect(actor5eCharacter.update).toMatchSnapshot();
   });
+
+  test('long rest restores spell slots up to overriden max', async () => {
+    // set level 1 spell override to 100
+    actor5eCharacter.data.data.spells.spell1.override = 100;
+
+    await actor5eCharacter.longRest({dialog: false});
+
+    expect(actor5eCharacter.data.data.spells).toMatchSnapshot();
+    expect(actor5eCharacter.update).toMatchSnapshot();
+  });
+
+  
+  test('long rest restores hp', async () => {
+    // set hp to 1
+    actor5eCharacter.data.data.attributes.hp.value = 1;
+    expect(actor5eCharacter.data.data.attributes.hp).toMatchSnapshot();
+    
+    await actor5eCharacter.longRest({dialog: false});
+
+    expect(actor5eCharacter.data.data.attributes.hp).toMatchSnapshot();
+    expect(actor5eCharacter.update).toMatchSnapshot();
+  });
 });
 
 describe('Actor5e#applyDamage', () => {
