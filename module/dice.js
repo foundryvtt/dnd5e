@@ -105,7 +105,11 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   elvenAccuracy=false, halflingLucky=false, reliableTalent=false,
   chatMessage=true, messageData={}}={}) {
 
-  const rollArgs = arguments[0];
+  const rollArgs = {
+    parts, data, event, rollMode, template, title, speaker, flavor,
+    fastForward, dialogOptions, advantage, disadvantage, critical, fumble, targetValue,
+    elvenAccuracy, halflingLucky, reliableTalent, chatMessage, messageData
+  };
   const messageOptions = {};
 
   prepareD20MessageData(messageOptions, rollArgs);
