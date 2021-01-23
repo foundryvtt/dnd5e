@@ -1,0 +1,21 @@
+# If you want the runner to use a Docker image to run the jobs, edit the .gitlab-ci.yml file to include your image name:
+# 
+# default:
+  # image: ruby:2.7.2
+# 
+# This command tells the runner to use a Ruby image from Docker Hub.
+# Can I use this with the Felddy foundry docker image?
+
+
+
+image: node:14
+
+build-job:
+  stage: build
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN!"
+
+test-job1:
+  stage: test
+  script:
+    - npm test
