@@ -10,10 +10,15 @@
 
 image: node:14
 
-build-job:
+cache:
+    paths:
+        - node_modules/
+
+
+build:
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - npm ci
 
 test-job1:
   stage: test
