@@ -14,12 +14,12 @@ cache:
     paths:
         - node_modules/
 
-build:
+install-dependencies:
   stage: build
   script:
     - npm ci
 
-test-job1:
+jest-tests:
   stage: test
   script:
     - npm test
