@@ -12,14 +12,14 @@ beforeAll(async () => {
 });
 
 describe('hero db', () => {
-  test('Merric should exist', async () => {
+  it('should have Merric', async () => {
     const dbQuery = await db.find({ _id: '1tAXamEdCqcLQwpM' });
     const hero = dbQuery[0];
 
     expect(hero).toMatchSnapshot();
   });
 
-  test('Zanna should exist', async () => {
+  it('should have Zanna', async () => {
     const dbQuery = await db.find({ _id: 'p6FusMkGMOMBTDkt' });
     const hero = dbQuery[0];
 
@@ -35,36 +35,35 @@ describe('Actor5e#longRest', () => {
 
   })
 
-  test('long rest restores spell slots', async () => {
+  it('should restore spell slots to max', async () => {
     // set spells to 0
     actor5eCharacter.data.data.spells.spell1.value = 0;
 
     await actor5eCharacter.longRest({dialog: false});
 
     expect(actor5eCharacter.data.data.spells).toMatchSnapshot();
-    expect(actor5eCharacter.update).toMatchSnapshot();
+    expect(actor5eCharacter.update.mock.calls).toMatchSnapshot();
   });
 
-  test('long rest restores spell slots up to overriden max', async () => {
+  it('should restore spell slots to overriden max', async () => {
     // set level 1 spell override to 100
     actor5eCharacter.data.data.spells.spell1.override = 100;
 
     await actor5eCharacter.longRest({dialog: false});
 
     expect(actor5eCharacter.data.data.spells).toMatchSnapshot();
-    expect(actor5eCharacter.update).toMatchSnapshot();
+    expect(actor5eCharacter.update.mock.calls).toMatchSnapshot();
   });
 
   
-  test('long rest restores hp', async () => {
+  it('should restore  hp', async () => {
     // set hp to 1
     actor5eCharacter.data.data.attributes.hp.value = 1;
-    expect(actor5eCharacter.data.data.attributes.hp).toMatchSnapshot();
     
     await actor5eCharacter.longRest({dialog: false});
 
     expect(actor5eCharacter.data.data.attributes.hp).toMatchSnapshot();
-    expect(actor5eCharacter.update).toMatchSnapshot();
+    expect(actor5eCharacter.update.mock.calls).toMatchSnapshot();
   });
 });
 
@@ -75,20 +74,20 @@ describe('Actor5e#applyDamage', () => {
     actor5eCharacter = new Actor5e(hero);
   })
 
-  test('apply 3 damage', async () => {
+  it('should apply 3 damage', async () => {
     await actor5eCharacter.applyDamage(3);
 
     expect(actor5eCharacter.data.data.attributes.hp).toMatchSnapshot();
-    expect(Hooks.call).toMatchSnapshot();
-    expect(actor5eCharacter.update).toMatchSnapshot();
+    expect(Hooks.call.mock.calls).toMatchSnapshot();
+    expect(actor5eCharacter.update.mock.calls).toMatchSnapshot();
   });
 
-  test('apply 3 damage with a multiplier of two', async () => {
+  it('should apply 3 damage with a multiplier of 2', async () => {
     await actor5eCharacter.applyDamage(3, 2);
 
     expect(actor5eCharacter.data.data.attributes.hp).toMatchSnapshot();
     expect(Hooks.call).toMatchSnapshot();
-    expect(actor5eCharacter.update).toMatchSnapshot();
+    expect(actor5eCharacter.update.mock.calls).toMatchSnapshot();
   });
 });
 
@@ -99,7 +98,7 @@ describe('Actor5e#getRollData', () => {
     actor5eCharacter = new Actor5e(hero);
   });
 
-  test('getRollData snapshot', async () => {
+  it('should return the rollData', async () => {
     const dbQuery = await db.find({ _id: '1tAXamEdCqcLQwpM' }); // halfling barbarian
     const hero = dbQuery[0];
     const heroActor = new Actor5e(hero);

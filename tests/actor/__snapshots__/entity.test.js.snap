@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Actor5e#applyDamage apply 3 damage 1`] = `
+exports[`Actor5e#applyDamage should apply 3 damage 1`] = `
 Object {
   "max": 14,
   "min": 0,
@@ -10,55 +10,36 @@ Object {
 }
 `;
 
-exports[`Actor5e#applyDamage apply 3 damage 2`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "modifyTokenAttribute",
-      Object {
-        "attribute": "attributes.hp",
-        "isBar": true,
-        "isDelta": false,
-        "value": 3,
-      },
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.value": 11,
-      },
-    ],
-  ],
-  "results": Array [
+exports[`Actor5e#applyDamage should apply 3 damage 2`] = `
+Array [
+  Array [
+    "modifyTokenAttribute",
     Object {
-      "type": "return",
-      "value": undefined,
+      "attribute": "attributes.hp",
+      "isBar": true,
+      "isDelta": false,
+      "value": 3,
+    },
+    Object {
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.value": 11,
     },
   ],
-}
+]
 `;
 
-exports[`Actor5e#applyDamage apply 3 damage 3`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.value": 11,
-      },
-    ],
-  ],
-  "results": Array [
+exports[`Actor5e#applyDamage should apply 3 damage 3`] = `
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.value": 11,
-      },
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.value": 11,
     },
   ],
-}
+]
 `;
 
-exports[`Actor5e#applyDamage apply 3 damage with a multiplier of two 1`] = `
+exports[`Actor5e#applyDamage should apply 3 damage with a multiplier of 2 1`] = `
 Object {
   "max": 14,
   "min": 0,
@@ -68,7 +49,7 @@ Object {
 }
 `;
 
-exports[`Actor5e#applyDamage apply 3 damage with a multiplier of two 2`] = `
+exports[`Actor5e#applyDamage should apply 3 damage with a multiplier of 2 2`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -111,29 +92,18 @@ exports[`Actor5e#applyDamage apply 3 damage with a multiplier of two 2`] = `
 }
 `;
 
-exports[`Actor5e#applyDamage apply 3 damage with a multiplier of two 3`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.value": 8,
-      },
-    ],
-  ],
-  "results": Array [
+exports[`Actor5e#applyDamage should apply 3 damage with a multiplier of 2 3`] = `
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.value": 8,
-      },
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.value": 8,
     },
   ],
-}
+]
 `;
 
-exports[`Actor5e#getRollData getRollData snapshot 1`] = `
+exports[`Actor5e#getRollData should return the rollData 1`] = `
 Object {
   "abilities": Object {
     "cha": Object {
@@ -509,7 +479,6 @@ Object {
       "value": 0,
     },
   },
-  "foo": "bar",
   "prof": 2,
   "resources": Object {
     "primary": Object {
@@ -807,7 +776,7 @@ Object {
 }
 `;
 
-exports[`Actor5e#longRest long rest restores hp 1`] = `
+exports[`Actor5e#longRest should restore  hp 1`] = `
 Object {
   "max": 8,
   "min": 0,
@@ -817,63 +786,30 @@ Object {
 }
 `;
 
-exports[`Actor5e#longRest long rest restores hp 2`] = `
-Object {
-  "max": 8,
-  "min": 0,
-  "temp": null,
-  "tempmax": null,
-  "value": 1,
-}
-`;
-
-exports[`Actor5e#longRest long rest restores hp 3`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.tempmax": 0,
-        "data.attributes.hp.value": 8,
-        "data.spells.pact.value": 0,
-        "data.spells.spell0.value": 0,
-        "data.spells.spell1.value": 2,
-        "data.spells.spell2.value": 0,
-        "data.spells.spell3.value": 0,
-        "data.spells.spell4.value": 0,
-        "data.spells.spell5.value": 0,
-        "data.spells.spell6.value": 0,
-        "data.spells.spell7.value": 0,
-        "data.spells.spell8.value": 0,
-        "data.spells.spell9.value": 0,
-      },
-    ],
-  ],
-  "results": Array [
+exports[`Actor5e#longRest should restore  hp 2`] = `
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.tempmax": 0,
-        "data.attributes.hp.value": 8,
-        "data.spells.pact.value": 0,
-        "data.spells.spell0.value": 0,
-        "data.spells.spell1.value": 2,
-        "data.spells.spell2.value": 0,
-        "data.spells.spell3.value": 0,
-        "data.spells.spell4.value": 0,
-        "data.spells.spell5.value": 0,
-        "data.spells.spell6.value": 0,
-        "data.spells.spell7.value": 0,
-        "data.spells.spell8.value": 0,
-        "data.spells.spell9.value": 0,
-      },
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.tempmax": 0,
+      "data.attributes.hp.value": 8,
+      "data.spells.pact.value": 0,
+      "data.spells.spell0.value": 0,
+      "data.spells.spell1.value": 2,
+      "data.spells.spell2.value": 0,
+      "data.spells.spell3.value": 0,
+      "data.spells.spell4.value": 0,
+      "data.spells.spell5.value": 0,
+      "data.spells.spell6.value": 0,
+      "data.spells.spell7.value": 0,
+      "data.spells.spell8.value": 0,
+      "data.spells.spell9.value": 0,
     },
   ],
-}
+]
 `;
 
-exports[`Actor5e#longRest long rest restores spell slots 1`] = `
+exports[`Actor5e#longRest should restore spell slots to max 1`] = `
 Object {
   "pact": Object {
     "level": 0,
@@ -934,53 +870,30 @@ Object {
 }
 `;
 
-exports[`Actor5e#longRest long rest restores spell slots 2`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.tempmax": 0,
-        "data.attributes.hp.value": 8,
-        "data.spells.pact.value": 0,
-        "data.spells.spell0.value": 0,
-        "data.spells.spell1.value": 2,
-        "data.spells.spell2.value": 0,
-        "data.spells.spell3.value": 0,
-        "data.spells.spell4.value": 0,
-        "data.spells.spell5.value": 0,
-        "data.spells.spell6.value": 0,
-        "data.spells.spell7.value": 0,
-        "data.spells.spell8.value": 0,
-        "data.spells.spell9.value": 0,
-      },
-    ],
-  ],
-  "results": Array [
+exports[`Actor5e#longRest should restore spell slots to max 2`] = `
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.tempmax": 0,
-        "data.attributes.hp.value": 8,
-        "data.spells.pact.value": 0,
-        "data.spells.spell0.value": 0,
-        "data.spells.spell1.value": 2,
-        "data.spells.spell2.value": 0,
-        "data.spells.spell3.value": 0,
-        "data.spells.spell4.value": 0,
-        "data.spells.spell5.value": 0,
-        "data.spells.spell6.value": 0,
-        "data.spells.spell7.value": 0,
-        "data.spells.spell8.value": 0,
-        "data.spells.spell9.value": 0,
-      },
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.tempmax": 0,
+      "data.attributes.hp.value": 8,
+      "data.spells.pact.value": 0,
+      "data.spells.spell0.value": 0,
+      "data.spells.spell1.value": 2,
+      "data.spells.spell2.value": 0,
+      "data.spells.spell3.value": 0,
+      "data.spells.spell4.value": 0,
+      "data.spells.spell5.value": 0,
+      "data.spells.spell6.value": 0,
+      "data.spells.spell7.value": 0,
+      "data.spells.spell8.value": 0,
+      "data.spells.spell9.value": 0,
     },
   ],
-}
+]
 `;
 
-exports[`Actor5e#longRest long rest restores spell slots up to overriden max 1`] = `
+exports[`Actor5e#longRest should restore spell slots to overriden max 1`] = `
 Object {
   "pact": Object {
     "level": 0,
@@ -1041,53 +954,30 @@ Object {
 }
 `;
 
-exports[`Actor5e#longRest long rest restores spell slots up to overriden max 2`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.tempmax": 0,
-        "data.attributes.hp.value": 8,
-        "data.spells.pact.value": 0,
-        "data.spells.spell0.value": 0,
-        "data.spells.spell1.value": 100,
-        "data.spells.spell2.value": 0,
-        "data.spells.spell3.value": 0,
-        "data.spells.spell4.value": 0,
-        "data.spells.spell5.value": 0,
-        "data.spells.spell6.value": 0,
-        "data.spells.spell7.value": 0,
-        "data.spells.spell8.value": 0,
-        "data.spells.spell9.value": 0,
-      },
-    ],
-  ],
-  "results": Array [
+exports[`Actor5e#longRest should restore spell slots to overriden max 2`] = `
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.tempmax": 0,
-        "data.attributes.hp.value": 8,
-        "data.spells.pact.value": 0,
-        "data.spells.spell0.value": 0,
-        "data.spells.spell1.value": 100,
-        "data.spells.spell2.value": 0,
-        "data.spells.spell3.value": 0,
-        "data.spells.spell4.value": 0,
-        "data.spells.spell5.value": 0,
-        "data.spells.spell6.value": 0,
-        "data.spells.spell7.value": 0,
-        "data.spells.spell8.value": 0,
-        "data.spells.spell9.value": 0,
-      },
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.tempmax": 0,
+      "data.attributes.hp.value": 8,
+      "data.spells.pact.value": 0,
+      "data.spells.spell0.value": 0,
+      "data.spells.spell1.value": 100,
+      "data.spells.spell2.value": 0,
+      "data.spells.spell3.value": 0,
+      "data.spells.spell4.value": 0,
+      "data.spells.spell5.value": 0,
+      "data.spells.spell6.value": 0,
+      "data.spells.spell7.value": 0,
+      "data.spells.spell8.value": 0,
+      "data.spells.spell9.value": 0,
     },
   ],
-}
+]
 `;
 
-exports[`hero db Merric should exist 1`] = `
+exports[`hero db should have Merric 1`] = `
 Object {
   "_id": "1tAXamEdCqcLQwpM",
   "data": Object {
@@ -3764,7 +3654,7 @@ Object {
 }
 `;
 
-exports[`hero db Zanna should exist 1`] = `
+exports[`hero db should have Zanna 1`] = `
 Object {
   "_id": "p6FusMkGMOMBTDkt",
   "data": Object {

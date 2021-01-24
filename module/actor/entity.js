@@ -139,7 +139,6 @@ export default class Actor5e extends Actor {
       return obj;
     }, {});
     data.prof = this.data.data.attributes.prof || 0;
-    data.foo = 'bar';
     return data;
   }
 
