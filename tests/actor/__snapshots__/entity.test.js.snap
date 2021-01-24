@@ -980,7 +980,7 @@ exports[`Actor5e#longRest long rest restores spell slots 2`] = `
 }
 `;
 
-exports[`Actor5e#longRest long rest restores spell slots up to max 1`] = `
+exports[`Actor5e#longRest long rest restores spell slots up to overriden max 1`] = `
 Object {
   "pact": Object {
     "level": 0,
@@ -1041,7 +1041,7 @@ Object {
 }
 `;
 
-exports[`Actor5e#longRest long rest restores spell slots up to max 2`] = `
+exports[`Actor5e#longRest long rest restores spell slots up to overriden max 2`] = `
 [MockFunction] {
   "calls": Array [
     Array [
