@@ -1,0 +1,41 @@
+{
+  "name": "dnd5e",
+  "version": "1.2.2",
+  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
+  "main": "dnd5e.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/akrigline/dnd5e.git"
+  },
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://gitlab.com/akrigline/dnd5e/issues"
+  },
+  "homepage": "https://gitlab.com/akrigline/dnd5e#readme",
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "nedb": "^1.8.0",
+    "nedb-promises": "^4.1.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
+    "transform": {},
+    "testMatch": ["**/?(*.)+(spec|test).[jt]s?(x)"],
+    "moduleFileExtensions": ["js"]
+  },
+  "type": "module",
+  "dependencies": {}
+}
