@@ -86,7 +86,7 @@ describe('Actor5e#applyDamage', () => {
     await actor5eCharacter.applyDamage(3, 2);
 
     expect(actor5eCharacter.data.data.attributes.hp).toMatchSnapshot();
-    expect(Hooks.call).toMatchSnapshot();
+    expect(Hooks.call.mock.calls).toMatchSnapshot();
     expect(actor5eCharacter.update.mock.calls).toMatchSnapshot();
   });
 });

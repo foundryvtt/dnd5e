@@ -50,46 +50,34 @@ Object {
 `;
 
 exports[`Actor5e#applyDamage should apply 3 damage with a multiplier of 2 2`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "modifyTokenAttribute",
-      Object {
-        "attribute": "attributes.hp",
-        "isBar": true,
-        "isDelta": false,
-        "value": 3,
-      },
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.value": 11,
-      },
-    ],
-    Array [
-      "modifyTokenAttribute",
-      Object {
-        "attribute": "attributes.hp",
-        "isBar": true,
-        "isDelta": false,
-        "value": 6,
-      },
-      Object {
-        "data.attributes.hp.temp": 0,
-        "data.attributes.hp.value": 8,
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
+    "modifyTokenAttribute",
     Object {
-      "type": "return",
-      "value": undefined,
+      "attribute": "attributes.hp",
+      "isBar": true,
+      "isDelta": false,
+      "value": 3,
     },
     Object {
-      "type": "return",
-      "value": undefined,
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.value": 11,
     },
   ],
-}
+  Array [
+    "modifyTokenAttribute",
+    Object {
+      "attribute": "attributes.hp",
+      "isBar": true,
+      "isDelta": false,
+      "value": 6,
+    },
+    Object {
+      "data.attributes.hp.temp": 0,
+      "data.attributes.hp.value": 8,
+    },
+  ],
+]
 `;
 
 exports[`Actor5e#applyDamage should apply 3 damage with a multiplier of 2 3`] = `
