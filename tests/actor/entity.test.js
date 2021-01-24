@@ -55,8 +55,7 @@ describe('Actor5e#longRest', () => {
     expect(actor5eCharacter.update.mock.calls).toMatchSnapshot();
   });
 
-  
-  it('should restore  hp', async () => {
+  it('should restore hp', async () => {
     // set hp to 1
     actor5eCharacter.data.data.attributes.hp.value = 1;
     
