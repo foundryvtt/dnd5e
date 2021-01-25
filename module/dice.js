@@ -217,7 +217,8 @@ function determineDialogAdvantageMode(formData, rollArgs) {
 export const d20RollComponents = {
   prepareD20MessageData,
   determineD20FastForward,
-  applyD20DialogData
+  applyD20DialogData,
+  determineDialogAdvantageMode
 }
 
 /* -------------------------------------------- */
