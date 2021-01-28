@@ -59,7 +59,7 @@ export default class TraitSelector extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-  _updateObject(event, formData) {
+  async _updateObject(event, formData) {
     const updateData = {};
 
     // Obtain choices

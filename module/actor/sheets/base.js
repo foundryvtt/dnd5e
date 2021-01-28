@@ -662,7 +662,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onUsesChange(event) {
       event.preventDefault();
       const itemId = event.currentTarget.closest(".item").dataset.itemId;
-      const item = this.actor.getOwnedItem(itemId);
+      const item = this.actor.items.get(itemId);
       const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
       event.target.value = uses;
       return item.update({ 'data.uses.value': uses });
@@ -677,7 +677,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemRoll(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.roll();
   }
 
@@ -691,7 +691,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemRecharge(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.rollRecharge();
   };
 
@@ -704,7 +704,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemSummary(event) {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
-        item = this.actor.getOwnedItem(li.data("item-id")),
+        item = this.actor.items.get(li.data("item-id")),
         chatData = item.getChatData({secrets: this.actor.isOwner});
 
     // Toggle summary
@@ -739,7 +739,7 @@ export default class ActorSheet5e extends ActorSheet {
       data: foundry.utils.deepClone(header.dataset)
     };
     delete itemData.data["type"];
-    return this.actor.createEmbeddedEntity("OwnedItem", itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /* -------------------------------------------- */
@@ -752,7 +752,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemEdit(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
-    const item = this.actor.getOwnedItem(li.dataset.itemId);
+    const item = this.actor.items.get(li.dataset.itemId);
     item.sheet.render(true);
   }
 

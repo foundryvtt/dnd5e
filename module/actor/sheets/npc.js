@@ -86,7 +86,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  _updateObject(event, formData) {
+  async _updateObject(event, formData) {
 
     // Format NPC Challenge Rating
     const crs = {"1/8": 0.125, "1/4": 0.25, "1/2": 0.5};
@@ -96,7 +96,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     if ( cr ) formData[crv] = cr < 1 ? cr : parseInt(cr);
 
     // Parent ActorSheet update steps
-    super._updateObject(event, formData);
+    return super._updateObject(event, formData);
   }
 
   /* -------------------------------------------- */
