@@ -2,12 +2,13 @@ import D20Roll from "./d20-roll.js";
 
 /**
  * Shows the roll dialog for a D20Roll and returns the associated formData from the dialog when closed (or null if the user cancels the dialog)
- * @param {string} title             The title of the shown dialog window
- * @param {string} formula           The roll formula shown in the dialog window
- * @param {number} defaultRollMode   The roll mode that the roll mode select element should default to
- * @param {string} defaultAbility    For tool rolls, the default ability modifier to use for the roll
- * @param {string} template          The path to the dialog handlebars template
- * @param {object} dialogOptions     Extra options to send to the dialog
+ * @param {object} options
+ * @param {string} [options.title]             The title of the shown dialog window
+ * @param {string} [options.formula]           The roll formula shown in the dialog window
+ * @param {number} [options.defaultRollMode]   The roll mode that the roll mode select element should default to
+ * @param {string} [options.defaultAbility]    For tool rolls, the default ability modifier to use for the roll
+ * @param {string} [options.template]          The path to the dialog handlebars template
+ * @param {object} dialogOptions               Extra options to send to the dialog
  * @returns {Promise<object>}
  */
 async function d20Dialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions) {
@@ -16,11 +17,12 @@ async function d20Dialog({ title, formula, defaultRollMode, defaultAbility, temp
 
 /**
  * Shows the roll dialog for a damage roll and returns the associated formData from the dialog when closed (or null if the user cancels the dialog)
- * @param {string} title             The title of the shown dialog window
- * @param {string} formula           The roll formula shown in the dialog window
- * @param {number} defaultRollMode   The roll mode that the roll mode select element should default to
- * @param {string} template          The path to the dialog handlebars template
- * @param {object} dialogOptions     Extra options to send to the dialog
+ * @param {object} options
+ * @param {string} [options.title]             The title of the shown dialog window
+ * @param {string} [options.formula]           The roll formula shown in the dialog window
+ * @param {number} [options.defaultRollMode]   The roll mode that the roll mode select element should default to
+ * @param {string} [options.template]          The path to the dialog handlebars template
+ * @param {object} dialogOptions               Extra options to send to the dialog
  * @returns {Promise<object>}
  */
 async function damageDialog({ title, formula, defaultRollMode, template }, dialogOptions) {
@@ -29,13 +31,14 @@ async function damageDialog({ title, formula, defaultRollMode, template }, dialo
 
 /**
  * Shows the roll dialog for d20 or damage roll and returns the associated formData from the dialog when closed (or null if the user cancels the dialog)
- * @param {string} title               The title of the shown dialog window
- * @param {string} formula             The roll formula shown in the dialog window
- * @param {number} defaultRollMode     The roll mode that the roll mode select element should default to
- * @param {string} defaultAbility      For tool rolls, the default ability modifier to use for the roll
- * @param {string} template            The path to the dialog handlebars template
- * @param {object} dialogOptions       Extra options to send to the dialog
- * @param {function} buttonGenerator   A function that returns object of buttons that should be shown in the dialog
+ * @param {object} options
+ * @param {string} [options.title]               The title of the shown dialog window
+ * @param {string} [options.formula]             The roll formula shown in the dialog window
+ * @param {number} [options.defaultRollMode]     The roll mode that the roll mode select element should default to
+ * @param {string} [options.defaultAbility]      For tool rolls, the default ability modifier to use for the roll
+ * @param {string} [options.template]            The path to the dialog handlebars template
+ * @param {object} dialogOptions                 Extra options to send to the dialog
+ * @param {function} buttonGenerator             A function that returns object of buttons that should be shown in the dialog
  * @returns {Promise<object>}
  */
 async function rollDialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions, buttonGenerator) {
