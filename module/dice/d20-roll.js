@@ -31,7 +31,7 @@ export default class D20Roll extends Roll {
         });
 
         // If there is not already a d20 term, add one
-        if ( !(this.terms[0] instanceof Die) || this.terms[0].faces !== 20 ) {
+        if ( !(this.terms[0] instanceof Die) || (this.terms[0].faces !== 20) ) {
             const d20Term = this._createD20FormulaTerm();
             formula = `${d20Term} + ${this._formula}`;
             this.terms = this._identifyTerms(formula);
@@ -75,12 +75,12 @@ export default class D20Roll extends Roll {
         mods += D20Roll._ADV_MODE_LOOKUP[advantageMode].mod;
 
         // Account for elven accuracy feat when rolling with advantage
-        if ( elvenAccuracy && advantageMode === D20Roll.ADV_MODE.ADV ) numberOfDice++;
+        if ( elvenAccuracy && (advantageMode === D20Roll.ADV_MODE.ADV) ) numberOfDice++;
 
         let d20Term = `${numberOfDice}d20${mods}`;
 
         // Minimum result of 10 for reliable talent
-        if (reliableTalent) d20Term = `{${d20Term}, 10}kh`;
+        if ( reliableTalent ) d20Term = `{${d20Term}, 10}kh`;
 
         return d20Term;
     }
@@ -96,7 +96,7 @@ export default class D20Roll extends Roll {
             d.options.critical = this.options.critical;
             d.options.fumble = this.options.fumble;
 
-            switch (this.options.advantageMode) {
+            switch ( this.options.advantageMode ) {
                 case D20Roll.ADV_MODE.ADV: d.options.advantage = true; break;
                 case D20Roll.ADV_MODE.DISADV: d.options.disadvantage = true; break;
                 default: break;
@@ -128,10 +128,10 @@ export default class D20Roll extends Roll {
         }
 
         // Evaluate the roll now so we have the results available to determine whether reliable talent came into play
-        if (!this._rolled) this.evaluate();
+        if ( !this._rolled ) this.evaluate();
 
         // Add reliable talent message flavor if reliable talent affected the results
-        if ( this.options.reliableTalent && this.dice[0].total < 10 ) {
+        if ( this.options.reliableTalent && (this.dice[0].total < 10) ) {
             messageData.flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
         }
 
