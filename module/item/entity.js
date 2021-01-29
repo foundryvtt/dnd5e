@@ -223,7 +223,9 @@ export default class Item5e extends Item {
     // Item Actions
     if ( data.hasOwnProperty("actionType") ) {
       this.getSaveDC();
-      this.getAttackToHit();
+
+      // If this item is owned, the to hit label will be calculated when the owning actor's data is prepared
+      if ( !this.isOwned ) this.getAttackToHit();
 
       // Damage
       let dam = data.damage || {};
