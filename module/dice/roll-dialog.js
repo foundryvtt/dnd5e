@@ -1,4 +1,4 @@
-import D20Roll from "./d20Roll.js";
+import D20Roll from "./d20-roll.js";
 
 async function d20Dialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions) {
     return rollDialog(...arguments, generateD20Buttons);

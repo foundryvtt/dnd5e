@@ -14,7 +14,7 @@ import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances, getBarAttribute } from "./module/canvas.js";
-import D20Roll from "./module/dice/d20Roll.js";
+import D20Roll from "./module/dice/d20-roll.js";
 
 // Import Entities
 import Actor5e from "./module/actor/entity.js";

@@ -1,5 +1,5 @@
 import { RollDialog } from "./dice/roll-dialog.js";
-import D20Roll from "./dice/d20Roll.js";
+import D20Roll from "./dice/d20-roll.js";
 
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
