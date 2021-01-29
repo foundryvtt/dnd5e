@@ -20,12 +20,19 @@ export default class D20Roll extends Roll {
 
         super(formula, data);
 
-        const d20Options = { advantageMode, critical, fumble, targetValue, elvenAccuracy, halflingLucky, reliableTalent };
-        this.options = mergeObject(this.options ?? {}, d20Options);
+        this.options = mergeObject(this.options ?? {}, {
+            advantageMode,
+            critical,
+            fumble,
+            targetValue,
+            elvenAccuracy,
+            halflingLucky,
+            reliableTalent
+        });
 
         // If there is not already a d20 term, add one
         if ( !(this.terms[0] instanceof Die) || this.terms[0].faces !== 20 ) {
-            const d20Term = D20Roll._createD20FormulaTerm(d20Options);
+            const d20Term = D20Roll._createD20FormulaTerm(this.options);
             formula = `${d20Term} + ${this._formula}`;
             this.terms = this._identifyTerms(formula, {step: 0});
             this._formula = this.constructor.cleanFormula(this.terms);
