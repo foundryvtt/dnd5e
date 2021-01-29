@@ -32,9 +32,9 @@ export default class D20Roll extends Roll {
 
         // If there is not already a d20 term, add one
         if ( !(this.terms[0] instanceof Die) || this.terms[0].faces !== 20 ) {
-            const d20Term = D20Roll._createD20FormulaTerm(this.options);
+            const d20Term = this._createD20FormulaTerm();
             formula = `${d20Term} + ${this._formula}`;
-            this.terms = this._identifyTerms(formula, {step: 0});
+            this.terms = this._identifyTerms(formula);
             this._formula = this.constructor.cleanFormula(this.terms);
         }
     }
@@ -51,6 +51,7 @@ export default class D20Roll extends Roll {
     }
 
     /**
+     * Details of how to apply each advantage mode to a d20 roll
      * @enum {{ numberOfDice: number, mod: string }}
      * @private
      * @readonly
@@ -61,9 +62,12 @@ export default class D20Roll extends Roll {
         [D20Roll.ADV_MODE.DISADV]: { numberOfDice: 2, mod: "kl" }
     }
 
-    /** @private */
-    static _createD20FormulaTerm(d20Options) {
-        let { advantageMode, halflingLucky, elvenAccuracy, reliableTalent } = d20Options;
+    /**
+     * Creates the d20 term of the roll formula, including the effects of actor features and advantage/disadvantage
+     * @private
+     */
+    _createD20FormulaTerm() {
+        let { advantageMode=D20Roll.ADV_MODE.NORMAL, halflingLucky=false, elvenAccuracy=false, reliableTalent=false } = this.options;
 
         // Set number of dice and modifiers based on advantage mode and halfling lucky feature
         let numberOfDice = D20Roll._ADV_MODE_LOOKUP[advantageMode].numberOfDice;
