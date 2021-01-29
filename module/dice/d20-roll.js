@@ -3,15 +3,16 @@
 /**
  * A type of Roll specific to a d20 based check, save, or attack roll in the 5e system
  *
- * @param {String} formula                The string formula to parse, *not including the d20 term*
- * @param {Object} data                   The data object against which to parse attributes within the formula
- * @param {ADV_MODE} advantageMode        What advantage modifier to apply to the roll (none, advantage, disadvantage)
- * @param {number} critical               The value of d20 result which represents a critical success
- * @param {number} fumble                 The value of d20 result which represents a critical failure
- * @param {(number|null)} targetValue     Assign a target value against which the result of this roll should be compared
- * @param {boolean} elvenAccuracy         Allow Elven Accuracy to modify this roll?
- * @param {boolean} halflingLucky         Allow Halfling Luck to modify this roll?
- * @param {boolean} reliableTalent        Allow Reliable Talent to modify this roll?
+ * @param {string} formula                       The string formula to parse, *not including the d20 term*
+ * @param {object} data                          The data object against which to parse attributes within the formula
+ * @param {object} options                       Extra optional arguments
+ * @param {number} [options.advantageMode]       What advantage modifier to apply to the roll (none, advantage, disadvantage)
+ * @param {number} [options.critical]            The value of d20 result which represents a critical success
+ * @param {number} [options.fumble]              The value of d20 result which represents a critical failure
+ * @param {(number|null)} [options.targetValue]  Assign a target value against which the result of this roll should be compared
+ * @param {boolean} [options.elvenAccuracy]      Allow Elven Accuracy to modify this roll?
+ * @param {boolean} [options.halflingLucky]      Allow Halfling Luck to modify this roll?
+ * @param {boolean} [options.reliableTalent]     Allow Reliable Talent to modify this roll?
  */
 export default class D20Roll extends Roll {
     constructor(formula, data, { advantageMode=D20Roll.ADV_MODE.NORMAL, critical=20, fumble=1,
