@@ -17,9 +17,7 @@
 export default class D20Roll extends Roll {
     constructor(formula, data, { advantageMode=D20Roll.ADV_MODE.NORMAL, critical=20, fumble=1,
         targetValue=null,  elvenAccuracy=false, halflingLucky=false, reliableTalent=false }={}) {
-
         super(formula, data);
-
         this.options = mergeObject(this.options ?? {}, {
             advantageMode,
             critical,
@@ -76,12 +74,10 @@ export default class D20Roll extends Roll {
 
         // Account for elven accuracy feat when rolling with advantage
         if ( elvenAccuracy && (advantageMode === D20Roll.ADV_MODE.ADV) ) numberOfDice++;
-
         let d20Term = `${numberOfDice}d20${mods}`;
 
         // Minimum result of 10 for reliable talent
         if ( reliableTalent ) d20Term = `{${d20Term}, 10}kh`;
-
         return d20Term;
     }
 
@@ -92,19 +88,15 @@ export default class D20Roll extends Roll {
         // Set appropriate dice options for all d20s in the roll
         for (let d of this.dice) {
             if (d.faces !== 20) continue;
-
             d.options.critical = this.options.critical;
             d.options.fumble = this.options.fumble;
-
             switch ( this.options.advantageMode ) {
                 case D20Roll.ADV_MODE.ADV: d.options.advantage = true; break;
                 case D20Roll.ADV_MODE.DISADV: d.options.disadvantage = true; break;
                 default: break;
             }
-
             if ( this.options.targetValue ) d.options.target = this.options.targetValue;
         }
-
         return this;
     }
 
@@ -134,7 +126,6 @@ export default class D20Roll extends Roll {
         if ( this.options.reliableTalent && (this.dice[0].total < 10) ) {
             messageData.flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
         }
-
         return super.toMessage(messageData, { rollMode , create });
     }
 }
