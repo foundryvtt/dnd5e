@@ -1,13 +1,43 @@
 import D20Roll from "./d20-roll.js";
 
+/**
+ * Shows the roll dialog for a D20Roll and returns the associated formData from the dialog when closed (or null if the user cancels the dialog)
+ * @param {string} title             The title of the shown dialog window
+ * @param {string} formula           The roll formula shown in the dialog window
+ * @param {number} defaultRollMode   The roll mode that the roll mode select element should default to
+ * @param {string} defaultAbility    For tool rolls, the default ability modifier to use for the roll
+ * @param {string} template          The path to the dialog handlebars template
+ * @param {object} dialogOptions     Extra options to send to the dialog
+ * @returns {Promise<object>}
+ */
 async function d20Dialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions) {
     return rollDialog(...arguments, generateD20Buttons);
 }
 
+/**
+ * Shows the roll dialog for a damage roll and returns the associated formData from the dialog when closed (or null if the user cancels the dialog)
+ * @param {string} title             The title of the shown dialog window
+ * @param {string} formula           The roll formula shown in the dialog window
+ * @param {number} defaultRollMode   The roll mode that the roll mode select element should default to
+ * @param {string} template          The path to the dialog handlebars template
+ * @param {object} dialogOptions     Extra options to send to the dialog
+ * @returns {Promise<object>}
+ */
 async function damageDialog({ title, formula, defaultRollMode, template }, dialogOptions) {
     return rollDialog(...arguments, generateDamageButtons);
 }
 
+/**
+ * Shows the roll dialog for d20 or damage roll and returns the associated formData from the dialog when closed (or null if the user cancels the dialog)
+ * @param {string} title               The title of the shown dialog window
+ * @param {string} formula             The roll formula shown in the dialog window
+ * @param {number} defaultRollMode     The roll mode that the roll mode select element should default to
+ * @param {string} defaultAbility      For tool rolls, the default ability modifier to use for the roll
+ * @param {string} template            The path to the dialog handlebars template
+ * @param {object} dialogOptions       Extra options to send to the dialog
+ * @param {function} buttonGenerator   A function that returns object of buttons that should be shown in the dialog
+ * @returns {Promise<object>}
+ */
 async function rollDialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions, buttonGenerator) {
     template = template ?? "systems/dnd5e/templates/chat/roll-dialog.html";
     const templateData = {
@@ -31,37 +61,55 @@ async function rollDialog({ title, formula, defaultRollMode, defaultAbility, tem
     });
 }
 
-function generateD20Buttons(resolve) {
+/**
+ * Creates an object containing the appropriate buttons for a d20 roll: Advantage, Normal, and Disadvantage
+ * @param {function} callback   A callback to call with the final results of the button pressed in the dialog
+ * @returns {function}
+ */
+function generateD20Buttons(callback) {
     return {
         advantage: {
             label: game.i18n.localize("DND5E.Advantage"),
-            callback: html => resolve(getFormData(html, D20Roll.ADV_MODE.ADV))
+            callback: html => callback(getFormData(html, D20Roll.ADV_MODE.ADV))
         },
         normal: {
             label: game.i18n.localize("DND5E.Normal"),
-            callback: html => resolve(getFormData(html, D20Roll.ADV_MODE.NORMAL))
+            callback: html => callback(getFormData(html, D20Roll.ADV_MODE.NORMAL))
         },
         disadvantage: {
             label: game.i18n.localize("DND5E.Disadvantage"),
-            callback: html => resolve(getFormData(html, D20Roll.ADV_MODE.DISADV))
+            callback: html => callback(getFormData(html, D20Roll.ADV_MODE.DISADV))
         }
     };
 }
 
-function generateDamageButtons(resolve, allowCritical) {
+
+/**
+ * Creates an object containing the appropriate buttons for a damage roll: Critical or Normal
+ * @param {function} callback      A callback to call with the final results of the button pressed in the dialog
+ * @param {boolean} allowCritical  Whether or not the critical button should show as an option in the dialog
+ * @returns {function}
+ */
+function generateDamageButtons(callback, allowCritical) {
     return {
         critical: {
             condition: allowCritical,
                 label: game.i18n.localize("DND5E.CriticalHit"),
-                callback: html => resolve(getFormData(html, true))
+                callback: html => callback(getFormData(html, true))
         },
         normal: {
             label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
-                callback: html => resolve(getFormData(html, false))
+                callback: html => callback(getFormData(html, false))
         },
     }
 }
 
+/**
+ * Given the dialog html element, creates an object creating the results of the form along with the button selected by the user
+ * @param {jQuery} html          The dialog html element
+ * @param {any} buttonSelection  The button the user selected
+ * @returns {object}
+ */
 function getFormData(html, buttonSelection) {
     const formData = new FormDataExtended(html[0].querySelector("form")).toObject();
     formData.buttonSelection = buttonSelection;
