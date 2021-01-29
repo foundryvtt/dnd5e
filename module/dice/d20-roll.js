@@ -21,6 +21,7 @@ export default class D20Roll extends Roll {
         super(formula, data);
 
         const d20Options = { advantageMode, critical, fumble, targetValue, elvenAccuracy, halflingLucky, reliableTalent };
+        this.options = mergeObject(this.options ?? {}, d20Options);
 
         // If there is not already a d20 term, add one
         if ( !(this.terms[0] instanceof Die) || this.terms[0].faces !== 20 ) {
@@ -29,21 +30,6 @@ export default class D20Roll extends Roll {
             this.terms = this._identifyTerms(formula, {step: 0});
             this._formula = this.constructor.cleanFormula(this.terms);
         }
-
-        /**
-         * 5e d20 check options
-         * @type {{
-         *     advantageMode: ADV_MODE,
-         *     halflingLucky: boolean,
-         *     elvenAccuracy: boolean,
-         *     reliableTalent: boolean,
-         *     critical: number,
-         *     fumble: number,
-         *     targetValue: (number|null)
-         * }}
-         * @private
-         */
-        this._d20Options = d20Options;
     }
 
     /**
@@ -96,16 +82,16 @@ export default class D20Roll extends Roll {
         for (let d of this.dice) {
             if (d.faces !== 20) continue;
 
-            d.options.critical = this._d20Options.critical;
-            d.options.fumble = this._d20Options.fumble;
+            d.options.critical = this.options.critical;
+            d.options.fumble = this.options.fumble;
 
-            switch (this._d20Options.advantageMode) {
+            switch (this.options.advantageMode) {
                 case D20Roll.ADV_MODE.ADV: d.options.advantage = true; break;
                 case D20Roll.ADV_MODE.DISADV: d.options.disadvantage = true; break;
                 default: break;
             }
 
-            if (this._d20Options.targetValue) d.options.target = this._d20Options.targetValue;
+            if ( this.options.targetValue ) d.options.target = this.options.targetValue;
         }
 
         return this;
@@ -117,7 +103,7 @@ export default class D20Roll extends Roll {
         const hasRollFlags = rollFlagsKey in messageData;
 
         // Add appropriate advantage mode message flavor and dnd5e roll flags
-        switch (this._d20Options.advantageMode) {
+        switch ( this.options.advantageMode ) {
             case D20Roll.ADV_MODE.ADV:
                 messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
                 if (hasRollFlags) messageData[rollFlagsKey].advantage = true;
@@ -134,7 +120,7 @@ export default class D20Roll extends Roll {
         if (!this._rolled) this.evaluate();
 
         // Add reliable talent message flavor if reliable talent affected the results
-        if (this._d20Options.reliableTalent && this.dice[0].total < 10) {
+        if ( this.options.reliableTalent && this.dice[0].total < 10 ) {
             messageData.flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
         }
 
