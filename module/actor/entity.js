@@ -463,22 +463,23 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Socket Listeners and Handlers
+  /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @override */
-  static async create(data, options={}) {
-    data.token = data.token || {};
-    if ( data.type === "character" ) {
-      mergeObject(data.token, {
-        vision: true,
-        dimSight: 30,
-        brightSight: 0,
-        actorLink: true,
-        disposition: 1
-      }, {overwrite: false});
+  /** @inheritdoc */
+  async _preCreate(data, options, user) {
+    await super._preCreate(data, options, user);
+
+    // Token size category
+    const size = this.data.data.traits.size || "med";
+    data.token.width = data.token.height = CONFIG.DND5E.tokenSizes[size];
+
+    // Player character prototype token
+    if ( this.type === "character" ) {
+      data.token.vision = true;
+      data.token.actorLink = true;
+      data.token.disposition = 1;
     }
-    return super.create(data, options);
   }
 
   /* -------------------------------------------- */

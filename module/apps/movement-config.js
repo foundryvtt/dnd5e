@@ -1,12 +1,12 @@
 /**
  * A simple form to set actor movement speeds
- * @implements {BaseEntitySheet}
+ * @extends {BaseEntitySheet}
  */
 export default class ActorMovementConfig extends BaseEntitySheet {
 
   /** @override */
 	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+	  return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/movement-config.html",
       width: 300,
@@ -18,14 +18,14 @@ export default class ActorMovementConfig extends BaseEntitySheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.localize("DND5E.MovementConfig")}: ${this.actor.name}`;
+    return `${game.i18n.localize("DND5E.MovementConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   getData(options) {
-    const sourceMovement = foundry.utils.getProperty(this.document.data._source, "data.attributes.senses") || {};
+    const sourceMovement = foundry.utils.getProperty(this.document.data._source, "data.attributes.movement") || {};
     const data = {
       movement: foundry.utils.deepClone(sourceMovement),
       units: CONFIG.DND5E.movementUnits
