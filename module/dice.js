@@ -112,9 +112,9 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   };
   const messageOptions = {};
 
-  prepareD20MessageData(messageOptions, rollArgs);
+  d20RollComponents.prepareD20MessageData(messageOptions, rollArgs);
 
-  let { advantageMode, ff } = determineD20FastForward(rollArgs);
+  let { advantageMode, ff } = d20RollComponents.determineD20FastForward(rollArgs);
 
   if ( !ff ) {
     let formData = await RollDialog.d20Dialog({
@@ -127,8 +127,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
     // If user canceled the roll dialog, quit early
     if ( !formData ) return;
-    applyD20DialogData(formData, messageOptions, rollArgs);
-    advantageMode = determineDialogAdvantageMode(formData, rollArgs) ?? advantageMode;
+    d20RollComponents.applyD20DialogData(formData, messageOptions, rollArgs);
+    advantageMode = d20RollComponents.determineDialogAdvantageMode(formData, rollArgs) ?? advantageMode;
   }
 
   // If no situational bonus was provided, remove the @bonus part from the formula
