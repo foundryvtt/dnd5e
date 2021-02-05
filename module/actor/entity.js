@@ -484,28 +484,27 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async update(data, options={}) {
+  /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
 
     // Apply changes in Actor size to Token width/height
-    const newSize = getProperty(data, "data.traits.size");
-    if ( newSize && (newSize !== getProperty(this.data, "data.traits.size")) ) {
+    const newSize = foundry.utils.getProperty(changed, "data.traits.size");
+    if ( newSize && (newSize !== foundry.utils.getProperty(this.data, "data.traits.size")) ) {
       let size = CONFIG.DND5E.tokenSizes[newSize];
-      if ( this.isToken ) this.token.update({height: size, width: size});
-      else if ( !data["token.width"] && !hasProperty(data, "token.width") ) {
-        data["token.height"] = size;
-        data["token.width"] = size;
+      if ( !foundry.utils.hasProperty(changed, "token.width") ) {
+        changed.token = changed.token || {};
+        changed.token.height = size;
+        changed.token.width = size;
       }
     }
 
     // Reset death save counters
-    if ( (this.data.data.attributes.hp.value <= 0) && (getProperty(data, "data.attributes.hp.value") > 0) ) {
-      setProperty(data, "data.attributes.death.success", 0);
-      setProperty(data, "data.attributes.death.failure", 0);
+    const isDead = this.data.data.attributes.hp.value <= 0;
+    if ( isDead && (foundry.utils.getProperty(changed, "data.attributes.hp.value") > 0) ) {
+      foundry.utils.setProperty(changed, "data.attributes.death.success", 0);
+      foundry.utils.setProperty(changed, "data.attributes.death.failure", 0);
     }
-
-    // Perform the update
-    return super.update(data, options);
   }
 
   /* -------------------------------------------- */
