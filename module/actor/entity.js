@@ -93,7 +93,7 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.prof + init.bonus;
 
     // Prepare spell-casting data
-    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
+    data.attributes.spelldc = data.abilities[data.attributes.spellcasting]?.dc ?? 10
     this._computeSpellcastingProgression(this.data);
 
     // Compute owned item attributes which depend on prepared Actor data
