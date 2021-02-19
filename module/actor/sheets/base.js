@@ -53,7 +53,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  getData(options) {
 
     // Basic data
     let isOwner = this.actor.isOwner;
@@ -67,6 +67,7 @@ export default class ActorSheet5e extends ActorSheet {
       isNPC: this.actor.type === "npc",
       isVehicle: this.actor.type === 'vehicle',
       config: CONFIG.DND5E,
+      rollData: this.actor.getRollData.bind(this.actor)
     };
 
     // The Actor and its Items
