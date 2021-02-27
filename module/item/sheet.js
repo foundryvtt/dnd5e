@@ -263,6 +263,7 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
+      html.find('.trait-selector.class-savingThrows').click(this._onConfigureClassSavingThrows.bind(this));
       html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
@@ -301,6 +302,25 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Handle spawning the TraitSelector application for selecting class saving throws.
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
+  _onConfigureClassSavingThrows(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const label = a.parentElement;
+  
+    // Render the Trait Selector dialog
+    new TraitSelector(this.item, {
+      name: a.dataset.target,
+      title: label.innerText,
+      choices: CONFIG.DND5E.abilities,
+      allowCustom: false
+    }).render(true)
+  }
 
   /**
    * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
