@@ -89,6 +89,24 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label>
+                    {{ localize "DND5E.ClassSavingThrows" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-savingThrows" data-target="data.savingThrows" data-options="savingThrows">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.savingThrows.value}}
+                            <li class="tag {{this}}">{{lookup ../config.abilities this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
             {{!-- Level 1 skills --}}
             <div class="form-group">
                 <label>{{localize "DND5E.ClassSkillsNumber"}}</label>
