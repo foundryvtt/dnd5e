@@ -91,16 +91,16 @@
 
             <div class="form-group">
                 <label>
-                    {{ localize "DND5E.ClassSavingThrows" }}
+                    {{ localize "DND5E.ClassSaves" }}
                     {{#if editable}}
-                    <a class="trait-selector class-savingThrows" data-target="data.savingThrows" data-options="savingThrows">
+                    <a class="trait-selector class-saves" data-target="data.saves" data-options="saves">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.savingThrows.value}}
+                        {{#each data.saves.value}}
                             <li class="tag {{this}}">{{lookup ../config.abilities this}}</li>
                         {{/each}}
                     </ul>
