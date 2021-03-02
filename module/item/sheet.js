@@ -263,7 +263,7 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
+      html.find('.trait-selector').click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
         onManageActiveEffect(ev, this.item)
@@ -303,28 +303,37 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
+   * Handle spawning the TraitSelector application for selection various options.
    * @param {Event} event   The click event which originated the selection
    * @private
    */
-  _onConfigureClassSkills(event) {
+  _onConfigureTraits(event) {
     event.preventDefault();
-    const skills = this.item.data.data.skills;
-    const choices = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
     const a = event.currentTarget;
     const label = a.parentElement;
 
-    // Render the Trait Selector dialog
-    new TraitSelector(this.item, {
+    let options = {
       name: a.dataset.target,
       title: label.innerText,
-      choices: Object.entries(CONFIG.DND5E.skills).reduce((obj, e) => {
-        if ( choices.includes(e[0] ) ) obj[e[0]] = e[1];
-        return obj;
-      }, {}),
-      minimum: skills.number,
-      maximum: skills.number
-    }).render(true)
+      choices: [],
+      allowCustom: false
+    };
+
+    switch(a.dataset.options) {
+      case 'saves':
+        options.choices = CONFIG.DND5E.abilities;
+        break;
+      case 'skills':
+        const skills = this.item.data.data.skills;
+        const choiceSet = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
+        options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(skill => choiceSet.includes(skill[0])));
+        options.allowCustom = true;
+        options.minimum = skills.number;
+        options.maximum = skills.number;
+        break;
+    }
+
+    new TraitSelector(this.item, options).render(true);
   }
 
   /* -------------------------------------------- */
