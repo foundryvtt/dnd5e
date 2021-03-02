@@ -1299,6 +1299,20 @@ export default class Item5e extends Item {
     }
   }
 
+  /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
+    if ( this.type === "class" ) {
+      const features = await this.parent.getClassFeatures({
+        className: changed.data.name || this.name,
+        subclassName: changed.data.subclass || this.data.data.subclass,
+        level: changed.data.levels || this.data.data.levels
+      });
+      this.constructor.createDocuments(features, this.parent);
+    }
+  }
+
   /* -------------------------------------------- */
 
   /**
