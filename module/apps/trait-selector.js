@@ -40,7 +40,7 @@ export default class TraitSelector extends FormApplication {
     if ( getType(attr) !== "Object" ) attr = {value: [], custom: ""};
 
 	  // Populate choices
-    const choices = duplicate(this.options.choices);
+    const choices = foundry.utils.deepClone(this.options.choices);
     for ( let [k, v] of Object.entries(choices) ) {
       choices[k] = {
         label: v,
@@ -59,7 +59,7 @@ export default class TraitSelector extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-  _updateObject(event, formData) {
+  async _updateObject(event, formData) {
     const updateData = {};
 
     // Obtain choices

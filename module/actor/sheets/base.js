@@ -53,24 +53,25 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  getData(options) {
 
     // Basic data
-    let isOwner = this.entity.owner;
+    let isOwner = this.actor.isOwner;
     const data = {
       owner: isOwner,
-      limited: this.entity.limited,
+      limited: this.actor.limited,
       options: this.options,
       editable: this.isEditable,
       cssClass: isOwner ? "editable" : "locked",
-      isCharacter: this.entity.data.type === "character",
-      isNPC: this.entity.data.type === "npc",
-      isVehicle: this.entity.data.type === 'vehicle',
+      isCharacter: this.actor.type === "character",
+      isNPC: this.actor.type === "npc",
+      isVehicle: this.actor.type === 'vehicle',
       config: CONFIG.DND5E,
+      rollData: this.actor.getRollData.bind(this.actor)
     };
 
     // The Actor and its Items
-    data.actor = duplicate(this.actor.data);
+    data.actor = foundry.utils.deepClone(this.actor.data);
     data.items = this.actor.items.map(i => {
       i.data.labels = i.labels;
       return i.data;
@@ -110,7 +111,7 @@ export default class ActorSheet5e extends ActorSheet {
     this._prepareItems(data);
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.entity.effects);
+    data.effects = prepareActiveEffectCategories(this.actor.effects);
 
     // Return data to the sheet
     return data
@@ -221,7 +222,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _prepareSpellbook(data, spells) {
-    const owner = this.actor.owner;
+    const owner = this.actor.isOwner;
     const levels = data.data.spells;
     const spellbook = {};
 
@@ -423,11 +424,11 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
-      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.entity));
+      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
     }
 
     // Owner Only Listeners
-    if ( this.actor.owner ) {
+    if ( this.actor.isOwner ) {
 
       // Ability Checks
       html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
@@ -538,7 +539,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('dnd5e', 'allowPolymorphing'));
+    const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get('dnd5e', 'allowPolymorphing'));
     if ( !canPolymorph ) return false;
 
     // Get the target actor
@@ -662,7 +663,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onUsesChange(event) {
       event.preventDefault();
       const itemId = event.currentTarget.closest(".item").dataset.itemId;
-      const item = this.actor.getOwnedItem(itemId);
+      const item = this.actor.items.get(itemId);
       const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
       event.target.value = uses;
       return item.update({ 'data.uses.value': uses });
@@ -677,7 +678,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemRoll(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.roll();
   }
 
@@ -691,7 +692,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemRecharge(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.rollRecharge();
   };
 
@@ -704,8 +705,8 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemSummary(event) {
     event.preventDefault();
     let li = $(event.currentTarget).parents(".item"),
-        item = this.actor.getOwnedItem(li.data("item-id")),
-        chatData = item.getChatData({secrets: this.actor.owner});
+        item = this.actor.items.get(li.data("item-id")),
+        chatData = item.getChatData({secrets: this.actor.isOwner});
 
     // Toggle summary
     if ( li.hasClass("expanded") ) {
@@ -736,10 +737,10 @@ export default class ActorSheet5e extends ActorSheet {
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: type.capitalize()}),
       type: type,
-      data: duplicate(header.dataset)
+      data: foundry.utils.deepClone(header.dataset)
     };
     delete itemData.data["type"];
-    return this.actor.createEmbeddedEntity("OwnedItem", itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /* -------------------------------------------- */
@@ -752,7 +753,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemEdit(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
-    const item = this.actor.getOwnedItem(li.dataset.itemId);
+    const item = this.actor.items.get(li.dataset.itemId);
     item.sheet.render(true);
   }
 

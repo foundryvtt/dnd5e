@@ -142,6 +142,30 @@ export default class Actor5e extends Actor {
     return data;
   }
 
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create additional class features in the Actor when a class item is updated.
+   */
+  async getClassFeatures({className, subclassName, level}={}) {
+    const current = this.itemTypes.class.find(c => c.name === className);
+    const priorLevel = current ? current.data.data.levels : 0;
+
+    // Did the class change?
+    let changed = false;
+    if ( level && (level > priorLevel) ) changed = true;
+    if ( subclassName && (subclassName !== current?.data.data.subclass )) changed = true;
+
+    // Get features to create
+    if ( changed ) {
+      const existing = new Set(this.items.map(i => i.name));
+      const features = await Actor5e.loadClassFeatures({className, subclassName, level});
+      return features.filter(f => !existing.has(f.name));
+    }
+    return [];
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -152,7 +176,7 @@ export default class Actor5e extends Actor {
    * @param {number} priorLevel       The previous level of the added class
    * @return {Promise<Item5e[]>}     Array of Item5e entities
    */
-  static async getClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
+  static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
     className = className.toLowerCase();
     subclassName = subclassName.slugify();
 
@@ -189,52 +213,6 @@ export default class Actor5e extends Actor {
       }
     }
     return features;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async updateEmbeddedEntity(embeddedName, data, options={}) {
-    const createItems = embeddedName === "OwnedItem" ? await this._createClassFeatures(data) : [];
-    let updated = await super.updateEmbeddedEntity(embeddedName, data, options);
-    if ( createItems.length ) await this.createEmbeddedEntity("OwnedItem", createItems);
-    return updated;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create additional class features in the Actor when a class item is updated.
-   * @private
-   */
-  async _createClassFeatures(updated) {
-    let toCreate = [];
-    for (let u of updated instanceof Array ? updated : [updated]) {
-      const item = this.items.get(u._id);
-      if (!item || (item.data.type !== "class")) continue;
-      const updateData = expandObject(u);
-      const config = {
-        className: updateData.name || item.data.name,
-        subclassName: getProperty(updateData, "data.subclass") || item.data.data.subclass,
-        level: getProperty(updateData, "data.levels"),
-        priorLevel: item ? item.data.data.levels : 0
-      }
-
-      // Get and create features for an increased class level
-      let changed = false;
-      if ( config.level && (config.level > config.priorLevel)) changed = true;
-      if ( config.subclassName !== item.data.data.subclass ) changed = true;
-
-      // Get features to create
-      if ( changed ) {
-        const existing = new Set(this.items.map(i => i.name));
-        const features = await Actor5e.getClassFeatures(config);
-        for ( let f of features ) {
-          if ( !existing.has(f.name) ) toCreate.push(f);
-        }
-      }
-    }
-    return toCreate
   }
 
   /* -------------------------------------------- */
@@ -485,128 +463,48 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Socket Listeners and Handlers
+  /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @override */
-  static async create(data, options={}) {
-    data.token = data.token || {};
-    if ( data.type === "character" ) {
-      mergeObject(data.token, {
-        vision: true,
-        dimSight: 30,
-        brightSight: 0,
-        actorLink: true,
-        disposition: 1
-      }, {overwrite: false});
+  /** @inheritdoc */
+  async _preCreate(data, options, user) {
+    await super._preCreate(data, options, user);
+
+    // Token size category
+    const size = this.data.data.traits.size || "med";
+    data.token.width = data.token.height = CONFIG.DND5E.tokenSizes[size];
+
+    // Player character prototype token
+    if ( this.type === "character" ) {
+      data.token.vision = true;
+      data.token.actorLink = true;
+      data.token.disposition = 1;
     }
-    return super.create(data, options);
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async update(data, options={}) {
+  /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
 
     // Apply changes in Actor size to Token width/height
-    const newSize = getProperty(data, "data.traits.size");
-    if ( newSize && (newSize !== getProperty(this.data, "data.traits.size")) ) {
+    const newSize = foundry.utils.getProperty(changed, "data.traits.size");
+    if ( newSize && (newSize !== foundry.utils.getProperty(this.data, "data.traits.size")) ) {
       let size = CONFIG.DND5E.tokenSizes[newSize];
-      if ( this.isToken ) this.token.update({height: size, width: size});
-      else if ( !data["token.width"] && !hasProperty(data, "token.width") ) {
-        data["token.height"] = size;
-        data["token.width"] = size;
+      if ( !foundry.utils.hasProperty(changed, "token.width") ) {
+        changed.token = changed.token || {};
+        changed.token.height = size;
+        changed.token.width = size;
       }
     }
 
     // Reset death save counters
-    if ( (this.data.data.attributes.hp.value <= 0) && (getProperty(data, "data.attributes.hp.value") > 0) ) {
-      setProperty(data, "data.attributes.death.success", 0);
-      setProperty(data, "data.attributes.death.failure", 0);
+    const isDead = this.data.data.attributes.hp.value <= 0;
+    if ( isDead && (foundry.utils.getProperty(changed, "data.attributes.hp.value") > 0) ) {
+      foundry.utils.setProperty(changed, "data.attributes.death.success", 0);
+      foundry.utils.setProperty(changed, "data.attributes.death.failure", 0);
     }
-
-    // Perform the update
-    return super.update(data, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async createEmbeddedEntity(embeddedName, itemData, options={}) {
-
-    // Pre-creation steps for owned items
-    if ( embeddedName === "OwnedItem" ) this._preCreateOwnedItem(itemData, options);
-
-    // Standard embedded entity creation
-    return super.createEmbeddedEntity(embeddedName, itemData, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * A temporary shim function which will eventually (in core fvtt version 0.8.0+) be migrated to the new abstraction layer
-   * @param itemData
-   * @param options
-   * @private
-   */
-  _preCreateOwnedItem(itemData, options) {
-    if ( this.data.type === "vehicle" ) return;
-    const isNPC = this.data.type === 'npc';
-    let initial = {};
-    switch ( itemData.type ) {
-
-      case "weapon":
-        if ( getProperty(itemData, "data.equipped") === undefined ) {
-          initial["data.equipped"] = isNPC;       // NPCs automatically equip weapons
-        }
-        if ( getProperty(itemData, "data.proficient") === undefined ) {
-          if ( isNPC ) {
-            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
-          } else {
-            const weaponProf = {
-              "natural": true,
-              "simpleM": "sim",
-              "simpleR": "sim",
-              "martialM": "mar",
-              "martialR": "mar"
-            }[itemData.data?.weaponType];         // Player characters check proficiency
-            const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
-            const hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
-            initial["data.proficient"] = hasWeaponProf;
-          }
-        }
-        break;
-
-      case "equipment":
-        if ( getProperty(itemData, "data.equipped") === undefined ) {
-          initial["data.equipped"] = isNPC;       // NPCs automatically equip equipment
-        }
-        if ( getProperty(itemData, "data.proficient") === undefined ) {
-          if ( isNPC ) {
-            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
-          } else {
-            const armorProf = {
-              "natural": true,
-              "clothing": true,
-              "light": "lgt",
-              "medium": "med",
-              "heavy": "hvy",
-              "shield": "shl"
-            }[itemData.data?.armor?.type];        // Player characters check proficiency
-            const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
-            const hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
-            initial["data.proficient"] = hasEquipmentProf;
-          }
-        }
-        break;
-
-      case "spell":
-        if ( getProperty(itemData, "data.proficient") === undefined ) {
-          initial["data.prepared"] = isNPC;       // NPCs automatically prepare spells
-        }
-        break;
-    }
-    mergeObject(itemData, initial);
   }
 
   /* -------------------------------------------- */
@@ -963,7 +861,7 @@ export default class Actor5e extends Actor {
     // Prepare roll data
     const parts = [`1${denomination}`, "@abilities.con.mod"];
     const title = game.i18n.localize("DND5E.HitDiceRoll");
-    const rollData = duplicate(this.data.data);
+    const rollData = foundry.utils.deepClone(this.data.data);
 
     // Call the roll helper utility
     const roll = await damageRoll({
@@ -1049,7 +947,7 @@ export default class Actor5e extends Actor {
         "data.uses.value": item.data.data.uses.max
       };
     });
-    await this.updateEmbeddedEntity("OwnedItem", updateItems);
+    await this.updateEmbeddedDocuments("Item", updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
@@ -1164,7 +1062,7 @@ export default class Actor5e extends Actor {
 
     // Perform the updates
     await this.update(updateData);
-    if ( updateItems.length ) await this.updateEmbeddedEntity("OwnedItem", updateItems);
+    if ( updateItems.length ) await this.updateEmbeddedDocuments("Item", updateItems);
 
     // Display a Chat Message summarizing the rest effects
     let restFlavor;
@@ -1206,7 +1104,7 @@ export default class Actor5e extends Actor {
    * @return {Promise<Actor5e>}
    */
   convertCurrency() {
-    const curr = duplicate(this.data.data.currency);
+    const curr = foundry.utils.deepClone(this.data.data.currency);
     const convert = CONFIG.DND5E.currencyConversion;
     for ( let [c, t] of Object.entries(convert) ) {
       let change = Math.floor(curr[c] / t.each);
@@ -1247,10 +1145,10 @@ export default class Actor5e extends Actor {
     }
 
     // Get the original Actor data and the new source data
-    const o = duplicate(this.toJSON());
+    const o = this.toJSON();
     o.flags.dnd5e = o.flags.dnd5e || {};
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
-    const source = duplicate(target.toJSON());
+    const source = target.toJSON();
 
     // Prepare new data to merge from the source
     const d = {
@@ -1359,13 +1257,13 @@ export default class Actor5e extends Actor {
     if ( !transformTokens ) return;
     const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
-      const newTokenData = duplicate(d.token);
+      const newTokenData = foundry.utils.deepClone(d.token);
       if ( !t.data.actorLink ) newTokenData.actorData = newActor.data;
       newTokenData._id = t.data._id;
       newTokenData.actorId = newActor.id;
       return newTokenData;
     });
-    return canvas.scene?.updateEmbeddedEntity("Token", updates);
+    return canvas.scene?.updateEmbeddedDocuments("Token", updates);
   }
 
   /* -------------------------------------------- */
@@ -1377,14 +1275,14 @@ export default class Actor5e extends Actor {
    */
   async revertOriginalForm() {
     if ( !this.isPolymorphed ) return;
-    if ( !this.owner ) {
+    if ( !this.isOwner ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
     }
 
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
     if ( this.isToken ) {
       const baseActor = game.actors.get(this.token.data.actorId);
-      const prototypeTokenData = duplicate(baseActor.token);
+      const prototypeTokenData = baseActor.data.token.toJSON();
       prototypeTokenData.actorData = null;
       return this.token.update(prototypeTokenData);
     }
@@ -1397,12 +1295,12 @@ export default class Actor5e extends Actor {
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
       const tokenUpdates = tokens.map(t => {
-        const tokenData = duplicate(original.data.token);
+        const tokenData = original.data.token.toJSON();
         tokenData._id = t.id;
         tokenData.actorId = original.id;
         return tokenData;
       });
-      canvas.scene.updateEmbeddedEntity("Token", tokenUpdates);
+      canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
     }
 
     // Delete the polymorphed Actor and maybe re-render the original sheet
