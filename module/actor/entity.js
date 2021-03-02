@@ -211,11 +211,11 @@ export default class Actor5e extends Actor {
     let toCreate = [];
     for (let u of updated instanceof Array ? updated : [updated]) {
       const item = this.items.get(u._id);
-      if (!item || (item.data.type !== "class")) continue;
+      if ((getProperty(u, "type") || getProperty(item, "data.type")) !== "class") continue;
       const updateData = expandObject(u);
       const config = {
-        className: updateData.name || item.data.name,
-        subclassName: getProperty(updateData, "data.subclass") || item.data.data.subclass,
+        className: updateData.name || getProperty(item, "data.name"),
+        subclassName: getProperty(updateData, "data.subclass") || getProperty(item, "data.data.subclass") || "",
         level: getProperty(updateData, "data.levels"),
         priorLevel: item ? item.data.data.levels : 0
       }
@@ -223,7 +223,7 @@ export default class Actor5e extends Actor {
       // Get and create features for an increased class level
       let changed = false;
       if ( config.level && (config.level > config.priorLevel)) changed = true;
-      if ( config.subclassName !== item.data.data.subclass ) changed = true;
+      if ( config.subclassName !== getProperty(item, "data.data.subclass") ) changed = true;
 
       // Get features to create
       if ( changed ) {
@@ -537,8 +537,12 @@ export default class Actor5e extends Actor {
     // Pre-creation steps for owned items
     if ( embeddedName === "OwnedItem" ) this._preCreateOwnedItem(itemData, options);
 
-    // Standard embedded entity creation
-    return super.createEmbeddedEntity(embeddedName, itemData, options);
+    // Apply class features
+    const createItems = embeddedName === "OwnedItem" ? await this._createClassFeatures(itemData) : [];
+    let created = await super.createEmbeddedEntity(embeddedName, itemData, options);
+    if ( createItems.length ) await this.createEmbeddedEntity("OwnedItem", createItems);
+
+    return created;
   }
 
   /* -------------------------------------------- */
