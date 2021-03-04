@@ -1285,17 +1285,27 @@ export default class Item5e extends Item {
           subclassName: this.data.data.subclass,
           level: this.data.data.levels
         });
-        this.constructor.createDocuments(features, this.parent);
-        break;
+        return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
       case "equipment":
-        this._onCreateOwnedEquipment(data, actorData, isNPC);
-        break;
+        return this._onCreateOwnedEquipment(data, actorData, isNPC);
       case "weapon":
-        this._onCreateOwnedWeapon(data, actorData, isNPC);
-        break;
+        return this._onCreateOwnedWeapon(data, actorData, isNPC);
       case "spell":
-        this._onCreateOwnedSpell(data, actorData, isNPC);
-        break;
+        return this._onCreateOwnedSpell(data, actorData, isNPC);
+    }
+  }
+
+  /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
+    if ( (this.type === "class") && Object.keys(changed.data).some(k => ["name", "subclass", "levels"].includes(k)) ) {
+      const features = await this.parent.getClassFeatures({
+        className: changed.data.name || this.name,
+        subclassName: changed.data.subclass || this.data.data.subclass,
+        level: changed.data.levels || this.data.data.levels
+      });
+      return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
     }
   }
 
