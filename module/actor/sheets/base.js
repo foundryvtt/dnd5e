@@ -628,7 +628,8 @@ export default class ActorSheet5e extends ActorSheet {
     // Stack identical consumables
     if ( itemData.type === "consumable" ) {
       const similarItem = this.actor.items.find(i => {
-        return (i.name === itemData.name) &&
+        return (i.type === "consumable") &&
+               (i.name === itemData.name) &&
                (i.data.data.consumableType === itemData.data.consumableType);
       });
       if ( similarItem ) {
