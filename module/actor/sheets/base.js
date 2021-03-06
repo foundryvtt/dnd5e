@@ -632,7 +632,7 @@ export default class ActorSheet5e extends ActorSheet {
                (i.data.data.consumableType === itemData.data.consumableType);
       });
       if ( similarItem ) {
-        similarItem.data.data.quantity += Math.min(itemData.data.quantity, 1);
+        similarItem.data.data.quantity += Math.max(itemData.data.quantity, 1);
         return this.render();
       }
     }
