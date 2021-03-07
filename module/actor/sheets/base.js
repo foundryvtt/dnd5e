@@ -629,12 +629,12 @@ export default class ActorSheet5e extends ActorSheet {
     if ( itemData.type === "consumable" ) {
       const similarItem = this.actor.items.find(i => {
         return (i.type === "consumable") &&
-               (i.name === itemData.name) &&
-               (i.data.data.consumableType === itemData.data.consumableType);
+               (i.data.flags.core.sourceId === itemData.flags.core.sourceId);
       });
       if ( similarItem ) {
-        similarItem.data.data.quantity += Math.max(itemData.data.quantity, 1);
-        return this.render();
+        return similarItem.update({
+          'data.quantity': similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+        });
       }
     }
 
