@@ -625,6 +625,20 @@ export default class ActorSheet5e extends ActorSheet {
       ["attunement", "equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
     }
 
+    // Stack identical consumables
+    if ( itemData.type === "consumable" && itemData.flags.core?.sourceId ) {
+      const similarItem = this.actor.items.find(i => {
+        const sourceId = i.getFlag("core", "sourceId");
+        return sourceId && (sourceId === itemData.flags.core?.sourceId) &&
+               (i.type === "consumable");
+      });
+      if ( similarItem ) {
+        return similarItem.update({
+          'data.quantity': similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+        });
+      }
+    }
+
     // Create the owned item as normal
     return super._onDropItemCreate(itemData);
   }
