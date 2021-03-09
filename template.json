@@ -399,7 +399,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "race", "class", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -550,6 +550,22 @@
       "ability": "int",
       "chatFlavor": "",
       "proficient": 0
+    },
+    "race": {
+      "templates": ["itemDescription"],
+      "speed": 30,
+      "size": "med",
+      "type": "",
+      "abilityScores": {
+        "default": {},
+        "additional": 0,
+        "selected": []
+      },
+      "languages": {
+        "default": ["common"],
+        "additional": 0,
+        "selected": []
+      }
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
