@@ -353,9 +353,7 @@ export default class Item5e extends Item {
 
     // if this is an owned item and the max is not numeric, we need to calculate it
     if (this.isOwned && !Number.isNumeric(max)) {
-      if (this.actor.data === undefined) {
-        return;
-      }
+      if (this.actor.data === undefined) return;
 
       try {
         max = Roll.replaceFormulaData(max, this.actor.getRollData());
