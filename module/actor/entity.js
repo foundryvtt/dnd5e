@@ -19,6 +19,14 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /** @override */
+  prepareData() {
+    super.prepareData();
+    this._finalizeOwnedItemAttributes();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   prepareBaseData() {
     switch ( this.data.type ) {
       case "character":
@@ -95,12 +103,6 @@ export default class Actor5e extends Actor {
     // Prepare spell-casting data
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
-
-    // Compute owned item attributes which depend on prepared Actor data
-    this.items.forEach(item => {
-      item.getSaveDC();
-      item.getAttackToHit();
-    });
   }
 
   /* -------------------------------------------- */
@@ -460,6 +462,23 @@ export default class Actor5e extends Actor {
     const max = actorData.data.abilities.str.value * CONFIG.DND5E.encumbrance.strMultiplier * mod;
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
+  }
+
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recompute item attributes which depend on prepared actor data.
+   *
+   * @private
+   */
+  _finalizeOwnedItemAttributes() {
+    // Compute owned item attributes which depend on prepared Actor data
+    this.items.forEach(item => {
+      item.getSaveDC();
+      item.getAttackToHit();
+      item.prepareMaxUses();
+    });
   }
 
   /* -------------------------------------------- */

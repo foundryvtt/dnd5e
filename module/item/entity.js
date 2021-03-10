@@ -230,6 +230,9 @@ export default class Item5e extends Item {
 
         // To Hit
         this.getAttackToHit();
+
+        // Limited Uses
+        this.prepareMaxUses();
       }
 
       // Damage
@@ -239,15 +242,6 @@ export default class Item5e extends Item {
         labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
       }
 
-      // Limited Uses
-      if ( this.isOwned && !!data.uses?.max ) {
-        let max = data.uses.max;
-        if ( !Number.isNumeric(max) ) {
-          max = Roll.replaceFormulaData(max, this.actor.getRollData());
-          if ( Roll.MATH_PROXY.safeEval ) max = Roll.MATH_PROXY.safeEval(max);
-        }
-        data.uses.max = Number(max);
-      }
     }
   }
 
@@ -343,6 +337,36 @@ export default class Item5e extends Item {
 
     // Update labels and return the prepared roll data
     return {rollData, parts};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Populates the max uses of an item. 
+   * If the item is an owned item and the `max` is not numeric, calculate based on actor data.
+   */
+  prepareMaxUses() {
+    const data = this.data.data;
+
+    if (!data.uses?.max) return;
+    let max = data.uses.max;
+
+    // if this is an owned item and the max is not numeric, we need to calculate it
+    if (this.isOwned && !Number.isNumeric(max)) {
+      if (this.actor.data === undefined) {
+        return;
+      }
+
+      try {
+        max = Roll.replaceFormulaData(max, this.actor.getRollData());
+        if ( Roll.MATH_PROXY.safeEval ) max = Roll.MATH_PROXY.safeEval(max);
+      } catch(e) {
+        console.error('Problem preparing Max uses for', this.data.name, e);
+        return;
+      }
+    }
+
+    data.uses.max = Number(max);
   }
 
   /* -------------------------------------------- */
