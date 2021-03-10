@@ -78,6 +78,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const cr = parseFloat(data.data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
     data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
+
+    data.localizedType = this.actor.localizedType;
+    if (data.localizedType == "") data.localizedType = game.i18n.localize("DND5E.Type");
+
     return data;
   }
 

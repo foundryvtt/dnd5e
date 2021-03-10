@@ -1,0 +1,27 @@
+<form autocomplete="off" onsubmit="event.preventDefault();">
+    <ol class="trait-list">
+        {{#each types as |type key|}}
+        <li>
+            <label class="radio">
+                <input type="radio" name="value" value="{{key}}" data-dtype="String" {{checked type.chosen}}>
+                {{#if (eq key "custom") }}
+                    <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
+                {{else}}
+                    {{type.label}}
+                {{/if}}
+            </label>
+        </li>
+        {{/each}}
+    </ol>
+    <div class="form-group stacked">
+        <label>{{ localize "DND5E.CreatureTypeSelectorSubtype" }}</label>
+        <input type="text" name="subtype" value="{{subtype}}" data-dtype="String"/>
+    </div>
+    <div class="form-group">
+        <label class="checkbox">
+          {{ localize "DND5E.CreatureSwarm" }}
+          <input type="checkbox" name="swarm" data-dtype="Boolean" {{checked swarm}}>
+        </label>
+    </div>
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "DND5E.TraitSave"}}</button>
+</form>

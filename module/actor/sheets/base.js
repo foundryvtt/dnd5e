@@ -3,6 +3,7 @@ import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
+import ActorTypeConfig from "../../apps/actor-type.js";
 import {DND5E} from '../../config.js';
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
 
@@ -504,6 +505,9 @@ export default class ActorSheet5e extends ActorSheet {
         break;
       case "senses":
         new ActorSensesConfig(this.object).render(true);
+        break;
+      case "type":
+        new ActorTypeConfig(this.object).render(true);
         break;
     }
   }

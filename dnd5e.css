@@ -115,7 +115,9 @@
   background: rgba(0, 0, 0, 0.1);
   border: 2px groove #eeede0;
 }
-.dnd5e label.checkbox {
+.dnd5e label.checkbox,
+.dnd5e label.radio {
+  display: flex;
   flex: auto;
   padding: 0;
   margin: 0;
@@ -123,15 +125,23 @@
   line-height: 22px;
   font-size: 11px;
 }
-.dnd5e label.checkbox > input[type="checkbox"] {
+.dnd5e label.checkbox > input[type="checkbox"],
+.dnd5e label.radio > input[type="checkbox"],
+.dnd5e label.checkbox > input[type="radio"],
+.dnd5e label.radio > input[type="radio"] {
   width: 16px;
   height: 16px;
   margin: 0 2px 0 0;
   position: relative;
   top: 4px;
 }
-.dnd5e label.checkbox.right > input[type="checkbox"] {
+.dnd5e label.checkbox.right > input[type="checkbox"],
+.dnd5e label.radio.right > input[type="checkbox"] {
   margin: 0 0 0 2px;
+}
+.dnd5e label.checkbox > input[type="text"],
+.dnd5e label.radio > input[type="text"] {
+  margin-right: -2px;
 }
 .dnd5e .form-group label {
   flex: 2;
@@ -488,14 +498,22 @@
 /* ----------------------------------------- */
 /* Trait Selector
 /* ----------------------------------------- */
+#actor-type .trait-list,
 #trait-selector .trait-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+#actor-type input[type="text"],
 #trait-selector input[type="text"] {
   height: 24px;
   margin: 2px;
+}
+#actor-type label.radio {
+  font-size: 12px;
+}
+#actor-type label.checkbox {
+  font-size: 13px;
 }
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
@@ -1527,6 +1545,20 @@
 }
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type span {
+  position: relative;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type .config-button {
+  position: absolute;
+  display: none;
+  right: 4px;
+  top: 0;
+  font-size: 12px;
+  font-weight: normal;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
+  display: block;
 }
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;

@@ -60,14 +60,15 @@
 
   // Checkbox Labels
   // TODO: THIS CAN BE MOSTLY REMOVED NOW THAT IT IS IN CORE, see core forms.less
-  label.checkbox {
+  label.checkbox, label.radio {
+    display: flex;
     flex: auto;
     padding: 0;
     margin: 0;
     height: 22px;
     line-height: 22px;
     font-size: 11px;
-    > input[type="checkbox"] {
+    > input[type="checkbox"], > input[type="radio"] {
       width: 16px;
       height: 16px;
       margin: 0 2px 0 0;
@@ -76,6 +77,9 @@
     }
     &.right > input[type="checkbox"] {
       margin: 0 0 0 2px;
+    }
+    > input[type="text"] {
+      margin-right: -2px;
     }
   }
 
@@ -475,7 +479,7 @@
 /* Trait Selector
 /* ----------------------------------------- */
 
-#trait-selector {
+#actor-type, #trait-selector {
   .trait-list {
     list-style: none;
     margin: 0;
@@ -485,5 +489,15 @@
   input[type="text"] {
     height: 24px;
     margin: 2px;
+  }
+}
+
+#actor-type {
+  label.radio {
+    font-size: 12px;
+  }
+
+  label.checkbox {
+    font-size: 13px;
   }
 }
