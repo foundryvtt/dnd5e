@@ -170,6 +170,31 @@ DND5E.tokenSizes = {
   "grg": 4
 };
 
+
+/* -------------------------------------------- */
+
+/**
+ * Creature types
+ * @type {Object}
+ */
+DND5E.creatureTypes = {
+  "aberration": "DND5E.CreatureAberration",
+  "beast": "DND5E.CreatureBeast",
+  "celestial": "DND5E.CreatureCelestial",
+  "construct": "DND5E.CreatureConstruct",
+  "dragon": "DND5E.CreatureDragon",
+  "elemental": "DND5E.CreatureElemental",
+  "fey": "DND5E.CreatureFey",
+  "fiend": "DND5E.CreatureFiend",
+  "giant": "DND5E.CreatureGiant",
+  "humanoid": "DND5E.CreatureHumanoid",
+  "monstrosity": "DND5E.CreatureMonstrosity",
+  "ooze": "DND5E.CreatureOoze",
+  "plant": "DND5E.CreaturePlant",
+  "undead": "DND5E.CreatureUndead"
+};
+
+
 /* -------------------------------------------- */
 
 /**
@@ -212,7 +237,7 @@ DND5E.limitedUsePeriods = {
 /* -------------------------------------------- */
 
 /**
- * The set of equipment types for armor, clothing, and other objects which can ber worn by the character
+ * The set of equipment types for armor, clothing, and other objects which can be worn by the character
  * @type {Object}
  */
 DND5E.equipmentTypes = {
