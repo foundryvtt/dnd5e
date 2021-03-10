@@ -30,5 +30,23 @@
 
   .summary {
     font-size: 18px;
+
+    .creature-type {
+      span {
+        position: relative;
+      }
+
+      .config-button {
+        position: absolute;
+        display: none;
+        right: 4px;
+        top: 0;
+        font-size: 12px;
+        font-weight: normal;
+      }
+      &:hover .config-button {
+        display: block;
+      }
+    }
   }
 }

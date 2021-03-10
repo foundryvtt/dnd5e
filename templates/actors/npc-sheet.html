@@ -27,8 +27,11 @@
                 <li>
                     <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
                 </li>
-                <li>
-                    <input type="text" name="data.details.type" value="{{data.details.type}}" placeholder="{{ localize 'DND5E.Type' }}"/>
+                <li class="creature-type">
+                    <span>
+                        {{localizedType}}
+                        <a class="config-button" data-action="type" title="{{localize 'DND5E.CreatureTypeConfig'}}"><i class="fas fa-cog"></i></a>
+                    </span>
                 </li>
                 <li>
                     <input type="text" name="data.details.source" value="{{data.details.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
