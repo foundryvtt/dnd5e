@@ -356,14 +356,14 @@ export default class Actor5e extends Actor {
     // Tabulate the total spell-casting progression
     const classes = this.data.items.filter(i => i.type === "class");
     for ( let cls of classes ) {
-      const d = cls.data;
+      const d = cls.data.data;
       if ( d.spellcasting === "none" ) continue;
       const levels = d.levels;
       const prog = d.spellcasting;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
-        caster = cls;
+        caster = cls.data;
         progression.total++;
       }
       switch (prog) {
