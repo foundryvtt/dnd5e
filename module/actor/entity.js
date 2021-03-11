@@ -363,7 +363,7 @@ export default class Actor5e extends Actor {
 
       // Accumulate levels
       if ( prog !== "pact" ) {
-        caster = cls.data;
+        caster = d;
         progression.total++;
       }
       switch (prog) {
@@ -377,9 +377,9 @@ export default class Actor5e extends Actor {
 
     // EXCEPTION: single-classed non-full progression rounds up, rather than down
     const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.data.spellcasting) ) {
-      const denom = caster.data.spellcasting === 'third' ? 3 : 2;
-      progression.slot = Math.ceil(caster.data.levels / denom);
+    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.spellcasting) ) {
+      const denom = caster.spellcasting === 'third' ? 3 : 2;
+      progression.slot = Math.ceil(caster.levels / denom);
     }
 
     // EXCEPTION: NPC with an explicit spell-caster level
