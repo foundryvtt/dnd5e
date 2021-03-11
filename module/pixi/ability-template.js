@@ -115,7 +115,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       this.data.y = destination.y;
 
       // Create the template
-      canvas.scene.createEmbeddedEntity("MeasuredTemplate", this.data);
+      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.data]);
     };
 
     // Rotate the template by 3 degree increments (mouse-wheel)

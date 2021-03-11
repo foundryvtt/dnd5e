@@ -2,7 +2,8 @@ import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 
 /**
- * Override and extend the basic :class:`Item` implementation
+ * Override and extend the basic Item implementation
+ * @extends {Item}
  */
 export default class Item5e extends Item {
 
@@ -145,8 +146,8 @@ export default class Item5e extends Item {
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
-  prepareData() {
-    super.prepareData();
+  prepareDerivedData() {
+    super.prepareDerivedData();
 
     // Get the Item's data
     const itemData = this.data;
@@ -394,7 +395,7 @@ export default class Item5e extends Item {
         const spellLevel = slotLevel === "pact" ? actor.data.data.spells.pact.level : parseInt(slotLevel);
         if (spellLevel !== id.level) {
           const upcastData = mergeObject(this.data, {"data.level": spellLevel}, {inplace: false});
-          item = this.constructor.createOwned(upcastData, actor);  // Replace the item with an upcast version
+          item = new this.constructor(upcastData, actor);  // Replace the item with an upcast version
         }
         if ( consumeSpellSlot ) consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
       }
@@ -652,7 +653,7 @@ export default class Item5e extends Item {
    * @return {Object}               An object of chat data to render
    */
   getChatData(htmlOptions={}) {
-    const data = duplicate(this.data.data);
+    const data = foundry.utils.deepClone(this.data.data);
     const labels = this.labels;
 
     // Rich text description
@@ -1118,7 +1119,7 @@ export default class Item5e extends Item {
   getRollData() {
     if ( !this.actor ) return null;
     const rollData = this.actor.getRollData();
-    rollData.item = duplicate(this.data.data);
+    rollData.item = foundry.utils.deepClone(this.data.data);
 
     // Include an ability score modifier if one exists
     const abl = this.abilityMod;
@@ -1171,7 +1172,7 @@ export default class Item5e extends Item {
 
     // Get the Item from stored flag data or by the item ID on the Actor
     const storedData = message.getFlag("dnd5e", "itemData");
-    const item = storedData ? this.createOwned(storedData, actor) : actor.getOwnedItem(card.dataset.itemId);
+    const item = storedData ? new this.constructor(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
     if ( !item ) {
       return ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name}))
     }
@@ -1242,9 +1243,8 @@ export default class Item5e extends Item {
       const [sceneId, tokenId] = tokenKey.split(".");
       const scene = game.scenes.get(sceneId);
       if (!scene) return null;
-      const tokenData = scene.getEmbeddedEntity("Token", tokenId);
-      if (!tokenData) return null;
-      const token = new Token(tokenData);
+      const token = scene.tokens.get(tokenId);
+      if ( !token ) return null;
       return token.actor;
     }
 
@@ -1266,6 +1266,120 @@ export default class Item5e extends Item {
     if ( !targets.length && game.user.character ) targets = targets.concat(game.user.character.getActiveTokens());
     if ( !targets.length ) ui.notifications.warn(game.i18n.localize("DND5E.ActionWarningNoToken"));
     return targets;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _preCreate(data, options, user) {
+    await super._preCreate(data, options, user);
+    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
+    const actorData = this.parent.data;
+    const isNPC = this.parent.type === "npc";
+    switch (data.type) {
+      case "class":
+        const features = await this.parent.getClassFeatures({
+          className: this.name,
+          subclassName: this.data.data.subclass,
+          level: this.data.data.levels
+        });
+        return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
+      case "equipment":
+        return this._onCreateOwnedEquipment(data, actorData, isNPC);
+      case "weapon":
+        return this._onCreateOwnedWeapon(data, actorData, isNPC);
+      case "spell":
+        return this._onCreateOwnedSpell(data, actorData, isNPC);
+    }
+  }
+
+  /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
+    if ( (this.type === "class") && Object.keys(changed.data).some(k => ["name", "subclass", "levels"].includes(k)) ) {
+      const features = await this.parent.getClassFeatures({
+        className: changed.data.name || this.name,
+        subclassName: changed.data.subclass || this.data.data.subclass,
+        level: changed.data.levels || this.data.data.levels
+      });
+      return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for the automatic configuration of owned equipment type Items
+   * @private
+   */
+  _onCreateOwnedEquipment(data, actorData, isNPC) {
+    const updates = {};
+    if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
+      updates["data.equipped"] = isNPC;       // NPCs automatically equip equipment
+    }
+    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
+      if ( isNPC ) {
+        updates["data.proficient"] = true;    // NPCs automatically have equipment proficiency
+      } else {
+        const armorProf = {
+          "natural": true,
+          "clothing": true,
+          "light": "lgt",
+          "medium": "med",
+          "heavy": "hvy",
+          "shield": "shl"
+        }[data.data?.armor?.type];        // Player characters check proficiency
+        const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
+        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf);
+      }
+    }
+    foundry.utils.mergeObject(data, updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for the automatic configuration of owned spell type Items
+   * @private
+   */
+  _onCreateOwnedSpell(data, actorData, isNPC) {
+    const updates = {};
+    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
+      updates["data.prepared"] = isNPC;       // NPCs automatically prepare spells
+    }
+    foundry.utils.mergeObject(data, updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for the automatic configuration of owned weapon type Items
+   * @private
+   */
+  _onCreateOwnedWeapon(data, actorData, isNPC) {
+    const updates = {};
+    if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
+      updates["data.equipped"] = isNPC;       // NPCs automatically equip weapons
+    }
+    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
+      if ( isNPC ) {
+        updates["data.proficient"] = true;    // NPCs automatically have equipment proficiency
+      } else {
+        const weaponProf = {
+          "natural": true,
+          "simpleM": "sim",
+          "simpleR": "sim",
+          "martialM": "mar",
+          "martialR": "mar"
+        }[data.data?.weaponType];         // Player characters check proficiency
+        const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
+        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+      }
+    }
+    foundry.utils.mergeObject(data, updates);
   }
 
   /* -------------------------------------------- */

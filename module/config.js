@@ -64,7 +64,7 @@ DND5E.attunementTypes = {
   NONE: 0,
   REQUIRED: 1,
   ATTUNED: 2,
-}
+};
 
 /**
  * An enumeration of item attunement states
@@ -170,6 +170,31 @@ DND5E.tokenSizes = {
   "grg": 4
 };
 
+
+/* -------------------------------------------- */
+
+/**
+ * Creature types
+ * @type {Object}
+ */
+DND5E.creatureTypes = {
+  "aberration": "DND5E.CreatureAberration",
+  "beast": "DND5E.CreatureBeast",
+  "celestial": "DND5E.CreatureCelestial",
+  "construct": "DND5E.CreatureConstruct",
+  "dragon": "DND5E.CreatureDragon",
+  "elemental": "DND5E.CreatureElemental",
+  "fey": "DND5E.CreatureFey",
+  "fiend": "DND5E.CreatureFiend",
+  "giant": "DND5E.CreatureGiant",
+  "humanoid": "DND5E.CreatureHumanoid",
+  "monstrosity": "DND5E.CreatureMonstrosity",
+  "ooze": "DND5E.CreatureOoze",
+  "plant": "DND5E.CreaturePlant",
+  "undead": "DND5E.CreatureUndead"
+};
+
+
 /* -------------------------------------------- */
 
 /**
@@ -212,7 +237,7 @@ DND5E.limitedUsePeriods = {
 /* -------------------------------------------- */
 
 /**
- * The set of equipment types for armor, clothing, and other objects which can ber worn by the character
+ * The set of equipment types for armor, clothing, and other objects which can be worn by the character
  * @type {Object}
  */
 DND5E.equipmentTypes = {
@@ -306,7 +331,7 @@ DND5E.damageTypes = {
 };
 
 // Damage Resistance Types
-DND5E.damageResistanceTypes = mergeObject(duplicate(DND5E.damageTypes), {
+DND5E.damageResistanceTypes = mergeObject(foundry.utils.deepClone(DND5E.damageTypes), {
   "physical": "DND5E.DamagePhysical"
 });
 
@@ -324,7 +349,7 @@ DND5E.movementTypes = {
   "fly": "DND5E.MovementFly",
   "swim": "DND5E.MovementSwim",
   "walk": "DND5E.MovementWalk",
-}
+};
 
 /**
  * The valid units of measure for movement distances in the game system.
@@ -334,7 +359,7 @@ DND5E.movementTypes = {
 DND5E.movementUnits = {
   "ft": "DND5E.DistFt",
   "mi": "DND5E.DistMi"
-}
+};
 
 /**
  * The valid units of measure for the range of an action or effect.
@@ -440,7 +465,7 @@ DND5E.healingTypes = {
 
 /**
  * Enumerate the denominations of hit dice which can apply to classes
- * @type {Array.<string>}
+ * @type {string[]}
  */
 DND5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
 
@@ -449,7 +474,7 @@ DND5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
 
 /**
  * The set of possible sensory perception types which an Actor may have
- * @type {object}
+ * @enum {string}
  */
 DND5E.senses = {
   "blindsight": "DND5E.SenseBlindsight",

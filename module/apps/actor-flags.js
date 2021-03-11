@@ -41,10 +41,10 @@ export default class ActorSheetFlags extends BaseEntitySheet {
    */
   _getFlags() {
     const flags = {};
-    const baseData = this.entity._data;
+    const baseData = this.document.toJSON();
     for ( let [k, v] of Object.entries(CONFIG.DND5E.characterFlags) ) {
       if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
-      let flag = duplicate(v);
+      let flag = foundry.utils.deepClone(v);
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');
