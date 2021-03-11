@@ -1,8 +1,8 @@
 /**
  * A simple form to set actor hit dice amounts
- * @implements {BaseEntitySheet}
+ * @implements {DocumentSheet}
  */
-export default class ActorHitDiceConfig extends BaseEntitySheet {
+export default class ActorHitDiceConfig extends DocumentSheet {
 
     /** @override */
     static get defaultOptions() {
