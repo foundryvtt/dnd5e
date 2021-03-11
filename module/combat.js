@@ -12,8 +12,8 @@ export const _getInitiativeFormula = function(combatant) {
 
   let nd = 1;
   let mods = "";
-  
-  if (actor.getFlag("dnd5e", "halflingLucky")) mods += "r=1";
+
+  if (actor.getFlag("dnd5e", "halflingLucky")) mods += "r1=1";
   if (actor.getFlag("dnd5e", "initiativeAdv")) {
     nd = 2;
     mods += "kh";
@@ -26,15 +26,3 @@ export const _getInitiativeFormula = function(combatant) {
   if ( tiebreaker ) parts.push(actor.data.data.abilities.dex.value / 100);
   return parts.filter(p => p !== null).join(" + ");
 };
-
-/**
- * When the Combat encounter updates - re-render open Actor sheets for combatants in the encounter.
- */
-Hooks.on("updateCombat", (combat, data, options, userId) => {
-  const updateTurn = ("turn" in data) || ("round" in data);
-  if ( !updateTurn ) return;
-  for ( let t of combat.turns ) {
-    const a = t.actor;
-    if ( t.actor ) t.actor.sheet.render(false);
-  }
-});

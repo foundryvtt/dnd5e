@@ -120,8 +120,8 @@ export const migrateCompendium = async function(pack) {
 /**
  * Migrate a single Actor entity to incorporate latest data model changes
  * Return an Object of updateData to be applied
- * @param {Actor} actor   The actor to Update
- * @return {Object}       The updateData to apply
+ * @param {object} actor    The actor data object to update
+ * @return {Object}         The updateData to apply
  */
 export const migrateActorData = function(actor) {
   const updateData = {};
@@ -232,13 +232,24 @@ export const migrateSceneData = function(scene) {
  * Migrate the actor speed string to movement object
  * @private
  */
-function _migrateActorMovement(actor, updateData) {
-  const ad = actor.data;
-  const old = actor.type === 'vehicle' ? ad?.attributes?.speed : ad?.attributes?.speed?.value;
-  if ( old === undefined ) return;
-  const s = (old || "").split(" ");
-  if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
-  updateData["data.attributes.-=speed"] = null;
+function _migrateActorMovement(actorData, updateData) {
+  const ad = actorData.data;
+
+  // Work is needed if old data is present
+  const old = actorData.type === 'vehicle' ? ad?.attributes?.speed : ad?.attributes?.speed?.value;
+  const hasOld = old !== undefined;
+  if ( hasOld ) {
+
+    // If new data is not present, migrate the old data
+    const hasNew = ad?.attributes?.movement?.walk !== undefined;
+    if ( !hasNew && (typeof old === "string") ) {
+      const s = (old || "").split(" ");
+      if ( s.length > 0 ) updateData["data.attributes.movement.walk"] = Number.isNumeric(s[0]) ? parseInt(s[0]) : null;
+    }
+
+    // Remove the old attribute
+    updateData["data.attributes.-=speed"] = null;
+  }
   return updateData
 }
 
@@ -254,7 +265,7 @@ function _migrateActorSenses(actor, updateData) {
   const original = ad.traits.senses || "";
 
   // Try to match old senses with the format like "Darkvision 60 ft, Blindsight 30 ft"
-  const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/
+  const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/;
   let wasMatched = false;
 
   // Match each comma-separated term

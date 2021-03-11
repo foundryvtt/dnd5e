@@ -374,7 +374,7 @@ export default class ActorSheet5e extends ActorSheet {
       1: '<i class="fas fa-check"></i>',
       2: '<i class="fas fa-check-double"></i>'
     };
-    return icons[level];
+    return icons[level] || icons[0];
   }
 
   /* -------------------------------------------- */
@@ -617,6 +617,11 @@ export default class ActorSheet5e extends ActorSheet {
     if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
       itemData = scroll.data;
+    }
+
+    // Ignore certain statuses
+    if ( itemData.data ) {
+      ["attunement", "equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
     }
 
     // Create the owned item as normal

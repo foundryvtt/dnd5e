@@ -175,7 +175,10 @@ export default class Actor5e extends Actor {
     }
 
     // Load item data for all identified features
-    const features = await Promise.all(ids.map(id => fromUuid(id)));
+    const features = [];
+    for ( let id of ids ) {
+      features.push(await fromUuid(id));
+    }
 
     // Class spells should always be prepared
     for ( const feature of features ) {
@@ -319,19 +322,22 @@ export default class Actor5e extends Actor {
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
-    let round = Math.floor;
     for (let [id, skl] of Object.entries(data.skills)) {
-      skl.value = parseFloat(skl.value || 0);
+      skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
+      let round = Math.floor;
 
-      // Apply Remarkable Athlete or Jack of all Trades
-      let multi = skl.value;
-      if ( athlete && (skl.value === 0) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
-        multi = 0.5;
+      // Remarkable
+      if ( athlete && (skl.value < 0.5) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
+        skl.value = 0.5;
         round = Math.ceil;
       }
-      if ( joat && (skl.value === 0 ) ) multi = 0.5;
 
-      // Retain the maximum skill proficiency when skill proficiencies are merged
+      // Jack of All Trades
+      if ( joat && (skl.value < 0.5) ) {
+        skl.value = 0.5;
+      }
+
+      // Polymorph Skill Proficiencies
       if ( originalSkills ) {
         skl.value = Math.max(skl.value, originalSkills[id].value);
       }
@@ -339,7 +345,7 @@ export default class Actor5e extends Actor {
       // Compute modifier
       skl.bonus = checkBonus + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = round(multi * data.attributes.prof);
+      skl.prof = round(skl.value * data.attributes.prof);
       skl.total = skl.mod + skl.prof + skl.bonus;
 
       // Compute passive bonus
@@ -411,7 +417,7 @@ export default class Actor5e extends Actor {
       if ( Number.isNaN(i) ) continue;
       if ( Number.isNumeric(lvl.override) ) lvl.max = Math.max(parseInt(lvl.override), 0);
       else lvl.max = slots[i-1] || 0;
-      lvl.value = Math.min(parseInt(lvl.value), lvl.max);
+      lvl.value = parseInt(lvl.value);
     }
 
     // Determine the Actor's pact magic level (if any)
@@ -453,8 +459,8 @@ export default class Actor5e extends Actor {
       return weight + (q * w);
     }, 0);
 
-    // [Optional] add Currency Weight
-    if ( game.settings.get("dnd5e", "currencyWeight") ) {
+    // [Optional] add Currency Weight (for non-transformed actors)
+    if ( game.settings.get("dnd5e", "currencyWeight") && actorData.data.currency ) {
       const currency = actorData.data.currency;
       const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
       weight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
@@ -548,41 +554,56 @@ export default class Actor5e extends Actor {
     const isNPC = this.data.type === 'npc';
     let initial = {};
     switch ( itemData.type ) {
+
       case "weapon":
-        initial["data.equipped"] = isNPC;         // NPCs automatically equip weapons
-        let hasWeaponProf = isNPC;                // NPCs automatically have weapon proficiency
-        if ( !isNPC ) {
-          const weaponProf = {
-            "natural": true,
-            "simpleM": "sim",
-            "simpleR": "sim",
-            "martialM": "mar",
-            "martialR": "mar"
-          }[itemData.data?.weaponType];
-          const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
-          hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+        if ( getProperty(itemData, "data.equipped") === undefined ) {
+          initial["data.equipped"] = isNPC;       // NPCs automatically equip weapons
         }
-        initial["data.proficient"] = hasWeaponProf;
+        if ( getProperty(itemData, "data.proficient") === undefined ) {
+          if ( isNPC ) {
+            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
+          } else {
+            const weaponProf = {
+              "natural": true,
+              "simpleM": "sim",
+              "simpleR": "sim",
+              "martialM": "mar",
+              "martialR": "mar"
+            }[itemData.data?.weaponType];         // Player characters check proficiency
+            const actorWeaponProfs = this.data.data.traits?.weaponProf?.value || [];
+            const hasWeaponProf = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+            initial["data.proficient"] = hasWeaponProf;
+          }
+        }
         break;
+
       case "equipment":
-        initial["data.equipped"] = isNPC;         // NPCs automatically equip equipment
-        let hasEquipmentProf = isNPC;             // NPCs automatically have equipment proficiency
-        if ( !isNPC ) {
-          const armorProf = {
-            "natural": true,
-            "clothing": true,
-            "light": "lgt",
-            "medium": "med",
-            "heavy": "hvy",
-            "shield": "shl"
-          }[itemData.data?.armor?.type];
-          const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
-          hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
+        if ( getProperty(itemData, "data.equipped") === undefined ) {
+          initial["data.equipped"] = isNPC;       // NPCs automatically equip equipment
         }
-        initial["data.proficient"] = hasEquipmentProf;
+        if ( getProperty(itemData, "data.proficient") === undefined ) {
+          if ( isNPC ) {
+            initial["data.proficient"] = true;    // NPCs automatically have equipment proficiency
+          } else {
+            const armorProf = {
+              "natural": true,
+              "clothing": true,
+              "light": "lgt",
+              "medium": "med",
+              "heavy": "hvy",
+              "shield": "shl"
+            }[itemData.data?.armor?.type];        // Player characters check proficiency
+            const actorArmorProfs = this.data.data.traits?.armorProf?.value || [];
+            const hasEquipmentProf = (armorProf === true) || actorArmorProfs.includes(armorProf);
+            initial["data.proficient"] = hasEquipmentProf;
+          }
+        }
         break;
+
       case "spell":
-        initial["data.prepared"] = true;          // NPCs automatically prepare spells
+        if ( getProperty(itemData, "data.proficient") === undefined ) {
+          initial["data.prepared"] = isNPC;       // NPCs automatically prepare spells
+        }
         break;
     }
     mergeObject(itemData, initial);
@@ -1102,8 +1123,7 @@ export default class Actor5e extends Actor {
 
     // Recover spell slots
     for ( let [k, v] of Object.entries(data.spells) ) {
-      if ( !v.max && !v.override ) continue;
-      updateData[`data.spells.${k}.value`] = v.override || v.max;
+      updateData[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
     }
 
     // Recover pact slots.
@@ -1227,10 +1247,10 @@ export default class Actor5e extends Actor {
     }
 
     // Get the original Actor data and the new source data
-    const o = duplicate(this.data);
+    const o = duplicate(this.toJSON());
     o.flags.dnd5e = o.flags.dnd5e || {};
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
-    const source = duplicate(target.data);
+    const source = duplicate(target.toJSON());
 
     // Prepare new data to merge from the source
     const d = {
@@ -1238,6 +1258,7 @@ export default class Actor5e extends Actor {
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
       data: source.data, // Get the data model of your new form
       items: source.items, // Get the items of your new form
+      effects: o.effects.concat(source.effects), // Combine active effects from both forms
       token: source.token, // New token configuration
       img: source.img, // New appearance
       permission: o.permission, // Use the original actor permissions
@@ -1260,7 +1281,7 @@ export default class Actor5e extends Actor {
     // Handle wildcard
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
-      d.token.img = images[0];
+      d.token.img = images[Math.floor(Math.random() * images.length)];
     }
 
     // Keep Token configurations
@@ -1344,7 +1365,7 @@ export default class Actor5e extends Actor {
       newTokenData.actorId = newActor.id;
       return newTokenData;
     });
-    return canvas.scene.updateEmbeddedEntity("Token", updates);
+    return canvas.scene?.updateEmbeddedEntity("Token", updates);
   }
 
   /* -------------------------------------------- */

@@ -78,6 +78,9 @@ Hooks.once("init", function() {
   CONFIG.Item.entityClass = Item5e;
   CONFIG.time.roundTime = 6;
 
+  // 5e cone RAW should be 53.13 degrees
+  CONFIG.MeasuredTemplate.defaults.angle = 53.13;
+
   // Register System Settings
   registerSystemSettings();
 

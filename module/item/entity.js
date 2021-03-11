@@ -1,4 +1,4 @@
-import {d20Roll, damageRoll} from "../dice.js";
+import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 
 /**
@@ -222,12 +222,14 @@ export default class Item5e extends Item {
 
     // Item Actions
     if ( data.hasOwnProperty("actionType") ) {
+      // if this item is owned, we populate the label and saving throw during actor init
+      if (!this.isOwned) {
+        // Saving throws
+        this.getSaveDC();
 
-      // Saving throws
-      this.getSaveDC();
-
-      // To Hit
-      this.getAttackToHit();
+        // To Hit
+        this.getAttackToHit();
+      }
 
       // Damage
       let dam = data.damage || {};
@@ -283,7 +285,7 @@ export default class Item5e extends Item {
    * - item's actor's proficiency bonus if applicable
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
-   * 
+   *
    * @returns {Object} returns `rollData` and `parts` to be used in the item's Attack roll
    */
   getAttackToHit() {
@@ -316,20 +318,23 @@ export default class Item5e extends Item {
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
     // One-time bonus provided by consumed ammunition
-    if ( itemData.consume.type === 'ammo' && !!this.actor.items ) {
+    if ( (itemData.consume?.type === 'ammo') && !!this.actor.items ) {
       const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
-      const ammoItemQuantity = ammoItemData?.data.quantity;
-      const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
-      const ammoItemAttackBonus = ammoItemData?.data.attackBonus;
-      const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
-      if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
-        parts.push("@ammo");
-        rollData["ammo"] = ammoItemAttackBonus;
+
+      if (ammoItemData) {
+        const ammoItemQuantity = ammoItemData.data.quantity;
+        const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
+        const ammoItemAttackBonus = ammoItemData.data.attackBonus;
+        const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo")
+        if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
+          parts.push("@ammo");
+          rollData["ammo"] = ammoItemAttackBonus;
+        }
       }
     }
 
     // Condense the resulting attack bonus formula into a simplified label
-    let toHitLabel = new Roll(parts.join('+'), rollData).formula.trim();
+    let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
     if (toHitLabel.charAt(0) !== '-') {
       toHitLabel = '+ ' + toHitLabel
     }
@@ -481,8 +486,8 @@ export default class Item5e extends Item {
         itemUpdates["data.uses.value"] = remaining;
       }
 
-      // Otherwise reduce quantity
-      if ( consumeQuantity && !used ) {
+      // Reduce quantity if not reducing usages or if usages hit 0 and we are set to consumeQuantity
+      if ( consumeQuantity && (!used || (remaining === 0)) ) {
         const q = Number(id.quantity ?? 1);
         if ( q >= 1 ) {
           used = true;
@@ -883,7 +888,8 @@ export default class Item5e extends Item {
     if ( spellLevel ) rollData.item.level = spellLevel;
 
     // Configure the damage roll
-    const title = `${this.name} - ${game.i18n.localize("DND5E.DamageRoll")}`;
+    const actionFlavor = game.i18n.localize(itemData.actionType === "heal" ? "DND5E.Healing" : "DND5E.DamageRoll");
+    const title = `${this.name} - ${actionFlavor}`;
     const rollConfig = {
       actor: this.actor,
       critical: critical ?? event?.altKey ?? false,

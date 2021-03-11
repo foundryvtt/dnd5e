@@ -1,4 +1,70 @@
 /**
+ * A standardized helper function for simplifying the constant parts of a multipart roll formula
+ *
+ * @param {string} formula                 The original Roll formula
+ * @param {Object} data                    Actor or item data against which to parse the roll
+ * @param {Object} options                 Formatting options
+ * @param {boolean} options.constantFirst   Puts the constants before the dice terms in the resulting formula
+ *
+ * @return {string}                        The resulting simplified formula
+ */
+export function simplifyRollFormula(formula, data, {constantFirst = false} = {}) {
+  const roll = new Roll(formula, data); // Parses the formula and replaces any @properties
+  const terms = roll.terms;
+
+  // Some terms are "too complicated" for this algorithm to simplify
+  // In this case, the original formula is returned.
+  if (terms.some(_isUnsupportedTerm)) return roll.formula;
+
+  const rollableTerms = []; // Terms that are non-constant, and their associated operators
+  const constantTerms = []; // Terms that are constant, and their associated operators
+  let operators = [];       // Temporary storage for operators before they are moved to one of the above
+
+  for (let term of terms) {                                // For each term
+    if (["+", "-"].includes(term)) operators.push(term);   // If the term is an addition/subtraction operator, push the term into the operators array
+    else {                                                 // Otherwise the term is not an operator
+      if (term instanceof DiceTerm) {                      // If the term is something rollable
+        rollableTerms.push(...operators);                  // Place all the operators into the rollableTerms array
+        rollableTerms.push(term);                          // Then place this rollable term into it as well
+      }                                                    //
+      else {                                               // Otherwise, this must be a constant
+        constantTerms.push(...operators);                  // Place the operators into the constantTerms array
+        constantTerms.push(term);                          // Then also add this constant term to that array.
+      }                                                    //
+      operators = [];                                      // Finally, the operators have now all been assigend to one of the arrays, so empty this before the next iteration.
+    }
+  }
+
+  const constantFormula = Roll.cleanFormula(constantTerms);  // Cleans up the constant terms and produces a new formula string
+  const rollableFormula = Roll.cleanFormula(rollableTerms);  // Cleans up the non-constant terms and produces a new formula string
+
+  const constantPart = roll._safeEval(constantFormula);      // Mathematically evaluate the constant formula to produce a single constant term
+
+  const parts = constantFirst ? // Order the rollable and constant terms, either constant first or second depending on the optional argumen
+    [constantPart, rollableFormula] : [rollableFormula, constantPart];
+
+  // Join the parts with a + sign, pass them to `Roll` once again to clean up the formula
+  return new Roll(parts.filterJoin(" + ")).formula;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
+ * @param {*} term - A single Dice term to check support on
+ * @return {Boolean} True when unsupported, false if supported
+ */
+function _isUnsupportedTerm(term) {
+	const diceTerm = term instanceof DiceTerm;
+	const operator = ["+", "-"].includes(term);
+	const number   = !isNaN(Number(term));
+
+	return !(diceTerm || operator || number);
+}
+
+/* -------------------------------------------- */
+
+/**
  * A standardized helper function for managing core 5e "d20 rolls"
  *
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
@@ -44,8 +110,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   let adv = 0;
   fastForward = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   if (fastForward) {
-    if ( advantage || event.altKey ) adv = 1;
-    else if ( disadvantage || event.ctrlKey || event.metaKey ) adv = -1;
+    if ( advantage ?? event.altKey ) adv = 1;
+    else if ( disadvantage ?? (event.ctrlKey || event.metaKey) ) adv = -1;
   }
 
   // Define the inner roll function
@@ -53,7 +119,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 
     // Determine the d20 roll and modifiers
     let nd = 1;
-    let mods = halflingLucky ? "r=1" : "";
+    let mods = halflingLucky ? "r1=1" : "";
 
     // Handle advantage
     if (adv === 1) {
@@ -109,6 +175,8 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
       if (d.faces === 20) {
         d.options.critical = critical;
         d.options.fumble = fumble;
+        if ( adv === 1 ) d.options.advantage = true;
+        else if ( adv === -1 ) d.options.disadvantage = true;
         if (targetValue) d.options.target = targetValue;
       }
     }
@@ -130,7 +198,6 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 }
 
 /* -------------------------------------------- */
-
 
 /**
  * Present a Dialog form which creates a d20 roll once submitted
@@ -174,7 +241,6 @@ async function _d20RollDialog({template, title, parts, data, rollMode, dialogOpt
     }, dialogOptions).render(true);
   });
 }
-
 
 /* -------------------------------------------- */
 
@@ -235,14 +301,15 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
         roll.terms[0].alter(1, criticalBonusDice);
         roll._formula = roll.formula;
       }
-      roll.dice.forEach(d => d.options.critical = true);
       messageData.flavor += ` (${game.i18n.localize("DND5E.Critical")})`;
       if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].critical = true;
     }
 
     // Execute the roll
     try {
-      return roll.roll();
+      roll.evaluate()
+      if ( crit ) roll.dice.forEach(d => d.options.critical = true); // TODO workaround core bug which wipes Roll#options on roll
+      return roll;
     } catch(err) {
       console.error(err);
       ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);

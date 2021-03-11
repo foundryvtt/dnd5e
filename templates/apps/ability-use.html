@@ -2,7 +2,7 @@
     <p>{{ title }}</p>
     <p class="notes">{{note}}</p>
     {{#each errors}}
-    <p class="notification error">{{localize this}}</p>
+    <p class="notification error">{{this}}</p>
     {{/each}}
 
     {{#if consumeSpellSlot}}
