@@ -46,6 +46,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
     activateListeners(html) {
         super.activateListeners(html);
 
+        // Hook up -/+ buttons to adjust the current value in the form
         html.find("button.decrement").click(function() {
             const el = $(this);
             const oldVal = parseInt(el.siblings("input.current").val());
@@ -87,11 +88,17 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
     /* -------------------------------------------- */
 
+    /**
+     * Rolls the hit die corresponding with the class row containing the event's target button.
+     * @param {MouseEvent} event
+     * @private
+     */
     async _onRollHitDie(event) {
         event.preventDefault();
         const button = event.currentTarget;
-        const hdDenom = button.dataset.hdDenom;
-        await this.object.rollHitDie(hdDenom);
+        await this.object.rollHitDie(button.dataset.hdDenom);
+
+        // Re-render dialog to reflect changed hit dice quantities
         this.render();
     }
 }
