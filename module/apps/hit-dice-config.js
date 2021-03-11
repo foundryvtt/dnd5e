@@ -18,7 +18,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
     /** @override */
     get title() {
-        return `${game.i18n.localize("DND5E.HitDiceConfig")}: ${this.entity.name}`;
+        return `${game.i18n.localize("DND5E.HitDiceConfig")}: ${this.object.name}`;
     }
 
     /* -------------------------------------------- */
@@ -26,16 +26,16 @@ export default class ActorHitDiceConfig extends DocumentSheet {
     /** @override */
     getData(options) {
         // Get class items and sort by order of largest hit die
-        const classItems = this.object.data.items.filter(i => i.type === "class")
-            .sort((a, b) => parseInt(b.data.hitDice.slice(1)) - parseInt(a.data.hitDice.slice(1)));
+        const classItems = this.object.items.filter(i => i.data.type === "class")
+            .sort((a, b) => parseInt(b.data.data.hitDice.slice(1)) - parseInt(a.data.data.hitDice.slice(1)));
         return {
             classes: classItems.map(i => ({
-                classItemId: i._id,
-                name: i.name,
-                diceDenom: i.data.hitDice,
-                currentHitDice: i.data.levels - i.data.hitDiceUsed,
-                maxHitDice: i.data.levels,
-                canRoll: (i.data.levels - i.data.hitDiceUsed) > 0,
+                classItemId: i.data._id,
+                name: i.data.name,
+                diceDenom: i.data.data.hitDice,
+                currentHitDice: i.data.data.levels - i.data.data.hitDiceUsed,
+                maxHitDice: i.data.data.levels,
+                canRoll: (i.data.data.levels - i.data.data.hitDiceUsed) > 0,
             })),
         };
     }
@@ -87,7 +87,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
     /** @override */
     async _updateObject(event, formData) {
-        return this.object.updateOwnedItem(formData);
+        return this.object.updateEmbeddedDocuments("Item", formData);
     }
 
     /* -------------------------------------------- */
