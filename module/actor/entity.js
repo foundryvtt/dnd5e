@@ -19,6 +19,16 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /** @override */
+  prepareData() {
+    super.prepareData();
+
+    // iterate over owned items and recompute attributes that depend on prepared actor data
+    this.items.forEach(item => item.prepareFinalAttributes());
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   prepareBaseData() {
     switch ( this.data.type ) {
       case "character":
@@ -95,12 +105,6 @@ export default class Actor5e extends Actor {
     // Prepare spell-casting data
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
-
-    // Compute owned item attributes which depend on prepared Actor data
-    this.items.forEach(item => {
-      item.getSaveDC();
-      item.getAttackToHit();
-    });
   }
 
   /* -------------------------------------------- */
@@ -228,9 +232,9 @@ export default class Actor5e extends Actor {
     // Determine character level and available hit dice based on owned Class items
     const [level, hd] = actorData.items.reduce((arr, item) => {
       if ( item.type === "class" ) {
-        const classLevels = parseInt(item.data.levels) || 1;
+        const classLevels = parseInt(item.data.data.levels) || 1;
         arr[0] += classLevels;
-        arr[1] += classLevels - (parseInt(item.data.hitDiceUsed) || 0);
+        arr[1] += classLevels - (parseInt(item.data.data.hitDiceUsed) || 0);
       }
       return arr;
     }, [0, 0]);
@@ -356,14 +360,14 @@ export default class Actor5e extends Actor {
     // Tabulate the total spell-casting progression
     const classes = this.data.items.filter(i => i.type === "class");
     for ( let cls of classes ) {
-      const d = cls.data;
+      const d = cls.data.data;
       if ( d.spellcasting === "none" ) continue;
       const levels = d.levels;
       const prog = d.spellcasting;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
-        caster = cls;
+        caster = d;
         progression.total++;
       }
       switch (prog) {
@@ -377,9 +381,9 @@ export default class Actor5e extends Actor {
 
     // EXCEPTION: single-classed non-full progression rounds up, rather than down
     const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.data.spellcasting) ) {
-      const denom = caster.data.spellcasting === 'third' ? 3 : 2;
-      progression.slot = Math.ceil(caster.data.levels / denom);
+    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.spellcasting) ) {
+      const denom = caster.spellcasting === 'third' ? 3 : 2;
+      progression.slot = Math.ceil(caster.levels / denom);
     }
 
     // EXCEPTION: NPC with an explicit spell-caster level
