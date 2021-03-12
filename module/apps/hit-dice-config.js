@@ -9,7 +9,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["dnd5e", "hd-config", "dialog"],
             template: "systems/dnd5e/templates/apps/hit-dice-config.html",
-            width: 400,
+            width: 360,
             height: "auto"
         });
     }
