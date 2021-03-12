@@ -50,19 +50,12 @@ export default class ActorHitDiceConfig extends DocumentSheet {
         super.activateListeners(html);
 
         // Hook up -/+ buttons to adjust the current value in the form
-        html.find("button.decrement").click(function() {
-            const el = $(this);
-            const oldVal = parseInt(el.siblings("input.current").val());
-            const newVal = oldVal - 1 < 0 ? 0 : oldVal - 1;
-            el.siblings("input.current").val(newVal);
-        });
-
-        html.find("button.increment").click(function() {
-            const el = $(this);
-            const oldVal = parseInt(el.siblings("input.current").val());
-            const maxVal = parseInt(el.siblings("input.max").val())
-            const newVal = oldVal + 1 > maxVal ? maxVal : oldVal + 1;
-            el.siblings("input.current").val(newVal);
+        html.find("button.increment,button.decrement").click(event => {
+            const button = event.currentTarget;
+            const current = button.parentElement.querySelector(".current");
+            const max = button.parentElement.querySelector(".max");
+            const direction = button.classList.contains("increment") ? 1 : -1;
+            current.value = Math.clamped(parseInt(current.value) + direction, 0, parseInt(max.value));
         });
 
         html.find("button.roll-hd").click(this._onRollHitDie.bind(this));
