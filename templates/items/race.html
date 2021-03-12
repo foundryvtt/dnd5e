@@ -39,6 +39,42 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            {{!-- Ability Scores --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.AbilityScores" }}</label>
+                <ul class="traits-list">
+                    {{#each data.abilityScores.selected as |value score| }}
+                      <li class="tag {{score}}">{{lookup ../config.abilities score}}: {{value}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            {{!-- Size --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.Size" }}</label>
+                <ul class="trait-list">
+                  <li class="tag {{data.size.selected}}">{{lookup config.actorSizes data.size.selected}}</li>
+                </ul>
+            </div>
+
+            {{!-- Movement --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.Movement" }}</label>
+                <ul class="trait-list">
+                  
+                </ul>
+            </div>
+
+            {{!-- Languages --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.Languages" }}</label>
+                <ul class="traits-list">
+                    {{#each data.languages.selected as |v k| }}
+                      <li class="tag {{k}}">{{v}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+
         </div>
     </section>
 </form>

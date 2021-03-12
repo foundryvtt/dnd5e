@@ -553,18 +553,30 @@
     },
     "race": {
       "templates": ["itemDescription"],
-      "speed": 30,
-      "size": "med",
-      "type": "",
+      "type": [],
+      "size": {
+        "options": ["med"],
+        "selected": "med"
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
       "abilityScores": {
         "default": {},
         "additional": 0,
-        "selected": []
+        "selected": {}
       },
       "languages": {
         "default": ["common"],
         "additional": 0,
-        "selected": []
+        "value": [],
+        "custom": ""
       }
     },
     "spell": {
