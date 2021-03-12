@@ -241,7 +241,7 @@ export default class Item5e extends Item {
    * Compute item attributes which might depend on prepared actor data.
    */
   prepareFinalAttributes() {
-    if ( data.hasOwnProperty("actionType") ) {
+    if ( this.data.data.hasOwnProperty("actionType") ) {
       // Saving throws
       this.getSaveDC();
 
