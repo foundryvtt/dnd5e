@@ -23,7 +23,7 @@ export default class Actor5e extends Actor {
     super.prepareData();
 
     // iterate over owned items and recompute attributes that depend on prepared actor data
-    this.items.forEach(item => item.calculateMaybeOwnedAttributes());
+    this.items.forEach(item => item.prepareFinalAttributes());
   }
 
   /* -------------------------------------------- */

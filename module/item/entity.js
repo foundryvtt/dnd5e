@@ -231,8 +231,8 @@ export default class Item5e extends Item {
       }
     }
 
-    // if this item is owned, we calculateMaybeOwnedAttributes() at the end of actor init
-    if (!this.isOwned) this.calculateMaybeOwnedAttributes();
+    // if this item is owned, we prepareFinalAttributes() at the end of actor init
+    if (!this.isOwned) this.prepareFinalAttributes();
   }
 
   /* -------------------------------------------- */
@@ -240,7 +240,7 @@ export default class Item5e extends Item {
   /**
    * Compute item attributes which might depend on prepared actor data.
    */
-  calculateMaybeOwnedAttributes() {
+  prepareFinalAttributes() {
     if ( data.hasOwnProperty("actionType") ) {
       // Saving throws
       this.getSaveDC();
