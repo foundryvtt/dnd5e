@@ -19,6 +19,16 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /** @override */
+  prepareData() {
+    super.prepareData();
+
+    // iterate over owned items and recompute attributes that depend on prepared actor data
+    this.items.forEach(item => item.prepareFinalAttributes());
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   prepareBaseData() {
     switch ( this.data.type ) {
       case "character":
@@ -95,12 +105,6 @@ export default class Actor5e extends Actor {
     // Prepare spell-casting data
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
-
-    // Compute owned item attributes which depend on prepared Actor data
-    this.items.forEach(item => {
-      item.getSaveDC();
-      item.getAttackToHit();
-    });
   }
 
   /* -------------------------------------------- */
