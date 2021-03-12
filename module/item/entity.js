@@ -223,32 +223,40 @@ export default class Item5e extends Item {
 
     // Item Actions
     if ( data.hasOwnProperty("actionType") ) {
-      // if this item is owned, we populate the label and saving throw during actor init
-      if (!this.isOwned) {
-        // Saving throws
-        this.getSaveDC();
-
-        // To Hit
-        this.getAttackToHit();
-
-        // Limited Uses
-        this.prepareMaxUses();
-      }
-
       // Damage
       let dam = data.damage || {};
       if ( dam.parts ) {
         labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
         labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
       }
+    }
 
+    // if this item is owned, we calculateMaybeOwnedAttributes() at the end of actor init
+    if (!this.isOwned) this.calculateMaybeOwnedAttributes();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute item attributes which might depend on prepared actor data.
+   */
+  calculateMaybeOwnedAttributes() {
+    if ( data.hasOwnProperty("actionType") ) {
+      // Saving throws
+      this.getSaveDC();
+
+      // To Hit
+      this.getAttackToHit();
+
+      // Limited Uses
+      this.prepareMaxUses();
     }
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Update the derived spell DC for an item that requires a saving throw
+   * Update the derived spell DC for an this that requires a saving throw
    * @returns {number|null}
    */
   getSaveDC() {
