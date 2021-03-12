@@ -496,20 +496,22 @@ export default class ActorSheet5e extends ActorSheet {
   _onConfigMenu(event) {
     event.preventDefault();
     const button = event.currentTarget;
+    let app;
     switch ( button.dataset.action ) {
       case "hit-dice":
-        new ActorHitDiceConfig(this.object).render(true);
+        app = new ActorHitDiceConfig(this.object);
         break;
       case "movement":
-        new ActorMovementConfig(this.object).render(true);
+        app = new ActorMovementConfig(this.object);
         break;
       case "flags":
-        new ActorSheetFlags(this.object).render(true);
+        app = new ActorSheetFlags(this.object);
         break;
       case "senses":
-        new ActorSensesConfig(this.object).render(true);
+        app = new ActorSensesConfig(this.object);
         break;
     }
+    app?.render(true);
   }
 
   /* -------------------------------------------- */
