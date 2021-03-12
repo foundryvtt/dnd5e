@@ -256,7 +256,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Update the derived spell DC for an this that requires a saving throw
+   * Update the derived spell DC for an item that requires a saving throw
    * @returns {number|null}
    */
   getSaveDC() {
