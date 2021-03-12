@@ -25,18 +25,21 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
     /** @override */
     getData(options) {
-        // Get class items and sort by order of largest hit die
-        const classItems = this.object.items.filter(i => i.data.type === "class")
-            .sort((a, b) => parseInt(b.data.data.hitDice.slice(1)) - parseInt(a.data.data.hitDice.slice(1)));
         return {
-            classes: classItems.map(i => ({
-                classItemId: i.data._id,
-                name: i.data.name,
-                diceDenom: i.data.data.hitDice,
-                currentHitDice: i.data.data.levels - i.data.data.hitDiceUsed,
-                maxHitDice: i.data.data.levels,
-                canRoll: (i.data.data.levels - i.data.data.hitDiceUsed) > 0,
-            })),
+            classes: this.object.items.reduce((classes, item) => {
+                if (item.data.type === "class") {
+                    // Add the appropriate data only if this item is a "class"
+                    classes.push({
+                        classItemId: item.data._id,
+                        name: item.data.name,
+                        diceDenom: item.data.data.hitDice,
+                        currentHitDice: item.data.data.levels - item.data.data.hitDiceUsed,
+                        maxHitDice: item.data.data.levels,
+                        canRoll: (item.data.data.levels - item.data.data.hitDiceUsed) > 0
+                    });
+                }
+                return classes;
+            }, []).sort((a, b) => parseInt(b.diceDenom.slice(1)) - parseInt(a.diceDenom.slice(1)))
         };
     }
 
