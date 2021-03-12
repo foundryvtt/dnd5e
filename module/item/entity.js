@@ -223,31 +223,33 @@ export default class Item5e extends Item {
 
     // Item Actions
     if ( data.hasOwnProperty("actionType") ) {
-      // if this item is owned, we populate the label and saving throw during actor init
-      if (!this.isOwned) {
-        // Saving throws
-        this.getSaveDC();
-
-        // To Hit
-        this.getAttackToHit();
-      }
-
       // Damage
       let dam = data.damage || {};
       if ( dam.parts ) {
         labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
         labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
       }
+    }
+
+    // if this item is owned, we prepareFinalAttributes() at the end of actor init
+    if (!this.isOwned) this.prepareFinalAttributes();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute item attributes which might depend on prepared actor data.
+   */
+  prepareFinalAttributes() {
+    if ( this.data.data.hasOwnProperty("actionType") ) {
+      // Saving throws
+      this.getSaveDC();
+
+      // To Hit
+      this.getAttackToHit();
 
       // Limited Uses
-      if ( this.isOwned && !!data.uses?.max ) {
-        let max = data.uses.max;
-        if ( !Number.isNumeric(max) ) {
-          max = Roll.replaceFormulaData(max, this.actor.getRollData());
-          if ( Roll.MATH_PROXY.safeEval ) max = Roll.MATH_PROXY.safeEval(max);
-        }
-        data.uses.max = Number(max);
-      }
+      this.prepareMaxUses();
     }
   }
 
@@ -343,6 +345,34 @@ export default class Item5e extends Item {
 
     // Update labels and return the prepared roll data
     return {rollData, parts};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Populates the max uses of an item. 
+   * If the item is an owned item and the `max` is not numeric, calculate based on actor data.
+   */
+  prepareMaxUses() {
+    const data = this.data.data;
+
+    if (!data.uses?.max) return;
+    let max = data.uses.max;
+
+    // if this is an owned item and the max is not numeric, we need to calculate it
+    if (this.isOwned && !Number.isNumeric(max)) {
+      if (this.actor.data === undefined) return;
+
+      try {
+        max = Roll.replaceFormulaData(max, this.actor.getRollData());
+        if ( Roll.MATH_PROXY.safeEval ) max = Roll.MATH_PROXY.safeEval(max);
+      } catch(e) {
+        console.error('Problem preparing Max uses for', this.data.name, e);
+        return;
+      }
+    }
+
+    data.uses.max = Number(max);
   }
 
   /* -------------------------------------------- */
