@@ -319,7 +319,15 @@
     "npc": {
       "templates": ["common", "creature"],
       "details": {
-        "type": "",
+        "type": {
+          "value": "",
+          "subtype": "",
+          "swarm": {
+            "isSwarm": false,
+            "size": ""
+          },
+          "custom": ""
+        },
         "environment": "",
         "cr": 1,
         "spellLevel": 0,
