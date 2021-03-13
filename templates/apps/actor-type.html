@@ -20,7 +20,14 @@
     <div class="form-group">
         <label class="checkbox">
           {{ localize "DND5E.CreatureSwarm" }}
-          <input type="checkbox" name="swarm" data-dtype="Boolean" {{checked swarm}}>
+          <input type="checkbox" name="swarm.isSwarm" data-dtype="Boolean" {{checked swarm.isSwarm}}>
+        </label>
+
+        <label>
+            {{ localize "DND5E.Size" }}
+            <select name="swarm.size">
+                {{selectOptions sizes selected=swarm.size localize=true}}
+            </select>
         </label>
     </div>
     <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "DND5E.TraitSave"}}</button>

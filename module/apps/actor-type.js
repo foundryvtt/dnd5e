@@ -11,7 +11,7 @@ export default class ActorTypeConfig extends FormApplication {
       classes: ["dnd5e"],
       title: "Actor Creature Type",
       template: "systems/dnd5e/templates/apps/actor-type.html",
-      width: 320,
+      width: 280,
       height: "auto",
       choices: {},
       allowCustom: true,
@@ -30,7 +30,7 @@ export default class ActorTypeConfig extends FormApplication {
     if ( getType(attr) !== "Object" ) attr = {
       value: attr ?? "",
       subtype: "",
-      swarm: false,
+      swarm: { isSwarm: false, size: "" },
       custom: ""
     };
 
@@ -52,7 +52,8 @@ export default class ActorTypeConfig extends FormApplication {
       types: types,
       subtype: attr.subtype,
       swarm: attr.swarm,
-      custom: attr.custom
+      custom: attr.custom,
+      sizes: CONFIG.DND5E.actorSizes
     }
   }
 
@@ -60,12 +61,8 @@ export default class ActorTypeConfig extends FormApplication {
 
   /** @override */
   async _updateObject(event, formData) {
-    this.object.update({
-      'data.details.type.value': formData.value,
-      'data.details.type.subtype': formData.subtype,
-      'data.details.type.swarm': formData.swarm,
-      'data.details.type.custom': formData.custom
-    });
+    const typeObject = foundry.utils.expandObject(formData);
+    this.object.update({ 'data.details.type': typeObject });
   }
 
   /* -------------------------------------------- */

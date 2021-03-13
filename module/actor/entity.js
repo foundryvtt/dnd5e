@@ -31,13 +31,13 @@ export default class Actor5e extends Actor {
       localizedType = attr.custom;
     } else {
       let code = CONFIG.DND5E.creatureTypes[attr.value];
-      localizedType = game.i18n.localize(attr.swarm ? `${code}Pl` : code);
+      localizedType = game.i18n.localize(attr.swarm.isSwarm ? `${code}Pl` : code);
     }
 
     let type;
-    if (attr.swarm) {
+    if (attr.swarm.isSwarm) {
       type = game.i18n.format('DND5E.CreatureSwarmPhrase', {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[this.data.data.traits.size]),
+        size: game.i18n.localize(CONFIG.DND5E.actorSizes[attr.swarm.size]),
         type: localizedType
       });
     } else {
