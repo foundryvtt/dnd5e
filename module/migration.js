@@ -315,6 +315,7 @@ function _migrateActorType(actor, updateData) {
   const pattern = /^(?:swarm of (?<size>[\w\-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
   const match = original.trim().match(pattern);
   if (!match) {
+    data.value = "custom";
     data.custom = original;
   } else {
 
@@ -327,6 +328,7 @@ function _migrateActorType(actor, updateData) {
     if (typeMatch) {
       data.value = typeMatch[0];
     } else {
+      data.value = "custom";
       data.custom = match.groups.type.trim();
     }
 
