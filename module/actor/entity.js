@@ -1307,10 +1307,11 @@ export default class Actor5e extends Actor {
       canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
     }
 
-    // Delete the polymorphed Actor and maybe re-render the original sheet
+    // Delete the polymorphed version of the actor, if possible
     const isRendered = this.sheet.rendered;
     if ( game.user.isGM ) await this.delete();
-    original.sheet.render(isRendered);
+    else if ( isRendered ) this.sheet.close();
+    if ( isRendered ) original.sheet.render(isRendered);
     return original;
   }
 
