@@ -79,10 +79,43 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
     data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
-    data.localizedType = this.actor.localizedType;
-    if (data.localizedType == "") data.localizedType = game.i18n.localize("DND5E.Type");
+    // Type
+    data.type = this._getType(data.actor.data);
 
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the NPC type formatted as a string.
+   * @param {object} actorData                The Actor data being prepared.
+   * @returns {string}
+   * @private
+   */
+  _getType(actorData) {
+    let attr = actorData.details.type;
+    if ( getType(attr) !== "Object" ) return attr;
+
+    let localizedType;
+    if ( attr.value === "custom" ) {
+      localizedType = attr.custom;
+    } else {
+      let code = CONFIG.DND5E.creatureTypes[attr.value];
+      localizedType = game.i18n.localize(attr.swarm.isSwarm ? `${code}Pl` : code);
+    }
+
+    let type = localizedType;
+    if (attr.swarm.isSwarm) {
+      type = game.i18n.format('DND5E.CreatureSwarmPhrase', {
+        size: game.i18n.localize(CONFIG.DND5E.actorSizes[attr.swarm.size]),
+        type: localizedType
+      });
+    }
+
+    if (attr.subtype) type = `${type} (${attr.subtype})`;
+
+    return type;
   }
 
   /* -------------------------------------------- */

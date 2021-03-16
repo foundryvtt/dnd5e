@@ -16,41 +16,6 @@ export default class Actor5e extends Actor {
     return this.getFlag("dnd5e", "isPolymorphed") || false;
   }
 
-  /**
-   * Complete type for NPCs.
-   * @return {string}
-   */
-  get localizedType() {
-    if (this.data.type !== "npc") return "";
-
-    let attr = this.data.data.details.type;
-    if ( getType(attr) !== "Object" ) return attr;
-
-    let localizedType;
-    if ( attr.value === "custom" ) {
-      localizedType = attr.custom;
-    } else {
-      let code = CONFIG.DND5E.creatureTypes[attr.value];
-      localizedType = game.i18n.localize(attr.swarm.isSwarm ? `${code}Pl` : code);
-    }
-
-    let type;
-    if (attr.swarm.isSwarm) {
-      type = game.i18n.format('DND5E.CreatureSwarmPhrase', {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[attr.swarm.size]),
-        type: localizedType
-      });
-    } else {
-      type = localizedType;
-    }
-
-    if (attr.subtype) {
-      type = `${type} (${attr.subtype})`;
-    }
-
-    return type;
-  }
-
   /* -------------------------------------------- */
 
   /** @override */
