@@ -86,7 +86,7 @@ Hooks.once("init", function() {
 
   // Patch Core Functions
   CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
-  Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+  Combatant.prototype._getInitiativeFormula = _getInitiativeFormula;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
