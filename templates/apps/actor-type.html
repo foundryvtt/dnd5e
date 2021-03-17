@@ -5,7 +5,7 @@
             <label class="radio">
                 <input type="radio" name="value" value="{{key}}" data-dtype="String" {{checked type.chosen}}>
                 {{#if (eq key "custom") }}
-                    <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
+                    <input type="text" name="custom" value="{{../custom}}" data-dtype="String"/>
                 {{else}}
                     {{type.label}}
                 {{/if}}
