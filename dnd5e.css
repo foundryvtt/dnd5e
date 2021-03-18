@@ -1549,6 +1549,9 @@
 .dnd5e.sheet.actor.npc .summary .creature-type span {
   position: relative;
 }
+.dnd5e.sheet.actor.npc .summary .creature-type:hover input {
+  padding-right: 1em;
+}
 .dnd5e.sheet.actor.npc .summary .creature-type .config-button {
   position: absolute;
   display: none;
