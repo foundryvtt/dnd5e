@@ -529,8 +529,21 @@
   height: 24px;
   margin: 2px;
 }
+#actor-type .trait-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+#actor-type .trait-list li {
+  flex-basis: 50%;
+  flex-grow: 1;
+  padding-left: 0.25em;
+}
 #actor-type label.radio {
   font-size: 12px;
+  line-height: 2.2em;
+}
+#actor-type label.radio input {
+  margin-right: 0.33em;
 }
 #actor-type label.checkbox {
   font-size: 13px;
