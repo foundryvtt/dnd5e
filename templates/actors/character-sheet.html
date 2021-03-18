@@ -165,16 +165,16 @@
                                    placeholder="{{res.placeholder}}" />
                         </h4>
                         <div class="attribute-value">
-                            <label class="recharge checkbox">
-                                {{ localize "DND5E.AbbreviationSR" }}<br /><input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
+                            <label class="recharge checkbox flexcol">
+                                <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
                             </label>
 
                             <input name="data.resources.{{res.name}}.value" type="number" value="{{res.value}}" placeholder="0"/>
                             <span class="sep"> / </span>
                             <input name="data.resources.{{res.name}}.max" type="number" value="{{res.max}}" placeholder="0"/>
 
-                            <label class="recharge checkbox">
-                                {{ localize "DND5E.AbbreviationLR" }}<br /><input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
+                            <label class="recharge checkbox flexcol">
+                                <span>{{ localize "DND5E.AbbreviationLR" }}</span><input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
                             </label>
                         </div>
                     </li>
