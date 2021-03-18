@@ -493,8 +493,23 @@
 }
 
 #actor-type {
+  .trait-list {
+    display: flex;
+    flex-wrap: wrap;
+    
+    li {
+      flex-basis: 50%;
+      flex-grow: 1;
+      padding-left: 0.25em;
+    }
+  }
   label.radio {
     font-size: 12px;
+    line-height: 2.2em;
+
+    input {
+      margin-right: 0.33em;
+    }
   }
 
   label.checkbox {
