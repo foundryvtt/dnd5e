@@ -1,4 +1,5 @@
 import ActorSheet5e from "../sheets/base.js";
+import { formCreatureType } from "../shared.js";
 
 /**
  * An Actor sheet for NPC type characters.
@@ -96,27 +97,9 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   _getType(actorData) {
     let attr = actorData.details.type;
     if ( getType(attr) !== "Object" ) return attr;
-
-    let localizedType;
-    if ( attr.value === "custom" ) {
-      localizedType = attr.custom;
-    } else {
-      let code = CONFIG.DND5E.creatureTypes[attr.value];
-      localizedType = game.i18n.localize(attr.swarm.isSwarm ? `${code}Pl` : code);
-    }
-
-    let type = localizedType;
-    if (attr.swarm.isSwarm) {
-      type = game.i18n.format('DND5E.CreatureSwarmPhrase', {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[attr.swarm.size]),
-        type: localizedType
-      });
-    }
-
-    if (attr.subtype) type = `${type} (${attr.subtype})`;
-
-    return type;
+    return formCreatureType(attr);
   }
+
 
   /* -------------------------------------------- */
   /*  Object Updates                              */
