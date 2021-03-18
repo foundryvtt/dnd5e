@@ -1,3 +1,6 @@
+import { formCreatureType } from "../actor/shared.js";
+
+
 /**
  * A specialized form used to select from a checklist of attributes, traits, or properties
  * @implements {FormApplication}
@@ -53,7 +56,8 @@ export default class ActorTypeConfig extends FormApplication {
       subtype: attr.subtype,
       swarm: attr.swarm,
       custom: attr.custom,
-      sizes: CONFIG.DND5E.actorSizes
+      sizes: CONFIG.DND5E.actorSizes,
+      preview: formCreatureType(attr) || "–"
     }
   }
 
@@ -75,6 +79,14 @@ export default class ActorTypeConfig extends FormApplication {
     html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this, html));
   }
 
+  /** @override */
+  _onChangeInput(event) {
+    super._onChangeInput(event);
+
+    const typeObject = foundry.utils.expandObject(this._getSubmitData());
+    this._element.find(".type-preview").text(formCreatureType(typeObject) || "—");
+  }
+
   /**
    * Select the custom radio button when the custom text field is focused.
    * @param {Event} event     The original click event
@@ -82,5 +94,6 @@ export default class ActorTypeConfig extends FormApplication {
    */
   _onCustomFieldFocused(html, event) {
     html.find("input[name='value']").val(["custom"]);
+    this._onChangeInput(event);
   }
 }

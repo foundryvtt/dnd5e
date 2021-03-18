@@ -1,4 +1,8 @@
 <form autocomplete="off" onsubmit="event.preventDefault();">
+    <div class="form-group">
+      <label>{{ localize "DND5E.Type" }}</label>
+      <span class="type-preview tag">{{preview}}</span>
+    </div>
     <ol class="trait-list">
         {{#each types as |type key|}}
         <li>
