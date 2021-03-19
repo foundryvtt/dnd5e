@@ -76,7 +76,11 @@ export default class ActorTypeConfig extends FormApplication {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-    html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this, html));
+    html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this, html[0]));
+    html.find("input[name='swarm.isSwarm']").change(this._onSwarmCheckboxChanged.bind(this, html[0]));
+
+    // Set initial visibility
+    this._onSwarmCheckboxChanged(html[0]);
   }
 
   /** @override */
@@ -89,11 +93,23 @@ export default class ActorTypeConfig extends FormApplication {
 
   /**
    * Select the custom radio button when the custom text field is focused.
-   * @param {Event} event     The original click event
+   * @param {HTMLElement} html      HTML object of the form area
+   * @param {Event} event           The original click event
    * @private
    */
   _onCustomFieldFocused(html, event) {
-    html.find("input[name='value']").val(["custom"]);
+    html.querySelector("input[name='value'][value='custom']").checked = true;
     this._onChangeInput(event);
+  }
+
+  /**
+   * Toggle the visibility of the swarm size field when the swarm checkbox is changed.
+   * @param {HTMLElement} html      HTML object of the form area
+   * @param {Event} event           The original click event
+   * @private
+   */
+  _onSwarmCheckboxChanged(html, event) {
+    const checked = html.querySelector("input[name='swarm.isSwarm']").checked;
+    html.querySelector("select[name='swarm.size']").parentElement.style.opacity = checked ? 1 : 0;
   }
 }
