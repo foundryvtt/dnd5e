@@ -3,7 +3,7 @@
       <label>{{ localize "DND5E.Type" }}</label>
       <span class="type-preview tag">{{preview}}</span>
     </div>
-    <ol class="trait-list">
+    <ul class="trait-list">
         {{#each types as |type key|}}
         <li>
             <label class="radio">
@@ -16,7 +16,7 @@
             </label>
         </li>
         {{/each}}
-    </ol>
+    </ul>
     <div class="form-group stacked">
         <label>{{ localize "DND5E.CreatureTypeSelectorSubtype" }}</label>
         <input type="text" name="subtype" value="{{subtype}}" data-dtype="String"/>
