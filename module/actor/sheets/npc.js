@@ -81,7 +81,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Type
-    data.type = this._getType(data.actor.data);
+    data.labels["type"] = this._getType(data.actor.data);
 
     return data;
   }
