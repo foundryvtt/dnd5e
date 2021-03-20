@@ -1,30 +1,34 @@
-# Foundry Virtual Tabletop - DnD5e Game System
+# Dungeons and Destiny - FoundryVTT
 
-This game system for [Foundry Virtual Tabletop](http://foundryvtt.com) provides character sheet and game system 
-support for the Fifth Edition of the world's most popular roleplaying game.
+This game system for [Foundry Virtual Tabletop][foundryvtt] provides character
+sheet and game system support for [Dungeons and Destiny][dndestiny], a hack of
+5th edition Dungeons & Dragons based on the Destiny video game series. This
+FoundryVTT system was originally forked from
+[Foundry VTT 5th Edition][foundryvtt-5e].
 
-This system is offered and may be used under the terms of the Open Gaming License v1.0a and its accompanying
-[Systems Reference Document 5.1 (SRD5)](http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf).
+If you enjoy this system, please consider [supporting the creators]
+[dndestiny-support] by following them on social media and donating to their
+Patreon.
 
-This system provides character sheet support for Actors and Items, mechanical support for dice and rules necessary to
-play games of 5th Edition, and compendium content for Monsters, Heroes, Items, Spells, Class Features, Monster 
-Features, and more!
+This system is offered and may be used under the terms of the Open Gaming
+License v1.0a and its accompanying
+[Systems Reference Document 5.1 (SRD5)][srd5].
 
 The software component of this system is distributed under the GNUv3 license.
 
 ## Installation Instructions
 
-To install and use the DnD5e system for Foundry Virtual Tabletop, simply paste the following URL into the 
-**Install System** dialog on the Setup menu of the application.
+To install and use the system for Foundry Virtual Tabletop, simply paste the
+following URL into the **Install System** dialog on the Setup menu of the
+application.
 
-https://gitlab.com/foundrynet/dnd5e/raw/master/system.json
+https://gitlab.com/dndestiny-vtt/dndestiny-foundryvtt/raw/master/system.json
 
-If you wish to manually install the system, you must clone or extract it into the ``Data/systems/dnd5e`` folder. You
-may do this by cloning the repository or downloading a zip archive from the
-[Releases Page](https://gitlab.com/foundrynet/dnd5e/-/releases).
+If you wish to manually install the system, you must clone or extract it into
+the ``Data/systems/dndestiny-foundryvtt`` folder.
 
-## Community Contribution
-
-Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge
-requests for code changes. Approval for such requests involves code and (if necessary) design review by Atropos. Please
-reach out on the Foundry Community Discord with any questions.
+[dndestiny]: https://dndestinyproject.com/
+[dndestiny-support]: https://dndestinyproject.com/support
+[foundryvtt]: http://foundryvtt.com
+[foundryvtt-5e]: https://gitlab.com/foundrynet/dnd5e
+[srd5]: http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
