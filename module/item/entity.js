@@ -633,7 +633,7 @@ export default class Item5e extends Item {
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
-      tokenId: token ? `${token.scene._id}.${token.id}` : null,
+      tokenId: token?.uuid || null,
       item: this.data,
       data: this.getChatData(),
       labels: this.labels,
@@ -1197,7 +1197,7 @@ export default class Item5e extends Item {
     if ( !( isTargetted || game.user.isGM || message.isAuthor ) ) return;
 
     // Recover the actor for the chat card
-    const actor = this._getChatCardActor(card);
+    const actor = await this._getChatCardActor(card);
     if ( !actor ) return;
 
     // Get the Item from stored flag data or by the item ID on the Actor
@@ -1265,15 +1265,11 @@ export default class Item5e extends Item {
    * @return {Actor|null}         The Actor entity or null
    * @private
    */
-  static _getChatCardActor(card) {
+  static async _getChatCardActor(card) {
 
     // Case 1 - a synthetic actor from a Token
-    const tokenKey = card.dataset.tokenId;
-    if (tokenKey) {
-      const [sceneId, tokenId] = tokenKey.split(".");
-      const scene = game.scenes.get(sceneId);
-      if (!scene) return null;
-      const token = scene.tokens.get(tokenId);
+    if ( card.dataset.tokenId ) {
+      const token = await fromUuid(card.dataset.tokenId);
       if ( !token ) return null;
       return token.actor;
     }
