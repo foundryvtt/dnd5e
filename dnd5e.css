@@ -1559,19 +1559,22 @@
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type span {
-  position: relative;
+.dnd5e.sheet.actor.npc .summary .creature-type {
+  display: flex;
+  justify-content: space-between;
+  width: 1em;
+  padding: 0 3px;
 }
-.dnd5e.sheet.actor.npc .summary .creature-type:hover input {
-  padding-right: 1em;
+.dnd5e.sheet.actor.npc .summary .creature-type span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .dnd5e.sheet.actor.npc .summary .creature-type .config-button {
-  position: absolute;
   display: none;
-  right: 4px;
-  top: 0;
   font-size: 12px;
   font-weight: normal;
+  line-height: 2em;
 }
 .dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
   display: block;
