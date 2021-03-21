@@ -32,21 +32,22 @@
     font-size: 18px;
 
     .creature-type {
-      span {
-        position: relative;
-      }
+      display: flex;
+      justify-content: space-between;
+      width: 1em;
+      padding: 0 3px;
 
-      &:hover input {
-        padding-right: 1em;
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .config-button {
-        position: absolute;
         display: none;
-        right: 4px;
-        top: 0;
         font-size: 12px;
         font-weight: normal;
+        line-height: 2em;
       }
       &:hover .config-button {
         display: block;
