@@ -89,18 +89,76 @@
                 </div>
             </div>
 
+            <div>
+                <h2>{{ localize "DND5E.ProficiencyPl" }}</h2>
+            </div>
+
             <div class="form-group">
                 <label>
-                    {{ localize "DND5E.ClassSaves" }}
+                    {{ localize "DND5E.Armor" }}
                     {{#if editable}}
-                    <a class="trait-selector class-saves" data-target="data.saves" data-options="saves">
+                    <a class="trait-selector class-armor" data-target="data.proficiencies.armor" data-options="armor">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.saves.value}}
+                        {{#each data.proficiencies.armor.selected as |v k|}}
+                            <li class="tag {{k}}">{{v}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    {{ localize "DND5E.ItemTypeWeaponPl" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-weapon" data-target="data.proficiencies.weapons" data-options="weapons">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.proficiencies.weapons.selected as |v k|}}
+                            <li class="tag {{k}}">{{v}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    {{ localize "DND5E.ItemTypeToolPl" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-tool" data-target="data.proficiencies.tools" data-options="tools">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.proficiencies.tools.selected as |v k|}}
+                            <li class="tag {{k}}">{{v}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    {{ localize "DND5E.ClassSaves" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-saves" data-target="data.proficiencies.saves" data-options="saves">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.proficiencies.saves.value}}
                             <li class="tag {{this}}">{{lookup ../config.abilities this}}</li>
                         {{/each}}
                     </ul>
@@ -111,7 +169,7 @@
             <div class="form-group">
                 <label>{{localize "DND5E.ClassSkillsNumber"}}</label>
                 <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.skills.number" value="{{data.skills.number}}" data-dtype="Number"/>
+                    <input type="text" placeholder="0" name="data.proficiencies.skills.number" value="{{data.proficiencies.skills.number}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -119,13 +177,13 @@
                 <label>
                     {{localize "DND5E.ClassSkillsChosen"}}
                     {{#if editable }}
-                    <a class="trait-selector class-skills" data-target="data.skills" data-options="skills">
+                    <a class="trait-selector class-skills" data-target="data.proficiencies.skills" data-options="skills">
                         <i class="fas fa-edit"></i></a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.skills.value}}
+                        {{#each data.proficiencies.skills.value}}
                             <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
                         {{/each}}
                     </ul>

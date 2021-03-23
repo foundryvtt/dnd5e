@@ -502,13 +502,27 @@
       "subclass": "",
       "hitDice": "d6",
       "hitDiceUsed": 0,
-      "saves": {
-        "value": []
-      },
-      "skills": {
-        "number": 2,
-        "choices": [],
-        "value": []
+      "proficiencies": {
+        "armor": {
+          "value": [],
+          "custom": ""
+        },
+        "weapons": {
+          "value": [],
+          "custom": ""
+        },
+        "tools": {
+          "value": [],
+          "custom": ""
+        },
+        "saves": {
+          "value": []
+        },
+        "skills": {
+          "number": 2,
+          "value": [],
+          "choices": []
+        }
       },
       "spellcasting": "none"
     },
