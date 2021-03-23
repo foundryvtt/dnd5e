@@ -320,17 +320,28 @@ export default class ItemSheet5e extends ItemSheet {
       name: a.dataset.target,
       title: a.parentElement.innerText,
       choices: [],
-      allowCustom: false
+      allowCustom: true
     };
     switch(a.dataset.options) {
+      case 'armor':
+        options.choices = CONFIG.DND5E.armorProficiencies;
+        break;
+      case 'weapons':
+        options.choices = CONFIG.DND5E.weaponProficiencies;
+        break;
+      case 'tools':
+        options.choices = CONFIG.DND5E.toolProficiencies;
+        break;
       case 'saves':
         options.choices = CONFIG.DND5E.abilities;
+        options.allowCustom = false;
         options.valueKey = null;
         break;
       case 'skills':
         const skills = this.item.data.data.skills;
         const choiceSet = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
         options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(skill => choiceSet.includes(skill[0])));
+        options.allowCustom = false;
         options.maximum = skills.number;
         break;
     }
