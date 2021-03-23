@@ -877,10 +877,8 @@ export default class Item5e extends Item {
     }
 
     // Elven Accuracy
-    if ( ["weapon", "spell", "feat"].includes(this.data.type) ) {
-      if (flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod)) {
-        rollConfig.elvenAccuracy = true;
-      }
+    if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
+      rollConfig.elvenAccuracy = true;
     }
 
     // Apply Halfling Lucky
