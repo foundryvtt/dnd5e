@@ -64,22 +64,13 @@ export default class ActorHitDiceConfig extends DocumentSheet {
     /* -------------------------------------------- */
 
     /** @override */
-    _getSubmitData(updateData = {}) {
-        const fd = new FormDataExtended(this.form);
-        // formData maps the class item id as the key to the new hit dice quantity as the value
-        const formData = fd.toObject();
+    async _updateObject(event, formData) {
         const actorItems = this.object.items;
-        return Object.entries(formData).map(([id, hd]) => ({
+        const classUpdates = Object.entries(formData).map(([id, hd]) => ({
             _id: id,
             "data.hitDiceUsed": actorItems.get(id).data.data.levels - hd,
         }));
-    }
-
-    /* -------------------------------------------- */
-
-    /** @override */
-    async _updateObject(event, formData) {
-        return this.object.updateEmbeddedDocuments("Item", formData);
+        return this.object.updateEmbeddedDocuments("Item", classUpdates);
     }
 
     /* -------------------------------------------- */
