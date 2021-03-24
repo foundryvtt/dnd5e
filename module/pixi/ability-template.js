@@ -45,10 +45,12 @@ export default class AbilityTemplate extends MeasuredTemplate {
     }
 
     // Return the template constructed from the item data
-    const template = new this(templateData);
-    template.item = item;
-    template.actorSheet = item.actor?.sheet || null;
-    return template;
+    const cls = CONFIG.MeasuredTemplate.documentClass;
+    const template = new cls(templateData, {parent: canvas.scene});
+    const object = new this(template);
+    object.item = item;
+    object.actorSheet = item.actor?.sheet || null;
+    return object;
   }
 
   /* -------------------------------------------- */
