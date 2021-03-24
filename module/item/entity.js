@@ -228,15 +228,6 @@ export default class Item5e extends Item {
       if ( dam.parts ) {
         labels.damage = dam.parts.map(d => d[0]).join(" + ").replace(/\+ -/g, "- ");
         labels.damageTypes = dam.parts.map(d => C.damageTypes[d[1]]).join(", ");
-
-        if (this.isOwned) {
-          const rollData = this.getRollData();
-
-          labels.totalDamages = dam.parts.map((damagePart) => ({
-            formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
-            damageType: C.damageTypes[damagePart[1]],
-          }));
-        }
       }
     }
 
@@ -259,7 +250,35 @@ export default class Item5e extends Item {
 
       // Limited Uses
       this.prepareMaxUses();
+
+      // Damage Label
+      this.getDerivedDamageLabel();
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Populate a label with the compiled and simplified damage formula
+   * based on owned item actor data. This is only used for display
+   * purposes and is not related to Item5e#rollDamage
+   * 
+   * @returns {Array} array of objects with `formula` and `damageType`
+   */
+  getDerivedDamageLabel() {
+    const itemData = this.data.data;
+    if ( !this.hasAttack || !itemData || !this.isOwned ) return [];
+
+    const rollData = this.getRollData();
+
+    const derivedDamage = itemData.damage?.parts?.map((damagePart) => ({
+      formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
+      damageType: damagePart[1],
+    }));
+
+    this.labels.derivedDamage = derivedDamage
+
+    return derivedDamage;
   }
 
   /* -------------------------------------------- */
