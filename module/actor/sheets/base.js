@@ -1,6 +1,7 @@
 import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
+import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
 import {DND5E} from '../../config.js';
@@ -495,17 +496,22 @@ export default class ActorSheet5e extends ActorSheet {
   _onConfigMenu(event) {
     event.preventDefault();
     const button = event.currentTarget;
+    let app;
     switch ( button.dataset.action ) {
+      case "hit-dice":
+        app = new ActorHitDiceConfig(this.object);
+        break;
       case "movement":
-        new ActorMovementConfig(this.object).render(true);
+        app = new ActorMovementConfig(this.object);
         break;
       case "flags":
-        new ActorSheetFlags(this.object).render(true);
+        app = new ActorSheetFlags(this.object);
         break;
       case "senses":
-        new ActorSensesConfig(this.object).render(true);
+        app = new ActorSensesConfig(this.object);
         break;
     }
+    app?.render(true);
   }
 
   /* -------------------------------------------- */
