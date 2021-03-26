@@ -620,8 +620,8 @@ export default class ActorSheet5e extends ActorSheet {
       itemData = scroll.data;
     }
 
-    // Ignore certain statuses
     if ( itemData.data ) {
+      // Ignore certain statuses
       ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
 
       // Reset ATTUNED to REQUIRED
