@@ -1057,7 +1057,12 @@ export default class Actor5e extends Actor {
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
       parts.push("@prof");
-      data.prof = this.data.data.attributes.prof;
+      
+      if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
+        data.prof = this.data.data.attributes.prof;
+      } else {
+        data.prof = `1${this.proficiencyDice}`;
+      }
     }
 
     // Include a global actor ability save bonus
