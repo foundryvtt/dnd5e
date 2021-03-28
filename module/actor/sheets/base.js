@@ -626,9 +626,12 @@ export default class ActorSheet5e extends ActorSheet {
       itemData = scroll.data;
     }
 
-    // Ignore certain statuses
     if ( itemData.data ) {
-      ["attunement", "equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+      // Ignore certain statuses
+      ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+
+      // Downgrade ATTUNED to REQUIRED
+      itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
     }
 
     // Stack identical consumables
