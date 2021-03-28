@@ -40,6 +40,20 @@ export const registerSystemSettings = function() {
     onChange: rule => canvas.grid.diagonalRule = rule
   });
 
+  // Proficiency modifier type
+  game.settings.register("dnd5e", "proficiencyModifier", {
+    name: "SETTINGS.5eProfN",
+    hint: "SETTINGS.5eProfL",
+    scope: "world",
+    config: true,
+    default: "bonus",
+    type: String,
+    choices: {
+      "bonus": "SETTINGS.5eProfBonus",
+      "dice": "SETTINGS.5eProfDice"
+    }
+  });
+
   // Apply Dexterity as Initiative Tiebreaker
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",

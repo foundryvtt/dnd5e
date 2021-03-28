@@ -55,6 +55,13 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       ? game.i18n.localize("DND5E.AbbreviationKgs")
       : game.i18n.localize("DND5E.AbbreviationLbs");
 
+    // Proficiency Dice
+    if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
+      sheetData.labels["proficiency"] = HandlebarsHelpers.numberFormat(sheetData.data.attributes.prof, {"hash": {"decimals": 0, "sign": true}});
+    } else {
+      sheetData.labels["proficiency"] = `d${sheetData.data.attributes.prof * 2}`;
+    }
+
     // Return data for rendering
     return sheetData;
   }
