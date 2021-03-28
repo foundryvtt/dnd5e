@@ -1,3 +1,6 @@
+import { RollDialog } from "./dice/roll-dialog.js";
+import D20Roll from "./dice/d20-roll.js";
+
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
  *
@@ -63,6 +66,8 @@ function _isUnsupportedTerm(term) {
 }
 
 /* -------------------------------------------- */
+/* D20 Roll                                     */
+/* -------------------------------------------- */
 
 /**
  * A standardized helper function for managing core 5e "d20 rolls"
@@ -100,97 +105,36 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
   elvenAccuracy=false, halflingLucky=false, reliableTalent=false,
   chatMessage=true, messageData={}}={}) {
 
-  // Prepare Message Data
-  messageData.flavor = flavor || title;
-  messageData.speaker = speaker || ChatMessage.getSpeaker();
-  const messageOptions = {rollMode: rollMode || game.settings.get("core", "rollMode")};
-  parts = parts.concat(["@bonus"]);
+  const rollArgs = {
+    parts, data, event, rollMode, template, title, speaker, flavor,
+    fastForward, dialogOptions, advantage, disadvantage, critical, fumble, targetValue,
+    elvenAccuracy, halflingLucky, reliableTalent, chatMessage, messageData
+  };
+  const messageOptions = {};
 
-  // Handle fast-forward events
-  let adv = 0;
-  fastForward = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  if (fastForward) {
-    if ( advantage ?? event.altKey ) adv = 1;
-    else if ( disadvantage ?? (event.ctrlKey || event.metaKey) ) adv = -1;
+  d20RollComponents.prepareD20MessageData(messageOptions, rollArgs);
+
+  let { advantageMode, ff } = d20RollComponents.determineD20FastForward(rollArgs);
+
+  if ( !ff ) {
+    let formData = await RollDialog.d20Dialog({
+      title,
+      formula: parts.join(" + "),
+      defaultRollMode: messageOptions.rollMode,
+      defaultAbility: data?.item?.ability,
+      template
+    }, dialogOptions);
+
+    // If user canceled the roll dialog, quit early
+    if ( !formData ) return;
+    d20RollComponents.applyD20DialogData(formData, messageOptions, rollArgs);
+    advantageMode = d20RollComponents.determineDialogAdvantageMode(formData, rollArgs) ?? advantageMode;
   }
 
-  // Define the inner roll function
-  const _roll = (parts, adv, form) => {
+  // If no situational bonus was provided, remove the @bonus part from the formula
+  if ( !data.bonus?.length ) parts.findSplice(p => p === "@bonus");
 
-    // Determine the d20 roll and modifiers
-    let nd = 1;
-    let mods = halflingLucky ? "r1=1" : "";
-
-    // Handle advantage
-    if (adv === 1) {
-      nd = elvenAccuracy ? 3 : 2;
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
-      if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].advantage = true;
-      mods += "kh";
-    }
-
-    // Handle disadvantage
-    else if (adv === -1) {
-      nd = 2;
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
-      if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].disadvantage = true;
-      mods += "kl";
-    }
-
-    // Prepend the d20 roll
-    let formula = `${nd}d20${mods}`;
-    if (reliableTalent) formula = `{${nd}d20${mods},10}kh`;
-    parts.unshift(formula);
-
-    // Optionally include a situational bonus
-    if ( form ) {
-      data['bonus'] = form.bonus.value;
-      messageOptions.rollMode = form.rollMode.value;
-    }
-    if (!data["bonus"]) parts.pop();
-
-    // Optionally include an ability score selection (used for tool checks)
-    const ability = form ? form.ability : null;
-    if (ability && ability.value) {
-      data.ability = ability.value;
-      const abl = data.abilities[data.ability];
-      if (abl) {
-        data.mod = abl.mod;
-        messageData.flavor += ` (${CONFIG.DND5E.abilities[data.ability]})`;
-      }
-    }
-
-    // Execute the roll
-    let roll = new Roll(parts.join(" + "), data);
-    try {
-      roll.roll();
-    } catch (err) {
-      console.error(err);
-      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-      return null;
-    }
-
-    // Flag d20 options for any 20-sided dice in the roll
-    for (let d of roll.dice) {
-      if (d.faces === 20) {
-        d.options.critical = critical;
-        d.options.fumble = fumble;
-        if ( adv === 1 ) d.options.advantage = true;
-        else if ( adv === -1 ) d.options.disadvantage = true;
-        if (targetValue) d.options.target = targetValue;
-      }
-    }
-
-    // If reliable talent was applied, add it to the flavor text
-    if (reliableTalent && roll.dice[0].total < 10) {
-      messageData.flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
-    }
-    return roll;
-  };
-
-  // Create the Roll instance
-  const roll = fastForward ? _roll(parts, adv) :
-    await _d20RollDialog({template, title, parts, data, rollMode: messageOptions.rollMode, dialogOptions, roll: _roll});
+  const roll = new D20Roll(parts.join(" + "), data, { advantageMode, critical, fumble, targetValue, elvenAccuracy, halflingLucky, reliableTalent }).evaluate();
 
   // Create a Chat Message
   if ( roll && chatMessage ) roll.toMessage(messageData, messageOptions);
@@ -200,48 +144,85 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 /* -------------------------------------------- */
 
 /**
- * Present a Dialog form which creates a d20 roll once submitted
- * @return {Promise<Roll>}
- * @private
+ * Sets up some initial message data and options for a call to d20Roll
+ * @param {Object} messageOptions     Options to be passed to `ChatMessage.create` later
+ * @param {Object} rollArgs           The options passed into the original call to d20Roll
  */
-async function _d20RollDialog({template, title, parts, data, rollMode, dialogOptions, roll}={}) {
+function prepareD20MessageData(messageOptions, rollArgs) {
+  let { messageData, flavor, title, speaker, rollMode, parts } = rollArgs;
 
-  // Render modal dialog
-  template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
-  let dialogData = {
-    formula: parts.join(" + "),
-    data: data,
-    rollMode: rollMode,
-    rollModes: CONFIG.Dice.rollModes,
-    config: CONFIG.DND5E
-  };
-  const html = await renderTemplate(template, dialogData);
-
-  // Create the Dialog window
-  return new Promise(resolve => {
-    new Dialog({
-      title: title,
-      content: html,
-      buttons: {
-        advantage: {
-          label: game.i18n.localize("DND5E.Advantage"),
-          callback: html => resolve(roll(parts, 1, html[0].querySelector("form")))
-        },
-        normal: {
-          label: game.i18n.localize("DND5E.Normal"),
-          callback: html => resolve(roll(parts, 0, html[0].querySelector("form")))
-        },
-        disadvantage: {
-          label: game.i18n.localize("DND5E.Disadvantage"),
-          callback: html => resolve(roll(parts, -1, html[0].querySelector("form")))
-        }
-      },
-      default: "normal",
-      close: () => resolve(null)
-    }, dialogOptions).render(true);
-  });
+  messageData.flavor = flavor || title;
+  messageData.speaker = speaker || ChatMessage.getSpeaker();
+  messageOptions.rollMode = rollMode || game.settings.get("core", "rollMode");
+  parts.push("@bonus");
 }
 
+/* -------------------------------------------- */
+
+/**
+ * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * @param {Object} rollArgs                The options passed into the original call to d20Roll
+ * @returns {{ ff: boolean, advantageMode: D20Roll.ADV_MODE }}
+ */
+function determineD20FastForward(rollArgs) {
+  let { fastForward, advantage, disadvantage, event } = rollArgs;
+
+  let advantageMode = D20Roll.ADV_MODE.NORMAL;
+  const ff = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+  if (ff) {
+    if ( advantage ?? event.altKey ) advantageMode = D20Roll.ADV_MODE.ADV;
+    else if ( disadvantage ?? (event.ctrlKey || event.metaKey) ) advantageMode = D20Roll.ADV_MODE.DISADV;
+  }
+
+  return { advantageMode, ff };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Applies the results from the provided d20 roll dialog form data to the roll data and messageData.
+ * @param {Object} formData         The form data from the d20 roll dialog
+ * @param {Object} messageOptions   Options for the resulting ChatMessage
+ * @param {Object} rollArgs         Options passed into the original call to d20Roll
+
+ */
+function applyD20DialogData(formData, messageOptions, rollArgs) {
+  let { data, messageData } = rollArgs;
+
+  // Optionally include a situational bonus
+  data.bonus = formData.bonus;
+
+  // Set roll mode override
+  messageOptions.rollMode = formData.rollMode;
+
+  // Optionally include an ability score selection (used for tool checks)
+  if (formData.ability) {
+    data.ability = formData.ability;
+    const abl = data.abilities[data.ability];
+    if (abl) {
+      data.mod = abl.mod;
+      messageData.flavor += ` (${CONFIG.DND5E.abilities[data.ability]})`;
+    }
+  }
+}
+
+/* -------------------------------------------- */
+
+function determineDialogAdvantageMode(formData, rollArgs) {
+  return formData.buttonSelection;
+}
+
+/* -------------------------------------------- */
+
+export const d20RollComponents = {
+  prepareD20MessageData,
+  determineD20FastForward,
+  applyD20DialogData,
+  determineDialogAdvantageMode
+}
+
+/* -------------------------------------------- */
+/* Damage Roll                                  */
 /* -------------------------------------------- */
 
 /**
