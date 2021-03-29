@@ -1214,7 +1214,17 @@ export default class Item5e extends Item {
 
     // Include a proficiency score
     const prof = ("proficient" in rollData.item) ? (rollData.item.proficient || 0) : 1;
-    rollData["prof"] = Math.floor(prof * (rollData.attributes.prof || 0));
+    if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
+      rollData["prof"] = Math.floor(prof * (rollData.attributes.prof || 0));
+    } else {
+      if (prof === 0.5) {
+        rollData["prof"] = `1d${(rollData.attributes.prof || 0)}`;
+      } else if (prof >= 1) {
+        rollData["prof"] = `${prof}d${(rollData.attributes.prof || 1) * 2}`;
+      } else {
+        rollData["prof"] = 0;
+      }
+    }
     return rollData;
   }
 
