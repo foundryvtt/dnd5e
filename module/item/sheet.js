@@ -345,6 +345,7 @@ export default class ItemSheet5e extends ItemSheet {
         options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(skill => choiceSet.includes(skill[0])));
         options.minimum = skills.number;
         options.maximum = skills.number;
+        options.allowCustom = false;
         break;
     }
 
