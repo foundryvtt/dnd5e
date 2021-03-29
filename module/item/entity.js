@@ -248,15 +248,15 @@ export default class Item5e extends Item {
       "saves": CONFIG.DND5E.abilities,
       "skills": CONFIG.DND5E.skills
     };
-    for ( let [t, choices] of Object.entries(map) ) {
-      const prof = profs[t];
+    for ( let [p, choices] of Object.entries(map) ) {
+      const prof = profs[p];
       if ( !prof ) continue;
       let values = [];
       if ( prof.value ) {
         values = prof.value instanceof Array ? prof.value : [prof.value];
       }
       prof.selected = values.reduce((obj, p) => {
-        obj[t] = choices[p];
+        obj[p] = choices[p];
         return obj;
       }, {});
 
