@@ -153,6 +153,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the amount of experience required to gain a certain character level.
+   *
    * @param level {number}  The desired level
    * @return {number}       The XP required
    */
@@ -165,6 +166,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the amount of experience granted by killing a creature of a certain CR.
+   *
    * @param cr {number}     The creature's challenge rating
    * @return {number}       The amount of experience granted per kill
    */
@@ -234,6 +236,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the features which a character is awarded for each class level.
+   *
    * @param {object} changes              Information on the changes to the class
    * @param {string} changes.className    The class name being added
    * @param {string} changes.subclassName The subclass of the class being added, if any
@@ -286,6 +289,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare Character type specific data.
+   *
    * @private
    */
   _prepareCharacterData(actorData) {
@@ -319,6 +323,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare NPC type specific data.
+   *
    * @private
    */
   _prepareNPCData(actorData) {
@@ -340,6 +345,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare vehicle type-specific data.
+   *
    * @param actorData
    * @private
    */
@@ -349,6 +355,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare skill checks.
+   *
    * @param actorData
    * @param bonuses Global bonus data.
    * @param checkBonus Ability check specific bonus.
@@ -557,6 +564,7 @@ export default class Actor5e extends Actor {
    *
    * Optionally include the weight of carried currency across all denominations by applying the standard rule
    * from the PHB pg. 143.
+   *
    * @param {object} actorData      The data object for the Actor being rendered
    * @return {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
@@ -670,6 +678,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Apply a certain amount of damage or healing to the health pool for Actor.
+   *
    * @param {number} amount       An amount of damage (positive) or healing (negative) to sustain
    * @param {number} multiplier   A multiplier which allows for resistance, vulnerability, or healing
    * @return {Promise<Actor>}     A Promise which resolves once the damage has been applied
@@ -708,6 +717,7 @@ export default class Actor5e extends Actor {
   /**
    * Roll a Skill Check.
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus.
+   *
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {object} options      Options which configure how the skill check is rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
@@ -760,6 +770,7 @@ export default class Actor5e extends Actor {
   /**
    * Roll a generic ability test or saving throw.
    * Prompt the user for input on which variety of roll they want to do.
+   *
    * @param {string}abilityId     The ability id (e.g. "str")
    * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
@@ -786,6 +797,7 @@ export default class Actor5e extends Actor {
   /**
    * Roll an Ability Test.
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus.
+   *
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
@@ -840,6 +852,7 @@ export default class Actor5e extends Actor {
   /**
    * Roll an Ability Saving Throw.
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus.
+   *
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
@@ -888,6 +901,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Perform a death saving throw, rolling a d20 plus any global save bonuses.
+   *
    * @param {object} options        Additional options which modify the roll
    * @return {Promise<Roll|null>}   A Promise which resolves to the Roll instance
    */
@@ -989,6 +1003,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.
+   *
    * @param {string} [denomination]   The hit denomination of hit die to roll. Example "d8".
    *                                  If no denomination is provided, the first available HD will be used
    * @param {boolean} [dialog]        Show a dialog prompt for configuring the hit die roll?
@@ -1388,6 +1403,7 @@ export default class Actor5e extends Actor {
   /**
    * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being.
    * carried by an Actor.
+   *
    * @return {Promise<Actor5e>}
    */
   convertCurrency() {
@@ -1610,6 +1626,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Add additional system-specific sidebar directory context menu options for Actor entities.
+   *
    * @param {jQuery} html         The sidebar HTML
    * @param {Array} entryOptions  The default array of context menu options
    */
@@ -1710,6 +1727,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Cast a Spell, consuming a spell slot of a certain level.
+   *
    * @param {Item5e} item   The spell being cast by the actor
    * @param {Event} event   The originating user interaction which triggered the cast
    * @deprecated since dnd5e 1.2.0

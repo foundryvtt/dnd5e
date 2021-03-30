@@ -1,5 +1,6 @@
 /**
- * An application class which provides advanced configuration for special character flags which modify an Actor
+ * An application class which provides advanced configuration for special character flags which modify an Actor.
+ *
  * @implements {DocumentSheet}
  */
 export default class ActorSheetFlags extends DocumentSheet {
@@ -36,6 +37,7 @@ export default class ActorSheetFlags extends DocumentSheet {
 
   /**
    * Prepare an object of sorted classes.
+   *
    * @return {object}
    * @private
    */
@@ -74,6 +76,7 @@ export default class ActorSheetFlags extends DocumentSheet {
 
   /**
    * Get the bonuses fields and their localization strings.
+   *
    * @return {Array<object>}
    * @private
    */

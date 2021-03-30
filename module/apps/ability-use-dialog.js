@@ -1,5 +1,6 @@
 /**
  * A specialized Dialog subclass for ability usage.
+ *
  * @type {Dialog}
  */
 export default class AbilityUseDialog extends Dialog {
@@ -9,6 +10,7 @@ export default class AbilityUseDialog extends Dialog {
 
     /**
      * Store a reference to the Item entity being used
+     *
      * @type {Item5e}
      */
     this.item = item;
@@ -21,6 +23,7 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
+   *
    * @param {Item5e} item
    * @return {Promise}
    */
@@ -84,6 +87,7 @@ export default class AbilityUseDialog extends Dialog {
 
   /**
    * Get dialog data related to limited spell slots.
+   *
    * @private
    */
   static _getSpellData(actorData, itemData, data) {
@@ -140,6 +144,7 @@ export default class AbilityUseDialog extends Dialog {
 
   /**
    * Get the ability usage note that is displayed.
+   *
    * @private
    */
   static _getAbilityUseNote(item, uses, recharge) {

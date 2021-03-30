@@ -1,5 +1,6 @@
 /**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs.
+ *
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
@@ -66,6 +67,7 @@ export const migrateWorld = async function() {
 
 /**
  * Apply migration rules to all Entities within a single Compendium pack.
+ *
  * @param pack
  * @return {Promise}
  */
@@ -121,6 +123,7 @@ export const migrateCompendium = async function(pack) {
 
 /**
  * Migrate a single Actor entity to incorporate latest data model changes.
+ *
  * @param {object} actor    The actor data object to update
  * @return {object}         The updateData to apply
  */
@@ -166,6 +169,7 @@ export const migrateActorData = function(actor) {
 
 /**
  * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template.
+ *
  * @param {object} actorData    The data object for an Actor
  * @return {object}             The scrubbed Actor data
  */
@@ -209,6 +213,7 @@ export const migrateItemData = function(item) {
 
 /**
  * Migrate a single Scene entity to incorporate changes to the data model of its actor data overrides.
+ *
  * @param {object} scene  The Scene data to Update
  * @return {object}       The updateData to apply
  */
@@ -249,6 +254,7 @@ export const migrateSceneData = function(scene) {
 
 /**
  * Migrate the actor speed string to movement object.
+ *
  * @private
  */
 function _migrateActorMovement(actorData, updateData) {
@@ -276,6 +282,7 @@ function _migrateActorMovement(actorData, updateData) {
 
 /**
  * Migrate the actor traits.senses string to attributes.senses object.
+ *
  * @private
  */
 function _migrateActorSenses(actor, updateData) {
@@ -445,6 +452,7 @@ function _migrateItemSpellcasting(item, updateData) {
 
 /**
  * A general tool to purge flags from all entities in a Compendium pack.
+ *
  * @param {Compendium} pack   The compendium pack to clean
  * @private
  */
@@ -474,6 +482,7 @@ export async function purgeFlags(pack) {
 
 /**
  * Purge the data model of any inner objects which have been flagged as _deprecated.
+ *
  * @param {object} data   The data to clean
  * @private
  */

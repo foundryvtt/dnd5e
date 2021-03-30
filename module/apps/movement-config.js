@@ -1,5 +1,6 @@
 /**
- * A simple form to set actor movement speeds
+ * A simple form to set actor movement speeds.
+ *
  * @extends {DocumentSheet}
  */
 export default class ActorMovementConfig extends DocumentSheet {

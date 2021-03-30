@@ -2,6 +2,7 @@ import LongRestDialog from "./long-rest.js";
 
 /**
  * A helper Dialog subclass for rolling Hit Dice on short rest.
+ *
  * @extends {Dialog}
  */
 export default class ShortRestDialog extends Dialog {
@@ -10,12 +11,14 @@ export default class ShortRestDialog extends Dialog {
 
     /**
      * Store a reference to the Actor entity which is resting.
+     *
      * @type {Actor}
      */
     this.actor = actor;
 
     /**
      * Track the most recently used HD denomination for re-rendering the form.
+     *
      * @type {string}
      */
     this._denom = null;
@@ -71,6 +74,7 @@ export default class ShortRestDialog extends Dialog {
 
   /**
    * Handle rolling a Hit Die as part of a Short Rest action.
+   *
    * @param {Event} event     The triggering click event
    * @private
    */
@@ -87,6 +91,7 @@ export default class ShortRestDialog extends Dialog {
   /**
    * A helper constructor function which displays the Short Rest dialog and returns a Promise once it's workflow has
    * been resolved.
+   *
    * @param {Actor5e} actor
    * @return {Promise}
    */
@@ -122,6 +127,7 @@ export default class ShortRestDialog extends Dialog {
   /**
    * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
    * workflow has been resolved.
+   *
    * @deprecated
    * @param {Actor5e} actor
    * @return {Promise}

@@ -3,6 +3,7 @@ import {onManageActiveEffect, prepareActiveEffectCategories} from "../effects.js
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
+ *
  * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
@@ -83,6 +84,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the valid item consumption targets which exist on the actor.
+   *
    * @param {object} item         Item data for the item being displayed
    * @return {{string: string}}   An object of potential consumption targets
    * @private
@@ -150,6 +152,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet.
+   *
    * @return {string}
    * @private
    */
@@ -169,6 +172,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the Array of item properties which are used in the small sidebar of the description tab.
+   *
    * @return {Array}
    * @private
    */
@@ -223,6 +227,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Is this item a separate large object like a siege engine or vehicle
    * component that is usually mounted on fixtures rather than equipped, and
    * has its own AC and HP.
+   *
    * @param item
    * @return {boolean}
    * @private
@@ -283,6 +288,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Add or remove a damage part from the damage formula.
+   *
    * @param {Event} event     The original click event
    * @return {Promise}
    * @private
@@ -312,6 +318,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Handle spawning the TraitSelector application for selection various options.
+   *
    * @param {Event} event   The click event which originated the selection
    * @private
    */

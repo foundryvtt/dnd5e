@@ -62,6 +62,7 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
 
 /**
  * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
+ *
  * @param {*} term - A single Dice term to check support on
  * @return {boolean} True when unsupported, false if supported
  */

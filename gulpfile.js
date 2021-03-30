@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const gulpIf = require('gulp-if');
 const less = require('gulp-less');
 const eslint = require('gulp-eslint');
 
@@ -19,12 +20,14 @@ const css = gulp.series(compileLESS);
 /*  Lint Javascript
 /* ----------------------------------------- */
 
+const applyFixes = process.argv.slice(2).includes('--fix');
 const DND5E_JS = [".eslintrc.json", "dnd5e.js", "module/**/*.js"];
 function lintJavascript() {
   return gulp
     .src("module/**/*.js")
-    .pipe(eslint({}))
-    .pipe(eslint.format());
+    .pipe(eslint({"fix": applyFixes}))
+    .pipe(eslint.format())
+    .pipe(gulpIf((file) => file.eslint != null && file.eslint.fixed, gulp.dest("module/")));
 }
 const jsLint = gulp.series(lintJavascript);
 
