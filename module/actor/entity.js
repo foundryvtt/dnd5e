@@ -1716,6 +1716,8 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Calculate Actor's spell save DC.
+   *
    * @deprecated since dnd5e 0.97
    */
   getSpellDC(ability) {
