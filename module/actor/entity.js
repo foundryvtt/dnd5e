@@ -51,13 +51,6 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Proficiency dice to be rolled if the proficiency dice variant rule is used.
-   * @return {String}
-   */
-  get proficiencyDice() {
-    return `d${this.data.data.attributes.prof * 2}`;
-  }
-  /**
    * Produce the correct proficiency term based on the provided static proficiency data
    * and whether the proficiency dice variant is selected.
    *
