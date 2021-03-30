@@ -319,7 +319,7 @@ export default class Item5e extends Item {
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
    *
-   * @return {Object} returns `rollData` and `parts` to be used in the item's Attack roll
+   * @return {object} returns `rollData` and `parts` to be used in the item's Attack roll
    */
   getAttackToHit() {
     const itemData = this.data.data;
@@ -711,8 +711,8 @@ export default class Item5e extends Item {
 
   /**
    * Prepare an object of chat data used to display a card for the Item in the chat log
-   * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
-   * @return {Object}               An object of chat data to render
+   * @param {object} htmlOptions    Options used by the TextEditor.enrichHTML function
+   * @return {object}               An object of chat data to render
    */
   getChatData(htmlOptions={}) {
     const data = foundry.utils.deepClone(this.data.data);
@@ -820,7 +820,7 @@ export default class Item5e extends Item {
 
   /**
    * Render a chat card for Spell type data
-   * @return {Object}
+   * @return {object}
    * @private
    */
   _spellChatData(data, labels, props) {
@@ -1140,7 +1140,7 @@ export default class Item5e extends Item {
 
   /**
    * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation
-   * @param {Object} options   Roll configuration options provided to the d20Roll function
+   * @param {object} options   Roll configuration options provided to the d20Roll function
    * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollToolCheck(options={}) {

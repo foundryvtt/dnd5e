@@ -123,7 +123,7 @@ export const migrateCompendium = async function(pack) {
  * Migrate a single Actor entity to incorporate latest data model changes
  * Return an Object of updateData to be applied
  * @param {object} actor    The actor data object to update
- * @return {Object}         The updateData to apply
+ * @return {object}         The updateData to apply
  */
 export const migrateActorData = function(actor) {
   const updateData = {};
@@ -167,8 +167,8 @@ export const migrateActorData = function(actor) {
 
 /**
  * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template
- * @param {Object} actorData    The data object for an Actor
- * @return {Object}             The scrubbed Actor data
+ * @param {object} actorData    The data object for an Actor
+ * @return {object}             The scrubbed Actor data
  */
 function cleanActorData(actorData) {
 
@@ -211,8 +211,8 @@ export const migrateItemData = function(item) {
 /**
  * Migrate a single Scene entity to incorporate changes to the data model of it's actor data overrides
  * Return an Object of updateData to be applied
- * @param {Object} scene  The Scene data to Update
- * @return {Object}       The updateData to apply
+ * @param {object} scene  The Scene data to Update
+ * @return {object}       The updateData to apply
  */
 export const migrateSceneData = function(scene) {
   const tokens = scene.tokens.map(token => {

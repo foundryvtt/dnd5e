@@ -5,8 +5,8 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
  *
  * @param {string} formula                 The original Roll formula
- * @param {Object} data                    Actor or item data against which to parse the roll
- * @param {Object} options                 Formatting options
+ * @param {object} data                    Actor or item data against which to parse the roll
+ * @param {object} options                 Formatting options
  * @param {boolean} options.constantFirst   Puts the constants before the dice terms in the resulting formula
  *
  * @return {string}                        The resulting simplified formula
@@ -63,7 +63,7 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
 /**
  * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
  * @param {*} term - A single Dice term to check support on
- * @return {Boolean} True when unsupported, false if supported
+ * @return {boolean} True when unsupported, false if supported
  */
 function _isUnsupportedTerm(term) {
 	const diceTerm = term instanceof DiceTerm;

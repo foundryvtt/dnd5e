@@ -10,7 +10,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Define default rendering options for the NPC sheet
-   * @return {Object}
+   * @return {object}
    */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {

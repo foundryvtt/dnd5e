@@ -83,7 +83,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the valid item consumption targets which exist on the actor
-   * @param {Object} item         Item data for the item being displayed
+   * @param {object} item         Item data for the item being displayed
    * @return {{string: string}}   An object of potential consumption targets
    * @private
    */

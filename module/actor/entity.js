@@ -153,8 +153,8 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the amount of experience required to gain a certain character level.
-   * @param level {Number}  The desired level
-   * @return {Number}       The XP required
+   * @param level {number}  The desired level
+   * @return {number}       The XP required
    */
   getLevelExp(level) {
     const levels = CONFIG.DND5E.CHARACTER_EXP_LEVELS;
@@ -165,8 +165,8 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the amount of experience granted by killing a creature of a certain CR.
-   * @param cr {Number}     The creature's challenge rating
-   * @return {Number}       The amount of experience granted per kill
+   * @param cr {number}     The creature's challenge rating
+   * @return {number}       The amount of experience granted per kill
    */
   getCRExp(cr) {
     if (cr < 1.0) return Math.max(200 * cr, 10);
@@ -234,7 +234,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the features which a character is awarded for each class level
-   * @param {Object} changes              Information on the changes to the class
+   * @param {object} changes              Information on the changes to the class
    * @param {string} changes.className    The class name being added
    * @param {string} changes.subclassName The subclass of the class being added, if any
    * @param {number} changes.level        The number of levels in the added class
@@ -555,7 +555,7 @@ export default class Actor5e extends Actor {
    *
    * Optionally include the weight of carried currency across all denominations by applying the standard rule
    * from the PHB pg. 143
-   * @param {Object} actorData      The data object for the Actor being rendered
+   * @param {object} actorData      The data object for the Actor being rendered
    * @return {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
    */
@@ -707,7 +707,7 @@ export default class Actor5e extends Actor {
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
-   * @param {Object} options      Options which configure how the skill check is rolled
+   * @param {object} options      Options which configure how the skill check is rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
@@ -758,8 +758,8 @@ export default class Actor5e extends Actor {
   /**
    * Roll a generic ability test or saving throw.
    * Prompt the user for input on which variety of roll they want to do.
-   * @param {String}abilityId     The ability id (e.g. "str")
-   * @param {Object} options      Options which configure how ability tests or saving throws are rolled
+   * @param {string}abilityId     The ability id (e.g. "str")
+   * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
@@ -784,8 +784,8 @@ export default class Actor5e extends Actor {
   /**
    * Roll an Ability Test
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {String} abilityId    The ability ID (e.g. "str")
-   * @param {Object} options      Options which configure how ability tests are rolled
+   * @param {string} abilityId    The ability ID (e.g. "str")
+   * @param {object} options      Options which configure how ability tests are rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
@@ -838,8 +838,8 @@ export default class Actor5e extends Actor {
   /**
    * Roll an Ability Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {String} abilityId    The ability ID (e.g. "str")
-   * @param {Object} options      Options which configure how ability tests are rolled
+   * @param {string} abilityId    The ability ID (e.g. "str")
+   * @param {object} options      Options which configure how ability tests are rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
@@ -886,7 +886,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Perform a death saving throw, rolling a d20 plus any global save bonuses
-   * @param {Object} options        Additional options which modify the roll
+   * @param {object} options        Additional options which modify the roll
    * @return {Promise<Roll|null>}   A Promise which resolves to the Roll instance
    */
   async rollDeathSave(options={}) {

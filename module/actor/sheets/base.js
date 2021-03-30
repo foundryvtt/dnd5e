@@ -244,7 +244,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Insert a spell into the spellbook object when rendering the character sheet
-   * @param {Object} data     The Actor data being prepared
+   * @param {object} data     The Actor data being prepared
    * @param {Array} spells    The spell data being prepared
    * @private
    */

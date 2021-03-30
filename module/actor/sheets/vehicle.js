@@ -8,7 +8,7 @@ import ActorSheet5e from "./base.js";
 export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Define default rendering options for the Vehicle sheet.
-   * @return {Object}
+   * @return {object}
    */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -39,8 +39,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /**
    * Compute the total weight of the vehicle's cargo.
-   * @param {Number} totalWeight    The cumulative item weight from inventory items
-   * @param {Object} actorData      The data object for the Actor being rendered
+   * @param {number} totalWeight    The cumulative item weight from inventory items
+   * @param {object} actorData      The data object for the Actor being rendered
    * @return {{max: number, value: number, pct: number}}
    * @private
    */

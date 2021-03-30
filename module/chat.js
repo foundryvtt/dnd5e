@@ -104,7 +104,7 @@ export const addChatMessageContextOptions = function(html, options) {
  * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
  *
  * @param {HTMLElement} li      The chat entry which contains the roll data
- * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
+ * @param {number} multiplier   A damage multiplier to apply to the rolled damage.
  * @return {Promise}
  */
 function applyChatCardDamage(li, multiplier) {
