@@ -11,7 +11,7 @@ const packs = require('./utils/packs.js');
 /*  Lint Javascript
 /* ----------------------------------------- */
 
-const DND5E_JS = ["dnd5e.js", "module/**/*.js"];
+const DND5E_JS = [".eslintrc.json", "dnd5e.js", "module/**/*.js"];
 function lintJavascript() {
   return gulp
     .src("module/**/*.js")
