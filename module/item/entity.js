@@ -361,7 +361,7 @@ export default class Item5e extends Item {
       if (this.actor.data === undefined) return;
 
       try {
-        max = Roll.replaceFormulaData(max, this.actor.getRollData());
+        max = Roll.replaceFormulaData(max, this.actor.getRollData(), {missing: 0, warn: true});
         if ( Roll.MATH_PROXY.safeEval ) max = Roll.MATH_PROXY.safeEval(max);
       } catch(e) {
         console.error('Problem preparing Max uses for', this.data.name, e);
@@ -423,6 +423,7 @@ export default class Item5e extends Item {
         if (spellLevel !== id.level) {
           item = this.clone({"data.level": spellLevel}, {keepId: true});
           item.data.update({_id: this.id}); // Retain the original ID (needed until 0.8.2+)
+          item.prepareFinalAttributes(); // Spell save DC, etc...
         }
         if ( consumeSpellSlot ) consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
       }
@@ -644,6 +645,8 @@ export default class Item5e extends Item {
     };
 
     // Render the chat card template
+    console.log(this.labels);
+    debugger;
     const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
     const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
