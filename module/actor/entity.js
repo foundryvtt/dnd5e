@@ -636,7 +636,7 @@ export default class Actor5e extends Actor {
    * Optionally include the weight of carried currency across all denominations by applying the standard rule
    * from the PHB pg. 143
    * @param {Object} actorData      The data object for the Actor being rendered
-   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
+   * @return {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
    */
   _computeEncumbrance(actorData) {
