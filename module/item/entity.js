@@ -133,7 +133,7 @@ export default class Item5e extends Item {
   get hasLimitedUses() {
     let chg = this.data.data.recharge || {};
     let uses = this.data.data.uses || {};
-    return !!chg.value || (!!uses.per && (uses.max > 0));
+    return !!chg.value || (uses.per && (uses.max > 0));
   }
 
   /* -------------------------------------------- */
