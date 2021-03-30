@@ -3,7 +3,6 @@ import ActorSheet5e from "../sheets/base.js";
 
 /**
  * An Actor sheet for NPC type characters.
- * Extends the base ActorSheet5e class.
  * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eNPC extends ActorSheet5e {
@@ -25,7 +24,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Organize Owned Items for rendering the NPC sheet
+   * Organize Owned Items for rendering the NPC sheet.
    * @private
    */
   _prepareItems(data) {
@@ -138,7 +137,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling NPC health values using the provided formula
+   * Handle rolling NPC health values using the provided formula.
    * @param {Event} event     The original click event
    * @private
    */

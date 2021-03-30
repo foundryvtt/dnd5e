@@ -142,7 +142,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare the display of movement speed data for the Actor*
+   * Prepare the display of movement speed data for the Actor.
    * @param {object} actorData                The Actor data being prepared.
    * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk"
    * @return {{primary: string, special: string}}
@@ -200,7 +200,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies
+   * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies.
    * @param {object} traits   The raw traits data object from the actor data
    * @private
    */
@@ -243,7 +243,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Insert a spell into the spellbook object when rendering the character sheet
+   * Insert a spell into the spellbook object when rendering the character sheet.
    * @param {object} data     The Actor data being prepared
    * @param {Array} spells    The spell data being prepared
    * @private
@@ -355,7 +355,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Determine whether an Owned Item will be shown based on the current set of filters
+   * Determine whether an Owned Item will be shown based on the current set of filters.
    * @return {boolean}
    * @private
    */
@@ -394,7 +394,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the font-awesome icon used to display a certain level of skill proficiency
+   * Get the font-awesome icon used to display a certain level of skill proficiency.
    * @private
    */
   _getProficiencyIcon(level) {
@@ -482,7 +482,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Iinitialize Item list filters by activating the set of filters which are currently applied
+   * Initialize Item list filters by activating the set of filters which are currently applied.
    * @private
    */
   _initializeFilterItemList(i, ul) {
@@ -498,7 +498,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
    * @param event
    * @private
    */
@@ -516,7 +516,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
    * @param {Event} event   The click event which originated the selection
    * @private
    */
@@ -550,7 +550,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle cycling proficiency in a Skill
+   * Handle cycling proficiency in a Skill.
    * @param {Event} event   A click or contextmenu event which triggered the handler
    * @private
    */
@@ -693,7 +693,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle enabling editing for a spell slot override value
+   * Handle enabling editing for a spell slot override value.
    * @param {MouseEvent} event    The originating click event
    * @private
    */
@@ -717,7 +717,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Change the uses amount of an Owned Item within the Actor
+   * Change the uses amount of an Owned Item within the Actor.
    * @param {Event} event   The triggering click event
    * @private
    */
@@ -733,7 +733,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method.
    * @private
    */
   _onItemRoll(event) {
@@ -746,7 +746,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle attempting to recharge an item usage by rolling a recharge check
+   * Handle attempting to recharge an item usage by rolling a recharge check.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -760,7 +760,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method.
    * @private
    */
   _onItemSummary(event) {
@@ -787,7 +787,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -807,7 +807,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle editing an existing Owned Item for the Actor
+   * Handle editing an existing Owned Item for the Actor.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -821,7 +821,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle deleting an existing Owned Item for the Actor
+   * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -835,7 +835,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling an Ability check, either a test or a saving throw
+   * Handle rolling an Ability check, either a test or a saving throw.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -848,7 +848,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling a Skill check
+   * Handle rolling a Skill check.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -861,7 +861,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling Ability score proficiency level
+   * Handle toggling Ability score proficiency level.
    * @param {Event} event     The originating click event
    * @private
    */
@@ -874,7 +874,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling of filters to display a different set of owned items
+   * Handle toggling of filters to display a different set of owned items.
    * @param {Event} event     The click event which triggered the toggle
    * @private
    */

@@ -32,7 +32,7 @@ export default class TraitSelector extends DocumentSheet {
   /* -------------------------------------------- */
 
   /**
-   * Return a reference to the target attribute
+   * Return a reference to the target attribute.
    * @type {string}
    */
   get attribute() {

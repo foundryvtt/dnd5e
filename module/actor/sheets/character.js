@@ -3,13 +3,12 @@ import Actor5e from "../entity.js";
 
 /**
  * An Actor sheet for player character type actors.
- * Extends the base ActorSheet5e class.
- * @type {ActorSheet5e}
+ * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
-   * Define default rendering options for the NPC sheet
+   * Define default rendering options for the NPC sheet.
    * @return {object}
    */
 	static get defaultOptions() {
@@ -57,7 +56,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Organize and classify Owned Items for Character sheets
+   * Organize and classify Owned Items for Character sheets.
    * @private
    */
   _prepareItems(data) {
@@ -153,7 +152,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * A helper method to establish the displayed preparation state for an item
+   * A helper method to establish the displayed preparation state for an item.
    * @param {Item} item
    * @private
    */
@@ -200,7 +199,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle mouse click events for character sheet actions
+   * Handle mouse click events for character sheet actions.
    * @param {MouseEvent} event    The originating click event
    * @private
    */
@@ -224,7 +223,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling the state of an Owned Item within the Actor
+   * Handle toggling the state of an Owned Item within the Actor.
    * @param {Event} event   The triggering click event
    * @private
    */
@@ -239,7 +238,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Take a short rest, calling the relevant function on the Actor instance
+   * Take a short rest, calling the relevant function on the Actor instance.
    * @param {Event} event   The triggering click event
    * @private
    */
@@ -252,7 +251,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Take a long rest, calling the relevant function on the Actor instance
+   * Take a long rest, calling the relevant function on the Actor instance.
    * @param {Event} event   The triggering click event
    * @private
    */

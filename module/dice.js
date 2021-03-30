@@ -2,7 +2,7 @@ export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
- * A standardized helper function for simplifying the constant parts of a multipart roll formula
+ * A standardized helper function for simplifying the constant parts of a multipart roll formula.
  *
  * @param {string} formula                 The original Roll formula
  * @param {object} data                    Actor or item data against which to parse the roll
@@ -80,7 +80,7 @@ function _isUnsupportedTerm(term) {
 /**
  * A standardized helper function for managing core 5e d20 rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
- * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
+ * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively.
  *
  * @param {string[]} parts          The dice roll component parts, excluding the initial d20
  * @param {object} data             Actor or item data against which to parse the roll
@@ -165,7 +165,7 @@ export async function d20Roll({
 
 /**
  * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
- * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
+ * @return {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
  */
 function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
@@ -182,7 +182,7 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
 /**
  * A standardized helper function for managing core 5e damage rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
- * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
+ * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively.
  *
  * @param {string[]} parts          The dice roll component parts, excluding the initial d20
  * @param {object} [data]           Actor or item data against which to parse the roll
@@ -258,7 +258,7 @@ export async function damageRoll({
 
 /**
  * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
- * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
+ * @return {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
 function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));

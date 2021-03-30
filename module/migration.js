@@ -1,5 +1,5 @@
 /**
- * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs
+ * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs.
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
@@ -65,7 +65,7 @@ export const migrateWorld = async function() {
 /* -------------------------------------------- */
 
 /**
- * Apply migration rules to all Entities within a single Compendium pack
+ * Apply migration rules to all Entities within a single Compendium pack.
  * @param pack
  * @return {Promise}
  */
@@ -120,8 +120,7 @@ export const migrateCompendium = async function(pack) {
 /* -------------------------------------------- */
 
 /**
- * Migrate a single Actor entity to incorporate latest data model changes
- * Return an Object of updateData to be applied
+ * Migrate a single Actor entity to incorporate latest data model changes.
  * @param {object} actor    The actor data object to update
  * @return {object}         The updateData to apply
  */
@@ -166,7 +165,7 @@ export const migrateActorData = function(actor) {
 
 
 /**
- * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template
+ * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template.
  * @param {object} actorData    The data object for an Actor
  * @return {object}             The scrubbed Actor data
  */
@@ -209,8 +208,7 @@ export const migrateItemData = function(item) {
 /* -------------------------------------------- */
 
 /**
- * Migrate a single Scene entity to incorporate changes to the data model of it's actor data overrides
- * Return an Object of updateData to be applied
+ * Migrate a single Scene entity to incorporate changes to the data model of its actor data overrides.
  * @param {object} scene  The Scene data to Update
  * @return {object}       The updateData to apply
  */
@@ -250,7 +248,7 @@ export const migrateSceneData = function(scene) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the actor speed string to movement object
+ * Migrate the actor speed string to movement object.
  * @private
  */
 function _migrateActorMovement(actorData, updateData) {
@@ -277,7 +275,7 @@ function _migrateActorMovement(actorData, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the actor traits.senses string to attributes.senses object
+ * Migrate the actor traits.senses string to attributes.senses object.
  * @private
  */
 function _migrateActorSenses(actor, updateData) {

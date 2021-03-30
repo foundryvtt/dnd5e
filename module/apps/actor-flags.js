@@ -73,7 +73,7 @@ export default class ActorSheetFlags extends DocumentSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the bonuses fields and their localization strings
+   * Get the bonuses fields and their localization strings.
    * @return {Array<object>}
    * @private
    */

@@ -2,7 +2,7 @@ import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 
 /**
- * Override and extend the basic Item implementation
+ * Override and extend the basic Item implementation.
  * @extends {Item}
  */
 export default class Item5e extends Item {
@@ -12,7 +12,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Determine which ability score modifier is used by this item
+   * Determine which ability score modifier is used by this item.
    * @type {string|null}
    */
   get abilityMod() {
@@ -59,7 +59,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement an attack roll as part of its usage
+   * Does the Item implement an attack roll as part of its usage.
    * @type {boolean}
    */
   get hasAttack() {
@@ -69,7 +69,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a damage roll as part of its usage
+   * Does the Item implement a damage roll as part of its usage.
    * @type {boolean}
    */
   get hasDamage() {
@@ -79,7 +79,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a versatile damage roll as part of its usage
+   * Does the Item implement a versatile damage roll as part of its usage.
    * @type {boolean}
    */
   get isVersatile() {
@@ -99,7 +99,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a saving throw as part of its usage
+   * Does the Item implement a saving throw as part of its usage.
    * @type {boolean}
    */
   get hasSave() {
@@ -110,7 +110,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item have a target
+   * Does the Item have a target.
    * @type {boolean}
    */
   get hasTarget() {
@@ -121,7 +121,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item have an area of effect target
+   * Does the Item have an area of effect target.
    * @type {boolean}
    */
   get hasAreaTarget() {
@@ -265,7 +265,7 @@ export default class Item5e extends Item {
    * based on owned item actor data. This is only used for display
    * purposes and is not related to Item5e#rollDamage
    * 
-   * @returns {Array} array of objects with `formula` and `damageType`
+   * @return {Array} array of objects with `formula` and `damageType`
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
@@ -405,7 +405,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
+   * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options.
    * @param {object} options                   Configuration options for how the roll is performed
    * @param {boolean} options.configureDialog  Display a configuration dialog for the item roll, if applicable?
    * @param {string} options.rollMode          The roll display mode with which to display (or not) the card
@@ -576,7 +576,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Handle update actions required when consuming an external resource
+   * Handle update actions required when consuming an external resource.
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object} resourceUpdates    An object of data updates applied to a different resource item (Item)
@@ -656,7 +656,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Display the chat card for an Item as a Chat Message
+   * Display the chat card for an Item as a Chat Message.
    * @param {object} options                 Options which configure the display of the item chat card
    * @param {string} options.rollMode        The message visibility mode to apply to the created card
    * @param {boolean} options.createMessage  Whether to automatically create a ChatMessage entity (if true), or only return
@@ -710,7 +710,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare an object of chat data used to display a card for the Item in the chat log
+   * Prepare an object of chat data used to display a card for the Item in the chat log.
    * @param {object} htmlOptions    Options used by the TextEditor.enrichHTML function
    * @return {object}               An object of chat data to render
    */
@@ -753,7 +753,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for equipment type items
+   * Prepare chat card data for equipment type items.
    * @private
    */
   _equipmentChatData(data, labels, props) {
@@ -767,7 +767,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for weapon type items
+   * Prepare chat card data for weapon type items.
    * @private
    */
   _weaponChatData(data, labels, props) {
@@ -779,7 +779,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for consumable type items
+   * Prepare chat card data for consumable type items.
    * @private
    */
   _consumableChatData(data, labels, props) {
@@ -793,7 +793,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for tool type items
+   * Prepare chat card data for tool type items.
    * @private
    */
   _toolChatData(data, labels, props) {
@@ -806,7 +806,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for tool type items
+   * Prepare chat card data for tool type items.
    * @private
    */
   _lootChatData(data, labels, props) {
@@ -819,7 +819,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Render a chat card for Spell type data
+   * Render a chat card for Spell type data.
    * @return {object}
    * @private
    */
@@ -833,7 +833,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for items of the "Feat" type
+   * Prepare chat card data for items of the "Feat" type.
    * @private
    */
   _featChatData(data, labels, props) {
@@ -845,8 +845,8 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the d20Roll logic for the core implementation
+   * Place an attack roll using an item (weapon, feat, spell, or equipment).
+   * Rely upon the d20Roll logic for the core implementation.
    *
    * @param {object} options        Roll options which are configured and provided to the d20Roll function
    * @return {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
@@ -928,7 +928,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Place a damage roll using an item (weapon, feat, spell, or equipment)
+   * Place a damage roll using an item (weapon, feat, spell, or equipment).
    * Rely upon the damageRoll logic for the core implementation.
    * @param {object} options              Configuration options on how the damage should be calculated
    * @param {boolean} options.critical    Should damage be rolled as a critical hit?
@@ -1020,7 +1020,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Adjust a cantrip damage formula to scale it for higher level characters and monsters
+   * Adjust a cantrip damage formula to scale it for higher level characters and monsters.
    * @private
    */
   _scaleCantripDamage(parts, scale, level, rollData) {
@@ -1032,7 +1032,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Adjust the spell damage formula to scale it for spell level up-casting
+   * Adjust the spell damage formula to scale it for spell level up-casting.
    * @param {Array} parts         The original damage parts
    * @param {number} baseLevel    The default spell level
    * @param {number} spellLevel   The casted spell level
@@ -1050,7 +1050,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Scale an array of damage parts according to a provided scaling formula and scaling multiplier
+   * Scale an array of damage parts according to a provided scaling formula and scaling multiplier.
    * @param {string[]} parts    Initial roll parts
    * @param {string} scaling    A scaling formula
    * @param {number} times      A number of times to apply the scaling formula
@@ -1085,8 +1085,8 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the d20Roll logic for the core implementation
+   * Place an attack roll using an item (weapon, feat, spell, or equipment).
+   * Rely upon the d20Roll logic for the core implementation.
    *
    * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
@@ -1114,7 +1114,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Perform an ability recharge test for an item which uses the d6 recharge mechanic
+   * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
    * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
@@ -1139,7 +1139,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation
+   * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation.
    * @param {object} options   Roll configuration options provided to the d20Roll function
    * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
@@ -1184,7 +1184,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare a data object which is passed to any Roll formulas which are created related to this Item
+   * Prepare a data object which is passed to any Roll formulas which are created related to this Item.
    * @private
    */
   getRollData() {
@@ -1220,7 +1220,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Handle execution of a chat card action via a click event on one of the card buttons
+   * Handle execution of a chat card action via a click event on one of the card buttons.
    * @param {Event} event       The originating click event
    * @return {Promise}          A promise which resolves once the handler workflow is complete
    * @private
@@ -1289,7 +1289,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling the visibility of chat card content when the name is clicked
+   * Handle toggling the visibility of chat card content when the name is clicked.
    * @param {Event} event   The originating click event
    * @private
    */
@@ -1304,7 +1304,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Get the Actor which is the author of a chat card
+   * Get the Actor which is the author of a chat card.
    * @param {HTMLElement} card    The chat card being used
    * @return {Actor|null}         The Actor entity or null
    * @private
@@ -1326,7 +1326,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Get the Actor which is the author of a chat card
+   * Get the Actor which is the author of a chat card.
    * @param {HTMLElement} card    The chat card being used
    * @return {Actor[]}            An Array of Actor entities, if any
    * @private
@@ -1428,7 +1428,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned equipment type Items
+   * Pre-creation logic for the automatic configuration of owned equipment type Items.
    * @private
    */
   _onCreateOwnedEquipment(data, actorData, isNPC) {
@@ -1451,7 +1451,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned spell type Items
+   * Pre-creation logic for the automatic configuration of owned spell type Items.
    * @private
    */
   _onCreateOwnedSpell(data, actorData, isNPC) {
@@ -1465,7 +1465,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned weapon type Items
+   * Pre-creation logic for the automatic configuration of owned weapon type Items.
    * @private
    */
   _onCreateOwnedWeapon(data, actorData, isNPC) {
