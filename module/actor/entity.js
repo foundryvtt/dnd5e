@@ -57,6 +57,33 @@ export default class Actor5e extends Actor {
   get proficiencyDice() {
     return `d${this.data.data.attributes.prof * 2}`;
   }
+  /**
+   * Produce the correct proficiency term based on the provided static proficiency data
+   * and whether the proficiency dice variant is selected.
+   *
+   * @param {number} proficient  Proficiency status (0.5=half proficient, 1=proficient, 2=expertise).
+   * @param {number} value       Actor's flat proficiency bonus based on their current level.
+   * @param {boolean} roundDown  Whether half proficiency should round down or up.
+   * @return {string}
+   */
+  static proficiencyModifier(proficient, value, roundDown=true) {
+
+    // Flat proficiency
+    if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
+      const round = roundDown ? Math.floor : Math.ceil;
+      return round(proficient * value);
+    }
+
+    // Proficiency dice
+    else {
+      if ( proficient == 0.5 ) {
+        const drop = roundDown ? 'kl' : 'kh';
+        return `2d${value}${drop}`;
+      } else {
+        return `${proficient}d${value * 2}`;
+      }
+    }
+  }
 
   /* -------------------------------------------- */
 
@@ -818,15 +845,7 @@ export default class Actor5e extends Actor {
     // Include proficiency bonus
     if ( skl.prof > 0 ) {
       parts.push("@prof");
-      if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
-        data.prof = skl.prof;
-      } else {
-        if ( skl.proficient == 0.5 ) {
-          data.prof = `1d${this.data.data.attributes.prof}`;
-        } else {
-          data.prof = `${skl.proficient}${this.proficiencyDice}`;
-        }
-      }
+      data.prof = Actor5e.proficiencyModifier(skl.proficient, this.data.data.attributes.prof);
     }
 
     // Ability test bonus
@@ -925,19 +944,11 @@ export default class Actor5e extends Actor {
     const feats = this.data.flags.dnd5e || {};
     if ( feats.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
       parts.push("@prof");
-      if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
-        data.prof = Math.ceil(0.5 * this.data.data.attributes.prof);
-      } else {
-        data.prof = `1d${this.data.data.attributes.prof}`;
-      }
+      data.prof = Actor5e.proficiencyModifier(0.5, this.data.data.attributes.prof, false);
     }
     else if ( feats.jackOfAllTrades ) {
       parts.push("@prof");
-      if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
-        data.prof = Math.floor(0.5 * this.data.data.attributes.prof);
-      } else {
-        data.prof = `1d${this.data.data.attributes.prof}`;
-      }
+      data.prof = Actor5e.proficiencyModifier(0.5, this.data.data.attributes.prof);
     }
 
     // Add ability-specific check bonus
@@ -993,11 +1004,7 @@ export default class Actor5e extends Actor {
     // Include proficiency bonus
     if ( abl.prof > 0 ) {
       parts.push("@prof");
-      if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
-        data.prof = abl.prof;
-      } else {
-        data.prof = `${abl.proficient}${this.proficiencyDice}`;
-      }
+      data.prof = Actor5e.proficiencyModifier(abl.proficient, this.data.data.attributes.prof);
     }
 
     // Include ability-specific saving throw bonus
@@ -1057,12 +1064,7 @@ export default class Actor5e extends Actor {
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
       parts.push("@prof");
-      
-      if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
-        data.prof = this.data.data.attributes.prof;
-      } else {
-        data.prof = `1${this.proficiencyDice}`;
-      }
+      data.prof = Actor5e.proficiencyModifier(1, this.data.data.attributes.prof);
     }
 
     // Include a global actor ability save bonus
