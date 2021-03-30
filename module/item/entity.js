@@ -247,7 +247,35 @@ export default class Item5e extends Item {
 
       // Limited Uses
       this.prepareMaxUses();
+
+      // Damage Label
+      this.getDerivedDamageLabel();
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Populate a label with the compiled and simplified damage formula
+   * based on owned item actor data. This is only used for display
+   * purposes and is not related to Item5e#rollDamage
+   * 
+   * @returns {Array} array of objects with `formula` and `damageType`
+   */
+  getDerivedDamageLabel() {
+    const itemData = this.data.data;
+    if ( !this.hasAttack || !itemData || !this.isOwned ) return [];
+
+    const rollData = this.getRollData();
+
+    const derivedDamage = itemData.damage?.parts?.map((damagePart) => ({
+      formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
+      damageType: damagePart[1],
+    }));
+
+    this.labels.derivedDamage = derivedDamage
+
+    return derivedDamage;
   }
 
   /* -------------------------------------------- */
