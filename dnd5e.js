@@ -14,9 +14,8 @@ import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances, getBarAttribute } from "./module/canvas.js";
-import D20Roll from "./module/dice/d20-roll.js";
 
-// Import Entities
+// Import Documents
 import Actor5e from "./module/actor/entity.js";
 import Item5e from "./module/item/entity.js";
 
@@ -57,7 +56,8 @@ Hooks.once("init", function() {
       ItemSheet5e,
       ShortRestDialog,
       TraitSelector,
-      ActorMovementConfig
+      ActorMovementConfig,
+      ActorSensesConfig
     },
     canvas: {
       AbilityTemplate
@@ -90,7 +90,8 @@ Hooks.once("init", function() {
   Combatant.prototype._getInitiativeFormula = _getInitiativeFormula;
 
   // Register Roll Extensions
-  CONFIG.Dice.rolls.push(D20Roll);
+  CONFIG.Dice.rolls.push(dice.D20Roll);
+  CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -116,7 +117,7 @@ Hooks.once("init", function() {
   });
 
   // Preload Handlebars Templates
-  preloadHandlebarsTemplates();
+  return preloadHandlebarsTemplates();
 });
 
 
@@ -218,8 +219,3 @@ Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
-
-// TODO I should remove this
-Handlebars.registerHelper('getProperty', function (data, property) {
-  return getProperty(data, property);
-});

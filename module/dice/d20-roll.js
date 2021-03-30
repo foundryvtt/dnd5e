@@ -99,23 +99,15 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  toMessage(messageData = {}, { rollMode = null, create = true } = {}) {
-    const rollFlagsKey = "flags.dnd5e.roll";
-    const hasRollFlags = rollFlagsKey in messageData;
+  toMessage(messageData={}, options) {
     messageData.flavor = messageData.flavor || this.options.flavor;
 
     // Evaluate the roll now so we have the results available to determine whether reliable talent came into play
     if ( !this._evaluated ) this.evaluate();
 
     // Add appropriate advantage mode message flavor and dnd5e roll flags
-    if ( this.hasAdvantage ) {
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
-      if (hasRollFlags) messageData[rollFlagsKey].advantage = true;
-    }
-    else if ( this.hasDisadvantage ) {
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
-      if (hasRollFlags) messageData[rollFlagsKey].disadvantage = true;
-    }
+    if ( this.hasAdvantage ) messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
+    else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
 
     // Add reliable talent to the d20-term flavor text if it applied
     if ( this.options.reliableTalent ) {
@@ -124,7 +116,7 @@ export default class D20Roll extends Roll {
       const label = `(${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
       if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
     }
-    return super.toMessage(messageData, { rollMode , create });
+    return super.toMessage(messageData, options);
   }
 
   /* -------------------------------------------- */
