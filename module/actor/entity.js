@@ -234,11 +234,12 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the features which a character is awarded for each class level
-   * @param {string} className        The class name being added
-   * @param {string} subclassName     The subclass of the class being added, if any
-   * @param {number} level            The number of levels in the added class
-   * @param {number} priorLevel       The previous level of the added class
-   * @return {Promise<Item5e[]>}     Array of Item5e entities
+   * @param {Object} changes              Information on the changes to the class
+   * @param {string} changes.className    The class name being added
+   * @param {string} changes.subclassName The subclass of the class being added, if any
+   * @param {number} changes.level        The number of levels in the added class
+   * @param {number} changes.priorLevel   The previous level of the added class
+   * @return {Promise<Item5e[]>}          Array of Item5e entities
    */
   static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
     className = className.toLowerCase();

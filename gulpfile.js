@@ -19,6 +19,7 @@ const css = gulp.series(compileLESS);
 /*  Lint Javascript
 /* ----------------------------------------- */
 
+const DND5E_JS = ["dnd5e.js", "module/**/*.js"];
 function lintJavascript() {
   return gulp
     .src("module/**/*.js")
@@ -34,6 +35,7 @@ const jsLint = gulp.series(lintJavascript);
 
 function watchUpdates() {
   gulp.watch(DND5E_LESS, css);
+  gulp.watch(DND5E_JS, jsLint);
 }
 
 /* ----------------------------------------- */
