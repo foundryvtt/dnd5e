@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
+const eslint = require('gulp-eslint');
 
 /* ----------------------------------------- */
 /*  Compile LESS
@@ -12,6 +13,20 @@ function compileLESS() {
     .pipe(gulp.dest("./"))
 }
 const css = gulp.series(compileLESS);
+
+
+/* ----------------------------------------- */
+/*  Lint Javascript
+/* ----------------------------------------- */
+
+function lintJavascript() {
+  return gulp
+    .src("module/**/*.js")
+    .pipe(eslint({}))
+    .pipe(eslint.format());
+}
+const jsLint = gulp.series(lintJavascript);
+
 
 /* ----------------------------------------- */
 /*  Watch Updates
@@ -27,6 +42,7 @@ function watchUpdates() {
 
 exports.default = gulp.series(
   gulp.parallel(css),
+  gulp.parallel(jsLint),
   watchUpdates
 );
 exports.css = css;
