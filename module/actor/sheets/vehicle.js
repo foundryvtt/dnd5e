@@ -27,6 +27,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /**
    * Creates a new cargo entry for a vehicle Actor.
+   *
+   * @return {object}
    */
   static get newCargo() {
     return {
