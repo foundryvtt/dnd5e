@@ -18,7 +18,7 @@
     "jsdoc/check-param-names": 1,
     "jsdoc/check-property-names": 1,
     "jsdoc/check-syntax": 0,
-    "jsdoc/check-tag-names": 0,
+    "jsdoc/check-tag-names": 1,
     "jsdoc/check-types": 0,
     "jsdoc/check-values": 0,
     "jsdoc/empty-tags": 0,
@@ -51,5 +51,13 @@
     "jsdoc/require-yields": 0,
     "jsdoc/require-yields-check": 0,
     "jsdoc/valid-types": 0
+  },
+  "settings": {
+    "jsdoc": {
+      "tagNamePreference": {
+        "auguments": "extends",
+        "returns": "return"
+      }
+    }
   }
 }

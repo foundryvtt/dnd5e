@@ -287,7 +287,7 @@ export default class Item5e extends Item {
 
   /**
    * Update the derived spell DC for an item that requires a saving throw
-   * @returns {number|null}
+   * @return {number|null}
    */
   getSaveDC() {
     if ( !this.hasSave ) return;
@@ -319,7 +319,7 @@ export default class Item5e extends Item {
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
    *
-   * @returns {Object} returns `rollData` and `parts` to be used in the item's Attack roll
+   * @return {Object} returns `rollData` and `parts` to be used in the item's Attack roll
    */
   getAttackToHit() {
     const itemData = this.data.data;
@@ -1140,7 +1140,7 @@ export default class Item5e extends Item {
 
   /**
    * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation
-   * @prarm {Object} options   Roll configuration options provided to the d20Roll function
+   * @param {Object} options   Roll configuration options provided to the d20Roll function
    * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollToolCheck(options={}) {
@@ -1222,7 +1222,7 @@ export default class Item5e extends Item {
   /**
    * Handle execution of a chat card action via a click event on one of the card buttons
    * @param {Event} event       The originating click event
-   * @returns {Promise}         A promise which resolves once the handler workflow is complete
+   * @return {Promise}          A promise which resolves once the handler workflow is complete
    * @private
    */
   static async _onChatCardAction(event) {
