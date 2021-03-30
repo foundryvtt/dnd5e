@@ -115,8 +115,7 @@
   background: rgba(0, 0, 0, 0.1);
   border: 2px groove #eeede0;
 }
-.dnd5e label.checkbox,
-.dnd5e label.radio {
+.dnd5e label.checkbox {
   display: flex;
   flex: auto;
   padding: 0;
@@ -125,23 +124,15 @@
   line-height: 22px;
   font-size: 11px;
 }
-.dnd5e label.checkbox > input[type="checkbox"],
-.dnd5e label.radio > input[type="checkbox"],
-.dnd5e label.checkbox > input[type="radio"],
-.dnd5e label.radio > input[type="radio"] {
+.dnd5e label.checkbox > input[type="checkbox"] {
   width: 16px;
   height: 16px;
   margin: 0 2px 0 0;
   position: relative;
   top: 4px;
 }
-.dnd5e label.checkbox.right > input[type="checkbox"],
-.dnd5e label.radio.right > input[type="checkbox"] {
+.dnd5e label.checkbox.right > input[type="checkbox"] {
   margin: 0 0 0 2px;
-}
-.dnd5e label.checkbox > input[type="text"],
-.dnd5e label.radio > input[type="text"] {
-  margin-right: -2px;
 }
 .dnd5e .form-group label {
   flex: 2;
@@ -536,14 +527,23 @@
 #actor-type .trait-list li {
   flex-basis: 50%;
   flex-grow: 1;
-  padding-left: 0.25em;
 }
 #actor-type label.radio {
+  display: flex;
+  flex: auto;
+  height: 22px;
   font-size: 12px;
   line-height: 2.2em;
 }
-#actor-type label.radio input {
+#actor-type label.radio > input[type="radio"] {
+  width: 16px;
+  height: 16px;
   margin-right: 0.33em;
+  position: relative;
+  top: 4px;
+}
+#actor-type label.radio > input[type="text"] {
+  margin-right: -2px;
 }
 #actor-type label.checkbox {
   font-size: 13px;

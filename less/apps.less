@@ -60,7 +60,7 @@
 
   // Checkbox Labels
   // TODO: THIS CAN BE MOSTLY REMOVED NOW THAT IT IS IN CORE, see core forms.less
-  label.checkbox, label.radio {
+  label.checkbox {
     display: flex;
     flex: auto;
     padding: 0;
@@ -68,7 +68,7 @@
     height: 22px;
     line-height: 22px;
     font-size: 11px;
-    > input[type="checkbox"], > input[type="radio"] {
+    > input[type="checkbox"] {
       width: 16px;
       height: 16px;
       margin: 0 2px 0 0;
@@ -77,9 +77,6 @@
     }
     &.right > input[type="checkbox"] {
       margin: 0 0 0 2px;
-    }
-    > input[type="text"] {
-      margin-right: -2px;
     }
   }
 
@@ -529,15 +526,25 @@
     li {
       flex-basis: 50%;
       flex-grow: 1;
-      padding-left: 0.25em;
     }
   }
   label.radio {
+    display: flex;
+    flex: auto;
+    height: 22px;
+
     font-size: 12px;
     line-height: 2.2em;
 
-    input {
+    > input[type="radio"] {
+      width: 16px;
+      height: 16px;
       margin-right: 0.33em;
+      position: relative;
+      top: 4px;
+    }
+    > input[type="text"] {
+      margin-right: -2px;
     }
   }
 
