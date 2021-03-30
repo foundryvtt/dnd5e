@@ -60,6 +60,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /**
    * Organize and classify Owned Items for Character sheets.
    *
+   * @param {object} data  Item data being prepared.
    * @private
    */
   _prepareItems(data) {

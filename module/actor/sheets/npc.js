@@ -27,6 +27,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /**
    * Organize Owned Items for rendering the NPC sheet.
    *
+   * @param {object} data  Item data being prepared.
    * @private
    */
   _prepareItems(data) {

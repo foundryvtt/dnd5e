@@ -153,7 +153,8 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet.
    *
-   * @return {string}
+   * @param {Item5e} item  Item to use when formatting status.
+   * @return {string}      Localized status.
    * @private
    */
   _getItemStatus(item) {
@@ -173,7 +174,8 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the Array of item properties which are used in the small sidebar of the description tab.
    *
-   * @return {Array}
+   * @param {Item5e} item  Item to use when getting properties.
+   * @return {Array}       Properties for the item.
    * @private
    */
   _getItemProperties(item) {
@@ -228,7 +230,7 @@ export default class ItemSheet5e extends ItemSheet {
    * component that is usually mounted on fixtures rather than equipped, and
    * has its own AC and HP.
    *
-   * @param item
+   * @param {Item5e} item
    * @return {boolean}
    * @private
    */

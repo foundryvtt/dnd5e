@@ -154,7 +154,7 @@ export default class Actor5e extends Actor {
   /**
    * Return the amount of experience required to gain a certain character level.
    *
-   * @param level {number}  The desired level
+   * @param {number} level  The desired level
    * @return {number}       The XP required
    */
   getLevelExp(level) {
@@ -167,7 +167,7 @@ export default class Actor5e extends Actor {
   /**
    * Return the amount of experience granted by killing a creature of a certain CR.
    *
-   * @param cr {number}     The creature's challenge rating
+   * @param {number} cr     The creature's challenge rating
    * @return {number}       The amount of experience granted per kill
    */
   getCRExp(cr) {
@@ -290,6 +290,7 @@ export default class Actor5e extends Actor {
   /**
    * Prepare Character type specific data.
    *
+   * @param {object} actorData  Data to prepare.
    * @private
    */
   _prepareCharacterData(actorData) {
@@ -324,6 +325,7 @@ export default class Actor5e extends Actor {
   /**
    * Prepare NPC type specific data.
    *
+   * @param {object} actorData  Data to prepare.
    * @private
    */
   _prepareNPCData(actorData) {
@@ -346,7 +348,7 @@ export default class Actor5e extends Actor {
   /**
    * Prepare vehicle type-specific data.
    *
-   * @param actorData
+   * @param {object} actorData  Data to prepare.
    * @private
    */
   _prepareVehicleData(actorData) {}
@@ -356,10 +358,10 @@ export default class Actor5e extends Actor {
   /**
    * Prepare skill checks.
    *
-   * @param actorData
-   * @param bonuses Global bonus data.
-   * @param checkBonus Ability check specific bonus.
-   * @param originalSkills A transformed actor's original actor's skills.
+   * @param {object} actorData
+   * @param {object} bonuses        Global bonus data.
+   * @param {number} checkBonus     Ability check specific bonus.
+   * @param {object} originalSkills A transformed actor's original actor's skills.
    * @private
    */
   _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {

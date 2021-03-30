@@ -74,6 +74,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
    * Prepare items that are mounted to a vehicle and require one or more crew
    * to operate.
    *
+   * @param {Item5e} item  Item to be prepared.
    * @private
    */
   _prepareCrewedItem(item) {
@@ -104,6 +105,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Organize Owned Items for rendering the Vehicle sheet.
    *
+   * @param {object} data  Item data being prepared.
    * @private
    */
   _prepareItems(data) {
@@ -285,7 +287,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle saving a cargo row (i.e. crew or passenger) in-sheet.
    *
-   * @param event {Event}
+   * @param {Event} event
    * @return {Promise<Actor>|null}
    * @private
    */
@@ -317,7 +319,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle editing certain values like quantity, price, and weight in-sheet.
    *
-   * @param event {Event}
+   * @param {Event} event
    * @return {Promise<Item>}
    * @private
    */
@@ -340,7 +342,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle creating a new crew or passenger row.
    *
-   * @param event {Event}
+   * @param {Event} event
    * @return {Promise<Actor|Item>}
    * @private
    */
@@ -361,7 +363,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle deleting a crew or passenger row.
    *
-   * @param event {Event}
+   * @param {Event} event
    * @return {Promise<Actor|Item>}
    * @private
    */
@@ -392,7 +394,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Special handling for editing HP to clamp it within appropriate range.
    *
-   * @param event {Event}
+   * @param {Event} event
    * @return {Promise<Item>}
    * @private
    */
@@ -410,7 +412,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle toggling an item's crewed status.
    *
-   * @param event {Event}
+   * @param {Event} event
    * @return {Promise<Item>}
    * @private
    */

@@ -362,6 +362,8 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Determine whether an Owned Item will be shown based on the current set of filters.
    *
+   * @param {Array<Item5e>} items  Items to filter.
+   * @param {Set} filters          Filters to check.
    * @return {boolean}
    * @private
    */
@@ -402,6 +404,8 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Get the font-awesome icon used to display a certain level of skill proficiency.
    *
+   * @param {number} level  Proficiency value.
+   * @return {string}       HTML string for the font-awesome icon.
    * @private
    */
   _getProficiencyIcon(level) {
@@ -508,7 +512,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
    *
-   * @param event
+   * @param {Event} event
    * @private
    */
   _onChangeInputDelta(event) {
