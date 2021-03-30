@@ -421,8 +421,8 @@ export default class Item5e extends Item {
         const slotLevel = configuration.level;
         const spellLevel = slotLevel === "pact" ? actor.data.data.spells.pact.level : parseInt(slotLevel);
         if (spellLevel !== id.level) {
-          const upcastData = mergeObject(this.data, {"data.level": spellLevel}, {inplace: false});
-          item = new this.constructor(upcastData, actor);  // Replace the item with an upcast version
+          item = this.clone({"data.level": spellLevel}, {keepId: true});
+          item.data.update({_id: this.id}); // Retain the original ID (needed until 0.8.2+)
         }
         if ( consumeSpellSlot ) consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
       }

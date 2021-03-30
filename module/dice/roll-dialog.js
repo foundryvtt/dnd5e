@@ -1,18 +1,12 @@
 import D20Roll from "./d20-roll.js";
 
 /**
- * Shows the roll dialog for a D20Roll and returns the associated formData from the dialog when closed (or null if the user cancels the dialog)
- * @param {object} options
- * @param {string} [options.title]             The title of the shown dialog window
- * @param {string} [options.formula]           The roll formula shown in the dialog window
- * @param {number} [options.defaultRollMode]   The roll mode that the roll mode select element should default to
- * @param {string} [options.defaultAbility]    For tool rolls, the default ability modifier to use for the roll
- * @param {string} [options.template]          The path to the dialog handlebars template
- * @param {object} dialogOptions               Extra options to send to the dialog
- * @returns {Promise<object>}
+ * @deprecated since 1.3.0
+ * @ignore
  */
-async function d20Dialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions) {
-    return rollDialog(...arguments, generateD20Buttons);
+async function d20Dialog(data, options) {
+  console.warn("You are calling the d20Dialog helper method which has been replaced by the D20Roll.createDialog static method.");
+  return D20Roll.createDialog(data, options);
 }
 
 /**
@@ -26,7 +20,7 @@ async function d20Dialog({ title, formula, defaultRollMode, defaultAbility, temp
  * @returns {Promise<object>}
  */
 async function damageDialog({ title, formula, defaultRollMode, template }, dialogOptions) {
-    return rollDialog(...arguments, generateDamageButtons);
+  return rollDialog(...arguments, generateDamageButtons);
 }
 
 /**
@@ -42,48 +36,26 @@ async function damageDialog({ title, formula, defaultRollMode, template }, dialo
  * @returns {Promise<object>}
  */
 async function rollDialog({ title, formula, defaultRollMode, defaultAbility, template }, dialogOptions, buttonGenerator) {
-    template = template ?? "systems/dnd5e/templates/chat/roll-dialog.html";
-    const templateData = {
-        formula,
-        defaultRollMode,
-        rollModes: CONFIG.Dice.rollModes,
-        // used for tool checks
-        defaultAbility,
-        abilities: CONFIG.DND5E.abilities
-    }
-    const content = await renderTemplate(template, templateData);
+  template = template ?? "systems/dnd5e/templates/chat/roll-dialog.html";
+  const templateData = {
+    formula,
+    defaultRollMode,
+    rollModes: CONFIG.Dice.rollModes,
+    // used for tool checks
+    defaultAbility,
+    abilities: CONFIG.DND5E.abilities
+  }
+  const content = await renderTemplate(template, templateData);
 
-    return new Promise(resolve => {
-        new Dialog({
-            title,
-            content,
-            buttons: buttonGenerator(resolve),
-            default: "normal",
-            close: () => resolve(null)
-        }, dialogOptions).render(true);
-    });
-}
-
-/**
- * Creates an object containing the appropriate buttons for a d20 roll: Advantage, Normal, and Disadvantage
- * @param {function} callback   A callback to call with the final results of the button pressed in the dialog
- * @returns {function}
- */
-function generateD20Buttons(callback) {
-    return {
-        advantage: {
-            label: game.i18n.localize("DND5E.Advantage"),
-            callback: html => callback(getFormData(html, D20Roll.ADV_MODE.ADV))
-        },
-        normal: {
-            label: game.i18n.localize("DND5E.Normal"),
-            callback: html => callback(getFormData(html, D20Roll.ADV_MODE.NORMAL))
-        },
-        disadvantage: {
-            label: game.i18n.localize("DND5E.Disadvantage"),
-            callback: html => callback(getFormData(html, D20Roll.ADV_MODE.DISADV))
-        }
-    };
+  return new Promise(resolve => {
+    new Dialog({
+      title,
+      content,
+      buttons: buttonGenerator(resolve),
+      default: "normal",
+      close: () => resolve(null)
+    }, dialogOptions).render(true);
+  });
 }
 
 
@@ -94,17 +66,17 @@ function generateD20Buttons(callback) {
  * @returns {function}
  */
 function generateDamageButtons(callback, allowCritical) {
-    return {
-        critical: {
-            condition: allowCritical,
-                label: game.i18n.localize("DND5E.CriticalHit"),
-                callback: html => callback(getFormData(html, true))
-        },
-        normal: {
-            label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
-                callback: html => callback(getFormData(html, false))
-        },
-    }
+  return {
+    critical: {
+      condition: allowCritical,
+      label: game.i18n.localize("DND5E.CriticalHit"),
+      callback: html => callback(getFormData(html, true))
+    },
+    normal: {
+      label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
+      callback: html => callback(getFormData(html, false))
+    },
+  }
 }
 
 /**
@@ -114,12 +86,12 @@ function generateDamageButtons(callback, allowCritical) {
  * @returns {object}
  */
 function getFormData(html, buttonSelection) {
-    const formData = new FormDataExtended(html[0].querySelector("form")).toObject();
-    formData.buttonSelection = buttonSelection;
-    return formData;
+  const formData = new FormDataExtended(html[0].querySelector("form")).toObject();
+  formData.buttonSelection = buttonSelection;
+  return formData;
 }
 
 export const RollDialog = {
-    d20Dialog,
-    damageDialog,
+  d20Dialog,
+  damageDialog,
 }
