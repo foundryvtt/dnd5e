@@ -7,7 +7,7 @@
         {{#each types as |type key|}}
         <li>
             <label class="radio">
-                <input type="radio" name="value" value="{{key}}" data-dtype="String" {{checked type.chosen}}>
+                <input type="radio" name="value" value="{{key}}" data-dtype="String" {{checked type.chosen}}/>
                 {{#if (eq key "custom") }}
                     <input type="text" name="custom" value="{{../custom}}" data-dtype="String"/>
                 {{else}}
@@ -24,7 +24,7 @@
     <div class="form-group">
         <label class="checkbox">
           {{ localize "DND5E.CreatureSwarm" }}
-          <input type="checkbox" name="swarm.isSwarm" data-dtype="Boolean" {{checked swarm.isSwarm}}>
+          <input type="checkbox" name="swarm.isSwarm" data-dtype="Boolean" {{checked swarm.isSwarm}}/>
         </label>
 
         <label>
