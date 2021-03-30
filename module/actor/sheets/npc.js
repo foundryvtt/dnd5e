@@ -1,5 +1,5 @@
+import Actor5e from "../entity.js";
 import ActorSheet5e from "../sheets/base.js";
-import { formCreatureType } from "../shared.js";
 
 /**
  * An Actor sheet for NPC type characters.
@@ -97,7 +97,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   _getType(actorData) {
     let attr = actorData.details.type;
     if ( getType(attr) !== "Object" ) return attr;
-    return formCreatureType(attr);
+    return Actor5e.formatCreatureType(attr);
   }
 
 

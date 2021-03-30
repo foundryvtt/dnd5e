@@ -1,5 +1,4 @@
-import { formCreatureType } from "../actor/shared.js";
-
+import Actor5e from "../actor/entity.js";
 
 /**
  * A specialized form used to select from a checklist of attributes, traits, or properties
@@ -57,7 +56,7 @@ export default class ActorTypeConfig extends FormApplication {
       swarm: attr.swarm,
       custom: attr.custom,
       sizes: CONFIG.DND5E.actorSizes,
-      preview: formCreatureType(attr) || "–"
+      preview: Actor5e.formatCreatureType(attr) || "–"
     }
   }
 
@@ -88,7 +87,7 @@ export default class ActorTypeConfig extends FormApplication {
     super._onChangeInput(event);
 
     const typeObject = foundry.utils.expandObject(this._getSubmitData());
-    this._element.find(".type-preview").text(formCreatureType(typeObject) || "—");
+    this._element.find(".type-preview").text(Actor5e.formatCreatureType(typeObject) || "—");
   }
 
   /**
