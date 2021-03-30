@@ -301,7 +301,7 @@ export default class Item5e extends Item {
 
   /**
    * Update the derived spell DC for an item that requires a saving throw
-   * @return {number|null}
+   * @returns {number|null}
    */
   getSaveDC() {
     if ( !this.hasSave ) return;
@@ -333,7 +333,7 @@ export default class Item5e extends Item {
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
    *
-   * @return {Object} returns `rollData` and `parts` to be used in the item's Attack roll
+   * @returns {Object} returns `rollData` and `parts` to be used in the item's Attack roll
    */
   getAttackToHit() {
     const itemData = this.data.data;
@@ -452,11 +452,10 @@ export default class Item5e extends Item {
 
   /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
-   * @param {object} options                   Configuration options for how the roll is performed
-   * @param {boolean} options.configureDialog  Display a configuration dialog for the item roll, if applicable?
-   * @param {string} options.rollMode          The roll display mode with which to display (or not) the card
-   * @param {boolean} options.createMessage    Whether to automatically create a chat message (if true) or simply return
-   *                                           the prepared chat message data (if false).
+   * @param {boolean} [configureDialog]     Display a configuration dialog for the item roll, if applicable?
+   * @param {string} [rollMode]             The roll display mode with which to display (or not) the card
+   * @param {boolean} [createMessage]       Whether to automatically create a chat message (if true) or simply return
+   *                                        the prepared chat message data (if false).
    * @return {Promise<ChatMessage|object|void>}
    */
   async roll({configureDialog=true, rollMode, createMessage=true}={}) {
@@ -538,14 +537,12 @@ export default class Item5e extends Item {
   /**
    * Verify that the consumed resources used by an Item are available.
    * Otherwise display an error and return false.
-   *
-   * @param {object} options                        Configuration on which consumption types to check against
-   * @param {boolean} options.consumeQuantity       Consume quantity of the item if other consumption modes are not available?
-   * @param {boolean} options.consumeRecharge       Whether the item consumes the recharge mechanic
-   * @param {boolean} options.consumeResource       Whether the item consumes a limited resource
-   * @param {string|null} options.consumeSpellSlot  The category of spell slot to consume, or null
-   * @param {boolean} options.consumeUsage          Whether the item consumes a limited usage
-   * @returns {object|boolean}                      A set of data changes to apply when the item is used, or false
+   * @param {boolean} consumeQuantity     Consume quantity of the item if other consumption modes are not available?
+   * @param {boolean} consumeRecharge     Whether the item consumes the recharge mechanic
+   * @param {boolean} consumeResource     Whether the item consumes a limited resource
+   * @param {string|null} consumeSpellLevel The category of spell slot to consume, or null
+   * @param {boolean} consumeUsage        Whether the item consumes a limited usage
+   * @returns {object|boolean}            A set of data changes to apply when the item is used, or false
    * @private
    */
   _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage}) {
@@ -703,10 +700,10 @@ export default class Item5e extends Item {
 
   /**
    * Display the chat card for an Item as a Chat Message
-   * @param {object} options                 Options which configure the display of the item chat card
-   * @param {string} options.rollMode        The message visibility mode to apply to the created card
-   * @param {boolean} options.createMessage  Whether to automatically create a ChatMessage entity (if true), or only return
-   *                                         the prepared message data (if false)
+   * @param {object} options          Options which configure the display of the item chat card
+   * @param {string} rollMode         The message visibility mode to apply to the created card
+   * @param {boolean} createMessage   Whether to automatically create a ChatMessage entity (if true), or only return
+   *                                  the prepared message data (if false)
    */
   async displayCard({rollMode, createMessage=true}={}) {
 
@@ -976,13 +973,12 @@ export default class Item5e extends Item {
   /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the damageRoll logic for the core implementation.
-   * @param {object} options              Configuration options on how the damage should be calculated
-   * @param {boolean} options.critical    Should damage be rolled as a critical hit?
-   * @param {MouseEvent} options.event    An event which triggered this roll, if any
-   * @param {number} options.spellLevel   If the item is a spell, override the level for damage scaling
-   * @param {boolean} options.versatile   If the item is a weapon, roll damage using the versatile formula
-   * @param {object} options.options      Additional options passed to the damageRoll function
-   * @return {Promise<Roll>}              A Promise which resolves to the created Roll instance
+   * @param {MouseEvent} [event]    An event which triggered this roll, if any
+   * @param {boolean} [critical]    Should damage be rolled as a critical hit?
+   * @param {number} [spellLevel]   If the item is a spell, override the level for damage scaling
+   * @param {boolean} [versatile]   If the item is a weapon, roll damage using the versatile formula
+   * @param {object} [options]      Additional options passed to the damageRoll function
+   * @return {Promise<Roll>}        A Promise which resolves to the created Roll instance
    */
   rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
@@ -1191,7 +1187,7 @@ export default class Item5e extends Item {
 
   /**
    * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation
-   * @param {Object} options   Roll configuration options provided to the d20Roll function
+   * @prarm {Object} options   Roll configuration options provided to the d20Roll function
    * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollToolCheck(options={}) {
@@ -1291,7 +1287,7 @@ export default class Item5e extends Item {
   /**
    * Handle execution of a chat card action via a click event on one of the card buttons
    * @param {Event} event       The originating click event
-   * @return {Promise}          A promise which resolves once the handler workflow is complete
+   * @returns {Promise}         A promise which resolves once the handler workflow is complete
    * @private
    */
   static async _onChatCardAction(event) {

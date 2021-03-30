@@ -164,7 +164,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Prepare the display of movement speed data for the Actor*
    * @param {object} actorData                The Actor data being prepared.
    * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk"
-   * @return {{primary: string, special: string}}
+   * @returns {{primary: string, special: string}}
    * @private
    */
   _getMovementSpeed(actorData, largestPrimary=false) {

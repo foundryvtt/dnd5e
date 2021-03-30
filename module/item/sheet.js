@@ -260,7 +260,7 @@ export default class ItemSheet5e extends ItemSheet {
    * component that is usually mounted on fixtures rather than equipped, and
    * has its own AC and HP.
    * @param item
-   * @return {boolean}
+   * @returns {boolean}
    * @private
    */
   _isItemMountable(item) {
