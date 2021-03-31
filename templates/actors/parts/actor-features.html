@@ -85,6 +85,17 @@
 
             {{#if ../../owner}}
             <div class="item-controls flexrow">
+                {{#if section.isClass}}
+                    <span class="primary-class">
+                        {{#if item.isPrimaryClass}}
+                        <i class="fas fa-star" title="{{localize "DND5E.ClassPrimary"}}"></i>
+                        {{else}}
+                        <a class="item-control make-primary" title="{{localize "DND5E.ClassMakePrimary"}}">
+                            <i class="far fa-star"></i>
+                        </a>
+                        {{/if}}
+                    </span>
+                {{/if}}
                 {{#if section.crewable}}
                 <a class="item-control item-toggle {{item.toggleClass}}"
                    title="{{item.toggleTitle}}">

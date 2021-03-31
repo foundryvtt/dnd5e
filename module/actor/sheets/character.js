@@ -100,6 +100,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // Item toggle state
       this._prepareItemToggleState(item);
 
+      // Primary Class
+      if ( item.type === "class" ) item.isPrimaryClass = ( item._id === this.actor.data.flags.dnd5e?.primaryClass );
+
       // Classify items into types
       if ( item.type === "spell" ) arr[1].push(item);
       else if ( item.type === "feat" ) arr[2].push(item);
@@ -186,6 +189,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Item State Toggling
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
 
+    // Primary Class Toggling
+    html.find(".make-primary").click(this._onMakeClassPrimary.bind(this));
+
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
@@ -236,6 +242,20 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle setting class as primary class.
+   *
+   * @param {Event} event   The triggering click event
+   * @private
+   */
+  async _onMakeClassPrimary(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    return this.actor.update({"flags.dnd5e.primaryClass": itemId});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Take a short rest, calling the relevant function on the Actor instance
    * @param {Event} event   The triggering click event
    * @private
@@ -274,6 +294,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
           itemData.levels = next;
           return cls.update({"data.levels": next});
         }
+      } else if ( this.actor.itemTypes.class.length === 0 ) {
+        await this.actor.update({"flags.dnd5e.primaryClass": itemData._id});
       }
     }
 
