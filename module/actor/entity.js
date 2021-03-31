@@ -136,9 +136,9 @@ export default class Actor5e extends Actor {
   /** @inheritdoc */
   getRollData() {
     const data = super.getRollData();
-    data.classes = this.data.items.reduce((obj, i) => {
+    data.classes = this.items.reduce((obj, i) => {
       if ( i.type === "class" ) {
-        obj[i.name.slugify({strict: true})] = i.getRollData();
+        obj[i.name.slugify({strict: true})] = i.data.data;
       }
       return obj;
     }, {});

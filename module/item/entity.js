@@ -412,10 +412,11 @@ export default class Item5e extends Item {
    */
   async roll({configureDialog=true, rollMode, createMessage=true}={}) {
     let item = this;
+    const id = this.data.data;                // Item system data
     const actor = this.actor;
+    const ad = actor.data.data;               // Actor system data
 
     // Reference aspects of the item data necessary for usage
-    const id = this.data.data;                // Item data
     const hasArea = this.hasAreaTarget;       // Is the ability usage an AoE?
     const resource = id.consume || {};        // Resource consumption
     const recharge = id.recharge || {};       // Recharge mechanic
@@ -430,6 +431,8 @@ export default class Item5e extends Item {
     let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
     let consumeUsage = !!uses.per;              // Consume limited uses
     let consumeQuantity = uses.autoDestroy;     // Consume quantity of the item in lieu of uses
+    let consumeSpellLevel = id.preparation.mode === "pact" ? "pact" : `spell${id.level}`; // Consume a specific category of spell slot
+    if ( !requireSpellSlot ) consumeSpellSlot = null;
 
     // Display a configuration dialog to customize the usage
     const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
@@ -446,27 +449,27 @@ export default class Item5e extends Item {
 
       // Handle spell upcasting
       if ( requireSpellSlot ) {
-        const slotLevel = configuration.level;
-        const spellLevel = slotLevel === "pact" ? actor.data.data.spells.pact.level : parseInt(slotLevel);
-        if (spellLevel !== id.level) {
-          item = this.clone({"data.level": spellLevel}, {keepId: true});
+        consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
+        if ( consumeSpellSlot === false ) consumeSpellLevel = null;
+        const upcastLevel = configuration.level === "pact" ? ad.spells.pact.level : parseInt(configuration.level);
+        if (upcastLevel !== id.level) {
+          item = this.clone({"data.level": upcastLevel}, {keepId: true});
           item.data.update({_id: this.id}); // Retain the original ID (needed until 0.8.2+)
           item.prepareFinalAttributes(); // Spell save DC, etc...
         }
-        if ( consumeSpellSlot ) consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
       }
     }
 
     // Determine whether the item can be used by testing for resource consumption
-    const usage = item._getUsageUpdates({consumeRecharge, consumeResource, consumeSpellSlot, consumeUsage, consumeQuantity});
+    const usage = item._getUsageUpdates({consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage, consumeQuantity});
     if ( !usage ) return;
     const {actorUpdates, itemUpdates, resourceUpdates} = usage;
 
     // Commit pending data updates
-    if ( !isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
-    if ( !isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
-    if ( !isObjectEmpty(resourceUpdates) ) {
+    if ( !foundry.utils.isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
+    if ( consumeQuantity && (id.quantity === 0) ) await item.delete();
+    if ( !foundry.utils.isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
+    if ( !foundry.utils.isObjectEmpty(resourceUpdates) ) {
       const resource = actor.items.get(id.consume?.target);
       if ( resource ) await resource.update(resourceUpdates);
     }
@@ -489,12 +492,12 @@ export default class Item5e extends Item {
    * @param {boolean} consumeQuantity     Consume quantity of the item if other consumption modes are not available?
    * @param {boolean} consumeRecharge     Whether the item consumes the recharge mechanic
    * @param {boolean} consumeResource     Whether the item consumes a limited resource
-   * @param {string|boolean} consumeSpellSlot   A level of spell slot consumed, or false
+   * @param {string|null} consumeSpellLevel The category of spell slot to consume, or null
    * @param {boolean} consumeUsage        Whether the item consumes a limited usage
    * @returns {object|boolean}            A set of data changes to apply when the item is used, or false
    * @private
    */
-  _getUsageUpdates({consumeQuantity=false, consumeRecharge=false, consumeResource=false, consumeSpellSlot=false, consumeUsage=false}) {
+  _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage}) {
 
     // Reference item data
     const id = this.data.data;
@@ -519,15 +522,16 @@ export default class Item5e extends Item {
     }
 
     // Consume Spell Slots
-    if ( consumeSpellSlot ) {
-      const level = this.actor?.data.data.spells[consumeSpellSlot];
+    if ( consumeSpellLevel ) {
+      if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
+      const level = this.actor?.data.data.spells[consumeSpellLevel];
       const spells = Number(level?.value ?? 0);
       if ( spells === 0 ) {
-        const label = game.i18n.localize(consumeSpellSlot === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${id.level}`);
+        const label = game.i18n.localize(consumeSpellLevel === "pact" ? "DND5E.SpellProgPact" : `DND5E.SpellLevel${id.level}`);
         ui.notifications.warn(game.i18n.format("DND5E.SpellCastNoSlots", {name: this.name, level: label}));
         return false;
       }
-      actorUpdates[`data.spells.${consumeSpellSlot}.value`] = Math.max(spells - 1, 0);
+      actorUpdates[`data.spells.${consumeSpellLevel}.value`] = Math.max(spells - 1, 0);
     }
 
     // Consume Limited Usage
