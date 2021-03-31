@@ -2,6 +2,19 @@
     <section class="form-body">
 	    <p class="notes">{{localize 'DND5E.FlagsInstructions'}}</p>
 
+        <h3 class="form-header">{{localize "DND5E.ItemTypeClass"}}</h3>
+        <div class="form-group">
+          <label>{{localize "DND5E.ClassMakePrimary"}}</label>
+          <select name="data.primaryClass" data-dtype="String">
+            {{#select actor.data.data.primaryClass}}
+            {{#each actor.itemTypes.class}}
+              <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+            {{/select}}
+          </select>
+          <p class="notes">{{localize "DND5E.ClassMakePrimaryHint"}}</p>
+        </div>
+
         {{#each flags as |fs section|}}
         <h3 class="form-header">{{localize section}}</h3>
         {{#each fs as |flag key|}}

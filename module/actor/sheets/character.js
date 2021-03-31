@@ -189,9 +189,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Item State Toggling
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
 
-    // Primary Class Toggling
-    html.find(".make-primary").click(this._onMakeClassPrimary.bind(this));
-
     // Short and Long Rest
     html.find('.short-rest').click(this._onShortRest.bind(this));
     html.find('.long-rest').click(this._onLongRest.bind(this));
@@ -237,20 +234,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const item = this.actor.items.get(itemId);
     const attr = item.data.type === "spell" ? "data.preparation.prepared" : "data.equipped";
     return item.update({[attr]: !getProperty(item.data, attr)});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle setting class as primary class.
-   *
-   * @param {Event} event   The triggering click event
-   * @private
-   */
-  async _onMakeClassPrimary(event) {
-    event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    return this.actor.update({"data.primaryClass": itemId});
   }
 
   /* -------------------------------------------- */
