@@ -5,8 +5,8 @@
         <h3 class="form-header">{{localize "DND5E.ItemTypeClass"}}</h3>
         <div class="form-group">
           <label>{{localize "DND5E.ClassMakePrimary"}}</label>
-          <select name="data.primaryClass" data-dtype="String">
-            {{#select actor.data.data.primaryClass}}
+          <select name="data.details.primaryClass" data-dtype="String">
+            {{#select actor.data.data.details.primaryClass}}
             {{#each classes}}
               <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
