@@ -525,6 +525,21 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+    super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);
+
+    if ( embeddedName !== "Item" ) return;
+    for ( let item of documents ) {
+      if ( item.type === "class" && (item._id === this.data.data.primaryClass) ) {
+        const classes = this.itemTypes.class.sort((a, b) => b.data.data.levels - a.data.data.levels);
+        return this.update({"data.primaryClass": classes[0]?._id || ""});
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Gameplay Mechanics                          */
   /* -------------------------------------------- */
 

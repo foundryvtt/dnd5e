@@ -7,7 +7,7 @@
           <label>{{localize "DND5E.ClassMakePrimary"}}</label>
           <select name="data.primaryClass" data-dtype="String">
             {{#select actor.data.data.primaryClass}}
-            {{#each actor.itemTypes.class}}
+            {{#each classes}}
               <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
             {{/select}}

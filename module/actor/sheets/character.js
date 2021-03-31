@@ -140,7 +140,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( f.data.activation.type ) features.active.items.push(f);
       else features.passive.items.push(f);
     }
-    classes.sort((a, b) => b.levels - a.levels);
+    classes.sort((a, b) => b.data.levels - a.data.levels);
     features.classes.items = classes;
 
     // Assign and return
