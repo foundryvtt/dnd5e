@@ -1,8 +1,8 @@
 /**
  * A simple form to set actor movement speeds
- * @extends {BaseEntitySheet}
+ * @extends {DocumentSheet}
  */
-export default class ActorMovementConfig extends BaseEntitySheet {
+export default class ActorMovementConfig extends DocumentSheet {
 
   /** @override */
 	static get defaultOptions() {

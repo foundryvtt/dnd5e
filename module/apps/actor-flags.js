@@ -1,11 +1,10 @@
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor
- * @implements {BaseEntitySheet}
+ * @implements {DocumentSheet}
  */
-export default class ActorSheetFlags extends BaseEntitySheet {
+export default class ActorSheetFlags extends DocumentSheet {
   static get defaultOptions() {
-    const options = super.defaultOptions;
-    return mergeObject(options, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
 	    classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/actor-flags.html",
