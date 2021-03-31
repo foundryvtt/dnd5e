@@ -294,8 +294,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
           itemData.levels = next;
           return cls.update({"data.levels": next});
         }
-      } else if ( this.actor.itemTypes.class.length === 0 ) {
-        await this.actor.update({"flags.dnd5e.primaryClass": itemData._id});
       }
     }
 
