@@ -38,7 +38,7 @@
         <li class="item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url('{{item.img}}')"></div>
-                <h4>{{item.name}}</h4>
+                <h4>{{item.name}}{{#if item.isPrimaryClass}} ({{localize "DND5E.ClassPrimary"}}){{/if}}</h4>
             </div>
 
             {{#if section.hasActions}}

@@ -511,6 +511,19 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
+    if ( embeddedName !== "Item" ) return;
+
+    for ( let item of documents ) {
+      if ( item.type === "class" && !this.items.get(this.data.data.primaryClass) ) {
+        return this.update({"data.primaryClass": item._id});
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Gameplay Mechanics                          */
   /* -------------------------------------------- */
 

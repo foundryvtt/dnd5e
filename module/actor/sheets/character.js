@@ -101,7 +101,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       this._prepareItemToggleState(item);
 
       // Primary Class
-      if ( item.type === "class" ) item.isPrimaryClass = ( item._id === this.actor.data.flags.dnd5e?.primaryClass );
+      if ( item.type === "class" ) item.isPrimaryClass = ( item._id === this.actor.data.data.primaryClass );
 
       // Classify items into types
       if ( item.type === "spell" ) arr[1].push(item);
@@ -250,7 +250,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   async _onMakeClassPrimary(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    return this.actor.update({"flags.dnd5e.primaryClass": itemId});
+    return this.actor.update({"data.primaryClass": itemId});
   }
 
   /* -------------------------------------------- */
