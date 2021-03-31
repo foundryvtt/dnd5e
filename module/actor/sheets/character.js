@@ -278,6 +278,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Default drop handling if levels were not added
-    super._onDropItemCreate(itemData);
+    return super._onDropItemCreate(itemData);
   }
 }
