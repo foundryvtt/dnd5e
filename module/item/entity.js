@@ -673,8 +673,6 @@ export default class Item5e extends Item {
     };
 
     // Render the chat card template
-    console.log(this.labels);
-    debugger;
     const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
     const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
