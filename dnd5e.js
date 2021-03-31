@@ -18,6 +18,7 @@ import { measureDistances, getBarAttribute } from "./module/canvas.js";
 // Import Documents
 import Actor5e from "./module/actor/entity.js";
 import Item5e from "./module/item/entity.js";
+import Token5e from "./module/token.js";
 
 // Import Applications
 import AbilityTemplate from "./module/pixi/ability-template.js";
@@ -67,6 +68,7 @@ Hooks.once("init", function() {
     entities: {
       Actor5e,
       Item5e,
+      Token5e,
     },
     macros: macros,
     migrations: migrations,
@@ -77,6 +79,7 @@ Hooks.once("init", function() {
   CONFIG.DND5E = DND5E;
   CONFIG.Actor.documentClass = Actor5e;
   CONFIG.Item.documentClass = Item5e;
+  CONFIG.Token.objectClass = Token5e;
   CONFIG.time.roundTime = 6;
 
   // 5e cone RAW should be 53.13 degrees
@@ -196,7 +199,7 @@ Hooks.on("canvasInit", function() {
   SquareGrid.prototype.measureDistances = measureDistances;
 
   // Extend Token Resource Bars
-  Token.prototype.getBarAttribute = getBarAttribute;
+  TokenDocument.prototype.getBarAttribute = getBarAttribute;
 });
 
 

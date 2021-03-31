@@ -43,7 +43,7 @@ export const measureDistances = function(segments, options={}) {
  * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
  * TODO: This should probably be replaced with a formal Token class extension
  */
-const _TokenGetBarAttribute = Token.prototype.getBarAttribute;
+const _TokenGetBarAttribute = TokenDocument.prototype.getBarAttribute;
 export const getBarAttribute = function(...args) {
   const data = _TokenGetBarAttribute.bind(this)(...args);
   if ( data && (data.attribute === "attributes.hp") ) {
