@@ -1,9 +1,27 @@
 /**
+ * Extend the base TokenDocument class to implement system-specific HP bar logic.
+ */
+export class TokenDocument5e extends TokenDocument {
+
+  /** @override */
+  getBarAttribute(...args) {
+    const data = super.getBarAttribute(...args);
+    if ( data && (data.attribute === "attributes.hp") ) {
+      data.value += parseInt(getProperty(this.actor.data, "data.attributes.hp.temp") || 0);
+      data.max += parseInt(getProperty(this.actor.data, "data.attributes.hp.tempmax") || 0);
+    }
+    return data;
+  }
+
+}
+
+
+/**
  * Extend the base Token class to implement additional system-specific logic.
  *
  * @extends {Token}
  */
-export default class Token5e extends Token {
+export class Token5e extends Token {
 
   /** @override */
   _drawBar(number, bar, data) {
