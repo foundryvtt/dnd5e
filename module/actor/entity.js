@@ -518,8 +518,8 @@ export default class Actor5e extends Actor {
 
     if ( embeddedName !== "Item" ) return;
     for ( let item of documents ) {
-      if ( item.type === "class" && !this.items.get(this.data.data.details.primaryClass) ) {
-        return this.update({"data.details.primaryClass": item._id});
+      if ( item.type === "class" && !this.items.get(this.data.data.details.originalClass) ) {
+        return this.update({"data.details.originalClass": item._id});
       }
     }
   }
@@ -532,9 +532,9 @@ export default class Actor5e extends Actor {
 
     if ( embeddedName !== "Item" ) return;
     for ( let item of documents ) {
-      if ( item.type === "class" && (item._id === this.data.data.details.primaryClass) ) {
+      if ( item.type === "class" && (item._id === this.data.data.details.originalClass) ) {
         const classes = this.itemTypes.class.sort((a, b) => b.data.data.levels - a.data.data.levels);
-        return this.update({"data.details.primaryClass": classes[0]?._id || ""});
+        return this.update({"data.details.originalClass": classes[0]?._id || ""});
       }
     }
   }

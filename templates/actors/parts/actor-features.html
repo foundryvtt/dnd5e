@@ -60,11 +60,11 @@
             </div>
 
             {{else if section.isClass}}
+            <div class="item-detail item-action">
+                {{#if item.isOriginalClass}}{{localize "DND5E.ClassOriginal"}}{{/if}}
+            </div>
             <div class="item-detail player-class">
                 {{item.data.subclass}}
-            </div>
-            <div class="item-detail item-action">
-                {{#if item.isPrimaryClass}}{{localize "DND5E.ClassPrimary"}}{{/if}}
             </div>
             <div class="item-detail item-action">
                 Level {{item.data.levels}}
