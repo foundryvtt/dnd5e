@@ -1655,6 +1655,53 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /*
+   * Populate a proficiency object with a `selected` field containing a combination of
+   * localizable group & individual proficiencies from `value` and the contents of `custom`.
+   *
+   * @param {object} data                Object containing proficiency data
+   * @param {Array.<string>} data.value  Array of standard proficiency keys
+   * @param {string} data.custom         Semicolon-separated string of custom proficiencies
+   * @param {string} type                "armor", "weapon", or "tool"
+   */
+  static prepareProficiencies(data, type) {
+    let profs, profGroups;
+    switch (type) {
+      case "armor":
+        profs = CONFIG.DND5E.armorProficiencies;
+        break;
+      case "weapon":
+        profs = CONFIG.DND5E.weaponProficiencies;
+        profGroups = CONFIG.DND5E.weapons;
+        break;
+      case "tool":
+        profs = CONFIG.DND5E.toolProficiencies;
+        profGroups = CONFIG.DND5E.tools;
+        break;
+    }
+
+    let values = [];
+    if ( data.value ) {
+      values = data.value instanceof Array ? data.value : [data.value];
+    }
+
+    data.selected = values.reduce((obj, t) => {
+      if (profGroups && t.includes(".")) {
+        obj[t] = getProperty(profGroups, t)?.label;
+      } else {
+        obj[t] = profs[t];
+      }
+      return obj;
+    }, {});
+
+    // Add custom entries
+    if ( data.custom ) {
+      data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  DEPRECATED METHODS                          */
   /* -------------------------------------------- */
 

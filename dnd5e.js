@@ -166,6 +166,21 @@ Hooks.once("setup", function() {
       return obj;
     }, {});
   }
+
+  // Localize and sort Tools & Weapons CONFIG objects
+  for ( let type of ["tools", "weapons"] ) {
+    for (let [k, v] of Object.entries(CONFIG.DND5E[type])) {
+      const localized = Object.entries(v).map(e => {
+        return [e[0], {label: game.i18n.localize(e[1].label), link: e[1].link}];
+      });
+      localized.sort((a, b) => a[1].label.localeCompare(b[1].label));
+      CONFIG.DND5E[type][k] = localized.reduce((obj, e) => {
+        obj[e[0]] = e[1];
+        return obj;
+      }, {});
+    }
+  }
+
 });
 
 /* -------------------------------------------- */
