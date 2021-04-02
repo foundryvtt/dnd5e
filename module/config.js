@@ -84,6 +84,54 @@ DND5E.weaponProficiencies = {
   "mar": "DND5E.WeaponMartialProficiency"
 };
 
+DND5E.weapons = {
+  "sim": {
+    "club":          { label: "DND5E.WEAPONS.Club",          link: "dnd5e.items.nfIRTECQIG81CvM4" },
+    "dagger":        { label: "DND5E.WEAPONS.Dagger",        link: "dnd5e.items.0E565kQUBmndJ1a2" },
+    "greatclub":     { label: "DND5E.WEAPONS.Greatclub",     link: "dnd5e.items.QRCsxkCwWNwswL9o" },
+    "handaxe":       { label: "DND5E.WEAPONS.Handaxe",       link: "dnd5e.items.eO7Fbv5WBk5zvGOc" },
+    "javelin":       { label: "DND5E.WEAPONS.Javelin",       link: "dnd5e.items.DWLMnODrnHn8IbAG" },
+    "lighthammer":   { label: "DND5E.WEAPONS.LightHammer",   link: "dnd5e.items.XVK6TOL4sGItssAE" },
+    "mace":          { label: "DND5E.WEAPONS.Mace",          link: "dnd5e.items.Ajyq6nGwF7FtLhDQ" },
+    "quarterstaff":  { label: "DND5E.WEAPONS.Quarterstaff",  link: "dnd5e.items.g2dWN7PQiMRYWzyk" },
+    "sickle":        { label: "DND5E.WEAPONS.Sickle",        link: "dnd5e.items.i4NeNZ30ycwPDHMx" },
+    "spear":         { label: "DND5E.WEAPONS.Spear",         link: "dnd5e.items.OG4nBBydvmfWYXIk" },
+    "lightcrossbow": { label: "DND5E.WEAPONS.CrossbowLight", link: "dnd5e.items.ddWvQRLmnnIS0eLF" },
+    "dart":          { label: "DND5E.WEAPONS.Dart",          link: "dnd5e.items.3rCO8MTIdPGSW6IJ" },
+    "shortbow":      { label: "DND5E.WEAPONS.Shorbow",       link: "dnd5e.items.GJv6WkD7D2J6rP6M" },
+    "sling":         { label: "DND5E.WEAPONS.Sling",         link: "dnd5e.items.3gynWO9sN4OLGMWD" },
+  },
+  "mar": {
+    "battleaxe":     { label: "DND5E.WEAPONS.Battleaxe",     link: "dnd5e.items.I0WocDSuNpGJayPb" },
+    "flail":         { label: "DND5E.WEAPONS.Flail",         link: "dnd5e.items.UrH3sMdnUDckIHJ6" },
+    "glaive":        { label: "DND5E.WEAPONS.Glaive",        link: "dnd5e.items.rOG1OM2ihgPjOvFW" },
+    "greataxe":      { label: "DND5E.WEAPONS.Greataxe",      link: "dnd5e.items.1Lxk6kmoRhG8qQ0u" },
+    "greatsword":    { label: "DND5E.WEAPONS.Greatsword",    link: "dnd5e.items.xMkP8BmFzElcsMaR" },
+    "halberd":       { label: "DND5E.WEAPONS.Halberd",       link: "dnd5e.items.DMejWAc8r8YvDPP1" },
+    "lance":         { label: "DND5E.WEAPONS.Lance",         link: "dnd5e.items.RnuxdHUAIgxccVwj" },
+    "longsword":     { label: "DND5E.WEAPONS.Longsword",     link: "dnd5e.items.10ZP2Bu3vnCuYMIB" },
+    "maul":          { label: "DND5E.WEAPONS.Maul",          link: "dnd5e.items.DizirD7eqjh8n95A" },
+    "morningstar":   { label: "DND5E.WEAPONS.Morningstar",   link: "dnd5e.items.dX8AxCh9o0A9CkT3" },
+    "pike":          { label: "DND5E.WEAPONS.Pike",          link: "dnd5e.items.tC0kcqZT9HHAO0PD" },
+    "rapier":        { label: "DND5E.WEAPONS.Rapier",        link: "dnd5e.items.Tobce1hexTnDk4sV" },
+    "scimitar":      { label: "DND5E.WEAPONS.Scimitar",      link: "dnd5e.items.fbC0Mg1a73wdFbqO" },
+    "shortsword":    { label: "DND5E.WEAPONS.Shortsword",    link: "dnd5e.items.osLzOwQdPtrK3rQH" },
+    "trident":       { label: "DND5E.WEAPONS.Trident",       link: "dnd5e.items.F65ANO66ckP8FDMa" },
+    "warpick":       { label: "DND5E.WEAPONS.WarPick",       link: "dnd5e.items.2YdfjN1PIIrSHZii" },
+    "warhammer":     { label: "DND5E.WEAPONS.Warhammer",     link: "dnd5e.items.F0Df164Xv1gWcYt0" },
+    "whip":          { label: "DND5E.WEAPONS.Whip",          link: "dnd5e.items.QKTyxoO0YDnAsbYe" },
+    "blowgun":       { label: "DND5E.WEAPONS.Blowgun",       link: "dnd5e.items.wNWK6yJMHG9ANqQV" },
+    "handcrossbow":  { label: "DND5E.WEAPONS.CrossbowHand",  link: "dnd5e.items.qaSro7kFhxD6INbZ" },
+    "heavycrossbow": { label: "DND5E.WEAPONS.CrossbowHeavy", link: "dnd5e.items.RmP0mYRn2J7K26rX" },
+    "longbow":       { label: "DND5E.WEAPONS.Longbow",       link: "dnd5e.items.3cymOVja8jXbzrdT" },
+    "net":           { label: "DND5E.WEAPONS.Net",           link: "dnd5e.items.aEiM49V8vWpWw7rU" },
+  }
+};
+
+/* -------------------------------------------- */
+
+
+
 DND5E.toolProficiencies = {
   "art": "DND5E.ToolArtisans",
   "disg": "DND5E.ToolDisguiseKit",
@@ -95,6 +143,46 @@ DND5E.toolProficiencies = {
   "pois": "DND5E.ToolPoisonersKit",
   "thief": "DND5E.ToolThieves",
   "vehicle": "DND5E.ToolVehicle"
+};
+
+DND5E.tools = {
+  "art": {
+    "alchemist": { label: "DND5E.TOOLS.Alchemist", link: "dnd5e.items." },
+    "brewer": { label: "DND5E.TOOLS.Brewer", link: "dnd5e.items." },
+    "calligrapher": { label: "DND5E.TOOLS.Calligrapher", link: "dnd5e.items." },
+    "carpenter": { label: "DND5E.TOOLS.Carpenter", link: "dnd5e.items." },
+    "cartographer": { label: "DND5E.TOOLS.Cartographer", link: "dnd5e.items." },
+    "cobbler": { label: "DND5E.TOOLS.Cobbler", link: "dnd5e.items." },
+    "cook": { label: "DND5E.TOOLS.Cook", link: "dnd5e.items." },
+    "glassblower": { label: "DND5E.TOOLS.Glassblower", link: "dnd5e.items." },
+    "jeweler": { label: "DND5E.TOOLS.Jeweler", link: "dnd5e.items." },
+    "leatherworker": { label: "DND5E.TOOLS.Leatherworker", link: "dnd5e.items." },
+    "mason": { label: "DND5E.TOOLS.Mason", link: "dnd5e.items." },
+    "painter": { label: "DND5E.TOOLS.Painter", link: "dnd5e.items." },
+    "potter": { label: "DND5E.TOOLS.Potter", link: "dnd5e.items." },
+    "smith": { label: "DND5E.TOOLS.Smith", link: "dnd5e.items." },
+    "tinker": { label: "DND5E.TOOLS.Tinker", link: "dnd5e.items." },
+    "weaver": { label: "DND5E.TOOLS.Weaver", link: "dnd5e.items." },
+    "woodcarver": { label: "DND5E.TOOLS.Woodcarver", link: "dnd5e.items." },
+    "disguise": { label: "DND5E.TOOLS.Disguise", link: "dnd5e.items." },
+    "forgery": { label: "DND5E.TOOLS.Forgery", link: "dnd5e.items." },
+  },
+  "game": {
+    "dice": { label: "DND5E.TOOLS.Dice", link: "dnd5e.items." },
+    "card": { label: "DND5E.TOOLS.PlayingCard", link: "dnd5e.items." },
+  },
+  "music": {
+    "bagpipes": { label: "DND5E.TOOLS.Bagpipes", link: "dnd5e.items." },
+    "drum": { label: "DND5E.TOOLS.Drum", link: "dnd5e.items." },
+    "dulcimer": { label: "DND5E.TOOLS.Dulcimer", link: "dnd5e.items." },
+    "flute": { label: "DND5E.TOOLS.Flute", link: "dnd5e.items." },
+    "lute": { label: "DND5E.TOOLS.Lute", link: "dnd5e.items." },
+    "lyre": { label: "DND5E.TOOLS.Lyre", link: "dnd5e.items." },
+    "horn": { label: "DND5E.TOOLS.Horn", link: "dnd5e.items." },
+    "panflute": { label: "DND5E.TOOLS.PanFlute", link: "dnd5e.items." },
+    "shawm": { label: "DND5E.TOOLS.Shawm", link: "dnd5e.items." },
+    "viol": { label: "DND5E.TOOLS.Viol", link: "dnd5e.items." },
+  }
 };
 
 
