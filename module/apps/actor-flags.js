@@ -26,10 +26,24 @@ export default class ActorSheetFlags extends DocumentSheet {
   getData() {
     const data = {};
     data.actor = this.object;
-    data.classes = this.object.itemTypes.class.sort((a, b) => a.name.localeCompare(b.name));
+    data.classes = this._getClasses();
     data.flags = this._getFlags();
     data.bonuses = this._getBonuses();
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an object of sorted classes.
+   * @return {object}
+   */
+  _getClasses() {
+    const classes = this.object.itemTypes.class.sort((a, b) => a.name.localeCompare(b.name));
+    return classes.reduce((acc, cur) => {
+      acc[cur.data._id] = cur.name;
+      return acc;
+    }, {});
   }
 
   /* -------------------------------------------- */
