@@ -37,6 +37,7 @@ export default class ActorSheetFlags extends DocumentSheet {
   /**
    * Prepare an object of sorted classes.
    * @return {object}
+   * @private
    */
   _getClasses() {
     const classes = this.object.itemTypes.class.sort((a, b) => a.name.localeCompare(b.name));
@@ -52,6 +53,7 @@ export default class ActorSheetFlags extends DocumentSheet {
    * Prepare an object of flags data which groups flags by section
    * Add some additional data for rendering
    * @return {object}
+   * @private
    */
   _getFlags() {
     const flags = {};
