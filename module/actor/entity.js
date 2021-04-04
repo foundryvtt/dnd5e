@@ -229,7 +229,7 @@ export default class Actor5e extends Actor {
     const data = actorData.data;
 
     // Determine character level and available hit dice based on owned Class items
-    const [level, hd] = actorData.items.reduce((arr, item) => {
+    const [level, hd] = this.items.reduce((arr, item) => {
       if ( item.type === "class" ) {
         const classLevels = parseInt(item.data.data.levels) || 1;
         arr[0] += classLevels;

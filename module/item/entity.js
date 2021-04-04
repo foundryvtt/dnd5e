@@ -431,8 +431,8 @@ export default class Item5e extends Item {
     let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
     let consumeUsage = !!uses.per;              // Consume limited uses
     let consumeQuantity = uses.autoDestroy;     // Consume quantity of the item in lieu of uses
-    let consumeSpellLevel = id.preparation.mode === "pact" ? "pact" : `spell${id.level}`; // Consume a specific category of spell slot
-    if ( !requireSpellSlot ) consumeSpellSlot = null;
+    let consumeSpellLevel = null;               // Consume a specific category of spell slot
+    if ( requireSpellSlot ) consumeSpellLevel = id.preparation.mode === "pact" ? "pact" : `spell${id.level}`;
 
     // Display a configuration dialog to customize the usage
     const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
