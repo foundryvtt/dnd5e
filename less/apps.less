@@ -482,7 +482,7 @@
 /* Trait Selector
 /* ----------------------------------------- */
 
-#trait-selector {
+#actor-type, #trait-selector {
   .trait-list {
     list-style: none;
     margin: 0;
@@ -492,5 +492,40 @@
   input[type="text"] {
     height: 24px;
     margin: 2px;
+  }
+}
+
+#actor-type {
+  .trait-list {
+    display: flex;
+    flex-wrap: wrap;
+    
+    li {
+      flex-basis: 50%;
+      flex-grow: 1;
+    }
+  }
+  label.radio {
+    display: flex;
+    flex: auto;
+    height: 22px;
+
+    font-size: 12px;
+    line-height: 2.2em;
+
+    > input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.33em;
+      position: relative;
+      top: 4px;
+    }
+    > input[type="text"] {
+      margin-right: -2px;
+    }
+  }
+
+  label.checkbox {
+    font-size: 13px;
   }
 }

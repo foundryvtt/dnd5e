@@ -1,3 +1,4 @@
+import Actor5e from "../entity.js";
 import ActorSheet5e from "../sheets/base.js";
 
 /**
@@ -78,8 +79,27 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     const cr = parseFloat(data.data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
     data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
+
+    // Type
+    data.labels["type"] = this._getType(data.actor.data);
+
     return data;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the NPC type formatted as a string.
+   * @param {object} actorData                The Actor data being prepared.
+   * @returns {string}
+   * @private
+   */
+  _getType(actorData) {
+    let attr = actorData.details.type;
+    if ( getType(attr) !== "Object" ) return attr;
+    return Actor5e.formatCreatureType(attr);
+  }
+
 
   /* -------------------------------------------- */
   /*  Object Updates                              */
