@@ -100,6 +100,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // Item toggle state
       this._prepareItemToggleState(item);
 
+      // Primary Class
+      if ( item.type === "class" ) item.isOriginalClass = ( item._id === this.actor.data.data.details.originalClass );
+
       // Classify items into types
       if ( item.type === "spell" ) arr[1].push(item);
       else if ( item.type === "feat" ) arr[2].push(item);
@@ -137,7 +140,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( f.data.activation.type ) features.active.items.push(f);
       else features.passive.items.push(f);
     }
-    classes.sort((a, b) => b.levels - a.levels);
+    classes.sort((a, b) => b.data.levels - a.data.levels);
     features.classes.items = classes;
 
     // Assign and return
