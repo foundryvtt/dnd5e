@@ -1,14 +1,13 @@
 /**
  * A specialized form used to select from a checklist of attributes, traits, or properties
- * @implements {FormApplication}
+ * @extends {FormApplication}
  */
 export default class TraitSelector extends FormApplication {
 
-  /** @override */
+  /** @inheritdoc */
 	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
-	    id: "trait-selector",
-      classes: ["dnd5e"],
+	  return foundry.utils.mergeObject(super.defaultOptions, {
+      classes: ["dnd5e", "trait-selector", "subconfig"],
       title: "Actor Trait Selection",
       template: "systems/dnd5e/templates/apps/trait-selector.html",
       width: 320,
@@ -22,9 +21,16 @@ export default class TraitSelector extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get id() {
+    return `trait-selector-${this.object.id}`;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Return a reference to the target attribute
-   * @type {String}
+   * @type {string}
    */
   get attribute() {
 	  return this.options.name;
@@ -35,18 +41,19 @@ export default class TraitSelector extends FormApplication {
   /** @override */
   getData() {
 
-    // Get current values
-    let attr = getProperty(this.object._data, this.attribute);
-    if ( getType(attr) !== "Object" ) attr = {value: [], custom: ""};
+    // Get the source object value
+    let attr = foundry.utils.getProperty(this.object.toJSON(), this.attribute);
+    if ( foundry.utils.getType(attr) !== "Object" ) attr = {value: [], custom: ""};
 
 	  // Populate choices
-    const choices = foundry.utils.deepClone(this.options.choices);
-    for ( let [k, v] of Object.entries(choices) ) {
-      choices[k] = {
+    const choices = Object.entries(this.options.choices).reduce((obj, e) => {
+      let [k, v] = e;
+      obj[k] = {
         label: v,
         chosen: attr ? attr.value.includes(k) : false
-      }
-    }
+      };
+      return obj;
+    }, {})
 
     // Return data
     return {

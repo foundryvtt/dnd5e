@@ -205,24 +205,21 @@ export const migrateItemData = function(item) {
  * @return {Object}       The updateData to apply
  */
 export const migrateSceneData = function(scene) {
-  const tokens = scene.tokens.toJSON();
-  return {
-    tokens: tokens.map(t => {
-      if (!t.actorId || t.actorLink || !t.actorData.data) {
-        t.actorData = {};
-        return t;
-      }
-      const token = new Token(t);
-      if ( !token.actor ) {
-        t.actorId = null;
-        t.actorData = {};
-      } else if ( !t.actorLink ) {
-        const updateData = migrateActorData(token.data.actorData);
-        t.actorData = mergeObject(token.data.actorData, updateData);
-      }
-      return t;
-    })
-  };
+  const tokens = scene.tokens.map(token => {
+    const t = token.toJSON();
+    if (!t.actorId || t.actorLink || !t.actorData.data) {
+      t.actorData = {};
+    }
+    else if ( !game.actors.has(t.actorId) ){
+      t.actorId = null;
+      t.actorData = {};
+    }
+    else if ( !t.actorLink ) {
+      t.actorData = mergeObject(t.actorData, migrateActorData(t.actorData));
+    }
+    return t;
+  });
+  return {tokens};
 };
 
 /* -------------------------------------------- */
@@ -299,54 +296,56 @@ function _migrateActorSenses(actor, updateData) {
  */
 function _migrateActorType(actor, updateData) {
   const ad = actor.data;
-  if ( ad?.details?.type === undefined || getType(ad.details.type) === "Object" ) return;
-  const original = ad.details.type;
+  const original = ad.details?.type;
+  if ( original === undefined || foundry.utils.getType(original) === "Object" ) return;
 
+  // New default data structure
   let data = {
     "value": "",
     "subtype": "",
-    "swarm": {
-      "isSwarm": false,
-      "size": ""
-    },
+    "swarm": {isSwarm: false, size: ""},
     "custom": ""
   }
 
+  // Match the existing string
   const pattern = /^(?:swarm of (?<size>[\w\-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
   const match = original.trim().match(pattern);
-  if (!match) {
-    data.value = "custom";
-    data.custom = original;
-  } else {
+  if ( match ) {
 
+    // Match a known creature type
     const typeLc = match.groups.type.trim().toLowerCase();
     const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
-      return typeLc === k ||
-             typeLc === game.i18n.localize(v).toLowerCase() ||
-             typeLc === game.i18n.localize(`${v}Pl`).toLowerCase();
+      return (typeLc === k) ||
+        (typeLc === game.i18n.localize(v).toLowerCase()) ||
+        (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
     });
-    if (typeMatch) {
-      data.value = typeMatch[0];
-    } else {
+    if (typeMatch) data.value = typeMatch[0];
+    else {
       data.value = "custom";
       data.custom = match.groups.type.trim();
     }
-
     data.subtype = match.groups.subtype?.trim() || "";
 
+    // Match a swarm
     if (match.groups.size) {
       data.swarm.isSwarm = true;
       const sizeLc = match.groups.size.trim().toLowerCase();
       const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
-        return sizeLc == k ||
-               sizeLc == game.i18n.localize(v).toLowerCase();
+        return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
       });
       if (sizeMatch) data.swarm.size = sizeMatch[0];
     }
-
   }
 
+  // No match found
+  else {
+    data.value = "custom";
+    data.custom = original;
+  }
+
+  // Update the actor data
   updateData["data.details.type"] = data;
+  console.log(data);
   return updateData;
 }
 

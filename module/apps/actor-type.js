@@ -2,15 +2,14 @@ import Actor5e from "../actor/entity.js";
 
 /**
  * A specialized form used to select from a checklist of attributes, traits, or properties
- * @implements {FormApplication}
+ * @extends {FormApplication}
  */
 export default class ActorTypeConfig extends FormApplication {
 
-  /** @override */
+  /** @inheritdoc */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
-      id: "actor-type",
-      classes: ["dnd5e"],
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      classes: ["dnd5e", "actor-type", "trait-selector"],
       title: "Actor Creature Type",
       template: "systems/dnd5e/templates/apps/actor-type.html",
       width: 280,
@@ -25,37 +24,47 @@ export default class ActorTypeConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  get id() {
+    return `actor-type-${this.object.id}`;
+  }
 
-    // Get current values
-    let attr = getProperty(this.object.data.data, 'details.type');
-    if ( getType(attr) !== "Object" ) attr = {
-      value: attr ?? "",
+  /* -------------------------------------------- */
+
+  /** @override */
+  getData(options) {
+
+    // Get current value or new default
+    let attr = foundry.utils.getProperty(this.object.data.data, 'details.type');
+    if ( foundry.utils.getType(attr) !== "Object" ) attr = {
+      value: (attr in CONFIG.DND5E.creatureTypes) ? attr : "humanoid",
       subtype: "",
       swarm: { isSwarm: false, size: "" },
       custom: ""
     };
 
-    let types = {};
     // Populate choices
+    const types = {};
     for ( let [k, v] of Object.entries(CONFIG.DND5E.creatureTypes) ) {
       types[k] = {
         label: game.i18n.localize(v),
-        chosen: attr.value.includes(k)
+        chosen: attr.value === k
       }
     }
-    types["custom"] = {
-      label: game.i18n.localize("DND5E.CreatureTypeSelectorCustom"),
-      chosen: (attr.value === "custom")
-    };
 
-    // Return data
+    // Return data for rendering
     return {
       types: types,
+      custom: {
+        value: attr.custom,
+        label: game.i18n.localize("DND5E.CreatureTypeSelectorCustom"),
+        chosen: attr.value === "custom"
+      },
       subtype: attr.subtype,
       swarm: attr.swarm,
-      custom: attr.custom,
-      sizes: CONFIG.DND5E.actorSizes,
+      sizes: Array.from(Object.entries(CONFIG.DND5E.actorSizes)).reverse().reduce((obj, e) => {
+        obj[e[0]] = e[1];
+        return obj;
+      }, {}),
       preview: Actor5e.formatCreatureType(attr) || "–"
     }
   }
@@ -65,50 +74,54 @@ export default class ActorTypeConfig extends FormApplication {
   /** @override */
   async _updateObject(event, formData) {
     const typeObject = foundry.utils.expandObject(formData);
-    this.object.update({ 'data.details.type': typeObject });
+    return this.object.update({ 'data.details.type': typeObject });
   }
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
-    html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this, html[0]));
-    html.find("input[name='swarm.isSwarm']").change(this._onSwarmCheckboxChanged.bind(this, html[0]));
-
-    // Set initial visibility
-    this._onSwarmCheckboxChanged(html[0]);
+    html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this));
+    html.find("input[name='swarm.isSwarm']").change(this._onSwarmCheckboxChanged.bind(this));
+    this._onSwarmCheckboxChanged();
   }
 
-  /** @override */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   _onChangeInput(event) {
     super._onChangeInput(event);
-
     const typeObject = foundry.utils.expandObject(this._getSubmitData());
-    this._element.find(".type-preview").text(Actor5e.formatCreatureType(typeObject) || "—");
+    this.form["preview"].value = Actor5e.formatCreatureType(typeObject) || "—";
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Select the custom radio button when the custom text field is focused.
-   * @param {HTMLElement} html      HTML object of the form area
-   * @param {Event} event           The original click event
+   * @param {FocusEvent} event      The original focusin event
    * @private
    */
-  _onCustomFieldFocused(html, event) {
-    html.querySelector("input[name='value'][value='custom']").checked = true;
+  _onCustomFieldFocused(event) {
+    this.form.querySelector("input[name='value'][value='custom']").checked = true;
     this._onChangeInput(event);
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Toggle the visibility of the swarm size field when the swarm checkbox is changed.
-   * @param {HTMLElement} html      HTML object of the form area
-   * @param {Event} event           The original click event
+   * @param {Event} [event]          The original change event
    * @private
    */
-  _onSwarmCheckboxChanged(html, event) {
-    const checked = html.querySelector("input[name='swarm.isSwarm']").checked;
-    html.querySelector("select[name='swarm.size']").parentElement.style.opacity = checked ? 1 : 0;
+  _onSwarmCheckboxChanged(event) {
+    const form = this.form;
+    const checked = form["swarm.isSwarm"].checked;
+    const div = form.querySelector(".swarm-size");
+    div.style.display = checked ? "flex" : "none";
+    this.setPosition({width: this.options.width, height: "auto"});
   }
 }
