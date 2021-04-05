@@ -24,15 +24,10 @@
         </ul>
     </div>
 
-    <div class="form-group">
-        <label>{{ localize "DND5E.CreatureSwarm" }}</label>
-        <input type="checkbox" name="swarm.isSwarm" {{checked swarm.isSwarm}}/>
-    </div>
-
     <div class="swarm-size form-group">
         <label>{{ localize "DND5E.CreatureSwarmSize" }}</label>
-        <select name="swarm.size">
-            {{selectOptions sizes selected=swarm.size localize=true}}
+        <select name="swarm">
+            {{selectOptions sizes selected=swarm blank="" localize=true}}
         </select>
     </div>
 

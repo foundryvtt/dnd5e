@@ -38,7 +38,7 @@ export default class ActorTypeConfig extends FormApplication {
     if ( foundry.utils.getType(attr) !== "Object" ) attr = {
       value: (attr in CONFIG.DND5E.creatureTypes) ? attr : "humanoid",
       subtype: "",
-      swarm: { isSwarm: false, size: "" },
+      swarm: "",
       custom: ""
     };
 
@@ -85,8 +85,6 @@ export default class ActorTypeConfig extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
     html.find("input[name='custom']").focusin(this._onCustomFieldFocused.bind(this));
-    html.find("input[name='swarm.isSwarm']").change(this._onSwarmCheckboxChanged.bind(this));
-    this._onSwarmCheckboxChanged();
   }
 
   /* -------------------------------------------- */
@@ -108,20 +106,5 @@ export default class ActorTypeConfig extends FormApplication {
   _onCustomFieldFocused(event) {
     this.form.querySelector("input[name='value'][value='custom']").checked = true;
     this._onChangeInput(event);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Toggle the visibility of the swarm size field when the swarm checkbox is changed.
-   * @param {Event} [event]          The original change event
-   * @private
-   */
-  _onSwarmCheckboxChanged(event) {
-    const form = this.form;
-    const checked = form["swarm.isSwarm"].checked;
-    const div = form.querySelector(".swarm-size");
-    div.style.display = checked ? "flex" : "none";
-    this.setPosition({width: this.options.width, height: "auto"});
   }
 }

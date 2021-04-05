@@ -76,40 +76,40 @@ export const migrateCompendium = async function(pack) {
 
   // Begin by requesting server-side data model migration and get the migrated content
   await pack.migrate();
-  const content = await pack.getContent();
+  const documents = await pack.getDocuments();
 
   // Iterate over compendium entries - applying fine-tuned migration functions
-  for ( let ent of content ) {
+  for ( let doc of documents ) {
     let updateData = {};
     try {
       switch (entity) {
         case "Actor":
-          updateData = migrateActorData(ent.data);
+          updateData = migrateActorData(doc.data);
           break;
         case "Item":
-          updateData = migrateItemData(ent.data);
+          updateData = migrateItemData(doc.data);
           break;
         case "Scene":
-          updateData = migrateSceneData(ent.data);
+          updateData = migrateSceneData(doc.data);
           break;
       }
-      if ( isObjectEmpty(updateData) ) continue;
+      if ( foundry.utils.isObjectEmpty(updateData) ) continue;
 
       // Save the entry, if data was changed
-      updateData["_id"] = ent._id;
-      await pack.updateEntity(updateData);
-      console.log(`Migrated ${entity} entity ${ent.name} in Compendium ${pack.collection}`);
+      updateData["_id"] = doc._id;
+      await doc.update(updateData);
+      console.log(`Migrated ${entity} entity ${doc.name} in Compendium ${pack.collection}`);
     }
 
     // Handle migration failures
     catch(err) {
-      err.message = `Failed dnd5e system migration for entity ${ent.name} in pack ${pack.collection}: ${err.message}`;
+      err.message = `Failed dnd5e system migration for entity ${doc.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
 
   // Apply the original locked status for the pack
-  pack.configure({locked: wasLocked});
+  await pack.configure({locked: wasLocked});
   console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
 };
 
@@ -297,13 +297,13 @@ function _migrateActorSenses(actor, updateData) {
 function _migrateActorType(actor, updateData) {
   const ad = actor.data;
   const original = ad.details?.type;
-  if ( original === undefined || foundry.utils.getType(original) === "Object" ) return;
+  if ( (original === undefined) || (foundry.utils.getType(original) === "Object") ) return;
 
   // New default data structure
   let data = {
     "value": "",
     "subtype": "",
-    "swarm": {isSwarm: false, size: ""},
+    "swarm": "",
     "custom": ""
   }
 
@@ -322,19 +322,20 @@ function _migrateActorType(actor, updateData) {
     if (typeMatch) data.value = typeMatch[0];
     else {
       data.value = "custom";
-      data.custom = match.groups.type.trim();
+      data.custom = match.groups.type.trim().titleCase();
     }
-    data.subtype = match.groups.subtype?.trim() || "";
+    data.subtype = match.groups.subtype?.trim().titleCase() || "";
 
     // Match a swarm
-    if (match.groups.size) {
-      data.swarm.isSwarm = true;
-      const sizeLc = match.groups.size.trim().toLowerCase();
+    const isNamedSwarm = actor.name.startsWith(game.i18n.localize("DND5E.CreatureSwarm"));
+    if ( match.groups.size || isNamedSwarm ) {
+      const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
       const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
         return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
       });
-      if (sizeMatch) data.swarm.size = sizeMatch[0];
+      data.swarm = sizeMatch ? sizeMatch[0] : "tiny";
     }
+    else data.swarm = "";
   }
 
   // No match found
