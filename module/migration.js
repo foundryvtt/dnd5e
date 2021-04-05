@@ -93,10 +93,9 @@ export const migrateCompendium = async function(pack) {
           updateData = migrateSceneData(doc.data);
           break;
       }
-      if ( foundry.utils.isObjectEmpty(updateData) ) continue;
 
       // Save the entry, if data was changed
-      updateData["_id"] = doc.id;
+      if ( foundry.utils.isObjectEmpty(updateData) ) continue;
       await doc.update(updateData);
       console.log(`Migrated ${entity} entity ${doc.name} in Compendium ${pack.collection}`);
     }
