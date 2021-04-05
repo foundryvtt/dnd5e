@@ -781,7 +781,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
-    item.sheet.render(true);
+    return item.sheet.render(true);
   }
 
   /* -------------------------------------------- */
@@ -794,7 +794,8 @@ export default class ActorSheet5e extends ActorSheet {
   _onItemDelete(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
-    this.actor.deleteOwnedItem(li.dataset.itemId);
+    const item = this.actor.items.get(li.dataset.itemId);
+    if ( item ) return item.delete();
   }
 
   /* -------------------------------------------- */
@@ -807,7 +808,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onRollAbilityTest(event) {
     event.preventDefault();
     let ability = event.currentTarget.parentElement.dataset.ability;
-    this.actor.rollAbility(ability, {event: event});
+    return this.actor.rollAbility(ability, {event: event});
   }
 
   /* -------------------------------------------- */
@@ -820,7 +821,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onRollSkillCheck(event) {
     event.preventDefault();
     const skill = event.currentTarget.parentElement.dataset.skill;
-    this.actor.rollSkill(skill, {event: event});
+    return this.actor.rollSkill(skill, {event: event});
   }
 
   /* -------------------------------------------- */
@@ -833,7 +834,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onToggleAbilityProficiency(event) {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
-    this.actor.update({[field.name]: 1 - parseInt(field.value)});
+    return this.actor.update({[field.name]: 1 - parseInt(field.value)});
   }
 
   /* -------------------------------------------- */
@@ -850,7 +851,7 @@ export default class ActorSheet5e extends ActorSheet {
     const filter = li.dataset.filter;
     if ( set.has(filter) ) set.delete(filter);
     else set.add(filter);
-    this.render();
+    return this.render();
   }
 
   /* -------------------------------------------- */
@@ -866,7 +867,7 @@ export default class ActorSheet5e extends ActorSheet {
     const label = a.parentElement.querySelector("label");
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
-    new TraitSelector(this.actor, options).render(true)
+    return new TraitSelector(this.actor, options).render(true)
   }
 
   /* -------------------------------------------- */
