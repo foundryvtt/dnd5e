@@ -508,14 +508,44 @@
 /* ----------------------------------------- */
 /* Trait Selector
 /* ----------------------------------------- */
+#actor-type .trait-list,
 #trait-selector .trait-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+#actor-type input[type="text"],
 #trait-selector input[type="text"] {
   height: 24px;
   margin: 2px;
+}
+#actor-type .trait-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+#actor-type .trait-list li {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+#actor-type label.radio {
+  display: flex;
+  flex: auto;
+  height: 22px;
+  font-size: 12px;
+  line-height: 2.2em;
+}
+#actor-type label.radio > input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.33em;
+  position: relative;
+  top: 4px;
+}
+#actor-type label.radio > input[type="text"] {
+  margin-right: -2px;
+}
+#actor-type label.checkbox {
+  font-size: 13px;
 }
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
@@ -1551,6 +1581,26 @@
 }
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type {
+  display: flex;
+  justify-content: space-between;
+  width: 1em;
+  padding: 0 3px;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type .config-button {
+  display: none;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 2em;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
+  display: block;
 }
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;

@@ -4,6 +4,7 @@ import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
+import ActorTypeConfig from "../../apps/actor-type.js";
 import {DND5E} from '../../config.js';
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
 
@@ -509,6 +510,9 @@ export default class ActorSheet5e extends ActorSheet {
         break;
       case "senses":
         app = new ActorSensesConfig(this.object);
+        break;
+      case "type":
+        new ActorTypeConfig(this.object).render(true);
         break;
     }
     app?.render(true);
