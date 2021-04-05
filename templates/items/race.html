@@ -39,12 +39,22 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            {{!-- Type --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.Type" }}</label>
+                <ul class="traits-list">
+                    {{#each data.type}}
+                        <li class="tag {{this}}">{{lookup ../config.creatureTypes this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+
             {{!-- Ability Scores --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.AbilityScores" }}</label>
                 <ul class="traits-list">
-                    {{#each data.abilityScores.selected as |value score| }}
-                      <li class="tag {{score}}">{{lookup ../config.abilities score}}: {{value}}</li>
+                    {{#each data.abilityScores.value as |value score| }}
+                      <li class="tag {{score}}">{{lookup ../config.abilities score}}: {{numberFormat value sign=true}}</li>
                     {{/each}}
                 </ul>
             </div>
@@ -53,7 +63,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.Size" }}</label>
                 <ul class="trait-list">
-                  <li class="tag {{data.size.selected}}">{{lookup config.actorSizes data.size.selected}}</li>
+                  <li class="tag {{data.size.value}}">{{lookup config.actorSizes data.size.value}}</li>
                 </ul>
             </div>
 
@@ -69,8 +79,8 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.Languages" }}</label>
                 <ul class="traits-list">
-                    {{#each data.languages.selected as |v k| }}
-                      <li class="tag {{k}}">{{v}}</li>
+                    {{#each data.languages.value as |v k| }}
+                      <li class="tag {{k}}">{{lookup ../config.languages v}}</li>
                     {{/each}}
                 </ul>
             </div>
