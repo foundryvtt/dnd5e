@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const gulpIf = require('gulp-if');
 const less = require('gulp-less');
 const eslint = require('gulp-eslint');
+require('eslint-plugin-jsdoc');
 
 /* ----------------------------------------- */
 /*  Compile LESS
@@ -47,7 +48,7 @@ function watchUpdates() {
 
 exports.default = gulp.series(
   gulp.parallel(css),
-  gulp.parallel(jsLint),
   watchUpdates
 );
 exports.css = css;
+exports.lint = jsLint;
