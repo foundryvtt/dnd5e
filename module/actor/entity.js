@@ -435,8 +435,8 @@ export default class Actor5e extends Actor {
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
     let weight = actorData.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.data.quantity || 0;
-      const w = i.data.weight || 0;
+      const q = i.data.data.quantity || 0;
+      const w = i.data.data.weight || 0;
       return weight + (q * w);
     }, 0);
 
