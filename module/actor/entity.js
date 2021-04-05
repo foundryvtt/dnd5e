@@ -512,31 +512,14 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  async _onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId) {
-    super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
-
-    if ( embeddedName !== "Item" ) return;
-    for ( let item of documents ) {
-      if ( item.type === "class" && !this.items.get(this.data.data.details.originalClass) ) {
-        return this.update({"data.details.originalClass": item._id});
-      }
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId) {
-    super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);
-
-    if ( embeddedName !== "Item" ) return;
-    for ( let item of documents ) {
-      if ( item.type === "class" && (item._id === this.data.data.details.originalClass) ) {
-        const classes = this.itemTypes.class.sort((a, b) => b.data.data.levels - a.data.data.levels);
-        return this.update({"data.details.originalClass": classes[0]?._id || ""});
-      }
-    }
+  /**
+   * Assign a class item as the original class for the Actor based on which class has the most levels
+   * @protected
+   */
+  _assignPrimaryClass() {
+    const classes = this.itemTypes.class.sort((a, b) => b.data.data.levels - a.data.data.levels);
+    const newPC = classes[0]?.id || "";
+    return this.update({"data.details.originalClass": newPC});
   }
 
   /* -------------------------------------------- */

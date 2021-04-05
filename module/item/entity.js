@@ -1349,6 +1349,21 @@ export default class Item5e extends Item {
     }
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+
+    // Assign a new primary class
+    if ( this.parent && (this.type === "class") && (userId === game.user.id) )  {
+      const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
+      if ( !pc ) this.parent._assignPrimaryClass();
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
@@ -1360,6 +1375,19 @@ export default class Item5e extends Item {
         level: changed.data.levels || this.data.data.levels
       });
       return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+
+    // Assign a new primary class
+    if ( this.parent && (this.type === "class") && (userId === game.user.id) )  {
+      if ( this.id !== this.parent.data.data.details.originalClass ) return;
+      this.parent._assignPrimaryClass();
     }
   }
 

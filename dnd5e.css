@@ -555,6 +555,9 @@
   /*  Spellbook                                */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Features Tab                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
 }
@@ -1086,6 +1089,9 @@
 }
 .dnd5e.sheet.actor .spellbook-empty .item-controls {
   flex: 1;
+}
+.dnd5e.sheet.actor .features i.original-class {
+  color: #4b4a44;
 }
 .dnd5e.sheet.actor .editor {
   padding: 0 8px;

@@ -38,7 +38,10 @@
         <li class="item flexrow {{#if isDepleted}}depleted{{/if}}" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url('{{item.img}}')"></div>
-                <h4>{{item.name}}</h4>
+                <h4>
+                    {{item.name}}
+                    {{#if item.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'DND5E.ClassOriginal'}}"></i>{{/if}}
+                </h4>
             </div>
 
             {{#if section.hasActions}}
@@ -52,7 +55,6 @@
                 <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
                 {{/if}}
             </div>
-
             <div class="item-detail item-action">
                 {{#if item.data.activation.type }}
                 {{item.labels.activation}}
@@ -60,9 +62,6 @@
             </div>
 
             {{else if section.isClass}}
-            <div class="item-detail item-action">
-                {{#if item.isOriginalClass}}{{localize "DND5E.ClassOriginal"}}{{/if}}
-            </div>
             <div class="item-detail player-class">
                 {{item.data.subclass}}
             </div>
