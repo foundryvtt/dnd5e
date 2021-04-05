@@ -129,6 +129,7 @@ export const migrateActorData = function(actor) {
   // Actor Data Updates
   _migrateActorMovement(actor, updateData);
   _migrateActorSenses(actor, updateData);
+  _migrateActorType(actor, updateData);
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
@@ -287,6 +288,65 @@ function _migrateActorSenses(actor, updateData) {
 
   // Remove the old traits.senses string once the migration is complete
   updateData["data.traits.-=senses"] = null;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate the actor details.type string to object
+ * @private
+ */
+function _migrateActorType(actor, updateData) {
+  const ad = actor.data;
+  if ( ad?.details?.type === undefined || getType(ad.details.type) === "Object" ) return;
+  const original = ad.details.type;
+
+  let data = {
+    "value": "",
+    "subtype": "",
+    "swarm": {
+      "isSwarm": false,
+      "size": ""
+    },
+    "custom": ""
+  }
+
+  const pattern = /^(?:swarm of (?<size>[\w\-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
+  const match = original.trim().match(pattern);
+  if (!match) {
+    data.value = "custom";
+    data.custom = original;
+  } else {
+
+    const typeLc = match.groups.type.trim().toLowerCase();
+    const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
+      return typeLc === k ||
+             typeLc === game.i18n.localize(v).toLowerCase() ||
+             typeLc === game.i18n.localize(`${v}Pl`).toLowerCase();
+    });
+    if (typeMatch) {
+      data.value = typeMatch[0];
+    } else {
+      data.value = "custom";
+      data.custom = match.groups.type.trim();
+    }
+
+    data.subtype = match.groups.subtype?.trim() || "";
+
+    if (match.groups.size) {
+      data.swarm.isSwarm = true;
+      const sizeLc = match.groups.size.trim().toLowerCase();
+      const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
+        return sizeLc == k ||
+               sizeLc == game.i18n.localize(v).toLowerCase();
+      });
+      if (sizeMatch) data.swarm.size = sizeMatch[0];
+    }
+
+  }
+
+  updateData["data.details.type"] = data;
   return updateData;
 }
 
