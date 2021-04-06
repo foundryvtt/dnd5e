@@ -76,6 +76,7 @@
                 </div>
             </div>
 
+            {{!-- Spellcasting --}}
             <div class="form-group">
                 <label>{{localize 'DND5E.SpellProgression'}}</label>
                 <div class="form-fields">
@@ -89,6 +90,18 @@
                 </div>
             </div>
 
+            {{#unless (eq data.spellcasting "none")}}
+            <div class="form-group">
+                <label>{{localize "DND5E.SpellcastingAbility"}}</label>
+                <div class="form-fields">
+                    <select name="data.spellcastingAbility">
+                        {{selectOptions config.abilities selected=data.spellcastingAbility blank=""}}
+                    </select>
+                </div>
+            </div>
+            {{/unless}}
+
+            {{!-- Proficiencies --}}
             <div class="form-group">
                 <label>
                     {{ localize "DND5E.ClassSaves" }}
