@@ -113,12 +113,13 @@ export async function d20Roll({
   // Handle input arguments
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
+  const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
 
   // Construct the D20Roll instance
   const roll = new D20Roll(formula, data, {
     flavor: flavor || title,
     advantageMode,
-    rollMode,
+    defaultRollMode,
     critical,
     fumble,
     targetValue,
@@ -131,7 +132,7 @@ export async function d20Roll({
   if ( !isFF ) {
     const configured = await roll.configureDialog({
       title,
-      defaultRollMode: rollMode,
+      defaultRollMode: defaultRollMode,
       defaultAbility: data?.item?.ability,
       template
     }, dialogOptions);
@@ -146,7 +147,7 @@ export async function d20Roll({
     console.warn(`You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData`);
     messageData.speaker = speaker;
   }
-  if ( roll && chatMessage ) roll.toMessage(messageData, { rollMode });
+  if ( roll && chatMessage ) roll.toMessage(messageData, { rollMode: roll.options.rollMode });
   return roll;
 }
 
