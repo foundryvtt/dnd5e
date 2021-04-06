@@ -800,6 +800,8 @@ export default class Actor5e extends Actor {
     const success = roll.total >= 10;
     const d20 = roll.dice[0].total;
 
+    let chatString;
+
     // Save success
     if ( success ) {
       let successes = (death.success || 0) + 1;
@@ -811,7 +813,7 @@ export default class Actor5e extends Actor {
           "data.attributes.death.failure": 0,
           "data.attributes.hp.value": 1
         });
-        await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveCriticalSuccess", {name: this.name}), speaker});
+        chatString = "DND5E.DeathSaveCriticalSuccess";
       }
 
       // 3 Successes = survive and reset checks
@@ -820,7 +822,7 @@ export default class Actor5e extends Actor {
           "data.attributes.death.success": 0,
           "data.attributes.death.failure": 0
         });
-        await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveSuccess", {name: this.name}), speaker});
+        chatString = "DND5E.DeathSaveSuccess";
       }
 
       // Increment successes
@@ -832,8 +834,15 @@ export default class Actor5e extends Actor {
       let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
       await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
       if ( failures >= 3 ) {  // 3 Failures = death
-        await ChatMessage.create({content: game.i18n.format("DND5E.DeathSaveFailure", {name: this.name}), speaker});
+        chatString = "DND5E.DeathSaveFailure";
       }
+    }
+
+    // Display success/failure chat message
+    if ( chatString ) {
+      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      await ChatMessage.create(chatData);
     }
 
     // Return the rolled result
