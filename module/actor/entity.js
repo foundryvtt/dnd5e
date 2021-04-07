@@ -1084,11 +1084,12 @@ export default class Actor5e extends Actor {
 
   /**
    * Recovers spell slots and pact slots.
+   *
    * @param {object} options
-   * @param {boolean} recoverPact       Recover all expended pact slots.
-   * @param {boolean} recoverSpells     Recover all expended spell slots.
-   * @param {boolean} performUpdate     Should the update be performed or should an update object be returned.
-   * @param {Promise.<Actor5e>|object}  Updated actor if updates were performed, otherwise object of updates to handle.
+   * @param {boolean} options.recoverPact       Recover all expended pact slots.
+   * @param {boolean} options.recoverSpells     Recover all expended spell slots.
+   * @param {boolean} options.performUpdate     Should the update be performed or should an update object be returned.
+   * @param {(Promise.<Actor5e>|object)}          Updated actor if updates were performed, otherwise object of updates to handle.
    */
   async recoverSpellSlots({recoverPact=true, recoverSpells=true, performUpdate=true}={}) {
     let updates = {};
@@ -1114,10 +1115,13 @@ export default class Actor5e extends Actor {
 
   /**
    * Recovers class hit dice during a long rest.
-   * @param {number} maxHitDice                  Maximum number of hit dice to recover.
-   * @return [Promise.<Array.<Item5e>>, number]  Array of updated items and number of hit dice recovered.
+   *
+   * @param {object} options
+   * @param {number} options.maxHitDice         Maximum number of hit dice to recover.
+   * @param {boolean} options.performUpdate     Should the update be performed or should an update object be returned.
+   * @return {Promise.[<Array.<(Item5e|object)>, number]}  Array of updated items and number of hit dice recovered.
    */
-  async recoverHitDice(maxHitDice) {
+  async recoverHitDice({ maxHitDice=undefined, performUpdate=true }) {
     // Determine the number of hit dice which may be recovered
     if ( !maxHitDice ) {
       maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
@@ -1138,24 +1142,31 @@ export default class Actor5e extends Actor {
         updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
       }
     }
-    return [await this.updateEmbeddedDocuments("Item", updates), hitDiceRecovered];
+
+    if ( perfomUpdate ) {
+      return [await this.updateEmbeddedDocuments("Item", updates), hitDiceRecovered];
+    } else {
+      return [updates, hitDiceRecovered];
+    }
   }
 
   /* -------------------------------------------- */
 
   /**
    * Recovers item uses during short or long rests.
+   *
    * @param {object} options
    * @param {boolean} options.shortRest  Recover uses for items that recharge after a short rest.
    * @param {boolean} options.longRest   Recover uses for items that recharge after a long rest.
    * @param {boolean} options.newDay     Recover uses for items that recharge on a new day.
-   * @return {Promise.<Array.<Item5e>>}  An array of updated items.
+   * @return {(Promise.<Array.<Item5e>>|Array.<object>)}  An array of updated items if updates were performed
+   *                                                      or an array of embedded document updates to handle.
    */
-  async recoverItemUses({ shortRest=true, longRest=true, newDay=true }={}) {
+  async recoverItemUses({ shortRest=true, longRest=true, newDay=true, performUpdate=true }={}) {
     let recovery = [];
-    if (shortRest) recovery.push("sr");
-    if (longRest) recovery.push("lr");
-    if (newDay) recovery.push("day");
+    if ( shortRest ) recovery.push("sr");
+    if ( longRest ) recovery.push("lr");
+    if ( newDay ) recovery.push("day");
 
     let updates = [];
     for ( let item of this.items ) {
@@ -1167,7 +1178,12 @@ export default class Actor5e extends Actor {
         updates.push({_id: item.id, "data.recharge.charged": true});
       }
     }
-    return this.updateEmbeddedDocuments("Item", updates);
+
+    if ( performUpdate ) {
+      return this.updateEmbeddedDocuments("Item", updates);
+    } else {
+      return updates;
+    }
   }
 
   /* -------------------------------------------- */
