@@ -925,8 +925,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Cause this Actor to take a Short Rest
-   * During a Short Rest resources and limited item uses may be recovered
+   * Take a short rest, possibly spending hit dice and recovering resources, item uses, and pact slots.
    *
    * @param {object} options
    * @param {boolean} options.dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
@@ -961,7 +960,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Take a long rest, recovering HP, HD, resources, and spell slots.
+   * Take a long rest, recovering hit points, hit dice, resources, item uses, and spell slots.
    *
    * @param {object} options
    * @param {boolean} options.dialog  Present a confirmation dialog window whether or not to take a long rest
@@ -1089,7 +1088,7 @@ export default class Actor5e extends Actor {
    *
    * @param {object} options
    * @param {number} options.threshold   A number of missing hit points which would trigger an automatic HD roll.
-   * @return {number}                    Number of hit dice spent.
+   * @return {Promise.<number>}          Number of hit dice spent.
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const max = this.data.data.attributes.hp.max + this.data.data.attributes.hp.tempmax;
@@ -1114,7 +1113,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.recoverTemp     Reset temp HP to zero.
    * @param {boolean} options.recoverTempMax  Reset temp max HP to zero.
    * @param {boolean} options.performUpdate   Should the update be performed or should an update object be returned.
-   * @return {Promise)                        Updates to the actor and change in hit points.
+   * @return {Promise.<[object, number]>)     Updates to the actor and change in hit points.
    */
   async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=false }={}) {
     const data = this.data.data;
@@ -1197,7 +1196,7 @@ export default class Actor5e extends Actor {
    * @param {object} options
    * @param {number} options.maxHitDice      Maximum number of hit dice to recover.
    * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
-   * @return {[<Array.<object>, number]}     Array of item updates and number of hit dice recovered.
+   * @return {Promise.<[Array.<object>, number]>}  Array of item updates and number of hit dice recovered.
    */
   async recoverHitDice({ maxHitDice=undefined, performUpdate=false }={}) {
     // Determine the number of hit dice which may be recovered
