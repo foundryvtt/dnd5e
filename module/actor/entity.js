@@ -962,14 +962,14 @@ export default class Actor5e extends Actor {
 
     // Recover character resources & pact slots
     const updateData = {
-      ...await this.recoverResources({ longRest: false, performUpdate: false }),
-      ...await this.recoverSpellSlots({ recoverSpells: false, performUpdate: false })
+      ...await this.recoverResources({ longRest: false }),
+      ...await this.recoverSpellSlots({ recoverSpells: false })
     }
     await this.update(updateData);
 
     // Recover item uses
-    const updateItems = await this.recoverItemUses({ longRest: false, newDay });
-    
+    const updateItems = await this.recoverItemUses({ longRest: false, newDay, performUpdate: true });
+
     const result = {
       dhd: this.data.data.attributes.hd - hd0,
       dhp: this.data.data.attributes.hp.value - hp0,
@@ -1014,16 +1014,16 @@ export default class Actor5e extends Actor {
     // Recover character resources & spell slots
     const updateData = {
       ...hitPointsUpdates,
-      ...await this.recoverResources({ shortRest: false, performUpdate: false }),
-      ...await this.recoverSpellSlots({ performUpdate: false })
+      ...await this.recoverResources({ shortRest: false }),
+      ...await this.recoverSpellSlots()
     }
     await this.update(updateData);
 
     // Recover hit dice
-    let [updateItems, dhd] = await this.recoverHitDice();
+    let [updateItems, dhd] = await this.recoverHitDice({ performUpdate: true });
 
     // Restore item uses
-    updateItems = updateItems.concat(await this.recoverItemUses({ newDay }));
+    updateItems = updateItems.concat(await this.recoverItemUses({ newDay, performUpdate: true }));
 
     const result = {
       dhd: dhd,
@@ -1045,9 +1045,9 @@ export default class Actor5e extends Actor {
   /**
    * Display a chat message with the result of a rest.
    *
-   * @param {RestResult} result  Result of the rest operation.
-   * @param {boolean} longRest   Is this a long rest?
-   * @return {ChatMessage}       Chat message that was created.
+   * @param {RestResult} result       Result of the rest operation.
+   * @param {boolean} longRest        Is this a long rest?
+   * @return {Promise.<ChatMessage>}  Chat message that was created.
    */
   async displayRestResultMessage({ dhd, dhp, newDay }={}, longRest=false) {
     const length = longRest ? "Long" : "Short";
@@ -1091,7 +1091,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.performUpdate   Should the update be performed or should an update object be returned.
    * @return {Promise)                        Updates to the actor and change in hit points.
    */
-  async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=true }) {
+  async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=false }) {
     const data = this.data.data;
     let updates = {};
     let max = data.attributes.hp.max;
@@ -1123,7 +1123,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
    * @return {Promise.<object>}              Updates to the actor.
    */
-  async recoverResources({ shortRest=true, longRest=true, performUpdate=true }={}) {
+  async recoverResources({ shortRest=true, longRest=true, performUpdate=false }={}) {
     let updates = {};
 
     for ( let [k, r] of Object.entries(this.data.data.resources) ) {
@@ -1147,7 +1147,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
    * @return {Promise.<object>}              Updates to the actor.
    */
-  async recoverSpellSlots({ recoverPact=true, recoverSpells=true, performUpdate=true }={}) {
+  async recoverSpellSlots({ recoverPact=true, recoverSpells=true, performUpdate=false }={}) {
     let updates = {};
     if ( recoverPact ) {
       const pact = this.data.data.spells.pact;
@@ -1174,7 +1174,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
    * @return {[<Array.<object>, number]}     Array of item updates and number of hit dice recovered.
    */
-  async recoverHitDice({ maxHitDice=undefined, performUpdate=true }={}) {
+  async recoverHitDice({ maxHitDice=undefined, performUpdate=false }={}) {
     // Determine the number of hit dice which may be recovered
     if ( !maxHitDice ) {
       maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
@@ -1212,7 +1212,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
    * @return {Promise.<Array.<object>>}      Array of item updates.
    */
-  async recoverItemUses({ shortRest=true, longRest=true, newDay=true, performUpdate=true }={}) {
+  async recoverItemUses({ shortRest=true, longRest=true, newDay=true, performUpdate=false }={}) {
     let recovery = [];
     if ( shortRest ) recovery.push("sr");
     if ( longRest ) recovery.push("lr");
