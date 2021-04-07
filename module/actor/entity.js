@@ -954,10 +954,7 @@ export default class Actor5e extends Actor {
 
     // Automatically spend hit dice
     else if ( autoHD ) {
-      while ( (hp.value + autoHDThreshold) <= hp.max ) {
-        const r = await this.rollHitDie(undefined, {dialog: false});
-        if ( r === null ) break;
-      }
+      await this.autoSpendHitDice({ threshold: autoHDThreshold });
     }
 
     const result = {
@@ -1064,7 +1061,7 @@ export default class Actor5e extends Actor {
     else if ( longRest && (dhd !== 0) && (dhp === 0) ) message = "DND5E.LongRestResultHitDice";
 
     // Create a chat message
-    return ChatMessage.create({
+    let chatData = {
       user: game.user.id,
       speaker: {actor: this, alias: this.name},
       flavor: game.i18n.localize(restFlavor),
@@ -1073,7 +1070,32 @@ export default class Actor5e extends Actor {
         dice: longRest ? dhd : -dhd,
         health: dhp
       })
-    });
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+
+    return ChatMessage.create(chatData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Automatically spend hit dice to recover hit points up to a certain threshold.
+   *
+   * @param {object} options
+   * @param {number} options.threshold   A number of missing hit points which would trigger an automatic HD roll.
+   * @return {number}                    Number of hit dice spent.
+   */
+  async autoSpendHitDice({ threshold=3 }={}) {
+    const max = this.data.data.attributes.hp.max + this.data.data.attributes.hp.tempmax;
+
+    let diceRolled = 0;
+    while ( (this.data.data.attributes.hp.value + threshold) <= max ) {
+      const r = await this.rollHitDie(undefined, {dialog: false});
+      if ( r === null ) break;
+      diceRolled += 1;
+    }
+
+    return diceRolled;
   }
 
   /* -------------------------------------------- */
