@@ -973,39 +973,20 @@ export default class Actor5e extends Actor {
 
     // Recover item uses
     const updateItems = await this.recoverItemUses({ longRest: false, newDay });
-
-    // Display a Chat Message summarizing the rest effects
-    if ( chat ) {
-
-      // Summarize the rest duration
-      let restFlavor;
-      switch (game.settings.get("dnd5e", "restVariant")) {
-        case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
-        case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
-        case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
-      }
-
-      // Summarize the health effects
-      let srMessage = "DND5E.ShortRestResultShort";
-      if ((dhd !== 0) && (dhp !== 0)) srMessage = "DND5E.ShortRestResult";
-
-      // Create a chat message
-      ChatMessage.create({
-        user: game.user.id,
-        speaker: {actor: this, alias: this.name},
-        flavor: restFlavor,
-        content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
-      });
-    }
-
-    // Return data summarizing the rest effects
-    return {
+    
+    const result = {
       dhd: dhd,
       dhp: dhp,
       updateData: updateData,
       updateItems: updateItems,
       newDay: newDay
     }
+
+    // Display a Chat Message summarizing the rest effects
+    if ( chat ) await this.displayShortRestChatMessage(result);
+
+    // Return data summarizing the rest effects
+    return result;
   }
 
   /* -------------------------------------------- */
@@ -1048,7 +1029,61 @@ export default class Actor5e extends Actor {
     // Restore item uses
     updateItems = updateItems.concat(await this.recoverItemUses({ newDay }));
 
+    const result = {
+      dhd: dhd,
+      dhp: dhp,
+      updateData: updateData,
+      updateItems: updateItems,
+      newDay: newDay
+    };
+
     // Display a Chat Message summarizing the rest effects
+    if ( chat ) await this.displayLongRestChatMessage(result);
+
+    // Return data summarizing the rest effects
+    return result;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the chat message with the result of a short rest.
+   *
+   * @param {RestResult}   Result of the rest operation.
+   * @return {ChatMessage} Chat message that was created.
+   */
+  async displayShortRestChatMessage({ dhd, dhp, newDay }={}) {
+    // Summarize the rest duration
+    let restFlavor;
+    switch (game.settings.get("dnd5e", "restVariant")) {
+      case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
+      case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
+      case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
+    }
+
+    // Summarize the health effects
+    let srMessage = "DND5E.ShortRestResultShort";
+    if ((dhd !== 0) && (dhp !== 0)) srMessage = "DND5E.ShortRestResult";
+
+    // Create a chat message
+    return ChatMessage.create({
+      user: game.user.id,
+      speaker: {actor: this, alias: this.name},
+      flavor: restFlavor,
+      content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the chat message with the result of the long rest.
+   *
+   * @param {RestResult}   Result of the rest operation.
+   * @return {ChatMessage} Chat message that was created.
+   */
+  async displayLongRestChatMessage({ dhd, dhp, newDay }={}) {
+    // Summarize the rest duration
     let restFlavor;
     switch (game.settings.get("dnd5e", "restVariant")) {
       case 'normal': restFlavor = game.i18n.localize(newDay ? "DND5E.LongRestOvernight" : "DND5E.LongRestNormal"); break;
@@ -1057,27 +1092,17 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the chat message to display
-    if ( chat ) {
-      let lrMessage = "DND5E.LongRestResultShort";
-      if((dhp !== 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResult";
-      else if ((dhp !== 0) && (dhd === 0)) lrMessage = "DND5E.LongRestResultHitPoints";
-      else if ((dhp === 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResultHitDice";
-      ChatMessage.create({
-        user: game.user.id,
-        speaker: {actor: this, alias: this.name},
-        flavor: restFlavor,
-        content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
-      });
-    }
+    let lrMessage = "DND5E.LongRestResultShort";
+    if ((dhp !== 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResult";
+    else if ((dhp !== 0) && (dhd === 0)) lrMessage = "DND5E.LongRestResultHitPoints";
+    else if ((dhp === 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResultHitDice";
 
-    // Return data summarizing the rest effects
-    return {
-      dhd: dhd,
-      dhp: dhp,
-      updateData: updateData,
-      updateItems: updateItems,
-      newDay: newDay
-    }
+    ChatMessage.create({
+      user: game.user.id,
+      speaker: {actor: this, alias: this.name},
+      flavor: restFlavor,
+      content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
+    });
   }
 
   /* -------------------------------------------- */
