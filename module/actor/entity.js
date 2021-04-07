@@ -1044,32 +1044,14 @@ export default class Actor5e extends Actor {
     const pact = data.spells.pact;
     updateData['data.spells.pact.value'] = pact.override || pact.max;
 
-    // Determine the number of hit dice which may be recovered
-    let recoverHD = Math.max(Math.floor(data.details.level / 2), 1);
-    let dhd = 0;
+    // Recover hit dice
+    let [updateItems, dhd] = await this.recoverHitDice();
 
-    // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
-    const updateItems = this.items.filter(item => item.data.type === "class").sort((a, b) => {
-      let da = parseInt(a.data.data.hitDice.slice(1)) || 0;
-      let db = parseInt(b.data.data.hitDice.slice(1)) || 0;
-      return db - da;
-    }).reduce((updates, item) => {
-      const d = item.data.data;
-      if ( (recoverHD > 0) && (d.hitDiceUsed > 0) ) {
-        let delta = Math.min(d.hitDiceUsed || 0, recoverHD);
-        recoverHD -= delta;
-        dhd += delta;
-        updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
-      }
-      return updates;
-    }, []);
-
-    // Iterate over owned items, restoring uses per day and recovering Hit Dice
-    Array.prototype.push.apply(updateItems, await this.recoverItemUses({ newDay }));
+    // Restore item uses
+    updateItems = updateItems.concat(await this.recoverItemUses({ newDay }));
 
     // Perform the updates
     await this.update(updateData);
-    if ( updateItems.length ) await this.updateEmbeddedDocuments("Item", updateItems);
 
     // Display a Chat Message summarizing the rest effects
     let restFlavor;
@@ -1106,12 +1088,43 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Recovers class hit dice during a long rest.
+   * @param {number} maxHitDice                  Maximum number of hit dice to recover.
+   * @return [Promise.<Array.<Item5e>>, number]  Array of updated items and number of hit dice recovered.
+   */
+  async recoverHitDice(maxHitDice) {
+    // Determine the number of hit dice which may be recovered
+    if ( !maxHitDice ) {
+      maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
+    }
+
+    // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
+    const sortedClasses = this.items.filter(item => item.data.type === "class").sort((a, b) => {
+      return (parseInt(a.data.data.hitDice.slice(1)) || 0) - (parseInt(a.data.data.hitDice.slice(1)) || 0);
+    });
+
+    let updates = [];
+    let hitDiceRecovered = 0;
+    for ( let item of sortedClasses ) {
+      const d = item.data.data;
+      if ( (hitDiceRecovered < maxHitDice) && (d.hitDiceUsed > 0) ) {
+        let delta = Math.min(d.hitDiceUsed || 0, maxHitDice - hitDiceRecovered);
+        hitDiceRecovered += delta;
+        updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
+      }
+    }
+    return [await this.updateEmbeddedDocuments("Item", updates), hitDiceRecovered];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Recovers item uses during short or long rests.
    * @param {object} options
-   * @param {boolean} options.shortRest   Recover uses for items that recharge after a short rest
-   * @param {boolean} options.longRest    Recover uses for items that recharge after a long rest
-   * @param {boolean} options.newDay      Recover uses for items that recharge on a new day
-   * @return {Promise.<Array.<Document>>} An array of updated items.
+   * @param {boolean} options.shortRest  Recover uses for items that recharge after a short rest
+   * @param {boolean} options.longRest   Recover uses for items that recharge after a long rest
+   * @param {boolean} options.newDay     Recover uses for items that recharge on a new day
+   * @return {Promise.<Array.<Item5e>>}  An array of updated items.
    */
   async recoverItemUses({ shortRest=true, longRest=true, newDay=true }={}) {
     let recovery = [];
