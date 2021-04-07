@@ -960,23 +960,20 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Recover character resources & pact slots
-    const updateData = {
-      ...await this.recoverResources({ longRest: false }),
-      ...await this.recoverSpellSlots({ recoverSpells: false })
-    }
-    await this.update(updateData);
-
-    // Recover item uses
-    const updateItems = await this.recoverItemUses({ longRest: false, newDay, performUpdate: true });
-
     const result = {
       dhd: this.data.data.attributes.hd - hd0,
       dhp: this.data.data.attributes.hp.value - hp0,
-      updateData: updateData,
-      updateItems: updateItems,
+      updateData: {
+        ...await this.recoverResources({ longRest: false }),
+        ...await this.recoverSpellSlots({ recoverSpells: false })
+      },
+      updateItems: await this.recoverItemUses({ longRest: false, newDay }),
       newDay: newDay
     }
+
+    // Perform updates
+    await this.update(result.updateData);
+    await this.updateEmbeddedDocuments("Item", result.updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this.displayRestResultMessage(result);
@@ -1009,29 +1006,29 @@ export default class Actor5e extends Actor {
     }
 
     // Recover hit points to full, and eliminate any existing temporary HP
-    let [hitPointsUpdates, dhp] = await this.recoverHitPoints({ performUpdate: false });
-
-    // Recover character resources & spell slots
-    const updateData = {
-      ...hitPointsUpdates,
-      ...await this.recoverResources({ shortRest: false }),
-      ...await this.recoverSpellSlots()
-    }
-    await this.update(updateData);
+    const [hitPointsUpdates, dhp] = await this.recoverHitPoints();
 
     // Recover hit dice
-    let [updateItems, dhd] = await this.recoverHitDice({ performUpdate: true });
-
-    // Restore item uses
-    updateItems = updateItems.concat(await this.recoverItemUses({ newDay, performUpdate: true }));
+    const [hitDiceUpdates, dhd] = await this.recoverHitDice();
 
     const result = {
       dhd: dhd,
       dhp: dhp,
-      updateData: updateData,
-      updateItems: updateItems,
+      updateData: {
+        ...hitPointsUpdates,
+        ...await this.recoverResources({ shortRest: false }),
+        ...await this.recoverSpellSlots()
+      },
+      updateItems: [
+        ...hitDiceUpdates,
+        ...await this.recoverItemUses({ newDay })
+      ],
       newDay: newDay
     };
+
+    // Perform updates
+    await this.update(result.updateData);
+    await this.updateEmbeddedDocuments("Item", result.updateItems);
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this.displayRestResultMessage(result, true);
@@ -1091,7 +1088,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.performUpdate   Should the update be performed or should an update object be returned.
    * @return {Promise)                        Updates to the actor and change in hit points.
    */
-  async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=false }) {
+  async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=false }={}) {
     const data = this.data.data;
     let updates = {};
     let max = data.attributes.hp.max;
