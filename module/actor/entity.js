@@ -1016,12 +1016,7 @@ export default class Actor5e extends Actor {
     }
 
     // Recover hit points to full, and eliminate any existing temporary HP
-    const dhp = data.attributes.hp.max - data.attributes.hp.value;
-    let updateData = {
-      "data.attributes.hp.value": data.attributes.hp.max,
-      "data.attributes.hp.temp": 0,
-      "data.attributes.hp.tempmax": 0
-    };
+    let [updateData, dhp] = await this.recoverHitPoints({ recoverTempMax: false, performUpdate: false });
 
     // Recover character resources
     const resourceUpdates = await this.recoverResources({ shortRest: false, performUpdate: false });
@@ -1069,6 +1064,43 @@ export default class Actor5e extends Actor {
       updateData: updateData,
       updateItems: updateItems,
       newDay: newDay
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers actor hit points and eliminates any temp HP.
+   *
+   * @param {object} options
+   * @param {boolean} options.recoverHP       Reset HP to maximum.
+   * @param {boolean} options.recoverTemp     Reset temp HP to zero.
+   * @param {boolean} options.recoverTempMax  Reset temp max HP to zero.
+   * @param {boolean} options.performUpdate   Should the update be performed or should an update object be returned.
+   * @return {(Promise.<Actor5e>|object})     Updated actor if updates were performed, otherwise object of updates to handle.
+   */
+  async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=true }) {
+    const data = this.data.data;
+    let updates = {};
+    let max = data.attributes.hp.max;
+
+    if ( recoverTempMax ) {
+      updates["data.attributes.hp.tempmax"] = 0;
+    } else {
+      max += data.attributes.hp.tempmax;
+    }
+    if ( recoverHP ) {
+      updates["data.attributes.hp.value"] = max;
+    }
+    if ( recoverTemp ) {
+      updates["data.attributes.hp.temp"] = 0;
+    }
+
+    const dhp = recoverHP ? max - data.attributes.hp.value : 0;
+    if ( performUpdate ) {
+      return [await this.update(updates), dhp];
+    } else {
+      return [updates, dhp];
     }
   }
 
