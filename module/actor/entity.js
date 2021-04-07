@@ -960,10 +960,6 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Note the change in HP and HD which occurred
-    const dhd = this.data.data.attributes.hd - hd0;
-    const dhp = this.data.data.attributes.hp.value - hp0;
-
     // Recover character resources & pact slots
     const updateData = {
       ...await this.recoverResources({ longRest: false, performUpdate: false }),
@@ -975,8 +971,8 @@ export default class Actor5e extends Actor {
     const updateItems = await this.recoverItemUses({ longRest: false, newDay });
     
     const result = {
-      dhd: dhd,
-      dhp: dhp,
+      dhd: this.data.data.attributes.hd - hd0,
+      dhp: this.data.data.attributes.hp.value - hp0,
       updateData: updateData,
       updateItems: updateItems,
       newDay: newDay
@@ -1115,7 +1111,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.recoverTemp     Reset temp HP to zero.
    * @param {boolean} options.recoverTempMax  Reset temp max HP to zero.
    * @param {boolean} options.performUpdate   Should the update be performed or should an update object be returned.
-   * @return {(Promise.<Actor5e>|object})     Updated actor if updates were performed, otherwise object of updates to handle.
+   * @return {Promise)                        Updates to the actor and change in hit points.
    */
   async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=true }) {
     const data = this.data.data;
@@ -1134,12 +1130,8 @@ export default class Actor5e extends Actor {
       updates["data.attributes.hp.temp"] = 0;
     }
 
-    const dhp = recoverHP ? max - data.attributes.hp.value : 0;
-    if ( performUpdate ) {
-      return [await this.update(updates), dhp];
-    } else {
-      return [updates, dhp];
-    }
+    if ( performUpdate ) await this.update(updates);
+    return [updates, recoverHP ? max - data.attributes.hp.value : 0];
   }
 
   /* -------------------------------------------- */
@@ -1151,7 +1143,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.shortRest      Recover resources that recharge on a short rest.
    * @param {boolean} options.longRest       Recover resources that recharge on a long rest.
    * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
-   * @return {(Promise.<Actor5e>|object)}    Updated actor if updates were performed, otherwise object of updates to handle.
+   * @return {Promise.<object>}              Updates to the actor.
    */
   async recoverResources({ shortRest=true, longRest=true, performUpdate=true }={}) {
     let updates = {};
@@ -1162,11 +1154,8 @@ export default class Actor5e extends Actor {
       }
     }
 
-    if ( performUpdate ) {
-      return this.update(updates);
-    } else {
-      return updates;
-    }
+    if ( performUpdate ) await this.update(updates);
+    return updates;
   }
 
   /* -------------------------------------------- */
@@ -1178,7 +1167,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.recoverPact    Recover all expended pact slots.
    * @param {boolean} options.recoverSpells  Recover all expended spell slots.
    * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
-   * @return {(Promise.<Actor5e>|object)}    Updated actor if updates were performed, otherwise object of updates to handle.
+   * @return {Promise.<object>}              Updates to the actor.
    */
   async recoverSpellSlots({ recoverPact=true, recoverSpells=true, performUpdate=true }={}) {
     let updates = {};
@@ -1193,11 +1182,8 @@ export default class Actor5e extends Actor {
       }
     }
 
-    if ( performUpdate ) {
-      return this.update(updates);
-    } else {
-      return updates;
-    }
+    if ( performUpdate ) await this.update(updates);
+    return updates;
   }
 
   /* -------------------------------------------- */
@@ -1206,9 +1192,9 @@ export default class Actor5e extends Actor {
    * Recovers class hit dice during a long rest.
    *
    * @param {object} options
-   * @param {number} options.maxHitDice         Maximum number of hit dice to recover.
-   * @param {boolean} options.performUpdate     Should the update be performed or should an update object be returned.
-   * @return {Promise.[<Array.<(Item5e|object)>, number]}  Array of updated items and number of hit dice recovered.
+   * @param {number} options.maxHitDice      Maximum number of hit dice to recover.
+   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
+   * @return {[<Array.<object>, number]}     Array of item updates and number of hit dice recovered.
    */
   async recoverHitDice({ maxHitDice=undefined, performUpdate=true }={}) {
     // Determine the number of hit dice which may be recovered
@@ -1232,11 +1218,8 @@ export default class Actor5e extends Actor {
       }
     }
 
-    if ( performUpdate ) {
-      return [await this.updateEmbeddedDocuments("Item", updates), hitDiceRecovered];
-    } else {
-      return [updates, hitDiceRecovered];
-    }
+    if ( performUpdate ) await this.updateEmbeddedDocuments("Item", updates);
+    return [updates, hitDiceRecovered];
   }
 
   /* -------------------------------------------- */
@@ -1245,12 +1228,11 @@ export default class Actor5e extends Actor {
    * Recovers item uses during short or long rests.
    *
    * @param {object} options
-   * @param {boolean} options.shortRest  Recover uses for items that recharge after a short rest.
-   * @param {boolean} options.longRest   Recover uses for items that recharge after a long rest.
-   * @param {boolean} options.newDay     Recover uses for items that recharge on a new day.
-   * @param {boolean} options.performUpdate   Should the update be performed or should an update object be returned.
-   * @return {(Promise.<Array.<Item5e>>|Array.<object>)}  An array of updated items if updates were performed
-   *                                                      or an array of embedded document updates to handle.
+   * @param {boolean} options.shortRest      Recover uses for items that recharge after a short rest.
+   * @param {boolean} options.longRest       Recover uses for items that recharge after a long rest.
+   * @param {boolean} options.newDay         Recover uses for items that recharge on a new day.
+   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
+   * @return {Promise.<Array.<object>>}      Array of item updates.
    */
   async recoverItemUses({ shortRest=true, longRest=true, newDay=true, performUpdate=true }={}) {
     let recovery = [];
@@ -1269,11 +1251,8 @@ export default class Actor5e extends Actor {
       }
     }
 
-    if ( performUpdate ) {
-      return this.updateEmbeddedDocuments("Item", updates);
-    } else {
-      return updates;
-    }
+    if ( performUpdate ) await this.updateEmbeddedDocuments("Item", updates);
+    return updates;
   }
 
   /* -------------------------------------------- */
