@@ -950,7 +950,7 @@ export default class Actor5e extends Actor {
     const dhp = this.data.data.attributes.hp.value - hp0;
 
     // Recover character resources
-    const updateData = {};
+    let updateData = {};
     for ( let [k, r] of Object.entries(this.data.data.resources) ) {
       if ( r.max && r.sr ) {
         updateData[`data.resources.${k}.value`] = r.max;
@@ -958,8 +958,8 @@ export default class Actor5e extends Actor {
     }
 
     // Recover pact slots.
-    const pact = this.data.data.spells.pact;
-    updateData['data.spells.pact.value'] = pact.override || pact.max;
+    const spellSlotUpdates = await this.recoverSpellSlots({ recoverSpells: false, performUpdate: false });
+    Object.assign(updateData, spellSlotUpdates);
     await this.update(updateData);
 
     // Recover item uses
@@ -1022,7 +1022,7 @@ export default class Actor5e extends Actor {
 
     // Recover hit points to full, and eliminate any existing temporary HP
     const dhp = data.attributes.hp.max - data.attributes.hp.value;
-    const updateData = {
+    let updateData = {
       "data.attributes.hp.value": data.attributes.hp.max,
       "data.attributes.hp.temp": 0,
       "data.attributes.hp.tempmax": 0
@@ -1035,14 +1035,9 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Recover spell slots
-    for ( let [k, v] of Object.entries(data.spells) ) {
-      updateData[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
-    }
-
-    // Recover pact slots.
-    const pact = data.spells.pact;
-    updateData['data.spells.pact.value'] = pact.override || pact.max;
+    // Recover spell & pact slots
+    const spellSlotUpdates = await this.recoverSpellSlots({ performUpdate: false });
+    Object.assign(updateData, spellSlotUpdates);
 
     // Recover hit dice
     let [updateItems, dhd] = await this.recoverHitDice();
@@ -1088,6 +1083,36 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Recovers spell slots and pact slots.
+   * @param {object} options
+   * @param {boolean} recoverPact       Recover all expended pact slots.
+   * @param {boolean} recoverSpells     Recover all expended spell slots.
+   * @param {boolean} performUpdate     Should the update be performed or should an update object be returned.
+   * @param {Promise.<Actor5e>|object}  Updated actor if updates were performed, otherwise object of updates to handle.
+   */
+  async recoverSpellSlots({recoverPact=true, recoverSpells=true, performUpdate=true}={}) {
+    let updates = {};
+    if ( recoverPact ) {
+      const pact = this.data.data.spells.pact;
+      updates['data.spells.pact.value'] = pact.override || pact.max;
+    }
+
+    if ( recoverSpells ) {
+      for ( let [k, v] of Object.entries(this.data.data.spells) ) {
+        updates[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
+      }
+    }
+
+    if ( performUpdate ) {
+      return this.update(updates);
+    } else {
+      return updates;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Recovers class hit dice during a long rest.
    * @param {number} maxHitDice                  Maximum number of hit dice to recover.
    * @return [Promise.<Array.<Item5e>>, number]  Array of updated items and number of hit dice recovered.
@@ -1121,9 +1146,9 @@ export default class Actor5e extends Actor {
   /**
    * Recovers item uses during short or long rests.
    * @param {object} options
-   * @param {boolean} options.shortRest  Recover uses for items that recharge after a short rest
-   * @param {boolean} options.longRest   Recover uses for items that recharge after a long rest
-   * @param {boolean} options.newDay     Recover uses for items that recharge on a new day
+   * @param {boolean} options.shortRest  Recover uses for items that recharge after a short rest.
+   * @param {boolean} options.longRest   Recover uses for items that recharge after a long rest.
+   * @param {boolean} options.newDay     Recover uses for items that recharge on a new day.
    * @return {Promise.<Array.<Item5e>>}  An array of updated items.
    */
   async recoverItemUses({ shortRest=true, longRest=true, newDay=true }={}) {
