@@ -950,12 +950,7 @@ export default class Actor5e extends Actor {
     const dhp = this.data.data.attributes.hp.value - hp0;
 
     // Recover character resources
-    let updateData = {};
-    for ( let [k, r] of Object.entries(this.data.data.resources) ) {
-      if ( r.max && r.sr ) {
-        updateData[`data.resources.${k}.value`] = r.max;
-      }
-    }
+    let updateData = await this.recoverResources({ longRest: false, performUpdate: false });
 
     // Recover pact slots.
     const spellSlotUpdates = await this.recoverSpellSlots({ recoverSpells: false, performUpdate: false });
@@ -1029,11 +1024,8 @@ export default class Actor5e extends Actor {
     };
 
     // Recover character resources
-    for ( let [k, r] of Object.entries(data.resources) ) {
-      if ( r.max && (r.sr || r.lr) ) {
-        updateData[`data.resources.${k}.value`] = r.max;
-      }
-    }
+    const resourceUpdates = await this.recoverResources({ shortRest: false, performUpdate: false });
+    Object.assign(updateData, resourceUpdates);
 
     // Recover spell & pact slots
     const spellSlotUpdates = await this.recoverSpellSlots({ performUpdate: false });
@@ -1083,15 +1075,42 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Recovers actor resources.
+   *
+   * @param {object} options
+   * @param {boolean} options.shortRest      Recover resources that recharge on a short rest.
+   * @param {boolean} options.longRest       Recover resources that recharge on a long rest.
+   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
+   * @return {(Promise.<Actor5e>|object)}    Updated actor if updates were performed, otherwise object of updates to handle.
+   */
+  async recoverResources({ shortRest=true, longRest=true, performUpdate=true }={}) {
+    let updates = {};
+
+    for ( let [k, r] of Object.entries(this.data.data.resources) ) {
+      if ( r.max && ((shortRest && r.sr) || (longRest && r.lr)) ) {
+        updates[`data.resources.${k}.value`] = r.max;
+      }
+    }
+
+    if ( performUpdate ) {
+      return this.update(updates);
+    } else {
+      return updates;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Recovers spell slots and pact slots.
    *
    * @param {object} options
-   * @param {boolean} options.recoverPact       Recover all expended pact slots.
-   * @param {boolean} options.recoverSpells     Recover all expended spell slots.
-   * @param {boolean} options.performUpdate     Should the update be performed or should an update object be returned.
-   * @param {(Promise.<Actor5e>|object)}          Updated actor if updates were performed, otherwise object of updates to handle.
+   * @param {boolean} options.recoverPact    Recover all expended pact slots.
+   * @param {boolean} options.recoverSpells  Recover all expended spell slots.
+   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
+   * @return {(Promise.<Actor5e>|object)}    Updated actor if updates were performed, otherwise object of updates to handle.
    */
-  async recoverSpellSlots({recoverPact=true, recoverSpells=true, performUpdate=true}={}) {
+  async recoverSpellSlots({ recoverPact=true, recoverSpells=true, performUpdate=true }={}) {
     let updates = {};
     if ( recoverPact ) {
       const pact = this.data.data.spells.pact;
@@ -1121,7 +1140,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} options.performUpdate     Should the update be performed or should an update object be returned.
    * @return {Promise.[<Array.<(Item5e|object)>, number]}  Array of updated items and number of hit dice recovered.
    */
-  async recoverHitDice({ maxHitDice=undefined, performUpdate=true }) {
+  async recoverHitDice({ maxHitDice=undefined, performUpdate=true }={}) {
     // Determine the number of hit dice which may be recovered
     if ( !maxHitDice ) {
       maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
@@ -1143,7 +1162,7 @@ export default class Actor5e extends Actor {
       }
     }
 
-    if ( perfomUpdate ) {
+    if ( performUpdate ) {
       return [await this.updateEmbeddedDocuments("Item", updates), hitDiceRecovered];
     } else {
       return [updates, hitDiceRecovered];
