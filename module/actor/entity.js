@@ -963,15 +963,7 @@ export default class Actor5e extends Actor {
     await this.update(updateData);
 
     // Recover item uses
-    const recovery = newDay ? ["sr", "day"] : ["sr"];
-    const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
-    const updateItems = items.map(item => {
-      return {
-        _id: item._id,
-        "data.uses.value": item.data.data.uses.max
-      };
-    });
-    await this.updateEmbeddedDocuments("Item", updateItems);
+    const updateItems = await this.recoverItemUses({ longRest: false, newDay });
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) {
@@ -990,7 +982,7 @@ export default class Actor5e extends Actor {
 
       // Create a chat message
       ChatMessage.create({
-        user: game.user._id,
+        user: game.user.id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
         content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
@@ -1073,16 +1065,7 @@ export default class Actor5e extends Actor {
     }, []);
 
     // Iterate over owned items, restoring uses per day and recovering Hit Dice
-    const recovery = newDay ? ["sr", "lr", "day"] : ["sr", "lr"];
-    for ( let item of this.items ) {
-      const d = item.data.data;
-      if ( d.uses && recovery.includes(d.uses.per) ) {
-        updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
-      }
-      else if ( d.recharge && d.recharge.value ) {
-        updateItems.push({_id: item.id, "data.recharge.charged": true});
-      }
-    }
+    Array.prototype.push.apply(updateItems, await this.recoverItemUses({ newDay }));
 
     // Perform the updates
     await this.update(updateData);
@@ -1103,7 +1086,7 @@ export default class Actor5e extends Actor {
       else if ((dhp !== 0) && (dhd === 0)) lrMessage = "DND5E.LongRestResultHitPoints";
       else if ((dhp === 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResultHitDice";
       ChatMessage.create({
-        user: game.user._id,
+        user: game.user.id,
         speaker: {actor: this, alias: this.name},
         flavor: restFlavor,
         content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
@@ -1118,6 +1101,35 @@ export default class Actor5e extends Actor {
       updateItems: updateItems,
       newDay: newDay
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers item uses during short or long rests.
+   * @param {object} options
+   * @param {boolean} options.shortRest   Recover uses for items that recharge after a short rest
+   * @param {boolean} options.longRest    Recover uses for items that recharge after a long rest
+   * @param {boolean} options.newDay      Recover uses for items that recharge on a new day
+   * @return {Promise.<Array.<Document>>} An array of updated items.
+   */
+  async recoverItemUses({ shortRest=true, longRest=true, newDay=true }={}) {
+    let recovery = [];
+    if (shortRest) recovery.push("sr");
+    if (longRest) recovery.push("lr");
+    if (newDay) recovery.push("day");
+
+    let updates = [];
+    for ( let item of this.items ) {
+      const d = item.data.data;
+      if ( d.uses && recovery.includes(d.uses.per) ) {
+        updates.push({_id: item.id, "data.uses.value": d.uses.max});
+      }
+      else if ( longRest && d.recharge && d.recharge.value ) {
+        updates.push({_id: item.id, "data.recharge.charged": true});
+      }
+    }
+    return this.updateEmbeddedDocuments("Item", updates);
   }
 
   /* -------------------------------------------- */
