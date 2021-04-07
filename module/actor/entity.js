@@ -936,11 +936,9 @@ export default class Actor5e extends Actor {
    * @return {Promise.<RestResult>}             A Promise which resolves once the short rest workflow has completed
    */
   async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
-
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hp = this.data.data.attributes.hp;
     const hd0 = this.data.data.attributes.hd;
-    const hp0 = hp.value;
+    const hp0 = this.data.data.attributes.hp.value;
     let newDay = false;
 
     // Display a Dialog for rolling hit dice
@@ -957,26 +955,7 @@ export default class Actor5e extends Actor {
       await this.autoSpendHitDice({ threshold: autoHDThreshold });
     }
 
-    const result = {
-      dhd: this.data.data.attributes.hd - hd0,
-      dhp: this.data.data.attributes.hp.value - hp0,
-      updateData: {
-        ...await this.recoverResources({ longRest: false }),
-        ...await this.recoverSpellSlots({ recoverSpells: false })
-      },
-      updateItems: await this.recoverItemUses({ longRest: false, newDay }),
-      newDay: newDay
-    }
-
-    // Perform updates
-    await this.update(result.updateData);
-    await this.updateEmbeddedDocuments("Item", result.updateItems);
-
-    // Display a Chat Message summarizing the rest effects
-    if ( chat ) await this.displayRestResultMessage(result);
-
-    // Return data summarizing the rest effects
-    return result;
+    return this._rest({ chat, newDay, hd0, hp0, longRest: false });
   }
 
   /* -------------------------------------------- */
@@ -991,8 +970,6 @@ export default class Actor5e extends Actor {
    * @return {Promise.<RestResult>}   A Promise which resolves once the long rest workflow has completed
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
-    const data = this.data.data;
-
     // Maybe present a confirmation dialog
     if ( dialog ) {
       try {
@@ -1002,33 +979,62 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Recover hit points to full, and eliminate any existing temporary HP
-    const [hitPointsUpdates, dhp] = await this.recoverHitPoints();
+    return this._rest({ chat, newDay, longRest: true });
+  }
 
-    // Recover hit dice
-    const [hitDiceUpdates, dhd] = await this.recoverHitDice();
+  /* -------------------------------------------- */
 
+  /**
+   * Perform all of the changes needed for a short or long rest.
+   *
+   * @param {object} options
+   * @param {boolean} chat           Summarize the results of the rest workflow as a chat message.
+   * @param {boolean} newDay         Has a new day occurred during this rest?
+   * @param {number} hd0             Hit dice before and hit dice were spent (short rest only).
+   * @param {number} hp0             Hit points before any hit dice were spent (short rest only).
+   * @param {boolean} longRest       Is this a long rest?
+   * @return {Promise.<RestResult>}  Consolidated results of the rest workflow.
+   * @private
+   */
+  async _rest({ chat, newDay, hd0=0, hp0=0, longRest }={}) {
+    let dhd, dhp;
+    let hitPointUpdates = {};
+    let hitDiceUpdates = [];
+
+    // Recover hit points & hit dice on long rest
+    if ( longRest ) {
+      [hitPointUpdates, dhp] = await this.recoverHitPoints();
+      [hitDiceUpdates, dhd] = await this.recoverHitDice();
+    }
+
+    // Calculate recovered hit points & spent hit dice on short rest
+    else {
+      dhd = this.data.data.attributes.hd - hd0;
+      dhp = this.data.data.attributes.hp.value - hp0;
+    }
+
+    // Figure out the rest of the changes
     const result = {
       dhd: dhd,
       dhp: dhp,
       updateData: {
-        ...hitPointsUpdates,
-        ...await this.recoverResources({ shortRest: false }),
-        ...await this.recoverSpellSlots()
+        ...hitPointUpdates,
+        ...await this.recoverResources({ shortRest: !longRest, longRest: longRest }),
+        ...await this.recoverSpellSlots({ recoverSpells: longRest })
       },
       updateItems: [
         ...hitDiceUpdates,
-        ...await this.recoverItemUses({ newDay })
+        ...await this.recoverItemUses({ longRest: longRest, newDay })
       ],
       newDay: newDay
-    };
+    }
 
     // Perform updates
     await this.update(result.updateData);
     await this.updateEmbeddedDocuments("Item", result.updateItems);
 
     // Display a Chat Message summarizing the rest effects
-    if ( chat ) await this.displayRestResultMessage(result, true);
+    if ( chat ) await this.displayRestResultMessage(result, longRest);
 
     // Return data summarizing the rest effects
     return result;
