@@ -1,5 +1,5 @@
 /**
- * An application class which provides advanced configuration for special character flags which modify an Actor
+ * A Dialog to prompt the user to select from a list of features.
  * @type {Dialog}
  */
 export default class AddFeaturePrompt extends Dialog {
@@ -17,19 +17,11 @@ export default class AddFeaturePrompt extends Dialog {
   activateListeners(html) {
     super.activateListeners(html);
     
+    // render the item's sheet if its image is clicked
     html.on('click', '.item-image', (event) => {
-      const itemId = event.currentTarget.dataset?.itemId;
+      const item = this.features.find(({id}) => id === event.currentTarget.dataset?.itemId);
 
-      const item = this.features.find(({id}) => id === itemId);
-
-      console.log('AddFeaturePrompt item image clicked', {
-        event,
-        dataset: event.currentTarget.dataset,
-        itemId,
-        item,
-      });
-
-      item.sheet.render(true);
+      item?.sheet.render(true);
     })
   }
 
@@ -45,13 +37,9 @@ export default class AddFeaturePrompt extends Dialog {
       features
     };
 
-    console.log('dnd5e add-feature-prompt create', {
-      data
-    })
-
     // Render the ability usage template
     const html = await renderTemplate("systems/dnd5e/templates/apps/add-feature-prompt.html", data);
-    
+
     return new Promise((resolve) => {
       const dlg = new this(features, {
         title: game.i18n.localize('DND5E.AddFeaturePromptTitle'),
@@ -65,10 +53,6 @@ export default class AddFeaturePrompt extends Dialog {
 
               const selectedIds = Object.keys(fd).filter(itemId => fd[itemId]);
 
-              console.log('dnd5e add-feature-prompt apply', {
-                fd,
-                selectedIds
-              })
               resolve(selectedIds);
             }
           },

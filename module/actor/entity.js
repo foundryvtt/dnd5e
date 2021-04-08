@@ -150,7 +150,8 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Create additional class features in the Actor when a class item is updated.
+   * Get a list of features to add to the Actor when a class item is updated.
+   * Optionally prompt the user for which they would like to add.
    */
   async getClassFeatures({className, subclassName, level, prompt = true}={}) {
     const current = this.itemTypes.class.find(c => c.name === className);
@@ -177,11 +178,6 @@ export default class Actor5e extends Actor {
 
       const featuresToAdd = newFeatures.filter(feature => featureIdsToAdd.includes(feature.id));
 
-      console.log('getClassFeatures', {
-        newFeatures,
-        featureIdsToAdd,
-        featuresToAdd
-      })
       return featuresToAdd || [];
     }
     return [];
