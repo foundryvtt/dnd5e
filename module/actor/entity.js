@@ -2,6 +2,7 @@ import { d20Roll, damageRoll } from "../dice.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import {DND5E} from '../config.js';
+import AddFeaturePrompt from "../apps/add-feature-prompt.js";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -151,7 +152,7 @@ export default class Actor5e extends Actor {
   /**
    * Create additional class features in the Actor when a class item is updated.
    */
-  async getClassFeatures({className, subclassName, level}={}) {
+  async getClassFeatures({className, subclassName, level, prompt = true}={}) {
     const current = this.itemTypes.class.find(c => c.name === className);
     const priorLevel = current ? current.data.data.levels : 0;
 
@@ -164,7 +165,24 @@ export default class Actor5e extends Actor {
     if ( changed ) {
       const existing = new Set(this.items.map(i => i.name));
       const features = await Actor5e.loadClassFeatures({className, subclassName, level});
-      return features.filter(f => !existing.has(f.name));
+      const newFeatures = features.filter(f => !existing.has(f.name));
+
+      if (newFeatures.length === 0) return [];
+
+      // Prompt the user if they wish to add the new features
+      let featureIdsToAdd = newFeatures.map(({id}) => id);
+      if (prompt) {
+        featureIdsToAdd = await AddFeaturePrompt.create(newFeatures);
+      }
+
+      const featuresToAdd = newFeatures.filter(feature => featureIdsToAdd.includes(feature.id));
+
+      console.log('getClassFeatures', {
+        newFeatures,
+        featureIdsToAdd,
+        featuresToAdd
+      })
+      return featuresToAdd || [];
     }
     return [];
   }
