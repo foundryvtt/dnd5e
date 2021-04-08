@@ -136,12 +136,6 @@ export default class Actor5e extends Actor {
   /** @inheritdoc */
   getRollData() {
     const data = super.getRollData();
-    data.classes = this.items.reduce((obj, i) => {
-      if ( i.type === "class" ) {
-        obj[i.name.slugify({strict: true})] = i.data.data;
-      }
-      return obj;
-    }, {});
     data.prof = this.data.data.attributes.prof || 0;
     return data;
   }
@@ -229,16 +223,17 @@ export default class Actor5e extends Actor {
     const data = actorData.data;
 
     // Determine character level and available hit dice based on owned Class items
-    const [level, hd] = this.items.reduce((arr, item) => {
-      if ( item.type === "class" ) {
-        const classLevels = parseInt(item.data.data.levels) || 1;
-        arr[0] += classLevels;
-        arr[1] += classLevels - (parseInt(item.data.data.hitDiceUsed) || 0);
-      }
-      return arr;
-    }, [0, 0]);
+    data.classes = {};
+    data.attributes.hd = 0;
+    let level = 0;
+    for ( const item of this.items ) {
+      if ( item.type !== "class" ) continue;
+      const classLevels = parseInt(item.data.data.levels) || 1;
+      data.classes[item.name.slugify({strict: true})] = item.data.data;
+      data.attributes.hd += classLevels - (parseInt(item.data.data.hitDiceUsed) || 0);
+      level += classLevels;
+    }
     data.details.level = level;
-    data.attributes.hd = hd;
 
     // Character proficiency bonus
     data.attributes.prof = Math.floor((level + 7) / 4);
