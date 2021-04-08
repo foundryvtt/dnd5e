@@ -1367,12 +1367,12 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
-    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
-    if ( (this.type === "class") && Object.keys(changed.data).some(k => ["name", "subclass", "levels"].includes(k)) ) {
+    if ( !this.isEmbedded || (this.parent.type === "vehicle") || (this.type !== "class") ) return;
+    if ( changed["name"] || (changed.data && Object.keys(changed.data).some(k => ["subclass", "levels"].includes(k))) ) {
       const features = await this.parent.getClassFeatures({
-        className: changed.data.name || this.name,
-        subclassName: changed.data.subclass || this.data.data.subclass,
-        level: changed.data.levels || this.data.data.levels
+        className: changed.name || this.name,
+        subclassName: changed.data?.subclass || this.data.data.subclass,
+        level: changed.data?.levels || this.data.data.levels
       });
       return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
     }
