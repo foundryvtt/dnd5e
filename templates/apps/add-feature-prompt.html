@@ -5,10 +5,12 @@
   <ul class="items-list">
     {{#each features}}
     <li class="item flexrow">
-      <label for="toggle-feature-add-{{id}}" class="item-name flexrow">
-        <div class="item-image" style="background-image:url({{data.img}})"></div>
-        <h4>{{data.name}}</h4>
-      </label>
+      <div class="item-name flexrow">
+        <div class="item-image" style="background-image:url({{data.img}})" data-item-id="{{id}}"></div>
+        <label for="toggle-feature-add-{{id}}">
+          <h4>{{data.name}}</h4>
+        </label>
+      </div>
 
       <input type="checkbox" checked id="toggle-feature-add-{{id}}" name="{{id}}" />
     </li>

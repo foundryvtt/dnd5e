@@ -3,7 +3,7 @@
  * @type {Dialog}
  */
 export default class AddFeaturePrompt extends Dialog {
-  constructor(featureSet, dialogData={}, options={}) {
+  constructor(features, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog", "add-feature-prompt", "sheet"];
 
@@ -11,7 +11,26 @@ export default class AddFeaturePrompt extends Dialog {
      * Store a reference to the Item entities being used
      * @type {Array<Item5e>}
      */
-    this.featureSet = featureSet;
+    this.features = features;
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+    
+    html.on('click', '.item-image', (event) => {
+      const itemId = event.currentTarget.dataset?.itemId;
+
+      const item = this.features.find(({id}) => id === itemId);
+
+      console.log('AddFeaturePrompt item image clicked', {
+        event,
+        dataset: event.currentTarget.dataset,
+        itemId,
+        item,
+      });
+
+      item.sheet.render(true);
+    })
   }
 
   /**

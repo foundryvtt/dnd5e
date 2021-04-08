@@ -496,6 +496,10 @@
   }
 }
 
+/* ----------------------------------------- */
+/*  Actor Type Config Sheet Specifically     */
+/* ----------------------------------------- */
+
 .actor-type {
   .trait-list {
     display: flex;
@@ -520,5 +524,26 @@
   }
   li.custom-type input[type="radio"] {
     display: none;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Add Feature Prompt Specifically          */
+/* ----------------------------------------- */
+
+.dnd5e.add-feature-prompt {
+  .dialog-content {
+    padding-bottom: 1em;
+
+  }
+
+  form {
+    > :not(:first-child) {
+      margin-top: 0.5em;
+    }
+  }
+
+  .item-name > label, .item-image, input {
+    cursor: pointer;
   }
 }
