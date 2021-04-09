@@ -81,7 +81,7 @@ export class Token5e extends Token {
          .drawRoundedRect((maxPct*w-2), 1, (1-maxPct)*w, h-2, 2);
     }
 
-    bar.beginFill(PIXI.utils.rgb2hex([(1-(valueColorPct/2)), valueColorPct, 0]))
+    bar.beginFill(PIXI.utils.rgb2hex([(1-(valueColorPct/2)), valueColorPct, 0]), 0.8)
        .lineStyle(1, 0x000000, 0.8)
        .drawRoundedRect(1, 1, valuePct*(w-2), h-2, 2)
        .beginFill(0x559cc6, 0.5)
