@@ -917,8 +917,8 @@ export default class Actor5e extends Actor {
    * @typedef {object} RestResult
    * @property {number} dhp                  Hit points recovered during the rest.
    * @property {number} dhd                  Hit dice recovered or spent during the rest.
-   * @property {object} updateData           Updates applies to the actor.
-   * @property {Array.<object>} updateItems  Updates applies to actor's items.
+   * @property {object} updateData           Updates applied to the actor.
+   * @property {Array.<object>} updateItems  Updates applied to actor's items.
    * @property {boolean} newDay              Whether a new day occurred during the rest.
    */
 
@@ -927,12 +927,13 @@ export default class Actor5e extends Actor {
   /**
    * Take a short rest, possibly spending hit dice and recovering resources, item uses, and pact slots.
    *
-   * @param {object} options
-   * @param {boolean} options.dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
-   * @param {boolean} options.chat    Summarize the results of the rest workflow as a chat message
-   * @param {boolean} options.autoHD  Automatically spend Hit Dice if you are missing 3 or more hit points
-   * @param {boolean} options.autoHDThreshold   A number of missing hit points which would trigger an automatic HD roll
-   * @return {Promise.<RestResult>}             A Promise which resolves once the short rest workflow has completed
+   * @param {object} [options]
+   * @param {boolean} [options.dialog=true]         Present a dialog window which allows for rolling hit dice as part
+   *                                                of the Short Rest and selecting whether a new day has occurred.
+   * @param {boolean} [options.chat=true]           Summarize the results of the rest workflow as a chat message.
+   * @param {boolean} [options.autoHD=false]        Automatically spend Hit Dice if you are missing 3 or more hit points.
+   * @param {boolean} [options.autoHDThreshold=3]   A number of missing hit points which would trigger an automatic HD roll.
+   * @return {Promise.<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
     // Take note of the initial hit points and number of hit dice the Actor has
@@ -962,11 +963,11 @@ export default class Actor5e extends Actor {
   /**
    * Take a long rest, recovering hit points, hit dice, resources, item uses, and spell slots.
    *
-   * @param {object} options
-   * @param {boolean} options.dialog  Present a confirmation dialog window whether or not to take a long rest
-   * @param {boolean} options.chat    Summarize the results of the rest workflow as a chat message
-   * @param {boolean} options.newDay  Whether the long rest carries over to a new day
-   * @return {Promise.<RestResult>}   A Promise which resolves once the long rest workflow has completed
+   * @param {object} [options]
+   * @param {boolean} [options.dialog=true]  Present a confirmation dialog window whether or not to take a long rest.
+   * @param {boolean} [options.chat=true]    Summarize the results of the rest workflow as a chat message.
+   * @param {boolean} [options.newDay=true]  Whether the long rest carries over to a new day.
+   * @return {Promise.<RestResult>}          A Promise which resolves once the long rest workflow has completed.
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
     // Maybe present a confirmation dialog
@@ -989,13 +990,13 @@ export default class Actor5e extends Actor {
    * @param {object} options
    * @param {boolean} chat           Summarize the results of the rest workflow as a chat message.
    * @param {boolean} newDay         Has a new day occurred during this rest?
-   * @param {number} hd0             Hit dice before and hit dice were spent (short rest only).
-   * @param {number} hp0             Hit points before any hit dice were spent (short rest only).
+   * @param {number} [hd0=0]         Hit dice before and hit dice were spent (short rest only).
+   * @param {number} [hp0=0]         Hit points before any hit dice were spent (short rest only).
    * @param {boolean} longRest       Is this a long rest?
    * @return {Promise.<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
-  async _rest({ chat, newDay, hd0=0, hp0=0, longRest }={}) {
+  async _rest({ chat, newDay, hd0=0, hp0=0, longRest }) {
     let dhd, dhp;
     let hitPointUpdates = {};
     let hitDiceUpdates = [];
@@ -1044,11 +1045,12 @@ export default class Actor5e extends Actor {
   /**
    * Display a chat message with the result of a rest.
    *
-   * @param {RestResult} result       Result of the rest operation.
-   * @param {boolean} longRest        Is this a long rest?
-   * @return {Promise.<ChatMessage>}  Chat message that was created.
+   * @param {RestResult} result         Result of the rest operation.
+   * @param {boolean} [longRest=false]  Is this a long rest?
+   * @return {Promise.<ChatMessage>}    Chat message that was created.
    */
-  async displayRestResultMessage({ dhd, dhp, newDay }={}, longRest=false) {
+  async displayRestResultMessage(result, longRest=false) {
+    const { dhd, dhp, newDay } = result;
     const length = longRest ? "Long" : "Short";
 
     // Summarize the rest duration
@@ -1086,9 +1088,9 @@ export default class Actor5e extends Actor {
   /**
    * Automatically spend hit dice to recover hit points up to a certain threshold.
    *
-   * @param {object} options
-   * @param {number} options.threshold   A number of missing hit points which would trigger an automatic HD roll.
-   * @return {Promise.<number>}          Number of hit dice spent.
+   * @param {object} [options]
+   * @param {number} [options.threshold=3]  A number of missing hit points which would trigger an automatic HD roll.
+   * @return {Promise.<number>}             Number of hit dice spent.
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const max = this.data.data.attributes.hp.max + this.data.data.attributes.hp.tempmax;
@@ -1108,12 +1110,12 @@ export default class Actor5e extends Actor {
   /**
    * Recovers actor hit points and eliminates any temp HP.
    *
-   * @param {object} options
-   * @param {boolean} options.recoverHP       Reset HP to maximum.
-   * @param {boolean} options.recoverTemp     Reset temp HP to zero.
-   * @param {boolean} options.recoverTempMax  Reset temp max HP to zero.
-   * @param {boolean} options.performUpdate   Should the update be performed or should an update object be returned.
-   * @return {Promise.<[object, number]>)     Updates to the actor and change in hit points.
+   * @param {object} [options]
+   * @param {boolean} [options.recoverHP=true]       Reset HP to maximum.
+   * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
+   * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
+   * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
+   * @return {Promise.<Array>)                       Updates to the actor and change in hit points.
    */
   async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=false }={}) {
     const data = this.data.data;
@@ -1141,11 +1143,11 @@ export default class Actor5e extends Actor {
   /**
    * Recovers actor resources.
    *
-   * @param {object} options
-   * @param {boolean} options.shortRest      Recover resources that recharge on a short rest.
-   * @param {boolean} options.longRest       Recover resources that recharge on a long rest.
-   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
-   * @return {Promise.<object>}              Updates to the actor.
+   * @param {object} [options]
+   * @param {boolean} [options.shortRest=true]       Recover resources that recharge on a short rest.
+   * @param {boolean} [options.longRest=true]        Recover resources that recharge on a long rest.
+   * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
+   * @return {Promise.<object>}                      Updates to the actor.
    */
   async recoverResources({ shortRest=true, longRest=true, performUpdate=false }={}) {
     let updates = {};
@@ -1165,10 +1167,10 @@ export default class Actor5e extends Actor {
   /**
    * Recovers spell slots and pact slots.
    *
-   * @param {object} options
-   * @param {boolean} options.recoverPact    Recover all expended pact slots.
-   * @param {boolean} options.recoverSpells  Recover all expended spell slots.
-   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
+   * @param {object} [options]
+   * @param {boolean} [options.recoverPact=true]     Recover all expended pact slots.
+   * @param {boolean} [options.recoverSpells=true]   Recover all expended spell slots.
+   * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
    * @return {Promise.<object>}              Updates to the actor.
    */
   async recoverSpellSlots({ recoverPact=true, recoverSpells=true, performUpdate=false }={}) {
@@ -1193,10 +1195,10 @@ export default class Actor5e extends Actor {
   /**
    * Recovers class hit dice during a long rest.
    *
-   * @param {object} options
-   * @param {number} options.maxHitDice      Maximum number of hit dice to recover.
-   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
-   * @return {Promise.<[Array.<object>, number]>}  Array of item updates and number of hit dice recovered.
+   * @param {object} [options]
+   * @param {number} [options.maxHitDice]            Maximum number of hit dice to recover.
+   * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
+   * @return {Promise.<Array>}                       Array of item updates and number of hit dice recovered.
    */
   async recoverHitDice({ maxHitDice=undefined, performUpdate=false }={}) {
     // Determine the number of hit dice which may be recovered
@@ -1229,12 +1231,12 @@ export default class Actor5e extends Actor {
   /**
    * Recovers item uses during short or long rests.
    *
-   * @param {object} options
-   * @param {boolean} options.shortRest      Recover uses for items that recharge after a short rest.
-   * @param {boolean} options.longRest       Recover uses for items that recharge after a long rest.
-   * @param {boolean} options.newDay         Recover uses for items that recharge on a new day.
-   * @param {boolean} options.performUpdate  Should the update be performed or should an update object be returned.
-   * @return {Promise.<Array.<object>>}      Array of item updates.
+   * @param {object} [options]
+   * @param {boolean} [options.shortRest=true]       Recover uses for items that recharge after a short rest.
+   * @param {boolean} [options.longRest=true]        Recover uses for items that recharge after a long rest.
+   * @param {boolean} [options.newDay=true]          Recover uses for items that recharge on a new day.
+   * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
+   * @return {Promise.<Array.<object>>}              Array of item updates.
    */
   async recoverItemUses({ shortRest=true, longRest=true, newDay=true, performUpdate=false }={}) {
     let recovery = [];
