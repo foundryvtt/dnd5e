@@ -1205,7 +1205,7 @@ export default class Actor5e extends Actor {
    */
   async recoverHitDice({ maxHitDice=undefined, performUpdate=false }={}) {
     // Determine the number of hit dice which may be recovered
-    if ( !maxHitDice ) {
+    if ( maxHitDice === undefined ) {
       maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
     }
 
