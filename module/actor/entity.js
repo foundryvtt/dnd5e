@@ -1019,12 +1019,12 @@ export default class Actor5e extends Actor {
       dhp: dhp,
       updateData: {
         ...hitPointUpdates,
-        ...await this.recoverResources({ shortRest: !longRest, longRest: longRest }),
+        ...await this.recoverResources({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
         ...await this.recoverSpellSlots({ recoverSpells: longRest })
       },
       updateItems: [
         ...hitDiceUpdates,
-        ...await this.recoverItemUses({ longRest: longRest, newDay })
+        ...await this.recoverItemUses({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
       ],
       newDay: newDay
     }
@@ -1144,16 +1144,16 @@ export default class Actor5e extends Actor {
    * Recovers actor resources.
    *
    * @param {object} [options]
-   * @param {boolean} [options.shortRest=true]       Recover resources that recharge on a short rest.
-   * @param {boolean} [options.longRest=true]        Recover resources that recharge on a long rest.
-   * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
-   * @return {Promise.<object>}                      Updates to the actor.
+   * @param {boolean} [options.recoverShortRestResources=true]  Recover resources that recharge on a short rest.
+   * @param {boolean} [options.recoverLongRestResources=true]   Recover resources that recharge on a long rest.
+   * @param {boolean} [options.performUpdate=false]             Should the update be performed or should an update object be returned.
+   * @return {Promise.<object>}                                 Updates to the actor.
    */
-  async recoverResources({ shortRest=true, longRest=true, performUpdate=false }={}) {
+  async recoverResources({ recoverShortRestResources=true, recoverLongRestResources=true, performUpdate=false }={}) {
     let updates = {};
 
     for ( let [k, r] of Object.entries(this.data.data.resources) ) {
-      if ( r.max && ((shortRest && r.sr) || (longRest && r.lr)) ) {
+      if ( r.max && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
         updates[`data.resources.${k}.value`] = r.max;
       }
     }
@@ -1232,17 +1232,17 @@ export default class Actor5e extends Actor {
    * Recovers item uses during short or long rests.
    *
    * @param {object} [options]
-   * @param {boolean} [options.shortRest=true]       Recover uses for items that recharge after a short rest.
-   * @param {boolean} [options.longRest=true]        Recover uses for items that recharge after a long rest.
-   * @param {boolean} [options.newDay=true]          Recover uses for items that recharge on a new day.
-   * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
-   * @return {Promise.<Array.<object>>}              Array of item updates.
+   * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
+   * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
+   * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
+   * @param {boolean} [options.performUpdate=false]        Should the update be performed or should an update object be returned.
+   * @return {Promise.<Array.<object>>}                    Array of item updates.
    */
-  async recoverItemUses({ shortRest=true, longRest=true, newDay=true, performUpdate=false }={}) {
+  async recoverItemUses({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true, performUpdate=false }={}) {
     let recovery = [];
-    if ( shortRest ) recovery.push("sr");
-    if ( longRest ) recovery.push("lr");
-    if ( newDay ) recovery.push("day");
+    if ( recoverShortRestUses ) recovery.push("sr");
+    if ( recoverLongRestUses ) recovery.push("lr");
+    if ( recoverDailyUses ) recovery.push("day");
 
     let updates = [];
     for ( let item of this.items ) {
@@ -1250,7 +1250,7 @@ export default class Actor5e extends Actor {
       if ( d.uses && recovery.includes(d.uses.per) ) {
         updates.push({_id: item.id, "data.uses.value": d.uses.max});
       }
-      else if ( longRest && d.recharge && d.recharge.value ) {
+      if ( recoverLongRestUses && d.recharge && d.recharge.value ) {
         updates.push({_id: item.id, "data.recharge.charged": true});
       }
     }
