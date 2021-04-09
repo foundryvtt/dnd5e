@@ -13,7 +13,7 @@ import { DND5E } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
-import { measureDistances, getBarAttribute } from "./module/canvas.js";
+import { measureDistances } from "./module/canvas.js";
 
 // Import Documents
 import Actor5e from "./module/actor/entity.js";
