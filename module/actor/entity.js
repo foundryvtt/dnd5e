@@ -1003,8 +1003,8 @@ export default class Actor5e extends Actor {
 
     // Recover hit points & hit dice on long rest
     if ( longRest ) {
-      [hitPointUpdates, dhp] = await this.recoverHitPoints();
-      [hitDiceUpdates, dhd] = await this.recoverHitDice();
+      ({ updates: hitPointUpdates, hitPointsRecovered: dhp } = await this.recoverHitPoints());
+      ({ updates: hitDiceUpdates, hitDiceRecovered: dhd} = await this.recoverHitDice());
     }
 
     // Calculate recovered hit points & spent hit dice on short rest
@@ -1115,7 +1115,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
    * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
    * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
-   * @return {Promise.<Array>)                       Updates to the actor and change in hit points.
+   * @return {Promise.<object>)                      Updates to the actor and change in hit points.
    */
   async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true, performUpdate=false }={}) {
     const data = this.data.data;
@@ -1135,7 +1135,7 @@ export default class Actor5e extends Actor {
     }
 
     if ( performUpdate ) await this.update(updates);
-    return [updates, recoverHP ? max - data.attributes.hp.value : 0];
+    return { updates, hitPointsRecovered: recoverHP ? max - data.attributes.hp.value : 0 };
   }
 
   /* -------------------------------------------- */
@@ -1198,7 +1198,7 @@ export default class Actor5e extends Actor {
    * @param {object} [options]
    * @param {number} [options.maxHitDice]            Maximum number of hit dice to recover.
    * @param {boolean} [options.performUpdate=false]  Should the update be performed or should an update object be returned.
-   * @return {Promise.<Array>}                       Array of item updates and number of hit dice recovered.
+   * @return {Promise.<object>}                      Array of item updates and number of hit dice recovered.
    */
   async recoverHitDice({ maxHitDice=undefined, performUpdate=false }={}) {
     // Determine the number of hit dice which may be recovered
@@ -1223,7 +1223,7 @@ export default class Actor5e extends Actor {
     }
 
     if ( performUpdate ) await this.updateEmbeddedDocuments("Item", updates);
-    return [updates, hitDiceRecovered];
+    return { updates, hitDiceRecovered };
   }
 
   /* -------------------------------------------- */
