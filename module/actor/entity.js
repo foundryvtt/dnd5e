@@ -1051,10 +1051,13 @@ export default class Actor5e extends Actor {
    */
   async displayRestResultMessage(result, longRest=false) {
     const { dhd, dhp, newDay } = result;
+    const diceRestored = dhd !== 0;
+    const healthRestored = dhp !== 0;
     const length = longRest ? "Long" : "Short";
 
+    let restFlavor, message;
+
     // Summarize the rest duration
-    let restFlavor;
     switch (game.settings.get("dnd5e", "restVariant")) {
       case 'normal': restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`; break;
       case 'gritty': restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`; break;
@@ -1062,10 +1065,10 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the chat message to display
-    let message = `DND5E.${length}RestResultShort`;
-    if ( (dhd !== 0) && (dhp !== 0) ) message = `DND5E.${length}RestResult`;
-    else if ( longRest && (dhd === 0) && (dhp !== 0) ) message = "DND5E.LongRestResultHitPoints";
-    else if ( longRest && (dhd !== 0) && (dhp === 0) ) message = "DND5E.LongRestResultHitDice";
+    if ( diceRestored && healthRestored ) message = `DND5E.${length}RestResult`;
+    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.LongRestResultHitPoints";
+    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.LongRestResultHitDice";
+    else message = `DND5E.${length}RestResultShort`;
 
     // Create a chat message
     let chatData = {
