@@ -894,7 +894,7 @@ export default class Actor5e extends Actor {
       data: rollData,
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this}),
-      allowcritical: false,
+      allowCritical: false,
       fastForward: !dialog,
       dialogOptions: {width: 350},
       messageData: {"flags.dnd5e.roll": {type: "hitDie"}}
