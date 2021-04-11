@@ -418,11 +418,11 @@ export default class Item5e extends Item {
   /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options.
    *
-   * @param {object} options                   Configuration options for how the roll is performed
-   * @param {boolean} options.configureDialog  Display a configuration dialog for the item roll, if applicable?
-   * @param {string} options.rollMode          The roll display mode with which to display (or not) the card
-   * @param {boolean} options.createMessage    Whether to automatically create a chat message (if true) or simply return
-   *                                           the prepared chat message data (if false).
+   * @param {object} [options]                   Configuration options for how the roll is performed
+   * @param {boolean} [options.configureDialog]  Display a configuration dialog for the item roll, if applicable?
+   * @param {string} [options.rollMode]          The roll display mode with which to display (or not) the card
+   * @param {boolean} [options.createMessage]    Whether to automatically create a chat message (if true) or simply return
+   *                                             the prepared chat message data (if false).
    * @return {Promise<ChatMessage|object|void>}
    */
   async roll({configureDialog=true, rollMode, createMessage=true}={}) {
@@ -952,13 +952,13 @@ export default class Item5e extends Item {
    * Place a damage roll using an item (weapon, feat, spell, or equipment).
    * Rely upon the damageRoll logic for the core implementation.
    *
-   * @param {object} options              Configuration options on how the damage should be calculated
-   * @param {boolean} options.critical    Should damage be rolled as a critical hit?
-   * @param {MouseEvent} options.event    An event which triggered this roll, if any
-   * @param {number} options.spellLevel   If the item is a spell, override the level for damage scaling
-   * @param {boolean} options.versatile   If the item is a weapon, roll damage using the versatile formula
-   * @param {object} options.options      Additional options passed to the damageRoll function
-   * @return {Promise<Roll>}              A Promise which resolves to the created Roll instance
+   * @param {object} [options]             Configuration options on how the damage should be calculated
+   * @param {boolean} [options.critical]   Should damage be rolled as a critical hit?
+   * @param {MouseEvent} [options.event]   An event which triggered this roll, if any
+   * @param {number} [options.spellLevel]  If the item is a spell, override the level for damage scaling
+   * @param {boolean} [options.versatile]  If the item is a weapon, roll damage using the versatile formula
+   * @param {object} [options.options]     Additional options passed to the damageRoll function
+   * @return {Promise<Roll>}               A Promise which resolves to the created Roll instance
    */
   rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");

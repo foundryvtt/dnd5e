@@ -3,7 +3,7 @@ import ActorSheet5e from "./base.js";
 /**
  * An Actor sheet for Vehicle type actors.
  *
- * @type {ActorSheet5e}
+ * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
