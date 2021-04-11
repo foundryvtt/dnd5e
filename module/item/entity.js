@@ -273,9 +273,9 @@ export default class Item5e extends Item {
   /**
    * Populate a label with the compiled and simplified damage formula
    * based on owned item actor data. This is only used for display
-   * purposes and is not related to Item5e#rollDamage
+   * purposes and is not related to Item5e#rollDamage.
    * 
-   * @return {Array} array of objects with `formula` and `damageType`
+   * @return {Array} Array of objects with `formula` and `damageType`
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
@@ -297,6 +297,7 @@ export default class Item5e extends Item {
 
   /**
    * Update the derived spell DC for an item that requires a saving throw.
+   *
    * @return {number|null}
    */
   getSaveDC() {
@@ -508,7 +509,7 @@ export default class Item5e extends Item {
    * @param {boolean} options.consumeQuantity       Consume quantity of the item if other consumption modes are not available?
    * @param {boolean} options.consumeRecharge       Whether the item consumes the recharge mechanic
    * @param {boolean} options.consumeResource       Whether the item consumes a limited resource
-   * @param {string|null} options.consumeSpellSlot  The category of spell slot to consume, or null
+   * @param {string|null} options.consumeSpellLevel The category of spell slot to consume, or null
    * @param {boolean} options.consumeUsage          Whether the item consumes a limited usage
    * @return {object|boolean}                       A set of data changes to apply when the item is used, or false
    * @private
@@ -840,7 +841,6 @@ export default class Item5e extends Item {
   /**
    * Render a chat card for Spell type data.
    *
-   * @return {object}
    * @private
    */
   _spellChatData(data, labels, props) {
