@@ -170,6 +170,15 @@ DND5E.tokenSizes = {
   "grg": 4
 };
 
+/**
+ * Colors used to visualize temporary and temporary maximum HP in token health bars
+ * @enum {number}
+ */
+DND5E.tokenHPColors = {
+  temp: 0x66CCFF,
+  tempmax: 0x440066,
+  negmax: 0x550000
+}
 
 /* -------------------------------------------- */
 
