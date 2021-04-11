@@ -1,4 +1,6 @@
 /**
+ * Deprecated in favor of D20Roll#configureDialog.
+ *
  * @deprecated since 1.3.0
  * @ignore
  */
@@ -7,6 +9,8 @@ async function d20Dialog(data, options) {
 }
 
 /**
+ * Deprecated in favor of DamageRoll#configureDialog.
+ *
  * @deprecated since 1.3.0
  * @ignore
  */

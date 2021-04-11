@@ -1,5 +1,6 @@
 /**
  * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
+ *
  * @param {string} formula                       The string formula to parse
  * @param {object} data                          The data object against which to parse attributes within the formula
  * @param {object} [options={}]                  Extra optional arguments which describe or modify the D20Roll
@@ -10,6 +11,8 @@
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
+ *
+ * @extends {Roll}
  */
 export default class D20Roll extends Roll {
   constructor(formula, data, options) {
@@ -23,7 +26,8 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Advantage mode of a 5e d20 roll
+   * Advantage mode of a 5e d20 roll.
+   *
    * @enum {number}
    */
   static ADV_MODE = {
@@ -33,7 +37,8 @@ export default class D20Roll extends Roll {
   }
 
   /**
-   * The HTML template path used to configure evaluation of this Roll
+   * The HTML template path used to configure evaluation of this Roll.
+   *
    * @type {string}
    */
   static EVALUATION_TEMPLATE = "systems/dnd5e/templates/chat/roll-dialog.html";
@@ -41,7 +46,8 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * A convenience reference for whether this D20Roll has advantage
+   * A convenience reference for whether this D20Roll has advantage.
+   *
    * @type {boolean}
    */
   get hasAdvantage() {
@@ -49,7 +55,8 @@ export default class D20Roll extends Roll {
   }
 
   /**
-   * A convenience reference for whether this D20Roll has disadvantage
+   * A convenience reference for whether this D20Roll has disadvantage.
+   *
    * @type {boolean}
    */
   get hasDisadvantage() {
@@ -61,7 +68,8 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Apply optional modifiers which customize the behavior of the d20term
+   * Apply optional modifiers which customize the behavior of the d20term.
+   *
    * @private
    */
   configureModifiers() {
@@ -128,6 +136,7 @@ export default class D20Roll extends Roll {
 
   /**
    * Create a Dialog prompt used to configure evaluation of an existing D20Roll instance.
+   *
    * @param {object} data                     Dialog configuration data
    * @param {string} [data.title]               The title of the shown dialog window
    * @param {number} [data.defaultRollMode]     The roll mode that the roll mode select element should default to
@@ -136,7 +145,7 @@ export default class D20Roll extends Roll {
    * @param {string} [data.defaultAbility]      For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
    * @param {object} options                  Additional Dialog customization options
-   * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the dialog was closed
+   * @return {Promise<D20Roll|null>}          A resulting D20Roll object constructed with the dialog, or null if the dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultAction=D20Roll.ADV_MODE.NORMAL, chooseModifier=false, defaultAbility, template}={}, options={}) {
 
@@ -184,7 +193,8 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Handle submission of the Roll evaluation configuration Dialog
+   * Handle submission of the Roll evaluation configuration Dialog.
+   *
    * @param {jQuery} html             The submitted dialog content
    * @param {number} advantageMode    The chosen advantage mode
    * @private
