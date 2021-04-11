@@ -40,7 +40,7 @@ export default class ActorSheetFlags extends DocumentSheet {
    * @private
    */
   _getClasses() {
-    const classes = this.items.filter(i => i.type === "class");
+    const classes = this.object.items.filter(i => i.type === "class");
     return classes.sort((a, b) => a.name.localeCompare(b.name)).reduce((obj, i) => {
       obj[i.id] = i.name;
       return obj;
