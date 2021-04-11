@@ -1,5 +1,6 @@
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
+ *
  * @param {string} formula                       The string formula to parse
  * @param {object} data                          The data object against which to parse attributes within the formula
  * @param {object} [options={}]                  Extra optional arguments which describe or modify the DamageRoll
@@ -7,7 +8,8 @@
  * @param {number} [options.criticalMultiplier=2]     A critical hit multiplier which is applied to critical hits
  * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
- *
+ * 
+ * @extends {Roll}
  */
 export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
@@ -17,7 +19,8 @@ export default class DamageRoll extends Roll {
   }
 
   /**
-   * The HTML template path used to configure evaluation of this Roll
+   * The HTML template path used to configure evaluation of this Roll.
+   *
    * @type {string}
    */
   static EVALUATION_TEMPLATE = "systems/dnd5e/templates/chat/roll-dialog.html";
@@ -25,7 +28,8 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * A convenience reference for whether this DamageRoll is a critical hit
+   * A convenience reference for whether this DamageRoll is a critical hit.
+   *
    * @type {boolean}
    */
   get isCritical() {
@@ -37,7 +41,8 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Apply optional modifiers which customize the behavior of the d20term
+   * Apply optional modifiers which customize the behavior of the d20term.
+   *
    * @private
    */
   configureDamage() {
@@ -105,6 +110,7 @@ export default class DamageRoll extends Roll {
 
   /**
    * Create a Dialog prompt used to configure evaluation of an existing D20Roll instance.
+   *
    * @param {object} data                     Dialog configuration data
    * @param {string} [data.title]               The title of the shown dialog window
    * @param {number} [data.defaultRollMode]     The roll mode that the roll mode select element should default to
@@ -112,7 +118,7 @@ export default class DamageRoll extends Roll {
    * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
    * @param {boolean} [data.allowCritical=true] Allow critical hit to be chosen as a possible damage mode
    * @param {object} options                  Additional Dialog customization options
-   * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the dialog was closed
+   * @return {Promise<D20Roll|null>}          A resulting D20Roll object constructed with the dialog, or null if the dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
 
@@ -148,7 +154,8 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Handle submission of the Roll evaluation configuration Dialog
+   * Handle submission of the Roll evaluation configuration Dialog.
+   *
    * @param {jQuery} html             The submitted dialog content
    * @param {boolean} isCritical      Is the damage a critical hit?
    * @private
