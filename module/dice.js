@@ -225,7 +225,8 @@ export async function damageRoll({
     const configured = await roll.configureDialog({
       title,
       defaultRollMode: defaultRollMode,
-      template
+      template,
+      allowCritical
     }, dialogOptions);
     if ( configured === null ) return null;
   }
