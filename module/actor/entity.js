@@ -955,7 +955,7 @@ export default class Actor5e extends Actor {
       await this.autoSpendHitDice({ threshold: autoHDThreshold });
     }
 
-    return this._rest({ chat, newDay, hd0, hp0, longRest: false });
+    return this._rest(chat, newDay, false, hd0, hp0);
   }
 
   /* -------------------------------------------- */
@@ -979,7 +979,7 @@ export default class Actor5e extends Actor {
       }
     }
 
-    return this._rest({ chat, newDay, longRest: true });
+    return this._rest(chat, newDay, true);
   }
 
   /* -------------------------------------------- */
@@ -987,16 +987,15 @@ export default class Actor5e extends Actor {
   /**
    * Perform all of the changes needed for a short or long rest.
    *
-   * @param {object} options
    * @param {boolean} chat           Summarize the results of the rest workflow as a chat message.
    * @param {boolean} newDay         Has a new day occurred during this rest?
+   * @param {boolean} longRest       Is this a long rest?
    * @param {number} [hd0=0]         Hit dice before and hit dice were spent (short rest only).
    * @param {number} [hp0=0]         Hit points before any hit dice were spent (short rest only).
-   * @param {boolean} longRest       Is this a long rest?
    * @return {Promise.<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
-  async _rest({ chat, newDay, hd0=0, hp0=0, longRest }) {
+  async _rest(chat, newDay, longRest, hd0=0, hp0=0) {
     let dhd, dhp;
     let hitPointUpdates = {};
     let hitDiceUpdates = [];
