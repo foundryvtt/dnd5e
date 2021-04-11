@@ -1,21 +1,23 @@
 const gulp = require('gulp');
 const gulpIf = require('gulp-if');
-const eslint = require('gulp-eslint');
-require('eslint-plugin-jsdoc');
 
 const css = require('./utils/css.js');
 const packs = require('./utils/packs.js');
 
+const parsedArgs = require('minimist')(process.argv.slice(2));
 
+// Code Linting
+const eslint = require('gulp-eslint');
+require('eslint-plugin-jsdoc');
 
 
 /* ----------------------------------------- */
 /*  Lint Javascript
 /* ----------------------------------------- */
 
-const applyFixes = process.argv.slice(2).includes('--fix');
 const DND5E_JS = [".eslintrc.json", "dnd5e.js", "module/**/*.js"];
 function lintJavascript() {
+  const applyFixes = parsedArgs.hasOwnProperty("fix");
   return gulp
     .src("module/**/*.js")
     .pipe(eslint({"fix": applyFixes}))
