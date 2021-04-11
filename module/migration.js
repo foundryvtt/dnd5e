@@ -68,8 +68,7 @@ export const migrateWorld = async function() {
 /**
  * Apply migration rules to all Entities within a single Compendium pack.
  *
- * @param pack
- * @return {Promise}
+ * @param {Compendium} pack  Pack to migrate
  */
 export const migrateCompendium = async function(pack) {
   const entity = pack.metadata.entity;
@@ -255,6 +254,9 @@ export const migrateSceneData = function(scene) {
 /**
  * Migrate the actor speed string to movement object.
  *
+ * @param {object} actorData   Actor data to migrate
+ * @param {object} updateData  Existing updates to expand upon
+ * @return {object}            The updateData to apply
  * @private
  */
 function _migrateActorMovement(actorData, updateData) {
@@ -283,6 +285,9 @@ function _migrateActorMovement(actorData, updateData) {
 /**
  * Migrate the actor traits.senses string to attributes.senses object.
  *
+ * @param {object} actor       Actor data to migrate
+ * @param {object} updateData  Existing updates to expand upon
+ * @return {object}            The updateData to apply
  * @private
  */
 function _migrateActorSenses(actor, updateData) {
@@ -320,7 +325,11 @@ function _migrateActorSenses(actor, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the actor details.type string to object
+ * Migrate the actor details.type string to object.
+ *
+ * @param {object} actor       Actor data to migrate
+ * @param {object} updateData  Existing updates to expand upon
+ * @return {object}            The updateData to apply
  * @private
  */
 function _migrateActorType(actor, updateData) {
@@ -484,6 +493,7 @@ export async function purgeFlags(pack) {
  * Purge the data model of any inner objects which have been flagged as _deprecated.
  *
  * @param {object} data   The data to clean
+ * @return {object}       The updateData to apply
  * @private
  */
 export function removeDeprecatedObjects(data) {
