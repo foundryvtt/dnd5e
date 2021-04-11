@@ -653,7 +653,8 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Assign a class item as the original class for the Actor based on which class has the most levels
+   * Assign a class item as the original class for the Actor based on which class has the most levels.
+   *
    * @protected
    */
   _assignPrimaryClass() {
@@ -1576,6 +1577,8 @@ export default class Actor5e extends Actor {
    * If this actor was transformed with transformTokens enabled, then its
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
+   * 
+   * @return {Promise.<(Token|Actor5e)>}  Unpolymorphed token or actor  
    */
   async revertOriginalForm() {
     if ( !this.isPolymorphed ) return;
@@ -1653,8 +1656,9 @@ export default class Actor5e extends Actor {
 
   /**
    * Format a type object into a string.
+   *
    * @param {object} typeData          The type data to convert to a string.
-   * @returns {string}
+   * @return {string}
    */
   static formatCreatureType(typeData) {
     if ( typeof typeData === "string" ) return typeData; // backwards compatibility
