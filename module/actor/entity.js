@@ -124,6 +124,9 @@ export default class Actor5e extends Actor {
     // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
+    // Reset class store to ensure it is updated with any changes
+    this._classes = undefined;
+
     // Determine Initiative Modifier
     const init = data.attributes.init;
     const athlete = flags.remarkableAthlete;
