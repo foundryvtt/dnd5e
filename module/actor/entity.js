@@ -7,6 +7,38 @@ import {DND5E} from '../config.js';
  * Extend the base Actor class to implement additional system-specific logic.
  */
 export default class Actor5e extends Actor {
+  constructor(data, context) {
+    super(data, context);
+
+    /**
+     * The data source for Actor5e.classes allowing it to be lazily computed.
+     *
+     * @type {object.<string, Item5e>}
+     * @private
+     */
+    this._classes = undefined;
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * A mapping of classes belonging to this Actor.
+   *
+   * @return {object.<string, Item5e>}
+   */
+  get classes() {
+    if ( this._classes !== undefined ) return this._classes;
+    if ( this.data.type !== "character" ) return this._classes = {};
+
+    return this._classes = this.items.filter((item) => item.type === "class").reduce((obj, cls) => {
+      obj[cls.name.slugify({strict: true})] = cls;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Is this Actor currently polymorphed into some other creature?
@@ -16,6 +48,8 @@ export default class Actor5e extends Actor {
     return this.getFlag("dnd5e", "isPolymorphed") || false;
   }
 
+  /* -------------------------------------------- */
+  /*  Methods                                     */
   /* -------------------------------------------- */
 
   /** @override */
@@ -137,6 +171,11 @@ export default class Actor5e extends Actor {
   getRollData() {
     const data = super.getRollData();
     data.prof = this.data.data.attributes.prof || 0;
+    data.classes = Object.entries(this.classes).reduce((obj, e) => {
+      const [slug, cls] = e;
+      obj[slug] = cls.data.data;
+      return obj;
+    }, {});
     return data;
   }
 
@@ -223,17 +262,16 @@ export default class Actor5e extends Actor {
     const data = actorData.data;
 
     // Determine character level and available hit dice based on owned Class items
-    data.classes = {};
-    data.attributes.hd = 0;
-    let level = 0;
-    for ( const item of this.items ) {
-      if ( item.type !== "class" ) continue;
-      const classLevels = parseInt(item.data.data.levels) || 1;
-      data.classes[item.name.slugify({strict: true})] = item.data.data;
-      data.attributes.hd += classLevels - (parseInt(item.data.data.hitDiceUsed) || 0);
-      level += classLevels;
-    }
+    const [level, hd] = this.items.reduce((arr, item) => {
+      if ( item.type === "class" ) {
+        const classLevels = parseInt(item.data.data.levels) || 1;
+        arr[0] += classLevels;
+        arr[1] += classLevels - (parseInt(item.data.data.hitDiceUsed) || 0);
+      }
+      return arr;
+    }, [0, 0]);
     data.details.level = level;
+    data.attributes.hd = hd;
 
     // Character proficiency bonus
     data.attributes.prof = Math.floor((level + 7) / 4);
