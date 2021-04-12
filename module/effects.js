@@ -37,17 +37,17 @@ export function prepareActiveEffectCategories(effects) {
     const categories = {
       temporary: {
         type: "temporary",
-        label: "Temporary Effects",
+        label: "DND5E.EffectsCategoryTemporary",
         effects: []
       },
       passive: {
         type: "passive",
-        label: "Passive Effects",
+        label: "DND5E.EffectsCategoryPassive",
         effects: []
       },
       inactive: {
         type: "inactive",
-        label: "Inactive Effects",
+        label: "DND5E.EffectsCategoryInactive",
         effects: []
       }
     };
