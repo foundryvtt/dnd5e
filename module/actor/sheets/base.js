@@ -92,15 +92,12 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Skills
     if (data.actor.data.skills) {
-      data.actor.data.skills = Object.fromEntries(
-        Object.entries(data.actor.data.skills).map(([s, skl]) => {
-          skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
-          skl.icon = this._getProficiencyIcon(skl.value);
-          skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
-          skl.label = CONFIG.DND5E.skills[s];
-          return [s, skl];
-        }).sort(([,a], [,b]) => a.label.localeCompare(b.label))
-      );
+      for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
+        skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
+        skl.icon = this._getProficiencyIcon(skl.value);
+        skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
+        skl.label = CONFIG.DND5E.skills[s];
+      }
     }
 
     // Movement speeds
