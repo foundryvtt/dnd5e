@@ -516,8 +516,10 @@
         "choices": [],
         "value": []
       },
-      "spellcasting": "none",
-      "spellcastingAbility": ""
+      "spellcasting": {
+        "progression": "none",
+        "ability": ""
+      }
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
