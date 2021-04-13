@@ -9,7 +9,7 @@ export const migrateWorld = async function() {
   for ( let a of game.actors.entities ) {
     try {
       const updateData = migrateActorData(a.data);
-      if ( !isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
@@ -23,7 +23,7 @@ export const migrateWorld = async function() {
   for ( let i of game.items.entities ) {
     try {
       const updateData = migrateItemData(i.data);
-      if ( !isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
@@ -37,7 +37,7 @@ export const migrateWorld = async function() {
   for ( let s of game.scenes.entities ) {
     try {
       const updateData = migrateSceneData(s.data);
-      if ( !isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
       }
@@ -132,11 +132,9 @@ export const migrateActorData = function(actor) {
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
-  let hasItemUpdates = false;
-  const items = actor.items.map(i => {
-
+  const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
-    let itemUpdate = migrateItemData(i);
+    let itemUpdate = migrateItemData(i.data);
 
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actor.type === "npc" ) {
@@ -147,11 +145,13 @@ export const migrateActorData = function(actor) {
 
     // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) {
-      hasItemUpdates = true;
-      return mergeObject(i, itemUpdate, {enforceTypes: false, inplace: false});
-    } else return i;
-  });
-  if ( hasItemUpdates ) updateData.items = items;
+      itemUpdate._id = i.id;
+      arr.push(itemUpdate);
+    }
+
+    return arr;
+  }, []);
+  if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
 
@@ -187,11 +187,14 @@ function cleanActorData(actorData) {
 
 /**
  * Migrate a single Item entity to incorporate latest data model changes
- * @param item
+ *
+ * @param {object} item  Item data to migrate
+ * @return {object}      The updateData to apply
  */
 export const migrateItemData = function(item) {
   const updateData = {};
   _migrateItemAttunement(item, updateData);
+  _migrateItemSpellcasting(item, updateData);
   return updateData;
 };
 
@@ -353,12 +356,35 @@ function _migrateActorType(actor, updateData) {
 
 /**
  * Delete the old data.attuned boolean
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
  * @private
  */
 function _migrateItemAttunement(item, updateData) {
-  if ( item.data.attuned === undefined ) return;
+  if ( item.data.attuned === undefined ) return updateData;
   updateData["data.attunement"] = CONFIG.DND5E.attunementTypes.NONE;
   updateData["data.-=attuned"] = null;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Replace class spellcasting string to object.
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
+ * @private
+ */
+function _migrateItemSpellcasting(item, updateData) {
+  if ( item.type !== "class" ) return updateData;
+  updateData["data.spellcasting"] = {
+    progression: item.data.spellcasting,
+    ability: ""
+  };
   return updateData;
 }
 
