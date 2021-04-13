@@ -602,7 +602,11 @@
     "class": {
       "templates": ["itemDescription"],
       "levels": 1,
-      "subclass": "",
+      "subclass": {
+        "label": "",
+        "level": 3,
+        "selected": ""
+      },
       "hitDice": "d6",
       "hitDiceUsed": 0,
       "saves": [],
