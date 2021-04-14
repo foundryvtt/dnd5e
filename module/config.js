@@ -84,48 +84,50 @@ DND5E.weaponProficiencies = {
   "mar": "DND5E.WeaponMartialProficiency"
 };
 
-DND5E.weapons = {
-  "sim": {
-    "club":          { label: "DND5E.WEAPONS.Club",          link: "dnd5e.items.nfIRTECQIG81CvM4" },
-    "dagger":        { label: "DND5E.WEAPONS.Dagger",        link: "dnd5e.items.0E565kQUBmndJ1a2" },
-    "greatclub":     { label: "DND5E.WEAPONS.Greatclub",     link: "dnd5e.items.QRCsxkCwWNwswL9o" },
-    "handaxe":       { label: "DND5E.WEAPONS.Handaxe",       link: "dnd5e.items.eO7Fbv5WBk5zvGOc" },
-    "javelin":       { label: "DND5E.WEAPONS.Javelin",       link: "dnd5e.items.DWLMnODrnHn8IbAG" },
-    "lighthammer":   { label: "DND5E.WEAPONS.LightHammer",   link: "dnd5e.items.XVK6TOL4sGItssAE" },
-    "mace":          { label: "DND5E.WEAPONS.Mace",          link: "dnd5e.items.Ajyq6nGwF7FtLhDQ" },
-    "quarterstaff":  { label: "DND5E.WEAPONS.Quarterstaff",  link: "dnd5e.items.g2dWN7PQiMRYWzyk" },
-    "sickle":        { label: "DND5E.WEAPONS.Sickle",        link: "dnd5e.items.i4NeNZ30ycwPDHMx" },
-    "spear":         { label: "DND5E.WEAPONS.Spear",         link: "dnd5e.items.OG4nBBydvmfWYXIk" },
-    "lightcrossbow": { label: "DND5E.WEAPONS.CrossbowLight", link: "dnd5e.items.ddWvQRLmnnIS0eLF" },
-    "dart":          { label: "DND5E.WEAPONS.Dart",          link: "dnd5e.items.3rCO8MTIdPGSW6IJ" },
-    "shortbow":      { label: "DND5E.WEAPONS.Shorbow",       link: "dnd5e.items.GJv6WkD7D2J6rP6M" },
-    "sling":         { label: "DND5E.WEAPONS.Sling",         link: "dnd5e.items.3gynWO9sN4OLGMWD" },
-  },
-  "mar": {
-    "battleaxe":     { label: "DND5E.WEAPONS.Battleaxe",     link: "dnd5e.items.I0WocDSuNpGJayPb" },
-    "flail":         { label: "DND5E.WEAPONS.Flail",         link: "dnd5e.items.UrH3sMdnUDckIHJ6" },
-    "glaive":        { label: "DND5E.WEAPONS.Glaive",        link: "dnd5e.items.rOG1OM2ihgPjOvFW" },
-    "greataxe":      { label: "DND5E.WEAPONS.Greataxe",      link: "dnd5e.items.1Lxk6kmoRhG8qQ0u" },
-    "greatsword":    { label: "DND5E.WEAPONS.Greatsword",    link: "dnd5e.items.xMkP8BmFzElcsMaR" },
-    "halberd":       { label: "DND5E.WEAPONS.Halberd",       link: "dnd5e.items.DMejWAc8r8YvDPP1" },
-    "lance":         { label: "DND5E.WEAPONS.Lance",         link: "dnd5e.items.RnuxdHUAIgxccVwj" },
-    "longsword":     { label: "DND5E.WEAPONS.Longsword",     link: "dnd5e.items.10ZP2Bu3vnCuYMIB" },
-    "maul":          { label: "DND5E.WEAPONS.Maul",          link: "dnd5e.items.DizirD7eqjh8n95A" },
-    "morningstar":   { label: "DND5E.WEAPONS.Morningstar",   link: "dnd5e.items.dX8AxCh9o0A9CkT3" },
-    "pike":          { label: "DND5E.WEAPONS.Pike",          link: "dnd5e.items.tC0kcqZT9HHAO0PD" },
-    "rapier":        { label: "DND5E.WEAPONS.Rapier",        link: "dnd5e.items.Tobce1hexTnDk4sV" },
-    "scimitar":      { label: "DND5E.WEAPONS.Scimitar",      link: "dnd5e.items.fbC0Mg1a73wdFbqO" },
-    "shortsword":    { label: "DND5E.WEAPONS.Shortsword",    link: "dnd5e.items.osLzOwQdPtrK3rQH" },
-    "trident":       { label: "DND5E.WEAPONS.Trident",       link: "dnd5e.items.F65ANO66ckP8FDMa" },
-    "warpick":       { label: "DND5E.WEAPONS.WarPick",       link: "dnd5e.items.2YdfjN1PIIrSHZii" },
-    "warhammer":     { label: "DND5E.WEAPONS.Warhammer",     link: "dnd5e.items.F0Df164Xv1gWcYt0" },
-    "whip":          { label: "DND5E.WEAPONS.Whip",          link: "dnd5e.items.QKTyxoO0YDnAsbYe" },
-    "blowgun":       { label: "DND5E.WEAPONS.Blowgun",       link: "dnd5e.items.wNWK6yJMHG9ANqQV" },
-    "handcrossbow":  { label: "DND5E.WEAPONS.CrossbowHand",  link: "dnd5e.items.qaSro7kFhxD6INbZ" },
-    "heavycrossbow": { label: "DND5E.WEAPONS.CrossbowHeavy", link: "dnd5e.items.RmP0mYRn2J7K26rX" },
-    "longbow":       { label: "DND5E.WEAPONS.Longbow",       link: "dnd5e.items.3cymOVja8jXbzrdT" },
-    "net":           { label: "DND5E.WEAPONS.Net",           link: "dnd5e.items.aEiM49V8vWpWw7rU" },
-  }
+/**
+ * The basic weapon types in 5e. This enables specific weapon proficiencies or
+ * starting equipment provided by classes and backgrounds.
+ *
+ * @enum {string}
+ */
+DND5E.weaponTypes = {
+    "battleaxe": "I0WocDSuNpGJayPb",
+    "blowgun": "wNWK6yJMHG9ANqQV",
+    "club": "nfIRTECQIG81CvM4",
+    "dagger": "0E565kQUBmndJ1a2",
+    "dart": "3rCO8MTIdPGSW6IJ",
+    "flail": "UrH3sMdnUDckIHJ6",
+    "glaive": "rOG1OM2ihgPjOvFW",
+    "greataxe": "1Lxk6kmoRhG8qQ0u",
+    "greatclub": "QRCsxkCwWNwswL9o",
+    "greatsword": "xMkP8BmFzElcsMaR",
+    "halberd": "DMejWAc8r8YvDPP1",
+    "handaxe": "eO7Fbv5WBk5zvGOc",
+    "handcrossbow": "qaSro7kFhxD6INbZ",
+    "heavycrossbow": "RmP0mYRn2J7K26rX",
+    "javelin": "DWLMnODrnHn8IbAG",
+    "lance": "RnuxdHUAIgxccVwj",
+    "lightcrossbow": "ddWvQRLmnnIS0eLF",
+    "lighthammer": "XVK6TOL4sGItssAE",
+    "longbow": "3cymOVja8jXbzrdT",
+    "longsword": "10ZP2Bu3vnCuYMIB",
+    "mace": "Ajyq6nGwF7FtLhDQ",
+    "maul": "DizirD7eqjh8n95A",
+    "morningstar": "dX8AxCh9o0A9CkT3",
+    "net": "aEiM49V8vWpWw7rU",
+    "pike": "tC0kcqZT9HHAO0PD",
+    "quarterstaff": "g2dWN7PQiMRYWzyk",
+    "rapier": "Tobce1hexTnDk4sV",
+    "scimitar": "fbC0Mg1a73wdFbqO",
+    "shortsword": "osLzOwQdPtrK3rQH",
+    "sickle": "i4NeNZ30ycwPDHMx",
+    "spear": "OG4nBBydvmfWYXIk",
+    "shortbow": "GJv6WkD7D2J6rP6M",
+    "sling": "3gynWO9sN4OLGMWD",
+    "trident": "F65ANO66ckP8FDMa",
+    "warpick": "2YdfjN1PIIrSHZii",
+    "warhammer":  "F0Df164Xv1gWcYt0",
+    "whip": "QKTyxoO0YDnAsbYe"
 };
 
 /* -------------------------------------------- */
@@ -145,43 +147,49 @@ DND5E.toolProficiencies = {
   "vehicle": "DND5E.ToolVehicle"
 };
 
-DND5E.tools = {
+/**
+ * The basic tool types in 5e. This enables specific tool proficiencies or
+ * starting equipment provided by classes and backgrounds.
+ *
+ * @enum {object}
+ */
+DND5E.toolTypes = {
   "art": {
-    "alchemist":     { label: "DND5E.TOOLS.Alchemist",     link: "dnd5e.items.SztwZhbhZeCqyAes" },
-    "brewer":        { label: "DND5E.TOOLS.Brewer",        link: "dnd5e.items.Y9S75go1hLMXUD48" },
-    "calligrapher":  { label: "DND5E.TOOLS.Calligrapher",  link: "dnd5e.items.jhjo20QoiD5exf09" },
-    "carpenter":     { label: "DND5E.TOOLS.Carpenter",     link: "dnd5e.items.8NS6MSOdXtUqD7Ib" },
-    "cartographer":  { label: "DND5E.TOOLS.Cartographer",  link: "dnd5e.items.fC0lFK8P4RuhpfaU" },
-    "cobbler":       { label: "DND5E.TOOLS.Cobbler",       link: "dnd5e.items.hM84pZnpCqKfi8XH" },
-    "cook":          { label: "DND5E.TOOLS.Cook",          link: "dnd5e.items.Gflnp29aEv5Lc1ZM" },
-    "glassblower":   { label: "DND5E.TOOLS.Glassblower",   link: "dnd5e.items.rTbVrNcwApnuTz5E" },
-    "jeweler":       { label: "DND5E.TOOLS.Jeweler",       link: "dnd5e.items.YfBwELTgPFHmQdHh" },
-    "leatherworker": { label: "DND5E.TOOLS.Leatherworker", link: "dnd5e.items.PUMfwyVUbtyxgYbD" },
-    "mason":         { label: "DND5E.TOOLS.Mason",         link: "dnd5e.items.skUih6tBvcBbORzA" },
-    "painter":       { label: "DND5E.TOOLS.Painter",       link: "dnd5e.items.ccm5xlWhx74d6lsK" },
-    "potter":        { label: "DND5E.TOOLS.Potter",        link: "dnd5e.items.hJS8yEVkqgJjwfWa" },
-    "smith":         { label: "DND5E.TOOLS.Smith",         link: "dnd5e.items.KndVe2insuctjIaj" },
-    "tinker":        { label: "DND5E.TOOLS.Tinker",        link: "dnd5e.items.0d08g1i5WXnNrCNA" },
-    "weaver":        { label: "DND5E.TOOLS.Weaver",        link: "dnd5e.items.ap9prThUB2y9lDyj" },
-    "woodcarver":    { label: "DND5E.TOOLS.Woodcarver",    link: "dnd5e.items.xKErqkLo4ASYr5EP" },
-    "disguise":      { label: "DND5E.TOOLS.Disguise",      link: "dnd5e.items.IBhDAr7WkhWPYLVn" },
-    "forgery":       { label: "DND5E.TOOLS.Forgery",       link: "dnd5e.items.cG3m4YlHfbQlLEOx" },
+    "alchemist": "SztwZhbhZeCqyAes",
+    "brewer": "Y9S75go1hLMXUD48",
+    "calligrapher": "jhjo20QoiD5exf09",
+    "carpenter": "8NS6MSOdXtUqD7Ib",
+    "cartographer": "fC0lFK8P4RuhpfaU",
+    "cobbler": "hM84pZnpCqKfi8XH",
+    "cook": "Gflnp29aEv5Lc1ZM",
+    "glassblower": "rTbVrNcwApnuTz5E",
+    "jeweler": "YfBwELTgPFHmQdHh",
+    "leatherworker": "PUMfwyVUbtyxgYbD",
+    "mason": "skUih6tBvcBbORzA",
+    "painter": "ccm5xlWhx74d6lsK",
+    "potter": "hJS8yEVkqgJjwfWa",
+    "smith": "KndVe2insuctjIaj",
+    "tinker": "0d08g1i5WXnNrCNA",
+    "weaver": "ap9prThUB2y9lDyj",
+    "woodcarver": "xKErqkLo4ASYr5EP",
+    "disguise": "IBhDAr7WkhWPYLVn",
+    "forgery": "cG3m4YlHfbQlLEOx",
   },
   "game": {
-    "dice":          { label: "DND5E.TOOLS.Dice",          link: "dnd5e.items.iBuTM09KD9IoM5L8" },
-    "card":          { label: "DND5E.TOOLS.PlayingCard",   link: "dnd5e.items.YwlHI3BVJapz4a3E" },
+    "dice": "iBuTM09KD9IoM5L8",
+    "card": "YwlHI3BVJapz4a3E",
   },
   "music": {
-    "bagpipes":      { label: "DND5E.TOOLS.Bagpipes",      link: "dnd5e.items.yxHi57T5mmVt0oDr" },
-    "drum":          { label: "DND5E.TOOLS.Drum",          link: "dnd5e.items.69Dpr25pf4BjkHKb" },
-    "dulcimer":      { label: "DND5E.TOOLS.Dulcimer",      link: "dnd5e.items.NtdDkjmpdIMiX7I2" },
-    "flute":         { label: "DND5E.TOOLS.Flute",         link: "dnd5e.items.eJOrPcAz9EcquyRQ" },
-    "lute":          { label: "DND5E.TOOLS.Lute",          link: "dnd5e.items.qBydtUUIkv520DT7" },
-    "lyre":          { label: "DND5E.TOOLS.Lyre",          link: "dnd5e.items.EwG1EtmbgR3bM68U" },
-    "horn":          { label: "DND5E.TOOLS.Horn",          link: "dnd5e.items.aa9KuBy4dst7WIW9" },
-    "panflute":      { label: "DND5E.TOOLS.PanFlute",      link: "dnd5e.items.G5m5gYIx9VAUWC3J" },
-    "shawm":         { label: "DND5E.TOOLS.Shawm",         link: "dnd5e.items.G3cqbejJpfB91VhP" },
-    "viol":          { label: "DND5E.TOOLS.Viol",          link: "dnd5e.items.baoe3U5BfMMMxhCU" },
+    "bagpipes": "yxHi57T5mmVt0oDr",
+    "drum": "69Dpr25pf4BjkHKb",
+    "dulcimer": "NtdDkjmpdIMiX7I2",
+    "flute": "eJOrPcAz9EcquyRQ",
+    "lute": "qBydtUUIkv520DT7",
+    "lyre": "EwG1EtmbgR3bM68U",
+    "horn": "aa9KuBy4dst7WIW9",
+    "panflute": "G5m5gYIx9VAUWC3J",
+    "shawm": "G3cqbejJpfB91VhP",
+    "viol": "baoe3U5BfMMMxhCU",
   }
 };
 
@@ -707,6 +715,14 @@ DND5E.spellScrollIds = {
   8: 'Compendium.dnd5e.items.aOrinPg7yuDZEuWr',
   9: 'Compendium.dnd5e.items.O4YbkJkLlnsgUszZ'
 };
+
+/**
+ * Compendium packs used for localized items.
+ * @enum {string}
+ */
+DND5E.sourcePacks = {
+  ITEMS: "dnd5e.items"
+}
 
 /**
  * Define the standard slot progression by character level.
