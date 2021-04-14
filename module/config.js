@@ -151,46 +151,40 @@ DND5E.toolProficiencies = {
  * The basic tool types in 5e. This enables specific tool proficiencies or
  * starting equipment provided by classes and backgrounds.
  *
- * @enum {object}
+ * @enum {string}
  */
 DND5E.toolTypes = {
-  "art": {
-    "alchemist": "SztwZhbhZeCqyAes",
-    "brewer": "Y9S75go1hLMXUD48",
-    "calligrapher": "jhjo20QoiD5exf09",
-    "carpenter": "8NS6MSOdXtUqD7Ib",
-    "cartographer": "fC0lFK8P4RuhpfaU",
-    "cobbler": "hM84pZnpCqKfi8XH",
-    "cook": "Gflnp29aEv5Lc1ZM",
-    "glassblower": "rTbVrNcwApnuTz5E",
-    "jeweler": "YfBwELTgPFHmQdHh",
-    "leatherworker": "PUMfwyVUbtyxgYbD",
-    "mason": "skUih6tBvcBbORzA",
-    "painter": "ccm5xlWhx74d6lsK",
-    "potter": "hJS8yEVkqgJjwfWa",
-    "smith": "KndVe2insuctjIaj",
-    "tinker": "0d08g1i5WXnNrCNA",
-    "weaver": "ap9prThUB2y9lDyj",
-    "woodcarver": "xKErqkLo4ASYr5EP",
-    "disguise": "IBhDAr7WkhWPYLVn",
-    "forgery": "cG3m4YlHfbQlLEOx",
-  },
-  "game": {
-    "dice": "iBuTM09KD9IoM5L8",
-    "card": "YwlHI3BVJapz4a3E",
-  },
-  "music": {
-    "bagpipes": "yxHi57T5mmVt0oDr",
-    "drum": "69Dpr25pf4BjkHKb",
-    "dulcimer": "NtdDkjmpdIMiX7I2",
-    "flute": "eJOrPcAz9EcquyRQ",
-    "lute": "qBydtUUIkv520DT7",
-    "lyre": "EwG1EtmbgR3bM68U",
-    "horn": "aa9KuBy4dst7WIW9",
-    "panflute": "G5m5gYIx9VAUWC3J",
-    "shawm": "G3cqbejJpfB91VhP",
-    "viol": "baoe3U5BfMMMxhCU",
-  }
+  "alchemist": "SztwZhbhZeCqyAes",
+  "bagpipes": "yxHi57T5mmVt0oDr",
+  "brewer": "Y9S75go1hLMXUD48",
+  "calligrapher": "jhjo20QoiD5exf09",
+  "card": "YwlHI3BVJapz4a3E",
+  "carpenter": "8NS6MSOdXtUqD7Ib",
+  "cartographer": "fC0lFK8P4RuhpfaU",
+  "cobbler": "hM84pZnpCqKfi8XH",
+  "cook": "Gflnp29aEv5Lc1ZM",
+  "dice": "iBuTM09KD9IoM5L8",
+  "disguise": "IBhDAr7WkhWPYLVn",
+  "drum": "69Dpr25pf4BjkHKb",
+  "dulcimer": "NtdDkjmpdIMiX7I2",
+  "flute": "eJOrPcAz9EcquyRQ",
+  "forgery": "cG3m4YlHfbQlLEOx",
+  "glassblower": "rTbVrNcwApnuTz5E",
+  "horn": "aa9KuBy4dst7WIW9",
+  "jeweler": "YfBwELTgPFHmQdHh",
+  "leatherworker": "PUMfwyVUbtyxgYbD",
+  "lute": "qBydtUUIkv520DT7",
+  "lyre": "EwG1EtmbgR3bM68U",
+  "mason": "skUih6tBvcBbORzA",
+  "painter": "ccm5xlWhx74d6lsK",
+  "panflute": "G5m5gYIx9VAUWC3J",
+  "potter": "hJS8yEVkqgJjwfWa",
+  "shawm": "G3cqbejJpfB91VhP",
+  "smith": "KndVe2insuctjIaj",
+  "tinker": "0d08g1i5WXnNrCNA",
+  "viol": "baoe3U5BfMMMxhCU",
+  "weaver": "ap9prThUB2y9lDyj",
+  "woodcarver": "xKErqkLo4ASYr5EP",
 };
 
 
