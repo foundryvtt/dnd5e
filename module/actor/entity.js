@@ -1551,35 +1551,25 @@ export default class Actor5e extends Actor {
    * @param {string} data.custom         Semicolon-separated string of custom proficiencies
    * @param {string} type                "armor", "weapon", or "tool"
    */
-  static prepareProficiencies(data, type) {
-    let profs, profGroups;
-    switch (type) {
-      case "armor":
-        profs = CONFIG.DND5E.armorProficiencies;
-        break;
-      case "weapon":
-        profs = CONFIG.DND5E.weaponProficiencies;
-        profGroups = CONFIG.DND5E.weapons;
-        break;
-      case "tool":
-        profs = CONFIG.DND5E.toolProficiencies;
-        profGroups = CONFIG.DND5E.tools;
-        break;
-    }
+  static async prepareProficiencies(data, type) {
+    let profs = CONFIG.DND5E[`${type}Proficiencies`];
+    let itemTypes = CONFIG.DND5E[`${type}Ids`];
 
     let values = [];
     if ( data.value ) {
       values = data.value instanceof Array ? data.value : [data.value];
     }
 
-    data.selected = values.reduce((obj, t) => {
-      if (profGroups && t.includes(".")) {
-        obj[t] = getProperty(profGroups, t)?.label;
-      } else {
-        obj[t] = profs[t];
+    data.selected = {};
+    const pack = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}`;
+    for ( const t of values ) {
+      if ( Object.keys(profs).includes(t) ) {
+        data.selected[t] = profs[t];
+      } else if ( itemTypes && Object.keys(itemTypes).includes(t) ) {
+        const item = await fromUuid(`${pack}.${itemTypes[t]}`);
+        data.selected[t] = item.name;
       }
-      return obj;
-    }, {});
+    }
 
     // Add custom entries
     if ( data.custom ) {

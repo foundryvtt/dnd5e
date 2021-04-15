@@ -25,8 +25,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /**
    * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
    */
-  getData() {
-    const sheetData = super.getData();
+  async getData() {
+    const sheetData = await super.getData();
 
     // Temporary HP
     let hp = sheetData.data.attributes.hp;
