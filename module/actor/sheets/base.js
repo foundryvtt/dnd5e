@@ -229,10 +229,12 @@ export default class ActorSheet5e extends ActorSheet {
       }
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
-    for ( let t of ["armorProf", "weaponProf", "toolProf"] ) {
-      const trait = traits[t];
+
+    // Populate and localize proficiencies
+    for ( let t of ["armor", "weapon", "tool"] ) {
+      const trait = traits[`${t}Prof`];
       if ( !trait ) continue;
-      await Actor5e.prepareProficiencies(trait, t.slice(0, -4));
+      await Actor5e.prepareProficiencies(trait, t);
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
   }
