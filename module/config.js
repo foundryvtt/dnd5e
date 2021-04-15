@@ -90,7 +90,7 @@ DND5E.weaponProficiencies = {
  *
  * @enum {string}
  */
-DND5E.weaponTypes = {
+DND5E.weaponIds = {
     "battleaxe": "I0WocDSuNpGJayPb",
     "blowgun": "wNWK6yJMHG9ANqQV",
     "club": "nfIRTECQIG81CvM4",
@@ -153,7 +153,7 @@ DND5E.toolProficiencies = {
  *
  * @enum {string}
  */
-DND5E.toolTypes = {
+DND5E.toolIds = {
   "alchemist": "SztwZhbhZeCqyAes",
   "bagpipes": "yxHi57T5mmVt0oDr",
   "brewer": "Y9S75go1hLMXUD48",
