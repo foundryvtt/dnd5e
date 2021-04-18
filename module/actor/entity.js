@@ -938,20 +938,33 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Cause this Actor to take a Short Rest
-   * During a Short Rest resources and limited item uses may be recovered
-   * @param {boolean} dialog  Present a dialog window which allows for rolling hit dice as part of the Short Rest
-   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
-   * @param {boolean} autoHD  Automatically spend Hit Dice if you are missing 3 or more hit points
-   * @param {boolean} autoHDThreshold   A number of missing hit points which would trigger an automatic HD roll
-   * @return {Promise}        A Promise which resolves once the short rest workflow has completed
+   * Results from a rest operation.
+   *
+   * @typedef {object} RestResult
+   * @property {number} dhp                  Hit points recovered during the rest.
+   * @property {number} dhd                  Hit dice recovered or spent during the rest.
+   * @property {object} updateData           Updates applied to the actor.
+   * @property {Array.<object>} updateItems  Updates applied to actor's items.
+   * @property {boolean} newDay              Whether a new day occurred during the rest.
+   */
+
+  /* -------------------------------------------- */
+
+  /**
+   * Take a short rest, possibly spending hit dice and recovering resources, item uses, and pact slots.
+   *
+   * @param {object} [options]
+   * @param {boolean} [options.dialog=true]         Present a dialog window which allows for rolling hit dice as part
+   *                                                of the Short Rest and selecting whether a new day has occurred.
+   * @param {boolean} [options.chat=true]           Summarize the results of the rest workflow as a chat message.
+   * @param {boolean} [options.autoHD=false]        Automatically spend Hit Dice if you are missing 3 or more hit points.
+   * @param {boolean} [options.autoHDThreshold=3]   A number of missing hit points which would trigger an automatic HD roll.
+   * @return {Promise.<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
-
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hp = this.data.data.attributes.hp;
     const hd0 = this.data.data.attributes.hd;
-    const hp0 = hp.value;
+    const hp0 = this.data.data.attributes.hp.value;
     let newDay = false;
 
     // Display a Dialog for rolling hit dice
@@ -965,86 +978,24 @@ export default class Actor5e extends Actor {
 
     // Automatically spend hit dice
     else if ( autoHD ) {
-      while ( (hp.value + autoHDThreshold) <= hp.max ) {
-        const r = await this.rollHitDie(undefined, {dialog: false});
-        if ( r === null ) break;
-      }
+      await this.autoSpendHitDice({ threshold: autoHDThreshold });
     }
 
-    // Note the change in HP and HD which occurred
-    const dhd = this.data.data.attributes.hd - hd0;
-    const dhp = this.data.data.attributes.hp.value - hp0;
-
-    // Recover character resources
-    const updateData = {};
-    for ( let [k, r] of Object.entries(this.data.data.resources) ) {
-      if ( r.max && r.sr ) {
-        updateData[`data.resources.${k}.value`] = r.max;
-      }
-    }
-
-    // Recover pact slots.
-    const pact = this.data.data.spells.pact;
-    updateData['data.spells.pact.value'] = pact.override || pact.max;
-    await this.update(updateData);
-
-    // Recover item uses
-    const recovery = newDay ? ["sr", "day"] : ["sr"];
-    const items = this.items.filter(item => item.data.data.uses && recovery.includes(item.data.data.uses.per));
-    const updateItems = items.map(item => {
-      return {
-        _id: item._id,
-        "data.uses.value": item.data.data.uses.max
-      };
-    });
-    await this.updateEmbeddedDocuments("Item", updateItems);
-
-    // Display a Chat Message summarizing the rest effects
-    if ( chat ) {
-
-      // Summarize the rest duration
-      let restFlavor;
-      switch (game.settings.get("dnd5e", "restVariant")) {
-        case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
-        case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
-        case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
-      }
-
-      // Summarize the health effects
-      let srMessage = "DND5E.ShortRestResultShort";
-      if ((dhd !== 0) && (dhp !== 0)) srMessage = "DND5E.ShortRestResult";
-
-      // Create a chat message
-      ChatMessage.create({
-        user: game.user._id,
-        speaker: {actor: this, alias: this.name},
-        flavor: restFlavor,
-        content: game.i18n.format(srMessage, {name: this.name, dice: -dhd, health: dhp})
-      });
-    }
-
-    // Return data summarizing the rest effects
-    return {
-      dhd: dhd,
-      dhp: dhp,
-      updateData: updateData,
-      updateItems: updateItems,
-      newDay: newDay
-    }
+    return this._rest(chat, newDay, false, this.data.data.attributes.hd - hd0, this.data.data.attributes.hp.value - hp0);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Take a long rest, recovering HP, HD, resources, and spell slots
-   * @param {boolean} dialog  Present a confirmation dialog window whether or not to take a long rest
-   * @param {boolean} chat    Summarize the results of the rest workflow as a chat message
-   * @param {boolean} newDay  Whether the long rest carries over to a new day
-   * @return {Promise}        A Promise which resolves once the long rest workflow has completed
+   * Take a long rest, recovering hit points, hit dice, resources, item uses, and spell slots.
+   *
+   * @param {object} [options]
+   * @param {boolean} [options.dialog=true]  Present a confirmation dialog window whether or not to take a long rest.
+   * @param {boolean} [options.chat=true]    Summarize the results of the rest workflow as a chat message.
+   * @param {boolean} [options.newDay=true]  Whether the long rest carries over to a new day.
+   * @return {Promise.<RestResult>}          A Promise which resolves once the long rest workflow has completed.
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
-    const data = this.data.data;
-
     // Maybe present a confirmation dialog
     if ( dialog ) {
       try {
@@ -1054,96 +1005,274 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Recover hit points to full, and eliminate any existing temporary HP
-    const dhp = data.attributes.hp.max - data.attributes.hp.value;
-    const updateData = {
-      "data.attributes.hp.value": data.attributes.hp.max,
-      "data.attributes.hp.temp": 0,
-      "data.attributes.hp.tempmax": 0
-    };
+    return this._rest(chat, newDay, true);
+  }
 
-    // Recover character resources
-    for ( let [k, r] of Object.entries(data.resources) ) {
-      if ( r.max && (r.sr || r.lr) ) {
-        updateData[`data.resources.${k}.value`] = r.max;
-      }
+  /* -------------------------------------------- */
+
+  /**
+   * Perform all of the changes needed for a short or long rest.
+   *
+   * @param {boolean} chat           Summarize the results of the rest workflow as a chat message.
+   * @param {boolean} newDay         Has a new day occurred during this rest?
+   * @param {boolean} longRest       Is this a long rest?
+   * @param {number} [dhd=0]         Number of hit dice spent during so far during the rest.
+   * @param {number} [dhp=0]         Number of hit points recovered so far during the rest.
+   * @return {Promise.<RestResult>}  Consolidated results of the rest workflow.
+   * @private
+   */
+  async _rest(chat, newDay, longRest, dhd=0, dhp=0) {
+    let hitPointsRecovered = 0;
+    let hitPointUpdates = {};
+    let hitDiceRecovered = 0;
+    let hitDiceUpdates = [];
+
+    // Recover hit points & hit dice on long rest
+    if ( longRest ) {
+      ({ updates: hitPointUpdates, hitPointsRecovered } = this._getRestHitPointRecovery());
+      ({ updates: hitDiceUpdates, hitDiceRecovered } = this._getRestHitDiceRecovery());
     }
 
-    // Recover spell slots
-    for ( let [k, v] of Object.entries(data.spells) ) {
-      updateData[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
+    // Figure out the rest of the changes
+    const result = {
+      dhd: dhd + hitDiceRecovered,
+      dhp: dhp + hitPointsRecovered,
+      updateData: {
+        ...hitPointUpdates,
+        ...this._getRestResourceRecovery({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
+        ...this._getRestSpellRecovery({ recoverSpells: longRest })
+      },
+      updateItems: [
+        ...hitDiceUpdates,
+        ...this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
+      ],
+      newDay: newDay
     }
 
-    // Recover pact slots.
-    const pact = data.spells.pact;
-    updateData['data.spells.pact.value'] = pact.override || pact.max;
-
-    // Determine the number of hit dice which may be recovered
-    let recoverHD = Math.max(Math.floor(data.details.level / 2), 1);
-    let dhd = 0;
-
-    // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
-    const updateItems = this.items.filter(item => item.data.type === "class").sort((a, b) => {
-      let da = parseInt(a.data.data.hitDice.slice(1)) || 0;
-      let db = parseInt(b.data.data.hitDice.slice(1)) || 0;
-      return db - da;
-    }).reduce((updates, item) => {
-      const d = item.data.data;
-      if ( (recoverHD > 0) && (d.hitDiceUsed > 0) ) {
-        let delta = Math.min(d.hitDiceUsed || 0, recoverHD);
-        recoverHD -= delta;
-        dhd += delta;
-        updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
-      }
-      return updates;
-    }, []);
-
-    // Iterate over owned items, restoring uses per day and recovering Hit Dice
-    const recovery = newDay ? ["sr", "lr", "day"] : ["sr", "lr"];
-    for ( let item of this.items ) {
-      const d = item.data.data;
-      if ( d.uses && recovery.includes(d.uses.per) ) {
-        updateItems.push({_id: item.id, "data.uses.value": d.uses.max});
-      }
-      else if ( d.recharge && d.recharge.value ) {
-        updateItems.push({_id: item.id, "data.recharge.charged": true});
-      }
-    }
-
-    // Perform the updates
-    await this.update(updateData);
-    if ( updateItems.length ) await this.updateEmbeddedDocuments("Item", updateItems);
+    // Perform updates
+    await this.update(result.updateData);
+    await this.updateEmbeddedDocuments("Item", result.updateItems);
 
     // Display a Chat Message summarizing the rest effects
-    let restFlavor;
+    if ( chat ) await this._displayRestResultMessage(result, longRest);
+
+    // Return data summarizing the rest effects
+    return result;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display a chat message with the result of a rest.
+   *
+   * @param {RestResult} result         Result of the rest operation.
+   * @param {boolean} [longRest=false]  Is this a long rest?
+   * @return {Promise.<ChatMessage>}    Chat message that was created.
+   * @protected
+   */
+  async _displayRestResultMessage(result, longRest=false) {
+    const { dhd, dhp, newDay } = result;
+    const diceRestored = dhd !== 0;
+    const healthRestored = dhp !== 0;
+    const length = longRest ? "Long" : "Short";
+
+    let restFlavor, message;
+
+    // Summarize the rest duration
     switch (game.settings.get("dnd5e", "restVariant")) {
-      case 'normal': restFlavor = game.i18n.localize(newDay ? "DND5E.LongRestOvernight" : "DND5E.LongRestNormal"); break;
-      case 'gritty': restFlavor = game.i18n.localize("DND5E.LongRestGritty"); break;
-      case 'epic':  restFlavor = game.i18n.localize("DND5E.LongRestEpic"); break;
+      case 'normal': restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`; break;
+      case 'gritty': restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`; break;
+      case 'epic':  restFlavor = `DND5E.${length}RestEpic`; break;
     }
 
     // Determine the chat message to display
-    if ( chat ) {
-      let lrMessage = "DND5E.LongRestResultShort";
-      if((dhp !== 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResult";
-      else if ((dhp !== 0) && (dhd === 0)) lrMessage = "DND5E.LongRestResultHitPoints";
-      else if ((dhp === 0) && (dhd !== 0)) lrMessage = "DND5E.LongRestResultHitDice";
-      ChatMessage.create({
-        user: game.user._id,
-        speaker: {actor: this, alias: this.name},
-        flavor: restFlavor,
-        content: game.i18n.format(lrMessage, {name: this.name, health: dhp, dice: dhd})
-      });
+    if ( diceRestored && healthRestored ) message = `DND5E.${length}RestResult`;
+    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.LongRestResultHitPoints";
+    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.LongRestResultHitDice";
+    else message = `DND5E.${length}RestResultShort`;
+
+    // Create a chat message
+    let chatData = {
+      user: game.user.id,
+      speaker: {actor: this, alias: this.name},
+      flavor: game.i18n.localize(restFlavor),
+      content: game.i18n.format(message, {
+        name: this.name,
+        dice: longRest ? dhd : -dhd,
+        health: dhp
+      })
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+
+    return ChatMessage.create(chatData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Automatically spend hit dice to recover hit points up to a certain threshold.
+   *
+   * @param {object} [options]
+   * @param {number} [options.threshold=3]  A number of missing hit points which would trigger an automatic HD roll.
+   * @return {Promise.<number>}             Number of hit dice spent.
+   */
+  async autoSpendHitDice({ threshold=3 }={}) {
+    const max = this.data.data.attributes.hp.max + this.data.data.attributes.hp.tempmax;
+
+    let diceRolled = 0;
+    while ( (this.data.data.attributes.hp.value + threshold) <= max ) {
+      const r = await this.rollHitDie(undefined, {dialog: false});
+      if ( r === null ) break;
+      diceRolled += 1;
     }
 
-    // Return data summarizing the rest effects
-    return {
-      dhd: dhd,
-      dhp: dhp,
-      updateData: updateData,
-      updateItems: updateItems,
-      newDay: newDay
+    return diceRolled;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers actor hit points and eliminates any temp HP.
+   *
+   * @param {object} [options]
+   * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
+   * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
+   * @return {object)                                Updates to the actor and change in hit points.
+   * @protected
+   */
+  _getRestHitPointRecovery({ recoverTemp=true, recoverTempMax=true }={}) {
+    const data = this.data.data;
+    let updates = {};
+    let max = data.attributes.hp.max;
+
+    if ( recoverTempMax ) {
+      updates["data.attributes.hp.tempmax"] = 0;
+    } else {
+      max += data.attributes.hp.tempmax;
     }
+    updates["data.attributes.hp.value"] = max;
+    if ( recoverTemp ) {
+      updates["data.attributes.hp.temp"] = 0;
+    }
+
+    return { updates, hitPointsRecovered: max - data.attributes.hp.value };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers actor resources.
+   *
+   * @param {object} [options]
+   * @param {boolean} [options.recoverShortRestResources=true]  Recover resources that recharge on a short rest.
+   * @param {boolean} [options.recoverLongRestResources=true]   Recover resources that recharge on a long rest.
+   * @return {object}                                           Updates to the actor.
+   * @protected
+   */
+  _getRestResourceRecovery({ recoverShortRestResources=true, recoverLongRestResources=true }={}) {
+    let updates = {};
+
+    for ( let [k, r] of Object.entries(this.data.data.resources) ) {
+      if ( r.max && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
+        updates[`data.resources.${k}.value`] = r.max;
+      }
+    }
+
+    return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers spell slots and pact slots.
+   *
+   * @param {object} [options]
+   * @param {boolean} [options.recoverPact=true]     Recover all expended pact slots.
+   * @param {boolean} [options.recoverSpells=true]   Recover all expended spell slots.
+   * @return {object}                                Updates to the actor.
+   * @protected
+   */
+  _getRestSpellRecovery({ recoverPact=true, recoverSpells=true }={}) {
+    let updates = {};
+    if ( recoverPact ) {
+      const pact = this.data.data.spells.pact;
+      updates['data.spells.pact.value'] = pact.override || pact.max;
+    }
+
+    if ( recoverSpells ) {
+      for ( let [k, v] of Object.entries(this.data.data.spells) ) {
+        updates[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
+      }
+    }
+
+    return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers class hit dice during a long rest.
+   *
+   * @param {object} [options]
+   * @param {number} [options.maxHitDice]  Maximum number of hit dice to recover.
+   * @return {object}                      Array of item updates and number of hit dice recovered.
+   * @protected
+   */
+  _getRestHitDiceRecovery({ maxHitDice=undefined }={}) {
+    // Determine the number of hit dice which may be recovered
+    if ( maxHitDice === undefined ) {
+      maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
+    }
+
+    // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
+    const sortedClasses = this.items.filter(item => item.data.type === "class").sort((a, b) => {
+      return (parseInt(a.data.data.hitDice.slice(1)) || 0) - (parseInt(a.data.data.hitDice.slice(1)) || 0);
+    });
+
+    let updates = [];
+    let hitDiceRecovered = 0;
+    for ( let item of sortedClasses ) {
+      const d = item.data.data;
+      if ( (hitDiceRecovered < maxHitDice) && (d.hitDiceUsed > 0) ) {
+        let delta = Math.min(d.hitDiceUsed || 0, maxHitDice - hitDiceRecovered);
+        hitDiceRecovered += delta;
+        updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
+      }
+    }
+
+    return { updates, hitDiceRecovered };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovers item uses during short or long rests.
+   *
+   * @param {object} [options]
+   * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
+   * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
+   * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
+   * @return {Array.<object>}                              Array of item updates.
+   * @protected
+   */
+  _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
+    let recovery = [];
+    if ( recoverShortRestUses ) recovery.push("sr");
+    if ( recoverLongRestUses ) recovery.push("lr");
+    if ( recoverDailyUses ) recovery.push("day");
+
+    let updates = [];
+    for ( let item of this.items ) {
+      const d = item.data.data;
+      if ( d.uses && recovery.includes(d.uses.per) ) {
+        updates.push({_id: item.id, "data.uses.value": d.uses.max});
+      }
+      if ( recoverLongRestUses && d.recharge && d.recharge.value ) {
+        updates.push({_id: item.id, "data.recharge.charged": true});
+      }
+    }
+
+    return updates;
   }
 
   /* -------------------------------------------- */
