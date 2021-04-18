@@ -1,8 +1,8 @@
 import { d20Roll, damageRoll } from "../dice.js";
+import AddFeaturePrompt from "../apps/add-feature-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import {DND5E} from '../config.js';
-import AddFeaturePrompt from "../apps/add-feature-prompt.js";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
