@@ -1,5 +1,5 @@
 import { d20Roll, damageRoll } from "../dice.js";
-import AddFeaturePrompt from "../apps/add-feature-prompt.js";
+import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import {DND5E} from '../config.js';
@@ -162,7 +162,9 @@ export default class Actor5e extends Actor {
 
     let itemIdsToAdd = items.map(({id}) => id);
     if (prompt) {
-      itemIdsToAdd = await AddFeaturePrompt.create(items);
+      itemIdsToAdd = await SelectItemsPrompt.create(items, {
+        hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
+      });
     }
     const itemsToAdd = items.filter(item => itemIdsToAdd.includes(item.id));
 

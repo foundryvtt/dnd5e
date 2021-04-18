@@ -1,17 +1,17 @@
 /**
- * A Dialog to prompt the user to select from a list of features.
+ * A Dialog to prompt the user to select from a list of items.
  * @type {Dialog}
  */
-export default class AddFeaturePrompt extends Dialog {
-  constructor(features, dialogData={}, options={}) {
+export default class SelectItemsPrompt extends Dialog {
+  constructor(items, dialogData={}, options={}) {
     super(dialogData, options);
-    this.options.classes = ["dnd5e", "dialog", "add-feature-prompt", "sheet"];
+    this.options.classes = ["dnd5e", "dialog", "select-items-prompt", "sheet"];
 
     /**
      * Store a reference to the Item entities being used
      * @type {Array<Item5e>}
      */
-    this.features = features;
+    this.items = items;
   }
 
   activateListeners(html) {
@@ -19,25 +19,29 @@ export default class AddFeaturePrompt extends Dialog {
     
     // render the item's sheet if its image is clicked
     html.on('click', '.item-image', (event) => {
-      const item = this.features.find((feature) => feature.id === event.currentTarget.dataset?.itemId);
+      const item = this.items.find((feature) => feature.id === event.currentTarget.dataset?.itemId);
 
       item?.sheet.render(true);
     })
   }
 
   /**
-   * A constructor function which displays the Add Features Prompt app for a given Actor and Item set.
+   * A constructor function which displays the AddItemPrompt app for a given Actor and Item set.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Array<Item5e>} features
-   * @return {Promise}
+   * @param {Array<Item5e>} items
+   * @param {Object} options
+   * @param {string} options.hint - Localized hint to display at the top of the prompt
+   * @return {Promise<string[]>} - list of item ids which the user has selected
    */
-  static async create(features) {
+  static async create(items, {
+    hint
+  }) {
     // Render the ability usage template
-    const html = await renderTemplate("systems/dnd5e/templates/apps/add-feature-prompt.html", {features});
+    const html = await renderTemplate("systems/dnd5e/templates/apps/select-items-prompt.html", {items, hint});
 
     return new Promise((resolve) => {
-      const dlg = new this(features, {
-        title: game.i18n.localize('DND5E.AddFeaturePromptTitle'),
+      const dlg = new this(items, {
+        title: game.i18n.localize('DND5E.SelectItemsPromptTitle'),
         content: html,
         buttons: {
           apply: {

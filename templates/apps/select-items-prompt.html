@@ -1,18 +1,18 @@
 
 <form>
-  <p class="hint">{{localize "DND5E.AddFeaturePromptHint"}}</p>
+  <p class="hint">{{hint}}</p>
 
   <ul class="items-list">
-    {{#each features}}
+    {{#each items}}
     <li class="item flexrow">
       <div class="item-name flexrow">
         <div class="item-image" style="background-image:url({{data.img}})" data-item-id="{{id}}"></div>
-        <label for="toggle-feature-add-{{id}}">
+        <label>
           <h4>{{data.name}}</h4>
+
+          <input type="checkbox" checked name="{{id}}" />
         </label>
       </div>
-
-      <input type="checkbox" checked id="toggle-feature-add-{{id}}" name="{{id}}" />
     </li>
     {{/each}}
   </ul>
