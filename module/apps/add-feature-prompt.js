@@ -32,13 +32,8 @@ export default class AddFeaturePrompt extends Dialog {
    * @return {Promise}
    */
   static async create(features) {
-    // Prepare dialog form data
-    const data = {
-      features
-    };
-
     // Render the ability usage template
-    const html = await renderTemplate("systems/dnd5e/templates/apps/add-feature-prompt.html", data);
+    const html = await renderTemplate("systems/dnd5e/templates/apps/add-feature-prompt.html", {features});
 
     return new Promise((resolve) => {
       const dlg = new this(features, {
