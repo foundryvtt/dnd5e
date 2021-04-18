@@ -380,7 +380,7 @@ function _migrateItemAttunement(item, updateData) {
  * @private
  */
 function _migrateItemSpellcasting(item, updateData) {
-  if ( item.type !== "class" ) return updateData;
+  if ( item.type !== "class" || (foundry.utils.getType(item.data.spellcasting) === "Object") ) return updateData;
   updateData["data.spellcasting"] = {
     progression: item.data.spellcasting,
     ability: ""
