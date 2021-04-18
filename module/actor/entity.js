@@ -955,7 +955,7 @@ export default class Actor5e extends Actor {
       await this.autoSpendHitDice({ threshold: autoHDThreshold });
     }
 
-    return this._rest(chat, newDay, false, hd0, hp0);
+    return this._rest(chat, newDay, false, this.data.data.attributes.hd - hd0, this.data.data.attributes.hp.value - hp0);
   }
 
   /* -------------------------------------------- */
@@ -990,13 +990,12 @@ export default class Actor5e extends Actor {
    * @param {boolean} chat           Summarize the results of the rest workflow as a chat message.
    * @param {boolean} newDay         Has a new day occurred during this rest?
    * @param {boolean} longRest       Is this a long rest?
-   * @param {number} [hd0=0]         Hit dice before and hit dice were spent (short rest only).
-   * @param {number} [hp0=0]         Hit points before any hit dice were spent (short rest only).
+   * @param {number} [dhd=0]         Hit dice before and hit dice were spent (short rest only).
+   * @param {number} [dhp=0]         Hit points before any hit dice were spent (short rest only).
    * @return {Promise.<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
-  async _rest(chat, newDay, longRest, hd0=0, hp0=0) {
-    let dhd, dhp;
+  async _rest(chat, newDay, longRest, dhd=0, dhp=0) {
     let hitPointUpdates = {};
     let hitDiceUpdates = [];
 
@@ -1004,12 +1003,6 @@ export default class Actor5e extends Actor {
     if ( longRest ) {
       ({ updates: hitPointUpdates, hitPointsRecovered: dhp } = await this.recoverHitPoints());
       ({ updates: hitDiceUpdates, hitDiceRecovered: dhd} = await this.recoverHitDice());
-    }
-
-    // Calculate recovered hit points & spent hit dice on short rest
-    else {
-      dhd = this.data.data.attributes.hd - hd0;
-      dhp = this.data.data.attributes.hp.value - hp0;
     }
 
     // Figure out the rest of the changes
