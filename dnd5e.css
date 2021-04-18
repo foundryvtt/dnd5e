@@ -500,6 +500,9 @@
   height: 24px;
   margin: 2px;
 }
+/* ----------------------------------------- */
+/*  Actor Type Config Sheet Specifically     */
+/* ----------------------------------------- */
 .actor-type .trait-list {
   display: flex;
   flex-wrap: wrap;
@@ -523,6 +526,23 @@
 }
 .actor-type li.custom-type input[type="radio"] {
   display: none;
+}
+/* ----------------------------------------- */
+/*  Add Feature Prompt Specifically          */
+/* ----------------------------------------- */
+.dnd5e.select-items-prompt .dialog-content {
+  margin-bottom: 1em;
+}
+.dnd5e.select-items-prompt .items-list {
+  margin-top: 0.5em;
+}
+.dnd5e.select-items-prompt .item-name > label,
+.dnd5e.select-items-prompt .item-image,
+.dnd5e.select-items-prompt input {
+  cursor: pointer;
+}
+.dnd5e.select-items-prompt .item-name > label {
+  align-items: center;
 }
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
