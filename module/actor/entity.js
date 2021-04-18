@@ -1107,13 +1107,12 @@ export default class Actor5e extends Actor {
    * Recovers actor hit points and eliminates any temp HP.
    *
    * @param {object} [options]
-   * @param {boolean} [options.recoverHP=true]       Reset HP to maximum.
    * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
    * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
    * @return {Promise.<object>)                      Updates to the actor and change in hit points.
    * @protected
    */
-  async _getRestHitPointRecovery({ recoverHP=true, recoverTemp=true, recoverTempMax=true }={}) {
+  async _getRestHitPointRecovery({ recoverTemp=true, recoverTempMax=true }={}) {
     const data = this.data.data;
     let updates = {};
     let max = data.attributes.hp.max;
@@ -1123,9 +1122,7 @@ export default class Actor5e extends Actor {
     } else {
       max += data.attributes.hp.tempmax;
     }
-    if ( recoverHP ) {
-      updates["data.attributes.hp.value"] = max;
-    }
+    updates["data.attributes.hp.value"] = max;
     if ( recoverTemp ) {
       updates["data.attributes.hp.temp"] = 0;
     }
