@@ -1001,8 +1001,8 @@ export default class Actor5e extends Actor {
 
     // Recover hit points & hit dice on long rest
     if ( longRest ) {
-      ({ updates: hitPointUpdates, hitPointsRecovered: dhp } = await this.recoverHitPoints());
-      ({ updates: hitDiceUpdates, hitDiceRecovered: dhd} = await this.recoverHitDice());
+      ({ updates: hitPointUpdates, hitPointsRecovered: dhp } = await this._getRestHitPointRecovery());
+      ({ updates: hitDiceUpdates, hitDiceRecovered: dhd} = await this._getRestHitDiceRecovery());
     }
 
     // Figure out the rest of the changes
@@ -1011,12 +1011,12 @@ export default class Actor5e extends Actor {
       dhp: dhp,
       updateData: {
         ...hitPointUpdates,
-        ...await this.recoverResources({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
-        ...await this.recoverSpellSlots({ recoverSpells: longRest })
+        ...await this._getRestResourceRecovery({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
+        ...await this._getRestSpellRecovery({ recoverSpells: longRest })
       },
       updateItems: [
         ...hitDiceUpdates,
-        ...await this.recoverItemUses({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
+        ...await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
       ],
       newDay: newDay
     }
@@ -1026,7 +1026,7 @@ export default class Actor5e extends Actor {
     await this.updateEmbeddedDocuments("Item", result.updateItems);
 
     // Display a Chat Message summarizing the rest effects
-    if ( chat ) await this.displayRestResultMessage(result, longRest);
+    if ( chat ) await this._displayRestResultMessage(result, longRest);
 
     // Return data summarizing the rest effects
     return result;
@@ -1040,8 +1040,9 @@ export default class Actor5e extends Actor {
    * @param {RestResult} result         Result of the rest operation.
    * @param {boolean} [longRest=false]  Is this a long rest?
    * @return {Promise.<ChatMessage>}    Chat message that was created.
+   * @protected
    */
-  async displayRestResultMessage(result, longRest=false) {
+  async _displayRestResultMessage(result, longRest=false) {
     const { dhd, dhp, newDay } = result;
     const diceRestored = dhd !== 0;
     const healthRestored = dhp !== 0;
@@ -1110,8 +1111,9 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
    * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
    * @return {Promise.<object>)                      Updates to the actor and change in hit points.
+   * @protected
    */
-  async recoverHitPoints({ recoverHP=true, recoverTemp=true, recoverTempMax=true }={}) {
+  async _getRestHitPointRecovery({ recoverHP=true, recoverTemp=true, recoverTempMax=true }={}) {
     const data = this.data.data;
     let updates = {};
     let max = data.attributes.hp.max;
@@ -1140,8 +1142,9 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverShortRestResources=true]  Recover resources that recharge on a short rest.
    * @param {boolean} [options.recoverLongRestResources=true]   Recover resources that recharge on a long rest.
    * @return {Promise.<object>}                                 Updates to the actor.
+   * @protected
    */
-  async recoverResources({ recoverShortRestResources=true, recoverLongRestResources=true }={}) {
+  async _getRestResourceRecovery({ recoverShortRestResources=true, recoverLongRestResources=true }={}) {
     let updates = {};
 
     for ( let [k, r] of Object.entries(this.data.data.resources) ) {
@@ -1162,8 +1165,9 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverPact=true]     Recover all expended pact slots.
    * @param {boolean} [options.recoverSpells=true]   Recover all expended spell slots.
    * @return {Promise.<object>}              Updates to the actor.
+   * @protected
    */
-  async recoverSpellSlots({ recoverPact=true, recoverSpells=true }={}) {
+  async _getRestSpellRecovery({ recoverPact=true, recoverSpells=true }={}) {
     let updates = {};
     if ( recoverPact ) {
       const pact = this.data.data.spells.pact;
@@ -1187,8 +1191,9 @@ export default class Actor5e extends Actor {
    * @param {object} [options]
    * @param {number} [options.maxHitDice]            Maximum number of hit dice to recover.
    * @return {Promise.<object>}                      Array of item updates and number of hit dice recovered.
+   * @protected
    */
-  async recoverHitDice({ maxHitDice=undefined }={}) {
+  async _getRestHitDiceRecovery({ maxHitDice=undefined }={}) {
     // Determine the number of hit dice which may be recovered
     if ( maxHitDice === undefined ) {
       maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
@@ -1223,8 +1228,9 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
    * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
    * @return {Promise.<Array.<object>>}                    Array of item updates.
+   * @protected
    */
-  async recoverItemUses({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
+  async _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
     let recovery = [];
     if ( recoverShortRestUses ) recovery.push("sr");
     if ( recoverLongRestUses ) recovery.push("lr");
