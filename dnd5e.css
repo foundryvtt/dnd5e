@@ -530,16 +530,19 @@
 /* ----------------------------------------- */
 /*  Add Feature Prompt Specifically          */
 /* ----------------------------------------- */
-.dnd5e.add-feature-prompt .dialog-content {
-  padding-bottom: 1em;
+.dnd5e.select-items-prompt .dialog-content {
+  margin-bottom: 1em;
 }
-.dnd5e.add-feature-prompt .items-list {
+.dnd5e.select-items-prompt .items-list {
   margin-top: 0.5em;
 }
-.dnd5e.add-feature-prompt .item-name > label,
-.dnd5e.add-feature-prompt .item-image,
-.dnd5e.add-feature-prompt input {
+.dnd5e.select-items-prompt .item-name > label,
+.dnd5e.select-items-prompt .item-image,
+.dnd5e.select-items-prompt input {
   cursor: pointer;
+}
+.dnd5e.select-items-prompt .item-name > label {
+  align-items: center;
 }
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
