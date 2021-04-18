@@ -990,25 +990,27 @@ export default class Actor5e extends Actor {
    * @param {boolean} chat           Summarize the results of the rest workflow as a chat message.
    * @param {boolean} newDay         Has a new day occurred during this rest?
    * @param {boolean} longRest       Is this a long rest?
-   * @param {number} [dhd=0]         Hit dice before and hit dice were spent (short rest only).
-   * @param {number} [dhp=0]         Hit points before any hit dice were spent (short rest only).
+   * @param {number} [dhd=0]         Number of hit dice spent during so far during the rest.
+   * @param {number} [dhp=0]         Number of hit points recovered so far during the rest.
    * @return {Promise.<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
   async _rest(chat, newDay, longRest, dhd=0, dhp=0) {
+    let hitPointsRecovered = 0;
     let hitPointUpdates = {};
+    let hitDiceRecovered = 0;
     let hitDiceUpdates = [];
 
     // Recover hit points & hit dice on long rest
     if ( longRest ) {
-      ({ updates: hitPointUpdates, hitPointsRecovered: dhp } = await this._getRestHitPointRecovery());
-      ({ updates: hitDiceUpdates, hitDiceRecovered: dhd} = await this._getRestHitDiceRecovery());
+      ({ updates: hitPointUpdates, hitPointsRecovered } = await this._getRestHitPointRecovery());
+      ({ updates: hitDiceUpdates, hitDiceRecovered } = await this._getRestHitDiceRecovery());
     }
 
     // Figure out the rest of the changes
     const result = {
-      dhd: dhd,
-      dhp: dhp,
+      dhd: dhd + hitDiceRecovered,
+      dhp: dhp + hitPointsRecovered,
       updateData: {
         ...hitPointUpdates,
         ...await this._getRestResourceRecovery({ recoverShortRestResources: !longRest, recoverLongRestResources: longRest }),
@@ -1127,7 +1129,7 @@ export default class Actor5e extends Actor {
       updates["data.attributes.hp.temp"] = 0;
     }
 
-    return { updates, hitPointsRecovered: recoverHP ? max - data.attributes.hp.value : 0 };
+    return { updates, hitPointsRecovered: max - data.attributes.hp.value };
   }
 
   /* -------------------------------------------- */
