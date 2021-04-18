@@ -26,6 +26,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+        <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -138,6 +139,27 @@
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="tab flexrow" data-group="primary" data-tab="features">
+            <ul class="items-list">
+                {{#each featureItems as |features level|}}
+                <li class="items-header flexrow">
+                    <h3 class="item-name flexrow">{{localize "DND5E.Level"}} {{level}}</h3>
+                </li>
+                <ul class="items-list">
+                    {{#each features}}
+                    <li class="item flexrow">
+                        <div class="item-name flexrow">
+                            <div class="item-image" style="background-image:url({{data.img}})" data-item-id="{{id}}"></div>
+                            <label for="toggle-feature-add-{{id}}">
+                                <h4>{{data.name}}</h4>
+                            </label>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{/each}}
+            </ul>
         </div>
     </section>
 </form>

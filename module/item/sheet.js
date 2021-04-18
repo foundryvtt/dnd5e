@@ -76,6 +76,30 @@ export default class ItemSheet5e extends ItemSheet {
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
     data.data = itemData.data;
+
+    // Class Features
+    const levels = Object.keys(itemData.data.features);
+
+    const featureItems = await levels.reduce(async (acc, level) => {
+      const accumulator = await acc;
+      const featureLevelItemUuids = itemData.data.features[level]; // array of uuids
+      // want the item themselves
+      for ( const uuid of featureLevelItemUuids) {
+        const featureItem = await fromUuid(uuid);
+
+        accumulator[level] = {
+          ...accumulator[level],
+          [uuid]: featureItem
+        }
+      }
+      console.log('foo', {
+        accumulator, level, featureLevelItemUuids, itemData
+      })
+      return accumulator;
+    }, {});
+
+    data.featureItems = featureItems;
+
     return data;
   }
 
