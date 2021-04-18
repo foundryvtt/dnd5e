@@ -19,7 +19,7 @@ export default class AddFeaturePrompt extends Dialog {
     
     // render the item's sheet if its image is clicked
     html.on('click', '.item-image', (event) => {
-      const item = this.features.find(({id}) => id === event.currentTarget.dataset?.itemId);
+      const item = this.features.find((feature) => feature.id === event.currentTarget.dataset?.itemId);
 
       item?.sheet.render(true);
     })
