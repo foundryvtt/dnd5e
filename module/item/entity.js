@@ -1339,7 +1339,7 @@ export default class Item5e extends Item {
           subclassName: this.data.data.subclass,
           level: this.data.data.levels
         });
-        return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
+        return this.parent.addEmbeddedItems(features);
       case "equipment":
         return this._onCreateOwnedEquipment(data, actorData, isNPC);
       case "weapon":
@@ -1374,7 +1374,7 @@ export default class Item5e extends Item {
         subclassName: changed.data.subclass || this.data.data.subclass,
         level: changed.data.levels || this.data.data.levels
       });
-      return this.constructor.createDocuments(features.map(f => f.toJSON()), {parent: this.parent});
+      return this.parent.addEmbeddedItems(features);
     }
   }
 

@@ -3,6 +3,7 @@ import AddFeaturePrompt from "../apps/add-feature-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import {DND5E} from '../config.js';
+import Item5e from "../item/entity.js";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -150,10 +151,34 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Given a list of items to add to the Actor, optionally prompt the 
+   * user for which they would like to add.
+   * @param {Array.<Item5e>} items - The items being added to the Actor.
+   * @param {number} [prompt=true] - Whether or not to prompt the user.
+   * @returns {Promise<Item5e[]>}
+   */
+  async addEmbeddedItems(items, prompt = true) {
+    if (items.length === 0) return;
+
+    let itemIdsToAdd = items.map(({id}) => id);
+    if (prompt) {
+      itemIdsToAdd = await AddFeaturePrompt.create(items);
+    }
+    const itemsToAdd = items.filter(item => itemIdsToAdd.includes(item.id));
+
+    if (itemsToAdd.length === 0) return;
+
+    // create the selected items with this actor as parent
+    return Item5e.createDocuments(itemsToAdd.map(i => i.toJSON()), {parent: this});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get a list of features to add to the Actor when a class item is updated.
    * Optionally prompt the user for which they would like to add.
    */
-  async getClassFeatures({className, subclassName, level, prompt = true}={}) {
+   async getClassFeatures({className, subclassName, level}={}) {
     const current = this.itemTypes.class.find(c => c.name === className);
     const priorLevel = current ? current.data.data.levels : 0;
 
@@ -166,19 +191,7 @@ export default class Actor5e extends Actor {
     if ( changed ) {
       const existing = new Set(this.items.map(i => i.name));
       const features = await Actor5e.loadClassFeatures({className, subclassName, level});
-      const newFeatures = features.filter(f => !existing.has(f.name));
-
-      if (newFeatures.length === 0) return [];
-
-      // Prompt the user if they wish to add the new features
-      let featureIdsToAdd = newFeatures.map(({id}) => id);
-      if (prompt) {
-        featureIdsToAdd = await AddFeaturePrompt.create(newFeatures);
-      }
-
-      const featuresToAdd = newFeatures.filter(feature => featureIdsToAdd.includes(feature.id));
-
-      return featuresToAdd || [];
+      return features.filter(f => !existing.has(f.name)) || [];
     }
     return [];
   }
