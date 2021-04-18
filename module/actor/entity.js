@@ -158,16 +158,13 @@ export default class Actor5e extends Actor {
    * @returns {Promise<Item5e[]>}
    */
   async addEmbeddedItems(items, prompt = true) {
-    if (items.length === 0) return;
-
-    let itemIdsToAdd = items.map(({id}) => id);
-    if (prompt) {
-      itemIdsToAdd = await SelectItemsPrompt.create(items, {
-        hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
-      });
+    let itemsToAdd = items;
+    if (prompt && !!itemsToAdd.length) {
+      let itemIdsToAdd = await SelectItemsPrompt.create(itemsToAdd, {
+          hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
+        });
+      itemsToAdd = itemsToAdd.filter(item => itemIdsToAdd.includes(item.id));
     }
-    const itemsToAdd = items.filter(item => itemIdsToAdd.includes(item.id));
-
     if (itemsToAdd.length === 0) return;
 
     // create the selected items with this actor as parent
