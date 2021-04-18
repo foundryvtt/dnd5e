@@ -45,9 +45,7 @@ export default class AddFeaturePrompt extends Dialog {
             label: game.i18n.localize('DND5E.Apply'),
             callback: html => {
               const fd = new FormDataExtended(html[0].querySelector("form")).toObject();
-
               const selectedIds = Object.keys(fd).filter(itemId => fd[itemId]);
-
               resolve(selectedIds);
             }
           },
