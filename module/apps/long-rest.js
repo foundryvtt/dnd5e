@@ -46,11 +46,9 @@ export default class LongRestDialog extends Dialog {
             icon: '<i class="fas fa-bed"></i>',
             label: "Rest",
             callback: html => {
-              let newDay = false;
-              if (game.settings.get("dnd5e", "restVariant") === "normal")
+              let newDay = true;
+              if (game.settings.get("dnd5e", "restVariant") !== "gritty")
                 newDay = html.find('input[name="newDay"]')[0].checked;
-              else if(game.settings.get("dnd5e", "restVariant") === "gritty")
-                newDay = true;
               resolve(newDay);
             }
           },
