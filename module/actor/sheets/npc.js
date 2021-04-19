@@ -68,21 +68,19 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     data.spellbook = spellbook;
   }
 
-
   /* -------------------------------------------- */
 
-  /** @override */
-  getData() {
-    const data = super.getData();
+  /** @inheritdoc */
+  getData(options) {
+    const data = super.getData(options);
 
     // Challenge Rating
     const cr = parseFloat(data.data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
     data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
-    // Type
+    // Creature Type
     data.labels["type"] = this._getType(data.actor.data);
-
     return data;
   }
 
@@ -96,10 +94,9 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
    */
   _getType(actorData) {
     let attr = actorData.details.type;
-    if ( getType(attr) !== "Object" ) return attr;
-    return Actor5e.formatCreatureType(attr);
+    if ( typeof attr === "string" ) return attr;
+    return Actor5e.formatCreatureType(attr) || game.i18n.localize("DND5E.Type");
   }
-
 
   /* -------------------------------------------- */
   /*  Object Updates                              */
