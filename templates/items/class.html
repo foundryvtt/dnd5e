@@ -56,6 +56,15 @@
                 </div>
             </div>
 
+            {{!-- Class Slug --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.Slug" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.slug" value="{{data.slug}}"/>
+                </div>
+                <p class="hint">{{localize "DND5E.SlugHint"}}</p>
+            </div>
+
             {{!-- Class Hit Dice --}}
             <div class="form-group">
                 <label>{{localize "DND5E.HitDice"}}</label>

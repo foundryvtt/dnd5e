@@ -208,9 +208,11 @@ export default class Actor5e extends Actor {
   /**
    * Get a list of features to add to the Actor when a class item is updated.
    * Optionally prompt the user for which they would like to add.
+   * @param {Object} options
+   * @param {Record<number, string>} options.classFeatures - Map of levels to uuids from the class item itself
    */
-   async getClassFeatures({className, subclassName, level}={}) {
-    const current = this.itemTypes.class.find(c => c.name === className);
+   async getClassFeatures({classSlug, classFeatures, subclassName, level}={}) {
+    const current = this.itemTypes.class.find(c => c.data.slug === classSlug);
     const priorLevel = current ? current.data.data.levels : 0;
 
     // Did the class change?
@@ -221,7 +223,7 @@ export default class Actor5e extends Actor {
     // Get features to create
     if ( changed ) {
       const existing = new Set(this.items.map(i => i.name));
-      const features = await Actor5e.loadClassFeatures({className, subclassName, level});
+      const features = await Actor5e.loadClassFeatures({classSlug, classFeatures, subclassName, level});
       return features.filter(f => !existing.has(f.name)) || [];
     }
     return [];
@@ -231,23 +233,24 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the features which a character is awarded for each class level
-   * @param {string} className        The class name being added
-   * @param {string} subclassName     The subclass of the class being added, if any
-   * @param {number} level            The number of levels in the added class
-   * @param {number} priorLevel       The previous level of the added class
-   * @return {Promise<Item5e[]>}     Array of Item5e entities
+   * @param {Object} options
+   * @param {string} options.classSlug                        The class name being added
+   * @param {Record<number, string>} options.classFeatures    The map of levels to itemIds of the features being added from the class item itself
+   * @param {string} options.subclassName                     The subclass of the class being added, if any
+   * @param {number} options.level                            The number of levels in the added class
+   * @param {number} options.priorLevel                       The previous level of the added class
+   * @return {Promise<Item5e[]>}                              Array of Item5e entities
    */
-  static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
-    className = className.toLowerCase();
+  static async loadClassFeatures({classSlug="", subclassName="", level=1, priorLevel=0, classFeatures}={}) {
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
-    const clsConfig = CONFIG.DND5E.classFeatures[className];
+    const clsConfig = CONFIG.DND5E.classFeatures[classSlug];
     if (!clsConfig) return [];
 
     // Acquire class features
     let ids = [];
-    for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
+    for ( let [l, f] of Object.entries(classFeatures || {}) ) {
       l = parseInt(l);
       if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
     }

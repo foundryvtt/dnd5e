@@ -1,3 +1,8 @@
+/**
+ * DEPRECATION WARNING
+ * This file is no longer how classes and subclass map to features
+ * as of dnd5e 1.3.0.
+ */
 export const ClassFeatures = {
  "barbarian": {
    "subclasses": {

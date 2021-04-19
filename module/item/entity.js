@@ -1329,13 +1329,19 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
+
+    if (data.type === "class" && !data.data.slug) {
+      data.data.slug = data.name.slugify({strict: true});
+    }
+
     if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
     switch (data.type) {
       case "class":
         const features = await this.parent.getClassFeatures({
-          className: this.name,
+          classSlug: this.data.data.slug,
+          classFeatures: this.data.data.features,
           subclassName: this.data.data.subclass,
           level: this.data.data.levels
         });
@@ -1368,10 +1374,12 @@ export default class Item5e extends Item {
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
     if ( !this.isEmbedded || (this.parent.type === "vehicle") || (this.type !== "class") ) return;
-    if ( changed["name"] || (changed.data && Object.keys(changed.data).some(k => ["subclass", "levels"].includes(k))) ) {
+
+    if (changed.data && Object.keys(changed.data).some(k => ["subclass", "levels"].includes(k)) ) {
       const features = await this.parent.getClassFeatures({
-        className: changed.name || this.name,
-        subclassName: changed.data?.subclass || this.data.data.subclass,
+        classSlug: changed.data.slug || this.data.data.slug, // temporary until subclass is handled
+        classFeatures: changed.features || this.data.data.features,
+        subclassName: changed.data?.subclass || this.data.data.subclass, // temporary until subclass is handled
         level: changed.data?.levels || this.data.data.levels
       });
       return this.parent.addEmbeddedItems(features);
