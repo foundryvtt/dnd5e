@@ -76,11 +76,12 @@
                 </div>
             </div>
 
+            {{!-- Spellcasting --}}
             <div class="form-group">
                 <label>{{localize 'DND5E.SpellProgression'}}</label>
                 <div class="form-fields">
-                    <select name="data.spellcasting">
-                        {{#select data.spellcasting}}
+                    <select name="data.spellcasting.progression">
+                        {{#select data.spellcasting.progression}}
                             {{#each config.spellProgression}}
                                 <option value="{{@key}}">{{localize this}}</option>
                             {{/each}}
@@ -89,6 +90,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label>{{localize "DND5E.SpellAbility"}}</label>
+                <div class="form-fields">
+                    <select name="data.spellcasting.ability">
+                        {{selectOptions config.abilities selected=data.spellcasting.ability blank=""}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- Proficiencies --}}
             <div class="form-group">
                 <label>
                     {{ localize "DND5E.ClassSaves" }}
