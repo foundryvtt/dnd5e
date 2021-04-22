@@ -1515,7 +1515,7 @@ export default class Item5e extends Item {
     if (options.addFeatures === false) return;
     this.parent.getClassFeatures({
       className: this.name,
-      subclassName: this.data.data.subclass,
+      subclassName: this.data.data.subclass.selected,
       level: this.data.data.levels
     }).then(features => {
       return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
@@ -1538,7 +1538,7 @@ export default class Item5e extends Item {
     if ( !addFeatures || (options.addFeatures === false) ) return;
     this.parent.getClassFeatures({
       className: changed.name || this.name,
-      subclassName: changed.data?.subclass || this.data.data.subclass,
+      subclassName: changed.data?.subclass?.selected || this.data.data.subclass.selected,
       level: changed.data?.levels || this.data.data.levels
     }).then(features => {
       return this.parent.addEmbeddedItems(features, options.promptAddFeatures);

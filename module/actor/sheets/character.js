@@ -46,7 +46,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     sheetData.disableExperience = game.settings.get("dnd5e", "disableExperienceTracking");
     sheetData.classLabels = this.actor.itemTypes.class.map(c => c.name).join(", ");
     sheetData.multiclassLabels = this.actor.itemTypes.class.map(c => {
-      return [c.data.data.subclass, c.name, c.data.data.levels].filterJoin(" ");
+      return [c.data.data.subclass.selected, c.name, c.data.data.levels].filterJoin(" ");
     }).join(", ");
 
     // Weight unit
