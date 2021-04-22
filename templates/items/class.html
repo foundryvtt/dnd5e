@@ -81,11 +81,7 @@
                 <label>{{localize 'DND5E.SpellProgression'}}</label>
                 <div class="form-fields">
                     <select name="data.spellcasting.progression">
-                        {{#select data.spellcasting.progression}}
-                            {{#each config.spellProgression}}
-                                <option value="{{@key}}">{{localize this}}</option>
-                            {{/each}}
-                        {{/select}}
+                        {{selectOptions config.spellProgression selected=data.spellcasting.progression localize=true}}
                     </select>
                 </div>
             </div>

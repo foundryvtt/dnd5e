@@ -7,19 +7,16 @@ import Item5e from "../item/entity.js";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
+ * @extends {Actor}
  */
 export default class Actor5e extends Actor {
-  constructor(data, context) {
-    super(data, context);
 
-    /**
-     * The data source for Actor5e.classes allowing it to be lazily computed.
-     *
-     * @type {object.<string, Item5e>}
-     * @private
-     */
-    this._classes = undefined;
-  }
+  /**
+   * The data source for Actor5e.classes allowing it to be lazily computed.
+   * @type {Object<string, Item5e>}
+   * @private
+   */
+  _classes = undefined;
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -27,8 +24,7 @@ export default class Actor5e extends Actor {
 
   /**
    * A mapping of classes belonging to this Actor.
-   *
-   * @return {object.<string, Item5e>}
+   * @type {Object<string, Item5e>}
    */
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
@@ -44,7 +40,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Is this Actor currently polymorphed into some other creature?
-   * @return {boolean}
+   * @type {boolean}
    */
   get isPolymorphed() {
     return this.getFlag("dnd5e", "isPolymorphed") || false;
