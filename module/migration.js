@@ -257,6 +257,7 @@ export const migrateItemData = function(item, migrationData) {
   _migrateArmorType(item, updateData);
   _migrateItemCriticalData(item, updateData);
   _migrateItemIcon(item, updateData, migrationData);
+  _migrateItemSubclass(item, updateData);
   return updateData;
 };
 
@@ -647,6 +648,26 @@ function _migrateItemIcon(item, updateData, {iconMap}={}) {
   if ( !iconMap || !item.img?.startsWith("systems/dnd5e/icons/") ) return updateData;
   const rename = iconMap[item.img];
   if ( rename ) updateData.img = rename;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Replace class subclass string to object.
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
+ * @private
+ */
+function _migrateItemSubclass(item, updateData) {
+  if ( item.type !== "class" || (foundry.utils.getType(item.data.subclass) === "Object") ) return updateData;
+  updateData["data.subclass"] = {
+    "label": "",
+    "level": 3,
+    "selected": item.data.subclass
+  };
   return updateData;
 }
 
