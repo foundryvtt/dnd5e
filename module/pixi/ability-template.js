@@ -110,13 +110,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Confirm the workflow (left-click)
     handlers.lc = event => {
       handlers.rc(event);
-
-      // Confirm final snapped position
-      const destination = canvas.grid.getSnappedPosition(this.x, this.y, 2);
-      this.data.x = destination.x;
-      this.data.y = destination.y;
-
-      // Create the template
+      const destination = canvas.grid.getSnappedPosition(this.data.x, this.data.y, 2);
+      this.data.update(destination);
       canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.data]);
     };
 
