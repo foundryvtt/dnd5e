@@ -386,9 +386,9 @@ export default class Actor5e extends Actor {
     const classes = this.data.items.filter(i => i.type === "class");
     for ( let cls of classes ) {
       const d = cls.data.data;
-      if ( d.spellcasting === "none" ) continue;
+      if ( d.spellcasting.progression === "none" ) continue;
       const levels = d.levels;
-      const prog = d.spellcasting;
+      const prog = d.spellcasting.progression;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
@@ -406,8 +406,8 @@ export default class Actor5e extends Actor {
 
     // EXCEPTION: single-classed non-full progression rounds up, rather than down
     const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.spellcasting) ) {
-      const denom = caster.spellcasting === 'third' ? 3 : 2;
+    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.spellcasting.progression) ) {
+      const denom = caster.spellcasting.progression === 'third' ? 3 : 2;
       progression.slot = Math.ceil(caster.levels / denom);
     }
 
