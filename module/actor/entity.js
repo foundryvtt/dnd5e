@@ -7,6 +7,38 @@ import {DND5E} from '../config.js';
  * Extend the base Actor class to implement additional system-specific logic.
  */
 export default class Actor5e extends Actor {
+  constructor(data, context) {
+    super(data, context);
+
+    /**
+     * The data source for Actor5e.classes allowing it to be lazily computed.
+     *
+     * @type {object.<string, Item5e>}
+     * @private
+     */
+    this._classes = undefined;
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * A mapping of classes belonging to this Actor.
+   *
+   * @return {object.<string, Item5e>}
+   */
+  get classes() {
+    if ( this._classes !== undefined ) return this._classes;
+    if ( this.data.type !== "character" ) return this._classes = {};
+
+    return this._classes = this.items.filter((item) => item.type === "class").reduce((obj, cls) => {
+      obj[cls.name.slugify({strict: true})] = cls;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Is this Actor currently polymorphed into some other creature?
@@ -16,6 +48,8 @@ export default class Actor5e extends Actor {
     return this.getFlag("dnd5e", "isPolymorphed") || false;
   }
 
+  /* -------------------------------------------- */
+  /*  Methods                                     */
   /* -------------------------------------------- */
 
   /** @override */
@@ -90,6 +124,9 @@ export default class Actor5e extends Actor {
     // Prepare skills
     this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
 
+    // Reset class store to ensure it is updated with any changes
+    this._classes = undefined;
+
     // Determine Initiative Modifier
     const init = data.attributes.init;
     const athlete = flags.remarkableAthlete;
@@ -136,13 +173,12 @@ export default class Actor5e extends Actor {
   /** @inheritdoc */
   getRollData() {
     const data = super.getRollData();
-    data.classes = this.items.reduce((obj, i) => {
-      if ( i.type === "class" ) {
-        obj[i.name.slugify({strict: true})] = i.data.data;
-      }
+    data.prof = this.data.data.attributes.prof || 0;
+    data.classes = Object.entries(this.classes).reduce((obj, e) => {
+      const [slug, cls] = e;
+      obj[slug] = cls.data.data;
       return obj;
     }, {});
-    data.prof = this.data.data.attributes.prof || 0;
     return data;
   }
 
