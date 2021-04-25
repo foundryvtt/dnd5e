@@ -121,7 +121,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       event.stopPropagation();
       let delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
       let snap = event.shiftKey ? delta : 5;
-      this.data.direction += (snap * Math.sign(event.deltaY));
+      this.data.update({direction: this.data.direction + (snap * Math.sign(event.deltaY))});
       this.refresh();
     };
 
