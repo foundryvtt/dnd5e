@@ -10,7 +10,7 @@ export const migrateWorld = async function() {
   // Migrate World Actors
   for ( let a of game.actors ) {
     try {
-      const updateData = migrateActorData(a.toObject(), migrationData);
+      const updateData = await migrateActorData(a.toObject(), migrationData);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
@@ -24,7 +24,7 @@ export const migrateWorld = async function() {
   // Migrate World Items
   for ( let i of game.items ) {
     try {
-      const updateData = migrateItemData(i.toObject(), migrationData);
+      const updateData = await migrateItemData(i.toObject(), migrationData);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
@@ -38,7 +38,7 @@ export const migrateWorld = async function() {
   // Migrate Actor Override Tokens
   for ( let s of game.scenes ) {
     try {
-      const updateData = migrateSceneData(s.data, migrationData);
+      const updateData = await migrateSceneData(s.data, migrationData);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
@@ -91,13 +91,13 @@ export const migrateCompendium = async function(pack) {
     try {
       switch (entity) {
         case "Actor":
-          updateData = migrateActorData(doc.toObject(), migrationData);
+          updateData = await migrateActorData(doc.toObject(), migrationData);
           break;
         case "Item":
-          updateData = migrateItemData(doc.toObject(), migrationData);
+          updateData = await migrateItemData(doc.toObject(), migrationData);
           break;
         case "Scene":
-          updateData = migrateSceneData(doc.data, migrationData);
+          updateData = await migrateSceneData(doc.data, migrationData);
           break;
       }
 
@@ -172,9 +172,9 @@ export const migrateArmorClass = async function(pack) {
  * Return an Object of updateData to be applied
  * @param {object} actor            The actor data object to update
  * @param {object} [migrationData]  Additional data to perform the migration
- * @returns {object}                The updateData to apply
+ * @returns {Promise<object>}       The updateData to apply
  */
-export const migrateActorData = function(actor, migrationData) {
+export const migrateActorData = async function(actor, migrationData) {
   const updateData = {};
   _migrateTokenImage(actor, updateData);
 
@@ -188,10 +188,11 @@ export const migrateActorData = function(actor, migrationData) {
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
-  const items = actor.items.reduce((arr, i) => {
+  let items = [];
+  for ( const i of actor.items ) {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-    let itemUpdate = migrateItemData(itemData, migrationData);
+    let itemUpdate = await migrateItemData(itemData, migrationData);
 
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actor.type === "npc" ) {
@@ -202,12 +203,10 @@ export const migrateActorData = function(actor, migrationData) {
 
     // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) {
-      itemUpdate._id = itemData._id;
-      arr.push(expandObject(itemUpdate));
+      itemUpdate._id = i.id;
+      items.push(expandObject(itemUpdate));
     }
-
-    return arr;
-  }, []);
+  }
   if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
@@ -249,15 +248,22 @@ function cleanActorData(actorData) {
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateItemData = function(item, migrationData) {
+export const migrateItemData = async function(item, migrationData) {
   const updateData = {};
   _migrateItemAttunement(item, updateData);
   _migrateItemRarity(item, updateData);
-  _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
   _migrateItemCriticalData(item, updateData);
   _migrateItemIcon(item, updateData, migrationData);
-  _migrateItemSubclass(item, updateData);
+
+  // Migrate class data
+  if ( item.type === "class" ) {
+    const sourceId = item.flags?.core?.sourceId;
+    const source = (sourceId) ? await fromUuid(sourceId) : null;
+    _migrateItemSpellcasting(item, source, updateData);
+    _migrateItemSubclass(item, source, updateData);
+  }
+
   return updateData;
 };
 
@@ -270,7 +276,7 @@ export const migrateItemData = function(item, migrationData) {
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateSceneData = function(scene, migrationData) {
+export const migrateSceneData = async function(scene, migrationData) {
   const tokens = scene.tokens.map(token => {
     const t = token.toObject();
     const update = {};
@@ -286,7 +292,7 @@ export const migrateSceneData = function(scene, migrationData) {
     else if ( !t.actorLink ) {
       const actorData = duplicate(t.actorData);
       actorData.type = token.actor?.type;
-      const update = migrateActorData(actorData, migrationData);
+      const update = await migrateActorData(actorData, migrationData);
       ["items", "effects"].forEach(embeddedName => {
         if (!update[embeddedName]?.length) return;
         const updates = new Map(update[embeddedName].map(u => [u._id, u]));
@@ -299,8 +305,8 @@ export const migrateSceneData = function(scene, migrationData) {
 
       mergeObject(t.actorData, update);
     }
-    return t;
-  });
+    tokens.push(t);
+  }
   return {tokens};
 };
 
@@ -587,15 +593,16 @@ function _migrateItemRarity(item, updateData) {
 /**
  * Replace class spellcasting string to object.
  * @param {object} item        Item data to migrate.
+ * @param {Item5e|null} source Original class this item was imported from to populate defaults
  * @param {object} updateData  Existing update to expand upon.
  * @returns {object}           The updateData to apply.
  * @private
  */
-function _migrateItemSpellcasting(item, updateData) {
-  if ( item.type !== "class" || (foundry.utils.getType(item.data.spellcasting) === "Object") ) return updateData;
+function _migrateItemSpellcasting(item, source, updateData) {
+  if ( foundry.utils.getType(item.data.spellcasting) === "Object" ) return updateData;
   updateData["data.spellcasting"] = {
     progression: item.data.spellcasting,
-    ability: ""
+    ability: source?.data?.data?.spellcasting?.ability ?? ""
   };
   return updateData;
 }
@@ -657,15 +664,16 @@ function _migrateItemIcon(item, updateData, {iconMap}={}) {
  * Replace class subclass string to object.
  *
  * @param {object} item        Item data to migrate
+ * @param {Item5e|null} source  Original class this item was imported from to populate defaults
  * @param {object} updateData  Existing update to expand upon
  * @return {object}            The updateData to apply
  * @private
  */
-function _migrateItemSubclass(item, updateData) {
-  if ( item.type !== "class" || (foundry.utils.getType(item.data.subclass) === "Object") ) return updateData;
+function _migrateItemSubclass(item, source, updateData) {
+  if ( foundry.utils.getType(item.data.subclass) === "Object" ) return updateData;
   updateData["data.subclass"] = {
-    "label": "",
-    "level": 3,
+    "label": source?.data?.data?.subclass?.label ?? "",
+    "level": source?.data?.data?.subclass?.level ?? 3,
     "selected": item.data.subclass
   };
   return updateData;
