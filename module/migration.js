@@ -602,7 +602,7 @@ function _migrateItemSpellcasting(item, source, updateData) {
   if ( foundry.utils.getType(item.data.spellcasting) === "Object" ) return updateData;
   updateData["data.spellcasting"] = {
     progression: item.data.spellcasting,
-    ability: source?.data?.data?.spellcasting?.ability ?? ""
+    ability: source?.data.data.spellcasting?.ability ?? ""
   };
   return updateData;
 }
@@ -672,8 +672,8 @@ function _migrateItemIcon(item, updateData, {iconMap}={}) {
 function _migrateItemSubclass(item, source, updateData) {
   if ( foundry.utils.getType(item.data.subclass) === "Object" ) return updateData;
   updateData["data.subclass"] = {
-    "label": source?.data?.data?.subclass?.label ?? "",
-    "level": source?.data?.data?.subclass?.level ?? 3,
+    "label": source?.data.data.subclass?.label ?? "",
+    "level": source?.data.data.subclass?.level ?? 3,
     "selected": item.data.subclass
   };
   return updateData;
