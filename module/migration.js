@@ -188,8 +188,7 @@ export const migrateActorData = async function(actor, migrationData) {
 
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
-  let items = [];
-  for ( const i of actor.items ) {
+  const items = await actor.items.reduce(async (arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
     let itemUpdate = await migrateItemData(itemData, migrationData);
@@ -204,9 +203,10 @@ export const migrateActorData = async function(actor, migrationData) {
     // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) {
       itemUpdate._id = i.id;
-      items.push(expandObject(itemUpdate));
+      (await arr).push(expandObject(itemUpdate));
     }
-  }
+    return arr;
+  }, []);
   if ( items.length > 0 ) updateData.items = items;
   return updateData;
 };
@@ -246,7 +246,7 @@ function cleanActorData(actorData) {
  *
  * @param {object} item             Item data to migrate
  * @param {object} [migrationData]  Additional data to perform the migration
- * @returns {object}                The updateData to apply
+ * @return {Promise.<object>}       The updateData to apply
  */
 export const migrateItemData = async function(item, migrationData) {
   const updateData = {};
@@ -274,10 +274,10 @@ export const migrateItemData = async function(item, migrationData) {
  * Return an Object of updateData to be applied
  * @param {object} scene            The Scene data to Update
  * @param {object} [migrationData]  Additional data to perform the migration
- * @returns {object}                The updateData to apply
+ * @return {Promise.<object>}       The updateData to apply
  */
 export const migrateSceneData = async function(scene, migrationData) {
-  const tokens = scene.tokens.map(token => {
+  const tokens = await Promise.all(scene.tokens.map(async token => {
     const t = token.toObject();
     const update = {};
     _migrateTokenImage(t, update);
@@ -305,8 +305,8 @@ export const migrateSceneData = async function(scene, migrationData) {
 
       mergeObject(t.actorData, update);
     }
-    tokens.push(t);
-  }
+    return t;
+  }));
   return {tokens};
 };
 
