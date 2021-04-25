@@ -92,9 +92,6 @@ export default class ItemSheet5e extends ItemSheet {
           [uuid]: featureItem
         }
       }
-      console.log('foo', {
-        accumulator, level, featureLevelItemUuids, itemData
-      })
       return accumulator;
     }, {});
 
