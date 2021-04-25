@@ -195,6 +195,7 @@ export const migrateItemData = function(item) {
   const updateData = {};
   _migrateItemAttunement(item, updateData);
   _migrateItemSpellcasting(item, updateData);
+  _migrateClassItem(item, updateData);
   return updateData;
 };
 
@@ -388,6 +389,31 @@ function _migrateItemSpellcasting(item, updateData) {
   return updateData;
 }
 
+
+/**
+ * A variety of updates to perform on class items
+ * @private
+ */
+function _migrateClassItem(item, updateData) {
+  if (item.type !== 'class') return;
+  _migrateClassItemSlug(item, updateData);
+  _migrateClassItemFeatures(item, updateData);
+  return updateData;
+}
+
+function _migrateClassItemSlug(item, updateData) {
+  if (item.type !== 'class' || !!item.data.slug) return;
+  updateData['data.slug'] = item.name.slugify({strict: true});
+  return updateData;
+}
+
+function _migrateClassItemFeatures(item, updateData) {
+  if (item.type !== 'class' || !foundry.utils.isObjectEmpty(item.data.features)) return;
+  const slug = item.data.slug || item.name.slugify({strict: true});
+  const features = game.dnd5e.config.classFeatures[slug]?.features;
+  updateData['data.features'] = features ?? {};
+  return updateData;
+}
 
 /* -------------------------------------------- */
 
