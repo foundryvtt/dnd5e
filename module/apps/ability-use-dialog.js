@@ -39,7 +39,7 @@ export default class AbilityUseDialog extends Dialog {
     // Prepare dialog form data
     const data = {
       item: item.data,
-      title: game.i18n.format("DND5E.AbilityUseHint", item.data),
+      title: game.i18n.format("DND5E.AbilityUseHint", {type: game.i18n.localize("DND5E.ItemType"+item.type.capitalize()), name: item.name}),
       note: this._getAbilityUseNote(item.data, uses, recharge),
       consumeSpellSlot: false,
       consumeRecharge: recharges,
@@ -59,7 +59,7 @@ export default class AbilityUseDialog extends Dialog {
     const label = game.i18n.localize("DND5E.AbilityUse" + (data.isSpell ? "Cast" : "Use"));
     return new Promise((resolve) => {
       const dlg = new this(item, {
-        title: `${item.name}: Usage Configuration`,
+        title: `${item.name}: ${game.i18n.localize("DND5E.AbilityUseConfig")}`,
         content: html,
         buttons: {
           use: {
@@ -151,7 +151,7 @@ export default class AbilityUseDialog extends Dialog {
     // Abilities which use Recharge
     if ( !!recharge.value ) {
       return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
-        type: item.type,
+        type: game.i18n.localize("DND5E.ItemType"+item.type.capitalize()),
       })
     }
 
@@ -165,7 +165,7 @@ export default class AbilityUseDialog extends Dialog {
       else if ( item.data.quantity === 1 && uses.autoDestroy ) str = "DND5E.AbilityUseConsumableDestroyHint";
       else if ( item.data.quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
-        type: item.data.consumableType,
+        type: game.i18n.localize("DND5E.Consumable"+item.data.consumableType.capitalize()),
         value: uses.value,
         quantity: item.data.quantity,
         max: uses.max,
@@ -176,7 +176,7 @@ export default class AbilityUseDialog extends Dialog {
     // Other Items
     else {
       return game.i18n.format("DND5E.AbilityUseNormalHint", {
-        type: item.type,
+        type: game.i18n.localize("DND5E.ItemType"+item.type.capitalize()),
         value: uses.value,
         max: uses.max,
         per: CONFIG.DND5E.limitedUsePeriods[uses.per]
