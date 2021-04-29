@@ -741,83 +741,83 @@ DND5E.characterFlags = {
   "diamondSoul": {
     name: "DND5E.FlagsDiamondSoul",
     hint: "DND5E.FlagsDiamondSoulHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "elvenAccuracy": {
     name: "DND5E.FlagsElvenAccuracy",
     hint: "DND5E.FlagsElvenAccuracyHint",
-    section: "Racial Traits",
+    section: "DND5E.RacialTraits",
     type: Boolean
   },
   "halflingLucky": {
     name: "DND5E.FlagsHalflingLucky",
     hint: "DND5E.FlagsHalflingLuckyHint",
-    section: "Racial Traits",
+    section: "DND5E.RacialTraits",
     type: Boolean
   },
   "initiativeAdv": {
     name: "DND5E.FlagsInitiativeAdv",
     hint: "DND5E.FlagsInitiativeAdvHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "initiativeAlert": {
     name: "DND5E.FlagsAlert",
     hint: "DND5E.FlagsAlertHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "jackOfAllTrades": {
     name: "DND5E.FlagsJOAT",
     hint: "DND5E.FlagsJOATHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "observantFeat": {
     name: "DND5E.FlagsObservant",
     hint: "DND5E.FlagsObservantHint",
     skills: ['prc','inv'],
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "powerfulBuild": {
     name: "DND5E.FlagsPowerfulBuild",
     hint: "DND5E.FlagsPowerfulBuildHint",
-    section: "Racial Traits",
+    section: "DND5E.RacialTraits",
     type: Boolean
   },
   "reliableTalent": {
     name: "DND5E.FlagsReliableTalent",
     hint: "DND5E.FlagsReliableTalentHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "remarkableAthlete": {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ['str','dex','con'],
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "weaponCriticalThreshold": {
     name: "DND5E.FlagsWeaponCritThreshold",
     hint: "DND5E.FlagsWeaponCritThresholdHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Number,
     placeholder: 20
   },
   "spellCriticalThreshold": {
     name: "DND5E.FlagsSpellCritThreshold",
     hint: "DND5E.FlagsSpellCritThresholdHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Number,
     placeholder: 20
   },
   "meleeCriticalDamageDice": {
     name: "DND5E.FlagsMeleeCriticalDice",
     hint: "DND5E.FlagsMeleeCriticalDiceHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Number,
     placeholder: 0
   },

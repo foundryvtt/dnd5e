@@ -2,8 +2,8 @@
 {{#each effects as |section sid|}}
     <li class="items-header flexrow" data-effect-type="{{section.type}}">
         <h3 class="item-name effect-name flexrow">{{localize section.label}}</h3>
-        <div class="effect-source">Source</div>
-        <div class="effect-source">Duration</div>
+        <div class="effect-source">{{localize "DND5E.Source"}}</div>
+        <div class="effect-source">{{localize "DND5E.Duration"}}</div>
         <div class="item-controls effect-controls flexrow">
             <a class="effect-control" data-action="create" title="{{localize 'DND5E.EffectCreate'}}">
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}

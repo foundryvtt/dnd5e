@@ -11,7 +11,7 @@ export function onManageActiveEffect(event, owner) {
   switch ( a.dataset.action ) {
     case "create":
       return ActiveEffect.create({
-        label: "New Effect",
+        label: game.i18n.localize("DND5E.EffectNew"),
         icon: "icons/svg/aura.svg",
         origin: owner.uuid,
         "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
@@ -37,17 +37,17 @@ export function prepareActiveEffectCategories(effects) {
     const categories = {
       temporary: {
         type: "temporary",
-        label: "Temporary Effects",
+        label: game.i18n.localize("DND5E.EffectTemporary"),
         effects: []
       },
       passive: {
         type: "passive",
-        label: "Passive Effects",
+        label: game.i18n.localize("DND5E.EffectPassive"),
         effects: []
       },
       inactive: {
         type: "inactive",
-        label: "Inactive Effects",
+        label: game.i18n.localize("DND5E.EffectInactive"),
         effects: []
       }
     };
