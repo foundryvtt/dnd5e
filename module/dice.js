@@ -178,7 +178,7 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  * @param {string[]} parts          The dice roll component parts, excluding the initial d20
  * @param {object} [data]           Actor or item data against which to parse the roll
  *
- * @param {boolean} [critical=false] Flag this roll as a critical hit for the purposes of fast-forward rolls
+ * @param {boolean} [critical=false] Flag this roll as a critical hit for the purposes of fast-forward or default dialog action
  * @param {number} [criticalBonusDice=0] A number of bonus damage dice that are added for critical hits
  * @param {number} [criticalMultiplier=2] A critical hit multiplier which is applied to critical hits
  * @param {boolean} [multiplyNumeric=false] Multiply numeric terms by the critical multiplier
