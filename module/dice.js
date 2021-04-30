@@ -133,6 +133,7 @@ export async function d20Roll({
     const configured = await roll.configureDialog({
       title,
       defaultRollMode: defaultRollMode,
+      defaultAction: advantageMode,
       defaultAbility: data?.item?.ability,
       template
     }, dialogOptions);
@@ -161,7 +162,7 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   let advantageMode = D20Roll.ADV_MODE.NORMAL;
   if ( advantage || event?.altKey ) advantageMode = D20Roll.ADV_MODE.ADVANTAGE;
-  else if ( disadvantage || event?.ctrlKey ) advantageMode = D20Roll.ADV_MODE.DISADVANTAGE;
+  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = D20Roll.ADV_MODE.DISADVANTAGE;
   return {isFF, advantageMode};
 }
 
@@ -225,6 +226,7 @@ export async function damageRoll({
     const configured = await roll.configureDialog({
       title,
       defaultRollMode: defaultRollMode,
+      defaultCritical: isCritical,
       template,
       allowCritical
     }, dialogOptions);
