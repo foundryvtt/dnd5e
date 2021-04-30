@@ -1454,6 +1454,9 @@ export default class Actor5e extends Actor {
 
     // Update regular Actors by creating a new Actor with the Polymorphed data
     await this.sheet.close();
+    // Remove any token position data
+    delete d.token.x;
+    delete d.token.y;
     Hooks.callAll('dnd5e.transformActor', this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
