@@ -107,12 +107,13 @@ export default class DamageRoll extends Roll {
    * @param {object} data                     Dialog configuration data
    * @param {string} [data.title]               The title of the shown dialog window
    * @param {number} [data.defaultRollMode]     The roll mode that the roll mode select element should default to
+   * @param {string} [data.defaultCritical]     Should critical be selected as default
    * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
    * @param {boolean} [data.allowCritical=true] Allow critical hit to be chosen as a possible damage mode
    * @param {object} options                  Additional Dialog customization options
    * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the dialog was closed
    */
-  async configureDialog({title, defaultRollMode, template, allowCritical=true}={}, options={}) {
+  async configureDialog({title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
 
     // Render the Dialog inner HTML
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
@@ -137,7 +138,7 @@ export default class DamageRoll extends Roll {
             callback: html => resolve(this._onDialogSubmit(html, false))
           }
         },
-        default: "normal",
+        default: defaultCritical ? "critical" : "normal",
         close: () => resolve(null)
       }, options).render(true);
     });
