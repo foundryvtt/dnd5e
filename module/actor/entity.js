@@ -532,14 +532,12 @@ export default class Actor5e extends Actor {
     await super._preCreate(data, options, user);
 
     // Token size category
-    const size = this.data.data.traits.size || "med";
-    data.token.width = data.token.height = CONFIG.DND5E.tokenSizes[size];
+    const s = CONFIG.DND5E.tokenSizes[this.data.data.traits.size || "med"];
+    this.data.token.update({width: s, height: s});
 
-    // Player character prototype token
+    // Player character configuration
     if ( this.type === "character" ) {
-      data.token.vision = true;
-      data.token.actorLink = true;
-      data.token.disposition = 1;
+      this.data.token.update({vision: true, actorLink: true, disposition: 1});
     }
   }
 
