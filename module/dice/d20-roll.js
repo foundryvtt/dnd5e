@@ -128,7 +128,7 @@ export default class D20Roll extends Roll {
    * @param {object} data                     Dialog configuration data
    * @param {string} [data.title]               The title of the shown dialog window
    * @param {number} [data.defaultRollMode]     The roll mode that the roll mode select element should default to
-   * @param {string} [data.defaultAction]       The button marked as default
+   * @param {number} [data.defaultAction]       The button marked as default
    * @param {string} [data.defaultAbility]      For tool rolls, the default ability modifier applied to the roll
    * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
    * @param {object} options                  Additional Dialog customization options
