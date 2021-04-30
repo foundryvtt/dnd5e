@@ -1366,38 +1366,36 @@ export default class Actor5e extends Actor {
       data: source.data, // Get the data model of your new form
       items: source.items, // Get the items of your new form
       effects: o.effects.concat(source.effects), // Combine active effects from both forms
-      token: source.token, // New token configuration
       img: source.img, // New appearance
       permission: o.permission, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags // Use the original actor flags
     };
 
-    // Additional adjustments
+    // Specifically delete some data attributes
     delete d.data.resources; // Don't change your resource pools
     delete d.data.currency; // Don't lose currency
     delete d.data.bonuses; // Don't lose global bonuses
-    delete d.token.actorId; // Don't reference the old actor ID
-    d.token.actorLink = o.token.actorLink; // Keep your actor link
-    d.token.name = d.name; // Token name same as actor name
+
+    // Specific additional adjustments
     d.data.details.alignment = o.data.details.alignment; // Don't change alignment
     d.data.attributes.exhaustion = o.data.attributes.exhaustion; // Keep your prior exhaustion level
     d.data.attributes.inspiration = o.data.attributes.inspiration; // Keep inspiration
     d.data.spells = o.data.spells; // Keep spell slots
 
-    // Handle wildcard
+    // Token appearance updates
+    d.token = {name: d.name};
+    for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
+      d.token[k] = source.token[k];
+    }
+    if ( !keepVision ) {
+      for ( let k of ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'] ) {
+        d.token[k] = source.token[k];
+      }
+    }
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
       d.token.img = images[Math.floor(Math.random() * images.length)];
-    }
-
-    // Keep Token configurations
-    const tokenConfig = ["displayName", "vision", "actorLink", "disposition", "displayBars", "bar1", "bar2"];
-    if ( keepVision ) {
-      tokenConfig.push(...['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle']);
-    }
-    for ( let c of tokenConfig ) {
-      d.token[c] = o.token[c];
     }
 
     // Transfer ability scores
@@ -1491,9 +1489,12 @@ export default class Actor5e extends Actor {
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
     if ( this.isToken ) {
       const baseActor = game.actors.get(this.token.data.actorId);
-      const prototypeTokenData = baseActor.data.token.toJSON();
-      prototypeTokenData.actorData = null;
-      return this.token.update(prototypeTokenData);
+      const prototypeTokenData = await baseActor.getTokenData();
+      const tokenUpdate = {actorData: {}};
+      for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
+        tokenUpdate[k] = prototypeTokenData[k];
+      }
+      return this.token.update(tokenUpdate, {recursive: false});
     }
 
     // Obtain a reference to the original actor

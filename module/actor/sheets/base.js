@@ -875,15 +875,14 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   _getHeaderButtons() {
     let buttons = super._getHeaderButtons();
-
-    // Add button to revert polymorph
-    if ( !this.actor.isPolymorphed || this.actor.isToken ) return buttons;
-    buttons.unshift({
-      label: 'DND5E.PolymorphRestoreTransformation',
-      class: "restore-transformation",
-      icon: "fas fa-backward",
-      onclick: ev => this.actor.revertOriginalForm()
-    });
+    if ( this.actor.isPolymorphed ) {
+      buttons.unshift({
+        label: 'DND5E.PolymorphRestoreTransformation',
+        class: "restore-transformation",
+        icon: "fas fa-backward",
+        onclick: () => this.actor.revertOriginalForm()
+      });
+    }
     return buttons;
   }
 }
