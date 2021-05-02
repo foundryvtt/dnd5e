@@ -1203,7 +1203,7 @@ export default class Actor5e extends Actor {
     let updates = {};
 
     for ( let [k, r] of Object.entries(this.data.data.resources) ) {
-      if ( r.max && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
+      if ( (recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr) ) {
         updates[`data.resources.${k}.value`] = r.max;
       }
     }
