@@ -281,7 +281,9 @@ export default class ActorSheet5e extends ActorSheet {
       if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       const l = levels.pact;
       const config = CONFIG.DND5E.spellPreparationModes.pact;
-      registerSection("pact", sections.pact, config, {
+      const level = game.i18n.localize(`DND5E.SpellLevel${levels.pact.level}`);
+      const label = `${config} — ${level}`;
+      registerSection("pact", sections.pact, label, {
         prepMode: "pact",
         value: l.value,
         max: l.max,
