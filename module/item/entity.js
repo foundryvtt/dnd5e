@@ -1145,6 +1145,13 @@ export default class Item5e extends Item {
     const parts = [`@mod`, "@prof"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
 
+    // Add global actor bonus
+    const bonuses = getProperty(this.actor.data.data, "bonuses.abilities") || {};
+    if ( bonuses.check ) {
+      parts.push("@checkBonus");
+      rollData.checkBonus = bonuses.check;
+    }
+
     // Compose the roll data
     const rollConfig = mergeObject({
       parts: parts,
