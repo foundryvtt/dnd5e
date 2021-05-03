@@ -1192,22 +1192,19 @@ export default class Actor5e extends Actor {
 
   /**
    * Recovers actor resources.
-   *
    * @param {object} [options]
    * @param {boolean} [options.recoverShortRestResources=true]  Recover resources that recharge on a short rest.
    * @param {boolean} [options.recoverLongRestResources=true]   Recover resources that recharge on a long rest.
    * @return {object}                                           Updates to the actor.
    * @protected
    */
-  _getRestResourceRecovery({ recoverShortRestResources=true, recoverLongRestResources=true }={}) {
+  _getRestResourceRecovery({recoverShortRestResources=true, recoverLongRestResources=true}={}) {
     let updates = {};
-
     for ( let [k, r] of Object.entries(this.data.data.resources) ) {
-      if ( r.max && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
-        updates[`data.resources.${k}.value`] = r.max;
+      if ( Number.isNumeric(r.max) && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
+        updates[`data.resources.${k}.value`] = Number(r.max);
       }
     }
-
     return updates;
   }
 
