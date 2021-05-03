@@ -1525,6 +1525,27 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+
+    // Check to make sure the updated class level doesn't exceed either cap
+    if ( this.type !== "class" ) return;
+    if ( changed.data?.levels ) {
+      if ( changed.data.levels > CONFIG.DND5E.classLevelCap ) {
+        ui.notifications.warn(game.i18n.format("DND5E.ClassLevelCapExceededWarn", {cap: CONFIG.DND5E.classLevelCap}));
+        changed.data.levels = CONFIG.DND5E.classLevelCap;
+      }
+      const newCharacterLevel = this.actor.data.data.details.level + (changed.data.levels - this.data.data.levels);
+      if ( newCharacterLevel > CONFIG.DND5E.levelCap ) {
+        ui.notifications.warn(game.i18n.format("DND5E.LevelCapExceededWarn", {cap: CONFIG.DND5E.levelCap}));
+        changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.levelCap);
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
 
