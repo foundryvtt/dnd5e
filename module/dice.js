@@ -1,5 +1,3 @@
-import D20Roll from "./dice/d20-roll.js";
-import DamageRoll from "./dice/damage-roll.js";
 export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 
@@ -116,7 +114,7 @@ export async function d20Roll({
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
 
   // Construct the D20Roll instance
-  const roll = new D20Roll(formula, data, {
+  const roll = new CONFIG.Dice.D20Roll(formula, data, {
     flavor: flavor || title,
     advantageMode,
     defaultRollMode,
@@ -160,9 +158,9 @@ export async function d20Roll({
  */
 function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  let advantageMode = D20Roll.ADV_MODE.NORMAL;
-  if ( advantage || event?.altKey ) advantageMode = D20Roll.ADV_MODE.ADVANTAGE;
-  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = D20Roll.ADV_MODE.DISADVANTAGE;
+  let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
+  if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
+  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
   return {isFF, advantageMode};
 }
 
@@ -212,7 +210,7 @@ export async function damageRoll({
   // Construct the DamageRoll instance
   const formula = parts.join(" + ");
   const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
-  const roll = new DamageRoll(formula, data, {
+  const roll = new CONFIG.Dice.DamageRoll(formula, data, {
     flavor: flavor || title,
     critical: isCritical,
     criticalBonusDice,
