@@ -1062,6 +1062,7 @@ DND5E.conditionTypes = {
  * @enum {string}
  */
 DND5E.languages = {
+<<<<<<< HEAD
   common: "DND5E.LanguagesCommon",
   aarakocra: "DND5E.LanguagesAarakocra",
   abyssal: "DND5E.LanguagesAbyssal",
@@ -1088,6 +1089,20 @@ DND5E.languages = {
   cant: "DND5E.LanguagesThievesCant",
   undercommon: "DND5E.LanguagesUndercommon"
 };
+
+/**
+ * Maximum allowed character level.
+ *
+ * @type {number}
+ */
+DND5E.levelCap = 20;
+
+/**
+ * Maximum allowed level of any individual class.
+ *
+ * @type {number}
+ */
+DND5E.classLevelCap = DND5E.levelCap;
 
 /**
  * XP required to achieve each character level.
