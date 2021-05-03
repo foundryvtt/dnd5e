@@ -558,8 +558,8 @@ export default class Actor5e extends Actor {
     }
 
     // Look up the number of slots per level from the progression table
-    const levels = Math.clamped(progression.slot, 0, 20);
-    const slots = DND5E.SPELL_SLOT_TABLE[levels - 1] || [];
+    const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.levelCap);
+    const slots = DND5E.SPELL_SLOT_TABLE[Math.min(levels, DND5E.SPELL_SLOT_TABLE.length) - 1] || [];
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
       if ( Number.isNaN(i) ) continue;
@@ -569,7 +569,7 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the Actor's pact magic level (if any)
-    let pl = Math.clamped(progression.pact, 0, 20);
+    let pl = Math.clamped(progression.pact, 0, CONFIG.DND5E.levelCap);
     spells.pact = spells.pact || {};
     if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = actorData.data.details.spellLevel;
 

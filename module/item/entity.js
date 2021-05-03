@@ -180,7 +180,7 @@ export default class Item5e extends Item {
 
     // Classes
     if ( itemData.type === "class" ) {
-      data.levels = Math.clamped(data.levels, 1, 20);
+      data.levels = Math.clamped(data.levels, 1, CONFIG.DND5E.classLevelCap);
     }
 
     // Spell Level,  School, and Components
