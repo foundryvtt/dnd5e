@@ -316,29 +316,24 @@ export default class ItemSheet5e extends ItemSheet {
   _onConfigureTraits(event) {
     event.preventDefault();
     const a = event.currentTarget;
-    const label = a.parentElement;
-
-    let options = {
+    const options = {
       name: a.dataset.target,
-      title: label.innerText,
+      title: a.parentElement.innerText,
       choices: [],
       allowCustom: false
     };
-
     switch(a.dataset.options) {
       case 'saves':
         options.choices = CONFIG.DND5E.abilities;
+        options.valueKey = null;
         break;
       case 'skills':
         const skills = this.item.data.data.skills;
         const choiceSet = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
         options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(skill => choiceSet.includes(skill[0])));
-        options.allowCustom = true;
-        options.minimum = skills.number;
         options.maximum = skills.number;
         break;
     }
-
     new TraitSelector(this.item, options).render(true);
   }
 

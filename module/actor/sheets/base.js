@@ -72,42 +72,46 @@ export default class ActorSheet5e extends ActorSheet {
       rollData: this.actor.getRollData.bind(this.actor)
     };
 
-    // The Actor and its Items
-    data.actor = foundry.utils.deepClone(this.actor.data);
-    data.items = this.actor.items.map(i => {
-      i.data.labels = i.labels;
-      return i.data;
-    });
+    // The Actor's data
+    const actorData = this.actor.data.toObject(false);
+    data.actor = actorData;
+    data.data = actorData.data;
+
+    // Owned Items
+    data.items = actorData.items;
+    for ( let i of data.items ) {
+      const item = this.actor.items.get(i._id);
+      i.labels = item.labels;
+    }
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-    data.data = data.actor.data;
+
+    // Labels and filters
     data.labels = this.actor.labels || {};
     data.filters = this._filters;
 
     // Ability Scores
-    for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
+    for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
     }
 
     // Skills
-    if (data.actor.data.skills) {
-      for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
-        skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
-        skl.icon = this._getProficiencyIcon(skl.value);
-        skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
-        skl.label = CONFIG.DND5E.skills[s];
-      }
+    for ( let [s, skl] of Object.entries(actorData.data.skills)) {
+      skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
+      skl.icon = this._getProficiencyIcon(skl.value);
+      skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
+      skl.label = CONFIG.DND5E.skills[s];
     }
 
     // Movement speeds
-    data.movement = this._getMovementSpeed(data.actor);
+    data.movement = this._getMovementSpeed(actorData);
 
     // Senses
-    data.senses = this._getSenses(data.actor);
+    data.senses = this._getSenses(actorData);
 
     // Update traits
-    this._prepareTraits(data.actor.data.traits);
+    this._prepareTraits(actorData.data.traits);
 
     // Prepare owned items
     this._prepareItems(data);
