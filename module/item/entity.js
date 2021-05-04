@@ -1338,12 +1338,13 @@ export default class Item5e extends Item {
     const isNPC = this.parent.type === "npc";
     switch (data.type) {
       case "class":
+        if (options.skipApplyFeatures) return;
         const features = await this.parent.getClassFeatures({
           className: this.name,
           subclassName: this.data.data.subclass,
           level: this.data.data.levels
         });
-        return this.parent.addEmbeddedItems(features);
+        return this.parent.addEmbeddedItems(features, !options.skipLevelupPrompt);
       case "equipment":
         return this._onCreateOwnedEquipment(data, actorData, isNPC);
       case "weapon":
