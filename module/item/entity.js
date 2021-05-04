@@ -659,7 +659,7 @@ export default class Item5e extends Item {
    */
   async displayCard({rollMode, createMessage=true}={}) {
 
-    // Basic template rendering data
+    // Render the chat card template
     const token = this.actor.token;
     const templateData = {
       actor: this.actor,
@@ -673,13 +673,10 @@ export default class Item5e extends Item {
       isVersatile: this.isVersatile,
       isSpell: this.data.type === "spell",
       hasSave: this.hasSave,
-      hasAreaTarget: this.hasAreaTarget
+      hasAreaTarget: this.hasAreaTarget,
+      isTool: this.data.type === "tool"
     };
-
-    // Render the chat card template
-    const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
-    const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
-    const html = await renderTemplate(template, templateData);
+    const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.html", templateData);
 
     // Create the ChatMessage data object
     const chatData = {
@@ -1156,7 +1153,6 @@ export default class Item5e extends Item {
     const rollConfig = mergeObject({
       parts: parts,
       data: rollData,
-      template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: title,
@@ -1165,6 +1161,7 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
       },
+      chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
       reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
       messageData: {"flags.dnd5e.roll": {type: "tool", itemId: this.id }}

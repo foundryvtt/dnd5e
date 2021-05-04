@@ -86,6 +86,7 @@ function _isUnsupportedTerm(term) {
  * @param {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
  * @param {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
 
+ * @param {boolean} [chooseModifier=false] Choose the ability modifier that should be used when the roll is made
  * @param {boolean} [fastForward=false] Allow fast-forward advantage selection
  * @param {Event} [event]             The triggering event which initiated the roll
  * @param {string} [rollMode]         A specific roll mode to apply as the default for the resulting roll
@@ -104,7 +105,7 @@ function _isUnsupportedTerm(term) {
 export async function d20Roll({
   parts=[], data={}, // Roll creation
   advantage, disadvantage, fumble=1, critical=20, targetValue, elvenAccuracy, halflingLucky, reliableTalent, // Roll customization
-  fastForward=false, event, template, title, dialogOptions, // Dialog configuration
+  chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
   chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
   }={}) {
 
@@ -112,6 +113,7 @@ export async function d20Roll({
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
+  if ( chooseModifier && !isFF ) data["mod"] = "@mod";
 
   // Construct the D20Roll instance
   const roll = new CONFIG.Dice.D20Roll(formula, data, {
@@ -130,6 +132,7 @@ export async function d20Roll({
   if ( !isFF ) {
     const configured = await roll.configureDialog({
       title,
+      chooseModifier,
       defaultRollMode: defaultRollMode,
       defaultAction: advantageMode,
       defaultAbility: data?.item?.ability,
