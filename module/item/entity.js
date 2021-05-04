@@ -1359,6 +1359,9 @@ export default class Item5e extends Item {
       case "spell":
         updates = this._onCreateOwnedSpell(data, actorData, isNPC);
         break;
+      case "tool":
+        updates = this._onCreateOwnedTool(data, actorData, isNPC);
+        break;
     }
     if (updates) return this.data.update(updates);
   }
@@ -1465,6 +1468,25 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Pre-creation logic for the automatic configuration of owned tool type Items.
+   * @private
+   */
+  _onCreateOwnedTool(data, actorData, isNPC) {
+    const updates = {};
+    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
+      if ( isNPC ) {
+        updates["data.proficient"] = 1;   /// NPCs automatically have tool proficiency
+      } else {
+        const actorToolProfs = actorData.data.traits?.toolProf?.value;
+        updates["data.proficient"] = (actorToolProfs.includes(data.data?.toolType) || actorToolProfs.includes(data.data?.baseTool));
+      }
+    }
+    foundry.utils.mergeObject(data, updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Pre-creation logic for the automatic configuration of owned weapon type Items
    * @private
    */
@@ -1479,7 +1501,7 @@ export default class Item5e extends Item {
       } else {
         const weaponProf = CONFIG.DND5E.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
         const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
-        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf) || actorWeaponProfs.includes(data.data?.baseWeapon);
       }
     }
     return updates;
