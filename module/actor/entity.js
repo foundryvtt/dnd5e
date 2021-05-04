@@ -137,6 +137,12 @@ export default class Actor5e extends Actor {
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.prof + init.bonus;
 
+    // Cache labels
+    this.labels = {};
+    if ( this.type === "npc" ) {
+      this.labels["creatureType"] = this.constructor.formatCreatureType(data.details.type);
+    }
+
     // Prepare spell-casting data
     data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
@@ -1550,6 +1556,7 @@ export default class Actor5e extends Actor {
    * @returns {string}
    */
   static formatCreatureType(typeData) {
+    if ( typeof typeData === "string" ) return typeData; // backwards compatibility
     let localizedType;
     if ( typeData.value === "custom" ) {
       localizedType = typeData.custom;

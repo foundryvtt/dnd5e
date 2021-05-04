@@ -80,22 +80,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Creature Type
-    data.labels["type"] = this._getType(data.actor.data);
+    data.labels["type"] = this.actor.labels.creatureType;
     return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare the NPC type formatted as a string.
-   * @param {object} actorData                The Actor data being prepared.
-   * @returns {string}
-   * @private
-   */
-  _getType(actorData) {
-    let attr = actorData.details.type;
-    if ( typeof attr === "string" ) return attr;
-    return Actor5e.formatCreatureType(attr) || game.i18n.localize("DND5E.Type");
   }
 
   /* -------------------------------------------- */
