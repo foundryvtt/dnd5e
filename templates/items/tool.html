@@ -50,6 +50,13 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label>{{ localize "DND5E.ItemToolBase" }}</label>
+                <select name="data.baseTool">
+                    {{selectOptions baseItems selected=data.baseTool blank=""}}
+                </select>
+            </div>
+
             {{!-- Tool Proficiency --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolProficiency" }}</label>
