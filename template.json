@@ -553,6 +553,7 @@
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
       "toolType": "",
+      "baseTool": "",
       "ability": "int",
       "chatFlavor": "",
       "proficient": 0
@@ -587,6 +588,7 @@
     "weapon": {
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
+      "baseWeapon": "",
       "properties": {},
       "proficient": true
     }
