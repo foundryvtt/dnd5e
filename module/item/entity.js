@@ -1333,13 +1333,6 @@ export default class Item5e extends Item {
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
     switch (data.type) {
-      case "class":
-        const features = await this.parent.getClassFeatures({
-          className: this.name,
-          subclassName: this.data.data.subclass,
-          level: this.data.data.levels
-        });
-        return this.parent.addEmbeddedItems(features);
       case "equipment":
         return this._onCreateOwnedEquipment(data, actorData, isNPC);
       case "weapon":
@@ -1359,6 +1352,14 @@ export default class Item5e extends Item {
     if ( this.parent && (this.type === "class") && (userId === game.user.id) )  {
       const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
       if ( !pc ) this.parent._assignPrimaryClass();
+
+      const features = this.parent.getClassFeatures({
+        className: this.name,
+        subclassName: this.data.data.subclass,
+        level: this.data.data.levels,
+        added: true
+      });
+      return this.parent.addEmbeddedItems(features);
     }
   }
 
