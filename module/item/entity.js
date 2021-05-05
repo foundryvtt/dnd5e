@@ -243,8 +243,8 @@ export default class Item5e extends Item {
   _prepareProficiencies(profs={}) {
     const map = {
       "armor": CONFIG.DND5E.armorProficiencies,
-      "weapons": CONFIG.DND5E.weaponProficiencies,
-      "tools": CONFIG.DND5E.toolProficiencies,
+      "weapon": CONFIG.DND5E.weaponProficiencies,
+      "tool": CONFIG.DND5E.toolProficiencies,
       "saves": CONFIG.DND5E.abilities,
       "skills": CONFIG.DND5E.skills
     };

@@ -122,14 +122,14 @@
                 <label>
                     {{ localize "DND5E.ItemTypeWeaponPl" }}
                     {{#if editable}}
-                    <a class="trait-selector class-weapon" data-target="data.proficiencies.weapons" data-options="weapons">
+                    <a class="trait-selector class-weapon" data-target="data.proficiencies.weapon" data-options="weapon">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.proficiencies.weapons.selected as |v k|}}
+                        {{#each data.proficiencies.weapon.selected as |v k|}}
                             <li class="tag {{k}}">{{v}}</li>
                         {{/each}}
                     </ul>
@@ -140,14 +140,14 @@
                 <label>
                     {{ localize "DND5E.ItemTypeToolPl" }}
                     {{#if editable}}
-                    <a class="trait-selector class-tool" data-target="data.proficiencies.tools" data-options="tools">
+                    <a class="trait-selector class-tool" data-target="data.proficiencies.tool" data-options="tool">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.proficiencies.tools.selected as |v k|}}
+                        {{#each data.proficiencies.tool.selected as |v k|}}
                             <li class="tag {{k}}">{{v}}</li>
                         {{/each}}
                     </ul>

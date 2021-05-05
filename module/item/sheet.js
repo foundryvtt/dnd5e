@@ -326,10 +326,10 @@ export default class ItemSheet5e extends ItemSheet {
       case 'armor':
         options.choices = CONFIG.DND5E.armorProficiencies;
         break;
-      case 'weapons':
+      case 'weapon':
         options.choices = CONFIG.DND5E.weaponProficiencies;
         break;
-      case 'tools':
+      case 'tool':
         options.choices = CONFIG.DND5E.toolProficiencies;
         break;
       case 'saves':
