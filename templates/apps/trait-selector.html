@@ -6,6 +6,18 @@
                 <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.chosen}}>
                 {{choice.label}}
             </label>
+            {{#if choice.children}}
+            <ol class="trait-list children">
+                {{#each choice.children as |child key|}}
+                <li>
+                    <label class="checkbox">
+                        <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked child.chosen}}/>
+                        {{child.label}}
+                    </label>
+                </li>
+                {{/each}}
+            </ol>
+            {{/if}}
         </li>
         {{/each}}
     </ol>

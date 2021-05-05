@@ -1,5 +1,6 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
+import ProficiencySelector from "../../apps/proficiency-selector.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
@@ -419,6 +420,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
       // Trait Selector
+      html.find('.proficiency-selector').click(this._onProficiencySelector.bind(this));
       html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
@@ -858,6 +860,21 @@ export default class ActorSheet5e extends ActorSheet {
     if ( set.has(filter) ) set.delete(filter);
     else set.add(filter);
     return this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool profociencies.
+   * @param {Event} event  The click event which originated the selection
+   * @private
+   */
+  _onProficiencySelector(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const label = a.parentElement.querySelector("label");
+    const options = { name: a.dataset.target, title: label.innerText, type: a.dataset.type };
+    return new ProficiencySelector(this.actor, options).render(true);
   }
 
   /* -------------------------------------------- */
