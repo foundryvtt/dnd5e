@@ -191,12 +191,13 @@ export default class Actor5e extends Actor {
   /**
    * Given a list of items to add to the Actor, optionally prompt the 
    * user for which they would like to add.
+   *
    * @param {Array.<Item5e>} items - The items being added to the Actor.
    * @param {number} [prompt=true] - Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
    */
   async addEmbeddedItems(items, prompt = true) {
-    let itemsToAdd = items;
+    let itemsToAdd = await items;
     if (prompt && !!itemsToAdd.length) {
       let itemIdsToAdd = await SelectItemsPrompt.create(itemsToAdd, {
           hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
@@ -214,13 +215,19 @@ export default class Actor5e extends Actor {
   /**
    * Get a list of features to add to the Actor when a class item is updated.
    * Optionally prompt the user for which they would like to add.
+   *
+   * @param {object} [info] - Class info needed to determine which items to return.
+   * @param {string} info.className - Name of the class.
+   * @param {string} info.subclassName - Name of the selected subclass.
+   * @param {number} info.level - Current level of the class.
+   * @param {boolean} [info.added=false] - Whether this class is new or just updated.
    */
-   async getClassFeatures({className, subclassName, level}={}) {
+   async getClassFeatures({className, subclassName, level, added=false}={}) {
     const current = this.itemTypes.class.find(c => c.name === className);
     const priorLevel = current ? current.data.data.levels : 0;
 
     // Did the class change?
-    let changed = false;
+    let changed = added;
     if ( level && (level > priorLevel) ) changed = true;
     if ( subclassName && (subclassName !== current?.data.data.subclass )) changed = true;
 
