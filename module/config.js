@@ -466,19 +466,22 @@ DND5E.movementUnits = {
 
 /**
  * The valid units of measure for the range of an action or effect.
- * This object automatically includes the movement units from DND5E.movementUnits
  * @type {Object<string,string>}
  */
-DND5E.distanceUnits = {
+DND5E.rangeUnits = {
   "none": "DND5E.None",
   "self": "DND5E.DistSelf",
   "touch": "DND5E.DistTouch",
   "spec": "DND5E.Special",
   "any": "DND5E.DistAny"
-};
-for ( let [k, v] of Object.entries(DND5E.movementUnits) ) {
-  DND5E.distanceUnits[k] = v;
 }
+
+/**
+ * The valid units of measure for the range of an action or effect.
+ * This object automatically includes the movement units from DND5E.movementUnits
+ * @type {Object<string,string>}
+ */
+DND5E.distanceUnits = { ...DND5E.movementUnits, ...DND5E.rangeUnits };
 
 /* -------------------------------------------- */
 
@@ -496,17 +499,24 @@ DND5E.encumbrance = {
 /* -------------------------------------------- */
 
 /**
- * This Object defines the types of single or area targets which can be applied
+ * This Object defines the types of single targets which can be applied
  * @type {Object}
  */
-DND5E.targetTypes = {
+DND5E.singleTargetTypes = {
   "none": "DND5E.None",
   "self": "DND5E.TargetSelf",
-  "creature": "DND5E.TargetCreature",
   "ally": "DND5E.TargetAlly",
+  "creature": "DND5E.TargetCreature",
   "enemy": "DND5E.TargetEnemy",
   "object": "DND5E.TargetObject",
-  "space": "DND5E.TargetSpace",
+  "space": "DND5E.TargetSpace"
+}
+
+/**
+ * This Object defines the types of area targets which can be applied
+ * @type {Object}
+ */
+DND5E.areaTargetTypes = {
   "radius": "DND5E.TargetRadius",
   "sphere": "DND5E.TargetSphere",
   "cylinder": "DND5E.TargetCylinder",
@@ -516,6 +526,12 @@ DND5E.targetTypes = {
   "line": "DND5E.TargetLine",
   "wall": "DND5E.TargetWall"
 };
+
+/**
+ * This Object defines the types of single or area targets which can be applied
+ * @type {Object}
+ */
+DND5E.targetTypes = { ...DND5E.singleTargetTypes, ...DND5E.areaTargetTypes }
 
 
 /* -------------------------------------------- */

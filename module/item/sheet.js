@@ -62,6 +62,10 @@ export default class ItemSheet5e extends ItemSheet {
     data.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
     data.isLine = ["line", "wall"].includes(itemData.data.target?.type);
 
+    data.hasActivationType = !["", "none"].includes(data.item.data.activation?.type);
+    data.isNonScalerTarget = ["", "none", "self"].includes(data.item.data.target?.type);
+    data.isNonScalerDuration = ["", "inst", "perm"].includes(data.item.data.duration?.units);
+
     // Original maximum uses formula
     const sourceMax = foundry.utils.getProperty(this.item.data._source, "data.uses.max");
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
