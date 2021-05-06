@@ -29,7 +29,6 @@ export default class Actor5e extends Actor {
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
     if ( this.data.type !== "character" ) return this._classes = {};
-
     return this._classes = this.items.filter((item) => item.type === "class").reduce((obj, cls) => {
       obj[cls.name.slugify({strict: true})] = cls;
       return obj;
@@ -224,21 +223,9 @@ export default class Actor5e extends Actor {
    * Optionally prompt the user for which they would like to add.
    */
    async getClassFeatures({className, subclassName, level}={}) {
-    const current = this.itemTypes.class.find(c => c.name === className);
-    const priorLevel = current ? current.data.data.levels : 0;
-
-    // Did the class change?
-    let changed = false;
-    if ( level && (level > priorLevel) ) changed = true;
-    if ( subclassName && (subclassName !== current?.data.data.subclass )) changed = true;
-
-    // Get features to create
-    if ( changed ) {
-      const existing = new Set(this.items.map(i => i.name));
-      const features = await Actor5e.loadClassFeatures({className, subclassName, level});
-      return features.filter(f => !existing.has(f.name)) || [];
-    }
-    return [];
+    const existing = new Set(this.items.map(i => i.name));
+    const features = await Actor5e.loadClassFeatures({className, subclassName, level});
+    return features.filter(f => !existing.has(f.name)) || [];
   }
 
   /* -------------------------------------------- */
