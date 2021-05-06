@@ -37,9 +37,9 @@ export default class Item5e extends Item {
         const wt = itemData.weaponType;
 
         //Weapons using the spellcasting modifier
-        if( ["msak", "rsak"].includes(itemData.actionType)) {
-            return actorData.attributes.spellcasting || "int";
-          }
+        if ( ["msak", "rsak"].includes(itemData.actionType) ) {
+          return actorData.attributes.spellcasting || "int";
+        }
 
         // Finesse weapons - Str or Dex (PHB pg. 147)
         if (itemData.properties.fin === true) {
