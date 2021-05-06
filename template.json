@@ -401,7 +401,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "race", "class", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -553,6 +553,34 @@
       "ability": "int",
       "chatFlavor": "",
       "proficient": 0
+    },
+    "race": {
+      "templates": ["itemDescription"],
+      "type": ["humanoid"],
+      "size": {
+        "options": ["med"],
+        "value": "med"
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "abilityScores": {
+        "default": {},
+        "additional": [],
+        "value": {}
+      },
+      "languages": {
+        "default": ["common"],
+        "additional": 0,
+        "value": ["common"],
+        "custom": ""
+      }
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
