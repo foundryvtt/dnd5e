@@ -192,21 +192,29 @@ export default class Actor5e extends Actor {
    * Given a list of items to add to the Actor, optionally prompt the 
    * user for which they would like to add.
    * @param {Array.<Item5e>} items - The items being added to the Actor.
-   * @param {number} [prompt=true] - Whether or not to prompt the user.
+   * @param {boolean} [prompt=true] - Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
    */
-  async addEmbeddedItems(items, prompt = true) {
+  async addEmbeddedItems(items, prompt=true) {
     let itemsToAdd = items;
-    if (prompt && !!itemsToAdd.length) {
-      let itemIdsToAdd = await SelectItemsPrompt.create(itemsToAdd, {
-          hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
-        });
-      itemsToAdd = itemsToAdd.filter(item => itemIdsToAdd.includes(item.id));
-    }
-    if (itemsToAdd.length === 0) return;
+    if ( !items.length ) return [];
 
-    // create the selected items with this actor as parent
-    return Item5e.createDocuments(itemsToAdd.map(i => i.toJSON()), {parent: this});
+    // Obtain the array of item creation data
+    let toCreate = [];
+    if (prompt) {
+      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
+        hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
+      });
+      for (let item of items) {
+        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
+      }
+    } else {
+      toCreate = items.map(item => item.toObject());
+    }
+
+    // Create the requested items
+    if (itemsToAdd.length === 0) return [];
+    return Item5e.createDocuments(toCreate, {parent: this});
   }
 
   /* -------------------------------------------- */

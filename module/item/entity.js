@@ -1316,7 +1316,7 @@ export default class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @return {Array.<Actor>}      An Array of Actor entities, if any
+   * @return {Actor[]}            An Array of Actor entities, if any
    * @private
    */
   static _getChatCardTargets(card) {
@@ -1337,14 +1337,6 @@ export default class Item5e extends Item {
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
     switch (data.type) {
-      case "class":
-        if (options.applyFeatures === false) return;
-        const features = await this.parent.getClassFeatures({
-          className: this.name,
-          subclassName: this.data.data.subclass,
-          level: this.data.data.levels
-        });
-        return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
       case "equipment":
         return this._onCreateOwnedEquipment(data, actorData, isNPC);
       case "weapon":
@@ -1360,27 +1352,47 @@ export default class Item5e extends Item {
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
 
+    // The below options are only needed for character classes
+    if ( userId !== game.user.id ) return;
+    const isCharacterClass = this.parent && (this.parent.type !== "vehicle") && (this.type === "class");
+    if ( !isCharacterClass ) return;
+
     // Assign a new primary class
-    if ( this.parent && (this.type === "class") && (userId === game.user.id) )  {
-      const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
-      if ( !pc ) this.parent._assignPrimaryClass();
-    }
+    const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
+    if ( !pc ) this.parent._assignPrimaryClass();
+
+    // Prompt to add new class features
+    if (options.addFeatures === false) return;
+    this.parent.getClassFeatures({
+      className: this.name,
+      subclassName: this.data.data.subclass,
+      level: this.data.data.levels
+    }).then(features => {
+      return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
+    });
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async _preUpdate(changed, options, user) {
-    await super._preUpdate(changed, options, user);
-    if ( !this.isEmbedded || (this.parent.type === "vehicle") || (this.type !== "class") ) return;
-    if ( changed["name"] || (changed.data && Object.keys(changed.data).some(k => ["subclass", "levels"].includes(k))) ) {
-      const features = await this.parent.getClassFeatures({
-        className: changed.name || this.name,
-        subclassName: changed.data?.subclass || this.data.data.subclass,
-        level: changed.data?.levels || this.data.data.levels
-      });
-      return this.parent.addEmbeddedItems(features);
-    }
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+
+    // The below options are only needed for character classes
+    if ( userId !== game.user.id ) return;
+    const isCharacterClass = this.parent && (this.parent.type !== "vehicle") && (this.type === "class");
+    if ( !isCharacterClass ) return;
+
+    // Prompt to add new class features
+    const addFeatures = changed["name"] || (changed.data && ["subclass", "levels"].some(k => k in changed.data));
+    if ( !addFeatures || (options.addFeatures === false) ) return;
+    this.parent.getClassFeatures({
+      className: changed.name || this.name,
+      subclassName: changed.data?.subclass || this.data.data.subclass,
+      level: changed.data?.levels || this.data.data.levels
+    }).then(features => {
+      return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
+    });
   }
 
   /* -------------------------------------------- */
@@ -1405,11 +1417,11 @@ export default class Item5e extends Item {
   _onCreateOwnedEquipment(data, actorData, isNPC) {
     const updates = {};
     if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
-      updates["data.equipped"] = isNPC;       // NPCs automatically equip equipment
+      updates["data.equipped"] = isNPC;  // NPCs automatically equip equipment
     }
     if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
       if ( isNPC ) {
-        updates["data.proficient"] = true;    // NPCs automatically have equipment proficiency
+        updates["data.proficient"] = true;  // NPCs automatically have equipment proficiency
       } else {
         const armorProf = {
           "natural": true,
