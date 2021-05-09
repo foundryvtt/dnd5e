@@ -380,23 +380,20 @@ export default class Item5e extends Item {
    */
   prepareMaxUses() {
     const data = this.data.data;
-
     if (!data.uses?.max) return;
     let max = data.uses.max;
 
     // if this is an owned item and the max is not numeric, we need to calculate it
     if (this.isOwned && !Number.isNumeric(max)) {
       if (this.actor.data === undefined) return;
-
       try {
         max = Roll.replaceFormulaData(max, this.actor.getRollData(), {missing: 0, warn: true});
-        if ( Roll.MATH_PROXY.safeEval ) max = Roll.MATH_PROXY.safeEval(max);
+        max = Roll.safeEval(max);
       } catch(e) {
         console.error('Problem preparing Max uses for', this.data.name, e);
         return;
       }
     }
-
     data.uses.max = Number(max);
   }
 

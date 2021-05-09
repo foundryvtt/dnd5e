@@ -99,13 +99,13 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  toMessage(messageData={}, options) {
-    messageData.flavor = messageData.flavor || this.options.flavor;
+  async toMessage(messageData={}, options={}) {
 
     // Evaluate the roll now so we have the results available to determine whether reliable talent came into play
-    if ( !this._evaluated ) this.evaluate();
+    if ( !this._evaluated ) await this.evaluate({async: true});
 
     // Add appropriate advantage mode message flavor and dnd5e roll flags
+    messageData.flavor = messageData.flavor || this.options.flavor;
     if ( this.hasAdvantage ) messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
     else if ( this.hasDisadvantage ) messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
 
@@ -116,6 +116,9 @@ export default class D20Roll extends Roll {
       const label = `(${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
       if ( isRT ) d20.options.flavor = d20.options.flavor ? `${d20.options.flavor} (${label})` : label;
     }
+
+    // Record the preferred rollMode
+    options.rollMode = options.rollMode ?? this.options.rollMode;
     return super.toMessage(messageData, options);
   }
 
@@ -197,7 +200,7 @@ export default class D20Roll extends Roll {
     }
 
     // Customize the modifier
-    if ( form.ability.value ) {
+    if ( form.ability?.value ) {
       const abl = this.data.abilities[form.ability.value];
       this.terms.findSplice(t => t.term === "@mod", new NumericTerm({number: abl.mod}));
       this.options.flavor += ` (${CONFIG.DND5E.abilities[form.ability.value]})`;

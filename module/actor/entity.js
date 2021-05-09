@@ -668,15 +668,17 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: reliableTalent,
-      messageData: {"flags.dnd5e.roll": {type: "skill", skillId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "skill", skillId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -747,14 +749,16 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
       halflingLucky: feats.halflingLucky,
-      messageData: {"flags.dnd5e.roll": {type: "ability", abilityId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "ability", abilityId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -794,14 +798,16 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      messageData: {"flags.dnd5e.roll": {type: "save", abilityId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "save", abilityId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -824,7 +830,6 @@ export default class Actor5e extends Actor {
     // Evaluate a global saving throw bonus
     const parts = [];
     const data = {};
-    const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
@@ -833,23 +838,24 @@ export default class Actor5e extends Actor {
     }
 
     // Include a global actor ability save bonus
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = bonuses.save;
     }
 
     // Evaluate the roll
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
-      speaker: speaker,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10,
-      messageData: {"flags.dnd5e.roll": {type: "death"}}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "death"}
+      }
     });
-    rollData.speaker = speaker;
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
 
@@ -950,11 +956,13 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: rollData,
       title: title,
-      speaker: ChatMessage.getSpeaker({actor: this}),
       allowCritical: false,
       fastForward: !dialog,
       dialogOptions: {width: 350},
-      messageData: {"flags.dnd5e.roll": {type: "hitDie"}}
+      messageData: {
+        speaker: ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "hitDie"}
+      }
     });
     if ( !roll ) return null;
 
@@ -1134,7 +1142,6 @@ export default class Actor5e extends Actor {
       })
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
-
     return ChatMessage.create(chatData);
   }
 
