@@ -1095,14 +1095,14 @@ DND5E.languages = {
  *
  * @type {number}
  */
-DND5E.levelCap = 20;
+DND5E.maxCharacterLevel = 20;
 
 /**
  * Maximum allowed level of any individual class.
  *
  * @type {number}
  */
-DND5E.classLevelCap = DND5E.levelCap;
+DND5E.maxClassLevel = DND5E.maxCharacterLevel;
 
 /**
  * XP required to achieve each character level.

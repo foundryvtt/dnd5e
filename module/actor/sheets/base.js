@@ -965,8 +965,8 @@ export default class ActorSheet5e extends ActorSheet {
     const type = header.dataset.type;
 
     // Check to make sure the newly created class doesn't take player over level cap
-    if ( type === "class" && (this.actor.data.data.details.level + 1 > CONFIG.DND5E.levelCap) ) {
-      return ui.notifications.warn(game.i18n.format("DND5E.LevelCapExceededWarn", {cap: CONFIG.DND5E.levelCap}));
+    if ( type === "class" && (this.actor.data.data.details.level + 1 > CONFIG.DND5E.maxCharacterLevel) ) {
+      return ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxCharacterLevel}));
     }
 
     const itemData = {

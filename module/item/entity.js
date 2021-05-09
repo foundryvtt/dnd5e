@@ -180,7 +180,7 @@ export default class Item5e extends Item {
 
     // Classes
     if ( itemData.type === "class" ) {
-      data.levels = Math.clamped(data.levels, 1, CONFIG.DND5E.classLevelCap);
+      data.levels = Math.clamped(data.levels, 1, CONFIG.DND5E.maxClassLevel);
     }
 
     // Spell Level,  School, and Components
@@ -1531,14 +1531,14 @@ export default class Item5e extends Item {
     // Check to make sure the updated class level doesn't exceed either cap
     if ( this.type !== "class" ) return;
     if ( changed.data?.levels ) {
-      if ( changed.data.levels > CONFIG.DND5E.classLevelCap ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ClassLevelCapExceededWarn", {cap: CONFIG.DND5E.classLevelCap}));
-        changed.data.levels = CONFIG.DND5E.classLevelCap;
+      if ( changed.data.levels > CONFIG.DND5E.maxClassLevel ) {
+        ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxClassLevel}));
+        changed.data.levels = CONFIG.DND5E.maxClassLevel;
       }
       const newCharacterLevel = this.actor.data.data.details.level + (changed.data.levels - this.data.data.levels);
-      if ( newCharacterLevel > CONFIG.DND5E.levelCap ) {
-        ui.notifications.warn(game.i18n.format("DND5E.LevelCapExceededWarn", {cap: CONFIG.DND5E.levelCap}));
-        changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.levelCap);
+      if ( newCharacterLevel > CONFIG.DND5E.maxCharacterLevel ) {
+        ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxCharacterLevel}));
+        changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.maxCharacterLevel);
       }
     }
   }
