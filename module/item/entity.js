@@ -1535,6 +1535,7 @@ export default class Item5e extends Item {
         ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxClassLevel}));
         changed.data.levels = CONFIG.DND5E.maxClassLevel;
       }
+      if ( !this.isEmbedded || (this.parent.type !== "character") ) return;
       const newCharacterLevel = this.actor.data.data.details.level + (changed.data.levels - this.data.data.levels);
       if ( newCharacterLevel > CONFIG.DND5E.maxCharacterLevel ) {
         ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxCharacterLevel}));
