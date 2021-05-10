@@ -142,14 +142,14 @@ export async function d20Roll({
   }
 
   // Evaluate the configured roll
-  roll.evaluate();
+  await roll.evaluate({async: true});
 
   // Create a Chat Message
   if ( speaker ) {
     console.warn(`You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData`);
     messageData.speaker = speaker;
   }
-  if ( roll && chatMessage ) roll.toMessage(messageData, { rollMode: roll.options.rollMode });
+  if ( roll && chatMessage ) await roll.toMessage(messageData);
   return roll;
 }
 
@@ -235,14 +235,14 @@ export async function damageRoll({
   }
 
   // Evaluate the configured roll
-  roll.evaluate();
+  await roll.evaluate({async: true});
 
   // Create a Chat Message
   if ( speaker ) {
     console.warn(`You are passing the speaker argument to the damageRoll function directly which should instead be passed as an internal key of messageData`);
     messageData.speaker = speaker;
   }
-  if ( roll && chatMessage ) roll.toMessage(messageData, { rollMode: roll.options.rollMode });
+  if ( roll && chatMessage ) await roll.toMessage(messageData);
   return roll;
 }
 
@@ -254,6 +254,6 @@ export async function damageRoll({
  */
 function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  if ( event.altKey ) critical = true;
+  if ( event?.altKey ) critical = true;
   return {isFF, isCritical: critical};
 }

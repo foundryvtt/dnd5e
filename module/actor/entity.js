@@ -29,7 +29,6 @@ export default class Actor5e extends Actor {
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
     if ( this.data.type !== "character" ) return this._classes = {};
-
     return this._classes = this.items.filter((item) => item.type === "class").reduce((obj, cls) => {
       obj[cls.name.slugify({strict: true})] = cls;
       return obj;
@@ -192,21 +191,29 @@ export default class Actor5e extends Actor {
    * Given a list of items to add to the Actor, optionally prompt the 
    * user for which they would like to add.
    * @param {Array.<Item5e>} items - The items being added to the Actor.
-   * @param {number} [prompt=true] - Whether or not to prompt the user.
+   * @param {boolean} [prompt=true] - Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
    */
-  async addEmbeddedItems(items, prompt = true) {
+  async addEmbeddedItems(items, prompt=true) {
     let itemsToAdd = items;
-    if (prompt && !!itemsToAdd.length) {
-      let itemIdsToAdd = await SelectItemsPrompt.create(itemsToAdd, {
-          hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
-        });
-      itemsToAdd = itemsToAdd.filter(item => itemIdsToAdd.includes(item.id));
-    }
-    if (itemsToAdd.length === 0) return;
+    if ( !items.length ) return [];
 
-    // create the selected items with this actor as parent
-    return Item5e.createDocuments(itemsToAdd.map(i => i.toJSON()), {parent: this});
+    // Obtain the array of item creation data
+    let toCreate = [];
+    if (prompt) {
+      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
+        hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
+      });
+      for (let item of items) {
+        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
+      }
+    } else {
+      toCreate = items.map(item => item.toObject());
+    }
+
+    // Create the requested items
+    if (itemsToAdd.length === 0) return [];
+    return Item5e.createDocuments(toCreate, {parent: this});
   }
 
   /* -------------------------------------------- */
@@ -216,21 +223,9 @@ export default class Actor5e extends Actor {
    * Optionally prompt the user for which they would like to add.
    */
    async getClassFeatures({className, subclassName, level}={}) {
-    const current = this.itemTypes.class.find(c => c.name === className);
-    const priorLevel = current ? current.data.data.levels : 0;
-
-    // Did the class change?
-    let changed = false;
-    if ( level && (level > priorLevel) ) changed = true;
-    if ( subclassName && (subclassName !== current?.data.data.subclass )) changed = true;
-
-    // Get features to create
-    if ( changed ) {
-      const existing = new Set(this.items.map(i => i.name));
-      const features = await Actor5e.loadClassFeatures({className, subclassName, level});
-      return features.filter(f => !existing.has(f.name)) || [];
-    }
-    return [];
+    const existing = new Set(this.items.map(i => i.name));
+    const features = await Actor5e.loadClassFeatures({className, subclassName, level});
+    return features.filter(f => !existing.has(f.name)) || [];
   }
 
   /* -------------------------------------------- */
@@ -673,15 +668,17 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: reliableTalent,
-      messageData: {"flags.dnd5e.roll": {type: "skill", skillId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "skill", skillId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -752,14 +749,16 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
       halflingLucky: feats.halflingLucky,
-      messageData: {"flags.dnd5e.roll": {type: "ability", abilityId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "ability", abilityId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -799,14 +798,16 @@ export default class Actor5e extends Actor {
     }
 
     // Roll and return
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      messageData: {"flags.dnd5e.roll": {type: "save", abilityId }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "save", abilityId }
+      }
     });
-    rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
   }
 
@@ -829,7 +830,6 @@ export default class Actor5e extends Actor {
     // Evaluate a global saving throw bonus
     const parts = [];
     const data = {};
-    const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
@@ -838,23 +838,24 @@ export default class Actor5e extends Actor {
     }
 
     // Include a global actor ability save bonus
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = bonuses.save;
     }
 
     // Evaluate the roll
-    const rollData = mergeObject(options, {
+    const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
-      speaker: speaker,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10,
-      messageData: {"flags.dnd5e.roll": {type: "death"}}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "death"}
+      }
     });
-    rollData.speaker = speaker;
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
 
@@ -955,11 +956,13 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: rollData,
       title: title,
-      speaker: ChatMessage.getSpeaker({actor: this}),
       allowCritical: false,
       fastForward: !dialog,
       dialogOptions: {width: 350},
-      messageData: {"flags.dnd5e.roll": {type: "hitDie"}}
+      messageData: {
+        speaker: ChatMessage.getSpeaker({actor: this}),
+        "flags.dnd5e.roll": {type: "hitDie"}
+      }
     });
     if ( !roll ) return null;
 
@@ -1139,7 +1142,6 @@ export default class Actor5e extends Actor {
       })
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
-
     return ChatMessage.create(chatData);
   }
 

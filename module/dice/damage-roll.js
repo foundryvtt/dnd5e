@@ -89,12 +89,13 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  toMessage(messageData={}, options) {
+  toMessage(messageData={}, options={}) {
     messageData.flavor = messageData.flavor || this.options.flavor;
     if ( this.isCritical ) {
       const label = game.i18n.localize("DND5E.CriticalHit");
       messageData.flavor = messageData.flavor ? `${messageData.flavor} (${label})` : label;
     }
+    options.rollMode = options.rollMode ?? this.options.rollMode;
     return super.toMessage(messageData, options);
   }
 
