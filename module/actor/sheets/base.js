@@ -46,6 +46,16 @@ export default class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * List of item types that should be prevented from being dropped on this actor sheet.
+   * @type {String[]}
+   */
+  static get excludedItemTypes() {
+    return []
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
@@ -631,6 +641,14 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropItemCreate(itemData) {
+
+    // Check to make sure items of this type are allowed on this actor
+    if ( this.constructor.excludedItemTypes.includes(itemData.type) ) {
+      return ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
+        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+      }));
+    }
 
     // Create a Consumable spell scroll on the Inventory tab
     if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {

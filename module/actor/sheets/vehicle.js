@@ -20,6 +20,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get excludedItemTypes() {
+    return ["class"]
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Creates a new cargo entry for a vehicle Actor.
    */
