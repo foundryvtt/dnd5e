@@ -209,18 +209,18 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     let totalWeight = 0;
     for (const item of data.items) {
       this._prepareCrewedItem(item);
-      if ( (item.flags.dnd5e?.vehicleCargo === true) || (item.type === "loot") ) {
-        totalWeight += (item.data.weight || 0) * item.data.quantity;
-        cargo.cargo.items.push(item);
-      }
-      else if (item.type === 'weapon') features.weapons.items.push(item);
-      else if (item.type === 'equipment') features.equipment.items.push(item);
-      else if (item.type === 'feat') {
+      const isCargo = item.flags.dnd5e?.vehicleCargo === true;
+      if ( (item.type === 'weapon') && !isCargo ) features.weapons.items.push(item);
+      else if ( (item.type === 'equipment') && !isCargo ) features.equipment.items.push(item);
+      else if ( (item.type === 'feat') && !isCargo ) {
         if (!item.data.activation.type || item.data.activation.type === 'none') {
           features.passive.items.push(item);
         }
         else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
         else features.actions.items.push(item);
+      } else {
+        totalWeight += (item.data.weight || 0) * item.data.quantity;
+        cargo.cargo.items.push(item);
       }
     }
 
