@@ -212,7 +212,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
       if ( (item.type === 'weapon') && !isCargo ) features.weapons.items.push(item);
       else if ( (item.type === 'equipment') && !isCargo ) features.equipment.items.push(item);
-      else if ( (item.type === 'feat') && !isCargo ) {
+      else if ( (item.type === 'feat') ) {
         if (!item.data.activation.type || item.data.activation.type === 'none') {
           features.passive.items.push(item);
         }
@@ -355,10 +355,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /** @override */
   async _onDropItemCreate(itemData) {
     // If item is dropped onto the cargo page, add the vehicleCargo flag
-    if ( this._tabs[0].active === "cargo" ) {
-      foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", true);
-    }
-  
+    foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", this._tabs[0].active === "cargo");
+
     // Create the owned item as normal
     return super._onDropItemCreate(itemData);
   }
