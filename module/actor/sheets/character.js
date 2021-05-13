@@ -76,7 +76,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
 
       // Item details
-      item.img = item.img || DEFAULT_TOKEN;
+      item.img = item.img || CONST.DEFAULT_TOKEN;
       item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
       item.attunement = {
         [CONFIG.DND5E.attunementTypes.REQUIRED]: {

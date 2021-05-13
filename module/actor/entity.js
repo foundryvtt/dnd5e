@@ -143,7 +143,6 @@ export default class Actor5e extends Actor {
     }
 
     // Prepare spell-casting data
-    data.attributes.spelldc = data.attributes.spellcasting ? data.abilities[data.attributes.spellcasting].dc : 10;
     this._computeSpellcastingProgression(this.data);
   }
 
@@ -402,8 +401,13 @@ export default class Actor5e extends Actor {
    */
   _computeSpellcastingProgression (actorData) {
     if (actorData.type === 'vehicle') return;
-    const spells = actorData.data.spells;
+    const ad = actorData.data;
+    const spells = ad.spells;
     const isNPC = actorData.type === 'npc';
+
+    // Spellcasting DC
+    const spellcastingAbility = ad.abilities[ad.attributes.spellcasting];
+    ad.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + ad.attributes.prof;
 
     // Translate the list of classes into spell-casting progression
     const progression = {

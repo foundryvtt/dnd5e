@@ -35,7 +35,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Start by classifying items into groups for rendering
     let [spells, other] = data.items.reduce((arr, item) => {
-      item.img = item.img || DEFAULT_TOKEN;
+      item.img = item.img || CONST.DEFAULT_TOKEN;
       item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
