@@ -47,12 +47,10 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * List of item types that should be prevented from being dropped on this actor sheet.
-   * @type {String[]}
+   * A set of item types that should be prevented from being dropped on this type of actor sheet.
+   * @type {Set<string>}
    */
-  static get excludedItemTypes() {
-    return []
-  }
+  static unsupportedItemTypes = new Set();
 
   /* -------------------------------------------- */
 
@@ -643,7 +641,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onDropItemCreate(itemData) {
 
     // Check to make sure items of this type are allowed on this actor
-    if ( this.constructor.excludedItemTypes.includes(itemData.type) ) {
+    if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       return ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
         itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
         actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])

@@ -77,7 +77,7 @@
             {{#if section.columns}}
                 {{#each section.columns}}
                     <div class="item-detail {{css}}">
-                        {{#with (lookup item property)}}
+                        {{#with (getProperty item property)}}
                             {{#if ../editable}}
                                 <input type="text" value="{{this}}" placeholder="&mdash;"
                                        data-dtype="{{../editable}}" data-property="{{../property}}">
@@ -89,13 +89,13 @@
                 {{/each}}
             {{else}}
                 {{#if ../../isCharacter}}
-                    <div class="item-detail item-weight">
-                        {{#if item.totalWeight}}
-                            <div class="item-detail">
-                                {{ item.totalWeight }} {{localize "DND5E.AbbreviationLbs"}}
-                            </div>
-                        {{/if}}
-                    </div>
+                <div class="item-detail item-weight">
+                    {{#if item.totalWeight}}
+                        <div class="item-detail">
+                            {{ item.totalWeight }} {{localize "DND5E.AbbreviationLbs"}}
+                        </div>
+                    {{/if}}
+                </div>
                 {{/if}}
 
                 <div class="item-detail item-uses">

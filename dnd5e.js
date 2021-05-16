@@ -198,11 +198,9 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("canvasInit", function() {
-
   // Extend Diagonal Measurement
   canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
   SquareGrid.prototype.measureDistances = measureDistances;
-
 });
 
 
@@ -225,3 +223,8 @@ Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
+
+// FIXME: This helper is needed for the vehicle sheet. It should probably be refactored.
+Handlebars.registerHelper('getProperty', function (data, property) {
+  return getProperty(data, property);
+});

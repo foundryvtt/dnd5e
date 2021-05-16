@@ -21,9 +21,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  static get excludedItemTypes() {
-    return ["class"]
-  }
+  static unsupportedItemTypes = new Set(["class"]);
 
   /* -------------------------------------------- */
 
@@ -213,24 +211,39 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       }
     };
 
+    // Classify items owned by the vehicle and compute total cargo weight
     let totalWeight = 0;
     for (const item of data.items) {
       this._prepareCrewedItem(item);
+
+      // Handle cargo explicitly
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
-      if ( (item.type === 'weapon') && !isCargo ) features.weapons.items.push(item);
-      else if ( (item.type === 'equipment') && !isCargo ) features.equipment.items.push(item);
-      else if ( (item.type === 'feat') ) {
-        if (!item.data.activation.type || item.data.activation.type === 'none') {
-          features.passive.items.push(item);
-        }
-        else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
-        else features.actions.items.push(item);
-      } else {
+      if ( isCargo ) {
         totalWeight += (item.data.weight || 0) * item.data.quantity;
         cargo.cargo.items.push(item);
+        continue;
+      }
+
+      // Handle non-cargo item types
+      switch ( item.type ) {
+        case "weapon":
+          features.weapons.items.push(item);
+          break;
+        case "equipment":
+          features.equipment.items.push(item);
+          break;
+        case "feat":
+          if ( !item.data.activation.type || (item.data.activation.type === "none") ) features.passive.items.push(item);
+          else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
+          else features.actions.items.push(item);
+          break;
+        default:
+          totalWeight += (item.data.weight || 0) * item.data.quantity;
+          cargo.cargo.items.push(item);
       }
     }
 
+    // Update the rendering context data
     data.features = Object.values(features);
     data.cargo = Object.values(cargo);
     data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
@@ -353,7 +366,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
       return this.actor.update({[`data.cargo.${type}`]: cargo});
     }
-
     return super._onItemDelete(event);
   }
 
@@ -361,10 +373,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /** @override */
   async _onDropItemCreate(itemData) {
-    // If item is dropped onto the cargo page, add the vehicleCargo flag
-    foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", this._tabs[0].active === "cargo");
-
-    // Create the owned item as normal
+    foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", true, this._tabs[0].active === "cargo");
     return super._onDropItemCreate(itemData);
   }
 

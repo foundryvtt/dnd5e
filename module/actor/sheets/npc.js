@@ -20,9 +20,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  static get excludedItemTypes() {
-    return ["class"]
-  }
+  static unsupportedItemTypes = new Set(["class"]);
 
   /* -------------------------------------------- */
 
