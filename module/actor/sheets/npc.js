@@ -19,6 +19,13 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get excludedItemTypes() {
+    return ["class"]
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Organize Owned Items for rendering the NPC sheet
    * @private
