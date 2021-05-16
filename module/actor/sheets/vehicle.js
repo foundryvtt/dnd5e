@@ -20,6 +20,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get excludedItemTypes() {
+    return ["class"]
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Creates a new cargo entry for a vehicle Actor.
    */
@@ -209,18 +216,18 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     let totalWeight = 0;
     for (const item of data.items) {
       this._prepareCrewedItem(item);
-      if (item.type === 'weapon') features.weapons.items.push(item);
-      else if (item.type === 'equipment') features.equipment.items.push(item);
-      else if (item.type === 'loot') {
-        totalWeight += (item.data.weight || 0) * item.data.quantity;
-        cargo.cargo.items.push(item);
-      }
-      else if (item.type === 'feat') {
+      const isCargo = item.flags.dnd5e?.vehicleCargo === true;
+      if ( (item.type === 'weapon') && !isCargo ) features.weapons.items.push(item);
+      else if ( (item.type === 'equipment') && !isCargo ) features.equipment.items.push(item);
+      else if ( (item.type === 'feat') ) {
         if (!item.data.activation.type || item.data.activation.type === 'none') {
           features.passive.items.push(item);
         }
         else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
         else features.actions.items.push(item);
+      } else {
+        totalWeight += (item.data.weight || 0) * item.data.quantity;
+        cargo.cargo.items.push(item);
       }
     }
 
@@ -348,6 +355,17 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     }
 
     return super._onItemDelete(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(itemData) {
+    // If item is dropped onto the cargo page, add the vehicleCargo flag
+    foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", this._tabs[0].active === "cargo");
+
+    // Create the owned item as normal
+    return super._onDropItemCreate(itemData);
   }
 
   /* -------------------------------------------- */
