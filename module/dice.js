@@ -41,10 +41,11 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
   const constantFormula = Roll.getFormula(constantTerms);  // Cleans up the constant terms and produces a new formula string
   const rollableFormula = Roll.getFormula(rollableTerms);  // Cleans up the non-constant terms and produces a new formula string
 
-  const constantPart = Roll.safeEval(constantFormula);     // Mathematically evaluate the constant formula to produce a single constant term
+  // Mathematically evaluate the constant formula to produce a single constant term
+  const constantPart = constantFormula ? Roll.safeEval(constantFormula) : undefined;
 
-  const parts = constantFirst ? // Order the rollable and constant terms, either constant first or second depending on the optional argumen
-    [constantPart, rollableFormula] : [rollableFormula, constantPart];
+  // Order the rollable and constant terms, either constant first or second depending on the optional argument
+  const parts = constantFirst ? [constantPart, rollableFormula] : [rollableFormula, constantPart];
 
   // Join the parts with a + sign, pass them to `Roll` once again to clean up the formula
   return new Roll(parts.filterJoin(" + ")).formula;
