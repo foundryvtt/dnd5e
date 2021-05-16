@@ -178,11 +178,6 @@ export default class Item5e extends Item {
     const C = CONFIG.DND5E;
     const labels = this.labels = {};
 
-    // Classes
-    if ( itemData.type === "class" ) {
-      data.levels = Math.clamped(data.levels, 1, CONFIG.DND5E.maxClassLevel);
-    }
-
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
       data.preparation.mode = data.preparation.mode || "prepared";
