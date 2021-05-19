@@ -42,7 +42,14 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
   const rollableFormula = Roll.getFormula(rollableTerms);  // Cleans up the non-constant terms and produces a new formula string
 
   // Mathematically evaluate the constant formula to produce a single constant term
-  const constantPart = constantFormula ? Roll.safeEval(constantFormula) : undefined;
+  let constantPart = undefined;
+  if ( constantFormula ) {
+    try {
+      constantPart = Roll.safeEval(constantFormula)
+    } catch (err) {
+      console.warn(`Unable to evaluate constant term ${constantFormula} in simplifyRollFormula`);
+    }
+  }
 
   // Order the rollable and constant terms, either constant first or second depending on the optional argument
   const parts = constantFirst ? [constantPart, rollableFormula] : [rollableFormula, constantPart];
