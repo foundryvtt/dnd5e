@@ -60,7 +60,6 @@ export default class Actor5e extends Actor {
    * @return {string}
    */
   static proficiencyModifier(proficient, value, roundDown=true) {
-
     // Flat proficiency
     if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
       const round = roundDown ? Math.floor : Math.ceil;
@@ -70,8 +69,8 @@ export default class Actor5e extends Actor {
     // Proficiency dice
     else {
       if ( proficient == 0.5 ) {
-        const drop = roundDown ? 'kl' : 'kh';
-        return `2d${value}${drop}`;
+        const round = roundDown ? 'floor' : 'ceil';
+        return `${round}(1d${value * 2} / 2)`;
       } else {
         return `${proficient}d${value * 2}`;
       }
