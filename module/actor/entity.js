@@ -820,6 +820,19 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Determine whether the provided ability is usable for remarkable athlete.
+   *
+   * @param {string} ability  Ability type to check.
+   * @return {boolean}        Whether the actor has the remarkable athlete flag and the ability is physical.
+   * @private
+   */
+  _isRemarkableAthlete(ability) {
+    return this.getFlag("dnd5e", "remarkableAthlete") && DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
@@ -838,7 +851,7 @@ export default class Actor5e extends Actor {
     // Include proficiency bonus
     if ( skl.prof > 0 ) {
       parts.push("@prof");
-      data.prof = Actor5e.proficiencyModifier(skl.proficient, this.data.data.attributes.prof);
+      data.prof = Actor5e.proficiencyModifier(skl.proficient, this.data.data.attributes.prof, !this._isRemarkableAthlete(skl.ability));
     }
 
     // Ability test bonus
@@ -935,13 +948,9 @@ export default class Actor5e extends Actor {
 
     // Add feat-related proficiency bonuses
     const feats = this.data.flags.dnd5e || {};
-    if ( feats.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
+    if ( feats.jackOfAllTrades || this._isRemarkableAthlete(abilityId) ) {
       parts.push("@prof");
-      data.prof = Actor5e.proficiencyModifier(0.5, this.data.data.attributes.prof, false);
-    }
-    else if ( feats.jackOfAllTrades ) {
-      parts.push("@prof");
-      data.prof = Actor5e.proficiencyModifier(0.5, this.data.data.attributes.prof);
+      data.prof = Actor5e.proficiencyModifier(0.5, this.data.data.attributes.prof, !this._isRemarkableAthlete(abilityId));
     }
 
     // Add ability-specific check bonus
