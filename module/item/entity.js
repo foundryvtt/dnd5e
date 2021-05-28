@@ -1214,9 +1214,10 @@ export default class Item5e extends Item {
     }
 
     // Include a proficiency score
-    if ( "proficient" in rollData.item ) {
-      const prof = typeof rollData.item.proficient === "boolean" ? ( rollData.item.proficient ? 1 : 0 ) : rollData.item.proficient;
-      if ( prof && rollData.attributes.prof ) rollData["prof"] = Actor5e.proficiencyModifier(prof, rollData.attributes.prof);
+    const proficient = getProperty(rollData, "item.proficient") ?? ["msak", "rsak"].includes(rollData.item.actionType);
+    const prof = typeof proficient === "boolean" ? ( proficient ? 1 : 0 ) : proficient;
+    if ( prof && rollData.attributes.prof ) {
+      rollData["prof"] = Actor5e.proficiencyModifier(prof, rollData.attributes.prof);
     }
 
     return rollData;
