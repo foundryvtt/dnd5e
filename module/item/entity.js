@@ -1338,14 +1338,19 @@ export default class Item5e extends Item {
     if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
+    let updates;
     switch (data.type) {
       case "equipment":
-        return this._onCreateOwnedEquipment(data, actorData, isNPC);
+        updates = this._onCreateOwnedEquipment(data, actorData, isNPC);
+        break;
       case "weapon":
-        return this._onCreateOwnedWeapon(data, actorData, isNPC);
+        updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
+        break;
       case "spell":
-        return this._onCreateOwnedSpell(data, actorData, isNPC);
+        updates = this._onCreateOwnedSpell(data, actorData, isNPC);
+        break;
     }
+    if (updates) return this.data.update(updates);
   }
 
   /* -------------------------------------------- */
@@ -1437,7 +1442,7 @@ export default class Item5e extends Item {
         updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf);
       }
     }
-    foundry.utils.mergeObject(data, updates);
+    return updates;
   }
 
   /* -------------------------------------------- */
@@ -1451,7 +1456,7 @@ export default class Item5e extends Item {
     if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
       updates["data.prepared"] = isNPC;       // NPCs automatically prepare spells
     }
-    foundry.utils.mergeObject(data, updates);
+    return updates;
   }
 
   /* -------------------------------------------- */
@@ -1480,7 +1485,7 @@ export default class Item5e extends Item {
         updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
       }
     }
-    foundry.utils.mergeObject(data, updates);
+    return updates;
   }
 
   /* -------------------------------------------- */
