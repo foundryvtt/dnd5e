@@ -60,20 +60,20 @@ export default class Actor5e extends Actor {
    * @return {string}
    */
   static proficiencyModifier(proficient, value, roundDown=true) {
-    // Flat proficiency
-    if ( game.settings.get("dnd5e", "proficiencyModifier") === "bonus" ) {
-      const round = roundDown ? Math.floor : Math.ceil;
-      return round(proficient * value);
-    }
-
     // Proficiency dice
-    else {
+    if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
       if ( proficient == 0.5 ) {
         const round = roundDown ? 'floor' : 'ceil';
         return `${round}(1d${value * 2} / 2)`;
       } else {
         return `${proficient}d${value * 2}`;
       }
+    }
+
+    // Flat proficiency
+    else {
+      const round = roundDown ? Math.floor : Math.ceil;
+      return round(proficient * value);
     }
   }
 
