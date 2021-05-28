@@ -469,7 +469,7 @@ export default class Item5e extends Item {
 
     // Commit pending data updates
     if ( !foundry.utils.isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( consumeQuantity && (id.quantity === 0) ) await item.delete();
+    if ( consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
     if ( !foundry.utils.isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
     if ( !foundry.utils.isObjectEmpty(resourceUpdates) ) {
       const resource = actor.items.get(id.consume?.target);
