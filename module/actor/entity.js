@@ -62,7 +62,7 @@ export default class Actor5e extends Actor {
   static proficiencyModifier(proficient, value, roundDown=true) {
     // Proficiency dice
     if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
-      if ( proficient == 0.5 ) {
+      if ( proficient === 0.5 ) {
         const round = roundDown ? 'floor' : 'ceil';
         return `${round}(1d${value * 2} / 2)`;
       } else {
