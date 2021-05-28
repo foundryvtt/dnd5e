@@ -60,6 +60,8 @@ export default class Actor5e extends Actor {
    * @return {string}
    */
   static proficiencyModifier(proficient, value, roundDown=true) {
+    if ( !proficient || !value ) return 0;
+
     // Proficiency dice
     if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
       if ( proficient === 0.5 ) {
