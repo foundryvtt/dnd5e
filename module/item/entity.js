@@ -269,7 +269,7 @@ export default class Item5e extends Item {
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
-    if ( !this.hasAttack || !itemData || !this.isOwned ) return [];
+    if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
 
     const rollData = this.getRollData();
 
