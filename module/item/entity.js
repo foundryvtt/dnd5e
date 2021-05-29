@@ -1236,7 +1236,7 @@ export default class Item5e extends Item {
 
     // Get the Item from stored flag data or by the item ID on the Actor
     const storedData = message.getFlag("dnd5e", "itemData");
-    const item = storedData ? new this.constructor(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
+    const item = storedData ? new Item5e(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
     if ( !item ) {
       return ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name}))
     }
