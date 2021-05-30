@@ -175,8 +175,8 @@ export default class Actor5e extends Actor {
     const athlete = flags.remarkableAthlete;
     const joat = flags.jackOfAllTrades;
     init.mod = data.abilities.dex.mod;
-    if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
-    else if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
+    if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
+    else if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
     else init.prof = 0;
     init.profRoll = (joat || athlete) ? Actor5e.proficiencyModifier(0.5, data.attributes.prof, !athlete) : 0;
     init.value = init.value ?? 0;
