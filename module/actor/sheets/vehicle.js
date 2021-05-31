@@ -256,7 +256,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-    if (!this.options.editable) return;
+    if ( !this.isEditable ) return;
 
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
     html.find('.item-hp input')

@@ -263,6 +263,7 @@ function _migrateActorSenses(actor, updateData) {
   const ad = actor.data;
   if ( ad?.traits?.senses === undefined ) return;
   const original = ad.traits.senses || "";
+  if ( typeof original !== "string" ) return;
 
   // Try to match old senses with the format like "Darkvision 60 ft, Blindsight 30 ft"
   const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/;
@@ -299,7 +300,7 @@ function _migrateActorSenses(actor, updateData) {
 function _migrateActorType(actor, updateData) {
   const ad = actor.data;
   const original = ad.details?.type;
-  if ( (original === undefined) || (foundry.utils.getType(original) === "Object") ) return;
+  if ( typeof original !== "string" ) return;
 
   // New default data structure
   let data = {

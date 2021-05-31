@@ -180,11 +180,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Activate event listeners using the prepared sheet HTML
-   * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
+   * @param html {jQuery}   The prepared HTML object ready to be rendered into the DOM
    */
 	activateListeners(html) {
     super.activateListeners(html);
-    if ( !this.options.editable ) return;
+    if ( !this.isEditable ) return;
 
     // Item State Toggling
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
