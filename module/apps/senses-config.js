@@ -1,12 +1,12 @@
 /**
- * A simple form to set actor movement speeds
- * @implements {BaseEntitySheet}
+ * A simple form to set Actor movement speeds.
+ * @extends {DocumentSheet}
  */
-export default class ActorSensesConfig extends BaseEntitySheet {
+export default class ActorSensesConfig extends DocumentSheet {
 
-  /** @override */
+  /** @inheritdoc */
 	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+	  return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/senses-config.html",
       width: 300,
@@ -16,16 +16,16 @@ export default class ActorSensesConfig extends BaseEntitySheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   get title() {
-    return `${game.i18n.localize("DND5E.SensesConfig")}: ${this.entity.name}`;
+    return `${game.i18n.localize("DND5E.SensesConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   getData(options) {
-    const senses = this.entity._data.data.attributes?.senses ?? {};
+    const senses = foundry.utils.getProperty(this.document.data._source, "data.attributes.senses") || {};
     const data = {
       senses: {},
       special: senses.special ?? "",

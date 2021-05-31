@@ -20,6 +20,11 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static unsupportedItemTypes = new Set(["class"]);
+
+  /* -------------------------------------------- */
+
   /**
    * Creates a new cargo entry for a vehicle Actor.
    */
@@ -206,24 +211,39 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       }
     };
 
+    // Classify items owned by the vehicle and compute total cargo weight
     let totalWeight = 0;
     for (const item of data.items) {
       this._prepareCrewedItem(item);
-      if (item.type === 'weapon') features.weapons.items.push(item);
-      else if (item.type === 'equipment') features.equipment.items.push(item);
-      else if (item.type === 'loot') {
+
+      // Handle cargo explicitly
+      const isCargo = item.flags.dnd5e?.vehicleCargo === true;
+      if ( isCargo ) {
         totalWeight += (item.data.weight || 0) * item.data.quantity;
         cargo.cargo.items.push(item);
+        continue;
       }
-      else if (item.type === 'feat') {
-        if (!item.data.activation.type || item.data.activation.type === 'none') {
-          features.passive.items.push(item);
-        }
-        else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
-        else features.actions.items.push(item);
+
+      // Handle non-cargo item types
+      switch ( item.type ) {
+        case "weapon":
+          features.weapons.items.push(item);
+          break;
+        case "equipment":
+          features.equipment.items.push(item);
+          break;
+        case "feat":
+          if ( !item.data.activation.type || (item.data.activation.type === "none") ) features.passive.items.push(item);
+          else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
+          else features.actions.items.push(item);
+          break;
+        default:
+          totalWeight += (item.data.weight || 0) * item.data.quantity;
+          cargo.cargo.items.push(item);
       }
     }
 
+    // Update the rendering context data
     data.features = Object.values(features);
     data.cargo = Object.values(cargo);
     data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
@@ -236,7 +256,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-    if (!this.options.editable) return;
+    if ( !this.isEditable ) return;
 
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
     html.find('.item-hp input')
@@ -272,7 +292,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const property = row.classList.contains('crew') ? 'crew' : 'passengers';
 
     // Get the cargo entry
-    const cargo = duplicate(this.actor.data.data.cargo[property]);
+    const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[property]);
     const entry = cargo[idx];
     if (!entry) return null;
 
@@ -322,7 +342,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const target = event.currentTarget;
     const type = target.dataset.type;
     if (type === 'crew' || type === 'passengers') {
-      const cargo = duplicate(this.actor.data.data.cargo[type]);
+      const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]);
       cargo.push(this.constructor.newCargo);
       return this.actor.update({[`data.cargo.${type}`]: cargo});
     }
@@ -343,11 +363,20 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     if (row.classList.contains('cargo-row')) {
       const idx = Number(row.dataset.itemId);
       const type = row.classList.contains('crew') ? 'crew' : 'passengers';
-      const cargo = duplicate(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
+      const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
       return this.actor.update({[`data.cargo.${type}`]: cargo});
     }
-
     return super._onItemDelete(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItemCreate(itemData) {
+    const cargoTypes = ["weapon", "equipment", "consumable", "tool", "loot", "backpack"];
+    const isCargo = cargoTypes.includes(itemData.type) && (this._tabs[0].active === "cargo");
+    foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", isCargo);
+    return super._onDropItemCreate(itemData);
   }
 
   /* -------------------------------------------- */

@@ -1,3 +1,6 @@
+export {default as D20Roll} from "./dice/d20-roll.js";
+export {default as DamageRoll} from "./dice/damage-roll.js";
+
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
  *
@@ -20,28 +23,36 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
   const constantTerms = []; // Terms that are constant, and their associated operators
   let operators = [];       // Temporary storage for operators before they are moved to one of the above
 
-  for (let term of terms) {                                // For each term
-    if (["+", "-"].includes(term)) operators.push(term);   // If the term is an addition/subtraction operator, push the term into the operators array
-    else {                                                 // Otherwise the term is not an operator
-      if (term instanceof DiceTerm) {                      // If the term is something rollable
-        rollableTerms.push(...operators);                  // Place all the operators into the rollableTerms array
-        rollableTerms.push(term);                          // Then place this rollable term into it as well
-      }                                                    //
-      else {                                               // Otherwise, this must be a constant
-        constantTerms.push(...operators);                  // Place the operators into the constantTerms array
-        constantTerms.push(term);                          // Then also add this constant term to that array.
-      }                                                    //
-      operators = [];                                      // Finally, the operators have now all been assigend to one of the arrays, so empty this before the next iteration.
+  for (let term of terms) {                                 // For each term
+    if (term instanceof OperatorTerm) operators.push(term); // If the term is an addition/subtraction operator, push the term into the operators array
+    else {                                                  // Otherwise the term is not an operator
+      if (term instanceof DiceTerm) {                       // If the term is something rollable
+        rollableTerms.push(...operators);                   // Place all the operators into the rollableTerms array
+        rollableTerms.push(term);                           // Then place this rollable term into it as well
+      }                                                     //
+      else {                                                // Otherwise, this must be a constant
+        constantTerms.push(...operators);                   // Place the operators into the constantTerms array
+        constantTerms.push(term);                           // Then also add this constant term to that array.
+      }                                                     //
+      operators = [];                                       // Finally, the operators have now all been assigend to one of the arrays, so empty this before the next iteration.
     }
   }
 
-  const constantFormula = Roll.cleanFormula(constantTerms);  // Cleans up the constant terms and produces a new formula string
-  const rollableFormula = Roll.cleanFormula(rollableTerms);  // Cleans up the non-constant terms and produces a new formula string
+  const constantFormula = Roll.getFormula(constantTerms);  // Cleans up the constant terms and produces a new formula string
+  const rollableFormula = Roll.getFormula(rollableTerms);  // Cleans up the non-constant terms and produces a new formula string
 
-  const constantPart = roll._safeEval(constantFormula);      // Mathematically evaluate the constant formula to produce a single constant term
+  // Mathematically evaluate the constant formula to produce a single constant term
+  let constantPart = undefined;
+  if ( constantFormula ) {
+    try {
+      constantPart = Roll.safeEval(constantFormula)
+    } catch (err) {
+      console.warn(`Unable to evaluate constant term ${constantFormula} in simplifyRollFormula`);
+    }
+  }
 
-  const parts = constantFirst ? // Order the rollable and constant terms, either constant first or second depending on the optional argumen
-    [constantPart, rollableFormula] : [rollableFormula, constantPart];
+  // Order the rollable and constant terms, either constant first or second depending on the optional argument
+  const parts = constantFirst ? [constantPart, rollableFormula] : [rollableFormula, constantPart];
 
   // Join the parts with a + sign, pass them to `Roll` once again to clean up the formula
   return new Roll(parts.filterJoin(" + ")).formula;
@@ -56,315 +67,201 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
  */
 function _isUnsupportedTerm(term) {
 	const diceTerm = term instanceof DiceTerm;
-	const operator = ["+", "-"].includes(term);
-	const number   = !isNaN(Number(term));
+	const operator = term instanceof OperatorTerm && ["+", "-"].includes(term.operator);
+	const number   = term instanceof NumericTerm;
 
 	return !(diceTerm || operator || number);
 }
 
 /* -------------------------------------------- */
+/* D20 Roll                                     */
+/* -------------------------------------------- */
 
 /**
- * A standardized helper function for managing core 5e "d20 rolls"
- *
+ * A standardized helper function for managing core 5e d20 rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
  *
- * @param {Array} parts             The dice roll component parts, excluding the initial d20
- * @param {Object} data             Actor or item data against which to parse the roll
- * @param {Event|object} event      The triggering event which initiated the roll
- * @param {string} rollMode         A specific roll mode to apply as the default for the resulting roll
- * @param {string|null} template    The HTML template used to render the roll dialog
- * @param {string|null} title       The dice roll UI window title
- * @param {Object} speaker          The ChatMessage speaker to pass when creating the chat
- * @param {string|null} flavor      Flavor text to use in the posted chat message
- * @param {Boolean} fastForward     Allow fast-forward advantage selection
- * @param {Function} onClose        Callback for actions to take when the dialog form is closed
- * @param {Object} dialogOptions    Modal dialog options
- * @param {boolean} advantage       Apply advantage to the roll (unless otherwise specified)
- * @param {boolean} disadvantage    Apply disadvantage to the roll (unless otherwise specified)
- * @param {number} critical         The value of d20 result which represents a critical success
- * @param {number} fumble           The value of d20 result which represents a critical failure
- * @param {number} targetValue      Assign a target value against which the result of this roll should be compared
- * @param {boolean} elvenAccuracy   Allow Elven Accuracy to modify this roll?
- * @param {boolean} halflingLucky   Allow Halfling Luck to modify this roll?
- * @param {boolean} reliableTalent  Allow Reliable Talent to modify this roll?
- * @param {boolean} chatMessage     Automatically create a Chat Message for the result of this roll
- * @param {object} messageData      Additional data which is applied to the created Chat Message, if any
+ * @param {string[]} parts          The dice roll component parts, excluding the initial d20
+ * @param {object} data             Actor or item data against which to parse the roll
  *
- * @return {Promise}                A Promise which resolves once the roll workflow has completed
+ * @param {boolean} [advantage]       Apply advantage to the roll (unless otherwise specified)
+ * @param {boolean} [disadvantage]    Apply disadvantage to the roll (unless otherwise specified)
+ * @param {number} [critical]         The value of d20 result which represents a critical success
+ * @param {number} [fumble]           The value of d20 result which represents a critical failure
+ * @param {number} [targetValue]      Assign a target value against which the result of this roll should be compared
+ * @param {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
+ * @param {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
+ * @param {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
+
+ * @param {boolean} [chooseModifier=false] Choose the ability modifier that should be used when the roll is made
+ * @param {boolean} [fastForward=false] Allow fast-forward advantage selection
+ * @param {Event} [event]             The triggering event which initiated the roll
+ * @param {string} [rollMode]         A specific roll mode to apply as the default for the resulting roll
+ * @param {string} [template]         The HTML template used to render the roll dialog
+ * @param {string} [title]            The dialog window title
+ * @param {Object} [dialogOptions]    Modal dialog options
+ *
+ * @param {boolean} [chatMessage=true] Automatically create a Chat Message for the result of this roll
+ * @param {object} [messageData={}] Additional data which is applied to the created Chat Message, if any
+ * @param {string} [rollMode]       A specific roll mode to apply as the default for the resulting roll
+ * @param {object} [speaker]        The ChatMessage speaker to pass when creating the chat
+ * @param {string} [flavor]         Flavor text to use in the posted chat message
+ *
+ * @return {Promise<D20Roll|null>}  The evaluated D20Roll, or null if the workflow was cancelled
  */
-export async function d20Roll({parts=[], data={}, event={}, rollMode=null, template=null, title=null, speaker=null,
-  flavor=null, fastForward=null, dialogOptions,
-  advantage=null, disadvantage=null, critical=20, fumble=1, targetValue=null,
-  elvenAccuracy=false, halflingLucky=false, reliableTalent=false,
-  chatMessage=true, messageData={}}={}) {
+export async function d20Roll({
+  parts=[], data={}, // Roll creation
+  advantage, disadvantage, fumble=1, critical=20, targetValue, elvenAccuracy, halflingLucky, reliableTalent, // Roll customization
+  chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
+  chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
+  }={}) {
 
-  // Prepare Message Data
-  messageData.flavor = flavor || title;
-  messageData.speaker = speaker || ChatMessage.getSpeaker();
-  const messageOptions = {rollMode: rollMode || game.settings.get("core", "rollMode")};
-  parts = parts.concat(["@bonus"]);
+  // Handle input arguments
+  const formula = ["1d20"].concat(parts).join(" + ");
+  const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
+  const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
+  if ( chooseModifier && !isFF ) data["mod"] = "@mod";
 
-  // Handle fast-forward events
-  let adv = 0;
-  fastForward = fastForward ?? (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  if (fastForward) {
-    if ( advantage ?? event.altKey ) adv = 1;
-    else if ( disadvantage ?? (event.ctrlKey || event.metaKey) ) adv = -1;
+  // Construct the D20Roll instance
+  const roll = new CONFIG.Dice.D20Roll(formula, data, {
+    flavor: flavor || title,
+    advantageMode,
+    defaultRollMode,
+    critical,
+    fumble,
+    targetValue,
+    elvenAccuracy,
+    halflingLucky,
+    reliableTalent
+  });
+
+  // Prompt a Dialog to further configure the D20Roll
+  if ( !isFF ) {
+    const configured = await roll.configureDialog({
+      title,
+      chooseModifier,
+      defaultRollMode: defaultRollMode,
+      defaultAction: advantageMode,
+      defaultAbility: data?.item?.ability,
+      template
+    }, dialogOptions);
+    if ( configured === null ) return null;
   }
 
-  // Define the inner roll function
-  const _roll = (parts, adv, form) => {
-
-    // Determine the d20 roll and modifiers
-    let nd = 1;
-    let mods = halflingLucky ? "r1=1" : "";
-
-    // Handle advantage
-    if (adv === 1) {
-      nd = elvenAccuracy ? 3 : 2;
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
-      if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].advantage = true;
-      mods += "kh";
-    }
-
-    // Handle disadvantage
-    else if (adv === -1) {
-      nd = 2;
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
-      if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].disadvantage = true;
-      mods += "kl";
-    }
-
-    // Prepend the d20 roll
-    let formula = `${nd}d20${mods}`;
-    if (reliableTalent) formula = `{${nd}d20${mods},10}kh`;
-    parts.unshift(formula);
-
-    // Optionally include a situational bonus
-    if ( form ) {
-      data['bonus'] = form.bonus.value;
-      messageOptions.rollMode = form.rollMode.value;
-    }
-    if (!data["bonus"]) parts.pop();
-
-    // Optionally include an ability score selection (used for tool checks)
-    const ability = form ? form.ability : null;
-    if (ability && ability.value) {
-      data.ability = ability.value;
-      const abl = data.abilities[data.ability];
-      if (abl) {
-        data.mod = abl.mod;
-        messageData.flavor += ` (${CONFIG.DND5E.abilities[data.ability]})`;
-      }
-    }
-
-    // Execute the roll
-    let roll = new Roll(parts.join(" + "), data);
-    try {
-      roll.roll();
-    } catch (err) {
-      console.error(err);
-      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-      return null;
-    }
-
-    // Flag d20 options for any 20-sided dice in the roll
-    for (let d of roll.dice) {
-      if (d.faces === 20) {
-        d.options.critical = critical;
-        d.options.fumble = fumble;
-        if ( adv === 1 ) d.options.advantage = true;
-        else if ( adv === -1 ) d.options.disadvantage = true;
-        if (targetValue) d.options.target = targetValue;
-      }
-    }
-
-    // If reliable talent was applied, add it to the flavor text
-    if (reliableTalent && roll.dice[0].total < 10) {
-      messageData.flavor += ` (${game.i18n.localize("DND5E.FlagsReliableTalent")})`;
-    }
-    return roll;
-  };
-
-  // Create the Roll instance
-  const roll = fastForward ? _roll(parts, adv) :
-    await _d20RollDialog({template, title, parts, data, rollMode: messageOptions.rollMode, dialogOptions, roll: _roll});
+  // Evaluate the configured roll
+  await roll.evaluate({async: true});
 
   // Create a Chat Message
-  if ( roll && chatMessage ) roll.toMessage(messageData, messageOptions);
+  if ( speaker ) {
+    console.warn(`You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData`);
+    messageData.speaker = speaker;
+  }
+  if ( roll && chatMessage ) await roll.toMessage(messageData);
   return roll;
 }
 
 /* -------------------------------------------- */
 
 /**
- * Present a Dialog form which creates a d20 roll once submitted
- * @return {Promise<Roll>}
- * @private
+ * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
  */
-async function _d20RollDialog({template, title, parts, data, rollMode, dialogOptions, roll}={}) {
-
-  // Render modal dialog
-  template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
-  let dialogData = {
-    formula: parts.join(" + "),
-    data: data,
-    rollMode: rollMode,
-    rollModes: CONFIG.Dice.rollModes,
-    config: CONFIG.DND5E
-  };
-  const html = await renderTemplate(template, dialogData);
-
-  // Create the Dialog window
-  return new Promise(resolve => {
-    new Dialog({
-      title: title,
-      content: html,
-      buttons: {
-        advantage: {
-          label: game.i18n.localize("DND5E.Advantage"),
-          callback: html => resolve(roll(parts, 1, html[0].querySelector("form")))
-        },
-        normal: {
-          label: game.i18n.localize("DND5E.Normal"),
-          callback: html => resolve(roll(parts, 0, html[0].querySelector("form")))
-        },
-        disadvantage: {
-          label: game.i18n.localize("DND5E.Disadvantage"),
-          callback: html => resolve(roll(parts, -1, html[0].querySelector("form")))
-        }
-      },
-      default: "normal",
-      close: () => resolve(null)
-    }, dialogOptions).render(true);
-  });
+function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
+  const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+  let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
+  if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
+  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
+  return {isFF, advantageMode};
 }
 
 /* -------------------------------------------- */
+/* Damage Roll                                  */
+/* -------------------------------------------- */
 
 /**
- * A standardized helper function for managing core 5e "d20 rolls"
- *
+ * A standardized helper function for managing core 5e damage rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
  *
- * @param {Array} parts           The dice roll component parts, excluding the initial d20
- * @param {Actor} actor           The Actor making the damage roll
- * @param {Object} data           Actor or item data against which to parse the roll
- * @param {Event|object}[event    The triggering event which initiated the roll
- * @param {string} rollMode       A specific roll mode to apply as the default for the resulting roll
- * @param {String} template       The HTML template used to render the roll dialog
- * @param {String} title          The dice roll UI window title
- * @param {Object} speaker        The ChatMessage speaker to pass when creating the chat
- * @param {string} flavor         Flavor text to use in the posted chat message
- * @param {boolean} allowCritical Allow the opportunity for a critical hit to be rolled
- * @param {Boolean} critical      Flag this roll as a critical hit for the purposes of fast-forward rolls
- * @param {number} criticalBonusDice    A number of bonus damage dice that are added for critical hits
- * @param {number} criticalMultiplier   A critical hit multiplier which is applied to critical hits
- * @param {Boolean} fastForward   Allow fast-forward advantage selection
- * @param {Function} onClose      Callback for actions to take when the dialog form is closed
- * @param {Object} dialogOptions  Modal dialog options
- * @param {boolean} chatMessage     Automatically create a Chat Message for the result of this roll
- * @param {object} messageData      Additional data which is applied to the created Chat Message, if any
+ * @param {string[]} parts          The dice roll component parts, excluding the initial d20
+ * @param {object} [data]           Actor or item data against which to parse the roll
  *
- * @return {Promise}              A Promise which resolves once the roll workflow has completed
+ * @param {boolean} [critical=false] Flag this roll as a critical hit for the purposes of fast-forward or default dialog action
+ * @param {number} [criticalBonusDice=0] A number of bonus damage dice that are added for critical hits
+ * @param {number} [criticalMultiplier=2] A critical hit multiplier which is applied to critical hits
+ * @param {boolean} [multiplyNumeric=false] Multiply numeric terms by the critical multiplier
+ * @param {boolean} [powerfulCritical=false] Apply the "powerful criticals" house rule to critical hits
+
+ * @param {boolean} [fastForward=false] Allow fast-forward advantage selection
+ * @param {Event}[event]            The triggering event which initiated the roll
+ * @param {boolean} [allowCritical=true] Allow the opportunity for a critical hit to be rolled
+ * @param {string} [template]       The HTML template used to render the roll dialog
+ * @param {string} [title]          The dice roll UI window title
+ * @param {object} [dialogOptions]  Configuration dialog options
+ *
+ * @param {boolean} [chatMessage=true] Automatically create a Chat Message for the result of this roll
+ * @param {object} [messageData={}] Additional data which is applied to the created Chat Message, if any
+ * @param {string} [rollMode]       A specific roll mode to apply as the default for the resulting roll
+ * @param {object} [speaker]        The ChatMessage speaker to pass when creating the chat
+ * @param {string} [flavor]         Flavor text to use in the posted chat message
+ *
+ * @return {Promise<DamageRoll|null>} The evaluated DamageRoll, or null if the workflow was canceled
  */
-export async function damageRoll({parts, actor, data, event={}, rollMode=null, template, title, speaker, flavor,
-  allowCritical=true, critical=false, criticalBonusDice=0, criticalMultiplier=2, fastForward=null,
-  dialogOptions={}, chatMessage=true, messageData={}}={}) {
+export async function damageRoll({
+  parts=[], data, // Roll creation
+  critical=false, criticalBonusDice, criticalMultiplier, multiplyNumeric, powerfulCritical, // Damage customization
+  fastForward=false, event, allowCritical=true, template, title, dialogOptions, // Dialog configuration
+  chatMessage=true, messageData={}, rollMode, speaker, flavor, // Chat Message customization
+  }={}) {
 
-  // Prepare Message Data
-  messageData.flavor = flavor || title;
-  messageData.speaker = speaker || ChatMessage.getSpeaker();
-  const messageOptions = {rollMode: rollMode || game.settings.get("core", "rollMode")};
-  parts = parts.concat(["@bonus"]);
+  // Handle input arguments
+  const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
 
-  // Define inner roll function
-  const _roll = function(parts, crit, form) {
-
-    // Optionally include a situational bonus
-    if ( form ) {
-      data['bonus'] = form.bonus.value;
-      messageOptions.rollMode = form.rollMode.value;
-    }
-    if (!data["bonus"]) parts.pop();
-
-    // Create the damage roll
-    let roll = new Roll(parts.join("+"), data);
-
-    // Modify the damage formula for critical hits
-    if ( crit === true ) {
-      roll.alter(criticalMultiplier, 0);      // Multiply all dice
-      if ( roll.terms[0] instanceof Die ) {   // Add bonus dice for only the main dice term
-        roll.terms[0].alter(1, criticalBonusDice);
-        roll._formula = roll.formula;
-      }
-      messageData.flavor += ` (${game.i18n.localize("DND5E.Critical")})`;
-      if ( "flags.dnd5e.roll" in messageData ) messageData["flags.dnd5e.roll"].critical = true;
-    }
-
-    // Execute the roll
-    try {
-      roll.evaluate()
-      if ( crit ) roll.dice.forEach(d => d.options.critical = true); // TODO workaround core bug which wipes Roll#options on roll
-      return roll;
-    } catch(err) {
-      console.error(err);
-      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-      return null;
-    }
-  };
-
-  // Create the Roll instance
-  const roll = fastForward ? _roll(parts, critical) : await _damageRollDialog({
-    template, title, parts, data, allowCritical, rollMode: messageOptions.rollMode, dialogOptions, roll: _roll
+  // Construct the DamageRoll instance
+  const formula = parts.join(" + ");
+  const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
+  const roll = new CONFIG.Dice.DamageRoll(formula, data, {
+    flavor: flavor || title,
+    critical: isCritical,
+    criticalBonusDice,
+    criticalMultiplier,
+    multiplyNumeric,
+    powerfulCritical
   });
 
-  // Create a Chat Message
-  if ( roll && chatMessage ) roll.toMessage(messageData, messageOptions);
-  return roll;
+  // Prompt a Dialog to further configure the DamageRoll
+  if ( !isFF ) {
+    const configured = await roll.configureDialog({
+      title,
+      defaultRollMode: defaultRollMode,
+      defaultCritical: isCritical,
+      template,
+      allowCritical
+    }, dialogOptions);
+    if ( configured === null ) return null;
+  }
 
+  // Evaluate the configured roll
+  await roll.evaluate({async: true});
+
+  // Create a Chat Message
+  if ( speaker ) {
+    console.warn(`You are passing the speaker argument to the damageRoll function directly which should instead be passed as an internal key of messageData`);
+    messageData.speaker = speaker;
+  }
+  if ( roll && chatMessage ) await roll.toMessage(messageData);
+  return roll;
 }
 
 /* -------------------------------------------- */
 
 /**
- * Present a Dialog form which creates a damage roll once submitted
- * @return {Promise<Roll>}
- * @private
+ * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
-async function _damageRollDialog({template, title, parts, data, allowCritical, rollMode, dialogOptions, roll}={}) {
-
-  // Render modal dialog
-  template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
-  let dialogData = {
-    formula: parts.join(" + "),
-    data: data,
-    rollMode: rollMode,
-    rollModes: CONFIG.Dice.rollModes
-  };
-  const html = await renderTemplate(template, dialogData);
-
-  // Create the Dialog window
-  return new Promise(resolve => {
-    new Dialog({
-      title: title,
-      content: html,
-      buttons: {
-        critical: {
-          condition: allowCritical,
-          label: game.i18n.localize("DND5E.CriticalHit"),
-          callback: html => resolve(roll(parts, true, html[0].querySelector("form")))
-        },
-        normal: {
-          label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
-          callback: html => resolve(roll(parts, false, html[0].querySelector("form")))
-        },
-      },
-      default: "normal",
-      close: () => resolve(null)
-    }, dialogOptions).render(true);
-  });
+function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
+  const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+  if ( event?.altKey ) critical = true;
+  return {isFF, isCritical: critical};
 }

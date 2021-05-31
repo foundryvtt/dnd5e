@@ -89,13 +89,13 @@
                 {{/each}}
             {{else}}
                 {{#if ../../isCharacter}}
-                    <div class="item-detail item-weight">
-                        {{#if item.totalWeight}}
-                            <div class="item-detail">
-                                {{ item.totalWeight }} {{localize "DND5E.AbbreviationLbs"}}
-                            </div>
-                        {{/if}}
-                    </div>
+                <div class="item-detail item-weight">
+                    {{#if item.totalWeight}}
+                        <div class="item-detail">
+                            {{ item.totalWeight }} {{localize "DND5E.AbbreviationLbs"}}
+                        </div>
+                    {{/if}}
+                </div>
                 {{/if}}
 
                 <div class="item-detail item-uses">

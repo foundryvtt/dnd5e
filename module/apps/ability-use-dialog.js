@@ -44,7 +44,7 @@ export default class AbilityUseDialog extends Dialog {
       consumeSpellSlot: false,
       consumeRecharge: recharges,
       consumeResource: !!itemData.consume.target,
-      consumeUses: uses.max,
+      consumeUses: uses.per && (uses.max > 0),
       canUse: recharges ? recharge.charged : sufficientUses,
       createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
       errors: []
@@ -133,7 +133,7 @@ export default class AbilityUseDialog extends Dialog {
     }));
 
     // Merge spell casting data
-    return mergeObject(data, { isSpell: true, consumeSpellSlot, spellLevels });
+    return foundry.utils.mergeObject(data, { isSpell: true, consumeSpellSlot, spellLevels });
   }
 
   /* -------------------------------------------- */
@@ -182,11 +182,5 @@ export default class AbilityUseDialog extends Dialog {
         per: CONFIG.DND5E.limitedUsePeriods[uses.per]
       });
     }
-  }
-
-  /* -------------------------------------------- */
-
-  static _handleSubmit(formData, item) {
-
   }
 }

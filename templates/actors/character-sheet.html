@@ -60,8 +60,11 @@
                     </footer>
                 </li>
 
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.HitDice" }}</h4>
+                <li class="attribute hit-dice">
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.HitDice" }}
+                        <a class="config-button" data-action="hit-dice" title="{{localize 'DND5E.HitDiceConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
                     <div class="attribute-value multiple">
                         <label class="hit-dice">{{data.attributes.hd}} <span class="sep"> / </span> {{data.details.level}}</label>
                     </div>
@@ -142,15 +145,17 @@
 
             {{!-- Skills --}}
             <ul class="skills-list">
-            {{#each data.skills as |skill s|}}
+            {{#each config.skills as |label s|}}
+            {{#with (lookup ../data.skills s) as |skill|}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
-                    <h4 class="skill-name rollable">{{skill.label}}</h4>
+                    <h4 class="skill-name rollable">{{label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>
                     <span class="skill-mod">{{numberFormat skill.total decimals=0 sign=true}}</span>
                     <span class="skill-passive">({{skill.passive}})</span>
                 </li>
+            {{/with}}
             {{/each}}
             </ul>
 
@@ -165,16 +170,16 @@
                                    placeholder="{{res.placeholder}}" />
                         </h4>
                         <div class="attribute-value">
-                            <label class="recharge checkbox">
-                                {{ localize "DND5E.AbbreviationSR" }} <input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
+                            <label class="recharge checkbox flexcol">
+                                <span>{{ localize "DND5E.AbbreviationSR" }}</span><input name="data.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}/>
                             </label>
 
                             <input name="data.resources.{{res.name}}.value" type="number" value="{{res.value}}" placeholder="0"/>
                             <span class="sep"> / </span>
                             <input name="data.resources.{{res.name}}.max" type="number" value="{{res.max}}" placeholder="0"/>
 
-                            <label class="recharge checkbox">
-                                {{ localize "DND5E.AbbreviationLR" }} <input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
+                            <label class="recharge checkbox flexcol">
+                                <span>{{ localize "DND5E.AbbreviationLR" }}</span><input name="data.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}/>
                             </label>
                         </div>
                     </li>
@@ -250,7 +255,7 @@
                 <textarea name="data.details.flaw">{{data.details.flaw}}</textarea>
             </div>
             <div class="biography">
-                {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
+                {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable rollData=rollData}}
             </div>
         </div>
     </section>

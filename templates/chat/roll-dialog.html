@@ -3,6 +3,14 @@
         <label>{{ localize "DND5E.Formula" }}</label>
         <input type="text" name="formula" value="{{formula}}" disabled/>
     </div>
+    {{#if chooseModifier}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.AbilityModifier" }}</label>
+        <select name="ability">
+            {{selectOptions abilities selected=defaultAbility}}
+        </select>
+    </div>
+    {{/if}}
     <div class="form-group">
         <label>{{ localize "DND5E.RollSituationalBonus" }}</label>
         <input type="text" name="bonus" value="" placeholder="{{ localize 'DND5E.RollExample' }}"/>
@@ -10,11 +18,7 @@
     <div class="form-group">
         <label>{{ localize "DND5E.RollMode" }}</label>
         <select name="rollMode">
-        {{#select rollMode}}
-        {{#each rollModes as |label mode|}}
-            <option value="{{mode}}">{{localize label}}</option>
-        {{/each}}
-        {{/select}}
+            {{selectOptions rollModes selected=defaultRollMode localize=true}}
         </select>
     </div>
 </form>

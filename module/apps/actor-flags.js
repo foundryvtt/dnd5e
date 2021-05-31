@@ -1,11 +1,10 @@
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor
- * @implements {BaseEntitySheet}
+ * @implements {DocumentSheet}
  */
-export default class ActorSheetFlags extends BaseEntitySheet {
+export default class ActorSheetFlags extends DocumentSheet {
   static get defaultOptions() {
-    const options = super.defaultOptions;
-    return mergeObject(options, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
 	    classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/actor-flags.html",
@@ -27,6 +26,7 @@ export default class ActorSheetFlags extends BaseEntitySheet {
   getData() {
     const data = {};
     data.actor = this.object;
+    data.classes = this._getClasses();
     data.flags = this._getFlags();
     data.bonuses = this._getBonuses();
     return data;
@@ -35,16 +35,32 @@ export default class ActorSheetFlags extends BaseEntitySheet {
   /* -------------------------------------------- */
 
   /**
+   * Prepare an object of sorted classes.
+   * @return {object}
+   * @private
+   */
+  _getClasses() {
+    const classes = this.object.items.filter(i => i.type === "class");
+    return classes.sort((a, b) => a.name.localeCompare(b.name)).reduce((obj, i) => {
+      obj[i.id] = i.name;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare an object of flags data which groups flags by section
    * Add some additional data for rendering
    * @return {object}
+   * @private
    */
   _getFlags() {
     const flags = {};
-    const baseData = this.entity._data;
+    const baseData = this.document.toJSON();
     for ( let [k, v] of Object.entries(CONFIG.DND5E.characterFlags) ) {
       if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
-      let flag = duplicate(v);
+      let flag = foundry.utils.deepClone(v);
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');

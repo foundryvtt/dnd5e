@@ -1,0 +1,19 @@
+
+<form>
+  <p class="hint">{{hint}}</p>
+
+  <ul class="items-list">
+    {{#each items}}
+    <li class="item flexrow">
+      <div class="item-name flexrow">
+        <div class="item-image" style="background-image:url({{data.img}})" data-item-id="{{id}}"></div>
+
+        <label class="flexrow">
+          <h4>{{data.name}}</h4>
+          <input type="checkbox" checked name="{{id}}" />
+        </label>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</form>

@@ -45,10 +45,12 @@ export default class AbilityTemplate extends MeasuredTemplate {
     }
 
     // Return the template constructed from the item data
-    const template = new this(templateData);
-    template.item = item;
-    template.actorSheet = item.actor?.sheet || null;
-    return template;
+    const cls = CONFIG.MeasuredTemplate.documentClass;
+    const template = new cls(templateData, {parent: canvas.scene});
+    const object = new this(template);
+    object.item = item;
+    object.actorSheet = item.actor?.sheet || null;
+    return object;
   }
 
   /* -------------------------------------------- */
@@ -108,14 +110,9 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Confirm the workflow (left-click)
     handlers.lc = event => {
       handlers.rc(event);
-
-      // Confirm final snapped position
-      const destination = canvas.grid.getSnappedPosition(this.x, this.y, 2);
-      this.data.x = destination.x;
-      this.data.y = destination.y;
-
-      // Create the template
-      canvas.scene.createEmbeddedEntity("MeasuredTemplate", this.data);
+      const destination = canvas.grid.getSnappedPosition(this.data.x, this.data.y, 2);
+      this.data.update(destination);
+      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.data]);
     };
 
     // Rotate the template by 3 degree increments (mouse-wheel)
@@ -124,7 +121,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       event.stopPropagation();
       let delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
       let snap = event.shiftKey ? delta : 5;
-      this.data.direction += (snap * Math.sign(event.deltaY));
+      this.data.update({direction: this.data.direction + (snap * Math.sign(event.deltaY))});
       this.refresh();
     };
 

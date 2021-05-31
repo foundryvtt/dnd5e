@@ -77,9 +77,7 @@
   /* Tags */
 }
 .dnd5e .window-content {
-  background: url("ui/parchment.jpg") repeat;
   font-size: 13px;
-  color: #191813;
 }
 .dnd5e input[type="text"],
 .dnd5e input[type="number"],
@@ -100,6 +98,8 @@
 .dnd5e select:disabled,
 .dnd5e textarea:disabled {
   color: #4b4a44;
+  border: 1px solid transparent !important;
+  outline: none !important;
 }
 .dnd5e input:disabled:hover,
 .dnd5e select:disabled:hover,
@@ -114,24 +114,6 @@
 .dnd5e button {
   background: rgba(0, 0, 0, 0.1);
   border: 2px groove #eeede0;
-}
-.dnd5e label.checkbox {
-  flex: auto;
-  padding: 0;
-  margin: 0;
-  height: 22px;
-  line-height: 22px;
-  font-size: 11px;
-}
-.dnd5e label.checkbox > input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  margin: 0 2px 0 0;
-  position: relative;
-  top: 4px;
-}
-.dnd5e label.checkbox.right > input[type="checkbox"] {
-  margin: 0 0 0 2px;
 }
 .dnd5e .form-group label {
   flex: 2;
@@ -165,11 +147,12 @@
 .dnd5e .form-group .form-fields > *:last-child {
   margin-right: 0;
 }
-.dnd5e .form-group.stacked label {
+.dnd5e .form-group.stacked > label {
   flex: 0 0 100%;
   margin: 0;
 }
-.dnd5e .form-group.stacked label.checkbox {
+.dnd5e .form-group.stacked label.checkbox,
+.dnd5e .form-group.stacked label.radio {
   flex: auto;
   text-align: left;
 }
@@ -191,6 +174,26 @@
   border: 1px solid #999;
   border-radius: 3px;
   background: rgba(0, 0, 0, 0.05);
+}
+/* ----------------------------------------- */
+/*  Hit Dice Config Sheet Specifically       */
+/* ----------------------------------------- */
+.dnd5e.hd-config .form-group button.increment,
+.dnd5e.hd-config .form-group button.decrement {
+  flex: 0 0 1rem;
+  line-height: 1rem;
+}
+.dnd5e.hd-config .form-group button.decrement {
+  margin-right: 0;
+}
+.dnd5e.hd-config .form-group span.sep {
+  margin: 0;
+}
+.dnd5e.hd-config .form-group input {
+  flex: 0 0 2rem;
+  text-align: center;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 /* ----------------------------------------- */
 /*  Entity Sheets Specifically               */
@@ -488,14 +491,58 @@
 /* ----------------------------------------- */
 /* Trait Selector
 /* ----------------------------------------- */
-#trait-selector .trait-list {
+.trait-selector .trait-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-#trait-selector input[type="text"] {
+.trait-selector input[type="text"] {
   height: 24px;
   margin: 2px;
+}
+/* ----------------------------------------- */
+/*  Actor Type Config Sheet Specifically     */
+/* ----------------------------------------- */
+.actor-type .trait-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.actor-type .trait-list li {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+.actor-type .trait-list li.form-group {
+  flex-basis: 100%;
+}
+.actor-type label.radio {
+  display: flex;
+  flex: auto;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: normal;
+}
+.actor-type label.radio > input[type="radio"] {
+  margin: 0 5px 0 0;
+}
+.actor-type li.custom-type input[type="radio"] {
+  display: none;
+}
+/* ----------------------------------------- */
+/*  Add Feature Prompt Specifically          */
+/* ----------------------------------------- */
+.dnd5e.select-items-prompt .dialog-content {
+  margin-bottom: 1em;
+}
+.dnd5e.select-items-prompt .items-list {
+  margin-top: 0.5em;
+}
+.dnd5e.select-items-prompt .item-name > label,
+.dnd5e.select-items-prompt .item-image,
+.dnd5e.select-items-prompt input {
+  cursor: pointer;
+}
+.dnd5e.select-items-prompt .item-name > label {
+  align-items: center;
 }
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
@@ -526,6 +573,9 @@
   /* Encumbrance Bar */
   /* ----------------------------------------- */
   /*  Spellbook                                */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Features Tab                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
   /*  TinyMCE                                  */
@@ -581,10 +631,12 @@
   height: 30px;
   line-height: 30px;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name {
+.dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name,
+.dnd5e.sheet.actor .sheet-header .attributes .hit-dice h4.attribute-name {
   position: relative;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .movement .config-button,
+.dnd5e.sheet.actor .sheet-header .attributes .hit-dice .config-button {
   position: absolute;
   display: none;
   right: 0;
@@ -592,7 +644,8 @@
   font-size: 12px;
   font-weight: normal;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .config-button,
+.dnd5e.sheet.actor .sheet-header .attributes .hit-dice:hover .config-button {
   display: block;
 }
 .dnd5e.sheet.actor .sheet-header .attributes input.temphp {
@@ -1057,6 +1110,9 @@
 .dnd5e.sheet.actor .spellbook-empty .item-controls {
   flex: 1;
 }
+.dnd5e.sheet.actor .features i.original-class {
+  color: #4b4a44;
+}
 .dnd5e.sheet.actor .editor {
   padding: 0 8px;
 }
@@ -1421,7 +1477,7 @@
   text-align: right;
   padding-right: 5px;
 }
-.dnd5e.sheet.actor.character .resource .attribute-value input {
+.dnd5e.sheet.actor.character .resource .attribute-value > input {
   flex: 0 0 25%;
 }
 .dnd5e.sheet.actor.character .resource .attribute-value label.recharge {
@@ -1431,6 +1487,7 @@
   font-size: 11px;
   text-align: center;
   color: #4b4a44;
+  align-items: center;
 }
 .dnd5e.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {
   height: 14px;
@@ -1527,6 +1584,26 @@
 }
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type {
+  display: flex;
+  justify-content: space-between;
+  width: 1em;
+  padding: 0 3px;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type .config-button {
+  display: none;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 2em;
+}
+.dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
+  display: block;
 }
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;

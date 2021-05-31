@@ -40,7 +40,7 @@ export const displayChatActionButtons = function(message, html, data) {
 
     // If the user is the message author or the actor owner, proceed
     let actor = game.actors.get(data.message.speaker.actor);
-    if ( actor && actor.owner ) return;
+    if ( actor && actor.isOwner ) return;
     else if ( game.user.isGM || (data.author.id === game.user.id)) return;
 
     // Otherwise conceal action buttons except for saving throw
@@ -66,7 +66,7 @@ export const displayChatActionButtons = function(message, html, data) {
 export const addChatMessageContextOptions = function(html, options) {
   let canApply = li => {
     const message = game.messages.get(li.data("messageId"));
-    return message?.isRoll && message?.isContentVisible && canvas?.tokens.controlled.length;
+    return message?.isRoll && message?.isContentVisible && canvas.tokens?.controlled.length;
   };
   options.push(
     {

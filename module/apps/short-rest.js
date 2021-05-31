@@ -40,7 +40,7 @@ export default class ShortRestDialog extends Dialog {
     // Determine Hit Dice
     data.availableHD = this.actor.data.items.reduce((hd, item) => {
       if ( item.type === "class" ) {
-        const d = item.data;
+        const d = item.data.data;
         const denom = d.hitDice || "d6";
         const available = parseInt(d.levels || 1) - parseInt(d.hitDiceUsed || 0);
         hd[denom] = denom in hd ? hd[denom] + available : available;

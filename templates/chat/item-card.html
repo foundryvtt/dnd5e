@@ -39,6 +39,10 @@
         {{#if hasAreaTarget}}
         <button data-action="placeTemplate">{{ localize "DND5E.PlaceTemplate" }}</button>
         {{/if}}
+
+        {{#if isTool}}
+        <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
+        {{/if}}
     </div>
 
     <footer class="card-footer">

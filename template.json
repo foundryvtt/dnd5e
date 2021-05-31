@@ -261,15 +261,12 @@
           "success": 0,
           "failure": 0
         },
-        "encumbrance": {
-          "value": null,
-          "max": null
-        },
         "exhaustion": 0,
         "inspiration": 0
       },
       "details": {
         "background": "",
+        "originalClass": "",
         "xp": {
           "value": 0,
           "min": 0,
@@ -319,7 +316,12 @@
     "npc": {
       "templates": ["common", "creature"],
       "details": {
-        "type": "",
+        "type": {
+          "value": "",
+          "subtype": "",
+          "swarm": "",
+          "custom": ""
+        },
         "environment": "",
         "cr": 1,
         "spellLevel": 0,
@@ -502,12 +504,16 @@
       "subclass": "",
       "hitDice": "d6",
       "hitDiceUsed": 0,
+      "saves": [],
       "skills": {
         "number": 2,
         "choices": [],
         "value": []
       },
-      "spellcasting": "none"
+      "spellcasting": {
+        "progression": "none",
+        "ability": ""
+      }
     },
     "consumable": {
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
