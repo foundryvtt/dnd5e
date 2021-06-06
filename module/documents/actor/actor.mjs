@@ -1725,25 +1725,20 @@ export default class Actor5e extends Actor {
       }
 
       // Items that roll to gain charges on a new day
-      if ( recoverDailyUses && d.uses && (d.uses.per === "charges") && (d.uses.rechargeFormula !== "") ) {
-        // Be sure to take 7 day long rest in "Gritty Realism" variant into account
-        var restDays = (!recoverLongRestUses || game.settings.get("dnd5e", "restVariant") !== "gritty") ? 1 : 7;
-        var charges = d.uses.value;
+      if ( recoverDailyUses && d.uses && (d.uses.per === "charges") &&
+           (d.uses.rechargeFormula !== "") && (d.uses.value !== d.uses.max) ) {
+        const roll = new CONFIG.Dice.DamageRoll(d.uses.rechargeFormula, this.getRollData());
 
-        while ( (restDays > 0) && charges < d.uses.max ) {
-          const roll = new CONFIG.Dice.DamageRoll(d.uses.rechargeFormula, this.getRollData());
-          await roll.evaluate({async: true});
-          if ( roll ) {
-            charges = Math.min(charges + roll.total, d.uses.max);
-            await roll.toMessage({
-              flavor: game.i18n.format("DND5E.ItemRechargeRoll", {name: item.name})
-            });
-          }
-          restDays -= 1;
-        }
+        if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") )
+          roll.alter(7, 0, {multiplyNumeric: true});
 
-        if ( charges !== d.uses.value ) {
-          updates.push({_id: item.id, "data.uses.value": charges});
+        await roll.evaluate({async: true});
+        if ( roll ) {
+          const rechargeAmount = Math.min(d.uses.value + roll.total, d.uses.max);
+          updates.push({_id: item.id, "data.uses.value": rechargeAmount});
+          await roll.toMessage({
+            flavor: game.i18n.format("DND5E.ItemRechargeRoll", {name: item.name})
+          });
         }
       }
     }
