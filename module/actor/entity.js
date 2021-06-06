@@ -1469,7 +1469,7 @@ export default class Actor5e extends Actor {
       },
       updateItems: [
         ...hitDiceUpdates,
-        ...this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
+        ...await this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
       ],
       longRest,
       newDay
@@ -1691,10 +1691,10 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
    * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
    * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
-   * @returns {Array<object>}                              Array of item updates.
+   * @return {Promise.<object[]>}                          Array of item updates.
    * @protected
    */
-  _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
+  async _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
     let recovery = [];
     if ( recoverShortRestUses ) recovery.push("sr");
     if ( recoverLongRestUses ) recovery.push("lr");
@@ -1708,6 +1708,20 @@ export default class Actor5e extends Actor {
       }
       if ( recoverLongRestUses && d.recharge && d.recharge.value ) {
         updates.push({_id: item.id, "data.recharge.charged": true});
+      }
+
+      // Items that roll to gain charges on a new day
+      if ( recoverDailyUses && d.uses && (d.uses.per === "charges") &&
+           (d.uses.rechargeFormula !== "") && (d.uses.value !== d.uses.max) ) {
+        const roll = new CONFIG.Dice.DamageRoll(d.uses.rechargeFormula, this.getRollData());
+        await roll.evaluate({async: true});
+        if ( roll ) {
+          const rechargeAmount = Math.min(d.uses.value + roll.total, d.uses.max);
+          updates.push({_id: item.id, "data.uses.value": rechargeAmount});
+          await roll.toMessage({
+            flavor: game.i18n.format("DND5E.ItemRechargeRoll", {name: item.name})
+          });
+        }
       }
     }
 
