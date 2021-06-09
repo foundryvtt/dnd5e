@@ -17,28 +17,12 @@ export default class ProficiencySelector extends TraitSelector {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  get id() {
-    return `proficiency-selector-${this.object.id}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return a reference to the target attribute
-   * @type {string}
-   */
-  get attribute() {
-    return this.options.name;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
+  /** @inheritdoc */
   async getData() {
-    // Get the source object value
-    let attr = foundry.utils.getProperty(this.object.toJSON(), this.attribute);
-    if ( foundry.utils.getType(attr) !== "Object" ) attr = {value: [], custom: ""};
+    const attr = foundry.utils.getProperty(this.object.data, this.attribute);
+    const o = this.options;
+    const value = (o.valueKey) ? attr[o.valueKey] ?? [] : attr;
+    const custom = (o.customKey) ? attr[o.customKey] ?? "" : "";
 
     const categories = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Proficiencies`);
     const ids = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Ids`);
@@ -48,7 +32,7 @@ export default class ProficiencySelector extends TraitSelector {
     let choices = Object.entries(categories).reduce((obj, [key, label]) => {
       obj[key] = {
         label: label,
-        chosen: attr ? attr.value.includes(key) : false
+        chosen: attr ? value.includes(key) : false
       }
       return obj;
     }, {});
@@ -77,7 +61,7 @@ export default class ProficiencySelector extends TraitSelector {
     return {
       allowCustom: this.options.allowCustom,
       choices: choices,
-      custom: attr ? attr.custom : ""
+      custom: custom
     }
   }
 
