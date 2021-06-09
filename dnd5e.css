@@ -404,7 +404,8 @@
 .dnd5e.sheet .traits {
   margin: 5px 0 0;
 }
-.dnd5e.sheet .traits .trait-selector {
+.dnd5e.sheet .traits .trait-selector,
+.dnd5e.sheet .traits .proficiency-selector {
   flex: 0 0 16px;
   padding: 2px 0;
   color: #999;
@@ -509,6 +510,9 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.trait-selector .trait-list .children {
+  margin-left: 1.5em;
 }
 .trait-selector input[type="text"] {
   height: 24px;
