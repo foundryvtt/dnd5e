@@ -20,23 +20,13 @@ export default class ProficiencySelector extends TraitSelector {
   /** @inheritdoc */
   async getData() {
     const attr = foundry.utils.getProperty(this.object.data, this.attribute);
-    const o = this.options;
-    const value = (o.valueKey) ? attr[o.valueKey] ?? [] : attr;
-    const custom = (o.customKey) ? attr[o.customKey] ?? "" : "";
+    const value = (this.options.valueKey) ? attr[this.options.valueKey] ?? [] : attr;
 
-    const categories = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Proficiencies`);
-    const ids = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Ids`);
+    this.options.choices = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Proficiencies`);
+    let data = super.getData();
 
     const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-
-    let choices = Object.entries(categories).reduce((obj, [key, label]) => {
-      obj[key] = {
-        label: label,
-        chosen: attr ? value.includes(key) : false
-      }
-      return obj;
-    }, {});
-
+    const ids = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Ids`);
     if ( ids !== undefined ) {
       const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
       for ( const [key, id] of Object.entries(ids) ) {
@@ -47,22 +37,18 @@ export default class ProficiencySelector extends TraitSelector {
           label: item.name,
           chosen: attr ? attr.value.includes(key) : false
         };
-        if ( choices[type] === undefined ) {
-          choices[key] = entry;
+        if ( data.choices[type] === undefined ) {
+          data.choices[key] = entry;
         } else {
-          if ( choices[type].children === undefined ) {
-            choices[type].children = {};
+          if ( data.choices[type].children === undefined ) {
+            data.choices[type].children = {};
           }
-          choices[type].children[key] = entry;
+          data.choices[type].children[key] = entry;
         }
       }
     }
 
-    return {
-      allowCustom: this.options.allowCustom,
-      choices: choices,
-      custom: custom
-    }
+    return data;
   }
 
 }
