@@ -24,6 +24,13 @@ export default class TraitSelector extends DocumentSheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  get title() {
+    return this.options.title || super.title;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Return a reference to the target attribute
    * @type {string}
