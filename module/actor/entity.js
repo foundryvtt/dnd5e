@@ -1513,11 +1513,13 @@ export default class Actor5e extends Actor {
     // Get the Tokens which represent this actor
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
+      const tokenData = await original.getTokenData();
       const tokenUpdates = tokens.map(t => {
-        const tokenData = original.data.token.toJSON();
-        tokenData._id = t.id;
-        tokenData.actorId = original.id;
-        return tokenData;
+        const update = duplicate(tokenData);
+        update._id = t.id;
+        delete update.x;
+        delete update.y;
+        return update;
       });
       canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates);
     }
