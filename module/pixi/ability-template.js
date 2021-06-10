@@ -90,8 +90,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       if ( now - moveTime <= 20 ) return;
       const center = event.data.getLocalPosition(this.layer);
       const snapped = canvas.grid.getSnappedPosition(center.x, center.y, 2);
-      this.data.x = snapped.x;
-      this.data.y = snapped.y;
+      this.data.update({x: snapped.x, y: snapped.y});
       this.refresh();
       moveTime = now;
     };
