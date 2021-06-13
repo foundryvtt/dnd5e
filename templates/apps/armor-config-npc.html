@@ -1,3 +1,32 @@
 <form id="armor-config-npc" onsubmit="event.preventDefault();">
-  
+  <!--<input type="text" name="ac" value="{{ac}}"/>-->
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.ArmorType" }}</label>
+        <select name="armor.type">
+            <option value="natural">{{ localize "DND5E.EquipmentNatural" }}</option>
+        {{#each types as |group|}}
+            <optgroup label="{{group.label}}">
+                {{#each group.children as |type key|}}
+                    <option value="{{key}}"{{#if type.chosen}} selected{{/if}}>{{type.label}}</option>
+                {{/each}}
+            </optgroup>
+        {{/each}}
+            <option value="">{{ localize "DND5E.ArmorConfigFlat" }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.ArmorConfigCustomLabel" }}</label>
+        <input type="text" name="armor.custom" value="{{armor.custom}}" data-dtype="String"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.ArmorConfigUsesShield" }}</label>
+        <input name="armor.shield" type="checkbox" {{checked armor.shield}}/>
+    </div>
+
+    <button type="submit" name="submit" value="1">
+        <i class="far fa-save"></i> {{ localize "DND5E.TraitSave"}}
+    </button>
 </form>
