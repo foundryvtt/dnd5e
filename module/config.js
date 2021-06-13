@@ -85,6 +85,19 @@ DND5E.weaponProficiencies = {
 };
 
 /**
+ * A map of weapon item proficiency to actor item proficiency
+ * Used when a new player owned item is created
+ * @type {Object}
+ */
+DND5E.weaponProficienciesMap = {{
+  "natural": true,
+  "simpleM": "sim",
+  "simpleR": "sim",
+  "martialM": "mar",
+  "martialR": "mar"
+}
+
+/**
  * The basic weapon types in 5e. This enables specific weapon proficiencies or
  * starting equipment provided by classes and backgrounds.
  *
@@ -368,6 +381,20 @@ DND5E.armorProficiencies = {
   "hvy": DND5E.equipmentTypes.heavy,
   "shl": "DND5E.EquipmentShieldProficiency"
 };
+
+/**
+ * A map of armor item proficiency to actor item proficiency
+ * Used when a new player owned item is created
+ * @type {Object}
+ */
+DND5E.armorProficienciesMap = {
+  "natural": true,
+  "clothing": true,
+  "light": "lgt",
+  "medium": "med",
+  "heavy": "hvy",
+  "shield": "shl"
+}
 
 
 /* -------------------------------------------- */
