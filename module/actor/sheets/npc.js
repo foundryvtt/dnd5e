@@ -1,5 +1,6 @@
 import Actor5e from "../entity.js";
 import ActorSheet5e from "../sheets/base.js";
+import ArmorConfigNPC from "../../apps/armor-config-npc.js";
 
 /**
  * An Actor sheet for NPC type characters.
@@ -115,6 +116,18 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 	activateListeners(html) {
     super.activateListeners(html);
     html.find(".health .rollable").click(this._onRollHPFormula.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onConfigMenu(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    if ( button.dataset.action === "armor" ) {
+      return new ArmorConfigNPC(this.object).render(true);
+    }
+    return super._onConfigMenu(event);
   }
 
   /* -------------------------------------------- */

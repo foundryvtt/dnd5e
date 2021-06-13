@@ -529,7 +529,7 @@ export default class ActorSheet5e extends ActorSheet {
         app = new ActorSensesConfig(this.object);
         break;
       case "type":
-        new ActorTypeConfig(this.object).render(true);
+        app = new ActorTypeConfig(this.object);
         break;
     }
     app?.render(true);
