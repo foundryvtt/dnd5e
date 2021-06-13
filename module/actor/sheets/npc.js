@@ -77,7 +77,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  getData(options) {
+  async getData(options) {
     const data = super.getData(options);
 
     // Challenge Rating
@@ -87,7 +87,42 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Creature Type
     data.labels["type"] = this.actor.labels.creatureType;
+
+    // Armor Type
+    data.labels["armorType"] = await this.armorLabel(data.data.details.armor);
+
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Format NPC armor information into a localized string.
+   *
+   * @param {object} armorData 
+   * @param {string} armorData.type     Type of armor for the NPC.
+   * @param {string} armorData.custom   Custom label override.
+   * @param {boolean} armorData.shield  Whether the NPC is wielding a shield.
+   * @return {string}  Formatted armor label.
+   */
+  async armorLabel(armorData) {
+    let typeLabel = armorData.custom;
+    if ( typeLabel === "" && armorData.type === "natural" ) {
+      typeLabel = game.i18n.localize("DND5E.EquipmentNatural");
+    }
+    if ( typeLabel === "" && armorData.type !== "" ) {
+      const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
+      const id = foundry.utils.getProperty(CONFIG.DND5E.armorIds, armorData.type);
+      if ( id !== undefined ) {
+        const item = await pack.getDocument(id);
+        typeLabel = item?.name ?? "";
+      }
+    }
+
+    const shieldLabel = game.i18n.localize("DND5E.EquipmentShield");
+    if ( !armorData.shield ) return typeLabel;
+    else if ( typeLabel === "" ) return shieldLabel;
+    else return `${typeLabel}, ${shieldLabel}`;
   }
 
   /* -------------------------------------------- */

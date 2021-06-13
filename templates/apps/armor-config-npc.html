@@ -4,7 +4,7 @@
     <div class="form-group">
         <label>{{ localize "DND5E.ArmorType" }}</label>
         <select name="armor.type">
-            <option value="natural">{{ localize "DND5E.EquipmentNatural" }}</option>
+            <option value="natural"{{#if (eq armor.type "natural")}} selected{{/if}}>{{ localize "DND5E.EquipmentNatural" }}</option>
         {{#each types as |group|}}
             <optgroup label="{{group.label}}">
                 {{#each group.children as |type key|}}
@@ -12,7 +12,7 @@
                 {{/each}}
             </optgroup>
         {{/each}}
-            <option value="">{{ localize "DND5E.ArmorConfigFlat" }}</option>
+            <option value=""{{#if (eq armor.type "")}} selected{{/if}}>{{ localize "DND5E.ArmorConfigFlat" }}</option>
         </select>
     </div>
 
