@@ -316,6 +316,11 @@
     "npc": {
       "templates": ["common", "creature"],
       "details": {
+        "armor": {
+          "type": "natural",
+          "custom": "",
+          "shield": false
+        },
         "type": {
           "value": "",
           "subtype": "",
