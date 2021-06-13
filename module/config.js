@@ -89,7 +89,7 @@ DND5E.weaponProficiencies = {
  * Used when a new player owned item is created
  * @type {Object}
  */
-DND5E.weaponProficienciesMap = {{
+DND5E.weaponProficienciesMap = {
   "natural": true,
   "simpleM": "sim",
   "simpleR": "sim",
