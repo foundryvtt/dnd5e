@@ -27,34 +27,26 @@ export default class ArmorConfigNPC extends DocumentSheet {
 
   /** @inheritdoc */
   async getData() {
-    // let armorTypes = Object.entries(CONFIG.DND5E.armorProficiencies).reduce((obj, [key, label]) => {
-    //   if (key === "shl") return obj;
-    //   obj[key] = {
-    //     label: label,
-    //     types: []
-    //   }
-    //   return obj;
-    // }, {});
-
     let data = {
       armor: foundry.utils.getProperty(this.object.data.data, "details.armor"),
-      types: {}
+      types: Object.entries(CONFIG.DND5E.armorProficiencies).reduce((obj, [key, label]) => {
+        if (key === "shl") return obj;
+        obj[key] = {
+          label: label,
+          children: {}
+        }
+        return obj;
+      }, {})
     };
 
     const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
     for ( const [key, id] of Object.entries(CONFIG.DND5E.armorIds) ) {
       const item = await pack.getDocument(id);
-      const type = foundry.utils.getProperty(item.data.data, "armor.type");
+      const type = CONFIG.DND5E.armorProficienciesMap[foundry.utils.getProperty(item.data.data, "armor.type")];
       const entry = {
         label: item.name,
         chosen: key === data.armor.type
       };
-      if ( data.types[type] === undefined ) {
-        data.types[type] = {
-          label: CONFIG.DND5E.armorProficiencies[CONFIG.DND5E.armorProficienciesMap[type]],
-          children: {}
-        }
-      }
       data.types[type].children[key] = entry;
     }
 

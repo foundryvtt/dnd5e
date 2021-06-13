@@ -1,9 +1,10 @@
 <form id="armor-config-npc" onsubmit="event.preventDefault();">
-  <!--<input type="text" name="ac" value="{{ac}}"/>-->
+    <!--<input type="text" name="ac" value="{{ac}}"/>-->
 
     <div class="form-group">
         <label>{{ localize "DND5E.ArmorType" }}</label>
         <select name="armor.type">
+            <option value=""{{#if (eq armor.type "")}} selected{{/if}}>{{ localize "DND5E.ArmorConfigFlat" }}</option>
             <option value="natural"{{#if (eq armor.type "natural")}} selected{{/if}}>{{ localize "DND5E.EquipmentNatural" }}</option>
         {{#each types as |group|}}
             <optgroup label="{{group.label}}">
@@ -12,7 +13,6 @@
                 {{/each}}
             </optgroup>
         {{/each}}
-            <option value=""{{#if (eq armor.type "")}} selected{{/if}}>{{ localize "DND5E.ArmorConfigFlat" }}</option>
         </select>
     </div>
 
