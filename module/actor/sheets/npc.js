@@ -89,7 +89,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     data.labels["type"] = this.actor.labels.creatureType;
 
     // Armor Type
-    data.labels["armorType"] = await this.armorLabel(data.data.details.armor);
+    data.labels["armorType"] = await this.armorLabel(data.data.attributes.ac);
 
     return data;
   }

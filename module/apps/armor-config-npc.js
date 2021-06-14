@@ -28,7 +28,7 @@ export default class ArmorConfigNPC extends DocumentSheet {
   /** @inheritdoc */
   async getData() {
     let data = {
-      armor: foundry.utils.getProperty(this.object.data.data, "details.armor"),
+      armor: foundry.utils.getProperty(this.object.data.data, "attributes.ac"),
       types: Object.entries(CONFIG.DND5E.armorProficiencies).reduce((obj, [key, label]) => {
         if (key === "shl") return obj;
         obj[key] = {
@@ -57,10 +57,14 @@ export default class ArmorConfigNPC extends DocumentSheet {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    const armorObject = foundry.utils.expandObject(formData);
-    const updates = {
-      "data.details.armor": armorObject.armor
-    };
-    return this.object.update(updates);
+    let armor = foundry.utils.expandObject(formData).armor;
+    if ( armor.type !== "" && armor.type !== "natural" ) {
+      const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
+      const item = await pack.getDocument(CONFIG.DND5E.armorIds[armor.type]);
+      armor.armor = item.data.data.armor;
+    } else {
+      armor.armor = null;
+    }
+    return this.object.update({"data.attributes.ac": armor});
   }
 }

@@ -315,12 +315,15 @@
     },
     "npc": {
       "templates": ["common", "creature"],
-      "details": {
-        "armor": {
+      "attributes": {
+        "ac": {
           "type": "",
+          "armor": null,
           "custom": "",
           "shield": false
-        },
+        }
+      },
+      "details": {
         "type": {
           "value": "",
           "subtype": "",

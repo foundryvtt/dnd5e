@@ -327,6 +327,19 @@ export default class Actor5e extends Actor {
     // Proficiency
     data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
 
+    // Armor Class
+    const ac = data.attributes.ac;
+    if ( !ac.value ) {
+      // If ac.value is not set, calculate automatically
+      let dex = Math.floor((data.abilities.dex.value - 10) / 2);
+      if ( ac.armor ) {
+        if ( ac.armor.dex !== null ) dex = Math.min(ac.armor.dex, dex);
+        ac.value = ac.armor.value + dex + (ac.shield ? 2 : 0);
+      } else {
+        ac.value = 10 + dex;
+      }
+    }
+
     // Spellcaster Level
     if ( data.attributes.spellcasting && !Number.isNumeric(data.details.spellLevel) ) {
       data.details.spellLevel = Math.max(data.details.cr, 1);
