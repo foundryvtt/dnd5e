@@ -182,6 +182,8 @@ Hooks.once("ready", function() {
   const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = "1.3.4";
   const COMPATIBLE_MIGRATION_VERSION = 0.80;
+  const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
+  if ( !currentVersion && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.data.version);
   const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
   if ( !needsMigration ) return;
 
