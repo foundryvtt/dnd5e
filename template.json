@@ -317,10 +317,11 @@
       "templates": ["common", "creature"],
       "attributes": {
         "ac": {
+          "override": null,
           "type": "",
-          "armor": null,
           "custom": "",
-          "shield": false
+          "shield": false,
+          "armor": null
         }
       },
       "details": {

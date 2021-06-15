@@ -1,5 +1,9 @@
-<form id="armor-config-npc" onsubmit="event.preventDefault();">
-    <!--<input type="text" name="armor.ac" value="{{armor.ac}}"/>-->
+<form onsubmit="event.preventDefault();">
+    <div class="ac-field form-group">
+        <input type="text" name="armor.override" value="{{armor.override}}" placeholder="{{preview}}" data-dtype="Number"/>
+    </div>
+
+    <p class="notes">{{ localize "DND5E.ArmorConfigHint" }}</p>
 
     <div class="form-group">
         <label>{{ localize "DND5E.ArmorType" }}</label>
