@@ -19,6 +19,8 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
   // In this case, the original formula is returned.
   if (terms.some(_isUnsupportedTerm)) return roll.formula;
 
+  terms.forEach(term => delete term.options.flavor);
+
   const rollableTerms = []; // Terms that are non-constant, and their associated operators
   const constantTerms = []; // Terms that are constant, and their associated operators
   let operators = [];       // Temporary storage for operators before they are moved to one of the above
