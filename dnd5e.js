@@ -180,9 +180,10 @@ Hooks.once("ready", function() {
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "1.3.4";
+  if ( !currentVersion ) return game.settings.set('dnd5e', 'systemMigrationVersion', game.system.data.version);
+  const NEEDS_MIGRATION_VERSION = "1.3.0";
   const COMPATIBLE_MIGRATION_VERSION = 0.80;
-  const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+  const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
   if ( !needsMigration ) return;
 
   // Perform the migration
