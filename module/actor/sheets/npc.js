@@ -106,7 +106,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
    * @return {string}  Formatted armor label.
    */
   async armorLabel(armorData) {
-    let typeLabel = armorData.custom;
+    let typeLabel = armorData.customLabel;
     if ( typeLabel === "" && armorData.type === "natural" ) {
       typeLabel = game.i18n.localize("DND5E.EquipmentNatural");
     }

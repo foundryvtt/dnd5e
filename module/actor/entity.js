@@ -118,7 +118,7 @@ export default class Actor5e extends Actor {
     }
 
     // Armor Class
-    if (  this.type === "npc" ) {
+    if ( this.type === "npc" ) {
       const ac = data.attributes.ac;
       if ( ac.override === null ) {
         // If ac.value is not set, calculate automatically
@@ -343,19 +343,6 @@ export default class Actor5e extends Actor {
 
     // Proficiency
     data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
-
-    // Armor Class
-    // const ac = data.attributes.ac;
-    // if ( !ac.value ) {
-    //   // If ac.value is not set, calculate automatically
-    //   let base = 10;
-    //   let dex = Math.floor((data.abilities.dex.value - 10) / 2);
-    //   if ( ac.armor ) {
-    //     base = ac.armor.value;
-    //     if ( ac.armor.dex !== null ) dex = Math.min(ac.armor.dex, dex);
-    //   }
-    //   ac.value = base + dex + (ac.shield ? 2 : 0);
-    // }
 
     // Spellcaster Level
     if ( data.attributes.spellcasting && !Number.isNumeric(data.details.spellLevel) ) {
