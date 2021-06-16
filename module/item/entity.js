@@ -1433,14 +1433,7 @@ export default class Item5e extends Item {
       if ( isNPC ) {
         updates["data.proficient"] = true;  // NPCs automatically have equipment proficiency
       } else {
-        const armorProf = {
-          "natural": true,
-          "clothing": true,
-          "light": "lgt",
-          "medium": "med",
-          "heavy": "hvy",
-          "shield": "shl"
-        }[data.data?.armor?.type];        // Player characters check proficiency
+        const armorProf = CONFIG.DND5E.armorProficienciesMap[data.data?.armor?.type]; // Player characters check proficiency
         const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
         updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf);
       }
@@ -1477,13 +1470,7 @@ export default class Item5e extends Item {
       if ( isNPC ) {
         updates["data.proficient"] = true;    // NPCs automatically have equipment proficiency
       } else {
-        const weaponProf = {
-          "natural": true,
-          "simpleM": "sim",
-          "simpleR": "sim",
-          "martialM": "mar",
-          "martialR": "mar"
-        }[data.data?.weaponType];         // Player characters check proficiency
+        const weaponProf = CONFIG.DND5E.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
         const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
         updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
       }

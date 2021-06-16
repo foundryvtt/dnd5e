@@ -1,11 +1,11 @@
 <form id="long-rest" class="dialog-content" onsubmit="event.preventDefault();">
-   <p>Take a long rest? On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots.</p>
+   <p>{{ localize "DND5E.LongRestHint" }}</p>
 
     {{#if promptNewDay}}
     <div class="form-group">
-        <label>Is New Day?</label>
+        <label>{{ localize "DND5E.NewDay" }}</label>
         <input type="checkbox" name="newDay" {{checked newDay}}/>
-        <p class="hint">Recover limited use abilities which recharge "per day"?</p>
+        <p class="hint">{{ localize "DND5E.NewDayHint" }}</p>
     </div>
     {{/if}}
 

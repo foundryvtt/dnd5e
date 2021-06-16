@@ -11,7 +11,7 @@
                 {{/select}}
             </select>
             <button id="roll-hd" {{#unless canRoll}}disabled{{/unless}}>
-                <i class="fas fa-dice-d20"></i> {{ localize "Roll" }}
+                <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}
             </button>
         </div>
         {{#unless canRoll}}
@@ -21,9 +21,9 @@
 
     {{#if promptNewDay}}
     <div class="form-group">
-        <label>Is New Day?</label>
+        <label>{{ localize "DND5E.NewDay" }}</label>
         <input type="checkbox" name="newDay" {{checked newDay}}/>
-        <p class="hint">Recover limited use abilities which recharge "per day"?</p>
+        <p class="hint">{{ localize "DND5E.NewDayHint" }}</p>
     </div>
     {{/if}}
 

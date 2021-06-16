@@ -85,6 +85,19 @@ DND5E.weaponProficiencies = {
 };
 
 /**
+ * A map of weapon item proficiency to actor item proficiency
+ * Used when a new player owned item is created
+ * @type {Object}
+ */
+DND5E.weaponProficienciesMap = {
+  "natural": true,
+  "simpleM": "sim",
+  "simpleR": "sim",
+  "martialM": "mar",
+  "martialR": "mar"
+}
+
+/**
  * The basic weapon types in 5e. This enables specific weapon proficiencies or
  * starting equipment provided by classes and backgrounds.
  *
@@ -227,8 +240,8 @@ DND5E.abilityActivationTypes = {
   "hour": DND5E.timePeriods.hour,
   "day": DND5E.timePeriods.day,
   "special": DND5E.timePeriods.spec,
-  "legendary": "DND5E.LegAct",
-  "lair": "DND5E.LairAct",
+  "legendary": "DND5E.LegendaryActionLabel",
+  "lair": "DND5E.LairActionLabel",
   "crew": "DND5E.VehicleCrewAction"
 };
 
@@ -368,6 +381,20 @@ DND5E.armorProficiencies = {
   "hvy": DND5E.equipmentTypes.heavy,
   "shl": "DND5E.EquipmentShieldProficiency"
 };
+
+/**
+ * A map of armor item proficiency to actor item proficiency
+ * Used when a new player owned item is created
+ * @type {Object}
+ */
+DND5E.armorProficienciesMap = {
+  "natural": true,
+  "clothing": true,
+  "light": "lgt",
+  "medium": "med",
+  "heavy": "hvy",
+  "shield": "shl"
+}
 
 
 /* -------------------------------------------- */
@@ -877,83 +904,83 @@ DND5E.characterFlags = {
   "diamondSoul": {
     name: "DND5E.FlagsDiamondSoul",
     hint: "DND5E.FlagsDiamondSoulHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "elvenAccuracy": {
     name: "DND5E.FlagsElvenAccuracy",
     hint: "DND5E.FlagsElvenAccuracyHint",
-    section: "Racial Traits",
+    section: "DND5E.RacialTraits",
     type: Boolean
   },
   "halflingLucky": {
     name: "DND5E.FlagsHalflingLucky",
     hint: "DND5E.FlagsHalflingLuckyHint",
-    section: "Racial Traits",
+    section: "DND5E.RacialTraits",
     type: Boolean
   },
   "initiativeAdv": {
     name: "DND5E.FlagsInitiativeAdv",
     hint: "DND5E.FlagsInitiativeAdvHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "initiativeAlert": {
     name: "DND5E.FlagsAlert",
     hint: "DND5E.FlagsAlertHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "jackOfAllTrades": {
     name: "DND5E.FlagsJOAT",
     hint: "DND5E.FlagsJOATHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "observantFeat": {
     name: "DND5E.FlagsObservant",
     hint: "DND5E.FlagsObservantHint",
     skills: ['prc','inv'],
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "powerfulBuild": {
     name: "DND5E.FlagsPowerfulBuild",
     hint: "DND5E.FlagsPowerfulBuildHint",
-    section: "Racial Traits",
+    section: "DND5E.RacialTraits",
     type: Boolean
   },
   "reliableTalent": {
     name: "DND5E.FlagsReliableTalent",
     hint: "DND5E.FlagsReliableTalentHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "remarkableAthlete": {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ['str','dex','con'],
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Boolean
   },
   "weaponCriticalThreshold": {
     name: "DND5E.FlagsWeaponCritThreshold",
     hint: "DND5E.FlagsWeaponCritThresholdHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Number,
     placeholder: 20
   },
   "spellCriticalThreshold": {
     name: "DND5E.FlagsSpellCritThreshold",
     hint: "DND5E.FlagsSpellCritThresholdHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Number,
     placeholder: 20
   },
   "meleeCriticalDamageDice": {
     name: "DND5E.FlagsMeleeCriticalDice",
     hint: "DND5E.FlagsMeleeCriticalDiceHint",
-    section: "Feats",
+    section: "DND5E.Feats",
     type: Number,
     placeholder: 0
   },
