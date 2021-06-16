@@ -120,7 +120,7 @@ export default class Actor5e extends Actor {
     // Armor Class
     if ( this.type === "npc" ) {
       const ac = data.attributes.ac;
-      if ( ac.override === null ) {
+      if ( ac.flat === null ) {
         // If ac.value is not set, calculate automatically
         let base = 10;
         let dex = data.abilities.dex.mod;
@@ -130,7 +130,7 @@ export default class Actor5e extends Actor {
         }
         ac.value = base + dex + (ac.shield ? 2 : 0);
       } else {
-        ac.value = ac.override;
+        ac.value = ac.flat;
       }
     }
 

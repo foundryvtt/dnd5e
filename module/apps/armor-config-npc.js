@@ -107,6 +107,6 @@ export default class ArmorConfigNPC extends DocumentSheet {
   async _onChangeInput(event) {
     super._onChangeInput(event);
     const data = foundry.utils.expandObject(this._getSubmitData()).armor;
-    this.form["armor.override"].placeholder = await this.calculateAC(data);
+    this.form["armor.flat"].placeholder = await this.calculateAC(data);
   }
 }
