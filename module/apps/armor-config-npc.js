@@ -93,10 +93,16 @@ export default class ArmorConfigNPC extends DocumentSheet {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    let armor = foundry.utils.expandObject(formData).armor;
-    const item = await this.getArmorItem(armor.type);
-    armor.armor = item?.data.data.armor ?? null;
-    return await this.object.update({"data.attributes.ac": armor});
+    let data = foundry.utils.expandObject(formData).armor;
+    const item = await this.getArmorItem(data.type);
+    if ( item !== undefined ) {
+      data.base = item.data.data.armor.value;
+      data.maxDex = item.data.data.armor.dex;
+    } else {
+      data.base = 10;
+      data.maxDex = null;
+    }
+    return this.object.update({"data.attributes.ac": data});
   }
 
   /* -------------------------------------------- */

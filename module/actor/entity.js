@@ -122,12 +122,9 @@ export default class Actor5e extends Actor {
       const ac = data.attributes.ac;
       if ( ac.flat === null ) {
         // If ac.value is not set, calculate automatically
-        let base = 10;
+        let base = ac.base ?? 10;
         let dex = data.abilities.dex.mod;
-        if ( ac.armor ) {
-          base = ac.armor.value;
-          if ( ac.armor.dex !== null ) dex = Math.min(ac.armor.dex, dex);
-        }
+        if ( ac.maxDex ) dex = Math.min(ac.maxDex, dex);
         ac.value = base + dex + (ac.shield ? 2 : 0);
       } else {
         ac.value = ac.flat;
