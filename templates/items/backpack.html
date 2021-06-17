@@ -15,9 +15,10 @@
 			</div>
 
 			<ul class="summary flexrow">
-				<li></li>
 				<li>
-					<input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'DND5E.Rarity' }}"/>
+					<select name="data.rarity">
+							{{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+					</select>
 				</li>
 				<li>
 					<input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
@@ -53,11 +54,7 @@
 			<div class="form-group">
 				<label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
 				<select name="data.capacity.type">
-					{{#select data.capacity.type}}
-						{{#each config.itemCapacityTypes}}
-							<option value="{{@key}}">{{localize this}}</option>
-						{{/each}}
-					{{/select}}
+					{{selectOptions config.itemCapacityTypes selected=data.capacity.type localize=true}}
 				</select>
 			</div>
 
