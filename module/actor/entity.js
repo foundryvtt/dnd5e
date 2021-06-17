@@ -51,6 +51,7 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareData() {
+    this._preparationWarnings = [];
     super.prepareData();
 
     // iterate over owned items and recompute attributes that depend on prepared actor data
@@ -61,6 +62,7 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
+    this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
@@ -144,6 +146,7 @@ export default class Actor5e extends Actor {
 
     // Prepare spell-casting data
     this._computeSpellcastingProgression(this.data);
+    this._computeArmorClass(data);
   }
 
   /* -------------------------------------------- */
@@ -396,6 +399,20 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Initialise derived AC fields for Active Effects to target.
+   * @param actorData
+   * @private
+   */
+  _prepareBaseArmorClass(actorData) {
+    const ac = actorData.data.attributes.ac;
+    ac.base = ac.shield = ac.bonus = ac.cover = 0;
+    this.armor = null;
+    this.shield = null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data related to the spell-casting capabilities of the Actor
    * @private
    */
@@ -479,6 +496,51 @@ export default class Actor5e extends Actor {
       spells.pact.max = parseInt(spells.pact.override) || 0
       spells.pact.level = spells.pact.max > 0 ? 1 : 0;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine a character's AC value from their equipped armor and shield.
+   * @param data
+   * @private
+   */
+  _computeArmorClass(data) {
+    const calc = data.attributes.ac;
+    if ( calc.flat !== null ) {
+      calc.value = calc.flat;
+      return;
+    }
+
+    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
+    const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
+      const armor = equip.data.data.armor;
+      if ( !equip.data.data.equipped || !armorTypes.has(armor?.type) ) return obj;
+      if ( armor.type === "shield" ) obj.shields.push(equip);
+      else obj.armors.push(equip);
+      return obj;
+    }, {armors: [], shields: []});
+
+    if ( armors.length ) {
+      if ( armors.length > 1 ) this._preparationWarnings.push('DND5E.WarnMultipleArmor');
+      this.armor = armors[0];
+      const armorData = this.armor.data.data.armor;
+      let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
+      if ( armorData.type === "heavy" ) ac = armorData.value;
+      if ( ac > calc.base ) calc.base = ac;
+    } else {
+      const ac = 10 + data.abilities.dex.mod;
+      if ( ac > calc.base ) calc.base = ac;
+    }
+
+    if ( shields.length ) {
+      if ( shields.length > 1 ) this._preparationWarnings.push('DND5E.WarnMultipleShields');
+      this.shield = shields[0];
+      const ac = this.shield.data.data.armor.value;
+      if ( ac > calc.shield ) calc.shield = ac;
+    }
+
+    calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
   }
 
   /* -------------------------------------------- */
@@ -1391,6 +1453,7 @@ export default class Actor5e extends Actor {
     d.data.attributes.exhaustion = o.data.attributes.exhaustion; // Keep your prior exhaustion level
     d.data.attributes.inspiration = o.data.attributes.inspiration; // Keep inspiration
     d.data.spells = o.data.spells; // Keep spell slots
+    d.data.attributes.ac.flat = target.data.data.attributes.ac.value; // Override AC
 
     // Token appearance updates
     d.token = {name: d.name};

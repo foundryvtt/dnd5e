@@ -5,6 +5,8 @@
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
 
         <section class="header-details flexrow">
+            {{> "systems/dnd5e/templates/actors/parts/actor-warnings.html"}}
+
             <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
             </h1>
@@ -38,7 +40,7 @@
 
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
-               <li class="attribute health">
+                <li class="attribute health">
                     <h4 class="attribute-name box-title rollable">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" data-dtype="Number"/>
@@ -53,9 +55,7 @@
 
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
-                    <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
-                    </div>
+                    <div class="attribute-value">{{data.attributes.ac.value}}</div>
                     <footer class="attribute-footer">
                         <span>{{ localize "DND5E.Proficiency" }}</span>
                         <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
