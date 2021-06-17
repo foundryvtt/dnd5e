@@ -339,6 +339,21 @@ DND5E.itemCapacityTypes = {
 /* -------------------------------------------- */
 
 /**
+ * List of various item rarities.
+ * @enum {String}
+ */
+DND5E.itemRarity = {
+  "common": "DND5E.ItemRarityCommon",
+  "uncommon": "DND5E.ItemRarityUncommon",
+  "rare": "DND5E.ItemRarityRare",
+  "veryRare": "DND5E.ItemRarityVeryRare",
+  "legendary": "DND5E.ItemRarityLegendary",
+  "artifact": "DND5E.ItemRarityArtifact"
+};
+
+/* -------------------------------------------- */
+
+/**
  * Enumerate the lengths of time over which an item can have limited use ability
  * @type {Object}
  */
