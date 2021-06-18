@@ -1,5 +1,6 @@
 import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
+import ActorArmorConfig from "../../apps/actor-armor.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
@@ -516,6 +517,9 @@ export default class ActorSheet5e extends ActorSheet {
     const button = event.currentTarget;
     let app;
     switch ( button.dataset.action ) {
+      case "armor":
+        app = new ActorArmorConfig(this.object);
+        break;
       case "hit-dice":
         app = new ActorHitDiceConfig(this.object);
         break;

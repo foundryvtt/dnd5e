@@ -117,19 +117,6 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Armor Class
-    if ( this.type === "npc" ) {
-      const ac = data.attributes.ac;
-      if ( ac.flat === null ) {
-        // If ac.value is not set, calculate automatically
-        const base = ac.base ?? 10;
-        const dex = Math.min(ac.maxDex ?? Infinity, data.abilities.dex.mod); // TODO: Minimum dex penalty for heavy armor
-        ac.value = base + dex + (ac.shield ? 2 : 0);
-      } else {
-        ac.value = ac.flat;
-      }
-    }
-
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
 
@@ -412,7 +399,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Initialise derived AC fields for Active Effects to target.
+   * Initialize derived AC fields for Active Effects to target.
    * @param actorData
    * @private
    */
@@ -515,12 +502,15 @@ export default class Actor5e extends Actor {
 
   /**
    * Determine a character's AC value from their equipped armor and shield.
-   * @param data
+   * @param {object} data
+   * @param {object} [options]
+   * @param {boolean} [options.ignoreFlat]  Should ac.flat be ignored while calculating the AC?
+   * @return {Number}                       Calculated armor value.
    * @private
    */
-  _computeArmorClass(data) {
+  _computeArmorClass(data, { ignoreFlat=false }={}) {
     const calc = data.attributes.ac;
-    if ( calc.flat !== null ) {
+    if ( !ignoreFlat && (calc.flat !== null) ) {
       calc.value = calc.flat;
       return;
     }
@@ -554,6 +544,7 @@ export default class Actor5e extends Actor {
     }
 
     calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
+    return calc.value;
   }
 
   /* -------------------------------------------- */

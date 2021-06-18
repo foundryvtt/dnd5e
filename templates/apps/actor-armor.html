@@ -1,0 +1,11 @@
+<form onsubmit="event.preventDefault();">
+    <div class="ac-field form-group">
+        <input type="text" name="ac.flat" value="{{ac.flat}}" placeholder="{{preview}}" data-dtype="Number"/>
+    </div>
+
+    <p class="notes">{{ localize "DND5E.ArmorConfigHint" }}</p>
+
+    <button type="submit" name="submit" value="1">
+        <i class="far fa-save"></i> {{ localize "DND5E.TraitSave" }}
+    </button>
+</form>
