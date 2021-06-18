@@ -76,7 +76,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async getData(options) {
+  getData(options) {
     const data = super.getData(options);
 
     // Challenge Rating
