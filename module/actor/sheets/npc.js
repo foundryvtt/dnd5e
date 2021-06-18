@@ -88,7 +88,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     data.labels["type"] = this.actor.labels.creatureType;
 
     // Armor Type
-    data.labels["armorType"] = await this.armorLabel(data.data.attributes.ac);
+    data.labels["armorType"] = this.armorLabel();
 
     return data;
   }
@@ -98,31 +98,21 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /**
    * Format NPC armor information into a localized string.
    *
-   * @param {object} armorData 
-   * @param {string} armorData.type     Type of armor for the NPC.
-   * @param {string} armorData.custom   Custom label override.
-   * @param {boolean} armorData.shield  Whether the NPC is wielding a shield.
    * @return {string}  Formatted armor label.
    */
-  async armorLabel(armorData) {
-    return "";
-//     let typeLabel = armorData.customLabel;
-//     if ( typeLabel === "" && armorData.type === "natural" ) {
-//       typeLabel = game.i18n.localize("DND5E.EquipmentNatural");
-//     }
-//     if ( typeLabel === "" && armorData.type !== "" ) {
-//       const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-//       const id = foundry.utils.getProperty(CONFIG.DND5E.armorIds, armorData.type);
-//       if ( id !== undefined ) {
-//         const item = await pack.getDocument(id);
-//         typeLabel = item?.name ?? "";
-//       }
-//     }
-// 
-//     const shieldLabel = game.i18n.localize("DND5E.EquipmentShield");
-//     if ( !armorData.shield ) return typeLabel;
-//     else if ( typeLabel === "" ) return shieldLabel;
-//     else return `${typeLabel}, ${shieldLabel}`;
+  armorLabel(armorData) {
+    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
+    const obj = this.actor.itemTypes.equipment.reduce( (obj, item) => {
+      const data = item.data.data;
+      if ( !armorTypes.has(data.armor?.type) ) return obj;
+      if ( (data.armor.type === "shield") ) obj.shield = item;
+      else obj.armor = item;
+      return obj;
+    }, {});
+
+    if ( obj.shield === undefined ) return obj.armor?.name ?? "";
+    if ( obj.armor === undefined ) return obj.shield?.name ?? "";
+    return `${obj.armor.name}, ${obj.shield.name}`;
   }
 
   /* -------------------------------------------- */

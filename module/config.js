@@ -359,6 +359,7 @@ DND5E.armorTypes = {
   "light": "DND5E.EquipmentLight",
   "medium": "DND5E.EquipmentMedium",
   "heavy": "DND5E.EquipmentHeavy",
+  "natural": "DND5E.EquipmentNatural",
   "shield": "DND5E.EquipmentShield"
 };
 
@@ -370,7 +371,6 @@ DND5E.armorTypes = {
  */
 DND5E.equipmentTypes = {
   "bonus": "DND5E.EquipmentBonus",
-  "natural": "DND5E.EquipmentNatural",
   "clothing": "DND5E.EquipmentClothing",
   "trinket": "DND5E.EquipmentTrinket",
   "vehicle": "DND5E.EquipmentVehicle",
