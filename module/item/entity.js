@@ -686,7 +686,7 @@ export default class Item5e extends Item {
         quantity = resource ? resource.data.data.quantity : 0;
         break;
       case "hitDice":
-        let denom = !["lowest", "highest"].includes(consume.target) ? consume.target : false;
+        let denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
         resource = actor.items.filter((item) => {
           if ( item.type !== "class" ) return false;
           return !denom || (item.data.data.hitDice === denom);
@@ -731,9 +731,9 @@ export default class Item5e extends Item {
         resourceUpdates.push({_id: consume.target, "data.quantity": remaining});
         break;
       case "hitDice":
-        if ( ["lowest", "highest"].includes(consume.target) ) resource = resource.sort((lhs, rhs) => {
+        if ( ["smallest", "largest"].includes(consume.target) ) resource = resource.sort((lhs, rhs) => {
           let sort = lhs.data.data.hitDice.localeCompare(rhs.data.data.hitDice, undefined, {numeric: true});
-          if ( consume.target === "highest" ) sort = sort * -1;
+          if ( consume.target === "largest" ) sort = sort * -1;
           return sort;
         });
         let toConsume = consume.amount;
