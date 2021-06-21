@@ -151,11 +151,11 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Hit Dice
     else if ( consume.type === "hitDice" ) {
-      return [
-        game.i18n.localize("DND5E.ConsumeHitDiceLowest"),
-        ...CONFIG.DND5E.hitDieTypes,
-        game.i18n.localize("DND5E.ConsumeHitDiceHighest")
-      ];
+      return {
+        "lowest": game.i18n.localize("DND5E.ConsumeHitDiceLowest"),
+        ...CONFIG.DND5E.hitDieTypes.reduce((obj, hd) => { obj[hd] = hd; return obj; }, {}),
+        "highest": game.i18n.localize("DND5E.ConsumeHitDiceHighest")
+      };
     }
 
     // Materials

@@ -550,10 +550,7 @@ export default class Item5e extends Item {
     if ( !foundry.utils.isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
     if ( consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
     if ( !foundry.utils.isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
-    if ( !foundry.utils.isObjectEmpty(resourceUpdates) ) {
-      const resource = actor.items.get(id.consume?.target);
-      if ( resource ) await resource.update(resourceUpdates);
-    }
+    if ( !resourceUpdates.length > 0 ) await actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Initiate measured template creation
     if ( createMeasuredTemplate ) {
@@ -586,7 +583,7 @@ export default class Item5e extends Item {
     const id = this.data.data;
     const actorUpdates = {};
     const itemUpdates = {};
-    const resourceUpdates = {};
+    const resourceUpdates = [];
 
     // Consume Recharge
     if ( consumeRecharge ) {
@@ -657,7 +654,7 @@ export default class Item5e extends Item {
    * Handle update actions required when consuming an external resource
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
-   * @param {object} resourceUpdates    An object of data updates applied to a different resource item (Item)
+   * @param {object} resourceUpdates    An array of updates to apply to other items owned by the actor
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @private
    */
@@ -687,6 +684,17 @@ export default class Item5e extends Item {
       case "material":
         resource = actor.items.get(consume.target);
         quantity = resource ? resource.data.data.quantity : 0;
+        break;
+      case "hitDice":
+        let denom = !["lowest", "highest"].includes(consume.target) ? consume.target : false;
+        resource = actor.items.filter((item) => {
+          if ( item.type !== "class" ) return false;
+          return !denom || (item.data.data.hitDice === denom);
+        });
+        quantity = resource.reduce((count, cls) => {
+          count += cls.data.data.levels - cls.data.data.hitDiceUsed;
+          return count;
+        }, 0);
         break;
       case "charges":
         resource = actor.items.get(consume.target);
@@ -720,13 +728,25 @@ export default class Item5e extends Item {
         break;
       case "ammo":
       case "material":
-        resourceUpdates["data.quantity"] = remaining;
+        resourceUpdates.push({_id: consume.target, "data.quantity": remaining});
+        break;
+      case "hitDice":
+        if ( ["lowest", "highest"].includes(consume.target) ) resource = resource.sort((lhs, rhs) => {
+          let sort = lhs.data.data.hitDice.localeCompare(rhs.data.data.hitDice, undefined, {numeric: true});
+          if ( consume.target === "highest" ) sort = sort * -1;
+          return sort;
+        });
+        // resourceUpdates["data.hitDiceUsed"] = updatedUsed;
+        // resourceTarget = cls.id;
+        console.log(`HD: ${resource.map(cls => cls.data.data.hitDice)}`);
         break;
       case "charges":
         const uses = resource.data.data.uses || {};
         const recharge = resource.data.data.recharge || {};
-        if ( uses.per && uses.max ) resourceUpdates["data.uses.value"] = remaining;
-        else if ( recharge.value ) resourceUpdates["data.recharge.charged"] = false;
+        let data = {_id: consume.target};
+        if ( uses.per && uses.max ) data["data.uses.value"] = remaining;
+        else if ( recharge.value ) data["data.recharge.charged"] = false;
+        resourceUpdates.push(data);
         break;
     }
   }
@@ -983,7 +1003,7 @@ export default class Item5e extends Item {
       // Get pending ammunition update
       const usage = this._getUsageUpdates({consumeResource: true});
       if ( usage === false ) return null;
-      ammoUpdate = usage.resourceUpdates || {};
+      ammoUpdate = usage.resourceUpdates || [];
     }
 
     // Compose roll options
@@ -1023,7 +1043,7 @@ export default class Item5e extends Item {
     if ( roll === false ) return null;
 
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammo && !isObjectEmpty(ammoUpdate) ) await ammo.update(ammoUpdate);
+    if ( ammo && ammoUpdate.length > 0 ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
     return roll;
   }
 
