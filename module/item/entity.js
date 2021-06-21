@@ -550,7 +550,7 @@ export default class Item5e extends Item {
     if ( !foundry.utils.isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
     if ( consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
     if ( !foundry.utils.isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
-    if ( !resourceUpdates.length > 0 ) await actor.updateEmbeddedDocuments("Item", resourceUpdates);
+    if ( resourceUpdates.length > 0 ) await actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Initiate measured template creation
     if ( createMeasuredTemplate ) {
@@ -736,9 +736,17 @@ export default class Item5e extends Item {
           if ( consume.target === "highest" ) sort = sort * -1;
           return sort;
         });
-        // resourceUpdates["data.hitDiceUsed"] = updatedUsed;
-        // resourceTarget = cls.id;
-        console.log(`HD: ${resource.map(cls => cls.data.data.hitDice)}`);
+        let toConsume = consume.amount;
+        for ( const cls of resource ) {
+          const d = cls.data.data;
+          const space = (toConsume > 0 ? d.levels : 0) - d.hitDiceUsed;
+          const delta = toConsume > 0 ? Math.min(toConsume, space) : Math.max(toConsume, space);
+          if ( delta !== 0 ) {
+            resourceUpdates.push({_id: cls.id, "data.hitDiceUsed": d.hitDiceUsed + delta});
+            toConsume -= delta;
+            if ( toConsume === 0 ) break;
+          }
+        }
         break;
       case "charges":
         const uses = resource.data.data.uses || {};
