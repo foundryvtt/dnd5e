@@ -295,6 +295,20 @@
   font-size: 20px;
   font-weight: 700;
 }
+.dnd5e.sheet .sheet-header .header-details .warnings {
+  flex: 0 0 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dnd5e.sheet .sheet-header .header-details .warnings .notification {
+  font-family: 'Signika', sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  box-shadow: none;
+  padding: 2px 8px;
+  margin-bottom: 2px;
+}
 .dnd5e.sheet .sheet-header h1 {
   flex: 1;
   border-bottom: none;
