@@ -1337,19 +1337,19 @@ export default class Actor5e extends Actor {
   /**
    * Transform this Actor into another one.
    *
-   * @param {Actor} target The target Actor.
-   * @param {boolean} [keepPhysical] Keep physical abilities (str, dex, con)
-   * @param {boolean} [keepMental] Keep mental abilities (int, wis, cha)
-   * @param {boolean} [keepSaves] Keep saving throw proficiencies
-   * @param {boolean} [keepSkills] Keep skill proficiencies
-   * @param {boolean} [mergeSaves] Take the maximum of the save proficiencies
-   * @param {boolean} [mergeSkills] Take the maximum of the skill proficiencies
-   * @param {boolean} [keepClass] Keep proficiency bonus
-   * @param {boolean} [keepFeats] Keep features
-   * @param {boolean} [keepSpells] Keep spells
-   * @param {boolean} [keepItems] Keep items
-   * @param {boolean} [keepBio] Keep biography
-   * @param {boolean} [keepVision] Keep vision
+   * @param {Actor5e} target            The target Actor.
+   * @param {boolean} [keepPhysical]    Keep physical abilities (str, dex, con)
+   * @param {boolean} [keepMental]      Keep mental abilities (int, wis, cha)
+   * @param {boolean} [keepSaves]       Keep saving throw proficiencies
+   * @param {boolean} [keepSkills]      Keep skill proficiencies
+   * @param {boolean} [mergeSaves]      Take the maximum of the save proficiencies
+   * @param {boolean} [mergeSkills]     Take the maximum of the skill proficiencies
+   * @param {boolean} [keepClass]       Keep proficiency bonus
+   * @param {boolean} [keepFeats]       Keep features
+   * @param {boolean} [keepSpells]      Keep spells
+   * @param {boolean} [keepItems]       Keep items
+   * @param {boolean} [keepBio]         Keep biography
+   * @param {boolean} [keepVision]      Keep vision
    * @param {boolean} [transformTokens] Transform linked tokens too
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
@@ -1474,9 +1474,9 @@ export default class Actor5e extends Actor {
     const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
       const newTokenData = foundry.utils.deepClone(d.token);
-      if ( !t.data.actorLink ) newTokenData.actorData = newActor.data;
       newTokenData._id = t.data._id;
       newTokenData.actorId = newActor.id;
+      newTokenData.actorLink = true;
       return newTokenData;
     });
     return canvas.scene?.updateEmbeddedDocuments("Token", updates);

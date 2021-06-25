@@ -541,22 +541,19 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onCycleSkillProficiency(event) {
     event.preventDefault();
-    const field = $(event.currentTarget).siblings('input[type="hidden"]');
+    const field = event.currentTarget.previousElementSibling;
+    const skillName = field.parentElement.dataset.skill;
+    const source = this.actor.data._source.data.skills[skillName];
+    if ( !source ) return;
 
-    // Get the current level and the array of levels
-    const level = parseFloat(field.val());
+    // Cycle to the next or previous skill level
     const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(level);
-
-    // Toggle next level - forward on click, backwards on right
-    if ( event.type === "click" ) {
-      field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
-    } else if ( event.type === "contextmenu" ) {
-      field.val(levels[(idx === 0) ? levels.length - 1 : idx - 1]);
-    }
+    let idx = levels.indexOf(source.value);
+    const next = idx + (event.type === "click" ? 1 : 3);
+    field.value = levels[next % 4];
 
     // Update the field value and save the form
-    this._onSubmit(event);
+    return this._onSubmit(event);
   }
 
   /* -------------------------------------------- */

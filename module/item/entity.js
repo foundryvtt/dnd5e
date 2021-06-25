@@ -1490,7 +1490,7 @@ export default class Item5e extends Item {
   static async createScrollFromSpell(spell) {
 
     // Get spell data
-    const itemData = spell instanceof Item5e ? spell.data : spell;
+    const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
     const {actionType, description, source, activation, duration, target, range, damage, save, level} = itemData.data;
 
     // Get scroll data
@@ -1510,7 +1510,7 @@ export default class Item5e extends Item {
     const desc = `${scrollIntro}<hr/><h3>${itemData.name} (Level ${level})</h3><hr/>${description.value}<hr/><h3>Scroll Details</h3><hr/>${scrollDetails}`;
 
     // Create the spell scroll data
-    const spellScrollData = mergeObject(scrollData, {
+    const spellScrollData = foundry.utils.mergeObject(scrollData, {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       data: {
