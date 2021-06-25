@@ -1500,10 +1500,14 @@ export default class Actor5e extends Actor {
       const baseActor = game.actors.get(this.token.data.actorId);
       const prototypeTokenData = await baseActor.getTokenData();
       const tokenUpdate = {actorData: {}};
-      for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
+      for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation", "name"] ) {
         tokenUpdate[k] = prototypeTokenData[k];
       }
-      return this.token.update(tokenUpdate, {recursive: false});
+      await this.token.update(tokenUpdate, {recursive: false});
+      await this.sheet.close();
+      const actor = this.token.getActor();
+      actor.sheet.render(true);
+      return actor;
     }
 
     // Obtain a reference to the original actor
