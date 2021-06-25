@@ -349,6 +349,18 @@ DND5E.limitedUsePeriods = {
   "charges": "DND5E.Charges"
 };
 
+/* -------------------------------------------- */
+
+/**
+ * Specific equipment types that modify base AC
+ * @type {object}
+ */
+DND5E.armorTypes = {
+  "light": "DND5E.EquipmentLight",
+  "medium": "DND5E.EquipmentMedium",
+  "heavy": "DND5E.EquipmentHeavy",
+  "shield": "DND5E.EquipmentShield"
+};
 
 /* -------------------------------------------- */
 
@@ -357,15 +369,12 @@ DND5E.limitedUsePeriods = {
  * @type {Object}
  */
 DND5E.equipmentTypes = {
-  "light": "DND5E.EquipmentLight",
-  "medium": "DND5E.EquipmentMedium",
-  "heavy": "DND5E.EquipmentHeavy",
   "bonus": "DND5E.EquipmentBonus",
   "natural": "DND5E.EquipmentNatural",
-  "shield": "DND5E.EquipmentShield",
   "clothing": "DND5E.EquipmentClothing",
   "trinket": "DND5E.EquipmentTrinket",
-  "vehicle": "DND5E.EquipmentVehicle"
+  "vehicle": "DND5E.EquipmentVehicle",
+  ...DND5E.armorTypes
 };
 
 
