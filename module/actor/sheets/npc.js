@@ -100,19 +100,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
    *
    * @return {string}  Formatted armor label.
    */
-  armorLabel(armorData) {
-    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
-    const obj = this.actor.itemTypes.equipment.reduce( (obj, item) => {
-      const data = item.data.data;
-      if ( !armorTypes.has(data.armor?.type) ) return obj;
-      if ( (data.armor.type === "shield") ) obj.shield = item;
-      else obj.armor = item;
-      return obj;
-    }, {});
-
-    if ( obj.shield === undefined ) return obj.armor?.name ?? "";
-    if ( obj.armor === undefined ) return obj.shield?.name ?? "";
-    return `${obj.armor.name}, ${obj.shield.name}`;
+  armorLabel() {
+    if ( this.actor.shield === undefined ) return this.actor.armor?.name ?? "";
+    if ( this.actor.armor === undefined ) return this.actor.shield?.name ?? "";
+    return `${this.actor.armor.name}, ${this.actor.shield.name}`;
   }
 
   /* -------------------------------------------- */
