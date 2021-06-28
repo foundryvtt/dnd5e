@@ -96,6 +96,64 @@
             </div>
 
             {{!-- Proficiencies --}}
+            <div>
+                <h2>{{ localize "DND5E.ProficiencyPl" }}</h2>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    {{ localize "DND5E.Armor" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-armor" data-target="data.proficiencies.armor" data-options="armor">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.proficiencies.armor.selected as |v k|}}
+                            <li class="tag {{k}}">{{v}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    {{ localize "DND5E.ItemTypeWeaponPl" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-weapon" data-target="data.proficiencies.weapon" data-options="weapon">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.proficiencies.weapon.selected as |v k|}}
+                            <li class="tag {{k}}">{{v}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    {{ localize "DND5E.ItemTypeToolPl" }}
+                    {{#if editable}}
+                    <a class="trait-selector class-tool" data-target="data.proficiencies.tool" data-options="tool">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.proficiencies.tool.selected as |v k|}}
+                            <li class="tag {{k}}">{{v}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label>
                     {{ localize "DND5E.ClassSaves" }}

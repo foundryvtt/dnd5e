@@ -160,6 +160,7 @@ export default class Item5e extends Item {
     // Classes
     if ( itemData.type === "class" ) {
       data.levels = Math.clamped(data.levels, 1, 20);
+      this._prepareProficiencies(data.proficiencies);
     }
 
     // Spell Level,  School, and Components
@@ -235,6 +236,40 @@ export default class Item5e extends Item {
 
     // if this item is owned, we prepareFinalAttributes() at the end of actor init
     if (!this.isOwned) this.prepareFinalAttributes();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the data structure for proficiencies for classes
+   * @param {object} profs   The raw proficiency data object from the class data
+   * @private
+   */
+  _prepareProficiencies(profs={}) {
+    const map = {
+      "armor": CONFIG.DND5E.armorProficiencies,
+      "weapon": CONFIG.DND5E.weaponProficiencies,
+      "tool": CONFIG.DND5E.toolProficiencies,
+      "saves": CONFIG.DND5E.abilities,
+      "skills": CONFIG.DND5E.skills
+    };
+    for ( let [p, choices] of Object.entries(map) ) {
+      const prof = profs[p];
+      if ( !prof ) continue;
+      let values = [];
+      if ( prof.value ) {
+        values = prof.value instanceof Array ? prof.value : [prof.value];
+      }
+      prof.selected = values.reduce((obj, p) => {
+        obj[p] = choices[p];
+        return obj;
+      }, {});
+
+      // Add custom entry
+      if ( prof.custom ) {
+        prof.custom.split(";").forEach((c, i) => prof.selected[`custom${i+1}`] = c.trim());
+      }
+    }
   }
 
   /* -------------------------------------------- */
