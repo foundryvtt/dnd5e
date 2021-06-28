@@ -86,7 +86,24 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Creature Type
     data.labels["type"] = this.actor.labels.creatureType;
+
+    // Armor Type
+    data.labels["armorType"] = this.armorLabel();
+
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Format NPC armor information into a localized string.
+   *
+   * @return {string}  Formatted armor label.
+   */
+  armorLabel() {
+    if ( this.actor.shield === undefined ) return this.actor.armor?.name ?? "";
+    if ( this.actor.armor === undefined ) return this.actor.shield?.name ?? "";
+    return `${this.actor.armor.name}, ${this.actor.shield.name}`;
   }
 
   /* -------------------------------------------- */

@@ -95,7 +95,7 @@ DND5E.weaponProficienciesMap = {
   "simpleR": "sim",
   "martialM": "mar",
   "martialR": "mar"
-}
+};
 
 /**
  * The basic weapon types in 5e. This enables specific weapon proficiencies or
@@ -285,7 +285,7 @@ DND5E.tokenHPColors = {
   temp: 0x66CCFF,
   tempmax: 0x440066,
   negmax: 0x550000
-}
+};
 
 /* -------------------------------------------- */
 
@@ -359,6 +359,7 @@ DND5E.armorTypes = {
   "light": "DND5E.EquipmentLight",
   "medium": "DND5E.EquipmentMedium",
   "heavy": "DND5E.EquipmentHeavy",
+  "natural": "DND5E.EquipmentNatural",
   "shield": "DND5E.EquipmentShield"
 };
 
@@ -370,7 +371,6 @@ DND5E.armorTypes = {
  */
 DND5E.equipmentTypes = {
   "bonus": "DND5E.EquipmentBonus",
-  "natural": "DND5E.EquipmentNatural",
   "clothing": "DND5E.EquipmentClothing",
   "trinket": "DND5E.EquipmentTrinket",
   "vehicle": "DND5E.EquipmentVehicle",
@@ -403,7 +403,37 @@ DND5E.armorProficienciesMap = {
   "medium": "med",
   "heavy": "hvy",
   "shield": "shl"
-}
+};
+
+/**
+ * The basic armor types in 5e. This enables specific armor proficiencies,
+ * automated AC calculation in NPCs, and starting equipment.
+ *
+ * @enum {string}
+ */
+DND5E.armorIds = {
+  "breastplate": "SK2HATQ4abKUlV8i",
+  "chainmail": "rLMflzmxpe8JGTOA",
+  "chainshirt": "p2zChy24ZJdVqMSH",
+  "halfplate": "vsgmACFYINloIdPm",
+  "hide": "n1V07puo0RQxPGuF",
+  "leather": "WwdpHLXGX5r8uZu5",
+  "padded": "GtKV1b5uqFQqpEni",
+  "plate": "OjkIqlW2UpgFcjZa",
+  "ringmail": "nsXZejlmgalj4he9",
+  "scalemail": "XmnlF5fgIO3tg6TG",
+  "splint": "cKpJmsJmU8YaiuqG",
+  "studded": "TIV3B1vbrVHIhQAm"
+};
+
+/**
+ * The basic shield in 5e.
+ *
+ * @enum {string}
+ */
+DND5E.shieldIds = {
+  "shield": "sSs3hSzkKBMNBgTs"
+};
 
 
 /* -------------------------------------------- */

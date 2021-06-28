@@ -19,6 +19,11 @@
                 <div class="experience">
                     <span>{{data.details.xp.value}} XP</span>
                 </div>
+                <div class="proficiency">
+                    <span>
+                        {{ localize "DND5E.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}
+                    </span>
+                </div>
             </aside>
 
             {{!-- Character Summary --}}
@@ -53,12 +58,16 @@
                     </footer>
                 </li>
 
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
-                    <div class="attribute-value">{{data.attributes.ac.value}}</div>
+                <li class="attribute armor">
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.ArmorClass" }}
+                        <a class="config-button" data-action="armor" title="{{localize 'DND5E.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
+                    <div class="attribute-value">
+                        <span>{{data.attributes.ac.value}}</span>
+                    </div>
                     <footer class="attribute-footer">
-                        <span>{{ localize "DND5E.Proficiency" }}</span>
-                        <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                        <span>{{labels.armorType}}</span>
                     </footer>
                 </li>
 
