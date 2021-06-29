@@ -19,7 +19,9 @@
                     {{lookup config.weaponTypes data.weaponType }}
                 </li>
                 <li>
-                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'DND5E.Rarity' }}"/>
+                    <select name="data.rarity">
+                        {{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+                    </select>
                 </li>
                 <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
@@ -49,11 +51,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemWeaponType" }}</label>
                 <select name="data.weaponType">
-                    {{#select data.weaponType}}
-                    {{#each config.weaponTypes as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.weaponTypes selected=data.weaponType}}
                 </select>
             </div>
 

@@ -1193,6 +1193,16 @@
   font-size: 16px;
   line-height: 24px;
 }
+.dnd5e.sheet.item .sheet-header .summary select {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-weight: 100;
+}
 .dnd5e.sheet.item .sheet-navigation {
   margin-bottom: 5px;
 }
