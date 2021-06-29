@@ -201,6 +201,7 @@ function cleanActorData(actorData) {
 export const migrateItemData = function(item) {
   const updateData = {};
   _migrateItemAttunement(item, updateData);
+  _migrateItemRarity(item, updateData);
   _migrateItemSpellcasting(item, updateData);
   return updateData;
 };
@@ -400,6 +401,25 @@ function _migrateItemAttunement(item, updateData) {
   if ( item.data?.attuned === undefined ) return updateData;
   updateData["data.attunement"] = CONFIG.DND5E.attunementTypes.NONE;
   updateData["data.-=attuned"] = null;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Attempt to migrate item rarity from freeform string to enum value.
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
+ * @private
+ */
+function _migrateItemRarity(item, updateData) {
+  if ( item.data?.rarity === undefined ) return updateData;
+  const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
+    (CONFIG.DND5E.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
+  );
+  updateData["data.rarity"] = rarity ?? "";
   return updateData;
 }
 
