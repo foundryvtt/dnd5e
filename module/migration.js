@@ -416,10 +416,10 @@ function _migrateItemAttunement(item, updateData) {
  */
 function _migrateItemRarity(item, updateData) {
   if ( item.data?.rarity === undefined ) return updateData;
-  const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key => {
-    return (CONFIG.DND5E.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
-  });
-  updateData["data.rarity"] = ( rarity !== undefined ) ? rarity : "";
+  const rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
+    (CONFIG.DND5E.itemRarity[key].toLowerCase() === item.data.rarity.toLowerCase()) || (key === item.data.rarity)
+  );
+  updateData["data.rarity"] = rarity ?? "";
   return updateData;
 }
 
