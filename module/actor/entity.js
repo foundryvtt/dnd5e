@@ -1665,9 +1665,9 @@ export default class Actor5e extends Actor {
    * @param {string} data.custom         Semicolon-separated string of custom proficiencies
    * @param {string} type                "armor", "weapon", or "tool"
    */
-  static async prepareProficiencies(data, type) {
-    let profs = CONFIG.DND5E[`${type}Proficiencies`];
-    let itemTypes = CONFIG.DND5E[`${type}Ids`];
+  static prepareProficiencies(data, type) {
+    const profs = CONFIG.DND5E[`${type}Proficiencies`];
+    const itemTypes = CONFIG.DND5E[`${type}Ids`];
 
     let values = [];
     if ( data.value ) {
@@ -1675,13 +1675,13 @@ export default class Actor5e extends Actor {
     }
 
     data.selected = {};
-    const pack = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}`;
-    for ( const t of values ) {
-      if ( Object.keys(profs).includes(t) ) {
-        data.selected[t] = profs[t];
-      } else if ( itemTypes && Object.keys(itemTypes).includes(t) ) {
-        const item = await fromUuid(`${pack}.${itemTypes[t]}`);
-        data.selected[t] = item.name;
+    const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
+    for ( const key of values ) {
+      if ( !!profs[key] ) {
+        data.selected[key] = profs[key];
+      } else if ( itemTypes && !!itemTypes[key] ) {
+        const item = pack.index.get(itemTypes[key]);
+        data.selected[key] = item.name;
       }
     }
 

@@ -65,7 +65,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async getData(options) {
+  getData(options) {
 
     // Basic data
     let isOwner = this.actor.isOwner;
@@ -123,7 +123,7 @@ export default class ActorSheet5e extends ActorSheet {
     data.senses = this._getSenses(actorData);
 
     // Update traits
-    await this._prepareTraits(data.actor.data.traits);
+    this._prepareTraits(data.actor.data.traits);
 
     // Prepare owned items
     this._prepareItems(data);
@@ -203,7 +203,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {object} traits   The raw traits data object from the actor data
    * @private
    */
-  async _prepareTraits(traits) {
+  _prepareTraits(traits) {
     const map = {
       "dr": CONFIG.DND5E.damageResistanceTypes,
       "di": CONFIG.DND5E.damageResistanceTypes,
@@ -231,10 +231,10 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Populate and localize proficiencies
-    for ( let t of ["armor", "weapon", "tool"] ) {
+    for ( const t of ["armor", "weapon", "tool"] ) {
       const trait = traits[`${t}Prof`];
       if ( !trait ) continue;
-      await Actor5e.prepareProficiencies(trait, t);
+      Actor5e.prepareProficiencies(trait, t);
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
   }
