@@ -20,13 +20,13 @@ export default class ProficiencySelector extends TraitSelector {
   /** @inheritdoc */
   async getData() {
     const attr = foundry.utils.getProperty(this.object.data, this.attribute);
-    const value = (this.options.valueKey) ? attr[this.options.valueKey] ?? [] : attr;
+    const value = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
 
-    this.options.choices = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Proficiencies`);
-    let data = super.getData();
+    this.options.choices = CONFIG.DND5E[`${this.options.type}Proficiencies`];
+    const data = super.getData();
 
     const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-    const ids = foundry.utils.getProperty(CONFIG.DND5E, `${this.options.type}Ids`);
+    const ids = CONFIG.DND5E[`${this.options.type}Ids`];
     if ( ids !== undefined ) {
       const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
       for ( const [key, id] of Object.entries(ids) ) {
@@ -35,7 +35,7 @@ export default class ProficiencySelector extends TraitSelector {
         type = (this.options.type !== "weapon") ? type : type.slice(0, 3);
         const entry = {
           label: item.name,
-          chosen: attr ? attr.value.includes(key) : false
+          chosen: attr ? value.includes(key) : false
         };
         if ( data.choices[type] === undefined ) {
           data.choices[key] = entry;
