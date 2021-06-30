@@ -29,7 +29,7 @@ export default class ActorArmorConfig extends DocumentSheet {
   async getData() {
     return {
       ac: foundry.utils.getProperty(this.object.data, "data.attributes.ac"),
-      preview: this.object._computeAC(this.object.data.data, { ignoreFlat: true })
+      preview: this.object._computeArmorClass(this.object.data.data, { ignoreFlat: true })
     };
   }
 
@@ -48,6 +48,6 @@ export default class ActorArmorConfig extends DocumentSheet {
   /** @inheritdoc */
   async _onChangeInput(event) {
     super._onChangeInput(event);
-    this.form["ac.flat"].placeholder = this.object._computeAC(this.object.data.data, { ignoreFlat: true });
+    this.form["ac.flat"].placeholder = this.object._computeArmorClass(this.object.data.data, { ignoreFlat: true });
   }
 }
