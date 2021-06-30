@@ -27,12 +27,13 @@ export default class ProficiencySelector extends TraitSelector {
 
     const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
     const ids = CONFIG.DND5E[`${this.options.type}Ids`];
+    const map = CONFIG.DND5E[`${this.options.type}ProficienciesMap`];
     if ( ids !== undefined ) {
       const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
       for ( const [key, id] of Object.entries(ids) ) {
         const item = await pack.getDocument(id);
         let type = foundry.utils.getProperty(item.data.data, typeProperty);
-        type = (this.options.type !== "weapon") ? type : type.slice(0, 3);
+        if ( map && map[type] ) type = map[type];
         const entry = {
           label: item.name,
           chosen: attr ? value.includes(key) : false
