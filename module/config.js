@@ -146,17 +146,24 @@ DND5E.weaponIds = {
 /* -------------------------------------------- */
 
 
-
-DND5E.toolProficiencies = {
+/**
+ * The categories that Tool items can be grouped into.
+ *
+ * @enum {string}
+ */
+DND5E.toolTypes = {
   "art": "DND5E.ToolArtisans",
-  "disg": "DND5E.ToolDisguiseKit",
-  "forg": "DND5E.ToolForgeryKit",
   "game": "DND5E.ToolGamingSet",
-  "herb": "DND5E.ToolHerbalismKit",
-  "music": "DND5E.ToolMusicalInstrument",
-  "navg": "DND5E.ToolNavigators",
-  "pois": "DND5E.ToolPoisonersKit",
-  "thief": "DND5E.ToolThieves",
+  "music": "DND5E.ToolMusicalInstrument"
+};
+
+/**
+ * The general tool proficiencies that a character can gain.
+ *
+ * @enum {string}
+ */
+DND5E.toolProficiencies = {
+  ...DND5E.toolTypes,
   "vehicle": "DND5E.ToolVehicle"
 };
 

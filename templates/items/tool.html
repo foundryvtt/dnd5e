@@ -42,6 +42,14 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            {{!-- Tool Type --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.ItemToolType" }}</label>
+                <select name="data.toolType">
+                    {{selectOptions config.toolTypes selected=data.toolType blank=""}}
+                </select>
+            </div>
+
             {{!-- Tool Proficiency --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolProficiency" }}</label>
