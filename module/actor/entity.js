@@ -1677,9 +1677,9 @@ export default class Actor5e extends Actor {
     data.selected = {};
     const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
     for ( const key of values ) {
-      if ( !!profs[key] ) {
+      if ( profs[key] ) {
         data.selected[key] = profs[key];
-      } else if ( itemTypes && !!itemTypes[key] ) {
+      } else if ( itemTypes && itemTypes[key] ) {
         const item = pack.index.get(itemTypes[key]);
         data.selected[key] = item.name;
       }
