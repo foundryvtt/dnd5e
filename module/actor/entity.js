@@ -1655,6 +1655,43 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /*
+   * Populate a proficiency object with a `selected` field containing a combination of
+   * localizable group & individual proficiencies from `value` and the contents of `custom`.
+   *
+   * @param {object} data                Object containing proficiency data
+   * @param {Array.<string>} data.value  Array of standard proficiency keys
+   * @param {string} data.custom         Semicolon-separated string of custom proficiencies
+   * @param {string} type                "armor", "weapon", or "tool"
+   */
+  static prepareProficiencies(data, type) {
+    const profs = CONFIG.DND5E[`${type}Proficiencies`];
+    const itemTypes = CONFIG.DND5E[`${type}Ids`];
+
+    let values = [];
+    if ( data.value ) {
+      values = data.value instanceof Array ? data.value : [data.value];
+    }
+
+    data.selected = {};
+    const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
+    for ( const key of values ) {
+      if ( profs[key] ) {
+        data.selected[key] = profs[key];
+      } else if ( itemTypes && itemTypes[key] ) {
+        const item = pack.index.get(itemTypes[key]);
+        data.selected[key] = item.name;
+      }
+    }
+
+    // Add custom entries
+    if ( data.custom ) {
+      data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  DEPRECATED METHODS                          */
   /* -------------------------------------------- */
 

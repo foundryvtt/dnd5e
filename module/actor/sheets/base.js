@@ -1,3 +1,4 @@
+import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorArmorConfig from "../../apps/actor-armor.js";
@@ -208,10 +209,7 @@ export default class ActorSheet5e extends ActorSheet {
       "di": CONFIG.DND5E.damageResistanceTypes,
       "dv": CONFIG.DND5E.damageResistanceTypes,
       "ci": CONFIG.DND5E.conditionTypes,
-      "languages": CONFIG.DND5E.languages,
-      "armorProf": CONFIG.DND5E.armorProficiencies,
-      "weaponProf": CONFIG.DND5E.weaponProficiencies,
-      "toolProf": CONFIG.DND5E.toolProficiencies
+      "languages": CONFIG.DND5E.languages
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
@@ -229,6 +227,14 @@ export default class ActorSheet5e extends ActorSheet {
       if ( trait.custom ) {
         trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
       }
+      trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
+    }
+
+    // Populate and localize proficiencies
+    for ( const t of ["armor", "weapon", "tool"] ) {
+      const trait = traits[`${t}Prof`];
+      if ( !trait ) continue;
+      Actor5e.prepareProficiencies(trait, t);
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
   }
