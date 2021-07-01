@@ -52,4 +52,41 @@ export default class ProficiencySelector extends TraitSelector {
     return data;
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    for ( const checkbox of html[0].querySelectorAll("input[type='checkbox']") ) {
+      if ( checkbox.checked ) this._onToggleCategory(checkbox);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onChangeInput(event) {
+    super._onChangeInput(event);
+
+    if ( event.target.tagName === "INPUT" ) this._onToggleCategory(event.target);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Enable/disable all children when a category is checked.
+   *
+   * @param {HTMLElement} checkbox  Checkbox that was changed.
+   * @private
+   */
+  _onToggleCategory(checkbox) {
+    const children = checkbox.closest("li").querySelector("ol");
+    if ( !children ) return;
+
+    for ( const child of children.querySelectorAll("input[type='checkbox']") ) {
+      child.checked = child.disabled = checkbox.checked;
+    }
+  }
+
 }
