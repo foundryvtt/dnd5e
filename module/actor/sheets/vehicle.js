@@ -13,7 +13,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "vehicle"],
-      width: 605,
+      width: 720,
       height: 680
     });
   }
@@ -82,12 +82,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     // Handle crew actions
     if (item.type === 'feat' && item.data.activation.type === 'crew') {
-      item.crew = item.data.activation.cost;
       item.cover = game.i18n.localize(`DND5E.${item.data.cover ? 'CoverTotal' : 'None'}`);
       if (item.data.cover === .5) item.cover = '½';
       else if (item.data.cover === .75) item.cover = '¾';
       else if (item.data.cover === null) item.cover = '—';
-      if (item.crew < 1 || item.crew === null) item.crew = '—';
     }
 
     // Prepare vehicle weapons
@@ -113,7 +111,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const equipmentColumns = [{
       label: game.i18n.localize('DND5E.Quantity'),
       css: 'item-qty',
-      property: 'data.quantity'
+      property: 'data.quantity',
+      editable: 'Number'
     }, {
       label: game.i18n.localize('DND5E.AC'),
       css: 'item-ac',
@@ -133,13 +132,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       actions: {
         label: game.i18n.localize('DND5E.ActionPl'),
         items: [],
+        hasActions: true,
         crewable: true,
         dataset: {type: 'feat', 'activation.type': 'crew'},
         columns: [{
-          label: game.i18n.localize('DND5E.VehicleCrew'),
-          css: 'item-crew',
-          property: 'crew'
-        }, {
           label: game.i18n.localize('DND5E.Cover'),
           css: 'item-cover',
           property: 'cover'
@@ -170,6 +166,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: equipmentColumns
       }
     };
+
+    let [] = data.items.reduce((arr, item) => {
+      item.hasUses = item.data.uses && (item.data.uses.max > 0);
+      item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
+      item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
+      return arr;
+    }, [[], []]);
 
     const cargo = {
       crew: {
@@ -270,6 +273,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     html.find('.cargo-row input')
       .click(evt => evt.target.select())
       .change(this._onCargoRowChange.bind(this));
+
+    html.find('.item-qty:not(.cargo) input')
+      .click(evt => evt.target.select())
+      .change(this._onQtyChange.bind(this));
 
     if (this.actor.data.data.attributes.actions.stations) {
       html.find('.counter.actions, .counter.action-thresholds').hide();
@@ -396,6 +403,24 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     return item.update({'data.hp.value': hp});
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Special handling for editing quantity value of equipment and weapons inside the features tab.
+   * @param event {Event}
+   * @returns {Promise<Item>}
+   * @private
+   */
+
+  _onQtyChange(event) {
+    event.preventDefault();
+    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const item = this.actor.items.get(itemID);
+    const qty = parseInt(event.currentTarget.value);
+    event.currentTarget.value = qty;
+    return item.update({'data.quantity': qty});
+  }
+  
   /* -------------------------------------------- */
 
   /**
