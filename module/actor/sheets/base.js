@@ -123,7 +123,7 @@ export default class ActorSheet5e extends ActorSheet {
     data.senses = this._getSenses(actorData);
 
     // Update traits
-    this._prepareTraits(data.actor.data.traits);
+    this._prepareTraits(actorData.data.traits);
 
     // Prepare owned items
     this._prepareItems(data);
