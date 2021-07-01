@@ -157,7 +157,9 @@
         <div class="tab cargo flexcol" data-group="primary" data-tab="cargo">
             {{> 'systems/dnd5e/templates/actors/parts/actor-inventory.html' sections=cargo}}
         </div>
-
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/dnd5e/templates/actors/parts/active-effects.html"}}
+        </div>
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
             {{editor content=data.details.biography.value target='data.details.biography.value'
                      button=true owner=owner editable=editable rollData=rollData}}

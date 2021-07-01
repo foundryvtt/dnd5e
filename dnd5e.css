@@ -1647,6 +1647,10 @@
 .dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
   display: block;
 }
+.dnd5e.sheet.actor.vehicle {
+  min-width: 720px;
+  min-height: 680px;
+}
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;
 }
