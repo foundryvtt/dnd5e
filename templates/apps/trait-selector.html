@@ -1,4 +1,6 @@
 <form autocomplete="off" onsubmit="event.preventDefault();">
+
+    {{#*inline "traitList"}}
     <ol class="trait-list">
         {{#each choices as |choice key|}}
         <li>
@@ -6,9 +8,15 @@
                 <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.chosen}}>
                 {{choice.label}}
             </label>
+            {{#if choice.children}}
+              {{> traitList choices=choice.children}}
+            {{/if}}
         </li>
         {{/each}}
     </ol>
+    {{/inline}}
+
+    {{> traitList}}
     {{#if allowCustom}}
     <div class="form-group stacked">
         <label>{{ localize "DND5E.TraitSelectorSpecial" }}</label>
