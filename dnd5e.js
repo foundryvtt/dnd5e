@@ -157,10 +157,14 @@ Hooks.once("setup", function() {
 
   // Localize and sort CONFIG objects
   for ( let o of toLocalize ) {
-    const localized = Object.entries(CONFIG.DND5E[o]).map(e => {
-      return [e[0], game.i18n.localize(e[1])];
+    const localized = Object.entries(CONFIG.DND5E[o]).map(([k, v]) => {
+      if ( v.label ) v.label = game.i18n.localize(v.label);
+      if ( typeof v === "string" ) return [k, game.i18n.localize(v)];
+      return [k, v];
     });
-    if ( !noSort.includes(o) ) localized.sort((a, b) => a[1].localeCompare(b[1]));
+    if ( !noSort.includes(o) ) localized.sort((a, b) =>
+      (a[1].label ?? a[1]).localeCompare(b[1].label ?? b[1])
+    );
     CONFIG.DND5E[o] = localized.reduce((obj, e) => {
       obj[e[0]] = e[1];
       return obj;

@@ -1,6 +1,6 @@
 <form onsubmit="event.preventDefault();">
     <div class="ac-field form-group">
-        <input type="text" name="ac.flat" value="{{ac.flat}}" placeholder="{{preview}}" data-dtype="Number">
+        <input type="number" name="ac.flat" value="{{ac.flat}}" placeholder="{{preview}}">
     </div>
 
     <p class="notes">{{ localize "DND5E.ArmorConfigHint" }}</p>
@@ -8,13 +8,14 @@
     <div class="form-group select">
         <label>{{localize "DND5E.ArmorClassCalculation"}}</label>
         <select name="ac.calc">
-            {{selectOptions config.armorClasses selected=ac.calc}}
+            {{selectOptions config.armorClasses selected=ac.calc labelAttr="label"}}
         </select>
     </div>
 
     <div class="form-group">
         <label>{{localize "DND5E.ArmorClassFormula"}}</label>
-        <input type="text" name="ac.formula" value="{{ac.formula}}" placeholder="10 + @abilities.dex.mod" {{#if formulaDisabled}}disabled{{/if}}>
+        <input type="text" name="ac.formula" value="{{ac.formula}}" placeholder="{{config.armorClasses.default.formula}}"
+               {{#if formulaDisabled}}disabled{{/if}}>
     </div>
 
     <button type="submit" name="submit" value="1">

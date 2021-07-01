@@ -35,7 +35,7 @@ export default class ActorArmorConfig extends DocumentSheet {
     };
 
     if ( data.ac.calc !== "custom" ) {
-      data.ac.formula = CONFIG.DND5E.armorClassFormula[data.ac.calc] || "";
+      data.ac.formula = CONFIG.DND5E.armorClasses[data.ac.calc]?.formula || "";
       data.formulaDisabled = true;
     }
 
@@ -56,10 +56,10 @@ export default class ActorArmorConfig extends DocumentSheet {
 
   /** @inheritdoc */
   async _onChangeInput(event) {
-    super._onChangeInput(event);
+    await super._onChangeInput(event);
     const calc = this.form["ac.calc"].value;
     this.form["ac.formula"].disabled = calc !== "custom";
-    if ( calc !== "custom" ) this.form["ac.formula"].value = CONFIG.DND5E.armorClassFormula[calc] || "";
+    if ( calc !== "custom" ) this.form["ac.formula"].value = CONFIG.DND5E.armorClasses[calc]?.formula || "";
     const data = mergeObject(this.object.toObject(false), {
       'data.attributes.ac': {calc, formula: this.form["ac.formula"].value}
     });

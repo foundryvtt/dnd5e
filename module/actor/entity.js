@@ -540,7 +540,7 @@ export default class Actor5e extends Actor {
       if ( ac > calc.shield ) calc.shield = ac;
     }
 
-    let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClassFormula[calc.calc];
+    let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
     if ( !formula ) formula = "10 + @abilities.dex.mod";
     if ( !this.armor || calc.calc !== "default" ) {
       const replaced = Roll.replaceFormulaData(formula, this.getRollData());
