@@ -141,7 +141,7 @@ Hooks.once("setup", function() {
   // Localize CONFIG objects once up-front
   const toLocalize = [
     "abilities", "abilityAbbreviations", "abilityActivationTypes", "abilityConsumptionTypes", "actorSizes", "alignments",
-    "armorProficiencies", "conditionTypes", "consumableTypes", "cover", "currencies", "damageResistanceTypes",
+    "armorClasses", "armorProficiencies", "conditionTypes", "consumableTypes", "cover", "currencies", "damageResistanceTypes",
     "damageTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes", "itemRarity", "languages",
     "limitedUsePeriods", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels", "senses", "skills",
     "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools", "targetTypes",
@@ -150,9 +150,9 @@ Hooks.once("setup", function() {
 
   // Exclude some from sorting where the default order matters
   const noSort = [
-    "abilities", "alignments", "armorProficiencies", "currencies", "distanceUnits", "movementUnits", "itemActionTypes",
-    "itemRarity", "proficiencyLevels", "limitedUsePeriods", "spellComponents", "spellLevels", "spellPreparationModes",
-    "weaponTypes"
+    "abilities", "alignments", "armorClasses", "armorProficiencies", "currencies", "distanceUnits", "movementUnits",
+    "itemActionTypes", "itemRarity", "proficiencyLevels", "limitedUsePeriods", "spellComponents", "spellLevels",
+    "spellPreparationModes", "weaponTypes"
   ];
 
   // Localize and sort CONFIG objects
