@@ -87,6 +87,7 @@ export default class ActorSheet5e extends ActorSheet {
     const actorData = this.actor.data.toObject(false);
     data.actor = actorData;
     data.data = actorData.data;
+    data.source = this.actor.data.toObject();
 
     // Owned Items
     data.items = actorData.items;
