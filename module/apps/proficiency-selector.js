@@ -115,7 +115,7 @@ export default class ProficiencySelector extends TraitSelector {
    * @private
    */
   _onToggleCategory(checkbox) {
-    const children = checkbox.closest("li").querySelector("ol");
+    const children = checkbox.closest("li")?.querySelector("ol");
     if ( !children ) return;
 
     for ( const child of children.querySelectorAll("input[type='checkbox']") ) {
