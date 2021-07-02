@@ -24,6 +24,13 @@ export default class TraitSelector extends DocumentSheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  get title() {
+    return this.options.title || super.title;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Return a reference to the target attribute
    * @type {string}
@@ -38,8 +45,8 @@ export default class TraitSelector extends DocumentSheet {
   getData() {
     const attr = foundry.utils.getProperty(this.object.data, this.attribute);
     const o = this.options;
-    const value = (o.valueKey) ? attr[o.valueKey] ?? [] : attr;
-    const custom = (o.customKey) ? attr[o.customKey] ?? "" : "";
+    const value = (o.valueKey) ? foundry.utils.getProperty(attr, o.valueKey) ?? [] : attr;
+    const custom = (o.customKey) ? foundry.utils.getProperty(attr, o.customKey) ?? "" : "";
 
 	  // Populate choices
     const choices = Object.entries(o.choices).reduce((obj, e) => {
