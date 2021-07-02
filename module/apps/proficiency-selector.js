@@ -79,11 +79,9 @@ export default class ProficiencySelector extends TraitSelector {
    * @private
    */
   _sortObject(object) {
-    const array = Array.from(Object.entries(object));
-    array.sort((lhs, rhs) => {
-      return lhs[1].label.localeCompare(rhs[1].label);
-    });
-    return Object.fromEntries(array);
+    return Object.fromEntries(Object.entries(object).sort((lhs, rhs) =>
+      lhs[1].label.localeCompare(rhs[1].label)
+    ));
   }
 
   /* -------------------------------------------- */
