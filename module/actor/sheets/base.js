@@ -894,7 +894,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool profociencies.
+   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool proficiencies.
    * @param {Event} event  The click event which originated the selection
    * @private
    */
@@ -903,6 +903,7 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
     const options = { name: a.dataset.target, title: label.innerText, type: a.dataset.type };
+    if ( options.type === "tool" ) options.sortCategories = true;
     return new ProficiencySelector(this.actor, options).render(true);
   }
 

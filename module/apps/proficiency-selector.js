@@ -11,7 +11,8 @@ export default class ProficiencySelector extends TraitSelector {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       title: "Actor Proficiency Selection",
-      type: ""
+      type: "",
+      sortCategories: false
     });
   }
 
@@ -59,7 +60,30 @@ export default class ProficiencySelector extends TraitSelector {
       }, {});
     }
 
+    if ( this.options.sortCategories ) data.choices = this._sortObject(data.choices);
+    for ( const category of Object.values(data.choices) ) {
+      if ( !category.children ) continue;
+      category.children = this._sortObject(category.children);
+    }
+
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Take the provided object and sort by the "label" property.
+   *
+   * @param {object} object  Object to be sorted.
+   * @return {object}        Sorted object.
+   * @private
+   */
+  _sortObject(object) {
+    const array = Array.from(Object.entries(object));
+    array.sort((lhs, rhs) => {
+      return lhs[1].label.localeCompare(rhs[1].label);
+    });
+    return Object.fromEntries(array);
   }
 
   /* -------------------------------------------- */
