@@ -124,10 +124,29 @@
 
             <div class="form-group">
                 <label>
+                    {{localize "DND5E.ClassSkillsEligible"}}
+                    {{#if editable }}
+                    <a class="trait-selector class-skills" data-target="data.skills.choices" data-options="skills.choices">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{/if}}
+                </label>
+                <div class="form-fields">
+                    <ul class="traits-list">
+                        {{#each data.skills.choices}}
+                        <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
                     {{localize "DND5E.ClassSkillsChosen"}}
                     {{#if editable }}
                     <a class="trait-selector class-skills" data-target="data.skills" data-options="skills">
-                        <i class="fas fa-edit"></i></a>
+                        <i class="fas fa-edit"></i>
+                    </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
