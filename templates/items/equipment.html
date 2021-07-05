@@ -55,6 +55,13 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label>{{ localize "DND5E.ItemEquipmentBase" }}</label>
+                <select name="data.baseEquipment">
+                    {{selectOptions baseItems selected=data.baseEquipment blank=""}}
+                </select>
+            </div>
+
             {{#unless isMountable}}
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>

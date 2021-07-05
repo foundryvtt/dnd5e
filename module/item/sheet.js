@@ -94,15 +94,18 @@ export default class ItemSheet5e extends ItemSheet {
    * @protected
    */
   async _getItemBaseTypes(item) {
-    const ids = CONFIG.DND5E[`${item.type}Ids`];
+    const type = item.type === "equipment" ? "armor" : item.type;
+    const ids = CONFIG.DND5E[`${type}Ids`];
     if ( ids === undefined ) return {};
 
     const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-    const type = item.data[`${item.type}Type`];
+    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
+    const baseType = foundry.utils.getProperty(item.data, typeProperty);
+
     const items = await Object.entries(ids).reduce(async (acc, [name, id]) => {
       const baseItem = await pack.getDocument(id);
       const obj = await acc;
-      if ( type && (type !== baseItem.data.data[`${item.type}Type`]) ) return obj;
+      if ( baseType !== foundry.utils.getProperty(baseItem.data.data, typeProperty) ) return obj;
       obj[name] = baseItem.name;
       return obj;
     }, {});
