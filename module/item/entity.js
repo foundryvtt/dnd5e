@@ -1363,11 +1363,14 @@ export default class Item5e extends Item {
       case "equipment":
         updates = this._onCreateOwnedEquipment(data, actorData, isNPC);
         break;
-      case "weapon":
-        updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
-        break;
       case "spell":
         updates = this._onCreateOwnedSpell(data, actorData, isNPC);
+        break;
+      case "tool":
+        updates = this._onCreateOwnedTool(data, actorData, isNPC);
+        break;
+      case "weapon":
+        updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
         break;
     }
     if (updates) return this.data.update(updates);
@@ -1438,7 +1441,12 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned equipment type Items
+   * Pre-creation logic for the automatic configuration of owned equipment type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedEquipment(data, actorData, isNPC) {
@@ -1461,7 +1469,12 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned spell type Items
+   * Pre-creation logic for the automatic configuration of owned spell type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedSpell(data, actorData, isNPC) {
@@ -1475,7 +1488,37 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned weapon type Items
+   * Pre-creation logic for the automatic configuration of owned tool type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
+   * @private
+   */
+  _onCreateOwnedTool(data, actorData, isNPC) {
+    const updates = {};
+    if ( data.data?.proficient === undefined ) {
+      if ( isNPC ) {
+        updates["data.proficient"] = 1;
+      } else {
+        const toolType = data.data?.toolType;
+        const actorToolProfs = actorData.data.traits?.toolProf?.value;
+        updates["data.proficient"] = actorToolProfs.includes(toolType) ? 1 : 0;
+      }
+    }
+    return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for the automatic configuration of owned weapon type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedWeapon(data, actorData, isNPC) {
