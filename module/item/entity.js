@@ -1479,7 +1479,7 @@ export default class Item5e extends Item {
       } else {
         const weaponProf = CONFIG.DND5E.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
         const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
-        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf) || actorWeaponProfs.includes(data.data?.baseWeapon);
+        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
       }
     }
     return updates;
