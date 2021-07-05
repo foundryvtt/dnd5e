@@ -1502,9 +1502,8 @@ export default class Item5e extends Item {
       if ( isNPC ) {
         updates["data.proficient"] = 1;
       } else {
-        const toolType = data.data?.toolType;
         const actorToolProfs = actorData.data.traits?.toolProf?.value;
-        updates["data.proficient"] = actorToolProfs.includes(toolType) ? 1 : 0;
+        updates["data.proficient"] = actorToolProfs.includes(data.data?.toolType) ? 1 : 0;
       }
     }
     return updates;
