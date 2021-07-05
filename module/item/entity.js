@@ -1359,9 +1359,6 @@ export default class Item5e extends Item {
       case "spell":
         updates = this._onCreateOwnedSpell(data, actorData, isNPC);
         break;
-      case "tool":
-        updates = this._onCreateOwnedTool(data, actorData, isNPC);
-        break;
     }
     if (updates) return this.data.update(updates);
   }
@@ -1463,25 +1460,6 @@ export default class Item5e extends Item {
       updates["data.prepared"] = isNPC;       // NPCs automatically prepare spells
     }
     return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Pre-creation logic for the automatic configuration of owned tool type Items.
-   * @private
-   */
-  _onCreateOwnedTool(data, actorData, isNPC) {
-    const updates = {};
-    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["data.proficient"] = 1;   /// NPCs automatically have tool proficiency
-      } else {
-        const actorToolProfs = actorData.data.traits?.toolProf?.value;
-        updates["data.proficient"] = (actorToolProfs.includes(data.data?.toolType) || actorToolProfs.includes(data.data?.baseTool));
-      }
-    }
-    foundry.utils.mergeObject(data, updates);
   }
 
   /* -------------------------------------------- */
