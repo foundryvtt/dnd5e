@@ -525,22 +525,30 @@ export default class Actor5e extends Actor {
     }, {armors: [], shields: []});
 
     if ( armors.length ) {
-      if ( armors.length > 1 ) this._preparationWarnings.push('DND5E.WarnMultipleArmor');
+      if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
       this.armor = armors[0];
       const armorData = this.armor.data.data.armor;
       let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
       if ( armorData.type === "heavy" ) ac = armorData.value;
-      if ( ac > calc.base ) calc.base = ac;
-    } else {
-      const ac = 10 + data.abilities.dex.mod;
-      if ( ac > calc.base ) calc.base = ac;
+      if ( ac > calc.base && calc.calc === "default" ) calc.base = ac;
     }
 
     if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push('DND5E.WarnMultipleShields');
+      if ( shields.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleShields");
       this.shield = shields[0];
       const ac = this.shield.data.data.armor.value;
       if ( ac > calc.shield ) calc.shield = ac;
+    }
+
+    if ( !this.armor || calc.calc !== "default" ) {
+      let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
+      if ( !formula || !Roll.validate(formula) ) {
+        this._preparationWarnings.push("DND5E.WarnBadACFormula");
+        formula = "10 + @abilities.dex.mod";
+      }
+      const replaced = Roll.replaceFormulaData(formula, this.getRollData());
+      const ac = Roll.safeEval(replaced);
+      if ( ac > calc.base ) calc.base = ac;
     }
 
     calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
