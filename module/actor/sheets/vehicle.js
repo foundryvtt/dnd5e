@@ -167,12 +167,11 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       }
     };
 
-    let [] = data.items.reduce((arr, item) => {
+    data.items.forEach(item => {
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-      return arr;
-    }, [[], []]);
+    });
 
     const cargo = {
       crew: {
