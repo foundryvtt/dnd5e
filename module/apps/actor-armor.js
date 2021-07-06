@@ -27,17 +27,26 @@ export default class ActorArmorConfig extends DocumentSheet {
 
   /** @inheritdoc */
   async getData() {
-    return {
-      ac: foundry.utils.getProperty(this.object.data, "data.attributes.ac"),
-      preview: this.object._computeArmorClass(this.object.data.data, { ignoreFlat: true })
+    const data = {
+      config: CONFIG.DND5E,
+      ac: foundry.utils.deepClone(foundry.utils.getProperty(this.object.data, "data.attributes.ac")),
+      preview: this.object._computeArmorClass(this.object.data.data, { ignoreFlat: true }),
+      formulaDisabled: false
     };
+
+    if ( data.ac.calc !== "custom" ) {
+      data.ac.formula = CONFIG.DND5E.armorClasses[data.ac.calc]?.formula || "";
+      data.formulaDisabled = true;
+    }
+
+    return data;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    let data = foundry.utils.expandObject(formData).ac;
+    const data = foundry.utils.expandObject(formData).ac;
     return this.object.update({"data.attributes.ac": data});
   }
 
@@ -47,7 +56,13 @@ export default class ActorArmorConfig extends DocumentSheet {
 
   /** @inheritdoc */
   async _onChangeInput(event) {
-    super._onChangeInput(event);
-    this.form["ac.flat"].placeholder = this.object._computeArmorClass(this.object.data.data, { ignoreFlat: true });
+    await super._onChangeInput(event);
+    const calc = this.form["ac.calc"].value;
+    this.form["ac.formula"].disabled = calc !== "custom";
+    if ( calc !== "custom" ) this.form["ac.formula"].value = CONFIG.DND5E.armorClasses[calc]?.formula || "";
+    const data = mergeObject(this.object.toObject(false), {
+      'data.attributes.ac': {calc, formula: this.form["ac.formula"].value}
+    });
+    this.form["ac.flat"].placeholder = this.object._computeArmorClass(data.data, { ignoreFlat: true });
   }
 }

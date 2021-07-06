@@ -457,6 +457,35 @@ DND5E.shieldIds = {
   "shield": "sSs3hSzkKBMNBgTs"
 };
 
+/**
+ * Common armor class calculations.
+ * @enum {object}
+ */
+DND5E.armorClasses = {
+  "default": {
+    "label": "DND5E.ArmorClassDefault",
+    "formula": "10 + @abilities.dex.mod"
+  },
+  "mage": {
+    "label": "DND5E.ArmorClassMage",
+    "formula": "13 + @abilities.dex.mod"
+  },
+  "draconic": {
+    "label": "DND5E.ArmorClassDraconic",
+    "formula": "13 + @abilities.dex.mod"
+  },
+  "unarmoredMonk": {
+    "label": "DND5E.ArmorClassUnarmoredMonk",
+    "formula": "10 + @abilities.dex.mod + @abilities.wis.mod"
+  },
+  "unarmoredBarb": {
+    "label": "DND5E.ArmorClassUnarmoredBarbarian",
+    "formula": "10 + @abilities.dex.mod + @abilities.con.mod"
+  },
+  "custom": {
+    "label": "DND5E.ArmorClassCustom"
+  }
+};
 
 /* -------------------------------------------- */
 
