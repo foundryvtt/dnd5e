@@ -1,6 +1,6 @@
 
 /**
- * Highlight critical success or failure on d20 rolls.
+ * Highlight critical success or failure on d20 rolls
  */
 export const highlightCriticalSuccessFailure = function(message, html, data) {
   if ( !message.isRoll || !message.isContentVisible ) return;
@@ -30,7 +30,7 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
 /* -------------------------------------------- */
 
 /**
- * Optionally hide the display of chat card action buttons which cannot be performed by the user.
+ * Optionally hide the display of chat card action buttons which cannot be performed by the user
  */
 export const displayChatActionButtons = function(message, html, data) {
   const chatCard = html.find(".dnd5e.chat-card");
@@ -55,8 +55,8 @@ export const displayChatActionButtons = function(message, html, data) {
 /* -------------------------------------------- */
 
 /**
- * This function is used to hook into the Chat Log context menu to add additional options to each message.
- * These options make it easy to conveniently apply damage to controlled tokens based on the value of a Roll.
+ * This function is used to hook into the Chat Log context menu to add additional options to each message
+ * These options make it easy to conveniently apply damage to controlled tokens based on the value of a Roll
  *
  * @param {HTMLElement} html    The Chat Message being rendered
  * @param {Array} options       The Array of Context Menu options
@@ -101,10 +101,10 @@ export const addChatMessageContextOptions = function(html, options) {
 
 /**
  * Apply rolled dice damage to the token or tokens which are currently controlled.
- * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance.
+ * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
  *
  * @param {HTMLElement} li      The chat entry which contains the roll data
- * @param {number} multiplier   A damage multiplier to apply to the rolled damage.
+ * @param {Number} multiplier   A damage multiplier to apply to the rolled damage.
  * @return {Promise}
  */
 function applyChatCardDamage(li, multiplier) {

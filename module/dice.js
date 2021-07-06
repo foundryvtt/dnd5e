@@ -2,11 +2,11 @@ export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
- * A standardized helper function for simplifying the constant parts of a multipart roll formula.
+ * A standardized helper function for simplifying the constant parts of a multipart roll formula
  *
  * @param {string} formula                 The original Roll formula
- * @param {object} data                    Actor or item data against which to parse the roll
- * @param {object} options                 Formatting options
+ * @param {Object} data                    Actor or item data against which to parse the roll
+ * @param {Object} options                 Formatting options
  * @param {boolean} options.constantFirst   Puts the constants before the dice terms in the resulting formula
  *
  * @return {string}                        The resulting simplified formula
@@ -62,9 +62,8 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
 
 /**
  * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
- *
  * @param {*} term - A single Dice term to check support on
- * @return {boolean} True when unsupported, false if supported
+ * @return {Boolean} True when unsupported, false if supported
  */
 function _isUnsupportedTerm(term) {
 	const diceTerm = term instanceof DiceTerm;
@@ -81,7 +80,7 @@ function _isUnsupportedTerm(term) {
 /**
  * A standardized helper function for managing core 5e d20 rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
- * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively.
+ * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
  *
  * @param {string[]} parts          The dice roll component parts, excluding the initial d20
  * @param {object} data             Actor or item data against which to parse the roll
@@ -165,9 +164,8 @@ export async function d20Roll({
 /* -------------------------------------------- */
 
 /**
- * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied.
- *
- * @return {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
+ * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
  */
 function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
@@ -184,9 +182,10 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
 /**
  * A standardized helper function for managing core 5e damage rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
- * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively.
+ * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
  *
- * @param {object} [options={}]
+ * @param {string[]} parts          The dice roll component parts, excluding the initial d20
+ * @param {object} [data]           Actor or item data against which to parse the roll
  *
  * @param {boolean} [critical=false] Flag this roll as a critical hit for the purposes of fast-forward or default dialog action
  * @param {number} [criticalBonusDice=0] A number of bonus damage dice that are added for critical hits
@@ -201,18 +200,11 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  * @param {string} [title]          The dice roll UI window title
  * @param {object} [dialogOptions]  Configuration dialog options
  *
- * @param {boolean} [options.fastForward=false] Allow fast-forward advantage selection
- * @param {Event}[options.event]            The triggering event which initiated the roll
- * @param {boolean} [options.allowCritical=true] Allow the opportunity for a critical hit to be rolled
- * @param {string} [options.template]       The HTML template used to render the roll dialog
- * @param {string} [options.title]          The dice roll UI window title
- * @param {object} [options.dialogOptions]  Configuration dialog options
- *
- * @param {boolean} [options.chatMessage=true] Automatically create a Chat Message for the result of this roll
- * @param {object} [options.messageData={}] Additional data which is applied to the created Chat Message, if any
- * @param {string} [options.rollMode]       A specific roll mode to apply as the default for the resulting roll
- * @param {object} [options.speaker]        The ChatMessage speaker to pass when creating the chat
- * @param {string} [options.flavor]         Flavor text to use in the posted chat message
+ * @param {boolean} [chatMessage=true] Automatically create a Chat Message for the result of this roll
+ * @param {object} [messageData={}] Additional data which is applied to the created Chat Message, if any
+ * @param {string} [rollMode]       A specific roll mode to apply as the default for the resulting roll
+ * @param {object} [speaker]        The ChatMessage speaker to pass when creating the chat
+ * @param {string} [flavor]         Flavor text to use in the posted chat message
  *
  * @return {Promise<DamageRoll|null>} The evaluated DamageRoll, or null if the workflow was canceled
  */
@@ -265,9 +257,8 @@ export async function damageRoll({
 /* -------------------------------------------- */
 
 /**
- * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied.
- *
- * @return {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
+ * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
 function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));

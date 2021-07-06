@@ -1,6 +1,5 @@
 /**
- * An application class which provides advanced configuration for special character flags which modify an Actor.
- *
+ * An application class which provides advanced configuration for special character flags which modify an Actor
  * @implements {DocumentSheet}
  */
 export default class ActorSheetFlags extends DocumentSheet {
@@ -37,8 +36,7 @@ export default class ActorSheetFlags extends DocumentSheet {
 
   /**
    * Prepare an object of sorted classes.
-   *
-   * @return {object}  Sorted object with the classes to be used in selectOptions
+   * @return {object}
    * @private
    */
   _getClasses() {
@@ -52,10 +50,9 @@ export default class ActorSheetFlags extends DocumentSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare an object of flags data which groups flags by section and add some
-   * additional data for rendering.
-   *
-   * @return {object}  Sorted flags with labels, hints, and values.
+   * Prepare an object of flags data which groups flags by section
+   * Add some additional data for rendering
+   * @return {object}
    * @private
    */
   _getFlags() {
@@ -76,9 +73,8 @@ export default class ActorSheetFlags extends DocumentSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the bonuses fields and their localization strings.
-   *
-   * @return {Array<object>}  Array of objects containing names and labels.
+   * Get the bonuses fields and their localization strings
+   * @return {Array<object>}
    * @private
    */
   _getBonuses() {

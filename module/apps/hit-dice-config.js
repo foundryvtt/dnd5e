@@ -1,6 +1,5 @@
 /**
  * A simple form to set actor hit dice amounts
- *
  * @implements {DocumentSheet}
  */
 export default class ActorHitDiceConfig extends DocumentSheet {
@@ -78,7 +77,6 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
     /**
      * Rolls the hit die corresponding with the class row containing the event's target button.
-     *
      * @param {MouseEvent} event
      * @private
      */

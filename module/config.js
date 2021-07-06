@@ -16,8 +16,7 @@ _______________________________`;
 
 /**
  * The set of Ability Scores used within the system
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.abilities = {
   "str": "DND5E.AbilityStr",
@@ -41,8 +40,7 @@ DND5E.abilityAbbreviations = {
 
 /**
  * Character alignment options
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.alignments = {
   'lg': "DND5E.AlignmentLG",
@@ -60,7 +58,6 @@ DND5E.alignments = {
 
 /**
  * An enumeration of item attunement types
- *
  * @enum {number}
  */
 DND5E.attunementTypes = {
@@ -71,7 +68,6 @@ DND5E.attunementTypes = {
 
 /**
  * An enumeration of item attunement states
- *
  * @type {{"0": string, "1": string, "2": string}}
  */
 DND5E.attunements = {
@@ -220,8 +216,7 @@ DND5E.toolIds = {
 
 /**
  * This Object defines the various lengths of time which can occur
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.timePeriods = {
   "inst": "DND5E.TimeInst",
@@ -241,8 +236,7 @@ DND5E.timePeriods = {
 
 /**
  * This describes the ways that an ability can be activated
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.abilityActivationTypes = {
   "none": "DND5E.None",
@@ -304,8 +298,7 @@ DND5E.tokenHPColors = {
 
 /**
  * Creature types
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.creatureTypes = {
   "aberration": "DND5E.CreatureAberration",
@@ -329,8 +322,7 @@ DND5E.creatureTypes = {
 
 /**
  * Classification types for item action types
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.itemActionTypes = {
   "mwak": "DND5E.ActionMWAK",
@@ -370,8 +362,7 @@ DND5E.itemRarity = {
 
 /**
  * Enumerate the lengths of time over which an item can have limited use ability
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.limitedUsePeriods = {
   "sr": "DND5E.ShortRest",
@@ -398,7 +389,7 @@ DND5E.armorTypes = {
 
 /**
  * The set of equipment types for armor, clothing, and other objects which can be worn by the character
- * @type {object}
+ * @type {Object}
  */
 DND5E.equipmentTypes = {
   "bonus": "DND5E.EquipmentBonus",
@@ -413,8 +404,7 @@ DND5E.equipmentTypes = {
 
 /**
  * The set of Armor Proficiencies which a character may have
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.armorProficiencies = {
   "lgt": DND5E.equipmentTypes.light,
@@ -472,8 +462,7 @@ DND5E.shieldIds = {
 
 /**
  * Enumerate the valid consumable types which are recognized by the system
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.consumableTypes = {
   "ammo": "DND5E.ConsumableAmmunition",
@@ -490,8 +479,7 @@ DND5E.consumableTypes = {
 
 /**
  * The valid currency denominations supported by the 5e system
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.currencies = {
   "pp": "DND5E.CurrencyPP",
@@ -504,7 +492,6 @@ DND5E.currencies = {
 
 /**
  * Define the upwards-conversion rules for registered currency types
- *
  * @type {{string, object}}
  */
 DND5E.currencyConversion = {
@@ -545,8 +532,7 @@ DND5E.damageResistanceTypes = mergeObject(foundry.utils.deepClone(DND5E.damageTy
 /**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
- *
- * @type {object<string,string>}
+ * @type {Object<string,string>}
  */
 DND5E.movementTypes = {
   "burrow": "DND5E.MovementBurrow",
@@ -559,8 +545,7 @@ DND5E.movementTypes = {
 /**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
- *
- * @type {object<string,string>}
+ * @type {Object<string,string>}
  */
 DND5E.movementUnits = {
   "ft": "DND5E.DistFt",
@@ -570,8 +555,7 @@ DND5E.movementUnits = {
 /**
  * The valid units of measure for the range of an action or effect.
  * This object automatically includes the movement units from DND5E.movementUnits
- *
- * @type {object<string,string>}
+ * @type {Object<string,string>}
  */
 DND5E.distanceUnits = {
   "none": "DND5E.None",
@@ -589,8 +573,7 @@ for ( let [k, v] of Object.entries(DND5E.movementUnits) ) {
 
 /**
  * Configure aspects of encumbrance calculation so that it could be configured by modules
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.encumbrance = {
   currencyPerWeight: 50,
@@ -602,8 +585,7 @@ DND5E.encumbrance = {
 
 /**
  * This Object defines the types of single or area targets which can be applied
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.targetTypes = {
   "none": "DND5E.None",
@@ -630,8 +612,7 @@ DND5E.targetTypes = {
 /**
  * Map the subset of target types which produce a template area of effect
  * The keys are DND5E target types and the values are MeasuredTemplate shape types
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.areaTargetTypes = {
   cone: "cone",
@@ -659,7 +640,6 @@ DND5E.healingTypes = {
 
 /**
  * Enumerate the denominations of hit dice which can apply to classes
- *
  * @type {string[]}
  */
 DND5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
@@ -669,7 +649,6 @@ DND5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
 
 /**
  * The set of possible sensory perception types which an Actor may have
- *
  * @enum {string}
  */
 DND5E.senses = {
@@ -683,8 +662,7 @@ DND5E.senses = {
 
 /**
  * The set of skill which can be trained
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.skills = {
   "acr": "DND5E.SkillAcr",
@@ -733,8 +711,7 @@ DND5E.spellProgression = {
 
 /**
  * The available choices for how spell damage scaling may be computed
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.spellScalingModes = {
   "none": "DND5E.SpellNone",
@@ -747,8 +724,7 @@ DND5E.spellScalingModes = {
 
 /**
  * Define the set of types which a weapon item can take
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.weaponTypes = {
   "simpleM": "DND5E.WeaponSimpleM",
@@ -765,8 +741,7 @@ DND5E.weaponTypes = {
 
 /**
  * Define the set of weapon property flags which can exist on a weapon
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.weaponProperties = {
   "ada": "DND5E.WeaponPropertiesAda",
@@ -847,7 +822,6 @@ DND5E.sourcePacks = {
 /**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
- *
  * @type {Array[]}
  */
 DND5E.SPELL_SLOT_TABLE = [
@@ -896,8 +870,7 @@ DND5E.polymorphSettings = {
 /**
  * Skill, ability, and tool proficiency levels
  * Each level provides a proficiency multiplier
- *
- * @type {object}
+ * @type {Object}
  */
 DND5E.proficiencyLevels = {
   0: "DND5E.NotProficient",
