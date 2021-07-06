@@ -85,6 +85,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // The Actor's data
     const actorData = this.actor.data.toObject(false);
+    const source = this.actor.data._source.data;
     data.actor = actorData;
     data.data = actorData.data;
 
@@ -105,6 +106,7 @@ export default class ActorSheet5e extends ActorSheet {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
+      abl.baseProf = source.abilities[a].proficient;
     }
 
     // Skills
@@ -114,6 +116,7 @@ export default class ActorSheet5e extends ActorSheet {
         skl.icon = this._getProficiencyIcon(skl.value);
         skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
         skl.label = CONFIG.DND5E.skills[s];
+        skl.baseValue = source.skills[s].value;
       }
     }
 
@@ -677,7 +680,7 @@ export default class ActorSheet5e extends ActorSheet {
       const similarItem = this.actor.items.find(i => {
         const sourceId = i.getFlag("core", "sourceId");
         return sourceId && (sourceId === itemData.flags.core?.sourceId) &&
-               (i.type === "consumable");
+               (i.type === "consumable") && (i.name === itemData.name);
       });
       if ( similarItem ) {
         return similarItem.update({
