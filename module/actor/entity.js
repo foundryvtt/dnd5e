@@ -530,7 +530,7 @@ export default class Actor5e extends Actor {
       const armorData = this.armor.data.data.armor;
       let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
       if ( armorData.type === "heavy" ) ac = armorData.value;
-      if ( ac > calc.base && calc.calc === "default" ) calc.base = ac;
+      if ( (ac > calc.base) && (calc.calc === "default") ) calc.base = ac;
     }
 
     if ( shields.length ) {
@@ -544,7 +544,7 @@ export default class Actor5e extends Actor {
       let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
       if ( !formula || !Roll.validate(formula) ) {
         this._preparationWarnings.push("DND5E.WarnBadACFormula");
-        formula = "10 + @abilities.dex.mod";
+        formula = CONFIG.DND5E.armorClasses.default.formula;
       }
       const replaced = Roll.replaceFormulaData(formula, this.getRollData());
       const ac = Roll.safeEval(replaced);
