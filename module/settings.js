@@ -130,4 +130,16 @@ export const registerSystemSettings = function() {
       transformTokens: true
     }
   });
+
+  /**
+   * Option to replace imperial weight units with metric weight units.
+   */
+  game.settings.register("dnd5e", "metricWeightUnits", {
+    name: "SETTINGS.5eMetricN",
+    hint: "SETTINGS.5eMetricL",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: false
+  });
 };
