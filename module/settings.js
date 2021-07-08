@@ -137,7 +137,7 @@ export const registerSystemSettings = function() {
   game.settings.register("dnd5e", "metricWeightUnits", {
     name: "SETTINGS.5eMetricN",
     hint: "SETTINGS.5eMetricL",
-    scope: "client",
+    scope: "world",
     config: true,
     type: Boolean,
     default: false

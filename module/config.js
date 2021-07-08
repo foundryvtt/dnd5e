@@ -607,9 +607,18 @@ for ( let [k, v] of Object.entries(DND5E.movementUnits) ) {
  * @type {Object}
  */
 DND5E.encumbrance = {
-  currencyPerWeight: 50,
-  strMultiplier: 15,
-  vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
+  currencyPerWeight: {
+    imperial: 50,
+    metric: 110
+  },
+  strMultiplier: {
+    imperial: 15,
+    metric: 6.8
+  },
+  vehicleWeightMultiplier: {
+    imperial: 2000, // 2000 lbs in a ton
+    metric: 910, // ~907 kg in a ton
+  }
 };
 
 /* -------------------------------------------- */
