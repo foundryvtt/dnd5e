@@ -616,8 +616,8 @@ DND5E.encumbrance = {
     metric: 6.8
   },
   vehicleWeightMultiplier: {
-    imperial: 2000, // 2000 lbs in a ton
-    metric: 910, // ~907 kg in a ton
+    imperial: 2000, // 2000 lbs in an imperial ton
+    metric: 1000, // 1000 kg in a metric ton
   }
 };
 
