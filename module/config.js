@@ -578,7 +578,9 @@ DND5E.movementTypes = {
  */
 DND5E.movementUnits = {
   "ft": "DND5E.DistFt",
-  "mi": "DND5E.DistMi"
+  "mi": "DND5E.DistMi",
+  "m": "DND5E.DistM",
+  "km": "DND5E.DistKm"
 };
 
 /**
