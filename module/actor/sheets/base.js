@@ -8,6 +8,8 @@ import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
+import ActorSkillConfig from "../../apps/skill-config.js";
+import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
 import {DND5E} from '../../config.js';
 import ActiveEffect5e from "../../active-effect.js";
@@ -671,6 +673,16 @@ export default class ActorSheet5e extends ActorSheet {
       case "type":
         app = new ActorTypeConfig(this.object);
         break;
+      case "ability": {
+        const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
+        app = new ActorAbilityConfig(this.object, null, ability);
+        break;
+      }
+      case "skill": {
+        const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
+        app = new ActorSkillConfig(this.object, null, skill);
+        break;
+      }
     }
     app?.render(true);
   }
@@ -1003,7 +1015,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollSkillCheck(event) {
     event.preventDefault();
-    const skill = event.currentTarget.parentElement.dataset.skill;
+    const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
     return this.actor.rollSkill(skill, {event: event});
   }
 
