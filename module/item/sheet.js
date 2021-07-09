@@ -110,7 +110,7 @@ export default class ItemSheet5e extends ItemSheet {
       return obj;
     }, {});
 
-    return items;
+    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
   }
 
   /* -------------------------------------------- */
