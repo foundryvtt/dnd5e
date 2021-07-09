@@ -123,6 +123,7 @@ export default class ActorSheet5e extends ActorSheet {
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
       abl.baseProf = source.abilities[a].proficient;
+      abl.enabled = CONFIG.DND5E.abilities[a] !== undefined;
     }
 
     // Skills

@@ -54,6 +54,26 @@ export const registerSystemSettings = function() {
     }
   });
 
+  // Use Honor ability score
+  game.settings.register("dnd5e", "honorScore", {
+    name: "SETTINGS.5eHonorN",
+    hint: "SETTINGS.5eHonorL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
+  // Use Sanity ability score
+  game.settings.register("dnd5e", "sanityScore", {
+    name: "SETTINGS.5eSanityN",
+    hint: "SETTINGS.5eSanityL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Apply Dexterity as Initiative Tiebreaker
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",

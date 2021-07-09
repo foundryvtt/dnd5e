@@ -11,7 +11,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "npc"],
       width: 600,
-      height: 680
+      height: Math.max(680, 237 + Object.keys(CONFIG.DND5E.abilities).length * 70)
     });
   }
 
