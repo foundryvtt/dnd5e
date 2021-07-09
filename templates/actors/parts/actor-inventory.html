@@ -1,5 +1,4 @@
 <div class="inventory-filters flexrow">
-
     {{#unless isNPC}}
     <ol class="currency flexrow">
         <h3>
@@ -92,7 +91,7 @@
                 <div class="item-detail item-weight">
                     {{#if item.totalWeight}}
                         <div class="item-detail">
-                            {{ item.totalWeight }} {{localize "DND5E.AbbreviationLbs"}}
+                            {{ item.totalWeight }} {{ @root.weightUnit }}
                         </div>
                     {{/if}}
                 </div>

@@ -581,7 +581,12 @@ export default class Actor5e extends Actor {
     if ( game.settings.get("dnd5e", "currencyWeight") && actorData.data.currency ) {
       const currency = actorData.data.currency;
       const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
-      weight += numCoins / CONFIG.DND5E.encumbrance.currencyPerWeight;
+
+      const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
+        ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
+        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial
+
+      weight += numCoins / currencyPerWeight;
     }
 
     // Determine the encumbrance size class
@@ -597,7 +602,12 @@ export default class Actor5e extends Actor {
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
-    const max = actorData.data.abilities.str.value * CONFIG.DND5E.encumbrance.strMultiplier * mod;
+
+    const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
+      ? CONFIG.DND5E.encumbrance.strMultiplier.metric
+      : CONFIG.DND5E.encumbrance.strMultiplier.imperial
+
+    const max = (actorData.data.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
   }
