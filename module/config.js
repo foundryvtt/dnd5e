@@ -578,7 +578,9 @@ DND5E.movementTypes = {
  */
 DND5E.movementUnits = {
   "ft": "DND5E.DistFt",
-  "mi": "DND5E.DistMi"
+  "mi": "DND5E.DistMi",
+  "m": "DND5E.DistM",
+  "km": "DND5E.DistKm"
 };
 
 /**
@@ -605,9 +607,18 @@ for ( let [k, v] of Object.entries(DND5E.movementUnits) ) {
  * @type {Object}
  */
 DND5E.encumbrance = {
-  currencyPerWeight: 50,
-  strMultiplier: 15,
-  vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
+  currencyPerWeight: {
+    imperial: 50,
+    metric: 110
+  },
+  strMultiplier: {
+    imperial: 15,
+    metric: 6.8
+  },
+  vehicleWeightMultiplier: {
+    imperial: 2000, // 2000 lbs in an imperial ton
+    metric: 1000, // 1000 kg in a metric ton
+  }
 };
 
 /* -------------------------------------------- */
