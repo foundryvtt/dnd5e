@@ -202,7 +202,7 @@ export const migrateActorData = async function(actor, migrationData) {
 
     // Update the Owned Item
     if ( !isObjectEmpty(itemUpdate) ) {
-      itemUpdate._id = i.id;
+      itemUpdate._id = i._id;
       (await arr).push(expandObject(itemUpdate));
     }
     return arr;
