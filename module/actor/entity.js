@@ -1185,7 +1185,7 @@ export default class Actor5e extends Actor {
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
     // Call restCompleted hook so that modules can easily perform actions when actors finish a rest
-    Hooks.call("restCompleted", this, result);
+    Hooks.callAll("restCompleted", this, result);
 
     // Return data summarizing the rest effects
     return result;
