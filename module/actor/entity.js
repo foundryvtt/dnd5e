@@ -28,7 +28,7 @@ export default class Actor5e extends Actor {
    */
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
-    if ( this.data.type !== "character" ) return this._classes = {};
+    if ( !["character", "npc"].includes(this.data.type) ) return this._classes = {};
     return this._classes = this.items.filter((item) => item.type === "class").reduce((obj, cls) => {
       obj[cls.name.slugify({strict: true})] = cls;
       return obj;
