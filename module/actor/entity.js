@@ -1072,6 +1072,7 @@ export default class Actor5e extends Actor {
    * @property {number} dhd                  Hit dice recovered or spent during the rest.
    * @property {object} updateData           Updates applied to the actor.
    * @property {Array.<object>} updateItems  Updates applied to actor's items.
+   * @property {boolean} longRest            Whether the rest type was a long rest.
    * @property {boolean} newDay              Whether a new day occurred during the rest.
    */
 
@@ -1173,7 +1174,8 @@ export default class Actor5e extends Actor {
         ...hitDiceUpdates,
         ...this._getRestItemUsesRecovery({ recoverLongRestUses: longRest, recoverDailyUses: newDay })
       ],
-      newDay: newDay
+      longRest,
+      newDay
     }
 
     // Perform updates
@@ -1182,6 +1184,9 @@ export default class Actor5e extends Actor {
 
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
+
+    // Call restCompleted hook so that modules can easily perform actions when actors finish a rest
+    Hooks.callAll("restCompleted", this, result);
 
     // Return data summarizing the rest effects
     return result;
