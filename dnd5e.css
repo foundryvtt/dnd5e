@@ -569,6 +569,10 @@
 .dnd5e.select-items-prompt .item-name > label {
   align-items: center;
 }
+.dnd5e.select-items-prompt .window-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
   /*  Sheet Header                             */
