@@ -619,7 +619,10 @@ export default class Actor5e extends Actor {
   /** @inheritdoc */
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
+    const sourceId = this.getFlag("core", "sourceId");
+    if ( sourceId?.startsWith("Compendium.") ) return;
 
+    // Some sensible defaults for convenience
     // Token size category
     const s = CONFIG.DND5E.tokenSizes[this.data.data.traits.size || "med"];
     this.data.token.update({width: s, height: s});
