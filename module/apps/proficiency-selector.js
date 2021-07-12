@@ -49,6 +49,16 @@ export default class ProficiencySelector extends TraitSelector {
       }
     }
 
+    if ( this.options.type === "tool" ) {
+      data.choices["vehicle"].children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
+        obj[key] = {
+          label: label,
+          chosen: attr ? value.includes(key) : false
+        }
+        return obj;
+      }, {});
+    }
+
     return data;
   }
 
