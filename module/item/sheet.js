@@ -332,12 +332,10 @@ export default class ItemSheet5e extends ItemSheet {
       case 'skills':
         const skills = this.item.data.data.skills;
         const choiceSet = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
-        options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(skill => choiceSet.includes(skill[0])));
+        options.choices = a.dataset.target.endsWith("choices") ? Object.fromEntries(Object.entries(CONFIG.DND5E.skills)) : Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(skill => choiceSet.includes(skill[0])));
+        options.maximum = a.dataset.target.endsWith("choices") ? null : skills.number;
         if(a.dataset.target.endsWith("choices")) {
-          options.maximum = null;
           options.valueKey = null;
-        } else {
-          options.maximum = skills.number;
         }
         break;
     }
