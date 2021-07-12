@@ -265,7 +265,7 @@ export const ClassFeatures = {
        "features": {
          "3": ["Compendium.dnd5e.classfeatures.YgLQV1O849wE5TgM"],
          "7": ["Compendium.dnd5e.classfeatures.dHu1yzIjD38BvGGd"],
-         "11": ["Compendium.dnd5e.classfeatures.kYJsED0rqqqUcgKz"],
+         "10": ["Compendium.dnd5e.classfeatures.kYJsED0rqqqUcgKz"],
          "15": ["Compendium.dnd5e.classfeatures.aVKH6TLn1AG9hPSA"],
          "18": ["Compendium.dnd5e.classfeatures.ipG5yx1tRNmeJfSH"]
        }
