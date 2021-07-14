@@ -325,18 +325,19 @@ export default class ItemSheet5e extends ItemSheet {
       allowCustom: false
     };
     switch(a.dataset.options) {
-      case 'saves':
+      case "saves":
         options.choices = CONFIG.DND5E.abilities;
         options.valueKey = null;
         break;
-      case 'skills':
+      case "skills.choices":
+        options.choices = CONFIG.DND5E.skills;
+        options.valueKey = null;
+        break;
+      case "skills":
         const skills = this.item.data.data.skills;
-        const choiceSet = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
-        options.choices = a.dataset.target.endsWith("choices") ? Object.fromEntries(Object.entries(CONFIG.DND5E.skills)) : Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(skill => choiceSet.includes(skill[0])));
-        options.maximum = a.dataset.target.endsWith("choices") ? null : skills.number;
-        if(a.dataset.target.endsWith("choices")) {
-          options.valueKey = null;
-        }
+        const choiceSet = skills.choices?.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
+        options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([skill,]) => choiceSet.includes(skill)));
+        options.maximum = skills.number;
         break;
     }
     new TraitSelector(this.item, options).render(true);
