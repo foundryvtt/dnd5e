@@ -1,6 +1,7 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
+import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorArmorConfig from "../../apps/actor-armor.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
@@ -428,6 +429,9 @@ export default class ActorSheet5e extends ActorSheet {
     // View Item Sheets
     html.find('.item-edit').click(this._onItemEdit.bind(this));
 
+    // Property attributions
+    html.find('.attributable').on("contextmenu", this._onPropertyAttribution.bind(this));
+
     // Editable Only Listeners
     if ( this.isEditable ) {
 
@@ -485,7 +489,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Iinitialize Item list filters by activating the set of filters which are currently applied
+   * Initialize Item list filters by activating the set of filters which are currently applied
    * @private
    */
   _initializeFilterItemList(i, ul) {
@@ -833,6 +837,16 @@ export default class ActorSheet5e extends ActorSheet {
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
     if ( item ) return item.delete();
+  }
+
+  /* -------------------------------------------- */
+
+  _onPropertyAttribution(event) {
+    const li = event.currentTarget.closest(".attribute");
+    if ( !li ) return;
+    event.preventDefault();
+
+    return new PropertyAttribution(this.object).render(true);
   }
 
   /* -------------------------------------------- */
