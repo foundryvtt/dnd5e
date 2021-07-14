@@ -1708,6 +1708,8 @@ export default class Actor5e extends Actor {
       } else if ( itemTypes && itemTypes[key] ) {
         const item = pack.index.get(itemTypes[key]);
         data.selected[key] = item.name;
+      } else if ( type === "tool" && CONFIG.DND5E.vehicleTypes[key] ) {
+        data.selected[key] = CONFIG.DND5E.vehicleTypes[key];
       }
     }
 

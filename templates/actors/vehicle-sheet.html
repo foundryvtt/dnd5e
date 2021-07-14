@@ -14,7 +14,9 @@
                     <span>{{lookup config.actorSizes data.traits.size}}</span>
                 </li>
                 <li>
-                    <span>{{localize 'DND5E.Vehicle'}}</span>
+                    <select name="data.vehicleType">
+                      {{selectOptions config.vehicleTypes selected=data.vehicleType}}
+                    </select>
                 </li>
                 <li>
                     <input type="text" name="data.traits.dimensions"
