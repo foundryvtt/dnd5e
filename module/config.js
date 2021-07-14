@@ -147,7 +147,7 @@ DND5E.weaponIds = {
 
 
 /**
- * The categories that Tool items can be grouped into.
+ * The categories into which Tool items can be grouped.
  *
  * @enum {string}
  */
@@ -158,7 +158,7 @@ DND5E.toolTypes = {
 };
 
 /**
- * The general tool proficiencies that a character can gain.
+ * The categories of tool proficiencies that a character can gain.
  *
  * @enum {string}
  */
@@ -399,6 +399,17 @@ DND5E.equipmentTypes = {
   ...DND5E.armorTypes
 };
 
+/* -------------------------------------------- */
+
+/**
+ * The various types of vehicles in which characters can be proficient.
+ * @enum {string}
+ */
+DND5E.vehicleTypes = {
+  "air": "DND5E.VehicleTypeAir",
+  "land": "DND5E.VehicleTypeLand",
+  "water": "DND5E.VehicleTypeWater"
+};
 
 /* -------------------------------------------- */
 
