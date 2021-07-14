@@ -150,9 +150,9 @@ Hooks.once("setup", function() {
 
   // Exclude some from sorting where the default order matters
   const noSort = [
-    "abilities", "alignments", "armorClasses", "armorProficiencies", "currencies", "distanceUnits", "movementUnits",
+    "abilities", "alignments", "armorClasses", "armorProficiencies", "currencies", "distanceUnits", "movementUnits", 
     "itemActionTypes", "itemRarity", "proficiencyLevels", "limitedUsePeriods", "spellComponents", "spellLevels",
-    "spellPreparationModes", "weaponTypes"
+    "spellPreparationModes", "weaponProficiencies", "weaponTypes"
   ];
 
   // Localize and sort CONFIG objects
