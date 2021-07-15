@@ -181,6 +181,7 @@ DND5E.toolIds = {
   "card": "YwlHI3BVJapz4a3E",
   "carpenter": "8NS6MSOdXtUqD7Ib",
   "cartographer": "fC0lFK8P4RuhpfaU",
+  "chess": "23y8FvWKf9YLcnBL",
   "cobbler": "hM84pZnpCqKfi8XH",
   "cook": "Gflnp29aEv5Lc1ZM",
   "dice": "iBuTM09KD9IoM5L8",
