@@ -603,7 +603,7 @@ export default class Actor5e extends Actor {
       let dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
       for ( const [match, term] of formula.matchAll(dataRgx)) {
         attribution[term] = {
-          label: term,
+          label: match,
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: foundry.utils.getProperty(data, term)
         }

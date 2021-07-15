@@ -13,6 +13,8 @@ export default class PropertyAttribution extends Application {
     this.attributionData = attributionData;
   }
 
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -28,7 +30,21 @@ export default class PropertyAttribution extends Application {
 
   async getData() {
     return {
-      sources: this.attributionData
+      sources: this.attributionData.map((entry) => {
+        if ( entry.label.startsWith("@") ) {
+          entry.label = this.getPropertyLabel(entry.label.slice(1));
+        }
+        return entry;
+      })
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  getPropertyLabel(property) {
+    const parts = property.split(".");
+    if ( parts[0] === "abilities" && parts[1] ) {
+      return CONFIG.DND5E.abilities[parts[1]];
     }
   }
 
