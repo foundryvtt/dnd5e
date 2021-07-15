@@ -81,7 +81,9 @@
                         {{ localize "DND5E.ArmorClass" }}
                         <a class="config-button" data-action="armor" title="{{localize 'DND5E.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
                     </h4>
-                    <div class="attribute-value attributable">{{data.attributes.ac.value}}</div>
+                    <div class="attribute-value attributable" data-property="attributes.ac">
+                        {{data.attributes.ac.value}}
+                    </div>
                     <footer class="attribute-footer">
                         <span class="spell-dc">{{localize "DND5E.SpellDC"}} {{data.attributes.spelldc}}</span>
                     </footer>

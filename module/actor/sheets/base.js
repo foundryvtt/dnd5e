@@ -842,11 +842,11 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   _onPropertyAttribution(event) {
-    const li = event.currentTarget.closest(".attribute");
-    if ( !li ) return;
+    const property = event.currentTarget.dataset.property;
+    if ( !property ) return;
     event.preventDefault();
 
-    return new PropertyAttribution(this.object).render(true);
+    return new PropertyAttribution(this.object._propertyAttributions[property]).render(true);
   }
 
   /* -------------------------------------------- */

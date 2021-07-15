@@ -1,7 +1,10 @@
 <div>
-  <ol>
+  <table>
   {{#each sources as |source|}}
-    <li>{{source.name}}: {{source.value}}</li>
+    <tr>
+      <td class="attribution-value mode-{{source.mode}}">{{source.value}}</td>
+      <td class="attribution-label">{{source.label}}</td>
+    </tr>
   {{/each}}
-  </ol>
+  </table>
 </div>

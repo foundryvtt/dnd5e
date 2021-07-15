@@ -534,6 +534,33 @@
   margin: 2px;
 }
 /* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+.property-attribution .window-content {
+  padding: 0;
+}
+.property-attribution table {
+  margin: 0;
+  border: 0;
+  font-size: 1.25em;
+}
+.property-attribution table td:first-child {
+  width: 20%;
+  padding-left: 1em;
+}
+.property-attribution table td.mode-1::before {
+  content: "×";
+}
+.property-attribution table td.mode-2::before {
+  content: "+";
+}
+.property-attribution table td.mode-3::before {
+  content: "↓ ";
+}
+.property-attribution table td.mode-4::before {
+  content: "↑ ";
+}
+/* ----------------------------------------- */
 /*  Actor Type Config Sheet Specifically     */
 /* ----------------------------------------- */
 .actor-type .trait-list {

@@ -530,6 +530,42 @@
   }
 }
 
+
+/* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+
+.property-attribution {
+  .window-content {
+    padding: 0;
+  }
+
+  table {
+    margin: 0;
+    border: 0;
+
+    font-size: 1.25em;
+
+    td:first-child {
+      width: 20%;
+      padding-left: 1em;
+    }
+    td.mode-1::before { // Multiply
+      content: "×";
+    }
+    td.mode-2::before { // Add
+      content: "+";
+    }
+    td.mode-3::before { // Downgrade
+      content: "↓ ";
+    }
+    td.mode-4::before { // Upgrade
+      content: "↑ ";
+    }
+  }
+}
+
+
 /* ----------------------------------------- */
 /*  Actor Type Config Sheet Specifically     */
 /* ----------------------------------------- */

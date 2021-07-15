@@ -5,6 +5,14 @@
  */
 export default class PropertyAttribution extends Application {
 
+  /**
+   * @param {object[]} attributionData  Array of attribution entries.
+   */
+  constructor(attributionData, options={}) {
+    super(options);
+    this.attributionData = attributionData;
+  }
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -20,10 +28,7 @@ export default class PropertyAttribution extends Application {
 
   async getData() {
     return {
-      sources: [
-        { "name": "Base", "value": 10 },
-        { "name": "Dexterity", "value": 2 }
-      ]
+      sources: this.attributionData
     }
   }
 
