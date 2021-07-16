@@ -2,7 +2,9 @@
   <table>
   {{#each sources as |source|}}
     <tr>
-      <td class="attribution-value mode-{{source.mode}}">{{source.value}}</td>
+      <td class="attribution-value mode-{{source.mode}}{{#if source.negative}} negative{{/if}}">
+        {{source.value}}
+      </td>
       <td class="attribution-label">{{source.label}}</td>
     </tr>
   {{/each}}

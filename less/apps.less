@@ -556,11 +556,15 @@
     td.mode-2::before { // Add
       content: "+";
     }
+    td.mode-2.negative::before { // Subtract
+      content: "−";
+      margin-right: -1px;
+    }
     td.mode-3::before { // Downgrade
-      content: "↓ ";
+      content: "↓";
     }
     td.mode-4::before { // Upgrade
-      content: "↑ ";
+      content: "↑";
     }
 
     tr:first-child td {

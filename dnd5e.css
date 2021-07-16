@@ -554,11 +554,15 @@
 .property-attribution table td.mode-2::before {
   content: "+";
 }
+.property-attribution table td.mode-2.negative::before {
+  content: "−";
+  margin-right: -1px;
+}
 .property-attribution table td.mode-3::before {
-  content: "↓ ";
+  content: "↓";
 }
 .property-attribution table td.mode-4::before {
-  content: "↑ ";
+  content: "↑";
 }
 .property-attribution table tr:first-child td {
   padding-top: 0.5em;

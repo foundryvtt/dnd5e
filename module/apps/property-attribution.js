@@ -40,11 +40,15 @@ export default class PropertyAttribution extends Application {
       total = property.value;
     }
 
-    const sources = this.object._propertyAttributions[this.property];
+    const sources = foundry.utils.duplicate(this.object._propertyAttributions[this.property]);
     return {
       sources: sources.map((entry) => {
         if ( entry.label.startsWith("@") ) {
           entry.label = this.getPropertyLabel(entry.label.slice(1));
+        }
+        if ( entry.mode == CONST.ACTIVE_EFFECT_MODES.ADD && entry.value < 0 ) {
+          entry.negative = true;
+          entry.value = entry.value * -1;
         }
         return entry;
       }),
