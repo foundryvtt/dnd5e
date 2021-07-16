@@ -76,6 +76,36 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /** @override */
+  applyActiveEffects() {
+    // Mark some active effects as disabled, based on some special logic.
+    for ( const effect of this.effects ) {
+      effect.data.suppressed = false;
+      if ( effect.data.disabled ) continue;
+      const [parentType, parentId, documentType, documentId] = effect.data.origin?.split(".") ?? [];
+      if ( (parentType !== "Actor") || (parentId !== this.id) || (documentType !== "Item") ) continue;
+      const item = this.items.get(documentId);
+      if ( !item ) continue;
+      const itemData = item.data.data;
+      // If an item is not equipped, or it is equipped but it requires attunement and is not attuned, then disable any
+      // Active Effects that might have originated from it.
+      const suppressed = !itemData.equipped || (itemData.attunement === CONFIG.DND5E.attunementTypes.REQUIRED);
+      effect.data.disabled = suppressed;
+      effect.data.suppressed = suppressed;
+    }
+
+    super.applyActiveEffects();
+
+    // Now core has treated the effects as appropriately disabled, we reset the field so the rest of the UI does not
+    // think the effect is marked as disabled.
+    for ( const effect of this.effects ) {
+      if ( !effect.data.suppressed ) continue;
+      effect.data.disabled = effect.data._source.disabled;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   prepareDerivedData() {
     const actorData = this.data;
     const data = actorData.data;

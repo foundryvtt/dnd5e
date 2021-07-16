@@ -49,15 +49,24 @@ export function prepareActiveEffectCategories(effects) {
         type: "inactive",
         label: game.i18n.localize("DND5E.EffectInactive"),
         effects: []
+      },
+      suppressed: {
+        type: "suppressed",
+        label: game.i18n.localize("DND5E.EffectSuppressed"),
+        effects: [],
+        info: [game.i18n.localize("DND5E.EffectSuppressedInfo")]
       }
     };
 
     // Iterate over active effects, classifying them into categories
     for ( let e of effects ) {
       e._getSourceName(); // Trigger a lookup for the source name
-      if ( e.data.disabled ) categories.inactive.effects.push(e);
+      if ( e.data.suppressed ) categories.suppressed.effects.push(e);
+      else if ( e.data.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }
+
+    categories.suppressed.hidden = !categories.suppressed.effects.length;
     return categories;
 }
