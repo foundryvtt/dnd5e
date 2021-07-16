@@ -562,6 +562,17 @@
     td.mode-4::before { // Upgrade
       content: "↑ ";
     }
+
+    tr:first-child td {
+      padding-top: 0.5em;
+    }
+    tr.total {
+      border-top: @borderGroove;
+      font-weight: 600;
+      td {
+        padding-bottom: 0.5em;
+      }
+    }
   }
 }
 

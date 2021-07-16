@@ -846,7 +846,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !property ) return;
     event.preventDefault();
 
-    return new PropertyAttribution(this.object._propertyAttributions[property]).render(true);
+    return new PropertyAttribution(this.object, property).render(true);
   }
 
   /* -------------------------------------------- */

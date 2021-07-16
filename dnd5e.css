@@ -560,6 +560,16 @@
 .property-attribution table td.mode-4::before {
   content: "↑ ";
 }
+.property-attribution table tr:first-child td {
+  padding-top: 0.5em;
+}
+.property-attribution table tr.total {
+  border-top: 2px groove #eeede0;
+  font-weight: 600;
+}
+.property-attribution table tr.total td {
+  padding-bottom: 0.5em;
+}
 /* ----------------------------------------- */
 /*  Actor Type Config Sheet Specifically     */
 /* ----------------------------------------- */

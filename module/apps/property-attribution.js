@@ -6,11 +6,14 @@
 export default class PropertyAttribution extends Application {
 
   /**
-   * @param {object[]} attributionData  Array of attribution entries.
+   * @param {Document} object - Object containing the property to be attributed.
+   * @param {object} object._propertyAttributions - Object containing all of the attribution data.
+   * @param {string} property - Dot separated path to the property.
    */
-  constructor(attributionData, options={}) {
+  constructor(object, property, options={}) {
     super(options);
-    this.attributionData = attributionData;
+    this.object = object;
+    this.property = property;
   }
 
   /* -------------------------------------------- */
@@ -29,13 +32,23 @@ export default class PropertyAttribution extends Application {
   /* -------------------------------------------- */
 
   async getData() {
+    const property = foundry.utils.getProperty(this.object.data.data, this.property)
+    let total;
+    if ( Number.isNumeric(property)) {
+      total = property;
+    } else if ( typeof property === "object" && Number.isNumeric(property.value) ) {
+      total = property.value;
+    }
+
+    const sources = this.object._propertyAttributions[this.property];
     return {
-      sources: this.attributionData.map((entry) => {
+      sources: sources.map((entry) => {
         if ( entry.label.startsWith("@") ) {
           entry.label = this.getPropertyLabel(entry.label.slice(1));
         }
         return entry;
-      })
+      }),
+      total: total
     }
   }
 
