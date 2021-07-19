@@ -1760,7 +1760,6 @@ export default class Actor5e extends Actor {
     }
 
     data.selected = {};
-    const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
     for ( const key of values ) {
       if ( profs[key] ) {
         data.selected[key] = profs[key];
