@@ -512,7 +512,7 @@ export default class Actor5e extends Actor {
     const calc = data.attributes.ac;
     if ( !ignoreFlat && (calc.flat !== null) ) {
       calc.value = calc.flat;
-      return;
+      return calc.flat;
     }
 
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
