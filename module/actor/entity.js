@@ -609,7 +609,7 @@ export default class Actor5e extends Actor {
 
     const max = (actorData.data.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
-    return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (2/3) };
+    return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (200/3) };
   }
 
   /* -------------------------------------------- */
