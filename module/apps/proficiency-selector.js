@@ -33,6 +33,8 @@ export default class ProficiencySelector extends TraitSelector {
       const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
       for ( const [key, id] of Object.entries(ids) ) {
         const item = await pack.getDocument(id);
+        if ( !item ) continue;
+
         let type = foundry.utils.getProperty(item.data.data, typeProperty);
         if ( map && map[type] ) type = map[type];
         const entry = {
