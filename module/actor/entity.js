@@ -2,6 +2,7 @@ import { d20Roll, damageRoll } from "../dice.js";
 import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
+import ProficiencySelector from "../apps/proficiency-selector.js";
 import {DND5E} from '../config.js';
 import Item5e from "../item/entity.js";
 
@@ -1764,8 +1765,8 @@ export default class Actor5e extends Actor {
       if ( profs[key] ) {
         data.selected[key] = profs[key];
       } else if ( itemTypes && itemTypes[key] ) {
-        const item = pack.index.get(itemTypes[key]);
-        data.selected[key] = item.name;
+        const item = ProficiencySelector.getBaseItem(itemTypes[key], { indexOnly: true });
+        if ( item ) data.selected[key] = item.name;
       } else if ( type === "tool" && CONFIG.DND5E.vehicleTypes[key] ) {
         data.selected[key] = CONFIG.DND5E.vehicleTypes[key];
       }

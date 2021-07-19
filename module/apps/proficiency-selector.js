@@ -26,13 +26,12 @@ export default class ProficiencySelector extends TraitSelector {
     this.options.choices = CONFIG.DND5E[`${this.options.type}Proficiencies`];
     const data = super.getData();
 
-    const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
     const ids = CONFIG.DND5E[`${this.options.type}Ids`];
     const map = CONFIG.DND5E[`${this.options.type}ProficienciesMap`];
     if ( ids !== undefined ) {
       const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
       for ( const [key, id] of Object.entries(ids) ) {
-        const item = await pack.getDocument(id);
+        const item = await ProficiencySelector.getBaseItem(id);
         if ( !item ) continue;
 
         let type = foundry.utils.getProperty(item.data.data, typeProperty);
@@ -69,6 +68,31 @@ export default class ProficiencySelector extends TraitSelector {
     }
 
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch an item for the provided ID. If the provided ID contains a compendium pack name
+   * it will be fetched from that pack, otherwise it will be fetched from the compendium defined
+   * in `DND5E.sourcePacks.ITEMS`.
+   *
+   * @param {string} identifier            Simple ID or compendium name and ID separated by a dot.
+   * @param {object} [options]             
+   * @param {boolean} [options.indexOnly]  If set to true, only the index data will be fetched.
+   * @return {Promise<Document>|object}    Promise for a `Document` if `options.indexOnly` is false, else a simple
+   *                                       object containing the minimal index data.
+   */
+  static getBaseItem(identifier, { indexOnly = false }={}) {
+    const split = identifier.split(".");
+    const pack = game.packs.get(split.length > 1 ? `${split[0]}.${split[1]}` : CONFIG.DND5E.sourcePacks.ITEMS);
+    const id = split[2] ?? identifier;
+
+    if ( indexOnly ) {
+      return pack?.index.get(id);
+    } else {
+      return pack?.getDocument(id);
+    }
   }
 
   /* -------------------------------------------- */
