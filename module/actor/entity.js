@@ -405,7 +405,8 @@ export default class Actor5e extends Actor {
    */
   _prepareBaseArmorClass(actorData) {
     const ac = actorData.data.attributes.ac;
-    ac.base = ac.shield = ac.bonus = ac.cover = 0;
+    ac.base = 10;
+    ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
     this.shield = null;
   }
@@ -553,7 +554,7 @@ export default class Actor5e extends Actor {
         const replaced = Roll.replaceFormulaData(formula, rollData);
         ac = Roll.safeEval(replaced);
       }
-      if ( ac > calc.base ) calc.base = ac;
+      calc.base = ac;
     }
 
     calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
