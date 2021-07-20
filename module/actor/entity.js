@@ -548,7 +548,7 @@ export default class Actor5e extends Actor {
         value: 10
       },
       dex: {
-        label: game.i18n.localize("DND5E.AbilityDex"),
+        label: "@abilities.dex.mod",
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
         value: data.abilities.dex.mod
       }
