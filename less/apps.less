@@ -219,6 +219,26 @@
   }
 
   /* ----------------------------------------- */
+  /*  Notifications                            */
+  /* ----------------------------------------- */
+
+  .warnings, .info {
+    flex: 0 0 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .notification {
+      font-family: 'Signika', sans-serif;
+      font-weight: normal;
+      font-size: 13px;
+      box-shadow: none;
+      padding: 2px 8px;
+      margin-bottom: 2px;
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
 
@@ -228,22 +248,6 @@
 
     .header-details {
       .modesto();
-
-      .warnings {
-        flex: 0 0 100%;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        .notification {
-          font-family: 'Signika', sans-serif;
-          font-weight: normal;
-          font-size: 13px;
-          box-shadow: none;
-          padding: 2px 8px;
-          margin-bottom: 2px;
-        }
-      }
 
       .summary select {
         width: 100%;
