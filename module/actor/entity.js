@@ -405,7 +405,8 @@ export default class Actor5e extends Actor {
    */
   _prepareBaseArmorClass(actorData) {
     const ac = actorData.data.attributes.ac;
-    ac.base = ac.shield = ac.bonus = ac.cover = 0;
+    ac.base = 10;
+    ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
     this.shield = null;
   }
@@ -512,7 +513,7 @@ export default class Actor5e extends Actor {
     const calc = data.attributes.ac;
     if ( !ignoreFlat && (calc.flat !== null) ) {
       calc.value = calc.flat;
-      return;
+      return calc.flat;
     }
 
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
@@ -542,13 +543,18 @@ export default class Actor5e extends Actor {
 
     if ( !this.armor || calc.calc !== "default" ) {
       let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
-      if ( !formula || !Roll.validate(formula) ) {
+      const rollData = this.getRollData();
+      let ac;
+      try {
+        const replaced = Roll.replaceFormulaData(formula, rollData);
+        ac = Roll.safeEval(replaced);
+      } catch (err) {
         this._preparationWarnings.push("DND5E.WarnBadACFormula");
         formula = CONFIG.DND5E.armorClasses.default.formula;
+        const replaced = Roll.replaceFormulaData(formula, rollData);
+        ac = Roll.safeEval(replaced);
       }
-      const replaced = Roll.replaceFormulaData(formula, this.getRollData());
-      const ac = Roll.safeEval(replaced);
-      if ( ac > calc.base ) calc.base = ac;
+      calc.base = ac;
     }
 
     calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
