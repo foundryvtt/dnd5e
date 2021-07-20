@@ -9,7 +9,7 @@ import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
 import {DND5E} from '../../config.js';
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
+import ActiveEffect5e from "../../active-effect.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -133,7 +133,7 @@ export default class ActorSheet5e extends ActorSheet {
     this._prepareItems(data);
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.actor.effects);
+    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
 
     // Prepare warnings
     data.warnings = this.actor._preparationWarnings;
@@ -456,7 +456,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
-      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
+      html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
     }
 
     // Owner Only Listeners
