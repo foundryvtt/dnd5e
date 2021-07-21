@@ -559,6 +559,12 @@
 .property-attribution.tooltip table tr:nth-child(even) {
   background-color: inherit;
 }
+.property-attribution.tooltip table td::before {
+  opacity: 0.6;
+}
+.property-attribution.tooltip table td.attribution-value {
+  font-weight: 600;
+}
 .property-attribution.tooltip table tr.total {
   border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
