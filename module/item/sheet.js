@@ -1,5 +1,5 @@
 import TraitSelector from "../apps/trait-selector.js";
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../effects.js";
+import ActiveEffect5e from "../active-effect.js";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types
@@ -71,7 +71,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.isMountable = this._isItemMountable(itemData);
 
     // Prepare Active Effects
-    data.effects = prepareActiveEffectCategories(this.item.effects);
+    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
@@ -274,7 +274,7 @@ export default class ItemSheet5e extends ItemSheet {
       html.find('.trait-selector').click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
-        onManageActiveEffect(ev, this.item)
+        ActiveEffect5e.onManageActiveEffect(ev, this.item)
       });
     }
   }

@@ -38,6 +38,7 @@ import * as chat from "./module/chat.js";
 import * as dice from "./module/dice.js";
 import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
+import ActiveEffect5e from "./module/active-effect.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -78,6 +79,7 @@ Hooks.once("init", function() {
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
+  CONFIG.ActiveEffect.documentClass = ActiveEffect5e;
   CONFIG.Actor.documentClass = Actor5e;
   CONFIG.Item.documentClass = Item5e;
   CONFIG.Token.documentClass = TokenDocument5e;
