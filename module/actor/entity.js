@@ -524,11 +524,6 @@ export default class Actor5e extends Actor {
     const calc = data.attributes.ac;
     if ( !ignoreFlat && (calc.flat !== null) ) {
       calc.value = calc.flat;
-      this._propertyAttributions["attributes.ac"] = [{
-        "label": game.i18n.localize("DND5E.Flat"),
-        "mode": CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        "value": calc.flat
-      }];
       return calc.flat;
     }
 
@@ -541,36 +536,13 @@ export default class Actor5e extends Actor {
       return obj;
     }, {armors: [], shields: []});
 
-    let attribution = {
-      base: {
-        label: game.i18n.localize("DND5E.PropertyBase"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: 10
-      }
-    };
-    if ( data.abilities.dex.mod !== 0 ) {
-      attribution.dex = {
-        label: "@abilities.dex.mod",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: data.abilities.dex.mod
-      }
-    }
-
     if ( armors.length ) {
       if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
       this.armor = armors[0];
       const armorData = this.armor.data.data.armor;
-      const dex = Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod)
-      let ac = armorData.value + dex;
+      let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
       if ( armorData.type === "heavy" ) ac = armorData.value;
-      if ( (ac > calc.base) && (calc.calc === "default") ) {
-        calc.base = ac;
-
-        attribution.base.label = this.armor.name;
-        attribution.base.value = armorData.value;
-        if ( dex !== 0 ) attribution.dex.value = dex;
-        else delete attribution.dex;
-      }
+      if ( (ac > calc.base) && (calc.calc === "default") ) calc.base = ac;
     }
 
     if ( shields.length ) {
@@ -594,42 +566,7 @@ export default class Actor5e extends Actor {
         ac = Roll.safeEval(replaced);
       }
       calc.base = ac;
-
-      attribution = {
-        base: {
-          label: game.i18n.localize("DND5E.PropertyBase"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: Roll.safeEval(Roll.replaceFormulaData(formula, {}, {missing: 0}))
-        }
-      }
-      let dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
-      for ( const [match, term] of formula.matchAll(dataRgx)) {
-        const value = foundry.utils.getProperty(data, term);
-        if ( value === 0 ) continue;
-        attribution[term] = {
-          label: match,
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: foundry.utils.getProperty(data, term)
-        }
-      }
     }
-
-    if ( this.shield && calc.shield != 0 ) attribution.shield = {
-      label: this.shield.name,
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.shield
-    };
-    if ( calc.bonus != 0 ) attribution.bonus = {
-      label: game.i18n.localize("DND5E.EquipmentBonus"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.bonus
-    };
-    if ( calc.cover != 0 ) attribution.cover = {
-      label: game.i18n.localize("DND5E.Cover"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.cover
-    };
-    this._propertyAttributions["attributes.ac"] = Object.values(attribution);
 
     calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
     return calc.value;
