@@ -31,7 +31,16 @@ export default class PropertyAttribution extends Application {
 
   /* -------------------------------------------- */
 
-  async getData() {
+  async renderTooltip() {
+    const data = this.getData(this.options);
+    let html = await this._renderInner(data);
+    html[0].classList.add("tooltip");
+    return html;
+  }
+
+  /* -------------------------------------------- */
+
+  getData() {
     const property = foundry.utils.getProperty(this.object.data.data, this.property)
     let total;
     if ( Number.isNumeric(property)) {

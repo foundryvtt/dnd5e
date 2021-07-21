@@ -540,6 +540,35 @@
     padding: 0;
   }
 
+  &.tooltip {
+    display: none;
+    position: absolute;
+    min-width: 150px;
+    left: -25px;
+    top: 50px;
+    border-radius: 3px;
+
+    background-color: rgba(0, 0, 0, .8);
+    backdrop-filter: blur(4px);
+
+    color: white;
+    font-family: Signika, sans-serif;
+    font-size: 13px !important;
+    font-weight: normal !important;
+    line-height: 1.66em;
+    text-align: left;
+    z-index: 1;
+
+    table {
+      tr:nth-child(even) {
+        background-color: inherit;
+      }
+      tr.total {
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+      }
+    }
+  }
+
   table {
     margin: 0;
     border: 0;
@@ -547,8 +576,11 @@
     font-size: 1.25em;
 
     td:first-child {
-      width: 20%;
+      width: 3em;
       padding-left: 1em;
+    }
+    td:last-child {
+      padding-right: 0.75em;
     }
     td.mode-1::before { // Multiply
       content: "×";

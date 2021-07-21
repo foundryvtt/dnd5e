@@ -430,7 +430,7 @@ export default class ActorSheet5e extends ActorSheet {
     html.find('.item-edit').click(this._onItemEdit.bind(this));
 
     // Property attributions
-    html.find('.attributable').on("contextmenu", this._onPropertyAttribution.bind(this));
+    html.find('.attributable').mouseover(this._onPropertyAttribution.bind(this));
 
     // Editable Only Listeners
     if ( this.isEditable ) {
@@ -841,12 +841,18 @@ export default class ActorSheet5e extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  _onPropertyAttribution(event) {
+  /**
+   * Handle displaying the property attribution tooltip when a property is hovered over.
+   * @param {Event} event   The originating mouse event.
+   * @private
+   */
+  async _onPropertyAttribution(event) {
+    const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
-    if ( !property ) return;
-    event.preventDefault();
+    if ( existingTooltip || !property ) return;
 
-    return new PropertyAttribution(this.object, property).render(true);
+    let html = await new PropertyAttribution(this.object, property).renderTooltip();
+    event.currentTarget.insertAdjacentElement("beforeend", html[0]);
   }
 
   /* -------------------------------------------- */
