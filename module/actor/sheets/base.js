@@ -140,7 +140,7 @@ export default class ActorSheet5e extends ActorSheet {
     data.warnings = this.actor._preparationWarnings;
 
     // Prepare property attributions
-    this.attributions = {
+    this.attribution = {
       "attributes.ac": this._prepareArmorClassAttribution(actorData.data)
     };
 
@@ -944,9 +944,9 @@ export default class ActorSheet5e extends ActorSheet {
   async _onPropertyAttribution(event) {
     const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
-    if ( existingTooltip || !property || !this.attributions ) return;
+    if ( existingTooltip || !property || !this.attribution ) return;
 
-    let html = await new PropertyAttribution(this.object, this.attributions, property).renderTooltip();
+    let html = await new PropertyAttribution(this.object, this.attribution, property).renderTooltip();
     event.currentTarget.insertAdjacentElement("beforeend", html[0]);
   }
 
