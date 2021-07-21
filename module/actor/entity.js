@@ -546,13 +546,15 @@ export default class Actor5e extends Actor {
         label: game.i18n.localize("DND5E.PropertyBase"),
         mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
         value: 10
-      },
-      dex: {
+      }
+    };
+    if ( data.abilities.dex.mod !== 0 ) {
+      attribution.dex = {
         label: "@abilities.dex.mod",
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
         value: data.abilities.dex.mod
       }
-    };
+    }
 
     if ( armors.length ) {
       if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
@@ -566,7 +568,7 @@ export default class Actor5e extends Actor {
 
         attribution.base.label = this.armor.name;
         attribution.base.value = armorData.value;
-        if ( dex > 0 ) attribution.dex.value = dex;
+        if ( dex !== 0 ) attribution.dex.value = dex;
         else delete attribution.dex;
       }
     }
@@ -602,6 +604,8 @@ export default class Actor5e extends Actor {
       }
       let dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
       for ( const [match, term] of formula.matchAll(dataRgx)) {
+        const value = foundry.utils.getProperty(data, term);
+        if ( value === 0 ) continue;
         attribution[term] = {
           label: match,
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,

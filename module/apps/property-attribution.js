@@ -46,7 +46,7 @@ export default class PropertyAttribution extends Application {
         if ( entry.label.startsWith("@") ) {
           entry.label = this.getPropertyLabel(entry.label.slice(1));
         }
-        if ( entry.mode == CONST.ACTIVE_EFFECT_MODES.ADD && entry.value < 0 ) {
+        if ( (entry.mode === CONST.ACTIVE_EFFECT_MODES.ADD) && (entry.value < 0) ) {
           entry.negative = true;
           entry.value = entry.value * -1;
         }
@@ -63,6 +63,7 @@ export default class PropertyAttribution extends Application {
     if ( parts[0] === "abilities" && parts[1] ) {
       return CONFIG.DND5E.abilities[parts[1]];
     }
+    return property;
   }
 
 }
