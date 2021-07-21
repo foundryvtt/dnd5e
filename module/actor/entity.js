@@ -52,7 +52,6 @@ export default class Actor5e extends Actor {
   /** @override */
   prepareData() {
     this._preparationWarnings = [];
-    this._propertyAttributions = {};
     super.prepareData();
 
     // iterate over owned items and recompute attributes that depend on prepared actor data
