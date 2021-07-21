@@ -388,6 +388,38 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+  /**
+   * Retrieve an item's critical hit threshold.
+   *
+   * Uses the smallest value from among the following sources:
+   * - item entity
+   * - item entity's actor (if it has one)
+   * - the constant '20'
+   *
+   * @returns {Optional[Number]} the minimum value that must be rolled to be considered a critical hit.
+   */
+  getCriticalThreshold() {
+    const itemData = this.data.data;
+    const actorFlags = this.actor.data.flags.dnd5e || {};
+    
+    if ( !this.hasAttack || !itemData ) return;
+
+    if ( this.data.type === "weapon" ) {
+      return Math.min(
+          parseInt(actorFlags.weaponCriticalThreshold) || 20,
+          parseInt(itemData.critical?.threshold) || 20,
+      );
+    }
+
+    if ( this.data.type === "spell" ) {
+      return Math.min(
+          parseInt(actorFlags.spellCriticalThreshold) || 20,
+          parseInt(itemData.critical?.threshold) || 20,
+      );
+    }
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Populates the max uses of an item. 
@@ -909,12 +941,8 @@ export default class Item5e extends Item {
       }
     };
 
-    // Expanded critical hit thresholds
-    if (( this.data.type === "weapon" ) && flags.weaponCriticalThreshold) {
-      rollConfig.critical = parseInt(flags.weaponCriticalThreshold);
-    } else if (( this.data.type === "spell" ) && flags.spellCriticalThreshold) {
-      rollConfig.critical = parseInt(flags.spellCriticalThreshold);
-    }
+    // Critical hit thresholds
+    rollConfig.critical = this.getCriticalThreshold()
 
     // Elven Accuracy
     if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
@@ -1018,9 +1046,14 @@ export default class Item5e extends Item {
       delete this._ammo;
     }
 
-    // Scale melee critical hit damage
+    // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
     if ( itemData.actionType === "mwak" ) {
       rollConfig.criticalBonusDice = this.actor.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
+    }
+
+    // Factor in extra weapon-specific critical damage
+    if ( itemData.critical?.damage && rollConfig.critical ){
+      parts.push(itemData.critical?.damage);
     }
 
     // Call the roll helper utility
