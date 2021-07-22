@@ -21,15 +21,42 @@ export default class ProficiencySelector extends TraitSelector {
   /** @inheritdoc */
   async getData() {
     const attr = foundry.utils.getProperty(this.object.data, this.attribute);
-    const value = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
+    const chosen = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
 
-    this.options.choices = CONFIG.DND5E[`${this.options.type}Proficiencies`];
     const data = super.getData();
+    data.choices = await ProficiencySelector.getChoices(this.options.type, chosen, this.options.sortCategories);
+    return data;
+  }
 
-    const ids = CONFIG.DND5E[`${this.options.type}Ids`];
-    const map = CONFIG.DND5E[`${this.options.type}ProficienciesMap`];
+  /* -------------------------------------------- */
+
+  /**
+   * Structure representing proficiency choices split into categories.
+   *
+   * @typedef {object} ProficiencyChoice
+   * @property {string} label                    Localized label for the choice.
+   * @property {boolean} chosen                  Should this choice be selected by default?
+   * @property {ProficiencyChoice[]} [children]  Array of children if this is a category.
+   */
+
+  /**
+   * A static helper method to get a list of choices for a proficiency type.
+   *
+   * @param {string} type               Proficiency type to select, either `armor`, `tool`, or `weapon`.
+   * @param {string[]} [choices]        Optional list of items to be marked as chosen.
+   * @param {boolean} [sortCategories]  Should top level categories be sorted?
+   * @return {object.<string,ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
+   */
+  static async getChoices(type, chosen, sortCategories=false) {
+    let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
+      obj[key] = { label: label, chosen: chosen?.includes(key) ?? false };
+      return obj;
+    }, {});
+
+    const ids = CONFIG.DND5E[`${type}Ids`];
+    const map = CONFIG.DND5E[`${type}ProficienciesMap`];
     if ( ids !== undefined ) {
-      const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
+      const typeProperty = (type !== "armor") ? `${type}Type` : `armor.type`;
       for ( const [key, id] of Object.entries(ids) ) {
         const item = await ProficiencySelector.getBaseItem(id);
         if ( !item ) continue;
@@ -38,33 +65,30 @@ export default class ProficiencySelector extends TraitSelector {
         if ( map && map[type] ) type = map[type];
         const entry = {
           label: item.name,
-          chosen: attr ? value.includes(key) : false
+          chosen: chosen?.includes(key) ?? false
         };
-        if ( data.choices[type] === undefined ) {
-          data.choices[key] = entry;
+        if ( data[type] === undefined ) {
+          data[key] = entry;
         } else {
-          if ( data.choices[type].children === undefined ) {
-            data.choices[type].children = {};
+          if ( data[type].children === undefined ) {
+            data[type].children = {};
           }
-          data.choices[type].children[key] = entry;
+          data[type].children[key] = entry;
         }
       }
     }
 
-    if ( this.options.type === "tool" ) {
-      data.choices["vehicle"].children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
-        obj[key] = {
-          label: label,
-          chosen: attr ? value.includes(key) : false
-        }
+    if ( type === "tool" ) {
+      data["vehicle"].children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
+        obj[key] = { label: label, chosen: chosen?.includes(key) ?? false };
         return obj;
       }, {});
     }
 
-    if ( this.options.sortCategories ) data.choices = this._sortObject(data.choices);
-    for ( const category of Object.values(data.choices) ) {
+    if ( sortCategories ) data = ProficiencySelector._sortObject(data);
+    for ( const category of Object.values(data) ) {
       if ( !category.children ) continue;
-      category.children = this._sortObject(category.children);
+      category.children = ProficiencySelector._sortObject(category.children);
     }
 
     return data;
@@ -104,7 +128,7 @@ export default class ProficiencySelector extends TraitSelector {
    * @return {object}        Sorted object.
    * @private
    */
-  _sortObject(object) {
+  static _sortObject(object) {
     return Object.fromEntries(Object.entries(object).sort((lhs, rhs) =>
       lhs[1].label.localeCompare(rhs[1].label)
     ));
