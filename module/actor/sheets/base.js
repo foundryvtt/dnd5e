@@ -247,11 +247,12 @@ export default class ActorSheet5e extends ActorSheet {
     else {
       let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
 
-      let base = 10;
+      let base;
       try {
         base = Roll.safeEval(Roll.replaceFormulaData(formula, {}, {missing: 0}));
       } catch (err) {
         formula = CONFIG.DND5E.armorClasses.default.formula;
+        base = Roll.safeEval(Roll.replaceFormulaData(formula, {}, {missing: 0}));
       }
       attribution.push({
         label: game.i18n.localize("DND5E.PropertyBase"),
