@@ -534,6 +534,78 @@
   margin: 2px;
 }
 /* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+.property-attribution .window-content {
+  padding: 0;
+}
+.property-attribution.tooltip {
+  display: none;
+  position: absolute;
+  min-width: 150px;
+  top: 50px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  color: white;
+  font-family: Signika, sans-serif;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  line-height: 1.66em;
+  text-align: left;
+  z-index: 1;
+}
+.property-attribution.tooltip table tr:nth-child(even) {
+  background-color: inherit;
+}
+.property-attribution.tooltip table td::before {
+  opacity: 0.6;
+}
+.property-attribution.tooltip table td.attribution-value {
+  font-weight: 600;
+}
+.property-attribution.tooltip table tr.total {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+.property-attribution table {
+  margin: 0;
+  border: 0;
+  font-size: 1.25em;
+}
+.property-attribution table td:first-child {
+  width: 3em;
+  padding-left: 1em;
+}
+.property-attribution table td:last-child {
+  padding-right: 0.75em;
+}
+.property-attribution table td.mode-1::before {
+  content: "×";
+}
+.property-attribution table td.mode-2::before {
+  content: "+";
+}
+.property-attribution table td.mode-2.negative::before {
+  content: "−";
+  margin-right: -1px;
+}
+.property-attribution table td.mode-3::before {
+  content: "↓";
+}
+.property-attribution table td.mode-4::before {
+  content: "↑";
+}
+.property-attribution table tr:first-child td {
+  padding-top: 0.5em;
+}
+.property-attribution table tr.total {
+  border-top: 2px groove #eeede0;
+  font-weight: 600;
+}
+.property-attribution table tr.total td {
+  padding-bottom: 0.5em;
+}
+/* ----------------------------------------- */
 /*  Actor Type Config Sheet Specifically     */
 /* ----------------------------------------- */
 .actor-type .trait-list {
@@ -758,6 +830,12 @@
   font-size: 12px;
   font-weight: 400;
   white-space: nowrap;
+}
+.dnd5e.sheet.actor .attributable {
+  position: relative;
+}
+.dnd5e.sheet.actor .attributable:hover .tooltip {
+  display: block;
 }
 .dnd5e.sheet.actor .ability-scores {
   flex: 0 0 100px;
