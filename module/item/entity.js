@@ -882,7 +882,7 @@ export default class Item5e extends Item {
     }
 
     // Compose roll options
-    const rollConfig = mergeObject({
+    let rollConfig = {
       parts: parts,
       actor: this.actor,
       data: rollData,
@@ -895,8 +895,7 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       messageData: {"flags.dnd5e.roll": {type: "attack", itemId: this.id }}
-    }, options);
-    rollConfig.event = options.event;
+    };
 
     // Expanded critical hit thresholds
     if (( this.data.type === "weapon" ) && flags.weaponCriticalThreshold) {
@@ -912,6 +911,9 @@ export default class Item5e extends Item {
 
     // Apply Halfling Lucky
     if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
+
+    // Compose calculated roll options with passed-in roll options 
+    rollConfig = mergeObject(rollConfig, options)
 
     // Invoke the d20 roll helper
     const roll = await d20Roll(rollConfig);
