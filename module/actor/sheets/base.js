@@ -1,6 +1,7 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
+import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorArmorConfig from "../../apps/actor-armor.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
@@ -138,6 +139,11 @@ export default class ActorSheet5e extends ActorSheet {
     // Prepare warnings
     data.warnings = this.actor._preparationWarnings;
 
+    // Prepare property attributions
+    this.attribution = {
+      "attributes.ac": this._prepareArmorClassAttribution(actorData.data)
+    };
+
     // Return data to the sheet
     return data
   }
@@ -198,6 +204,97 @@ export default class ActorSheet5e extends ActorSheet {
     }
     if ( !!senses.special ) tags["special"] = senses.special;
     return tags;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Produce a list of armor class attribution objects.
+   * @param {object} data                Actor data to determine the attributions from.
+   * @return {AttributionDescription[]}  List of attribution descriptions.
+   */
+  _prepareArmorClassAttribution(data) {
+    const calc = data.attributes.ac;
+
+    // Flat
+    if ( calc.flat !== null ) {
+      return [{
+        label: game.i18n.localize("DND5E.Flat"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: calc.flat
+      }];
+    }
+
+    let attribution = [];
+
+    // Equipped Armor
+    if ( this.actor.armor && calc.calc === "default" ) {
+      const armorData = this.actor.armor.data.data.armor;
+      attribution.push({
+        label: this.actor.armor.name,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: armorData.value
+      });
+      const dex = Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
+      if ( dex !== 0 && armorData.type !== "heavy" ) attribution.push({
+        label: "@abilities.dex.mod",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: dex
+      });
+    }
+
+    // Formula
+    else {
+      let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
+
+      let base;
+      try {
+        base = Roll.safeEval(Roll.replaceFormulaData(formula, {}, {missing: 0}));
+      } catch (err) {
+        formula = CONFIG.DND5E.armorClasses.default.formula;
+        base = Roll.safeEval(Roll.replaceFormulaData(formula, {}, {missing: 0}));
+      }
+      attribution.push({
+        label: game.i18n.localize("DND5E.PropertyBase"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: base
+      });
+
+      const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
+      const rollData = this.actor.getRollData();
+      for ( const [match, term] of formula.matchAll(dataRgx) ) {
+        const value = foundry.utils.getProperty(data, term);
+        if ( value === 0 ) continue;
+        attribution.push({
+          label: match,
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: foundry.utils.getProperty(data, term)
+        });
+      }
+    }
+
+    // Shield
+    if ( this.actor.shield && calc.shield !== 0 ) attribution.push({
+      label: this.actor.shield.name,
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.shield
+    });
+
+    // Bonus
+    if ( calc.bonus !== 0 ) attribution.push({
+      label: game.i18n.localize("DND5E.EquipmentBonus"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.bonus
+    });
+
+    // Cover
+    if ( calc.cover !== 0 ) attribution.push({
+      label: game.i18n.localize("DND5E.Cover"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.cover
+    });
+
+    return attribution;
   }
 
   /* -------------------------------------------- */
@@ -428,6 +525,9 @@ export default class ActorSheet5e extends ActorSheet {
     // View Item Sheets
     html.find('.item-edit').click(this._onItemEdit.bind(this));
 
+    // Property attributions
+    html.find('.attributable').mouseover(this._onPropertyAttribution.bind(this));
+
     // Editable Only Listeners
     if ( this.isEditable ) {
 
@@ -485,7 +585,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Iinitialize Item list filters by activating the set of filters which are currently applied
+   * Initialize Item list filters by activating the set of filters which are currently applied
    * @private
    */
   _initializeFilterItemList(i, ul) {
@@ -833,6 +933,22 @@ export default class ActorSheet5e extends ActorSheet {
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
     if ( item ) return item.delete();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle displaying the property attribution tooltip when a property is hovered over.
+   * @param {Event} event   The originating mouse event.
+   * @private
+   */
+  async _onPropertyAttribution(event) {
+    const existingTooltip = event.currentTarget.querySelector("div.tooltip");
+    const property = event.currentTarget.dataset.property;
+    if ( existingTooltip || !property || !this.attribution ) return;
+
+    let html = await new PropertyAttribution(this.object, this.attribution, property).renderTooltip();
+    event.currentTarget.insertAdjacentElement("beforeend", html[0]);
   }
 
   /* -------------------------------------------- */
