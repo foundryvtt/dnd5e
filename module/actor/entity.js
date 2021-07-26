@@ -1506,10 +1506,9 @@ export default class Actor5e extends Actor {
     for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
       d.token[k] = source.token[k];
     }
-    if ( !keepVision ) {
-      for ( let k of ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'] ) {
-        d.token[k] = source.token[k];
-      }
+    const vision = keepVision ? o.token : source.token;
+    for ( let k of ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'] ) {
+      d.token[k] = vision[k];
     }
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
