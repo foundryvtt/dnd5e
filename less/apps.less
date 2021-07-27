@@ -508,7 +508,6 @@
   }
 }
 
-
 /* ----------------------------------------- */
 /* Trait Selector
 /* ----------------------------------------- */
@@ -530,62 +529,46 @@
   }
 }
 
-
 /* ----------------------------------------- */
 /*  Property Attribution                     */
 /* ----------------------------------------- */
 
 .property-attribution {
-  .window-content {
-    padding: 0;
-  }
-
-  &.tooltip {
-    display: none;
-    position: absolute;
-    min-width: 150px;
-    top: 50px;
-    border-radius: 3px;
-
-    background-color: rgba(0, 0, 0, .8);
-    backdrop-filter: blur(4px);
-
-    color: white;
-    font-family: Signika, sans-serif;
-    font-size: 11px !important;
-    font-weight: normal !important;
-    line-height: 1.66em;
-    text-align: left;
-    z-index: 1;
-
-    table {
-      tr:nth-child(even) {
-        background-color: inherit;
-      }
-      td::before {
-        opacity: 0.6;
-      }
-      td.attribution-value {
-        font-weight: 600;
-      }
-      tr.total {
-        border-top: 1px solid rgba(255, 255, 255, 0.25);
-      }
-    }
-  }
+  display: none;
+  position: absolute;
+  padding: 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, .8);
+  backdrop-filter: blur(4px);
+  color: @colorFaint;
+  text-align: left;
+  z-index: 1;
 
   table {
     margin: 0;
     border: 0;
-
-    font-size: 1.25em;
-
-    td:first-child {
-      width: 3em;
-      padding-left: 1em;
+    tr {
+      background-color: inherit;
     }
-    td:last-child {
-      padding-right: 0.75em;
+    td {
+      padding: 3px;
+    }
+    tr.total > td {
+      font-weight: 600;
+      padding-top: 5px;
+      border-top: 1px solid @colorTan;
+    }
+    td.attribution-value {
+      width: 20%;
+      padding-right: 5px;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    // Arithmetic Operators
+    td::before {
+      opacity: 0.6;
     }
     td.mode-1::before { // Multiply
       content: "×";
@@ -603,20 +586,8 @@
     td.mode-4::before { // Upgrade
       content: "↑";
     }
-
-    tr:first-child td {
-      padding-top: 0.5em;
-    }
-    tr.total {
-      border-top: @borderGroove;
-      font-weight: 600;
-      td {
-        padding-bottom: 0.5em;
-      }
-    }
   }
 }
-
 
 /* ----------------------------------------- */
 /*  Actor Type Config Sheet Specifically     */
