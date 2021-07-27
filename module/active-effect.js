@@ -32,7 +32,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     const itemData = item.data.data;
     // If an item is not equipped, or it is equipped but it requires attunement and is not attuned, then disable any
     // Active Effects that might have originated from it.
-    this.isSuppressed = !itemData.equipped || (itemData.attunement === CONFIG.DND5E.attunementTypes.REQUIRED);
+    this.isSuppressed = itemData.equipped === false || (itemData.attunement === CONFIG.DND5E.attunementTypes.REQUIRED);
   }
 
   /* --------------------------------------------- */
