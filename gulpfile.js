@@ -74,7 +74,7 @@ function extractPacks() {
 
       db.find({}, (err, packs) => {
         packs.forEach(pack => {
-          let output = JSON5.stringify(pack, { space: 2, quote: '"' });
+          let output = JSON5.stringify(pack, { space: 2, quote: '"' }) + "\n";
           let packName = pack.name.toLowerCase().replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
           fs.writeFileSync(`${folder}/${packName}.json`, output);
         });
