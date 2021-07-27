@@ -16,7 +16,9 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <input type="text" name="data.rarity" value="{{data.rarity}}" placeholder="{{ localize 'DND5E.Rarity' }}"/>
+                    <select name="data.rarity">
+                        {{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+                    </select>
                 </li>
                 <li>
                     <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
@@ -40,15 +42,19 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            {{!-- Tool Type --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.ItemToolType" }}</label>
+                <select name="data.toolType">
+                    {{selectOptions config.toolTypes selected=data.toolType blank=""}}
+                </select>
+            </div>
+
             {{!-- Tool Proficiency --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolProficiency" }}</label>
                  <select name="data.proficient" data-dtype="Number">
-                     {{#select data.proficient}}
-                     {{#each config.proficiencyLevels as |label p|}}
-                     <option value="{{p}}">{{label}}</option>
-                     {{/each}}
-                     {{/select}}
+                     {{selectOptions config.proficiencyLevels selected=data.proficient}}
                  </select>
             </div>
 
@@ -56,11 +62,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.DefaultAbilityCheck" }}</label>
                 <select name="data.ability">
-                    {{#select data.ability}}
-                    {{#each config.abilities as |name a|}}
-                    <option value="{{a}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{selectOptions config.abilities selected=data.ability}}
                 </select>
             </div>
 

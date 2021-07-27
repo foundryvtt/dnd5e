@@ -31,7 +31,9 @@
         },
         "attributes": {
           "ac": {
-            "value": 10
+            "flat": null,
+            "calc": "default",
+            "formula": ""
           },
           "hp": {
             "value": 10,
@@ -347,6 +349,7 @@
     },
     "vehicle": {
       "templates": ["common"],
+      "vehicleType": "water",
       "abilities": {
         "int": {
           "value": 0
@@ -415,7 +418,6 @@
         "quantity": 1,
         "weight": 0,
         "price": 0,
-        "attuned": false,
         "attunement": 0,
         "equipped": false,
         "rarity": "",
@@ -550,6 +552,7 @@
     },
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
+      "toolType": "",
       "ability": "int",
       "chatFlavor": "",
       "proficient": 0

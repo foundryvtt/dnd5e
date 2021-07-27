@@ -73,7 +73,7 @@
             {{#if section.columns}}
                 {{#each section.columns}}
                     <div class="item-detail {{css}}">
-                        {{#with (lookup item property)}}
+                        {{#with (getProperty item property)}}
                             {{#if ../editable}}
                                 <input type="text" value="{{this}}" placeholder="&mdash;"
                                        data-dtype="{{../editable}}">

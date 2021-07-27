@@ -5,6 +5,8 @@
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
 
         <section class="header-details flexrow">
+            {{> "systems/dnd5e/templates/actors/parts/actor-warnings.html"}}
+
             <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
             </h1>
@@ -74,10 +76,13 @@
                     </footer>
                 </li>
 
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.ArmorClass" }}</h4>
-                    <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
+                <li class="attribute armor">
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.ArmorClass" }}
+                        <a class="config-button" data-action="armor" title="{{localize 'DND5E.ArmorConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
+                    <div class="attribute-value attributable" data-property="attributes.ac">
+                        <span>{{data.attributes.ac.value}}</span>
                     </div>
                     <footer class="attribute-footer">
                         <span class="spell-dc">{{localize "DND5E.SpellDC"}} {{data.attributes.spelldc}}</span>
@@ -135,7 +140,7 @@
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="{{ localize 'DND5E.Modifier' }}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
+                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.baseProf}}" data-dtype="Number"/>
                         <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
                         <span class="ability-save" title="{{ localize 'DND5E.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
@@ -148,7 +153,7 @@
             {{#each config.skills as |label s|}}
             {{#with (lookup ../data.skills s) as |skill|}}
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
-                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number"/>
+                    <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.baseValue}}" data-dtype="Number"/>
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <h4 class="skill-name rollable">{{label}}</h4>
                     <span class="skill-ability">{{skill.ability}}</span>

@@ -3,7 +3,9 @@
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" alt="{{actor.name}}"
              data-edit="img">
         <section class="header-details flexrow">
-            <h1 class="charnam">
+            {{> "systems/dnd5e/templates/actors/parts/actor-warnings.html"}}
+
+            <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}"
                        placeholder="{{localize 'DND5E.Name'}}">
             </h1>
@@ -12,7 +14,9 @@
                     <span>{{lookup config.actorSizes data.traits.size}}</span>
                 </li>
                 <li>
-                    <span>{{localize 'DND5E.Vehicle'}}</span>
+                    <select name="data.vehicleType">
+                      {{selectOptions config.vehicleTypes selected=data.vehicleType}}
+                    </select>
                 </li>
                 <li>
                     <input type="text" name="data.traits.dimensions"
@@ -47,8 +51,8 @@
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{localize 'DND5E.ArmorClass'}}</h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="text" placeholder="&mdash;"
-                               value="{{data.attributes.ac.value}}" data-dtype="Number">
+                        <input name="data.attributes.ac.flat" type="text" placeholder="&mdash;"
+                               value="{{data.attributes.ac.flat}}" data-dtype="Number">
                     </div>
                     <footer class="attribute-footer">
                         <input type="text" name="data.attributes.ac.motionless"
@@ -155,7 +159,9 @@
         <div class="tab cargo flexcol" data-group="primary" data-tab="cargo">
             {{> 'systems/dnd5e/templates/actors/parts/actor-inventory.html' sections=cargo}}
         </div>
-
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/dnd5e/templates/actors/parts/active-effects.html"}}
+        </div>
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
             {{editor content=data.details.biography.value target='data.details.biography.value'
                      button=true owner=owner editable=editable rollData=rollData}}

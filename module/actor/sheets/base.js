@@ -1,12 +1,16 @@
+import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
+import ProficiencySelector from "../../apps/proficiency-selector.js";
+import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
+import ActorArmorConfig from "../../apps/actor-armor.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
 import {DND5E} from '../../config.js';
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
+import ActiveEffect5e from "../../active-effect.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -82,6 +86,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // The Actor's data
     const actorData = this.actor.data.toObject(false);
+    const source = this.actor.data._source.data;
     data.actor = actorData;
     data.data = actorData.data;
 
@@ -102,6 +107,7 @@ export default class ActorSheet5e extends ActorSheet {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
+      abl.baseProf = source.abilities[a].proficient;
     }
 
     // Skills
@@ -111,6 +117,7 @@ export default class ActorSheet5e extends ActorSheet {
         skl.icon = this._getProficiencyIcon(skl.value);
         skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
         skl.label = CONFIG.DND5E.skills[s];
+        skl.baseValue = source.skills[s].value;
       }
     }
 
@@ -127,7 +134,15 @@ export default class ActorSheet5e extends ActorSheet {
     this._prepareItems(data);
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.actor.effects);
+    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
+
+    // Prepare warnings
+    data.warnings = this.actor._preparationWarnings;
+
+    // Prepare property attributions
+    this.attribution = {
+      "attributes.ac": this._prepareArmorClassAttribution(actorData.data)
+    };
 
     // Return data to the sheet
     return data
@@ -194,6 +209,90 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Produce a list of armor class attribution objects.
+   * @param {object} data                Actor data to determine the attributions from.
+   * @return {AttributionDescription[]}  List of attribution descriptions.
+   */
+  _prepareArmorClassAttribution(data) {
+    const calc = data.attributes.ac;
+
+    // Flat
+    if ( calc.flat !== null ) {
+      return [{
+        label: game.i18n.localize("DND5E.Flat"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: calc.flat
+      }];
+    }
+
+    let attribution = [];
+
+    // Equipped Armor
+    if ( this.actor.armor && calc.calc === "default" ) {
+      const armorData = this.actor.armor.data.data.armor;
+      attribution.push({
+        label: this.actor.armor.name,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: armorData.value
+      });
+      const dex = Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
+      if ( dex !== 0 && armorData.type !== "heavy" ) attribution.push({
+        label: "@abilities.dex.mod",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: dex
+      });
+    }
+
+    // Formula
+    else {
+      const formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
+      let base = calc.base;
+      const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
+      const rollData = this.actor.getRollData();
+      for ( const [match, term] of formula.matchAll(dataRgx) ) {
+        const value = foundry.utils.getProperty(data, term);
+        if ( (term === "attributes.ac.base") || (value === 0) ) continue;
+        if ( Number.isNumeric(value) ) base -= Number(value);
+        attribution.push({
+          label: match,
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: foundry.utils.getProperty(data, term)
+        });
+      }
+      attribution.unshift({
+        label: game.i18n.localize("DND5E.PropertyBase"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: base
+      });
+    }
+
+    // Shield
+    if ( this.actor.shield && calc.shield !== 0 ) attribution.push({
+      label: this.actor.shield.name,
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.shield
+    });
+
+    // Bonus
+    if ( calc.bonus !== 0 ) attribution.push({
+      label: game.i18n.localize("DND5E.EquipmentBonus"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.bonus
+    });
+
+    // Cover
+    if ( calc.cover !== 0 ) attribution.push({
+      label: game.i18n.localize("DND5E.Cover"),
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: calc.cover
+    });
+
+    return attribution;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies
    * @param {object} traits   The raw traits data object from the actor data
    * @private
@@ -204,10 +303,7 @@ export default class ActorSheet5e extends ActorSheet {
       "di": CONFIG.DND5E.damageResistanceTypes,
       "dv": CONFIG.DND5E.damageResistanceTypes,
       "ci": CONFIG.DND5E.conditionTypes,
-      "languages": CONFIG.DND5E.languages,
-      "armorProf": CONFIG.DND5E.armorProficiencies,
-      "weaponProf": CONFIG.DND5E.weaponProficiencies,
-      "toolProf": CONFIG.DND5E.toolProficiencies
+      "languages": CONFIG.DND5E.languages
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
@@ -225,6 +321,14 @@ export default class ActorSheet5e extends ActorSheet {
       if ( trait.custom ) {
         trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
       }
+      trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
+    }
+
+    // Populate and localize proficiencies
+    for ( const t of ["armor", "weapon", "tool"] ) {
+      const trait = traits[`${t}Prof`];
+      if ( !trait ) continue;
+      Actor5e.prepareProficiencies(trait, t);
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
   }
@@ -414,6 +518,9 @@ export default class ActorSheet5e extends ActorSheet {
     // View Item Sheets
     html.find('.item-edit').click(this._onItemEdit.bind(this));
 
+    // Property attributions
+    html.find('.attributable').mouseover(this._onPropertyAttribution.bind(this));
+
     // Editable Only Listeners
     if ( this.isEditable ) {
 
@@ -429,6 +536,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
       // Trait Selector
+      html.find('.proficiency-selector').click(this._onProficiencySelector.bind(this));
       html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
@@ -441,7 +549,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
-      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
+      html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
     }
 
     // Owner Only Listeners
@@ -470,7 +578,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Iinitialize Item list filters by activating the set of filters which are currently applied
+   * Initialize Item list filters by activating the set of filters which are currently applied
    * @private
    */
   _initializeFilterItemList(i, ul) {
@@ -513,6 +621,9 @@ export default class ActorSheet5e extends ActorSheet {
     const button = event.currentTarget;
     let app;
     switch ( button.dataset.action ) {
+      case "armor":
+        app = new ActorArmorConfig(this.object);
+        break;
       case "hit-dice":
         app = new ActorHitDiceConfig(this.object);
         break;
@@ -526,7 +637,7 @@ export default class ActorSheet5e extends ActorSheet {
         app = new ActorSensesConfig(this.object);
         break;
       case "type":
-        new ActorTypeConfig(this.object).render(true);
+        app = new ActorTypeConfig(this.object);
         break;
     }
     app?.render(true);
@@ -662,7 +773,7 @@ export default class ActorSheet5e extends ActorSheet {
       const similarItem = this.actor.items.find(i => {
         const sourceId = i.getFlag("core", "sourceId");
         return sourceId && (sourceId === itemData.flags.core?.sourceId) &&
-               (i.type === "consumable");
+               (i.type === "consumable") && (i.name === itemData.name);
       });
       if ( similarItem ) {
         return similarItem.update({
@@ -820,6 +931,22 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Handle displaying the property attribution tooltip when a property is hovered over.
+   * @param {Event} event   The originating mouse event.
+   * @private
+   */
+  async _onPropertyAttribution(event) {
+    const existingTooltip = event.currentTarget.querySelector("div.tooltip");
+    const property = event.currentTarget.dataset.property;
+    if ( existingTooltip || !property || !this.attribution ) return;
+
+    let html = await new PropertyAttribution(this.object, this.attribution, property).renderTooltip();
+    event.currentTarget.insertAdjacentElement("beforeend", html[0]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle rolling an Ability check, either a test or a saving throw
    * @param {Event} event   The originating click event
    * @private
@@ -871,6 +998,22 @@ export default class ActorSheet5e extends ActorSheet {
     if ( set.has(filter) ) set.delete(filter);
     else set.add(filter);
     return this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool proficiencies.
+   * @param {Event} event  The click event which originated the selection
+   * @private
+   */
+  _onProficiencySelector(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const label = a.parentElement.querySelector("label");
+    const options = { name: a.dataset.target, title: label.innerText, type: a.dataset.type };
+    if ( options.type === "tool" ) options.sortCategories = true;
+    return new ProficiencySelector(this.actor, options).render(true);
   }
 
   /* -------------------------------------------- */

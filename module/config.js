@@ -95,7 +95,7 @@ DND5E.weaponProficienciesMap = {
   "simpleR": "sim",
   "martialM": "mar",
   "martialR": "mar"
-}
+};
 
 /**
  * The basic weapon types in 5e. This enables specific weapon proficiencies or
@@ -146,17 +146,24 @@ DND5E.weaponIds = {
 /* -------------------------------------------- */
 
 
-
-DND5E.toolProficiencies = {
+/**
+ * The categories into which Tool items can be grouped.
+ *
+ * @enum {string}
+ */
+DND5E.toolTypes = {
   "art": "DND5E.ToolArtisans",
-  "disg": "DND5E.ToolDisguiseKit",
-  "forg": "DND5E.ToolForgeryKit",
   "game": "DND5E.ToolGamingSet",
-  "herb": "DND5E.ToolHerbalismKit",
-  "music": "DND5E.ToolMusicalInstrument",
-  "navg": "DND5E.ToolNavigators",
-  "pois": "DND5E.ToolPoisonersKit",
-  "thief": "DND5E.ToolThieves",
+  "music": "DND5E.ToolMusicalInstrument"
+};
+
+/**
+ * The categories of tool proficiencies that a character can gain.
+ *
+ * @enum {string}
+ */
+DND5E.toolProficiencies = {
+  ...DND5E.toolTypes,
   "vehicle": "DND5E.ToolVehicle"
 };
 
@@ -174,6 +181,7 @@ DND5E.toolIds = {
   "card": "YwlHI3BVJapz4a3E",
   "carpenter": "8NS6MSOdXtUqD7Ib",
   "cartographer": "fC0lFK8P4RuhpfaU",
+  "chess": "23y8FvWKf9YLcnBL",
   "cobbler": "hM84pZnpCqKfi8XH",
   "cook": "Gflnp29aEv5Lc1ZM",
   "dice": "iBuTM09KD9IoM5L8",
@@ -285,7 +293,7 @@ DND5E.tokenHPColors = {
   temp: 0x66CCFF,
   tempmax: 0x440066,
   negmax: 0x550000
-}
+};
 
 /* -------------------------------------------- */
 
@@ -339,6 +347,21 @@ DND5E.itemCapacityTypes = {
 /* -------------------------------------------- */
 
 /**
+ * List of various item rarities.
+ * @enum {String}
+ */
+DND5E.itemRarity = {
+  "common": "DND5E.ItemRarityCommon",
+  "uncommon": "DND5E.ItemRarityUncommon",
+  "rare": "DND5E.ItemRarityRare",
+  "veryRare": "DND5E.ItemRarityVeryRare",
+  "legendary": "DND5E.ItemRarityLegendary",
+  "artifact": "DND5E.ItemRarityArtifact"
+};
+
+/* -------------------------------------------- */
+
+/**
  * Enumerate the lengths of time over which an item can have limited use ability
  * @type {Object}
  */
@@ -349,6 +372,19 @@ DND5E.limitedUsePeriods = {
   "charges": "DND5E.Charges"
 };
 
+/* -------------------------------------------- */
+
+/**
+ * Specific equipment types that modify base AC
+ * @type {object}
+ */
+DND5E.armorTypes = {
+  "light": "DND5E.EquipmentLight",
+  "medium": "DND5E.EquipmentMedium",
+  "heavy": "DND5E.EquipmentHeavy",
+  "natural": "DND5E.EquipmentNatural",
+  "shield": "DND5E.EquipmentShield"
+};
 
 /* -------------------------------------------- */
 
@@ -357,17 +393,24 @@ DND5E.limitedUsePeriods = {
  * @type {Object}
  */
 DND5E.equipmentTypes = {
-  "light": "DND5E.EquipmentLight",
-  "medium": "DND5E.EquipmentMedium",
-  "heavy": "DND5E.EquipmentHeavy",
   "bonus": "DND5E.EquipmentBonus",
-  "natural": "DND5E.EquipmentNatural",
-  "shield": "DND5E.EquipmentShield",
   "clothing": "DND5E.EquipmentClothing",
   "trinket": "DND5E.EquipmentTrinket",
-  "vehicle": "DND5E.EquipmentVehicle"
+  "vehicle": "DND5E.EquipmentVehicle",
+  ...DND5E.armorTypes
 };
 
+/* -------------------------------------------- */
+
+/**
+ * The various types of vehicles in which characters can be proficient.
+ * @enum {string}
+ */
+DND5E.vehicleTypes = {
+  "air": "DND5E.VehicleTypeAir",
+  "land": "DND5E.VehicleTypeLand",
+  "water": "DND5E.VehicleTypeWater"
+};
 
 /* -------------------------------------------- */
 
@@ -394,8 +437,67 @@ DND5E.armorProficienciesMap = {
   "medium": "med",
   "heavy": "hvy",
   "shield": "shl"
-}
+};
 
+/**
+ * The basic armor types in 5e. This enables specific armor proficiencies,
+ * automated AC calculation in NPCs, and starting equipment.
+ *
+ * @enum {string}
+ */
+DND5E.armorIds = {
+  "breastplate": "SK2HATQ4abKUlV8i",
+  "chainmail": "rLMflzmxpe8JGTOA",
+  "chainshirt": "p2zChy24ZJdVqMSH",
+  "halfplate": "vsgmACFYINloIdPm",
+  "hide": "n1V07puo0RQxPGuF",
+  "leather": "WwdpHLXGX5r8uZu5",
+  "padded": "GtKV1b5uqFQqpEni",
+  "plate": "OjkIqlW2UpgFcjZa",
+  "ringmail": "nsXZejlmgalj4he9",
+  "scalemail": "XmnlF5fgIO3tg6TG",
+  "splint": "cKpJmsJmU8YaiuqG",
+  "studded": "TIV3B1vbrVHIhQAm"
+};
+
+/**
+ * The basic shield in 5e.
+ *
+ * @enum {string}
+ */
+DND5E.shieldIds = {
+  "shield": "sSs3hSzkKBMNBgTs"
+};
+
+/**
+ * Common armor class calculations.
+ * @enum {object}
+ */
+DND5E.armorClasses = {
+  "default": {
+    "label": "DND5E.ArmorClassDefault",
+    "formula": "@attributes.ac.base + @abilities.dex.mod"
+  },
+  "mage": {
+    "label": "DND5E.ArmorClassMage",
+    "formula": "13 + @abilities.dex.mod"
+  },
+  "draconic": {
+    "label": "DND5E.ArmorClassDraconic",
+    "formula": "13 + @abilities.dex.mod"
+  },
+  "unarmoredMonk": {
+    "label": "DND5E.ArmorClassUnarmoredMonk",
+    "formula": "10 + @abilities.dex.mod + @abilities.wis.mod"
+  },
+  "unarmoredBarb": {
+    "label": "DND5E.ArmorClassUnarmoredBarbarian",
+    "formula": "10 + @abilities.dex.mod + @abilities.con.mod"
+  },
+  "custom": {
+    "label": "DND5E.ArmorClassCustom"
+  }
+};
 
 /* -------------------------------------------- */
 
@@ -488,7 +590,9 @@ DND5E.movementTypes = {
  */
 DND5E.movementUnits = {
   "ft": "DND5E.DistFt",
-  "mi": "DND5E.DistMi"
+  "mi": "DND5E.DistMi",
+  "m": "DND5E.DistM",
+  "km": "DND5E.DistKm"
 };
 
 /**
@@ -515,9 +619,18 @@ for ( let [k, v] of Object.entries(DND5E.movementUnits) ) {
  * @type {Object}
  */
 DND5E.encumbrance = {
-  currencyPerWeight: 50,
-  strMultiplier: 15,
-  vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
+  currencyPerWeight: {
+    imperial: 50,
+    metric: 110
+  },
+  strMultiplier: {
+    imperial: 15,
+    metric: 6.8
+  },
+  vehicleWeightMultiplier: {
+    imperial: 2000, // 2000 lbs in an imperial ton
+    metric: 1000, // 1000 kg in a metric ton
+  }
 };
 
 /* -------------------------------------------- */

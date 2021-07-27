@@ -219,6 +219,26 @@
   }
 
   /* ----------------------------------------- */
+  /*  Notifications                            */
+  /* ----------------------------------------- */
+
+  .warnings, .info {
+    flex: 0 0 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .notification {
+      font-family: 'Signika', sans-serif;
+      font-weight: normal;
+      font-size: 13px;
+      box-shadow: none;
+      padding: 2px 8px;
+      margin-bottom: 2px;
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
 
@@ -228,6 +248,16 @@
 
     .header-details {
       .modesto();
+
+      .summary select {
+        width: 100%;
+        height: 100%;
+        border: 0;
+  
+        .modesto();
+        text-transform: capitalize;
+        font-weight: 100;
+      }
     }
 
     /* Character Name */
@@ -359,7 +389,7 @@
   .traits {
     margin: 5px 0 0;
 
-    .trait-selector {
+    .trait-selector, .proficiency-selector {
       flex: 0 0 16px;
       padding: 2px 0;
       color: #999;
@@ -478,7 +508,6 @@
   }
 }
 
-
 /* ----------------------------------------- */
 /* Trait Selector
 /* ----------------------------------------- */
@@ -488,11 +517,75 @@
     list-style: none;
     margin: 0;
     padding: 0;
+
+    li ol.trait-list {
+      margin-left: 1.5em;
+    }
   }
 
   input[type="text"] {
     height: 24px;
     margin: 2px;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+
+.property-attribution {
+  display: none;
+  position: absolute;
+  padding: 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, .8);
+  backdrop-filter: blur(4px);
+  color: @colorFaint;
+  text-align: left;
+  z-index: 1;
+
+  table {
+    margin: 0;
+    border: 0;
+    tr {
+      background-color: inherit;
+    }
+    td {
+      padding: 3px;
+    }
+    tr.total > td {
+      font-weight: 600;
+      padding-top: 5px;
+      border-top: 1px solid @colorTan;
+    }
+    td.attribution-value {
+      width: 20%;
+      padding-right: 5px;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    // Arithmetic Operators
+    td::before {
+      opacity: 0.6;
+    }
+    td.mode-1::before { // Multiply
+      content: "×";
+    }
+    td.mode-2::before { // Add
+      content: "+";
+    }
+    td.mode-2.negative::before { // Subtract
+      content: "−";
+      margin-right: -1px;
+    }
+    td.mode-3::before { // Downgrade
+      content: "↓";
+    }
+    td.mode-4::before { // Upgrade
+      content: "↑";
+    }
   }
 }
 
@@ -528,6 +621,17 @@
 }
 
 /* ----------------------------------------- */
+/*  Armor Config Sheet Specifically          */
+/* ----------------------------------------- */
+
+.dnd5e.actor-armor-config {
+  .ac-field input {
+    font-size: 3em;
+    text-align: center;
+  }
+}
+
+/* ----------------------------------------- */
 /*  Add Feature Prompt Specifically          */
 /* ----------------------------------------- */
 
@@ -546,5 +650,10 @@
 
   .item-name > label {
     align-items: center;
+  }
+
+  .window-content {
+    max-height: 90vh;
+    overflow-y: auto;
   }
 }
