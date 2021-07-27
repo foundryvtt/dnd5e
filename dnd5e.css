@@ -536,48 +536,41 @@
 /* ----------------------------------------- */
 /*  Property Attribution                     */
 /* ----------------------------------------- */
-.property-attribution .window-content {
-  padding: 0;
-}
-.property-attribution.tooltip {
+.property-attribution {
   display: none;
   position: absolute;
-  min-width: 150px;
-  top: 50px;
+  padding: 3px;
+  border: 1px solid #000;
   border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(4px);
-  color: white;
-  font-family: Signika, sans-serif;
-  font-size: 11px !important;
-  font-weight: normal !important;
-  line-height: 1.66em;
+  color: #c9c7b8;
   text-align: left;
   z-index: 1;
-}
-.property-attribution.tooltip table tr:nth-child(even) {
-  background-color: inherit;
-}
-.property-attribution.tooltip table td::before {
-  opacity: 0.6;
-}
-.property-attribution.tooltip table td.attribution-value {
-  font-weight: 600;
-}
-.property-attribution.tooltip table tr.total {
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
 .property-attribution table {
   margin: 0;
   border: 0;
-  font-size: 1.25em;
 }
-.property-attribution table td:first-child {
-  width: 3em;
-  padding-left: 1em;
+.property-attribution table tr {
+  background-color: inherit;
 }
-.property-attribution table td:last-child {
-  padding-right: 0.75em;
+.property-attribution table td {
+  padding: 3px;
+}
+.property-attribution table tr.total > td {
+  font-weight: 600;
+  padding-top: 5px;
+  border-top: 1px solid #7a7971;
+}
+.property-attribution table td.attribution-value {
+  width: 20%;
+  padding-right: 5px;
+  text-align: right;
+  font-weight: 600;
+}
+.property-attribution table td::before {
+  opacity: 0.6;
 }
 .property-attribution table td.mode-1::before {
   content: "×";
@@ -594,16 +587,6 @@
 }
 .property-attribution table td.mode-4::before {
   content: "↑";
-}
-.property-attribution table tr:first-child td {
-  padding-top: 0.5em;
-}
-.property-attribution table tr.total {
-  border-top: 2px groove #eeede0;
-  font-weight: 600;
-}
-.property-attribution table tr.total td {
-  padding-bottom: 0.5em;
 }
 /* ----------------------------------------- */
 /*  Actor Type Config Sheet Specifically     */
@@ -747,32 +730,34 @@
 .dnd5e.sheet.actor .sheet-header .attributes .attribute:last-child {
   border-right: none;
 }
+.dnd5e.sheet.actor .sheet-header .attributes .attribute .attribute-name {
+  position: relative;
+}
 .dnd5e.sheet.actor .sheet-header .attributes .attribute .attribute-value {
   height: 30px;
   line-height: 30px;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .armor h4.attribute-name,
-.dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name,
-.dnd5e.sheet.actor .sheet-header .attributes .hit-dice h4.attribute-name {
-  position: relative;
-}
-.dnd5e.sheet.actor .sheet-header .attributes .armor .config-button,
-.dnd5e.sheet.actor .sheet-header .attributes .movement .config-button,
-.dnd5e.sheet.actor .sheet-header .attributes .hit-dice .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .attribute .config-button {
   position: absolute;
   display: none;
-  right: 0;
-  top: 1px;
-  font-size: 12px;
+  right: -6px;
+  top: -3px;
+  font-size: 10px;
   font-weight: normal;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .armor:hover .config-button,
-.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .config-button,
-.dnd5e.sheet.actor .sheet-header .attributes .hit-dice:hover .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .attribute:hover .config-button {
   display: block;
 }
-.dnd5e.sheet.actor .sheet-header .attributes input.temphp {
+.dnd5e.sheet.actor .sheet-header .attributes .attribute input.temphp {
   width: 48%;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .attribute .property-attribution {
+  min-width: 150px;
+  top: 50px;
+  font-family: Signika, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1rem;
 }
 .dnd5e.sheet.actor h4.box-title {
   height: 18px;
