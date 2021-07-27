@@ -9,7 +9,7 @@ const fs = require("fs");
 const mergeStream = require("merge-stream");
 const path = require("path");
 const through2 = require("through2");
-const yaml = require('js-yaml');
+const JSON5 = require('json5');
 
 
 /* ----------------------------------------- */
@@ -39,15 +39,15 @@ function compilePacks() {
     return fs.statSync(path.join(PACK_SRC, file)).isDirectory();
   });
 
-  // Combine the YML files in each folder into a compendium pack
+  // Combine the JSON files in each folder into a compendium pack
   const packs = folders.map((folder) => {
     const db = new Datastore({
       filename: path.resolve(__dirname, PACK_DEST, `${folder}.db`),
       autoload: true
     });
-    return gulp.src(path.join(PACK_SRC, folder, "/**/*.yml")).pipe(
+    return gulp.src(path.join(PACK_SRC, folder, "/**/*.json")).pipe(
       through2.obj((file, enc, cb) => {
-        let json = yaml.loadAll(file.contents.toString());
+        let json = JSON5.parse(file.contents.toString());
         db.insert(json);
         cb(null, file);
       })
@@ -66,21 +66,17 @@ function extractPacks() {
   const packs = gulp.src(`${PACK_DEST}/**/${packName}.db`)
     .pipe(through2.obj((file, enc, callback) => {
       let filename = path.parse(file.path).name;
-      if (!fs.existsSync(`./${PACK_SRC}/${filename}`)) {
-        fs.mkdirSync(`./${PACK_SRC}/${filename}`);
-      }
+      const folder = `./${PACK_SRC}/${filename}`;
+      if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
 
       const db = new Datastore({ filename: file.path, autoload: true });
       db.loadDatabase();
 
       db.find({}, (err, packs) => {
         packs.forEach(pack => {
-          let output = yaml.dump(pack, {
-            noRefs: true,
-            sortKeys: false
-          });
+          let output = JSON5.stringify(pack, { space: 2, quote: '"' });
           let packName = pack.name.toLowerCase().replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
-          fs.writeFileSync(`./${PACK_SRC}/${filename}/${packName}.yml`, output);
+          fs.writeFileSync(`${folder}/${packName}.json`, output);
         });
       });
 
