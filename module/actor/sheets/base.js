@@ -245,32 +245,25 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Formula
     else {
-      let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
-
-      let base;
-      try {
-        base = Roll.safeEval(Roll.replaceFormulaData(formula, {}, {missing: 0}));
-      } catch (err) {
-        formula = CONFIG.DND5E.armorClasses.default.formula;
-        base = Roll.safeEval(Roll.replaceFormulaData(formula, {}, {missing: 0}));
-      }
-      attribution.push({
-        label: game.i18n.localize("DND5E.PropertyBase"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: base
-      });
-
+      const formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
+      let base = calc.base;
       const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
       const rollData = this.actor.getRollData();
       for ( const [match, term] of formula.matchAll(dataRgx) ) {
         const value = foundry.utils.getProperty(data, term);
-        if ( value === 0 ) continue;
+        if ( (term === "attributes.ac.base") || (value === 0) ) continue;
+        if ( Number.isNumeric(value) ) base -= Number(value);
         attribution.push({
           label: match,
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: foundry.utils.getProperty(data, term)
         });
       }
+      attribution.unshift({
+        label: game.i18n.localize("DND5E.PropertyBase"),
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: base
+      });
     }
 
     // Shield

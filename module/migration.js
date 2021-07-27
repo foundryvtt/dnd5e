@@ -115,6 +115,52 @@ export const migrateCompendium = async function(pack) {
   console.log(`Migrated all ${entity} entities from Compendium ${pack.collection}`);
 };
 
+/**
+ * Apply 'smart' AC migration to a given Actor compendium. This will perform the normal AC migration but additionally
+ * check to see if the actor has armor already equipped, and opt to use that instead.
+ * @param pack
+ * @return {Promise}
+ */
+export const migrateArmorClass = async function(pack) {
+  if ( typeof pack === "string" ) pack = game.packs.get(pack);
+  if ( pack.metadata.entity !== "Actor" ) return;
+  const wasLocked = pack.locked;
+  await pack.configure({locked: false});
+  const actors = await pack.getDocuments();
+  const updates = [];
+  const armor = new Set(Object.keys(CONFIG.DND5E.armorTypes));
+
+  for ( const actor of actors ) {
+    try {
+      console.log(`Migrating ${actor.name}...`);
+      const src = actor.toObject();
+      const update = {_id: actor.id};
+      const currentAC = src.data.attributes.ac.value;
+      const hasArmorEquipped = actor.itemTypes.equipment.some(e =>
+        armor.has(e.data.data.armor?.type) && e.data.data.equipped);
+
+      // Perform the normal migration.
+      _migrateActorAC(src, update);
+      updates.push(update);
+
+      if ( !hasArmorEquipped ) continue;
+      const computedAC = actor._computeArmorClass(actor.data.data, {ignoreFlat: true}).value;
+      if ( (currentAC !== undefined) && (computedAC !== currentAC) ) {
+        console.log(`${actor.name} had different computed AC: ${currentAC} (current) vs. ${computedAC} (computed)`);
+      }
+      delete update["data.attributes.ac.flat"];
+      update["data.attributes.ac.-=flat"] = null;
+    } catch (e) {
+      console.warn(`Failed to migrate ${actor.name}`, e);
+    }
+  }
+
+  await Actor.implementation.updateDocuments(updates, {pack: pack.collection});
+  await pack.getDocuments(); // Force a re-prepare of all actors.
+  await pack.configure({locked: wasLocked});
+  console.log(`Migrated the AC of all Actors from Compendium ${pack.collection}`);
+}
+
 /* -------------------------------------------- */
 /*  Entity Type Migration Helpers               */
 /* -------------------------------------------- */
