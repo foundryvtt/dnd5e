@@ -476,7 +476,7 @@ DND5E.shieldIds = {
 DND5E.armorClasses = {
   "default": {
     "label": "DND5E.ArmorClassDefault",
-    "formula": "10 + @abilities.dex.mod"
+    "formula": "@attributes.ac.base + @abilities.dex.mod"
   },
   "mage": {
     "label": "DND5E.ArmorClassMage",
