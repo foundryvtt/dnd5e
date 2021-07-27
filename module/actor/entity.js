@@ -156,7 +156,11 @@ export default class Actor5e extends Actor {
 
     // Prepare spell-casting data
     this._computeSpellcastingProgression(this.data);
-    this._computeArmorClass(data);
+
+    // Prepare armor class data
+    const {armor, shield} = this._computeArmorClass(data);
+    this.armor = armor || null;
+    this.shield = shield || null;
   }
 
   /* -------------------------------------------- */
@@ -523,7 +527,7 @@ export default class Actor5e extends Actor {
     const calc = data.attributes.ac;
     if ( !ignoreFlat && (calc.flat !== null) ) {
       calc.value = calc.flat;
-      return calc.flat;
+      return {value: calc.flat};
     }
 
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
@@ -537,8 +541,7 @@ export default class Actor5e extends Actor {
 
     if ( armors.length ) {
       if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
-      this.armor = armors[0];
-      const armorData = this.armor.data.data.armor;
+      const armorData = armors[0].data.data.armor;
       let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
       if ( armorData.type === "heavy" ) ac = armorData.value;
       if ( (ac > calc.base) && (calc.calc === "default") ) calc.base = ac;
@@ -546,12 +549,11 @@ export default class Actor5e extends Actor {
 
     if ( shields.length ) {
       if ( shields.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleShields");
-      this.shield = shields[0];
-      const ac = this.shield.data.data.armor.value;
+      const ac = shields[0].data.data.armor.value;
       if ( ac > calc.shield ) calc.shield = ac;
     }
 
-    if ( !this.armor || calc.calc !== "default" ) {
+    if ( !armors.length || calc.calc !== "default" ) {
       let formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
       const rollData = this.getRollData();
       let ac;
@@ -568,7 +570,7 @@ export default class Actor5e extends Actor {
     }
 
     calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
-    return calc.value;
+    return {value: calc.value, armor: armors[0], shield: shields[0]};
   }
 
   /* -------------------------------------------- */
