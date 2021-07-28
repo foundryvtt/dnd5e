@@ -267,8 +267,8 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Shield
-    if ( this.actor.shield && calc.shield !== 0 ) attribution.push({
-      label: this.actor.shield.name,
+    if ( calc.shield !== 0 ) attribution.push({
+      label: this.actor.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: calc.shield
     });
