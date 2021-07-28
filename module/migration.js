@@ -426,8 +426,8 @@ function _migrateActorType(actor, updateData) {
  * @private
  */
 function _migrateActorAC (actorData, updateData) {
-  const ac = actorData.data.attributes.ac;
-  if ( !Number.isNumeric(ac.value) ) return;
+  const ac = actorData.data?.attributes?.ac;
+  if ( !Number.isNumeric(ac?.value) ) return;
   updateData['data.attributes.ac.flat'] = ac.value;
   updateData['data.attributes.ac.-=value'] = null;
   return updateData;
