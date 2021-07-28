@@ -275,7 +275,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Bonus
     if ( calc.bonus !== 0 ) attribution.push({
-      label: game.i18n.localize("DND5E.EquipmentBonus"),
+      label: game.i18n.localize("DND5E.Bonus"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: calc.bonus
     });
