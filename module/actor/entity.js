@@ -161,6 +161,7 @@ export default class Actor5e extends Actor {
     const ac = this._computeArmorClass(data);
     this.armor = ac.equippedArmor || null;
     this.shield = ac.equippedShield || null;
+    if ( ac.warnings ) this._preparationWarnings.push(...ac.warnings);
   }
 
   /* -------------------------------------------- */
@@ -517,7 +518,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Determine a character's AC value from their equipped armor and shield.
-   * @param {object} data
+   * @param {object} data      Note that this object will be mutated.
    * @return {{
    *   calc: string,
    *   value: number,
@@ -527,7 +528,8 @@ export default class Actor5e extends Actor {
    *   cover: number,
    *   flat: number,
    *   equippedArmor: Item5e,
-   *   equippedShield: Item5e
+   *   equippedShield: Item5e,
+   *   warnings: string[]
    * }}
    * @private
    */
@@ -535,6 +537,7 @@ export default class Actor5e extends Actor {
 
     // Get AC configuration and apply automatic migrations for older data structures
     const ac = data.attributes.ac;
+    ac.warnings = [];
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
     if ( !cfg ) {
       ac.calc = "flat";
@@ -568,7 +571,7 @@ export default class Actor5e extends Actor {
       // Equipment-based AC
       case "default":
         if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
+          if ( armors.length > 1 ) ac.warnings.push("DND5E.WarnMultipleArmor");
           const armorData = armors[0].data.data.armor;
           const isHeavy = armorData.type === "heavy";
           ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
@@ -588,7 +591,7 @@ export default class Actor5e extends Actor {
           const replaced = Roll.replaceFormulaData(formula, rollData);
           ac.base = Roll.safeEval(replaced);
         } catch (err) {
-          this._preparationWarnings.push("DND5E.WarnBadACFormula");
+          ac.warnings.push("DND5E.WarnBadACFormula");
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
           ac.base = Roll.safeEval(replaced);
         }
@@ -597,7 +600,7 @@ export default class Actor5e extends Actor {
 
     // Equipped Shield
     if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleShields");
+      if ( shields.length > 1 ) ac.warnings.push("DND5E.WarnMultipleShields");
       ac.shield = shields[0].data.data.armor.value ?? 0;
       ac.equippedShield = shields[0];
     }
