@@ -214,79 +214,90 @@ export default class ActorSheet5e extends ActorSheet {
    * @return {AttributionDescription[]}  List of attribution descriptions.
    */
   _prepareArmorClassAttribution(data) {
-    const calc = data.attributes.ac;
+    const ac = data.attributes.ac;
+    const cfg = CONFIG.DND5E.armorClasses[ac.calc];
+    const attribution = [];
 
-    // Flat
-    if ( calc.flat !== null ) {
-      return [{
-        label: game.i18n.localize("DND5E.Flat"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: calc.flat
-      }];
-    }
+    // Base AC Attribution
+    switch ( ac.calc ) {
 
-    let attribution = [];
+      // Flat AC
+      case "flat":
+        return [{
+          label: game.i18n.localize("DND5E.ArmorClassFlat"),
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: ac.flat
+        }];
 
-    // Equipped Armor
-    if ( this.actor.armor && calc.calc === "default" ) {
-      const armorData = this.actor.armor.data.data.armor;
-      attribution.push({
-        label: this.actor.armor.name,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: armorData.value
-      });
-      const dex = Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
-      if ( dex !== 0 && armorData.type !== "heavy" ) attribution.push({
-        label: "@abilities.dex.mod",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: dex
-      });
-    }
-
-    // Formula
-    else {
-      const formula = calc.calc === "custom" ? calc.formula : CONFIG.DND5E.armorClasses[calc.calc]?.formula;
-      let base = calc.base;
-      const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
-      const rollData = this.actor.getRollData();
-      for ( const [match, term] of formula.matchAll(dataRgx) ) {
-        const value = foundry.utils.getProperty(data, term);
-        if ( (term === "attributes.ac.base") || (value === 0) ) continue;
-        if ( Number.isNumeric(value) ) base -= Number(value);
+      // Natural armor
+      case "natural":
         attribution.push({
-          label: match,
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: foundry.utils.getProperty(data, term)
+          label: game.i18n.localize("DND5E.ArmorClassNatural"),
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: ac.flat
         });
-      }
-      attribution.unshift({
-        label: game.i18n.localize("DND5E.PropertyBase"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: base
-      });
+        break;
+
+      // Equipment-based
+      case "equipment":
+        const hasArmor = !!this.actor.armor;
+        attribution.push({
+          label: hasArmor ? this.actor.armor.name : game.i18n.localize("DND5E.ArmorClassUnarmored"),
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: hasArmor ? this.actor.armor.data.data.armor.value : 10
+        });
+        if ( ac.dex !== 0 ) {
+          attribution.push({
+            label: game.i18n.localize("DND5E.AbilityDex"),
+            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            value: ac.dex
+          });
+        }
+        break;
+
+      // Other AC formula
+      default:
+        const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+        let base = ac.base;
+        const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
+        for ( const [match, term] of formula.matchAll(dataRgx) ) {
+          const value = foundry.utils.getProperty(data, term);
+          if ( (term === "attributes.ac.base") || (value === 0) ) continue;
+          if ( Number.isNumeric(value) ) base -= Number(value);
+          attribution.push({
+            label: match,
+            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            value: foundry.utils.getProperty(data, term)
+          });
+        }
+        attribution.unshift({
+          label: game.i18n.localize("DND5E.PropertyBase"),
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: base
+        });
+        break;
     }
 
     // Shield
-    if ( this.actor.shield && calc.shield !== 0 ) attribution.push({
+    if ( ac.shield !== 0 ) attribution.push({
       label: this.actor.shield.name,
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.shield
+      value: ac.shield
     });
 
     // Bonus
-    if ( calc.bonus !== 0 ) attribution.push({
+    if ( ac.bonus !== 0 ) attribution.push({
       label: game.i18n.localize("DND5E.EquipmentBonus"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.bonus
+      value: ac.bonus
     });
 
     // Cover
-    if ( calc.cover !== 0 ) attribution.push({
+    if ( ac.cover !== 0 ) attribution.push({
       label: game.i18n.localize("DND5E.Cover"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: calc.cover
+      value: ac.cover
     });
-
     return attribution;
   }
 
