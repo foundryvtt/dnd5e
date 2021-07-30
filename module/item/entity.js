@@ -620,7 +620,7 @@ export default class Item5e extends Item {
     }
 
     // Verify that a consumed resource is available
-    if ( !resource ) {
+    if ( resource === undefined ) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
       return false;
     }
