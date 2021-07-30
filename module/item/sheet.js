@@ -1,3 +1,4 @@
+import TraitConfiguration from "../apps/trait-configuration.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
 
@@ -271,7 +272,8 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find('.trait-selector').click(this._onConfigureTraits.bind(this));
+      html.find('.trait-configuration').click(this._onConfigureTraits.bind(this));
+      html.find('.trait-selector').click(this._onSelectTraits.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
         ActiveEffect5e.onManageActiveEffect(ev, this.item)
@@ -315,7 +317,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @param {Event} event   The click event which originated the selection
    * @private
    */
-  _onConfigureTraits(event) {
+  _onSelectTraits(event) {
     event.preventDefault();
     const a = event.currentTarget;
     const options = {
@@ -341,6 +343,17 @@ export default class ItemSheet5e extends ItemSheet {
         break;
     }
     new TraitSelector(this.item, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   *
+   */
+  _onConfigureTraits(event) {
+    event.preventDefault();
+    const options = {};
+    new TraitConfiguration(this.item, options).render(true);
   }
 
   /* -------------------------------------------- */

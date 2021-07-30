@@ -41,7 +41,14 @@
 
         {{!-- Skill Proficiencies --}}
         <div class="form-group">
-          <label>{{ localize "DND5E.TraitSkillProf" }}</label>
+          <label>
+            {{ localize "DND5E.TraitSkillProf" }}
+            {{#if editable}}
+            <a class="trait-configuration background-skills" data-target="data.skills" data-options="skills">
+                <i class="fas fa-edit"></i>
+            </a>
+            {{/if}}
+          </label>
           <div class="form-fields">
             
           </div>
@@ -49,7 +56,14 @@
 
         {{!-- Tool Proficiencies --}}
         <div class="form-group">
-          <label>{{ localize "DND5E.TraitToolProf" }}</label>
+          <label>
+            {{ localize "DND5E.TraitToolProf" }}
+            {{#if editable}}
+            <a class="trait-configuration background-tools" data-target="data.tools" data-options="tools">
+                <i class="fas fa-edit"></i>
+            </a>
+            {{/if}}
+          </label>
           <div class="form-fields">
             
           </div>
@@ -57,7 +71,14 @@
 
         {{!-- Languages --}}
         <div class="form-group">
-          <label>{{ localize "DND5E.Languages" }}</label>
+          <label>
+            {{ localize "DND5E.Languages" }}
+            {{#if editable}}
+            <a class="trait-configuration background-languages" data-target="data.languages" data-options="languages">
+                <i class="fas fa-edit"></i>
+            </a>
+            {{/if}}
+          </label>
           <div class="form-fields">
             
           </div>
