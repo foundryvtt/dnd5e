@@ -158,9 +158,10 @@ export default class Actor5e extends Actor {
     this._computeSpellcastingProgression(this.data);
 
     // Prepare armor class data
-    const {armor, shield} = this._computeArmorClass(data);
+    const {armor, shield, warnings} = this._computeArmorClass(data);
     this.armor = armor || null;
     this.shield = shield || null;
+    if ( warnings ) this._preparationWarnings = this._preparationWarnings.concat(warnings);
   }
 
   /* -------------------------------------------- */
@@ -516,11 +517,21 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Object describing the results of armor class computation.
+   *
+   * @typedef {object} ArmorClassComputationResult
+   * @property {Number} value         Total armor class calculated.
+   * @property {Item5e} [armor]       Equipped armor item.
+   * @property {Item5e} [shield]      Equipped shield item.
+   * @property {string[]} [warnings]  Preparation warnings encountered during the process.
+   */
+
+  /**
    * Determine a character's AC value from their equipped armor and shield.
-   * @param {object} data
+   * @param {object} data                   Actor data. **Note**: This will be modified during calculation.
    * @param {object} [options]
    * @param {boolean} [options.ignoreFlat]  Should ac.flat be ignored while calculating the AC?
-   * @return {Number}                       Calculated armor value.
+   * @return {ArmorClassComputationResult}  Calculated armor value, equipped armor & shields, and any warnings.
    * @private
    */
   _computeArmorClass(data, { ignoreFlat=false }={}) {
@@ -539,8 +550,9 @@ export default class Actor5e extends Actor {
       return obj;
     }, {armors: [], shields: []});
 
+    let warnings = [];
     if ( armors.length ) {
-      if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
+      if ( armors.length > 1 ) warnings.push("DND5E.WarnMultipleArmor");
       const armorData = armors[0].data.data.armor;
       let ac = armorData.value + Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
       if ( armorData.type === "heavy" ) ac = armorData.value;
@@ -548,7 +560,7 @@ export default class Actor5e extends Actor {
     }
 
     if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleShields");
+      if ( shields.length > 1 ) warnings.push("DND5E.WarnMultipleShields");
       const ac = shields[0].data.data.armor.value;
       if ( ac > calc.shield ) calc.shield = ac;
     }
@@ -561,7 +573,7 @@ export default class Actor5e extends Actor {
         const replaced = Roll.replaceFormulaData(formula, rollData);
         ac = Roll.safeEval(replaced);
       } catch (err) {
-        this._preparationWarnings.push("DND5E.WarnBadACFormula");
+        warnings.push("DND5E.WarnBadACFormula");
         formula = CONFIG.DND5E.armorClasses.default.formula;
         const replaced = Roll.replaceFormulaData(formula, rollData);
         ac = Roll.safeEval(replaced);
@@ -570,7 +582,7 @@ export default class Actor5e extends Actor {
     }
 
     calc.value = calc.base + calc.shield + calc.bonus + calc.cover;
-    return {value: calc.value, armor: armors[0], shield: shields[0]};
+    return {value: calc.value, armor: armors[0], shield: shields[0], warnings};
   }
 
   /* -------------------------------------------- */
@@ -939,6 +951,7 @@ export default class Actor5e extends Actor {
     // Evaluate a global saving throw bonus
     const parts = [];
     const data = {};
+    const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
@@ -961,7 +974,7 @@ export default class Actor5e extends Actor {
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10,
       messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        speaker: speaker,
         "flags.dnd5e.roll": {type: "death"}
       }
     });

@@ -620,7 +620,7 @@ export default class Item5e extends Item {
     }
 
     // Verify that a consumed resource is available
-    if ( !resource ) {
+    if ( resource === undefined ) {
       ui.notifications.warn(game.i18n.format("DND5E.ConsumeWarningNoSource", {name: this.name, type: typeLabel}));
       return false;
     }
@@ -664,7 +664,7 @@ export default class Item5e extends Item {
     // Render the chat card template
     const token = this.actor.token;
     const templateData = {
-      actor: this.actor,
+      actor: this.actor.data,
       tokenId: token?.uuid || null,
       item: this.data,
       data: this.getChatData(),
@@ -682,7 +682,7 @@ export default class Item5e extends Item {
 
     // Create the ChatMessage data object
     const chatData = {
-      user: game.user._id,
+      user: game.user.data._id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       flavor: this.data.data.chatFlavor || this.name,
@@ -888,13 +888,15 @@ export default class Item5e extends Item {
       data: rollData,
       title: title,
       flavor: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       },
-      messageData: {"flags.dnd5e.roll": {type: "attack", itemId: this.id }}
+      messageData: {
+        "flags.dnd5e.roll": {type: "attack", itemId: this.id },
+        speaker: ChatMessage.getSpeaker({actor: this.actor})
+      }
     };
 
     // Expanded critical hit thresholds
