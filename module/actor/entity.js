@@ -939,6 +939,7 @@ export default class Actor5e extends Actor {
     // Evaluate a global saving throw bonus
     const parts = [];
     const data = {};
+    const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
@@ -961,7 +962,7 @@ export default class Actor5e extends Actor {
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       targetValue: 10,
       messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
+        speaker: speaker,
         "flags.dnd5e.roll": {type: "death"}
       }
     });
