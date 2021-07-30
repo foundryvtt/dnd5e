@@ -888,13 +888,15 @@ export default class Item5e extends Item {
       data: rollData,
       title: title,
       flavor: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       },
-      messageData: {"flags.dnd5e.roll": {type: "attack", itemId: this.id }}
+      messageData: {
+        "flags.dnd5e.roll": {type: "attack", itemId: this.id },
+        speaker: ChatMessage.getSpeaker({actor: this.actor})
+      }
     };
 
     // Expanded critical hit thresholds
