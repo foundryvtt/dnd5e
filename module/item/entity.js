@@ -664,7 +664,7 @@ export default class Item5e extends Item {
     // Render the chat card template
     const token = this.actor.token;
     const templateData = {
-      actor: this.actor,
+      actor: this.actor.data,
       tokenId: token?.uuid || null,
       item: this.data,
       data: this.getChatData(),
@@ -682,7 +682,7 @@ export default class Item5e extends Item {
 
     // Create the ChatMessage data object
     const chatData = {
-      user: game.user._id,
+      user: game.user.data._id,
       type: CONST.CHAT_MESSAGE_TYPES.OTHER,
       content: html,
       flavor: this.data.data.chatFlavor || this.name,
