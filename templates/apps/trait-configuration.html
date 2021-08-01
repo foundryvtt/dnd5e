@@ -2,8 +2,8 @@
 
   <div class="grant-selector">
     <div class="form-group">
-      <button name="add"><i class="fas fa-plus"></i> Add</button>
-      <button name="remove"><i class="fas fa-minus"></i> Remove</button>
+      <button type="button" name="add"><i class="fas fa-plus"></i> {{localize "DND5E.Add"}}</button>
+      <button type="button" name="remove"><i class="fas fa-minus"></i> {{localize "DND5E.Remove"}}</button>
     </div>
 
     <div class="form-group">
@@ -15,13 +15,13 @@
     </div>
   
     <div class="form-group">
-      <label>Allow choices?</label>
+      <label>{{localize "DND5E.TraitConfigAllowChoices"}}</label>
       <input type="checkbox" name="allowChoices" data-dtype="Boolean" {{checked allowChoices}}>
     </div>
   
     {{#if allowChoices}}
       <div class="form-group">
-        <label>Count</label>
+        <label>{{localize "DND5E.TraitConfigCount"}}</label>
         <input name="count" type="number" step="1" value="{{count}}"/>
       </div>
     {{/if}}

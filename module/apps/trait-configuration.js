@@ -51,12 +51,21 @@ export default class TraitConfiguration extends DocumentSheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  get title() {
+    return game.i18n.format("DND5E.TraitConfigTitle", {
+      type: TraitConfiguration.typeLabel(this.options.type, 1)
+    });
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async getData() {
 
     let grants = this.grants.map((grant, index) => {
       return {
-        label: TraitConfiguration.grantLabel(this.options.type, grant) || "—", // TODO: Localize
+        label: TraitConfiguration.grantLabel(this.options.type, grant) || "—",
         data: grant,
         selected: index === this.selectedIndex
       }
@@ -146,33 +155,38 @@ export default class TraitConfiguration extends DocumentSheet {
       return TraitConfiguration.keyLabel(type, data);
     }
 
-    const typeLabel = TraitConfiguration.typeLabel(type).toLowerCase();
     // Select from all options
     if ( !data.choices ) {
-      return `Any ${data.count} ${typeLabel}`; // TODO: Localize
+      return game.i18n.format("DND5E.TraitConfigChooseAny", {
+        count: data.count,
+        type: TraitConfiguration.typeLabel(type, data.count).toLowerCase()
+      });
     }
 
     const choices = data.choices.map(key => TraitConfiguration.keyLabel(type, key));
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
-    return `Choose ${data.count} from ${listFormatter.format(choices)}`; // TODO: Localize
+    return game.i18n.format("DND5E.TraitConfigChooseList", {
+      count: data.count,
+      list: listFormatter.format(choices)
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
    * Get the localized label for a specific trait type.
-   * @param {string} type  Trait type.
-   * @return {string}      Localized label.
+   * @param {string} type     Trait type.
+   * @param {number} [count]  Count used to determine pluralization. If no count is provided, will default
+   *                          to the 'other' pluralization.
+   * @return {string}         Localized label.
    */
-  static typeLabel(type) {
-    const typeCap = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
+  static typeLabel(type, count) {
+    let typeCap = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
+    if ( ["armor", "tool", "weapon"].includes(type) ) typeCap = `${typeCap}Prof`;
 
-    // TODO: Localize this correctly
-    if ( ["armor", "tool", "weapon"].includes(type) ) {
-      return game.i18n.localize(`DND5E.Trait${typeCap}Prof`);
-    } else {
-      return type;
-    }
+    const pluralRule = ( count !== undefined ) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
+
+    return game.i18n.localize(`DND5E.Trait${typeCap}Plural.${pluralRule}`);
   }
 
   /* -------------------------------------------- */
@@ -192,10 +206,15 @@ export default class TraitConfiguration extends DocumentSheet {
         return CONFIG.DND5E.vehicleTypes[key];
       }
 
-      // TODO: Replace with ProficiencySelector#getBaseItem when !335 is merged
+      /****************************************************************************/
+      /*             TODO: Refactor out this code when !335 is merged             */
+      /****************************************************************************/
       const baseItems = CONFIG.DND5E[`${type}Ids`];
       const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
       const item = pack.index.get(baseItems[key]);
+      /****************************************************************************/
+      /*                                End Refactor                              */
+      /****************************************************************************/
 
       return item?.name ?? "";
     } else {
