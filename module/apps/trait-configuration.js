@@ -303,7 +303,7 @@ export default class TraitConfiguration extends DocumentSheet {
         this.grants[this.selectedIndex] = { count: 1 }
         if ( current ) this.grants[this.selectedIndex].choices = [current];
       } else {
-        this.grants[this.selectedIndex] = current.choices[0] ?? "";
+        this.grants[this.selectedIndex] = current.choices ? current.choices[0] ?? "" : "";
       }
     }
 
