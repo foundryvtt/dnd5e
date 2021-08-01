@@ -20,6 +20,9 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/dnd5e/templates/items/parts/item-action.html",
     "systems/dnd5e/templates/items/parts/item-activation.html",
     "systems/dnd5e/templates/items/parts/item-description.html",
-    "systems/dnd5e/templates/items/parts/item-mountable.html"
+    "systems/dnd5e/templates/items/parts/item-mountable.html",
+
+    // App Partials
+    "systems/dnd5e/templates/apps/parts/trait-list.html"
   ]);
 };

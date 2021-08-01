@@ -44,7 +44,7 @@
           <label>
             {{ localize "DND5E.TraitSkillProf" }}
             {{#if editable}}
-            <a class="trait-configuration background-skills" data-target="data.skills" data-options="skills">
+            <a class="trait-configuration background-skills" data-target="data.skills" data-type="skills">
                 <i class="fas fa-edit"></i>
             </a>
             {{/if}}
@@ -59,7 +59,7 @@
           <label>
             {{ localize "DND5E.TraitToolProf" }}
             {{#if editable}}
-            <a class="trait-configuration background-tools" data-target="data.tools" data-options="tools">
+            <a class="trait-configuration background-tools" data-target="data.tools" data-type="tool">
                 <i class="fas fa-edit"></i>
             </a>
             {{/if}}
@@ -74,7 +74,7 @@
           <label>
             {{ localize "DND5E.Languages" }}
             {{#if editable}}
-            <a class="trait-configuration background-languages" data-target="data.languages" data-options="languages">
+            <a class="trait-configuration background-languages" data-target="data.languages" data-type="languages">
                 <i class="fas fa-edit"></i>
             </a>
             {{/if}}

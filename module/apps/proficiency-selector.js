@@ -60,10 +60,10 @@ export default class ProficiencySelector extends TraitSelector {
       }, {});
     }
 
-    if ( this.options.sortCategories ) data.choices = this._sortObject(data.choices);
+    if ( this.options.sortCategories ) data.choices = ProficiencySelector._sortObject(data.choices);
     for ( const category of Object.values(data.choices) ) {
       if ( !category.children ) continue;
-      category.children = this._sortObject(category.children);
+      category.children = ProficiencySelector._sortObject(category.children);
     }
 
     return data;
@@ -78,7 +78,7 @@ export default class ProficiencySelector extends TraitSelector {
    * @return {object}        Sorted object.
    * @private
    */
-  _sortObject(object) {
+  static _sortObject(object) {
     return Object.fromEntries(Object.entries(object).sort((lhs, rhs) =>
       lhs[1].label.localeCompare(rhs[1].label)
     ));

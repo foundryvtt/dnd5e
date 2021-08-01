@@ -1,8 +1,16 @@
 <form autocomplete="off">
 
   <div class="form-group">
+    
+  </div>
+
+  <div class="form-group">
     <label>Allow choices?</label>
     <input type="checkbox" name="allow-choices" data-dtype="Boolean" {{checked allow-choices}}>
+  </div>
+
+  <div class="trait-selector">
+    {{> "systems/dnd5e/templates/apps/parts/trait-list.html"}}
   </div>
 
   <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "DND5E.TraitSave"}}</button>

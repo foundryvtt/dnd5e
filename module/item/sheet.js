@@ -348,11 +348,19 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   *
+   * Handle spawning the TraitConfiguration application for configuring which traits
+   * can be chosen by the player.
+   * @param {Event} event  The click event which originated the configuration.
+   * @private
    */
   _onConfigureTraits(event) {
     event.preventDefault();
-    const options = {};
+    const a = event.currentTarget;
+    const options = {
+      name: a.dataset.target,
+      title: a.parentElement.innerText,
+      type: a.dataset.type
+    };
     new TraitConfiguration(this.item, options).render(true);
   }
 
