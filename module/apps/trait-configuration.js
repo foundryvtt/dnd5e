@@ -27,13 +27,11 @@ export default class TraitConfiguration extends DocumentSheet {
      */
     this.grants = foundry.utils.getProperty(this.object.data, `${options.name}.grants`);
 
-    if ( this.grants.length === 0 ) this.grants = [""];
-
     /**
      * Index of the selected grant configuration.
-     * @type {number}
+     * @type {number|null}
      */
-    this.selectedIndex = 0;
+    this.selectedIndex = this.grants.length > 0 ? 0 : null;
   }
 
   /* -------------------------------------------- */
@@ -58,7 +56,7 @@ export default class TraitConfiguration extends DocumentSheet {
 
     let grants = this.grants.map((grant, index) => {
       return {
-        label: TraitConfiguration.grantLabel(this.options.type, grant) || "No Selection", // TODO: Localize
+        label: TraitConfiguration.grantLabel(this.options.type, grant) || "—", // TODO: Localize
         data: grant,
         selected: index === this.selectedIndex
       }
@@ -130,7 +128,7 @@ export default class TraitConfiguration extends DocumentSheet {
     return {
       grants,
       allowChoices: typeof grants[this.selectedIndex]?.data === "object",
-      count: grants[this.selectedIndex]?.count ?? 1,
+      count: this.grants[this.selectedIndex]?.count ?? 1,
       choices
     }
   }
@@ -195,8 +193,9 @@ export default class TraitConfiguration extends DocumentSheet {
       }
 
       // TODO: Replace with ProficiencySelector#getBaseItem when !335 is merged
+      const baseItems = CONFIG.DND5E[`${type}Ids`];
       const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-      const item = pack.index.get(key);
+      const item = pack.index.get(baseItems[key]);
 
       return item?.name ?? "";
     } else {
@@ -220,6 +219,14 @@ export default class TraitConfiguration extends DocumentSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    this.form.addEventListener("click", this._onListButtonClick.bind(this));
+
+    if ( this.selectedIndex === null ) {
+      this._disableFields(this.form);
+      this.form.querySelector("button[name='add']").removeAttribute("disabled");
+      return;
+    }
+
     for ( const checkbox of html[0].querySelectorAll(".trait-selector input[type='checkbox']") ) {
       if ( checkbox.checked ) ProficiencySelector._onToggleCategory(checkbox);
     }
@@ -227,31 +234,63 @@ export default class TraitConfiguration extends DocumentSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Handle clicks to the Add and Remove buttons above the list.
+   * @param {Event} event  Triggering click.
+   */
+  _onListButtonClick(event) {
+    if ( event.target.tagName !== "BUTTON" ) return;
+
+    switch (event.target.name) {
+      case "add":
+        this.grants.push("");
+        this.selectedIndex = this.grants.length - 1;
+        break;
+
+      case "remove":
+        if ( this.selectedIndex === null ) break;
+
+        this.grants.splice(this.selectedIndex, 1);
+
+        if ( this.grants.length === 0 ) this.selectedIndex = null;
+        else if ( this.selectedIndex !== 0 ) this.selectedIndex -= 1;
+        break;
+
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    this.render();
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async _onChangeInput(event) {
     super._onChangeInput(event);
-
     const t = event.target;
-    const current = this.grants[this.selectedIndex];
 
     if ( t.name === "selectedIndex" ) {
       this.selectedIndex = Number(t.value ?? 0);
+      return this.render();
     }
 
-    else if ( t.name === "allowChoices" ) {
+    const current = this.grants[this.selectedIndex];
+    if ( current === undefined ) return;
+
+    if ( t.name === "allowChoices" ) {
       if ( t.checked ) {
-        this.grants[this.selectedIndex] = {
-          count: 1,
-          choices: current ? [current] : []
-        }
+        this.grants[this.selectedIndex] = { count: 1 }
+        if ( current ) this.grants[this.selectedIndex].choices = [current];
       } else {
-        this.grants[this.selectedIndex] = current?.choices[0] ?? "";
+        this.grants[this.selectedIndex] = current.choices[0] ?? "";
       }
     }
 
     else if ( t.name === "count" ) {
-      let count = Number.praseInt(t.value);
-      if ( count < 1 ) count = 1;
+      let count = Number.parseInt(t.value);
+      if ( (count < 1) || Number.isNaN(count) ) count = 1;
       this.grants[this.selectedIndex].count = count;
     }
 
@@ -270,6 +309,6 @@ export default class TraitConfiguration extends DocumentSheet {
       }
     }
 
-    this.render();
+    return this.render();
   }
 }

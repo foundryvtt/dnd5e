@@ -2,8 +2,8 @@
 
   <div class="grant-selector">
     <div class="form-group">
-      <button><i class="fas fa-plus"></i> Add</button>
-      <button><i class="fas fa-minus"></i> Remove</button>
+      <button name="add"><i class="fas fa-plus"></i> Add</button>
+      <button name="remove"><i class="fas fa-minus"></i> Remove</button>
     </div>
 
     <div class="form-group">
@@ -22,7 +22,7 @@
     {{#if allowChoices}}
       <div class="form-group">
         <label>Count</label>
-        <input name="count" type="number" step="1" value="1"/>
+        <input name="count" type="number" step="1" value="{{count}}"/>
       </div>
     {{/if}}
   </div>
