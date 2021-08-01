@@ -18,11 +18,23 @@ import ProficiencySelector from "./proficiency-selector.js";
  */
 export default class TraitConfiguration extends DocumentSheet {
 
-  /**
-   * Index of the selected grant configuration.
-   * @type {number}
-   */
-  selectedIndex = 0;
+  constructor(object={}, options={}) {
+    super(object, options);
+
+    /**
+     * Internal version of the grants array.
+     * @type {Array.<string|TraitGrant>}
+     */
+    this.grants = foundry.utils.getProperty(this.object.data, `${options.name}.grants`);
+
+    if ( this.grants.length === 0 ) this.grants = [""];
+
+    /**
+     * Index of the selected grant configuration.
+     * @type {number}
+     */
+    this.selectedIndex = 0;
+  }
 
   /* -------------------------------------------- */
 
@@ -34,7 +46,7 @@ export default class TraitConfiguration extends DocumentSheet {
       title: "Trait Configuration",
       template: "systems/dnd5e/templates/apps/trait-configuration.html",
       width: 540,
-      height: 680,
+      height: "auto",
       type: ""
     });
   }
@@ -44,10 +56,9 @@ export default class TraitConfiguration extends DocumentSheet {
   /** @override */
   async getData() {
 
-    let grants = foundry.utils.getProperty(this.object.data, `${this.options.name}.grants`);
-    grants = grants.map((grant, index) => {
+    let grants = this.grants.map((grant, index) => {
       return {
-        label: TraitConfiguration.grantLabel(this.options.type, grant),
+        label: TraitConfiguration.grantLabel(this.options.type, grant) || "No Selection", // TODO: Localize
         data: grant,
         selected: index === this.selectedIndex
       }
@@ -140,7 +151,7 @@ export default class TraitConfiguration extends DocumentSheet {
     const typeLabel = TraitConfiguration.typeLabel(type).toLowerCase();
     // Select from all options
     if ( !data.choices ) {
-      return `Choose ${data.count} ${typeLabel}`; // TODO: Localize
+      return `Any ${data.count} ${typeLabel}`; // TODO: Localize
     }
 
     const choices = data.choices.map(key => TraitConfiguration.keyLabel(type, key));
@@ -198,6 +209,67 @@ export default class TraitConfiguration extends DocumentSheet {
 
   /** @override */
   async _updateObject(event, formData) {
+    const updateData = {};
+    updateData[`${this.options.name}.grants`] = this.grants.filter(grant => grant !== "");
+    return this.object.update(updateData);
+  }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    for ( const checkbox of html[0].querySelectorAll(".trait-selector input[type='checkbox']") ) {
+      if ( checkbox.checked ) ProficiencySelector._onToggleCategory(checkbox);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onChangeInput(event) {
+    super._onChangeInput(event);
+
+    const t = event.target;
+    const current = this.grants[this.selectedIndex];
+
+    if ( t.name === "selectedIndex" ) {
+      this.selectedIndex = Number(t.value ?? 0);
+    }
+
+    else if ( t.name === "allowChoices" ) {
+      if ( t.checked ) {
+        this.grants[this.selectedIndex] = {
+          count: 1,
+          choices: current ? [current] : []
+        }
+      } else {
+        this.grants[this.selectedIndex] = current?.choices[0] ?? "";
+      }
+    }
+
+    else if ( t.name === "count" ) {
+      let count = Number.praseInt(t.value);
+      if ( count < 1 ) count = 1;
+      this.grants[this.selectedIndex].count = count;
+    }
+
+    else if ( t.closest(".trait-selector") ) {
+      if ( typeof current === "string" ) {
+        this.grants[this.selectedIndex] = t.checked ? t.name : "";
+      } else {
+        let choiceSet = new Set(current.choices ?? []);
+        if ( t.checked ) choiceSet.add(t.name);
+        else choiceSet.delete(t.name);
+        if ( choiceSet.size > 0 ) {
+          this.grants[this.selectedIndex].choices = Array.from(choiceSet);
+        } else if ( current.choices ) {
+          delete this.grants[this.selectedIndex].choices;
+        }
+      }
+    }
+
+    this.render();
   }
 }
