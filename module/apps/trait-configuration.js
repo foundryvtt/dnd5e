@@ -33,8 +33,8 @@ export default class TraitConfiguration extends DocumentSheet {
       classes: ["dnd5e", "trait-configuration", "subconfig"],
       title: "Trait Configuration",
       template: "systems/dnd5e/templates/apps/trait-configuration.html",
-      width: 320,
-      height: "auto",
+      width: 540,
+      height: 680,
       type: ""
     });
   }
@@ -117,8 +117,9 @@ export default class TraitConfiguration extends DocumentSheet {
     }
 
     return {
-      selectedIndex: this.selectedIndex,
       grants,
+      allowChoices: typeof grants[this.selectedIndex]?.data === "object",
+      count: grants[this.selectedIndex]?.count ?? 1,
       choices
     }
   }
@@ -139,12 +140,12 @@ export default class TraitConfiguration extends DocumentSheet {
     const typeLabel = TraitConfiguration.typeLabel(type).toLowerCase();
     // Select from all options
     if ( !data.choices ) {
-      return `Select ${data.count} ${typeLabel}`; // TODO: Localize
+      return `Choose ${data.count} ${typeLabel}`; // TODO: Localize
     }
 
     const choices = data.choices.map(key => TraitConfiguration.keyLabel(type, key));
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
-    return `Select ${data.count} from ${listFormatter.format(choices)}`; // TODO: Localize
+    return `Choose ${data.count} from ${listFormatter.format(choices)}`; // TODO: Localize
   }
 
   /* -------------------------------------------- */

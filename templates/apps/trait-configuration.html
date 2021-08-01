@@ -1,24 +1,31 @@
 <form autocomplete="off">
 
-  <div class="form-group">
-    <select name="selectedIndex">
-      {{#each grants}}
-        <option value="{{@index}}"{{#if this.selected}} selected{{/if}}>{{this.label}}</option>
-      {{/each}}
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Allow choices?</label>
-    <input type="checkbox" name="allow-choices" data-dtype="Boolean" {{checked allow-choices}}>
-  </div>
-
-  {{#if allowChoices}}
+  <div class="grant-selector">
     <div class="form-group">
-      <label>Count</label>
-      <input name="count" type="number" step="1" value="1"/>
+      <button><i class="fas fa-plus"></i> Add</button>
+      <button><i class="fas fa-minus"></i> Remove</button>
     </div>
-  {{/if}}
+
+    <div class="form-group">
+      <select name="selectedIndex" size=5>
+        {{#each grants}}
+          <option value="{{@index}}"{{#if this.selected}} selected{{/if}}>{{this.label}}</option>
+        {{/each}}
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label>Allow choices?</label>
+      <input type="checkbox" name="allowChoices" data-dtype="Boolean" {{checked allowChoices}}>
+    </div>
+  
+    {{#if allowChoices}}
+      <div class="form-group">
+        <label>Count</label>
+        <input name="count" type="number" step="1" value="1"/>
+      </div>
+    {{/if}}
+  </div>
 
   <div class="trait-selector">
     {{> "systems/dnd5e/templates/apps/parts/trait-list.html"}}
