@@ -135,23 +135,21 @@ export const migrateArmorClass = async function(pack) {
       console.log(`Migrating ${actor.name}...`);
       const src = actor.toObject();
       const update = {_id: actor.id};
-      const currentAC = src.data.attributes.ac.value;
-      const hasArmorEquipped = actor.itemTypes.equipment.some(e =>
-        armor.has(e.data.data.armor?.type) && e.data.data.equipped);
 
       // Perform the normal migration.
       _migrateActorAC(src, update);
       updates.push(update);
 
-      if ( !hasArmorEquipped ) continue;
-      const computedAC = actor._computeArmorClass(actor.data.data, {ignoreFlat: true}).value;
-      if ( (currentAC !== undefined) && (computedAC !== currentAC) ) {
-        console.log(`${actor.name} had different computed AC: ${currentAC} (current) vs. ${computedAC} (computed)`);
-      }
-      delete update["data.attributes.ac.flat"];
-      update["data.attributes.ac.-=flat"] = null;
+      // CASE 1: Armor is equipped
+      const hasArmorEquipped = actor.itemTypes.equipment.some(e => {
+        return armor.has(e.data.data.armor?.type) && e.data.data.equipped;
+      });
+      if ( hasArmorEquipped ) update["data.attributes.ac.calc"] = "default";
+
+      // CASE 2: NPC Natural Armor
+      else if ( src.type === "npc" ) update["data.attributes.ac.calc"] = "natural";
     } catch (e) {
-      console.warn(`Failed to migrate ${actor.name}`, e);
+      console.warn(`Failed to migrate armor class for Actor ${actor.name}`, e);
     }
   }
 
@@ -428,8 +426,8 @@ function _migrateActorType(actor, updateData) {
 function _migrateActorAC (actorData, updateData) {
   const ac = actorData.data?.attributes?.ac;
   if ( !Number.isNumeric(ac?.value) ) return;
-  updateData['data.attributes.ac.flat'] = ac.value;
-  updateData['data.attributes.ac.-=value'] = null;
+  updateData["data.attributes.ac.flat"] = ac.value;
+  updateData["data.attributes.ac.-=value"] = null;
   return updateData;
 }
 

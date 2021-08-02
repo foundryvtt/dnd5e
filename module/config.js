@@ -474,28 +474,36 @@ DND5E.shieldIds = {
  * @enum {object}
  */
 DND5E.armorClasses = {
-  "default": {
-    "label": "DND5E.ArmorClassDefault",
-    "formula": "@attributes.ac.base + @abilities.dex.mod"
+  flat: {
+    label: "DND5E.ArmorClassFlat",
+    formula: "@attributes.ac.flat"
   },
-  "mage": {
-    "label": "DND5E.ArmorClassMage",
-    "formula": "13 + @abilities.dex.mod"
+  natural: {
+    label: "DND5E.ArmorClassNatural",
+    formula: "@attributes.ac.flat"
   },
-  "draconic": {
-    "label": "DND5E.ArmorClassDraconic",
-    "formula": "13 + @abilities.dex.mod"
+  default: {
+    label: "DND5E.ArmorClassEquipment",
+    formula: "@attributes.ac.base + @abilities.dex.mod"
   },
-  "unarmoredMonk": {
-    "label": "DND5E.ArmorClassUnarmoredMonk",
-    "formula": "10 + @abilities.dex.mod + @abilities.wis.mod"
+  mage: {
+    label: "DND5E.ArmorClassMage",
+    formula: "13 + @abilities.dex.mod"
   },
-  "unarmoredBarb": {
-    "label": "DND5E.ArmorClassUnarmoredBarbarian",
-    "formula": "10 + @abilities.dex.mod + @abilities.con.mod"
+  draconic: {
+    label: "DND5E.ArmorClassDraconic",
+    formula: "13 + @abilities.dex.mod"
   },
-  "custom": {
-    "label": "DND5E.ArmorClassCustom"
+  unarmoredMonk: {
+    label: "DND5E.ArmorClassUnarmoredMonk",
+    formula: "10 + @abilities.dex.mod + @abilities.wis.mod"
+  },
+  unarmoredBarb: {
+    label: "DND5E.ArmorClassUnarmoredBarbarian",
+    formula: "10 + @abilities.dex.mod + @abilities.con.mod"
+  },
+  custom: {
+    label: "DND5E.ArmorClassCustom"
   }
 };
 
