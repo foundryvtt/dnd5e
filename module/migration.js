@@ -144,7 +144,7 @@ export const migrateArmorClass = async function(pack) {
       const hasArmorEquipped = actor.itemTypes.equipment.some(e => {
         return armor.has(e.data.data.armor?.type) && e.data.data.equipped;
       });
-      if ( hasArmorEquipped ) update["data.attributes.ac.calc"] = "equipment";
+      if ( hasArmorEquipped ) update["data.attributes.ac.calc"] = "default";
 
       // CASE 2: NPC Natural Armor
       else if ( src.type === "npc" ) update["data.attributes.ac.calc"] = "natural";
@@ -426,8 +426,8 @@ function _migrateActorType(actor, updateData) {
 function _migrateActorAC (actorData, updateData) {
   const ac = actorData.data?.attributes?.ac;
   if ( !Number.isNumeric(ac?.value) ) return;
-  updateData['data.attributes.ac.flat'] = ac.value;
-  updateData['data.attributes.ac.-=value'] = null;
+  updateData["data.attributes.ac.flat"] = ac.value;
+  updateData["data.attributes.ac.-=value"] = null;
   return updateData;
 }
 

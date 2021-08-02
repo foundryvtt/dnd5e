@@ -83,7 +83,7 @@ export default class ActorArmorConfig extends DocumentSheet {
     }
 
     // Recompute effective AC
-    actorData = foundry.utils.mergeObject(actorData, {'data.attributes.ac': {calc, formula}});
+    actorData = foundry.utils.mergeObject(actorData, {"data.attributes.ac": {calc, formula}});
     if ( enableFlat ) actorData.data.attributes.ac.flat = flat;
     ac = this.object._computeArmorClass(actorData.data);
 

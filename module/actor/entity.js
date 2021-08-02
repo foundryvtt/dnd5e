@@ -535,7 +535,6 @@ export default class Actor5e extends Actor {
 
     // Get AC configuration and apply automatic migrations for older data structures
     const ac = data.attributes.ac;
-    if ( ac.calc === "default" ) ac.calc = "equipment";
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
     if ( !cfg ) {
       ac.calc = "flat";
@@ -567,9 +566,9 @@ export default class Actor5e extends Actor {
         break;
 
       // Equipment-based AC
-      case "equipment":
-        if (armors.length) {
-          if (armors.length > 1) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
+      case "default":
+        if ( armors.length ) {
+          if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
           const armorData = armors[0].data.data.armor;
           const isHeavy = armorData.type === "heavy";
           ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
@@ -590,7 +589,7 @@ export default class Actor5e extends Actor {
           ac.base = Roll.safeEval(replaced);
         } catch (err) {
           this._preparationWarnings.push("DND5E.WarnBadACFormula");
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.equipment.formula, rollData);
+          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
           ac.base = Roll.safeEval(replaced);
         }
         break;

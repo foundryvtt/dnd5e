@@ -482,7 +482,7 @@ DND5E.armorClasses = {
     label: "DND5E.ArmorClassNatural",
     formula: "@attributes.ac.flat"
   },
-  equipment: {
+  default: {
     label: "DND5E.ArmorClassEquipment",
     formula: "@attributes.ac.base + @abilities.dex.mod"
   },

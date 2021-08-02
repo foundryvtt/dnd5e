@@ -238,8 +238,8 @@ export default class ActorSheet5e extends ActorSheet {
         });
         break;
 
-      // Equipment-based
-      case "equipment":
+      // Equipment-based AC
+      case "default":
         const hasArmor = !!this.actor.armor;
         attribution.push({
           label: hasArmor ? this.actor.armor.name : game.i18n.localize("DND5E.ArmorClassUnarmored"),
@@ -280,7 +280,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Shield
     if ( ac.shield !== 0 ) attribution.push({
-      label: this.actor.shield.name,
+      label: this.actor.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: ac.shield
     });

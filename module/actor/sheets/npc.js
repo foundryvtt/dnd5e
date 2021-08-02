@@ -88,7 +88,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     data.labels["type"] = this.actor.labels.creatureType;
 
     // Armor Type
-    data.labels["armorType"] = this.armorLabel();
+    data.labels["armorType"] = this.getArmorLabel();
 
     return data;
   }
@@ -99,8 +99,15 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
    * Format NPC armor information into a localized string.
    * @return {string}  Formatted armor label.
    */
-  armorLabel() {
+  getArmorLabel() {
     const ac = this.actor.data.data.attributes.ac;
+    if ( ac.calc === "default" ) {
+      const label = [];
+      if ( this.actor.armor ) label.push(this.actor.armor.name);
+      else label.push(game.i18n.localize("DND5E.ArmorClassUnarmored"));
+      if ( this.actor.shield ) label.push(this.actor.shield.name);
+      return label.filterJoin(", ");
+    }
     return game.i18n.localize(CONFIG.DND5E.armorClasses[ac.calc].label);
   }
 
