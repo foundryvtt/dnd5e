@@ -540,11 +540,11 @@ DND5E.consumableTypes = {
  * @enum {string}
  */
 DND5E.currencies = {
-  "pp": "DND5E.CurrencyPP",
-  "gp": "DND5E.CurrencyGP",
-  "ep": "DND5E.CurrencyEP",
-  "sp": "DND5E.CurrencySP",
-  "cp": "DND5E.CurrencyCP",
+  pp: "DND5E.CurrencyPP",
+  gp: "DND5E.CurrencyGP",
+  ep: "DND5E.CurrencyEP",
+  sp: "DND5E.CurrencySP",
+  cp: "DND5E.CurrencyCP",
 };
 
 
@@ -553,11 +553,11 @@ DND5E.currencies = {
  * @enum {string}
  */
 DND5E.currencyAbbr = {
-  "pp": "DND5E.CurrencyAbbrPP",
-  "gp": "DND5E.CurrencyAbbrGP",
-  "ep": "DND5E.CurrencyAbbrEP",
-  "sp": "DND5E.CurrencyAbbrSP",
-  "cp": "DND5E.CurrencyAbbrCP",
+  pp: "DND5E.CurrencyAbbrPP",
+  gp: "DND5E.CurrencyAbbrGP",
+  ep: "DND5E.CurrencyAbbrEP",
+  sp: "DND5E.CurrencyAbbrSP",
+  cp: "DND5E.CurrencyAbbrCP",
 };
 
 
