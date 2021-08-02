@@ -537,7 +537,7 @@ DND5E.consumableTypes = {
 
 /**
  * The valid currency denominations supported by the 5e system
- * @type {Object}
+ * @enum {string}
  */
 DND5E.currencies = {
   "pp": "DND5E.CurrencyPP",
@@ -545,6 +545,19 @@ DND5E.currencies = {
   "ep": "DND5E.CurrencyEP",
   "sp": "DND5E.CurrencySP",
   "cp": "DND5E.CurrencyCP",
+};
+
+
+/**
+ * Abbreviations of the currencies.
+ * @enum {string}
+ */
+DND5E.currencyAbbr = {
+  "pp": "DND5E.CurrencyAbbrPP",
+  "gp": "DND5E.CurrencyAbbrGP",
+  "ep": "DND5E.CurrencyAbbrEP",
+  "sp": "DND5E.CurrencyAbbrSP",
+  "cp": "DND5E.CurrencyAbbrCP",
 };
 
 
