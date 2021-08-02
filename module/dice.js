@@ -4,26 +4,28 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
  *
- * @param {string} formula                 The original Roll formula
- * @param {Object} data                    Actor or item data against which to parse the roll
- * @param {Object} options                 Formatting options
- * @param {boolean} options.constantFirst   Puts the constants before the dice terms in the resulting formula
+ * @param {string} formula                          The original Roll formula
+ * @param {Object} data                             Actor or item data against which to parse the roll
+ * @param {Object} [options]                        Formatting options
+ * @param {boolean} [options.constantFirst=false]   Puts the constants before the dice terms in the resulting formula
+ * @param {boolean} [options.preserveFlavor=false]  Preserve flavor for non-constant terms
  *
- * @return {string}                        The resulting simplified formula
+ * @return {string}  The resulting simplified formula
  */
-export function simplifyRollFormula(formula, data, {constantFirst = false} = {}) {
+export function simplifyRollFormula(formula, data, {constantFirst=false, preserveFlavor=false} = {}) {
   const roll = new Roll(formula, data); // Parses the formula and replaces any @properties
   const terms = roll.terms;
 
   // Some terms are "too complicated" for this algorithm to simplify
   // In this case, the original formula is returned.
-  if (terms.some(_isUnsupportedTerm)) return roll.formula;
+  if ( terms.some(_isUnsupportedTerm) ) return roll.formula;
+  if ( !preserveFlavor ) terms.forEach(term => delete term.options.flavor);
 
   const rollableTerms = []; // Terms that are non-constant, and their associated operators
   const constantTerms = []; // Terms that are constant, and their associated operators
   let operators = [];       // Temporary storage for operators before they are moved to one of the above
 
-  for (let term of terms) {                                 // For each term
+  for ( let term of terms ) {                                 // For each term
     if (term instanceof OperatorTerm) operators.push(term); // If the term is an addition/subtraction operator, push the term into the operators array
     else {                                                  // Otherwise the term is not an operator
       if (term instanceof DiceTerm) {                       // If the term is something rollable
@@ -31,6 +33,7 @@ export function simplifyRollFormula(formula, data, {constantFirst = false} = {})
         rollableTerms.push(term);                           // Then place this rollable term into it as well
       }                                                     //
       else {                                                // Otherwise, this must be a constant
+        delete term.options.flavor;
         constantTerms.push(...operators);                   // Place the operators into the constantTerms array
         constantTerms.push(term);                           // Then also add this constant term to that array.
       }                                                     //
