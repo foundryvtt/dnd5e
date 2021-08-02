@@ -267,15 +267,15 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Shield
-    if ( this.actor.shield && calc.shield !== 0 ) attribution.push({
-      label: this.actor.shield.name,
+    if ( calc.shield !== 0 ) attribution.push({
+      label: this.actor.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: calc.shield
     });
 
     // Bonus
     if ( calc.bonus !== 0 ) attribution.push({
-      label: game.i18n.localize("DND5E.EquipmentBonus"),
+      label: game.i18n.localize("DND5E.Bonus"),
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: calc.bonus
     });
