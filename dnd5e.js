@@ -152,7 +152,7 @@ Hooks.once("setup", function() {
 
   // Exclude some from sorting where the default order matters
   const noSort = [
-    "abilities", "alignments", "armorClasses", "armorProficiencies", "currencies", "distanceUnits", "movementUnits", 
+    "abilities", "alignments", "armorClasses", "armorProficiencies", "currencies", "distanceUnits", "movementUnits",
     "itemActionTypes", "itemRarity", "proficiencyLevels", "limitedUsePeriods", "spellComponents", "spellLevels",
     "spellPreparationModes", "weaponProficiencies", "weaponTypes"
   ];
@@ -187,7 +187,7 @@ Hooks.once("ready", function() {
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "1.4.1";
+  const NEEDS_MIGRATION_VERSION = "1.4.2";
   const COMPATIBLE_MIGRATION_VERSION = 0.80;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !currentVersion && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.data.version);

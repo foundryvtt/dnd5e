@@ -425,9 +425,18 @@ function _migrateActorType(actor, updateData) {
  */
 function _migrateActorAC (actorData, updateData) {
   const ac = actorData.data?.attributes?.ac;
-  if ( !Number.isNumeric(ac?.value) ) return;
-  updateData["data.attributes.ac.flat"] = ac.value;
-  updateData["data.attributes.ac.-=value"] = null;
+  // If the actor has a numeric ac.value, then their AC has not been migrated to the auto-calculation schema yet.
+  if ( Number.isNumeric(ac?.value) ) {
+    updateData["data.attributes.ac.flat"] = ac.value;
+    updateData["data.attributes.ac.calc"] = actorData.type === "npc" ? "natural" : "flat";
+    updateData["data.attributes.ac.-=value"] = null;
+    return updateData;
+  }
+
+  // If the actor is already on the AC auto-calculation schema, but is using a flat value, they must now have their
+  // calculation updated to an appropriate value.
+  if ( !Number.isNumeric(ac?.flat) ) return updateData;
+  updateData["data.attributes.ac.calc"] = actorData.type === "npc" ? "natural" : "flat";
   return updateData;
 }
 
