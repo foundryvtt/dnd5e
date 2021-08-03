@@ -334,19 +334,22 @@ export default class ItemSheet5e extends ItemSheet {
     // Filter out any traits that have already been selected
     this._filterTraitObject(allChoices, actorSelected, false);
     available = available.map(a => this._filterGrantChoices(allChoices, Array.from(a.set)));
-    let unfilteredCount = available.length;
-
+    let unfilteredLength = available.length;
     available = available.filter(a => a.set.size > 0);
-    const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
-    let remainingChoices = foundry.utils.duplicate(allChoices);
-    this._filterTraitObject(remainingChoices, Array.from(remainingSet), true);
 
-    if ( foundry.utils.isObjectEmpty(allChoices) ) {
-      if ( !allowReplacements || (unfilteredCount >= available.length) ) return null;
-      remainingChoices = allChoices;
+    if ( allowReplacements && (unfilteredLength > available.length) ) {
+      return {
+        choices: allChoices,
+        remaining: unfilteredLength
+      }
     }
+
+    const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
+    this._filterTraitObject(allChoices, Array.from(remainingSet), true);
+
+    if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
     return {
-      choices: remainingChoices,
+      choices: allChoices,
       remaining: available.length
     }
   }
