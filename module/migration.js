@@ -13,12 +13,6 @@ export const migrateWorld = async function() {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
-      const armorEffects = [];
-      for ( const i of a.items ) {
-        const armorEffect = _createArmorEffect(i);
-        if ( armorEffect ) armorEffects.push(armorEffect);
-      }
-      if ( armorEffects.length ) await ActiveEffect.implementation.createDocuments(armorEffects, {parent: a});
     } catch(err) {
       err.message = `Failed dnd5e system migration for Actor ${a.name}: ${err.message}`;
       console.error(err);
@@ -33,8 +27,6 @@ export const migrateWorld = async function() {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
-      const armorEffect = _createArmorEffect(i);
-      if ( armorEffect ) await ActiveEffect.implementation.create(armorEffect, {parent: i});
     } catch(err) {
       err.message = `Failed dnd5e system migration for Item ${i.name}: ${err.message}`;
       console.error(err);
@@ -48,15 +40,6 @@ export const migrateWorld = async function() {
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
-        for ( const t of s.tokens ) {
-          if ( !t.actor ) continue;
-          const armorEffects = [];
-          for ( const i of t.actor.items ) {
-            const armorEffect = _createArmorEffect(i);
-            if ( armorEffect ) armorEffects.push(armorEffects);
-          }
-          if ( armorEffects.length ) await ActiveEffect.implementation.createDocuments(armorEffects, {parent: t.actor});
-        }
         // If we do not do this, then synthetic token actors remain in cache
         // with the un-updated actorData.
         s.tokens.forEach(t => t._actor = null);
@@ -538,11 +521,9 @@ function _migrateArmorType(item, updateData) {
  * @return {object|null} The Active Effect object
  * @private
  */
-function _createArmorEffect(item) {
+export async function createArmorEffect(item) {
   const armor = item.data.data.armor;
-  let needsArmorEffects = item.type === "equipment" && ["clothing", "trinket"].includes(armor?.type);
-  needsArmorEffects &&= Number.isNumeric(armor?.value) && armor?.value > 0;
-  needsArmorEffects &&= !item.effects.some(e => e.getFlag("dnd5e", "armorMigration"));
+  const needsArmorEffects = item.type === "equipment" && ["clothing", "trinket"].includes(armor?.type);
   if ( !needsArmorEffects ) return null;
   let effect;
   const ac = game.i18n.localize("DND5E.AC");
@@ -569,7 +550,7 @@ function _createArmorEffect(item) {
       value: armor.value.toString()
     }]);
   }
-  return effect?.toObject() || null;
+  return ActiveEffect.implementation.create(effect.toObject(), {parent: item});
 }
 
 /* -------------------------------------------- */
