@@ -460,6 +460,7 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
+      html.find(".delete-tag").click(this._onDeleteTag.bind(this));
       html.find('.trait-configuration').click(this._onConfigureTraits.bind(this));
       html.find('.trait-selector').click(this._onSelectTraits.bind(this));
       html.find(".effect-control").click(ev => {
@@ -550,6 +551,27 @@ export default class ItemSheet5e extends ItemSheet {
       type: a.dataset.type
     };
     new TraitConfiguration(this.item, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the deletion of a tag when the delete tag link is clicked.
+   * @param {Event} event  The click event that triggered the deletion.
+   * @private
+   */
+  _onDeleteTag(event) {
+    event.preventDefault();
+    const tag = event.target.closest(".tag");
+    const type = tag.dataset.type;
+    const existingValues = this.object.data.data[type]?.value ?? [];
+    const index = existingValues.findIndex(v => v === tag.dataset.key);
+    if ( index !== -1 ) {
+      existingValues.splice(index, 1);
+      const updateData = {};
+      updateData[`data.${type}.value`] = existingValues;
+      return this.object.update(updateData);
+    }
   }
 
   /* -------------------------------------------- */

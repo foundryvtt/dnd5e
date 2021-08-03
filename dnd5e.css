@@ -1370,6 +1370,15 @@
   padding: 2px 6px;
   font-size: 12px;
 }
+.dnd5e.sheet.item .details .form-group.selectable-trait ul.traits-list .tag .delete-tag {
+  display: none;
+  position: relative;
+  top: 1px;
+  opacity: 0.6;
+}
+.dnd5e.sheet.item .details .form-group.selectable-trait ul.traits-list .tag:hover .delete-tag {
+  display: inherit;
+}
 .dnd5e.sheet.item .details .form-group.selectable-trait select {
   flex-basis: 100%;
 }
