@@ -40,88 +40,13 @@
       <div class="tab details" data-group="primary" data-tab="details">
 
         {{!-- Skill Proficiencies --}}
-        <div class="form-group">
-          <label>
-            {{ localize "DND5E.TraitSkillProf" }}
-            {{#if editable}}
-            <a class="trait-configuration background-skills" data-target="data.skills" data-type="skills">
-                <i class="fas fa-edit"></i>
-            </a>
-            {{/if}}
-          </label>
-          <div class="form-fields">
-            {{#if data.skills.value}}
-              <ul class="traits-list">
-                  {{#each data.skills.value}}
-                      <li class="tag {{this}}">{{this}}</li>
-                  {{/each}}
-              </ul>
-            {{/if}}
-            {{#if data.skills.available}}
-              <select name="skills">
-                {{groupedSelectOptions data.skills.available.choices blank=labels.grants.skills}}
-              </select>
-            {{else}}
-              {{labels.grants.skills}}
-            {{/if}}
-          </div>
-        </div>
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitSkillProf" type="skills" data=data.skills label=labels.grants.skills}}
 
         {{!-- Tool Proficiencies --}}
-        <div class="form-group">
-          <label>
-            {{ localize "DND5E.TraitToolProf" }}
-            {{#if editable}}
-            <a class="trait-configuration background-tools" data-target="data.tool" data-type="tool">
-                <i class="fas fa-edit"></i>
-            </a>
-            {{/if}}
-          </label>
-          <div class="form-fields">
-            {{#if data.tool.value}}
-              <ul class="traits-list">
-                  {{#each data.tool.value}}
-                      <li class="tag {{this}}">{{this}}</li>
-                  {{/each}}
-              </ul>
-            {{/if}}
-            {{#if data.tool.available}}
-              <select name="tool">
-                {{groupedSelectOptions data.tool.available.choices blank=labels.grants.tool}}
-              </select>
-            {{else}}
-              {{labels.grants.tool}}
-            {{/if}}
-          </div>
-        </div>
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitToolProf" type="tool" data=data.tool label=labels.grants.tool}}
 
         {{!-- Languages --}}
-        <div class="form-group">
-          <label>
-            {{ localize "DND5E.Languages" }}
-            {{#if editable}}
-            <a class="trait-configuration background-languages" data-target="data.languages" data-type="languages">
-                <i class="fas fa-edit"></i>
-            </a>
-            {{/if}}
-          </label>
-          <div class="form-fields">
-            {{#if data.languages.value}}
-              <ul class="traits-list">
-                  {{#each data.languages.value}}
-                      <li class="tag {{this}}">{{this}}</li>
-                  {{/each}}
-              </ul>
-            {{/if}}
-            {{#if data.languages.available}}
-              <select name="languages">
-                {{groupedSelectOptions data.languages.available.choices blank=labels.grants.languages}}
-              </select>
-            {{else}}
-              {{labels.grants.languages}}
-            {{/if}}
-          </div>
-        </div>
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.Languages" type="languages" data=data.languages label=labels.grants.languages}}
 
         {{!-- Feature --}}
         <div class="form-group">

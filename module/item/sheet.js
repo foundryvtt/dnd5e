@@ -1,3 +1,4 @@
+import Actor5e from "../actor/entity.js";
 import TraitConfiguration from "../apps/trait-configuration.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
@@ -75,6 +76,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     if ( itemData.type === "background" ) {
+      this._prepareTraits(itemData);
       await this._prepareGrantedTraits(data);
     }
 
@@ -220,6 +222,32 @@ export default class ItemSheet5e extends ItemSheet {
       )
     }
     return props.filter(p => !!p);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the data structure for traits data like languages, skills, and proficiencies
+   * @param {object} itemData  Item data being prepared.
+   * @private
+   */
+  _prepareTraits(itemData) {
+    const traits = ["skills", "tool", "languages"];
+    for ( const type of traits ) {
+      const data = itemData.data[type];
+      if ( !data ) continue;
+      if ( ["armor", "weapon", "tool"].includes(type) ) {
+        Actor5e.prepareProficiencies(data, type);
+      } else {
+        const choices = CONFIG.DND5E[type];
+        if ( !choices || !data ) continue;
+        data.selected = data.value.reduce((obj, t) => {
+          obj[t] = choices[t];
+          return obj;
+        }, {});
+      }
+      if ( foundry.utils.isObjectEmpty(data.selected) ) data.selected = null;
+    }
   }
 
   /* -------------------------------------------- */
@@ -530,5 +558,23 @@ export default class ItemSheet5e extends ItemSheet {
   async _onSubmit(...args) {
     if ( this._tabs[0].active === "details" ) this.position.height = "auto";
     await super._onSubmit(...args);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _updateObject(event, formData) {
+    let addedTraits = {};
+    const updateData = foundry.utils.expandObject(Object.fromEntries(Object.entries(formData).filter(([k, v]) => {
+      if ( !k.startsWith("addedTrait:") ) return true;
+      if ( v !== "" ) addedTraits[k.replace("addedTrait:", "")] = v;
+      return false;
+    })));
+    for ( const [type, value] of Object.entries(addedTraits) ) {
+      let existingValue = this.object.data.data[type].value ?? [];
+      existingValue.push(value);
+      updateData[`data.${type}.value`] = existingValue;
+    }
+    return this.object.update(updateData);
   }
 }

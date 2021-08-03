@@ -1362,6 +1362,17 @@
 .dnd5e.sheet.item .details .form-group.input-select-select select {
   flex: 1.5;
 }
+.dnd5e.sheet.item .details .form-group.selectable-trait ul.traits-list {
+  padding-left: 0;
+}
+.dnd5e.sheet.item .details .form-group.selectable-trait ul.traits-list .tag {
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.dnd5e.sheet.item .details .form-group.selectable-trait select {
+  flex-basis: 100%;
+}
 .dnd5e.sheet.item .details .form-group.uses-per .form-fields {
   flex-wrap: nowrap;
 }

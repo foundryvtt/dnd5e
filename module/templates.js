@@ -21,6 +21,7 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/dnd5e/templates/items/parts/item-activation.html",
     "systems/dnd5e/templates/items/parts/item-description.html",
     "systems/dnd5e/templates/items/parts/item-mountable.html",
+    "systems/dnd5e/templates/items/parts/item-selectable-trait.html",
 
     // App Partials
     "systems/dnd5e/templates/apps/parts/trait-list.html"
@@ -51,7 +52,7 @@ function groupedSelectOptions(choices, options) {
   };
 
   // Create an group
-  const group = (name, category) => {
+  const group = (category) => {
     let label = category[labelAttr];
     if ( localize ) game.i18n.localize(label);
     html += `<optgroup label="${label}">`;
@@ -61,8 +62,8 @@ function groupedSelectOptions(choices, options) {
 
   // Add children
   const children = (children) => {
-    for ( let [key, child] of Object.entries(children) ) {
-      if ( child[childrenAttr] ) group(name, child);
+    for ( let [name, child] of Object.entries(children) ) {
+      if ( child[childrenAttr] ) group(child);
       else option(name, child[labelAttr]);
     }
   }
