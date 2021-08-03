@@ -75,7 +75,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     if ( itemData.type === "background" ) {
-      this._prepareGrantedTraits(data);
+      await this._prepareGrantedTraits(data);
     }
 
     // Re-define the template data references (backwards compatible)
@@ -225,22 +225,6 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare the labels and selection lists for granted traits (used by Background & Class items).
-   * @param {object} data  Data being prepared.
-   */
-  _prepareGrantedTraits(data) {
-    const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
-    const types = ["skills", "tool", "languages"];
-    data.labels.grants = {};
-    for ( const type of types ) {
-      const grants = data.data.data[type].grants;
-      data.labels.grants[type] = listFormatter.format(grants.map(g => TraitConfiguration.grantLabel(type, g)));
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Is this item a separate large object like a siege engine or vehicle
    * component that is usually mounted on fixtures rather than equipped, and
    * has its own AC and HP.
@@ -262,6 +246,159 @@ export default class ItemSheet5e extends ItemSheet {
       position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
     }
     return super.setPosition(position);
+  }
+
+  /* -------------------------------------------- */
+  /*  Granted Traits                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the labels and selection lists for granted traits (used by Background & Class items).
+   * @param {object} data  Data being prepared.
+   */
+  async _prepareGrantedTraits(data) {
+    const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
+    const types = ["skills", "tool", "languages"];
+    data.labels.grants = {};
+    for ( const type of types ) {
+      const grants = data.data.data[type].grants;
+      if ( this.object.isEmbedded ) {
+        const allowReplacements = ["skills", "tool"].includes(type);
+        const choices = await this._prepareUnfulfilledGrants(
+          type, grants, this.object.actor.getSelectedTraits(type), data.data.data[type].value, allowReplacements
+        );
+        data.data.data[type].available = choices;
+        if ( choices ) {
+          data.labels.grants[type] = game.i18n.format("DND5E.TraitConfigurationChoicesRemaining", {
+            count: choices.remaining,
+            type: TraitConfiguration.typeLabel(type, choices.remaining)
+          });
+        }
+      } else {
+        data.labels.grants[type] = listFormatter.format(grants.map(g => TraitConfiguration.grantLabel(type, g)));
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine which of the provided grants, if any, still needs to be fulfilled.
+   * @param {string} type                      Trait affected by these grants.
+   * @param {Array.<string|TraitGrant> grants  Grants that should be fulfilled.
+   * @param {Array.<string>} actorSelected     Values that have already been selected on the actor.
+   * @param {Array.<string>} selected          Values that have already been selected on this item.
+   * @param {boolean} allowReplacements        If a grant with limited choices has no available options,
+   *                                           allow player to select from full list of options.
+   * @param {{
+   *   choices: object
+   *   remaining: number
+   * }|null}  Choices available for most permissive unfulfilled grant & number of remaining traits to select.
+   */
+  async _prepareUnfulfilledGrants(type, grants, actorSelected, itemSelected, allowReplacements) {
+    const expandedGrants = grants.reduce((arr, grant) => {
+      if ( typeof grant === "string" ) {
+        arr.push([grant]);
+        return arr;
+      }
+      arr.push(grant.choices ?? []);
+      if ( (typeof grant === "object") && (grant.count > 1) ) {
+        let count = grant.count - 1;
+        while ( count > 0 ) {
+          arr.push(grant.choices ?? []);
+          count -= 1;
+        }
+      }
+      return arr;
+    }, []);
+
+    // If all of the grants have been selected, no need to go further
+    if ( expandedGrants.length <= itemSelected.length ) return null;
+ 
+    // Figure out how many choices each grant and sort by most restrictive first
+    const allChoices = await TraitConfiguration.getTraitChoices(type);
+    let available = expandedGrants.map(grant => this._filterGrantChoices(allChoices, grant));
+    const setSort = (lhs, rhs) => lhs.set.size - rhs.set.size;
+    available.sort(setSort);
+
+    // Remove any fulfilled grants
+    for ( const selected of itemSelected ) {
+      let foundMatch = false;
+      available = available.filter(grant => {
+        if ( foundMatch || !grant.set.has(selected) ) return true;
+        foundMatch = true;
+        return false;
+      });
+    }
+
+    // Filter out any traits that have already been selected
+    this._filterTraitObject(allChoices, actorSelected, false);
+    available = available.map(a => this._filterGrantChoices(allChoices, Array.from(a.set)));
+    let unfilteredCount = available.length;
+
+    available = available.filter(a => a.set.size > 0);
+    const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
+    let remainingChoices = foundry.utils.duplicate(allChoices);
+    this._filterTraitObject(remainingChoices, Array.from(remainingSet), true);
+
+    if ( foundry.utils.isObjectEmpty(allChoices) ) {
+      if ( !allowReplacements || (unfilteredCount >= available.length) ) return null;
+      remainingChoices = allChoices;
+    }
+    return {
+      choices: remainingChoices,
+      remaining: available.length
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Turn a grant into a set of possible choices it provides.
+   * @param {object} traits       Object containing all potential traits grouped into categories.
+   * @param {string[]} choices    Choices to use when building trait list. Empty array means all traits passed through.
+   * @return {{
+   *   choices: object,
+   *   set: Set.<string>
+   * }}
+   * @private
+   */
+  _filterGrantChoices(traits, choices) {
+    const choiceSet = (choices) => Object.entries(choices).reduce((set, [key, choice]) => {
+      if ( choice.children ) choiceSet(choice.children).forEach(c => set.add(c));
+      else set.add(key);
+      return set;
+    }, new Set());
+
+    let traitsSet = foundry.utils.duplicate(traits);
+    if ( choices.length > 0 ) this._filterTraitObject(traitsSet, choices, true);
+    return { choices: traitsSet, set: choiceSet(traitsSet) };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Filters the provided trait object.
+   * @param {object} traits    Object of traits to filter.
+   * @param {string[]} filter  Array of keys to use when applying the filter.
+   * @param {boolean} union    If true, only items in filter array will be included.
+   *                           If false, only items not in the filter array will be included.
+   */
+  _filterTraitObject(traits, filter, union) {
+    for ( const [key, trait] of Object.entries(traits) ) {
+      if ( filter.includes(key) ) {
+        if ( !union ) delete traits[key];
+        continue;
+      };
+
+      let selectedChildren = false;
+      if ( trait.children ) {
+        this._filterTraitObject(trait.children, filter, union);
+        if ( !foundry.utils.isObjectEmpty(trait.children) ) selectedChildren = true;
+      }
+
+      if ( union && !selectedChildren ) delete traits[key];
+    }
   }
 
   /* -------------------------------------------- */

@@ -62,7 +62,6 @@ export default class TraitConfiguration extends DocumentSheet {
 
   /** @override */
   async getData() {
-
     let grants = this.grants.map((grant, index) => {
       return {
         label: TraitConfiguration.grantLabel(this.options.type, grant) || "—",
@@ -73,14 +72,31 @@ export default class TraitConfiguration extends DocumentSheet {
 
     const selectedData = grants[this.selectedIndex]?.data;
     const chosen = (typeof selectedData === "string") ? [selectedData] : selectedData?.choices ?? [];
-    let choices;
-    if ( ["armor", "tool", "weapon"].includes(this.options.type) ) {
+
+    return {
+      grants,
+      allowChoices: typeof grants[this.selectedIndex]?.data === "object",
+      count: this.grants[this.selectedIndex]?.count ?? 1,
+      choices: await TraitConfiguration.getTraitChoices(this.options.type, chosen)
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Produce an object containing all of the choices for the provided trait type.
+   * @param {string} type      Trait name.
+   * @param {string[]} chosen  Any currently selected options.
+   * @return {object}          Object of choices ready to be displayed in a TraitSelector list.
+   */
+  static async getTraitChoices(type, chosen) {
+
+    if ( ["armor", "tool", "weapon"].includes(type) ) {
 
       /****************************************************************************/
       /*             TODO: Refactor out this code when !335 is merged             */
       /****************************************************************************/
-      const type = this.options.type;
-      choices = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
+      let choices = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
         obj[key] = { label: label, chosen: chosen?.includes(key) ?? false };
         return obj;
       }, {});
@@ -122,24 +138,17 @@ export default class TraitConfiguration extends DocumentSheet {
       /****************************************************************************/
       /*                                End Refactor                              */
       /****************************************************************************/
-
-
-    } else {
-      choices = Object.entries(CONFIG.DND5E[this.options.type] ?? {}).reduce((obj, [key, label]) => {
-        obj[key] = {
-          label,
-          chosen: chosen.includes(key)
-        };
-        return obj;
-      }, {});
+  
+      return choices;
     }
 
-    return {
-      grants,
-      allowChoices: typeof grants[this.selectedIndex]?.data === "object",
-      count: this.grants[this.selectedIndex]?.count ?? 1,
-      choices
-    }
+    return Object.entries(CONFIG.DND5E[type] ?? {}).reduce((obj, [key, label]) => {
+      obj[key] = {
+        label,
+        chosen: chosen?.includes(key) ?? false
+      };
+      return obj;
+    }, {});
   }
 
   /* -------------------------------------------- */

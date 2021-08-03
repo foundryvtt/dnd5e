@@ -50,7 +50,20 @@
             {{/if}}
           </label>
           <div class="form-fields">
-            {{labels.grants.skills}}
+            {{#if data.skills.value}}
+              <ul class="traits-list">
+                  {{#each data.skills.value}}
+                      <li class="tag {{this}}">{{this}}</li>
+                  {{/each}}
+              </ul>
+            {{/if}}
+            {{#if data.skills.available}}
+              <select name="skills">
+                {{groupedSelectOptions data.skills.available.choices blank=labels.grants.skills}}
+              </select>
+            {{else}}
+              {{labels.grants.skills}}
+            {{/if}}
           </div>
         </div>
 
@@ -65,7 +78,20 @@
             {{/if}}
           </label>
           <div class="form-fields">
-            {{labels.grants.tool}}
+            {{#if data.tool.value}}
+              <ul class="traits-list">
+                  {{#each data.tool.value}}
+                      <li class="tag {{this}}">{{this}}</li>
+                  {{/each}}
+              </ul>
+            {{/if}}
+            {{#if data.tool.available}}
+              <select name="tool">
+                {{groupedSelectOptions data.tool.available.choices blank=labels.grants.tool}}
+              </select>
+            {{else}}
+              {{labels.grants.tool}}
+            {{/if}}
           </div>
         </div>
 
@@ -80,7 +106,20 @@
             {{/if}}
           </label>
           <div class="form-fields">
-            {{labels.grants.languages}}
+            {{#if data.languages.value}}
+              <ul class="traits-list">
+                  {{#each data.languages.value}}
+                      <li class="tag {{this}}">{{this}}</li>
+                  {{/each}}
+              </ul>
+            {{/if}}
+            {{#if data.languages.available}}
+              <select name="languages">
+                {{groupedSelectOptions data.languages.available.choices blank=labels.grants.languages}}
+              </select>
+            {{else}}
+              {{labels.grants.languages}}
+            {{/if}}
           </div>
         </div>
 
