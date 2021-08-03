@@ -6,13 +6,19 @@ export const migrateWorld = async function() {
   ui.notifications.info(`Applying DnD5E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   // Migrate World Actors
-  for ( let a of game.actors.contents ) {
+  for ( let a of game.actors ) {
     try {
       const updateData = migrateActorData(a.toObject());
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
+      const armorEffects = [];
+      for ( const i of a.items ) {
+        const armorEffect = _createArmorEffect(i);
+        if ( armorEffect ) armorEffects.push(armorEffect);
+      }
+      if ( armorEffects.length ) await ActiveEffect.implementation.createDocuments(armorEffects, {parent: a});
     } catch(err) {
       err.message = `Failed dnd5e system migration for Actor ${a.name}: ${err.message}`;
       console.error(err);
@@ -20,13 +26,15 @@ export const migrateWorld = async function() {
   }
 
   // Migrate World Items
-  for ( let i of game.items.contents ) {
+  for ( let i of game.items ) {
     try {
       const updateData = migrateItemData(i.toObject());
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
+      const armorEffect = _createArmorEffect(i);
+      if ( armorEffect ) await ActiveEffect.implementation.create(armorEffect, {parent: i});
     } catch(err) {
       err.message = `Failed dnd5e system migration for Item ${i.name}: ${err.message}`;
       console.error(err);
@@ -34,15 +42,24 @@ export const migrateWorld = async function() {
   }
 
   // Migrate Actor Override Tokens
-  for ( let s of game.scenes.contents ) {
+  for ( let s of game.scenes ) {
     try {
       const updateData = migrateSceneData(s.data);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
+        for ( const t of s.tokens ) {
+          if ( !t.actor ) continue;
+          const armorEffects = [];
+          for ( const i of t.actor.items ) {
+            const armorEffect = _createArmorEffect(i);
+            if ( armorEffect ) armorEffects.push(armorEffects);
+          }
+          if ( armorEffects.length ) await ActiveEffect.implementation.createDocuments(armorEffects, {parent: t.actor});
+        }
         // If we do not do this, then synthetic token actors remain in cache
         // with the un-updated actorData.
-        s.tokens.contents.forEach(t => t._actor = null);
+        s.tokens.forEach(t => t._actor = null);
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Scene ${s.name}: ${err.message}`;
@@ -247,6 +264,7 @@ export const migrateItemData = function(item) {
   _migrateItemAttunement(item, updateData);
   _migrateItemRarity(item, updateData);
   _migrateItemSpellcasting(item, updateData);
+  _migrateArmorType(item, updateData);
   return updateData;
 };
 
@@ -495,6 +513,64 @@ function _migrateItemSpellcasting(item, updateData) {
   return updateData;
 }
 
+/* --------------------------------------------- */
+
+/**
+ * Convert equipment items of type 'bonus' to 'trinket'.
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
+ * @private
+ */
+function _migrateArmorType(item, updateData) {
+  if ( item.type !== "equipment" ) return updateData;
+  if ( item.data?.armor?.type === "bonus" ) updateData["data.armor.type"] = "trinket";
+  return updateData;
+}
+
+/* --------------------------------------------- */
+
+/**
+ * Determine whether an item needs a special AC Active Effect created for it, and return it if so.
+ *
+ * @param {Item5e} item  The parent item
+ * @return {object|null} The Active Effect object
+ * @private
+ */
+function _createArmorEffect(item) {
+  const armor = item.data.data.armor;
+  let needsArmorEffects = item.type === "equipment" && ["clothing", "trinket"].includes(armor?.type);
+  needsArmorEffects &&= Number.isNumeric(armor?.value) && armor?.value > 0;
+  needsArmorEffects &&= !item.effects.some(e => e.getFlag("dnd5e", "armorMigration"));
+  if ( !needsArmorEffects ) return null;
+  let effect;
+  const ac = game.i18n.localize("DND5E.AC");
+  const createAE = (label, changes) => new ActiveEffect.implementation({
+    icon: item.img,
+    origin: item.uuid,
+    transfer: true,
+    flags: {dnd5e: {armorMigration: true}},
+    label, changes
+  });
+  if ( armor.type === "clothing" ) {
+    // Legacy clothing might have been used to grant AC like armor so create an effect for that.
+    effect = createAE(`${armor.value} ${ac}`, [{
+      key: "data.attributes.ac.base",
+      mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+      value: armor.value.toString()
+    }]);
+  } else {
+    // All 'bonus' items are already converted to 'trinket' here. Legacy trinkets might have been used to add bonus AC,
+    // so create an effect for that.
+    effect = createAE(`${armor.value.signedString()} ${ac}`, [{
+      key: "data.attributes.ac.bonus",
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: armor.value.toString()
+    }]);
+  }
+  return effect?.toObject() || null;
+}
 
 /* -------------------------------------------- */
 
