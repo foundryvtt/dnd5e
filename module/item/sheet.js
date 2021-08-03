@@ -74,6 +74,10 @@ export default class ItemSheet5e extends ItemSheet {
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
+    if ( itemData.type === "background" ) {
+      this._prepareGrantedTraits(data);
+    }
+
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
     data.data = itemData.data;
@@ -216,6 +220,22 @@ export default class ItemSheet5e extends ItemSheet {
       )
     }
     return props.filter(p => !!p);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the labels and selection lists for granted traits (used by Background & Class items).
+   * @param {object} data  Data being prepared.
+   */
+  _prepareGrantedTraits(data) {
+    const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
+    const types = ["skills", "tool", "languages"];
+    data.labels.grants = {};
+    for ( const type of types ) {
+      const grants = data.data.data[type].grants;
+      data.labels.grants[type] = listFormatter.format(grants.map(g => TraitConfiguration.grantLabel(type, g)));
+    }
   }
 
   /* -------------------------------------------- */
