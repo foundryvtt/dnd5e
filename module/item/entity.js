@@ -1,3 +1,4 @@
+import ItemSheet5e from "./sheet.js";
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 
@@ -1367,6 +1368,9 @@ export default class Item5e extends Item {
     const isNPC = this.parent.type === "npc";
     let updates;
     switch (data.type) {
+      case "background":
+        updates = await this._assignOwnedItemTraits(data, this.parent);
+        break;
       case "equipment":
         updates = this._onCreateOwnedEquipment(data, actorData, isNPC);
         break;
@@ -1440,6 +1444,32 @@ export default class Item5e extends Item {
       if ( this.id !== this.parent.data.data.details.originalClass ) return;
       this.parent._assignPrimaryClass();
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for automatically assigning traits to an item based on actor traits if possible.
+   * @param {object} itemData  Item data being prepared.
+   * @param {Actor5e} actor    Actor object to check against.
+   * @return {object}          Object containing updates to apply to the item data.
+   * @private
+   */
+  async _assignOwnedItemTraits(itemData, actor) {
+    const updates = {};
+    const types = ["skills", "tool", "languages"];
+    for ( const type of types ) {
+      const { available } = await ItemSheet5e._prepareUnfulfilledGrants(
+        type, itemData.data[type].grants, itemData.data[type].value, actor.getSelectedTraits(type)
+      );
+      let newValues = [];
+      for ( const { set } of available ) {
+        if ( set.size > 1 ) continue;
+        newValues.push(set.values().next().value);
+      }
+      if ( newValues.length > 0 ) updates[`data.${type}.value`] = newValues;
+    }
+    return updates;
   }
 
   /* -------------------------------------------- */
