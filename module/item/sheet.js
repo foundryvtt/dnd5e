@@ -365,6 +365,7 @@ export default class ItemSheet5e extends ItemSheet {
     let unfilteredLength = available.length;
     available = available.filter(a => a.set.size > 0);
 
+    if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
     if ( allowReplacements && (unfilteredLength > available.length) ) {
       return {
         choices: allChoices,
