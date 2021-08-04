@@ -162,6 +162,23 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Get a list of UUIDs for linked items that should be added when this item is dropped
+   * on an actor.
+   * @return {string[]}  Array of UUIDs.
+   */
+  get grantedItems() {
+    let items = [];
+    switch (this.type) {
+      case "background":
+        if ( this.data.data.feature ) items.push(this.data.data.feature);
+        break;
+    }
+    return items;
+  }
+
+  /* -------------------------------------------- */
   /*	Data Preparation														*/
   /* -------------------------------------------- */
 
@@ -1389,10 +1406,18 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
+    if ( (userId !== game.user.id) || !this.parent ) return;
 
-    // The below options are only needed for character classes
-    if ( userId !== game.user.id ) return;
-    const isCharacterClass = this.parent && (this.parent.type !== "vehicle") && (this.type === "class");
+    // See if this item grants any other items when added (not used by classes)
+    const items = this.grantedItems;
+    if ( items.length > 0 ) {
+      Promise.all(items.map(async i => await fromUuid(i))).then(items => {
+        return this.parent.addEmbeddedItems(items, options.promptAddFeatures);
+      });
+    };
+
+    // Additional actions if this is a class
+    const isCharacterClass = (this.parent.type !== "vehicle") && (this.type === "class");
     if ( !isCharacterClass ) return;
 
     // Assign a new primary class
