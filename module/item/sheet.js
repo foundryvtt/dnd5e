@@ -28,7 +28,8 @@ export default class ItemSheet5e extends ItemSheet {
       classes: ["dnd5e", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
+      dragDrop: [{ dropSelector: ".drop-area" }]
     });
   }
 
@@ -78,6 +79,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( itemData.type === "background" ) {
       this._prepareTraits(itemData);
       await this._prepareGrantedTraits(data);
+      if ( itemData.data.feature ) data.feature = await fromUuid(itemData.data.feature);
     }
 
     // Re-define the template data references (backwards compatible)
@@ -488,9 +490,10 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
+      html.find(".delete-item").click(this._onDeleteLinkedItem.bind(this));
       html.find(".delete-tag").click(this._onDeleteTag.bind(this));
-      html.find('.trait-configuration').click(this._onConfigureTraits.bind(this));
-      html.find('.trait-selector').click(this._onSelectTraits.bind(this));
+      html.find(".trait-configuration").click(this._onConfigureTraits.bind(this));
+      html.find(".trait-selector").click(this._onSelectTraits.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
         ActiveEffect5e.onManageActiveEffect(ev, this.item)
@@ -584,6 +587,23 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
+   * Handle the deletion of a linked item.
+   * @param {Event} event  The click event that triggered the deletion.
+   * @private
+   */
+  _onDeleteLinkedItem(event) {
+    event.preventDefault();
+    const dropArea = event.target.closest(".linked-item");
+    const type = dropArea.dataset.type;
+
+    if ( type === "feature" ) {
+      return this.object.update({ "data.feature": null });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle the deletion of a tag when the delete tag link is clicked.
    * @param {Event} event  The click event that triggered the deletion.
    * @private
@@ -627,4 +647,36 @@ export default class ItemSheet5e extends ItemSheet {
     }
     return this.object.update(updateData);
   }
+
+  /* -------------------------------------------- */
+  /*  Drag and Drop                               */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onDrop(event) {
+    
+    // Try to extract the data
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch (err) {
+      return false;
+    }
+
+    const allowed = Hooks.call("dropItemSheetData", this.object, this, data);
+    if ( allowed === false ) return false;
+
+    if ( data.type !== "Item" ) return false;
+    const item = await Item.implementation.fromDropData(data);
+
+    // Get information from the drop area
+    const linkedItemArea = event.target.closest(".linked-item");
+    const type = linkedItemArea?.dataset.type;
+
+    if ( type === "feature" ) {
+      return this.object.update({"data.feature": item.uuid});
+    }
+
+  }
+
 }

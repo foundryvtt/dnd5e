@@ -39,6 +39,10 @@
       {{!-- Details Tab --}}
       <div class="tab details" data-group="primary" data-tab="details">
 
+        <div>
+          <h2>{{ localize "DND5E.TraitsHeader" }}</h2>
+        </div>
+
         {{!-- Skill Proficiencies --}}
         {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitSkillProf" type="skills" data=data.skills label=labels.grants.skills}}
 
@@ -49,11 +53,28 @@
         {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.Languages" type="languages" data=data.languages label=labels.grants.languages}}
 
         {{!-- Feature --}}
-        <div class="form-group">
-          <label>{{ localize "DND5E.BackgroundFeature" }}</label>
-          <div class="form-fields">
-            
-          </div>
+        <div>
+          <h2>{{ localize "DND5E.BackgroundFeature" }}</h2>
+        </div>
+
+        <div class="form-group linked-item" data-type="feature">
+          {{#if feature}}
+            <div class="preview">
+              <img src="{{feature.img}}">
+              <span>{{feature.name}}</span>
+              {{#if editable}}
+                <a class="delete-item">
+                  <i class="fas fa-trash"></i>
+                </a>
+              {{/if}}
+            </div>
+          {{else}}
+            {{#if editable}}
+              <div class="drop-area">
+                <span>{{localize "DND5E.ItemDropArea"}}</span>
+              </div>
+            {{/if}}
+          {{/if}}
         </div>
 
       </div>
