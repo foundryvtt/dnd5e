@@ -11,10 +11,14 @@ export default class ItemSheet5e extends ItemSheet {
   constructor(...args) {
     super(...args);
 
-    // Expand the default size of the class sheet
-    if ( this.object.data.type === "class" ) {
-      this.options.width = this.position.width =  600;
-      this.options.height = this.position.height = 680;
+    // Expand the default size of certain sheets
+    switch ( this.object.data.type ) {
+      case "background":
+        this.options.height = this.position.height = 680;
+      case "class":
+        this.options.width = this.position.width =  600;
+        this.options.height = this.position.height = 680;
+        break;
     }
   }
 
