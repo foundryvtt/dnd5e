@@ -292,7 +292,7 @@ export default class ItemSheet5e extends ItemSheet {
       const grants = data.data.data[type].grants;
       if ( this.object.isEmbedded ) {
         const allowReplacements = ["skills", "tool"].includes(type);
-        const choices = await this._prepareUnfulfilledGrants(
+        const choices = await ItemSheet5e._prepareTraitOptions(
           type, grants, this.object.actor.getSelectedTraits(type), data.data.data[type].value, allowReplacements
         );
         data.data.data[type].available = choices;
@@ -311,19 +311,62 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Determine which of the provided grants, if any, still needs to be fulfilled.
+   * Create a list of selectable options for the provided trait as well as how many still need to be fulfilled.
    * @param {string} type                      Trait affected by these grants.
    * @param {Array.<string|TraitGrant> grants  Grants that should be fulfilled.
    * @param {Array.<string>} actorSelected     Values that have already been selected on the actor.
-   * @param {Array.<string>} selected          Values that have already been selected on this item.
+   * @param {Array.<string>} itemSelected      Values that have already been selected on this item.
    * @param {boolean} allowReplacements        If a grant with limited choices has no available options,
    *                                           allow player to select from full list of options.
    * @param {{
    *   choices: object
    *   remaining: number
    * }|null}  Choices available for most permissive unfulfilled grant & number of remaining traits to select.
+   */ 
+  static async _prepareTraitOptions(type, grants, actorSelected, itemSelected, allowReplacements) {
+    let { available, allChoices } = await ItemSheet5e._prepareUnfulfilledGrants(type, grants, actorSelected, itemSelected);
+
+    // Remove any grants that have no choices remaining
+    let unfilteredLength = available.length;
+    available = available.filter(a => a.set.size > 0);
+
+    // If all traits of this type are already assigned, then nothing new can be selected
+    if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
+
+    // If replacements are allowed and there are grants with zero choices from their limited set,
+    // display all remaining choices as an option
+    if ( allowReplacements && (unfilteredLength > available.length) ) {
+      return {
+        choices: allChoices,
+        remaining: unfilteredLength
+      }
+    }
+
+    // Create a choices object featuring a union of choices from all remaining grants
+    const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
+    this._filterTraitObject(allChoices, Array.from(remainingSet), true);
+
+    if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
+    return {
+      choices: allChoices,
+      remaining: available.length
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine which of the provided grants, if any, still needs to be fulfilled.
+   * @param {string} type                      Trait affected by these grants.
+   * @param {Array.<string|TraitGrant> grants  Grants that should be fulfilled.
+   * @param {Array.<string>} actorSelected     Values that have already been selected on the actor.
+   * @param {Array.<string>} itemSelected      Values that have already been selected on this item.
+   * @param {{
+   *   available: object[]
+   *   allChoices: object
+   * }}
    */
-  async _prepareUnfulfilledGrants(type, grants, actorSelected, itemSelected, allowReplacements) {
+  static async _prepareUnfulfilledGrants(type, grants, actorSelected, itemSelected) {
     const expandedGrants = grants.reduce((arr, grant) => {
       if ( typeof grant === "string" ) {
         arr.push([grant]);
@@ -341,11 +384,11 @@ export default class ItemSheet5e extends ItemSheet {
     }, []);
 
     // If all of the grants have been selected, no need to go further
-    if ( expandedGrants.length <= itemSelected.length ) return null;
+    if ( expandedGrants.length <= itemSelected.length ) return { available: [], allChoices: {} };
  
     // Figure out how many choices each grant and sort by most restrictive first
     const allChoices = await TraitConfiguration.getTraitChoices(type);
-    let available = expandedGrants.map(grant => this._filterGrantChoices(allChoices, grant));
+    let available = expandedGrants.map(grant => ItemSheet5e._filterGrantChoices(allChoices, grant));
     const setSort = (lhs, rhs) => lhs.set.size - rhs.set.size;
     available.sort(setSort);
 
@@ -362,25 +405,8 @@ export default class ItemSheet5e extends ItemSheet {
     // Filter out any traits that have already been selected
     this._filterTraitObject(allChoices, actorSelected, false);
     available = available.map(a => this._filterGrantChoices(allChoices, Array.from(a.set)));
-    let unfilteredLength = available.length;
-    available = available.filter(a => a.set.size > 0);
 
-    if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
-    if ( allowReplacements && (unfilteredLength > available.length) ) {
-      return {
-        choices: allChoices,
-        remaining: unfilteredLength
-      }
-    }
-
-    const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
-    this._filterTraitObject(allChoices, Array.from(remainingSet), true);
-
-    if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
-    return {
-      choices: allChoices,
-      remaining: available.length
-    }
+    return { available, allChoices };
   }
 
   /* -------------------------------------------- */
@@ -395,7 +421,7 @@ export default class ItemSheet5e extends ItemSheet {
    * }}
    * @private
    */
-  _filterGrantChoices(traits, choices) {
+  static _filterGrantChoices(traits, choices) {
     const choiceSet = (choices) => Object.entries(choices).reduce((set, [key, choice]) => {
       if ( choice.children ) choiceSet(choice.children).forEach(c => set.add(c));
       else set.add(key);
@@ -403,7 +429,7 @@ export default class ItemSheet5e extends ItemSheet {
     }, new Set());
 
     let traitsSet = foundry.utils.duplicate(traits);
-    if ( choices.length > 0 ) this._filterTraitObject(traitsSet, choices, true);
+    if ( choices.length > 0 ) ItemSheet5e._filterTraitObject(traitsSet, choices, true);
     return { choices: traitsSet, set: choiceSet(traitsSet) };
   }
 
@@ -415,8 +441,9 @@ export default class ItemSheet5e extends ItemSheet {
    * @param {string[]} filter  Array of keys to use when applying the filter.
    * @param {boolean} union    If true, only items in filter array will be included.
    *                           If false, only items not in the filter array will be included.
+   * @private
    */
-  _filterTraitObject(traits, filter, union) {
+  static _filterTraitObject(traits, filter, union) {
     for ( const [key, trait] of Object.entries(traits) ) {
       if ( filter.includes(key) ) {
         if ( !union ) delete traits[key];
