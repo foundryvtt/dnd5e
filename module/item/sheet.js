@@ -49,6 +49,8 @@ export default class ItemSheet5e extends ItemSheet {
     const itemData = data.data;
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
+    data.embedded = this.object.isEmbedded;
+    data.editablePrototype = data.editable && !data.embedded;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
