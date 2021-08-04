@@ -138,7 +138,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Features
     const features = {
-      background: { label: "DND5E.ItemTypeBackground", items: backgrounds, hasActions: false, dataset: {type: "background"} }, // TODO: Add preparation warning if character has more than one background
+      background: { label: "DND5E.ItemTypeBackground", items: backgrounds, hasActions: false, dataset: {type: "background"} },
       classes: { label: "DND5E.ItemTypeClassPl", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
       active: { label: "DND5E.FeatureActive", items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
       passive: { label: "DND5E.FeaturePassive", items: [], hasActions: false, dataset: {type: "feat"} }
@@ -149,6 +149,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
     classes.sort((a, b) => b.data.levels - a.data.levels);
     features.classes.items = classes;
+
+    // Warnings
+    if ( backgrounds.length > 1 ) this.actor._preparationWarnings.push("DND5E.WarnMultipleBackgrounds");
 
     // Assign and return
     data.inventory = Object.values(inventory);
