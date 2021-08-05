@@ -87,7 +87,7 @@ export default class TraitConfiguration extends DocumentSheet {
    * Produce an object containing all of the choices for the provided trait type.
    * @param {string} type      Trait name.
    * @param {string[]} chosen  Any currently selected options.
-   * @return {object}          Object of choices ready to be displayed in a TraitSelector list.
+   * @return {SelectChoices}   Object of choices ready to be displayed in a TraitSelector list.
    */
   static async getTraitChoices(type, chosen) {
 

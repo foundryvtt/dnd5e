@@ -603,6 +603,7 @@ export default class ItemSheet5e extends ItemSheet {
     const type = dropArea.dataset.type;
 
     if ( type === "feature" ) {
+      this.position.height = "auto";
       return this.object.update({ "data.feature": null });
     }
   }
@@ -680,6 +681,7 @@ export default class ItemSheet5e extends ItemSheet {
     const type = linkedItemArea?.dataset.type;
 
     if ( type === "feature" ) {
+      this.position.height = "auto";
       return this.object.update({"data.feature": item.uuid});
     }
 

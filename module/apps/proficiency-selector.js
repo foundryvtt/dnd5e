@@ -74,8 +74,8 @@ export default class ProficiencySelector extends TraitSelector {
   /**
    * Take the provided object and sort by the "label" property.
    *
-   * @param {object} object  Object to be sorted.
-   * @return {object}        Sorted object.
+   * @param {SelectChoices} object  Object to be sorted.
+   * @return {SelectChoices}        Sorted object.
    * @private
    */
   static _sortObject(object) {

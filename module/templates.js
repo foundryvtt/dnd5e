@@ -30,25 +30,37 @@ export const preloadHandlebarsTemplates = async function() {
 
 
 /**
+ * Object representing a nested set of choices to be displayed in a grouped select list or a trait selector.
+ *
+ * @typedef {object} SelectChoices
+ * @property {string} label
+ * @property {boolean} [chosen]
+ * @property {SelectChoices[]} [children]
+ */
+
+/**
  * A helper to create a set of <option> elements in a <select> block grouped together
  * in <optgroup> based on the provided categories.
  *
- * @param {object} choices
+ * @param {SelectChoices} choices
+ * @param {boolean} [option.localize]     Should the label be localized?
+ * @param {string} [option.blank]         Name for the empty option. If nothing provided, no empty option is displayed.
+ * @param {string} [option.labelAttr]     Attribute pointing to label string.
+ * @param {string} [option.chosenAttr]    Attribute pointing to chosen boolean.
+ * @param {string} [option.childrenAttr]  Attribute pointing to array of children.
  * @return {Handlebars.SafeString}
  */
 function groupedSelectOptions(choices, options) {
   const localize = options.hash["localize"] ?? false;
-  let selected = options.hash["selected"] ?? null;
   let blank = options.hash["blank"] ?? null;
   let labelAttr = options.hash["labelAttr"] ?? "label";
+  let chosenAttr = options.hash["chosenAttr"] ?? "chosen";
   let childrenAttr = options.hash["childrenAttr"] ?? "children";
-  selected = selected instanceof Array ? selected.map(String) : [String(selected)];
 
   // Create an option
-  const option = (name, label) => {
+  const option = (name, label, chosen) => {
     if ( localize ) label = game.i18n.localize(label);
-    let isSelected = selected.includes(name);
-    html += `<option value="${name}" ${isSelected ? "selected" : ""}>${label}</option>`
+    html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`
   };
 
   // Create an group
@@ -64,7 +76,7 @@ function groupedSelectOptions(choices, options) {
   const children = (children) => {
     for ( let [name, child] of Object.entries(children) ) {
       if ( child[childrenAttr] ) group(child);
-      else option(name, child[labelAttr]);
+      else option(name, child[labelAttr], child[chosenAttr] ?? false);
     }
   }
 
