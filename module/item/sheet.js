@@ -72,6 +72,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Armor Class
     data.isArmor = itemData.data.armor?.type in data.config.armorTypes;
+    data.isShield = itemData.data.armor?.type === "shield";
     data.hasAC = data.isArmor || data.isMountable;
 
     // Prepare Active Effects

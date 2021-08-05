@@ -376,26 +376,36 @@ DND5E.limitedUsePeriods = {
 
 /**
  * Specific equipment types that modify base AC
- * @type {object}
+ * @enum {string}
  */
 DND5E.armorTypes = {
-  "light": "DND5E.EquipmentLight",
-  "medium": "DND5E.EquipmentMedium",
-  "heavy": "DND5E.EquipmentHeavy",
-  "natural": "DND5E.EquipmentNatural",
-  "shield": "DND5E.EquipmentShield"
+  light: "DND5E.EquipmentLight",
+  medium: "DND5E.EquipmentMedium",
+  heavy: "DND5E.EquipmentHeavy",
+  natural: "DND5E.EquipmentNatural",
+  shield: "DND5E.EquipmentShield",
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Equipment types that aren't armor.
+ * @enum {string}
+ */
+DND5E.miscEquipmentTypes = {
+  clothing: "DND5E.EquipmentClothing",
+  trinket: "DND5E.EquipmentTrinket",
+  vehicle: "DND5E.EquipmentVehicle",
 };
 
 /* -------------------------------------------- */
 
 /**
  * The set of equipment types for armor, clothing, and other objects which can be worn by the character
- * @type {Object}
+ * @enum {string}
  */
 DND5E.equipmentTypes = {
-  "clothing": "DND5E.EquipmentClothing",
-  "trinket": "DND5E.EquipmentTrinket",
-  "vehicle": "DND5E.EquipmentVehicle",
+  ...DND5E.miscEquipmentTypes,
   ...DND5E.armorTypes
 };
 
