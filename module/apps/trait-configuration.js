@@ -69,16 +69,20 @@ export default class TraitConfiguration extends DocumentSheet {
         selected: index === this.selectedIndex
       }
     });
+    const allowChoices = typeof grants[this.selectedIndex]?.data === "object";
 
     const selectedData = grants[this.selectedIndex]?.data;
     const chosen = (typeof selectedData === "string") ? [selectedData] : selectedData?.choices ?? [];
+    const choices = await TraitConfiguration.getTraitChoices(this.options.type, chosen);
 
-    return {
-      grants,
-      allowChoices: typeof grants[this.selectedIndex]?.data === "object",
-      count: this.grants[this.selectedIndex]?.count ?? 1,
-      choices: await TraitConfiguration.getTraitChoices(this.options.type, chosen)
+    // Don't allow the selection of tool categories if not in "Allow Choices" mode
+    if ( !allowChoices && (this.options.type === "tool") ) {
+      Object.values(choices).forEach(v => {
+        if ( v.children ) v.disabled = true;
+      });
     }
+
+    return { grants, allowChoices, count: this.grants[this.selectedIndex]?.count ?? 1, choices };
   }
 
   /* -------------------------------------------- */

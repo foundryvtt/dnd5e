@@ -28,6 +28,15 @@ export const preloadHandlebarsTemplates = async function() {
   ]);
 };
 
+/**
+ * For inputs, if the value is true, add the "disabled" property, otherwise add nothing.
+ * @param {boolean} value  To disable, or not to disable?
+ * @return {string}
+ */
+function disabled(value) {
+  return Boolean(value) ? "disabled" : "";
+}
+
 
 /**
  * Object representing a nested set of choices to be displayed in a grouped select list or a trait selector.
@@ -94,6 +103,7 @@ function groupedSelectOptions(choices, options) {
  */
 export const registerHandlebarsHelpers = function() {
   Handlebars.registerHelper({
+    disabled: disabled,
     getProperty: foundry.utils.getProperty,
     groupedSelectOptions: groupedSelectOptions
   });
