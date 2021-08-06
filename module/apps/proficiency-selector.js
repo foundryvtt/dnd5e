@@ -47,9 +47,9 @@ export default class ProficiencySelector extends TraitSelector {
    * @param {boolean} [sortCategories]  Should top level categories be sorted?
    * @return {Object.<string,ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
    */
-  static async getChoices(type, chosen, sortCategories=false) {
+  static async getChoices(type, chosen=[], sortCategories=false) {
     let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
-      obj[key] = { label: label, chosen: chosen?.includes(key) ?? false };
+      obj[key] = { label: label, chosen: chosen.includes(key) ?? false };
       return obj;
     }, {});
 
@@ -65,7 +65,7 @@ export default class ProficiencySelector extends TraitSelector {
         if ( map && map[type] ) type = map[type];
         const entry = {
           label: item.name,
-          chosen: chosen?.includes(key) ?? false
+          chosen: chosen.includes(key) ?? false
         };
         if ( data[type] === undefined ) {
           data[key] = entry;
@@ -79,8 +79,8 @@ export default class ProficiencySelector extends TraitSelector {
     }
 
     if ( type === "tool" ) {
-      data["vehicle"].children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
-        obj[key] = { label: label, chosen: chosen?.includes(key) ?? false };
+      data.vehicle.children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
+        obj[key] = { label: label, chosen: chosen.includes(key) ?? false };
         return obj;
       }, {});
     }
