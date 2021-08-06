@@ -43,9 +43,9 @@ export default class ProficiencySelector extends TraitSelector {
    * A static helper method to get a list of choices for a proficiency type.
    *
    * @param {string} type               Proficiency type to select, either `armor`, `tool`, or `weapon`.
-   * @param {string[]} [choices]        Optional list of items to be marked as chosen.
+   * @param {string[]} [chosen]         Optional list of items to be marked as chosen.
    * @param {boolean} [sortCategories]  Should top level categories be sorted?
-   * @return {object.<string,ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
+   * @return {Object.<string,ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
    */
   static async getChoices(type, chosen, sortCategories=false) {
     let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
