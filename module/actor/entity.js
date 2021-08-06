@@ -231,18 +231,16 @@ export default class Actor5e extends Actor {
    * @param {string[]} keys  What proficiencies should be granted.
    */
   assignTraitProficiencies(type, keys) {
-    if ( ["armor", "tool", "weapon"].includes(type) ) {
-      this.data.data.traits[`${type}Prof`].value.push(...keys);
-    } else if ( type === "skills" ) {
-      for ( const key of keys ) {
-        if ( this.data.data.skills[key].value < 1 ) this.data.data.skills[key].value = 1;
+    for ( const key of keys ) {
+      if ( ["armor", "tool", "weapon"].includes(type) ) {
+        if ( !this.data.data.traits[type]?.value?.includes(key) ) this.data.data.traits[`${type}Prof`]?.value?.push(key);
+      } else if ( type === "skills" ) {
+        if ( this.data.data.skills[key]?.value < 1 ) this.data.data.skills[key].value = 1;
+      } else if ( type === "saves" ) {
+        if ( this.data.data.abilities[key]?.proficient < 1 ) this.data.data.abilities[key].proficient = 1;
+      } else {
+        if ( !this.data.data.traits[type]?.value?.includes(key) ) this.data.data.traits[type]?.value?.push(key);
       }
-    } else if ( type === "saves" ) {
-      for ( const key of keys ) {
-        if ( this.data.data.abilities[key].proficient < 1 ) this.data.data.abilities[key].proficient = 1;
-      }
-    } else {
-      this.data.data.traits[type]?.value?.push(...keys);
     }
   }
 
