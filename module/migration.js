@@ -512,47 +512,6 @@ function _migrateArmorType(item, updateData) {
   return updateData;
 }
 
-/* --------------------------------------------- */
-
-/**
- * Determine whether an item needs a special AC Active Effect created for it, and return it if so.
- *
- * @param {Item5e} item  The parent item
- * @return {object|null} The Active Effect object
- * @private
- */
-export async function createArmorEffect(item) {
-  const armor = item.data.data.armor;
-  const needsArmorEffects = item.type === "equipment" && ["clothing", "trinket"].includes(armor?.type);
-  if ( !needsArmorEffects ) return null;
-  let effect;
-  const ac = game.i18n.localize("DND5E.AC");
-  const createAE = (label, changes) => new ActiveEffect.implementation({
-    icon: item.img,
-    origin: item.uuid,
-    transfer: true,
-    flags: {dnd5e: {armorMigration: true}},
-    label, changes
-  });
-  if ( armor.type === "clothing" ) {
-    // Legacy clothing might have been used to grant AC like armor so create an effect for that.
-    effect = createAE(`${armor.value} ${ac}`, [{
-      key: "data.attributes.ac.base",
-      mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-      value: armor.value.toString()
-    }]);
-  } else {
-    // All 'bonus' items are already converted to 'trinket' here. Legacy trinkets might have been used to add bonus AC,
-    // so create an effect for that.
-    effect = createAE(`${armor.value.signedString()} ${ac}`, [{
-      key: "data.attributes.ac.bonus",
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: armor.value.toString()
-    }]);
-  }
-  return ActiveEffect.implementation.create(effect.toObject(), {parent: item});
-}
-
 /* -------------------------------------------- */
 
 /**

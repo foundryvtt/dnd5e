@@ -71,7 +71,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.isMountable = this._isItemMountable(itemData);
 
     // Armor Class
-    data.isArmor = Object.keys(data.config.armorTypes).includes(itemData.data.armor?.type);
+    data.isArmor = itemData.data.armor?.type in data.config.armorTypes;
     data.hasAC = data.isArmor || data.isMountable;
 
     // Prepare Active Effects
