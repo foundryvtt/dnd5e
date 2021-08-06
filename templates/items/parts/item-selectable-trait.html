@@ -1,0 +1,31 @@
+<div class="form-group selectable-trait">
+  <label>
+    {{localize header}}
+    {{#if editablePrototype}}
+    <a class="trait-configuration" data-target="data.{{type}}" data-type="{{type}}">
+      <i class="fas fa-edit"></i>
+    </a>
+    {{/if}}
+  </label>
+  <div class="form-fields">
+    {{#if data.selected}}
+      <ul class="traits-list">
+        {{#each data.selected as |label key|}}
+          <li class="tag" data-key="{{key}}" data-type="{{../type}}">
+            {{label}}
+            <a class="delete-tag">
+              <i class="fas fa-minus-circle"></i>
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    {{#if data.available}}
+      <select name="addedTrait:{{type}}">
+        {{groupedSelectOptions data.available.choices blank=label}}
+      </select>
+    {{else}}
+      {{label}}
+    {{/if}}
+  </div>
+</div>

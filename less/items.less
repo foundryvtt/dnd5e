@@ -97,6 +97,9 @@
       border: 1px solid @colorTan;
       background: rgba(0, 0, 0, 0.05);
     }
+    h2 {
+      margin-top: 0.5em;
+    }
 
     .form-group {
       span {
@@ -117,6 +120,30 @@
       }
     }
 
+    .form-group.selectable-trait {
+      ul.traits-list {
+        padding-left: 0;
+        .tag {
+          border-radius: 6px;
+          padding: 2px 6px;
+          font-size: 12px;
+
+          .delete-tag {
+            display: none;
+            position: relative;
+            top: 1px;
+            opacity: 0.6;
+          }
+          &:hover .delete-tag {
+            display: inherit;
+          }
+        }
+      }
+      select {
+        flex-basis: 100%;
+      }
+    }
+
     .form-group.uses-per {
       .form-fields {
         flex-wrap: nowrap;
@@ -131,6 +158,53 @@
     }
     span.sep {
       flex: 0 0 8px;
+    }
+
+    .linked-item {
+      .preview {
+        display: flex;
+
+        img {
+          width: 48px;
+          height: 48px;
+        }
+        span {
+          display: block;
+          flex-grow: 10;
+          align-self: center;
+          padding: 0 1em;
+
+          text-align: left;
+          font-size: 16px;
+        }
+        .delete-item {
+          display: none;
+          align-self: center;
+          padding: 0.5em 1em;
+
+          fotn-size: 20px;
+          opacity: 0.6;
+        }
+        &:hover .delete-item {
+          display: block;
+        }
+      }
+
+      .drop-area {
+        display: flex;
+        width: 100%;
+        height: 48px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.2);
+
+        span {
+          align-self: center;
+          flex-grow: 10;
+          font-size: 18px;
+          font-style: italic;
+          opacity: 0.8;
+        }
+      }
     }
 
     .prepared {

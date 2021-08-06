@@ -60,11 +60,15 @@ export default class ProficiencySelector extends TraitSelector {
       }, {});
     }
 
-    if ( this.options.sortCategories ) data.choices = this._sortObject(data.choices);
+    if ( this.options.sortCategories ) data.choices = ProficiencySelector._sortObject(data.choices);
     for ( const category of Object.values(data.choices) ) {
       if ( !category.children ) continue;
-      category.children = this._sortObject(category.children);
+      category.children = ProficiencySelector._sortObject(category.children);
     }
+
+    const source = foundry.utils.getProperty(this.object.data._source, this.attribute);
+    const sourceValue = (this.options.valueKey) ? foundry.utils.getProperty(source, this.options.valueKey) ?? [] : source;
+    this._disableAssignedTraits(data.choices, sourceValue, value);
 
     return data;
   }
@@ -74,11 +78,11 @@ export default class ProficiencySelector extends TraitSelector {
   /**
    * Take the provided object and sort by the "label" property.
    *
-   * @param {object} object  Object to be sorted.
-   * @return {object}        Sorted object.
+   * @param {SelectChoices} object  Object to be sorted.
+   * @return {SelectChoices}        Sorted object.
    * @private
    */
-  _sortObject(object) {
+  static _sortObject(object) {
     return Object.fromEntries(Object.entries(object).sort((lhs, rhs) =>
       lhs[1].label.localeCompare(rhs[1].label)
     ));
@@ -91,7 +95,7 @@ export default class ProficiencySelector extends TraitSelector {
     super.activateListeners(html);
 
     for ( const checkbox of html[0].querySelectorAll("input[type='checkbox']") ) {
-      if ( checkbox.checked ) this._onToggleCategory(checkbox);
+      if ( checkbox.checked ) ProficiencySelector._onToggleCategory(checkbox);
     }
   }
 
@@ -101,7 +105,7 @@ export default class ProficiencySelector extends TraitSelector {
   async _onChangeInput(event) {
     super._onChangeInput(event);
 
-    if ( event.target.tagName === "INPUT" ) this._onToggleCategory(event.target);
+    if ( event.target.tagName === "INPUT" ) ProficiencySelector._onToggleCategory(event.target);
   }
 
   /* -------------------------------------------- */
@@ -112,7 +116,7 @@ export default class ProficiencySelector extends TraitSelector {
    * @param {HTMLElement} checkbox  Checkbox that was changed.
    * @private
    */
-  _onToggleCategory(checkbox) {
+  static _onToggleCategory(checkbox) {
     const children = checkbox.closest("li")?.querySelector("ol");
     if ( !children ) return;
 

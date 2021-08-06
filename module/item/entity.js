@@ -1,3 +1,4 @@
+import ItemSheet5e from "./sheet.js";
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 
@@ -139,6 +140,42 @@ export default class Item5e extends Item {
     let chg = this.data.data.recharge || {};
     let uses = this.data.data.uses || {};
     return !!chg.value || (uses.per && (uses.max > 0));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the changes this item causes on its owning actor.
+   * @return {object.<string, string[]>}  Changes to apply grouped by trait type.
+   */
+  get actorTraitChanges() {
+    switch (this.type) {
+      case "background":
+        return {
+          skills: this.data.data.skills.value,
+          tool: this.data.data.tool.value,
+          languages: this.data.data.languages.value
+        }
+      default:
+        return {}
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get a list of UUIDs for linked items that should be added when this item is dropped
+   * on an actor.
+   * @return {string[]}  Array of UUIDs.
+   */
+  get grantedItems() {
+    let items = [];
+    switch (this.type) {
+      case "background":
+        if ( this.data.data.feature ) items.push(this.data.data.feature);
+        break;
+    }
+    return items;
   }
 
   /* -------------------------------------------- */
@@ -1348,6 +1385,9 @@ export default class Item5e extends Item {
     const isNPC = this.parent.type === "npc";
     let updates;
     switch (data.type) {
+      case "background":
+        updates = await this._assignOwnedItemTraits(data, this.parent);
+        break;
       case "equipment":
         updates = this._onCreateOwnedEquipment(data, actorData, isNPC);
         break;
@@ -1366,10 +1406,18 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
+    if ( (userId !== game.user.id) || !this.parent ) return;
 
-    // The below options are only needed for character classes
-    if ( userId !== game.user.id ) return;
-    const isCharacterClass = this.parent && (this.parent.type !== "vehicle") && (this.type === "class");
+    // See if this item grants any other items when added (not used by classes)
+    const items = this.grantedItems;
+    if ( items.length > 0 ) {
+      Promise.all(items.map(async i => await fromUuid(i))).then(items => {
+        return this.parent.addEmbeddedItems(items, options.promptAddFeatures);
+      });
+    };
+
+    // Additional actions if this is a class
+    const isCharacterClass = (this.parent.type !== "vehicle") && (this.type === "class");
     if ( !isCharacterClass ) return;
 
     // Assign a new primary class
@@ -1421,6 +1469,32 @@ export default class Item5e extends Item {
       if ( this.id !== this.parent.data.data.details.originalClass ) return;
       this.parent._assignPrimaryClass();
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for automatically assigning traits to an item based on actor traits if possible.
+   * @param {object} itemData  Item data being prepared.
+   * @param {Actor5e} actor    Actor object to check against.
+   * @return {object}          Object containing updates to apply to the item data.
+   * @private
+   */
+  async _assignOwnedItemTraits(itemData, actor) {
+    const updates = {};
+    const types = ["skills", "tool", "languages"];
+    for ( const type of types ) {
+      const { available } = await ItemSheet5e._prepareUnfulfilledGrants(
+        type, itemData.data[type].grants, itemData.data[type].value, actor.getSelectedTraits(type)
+      );
+      let newValues = [];
+      for ( const { set } of available ) {
+        if ( set.size > 1 ) continue;
+        newValues.push(set.values().next().value);
+      }
+      if ( newValues.length > 0 ) updates[`data.${type}.value`] = newValues;
+    }
+    return updates;
   }
 
   /* -------------------------------------------- */

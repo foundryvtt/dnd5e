@@ -92,6 +92,9 @@ export default class Actor5e extends Actor {
     const flags = actorData.flags.dnd5e || {};
     const bonuses = getProperty(data, "bonuses.abilities") || {};
 
+    // Apply any changes from race, class, or background
+    this._prepareItemTraitChanges(data);
+
     // Retrieve data for polymorphed actors
     let originalSaves = null;
     let originalSkills = null;
@@ -199,6 +202,46 @@ export default class Actor5e extends Actor {
       return obj;
     }, {});
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get currently selected traits.
+   * @param {string} type  Trait type for which to fetch data.
+   * @return {string[]}
+   */
+  getSelectedTraits(type) {
+    if ( ["armor", "tool", "weapon"].includes(type) ) {
+      return this.data.data.traits[`${type}Prof`].value;
+    } else if ( type === "skills" ) {
+      return Object.keys(CONFIG.DND5E.skills).filter(key => this.data.data.skills[key].value >= 1);
+    } else if ( type === "saves" ) {
+      return Object.keys(CONFIG.DND5E.abilities).filter(key => this.data.data.abilities[key].proficient >= 1);
+    } else {
+      return this.data.data.traits[type]?.value ?? [];
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Grant proficiency for the provided keys for a trait of the specified type.
+   * @param {string} type    Trait type to give proficiency.
+   * @param {string[]} keys  What proficiencies should be granted.
+   */
+  assignTraitProficiencies(type, keys) {
+    for ( const key of keys ) {
+      if ( ["armor", "tool", "weapon"].includes(type) ) {
+        if ( !this.data.data.traits[type]?.value?.includes(key) ) this.data.data.traits[`${type}Prof`]?.value?.push(key);
+      } else if ( type === "skills" ) {
+        if ( this.data.data.skills[key]?.value < 1 ) this.data.data.skills[key].value = 1;
+      } else if ( type === "saves" ) {
+        if ( this.data.data.abilities[key]?.proficient < 1 ) this.data.data.abilities[key].proficient = 1;
+      } else {
+        if ( !this.data.data.traits[type]?.value?.includes(key) ) this.data.data.traits[type]?.value?.push(key);
+      }
+    }
   }
 
   /* -------------------------------------------- */
@@ -355,6 +398,20 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareVehicleData(actorData) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply any change from classes, race, and background.
+   * @param {ItemData} actorData  Data used during preparation.
+   */
+  _prepareItemTraitChanges(actorData) {
+    for ( const item of this.items ) {
+      for ( const [type, changes] of Object.entries(item.actorTraitChanges) ) {
+        this.assignTraitProficiencies(type, changes);
+      }
+    }
+  }
 
   /* -------------------------------------------- */
 

@@ -530,6 +530,33 @@
 }
 
 /* ----------------------------------------- */
+/* Trait Configuration
+/* ----------------------------------------- */
+
+.trait-configuration {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+
+    button[type="submit"] {
+      flex-basis: 100%;
+    }
+  }
+
+  .grant-selector {
+    flex-basis: calc(50% - 6px);
+
+    select option {
+      white-space: normal;
+    }
+  }
+  .trait-selector {
+    flex-basis: 50%;
+    margin-left: 6px;
+  }
+}
+
+/* ----------------------------------------- */
 /*  Property Attribution                     */
 /* ----------------------------------------- */
 
