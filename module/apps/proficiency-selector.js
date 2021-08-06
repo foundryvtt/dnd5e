@@ -49,7 +49,7 @@ export default class ProficiencySelector extends TraitSelector {
    */
   static async getChoices(type, chosen=[], sortCategories=false) {
     let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
-      obj[key] = { label: label, chosen: chosen.includes(key) ?? false };
+      obj[key] = { label: label, chosen: chosen.includes(key) };
       return obj;
     }, {});
 
@@ -65,7 +65,7 @@ export default class ProficiencySelector extends TraitSelector {
         if ( map && map[type] ) type = map[type];
         const entry = {
           label: item.name,
-          chosen: chosen.includes(key) ?? false
+          chosen: chosen.includes(key)
         };
         if ( data[type] === undefined ) {
           data[key] = entry;
@@ -80,7 +80,7 @@ export default class ProficiencySelector extends TraitSelector {
 
     if ( type === "tool" ) {
       data.vehicle.children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
-        obj[key] = { label: label, chosen: chosen.includes(key) ?? false };
+        obj[key] = { label: label, chosen: chosen.includes(key) };
         return obj;
       }, {});
     }
@@ -108,14 +108,15 @@ export default class ProficiencySelector extends TraitSelector {
    *                                       object containing the minimal index data.
    */
   static getBaseItem(identifier, { indexOnly = false }={}) {
-    const split = identifier.split(".");
-    const pack = game.packs.get(split.length > 1 ? `${split[0]}.${split[1]}` : CONFIG.DND5E.sourcePacks.ITEMS);
-    const id = split[2] ?? identifier;
+    let pack = CONFIG.DND5E.sourcePacks.ITEMS;
+    let [scope, collection, id] = identifier.split(".");
+    if ( scope && collection ) pack = `${scope}.${collection}`;
+    if ( !id ) id = identifier;
 
     if ( indexOnly ) {
-      return pack?.index.get(id);
+      return game.packs.get(pack)?.index.get(id);
     } else {
-      return pack?.getDocument(id);
+      return game.packs.get(pack)?.getDocument(id);
     }
   }
 
