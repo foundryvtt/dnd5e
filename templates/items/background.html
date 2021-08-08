@@ -52,6 +52,35 @@
         {{!-- Languages --}}
         {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.Languages" type="languages" data=data.traits.languages label=labels.grants.languages}}
 
+        {{!-- Feature --}}
+        <div>
+          <h2>{{ localize "DND5E.BackgroundFeature" }}</h2>
+        </div>
+
+        <div class="form-group linked-item" data-type="feature">
+          {{#if feature}}
+            <div class="preview">
+              <img src="{{feature.img}}">
+              <span>{{feature.name}}</span>
+              {{#if editablePrototype}}
+                <a class="delete-item">
+                  <i class="fas fa-trash"></i>
+                </a>
+              {{/if}}
+            </div>
+          {{else}}
+            {{#if editablePrototype}}
+              <div class="drop-area">
+                <span>{{localize "DND5E.ItemDropArea"}}</span>
+              </div>
+            {{/if}}
+          {{/if}}
+        </div>
+
+        {{#if feature}}
+          {{{feature.data.data.description.value}}}
+        {{/if}}
+
       </div>
   </section>
 </form>

@@ -160,6 +160,53 @@
       flex: 0 0 8px;
     }
 
+    .linked-item {
+      .preview {
+        display: flex;
+
+        img {
+          width: 48px;
+          height: 48px;
+        }
+        span {
+          display: block;
+          flex-grow: 10;
+          align-self: center;
+          padding: 0 1em;
+
+          text-align: left;
+          font-size: 16px;
+        }
+        .delete-item {
+          display: none;
+          align-self: center;
+          padding: 0.5em 1em;
+
+          fotn-size: 20px;
+          opacity: 0.6;
+        }
+        &:hover .delete-item {
+          display: block;
+        }
+      }
+
+      .drop-area {
+        display: flex;
+        width: 100%;
+        height: 48px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.2);
+
+        span {
+          align-self: center;
+          flex-grow: 10;
+          font-size: 18px;
+          font-style: italic;
+          opacity: 0.8;
+        }
+      }
+    }
+
     .prepared {
       flex: 1.3 !important;
       text-align: right;
