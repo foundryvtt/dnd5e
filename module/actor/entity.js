@@ -214,6 +214,25 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Get currently selected traits.
+   * @param {string} type  Trait type for which to fetch data.
+   * @return {string[]}
+   */
+  getSelectedTraits(type) {
+    if ( ["armor", "tool", "weapon"].includes(type) ) {
+      return this.data.data.traits[`${type}Prof`].value;
+    } else if ( type === "skills" ) {
+      return Object.keys(CONFIG.DND5E.skills).filter(key => this.data.data.skills[key].value >= 1);
+    } else if ( type === "saves" ) {
+      return Object.keys(CONFIG.DND5E.abilities).filter(key => this.data.data.abilities[key].proficient >= 1);
+    } else {
+      return this.data.data.traits[type]?.value ?? [];
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Given a list of items to add to the Actor, optionally prompt the
    * user for which they would like to add.
    * @param {Item5e[]} items         The items being added to the Actor.
