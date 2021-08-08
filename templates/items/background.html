@@ -39,6 +39,19 @@
       {{!-- Details Tab --}}
       <div class="tab details" data-group="primary" data-tab="details">
 
+        <div>
+          <h2>{{ localize "DND5E.TraitsHeader" }}</h2>
+        </div>
+
+        {{!-- Skill Proficiencies --}}
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitSkillProf" type="skills" data=data.skills label=labels.grants.skills}}
+
+        {{!-- Tool Proficiencies --}}
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitToolProf" type="tool" data=data.tool label=labels.grants.tool}}
+
+        {{!-- Languages --}}
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.Languages" type="languages" data=data.languages label=labels.grants.languages}}
+
       </div>
   </section>
 </form>

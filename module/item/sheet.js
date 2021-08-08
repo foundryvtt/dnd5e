@@ -1,4 +1,5 @@
 import ProficiencySelector from "../apps/proficiency-selector.js";
+import TraitConfiguration from "../apps/trait-configuration.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
 
@@ -47,6 +48,8 @@ export default class ItemSheet5e extends ItemSheet {
     const itemData = data.data;
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
+    data.embedded = this.object.isEmbedded;
+    data.editablePrototype = data.editable && !data.embedded;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -79,6 +82,11 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
+
+    // Prepare Traits
+    if ( itemData.type === "background" ) {
+      await this._prepareGrantedTraits(data);
+    }
 
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
@@ -280,6 +288,28 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Granted Traits                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the labels and selection lists for granted traits (used by Background & Class items).
+   * @param {object} data  Data being prepared.
+   */
+  async _prepareGrantedTraits(data) {
+    const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
+    const types = ["skills", "tool", "languages"];
+    data.labels.grants = {};
+    for ( const type of types ) {
+      const grants = data.data.data[type].grants;
+      if ( this.object.isEmbedded ) {
+        // To be filled in :)
+      } else {
+        data.labels.grants[type] = listFormatter.format(grants.map(g => TraitConfiguration.grantLabel(type, g)));
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Form Submission                             */
   /* -------------------------------------------- */
 
@@ -307,7 +337,8 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
+      html.find(".trait-configuration").click(this._onConfigureTraits.bind(this));
+      html.find(".trait-selector").click(this._onSelectTraits.bind(this));
       html.find(".effect-control").click(ev => {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
@@ -351,7 +382,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @param {Event} event   The click event which originated the selection.
    * @private
    */
-  _onConfigureTraits(event) {
+  _onSelectTraits(event) {
     event.preventDefault();
     const a = event.currentTarget;
     const options = {
@@ -378,6 +409,25 @@ export default class ItemSheet5e extends ItemSheet {
         break;
     }
     new TraitSelector(this.item, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle spawning the TraitConfiguration application for configuring which traits
+   * can be chosen by the player.
+   * @param {Event} event  The click event which originated the configuration.
+   * @private
+   */
+  _onConfigureTraits(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const options = {
+      name: a.dataset.target,
+      title: a.parentElement.innerText,
+      type: a.dataset.type
+    };
+    new TraitConfiguration(this.item, options).render(true);
   }
 
   /* -------------------------------------------- */

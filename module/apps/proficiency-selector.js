@@ -155,8 +155,8 @@ export default class ProficiencySelector extends TraitSelector {
   /**
    * Take the provided object and sort by the "label" property.
    *
-   * @param {object} object  Object to be sorted.
-   * @returns {object}        Sorted object.
+   * @param {SelectChoices} object  Object to be sorted.
+   * @returns {SelectChoices}       Sorted object.
    * @private
    */
   static _sortObject(object) {
@@ -172,7 +172,7 @@ export default class ProficiencySelector extends TraitSelector {
     super.activateListeners(html);
 
     for ( const checkbox of html[0].querySelectorAll("input[type='checkbox']") ) {
-      if ( checkbox.checked ) this._onToggleCategory(checkbox);
+      if ( checkbox.checked ) ProficiencySelector._onToggleCategory(checkbox);
     }
   }
 
@@ -182,7 +182,7 @@ export default class ProficiencySelector extends TraitSelector {
   async _onChangeInput(event) {
     super._onChangeInput(event);
 
-    if ( event.target.tagName === "INPUT" ) this._onToggleCategory(event.target);
+    if ( event.target.tagName === "INPUT" ) ProficiencySelector._onToggleCategory(event.target);
   }
 
   /* -------------------------------------------- */
@@ -193,7 +193,7 @@ export default class ProficiencySelector extends TraitSelector {
    * @param {HTMLElement} checkbox  Checkbox that was changed.
    * @private
    */
-  _onToggleCategory(checkbox) {
+  static _onToggleCategory(checkbox) {
     const children = checkbox.closest("li")?.querySelector("ol");
     if ( !children ) return;
 

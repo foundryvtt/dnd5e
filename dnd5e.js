@@ -11,7 +11,7 @@
 // Import Modules
 import { DND5E } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
-import { preloadHandlebarsTemplates } from "./module/templates.js";
+import { preloadHandlebarsTemplates, registerHandlebarsHelpers } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances } from "./module/canvas.js";
 
@@ -132,6 +132,8 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
+
+  registerHandlebarsHelpers();
 
   // Preload Handlebars Templates
   return preloadHandlebarsTemplates();
@@ -311,8 +313,3 @@ Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("getActorDirectoryEntryContext", Actor5e.addDirectoryContextOptions);
-
-// FIXME: This helper is needed for the vehicle sheet. It should probably be refactored.
-Handlebars.registerHelper("getProperty", function(data, property) {
-  return getProperty(data, property);
-});
