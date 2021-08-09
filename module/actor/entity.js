@@ -64,6 +64,7 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
+    this._prepareBaseAbilityScores(this.data);
     this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
       case "character":
@@ -305,6 +306,26 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
   /*  Data Preparation Helpers                    */
   /* -------------------------------------------- */
+
+  /**
+   * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
+   * @param {ActorData} actorData  Data being prepared.
+   * @private
+   */
+  _prepareBaseAbilityScores(actorData) {
+    const abilities = {};
+    for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
+      abilities[key] = actorData.data.abilities[key] ?? {
+        value: 10,
+        proficient: 0,
+        bonuses: {
+          check: "",
+          save: ""
+        }
+      }
+    }
+    actorData.data.abilities = abilities;
+  }
 
   /**
    * Perform any Character specific preparation.
