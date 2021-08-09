@@ -105,7 +105,6 @@
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
             {{#each data.abilities as |ability id|}}
-            {{#if ability.enabled}}
                 <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
@@ -117,7 +116,6 @@
                     </div>
                     <a class="config-button" data-action="ability" title="{{localize 'DND5E.AbilityConfigure'}}"><i class="fas fa-cog"></i></a>
                 </li>
-            {{/if}}
             {{/each}}
             </ul>
 
