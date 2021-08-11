@@ -139,11 +139,6 @@ export default class ActorSheet5e extends ActorSheet {
     // Prepare warnings
     data.warnings = this.actor._preparationWarnings;
 
-    // Prepare property attributions
-    this.attribution = {
-      "attributes.ac": this._prepareArmorClassAttribution(actorData.data)
-    };
-
     // Return data to the sheet
     return data
   }
@@ -204,6 +199,30 @@ export default class ActorSheet5e extends ActorSheet {
     }
     if ( !!senses.special ) tags["special"] = senses.special;
     return tags;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Break down all of the Active Effects affecting a given target property.
+   * @param {string} target  The data property being targeted.
+   * @return {AttributionDescription[]}
+   * @protected
+   */
+  _prepareActiveEffectAttributions(target) {
+    return this.actor.effects.reduce((arr, e) => {
+      let source = e.sourceName;
+      if ( e.data.origin === this.actor.uuid ) source = e.data.label;
+      if ( !source ) return arr;
+      const value = e.data.changes.reduce((n, change) => {
+        if ( (change.key !== target) || !Number.isNumeric(change.value) ) return n;
+        if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
+        return n + Number(change.value);
+      }, 0);
+      if ( !value ) return arr;
+      arr.push({value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD});
+      return arr;
+    }, []);
   }
 
   /* -------------------------------------------- */
@@ -286,11 +305,7 @@ export default class ActorSheet5e extends ActorSheet {
     });
 
     // Bonus
-    if ( ac.bonus !== 0 ) attribution.push({
-      label: game.i18n.localize("DND5E.Bonus"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: ac.bonus
-    });
+    if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("data.attributes.ac.bonus"));
 
     // Cover
     if ( ac.cover !== 0 ) attribution.push({
@@ -949,9 +964,14 @@ export default class ActorSheet5e extends ActorSheet {
   async _onPropertyAttribution(event) {
     const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
-    if ( existingTooltip || !property || !this.attribution ) return;
-
-    let html = await new PropertyAttribution(this.object, this.attribution, property).renderTooltip();
+    if ( existingTooltip || !property ) return;
+    const data = this.actor.data.data;
+    let attributions;
+    switch ( property ) {
+      case "attributes.ac": attributions = this._prepareArmorClassAttribution(data); break;
+    }
+    if ( !attributions ) return;
+    const html = await new PropertyAttribution(this.actor, attributions, property).renderTooltip();
     event.currentTarget.insertAdjacentElement("beforeend", html[0]);
   }
 
