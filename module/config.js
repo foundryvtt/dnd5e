@@ -393,7 +393,6 @@ DND5E.armorTypes = {
  * @type {Object}
  */
 DND5E.equipmentTypes = {
-  "bonus": "DND5E.EquipmentBonus",
   "clothing": "DND5E.EquipmentClothing",
   "trinket": "DND5E.EquipmentTrinket",
   "vehicle": "DND5E.EquipmentVehicle",

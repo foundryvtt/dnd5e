@@ -79,14 +79,16 @@
             {{/unless}}
 
             {{!-- Armor Class --}}
+            {{#if hasAC}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ArmorClass" }}</label>
                 <div class="form-fields">
                    <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
                 </div>
             </div>
+            {{/if}}
 
-            {{#unless isMountable}}
+            {{#if isArmor}}
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
@@ -108,7 +110,7 @@
                 <label>{{ localize "DND5E.ItemEquipmentStealthDisav" }}</label>
                 <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
             </div>
-            {{/unless}}
+            {{/if}}
 
             {{#if isMountable}}
             {{> 'systems/dnd5e/templates/items/parts/item-mountable.html'}}
