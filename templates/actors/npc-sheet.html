@@ -134,30 +134,38 @@
 
             <section class="center-pane flexcol">
 
-                {{!-- Legendary Actions --}}
+                {{!-- Legendary/Mythic Actions --}}
                 <div class="counters">
                     <div class="counter flexrow legendary">
                         <h4>{{ localize "DND5E.LegAct" }}</h4>
                         <div class="counter-value">
-                            <input name="data.resources.legact.value" type="number" value="{{data.resources.legact.value}}" placeholder="0"/>
+                            <input name="data.resources.legact.value" type="number" value="{{data.resources.legact.value}}" placeholder="0">
                             <span class="sep">/</span>
-                            <input name="data.resources.legact.max" type="number" value="{{data.resources.legact.max}}" placeholder="0"/>
+                            <input name="data.resources.legact.max" type="number" value="{{data.resources.legact.max}}" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="counter flexrow legendary">
+                        <h4>{{ localize "DND5E.MythAct" }}</h4>
+                        <div class="counter-value">
+                            <input name="data.resources.mythact.value" type="number" value="{{data.resources.mythact.value}}" placeholder="0">
+                            <span class="sep">/</span>
+                            <input name="data.resources.mythact.max" type="number" value="{{data.resources.mythact.max}}" placeholder="0">
                         </div>
                     </div>
                     <div class="counter flexrow legendary">
                         <h4>{{ localize "DND5E.LegRes" }}</h4>
                         <div class="counter-value">
-                            <input name="data.resources.legres.value" type="number" value="{{data.resources.legres.value}}" placeholder="0"/>
+                            <input name="data.resources.legres.value" type="number" value="{{data.resources.legres.value}}" placeholder="0">
                             <span class="sep">/</span>
-                            <input name="data.resources.legres.max" type="number" value="{{data.resources.legres.max}}" placeholder="0"/>
+                            <input name="data.resources.legres.max" type="number" value="{{data.resources.legres.max}}" placeholder="0">
                         </div>
                     </div>
                     <div class="counter flexrow lair">
                         <h4>{{ localize "DND5E.LairAct" }}</h4>
                         <div class="counter-value">
                             <input name="data.resources.lair.value" type="checkbox" value="{{data.resources.lair.value}}"
-                                   data-dtype="Boolean" {{checked data.resources.lair.value}}/>
-                            <input name="data.resources.lair.initiative" type="number" value="{{data.resources.lair.initiative}}" placeholder="20"/>
+                                   data-dtype="Boolean" {{checked data.resources.lair.value}}>
+                            <input name="data.resources.lair.initiative" type="number" value="{{data.resources.lair.initiative}}" placeholder="20">
                         </div>
                     </div>
                 </div>
