@@ -179,6 +179,7 @@ export default class Item5e extends Item {
     else if ( itemData.type === "feat" ) {
       const act = data.activation;
       if ( act && (act.type === C.abilityActivationTypes.legendary) ) labels.featType = game.i18n.localize("DND5E.LegendaryActionLabel");
+      else if ( act && (act.type === C.abilityActivationTypes.mythic) ) labels.featType = game.i18n.localize("DND5E.MythicActionLabel");
       else if ( act && (act.type === C.abilityActivationTypes.lair) ) labels.featType = game.i18n.localize("DND5E.LairActionLabel");
       else if ( act && act.type ) labels.featType = game.i18n.localize(data.damage.length ? "DND5E.Attack" : "DND5E.Action");
       else labels.featType = game.i18n.localize("DND5E.Passive");
