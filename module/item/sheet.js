@@ -71,7 +71,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.isMountable = this._isItemMountable(itemData);
 
     // Armor Class
-    data.isArmor = itemData.data.armor?.type in data.config.armorTypes;
+    data.isArmor = this.item.isArmor;
     data.isShield = itemData.data.armor?.type === "shield";
     data.hasAC = data.isArmor || data.isMountable;
 
@@ -198,7 +198,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     else if ( item.type === "equipment" ) {
       props.push(CONFIG.DND5E.equipmentTypes[item.data.armor.type]);
-      props.push(labels.armor);
+      if ( this.item.isArmor || this._isItemMountable(item) ) props.push(labels.armor);
     }
 
     else if ( item.type === "feat" ) {
