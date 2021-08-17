@@ -70,6 +70,10 @@ export default class ItemSheet5e extends ItemSheet {
     data.isCrewed = itemData.data.activation?.type === 'crew';
     data.isMountable = this._isItemMountable(itemData);
 
+    // Armor Class
+    data.isArmor = itemData.data.armor?.type in data.config.armorTypes;
+    data.hasAC = data.isArmor || data.isMountable;
+
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 

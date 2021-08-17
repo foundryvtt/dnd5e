@@ -19,7 +19,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Prepare template data
     const templateData = {
       t: templateShape,
-      user: game.user._id,
+      user: game.user.id,
       distance: target.value,
       direction: 0,
       x: 0,
@@ -97,7 +97,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
     // Cancel the workflow (right-click)
     handlers.rc = event => {
-      this.layer.preview.removeChildren();
+      this.layer._onDragLeftCancel(event);
       canvas.stage.off("mousemove", handlers.mm);
       canvas.stage.off("mousedown", handlers.lc);
       canvas.app.view.oncontextmenu = null;
