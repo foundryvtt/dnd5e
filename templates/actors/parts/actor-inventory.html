@@ -8,7 +8,7 @@
             </a>
         </h3>
         {{#each data.currency as |v k|}}
-        <label class="denomination {{k}}">{{ lookup ../labels.currency k }}</label>
+        <label class="denomination {{k}}">{{ lookup ../labels.currencies k }}</label>
         <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>

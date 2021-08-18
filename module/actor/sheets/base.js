@@ -103,7 +103,7 @@ export default class ActorSheet5e extends ActorSheet {
     data.filters = this._filters;
 
     // Currency Labels
-    data.labels.currency = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+    data.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
       obj[k] = c.label;
       return obj;
     }, {});
