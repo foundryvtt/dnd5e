@@ -147,12 +147,12 @@ export default class Actor5e extends Actor {
     for (let [id, abl] of Object.entries(data.abilities)) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.profTerm = Actor5e.proficiencyTerm(abl.proficient || 0, data.attributes.prof, !["dex", "str"].includes(id));
+      abl.profTerm = Actor5e.proficiencyTerm(abl.proficient || 0, data.attributes.prof);
       const saveBonusAbl = Number.isNumeric(abl.bonuses?.save) ? parseInt(abl.bonuses.save) : 0;
       abl.saveBonus = saveBonusAbl + saveBonus;
       const checkBonusAbl = Number.isNumeric(abl.bonuses?.check) ? parseInt(abl.bonuses.check) : 0;
       abl.checkBonus = checkBonusAbl + checkBonus;
-      abl.save = abl.mod + abl.prof + abl.saveBonus;
+      abl.save = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.profTerm) ) abl.save += Number.parseInt(abl.profTerm);
       abl.dc = 8 + abl.mod + data.attributes.prof + dcBonus;
 
