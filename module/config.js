@@ -536,41 +536,39 @@ DND5E.consumableTypes = {
 /* -------------------------------------------- */
 
 /**
- * The valid currency denominations supported by the 5e system
- * @enum {string}
+ * The valid currency denominations with localized labels, abbreviations, and conversions.
+ * @enum {{
+ *   label: string,
+ *   abbreviation: string,
+ *   [conversion]: {into: string, each: number}
+ * }}
  */
 DND5E.currencies = {
-  pp: "DND5E.CurrencyPP",
-  gp: "DND5E.CurrencyGP",
-  ep: "DND5E.CurrencyEP",
-  sp: "DND5E.CurrencySP",
-  cp: "DND5E.CurrencyCP",
-};
-
-
-/**
- * Abbreviations of the currencies.
- * @enum {string}
- */
-DND5E.currencyAbbr = {
-  pp: "DND5E.CurrencyAbbrPP",
-  gp: "DND5E.CurrencyAbbrGP",
-  ep: "DND5E.CurrencyAbbrEP",
-  sp: "DND5E.CurrencyAbbrSP",
-  cp: "DND5E.CurrencyAbbrCP",
-};
-
-
-/**
- * Define the upwards-conversion rules for registered currency types
- * @type {{string, object}}
- */
-DND5E.currencyConversion = {
-  cp: {into: "sp", each: 10},
-  sp: {into: "ep", each: 5 },
-  ep: {into: "gp", each: 2 },
-  gp: {into: "pp", each: 10}
-};
+  pp: {
+    label: "DND5E.CurrencyPP",
+    abbreviation: "DND5E.CurrencyAbbrPP",
+  },
+  gp: {
+    label: "DND5E.CurrencyGP",
+    abbreviation: "DND5E.CurrencyAbbrGP",
+    conversion: {into: "pp", each: 10}
+  },
+  ep: {
+    label: "DND5E.CurrencyEP",
+    abbreviation: "DND5E.CurrencyAbbrEP",
+    conversion: {into: "gp", each: 2}
+  },
+  sp: {
+    label: "DND5E.CurrencySP",
+    abbreviation: "DND5E.CurrencyAbbrSP",
+    conversion: {into: "ep", each: 5}
+  },
+  cp: {
+    label: "DND5E.CurrencyCP",
+    abbreviation: "DND5E.CurrencyAbbrCP",
+    conversion: {into: "sp", each: 10}
+  },
+}
 
 /* -------------------------------------------- */
 
