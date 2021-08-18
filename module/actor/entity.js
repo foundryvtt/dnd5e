@@ -59,7 +59,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} roundDown  Whether half proficiency should round down or up.
    * @return {string}
    */
-  static proficiencyModifier(proficient, value, roundDown=true) {
+  static proficiencyTerm(proficient, value, roundDown=true) {
     if ( !proficient || !value ) return 0;
 
     // Proficiency dice
@@ -147,12 +147,13 @@ export default class Actor5e extends Actor {
     for (let [id, abl] of Object.entries(data.abilities)) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
-      abl.prof = (abl.proficient || 0) * data.attributes.prof;
+      abl.profTerm = Actor5e.proficiencyTerm(abl.proficient || 0, data.attributes.prof, !["dex", "str"].includes(id));
       const saveBonusAbl = Number.isNumeric(abl.bonuses?.save) ? parseInt(abl.bonuses.save) : 0;
       abl.saveBonus = saveBonusAbl + saveBonus;
       const checkBonusAbl = Number.isNumeric(abl.bonuses?.check) ? parseInt(abl.bonuses.check) : 0;
       abl.checkBonus = checkBonusAbl + checkBonus;
       abl.save = abl.mod + abl.prof + abl.saveBonus;
+      if ( Number.isNumeric(abl.profTerm) ) abl.save += Number.parseInt(abl.profTerm);
       abl.dc = 8 + abl.mod + data.attributes.prof + dcBonus;
 
       // If we merged saves when transforming, take the highest bonus here.
@@ -175,13 +176,11 @@ export default class Actor5e extends Actor {
     const athlete = flags.remarkableAthlete;
     const joat = flags.jackOfAllTrades;
     init.mod = data.abilities.dex.mod;
-    if ( athlete ) init.prof = Math.ceil(0.5 * data.attributes.prof);
-    else if ( joat ) init.prof = Math.floor(0.5 * data.attributes.prof);
-    else init.prof = 0;
-    init.profRoll = (joat || athlete) ? Actor5e.proficiencyModifier(0.5, data.attributes.prof, !athlete) : 0;
+    init.profTerm = (joat || athlete) ? Actor5e.proficiencyTerm(0.5, data.attributes.prof, !athlete) : 0;
     init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
-    init.total = init.mod + init.prof + init.bonus;
+    init.total = init.mod + init.bonus;
+    if ( Number.isNumeric(init.profTerm) ) init.total += Number.parseInt(init.profTerm);
 
     // Cache labels
     this.labels = {};
@@ -415,23 +414,26 @@ export default class Actor5e extends Actor {
 
     // Skill modifiers
     const feats = DND5E.characterFlags;
-    const athlete = flags.remarkableAthlete;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
     const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
+<<<<<<< HEAD
       const baseBonus = Number.isNumeric(skl.bonuses?.check) ? parseInt(skl.bonuses.check) : 0;
       let round = Math.floor;
+=======
+      let roundDown = true;
+>>>>>>> 450670b (Make it clearer when prof can only be a number and when it is a dice term)
 
-      // Remarkable
-      if ( athlete && (skl.value < 0.5) && feats.remarkableAthlete.abilities.includes(skl.ability) ) {
+      // Remarkable Athlete
+      if ( this._isRemarkableAthlete(skl.ability) && (skl.value < 0.5) ) {
         skl.value = 0.5;
-        round = Math.ceil;
+        roundDown = false;
       }
 
       // Jack of All Trades
-      if ( joat && (skl.value < 0.5) ) {
+      else if ( joat && (skl.value < 0.5) ) {
         skl.value = 0.5;
       }
 
@@ -443,9 +445,10 @@ export default class Actor5e extends Actor {
       // Compute modifier
       skl.bonus = baseBonus + checkBonus + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = round(skl.value * data.attributes.prof);
+      skl.profTerm = Actor5e.proficiencyTerm(skl.value, data.attributes.prof, roundDown);
       skl.proficient = skl.value;
-      skl.total = skl.mod + skl.prof + skl.bonus;
+      skl.total = skl.mod + skl.bonus;
+      if ( Number.isNumeric(skl.profTerm) ) skl.total += Number.parseInt(skl.profTerm);
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
@@ -851,9 +854,9 @@ export default class Actor5e extends Actor {
     const data = {mod: skl.mod};
 
     // Include proficiency bonus
-    if ( skl.prof > 0 ) {
+    if ( skl.profTerm !== 0 ) {
+      data.prof = skl.profTerm;
       parts.push("@prof");
-      data.prof = Actor5e.proficiencyModifier(skl.proficient, this.data.data.attributes.prof, !this._isRemarkableAthlete(skl.ability));
     }
 
     // Ability test bonus
@@ -952,7 +955,7 @@ export default class Actor5e extends Actor {
     const feats = this.data.flags.dnd5e || {};
     if ( feats.jackOfAllTrades || this._isRemarkableAthlete(abilityId) ) {
       parts.push("@prof");
-      data.prof = Actor5e.proficiencyModifier(0.5, this.data.data.attributes.prof, !this._isRemarkableAthlete(abilityId));
+      data.prof = Actor5e.proficiencyTerm(0.5, this.data.data.attributes.prof, !this._isRemarkableAthlete(abilityId));
     }
 
     // Add ability-specific check bonus
@@ -1006,9 +1009,9 @@ export default class Actor5e extends Actor {
     const data = {mod: abl.mod};
 
     // Include proficiency bonus
-    if ( abl.prof > 0 ) {
+    if ( abl.profTerm !== 0 ) {
       parts.push("@prof");
-      data.prof = Actor5e.proficiencyModifier(abl.proficient, this.data.data.attributes.prof);
+      data.prof = abl.profTerm;
     }
 
     // Include ability-specific saving throw bonus
@@ -1068,7 +1071,7 @@ export default class Actor5e extends Actor {
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
       parts.push("@prof");
-      data.prof = Actor5e.proficiencyModifier(1, this.data.data.attributes.prof);
+      data.prof = Actor5e.proficiencyTerm(1, this.data.data.attributes.prof);
     }
 
     // Include a global actor ability save bonus

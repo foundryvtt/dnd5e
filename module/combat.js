@@ -18,7 +18,12 @@ export const _getInitiativeFormula = function() {
     nd = 2;
     mods += "kh";
   }
-  const parts = [`${nd}d20${mods}`, init.mod, (init.profRoll !== 0) ? init.profRoll : null, (init.bonus !== 0) ? init.bonus : null];
+  const parts = [
+    `${nd}d20${mods}`,
+    init.mod,
+    (init.profTerm !== 0) ? init.profTerm : null,
+    (init.bonus !== 0) ? init.bonus : null
+  ];
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");

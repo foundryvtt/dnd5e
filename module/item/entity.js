@@ -1215,7 +1215,7 @@ export default class Item5e extends Item {
 
     // Include a proficiency score
     const proficient = foundry.utils.getProperty(rollData, "item.proficient") ?? true;
-    rollData["prof"] = Actor5e.proficiencyModifier(Number(proficient), rollData.attributes.prof);
+    rollData["prof"] = Actor5e.proficiencyTerm(Number(proficient), rollData.attributes.prof);
 
     return rollData;
   }
