@@ -143,7 +143,7 @@ Hooks.once("setup", function() {
   // Localize CONFIG objects once up-front
   const toLocalize = [
     "abilities", "abilityAbbreviations", "abilityActivationTypes", "abilityConsumptionTypes", "actorSizes", "alignments",
-    "armorClasses", "armorProficiencies", "armorTypes", "conditionTypes", "consumableTypes", "cover", "currencies",
+    "armorClasses", "armorProficiencies", "armorTypes", "conditionTypes", "consumableTypes", "cover",
     "damageResistanceTypes", "damageTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes", "itemRarity",
     "languages", "limitedUsePeriods", "miscEquipmentTypes", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels",
     "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools", "targetTypes",
@@ -152,7 +152,7 @@ Hooks.once("setup", function() {
 
   // Exclude some from sorting where the default order matters
   const noSort = [
-    "abilities", "alignments", "armorClasses", "armorProficiencies", "armorTypes", "currencies", "distanceUnits", "movementUnits",
+    "abilities", "alignments", "armorClasses", "armorProficiencies", "armorTypes", "distanceUnits", "movementUnits",
     "itemActionTypes", "itemRarity", "proficiencyLevels", "limitedUsePeriods", "spellComponents", "spellLevels",
     "spellPreparationModes", "weaponProficiencies", "weaponTypes"
   ];
@@ -171,6 +171,12 @@ Hooks.once("setup", function() {
       obj[e[0]] = e[1];
       return obj;
     }, {});
+  }
+
+  // Localize currencies
+  for ( const c of Object.values(DND5E.currencies) ) {
+    c.label = game.i18n.localize(c.label);
+    c.abbreviation = game.i18n.localize(c.abbreviation);
   }
 });
 
