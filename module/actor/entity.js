@@ -1471,8 +1471,11 @@ export default class Actor5e extends Actor {
    */
   convertCurrency() {
     const curr = foundry.utils.deepClone(this.data.data.currency);
-    const convert = CONFIG.DND5E.currencyConversion;
-    for ( let [c, t] of Object.entries(convert) ) {
+    const conversion = Object.entries(CONFIG.DND5E.currencies);
+    conversion.reverse();
+    for ( let [c, data] of conversion ) {
+      const t = data.conversion;
+      if ( !t ) continue;
       let change = Math.floor(curr[c] / t.each);
       curr[c] -= (change * t.each);
       curr[t.into] += change;

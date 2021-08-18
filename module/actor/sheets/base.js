@@ -102,6 +102,12 @@ export default class ActorSheet5e extends ActorSheet {
     data.labels = this.actor.labels || {};
     data.filters = this._filters;
 
+    // Currency Labels
+    data.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+      obj[k] = c.label;
+      return obj;
+    }, {});
+
     // Ability Scores
     for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
