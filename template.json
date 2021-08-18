@@ -531,7 +531,7 @@
         "value": null,
         "dex": null
       },
-      "baseEquipment": "",
+      "baseItem": "",
       "speed": {
         "value": null,
         "conditions": ""
@@ -554,7 +554,7 @@
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
       "toolType": "",
-      "baseTool": "",
+      "baseItem": "",
       "ability": "int",
       "chatFlavor": "",
       "proficient": 0
@@ -589,7 +589,7 @@
     "weapon": {
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
-      "baseWeapon": "",
+      "baseItem": "",
       "properties": {},
       "proficient": true
     }
