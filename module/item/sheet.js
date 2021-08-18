@@ -51,6 +51,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
     data.itemStatus = this._getItemStatus(itemData);
     data.itemProperties = this._getItemProperties(itemData);
+    data.baseItems = await this._getItemBaseTypes(itemData);
     data.isPhysical = itemData.data.hasOwnProperty("quantity");
 
     // Potential consumption targets
@@ -81,6 +82,35 @@ export default class ItemSheet5e extends ItemSheet {
     data.item = itemData;
     data.data = itemData.data;
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the base weapons and tools based on the selected type.
+   *
+   * @param {Object} item         Item data for the item being displayed
+   * @return {Promise.<object>}   Object with base items for this type formatted for selectOptions.
+   * @protected
+   */
+  async _getItemBaseTypes(item) {
+    const type = item.type === "equipment" ? "armor" : item.type;
+    const ids = CONFIG.DND5E[`${type}Ids`];
+    if ( ids === undefined ) return {};
+
+    const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
+    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
+    const baseType = foundry.utils.getProperty(item.data, typeProperty);
+
+    const items = await Object.entries(ids).reduce(async (acc, [name, id]) => {
+      const baseItem = await pack.getDocument(id);
+      const obj = await acc;
+      if ( baseType !== foundry.utils.getProperty(baseItem.data.data, typeProperty) ) return obj;
+      obj[name] = baseItem.name;
+      return obj;
+    }, {});
+
+    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
   }
 
   /* -------------------------------------------- */
