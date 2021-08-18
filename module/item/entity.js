@@ -142,6 +142,16 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Is this item any of the armor subtypes.
+   * @type {boolean}
+   */
+  get isArmor() {
+    return this.data.data.armor?.type in CONFIG.DND5E.armorTypes;
+  }
+
+  /* -------------------------------------------- */
   /*	Data Preparation														*/
   /* -------------------------------------------- */
 
