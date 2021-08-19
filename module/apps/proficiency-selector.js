@@ -60,6 +60,9 @@ export default class ProficiencySelector extends TraitSelector {
       return obj;
     }, {});
 
+    // Preload incides
+    await ProficiencySelector._packIndices();
+
     const ids = CONFIG.DND5E[`${type}Ids`];
     const map = CONFIG.DND5E[`${type}ProficienciesMap`];
     if ( ids !== undefined ) {
@@ -121,7 +124,7 @@ export default class ProficiencySelector extends TraitSelector {
     if ( scope && collection ) pack = `${scope}.${collection}`;
     if ( !id ) id = identifier;
 
-    if ( ProficiencySelector._cacheedIndices && !fullItem ) {
+    if ( ProficiencySelector._cachedIndices && !fullItem ) {
       return ProficiencySelector._cachedIndices[pack]?.get(id);
     } else if ( indexOnly ) {
       return game.packs.get(pack)?.index.get(id);
