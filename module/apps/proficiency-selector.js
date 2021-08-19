@@ -7,6 +7,14 @@ import TraitSelector from "./trait-selector.js";
  */
 export default class ProficiencySelector extends TraitSelector {
 
+  /**
+   * Cached version of the base items compendia indices with the needed subtype fields.
+   * @type {object}
+   */
+  static _cachedIndices;
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -114,9 +122,39 @@ export default class ProficiencySelector extends TraitSelector {
 
     if ( indexOnly ) {
       return game.packs.get(pack)?.index.get(id);
+    } else if ( ProficiencySelector._cachedIndices ) {
+      return ProficiencySelector._cachedIndices[pack]?.get(id);
     } else {
       return game.packs.get(pack)?.getDocument(id);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch indexed versions of all of the compendia containing base items with the
+   * appropriate fields saved.
+   * @return {object}
+   */
+  static async _packIndices() {
+    if ( ProficiencySelector._cachedIndices ) return ProficiencySelector._cachedIndices;
+
+    const packs = new Set([CONFIG.DND5E.sourcePacks.ITEMS]);
+    for ( const type of ["armor", "tool", "weapon"] ) {
+      for ( const id of Object.values(CONFIG.DND5E[`${type}Ids`]) ) {
+        const [scope, collection, ] = id.split(".");
+        if ( scope && collection ) packs.add(`${scope}.${collection}`);
+      }
+    }
+    const indices = {};
+    for ( const packName of Array.from(packs) ) {
+      const pack = game.packs.get(packName);
+      const idx = await pack.getIndex({fields: ["data.armor.type", "data.toolType", "data.weaponType"]});
+      indices[packName] = idx;
+    }
+
+    ProficiencySelector._cachedIndices = indices;
+    return indices;
   }
 
   /* -------------------------------------------- */
