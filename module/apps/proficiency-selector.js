@@ -44,10 +44,9 @@ export default class ProficiencySelector extends TraitSelector {
    *
    * @param {string} type               Proficiency type to select, either `armor`, `tool`, or `weapon`.
    * @param {string[]} [chosen]         Optional list of items to be marked as chosen.
-   * @param {boolean} [sortCategories]  Should top level categories be sorted?
    * @return {Object.<string,ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
    */
-  static async getChoices(type, chosen=[], sortCategories=false) {
+  static async getChoices(type, chosen=[]) {
     let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
       obj[key] = { label: label, chosen: chosen.includes(key) };
       return obj;
@@ -83,9 +82,9 @@ export default class ProficiencySelector extends TraitSelector {
         obj[key] = { label: label, chosen: chosen.includes(key) };
         return obj;
       }, {});
+      data = ProficiencySelector._sortObject(data);
     }
 
-    if ( sortCategories ) data = ProficiencySelector._sortObject(data);
     for ( const category of Object.values(data) ) {
       if ( !category.children ) continue;
       category.children = ProficiencySelector._sortObject(category.children);
