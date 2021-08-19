@@ -1363,11 +1363,14 @@ export default class Item5e extends Item {
       case "equipment":
         updates = this._onCreateOwnedEquipment(data, actorData, isNPC);
         break;
-      case "weapon":
-        updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
-        break;
       case "spell":
         updates = this._onCreateOwnedSpell(data, actorData, isNPC);
+        break;
+      case "tool":
+        updates = this._onCreateOwnedTool(data, actorData, isNPC);
+        break;
+      case "weapon":
+        updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
         break;
     }
     if (updates) return this.data.update(updates);
@@ -1438,7 +1441,12 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned equipment type Items
+   * Pre-creation logic for the automatic configuration of owned equipment type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedEquipment(data, actorData, isNPC) {
@@ -1452,7 +1460,7 @@ export default class Item5e extends Item {
       } else {
         const armorProf = CONFIG.DND5E.armorProficienciesMap[data.data?.armor?.type]; // Player characters check proficiency
         const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
-        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf);
+        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf) || actorArmorProfs.includes(data.data.baseItem);
       }
     }
     return updates;
@@ -1461,7 +1469,12 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned spell type Items
+   * Pre-creation logic for the automatic configuration of owned spell type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedSpell(data, actorData, isNPC) {
@@ -1475,7 +1488,37 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned weapon type Items
+   * Pre-creation logic for the automatic configuration of owned tool type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
+   * @private
+   */
+  _onCreateOwnedTool(data, actorData, isNPC) {
+    const updates = {};
+    if ( data.data?.proficient === undefined ) {
+      if ( isNPC ) {
+        updates["data.proficient"] = 1;
+      } else {
+        const actorToolProfs = actorData.data.traits?.toolProf?.value;
+        const proficient = actorToolProfs.includes(data.data?.toolType) || actorToolProfs.includes(data.data?.baseItem);
+        updates["data.proficient"] = Number(proficient);
+      }
+    }
+    return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for the automatic configuration of owned weapon type Items.
+   *
+   * @param {object} data       Data for the newly created item.
+   * @param {object} actorData  Data for the actor to which the item is being added.
+   * @param {boolean} isNPC     Is this actor an NPC?
+   * @return {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedWeapon(data, actorData, isNPC) {
@@ -1489,7 +1532,7 @@ export default class Item5e extends Item {
       } else {
         const weaponProf = CONFIG.DND5E.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
         const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
-        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf) || actorWeaponProfs.includes(data.data.baseItem);
       }
     }
     return updates;
