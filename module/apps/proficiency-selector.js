@@ -110,20 +110,21 @@ export default class ProficiencySelector extends TraitSelector {
    *
    * @param {string} identifier            Simple ID or compendium name and ID separated by a dot.
    * @param {object} [options]             
-   * @param {boolean} [options.indexOnly]  If set to true, only the index data will be fetched.
-   * @return {Promise<Document>|object}    Promise for a `Document` if `options.indexOnly` is false, else a simple
-   *                                       object containing the minimal index data.
+   * @param {boolean} [options.indexOnly]  If set to true, only the index data will be fetched (will never return Promise).
+   * @param {boolean} [options.fullItem]   If set to true, the full item will be returned as long as `indexOnly` is false.
+   * @return {Promise<Item5e>|object}      Promise for a `Document` if `indexOnly` is false & `fullItem` is true,
+   *                                       otherwise else a simple object containing the minimal index data.
    */
-  static getBaseItem(identifier, { indexOnly = false }={}) {
+  static getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
     let pack = CONFIG.DND5E.sourcePacks.ITEMS;
     let [scope, collection, id] = identifier.split(".");
     if ( scope && collection ) pack = `${scope}.${collection}`;
     if ( !id ) id = identifier;
 
-    if ( indexOnly ) {
-      return game.packs.get(pack)?.index.get(id);
-    } else if ( ProficiencySelector._cachedIndices ) {
+    if ( ProficiencySelector._cacheedIndices && !fullItem ) {
       return ProficiencySelector._cachedIndices[pack]?.get(id);
+    } else if ( indexOnly ) {
+      return game.packs.get(pack)?.index.get(id);
     } else {
       return game.packs.get(pack)?.getDocument(id);
     }
