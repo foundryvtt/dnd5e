@@ -169,18 +169,18 @@ Hooks.once("setup", function() {
 function preLocalizeConfig(config, localizeKeys, sortKeys) {
 
   // Localize Objects
-  for ( let key of localizeKeys ) {
+  for ( const key of localizeKeys ) {
     if ( key.includes(".") ) {
-      let [inner, label] = key.split(".");
+      const [inner, label] = key.split(".");
       _localizeObject(config[inner], label);
     }
     else _localizeObject(config[key]);
   }
 
   // Sort objects
-  for ( let key of sortKeys ) {
+  for ( const key of sortKeys ) {
     if ( key.includes(".") ) {
-      let [configKey, sortKey] = key.split(".");
+      const [configKey, sortKey] = key.split(".");
       config[configKey] = _sortObject(config[configKey], sortKey);
     }
     else config[key] = _sortObject(config[key]);
@@ -196,7 +196,7 @@ function preLocalizeConfig(config, localizeKeys, sortKeys) {
  * @private
  */
 function _localizeObject(obj, key) {
-  for ( let [k, v] of Object.entries(obj) ) {
+  for ( const [k, v] of Object.entries(obj) ) {
 
     // String directly
     if ( typeof v === "string" ) {
@@ -222,7 +222,7 @@ function _localizeObject(obj, key) {
  * @returns {{[p: string]: any}}      The sorted configuration object
  */
 function _sortObject(obj, sortKey) {
-  let sorted = Array.from(Object.entries(obj));
+  let sorted = Object.entries(obj);
   if ( sortKey ) sorted = sorted.sort((a, b) => a[1][sortKey].localeCompare(b[1][sortKey]));
   else sorted = sorted.sort((a, b) => a[1].localeCompare(b[1]));
   return Object.fromEntries(sorted);
