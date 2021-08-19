@@ -1460,7 +1460,7 @@ export default class Item5e extends Item {
       } else {
         const armorProf = CONFIG.DND5E.armorProficienciesMap[data.data?.armor?.type]; // Player characters check proficiency
         const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
-        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf);
+        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf) || actorArmorProfs.includes(data.data.baseItem);
       }
     }
     return updates;
@@ -1503,7 +1503,8 @@ export default class Item5e extends Item {
         updates["data.proficient"] = 1;
       } else {
         const actorToolProfs = actorData.data.traits?.toolProf?.value;
-        updates["data.proficient"] = actorToolProfs.includes(data.data?.toolType) ? 1 : 0;
+        const proficient = actorToolProfs.includes(data.data?.toolType) || actorToolProfs.includes(data.data?.baseItem);
+        updates["data.proficient"] = Number(proficient);
       }
     }
     return updates;
@@ -1531,7 +1532,7 @@ export default class Item5e extends Item {
       } else {
         const weaponProf = CONFIG.DND5E.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
         const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
-        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf);
+        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf) || actorWeaponProfs.includes(data.data.baseItem);
       }
     }
     return updates;
