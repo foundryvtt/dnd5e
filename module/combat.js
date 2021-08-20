@@ -21,7 +21,7 @@ export const _getInitiativeFormula = function() {
   const parts = [
     `${nd}d20${mods}`,
     init.mod,
-    (init.profTerm !== 0) ? init.profTerm : null,
+    (init.prof.term !== "0") ? init.prof.term : null,
     (init.bonus !== 0) ? init.bonus : null
   ];
 

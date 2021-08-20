@@ -254,6 +254,13 @@ export default class Item5e extends Item {
    * Compute item attributes which might depend on prepared actor data.
    */
   prepareFinalAttributes() {
+    // Proficiency
+    if ( this.isOwned ) {
+      this.data.data.prof = Actor5e.proficiencyDescription(
+        Number(this.actor.data.data.prof), Number(this.data.data.proficient ?? 1)
+      );
+    }
+
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Saving throws
       this.getSaveDC();
@@ -355,6 +362,9 @@ export default class Item5e extends Item {
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
     if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
       parts.push("@prof");
+      if ( this.data.data.prof && (this.data.data.prof.term !== "0") ) {
+        rollData.prof = this.data.data.prof.term;
+      }
     }
 
     // Actor-level global bonus to attack rolls
@@ -1159,8 +1169,14 @@ export default class Item5e extends Item {
 
     // Prepare roll data
     let rollData = this.getRollData();
-    const parts = [`@mod`, "@prof"];
+    const parts = [`@mod`];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
+
+    // Add proficiency
+    if ( this.data.data.prof && (this.data.data.prof.term !== "0") ) {
+      parts.push("@prof");
+      rollData.prof = this.data.data.prof.term;
+    }
 
     // Add global actor bonus
     const bonuses = getProperty(this.actor.data.data, "bonuses.abilities") || {};
@@ -1212,10 +1228,6 @@ export default class Item5e extends Item {
       }
       rollData["mod"] = ability?.mod || 0;
     }
-
-    // Include a proficiency score
-    const proficient = foundry.utils.getProperty(rollData, "item.proficient") ?? true;
-    rollData["prof"] = Actor5e.proficiencyTerm(Number(proficient), rollData.attributes.prof);
 
     return rollData;
   }

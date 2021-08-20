@@ -992,6 +992,15 @@ DND5E.proficiencyLevels = {
   2: "DND5E.Expertise"
 };
 
+/**
+ * Rounding direction for proficiencies.
+ * @enum {{ method: function, term: string }}
+ */
+DND5E.rounding = {
+  UP: { method: Math.ceil, term: "ceil" },
+  DOWN: { method: Math.floor, term: "floor" }
+};
+
 /* -------------------------------------------- */
 
 /**
