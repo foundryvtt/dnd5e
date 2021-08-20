@@ -229,8 +229,8 @@ export async function damageRoll({
     critical: isCritical,
     criticalBonusDice,
     criticalMultiplier,
-    multiplyNumeric,
-    powerfulCritical
+    multiplyNumeric: multiplyNumeric ?? game.settings.get("dnd5e", "criticalDamageModifiers"),
+    powerfulCritical: powerfulCritical ?? game.settings.get("dnd5e", "criticalDamageMaxDice")
   });
 
   // Prompt a Dialog to further configure the DamageRoll
