@@ -40,11 +40,10 @@
 <div class="form-group">
     <label>{{ localize "DND5E.ItemCritThreshold" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.critical.threshold" placeholder="20" value="{{data.critical.threshold}}">
+        <input type="number" name="data.critical.threshold" placeholder="20" value="{{data.critical.threshold}}">
     </div>
 </div>
 {{/if}}
-
 
 {{!-- Critical Hit Damage --}}
 {{#if hasAttackRoll }}

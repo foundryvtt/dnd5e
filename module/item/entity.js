@@ -403,27 +403,29 @@ export default class Item5e extends Item {
    * - item entity's actor (if it has one)
    * - the constant '20'
    *
-   * @returns {Optional[Number]} the minimum value that must be rolled to be considered a critical hit.
+   * @returns {number} the minimum value that must be rolled to be considered a critical hit.
    */
   getCriticalThreshold() {
     const itemData = this.data.data;
     const actorFlags = this.actor.data.flags.dnd5e || {};
-    
+
     if ( !this.hasAttack || !itemData ) return;
 
+    // Get the item's critical threshold
+    let itemThreshold = itemData.critical.threshold;
+
+    // Get the actor's critical threshold
+    let actorThreshold = null;
+
     if ( this.data.type === "weapon" ) {
-      return Math.min(
-          parseInt(actorFlags.weaponCriticalThreshold) || 20,
-          parseInt(itemData.critical?.threshold) || 20,
-      );
+      actorThreshold = actorFlags.weaponCriticalThreshold;
+    }
+    if ( this.data.type === "spell" ) {
+      actorThreshold = actorFlags.spellCriticalThreshold;
     }
 
-    if ( this.data.type === "spell" ) {
-      return Math.min(
-          parseInt(actorFlags.spellCriticalThreshold) || 20,
-          parseInt(itemData.critical?.threshold) || 20,
-      );
-    }
+    // Return the lowest of the two thresholds
+    return Math.min(itemThreshold ?? 20, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
