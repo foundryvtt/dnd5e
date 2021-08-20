@@ -11,7 +11,7 @@ export default class ProficiencySelector extends TraitSelector {
    * Cached version of the base items compendia indices with the needed subtype fields.
    * @type {object}
    */
-  static _cachedIndices;
+  static _cachedIndices = {};
 
   /* -------------------------------------------- */
 
@@ -60,9 +60,6 @@ export default class ProficiencySelector extends TraitSelector {
       return obj;
     }, {});
 
-    // Preload incides
-    await ProficiencySelector._packIndices();
-
     const ids = CONFIG.DND5E[`${type}Ids`];
     const map = CONFIG.DND5E[`${type}ProficienciesMap`];
     if ( ids !== undefined ) {
@@ -71,7 +68,7 @@ export default class ProficiencySelector extends TraitSelector {
         const item = await ProficiencySelector.getBaseItem(id);
         if ( !item ) continue;
 
-        let type = foundry.utils.getProperty(item.data.data, typeProperty);
+        let type = foundry.utils.getProperty(item.data, typeProperty);
         if ( map && map[type] ) type = map[type];
         const entry = {
           label: item.name,
@@ -124,41 +121,31 @@ export default class ProficiencySelector extends TraitSelector {
     if ( scope && collection ) pack = `${scope}.${collection}`;
     if ( !id ) id = identifier;
 
-    if ( ProficiencySelector._cachedIndices && !fullItem ) {
-      return ProficiencySelector._cachedIndices[pack]?.get(id);
-    } else if ( indexOnly ) {
-      return game.packs.get(pack)?.index.get(id);
-    } else {
+    // Return extended index if cached, otherwise normal index, guaranteed to never be async.
+    if ( indexOnly ) {
+      return ProficiencySelector._cachedIndices[pack]?.get(id) ?? game.packs.get(pack)?.index.get(id);
+    }
+
+    // Full Item5e document required, always async.
+    if ( fullItem ) {
       return game.packs.get(pack)?.getDocument(id);
     }
-  }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Fetch indexed versions of all of the compendia containing base items with the
-   * appropriate fields saved.
-   * @return {object}
-   */
-  static async _packIndices() {
-    if ( ProficiencySelector._cachedIndices ) return ProficiencySelector._cachedIndices;
-
-    const packs = new Set([CONFIG.DND5E.sourcePacks.ITEMS]);
-    for ( const type of ["armor", "tool", "weapon"] ) {
-      for ( const id of Object.values(CONFIG.DND5E[`${type}Ids`]) ) {
-        const [scope, collection, ] = id.split(".");
-        if ( scope && collection ) packs.add(`${scope}.${collection}`);
-      }
-    }
-    const indices = {};
-    for ( const packName of Array.from(packs) ) {
-      const pack = game.packs.get(packName);
-      const idx = await pack.getIndex({fields: ["data.armor.type", "data.toolType", "data.weaponType"]});
-      indices[packName] = idx;
+    // Returned cached version of extended index if available.
+    if ( ProficiencySelector._cachedIndices[pack] ) {
+      return ProficiencySelector._cachedIndices[pack].get(id);
     }
 
-    ProficiencySelector._cachedIndices = indices;
-    return indices;
+    // Build the extended index and return a promise for the data
+    const packObject = game.packs.get(pack);
+    if ( !packObject ) return;
+
+    return game.packs.get(pack)?.getIndex({
+      fields: ["data.armor.type", "data.toolType", "data.weaponType"]
+    }).then(index => {
+      ProficiencySelector._cachedIndices[pack] = index;
+      return index.get(id);
+    });
   }
 
   /* -------------------------------------------- */

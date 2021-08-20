@@ -107,7 +107,7 @@ export default class ItemSheet5e extends ItemSheet {
     const items = await Object.entries(ids).reduce(async (acc, [name, id]) => {
       const baseItem = await ProficiencySelector.getBaseItem(id);
       const obj = await acc;
-      if ( baseType !== foundry.utils.getProperty(baseItem.data.data, typeProperty) ) return obj;
+      if ( baseType !== foundry.utils.getProperty(baseItem.data, typeProperty) ) return obj;
       obj[name] = baseItem.name;
       return obj;
     }, {});
