@@ -1556,7 +1556,7 @@ export default class Item5e extends Item {
     // Get scroll data
     const scrollUuid = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}.${CONFIG.DND5E.spellScrollIds[level]}`;
     const scrollItem = await fromUuid(scrollUuid);
-    const scrollData = scrollItem.data;
+    const scrollData = scrollItem.toObject();
     delete scrollData._id;
 
     // Split the scroll description into an intro paragraph and the remaining details
