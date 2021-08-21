@@ -1,3 +1,4 @@
+import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
 
@@ -104,9 +105,9 @@ export default class ItemSheet5e extends ItemSheet {
     const baseType = foundry.utils.getProperty(item.data, typeProperty);
 
     const items = await Object.entries(ids).reduce(async (acc, [name, id]) => {
-      const baseItem = await pack.getDocument(id);
+      const baseItem = await ProficiencySelector.getBaseItem(id);
       const obj = await acc;
-      if ( baseType !== foundry.utils.getProperty(baseItem.data.data, typeProperty) ) return obj;
+      if ( baseType !== foundry.utils.getProperty(baseItem.data, typeProperty) ) return obj;
       obj[name] = baseItem.name;
       return obj;
     }, {});

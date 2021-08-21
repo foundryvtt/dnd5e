@@ -1049,7 +1049,6 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
     const options = { name: a.dataset.target, title: label.innerText, type: a.dataset.type };
-    if ( options.type === "tool" ) options.sortCategories = true;
     return new ProficiencySelector(this.actor, options).render(true);
   }
 
