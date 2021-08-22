@@ -720,6 +720,20 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if ( userId !== game.user.id ) return;
+
+    // Determine if any proficiencies have been changed
+    const changedProfs = foundry.utils.getProperty(changed, "data.traits.armorProf") ||
+                         foundry.utils.getProperty(changed, "data.traits.toolProf") ||
+                         foundry.utils.getProperty(changed, "data.traits.weaponProf");
+    if (changedProfs) return this._updateItemProficiency();
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Assign a class item as the original class for the Actor based on which class has the most levels
    * @protected
@@ -728,6 +742,32 @@ export default class Actor5e extends Actor {
     const classes = this.itemTypes.class.sort((a, b) => b.data.data.levels - a.data.data.levels);
     const newPC = classes[0]?.id || "";
     return this.update({"data.details.originalClass": newPC});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the proficiency on all owned items when proficiency is changed.
+   * @return {Promise.<Array.<Document>>|undefined}  Any updates that are applied, if any changes were needed.
+   */
+  async _updateItemProficiency() {
+    const updates = [];
+    for ( const item of this.items ) {
+      const existingProf = item.data.data.proficient;
+      if ( existingProf === undefined ) continue;
+      const type = (item.type === "equipment") ? "armor" : item.type;
+      const actorProf = foundry.utils.getProperty(this.data, `data.traits.${type}Prof.value`) ?? [];
+      let updatedProf = Item5e.hasProficiency(item.data, actorProf);
+      if ( type === "tool" ) {
+        updatedProf = Number(updatedProf);
+        if ( existingProf > 1 ) continue; // FIXME: Temp fix to prevent removing tool expertise
+      }
+
+      if ( existingProf !== updatedProf ) {
+        updates.push({ _id: item.id, "data.proficient": updatedProf });
+      }
+    }
+    if ( updates ) return this.updateEmbeddedDocuments("Item", updates);
   }
 
   /* -------------------------------------------- */
