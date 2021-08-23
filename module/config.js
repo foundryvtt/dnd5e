@@ -580,7 +580,7 @@ DND5E.currencies = {
     abbreviation: "DND5E.CurrencyAbbrCP",
     conversion: {into: "sp", each: 10}
   }
-}
+};
 
 /* -------------------------------------------- */
 
@@ -927,7 +927,7 @@ DND5E.spellScrollIds = {
  */
 DND5E.sourcePacks = {
   ITEMS: "dnd5e.items"
-}
+};
 
 /**
  * Define the standard slot progression by character level.
