@@ -39,6 +39,8 @@ import * as dice from "./module/dice.js";
 import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
 import ActiveEffect5e from "./module/active-effect.js";
+import ActorAbilityConfig from "./module/apps/ability-config.js";
+import ActorSkillConfig from "./module/apps/skill-config.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -59,7 +61,9 @@ Hooks.once("init", function() {
       ShortRestDialog,
       TraitSelector,
       ActorMovementConfig,
-      ActorSensesConfig
+      ActorSensesConfig,
+      ActorAbilityConfig,
+      ActorSkillConfig
     },
     canvas: {
       AbilityTemplate
