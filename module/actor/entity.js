@@ -54,11 +54,11 @@ export default class Actor5e extends Actor {
    * Object describing the proficiency for a specific ability or skill.
    *
    * @typedef {object} ProficiencyDescription
-   * @property {number} multiplier                   Value by which to multiply the actor's base proficiency value.
-   * @property {DND5E.proficiencyRounding} rounding  Direction decimal results should be rounded.
-   * @property {number} flat                         Flat proficiency value regardless of proficiency mode.
-   * @property {string} dice                         Dice-based proficiency value regardless of proficiency mode.
-   * @property {string} term                         Either flat or dice proficiency term based on configured setting.
+   * @property {number} multiplier        Value by which to multiply the actor's base proficiency value.
+   * @property {DND5E.rounding} rounding  Direction decimal results should be rounded.
+   * @property {number} flat              Flat proficiency value regardless of proficiency mode.
+   * @property {string} dice              Dice-based proficiency value regardless of proficiency mode.
+   * @property {string} term              Either flat or dice proficiency term based on configured setting.
    */
 
   /**
@@ -72,7 +72,7 @@ export default class Actor5e extends Actor {
   static proficiencyDescription(proficiency, multiplier, rounding="DOWN") {
     if ( !proficiency || !multiplier ) return {
       multiplier: 0,
-      rounding: rounding,
+      rounding: CONFIG.DND5E.rounding[rounding],
       flat: 0,
       dice: "0",
       term: "0"
@@ -80,7 +80,7 @@ export default class Actor5e extends Actor {
 
     const prof = {
       multiplier: Number(multiplier),
-      rounding: rounding,
+      rounding: CONFIG.DND5E.rounding[rounding],
       flat: CONFIG.DND5E.rounding[rounding].method(multiplier * proficiency)
     };
 
