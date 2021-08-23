@@ -24,7 +24,7 @@ DND5E.abilities = {
   con: "DND5E.AbilityCon",
   int: "DND5E.AbilityInt",
   wis: "DND5E.AbilityWis",
-  cha: "DND5E.AbilityCha",
+  cha: "DND5E.AbilityCha"
 };
 
 /**
@@ -37,7 +37,7 @@ DND5E.abilityAbbreviations = {
   con: "DND5E.AbilityConAbbr",
   int: "DND5E.AbilityIntAbbr",
   wis: "DND5E.AbilityWisAbbr",
-  cha: "DND5E.AbilityChaAbbr",
+  cha: "DND5E.AbilityChaAbbr"
 };
 
 /* -------------------------------------------- */
@@ -55,7 +55,7 @@ DND5E.alignments = {
   cn: "DND5E.AlignmentCN",
   le: "DND5E.AlignmentLE",
   ne: "DND5E.AlignmentNE",
-  ce: "DND5E.AlignmentCE",
+  ce: "DND5E.AlignmentCE"
 };
 
 /* -------------------------------------------- */
@@ -77,7 +77,7 @@ DND5E.attunementTypes = {
 DND5E.attunements = {
   0: "DND5E.AttunementNone",
   1: "DND5E.AttunementRequired",
-  2: "DND5E.AttunementAttuned",
+  2: "DND5E.AttunementAttuned"
 };
 
 /* -------------------------------------------- */
@@ -88,7 +88,7 @@ DND5E.attunements = {
  */
 DND5E.weaponProficiencies = {
   sim: "DND5E.WeaponSimpleProficiency",
-  mar: "DND5E.WeaponMartialProficiency",
+  mar: "DND5E.WeaponMartialProficiency"
 };
 
 /**
@@ -101,7 +101,7 @@ DND5E.weaponProficienciesMap = {
   simpleM: "sim",
   simpleR: "sim",
   martialM: "mar",
-  martialR: "mar",
+  martialR: "mar"
 };
 
 /**
@@ -146,7 +146,7 @@ DND5E.weaponIds = {
   trident: "F65ANO66ckP8FDMa",
   warpick: "2YdfjN1PIIrSHZii",
   warhammer:  "F0Df164Xv1gWcYt0",
-  whip: "QKTyxoO0YDnAsbYe",
+  whip: "QKTyxoO0YDnAsbYe"
 };
 
 /* -------------------------------------------- */
@@ -159,7 +159,7 @@ DND5E.weaponIds = {
 DND5E.toolTypes = {
   art: "DND5E.ToolArtisans",
   game: "DND5E.ToolGamingSet",
-  music: "DND5E.ToolMusicalInstrument",
+  music: "DND5E.ToolMusicalInstrument"
 };
 
 /**
@@ -169,7 +169,7 @@ DND5E.toolTypes = {
  */
 DND5E.toolProficiencies = {
   ...DND5E.toolTypes,
-  vehicle: "DND5E.ToolVehicle",
+  vehicle: "DND5E.ToolVehicle"
 };
 
 /**
@@ -213,7 +213,7 @@ DND5E.toolIds = {
   tinker: "0d08g1i5WXnNrCNA",
   viol: "baoe3U5BfMMMxhCU",
   weaver: "ap9prThUB2y9lDyj",
-  woodcarver: "xKErqkLo4ASYr5EP",
+  woodcarver: "xKErqkLo4ASYr5EP"
 };
 
 /* -------------------------------------------- */
@@ -232,7 +232,7 @@ DND5E.timePeriods = {
   month: "DND5E.TimeMonth",
   year: "DND5E.TimeYear",
   perm: "DND5E.TimePerm",
-  spec: "DND5E.Special",
+  spec: "DND5E.Special"
 };
 
 /* -------------------------------------------- */
@@ -252,7 +252,7 @@ DND5E.abilityActivationTypes = {
   special: DND5E.timePeriods.spec,
   legendary: "DND5E.LegendaryActionLabel",
   lair: "DND5E.LairActionLabel",
-  crew: "DND5E.VehicleCrewAction",
+  crew: "DND5E.VehicleCrewAction"
 };
 
 /* -------------------------------------------- */
@@ -265,7 +265,7 @@ DND5E.abilityConsumptionTypes = {
   ammo: "DND5E.ConsumeAmmunition",
   attribute: "DND5E.ConsumeAttribute",
   material: "DND5E.ConsumeMaterial",
-  charges: "DND5E.ConsumeCharges",
+  charges: "DND5E.ConsumeCharges"
 };
 
 /* -------------------------------------------- */
@@ -280,7 +280,7 @@ DND5E.actorSizes = {
   med: "DND5E.SizeMedium",
   lg: "DND5E.SizeLarge",
   huge: "DND5E.SizeHuge",
-  grg: "DND5E.SizeGargantuan",
+  grg: "DND5E.SizeGargantuan"
 };
 
 /**
@@ -293,7 +293,7 @@ DND5E.tokenSizes = {
   med: 1,
   lg: 2,
   huge: 3,
-  grg: 4,
+  grg: 4
 };
 
 /**
@@ -303,7 +303,7 @@ DND5E.tokenSizes = {
 DND5E.tokenHPColors = {
   temp: 0x66CCFF,
   tempmax: 0x440066,
-  negmax: 0x550000,
+  negmax: 0x550000
 };
 
 /* -------------------------------------------- */
@@ -326,7 +326,7 @@ DND5E.creatureTypes = {
   monstrosity: "DND5E.CreatureMonstrosity",
   ooze: "DND5E.CreatureOoze",
   plant: "DND5E.CreaturePlant",
-  undead: "DND5E.CreatureUndead",
+  undead: "DND5E.CreatureUndead"
 };
 
 /* -------------------------------------------- */
@@ -344,7 +344,7 @@ DND5E.itemActionTypes = {
   heal: "DND5E.ActionHeal",
   abil: "DND5E.ActionAbil",
   util: "DND5E.ActionUtil",
-  other: "DND5E.ActionOther",
+  other: "DND5E.ActionOther"
 };
 
 /* -------------------------------------------- */
@@ -355,7 +355,7 @@ DND5E.itemActionTypes = {
  */
 DND5E.itemCapacityTypes = {
   items: "DND5E.ItemContainerCapacityItems",
-  weight: "DND5E.ItemContainerCapacityWeight",
+  weight: "DND5E.ItemContainerCapacityWeight"
 };
 
 /* -------------------------------------------- */
@@ -370,7 +370,7 @@ DND5E.itemRarity = {
   rare: "DND5E.ItemRarityRare",
   veryRare: "DND5E.ItemRarityVeryRare",
   legendary: "DND5E.ItemRarityLegendary",
-  artifact: "DND5E.ItemRarityArtifact",
+  artifact: "DND5E.ItemRarityArtifact"
 };
 
 /* -------------------------------------------- */
@@ -383,7 +383,7 @@ DND5E.limitedUsePeriods = {
   sr: "DND5E.ShortRest",
   lr: "DND5E.LongRest",
   day: "DND5E.Day",
-  charges: "DND5E.Charges",
+  charges: "DND5E.Charges"
 };
 
 /* -------------------------------------------- */
@@ -397,7 +397,7 @@ DND5E.armorTypes = {
   medium: "DND5E.EquipmentMedium",
   heavy: "DND5E.EquipmentHeavy",
   natural: "DND5E.EquipmentNatural",
-  shield: "DND5E.EquipmentShield",
+  shield: "DND5E.EquipmentShield"
 };
 
 /* -------------------------------------------- */
@@ -409,7 +409,7 @@ DND5E.armorTypes = {
 DND5E.miscEquipmentTypes = {
   clothing: "DND5E.EquipmentClothing",
   trinket: "DND5E.EquipmentTrinket",
-  vehicle: "DND5E.EquipmentVehicle",
+  vehicle: "DND5E.EquipmentVehicle"
 };
 
 /* -------------------------------------------- */
@@ -420,7 +420,7 @@ DND5E.miscEquipmentTypes = {
  */
 DND5E.equipmentTypes = {
   ...DND5E.miscEquipmentTypes,
-  ...DND5E.armorTypes,
+  ...DND5E.armorTypes
 };
 
 /* -------------------------------------------- */
@@ -432,7 +432,7 @@ DND5E.equipmentTypes = {
 DND5E.vehicleTypes = {
   air: "DND5E.VehicleTypeAir",
   land: "DND5E.VehicleTypeLand",
-  water: "DND5E.VehicleTypeWater",
+  water: "DND5E.VehicleTypeWater"
 };
 
 /* -------------------------------------------- */
@@ -445,7 +445,7 @@ DND5E.armorProficiencies = {
   lgt: DND5E.equipmentTypes.light,
   med: DND5E.equipmentTypes.medium,
   hvy: DND5E.equipmentTypes.heavy,
-  shl: "DND5E.EquipmentShieldProficiency",
+  shl: "DND5E.EquipmentShieldProficiency"
 };
 
 /**
@@ -459,7 +459,7 @@ DND5E.armorProficienciesMap = {
   light: "lgt",
   medium: "med",
   heavy: "hvy",
-  shield: "shl",
+  shield: "shl"
 };
 
 /**
@@ -479,7 +479,7 @@ DND5E.armorIds = {
   ringmail: "nsXZejlmgalj4he9",
   scalemail: "XmnlF5fgIO3tg6TG",
   splint: "cKpJmsJmU8YaiuqG",
-  studded: "TIV3B1vbrVHIhQAm",
+  studded: "TIV3B1vbrVHIhQAm"
 };
 
 /**
@@ -487,7 +487,7 @@ DND5E.armorIds = {
  * @enum {string}
  */
 DND5E.shieldIds = {
-  "shield": "sSs3hSzkKBMNBgTs",
+  "shield": "sSs3hSzkKBMNBgTs"
 };
 
 /**
@@ -542,7 +542,7 @@ DND5E.consumableTypes = {
   scroll: "DND5E.ConsumableScroll",
   wand: "DND5E.ConsumableWand",
   rod: "DND5E.ConsumableRod",
-  trinket: "DND5E.ConsumableTrinket",
+  trinket: "DND5E.ConsumableTrinket"
 };
 
 /* -------------------------------------------- */
@@ -579,7 +579,7 @@ DND5E.currencies = {
     label: "DND5E.CurrencyCP",
     abbreviation: "DND5E.CurrencyAbbrCP",
     conversion: {into: "sp", each: 10}
-  },
+  }
 }
 
 /* -------------------------------------------- */
@@ -601,7 +601,7 @@ DND5E.damageTypes = {
   psychic: "DND5E.DamagePsychic",
   radiant: "DND5E.DamageRadiant",
   slashing: "DND5E.DamageSlashing",
-  thunder: "DND5E.DamageThunder",
+  thunder: "DND5E.DamageThunder"
 };
 
 /**
@@ -610,7 +610,7 @@ DND5E.damageTypes = {
  */
 DND5E.damageResistanceTypes = {
   ...DND5E.damageTypes,
-  physical: "DND5E.DamagePhysical",
+  physical: "DND5E.DamagePhysical"
 };
 
 /* -------------------------------------------- */
@@ -625,7 +625,7 @@ DND5E.movementTypes = {
   climb: "DND5E.MovementClimb",
   fly: "DND5E.MovementFly",
   swim: "DND5E.MovementSwim",
-  walk: "DND5E.MovementWalk",
+  walk: "DND5E.MovementWalk"
 };
 
 /**
@@ -637,7 +637,7 @@ DND5E.movementUnits = {
   ft: "DND5E.DistFt",
   mi: "DND5E.DistMi",
   m: "DND5E.DistM",
-  km: "DND5E.DistKm",
+  km: "DND5E.DistKm"
 };
 
 /**
@@ -651,7 +651,7 @@ DND5E.distanceUnits = {
   "touch": "DND5E.DistTouch",
   "spec": "DND5E.Special",
   "any": "DND5E.DistAny",
-  ...DND5E.movementUnits,
+  ...DND5E.movementUnits
 };
 
 /* -------------------------------------------- */
@@ -671,7 +671,7 @@ DND5E.encumbrance = {
   },
   vehicleWeightMultiplier: {
     imperial: 2000, // 2000 lbs in an imperial ton
-    metric: 1000, // 1000 kg in a metric ton
+    metric: 1000 // 1000 kg in a metric ton
   }
 };
 
@@ -696,7 +696,7 @@ DND5E.targetTypes = {
   square: "DND5E.TargetSquare",
   cube: "DND5E.TargetCube",
   line: "DND5E.TargetLine",
-  wall: "DND5E.TargetWall",
+  wall: "DND5E.TargetWall"
 };
 
 /* -------------------------------------------- */
@@ -714,7 +714,7 @@ DND5E.areaTargetTypes = {
   radius: "circle",
   sphere: "circle",
   square: "rect",
-  wall: "ray",
+  wall: "ray"
 };
 
 /* -------------------------------------------- */
@@ -725,7 +725,7 @@ DND5E.areaTargetTypes = {
  */
 DND5E.healingTypes = {
   healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp",
+  temphp: "DND5E.HealingTemp"
 };
 
 /* -------------------------------------------- */
@@ -746,7 +746,7 @@ DND5E.senses = {
   blindsight: "DND5E.SenseBlindsight",
   darkvision: "DND5E.SenseDarkvision",
   tremorsense: "DND5E.SenseTremorsense",
-  truesight: "DND5E.SenseTruesight",
+  truesight: "DND5E.SenseTruesight"
 };
 
 /* -------------------------------------------- */
@@ -773,7 +773,7 @@ DND5E.skills = {
   rel: "DND5E.SkillRel",
   slt: "DND5E.SkillSlt",
   ste: "DND5E.SkillSte",
-  sur: "DND5E.SkillSur",
+  sur: "DND5E.SkillSur"
 };
 
 /* -------------------------------------------- */
@@ -786,7 +786,7 @@ DND5E.spellPreparationModes = {
   pact: "DND5E.PactMagic",
   always: "DND5E.SpellPrepAlways",
   atwill: "DND5E.SpellPrepAtWill",
-  innate: "DND5E.SpellPrepInnate",
+  innate: "DND5E.SpellPrepInnate"
 };
 
 /**
@@ -805,7 +805,7 @@ DND5E.spellProgression = {
   half: "DND5E.SpellProgHalf",
   third: "DND5E.SpellProgThird",
   pact: "DND5E.SpellProgPact",
-  artificer: "DND5E.SpellProgArt",
+  artificer: "DND5E.SpellProgArt"
 };
 
 /* -------------------------------------------- */
@@ -817,7 +817,7 @@ DND5E.spellProgression = {
 DND5E.spellScalingModes = {
   none: "DND5E.SpellNone",
   cantrip: "DND5E.SpellCantrip",
-  level: "DND5E.SpellLevel",
+  level: "DND5E.SpellLevel"
 };
 
 /* -------------------------------------------- */
@@ -833,7 +833,7 @@ DND5E.weaponTypes = {
   martialR: "DND5E.WeaponMartialR",
   natural: "DND5E.WeaponNatural",
   improv: "DND5E.WeaponImprov",
-  siege: "DND5E.WeaponSiege",
+  siege: "DND5E.WeaponSiege"
 };
 
 /* -------------------------------------------- */
@@ -859,7 +859,7 @@ DND5E.weaponProperties = {
   spc: "DND5E.WeaponPropertiesSpc",
   thr: "DND5E.WeaponPropertiesThr",
   two: "DND5E.WeaponPropertiesTwo",
-  ver: "DND5E.WeaponPropertiesVer",
+  ver: "DND5E.WeaponPropertiesVer"
 };
 
 /**
@@ -869,7 +869,7 @@ DND5E.weaponProperties = {
 DND5E.spellComponents = {
   V: "DND5E.ComponentVerbal",
   S: "DND5E.ComponentSomatic",
-  M: "DND5E.ComponentMaterial",
+  M: "DND5E.ComponentMaterial"
 };
 
 /**
@@ -884,7 +884,7 @@ DND5E.spellSchools = {
   evo: "DND5E.SchoolEvo",
   ill: "DND5E.SchoolIll",
   nec: "DND5E.SchoolNec",
-  trs: "DND5E.SchoolTrs",
+  trs: "DND5E.SchoolTrs"
 };
 
 /**
@@ -918,7 +918,7 @@ DND5E.spellScrollIds = {
   6: "tI3rWx4bxefNCexS",
   7: "mtyw4NS1s7j2EJaD",
   8: "aOrinPg7yuDZEuWr",
-  9: "O4YbkJkLlnsgUszZ",
+  9: "O4YbkJkLlnsgUszZ"
 };
 
 /**
@@ -926,7 +926,7 @@ DND5E.spellScrollIds = {
  * @enum {string}
  */
 DND5E.sourcePacks = {
-  ITEMS: "dnd5e.items",
+  ITEMS: "dnd5e.items"
 }
 
 /**
@@ -954,7 +954,7 @@ DND5E.SPELL_SLOT_TABLE = [
   [4, 3, 3, 3, 2, 1, 1, 1, 1],
   [4, 3, 3, 3, 3, 1, 1, 1, 1],
   [4, 3, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 3, 2, 2, 1, 1],
+  [4, 3, 3, 3, 3, 2, 2, 1, 1]
 ];
 
 /* -------------------------------------------- */
@@ -975,7 +975,7 @@ DND5E.polymorphSettings = {
   keepSpells: "DND5E.PolymorphKeepSpells",
   keepItems: "DND5E.PolymorphKeepItems",
   keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision",
+  keepVision: "DND5E.PolymorphKeepVision"
 };
 
 /* -------------------------------------------- */
@@ -1003,7 +1003,7 @@ DND5E.cover = {
   0: "DND5E.None",
   .5: "DND5E.CoverHalf",
   .75: "DND5E.CoverThreeQuarters",
-  1: "DND5E.CoverTotal",
+  1: "DND5E.CoverTotal"
 };
 
 /* -------------------------------------------- */
@@ -1028,7 +1028,7 @@ DND5E.conditionTypes = {
   prone: "DND5E.ConProne",
   restrained: "DND5E.ConRestrained",
   stunned: "DND5E.ConStunned",
-  unconscious: "DND5E.ConUnconscious",
+  unconscious: "DND5E.ConUnconscious"
 };
 
 /**
@@ -1060,7 +1060,7 @@ DND5E.languages = {
   sylvan: "DND5E.LanguagesSylvan",
   terran: "DND5E.LanguagesTerran",
   cant: "DND5E.LanguagesThievesCant",
-  undercommon: "DND5E.LanguagesUndercommon",
+  undercommon: "DND5E.LanguagesUndercommon"
 };
 
 /**
@@ -1069,7 +1069,7 @@ DND5E.languages = {
  */
 DND5E.CHARACTER_EXP_LEVELS = [
   0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000,
-  120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000,
+  120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000
 ];
 
 /**
@@ -1078,7 +1078,7 @@ DND5E.CHARACTER_EXP_LEVELS = [
  */
 DND5E.CR_EXP_LEVELS = [
   10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
-  20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000,
+  20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
 ];
 
 /**
@@ -1182,7 +1182,7 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Number,
     placeholder: 0
-  },
+  }
 };
 
 /**
