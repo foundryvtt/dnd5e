@@ -256,7 +256,7 @@ export default class Item5e extends Item {
   prepareFinalAttributes() {
     // Proficiency
     if ( this.isOwned ) {
-      this.data.data.prof = Actor5e.proficiencyDescription(
+      this.data.data.prof = Actor5e.getProficiencyDescription(
         Number(this.actor.data.data.prof), Number(this.data.data.proficient ?? 1)
       );
     }

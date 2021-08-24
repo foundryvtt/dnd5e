@@ -54,38 +54,42 @@ export default class Actor5e extends Actor {
    * Object describing the proficiency for a specific ability or skill.
    *
    * @typedef {object} ProficiencyDescription
-   * @property {number} multiplier        Value by which to multiply the actor's base proficiency value.
-   * @property {DND5E.rounding} rounding  Direction decimal results should be rounded.
-   * @property {number} flat              Flat proficiency value regardless of proficiency mode.
-   * @property {string} dice              Dice-based proficiency value regardless of proficiency mode.
-   * @property {string} term              Either flat or dice proficiency term based on configured setting.
+   * @property {number} multiplier  Value by which to multiply the actor's base proficiency value.
+   * @property {string} rounding    Direction decimal results should be rounded ("up" or "down").
+   * @property {number} flat        Flat proficiency value regardless of proficiency mode.
+   * @property {string} dice        Dice-based proficiency value regardless of proficiency mode.
+   * @property {string} term        Either flat or dice proficiency term based on configured setting.
    */
 
   /**
    * Produce an object describing the proficiency for a specific ability or skill.
    *
-   * @param {number} proficiency  Actor's flat proficiency bonus based on their current level.
-   * @param {number} multiplier   Value by which to multiply the actor's base proficiency value.
-   * @param {string} [rounding]   Direction decimal results should be rounded, one of the options of DND5E.rounding.
+   * @param {number} proficiency   Actor's flat proficiency bonus based on their current level.
+   * @param {number} multiplier    Value by which to multiply the actor's base proficiency value.
+   * @param {boolean} [roundDown]  Should half-values be rounded up or down.
    * @return {ProficiencyDescription}
    */
-  static proficiencyDescription(proficiency, multiplier, rounding="DOWN") {
+  static getProficiencyDescription(proficiency, multiplier, roundDown=true) {
+    const rounding = roundDown ? "down" : "up";
     if ( !proficiency || !multiplier ) return {
       multiplier: 0,
-      rounding: CONFIG.DND5E.rounding[rounding],
+      rounding: rounding,
       flat: 0,
       dice: "0",
       term: "0"
     };
 
+    const roundMethod = roundDown ? Math.floor : Math.ceil;
+    const roundTerm = roundDown ? "floor" : "ceil";
+
     const prof = {
       multiplier: Number(multiplier),
-      rounding: CONFIG.DND5E.rounding[rounding],
-      flat: CONFIG.DND5E.rounding[rounding].method(multiplier * proficiency)
+      rounding: rounding,
+      flat: roundMethod(multiplier * proficiency)
     };
 
     if ( multiplier === 0.5 ) {
-      prof.dice = `${CONFIG.DND5E.rounding[rounding].term}(1d${proficiency * 2} / 2)`;
+      prof.dice = `${roundTerm}(1d${proficiency * 2} / 2)`;
     } else {
       prof.dice = `${multiplier}d${proficiency * 2}`;
     }
@@ -167,12 +171,12 @@ export default class Actor5e extends Actor {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
 
-      abl.checkProf = Actor5e.proficiencyDescription(data.attributes.prof,
-        (this._isRemarkableAthlete(id) || joat) ? 0.5 : 0, this._isRemarkableAthlete(id) ? "UP" : "DOWN");
+      const isRA = this._isRemarkableAthlete(id);
+      abl.checkProf = Actor5e.getProficiencyDescription(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
       const saveBonusAbl = Number.isNumeric(abl.bonuses?.save) ? parseInt(abl.bonuses.save) : 0;
       abl.saveBonus = saveBonusAbl + saveBonus;
 
-      abl.saveProf = Actor5e.proficiencyDescription(data.attributes.prof, abl.proficient);
+      abl.saveProf = Actor5e.getProficiencyDescription(data.attributes.prof, abl.proficient);
       const checkBonusAbl = Number.isNumeric(abl.bonuses?.check) ? parseInt(abl.bonuses.check) : 0;
       abl.checkBonus = checkBonusAbl + checkBonus;
 
@@ -199,7 +203,7 @@ export default class Actor5e extends Actor {
     const init = data.attributes.init;
     const athlete = flags.remarkableAthlete;
     init.mod = data.abilities.dex.mod;
-    init.prof = Actor5e.proficiencyDescription(data.attributes.prof, (joat || athlete) ? 0.5 : 0, athlete ? "UP" : "DOWN");
+    init.prof = Actor5e.getProficiencyDescription(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
     init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.bonus;
@@ -443,12 +447,12 @@ export default class Actor5e extends Actor {
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
       const baseBonus = Number.isNumeric(skl.bonuses?.check) ? parseInt(skl.bonuses.check) : 0;
-      let rounding = "DOWN";
+      let roundDown = true;
 
       // Remarkable Athlete
       if ( this._isRemarkableAthlete(skl.ability) && (skl.value < 0.5) ) {
         skl.value = 0.5;
-        rounding = "UP";
+        roundDown = false;
       }
 
       // Jack of All Trades
@@ -464,7 +468,7 @@ export default class Actor5e extends Actor {
       // Compute modifier
       skl.bonus = baseBonus + checkBonus + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = Actor5e.proficiencyDescription(data.attributes.prof, skl.value, rounding);
+      skl.prof = Actor5e.getProficiencyDescription(data.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
       if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
@@ -472,7 +476,7 @@ export default class Actor5e extends Actor {
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
       const passiveBonus = Number.isNumeric(skl.bonuses?.passive) ? parseInt(skl.bonuses.passive) : 0;
-      skl.passive = 10 + skl.total + passive + passiveBonus;
+      skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
     }
   }
 
@@ -1089,7 +1093,7 @@ export default class Actor5e extends Actor {
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
       parts.push("@prof");
-      data.prof = Actor5e.proficiencyDescription(this.data.data.attributes.prof, 1).term;
+      data.prof = Actor5e.getProficiencyDescription(this.data.data.attributes.prof, 1).term;
     }
 
     // Include a global actor ability save bonus
