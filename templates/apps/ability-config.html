@@ -1,0 +1,34 @@
+<form autocomplete="off">
+  <p class="notes">{{localize "DND5E.AbilityConfigurationHint"}}</p>
+  <h3 class="form-header">{{labelSaves}}</h3>
+  <div class="form-group">
+    <label>{{ localize "DND5E.ProficiencyLevel" }}</label>
+    <select name="data.abilities.{{abilityId}}.proficient">
+      {{selectOptions proficiencyLevels selected=ability.proficient}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>{{localize "DND5E.SaveBonus"}}</label>
+    <input name="data.abilities.{{abilityId}}.bonuses.save" type="text" value="{{ability.bonuses.save}}">
+  </div>
+  <hr>
+  <div class="form-group">
+    <label>{{localize "DND5E.BonusAbilitySave"}}</label>
+    <input name="data.bonuses.abilities.save" type="text" value="{{bonusGlobalSave}}">
+    <p class="notes">{{localize "DND5E.SaveGlobalBonusHint"}}</p>
+  </div>
+
+  <h3 class="form-header">{{labelChecks}}</h3>
+  <div class="form-group">
+    <label>{{localize "DND5E.AbilityCheckBonus"}}</label>
+    <input name="data.abilities.{{abilityId}}.bonuses.check" type="text" value="{{ability.bonuses.check}}">
+  </div>
+  <hr>
+  <div class="form-group">
+    <label>{{localize "DND5E.BonusAbilityCheck"}}</label>
+    <input name="data.bonuses.abilities.check" type="text" value="{{bonusGlobalCheck}}"/>
+    <p class="notes">{{localize "DND5E.AbilityCheckGlobalBonusHint"}}</p>
+  </div>
+
+  <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+</form>
