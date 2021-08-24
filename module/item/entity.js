@@ -266,6 +266,10 @@ export default class Item5e extends Item {
       // Damage Label
       this.getDerivedDamageLabel();
     }
+
+    if ( this.data.data.hasOwnProperty("proficient") ) {
+      this.getProficiency();
+    }
   }
 
   /* -------------------------------------------- */
@@ -385,6 +389,19 @@ export default class Item5e extends Item {
 
     // Update labels and return the prepared roll data
     return {rollData, parts};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Upgrade proficiency based on actor's proficiencies.
+   */
+  getProficiency() {
+    const type = (this.type === "equipment") ? "armor" : this.type;
+    const actorProfs = this.actor?.data.data.traits[`${type}Prof`]?.value ?? [];
+    let upgradeProf = (this.actor?.type === "npc") ? true : Item5e.hasProficiency(this.data, actorProfs);
+    if ( type === "tool" ) upgradeProf = Number(upgradeProf);
+    if ( upgradeProf > this.data.data.proficient ) this.data.data.proficient = upgradeProf;
   }
 
   /* -------------------------------------------- */
@@ -1366,9 +1383,6 @@ export default class Item5e extends Item {
       case "spell":
         updates = this._onCreateOwnedSpell(data, actorData, isNPC);
         break;
-      case "tool":
-        updates = this._onCreateOwnedTool(data, actorData, isNPC);
-        break;
       case "weapon":
         updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
         break;
@@ -1454,13 +1468,6 @@ export default class Item5e extends Item {
     if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
       updates["data.equipped"] = isNPC;  // NPCs automatically equip equipment
     }
-    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["data.proficient"] = true;  // NPCs automatically have equipment proficiency
-      } else {
-        updates["data.proficient"] = Item5e.hasProficiency(data, actorData.data.traits?.armorProf?.value ?? []);
-      }
-    }
     return updates;
   }
 
@@ -1486,29 +1493,6 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned tool type Items.
-   *
-   * @param {object} data       Data for the newly created item.
-   * @param {object} actorData  Data for the actor to which the item is being added.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedTool(data, actorData, isNPC) {
-    const updates = {};
-    if ( data.data?.proficient === undefined ) {
-      if ( isNPC ) {
-        updates["data.proficient"] = 1;
-      } else {
-        updates["data.proficient"] = Number(Item5e.hasProficiency(data, actorData.data.traits?.toolProf?.value ?? []));
-      }
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Pre-creation logic for the automatic configuration of owned weapon type Items.
    *
    * @param {object} data       Data for the newly created item.
@@ -1521,13 +1505,6 @@ export default class Item5e extends Item {
     const updates = {};
     if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
       updates["data.equipped"] = isNPC;       // NPCs automatically equip weapons
-    }
-    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["data.proficient"] = true;    // NPCs automatically have equipment proficiency
-      } else {
-        updates["data.proficient"] = Item5e.hasProficiency(data, actorData.data.traits?.weaponProf?.value ?? []);
-      }
     }
     return updates;
   }
