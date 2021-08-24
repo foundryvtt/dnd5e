@@ -1,0 +1,27 @@
+<form autocomplete="off" onsubmit="event.preventDefault();">
+    {{#if options.typeProfs}}
+        <label>{{localize options.itemTypeLabel}}</label>
+        <ul class="skills-list">
+            {{#each options.typeProfs}}
+                <li class="skill flexrow">
+                    <input type="hidden" data-name="{{@key}}" value="{{this.value}}" data-dtype="Number"/>
+                    <a class="proficiency-toggle item-proficiency skill-name">{{{this.icon}}}{{{localize this.label}}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+    <label>{{localize options.itemBaseLabel}}</label>
+    <ul class="skill-list">
+        {{#each options.baseProfs}}
+            <li class="skill flexrow">
+                <input type="hidden" data-name="{{@key}}" value="{{this.value}}"
+                       data-custom="{{this.custom}}" data-dtype="Number"/>
+                <a class="proficiency-toggle item-proficiency skill-name ">{{{this.icon}}}{{{localize this.label}}}</a>
+            </li>
+        {{/each}}
+    </ul>
+    <span class="form-group stacked">
+        <input type="text" data-dtype="String"/>
+        <button class="item-prof-custom-add" type="button">{{localize "DND5E.AddCustomItemProficiency"}}</button>
+    </span>
+</form>

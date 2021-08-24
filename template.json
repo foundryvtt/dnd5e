@@ -404,17 +404,19 @@
         }
       },
       "traits": {
-        "weaponProf": {
-          "value": [],
-          "custom": ""
-        },
-        "armorProf": {
-          "value": [],
-          "custom": ""
-        },
-        "toolProf": {
-          "value": [],
-          "custom": ""
+        "itemProficiencies": {
+          "weapon": {
+            "standard": {"natural": 1},
+            "custom": {}
+          },
+          "armor": {
+            "standard": {"natural": 1},
+            "custom": {}
+          },
+          "tool": {
+            "standard": {},
+            "custom": {}
+          }
         }
       }
     },
@@ -654,7 +656,7 @@
       },
       "strength": 0,
       "stealth": false,
-      "proficient": true
+      "autoProficiency": true
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
@@ -669,11 +671,11 @@
     },
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
-      "toolType": "",
+      "toolType": "misc",
       "baseItem": "",
       "ability": "int",
       "chatFlavor": "",
-      "proficient": 0,
+      "autoProficiency": true,
       "bonus": ""
     },
     "spell": {
@@ -718,7 +720,7 @@
       "weaponType": "simpleM",
       "baseItem": "",
       "properties": {},
-      "proficient": true
+      "autoProficiency": true
     }
   }
 }

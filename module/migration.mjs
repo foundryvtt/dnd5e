@@ -198,6 +198,7 @@ export const migrateActorData = function(actor, migrationData) {
   _migrateActorSenses(actor, updateData);
   _migrateActorType(actor, updateData);
   _migrateActorAC(actor, updateData);
+  _migrateActorItemProficiencies(actor, updateData);
 
   // Migrate embedded effects
   if ( actor.effects ) {
@@ -274,8 +275,10 @@ export const migrateItemData = function(item, migrationData) {
   _migrateItemRarity(item, updateData);
   _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
+  _migrateToolType(item, updateData);
   _migrateItemCriticalData(item, updateData);
   _migrateDocumentIcon(item, updateData, migrationData);
+  _migrateItemProficiency(item, updateData);
 
   // Migrate embedded effects
   if ( item.effects ) {
@@ -567,6 +570,45 @@ function _migrateActorAC(actorData, updateData) {
 
 /* -------------------------------------------- */
 
+
+/**
+ * Migrate the actor item proficiencies to the new JSON format.
+ * @param {object} actorData   Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
+ * @private
+ */
+function _migrateActorItemProficiencies(actorData, updateData) {
+  if (actorData.system?.traits?.weaponProf?.value) {
+    const weaponProf = actorData.system.traits.weaponProf;
+    const updateValues = {"default": {}, "custom": {}};
+    for (const prof in weaponProf.value) updateValues.default[prof] = 1;
+    for (const prof in weaponProf.custom.split(";")) updateValues.custom[prof] = 1;
+    updateData["system.traits.weaponProf"] = updateValues;
+    updateData["system.traits.weaponProf.-=value"] = null;
+  }
+  if (actorData.system?.traits?.armorProf?.value) {
+    const armorProf = actorData.system.traits.armorProf;
+    const updateValues = {"default": {}, "custom": {}};
+    for (const prof in armorProf.value) updateValues.default[prof] = 1;
+    for (const prof in armorProf.custom.split(";")) updateValues.custom[prof] = 1;
+    updateData["system.traits.armorProf"] = updateValues;
+    updateData["system.traits.armorProf.-=value"] = null;
+  }
+  if (actorData.system?.traits?.toolProf?.value) {
+    const toolProf = actorData.system.traits.toolProf;
+    const updateValues = {"default": {}, "custom": {}};
+    for (const prof in toolProf.value) updateValues.default[prof] = 1;
+    for (const prof in toolProf.custom.split(";")) updateValues.custom[prof] = 1;
+    updateData["system.traits.toolProf"] = updateValues;
+    updateData["system.traits.toolProf.-=value"] = null;
+
+  }
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
 /**
  * Migrate any system token images from PNG to WEBP.
  * @param {object} actorData    Actor or token data to migrate.
@@ -653,6 +695,21 @@ function _migrateArmorType(item, updateData) {
   return updateData;
 }
 
+/* --------------------------------------------- */
+
+/**
+ * Convert tool items of type '' to 'misc'.
+ * @param {object} item        Item data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ * @private
+ */
+function _migrateToolType(item, updateData) {
+  if ( item.type !== "tool" ) return updateData;
+  if ( item.system?.toolType === "" ) updateData["system.toolType"] = "misc";
+  return updateData;
+}
+
 /* -------------------------------------------- */
 
 /**
@@ -669,6 +726,22 @@ function _migrateItemCriticalData(item, updateData) {
     threshold: null,
     damage: null
   };
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Sets the item to calculate proficiency automatically
+ * @param {object} item        Item data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ * @private
+ */
+function _migrateItemProficiency(item, updateData) {
+  if (game.system.template.Item[item.type]?.proficient) {
+    updateData["system.autoProficiency"] = true
+  }
   return updateData;
 }
 

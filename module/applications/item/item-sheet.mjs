@@ -1,5 +1,4 @@
 import AdvancementManager from "../../advancement/advancement-manager.mjs";
-import ProficiencySelector from "../proficiency-selector.mjs";
 import TraitSelector from "../trait-selector.mjs";
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 
@@ -71,8 +70,8 @@ export default class ItemSheet5e extends ItemSheet {
       itemType: game.i18n.localize(`ITEM.Type${item.type.titleCase()}`),
       itemStatus: this._getItemStatus(),
       itemProperties: this._getItemProperties(),
-      baseItems: await this._getItemBaseTypes(),
       isPhysical: item.system.hasOwnProperty("quantity"),
+      possibleSubtypes: this.possibleSubtypes(item),
 
       // Enrich HTML description
       descriptionHTML: await TextEditor.enrichHTML(item.system.description.value, {
@@ -127,6 +126,25 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
+   * Get the possible subtypes for this item.
+   * @param {object} item  Object of relevant item.
+   * @returns {object}     Object with subtype data.
+   */
+  possibleSubtypes(item) {
+    const type = (item.type === "equipment") ? "armor" : item.type;
+    if ( !CONFIG.DND5E.itemSubtypes.hasOwnProperty(type)) return {};
+    const subtypeProperty = (type === "armor") ? "system.armor.type" : `system.${type}Type`;
+    const subtype = foundry.utils.getProperty(item, subtypeProperty);
+    let possibleOptions = CONFIG.DND5E.itemSubtypes[type][subtype]?.baseItems ?? {};
+    let customProfs = item.actor?.system.traits.itemProficiencies[type].custom ?? {};
+    for ( const key in customProfs ) customProfs[key] = key;
+    foundry.utils.mergeObject(possibleOptions, customProfs);
+    return possibleOptions;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the display object used to show the advancement tab.
    * @param {Item5e} item  The item for which the advancement is being prepared.
    * @returns {object}     Object with advancement data grouped by levels.
@@ -171,30 +189,6 @@ export default class ItemSheet5e extends ItemSheet {
       };
     }
     return advancement;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the base weapons and tools based on the selected type.
-   * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
-   * @protected
-   */
-  async _getItemBaseTypes() {
-    const type = this.item.type === "equipment" ? "armor" : this.item.type;
-    const baseIds = CONFIG.DND5E[`${type}Ids`];
-    if ( baseIds === undefined ) return {};
-
-    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
-    const baseType = foundry.utils.getProperty(this.item.system, typeProperty);
-
-    const items = {};
-    for ( const [name, id] of Object.entries(baseIds) ) {
-      const baseItem = await ProficiencySelector.getBaseItem(id);
-      if ( baseType !== foundry.utils.getProperty(baseItem.system, typeProperty) ) continue;
-      items[name] = baseItem.name;
-    }
-    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
   }
 
   /* -------------------------------------------- */

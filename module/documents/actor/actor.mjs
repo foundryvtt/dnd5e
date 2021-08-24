@@ -3,7 +3,6 @@ import { d20Roll, damageRoll } from "../../dice/dice.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 import ShortRestDialog from "../../applications/actor/short-rest.mjs";
 import LongRestDialog from "../../applications/actor/long-rest.mjs";
-import ProficiencySelector from "../../applications/proficiency-selector.mjs";
 import Item5e from "../item.mjs";
 import SelectItemsPrompt from "../../applications/select-items-prompt.mjs";
 
@@ -2023,41 +2022,7 @@ export default class Actor5e extends Actor {
     return type;
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Populate a proficiency object with a `selected` field containing a combination of
-   * localizable group & individual proficiencies from `value` and the contents of `custom`.
-   *
-   * @param {object} data          Object containing proficiency data.
-   * @param {string[]} data.value  Array of standard proficiency keys.
-   * @param {string} data.custom   Semicolon-separated string of custom proficiencies.
-   * @param {string} type          "armor", "weapon", or "tool"
-   */
-  static prepareProficiencies(data, type) {
-    const profs = CONFIG.DND5E[`${type}Proficiencies`];
-    const itemTypes = CONFIG.DND5E[`${type}Ids`];
-
-    let values = [];
-    if ( data.value ) values = data.value instanceof Array ? data.value : [data.value];
-
-    data.selected = {};
-    for ( const key of values ) {
-      if ( profs[key] ) {
-        data.selected[key] = profs[key];
-      } else if ( itemTypes && itemTypes[key] ) {
-        const item = ProficiencySelector.getBaseItem(itemTypes[key], { indexOnly: true });
-        if ( item ) data.selected[key] = item.name;
-      } else if ( type === "tool" && CONFIG.DND5E.vehicleTypes[key] ) {
-        data.selected[key] = CONFIG.DND5E.vehicleTypes[key];
-      }
-    }
-
-    // Add custom entries
-    if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
-  }
-
-  /* -------------------------------------------- */
+   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 

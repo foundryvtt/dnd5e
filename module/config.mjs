@@ -1,5 +1,5 @@
 import ClassFeatures from "./advancement/class-features.mjs";
-import { preLocalize, preLocalizeDeep } from "./utils.mjs";
+import {preLocalize, preLocalizeDeep} from "./utils.mjs";
 
 // Namespace Configuration Values
 const DND5E = {};
@@ -144,7 +144,7 @@ preLocalize("weaponProficiencies");
  * @enum {(boolean|string)}
  */
 DND5E.weaponProficienciesMap = {
-  natural: true,
+  natural: "natural",
   simpleM: "sim",
   simpleR: "sim",
   martialM: "mar",
@@ -206,7 +206,8 @@ DND5E.weaponIds = {
 DND5E.toolTypes = {
   art: "DND5E.ToolArtisans",
   game: "DND5E.ToolGamingSet",
-  music: "DND5E.ToolMusicalInstrument"
+  music: "DND5E.ToolMusicalInstrument",
+  misc: "DND5E.ItemTypeMisc"
 };
 preLocalize("toolTypes", { sort: true });
 
@@ -451,8 +452,14 @@ DND5E.itemSubtypes = {
         splint: "DND5E.BaseItemSplint"
       }
     },
-    natural: "DND5E.ItemTypeNatural",
-    shield: "DND5E.ItemTypeShield"
+    natural: {
+      label: "DND5E.ItemTypeNatural",
+      baseItems: {}
+    },
+    shield: {
+      label: "DND5E.ItemTypeShield",
+      baseItems: {}
+    }
   },
   tool: {
     art: {
@@ -510,12 +517,17 @@ DND5E.itemSubtypes = {
         water: "DND5E.VehicleTypeWater"
       }
     },
-    disg: "DND5E.BaseItemDisguise",
-    forg: "DND5E.BaseItemForgery",
-    herb: "DND5E.BaseItemHerbalism",
-    navg: "DND5E.BaseItemNavg",
-    pois: "DND5E.BaseItemPois",
-    thief: "DND5E.BaseItemThief",
+    misc: {
+      label: "DND5E.ItemTypeMisc",
+      baseItems: {
+        disg: "DND5E.BaseItemDisguise",
+        forg: "DND5E.BaseItemForgery",
+        herb: "DND5E.BaseItemHerbalism",
+        navg: "DND5E.BaseItemNavg",
+        pois: "DND5E.BaseItemPois",
+        thief: "DND5E.BaseItemThief"
+      }
+    }
   },
   weapon: {
     simpleM: {
@@ -574,10 +586,77 @@ DND5E.itemSubtypes = {
         longbow: "DND5E.BaseItemLongbow",
         net: "DND5E.BaseItemNet"
       }
+    },
+    natural: {
+      label: "DND5E.ItemTypeNatural",
+      baseItems: {}
     }
-  }
+  },
 }
 preLocalizeDeep(DND5E, "itemSubtypes");
+
+/* -------------------------------------------- */
+
+DND5E.baseArmorItems = {
+  ...DND5E.itemSubtypes.armor.light.baseItems,
+  ...DND5E.itemSubtypes.armor.medium.baseItems,
+  ...DND5E.itemSubtypes.armor.heavy.baseItems,
+  natural: "DND5E.ItemTypeNatural",
+  shield: "DND5E.ItemTypeShield",
+}
+preLocalize("baseArmorItems");
+
+/* -------------------------------------------- */
+
+DND5E.baseWeaponItems = {
+  ...DND5E.itemSubtypes.weapon.simpleM.baseItems,
+  ...DND5E.itemSubtypes.weapon.simpleR.baseItems,
+  ...DND5E.itemSubtypes.weapon.martialM.baseItems,
+  ...DND5E.itemSubtypes.weapon.martialR.baseItems,
+  natural: "DND5E.ItemTypeNatural",
+
+}
+preLocalize("baseWeaponItems");
+
+/* -------------------------------------------- */
+
+DND5E.baseItems = {
+  ...DND5E.itemSubtypes.armor.light.baseItems,
+  ...DND5E.itemSubtypes.armor.medium.baseItems,
+  ...DND5E.itemSubtypes.armor.heavy.baseItems,
+  natural: "DND5E.ItemTypeNatural",
+  shield: "DND5E.ItemTypeShield",
+  ...DND5E.itemSubtypes.tool.art.baseItems,
+  ...DND5E.itemSubtypes.tool.game.baseItems,
+  ...DND5E.itemSubtypes.tool.music.baseItems,
+  ...DND5E.itemSubtypes.tool.vehicle.baseItems,
+  ...DND5E.itemSubtypes.weapon.simpleM.baseItems,
+  ...DND5E.itemSubtypes.weapon.simpleR.baseItems,
+  ...DND5E.itemSubtypes.weapon.martialM.baseItems,
+  ...DND5E.itemSubtypes.weapon.martialR.baseItems,
+  disg: "DND5E.BaseItemDisguise",
+  forg: "DND5E.BaseItemForgery",
+  herb: "DND5E.BaseItemHerbalism",
+  navg: "DND5E.BaseItemNavg",
+  pois: "DND5E.BaseItemPois",
+  thief: "DND5E.BaseItemThief"
+}
+preLocalize("baseItems");
+
+/* -------------------------------------------- */
+
+DND5E.itemProficiencies = {
+  light: "DND5E.ItemTypeLight",
+  medium: "DND5E.ItemTypeMedium",
+  heavy: "DND5E.ItemTypeHeavy",
+  simpleM: "DND5E.ItemTypeSimpleM",
+  simpleR: "DND5E.ItemTypeSimpleR",
+  martialM: "DND5E.ItemTypeMartialM",
+  martialR: "DND5E.ItemTypeMartialR",
+  ...DND5E.baseItems
+}
+preLocalize("itemProficiencies");
+
 
 /* -------------------------------------------- */
 
@@ -683,8 +762,7 @@ preLocalize("armorProficiencies");
  * @enum {(boolean|string)}
  */
 DND5E.armorProficienciesMap = {
-  natural: true,
-  clothing: true,
+  natural: "natural",
   light: "lgt",
   medium: "med",
   heavy: "hvy",
@@ -1502,7 +1580,7 @@ function patchConfig(key, fallbackKey, options) {
   /** @override */
   function toString() {
     const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
-        +` The former value can be acccessed from .${fallbackKey}.`;
+      +` The former value can be acccessed from .${fallbackKey}.`;
     foundry.utils.logCompatibilityWarning(message, options);
     return this[fallbackKey];
   }

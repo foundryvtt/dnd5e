@@ -97,8 +97,11 @@
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
-        {{#each system.traits.weaponProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
+        {{#each system.traits.itemProficiencies.weapon.standard as |v k|}}
+            <li class="tag {{v}}">{{localize (lookup ../config.itemProficiencies k)}}</li>
+        {{/each}}
+        {{#each system.traits.itemProficiencies.weapon.custom as |v k|}}
+            <li class="tag {{v}}">{{k}}</li>
         {{/each}}
         </ul>
     </div>
@@ -110,8 +113,11 @@
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
-        {{#each system.traits.armorProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
+        {{#each system.traits.itemProficiencies.armor.standard as |v k|}}
+            <li class="tag {{v}}">{{localize (lookup ../config.itemProficiencies k)}}</li>
+        {{/each}}
+        {{#each system.traits.itemProficiencies.armor.custom as |v k|}}
+            <li class="tag {{v}}">{{k}}</li>
         {{/each}}
         </ul>
     </div>
@@ -123,9 +129,12 @@
             <i class="fas fa-edit"></i>
         </a>
         <ul class="traits-list">
-        {{#each system.traits.toolProf.selected as |v k|}}
-            <li class="tag {{k}}">{{v}}</li>
-        {{/each}}
+            {{#each system.traits.itemProficiencies.tool.standard as |v k|}}
+                <li class="tag {{v}}">{{localize (lookup ../config.itemProficiencies k)}}</li>
+            {{/each}}
+            {{#each system.traits.itemProficiencies.tool.custom as |v k|}}
+                <li class="tag {{v}}">{{k}}</li>
+            {{/each}}
         </ul>
     </div>
     {{/if}}

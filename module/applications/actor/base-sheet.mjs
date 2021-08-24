@@ -14,7 +14,7 @@ import ActorTypeConfig from "./type-config.mjs";
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../../advancement/advancement-manager.mjs";
 
-import ProficiencySelector from "../proficiency-selector.mjs";
+import ItemProficiencyConfig from "../item-proficiency-config.mjs";
 import PropertyAttribution from "../property-attribution.mjs";
 import TraitSelector from "../trait-selector.mjs";
 
@@ -390,14 +390,6 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Add custom entry
       if ( trait.custom ) trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
-      trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
-    }
-
-    // Populate and localize proficiencies
-    for ( const t of ["armor", "weapon", "tool"] ) {
-      const trait = traits[`${t}Prof`];
-      if ( !trait ) continue;
-      Actor5e.prepareProficiencies(trait, t);
       trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
     }
   }
@@ -886,7 +878,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onDropResetData(itemData) {
     if ( !itemData.system ) return;
-    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
+    ["equipped", "prepared"].forEach(k => delete itemData.system[k]);
     if ( "attunement" in itemData.system ) {
       itemData.system.attunement = Math.min(itemData.system.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
     }
@@ -1173,9 +1165,9 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool proficiencies.
+   * Handle spawning the ItemProficiencyConfig application to configure armor, weapon, and tool proficiencies.
    * @param {Event} event            The click event which originated the selection.
-   * @returns {ProficiencySelector}  Newly displayed application.
+   * @returns {ItemProficiencyConfig}  Newly displayed application.
    * @private
    */
   _onProficiencySelector(event) {
@@ -1183,7 +1175,7 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
     const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, type: a.dataset.type };
-    return new ProficiencySelector(this.actor, options).render(true);
+    return new ItemProficiencyConfig(this.actor, options).render(true);
   }
 
   /* -------------------------------------------- */
