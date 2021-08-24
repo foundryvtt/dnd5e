@@ -377,10 +377,7 @@ export default class Item5e extends Item {
     }
 
     // Condense the resulting attack bonus formula into a simplified label
-    let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
-    if (toHitLabel.charAt(0) !== '-') {
-      toHitLabel = '+ ' + toHitLabel
-    }
+    let toHitLabel = simplifyRollFormula(parts.join('+'), rollData, { alwaysIncludeSign: true }).trim();
     this.labels.toHit = toHitLabel;
 
     // Update labels and return the prepared roll data

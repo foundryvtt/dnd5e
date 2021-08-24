@@ -4,15 +4,16 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
  *
- * @param {string} formula                          The original Roll formula
- * @param {Object} data                             Actor or item data against which to parse the roll
- * @param {Object} [options]                        Formatting options
- * @param {boolean} [options.constantFirst=false]   Puts the constants before the dice terms in the resulting formula
- * @param {boolean} [options.preserveFlavor=false]  Preserve flavor for non-constant terms
+ * @param {string} formula                             The original Roll formula
+ * @param {Object} data                                Actor or item data against which to parse the roll
+ * @param {Object} [options]                           Formatting options
+ * @param {boolean} [options.constantFirst=false]      Puts the constants before the dice terms in the resulting formula
+ * @param {boolean} [options.preserveFlavor=false]     Preserve flavor for non-constant terms
+ * @param {boolean} [options.alwaysIncludeSign=false]  Always include the sign at the start of the formula
  *
  * @return {string}  The resulting simplified formula
  */
-export function simplifyRollFormula(formula, data, {constantFirst=false, preserveFlavor=false} = {}) {
+export function simplifyRollFormula(formula, data, {constantFirst=false, preserveFlavor=false, alwaysIncludeSign=false} = {}) {
   const roll = new Roll(formula, data); // Parses the formula and replaces any @properties
   const terms = roll.terms;
 
@@ -37,7 +38,7 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
         constantTerms.push(...operators);                   // Place the operators into the constantTerms array
         constantTerms.push(term);                           // Then also add this constant term to that array.
       }                                                     //
-      operators = [];                                       // Finally, the operators have now all been assigend to one of the arrays, so empty this before the next iteration.
+      operators = [];                                       // Finally, the operators have now all been assigned to one of the arrays, so empty this before the next iteration.
     }
   }
 
@@ -54,11 +55,21 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
     }
   }
 
-  // Order the rollable and constant terms, either constant first or second depending on the optional argument
-  const parts = constantFirst ? [constantPart, rollableFormula] : [rollableFormula, constantPart];
+  // Join parts in the correct order with the correct signs
+  let simplifiedFormula;
+  if ( constantFirst || !constantPart || !rollableFormula ) {
+    simplifiedFormula = `${constantPart ?? ""} ${rollableFormula ?? ""}`;
+  } else {
+    simplifiedFormula = `${rollableFormula} ${(constantPart < 0) ? "" : "+"}${constantPart}`;
+  }
 
-  // Join the parts with a + sign, pass them to `Roll` once again to clean up the formula
-  return new Roll(parts.filterJoin(" + ")).formula;
+  // Pass simplified formula to `Roll` once again for clean up
+  let finalFormula = new Roll(simplifiedFormula).formula;
+
+  // Ensure final formula begins with a sign if alwaysIncludeSign is true
+  if ( alwaysIncludeSign && !/^[+-]/.test(finalFormula.trim()) ) finalFormula = ` + ${finalFormula}`;
+
+  return finalFormula;
 }
 
 /* -------------------------------------------- */
