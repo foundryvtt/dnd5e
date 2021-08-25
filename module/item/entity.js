@@ -1,6 +1,6 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
-import { Proficiency } from "../actor/entity.js";
+import Proficiency from "../actor/proficiency.js";
 
 /**
  * Override and extend the basic Item implementation
