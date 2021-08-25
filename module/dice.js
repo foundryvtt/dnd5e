@@ -55,10 +55,15 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
     }
   }
 
+  const addSign = (string) => {
+    if ( typeof string !== "string" || /^[+-]/.test(string.trim()) ) return string;
+    return ` + ${string}`;
+  };
+
   // Join parts in the correct order with the correct signs
   let simplifiedFormula;
   if ( constantFirst || !constantPart || !rollableFormula ) {
-    simplifiedFormula = `${constantPart ?? ""} ${rollableFormula ?? ""}`;
+    simplifiedFormula = `${constantPart ?? ""} ${addSign(rollableFormula) ?? ""}`;
   } else {
     simplifiedFormula = `${rollableFormula} ${constantPart.signedString()}`;
   }
@@ -67,7 +72,7 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
   let finalFormula = new Roll(simplifiedFormula).formula;
 
   // Ensure final formula begins with a sign if alwaysIncludeSign is true
-  if ( alwaysIncludeSign && !/^[+-]/.test(finalFormula.trim()) ) finalFormula = ` + ${finalFormula}`;
+  if ( alwaysIncludeSign ) finalFormula = addSign(finalFormula);
 
   return finalFormula;
 }
