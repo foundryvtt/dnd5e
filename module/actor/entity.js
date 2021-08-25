@@ -358,7 +358,12 @@ export default class Actor5e extends Actor {
    * @param actorData
    * @private
    */
-  _prepareVehicleData(actorData) {}
+  _prepareVehicleData(actorData) {
+    const data = actorData.data;
+
+    // Proficiency
+    data.attributes.prof = 0;
+  }
 
   /* -------------------------------------------- */
 
