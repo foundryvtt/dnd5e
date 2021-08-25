@@ -56,14 +56,14 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
   }
 
   const addSign = (string) => {
-    if ( typeof string !== "string" || /^[+-]/.test(string.trim()) ) return string;
+    if ( typeof string !== 'string' || /^[+-]/.test(string.trim()) ) return string;
     return ` + ${string}`;
   };
 
   // Join parts in the correct order with the correct signs
   let simplifiedFormula;
   if ( constantFirst || !constantPart || !rollableFormula ) {
-    simplifiedFormula = `${constantPart ?? ""} ${addSign(rollableFormula) ?? ""}`;
+    simplifiedFormula = `${constantPart ?? ''} ${addSign(rollableFormula) ?? ''}`;
   } else {
     simplifiedFormula = `${rollableFormula} ${constantPart.signedString()}`;
   }
