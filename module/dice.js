@@ -60,7 +60,7 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
   if ( constantFirst || !constantPart || !rollableFormula ) {
     simplifiedFormula = `${constantPart ?? ""} ${rollableFormula ?? ""}`;
   } else {
-    simplifiedFormula = `${rollableFormula} ${(constantPart < 0) ? "" : "+"}${constantPart}`;
+    simplifiedFormula = `${rollableFormula} ${constantPart.signedString()}`;
   }
 
   // Pass simplified formula to `Roll` once again for clean up
