@@ -1,6 +1,6 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
-import Actor5e from "../actor/entity.js";
+import { Proficiency } from "../actor/entity.js";
 
 /**
  * Override and extend the basic Item implementation
@@ -255,11 +255,9 @@ export default class Item5e extends Item {
    */
   prepareFinalAttributes() {
     // Proficiency
-    if ( this.isOwned ) {
-      this.data.data.prof = Actor5e.getProficiencyDescription(
-        Number(this.actor.data.data.prof), Number(this.data.data.proficient ?? 1)
-      );
-    }
+    this.data.data.prof = new Proficiency(
+      this.actor?.data.data.prof ?? 0, Number(this.data.data.proficient ?? 1)
+    );
 
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Saving throws

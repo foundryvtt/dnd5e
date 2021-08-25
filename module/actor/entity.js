@@ -47,59 +47,6 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Proficiency                                 */
-  /* -------------------------------------------- */
-
-  /**
-   * Object describing the proficiency for a specific ability or skill.
-   *
-   * @typedef {object} ProficiencyDescription
-   * @property {number} multiplier  Value by which to multiply the actor's base proficiency value.
-   * @property {string} rounding    Direction decimal results should be rounded ("up" or "down").
-   * @property {number} flat        Flat proficiency value regardless of proficiency mode.
-   * @property {string} dice        Dice-based proficiency value regardless of proficiency mode.
-   * @property {string} term        Either flat or dice proficiency term based on configured setting.
-   */
-
-  /**
-   * Produce an object describing the proficiency for a specific ability or skill.
-   *
-   * @param {number} proficiency   Actor's flat proficiency bonus based on their current level.
-   * @param {number} multiplier    Value by which to multiply the actor's base proficiency value.
-   * @param {boolean} [roundDown]  Should half-values be rounded up or down.
-   * @return {ProficiencyDescription}
-   */
-  static getProficiencyDescription(proficiency, multiplier, roundDown=true) {
-    const rounding = roundDown ? "down" : "up";
-    if ( !proficiency || !multiplier ) return {
-      multiplier: 0,
-      rounding: rounding,
-      flat: 0,
-      dice: "0",
-      term: "0"
-    };
-
-    const roundMethod = roundDown ? Math.floor : Math.ceil;
-    const roundTerm = roundDown ? "floor" : "ceil";
-
-    const prof = {
-      multiplier: Number(multiplier),
-      rounding: rounding,
-      flat: roundMethod(multiplier * proficiency)
-    };
-
-    if ( multiplier === 0.5 ) {
-      prof.dice = `${roundTerm}(1d${proficiency * 2} / 2)`;
-    } else {
-      prof.dice = `${multiplier}d${proficiency * 2}`;
-    }
-
-    prof.term = (game.settings.get("dnd5e", "proficiencyModifier") === "dice") ? prof.dice : String(prof.flat);
-
-    return prof;
-  }
-
-  /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
 
@@ -172,11 +119,11 @@ export default class Actor5e extends Actor {
       abl.mod = Math.floor((abl.value - 10) / 2);
 
       const isRA = this._isRemarkableAthlete(id);
-      abl.checkProf = Actor5e.getProficiencyDescription(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
+      abl.checkProf = new Proficiency(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
       const saveBonusAbl = Number.isNumeric(abl.bonuses?.save) ? parseInt(abl.bonuses.save) : 0;
       abl.saveBonus = saveBonusAbl + saveBonus;
 
-      abl.saveProf = Actor5e.getProficiencyDescription(data.attributes.prof, abl.proficient);
+      abl.saveProf = new Proficiency(data.attributes.prof, abl.proficient);
       const checkBonusAbl = Number.isNumeric(abl.bonuses?.check) ? parseInt(abl.bonuses.check) : 0;
       abl.checkBonus = checkBonusAbl + checkBonus;
 
@@ -203,7 +150,7 @@ export default class Actor5e extends Actor {
     const init = data.attributes.init;
     const athlete = flags.remarkableAthlete;
     init.mod = data.abilities.dex.mod;
-    init.prof = Actor5e.getProficiencyDescription(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
+    init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
     init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.bonus;
@@ -468,7 +415,7 @@ export default class Actor5e extends Actor {
       // Compute modifier
       skl.bonus = baseBonus + checkBonus + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
-      skl.prof = Actor5e.getProficiencyDescription(data.attributes.prof, skl.value, roundDown);
+      skl.prof = new Proficiency(data.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
       if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
@@ -1093,7 +1040,7 @@ export default class Actor5e extends Actor {
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
       parts.push("@prof");
-      data.prof = Actor5e.getProficiencyDescription(this.data.data.attributes.prof, 1).term;
+      data.prof = new Proficiency(this.data.data.attributes.prof, 1).term;
     }
 
     // Include a global actor ability save bonus
@@ -1912,5 +1859,71 @@ export default class Actor5e extends Actor {
     console.warn(`The Actor5e#useSpell method has been deprecated in favor of Item5e#roll`);
     if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
     return item.roll();
+  }
+}
+
+/**
+ * Object describing the proficiency for a specific ability or skill.
+ */
+export class Proficiency {
+  /**
+   * Produce an object describing the proficiency for a specific ability or skill.
+   *
+   * @param {number} proficiency   Actor's flat proficiency bonus based on their current level.
+   * @param {number} multiplier    Value by which to multiply the actor's base proficiency value.
+   * @param {boolean} [roundDown]  Should half-values be rounded up or down.
+   */
+  constructor(proficiency, multiplier, roundDown=true) {
+
+    /**
+     * Base proficiency value of the actor.
+     * @type {number}
+     * @private
+     */
+    this._baseProficiency = Number(proficiency ?? 0);
+
+    /**
+     * Value by which to multiply the actor's base proficiency value.
+     * @type {number}
+     */
+    this.multiplier = Number(multiplier ?? 0);
+
+    /**
+     * Direction decimal results should be rounded ("up" or "down").
+     * @type {string}
+     */
+    this.rounding = roundDown ? "down" : "up";
+
+  }
+
+  /**
+   * Flat proficiency value regardless of proficiency mode.
+   * @type {number}
+   */
+  get flat() {
+    const roundMethod = (this.rounding === "down") ? Math.floor : Math.ceil;
+    return roundMethod(this.multiplier * this._baseProficiency);
+  }
+
+  /**
+   * Dice-based proficiency value regardless of proficiency mode.
+   * @type {string}
+   */
+  get dice() {
+    if ( (this._baseProficiency === 0) || (this.multiplier === 0) ) return "0";
+    const roundTerm = (this.rounding === "down") ? "floor" : "ceil";
+    if ( this.multiplier === 0.5 ) {
+     return `${roundTerm}(1d${this._baseProficiency * 2} / 2)`;
+    } else {
+      return `${this.multiplier}d${this._baseProficiency * 2}`;
+    }
+  }
+
+  /**
+   * Either flat or dice proficiency term based on configured setting.
+   * @type {string}
+   */
+  get term() {
+    return (game.settings.get("dnd5e", "proficiencyModifier") === "dice") ? this.dice : String(this.flat);
   }
 }
