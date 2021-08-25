@@ -360,7 +360,7 @@ export default class Item5e extends Item {
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
     if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
       parts.push("@prof");
-      if ( this.data.data.prof && (this.data.data.prof.term !== "0") ) {
+      if ( this.data.data.prof?.hasProficiency ) {
         rollData.prof = this.data.data.prof.term;
       }
     }
@@ -1171,7 +1171,7 @@ export default class Item5e extends Item {
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
 
     // Add proficiency
-    if ( this.data.data.prof && (this.data.data.prof.term !== "0") ) {
+    if ( this.data.data.prof?.hasProficiency ) {
       parts.push("@prof");
       rollData.prof = this.data.data.prof.term;
     }

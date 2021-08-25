@@ -824,7 +824,7 @@ export default class Actor5e extends Actor {
     const data = {mod: skl.mod};
 
     // Include proficiency bonus
-    if ( skl.prof.term !== "0" ) {
+    if ( skl.prof.hasProficiency ) {
       data.prof = skl.prof.term;
       parts.push("@prof");
     }
@@ -922,7 +922,7 @@ export default class Actor5e extends Actor {
     const data = {mod: abl.mod};
 
     // Include proficiency bonus
-    if ( abl.checkProf.term !== "0" ) {
+    if ( abl.checkProf.hasProficiency ) {
       parts.push("@prof");
       data.prof = abl.checkProf.term;
     }
@@ -978,7 +978,7 @@ export default class Actor5e extends Actor {
     const data = {mod: abl.mod};
 
     // Include proficiency bonus
-    if ( abl.saveProf.term !== "0" ) {
+    if ( abl.saveProf.hasProficiency ) {
       parts.push("@prof");
       data.prof = abl.saveProf.term;
     }
@@ -1925,5 +1925,13 @@ export class Proficiency {
    */
   get term() {
     return (game.settings.get("dnd5e", "proficiencyModifier") === "dice") ? this.dice : String(this.flat);
+  }
+
+  /**
+   * Whether the proficiency is greater than zero.
+   * @type {boolean}
+   */
+  get hasProficiency() {
+    return this.term !== "0";
   }
 }
