@@ -52,7 +52,7 @@ export const registerSystemSettings = function() {
       "bonus": "SETTINGS.5eProfBonus",
       "dice": "SETTINGS.5eProfDice"
     },
-    onChange: rule => game.actors.forEach(a => a.render())
+    onChange: rule => game.actors.forEach(a => { a.prepareData(); a.render(); })
   });
 
   // Apply Dexterity as Initiative Tiebreaker
