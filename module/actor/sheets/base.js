@@ -110,6 +110,13 @@ export default class ActorSheet5e extends ActorSheet {
       return obj;
     }, {});
 
+    // Proficiency
+    if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
+      data.labels["proficiency"] = `d${data.data.attributes.prof * 2}`;
+    } else {
+      data.labels["proficiency"] = `+${data.data.attributes.prof}`;
+    }
+
     // Ability Scores
     for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
