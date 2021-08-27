@@ -725,10 +725,6 @@ export default class Item5e extends Item {
     const data = foundry.utils.deepClone(this.data.data);
     const labels = this.labels;
 
-    //Localize ability check strings
-    const abilityLabel = CONFIG.DND5E.abilities[this.data.data.ability]
-    data.abilityCheck = {label : game.i18n.format("DND5E.AbilityPromptTitle", {ability: abilityLabel}), ability: this.data.data.ability}
-
     // Rich text description
     data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
 
@@ -1293,9 +1289,6 @@ export default class Item5e extends Item {
       case "placeTemplate":
         const template = game.dnd5e.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();
-        break;
-      case "abilityCheck": 
-        await actor.rollAbilityTest(button.dataset.ability)
         break;
     }
 
