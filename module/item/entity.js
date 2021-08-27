@@ -1,5 +1,6 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
+import Proficiency from "../actor/proficiency.js";
 
 /**
  * Override and extend the basic Item implementation
@@ -253,6 +254,9 @@ export default class Item5e extends Item {
    * Compute item attributes which might depend on prepared actor data.
    */
   prepareFinalAttributes() {
+    // Proficiency
+    this.data.data.prof = new Proficiency(this.actor?.data.data.prof, this.data.data.proficient);
+
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Saving throws
       this.getSaveDC();
@@ -354,6 +358,9 @@ export default class Item5e extends Item {
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
     if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
       parts.push("@prof");
+      if ( this.data.data.prof?.hasProficiency ) {
+        rollData.prof = this.data.data.prof.term;
+      }
     }
 
     // Actor-level global bonus to attack rolls
@@ -378,7 +385,7 @@ export default class Item5e extends Item {
 
     // Condense the resulting attack bonus formula into a simplified label
     let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
-    if (toHitLabel.charAt(0) !== '-') {
+    if ( !/^[+-]/.test(toHitLabel) ) {
       toHitLabel = '+ ' + toHitLabel
     }
     this.labels.toHit = toHitLabel;
@@ -1158,8 +1165,14 @@ export default class Item5e extends Item {
 
     // Prepare roll data
     let rollData = this.getRollData();
-    const parts = [`@mod`, "@prof"];
+    const parts = [`@mod`];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
+
+    // Add proficiency
+    if ( this.data.data.prof?.hasProficiency ) {
+      parts.push("@prof");
+      rollData.prof = this.data.data.prof.term;
+    }
 
     // Add global actor bonus
     const bonuses = getProperty(this.actor.data.data, "bonuses.abilities") || {};
@@ -1212,9 +1225,6 @@ export default class Item5e extends Item {
       rollData["mod"] = ability?.mod || 0;
     }
 
-    // Include a proficiency score
-    const prof = ("proficient" in rollData.item) ? (rollData.item.proficient || 0) : 1;
-    rollData["prof"] = Math.floor(prof * (rollData.attributes.prof || 0));
     return rollData;
   }
 
