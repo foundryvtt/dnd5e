@@ -8,6 +8,8 @@ import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
+import ActorSkillConfig from "../../apps/skill-config.js";
+import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
 import {DND5E} from '../../config.js';
 import ActiveEffect5e from "../../active-effect.js";
@@ -101,6 +103,12 @@ export default class ActorSheet5e extends ActorSheet {
     // Labels and filters
     data.labels = this.actor.labels || {};
     data.filters = this._filters;
+
+    // Currency Labels
+    data.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+      obj[k] = c.label;
+      return obj;
+    }, {});
 
     // Ability Scores
     for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
@@ -213,7 +221,7 @@ export default class ActorSheet5e extends ActorSheet {
     return this.actor.effects.reduce((arr, e) => {
       let source = e.sourceName;
       if ( e.data.origin === this.actor.uuid ) source = e.data.label;
-      if ( !source ) return arr;
+      if ( !source || e.data.disabled || e.isSuppressed ) return arr;
       const value = e.data.changes.reduce((n, change) => {
         if ( (change.key !== target) || !Number.isNumeric(change.value) ) return n;
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
@@ -665,6 +673,16 @@ export default class ActorSheet5e extends ActorSheet {
       case "type":
         app = new ActorTypeConfig(this.object);
         break;
+      case "ability": {
+        const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
+        app = new ActorAbilityConfig(this.object, null, ability);
+        break;
+      }
+      case "skill": {
+        const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
+        app = new ActorSkillConfig(this.object, null, skill);
+        break;
+      }
     }
     app?.render(true);
   }
@@ -997,7 +1015,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollSkillCheck(event) {
     event.preventDefault();
-    const skill = event.currentTarget.parentElement.dataset.skill;
+    const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
     return this.actor.rollSkill(skill, {event: event});
   }
 
@@ -1043,7 +1061,6 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
     const options = { name: a.dataset.target, title: label.innerText, type: a.dataset.type };
-    if ( options.type === "tool" ) options.sortCategories = true;
     return new ProficiencySelector(this.actor, options).render(true);
   }
 

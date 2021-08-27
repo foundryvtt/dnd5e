@@ -51,7 +51,18 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentType" }}</label>
                 <select name="data.armor.type">
-                    {{selectOptions config.equipmentTypes selected=data.armor.type blank=""}}
+                    <option value=""></option>
+                    <optgroup label="{{ localize "DND5E.Armor" }}">
+                        {{selectOptions config.armorTypes selected=data.armor.type}}
+                    </optgroup>
+                    {{selectOptions config.miscEquipmentTypes selected=data.armor.type}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "DND5E.ItemEquipmentBase" }}</label>
+                <select name="data.baseItem">
+                    {{selectOptions baseItems selected=data.baseItem blank=""}}
                 </select>
             </div>
 
@@ -88,7 +99,7 @@
             </div>
             {{/if}}
 
-            {{#if isArmor}}
+            {{#if hasDexModifier}}
             {{!-- Dexterity Modifier --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
@@ -96,7 +107,9 @@
                    <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Unlimited' }}"/>
                 </div>
             </div>
+            {{/if}}
 
+            {{#if isArmor}}
             {{!-- Required Strength --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemRequiredStr" }}</label>

@@ -645,6 +645,9 @@
 }
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
+  /*  Shared Styles                            */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -679,6 +682,13 @@
   /* ----------------------------------------- */
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
+}
+.dnd5e.sheet.actor .config-button {
+  color: #4b4a44;
+  right: -6px;
+  top: -3px;
+  font-size: 10px;
+  font-weight: normal;
 }
 .dnd5e.sheet.actor .sheet-header img.profile {
   flex: 0 0 160px;
@@ -740,10 +750,6 @@
 .dnd5e.sheet.actor .sheet-header .attributes .attribute .config-button {
   position: absolute;
   display: none;
-  right: -6px;
-  top: -3px;
-  font-size: 10px;
-  font-weight: normal;
 }
 .dnd5e.sheet.actor .sheet-header .attributes .attribute:hover .config-button {
   display: block;
@@ -838,6 +844,7 @@
   height: 70px;
   text-align: center;
   border-bottom: 2px groove #eeede0;
+  position: relative;
 }
 .dnd5e.sheet.actor .ability-scores .ability:last-child {
   border-bottom: none;
@@ -849,6 +856,15 @@
   margin: 0 auto;
   line-height: 32px;
   font-size: 24px;
+}
+.dnd5e.sheet.actor .ability-scores .ability .config-button {
+  right: 2px;
+  top: 3px;
+  position: absolute;
+  display: none;
+}
+.dnd5e.sheet.actor .ability-scores .ability:hover .config-button {
+  display: block;
 }
 .dnd5e.sheet.actor .ability-scores .ability .ability-modifiers {
   height: 24px;
@@ -908,6 +924,18 @@
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-proficiency {
   flex: 0 0 16px;
   line-height: 18px;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill .skill-name-controls {
+  position: relative;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill .skill-name-controls .config-button {
+  right: 3px;
+  top: 4px;
+  position: absolute;
+  display: none;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill .skill-name-controls:hover .config-button {
+  display: block;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-ability {
   flex: 0 0 26px;
