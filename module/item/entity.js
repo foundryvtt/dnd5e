@@ -678,7 +678,6 @@ export default class Item5e extends Item {
       hasAreaTarget: this.hasAreaTarget,
       isTool: this.data.type === "tool",
       isAbilityCheck: this.data.data.actionType === "abil",
-      isSkillCheck: this.data.data.actionType === "skill"
     };
     const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.html", templateData);
 
