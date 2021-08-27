@@ -880,7 +880,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    return item.roll();
+    if ( item ) return item.roll();
   }
 
   /* -------------------------------------------- */
