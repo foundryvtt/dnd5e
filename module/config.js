@@ -1062,7 +1062,6 @@ DND5E.conditionTypes = {
  * @enum {string}
  */
 DND5E.languages = {
-<<<<<<< HEAD
   common: "DND5E.LanguagesCommon",
   aarakocra: "DND5E.LanguagesAarakocra",
   abyssal: "DND5E.LanguagesAbyssal",
