@@ -796,13 +796,14 @@ export default class Actor5e extends Actor {
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
+    options.chooseModifier = true
     const skl = this.data.data.skills[skillId];
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
     // Compose roll parts and data
     const parts = ["@mod"];
-    const data = {mod: skl.mod + skl.prof};
+    const data = {mod: skl.mod + skl.prof, abilities: this.data.data.abilities, default: {ability: skl.ability}};
 
     // Ability test bonus
     if ( bonuses.check ) {
