@@ -267,7 +267,7 @@ export default class Item5e extends Item {
       this.getDerivedDamageLabel();
     }
 
-    if ( this.data.data.hasOwnProperty("proficient") ) {
+    if ( this.data.data.hasOwnProperty("proficiencyMode") ) {
       this.getProficiency();
     }
   }
@@ -399,9 +399,9 @@ export default class Item5e extends Item {
   getProficiency() {
     const type = (this.type === "equipment") ? "armor" : this.type;
     const actorProfs = this.actor?.data.data.traits[`${type}Prof`]?.value ?? [];
-    let upgradeProf = (this.actor?.type === "npc") ? true : Item5e.hasProficiency(this.data, actorProfs);
-    if ( type === "tool" ) upgradeProf = Number(upgradeProf);
-    if ( upgradeProf > this.data.data.proficient ) this.data.data.proficient = upgradeProf;
+    let proficiency = (this.actor?.type === "npc") ? true : Item5e.hasProficiency(this.data, actorProfs);
+    if ( type === "tool" ) proficiency = Number(proficiency); // TODO: Handle expertise when it is added to actor data
+    this.data.data.proficient = proficiency;
   }
 
   /* -------------------------------------------- */
@@ -1518,6 +1518,12 @@ export default class Item5e extends Item {
    * @return {boolean}              Should this item be marked as proficient.
    */
   static hasProficiency(data, actorProf) {
+    switch ( data.data.proficiencyMode ) {
+      case "auto": break;
+      case "always": return true;
+      case "never": return false;
+    }
+
     const type = (data.type === "equipment") ? "armor" : data.type;
     const subtypeProperty = (type === "armor") ? "data.armor.type" : `data.${type}Type`;
     const subtype = foundry.utils.getProperty(data, subtypeProperty);

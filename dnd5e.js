@@ -148,8 +148,8 @@ Hooks.once("setup", function() {
     "alignments", "armorClasses.label", "armorProficiencies", "armorTypes", "conditionTypes", "consumableTypes",
     "cover", "currencies.label", "currencies.abbreviation", "damageResistanceTypes", "damageTypes", "distanceUnits",
     "equipmentTypes", "healingTypes", "itemActionTypes", "itemRarity", "languages", "limitedUsePeriods",
-    "miscEquipmentTypes", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels", "senses",
-    "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools",
+    "miscEquipmentTypes", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels", "proficiencyMode",
+    "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools",
     "targetTypes", "timePeriods", "toolProficiencies", "toolTypes", "vehicleTypes", "weaponProficiencies",
     "weaponProperties", "weaponTypes"
   ];
