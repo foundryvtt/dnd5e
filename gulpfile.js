@@ -8,6 +8,7 @@ const Datastore = require('nedb');
 const fs = require("fs");
 const mergeStream = require("merge-stream");
 const path = require("path");
+const { Transform } = require('stream');
 const through2 = require("through2");
 
 
@@ -38,19 +39,14 @@ function compilePacks() {
     return fs.statSync(path.join(PACK_SRC, file)).isDirectory();
   });
 
-  // Combine the JSON files in each folder into a compendium pack
   const packs = folders.map((folder) => {
-    const db = new Datastore({
-      filename: path.resolve(__dirname, PACK_DEST, `${folder}.db`),
-      autoload: true
-    });
-    return gulp.src(path.join(PACK_SRC, folder, "/**/*.json")).pipe(
-      through2.obj((file, enc, cb) => {
+    const db = fs.createWriteStream(path.resolve(__dirname, PACK_DEST, `${folder}.db`), {flags: "a"});
+    return gulp.src(path.join(PACK_SRC, folder, "/**/*.json"))
+      .pipe(through2.obj((file, enc, callback) => {
         let json = JSON.parse(file.contents.toString());
-        db.insert(json);
-        cb(null, file);
-      })
-    );
+        db.write(JSON.stringify(json) + "\n");
+        callback(null, file);
+      }));
   });
   return mergeStream.call(null, packs);
 }
