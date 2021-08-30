@@ -9,7 +9,6 @@ const fs = require("fs");
 const mergeStream = require("merge-stream");
 const path = require("path");
 const through2 = require("through2");
-const JSON5 = require('json5');
 
 
 /* ----------------------------------------- */
@@ -47,7 +46,7 @@ function compilePacks() {
     });
     return gulp.src(path.join(PACK_SRC, folder, "/**/*.json")).pipe(
       through2.obj((file, enc, cb) => {
-        let json = JSON5.parse(file.contents.toString());
+        let json = JSON.parse(file.contents.toString());
         db.insert(json);
         cb(null, file);
       })
@@ -74,7 +73,7 @@ function extractPacks() {
 
       db.find({}, (err, packs) => {
         packs.forEach(pack => {
-          let output = JSON5.stringify(pack, { space: 2, quote: '"' }) + "\n";
+          let output = JSON.stringify(pack, undefined, 2) + "\n";
           let packName = pack.name.toLowerCase().replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
           fs.writeFileSync(`${folder}/${packName}.json`, output);
         });
