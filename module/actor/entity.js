@@ -790,7 +790,7 @@ export default class Actor5e extends Actor {
       isDelta: false,
       isBar: true
     }, updates);
-    return allowed !== false ? this.update(updates) : this;
+    return allowed !== false ? this.update(updates, {dhp: -amount}) : this;
   }
 
   /* -------------------------------------------- */
@@ -1227,7 +1227,6 @@ export default class Actor5e extends Actor {
     else if ( autoHD ) {
       await this.autoSpendHitDice({ threshold: autoHDThreshold });
     }
-
     return this._rest(chat, newDay, false, this.data.data.attributes.hd - hd0, this.data.data.attributes.hp.value - hp0);
   }
 
@@ -1833,6 +1832,42 @@ export default class Actor5e extends Actor {
     // Add custom entries
     if ( data.custom ) {
       data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+    this._displayScrollingDamage(options.dhp);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display changes to health as scrolling combat text.
+   * Adapt the font size relative to the Actor's HP total to emphasize more significant blows.
+   * @param dhp
+   * @private
+   */
+  _displayScrollingDamage(dhp) {
+    if ( !dhp ) return;
+    dhp = Number(dhp);
+    const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
+    for ( let t of tokens ) {
+      if ( !t?.hud?.createScrollingText ) continue;  // This is undefined prior to v9-p2
+      const pct = Math.clamped(Math.abs(dhp) / this.data.data.attributes.hp.max, 0, 1);
+      t.hud.createScrollingText(dhp.signedString(), {
+        anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
+        fontSize: 16 + (32 * pct), // Range between [16, 48]
+        fill: dhp < 0 ? 0xFF0000 : 0x00FF00,
+        stroke: 0x000000,
+        strokeThickness: 4,
+        jitter: 0.25
+      });
     }
   }
 
