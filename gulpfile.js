@@ -51,7 +51,9 @@ function compilePacks() {
   });
 
   const packs = folders.map((folder) => {
-    const db = fs.createWriteStream(path.resolve(__dirname, PACK_DEST, `${folder}.db`), {flags: "a"});
+    const filePath = path.resolve(__dirname, PACK_DEST, `${folder}.db`);
+    if ( fs.existsSync(filePath) ) fs.rmSync(filePath);
+    const db = fs.createWriteStream(filePath, {flags: "a"});
     return gulp.src(path.join(PACK_SRC, folder, "/**/*.json"))
       .pipe(through2.obj((file, enc, callback) => {
         let json = JSON.parse(file.contents.toString());
@@ -81,7 +83,7 @@ function extractPacks() {
     .pipe(through2.obj((file, enc, callback) => {
       let filename = path.parse(file.path).name;
       const folder = `./${PACK_SRC}/${filename}`;
-      if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
+      if ( !fs.existsSync(folder) ) fs.mkdirSync(folder, { recursive: true });
 
       const db = new Datastore({ filename: file.path, autoload: true });
       db.loadDatabase();
@@ -89,7 +91,7 @@ function extractPacks() {
       db.find({}, (err, entries) => {
         entries.forEach(entry => {
           const name = entry.name.toLowerCase();
-          if ( entryName && entryName !== name ) return;
+          if ( entryName && (entryName !== name) ) return;
           let output = JSON.stringify(entry, undefined, 2) + "\n";
           let outputName = name.replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
           fs.writeFileSync(`${folder}/${outputName}.json`, output);
