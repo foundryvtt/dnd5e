@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
 
-const parsedArgs = require('minimist')(process.argv.slice(2));
+const parsedArgs = require('yargs').argv;
 
 // Package Building
 const Datastore = require('nedb');
