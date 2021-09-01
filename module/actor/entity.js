@@ -577,12 +577,12 @@ export default class Actor5e extends Actor {
 
       // Flat AC (no additional bonuses)
       case "flat":
-        ac.value = ac.flat;
+        ac.value = Number(ac.flat);
         return ac;
 
       // Natural AC (includes bonuses)
       case "natural":
-        ac.base = ac.flat;
+        ac.base = Number(ac.flat);
         break;
 
       // Equipment-based AC
