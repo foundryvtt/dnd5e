@@ -739,6 +739,7 @@ DND5E.skills = {
   "prf": "DND5E.SkillPrf",
   "per": "DND5E.SkillPer",
   "rel": "DND5E.SkillRel",
+  "sca": "DND5e.SkillSca",
   "slt": "DND5E.SkillSlt",
   "ste": "DND5E.SkillSte",
   "sur": "DND5E.SkillSur"
