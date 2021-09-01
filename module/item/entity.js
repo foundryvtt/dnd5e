@@ -353,7 +353,7 @@ export default class Item5e extends Item {
     if ( !this.isOwned ) return {rollData, parts};
 
     // Ability score modifier
-    parts.push(`@mod`);
+    parts.push("@mod");
 
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
     if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
@@ -820,7 +820,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for tool type items
+   * Prepare chat card data for loot type items
    * @private
    */
   _lootChatData(data, labels, props) {
@@ -1164,14 +1164,20 @@ export default class Item5e extends Item {
     if ( this.type !== "tool" ) throw "Wrong item type!";
 
     // Prepare roll data
-    let rollData = this.getRollData();
-    const parts = [`@mod`];
+    const rollData = this.getRollData();
+    const parts = ["@mod"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
 
     // Add proficiency
     if ( this.data.data.prof?.hasProficiency ) {
       parts.push("@prof");
       rollData.prof = this.data.data.prof.term;
+    }
+
+    // Add tool bonuses
+    if ( this.data.data.bonus ) {
+      parts.push("@toolBonus");
+      rollData.toolBonus = this.data.data.bonus;
     }
 
     // Add global actor bonus
