@@ -8,7 +8,6 @@ const Datastore = require('nedb');
 const fs = require("fs");
 const mergeStream = require("merge-stream");
 const path = require("path");
-const { Transform } = require('stream');
 const through2 = require("through2");
 
 
@@ -45,18 +44,17 @@ const PACK_DEST = "packs";
 function compilePacks() {
   const packName = parsedArgs["pack"];
   // Determine which source folders to process
-  const folders = fs.readdirSync(PACK_SRC).filter((file) => {
-    if ( packName && packName !== file ) return;
-    return fs.statSync(path.join(PACK_SRC, file)).isDirectory();
-  });
+  const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true }).filter((file) =>
+    file.isDirectory() && ( !packName || (packName === file.name) )
+  );
 
   const packs = folders.map((folder) => {
-    const filePath = path.resolve(__dirname, PACK_DEST, `${folder}.db`);
-    if ( fs.existsSync(filePath) ) fs.rmSync(filePath);
-    const db = fs.createWriteStream(filePath, {flags: "a"});
-    return gulp.src(path.join(PACK_SRC, folder, "/**/*.json"))
+    const filePath = path.join(PACK_DEST, `${folder.name}.db`);
+    fs.rmSync(filePath, { force: true });
+    const db = fs.createWriteStream(filePath, { flags: "a", mode: 0o664 });
+    return gulp.src(path.join(PACK_SRC, folder.name, "/**/*.json"))
       .pipe(through2.obj((file, enc, callback) => {
-        let json = JSON.parse(file.contents.toString());
+        const json = JSON.parse(file.contents.toString());
         db.write(JSON.stringify(json) + "\n");
         callback(null, file);
       }));
@@ -77,13 +75,13 @@ function compilePacks() {
  * - `gulp extractPacks --pack classes --name Barbarian` - Only extract a single item from the specified compendium.
  */
 function extractPacks() {
-  const packName = parsedArgs["pack"] ?? "*";
-  const entryName = parsedArgs["name"]?.toLowerCase();
+  const packName = parsedArgs.pack ?? "*";
+  const entryName = parsedArgs.name?.toLowerCase();
   const packs = gulp.src(`${PACK_DEST}/**/${packName}.db`)
     .pipe(through2.obj((file, enc, callback) => {
-      let filename = path.parse(file.path).name;
-      const folder = `./${PACK_SRC}/${filename}`;
-      if ( !fs.existsSync(folder) ) fs.mkdirSync(folder, { recursive: true });
+      const filename = path.parse(file.path).name;
+      const folder = path.join(PACK_SRC, filename);
+      if ( !fs.existsSync(folder) ) fs.mkdirSync(folder, { recursive: true, mode: 0o775 });
 
       const db = new Datastore({ filename: file.path, autoload: true });
       db.loadDatabase();
@@ -92,9 +90,9 @@ function extractPacks() {
         entries.forEach(entry => {
           const name = entry.name.toLowerCase();
           if ( entryName && (entryName !== name) ) return;
-          let output = JSON.stringify(entry, undefined, 2) + "\n";
-          let outputName = name.replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
-          fs.writeFileSync(`${folder}/${outputName}.json`, output);
+          const output = JSON.stringify(entry, null, 2) + "\n";
+          const outputName = name.replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
+          fs.writeFileSync(path.join(folder, `${outputName}.json`), output, { mode: 0o664 });
         });
       });
 
