@@ -50,6 +50,7 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
     if ( Object.keys(contents).length === 0 ) delete data.flags[key];
   });
 
+  if ( data.effects ) data.effects.forEach((i) => cleanPackEntry(i, { clearSourceId: false }));
   if ( data.items ) data.items.forEach((i) => cleanPackEntry(i, { clearSourceId: false }));
 }
 

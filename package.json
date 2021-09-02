@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "gulp css",
+    "build:clean": "gulp cleanPacks",
     "build:db": "gulp compilePacks",
     "build:json": "gulp extractPacks",
     "build:watch": "gulp"
