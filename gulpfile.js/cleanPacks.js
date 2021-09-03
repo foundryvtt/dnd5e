@@ -1,12 +1,13 @@
 const parsedArgs = require('yargs').argv;
 
+const Datastore = require('nedb');
 const fs = require("fs");
 const gulp = require('gulp');
 const mergeStream = require("merge-stream");
 const path = require("path");
 const through2 = require("through2");
 
-const { PACK_SRC } = require("./paths.js");
+const { PACK_DEST, PACK_SRC } = require("./paths.js");
 
 
 /**
@@ -33,6 +34,29 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
 
 /**
+ * Attempts to find an existing matching ID for an item of this name, otherwise generates a new unique ID.
+ * @param {object} data  Data for the entry that needs an ID.
+ * @param {string} pack  Name of the pack to which this item belongs.
+ * @return {Promise.<string>}  Resolves once the ID is determined.
+ */
+function determineId(data, pack) {
+  const dbPath = path.join(PACK_DEST, `${pack}.db`);
+  const db = new Datastore({ filename: dbPath, autoload: true });
+  db.loadDatabase();
+
+  return new Promise((resolve, reject) => {
+    db.findOne({ name: data.name }, (err, entry) => {
+      if ( entry ) {
+        resolve(entry._id);
+      } else {
+        resolve(db.createNewId());
+      }
+    });
+  });
+}
+
+
+/**
  * Cleans and formats source JSON files, removing unnecessary permissions and flags
  * and adding the proper spacing.
  *
@@ -49,11 +73,12 @@ function cleanPacks() {
 
   const packs = folders.map((folder) => {
     return gulp.src(path.join(PACK_SRC, folder.name, "/**/*.json"))
-      .pipe(through2.obj((file, enc, callback) => {
+      .pipe(through2.obj(async (file, enc, callback) => {
         const json = JSON.parse(file.contents.toString());
         const name = json.name.toLowerCase();
         if ( entryName && (entryName !== name) ) return callback(null, file);
         cleanPackEntry(json);
+        if ( !json._id ) json._id = await determineId(json, folder.name);
         fs.rmSync(file.path, { force: true });
         fs.writeFileSync(file.path, JSON.stringify(json, null, 2) + "\n", { mode: 0o664 });
         callback(null, file);
