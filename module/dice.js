@@ -2,78 +2,74 @@ export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
- * A standardized helper function for simplifying the constant parts of a multipart roll formula
- *
- * @param {string} formula                          The original Roll formula
- * @param {Object} data                             Actor or item data against which to parse the roll
- * @param {Object} [options]                        Formatting options
- * @param {boolean} [options.constantFirst=false]   Puts the constants before the dice terms in the resulting formula
- * @param {boolean} [options.preserveFlavor=false]  Preserve flavor for non-constant terms
- *
- * @return {string}  The resulting simplified formula
+ * A helper function to remove redundant addition and subtraction operators
+ * in roll formulae.
+ * 
+ * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ * 
+ * @return {Object[]}  A new array of roll terms with redundant operators removed
+ * @ 
  */
-export function simplifyRollFormula(formula, data, {constantFirst=false, preserveFlavor=false} = {}) {
-  const roll = new Roll(formula, data); // Parses the formula and replaces any @properties
-  const terms = roll.terms;
+function _stripRedundantOperatorTerms(terms) {
+  const simplifiedTerms = terms.reduce((accumulatedTerms, currentTerm) => {
+    const previousTerm = accumulatedTerms[accumulatedTerms.length - 1];
 
-  // Some terms are "too complicated" for this algorithm to simplify
-  // In this case, the original formula is returned.
-  if ( terms.some(_isUnsupportedTerm) ) return roll.formula;
-  if ( !preserveFlavor ) terms.forEach(term => delete term.options.flavor);
+    // If we have a chain of operators, we should attempt to simplify the formula.
+    if (previousTerm instanceof OperatorTerm && currentTerm instanceof OperatorTerm) {
+      // Create an array containing the operator types used in the current
+      // and previous term.
+      const operators = Array.from(new Set([previousTerm.operator, currentTerm.operator]));
 
-  const rollableTerms = []; // Terms that are non-constant, and their associated operators
-  const constantTerms = []; // Terms that are constant, and their associated operators
-  let operators = [];       // Temporary storage for operators before they are moved to one of the above
+      // If the array contains a single term and it is an addition operator,
+      // adding a second addition operator is redundant. Return the accumulated
+      // terms as they are.
+      if (operators.length === 1 && operators.includes("+")) {
+        return accumulatedTerms;
 
-  for ( let term of terms ) {                                 // For each term
-    if (term instanceof OperatorTerm) operators.push(term); // If the term is an addition/subtraction operator, push the term into the operators array
-    else {                                                  // Otherwise the term is not an operator
-      if (term instanceof DiceTerm) {                       // If the term is something rollable
-        rollableTerms.push(...operators);                   // Place all the operators into the rollableTerms array
-        rollableTerms.push(term);                           // Then place this rollable term into it as well
-      }                                                     //
-      else {                                                // Otherwise, this must be a constant
-        delete term.options.flavor;
-        constantTerms.push(...operators);                   // Place the operators into the constantTerms array
-        constantTerms.push(term);                           // Then also add this constant term to that array.
-      }                                                     //
-      operators = [];                                       // Finally, the operators have now all been assigend to one of the arrays, so empty this before the next iteration.
+      // If the array contains a single term and it is a substration operator,
+      // the two subtractions cancel out. Remove the previous element from the
+      // accumulated terms and replace it with an addition operator.
+      } else if (operators.length === 1 && operators.includes("-")) {
+        accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+
+      // If the array contains both an addition and subtraction operator,
+      // the subtraction operator is the only one the matters. Remove the previous
+      // element from the accumulated terms and insert a subtraction operator in
+      // its place.
+      } else if (operators.includes("+") && operators.includes("-")) {
+        accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+
+      // In all other cases, such as pairs including a multiplication or division
+      // operator, we should do nothing special. Append the current term to the
+      // accumulated terms and move on.
+      } else {
+        accumulatedTerms.push(currentTerm);
+      }
+
+    // If there isn't a chain of operators, we can add the die or numerical term
+    // without making simplifications.
+    } else {
+      accumulatedTerms.push(currentTerm);
     }
-  }
 
-  const constantFormula = Roll.getFormula(constantTerms);  // Cleans up the constant terms and produces a new formula string
-  const rollableFormula = Roll.getFormula(rollableTerms);  // Cleans up the non-constant terms and produces a new formula string
+    return accumulatedTerms;
+  }, [])
 
-  // Mathematically evaluate the constant formula to produce a single constant term
-  let constantPart = undefined;
-  if ( constantFormula ) {
-    try {
-      constantPart = Roll.safeEval(constantFormula)
-    } catch (err) {
-      console.warn(`Unable to evaluate constant term ${constantFormula} in simplifyRollFormula`);
-    }
-  }
-
-  // Order the rollable and constant terms, either constant first or second depending on the optional argument
-  const parts = constantFirst ? [constantPart, rollableFormula] : [rollableFormula, constantPart];
-
-  // Join the parts with a + sign, pass them to `Roll` once again to clean up the formula
-  return new Roll(parts.filterJoin(" + ")).formula;
+  return simplifiedTerms;
 }
 
-/* -------------------------------------------- */
-
 /**
- * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
- * @param {*} term - A single Dice term to check support on
- * @return {Boolean} True when unsupported, false if supported
+ * A standardized helper function for simplifying the constant parts of a multipart roll formula
+ * 
+ * @param {Object} roll  An unevaluated Roll object
+ * 
+ * @return {Object}  A new Roll object with a simplified formula and terms
  */
-function _isUnsupportedTerm(term) {
-	const diceTerm = term instanceof DiceTerm;
-	const operator = term instanceof OperatorTerm && ["+", "-"].includes(term.operator);
-	const number   = term instanceof NumericTerm;
+export function simplifyRollFormula(roll) {
+  const simplifiedTerms = _stripRedundantOperatorTerms(roll.terms);
+  const simplifiedRollFormula = simplifiedTerms.map((term) => term.formula).join("");
 
-	return !(diceTerm || operator || number);
+  return new Roll(simplifiedRollFormula);
 }
 
 /* -------------------------------------------- */
@@ -152,16 +148,18 @@ export async function d20Roll({
     if ( configured === null ) return null;
   }
 
+  const simplifiedRoll = simplifyRollFormula(roll);
+
   // Evaluate the configured roll
-  await roll.evaluate({async: true});
+  await simplifiedRoll.evaluate({async: true});
 
   // Create a Chat Message
   if ( speaker ) {
     console.warn(`You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData`);
     messageData.speaker = speaker;
   }
-  if ( roll && chatMessage ) await roll.toMessage(messageData);
-  return roll;
+  if ( simplifiedRoll && chatMessage ) await simplifiedRoll.toMessage(messageData);
+  return simplifiedRoll;
 }
 
 /* -------------------------------------------- */
@@ -245,16 +243,18 @@ export async function damageRoll({
     if ( configured === null ) return null;
   }
 
+  const simplifiedRoll = simplifyRollFormula(roll)
+
   // Evaluate the configured roll
-  await roll.evaluate({async: true});
+  await simplifiedRoll.evaluate({async: true});
 
   // Create a Chat Message
   if ( speaker ) {
     console.warn(`You are passing the speaker argument to the damageRoll function directly which should instead be passed as an internal key of messageData`);
     messageData.speaker = speaker;
   }
-  if ( roll && chatMessage ) await roll.toMessage(messageData);
-  return roll;
+  if ( simplifiedRoll && chatMessage ) await simplifiedRoll.toMessage(messageData);
+  return simplifiedRoll;
 }
 
 /* -------------------------------------------- */
