@@ -3,12 +3,11 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
  * A helper function to remove redundant addition and subtraction operators
- * in roll formulae.
+ * in roll terms.
  * 
  * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  * 
  * @return {Object[]}  A new array of roll terms with redundant operators removed
- * @ 
  */
 function _stripRedundantOperatorTerms(terms) {
   const simplifiedTerms = terms.reduce((accumulatedTerms, currentTerm) => {
@@ -26,7 +25,7 @@ function _stripRedundantOperatorTerms(terms) {
       if (operators.length === 1 && operators.includes("+")) {
         return accumulatedTerms;
 
-      // If the array contains a single term and it is a substration operator,
+      // If the array contains a single term and it is a substraction operator,
       // the two subtractions cancel out. Remove the previous element from the
       // accumulated terms and replace it with an addition operator.
       } else if (operators.length === 1 && operators.includes("-")) {
@@ -39,8 +38,12 @@ function _stripRedundantOperatorTerms(terms) {
       } else if (operators.includes("+") && operators.includes("-")) {
         accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
-      // In all other cases, such as pairs including a multiplication or division
-      // operator, we should do nothing special. Append the current term to the
+      // In cases where the first operator is a muliplication or division operator
+      // and the second operator is an addition operator, the addition is redundant.
+      } else if (["*", "/"].includes(previousTerm.operator) && operators.includes("+")) {
+        return accumulatedTerms;
+
+      // In all other cases, we should do nothing special. Append the current term to the
       // accumulated terms and move on.
       } else {
         accumulatedTerms.push(currentTerm);
@@ -60,6 +63,7 @@ function _stripRedundantOperatorTerms(terms) {
 
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
+ * on an existing roll. A new roll with a simplified formula is returned.
  * 
  * @param {Object} roll  An unevaluated Roll object
  * 
