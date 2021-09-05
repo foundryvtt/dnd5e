@@ -786,7 +786,8 @@ DND5E.spellPreparationModes = {
   pact: "DND5E.PactMagic",
   always: "DND5E.SpellPrepAlways",
   atwill: "DND5E.SpellPrepAtWill",
-  innate: "DND5E.SpellPrepInnate"
+  innate: "DND5E.SpellPrepInnate",
+  ritualBook: "DND5E.SpellPrepRitualBook"
 };
 
 /**
