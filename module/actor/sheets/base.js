@@ -391,14 +391,16 @@ export default class ActorSheet5e extends ActorSheet {
     const sections = {
       "atwill": -20,
       "innate": -10,
-      "pact": 0.5
+      "pact": 0.5,
+      "ritualBook": 10
     };
 
     // Label spell slot uses headers
     const useLabels = {
       "-20": "-",
       "-10": "-",
-      "0": "&infin;"
+      "0": "&infin;",
+      "10": "-"
     };
 
     // Format a spellbook entry for a certain indexed level
@@ -406,7 +408,7 @@ export default class ActorSheet5e extends ActorSheet {
       spellbook[i] = {
         order: i,
         label: label,
-        usesSlots: i > 0,
+        usesSlots: i > 0 && i < 10,
         canCreate: owner,
         canPrepare: (data.actor.type === "character") && (i >= 1),
         spells: [],
