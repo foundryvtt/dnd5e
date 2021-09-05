@@ -63,17 +63,13 @@ function _stripRedundantOperatorTerms(terms) {
 
 /**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
- * on an existing roll. A new roll with a simplified formula is returned.
+ * on an existing roll. The original roll is modified, updating both its terms and roll formula.
  * 
- * @param {Object} roll  An unevaluated Roll object
- * 
- * @return {Object}  A new Roll object with a simplified formula and terms
+ * @param {Object} roll  A Roll object 
  */
 export function simplifyRollFormula(roll) {
-  const simplifiedTerms = _stripRedundantOperatorTerms(roll.terms);
-  const simplifiedRollFormula = simplifiedTerms.map((term) => term.formula).join("");
-
-  return new Roll(simplifiedRollFormula);
+  roll.terms = _stripRedundantOperatorTerms(roll.terms);
+  roll._formula = roll.constructor.getFormula(roll.terms);
 }
 
 /* -------------------------------------------- */
@@ -152,18 +148,19 @@ export async function d20Roll({
     if ( configured === null ) return null;
   }
 
-  const simplifiedRoll = simplifyRollFormula(roll);
+  // Remove redundant operator terms from the roll formula
+  simplifyRollFormula(roll);
 
   // Evaluate the configured roll
-  await simplifiedRoll.evaluate({async: true});
+  await roll.evaluate({async: true});
 
   // Create a Chat Message
   if ( speaker ) {
     console.warn(`You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData`);
     messageData.speaker = speaker;
   }
-  if ( simplifiedRoll && chatMessage ) await simplifiedRoll.toMessage(messageData);
-  return simplifiedRoll;
+  if ( roll && chatMessage ) await roll.toMessage(messageData);
+  return roll;
 }
 
 /* -------------------------------------------- */
@@ -247,18 +244,19 @@ export async function damageRoll({
     if ( configured === null ) return null;
   }
 
-  const simplifiedRoll = simplifyRollFormula(roll)
+  // Remove redundant operator terms from the roll formula
+  simplifyRollFormula(roll);
 
   // Evaluate the configured roll
-  await simplifiedRoll.evaluate({async: true});
+  await roll.evaluate({async: true});
 
   // Create a Chat Message
   if ( speaker ) {
     console.warn(`You are passing the speaker argument to the damageRoll function directly which should instead be passed as an internal key of messageData`);
     messageData.speaker = speaker;
   }
-  if ( simplifiedRoll && chatMessage ) await simplifiedRoll.toMessage(messageData);
-  return simplifiedRoll;
+  if ( roll && chatMessage ) await roll.toMessage(messageData);
+  return roll;
 }
 
 /* -------------------------------------------- */
