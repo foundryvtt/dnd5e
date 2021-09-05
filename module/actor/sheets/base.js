@@ -408,7 +408,7 @@ export default class ActorSheet5e extends ActorSheet {
       spellbook[i] = {
         order: i,
         label: label,
-        usesSlots: 10 > i > 0,
+        usesSlots: i > 0 && i < 10,
         canCreate: owner,
         canPrepare: (data.actor.type === "character") && (i >= 1),
         spells: [],
