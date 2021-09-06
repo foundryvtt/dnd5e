@@ -445,7 +445,12 @@ export default class Actor5e extends Actor {
 
     // Initiative modifiers
     const joat = flags.jackOfAllTrades;
-    const initiativeBonus = Number.isNumeric(init.bonus) ? parseInt(init.bonus) : 0;
+
+    // Removes flavour annotations from the modifier formula. Without this step,
+    // simple numerical modifiers with a flavour annotation cannot be included
+    // in the initiative mod total displayed to users on their character sheets.
+    const bonus = init.bonus.replace(RollTerm.FLAVOR_REGEXP, "");
+    const initiativeBonus = Number.isNumeric(bonus) ? parseInt(bonus) : 0;
 
     let roundDown = true;
   
