@@ -1,0 +1,27 @@
+<form autocomplete="off">
+  <p class="notes">{{localize "DND5E.InitiativeConfigurationHint"}}</p>
+  <div class="form-group">
+    <label>{{ localize "DND5E.ProficiencyLevel" }}</label>
+    <select name="data.attributes.init.proficient">
+      {{selectOptions proficiencyLevels selected=initiative.proficient}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>{{localize "DND5E.SkillBonusCheck"}}</label>
+    <input
+      name="data.attributes.init.value"
+      type="text" data-dtype="Number"
+      value="{{numberFormat initiative.value decimals=0 sign=true}}"
+      placeholder="0"
+    >
+  </div>
+  <hr>
+  <div class="form-group">
+    <label>{{localize "DND5E.BonusAbilityCheck"}}</label>
+    <input name="data.bonuses.abilities.check" type="text" value="{{bonusGlobalCheck}}"/>
+    <p class="notes">{{localize "DND5E.AbilityCheckGlobalBonusHint"}}</p>
+  </div>
+
+  <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{localize "Submit"}}</button>
+</form>
+  

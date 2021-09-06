@@ -765,6 +765,13 @@
   font-weight: normal;
   line-height: 1rem;
 }
+.dnd5e.sheet.actor .sheet-header .attributes .initiative {
+  position: relative;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .initiative:hover .config-button {
+  top: 2px;
+  right: 3px;
+}
 .dnd5e.sheet.actor h4.box-title {
   height: 18px;
   line-height: 16px;
