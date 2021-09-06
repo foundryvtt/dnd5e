@@ -1,9 +1,7 @@
 const gulp = require('gulp');
 
 const css = require('./css.js');
-const { cleanPacks } = require('./cleanPacks.js');
-const { compilePacks } = require('./compilePacks.js');
-const { extractPacks } = require('./extractPacks.js');
+const packs = require('./packs.js');
 
 
 exports.default = gulp.series(
@@ -11,6 +9,6 @@ exports.default = gulp.series(
   css.watchUpdates
 );
 exports.css = css.compile;
-exports.cleanPacks = gulp.series(cleanPacks);
-exports.compilePacks = gulp.series(compilePacks);
-exports.extractPacks = gulp.series(extractPacks);
+exports.cleanPacks = gulp.series(packs.clean);
+exports.compilePacks = gulp.series(packs.compile);
+exports.extractPacks = gulp.series(packs.extract);
