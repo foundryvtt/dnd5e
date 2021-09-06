@@ -1850,7 +1850,7 @@ export default class Actor5e extends Actor {
   /**
    * Display changes to health as scrolling combat text.
    * Adapt the font size relative to the Actor's HP total to emphasize more significant blows.
-   * @param dhp
+   * @param {number} dhp      The change in hit points that was applied
    * @private
    */
   _displayScrollingDamage(dhp) {
@@ -1863,7 +1863,7 @@ export default class Actor5e extends Actor {
       t.hud.createScrollingText(dhp.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
         fontSize: 16 + (32 * pct), // Range between [16, 48]
-        fill: dhp < 0 ? 0xFF0000 : 0x00FF00,
+        fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
         stroke: 0x000000,
         strokeThickness: 4,
         jitter: 0.25

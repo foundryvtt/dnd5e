@@ -301,6 +301,8 @@ DND5E.tokenSizes = {
  * @enum {number}
  */
 DND5E.tokenHPColors = {
+  damage: 0xFF0000,
+  healing: 0x00FF00,
   temp: 0x66CCFF,
   tempmax: 0x440066,
   negmax: 0x550000
