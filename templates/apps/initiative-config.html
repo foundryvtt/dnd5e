@@ -9,9 +9,9 @@
   <div class="form-group">
     <label>{{localize "DND5E.SkillBonusCheck"}}</label>
     <input
-      name="data.attributes.init.value"
-      type="text" data-dtype="Number"
-      value="{{numberFormat initiative.value decimals=0 sign=true}}"
+      name="data.attributes.init.bonus"
+      type="text"
+      value="{{initiative.bonus}}"
       placeholder="0"
     >
   </div>
