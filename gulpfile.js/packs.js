@@ -38,6 +38,13 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
 
 /**
+ * Cache of DBs so they aren't loaded repeatedly when determining IDs.
+ * @type {Object.<string,Datastore>}
+ */
+const dbCache = {};
+
+
+/**
  * Attempts to find an existing matching ID for an item of this name, otherwise generates a new unique ID.
  * @param {object} data  Data for the entry that needs an ID.
  * @param {string} pack  Name of the pack to which this item belongs.
@@ -45,8 +52,11 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
  */
 function determineId(data, pack) {
   const dbPath = path.join(PACK_DEST, `${pack}.db`);
-  const db = new Datastore({ filename: dbPath, autoload: true });
-  db.loadDatabase();
+  if ( !dbCache[dbPath] ) {
+    dbCache[dbPath] = new Datastore({ filename: dbPath, autoload: true });
+    dbCache[dbPath].loadDatabase();
+  }
+  const db = dbCache[dbPath];
 
   return new Promise((resolve, reject) => {
     db.findOne({ name: data.name }, (err, entry) => {
