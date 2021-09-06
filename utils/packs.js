@@ -7,7 +7,9 @@ const mergeStream = require("merge-stream");
 const path = require("path");
 const through2 = require("through2");
 
-const { PACK_DEST, PACK_SRC } = require("./paths.js");
+
+const PACK_SRC = "packs/src";
+const PACK_DEST = "packs";
 
 
 /* ----------------------------------------- */

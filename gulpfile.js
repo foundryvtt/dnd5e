@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 
-const css = require('./css.js');
-const packs = require('./packs.js');
+const css = require('./utils/css.js');
+const packs = require('./utils/packs.js');
 
 
 exports.default = gulp.series(
