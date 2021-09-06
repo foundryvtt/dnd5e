@@ -1296,7 +1296,11 @@ export default class Item5e extends Item {
         if ( template ) template.drawPreview();
         break;
       case "abilityCheck": 
-        await actor.rollAbilityTest(button.dataset.ability)
+        const targets = this._getChatCardTargets(card);
+        for ( let token of targets ) {
+          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
+          await token.rollAbilityTest(button.dataset.ability, { event, speaker });
+        }
         break;
     }
 
