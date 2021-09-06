@@ -1016,7 +1016,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onRollSkillCheck(event) {
     event.preventDefault();
     const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
-    return this.actor.rollSkill(skill, {event: event});
+    return this.actor.rollSkill(skill, {event: event, chooseModifier: true});
   }
 
   /* -------------------------------------------- */
