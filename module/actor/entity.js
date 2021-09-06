@@ -902,7 +902,6 @@ export default class Actor5e extends Actor {
    * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
-    options.chooseModifier = true
     const skl = this.data.data.skills[skillId];
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
