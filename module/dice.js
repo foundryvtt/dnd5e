@@ -61,6 +61,23 @@ function _stripRedundantOperatorTerms(terms) {
   return simplifiedTerms;
 }
 
+/**
+ * A helper function to combine NumericTerms for a roll, returning a new array of terms
+ * with the static modifiers combined.
+ * 
+ * Terms for a formula that include division and multiplication are currently not supported,
+ * and such lists of terms will be returned as-is. ParentheticalTerms and Die are likewise
+ * ignored in the current implementation.
+ * 
+ * NumericTerms with flavor text are intentionally not merged into the other NumericTerms
+ * so that the flavour text is not lost.
+ * 
+ * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ * 
+ * @return {Object[]}  A new array of roll terms with its NumericTerm objects combined into
+ *                     a single object. NumericTerm objects with flavor text are not merged
+ *                     and remain separate objects within the term array.
+ */
 function _simplifyNumericTerms(_terms) {
   // Do not simplify terms that include multiplication and divison.
   if (_terms.find((term) => ["/", "*"].includes(term.operator))) return _terms;
