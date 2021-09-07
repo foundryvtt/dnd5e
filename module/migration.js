@@ -438,10 +438,6 @@ function _migrateActorAC (actorData, updateData) {
     updateData["data.attributes.ac.flat"] = parseInt(ac.flat);
   }
 
-  // If the actor is already on the AC auto-calculation schema, but is using a flat value, they must now have their
-  // calculation updated to an appropriate value.
-  if ( !Number.isNumeric(ac?.flat) ) return updateData;
-  updateData["data.attributes.ac.calc"] = actorData.type === "npc" ? "natural" : "flat";
   return updateData;
 }
 
