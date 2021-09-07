@@ -997,6 +997,18 @@ DND5E.proficiencyLevels = {
 /* -------------------------------------------- */
 
 /**
+ * Automated proficiency mode for items.
+ * @enum {string}
+ */
+DND5E.proficiencyMode = {
+  auto: "DND5E.ProficiencyModeAuto",
+  always: "DND5E.ProficiencyModeAlways",
+  never: "DND5E.ProficiencyModeNever"
+};
+
+/* -------------------------------------------- */
+
+/**
  * The amount of cover provided by an object. In cases where multiple pieces
  * of cover are in play, we take the highest value.
  * @enum {string}

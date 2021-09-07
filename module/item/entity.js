@@ -270,6 +270,10 @@ export default class Item5e extends Item {
       // Damage Label
       this.getDerivedDamageLabel();
     }
+
+    if ( this.data.data.hasOwnProperty("proficiencyMode") ) {
+      this.getProficiency();
+    }
   }
 
   /* -------------------------------------------- */
@@ -392,6 +396,19 @@ export default class Item5e extends Item {
 
     // Update labels and return the prepared roll data
     return {rollData, parts};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Upgrade proficiency based on actor's proficiencies.
+   */
+  getProficiency() {
+    const type = (this.type === "equipment") ? "armor" : this.type;
+    const actorProfs = this.actor?.data.data.traits[`${type}Prof`]?.value ?? [];
+    let proficiency = (this.actor?.type === "npc") ? true : Item5e.hasProficiency(this.data, actorProfs);
+    if ( type === "tool" ) proficiency = Number(proficiency); // TODO: Handle expertise when it is added to actor data
+    this.data.data.proficient = proficiency;
   }
 
   /* -------------------------------------------- */
@@ -1376,9 +1393,6 @@ export default class Item5e extends Item {
       case "spell":
         updates = this._onCreateOwnedSpell(data, actorData, isNPC);
         break;
-      case "tool":
-        updates = this._onCreateOwnedTool(data, actorData, isNPC);
-        break;
       case "weapon":
         updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
         break;
@@ -1464,15 +1478,6 @@ export default class Item5e extends Item {
     if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
       updates["data.equipped"] = isNPC;  // NPCs automatically equip equipment
     }
-    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["data.proficient"] = true;  // NPCs automatically have equipment proficiency
-      } else {
-        const armorProf = CONFIG.DND5E.armorProficienciesMap[data.data?.armor?.type]; // Player characters check proficiency
-        const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
-        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf) || actorArmorProfs.includes(data.data.baseItem);
-      }
-    }
     return updates;
   }
 
@@ -1498,31 +1503,6 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Pre-creation logic for the automatic configuration of owned tool type Items.
-   *
-   * @param {object} data       Data for the newly created item.
-   * @param {object} actorData  Data for the actor to which the item is being added.
-   * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
-   * @private
-   */
-  _onCreateOwnedTool(data, actorData, isNPC) {
-    const updates = {};
-    if ( data.data?.proficient === undefined ) {
-      if ( isNPC ) {
-        updates["data.proficient"] = 1;
-      } else {
-        const actorToolProfs = actorData.data.traits?.toolProf?.value;
-        const proficient = actorToolProfs.includes(data.data?.toolType) || actorToolProfs.includes(data.data?.baseItem);
-        updates["data.proficient"] = Number(proficient);
-      }
-    }
-    return updates;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Pre-creation logic for the automatic configuration of owned weapon type Items.
    *
    * @param {object} data       Data for the newly created item.
@@ -1536,16 +1516,31 @@ export default class Item5e extends Item {
     if ( foundry.utils.getProperty(data, "data.equipped") === undefined ) {
       updates["data.equipped"] = isNPC;       // NPCs automatically equip weapons
     }
-    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
-      if ( isNPC ) {
-        updates["data.proficient"] = true;    // NPCs automatically have equipment proficiency
-      } else {
-        const weaponProf = CONFIG.DND5E.weaponProficienciesMap[data.data?.weaponType]; // Player characters check proficiency
-        const actorWeaponProfs = actorData.data.traits?.weaponProf?.value || [];
-        updates["data.proficient"] = (weaponProf === true) || actorWeaponProfs.includes(weaponProf) || actorWeaponProfs.includes(data.data.baseItem);
-      }
-    }
     return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether the provided actor data grants proficiency for this item.
+   * @param {object|ItemData} data  Data object for the item being checked.
+   * @param {string[]} actorProf    Array of proficiencies the actor possesses.
+   * @return {boolean}              Should this item be marked as proficient.
+   */
+  static hasProficiency(data, actorProf) {
+    switch ( data.data.proficiencyMode ) {
+      case "auto": break;
+      case "always": return true;
+      case "never": return false;
+    }
+
+    const type = (data.type === "equipment") ? "armor" : data.type;
+    const subtypeProperty = (type === "armor") ? "data.armor.type" : `data.${type}Type`;
+    const subtype = foundry.utils.getProperty(data, subtypeProperty);
+    const mappedProf = foundry.utils.getProperty(CONFIG.DND5E, `${type}ProficienciesMap.${subtype}`) ?? subtype;
+
+    const isProficient = (mappedProf === true) || actorProf.includes(mappedProf) || actorProf.includes(data.data?.baseItem);
+    return isProficient;
   }
 
   /* -------------------------------------------- */

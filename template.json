@@ -634,7 +634,7 @@
       },
       "strength": 0,
       "stealth": false,
-      "proficient": true
+      "proficiencyMode": "auto"
     },
     "feat": {
       "templates": ["itemDescription", "activatedEffect", "action"],
@@ -653,7 +653,7 @@
       "baseItem": "",
       "ability": "int",
       "chatFlavor": "",
-      "proficient": 0
+      "proficiencyMode": "auto"
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
@@ -687,7 +687,7 @@
       "weaponType": "simpleM",
       "baseItem": "",
       "properties": {},
-      "proficient": true
+      "proficiencyMode": "auto"
     }
   }
 }

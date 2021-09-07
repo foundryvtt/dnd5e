@@ -59,10 +59,10 @@
 
             {{!-- Tool Proficiency --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.ItemToolProficiency" }}</label>
-                 <select name="data.proficient" data-dtype="Number">
-                     {{selectOptions config.proficiencyLevels selected=data.proficient}}
-                 </select>
+                <label>{{localize "DND5E.ProficiencyMode"}}</label>
+                <select name="data.proficiencyMode" data-dtype="String">
+                    {{selectOptions config.proficiencyMode selected=data.proficiencyMode}}
+                </select>
             </div>
 
             {{!-- Ability Check --}}

@@ -813,7 +813,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     if ( itemData.data ) {
       // Ignore certain statuses
-      ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+      ["equipped", "prepared"].forEach(k => delete itemData.data[k]);
 
       // Downgrade ATTUNED to REQUIRED
       itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);

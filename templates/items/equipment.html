@@ -74,11 +74,18 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label>{{localize "DND5E.ProficiencyMode"}}</label>
+                <select name="data.proficiencyMode" data-dtype="String">
+                    {{selectOptions config.proficiencyMode selected=data.proficiencyMode}}
+                </select>
+            </div>
+
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemEquipmentStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "DND5E.Proficient" }}
+                    <input type="checkbox" name="data.proficient" {{checked data.proficient}} disabled/> {{ localize "DND5E.Proficient" }}
                 </label>
                 <label class="checkbox">
                     <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "DND5E.Equipped" }}
