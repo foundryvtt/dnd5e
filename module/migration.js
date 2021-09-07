@@ -248,6 +248,7 @@ export const migrateItemData = function(item) {
   _migrateItemRarity(item, updateData);
   _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
+  _migrateItemCriticalData(item, updateData);
   return updateData;
 };
 
@@ -509,6 +510,27 @@ function _migrateItemSpellcasting(item, updateData) {
 function _migrateArmorType(item, updateData) {
   if ( item.type !== "equipment" ) return updateData;
   if ( item.data?.armor?.type === "bonus" ) updateData["data.armor.type"] = "trinket";
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Set the item's `critical` property to a proper object value.
+ *
+ * @param {object} item        Item data to migrate
+ * @param {object} updateData  Existing update to expand upon
+ * @return {object}            The updateData to apply
+ * @private
+ */
+function _migrateItemCriticalData(item, updateData) {
+  if ( foundry.utils.getType(item.data.critical) === "Object" ) {
+    return updateData;
+  }
+  updateData["data.critical"] = {
+    threshold: null,
+    damage: null
+  };
   return updateData;
 }
 
