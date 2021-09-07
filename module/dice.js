@@ -62,12 +62,26 @@ function _stripRedundantOperatorTerms(terms) {
 }
 
 /**
+ * Creates a set of terms from a roll formula with any flavour text absent in the
+ * resulting terms.
+ * 
+ * @param {*} formula  A roll formula
+ * 
+ * @returns {Object}  An array of roll terms with the flavour text removed
+ */
+function _stripFlavor(formula) {
+  return Roll.parse(formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+}
+
+/**
  * A standardized helper function for simplifying the constant parts of a multipart roll formula
  * on an existing roll. The original roll is modified, updating both its terms and roll formula.
  * 
  * @param {Object} roll  A Roll object 
  */
-export function simplifyRollFormula(roll) {
+export function simplifyRollFormula(roll, { ignoreFlavor=true }={}) {
+  if (ignoreFlavor) roll.terms = _stripFlavor(roll.formula);
+
   roll.terms = _stripRedundantOperatorTerms(roll.terms);
   roll._formula = roll.constructor.getFormula(roll.terms);
 }
@@ -149,7 +163,7 @@ export async function d20Roll({
   }
 
   // Remove redundant operator terms from the roll formula
-  simplifyRollFormula(roll);
+  simplifyRollFormula(roll, { ignoreFlavor: false });
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});
@@ -245,7 +259,7 @@ export async function damageRoll({
   }
 
   // Remove redundant operator terms from the roll formula
-  simplifyRollFormula(roll);
+  simplifyRollFormula(roll, { ignoreFlavor: false });
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});
