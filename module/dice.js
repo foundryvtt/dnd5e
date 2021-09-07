@@ -65,7 +65,7 @@ function _stripRedundantOperatorTerms(terms) {
  * Creates a set of terms from a roll formula with any flavour text absent in the
  * resulting terms.
  * 
- * @param {*} formula  A roll formula
+ * @param {String} formula  A roll formula
  * 
  * @returns {Object}  An array of roll terms with the flavour text removed
  */
