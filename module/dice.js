@@ -56,7 +56,43 @@ function _stripRedundantOperatorTerms(terms) {
     }
 
     return accumulatedTerms;
-  }, [])
+  }, []);
+
+  return simplifiedTerms;
+}
+
+function _simplifyNumericTerms(_terms) {
+  // Do not simplify terms that include multiplication and divison.
+  if (_terms.find((term) => ["/", "*"].includes(term.operator))) return _terms;
+
+  const terms = [].concat(..._terms);
+  const simplifiedTerms = []
+
+  // Adds all of the complex terms (Dice, parenthetical terms, and terms with
+  // flavour text) to the simplifiedTerms array directly.
+  while (true) {
+    const complexTermIndex = terms.find((term) => 
+      term instanceof ParentheticalTerm || term instanceof Die || term.flavor
+    );
+
+    if (complexTermIndex) {
+      simplifiedTerms.push(...terms.splice(complexTermIndex - 1, 2));
+    } else {
+      break;
+    }
+  }
+
+  // Combines the numerical bonuses into a single number and creates a new
+  // NumericTerm to represent the value in the terms.
+  if (terms.length) {
+    const staticBonus = Roll.safeEval(Roll.getFormula(terms));
+    simplifiedTerms.push(new NumericTerm({ number: staticBonus} ));
+
+  // In the event that no terms are provided at all, this creates a new
+  // NumericTerm with a value of 0.
+  } else if (!simplifiedTerms.length) {
+    simplifiedTerms.push(new NumericTerm({ number: 0 }))
+  }
 
   return simplifiedTerms;
 }
@@ -67,7 +103,7 @@ function _stripRedundantOperatorTerms(terms) {
  * 
  * @param {String} formula  A roll formula
  * 
- * @returns {Object}  An array of roll terms with the flavour text removed
+ * @returns {Object[]}  An array of roll terms with the flavour text removed
  */
 function _stripFlavor(formula) {
   return Roll.parse(formula.replace(RollTerm.FLAVOR_REGEXP, ""));
@@ -80,9 +116,17 @@ function _stripFlavor(formula) {
  * @param {Object} roll  A Roll object 
  */
 export function simplifyRollFormula(roll, { ignoreFlavor=true }={}) {
+  // Verify that the roll formula is valid before attempting simplification
+  Roll.validate(roll.formula);
+
+  // Optionally strip flavor text from the provided roll formula
   if (ignoreFlavor) roll.terms = _stripFlavor(roll.formula);
 
-  roll.terms = _stripRedundantOperatorTerms(roll.terms);
+  // Replace the roll terms with the new simplified terms
+  roll.terms = _simplifyNumericTerms(_stripRedundantOperatorTerms(roll.terms));
+
+  // Generate a new formula from the updated roll terms and replace the
+  // original roll formula of the provided Roll object
   roll._formula = roll.constructor.getFormula(roll.terms);
 }
 
