@@ -39,35 +39,35 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 function _simplifyRedundantOperatorTerms(terms) {
   const simplifiedTerms = terms.reduce((accumulatedTerms, currentTerm) => {
     const previousTerm = accumulatedTerms[accumulatedTerms.length - 1];
-
+  
     // If we have a chain of operators, we should attempt to simplify the formula.
-    if (previousTerm instanceof OperatorTerm && currentTerm instanceof OperatorTerm) {
-      // Create an array containing the operator types used in the current
-      // and previous term.
-      const operators = Array.from(new Set([previousTerm.operator, currentTerm.operator]));
+    if ( (previousTerm instanceof OperatorTerm) && (currentTerm instanceof OperatorTerm) ) {
+      // Create a set containing the operator types used in the current and 
+      // previous term.
+      const operators = new Set([previousTerm.operator, currentTerm.operator]);
 
-      // If the array contains a single term and it is an addition operator,
+      // If the set contains a single term and it is an addition operator,
       // adding a second addition operator is redundant. Return the accumulated
       // terms as they are.
-      if (operators.length === 1 && operators.includes("+")) {
+      if ( (operators.size === 1) && (operators.has("+")) ) {
         return accumulatedTerms;
 
-      // If the array contains a single term and it is a substraction operator,
+      // If the set contains a single term and it is a substraction operator,
       // the two subtractions cancel out. Remove the previous element from the
       // accumulated terms and replace it with an addition operator.
-      } else if (operators.length === 1 && operators.includes("-")) {
+      } else if ( (operators.size === 1) && (operators.has("-")) ) {
         accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "+" }));
 
-      // If the array contains both an addition and subtraction operator,
+      // If the set contains both an addition and subtraction operator,
       // the subtraction operator is the only one the matters. Remove the previous
       // element from the accumulated terms and insert a subtraction operator in
       // its place.
-      } else if (operators.includes("+") && operators.includes("-")) {
+      } else if (operators.has("+") && operators.has("-")) {
         accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
       // In cases where the first operator is a muliplication or division operator
       // and the second operator is an addition operator, the addition is redundant.
-      } else if (["*", "/"].includes(previousTerm.operator) && operators.includes("+")) {
+      } else if (["*", "/"].includes(previousTerm.operator) && operators.has("+")) {
         return accumulatedTerms;
 
       // In all other cases, we should do nothing special. Append the current term to the
@@ -109,9 +109,9 @@ function _simplifyNumericTerms(_terms) {
   // Do not simplify terms that include multiplication and divison.
   if (_terms.find((term) => ["/", "*"].includes(term.operator))) return _terms;
 
-  const terms = [].concat(..._terms);
+  const terms = Array.from(_terms);
 
-  const groupTermsByType = ((termType) => {
+  const groupTermsByType = (termType) => {
     const groupedTerms = []
 
     while (true) {
@@ -123,7 +123,7 @@ function _simplifyNumericTerms(_terms) {
     }
 
     return groupedTerms;
-  })
+  }
 
   // Group complex terms by type and add them to the simplifiedTerms array 
   // without modification.
