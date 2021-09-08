@@ -83,35 +83,61 @@ function _simplifyNumericTerms(_terms) {
   if (_terms.find((term) => ["/", "*"].includes(term.operator))) return _terms;
 
   const terms = [].concat(..._terms);
-  const simplifiedTerms = []
 
-  // Adds all of the complex terms (Dice, parenthetical terms, and terms with
-  // flavour text) to the simplifiedTerms array directly.
-  while (true) {
-    const complexTermIndex = terms.find((term) => 
-      term instanceof ParentheticalTerm || term instanceof Die || term.flavor
-    );
+  const groupTermsByType = ((termType) => {
+    const groupedTerms = []
 
-    if (complexTermIndex) {
-      simplifiedTerms.push(...terms.splice(complexTermIndex - 1, 2));
-    } else {
-      break;
+    while (true) {
+      const termIndex = terms.findIndex((term) => term instanceof termType);
+  
+      if (termIndex === -1) break;
+      else if (termIndex === 0) groupedTerms.push(terms.shift());
+      else groupedTerms.push(...terms.splice(termIndex - 1, 2));
     }
+
+    return groupedTerms;
+  })
+
+  // Group complex terms by type and add them to the simplifiedTerms array 
+  // without modification.
+  const simplifiedTerms = [
+    ...groupTermsByType(DiceTerm),
+    ...groupTermsByType(StringTerm),
+    ...groupTermsByType(ParentheticalTerm)
+  ];
+  
+  const flavorTerms = [];
+  
+  // Isolate any remaining static terms with flavour text so that they can be
+  // placed at the end of the terms list.
+  while (true) {
+    const termIndex = terms.findIndex((term) => term.flavor);
+
+    if (termIndex === -1) break;
+    else if (termIndex === 0) flavorTerms.push(terms.shift());
+    else flavorTerms.push(...terms.splice(termIndex - 1, 2));
   }
 
-  // Combines the numerical bonuses into a single number and creates a new
-  // NumericTerm to represent the value in the terms.
+  // Combines the unannotated numerical bonuses into a single number and creates
+  // a new NumericTerm to represent the value in the terms.
   if (terms.length) {
     const staticBonus = Roll.safeEval(Roll.getFormula(terms));
+
+    // If the staticBonus is 0 or greater, there is no operator attached to it.
+    // Add a plus operator so that the formula remains valid.
+    if (staticBonus >= 0) {
+      simplifiedTerms.push(new OperatorTerm({ operator: "+"}));
+    }
+
     simplifiedTerms.push(new NumericTerm({ number: staticBonus} ));
 
   // In the event that no terms are provided at all, this creates a new
   // NumericTerm with a value of 0.
-  } else if (!simplifiedTerms.length) {
+  } else if (!simplifiedTerms.length && !flavorTerms.length) {
     simplifiedTerms.push(new NumericTerm({ number: 0 }))
   }
 
-  return simplifiedTerms;
+  return [...simplifiedTerms, ...flavorTerms];
 }
 
 /**
