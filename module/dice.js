@@ -2,12 +2,20 @@ export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
- * A standardized helper function for simplifying the constant parts of a multipart roll formula
- * on an existing roll. The original roll is modified, updating both its terms and roll formula.
+ * A standardized helper function for simplifying the constant parts of a multipart
+ * roll formula.
  * 
- * @param {Object} roll  A Roll object 
+ * A new, simplified version of the formula is returned. 
+ * 
+ * @param {String} formula                      A roll formula
+ * @param {Object} [options={}]                 A configuration object
+ * @param {Boolean} [option.ignoreFlavor=true]  A Boolean controlling whether flavor text
+ *                                              is included in the simplified roll formula
+ *                                              returned by the function
  */
- export function simplifyRollFormula(roll, { ignoreFlavor=true }={}) {
+ export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
+  const roll = new Roll(formula);
+
   // Verify that the roll formula is valid before attempting simplification
   Roll.validate(roll.formula);
 
@@ -17,15 +25,14 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
   // Perform arithmetic simplification on the existing roll terms and
   // remove any duplicate operators. Replace the existing roll terms
   // with the new simplified set.
-  roll.terms = _simplifyRedundantOperatorTerms(roll.terms)
+  roll.terms = _simplifyRedundantOperatorTerms(roll.terms);
 
   // Attempt to combine numeric terms that do not have flavor text attached.
   // Replace the existing roll terms with the new simplified set.
   roll.terms = _simplifyNumericTerms(roll.terms);
 
-  // Generate a new formula from the updated roll terms and replace the
-  // original roll formula of the provided Roll object
-  roll._formula = roll.constructor.getFormula(roll.terms);
+  // Generate a new formula from the updated roll terms and return it
+  return roll.constructor.getFormula(roll.terms);
 }
 
 /**
@@ -256,7 +263,11 @@ export async function d20Roll({
   }
 
   // Remove redundant operator terms from the roll formula
-  simplifyRollFormula(roll, { ignoreFlavor: false });
+  const simplifiedRollFormula = simplifyRollFormula(roll.formula, { ignoreFlavor: false });
+
+  // Update roll terms and formula
+  roll.terms = Roll.parse(simplifiedRollFormula);
+  roll._formula = roll.constructor.getFormula(roll.terms);
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});
@@ -352,7 +363,11 @@ export async function damageRoll({
   }
 
   // Remove redundant operator terms from the roll formula
-  simplifyRollFormula(roll, { ignoreFlavor: false });
+  const simplifiedRollFormula = simplifyRollFormula(roll.formula, { ignoreFlavor: false });
+
+  // Update roll terms and formula
+  roll.terms = Roll.parse(simplifiedRollFormula);
+  roll._formula = roll.constructor.getFormula(roll.terms);
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});

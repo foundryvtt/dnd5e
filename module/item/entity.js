@@ -289,10 +289,10 @@ export default class Item5e extends Item {
 
     const derivedDamage = itemData.damage?.parts?.map((damagePart) => {
       const roll = new Roll(damagePart[0], rollData);
-      simplifyRollFormula(roll);
+      const formula = simplifyRollFormula(roll.formula);
 
       return {
-        formula: roll.formula,
+        formula,
         damageType: damagePart[1],
       }
     });
@@ -389,10 +389,10 @@ export default class Item5e extends Item {
     }
 
     const roll = new Roll(parts.join('+'), rollData);
-    simplifyRollFormula(roll);
+    const formula = simplifyRollFormula(roll.formula);
 
     // Condense the resulting attack bonus formula into a simplified label
-    let toHitLabel = roll.formula;
+    let toHitLabel = formula;
 
     if ( !/^[+-]/.test(toHitLabel) ) {
       toHitLabel = '+ ' + toHitLabel
