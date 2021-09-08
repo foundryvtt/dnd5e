@@ -29,6 +29,4 @@ may do this by cloning the repository or downloading a zip archive from the
 
 ## Community Contribution
 
-Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge
-requests for code changes. Approval for such requests involves code and (if necessary) design review by Atropos. Please
-reach out on the Foundry Community Discord with any questions.
+See the [CONTRIBUTING](/CONTRIBUTING.md) file for information about how you can help this project.

@@ -1,8 +1,29 @@
 # Contributing to foundrynet/dnd5e
 
-Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge requests for code/content changes. Approval for such requests involves code and (if necessary) design review by the Maintainers of this repo. Please reach out on the Foundry Community Discord with any questions.
+Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge requests for code/content changes. Approval for such requests involves code and (if necessary) design review by the Maintainers of this repo. Please reach out on the [Foundry Community Discord](https://discord.gg/foundryvtt) with any questions.
 
 Please ensure there is an open issue about whatever contribution you are submitting. Please also ensure your contribution does not duplicate an existing one.
+
+## Developer Tooling
+
+Cloning this repository down and either placing it or symlinking it to your `/Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
+
+This repository leverages [gulp](https://gulpjs.com/) to run automated build tasks. If your system supports `npm`, you can run the following commands from the root of the project to get set up:
+
+### `npm install`
+
+Installs all dependencies needed to run developer tooling scripts.
+
+### `npm run build` / `gulp css`
+
+Runs all relevant build scripts:
+
+- Converts LESS -> CSS
+- Converts JSON -> DB (compendia)
+
+### `npm run build:watch` / `gulp`
+
+Runs the LESS -> CSS builder in watch mode so that changes made to the LESS files will automatically compile to CSS.
 
 ## Issues
 
@@ -37,11 +58,9 @@ Instead of opening an MR with translation files, create one of these modules (or
 
 ## Code
 
-Here are some [guidelines](https://media.giphy.com/media/uXUmaREltwja1dEqXi/giphy.gif?cid=790b76112e01a07497c42026f36e1d3bafcefc5f7894b762&rid=giphy.gif&ct=g) for contributing code to this project.
+Here are some guidelines for contributing code to this project.
 
-### MR Size
-
-Please understand that large and sprawling MRs are exceptionally difficult to review. As much as possible, break down the work for a large feature into smaller steps. Even if multiple MRs are required for a single Issue, this will make it considerably easier and therefore more likely that your contributions will be reviewed and merged in a timely manner.
+To contribute code, [fork this project](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html) and open a [merge request (MR)](https://docs.gitlab.com/ee/user/project/merge_requests/getting_started.html) against the correct development branch.
 
 ### Linked Issues
 
@@ -69,7 +88,7 @@ Please appreciate that reviewing contributions constitutes a substantial amount 
 - Large Features related to issues assigned to the current milestone
 - Small Features which are out of scope for the current milestone
 
-#### Low Priority
+#### Not Prioritized
 
 - Large Features which are out of scope for the current milestone
 
@@ -81,23 +100,6 @@ MRs have a few phases:
 1. **Initial Review from the 5e contributor team.** This lets us spread out the review work and catch some of the more obvious things that need to be fixed before final review. Generally this talks about code style and some methodology.
 2. **Final Review from the Maintainers.** Atropos and Kim have final review and are the only ones with merge permission.
 
-## Developer Tooling
+#### MR Size
 
-Cloning this repository down and either placing it or symlinking it to your `/Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
-
-This repository leverages [gulp](https://gulpjs.com/) to run automated build tasks. If your system supports `npm`, you can run the following commands from the root of the project to get set up:
-
-### `npm install`
-
-Installs all dependencies needed to run developer tooling scripts.
-
-### `npm run build`
-
-Runs all relevant build scripts:
-
-- Converts LESS -> CSS
-- Converts JSON -> DB (compendia)
-
-### `npm run build:watch`
-
-Runs the LESS -> CSS builder in watch mode so that changes made to the LESS files will automatically compile to CSS.
+Please understand that large and sprawling MRs are exceptionally difficult to review. As much as possible, break down the work for a large feature into smaller steps. Even if multiple MRs are required for a single Issue, this will make it considerably easier and therefore more likely that your contributions will be reviewed and merged in a timely manner.
