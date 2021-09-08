@@ -165,8 +165,14 @@ export function simplifyRollFormula(roll, { ignoreFlavor=true }={}) {
   // Optionally strip flavor text from the provided roll formula
   if (ignoreFlavor) roll.terms = _stripFlavor(roll.formula);
 
-  // Replace the roll terms with the new simplified terms
-  roll.terms = _simplifyNumericTerms(_stripRedundantOperatorTerms(roll.terms));
+  // Perform arithmetic simplification on the existing roll terms and
+  // remove any duplicate operators. Replace the existing roll terms
+  // with the new simplified set.
+  roll.terms = _simplifyRedundantOperatorTerms(roll.terms)
+
+  // Attempt to combine numeric terms that do not have flavor text attached.
+  // Replace the existing roll terms with the new simplified set.
+  roll.terms = _simplifyNumericTerms(roll.terms);
 
   // Generate a new formula from the updated roll terms and replace the
   // original roll formula of the provided Roll object
