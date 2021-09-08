@@ -80,3 +80,24 @@ MRs have a few phases:
 0. **Prioritization.** If the MR relates to the current milestone, it is assigned to that milestone.
 1. **Initial Review from the 5e contributor team.** This lets us spread out the review work and catch some of the more obvious things that need to be fixed before final review. Generally this talks about code style and some methodology.
 2. **Final Review from the Maintainers.** Atropos and Kim have final review and are the only ones with merge permission.
+
+## Developer Tooling
+
+Cloning this repository down and either placing it or symlinking it to your `/Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
+
+This repository leverages [gulp](https://gulpjs.com/) to run automated build tasks. If your system supports `npm`, you can run the following commands from the root of the project to get set up:
+
+### `npm install`
+
+Installs all dependencies needed to run developer tooling scripts.
+
+### `npm run build`
+
+Runs all relevant build scripts:
+
+- Converts LESS -> CSS
+- Converts JSON -> DB (compendia)
+
+### `npm run build:watch`
+
+Runs the LESS -> CSS builder in watch mode so that changes made to the LESS files will automatically compile to CSS.
