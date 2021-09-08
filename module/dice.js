@@ -46,45 +46,45 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 function _simplifyRedundantOperatorTerms(terms) {
   const simplifiedTerms = terms.reduce((accumulatedTerms, currentTerm) => {
     const previousTerm = accumulatedTerms[accumulatedTerms.length - 1];
+    const sequentialOperators = (previousTerm instanceof OperatorTerm) && (currentTerm instanceof OperatorTerm);
   
-    // If we have a chain of operators, we should attempt to simplify the formula.
-    if ( (previousTerm instanceof OperatorTerm) && (currentTerm instanceof OperatorTerm) ) {
-      // Create a set containing the operator types used in the current and 
-      // previous term.
-      const operators = new Set([previousTerm.operator, currentTerm.operator]);
+    // If the previous and current term are not a series of operators, add the term
+    // to the accumulated terms and return.
+    if (!sequentialOperators) {
+      accumulatedTerms.push(currentTerm);
+      return accumulatedTerms;
+    }
+    
+    // Create a set containing the operator types used in the current and 
+    // previous term.
+    const operators = new Set([previousTerm.operator, currentTerm.operator]);
 
-      // If the set contains a single term and it is an addition operator,
-      // adding a second addition operator is redundant. Return the accumulated
-      // terms as they are.
-      if ( (operators.size === 1) && (operators.has("+")) ) {
-        return accumulatedTerms;
+    // If the set contains a single term and it is an addition operator,
+    // adding a second addition operator is redundant. Return the accumulated
+    // terms as they are.
+    if ( (operators.size === 1) && (operators.has("+")) ) {
+      return accumulatedTerms;
 
-      // If the set contains a single term and it is a substraction operator,
-      // the two subtractions cancel out. Remove the previous element from the
-      // accumulated terms and replace it with an addition operator.
-      } else if ( (operators.size === 1) && (operators.has("-")) ) {
-        accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+    // If the set contains a single term and it is a substraction operator,
+    // the two subtractions cancel out. Remove the previous element from the
+    // accumulated terms and replace it with an addition operator.
+    } else if ( (operators.size === 1) && (operators.has("-")) ) {
+      accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "+" }));
 
-      // If the set contains both an addition and subtraction operator,
-      // the subtraction operator is the only one the matters. Remove the previous
-      // element from the accumulated terms and insert a subtraction operator in
-      // its place.
-      } else if (operators.has("+") && operators.has("-")) {
-        accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+    // If the set contains both an addition and subtraction operator,
+    // the subtraction operator is the only one the matters. Remove the previous
+    // element from the accumulated terms and insert a subtraction operator in
+    // its place.
+    } else if (operators.has("+") && operators.has("-")) {
+      accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
-      // In cases where the first operator is a muliplication or division operator
-      // and the second operator is an addition operator, the addition is redundant.
-      } else if (["*", "/"].includes(previousTerm.operator) && operators.has("+")) {
-        return accumulatedTerms;
+    // In cases where the first operator is a muliplication or division operator
+    // and the second operator is an addition operator, the addition is redundant.
+    } else if (["*", "/"].includes(previousTerm.operator) && operators.has("+")) {
+      return accumulatedTerms;
 
-      // In all other cases, we should do nothing special. Append the current term to the
-      // accumulated terms and move on.
-      } else {
-        accumulatedTerms.push(currentTerm);
-      }
-
-    // If there isn't a chain of operators, we can add the die or numerical term
-    // without making simplifications.
+    // In all other cases, we should do nothing special. Append the current term to the
+    // accumulated terms and move on.
     } else {
       accumulatedTerms.push(currentTerm);
     }
