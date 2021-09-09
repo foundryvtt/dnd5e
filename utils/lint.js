@@ -17,7 +17,7 @@ const LINTING_PATHS = ["./dnd5e.js", "./module/"];
  * Lint javascript sources and optionally applies fixes.
  *
  * - `gulp lint` - Lint all javascript files.
- * - `gulp lint --fix` - Lint and apply simple changes automatically.
+ * - `gulp lint --fix` - Lint and apply available fixes automatically.
  */
 function lintJavascript() {
   const applyFixes = !!parsedArgs.fix;
