@@ -524,9 +524,7 @@ function _migrateArmorType(item, updateData) {
  * @private
  */
 function _migrateItemCriticalData(item, updateData) {
-  if ( foundry.utils.getType(item.data.critical) === "Object" ) {
-    return updateData;
-  }
+  if ( foundry.utils.getType(item.data.critical) === "Object" ) return updateData;
   updateData["data.critical"] = {
     threshold: null,
     damage: null
