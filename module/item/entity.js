@@ -396,9 +396,8 @@ export default class Item5e extends Item {
 
   /* -------------------------------------------- */
   /**
-   * Retrieve an item's critical hit threshold.
-   *
-   * Uses the smallest value from among the following sources:
+   * Retrieve an item's critical hit threshold. Uses the smallest value from among the
+   * following sources:
    * - item entity
    * - item entity's actor (if it has one)
    * - the constant '20'
@@ -411,21 +410,17 @@ export default class Item5e extends Item {
 
     if ( !this.hasAttack || !itemData ) return;
 
-    // Get the item's critical threshold
-    let itemThreshold = itemData.critical.threshold;
-
     // Get the actor's critical threshold
     let actorThreshold = null;
 
     if ( this.data.type === "weapon" ) {
       actorThreshold = actorFlags.weaponCriticalThreshold;
-    }
-    if ( this.data.type === "spell" ) {
+    } else if ( this.data.type === "spell" ) {
       actorThreshold = actorFlags.spellCriticalThreshold;
     }
 
-    // Return the lowest of the two thresholds
-    return Math.min(itemThreshold ?? 20, actorThreshold ?? 20);
+    // Return the lowest of the the item and actor thresholds
+    return Math.min(itemData.critical?.threshold ?? 20, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
@@ -1061,8 +1056,8 @@ export default class Item5e extends Item {
     }
 
     // Factor in extra weapon-specific critical damage
-    if ( itemData.critical?.damage && rollConfig.critical ){
-      parts.push(itemData.critical?.damage);
+    if ( itemData.critical?.damage && rollConfig.critical ) {
+      parts.push(itemData.critical.damage);
     }
 
     // Call the roll helper utility
