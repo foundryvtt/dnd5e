@@ -401,7 +401,6 @@ export default class Item5e extends Item {
    * - item entity
    * - item entity's actor (if it has one)
    * - the constant '20'
-   *
    * @returns {number} the minimum value that must be rolled to be considered a critical hit.
    */
   getCriticalThreshold() {
