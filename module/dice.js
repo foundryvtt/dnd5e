@@ -117,45 +117,38 @@ function _simplifyNumericTerms(_terms) {
   if (_terms.find((term) => ["/", "*"].includes(term.operator))) return _terms;
 
   const terms = Array.from(_terms);
-
-  const groupTermsByType = (termType) => {
-    const groupedTerms = []
-
-    while (true) {
-      const termIndex = terms.findIndex((term) => term instanceof termType);
+  const simplifiedTerms = [];
+  const numericTerms = [];
   
-      if (termIndex === -1) break;
-      else if (termIndex === 0) groupedTerms.push(terms.shift());
-      else groupedTerms.push(...terms.splice(termIndex - 1, 2));
+  terms.forEach((term, i, termArray) => {
+    // Skip over operators as they are handled when other terms are encountered.
+    if (term instanceof OperatorTerm) {
+      return;
     }
 
-    return groupedTerms;
-  }
+    // Isolate all numeric terms that do not have flavor text.
+    if ( (term instanceof NumericTerm) && (!term.flavor) ) {
+      // If the numeroc term is the first element in the terms array, it has no 
+      // preceeding operator, so just push the term.
+      if (i === 0) numericTerms.push(term);
 
-  // Group complex terms by type and add them to the simplifiedTerms array 
-  // without modification.
-  const simplifiedTerms = [
-    ...groupTermsByType(DiceTerm),
-    ...groupTermsByType(StringTerm),
-    ...groupTermsByType(ParentheticalTerm)
-  ];
-  
-  const flavorTerms = [];
-  
-  // Isolate any remaining static terms with flavour text so that they can be
-  // placed at the end of the terms list.
-  while (true) {
-    const termIndex = terms.findIndex((term) => term.flavor);
+      // If the term is not the first element, push the preceeding operator to
+      // the terms array alongside the numeric term.
+      else numericTerms.push(termArray[i - 1], term);
+    }
+    
+    // Repeat the same steps for the non-numeric terms, pushing them to the
+    // simplifiedTerms array instead, as no further processing is required.
+    else {
+      if (i === 0) simplifiedTerms.push(term);
+      else simplifiedTerms.push(termArray[i - 1], term);
+    }
+  });
 
-    if (termIndex === -1) break;
-    else if (termIndex === 0) flavorTerms.push(terms.shift());
-    else flavorTerms.push(...terms.splice(termIndex - 1, 2));
-  }
-
-  // Combines the unannotated numerical bonuses into a single number and creates
+  // Combine the unannotated numerical bonuses into a single number and create
   // a new NumericTerm to represent the value in the terms.
-  if (terms.length) {
-    const staticBonus = Roll.safeEval(Roll.getFormula(terms));
+  if (numericTerms.length) {
+    const staticBonus = Roll.safeEval(Roll.getFormula(numericTerms));
 
     // If the staticBonus is 0 or greater, there is no operator attached to it.
     // Add a plus operator so that the formula remains valid.
@@ -167,11 +160,11 @@ function _simplifyNumericTerms(_terms) {
 
   // In the event that no terms are provided at all, this creates a new
   // NumericTerm with a value of 0.
-  } else if (!simplifiedTerms.length && !flavorTerms.length) {
+  } else if (!simplifiedTerms.length) {
     simplifiedTerms.push(new NumericTerm({ number: 0 }))
   }
 
-  return [...simplifiedTerms, ...flavorTerms];
+  return simplifiedTerms;
 }
 
 /**
