@@ -755,6 +755,14 @@ export default class ActorSheet5e extends ActorSheet {
             transformTokens: rememberOptions(html).transformTokens
           })
         },
+        self: {
+          icon: '<i class="fas fa-eye"></i>',
+          label: game.i18n.localize('DND5E.PolymorphSelf'),
+          callback: html => this.actor.transformInto(sourceActor, {
+            keepSelf: true,
+            transformTokens: rememberOptions(html).transformTokens
+          })
+        },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
           label: game.i18n.localize('Cancel')
