@@ -8,11 +8,10 @@
   },
   "devDependencies": {
     "@ckeditor/jsdoc-plugins": "^24.4.2",
-    "babel-eslint": "^10.1.0",
     "eslint-plugin-jsdoc": "^32.3.0",
     "fs": "^0.0.1-security",
     "gulp": "^4.0.2",
-    "gulp-eslint": "^6.0.0",
+    "gulp-eslint7": "^0.3.1",
     "gulp-if": "^3.0.0",
     "gulp-less": "^5.0.0",
     "merge-stream": "^2.0.0",
@@ -21,5 +20,70 @@
     "through2": "^2.0.5",
     "minimist": "^1.2.5"
     "yargs": "^7.1.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true,
+      "jquery": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "plugins": [
+      "jsdoc"
+    ],
+    "rules": {
+      "jsdoc/check-access": 1,
+      "jsdoc/check-alignment": 1,
+      "jsdoc/check-examples": 0,
+      "jsdoc/check-indentation": 0,
+      "jsdoc/check-line-alignment": 0,
+      "jsdoc/check-param-names": 1,
+      "jsdoc/check-property-names": 1,
+      "jsdoc/check-syntax": 0,
+      "jsdoc/check-tag-names": 1,
+      "jsdoc/check-types": 1,
+      "jsdoc/check-values": 1,
+      "jsdoc/empty-tags": 1,
+      "jsdoc/implements-on-classes": 1,
+      "jsdoc/match-description": 0,
+      "jsdoc/newline-after-description": 0,
+      "jsdoc/no-bad-blocks": 1,
+      "jsdoc/no-defaults": 0,
+      "jsdoc/no-types": 0,
+      "jsdoc/no-undefined-types": 0,
+      "jsdoc/require-description": 1,
+      "jsdoc/require-description-complete-sentence": 0,
+      "jsdoc/require-example": 0,
+      "jsdoc/require-file-overview": 0,
+      "jsdoc/require-hyphen-before-param-description": 0,
+      "jsdoc/require-jsdoc": 1,
+      "jsdoc/require-param": 1,
+      "jsdoc/require-param-description": 0,
+      "jsdoc/require-param-name": 1,
+      "jsdoc/require-param-type": 1,
+      "jsdoc/require-property": 1,
+      "jsdoc/require-property-description": 0,
+      "jsdoc/require-property-name": 1,
+      "jsdoc/require-property-type": 1,
+      "jsdoc/require-returns": 1,
+      "jsdoc/require-returns-check": 1,
+      "jsdoc/require-returns-description": 0,
+      "jsdoc/require-returns-type": 1,
+      "jsdoc/require-throws": 0,
+      "jsdoc/require-yields": 1,
+      "jsdoc/require-yields-check": 1,
+      "jsdoc/valid-types": 0
+    },
+    "settings": {
+      "jsdoc": {
+        "tagNamePreference": {
+          "auguments": "extends",
+          "returns": "return"
+        }
+      }
+    }
   }
 }
