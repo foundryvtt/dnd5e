@@ -7,6 +7,7 @@
     "build:watch": "gulp"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.15.4",
     "@ckeditor/jsdoc-plugins": "^24.4.2",
     "eslint-plugin-jsdoc": "^32.3.0",
     "fs": "^0.0.1-security",
@@ -28,7 +29,9 @@
       "node": true,
       "jquery": true
     },
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
+      "requireConfigFile": false,
       "sourceType": "module"
     },
     "plugins": [
