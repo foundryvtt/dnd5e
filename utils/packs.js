@@ -1,15 +1,31 @@
-const parsedArgs = require('yargs').argv;
+const parsedArgs = require("yargs").argv;
 
-const Datastore = require('nedb');
+const Datastore = require("nedb");
 const fs = require("fs");
-const gulp = require('gulp');
+const gulp = require("gulp");
 const mergeStream = require("merge-stream");
 const path = require("path");
 const through2 = require("through2");
 
 
-const PACK_SRC = "packs/src";
+/**
+ * Folder where the compiled compendium packs should be located relative to the
+ * base 5e system folder.
+ * @type {string}
+ */
 const PACK_DEST = "packs";
+
+/**
+ * Folder where source JSON files should be located relative to the 5e system folder.
+ * @type {string}
+ */
+const PACK_SRC = "packs/src";
+
+/**
+ * Cache of DBs so they aren't loaded repeatedly when determining IDs.
+ * @type {Object.<string,Datastore>}
+ */
+const DB_CACHE = {};
 
 
 /* ----------------------------------------- */
@@ -40,25 +56,18 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
 
 /**
- * Cache of DBs so they aren't loaded repeatedly when determining IDs.
- * @type {Object.<string,Datastore>}
- */
-const dbCache = {};
-
-
-/**
  * Attempts to find an existing matching ID for an item of this name, otherwise generates a new unique ID.
  * @param {object} data  Data for the entry that needs an ID.
  * @param {string} pack  Name of the pack to which this item belongs.
  * @return {Promise.<string>}  Resolves once the ID is determined.
  */
 function determineId(data, pack) {
-  const dbPath = path.join(PACK_DEST, `${pack}.db`);
-  if ( !dbCache[dbPath] ) {
-    dbCache[dbPath] = new Datastore({ filename: dbPath, autoload: true });
-    dbCache[dbPath].loadDatabase();
+  const db_path = path.join(PACK_DEST, `${pack}.db`);
+  if ( !DB_CACHE[db_path] ) {
+    DB_CACHE[db_path] = new Datastore({ filename: db_path, autoload: true });
+    DB_CACHE[db_path].loadDatabase();
   }
-  const db = dbCache[dbPath];
+  const db = DB_CACHE[db_path];
 
   return new Promise((resolve, reject) => {
     db.findOne({ name: data.name }, (err, entry) => {
