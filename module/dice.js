@@ -100,8 +100,7 @@ function _simplifyRedundantOperatorTerms(terms) {
  * with the static modifiers combined.
  * 
  * Terms for a formula that include division and multiplication are currently not supported,
- * and such lists of terms will be returned as-is. ParentheticalTerms and Die are likewise
- * ignored in the current implementation.
+ * and such lists of terms will be returned as-is.
  * 
  * NumericTerms with flavor text are intentionally not merged into the other NumericTerms
  * so that the flavour text is not lost.
@@ -122,9 +121,7 @@ function _simplifyNumericTerms(_terms) {
   
   terms.forEach((term, i, termArray) => {
     // Skip over operators as they are handled when other terms are encountered.
-    if (term instanceof OperatorTerm) {
-      return;
-    }
+    if (term instanceof OperatorTerm) return;
 
     // Isolate all numeric terms that do not have flavor text.
     if ( (term instanceof NumericTerm) && (!term.flavor) ) {
