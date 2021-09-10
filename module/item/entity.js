@@ -1178,21 +1178,22 @@ export default class Item5e extends Item {
     // Add tool bonuses
     if ( this.data.data.bonus ) {
       parts.push("@toolBonus");
-      rollData.toolBonus = this.data.data.bonus;
+      rollData.toolBonus = Roll.replaceFormulaData(this.data.data.bonus, rollData);
     }
 
     // Add ability-specific check bonus
     if ( getProperty(rollData, `abilities.${abl}.bonuses.check`) ) {
       const checkBonusKey = `${abl}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
-      rollData[checkBonusKey] = getProperty(rollData, `abilities.${abl}.bonuses.check`);
+      const checkBonus = getProperty(rollData, `abilities.${abl}.bonuses.check`)
+      rollData[checkBonusKey] = Roll.replaceFormulaData(checkBonus, rollData);
     }
 
     // Add global actor bonus
     const bonuses = getProperty(this.actor.data.data, "bonuses.abilities") || {};
     if ( bonuses.check ) {
       parts.push("@checkBonus");
-      rollData.checkBonus = bonuses.check;
+      rollData.checkBonus = Roll.replaceFormulaData(bonuses.check, rollData);
     }
 
     // Compose the roll data
