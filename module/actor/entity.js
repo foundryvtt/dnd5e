@@ -472,6 +472,12 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
   
+  /**
+   * Calculate the initiative bonus to display on a character sheet
+   * 
+   * @param {Object} actorData
+   * @param {String} globalCheckBonus  The global ability check bonus for this actor
+   */
   _computeInitiativeModifier(actorData, globalCheckBonus) {
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
