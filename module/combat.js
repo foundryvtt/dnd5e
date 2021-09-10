@@ -9,7 +9,14 @@
 export const _getInitiativeFormula = function() {
   const actor = this.actor;
   if ( !actor ) return "1d20";
-  const init = actor.data.data.attributes.init;
+  const actorData = actor.data.data;
+  const init = actorData.attributes.init;
+
+  // Ability Check Bonuses
+  const dexCheckBonus = actorData.abilities.dex.bonuses.check;
+  const globalCheckBonus = actorData.bonuses.abilities.check;
+
+  console.log("BONUSES!!!", dexCheckBonus, globalCheckBonus)
 
   // Construct initiative formula parts
   let nd = 1;
@@ -23,8 +30,12 @@ export const _getInitiativeFormula = function() {
     `${nd}d20${mods}`,
     init.mod,
     (init.prof.term !== "0") ? init.prof.term : null,
-    (init.bonus !== 0) ? init.bonus : null
+    (init.bonus !== 0) ? init.bonus : null,
+    ( (dexCheckBonus !== "0") && (dexCheckBonus) ) ? dexCheckBonus : null,
+    ( (globalCheckBonus !== "0") && globalCheckBonus ) ? globalCheckBonus : null
   ];
+
+  console.log("PARTS!!!", parts)
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
