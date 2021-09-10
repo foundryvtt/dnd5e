@@ -25,6 +25,50 @@ Runs all relevant build scripts:
 
 Runs the LESS -> CSS builder in watch mode so that changes made to the LESS files will automatically compile to CSS.
 
+### Compendia as JSON
+
+This repository includes some utilities which allow the Compendia included in the System to be maintained as JSON files. This makes contributions which include changes to the compendia considerably easier to review.
+
+Please remember to compile any pack whose JSON your contribution touches before submitting an MR.
+
+#### Compiling Packs
+
+Compile the source JSON files into compendium packs.
+
+```text
+npm run build:db
+gulp compilePacks
+```
+
+- `gulp compilePacks` - Compile all JSON files into their NEDB files.
+- `gulp compilePacks --pack classes` - Only compile the specified pack.
+
+#### Extracting Packs
+
+Extract the contents of compendium packs to JSON files.
+
+```text
+npm run build:json
+gulp extractPacks
+```
+
+- `gulp extractPacks` - Extract all compendium NEDB files into JSON files.
+- `gulp extractPacks --pack classes` - Only extract the contents of the specified compendium.
+- `gulp extractPacks --pack classes --name Barbarian` - Only extract a single item from the specified compendium.
+
+#### Cleaning Packs
+
+Cleans and formats source JSON files, removing unnecessary permissions and flags and adding the proper spacing.
+
+```text
+npm run build:clean
+gulp extractPacks
+```
+
+- `gulp cleanPacks` - Clean all source JSON files.
+- `gulp cleanPacks --pack classes` - Only clean the source files for the specified compendium.
+- `gulp cleanPacks --pack classes --name Barbarian` - Only clean a single item from the specified compendium.
+
 ## Issues
 
 Check that your Issue isn't a duplicate (also check the closed issues, as sometimes work which has not been released closes an issue).
@@ -48,7 +92,11 @@ Any feature request should be considered from the lens of "Does this belong in t
 
 All Content released with this system must come from the WotC [5e System Reference Document](https://dnd.wizards.com/articles/features/systems-reference-document-srd) (aka SRD).
 
-In general, content contributions will take the shape of fixing typos or bugs in the configuration of the existing items in the included compendia. If there is missing content, please open an issue detailing what is missing.
+If there is missing content, please open an issue detailing what is missing.
+
+In general, content contributions will take the shape of fixing typos or bugs in the configuration of the existing items in the included compendia JSON files, which are then compiled into the appropriate db file.
+
+Every MR which contributes content must change both the source JSON file and the db file.
 
 ### Translations
 
