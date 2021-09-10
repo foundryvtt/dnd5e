@@ -16,8 +16,6 @@ export const _getInitiativeFormula = function() {
   const dexCheckBonus = actorData.abilities.dex.bonuses.check;
   const globalCheckBonus = actorData.bonuses.abilities.check;
 
-  console.log("BONUSES!!!", dexCheckBonus, globalCheckBonus)
-
   // Construct initiative formula parts
   let nd = 1;
   let mods = "";
@@ -34,8 +32,6 @@ export const _getInitiativeFormula = function() {
     ( (dexCheckBonus !== "0") && (dexCheckBonus) ) ? dexCheckBonus : null,
     ( (globalCheckBonus !== "0") && globalCheckBonus ) ? globalCheckBonus : null
   ];
-
-  console.log("PARTS!!!", parts)
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
