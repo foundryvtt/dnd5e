@@ -5,7 +5,8 @@
     "build:db": "gulp compilePacks",
     "build:json": "gulp extractPacks",
     "build:watch": "gulp",
-    "lint": "gulp lint"
+    "lint": "gulp lint",
+    "lint:fix": "gulp lint --fix"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.4",
