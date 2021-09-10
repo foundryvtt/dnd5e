@@ -486,7 +486,12 @@ export default class Actor5e extends Actor {
     // Initiative modifiers
     const joat = flags.jackOfAllTrades;
     const athlete = flags.remarkableAthlete;
-    const dexCheckBonus = data.abilities.dex.bonuses.check ?? 0;
+    let dexCheckBonus = data.abilities.dex.bonuses.check ?? 0;
+
+    // Strip flavour text from the bonuses so that annotated numeric terms
+    // can be included in the initiative total
+    dexCheckBonus = dexCheckBonus.toString().replace(RollTerm.FLAVOR_REGEXP, "");
+    globalCheckBonus = globalCheckBonus.toString().replace(RollTerm.FLAVOR_REGEXP, "");
     
     // Compute initiative modifier
     init.mod = data.abilities.dex.mod;
@@ -495,8 +500,8 @@ export default class Actor5e extends Actor {
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.bonus
 
-    if ( Number.isNumeric(dexCheckBonus) ) init.total += Number(dexCheckBonus);
-    if ( Number.isNumeric(globalCheckBonus) ) init.total += Number(globalCheckBonus);
+    if ( Number.isNumeric(dexCheckBonus) ) init.total += parseInt(dexCheckBonus);
+    if ( Number.isNumeric(globalCheckBonus) ) init.total += parseInt(globalCheckBonus);
     if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
   }
 
