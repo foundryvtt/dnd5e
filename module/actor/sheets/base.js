@@ -603,7 +603,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
       // Item Rolling
-      html.find('.item .item-image').click(event => this._onItemRoll(event));
+      html.find('.rollable .item-image').click(event => this._onItemRoll(event));
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
     }
 
@@ -887,7 +887,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    return item.roll();
+    if ( item ) return item.roll();
   }
 
   /* -------------------------------------------- */
