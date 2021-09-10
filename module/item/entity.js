@@ -1165,6 +1165,7 @@ export default class Item5e extends Item {
 
     // Prepare roll data
     const rollData = this.getRollData();
+    const abl = this.data.data.ability;
     const parts = ["@mod"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
 
@@ -1178,6 +1179,13 @@ export default class Item5e extends Item {
     if ( this.data.data.bonus ) {
       parts.push("@toolBonus");
       rollData.toolBonus = this.data.data.bonus;
+    }
+
+    // Add ability-specific check bonus
+    if ( getProperty(rollData, `abilities.${abl}.bonuses.check`) ) {
+      const checkBonusKey = `${abl}CheckBonus`;
+      parts.push(`@${checkBonusKey}`);
+      rollData[checkBonusKey] = getProperty(rollData, `abilities.${abl}.bonuses.check`);
     }
 
     // Add global actor bonus
