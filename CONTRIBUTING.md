@@ -6,7 +6,7 @@ Please ensure there is an open issue about whatever contribution you are submitt
 
 ## Developer Tooling
 
-Cloning this repository down and either placing it or symlinking it to your `/Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
+Cloning this repository and either placing it in or symlinking it to your `Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
 
 This repository leverages [gulp](https://gulpjs.com/) to run automated build tasks. If your system supports `npm`, you can run the following commands from the root of the project to get set up:
 
@@ -32,15 +32,15 @@ Issues which are assigned to a Milestone are considered "Prioritized." This assi
 
 ### Bugs
 
-- Ensure that the bug is reproducable with no modules active. If the bug only happens when a module is active, report that to the module's author.
+- Ensure that the bug is reproducible with no modules active. If the bug only happens when a module is active, report it to the module's author instead.
 - Provide hosting details as they might be relevant.
-- Provide clear step-by-step reproduction steps, as well as what you expected to happen during those steps vs what actually happened.
+- Provide clear step-by-step reproduction instructions, as well as what you expected to happen during those steps vs what actually happened.
 
 ### Feature Requests
 
 Any feature request should be considered from the lens of "Does this belong in the core system?"
 
-- Does the RAW support this feature? If so, provide some examples.
+- Do the Rules as Written (RAW) support this feature? If so, provide some examples.
 - Is the missing feature in the System Reference Document? If not, it might still be supportable, but it is worth mentioning in the request.
 - Does this feature help a GM run a fifth edition game in Foundry VTT?
 
@@ -60,13 +60,13 @@ Instead of opening an MR with translation files, create one of these modules (or
 
 Here are some guidelines for contributing code to this project.
 
-To contribute code, [fork this project](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html) and open a [merge request (MR)](https://docs.gitlab.com/ee/user/project/merge_requests/getting_started.html) against the correct development branch.
+To contribute code, [fork this project](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html) and submit a [merge request (MR)](https://docs.gitlab.com/ee/user/project/merge_requests/getting_started.html) against the correct development branch.
 
 ### Linked Issues
 
-Before, or alongside of, opening an MR, we ask that you open a feature request issue. This will let us discuss the approach and prioritization of the proposed change.
+Before (or alongside) submitting an MR, we ask that you open a feature request issue. This will let us discuss the approach and prioritization of the proposed change.
 
-If you want to work on an existing issue, leave a comment saying you're going to take a crack at it so that other contributors know not to duplicate work. Similarly, if you see an issue is assigned to someone, that member of the team has made it known they are working on it.
+If you want to work on an existing issue, leave a comment saying you're going to work on the issue so that other contributors know not to duplicate work. Similarly, if you see an issue is assigned to someone, that member of the team has made it known they are working on it.
 
 When you open an MR it is recommended to [link it to an open issue](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically). Include which issue it resolves by putting something like this in your description:
 
