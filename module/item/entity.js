@@ -1,4 +1,4 @@
-import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
+import {d20Roll, damageRoll, simplifyRollFormula} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import Proficiency from "../actor/proficiency.js";
 
@@ -288,7 +288,7 @@ export default class Item5e extends Item {
     const rollData = this.getRollData();
 
     const derivedDamage = itemData.damage?.parts?.map((damagePart) => ({
-      formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
+      formula: simplifyRollFormula(damagePart[0], rollData),
       damageType: damagePart[1],
     }));
 
@@ -384,11 +384,7 @@ export default class Item5e extends Item {
     }
 
     // Condense the resulting attack bonus formula into a simplified label
-    let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
-    if ( !/^[+-]/.test(toHitLabel) ) {
-      toHitLabel = '+ ' + toHitLabel
-    }
-    this.labels.toHit = toHitLabel;
+    this.labels.toHit = simplifyRollFormula(parts.join('+'), rollData, {alwaysIncludeSign: true}).trim();
 
     // Update labels and return the prepared roll data
     return {rollData, parts};
