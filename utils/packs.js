@@ -203,19 +203,21 @@ exports.extract = extract;
 function _getSubfolderName(data, pack) {
   switch (pack) {
     // Items should be grouped by type
-    case "items": return data.type;
+    case "items":
+      if ( (data.type === "consumable") && data.data.consumableType ) return data.data.consumableType;
+      return data.type;
 
     // Monsters should be grouped by CR
     case "monsters":
-      if ( data.data?.details?.cr === undefined ) return '';
+      if ( data.data?.details?.cr === undefined ) return "";
       return `cr-${data.data.details.cr}`;
 
     // Spells should be grouped by level
     case "spells":
-      if ( data.data?.level === undefined ) return '';
-      if ( data.data.level === 0 ) return 'cantrip';
+      if ( data.data?.level === undefined ) return "";
+      if ( data.data.level === 0 ) return "cantrip";
       return `level-${data.data.level}`;
 
-    default: return '';
+    default: return "";
   }
 }
