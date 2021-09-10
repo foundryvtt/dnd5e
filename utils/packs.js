@@ -193,9 +193,15 @@ function extract() {
 exports.extract = extract;
 
 
+/**
+ * Determine a subfolder name based on which pack is being extracted.
+ * @param {object} data  Data for the entry being extracted.
+ * @param {string} pack  Name of the pack.
+ * @return {string}      Subfolder name the entry into which the entry should be created. An empty string if none.
+ * @private
+ */
 function _getSubfolderName(data, pack) {
   switch (pack) {
-
     // Items should be grouped by type
     case "items": return data.type;
 
