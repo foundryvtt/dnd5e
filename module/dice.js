@@ -120,19 +120,13 @@ function _simplifyRedundantOperatorTerms(terms) {
 
 /**
  * A helper function to combine NumericTerms for a roll, returning a new array of terms
- * with the static modifiers combined. ParentheticalTerms, StringTerms, and MathTerms that
- * can be evaluated to a NumericTerm are also combined with the existing NumericTerms.
- * 
- * Terms for a formula that include division and multiplication are currently not supported,
- * and such lists of terms will be returned as-is.
- * 
- * NumericTerms with flavor text are intentionally not merged into the other NumericTerms
- * so that the flavour text is not lost.
- * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ * with the static modifiers combined. NumericTerms with flavor text are intentionally
+ * not merged into the other NumericTerms so that the flavour text is not lost.
+ * @param {RollTerm[]} terms  An array of Numeric Terms and associated OperatorTerms
  * 
  * @return {RollTerm[]}  A new array of roll terms with its NumericTerm objects combined into
- *                     a single object. NumericTerm objects with flavor text are not merged
- *                     and remain separate objects within the term array.
+ *                       a single object. NumericTerm objects with flavor text are not merged
+ *                       and remain separate objects within the term array.
  */
 function _simplifyNumericTerms(_terms) {
   // Split the _terms array into OperatorTerm-NumericTerm pairs
