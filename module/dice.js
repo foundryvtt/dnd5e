@@ -3,15 +3,14 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
  * A standardized helper function for simplifying the constant parts of a multipart
- * roll formula.
- * 
- * A new, simplified version of the formula is returned. 
- * 
+ * roll formula. A new, simplified version of the formula is returned. 
  * @param {String} formula                      A roll formula
  * @param {Object} [options={}]                 A configuration object
  * @param {Boolean} [option.ignoreFlavor=true]  A Boolean controlling whether flavor text
  *                                              is included in the simplified roll formula
  *                                              returned by the function
+ *
+ * @returns {String} A simplified roll formula
  */
  export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
   const roll = new Roll(formula);
@@ -27,8 +26,14 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
   // with the new simplified set.
   roll.terms = _simplifyRedundantOperatorTerms(roll.terms);
 
+  // Perform no further simplification if terms that include multiplication and divison.
+  if (roll.terms.find((term) => ["/", "*"].includes(term.operator))) {
+    return roll.constructor.getFormula(roll.terms);
+  }
+  
   // Attempt to combine numeric terms that do not have flavor text attached.
   // Replace the existing roll terms with the new simplified set.
+  roll.terms = _evaluateComplexNumericTerms(roll.terms);
   roll.terms = _simplifyNumericTerms(roll.terms);
 
   // Generate a new formula from the updated roll terms and return it
@@ -36,9 +41,31 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 }
 
 /**
+ * A helper function to evaluate ParentheticalTerms, MathTerms, and StringTerms that can
+ * be evaluated to a simple NumericTerms. Returns a new array of terms with any applicable
+ * terms converted to NumericTerms.
+ * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ *
+ * @returns {Object[]}      A new array of roll terms with various complex terms converted
+ *                          to numeric terms.
+ */
+function _evaluateComplexNumericTerms(terms) {
+  return Array.from(terms, (term) => {
+    if ( [ParentheticalTerm, MathTerm, StringTerm].some(type => term instanceof type) ) {
+      try {
+        term = new NumericTerm({ number: Roll.safeEval(term.formula) })
+      } catch {
+        // In the event of an exception, the term cannot be evaluated, likely because
+        // its formula includes a die roll or flavour text. Leave the term as-is.
+      }
+    }
+    return term;
+  });
+}
+
+/**
  * A helper function to remove redundant addition and subtraction operators
  * in roll terms.
- * 
  * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  * 
  * @return {Object[]}  A new array of roll terms with redundant operators removed
@@ -105,7 +132,6 @@ function _simplifyRedundantOperatorTerms(terms) {
  * 
  * NumericTerms with flavor text are intentionally not merged into the other NumericTerms
  * so that the flavour text is not lost.
- * 
  * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  * 
  * @return {Object[]}  A new array of roll terms with its NumericTerm objects combined into
@@ -169,7 +195,7 @@ function _simplifyNumericTerms(_terms) {
   // In the event that no terms are provided at all, this creates a new
   // NumericTerm with a value of 0.
   } else if (!simplifiedTerms.length) {
-    simplifiedTerms.push(new NumericTerm({ number: 0 }))
+    simplifiedTerms.push(new NumericTerm({ number: 0 }));
   }
 
   return simplifiedTerms;
@@ -178,7 +204,6 @@ function _simplifyNumericTerms(_terms) {
 /**
  * Creates a set of terms from a roll formula with any flavour text absent in the
  * resulting terms.
- * 
  * @param {String} formula  A roll formula
  * 
  * @returns {Object[]}  An array of roll terms with the flavour text removed
