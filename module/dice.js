@@ -97,7 +97,8 @@ function _simplifyRedundantOperatorTerms(terms) {
 
 /**
  * A helper function to combine NumericTerms for a roll, returning a new array of terms
- * with the static modifiers combined.
+ * with the static modifiers combined. ParentheticalTerms, StringTerms, and MathTerms that
+ * can be evaluated to a NumericTerm are also combined with the existing NumericTerms.
  * 
  * Terms for a formula that include division and multiplication are currently not supported,
  * and such lists of terms will be returned as-is.
@@ -122,6 +123,16 @@ function _simplifyNumericTerms(_terms) {
   terms.forEach((term, i, termArray) => {
     // Skip over operators as they are handled when other terms are encountered.
     if (term instanceof OperatorTerm) return;
+
+    // Attempt to evaluate complex or unknown terms to NumericTerms
+    if ( [ParentheticalTerm, MathTerm, StringTerm].some(type => term instanceof type)) {
+      try {
+        term = new NumericTerm({ number: Roll.safeEval(term.formula) })
+      } catch {
+        // In the event of an exception, the term cannot be evaluated, likely because
+        // its formula includes a die roll or flavour text. Leave the term as-is.
+      }
+    }
 
     // Isolate all numeric terms that do not have flavor text.
     if ( (term instanceof NumericTerm) && (!term.flavor) ) {
