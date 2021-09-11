@@ -13,40 +13,42 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  * @returns {String} A simplified roll formula
  */
  export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
+  // Create a new roll and verify that the formula is valid before attempting simplification
   const roll = new Roll(formula);
-
-  // Verify that the roll formula is valid before attempting simplification
   Roll.validate(roll.formula);
 
-  // Optionally strip flavor text from the provided roll formula
+  // Optionally stip flavor annotations
   if (ignoreFlavor) roll.terms = _stripFlavor(roll.formula);
 
-  // Perform arithmetic simplification on the existing roll terms and
-  // remove any duplicate operators. Replace the existing roll terms
-  // with the new simplified set.
+  // Perform arithmetic simplification on the existing roll terms and remove any 
+  // duplicate operators. Replace the existing roll terms with the new simplified set.
   roll.terms = _simplifyRedundantOperatorTerms(roll.terms);
 
   // Perform no further simplification if terms that include multiplication and divison.
   if (roll.terms.find((term) => ["/", "*"].includes(term.operator))) {
     return roll.constructor.getFormula(roll.terms);
   }
-  
-  // Attempt to combine numeric terms that do not have flavor text attached.
-  // Replace the existing roll terms with the new simplified set.
-  roll.terms = _evaluateComplexNumericTerms(roll.terms);
-  roll.terms = _simplifyNumericTerms(roll.terms);
 
-  // Generate a new formula from the updated roll terms and return it
-  return roll.constructor.getFormula(roll.terms);
+  // Attempt to converting complex and unknown terms to NumericTerms
+  roll.terms = _evaluateComplexNumericTerms(roll.terms);
+
+  // Group terms by type and perform simplifications on various types of roll term.
+  const groupedTerms = _groupTermsByType(roll.terms);
+  groupedTerms.numericTerms = _simplifyNumericTerms(groupedTerms.numericTerms);
+
+  // Recombine the terms into a single term array and remove an initial + operator if present.
+  const simplifiedTerms = Object.values(groupedTerms).flat();
+  if (simplifiedTerms[0].operator === "+") simplifiedTerms.shift();
+  return roll.constructor.getFormula(simplifiedTerms);
 }
 
 /**
  * A helper function to evaluate ParentheticalTerms, MathTerms, and StringTerms that can
  * be evaluated to a simple NumericTerms. Returns a new array of terms with any applicable
  * terms converted to NumericTerms.
- * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  *
- * @returns {Object[]}      A new array of roll terms with various complex terms converted
+ * @returns {RollTerm[]}      A new array of roll terms with various complex terms converted
  *                          to numeric terms.
  */
 function _evaluateComplexNumericTerms(terms) {
@@ -66,9 +68,9 @@ function _evaluateComplexNumericTerms(terms) {
 /**
  * A helper function to remove redundant addition and subtraction operators
  * in roll terms.
- * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  * 
- * @return {Object[]}  A new array of roll terms with redundant operators removed
+ * @return {RollTerm[]}  A new array of roll terms with redundant operators removed
  */
 function _simplifyRedundantOperatorTerms(terms) {
   const simplifiedTerms = terms.reduce((accumulatedTerms, currentTerm) => {
@@ -82,36 +84,30 @@ function _simplifyRedundantOperatorTerms(terms) {
       return accumulatedTerms;
     }
     
-    // Create a set containing the operator types used in the current and 
-    // previous term.
+    // Create a set containing the operators used in the current and previous term.
     const operators = new Set([previousTerm.operator, currentTerm.operator]);
 
-    // If the set contains a single term and it is an addition operator,
-    // adding a second addition operator is redundant. Return the accumulated
-    // terms as they are.
+    // If the set contains a single term and it is a "+" operator, return the
+    // accumulated terms as they are.
     if ( (operators.size === 1) && (operators.has("+")) ) {
       return accumulatedTerms;
 
-    // If the set contains a single term and it is a substraction operator,
-    // the two subtractions cancel out. Remove the previous element from the
-    // accumulated terms and replace it with an addition operator.
+    // If the set contains a single term and it is a "-" operator, remove the
+    // previous term from the accumulated terms and replace it with a "+" operator.
     } else if ( (operators.size === 1) && (operators.has("-")) ) {
       accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "+" }));
 
-    // If the set contains both an addition and subtraction operator,
-    // the subtraction operator is the only one the matters. Remove the previous
-    // element from the accumulated terms and insert a subtraction operator in
-    // its place.
+    // If the set contains both a "+" and "-" operator, remove the previous term from
+    // the accumulated terms and insert a subtraction operator in its place.
     } else if (operators.has("+") && operators.has("-")) {
       accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
-    // In cases where the first operator is a muliplication or division operator
-    // and the second operator is an addition operator, the addition is redundant.
+    // In cases where the first operator is a "*" or "/" operator and the second
+    // operator is a "+" operator, the "+" is redundant.
     } else if (["*", "/"].includes(previousTerm.operator) && operators.has("+")) {
       return accumulatedTerms;
 
-    // In all other cases, we should do nothing special. Append the current term to the
-    // accumulated terms and move on.
+    // In all other cases, simply no simplification is necessary. Append the term as-is.
     } else {
       accumulatedTerms.push(currentTerm);
     }
@@ -132,73 +128,81 @@ function _simplifyRedundantOperatorTerms(terms) {
  * 
  * NumericTerms with flavor text are intentionally not merged into the other NumericTerms
  * so that the flavour text is not lost.
- * @param {Object[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  * 
- * @return {Object[]}  A new array of roll terms with its NumericTerm objects combined into
+ * @return {RollTerm[]}  A new array of roll terms with its NumericTerm objects combined into
  *                     a single object. NumericTerm objects with flavor text are not merged
  *                     and remain separate objects within the term array.
  */
 function _simplifyNumericTerms(_terms) {
-  // Do not simplify terms that include multiplication and divison.
-  if (_terms.find((term) => ["/", "*"].includes(term.operator))) return _terms;
+  // Split the _terms array into OperatorTerm-NumericTerm pairs
+  const terms = _terms?.reduce((termGroups, _, i) => {
+    if (i % 2 === 0) termGroups.push(_terms.slice(i, i + 2));
+    return termGroups;
+  }, []) || [];
 
-  const terms = Array.from(_terms);
   const simplifiedTerms = [];
-  const numericTerms = [];
-  
-  terms.forEach((term, i, termArray) => {
-    // Skip over operators as they are handled when other terms are encountered.
-    if (term instanceof OperatorTerm) return;
+  const annotatedTerms = [];
+  const unannotatedTerms = [];
 
-    // Attempt to evaluate complex or unknown terms to NumericTerms
-    if ( [ParentheticalTerm, MathTerm, StringTerm].some(type => term instanceof type)) {
-      try {
-        term = new NumericTerm({ number: Roll.safeEval(term.formula) })
-      } catch {
-        // In the event of an exception, the term cannot be evaluated, likely because
-        // its formula includes a die roll or flavour text. Leave the term as-is.
-      }
-    }
-
-    // Isolate all numeric terms that do not have flavor text.
-    if ( (term instanceof NumericTerm) && (!term.flavor) ) {
-      // If the numeroc term is the first element in the terms array, it has no 
-      // preceeding operator, so just push the term.
-      if (i === 0) numericTerms.push(term);
-
-      // If the term is not the first element, push the preceeding operator to
-      // the terms array alongside the numeric term.
-      else numericTerms.push(termArray[i - 1], term);
-    }
-    
-    // Repeat the same steps for the non-numeric terms, pushing them to the
-    // simplifiedTerms array instead, as no further processing is required.
-    else {
-      if (i === 0) simplifiedTerms.push(term);
-      else simplifiedTerms.push(termArray[i - 1], term);
-    }
+  // Sort the pairs with flavor annotations from those without.
+  terms.forEach(([operator, numericTerm]) => {
+    if (numericTerm.flavor) annotatedTerms.push(operator, numericTerm);
+    else unannotatedTerms.push(operator, numericTerm);
   });
 
   // Combine the unannotated numerical bonuses into a single number and create
   // a new NumericTerm to represent the value in the terms.
-  if (numericTerms.length) {
-    const staticBonus = Roll.safeEval(Roll.getFormula(numericTerms));
+  if (unannotatedTerms.length) {
+    const staticBonus = Roll.safeEval(Roll.getFormula(unannotatedTerms));
 
-    // If the staticBonus is 0 or greater, there is no operator attached to it.
-    // Add a plus operator so that the formula remains valid.
-    if (staticBonus >= 0) {
-      simplifiedTerms.push(new OperatorTerm({ operator: "+"}));
-    }
-
+    // If the staticBonus is 0 or greater, add a "+" operator so the formula remains valid.
+    if (staticBonus >= 0) simplifiedTerms.push(new OperatorTerm({ operator: "+"}));
     simplifiedTerms.push(new NumericTerm({ number: staticBonus} ));
 
-  // In the event that no terms are provided at all, this creates a new
-  // NumericTerm with a value of 0.
-  } else if (!simplifiedTerms.length) {
+  // In the event that no terms are provided at all, create a new NumericTerm with a value of 0.
+  } else if (!annotatedTerms.length) {
     simplifiedTerms.push(new NumericTerm({ number: 0 }));
   }
+  return [...simplifiedTerms, ...annotatedTerms];
+}
 
-  return simplifiedTerms;
+/**
+ * Splits an array of dissimilar roll terms into a several arrays of roll terms, each
+ * containing terms of the same type. OperatorTerms are included alongside other term
+ * types in each array.
+ * @param {RollTerm[]} _terms  An array of RollTerms
+ * 
+ * @returns {Object} An object mapping term types to arrays containing roll terms of that type.
+ */
+function _groupTermsByType(_terms) {
+  const relevantTermTypes = [DiceTerm, PoolTerm, ParentheticalTerm, MathTerm, StringTerm, NumericTerm];
+  const terms = Array.from(_terms);
+  const termGroups = {};
+
+  // Add an initial operator so that terms can be rerranged arbitrarily without
+  // creating an invalid formula.
+  if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+
+  terms.forEach((term, i, termArray) => {
+    // Skip over operators as they are handled when other terms are encountered.
+    if (term instanceof OperatorTerm) return;
+
+    // Identify the term type and push the term and its preceding OperatorTerm to
+    // the appropriate array.
+    relevantTermTypes.forEach((type) => {
+      if (term instanceof type) {
+        // Convert the roll term class name to camel case
+        const key = type.name.charAt(0).toLowerCase() + type.name.substring(1) + "s";
+        
+        // Create a new array as the value for the appropriate key if the key does
+        // not yet exist. Push the term and the preceding OperatorTerm.
+        if (!termGroups[key]) termGroups[key] = [];
+        termGroups[key].push(termArray[i - 1], term);
+      }
+    });
+  });
+  return termGroups;
 }
 
 /**
