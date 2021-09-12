@@ -130,11 +130,7 @@ function _simplifyRedundantOperatorTerms(terms) {
  */
 function _simplifyDiceTerms(_terms) {
   // Split the _terms array into OperatorTerm-DiceTerm pairs
-  const terms = _terms?.reduce((termGroups, _, i) => {
-    if (i % 2 === 0) termGroups.push(_terms.slice(i, i + 2));
-    return termGroups;
-  }, []) || [];
-  
+  const terms = _chunkArray(_terms, 2);
   const simplifiedTerms = [];
   const annotatedTerms = [];
   const unannotatedTerms = [];
@@ -191,11 +187,7 @@ function _simplifyDiceTerms(_terms) {
  */
 function _simplifyNumericTerms(_terms) {
   // Split the _terms array into OperatorTerm-NumericTerm pairs
-  const terms = _terms?.reduce((termGroups, _, i) => {
-    if (i % 2 === 0) termGroups.push(_terms.slice(i, i + 2));
-    return termGroups;
-  }, []) || [];
-
+  const terms = _chunkArray(_terms, 2);
   const simplifiedTerms = [];
   const annotatedTerms = [];
   const unannotatedTerms = [];
@@ -255,6 +247,23 @@ function _groupTermsByType(_terms) {
     });
   });
   return termGroups;
+}
+
+/**
+ * A helper function to split an array into a series of sub-arrays based on
+ * a given chunk size. This can be used to create operator + non-operator term
+ * pairs form an array of terms.
+ * @param {Array} _array
+ * @param {number} chunkSize
+ * 
+ * @returns {Array | Array[]} An array of sub-arrays of the requested size.
+ */
+function _chunkArray(_array, chunkSize) {
+  const array = Array.from(_array);
+  return array?.reduce((chunks, _, i) => {
+    if (i % chunkSize === 0) chunks.push(array.slice(i, i + chunkSize));
+    return chunks;
+  }, []) || [];
 }
 
 /**
