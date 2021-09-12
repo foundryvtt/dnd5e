@@ -154,16 +154,26 @@ function _simplifyDiceTerms(_terms) {
   diceSizes.forEach((dieSize) => {
     // Find all dice of a given size
     const matchingDice = unannotatedTerms.filter(([_, diceTerm]) => diceTerm.faces === dieSize);
-    // Sum the total number of dice by creating a roll formula and evaluating it.
-    const quantity = Roll.safeEval(
-      matchingDice.map(([{ operator }, diceTerm]) => `${operator}${diceTerm.number}`).join("")
-    );
+    const positiveTerms = [];
+    const negativeTerms = [];
+    matchingDice.forEach(([{ operator }, { number}]) => {
+      operator === "+" ? positiveTerms.push(number) : negativeTerms.push(number)
+    });
 
-    // Create a new Die and OperatorTerm using the calculated quantities.
-    simplifiedTerms.push(
-      new OperatorTerm({ operator: quantity >= 0 ? "+" : "-" }),
-      new Die({ number: Math.abs(quantity), faces: dieSize })
-    );
+    const createCombinedDiceTerm = (termGroup, operator) => {
+      if (termGroup.length) {
+        const quantity = Roll.safeEval(termGroup.join("+"));
+
+        // Create a new Die and OperatorTerm using the calculated quantities.
+        simplifiedTerms.push(
+          new OperatorTerm({ operator }),
+          new Die({ number: Math.abs(quantity), faces: dieSize })
+        );
+      };
+    };
+
+    createCombinedDiceTerm(positiveTerms, "+");
+    createCombinedDiceTerm(negativeTerms, "-");
   });
 
   return [...simplifiedTerms, ...annotatedTerms];
