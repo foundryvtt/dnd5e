@@ -259,7 +259,7 @@ function _groupTermsByType(_terms) {
  * @returns {Array | Array[]} An array of sub-arrays of the requested size.
  */
 function _chunkArray(_array, chunkSize) {
-  const array = Array.from(_array);
+  const array = Array.from(_array || []);
   return array?.reduce((chunks, _, i) => {
     if (i % chunkSize === 0) chunks.push(array.slice(i, i + chunkSize));
     return chunks;
