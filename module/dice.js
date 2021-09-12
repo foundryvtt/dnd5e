@@ -35,10 +35,11 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
   // Group terms by type and perform simplifications on various types of roll term.
   const groupedTerms = _groupTermsByType(roll.terms);
   groupedTerms.numericTerms = _simplifyNumericTerms(groupedTerms.numericTerms);
+  groupedTerms.diceTerms = _simplifyDiceTerms(groupedTerms.diceTerms);
 
   // Recombine the terms into a single term array and remove an initial + operator if present.
   const simplifiedTerms = Object.values(groupedTerms).flat();
-  if (simplifiedTerms[0].operator === "+") simplifiedTerms.shift();
+  if (simplifiedTerms[0]?.operator === "+") simplifiedTerms.shift();
   return roll.constructor.getFormula(simplifiedTerms);
 }
 
@@ -119,10 +120,60 @@ function _simplifyRedundantOperatorTerms(terms) {
 }
 
 /**
+ * A helper function to combine DiceTerms for a roll, returning a new array of terms
+ * where dice of the same size are merged into a single DiceTerm. DiceTerms with flavor
+ * text are intentionally not merged into the other DiceTerms so that the flavour text
+ * is not lost.
+ * @param {RollTerm[]} _terms An array of DiceTerms and associated OperatorTerms
+ * 
+ * @returns {RollTerm[]}  A new array of simplified dice terms
+ */
+function _simplifyDiceTerms(_terms) {
+  // Split the _terms array into OperatorTerm-DiceTerm pairs
+  const terms = _terms?.reduce((termGroups, _, i) => {
+    if (i % 2 === 0) termGroups.push(_terms.slice(i, i + 2));
+    return termGroups;
+  }, []) || [];
+  
+  const simplifiedTerms = [];
+  const annotatedTerms = [];
+  const unannotatedTerms = [];
+
+  // Sort the pairs with flavor annotations from those without.
+  terms.forEach(([operator, diceTerm]) => {
+    if (diceTerm.flavor) annotatedTerms.push(operator, diceTerm);
+    // Maintain the two-element array format for ease of comparison in the
+    // following simplification steps.
+    else unannotatedTerms.push([operator, diceTerm]);
+  });
+
+  // Find all of the dice sizes used in the terms that can be simplified.
+  const diceSizes = new Set(unannotatedTerms.map(([_, diceTerm]) => diceTerm.faces));
+
+
+  diceSizes.forEach((dieSize) => {
+    // Find all dice of a given size
+    const matchingDice = unannotatedTerms.filter(([_, diceTerm]) => diceTerm.faces === dieSize);
+    // Sum the total number of dice by creating a roll formula and evaluating it.
+    const quantity = Roll.safeEval(
+      matchingDice.map(([{ operator }, diceTerm]) => `${operator}${diceTerm.number}`).join("")
+    );
+
+    // Create a new Die and OperatorTerm using the calculated quantities.
+    simplifiedTerms.push(
+      new OperatorTerm({ operator: quantity >= 0 ? "+" : "-" }),
+      new Die({ number: Math.abs(quantity), faces: dieSize })
+    );
+  });
+
+  return [...simplifiedTerms, ...annotatedTerms];
+}
+
+/**
  * A helper function to combine NumericTerms for a roll, returning a new array of terms
  * with the static modifiers combined. NumericTerms with flavor text are intentionally
  * not merged into the other NumericTerms so that the flavour text is not lost.
- * @param {RollTerm[]} terms  An array of Numeric Terms and associated OperatorTerms
+ * @param {RollTerm[]} _terms  An array of NumericTerms and associated OperatorTerms
  * 
  * @return {RollTerm[]}  A new array of roll terms with its NumericTerm objects combined into
  *                       a single object. NumericTerm objects with flavor text are not merged
@@ -153,11 +204,8 @@ function _simplifyNumericTerms(_terms) {
     // If the staticBonus is 0 or greater, add a "+" operator so the formula remains valid.
     if (staticBonus >= 0) simplifiedTerms.push(new OperatorTerm({ operator: "+"}));
     simplifiedTerms.push(new NumericTerm({ number: staticBonus} ));
-
-  // In the event that no terms are provided at all, create a new NumericTerm with a value of 0.
-  } else if (!annotatedTerms.length) {
-    simplifiedTerms.push(new NumericTerm({ number: 0 }));
   }
+
   return [...simplifiedTerms, ...annotatedTerms];
 }
 
