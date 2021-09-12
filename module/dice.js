@@ -3,7 +3,7 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
  * A standardized helper function for simplifying the constant parts of a multipart
- * roll formula. A new, simplified version of the formula is returned. 
+ * roll formula. A new, simplified version of the formula is returned.
  * @param {String} formula                      A roll formula
  * @param {Object} [options={}]                 A configuration object
  * @param {Boolean} [option.ignoreFlavor=true]  A Boolean controlling whether flavor text
@@ -20,7 +20,7 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
   // Optionally stip flavor annotations
   if (ignoreFlavor) roll.terms = _stripFlavor(roll.formula);
 
-  // Perform arithmetic simplification on the existing roll terms and remove any 
+  // Perform arithmetic simplification on the existing roll terms and remove any
   // duplicate operators. Replace the existing roll terms with the new simplified set.
   roll.terms = _simplifyRedundantOperatorTerms(roll.terms);
 
@@ -29,7 +29,7 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
     return roll.constructor.getFormula(roll.terms);
   }
 
-  // Attempt to converting complex and unknown terms to NumericTerms
+  // Attempt to converting complex and unknown terms to NumericTerms.
   roll.terms = _evaluateComplexNumericTerms(roll.terms);
 
   // Group terms by type and perform simplifications on various types of roll term.
@@ -71,7 +71,7 @@ function _evaluateComplexNumericTerms(terms) {
  * in roll terms.
  * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  * 
- * @return {RollTerm[]}  A new array of roll terms with redundant operators removed
+ * @return {RollTerm[]}  A new array of roll terms with redundant operators removed.
  */
 function _simplifyRedundantOperatorTerms(terms) {
   const simplifiedTerms = terms.reduce((accumulatedTerms, currentTerm) => {
