@@ -197,9 +197,10 @@ function _simplifyNumericTerms(terms) {
   // a new NumericTerm to represent the value in the terms.
   if (unannotated.length) {
     const staticBonus = Roll.safeEval(Roll.getFormula(unannotated));
+    if (staticBonus === 0) return [...annotated];
 
-    // If the staticBonus is 0 or greater, add a "+" operator so the formula remains valid.
-    if (staticBonus >= 0) simplified.push(new OperatorTerm({ operator: "+"}));
+    // If the staticBonus is greatert than 0, add a "+" operator so the formula remains valid.
+    if (staticBonus > 0) simplified.push(new OperatorTerm({ operator: "+"}));
     simplified.push(new NumericTerm({ number: staticBonus} ));
   }
 
