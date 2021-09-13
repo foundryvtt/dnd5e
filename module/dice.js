@@ -148,11 +148,12 @@ function _simplifyDiceTerms(terms) {
   diceSizes.forEach((dieSize) => {
     // Find all dice of a given size
     const matchingDice = unannotated.filter(([_, diceTerm]) => diceTerm.faces === dieSize);
-    const positiveTerms = [];
-    const negativeTerms = [];
-    matchingDice.forEach(([{ operator }, { number}]) => {
-      operator === "+" ? positiveTerms.push(number) : negativeTerms.push(number)
-    });
+    
+    // Split positive and negative dice terms
+    const { positive, negative } = matchingDice.reduce((obj, [{ operator }, { number }]) => {
+      operator === "+" ? obj.positive.push(number) : obj.negative.push(number);
+      return obj;
+    }, { positive: [], negative: [] });
 
     const createCombinedDiceTerm = (termGroup, operator) => {
       if (termGroup.length) {
@@ -166,8 +167,8 @@ function _simplifyDiceTerms(terms) {
       };
     };
 
-    createCombinedDiceTerm(positiveTerms, "+");
-    createCombinedDiceTerm(negativeTerms, "-");
+    createCombinedDiceTerm(positive, "+");
+    createCombinedDiceTerm(negative, "-");
   });
 
   return [...simplified, ...annotated];
