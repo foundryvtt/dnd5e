@@ -29,7 +29,7 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
     return roll.constructor.getFormula(roll.terms);
   }
 
-  // Attempt to converting complex and unknown terms to NumericTerms.
+  // Attempt to convert complex and unknown terms to NumericTerms.
   roll.terms = _evaluateComplexNumericTerms(roll.terms);
 
   // Group terms by type and perform simplifications on various types of roll term.
