@@ -129,26 +129,25 @@ function _simplifyRedundantOperatorTerms(terms) {
  * @returns {RollTerm[]}  A new array of simplified dice terms
  */
 function _simplifyDiceTerms(terms) {
-  const simplifiedTerms = [];
-  const annotatedTerms = [];
-  const unannotatedTerms = [];
+  const simplified = [];
 
-    // Split the terms array into OperatorTerm-DiceTerm pairs and aort the pairs
+  // Split the terms array into OperatorTerm-DiceTerm pairs and aort the pairs
   // with flavor annotations from those without.
-  _chunkArray(terms, 2).forEach(([operator, diceTerm]) => {
-    if (diceTerm.flavor) annotatedTerms.push(operator, diceTerm);
-    // Maintain the two-element array format for ease of comparison in the
-    // following simplification steps.
-    else unannotatedTerms.push([operator, diceTerm]);
-  });
+  const { annotated, unannotated } = _chunkArray(terms, 2).reduce((obj, [operator, diceTerm]) => {
+    if ( diceTerm.flavor ) obj.annotated.push(operator, diceTerm);
+
+    // Unlike in _simplifyNumericTerms, maintain the two-element array format
+    // for ease of comparison in the following simplification steps.
+    else obj.unannotated.push([operator, diceTerm]);
+    return obj;
+  }, { annotated: [], unannotated: [] });
 
   // Find all of the dice sizes used in the terms that can be simplified.
-  const diceSizes = new Set(unannotatedTerms.map(([_, diceTerm]) => diceTerm.faces));
-
+  const diceSizes = new Set(unannotated.map(([_, diceTerm]) => diceTerm.faces));
 
   diceSizes.forEach((dieSize) => {
     // Find all dice of a given size
-    const matchingDice = unannotatedTerms.filter(([_, diceTerm]) => diceTerm.faces === dieSize);
+    const matchingDice = unannotated.filter(([_, diceTerm]) => diceTerm.faces === dieSize);
     const positiveTerms = [];
     const negativeTerms = [];
     matchingDice.forEach(([{ operator }, { number}]) => {
@@ -160,7 +159,7 @@ function _simplifyDiceTerms(terms) {
         const quantity = Roll.safeEval(termGroup.join("+"));
 
         // Create a new Die and OperatorTerm using the calculated quantities.
-        simplifiedTerms.push(
+        simplified.push(
           new OperatorTerm({ operator }),
           new Die({ number: Math.abs(quantity), faces: dieSize })
         );
@@ -171,7 +170,7 @@ function _simplifyDiceTerms(terms) {
     createCombinedDiceTerm(negativeTerms, "-");
   });
 
-  return [...simplifiedTerms, ...annotatedTerms];
+  return [...simplified, ...annotated];
 }
 
 /**
@@ -185,28 +184,27 @@ function _simplifyDiceTerms(terms) {
  *                       and remain separate objects within the term array.
  */
 function _simplifyNumericTerms(terms) {
-  const simplifiedTerms = [];
-  const annotatedTerms = [];
-  const unannotatedTerms = [];
+  const simplified = [];
 
   // Split the terms array into OperatorTerm-NumericTerm pairs and aort the pairs
   // with flavor annotations from those without.
-  _chunkArray(terms, 2).forEach(([operator, numericTerm]) => {
-    if (numericTerm.flavor) annotatedTerms.push(operator, numericTerm);
-    else unannotatedTerms.push(operator, numericTerm);
-  });
-
+  const { annotated, unannotated } = _chunkArray(terms, 2).reduce((obj, [operator, diceTerm]) => {
+    if ( diceTerm.flavor ) obj.annotated.push(operator, diceTerm);
+    else obj.unannotated.push(operator, diceTerm);
+    return obj;
+  }, { annotated: [], unannotated: [] });
+  
   // Combine the unannotated numerical bonuses into a single number and create
   // a new NumericTerm to represent the value in the terms.
-  if (unannotatedTerms.length) {
-    const staticBonus = Roll.safeEval(Roll.getFormula(unannotatedTerms));
+  if (unannotated.length) {
+    const staticBonus = Roll.safeEval(Roll.getFormula(unannotated));
 
     // If the staticBonus is 0 or greater, add a "+" operator so the formula remains valid.
-    if (staticBonus >= 0) simplifiedTerms.push(new OperatorTerm({ operator: "+"}));
-    simplifiedTerms.push(new NumericTerm({ number: staticBonus} ));
+    if (staticBonus >= 0) simplified.push(new OperatorTerm({ operator: "+"}));
+    simplified.push(new NumericTerm({ number: staticBonus} ));
   }
 
-  return [...simplifiedTerms, ...annotatedTerms];
+  return [...simplified, ...annotated];
 }
 
 /**
