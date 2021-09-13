@@ -34,8 +34,8 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
 
   // Group terms by type and perform simplifications on various types of roll term.
   const groupedTerms = _groupTermsByType(roll.terms);
-  groupedTerms.numericTerms = _simplifyNumericTerms(groupedTerms.numericTerms);
-  groupedTerms.diceTerms = _simplifyDiceTerms(groupedTerms.diceTerms);
+  groupedTerms.numericTerms = _simplifyNumericTerms(groupedTerms.numericTerms || []);
+  groupedTerms.diceTerms = _simplifyDiceTerms(groupedTerms.diceTerms || []);
 
   // Recombine the terms into a single term array and remove an initial + operator if present.
   const simplifiedTerms = Object.values(groupedTerms).flat();
@@ -53,7 +53,7 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  *                          to numeric terms.
  */
 function _evaluateComplexNumericTerms(terms) {
-  return Array.from(terms, (term) => {
+  return terms.map((term) => {
     if ( [ParentheticalTerm, MathTerm, StringTerm].some(type => term instanceof type) ) {
       try {
         term = new NumericTerm({ number: Roll.safeEval(term.formula) })
@@ -74,7 +74,7 @@ function _evaluateComplexNumericTerms(terms) {
  * @return {RollTerm[]}  A new array of roll terms with redundant operators removed.
  */
 function _simplifyRedundantOperatorTerms(terms) {
-  const simplified = terms.reduce((acc, term) => {
+  return terms.reduce((acc, term) => {
     const prior = acc[acc.length - 1];
     const sequentialOperators = (prior instanceof OperatorTerm) && (term instanceof OperatorTerm);
   
@@ -115,8 +115,6 @@ function _simplifyRedundantOperatorTerms(terms) {
 
     return acc;
   }, []);
-
-  return simplified;
 }
 
 /**
@@ -187,7 +185,7 @@ function _simplifyDiceTerms(terms) {
 function _simplifyNumericTerms(terms) {
   const simplified = [];
 
-  // Split the terms array into OperatorTerm-NumericTerm pairs and aort the pairs
+  // Split the terms array into OperatorTerm-NumericTerm pairs and sort the pairs
   // with flavor annotations from those without.
   const { annotated, unannotated } = _chunkArray(terms, 2).reduce((obj, [operator, diceTerm]) => {
     if ( diceTerm.flavor ) obj.annotated.push(operator, diceTerm);
@@ -212,55 +210,46 @@ function _simplifyNumericTerms(terms) {
  * Splits an array of dissimilar roll terms into a several arrays of roll terms, each
  * containing terms of the same type. OperatorTerms are included alongside other term
  * types in each array.
- * @param {RollTerm[]} _terms  An array of RollTerms
+ * @param {RollTerm[]} terms  An array of RollTerms
  * 
  * @returns {Object} An object mapping term types to arrays containing roll terms of that type.
  */
-function _groupTermsByType(_terms) {
+function _groupTermsByType(terms) {
+  terms = Array.from(terms);
   const relevantTermTypes = [DiceTerm, PoolTerm, ParentheticalTerm, MathTerm, StringTerm, NumericTerm];
-  const terms = Array.from(_terms);
-  const termGroups = {};
 
   // Add an initial operator so that terms can be rerranged arbitrarily without
   // creating an invalid formula.
   if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
 
-  terms.forEach((term, i, termArray) => {
-    // Skip over operators as they are handled when other terms are encountered.
-    if (term instanceof OperatorTerm) return;
-
-    // Identify the term type and push the term and its preceding OperatorTerm to
-    // the appropriate array.
-    relevantTermTypes.forEach((type) => {
-      if (term instanceof type) {
-        // Convert the roll term class name to camel case
-        const key = type.name.charAt(0).toLowerCase() + type.name.substring(1) + "s";
+  return terms.reduce((obj, term, i) => {
+    // Count Die, Coin, and FateDie terms as DiceTerms
+    const type = [Die, Coin, FateDie].includes(term.constructor) ? DiceTerm : term.constructor;
+    if ( !relevantTermTypes.includes(type) ) return obj;
+    const key = type.name.charAt(0).toLowerCase() + type.name.substring(1) + "s";
         
-        // Create a new array as the value for the appropriate key if the key does
-        // not yet exist. Push the term and the preceding OperatorTerm.
-        if (!termGroups[key]) termGroups[key] = [];
-        termGroups[key].push(termArray[i - 1], term);
-      }
-    });
-  });
-  return termGroups;
+    // Create a new array as the value for the appropriate key if the key does
+    // not yet exist. Push the term and the preceding OperatorTerm.
+    if (!obj[key]) obj[key] = [];
+    obj[key].push(terms[i - 1], term);
+    return obj;
+  }, {});
 }
 
 /**
  * A helper function to split an array into a series of sub-arrays based on
  * a given chunk size. This can be used to create operator + non-operator term
  * pairs form an array of terms.
- * @param {Array} _array
+ * @param {Array} array
  * @param {number} chunkSize
  * 
  * @returns {Array | Array[]} An array of sub-arrays of the requested size.
  */
-function _chunkArray(_array, chunkSize) {
-  const array = Array.from(_array || []);
-  return array?.reduce((chunks, _, i) => {
+function _chunkArray(array, chunkSize) {
+  return array.reduce((chunks, _, i) => {
     if (i % chunkSize === 0) chunks.push(array.slice(i, i + chunkSize));
     return chunks;
-  }, []) || [];
+  }, []);
 }
 
 /**
