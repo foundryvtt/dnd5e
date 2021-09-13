@@ -124,19 +124,18 @@ function _simplifyRedundantOperatorTerms(terms) {
  * where dice of the same size are merged into a single DiceTerm. DiceTerms with flavor
  * text are intentionally not merged into the other DiceTerms so that the flavour text
  * is not lost.
- * @param {RollTerm[]} _terms An array of DiceTerms and associated OperatorTerms
+ * @param {RollTerm[]} terms An array of DiceTerms and associated OperatorTerms
  * 
  * @returns {RollTerm[]}  A new array of simplified dice terms
  */
-function _simplifyDiceTerms(_terms) {
-  // Split the _terms array into OperatorTerm-DiceTerm pairs
-  const terms = _chunkArray(_terms, 2);
+function _simplifyDiceTerms(terms) {
   const simplifiedTerms = [];
   const annotatedTerms = [];
   const unannotatedTerms = [];
 
-  // Sort the pairs with flavor annotations from those without.
-  terms.forEach(([operator, diceTerm]) => {
+    // Split the terms array into OperatorTerm-DiceTerm pairs and aort the pairs
+  // with flavor annotations from those without.
+  _chunkArray(terms, 2).forEach(([operator, diceTerm]) => {
     if (diceTerm.flavor) annotatedTerms.push(operator, diceTerm);
     // Maintain the two-element array format for ease of comparison in the
     // following simplification steps.
@@ -179,21 +178,20 @@ function _simplifyDiceTerms(_terms) {
  * A helper function to combine NumericTerms for a roll, returning a new array of terms
  * with the static modifiers combined. NumericTerms with flavor text are intentionally
  * not merged into the other NumericTerms so that the flavour text is not lost.
- * @param {RollTerm[]} _terms  An array of NumericTerms and associated OperatorTerms
+ * @param {RollTerm[]} terms  An array of NumericTerms and associated OperatorTerms
  * 
  * @return {RollTerm[]}  A new array of roll terms with its NumericTerm objects combined into
  *                       a single object. NumericTerm objects with flavor text are not merged
  *                       and remain separate objects within the term array.
  */
-function _simplifyNumericTerms(_terms) {
-  // Split the _terms array into OperatorTerm-NumericTerm pairs
-  const terms = _chunkArray(_terms, 2);
+function _simplifyNumericTerms(terms) {
   const simplifiedTerms = [];
   const annotatedTerms = [];
   const unannotatedTerms = [];
 
-  // Sort the pairs with flavor annotations from those without.
-  terms.forEach(([operator, numericTerm]) => {
+  // Split the terms array into OperatorTerm-NumericTerm pairs and aort the pairs
+  // with flavor annotations from those without.
+  _chunkArray(terms, 2).forEach(([operator, numericTerm]) => {
     if (numericTerm.flavor) annotatedTerms.push(operator, numericTerm);
     else unannotatedTerms.push(operator, numericTerm);
   });
