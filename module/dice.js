@@ -18,7 +18,7 @@ export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
   try {
     roll = new Roll(formula);
   } catch(err) {
-   console.warn(`Unable to simplify formula '${formula}': ${err}`);
+    console.warn(`Unable to simplify formula '${formula}': ${err}`);
   }
   Roll.validate(roll.formula);
 
@@ -61,7 +61,7 @@ function _evaluateComplexNumericTerms(terms) {
   return terms.map((term) => {
     if ( [ParentheticalTerm, MathTerm, StringTerm].some(type => term instanceof type) ) {
       try {
-        term = new NumericTerm({ number: Roll.safeEval(term.formula) })
+        term = new NumericTerm({ number: Roll.safeEval(term.formula) });
       } catch {
         // In the event of an exception, the term cannot be evaluated, likely because
         // its formula includes a die roll or flavour text. Leave the term as-is.
