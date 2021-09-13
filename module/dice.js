@@ -12,9 +12,14 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  *
  * @returns {String} A simplified roll formula
  */
- export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
+export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
+  let roll;
+  try {
+    roll = new Roll(formula);
+  } catch(err) {
+   console.warn(`Unable to simplify formula '${formula}': ${err}`);
+  }
   // Create a new roll and verify that the formula is valid before attempting simplification
-  const roll = new Roll(formula);
   Roll.validate(roll.formula);
 
   // Optionally stip flavor annotations
