@@ -74,49 +74,49 @@ function _evaluateComplexNumericTerms(terms) {
  * @return {RollTerm[]}  A new array of roll terms with redundant operators removed.
  */
 function _simplifyRedundantOperatorTerms(terms) {
-  const simplifiedTerms = terms.reduce((accumulatedTerms, currentTerm) => {
-    const previousTerm = accumulatedTerms[accumulatedTerms.length - 1];
-    const sequentialOperators = (previousTerm instanceof OperatorTerm) && (currentTerm instanceof OperatorTerm);
+  const simplified = terms.reduce((acc, term) => {
+    const prior = acc[acc.length - 1];
+    const sequentialOperators = (prior instanceof OperatorTerm) && (term instanceof OperatorTerm);
   
     // If the previous and current term are not a series of operators, add the term
     // to the accumulated terms and return.
     if (!sequentialOperators) {
-      accumulatedTerms.push(currentTerm);
-      return accumulatedTerms;
+      acc.push(term);
+      return acc;
     }
     
     // Create a set containing the operators used in the current and previous term.
-    const operators = new Set([previousTerm.operator, currentTerm.operator]);
+    const operators = new Set([prior.operator, term.operator]);
 
     // If the set contains a single term and it is a "+" operator, return the
     // accumulated terms as they are.
     if ( (operators.size === 1) && (operators.has("+")) ) {
-      return accumulatedTerms;
+      return acc;
 
     // If the set contains a single term and it is a "-" operator, remove the
     // previous term from the accumulated terms and replace it with a "+" operator.
     } else if ( (operators.size === 1) && (operators.has("-")) ) {
-      accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+      acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
 
     // If the set contains both a "+" and "-" operator, remove the previous term from
     // the accumulated terms and insert a subtraction operator in its place.
     } else if (operators.has("+") && operators.has("-")) {
-      accumulatedTerms.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+      acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
     // In cases where the first operator is a "*" or "/" operator and the second
     // operator is a "+" operator, the "+" is redundant.
-    } else if (["*", "/"].includes(previousTerm.operator) && operators.has("+")) {
-      return accumulatedTerms;
+    } else if (["*", "/"].includes(prior.operator) && operators.has("+")) {
+      return acc;
 
     // In all other cases, simply no simplification is necessary. Append the term as-is.
     } else {
-      accumulatedTerms.push(currentTerm);
+      acc.push(term);
     }
 
-    return accumulatedTerms;
+    return acc;
   }, []);
 
-  return simplifiedTerms;
+  return simplified;
 }
 
 /**
