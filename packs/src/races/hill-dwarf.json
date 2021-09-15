@@ -1,0 +1,68 @@
+{
+  "_id": "UQiRQUTBcsz8gZU1",
+  "name": "Hill Dwarf",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p><em>As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience. </em></p>\n<p><em><strong>Ability Score Increase.</strong></em> Your Wisdom score increases by 1.</p>\n<p><em><strong>Dwarven Toughness.</strong></em> Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Dwarf",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
+  "effects": []
+}

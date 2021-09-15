@@ -178,8 +178,10 @@ function extract() {
           if ( entryName && (entryName !== name) ) return;
           cleanPackEntry(entry);
           const output = JSON.stringify(entry, null, 2) + "\n";
-          const outputName = name.replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
-          fs.writeFileSync(path.join(folder, `${outputName}.json`), output, { mode: 0o664 });
+          const outputName = name.replace("'", "").replace(/[^a-z0-9]+/gi, " ").trim().replace(/\s+|-{2,}/g, "-");
+          const subfolder = path.join(folder, _getSubfolderName(entry, filename));
+          if ( !fs.existsSync(subfolder) ) fs.mkdirSync(subfolder, { recursive: true, mode: 0o775 });
+          fs.writeFileSync(path.join(subfolder, `${outputName}.json`), output, { mode: 0o664 });
         });
       });
 
@@ -189,3 +191,33 @@ function extract() {
   return mergeStream.call(null, packs);
 }
 exports.extract = extract;
+
+
+/**
+ * Determine a subfolder name based on which pack is being extracted.
+ * @param {object} data  Data for the entry being extracted.
+ * @param {string} pack  Name of the pack.
+ * @return {string}      Subfolder name the entry into which the entry should be created. An empty string if none.
+ * @private
+ */
+function _getSubfolderName(data, pack) {
+  switch (pack) {
+    // Items should be grouped by type
+    case "items":
+      if ( (data.type === "consumable") && data.data.consumableType ) return data.data.consumableType;
+      return data.type;
+
+    // Monsters should be grouped by CR
+    case "monsters":
+      if ( data.data?.details?.cr === undefined ) return "";
+      return `cr-${data.data.details.cr}`;
+
+    // Spells should be grouped by level
+    case "spells":
+      if ( data.data?.level === undefined ) return "";
+      if ( data.data.level === 0 ) return "cantrip";
+      return `level-${data.data.level}`;
+
+    default: return "";
+  }
+}
