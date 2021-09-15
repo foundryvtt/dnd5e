@@ -1,0 +1,68 @@
+{
+  "_id": "ZgYBjYYfiUstQD6f",
+  "name": "Lightfoot Halfling",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p><em>As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others. </em></p>\n<p><em>Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life. </em></p>\n<p><em><strong>Ability Score Increase.</strong></em> Your Charisma score increases by 1.</p>\n<p><strong><em>Naturally Stealthy.</em></strong> @Compendium[dnd5e.races.GWPjKFeIthBBeCFJ]{Naturally Stealthy} You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 28",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Halfling",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
+  "effects": []
+}

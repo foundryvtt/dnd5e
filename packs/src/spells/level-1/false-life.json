@@ -1,0 +1,89 @@
+{
+  "_id": "7e3QXF10hLNDEdr6",
+  "name": "False Life",
+  "permission": {
+    "default": 0
+  },
+  "type": "spell",
+  "data": {
+    "description": {
+      "value": "<p>Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 Temporary Hit Points for the Duration.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional Temporary Hit Points for each slot level above 1st.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 239",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 1,
+      "units": "hour"
+    },
+    "target": {
+      "value": null,
+      "units": null,
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": ""
+    },
+    "ability": "",
+    "actionType": "heal",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [
+        [
+          "1d4 + 4",
+          "temphp"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "nec",
+    "components": {
+      "value": "",
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "A small amount of alcohol or distilled spirits",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 100001,
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/heal-royal-1.jpg",
+  "effects": []
+}
