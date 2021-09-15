@@ -1126,12 +1126,6 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Boolean
   },
-  "initiativeAlert": {
-    name: "DND5E.FlagsAlert",
-    hint: "DND5E.FlagsAlertHint",
-    section: "DND5E.Feats",
-    type: Boolean
-  },
   "jackOfAllTrades": {
     name: "DND5E.FlagsJOAT",
     hint: "DND5E.FlagsJOATHint",

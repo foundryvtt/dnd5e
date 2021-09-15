@@ -6,6 +6,7 @@ import TraitSelector from "../../apps/trait-selector.js";
 import ActorArmorConfig from "../../apps/actor-armor.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
+import ActorInitiativeConfig from "../../apps/initiative-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorSkillConfig from "../../apps/skill-config.js";
@@ -688,6 +689,10 @@ export default class ActorSheet5e extends ActorSheet {
       case "skill": {
         const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
         app = new ActorSkillConfig(this.object, null, skill);
+        break;
+      }
+      case "initiative": {
+        app = new ActorInitiativeConfig(this.object, null);
         break;
       }
     }
