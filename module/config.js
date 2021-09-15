@@ -288,7 +288,7 @@ DND5E.actorSizes = {
  * @enum {number}
  */
 DND5E.tokenSizes = {
-  tiny: 1,
+  tiny: 0.5,
   sm: 1,
   med: 1,
   lg: 2,
