@@ -2,12 +2,16 @@
   "_id": "y8sRU8Ks2lcrGsaf",
   "name": "Goat",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/Goat.png",
+  "img": "systems/dnd5e/tokens/beast/Goat.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -30,6 +38,10 @@
       "con": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -41,6 +53,10 @@
       "int": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 5,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -3,
         "save": -3,
@@ -124,7 +148,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Ah the domestic goat, both the shepard&rsquo;s best friend and mortal enemy. Hailing from roots similar to antelope and sheep, the goat has become a mainstay in the world of domesticated farm animals. Goats resemble something of a shorn sheep with thick, bristle-like fur and small hooves adorning their nimble feet. Atop the goat&rsquo;s head rests a set of hard horns which, depending upon the species, can vary from short and knobby to long curled protrusions. The goats use their horns for both defense and contests of strength between fellow males (or billies) during spectacular ramming matches. The clattering of mountain goats&rsquo; horns can be heard clearly throughout the valley towns during the creature&rsquo;s mating seasons.</p>\n<p><strong>Of Evil and Garbage.</strong> Goats can be called nothing if not resourceful when it comes to what they choose to ingest. Goats will typically feed upon grass and weeds found in their favored open fields; however, several shepherds have noted their goats eating such objects as iron nails, bits of discarded clothing, and even the wheels of a wagon! The image of a goat has also been co opted by some of the more nefarious of our realm as a symbol of evil to represent various foul cults. Perhaps it is the goat&rsquo;s sinister horizontal pupil that elicits fear in onlookers or their common use by some cultures as a ritualistic sacrifice that drives the cults to utilize their visage. No matter the cause, goats continue to be an integral though stubborn part of our everyday lives as their meat, milk, and utility in flocks makes them a hardy domesticated creature.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<p>Ah the domestic goat, both the shepard’s best friend and mortal enemy. Hailing from roots similar to antelope and sheep, the goat has become a mainstay in the world of domesticated farm animals. Goats resemble something of a shorn sheep with thick, bristle-like fur and small hooves adorning their nimble feet. Atop the goat’s head rests a set of hard horns which, depending upon the species, can vary from short and knobby to long curled protrusions. The goats use their horns for both defense and contests of strength between fellow males (or billies) during spectacular ramming matches. The clattering of mountain goats’ horns can be heard clearly throughout the valley towns during the creature’s mating seasons.</p>\n<p><strong>Of Evil and Garbage.</strong> Goats can be called nothing if not resourceful when it comes to what they choose to ingest. Goats will typically feed upon grass and weeds found in their favored open fields; however, several shepherds have noted their goats eating such objects as iron nails, bits of discarded clothing, and even the wheels of a wagon! The image of a goat has also been co opted by some of the more nefarious of our realm as a symbol of evil to represent various foul cults. Perhaps it is the goat’s sinister horizontal pupil that elicits fear in onlookers or their common use by some cultures as a ritualistic sacrifice that drives the cults to utilize their visage. No matter the cause, goats continue to be an integral though stubborn part of our everyday lives as their meat, milk, and utility in flocks makes them a hardy domesticated creature.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -178,6 +202,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -187,6 +215,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -196,6 +228,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -205,6 +241,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -214,6 +254,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -223,6 +267,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -232,6 +280,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -241,6 +293,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -250,6 +306,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -259,6 +319,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -268,6 +332,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -277,6 +345,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -286,6 +358,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -295,6 +371,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -304,6 +384,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -313,6 +397,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -322,6 +410,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -331,6 +423,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -466,13 +562,34 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/Goat.png",
+    "img": "systems/dnd5e/tokens/beast/Goat.webp",
     "actorId": "y8sRU8Ks2lcrGsaf",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -708,6 +825,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -738,7 +856,7 @@
   ],
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
-  "sort": 3800000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

@@ -8,6 +8,10 @@
       "str": {
         "value": 30,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 10,
         "save": 10,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 9,
@@ -30,6 +38,10 @@
       "con": {
         "value": 29,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 9,
         "save": 16,
@@ -41,6 +53,10 @@
       "int": {
         "value": 18,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 17,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 10,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 28,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 9,
         "save": 16,
@@ -183,6 +207,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -192,6 +220,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -201,6 +233,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -210,6 +246,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 10,
         "passive": 20,
@@ -219,6 +259,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 9,
         "passive": 19,
@@ -228,6 +272,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -237,6 +285,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 20,
@@ -246,6 +298,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 9,
         "passive": 19,
@@ -255,6 +311,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -264,6 +324,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -273,6 +337,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -282,6 +350,10 @@
       "prc": {
         "value": 2,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 27,
@@ -291,6 +363,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 9,
         "passive": 19,
@@ -300,6 +376,10 @@
       "per": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 9,
         "passive": 26,
@@ -309,6 +389,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -318,6 +402,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -327,6 +415,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 19,
@@ -336,6 +428,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -467,13 +563,34 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": "resources.legact"
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "ckOF3vQrnjFnZIDU",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -915,6 +1032,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1021,6 +1139,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1127,6 +1246,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1665,6 +1785,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1771,6 +1892,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1873,7 +1995,7 @@
   ],
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
-  "sort": 1700000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

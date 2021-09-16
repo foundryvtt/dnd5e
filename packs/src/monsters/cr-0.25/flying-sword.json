@@ -2,12 +2,16 @@
   "_id": "EqJUA3Z3181RSSFU",
   "name": "Flying Sword",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/construct/FlyingSword.png",
+  "img": "systems/dnd5e/tokens/construct/FlyingSword.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 15,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 4,
@@ -30,6 +38,10 @@
       "con": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -41,6 +53,10 @@
       "int": {
         "value": 1,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -5,
         "save": -5,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 5,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -3,
         "save": -3,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 1,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -5,
         "save": -5,
@@ -124,7 +148,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Mimicry is a favored trick of those with the capacity for magic and the Flying Sword is an example of the simplest yet most effective mimicry in the arcane realm.&nbsp; A flying sword is just that: a sword which flies.&nbsp; Enchanted by a mage (typically for the purpose of guarding a home, study, or tower) the magical flying sword rests peacefully wherever its master has left it.&nbsp; These enhanced blades are given simple instructions such as, “Kill any intruders”, and until such a prompt is met, the sword will sit motionless.&nbsp; While motionless, the sword is indistinguishable from any ordinary sword (excepting to those trained in seeing magical auras) which exemplifies the swords most dastardly characteristic.&nbsp; Like this, the sword can rest for ages until its prompt is met and the weapon springs to life.&nbsp; The sword will float from its hiding place, then slash and stab at any foolish trespassers with the confidence of a trained warrior until it is destroyed or its foes lay dead.&nbsp; Upon destruction the spell placed upon the sword is dissolved and the object returns to normal.</p>\n<blockquote>\n<p>Author's Note: Wary adventurers should be on alert for other weaponry such as Clubs, Axes, Crossbows, or Hammers as the enchantment can be used on most common weaponry.</p>\n</blockquote>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<p>Mimicry is a favored trick of those with the capacity for magic and the Flying Sword is an example of the simplest yet most effective mimicry in the arcane realm.  A flying sword is just that: a sword which flies.  Enchanted by a mage (typically for the purpose of guarding a home, study, or tower) the magical flying sword rests peacefully wherever its master has left it.  These enhanced blades are given simple instructions such as, “Kill any intruders”, and until such a prompt is met, the sword will sit motionless.  While motionless, the sword is indistinguishable from any ordinary sword (excepting to those trained in seeing magical auras) which exemplifies the swords most dastardly characteristic.  Like this, the sword can rest for ages until its prompt is met and the weapon springs to life.  The sword will float from its hiding place, then slash and stab at any foolish trespassers with the confidence of a trained warrior until it is destroyed or its foes lay dead.  Upon destruction the spell placed upon the sword is dissolved and the object returns to normal.</p>\n<blockquote>\n<p>Author's Note: Wary adventurers should be on alert for other weaponry such as Clubs, Axes, Crossbows, or Hammers as the enchantment can be used on most common weaponry.</p>\n</blockquote>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -189,6 +213,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -198,6 +226,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -207,6 +239,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -216,6 +252,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -225,6 +265,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -234,6 +278,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -243,6 +291,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -252,6 +304,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -261,6 +317,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -270,6 +330,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -279,6 +343,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -288,6 +356,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -297,6 +369,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -306,6 +382,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -315,6 +395,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -324,6 +408,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -333,6 +421,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -342,6 +434,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -448,42 +544,64 @@
     }
   },
   "token": {
+    "_id": "ynek5mjRq1B6rFX3",
     "name": "Flying Sword",
-    "displayName": 0,
+    "displayName": 20,
+    "actorId": "jtOTi1lOK6Q7N8z2",
     "actorLink": false,
+    "actorData": {},
+    "img": "systems/dnd5e/tokens/construct/FlyingSword.webp",
     "tint": null,
     "width": 1,
     "height": 1,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
+    "x": null,
+    "y": null,
+    "elevation": 0,
     "lockRotation": false,
     "rotation": 0,
+    "effects": [],
+    "alpha": 1,
+    "hidden": false,
     "vision": false,
     "dimSight": 0,
     "brightSight": 60,
-    "dimLight": 0,
-    "brightLight": 0,
     "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null
     },
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
-    "randomImg": false,
-    "img": "systems/dnd5e/tokens/construct/FlyingSword.png",
-    "actorId": "EqJUA3Z3181RSSFU",
-    "alpha": 1
+    "tokenId": null,
+    "randomImg": false
   },
   "items": [
     {
@@ -709,6 +827,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -739,7 +858,7 @@
   ],
   "effects": [],
   "folder": "cYGuEOeNz5ylp2Vs",
-  "sort": 500000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

@@ -2,12 +2,16 @@
   "_id": "KXG5XLIwKhn1V0Y5",
   "name": "Swarm of Quippers",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/SwarmQuippers.png",
+  "img": "systems/dnd5e/tokens/beast/SwarmQuippers.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -30,6 +38,10 @@
       "con": {
         "value": 9,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -41,6 +53,10 @@
       "int": {
         "value": 1,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -5,
         "save": -5,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 7,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -191,6 +215,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -200,6 +228,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -209,6 +241,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -218,6 +254,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -227,6 +267,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -236,6 +280,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -245,6 +293,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -254,6 +306,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -263,6 +319,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -272,6 +332,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -281,6 +345,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -290,6 +358,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -299,6 +371,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -308,6 +384,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -317,6 +397,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -326,6 +410,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -335,6 +423,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -344,6 +436,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -480,13 +576,34 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/SwarmQuippers.png",
+    "img": "systems/dnd5e/tokens/beast/SwarmQuippers.webp",
     "actorId": "KXG5XLIwKhn1V0Y5",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -793,6 +910,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "amm": false,
@@ -823,7 +941,7 @@
   ],
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
-  "sort": 2800000,
+  "sort": 0,
   "permission": {
     "default": 0
   },
