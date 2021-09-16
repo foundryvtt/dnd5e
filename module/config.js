@@ -67,7 +67,7 @@ DND5E.alignments = {
 DND5E.attunementTypes = {
   NONE: 0,
   REQUIRED: 1,
-  ATTUNED: 2,
+  ATTUNED: 2
 };
 
 /**
@@ -560,7 +560,7 @@ DND5E.consumableTypes = {
 DND5E.currencies = {
   pp: {
     label: "DND5E.CurrencyPP",
-    abbreviation: "DND5E.CurrencyAbbrPP",
+    abbreviation: "DND5E.CurrencyAbbrPP"
   },
   gp: {
     label: "DND5E.CurrencyGP",

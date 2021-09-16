@@ -194,7 +194,7 @@ export const ClassFeatures = {
      "2": ["Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ"],
      "5": ["Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE"],
      "10": ["Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU"]
-   },
+   }
  },
  "druid": {
    "subclasses": {
@@ -235,7 +235,7 @@ export const ClassFeatures = {
      "2": ["Compendium.dnd5e.classfeatures.swK0r5TOIxredxWS", "Compendium.dnd5e.classfeatures.u6Du2P9s81SWuGbi"],
      "18": ["Compendium.dnd5e.classfeatures.cVDEQo0ow1WJT7Wl", "Compendium.dnd5e.classfeatures.xvgPu1O57DgXCM86"],
      "20": ["Compendium.dnd5e.classfeatures.ip4bvmGoz3qkoqes"]
-   },
+   }
  },
  "fighter": {
    "subclasses": {
@@ -292,7 +292,7 @@ export const ClassFeatures = {
      "3": ["Compendium.dnd5e.classfeatures.ax8M0X0q1GGWM26j"],
      "5": ["Compendium.dnd5e.classfeatures.q9g1MLXuLZyxjQMg"],
      "9": ["Compendium.dnd5e.classfeatures.653ZHbNcmm7ZGXbw"]
-   },
+   }
  },
  "monk": {
    "subclasses": {
@@ -356,7 +356,7 @@ export const ClassFeatures = {
      "15": ["Compendium.dnd5e.classfeatures.gDH8PMrKvLHaNmEI"],
      "18": ["Compendium.dnd5e.classfeatures.3jwFt3hSqDswBlOH"],
      "20": ["Compendium.dnd5e.classfeatures.mQNPg89YIs7g5tG4"]
-   },
+   }
  },
  "paladin": {
    "subclasses": {
@@ -411,7 +411,7 @@ export const ClassFeatures = {
      "10": ["Compendium.dnd5e.classfeatures.nahSkBO6LH4HkpaT"],
      "11": ["Compendium.dnd5e.classfeatures.FAk41RPCTcvCk6KI"],
      "14": ["Compendium.dnd5e.classfeatures.U7BIPVPsptBmwsnV"]
-   },
+   }
  },
  "ranger": {
    "subclasses": {
@@ -456,7 +456,7 @@ export const ClassFeatures = {
      "14": ["Compendium.dnd5e.classfeatures.DhU2dWCNnX78TstR"],
      "18": ["Compendium.dnd5e.classfeatures.QBVmY56RMQuh6C8h"],
      "20": ["Compendium.dnd5e.classfeatures.3CaP1vFHVR8LgHjx"]
-   },
+   }
  },
  "rogue": {
    "subclasses": {
@@ -512,7 +512,7 @@ export const ClassFeatures = {
      "15": ["Compendium.dnd5e.classfeatures.V4pwFxlwHtNeB4w9"],
      "18": ["Compendium.dnd5e.classfeatures.L7nJSRosos8sHJH9"],
      "20": ["Compendium.dnd5e.classfeatures.rQhWDaMHMn7iU4f2"]
-   },
+   }
  },
  "sorcerer": {
    "subclasses": {
@@ -562,7 +562,7 @@ export const ClassFeatures = {
      "2": ["Compendium.dnd5e.classfeatures.LBKChJY5n02Afhnq"],
      "3": ["Compendium.dnd5e.classfeatures.9Uh7uTDNZ04oTJsL"],
      "20": ["Compendium.dnd5e.classfeatures.F2lEKSmOY0NUruzY"]
-   },
+   }
  },
  "warlock": {
    "subclasses": {
@@ -611,7 +611,7 @@ export const ClassFeatures = {
      "15": ["Compendium.dnd5e.classfeatures.knDZR4l4QfLTKinm"],
      "17": ["Compendium.dnd5e.classfeatures.vMxJQEKeK6WwZFaF"],
      "20": ["Compendium.dnd5e.classfeatures.0C04rwyvoknvFYiy"]
-   },
+   }
  },
  "wizard": {
    "subclasses": {
@@ -686,6 +686,6 @@ export const ClassFeatures = {
      "2": ["Compendium.dnd5e.classfeatures.AEWr9EMxy5gj4ZFT"],
      "18": ["Compendium.dnd5e.classfeatures.JfFfHTeIszx1hNRx"],
      "20": ["Compendium.dnd5e.classfeatures.nUrZDi6QN1YjwAr6", "Compendium.dnd5e.classfeatures.31bKbWe9ZGVLEns6"]
-   },
+   }
  }
 };

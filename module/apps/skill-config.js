@@ -37,7 +37,7 @@ export default class ActorSkillConfig extends DocumentSheet {
       skill: foundry.utils.getProperty(this.document.data._source, `data.skills.${this._skillId}`) || {},
       skillId: this._skillId,
       proficiencyLevels: CONFIG.DND5E.proficiencyLevels,
-      bonusGlobal: getProperty(this.object.data._source, "data.bonuses.abilities.skill"),
+      bonusGlobal: getProperty(this.object.data._source, "data.bonuses.abilities.skill")
     };
   }
 }

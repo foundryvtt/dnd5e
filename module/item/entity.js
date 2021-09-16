@@ -289,7 +289,7 @@ export default class Item5e extends Item {
 
     const derivedDamage = itemData.damage?.parts?.map((damagePart) => ({
       formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
-      damageType: damagePart[1],
+      damageType: damagePart[1]
     }));
 
     this.labels.derivedDamage = derivedDamage
@@ -774,7 +774,7 @@ export default class Item5e extends Item {
       if ( data.attunement === CONFIG.DND5E.attunementTypes.REQUIRED ) props.push(game.i18n.localize(CONFIG.DND5E.attunements[CONFIG.DND5E.attunementTypes.REQUIRED]));
       props.push(
         game.i18n.localize(data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-        game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient"),
+        game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient")
       );
     }
 
@@ -815,7 +815,7 @@ export default class Item5e extends Item {
    */
   _weaponChatData(data, labels, props) {
     props.push(
-      CONFIG.DND5E.weaponTypes[data.weaponType],
+      CONFIG.DND5E.weaponTypes[data.weaponType]
     );
   }
 
@@ -1236,7 +1236,7 @@ export default class Item5e extends Item {
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
-        left: window.innerWidth - 710,
+        left: window.innerWidth - 710
       },
       chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,

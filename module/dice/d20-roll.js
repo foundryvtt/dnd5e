@@ -29,7 +29,7 @@ export default class D20Roll extends Roll {
   static ADV_MODE = {
     NORMAL: 0,
     ADVANTAGE: 1,
-    DISADVANTAGE: -1,
+    DISADVANTAGE: -1
   }
 
   /**

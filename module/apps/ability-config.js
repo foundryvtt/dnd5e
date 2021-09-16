@@ -43,7 +43,7 @@ export default class ActorAbilityConfig extends DocumentSheet {
         1: CONFIG.DND5E.proficiencyLevels[1]
       },
       bonusGlobalSave: getProperty(this.object.data._source, "data.bonuses.abilities.save"),
-      bonusGlobalCheck: getProperty(this.object.data._source, "data.bonuses.abilities.check"),
+      bonusGlobalCheck: getProperty(this.object.data._source, "data.bonuses.abilities.check")
     };
   }
 }

@@ -120,7 +120,7 @@ export default class DamageRoll extends Roll {
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
       defaultRollMode,
-      rollModes: CONFIG.Dice.rollModes,
+      rollModes: CONFIG.Dice.rollModes
     });
 
     // Create the Dialog window and await submission of the form

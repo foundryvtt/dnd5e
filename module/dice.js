@@ -215,7 +215,7 @@ export async function damageRoll({
   parts=[], data, // Roll creation
   critical=false, criticalBonusDice, criticalMultiplier, multiplyNumeric, powerfulCritical, // Damage customization
   fastForward=false, event, allowCritical=true, template, title, dialogOptions, // Dialog configuration
-  chatMessage=true, messageData={}, rollMode, speaker, flavor, // Chat Message customization
+  chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
   }={}) {
 
   // Handle input arguments

@@ -151,7 +151,7 @@ export default class AbilityUseDialog extends Dialog {
     // Abilities which use Recharge
     if ( !!recharge.value ) {
       return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
-        type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`),
+        type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`)
       })
     }
 
