@@ -8,6 +8,10 @@
       "str": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -41,6 +53,10 @@
       "int": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -124,7 +148,7 @@
     },
     "details": {
       "biography": {
-        "value": "<blockquote>\n<p>Experts in poisons: Check.&nbsp; Beholden to ancient evils: Check.&nbsp; Can see you in the dark: Check.&nbsp; Now let me ask you this… why are you wanting to go stir up a nest of Drow?<br><strong>- a subterranean guide.</strong></p>\n</blockquote>\n<p>Drow were once the very same elves of the woods and cities we are more commonly aware of; however, a schism within the belief structures of various elvish factions forced a sect of elvenkind to flee below the surface of the world and take refuge within the massive subterranean caverns they found there.&nbsp; Within the caves their skin darkened to a deep pitch black and their hair faded to shades of white and silver.&nbsp; These elves, thin and regal in posture, became known as simply the Drow.&nbsp; As centuries passed beneath the world's crust, the Drow adapted to their new surroundings in notable ways.</p>\n<p><strong>You Think the Darkness is your Ally?</strong>&nbsp;The Drow's elven eyes, once adapted to see for miles in the bright sunlight, grew pale without the nourishment of the light and transformed into orbs keen at seeing anything within the pitch darkness of the underground.&nbsp; Drow have also learned to use the darkness to their advantage and may even creep to the surface world under the cover of night's shadows to carry out raids upon villages nearby.&nbsp; This adaptation has not come without cost, however, as the Drow's skin and eyes can no longer stand the burning sun.&nbsp; This forces the dark elves to utilize the night or sufficiently cover themselves to avoid the sun's glare.&nbsp; Drow do still retain some of their elvish arcane abilities as they may not be charmed or forced to sleep by spellwork.&nbsp; Many Drow females (as Drows exist in a matriarchy) are also skilled sorcerers and priestesses who primarily choose to side with gods on the more sinister side of the pantheon.&nbsp; Other clever Drow have worked out methods of distilling certain poisons from underground mushrooms and creatures who lurk upon the cavern walls.&nbsp; These toxins are well known amongst connoisseurs of poisons for both their availability as well as their legendary potency.&nbsp; It is not uncommon for all soldiers in a Drow army to be equipped with at least one vial of potent poison.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<blockquote>\n<p>Experts in poisons: Check.  Beholden to ancient evils: Check.  Can see you in the dark: Check.  Now let me ask you this… why are you wanting to go stir up a nest of Drow?<br /><strong>- a subterranean guide.</strong></p>\n</blockquote>\n<p>Drow were once the very same elves of the woods and cities we are more commonly aware of; however, a schism within the belief structures of various elvish factions forced a sect of elvenkind to flee below the surface of the world and take refuge within the massive subterranean caverns they found there.  Within the caves their skin darkened to a deep pitch black and their hair faded to shades of white and silver.  These elves, thin and regal in posture, became known as simply the Drow.  As centuries passed beneath the world's crust, the Drow adapted to their new surroundings in notable ways.</p>\n<p><strong>You Think the Darkness is your Ally?</strong> The Drow's elven eyes, once adapted to see for miles in the bright sunlight, grew pale without the nourishment of the light and transformed into orbs keen at seeing anything within the pitch darkness of the underground.  Drow have also learned to use the darkness to their advantage and may even creep to the surface world under the cover of night's shadows to carry out raids upon villages nearby.  This adaptation has not come without cost, however, as the Drow's skin and eyes can no longer stand the burning sun.  This forces the dark elves to utilize the night or sufficiently cover themselves to avoid the sun's glare.  Drow do still retain some of their elvish arcane abilities as they may not be charmed or forced to sleep by spellwork.  Many Drow females (as Drows exist in a matriarchy) are also skilled sorcerers and priestesses who primarily choose to side with gods on the more sinister side of the pantheon.  Other clever Drow have worked out methods of distilling certain poisons from underground mushrooms and creatures who lurk upon the cavern walls.  These toxins are well known amongst connoisseurs of poisons for both their availability as well as their legendary potency.  It is not uncommon for all soldiers in a Drow army to be equipped with at least one vial of potent poison.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Neutral Evil",
@@ -181,6 +205,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -190,6 +218,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -199,6 +231,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -208,6 +244,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -217,6 +257,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -226,6 +270,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -235,6 +283,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -244,6 +296,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -253,6 +309,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -262,6 +322,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -271,6 +335,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -280,6 +348,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 12,
@@ -289,6 +361,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -298,6 +374,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -307,6 +387,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -316,6 +400,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -325,6 +413,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -334,6 +426,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -466,7 +562,7 @@
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -475,7 +571,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "1vaBSMUfOy6JPJ14",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -1059,6 +1176,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1165,6 +1283,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1267,6 +1386,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1287,7 +1407,7 @@
   ],
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
-  "sort": 1100000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

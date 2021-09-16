@@ -2,12 +2,16 @@
   "_id": "8RgUhb31VvjUNZU1",
   "name": "Crab",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/CrabOrange.png",
+  "img": "systems/dnd5e/tokens/beast/CrabOrange.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -30,6 +38,10 @@
       "con": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -41,6 +53,10 @@
       "int": {
         "value": 1,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -5,
         "save": -5,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 8,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -124,7 +148,7 @@
     },
     "details": {
       "biography": {
-        "value": "<blockquote>\n<p>I once saw a crab so big it had claws what could cut a grown Goliath's hand clean off and wore a soldier's helmet as a shell! I swear it's true!<br><em>- Unknown Disorderly Patron at the Brass Buck Tavern.</em></p>\n</blockquote>\n<p>What more could be said about the humble crab than is not already common knowledge to those who live near or frequent the coasts of the continent. Crabs are uniquely robust little creatures often no larger than the palm of an adult human's hand, with eight segmented legs protruding from either side of its scallop-shaped carapace. This hardened chitin carapace is topped with two black eye stalks (not unlike those of a snail) through which the beast views our coastlines and oceans. It has been observed that some species of crab lack an armored shell and prefer to squat in the discarded shells of conchs. This gives the crab a rather clever and sturdy mobile home. Adorning the crabs ninth and tenth appendages near its tiny mouth are two massive claws, resembling those of a scorpion, with dull serrations marking the inner edge of each. The crab primarily utilizes these claws in its search for food, cracking open the shells of other tiny aquatic beasts or snipping off tiny pieces of undersea plant life to dine on.</p>\n<p>While perhaps not the most dangerous companion a summoner could wish for, the crab's ability to breath both in the water and upon land makes the crustacean an ally brimming with utility. I advise caution, however, when first looking through your crab familiar's eyes, as the sideways scuttling by which the crab moves has proven to cause vomiting in some weak stomached summoners.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<blockquote>\n<p>I once saw a crab so big it had claws what could cut a grown Goliath's hand clean off and wore a soldier's helmet as a shell! I swear it's true!<br /><em>- Unknown Disorderly Patron at the Brass Buck Tavern.</em></p>\n</blockquote>\n<p>What more could be said about the humble crab than is not already common knowledge to those who live near or frequent the coasts of the continent. Crabs are uniquely robust little creatures often no larger than the palm of an adult human's hand, with eight segmented legs protruding from either side of its scallop-shaped carapace. This hardened chitin carapace is topped with two black eye stalks (not unlike those of a snail) through which the beast views our coastlines and oceans. It has been observed that some species of crab lack an armored shell and prefer to squat in the discarded shells of conchs. This gives the crab a rather clever and sturdy mobile home. Adorning the crabs ninth and tenth appendages near its tiny mouth are two massive claws, resembling those of a scorpion, with dull serrations marking the inner edge of each. The crab primarily utilizes these claws in its search for food, cracking open the shells of other tiny aquatic beasts or snipping off tiny pieces of undersea plant life to dine on.</p>\n<p>While perhaps not the most dangerous companion a summoner could wish for, the crab's ability to breath both in the water and upon land makes the crustacean an ally brimming with utility. I advise caution, however, when first looking through your crab familiar's eyes, as the sideways scuttling by which the crab moves has proven to cause vomiting in some weak stomached summoners.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -178,6 +202,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -187,6 +215,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -196,6 +228,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -205,6 +241,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -214,6 +254,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -223,6 +267,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -232,6 +280,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -241,6 +293,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -250,6 +306,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -259,6 +319,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -268,6 +332,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -277,6 +345,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -286,6 +358,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -295,6 +371,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -304,6 +384,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -313,6 +397,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -322,6 +410,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 12,
@@ -331,6 +423,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -441,8 +537,8 @@
     "displayName": 20,
     "actorLink": false,
     "tint": null,
-    "width": 1,
-    "height": 1,
+    "width": 0.5,
+    "height": 0.5,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
@@ -466,13 +562,34 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/CrabOrange.png",
+    "img": "systems/dnd5e/tokens/beast/CrabOrange.webp",
     "actorId": "8RgUhb31VvjUNZU1",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -554,6 +671,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "value": "",
           "amm": false,
@@ -659,7 +777,7 @@
   ],
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
-  "sort": 1500000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

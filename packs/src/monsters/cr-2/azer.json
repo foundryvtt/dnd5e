@@ -2,12 +2,16 @@
   "_id": "IiEDPMWqBlzkggYD",
   "name": "Azer",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/elemental/Azer.png",
+  "img": "systems/dnd5e/tokens/elemental/Azer.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 17,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 15,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 4,
@@ -41,6 +53,10 @@
       "int": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -185,6 +209,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -194,6 +222,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -203,6 +235,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -212,6 +248,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -221,6 +261,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -230,6 +274,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -239,6 +287,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -248,6 +300,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -257,6 +313,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -266,6 +326,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -275,6 +339,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -284,6 +352,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -293,6 +365,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -302,6 +378,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -311,6 +391,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -320,6 +404,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -329,6 +417,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -338,6 +430,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -473,13 +569,34 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": null
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/elemental/Azer.png",
+    "img": "systems/dnd5e/tokens/elemental/Azer.webp",
     "actorId": "IiEDPMWqBlzkggYD",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -557,6 +674,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -886,6 +1004,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "ver": true,
           "amm": false,
@@ -916,7 +1035,7 @@
   ],
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
-  "sort": 3200000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

@@ -2,7 +2,7 @@
   "_id": "EpYl7qifM5pq6W6B",
   "name": "Cockatrice",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/monstrosity/Cockatrice.png",
+  "img": "systems/dnd5e/tokens/monstrosity/Cockatrice.webp",
   "data": {
     "abilities": {
       "str": {
@@ -569,9 +569,30 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/monstrosity/Cockatrice.png",
+    "img": "systems/dnd5e/tokens/monstrosity/Cockatrice.webp",
     "actorId": "EpYl7qifM5pq6W6B",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -687,7 +708,7 @@
   ],
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
-  "sort": 1000000,
+  "sort": 0,
   "permission": {
     "default": 0
   },
