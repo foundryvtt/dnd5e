@@ -6,9 +6,9 @@
 /**
  * Create a Macro from an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
- * @param {Object} data     The dropped data
+ * @param {object} data     The dropped data
  * @param {number} slot     The hotbar slot to use
- * @returns {Promise}
+ * @return {Promise}
  */
 export async function create5eMacro(data, slot) {
   if ( data.type !== "Item" ) return;

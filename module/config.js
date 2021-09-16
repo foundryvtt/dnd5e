@@ -441,7 +441,7 @@ DND5E.vehicleTypes = {
 
 /**
  * The set of Armor Proficiencies which a character may have.
- * @type {Object}
+ * @type {object}
  */
 DND5E.armorProficiencies = {
   lgt: DND5E.equipmentTypes.light,

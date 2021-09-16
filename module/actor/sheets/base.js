@@ -164,7 +164,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Prepare the display of movement speed data for the Actor*
    * @param {object} actorData                The Actor data being prepared.
    * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk"
-   * @returns {{primary: string, special: string}}
+   * @return {{primary: string, special: string}}
    * @private
    */
   _getMovementSpeed(actorData, largestPrimary=false) {
@@ -378,7 +378,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Insert a spell into the spellbook object when rendering the character sheet
-   * @param {Object} data     The Actor data being prepared
+   * @param {object} data     The Actor data being prepared
    * @param {Array} spells    The spell data being prepared
    * @private
    */

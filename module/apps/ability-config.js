@@ -3,7 +3,7 @@
  * @extends {DocumentSheet}
  * @param {Actor} actor                   The Actor instance being displayed within the sheet.
  * @param {ApplicationOptions} options    Additional application configuration options.
- * @param {String} abilityId              The ability ID (e.g. "str")
+ * @param {string} abilityId              The ability ID (e.g. "str")
  */
 export default class ActorAbilityConfig extends DocumentSheet {
 

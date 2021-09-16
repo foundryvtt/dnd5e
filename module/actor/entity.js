@@ -15,7 +15,7 @@ export default class Actor5e extends Actor {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {Object<string, Item5e>}
+   * @type {object<string, Item5e>}
    * @private
    */
   _classes = undefined;
@@ -26,7 +26,7 @@ export default class Actor5e extends Actor {
 
   /**
    * A mapping of classes belonging to this Actor.
-   * @type {Object<string, Item5e>}
+   * @type {object<string, Item5e>}
    */
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
@@ -177,8 +177,8 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the amount of experience required to gain a certain character level.
-   * @param level {Number}  The desired level
-   * @return {Number}       The XP required
+   * @param level {number}  The desired level
+   * @return {number}       The XP required
    */
   getLevelExp(level) {
     const levels = CONFIG.DND5E.CHARACTER_EXP_LEVELS;
@@ -189,8 +189,8 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the amount of experience granted by killing a creature of a certain CR.
-   * @param cr {Number}     The creature's challenge rating
-   * @return {Number}       The amount of experience granted per kill
+   * @param cr {number}     The creature's challenge rating
+   * @return {number}       The amount of experience granted per kill
    */
   getCRExp(cr) {
     if (cr < 1.0) return Math.max(200 * cr, 10);
@@ -218,7 +218,7 @@ export default class Actor5e extends Actor {
    * user for which they would like to add.
    * @param {Array.<Item5e>} items - The items being added to the Actor.
    * @param {boolean} [prompt=true] - Whether or not to prompt the user.
-   * @returns {Promise<Item5e[]>}
+   * @return {Promise<Item5e[]>}
    */
   async addEmbeddedItems(items, prompt=true) {
     let itemsToAdd = items;
@@ -258,10 +258,11 @@ export default class Actor5e extends Actor {
 
   /**
    * Return the features which a character is awarded for each class level
-   * @param {string} className        The class name being added
-   * @param {string} subclassName     The subclass of the class being added, if any
-   * @param {number} level            The number of levels in the added class
-   * @param {number} priorLevel       The previous level of the added class
+   * @param {object} [options]
+   * @param {string} [options.className]        The class name being added
+   * @param {string} [options.subclassName]     The subclass of the class being added, if any
+   * @param {number} [options.level]            The number of levels in the added class
+   * @param {number} [options.priorLevel]       The previous level of the added class
    * @return {Promise<Item5e[]>}     Array of Item5e entities
    */
   static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
@@ -634,8 +635,8 @@ export default class Actor5e extends Actor {
    *
    * Optionally include the weight of carried currency across all denominations by applying the standard rule
    * from the PHB pg. 143
-   * @param {Object} actorData      The data object for the Actor being rendered
-   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
+   * @param {object} actorData      The data object for the Actor being rendered
+   * @return {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
    */
   _computeEncumbrance(actorData) {
@@ -812,7 +813,7 @@ export default class Actor5e extends Actor {
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
-   * @param {Object} options      Options which configure how the skill check is rolled
+   * @param {object} options      Options which configure how the skill check is rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
@@ -884,8 +885,8 @@ export default class Actor5e extends Actor {
   /**
    * Roll a generic ability test or saving throw.
    * Prompt the user for input on which variety of roll they want to do.
-   * @param {String}abilityId     The ability id (e.g. "str")
-   * @param {Object} options      Options which configure how ability tests or saving throws are rolled
+   * @param {string} abilityId    The ability id (e.g. "str")
+   * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
@@ -910,8 +911,8 @@ export default class Actor5e extends Actor {
   /**
    * Roll an Ability Test
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {String} abilityId    The ability ID (e.g. "str")
-   * @param {Object} options      Options which configure how ability tests are rolled
+   * @param {string} abilityId    The ability ID (e.g. "str")
+   * @param {object} options      Options which configure how ability tests are rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
@@ -966,8 +967,8 @@ export default class Actor5e extends Actor {
   /**
    * Roll an Ability Saving Throw
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {String} abilityId    The ability ID (e.g. "str")
-   * @param {Object} options      Options which configure how ability tests are rolled
+   * @param {string} abilityId    The ability ID (e.g. "str")
+   * @param {object} options      Options which configure how ability tests are rolled
    * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
@@ -1021,7 +1022,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Perform a death saving throw, rolling a d20 plus any global save bonuses
-   * @param {Object} options        Additional options which modify the roll
+   * @param {object} options        Additional options which modify the roll
    * @return {Promise<Roll|null>}   A Promise which resolves to the Roll instance
    */
   async rollDeathSave(options={}) {
@@ -1548,19 +1549,20 @@ export default class Actor5e extends Actor {
    * Transform this Actor into another one.
    *
    * @param {Actor5e} target            The target Actor.
-   * @param {boolean} [keepPhysical]    Keep physical abilities (str, dex, con)
-   * @param {boolean} [keepMental]      Keep mental abilities (int, wis, cha)
-   * @param {boolean} [keepSaves]       Keep saving throw proficiencies
-   * @param {boolean} [keepSkills]      Keep skill proficiencies
-   * @param {boolean} [mergeSaves]      Take the maximum of the save proficiencies
-   * @param {boolean} [mergeSkills]     Take the maximum of the skill proficiencies
-   * @param {boolean} [keepClass]       Keep proficiency bonus
-   * @param {boolean} [keepFeats]       Keep features
-   * @param {boolean} [keepSpells]      Keep spells
-   * @param {boolean} [keepItems]       Keep items
-   * @param {boolean} [keepBio]         Keep biography
-   * @param {boolean} [keepVision]      Keep vision
-   * @param {boolean} [transformTokens] Transform linked tokens too
+   * @param {object} [options]
+   * @param {boolean} [options.keepPhysical]    Keep physical abilities (str, dex, con)
+   * @param {boolean} [options.keepMental]      Keep mental abilities (int, wis, cha)
+   * @param {boolean} [options.keepSaves]       Keep saving throw proficiencies
+   * @param {boolean} [options.keepSkills]      Keep skill proficiencies
+   * @param {boolean} [options.mergeSaves]      Take the maximum of the save proficiencies
+   * @param {boolean} [options.mergeSkills]     Take the maximum of the skill proficiencies
+   * @param {boolean} [options.keepClass]       Keep proficiency bonus
+   * @param {boolean} [options.keepFeats]       Keep features
+   * @param {boolean} [options.keepSpells]      Keep spells
+   * @param {boolean} [options.keepItems]       Keep items
+   * @param {boolean} [options.keepBio]         Keep biography
+   * @param {boolean} [options.keepVision]      Keep vision
+   * @param {boolean} [options.transformTokens] Transform linked tokens too
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
@@ -1775,7 +1777,7 @@ export default class Actor5e extends Actor {
   /**
    * Format a type object into a string.
    * @param {object} typeData          The type data to convert to a string.
-   * @returns {string}
+   * @return {string}
    */
   static formatCreatureType(typeData) {
     if ( typeof typeData === "string" ) return typeData; // backwards compatibility
@@ -1799,7 +1801,7 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /*
+  /**
    * Populate a proficiency object with a `selected` field containing a combination of
    * localizable group & individual proficiencies from `value` and the contents of `custom`.
    *

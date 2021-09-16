@@ -91,7 +91,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the base weapons and tools based on the selected type.
    *
-   * @param {Object} item         Item data for the item being displayed
+   * @param {object} item         Item data for the item being displayed
    * @return {Promise.<object>}   Object with base items for this type formatted for selectOptions.
    * @protected
    */
@@ -119,7 +119,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the valid item consumption targets which exist on the actor
-   * @param {Object} item         Item data for the item being displayed
+   * @param {object} item         Item data for the item being displayed
    * @return {{string: string}}   An object of potential consumption targets
    * @private
    */
@@ -260,7 +260,7 @@ export default class ItemSheet5e extends ItemSheet {
    * component that is usually mounted on fixtures rather than equipped, and
    * has its own AC and HP.
    * @param item
-   * @returns {boolean}
+   * @return {boolean}
    * @private
    */
   _isItemMountable(item) {

@@ -172,7 +172,7 @@ export const migrateArmorClass = async function(pack) {
  * Return an Object of updateData to be applied
  * @param {object} actor            The actor data object to update
  * @param {object} [migrationData]  Additional data to perform the migration
- * @return {Object}                 The updateData to apply
+ * @returns {Object}                The updateData to apply
  */
 export const migrateActorData = function(actor, migrationData) {
   const updateData = {};
@@ -217,8 +217,8 @@ export const migrateActorData = function(actor, migrationData) {
 
 /**
  * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template
- * @param {Object} actorData    The data object for an Actor
- * @return {Object}             The scrubbed Actor data
+ * @param {object} actorData    The data object for an Actor
+ * @return {object}             The scrubbed Actor data
  */
 function cleanActorData(actorData) {
 
@@ -267,7 +267,7 @@ export const migrateItemData = function(item, migrationData) {
  * Return an Object of updateData to be applied
  * @param {object} scene            The Scene data to Update
  * @param {object} [migrationData]  Additional data to perform the migration
- * @return {object}                 The updateData to apply
+ * @returns {object}                The updateData to apply
  */
 export const migrateSceneData = function(scene, migrationData) {
   const tokens = scene.tokens.map(token => {
