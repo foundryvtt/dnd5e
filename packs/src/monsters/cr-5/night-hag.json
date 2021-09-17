@@ -2,12 +2,16 @@
   "_id": "xvh2UOKv1bh03Gih",
   "name": "Night Hag",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/fiend/NightHag.png",
+  "img": "systems/dnd5e/tokens/fiend/NightHag.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 18,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -41,6 +53,10 @@
       "int": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -189,6 +213,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -198,6 +226,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -207,6 +239,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -216,6 +252,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 4,
         "bonus": 1,
         "passive": 15,
@@ -225,6 +265,10 @@
       "dec": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 17,
@@ -234,6 +278,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -243,6 +291,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 16,
@@ -252,6 +304,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -261,6 +317,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -270,6 +330,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -279,6 +343,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -288,6 +356,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 16,
@@ -297,6 +369,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -306,6 +382,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -315,6 +395,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 1,
         "passive": 14,
@@ -324,6 +408,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -333,6 +421,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 16,
@@ -342,6 +434,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 1,
         "passive": 13,
@@ -481,9 +577,30 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/fiend/NightHag.png",
+    "img": "systems/dnd5e/tokens/fiend/NightHag.webp",
     "actorId": "xvh2UOKv1bh03Gih",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -1188,6 +1305,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1434,7 +1552,7 @@
   ],
   "effects": [],
   "folder": "8kEIcpvnYCYQJ2sV",
-  "sort": 100000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

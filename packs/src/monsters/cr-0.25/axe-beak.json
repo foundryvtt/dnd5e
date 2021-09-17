@@ -2,12 +2,16 @@
   "_id": "SXXvwaLBNuzBymp3",
   "name": "Axe Beak",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/AxeBeak.png",
+  "img": "systems/dnd5e/tokens/beast/AxeBeak.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -41,6 +53,10 @@
       "int": {
         "value": 2,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 5,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -3,
         "save": -3,
@@ -124,7 +148,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Large and highly aggressive, the avian Axe Beak has maintained a well-earned reputation as an animal not to be toyed with.&nbsp; Hailing from grassy plains to thick and sweltering jungles, the Axe Beak resembles the flightless emu in both size and appearance.&nbsp; The Axe Beak sports a rounded, plump body resting upon two powerful legs built for running and kicking at high speeds.&nbsp; From the body sprouts a long and graceful neck ending in an unfeathered head tipped with a sharp, wedge-shaped beak.&nbsp; This beak (reminiscent of a hatchet) is what gives the creature its fearsome name.</p>\n<p><strong>Let Me Axe You a Question.</strong> Axe Beaks have been studied for quite some time, as their flightless footsteps have been tracked for thousands of years by biologists.&nbsp; An ancient and relatively unchanged species, the Axe Beak is most notable (aside from the beak) for its temper.&nbsp; Axe Beaks are incredibly territorial animals and have been known to chase down intruders within their territory for miles before finally calling off the attack.&nbsp; Shockingly, some Axe Beaks have been domesticated through rigorous, consistent interaction with humanoids.&nbsp; These beasts may act as riding animals and are powerful enough to support a fully grown Orc warrior.&nbsp; During battle, should one be unfortunate enough to cross the bird, the Axe Beak will swing its powerful neck in a chopping arc to bring its sharpened beak down upon any unfortunate foe.&nbsp; Should their beak (which has been known to sever limbs and pierce plate armor) not be enough, the Axe Beak may turn and deliver a devastating kick with one of its powerful, clawed feet.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<p>Large and highly aggressive, the avian Axe Beak has maintained a well-earned reputation as an animal not to be toyed with.  Hailing from grassy plains to thick and sweltering jungles, the Axe Beak resembles the flightless emu in both size and appearance.  The Axe Beak sports a rounded, plump body resting upon two powerful legs built for running and kicking at high speeds.  From the body sprouts a long and graceful neck ending in an unfeathered head tipped with a sharp, wedge-shaped beak.  This beak (reminiscent of a hatchet) is what gives the creature its fearsome name.</p>\n<p><strong>Let Me Axe You a Question.</strong> Axe Beaks have been studied for quite some time, as their flightless footsteps have been tracked for thousands of years by biologists.  An ancient and relatively unchanged species, the Axe Beak is most notable (aside from the beak) for its temper.  Axe Beaks are incredibly territorial animals and have been known to chase down intruders within their territory for miles before finally calling off the attack.  Shockingly, some Axe Beaks have been domesticated through rigorous, consistent interaction with humanoids.  These beasts may act as riding animals and are powerful enough to support a fully grown Orc warrior.  During battle, should one be unfortunate enough to cross the bird, the Axe Beak will swing its powerful neck in a chopping arc to bring its sharpened beak down upon any unfortunate foe.  Should their beak (which has been known to sever limbs and pierce plate armor) not be enough, the Axe Beak may turn and deliver a devastating kick with one of its powerful, clawed feet.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -178,6 +202,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -187,6 +215,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -196,6 +228,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -205,6 +241,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -214,6 +254,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -223,6 +267,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -232,6 +280,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -241,6 +293,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -250,6 +306,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -259,6 +319,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -268,6 +332,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -277,6 +345,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -286,6 +358,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -295,6 +371,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -304,6 +384,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -313,6 +397,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -322,6 +410,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -331,6 +423,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -437,42 +533,64 @@
     }
   },
   "token": {
+    "_id": "Ehs4M06qRUjm78J4",
     "name": "Axe Beak",
-    "displayName": 0,
+    "displayName": 20,
+    "actorId": "dPErTuBNoBgLknAL",
     "actorLink": false,
+    "actorData": {},
+    "img": "systems/dnd5e/tokens/beast/AxeBeak.webp",
     "tint": null,
     "width": 2,
     "height": 2,
-    "scale": 1,
+    "scale": 1.5,
     "mirrorX": false,
     "mirrorY": false,
+    "x": null,
+    "y": null,
+    "elevation": 0,
     "lockRotation": false,
     "rotation": 0,
+    "effects": [],
+    "alpha": 1,
+    "hidden": false,
     "vision": false,
     "dimSight": 0,
     "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
     "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null
     },
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": ""
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
     "flags": {},
-    "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/AxeBeak.png",
-    "actorId": "SXXvwaLBNuzBymp3",
-    "alpha": 1
+    "tokenId": null,
+    "randomImg": false
   },
   "items": [
     {
@@ -554,6 +672,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -584,7 +703,7 @@
   ],
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
-  "sort": 3000000,
+  "sort": 0,
   "permission": {
     "default": 0
   },
