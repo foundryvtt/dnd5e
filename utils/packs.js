@@ -136,12 +136,17 @@ function compile() {
     const filePath = path.join(PACK_DEST, `${folder.name}.db`);
     fs.rmSync(filePath, { force: true });
     const db = fs.createWriteStream(filePath, { flags: "a", mode: 0o664 });
+    const data = [];
     return gulp.src(path.join(PACK_SRC, folder.name, "/**/*.json"))
       .pipe(through2.obj((file, enc, callback) => {
         const json = JSON.parse(file.contents.toString());
         cleanPackEntry(json);
-        db.write(JSON.stringify(json) + "\n");
+        data.push(json);
         callback(null, file);
+      }, (callback) => {
+        data.sort((lhs, rhs) => lhs._id > rhs._id ? 1 : -1);
+        data.forEach(entry => db.write(JSON.stringify(entry) + "\n"));
+        callback();
       }));
   });
   return mergeStream.call(null, packs);
