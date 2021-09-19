@@ -91,7 +91,7 @@ export default class Item5e extends Item {
 
   /**
    * Does the item provide an amount of healing instead of conventional damage?
-   * @return {boolean}
+   * @returns {boolean}
    */
   get isHealing() {
     return (this.data.data.actionType === "heal") && this.data.data.damage.parts.length;
@@ -279,7 +279,7 @@ export default class Item5e extends Item {
    * based on owned item actor data. This is only used for display
    * purposes and is not related to Item5e#rollDamage
    *
-   * @return {Array} array of objects with `formula` and `damageType`
+   * @returns {Array} array of objects with `formula` and `damageType`
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
@@ -301,7 +301,7 @@ export default class Item5e extends Item {
 
   /**
    * Update the derived spell DC for an item that requires a saving throw
-   * @return {number|null}
+   * @returns {number|null}
    */
   getSaveDC() {
     if ( !this.hasSave ) return;
@@ -333,7 +333,7 @@ export default class Item5e extends Item {
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
    *
-   * @return {object} returns `rollData` and `parts` to be used in the item's Attack roll
+   * @returns {object} returns `rollData` and `parts` to be used in the item's Attack roll
    */
   getAttackToHit() {
     const itemData = this.data.data;
@@ -403,7 +403,7 @@ export default class Item5e extends Item {
    * - item entity's actor (if it has one)
    * - the constant '20'
    *
-   * @return {number} the minimum value that must be rolled to be considered a critical hit.
+   * @returns {number} the minimum value that must be rolled to be considered a critical hit.
    */
   getCriticalThreshold() {
     const itemData = this.data.data;
@@ -457,7 +457,7 @@ export default class Item5e extends Item {
    * @param {string} [options.rollMode]             The roll display mode with which to display (or not) the card
    * @param {boolean} [options.createMessage]       Whether to automatically create a chat message (if true) or simply return
    *                                                the prepared chat message data (if false).
-   * @return {Promise<ChatMessage|object|void>}
+   * @returns {Promise<ChatMessage|object|void>}
    */
   async roll({configureDialog=true, rollMode, createMessage=true}={}) {
     let item = this;
@@ -544,7 +544,7 @@ export default class Item5e extends Item {
    * @param {boolean} options.consumeResource     Whether the item consumes a limited resource
    * @param {string|null} options.consumeSpellLevel The category of spell slot to consume, or null
    * @param {boolean} options.consumeUsage        Whether the item consumes a limited usage
-   * @return {object|boolean}            A set of data changes to apply when the item is used, or false
+   * @returns {object|boolean}            A set of data changes to apply when the item is used, or false
    * @private
    */
   _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage}) {
@@ -625,7 +625,7 @@ export default class Item5e extends Item {
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object} resourceUpdates    An object of data updates applied to a different resource item (Item)
-   * @return {boolean|void}             Return false to block further progress, or return nothing to continue
+   * @returns {boolean|void}             Return false to block further progress, or return nothing to continue
    * @private
    */
   _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
@@ -757,7 +757,7 @@ export default class Item5e extends Item {
   /**
    * Prepare an object of chat data used to display a card for the Item in the chat log
    * @param {object} htmlOptions    Options used by the TextEditor.enrichHTML function
-   * @return {object}               An object of chat data to render
+   * @returns {object}               An object of chat data to render
    */
   getChatData(htmlOptions={}) {
     const data = foundry.utils.deepClone(this.data.data);
@@ -865,7 +865,7 @@ export default class Item5e extends Item {
 
   /**
    * Render a chat card for Spell type data
-   * @return {object}
+   * @returns {object}
    * @private
    */
   _spellChatData(data, labels, props) {
@@ -894,7 +894,7 @@ export default class Item5e extends Item {
    * Rely upon the d20Roll logic for the core implementation
    *
    * @param {object} options        Roll options which are configured and provided to the d20Roll function
-   * @return {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollAttack(options={}) {
     const itemData = this.data.data;
@@ -981,7 +981,7 @@ export default class Item5e extends Item {
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
    * @param {object} [config.options]      Additional options passed to the damageRoll function
-   * @return {Promise<Roll>}        A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll>}        A Promise which resolves to the created Roll instance
    */
   rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
@@ -1088,7 +1088,7 @@ export default class Item5e extends Item {
    * @param {number} spellLevel   The casted spell level
    * @param {string} formula      The scaling formula
    * @param {object} rollData     A data object that should be applied to the scaled damage roll
-   * @return {string[]}           The scaled roll parts
+   * @returns {string[]}           The scaled roll parts
    * @private
    */
   _scaleSpellDamage(parts, baseLevel, spellLevel, formula, rollData) {
@@ -1105,7 +1105,7 @@ export default class Item5e extends Item {
    * @param {string} scaling    A scaling formula
    * @param {number} times      A number of times to apply the scaling formula
    * @param {object} rollData   A data object that should be applied to the scaled damage roll
-   * @return {string[]}         The scaled roll parts
+   * @returns {string[]}         The scaled roll parts
    * @private
    */
   _scaleDamage(parts, scaling, times, rollData) {
@@ -1138,7 +1138,7 @@ export default class Item5e extends Item {
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the d20Roll logic for the core implementation
    *
-   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollFormula(options={}) {
     if ( !this.data.data.formula ) {
@@ -1165,7 +1165,7 @@ export default class Item5e extends Item {
 
   /**
    * Perform an ability recharge test for an item which uses the d6 recharge mechanic
-   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
     const data = this.data.data;
@@ -1191,7 +1191,7 @@ export default class Item5e extends Item {
   /**
    * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation
    * @param {object} options   Roll configuration options provided to the d20Roll function
-   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
@@ -1290,7 +1290,7 @@ export default class Item5e extends Item {
   /**
    * Handle execution of a chat card action via a click event on one of the card buttons
    * @param {Event} event       The originating click event
-   * @return {Promise}         A promise which resolves once the handler workflow is complete
+   * @returns {Promise}         A promise which resolves once the handler workflow is complete
    * @private
    */
   static async _onChatCardAction(event) {
@@ -1374,7 +1374,7 @@ export default class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @return {Actor|null}         The Actor entity or null
+   * @returns {Actor|null}         The Actor entity or null
    * @private
    */
   static async _getChatCardActor(card) {
@@ -1396,7 +1396,7 @@ export default class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @return {Actor[]}            An Array of Actor entities, if any
+   * @returns {Actor[]}            An Array of Actor entities, if any
    * @private
    */
   static _getChatCardTargets(card) {
@@ -1504,7 +1504,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedEquipment(data, actorData, isNPC) {
@@ -1532,7 +1532,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedSpell(data, actorData, isNPC) {
@@ -1551,7 +1551,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedTool(data, actorData, isNPC) {
@@ -1576,7 +1576,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}           Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedWeapon(data, actorData, isNPC) {
@@ -1603,7 +1603,7 @@ export default class Item5e extends Item {
   /**
    * Create a consumable spell scroll Item from a spell Item.
    * @param {Item5e} spell      The spell to be made into a scroll
-   * @return {Item5e}           The created scroll consumable item
+   * @returns {Item5e}           The created scroll consumable item
    */
   static async createScrollFromSpell(spell) {
 

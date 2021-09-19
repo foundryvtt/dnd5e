@@ -31,7 +31,7 @@ export default class SelectItemsPrompt extends Dialog {
    * @param {Array<Item5e>} items
    * @param {object} options
    * @param {string} options.hint - Localized hint to display at the top of the prompt
-   * @return {Promise<string[]>} - list of item ids which the user has selected
+   * @returns {Promise<string[]>} - list of item ids which the user has selected
    */
   static async create(items, {
     hint

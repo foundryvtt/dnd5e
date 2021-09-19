@@ -1,6 +1,6 @@
 /**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs
- * @return {Promise}      A Promise which resolves once the migration is completed
+ * @returns {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
   ui.notifications.info(`Applying DnD5E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
@@ -69,7 +69,7 @@ export const migrateWorld = async function() {
 /**
  * Apply migration rules to all Entities within a single Compendium pack
  * @param pack
- * @return {Promise}
+ * @returns {Promise}
  */
 export const migrateCompendium = async function(pack) {
   const entity = pack.metadata.entity;
@@ -123,7 +123,7 @@ export const migrateCompendium = async function(pack) {
  * Apply 'smart' AC migration to a given Actor compendium. This will perform the normal AC migration but additionally
  * check to see if the actor has armor already equipped, and opt to use that instead.
  * @param pack
- * @return {Promise}
+ * @returns {Promise}
  */
 export const migrateArmorClass = async function(pack) {
   if ( typeof pack === "string" ) pack = game.packs.get(pack);
@@ -218,7 +218,7 @@ export const migrateActorData = function(actor, migrationData) {
 /**
  * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template
  * @param {object} actorData    The data object for an Actor
- * @return {object}             The scrubbed Actor data
+ * @returns {object}             The scrubbed Actor data
  */
 function cleanActorData(actorData) {
 
@@ -247,7 +247,7 @@ function cleanActorData(actorData) {
  *
  * @param {object} item             Item data to migrate
  * @param {object} [migrationData]  Additional data to perform the migration
- * @return {object}                 The updateData to apply
+ * @return {object}s                The updateData to apply
  */
 export const migrateItemData = function(item, migrationData) {
   const updateData = {};
@@ -517,7 +517,7 @@ function _migrateTokenImage(actorData, updateData) {
  *
  * @param {object} item        Item data to migrate
  * @param {object} updateData  Existing update to expand upon
- * @return {object}            The updateData to apply
+ * @returns {object}            The updateData to apply
  * @private
  */
 function _migrateItemAttunement(item, updateData) {
@@ -534,7 +534,7 @@ function _migrateItemAttunement(item, updateData) {
  *
  * @param {object} item        Item data to migrate
  * @param {object} updateData  Existing update to expand upon
- * @return {object}            The updateData to apply
+ * @returns {object}            The updateData to apply
  * @private
  */
 function _migrateItemRarity(item, updateData) {
@@ -553,7 +553,7 @@ function _migrateItemRarity(item, updateData) {
  *
  * @param {object} item        Item data to migrate
  * @param {object} updateData  Existing update to expand upon
- * @return {object}            The updateData to apply
+ * @returns {object}            The updateData to apply
  * @private
  */
 function _migrateItemSpellcasting(item, updateData) {
@@ -572,7 +572,7 @@ function _migrateItemSpellcasting(item, updateData) {
  *
  * @param {object} item        Item data to migrate
  * @param {object} updateData  Existing update to expand upon
- * @return {object}            The updateData to apply
+ * @returns {object}            The updateData to apply
  * @private
  */
 function _migrateArmorType(item, updateData) {
@@ -588,7 +588,7 @@ function _migrateArmorType(item, updateData) {
  *
  * @param {object} item        Item data to migrate
  * @param {object} updateData  Existing update to expand upon
- * @return {object}            The updateData to apply
+ * @returns {object}            The updateData to apply
  * @private
  */
 function _migrateItemCriticalData(item, updateData) {

@@ -35,7 +35,7 @@ export default class LongRestDialog extends Dialog {
    * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
    * workflow has been resolved.
    * @param {Actor5e} actor
-   * @return {Promise}
+   * @returns {Promise}
    */
   static async longRestDialog({ actor } = {}) {
     return new Promise((resolve, reject) => {

@@ -178,7 +178,7 @@ export default class Actor5e extends Actor {
   /**
    * Return the amount of experience required to gain a certain character level.
    * @param level {number}  The desired level
-   * @return {number}       The XP required
+   * @returns {number}       The XP required
    */
   getLevelExp(level) {
     const levels = CONFIG.DND5E.CHARACTER_EXP_LEVELS;
@@ -190,7 +190,7 @@ export default class Actor5e extends Actor {
   /**
    * Return the amount of experience granted by killing a creature of a certain CR.
    * @param cr {number}     The creature's challenge rating
-   * @return {number}       The amount of experience granted per kill
+   * @returns {number}       The amount of experience granted per kill
    */
   getCRExp(cr) {
     if (cr < 1.0) return Math.max(200 * cr, 10);
@@ -218,7 +218,7 @@ export default class Actor5e extends Actor {
    * user for which they would like to add.
    * @param {Array.<Item5e>} items - The items being added to the Actor.
    * @param {boolean} [prompt=true] - Whether or not to prompt the user.
-   * @return {Promise<Item5e[]>}
+   * @returns {Promise<Item5e[]>}
    */
   async addEmbeddedItems(items, prompt=true) {
     let itemsToAdd = items;
@@ -263,7 +263,7 @@ export default class Actor5e extends Actor {
    * @param {string} [options.subclassName]     The subclass of the class being added, if any
    * @param {number} [options.level]            The number of levels in the added class
    * @param {number} [options.priorLevel]       The previous level of the added class
-   * @return {Promise<Item5e[]>}     Array of Item5e entities
+   * @returns {Promise<Item5e[]>}     Array of Item5e entities
    */
   static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
     className = className.toLowerCase();
@@ -537,7 +537,7 @@ export default class Actor5e extends Actor {
   /**
    * Determine a character's AC value from their equipped armor and shield.
    * @param {object} data      Note that this object will be mutated.
-   * @return {{
+   * @returns {{
    *   calc: string,
    *   value: number,
    *   base: number,
@@ -636,7 +636,7 @@ export default class Actor5e extends Actor {
    * Optionally include the weight of carried currency across all denominations by applying the standard rule
    * from the PHB pg. 143
    * @param {object} actorData      The data object for the Actor being rendered
-   * @return {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
+   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
    */
   _computeEncumbrance(actorData) {
@@ -763,7 +763,7 @@ export default class Actor5e extends Actor {
    * Apply a certain amount of damage or healing to the health pool for Actor
    * @param {number} amount       An amount of damage (positive) or healing (negative) to sustain
    * @param {number} multiplier   A multiplier which allows for resistance, vulnerability, or healing
-   * @return {Promise<Actor>}     A Promise which resolves once the damage has been applied
+   * @returns {Promise<Actor>}     A Promise which resolves once the damage has been applied
    */
   async applyDamage(amount=0, multiplier=1) {
     amount = Math.floor(parseInt(amount) * multiplier);
@@ -800,7 +800,7 @@ export default class Actor5e extends Actor {
    * Determine whether the provided ability is usable for remarkable athlete.
    *
    * @param {string} ability  Ability type to check.
-   * @return {boolean}        Whether the actor has the remarkable athlete flag and the ability is physical.
+   * @returns {boolean}        Whether the actor has the remarkable athlete flag and the ability is physical.
    * @private
    */
   _isRemarkableAthlete(ability) {
@@ -814,7 +814,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {object} options      Options which configure how the skill check is rolled
-   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
@@ -913,7 +913,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
-   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
@@ -969,7 +969,7 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
-   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll>}      A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId];
@@ -1023,7 +1023,7 @@ export default class Actor5e extends Actor {
   /**
    * Perform a death saving throw, rolling a d20 plus any global save bonuses
    * @param {object} options        Additional options which modify the roll
-   * @return {Promise<Roll|null>}   A Promise which resolves to the Roll instance
+   * @returns {Promise<Roll|null>}   A Promise which resolves to the Roll instance
    */
   async rollDeathSave(options={}) {
 
@@ -1127,7 +1127,7 @@ export default class Actor5e extends Actor {
    * @param {string} [denomination]   The hit denomination of hit die to roll. Example "d8".
    *                                  If no denomination is provided, the first available HD will be used
    * @param {boolean} [dialog]        Show a dialog prompt for configuring the hit die roll?
-   * @return {Promise<Roll|null>}     The created Roll instance, or null if no hit die was rolled
+   * @returns {Promise<Roll|null>}     The created Roll instance, or null if no hit die was rolled
    */
   async rollHitDie(denomination, {dialog=true}={}) {
 
@@ -1207,7 +1207,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.chat=true]           Summarize the results of the rest workflow as a chat message.
    * @param {boolean} [options.autoHD=false]        Automatically spend Hit Dice if you are missing 3 or more hit points.
    * @param {boolean} [options.autoHDThreshold=3]   A number of missing hit points which would trigger an automatic HD roll.
-   * @return {Promise.<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
+   * @returns {Promise.<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
     // Take note of the initial hit points and number of hit dice the Actor has
@@ -1240,7 +1240,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.dialog=true]  Present a confirmation dialog window whether or not to take a long rest.
    * @param {boolean} [options.chat=true]    Summarize the results of the rest workflow as a chat message.
    * @param {boolean} [options.newDay=true]  Whether the long rest carries over to a new day.
-   * @return {Promise.<RestResult>}          A Promise which resolves once the long rest workflow has completed.
+   * @returns {Promise.<RestResult>}          A Promise which resolves once the long rest workflow has completed.
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
     // Maybe present a confirmation dialog
@@ -1265,7 +1265,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} longRest       Is this a long rest?
    * @param {number} [dhd=0]         Number of hit dice spent during so far during the rest.
    * @param {number} [dhp=0]         Number of hit points recovered so far during the rest.
-   * @return {Promise.<RestResult>}  Consolidated results of the rest workflow.
+   * @returns {Promise.<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
   async _rest(chat, newDay, longRest, dhd=0, dhp=0) {
@@ -1318,7 +1318,7 @@ export default class Actor5e extends Actor {
    *
    * @param {RestResult} result         Result of the rest operation.
    * @param {boolean} [longRest=false]  Is this a long rest?
-   * @return {Promise.<ChatMessage>}    Chat message that was created.
+   * @returns {Promise.<ChatMessage>}    Chat message that was created.
    * @protected
    */
   async _displayRestResultMessage(result, longRest=false) {
@@ -1364,7 +1364,7 @@ export default class Actor5e extends Actor {
    *
    * @param {object} [options]
    * @param {number} [options.threshold=3]  A number of missing hit points which would trigger an automatic HD roll.
-   * @return {Promise.<number>}             Number of hit dice spent.
+   * @returns {Promise.<number>}             Number of hit dice spent.
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const max = this.data.data.attributes.hp.max + this.data.data.attributes.hp.tempmax;
@@ -1387,7 +1387,7 @@ export default class Actor5e extends Actor {
    * @param {object} [options]
    * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
    * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
-   * @return {object)                                Updates to the actor and change in hit points.
+   * @returns {object)                                Updates to the actor and change in hit points.
    * @protected
    */
   _getRestHitPointRecovery({ recoverTemp=true, recoverTempMax=true }={}) {
@@ -1415,7 +1415,7 @@ export default class Actor5e extends Actor {
    * @param {object} [options]
    * @param {boolean} [options.recoverShortRestResources=true]  Recover resources that recharge on a short rest.
    * @param {boolean} [options.recoverLongRestResources=true]   Recover resources that recharge on a long rest.
-   * @return {object}                                           Updates to the actor.
+   * @returns {object}                                           Updates to the actor.
    * @protected
    */
   _getRestResourceRecovery({recoverShortRestResources=true, recoverLongRestResources=true}={}) {
@@ -1436,7 +1436,7 @@ export default class Actor5e extends Actor {
    * @param {object} [options]
    * @param {boolean} [options.recoverPact=true]     Recover all expended pact slots.
    * @param {boolean} [options.recoverSpells=true]   Recover all expended spell slots.
-   * @return {object}                                Updates to the actor.
+   * @returns {object}                                Updates to the actor.
    * @protected
    */
   _getRestSpellRecovery({ recoverPact=true, recoverSpells=true }={}) {
@@ -1462,7 +1462,7 @@ export default class Actor5e extends Actor {
    *
    * @param {object} [options]
    * @param {number} [options.maxHitDice]  Maximum number of hit dice to recover.
-   * @return {object}                      Array of item updates and number of hit dice recovered.
+   * @returns {object}                      Array of item updates and number of hit dice recovered.
    * @protected
    */
   _getRestHitDiceRecovery({ maxHitDice=undefined }={}) {
@@ -1499,7 +1499,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
    * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
    * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
-   * @return {Array.<object>}                              Array of item updates.
+   * @returns {Array.<object>}                              Array of item updates.
    * @protected
    */
   _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
@@ -1527,7 +1527,7 @@ export default class Actor5e extends Actor {
   /**
    * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being
    * carried by an Actor.
-   * @return {Promise<Actor5e>}
+   * @returns {Promise<Actor5e>}
    */
   convertCurrency() {
     const curr = foundry.utils.deepClone(this.data.data.currency);
@@ -1777,7 +1777,7 @@ export default class Actor5e extends Actor {
   /**
    * Format a type object into a string.
    * @param {object} typeData          The type data to convert to a string.
-   * @return {string}
+   * @returns {string}
    */
   static formatCreatureType(typeData) {
     if ( typeof typeData === "string" ) return typeData; // backwards compatibility

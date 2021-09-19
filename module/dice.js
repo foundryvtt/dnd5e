@@ -10,7 +10,7 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  * @param {boolean} [options.constantFirst=false]   Puts the constants before the dice terms in the resulting formula
  * @param {boolean} [options.preserveFlavor=false]  Preserve flavor for non-constant terms
  *
- * @return {string}  The resulting simplified formula
+ * @returns {string}  The resulting simplified formula
  */
 export function simplifyRollFormula(formula, data, {constantFirst=false, preserveFlavor=false} = {}) {
   const roll = new Roll(formula, data); // Parses the formula and replaces any @properties
@@ -66,7 +66,7 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
 /**
  * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
  * @param {*} term - A single Dice term to check support on
- * @return {boolean} True when unsupported, false if supported
+ * @returns {boolean} True when unsupported, false if supported
  */
 function _isUnsupportedTerm(term) {
 	const diceTerm = term instanceof DiceTerm;
@@ -111,7 +111,7 @@ function _isUnsupportedTerm(term) {
  * @param {object} [config.speaker]        The ChatMessage speaker to pass when creating the chat
  * @param {string} [config.flavor]         Flavor text to use in the posted chat message
  *
- * @return {Promise<D20Roll|null>}  The evaluated D20Roll, or null if the workflow was cancelled
+ * @returns {Promise<D20Roll|null>}  The evaluated D20Roll, or null if the workflow was cancelled
  */
 export async function d20Roll({
   parts=[], data={}, // Roll creation
@@ -168,7 +168,7 @@ export async function d20Roll({
 
 /**
  * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
- * @return {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
+ * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
  */
 function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
@@ -210,7 +210,7 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  * @param {object} [config.speaker]        The ChatMessage speaker to pass when creating the chat
  * @param {string} [config.flavor]         Flavor text to use in the posted chat message
  *
- * @return {Promise<DamageRoll|null>} The evaluated DamageRoll, or null if the workflow was canceled
+ * @returns {Promise<DamageRoll|null>} The evaluated DamageRoll, or null if the workflow was canceled
  */
 export async function damageRoll({
   parts=[], data, // Roll creation
@@ -262,7 +262,7 @@ export async function damageRoll({
 
 /**
  * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
- * @return {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
+ * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
 function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));

@@ -52,7 +52,7 @@ export default class ProficiencySelector extends TraitSelector {
    *
    * @param {string} type               Proficiency type to select, either `armor`, `tool`, or `weapon`.
    * @param {string[]} [chosen]         Optional list of items to be marked as chosen.
-   * @return {object.<string, ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
+   * @returns {object.<string, ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
    */
   static async getChoices(type, chosen=[]) {
     let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
@@ -112,7 +112,7 @@ export default class ProficiencySelector extends TraitSelector {
    * @param {object} [options]             
    * @param {boolean} [options.indexOnly]  If set to true, only the index data will be fetched (will never return Promise).
    * @param {boolean} [options.fullItem]   If set to true, the full item will be returned as long as `indexOnly` is false.
-   * @return {Promise<Item5e>|object}      Promise for a `Document` if `indexOnly` is false & `fullItem` is true,
+   * @returns {Promise<Item5e>|object}      Promise for a `Document` if `indexOnly` is false & `fullItem` is true,
    *                                       otherwise else a simple object containing the minimal index data.
    */
   static getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
@@ -154,7 +154,7 @@ export default class ProficiencySelector extends TraitSelector {
    * Take the provided object and sort by the "label" property.
    *
    * @param {object} object  Object to be sorted.
-   * @return {object}        Sorted object.
+   * @returns {object}        Sorted object.
    * @private
    */
   static _sortObject(object) {

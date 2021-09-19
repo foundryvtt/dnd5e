@@ -164,7 +164,7 @@ export default class ActorSheet5e extends ActorSheet {
    * Prepare the display of movement speed data for the Actor*
    * @param {object} actorData                The Actor data being prepared.
    * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk"
-   * @return {{primary: string, special: string}}
+   * @returns {{primary: string, special: string}}
    * @private
    */
   _getMovementSpeed(actorData, largestPrimary=false) {
@@ -221,7 +221,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Break down all of the Active Effects affecting a given target property.
    * @param {string} target  The data property being targeted.
-   * @return {AttributionDescription[]}
+   * @returns {AttributionDescription[]}
    * @protected
    */
   _prepareActiveEffectAttributions(target) {
@@ -245,7 +245,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Produce a list of armor class attribution objects.
    * @param {object} data                Actor data to determine the attributions from.
-   * @return {AttributionDescription[]}  List of attribution descriptions.
+   * @returns {AttributionDescription[]}  List of attribution descriptions.
    */
   _prepareArmorClassAttribution(data) {
     const ac = data.attributes.ac;
@@ -490,7 +490,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Determine whether an Owned Item will be shown based on the current set of filters
-   * @return {boolean}
+   * @returns {boolean}
    * @private
    */
   _filterItems(items, filters) {

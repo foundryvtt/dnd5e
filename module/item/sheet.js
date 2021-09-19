@@ -92,7 +92,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Get the base weapons and tools based on the selected type.
    *
    * @param {object} item         Item data for the item being displayed
-   * @return {Promise.<object>}   Object with base items for this type formatted for selectOptions.
+   * @returns {Promise.<object>}   Object with base items for this type formatted for selectOptions.
    * @protected
    */
   async _getItemBaseTypes(item) {
@@ -120,7 +120,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the valid item consumption targets which exist on the actor
    * @param {object} item         Item data for the item being displayed
-   * @return {{string: string}}   An object of potential consumption targets
+   * @returns {{string: string}}   An object of potential consumption targets
    * @private
    */
   _getItemConsumptionTargets(item) {
@@ -186,7 +186,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
-   * @return {string}
+   * @returns {string}
    * @private
    */
   _getItemStatus(item) {
@@ -205,7 +205,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the Array of item properties which are used in the small sidebar of the description tab
-   * @return {Array}
+   * @returns {Array}
    * @private
    */
   _getItemProperties(item) {
@@ -260,7 +260,7 @@ export default class ItemSheet5e extends ItemSheet {
    * component that is usually mounted on fixtures rather than equipped, and
    * has its own AC and HP.
    * @param item
-   * @return {boolean}
+   * @returns {boolean}
    * @private
    */
   _isItemMountable(item) {
@@ -320,7 +320,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Add or remove a damage part from the damage formula
    * @param {Event} event     The original click event
-   * @return {Promise}
+   * @returns {Promise}
    * @private
    */
   async _onDamageControl(event) {

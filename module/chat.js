@@ -61,7 +61,7 @@ export const displayChatActionButtons = function(message, html, data) {
  * @param {HTMLElement} html    The Chat Message being rendered
  * @param {Array} options       The Array of Context Menu options
  *
- * @return {Array}              The extended options Array including new context choices
+ * @returns {Array}              The extended options Array including new context choices
  */
 export const addChatMessageContextOptions = function(html, options) {
   let canApply = li => {
@@ -105,7 +105,7 @@ export const addChatMessageContextOptions = function(html, options) {
  *
  * @param {HTMLElement} li      The chat entry which contains the roll data
  * @param {number} multiplier   A damage multiplier to apply to the rolled damage.
- * @return {Promise}
+ * @returns {Promise}
  */
 function applyChatCardDamage(li, multiplier) {
   const message = game.messages.get(li.data("messageId"));

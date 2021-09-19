@@ -223,7 +223,7 @@ function _localizeObject(obj, key) {
  * Sort a configuration object by its values or by an inner sortKey.
  * @param {object} obj                The configuration object to sort
  * @param {string} [sortKey]          An inner key upon which to sort
- * @return {{[p: string]: any}}      The sorted configuration object
+ * @returns {{[p: string]: any}}      The sorted configuration object
  */
 function _sortObject(obj, sortKey) {
   let sorted = Object.entries(obj);

@@ -47,7 +47,7 @@ export default class PropertyAttribution extends Application {
 
   /**
    * Render this view as a tooltip rather than a whole window.
-   * @return {jQuery}  HTML of the rendered tooltip.
+   * @returns {jQuery}  HTML of the rendered tooltip.
    */
   async renderTooltip() {
     const data = this.getData(this.options);

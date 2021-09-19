@@ -70,7 +70,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Prepare the data structure for Active Effects which are currently applied to an Actor or Item.
    * @param {ActiveEffect[]} effects    The array of Active Effect instances to prepare sheet data for
-   * @return {object}                   Data for rendering
+   * @returns {object}                   Data for rendering
    */
   static prepareActiveEffectCategories(effects) {
     // Define effect header categories

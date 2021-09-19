@@ -97,7 +97,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /**
    * Format NPC armor information into a localized string.
-   * @return {string}  Formatted armor label.
+   * @returns {string}  Formatted armor label.
    */
   getArmorLabel() {
     const ac = this.actor.data.data.attributes.ac;

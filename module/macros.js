@@ -8,7 +8,7 @@
  * Get an existing item macro if one exists, otherwise create a new one.
  * @param {object} data     The dropped data
  * @param {number} slot     The hotbar slot to use
- * @return {Promise}
+ * @returns {Promise}
  */
 export async function create5eMacro(data, slot) {
   if ( data.type !== "Item" ) return;
@@ -37,7 +37,7 @@ export async function create5eMacro(data, slot) {
  * Create a Macro from an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
  * @param {string} itemName
- * @return {Promise}
+ * @returns {Promise}
  */
 export function rollItemMacro(itemName) {
   const speaker = ChatMessage.getSpeaker();

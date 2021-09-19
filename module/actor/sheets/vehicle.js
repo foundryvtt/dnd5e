@@ -8,7 +8,7 @@ import ActorSheet5e from "./base.js";
 export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Define default rendering options for the Vehicle sheet.
-   * @return {object}
+   * @returns {object}
    */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -41,7 +41,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
    * Compute the total weight of the vehicle's cargo.
    * @param {number} totalWeight    The cumulative item weight from inventory items
    * @param {object} actorData      The data object for the Actor being rendered
-   * @return {{max: number, value: number, pct: number}}
+   * @returns {{max: number, value: number, pct: number}}
    * @private
    */
   _computeEncumbrance(totalWeight, actorData) {
@@ -294,7 +294,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle saving a cargo row (i.e. crew or passenger) in-sheet.
    * @param event {Event}
-   * @return {Promise<Actor>|null}
+   * @returns {Promise<Actor>|null}
    * @private
    */
   _onCargoRowChange(event) {
@@ -325,7 +325,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle editing certain values like quantity, price, and weight in-sheet.
    * @param event {Event}
-   * @return {Promise<Item>}
+   * @returns {Promise<Item>}
    * @private
    */
   _onEditInSheet(event) {
@@ -347,7 +347,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle creating a new crew or passenger row.
    * @param event {Event}
-   * @return {Promise<Actor|Item>}
+   * @returns {Promise<Actor|Item>}
    * @private
    */
   _onItemCreate(event) {
@@ -367,7 +367,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle deleting a crew or passenger row.
    * @param event {Event}
-   * @return {Promise<Actor|Item>}
+   * @returns {Promise<Actor|Item>}
    * @private
    */
   _onItemDelete(event) {
@@ -397,7 +397,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Special handling for editing HP to clamp it within appropriate range.
    * @param event {Event}
-   * @return {Promise<Item>}
+   * @returns {Promise<Item>}
    * @private
    */
   _onHPChange(event) {
@@ -414,7 +414,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Special handling for editing quantity value of equipment and weapons inside the features tab.
    * @param event {Event}
-   * @return {Promise<Item>}
+   * @returns {Promise<Item>}
    * @private
    */
 
@@ -432,7 +432,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Handle toggling an item's crewed status.
    * @param event {Event}
-   * @return {Promise<Item>}
+   * @returns {Promise<Item>}
    * @private
    */
   _onToggleItem(event) {

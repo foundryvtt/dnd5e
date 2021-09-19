@@ -22,7 +22,7 @@ export default class AbilityUseDialog extends Dialog {
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
    * @param {Item5e} item
-   * @return {Promise}
+   * @returns {Promise}
    */
   static async create(item) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
