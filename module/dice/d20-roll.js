@@ -10,6 +10,7 @@
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
+ * @extends {Roll}
  */
 export default class D20Roll extends Roll {
   constructor(formula, data, options) {
@@ -185,8 +186,9 @@ export default class D20Roll extends Roll {
 
   /**
    * Handle submission of the Roll evaluation configuration Dialog
-   * @param {jQuery} html             The submitted dialog content
-   * @param {number} advantageMode    The chosen advantage mode
+   * @param {jQuery} html            The submitted dialog content
+   * @param {number} advantageMode   The chosen advantage mode
+   * @returns {D20Roll}              This damage roll.
    * @private
    */
   _onDialogSubmit(html, advantageMode) {

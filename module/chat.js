@@ -1,6 +1,9 @@
 
 /**
- * Highlight critical success or failure on d20 rolls
+ * Highlight critical success or failure on d20 rolls.
+ * @param {ChatMessage} message  Message being prepared.
+ * @param {HTMLElement} html     Rendered contents of the message.
+ * @param {object} data          Configuration data passed to the message.
  */
 export const highlightCriticalSuccessFailure = function(message, html, data) {
   if ( !message.isRoll || !message.isContentVisible ) return;
@@ -31,6 +34,9 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
 
 /**
  * Optionally hide the display of chat card action buttons which cannot be performed by the user
+ * @param {ChatMessage} message  Message being prepared.
+ * @param {HTMLElement} html     Rendered contents of the message.
+ * @param {object} data          Configuration data passed to the message.
  */
 export const displayChatActionButtons = function(message, html, data) {
   const chatCard = html.find(".dnd5e.chat-card");

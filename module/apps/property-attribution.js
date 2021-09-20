@@ -14,7 +14,7 @@
 /**
  * Interface for viewing what factors went into determining a specific property.
  *
- * @extends {DocumentSheet}
+ * @extends {Application}
  */
 export default class PropertyAttribution extends Application {
 
@@ -22,6 +22,7 @@ export default class PropertyAttribution extends Application {
    * @param {Document} object  The Document that owns the property being attributed.
    * @param {AttributionDescription[]} attributions  An array of all the attribution data.
    * @param {string} property  Dot separated path to the property.
+   * @param {object} [options]  Options passed to the Application initializer.
    */
   constructor(object, attributions, property, options={}) {
     super(options);
@@ -58,6 +59,7 @@ export default class PropertyAttribution extends Application {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   getData() {
     const property = foundry.utils.getProperty(this.object.data.data, this.property);
     let total;
@@ -85,6 +87,11 @@ export default class PropertyAttribution extends Application {
 
   /* -------------------------------------------- */
 
+  /**
+   * Produce a human readable and localized name for the provided property.
+   * @param {string} property  Dot separated path to the property.
+   * @returns {string}         Property name for display.
+   */
   getPropertyLabel(property) {
     const parts = property.split(".");
     if ( parts[0] === "abilities" && parts[1] ) {

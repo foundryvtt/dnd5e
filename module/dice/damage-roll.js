@@ -7,7 +7,7 @@
  * @param {number} [options.criticalMultiplier=2]     A critical hit multiplier which is applied to critical hits
  * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
- *
+ * @extends {Roll}
  */
 export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
@@ -149,8 +149,9 @@ export default class DamageRoll extends Roll {
 
   /**
    * Handle submission of the Roll evaluation configuration Dialog
-   * @param {jQuery} html             The submitted dialog content
-   * @param {boolean} isCritical      Is the damage a critical hit?
+   * @param {jQuery} html         The submitted dialog content
+   * @param {boolean} isCritical  Is the damage a critical hit?
+   * @returns {DamageRoll}        This damage roll.
    * @private
    */
   _onDialogSubmit(html, isCritical) {

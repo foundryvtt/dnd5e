@@ -168,7 +168,12 @@ export async function d20Roll({
 
 /**
  * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
- * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode
+ * @param {object} [config]
+ * @param {Event} [config.event]           Event that triggered the roll.
+ * @param {boolean} [config.advantage]     Is something granting this roll advantage?
+ * @param {boolean} [config.disadvantage]  Is something granting this roll disadvantage?
+ * @param {boolean} [config.fastForward]   Should the roll dialog be skipped?
+ * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode.
  */
 function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
@@ -262,6 +267,10 @@ export async function damageRoll({
 
 /**
  * Determines whether this d20 roll should be fast-forwarded, and whether advantage or disadvantage should be applied
+ * @param {object} [config]
+ * @param {Event} [config.event]          Event that triggered the roll.
+ * @param {boolean} [config.critical]     Is this roll treated as a critical by default?
+ * @param {boolean} [config.fastForward]  Should the roll dialog be skipped?
  * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
 function _determineCriticalMode({event, critical=false, fastForward=false}={}) {

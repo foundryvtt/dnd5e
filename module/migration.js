@@ -68,7 +68,7 @@ export const migrateWorld = async function() {
 
 /**
  * Apply migration rules to all Entities within a single Compendium pack
- * @param pack
+ * @param {Compendium} pack  Pack to be migrated.
  * @returns {Promise}
  */
 export const migrateCompendium = async function(pack) {
@@ -122,7 +122,7 @@ export const migrateCompendium = async function(pack) {
 /**
  * Apply 'smart' AC migration to a given Actor compendium. This will perform the normal AC migration but additionally
  * check to see if the actor has armor already equipped, and opt to use that instead.
- * @param pack
+ * @param {Compendium|string} pack  Pack or name of pack to migrate.
  * @returns {Promise}
  */
 export const migrateArmorClass = async function(pack) {
@@ -218,7 +218,7 @@ export const migrateActorData = function(actor, migrationData) {
 /**
  * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template
  * @param {object} actorData    The data object for an Actor
- * @returns {object}             The scrubbed Actor data
+ * @returns {object}            The scrubbed Actor data
  */
 function cleanActorData(actorData) {
 
@@ -247,7 +247,7 @@ function cleanActorData(actorData) {
  *
  * @param {object} item             Item data to migrate
  * @param {object} [migrationData]  Additional data to perform the migration
- * @return {object}s                The updateData to apply
+ * @returns {object}                The updateData to apply
  */
 export const migrateItemData = function(item, migrationData) {
   const updateData = {};
@@ -327,6 +327,9 @@ export const getMigrationData = async function() {
 
 /**
  * Migrate the actor speed string to movement object
+ * @param {object} actorData   Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
  * @private
  */
 function _migrateActorMovement(actorData, updateData) {
@@ -354,6 +357,9 @@ function _migrateActorMovement(actorData, updateData) {
 
 /**
  * Migrate the actor traits.senses string to attributes.senses object
+ * @param {object} actor       Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
  * @private
  */
 function _migrateActorSenses(actor, updateData) {
@@ -392,6 +398,9 @@ function _migrateActorSenses(actor, updateData) {
 
 /**
  * Migrate the actor details.type string to object
+ * @param {object} actor       Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
  * @private
  */
 function _migrateActorType(actor, updateData) {
@@ -453,6 +462,9 @@ function _migrateActorType(actor, updateData) {
 
 /**
  * Migrate the actor attributes.ac.value to the new ac.flat override field.
+ * @param {object} actorData   Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
  * @private
  */
 function _migrateActorAC(actorData, updateData) {
@@ -513,11 +525,10 @@ function _migrateTokenImage(actorData, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Delete the old data.attuned boolean
- *
+ * Delete the old data.attuned boolean.
  * @param {object} item        Item data to migrate
  * @param {object} updateData  Existing update to expand upon
- * @returns {object}            The updateData to apply
+ * @returns {object}           The updateData to apply
  * @private
  */
 function _migrateItemAttunement(item, updateData) {
@@ -531,10 +542,9 @@ function _migrateItemAttunement(item, updateData) {
 
 /**
  * Attempt to migrate item rarity from freeform string to enum value.
- *
- * @param {object} item        Item data to migrate
- * @param {object} updateData  Existing update to expand upon
- * @returns {object}            The updateData to apply
+ * @param {object} item        Item data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
  * @private
  */
 function _migrateItemRarity(item, updateData) {
@@ -550,10 +560,9 @@ function _migrateItemRarity(item, updateData) {
 
 /**
  * Replace class spellcasting string to object.
- *
- * @param {object} item        Item data to migrate
- * @param {object} updateData  Existing update to expand upon
- * @returns {object}            The updateData to apply
+ * @param {object} item        Item data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
  * @private
  */
 function _migrateItemSpellcasting(item, updateData) {
@@ -569,10 +578,9 @@ function _migrateItemSpellcasting(item, updateData) {
 
 /**
  * Convert equipment items of type 'bonus' to 'trinket'.
- *
- * @param {object} item        Item data to migrate
- * @param {object} updateData  Existing update to expand upon
- * @returns {object}            The updateData to apply
+ * @param {object} item        Item data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
  * @private
  */
 function _migrateArmorType(item, updateData) {
@@ -585,10 +593,9 @@ function _migrateArmorType(item, updateData) {
 
 /**
  * Set the item's `critical` property to a proper object value.
- *
- * @param {object} item        Item data to migrate
- * @param {object} updateData  Existing update to expand upon
- * @returns {object}            The updateData to apply
+ * @param {object} item        Item data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
  * @private
  */
 function _migrateItemCriticalData(item, updateData) {
@@ -622,7 +629,7 @@ function _migrateItemIcon(item, updateData, {iconMap}={}) {
 
 /**
  * A general tool to purge flags from all entities in a Compendium pack.
- * @param {Compendium} pack   The compendium pack to clean
+ * @param {Compendium} pack   The compendium pack to clean.
  * @private
  */
 export async function purgeFlags(pack) {
@@ -651,7 +658,8 @@ export async function purgeFlags(pack) {
 
 /**
  * Purge the data model of any inner objects which have been flagged as _deprecated.
- * @param {object} data   The data to clean
+ * @param {object} data   The data to clean.
+ * @returns {object}      Cleaned data.
  * @private
  */
 export function removeDeprecatedObjects(data) {

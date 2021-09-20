@@ -1,6 +1,6 @@
 /**
- * A specialized Dialog subclass for ability usage
- * @type {Dialog}
+ * A specialized Dialog subclass for ability usage.
+ * @extends {Dialog}
  */
 export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
@@ -21,8 +21,8 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Item5e} item
-   * @returns {Promise}
+   * @param {Item5e} item  Item being used.
+   * @returns {Promise}    Promise that is resolved when the use dialog is acted upon.
    */
   static async create(item) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
@@ -83,7 +83,11 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Get dialog data related to limited spell slots
+   * Get dialog data related to limited spell slots.
+   * @param {object} actorData  Data from the actor using the spell.
+   * @param {object} itemData   Data from the spell being used.
+   * @param {object} data       Data for the dialog being presented.
+   * @returns {object}          Modified dialog data.
    * @private
    */
   static _getSpellData(actorData, itemData, data) {
@@ -94,8 +98,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!consumeSpellSlot) {
-      mergeObject(data, { isSpell: true, consumeSpellSlot });
-      return;
+      return foundry.utils.mergeObject(data, { isSpell: true, consumeSpellSlot });
     }
 
     // Determine the levels which are feasible
@@ -139,7 +142,11 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Get the ability usage note that is displayed
+   * Get the ability usage note that is displayed.
+   * @param {object} item                                     Data for the item being used.
+   * @param {{value: number, max: number, per: string}} uses  Object uses and recovery configuration.
+   * @param {{charged: boolean, value: string}} recharge      Object recharge configuration.
+   * @returns {string}                                        Localized string indicating available uses.
    * @private
    */
   static _getAbilityUseNote(item, uses, recharge) {
