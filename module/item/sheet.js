@@ -3,7 +3,7 @@ import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
 
 /**
- * Override and extend the core ItemSheet implementation to handle specific item types
+ * Override and extend the core ItemSheet implementation to handle specific item types.
  * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
@@ -92,7 +92,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Get the base weapons and tools based on the selected type.
    *
    * @param {object} item         Item data for the item being displayed
-   * @returns {Promise.<object>}   Object with base items for this type formatted for selectOptions.
+   * @returns {Promise.<object>}  Object with base items for this type formatted for selectOptions.
    * @protected
    */
   async _getItemBaseTypes(item) {
@@ -185,8 +185,9 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
-   * @returns {string}
+   * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet.
+   * @param {object} item    Copy of the item data being prepared for display.
+   * @returns {string|null}  Item status string if applicable to item's type.
    * @private
    */
   _getItemStatus(item) {
@@ -204,8 +205,9 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the Array of item properties which are used in the small sidebar of the description tab
-   * @returns {Array}
+   * Get the Array of item properties which are used in the small sidebar of the description tab.
+   * @param {object} item  Copy of the item data being prepared for display.
+   * @returns {string[]}   List of property labels to be shown.
    * @private
    */
   _getItemProperties(item) {
@@ -256,11 +258,10 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Is this item a separate large object like a siege engine or vehicle
-   * component that is usually mounted on fixtures rather than equipped, and
-   * has its own AC and HP.
-   * @param item
-   * @returns {boolean}
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP.
+   * @param {object} item  Copy of item data being prepared for display.
+   * @returns {boolean}    Is item siege weapon or vehicle equipment?
    * @private
    */
   _isItemMountable(item) {
@@ -318,9 +319,9 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Add or remove a damage part from the damage formula
-   * @param {Event} event     The original click event
-   * @returns {Promise}
+   * Add or remove a damage part from the damage formula.
+   * @param {Event} event             The original click event.
+   * @returns {Promise<Item5e>|null}  Item with updates applied.
    * @private
    */
   async _onDamageControl(event) {
@@ -348,7 +349,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Handle spawning the TraitSelector application for selection various options.
-   * @param {Event} event   The click event which originated the selection
+   * @param {Event} event   The click event which originated the selection.
    * @private
    */
   _onConfigureTraits(event) {
