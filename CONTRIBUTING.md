@@ -112,7 +112,7 @@ To contribute code, [fork this project](https://docs.gitlab.com/ee/user/project/
 
 ### Style
 
-Attempt to follow code style previous established throughout the project. A ESLint profile is included to help with maintaining a consistent code style. All warners presented by the linter should be resolved before a MR is submitted.
+Please attempt to follow code style present throughout the project. An ESLint profile is included to help with maintaining a consistent code style. All warnings presented by the linter should be resolved before an MR is submitted.
 
 - `gulp lint` or `npm run lint` - Run the linter and display any issues found.
 - `gulp lint --fix` or `npm run lint:fix` - Automatically fix any code style issues that can be fixed.
