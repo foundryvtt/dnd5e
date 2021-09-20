@@ -93,6 +93,7 @@ Hooks.once("init", function() {
   CONFIG.Token.objectClass = Token5e;
   CONFIG.time.roundTime = 6;
 
+  CONFIG.Dice.Roll5e = dice.Roll5e;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Roll = dice.D20Roll;
 
@@ -107,6 +108,7 @@ Hooks.once("init", function() {
   Combatant.prototype._getInitiativeFormula = _getInitiativeFormula;
 
   // Register Roll Extensions
+  CONFIG.Dice.rolls.push(dice.Roll5e);
   CONFIG.Dice.rolls.push(dice.D20Roll);
   CONFIG.Dice.rolls.push(dice.DamageRoll);
 

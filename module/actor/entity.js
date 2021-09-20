@@ -830,40 +830,43 @@ export default class Actor5e extends Actor {
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
-    // Compose roll parts and data
-    const parts = ["@mod"];
-    const data = {mod: skl.mod};
+    const parts = [];
+    const data = this.getRollData();
+
+    // Add ability modifier
+    parts.push("@mod");
+    data.mod = skl.mod;
 
     // Include proficiency bonus
     if ( skl.prof.hasProficiency ) {
-      data.prof = skl.prof.term;
       parts.push("@prof");
+      data.prof = skl.prof.term;
     }
 
     // Ability test bonus
     if ( bonuses.check ) {
-      data.checkBonus = bonuses.check;
       parts.push("@checkBonus");
+      data.checkBonus = bonuses.check;
     }
 
     // Ability-specific check bonus
     if ( abl?.bonuses?.check ) {
       const checkBonusKey = `${skl.ability}CheckBonus`;
-      data[checkBonusKey] = abl.bonuses.check;
       parts.push(`@${checkBonusKey}`);
+      data[checkBonusKey] = abl.bonuses.check;
     }
 
     // Skill-specific skill bonus
     if ( skl.bonuses?.check ) {
       const checkBonusKey = `${skillId}CheckBonus`;
-      data[checkBonusKey] = skl.bonuses.check;
       parts.push(`@${checkBonusKey}`);
+      data[checkBonusKey] = skl.bonuses.check;
     }
 
     // Skill check bonus
     if ( bonuses.skill ) {
-      data.skillBonus = bonuses.skill;
       parts.push("@skillBonus");
+      data.skillBonus = bonuses.skill;
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -928,9 +931,12 @@ export default class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
-    // Construct parts
-    const parts = ["@mod"];
-    const data = {mod: abl.mod};
+    const parts = [];
+    const data = this.getRollData();
+
+    // Add ability modifier
+    parts.push("@mod");
+    data.mod = abl.mod;
 
     // Include proficiency bonus
     if ( abl.checkProf.hasProficiency ) {
@@ -984,9 +990,12 @@ export default class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
-    // Construct parts
-    const parts = ["@mod"];
-    const data = {mod: abl.mod};
+    const parts = [];
+    const data = this.getRollData();
+
+    // Add ability modifier
+    parts.push("@mod");
+    data.mod = abl.mod;
 
     // Include proficiency bonus
     if ( abl.saveProf.hasProficiency ) {
@@ -1045,7 +1054,7 @@ export default class Actor5e extends Actor {
 
     // Evaluate a global saving throw bonus
     const parts = [];
-    const data = {};
+    const data = this.getRollData();
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
