@@ -110,6 +110,13 @@ Here are some guidelines for contributing code to this project.
 
 To contribute code, [fork this project](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html) and submit a [merge request (MR)](https://docs.gitlab.com/ee/user/project/merge_requests/getting_started.html) against the correct development branch.
 
+### Style
+
+Attempt to follow code style previous established throughout the project. A ESLint profile is included to help with maintaining a consistent code style. All warners presented by the linter should be resolved before a MR is submitted.
+
+- `gulp lint` or `npm run lint` - Run the linter and display any issues found.
+- `gulp lint --fix` or `npm run lint:fix` - Automatically fix any code style issues that can be fixed.
+
 ### Linked Issues
 
 Before (or alongside) submitting an MR, we ask that you open a feature request issue. This will let us discuss the approach and prioritization of the proposed change.
