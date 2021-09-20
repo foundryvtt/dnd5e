@@ -216,7 +216,7 @@ export default class Actor5e extends Actor {
   /**
    * Given a list of items to add to the Actor, optionally prompt the
    * user for which they would like to add.
-   * @param {Array.<Item5e>} items   The items being added to the Actor.
+   * @param {Array<Item5e>} items   The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
    */
@@ -1197,12 +1197,12 @@ export default class Actor5e extends Actor {
    * Results from a rest operation.
    *
    * @typedef {object} RestResult
-   * @property {number} dhp                  Hit points recovered during the rest.
-   * @property {number} dhd                  Hit dice recovered or spent during the rest.
-   * @property {object} updateData           Updates applied to the actor.
-   * @property {Array.<object>} updateItems  Updates applied to actor's items.
-   * @property {boolean} longRest            Whether the rest type was a long rest.
-   * @property {boolean} newDay              Whether a new day occurred during the rest.
+   * @property {number} dhp            Hit points recovered during the rest.
+   * @property {number} dhd            Hit dice recovered or spent during the rest.
+   * @property {object} updateData     Updates applied to the actor.
+   * @property {object[]} updateItems  Updates applied to actor's items.
+   * @property {boolean} longRest      Whether the rest type was a long rest.
+   * @property {boolean} newDay        Whether a new day occurred during the rest.
    */
 
   /* -------------------------------------------- */
@@ -1216,7 +1216,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.chat=true]           Summarize the results of the rest workflow as a chat message.
    * @param {boolean} [options.autoHD=false]        Automatically spend Hit Dice if you are missing 3 or more hit points.
    * @param {boolean} [options.autoHDThreshold=3]   A number of missing hit points which would trigger an automatic HD roll.
-   * @returns {Promise.<RestResult>}                A Promise which resolves once the short rest workflow has completed.
+   * @returns {Promise<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
     // Take note of the initial hit points and number of hit dice the Actor has
@@ -1249,7 +1249,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.dialog=true]  Present a confirmation dialog window whether or not to take a long rest.
    * @param {boolean} [options.chat=true]    Summarize the results of the rest workflow as a chat message.
    * @param {boolean} [options.newDay=true]  Whether the long rest carries over to a new day.
-   * @returns {Promise.<RestResult>}         A Promise which resolves once the long rest workflow has completed.
+   * @returns {Promise<RestResult>}          A Promise which resolves once the long rest workflow has completed.
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
     // Maybe present a confirmation dialog
@@ -1274,7 +1274,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} longRest       Is this a long rest?
    * @param {number} [dhd=0]         Number of hit dice spent during so far during the rest.
    * @param {number} [dhp=0]         Number of hit points recovered so far during the rest.
-   * @returns {Promise.<RestResult>} Consolidated results of the rest workflow.
+   * @returns {Promise<RestResult>}  Consolidated results of the rest workflow.
    * @private
    */
   async _rest(chat, newDay, longRest, dhd=0, dhp=0) {
@@ -1327,7 +1327,7 @@ export default class Actor5e extends Actor {
    *
    * @param {RestResult} result         Result of the rest operation.
    * @param {boolean} [longRest=false]  Is this a long rest?
-   * @returns {Promise.<ChatMessage>}   Chat message that was created.
+   * @returns {Promise<ChatMessage>}    Chat message that was created.
    * @protected
    */
   async _displayRestResultMessage(result, longRest=false) {
@@ -1373,7 +1373,7 @@ export default class Actor5e extends Actor {
    *
    * @param {object} [options]
    * @param {number} [options.threshold=3]  A number of missing hit points which would trigger an automatic HD roll.
-   * @returns {Promise.<number>}            Number of hit dice spent.
+   * @returns {Promise<number>}             Number of hit dice spent.
    */
   async autoSpendHitDice({ threshold=3 }={}) {
     const max = this.data.data.attributes.hp.max + this.data.data.attributes.hp.tempmax;
@@ -1508,7 +1508,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.recoverShortRestUses=true]  Recover uses for items that recharge after a short rest.
    * @param {boolean} [options.recoverLongRestUses=true]   Recover uses for items that recharge after a long rest.
    * @param {boolean} [options.recoverDailyUses=true]      Recover uses for items that recharge on a new day.
-   * @returns {Array.<object>}                             Array of item updates.
+   * @returns {Array<object>}                              Array of item updates.
    * @protected
    */
   _getRestItemUsesRecovery({ recoverShortRestUses=true, recoverLongRestUses=true, recoverDailyUses=true }={}) {
@@ -1572,7 +1572,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.keepBio]         Keep biography
    * @param {boolean} [options.keepVision]      Keep vision
    * @param {boolean} [options.transformTokens] Transform linked tokens too
-   * @returns {Promise.<Array.<Token>>|null}    Updated token if the transformation was performed.
+   * @returns {Promise<Array<Token>>|null}      Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
@@ -1816,10 +1816,10 @@ export default class Actor5e extends Actor {
    * Populate a proficiency object with a `selected` field containing a combination of
    * localizable group & individual proficiencies from `value` and the contents of `custom`.
    *
-   * @param {object} data                Object containing proficiency data
-   * @param {Array.<string>} data.value  Array of standard proficiency keys
-   * @param {string} data.custom         Semicolon-separated string of custom proficiencies
-   * @param {string} type                "armor", "weapon", or "tool"
+   * @param {object} data               Object containing proficiency data.
+   * @param {Array<string>} data.value  Array of standard proficiency keys.
+   * @param {string} data.custom        Semicolon-separated string of custom proficiencies.
+   * @param {string} type               "armor", "weapon", or "tool"
    */
   static prepareProficiencies(data, type) {
     const profs = CONFIG.DND5E[`${type}Proficiencies`];
@@ -1889,6 +1889,7 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the spell save DC for the provided ability.
    * @param {string} ability  Ability key as defined in `CONFIG.DND5E.abilities`.
    * @returns {number}        Spell save DC for provided ability.
    * @deprecated since dnd5e 0.97

@@ -14,16 +14,14 @@
 /**
  * Interface for viewing what factors went into determining a specific property.
  *
+ * @param {Document} object  The Document that owns the property being attributed.
+ * @param {AttributionDescription[]} attributions  An array of all the attribution data.
+ * @param {string} property  Dot separated path to the property.
+ * @param {object} [options]  Options passed to the Application initializer.
  * @extends {Application}
  */
 export default class PropertyAttribution extends Application {
 
-  /**
-   * @param {Document} object  The Document that owns the property being attributed.
-   * @param {AttributionDescription[]} attributions  An array of all the attribution data.
-   * @param {string} property  Dot separated path to the property.
-   * @param {object} [options]  Options passed to the Application initializer.
-   */
   constructor(object, attributions, property, options={}) {
     super(options);
     this.object = object;

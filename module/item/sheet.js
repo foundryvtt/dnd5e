@@ -91,8 +91,8 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the base weapons and tools based on the selected type.
    *
-   * @param {object} item         Item data for the item being displayed
-   * @returns {Promise.<object>}  Object with base items for this type formatted for selectOptions.
+   * @param {object} item        Item data for the item being displayed
+   * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
    * @protected
    */
   async _getItemBaseTypes(item) {
