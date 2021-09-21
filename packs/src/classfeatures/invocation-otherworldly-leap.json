@@ -1,40 +1,40 @@
 {
-  "_id": "zUIAzBnyt0NDvVXb",
-  "name": "Invocation: Life Drinker",
+  "_id": "8zciiglzEOZo7DDN",
+  "name": "Invocation: Otherworldly Leap",
   "permission": {
     "default": 0
   },
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p>When you hit a creature with your pact weapon, the creature takes extra necrotic damage equal to your Charisma modifier (minimum 1).</p>",
+      "value": "<p>You can cast @Compendium[dnd5e.spells.ZrTc23tToJ0JpH2h]{Jump} on yourself at will, without expending a spell slot or material components.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "PHB pg. 111",
     "activation": {
-      "type": "",
-      "cost": 0,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
-      "value": "",
-      "units": ""
+      "value": 1,
+      "units": "minute"
     },
     "target": {
-      "value": "",
-      "units": "",
-      "type": ""
+      "value": null,
+      "units": null,
+      "type": "self"
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
-      "units": ""
+      "units": "self"
     },
     "uses": {
       "value": 0,
       "max": 0,
-      "per": null,
+      "per": "",
       "type": ""
     },
     "ability": "",
@@ -54,13 +54,13 @@
       "value": "",
       "scaling": "spell"
     },
-    "requirements": "Warlock 12, Pact of the Blade",
+    "requirements": "Warlock 9",
     "recharge": {
       "value": null,
       "charged": false
     }
   },
   "flags": {},
-  "img": "systems/dnd5e/icons/skills/weapon_39.jpg",
+  "img": "systems/dnd5e/icons/skills/yellow_11.jpg",
   "effects": []
 }
