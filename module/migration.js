@@ -5,10 +5,12 @@
 export const migrateWorld = async function() {
   ui.notifications.info(`Applying DnD5E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
+  const migrationData = await getMigrationData();
+
   // Migrate World Actors
   for ( let a of game.actors ) {
     try {
-      const updateData = migrateActorData(a.toObject());
+      const updateData = migrateActorData(a.toObject(), migrationData);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Actor entity ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
@@ -22,7 +24,7 @@ export const migrateWorld = async function() {
   // Migrate World Items
   for ( let i of game.items ) {
     try {
-      const updateData = migrateItemData(i.toObject());
+      const updateData = migrateItemData(i.toObject(), migrationData);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Item entity ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
@@ -36,7 +38,7 @@ export const migrateWorld = async function() {
   // Migrate Actor Override Tokens
   for ( let s of game.scenes ) {
     try {
-      const updateData = migrateSceneData(s.data);
+      const updateData = migrateSceneData(s.data, migrationData);
       if ( !foundry.utils.isObjectEmpty(updateData) ) {
         console.log(`Migrating Scene entity ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
@@ -73,6 +75,8 @@ export const migrateCompendium = async function(pack) {
   const entity = pack.metadata.entity;
   if ( !["Actor", "Item", "Scene"].includes(entity) ) return;
 
+  const migrationData = await getMigrationData();
+
   // Unlock the pack for editing
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
@@ -87,13 +91,13 @@ export const migrateCompendium = async function(pack) {
     try {
       switch (entity) {
         case "Actor":
-          updateData = migrateActorData(doc.toObject());
+          updateData = migrateActorData(doc.toObject(), migrationData);
           break;
         case "Item":
-          updateData = migrateItemData(doc.toObject());
+          updateData = migrateItemData(doc.toObject(), migrationData);
           break;
         case "Scene":
-          updateData = migrateSceneData(doc.data);
+          updateData = migrateSceneData(doc.data, migrationData);
           break;
       }
 
@@ -166,10 +170,11 @@ export const migrateArmorClass = async function(pack) {
 /**
  * Migrate a single Actor entity to incorporate latest data model changes
  * Return an Object of updateData to be applied
- * @param {object} actor    The actor data object to update
- * @return {Object}         The updateData to apply
+ * @param {object} actor            The actor data object to update
+ * @param {object} [migrationData]  Additional data to perform the migration
+ * @return {Object}                 The updateData to apply
  */
-export const migrateActorData = function(actor) {
+export const migrateActorData = function(actor, migrationData) {
   const updateData = {};
   _migrateTokenImage(actor, updateData);
 
@@ -186,7 +191,7 @@ export const migrateActorData = function(actor) {
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-    let itemUpdate = migrateItemData(itemData);
+    let itemUpdate = migrateItemData(itemData, migrationData);
 
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actor.type === "npc" ) {
@@ -240,16 +245,18 @@ function cleanActorData(actorData) {
 /**
  * Migrate a single Item entity to incorporate latest data model changes
  *
- * @param {object} item  Item data to migrate
- * @return {object}      The updateData to apply
+ * @param {object} item             Item data to migrate
+ * @param {object} [migrationData]  Additional data to perform the migration
+ * @return {object}                 The updateData to apply
  */
-export const migrateItemData = function(item) {
+export const migrateItemData = function(item, migrationData) {
   const updateData = {};
   _migrateItemAttunement(item, updateData);
   _migrateItemRarity(item, updateData);
   _migrateItemSpellcasting(item, updateData);
   _migrateArmorType(item, updateData);
   _migrateItemCriticalData(item, updateData);
+  _migrateItemIcon(item, updateData, migrationData);
   return updateData;
 };
 
@@ -258,10 +265,11 @@ export const migrateItemData = function(item) {
 /**
  * Migrate a single Scene entity to incorporate changes to the data model of it's actor data overrides
  * Return an Object of updateData to be applied
- * @param {Object} scene  The Scene data to Update
- * @return {Object}       The updateData to apply
+ * @param {object} scene            The Scene data to Update
+ * @param {object} [migrationData]  Additional data to perform the migration
+ * @return {object}                 The updateData to apply
  */
-export const migrateSceneData = function(scene) {
+export const migrateSceneData = function(scene, migrationData) {
   const tokens = scene.tokens.map(token => {
     const t = token.toObject();
     const imgUpdate = {};
@@ -277,7 +285,7 @@ export const migrateSceneData = function(scene) {
     else if ( !t.actorLink ) {
       const actorData = duplicate(t.actorData);
       actorData.type = token.actor?.type;
-      const update = migrateActorData(actorData);
+      const update = migrateActorData(actorData, migrationData);
       ['items', 'effects'].forEach(embeddedName => {
         if (!update[embeddedName]?.length) return;
         const updates = new Map(update[embeddedName].map(u => [u._id, u]));
@@ -294,6 +302,24 @@ export const migrateSceneData = function(scene) {
   });
   return {tokens};
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Fetch bundled data for large-scale migrations.
+ * @return {Promise<object>}
+ */
+export const getMigrationData = async function() {
+  const data = {};
+  try {
+    const res = await fetch("systems/dnd5e/json/icon-migration.json");
+    data.iconMap = await res.json();
+  } catch(err) {
+    console.warn(`Failed to retrieve icon migration data: ${err.message}`);
+  }
+
+  return data;
+}
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
@@ -571,6 +597,24 @@ function _migrateItemCriticalData(item, updateData) {
     threshold: null,
     damage: null
   };
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert system icons to use bundled core webp icons.
+ * @param {object} item                                     Item data to migrate
+ * @param {object} updateData                               Existing update to expand upon
+ * @param {object} [migrationData={}]                       Additional data to perform the migration
+ * @param {object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
+ * @returns {object}                                        The updateData to apply
+ * @private
+ */
+function _migrateItemIcon(item, updateData, {iconMap}={}) {
+  if ( !iconMap || !item.img?.startsWith("systems/dnd5e/icons/") ) return updateData;
+  const rename = iconMap[item.img];
+  if ( rename ) updateData.img = rename;
   return updateData;
 }
 
