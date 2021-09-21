@@ -742,7 +742,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "object"
         },
         "range": {
           "value": null,
@@ -851,7 +851,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": null,
@@ -1038,7 +1038,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": null,
@@ -1108,10 +1108,10 @@
           "units": "inst"
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1129,7 +1129,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "msak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": null,
@@ -1299,7 +1299,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 60,
@@ -1317,7 +1317,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": null,
