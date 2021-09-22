@@ -171,6 +171,7 @@ export const migrateArmorClass = async function(pack) {
  */
 export const migrateActorData = function(actor) {
   const updateData = {};
+  _migrateTokenImage(actor, updateData);
 
   // Actor Data Updates
   if (actor.data) {
@@ -262,11 +263,14 @@ export const migrateItemData = function(item) {
  */
 export const migrateSceneData = function(scene) {
   const tokens = scene.tokens.map(token => {
-    const t = token.toJSON();
-    if (!t.actorId || t.actorLink) {
+    const t = token.toObject();
+    const imgUpdate = {};
+    _migrateTokenImage(t, imgUpdate);
+    if ( imgUpdate.img ) t.img = imgUpdate.img;
+    if ( !t.actorId || t.actorLink ) {
       t.actorData = {};
     }
-    else if ( !game.actors.has(t.actorId) ){
+    else if ( !game.actors.has(t.actorId) ) {
       t.actorId = null;
       t.actorData = {};
     }
@@ -425,7 +429,7 @@ function _migrateActorType(actor, updateData) {
  * Migrate the actor attributes.ac.value to the new ac.flat override field.
  * @private
  */
-function _migrateActorAC (actorData, updateData) {
+function _migrateActorAC(actorData, updateData) {
   const ac = actorData.data?.attributes?.ac;
   // If the actor has a numeric ac.value, then their AC has not been migrated to the auto-calculation schema yet.
   if ( Number.isNumeric(ac?.value) ) {
@@ -439,6 +443,44 @@ function _migrateActorAC (actorData, updateData) {
     updateData["data.attributes.ac.flat"] = parseInt(ac.flat);
   }
 
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Renamed token images.
+ * @type {Object<string, string>}
+ */
+const TOKEN_IMAGE_RENAME = {
+  "systems/dnd5e/tokens/beast/OwlWhite.png": "systems/dnd5e/tokens/beast/Owl.webp",
+  "systems/dnd5e/tokens/beast/ScorpionSand.png": "systems/dnd5e/tokens/beast/Scorpion.webp",
+  "systems/dnd5e/tokens/beast/BaboonBlack.png": "systems/dnd5e/tokens/beast/Baboon.webp",
+  "systems/dnd5e/tokens/humanoid/BanditRedM.png": "systems/dnd5e/tokens/humanoid/Bandit.webp",
+  "systems/dnd5e/tokens/humanoid/GuardBlueM.png": "systems/dnd5e/tokens/humanoid/Guard.webp",
+  "systems/dnd5e/tokens/humanoid/NobleSwordM.png": "systems/dnd5e/tokens/humanoid/Noble.webp",
+  "systems/dnd5e/tokens/humanoid/MerfolkBlue.png": "systems/dnd5e/tokens/humanoid/Merfolk.webp",
+  "systems/dnd5e/tokens/humanoid/TribalWarriorM.png": "systems/dnd5e/tokens/humanoid/TribalWarrior.webp",
+  "systems/dnd5e/tokens/devil/Lemure.png": "systems/dnd5e/tokens/fiend/Lemure.webp",
+  "systems/dnd5e/tokens/humanoid/Satyr.png": "systems/dnd5e/tokens/fey/Satyr.webp",
+  "systems/dnd5e/tokens/beast/WinterWolf.png": "systems/dnd5e/tokens/monstrosity/WinterWolf.webp"
+};
+
+/**
+ * Migrate any system token images from PNG to WEBP.
+ * @param {object} actorData    Actor or token data to migrate.
+ * @param {object} updateData   Existing update to expand upon.
+ * @returns {object}            The updateData to apply
+ * @private
+ */
+function _migrateTokenImage(actorData, updateData) {
+  ["img", "token.img"].forEach(prop => {
+    const img = foundry.utils.getProperty(actorData, prop);
+    if ( !img?.startsWith("systems/dnd5e/tokens/") || img?.endsWith(".webp") ) return;
+    let rename = TOKEN_IMAGE_RENAME[img];
+    if ( !rename ) rename = img.replace(/\.png$/, ".webp");
+    updateData[prop] = rename;
+  });
   return updateData;
 }
 

@@ -2,7 +2,7 @@
   "_id": "f9JbhBfWucrY2eDA",
   "name": "Giant Wolf Spider",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/GiantWolfSpider.png",
+  "img": "systems/dnd5e/tokens/beast/GiantWolfSpider.webp",
   "data": {
     "abilities": {
       "str": {
@@ -124,7 +124,7 @@
     },
     "details": {
       "biography": {
-        "value": "<blockquote>\n<p>Author's Note: Please see below the entry for “Spider” which will suffice for the description of this creature.&nbsp; Please note that “Giant” is a relative term and this creature is only giant in relative terms to its common size.</p>\n</blockquote>\n<p>Spiders are one of the smallest, yet most feared, denizens of our planet.&nbsp; Spiders are arachnids with eight thin legs protruding from their dual-segmented body.&nbsp; Atop the spider's tiny head are eight glistening eyes with which it views the world in relative obscurity.&nbsp; While the spider's eyesight may be poor regardless of the number of eyes, they have a clever trick up their sleeves: the spider's web!</p>\n<p><strong>Some Bug.</strong> Ingenious little architects, spiders produce a silken thread from their rears dubbed “webbing” which they use to construct elaborate homes.&nbsp; Resembling something of a net, the spider's web serves a dual purpose: to capture food upon its sticky surface and to give the spider a safe place to perch away from predators.&nbsp; Once an insect is trapped within the web, the spider quickly wraps the unsuspecting creature in a bundle of webbing, saving its prize for later consumption.&nbsp; While all spiders are venomous in some capacity, many will not be harmful to the adventurer on their travels.&nbsp; Simply avoid webs where you see them and be quite sure that the web which you see only belongs to a standard spider species, as a plethora of gigantic and magical varieties also lurk within similar webs!</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<blockquote>\n<p>Author's Note: Please see below the entry for “Spider” which will suffice for the description of this creature.  Please note that “Giant” is a relative term and this creature is only giant in relative terms to its common size.</p>\n</blockquote>\n<p>Spiders are one of the smallest, yet most feared, denizens of our planet.  Spiders are arachnids with eight thin legs protruding from their dual-segmented body.  Atop the spider's tiny head are eight glistening eyes with which it views the world in relative obscurity.  While the spider's eyesight may be poor regardless of the number of eyes, they have a clever trick up their sleeves: the spider's web!</p>\n<p><strong>Some Bug.</strong> Ingenious little architects, spiders produce a silken thread from their rears dubbed “webbing” which they use to construct elaborate homes.  Resembling something of a net, the spider's web serves a dual purpose: to capture food upon its sticky surface and to give the spider a safe place to perch away from predators.  Once an insect is trapped within the web, the spider quickly wraps the unsuspecting creature in a bundle of webbing, saving its prize for later consumption.  While all spiders are venomous in some capacity, many will not be harmful to the adventurer on their travels.  Simply avoid webs where you see them and be quite sure that the web which you see only belongs to a standard spider species, as a plethora of gigantic and magical varieties also lurk within similar webs!</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -437,42 +437,64 @@
     }
   },
   "token": {
+    "_id": "u2de9Cp2nVg58IvJ",
     "name": "Giant Wolf Spider",
-    "displayName": 0,
+    "displayName": 20,
+    "actorId": "lDtqhVOxcFSqwtxX",
     "actorLink": false,
+    "actorData": {},
+    "img": "systems/dnd5e/tokens/beast/GiantWolfSpider.webp",
     "tint": null,
     "width": 1,
     "height": 1,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
+    "x": null,
+    "y": null,
+    "elevation": 0,
     "lockRotation": false,
     "rotation": 0,
+    "effects": [],
+    "alpha": 1,
+    "hidden": false,
     "vision": false,
     "dimSight": 60,
     "brightSight": 10,
-    "dimLight": 0,
-    "brightLight": 0,
     "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null
     },
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": ""
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
     "flags": {},
-    "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/GiantWolfSpider.png",
-    "actorId": "f9JbhBfWucrY2eDA",
-    "alpha": 1
+    "tokenId": null,
+    "randomImg": false
   },
   "items": [
     {
@@ -809,7 +831,7 @@
   ],
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
-  "sort": 3400000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

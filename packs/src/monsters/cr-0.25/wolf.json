@@ -2,7 +2,7 @@
   "_id": "yawTeS8u2FCfzzZH",
   "name": "Wolf",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/Wolf.png",
+  "img": "systems/dnd5e/tokens/beast/Wolf.webp",
   "data": {
     "abilities": {
       "str": {
@@ -124,7 +124,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Wolves are the largest of the wild dog species roaming the plains and forests of our wonderful world.&nbsp; Anywhere from light brown to a midnight black in coloration, wolves stand as the common ancestor to all natural dog species currently inhabiting the planet.&nbsp; Wolves have a long, broad muzzle filled with sharp teeth, a thick coat to insulate them from difficult winters, and keen eyes and ears with which they may track a target.&nbsp; The most amazing aspect of the wolf is its incredible nose which can smell prey from up to one and a half miles away.&nbsp; This amazing nose (packed with hundreds of millions of scent receptors) can also determine the mood of other wolves, what they've eaten, and even where they've been..</p>\n<p><strong>The Wolves Among Us.</strong> As is common with many other dog species, wolves live in communities called packs.&nbsp; WIthin the pack, wolves hunt together, raise their young together, and provide group protection.&nbsp; When encountering wolves, be wary should you only spy a single animal prowling the area.&nbsp; It's quite likely where there is a straggler wolf, the rest of the pack lurks nearby ready to defend their family from attack.&nbsp; Wolves, which unable to speak, are able to “communicate” via barks and growls as well as follow simplistic tactics such as flanking maneuvers or surprise attacks.&nbsp; The strength of the pack allows for the wolves to combine their intelligence and form a deadly fighting force of gnashing teeth.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<p>Wolves are the largest of the wild dog species roaming the plains and forests of our wonderful world.  Anywhere from light brown to a midnight black in coloration, wolves stand as the common ancestor to all natural dog species currently inhabiting the planet.  Wolves have a long, broad muzzle filled with sharp teeth, a thick coat to insulate them from difficult winters, and keen eyes and ears with which they may track a target.  The most amazing aspect of the wolf is its incredible nose which can smell prey from up to one and a half miles away.  This amazing nose (packed with hundreds of millions of scent receptors) can also determine the mood of other wolves, what they've eaten, and even where they've been..</p>\n<p><strong>The Wolves Among Us.</strong> As is common with many other dog species, wolves live in communities called packs.  WIthin the pack, wolves hunt together, raise their young together, and provide group protection.  When encountering wolves, be wary should you only spy a single animal prowling the area.  It's quite likely where there is a straggler wolf, the rest of the pack lurks nearby ready to defend their family from attack.  Wolves, which unable to speak, are able to “communicate” via barks and growls as well as follow simplistic tactics such as flanking maneuvers or surprise attacks.  The strength of the pack allows for the wolves to combine their intelligence and form a deadly fighting force of gnashing teeth.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -444,7 +444,7 @@
     "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
+    "scale": 1.5,
     "mirrorX": false,
     "mirrorY": false,
     "lockRotation": false,
@@ -467,11 +467,11 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/Wolf.png",
+    "img": "systems/dnd5e/tokens/beast/Wolf.webp",
     "actorId": "yawTeS8u2FCfzzZH",
     "alpha": 1
   },
@@ -735,7 +735,7 @@
   ],
   "effects": [],
   "folder": "Q7qeMxX30iDI2Wbs",
-  "sort": 1300000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

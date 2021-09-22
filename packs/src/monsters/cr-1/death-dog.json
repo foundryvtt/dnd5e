@@ -2,7 +2,7 @@
   "_id": "PH78NBdvoaszAb61",
   "name": "Death Dog",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/monstrosity/DeathDog.png",
+  "img": "systems/dnd5e/tokens/monstrosity/DeathDog.webp",
   "data": {
     "abilities": {
       "str": {
@@ -443,7 +443,7 @@
     "tint": null,
     "width": 1,
     "height": 1,
-    "scale": 1,
+    "scale": 1.5,
     "mirrorX": false,
     "mirrorY": false,
     "lockRotation": false,
@@ -466,11 +466,11 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/monstrosity/DeathDog.png",
+    "img": "systems/dnd5e/tokens/monstrosity/DeathDog.webp",
     "actorId": "PH78NBdvoaszAb61",
     "alpha": 1
   },
@@ -729,7 +729,7 @@
   ],
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
-  "sort": 200000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

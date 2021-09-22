@@ -2,7 +2,7 @@
   "_id": "Bupo3E9X5Ptx6XeT",
   "name": "Draft Horse",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/DraftHorse.png",
+  "img": "systems/dnd5e/tokens/beast/DraftHorse.webp",
   "data": {
     "abilities": {
       "str": {
@@ -124,7 +124,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>When the job of lugging lumber or trucking trade goods down a country road is simply too much for a humanoid to bear, they may find solace in the knowledge that there is a loyal, stalwart beast ready to shoulder the heavy load for them: the draft horse.&nbsp; Draft horses are a breed of horse who are more readily acclimated to rugged terrain and bearing great weights.&nbsp; Often covered in thicker fur to survive in more difficult climates than their short haired brethren, draft horses have stout, powerful legs and gargantuan hooves adept at clinging to the loose gravel of a mountain trail.&nbsp; Many breeds of draft horse exist within the world, so the picky merchant is never without option should they entertain the idea of purchasing such a beast.&nbsp; The draft horse is capable of moving loads up to 540 lbs and may easily pull a cart laden with adventurers and their spoils down the open road should they become lazy in their victories.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<p>When the job of lugging lumber or trucking trade goods down a country road is simply too much for a humanoid to bear, they may find solace in the knowledge that there is a loyal, stalwart beast ready to shoulder the heavy load for them: the draft horse.  Draft horses are a breed of horse who are more readily acclimated to rugged terrain and bearing great weights.  Often covered in thicker fur to survive in more difficult climates than their short haired brethren, draft horses have stout, powerful legs and gargantuan hooves adept at clinging to the loose gravel of a mountain trail.  Many breeds of draft horse exist within the world, so the picky merchant is never without option should they entertain the idea of purchasing such a beast.  The draft horse is capable of moving loads up to 540 lbs and may easily pull a cart laden with adventurers and their spoils down the open road should they become lazy in their victories.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -437,42 +437,64 @@
     }
   },
   "token": {
+    "_id": "D2cuMTSQSr2VsLHN",
     "name": "Draft Horse",
-    "displayName": 0,
+    "displayName": 20,
+    "actorId": "Cj3ReV6HzfjKztVR",
     "actorLink": false,
+    "actorData": {},
+    "img": "systems/dnd5e/tokens/beast/DraftHorse.webp",
     "tint": null,
     "width": 2,
     "height": 2,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
+    "x": null,
+    "y": null,
+    "elevation": 0,
     "lockRotation": false,
     "rotation": 0,
+    "effects": [],
+    "alpha": 1,
+    "hidden": false,
     "vision": false,
     "dimSight": 0,
     "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
     "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null
     },
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": ""
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
     "flags": {},
-    "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/DraftHorse.png",
-    "actorId": "Bupo3E9X5Ptx6XeT",
-    "alpha": 1
+    "tokenId": null,
+    "randomImg": false
   },
   "items": [
     {
@@ -584,7 +606,7 @@
   ],
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
-  "sort": 700000,
+  "sort": 0,
   "permission": {
     "default": 0
   },
