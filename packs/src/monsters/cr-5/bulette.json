@@ -2,7 +2,7 @@
   "_id": "1ES45ODWg3pCrkzv",
   "name": "Bulette",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/monstrosity/Bulette.png",
+  "img": "systems/dnd5e/tokens/monstrosity/Bulette.webp",
   "data": {
     "abilities": {
       "str": {
@@ -443,7 +443,7 @@
     "tint": null,
     "width": 2,
     "height": 2,
-    "scale": 1,
+    "scale": 1.5,
     "mirrorX": false,
     "mirrorY": false,
     "lockRotation": false,
@@ -466,11 +466,11 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/monstrosity/Bulette.png",
+    "img": "systems/dnd5e/tokens/monstrosity/Bulette.webp",
     "actorId": "1ES45ODWg3pCrkzv",
     "alpha": 1
   },
@@ -735,7 +735,7 @@
   ],
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
-  "sort": 2300000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

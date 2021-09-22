@@ -2,7 +2,7 @@
   "_id": "xBhG7Dos3tkg9jWz",
   "name": "Ochre Jelly",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/ooze/OchreJelly.webp",
   "data": {
     "abilities": {
       "str": {
@@ -124,7 +124,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>&nbsp;</p>",
+        "value": "<p> </p>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -453,8 +453,8 @@
     "displayName": 20,
     "actorLink": false,
     "tint": null,
-    "width": 1,
-    "height": 1,
+    "width": 2,
+    "height": 2,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
@@ -478,11 +478,11 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/ooze/OchreJelly.webp",
     "actorId": "xBhG7Dos3tkg9jWz",
     "alpha": 1
   },

@@ -2,7 +2,7 @@
   "_id": "Buxe6dDK5Mw7kxe6",
   "name": "Frost Giant",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/giant/FrostGiant.webp",
   "data": {
     "abilities": {
       "str": {
@@ -445,8 +445,8 @@
     "displayName": 20,
     "actorLink": false,
     "tint": null,
-    "width": 1,
-    "height": 1,
+    "width": 3,
+    "height": 3,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
@@ -470,11 +470,11 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/giant/FrostGiant.webp",
     "actorId": "Buxe6dDK5Mw7kxe6",
     "alpha": 1
   },
@@ -858,7 +858,7 @@
   ],
   "effects": [],
   "folder": "cYGuEOeNz5ylp2Vs",
-  "sort": 700000,
+  "sort": 0,
   "permission": {
     "default": 0
   },
