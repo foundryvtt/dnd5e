@@ -1,4 +1,3 @@
-export {default as Roll5e} from "./dice/roll.js";
 export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 

@@ -1,5 +1,3 @@
-import Roll5e from "./roll.js";
-
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -10,9 +8,9 @@ import Roll5e from "./roll.js";
  * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
  * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
- * @extends {Roll5e}
+ * @extends {Roll}
  */
-export default class DamageRoll extends Roll5e {
+export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
     // For backwards compatibility, skip rolls which do not have the "critical" option defined

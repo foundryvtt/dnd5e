@@ -846,27 +846,27 @@ export default class Actor5e extends Actor {
     // Ability test bonus
     if ( bonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = bonuses.check;
+      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);;
     }
 
     // Ability-specific check bonus
     if ( abl?.bonuses?.check ) {
       const checkBonusKey = `${skl.ability}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = abl.bonuses.check;
+      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);;
     }
 
     // Skill-specific skill bonus
     if ( skl.bonuses?.check ) {
       const checkBonusKey = `${skillId}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = skl.bonuses.check;
+      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);;
     }
 
     // Skill check bonus
     if ( bonuses.skill ) {
       parts.push("@skillBonus");
-      data.skillBonus = bonuses.skill;
+      data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);;
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -948,14 +948,14 @@ export default class Actor5e extends Actor {
     if ( abl.bonuses?.check ) {
       const checkBonusKey = `${abilityId}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = abl.bonuses.check;
+      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
     }
 
     // Add global actor bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = bonuses.check;
+      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -1007,14 +1007,14 @@ export default class Actor5e extends Actor {
     if ( abl.bonuses?.save ) {
       const saveBonusKey = `${abilityId}SaveBonus`;
       parts.push(`@${saveBonusKey}`);
-      data[saveBonusKey] = abl.bonuses.save;
+      data[saveBonusKey] = Roll.replaceFormulaData(abl.bonuses.save, data);
     }
 
     // Include a global actor ability save bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = bonuses.save;
+      data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -1067,7 +1067,7 @@ export default class Actor5e extends Actor {
     const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = bonuses.save;
+      data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
     }
 
     // Evaluate the roll

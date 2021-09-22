@@ -1,5 +1,3 @@
-import Roll5e from "./roll.js";
-
 /**
  * A type of Roll specific to a d20-based check, save, or attack roll in the 5e system.
  * @param {string} formula                       The string formula to parse
@@ -14,9 +12,9 @@ import Roll5e from "./roll.js";
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
- * @extends {Roll5e}
+ * @extends {Roll}
  */
-export default class D20Roll extends Roll5e {
+export default class D20Roll extends Roll {
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !((this.terms[0] instanceof Die) && (this.terms[0].faces === 20)) ) {
