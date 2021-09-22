@@ -141,7 +141,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attributes = TokenDocument.getTrackedAttributes(actor.data.data);
+      const attributes = TokenDocument.implementation.getConsumedAttributes(actor.data.data);
       attributes.bar.forEach(a => a.push("value"));
       return attributes.bar.concat(attributes.value).reduce((obj, a) => {
         let k = a.join(".");
