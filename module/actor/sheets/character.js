@@ -3,7 +3,7 @@ import Actor5e from "../entity.js";
 
 /**
  * An Actor sheet for player character type actors.
- * @type {ActorSheet5e}
+ * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eCharacter extends ActorSheet5e {
 
