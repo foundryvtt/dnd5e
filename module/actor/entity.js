@@ -112,20 +112,20 @@ export default class Actor5e extends Actor {
 
     // Ability modifiers and saves
     const joat = flags.jackOfAllTrades;
-    const dcBonus = Number.isNumeric(data.bonuses?.spell?.dc) ? parseInt(data.bonuses.spell.dc) : 0;
-    const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
-    const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
+    const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, data);
+    const saveBonus = this._simplifyBonus(bonuses.save, data);
+    const checkBonus = this._simplifyBonus(bonuses.check, data);
     for (let [id, abl] of Object.entries(data.abilities)) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
 
       const isRA = this._isRemarkableAthlete(id);
       abl.checkProf = new Proficiency(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
-      const saveBonusAbl = Number.isNumeric(abl.bonuses?.save) ? parseInt(abl.bonuses.save) : 0;
+      const saveBonusAbl = this._simplifyBonus(abl.bonuses?.save, data);
       abl.saveBonus = saveBonusAbl + saveBonus;
 
       abl.saveProf = new Proficiency(data.attributes.prof, abl.proficient);
-      const checkBonusAbl = Number.isNumeric(abl.bonuses?.check) ? parseInt(abl.bonuses.check) : 0;
+      const checkBonusAbl = this._simplifyBonus(abl.bonuses?.check, data);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
       abl.save = abl.mod + abl.saveBonus;
@@ -399,10 +399,10 @@ export default class Actor5e extends Actor {
     const feats = DND5E.characterFlags;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
-    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) : 0;
+    const skillBonus = this._simplifyBonus(bonuses.skill, data);
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
-      const baseBonus = Number.isNumeric(skl.bonuses?.check) ? parseInt(skl.bonuses.check) : 0;
+      const baseBonus = this._simplifyBonus(skl.bonuses?.check, data);
       let roundDown = true;
 
       // Remarkable Athlete
@@ -431,9 +431,18 @@ export default class Actor5e extends Actor {
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      const passiveBonus = Number.isNumeric(skl.bonuses?.passive) ? parseInt(skl.bonuses.passive) : 0;
+      const passiveBonus = this._simplifyBonus(skl.bonuses?.passive, data);
       skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  _simplifyBonus(bonus, data) {
+    if ( !bonus ) return 0;
+    if ( Number.isNumeric(bonus) ) return parseInt(bonus);
+    const formula = Roll.replaceFormulaData(bonus, data, {missing: "0"});
+    return Number.isNumeric(formula) ? parseInt(formula) : 0;
   }
 
   /* -------------------------------------------- */
@@ -843,7 +852,7 @@ export default class Actor5e extends Actor {
       data.prof = skl.prof.term;
     }
 
-    // Ability test bonus
+    // Global ability check bonus
     if ( bonuses.check ) {
       parts.push("@checkBonus");
       data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);;
@@ -863,7 +872,7 @@ export default class Actor5e extends Actor {
       data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);;
     }
 
-    // Skill check bonus
+    // Global skill check bonus
     if ( bonuses.skill ) {
       parts.push("@skillBonus");
       data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);;
