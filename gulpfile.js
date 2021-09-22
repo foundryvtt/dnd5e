@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 
 const css = require('./utils/css.js');
+const linting = require("./utils/lint.js");
 const packs = require('./utils/packs.js');
 
 
@@ -12,3 +13,4 @@ exports.css = css.compile;
 exports.cleanPacks = gulp.series(packs.clean);
 exports.compilePacks = gulp.series(packs.compile);
 exports.extractPacks = gulp.series(packs.extract);
+exports.lint = gulp.series(linting.lint);
