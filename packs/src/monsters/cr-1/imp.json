@@ -2,7 +2,7 @@
   "_id": "dLQiESMsfsXijD5c",
   "name": "Imp",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/fiend/Imp.png",
+  "img": "systems/dnd5e/tokens/fiend/Imp.webp",
   "data": {
     "abilities": {
       "str": {
@@ -452,8 +452,8 @@
     "displayName": 20,
     "actorLink": false,
     "tint": null,
-    "width": 1,
-    "height": 1,
+    "width": 0.5,
+    "height": 0.5,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
@@ -477,11 +477,11 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/fiend/Imp.png",
+    "img": "systems/dnd5e/tokens/fiend/Imp.webp",
     "actorId": "dLQiESMsfsXijD5c",
     "alpha": 1
   },
@@ -997,7 +997,7 @@
   ],
   "effects": [],
   "folder": "OvwYcGTa27ZerqL7",
-  "sort": 200000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

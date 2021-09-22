@@ -2,7 +2,7 @@
   "_id": "CHEUjiYrVM9X0vIT",
   "name": "Acolyte",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/humanoid/Acolyte.png",
+  "img": "systems/dnd5e/tokens/humanoid/Acolyte.webp",
   "data": {
     "abilities": {
       "str": {
@@ -124,7 +124,7 @@
     },
     "details": {
       "biography": {
-        "value": "<blockquote>\n<p>Wreathed in fantastical golden filigree with incense twirling through the atrium, the pillars of the Solarium glittered, bathed in the warmth of the Sun Lord's light.&nbsp; From a singular hole hewn into the domed ceiling of the temple, the sunlight poured in as if it were a rushing waterfall meant to drown us all in the bright corona. I strayed from my mentor, a priest in his middle years with a soft voice and ring of grey-dappled hair about a balding head, to approach a statue set aside within a shadowed alcove.&nbsp; It depicted our god in his humanoid form, an elderly man standing strictly at attention, his wild hair hanging as long as his chest length beard, a staff topped with a stern faced sun clutched in his hand.&nbsp; I knelt, still only fourteen, before this statue and began to pray right then.&nbsp; The next six years of my acolyte training would be nothing but a blessing, I knew.&nbsp;<br><em>“The Gleaming Star”, by Bishop Bernard Portis.</em></p>\n</blockquote>\n<p>Acolytes are those devoted followers of a particular goddess or god who have decided to take on the mantle of the clergy to better serve their chosen deity.&nbsp; Often no older than teenagers (though some acolytes begin later in their lives) acolytes are trained for a number of years (typically between three to ten) depending on the strictures of their deity's doctrines.&nbsp; During their time they memorize and study all written materials concerning their deity and their teachings, learn magics (be they healing or harmful) gifted to the acolytes by their deities, and often go out into their community to provide aid to those in need or proselytize the words of their goddess or god.&nbsp; Though not every acolyte climbs the ranks into full fledged priesthood, many remain highly dedicated to the church and remain to serve as life-long acolytes working closely with the lay community outside the temple walls.</p>\n<p>Recall that acolytes are trained in the arcane ways of their chosen deities.&nbsp; This being the case, acolytes rarely receive sufficient martial training in comparison to the paladin ranks of the temple (unless expressly dictated otherwise by their deity's teachings).&nbsp; This being the case, the acolyte is able to unleash some basic divine magic in order to both defend themselves and allies or to call upon their patron deity for aid for injured parties.&nbsp; Typically expelled in a gleaming shower of golden sparks and dazzlingly vibrant lights, the magic of the gods is truly something special, even at such a base nature.&nbsp; Spells such as Cure Wounds, Sacred Flame, or Sanctuary are all practiced by acolytes early on into their divine studies.&nbsp; Acolytes can make handy allies should you be in need of divine protection or a field medic for an injured compatriot.&nbsp; Be sure to mind your acolyte well, however, as their spellwork can easily be interrupted if they are forced into a melee fight with a band of slavering gnolls.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<blockquote>\n<p>Wreathed in fantastical golden filigree with incense twirling through the atrium, the pillars of the Solarium glittered, bathed in the warmth of the Sun Lord's light.  From a singular hole hewn into the domed ceiling of the temple, the sunlight poured in as if it were a rushing waterfall meant to drown us all in the bright corona. I strayed from my mentor, a priest in his middle years with a soft voice and ring of grey-dappled hair about a balding head, to approach a statue set aside within a shadowed alcove.  It depicted our god in his humanoid form, an elderly man standing strictly at attention, his wild hair hanging as long as his chest length beard, a staff topped with a stern faced sun clutched in his hand.  I knelt, still only fourteen, before this statue and began to pray right then.  The next six years of my acolyte training would be nothing but a blessing, I knew. <br /><em>“The Gleaming Star”, by Bishop Bernard Portis.</em></p>\n</blockquote>\n<p>Acolytes are those devoted followers of a particular goddess or god who have decided to take on the mantle of the clergy to better serve their chosen deity.  Often no older than teenagers (though some acolytes begin later in their lives) acolytes are trained for a number of years (typically between three to ten) depending on the strictures of their deity's doctrines.  During their time they memorize and study all written materials concerning their deity and their teachings, learn magics (be they healing or harmful) gifted to the acolytes by their deities, and often go out into their community to provide aid to those in need or proselytize the words of their goddess or god.  Though not every acolyte climbs the ranks into full fledged priesthood, many remain highly dedicated to the church and remain to serve as life-long acolytes working closely with the lay community outside the temple walls.</p>\n<p>Recall that acolytes are trained in the arcane ways of their chosen deities.  This being the case, acolytes rarely receive sufficient martial training in comparison to the paladin ranks of the temple (unless expressly dictated otherwise by their deity's teachings).  This being the case, the acolyte is able to unleash some basic divine magic in order to both defend themselves and allies or to call upon their patron deity for aid for injured parties.  Typically expelled in a gleaming shower of golden sparks and dazzlingly vibrant lights, the magic of the gods is truly something special, even at such a base nature.  Spells such as Cure Wounds, Sacred Flame, or Sanctuary are all practiced by acolytes early on into their divine studies.  Acolytes can make handy allies should you be in need of divine protection or a field medic for an injured compatriot.  Be sure to mind your acolyte well, however, as their spellwork can easily be interrupted if they are forced into a melee fight with a band of slavering gnolls.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Any",
@@ -437,42 +437,64 @@
     }
   },
   "token": {
+    "_id": "a2J5z9eErgpY3Ezj",
     "name": "Acolyte",
-    "displayName": 0,
+    "displayName": 20,
+    "actorId": "q10DenuZWlNsJWBq",
     "actorLink": false,
+    "actorData": {},
+    "img": "systems/dnd5e/tokens/humanoid/Acolyte.webp",
     "tint": null,
     "width": 1,
     "height": 1,
     "scale": 1,
     "mirrorX": false,
     "mirrorY": false,
+    "x": null,
+    "y": null,
+    "elevation": 0,
     "lockRotation": false,
     "rotation": 0,
+    "effects": [],
+    "alpha": 1,
+    "hidden": false,
     "vision": false,
     "dimSight": 0,
     "brightSight": 0,
-    "dimLight": 0,
-    "brightLight": 0,
     "sightAngle": 0,
-    "lightAngle": 0,
-    "lightAlpha": 1,
-    "lightAnimation": {
-      "speed": 5,
-      "intensity": 5
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null
     },
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": ""
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
     "flags": {},
-    "randomImg": false,
-    "img": "systems/dnd5e/tokens/humanoid/Acolyte.png",
-    "actorId": "CHEUjiYrVM9X0vIT",
-    "alpha": 1
+    "tokenId": null,
+    "randomImg": false
   },
   "items": [
     {
@@ -1225,7 +1247,7 @@
   ],
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
-  "sort": 200000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

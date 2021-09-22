@@ -2,7 +2,7 @@
   "_id": "28gU50HtG8Kp7uIz",
   "name": "Spider",
   "type": "npc",
-  "img": "systems/dnd5e/tokens/beast/Spider.png",
+  "img": "systems/dnd5e/tokens/beast/Spider.webp",
   "data": {
     "abilities": {
       "str": {
@@ -441,8 +441,8 @@
     "displayName": 20,
     "actorLink": false,
     "tint": null,
-    "width": 1,
-    "height": 1,
+    "width": 0.5,
+    "height": 0.5,
     "scale": 0.8,
     "mirrorX": false,
     "mirrorY": false,
@@ -470,7 +470,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "systems/dnd5e/tokens/beast/Spider.png",
+    "img": "systems/dnd5e/tokens/beast/Spider.webp",
     "actorId": "28gU50HtG8Kp7uIz",
     "alpha": 1
   },
@@ -804,7 +804,7 @@
   ],
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
-  "sort": 1400000,
+  "sort": 0,
   "permission": {
     "default": 0
   },

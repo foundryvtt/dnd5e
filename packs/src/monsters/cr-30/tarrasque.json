@@ -2,7 +2,7 @@
   "_id": "KCvt4FdOVJbuZ3T0",
   "name": "Tarrasque",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/monstrosity/Tarrasque.webp",
   "data": {
     "abilities": {
       "str": {
@@ -471,14 +471,14 @@
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": null
+      "attribute": ""
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/monstrosity/Tarrasque.webp",
     "actorId": "KCvt4FdOVJbuZ3T0",
     "alpha": 1
   },
@@ -1880,7 +1880,7 @@
   ],
   "effects": [],
   "folder": "RcadGAsg9rF7lRq9",
-  "sort": 100000,
+  "sort": 0,
   "permission": {
     "default": 0
   },
