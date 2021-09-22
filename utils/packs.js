@@ -52,6 +52,9 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
   if ( data.effects ) data.effects.forEach((i) => cleanPackEntry(i, { clearSourceId: false }));
   if ( data.items ) data.items.forEach((i) => cleanPackEntry(i, { clearSourceId: false }));
+  if ( data.data?.description?.value ) data.data.description.value = cleanString(data.data.description.value);
+  if ( data.label ) data.label = cleanString(data.label);
+  if ( data.name ) data.name = cleanString(data.name);
 }
 
 
@@ -78,6 +81,15 @@ function determineId(data, pack) {
       }
     });
   });
+}
+
+/**
+ * Removes invisible whitespace characters and normalises single- and double-quotes.
+ * @param {string} str  The string to be cleaned.
+ * @returns {string}    The cleaned string.
+ */
+function cleanString(str) {
+  return str.replace(/\u2060/gu, "").replace(/[‘’]/gu, "'").replace(/[“”]/gu, '"');
 }
 
 
