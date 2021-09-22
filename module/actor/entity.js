@@ -438,6 +438,13 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
+  /**
+   * Convert a bonus value to a simple integer for displaying on the sheet.
+   * @param {number|string|null} bonus  Actor's bonus value.
+   * @param {object} data               Actor data to use for replacing @ strings.
+   * @returns {number}                  Simplified bonus as an integer.
+   * @protected
+   */
   _simplifyBonus(bonus, data) {
     if ( !bonus ) return 0;
     if ( Number.isNumeric(bonus) ) return parseInt(bonus);
