@@ -172,7 +172,7 @@ export const migrateArmorClass = async function(pack) {
  * Return an Object of updateData to be applied
  * @param {object} actor            The actor data object to update
  * @param {object} [migrationData]  Additional data to perform the migration
- * @returns {Object}                The updateData to apply
+ * @returns {object}                The updateData to apply
  */
 export const migrateActorData = function(actor, migrationData) {
   const updateData = {};
@@ -307,7 +307,7 @@ export const migrateSceneData = function(scene, migrationData) {
 
 /**
  * Fetch bundled data for large-scale migrations.
- * @return {Promise<object>}
+ * @returns {Promise<object>}  Object mapping original system icons to their core replacements.
  */
 export const getMigrationData = async function() {
   const data = {};
@@ -488,7 +488,7 @@ function _migrateActorAC(actorData, updateData) {
 
 /**
  * Renamed token images.
- * @type {Object<string, string>}
+ * @type {object<string, string>}
  */
 const TOKEN_IMAGE_RENAME = {
   "systems/dnd5e/tokens/beast/OwlWhite.png": "systems/dnd5e/tokens/beast/Owl.webp",

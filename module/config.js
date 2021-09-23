@@ -934,7 +934,7 @@ DND5E.sourcePacks = {
 /**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
- * @type {Array<Array<number>>}
+ * @type {number[][]}
  */
 DND5E.SPELL_SLOT_TABLE = [
   [2],

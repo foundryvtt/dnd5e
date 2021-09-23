@@ -955,8 +955,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
-   * @param {Event} event        The originating click event.
-   * @returns {Promise<Item[]>}  The newly created item.
+   * @param {Event} event          The originating click event.
+   * @returns {Promise<Item5e[]>}  The newly created item.
    * @private
    */
   _onItemCreate(event) {
@@ -992,7 +992,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e>|null}  The deleted item if something was deleted.
+   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted.
    * @private
    */
   _onItemDelete(event) {

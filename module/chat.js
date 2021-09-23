@@ -65,9 +65,9 @@ export const displayChatActionButtons = function(message, html, data) {
  * These options make it easy to conveniently apply damage to controlled tokens based on the value of a Roll
  *
  * @param {HTMLElement} html    The Chat Message being rendered
- * @param {Array} options       The Array of Context Menu options
+ * @param {object[]} options    The Array of Context Menu options
  *
- * @returns {Array}              The extended options Array including new context choices
+ * @returns {object[]}          The extended options Array including new context choices
  */
 export const addChatMessageContextOptions = function(html, options) {
   let canApply = li => {

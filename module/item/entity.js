@@ -91,7 +91,7 @@ export default class Item5e extends Item {
 
   /**
    * Does the item provide an amount of healing instead of conventional damage?
-   * @returns {boolean}
+   * @type {boolean}
    */
   get isHealing() {
     return (this.data.data.actionType === "heal") && this.data.data.damage.parts.length;
@@ -1174,7 +1174,7 @@ export default class Item5e extends Item {
 
     // Define Roll Data
     const rollData = this.getRollData();
-    if ( options.spellLevel ) rollData.item.level = options.spellLevel;
+    if ( spellLevel ) rollData.item.level = spellLevel;
     const title = `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`;
 
     // Invoke the roll and submit it to chat

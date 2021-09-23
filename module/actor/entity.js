@@ -216,7 +216,7 @@ export default class Actor5e extends Actor {
   /**
    * Given a list of items to add to the Actor, optionally prompt the
    * user for which they would like to add.
-   * @param {Array<Item5e>} items   The items being added to the Actor.
+   * @param {Item5e[]} items         The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
    */
@@ -772,7 +772,7 @@ export default class Actor5e extends Actor {
    * Apply a certain amount of damage or healing to the health pool for Actor
    * @param {number} amount       An amount of damage (positive) or healing (negative) to sustain
    * @param {number} multiplier   A multiplier which allows for resistance, vulnerability, or healing
-   * @returns {Promise<Actor>}    A Promise which resolves once the damage has been applied
+   * @returns {Promise<Actor5e>}  A Promise which resolves once the damage has been applied
    */
   async applyDamage(amount=0, multiplier=1) {
     amount = Math.floor(parseInt(amount) * multiplier);
@@ -1816,10 +1816,10 @@ export default class Actor5e extends Actor {
    * Populate a proficiency object with a `selected` field containing a combination of
    * localizable group & individual proficiencies from `value` and the contents of `custom`.
    *
-   * @param {object} data               Object containing proficiency data.
-   * @param {Array<string>} data.value  Array of standard proficiency keys.
-   * @param {string} data.custom        Semicolon-separated string of custom proficiencies.
-   * @param {string} type               "armor", "weapon", or "tool"
+   * @param {object} data          Object containing proficiency data.
+   * @param {string[]} data.value  Array of standard proficiency keys.
+   * @param {string} data.custom   Semicolon-separated string of custom proficiencies.
+   * @param {string} type          "armor", "weapon", or "tool"
    */
   static prepareProficiencies(data, type) {
     const profs = CONFIG.DND5E[`${type}Proficiencies`];

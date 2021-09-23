@@ -22,8 +22,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Add some extra data when rendering the sheet to reduce the amount of logic required
-   * within the template.
+   * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
    * @returns {object}  Prepared copy of the actor data ready to be displayed.
    */
   getData() {
