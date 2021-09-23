@@ -25,8 +25,7 @@ export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
   // Optionally stip flavor annotations
   if (ignoreFlavor) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
 
-  // Perform arithmetic simplification on the existing roll terms and remove any
-  // duplicate operators. Replace the existing roll terms with the new simplified set.
+  // Perform arithmetic simplification on the existing roll terms.
   roll.terms = _simplifyRedundantOperatorTerms(roll.terms);
 
   // Perform no further simplification if terms that include multiplication and divison.
@@ -50,12 +49,10 @@ export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
 
 /**
  * A helper function to evaluate ParentheticalTerms, MathTerms, and StringTerms that can
- * be evaluated to a simple NumericTerms. Returns a new array of terms with any applicable
- * terms converted to NumericTerms.
+ * be replaced with simple NumericTerms.
  * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  *
- * @returns {RollTerm[]}      A new array of roll terms with various complex terms converted
- *                          to numeric terms.
+ * @returns {RollTerm[]} A new terms array with various terms replaced with numeric terms.
  */
 function _evaluateComplexNumericTerms(terms) {
   return terms.map((term) => {
@@ -72,8 +69,7 @@ function _evaluateComplexNumericTerms(terms) {
 }
 
 /**
- * A helper function to remove redundant addition and subtraction operators
- * in roll terms.
+ * A helper function to remove redundant addition and subtraction operators in roll terms.
  * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
  * 
  * @return {RollTerm[]}  A new array of roll terms with redundant operators removed.
@@ -93,8 +89,7 @@ function _simplifyRedundantOperatorTerms(terms) {
     // Create a set containing the operators used in the current and previous term.
     const operators = new Set([prior.operator, term.operator]);
 
-    // If the set contains a single term and it is a "+" operator, return the
-    // accumulated terms as they are.
+    // If the set only contains a single "+" operator term, return the accumulated terms.
     if ( (operators.size === 1) && (operators.has("+")) ) {
       return acc;
 
@@ -108,8 +103,7 @@ function _simplifyRedundantOperatorTerms(terms) {
     } else if (operators.has("+") && operators.has("-")) {
       acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
-    // In cases where the first operator is a "*" or "/" operator and the second
-    // operator is a "+" operator, the "+" is redundant.
+    // Do not add redundant "+" operators that follow a "*" or "/" operator.
     } else if (["*", "/"].includes(prior.operator) && operators.has("+")) {
       return acc;
 
@@ -134,7 +128,7 @@ function _simplifyRedundantOperatorTerms(terms) {
 function _simplifyDiceTerms(terms) {
   const simplified = [];
 
-  // Split the terms array into OperatorTerm-DiceTerm pairs and aort the pairs
+  // Split the terms array into OperatorTerm-DiceTerm pairs and sort the pairs
   // with flavor annotations from those without.
   const { annotated, unannotated } = _chunkArray(terms, 2).reduce((obj, [operator, diceTerm]) => {
     if ( diceTerm.flavor ) obj.annotated.push(operator, diceTerm);
@@ -198,8 +192,7 @@ function _simplifyNumericTerms(terms) {
     return obj;
   }, { annotated: [], unannotated: [] });
   
-  // Combine the unannotated numerical bonuses into a single number and create
-  // a new NumericTerm to represent the value in the terms.
+  // Combine the unannotated numerical bonuses into a single new NumericTerm.
   if (unannotated.length) {
     const staticBonus = Roll.safeEval(Roll.getFormula(unannotated));
     if (staticBonus === 0) return [...annotated];
@@ -243,9 +236,8 @@ function _groupTermsByType(terms) {
 }
 
 /**
- * A helper function to split an array into a series of sub-arrays based on
- * a given chunk size. This can be used to create operator + non-operator term
- * pairs form an array of terms.
+ * A helper function to split an array into a series of sub-arrays matching a given chunk
+ * size. This can be used to create operator + non-operator pairs from an array of terms.
  * @param {Array} array
  * @param {number} chunkSize
  * 
