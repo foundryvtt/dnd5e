@@ -23,7 +23,7 @@ export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
   Roll.validate(roll.formula);
 
   // Optionally stip flavor annotations
-  if (ignoreFlavor) roll.terms = _stripFlavor(roll.formula);
+  if (ignoreFlavor) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
 
   // Perform arithmetic simplification on the existing roll terms and remove any
   // duplicate operators. Replace the existing roll terms with the new simplified set.
@@ -256,17 +256,6 @@ function _chunkArray(array, chunkSize) {
     if (i % chunkSize === 0) chunks.push(array.slice(i, i + chunkSize));
     return chunks;
   }, []);
-}
-
-/**
- * Creates a set of terms from a roll formula with any flavour text absent in the
- * resulting terms.
- * @param {String} formula  A roll formula
- * 
- * @returns {Object[]}  An array of roll terms with the flavour text removed
- */
-function _stripFlavor(formula) {
-  return Roll.parse(formula.replace(RollTerm.FLAVOR_REGEXP, ""));
 }
 
 /* -------------------------------------------- */
