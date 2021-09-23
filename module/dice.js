@@ -33,9 +33,6 @@ export function simplifyRollFormula(formula, { ignoreFlavor=true }={}) {
     return roll.constructor.getFormula(roll.terms);
   }
 
-  // Attempt to convert complex and unknown terms to NumericTerms.
-  roll.terms = _evaluateComplexNumericTerms(roll.terms);
-
   // Group terms by type and perform simplifications on various types of roll term.
   const groupedTerms = _groupTermsByType(roll.terms);
   groupedTerms.numericTerms = _simplifyNumericTerms(groupedTerms.numericTerms || []);
@@ -214,7 +211,8 @@ function _simplifyNumericTerms(terms) {
  * @returns {Object} An object mapping term types to arrays containing roll terms of that type.
  */
 function _groupTermsByType(terms) {
-  terms = Array.from(terms);
+  // Attempt to replace complex/unknown terms with NumericTerms to enable better grouping.
+  terms = _evaluateComplexNumericTerms(terms);
   const relevantTermTypes = [DiceTerm, PoolTerm, ParentheticalTerm, MathTerm, StringTerm, NumericTerm];
 
   // Add an initial operator so that terms can be rerranged arbitrarily without
