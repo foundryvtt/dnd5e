@@ -422,7 +422,8 @@ export default class Actor5e extends Actor {
       }
 
       // Compute modifier
-      skl.bonus = baseBonus + checkBonus + skillBonus;
+      const checkBonusAbl = this._simplifyBonus(data.abilities[skl.ability]?.bonuses?.check, data);
+      skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
       skl.prof = new Proficiency(data.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
@@ -862,27 +863,27 @@ export default class Actor5e extends Actor {
     // Global ability check bonus
     if ( bonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);;
+      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
     }
 
     // Ability-specific check bonus
     if ( abl?.bonuses?.check ) {
       const checkBonusKey = `${skl.ability}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);;
+      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
     }
 
     // Skill-specific skill bonus
     if ( skl.bonuses?.check ) {
       const checkBonusKey = `${skillId}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);;
+      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);
     }
 
     // Global skill check bonus
     if ( bonuses.skill ) {
       parts.push("@skillBonus");
-      data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);;
+      data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
