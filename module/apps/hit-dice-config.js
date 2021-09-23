@@ -68,7 +68,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
         const actorItems = this.object.items;
         const classUpdates = Object.entries(formData).map(([id, hd]) => ({
             _id: id,
-            "data.hitDiceUsed": actorItems.get(id).data.data.levels - hd,
+            "data.hitDiceUsed": actorItems.get(id).data.data.levels - hd
         }));
         return this.object.updateEmbeddedDocuments("Item", classUpdates);
     }

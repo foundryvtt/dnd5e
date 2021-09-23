@@ -67,7 +67,7 @@ DND5E.alignments = {
 DND5E.attunementTypes = {
   NONE: 0,
   REQUIRED: 1,
-  ATTUNED: 2,
+  ATTUNED: 2
 };
 
 /**
@@ -441,7 +441,7 @@ DND5E.vehicleTypes = {
 
 /**
  * The set of Armor Proficiencies which a character may have.
- * @type {Object}
+ * @type {object}
  */
 DND5E.armorProficiencies = {
   lgt: DND5E.equipmentTypes.light,
@@ -560,7 +560,7 @@ DND5E.consumableTypes = {
 DND5E.currencies = {
   pp: {
     label: "DND5E.CurrencyPP",
-    abbreviation: "DND5E.CurrencyAbbrPP",
+    abbreviation: "DND5E.CurrencyAbbrPP"
   },
   gp: {
     label: "DND5E.CurrencyGP",
@@ -934,7 +934,7 @@ DND5E.sourcePacks = {
 /**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
- * @type {Array.<Array.<number>>}
+ * @type {number[][]}
  */
 DND5E.SPELL_SLOT_TABLE = [
   [2],
