@@ -107,6 +107,16 @@ export default class Item5e extends Item {
     return !!(save.ability && save.scaling);
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Does the Item implement an ability check as part of its usage?
+   * @type {boolean}
+   */
+  get hasAbilityCheck() {
+    return (this.data.data?.actionType === "abil") && this.data.data?.ability;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -254,6 +264,11 @@ export default class Item5e extends Item {
    */
   prepareFinalAttributes() {
     if ( this.data.data.hasOwnProperty("actionType") ) {
+      // Ability checks
+      this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
+        ability: CONFIG.DND5E.abilities[this.data.data?.ability]
+      });
+
       // Saving throws
       this.getSaveDC();
 
@@ -274,7 +289,7 @@ export default class Item5e extends Item {
    * Populate a label with the compiled and simplified damage formula
    * based on owned item actor data. This is only used for display
    * purposes and is not related to Item5e#rollDamage
-   * 
+   *
    * @returns {Array} array of objects with `formula` and `damageType`
    */
   getDerivedDamageLabel() {
@@ -390,7 +405,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Populates the max uses of an item. 
+   * Populates the max uses of an item.
    * If the item is an owned item and the `max` is not numeric, calculate based on actor data.
    */
   prepareMaxUses() {
@@ -687,7 +702,7 @@ export default class Item5e extends Item {
       hasSave: this.hasSave,
       hasAreaTarget: this.hasAreaTarget,
       isTool: this.data.type === "tool",
-      isAbilityCheck: this.data.data.actionType === "abil",
+      hasAbilityCheck: this.hasAbilityCheck
     };
     const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.html", templateData);
 
@@ -725,10 +740,6 @@ export default class Item5e extends Item {
   getChatData(htmlOptions={}) {
     const data = foundry.utils.deepClone(this.data.data);
     const labels = this.labels;
-
-    //Localize ability check strings
-    const abilityLabel = CONFIG.DND5E.abilities[this.data.data.ability]
-    data.abilityCheck = {label : game.i18n.format("DND5E.AbilityPromptTitle", {ability: abilityLabel}), ability: this.data.data.ability}
 
     // Rich text description
     data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
@@ -929,7 +940,7 @@ export default class Item5e extends Item {
     // Apply Halfling Lucky
     if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
 
-    // Compose calculated roll options with passed-in roll options 
+    // Compose calculated roll options with passed-in roll options
     rollConfig = mergeObject(rollConfig, options)
 
     // Invoke the d20 roll helper
@@ -1268,6 +1279,7 @@ export default class Item5e extends Item {
     const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
     // Handle different actions
+    let targets;
     switch ( action ) {
       case "attack":
         await item.rollAttack({event}); break;
@@ -1283,7 +1295,7 @@ export default class Item5e extends Item {
       case "formula":
         await item.rollFormula({event, spellLevel}); break;
       case "save":
-        const targets = this._getChatCardTargets(card);
+        targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
           const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
           await token.actor.rollAbilitySave(button.dataset.ability, { event, speaker });
@@ -1295,11 +1307,11 @@ export default class Item5e extends Item {
         const template = game.dnd5e.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();
         break;
-      case "abilityCheck": 
-        const targets = this._getChatCardTargets(card);
+      case "abilityCheck":
+        targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
           const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
-          await token.rollAbilityTest(button.dataset.ability, { event, speaker });
+          await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
         }
         break;
     }

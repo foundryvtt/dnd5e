@@ -44,8 +44,8 @@
         <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
         {{/if}}
 
-        {{#if isAbilityCheck}}
-        <button data-action="abilityCheck" data-ability="{{data.abilityCheck.ability}}">{{data.abilityCheck.label}}</button>
+        {{#if hasAbilityCheck}}
+        <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
         {{/if}}
     </div>
 
