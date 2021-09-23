@@ -82,17 +82,14 @@ function _simplifyRedundantOperatorTerms(terms) {
       acc.push(term);
       return acc;
     }
-    
-    // Create a set containing the operators used in the current and previous term.
     const operators = new Set([prior.operator, term.operator]);
 
     // If the set only contains a single "+" operator term, return the accumulated terms.
-    if ( (operators.size === 1) && (operators.has("+")) ) {
-      return acc;
+    if ( (operators.size === 1) && (operators.has("+")) ) return acc;
 
     // If the set contains a single term and it is a "-" operator, remove the
     // previous term from the accumulated terms and replace it with a "+" operator.
-    } else if ( (operators.size === 1) && (operators.has("-")) ) {
+    else if ( (operators.size === 1) && (operators.has("-")) ) {
       acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
 
     // If the set contains both a "+" and "-" operator, remove the previous term from
@@ -101,13 +98,10 @@ function _simplifyRedundantOperatorTerms(terms) {
       acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
     // Do not add redundant "+" operators that follow a "*" or "/" operator.
-    } else if (["*", "/"].includes(prior.operator) && operators.has("+")) {
-      return acc;
+    } else if (["*", "/"].includes(prior.operator) && operators.has("+")) return acc;
 
     // In all other cases, simply no simplification is necessary. Append the term as-is.
-    } else {
-      acc.push(term);
-    }
+    else acc.push(term);
 
     return acc;
   }, []);
