@@ -334,13 +334,6 @@ export async function d20Roll({
     if ( configured === null ) return null;
   }
 
-  // Remove redundant operator terms from the roll formula
-  const simplifiedRollFormula = simplifyRollFormula(roll.formula, { ignoreFlavor: false });
-
-  // Update roll terms and formula
-  roll.terms = Roll.parse(simplifiedRollFormula);
-  roll._formula = roll.constructor.getFormula(roll.terms);
-
   // Evaluate the configured roll
   await roll.evaluate({async: true});
 
@@ -433,13 +426,6 @@ export async function damageRoll({
     }, dialogOptions);
     if ( configured === null ) return null;
   }
-
-  // Remove redundant operator terms from the roll formula
-  const simplifiedRollFormula = simplifyRollFormula(roll.formula, { ignoreFlavor: false });
-
-  // Update roll terms and formula
-  roll.terms = Roll.parse(simplifiedRollFormula);
-  roll._formula = roll.constructor.getFormula(roll.terms);
 
   // Evaluate the configured roll
   await roll.evaluate({async: true});
