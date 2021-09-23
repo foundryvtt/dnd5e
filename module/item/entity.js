@@ -108,6 +108,16 @@ export default class Item5e extends Item {
     return !!(save.ability && save.scaling);
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Does the Item implement an ability check as part of its usage?
+   * @type {boolean}
+   */
+  get hasAbilityCheck() {
+    return (this.data.data?.actionType === "abil") && this.data.data?.ability;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -258,6 +268,11 @@ export default class Item5e extends Item {
     this.data.data.prof = new Proficiency(this.actor?.data.data.prof, this.data.data.proficient);
 
     if ( this.data.data.hasOwnProperty("actionType") ) {
+      // Ability checks
+      this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
+        ability: CONFIG.DND5E.abilities[this.data.data?.ability]
+      });
+
       // Saving throws
       this.getSaveDC();
 
@@ -722,7 +737,8 @@ export default class Item5e extends Item {
       isSpell: this.data.type === "spell",
       hasSave: this.hasSave,
       hasAreaTarget: this.hasAreaTarget,
-      isTool: this.data.type === "tool"
+      isTool: this.data.type === "tool",
+      hasAbilityCheck: this.hasAbilityCheck
     };
     const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.html", templateData);
 
@@ -1318,6 +1334,7 @@ export default class Item5e extends Item {
     const spellLevel = parseInt(card.dataset.spellLevel) || null;
 
     // Handle different actions
+    let targets;
     switch ( action ) {
       case "attack":
         await item.rollAttack({event}); break;
@@ -1333,7 +1350,7 @@ export default class Item5e extends Item {
       case "formula":
         await item.rollFormula({event, spellLevel}); break;
       case "save":
-        const targets = this._getChatCardTargets(card);
+        targets = this._getChatCardTargets(card);
         for ( let token of targets ) {
           const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
           await token.actor.rollAbilitySave(button.dataset.ability, { event, speaker });
@@ -1344,6 +1361,13 @@ export default class Item5e extends Item {
       case "placeTemplate":
         const template = game.dnd5e.canvas.AbilityTemplate.fromItem(item);
         if ( template ) template.drawPreview();
+        break;
+      case "abilityCheck":
+        targets = this._getChatCardTargets(card);
+        for ( let token of targets ) {
+          const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: token});
+          await token.actor.rollAbilityTest(button.dataset.ability, { event, speaker });
+        }
         break;
     }
 
