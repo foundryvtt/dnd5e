@@ -480,7 +480,7 @@
       "_id": "NB88hf8oRtLwBolX",
       "name": "Bite",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/skills/red_29.jpg",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>19 (2d10 + 8) <em>piercing damage</em></strong> plus <strong>9 (2d8) <em>cold damage</em></strong>.</p><p></p></section><p>The Ancient White Dragon attacks with its Bite.</p>",
@@ -590,7 +590,7 @@
       "_id": "Cz5xqvQ50f5zxuNY",
       "name": "Claw",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/skills/red_31.jpg",
+      "img": "icons/skills/melee/strike-slashes-red.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8) <em>slashing damage</em></strong>.</p><p></p></section><p>The Ancient White Dragon attacks with its Claw.</p>",
@@ -696,7 +696,7 @@
       "_id": "VtIk8lLDM4Qj3uOl",
       "name": "Cold Breath",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/ice_11.jpg",
+      "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\"><p>The dragon exhales an icy blast in a 90-foot cone. Each creature in that area must make a  <strong>DC 22 Constitution</strong> saving throw, taking 72 (l6d8) <em>cold damage</em> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The dragon exhales an icy blast in a 90-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
@@ -773,7 +773,7 @@
       "_id": "2LAZaoPDRIvnHwtf",
       "name": "Detect",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/blue_17.jpg",
+      "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon makes a Wisdom (Perception) check.</p>\n</section>\n<p>The dragon watches its surrounding...</p>",
@@ -845,7 +845,7 @@
       "_id": "sYtyFXYWqxWT1uUI",
       "name": "Frightful Presence",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/red_02.jpg",
+      "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\"><p>Each creature of the dragon's choice that is <strong>within 120 feet</strong> of the dragon and aware of it must succeed on a <strong>DC 16 Wisdom saving throw</strong> or become frightened for <strong>1 minute</strong>. </p><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the dragon's Frightful Presence for the next 24 hours .</p></section><p>Each creature of the dragon's choice that is <strong>within 120 feet</strong> of the dragon and aware of it must succeed on a Wisdom saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>",
@@ -917,7 +917,7 @@
       "_id": "fgHGU46JtSboc23B",
       "name": "Ice Walk",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/ice_05.jpg",
+      "img": "icons/magic/water/water-iceberg-bubbles.webp",
       "data": {
         "description": {
           "value": "<p>The dragon can move across and climb icy surfaces without needing to make an ability check. Additionally, difficult terrain composed of ice or snow doesn't cost it extra movement.</p>",
@@ -989,7 +989,7 @@
       "_id": "hixTmzxSmaFgXDMy",
       "name": "Lair Actions",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/green_18.jpg",
+      "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
@@ -1061,7 +1061,7 @@
       "_id": "rtz0KAuj9DeBKT8A",
       "name": "Legendary Actions",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/yellow_09.jpg",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The dragon regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The dragon can take 3 legendary actions. </p>",
@@ -1133,7 +1133,7 @@
       "_id": "b8vjJzQ5ha5CqneP",
       "name": "Legendary Resistance",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/weapon_18.jpg",
+      "img": "icons/equipment/shield/kite-wooden-oak-glow.webp",
       "data": {
         "description": {
           "value": "<p>If the dragon fails a saving throw, it can choose to succeed instead.</p>",
@@ -1205,7 +1205,7 @@
       "_id": "UGfL5qnzzi2y2pNj",
       "name": "Multiattack",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/weapon_24.jpg",
+      "img": "icons/skills/melee/blade-tips-triple-steel.webp",
       "data": {
         "description": {
           "value": "<p>The dragon can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws.</p>",
@@ -1277,7 +1277,7 @@
       "_id": "Q3Nd59qtQ5rsGs6c",
       "name": "Tail",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/skills/blood_08.jpg",
+      "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "data": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>20 ft.,</strong> one target. Hit: <strong>17 (2d8 + 8) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Ancient White Dragon attacks with its Tail.</p>",
@@ -1383,7 +1383,7 @@
       "_id": "zu4q8DV9mStLmBeN",
       "name": "Tail Attack",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/skills/blood_08.jpg",
+      "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "data": {
         "description": {
           "value": "<p>The dragon makes a tail attack.</p>",
@@ -1484,7 +1484,7 @@
       "_id": "DQGSNN2zFqmnBy9R",
       "name": "Wing Attack",
       "type": "weapon",
-      "img": "systems/dnd5e/icons/skills/blue_02.jpg",
+      "img": "icons/creatures/abilities/wing-batlike-white-blue.webp",
       "data": {
         "description": {
           "value": "<p>The dragon beats its wings. Each creature within <strong>15 feet </strong>of the dragon must succeed on a <strong>DC 22 Dexterity saving throw</strong> or take <strong>15 ([[/r 2d6+8]]) bludgeoning</strong> damage and be knocked prone. The dragon can then fly up to half its flying speed.</p>",
@@ -1590,7 +1590,7 @@
       "_id": "aHpjkoAnU66iriJW",
       "name": "Regional Effects",
       "type": "feat",
-      "img": "systems/dnd5e/icons/skills/blue_31.jpg",
+      "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
       "data": {
         "description": {
           "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
