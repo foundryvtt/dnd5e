@@ -43,6 +43,10 @@
         {{#if isTool}}
         <button data-action="toolCheck" data-ability="{{data.ability.value}}">{{ localize "DND5E.Use" }} {{item.name}}</button>
         {{/if}}
+
+        {{#if hasAbilityCheck}}
+        <button data-action="abilityCheck" data-ability="{{data.ability}}">{{labels.abilityCheck}}</button>
+        {{/if}}
     </div>
 
     <footer class="card-footer">
