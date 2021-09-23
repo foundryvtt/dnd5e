@@ -1,0 +1,65 @@
+{
+  "_id": "StfmqK1twVfukpa0",
+  "name": "Hunter's Prey: Giant Killer",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>When a Large or larger creature within 5 feet of you hits or misses you with an attack, you can use your reaction to attack that creature immediately after its attack, provided that you can see the creature.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 92",
+    "activation": {
+      "type": "reaction",
+      "cost": 1,
+      "condition": "Creature must be Large or larger and visible."
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": 1,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": ""
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "Hunter 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/skills/social/intimidation-impressing.webp",
+  "effects": []
+}

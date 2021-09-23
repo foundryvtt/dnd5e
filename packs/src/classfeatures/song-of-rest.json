@@ -1,0 +1,70 @@
+{
+  "_id": "he8RpPXwSl2lVSIk",
+  "name": "Song of Rest",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest.</p><p>If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.</p><p>The extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.</p><p><em>**Foundry note: Note the healing roll is set to the base default of 1d6. Please manually adjust as required.</em></p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 54",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": "",
+      "type": ""
+    },
+    "ability": "",
+    "actionType": "heal",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [
+        [
+          "1d6",
+          "healing"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "Bard 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/life/cross-worn-green.webp",
+  "effects": []
+}

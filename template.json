@@ -556,7 +556,10 @@
         "actionType": null,
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": null
+        },
         "damage": {
           "parts": [],
           "versatile": ""
@@ -653,7 +656,8 @@
       "baseItem": "",
       "ability": "int",
       "chatFlavor": "",
-      "proficient": 0
+      "proficient": 0,
+      "bonus": ""
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],

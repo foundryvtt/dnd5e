@@ -1,0 +1,70 @@
+{
+  "_id": "T6u5z8ZTX6UftXqE",
+  "name": "Divine Strike",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>At 8th level, you gain the ability to infuse your weapon strikes with divine energy.</p><p>Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra 1d8 radiant damage to the target. When you reach 14th level, the extra damage increases to 2d8.</p><p><em>**Foundry note: Note the damage die is set to the base default of 1d8, Versatile 2d8.</em></p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 60",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": "",
+      "type": ""
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [
+        [
+          "1d8",
+          "radiant"
+        ]
+      ],
+      "versatile": "2d8"
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "Life Domain 8",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
+  "effects": []
+}

@@ -1,0 +1,87 @@
+{
+  "_id": "wJc88B8OP1y1xzMw",
+  "name": "Infernal Legacy",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>You know the @Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{Thaumaturgy} cantrip.</p>\n<p>When you reach 3rd level, you can cast the @Compendium[dnd5e.spells.22dPoeXfaaAv4K3h]{Hellish Rebuke} spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest.</p>\n<p>When you reach 5th level, you can cast the @Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness} spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 43",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "target": {
+      "value": "",
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": "",
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": null,
+      "type": "sr"
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell",
+      "value": ""
+    },
+    "requirements": "Tiefling",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "featType": {
+      "value": "ability",
+      "_deprecated": true,
+      "type": "String",
+      "label": "Feat Type"
+    },
+    "time": {
+      "value": "",
+      "_deprecated": true
+    },
+    "damageType": {
+      "value": "",
+      "_deprecated": true
+    },
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "flags": {},
+  "img": "icons/creatures/unholy/demon-fanged-horned-yellow.webp",
+  "effects": []
+}

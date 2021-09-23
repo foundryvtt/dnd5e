@@ -1,0 +1,980 @@
+{
+  "_id": "8KSVpQZyzius93ko",
+  "name": "Will-o'-Wisp",
+  "type": "npc",
+  "img": "systems/dnd5e/tokens/undead/WilloWisp.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 1,
+        "proficient": 0,
+        "min": 3,
+        "mod": -5,
+        "save": -5,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 5
+      },
+      "dex": {
+        "value": 28,
+        "proficient": 0,
+        "min": 3,
+        "mod": 9,
+        "save": 9,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 19
+      },
+      "con": {
+        "value": 10,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "int": {
+        "value": 13,
+        "proficient": 0,
+        "min": 3,
+        "mod": 1,
+        "save": 1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "wis": {
+        "value": 14,
+        "proficient": 0,
+        "min": 3,
+        "mod": 2,
+        "save": 2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "cha": {
+        "value": 11,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 19,
+        "calc": "natural",
+        "formula": "",
+        "min": 19
+      },
+      "hp": {
+        "value": 22,
+        "min": 0,
+        "max": 22,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "9d4"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 9,
+        "total": 9,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": null,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 120,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "prof": 2,
+      "spelldc": 10,
+      "spellLevel": 0,
+      "encumbrance": {
+        "value": 0,
+        "max": 7.5,
+        "pct": 0,
+        "encumbered": false
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
+        "public": ""
+      },
+      "alignment": "Chaotic Evil",
+      "race": null,
+      "type": {
+        "value": "undead",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Forest",
+      "cr": 2,
+      "spellLevel": 0,
+      "xp": {
+        "value": 450
+      },
+      "source": "MM pg. 301",
+      "class": {}
+    },
+    "traits": {
+      "size": "tiny",
+      "di": {
+        "value": [
+          "lightning",
+          "poison"
+        ],
+        "custom": ""
+      },
+      "dr": {
+        "value": [
+          "acid",
+          "cold",
+          "fire",
+          "necrotic",
+          "thunder"
+        ],
+        "custom": "Nonmagical Attacks"
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [
+          "grappled",
+          "paralyzed",
+          "poisoned",
+          "prone",
+          "restrained",
+          "unconscious",
+          "exhaustion"
+        ],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": "Languages it knew in life"
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 9,
+        "bonus": 0,
+        "passive": 19,
+        "prof": 0,
+        "total": 9
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 9,
+        "bonus": 0,
+        "passive": 19,
+        "prof": 0,
+        "total": 9
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 9,
+        "bonus": 0,
+        "passive": 19,
+        "prof": 0,
+        "total": 9
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": null
+      },
+      "legres": {
+        "value": 0,
+        "max": null
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Will-o'-Wisp",
+    "displayName": 20,
+    "actorLink": false,
+    "tint": null,
+    "width": 0.5,
+    "height": 0.5,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 120,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightColor": null,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "systems/dnd5e/tokens/undead/WilloWisp.webp",
+    "actorId": "8KSVpQZyzius93ko",
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "RAnyTfj3CGaiGK3W",
+      "name": "Consume Life",
+      "type": "feat",
+      "img": "icons/magic/life/heart-glowing-red.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p>As a bonus action, the will-o'-wisp can target one creature it can see within <strong>5 ft.</strong> of it that has <strong>0 hit points</strong> and is still alive. </p><p>The target must succeed on a <strong>DC 10 Constitution saving throw</strong> against this magic or die. If the target dies, the will-o'-wisp regains 10 (3d6)<strong> hit points</strong>.</p></section><p>The will-o'-wisp can target one creature it can see within <strong>5 ft.</strong> The target must succeed on a Constitution saving throw.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "3d6",
+              "healing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": null,
+          "scaling": "flat"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "4wbSkOyE4ZqKLPQ6",
+      "name": "Ephemeral",
+      "type": "feat",
+      "img": "icons/magic/water/orb-ice-web.webp",
+      "data": {
+        "description": {
+          "value": "<p>The will-o'-wisp can't wear or carry anything.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "MGdIOXhRAQQRrAcO",
+      "name": "Incorporeal Movement",
+      "type": "feat",
+      "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p>The will-o'-wisp can move through other creatures and objects as if they were difficult terrain.</p><p>It takes <strong>5 (1d10) <em>force damage</em></strong> if it ends its turn inside an object.</p></section><p>The will-o'-wisp can move through other creatures and objects as if they were difficult terrain.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "other",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d10",
+              "force"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "3Sr6MrVgbTGw66Aa",
+      "name": "Variable Illumination",
+      "type": "feat",
+      "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
+      "data": {
+        "description": {
+          "value": "<p>The will-o'-wisp sheds bright light in a 5- to <strong>20-foot radius</strong> and dim light for an additional number of<strong> ft.</strong> equal to the chosen radius. The will-o'-wisp can alter the radius as a bonus action.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "np6oHDOwHQFsSn5B",
+      "name": "Shock",
+      "type": "weapon",
+      "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p><em>Melee Spell Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>9 (2d8) <em>lightning damage</em></strong>.</p><p></p></section><p>The Will-o'-Wisp attacks with its Shock.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "wis",
+        "actionType": "msak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "2d8",
+              "lightning"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "natural",
+        "properties": {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 500000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "vJR81iEOZYNMuAdz",
+      "name": "Invisibility",
+      "type": "feat",
+      "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p>The will-o'-wisp and its light magically become invisible until it attacks or uses its Consume Life, or until its concentration ends (as if concentrating on a spell).</p><p></p></section><p>The will-o'-wisp and its light magically become invisible.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 600000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": "Q7qeMxX30iDI2Wbs",
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

@@ -1,0 +1,43 @@
+{
+  "_id": "g8fQZ1WyTz2bTtvA",
+  "name": "Alms Box",
+  "type": "backpack",
+  "img": "icons/sundries/misc/piggybank.webp",
+  "data": {
+    "description": {
+      "value": "<p>A box with a money slot and detachable base mainly used by priests and the like to collect alms.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 151",
+    "quantity": 1,
+    "weight": 2,
+    "price": 0.1,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "common",
+    "identified": true,
+    "capacity": {
+      "type": "weight",
+      "value": 2,
+      "weightless": false
+    },
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "damage": {
+      "parts": []
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5100000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

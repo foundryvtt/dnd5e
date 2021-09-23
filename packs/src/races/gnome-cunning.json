@@ -1,0 +1,88 @@
+{
+  "_id": "EHhr9umJ5kxJFCQH",
+  "name": "Gnome Cunning",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 37",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "target": {
+      "value": "",
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": "",
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null,
+      "type": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell",
+      "value": ""
+    },
+    "requirements": "Gnome",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "featType": {
+      "value": "passive",
+      "_deprecated": true,
+      "type": "String",
+      "label": "Feat Type"
+    },
+    "time": {
+      "value": "",
+      "_deprecated": true
+    },
+    "damageType": {
+      "value": "",
+      "_deprecated": true
+    },
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+  "effects": []
+}

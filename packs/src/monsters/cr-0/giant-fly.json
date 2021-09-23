@@ -1,0 +1,472 @@
+{
+  "_id": "rLl22hYeAH3ljhdI",
+  "name": "Giant Fly",
+  "type": "npc",
+  "img": "icons/svg/mystery-man.svg",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 14,
+        "proficient": 0,
+        "mod": 2,
+        "save": 2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "dex": {
+        "value": 13,
+        "proficient": 0,
+        "mod": 1,
+        "save": 1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "con": {
+        "value": 13,
+        "proficient": 0,
+        "mod": 1,
+        "save": 1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "int": {
+        "value": 2,
+        "proficient": 0,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 6
+      },
+      "wis": {
+        "value": 10,
+        "proficient": 0,
+        "mod": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "save": 0,
+        "dc": 10
+      },
+      "cha": {
+        "value": 3,
+        "proficient": 0,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 6
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 11,
+        "calc": "natural",
+        "formula": ""
+      },
+      "hp": {
+        "value": 19,
+        "min": 0,
+        "max": 19,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "3d10 + 3"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 1,
+        "total": 1,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 60,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 60,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "spelldc": 10,
+      "prof": 2,
+      "encumbrance": {
+        "value": 0,
+        "max": 420,
+        "pct": 0,
+        "encumbered": false
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "",
+        "public": ""
+      },
+      "alignment": "Unaligned",
+      "race": "",
+      "type": {
+        "value": "beast",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "",
+      "cr": "0",
+      "spellLevel": 0,
+      "xp": {
+        "value": 10
+      },
+      "source": "DMG pg. 169"
+    },
+    "traits": {
+      "size": "lg",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": ""
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 1,
+        "total": 1,
+        "passive": 11,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "prof": 0,
+        "total": 0,
+        "passive": 10
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": 2,
+        "total": 2,
+        "passive": 12,
+        "bonus": 0,
+        "prof": 0
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "prof": 0,
+        "total": 0,
+        "passive": 10
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "prof": 0,
+        "total": 0,
+        "passive": 10
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "prof": 0,
+        "total": 0,
+        "passive": 10
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "total": -4,
+        "passive": 6,
+        "bonus": 0,
+        "prof": 0
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 1,
+        "total": 1,
+        "passive": 11,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 1,
+        "total": 1,
+        "passive": 11,
+        "bonus": 0,
+        "prof": 0
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 0,
+        "prof": 0,
+        "total": 0,
+        "passive": 10
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Giant Fly",
+    "displayName": 0,
+    "actorLink": false,
+    "tint": null,
+    "width": 2,
+    "height": 2,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 60,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "icons/svg/mystery-man.svg",
+    "actorId": "rLl22hYeAH3ljhdI",
+    "alpha": 1
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

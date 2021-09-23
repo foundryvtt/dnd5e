@@ -1,0 +1,72 @@
+{
+  "_id": "olAqNsUTIef9x8xC",
+  "name": "Sacred Oath",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>When you reach 3rd level, you swear the oath that binds you as a paladin forever. Up to this time you have been in a preparatory stage, committed to the path but not yet sworn to it. Now you choose an oath, such as the Oath of Devotion.</p><p>Your choice grants you features at 3rd level and again at 7th, 15th, and 20th level. Those features include oath spells and the Channel Divinity feature.</p>\n<h3>Oath Spells</h3>\n<p>Each oath has a list of associated spells. You gain access to these spells at the levels specified in the oath description. Once you gain access to an oath spell, you always have it prepared. Oath spells don't count against the number of spells you can prepare each day.</p><p>If you gain an oath spell that doesn't appear on the paladin spell list, the spell is nonetheless a paladin spell for you.</p>\n<h3>Channel Divinity</h3>\n<p>@Compendium[dnd5e.classfeatures.8M7uOPhbTxoxxJSo]{Channel Divinity}</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 85, 86",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "target": {
+      "value": "",
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": "",
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null,
+      "type": ""
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "Paladin 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    }
+  },
+  "sort": 700001,
+  "flags": {},
+  "img": "icons/sundries/documents/document-sealed-red-yellow.webp",
+  "effects": []
+}

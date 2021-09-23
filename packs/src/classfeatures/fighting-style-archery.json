@@ -1,0 +1,120 @@
+{
+  "_id": "8YwPFv3UAPjWVDNf",
+  "name": "Fighting Style: Archery",
+  "type": "feat",
+  "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
+  "data": {
+    "description": {
+      "value": "<p>You gain a +2 bonus to attack rolls you make with ranged weapons</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 72; 73; 91",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "target": {
+      "value": "",
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": "",
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null,
+      "type": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell",
+      "value": ""
+    },
+    "requirements": "Fighter 1, Champion 10, Ranger 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": {
+      "amm": false,
+      "fin": false,
+      "fir": false,
+      "foc": false,
+      "hvy": false,
+      "lgt": false,
+      "lod": false,
+      "rch": false,
+      "rel": false,
+      "ret": false,
+      "spc": false,
+      "thr": false,
+      "two": false,
+      "ver": false
+    }
+  },
+  "effects": [
+    {
+      "_id": "F0Bh4n8Tu1ZZnwSr",
+      "flags": {},
+      "changes": [
+        {
+          "key": "data.bonuses.rwak.attack",
+          "mode": 2,
+          "value": "+2"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 1620159562067
+      },
+      "icon": "icons/weapons/bows/shortbow-recurve-yellow.webp",
+      "label": "Fighting Style: Archery",
+      "origin": "Item.SDsWYh0xtS6nWuH8",
+      "tint": "",
+      "transfer": true
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

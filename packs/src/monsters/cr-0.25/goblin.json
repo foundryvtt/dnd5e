@@ -1,0 +1,957 @@
+{
+  "_id": "TjWQOgI3A4UAl7lC",
+  "name": "Goblin",
+  "type": "npc",
+  "img": "systems/dnd5e/tokens/humanoid/Goblin.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 8,
+        "proficient": 0,
+        "min": 3,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      },
+      "dex": {
+        "value": 14,
+        "proficient": 0,
+        "min": 3,
+        "mod": 2,
+        "save": 2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "con": {
+        "value": 10,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "int": {
+        "value": 10,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "wis": {
+        "value": 8,
+        "proficient": 0,
+        "min": 3,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      },
+      "cha": {
+        "value": 8,
+        "proficient": 0,
+        "min": 3,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": null,
+        "calc": "default",
+        "formula": "",
+        "min": 12
+      },
+      "hp": {
+        "value": 7,
+        "min": 0,
+        "max": 7,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "2d6"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 2,
+        "total": 2,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 60,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "prof": 2,
+      "spelldc": 10,
+      "spellLevel": 0,
+      "encumbrance": {
+        "value": 21,
+        "max": 120,
+        "pct": 17.5,
+        "encumbered": true
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "<blockquote>\n<p>Putrid little runts… they ambushed us on the trail before we'd even been made aware we'd entered their “king's” territory.  They attacked from out of the bushes like a tidal wave of bodies crashing into our cart, all the while gibbering in their foul, snarl of a tongue.  We should have been prepared for them, I recall their weaponry was so poor one bugger was swinging half a broom handle with a small iron spike driven through; nonetheless, they overwhelmed us with their surprise attack and made off with a hefty share of the camp's rations for the next month.<br /><em>Captain Will Freidmont of the Upper Wilds Valdyrguard.</em></p>\n</blockquote>\n<p>Goblins are evil creatures of diminutive stature who exist in almost every corner of the natural world as a constant yet generally manageable threat.  Hailing from a group of creatures called goblinoids (which includes bugbears and hobgoblins), the goblin is a foul humanoid measuring no larger than the average halfling.  Goblins have skin tones varying from light clay to deep chestnut brown to a sickly, acidic green, their hair is thin and greasy, and within their jaws rest cracked and sharpened teeth.  Together with their foaming fellows, goblins form loose collectives or tribes so their power can stand pronounced in numbers.  The tribal life also allows for a crude caste system to erupt from the goblin's chaotic politics.  All goblins have something to offer to the tribe, be they foragers, slavers, or warriors.  If they cannot contribute, they die.</p>\n<p><strong>We Live in a Society. </strong> Capricious to the last, goblins crave nothing more than power and domination of all others around them by any means (including those methods dangerous to the goblin).  Those goblins who possess enough might or cleverness may ascend to the rank of Goblin Boss and command a lair consisting of several dozens goblinoid fellows.  Should ambition prove overwhelming, the boss in rare cases may subjugate nearby lairs of rival goblinoids and crown themselves a Goblin Queen/King.  It has been documented that in one particular case, Queen Greld the Gutripper was able to enslave a camp containing hundreds of orcs, then laid siege to the city of Westerholt close by and sacked the entire city.</p>\n<p><strong>Gnash and Bite, Trick and Trap.</strong> Goblins maintain some of the most chaotic lairs within the known world, and to accomplish this the goblins require a plethora of slaves.  Not always willing to murder those they plunder, goblins and their kin are known slavers, spiriting away captured humans from merchant wagons to contruct their insidious dungeons.  WIthin a goblin lair is all manner of trap: tunnels leading nowhere, narrow passages no human could pass through, arrow slits, pits lined with spikes, and of course a multitude of alarms to warn the tribe of any impending danger.  Goblins utilize chaotic placement within their lairs to throw off intruders from their hard earned loot which is kept safe within the lair's heart.</p>\n<p><strong>And They Dance About the Flames.</strong> Goblins, though commonly thought of as greedy and stupid, leave their chaotic tendancies behind when it comes to the structure of religious worship.  They are beholden in particular to The God of the Goblins, also called They Who Lurk Beneath, who acts as chief of all other gods to the goblinoids.  This god encourages acts of violence, blind cruelty, enslaving others, as well as war amongst the enemies of the goblins.  Goblin tribes will join together in times of worship to dance, perform rituals with blood and bone, build massive bonfires, and sew chaos throughout the lair all in devotion to their evil benefactor.  Goblins, fueled by the spirit of the revelry, will then be exceedingly aggressive and volatile for the days after, raging through the surrounding area to sate the thirst of their cruel god.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "public": ""
+      },
+      "alignment": "Neutral Evil",
+      "race": null,
+      "type": {
+        "value": "humanoid",
+        "subtype": "Goblinoid",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Underdark",
+      "cr": 0.25,
+      "spellLevel": 0,
+      "xp": {
+        "value": 50
+      },
+      "source": "MM pg. 166",
+      "class": {}
+    },
+    "traits": {
+      "size": "sm",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [
+          "common",
+          "goblin"
+        ],
+        "custom": ""
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "ste": {
+        "value": 2,
+        "ability": "dex",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 16,
+        "prof": 4,
+        "total": 6
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Goblin",
+    "displayName": 0,
+    "actorLink": false,
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 60,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "systems/dnd5e/tokens/humanoid/Goblin.webp",
+    "actorId": "TjWQOgI3A4UAl7lC",
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "Ti3XQOmTKdgcnpAa",
+      "name": "Leather Armor",
+      "type": "equipment",
+      "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
+      "data": {
+        "description": {
+          "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 144",
+        "quantity": 1,
+        "weight": 10,
+        "price": 10,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 11,
+          "type": "light",
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "stealth": false,
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "sSs3hSzkKBMNBgTs",
+      "name": "Shield",
+      "type": "equipment",
+      "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
+      "data": {
+        "description": {
+          "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 144",
+        "quantity": 1,
+        "weight": 6,
+        "price": "10",
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": null,
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 2,
+          "type": "shield",
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": "",
+        "stealth": false,
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "SxVatHq02vURYDt3",
+      "name": "Nimble Escape",
+      "type": "feat",
+      "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+      "data": {
+        "description": {
+          "value": "<p>The goblin can take the Disengage or Hide action as a bonus action on each of its turns.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "S6UTTLu0bEB32HNG",
+      "name": "Scimitar",
+      "type": "weapon",
+      "img": "icons/weapons/swords/sword-katana.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>slashing damage</em></strong>.</p></section>\n<p>The Goblin attacks with its Scimitar.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 3,
+        "price": 25,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "dex",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "martialM",
+        "properties": {
+          "fin": true,
+          "lgt": true,
+          "amm": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "YqS3dsIlpWb2Q2UI",
+      "name": "Shortbow",
+      "type": "weapon",
+      "img": "icons/weapons/bows/shortbow-recurve.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Goblin attacks with its Shortbow.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 2,
+        "price": 25,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 80,
+          "long": 320,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleR",
+        "properties": {
+          "two": true,
+          "amm": true,
+          "hvy": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "lgt": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "ver": false,
+          "lod": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 2600001,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": "kdTgTyvlimxTW5xZ",
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

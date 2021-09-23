@@ -1,0 +1,88 @@
+{
+  "_id": "ufysTkqet2Ctmtyi",
+  "name": "Dwarven Resilience",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>You have advantage on saving throws against poison, and you have resistance against poison damage.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 20",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": ""
+    },
+    "target": {
+      "value": "",
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": "",
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null,
+      "type": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell",
+      "value": ""
+    },
+    "requirements": "Dwarf",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "featType": {
+      "value": "passive",
+      "_deprecated": true,
+      "type": "String",
+      "label": "Feat Type"
+    },
+    "time": {
+      "value": "",
+      "_deprecated": true
+    },
+    "damageType": {
+      "value": "",
+      "_deprecated": true
+    },
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "flags": {},
+  "img": "icons/creatures/abilities/stinger-poison-green.webp",
+  "effects": []
+}

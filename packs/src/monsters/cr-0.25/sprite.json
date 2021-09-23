@@ -1,0 +1,960 @@
+{
+  "_id": "MUpBNDoJEr09bLaO",
+  "name": "Sprite",
+  "type": "npc",
+  "img": "systems/dnd5e/tokens/fey/Sprite.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 3,
+        "proficient": 0,
+        "min": 3,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 6
+      },
+      "dex": {
+        "value": 18,
+        "proficient": 0,
+        "min": 3,
+        "mod": 4,
+        "save": 4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 14
+      },
+      "con": {
+        "value": 10,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "int": {
+        "value": 14,
+        "proficient": 0,
+        "min": 3,
+        "mod": 2,
+        "save": 2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "wis": {
+        "value": 13,
+        "proficient": 0,
+        "min": 3,
+        "mod": 1,
+        "save": 1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "cha": {
+        "value": 11,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": null,
+        "calc": "default",
+        "formula": "",
+        "min": 14
+      },
+      "hp": {
+        "value": 2,
+        "min": 0,
+        "max": 2,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "1d4"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 4,
+        "total": 4,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 40,
+        "swim": 0,
+        "walk": 10,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "prof": 2,
+      "spelldc": 10,
+      "spellLevel": 0,
+      "encumbrance": {
+        "value": 1,
+        "max": 22.5,
+        "pct": 4.444444444444445,
+        "encumbered": true
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Related to the fey pixie who dances merrily through sunlit glades, Sprites resemble their more fanciful kin in size only.  Sprites are tiny humanoids held aloft by a pair of dragonfly's wings who inhabit glades dappled with mushrooms, wild flowers, and occasionally fellow fey creatures such a living trees whom allow the Sprites to construct villages within their ample boughs.  Here in the bosom of nature's serenity the Sprites exist with one purpose: protect their home at all costs.  Unlike their Pixie kin, Sprites are fearsome warriors and adept poison crafters willing to lay down their lives to protect their glade.  Should an intruder enter into their territory, the Sprites will take to the trees and bushes causing all manner of racket in an attempt to scare off the intruder without conflict.  If the intruder remains, they will dart out and surround the invader, filling it with poison tipped arrows.  The poison is not deadly, rather, it renders the victim unconscious so the Sprites may flee to a safer location within the forest.</p>\n<p><strong>Closer to the Heart.</strong> While Sprites make fearsome warriors, they are not without reason in analyzing their enemies.  Upon rendering a creature unconscious, the Sprite can touch the creature and learn the true nature of the creature's heart, be they good or evil, by “seeing” their heart.  As the heart never lies, the Sprite can make keen judgements about the creature's intentions and determine if they are truly a threat using this “heart sight”.  In some instances, Sprites have been known to ally themselves with good natured creatures, especially if that creature has come to topple an evil-aligned fey creature in their forest home.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "public": ""
+      },
+      "alignment": "Neutral Good",
+      "race": null,
+      "type": {
+        "value": "fey",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Forest",
+      "cr": 0.25,
+      "spellLevel": 0,
+      "xp": {
+        "value": 50
+      },
+      "source": "MM pg. 283",
+      "class": {}
+    },
+    "traits": {
+      "size": "tiny",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [
+          "common",
+          "elvish",
+          "sylvan"
+        ],
+        "custom": ""
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 4,
+        "bonus": 0,
+        "passive": 14,
+        "prof": 0,
+        "total": 4
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "prc": {
+        "value": 1,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 13,
+        "prof": 2,
+        "total": 3
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 4,
+        "bonus": 0,
+        "passive": 14,
+        "prof": 0,
+        "total": 4
+      },
+      "ste": {
+        "value": 2,
+        "ability": "dex",
+        "mod": 4,
+        "bonus": 0,
+        "passive": 18,
+        "prof": 4,
+        "total": 8
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "_id": "kCZHP2yp95mqDrOF",
+    "name": "Sprite",
+    "displayName": 20,
+    "actorId": "xlp2Fy3EHujKVFwk",
+    "actorLink": false,
+    "actorData": {},
+    "img": "systems/dnd5e/tokens/fey/Sprite.webp",
+    "tint": null,
+    "width": 0.5,
+    "height": 0.5,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "x": null,
+    "y": null,
+    "elevation": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "effects": [],
+    "alpha": 1,
+    "hidden": false,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "sightAngle": 0,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null
+    },
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "tokenId": null,
+    "randomImg": false
+  },
+  "items": [
+    {
+      "_id": "qlTIjSkjmEDQTj1x",
+      "name": "Leather Armor (tiny)",
+      "type": "equipment",
+      "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
+      "data": {
+        "description": {
+          "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 144",
+        "quantity": 1,
+        "weight": 1,
+        "price": 10,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 11,
+          "type": "light",
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "stealth": false,
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "YN8cO9SCNOIFJcmw",
+      "name": "Shortbow",
+      "type": "weapon",
+      "img": "icons/weapons/bows/shortbow-recurve.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +6 to hit, range 40/160 ft., one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p></p></section><p>The Sprite attacks with its Shortbow.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 40,
+          "long": 160,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "dex",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 10,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleR",
+        "properties": {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "mT8SL7VHsG6qY5G7",
+      "name": "Longsword",
+      "type": "weapon",
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>slashing damage</em>.</strong></p><p></p></section><p>The Sprite attacks with its Longsword.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": null,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "martialM",
+        "properties": {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "qLd01BTjVwH6NUfH",
+      "name": "Invisibility",
+      "type": "feat",
+      "img": "icons/creatures/webs/webthin-blue.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p>The sprite magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the sprite wears or carries is invisible with it.</p><p></p></section><p>The sprite magically turns invisible. Any equipment the sprite wears or carries is invisible with it.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "qJHrH8Q3q1JB5xe5",
+      "name": "Heart Sight",
+      "type": "feat",
+      "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p>The sprite touches a creature and magically knows the creature's current emotional state. </p><p>If the target fails a  <strong>DC 10 Charisma</strong> saving throw, the sprite also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw.</p></section><p>The sprite touches a creature. target must make a <strong>Charisma</strong> saving throw.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "cha",
+        "actionType": "save",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "cha",
+          "dc": null,
+          "scaling": "flat"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 500000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": "rjehyX85FDoydEwV",
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

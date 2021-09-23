@@ -1,0 +1,849 @@
+{
+  "_id": "3YwmvDupMwycWNCO",
+  "name": "Giant Crocodile",
+  "type": "npc",
+  "img": "systems/dnd5e/tokens/beast/GiantCrocodile.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 21,
+        "proficient": 0,
+        "min": 3,
+        "mod": 5,
+        "save": 5,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 16
+      },
+      "dex": {
+        "value": 9,
+        "proficient": 0,
+        "min": 3,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "con": {
+        "value": 17,
+        "proficient": 0,
+        "min": 3,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 14
+      },
+      "int": {
+        "value": 2,
+        "proficient": 0,
+        "min": 3,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 7
+      },
+      "wis": {
+        "value": 10,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "cha": {
+        "value": 7,
+        "proficient": 0,
+        "min": 3,
+        "mod": -2,
+        "save": -2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 14,
+        "calc": "natural",
+        "formula": "",
+        "min": 9
+      },
+      "hp": {
+        "value": 85,
+        "min": 0,
+        "max": 85,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "9d12 + 27"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": -1,
+        "total": -1,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 50,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "prof": 3,
+      "spelldc": 10,
+      "spellLevel": 0,
+      "encumbrance": {
+        "value": 0,
+        "max": 1260,
+        "pct": 0,
+        "encumbered": false
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
+        "public": ""
+      },
+      "alignment": "Unaligned",
+      "race": null,
+      "type": {
+        "value": "beast",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Swamp",
+      "cr": 5,
+      "spellLevel": 0,
+      "xp": {
+        "value": 1800
+      },
+      "source": "MM pg. 324",
+      "class": {}
+    },
+    "traits": {
+      "size": "huge",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": ""
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": 5,
+        "bonus": 0,
+        "passive": 15,
+        "prof": 0,
+        "total": 5
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "ste": {
+        "value": 2,
+        "ability": "dex",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 15,
+        "prof": 6,
+        "total": 5
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Giant Crocodile",
+    "displayName": 20,
+    "actorLink": false,
+    "tint": null,
+    "width": 3,
+    "height": 3,
+    "scale": 1.5,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightColor": null,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "systems/dnd5e/tokens/beast/GiantCrocodile.webp",
+    "actorId": "3YwmvDupMwycWNCO",
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "Mgvz3Hm49kujtR0M",
+      "name": "Hold Breath",
+      "type": "feat",
+      "img": "icons/magic/water/pseudopod-swirl-blue.webp",
+      "data": {
+        "description": {
+          "value": "<p>The crocodile can hold its breath for <strong>30 minutes</strong>.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100001,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "YSeYSzU3P0FooGIw",
+      "name": "Multiattack",
+      "type": "feat",
+      "img": "icons/skills/melee/blade-tips-triple-steel.webp",
+      "data": {
+        "description": {
+          "value": "<p>The crocodile makes two attacks: one with its bite and one with its tail.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200001,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "u7eurp95tuW3tYGl",
+      "name": "Bite",
+      "type": "weapon",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>21 (3d10 + 5) <em>piercing damage</em></strong>.</p>\n<p>The target is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the crocodile can't bite another target.</p>\n</section>\n<p>The Giant Crocodile attacks with its Bite. If successful, the target is grappled. Until this grapple ends, the target is restrained, and the crocodile can't bite another target.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": null,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "3d10 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "natural",
+        "properties": {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100001,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "VkCVMF2SvsuYWWYg",
+      "name": "Tail",
+      "type": "weapon",
+      "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>10 ft.,</strong> one target <strong>not grappled by the crocodile</strong>. Hit: <strong>14 (2d8 + 5) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 16 Strength</strong> saving throw or be knocked prone.</p>\n</section>\n<p>The Giant Crocodile attacks with its Tail. If the target is a creature, it must make a <strong>Strength</strong> saving throw.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": null,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 10,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "2d8 + @mod",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "str",
+          "dc": 16,
+          "scaling": "flat"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "natural",
+        "properties": {
+          "rch": true,
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100001,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": "kdTgTyvlimxTW5xZ",
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

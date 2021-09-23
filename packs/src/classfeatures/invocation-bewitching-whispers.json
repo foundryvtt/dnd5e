@@ -1,0 +1,66 @@
+{
+  "_id": "KygHql3cTj4IRrvZ",
+  "name": "Invocation: Bewitching Whispers",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>You can cast @Compendium[dnd5e.spells.P6f1PPKPd9BCb742]{Compulsion} once using a warlock spell slot. You can't do so again until you finish a long rest.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 110",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 1,
+      "units": "minute"
+    },
+    "target": {
+      "value": null,
+      "units": "any",
+      "type": "creature"
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "lr",
+      "type": "lr"
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "value": "",
+      "scaling": "cha"
+    },
+    "requirements": "Warlock 7",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
+  "effects": []
+}

@@ -1,5 +1,6 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
+import Proficiency from "../actor/proficiency.js";
 
 /**
  * Override and extend the basic Item implementation
@@ -263,6 +264,9 @@ export default class Item5e extends Item {
    * Compute item attributes which might depend on prepared actor data.
    */
   prepareFinalAttributes() {
+    // Proficiency
+    this.data.data.prof = new Proficiency(this.actor?.data.data.prof, this.data.data.proficient);
+
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Ability checks
       this.labels.abilityCheck = game.i18n.format("DND5E.AbilityPromptTitle", {
@@ -364,11 +368,14 @@ export default class Item5e extends Item {
     if ( !this.isOwned ) return {rollData, parts};
 
     // Ability score modifier
-    parts.push(`@mod`);
+    parts.push("@mod");
 
     // Add proficiency bonus if an explicit proficiency flag is present or for non-item features
     if ( !["weapon", "consumable"].includes(this.data.type) || itemData.proficient ) {
       parts.push("@prof");
+      if ( this.data.data.prof?.hasProficiency ) {
+        rollData.prof = this.data.data.prof.term;
+      }
     }
 
     // Actor-level global bonus to attack rolls
@@ -393,13 +400,42 @@ export default class Item5e extends Item {
 
     // Condense the resulting attack bonus formula into a simplified label
     let toHitLabel = simplifyRollFormula(parts.join('+'), rollData).trim();
-    if (toHitLabel.charAt(0) !== '-') {
+    if ( !/^[+-]/.test(toHitLabel) ) {
       toHitLabel = '+ ' + toHitLabel
     }
     this.labels.toHit = toHitLabel;
 
     // Update labels and return the prepared roll data
     return {rollData, parts};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve an item's critical hit threshold. Uses the smallest value from among the
+   * following sources:
+   * - item entity
+   * - item entity's actor (if it has one)
+   * - the constant '20'
+   *
+   * @returns {number} the minimum value that must be rolled to be considered a critical hit.
+   */
+  getCriticalThreshold() {
+    const itemData = this.data.data;
+    const actorFlags = this.actor.data.flags.dnd5e || {};
+    if ( !this.hasAttack || !itemData ) return;
+
+    // Get the actor's critical threshold
+    let actorThreshold = null;
+
+    if ( this.data.type === "weapon" ) {
+      actorThreshold = actorFlags.weaponCriticalThreshold;
+    } else if ( this.data.type === "spell" ) {
+      actorThreshold = actorFlags.spellCriticalThreshold;
+    }
+
+    // Return the lowest of the the item and actor thresholds
+    return Math.min(itemData.critical?.threshold ?? 20, actorThreshold ?? 20);
   }
 
   /* -------------------------------------------- */
@@ -829,7 +865,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for tool type items
+   * Prepare chat card data for loot type items
    * @private
    */
   _lootChatData(data, labels, props) {
@@ -925,12 +961,8 @@ export default class Item5e extends Item {
       }
     };
 
-    // Expanded critical hit thresholds
-    if (( this.data.type === "weapon" ) && flags.weaponCriticalThreshold) {
-      rollConfig.critical = parseInt(flags.weaponCriticalThreshold);
-    } else if (( this.data.type === "spell" ) && flags.spellCriticalThreshold) {
-      rollConfig.critical = parseInt(flags.spellCriticalThreshold);
-    }
+    // Critical hit thresholds
+    rollConfig.critical = this.getCriticalThreshold()
 
     // Elven Accuracy
     if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
@@ -1034,9 +1066,14 @@ export default class Item5e extends Item {
       delete this._ammo;
     }
 
-    // Scale melee critical hit damage
+    // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
     if ( itemData.actionType === "mwak" ) {
       rollConfig.criticalBonusDice = this.actor.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
+    }
+
+    // Factor in extra weapon-specific critical damage
+    if ( itemData.critical?.damage && rollConfig.critical ) {
+      parts.push(itemData.critical.damage);
     }
 
     // Call the roll helper utility
@@ -1173,15 +1210,36 @@ export default class Item5e extends Item {
     if ( this.type !== "tool" ) throw "Wrong item type!";
 
     // Prepare roll data
-    let rollData = this.getRollData();
-    const parts = [`@mod`, "@prof"];
+    const rollData = this.getRollData();
+    const abl = this.data.data.ability;
+    const parts = ["@mod"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
+
+    // Add proficiency
+    if ( this.data.data.prof?.hasProficiency ) {
+      parts.push("@prof");
+      rollData.prof = this.data.data.prof.term;
+    }
+
+    // Add tool bonuses
+    if ( this.data.data.bonus ) {
+      parts.push("@toolBonus");
+      rollData.toolBonus = Roll.replaceFormulaData(this.data.data.bonus, rollData);
+    }
+
+    // Add ability-specific check bonus
+    if ( getProperty(rollData, `abilities.${abl}.bonuses.check`) ) {
+      const checkBonusKey = `${abl}CheckBonus`;
+      parts.push(`@${checkBonusKey}`);
+      const checkBonus = getProperty(rollData, `abilities.${abl}.bonuses.check`)
+      rollData[checkBonusKey] = Roll.replaceFormulaData(checkBonus, rollData);
+    }
 
     // Add global actor bonus
     const bonuses = getProperty(this.actor.data.data, "bonuses.abilities") || {};
     if ( bonuses.check ) {
       parts.push("@checkBonus");
-      rollData.checkBonus = bonuses.check;
+      rollData.checkBonus = Roll.replaceFormulaData(bonuses.check, rollData);
     }
 
     // Compose the roll data
@@ -1228,9 +1286,6 @@ export default class Item5e extends Item {
       rollData["mod"] = ability?.mod || 0;
     }
 
-    // Include a proficiency score
-    const prof = ("proficient" in rollData.item) ? (rollData.item.proficient || 0) : 1;
-    rollData["prof"] = Math.floor(prof * (rollData.attributes.prof || 0));
     return rollData;
   }
 

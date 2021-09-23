@@ -1,0 +1,592 @@
+{
+  "_id": "D5rwVIxmfFrdyyxT",
+  "name": "Poisonous Snake",
+  "type": "npc",
+  "img": "systems/dnd5e/tokens/beast/PoisonousSnake.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 2,
+        "proficient": 0,
+        "min": 3,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 6
+      },
+      "dex": {
+        "value": 16,
+        "proficient": 0,
+        "min": 3,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "con": {
+        "value": 11,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "int": {
+        "value": 1,
+        "proficient": 0,
+        "min": 3,
+        "mod": -5,
+        "save": -5,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 5
+      },
+      "wis": {
+        "value": 10,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "cha": {
+        "value": 3,
+        "proficient": 0,
+        "min": 3,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 6
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 13,
+        "calc": "natural",
+        "formula": "",
+        "min": 13
+      },
+      "hp": {
+        "value": 2,
+        "min": 0,
+        "max": 2,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "1d4"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 3,
+        "total": 3,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 30,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 10,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "prof": 2,
+      "spelldc": 10,
+      "spellLevel": 0,
+      "encumbrance": {
+        "value": 0,
+        "max": 15,
+        "pct": 0,
+        "encumbered": false
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Snakes rank among the most plentiful and diverse reptiles to slither across our planet's surface. Resembling nothing more than a scaly worm at first look, snakes are actually highly developed predators who slither across the ground in order to stealthily hunt their prey of smaller reptiles, rodents, and birds. Though there are many species of snake, we will only discuss the poisonous varieties within this article. Poisonous snakes bear a marked identifier separating them from their nonpoisonous brethren: the shape of their pupils. While snakes lacking venom glands have rounded pupils, those snakes with a venomous bite have slitted pupils much like those of a common domestic cat. The devious snake, however, has so much more beneath its scaly surface.</p>\n<p><strong>Don't Tread on Me.</strong> Ever camouflaged both by their similarities to roots, sticks, or branches as well as the marvelous patterns of black, browns, greens, and tans speckling their hides, snakes are masters of blending into their surroundings. Even perched on a rock to warm their bodies in the heat of the sun, snakes can certainly be missed by just a passing glance. While the creature's eyesight is relatively poor, snakes have adapted an amazing ability to sense the world around them. Snakes \"smell\" with their tongues! Yes, by flicking their tongues out of their mouths with a fascinating flourish, these reptiles are able to smell prey or predators in their environment by collecting the miniscule scents on their tongues. Within the snake's mouth lies its most deadly asset in the form of two, hollow fangs. Snakes prefer to strike from the shadows, allowing their quiet method of travel to get them close enough to their prey to avoid a fight. The creature then lashes out in the blink of an eye, catching the unwary prey in their jaws while injecting them with a controlled dose of highly toxic venom through their hollow fangs. Then it's only a matter of moments until the poor creature is left dead by the snake's potent toxins. While the majority of snake species are not deadly to humanoids, caution is advised for those not well versed in identifying reptiles. Antidote should always be carried in areas known to house populations of poisonous snakes, just in case.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "public": ""
+      },
+      "alignment": "Unaligned",
+      "race": null,
+      "type": {
+        "value": "beast",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Grassland",
+      "cr": 0.125,
+      "spellLevel": 0,
+      "xp": {
+        "value": 25
+      },
+      "source": "MM pg. 334",
+      "class": {}
+    },
+    "traits": {
+      "size": "tiny",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": ""
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 3,
+        "bonus": 0,
+        "passive": 13,
+        "prof": 0,
+        "total": 3
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 3,
+        "bonus": 0,
+        "passive": 13,
+        "prof": 0,
+        "total": 3
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 3,
+        "bonus": 0,
+        "passive": 13,
+        "prof": 0,
+        "total": 3
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Poisonous Snake",
+    "displayName": 20,
+    "actorLink": false,
+    "tint": null,
+    "width": 0.5,
+    "height": 0.5,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 10,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "systems/dnd5e/tokens/beast/PoisonousSnake.webp",
+    "actorId": "D5rwVIxmfFrdyyxT",
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "obYv0JJqJiMTsoIF",
+      "name": "Bite",
+      "type": "weapon",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must make a  <strong>DC 10 Constitution</strong> saving throw, taking <strong>5 (2d4) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The Poisonous Snake attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "dex",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "piercing"
+            ]
+          ],
+          "versatile": "2d4"
+        },
+        "formula": "",
+        "save": {
+          "ability": "con",
+          "dc": 10,
+          "scaling": "flat"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "natural",
+        "properties": {
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": "B3XQZKLaaIqhaEFM",
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

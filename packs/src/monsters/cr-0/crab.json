@@ -1,0 +1,667 @@
+{
+  "_id": "8RgUhb31VvjUNZU1",
+  "name": "Crab",
+  "type": "npc",
+  "img": "systems/dnd5e/tokens/beast/CrabOrange.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 2,
+        "proficient": 0,
+        "min": 3,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 6
+      },
+      "dex": {
+        "value": 11,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "con": {
+        "value": 10,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "int": {
+        "value": 1,
+        "proficient": 0,
+        "min": 3,
+        "mod": -5,
+        "save": -5,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 5
+      },
+      "wis": {
+        "value": 8,
+        "proficient": 0,
+        "min": 3,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      },
+      "cha": {
+        "value": 2,
+        "proficient": 0,
+        "min": 3,
+        "mod": -4,
+        "save": -4,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 6
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 11,
+        "calc": "natural",
+        "formula": "",
+        "min": 10
+      },
+      "hp": {
+        "value": 2,
+        "min": 0,
+        "max": 2,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "1d4"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 0,
+        "total": 0,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 20,
+        "walk": 20,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 30,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "prof": 2,
+      "spelldc": 10,
+      "spellLevel": 0,
+      "encumbrance": {
+        "value": 0,
+        "max": 15,
+        "pct": 0,
+        "encumbered": false
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "<blockquote>\n<p>I once saw a crab so big it had claws what could cut a grown Goliath's hand clean off and wore a soldier's helmet as a shell! I swear it's true!<br /><em>- Unknown Disorderly Patron at the Brass Buck Tavern.</em></p>\n</blockquote>\n<p>What more could be said about the humble crab than is not already common knowledge to those who live near or frequent the coasts of the continent. Crabs are uniquely robust little creatures often no larger than the palm of an adult human's hand, with eight segmented legs protruding from either side of its scallop-shaped carapace. This hardened chitin carapace is topped with two black eye stalks (not unlike those of a snail) through which the beast views our coastlines and oceans. It has been observed that some species of crab lack an armored shell and prefer to squat in the discarded shells of conchs. This gives the crab a rather clever and sturdy mobile home. Adorning the crabs ninth and tenth appendages near its tiny mouth are two massive claws, resembling those of a scorpion, with dull serrations marking the inner edge of each. The crab primarily utilizes these claws in its search for food, cracking open the shells of other tiny aquatic beasts or snipping off tiny pieces of undersea plant life to dine on.</p>\n<p>While perhaps not the most dangerous companion a summoner could wish for, the crab's ability to breath both in the water and upon land makes the crustacean an ally brimming with utility. I advise caution, however, when first looking through your crab familiar's eyes, as the sideways scuttling by which the crab moves has proven to cause vomiting in some weak stomached summoners.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "public": ""
+      },
+      "alignment": "Unaligned",
+      "race": null,
+      "type": {
+        "value": "beast",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Coastal",
+      "cr": "0",
+      "spellLevel": 0,
+      "xp": {
+        "value": 10
+      },
+      "source": "MM pg. 320",
+      "class": {}
+    },
+    "traits": {
+      "size": "tiny",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": ""
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -4,
+        "bonus": 0,
+        "passive": 6,
+        "prof": 0,
+        "total": -4
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": -5,
+        "bonus": 0,
+        "passive": 5,
+        "prof": 0,
+        "total": -5
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "ste": {
+        "value": 1,
+        "ability": "dex",
+        "mod": 0,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Crab",
+    "displayName": 20,
+    "actorLink": false,
+    "tint": null,
+    "width": 0.5,
+    "height": 0.5,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 30,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": 0,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "systems/dnd5e/tokens/beast/CrabOrange.webp",
+    "actorId": "8RgUhb31VvjUNZU1",
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "gvfgesIscW0VALbY",
+      "name": "Claw",
+      "type": "weapon",
+      "img": "icons/skills/melee/strike-slashes-red.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+0 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>bludgeoning damage</em>.</strong></p></section>\n<p>The Crab attacks with its Claw.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": null,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "natural",
+        "properties": {
+          "value": "",
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 375000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "ciz8wAZjqxPnu5Pe",
+      "name": "Amphibious",
+      "type": "feat",
+      "img": "icons/environment/creatures/frog-spotted-green.webp",
+      "data": {
+        "description": {
+          "value": "<p>The crab can breathe air and water.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 275000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": "ZSWBRlk2vsD2qKZC",
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

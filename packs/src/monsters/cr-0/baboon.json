@@ -1,0 +1,667 @@
+{
+  "_id": "JW8bXggOMBx1S6tF",
+  "name": "Baboon",
+  "type": "npc",
+  "img": "systems/dnd5e/tokens/beast/Baboon.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 8,
+        "proficient": 0,
+        "min": 3,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      },
+      "dex": {
+        "value": 14,
+        "proficient": 0,
+        "min": 3,
+        "mod": 2,
+        "save": 2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "con": {
+        "value": 11,
+        "proficient": 0,
+        "min": 3,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "int": {
+        "value": 4,
+        "proficient": 0,
+        "min": 3,
+        "mod": -3,
+        "save": -3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 7
+      },
+      "wis": {
+        "value": 12,
+        "proficient": 0,
+        "min": 3,
+        "mod": 1,
+        "save": 1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "cha": {
+        "value": 6,
+        "proficient": 0,
+        "min": 3,
+        "mod": -2,
+        "save": -2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 8
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 12,
+        "calc": "natural",
+        "formula": "",
+        "min": 12
+      },
+      "hp": {
+        "value": 3,
+        "min": 0,
+        "max": 3,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "1d6"
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 2,
+        "total": 2,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 30,
+        "fly": 0,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "",
+      "prof": 2,
+      "spelldc": 10,
+      "spellLevel": 0,
+      "encumbrance": {
+        "value": 0,
+        "max": 120,
+        "pct": 0,
+        "encumbered": false
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Baboons inhabit grassy plains and sparsely covered woodlands, moving always in small packs called troops. Primarily land-bound mammals, a baboon will use its powerful upper body to scamper up into a tree with alarming speed. Do not be misled by the size of this creature; a single woodland baboon can easily prove more vicious than an entire pack of hungry wolves. At first glance a baboon may appear an easy target for unwary adventurers as they are only three to four feet in length, weighing up to forty pounds per recent recordings. No larger than a healthy human child. This, however, is merely deception as the forest monkeys can easily overpower a group of unprepared travelers. Hidden within their dog-like muzzles are deadly sharp canines and behind their eyes is a shockingly intelligent mind.</p>\n<p><strong>Tooth Troop.</strong> Baboons are at their strongest when surrounded by their troop where they employ simplistic pack tactics to take down their foes. The monkeys have been observed skulking through tall grasses to set an ambush for unsuspecting prey or banding together to single out and mercilessly maul specific targets before moving to the next. Troops are governed by a single alpha who acts as the primary guardian of their fellows. Beneath the alpha, the troop works collaboratively, sharing food and resources between each other and engaging in communal grooming sessions to strengthen their bonds. Baboon young are raised in small family groups, being instructed by multiple adults at a time. A truly fascinating community and unique to our animal kingdom, baboons should be given a wide berth and travelers should cautiously handle an unexpected meeting by a local troop should your paths cross.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "public": ""
+      },
+      "alignment": "Unaligned",
+      "race": null,
+      "type": {
+        "value": "beast",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "Forest",
+      "cr": "0",
+      "spellLevel": 0,
+      "xp": {
+        "value": 10
+      },
+      "source": "MM pg. 318",
+      "class": {}
+    },
+    "traits": {
+      "size": "sm",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": ""
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": -3,
+        "bonus": 0,
+        "passive": 7,
+        "prof": 0,
+        "total": -3
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": -1,
+        "bonus": 0,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": -3,
+        "bonus": 0,
+        "passive": 7,
+        "prof": 0,
+        "total": -3
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": -3,
+        "bonus": 0,
+        "passive": 7,
+        "prof": 0,
+        "total": -3
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": -3,
+        "bonus": 0,
+        "passive": 7,
+        "prof": 0,
+        "total": -3
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": -2,
+        "bonus": 0,
+        "passive": 8,
+        "prof": 0,
+        "total": -2
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": -3,
+        "bonus": 0,
+        "passive": 7,
+        "prof": 0,
+        "total": -3
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 2,
+        "bonus": 0,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 1,
+        "bonus": 0,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Baboon",
+    "displayName": 20,
+    "actorLink": false,
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 0.8,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 0,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "systems/dnd5e/tokens/beast/Baboon.webp",
+    "actorId": "JW8bXggOMBx1S6tF",
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "yb6o6KfKlg9bGhqA",
+      "name": "Pack Tactics",
+      "type": "feat",
+      "img": "icons/creatures/abilities/paw-print-orange.webp",
+      "data": {
+        "description": {
+          "value": "<p>The baboon has<strong> advantage </strong>on an attack roll against a creature if at least one of the baboon's allies is within <strong>5 ft.</strong> of the creature and the ally isn't incapacitated.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "Baboon",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "EXVZptAEHLscbODF",
+      "name": "Bite",
+      "type": "weapon",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+1 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: 1 (1d4 - 1) <em>piercing damage</em>.</p></section>\n<p>The Baboon attacks with its Bite.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": null,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": "inst"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d4 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "natural",
+        "properties": {
+          "value": "",
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": "NBkyFFhtTwdmFhsp",
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

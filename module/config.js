@@ -288,7 +288,7 @@ DND5E.actorSizes = {
  * @enum {number}
  */
 DND5E.tokenSizes = {
-  tiny: 1,
+  tiny: 0.5,
   sm: 1,
   med: 1,
   lg: 2,
@@ -301,6 +301,8 @@ DND5E.tokenSizes = {
  * @enum {number}
  */
 DND5E.tokenHPColors = {
+  damage: 0xFF0000,
+  healing: 0x00FF00,
   temp: 0x66CCFF,
   tempmax: 0x440066,
   negmax: 0x550000

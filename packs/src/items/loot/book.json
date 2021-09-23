@@ -1,0 +1,34 @@
+{
+  "_id": "RMi9efrW9ouHVLI2",
+  "name": "Book",
+  "type": "loot",
+  "img": "icons/sundries/books/book-worn-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p>A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented using text or pictures. A book of spells is a spellbook.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 151",
+    "quantity": 1,
+    "weight": 5,
+    "price": 25,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "common",
+    "identified": true,
+    "damage": {
+      "parts": []
+    },
+    "details": {
+      "description": "<p>A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented using text or pictures. A book of spells is a @Compendium[dnd5e.items.LBajgahniRJbAgDr]{Spellbook}.</p>"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4000000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

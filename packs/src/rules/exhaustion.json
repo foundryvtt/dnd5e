@@ -1,0 +1,10 @@
+{
+  "_id": "apBZudO4UA1wj7aC",
+  "name": "Exhaustion",
+  "permission": {
+    "default": 0
+  },
+  "folder": "",
+  "flags": {},
+  "content": "<p>Some special abilities and environmental hazards, such as starvation and the long-term effects of freezing or scorching temperatures, can lead to a special condition called exhaustion. Exhaustion is measured in six levels. An effect can give a creature one or more levels of exhaustion, as specified in the effect&rsquo;s description.</p>\n<table border=\"0\">\n<thead>\n<tr>\n<td>Level</td>\n<td>Effect</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Disadvantage on ability checks</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Speed halved</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Disadvantage on attack rolls and saving throws</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Hit point maximum halved</td>\n</tr>\n<tr>\n<td>5</td>\n<td>Speed reduced to 0</td>\n</tr>\n<tr>\n<td>6</td>\n<td>Death</td>\n</tr>\n</tbody>\n</table>\n<p>If an already exhausted creature suffers another effect that causes exhaustion, its current level of exhaustion increases by the amount specified in the effect&rsquo;s description.</p>\n<p>A creature suffers the effect of its current level of exhaustion as well as all lower levels. For example, a creature suffering level 2 exhaustion has its speed halved and has disadvantage on ability checks.</p>\n<p>An effect that removes exhaustion reduces its level as specified in the effect&rsquo;s description, with all exhaustion effects ending if a creature&rsquo;s exhaustion level is reduced below 1.</p>\n<p>Finishing a long rest reduces a creature&rsquo;s exhaustion level by 1, provided that the creature has also ingested some food and drink.</p>"
+}

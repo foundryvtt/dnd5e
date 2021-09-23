@@ -1,0 +1,72 @@
+{
+  "_id": "10b6z2W1txNkrGP7",
+  "name": "Ki",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Starting at 2nd level, your training allows you to harness the mystic energy of ki. Your access to this energy is represented by a number of ki points. Your monk level equals the number of ki points you have, so a 2nd level monk has 2 ki points, a 16th level monk has 16.</p><p>You can spend these points to fuel various ki features. You start knowing three such features: @Compendium[dnd5e.classfeatures.5MwNlVZK7m6VolOH]{Ki: Flurry of Blows}, @Compendium[dnd5e.classfeatures.TDglPcxIVEzvVSgK]{Ki: Patient Defense}, and @Compendium[dnd5e.classfeatures.yrSFIGTaQOH2PFRI]{Ki: Step of the Wind}. You learn more ki features as you gain levels in this class.</p><p>When you spend a ki point, it is unavailable until you finish a short or long rest, at the end of which you draw all of your expended ki back into yourself. You must spend at least 30 minutes of the rest meditating to regain your ki points.</p><p>Some of your ki features require your target to make a saving throw to resist the feature's effects. The saving throw DC is calculated as follows:</p><p><em><strong>Ki save DC</strong> = 8 + your proficiency bonus + your Wisdom modifier</em></p><p><em>**Foundry note: </em><em>Use this to track all the various uses of ki for the monk. </em><em>Note the limited uses is set to the base default of 2 per short or long rest. Please manually adjust as required.</em></p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 78",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 2,
+      "max": "@classes.monk.levels",
+      "per": "sr",
+      "type": "sr"
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "Monk 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    }
+  },
+  "sort": 100001,
+  "flags": {},
+  "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
+  "effects": []
+}

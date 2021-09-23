@@ -1,0 +1,65 @@
+{
+  "_id": "5MwNlVZK7m6VolOH",
+  "name": "Ki: Flurry of Blows",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Immediately after you take the Attack action on your turn, you can spend 1 ki point to make two unarmed strikes as a bonus action.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 78",
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": "Comes immediately after taking the Attack action."
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": 5,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": "",
+      "type": ""
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "Monk 2",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
+  "effects": []
+}

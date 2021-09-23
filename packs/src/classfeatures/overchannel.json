@@ -1,0 +1,70 @@
+{
+  "_id": "VUtSLeCzFubGXmGx",
+  "name": "Overchannel",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Starting at 14th level, you can increase the power of your simpler spells. When you cast a wizard spell of 1st through 5th level that deals damage, you can deal maximum damage with that spell.</p><p>The first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity.</p><p><em>**Foundry note: Note the limited use is to track the first, safe instance of Overchanneling. The damage formula is set to the base default of 2d12. The Versatile roll is set to 1d12 to add any additional damage.</em></p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 118",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": null,
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "lr",
+      "type": "lr"
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [
+        [
+          "2d12",
+          "necrotic"
+        ]
+      ],
+      "versatile": "1d12"
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "School of Evocation 14",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/acid/projectile-faceted-glob.webp",
+  "effects": []
+}
