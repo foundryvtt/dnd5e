@@ -87,15 +87,10 @@ function _simplifyRedundantOperatorTerms(terms) {
     // If the set only contains a single "+" operator term, return the accumulated terms.
     if ( (operators.size === 1) && (operators.has("+")) ) return acc;
 
-    // If the set contains a single term and it is a "-" operator, remove the
-    // previous term from the accumulated terms and replace it with a "+" operator.
-    else if ( (operators.size === 1) && (operators.has("-")) ) {
-      acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
-
-    // If the set contains both a "+" and "-" operator, remove the previous term from
-    // the accumulated terms and insert a subtraction operator in its place.
-    } else if (operators.has("+") && operators.has("-")) {
-      acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+    // If the set contains a "-" operator but no "*" or "/", remove the previous term
+    // from the accumulated terms and replace it with a "+" or "-" operator as appropriate.
+    else if (!["*", "/"].includes(prior.operator) && operators.has("-")) {
+      acc.splice(-1, 1, new OperatorTerm({ operator: operators.size === 1 ? "+" : "-" }));
 
     // Do not add redundant "+" operators that follow a "*" or "/" operator.
     } else if (["*", "/"].includes(prior.operator) && operators.has("+")) return acc;
