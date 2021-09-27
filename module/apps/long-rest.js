@@ -58,7 +58,7 @@ export default class LongRestDialog extends Dialog {
             callback: reject
           }
         },
-        default: 'rest',
+        default: "rest",
         close: reject
       });
       dlg.render(true);

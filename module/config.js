@@ -1,4 +1,4 @@
-import {ClassFeatures} from "./classFeatures.js"
+import {ClassFeatures} from "./classFeatures.js";
 
 // Namespace Configuration Values
 export const DND5E = {};
@@ -145,7 +145,7 @@ DND5E.weaponIds = {
   sling: "3gynWO9sN4OLGMWD",
   trident: "F65ANO66ckP8FDMa",
   warpick: "2YdfjN1PIIrSHZii",
-  warhammer:  "F0Df164Xv1gWcYt0",
+  warhammer: "F0Df164Xv1gWcYt0",
   whip: "QKTyxoO0YDnAsbYe"
 };
 
@@ -1141,7 +1141,7 @@ DND5E.characterFlags = {
   "observantFeat": {
     name: "DND5E.FlagsObservant",
     hint: "DND5E.FlagsObservantHint",
-    skills: ["prc","inv"],
+    skills: ["prc", "inv"],
     section: "DND5E.Feats",
     type: Boolean
   },
@@ -1160,7 +1160,7 @@ DND5E.characterFlags = {
   "remarkableAthlete": {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
-    abilities: ["str","dex","con"],
+    abilities: ["str", "dex", "con"],
     section: "DND5E.Feats",
     type: Boolean
   },

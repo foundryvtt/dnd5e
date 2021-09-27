@@ -47,7 +47,7 @@ export default class Proficiency {
     if ( (this._baseProficiency === 0) || (this.multiplier === 0) ) return "0";
     const roundTerm = (this.rounding === "down") ? "floor" : "ceil";
     if ( this.multiplier === 0.5 ) {
-     return `${roundTerm}(1d${this._baseProficiency * 2} / 2)`;
+      return `${roundTerm}(1d${this._baseProficiency * 2} / 2)`;
     } else {
       return `${this.multiplier}d${this._baseProficiency * 2}`;
     }

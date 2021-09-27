@@ -1,5 +1,4 @@
 import ActorSheet5e from "./base.js";
-import Actor5e from "../entity.js";
 
 /**
  * An Actor sheet for player character type actors.
@@ -11,8 +10,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * Define default rendering options for the NPC sheet.
    * @returns {object}
    */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "character"],
       width: 720,
       height: 680
@@ -47,8 +46,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
     sheetData["classLabels"] = this.actor.itemTypes.class.map(c => c.name).join(", ");
     sheetData["multiclassLabels"] = this.actor.itemTypes.class.map(c => {
-      return [c.data.data.subclass, c.name, c.data.data.levels].filterJoin(' ')
-    }).join(', ');
+      return [c.data.data.subclass, c.name, c.data.data.levels].filterJoin(" ");
+    }).join(", ");
 
     // Weight unit
     sheetData["weightUnit"] = game.settings.get("dnd5e", "metricWeightUnits")
@@ -101,7 +100,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-      item.hasTarget = !!item.data.target && !(["none",""].includes(item.data.target.type));
+      item.hasTarget = !!item.data.target && !(["none", ""].includes(item.data.target.type));
 
       // Item toggle state
       this._prepareItemToggleState(item);
@@ -166,7 +165,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   _prepareItemToggleState(item) {
     if (item.type === "spell") {
       const isAlways = getProperty(item.data, "preparation.mode") === "always";
-      const isPrepared =  getProperty(item.data, "preparation.prepared");
+      const isPrepared = getProperty(item.data, "preparation.prepared");
       item.toggleClass = isPrepared ? "active" : "";
       if ( isAlways ) item.toggleClass = "fixed";
       if ( isAlways ) item.toggleTitle = CONFIG.DND5E.spellPreparationModes.always;
@@ -188,16 +187,16 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * Activate event listeners using the prepared sheet HTML.
    * @param {jQuery} html   The prepared HTML object ready to be rendered into the DOM.
    */
-	activateListeners(html) {
+  activateListeners(html) {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
 
     // Item State Toggling
-    html.find('.item-toggle').click(this._onToggleItem.bind(this));
+    html.find(".item-toggle").click(this._onToggleItem.bind(this));
 
     // Short and Long Rest
-    html.find('.short-rest').click(this._onShortRest.bind(this));
-    html.find('.long-rest').click(this._onLongRest.bind(this));
+    html.find(".short-rest").click(this._onShortRest.bind(this));
+    html.find(".long-rest").click(this._onLongRest.bind(this));
 
     // Rollable sheet actions
     html.find(".rollable[data-action]").click(this._onSheetAction.bind(this));
@@ -214,7 +213,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   _onSheetAction(event) {
     event.preventDefault();
     const button = event.currentTarget;
-    switch( button.dataset.action ) {
+    switch ( button.dataset.action ) {
       case "convertCurrency":
         return Dialog.confirm({
           title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,

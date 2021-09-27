@@ -1,4 +1,3 @@
-import Actor5e from "../entity.js";
 import ActorSheet5e from "../sheets/base.js";
 
 /**
@@ -8,8 +7,8 @@ import ActorSheet5e from "../sheets/base.js";
 export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "npc"],
       width: 600,
       height: 680
@@ -32,8 +31,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Categorize Items as Features and Spells
     const features = {
-      weapons: { label: game.i18n.localize("DND5E.AttackPl"), items: [] , hasActions: true, dataset: {type: "weapon", "weapon-type": "natural"} },
-      actions: { label: game.i18n.localize("DND5E.ActionPl"), items: [] , hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
+      weapons: { label: game.i18n.localize("DND5E.AttackPl"), items: [], hasActions: true, dataset: {type: "weapon", "weapon-type": "natural"} },
+      actions: { label: game.i18n.localize("DND5E.ActionPl"), items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
       passive: { label: game.i18n.localize("DND5E.Features"), items: [], dataset: {type: "feat"} },
       equipment: { label: game.i18n.localize("DND5E.Inventory"), items: [], dataset: {type: "loot"}}
     };
@@ -45,7 +44,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-      item.hasTarget = !!item.data.target && !(["none",""].includes(item.data.target.type));
+      item.hasTarget = !!item.data.target && !(["none", ""].includes(item.data.target.type));
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
@@ -131,7 +130,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-	activateListeners(html) {
+  activateListeners(html) {
     super.activateListeners(html);
     html.find(".health .rollable").click(this._onRollHPFormula.bind(this));
   }

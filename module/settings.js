@@ -98,18 +98,18 @@ export const registerSystemSettings = function() {
   });
 
   // Allow Polymorphing
-  game.settings.register('dnd5e', 'allowPolymorphing', {
-    name: 'SETTINGS.5eAllowPolymorphingN',
-    hint: 'SETTINGS.5eAllowPolymorphingL',
-    scope: 'world',
+  game.settings.register("dnd5e", "allowPolymorphing", {
+    name: "SETTINGS.5eAllowPolymorphingN",
+    hint: "SETTINGS.5eAllowPolymorphingL",
+    scope: "world",
     config: true,
     default: false,
     type: Boolean
   });
 
   // Polymorph Settings
-  game.settings.register('dnd5e', 'polymorphSettings', {
-    scope: 'client',
+  game.settings.register("dnd5e", "polymorphSettings", {
+    scope: "client",
     default: {
       keepPhysical: false,
       keepMental: false,
