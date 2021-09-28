@@ -7,7 +7,7 @@
  */
 export default class ActorSkillConfig extends DocumentSheet {
 
-  constructor (actor, opts, skillId) {
+  constructor(actor, opts, skillId) {
     super(actor, opts);
     this._skillId = skillId;
   }

@@ -80,7 +80,7 @@ export default class PropertyAttribution extends Application {
         return entry;
       }),
       total: total
-    }
+    };
   }
 
   /* -------------------------------------------- */

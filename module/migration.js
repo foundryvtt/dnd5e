@@ -152,7 +152,7 @@ export const migrateArmorClass = async function(pack) {
 
       // CASE 2: NPC Natural Armor
       else if ( src.type === "npc" ) update["data.attributes.ac.calc"] = "natural";
-    } catch (e) {
+    } catch(e) {
       console.warn(`Failed to migrate armor class for Actor ${actor.name}`, e);
     }
   }
@@ -161,7 +161,7 @@ export const migrateArmorClass = async function(pack) {
   await pack.getDocuments(); // Force a re-prepare of all actors.
   await pack.configure({locked: wasLocked});
   console.log(`Migrated the AC of all Actors from Compendium ${pack.collection}`);
-}
+};
 
 /* -------------------------------------------- */
 /*  Entity Type Migration Helpers               */
@@ -214,12 +214,12 @@ export const migrateActorData = function(actor, migrationData) {
 
 /* -------------------------------------------- */
 
-
 /**
  * Scrub an Actor's system data, removing all keys which are not explicitly defined in the system template
  * @param {object} actorData    The data object for an Actor
  * @returns {object}            The scrubbed Actor data
  */
+// eslint-disable-next-line no-unused-vars -- We might want to still use this in later migrations.
 function cleanActorData(actorData) {
 
   // Scrub system data
@@ -286,7 +286,7 @@ export const migrateSceneData = function(scene, migrationData) {
       const actorData = duplicate(t.actorData);
       actorData.type = token.actor?.type;
       const update = migrateActorData(actorData, migrationData);
-      ['items', 'effects'].forEach(embeddedName => {
+      ["items", "effects"].forEach(embeddedName => {
         if (!update[embeddedName]?.length) return;
         const updates = new Map(update[embeddedName].map(u => [u._id, u]));
         t.actorData[embeddedName].forEach(original => {
@@ -319,7 +319,7 @@ export const getMigrationData = async function() {
   }
 
   return data;
-}
+};
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
@@ -336,7 +336,7 @@ function _migrateActorMovement(actorData, updateData) {
   const ad = actorData.data;
 
   // Work is needed if old data is present
-  const old = actorData.type === 'vehicle' ? ad?.attributes?.speed : ad?.attributes?.speed?.value;
+  const old = actorData.type === "vehicle" ? ad?.attributes?.speed : ad?.attributes?.speed?.value;
   const hasOld = old !== undefined;
   if ( hasOld ) {
 
@@ -350,7 +350,7 @@ function _migrateActorMovement(actorData, updateData) {
     // Remove the old attribute
     updateData["data.attributes.-=speed"] = null;
   }
-  return updateData
+  return updateData;
 }
 
 /* -------------------------------------------- */
@@ -414,10 +414,10 @@ function _migrateActorType(actor, updateData) {
     "subtype": "",
     "swarm": "",
     "custom": ""
-  }
+  };
 
   // Match the existing string
-  const pattern = /^(?:swarm of (?<size>[\w\-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
+  const pattern = /^(?:swarm of (?<size>[\w-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
   const match = original.trim().match(pattern);
   if ( match ) {
 
@@ -645,7 +645,7 @@ export async function purgeFlags(pack) {
       update.items = entity.data.items.map(i => {
         i.flags = cleanFlags(i.flags);
         return i;
-      })
+      });
     }
     await pack.updateEntity(update, {recursive: false});
     console.log(`Purged flags from ${entity.name}`);

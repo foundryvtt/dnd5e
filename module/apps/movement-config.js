@@ -5,8 +5,8 @@
 export default class ActorMovementConfig extends DocumentSheet {
 
   /** @override */
-	static get defaultOptions() {
-	  return foundry.utils.mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/movement-config.html",
       width: 300,

@@ -119,8 +119,8 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClassNPC"
   });
-  Actors.registerSheet('dnd5e', ActorSheet5eVehicle, {
-    types: ['vehicle'],
+  Actors.registerSheet("dnd5e", ActorSheet5eVehicle, {
+    types: ["vehicle"],
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
@@ -256,7 +256,7 @@ Hooks.once("ready", function() {
 
   // Perform the migration
   if ( currentVersion && isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion) ) {
-    const warning = `Your DnD5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`;
+    const warning = "Your DnD5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.";
     ui.notifications.error(warning, {permanent: true});
   }
   migrations.migrateWorld();
@@ -291,9 +291,9 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
-Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
+Hooks.on("getActorDirectoryEntryContext", Actor5e.addDirectoryContextOptions);
 
 // FIXME: This helper is needed for the vehicle sheet. It should probably be refactored.
-Handlebars.registerHelper('getProperty', function (data, property) {
+Handlebars.registerHelper("getProperty", function(data, property) {
   return getProperty(data, property);
 });

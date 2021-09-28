@@ -4,7 +4,7 @@ import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
-import {DND5E} from '../config.js';
+import {DND5E} from "../config.js";
 import Item5e from "../item/entity.js";
 
 /**
@@ -98,8 +98,8 @@ export default class Actor5e extends Actor {
     let originalSaves = null;
     let originalSkills = null;
     if (this.isPolymorphed) {
-      const transformOptions = this.getFlag('dnd5e', 'transformOptions');
-      const original = game.actors?.get(this.getFlag('dnd5e', 'originalActor'));
+      const transformOptions = this.getFlag("dnd5e", "transformOptions");
+      const original = game.actors?.get(this.getFlag("dnd5e", "originalActor"));
       if (original) {
         if (transformOptions.mergeSaves) {
           originalSaves = original.data.data.abilities;
@@ -228,7 +228,7 @@ export default class Actor5e extends Actor {
     let toCreate = [];
     if (prompt) {
       const itemIdsToAdd = await SelectItemsPrompt.create(items, {
-        hint: game.i18n.localize('DND5E.AddEmbeddedItemPromptHint')
+        hint: game.i18n.localize("DND5E.AddEmbeddedItemPromptHint")
       });
       for (let item of items) {
         if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
@@ -253,7 +253,7 @@ export default class Actor5e extends Actor {
    * @param {number} [options.level]         New class level if it has been changed.
    * @returns {Promise<Item5e[]>}            Any new items that should be added to the actor.
    */
-   async getClassFeatures({className, subclassName, level}={}) {
+  async getClassFeatures({className, subclassName, level}={}) {
     const existing = new Set(this.items.map(i => i.name));
     const features = await Actor5e.loadClassFeatures({className, subclassName, level});
     return features.filter(f => !existing.has(f.name)) || [];
@@ -390,7 +390,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
-    if (actorData.type === 'vehicle') return;
+    if (actorData.type === "vehicle") return;
 
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
@@ -399,7 +399,7 @@ export default class Actor5e extends Actor {
     const feats = DND5E.characterFlags;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
-    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) :  0;
+    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) : 0;
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
       const baseBonus = Number.isNumeric(skl.bonuses?.check) ? parseInt(skl.bonuses.check) : 0;
@@ -459,10 +459,10 @@ export default class Actor5e extends Actor {
    * @private
    */
   _computeSpellcastingProgression(actorData) {
-    if (actorData.type === 'vehicle') return;
+    if (actorData.type === "vehicle") return;
     const ad = actorData.data;
     const spells = ad.spells;
-    const isNPC = actorData.type === 'npc';
+    const isNPC = actorData.type === "npc";
 
     // Spellcasting DC
     const spellcastingAbility = ad.abilities[ad.attributes.spellcasting];
@@ -492,18 +492,18 @@ export default class Actor5e extends Actor {
         progression.total++;
       }
       switch (prog) {
-        case 'third': progression.slot += Math.floor(levels / 3); break;
-        case 'half': progression.slot += Math.floor(levels / 2); break;
-        case 'full': progression.slot += levels; break;
-        case 'artificer': progression.slot += Math.ceil(levels / 2); break;
-        case 'pact': progression.pact += levels; break;
+        case "third": progression.slot += Math.floor(levels / 3); break;
+        case "half": progression.slot += Math.floor(levels / 2); break;
+        case "full": progression.slot += levels; break;
+        case "artificer": progression.slot += Math.ceil(levels / 2); break;
+        case "pact": progression.pact += levels; break;
       }
     }
 
     // EXCEPTION: single-classed non-full progression rounds up, rather than down
     const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if (!isNPC && isSingleClass && ['half', 'third'].includes(caster.spellcasting.progression) ) {
-      const denom = caster.spellcasting.progression === 'third' ? 3 : 2;
+    if (!isNPC && isSingleClass && ["half", "third"].includes(caster.spellcasting.progression) ) {
+      const denom = caster.spellcasting.progression === "third" ? 3 : 2;
       progression.slot = Math.ceil(caster.levels / denom);
     }
 
@@ -535,7 +535,7 @@ export default class Actor5e extends Actor {
       else spells.pact.max = Math.max(1, Math.min(pl, 2), Math.min(pl - 8, 3), Math.min(pl - 13, 4));
       spells.pact.value = Math.min(spells.pact.value, spells.pact.max);
     } else {
-      spells.pact.max = parseInt(spells.pact.override) || 0
+      spells.pact.max = parseInt(spells.pact.override) || 0;
       spells.pact.level = spells.pact.max > 0 ? 1 : 0;
     }
   }
@@ -616,7 +616,7 @@ export default class Actor5e extends Actor {
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
           ac.base = Roll.safeEval(replaced);
-        } catch (err) {
+        } catch(err) {
           ac.warnings.push("DND5E.WarnBadACFormula");
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
           ac.base = Roll.safeEval(replaced);
@@ -665,7 +665,7 @@ export default class Actor5e extends Actor {
 
       const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
         ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
-        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial
+        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
 
       weight += numCoins / currencyPerWeight;
     }
@@ -686,7 +686,7 @@ export default class Actor5e extends Actor {
 
     const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
       ? CONFIG.DND5E.encumbrance.strMultiplier.metric
-      : CONFIG.DND5E.encumbrance.strMultiplier.imperial
+      : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
 
     const max = (actorData.data.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
@@ -1214,8 +1214,10 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.dialog=true]         Present a dialog window which allows for rolling hit dice as part
    *                                                of the Short Rest and selecting whether a new day has occurred.
    * @param {boolean} [options.chat=true]           Summarize the results of the rest workflow as a chat message.
-   * @param {boolean} [options.autoHD=false]        Automatically spend Hit Dice if you are missing 3 or more hit points.
-   * @param {boolean} [options.autoHDThreshold=3]   A number of missing hit points which would trigger an automatic HD roll.
+   * @param {boolean} [options.autoHD=false]        Automatically spend Hit Dice if you are missing 3 or more hit
+   *                                                points.
+   * @param {boolean} [options.autoHDThreshold=3]   A number of missing hit points which would trigger an automatic HD
+   *                                                roll.
    * @returns {Promise<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
@@ -1237,7 +1239,8 @@ export default class Actor5e extends Actor {
     else if ( autoHD ) {
       await this.autoSpendHitDice({ threshold: autoHDThreshold });
     }
-    return this._rest(chat, newDay, false, this.data.data.attributes.hd - hd0, this.data.data.attributes.hp.value - hp0);
+    return this._rest(
+      chat, newDay, false, this.data.data.attributes.hd - hd0, this.data.data.attributes.hp.value - hp0);
   }
 
   /* -------------------------------------------- */
@@ -1304,7 +1307,7 @@ export default class Actor5e extends Actor {
       ],
       longRest,
       newDay
-    }
+    };
 
     // Perform updates
     await this.update(result.updateData);
@@ -1340,9 +1343,9 @@ export default class Actor5e extends Actor {
 
     // Summarize the rest duration
     switch (game.settings.get("dnd5e", "restVariant")) {
-      case 'normal': restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`; break;
-      case 'gritty': restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`; break;
-      case 'epic':  restFlavor = `DND5E.${length}RestEpic`; break;
+      case "normal": restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`; break;
+      case "gritty": restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`; break;
+      case "epic": restFlavor = `DND5E.${length}RestEpic`; break;
     }
 
     // Determine the chat message to display
@@ -1452,7 +1455,7 @@ export default class Actor5e extends Actor {
     let updates = {};
     if ( recoverPact ) {
       const pact = this.data.data.spells.pact;
-      updates['data.spells.pact.value'] = pact.override || pact.max;
+      updates["data.spells.pact.value"] = pact.override || pact.max;
     }
 
     if ( recoverSpells ) {
@@ -1621,7 +1624,7 @@ export default class Actor5e extends Actor {
       d.token[k] = source.token[k];
     }
     const vision = keepVision ? o.token : source.token;
-    for ( let k of ['dimSight', 'brightSight', 'dimLight', 'brightLight', 'vision', 'sightAngle'] ) {
+    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
       d.token[k] = vision[k];
     }
     if ( source.token.randomImg ) {
@@ -1659,8 +1662,8 @@ export default class Actor5e extends Actor {
     // Transfer classes for NPCs
     if (!keepClass && d.data.details.cr) {
       d.items.push({
-        type: 'class',
-        name: game.i18n.localize('DND5E.PolymorphTmpClass'),
+        type: "class",
+        name: game.i18n.localize("DND5E.PolymorphTmpClass"),
         data: { levels: d.data.details.cr }
       });
     }
@@ -1685,7 +1688,7 @@ export default class Actor5e extends Actor {
 
     // Update regular Actors by creating a new Actor with the Polymorphed data
     await this.sheet.close();
-    Hooks.callAll('dnd5e.transformActor', this, target, d, {
+    Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
     });
@@ -1734,7 +1737,7 @@ export default class Actor5e extends Actor {
     }
 
     // Obtain a reference to the original actor
-    const original = game.actors.get(this.getFlag('dnd5e', 'originalActor'));
+    const original = game.actors.get(this.getFlag("dnd5e", "originalActor"));
     if ( !original ) return;
 
     // Get the Tokens which represent this actor
@@ -1768,16 +1771,16 @@ export default class Actor5e extends Actor {
    */
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({
-      name: 'DND5E.PolymorphRestoreTransformation',
+      name: "DND5E.PolymorphRestoreTransformation",
       icon: '<i class="fas fa-backward"></i>',
       callback: li => {
-        const actor = game.actors.get(li.data('entityId'));
+        const actor = game.actors.get(li.data("entityId"));
         return actor.revertOriginalForm();
       },
       condition: li => {
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
-        const actor = game.actors.get(li.data('entityId'));
+        const actor = game.actors.get(li.data("entityId"));
         return actor && actor.isPolymorphed;
       }
     });
@@ -1801,7 +1804,7 @@ export default class Actor5e extends Actor {
     }
     let type = localizedType;
     if ( !!typeData.swarm ) {
-      type = game.i18n.format('DND5E.CreatureSwarmPhrase', {
+      type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
         size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm]),
         type: localizedType
       });
@@ -1895,7 +1898,7 @@ export default class Actor5e extends Actor {
    * @deprecated since dnd5e 0.97
    */
   getSpellDC(ability) {
-    console.warn(`The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc`);
+    console.warn("The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc");
     return this.data.data.abilities[ability]?.dc;
   }
 
@@ -1909,7 +1912,7 @@ export default class Actor5e extends Actor {
    * @deprecated since dnd5e 1.2.0
    */
   async useSpell(item, {configureDialog=true}={}) {
-    console.warn(`The Actor5e#useSpell method has been deprecated in favor of Item5e#roll`);
+    console.warn("The Actor5e#useSpell method has been deprecated in favor of Item5e#roll");
     if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
     return item.roll();
   }

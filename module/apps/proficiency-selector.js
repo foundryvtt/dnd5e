@@ -63,7 +63,7 @@ export default class ProficiencySelector extends TraitSelector {
     const ids = CONFIG.DND5E[`${type}Ids`];
     const map = CONFIG.DND5E[`${type}ProficienciesMap`];
     if ( ids !== undefined ) {
-      const typeProperty = (type !== "armor") ? `${type}Type` : `armor.type`;
+      const typeProperty = (type !== "armor") ? `${type}Type` : "armor.type";
       for ( const [key, id] of Object.entries(ids) ) {
         const item = await ProficiencySelector.getBaseItem(id);
         if ( !item ) continue;
@@ -109,10 +109,12 @@ export default class ProficiencySelector extends TraitSelector {
    * in `DND5E.sourcePacks.ITEMS`.
    *
    * @param {string} identifier            Simple ID or compendium name and ID separated by a dot.
-   * @param {object} [options]             
-   * @param {boolean} [options.indexOnly]  If set to true, only the index data will be fetched (will never return Promise).
-   * @param {boolean} [options.fullItem]   If set to true, the full item will be returned as long as `indexOnly` is false.
-   * @returns {Promise<Item5e>|object}      Promise for a `Document` if `indexOnly` is false & `fullItem` is true,
+   * @param {object} [options]
+   * @param {boolean} [options.indexOnly]  If set to true, only the index data will be fetched (will never return
+   *                                       Promise).
+   * @param {boolean} [options.fullItem]   If set to true, the full item will be returned as long as `indexOnly` is
+   *                                       false.
+   * @returns {Promise<Item5e>|object}     Promise for a `Document` if `indexOnly` is false & `fullItem` is true,
    *                                       otherwise else a simple object containing the minimal index data.
    */
   static getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {

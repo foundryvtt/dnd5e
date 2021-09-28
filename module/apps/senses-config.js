@@ -5,8 +5,8 @@
 export default class ActorSensesConfig extends DocumentSheet {
 
   /** @inheritdoc */
-	static get defaultOptions() {
-	  return foundry.utils.mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/senses-config.html",
       width: 300,
@@ -36,7 +36,7 @@ export default class ActorSensesConfig extends DocumentSheet {
       data.senses[name] = {
         label: game.i18n.localize(label),
         value: Number.isNumeric(v) ? v.toNearest(0.1) : 0
-      }
+      };
     }
     return data;
   }
