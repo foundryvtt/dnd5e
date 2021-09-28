@@ -1100,8 +1100,8 @@ export default class Item5e extends Item {
     }
 
     // Factor in extra weapon-specific critical damage
-    if ( itemData.critical?.damage && rollConfig.critical ) {
-      parts.push(itemData.critical.damage);
+    if ( itemData.critical?.damage ) {
+      rollConfig.criticalBonusDamage = itemData.critical.damage;
     }
 
     // Call the roll helper utility
