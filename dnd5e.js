@@ -160,6 +160,8 @@ Hooks.once("setup", function() {
     "spellSchools", "targetTypes", "toolProficiencies", "toolTypes", "vehicleTypes", "weaponProperties"
   ];
   preLocalizeConfig(CONFIG.DND5E, localizeKeys, sortKeys);
+  CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
+  CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
 });
 
 /* -------------------------------------------- */
@@ -230,6 +232,19 @@ function _sortObject(obj, sortKey) {
   if ( sortKey ) sorted = sorted.sort((a, b) => a[1][sortKey].localeCompare(b[1][sortKey]));
   else sorted = sorted.sort((a, b) => a[1].localeCompare(b[1]));
   return Object.fromEntries(sorted);
+}
+
+/* --------------------------------------------- */
+
+/**
+ * Expand a list of attribute paths into an object that can be traversed.
+ * @returns {object}  The expanded object structure.
+ */
+function expandAttributeList(attributes) {
+  return attributes.reduce((obj, attr) => {
+    foundry.utils.setProperty(obj, attr, true);
+    return obj;
+  }, {});
 }
 
 /* -------------------------------------------- */
