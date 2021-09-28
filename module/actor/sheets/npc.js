@@ -3,7 +3,6 @@ import ActorSheet5e from "../sheets/base.js";
 
 /**
  * An Actor sheet for NPC type characters.
- * Extends the base ActorSheet5e class.
  * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eNPC extends ActorSheet5e {
@@ -25,7 +24,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Organize Owned Items for rendering the NPC sheet
+   * Organize Owned Items for rendering the NPC sheet.
+   * @param {object} data  Copy of the actor data being prepared for displayed. *Will be mutated.*
    * @private
    */
   _prepareItems(data) {
@@ -97,7 +97,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /**
    * Format NPC armor information into a localized string.
-   * @return {string}  Formatted armor label.
+   * @returns {string}  Formatted armor label.
    */
   getArmorLabel() {
     const ac = this.actor.data.data.attributes.ac;
@@ -139,8 +139,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling NPC health values using the provided formula
-   * @param {Event} event     The original click event
+   * Handle rolling NPC health values using the provided formula.
+   * @param {Event} event  The original click event.
    * @private
    */
   _onRollHPFormula(event) {

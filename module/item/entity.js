@@ -3,7 +3,7 @@ import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import Proficiency from "../actor/proficiency.js";
 
 /**
- * Override and extend the basic Item implementation
+ * Override and extend the basic Item implementation.
  * @extends {Item}
  */
 export default class Item5e extends Item {
@@ -13,7 +13,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Determine which ability score modifier is used by this item
+   * Which ability score modifier is used by this item.
    * @type {string|null}
    */
   get abilityMod() {
@@ -60,7 +60,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement an attack roll as part of its usage
+   * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
    */
   get hasAttack() {
@@ -70,7 +70,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a damage roll as part of its usage
+   * Does the Item implement a damage roll as part of its usage?
    * @type {boolean}
    */
   get hasDamage() {
@@ -80,7 +80,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a versatile damage roll as part of its usage
+   * Does the Item implement a versatile damage roll as part of its usage?
    * @type {boolean}
    */
   get isVersatile() {
@@ -91,7 +91,7 @@ export default class Item5e extends Item {
 
   /**
    * Does the item provide an amount of healing instead of conventional damage?
-   * @return {boolean}
+   * @type {boolean}
    */
   get isHealing() {
     return (this.data.data.actionType === "heal") && this.data.data.damage.parts.length;
@@ -100,7 +100,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item implement a saving throw as part of its usage
+   * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
    */
   get hasSave() {
@@ -111,7 +111,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item have a target
+   * Does the Item have a target?
    * @type {boolean}
    */
   get hasTarget() {
@@ -122,7 +122,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item have an area of effect target
+   * Does the Item have an area of effect target?
    * @type {boolean}
    */
   get hasAreaTarget() {
@@ -133,7 +133,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * A flag for whether this Item is limited in it's ability to be used by charges or by recharge.
+   * Is this Item limited in its ability to be used by charges or by recharge?
    * @type {boolean}
    */
   get hasLimitedUses() {
@@ -145,7 +145,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Is this item any of the armor subtypes.
+   * Is this item any of the armor subtypes?
    * @type {boolean}
    */
   get isArmor() {
@@ -244,14 +244,16 @@ export default class Item5e extends Item {
       }
     }
 
-    // if this item is owned, we prepareFinalAttributes() at the end of actor init
+    // If this item is owned, we prepareFinalAttributes() at the end of actor init
     if (!this.isOwned) this.prepareFinalAttributes();
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Compute item attributes which might depend on prepared actor data.
+   * Compute item attributes which might depend on prepared actor data. If this item is
+   * embedded this method will be called after the actor's data is prepared. Otherwise it
+   * will be called at the end of `Item5e#prepareDerivedData`.
    */
   prepareFinalAttributes() {
     // Proficiency
@@ -275,11 +277,9 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Populate a label with the compiled and simplified damage formula
-   * based on owned item actor data. This is only used for display
-   * purposes and is not related to Item5e#rollDamage
-   *
-   * @returns {Array} array of objects with `formula` and `damageType`
+   * Populate a label with the compiled and simplified damage formula based on owned item
+   * actor data. This is only used for display purposes and is not related to `Item5e#rollDamage`.
+   * @returns {{damageType: number, formula: string}[]}
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
@@ -289,7 +289,7 @@ export default class Item5e extends Item {
 
     const derivedDamage = itemData.damage?.parts?.map((damagePart) => ({
       formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
-      damageType: damagePart[1],
+      damageType: damagePart[1]
     }));
 
     this.labels.derivedDamage = derivedDamage
@@ -300,7 +300,7 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Update the derived spell DC for an item that requires a saving throw
+   * Update the derived spell DC for an item that requires a saving throw.
    * @returns {number|null}
    */
   getSaveDC() {
@@ -333,7 +333,7 @@ export default class Item5e extends Item {
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
    *
-   * @returns {Object} returns `rollData` and `parts` to be used in the item's Attack roll
+   * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
    */
   getAttackToHit() {
     const itemData = this.data.data;
@@ -403,7 +403,7 @@ export default class Item5e extends Item {
    * - item entity's actor (if it has one)
    * - the constant '20'
    *
-   * @returns {number} the minimum value that must be rolled to be considered a critical hit.
+   * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
    */
   getCriticalThreshold() {
     const itemData = this.data.data;
@@ -426,8 +426,8 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Populates the max uses of an item.
-   * If the item is an owned item and the `max` is not numeric, calculate based on actor data.
+   * Populates the max uses of an item. If the item is an owned item and the `max`
+   * is not numeric, calculate based on actor data.
    */
   prepareMaxUses() {
     const data = this.data.data;
@@ -452,11 +452,12 @@ export default class Item5e extends Item {
 
   /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
-   * @param {boolean} [configureDialog]     Display a configuration dialog for the item roll, if applicable?
-   * @param {string} [rollMode]             The roll display mode with which to display (or not) the card
-   * @param {boolean} [createMessage]       Whether to automatically create a chat message (if true) or simply return
-   *                                        the prepared chat message data (if false).
-   * @return {Promise<ChatMessage|object|void>}
+   * @param {object} [options]
+   * @param {boolean} [options.configureDialog]     Display a configuration dialog for the item roll, if applicable?
+   * @param {string} [options.rollMode]             The roll display mode with which to display (or not) the card
+   * @param {boolean} [options.createMessage]       Whether to automatically create a chat message (if true) or simply return
+   *                                                the prepared chat message data (if false).
+   * @returns {Promise<ChatMessage|object|void>}
    */
   async roll({configureDialog=true, rollMode, createMessage=true}={}) {
     let item = this;
@@ -537,11 +538,12 @@ export default class Item5e extends Item {
   /**
    * Verify that the consumed resources used by an Item are available.
    * Otherwise display an error and return false.
-   * @param {boolean} consumeQuantity     Consume quantity of the item if other consumption modes are not available?
-   * @param {boolean} consumeRecharge     Whether the item consumes the recharge mechanic
-   * @param {boolean} consumeResource     Whether the item consumes a limited resource
-   * @param {string|null} consumeSpellLevel The category of spell slot to consume, or null
-   * @param {boolean} consumeUsage        Whether the item consumes a limited usage
+   * @param {object} options
+   * @param {boolean} options.consumeQuantity     Consume quantity of the item if other consumption modes are not available?
+   * @param {boolean} options.consumeRecharge     Whether the item consumes the recharge mechanic
+   * @param {boolean} options.consumeResource     Whether the item consumes a limited resource
+   * @param {string|null} options.consumeSpellLevel The category of spell slot to consume, or null
+   * @param {boolean} options.consumeUsage        Whether the item consumes a limited usage
    * @returns {object|boolean}            A set of data changes to apply when the item is used, or false
    * @private
    */
@@ -623,7 +625,7 @@ export default class Item5e extends Item {
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object} resourceUpdates    An object of data updates applied to a different resource item (Item)
-   * @return {boolean|void}             Return false to block further progress, or return nothing to continue
+   * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @private
    */
   _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
@@ -700,10 +702,11 @@ export default class Item5e extends Item {
 
   /**
    * Display the chat card for an Item as a Chat Message
-   * @param {object} options          Options which configure the display of the item chat card
-   * @param {string} rollMode         The message visibility mode to apply to the created card
-   * @param {boolean} createMessage   Whether to automatically create a ChatMessage entity (if true), or only return
-   *                                  the prepared message data (if false)
+   * @param {object} [options]          Options which configure the display of the item chat card
+   * @param {string} [options.rollMode]       The message visibility mode to apply to the created card
+   * @param {boolean} [options.createMessage] Whether to automatically create a ChatMessage entity (if true), or only return
+   *                                          the prepared message data (if false)
+   * @returns {ChatMessage|object}  Chat message if `createMessage` is true, otherwise an object containing message data.
    */
   async displayCard({rollMode, createMessage=true}={}) {
 
@@ -753,9 +756,9 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare an object of chat data used to display a card for the Item in the chat log
-   * @param {Object} htmlOptions    Options used by the TextEditor.enrichHTML function
-   * @return {Object}               An object of chat data to render
+   * Prepare an object of chat data used to display a card for the Item in the chat log.
+   * @param {object} htmlOptions    Options used by the TextEditor.enrichHTML function.
+   * @returns {object}              An object of chat data to render.
    */
   getChatData(htmlOptions={}) {
     const data = foundry.utils.deepClone(this.data.data);
@@ -774,7 +777,7 @@ export default class Item5e extends Item {
       if ( data.attunement === CONFIG.DND5E.attunementTypes.REQUIRED ) props.push(game.i18n.localize(CONFIG.DND5E.attunements[CONFIG.DND5E.attunementTypes.REQUIRED]));
       props.push(
         game.i18n.localize(data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-        game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient"),
+        game.i18n.localize(data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient")
       );
     }
 
@@ -796,7 +799,10 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for equipment type items
+   * Prepare chat card data for equipment type items.
+   * @param {object} data     Copy of item data being use to display the chat message.
+   * @param {object} labels   Specially prepared item labels.
+   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
    * @private
    */
   _equipmentChatData(data, labels, props) {
@@ -810,19 +816,25 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for weapon type items
+   * Prepare chat card data for weapon type items.
+   * @param {object} data     Copy of item data being use to display the chat message.
+   * @param {object} labels   Specially prepared item labels.
+   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
    * @private
    */
   _weaponChatData(data, labels, props) {
     props.push(
-      CONFIG.DND5E.weaponTypes[data.weaponType],
+      CONFIG.DND5E.weaponTypes[data.weaponType]
     );
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for consumable type items
+   * Prepare chat card data for consumable type items.
+   * @param {object} data     Copy of item data being use to display the chat message.
+   * @param {object} labels   Specially prepared item labels.
+   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
    * @private
    */
   _consumableChatData(data, labels, props) {
@@ -836,7 +848,10 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for tool type items
+   * Prepare chat card data for tool type items.
+   * @param {object} data     Copy of item data being use to display the chat message.
+   * @param {object} labels   Specially prepared item labels.
+   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
    * @private
    */
   _toolChatData(data, labels, props) {
@@ -849,7 +864,10 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for loot type items
+   * Prepare chat card data for loot type items.
+   * @param {object} data     Copy of item data being use to display the chat message.
+   * @param {object} labels   Specially prepared item labels.
+   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
    * @private
    */
   _lootChatData(data, labels, props) {
@@ -862,8 +880,10 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Render a chat card for Spell type data
-   * @return {Object}
+   * Render a chat card for Spell type data.
+   * @param {object} data     Copy of item data being use to display the chat message.
+   * @param {object} labels   Specially prepared item labels.
+   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
    * @private
    */
   _spellChatData(data, labels, props) {
@@ -876,7 +896,10 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare chat card data for items of the "Feat" type
+   * Prepare chat card data for items of the Feat type.
+   * @param {object} data     Copy of item data being use to display the chat message.
+   * @param {object} labels   Specially prepared item labels.
+   * @param {string[]} props  Existing list of properties to be displayed. *Will be mutated.*
    * @private
    */
   _featChatData(data, labels, props) {
@@ -892,7 +915,7 @@ export default class Item5e extends Item {
    * Rely upon the d20Roll logic for the core implementation
    *
    * @param {object} options        Roll options which are configured and provided to the d20Roll function
-   * @return {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollAttack(options={}) {
     const itemData = this.data.data;
@@ -973,12 +996,13 @@ export default class Item5e extends Item {
   /**
    * Place a damage roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the damageRoll logic for the core implementation.
-   * @param {MouseEvent} [event]    An event which triggered this roll, if any
-   * @param {boolean} [critical]    Should damage be rolled as a critical hit?
-   * @param {number} [spellLevel]   If the item is a spell, override the level for damage scaling
-   * @param {boolean} [versatile]   If the item is a weapon, roll damage using the versatile formula
-   * @param {object} [options]      Additional options passed to the damageRoll function
-   * @return {Promise<Roll>}        A Promise which resolves to the created Roll instance
+   * @param {object} [config]
+   * @param {MouseEvent} [config.event]    An event which triggered this roll, if any
+   * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
+   * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
+   * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
+   * @param {object} [config.options]      Additional options passed to the damageRoll function
+   * @returns {Promise<Roll>}        A Promise which resolves to the created Roll instance
    */
   rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
@@ -1067,42 +1091,47 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Adjust a cantrip damage formula to scale it for higher level characters and monsters
+   * Adjust a cantrip damage formula to scale it for higher level characters and monsters.
+   * @param {string[]} parts   The original parts of the damage formula.
+   * @param {string} scale     The scaling formula.
+   * @param {number} level     Level at which the spell is being cast.
+   * @param {object} rollData  A data object that should be applied to the scaled damage roll.
+   * @returns {string[]}       The parts of the damage formula with the scaling applied.
    * @private
    */
   _scaleCantripDamage(parts, scale, level, rollData) {
     const add = Math.floor((level + 1) / 6);
     if ( add === 0 ) return;
-    this._scaleDamage(parts, scale || parts.join(" + "), add, rollData);
+    return this._scaleDamage(parts, scale || parts.join(" + "), add, rollData);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Adjust the spell damage formula to scale it for spell level up-casting
-   * @param {Array} parts         The original damage parts
-   * @param {number} baseLevel    The default spell level
-   * @param {number} spellLevel   The casted spell level
-   * @param {string} formula      The scaling formula
-   * @param {object} rollData     A data object that should be applied to the scaled damage roll
-   * @return {string[]}           The scaled roll parts
+   * Adjust the spell damage formula to scale it for spell level up-casting.
+   * @param {string[]} parts      The original parts of the damage formula.
+   * @param {number} baseLevel    Default level for the spell.
+   * @param {number} spellLevel   Level at which the spell is being cast.
+   * @param {string} formula      The scaling formula.
+   * @param {object} rollData     A data object that should be applied to the scaled damage roll.
+   * @returns {string[]}          The parts of the damage formula with the scaling applied.
    * @private
    */
   _scaleSpellDamage(parts, baseLevel, spellLevel, formula, rollData) {
     const upcastLevels = Math.max(spellLevel - baseLevel, 0);
     if ( upcastLevels === 0 ) return parts;
-    this._scaleDamage(parts, formula, upcastLevels, rollData);
+    return this._scaleDamage(parts, formula, upcastLevels, rollData);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Scale an array of damage parts according to a provided scaling formula and scaling multiplier
-   * @param {string[]} parts    Initial roll parts
-   * @param {string} scaling    A scaling formula
-   * @param {number} times      A number of times to apply the scaling formula
+   * Scale an array of damage parts according to a provided scaling formula and scaling multiplier.
+   * @param {string[]} parts    The original parts of the damage formula.
+   * @param {string} scaling    The scaling formula.
+   * @param {number} times      A number of times to apply the scaling formula.
    * @param {object} rollData   A data object that should be applied to the scaled damage roll
-   * @return {string[]}         The scaled roll parts
+   * @returns {string[]}        The parts of the damage formula with the scaling applied.
    * @private
    */
   _scaleDamage(parts, scaling, times, rollData) {
@@ -1132,19 +1161,20 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the d20Roll logic for the core implementation
-   *
-   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * Prepare data needed to roll an attack using an item (weapon, feat, spell, or equipment)
+   * and then pass it off to `d20Roll`.
+   * @param {object} [options]
+   * @param {boolean} [options.spellLevel]  Level at which a spell is cast.
+   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
    */
-  async rollFormula(options={}) {
+  async rollFormula({spellLevel}={}) {
     if ( !this.data.data.formula ) {
       throw new Error("This Item does not have a formula to roll!");
     }
 
     // Define Roll Data
     const rollData = this.getRollData();
-    if ( options.spellLevel ) rollData.item.level = options.spellLevel;
+    if ( spellLevel ) rollData.item.level = spellLevel;
     const title = `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`;
 
     // Invoke the roll and submit it to chat
@@ -1161,8 +1191,8 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Perform an ability recharge test for an item which uses the d6 recharge mechanic
-   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
+   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
     const data = this.data.data;
@@ -1186,9 +1216,9 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Roll a Tool Check. Rely upon the d20Roll logic for the core implementation
-   * @prarm {Object} options   Roll configuration options provided to the d20Roll function
-   * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
+   * Prepare data needed to roll a tool check and then pass it off to `d20Roll`.
+   * @param {object} [options]  Roll configuration options provided to the d20Roll function.
+   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
    */
   rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw "Wrong item type!";
@@ -1236,7 +1266,7 @@ export default class Item5e extends Item {
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
-        left: window.innerWidth - 710,
+        left: window.innerWidth - 710
       },
       chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
@@ -1252,7 +1282,8 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Prepare a data object which is passed to any Roll formulas which are created related to this Item
+   * Prepare a data object which is passed to any Roll formulas which are created related to this Item.
+   * @returns {object}  Data used for @ formula replacement in Roll formulas.
    * @private
    */
   getRollData() {
@@ -1277,6 +1308,10 @@ export default class Item5e extends Item {
   /*  Chat Message Helpers                        */
   /* -------------------------------------------- */
 
+  /**
+   * Apply listeners to chat messages.
+   * @param {HTML} html  Rendered chat message.
+   */
   static chatListeners(html) {
     html.on('click', '.card-buttons button', this._onChatCardAction.bind(this));
     html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
@@ -1371,7 +1406,7 @@ export default class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @return {Actor|null}         The Actor entity or null
+   * @returns {Actor|null}         The Actor entity or null
    * @private
    */
   static async _getChatCardActor(card) {
@@ -1393,7 +1428,7 @@ export default class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @return {Actor[]}            An Array of Actor entities, if any
+   * @returns {Actor[]}            An Array of Actor entities, if any
    * @private
    */
   static _getChatCardTargets(card) {
@@ -1501,7 +1536,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}          Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedEquipment(data, actorData, isNPC) {
@@ -1529,7 +1564,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}          Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedSpell(data, actorData, isNPC) {
@@ -1548,7 +1583,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}          Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedTool(data, actorData, isNPC) {
@@ -1573,7 +1608,7 @@ export default class Item5e extends Item {
    * @param {object} data       Data for the newly created item.
    * @param {object} actorData  Data for the actor to which the item is being added.
    * @param {boolean} isNPC     Is this actor an NPC?
-   * @return {object}           Updates to apply to the item data.
+   * @returns {object}          Updates to apply to the item data.
    * @private
    */
   _onCreateOwnedWeapon(data, actorData, isNPC) {
@@ -1600,7 +1635,7 @@ export default class Item5e extends Item {
   /**
    * Create a consumable spell scroll Item from a spell Item.
    * @param {Item5e} spell      The spell to be made into a scroll
-   * @return {Item5e}           The created scroll consumable item
+   * @returns {Item5e}          The created scroll consumable item
    */
   static async createScrollFromSpell(spell) {
 

@@ -1,4 +1,7 @@
 /**
+ * Deprecated.
+ * @param {object} data
+ * @param {object} options
  * @deprecated since 1.3.0
  * @ignore
  */
@@ -7,6 +10,9 @@ async function d20Dialog(data, options) {
 }
 
 /**
+ * Deprecated.
+ * @param {object} data
+ * @param {object} options
  * @deprecated since 1.3.0
  * @ignore
  */

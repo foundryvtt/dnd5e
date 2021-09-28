@@ -20,7 +20,7 @@ export const registerSystemSettings = function() {
     choices: {
       "normal": "SETTINGS.5eRestPHB",
       "gritty": "SETTINGS.5eRestGritty",
-      "epic": "SETTINGS.5eRestEpic",
+      "epic": "SETTINGS.5eRestEpic"
     }
   });
 
@@ -35,7 +35,7 @@ export const registerSystemSettings = function() {
     choices: {
       "555": "SETTINGS.5eDiagPHB",
       "5105": "SETTINGS.5eDiagDMG",
-      "EUCL": "SETTINGS.5eDiagEuclidean",
+      "EUCL": "SETTINGS.5eDiagEuclidean"
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
@@ -81,7 +81,7 @@ export const registerSystemSettings = function() {
     scope: "world",
     config: true,
     default: false,
-    type: Boolean,
+    type: Boolean
   });
 
   // Collapse Item Cards (by default)

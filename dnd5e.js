@@ -74,7 +74,7 @@ Hooks.once("init", function() {
       Actor5e,
       Item5e,
       TokenDocument5e,
-      Token5e,
+      Token5e
     },
     macros: macros,
     migrations: migrations,

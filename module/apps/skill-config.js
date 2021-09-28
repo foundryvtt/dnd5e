@@ -3,7 +3,7 @@
  * @extends {DocumentSheet}
  * @param {Actor} actor                   The Actor instance being displayed within the sheet.
  * @param {ApplicationOptions} options    Additional application configuration options.
- * @param {String} skillId                The skill id (e.g. "ins")
+ * @param {string} skillId                The skill id (e.g. "ins")
  */
 export default class ActorSkillConfig extends DocumentSheet {
 
@@ -37,7 +37,7 @@ export default class ActorSkillConfig extends DocumentSheet {
       skill: foundry.utils.getProperty(this.document.data._source, `data.skills.${this._skillId}`) || {},
       skillId: this._skillId,
       proficiencyLevels: CONFIG.DND5E.proficiencyLevels,
-      bonusGlobal: getProperty(this.object.data._source, "data.bonuses.abilities.skill"),
+      bonusGlobal: getProperty(this.object.data._source, "data.bonuses.abilities.skill")
     };
   }
 }
