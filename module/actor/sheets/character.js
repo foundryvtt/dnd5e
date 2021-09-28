@@ -3,14 +3,13 @@ import Actor5e from "../entity.js";
 
 /**
  * An Actor sheet for player character type actors.
- * Extends the base ActorSheet5e class.
- * @type {ActorSheet5e}
+ * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
-   * Define default rendering options for the NPC sheet
-   * @return {Object}
+   * Define default rendering options for the NPC sheet.
+   * @returns {object}
    */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
@@ -24,6 +23,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
+   * @returns {object}  Prepared copy of the actor data ready to be displayed.
    */
   getData() {
     const sheetData = super.getData();
@@ -63,6 +63,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Organize and classify Owned Items for Character sheets
+   * @param {object} data  Copy of the actor data being prepared for display. *Will be mutated.*
    * @private
    */
   _prepareItems(data) {
@@ -158,8 +159,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * A helper method to establish the displayed preparation state for an item
-   * @param {Item} item
+   * A helper method to establish the displayed preparation state for an item.
+   * @param {Item5e} item  Item being prepared for display. *Will be mutated.*
    * @private
    */
   _prepareItemToggleState(item) {
@@ -184,8 +185,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Activate event listeners using the prepared sheet HTML
-   * @param html {jQuery}   The prepared HTML object ready to be rendered into the DOM
+   * Activate event listeners using the prepared sheet HTML.
+   * @param {jQuery} html   The prepared HTML object ready to be rendered into the DOM.
    */
 	activateListeners(html) {
     super.activateListeners(html);
@@ -205,8 +206,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle mouse click events for character sheet actions
-   * @param {MouseEvent} event    The originating click event
+   * Handle mouse click events for character sheet actions.
+   * @param {MouseEvent} event  The originating click event.
+   * @returns {Promise}         Dialog or roll result.
    * @private
    */
   _onSheetAction(event) {
@@ -229,8 +231,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling the state of an Owned Item within the Actor
-   * @param {Event} event   The triggering click event
+   * Handle toggling the state of an Owned Item within the Actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Item with the updates applied.
    * @private
    */
   _onToggleItem(event) {
@@ -244,8 +247,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Take a short rest, calling the relevant function on the Actor instance
-   * @param {Event} event   The triggering click event
+   * Take a short rest, calling the relevant function on the Actor instance.
+   * @param {Event} event             The triggering click event.
+   * @returns {Promise<RestResult>}  Result of the rest action.
    * @private
    */
   async _onShortRest(event) {
@@ -257,8 +261,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Take a long rest, calling the relevant function on the Actor instance
-   * @param {Event} event   The triggering click event
+   * Take a long rest, calling the relevant function on the Actor instance.
+   * @param {Event} event             The triggering click event.
+   * @returns {Promise<RestResult>}  Result of the rest action.
    * @private
    */
   async _onLongRest(event) {

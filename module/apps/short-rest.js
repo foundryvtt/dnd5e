@@ -88,7 +88,7 @@ export default class ShortRestDialog extends Dialog {
    * A helper constructor function which displays the Short Rest dialog and returns a Promise once it's workflow has
    * been resolved.
    * @param {Actor5e} actor
-   * @return {Promise}
+   * @returns {Promise}
    */
   static async shortRestDialog({actor}={}) {
     return new Promise((resolve, reject) => {
@@ -124,7 +124,7 @@ export default class ShortRestDialog extends Dialog {
    * workflow has been resolved.
    * @deprecated
    * @param {Actor5e} actor
-   * @return {Promise}
+   * @returns {Promise}
    */
   static async longRestDialog({actor}={}) {
     console.warn("WARNING! ShortRestDialog.longRestDialog has been deprecated, use LongRestDialog.longRestDialog instead.");

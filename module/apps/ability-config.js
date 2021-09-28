@@ -3,7 +3,7 @@
  * @extends {DocumentSheet}
  * @param {Actor} actor                   The Actor instance being displayed within the sheet.
  * @param {ApplicationOptions} options    Additional application configuration options.
- * @param {String} abilityId              The ability ID (e.g. "str")
+ * @param {string} abilityId              The ability ID (e.g. "str")
  */
 export default class ActorAbilityConfig extends DocumentSheet {
 
@@ -43,7 +43,7 @@ export default class ActorAbilityConfig extends DocumentSheet {
         1: CONFIG.DND5E.proficiencyLevels[1]
       },
       bonusGlobalSave: getProperty(this.object.data._source, "data.bonuses.abilities.save"),
-      bonusGlobalCheck: getProperty(this.object.data._source, "data.bonuses.abilities.check"),
+      bonusGlobalCheck: getProperty(this.object.data._source, "data.bonuses.abilities.check")
     };
   }
 }

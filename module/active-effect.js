@@ -41,6 +41,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Manage Active Effect instances through the Actor Sheet via effect control buttons.
    * @param {MouseEvent} event      The left-click event on the effect control
    * @param {Actor|Item} owner      The owning entity which manages this effect
+   * @returns {Promise|null}        Promise that resolves when the changes are complete.
    */
   static onManageActiveEffect(event, owner) {
     event.preventDefault();
@@ -70,7 +71,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Prepare the data structure for Active Effects which are currently applied to an Actor or Item.
    * @param {ActiveEffect[]} effects    The array of Active Effect instances to prepare sheet data for
-   * @return {object}                   Data for rendering
+   * @returns {object}                  Data for rendering
    */
   static prepareActiveEffectCategories(effects) {
     // Define effect header categories
