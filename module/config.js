@@ -1011,6 +1011,30 @@ DND5E.cover = {
 /* -------------------------------------------- */
 
 /**
+ * A selection of actor attributes that can be tracked on token resource bars.
+ * @type {string[]}
+ */
+DND5E.trackableAttributes = [
+  "attributes.ac.value", "attributes.init.value", "attributes.movement", "attributes.senses", "attributes.spelldc",
+  "attributes.spellLevel", "details.cr", "details.spellLevel", "details.xp.value", "skills.*.passive",
+  "abilities.*.value"
+];
+
+/* -------------------------------------------- */
+
+/**
+ * A selection of actor and item attributes that are valid targets for item resource consumption.
+ * @type {string[]}
+ */
+DND5E.consumableResources = [
+  "item.quantity", "item.weight", "item.duration.value", "currency", "details.xp.value", "abilities.*.value",
+  "attributes.senses", "attributes.movement", "attributes.ac.flat", "item.armor.value", "item.target", "item.range",
+  "item.save.dc"
+];
+
+/* -------------------------------------------- */
+
+/**
  * Conditions that can effect an actor.
  * @enum {string}
  */
