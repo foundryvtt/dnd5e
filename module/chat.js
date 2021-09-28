@@ -53,7 +53,7 @@ export const displayChatActionButtons = function(message, html, data) {
     const buttons = chatCard.find("button[data-action]");
     buttons.each((i, btn) => {
       if ( btn.dataset.action === "save" ) return;
-      btn.style.display = "none"
+      btn.style.display = "none";
     });
   }
 };

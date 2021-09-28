@@ -69,7 +69,7 @@ export class Token5e extends Token {
     const bs1 = bs+1;
 
     // Overall bar container
-    bar.clear()
+    bar.clear();
     bar.beginFill(blk, 0.5).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, w, h, 3);
 
     // Temporary maximum HP
@@ -85,7 +85,7 @@ export class Token5e extends Token {
     }
 
     // Health bar
-    bar.beginFill(hpColor, 1.0).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, valuePct*w, h, 2)
+    bar.beginFill(hpColor, 1.0).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, valuePct*w, h, 2);
 
     // Temporary hit points
     if ( temp > 0 ) {

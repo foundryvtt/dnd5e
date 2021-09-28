@@ -12,7 +12,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Expand the default size of the class sheet
     if ( this.object.data.type === "class" ) {
-      this.options.width = this.position.width =  600;
+      this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
     }
   }
@@ -20,8 +20,8 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-	static get defaultOptions() {
-	  return foundry.utils.mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 560,
       height: 400,
       classes: ["dnd5e", "sheet", "item"],
@@ -69,7 +69,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
 
     // Vehicles
-    data.isCrewed = itemData.data.activation?.type === 'crew';
+    data.isCrewed = itemData.data.activation?.type === "crew";
     data.isMountable = this._isItemMountable(itemData);
 
     // Armor Class
@@ -100,7 +100,6 @@ export default class ItemSheet5e extends ItemSheet {
     const ids = CONFIG.DND5E[`${type}Ids`];
     if ( ids === undefined ) return {};
 
-    const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
     const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
     const baseType = foundry.utils.getProperty(item.data, typeProperty);
 
@@ -131,7 +130,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Ammunition
     if ( consume.type === "ammo" ) {
-      return actor.itemTypes.consumable.reduce((ammo, i) =>  {
+      return actor.itemTypes.consumable.reduce((ammo, i) => {
         if ( i.data.data.consumableType === "ammo" ) {
           ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
         }
@@ -177,7 +176,7 @@ export default class ItemSheet5e extends ItemSheet {
         const recharge = i.data.data.recharge || {};
         if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("DND5E.Recharge")})`;
         return obj;
-      }, {})
+      }, {});
     }
     else return {};
   }
@@ -226,7 +225,7 @@ export default class ItemSheet5e extends ItemSheet {
         labels.materials,
         item.data.components.concentration ? game.i18n.localize("DND5E.Concentration") : null,
         item.data.components.ritual ? game.i18n.localize("DND5E.Ritual") : null
-      )
+      );
     }
 
     else if ( item.type === "equipment" ) {
@@ -250,7 +249,7 @@ export default class ItemSheet5e extends ItemSheet {
         labels.range,
         labels.target,
         labels.duration
-      )
+      );
     }
     return props.filter(p => !!p);
   }
@@ -266,15 +265,15 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _isItemMountable(item) {
     const data = item.data;
-    return (item.type === 'weapon' && data.weaponType === 'siege')
-      || (item.type === 'equipment' && data.armor.type === 'vehicle');
+    return (item.type === "weapon" && data.weaponType === "siege")
+      || (item.type === "equipment" && data.armor.type === "vehicle");
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   setPosition(position={}) {
-    if ( !(this._minimized  || position.height) ) {
+    if ( !(this._minimized || position.height) ) {
       position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
     }
     return super.setPosition(position);
@@ -282,7 +281,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
   /*  Form Submission                             */
-	/* -------------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   _getSubmitData(updateData={}) {
@@ -308,10 +307,10 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find('.trait-selector').click(this._onConfigureTraits.bind(this));
+      html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
-        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
-        ActiveEffect5e.onManageActiveEffect(ev, this.item)
+        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
+        ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
     }
   }
@@ -361,7 +360,7 @@ export default class ItemSheet5e extends ItemSheet {
       choices: [],
       allowCustom: false
     };
-    switch(a.dataset.options) {
+    switch (a.dataset.options) {
       case "saves":
         options.choices = CONFIG.DND5E.abilities;
         options.valueKey = null;
@@ -373,7 +372,8 @@ export default class ItemSheet5e extends ItemSheet {
       case "skills":
         const skills = this.item.data.data.skills;
         const choiceSet = skills.choices?.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
-        options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([skill]) => choiceSet.includes(skill)));
+        options.choices =
+          Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([skill]) => choiceSet.includes(skill)));
         options.maximum = skills.number;
         break;
     }

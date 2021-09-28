@@ -6,7 +6,7 @@ export default class ActorSheetFlags extends DocumentSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
-	    classes: ["dnd5e"],
+      classes: ["dnd5e"],
       template: "systems/dnd5e/templates/apps/actor-flags.html",
       width: 500,
       closeOnSubmit: true
@@ -17,7 +17,7 @@ export default class ActorSheetFlags extends DocumentSheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.localize('DND5E.FlagsTitle')}: ${this.object.name}`;
+    return `${game.i18n.localize("DND5E.FlagsTitle")}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
@@ -63,7 +63,7 @@ export default class ActorSheetFlags extends DocumentSheet {
       let flag = foundry.utils.deepClone(v);
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
-      flag.isSelect = v.hasOwnProperty('choices');
+      flag.isSelect = v.hasOwnProperty("choices");
       flag.value = getProperty(baseData.flags, `dnd5e.${k}`);
       flags[v.section][`flags.dnd5e.${k}`] = flag;
     }
@@ -106,13 +106,11 @@ export default class ActorSheetFlags extends DocumentSheet {
     let updateData = expandObject(formData);
 
     // Unset any flags which are "false"
-    let unset = false;
     const flags = updateData.flags.dnd5e;
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];
         if ( hasProperty(actor.data._source.flags, `dnd5e.${k}`) ) {
-          unset = true;
           flags[`-=${k}`] = null;
         }
       }

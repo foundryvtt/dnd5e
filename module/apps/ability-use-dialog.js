@@ -34,7 +34,7 @@ export default class AbilityUseDialog extends Dialog {
     const quantity = itemData.quantity || 0;
     const recharge = itemData.recharge || {};
     const recharges = !!recharge.value;
-    const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0; 
+    const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0;
 
     // Prepare dialog form data
     const data = {
@@ -112,7 +112,7 @@ export default class AbilityUseDialog extends Dialog {
       if ( max > 0 ) lmax = i;
       arr.push({
         level: i,
-        label: i > 0 ? game.i18n.format('DND5E.SpellLevelSlot', {level: label, n: slots}) : label,
+        label: i > 0 ? game.i18n.format("DND5E.SpellLevelSlot", {level: label, n: slots}) : label,
         canCast: max > 0,
         hasSlots: slots > 0
       });
@@ -123,8 +123,8 @@ export default class AbilityUseDialog extends Dialog {
     const pact = actorData.spells.pact;
     if (pact.level >= lvl) {
       spellLevels.push({
-        level: 'pact',
-        label: `${game.i18n.format('DND5E.SpellLevelPact', {level: pact.level, n: pact.value})}`,
+        level: "pact",
+        label: `${game.i18n.format("DND5E.SpellLevelPact", {level: pact.level, n: pact.value})}`,
         canCast: true,
         hasSlots: pact.value > 0
       });
@@ -159,7 +159,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( !!recharge.value ) {
       return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
         type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`)
-      })
+      });
     }
 
     // Does not use any resource

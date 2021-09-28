@@ -116,6 +116,33 @@
     "valid-typeof": ["warn", {"requireStringLiterals": true}],
     "wrap-iife": ["warn", "inside"],
 
+    "no-extra-semi": "warn",
+    "no-useless-escape": "warn",
+    "no-unused-vars": ["warn", {"args": "none"}],
+    "comma-spacing": "warn",
+    "indent": ["warn", 2, {"SwitchCase": 1}],
+    "key-spacing": "warn",
+    "keyword-spacing": ["warn", {"overrides": {"catch": {"before": true, "after": false}}}],
+    "max-len": ["warn", {
+      "code": 120,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "no-tabs": "warn",
+    "no-trailing-spaces": "warn",
+    "no-multi-spaces": ["warn", {"ignoreEOLComments": true}],
+    "quotes": ["warn", "double", {"avoidEscape": true, "allowTemplateLiterals": false}],
+    "semi": "warn",
+    "space-before-blocks": ["warn", "always"],
+    "space-before-function-paren": ["warn", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    "spaced-comment": "warn",
+
     "jsdoc/check-access": "warn",
     "jsdoc/check-alignment": "warn",
     "jsdoc/check-examples": "off",
