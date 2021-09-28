@@ -7,6 +7,7 @@
  * @param {number} [options.criticalMultiplier=2]     A critical hit multiplier which is applied to critical hits
  * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
+ * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
  * @extends {Roll}
  */
 export default class DamageRoll extends Roll {
@@ -80,6 +81,13 @@ export default class DamageRoll extends Roll {
     if ( this.options.powerfulCritical && (flatBonus > 0) ) {
       this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms.push(new NumericTerm({number: flatBonus}, {flavor: game.i18n.localize("DND5E.PowerfulCritical")}));
+    }
+
+    // Add extra critical damage term
+    if ( this.isCritical && this.options.criticalBonusDamage ) {
+      const extra = new Roll(this.options.criticalBonusDamage, this.data);
+      if ( !(extra.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
+      this.terms.push(...extra.terms);
     }
 
     // Re-compile the underlying formula
