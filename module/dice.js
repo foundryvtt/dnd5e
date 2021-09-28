@@ -201,6 +201,7 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  * @param {number} [config.criticalMultiplier=2] A critical hit multiplier which is applied to critical hits
  * @param {boolean} [config.multiplyNumeric=false] Multiply numeric terms by the critical multiplier
  * @param {boolean} [config.powerfulCritical=false] Apply the "powerful criticals" house rule to critical hits
+ * @param {string} [config.criticalBonusDamage] An extra damage term that is applied only on a critical hit
  *
  * @param {boolean} [config.fastForward=false] Allow fast-forward advantage selection
  * @param {Event}[config.event]            The triggering event which initiated the roll
@@ -219,7 +220,8 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  */
 export async function damageRoll({
   parts=[], data, // Roll creation
-  critical=false, criticalBonusDice, criticalMultiplier, multiplyNumeric, powerfulCritical, // Damage customization
+  critical=false, criticalBonusDice, criticalMultiplier, multiplyNumeric, powerfulCritical,
+  criticalBonusDamage, // Damage customization
   fastForward=false, event, allowCritical=true, template, title, dialogOptions, // Dialog configuration
   chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
   }={}) {
@@ -235,6 +237,7 @@ export async function damageRoll({
     critical: isCritical,
     criticalBonusDice,
     criticalMultiplier,
+    criticalBonusDamage,
     multiplyNumeric: multiplyNumeric ?? game.settings.get("dnd5e", "criticalDamageModifiers"),
     powerfulCritical: powerfulCritical ?? game.settings.get("dnd5e", "criticalDamageMaxDice")
   });
