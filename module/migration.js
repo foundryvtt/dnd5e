@@ -272,9 +272,9 @@ export const migrateItemData = function(item, migrationData) {
 export const migrateSceneData = function(scene, migrationData) {
   const tokens = scene.tokens.map(token => {
     const t = token.toObject();
-    const imgUpdate = {};
-    _migrateTokenImage(t, imgUpdate);
-    if ( imgUpdate.img ) t.img = imgUpdate.img;
+    const update = {};
+    _migrateTokenImage(t, update);
+    if ( Object.keys(update).length ) foundry.utils.mergeObject(t, update);
     if ( !t.actorId || t.actorLink ) {
       t.actorData = {};
     }
@@ -505,6 +505,29 @@ const TOKEN_IMAGE_RENAME = {
 };
 
 /**
+ * Re-scaled token images.
+ * @type {object<string, number>}
+ */
+const TOKEN_IMAGE_RESCALE = {
+  "systems/dnd5e/tokens/beast/HunterShark.png": 1.5,
+  "systems/dnd5e/tokens/beast/GiantElk.png": 1.5,
+  "systems/dnd5e/tokens/monstrosity/Bulette.png": 1.5,
+  "systems/dnd5e/tokens/beast/Wolf.png": 1.5,
+  "systems/dnd5e/tokens/beast/Panther.png": 1.5,
+  "systems/dnd5e/tokens/beast/Elk.png": 1.5,
+  "systems/dnd5e/tokens/beast/AxeBeak.png": 1.5,
+  "systems/dnd5e/tokens/beast/GiantVulture.png": 1.5,
+  "systems/dnd5e/tokens/beast/GiantSpider.png": 1.5,
+  "systems/dnd5e/tokens/beast/DireWolf.png": 1.5,
+  "systems/dnd5e/tokens/monstrosity/DeathDog.png": 1.5,
+  "systems/dnd5e/tokens/devil/Lemure.png": 1.5,
+  "systems/dnd5e/tokens/beast/Deer.png": 1.1,
+  "systems/dnd5e/tokens/beast/GiantWeasel.png": 1.5,
+  "systems/dnd5e/tokens/beast/Camel.png": 1.2,
+  "systems/dnd5e/tokens/beast/BloodHawk.png": 1.5
+};
+
+/**
  * Migrate any system token images from PNG to WEBP.
  * @param {object} actorData    Actor or token data to migrate.
  * @param {object} updateData   Existing update to expand upon.
@@ -515,9 +538,11 @@ function _migrateTokenImage(actorData, updateData) {
   ["img", "token.img"].forEach(prop => {
     const img = foundry.utils.getProperty(actorData, prop);
     if ( !img?.startsWith("systems/dnd5e/tokens/") || img?.endsWith(".webp") ) return;
-    let rename = TOKEN_IMAGE_RENAME[img];
-    if ( !rename ) rename = img.replace(/\.png$/, ".webp");
-    updateData[prop] = rename;
+    updateData[prop] = TOKEN_IMAGE_RENAME[img] ?? img.replace(/\.png$/, ".webp");
+    const scale = `${prop.startsWith("token.") ? "token." : ""}scale`;
+    if ( !foundry.utils.hasProperty(actorData, scale) ) return;
+    const rescale = TOKEN_IMAGE_RESCALE[img];
+    if ( rescale ) updateData[scale] = rescale;
   });
   return updateData;
 }
