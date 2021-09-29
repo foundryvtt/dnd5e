@@ -81,13 +81,13 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Challenge Rating
     const cr = parseFloat(data.data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
+    data.labels.cr = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Creature Type
-    data.labels["type"] = this.actor.labels.creatureType;
+    data.labels.type = this.actor.labels.creatureType;
 
     // Armor Type
-    data.labels["armorType"] = this.getArmorLabel();
+    data.labels.armorType = this.getArmorLabel();
 
     return data;
   }

@@ -31,7 +31,7 @@ export default class Actor5e extends Actor {
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
     if ( !["character", "npc"].includes(this.data.type) ) return this._classes = {};
-    return this._classes = this.items.filter((item) => item.type === "class").reduce((obj, cls) => {
+    return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
       obj[cls.name.slugify({strict: true})] = cls;
       return obj;
     }, {});
@@ -56,7 +56,7 @@ export default class Actor5e extends Actor {
     this._preparationWarnings = [];
     super.prepareData();
 
-    // iterate over owned items and recompute attributes that depend on prepared actor data
+    // Iterate over owned items and recompute attributes that depend on prepared actor data
     this.items.forEach(item => item.prepareFinalAttributes());
   }
 
@@ -160,7 +160,7 @@ export default class Actor5e extends Actor {
     // Cache labels
     this.labels = {};
     if ( this.type === "npc" ) {
-      this.labels["creatureType"] = this.constructor.formatCreatureType(data.details.type);
+      this.labels.creatureType = this.constructor.formatCreatureType(data.details.type);
     }
 
     // Prepare spell-casting data
@@ -842,7 +842,7 @@ export default class Actor5e extends Actor {
 
     // Ability test bonus
     if ( bonuses.check ) {
-      data["checkBonus"] = bonuses.check;
+      data.checkBonus = bonuses.check;
       parts.push("@checkBonus");
     }
 
@@ -862,7 +862,7 @@ export default class Actor5e extends Actor {
 
     // Skill check bonus
     if ( bonuses.skill ) {
-      data["skillBonus"] = bonuses.skill;
+      data.skillBonus = bonuses.skill;
       parts.push("@skillBonus");
     }
 
@@ -1339,7 +1339,8 @@ export default class Actor5e extends Actor {
     const healthRestored = dhp !== 0;
     const length = longRest ? "Long" : "Short";
 
-    let restFlavor, message;
+    let restFlavor;
+    let message;
 
     // Summarize the rest duration
     switch (game.settings.get("dnd5e", "restVariant")) {
@@ -1794,16 +1795,16 @@ export default class Actor5e extends Actor {
    * @returns {string}
    */
   static formatCreatureType(typeData) {
-    if ( typeof typeData === "string" ) return typeData; // backwards compatibility
+    if ( typeof typeData === "string" ) return typeData; // Backwards compatibility
     let localizedType;
     if ( typeData.value === "custom" ) {
       localizedType = typeData.custom;
     } else {
       let code = CONFIG.DND5E.creatureTypes[typeData.value];
-      localizedType = game.i18n.localize(!!typeData.swarm ? `${code}Pl` : code);
+      localizedType = game.i18n.localize(typeData.swarm ? `${code}Pl` : code);
     }
     let type = localizedType;
-    if ( !!typeData.swarm ) {
+    if ( typeData.swarm ) {
       type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
         size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm]),
         type: localizedType

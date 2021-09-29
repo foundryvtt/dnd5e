@@ -18,9 +18,9 @@ export const registerSystemSettings = function() {
     default: "normal",
     type: String,
     choices: {
-      "normal": "SETTINGS.5eRestPHB",
-      "gritty": "SETTINGS.5eRestGritty",
-      "epic": "SETTINGS.5eRestEpic"
+      normal: "SETTINGS.5eRestPHB",
+      gritty: "SETTINGS.5eRestGritty",
+      epic: "SETTINGS.5eRestEpic"
     }
   });
 
@@ -33,9 +33,9 @@ export const registerSystemSettings = function() {
     default: "555",
     type: String,
     choices: {
-      "555": "SETTINGS.5eDiagPHB",
-      "5105": "SETTINGS.5eDiagDMG",
-      "EUCL": "SETTINGS.5eDiagEuclidean"
+      555: "SETTINGS.5eDiagPHB",
+      5105: "SETTINGS.5eDiagDMG",
+      EUCL: "SETTINGS.5eDiagEuclidean"
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
@@ -49,8 +49,8 @@ export const registerSystemSettings = function() {
     default: "bonus",
     type: String,
     choices: {
-      "bonus": "SETTINGS.5eProfBonus",
-      "dice": "SETTINGS.5eProfDice"
+      bonus: "SETTINGS.5eProfBonus",
+      dice: "SETTINGS.5eProfDice"
     }
   });
 

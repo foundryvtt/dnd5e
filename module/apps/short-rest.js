@@ -100,8 +100,9 @@ export default class ShortRestDialog extends Dialog {
             label: game.i18n.localize("DND5E.Rest"),
             callback: html => {
               let newDay = false;
-              if (game.settings.get("dnd5e", "restVariant") === "gritty")
+              if (game.settings.get("dnd5e", "restVariant") === "gritty") {
                 newDay = html.find('input[name="newDay"]')[0].checked;
+              }
               resolve(newDay);
             }
           },

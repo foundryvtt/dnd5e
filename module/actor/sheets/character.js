@@ -33,24 +33,24 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     if (hp.tempmax === 0) delete hp.tempmax;
 
     // Resources
-    sheetData["resources"] = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
+    sheetData.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
       const res = sheetData.data.resources[r] || {};
       res.name = r;
-      res.placeholder = game.i18n.localize("DND5E.Resource"+r.titleCase());
+      res.placeholder = game.i18n.localize(`DND5E.Resource${r.titleCase()}`);
       if (res && res.value === 0) delete res.value;
       if (res && res.max === 0) delete res.max;
       return arr.concat([res]);
     }, []);
 
     // Experience Tracking
-    sheetData["disableExperience"] = game.settings.get("dnd5e", "disableExperienceTracking");
-    sheetData["classLabels"] = this.actor.itemTypes.class.map(c => c.name).join(", ");
-    sheetData["multiclassLabels"] = this.actor.itemTypes.class.map(c => {
+    sheetData.disableExperience = game.settings.get("dnd5e", "disableExperienceTracking");
+    sheetData.classLabels = this.actor.itemTypes.class.map(c => c.name).join(", ");
+    sheetData.multiclassLabels = this.actor.itemTypes.class.map(c => {
       return [c.data.data.subclass, c.name, c.data.data.levels].filterJoin(" ");
     }).join(", ");
 
     // Weight unit
-    sheetData["weightUnit"] = game.settings.get("dnd5e", "metricWeightUnits")
+    sheetData.weightUnit = game.settings.get("dnd5e", "metricWeightUnits")
       ? game.i18n.localize("DND5E.AbbreviationKgs")
       : game.i18n.localize("DND5E.AbbreviationLbs");
 
@@ -280,7 +280,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     if ( itemData.type === "class" ) {
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
       let priorLevel = cls?.data.data.levels ?? 0;
-      if ( !!cls ) {
+      if ( cls ) {
         const next = Math.min(priorLevel + 1, 20 + priorLevel - this.actor.data.data.details.level);
         if ( next > priorLevel ) {
           itemData.levels = next;

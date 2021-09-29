@@ -93,7 +93,7 @@ export default class ActorTypeConfig extends FormApplication {
   _onChangeInput(event) {
     super._onChangeInput(event);
     const typeObject = foundry.utils.expandObject(this._getSubmitData());
-    this.form["preview"].value = Actor5e.formatCreatureType(typeObject) || "—";
+    this.form.preview.value = Actor5e.formatCreatureType(typeObject) || "—";
   }
 
   /* -------------------------------------------- */
