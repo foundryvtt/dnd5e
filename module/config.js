@@ -489,7 +489,7 @@ DND5E.armorIds = {
  * @enum {string}
  */
 DND5E.shieldIds = {
-  "shield": "sSs3hSzkKBMNBgTs"
+  shield: "sSs3hSzkKBMNBgTs"
 };
 
 /**
@@ -648,11 +648,11 @@ DND5E.movementUnits = {
  * @enum {string}
  */
 DND5E.distanceUnits = {
-  "none": "DND5E.None",
-  "self": "DND5E.DistSelf",
-  "touch": "DND5E.DistTouch",
-  "spec": "DND5E.Special",
-  "any": "DND5E.DistAny",
+  none: "DND5E.None",
+  self: "DND5E.DistSelf",
+  touch: "DND5E.DistTouch",
+  spec: "DND5E.Special",
+  any: "DND5E.DistAny",
   ...DND5E.movementUnits
 };
 
@@ -1126,83 +1126,83 @@ DND5E.classFeatures = ClassFeatures;
  * }}
  */
 DND5E.characterFlags = {
-  "diamondSoul": {
+  diamondSoul: {
     name: "DND5E.FlagsDiamondSoul",
     hint: "DND5E.FlagsDiamondSoulHint",
     section: "DND5E.Feats",
     type: Boolean
   },
-  "elvenAccuracy": {
+  elvenAccuracy: {
     name: "DND5E.FlagsElvenAccuracy",
     hint: "DND5E.FlagsElvenAccuracyHint",
     section: "DND5E.RacialTraits",
     type: Boolean
   },
-  "halflingLucky": {
+  halflingLucky: {
     name: "DND5E.FlagsHalflingLucky",
     hint: "DND5E.FlagsHalflingLuckyHint",
     section: "DND5E.RacialTraits",
     type: Boolean
   },
-  "initiativeAdv": {
+  initiativeAdv: {
     name: "DND5E.FlagsInitiativeAdv",
     hint: "DND5E.FlagsInitiativeAdvHint",
     section: "DND5E.Feats",
     type: Boolean
   },
-  "initiativeAlert": {
+  initiativeAlert: {
     name: "DND5E.FlagsAlert",
     hint: "DND5E.FlagsAlertHint",
     section: "DND5E.Feats",
     type: Boolean
   },
-  "jackOfAllTrades": {
+  jackOfAllTrades: {
     name: "DND5E.FlagsJOAT",
     hint: "DND5E.FlagsJOATHint",
     section: "DND5E.Feats",
     type: Boolean
   },
-  "observantFeat": {
+  observantFeat: {
     name: "DND5E.FlagsObservant",
     hint: "DND5E.FlagsObservantHint",
     skills: ["prc", "inv"],
     section: "DND5E.Feats",
     type: Boolean
   },
-  "powerfulBuild": {
+  powerfulBuild: {
     name: "DND5E.FlagsPowerfulBuild",
     hint: "DND5E.FlagsPowerfulBuildHint",
     section: "DND5E.RacialTraits",
     type: Boolean
   },
-  "reliableTalent": {
+  reliableTalent: {
     name: "DND5E.FlagsReliableTalent",
     hint: "DND5E.FlagsReliableTalentHint",
     section: "DND5E.Feats",
     type: Boolean
   },
-  "remarkableAthlete": {
+  remarkableAthlete: {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ["str", "dex", "con"],
     section: "DND5E.Feats",
     type: Boolean
   },
-  "weaponCriticalThreshold": {
+  weaponCriticalThreshold: {
     name: "DND5E.FlagsWeaponCritThreshold",
     hint: "DND5E.FlagsWeaponCritThresholdHint",
     section: "DND5E.Feats",
     type: Number,
     placeholder: 20
   },
-  "spellCriticalThreshold": {
+  spellCriticalThreshold: {
     name: "DND5E.FlagsSpellCritThreshold",
     hint: "DND5E.FlagsSpellCritThresholdHint",
     section: "DND5E.Feats",
     type: Number,
     placeholder: 20
   },
-  "meleeCriticalDamageDice": {
+  meleeCriticalDamageDice: {
     name: "DND5E.FlagsMeleeCriticalDice",
     hint: "DND5E.FlagsMeleeCriticalDiceHint",
     section: "DND5E.Feats",

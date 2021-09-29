@@ -112,9 +112,9 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Proficiency
     if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
-      data.labels["proficiency"] = `d${data.data.attributes.prof * 2}`;
+      data.labels.proficiency = `d${data.data.attributes.prof * 2}`;
     } else {
-      data.labels["proficiency"] = `+${data.data.attributes.prof}`;
+      data.labels.proficiency = `+${data.data.attributes.prof}`;
     }
 
     // Ability Scores
@@ -174,7 +174,7 @@ export default class ActorSheet5e extends ActorSheet {
     let speeds = [
       [movement.burrow, `${game.i18n.localize("DND5E.MovementBurrow")} ${movement.burrow}`],
       [movement.climb, `${game.i18n.localize("DND5E.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : "")],
+      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}${movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : ""}`],
       [movement.swim, `${game.i18n.localize("DND5E.MovementSwim")} ${movement.swim}`]
     ];
     if ( largestPrimary ) {
@@ -218,7 +218,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
     }
-    if ( !!senses.special ) tags["special"] = senses.special;
+    if ( senses.special ) tags.special = senses.special;
     return tags;
   }
 
@@ -347,11 +347,11 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _prepareTraits(traits) {
     const map = {
-      "dr": CONFIG.DND5E.damageResistanceTypes,
-      "di": CONFIG.DND5E.damageResistanceTypes,
-      "dv": CONFIG.DND5E.damageResistanceTypes,
-      "ci": CONFIG.DND5E.conditionTypes,
-      "languages": CONFIG.DND5E.languages
+      dr: CONFIG.DND5E.damageResistanceTypes,
+      di: CONFIG.DND5E.damageResistanceTypes,
+      dv: CONFIG.DND5E.damageResistanceTypes,
+      ci: CONFIG.DND5E.conditionTypes,
+      languages: CONFIG.DND5E.languages
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
@@ -397,16 +397,16 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Define some mappings
     const sections = {
-      "atwill": -20,
-      "innate": -10,
-      "pact": 0.5
+      atwill: -20,
+      innate: -10,
+      pact: 0.5
     };
 
     // Label spell slot uses headers
     const useLabels = {
       "-20": "-",
       "-10": "-",
-      "0": "&infin;"
+      0: "&infin;"
     };
 
     // Format a spellbook entry for a certain indexed level
@@ -421,7 +421,7 @@ export default class ActorSheet5e extends ActorSheet {
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
-        dataset: {"type": "spell", "level": prepMode in sections ? 1 : i, "preparation.mode": prepMode},
+        dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparation.mode": prepMode},
         prop: sl
       };
     };
@@ -838,8 +838,8 @@ export default class ActorSheet5e extends ActorSheet {
     if ( itemData.type === "consumable" && itemData.flags.core?.sourceId ) {
       const similarItem = this.actor.items.find(i => {
         const sourceId = i.getFlag("core", "sourceId");
-        return sourceId && (sourceId === itemData.flags.core?.sourceId) &&
-               (i.type === "consumable") && (i.name === itemData.name);
+        return sourceId && (sourceId === itemData.flags.core?.sourceId)
+               && (i.type === "consumable") && (i.name === itemData.name);
       });
       if ( similarItem ) {
         return similarItem.update({
@@ -968,7 +968,7 @@ export default class ActorSheet5e extends ActorSheet {
       type: type,
       data: foundry.utils.deepClone(header.dataset)
     };
-    delete itemData.data["type"];
+    delete itemData.data.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 

@@ -56,8 +56,8 @@ export default class AbilityUseDialog extends Dialog {
 
     // Create the Dialog and return data as a Promise
     const icon = data.isSpell ? "fa-magic" : "fa-fist-raised";
-    const label = game.i18n.localize("DND5E.AbilityUse" + (data.isSpell ? "Cast" : "Use"));
-    return new Promise((resolve) => {
+    const label = game.i18n.localize(`DND5E.AbilityUse${data.isSpell ? "Cast" : "Use"}`);
+    return new Promise(resolve => {
       const dlg = new this(item, {
         title: `${item.name}: ${game.i18n.localize("DND5E.AbilityUseConfig")}`,
         content: html,
@@ -106,7 +106,7 @@ export default class AbilityUseDialog extends Dialog {
     const spellLevels = Array.fromRange(10).reduce((arr, i) => {
       if ( i < lvl ) return arr;
       const label = CONFIG.DND5E.spellLevels[i];
-      const l = actorData.spells["spell"+i] || {max: 0, override: null};
+      const l = actorData.spells[`spell${i}`] || {max: 0, override: null};
       let max = parseInt(l.override || l.max || 0);
       let slots = Math.clamped(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
@@ -156,7 +156,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
-    if ( !!recharge.value ) {
+    if ( recharge.value ) {
       return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
         type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`)
       });

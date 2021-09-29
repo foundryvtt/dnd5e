@@ -44,7 +44,7 @@ export default class Item5e extends Item {
 
         // Finesse weapons - Str or Dex (PHB pg. 147)
         else if (itemData.properties.fin === true) {
-          return (actorData.abilities["dex"].mod >= actorData.abilities["str"].mod) ? "dex" : "str";
+          return (actorData.abilities.dex.mod >= actorData.abilities.str.mod) ? "dex" : "str";
         }
 
         // Ranged weapons - Dex (PH p.194)
@@ -300,7 +300,7 @@ export default class Item5e extends Item {
     const itemData = this.data.data;
     if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
     const rollData = this.getRollData();
-    const derivedDamage = itemData.damage?.parts?.map((damagePart) => ({
+    const derivedDamage = itemData.damage?.parts?.map(damagePart => ({
       formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
       damageType: damagePart[1]
     }));
@@ -380,7 +380,7 @@ export default class Item5e extends Item {
     if ( actorBonus.attack ) parts.push(actorBonus.attack);
 
     // One-time bonus provided by consumed ammunition
-    if ( (itemData.consume?.type === "ammo") && !!this.actor.items ) {
+    if ( (itemData.consume?.type === "ammo") && this.actor.items ) {
       const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
 
       if (ammoItemData) {
@@ -390,7 +390,7 @@ export default class Item5e extends Item {
         const ammoIsTypeConsumable = (ammoItemData.type === "consumable") && (ammoItemData.data.consumableType === "ammo");
         if ( ammoCanBeConsumed && ammoItemAttackBonus && ammoIsTypeConsumable ) {
           parts.push("@ammo");
-          rollData["ammo"] = ammoItemAttackBonus;
+          rollData.ammo = ammoItemAttackBonus;
         }
       }
     }
@@ -398,7 +398,7 @@ export default class Item5e extends Item {
     // Condense the resulting attack bonus formula into a simplified label
     let toHitLabel = simplifyRollFormula(parts.join("+"), rollData).trim();
     if ( !/^[+-]/.test(toHitLabel) ) {
-      toHitLabel = "+ " + toHitLabel;
+      toHitLabel = `+ ${toHitLabel}`;
     }
     this.labels.toHit = toHitLabel;
 
@@ -446,7 +446,7 @@ export default class Item5e extends Item {
     if (!data.uses?.max) return;
     let max = data.uses.max;
 
-    // if this is an owned item and the max is not numeric, we need to calculate it
+    // If this is an owned item and the max is not numeric, we need to calculate it
     if (this.isOwned && !Number.isNumeric(max)) {
       if (this.actor.data === undefined) return;
       try {
@@ -860,7 +860,7 @@ export default class Item5e extends Item {
   _consumableChatData(data, labels, props) {
     props.push(
       CONFIG.DND5E.consumableTypes[data.consumableType],
-      data.uses.value + "/" + data.uses.max + " " + game.i18n.localize("DND5E.Charges")
+      `${data.uses.value}/${data.uses.max} ${game.i18n.localize("DND5E.Charges")}`
     );
     data.hasCharges = data.uses.value >= 0;
   }
@@ -893,7 +893,7 @@ export default class Item5e extends Item {
   _lootChatData(data, labels, props) {
     props.push(
       game.i18n.localize("DND5E.ItemTypeLoot"),
-      data.weight ? data.weight + " " + game.i18n.localize("DND5E.AbbreviationLbs") : null
+      data.weight ? `${data.weight} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null
     );
   }
 
@@ -945,7 +945,7 @@ export default class Item5e extends Item {
     }
     let title = `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`;
 
-    // get the parts and rollData for this item's attack
+    // Get the parts and rollData for this item's attack
     const {parts, rollData} = this.getAttackToHit();
 
     // Handle ammunition consumption
@@ -1086,10 +1086,10 @@ export default class Item5e extends Item {
     // Handle ammunition damage
     const ammoData = this._ammo?.data;
 
-    // only add the ammunition damage if the ammution is a consumable with type 'ammo'
+    // Only add the ammunition damage if the ammution is a consumable with type 'ammo'
     if ( this._ammo && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
       parts.push("@ammo");
-      rollData["ammo"] = ammoData.data.damage.parts.map(p => p[0]).join("+");
+      rollData.ammo = ammoData.data.damage.parts.map(p => p[0]).join("+");
       rollConfig.flavor += ` [${this._ammo.name}]`;
       delete this._ammo;
     }
@@ -1241,7 +1241,7 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
    */
   rollToolCheck(options={}) {
-    if ( this.type !== "tool" ) throw "Wrong item type!";
+    if ( this.type !== "tool" ) throw new Error("Wrong item type!");
 
     // Prepare roll data
     const rollData = this.getRollData();
@@ -1318,7 +1318,7 @@ export default class Item5e extends Item {
       if ( !ability ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);
       }
-      rollData["mod"] = ability?.mod || 0;
+      rollData.mod = ability?.mod || 0;
     }
 
     return rollData;
@@ -1532,7 +1532,7 @@ export default class Item5e extends Item {
     if ( !isCharacterClass ) return;
 
     // Prompt to add new class features
-    const addFeatures = changed["name"] || (changed.data && ["subclass", "levels"].some(k => k in changed.data));
+    const addFeatures = changed.name || (changed.data && ["subclass", "levels"].some(k => k in changed.data));
     if ( !addFeatures || (options.addFeatures === false) ) return;
     this.parent.getClassFeatures({
       className: changed.name || this.name,

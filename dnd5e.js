@@ -238,6 +238,7 @@ function _sortObject(obj, sortKey) {
 
 /**
  * Expand a list of attribute paths into an object that can be traversed.
+ * @param {string[]} attributes  The initial attributes configuration.
  * @returns {object}  The expanded object structure.
  */
 function expandAttributeList(attributes) {

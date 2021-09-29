@@ -17,9 +17,9 @@ export default class SelectItemsPrompt extends Dialog {
   activateListeners(html) {
     super.activateListeners(html);
 
-    // render the item's sheet if its image is clicked
-    html.on("click", ".item-image", (event) => {
-      const item = this.items.find((feature) => feature.id === event.currentTarget.dataset?.itemId);
+    // Render the item's sheet if its image is clicked
+    html.on("click", ".item-image", event => {
+      const item = this.items.find(feature => feature.id === event.currentTarget.dataset?.itemId);
       item?.sheet.render(true);
     });
   }
@@ -35,7 +35,7 @@ export default class SelectItemsPrompt extends Dialog {
   static async create(items, {hint}) {
     // Render the ability usage template
     const html = await renderTemplate("systems/dnd5e/templates/apps/select-items-prompt.html", {items, hint});
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const dlg = new this(items, {
         title: game.i18n.localize("DND5E.SelectItemsPromptTitle"),
         content: html,
