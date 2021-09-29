@@ -142,6 +142,19 @@
       "asyncArrow": "always"
     }],
     "spaced-comment": "warn",
+    "no-extra-boolean-cast": ["warn", {"enforceForLogicalOperands": true}],
+    "no-throw-literal": "warn",
+    "dot-notation": "warn",
+    "arrow-parens": ["warn", "as-needed", {"requireForBlockBody": false}],
+    "arrow-body-style": ["warn", "as-needed"],
+    "prefer-template": "warn",
+    "capitalized-comments": ["warn", "always", {"ignoreConsecutiveComments": true}],
+    "nonblock-statement-body-position": ["warn", "beside"],
+    "one-var": ["warn", "never"],
+    "operator-linebreak": ["warn", "before", {
+      "overrides": {"=": "after", "+=": "after", "-=": "after"}
+    }],
+    "quote-props": ["warn", "as-needed", {"keywords": false}],
 
     "jsdoc/check-access": "warn",
     "jsdoc/check-alignment": "warn",
