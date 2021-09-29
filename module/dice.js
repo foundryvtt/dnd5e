@@ -48,8 +48,8 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
   let constantPart = undefined;
   if ( constantFormula ) {
     try {
-      constantPart = Roll.safeEval(constantFormula)
-    } catch (err) {
+      constantPart = Roll.safeEval(constantFormula);
+    } catch(err) {
       console.warn(`Unable to evaluate constant term ${constantFormula} in simplifyRollFormula`);
     }
   }
@@ -69,11 +69,11 @@ export function simplifyRollFormula(formula, data, {constantFirst=false, preserv
  * @returns {boolean} True when unsupported, false if supported
  */
 function _isUnsupportedTerm(term) {
-	const diceTerm = term instanceof DiceTerm;
-	const operator = term instanceof OperatorTerm && ["+", "-"].includes(term.operator);
-	const number   = term instanceof NumericTerm;
+  const diceTerm = term instanceof DiceTerm;
+  const operator = term instanceof OperatorTerm && ["+", "-"].includes(term.operator);
+  const number = term instanceof NumericTerm;
 
-	return !(diceTerm || operator || number);
+  return !(diceTerm || operator || number);
 }
 
 /* -------------------------------------------- */
@@ -118,13 +118,13 @@ export async function d20Roll({
   advantage, disadvantage, fumble=1, critical=20, targetValue, elvenAccuracy, halflingLucky, reliableTalent, // Roll customization
   chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
   chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
-  }={}) {
+}={}) {
 
   // Handle input arguments
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
-  if ( chooseModifier && !isFF ) data["mod"] = "@mod";
+  if ( chooseModifier && !isFF ) data.mod = "@mod";
 
   // Construct the D20Roll instance
   const roll = new CONFIG.Dice.D20Roll(formula, data, {
@@ -157,7 +157,7 @@ export async function d20Roll({
 
   // Create a Chat Message
   if ( speaker ) {
-    console.warn(`You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData`);
+    console.warn("You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData");
     messageData.speaker = speaker;
   }
   if ( roll && chatMessage ) await roll.toMessage(messageData);
@@ -224,7 +224,7 @@ export async function damageRoll({
   criticalBonusDamage, // Damage customization
   fastForward=false, event, allowCritical=true, template, title, dialogOptions, // Dialog configuration
   chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
-  }={}) {
+}={}) {
 
   // Handle input arguments
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
@@ -259,7 +259,7 @@ export async function damageRoll({
 
   // Create a Chat Message
   if ( speaker ) {
-    console.warn(`You are passing the speaker argument to the damageRoll function directly which should instead be passed as an internal key of messageData`);
+    console.warn("You are passing the speaker argument to the damageRoll function directly which should instead be passed as an internal key of messageData");
     messageData.speaker = speaker;
   }
   if ( roll && chatMessage ) await roll.toMessage(messageData);

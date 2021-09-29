@@ -39,6 +39,7 @@ export class TokenDocument5e extends TokenDocument {
    * Traverse the configured allowed attributes to see if the provided one matches.
    * @param {object} allowed  The allowed attributes structure.
    * @param {string[]} attrs  The attributes list to test.
+   * @returns {boolean}       Whether the given attribute is allowed.
    * @private
    */
   static _isAllowedAttribute(allowed, attrs) {

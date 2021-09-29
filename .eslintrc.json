@@ -116,10 +116,10 @@
     "valid-typeof": ["warn", {"requireStringLiterals": true}],
     "wrap-iife": ["warn", "inside"],
 
-    "no-extra-semi": "warn",
-    "no-useless-escape": "warn",
-    "no-unused-vars": ["warn", {"args": "none"}],
+    "arrow-parens": ["warn", "as-needed", {"requireForBlockBody": false}],
+    "capitalized-comments": ["warn", "always", {"ignoreConsecutiveComments": true}],
     "comma-spacing": "warn",
+    "dot-notation": "warn",
     "indent": ["warn", 2, {"SwitchCase": 1}],
     "key-spacing": "warn",
     "keyword-spacing": ["warn", {"overrides": {"catch": {"before": true, "after": false}}}],
@@ -130,9 +130,21 @@
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true
     }],
-    "no-tabs": "warn",
-    "no-trailing-spaces": "warn",
+    "no-extra-boolean-cast": ["warn", {"enforceForLogicalOperands": true}],
+    "no-extra-semi": "warn",
     "no-multi-spaces": ["warn", {"ignoreEOLComments": true}],
+    "no-tabs": "warn",
+    "no-throw-literal": "error",
+    "no-trailing-spaces": "warn",
+    "no-useless-escape": "warn",
+    "no-unused-vars": ["warn", {"args": "none"}],
+    "nonblock-statement-body-position": ["warn", "beside"],
+    "one-var": ["warn", "never"],
+    "operator-linebreak": ["warn", "before", {
+      "overrides": {"=": "after", "+=": "after", "-=": "after"}
+    }],
+    "prefer-template": "warn",
+    "quote-props": ["warn", "as-needed", {"keywords": false}],
     "quotes": ["warn", "double", {"avoidEscape": true, "allowTemplateLiterals": false}],
     "semi": "warn",
     "space-before-blocks": ["warn", "always"],
@@ -142,19 +154,6 @@
       "asyncArrow": "always"
     }],
     "spaced-comment": "warn",
-    "no-extra-boolean-cast": ["warn", {"enforceForLogicalOperands": true}],
-    "no-throw-literal": "warn",
-    "dot-notation": "warn",
-    "arrow-parens": ["warn", "as-needed", {"requireForBlockBody": false}],
-    "arrow-body-style": ["warn", "as-needed"],
-    "prefer-template": "warn",
-    "capitalized-comments": ["warn", "always", {"ignoreConsecutiveComments": true}],
-    "nonblock-statement-body-position": ["warn", "beside"],
-    "one-var": ["warn", "never"],
-    "operator-linebreak": ["warn", "before", {
-      "overrides": {"=": "after", "+=": "after", "-=": "after"}
-    }],
-    "quote-props": ["warn", "as-needed", {"keywords": false}],
 
     "jsdoc/check-access": "warn",
     "jsdoc/check-alignment": "warn",

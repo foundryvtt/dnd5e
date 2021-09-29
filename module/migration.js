@@ -385,7 +385,7 @@ function _migrateActorSenses(actor, updateData) {
   }
 
   // If nothing was matched, but there was an old string - put the whole thing in "special"
-  if ( !wasMatched && !!original ) {
+  if ( !wasMatched && original ) {
     updateData["data.attributes.senses.special"] = original;
   }
 
@@ -410,10 +410,10 @@ function _migrateActorType(actor, updateData) {
 
   // New default data structure
   let data = {
-    "value": "",
-    "subtype": "",
-    "swarm": "",
-    "custom": ""
+    value: "",
+    subtype: "",
+    swarm: "",
+    custom: ""
   };
 
   // Match the existing string
@@ -424,9 +424,9 @@ function _migrateActorType(actor, updateData) {
     // Match a known creature type
     const typeLc = match.groups.type.trim().toLowerCase();
     const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
-      return (typeLc === k) ||
-        (typeLc === game.i18n.localize(v).toLowerCase()) ||
-        (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
+      return (typeLc === k)
+        || (typeLc === game.i18n.localize(v).toLowerCase())
+        || (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
     });
     if (typeMatch) data.value = typeMatch[0];
     else {
@@ -658,7 +658,7 @@ function _migrateItemIcon(item, updateData, {iconMap}={}) {
  * @private
  */
 export async function purgeFlags(pack) {
-  const cleanFlags = (flags) => {
+  const cleanFlags = flags => {
     const flags5e = flags.dnd5e || null;
     return flags5e ? {dnd5e: flags5e} : {};
   };
