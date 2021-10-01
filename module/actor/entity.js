@@ -248,8 +248,8 @@ export default class Actor5e extends Actor {
         if ( this.data.data.skills[key]?.value < 1 ) this.data.data.skills[key].value = 1;
       } else if ( type === "saves" ) {
         if ( this.data.data.abilities[key]?.proficient < 1 ) this.data.data.abilities[key].proficient = 1;
-      } else {
-        if ( !this.data.data.traits[type]?.value?.includes(key) ) this.data.data.traits[type]?.value?.push(key);
+      } else if ( !this.data.data.traits[type]?.value?.includes(key) ) {
+        this.data.data.traits[type]?.value?.push(key);
       }
     }
   }

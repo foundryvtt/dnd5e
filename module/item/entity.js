@@ -166,7 +166,7 @@ export default class Item5e extends Item {
 
   /**
    * Retrieve the changes this item causes on its owning actor.
-   * @return {object<string, string[]>}  Changes to apply grouped by trait type.
+   * @returns {object<string, string[]>}  Changes to apply grouped by trait type.
    */
   get actorTraitChanges() {
     switch (this.type) {
@@ -175,9 +175,9 @@ export default class Item5e extends Item {
           skills: this.data.data.skills.value,
           tool: this.data.data.tool.value,
           languages: this.data.data.languages.value
-        }
+        };
       default:
-        return {}
+        return {};
     }
   }
 

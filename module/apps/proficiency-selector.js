@@ -99,7 +99,7 @@ export default class ProficiencySelector extends TraitSelector {
     }
 
     const source = foundry.utils.getProperty(this.object.data._source, this.attribute);
-    const sourceValue = (this.options.valueKey) ? foundry.utils.getProperty(source, this.options.valueKey) ?? [] : source;
+    const sourceValue = this.options.valueKey ? foundry.utils.getProperty(source, this.options.valueKey) ?? [] : source;
     this._disableAssignedTraits(data.choices, sourceValue, value);
 
     return data;
