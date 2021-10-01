@@ -725,7 +725,7 @@ export default class ItemSheet5e extends ItemSheet {
     let data;
     try {
       data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch (err) {
+    } catch(err) {
       return false;
     }
 

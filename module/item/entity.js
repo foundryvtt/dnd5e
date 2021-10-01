@@ -183,9 +183,8 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Get a list of UUIDs for linked items that should be added when this item is dropped
-   * on an actor.
-   * @return {string[]}  Array of UUIDs.
+   * Get a list of UUIDs for linked items that should be added when this item is dropped on an actor.
+   * @returns {string[]}  Array of item UUIDs.
    */
   get grantedItems() {
     let items = [];
@@ -1545,7 +1544,7 @@ export default class Item5e extends Item {
       Promise.all(items.map(async i => await fromUuid(i))).then(items => {
         return this.parent.addEmbeddedItems(items, options.promptAddFeatures);
       });
-    };
+    }
 
     // Additional actions if this is a class
     const isCharacterClass = (this.parent.type !== "vehicle") && (this.type === "class");
