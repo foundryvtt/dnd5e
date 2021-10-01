@@ -173,13 +173,7 @@ export default class Item5e extends Item {
         let abbreviationObj = CONFIG.DND5E.spellComponentsAbbreviations[componentTag];
         let isDisplayed = abbreviationObj?.isDisplayed ?? true;
 
-        if ( isDisplayed ) {
-            if( abbreviationObj?.label ) {
-              arr.push(abbreviationObj?.label ?? componentTag.titleCase().slice(0, 1));
-            } else {
-              arr.push(componentTag.titleCase().slice(0, 1));
-            }
-        }
+        if ( isDisplayed ) arr.push(abbreviationObj?.label ?? componentTag.titleCase().slice(0, 1));
         
         return arr;
       }, []);
