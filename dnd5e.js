@@ -81,6 +81,9 @@ Hooks.once("init", function() {
     rollItemMacro: macros.rollItemMacro
   };
 
+  // This will be removed when dnd5e minimum core version is updated to v9.
+  if ( foundry.utils.isNewerVersion("9.224", game.data.version) ) dice.shimIsDeterministic();
+
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = ActiveEffect5e;
