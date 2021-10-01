@@ -111,21 +111,22 @@ export default class Actor5e extends Actor {
     }
 
     // Ability modifiers and saves
+    const bonusData = this.getRollData();
     const joat = flags.jackOfAllTrades;
-    const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, data);
-    const saveBonus = this._simplifyBonus(bonuses.save, data);
-    const checkBonus = this._simplifyBonus(bonuses.check, data);
+    const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, bonusData);
+    const saveBonus = this._simplifyBonus(bonuses.save, bonusData);
+    const checkBonus = this._simplifyBonus(bonuses.check, bonusData);
     for (let [id, abl] of Object.entries(data.abilities)) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
 
       const isRA = this._isRemarkableAthlete(id);
       abl.checkProf = new Proficiency(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
-      const saveBonusAbl = this._simplifyBonus(abl.bonuses?.save, data);
+      const saveBonusAbl = this._simplifyBonus(abl.bonuses?.save, bonusData);
       abl.saveBonus = saveBonusAbl + saveBonus;
 
       abl.saveProf = new Proficiency(data.attributes.prof, abl.proficient);
-      const checkBonusAbl = this._simplifyBonus(abl.bonuses?.check, data);
+      const checkBonusAbl = this._simplifyBonus(abl.bonuses?.check, bonusData);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
       abl.save = abl.mod + abl.saveBonus;
@@ -142,7 +143,7 @@ export default class Actor5e extends Actor {
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
 
     // Prepare skills
-    this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
+    this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
 
     // Reset class store to ensure it is updated with any changes
     this._classes = undefined;
@@ -384,12 +385,13 @@ export default class Actor5e extends Actor {
   /**
    * Prepare skill checks.
    * @param {object} actorData       Copy of the data for the actor being prepared. *Will be mutated.*
+   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulas.
    * @param {object} bonuses         Global bonus data.
    * @param {number} checkBonus      Global ability check bonus.
    * @param {object} originalSkills  A transformed actor's original actor's skills.
    * @private
    */
-  _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
+  _prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills) {
     if (actorData.type === "vehicle") return;
 
     const data = actorData.data;
@@ -399,10 +401,10 @@ export default class Actor5e extends Actor {
     const feats = DND5E.characterFlags;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
-    const skillBonus = this._simplifyBonus(bonuses.skill, data);
+    const skillBonus = this._simplifyBonus(bonuses.skill, bonusData);
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
-      const baseBonus = this._simplifyBonus(skl.bonuses?.check, data);
+      const baseBonus = this._simplifyBonus(skl.bonuses?.check, bonusData);
       let roundDown = true;
 
       // Remarkable Athlete
@@ -422,7 +424,7 @@ export default class Actor5e extends Actor {
       }
 
       // Compute modifier
-      const checkBonusAbl = this._simplifyBonus(data.abilities[skl.ability]?.bonuses?.check, data);
+      const checkBonusAbl = this._simplifyBonus(data.abilities[skl.ability]?.bonuses?.check, bonusData);
       skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
       skl.prof = new Proficiency(data.attributes.prof, skl.value, roundDown);
@@ -432,7 +434,7 @@ export default class Actor5e extends Actor {
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      const passiveBonus = this._simplifyBonus(skl.bonuses?.passive, data);
+      const passiveBonus = this._simplifyBonus(skl.bonuses?.passive, bonusData);
       skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
     }
   }
