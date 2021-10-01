@@ -2,12 +2,16 @@
   "_id": "qZyLwdx7lj5d1wfD",
   "name": "Roper",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/monstrosity/Roper.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 18,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 8,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 17,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -41,6 +53,10 @@
       "int": {
         "value": 7,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 6,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -124,7 +148,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>Ropers are underworld hunters and ambushers which have evolved to assume the appearance of stalagmites or other rock formations. Ropers wait for living creatures to draw near before lashing out with extruding tendrils which ensnare the target and sap its strength. The roper will draw its prey into a large fanged maw to slowly consume.</p>",
+        "value": "<p>Ropers are underworld hunters and ambushers which have evolved to assume the appearance of stalagmites or other rock formations. Ropers wait for living creatures to draw near before lashing out with extruding tendrils which ensnare the target and sap its strength. The roper will draw its prey into a large fanged maw to slowly consume.</p>\n<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Neutral Evil",
@@ -178,6 +202,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -187,6 +215,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -196,6 +228,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -205,6 +241,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 4,
         "bonus": 0,
         "passive": 14,
@@ -214,6 +254,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -223,6 +267,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -232,6 +280,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -241,6 +293,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -250,6 +306,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -259,6 +319,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -268,6 +332,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -277,6 +345,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 16,
@@ -286,6 +358,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -295,6 +371,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -304,6 +384,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -313,6 +397,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -322,6 +410,10 @@
       "ste": {
         "value": 2,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 15,
@@ -331,6 +423,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": null
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -470,9 +566,30 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/monstrosity/Roper.webp",
     "actorId": "qZyLwdx7lj5d1wfD",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": false,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -770,6 +887,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -871,6 +989,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
