@@ -76,7 +76,7 @@ export default class TraitConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   async getData() {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction" });
     const configurations = [{
@@ -167,9 +167,9 @@ export default class TraitConfig extends DocumentSheet {
 
   /**
    * Get the localized label for a specific key.
-   * @param {string} type
-   * @param {string} key
-   * @returns {string}
+   * @param {string} type  Trait type (e.g. `"weapon"` or `"tool"`).
+   * @param {string} key   Trait key (e.g. `"martial"` or `"disg"`).
+   * @returns {string}     Localized name.
    */
   static keyLabel(type, key) {
     if ( ["armor", "tool", "weapon"].includes(type) ) {
@@ -191,7 +191,7 @@ export default class TraitConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     const updateData = {};
     updateData[`${this.options.name}.${this.grantsKeyPath}`] = this.grants;
