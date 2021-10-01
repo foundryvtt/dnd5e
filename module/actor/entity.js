@@ -216,7 +216,7 @@ export default class Actor5e extends Actor {
   /**
    * Get currently selected traits.
    * @param {string} type  Trait type for which to fetch data.
-   * @return {string[]}
+   * @returns {string[]}   Array of formatted trait labels.
    */
   getSelectedTraits(type) {
     if ( ["armor", "tool", "weapon"].includes(type) ) {

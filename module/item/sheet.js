@@ -176,9 +176,9 @@ export default class ItemSheet5e extends ItemSheet {
         // Limited-use items
         const uses = i.data.data.uses || {};
         if ( uses.per && uses.max ) {
-          const label = uses.per === "charges" ?
-            ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})` :
-            ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
+          const label = uses.per === "charges"
+            ? ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})`
+            : ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
           obj[i.id] = i.name + label;
         }
 
@@ -354,18 +354,19 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Create a list of selectable options for the provided trait as well as how many still need to be fulfilled.
    * @param {string} type                      Trait affected by these grants.
-   * @param {Array.<string|TraitGrant> grants  Grants that should be fulfilled.
-   * @param {Array.<string>} actorSelected     Values that have already been selected on the actor.
-   * @param {Array.<string>} itemSelected      Values that have already been selected on this item.
+   * @param {Array<string|TraitGrant>} grants  Grants that should be fulfilled.
+   * @param {Array<string>} actorSelected      Values that have already been selected on the actor.
+   * @param {Array<string>} itemSelected       Values that have already been selected on this item.
    * @param {boolean} allowReplacements        If a grant with limited choices has no available options,
    *                                           allow player to select from full list of options.
-   * @param {{
-   *   choices: object
+   * @returns {{
+   *   choices: object,
    *   remaining: number
    * }|null}  Choices available for most permissive unfulfilled grant & number of remaining traits to select.
-   */ 
+   */
   static async _prepareTraitOptions(type, grants, actorSelected, itemSelected, allowReplacements) {
-    let { available, allChoices } = await ItemSheet5e._prepareUnfulfilledGrants(type, grants, actorSelected, itemSelected);
+    let { available, allChoices } = await ItemSheet5e._prepareUnfulfilledGrants(
+      type, grants, actorSelected, itemSelected);
 
     // Remove any grants that have no choices remaining
     let unfilteredLength = available.length;
@@ -380,7 +381,7 @@ export default class ItemSheet5e extends ItemSheet {
       return {
         choices: allChoices,
         remaining: unfilteredLength
-      }
+      };
     }
 
     // Create a choices object featuring a union of choices from all remaining grants
@@ -391,7 +392,7 @@ export default class ItemSheet5e extends ItemSheet {
     return {
       choices: allChoices,
       remaining: available.length
-    }
+    };
   }
 
   /* -------------------------------------------- */
@@ -399,13 +400,13 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Determine which of the provided grants, if any, still needs to be fulfilled.
    * @param {string} type                      Trait affected by these grants.
-   * @param {Array.<string|TraitGrant> grants  Grants that should be fulfilled.
-   * @param {Array.<string>} actorSelected     Values that have already been selected on the actor.
-   * @param {Array.<string>} itemSelected      Values that have already been selected on this item.
-   * @param {{
-   *   available: object[]
-   *   allChoices: object
-   * }}
+   * @param {Array<string|TraitGrant>} grants  Grants that should be fulfilled.
+   * @param {Array<string>} actorSelected      Values that have already been selected on the actor.
+   * @param {Array<string>} itemSelected       Values that have already been selected on this item.
+   * @returns {{
+   *   available: object[],
+   *   allChoices: SelectChoices
+   * }}  List of grants to be fulfilled and available choices.
    */
   static async _prepareUnfulfilledGrants(type, grants, actorSelected, itemSelected) {
     const expandedGrants = grants.reduce((arr, grant) => {
@@ -426,7 +427,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // If all of the grants have been selected, no need to go further
     if ( expandedGrants.length <= itemSelected.length ) return { available: [], allChoices: {} };
- 
+
     // Figure out how many choices each grant and sort by most restrictive first
     const allChoices = await TraitConfiguration.getTraitChoices(type);
     let available = expandedGrants.map(grant => ItemSheet5e._filterGrantChoices(allChoices, grant));
@@ -454,16 +455,16 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Turn a grant into a set of possible choices it provides.
-   * @param {object} traits       Object containing all potential traits grouped into categories.
-   * @param {string[]} choices    Choices to use when building trait list. Empty array means all traits passed through.
-   * @return {{
+   * @param {object} traits     Object containing all potential traits grouped into categories.
+   * @param {string[]} choices  Choices to use when building trait list. Empty array means all traits passed through.
+   * @returns {{
    *   choices: object,
-   *   set: Set.<string>
-   * }}
+   *   set: Set<string>
+   * }}  Filtered object of nested choices and set of available choices.
    * @private
    */
   static _filterGrantChoices(traits, choices) {
-    const choiceSet = (choices) => Object.entries(choices).reduce((set, [key, choice]) => {
+    const choiceSet = choices => Object.entries(choices).reduce((set, [key, choice]) => {
       if ( choice.children ) choiceSet(choice.children).forEach(c => set.add(c));
       else set.add(key);
       return set;
@@ -489,7 +490,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( filter.includes(key) ) {
         if ( !union ) delete traits[key];
         continue;
-      };
+      }
 
       let selectedChildren = false;
       if ( trait.children ) {
@@ -627,7 +628,8 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Handle the deletion of a tag when the delete tag link is clicked.
-   * @param {Event} event  The click event that triggered the deletion.
+   * @param {Event} event         The click event that triggered the deletion.
+   * @returns {Item5e|undefined}  Item with the updates applied (if they were applied).
    * @private
    */
   _onDeleteTag(event) {

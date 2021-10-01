@@ -1566,7 +1566,7 @@ export default class Item5e extends Item {
    * Pre-creation logic for automatically assigning traits to an item based on actor traits if possible.
    * @param {object} itemData  Item data being prepared.
    * @param {Actor5e} actor    Actor object to check against.
-   * @return {object}          Object containing updates to apply to the item data.
+   * @returns {object}         Object containing updates to apply to the item data.
    * @private
    */
   async _assignOwnedItemTraits(itemData, actor) {
