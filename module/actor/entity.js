@@ -449,8 +449,11 @@ export default class Actor5e extends Actor {
   _simplifyBonus(bonus, data) {
     if ( !bonus ) return 0;
     if ( Number.isNumeric(bonus) ) return parseInt(bonus);
-    const formula = Roll.replaceFormulaData(bonus, data, {missing: "0"});
-    return Number.isNumeric(formula) ? parseInt(formula) : 0;
+
+    const roll = new Roll(bonus, data);
+    if ( !roll.isDeterministic ) return 0;
+    roll.evaluate({ async: false });
+    return roll.total;
   }
 
   /* -------------------------------------------- */
