@@ -226,8 +226,8 @@ function _getSubfolderName(data, pack) {
 
     // Monsters should be grouped by CR
     case "monsters":
-      if ( data.data?.details?.cr === undefined ) return "";
-      return `cr-${data.data.details.cr}`;
+      if ( !data.data?.details?.type?.value ) return "";
+      return data.data.details.type.value;
 
     // Spells should be grouped by level
     case "spells":
