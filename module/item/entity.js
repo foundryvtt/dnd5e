@@ -169,12 +169,9 @@ export default class Item5e extends Item {
       labels.school = C.spellSchools[data.school];
       labels.components = Object.entries(data.components).reduce((arr, [componentTag, active]) => {
         if ( active !== true ) return arr;
-        
-        let abbreviationObj = CONFIG.DND5E.spellComponentsAbbreviations[componentTag];
-        let isDisplayed = abbreviationObj?.isDisplayed ?? true;
-
+        const abbreviationObj = CONFIG.DND5E.spellComponentsAbbreviations[componentTag];
+        const isDisplayed = abbreviationObj?.isDisplayed ?? true;
         if ( isDisplayed ) arr.push(abbreviationObj?.label ?? componentTag.titleCase().slice(0, 1));
-        
         return arr;
       }, []);
       labels.materials = data?.materials?.value ?? null;
