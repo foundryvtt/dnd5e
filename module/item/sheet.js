@@ -653,7 +653,8 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Handle the deletion of a linked item.
-   * @param {Event} event  The click event that triggered the deletion.
+   * @param {Event} event         The click event that triggered the deletion.
+   * @returns {Item5e|undefined}  Item with the updates applied (if they were applied).
    * @private
    */
   _onDeleteLinkedItem(event) {
