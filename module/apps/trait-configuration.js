@@ -23,7 +23,7 @@ export default class TraitConfiguration extends DocumentSheet {
 
     /**
      * Internal version of the grants array.
-     * @type {Array.<string|TraitGrant>}
+     * @type {Array<string | TraitGrant>}
      */
     this.grants = foundry.utils.getProperty(this.object.data, `${options.name}.grants`);
 
@@ -67,7 +67,7 @@ export default class TraitConfiguration extends DocumentSheet {
         label: TraitConfiguration.grantLabel(this.options.type, grant) || "—",
         data: grant,
         selected: index === this.selectedIndex
-      }
+      };
     });
     const allowChoices = typeof grants[this.selectedIndex]?.data === "object";
 
@@ -91,59 +91,11 @@ export default class TraitConfiguration extends DocumentSheet {
    * Produce an object containing all of the choices for the provided trait type.
    * @param {string} type      Trait name.
    * @param {string[]} chosen  Any currently selected options.
-   * @return {SelectChoices}   Object of choices ready to be displayed in a TraitSelector list.
+   * @returns {SelectChoices}  Object of choices ready to be displayed in a TraitSelector list.
    */
   static async getTraitChoices(type, chosen) {
-
     if ( ["armor", "tool", "weapon"].includes(type) ) {
-
-      /****************************************************************************/
-      /*             TODO: Refactor out this code when !335 is merged             */
-      /****************************************************************************/
-      let choices = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
-        obj[key] = { label: label, chosen: chosen?.includes(key) ?? false };
-        return obj;
-      }, {});
-      const ids = CONFIG.DND5E[`${type}Ids`];
-      const map = CONFIG.DND5E[`${type}ProficienciesMap`];
-      if ( ids !== undefined ) {
-        const typeProperty = (type !== "armor") ? `${type}Type` : `armor.type`;
-        for ( const [key, id] of Object.entries(ids) ) {
-          const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-          const item = await pack.getDocument(id);
-          if ( !item ) continue;
-          let type = foundry.utils.getProperty(item.data.data, typeProperty);
-          if ( map && map[type] ) type = map[type];
-          const entry = {
-            label: item.name,
-            chosen: chosen?.includes(key) ?? false
-          };
-          if ( choices[type] === undefined ) {
-            choices[key] = entry;
-          } else {
-            if ( choices[type].children === undefined ) {
-              choices[type].children = {};
-            }
-            choices[type].children[key] = entry;
-          }
-        }
-      }
-      if ( type === "tool" ) {
-        choices["vehicle"].children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
-          obj[key] = { label: label, chosen: chosen?.includes(key) ?? false };
-          return obj;
-        }, {});
-      }
-      if ( type === "tool" ) choices = ProficiencySelector._sortObject(choices);
-      for ( const category of Object.values(choices) ) {
-        if ( !category.children ) continue;
-        category.children = ProficiencySelector._sortObject(category.children);
-      }
-      /****************************************************************************/
-      /*                                End Refactor                              */
-      /****************************************************************************/
-  
-      return choices;
+      return ProficiencySelector.getChoices(type, chosen);
     }
 
     return Object.entries(CONFIG.DND5E[type] ?? {}).reduce((obj, [key, label]) => {
@@ -159,8 +111,9 @@ export default class TraitConfiguration extends DocumentSheet {
 
   /**
    * Create a human readable description of the provided grant.
-   * @param {string} type             
-   * @param {string|TraitGrant} data  
+   * @param {string} type             Trait name.
+   * @param {string|TraitGrant} data  Data for a specific grant.
+   * @returns {string}                Formatted and localized name.
    */
   static grantLabel(type, data) {
     // Single trait
@@ -191,7 +144,7 @@ export default class TraitConfiguration extends DocumentSheet {
    * @param {string} type     Trait type.
    * @param {number} [count]  Count used to determine pluralization. If no count is provided, will default
    *                          to the 'other' pluralization.
-   * @return {string}         Localized label.
+   * @returns {string}        Localized label.
    */
   static typeLabel(type, count) {
     let typeCap = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
@@ -206,9 +159,9 @@ export default class TraitConfiguration extends DocumentSheet {
 
   /**
    * Get the localized label for a specific key.
-   * @param {string} type  
-   * @param {string} key   
-   * @return {string}
+   * @param {string} type
+   * @param {string} key
+   * @returns {string}
    */
   static keyLabel(type, key) {
     if ( ["armor", "tool", "weapon"].includes(type) ) {
@@ -219,16 +172,7 @@ export default class TraitConfiguration extends DocumentSheet {
         return CONFIG.DND5E.vehicleTypes[key];
       }
 
-      /****************************************************************************/
-      /*             TODO: Refactor out this code when !335 is merged             */
-      /****************************************************************************/
-      const baseItems = CONFIG.DND5E[`${type}Ids`];
-      const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-      const item = pack.index.get(baseItems[key]);
-      /****************************************************************************/
-      /*                                End Refactor                              */
-      /****************************************************************************/
-
+      const item = ProficiencySelector.getBaseItem(CONFIG.DND5E[`${type}Ids`][key], { indexOnly: true });
       return item?.name ?? "";
     } else {
       const source = CONFIG.DND5E[type];
@@ -313,7 +257,7 @@ export default class TraitConfiguration extends DocumentSheet {
 
     if ( t.name === "allowChoices" ) {
       if ( t.checked ) {
-        this.grants[this.selectedIndex] = { count: 1 }
+        this.grants[this.selectedIndex] = { count: 1 };
         if ( current ) this.grants[this.selectedIndex].choices = [current];
       } else {
         this.grants[this.selectedIndex] = current.choices ? current.choices[0] ?? "" : "";
