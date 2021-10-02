@@ -846,7 +846,7 @@ DND5E.spellComponentsAbbreviations = {
   },
   "ritual": {
     label: "DND5E.ComponentRitualAbbr"
-  }
+  },
 };
 
 // Spell Schools
