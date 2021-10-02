@@ -6,14 +6,58 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  *
  * @param {string} formula                          The original roll formula
  * @param {object} [options]                        Formatting options
- * @param {boolean} [options.ignoreFlavor=true]     A Boolean controlling whether flavor text
- *                                                  is included in the simplified roll formula
- *                                                  returned by the function
+ * @param {boolean} [options.preserveFlavor=true]   Preserve flavor text in the simplified formula
  *
  * @returns {string}  The resulting simplified formula
  */
-export function simplifyRollFormula(formula, { ignoreFlavor=true } = {}) {
-  return formula;
+export function simplifyRollFormula(formula, { preserveFlavor=true } = {}) {
+  // Create a new roll and verify that the formula is valid before attempting simplification.
+  let roll;
+  try { roll = new Roll(formula); }
+  catch(err) { console.warn(`Unable to simplify formula '${formula}': ${err}`); }
+  Roll.validate(roll.formula);
+
+  // Optionally stip flavor annotations.
+  if (!preserveFlavor) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
+
+  // Perform arithmetic simplification on the existing roll terms.
+  roll.terms = _simplifyOperatorTerms(roll.terms);
+
+  if (roll.terms.find(term => ["/", "*"].includes(term.operator))) {
+    return roll.isDeterministic && !preserveFlavor
+      ? roll.evaluate().total.toString()
+      : roll.constructor.getFormula(roll.terms);
+  }
+  return roll.constructor.getFormula(roll.terms);
+}
+
+/**
+ * A helper function to perform arithmetic simplcification and remove redundant operator terms.
+ * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
+ *
+ * @returns {RollTerm[]}  A new array of roll terms with redundant operators removed.
+ */
+function _simplifyOperatorTerms(terms) {
+  return terms.reduce((acc, term) => {
+    const prior = acc[acc.length - 1];
+    const sequentialOperators = (prior instanceof OperatorTerm) && (term instanceof OperatorTerm);
+    if (!sequentialOperators) {
+      acc.push(term);
+      return acc;
+    }
+    const ops = new Set([prior.operator, term.operator]);
+
+    // Replace consecutive "+ -" operators with a "-" operator.
+    if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+
+    // Replace double "-" operators with a "+" operator.
+    else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+
+    // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as-is.
+    else if (!ops.has("+")) acc.push(term);
+
+    return acc;
+  }, []);
 }
 
 /* -------------------------------------------- */
