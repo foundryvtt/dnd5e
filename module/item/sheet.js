@@ -296,6 +296,18 @@ export default class ItemSheet5e extends ItemSheet {
     const damage = data.data?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
+    // Check max uses formula
+    if ( data.data?.uses?.max ) {
+      const maxRoll = new Roll(data.data.uses.max);
+      if ( !maxRoll.isDeterministic ) {
+        data.data.uses.max = this.object.data._source.data.uses.max;
+        this.form.querySelector("input[name='data.uses.max']").value = data.data.uses.max;
+        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
+          name: game.i18n.localize("DND5E.LimitedUses")
+        }));
+      }
+    }
+
     // Return the flattened submission data
     return flattenObject(data);
   }
