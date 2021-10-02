@@ -6,11 +6,11 @@ export {default as DamageRoll} from "./dice/damage-roll.js";
  *
  * @param {string} formula                          The original roll formula
  * @param {object} [options]                        Formatting options
- * @param {boolean} [options.preserveFlavor=true]   Preserve flavor text in the simplified formula
+ * @param {boolean} [options.preserveFlavor=false]   Preserve flavor text in the simplified formula
  *
  * @returns {string}  The resulting simplified formula
  */
-export function simplifyRollFormula(formula, { preserveFlavor=true } = {}) {
+export function simplifyRollFormula(formula, { preserveFlavor=false } = {}) {
   // Create a new roll and verify that the formula is valid before attempting simplification.
   let roll;
   try { roll = new Roll(formula); }
@@ -35,7 +35,7 @@ export function simplifyRollFormula(formula, { preserveFlavor=true } = {}) {
 
   // Group terms by type and perform simplifications on various types of roll term.
   let { poolTerms, diceTerms, mathTerms, numericTerms } = _groupTermsByType(roll.terms);
-  numericTerms = _simplifyNumericTerms(numericTerms);
+  numericTerms = _simplifyNumericTerms(numericTerms || []);
 
   // Recombine the terms into a single term array and remove an initial + operator if present.
   const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
@@ -45,8 +45,7 @@ export function simplifyRollFormula(formula, { preserveFlavor=true } = {}) {
 
 /**
  * A helper function to perform arithmetic simplcification and remove redundant operator terms.
- * @param {RollTerm[]} terms  An array of roll terms (Die, OperatorTerm, NumericTerm, etc.)
- *
+ * @param {RollTerm[]} terms  An array of roll terms
  * @returns {RollTerm[]}  A new array of roll terms with redundant operators removed.
  */
 function _simplifyOperatorTerms(terms) {
@@ -70,15 +69,39 @@ function _simplifyOperatorTerms(terms) {
   }, []);
 }
 
+/**
+ * A helper function for combining an array of numeric and operator terms into a single numeric term.
+ * @param {object[]} terms An array of roll terms
+ * @returns {object[]} A new array of terms with unnanotated numeric terms combined into one.
+ */
 function _simplifyNumericTerms(terms) {
-  const formula = terms?.map(term => term.formula).join("");
-  if (!formula) return null;
-  const result = Roll.safeEval(formula);
-  if (result === 0) return null;
-  const operator = new OperatorTerm({ operator: result > 0 ? "+" : "-" });
-  return [operator, new NumericTerm({ number: result })];
+  const simplified = [];
+
+  // Split the terms array into OperatorTerm-NumericTerm pairs and separate the pairs
+  // with flavor annotations from those without.
+  const { annotated, unannotated } = _chunkArray(terms, 2).reduce((obj, [operator, diceTerm]) => {
+    if ( diceTerm.flavor ) obj.annotated.push(operator, diceTerm);
+    else obj.unannotated.push(operator, diceTerm);
+    return obj;
+  }, { annotated: [], unannotated: [] });
+
+  // Combine the unannotated numerical bonuses into a single new NumericTerm.
+  if (unannotated.length) {
+    const staticBonus = Roll.safeEval(Roll.getFormula(unannotated));
+    if (staticBonus === 0) return [...annotated];
+
+    // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
+    if (staticBonus > 0) simplified.push(new OperatorTerm({ operator: "+"}));
+    simplified.push(new NumericTerm({ number: staticBonus} ));
+  }
+  return [...simplified, ...annotated];
 }
 
+/**
+ * A helper function to extract the contents of parenthetical terms into their own terms.
+ * @param {object[]} terms An array of roll terms
+ * @returns {object[]} A new array of terms with no parenthetical terms.
+ */
 function _expandParentheticalTerms(terms) {
   return terms.reduce((acc, term) => {
     if (term instanceof ParentheticalTerm) {
@@ -96,8 +119,7 @@ function _expandParentheticalTerms(terms) {
 /**
  * A helper function tp group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
  * MathTerms are included as NumericTerms if they are deterministic.
- * @param {RollTerm[]} terms  An array of RollTerms
- *
+ * @param {RollTerm[]} terms  An array of roll terms
  * @returns {object} An object mapping term types to arrays containing roll terms of that type.
  */
 function _groupTermsByType(terms) {
@@ -111,12 +133,24 @@ function _groupTermsByType(terms) {
     else type = term.constructor;
     const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 
-    // Create a new array as the value for the appropriate key if the key does not yet exist.
     // Push the term and the preceding OperatorTerm.
     if (!obj[key]) obj[key] = [];
     obj[key].push(terms[i - 1], term);
     return obj;
   }, {});
+}
+
+/**
+ * A helper function to split an array into a series of sub-arrays of a given chunk size.
+ * @param {Array} array
+ * @param {number} chunkSize The desired size of the subarrays
+ * @returns {Array | Array[]} An array of sub-arrays of the requested size.
+ */
+function _chunkArray(array, chunkSize) {
+  return array.reduce((chunks, _, i) => {
+    if (i % chunkSize === 0) chunks.push(array.slice(i, i + chunkSize));
+    return chunks;
+  }, []);
 }
 
 /* -------------------------------------------- */

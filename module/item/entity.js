@@ -310,8 +310,6 @@ export default class Item5e extends Item {
       catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
       return { formula, damageType: damagePart[1] };
     });
-
-    console.log(this.name);
     this.labels.derivedDamage = derivedDamage;
     return derivedDamage;
   }
