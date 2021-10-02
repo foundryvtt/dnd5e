@@ -843,7 +843,8 @@ const SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS = {
   isAbbreviationDisplayed: true
 };
 
-DND5E.SPELL_COMPONENTS_DEFAULT_SETTINGS = {
+// Spell Components Settings
+DND5E.spellComponentsSettings = {
   "vocal": {
     ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
   },
@@ -860,9 +861,6 @@ DND5E.SPELL_COMPONENTS_DEFAULT_SETTINGS = {
     ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
   },
 };
-
-// Spell Components Settings
-DND5E.spellComponentsSettings = foundry.utils.deepClone(DND5E.SPELL_COMPONENTS_DEFAULT_SETTINGS);
 
 // Spell Schools
 DND5E.spellSchools = {
