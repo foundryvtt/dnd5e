@@ -167,7 +167,7 @@ export default class Item5e extends Item {
       data.preparation.mode = data.preparation.mode || "prepared";
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
-      labels.components = new Intl.ListFormat(game.i18n.lang, { style: 'narrow', type: 'conjunction' }).format(
+      labels.components = new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" }).format(
         Object.entries(data.components).reduce((arr, [componentTag, active]) => {
           if ( active !== true ) return arr;
           const abbreviationSettings = CONFIG.DND5E.spellComponentsSettings[componentTag];
