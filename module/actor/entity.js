@@ -450,6 +450,7 @@ export default class Actor5e extends Actor {
    */
   _simplifyBonus(bonus, data) {
     if ( !bonus ) return 0;
+    if ( Number.isNumeric(bonus) ) return Number(bonus);
     try {
       const roll = new Roll(bonus, data);
       if ( !roll.isDeterministic ) return 0;
