@@ -832,11 +832,21 @@ DND5E.spellComponents = {
 
 // Spell Components Abbreviations
 DND5E.spellComponentsAbbreviations = {
-  "vocal": {"label": "DND5E.ComponentVerbalAbbr", "isDisplayed": true},
-  "somatic": {"label": "DND5E.ComponentSomaticAbbr", "isDisplayed": true},
-  "material": {"label": "DND5E.ComponentMaterialAbbr", "isDisplayed": true},
-  "concentration": {"label": "DND5E.ComponentConcentrationAbbr", "isDisplayed": true},
-  "ritual": {"label": "DND5E.ComponentRitualAbbr", "isDisplayed": true}
+  "vocal": {
+    label: "DND5E.ComponentVerbalAbbr"
+  },
+  "somatic": {
+    label: "DND5E.ComponentSomaticAbbr"
+  },
+  "material": {
+    label: "DND5E.ComponentMaterialAbbr"
+  },
+  "concentration": {
+    label: "DND5E.ComponentConcentrationAbbr"
+  },
+  "ritual": {
+    label: "DND5E.ComponentRitualAbbr"
+  }
 };
 
 // Spell Schools
