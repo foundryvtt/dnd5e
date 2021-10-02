@@ -839,29 +839,30 @@ DND5E.spellComponentsAbbreviations = {
   "ritual": "DND5E.ComponentRitualAbbr"
 };
 
-// If needed better to expose later through get method
-const SPELL_COMPONENT_DEFAULT_SETTINGS = {
+const SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS = {
   isAbbreviationDisplayed: true
 };
 
-// Spell Components Settings
-DND5E.spellComponentsSettings = {
+DND5E.SPELL_COMPONENTS_DEFAULT_SETTINGS = {
   "vocal": {
-    ...SPELL_COMPONENT_DEFAULT_SETTINGS
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
   },
   "somatic": {
-    ...SPELL_COMPONENT_DEFAULT_SETTINGS
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
   },
   "material": {
-    ...SPELL_COMPONENT_DEFAULT_SETTINGS
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
   },
   "concentration": {
-    ...SPELL_COMPONENT_DEFAULT_SETTINGS
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
   },
   "ritual": {
-    ...SPELL_COMPONENT_DEFAULT_SETTINGS
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
   },
 };
+
+// Spell Components Settings
+DND5E.spellComponentsSettings = foundry.utils.deepClone(DND5E.SPELL_COMPONENTS_DEFAULT_SETTINGS);
 
 // Spell Schools
 DND5E.spellSchools = {
