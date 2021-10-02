@@ -40,15 +40,13 @@ export function simplifyRollFormula(formula, { preserveFlavor=true } = {}) {
 function _simplifyOperatorTerms(terms) {
   return terms.reduce((acc, term) => {
     const prior = acc[acc.length - 1];
-    const sequentialOperators = (prior instanceof OperatorTerm) && (term instanceof OperatorTerm);
-    if (!sequentialOperators) {
-      acc.push(term);
-      return acc;
-    }
-    const ops = new Set([prior.operator, term.operator]);
+    const ops = new Set([prior?.operator, term.operator]);
+
+    // If one of the terms is not an operator, add the current term as-is.
+    if (ops.has(undefined)) acc.push(term);
 
     // Replace consecutive "+ -" operators with a "-" operator.
-    if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+    else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
 
     // Replace double "-" operators with a "+" operator.
     else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
