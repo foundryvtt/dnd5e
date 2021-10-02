@@ -170,9 +170,9 @@ export default class Item5e extends Item {
       labels.components = new Intl.ListFormat(game.i18n.lang, { style: 'narrow', type: 'conjunction' }).format(
         Object.entries(data.components).reduce((arr, [componentTag, active]) => {
           if ( active !== true ) return arr;
-          const abbreviationObj = CONFIG.DND5E.spellComponentsAbbreviations[componentTag];
-          const isDisplayed = abbreviationObj?.isDisplayed ?? true;
-          if ( isDisplayed ) arr.push(abbreviationObj?.label ?? componentTag.titleCase().slice(0, 1));
+          const abbreviationSettings = CONFIG.DND5E.spellComponentsSettings[componentTag];
+          const isAbbreviationDisplayed = abbreviationSettings?.isAbbreviationDisplayed ?? true;
+          if ( isAbbreviationDisplayed ) arr.push(CONFIG.DND5E.spellComponentsAbbreviations[componentTag] ?? componentTag.titleCase().slice(0, 1));
           return arr;
         }, [])
       );
