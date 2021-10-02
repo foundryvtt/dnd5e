@@ -311,6 +311,7 @@ export default class Item5e extends Item {
       return { formula, damageType: damagePart[1] };
     });
 
+    console.log(this.name);
     this.labels.derivedDamage = derivedDamage;
     return derivedDamage;
   }

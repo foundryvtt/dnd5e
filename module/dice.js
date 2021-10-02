@@ -2,7 +2,7 @@ export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
- * A standardized helper function for simplifying the constant parts of a multipart roll formula
+ * A standardized helper function for simplifying the constant parts of a multipart roll formula.
  *
  * @param {string} formula                          The original roll formula
  * @param {object} [options]                        Formatting options
@@ -29,11 +29,18 @@ export function simplifyRollFormula(formula, { preserveFlavor=true } = {}) {
       : roll.constructor.getFormula(roll.terms);
   }
 
-  // Flatten the roll formula and eliminate string terms
+  // Flatten the roll formula and eliminate string terms.
   roll.terms = _expandParentheticalTerms(roll.terms);
   roll.terms = Roll.simplifyTerms(roll.terms);
 
-  return roll.constructor.getFormula(roll.terms);
+  // Group terms by type and perform simplifications on various types of roll term.
+  let { poolTerms, diceTerms, mathTerms, numericTerms } = _groupTermsByType(roll.terms);
+  numericTerms = _simplifyNumericTerms(numericTerms);
+
+  // Recombine the terms into a single term array and remove an initial + operator if present.
+  const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
+  if (simplifiedTerms[0]?.operator === "+") simplifiedTerms.shift();
+  return roll.constructor.getFormula(simplifiedTerms);
 }
 
 /**
@@ -63,6 +70,15 @@ function _simplifyOperatorTerms(terms) {
   }, []);
 }
 
+function _simplifyNumericTerms(terms) {
+  const formula = terms?.map(term => term.formula).join("");
+  if (!formula) return null;
+  const result = Roll.safeEval(formula);
+  if (result === 0) return null;
+  const operator = new OperatorTerm({ operator: result > 0 ? "+" : "-" });
+  return [operator, new NumericTerm({ number: result })];
+}
+
 function _expandParentheticalTerms(terms) {
   return terms.reduce((acc, term) => {
     if (term instanceof ParentheticalTerm) {
@@ -75,6 +91,32 @@ function _expandParentheticalTerms(terms) {
     acc.push(term);
     return acc;
   }, []).flat();
+}
+
+/**
+ * A helper function tp group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
+ * MathTerms are included as NumericTerms if they are deterministic.
+ * @param {RollTerm[]} terms  An array of RollTerms
+ *
+ * @returns {object} An object mapping term types to arrays containing roll terms of that type.
+ */
+function _groupTermsByType(terms) {
+  // Add an initial operator so that terms can be rerranged arbitrarily.
+  if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+
+  return terms.reduce((obj, term, i) => {
+    let type;
+    if ([Die, Coin, FateDie].includes(term.constructor)) type = DiceTerm;
+    else if (term.constructor === MathTerm && term.isDeterministic) type = NumericTerm;
+    else type = term.constructor;
+    const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
+
+    // Create a new array as the value for the appropriate key if the key does not yet exist.
+    // Push the term and the preceding OperatorTerm.
+    if (!obj[key]) obj[key] = [];
+    obj[key].push(terms[i - 1], term);
+    return obj;
+  }, {});
 }
 
 /* -------------------------------------------- */
