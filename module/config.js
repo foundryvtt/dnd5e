@@ -839,22 +839,26 @@ DND5E.spellComponentsAbbreviations = {
   "ritual": "DND5E.ComponentRitualAbbr"
 };
 
+DND5E.SPELL_COMPONENT_DEFAULT_SETTINGS = {
+  isAbbreviationDisplayed: true
+};
+
 // Spell Components Settings
 DND5E.spellComponentsSettings = {
   "vocal": {
-    isAbbreviationDisplayed: true
+    ...DND5E.SPELL_COMPONENT_DEFAULT_SETTINGS
   },
   "somatic": {
-    isAbbreviationDisplayed: true
+    ...DND5E.SPELL_COMPONENT_DEFAULT_SETTINGS
   },
   "material": {
-    isAbbreviationDisplayed: true
+    ...DND5E.SPELL_COMPONENT_DEFAULT_SETTINGS
   },
   "concentration": {
-    isAbbreviationDisplayed: true
+    ...DND5E.SPELL_COMPONENT_DEFAULT_SETTINGS
   },
   "ritual": {
-    isAbbreviationDisplayed: true
+    ...DND5E.SPELL_COMPONENT_DEFAULT_SETTINGS
   },
 };
 
