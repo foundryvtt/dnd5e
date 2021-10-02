@@ -167,13 +167,15 @@ export default class Item5e extends Item {
       data.preparation.mode = data.preparation.mode || "prepared";
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
-      labels.components = Object.entries(data.components).reduce((arr, [componentTag, active]) => {
-        if ( active !== true ) return arr;
-        const abbreviationObj = CONFIG.DND5E.spellComponentsAbbreviations[componentTag];
-        const isDisplayed = abbreviationObj?.isDisplayed ?? true;
-        if ( isDisplayed ) arr.push(abbreviationObj?.label ?? componentTag.titleCase().slice(0, 1));
-        return arr;
-      }, []);
+      labels.components = new Intl.ListFormat(game.i18n.lang, { style: 'narrow', type: 'conjunction' }).format(
+        Object.entries(data.components).reduce((arr, [componentTag, active]) => {
+          if ( active !== true ) return arr;
+          const abbreviationObj = CONFIG.DND5E.spellComponentsAbbreviations[componentTag];
+          const isDisplayed = abbreviationObj?.isDisplayed ?? true;
+          if ( isDisplayed ) arr.push(abbreviationObj?.label ?? componentTag.titleCase().slice(0, 1));
+          return arr;
+        }, [])
+      );
       labels.materials = data?.materials?.value ?? null;
     }
 
