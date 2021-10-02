@@ -36,6 +36,7 @@ export function simplifyRollFormula(formula, { preserveFlavor=false } = {}) {
   // Group terms by type and perform simplifications on various types of roll term.
   let { poolTerms, diceTerms, mathTerms, numericTerms } = _groupTermsByType(roll.terms);
   numericTerms = _simplifyNumericTerms(numericTerms || []);
+  diceTerms = _simplifyDiceTerms(diceTerms || []);
 
   // Recombine the terms into a single term array and remove an initial + operator if present.
   const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
@@ -76,14 +77,7 @@ function _simplifyOperatorTerms(terms) {
  */
 function _simplifyNumericTerms(terms) {
   const simplified = [];
-
-  // Split the terms array into OperatorTerm-NumericTerm pairs and separate the pairs
-  // with flavor annotations from those without.
-  const { annotated, unannotated } = _chunkArray(terms, 2).reduce((obj, [operator, diceTerm]) => {
-    if ( diceTerm.flavor ) obj.annotated.push(operator, diceTerm);
-    else obj.unannotated.push(operator, diceTerm);
-    return obj;
-  }, { annotated: [], unannotated: [] });
+  const { annotated, unannotated } = _separateAnnotatedTerms(terms);
 
   // Combine the unannotated numerical bonuses into a single new NumericTerm.
   if (unannotated.length) {
@@ -94,6 +88,31 @@ function _simplifyNumericTerms(terms) {
     if (staticBonus > 0) simplified.push(new OperatorTerm({ operator: "+"}));
     simplified.push(new NumericTerm({ number: staticBonus} ));
   }
+  return [...simplified, ...annotated];
+}
+
+/**
+ * A helper function to combine DiceTerms of the same size and sign into single terms.
+ * @param {object[]} terms An array of DiceTerms and associated OperatorTerm.
+ * @returns {object[]}  A new array of simplified dice terms.
+ */
+function _simplifyDiceTerms(terms) {
+  const { annotated, unannotated } = _separateAnnotatedTerms(terms);
+
+  // Split the unannotated terms into different die sizes and signs
+  const diceQuantities = unannotated.reduce((obj, curr, i) => {
+    if (curr instanceof OperatorTerm) return obj;
+    const key = `${unannotated[i - 1].operator}${curr.faces}`;
+    if (!obj[key]) obj[key] = 0;
+    obj[key] += curr.number;
+    return obj;
+  }, {});
+
+  // Add new die and operator terms to simplified for each die size and sign
+  const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
+    new OperatorTerm({ operator: key.charAt(0) }),
+    new Die({ number, faces: parseInt(key.slice(1)) })
+  ]));
   return [...simplified, ...annotated];
 }
 
@@ -141,16 +160,16 @@ function _groupTermsByType(terms) {
 }
 
 /**
- * A helper function to split an array into a series of sub-arrays of a given chunk size.
- * @param {Array} array
- * @param {number} chunkSize The desired size of the subarrays
- * @returns {Array | Array[]} An array of sub-arrays of the requested size.
+ * A helper function to separate annotated terms from unannotated terms.
+ * @param {object[]} terms An array of DiceTerms and associated OperatorTerms
+ * @returns {Array | Array[]} A pair of term arrays, one containing annotated terms.
  */
-function _chunkArray(array, chunkSize) {
-  return array.reduce((chunks, _, i) => {
-    if (i % chunkSize === 0) chunks.push(array.slice(i, i + chunkSize));
-    return chunks;
-  }, []);
+function _separateAnnotatedTerms(terms) {
+  return terms.reduce((obj, curr, i) => {
+    if (curr instanceof OperatorTerm) return obj;
+    obj[curr.flavor ? "annotated" : "unannotated"].push(terms[i - 1], curr);
+    return obj;
+  }, { annotated: [], unannotated: [] });
 }
 
 /* -------------------------------------------- */
