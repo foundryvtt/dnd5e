@@ -23,11 +23,16 @@ export function simplifyRollFormula(formula, { preserveFlavor=true } = {}) {
   // Perform arithmetic simplification on the existing roll terms.
   roll.terms = _simplifyOperatorTerms(roll.terms);
 
-  if (roll.terms.find(term => ["/", "*"].includes(term.operator))) {
+  if (/[*/]/.test(roll.formula)) {
     return roll.isDeterministic && !preserveFlavor
       ? roll.evaluate().total.toString()
       : roll.constructor.getFormula(roll.terms);
   }
+
+  // Flatten the roll formula and eliminate string terms
+  roll.terms = _expandParentheticalTerms(roll.terms);
+  roll.terms = Roll.simplifyTerms(roll.terms);
+
   return roll.constructor.getFormula(roll.terms);
 }
 
@@ -56,6 +61,20 @@ function _simplifyOperatorTerms(terms) {
 
     return acc;
   }, []);
+}
+
+function _expandParentheticalTerms(terms) {
+  return terms.reduce((acc, term) => {
+    if (term instanceof ParentheticalTerm) {
+      if (term.isDeterministic) term = new NumericTerm({ number: Roll.safeEval(term.term) });
+      else {
+        const subterms = new Roll(term.term).terms;
+        term = _expandParentheticalTerms(subterms);
+      }
+    }
+    acc.push(term);
+    return acc;
+  }, []).flat();
 }
 
 /* -------------------------------------------- */
