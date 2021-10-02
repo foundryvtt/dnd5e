@@ -858,7 +858,6 @@ DND5E.spellComponentsSettings = {
   },
 };
 
-
 // Spell Schools
 DND5E.spellSchools = {
   "abj": "DND5E.SchoolAbj",
