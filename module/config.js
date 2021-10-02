@@ -830,6 +830,38 @@ DND5E.spellComponents = {
   "M": "DND5E.ComponentMaterial"
 };
 
+// Spell Components Abbreviations
+DND5E.spellComponentsAbbreviations = {
+  "vocal": "DND5E.ComponentVerbalAbbr",
+  "somatic": "DND5E.ComponentSomaticAbbr",
+  "material": "DND5E.ComponentMaterialAbbr",
+  "concentration": "DND5E.ComponentConcentrationAbbr",
+  "ritual": "DND5E.ComponentRitualAbbr"
+};
+
+const SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS = {
+  isAbbreviationDisplayed: true
+};
+
+// Spell Components Settings
+DND5E.spellComponentsSettings = {
+  "vocal": {
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
+  },
+  "somatic": {
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
+  },
+  "material": {
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
+  },
+  "concentration": {
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
+  },
+  "ritual": {
+    ...SPELL_COMPONENT_DEFAULT_SHARED_SETTINGS
+  },
+};
+
 // Spell Schools
 DND5E.spellSchools = {
   "abj": "DND5E.SchoolAbj",
