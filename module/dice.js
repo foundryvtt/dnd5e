@@ -73,7 +73,7 @@ function _simplifyOperatorTerms(terms) {
 /**
  * A helper function for combining an array of numeric and operator terms into a single numeric term.
  * @param {object[]} terms An array of roll terms
- * @returns {object[]} A new array of terms with unnanotated numeric terms combined into one.
+ * @returns {object[]} A new array of terms with unannotated numeric terms combined into one.
  */
 function _simplifyNumericTerms(terms) {
   const simplified = [];
@@ -92,8 +92,8 @@ function _simplifyNumericTerms(terms) {
 }
 
 /**
- * A helper function to combine DiceTerms of the same size and sign into single terms.
- * @param {object[]} terms An array of DiceTerms and associated OperatorTerm.
+ * A helper function to group dice of the same size and sign into single dice terms.
+ * @param {object[]} terms An array of DiceTerms and associated OperatorTerms.
  * @returns {object[]}  A new array of simplified dice terms.
  */
 function _simplifyDiceTerms(terms) {
