@@ -45,7 +45,7 @@ export function simplifyRollFormula(formula, { preserveFlavor=false } = {}) {
 }
 
 /**
- * A helper function to perform arithmetic simplcification and remove redundant operator terms.
+ * A helper function to perform arithmetic simplification and remove redundant operator terms.
  * @param {RollTerm[]} terms  An array of roll terms
  * @returns {RollTerm[]}  A new array of roll terms with redundant operators removed.
  */
@@ -54,7 +54,7 @@ function _simplifyOperatorTerms(terms) {
     const prior = acc[acc.length - 1];
     const ops = new Set([prior?.operator, term.operator]);
 
-    // If one of the terms is not an operator, add the current term as-is.
+    // If one of the terms is not an operator, add the current term as is.
     if (ops.has(undefined)) acc.push(term);
 
     // Replace consecutive "+ -" operators with a "-" operator.
@@ -63,7 +63,7 @@ function _simplifyOperatorTerms(terms) {
     // Replace double "-" operators with a "+" operator.
     else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
 
-    // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as-is.
+    // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as is.
     else if (!ops.has("+")) acc.push(term);
 
     return acc;
@@ -71,7 +71,7 @@ function _simplifyOperatorTerms(terms) {
 }
 
 /**
- * A helper function for combining an array of numeric and operator terms into a single numeric term.
+ * A helper function for combining unannoted numeric terms in an array into a single numeric term.
  * @param {object[]} terms An array of roll terms
  * @returns {object[]} A new array of terms with unannotated numeric terms combined into one.
  */
