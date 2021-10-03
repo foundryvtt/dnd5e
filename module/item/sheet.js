@@ -152,9 +152,9 @@ export default class ItemSheet5e extends ItemSheet {
     // Hit Dice
     else if ( consume.type === "hitDice" ) {
       return {
-        "smallest": game.i18n.localize("DND5E.ConsumeHitDiceSmallest"),
+        smallest: game.i18n.localize("DND5E.ConsumeHitDiceSmallest"),
         ...CONFIG.DND5E.hitDieTypes.reduce((obj, hd) => { obj[hd] = hd; return obj; }, {}),
-        "largest": game.i18n.localize("DND5E.ConsumeHitDiceLargest")
+        largest: game.i18n.localize("DND5E.ConsumeHitDiceLargest")
       };
     }
 

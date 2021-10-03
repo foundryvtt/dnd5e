@@ -654,7 +654,7 @@ export default class Item5e extends Item {
    * Handle update actions required when consuming an external resource
    * @param {object} itemUpdates        An object of data updates applied to this item
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
-   * @param {object} resourceUpdates    An array of updates to apply to other items owned by the actor
+   * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
    * @private
    */
@@ -687,7 +687,7 @@ export default class Item5e extends Item {
         break;
       case "hitDice":
         let denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
-        resource = Object.values(actor.classes).filter((item) => !denom || (item.data.data.hitDice === denom));
+        resource = Object.values(actor.classes).filter(item => !denom || (item.data.data.hitDice === denom));
         quantity = resource.reduce((count, cls) => {
           count += cls.data.data.levels - cls.data.data.hitDiceUsed;
           return count;
