@@ -103,8 +103,7 @@ function _simplifyDiceTerms(terms) {
   const diceQuantities = unannotated.reduce((obj, curr, i) => {
     if (curr instanceof OperatorTerm) return obj;
     const key = `${unannotated[i - 1].operator}${curr.faces}`;
-    if (!obj[key]) obj[key] = 0;
-    obj[key] += curr.number;
+    obj[key] = (obj[key] ?? 0) + curr.number;
     return obj;
   }, {});
 
@@ -153,8 +152,7 @@ function _groupTermsByType(terms) {
     const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 
     // Push the term and the preceding OperatorTerm.
-    if (!obj[key]) obj[key] = [];
-    obj[key].push(terms[i - 1], term);
+    (obj[key] = obj[key] ?? []).push(terms[i - 1], term);
     return obj;
   }, {});
 }
