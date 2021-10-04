@@ -301,10 +301,9 @@ export default class Item5e extends Item {
     if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
     const rollData = this.getRollData();
     const derivedDamage = itemData.damage?.parts?.map(damagePart => {
-      let roll;
       let formula;
       try {
-        roll = new Roll(damagePart[0], rollData);
+        const roll = new Roll(damagePart[0], rollData);
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
