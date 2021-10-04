@@ -305,7 +305,7 @@ export default class Item5e extends Item {
       let formula;
       try {
         roll = new Roll(damagePart[0], rollData);
-        formula = simplifyRollFormula(roll.formula);
+        formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
       return { formula, damageType: damagePart[1] };
