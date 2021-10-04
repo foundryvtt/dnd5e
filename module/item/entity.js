@@ -1676,7 +1676,9 @@ export default class Item5e extends Item {
 
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
-    const {actionType, description, source, activation, duration, target, range, damage, save, level} = itemData.data;
+    const {
+      actionType, description, source, activation, duration, target, range, damage, formula, save, level
+    } = itemData.data;
 
     // Get scroll data
     const scrollUuid = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}.${CONFIG.DND5E.spellScrollIds[level]}`;
@@ -1699,16 +1701,8 @@ export default class Item5e extends Item {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       data: {
-        "description.value": desc.trim(),
-        source,
-        actionType,
-        activation,
-        duration,
-        target,
-        range,
-        damage,
-        save,
-        level
+        "description.value": desc.trim(), source, actionType, activation, duration, target, range, damage, formula,
+        save, level
       }
     });
     return new this(spellScrollData);
