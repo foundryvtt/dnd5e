@@ -149,7 +149,7 @@ export default class Actor5e extends Actor {
     this._classes = undefined;
 
     // Determine Initiative Modifier
-    this._computeInitiativeModifier(actorData, checkBonus);
+    this._computeInitiativeModifier(actorData, checkBonus, bonusData);
 
     // Cache labels
     this.labels = {};
@@ -471,14 +471,15 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  
+
   /**
    * Calculate the initiative bonus to display on a character sheet
-   * 
-   * @param {Object} actorData
-   * @param {String} globalCheckBonus  The global ability check bonus for this actor
+   *
+   * @param {object} actorData         The actor data being prepared.
+   * @param {number} globalCheckBonus  The simplified global ability check bonus for this actor
+   * @param {object} bonusData         Actor data to use for replacing formula variables in bonuses
    */
-  _computeInitiativeModifier(actorData, globalCheckBonus) {
+  _computeInitiativeModifier(actorData, globalCheckBonus, bonusData) {
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
     const init = data.attributes.init;
@@ -486,22 +487,14 @@ export default class Actor5e extends Actor {
     // Initiative modifiers
     const joat = flags.jackOfAllTrades;
     const athlete = flags.remarkableAthlete;
-    let dexCheckBonus = data.abilities.dex.bonuses.check ?? 0;
+    const dexCheckBonus = this._simplifyBonus(data.abilities.dex.bonuses?.check, bonusData);
 
-    // Strip flavour text from the bonuses so that annotated numeric terms
-    // can be included in the initiative total
-    dexCheckBonus = dexCheckBonus.toString().replace(RollTerm.FLAVOR_REGEXP, "");
-    globalCheckBonus = globalCheckBonus.toString().replace(RollTerm.FLAVOR_REGEXP, "");
-    
     // Compute initiative modifier
     init.mod = data.abilities.dex.mod;
     init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
     init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
-    init.total = init.mod + init.bonus
-
-    if ( Number.isNumeric(dexCheckBonus) ) init.total += parseInt(dexCheckBonus);
-    if ( Number.isNumeric(globalCheckBonus) ) init.total += parseInt(globalCheckBonus);
+    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
     if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
   }
 
