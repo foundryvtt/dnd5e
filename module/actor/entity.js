@@ -111,21 +111,22 @@ export default class Actor5e extends Actor {
     }
 
     // Ability modifiers and saves
+    const bonusData = this.getRollData();
     const joat = flags.jackOfAllTrades;
-    const dcBonus = Number.isNumeric(data.bonuses?.spell?.dc) ? parseInt(data.bonuses.spell.dc) : 0;
-    const saveBonus = Number.isNumeric(bonuses.save) ? parseInt(bonuses.save) : 0;
-    const checkBonus = Number.isNumeric(bonuses.check) ? parseInt(bonuses.check) : 0;
+    const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, bonusData);
+    const saveBonus = this._simplifyBonus(bonuses.save, bonusData);
+    const checkBonus = this._simplifyBonus(bonuses.check, bonusData);
     for (let [id, abl] of Object.entries(data.abilities)) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
 
       const isRA = this._isRemarkableAthlete(id);
       abl.checkProf = new Proficiency(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
-      const saveBonusAbl = Number.isNumeric(abl.bonuses?.save) ? parseInt(abl.bonuses.save) : 0;
+      const saveBonusAbl = this._simplifyBonus(abl.bonuses?.save, bonusData);
       abl.saveBonus = saveBonusAbl + saveBonus;
 
       abl.saveProf = new Proficiency(data.attributes.prof, abl.proficient);
-      const checkBonusAbl = Number.isNumeric(abl.bonuses?.check) ? parseInt(abl.bonuses.check) : 0;
+      const checkBonusAbl = this._simplifyBonus(abl.bonuses?.check, bonusData);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
       abl.save = abl.mod + abl.saveBonus;
@@ -142,7 +143,7 @@ export default class Actor5e extends Actor {
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
 
     // Prepare skills
-    this._prepareSkills(actorData, bonuses, checkBonus, originalSkills);
+    this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
 
     // Reset class store to ensure it is updated with any changes
     this._classes = undefined;
@@ -384,12 +385,13 @@ export default class Actor5e extends Actor {
   /**
    * Prepare skill checks.
    * @param {object} actorData       Copy of the data for the actor being prepared. *Will be mutated.*
+   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulas.
    * @param {object} bonuses         Global bonus data.
    * @param {number} checkBonus      Global ability check bonus.
    * @param {object} originalSkills  A transformed actor's original actor's skills.
    * @private
    */
-  _prepareSkills(actorData, bonuses, checkBonus, originalSkills) {
+  _prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills) {
     if (actorData.type === "vehicle") return;
 
     const data = actorData.data;
@@ -399,10 +401,10 @@ export default class Actor5e extends Actor {
     const feats = DND5E.characterFlags;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
-    const skillBonus = Number.isNumeric(bonuses.skill) ? parseInt(bonuses.skill) : 0;
+    const skillBonus = this._simplifyBonus(bonuses.skill, bonusData);
     for (let [id, skl] of Object.entries(data.skills)) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
-      const baseBonus = Number.isNumeric(skl.bonuses?.check) ? parseInt(skl.bonuses.check) : 0;
+      const baseBonus = this._simplifyBonus(skl.bonuses?.check, bonusData);
       let roundDown = true;
 
       // Remarkable Athlete
@@ -422,7 +424,8 @@ export default class Actor5e extends Actor {
       }
 
       // Compute modifier
-      skl.bonus = baseBonus + checkBonus + skillBonus;
+      const checkBonusAbl = this._simplifyBonus(data.abilities[skl.ability]?.bonuses?.check, bonusData);
+      skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
       skl.mod = data.abilities[skl.ability].mod;
       skl.prof = new Proficiency(data.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
@@ -431,8 +434,31 @@ export default class Actor5e extends Actor {
 
       // Compute passive bonus
       const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      const passiveBonus = Number.isNumeric(skl.bonuses?.passive) ? parseInt(skl.bonuses.passive) : 0;
+      const passiveBonus = this._simplifyBonus(skl.bonuses?.passive, bonusData);
       skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert a bonus value to a simple integer for displaying on the sheet.
+   * @param {number|string|null} bonus  Actor's bonus value.
+   * @param {object} data               Actor data to use for replacing @ strings.
+   * @returns {number}                  Simplified bonus as an integer.
+   * @protected
+   */
+  _simplifyBonus(bonus, data) {
+    if ( !bonus ) return 0;
+    if ( Number.isNumeric(bonus) ) return Number(bonus);
+    try {
+      const roll = new Roll(bonus, data);
+      if ( !roll.isDeterministic ) return 0;
+      roll.evaluate({ async: false });
+      return roll.total;
+    } catch(error) {
+      console.error(error);
+      return 0;
     }
   }
 
@@ -830,40 +856,43 @@ export default class Actor5e extends Actor {
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
-    // Compose roll parts and data
-    const parts = ["@mod"];
-    const data = {mod: skl.mod};
+    const parts = [];
+    const data = this.getRollData();
+
+    // Add ability modifier
+    parts.push("@mod");
+    data.mod = skl.mod;
 
     // Include proficiency bonus
     if ( skl.prof.hasProficiency ) {
-      data.prof = skl.prof.term;
       parts.push("@prof");
+      data.prof = skl.prof.term;
     }
 
-    // Ability test bonus
+    // Global ability check bonus
     if ( bonuses.check ) {
-      data.checkBonus = bonuses.check;
       parts.push("@checkBonus");
+      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
     }
 
     // Ability-specific check bonus
     if ( abl?.bonuses?.check ) {
       const checkBonusKey = `${skl.ability}CheckBonus`;
-      data[checkBonusKey] = abl.bonuses.check;
       parts.push(`@${checkBonusKey}`);
+      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
     }
 
     // Skill-specific skill bonus
     if ( skl.bonuses?.check ) {
       const checkBonusKey = `${skillId}CheckBonus`;
-      data[checkBonusKey] = skl.bonuses.check;
       parts.push(`@${checkBonusKey}`);
+      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);
     }
 
-    // Skill check bonus
+    // Global skill check bonus
     if ( bonuses.skill ) {
-      data.skillBonus = bonuses.skill;
       parts.push("@skillBonus");
+      data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -928,9 +957,12 @@ export default class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
-    // Construct parts
-    const parts = ["@mod"];
-    const data = {mod: abl.mod};
+    const parts = [];
+    const data = this.getRollData();
+
+    // Add ability modifier
+    parts.push("@mod");
+    data.mod = abl.mod;
 
     // Include proficiency bonus
     if ( abl.checkProf.hasProficiency ) {
@@ -942,14 +974,14 @@ export default class Actor5e extends Actor {
     if ( abl.bonuses?.check ) {
       const checkBonusKey = `${abilityId}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = abl.bonuses.check;
+      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
     }
 
     // Add global actor bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = bonuses.check;
+      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -984,9 +1016,12 @@ export default class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId];
     const abl = this.data.data.abilities[abilityId];
 
-    // Construct parts
-    const parts = ["@mod"];
-    const data = {mod: abl.mod};
+    const parts = [];
+    const data = this.getRollData();
+
+    // Add ability modifier
+    parts.push("@mod");
+    data.mod = abl.mod;
 
     // Include proficiency bonus
     if ( abl.saveProf.hasProficiency ) {
@@ -998,14 +1033,14 @@ export default class Actor5e extends Actor {
     if ( abl.bonuses?.save ) {
       const saveBonusKey = `${abilityId}SaveBonus`;
       parts.push(`@${saveBonusKey}`);
-      data[saveBonusKey] = abl.bonuses.save;
+      data[saveBonusKey] = Roll.replaceFormulaData(abl.bonuses.save, data);
     }
 
     // Include a global actor ability save bonus
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = bonuses.save;
+      data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -1045,7 +1080,7 @@ export default class Actor5e extends Actor {
 
     // Evaluate a global saving throw bonus
     const parts = [];
-    const data = {};
+    const data = this.getRollData();
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
@@ -1058,7 +1093,7 @@ export default class Actor5e extends Actor {
     const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = bonuses.save;
+      data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
     }
 
     // Evaluate the roll
