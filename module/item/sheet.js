@@ -166,9 +166,9 @@ export default class ItemSheet5e extends ItemSheet {
         // Limited-use items
         const uses = i.data.data.uses || {};
         if ( uses.per && uses.max ) {
-          const label = uses.per === "charges" ?
-            ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})` :
-            ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
+          const label = uses.per === "charges"
+            ? ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})`
+            : ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
           obj[i.id] = i.name + label;
         }
 

@@ -1576,9 +1576,11 @@ export default class Item5e extends Item {
       if ( isNPC ) {
         updates["data.proficient"] = true;  // NPCs automatically have equipment proficiency
       } else {
-        const armorProf = CONFIG.DND5E.armorProficienciesMap[data.data?.armor?.type]; // Player characters check proficiency
+        const armorProf = CONFIG.DND5E.armorProficienciesMap[this.data.data.armor?.type]; // Player characters check proficiency
         const actorArmorProfs = actorData.data.traits?.armorProf?.value || [];
-        updates["data.proficient"] = (armorProf === true) || actorArmorProfs.includes(armorProf) || actorArmorProfs.includes(data.data.baseItem);
+        updates["data.proficient"] =
+          (armorProf === true) || actorArmorProfs.includes(armorProf)
+          || actorArmorProfs.includes(this.data.data.baseItem);
       }
     }
     return updates;
@@ -1597,8 +1599,8 @@ export default class Item5e extends Item {
    */
   _onCreateOwnedSpell(data, actorData, isNPC) {
     const updates = {};
-    if ( foundry.utils.getProperty(data, "data.proficient") === undefined ) {
-      updates["data.prepared"] = isNPC;       // NPCs automatically prepare spells
+    if ( foundry.utils.getProperty(data, "data.preparation.prepared") === undefined ) {
+      updates["data.preparation.prepared"] = isNPC; // NPCs automatically prepare spells
     }
     return updates;
   }
@@ -1621,7 +1623,8 @@ export default class Item5e extends Item {
         updates["data.proficient"] = 1;
       } else {
         const actorToolProfs = actorData.data.traits?.toolProf?.value;
-        const proficient = actorToolProfs.includes(data.data?.toolType) || actorToolProfs.includes(data.data?.baseItem);
+        const proficient =
+          actorToolProfs.includes(this.data.data.toolType) || actorToolProfs.includes(this.data.data.baseItem);
         updates["data.proficient"] = Number(proficient);
       }
     }
