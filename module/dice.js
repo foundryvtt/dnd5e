@@ -146,8 +146,8 @@ function _groupTermsByType(terms) {
 
   return terms.reduce((obj, term, i) => {
     let type;
-    if ([Die, Coin, FateDie].includes(term.constructor)) type = DiceTerm;
-    else if (term.constructor === MathTerm && term.isDeterministic) type = NumericTerm;
+    if (term instanceof DiceTerm) type = DiceTerm;
+    else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
     else type = term.constructor;
     const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 
