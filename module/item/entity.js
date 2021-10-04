@@ -1694,17 +1694,8 @@ export default class Item5e extends Item {
       name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
       img: itemData.img,
       data: {
-        "description.value": desc.trim(),
-        source,
-        actionType,
-        activation,
-        duration,
-        target,
-        range,
-        damage,
-        formula,
-        save,
-        level
+        "description.value": desc.trim(), source, actionType, activation, duration, target, range, damage, formula,
+        save, level
       }
     });
     return new this(spellScrollData);
