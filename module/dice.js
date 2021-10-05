@@ -24,7 +24,7 @@ export function simplifyRollFormula(formula, { preserveFlavor=false } = {}) {
   roll.terms = _simplifyOperatorTerms(roll.terms);
 
   if (/[*/]/.test(roll.formula)) {
-    return roll.isDeterministic && !preserveFlavor
+    return ( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )
       ? roll.evaluate({ async: false }).total.toString()
       : roll.constructor.getFormula(roll.terms);
   }
