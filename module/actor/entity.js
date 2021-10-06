@@ -149,14 +149,7 @@ export default class Actor5e extends Actor {
     this._classes = undefined;
 
     // Determine Initiative Modifier
-    const init = data.attributes.init;
-    const athlete = flags.remarkableAthlete;
-    init.mod = data.abilities.dex.mod;
-    init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
-    init.value = init.value ?? 0;
-    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
-    init.total = init.mod + init.bonus;
-    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
+    this._computeInitiativeModifier(actorData, checkBonus, bonusData);
 
     // Cache labels
     this.labels = {};
@@ -478,6 +471,32 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Calculate the initiative bonus to display on a character sheet
+   *
+   * @param {object} actorData         The actor data being prepared.
+   * @param {number} globalCheckBonus  The simplified global ability check bonus for this actor
+   * @param {object} bonusData         Actor data to use for replacing formula variables in bonuses
+   */
+  _computeInitiativeModifier(actorData, globalCheckBonus, bonusData) {
+    const data = actorData.data;
+    const flags = actorData.flags.dnd5e || {};
+    const init = data.attributes.init;
+
+    // Initiative modifiers
+    const joat = flags.jackOfAllTrades;
+    const athlete = flags.remarkableAthlete;
+    const dexCheckBonus = this._simplifyBonus(data.abilities.dex.bonuses?.check, bonusData);
+
+    // Compute initiative modifier
+    init.mod = data.abilities.dex.mod;
+    init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
+    init.value = init.value ?? 0;
+    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
+    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
+    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
+  }
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
