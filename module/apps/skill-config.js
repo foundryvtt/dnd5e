@@ -12,7 +12,7 @@ export default class ActorSkillConfig extends DocumentSheet {
     this._skillId = skillId;
   }
 
-  /** @override */
+  /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
@@ -24,14 +24,14 @@ export default class ActorSkillConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   get title() {
     return `${game.i18n.format("DND5E.SkillConfigureTitle", {skill: CONFIG.DND5E.skills[this._skillId]})}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   getData(options) {
     return {
       skill: foundry.utils.getProperty(this.document.data._source, `data.skills.${this._skillId}`) || {},
@@ -40,4 +40,22 @@ export default class ActorSkillConfig extends DocumentSheet {
       bonusGlobal: getProperty(this.object.data._source, "data.bonuses.abilities.skill")
     };
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _updateObject(event, formData) {
+    const passive = formData[`data.skills.${this._skillId}.bonuses.passive`];
+    const passiveRoll = new Roll(passive);
+    if ( !passiveRoll.isDeterministic ) {
+      const message = game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
+        name: game.i18n.localize("DND5E.SkillBonusPassive")
+      });
+      ui.notifications.error(message);
+      throw new Error(message);
+    }
+
+    super._updateObject(event, formData);
+  }
+
 }
