@@ -121,7 +121,7 @@ function _simplifyDiceTerms(terms) {
  * @returns {object[]} A new array of terms with no parenthetical terms.
  */
 function _expandParentheticalTerms(terms) {
-  return terms.reduce((acc, term) => {
+  terms = terms.reduce((acc, term) => {
     if (term instanceof ParentheticalTerm) {
       if (term.isDeterministic) term = new NumericTerm({ number: Roll.safeEval(term.term) });
       else {
@@ -131,7 +131,8 @@ function _expandParentheticalTerms(terms) {
     }
     acc.push(term);
     return acc;
-  }, []).flat();
+  }, []);
+  return _simplifyOperatorTerms(terms.flat());
 }
 
 /**
