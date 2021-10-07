@@ -875,6 +875,16 @@ DND5E.spellComponents = {
 };
 
 /**
+ * Spell components abbreviations used in short information block.
+ * @enum {string}
+ */
+DND5E.spellComponentsAbbreviations = {
+  vocal: "DND5E.ComponentVerbalAbbr",
+  somatic: "DND5E.ComponentSomaticAbbr",
+  material: "DND5E.ComponentMaterialAbbr"
+};
+
+/**
  * Schools to which a spell can belong.
  * @enum {string}
  */
