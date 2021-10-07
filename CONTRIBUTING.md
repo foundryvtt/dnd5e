@@ -14,12 +14,16 @@ This repository leverages [gulp](https://gulpjs.com/) to run automated build tas
 
 Installs all dependencies needed to run developer tooling scripts.
 
-### `npm run build` / `gulp css`
+### `npm run build` / `gulp buildAll`
 
 Runs all relevant build scripts:
 
 - Converts LESS -> CSS
 - Converts JSON -> DB (compendia)
+
+### `npm run build:css` / `gulp css`
+
+Converts the LESS in `./less` to the final `dnd5e.css`.
 
 ### `npm run build:watch` / `gulp`
 
@@ -158,3 +162,39 @@ MRs have a few phases:
 #### MR Size
 
 Please understand that large and sprawling MRs are exceptionally difficult to review. As much as possible, break down the work for a large feature into smaller steps. Even if multiple MRs are required for a single Issue, this will make it considerably easier and therefore more likely that your contributions will be reviewed and merged in a timely manner.
+
+## Releases
+
+This repository includes a Gitlab CI configuration which automates the compilation and bundling required for a release when a Tag is pushed or created with the name `release-x.x.x`.
+
+### Prerequisites
+
+If either of these conditions are not met on the commit that tag points at, the workflow will error out and release assets will not be created.
+
+- The `system.json` file's `version` must match the `x.x.x` part of the tag name.
+- The `system.json` file's `download` url must match the expected outcome of the release CI artifact. This should simply be changing version numbers in the url to match the release version.
+
+```text
+https://gitlab.com/foundrynet/dnd5e/-/releases/release-1.4.3/downloads/dnd5e-release-1.4.3.zip
+                                              └─ Tag Name ──┘               └─ Tag Name ──┘
+```
+
+### Package Repository
+
+This workflow uses the [Generic Package Repository](https://docs.gitlab.com/ee/user/packages/generic_packages/) to host the latest system manifest. Doing so allows us to have a stable url for a `latest` manifest as each CI run updates this package. By doing this, we avoid the 2 minute delay between release creation and file availability in which a user might hit 'update' and get an error.
+
+As such, the stable url to the "Latest" system manifest (as updated by the CI workflow) is:
+
+```text
+https://gitlab.com/api/v4/projects/foundrynet%2Fdnd5e/packages/generic/dnd5e/latest/system.json
+```
+
+### Process for Release
+
+`master` is to be kept as the "most recently released" version of the system. All work is done on development branches matching the milestone the work is a part of. Once the work on a milestone is complete, the following steps will create a system release:
+
+0. [ ] Verify the `NEEDS_MIGRATION_VERSION` is correct.
+1. [ ] `system.json` `version` and `download` fields are updated on the development branch (e.g. `1.5.x`).
+2. [ ] A Tag is created at the tip of the development branch with the format `release-x.x.x`, triggering the CI workflow (which takes ~2 mins to complete).
+3. [ ] Development Branch is merged to `master` after the workflow is completed.
+4. [ ] The Foundryvtt.com admin listing is updated with the `manifest` url pointing to the `system.json` attached to the workflow-created release.
