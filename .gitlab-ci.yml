@@ -58,7 +58,7 @@ build:
     - apt-get install zip
 
     # zip whitelist of files to distribute
-    - zip $ZIP_FILE_NAME -r icons lang module packs/*.db templates tokens ui dnd5e.css dnd5e.js LICENSE.txt OGL.txt README.md system.json template.json
+    - zip $ZIP_FILE_NAME -r icons lang module json packs/*.db templates tokens ui dnd5e.css dnd5e.js LICENSE.txt OGL.txt README.md system.json template.json
   artifacts:
     # include the system json and created zip file as artifacts of the job
     paths:
