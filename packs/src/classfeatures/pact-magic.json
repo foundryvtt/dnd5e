@@ -1,0 +1,68 @@
+{
+  "_id": "x6IJZwr6f0SGral7",
+  "name": "Pact Magic",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Your arcane research and the magic bestowed on you by your patron have given you facility with spells.</p>\n<h3>Cantrips</h3>\n<p>You know two cantrips of your choice from the warlock spell list. You learn additional warlock cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Warlock table.</p>\n<h3>Spell Slots</h3>\n<p>The Warlock table shows how many spell slots you have. The table also shows what the level of those slots is; all of your spell slots are the same level. To cast one of your warlock spells of 1st level or higher, you must expend a spell slot. You regain all expended spell slots when you finish a short or long rest.</p><p>For example, when you are 5th level, you have two 3rd-level spell slots. To cast the 1st-level spell thunderwave, you must spend one of those slots, and you cast it as a 3rd-level spell.</p>\n<h3>Spells Known of 1st Level and Higher</h3>\n<p>At 1st level, you know two 1st-level spells of your choice from the warlock spell list.</p><p>The Spells Known column of the Warlock table shows when you learn more warlock spells of your choice of 1st level and higher. A spell you choose must be of a level no higher than what's shown in the table's Slot Level column for your level. When you reach 6th level, for example, you learn a new warlock spell, which can be 1st, 2nd, or 3rd level.</p><p>Additionally, when you gain a level in this class, you can choose one of the warlock spells you know and replace it with another spell from the warlock spell list, which also must be of a level for which you have spell slots.</p>\n<table border=\"0\" cellspacing=\"0\">\n<thead>\n<tr>\n<td>Level</td>\n<td>Cantrips Known</td>\n<td>Spells Known</td>\n<td>Spell Slots</td>\n<td>Slot Level</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1st</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>2</td>\n<td>3</td>\n<td>2</td>\n<td>1st</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>2</td>\n<td>4</td>\n<td>2</td>\n<td>2nd</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>3</td>\n<td>5</td>\n<td>2</td>\n<td>2nd</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>3</td>\n<td>6</td>\n<td>2</td>\n<td>3rd</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>3</td>\n<td>7</td>\n<td>2</td>\n<td>3rd</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>3</td>\n<td>8</td>\n<td>2</td>\n<td>4th</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>3</td>\n<td>9</td>\n<td>2</td>\n<td>4th</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>3</td>\n<td>10</td>\n<td>2</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>4</td>\n<td>10</td>\n<td>2</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>4</td>\n<td>11</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>4</td>\n<td>11</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>4</td>\n<td>12</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>4</td>\n<td>12</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>4</td>\n<td>13</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>4</td>\n<td>13</td>\n<td>3</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>4</td>\n<td>14</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>4</td>\n<td>14</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>4</td>\n<td>15</td>\n<td>4</td>\n<td>5th</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Charisma is your spellcasting ability for your warlock spells, so you use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a warlock spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Charisma modifier</p><p><strong>Spell attack modifier </strong>= your proficiency bonus + your Charisma modifier</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use an arcane focus as a spellcasting focus for your warlock spells.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Warlock 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
+  "effects": []
+}

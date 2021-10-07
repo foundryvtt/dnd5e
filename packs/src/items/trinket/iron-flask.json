@@ -1,0 +1,79 @@
+{
+  "_id": "lvLrkAR7k8DS7J3W",
+  "name": "Iron Flask",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-round-empty-glass.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>This iron bottle has a brass stopper. You can use an action to speak the flask's command word, targeting a creature that you can see within 60 feet of you. If the target is native to a plane of existence other than the one you're on, the target must succeed on a DC 17 Wisdom saving throw or be trapped in the flask. If the target has been trapped by the flask before, it has advantage on the saving throw. Once trapped, a creature remains in the flask until released. The flask can hold only one creature at a time. A creature trapped in the flask doesn't need to breathe, eat, or drink and doesn't age.</p>\n<p>You can use an action to remove the flask's stopper and release the creature the flask contains. The creature is friendly to you and your companions for 1 hour and obeys your commands for that duration. If you give no commands or give it a command that is likely to result in its death, it defends itself but otherwise takes no actions. At the end of the duration, the creature acts in accordance with its normal disposition and alignment.</p>\n<p>An @Compendium[dnd5e.spells.3OZnNhunvRtPOQmH]{Identify} spell reveals that a creature is inside the flask, but the only way to determine the type of creature is to open the flask. A newly discovered bottle might already contain a creature chosen by the GM or determined randomly.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>d100</strong></td>\n<td><strong>Contents</strong></td>\n</tr>\n<tr>\n<td>1-50</td>\n<td>Empty</td>\n</tr>\n<tr>\n<td>51-54</td>\n<td>Demon (type 1)</td>\n</tr>\n<tr>\n<td>55-58</td>\n<td>Demon (type 2)</td>\n</tr>\n<tr>\n<td>59-62</td>\n<td>Demon (type 3)</td>\n</tr>\n<tr>\n<td>63-64</td>\n<td>Demon (type 4)</td>\n</tr>\n<tr>\n<td>65</td>\n<td>Demon (type 5)</td>\n</tr>\n<tr>\n<td>66</td>\n<td>Demon (type 6)</td>\n</tr>\n<tr>\n<td>67</td>\n<td>@Compendium[dnd5e.monsters.m4H3hjamBNMH09S9]{Deva}</td>\n</tr>\n<tr>\n<td>68-69</td>\n<td>Devil (greater)</td>\n</tr>\n<tr>\n<td>70-73</td>\n<td>Devil (lesser)</td>\n</tr>\n<tr>\n<td>74-75</td>\n<td>@Compendium[dnd5e.monsters.5P1VGAZQwOilwZQf]{Djinni}</td>\n</tr>\n<tr>\n<td>76-77</td>\n<td>@Compendium[dnd5e.monsters.LTomFUTBrkRi0Pj5]{Efreeti}</td>\n</tr>\n<tr>\n<td>78-83</td>\n<td>Elemental ( @Compendium[dnd5e.monsters.banHjKDMCegbUwYE]{Air Elemental} @Compendium[dnd5e.monsters.sApYLZj9PTZ40wJr]{Earth Elemental} @Compendium[dnd5e.monsters.brSo9cWhtpG0ifU5]{Fire Elemental} @Compendium[dnd5e.monsters.namJz755U1EhvEJa]{Water Elemental} )</td>\n</tr>\n<tr>\n<td>84-86</td>\n<td>@Compendium[dnd5e.monsters.oDspGxRQFBhE74L2]{Invisible Stalker}</td>\n</tr>\n<tr>\n<td>87-90</td>\n<td>@Compendium[dnd5e.monsters.xvh2UOKv1bh03Gih]{Night Hag}</td>\n</tr>\n<tr>\n<td>91</td>\n<td>@Compendium[dnd5e.monsters.XEByBLeOkDgL3mrr]{Planetar}</td>\n</tr>\n<tr>\n<td>92-95</td>\n<td>@Compendium[dnd5e.monsters.yVNPVJIBpQ2Mp3Xa]{Salamander}</td>\n</tr>\n<tr>\n<td>96</td>\n<td>@Compendium[dnd5e.monsters.lOYt73eaJojBDxAV]{Solar}</td>\n</tr>\n<tr>\n<td>97-99</td>\n<td>Succubus / Incubus</td>\n</tr>\n<tr>\n<td>100</td>\n<td>@Compendium[dnd5e.monsters.2MZNHeOZweXAYbv1]{Xorn}</td>\n</tr>\n</tbody>\n</table>\n<p> </p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 178",
+    "quantity": 1,
+    "weight": 0.1,
+    "price": 31000,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": 60,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "autoDestroy": false,
+      "autoUse": false
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": 17,
+      "scaling": "flat"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1500000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

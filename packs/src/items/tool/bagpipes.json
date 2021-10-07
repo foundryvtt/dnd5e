@@ -1,0 +1,36 @@
+{
+  "_id": "yxHi57T5mmVt0oDr",
+  "name": "Bagpipes",
+  "type": "tool",
+  "img": "icons/sundries/survival/waterskin-leather-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p>A set of bagpipes to evoke awe, wonder, or fear in your audience.</p>\n<p>If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency. </p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 154",
+    "quantity": 1,
+    "weight": 6,
+    "price": 30,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "common",
+    "identified": true,
+    "toolType": "music",
+    "baseItem": "bagpipes",
+    "ability": "cha",
+    "chatFlavor": "",
+    "proficient": 0,
+    "damage": {
+      "parts": []
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

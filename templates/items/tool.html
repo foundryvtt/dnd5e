@@ -50,6 +50,13 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label>{{ localize "DND5E.ItemToolBase" }}</label>
+                <select name="data.baseItem">
+                    {{selectOptions baseItems selected=data.baseItem blank=""}}
+                </select>
+            </div>
+
             {{!-- Tool Proficiency --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolProficiency" }}</label>
@@ -64,6 +71,12 @@
                 <select name="data.ability">
                     {{selectOptions config.abilities selected=data.ability}}
                 </select>
+            </div>
+
+            {{!-- Tool Bonus --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.ItemToolBonus" }}</label>
+                <input type="text" name="data.bonus" value="{{data.bonus}}"/>
             </div>
 
             {{!-- Chat Message Flavor --}}

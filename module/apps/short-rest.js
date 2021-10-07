@@ -24,9 +24,9 @@ export default class ShortRestDialog extends Dialog {
   /* -------------------------------------------- */
 
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
-	    template: "systems/dnd5e/templates/apps/short-rest.html",
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/apps/short-rest.html",
       classes: ["dnd5e", "dialog"]
     });
   }
@@ -88,7 +88,7 @@ export default class ShortRestDialog extends Dialog {
    * A helper constructor function which displays the Short Rest dialog and returns a Promise once it's workflow has
    * been resolved.
    * @param {Actor5e} actor
-   * @return {Promise}
+   * @returns {Promise}
    */
   static async shortRestDialog({actor}={}) {
     return new Promise((resolve, reject) => {
@@ -100,8 +100,9 @@ export default class ShortRestDialog extends Dialog {
             label: game.i18n.localize("DND5E.Rest"),
             callback: html => {
               let newDay = false;
-              if (game.settings.get("dnd5e", "restVariant") === "gritty")
+              if (game.settings.get("dnd5e", "restVariant") === "gritty") {
                 newDay = html.find('input[name="newDay"]')[0].checked;
+              }
               resolve(newDay);
             }
           },
@@ -124,7 +125,7 @@ export default class ShortRestDialog extends Dialog {
    * workflow has been resolved.
    * @deprecated
    * @param {Actor5e} actor
-   * @return {Promise}
+   * @returns {Promise}
    */
   static async longRestDialog({actor}={}) {
     console.warn("WARNING! ShortRestDialog.longRestDialog has been deprecated, use LongRestDialog.longRestDialog instead.");

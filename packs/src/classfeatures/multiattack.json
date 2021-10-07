@@ -1,0 +1,68 @@
+{
+  "_id": "7zlTRRXT1vWSBGjX",
+  "name": "Multiattack",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>At 11th level, you gain one of the following features of your choice.</p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"l7W6JB9yWLLLtQKP\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Volley</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"1DY8w3CXeD7PHDXF\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Whirlwind Attack</a></p>\n        <p>You can drag your choice from the above onto your character sheet and it will automatically update.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 93",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Hunter 11",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/death/skull-trio-badge-purple.webp",
+  "effects": []
+}

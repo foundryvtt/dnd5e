@@ -8,13 +8,15 @@ import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
+import ActorSkillConfig from "../../apps/skill-config.js";
+import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
-import {DND5E} from '../../config.js';
+import {DND5E} from "../../config.js";
 import ActiveEffect5e from "../../active-effect.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
- * This sheet is an Abstract layer which is not used.
+ * @abstract
  * @extends {ActorSheet}
  */
 export default class ActorSheet5e extends ActorSheet {
@@ -79,7 +81,7 @@ export default class ActorSheet5e extends ActorSheet {
       cssClass: isOwner ? "editable" : "locked",
       isCharacter: this.actor.type === "character",
       isNPC: this.actor.type === "npc",
-      isVehicle: this.actor.type === 'vehicle',
+      isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
       rollData: this.actor.getRollData.bind(this.actor)
     };
@@ -101,6 +103,19 @@ export default class ActorSheet5e extends ActorSheet {
     // Labels and filters
     data.labels = this.actor.labels || {};
     data.filters = this._filters;
+
+    // Currency Labels
+    data.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+      obj[k] = c.label;
+      return obj;
+    }, {});
+
+    // Proficiency
+    if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
+      data.labels.proficiency = `d${data.data.attributes.prof * 2}`;
+    } else {
+      data.labels.proficiency = `+${data.data.attributes.prof}`;
+    }
 
     // Ability Scores
     for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
@@ -140,15 +155,15 @@ export default class ActorSheet5e extends ActorSheet {
     data.warnings = this.actor._preparationWarnings;
 
     // Return data to the sheet
-    return data
+    return data;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Prepare the display of movement speed data for the Actor*
+   * Prepare the display of movement speed data for the Actor.
    * @param {object} actorData                The Actor data being prepared.
-   * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk"
+   * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk".
    * @returns {{primary: string, special: string}}
    * @private
    */
@@ -159,9 +174,9 @@ export default class ActorSheet5e extends ActorSheet {
     let speeds = [
       [movement.burrow, `${game.i18n.localize("DND5E.MovementBurrow")} ${movement.burrow}`],
       [movement.climb, `${game.i18n.localize("DND5E.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : "")],
+      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}${movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : ""}`],
       [movement.swim, `${game.i18n.localize("DND5E.MovementSwim")} ${movement.swim}`]
-    ]
+    ];
     if ( largestPrimary ) {
       speeds.push([movement.walk, `${game.i18n.localize("DND5E.MovementWalk")} ${movement.walk}`]);
     }
@@ -175,7 +190,7 @@ export default class ActorSheet5e extends ActorSheet {
       return {
         primary: `${primary ? primary[1] : "0"} ${movement.units}`,
         special: speeds.map(s => s[1]).join(", ")
-      }
+      };
     }
 
     // Case 2: Walk as primary
@@ -183,21 +198,27 @@ export default class ActorSheet5e extends ActorSheet {
       return {
         primary: `${movement.walk || 0} ${movement.units}`,
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
-      }
+      };
     }
   }
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare senses object for display.
+   * @param {object} actorData  Copy of actor data being prepared for display.
+   * @returns {object}          Senses grouped by key with localized and formatted string.
+   * @protected
+   */
   _getSenses(actorData) {
     const senses = actorData.data.attributes.senses || {};
     const tags = {};
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
-      const v = senses[k] ?? 0
+      const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
     }
-    if ( !!senses.special ) tags["special"] = senses.special;
+    if ( senses.special ) tags.special = senses.special;
     return tags;
   }
 
@@ -205,8 +226,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Break down all of the Active Effects affecting a given target property.
-   * @param {string} target  The data property being targeted.
-   * @return {AttributionDescription[]}
+   * @param {string} target               The data property being targeted.
+   * @returns {AttributionDescription[]}  Any active effects that modify that property.
    * @protected
    */
   _prepareActiveEffectAttributions(target) {
@@ -229,8 +250,9 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Produce a list of armor class attribution objects.
-   * @param {object} data                Actor data to determine the attributions from.
-   * @return {AttributionDescription[]}  List of attribution descriptions.
+   * @param {object} data                 Actor data to determine the attributions from.
+   * @returns {AttributionDescription[]}  List of attribution descriptions.
+   * @protected
    */
   _prepareArmorClassAttribution(data) {
     const ac = data.attributes.ac;
@@ -278,7 +300,7 @@ export default class ActorSheet5e extends ActorSheet {
       default:
         const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         let base = ac.base;
-        const dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
+        const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
         for ( const [match, term] of formula.matchAll(dataRgx) ) {
           const value = foundry.utils.getProperty(data, term);
           if ( (term === "attributes.ac.base") || (value === 0) ) continue;
@@ -319,17 +341,17 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies
-   * @param {object} traits   The raw traits data object from the actor data
+   * Prepare the data structure for traits data like languages, resistances & vulnerabilities, and proficiencies.
+   * @param {object} traits   The raw traits data object from the actor data. *Will be mutated.*
    * @private
    */
   _prepareTraits(traits) {
     const map = {
-      "dr": CONFIG.DND5E.damageResistanceTypes,
-      "di": CONFIG.DND5E.damageResistanceTypes,
-      "dv": CONFIG.DND5E.damageResistanceTypes,
-      "ci": CONFIG.DND5E.conditionTypes,
-      "languages": CONFIG.DND5E.languages
+      dr: CONFIG.DND5E.damageResistanceTypes,
+      di: CONFIG.DND5E.damageResistanceTypes,
+      dv: CONFIG.DND5E.damageResistanceTypes,
+      ci: CONFIG.DND5E.conditionTypes,
+      languages: CONFIG.DND5E.languages
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
@@ -362,9 +384,10 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Insert a spell into the spellbook object when rendering the character sheet
-   * @param {Object} data     The Actor data being prepared
-   * @param {Array} spells    The spell data being prepared
+   * Insert a spell into the spellbook object when rendering the character sheet.
+   * @param {object} data      Copy of the Actor data being prepared for display.
+   * @param {object[]} spells  Spells to be included in the spellbook.
+   * @returns {object[]}       Spellbook sections in the proper order.
    * @private
    */
   _prepareSpellbook(data, spells) {
@@ -374,16 +397,16 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Define some mappings
     const sections = {
-      "atwill": -20,
-      "innate": -10,
-      "pact": 0.5
+      atwill: -20,
+      innate: -10,
+      pact: 0.5
     };
 
     // Label spell slot uses headers
     const useLabels = {
       "-20": "-",
       "-10": "-",
-      "0": "&infin;"
+      0: "&infin;"
     };
 
     // Format a spellbook entry for a certain indexed level
@@ -398,7 +421,7 @@ export default class ActorSheet5e extends ActorSheet {
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
-        dataset: {"type": "spell", "level": prepMode in sections ? 1 : i, "preparation.mode": prepMode},
+        dataset: {type: "spell", level: prepMode in sections ? 1 : i, "preparation.mode": prepMode},
         prop: sl
       };
     };
@@ -444,7 +467,7 @@ export default class ActorSheet5e extends ActorSheet {
       // Specialized spellcasting modes (if they exist)
       if ( mode in sections ) {
         s = sections[mode];
-        if ( !spellbook[s] ){
+        if ( !spellbook[s] ) {
           const l = levels[mode] || {};
           const config = CONFIG.DND5E.spellPreparationModes[mode];
           registerSection(mode, s, config, {
@@ -474,8 +497,10 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Determine whether an Owned Item will be shown based on the current set of filters
-   * @return {boolean}
+   * Determine whether an Owned Item will be shown based on the current set of filters.
+   * @param {object[]} items       Copies of item data to be filtered.
+   * @param {Set<string>} filters  Filters applied to the item list.
+   * @returns {object[]}           Subset of input items limited by the provided filters.
    * @private
    */
   _filterItems(items, filters) {
@@ -513,7 +538,9 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the font-awesome icon used to display a certain level of skill proficiency
+   * Get the font-awesome icon used to display a certain level of skill proficiency.
+   * @param {number} level  A proficiency mode defined in `CONFIG.DND5E.proficiencyLevels`.
+   * @returns {string}      HTML string for the chosen icon.
    * @private
    */
   _getProficiencyIcon(level) {
@@ -539,13 +566,13 @@ export default class ActorSheet5e extends ActorSheet {
     filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
-    html.find('.item .item-name.rollable h4').click(event => this._onItemSummary(event));
+    html.find(".item .item-name.rollable h4").click(event => this._onItemSummary(event));
 
     // View Item Sheets
-    html.find('.item-edit').click(this._onItemEdit.bind(this));
+    html.find(".item-edit").click(this._onItemEdit.bind(this));
 
     // Property attributions
-    html.find('.attributable').mouseover(this._onPropertyAttribution.bind(this));
+    html.find(".attributable").mouseover(this._onPropertyAttribution.bind(this));
 
     // Editable Only Listeners
     if ( this.isEditable ) {
@@ -556,23 +583,23 @@ export default class ActorSheet5e extends ActorSheet {
       inputs.addBack().find('[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
-      html.find('.ability-proficiency').click(this._onToggleAbilityProficiency.bind(this));
+      html.find(".ability-proficiency").click(this._onToggleAbilityProficiency.bind(this));
 
       // Toggle Skill Proficiency
-      html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
+      html.find(".skill-proficiency").on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
       // Trait Selector
-      html.find('.proficiency-selector').click(this._onProficiencySelector.bind(this));
-      html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+      html.find(".proficiency-selector").click(this._onProficiencySelector.bind(this));
+      html.find(".trait-selector").click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
-      html.find('.config-button').click(this._onConfigMenu.bind(this));
+      html.find(".config-button").click(this._onConfigMenu.bind(this));
 
       // Owned Item management
-      html.find('.item-create').click(this._onItemCreate.bind(this));
-      html.find('.item-delete').click(this._onItemDelete.bind(this));
-      html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
-      html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
+      html.find(".item-create").click(this._onItemCreate.bind(this));
+      html.find(".item-delete").click(this._onItemDelete.bind(this));
+      html.find(".item-uses input").click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
+      html.find(".slot-max-override").click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
       html.find(".effect-control").click(ev => ActiveEffect5e.onManageActiveEffect(ev, this.actor));
@@ -582,14 +609,14 @@ export default class ActorSheet5e extends ActorSheet {
     if ( this.actor.isOwner ) {
 
       // Ability Checks
-      html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
+      html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
 
       // Roll Skill Checks
-      html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+      html.find(".skill-name").click(this._onRollSkillCheck.bind(this));
 
       // Item Rolling
-      html.find('.item .item-image').click(event => this._onItemRoll(event));
-      html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+      html.find(".rollable .item-image").click(event => this._onItemRoll(event));
+      html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
     }
 
     // Otherwise remove rollable classes
@@ -605,6 +632,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Initialize Item list filters by activating the set of filters which are currently applied
+   * @param {number} i  Index of the filter in the list.
+   * @param {HTML} ul   HTML object for the list item surrounding the filter.
    * @private
    */
   _initializeFilterItemList(i, ul) {
@@ -621,7 +650,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs
-   * @param event
+   * @param {Event} event  Triggering event.
    * @private
    */
   _onChangeInputDelta(event) {
@@ -638,8 +667,8 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
-   * @param {Event} event   The click event which originated the selection
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
+   * @param {Event} event   The click event which originated the selection.
    * @private
    */
   _onConfigMenu(event) {
@@ -665,6 +694,16 @@ export default class ActorSheet5e extends ActorSheet {
       case "type":
         app = new ActorTypeConfig(this.object);
         break;
+      case "ability": {
+        const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
+        app = new ActorAbilityConfig(this.object, null, ability);
+        break;
+      }
+      case "skill": {
+        const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
+        app = new ActorSkillConfig(this.object, null, skill);
+        break;
+      }
     }
     app?.render(true);
   }
@@ -672,8 +711,9 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle cycling proficiency in a Skill
-   * @param {Event} event   A click or contextmenu event which triggered the handler
+   * Handle cycling proficiency in a Skill.
+   * @param {Event} event   A click or contextmenu event which triggered the handler.
+   * @returns {Promise}     Updated data for this actor after changes are applied.
    * @private
    */
   _onCycleSkillProficiency(event) {
@@ -697,7 +737,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get('dnd5e', 'allowPolymorphing'));
+    const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowPolymorphing"));
     if ( !canPolymorph ) return false;
 
     // Get the target actor
@@ -713,32 +753,32 @@ export default class ActorSheet5e extends ActorSheet {
     // Define a function to record polymorph settings for future use
     const rememberOptions = html => {
       const options = {};
-      html.find('input').each((i, el) => {
+      html.find("input").each((i, el) => {
         options[el.name] = el.checked;
       });
-      const settings = mergeObject(game.settings.get('dnd5e', 'polymorphSettings') || {}, options);
-      game.settings.set('dnd5e', 'polymorphSettings', settings);
+      const settings = mergeObject(game.settings.get("dnd5e", "polymorphSettings") || {}, options);
+      game.settings.set("dnd5e", "polymorphSettings", settings);
       return settings;
     };
 
     // Create and render the Dialog
     return new Dialog({
-      title: game.i18n.localize('DND5E.PolymorphPromptTitle'),
+      title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
       content: {
-        options: game.settings.get('dnd5e', 'polymorphSettings'),
+        options: game.settings.get("dnd5e", "polymorphSettings"),
         i18n: DND5E.polymorphSettings,
         isToken: this.actor.isToken
       },
-      default: 'accept',
+      default: "accept",
       buttons: {
         accept: {
           icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize('DND5E.PolymorphAcceptSettings'),
+          label: game.i18n.localize("DND5E.PolymorphAcceptSettings"),
           callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
         },
         wildshape: {
           icon: '<i class="fas fa-paw"></i>',
-          label: game.i18n.localize('DND5E.PolymorphWildShape'),
+          label: game.i18n.localize("DND5E.PolymorphWildShape"),
           callback: html => this.actor.transformInto(sourceActor, {
             keepBio: true,
             keepClass: true,
@@ -750,20 +790,20 @@ export default class ActorSheet5e extends ActorSheet {
         },
         polymorph: {
           icon: '<i class="fas fa-pastafarianism"></i>',
-          label: game.i18n.localize('DND5E.Polymorph'),
+          label: game.i18n.localize("DND5E.Polymorph"),
           callback: html => this.actor.transformInto(sourceActor, {
             transformTokens: rememberOptions(html).transformTokens
           })
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize('Cancel')
+          label: game.i18n.localize("Cancel")
         }
       }
     }, {
-      classes: ['dialog', 'dnd5e'],
+      classes: ["dialog", "dnd5e"],
       width: 600,
-      template: 'systems/dnd5e/templates/apps/polymorph-prompt.html'
+      template: "systems/dnd5e/templates/apps/polymorph-prompt.html"
     }).render(true);
   }
 
@@ -798,12 +838,12 @@ export default class ActorSheet5e extends ActorSheet {
     if ( itemData.type === "consumable" && itemData.flags.core?.sourceId ) {
       const similarItem = this.actor.items.find(i => {
         const sourceId = i.getFlag("core", "sourceId");
-        return sourceId && (sourceId === itemData.flags.core?.sourceId) &&
-               (i.type === "consumable") && (i.name === itemData.name);
+        return sourceId && (sourceId === itemData.flags.core?.sourceId)
+               && (i.type === "consumable") && (i.name === itemData.name);
       });
       if ( similarItem ) {
         return similarItem.update({
-          'data.quantity': similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+          "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
         });
       }
     }
@@ -815,11 +855,11 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle enabling editing for a spell slot override value
-   * @param {MouseEvent} event    The originating click event
+   * Handle enabling editing for a spell slot override value.
+   * @param {MouseEvent} event    The originating click event.
    * @private
    */
-  async _onSpellSlotOverride (event) {
+  async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
     const level = span.dataset.level;
     const override = this.actor.data.data.spells[level].override || span.dataset.slots;
@@ -839,37 +879,41 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Change the uses amount of an Owned Item within the Actor
-   * @param {Event} event   The triggering click event
+   * Change the uses amount of an Owned Item within the Actor.
+   * @param {Event} event        The triggering click event.
+   * @returns {Promise<Item5e>}  Updated item.
    * @private
    */
   async _onUsesChange(event) {
-      event.preventDefault();
-      const itemId = event.currentTarget.closest(".item").dataset.itemId;
-      const item = this.actor.items.get(itemId);
-      const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
-      event.target.value = uses;
-      return item.update({ 'data.uses.value': uses });
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
+    event.target.value = uses;
+    return item.update({ "data.uses.value": uses });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * Handle rolling an item from the Actor sheet, obtaining the Item instance, and dispatching to its roll method.
+   * @param {Event} event  The triggering click event.
+   * @returns {Promise}    Results of the roll.
    * @private
    */
   _onItemRoll(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    return item.roll();
+    if ( item ) return item.roll();
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle attempting to recharge an item usage by rolling a recharge check
-   * @param {Event} event   The originating click event
+   * Handle attempting to recharge an item usage by rolling a recharge check.
+   * @param {Event} event      The originating click event.
+   * @returns {Promise<Roll>}  The resulting recharge roll.
    * @private
    */
   _onItemRecharge(event) {
@@ -877,19 +921,20 @@ export default class ActorSheet5e extends ActorSheet {
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
     return item.rollRecharge();
-  };
+  }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * Handle toggling and items expanded description.
+   * @param {Event} event   Triggering event.
    * @private
    */
   _onItemSummary(event) {
     event.preventDefault();
-    let li = $(event.currentTarget).parents(".item"),
-        item = this.actor.items.get(li.data("item-id")),
-        chatData = item.getChatData({secrets: this.actor.isOwner});
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.items.get(li.data("item-id"));
+    const chatData = item.getChatData({secrets: this.actor.isOwner});
 
     // Toggle summary
     if ( li.hasClass("expanded") ) {
@@ -897,7 +942,7 @@ export default class ActorSheet5e extends ActorSheet {
       summary.slideUp(200, () => summary.remove());
     } else {
       let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
-      let props = $(`<div class="item-properties"></div>`);
+      let props = $('<div class="item-properties"></div>');
       chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
       div.append(props);
       li.append(div.hide());
@@ -909,8 +954,9 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
-   * @param {Event} event   The originating click event
+   * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset.
+   * @param {Event} event          The originating click event.
+   * @returns {Promise<Item5e[]>}  The newly created item.
    * @private
    */
   _onItemCreate(event) {
@@ -922,15 +968,16 @@ export default class ActorSheet5e extends ActorSheet {
       type: type,
       data: foundry.utils.deepClone(header.dataset)
     };
-    delete itemData.data["type"];
+    delete itemData.data.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle editing an existing Owned Item for the Actor
-   * @param {Event} event   The originating click event
+   * Handle editing an existing Owned Item for the Actor.
+   * @param {Event} event    The originating click event.
+   * @returns {ItemSheet5e}  The rendered item sheet.
    * @private
    */
   _onItemEdit(event) {
@@ -943,8 +990,9 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle deleting an existing Owned Item for the Actor
-   * @param {Event} event   The originating click event
+   * Handle deleting an existing Owned Item for the Actor.
+   * @param {Event} event  The originating click event.
+   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted.
    * @private
    */
   _onItemDelete(event) {
@@ -978,34 +1026,36 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling an Ability check, either a test or a saving throw
-   * @param {Event} event   The originating click event
+   * Handle rolling an Ability test or saving throw.
+   * @param {Event} event      The originating click event.
    * @private
    */
   _onRollAbilityTest(event) {
     event.preventDefault();
     let ability = event.currentTarget.parentElement.dataset.ability;
-    return this.actor.rollAbility(ability, {event: event});
+    this.actor.rollAbility(ability, {event: event});
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling a Skill check
-   * @param {Event} event   The originating click event
+   * Handle rolling a Skill check.
+   * @param {Event} event      The originating click event.
+   * @returns {Promise<Roll>}  The resulting roll.
    * @private
    */
   _onRollSkillCheck(event) {
     event.preventDefault();
-    const skill = event.currentTarget.parentElement.dataset.skill;
+    const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
     return this.actor.rollSkill(skill, {event: event});
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling Ability score proficiency level
-   * @param {Event} event     The originating click event
+   * Handle toggling Ability score proficiency level.
+   * @param {Event} event         The originating click event.
+   * @returns {Promise<Actor5e>}  Updated actor instance.
    * @private
    */
   _onToggleAbilityProficiency(event) {
@@ -1017,8 +1067,9 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle toggling of filters to display a different set of owned items
-   * @param {Event} event     The click event which triggered the toggle
+   * Handle toggling of filters to display a different set of owned items.
+   * @param {Event} event     The click event which triggered the toggle.
+   * @returns {ActorSheet5e}  This actor sheet with toggled filters.
    * @private
    */
   _onToggleFilter(event) {
@@ -1035,7 +1086,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Handle spawning the ProficiencySelector application to configure armor, weapon, and tool proficiencies.
-   * @param {Event} event  The click event which originated the selection
+   * @param {Event} event            The click event which originated the selection.
+   * @returns {ProficiencySelector}  Newly displayed application.
    * @private
    */
   _onProficiencySelector(event) {
@@ -1043,15 +1095,15 @@ export default class ActorSheet5e extends ActorSheet {
     const a = event.currentTarget;
     const label = a.parentElement.querySelector("label");
     const options = { name: a.dataset.target, title: label.innerText, type: a.dataset.type };
-    if ( options.type === "tool" ) options.sortCategories = true;
     return new ProficiencySelector(this.actor, options).render(true);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
-   * @param {Event} event   The click event which originated the selection
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options.
+   * @param {Event} event      The click event which originated the selection.
+   * @returns {TraitSelector}  Newly displayed application.
    * @private
    */
   _onTraitSelector(event) {
@@ -1060,7 +1112,7 @@ export default class ActorSheet5e extends ActorSheet {
     const label = a.parentElement.querySelector("label");
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
-    return new TraitSelector(this.actor, options).render(true)
+    return new TraitSelector(this.actor, options).render(true);
   }
 
   /* -------------------------------------------- */
@@ -1070,7 +1122,7 @@ export default class ActorSheet5e extends ActorSheet {
     let buttons = super._getHeaderButtons();
     if ( this.actor.isPolymorphed ) {
       buttons.unshift({
-        label: 'DND5E.PolymorphRestoreTransformation',
+        label: "DND5E.PolymorphRestoreTransformation",
         class: "restore-transformation",
         icon: "fas fa-backward",
         onclick: () => this.actor.revertOriginalForm()

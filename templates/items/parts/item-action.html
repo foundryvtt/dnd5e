@@ -35,6 +35,26 @@
 </div>
 {{/if}}
 
+{{!-- Critical Hit Threshold --}}
+{{#if hasAttackRoll }}
+<div class="form-group">
+    <label>{{ localize "DND5E.ItemCritThreshold" }}</label>
+    <div class="form-fields">
+        {{ numberInput data.critical.threshold name="data.critical.threshold" placeholder="20" max=20 min=1 step=1 }}
+    </div>
+</div>
+{{/if}}
+
+{{!-- Critical Hit Damage --}}
+{{#if hasAttackRoll }}
+<div class="form-group">
+    <label>{{ localize "DND5E.ItemCritExtraDamage" }}</label>
+    <div class="form-fields">
+        <input type="text" name="data.critical.damage" value="{{data.critical.damage}}">
+    </div>
+</div>
+{{/if}}
+
 {{!-- Damage Formula --}}
 <h4 class="damage-header">
     {{#unless isHealing }}{{ localize "DND5E.Damage" }}{{ else }}{{ localize "DND5E.Healing" }}{{/unless}} {{ localize "DND5E.Formula" }}

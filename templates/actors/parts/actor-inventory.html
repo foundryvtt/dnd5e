@@ -8,7 +8,7 @@
             </a>
         </h3>
         {{#each data.currency as |v k|}}
-        <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
+        <label class="denomination {{k}}">{{ lookup ../labels.currencies k }}</label>
         <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>
@@ -60,7 +60,7 @@
                 {{#if section.editableName}}
                 <input type="text" value="{{item.name}}">
                 {{else}}
-                <div class="item-image" style="background-image: url('{{item.img}}')"></div>
+                <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
                     {{item.name~}}
                     {{~#if item.isStack}} ({{item.data.quantity}}){{/if}}

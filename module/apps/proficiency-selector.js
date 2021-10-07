@@ -7,6 +7,14 @@ import TraitSelector from "./trait-selector.js";
  */
 export default class ProficiencySelector extends TraitSelector {
 
+  /**
+   * Cached version of the base items compendia indices with the needed subtype fields.
+   * @type {object}
+   */
+  static _cachedIndices = {};
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -21,49 +29,73 @@ export default class ProficiencySelector extends TraitSelector {
   /** @inheritdoc */
   async getData() {
     const attr = foundry.utils.getProperty(this.object.data, this.attribute);
-    const value = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
+    const chosen = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
 
-    this.options.choices = CONFIG.DND5E[`${this.options.type}Proficiencies`];
     const data = super.getData();
+    data.choices = await ProficiencySelector.getChoices(this.options.type, chosen, this.options.sortCategories);
+    return data;
+  }
 
-    const pack = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS);
-    const ids = CONFIG.DND5E[`${this.options.type}Ids`];
-    const map = CONFIG.DND5E[`${this.options.type}ProficienciesMap`];
+  /* -------------------------------------------- */
+
+  /**
+   * Structure representing proficiency choices split into categories.
+   *
+   * @typedef {object} ProficiencyChoice
+   * @property {string} label                    Localized label for the choice.
+   * @property {boolean} chosen                  Should this choice be selected by default?
+   * @property {ProficiencyChoice[]} [children]  Array of children if this is a category.
+   */
+
+  /**
+   * A static helper method to get a list of choices for a proficiency type.
+   *
+   * @param {string} type               Proficiency type to select, either `armor`, `tool`, or `weapon`.
+   * @param {string[]} [chosen]         Optional list of items to be marked as chosen.
+   * @returns {object<string, ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
+   */
+  static async getChoices(type, chosen=[]) {
+    let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {
+      obj[key] = { label: label, chosen: chosen.includes(key) };
+      return obj;
+    }, {});
+
+    const ids = CONFIG.DND5E[`${type}Ids`];
+    const map = CONFIG.DND5E[`${type}ProficienciesMap`];
     if ( ids !== undefined ) {
-      const typeProperty = (this.options.type !== "armor") ? `${this.options.type}Type` : `armor.type`;
+      const typeProperty = (type !== "armor") ? `${type}Type` : "armor.type";
       for ( const [key, id] of Object.entries(ids) ) {
-        const item = await pack.getDocument(id);
-        let type = foundry.utils.getProperty(item.data.data, typeProperty);
+        const item = await ProficiencySelector.getBaseItem(id);
+        if ( !item ) continue;
+
+        let type = foundry.utils.getProperty(item.data, typeProperty);
         if ( map && map[type] ) type = map[type];
         const entry = {
           label: item.name,
-          chosen: attr ? value.includes(key) : false
+          chosen: chosen.includes(key)
         };
-        if ( data.choices[type] === undefined ) {
-          data.choices[key] = entry;
+        if ( data[type] === undefined ) {
+          data[key] = entry;
         } else {
-          if ( data.choices[type].children === undefined ) {
-            data.choices[type].children = {};
+          if ( data[type].children === undefined ) {
+            data[type].children = {};
           }
-          data.choices[type].children[key] = entry;
+          data[type].children[key] = entry;
         }
       }
     }
 
-    if ( this.options.type === "tool" ) {
-      data.choices["vehicle"].children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
-        obj[key] = {
-          label: label,
-          chosen: attr ? value.includes(key) : false
-        }
+    if ( type === "tool" ) {
+      data.vehicle.children = Object.entries(CONFIG.DND5E.vehicleTypes).reduce((obj, [key, label]) => {
+        obj[key] = { label: label, chosen: chosen.includes(key) };
         return obj;
       }, {});
+      data = ProficiencySelector._sortObject(data);
     }
 
-    if ( this.options.sortCategories ) data.choices = this._sortObject(data.choices);
-    for ( const category of Object.values(data.choices) ) {
+    for ( const category of Object.values(data) ) {
       if ( !category.children ) continue;
-      category.children = this._sortObject(category.children);
+      category.children = ProficiencySelector._sortObject(category.children);
     }
 
     return data;
@@ -72,13 +104,62 @@ export default class ProficiencySelector extends TraitSelector {
   /* -------------------------------------------- */
 
   /**
+   * Fetch an item for the provided ID. If the provided ID contains a compendium pack name
+   * it will be fetched from that pack, otherwise it will be fetched from the compendium defined
+   * in `DND5E.sourcePacks.ITEMS`.
+   *
+   * @param {string} identifier            Simple ID or compendium name and ID separated by a dot.
+   * @param {object} [options]
+   * @param {boolean} [options.indexOnly]  If set to true, only the index data will be fetched (will never return
+   *                                       Promise).
+   * @param {boolean} [options.fullItem]   If set to true, the full item will be returned as long as `indexOnly` is
+   *                                       false.
+   * @returns {Promise<Item5e>|object}     Promise for a `Document` if `indexOnly` is false & `fullItem` is true,
+   *                                       otherwise else a simple object containing the minimal index data.
+   */
+  static getBaseItem(identifier, { indexOnly=false, fullItem=false }={}) {
+    let pack = CONFIG.DND5E.sourcePacks.ITEMS;
+    let [scope, collection, id] = identifier.split(".");
+    if ( scope && collection ) pack = `${scope}.${collection}`;
+    if ( !id ) id = identifier;
+
+    // Return extended index if cached, otherwise normal index, guaranteed to never be async.
+    if ( indexOnly ) {
+      return ProficiencySelector._cachedIndices[pack]?.get(id) ?? game.packs.get(pack)?.index.get(id);
+    }
+
+    // Full Item5e document required, always async.
+    if ( fullItem ) {
+      return game.packs.get(pack)?.getDocument(id);
+    }
+
+    // Returned cached version of extended index if available.
+    if ( ProficiencySelector._cachedIndices[pack] ) {
+      return ProficiencySelector._cachedIndices[pack].get(id);
+    }
+
+    // Build the extended index and return a promise for the data
+    const packObject = game.packs.get(pack);
+    if ( !packObject ) return;
+
+    return game.packs.get(pack)?.getIndex({
+      fields: ["data.armor.type", "data.toolType", "data.weaponType"]
+    }).then(index => {
+      ProficiencySelector._cachedIndices[pack] = index;
+      return index.get(id);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Take the provided object and sort by the "label" property.
    *
    * @param {object} object  Object to be sorted.
-   * @return {object}        Sorted object.
+   * @returns {object}        Sorted object.
    * @private
    */
-  _sortObject(object) {
+  static _sortObject(object) {
     return Object.fromEntries(Object.entries(object).sort((lhs, rhs) =>
       lhs[1].label.localeCompare(rhs[1].label)
     ));

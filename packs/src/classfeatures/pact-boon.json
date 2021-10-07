@@ -1,0 +1,68 @@
+{
+  "_id": "QwgfIpCN8VWfoUtX",
+  "name": "Pact Boon",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>At 3rd level, your otherworldly patron bestows a gift upon you for your loyal service. You gain one of the following features of your choice.</p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"9dSSa68mIPoX2ezA\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Pact of the Blade</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"Ic1CSjvbWKudVUv9\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Pact of the Chain</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"MYM908WLZ1lVvA1u\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Pact of the Tome</a></p>\n        <p>You can drag your choice from the above onto your character sheet and it will automatically update.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 107",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Warlock 3",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
+  "effects": []
+}

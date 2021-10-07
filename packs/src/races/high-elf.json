@@ -1,0 +1,68 @@
+{
+  "_id": "A69KxdH1renVPrQV",
+  "name": "High Elf",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p><em>As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many fantasy gaming worlds, there are two kinds of high elves. One type is haughty and reclusive, believing themselves to be superior to non-elves and even other elves. The other type is more common and more friendly, and often encountered among humans and other races. </em></p>\n<p><em><strong>Ability Score Increase.</strong></em> Your Intelligence score increases by 1.</p>\n<p><em><strong>Elf Weapon Training.</strong></em> You have proficiency with the longsword, shortsword, shortbow, and longbow.</p>\n<p><em><strong>Cantrip.</strong></em> You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.</p>\n<p><em><strong>Extra Language.</strong></em> You can speak, read, and write one extra language of your choice.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 23",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Elf",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/leaf-acid-3.jpg",
+  "effects": []
+}

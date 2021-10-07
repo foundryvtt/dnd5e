@@ -1,0 +1,178 @@
+{
+  "_id": "3jwFt3hSqDswBlOH",
+  "name": "Ki: Empty Body",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Beginning at 18th level, you can use your action to spend 4 ki points to become invisible for 1 minute. During that time, you also have resistance to all damage but force damage.</p>\n<p>Additionally, you can spend 8 ki points to cast the @Compendium[dnd5e.spells.TIoadMIsUKD4edXi]{Astral Projection} spell, without needing material components. When you do so, you can't take any other creatures with you.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 79",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": "Also requires 4 ki points (or 8 for Astral Projection)."
+    },
+    "duration": {
+      "value": 1,
+      "units": "minute"
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": "self",
+      "width": null
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 0,
+      "max": "0",
+      "per": "",
+      "type": ""
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "Monk 18",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": {
+      "amm": false,
+      "fin": false,
+      "fir": false,
+      "foc": false,
+      "hvy": false,
+      "lgt": false,
+      "lod": false,
+      "rch": false,
+      "rel": false,
+      "ret": false,
+      "spc": false,
+      "thr": false,
+      "two": false,
+      "ver": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+  "effects": [
+    {
+      "_id": "4dvYtqvbQGDsVi51",
+      "flags": {},
+      "changes": [
+        {
+          "key": "data.traits.dr.value",
+          "value": "fire",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "cold",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "acid",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "bludgeoning",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "lightning",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "necrotic",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "piercing",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "psychic",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "radiant",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "slashing",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "thunder",
+          "mode": 2
+        },
+        {
+          "key": "data.traits.dr.value",
+          "value": "poison",
+          "mode": 2
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "rounds": 10,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
+      "label": "Ki: Empty Body",
+      "origin": "Item.xqRleciuHDZlYCl6",
+      "tint": "",
+      "transfer": true
+    }
+  ]
+}
