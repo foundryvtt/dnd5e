@@ -2,78 +2,173 @@ export {default as D20Roll} from "./dice/d20-roll.js";
 export {default as DamageRoll} from "./dice/damage-roll.js";
 
 /**
- * A standardized helper function for simplifying the constant parts of a multipart roll formula
+ * A standardized helper function for simplifying the constant parts of a multipart roll formula.
  *
- * @param {string} formula                          The original Roll formula
- * @param {object} data                             Actor or item data against which to parse the roll
+ * @param {string} formula                          The original roll formula
  * @param {object} [options]                        Formatting options
- * @param {boolean} [options.constantFirst=false]   Puts the constants before the dice terms in the resulting formula
- * @param {boolean} [options.preserveFlavor=false]  Preserve flavor for non-constant terms
+ * @param {boolean} [options.preserveFlavor=false]   Preserve flavor text in the simplified formula
  *
  * @returns {string}  The resulting simplified formula
  */
-export function simplifyRollFormula(formula, data, {constantFirst=false, preserveFlavor=false} = {}) {
-  const roll = new Roll(formula, data); // Parses the formula and replaces any @properties
-  const terms = roll.terms;
+export function simplifyRollFormula(formula, { preserveFlavor=false } = {}) {
+  // Create a new roll and verify that the formula is valid before attempting simplification.
+  let roll;
+  try { roll = new Roll(formula); }
+  catch(err) { console.warn(`Unable to simplify formula '${formula}': ${err}`); }
+  Roll.validate(roll.formula);
 
-  // Some terms are "too complicated" for this algorithm to simplify
-  // In this case, the original formula is returned.
-  if ( terms.some(_isUnsupportedTerm) ) return roll.formula;
-  if ( !preserveFlavor ) terms.forEach(term => delete term.options.flavor);
+  // Optionally stip flavor annotations.
+  if (!preserveFlavor) roll.terms = Roll.parse(roll.formula.replace(RollTerm.FLAVOR_REGEXP, ""));
 
-  const rollableTerms = []; // Terms that are non-constant, and their associated operators
-  const constantTerms = []; // Terms that are constant, and their associated operators
-  let operators = [];       // Temporary storage for operators before they are moved to one of the above
+  // Perform arithmetic simplification on the existing roll terms.
+  roll.terms = _simplifyOperatorTerms(roll.terms);
 
-  for ( let term of terms ) {                                 // For each term
-    if (term instanceof OperatorTerm) operators.push(term); // If the term is an addition/subtraction operator, push the term into the operators array
-    else {                                                  // Otherwise the term is not an operator
-      if (term instanceof DiceTerm) {                       // If the term is something rollable
-        rollableTerms.push(...operators);                   // Place all the operators into the rollableTerms array
-        rollableTerms.push(term);                           // Then place this rollable term into it as well
-      }                                                     //
-      else {                                                // Otherwise, this must be a constant
-        delete term.options.flavor;
-        constantTerms.push(...operators);                   // Place the operators into the constantTerms array
-        constantTerms.push(term);                           // Then also add this constant term to that array.
-      }                                                     //
-      operators = [];                                       // Finally, the operators have now all been assigend to one of the arrays, so empty this before the next iteration.
-    }
+  if (/[*/]/.test(roll.formula)) {
+    return ( roll.isDeterministic ) && ( !/\[/.test(roll.formula) || !preserveFlavor )
+      ? roll.evaluate({ async: false }).total.toString()
+      : roll.constructor.getFormula(roll.terms);
   }
 
-  const constantFormula = Roll.getFormula(constantTerms);  // Cleans up the constant terms and produces a new formula string
-  const rollableFormula = Roll.getFormula(rollableTerms);  // Cleans up the non-constant terms and produces a new formula string
+  // Flatten the roll formula and eliminate string terms.
+  roll.terms = _expandParentheticalTerms(roll.terms);
+  roll.terms = Roll.simplifyTerms(roll.terms);
 
-  // Mathematically evaluate the constant formula to produce a single constant term
-  let constantPart = undefined;
-  if ( constantFormula ) {
-    try {
-      constantPart = Roll.safeEval(constantFormula);
-    } catch(err) {
-      console.warn(`Unable to evaluate constant term ${constantFormula} in simplifyRollFormula`);
-    }
-  }
+  // Group terms by type and perform simplifications on various types of roll term.
+  let { poolTerms, diceTerms, mathTerms, numericTerms } = _groupTermsByType(roll.terms);
+  numericTerms = _simplifyNumericTerms(numericTerms || []);
+  diceTerms = _simplifyDiceTerms(diceTerms || []);
 
-  // Order the rollable and constant terms, either constant first or second depending on the optional argument
-  const parts = constantFirst ? [constantPart, rollableFormula] : [rollableFormula, constantPart];
-
-  // Join the parts with a + sign, pass them to `Roll` once again to clean up the formula
-  return new Roll(parts.filterJoin(" + ")).formula;
+  // Recombine the terms into a single term array and remove an initial + operator if present.
+  const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
+  if (simplifiedTerms[0]?.operator === "+") simplifiedTerms.shift();
+  return roll.constructor.getFormula(simplifiedTerms);
 }
 
-/* -------------------------------------------- */
+/**
+ * A helper function to perform arithmetic simplification and remove redundant operator terms.
+ * @param {RollTerm[]} terms  An array of roll terms
+ * @returns {RollTerm[]}  A new array of roll terms with redundant operators removed.
+ */
+function _simplifyOperatorTerms(terms) {
+  return terms.reduce((acc, term) => {
+    const prior = acc[acc.length - 1];
+    const ops = new Set([prior?.operator, term.operator]);
+
+    // If one of the terms is not an operator, add the current term as is.
+    if (ops.has(undefined)) acc.push(term);
+
+    // Replace consecutive "+ -" operators with a "-" operator.
+    else if ( (ops.has("+")) && (ops.has("-")) ) acc.splice(-1, 1, new OperatorTerm({ operator: "-" }));
+
+    // Replace double "-" operators with a "+" operator.
+    else if ( (ops.has("-")) && (ops.size === 1) ) acc.splice(-1, 1, new OperatorTerm({ operator: "+" }));
+
+    // Don't include "+" operators that directly follow "+", "*", or "/". Otherwise, add the term as is.
+    else if (!ops.has("+")) acc.push(term);
+
+    return acc;
+  }, []);
+}
 
 /**
- * Only some terms are supported by simplifyRollFormula, this method returns true when the term is not supported.
- * @param {*} term    A single Dice term to check support on
- * @returns {boolean} True when unsupported, false if supported
+ * A helper function for combining unannoted numeric terms in an array into a single numeric term.
+ * @param {object[]} terms An array of roll terms
+ * @returns {object[]} A new array of terms with unannotated numeric terms combined into one.
  */
-function _isUnsupportedTerm(term) {
-  const diceTerm = term instanceof DiceTerm;
-  const operator = term instanceof OperatorTerm && ["+", "-"].includes(term.operator);
-  const number = term instanceof NumericTerm;
+function _simplifyNumericTerms(terms) {
+  const simplified = [];
+  const { annotated, unannotated } = _separateAnnotatedTerms(terms);
 
-  return !(diceTerm || operator || number);
+  // Combine the unannotated numerical bonuses into a single new NumericTerm.
+  if (unannotated.length) {
+    const staticBonus = Roll.safeEval(Roll.getFormula(unannotated));
+    if (staticBonus === 0) return [...annotated];
+
+    // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
+    if (staticBonus > 0) simplified.push(new OperatorTerm({ operator: "+"}));
+    simplified.push(new NumericTerm({ number: staticBonus} ));
+  }
+  return [...simplified, ...annotated];
+}
+
+/**
+ * A helper function to group dice of the same size and sign into single dice terms.
+ * @param {object[]} terms An array of DiceTerms and associated OperatorTerms.
+ * @returns {object[]}  A new array of simplified dice terms.
+ */
+function _simplifyDiceTerms(terms) {
+  const { annotated, unannotated } = _separateAnnotatedTerms(terms);
+
+  // Split the unannotated terms into different die sizes and signs
+  const diceQuantities = unannotated.reduce((obj, curr, i) => {
+    if (curr instanceof OperatorTerm) return obj;
+    const key = `${unannotated[i - 1].operator}${curr.faces}`;
+    obj[key] = (obj[key] ?? 0) + curr.number;
+    return obj;
+  }, {});
+
+  // Add new die and operator terms to simplified for each die size and sign
+  const simplified = Object.entries(diceQuantities).flatMap(([key, number]) => ([
+    new OperatorTerm({ operator: key.charAt(0) }),
+    new Die({ number, faces: parseInt(key.slice(1)) })
+  ]));
+  return [...simplified, ...annotated];
+}
+
+/**
+ * A helper function to extract the contents of parenthetical terms into their own terms.
+ * @param {object[]} terms An array of roll terms
+ * @returns {object[]} A new array of terms with no parenthetical terms.
+ */
+function _expandParentheticalTerms(terms) {
+  terms = terms.reduce((acc, term) => {
+    if (term instanceof ParentheticalTerm) {
+      if (term.isDeterministic) term = new NumericTerm({ number: Roll.safeEval(term.term) });
+      else {
+        const subterms = new Roll(term.term).terms;
+        term = _expandParentheticalTerms(subterms);
+      }
+    }
+    acc.push(term);
+    return acc;
+  }, []);
+  return _simplifyOperatorTerms(terms.flat());
+}
+
+/**
+ * A helper function tp group terms into PoolTerms, DiceTerms, MathTerms, and NumericTerms.
+ * MathTerms are included as NumericTerms if they are deterministic.
+ * @param {RollTerm[]} terms  An array of roll terms
+ * @returns {object} An object mapping term types to arrays containing roll terms of that type.
+ */
+function _groupTermsByType(terms) {
+  // Add an initial operator so that terms can be rerranged arbitrarily.
+  if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
+
+  return terms.reduce((obj, term, i) => {
+    let type;
+    if (term instanceof DiceTerm) type = DiceTerm;
+    else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+    else type = term.constructor;
+    const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
+
+    // Push the term and the preceding OperatorTerm.
+    (obj[key] = obj[key] ?? []).push(terms[i - 1], term);
+    return obj;
+  }, {});
+}
+
+/**
+ * A helper function to separate annotated terms from unannotated terms.
+ * @param {object[]} terms An array of DiceTerms and associated OperatorTerms
+ * @returns {Array | Array[]} A pair of term arrays, one containing annotated terms.
+ */
+function _separateAnnotatedTerms(terms) {
+  return terms.reduce((obj, curr, i) => {
+    if (curr instanceof OperatorTerm) return obj;
+    obj[curr.flavor ? "annotated" : "unannotated"].push(terms[i - 1], curr);
+    return obj;
+  }, { annotated: [], unannotated: [] });
 }
 
 /* -------------------------------------------- */
@@ -93,7 +188,8 @@ function _isUnsupportedTerm(term) {
  * @param {boolean} [config.disadvantage]    Apply disadvantage to the roll (unless otherwise specified)
  * @param {number} [config.critical]         The value of d20 result which represents a critical success
  * @param {number} [config.fumble]           The value of d20 result which represents a critical failure
- * @param {number} [config.targetValue]      Assign a target value against which the result of this roll should be compared
+ * @param {number} [config.targetValue]      Assign a target value against which the result of this roll
+ *                                           should be compared
  * @param {boolean} [config.elvenAccuracy]   Allow Elven Accuracy to modify this roll?
  * @param {boolean} [config.halflingLucky]   Allow Halfling Luck to modify this roll?
  * @param {boolean} [config.reliableTalent]  Allow Reliable Talent to modify this roll?
@@ -179,7 +275,9 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
   if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
-  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
+  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) {
+    advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
+  }
   return {isFF, advantageMode};
 }
 
@@ -196,7 +294,8 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
  * @param {string[]} [config.parts]        The dice roll component parts, excluding the initial d20
  * @param {object} [config.data]           Actor or item data against which to parse the roll
  *
- * @param {boolean} [config.critical=false] Flag this roll as a critical hit for the purposes of fast-forward or default dialog action
+ * @param {boolean} [config.critical=false] Flag this roll as a critical hit for the purposes of
+ *                                          fast-forward or default dialog action
  * @param {number} [config.criticalBonusDice=0] A number of bonus damage dice that are added for critical hits
  * @param {number} [config.criticalMultiplier=2] A critical hit multiplier which is applied to critical hits
  * @param {boolean} [config.multiplyNumeric=false] Multiply numeric terms by the critical multiplier

@@ -300,11 +300,15 @@ export default class Item5e extends Item {
     const itemData = this.data.data;
     if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
     const rollData = this.getRollData();
-    const derivedDamage = itemData.damage?.parts?.map(damagePart => ({
-      formula: simplifyRollFormula(damagePart[0], rollData, { constantFirst: false }),
-      damageType: damagePart[1]
-    }));
-
+    const derivedDamage = itemData.damage?.parts?.map(damagePart => {
+      let formula;
+      try {
+        const roll = new Roll(damagePart[0], rollData);
+        formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
+      }
+      catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
+      return { formula, damageType: damagePart[1] };
+    });
     this.labels.derivedDamage = derivedDamage;
     return derivedDamage;
   }
@@ -396,11 +400,9 @@ export default class Item5e extends Item {
     }
 
     // Condense the resulting attack bonus formula into a simplified label
-    let toHitLabel = simplifyRollFormula(parts.join("+"), rollData).trim();
-    if ( !/^[+-]/.test(toHitLabel) ) {
-      toHitLabel = `+ ${toHitLabel}`;
-    }
-    this.labels.toHit = toHitLabel;
+    const roll = new Roll(parts.join("+"), rollData);
+    const formula = simplifyRollFormula(roll.formula);
+    this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
 
     // Update labels and return the prepared roll data
     return {rollData, parts};
