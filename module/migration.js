@@ -246,7 +246,7 @@ function cleanActorData(actorData) {
  *
  * @param {object} item             Item data to migrate
  * @param {object} [migrationData]  Additional data to perform the migration
- * @return {Promise.<object>}       The updateData to apply
+ * @returns {Promise<object>}       The updateData to apply
  */
 export const migrateItemData = async function(item, migrationData) {
   const updateData = {};
@@ -274,7 +274,7 @@ export const migrateItemData = async function(item, migrationData) {
  * Return an Object of updateData to be applied
  * @param {object} scene            The Scene data to Update
  * @param {object} [migrationData]  Additional data to perform the migration
- * @return {Promise.<object>}       The updateData to apply
+ * @returns {Promise<object>}       The updateData to apply
  */
 export const migrateSceneData = async function(scene, migrationData) {
   const tokens = await Promise.all(scene.tokens.map(async token => {
@@ -666,15 +666,15 @@ function _migrateItemIcon(item, updateData, {iconMap}={}) {
  * @param {object} item        Item data to migrate
  * @param {Item5e|null} source  Original class this item was imported from to populate defaults
  * @param {object} updateData  Existing update to expand upon
- * @return {object}            The updateData to apply
+ * @returns {object}           The updateData to apply
  * @private
  */
 function _migrateItemSubclass(item, source, updateData) {
   if ( foundry.utils.getType(item.data.subclass) === "Object" ) return updateData;
   updateData["data.subclass"] = {
-    "label": source?.data.data.subclass?.label ?? "",
-    "level": source?.data.data.subclass?.level ?? 3,
-    "selected": item.data.subclass
+    label: source?.data.data.subclass?.label ?? "",
+    level: source?.data.data.subclass?.level ?? 3,
+    selected: item.data.subclass
   };
   return updateData;
 }
