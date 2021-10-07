@@ -1,0 +1,2338 @@
+{
+  "_id": "yaxOpEDtDzn67I48",
+  "name": "Krusk (Half-Orc Paladin)",
+  "type": "character",
+  "img": "systems/dnd5e/tokens/heroes/PaladinHammer.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 17,
+        "proficient": 0,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "dex": {
+        "value": 8,
+        "proficient": 0,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      },
+      "con": {
+        "value": 14,
+        "proficient": 0,
+        "mod": 2,
+        "save": 2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "int": {
+        "value": 10,
+        "proficient": 0,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      },
+      "wis": {
+        "value": 12,
+        "proficient": 1,
+        "mod": 1,
+        "save": 3,
+        "prof": 2,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "cha": {
+        "value": 14,
+        "proficient": 1,
+        "mod": 2,
+        "save": 4,
+        "prof": 2,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": null,
+        "calc": "default",
+        "formula": "",
+        "min": 0
+      },
+      "hp": {
+        "value": 12,
+        "min": 0,
+        "max": 12,
+        "temp": null,
+        "tempmax": null
+      },
+      "init": {
+        "value": null,
+        "bonus": "0",
+        "mod": -1,
+        "prof": 0,
+        "total": "-10"
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 60,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "cha",
+      "death": {
+        "success": 0,
+        "failure": 0
+      },
+      "exhaustion": 0,
+      "inspiration": false,
+      "encumbrance": {
+        "value": 142,
+        "max": 255,
+        "pct": 55.68627450980392,
+        "encumbered": true
+      },
+      "hd": 1,
+      "prof": 2,
+      "spelldc": 12
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Roaming the land brigning justice to all, Krusk has just one goal: the destruction of evil wherever it lies.</p>\n<blockquote>Actor artwork provided by <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a></blockquote>",
+        "public": ""
+      },
+      "alignment": "Lawful Good",
+      "race": "Half Orc",
+      "background": "Local Champion",
+      "originalClass": "",
+      "xp": {
+        "value": 0,
+        "min": 0,
+        "max": 300,
+        "pct": 0
+      },
+      "appearance": "",
+      "trait": "",
+      "ideal": "",
+      "bond": "",
+      "flaw": "",
+      "level": 1,
+      "hd": {
+        "_deprecated": true
+      }
+    },
+    "traits": {
+      "size": "med",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [
+          "common",
+          "orc"
+        ],
+        "custom": ""
+      },
+      "weaponProf": {
+        "value": [
+          "sim",
+          "mar"
+        ],
+        "custom": ""
+      },
+      "armorProf": {
+        "value": [
+          "lgt",
+          "med",
+          "hvy",
+          "shl"
+        ],
+        "custom": ""
+      },
+      "toolProf": {
+        "value": [
+          "vehicle"
+        ],
+        "custom": "Smith's Tools"
+      },
+      "perception": {
+        "_deprecated": true
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "ani": {
+        "value": 1,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 13,
+        "prof": 2,
+        "total": 3
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "bonus": 0,
+        "mod": 3,
+        "passive": 13,
+        "prof": 0,
+        "total": 3
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "his": {
+        "value": 1,
+        "ability": "int",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "itm": {
+        "value": 1,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 14,
+        "prof": 2,
+        "total": 4
+      },
+      "inv": {
+        "value": 1,
+        "ability": "int",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "prc": {
+        "value": 1,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 13,
+        "prof": 2,
+        "total": 3
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "rel": {
+        "value": 1,
+        "ability": "int",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      },
+      "spell0": {
+        "_deprecated": true,
+        "max": 0,
+        "value": null
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "primary": {
+        "value": 5,
+        "max": 5,
+        "sr": false,
+        "lr": true,
+        "label": "Lay on Hands"
+      },
+      "secondary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "tertiary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      }
+    }
+  },
+  "token": {
+    "flags": {},
+    "name": "Krusk",
+    "displayName": 30,
+    "img": "systems/dnd5e/tokens/heroes/PaladinHammer.webp",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": true,
+    "dimSight": 30,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightColor": null,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "actorId": "yaxOpEDtDzn67I48",
+    "actorLink": true,
+    "disposition": 1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "randomImg": false,
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "mmNOUJeTSbhakKbO",
+      "name": "Amulet (Holy Symbol)",
+      "type": "equipment",
+      "data": {
+        "description": {
+          "value": "<p>An amulet depicting a symbol representing a deity through which a true believer can call forth their power and in doing so spread the faith.</p><p><strong>Spellcasting Focus</strong>. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 151",
+        "quantity": 1,
+        "weight": 1,
+        "price": 5,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "special",
+          "cost": 0,
+          "condition": "Holy symbol must be clearly visible."
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": null,
+          "type": "trinket",
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": 0,
+        "stealth": false,
+        "proficient": false,
+        "attuned": false,
+        "armorType": {
+          "value": "",
+          "_deprecated": true
+        },
+        "attributes": {
+          "spelldc": 10
+        }
+      },
+      "sort": 600000,
+      "flags": {},
+      "img": "icons/equipment/neck/pendant-bronze-gem-blue.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "z5rKywjIFzidberh",
+      "name": "Background: Local Champion",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<ul>\n<li>Skill Proficiencies: Animal Handling, Survival</li>\n<li>Tool Proficiencies: Artisan&rsquo;s tools, vehicles (land)</li>\n<li>Equipment: A set of artisan&rsquo;s tools, common clothes, and a pouch containing 10 gp</li>\n</ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 2,
+          "max": 2,
+          "per": null,
+          "type": "sr"
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "featType": {
+          "value": "passive",
+          "_deprecated": true,
+          "type": "String",
+          "label": "Feat Type"
+        },
+        "time": {
+          "value": "",
+          "_deprecated": true
+        },
+        "damageType": {
+          "value": "",
+          "_deprecated": true
+        },
+        "attributes": {
+          "spelldc": 10
+        },
+        "attunement": 0
+      },
+      "sort": 300000,
+      "flags": {
+        "_sheetTab": "details",
+        "entityorder": {
+          "order": 186
+        }
+      },
+      "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "k2pdPkmjujUh9mRl",
+      "name": "Divine Sense",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p>The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces. Until the end of your next turn, you know the location of any celestial, fiend, or undead within 60 feet of you that is not behind total cover. You know the type (celestial, fiend, or undead) of any being whose presence you sense, but not its identity (the vampire Count Strahd von Zarovich, for instance). Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated, as with the @Compendium[dnd5e.spells.SLxA9QhrggTz0taU]{Hallow} spell. </p><p>You can use this feature a number of times equal to 1 + your Charisma modifier. When you finish a long rest, you regain all expended uses.</p><p><em>**Foundry note: Note the limited uses is set to the base default of 1 per long rest. Please manually adjust as required.</em></p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 84",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "round"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 60,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "lr",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "Paladin 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "sort": 3300000,
+      "flags": {
+        "_sheetTab": "description",
+        "entityorder": {
+          "order": 164
+        }
+      },
+      "img": "icons/creatures/eyes/human-single-blue.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "eA81yYSjX5lu5xqR",
+      "name": "Lay on Hands",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p>Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level × 5. </p><p>As an action, you can touch a creature and draw power from the pool to restore a number of hit points to that creature, up to the maximum amount remaining in your pool.</p><p>Alternatively, you can expend 5 hit points from your pool of healing to cure the target of one disease or neutralize one poison affecting it. You can cure multiple diseases and neutralize multiple poisons with a single use of Lay on Hands, expending hit points separately for each one.</p><p>This feature has no effect on undead and constructs.</p><p><em><strong>Foundry Note: </strong>This has been configured to use the first of the three generic Resource Pools on the Attributes page.</em></p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 84",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": "Target cannot be Undead or a Construct."
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": "",
+          "type": "lr"
+        },
+        "consume": {
+          "type": "attribute",
+          "target": "resources.primary.value",
+          "amount": 1
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "Paladin 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "sort": 3400000,
+      "flags": {
+        "_sheetTab": "description",
+        "entityorder": {
+          "order": 161
+        }
+      },
+      "img": "icons/magic/light/orbs-hand-gray.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "wKzMNfJSgCUaqpHG",
+      "name": "Javelin (melee)",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": 0,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 30,
+          "long": 120,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleM",
+        "properties": {
+          "thr": true,
+          "amm": false,
+          "hvy": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "lgt": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "two": false,
+          "ver": false,
+          "lod": false
+        },
+        "proficient": true,
+        "attuned": false,
+        "attributes": {
+          "spelldc": 10
+        }
+      },
+      "sort": 2200000,
+      "flags": {},
+      "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "PzYFkgoa8KpZwUWe",
+      "name": "Javelin (thrown)",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": 0,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 30,
+          "long": 120,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "ammo",
+          "target": "REOAERyAiCBpCA7V",
+          "amount": 1
+        },
+        "ability": "",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleR",
+        "properties": {
+          "thr": true,
+          "amm": false,
+          "hvy": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "lgt": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "two": false,
+          "ver": false,
+          "lod": false
+        },
+        "proficient": true,
+        "attuned": false,
+        "attributes": {
+          "spelldc": 10
+        }
+      },
+      "sort": 2200000,
+      "flags": {},
+      "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "REOAERyAiCBpCA7V",
+      "name": "Javelin",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>This light and flexible spear is designed for throwing, but is versatile enough to be used in melee combat as well.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 5,
+        "weight": 2,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null,
+          "autoDestroy": false
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "ammo",
+        "attuned": false
+      },
+      "sort": 100001,
+      "flags": {},
+      "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "h9ta6MMHygQtSvhd",
+      "name": "Love Letter",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>A love letter sent by an admirer.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "attuned": false
+      },
+      "sort": 100001,
+      "flags": {},
+      "img": "icons/sundries/scrolls/scroll-plain-red.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "7GbdWRRe8GyKGVYk",
+      "name": "Chain Mail",
+      "type": "equipment",
+      "data": {
+        "description": {
+          "value": "<p>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 145",
+        "quantity": 1,
+        "weight": 55,
+        "price": 75,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 16,
+          "type": "heavy",
+          "dex": 0
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": 13,
+        "stealth": true,
+        "proficient": true,
+        "attuned": false
+      },
+      "sort": 400000,
+      "flags": {},
+      "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "jAp8oEZymuFqMEME",
+      "name": "Shield",
+      "type": "equipment",
+      "data": {
+        "description": {
+          "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 144",
+        "quantity": 1,
+        "weight": 6,
+        "price": 10,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 2,
+          "type": "shield",
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "stealth": false,
+        "proficient": true,
+        "attuned": false
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "JVygpNYgNviQlQDL",
+      "name": "Longsword",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "<p>A lengthy stright blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 3,
+        "price": 15,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "slashing"
+            ]
+          ],
+          "versatile": "1d10 + @mod"
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "martialM",
+        "properties": {
+          "ver": true,
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "sort": 2100000,
+      "flags": {},
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "QDJj8gNDG3fapNIZ",
+      "name": "Hempen Rope (50 ft.)",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 10,
+        "price": 1,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "charges",
+          "autoDestroy": false,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "abil",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "str",
+          "dc": 17,
+          "scaling": "flat"
+        },
+        "consumableType": "trinket",
+        "attuned": false
+      },
+      "sort": 1000000,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 8
+          }
+        }
+      },
+      "img": "icons/sundries/survival/rope-wrapped-brown.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "E0S0CJRUih4rZUTx",
+      "name": "Mess Kit",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 152",
+        "quantity": 1,
+        "weight": 1,
+        "price": 0.2,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 900000,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 4
+          }
+        }
+      },
+      "img": "icons/tools/cooking/fork-steel-grey.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "XDOhevGrWTwftiiM",
+      "name": "Bedroll",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 150",
+        "quantity": 1,
+        "weight": 7,
+        "price": 1,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 800000,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 6
+          }
+        }
+      },
+      "img": "icons/sundries/flags/banner-worn-blue.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "eIMlGbeDuYjjEGRH",
+      "name": "Waterskin",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 5,
+        "price": 0.2,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": 0,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 4,
+          "max": 4,
+          "per": "charges",
+          "autoDestroy": false,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "food",
+        "attuned": false
+      },
+      "sort": 500000,
+      "flags": {},
+      "img": "icons/sundries/survival/wetskin-leather-purple.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "XeDU0JtxGcNBjXer",
+      "name": "Backpack",
+      "type": "backpack",
+      "data": {
+        "description": {
+          "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 5,
+        "price": 2,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 30,
+          "weightless": false
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "icons/containers/bags/pack-simple-leather.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "IPeL1J71CbP6s5y5",
+      "name": "Smith's Tools",
+      "type": "tool",
+      "data": {
+        "description": {
+          "value": "<p>These special tools include the items needed to pursue a craft or trade in smithing.</p><p>Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 154",
+        "quantity": 1,
+        "weight": 8,
+        "price": 20,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "toolType": "",
+        "ability": "str",
+        "chatFlavor": "",
+        "proficient": 1,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 2800000,
+      "flags": {},
+      "img": "icons/tools/smithing/hammer-sledge-steel-grey.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "zk8hxPzKFTDZWVED",
+      "name": "Tinderbox",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 1,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 1400000,
+      "flags": {},
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "grGg87yIxTTxoPTA",
+      "name": "Torch",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 10,
+        "weight": 1,
+        "price": 0.01,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": 40,
+          "width": null,
+          "units": "ft",
+          "type": "radius"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "charges",
+          "autoDestroy": true,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "trinket",
+        "attuned": false
+      },
+      "sort": 4700000,
+      "flags": {
+        "adnd5e": {
+          "itemInfo": {
+            "type": "item",
+            "idx": 7
+          }
+        }
+      },
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "WuNY7UdTCjUEpGlU",
+      "name": "Rations",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 10,
+        "weight": 2,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "charges",
+          "autoDestroy": true,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "food",
+        "attuned": false
+      },
+      "sort": 1800000,
+      "flags": {},
+      "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "U9ppcPcWfdic6aF8",
+      "name": "Paladin",
+      "type": "class",
+      "data": {
+        "description": {
+          "value": "<p>As a paladin, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per paladin level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per paladin level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> All armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Wisdom, Charisma<br /><strong>Skills:</strong> Choose two from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a martial weapon and a shield or (b) two martial weapons</li>\n<li>(a) five javelins or (b) any simple melee weapon</li>\n<li>(a) a priest's pack or (b) an explorer's pack</li>\n<li>Chain mail and a holy symbol</li>\n</ul>\n<h1>Paladin Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.E8ozg8avUVOX9N7u]{Divine Sense},  @Compendium[dnd5e.classfeatures.OdrvL3afwLOPeuYZ]{Lay on Hands}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[dnd5e.classfeatures.ihoQHsmVZlyDbPhX]{Spellcasting}, @Compendium[dnd5e.classfeatures.ySMPQ6zNSlvkrl2f]{Divine Smite}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.dY9yrqkyEDuF0CG2]{Divine Health}, @Compendium[dnd5e.classfeatures.olAqNsUTIef9x8xC]{Sacred Oath}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>2nd Level Spell Slot, @Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.carGDhkIdoduTC0I]{Aura of Protection}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Sacred Oath feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.nahSkBO6LH4HkpaT]{Aura of Courage}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.FAk41RPCTcvCk6KI]{Improved Divine Smite}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.U7BIPVPsptBmwsnV]{Cleansing Touch}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Sacred Oath feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>Aura improvements</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>Sacred Oath feature</td>\n</tr>\n</tbody>\n</table>\n<h1>Sacred Oaths</h1>\n<p>Becoming a paladin involves taking vows that commit the paladin to the cause of righteousness, an active path of fighting wickedness. The final oath, taken when he or she reaches 3rd level, is the culmination of all the paladin's training. Some characters with this class don't consider themselves true paladins until they have reached 3rd level and made this oath. For others, the actual swearing of the oath is a formality, an official stamp on what has always been true in the paladin's heart.</p>\n<h2>Oath of Devotion</h2>\n<p>The Oath of Devotion binds a paladin to the loftiest ideals of justice, virtue, and order. Sometimes called cavaliers, white knights, or holy warriors, these paladins meet the ideal of the knight in shining armor, acting with honor in pursuit of justice and the greater good. They hold themselves to the highest standards of conduct, and some, for better or worse, hold the rest of the world to the same standards. Many who swear this oath are devoted to gods of law and good and use their gods' tenets as the measure of their devotion. They hold angels—the perfect servants of good—as their ideals, and incorporate images of angelic wings into their helmets or coats of arms.</p>\n<h3>Oath Spells</h3>\n<p>You gain oath spells at the paladin levels listed.</p>\n<table>\n<thead>\n<tr>\n<td><strong>Paladin Level</strong></td>\n<td><strong>Spells</strong></td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3rd</td>\n<td>@Compendium[dnd5e.spells.xmDBqZhRVrtLP8h2]{Protection from Evil and Good}, @Compendium[dnd5e.spells.gvdA9nPuWLck4tBl]{Sanctuary}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>@Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}, @Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>@Compendium[dnd5e.spells.ZU9d6woBdUP8pIPt]{Beacon of Hope}, @Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>@Compendium[dnd5e.spells.da0a1t2FqaTjRZGT]{Freedom of Movement}, @Compendium[dnd5e.spells.TgHsuhNasPbhu8MO]{Guardian of Faith}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>@Compendium[dnd5e.spells.d54VDyFulD9xxY7J]{Commune}, @Compendium[dnd5e.spells.5e1xTohkzqFqbYH4]{Flame Strike}</td>\n</tr>\n</tbody>\n</table>\n<h3>Channel Divinity</h3>\n<p>When you take this oath at 3rd level, you gain the following two @Compendium[dnd5e.classfeatures.8M7uOPhbTxoxxJSo]{Channel Divinity} options.</p>\n<p>@Compendium[dnd5e.classfeatures.xNN0JMKqlG4hKVYu]{Channel Divinity: Sacred Weapon}</p>\n<p>@Compendium[dnd5e.classfeatures.ZdwGlsJNtc7pGFCd]{Channel Divinity: Turn the Unholy}</p>\n<h3>Breaking Your Oath</h3>\n<p>A paladin tries to hold to the highest standards of conduct, but even the most virtuous paladin is fallible. Sometimes the right path proves too demanding, sometimes a situation calls for the lesser of two evils, and sometimes the heat of emotion causes a paladin to transgress his or her oath.</p>\n<p>A paladin who has broken a vow typically seeks absolution from a cleric who shares his or her faith or from another paladin of the same order. The paladin might spend an allnight vigil in prayer as a sign of penitence, or undertake a fast or similar act of self-denial. After a rite of confession and forgiveness, the paladin starts fresh.</p>\n<p>If a paladin willfully violates his or her oath and shows no sign of repentance, the consequences can be more serious. At the GM's discretion, an impenitent paladin might be forced to abandon this class and adopt another.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "levels": 1,
+        "subclass": "",
+        "hitDice": "d10",
+        "hitDiceUsed": 0,
+        "saves": [
+          "wis",
+          "cha"
+        ],
+        "skills": {
+          "number": 2,
+          "choices": [
+            "ath",
+            "ins",
+            "itm",
+            "med",
+            "per",
+            "rel"
+          ],
+          "value": []
+        },
+        "spellcasting": {
+          "progression": "half",
+          "ability": "cha"
+        },
+        "damage": {
+          "parts": []
+        },
+        "attunement": 0
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.gZiUvbXWLs0pOp0c"
+        }
+      },
+      "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "JdhpBDti3h3tNZai",
+      "name": "Relentless Endurance",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p>When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can't use this feature again until you finish a long rest.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 41",
+        "activation": {
+          "type": "special",
+          "cost": null,
+          "condition": "When you are reduced to 0 hit points"
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "lr",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "healing"
+            ]
+          ],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "Half-Orc",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "featType": {
+          "value": "ability",
+          "_deprecated": true,
+          "type": "String",
+          "label": "Feat Type"
+        },
+        "time": {
+          "value": "",
+          "_deprecated": true
+        },
+        "damageType": {
+          "value": "",
+          "_deprecated": true
+        },
+        "attributes": {
+          "spelldc": 10
+        },
+        "attunement": 0
+      },
+      "sort": 5000000,
+      "flags": {
+        "entityorder": {
+          "order": 8
+        }
+      },
+      "img": "icons/magic/control/control-influence-rally-purple.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "Md0yW4QscE770F7W",
+      "name": "Savage Attacks",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p>When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.</p><p><em><strong>Foundry Note:</strong> Enable this feature in the Special Traits section of the character sheet.</em></p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 41",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null,
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "Half-Orc",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "featType": {
+          "value": "passive",
+          "_deprecated": true,
+          "type": "String",
+          "label": "Feat Type"
+        },
+        "time": {
+          "value": "",
+          "_deprecated": true
+        },
+        "damageType": {
+          "value": "",
+          "_deprecated": true
+        },
+        "attributes": {
+          "spelldc": 10
+        },
+        "attunement": 0
+      },
+      "sort": 5100000,
+      "flags": {
+        "entityorder": {
+          "order": 118
+        }
+      },
+      "img": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "QX131bK0iuunr5uE",
+      "name": "Half-Orc",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<div title=\"Page 7\">\n<div>\n<div>\n<p><em>Your half-­orc character has certain traits deriving from your orc ancestry. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Strength score increases by 2, and your Constitution score increases by 1.</p><p><em><strong>Age.</strong></em> Half-­orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years.</p><p><em><strong>Alignment.</strong></em> Half-­orcs inherit a tendency toward chaos from their orc parents and are not strongly inclined toward good. Half-­orcs raised among orcs and willing to live out their lives among them are usually evil.</p><p><em><strong>Size.</strong></em> Half-­orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your orc blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Menacing.</strong></em> You gain proficiency in the Intimidation skill.</p><p><em><strong>Relentless Endurance.</strong></em> @Compendium[dnd5e.races.97c8i9Z28thvZuA8]{Relentless Endurance} When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can't use this feature again until you finish a long rest.</p>\n<div title=\"Page 7\">\n<div>\n<div>\n<p><em><strong>Savage Attacks.</strong></em> @Compendium[dnd5e.races.0kUsT4sMUOr5FcoX]{Savage Attacks} When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.</p><p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 41",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "sort": 5050000,
+      "flags": {},
+      "img": "icons/magic/unholy/orb-smoking-green.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "folder": "pK61u9wafV1nLfmS",
+  "sort": 187500,
+  "permission": {
+    "default": 0
+  },
+  "flags": {
+    "dnd5e": {
+      "savageAttacks": true
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_id": "s2kQs21J3cFg7ZSs",
+  "name": "Figurine of Wondrous Power Ebony Fly",
+  "type": "consumable",
+  "img": "icons/commodities/biological/legs-insect-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>A Figurine of Wondrous Power is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p>\n<p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p>\n<p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p>\n<p><strong>Ebony Fly</strong>. This ebony statuette is carved in the likeness of a horsefly. It can become a Giant Fly for up to 12 hours and can be ridden as a mount. Once it has been used, it can't be used again until 2 days have passed.</p>\n<h3 id=\"giant-fly\"><strong>Giant Fly</strong></h3>\n<p><em>Large beast, unaligned</em></p>\n<p><strong>Armor Class </strong>11<br><strong>Hit Points</strong> 19 (3d10 + 3)<br><strong>Speed </strong>30 ft., fly 60 ft.</p>\n<table>\n<thead>\n<tr>\n<th align=\"center\">STR</th>\n<th align=\"center\">DEX</th>\n<th align=\"center\">CON</th>\n<th align=\"center\">INT</th>\n<th align=\"center\">WIS</th>\n<th align=\"center\">CHA</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\">14 (+2)</td>\n<td align=\"center\">13 (+1)</td>\n<td align=\"center\">13 (+1)</td>\n<td align=\"center\">2 (-4)</td>\n<td align=\"center\">10 (+0)</td>\n<td align=\"center\">3 (-4)</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Senses </strong>darkvision 60 ft., passive Perception 10<br><strong>Languages </strong>--</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 169",
+    "quantity": 1,
+    "weight": 0.1,
+    "price": 6000,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 12,
+      "units": "hour"
+    },
+    "target": {
+      "value": 10,
+      "width": null,
+      "units": "ft",
+      "type": "space"
+    },
+    "range": {
+      "value": 60,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "charges",
+      "autoDestroy": false,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7000001,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

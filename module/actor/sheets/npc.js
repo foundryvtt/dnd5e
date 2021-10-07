@@ -1,16 +1,14 @@
-import Actor5e from "../entity.js";
 import ActorSheet5e from "../sheets/base.js";
 
 /**
  * An Actor sheet for NPC type characters.
- * Extends the base ActorSheet5e class.
  * @extends {ActorSheet5e}
  */
 export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "npc"],
       width: 600,
       height: 680
@@ -25,15 +23,16 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Organize Owned Items for rendering the NPC sheet
+   * Organize Owned Items for rendering the NPC sheet.
+   * @param {object} data  Copy of the actor data being prepared for displayed. *Will be mutated.*
    * @private
    */
   _prepareItems(data) {
 
     // Categorize Items as Features and Spells
     const features = {
-      weapons: { label: game.i18n.localize("DND5E.AttackPl"), items: [] , hasActions: true, dataset: {type: "weapon", "weapon-type": "natural"} },
-      actions: { label: game.i18n.localize("DND5E.ActionPl"), items: [] , hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
+      weapons: { label: game.i18n.localize("DND5E.AttackPl"), items: [], hasActions: true, dataset: {type: "weapon", "weapon-type": "natural"} },
+      actions: { label: game.i18n.localize("DND5E.ActionPl"), items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
       passive: { label: game.i18n.localize("DND5E.Features"), items: [], dataset: {type: "feat"} },
       equipment: { label: game.i18n.localize("DND5E.Inventory"), items: [], dataset: {type: "loot"}}
     };
@@ -45,7 +44,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
-      item.hasTarget = !!item.data.target && !(["none",""].includes(item.data.target.type));
+      item.hasTarget = !!item.data.target && !(["none", ""].includes(item.data.target.type));
       if ( item.type === "spell" ) arr[0].push(item);
       else arr[1].push(item);
       return arr;
@@ -82,13 +81,13 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Challenge Rating
     const cr = parseFloat(data.data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    data.labels["cr"] = cr >= 1 ? String(cr) : crLabels[cr] || 1;
+    data.labels.cr = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Creature Type
-    data.labels["type"] = this.actor.labels.creatureType;
+    data.labels.type = this.actor.labels.creatureType;
 
     // Armor Type
-    data.labels["armorType"] = this.getArmorLabel();
+    data.labels.armorType = this.getArmorLabel();
 
     return data;
   }
@@ -97,7 +96,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /**
    * Format NPC armor information into a localized string.
-   * @return {string}  Formatted armor label.
+   * @returns {string}  Formatted armor label.
    */
   getArmorLabel() {
     const ac = this.actor.data.data.attributes.ac;
@@ -131,7 +130,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-	activateListeners(html) {
+  activateListeners(html) {
     super.activateListeners(html);
     html.find(".health .rollable").click(this._onRollHPFormula.bind(this));
   }
@@ -139,8 +138,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling NPC health values using the provided formula
-   * @param {Event} event     The original click event
+   * Handle rolling NPC health values using the provided formula.
+   * @param {Event} event  The original click event.
    * @private
    */
   _onRollHPFormula(event) {

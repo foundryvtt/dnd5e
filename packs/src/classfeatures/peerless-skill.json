@@ -1,0 +1,65 @@
+{
+  "_id": "pquwueEMweRhiWaq",
+  "name": "Peerless Skill",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Starting at 14th level, when you make an ability check, you can expend one use of @Compendium[dnd5e.classfeatures.EeGafsa17CapsH2j]{Bardic Inspiraton}.</p><p>Roll a Bardic Inspiration die and add the number rolled to your ability check.</p><p>You can choose to do so after you roll the die for the ability check, but before the GM tells you whether you succeed or fail.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 54",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": "",
+      "type": ""
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "College of Lore 14",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+  "effects": []
+}

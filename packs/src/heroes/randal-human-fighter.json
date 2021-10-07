@@ -1,0 +1,2404 @@
+{
+  "_id": "K5XFMOiiM9WufwYO",
+  "name": "Randal (Human Fighter)",
+  "type": "character",
+  "img": "systems/dnd5e/tokens/heroes/FighterShield.webp",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 16,
+        "proficient": 1,
+        "mod": 3,
+        "save": 5,
+        "prof": 2,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "dex": {
+        "value": 14,
+        "proficient": 0,
+        "mod": 2,
+        "save": 2,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "con": {
+        "value": 15,
+        "proficient": 1,
+        "mod": 2,
+        "save": 4,
+        "prof": 2,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 12
+      },
+      "int": {
+        "value": 9,
+        "proficient": 0,
+        "mod": -1,
+        "save": -1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 9
+      },
+      "wis": {
+        "value": 13,
+        "proficient": 0,
+        "mod": 1,
+        "save": 1,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 11
+      },
+      "cha": {
+        "value": 11,
+        "proficient": 0,
+        "mod": 0,
+        "save": 0,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 10
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": null,
+        "calc": "default",
+        "formula": "",
+        "min": 0
+      },
+      "hp": {
+        "value": 12,
+        "min": 0,
+        "max": 12,
+        "temp": null,
+        "tempmax": null
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 2,
+        "prof": 0,
+        "total": 2
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": 30,
+        "units": "ft",
+        "hover": false
+      },
+      "senses": {
+        "darkvision": 0,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 0,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "int",
+      "death": {
+        "success": 0,
+        "failure": 0
+      },
+      "exhaustion": 0,
+      "inspiration": false,
+      "encumbrance": {
+        "value": 144.7,
+        "max": 240,
+        "pct": 60.29166666666666,
+        "encumbered": true
+      },
+      "hd": 1,
+      "prof": 2,
+      "spelldc": 9
+    },
+    "details": {
+      "biography": {
+        "value": "<p>Randal worked his way through the ranks of his hometown's guard, ultimately growing restless with city life and wandering off in search of adventure.</p>\n<blockquote>Actor artwork provided by <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a></blockquote>",
+        "public": ""
+      },
+      "alignment": "Neutral Good",
+      "race": "Variant Human",
+      "background": "Watchman",
+      "originalClass": "",
+      "xp": {
+        "value": 0,
+        "min": 0,
+        "max": 300,
+        "pct": 0
+      },
+      "appearance": "",
+      "trait": "",
+      "ideal": "",
+      "bond": "",
+      "flaw": "",
+      "level": 1,
+      "hd": {
+        "_deprecated": true
+      }
+    },
+    "traits": {
+      "size": "med",
+      "di": {
+        "value": [],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [],
+        "custom": ""
+      },
+      "languages": {
+        "value": [
+          "common",
+          "dwarvish",
+          "elvish",
+          "goblin"
+        ],
+        "custom": ""
+      },
+      "weaponProf": {
+        "value": [
+          "sim",
+          "mar"
+        ],
+        "custom": ""
+      },
+      "armorProf": {
+        "value": [
+          "lgt",
+          "med",
+          "hvy",
+          "shl"
+        ],
+        "custom": ""
+      },
+      "toolProf": {
+        "value": [],
+        "custom": ""
+      },
+      "perception": {
+        "_deprecated": true
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 10,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 1,
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 14,
+        "prof": 2,
+        "total": 4
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "ath": {
+        "value": 1,
+        "ability": "str",
+        "bonus": 0,
+        "mod": 3,
+        "passive": 15,
+        "prof": 2,
+        "total": 5
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "ins": {
+        "value": 1,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 13,
+        "prof": 2,
+        "total": 3
+      },
+      "itm": {
+        "value": 1,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 10,
+        "prof": 0,
+        "total": 0
+      },
+      "per": {
+        "value": 1,
+        "ability": "cha",
+        "bonus": 0,
+        "mod": 0,
+        "passive": 12,
+        "prof": 2,
+        "total": 2
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "bonus": 0,
+        "mod": -1,
+        "passive": 9,
+        "prof": 0,
+        "total": -1
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "bonus": 0,
+        "mod": 2,
+        "passive": 12,
+        "prof": 0,
+        "total": 2
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "bonus": 0,
+        "mod": 1,
+        "passive": 11,
+        "prof": 0,
+        "total": 1
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "level": 0,
+        "max": 0
+      },
+      "spell0": {
+        "_deprecated": true,
+        "max": 0,
+        "value": null
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "primary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "secondary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      },
+      "tertiary": {
+        "value": null,
+        "max": null,
+        "sr": false,
+        "lr": false,
+        "label": ""
+      }
+    }
+  },
+  "token": {
+    "flags": {},
+    "name": "Randal",
+    "displayName": 30,
+    "img": "systems/dnd5e/tokens/heroes/FighterShield.webp",
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": true,
+    "dimSight": 5,
+    "brightSight": 0,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightColor": null,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "actorId": "K5XFMOiiM9WufwYO",
+    "actorLink": true,
+    "disposition": 1,
+    "displayBars": 40,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": "attributes.ac.value"
+    },
+    "randomImg": false,
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "j3Vs0e3IZYBTGRik",
+      "name": "Background: Watchman",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<ul>\n<li>Skill Proficiencies: Athletics, Insight</li>\n<li>Languages: Two of your choice</li>\n<li>Equipment: A guard's uniform, a horn with which to summon help, and a pouch containing 10 gp</li>\n</ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "featType": {
+          "value": "",
+          "_deprecated": true
+        },
+        "time": {
+          "value": "",
+          "_deprecated": true
+        },
+        "damageType": {
+          "value": "",
+          "_deprecated": true
+        },
+        "attributes": {
+          "spelldc": 10
+        },
+        "attunement": 0
+      },
+      "sort": 4350001,
+      "flags": {},
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "qy0pVLQWv8tjWJPR",
+      "name": "Horn",
+      "type": "tool",
+      "data": {
+        "description": {
+          "value": "<p>A horn, used to sound the alarm and call upon reinforcements in times of need.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 2,
+        "price": 5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "toolType": "",
+        "ability": "cha",
+        "chatFlavor": "",
+        "proficient": 1,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        },
+        "attributes": {
+          "spelldc": 10
+        }
+      },
+      "sort": 1100000,
+      "flags": {},
+      "img": "icons/tools/instruments/flute-simple-wood.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "xhSq81g4w9vTE0nK",
+      "name": "Fighting Style: Defense",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p>While you are wearing armor, you gain a +1 bonus to AC</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 72; 73; 85; 91",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null,
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "Fighter 1, Champion 10, Paladin 2, Ranger 2",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "sort": 4325001,
+      "flags": {},
+      "img": "icons/equipment/shield/heater-stone-orange.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "SFFL6W2FeXR94xJN",
+      "name": "Second Wind",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p>You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 72",
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "sr"
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "heal",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d10 + @classes.fighter.levels",
+              "healing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Fighter 1",
+        "recharge": {
+          "value": 0,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "sort": 200000,
+      "flags": {},
+      "img": "icons/magic/life/heart-glowing-red.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "r7UallZJjcIFsz8i",
+      "name": "Grappler",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<p><em>Prerequisite: Strength 13 or higher </em></p><p>You've developed the skills necessary to hold your own in close-quarters grappling.</p><p>You gain the following benefits:</p>\n<ul>\n<li>You have advantage on attack rolls against a creature you are grappling.</li>\n<li>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</li>\n</ul>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 167",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "STR 13 or higher",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "sort": 400000,
+      "flags": {},
+      "img": "icons/skills/melee/unarmed-punch-fist.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "6kg0dYblyeGcoclF",
+      "name": "Arrows",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>Standard ammunition used for bows of all varieties. These mundane arrows are made of smooth wooden shafts with goose feather fletching and hammer metal bodkins.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 150",
+        "quantity": 20,
+        "weight": 0.05,
+        "price": 0.05,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": null,
+          "max": null,
+          "per": "",
+          "autoDestroy": false
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "",
+              "piercing"
+            ]
+          ],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "ammo",
+        "attuned": false,
+        "attributes": {
+          "spelldc": 10
+        }
+      },
+      "sort": 600000,
+      "flags": {},
+      "img": "icons/containers/ammunition/arrows-quiver-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "HW10iFMNN5JaJBFf",
+      "name": "Longbow",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "<p>A thick shaft of laminated wood is bowed by a taut string capable of launching deadly arrows at long distances.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 2,
+        "price": 50,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": 0,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 150,
+          "long": 600,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "ammo",
+          "target": "6kg0dYblyeGcoclF",
+          "amount": 1
+        },
+        "ability": "",
+        "actionType": "rwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "piercing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "martialR",
+        "properties": {
+          "amm": true,
+          "hvy": true,
+          "two": true,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "lgt": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "ver": false,
+          "lod": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "sort": 300000,
+      "flags": {},
+      "img": "icons/weapons/bows/longbow-leather-green.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "3d2b3iqnC0t116JB",
+      "name": "Longsword",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "<p>A lengthy stright blade designed for slashing foes, the longsword is a highly versatile weapon that may also be wielded with two hands for more punishing strikes.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 3,
+        "price": 15,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "slashing"
+            ]
+          ],
+          "versatile": "1d10 + @mod"
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "martialM",
+        "properties": {
+          "ver": true,
+          "amm": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "thr": false,
+          "two": false
+        },
+        "proficient": true,
+        "attuned": false
+      },
+      "sort": 100000,
+      "flags": {},
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "9vMrpjx6tZQVKCrF",
+      "name": "Handaxe (offhand)",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 2,
+        "price": 5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 20,
+          "long": 60,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d6",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleM",
+        "properties": {
+          "lgt": true,
+          "thr": true,
+          "amm": false,
+          "hvy": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false,
+        "attributes": {
+          "spelldc": 10
+        }
+      },
+      "sort": 200000,
+      "flags": {},
+      "img": "icons/weapons/axes/axe-broad-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "ZC11cflszLu1zXBL",
+      "name": "City Guard Chain Mail",
+      "type": "equipment",
+      "data": {
+        "description": {
+          "value": "<p>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 145",
+        "quantity": 1,
+        "weight": 55,
+        "price": 75,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 16,
+          "type": "heavy",
+          "dex": 0
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": 13,
+        "stealth": true,
+        "proficient": true,
+        "attuned": false
+      },
+      "sort": 800000,
+      "flags": {},
+      "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "UwH6scwUXajH9jCh",
+      "name": "Shield",
+      "type": "equipment",
+      "data": {
+        "description": {
+          "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 144",
+        "quantity": 1,
+        "weight": 6,
+        "price": 10,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 2,
+          "type": "shield",
+          "dex": null
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "speed": {
+          "value": null,
+          "conditions": ""
+        },
+        "strength": null,
+        "stealth": false,
+        "proficient": true,
+        "attuned": false
+      },
+      "sort": 4600000,
+      "flags": {},
+      "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "bq6RL40FQY52C7YE",
+      "name": "Backpack",
+      "type": "backpack",
+      "data": {
+        "description": {
+          "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 5,
+        "price": 2,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 30,
+          "weightless": false
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 300001,
+      "flags": {},
+      "img": "icons/containers/bags/pack-simple-leather.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "Z4bdbM4ROqwPcSli",
+      "name": "Pouch",
+      "type": "backpack",
+      "data": {
+        "description": {
+          "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 1,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "capacity": {
+          "type": "weight",
+          "value": 6,
+          "weightless": false
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 2300001,
+      "flags": {},
+      "img": "icons/containers/bags/coinpouch-simple-tan.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "RtMzLZEMAVyFwhLo",
+      "name": "Hammer",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>A tool with heavy metal head mounted ar the right angles at the end of a handle, used for job such as breaking things and driving in nails. </p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 150",
+        "quantity": 1,
+        "weight": 3,
+        "price": 1,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 3600000,
+      "flags": {},
+      "img": "icons/tools/smithing/hammer-sledge-steel-grey.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "BQIFmKZfFgM3XQPq",
+      "name": "Tinderbox",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 1,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 4800000,
+      "flags": {},
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "ASK21hDnn53hojQo",
+      "name": "Waterskin",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 5,
+        "price": 0.2,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": 0,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 4,
+          "max": 4,
+          "per": "charges",
+          "autoDestroy": false,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "food",
+        "attuned": false
+      },
+      "sort": 1900000,
+      "flags": {},
+      "img": "icons/sundries/survival/wetskin-leather-purple.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "pueZRmygDueiEPES",
+      "name": "Hempen Rope (50 ft.)",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 10,
+        "price": 1,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "charges",
+          "autoDestroy": false,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "abil",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "str",
+          "dc": 17,
+          "scaling": "flat"
+        },
+        "consumableType": "trinket",
+        "attuned": false
+      },
+      "sort": 4000000,
+      "flags": {},
+      "img": "icons/sundries/survival/rope-wrapped-brown.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "ph8RkMxLvWBSgIt3",
+      "name": "Quiver",
+      "type": "backpack",
+      "data": {
+        "description": {
+          "value": "<p>A quiver can hold up to 20 arrows.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 1,
+        "weight": 1,
+        "price": 1,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "Common",
+        "identified": true,
+        "capacity": {
+          "type": "items",
+          "value": 20,
+          "weightless": false
+        },
+        "currency": {
+          "cp": 0,
+          "sp": 0,
+          "ep": 0,
+          "gp": 0,
+          "pp": 0
+        },
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 2400001,
+      "flags": {},
+      "img": "icons/containers/ammunition/arrows-quiver-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "GUsTVResLLnqzu20",
+      "name": "Bedroll",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 150",
+        "quantity": 1,
+        "weight": 7,
+        "price": 1,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 3600000,
+      "flags": {},
+      "img": "icons/sundries/flags/banner-worn-blue.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "C47RdG1DyqBhG1aB",
+      "name": "Mess Kit",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 152",
+        "quantity": 1,
+        "weight": 1,
+        "price": 0.2,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false,
+        "damage": {
+          "parts": []
+        }
+      },
+      "sort": 3600000,
+      "flags": {},
+      "img": "icons/tools/cooking/fork-steel-grey.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "NcqTt0GXqkHxybfP",
+      "name": "Handaxe",
+      "type": "weapon",
+      "data": {
+        "description": {
+          "value": "<p>This one-handed axe is light and balanced for throwing while remaining useful in hand combat.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 149",
+        "quantity": 1,
+        "weight": 2,
+        "price": 5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 20,
+          "long": 60,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d6 + @mod",
+              "slashing"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "simpleM",
+        "properties": {
+          "lgt": true,
+          "thr": true,
+          "amm": false,
+          "hvy": false,
+          "fin": false,
+          "fir": false,
+          "foc": false,
+          "lod": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "spc": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true,
+        "attuned": false,
+        "attributes": {
+          "spelldc": 10
+        }
+      },
+      "sort": 150000,
+      "flags": {},
+      "img": "icons/weapons/axes/axe-broad-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "XlBuqgctFFNNx8Xn",
+      "name": "Rations",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 10,
+        "weight": 2,
+        "price": 0.5,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 0,
+          "units": ""
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "touch"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "charges",
+          "autoDestroy": true,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "food",
+        "attuned": false
+      },
+      "sort": 1800000,
+      "flags": {},
+      "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "rRBxjDaj0KZoEySZ",
+      "name": "Piton",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>A metal spike that is drive into a seam in a climbing surface with a climbing hammer. It can also be used like iron spikes to block doors in a pinch.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 150",
+        "quantity": 10,
+        "weight": 0.25,
+        "price": 0.05,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "charges",
+          "autoDestroy": true,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "trinket",
+        "attuned": false
+      },
+      "sort": 4300000,
+      "flags": {},
+      "img": "icons/sundries/survival/stake-rough-simple-brown.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "puS6D5ZXmiKePl1F",
+      "name": "Torch",
+      "type": "consumable",
+      "data": {
+        "description": {
+          "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 153",
+        "quantity": 10,
+        "weight": 1,
+        "price": 0.01,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "hour"
+        },
+        "target": {
+          "value": 40,
+          "width": null,
+          "units": "ft",
+          "type": "radius"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "charges",
+          "autoDestroy": true,
+          "autoUse": true
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "mwak",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1",
+              "fire"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "consumableType": "trinket",
+        "attuned": false
+      },
+      "sort": 4700000,
+      "flags": {},
+      "img": "icons/sundries/lights/torch-black.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "JhV1pJaLZSpAt51n",
+      "name": "Fighter",
+      "type": "class",
+      "data": {
+        "description": {
+          "value": "<p>As a fighter, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d10 per fighter level<br /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) + your Constitution modifier per fighter level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> All armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) chain mail or (b) leather armor, longbow, and 20 arrows</li>\n<li>(a) a martial weapon and a shield or (b) two martial weapons</li>\n<li>(a) a light crossbow and 20 bolts or (b) two handaxes</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n</ul>\n<h1>Fighter Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.fbExzwNwEAl2kW9c]{Fighting Style}, @Compendium[dnd5e.classfeatures.nTjmWbyHweXuIqwc]{Second Wind}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.ax8M0X0q1GGWM26j]{Martial Archetype}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable}</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (2)}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (2 uses)}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ]{Action Surge (2 uses)}, @Compendium[dnd5e.classfeatures.653ZHbNcmm7ZGXbw]{Indomitable (3 uses)}</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>Martial Archetype feature</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.sPy2OLoN7JaAcMl4]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.q9g1MLXuLZyxjQMg]{Extra Attack (3)}</td>\n</tr>\n</tbody>\n</table>\n<h1>Martial Archetypes</h1>\n<p>Different fighters choose different approaches to perfecting their fighting prowess. The martial archetype you choose to emulate reflects your approach.</p>\n<h2>Champion</h2>\n<p>The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.</p>\n<h3>Champion Features</h3>\n<p>3rd Level: @Compendium[dnd5e.classfeatures.YgLQV1O849wE5TgM]{Improved Critical}</p>\n<p>7th Level: @Compendium[dnd5e.classfeatures.dHu1yzIjD38BvGGd]{Remarkable Athlete}</p>\n<p>10th Level: @Compendium[dnd5e.classfeatures.kYJsED0rqqqUcgKz]{Additional Fighting Style}</p>\n<p>15th Level: @Compendium[dnd5e.classfeatures.aVKH6TLn1AG9hPSA]{Superior Critical}</p>\n<p>18th Level: @Compendium[dnd5e.classfeatures.ipG5yx1tRNmeJfSH]{Survivor}</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "levels": 1,
+        "subclass": "",
+        "hitDice": "d10",
+        "hitDiceUsed": 0,
+        "saves": [
+          "str",
+          "con"
+        ],
+        "skills": {
+          "number": 2,
+          "choices": [
+            "acr",
+            "ani",
+            "ath",
+            "his",
+            "ins",
+            "itm",
+            "prc",
+            "sur"
+          ],
+          "value": []
+        },
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "attunement": 0
+      },
+      "sort": 0,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.ABEBgWyRhVlDUIfq"
+        }
+      },
+      "img": "icons/skills/melee/hand-grip-sword-red.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "gxGtzolLrAw1A3or",
+      "name": "Crowbar",
+      "type": "loot",
+      "data": {
+        "description": {
+          "value": "<p>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 151",
+        "quantity": 1,
+        "weight": 5,
+        "price": 2,
+        "attunement": 0,
+        "equipped": false,
+        "rarity": "Common",
+        "identified": true,
+        "attuned": false
+      },
+      "sort": 100001,
+      "flags": {},
+      "img": "icons/tools/hand/pickaxe-steel-white.webp",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "FZMxHGzQLRylEPyZ",
+      "name": "Human",
+      "type": "feat",
+      "data": {
+        "description": {
+          "value": "<div title=\"Page 5\">\n<div>\n<div>\n<p><em>It&rsquo;s hard to make generalizations about humans, but your human character has these traits. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your ability scores each increase by 1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in their late teens and live less than a century.</p><p><em><strong>Alignment. </strong></em>Humans tend toward no particular alignment. The best and the worst are found among them.</p><p><em><strong>Size.</strong></em> Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Languages. </strong></em>You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.</p>\n</div>\n</div>\n</div>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 31",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "sort": 5000000,
+      "flags": {},
+      "img": "systems/dnd5e/icons/spells/light-air-fire-3.jpg",
+      "effects": [],
+      "folder": null,
+      "permission": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [
+    {
+      "_id": "4K6IBJnngJs6qjpa",
+      "changes": [
+        {
+          "key": "data.attributes.ac.bonus",
+          "mode": 2,
+          "value": "1"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "startRound": 0,
+        "startTurn": 0
+      },
+      "icon": "icons/equipment/shield/heater-stone-orange.webp",
+      "label": "+1 to AC",
+      "origin": "Compendium.dnd5e.heroes.K5XFMOiiM9WufwYO.Item.xhSq81g4w9vTE0nK",
+      "transfer": false,
+      "flags": {}
+    }
+  ],
+  "folder": "pK61u9wafV1nLfmS",
+  "sort": 199610,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

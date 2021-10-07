@@ -41,7 +41,7 @@
                     <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
                 </li>
                 <li class="proficiency">
-                    <span>{{ localize "DND5E.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                    <span>{{ localize "DND5E.Proficiency" }} {{labels.proficiency}}</span>
                 </li>
             </ul>
 
@@ -144,6 +144,7 @@
                         <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
                         <span class="ability-save" title="{{ localize 'DND5E.SavingThrow' }}">{{numberFormat ability.save decimals=0 sign=true}}</span>
                     </div>
+                    <a class="config-button" data-action="ability" title="{{localize 'DND5E.AbilityConfigure'}}"><i class="fas fa-cog"></i></a>
                 </li>
             {{/each}}
             </ul>
@@ -155,7 +156,10 @@
                 <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-skill="{{s}}">
                     <input type="hidden" name="data.skills.{{s}}.value" value="{{skill.baseValue}}" data-dtype="Number"/>
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
-                    <h4 class="skill-name rollable">{{label}}</h4>
+                    <div class="skill-name-controls">
+                      <h4 class="skill-name rollable">{{label}}</h4>
+                      <a class="config-button" data-action="skill" title="{{localize 'DND5E.SkillConfigure'}}"><i class="fas fa-cog"></i></a>
+                    </div>
                     <span class="skill-ability">{{skill.ability}}</span>
                     <span class="skill-mod">{{numberFormat skill.total decimals=0 sign=true}}</span>
                     <span class="skill-passive">({{skill.passive}})</span>

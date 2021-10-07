@@ -1,0 +1,48 @@
+{
+  "_id": "pvEzGSv71zBhaolc",
+  "name": "Barbarian",
+  "type": "class",
+  "img": "icons/skills/melee/hand-grip-sword-orange.webp",
+  "data": {
+    "description": {
+      "value": "<p>As a barbarian, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d12 per barbarian level<br><strong>Hit Points at 1st Level:</strong> 12 + your Constitution modifier<br><strong>Hit Points at Higher Levels:</strong> 1d12 (or 7) + your Constitution modifier per barbarian level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br><strong>Weapons:</strong> Simple weapons, martial weapons<br><strong>Tools:</strong> None<br><strong>Saving Throws:</strong> Strength, Constitution<br><strong>Skills:</strong> Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a greataxe or (b) any martial melee weapon</li>\n<li>(a) two handaxes or (b) any simple weapon</li>\n<li>An explorer's pack and four javelins</li>\n</ul>\n<h1>Barbarian Advancement</h1>\n<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n<thead>\n<tr>\n<td height=\"17\">Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n<td>Rages</td>\n<td>Rage Damage</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td height=\"17\">1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.VoR0SUrNX5EJVPIO]{Rage}, @Compendium[dnd5e.classfeatures.SZbsNbaxFFGwBpNK]{Unarmored Defense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.SCVjqRdlZ9cvHVSR]{Reckless Attack}, @Compendium[dnd5e.classfeatures.vt31lWAULygEl7yk]{Danger Sense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.TH1QAf6YNGSeBVjT]{Primal Path}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.Kl6zifJ5OmdHlOi2]{Fast Movement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">6th</td>\n<td>+3</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">7th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.NlXslw4yAqmKZWtN]{Feral Instinct}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td height=\"17\">9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (1 die)}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td height=\"17\">10th</td>\n<td>+4</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td height=\"17\">11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.FqfmbPgxiyrWzhYk]{Relentless Rage}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td height=\"17\">12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td height=\"17\">13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (2 dice)}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td height=\"17\">14th</td>\n<td>+5</td>\n<td>Path feature</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td height=\"17\">15th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.l8tUhZ5Pecm9wz7I]{Persistent Rage}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td height=\"17\">16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+4</td>\n</tr>\n<tr>\n<td height=\"17\">17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (3 dice)}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td height=\"17\">18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.Q1exex5ALteprrPo]{Indomitable Might}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td height=\"17\">19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td height=\"17\">20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.jVU4AgqfrFaqgXns]{Primal Champion}</td>\n<td>Unlimited</td>\n<td>+4</td>\n</tr>\n</tbody>\n</table>\n<h1>Primal Paths</h1>\n<h2>Path of the Berserker</h2>\n<p>For some barbarians, rage is a means to an end— that end being violence. The Path of the Berserker is a path of untrammeled fury, slick with blood. As you enter the berserker's rage, you thrill in the chaos of battle, heedless of your own health or well-being.</p>\n<h3>Path of the Berserker Features</h3>\n<p>3rd Level: @Compendium[dnd5e.classfeatures.CkbbAckeCtyHXEnL]{Frenzy}</p>\n<p>6th Level: @Compendium[dnd5e.classfeatures.0Jgf8fYY2ExwgQpN]{Mindless Rage}</p>\n<p>10th Level: @Compendium[dnd5e.classfeatures.M6VSMzVtKPhh8B0i]{Intimidating Presence}</p>\n<p>14th Level: @Compendium[dnd5e.classfeatures.xzD9zlRP6dUxCtCl]{Retaliation}</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "",
+    "levels": 1,
+    "subclass": "",
+    "hitDice": "d12",
+    "hitDiceUsed": 0,
+    "saves": [
+      "str",
+      "con"
+    ],
+    "skills": {
+      "number": 2,
+      "choices": [
+        "ani",
+        "ath",
+        "itm",
+        "nat",
+        "prc",
+        "sur"
+      ],
+      "value": []
+    },
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    },
+    "damage": {
+      "parts": []
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

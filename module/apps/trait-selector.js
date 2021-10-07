@@ -5,9 +5,9 @@
 export default class TraitSelector extends DocumentSheet {
 
   /** @inheritdoc */
-	static get defaultOptions() {
-	  return foundry.utils.mergeObject(super.defaultOptions, {
-	    id: "trait-selector",
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      id: "trait-selector",
       classes: ["dnd5e", "trait-selector", "subconfig"],
       title: "Actor Trait Selection",
       template: "systems/dnd5e/templates/apps/trait-selector.html",
@@ -36,7 +36,7 @@ export default class TraitSelector extends DocumentSheet {
    * @type {string}
    */
   get attribute() {
-	  return this.options.name;
+    return this.options.name;
   }
 
   /* -------------------------------------------- */
@@ -48,19 +48,19 @@ export default class TraitSelector extends DocumentSheet {
     const value = (o.valueKey) ? foundry.utils.getProperty(attr, o.valueKey) ?? [] : attr;
     const custom = (o.customKey) ? foundry.utils.getProperty(attr, o.customKey) ?? "" : "";
 
-	  // Populate choices
+    // Populate choices
     const choices = Object.entries(o.choices).reduce((obj, e) => {
       let [k, v] = e;
       obj[k] = { label: v, chosen: attr ? value.includes(k) : false };
       return obj;
-    }, {})
+    }, {});
 
     // Return data
     return {
       allowCustom: o.allowCustom,
-	    choices: choices,
+      choices: choices,
       custom: custom
-    }
+    };
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,43 @@
+{
+  "_id": "HZp69hhyNZUUCipF",
+  "name": "Glass Bottle",
+  "type": "backpack",
+  "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
+  "data": {
+    "description": {
+      "value": "<p>A bottle holds 1½ pints of liquid.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 153",
+    "quantity": 1,
+    "weight": 2,
+    "price": 2,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "common",
+    "identified": true,
+    "capacity": {
+      "type": "weight",
+      "value": 6,
+      "weightless": false
+    },
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "damage": {
+      "parts": []
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1200000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

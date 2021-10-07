@@ -1,0 +1,136 @@
+{
+  "_id": "VoR0SUrNX5EJVPIO",
+  "name": "Rage",
+  "type": "feat",
+  "img": "icons/creatures/abilities/mouth-teeth-human.webp",
+  "data": {
+    "description": {
+      "value": "<p>In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.&nbsp;While raging, you gain the following benefits if you aren't wearing heavy armor:</p>\n<ul>\n<li>\n<p>You have advantage on Strength checks and Strength saving throws.</p>\n</li>\n<li>\n<p>When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.</p>\n</li>\n<li>\n<p>You have resistance to bludgeoning, piercing, and slashing damage.</p>\n</li>\n</ul>\n<p>If you are able to cast spells, you can't cast them or concentrate on them while raging.&nbsp;</p>\n<p>Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.&nbsp;</p>\n<p>Once you have raged the number of times shown for your barbarian level in the Rages column in the table below, you must finish a long rest before you can rage again.</p>\n<p><em style=\"box-sizing: border-box; user-select: text; color: #191813; font-size: 13px;\">**Foundry note: Note the limited uses is set to the base default of 2. Please manually adjust as required.</em></p>\n<table style=\"width: 286px; height: 170px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\"><strong>Barbarian Level</strong></td>\n<td style=\"width: 68px; height: 17px;\"><strong>Rages</strong></td>\n<td style=\"width: 96px; height: 17px;\"><strong>Rage Damage</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">1st</td>\n<td style=\"width: 68px; height: 17px;\">2</td>\n<td style=\"width: 96px; height: 17px;\">+2</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">2nd</td>\n<td style=\"width: 68px; height: 17px;\">2</td>\n<td style=\"width: 96px; height: 17px;\">+2</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">3rd</td>\n<td style=\"width: 68px; height: 17px;\">3</td>\n<td style=\"width: 96px; height: 17px;\">+2</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">4th</td>\n<td style=\"width: 68px; height: 17px;\">3</td>\n<td style=\"width: 96px; height: 17px;\">+2</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">5th</td>\n<td style=\"width: 68px; height: 17px;\">3</td>\n<td style=\"width: 96px; height: 17px;\">+2</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">6th</td>\n<td style=\"width: 68px; height: 17px;\">4</td>\n<td style=\"width: 96px; height: 17px;\">+2</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">7th</td>\n<td style=\"width: 68px; height: 17px;\">4</td>\n<td style=\"width: 96px; height: 17px;\">+2</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">8th</td>\n<td style=\"width: 68px;\">4</td>\n<td style=\"width: 96px;\">+2</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">9th</td>\n<td style=\"width: 68px;\">4</td>\n<td style=\"width: 96px;\">+3</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">10th</td>\n<td style=\"width: 68px;\">4</td>\n<td style=\"width: 96px;\">+3</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">11th</td>\n<td style=\"width: 68px;\">4</td>\n<td style=\"width: 96px;\">+3</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">12th</td>\n<td style=\"width: 68px;\">5</td>\n<td style=\"width: 96px;\">+3</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">13th</td>\n<td style=\"width: 68px;\">5</td>\n<td style=\"width: 96px;\">+3</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">14th</td>\n<td style=\"width: 68px;\">5</td>\n<td style=\"width: 96px;\">+3</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">15th</td>\n<td style=\"width: 68px; height: 17px;\">5</td>\n<td style=\"width: 96px; height: 17px;\">+3</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">16th</td>\n<td style=\"width: 68px; height: 17px;\">5</td>\n<td style=\"width: 96px; height: 17px;\">+4</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">17th</td>\n<td style=\"width: 68px;\">6</td>\n<td style=\"width: 96px;\">+4</td>\n</tr>\n<tr>\n<td style=\"width: 112px;\">18th</td>\n<td style=\"width: 68px;\">6</td>\n<td style=\"width: 96px;\">+4</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">19th</td>\n<td style=\"width: 68px; height: 17px;\">6</td>\n<td style=\"width: 96px; height: 17px;\">+4</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"width: 112px; height: 17px;\">20th</td>\n<td style=\"width: 68px; height: 17px;\">Unlimited</td>\n<td style=\"width: 96px; height: 17px;\">+4</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp;</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 48",
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 1,
+      "units": "minute"
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 2,
+      "max": "@classes.barbarian.levels > 19 ? 99 : @classes.barbarian.levels > 16 ? 6 : @classes.barbarian.levels > 11 ? 5 : @classes.barbarian.levels > 5 ? 4 : @classes.barbarian.levels > 2 ? 3 : 2",
+      "per": "lr",
+      "type": "lr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell",
+      "value": ""
+    },
+    "requirements": "Barbarian 1",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "properties": {
+      "amm": false,
+      "fin": false,
+      "fir": false,
+      "foc": false,
+      "hvy": false,
+      "lgt": false,
+      "lod": false,
+      "rch": false,
+      "rel": false,
+      "ret": false,
+      "spc": false,
+      "thr": false,
+      "two": false,
+      "ver": false
+    }
+  },
+  "effects": [
+    {
+      "_id": "eWhL8hUr0c2ujDUm",
+      "flags": {},
+      "changes": [
+        {
+          "key": "data.bonuses.mwak.damage",
+          "mode": 2,
+          "value": "+2"
+        },
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "slashing"
+        },
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "piercing"
+        },
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "bludgeoning"
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": 1620159597128,
+        "rounds": 10
+      },
+      "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
+      "label": "Rage",
+      "origin": "Item.bdfYHJstcltQC7SZ",
+      "tint": "",
+      "transfer": true
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

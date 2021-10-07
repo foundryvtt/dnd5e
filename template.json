@@ -6,27 +6,51 @@
         "abilities": {
           "str": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "bonuses": {
+              "check": "",
+              "save": ""
+            }
           },
           "dex": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "bonuses": {
+              "check": "",
+              "save": ""
+            }
           },
           "con": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "bonuses": {
+              "check": "",
+              "save": ""
+            }
           },
           "int": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "bonuses": {
+              "check": "",
+              "save": ""
+            }
           },
           "wis": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "bonuses": {
+              "check": "",
+              "save": ""
+            }
           },
           "cha": {
             "value": 10,
-            "proficient": 0
+            "proficient": 0,
+            "bonuses": {
+              "check": "",
+              "save": ""
+            }
           }
         },
         "attributes": {
@@ -108,75 +132,147 @@
         "skills": {
           "acr": {
             "value": 0,
-            "ability": "dex"
+            "ability": "dex",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "ani": {
             "value": 0,
-            "ability": "wis"
+            "ability": "wis",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "arc": {
             "value": 0,
-            "ability": "int"
+            "ability": "int",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "ath": {
             "value": 0,
-            "ability": "str"
+            "ability": "str",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "dec": {
             "value": 0,
-            "ability": "cha"
+            "ability": "cha",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "his": {
             "value": 0,
-            "ability": "int"
+            "ability": "int",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "ins": {
             "value": 0,
-            "ability": "wis"
+            "ability": "wis",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "itm": {
             "value": 0,
-            "ability": "cha"
+            "ability": "cha",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "inv": {
             "value": 0,
-            "ability": "int"
+            "ability": "int",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "med": {
             "value": 0,
-            "ability": "wis"
+            "ability": "wis",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "nat": {
             "value": 0,
-            "ability": "int"
+            "ability": "int",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "prc": {
             "value": 0,
-            "ability": "wis"
+            "ability": "wis",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "prf": {
             "value": 0,
-            "ability": "cha"
+            "ability": "cha",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "per": {
             "value": 0,
-            "ability": "cha"
+            "ability": "cha",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "rel": {
             "value": 0,
-            "ability": "int"
+            "ability": "int",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "slt": {
             "value": 0,
-            "ability": "dex"
+            "ability": "dex",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "ste": {
             "value": 0,
-            "ability": "dex"
+            "ability": "dex",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           },
           "sur": {
             "value": 0,
-            "ability": "wis"
+            "ability": "wis",
+            "bonuses": {
+              "check": "",
+              "passive": ""
+            }
           }
         },
         "traits": {
@@ -445,8 +541,8 @@
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": "",
           "per": null
         },
         "consume": {
@@ -460,7 +556,10 @@
         "actionType": null,
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": null
+        },
         "damage": {
           "parts": [],
           "versatile": ""
@@ -531,6 +630,7 @@
         "value": null,
         "dex": null
       },
+      "baseItem": "",
       "speed": {
         "value": null,
         "conditions": ""
@@ -553,9 +653,11 @@
     "tool": {
       "templates": ["itemDescription", "physicalItem"],
       "toolType": "",
+      "baseItem": "",
       "ability": "int",
       "chatFlavor": "",
-      "proficient": 0
+      "proficient": 0,
+      "bonus": ""
     },
     "spell": {
       "templates": ["itemDescription", "activatedEffect", "action"],
@@ -587,6 +689,7 @@
     "weapon": {
       "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
+      "baseItem": "",
       "properties": {},
       "proficient": true
     }

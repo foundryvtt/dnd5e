@@ -34,7 +34,7 @@ export default class ActorTypeConfig extends FormApplication {
   getData(options) {
 
     // Get current value or new default
-    let attr = foundry.utils.getProperty(this.object.data.data, 'details.type');
+    let attr = foundry.utils.getProperty(this.object.data.data, "details.type");
     if ( foundry.utils.getType(attr) !== "Object" ) attr = {
       value: (attr in CONFIG.DND5E.creatureTypes) ? attr : "humanoid",
       subtype: "",
@@ -48,7 +48,7 @@ export default class ActorTypeConfig extends FormApplication {
       types[k] = {
         label: game.i18n.localize(v),
         chosen: attr.value === k
-      }
+      };
     }
 
     // Return data for rendering
@@ -66,7 +66,7 @@ export default class ActorTypeConfig extends FormApplication {
         return obj;
       }, {}),
       preview: Actor5e.formatCreatureType(attr) || "–"
-    }
+    };
   }
 
   /* -------------------------------------------- */
@@ -74,7 +74,7 @@ export default class ActorTypeConfig extends FormApplication {
   /** @override */
   async _updateObject(event, formData) {
     const typeObject = foundry.utils.expandObject(formData);
-    return this.object.update({ 'data.details.type': typeObject });
+    return this.object.update({ "data.details.type": typeObject });
   }
 
   /* -------------------------------------------- */
@@ -93,7 +93,7 @@ export default class ActorTypeConfig extends FormApplication {
   _onChangeInput(event) {
     super._onChangeInput(event);
     const typeObject = foundry.utils.expandObject(this._getSubmitData());
-    this.form["preview"].value = Actor5e.formatCreatureType(typeObject) || "—";
+    this.form.preview.value = Actor5e.formatCreatureType(typeObject) || "—";
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,133 @@
+{
+  "_id": "9UZ2WjUF2k58CQug",
+  "name": "Fiendish Resilience",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>Starting at 10th level, you can choose one damage type when you finish a short or long rest. You gain resistance to that damage type until you choose a different one with this feature. Damage from magical weapons or silver weapons ignores this resistance.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 109",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": null,
+      "type": "self",
+      "width": null
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": null,
+      "per": "",
+      "type": ""
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": null,
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "requirements": "The Fiend 10",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "quantity": 1,
+    "weight": 0,
+    "price": 0,
+    "attuned": false,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "",
+    "identified": true,
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "armor": {
+      "value": 10
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "weaponType": "simpleM",
+    "properties": {
+      "amm": false,
+      "fin": false,
+      "fir": false,
+      "foc": false,
+      "hvy": false,
+      "lgt": false,
+      "lod": false,
+      "rch": false,
+      "rel": false,
+      "ret": false,
+      "spc": false,
+      "thr": false,
+      "two": false,
+      "ver": false
+    },
+    "proficient": true
+  },
+  "flags": {},
+  "img": "icons/magic/defensive/armor-stone-skin.webp",
+  "effects": [
+    {
+      "_id": "reg3sjReHspgkd0I",
+      "flags": {},
+      "changes": [
+        {
+          "key": "data.traits.dr.custom",
+          "value": "Fiendish Resilience",
+          "mode": 2
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "icons/magic/defensive/armor-stone-skin.webp",
+      "label": "Fiendish Resilience",
+      "origin": "Item.C2lYHOGH2UpEifk7",
+      "tint": "",
+      "transfer": true
+    }
+  ]
+}

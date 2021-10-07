@@ -1,0 +1,24 @@
+<form autocomplete="off">
+  <p class="notes">{{localize "DND5E.SkillConfigurationHint"}}</p>
+  <div class="form-group">
+    <label>{{ localize "DND5E.ProficiencyLevel" }}</label>
+    <select name="data.skills.{{skillId}}.value">
+      {{selectOptions proficiencyLevels selected=skill.value}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>{{localize "DND5E.SkillBonusCheck"}}</label>
+    <input name="data.skills.{{skillId}}.bonuses.check" type="text" value="{{skill.bonuses.check}}">
+  </div>
+  <div class="form-group">
+    <label>{{localize "DND5E.SkillBonusPassive"}}</label>
+    <input name="data.skills.{{skillId}}.bonuses.passive" type="text" value="{{skill.bonuses.passive}}">
+  </div>
+  <hr>
+  <div class="form-group">
+    <label>{{localize "DND5E.BonusAbilitySkill"}}</label>
+    <input name="data.bonuses.abilities.skill" type="text" value="{{bonusGlobal}}">
+    <p class="notes">{{localize "DND5E.SkillGlobalBonusCheckHint"}}</p>
+  </div>
+  <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "Submit"}}</button>
+</form>

@@ -7,7 +7,8 @@
  * @param {number} [options.criticalMultiplier=2]     A critical hit multiplier which is applied to critical hits
  * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
- *
+ * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
+ * @extends {Roll}
  */
 export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
@@ -66,7 +67,7 @@ export default class DamageRoll extends Roll {
       }
 
       // Multiply numeric terms
-      else if ( this.options.multiplyNumeric && (term instanceof NumericTerm)  ) {
+      else if ( this.options.multiplyNumeric && (term instanceof NumericTerm) ) {
         term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
         term.number = term.options.baseNumber;
         if ( this.isCritical ) {
@@ -80,6 +81,13 @@ export default class DamageRoll extends Roll {
     if ( this.options.powerfulCritical && (flatBonus > 0) ) {
       this.terms.push(new OperatorTerm({operator: "+"}));
       this.terms.push(new NumericTerm({number: flatBonus}, {flavor: game.i18n.localize("DND5E.PowerfulCritical")}));
+    }
+
+    // Add extra critical damage term
+    if ( this.isCritical && this.options.criticalBonusDamage ) {
+      const extra = new Roll(this.options.criticalBonusDamage, this.data);
+      if ( !(extra.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
+      this.terms.push(...extra.terms);
     }
 
     // Re-compile the underlying formula
@@ -112,7 +120,8 @@ export default class DamageRoll extends Roll {
    * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
    * @param {boolean} [data.allowCritical=true] Allow critical hit to be chosen as a possible damage mode
    * @param {object} options                  Additional Dialog customization options
-   * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the dialog was closed
+   * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
+   *                                          dialog was closed
    */
   async configureDialog({title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
 
@@ -120,7 +129,7 @@ export default class DamageRoll extends Roll {
     const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
       formula: `${this.formula} + @bonus`,
       defaultRollMode,
-      rollModes: CONFIG.Dice.rollModes,
+      rollModes: CONFIG.Dice.rollModes
     });
 
     // Create the Dialog window and await submission of the form
@@ -149,8 +158,9 @@ export default class DamageRoll extends Roll {
 
   /**
    * Handle submission of the Roll evaluation configuration Dialog
-   * @param {jQuery} html             The submitted dialog content
-   * @param {boolean} isCritical      Is the damage a critical hit?
+   * @param {jQuery} html         The submitted dialog content
+   * @param {boolean} isCritical  Is the damage a critical hit?
+   * @returns {DamageRoll}        This damage roll.
    * @private
    */
   _onDialogSubmit(html, isCritical) {

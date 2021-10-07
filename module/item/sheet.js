@@ -1,8 +1,9 @@
+import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
 
 /**
- * Override and extend the core ItemSheet implementation to handle specific item types
+ * Override and extend the core ItemSheet implementation to handle specific item types.
  * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
@@ -11,7 +12,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Expand the default size of the class sheet
     if ( this.object.data.type === "class" ) {
-      this.options.width = this.position.width =  600;
+      this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
     }
   }
@@ -19,8 +20,8 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-	static get defaultOptions() {
-	  return foundry.utils.mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 560,
       height: 400,
       classes: ["dnd5e", "sheet", "item"],
@@ -51,6 +52,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
     data.itemStatus = this._getItemStatus(itemData);
     data.itemProperties = this._getItemProperties(itemData);
+    data.baseItems = await this._getItemBaseTypes(itemData);
     data.isPhysical = itemData.data.hasOwnProperty("quantity");
 
     // Potential consumption targets
@@ -67,12 +69,13 @@ export default class ItemSheet5e extends ItemSheet {
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
 
     // Vehicles
-    data.isCrewed = itemData.data.activation?.type === 'crew';
+    data.isCrewed = itemData.data.activation?.type === "crew";
     data.isMountable = this._isItemMountable(itemData);
 
     // Armor Class
-    data.isArmor = itemData.data.armor?.type in data.config.armorTypes;
+    data.isArmor = this.item.isArmor;
     data.hasAC = data.isArmor || data.isMountable;
+    data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
 
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
@@ -86,9 +89,37 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
+   * Get the base weapons and tools based on the selected type.
+   *
+   * @param {object} item        Item data for the item being displayed
+   * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
+   * @protected
+   */
+  async _getItemBaseTypes(item) {
+    const type = item.type === "equipment" ? "armor" : item.type;
+    const ids = CONFIG.DND5E[`${type}Ids`];
+    if ( ids === undefined ) return {};
+
+    const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
+    const baseType = foundry.utils.getProperty(item.data, typeProperty);
+
+    const items = await Object.entries(ids).reduce(async (acc, [name, id]) => {
+      const baseItem = await ProficiencySelector.getBaseItem(id);
+      const obj = await acc;
+      if ( baseType !== foundry.utils.getProperty(baseItem.data, typeProperty) ) return obj;
+      obj[name] = baseItem.name;
+      return obj;
+    }, {});
+
+    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the valid item consumption targets which exist on the actor
-   * @param {Object} item         Item data for the item being displayed
-   * @return {{string: string}}   An object of potential consumption targets
+   * @param {object} item         Item data for the item being displayed
+   * @returns {{string: string}}   An object of potential consumption targets
    * @private
    */
   _getItemConsumptionTargets(item) {
@@ -99,7 +130,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Ammunition
     if ( consume.type === "ammo" ) {
-      return actor.itemTypes.consumable.reduce((ammo, i) =>  {
+      return actor.itemTypes.consumable.reduce((ammo, i) => {
         if ( i.data.data.consumableType === "ammo" ) {
           ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
         }
@@ -109,7 +140,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Attributes
     else if ( consume.type === "attribute" ) {
-      const attributes = TokenDocument.getTrackedAttributes(actor.data.data);
+      const attributes = TokenDocument.implementation.getConsumedAttributes(actor.data.data);
       attributes.bar.forEach(a => a.push("value"));
       return attributes.bar.concat(attributes.value).reduce((obj, a) => {
         let k = a.join(".");
@@ -135,9 +166,9 @@ export default class ItemSheet5e extends ItemSheet {
         // Limited-use items
         const uses = i.data.data.uses || {};
         if ( uses.per && uses.max ) {
-          const label = uses.per === "charges" ?
-            ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})` :
-            ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
+          const label = uses.per === "charges"
+            ? ` (${game.i18n.format("DND5E.AbilityUseChargesLabel", {value: uses.value})})`
+            : ` (${game.i18n.format("DND5E.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
           obj[i.id] = i.name + label;
         }
 
@@ -145,7 +176,7 @@ export default class ItemSheet5e extends ItemSheet {
         const recharge = i.data.data.recharge || {};
         if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("DND5E.Recharge")})`;
         return obj;
-      }, {})
+      }, {});
     }
     else return {};
   }
@@ -153,8 +184,9 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
-   * @return {string}
+   * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet.
+   * @param {object} item    Copy of the item data being prepared for display.
+   * @returns {string|null}  Item status string if applicable to item's type.
    * @private
    */
   _getItemStatus(item) {
@@ -172,8 +204,9 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Get the Array of item properties which are used in the small sidebar of the description tab
-   * @return {Array}
+   * Get the Array of item properties which are used in the small sidebar of the description tab.
+   * @param {object} item  Copy of the item data being prepared for display.
+   * @returns {string[]}   List of property labels to be shown.
    * @private
    */
   _getItemProperties(item) {
@@ -192,12 +225,12 @@ export default class ItemSheet5e extends ItemSheet {
         labels.materials,
         item.data.components.concentration ? game.i18n.localize("DND5E.Concentration") : null,
         item.data.components.ritual ? game.i18n.localize("DND5E.Ritual") : null
-      )
+      );
     }
 
     else if ( item.type === "equipment" ) {
       props.push(CONFIG.DND5E.equipmentTypes[item.data.armor.type]);
-      props.push(labels.armor);
+      if ( this.item.isArmor || this._isItemMountable(item) ) props.push(labels.armor);
     }
 
     else if ( item.type === "feat" ) {
@@ -216,7 +249,7 @@ export default class ItemSheet5e extends ItemSheet {
         labels.range,
         labels.target,
         labels.duration
-      )
+      );
     }
     return props.filter(p => !!p);
   }
@@ -224,24 +257,23 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Is this item a separate large object like a siege engine or vehicle
-   * component that is usually mounted on fixtures rather than equipped, and
-   * has its own AC and HP.
-   * @param item
-   * @returns {boolean}
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP.
+   * @param {object} item  Copy of item data being prepared for display.
+   * @returns {boolean}    Is item siege weapon or vehicle equipment?
    * @private
    */
   _isItemMountable(item) {
     const data = item.data;
-    return (item.type === 'weapon' && data.weaponType === 'siege')
-      || (item.type === 'equipment' && data.armor.type === 'vehicle');
+    return (item.type === "weapon" && data.weaponType === "siege")
+      || (item.type === "equipment" && data.armor.type === "vehicle");
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   setPosition(position={}) {
-    if ( !(this._minimized  || position.height) ) {
+    if ( !(this._minimized || position.height) ) {
       position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
     }
     return super.setPosition(position);
@@ -249,7 +281,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
   /*  Form Submission                             */
-	/* -------------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   _getSubmitData(updateData={}) {
@@ -264,6 +296,18 @@ export default class ItemSheet5e extends ItemSheet {
     const damage = data.data?.damage;
     if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
 
+    // Check max uses formula
+    if ( data.data?.uses?.max ) {
+      const maxRoll = new Roll(data.data.uses.max);
+      if ( !maxRoll.isDeterministic ) {
+        data.data.uses.max = this.object.data._source.data.uses.max;
+        this.form.querySelector("input[name='data.uses.max']").value = data.data.uses.max;
+        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
+          name: game.i18n.localize("DND5E.LimitedUses")
+        }));
+      }
+    }
+
     // Return the flattened submission data
     return flattenObject(data);
   }
@@ -275,10 +319,10 @@ export default class ItemSheet5e extends ItemSheet {
     super.activateListeners(html);
     if ( this.isEditable ) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find('.trait-selector').click(this._onConfigureTraits.bind(this));
+      html.find(".trait-selector").click(this._onConfigureTraits.bind(this));
       html.find(".effect-control").click(ev => {
-        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
-        ActiveEffect5e.onManageActiveEffect(ev, this.item)
+        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
+        ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
     }
   }
@@ -286,9 +330,9 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Add or remove a damage part from the damage formula
-   * @param {Event} event     The original click event
-   * @return {Promise}
+   * Add or remove a damage part from the damage formula.
+   * @param {Event} event             The original click event.
+   * @returns {Promise<Item5e>|null}  Item with updates applied.
    * @private
    */
   async _onDamageControl(event) {
@@ -316,7 +360,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Handle spawning the TraitSelector application for selection various options.
-   * @param {Event} event   The click event which originated the selection
+   * @param {Event} event   The click event which originated the selection.
    * @private
    */
   _onConfigureTraits(event) {
@@ -328,7 +372,7 @@ export default class ItemSheet5e extends ItemSheet {
       choices: [],
       allowCustom: false
     };
-    switch(a.dataset.options) {
+    switch (a.dataset.options) {
       case "saves":
         options.choices = CONFIG.DND5E.abilities;
         options.valueKey = null;
@@ -340,7 +384,8 @@ export default class ItemSheet5e extends ItemSheet {
       case "skills":
         const skills = this.item.data.data.skills;
         const choiceSet = skills.choices?.length ? skills.choices : Object.keys(CONFIG.DND5E.skills);
-        options.choices = Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([skill,]) => choiceSet.includes(skill)));
+        options.choices =
+          Object.fromEntries(Object.entries(CONFIG.DND5E.skills).filter(([skill]) => choiceSet.includes(skill)));
         options.maximum = skills.number;
         break;
     }

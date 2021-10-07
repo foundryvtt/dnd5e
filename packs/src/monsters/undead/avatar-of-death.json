@@ -1,0 +1,718 @@
+{
+  "_id": "XiSWKZzAUxdmFOLL",
+  "name": "Avatar of Death",
+  "type": "npc",
+  "img": "icons/svg/mystery-man.svg",
+  "data": {
+    "abilities": {
+      "str": {
+        "value": 16,
+        "proficient": 0,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "dex": {
+        "value": 16,
+        "proficient": 0,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "con": {
+        "value": 16,
+        "proficient": 0,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "int": {
+        "value": 16,
+        "proficient": 0,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "wis": {
+        "value": 16,
+        "proficient": 0,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      },
+      "cha": {
+        "value": 16,
+        "proficient": 0,
+        "mod": 3,
+        "save": 3,
+        "prof": 0,
+        "saveBonus": 0,
+        "checkBonus": 0,
+        "dc": 13
+      }
+    },
+    "attributes": {
+      "ac": {
+        "flat": 20,
+        "calc": "natural",
+        "formula": ""
+      },
+      "hp": {
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "temp": 0,
+        "tempmax": 0,
+        "formula": "Half of Summoner Max."
+      },
+      "init": {
+        "value": 0,
+        "bonus": 0,
+        "mod": 3,
+        "total": 3,
+        "prof": 0
+      },
+      "movement": {
+        "burrow": 0,
+        "climb": 0,
+        "fly": 60,
+        "swim": 0,
+        "walk": 60,
+        "units": "ft",
+        "hover": true
+      },
+      "senses": {
+        "darkvision": 60,
+        "blindsight": 0,
+        "tremorsense": 0,
+        "truesight": 60,
+        "units": "ft",
+        "special": ""
+      },
+      "spellcasting": "int",
+      "spelldc": 13,
+      "prof": 2,
+      "encumbrance": {
+        "value": 0,
+        "max": 240,
+        "pct": 0,
+        "encumbered": false
+      }
+    },
+    "details": {
+      "biography": {
+        "value": "",
+        "public": ""
+      },
+      "alignment": "Neutral Evil",
+      "race": "",
+      "type": {
+        "value": "undead",
+        "subtype": "",
+        "swarm": "",
+        "custom": ""
+      },
+      "environment": "",
+      "cr": "0",
+      "spellLevel": 1,
+      "xp": {
+        "value": 10
+      },
+      "source": "DMG pg. 164"
+    },
+    "traits": {
+      "size": "med",
+      "di": {
+        "value": [
+          "necrotic",
+          "poison"
+        ],
+        "custom": ""
+      },
+      "dr": {
+        "value": [],
+        "custom": ""
+      },
+      "dv": {
+        "value": [],
+        "custom": ""
+      },
+      "ci": {
+        "value": [
+          "charmed",
+          "frightened",
+          "paralyzed",
+          "petrified",
+          "poisoned",
+          "unconscious"
+        ],
+        "custom": ""
+      },
+      "languages": {
+        "value": [],
+        "custom": "All languages known to its summoner"
+      }
+    },
+    "currency": {
+      "pp": 0,
+      "gp": 0,
+      "ep": 0,
+      "sp": 0,
+      "cp": 0
+    },
+    "skills": {
+      "acr": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ani": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "arc": {
+        "value": 0,
+        "ability": "int",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ath": {
+        "value": 0,
+        "ability": "str",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "dec": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "his": {
+        "value": 0,
+        "ability": "int",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ins": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "itm": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "inv": {
+        "value": 0,
+        "ability": "int",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "med": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "nat": {
+        "value": 0,
+        "ability": "int",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "prc": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "prf": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "per": {
+        "value": 0,
+        "ability": "cha",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "rel": {
+        "value": 0,
+        "ability": "int",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "slt": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "ste": {
+        "value": 0,
+        "ability": "dex",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      },
+      "sur": {
+        "value": 0,
+        "ability": "wis",
+        "mod": 3,
+        "total": 3,
+        "passive": 13,
+        "bonus": 0,
+        "prof": 0
+      }
+    },
+    "spells": {
+      "spell1": {
+        "value": 0,
+        "override": null,
+        "max": 2
+      },
+      "spell2": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell3": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell4": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell5": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell6": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell7": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell8": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "spell9": {
+        "value": 0,
+        "override": null,
+        "max": 0
+      },
+      "pact": {
+        "value": 0,
+        "override": null,
+        "max": 0,
+        "level": 0
+      }
+    },
+    "bonuses": {
+      "mwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rwak": {
+        "attack": "",
+        "damage": ""
+      },
+      "msak": {
+        "attack": "",
+        "damage": ""
+      },
+      "rsak": {
+        "attack": "",
+        "damage": ""
+      },
+      "abilities": {
+        "check": "",
+        "save": "",
+        "skill": ""
+      },
+      "spell": {
+        "dc": ""
+      }
+    },
+    "resources": {
+      "legact": {
+        "value": 0,
+        "max": 0
+      },
+      "legres": {
+        "value": 0,
+        "max": 0
+      },
+      "lair": {
+        "value": false,
+        "initiative": 0
+      }
+    }
+  },
+  "token": {
+    "name": "Avatar of Death",
+    "displayName": 0,
+    "actorLink": false,
+    "tint": null,
+    "width": 1,
+    "height": 1,
+    "scale": 1,
+    "mirrorX": false,
+    "mirrorY": false,
+    "lockRotation": false,
+    "rotation": 0,
+    "vision": false,
+    "dimSight": 60,
+    "brightSight": 60,
+    "dimLight": 0,
+    "brightLight": 0,
+    "sightAngle": 0,
+    "lightAngle": 0,
+    "lightAlpha": 1,
+    "lightAnimation": {
+      "speed": 5,
+      "intensity": 5
+    },
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "flags": {},
+    "randomImg": false,
+    "img": "icons/svg/mystery-man.svg",
+    "actorId": "XiSWKZzAUxdmFOLL",
+    "alpha": 1
+  },
+  "items": [
+    {
+      "_id": "tXHiE3pxHbBF8bS6",
+      "name": "Incorporeal Movement",
+      "type": "feat",
+      "img": "icons/magic/air/air-wave-gust-blue.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p>\n<p>It takes <strong>5 (1d10) <em>force damage</em></strong> if it ends its turn inside an object.</p>\n</section>\n<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "other",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d10",
+              "force"
+            ]
+          ],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "1rEzqo8fiLbeFE07",
+      "name": "Turn Immunity",
+      "type": "feat",
+      "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
+      "data": {
+        "description": {
+          "value": "<p>The avatar is immune to features that turn undead.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "",
+          "type": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [],
+          "versatile": "",
+          "value": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell",
+          "value": ""
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    },
+    {
+      "_id": "d7ERliHkrcvQAF1X",
+      "name": "Reaping Scythe",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-scythe-fire-green.webp",
+      "data": {
+        "description": {
+          "value": "<section class=\"secret\">\n<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it, dealing <strong>7 (1d8 + 3) <em>slashing damage</em></strong> plus <strong>4 (1d8) <em>necrotic damage</em></strong>.</p>\n</section>\n<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "action",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": 1,
+          "width": null,
+          "units": "",
+          "type": "creature"
+        },
+        "range": {
+          "value": 5,
+          "long": null,
+          "units": "ft"
+        },
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "str",
+        "actionType": "other",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+          "parts": [
+            [
+              "1d8 + @mod",
+              "slashing"
+            ],
+            [
+              "1d8",
+              "necrotic"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "",
+        "recharge": {
+          "value": null,
+          "charged": false
+        },
+        "attunement": 0
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}
