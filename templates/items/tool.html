@@ -57,6 +57,13 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label>{{localize "DND5E.Attunement"}}</label>
+                <select name="data.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=data.attunement}}
+                </select>
+            </div>
+
             {{!-- Tool Proficiency --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemToolProficiency" }}</label>
