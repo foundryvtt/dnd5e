@@ -51,7 +51,10 @@
     "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": "2d6"
+    },
     "damage": {
       "parts": [
         [
@@ -61,7 +64,7 @@
       ],
       "versatile": ""
     },
-    "formula": "2d6",
+    "formula": "",
     "save": {
       "ability": "",
       "dc": null,
