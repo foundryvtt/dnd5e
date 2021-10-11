@@ -523,7 +523,10 @@
         "actionType": "",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": null
+        },
         "damage": {
           "parts": [],
           "versatile": ""
@@ -602,7 +605,10 @@
         "actionType": "mwak",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": null
+        },
         "damage": {
           "parts": [
             [
@@ -708,7 +714,10 @@
         "actionType": "rwak",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": null
+        },
         "damage": {
           "parts": [
             [

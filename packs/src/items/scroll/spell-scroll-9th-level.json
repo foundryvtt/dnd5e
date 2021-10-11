@@ -53,7 +53,10 @@
     "actionType": "msak",
     "attackBonus": 11,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": null
+    },
     "damage": {
       "parts": [],
       "versatile": ""
