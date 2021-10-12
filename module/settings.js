@@ -123,6 +123,8 @@ export const registerSystemSettings = function() {
       keepItems: false,
       keepBio: false,
       keepVision: true,
+      keepSelf: false,
+      keepAEOnlyOriginNotEquipment: false,
       transformTokens: true
     }
   });

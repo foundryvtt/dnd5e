@@ -1629,12 +1629,16 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.keepItems]       Keep items
    * @param {boolean} [options.keepBio]         Keep biography
    * @param {boolean} [options.keepVision]      Keep vision
+   * @param {boolean} [options.keepSelf]        Keep self
+   * @param {boolean} [options.keepAEOnlyOriginNotEquipment] Keep only active effects which origin is not equipment
    * @param {boolean} [options.transformTokens] Transform linked tokens too
    * @returns {Promise<Array<Token>>|null}      Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
-    keepItems=false, keepBio=false, keepVision=false, transformTokens=true}={}) {
+    keepItems=false, keepBio=false, keepVision=false,
+    keepSelf=false, keepAEOnlyOriginNotEquipment=false,
+    transformTokens=true}={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1648,8 +1652,14 @@ export default class Actor5e extends Actor {
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
     const source = target.toJSON();
 
+    let d = new Object();
+    if(keepSelf){
+      // Keep Self
+      mergeObject(d,o);
+    }
+
     // Prepare new data to merge from the source
-    const d = {
+    d = {
       type: o.type, // Remain the same actor type
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
       data: source.data, // Get the data model of your new form
@@ -1678,13 +1688,17 @@ export default class Actor5e extends Actor {
     for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
       d.token[k] = source.token[k];
     }
-    const vision = keepVision ? o.token : source.token;
-    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
-      d.token[k] = vision[k];
-    }
+
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
       d.token.img = images[Math.floor(Math.random() * images.length)];
+    }
+
+    if(!keepSelf){
+
+    const vision = keepVision ? o.token : source.token;
+    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
+      d.token[k] = vision[k];
     }
 
     // Transfer ability scores
@@ -1729,6 +1743,22 @@ export default class Actor5e extends Actor {
     // Keep senses
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
+    // Keep active effects only origin not equipment
+    if(keepAEOnlyOriginNotEquipment){
+      const tokenEffects = foundry.utils.deepClone(d.effects) || [];
+      let nonEquipItems = ["feat", "spell", "class"];
+      const tokenEffectsNotEquipment = [];
+      tokenEffects.forEach((effect) => {
+        if(!effect.origin.toLowerCase().startsWith("item")){
+          tokenEffectsNotEquipment.push(effect);
+        }
+      });
+      d.effects = tokenEffectsNotEquipment;
+    }
+
+    }
+
+
     // Set new data flags
     if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
     d.flags.dnd5e.isPolymorphed = true;
@@ -1745,9 +1775,14 @@ export default class Actor5e extends Actor {
     await this.sheet.close();
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, keepAEOnlyOriginNotEquipment, transformTokens
     });
+
+    // TODO To analize strange bug... some info like height and weight of the token are reset to default
+    // TODO after the constructor of the actor is invoked solved with a backup of the info of the token
+    const tokenBackup = duplicate(d.token);
     const newActor = await this.constructor.create(d, {renderSheet: true});
+    mergeObject(d.token, tokenBackup);
 
     // Update placed Token instances
     if ( !transformTokens ) return;
