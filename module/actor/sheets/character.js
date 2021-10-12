@@ -284,7 +284,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
       let priorLevel = cls?.data.data.levels ?? 0;
       if ( cls ) {
-        if ( priorLevel + 1 > CONFIG.DND5E.maxClassLevel) {
+        if ( priorLevel + 1 > CONFIG.DND5E.maxClassLevel ) {
           return ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxClassLevel}));
         }
         itemData.levels = priorLevel + 1;
