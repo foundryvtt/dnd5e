@@ -53,7 +53,10 @@
     "actionType": "rwak",
     "attackBonus": 0,
     "chatFlavor": "improvised weapon",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [
         [
