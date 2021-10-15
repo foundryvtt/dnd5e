@@ -41,12 +41,14 @@
         </ol>
         {{/if}}
 
+        {{#if itemProperties.length}}
         <h4 class="properties-header">{{localize "DND5E.Properties"}}</h4>
         <ol class="properties-list">
             {{#each itemProperties}}
             <li>{{this}}</li>
             {{/each}}
         </ol>
+        {{/if}}
     </div>
 
     {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
