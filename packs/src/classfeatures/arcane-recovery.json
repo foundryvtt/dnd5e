@@ -41,7 +41,10 @@
     "actionType": "util",
     "attackBonus": 0,
     "chatFlavor": "The wizard can recover this number worth of spells slots (of 5th-level or lower):",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [],
       "versatile": "",
