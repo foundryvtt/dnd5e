@@ -541,7 +541,10 @@
         "actionType": "other",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [
             [
@@ -625,7 +628,10 @@
         "actionType": "msak",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [
             [
@@ -724,7 +730,10 @@
         "actionType": "",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [],
           "versatile": ""

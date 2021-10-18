@@ -46,7 +46,10 @@
     "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "You have advantage on saving throws against being frightened.",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [],
       "versatile": "",

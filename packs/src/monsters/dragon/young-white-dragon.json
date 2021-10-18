@@ -533,7 +533,10 @@
         "actionType": "mwak",
         "attackBonus": 0,
         "chatFlavor": "The dragon opens its wide mouth to bite its foe.",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [
             [
@@ -643,7 +646,10 @@
         "actionType": "mwak",
         "attackBonus": 0,
         "chatFlavor": "The dragon strikes with one of its claws.",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [
             [
@@ -742,7 +748,10 @@
         "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "The dragon exhales its deadly breath attack.",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [
             [
@@ -819,7 +828,10 @@
         "actionType": "",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [],
           "versatile": ""
@@ -891,7 +903,10 @@
         "actionType": "",
         "attackBonus": 0,
         "chatFlavor": "",
-        "critical": null,
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
         "damage": {
           "parts": [],
           "versatile": ""
