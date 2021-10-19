@@ -587,17 +587,19 @@
     "background": {
       "templates": ["itemDescription"],
       "feature": null,
-      "languages": {
-        "grants": [],
-        "value": []
-      },
-      "skills": {
-        "grants": [],
-        "value": []
-      },
-      "tool": {
-        "grants": [],
-        "value": []
+      "traits": {
+        "languages": {
+          "grants": [],
+          "value": []
+        },
+        "skills": {
+          "grants": [],
+          "value": []
+        },
+        "tool": {
+          "grants": [],
+          "value": []
+        }
       }
     },
     "backpack": {
