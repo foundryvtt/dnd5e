@@ -272,9 +272,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _prepareTraits(itemData) {
-    const traits = ["skills", "tool", "languages"];
-    for ( const type of traits ) {
-      const data = itemData.data[type];
+    for ( const [type, data] of Object.entries(itemData.data.traits) ) {
       if ( !data ) continue;
       if ( ["armor", "weapon", "tool"].includes(type) ) {
         Actor5e.prepareProficiencies(data, type);
@@ -327,13 +325,12 @@ export default class ItemSheet5e extends ItemSheet {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
     data.labels.grants = {};
     for ( const [type, config] of Object.entries(data.data.data.traits) ) {
-      const grants = config.grants;
       if ( this.object.isEmbedded ) {
         const allowReplacements = ["skills", "tool"].includes(type);
         const choices = await ItemSheet5e._prepareTraitOptions(
-          type, grants, this.object.actor.getSelectedTraits(type), data.data.data[type].value, allowReplacements
+          type, config.grants, this.object.actor.getSelectedTraits(type), config.value, allowReplacements
         );
-        data.data.data[type].available = choices;
+        config.available = choices;
         if ( choices ) {
           data.labels.grants[type] = game.i18n.format("DND5E.TraitConfigurationChoicesRemaining", {
             count: choices.remaining,
@@ -636,12 +633,12 @@ export default class ItemSheet5e extends ItemSheet {
     event.preventDefault();
     const tag = event.target.closest(".tag");
     const type = tag.dataset.type;
-    const existingValues = this.object.data.data[type]?.value ?? [];
+    const existingValues = this.object.data.data.traits[type]?.value ?? [];
     const index = existingValues.findIndex(v => v === tag.dataset.key);
     if ( index !== -1 ) {
       existingValues.splice(index, 1);
       const updateData = {};
-      updateData[`data.${type}.value`] = existingValues;
+      updateData[`data.traits.${type}.value`] = existingValues;
       return this.object.update(updateData);
     }
   }
@@ -665,9 +662,9 @@ export default class ItemSheet5e extends ItemSheet {
       return false;
     })));
     for ( const [type, value] of Object.entries(addedTraits) ) {
-      let existingValue = this.object.data.data[type].value ?? [];
+      let existingValue = this.object.data.data.traits[type].value ?? [];
       existingValue.push(value);
-      updateData[`data.${type}.value`] = existingValue;
+      updateData[`data.traits.${type}.value`] = existingValue;
     }
     return this.object.update(updateData);
   }

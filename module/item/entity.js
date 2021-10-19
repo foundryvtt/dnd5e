@@ -1571,17 +1571,16 @@ export default class Item5e extends Item {
    */
   async _assignOwnedItemTraits(itemData, actor) {
     const updates = {};
-    const types = ["skills", "tool", "languages"];
-    for ( const type of types ) {
+    for ( const [type, config] of Object.entries(itemData.data.traits) ) {
       const { available } = await ItemSheet5e._prepareUnfulfilledGrants(
-        type, itemData.data[type].grants, itemData.data[type].value, actor.getSelectedTraits(type)
+        type, config.grants, actor.getSelectedTraits(type), config.value
       );
       let newValues = [];
       for ( const { set } of available ) {
-        if ( set.size > 1 ) continue;
+        if ( set.size !== 1 ) continue;
         newValues.push(set.values().next().value);
       }
-      if ( newValues.length > 0 ) updates[`data.${type}.value`] = newValues;
+      if ( newValues.length > 0 ) updates[`data.traits.${type}.value`] = newValues;
     }
     return updates;
   }
