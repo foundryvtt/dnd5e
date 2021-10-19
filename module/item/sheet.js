@@ -297,10 +297,9 @@ export default class ItemSheet5e extends ItemSheet {
    */
   async _prepareGrantedTraits(data) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
-    const types = ["skills", "tool", "languages"];
     data.labels.grants = {};
-    for ( const type of types ) {
-      const grants = data.data.data[type].grants;
+    for ( const [type, config] of Object.entries(data.data.data.traits) ) {
+      const grants = config.grants;
       if ( this.object.isEmbedded ) {
         // To be filled in :)
       } else {

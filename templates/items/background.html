@@ -44,13 +44,13 @@
         </div>
 
         {{!-- Skill Proficiencies --}}
-        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitSkillProf" type="skills" data=data.skills label=labels.grants.skills}}
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitSkillProf" type="skills" data=data.traits.skills label=labels.grants.skills}}
 
         {{!-- Tool Proficiencies --}}
-        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitToolProf" type="tool" data=data.tool label=labels.grants.tool}}
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.TraitToolProf" type="tool" data=data.traits.tool label=labels.grants.tool}}
 
         {{!-- Languages --}}
-        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.Languages" type="languages" data=data.languages label=labels.grants.languages}}
+        {{> "systems/dnd5e/templates/items/parts/item-selectable-trait.html" header="DND5E.Languages" type="languages" data=data.traits.languages label=labels.grants.languages}}
 
       </div>
   </section>
