@@ -171,11 +171,10 @@ export default class Item5e extends Item {
   get actorTraitChanges() {
     switch (this.type) {
       case "background":
-        return {
-          skills: this.data.data.skills.value,
-          tool: this.data.data.tool.value,
-          languages: this.data.data.languages.value
-        };
+        return Object.entries(this.data.data.traits).reduce((obj, [type, data]) => {
+          obj[type] = data.value;
+          return obj;
+        }, {});
       default:
         return {};
     }
