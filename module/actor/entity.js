@@ -308,6 +308,15 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Default ability score entry as defined in template.json.
+   * @type {object}
+   * @private
+   */
+  static get _emptyAbilityScore() {
+    return game.system.model.Actor.character.abilities.cha;
+  }
+
+  /**
    * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
    * @param {ActorData} actorData  Data being prepared.
    * @private
@@ -315,14 +324,7 @@ export default class Actor5e extends Actor {
   _prepareBaseAbilityScores(actorData) {
     const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
-      abilities[key] = actorData.data.abilities[key] ?? {
-        value: 10,
-        proficient: 0,
-        bonuses: {
-          check: "",
-          save: ""
-        }
-      }
+      abilities[key] = actorData.data.abilities[key] ?? Actor5e._emptyAbilityScore;
     }
     actorData.data.abilities = abilities;
   }
@@ -507,10 +509,10 @@ export default class Actor5e extends Actor {
     // Initiative modifiers
     const joat = flags.jackOfAllTrades;
     const athlete = flags.remarkableAthlete;
-    const dexCheckBonus = this._simplifyBonus(data.abilities.dex.bonuses?.check, bonusData);
+    const dexCheckBonus = this._simplifyBonus(data.abilities.dex?.bonuses?.check, bonusData);
 
     // Compute initiative modifier
-    init.mod = data.abilities.dex.mod;
+    init.mod = data.abilities.dex?.mod ?? 0;
     init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
     init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
@@ -669,7 +671,7 @@ export default class Actor5e extends Actor {
           ac.base = (armorData.value ?? 0) + ac.dex;
           ac.equippedArmor = armors[0];
         } else {
-          ac.dex = data.abilities.dex.mod;
+          ac.dex = data.abilities.dex?.mod ?? 0;
           ac.base = 10 + ac.dex;
         }
         break;
@@ -1001,16 +1003,16 @@ export default class Actor5e extends Actor {
 
     // Add ability modifier
     parts.push("@mod");
-    data.mod = abl.mod;
+    data.mod = abl?.mod ?? 0;
 
     // Include proficiency bonus
-    if ( abl.checkProf.hasProficiency ) {
+    if ( abl?.checkProf.hasProficiency ) {
       parts.push("@prof");
       data.prof = abl.checkProf.term;
     }
 
     // Add ability-specific check bonus
-    if ( abl.bonuses?.check ) {
+    if ( abl?.bonuses?.check ) {
       const checkBonusKey = `${abilityId}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
       data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
@@ -1060,16 +1062,16 @@ export default class Actor5e extends Actor {
 
     // Add ability modifier
     parts.push("@mod");
-    data.mod = abl.mod;
+    data.mod = abl?.mod ?? 0;
 
     // Include proficiency bonus
-    if ( abl.saveProf.hasProficiency ) {
+    if ( abl?.saveProf.hasProficiency ) {
       parts.push("@prof");
       data.prof = abl.saveProf.term;
     }
 
     // Include ability-specific saving throw bonus
-    if ( abl.bonuses?.save ) {
+    if ( abl?.bonuses?.save ) {
       const saveBonusKey = `${abilityId}SaveBonus`;
       parts.push(`@${saveBonusKey}`);
       data[saveBonusKey] = Roll.replaceFormulaData(abl.bonuses.save, data);
