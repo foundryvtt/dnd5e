@@ -196,7 +196,7 @@ export default class Actor5e extends Actor {
   /** @inheritdoc */
   getRollData() {
     const data = super.getRollData();
-    data.prof = this.data.data.attributes.prof || 0;
+    data.prof = new Proficiency(this.data.data.attributes.prof, 1);
     data.classes = Object.entries(this.classes).reduce((obj, e) => {
       const [slug, cls] = e;
       obj[slug] = cls.data.data;
