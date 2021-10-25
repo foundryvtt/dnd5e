@@ -313,7 +313,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   static get _emptyAbilityScore() {
-    return game.system.model.Actor.character.abilities.cha;
+    return foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
   }
 
   /**
