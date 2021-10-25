@@ -15,6 +15,9 @@ import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances } from "./module/canvas.js";
 
+// Import Data Definitions
+import * as ActorData5e from "./module/actor/data.js";
+
 // Import Documents
 import Actor5e from "./module/actor/entity.js";
 import Item5e from "./module/item/entity.js";
@@ -84,6 +87,9 @@ Hooks.once("init", function() {
       AbilityTemplate
     },
     config: DND5E,
+    data: {
+      ...ActorData5e
+    },
     dice,
     entities: {
       Actor5e,
