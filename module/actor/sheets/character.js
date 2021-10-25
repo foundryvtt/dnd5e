@@ -14,7 +14,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "character"],
       width: 720,
-      height: Math.max(680, 237 + Object.keys(CONFIG.DND5E.abilities).length * 70)
+      height: Math.max(680, 237 + (Object.keys(CONFIG.DND5E.abilities).length * 70))
     });
   }
 

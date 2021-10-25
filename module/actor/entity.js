@@ -64,7 +64,7 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
-    this._prepareBaseAbilityScores(this.data);
+    this._prepareBaseAbilities(this.data);
     this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
       case "character":
@@ -312,7 +312,7 @@ export default class Actor5e extends Actor {
    * @type {object}
    * @private
    */
-  static get _emptyAbilityScore() {
+  static get _emptyAbility() {
     return foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
   }
 
@@ -321,10 +321,10 @@ export default class Actor5e extends Actor {
    * @param {ActorData} actorData  Data being prepared.
    * @private
    */
-  _prepareBaseAbilityScores(actorData) {
+  _prepareBaseAbilities(actorData) {
     const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
-      abilities[key] = actorData.data.abilities[key] ?? Actor5e._emptyAbilityScore;
+      abilities[key] = actorData.data.abilities[key] ?? Actor5e._emptyAbility;
     }
     actorData.data.abilities = abilities;
   }
