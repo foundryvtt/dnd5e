@@ -64,8 +64,10 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
-    this._prepareBaseAbilities(this.data);
+    const updates = {};
+    this._prepareBaseAbilities(this.data, updates);
     this._prepareBaseArmorClass(this.data);
+    if ( !foundry.utils.isObjectEmpty(updates) ) this.data.update(updates);
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
@@ -319,12 +321,14 @@ export default class Actor5e extends Actor {
   /**
    * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
    * @param {ActorData} actorData  Data being prepared.
+   * @param {object} updates       Updates to be applied to the actor. *Will be mutated*.
    * @private
    */
-  _prepareBaseAbilities(actorData) {
+  _prepareBaseAbilities(actorData, updates) {
     const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
-      abilities[key] = actorData.data.abilities[key] ?? Actor5e._emptyAbility;
+      abilities[key] = actorData.data.abilities[key];
+      if ( !abilities[key] ) updates[`data.abilities.${key}`] = Actor5e._emptyAbility;
     }
     actorData.data.abilities = abilities;
   }
