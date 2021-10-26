@@ -792,30 +792,33 @@ preLocalize("senses", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * The set of skill which can be trained.
- * @enum {string}
+ * The set of skill which can be trained with their default ability scores.
+ * @enum {{
+ *   label: string,
+ *   ability: string
+ * }}
  */
 DND5E.skills = {
-  acr: "DND5E.SkillAcr",
-  ani: "DND5E.SkillAni",
-  arc: "DND5E.SkillArc",
-  ath: "DND5E.SkillAth",
-  dec: "DND5E.SkillDec",
-  his: "DND5E.SkillHis",
-  ins: "DND5E.SkillIns",
-  itm: "DND5E.SkillItm",
-  inv: "DND5E.SkillInv",
-  med: "DND5E.SkillMed",
-  nat: "DND5E.SkillNat",
-  prc: "DND5E.SkillPrc",
-  prf: "DND5E.SkillPrf",
-  per: "DND5E.SkillPer",
-  rel: "DND5E.SkillRel",
-  slt: "DND5E.SkillSlt",
-  ste: "DND5E.SkillSte",
-  sur: "DND5E.SkillSur"
+  acr: { label: "DND5E.SkillAcr", ability: "dex" },
+  ani: { label: "DND5E.SkillAni", ability: "wis" },
+  arc: { label: "DND5E.SkillArc", ability: "int" },
+  ath: { label: "DND5E.SkillAth", ability: "str" },
+  dec: { label: "DND5E.SkillDec", ability: "cha" },
+  his: { label: "DND5E.SkillHis", ability: "int" },
+  ins: { label: "DND5E.SkillIns", ability: "wis" },
+  itm: { label: "DND5E.SkillItm", ability: "cha" },
+  inv: { label: "DND5E.SkillInv", ability: "int" },
+  med: { label: "DND5E.SkillMed", ability: "wis" },
+  nat: { label: "DND5E.SkillNat", ability: "int" },
+  prc: { label: "DND5E.SkillPrc", ability: "wis" },
+  prf: { label: "DND5E.SkillPrf", ability: "cha" },
+  per: { label: "DND5E.SkillPer", ability: "cha" },
+  rel: { label: "DND5E.SkillRel", ability: "int" },
+  slt: { label: "DND5E.SkillSlt", ability: "dex" },
+  ste: { label: "DND5E.SkillSte", ability: "dex" },
+  sur: { label: "DND5E.SkillSur", ability: "wis" }
 };
-preLocalize("skills", { sort: true });
+preLocalize("skills", { key: "label", sort: true });
 
 /* -------------------------------------------- */
 

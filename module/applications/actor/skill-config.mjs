@@ -27,7 +27,8 @@ export default class ActorSkillConfig extends DocumentSheet {
 
   /** @inheritdoc */
   get title() {
-    return `${game.i18n.format("DND5E.SkillConfigureTitle", {skill: CONFIG.DND5E.skills[this._skillId]})}: ${this.document.name}`;
+    const label = CONFIG.DND5E.skills[this._skillId]?.label ?? "";
+    return `${game.i18n.format("DND5E.SkillConfigureTitle", {skill: label})}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
