@@ -4,7 +4,6 @@ import { mergeObject } from "/common/utils/helpers.mjs";
 import { defaultData } from "./base.js";
 import { SimpleTraitData } from "./common.js";
 import * as creature from "./creature.js";
-import Item5e from "../../item/entity.js";
 
 
 export class ActorCharacterData extends creature.CreatureData {
