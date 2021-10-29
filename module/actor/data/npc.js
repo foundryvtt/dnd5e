@@ -32,7 +32,6 @@ export class ActorNPCData extends creature.CreatureData {
  * @property {string} environment  Common environments in which this NPC is found.
  * @property {number} cr           NPC's challenge rating.
  * @property {number} spellLevel   Spellcasting level of this NPC.
- * @property {XPData} xp           XP granted by this creature.
  * @property {string} source       What book or adventure is this NPC from?
  */
 export class DetailsData extends creature.DetailsData {
@@ -47,12 +46,6 @@ export class DetailsData extends creature.DetailsData {
       environment: fields.BLANK_STRING,
       cr: fields.field(fields.REQUIRED_POSITIVE_NUMBER, { default: 1 }),
       spellLevel: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      xp: {
-        type: XPData,
-        required: true,
-        nullable: false,
-        default: defaultData("npc.details.xp")
-      },
       source: fields.BLANK_STRING
     });
   }
@@ -75,25 +68,6 @@ class TypeData extends DocumentData {
       subtype: fields.BLANK_STRING,
       swarm: fields.BLANK_STRING,
       custom: fields.BLANK_STRING
-    };
-  }
-}
-
-/**
- * An embedded data structure for NPC experience value.
- * @extends DocumentData
- * @see DetailsData
- *
- * @property {number} value  XP granted upon defeating this NPC.
- */
-class XPData extends DocumentData {
-  static defineSchema() {
-    return {
-      value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, {
-        required: true,
-        nullable: false,
-        default: 10
-      })
     };
   }
 }
