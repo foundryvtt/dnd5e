@@ -13,9 +13,10 @@ import { deepClone, diffObject } from "/common/utils/helpers.mjs";
 
 /**
  * Method for checking to ensure data definition properly matches document data.
- * @property {Document} document         Document to use for comparison.
- * @property {DocumentData} definition   Data definition to compare against.
- * @property {boolean} compareToDefault  Compare document against defaults.
+ * @param {Document} document         Document to use for comparison.
+ * @param {DocumentData} definition   Data definition to compare against.
+ * @param {boolean} compareToDefault  Compare document against defaults.
+ * @returns {object}                  Differences between original document data and parsed data.
  */
 export function _checkData(document, definition, compareToDefault=false) {
   const otherData = compareToDefault ? {} : deepClone(document.data._source.data);

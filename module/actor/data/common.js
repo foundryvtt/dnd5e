@@ -1,13 +1,14 @@
 import { DocumentData } from "/common/abstract/module.mjs";
 import * as fields from "/common/data/fields.mjs";
-import { defaultData, mappingField } from "./base.js";
+import { FORMULA_FIELD, mappingField } from "../../fields.js";
+import { defaultData } from "./base.js";
 
 
 export class CommonData extends DocumentData {
   static defineSchema() {
     return {
       abilities: mappingField({
-        entryType: AbilityData,
+        type: AbilityData,
         required: true,
         nullable: false,
         default: defaultData("templates.common.abilities")
@@ -82,8 +83,8 @@ export class AbilityData extends DocumentData {
 class AbilityBonusesData extends DocumentData {
   static defineSchema() {
     return {
-      check: fields.BLANK_STRING, // TODO: Add DICE_FIELD perhaps?
-      save: fields.BLANK_STRING
+      check: FORMULA_FIELD,
+      save: FORMULA_FIELD
     };
   }
 }
@@ -143,7 +144,7 @@ export class ACData extends DocumentData {
     return {
       flat: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { nullable: true }),
       calc: fields.field(fields.REQUIRED_STRING, { default: "default" }),
-      formula: fields.BLANK_STRING
+      formula: FORMULA_FIELD
     };
   }
 }
@@ -219,7 +220,7 @@ export class MovementData extends DocumentData {
       walk: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, {
         required: true,
         nullable: false,
-        default: 30
+        default: defaultData("templates.common.attributes.movement.walk")
       }),
       units: fields.field(fields.REQUIRED_STRING, { default: "ft" }),
       hover: fields.BOOLEAN_FIELD

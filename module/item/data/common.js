@@ -1,6 +1,7 @@
 import { DocumentData } from "/common/abstract/module.mjs";
 import * as fields from "/common/data/fields.mjs";
-import { defaultData, NONNEGATIVE_NUMBER_FIELD, NULLABLE_STRING } from "./base.js";
+import { DETERMINISTIC_FORMULA_FIELD, FORMULA_FIELD, NONNEGATIVE_NUMBER_FIELD, NULLABLE_STRING } from "../../fields.js";
+import { defaultData } from "./base.js";
 
 
 /* -------------------------------------------- */
@@ -227,7 +228,7 @@ export class UsesData extends DocumentData {
   static defineSchema() {
     return {
       value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
-      max: fields.BLANK_STRING,
+      max: DETERMINISTIC_FORMULA_FIELD,
       per: NULLABLE_STRING
     }
   }
@@ -328,12 +329,13 @@ export class DamageData extends DocumentData {
   static defineSchema() {
     return {
       parts: {
-        type: [[String]],
+        // type: [[String]],
+        type: Array, // TODO: Figure out if there is any way to validate this properly
         required: true,
         nullable: false,
         default: []
       },
-      versatile: fields.BLANK_STRING
+      versatile: FORMULA_FIELD
     }
   }
 }

@@ -1,7 +1,8 @@
 import { DocumentData } from "/common/abstract/module.mjs";
 import * as fields from "/common/data/fields.mjs";
 import { mergeObject } from "/common/utils/helpers.mjs";
-import { defaultData, mappingField } from "./base.js";
+import { DETERMINISTIC_FORMULA_FIELD, FORMULA_FIELD, mappingField } from "../../fields.js";
+import { defaultData } from "./base.js";
 import * as common from "./common.js";
 
 
@@ -11,14 +12,14 @@ export class CreatureData extends common.CommonData {
       attributes: { type: AttributeData, default: defaultData("templates.creature.attributes") },
       details: { type: DetailsData, default: defaultData("templates.creature.details") },
       skills: mappingField({
-        entryType: SkillData,
+        type: SkillData,
         required: true,
         nullable: false,
         default: defaultData("templates.creature.skills")
       }),
       traits: { type: TraitsData, default: defaultData("templates.creature.traits") },
       spells: mappingField({
-        entryType: SpellData,
+        type: SpellData,
         required: true,
         nullable: false,
         default: defaultData("templates.creature.spells")
@@ -144,8 +145,8 @@ export class SkillData extends DocumentData {
 export class SkillBonusesData extends DocumentData {
   static defineSchema() {
     return {
-      check: fields.BLANK_STRING,
-      passive: fields.BLANK_STRING
+      check: FORMULA_FIELD,
+      passive: DETERMINISTIC_FORMULA_FIELD
     };
   }
 }
@@ -265,8 +266,8 @@ export class BonusesData extends DocumentData {
 export class AttackBonusesData extends DocumentData {
   static defineSchema() {
     return {
-      attack: fields.BLANK_STRING,
-      damage: fields.BLANK_STRING
+      attack: FORMULA_FIELD,
+      damage: FORMULA_FIELD
     };
   }
 }
@@ -283,9 +284,9 @@ export class AttackBonusesData extends DocumentData {
 export class AbilityBonusesData extends DocumentData {
   static defineSchema() {
     return {
-      check: fields.BLANK_STRING,
-      save: fields.BLANK_STRING,
-      skill: fields.BLANK_STRING
+      check: FORMULA_FIELD,
+      save: FORMULA_FIELD,
+      skill: FORMULA_FIELD
     };
   }
 }
@@ -300,7 +301,7 @@ export class AbilityBonusesData extends DocumentData {
 export class SpellBonusesData extends DocumentData {
   static defineSchema() {
     return {
-      dc: fields.BLANK_STRING
+      dc: DETERMINISTIC_FORMULA_FIELD
     };
   }
 }

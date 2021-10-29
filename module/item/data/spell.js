@@ -1,6 +1,7 @@
 import { DocumentData } from "/common/abstract/module.mjs";
 import * as fields from "/common/data/fields.mjs";
-import { defaultData, mergeObjects, NONNEGATIVE_NUMBER_FIELD } from "./base.js";
+import { FORMULA_FIELD } from "../../fields.js";
+import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
@@ -11,7 +12,7 @@ export class ItemSpellData extends DocumentData {
       common.ActivatedEffectData.defineSchema(),
       common.ActionData.defineSchema(),
       {
-        level: fields.field(fields.POSITIVE_INTEGER_FIELD, {
+        level: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, {
           required: true,
           nullable: false,
           default: defaultData("spell.level")
@@ -119,12 +120,7 @@ class ScalingData extends DocumentData {
   static defineSchema() {
     return {
       mode: fields.field(fields.REQUIRED_STRING, { default: defaultData("spell.scaling.mode") }),
-      formula: {
-        type: String,
-        required: true,
-        nullable: true,
-        default: null
-      }
+      formula: fields.field(FORMULA_FIELD, { nullable: true, default: null })
     };
   }
 }
