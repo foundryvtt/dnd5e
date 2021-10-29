@@ -39,14 +39,14 @@ export class ActorVehicleData extends common.CommonData {
 class AttributeData extends common.AttributeData {
   static defineSchema() {
     return mergeObject(super.defineSchema(), {
-      ac: { type: ACData },
+      ac: { type: ACData, default: defaultData("vehicle.attributes.ac") },
       actions: {
         type: ActionData,
         required: true,
         nullable: false,
         default: defaultData("vehicle.attributes.actions")
       },
-      hp: { type: HPData },
+      hp: { type: HPData, default: defaultData("vehicle.attributes.hp") },
       capacity: {
         type: CapacityData,
         required: true,
@@ -68,7 +68,6 @@ class AttributeData extends common.AttributeData {
 class ACData extends common.ACData {
   static defineSchema() {
     return mergeObject(super.defineSchema(), {
-      value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
       motionless: fields.BLANK_STRING
     });
   }

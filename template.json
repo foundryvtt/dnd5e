@@ -429,9 +429,6 @@
         "environment": "",
         "cr": 1,
         "spellLevel": 0,
-        "xp": {
-          "value": 10
-        },
         "source": ""
       },
       "resources": {
@@ -465,7 +462,7 @@
       },
       "attributes": {
         "ac": {
-          "value": null,
+          "calc": "flat",
           "motionless": ""
         },
         "actions": {
