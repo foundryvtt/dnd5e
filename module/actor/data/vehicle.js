@@ -5,6 +5,15 @@ import { defaultData } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Vehicles.
+ * @extends creature.CommonData
+ *
+ * @property {string} vehicleType        Type of vehicle as defined in `DND5E.vehicleTypes`.
+ * @property {AttributeData} attributes  Extended attributes with additional vehicle information.
+ * @property {TraitsData} traits         Extended traits with vehicle dimensions.
+ * @property {CargoData} cargo           Details on this vehicle's crew and cargo capacities.
+ */
 export class ActorVehicleData extends common.CommonData {
   static defineSchema() {
     return mergeObject(super.defineSchema(), {
@@ -78,9 +87,10 @@ class ACData extends common.ACData {
  * @extends DocumentData
  * @see AttributeData
  *
- * @property {boolean} stations                   
- * @property {number} value                       
- * @property {object<string, number>} thresholds  
+ * @property {boolean} stations                   Does this vehicle rely on action stations that required individual
+ *                                                crewing rather than general crew thresholds?
+ * @property {number} value                       Maximum number of actions available with full crewing.
+ * @property {object<string, number>} thresholds  Crew thresholds needed to perform various actions.
  */
 class ActionData extends DocumentData {
   static defineSchema() {
@@ -98,13 +108,13 @@ class ActionData extends DocumentData {
 }
 
 /**
- * An embedded data structure defining vehicle action thresholds.
+ * An embedded data structure defining vehicle crew action thresholds.
  * @extends DocumentData
  * @see ActionData
  *
- * @property {number} 2  
- * @property {number} 1  
- * @property {number} 0  
+ * @property {number} 2  Minimum crew needed to take full action complement.
+ * @property {number} 1  Minimum crew needed to take reduced action complement.
+ * @property {number} 0  Minimum crew needed to perform any actions.
  */
 class ThresholdData extends DocumentData {
   static defineSchema() {
@@ -112,7 +122,7 @@ class ThresholdData extends DocumentData {
       2: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
       1: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
       0: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null })
-    }
+    };
   }
 }
 

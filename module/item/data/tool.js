@@ -1,10 +1,23 @@
 import { DocumentData } from "/common/abstract/module.mjs";
 import * as fields from "/common/data/fields.mjs";
-import { NONNEGATIVE_NUMBER_FIELD } from "../../fields.js";
+import { FORMULA_FIELD, NONNEGATIVE_NUMBER_FIELD } from "../../fields.js";
 import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Tool items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ * @see common.PhysicalItemData
+ *
+ * @property {string} toolType    Tool category as defined in `DND5E.toolTypes`.
+ * @property {string} baseItem    Base tool as defined in `DND5E.toolIds` for determining proficiency.
+ * @property {string} ability     Default ability when this tool is being used.
+ * @property {string} chatFlavor  Additional text added to chat when this tool is used.
+ * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
+ * @property {string} bonus       Bonus formula added to tool rolls.
+ */
 export class ItemToolData extends DocumentData {
   static defineSchema() {
     return mergeObjects(
@@ -16,7 +29,7 @@ export class ItemToolData extends DocumentData {
         ability: fields.field(fields.REQUIRED_STRING, { default: defaultData("tool.ability") }),
         chatFlavor: fields.BLANK_STRING,
         proficient: fields.field(NONNEGATIVE_NUMBER_FIELD, fields.REQUIRED_NUMBER),
-        bonus: fields.BLANK_STRING
+        bonus: FORMULA_FIELD
       }
     );
   }

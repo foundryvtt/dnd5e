@@ -5,6 +5,20 @@ import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Spell items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ * @see common.ActivatedEffectData
+ * @see common.ActionData
+ *
+ * @property {number} level                 Base level of the spell.
+ * @property {string} school                Magical school to which this spell belongs.
+ * @property {ComponentsData} components    General components and tags for this spell.
+ * @property {MaterialsData} materials      Details on material components required for this spell.
+ * @property {PreparationData} preparation  Details on how this spell is prepared.
+ * @property {ScalingData} scaling          Details on how casting at higher levels affects this spell.
+ */
 export class ItemSpellData extends DocumentData {
   static defineSchema() {
     return mergeObjects(

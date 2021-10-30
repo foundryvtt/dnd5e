@@ -6,6 +6,15 @@ import { SimpleTraitData } from "./common.js";
 import * as creature from "./creature.js";
 
 
+/**
+ * Data definition for Player Characters.
+ * @extends creature.CreatureData
+ *
+ * @property {AttributesData} attributes  Extended attributes with death saves, exhaustion, and inspiration.
+ * @property {DetailsData} details        Extended details with additional character biography.
+ * @property {ResourcesData} resources    Actor's three resources.
+ * @property {TraitsData} traits          Extended traits with character's proficiencies.
+ */
 export class ActorCharacterData extends creature.CreatureData {
   static defineSchema() {
     return mergeObject(super.defineSchema(), {

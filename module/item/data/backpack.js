@@ -6,6 +6,15 @@ import * as common from "./common.js";
 import { CurrencyData } from "../../actor/data/common.js";
 
 
+/**
+ * Data definition for Backpack items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ * @see common.PhysicalItemData
+ *
+ * @property {CapacityData} capacity  Information on container's carrying capacity.
+ * @property {CurrencyData} currency  Amount of currency currently held by the container.
+ */
 export class ItemBackpackData extends DocumentData {
   static defineSchema() {
     return mergeObjects(
@@ -44,6 +53,6 @@ class CapacityData extends DocumentData {
       type: fields.field(fields.REQUIRED_STRING, { default: defaultData("backpack.capacity.type") }),
       value: fields.field(NONNEGATIVE_NUMBER_FIELD, fields.REQUIRED_NUMBER),
       weightless: fields.BOOLEAN_FIELD
-    }
+    };
   }
 }

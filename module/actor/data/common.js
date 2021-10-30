@@ -4,6 +4,16 @@ import { FORMULA_FIELD, mappingField } from "../../fields.js";
 import { defaultData } from "./base.js";
 
 
+/**
+ * Data definition for common data template.
+ * @extends DocumentData
+ *
+ * @property {object<string, AbilityData>} abilities  Actor's ability scores.
+ * @property {AttributeData} attributes               Armor class, hit points, movement, and initiative data.
+ * @property {DetailsData} details                    Actor's biography.
+ * @property {TraitsData} traits                      Actor's size, resistances, vulnerabilities, and immunities.
+ * @property {CurrencyData} currency                  Currency being held by this actor.
+ */
 export class CommonData extends DocumentData {
   static defineSchema() {
     return {

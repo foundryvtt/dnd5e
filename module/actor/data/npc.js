@@ -5,6 +5,13 @@ import { defaultData } from "./base.js";
 import * as creature from "./creature.js";
 
 
+/**
+ * Data definition for Non-Player Characters.
+ * @extends creature.CreatureData
+ *
+ * @property {DetailsData} details      NPC type, environment, CR, and other extended details.
+ * @property {ResourcesData} resources  NPC's legendary and lair resources.
+ */
 export class ActorNPCData extends creature.CreatureData {
   static defineSchema() {
     return mergeObject(super.defineSchema(), {

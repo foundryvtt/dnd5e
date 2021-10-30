@@ -4,6 +4,16 @@ import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Feature items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ * @see common.ActivatedEffectData
+ * @see common.ActionData
+ *
+ * @property {string} requirements    Actor details required to use this feature.
+ * @property {RechargeData} recharge  Details on how a feature can roll for recharges.
+ */
 export class ItemFeatData extends DocumentData {
   static defineSchema() {
     return mergeObjects(

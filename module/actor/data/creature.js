@@ -6,6 +6,17 @@ import { defaultData } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for creature data template used by Characters & NPCs.
+ * @extends common.CommonData
+ *
+ * @property {AttributeData} attributes          Extended attributes with senses and spellcasting.
+ * @property {DetailsData} details               Extended details with race and alignment.
+ * @property {object<string, SkillData>} skills  Creature's skills.
+ * @property {TraitsData} traits                 Extended traits with languages.
+ * @property {object<string, SpellData>} spells  Creature's spell levels with slots.
+ * @property {BonusesData} bonuses               Global bonuses to various rolls.
+ */
 export class CreatureData extends common.CommonData {
   static defineSchema() {
     return mergeObject(super.defineSchema(), {
@@ -79,7 +90,7 @@ export class SensesData extends DocumentData {
       blindsight: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
       tremorsense: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
       truesight: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      units: fields.field(fields.REQUIRED_STRING, { default: 'ft' }),
+      units: fields.field(fields.REQUIRED_STRING, { default: "ft" }),
       special: fields.BLANK_STRING
     };
   }

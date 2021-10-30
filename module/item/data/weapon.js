@@ -4,6 +4,20 @@ import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Weapon items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ * @see common.PhysicalItemData
+ * @see common.ActivatedEffectData
+ * @see common.ActionData
+ * @see common.MountableData
+ *
+ * @property {string} weaponType   Weapon category as defined in `DND5E.weaponTypes`.
+ * @property {string} baseItem     Base weapon as defined in `DND5E.weaponIds` for determining proficiency.
+ * @property {object} properties   Mapping of various weapon property booleans.
+ * @property {boolean} proficient  Does the weapon's owner have proficiency?
+ */
 export class ItemWeaponData extends DocumentData {
   static defineSchema() {
     return mergeObjects(
