@@ -1,3 +1,7 @@
+/**
+ * A field that contains a rollable formula.
+ * @type {DocumentField}
+ */
 export const FORMULA_FIELD = {
   type: String,
   required: true,
@@ -7,6 +11,10 @@ export const FORMULA_FIELD = {
   deterministic: false
 };
 
+/**
+ * A field that contains a deterministic formula.
+ * @type {DocumentField}
+ */
 export const DETERMINISTIC_FORMULA_FIELD = {
   type: String,
   required: true,
@@ -17,11 +25,17 @@ export const DETERMINISTIC_FORMULA_FIELD = {
   validate: d => {
     if ( !Roll ) return true;
     const roll = new Roll(d);
-    return roll.isDeterministic
+    return roll.isDeterministic;
   },
-  validationError: `{name} {field} does not contain a valid formula without dice terms.`
-}
+  validationError: "{name} {field} does not contain a valid formula without dice terms."
+};
 
+/**
+ * Create a mapping field that allows objects referenced by keys (e.g. an actor's skills).
+ * @param {object} options
+ * @param {DocumentData} options.type  Type of the objects embedded in the mapping field.
+ * @returns {DocumentField}            Created mapping field.
+ */
 export function mappingField(options) {
   return {
     type: Object,
@@ -42,9 +56,13 @@ export function mappingField(options) {
       });
     },
     validationError: `{name} {field} does not contain valid ${options.type.name} entries`
-  }
+  };
 }
 
+/**
+ * A non-negative number field which may be used in a Document.
+ * @type {DocumentField}
+ */
 export const NONNEGATIVE_NUMBER_FIELD = {
   type: Number,
   required: false,
@@ -52,6 +70,10 @@ export const NONNEGATIVE_NUMBER_FIELD = {
   validationError: '{name} {field} "{value}" does not have an non-negative value'
 };
 
+/**
+ * A string field that defaults to null to be used in a Document.
+ * @type {DocumentField}
+ */
 export const NULLABLE_STRING = {
   type: String,
   required: true,

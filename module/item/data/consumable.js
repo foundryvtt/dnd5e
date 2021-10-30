@@ -4,6 +4,17 @@ import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Consumable items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ * @see common.PhysicalItemData
+ * @see common.ActivatedEffectData
+ * @see common.ActionData
+ *
+ * @property {string} consumableType  Type of consumable as defined in `DND5E.consumableTypes`.
+ * @property {UsesData} uses          Information on how the consumable can be used and destroyed.
+ */
 export class ItemConsumableData extends DocumentData {
   static defineSchema() {
     return mergeObjects(
@@ -20,11 +31,11 @@ export class ItemConsumableData extends DocumentData {
 }
 
 /**
- * An embedded data structure for 
+ * An embedded data structure for consumable's auto destroy behavior.
  * @extends common.UsesData
  * @see ItemConsumableData
  *
- * @property {boolean} autoDestroy  Should this item be destroyed when it runs out of uses. 
+ * @property {boolean} autoDestroy  Should this item be destroyed when it runs out of uses.
  */
 class UsesData extends common.UsesData {
   static defineSchema() {

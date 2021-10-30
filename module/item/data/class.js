@@ -4,6 +4,19 @@ import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Class items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ *
+ * @property {number} levels       Current number of levels in this class.
+ * @property {string} subclass     Name of subclass chosen.
+ * @property {string} hitDice      Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
+ * @property {number} hitDiceUsed  Number of hit dice consumed.
+ * @property {string[]} saves      Savings throws in which this class grants proficiency.
+ * @property {SkillsData} skills   Available class skills and selected skills.
+ * @property {SpellcastingData} spellcasting  Details on class's spellcasting ability.
+ */
 export class ItemClassData extends DocumentData {
   static defineSchema() {
     return mergeObjects(

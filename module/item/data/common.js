@@ -25,7 +25,7 @@ export class ItemDescriptionData extends DocumentData {
         default: defaultData("templates.itemDescription.description")
       },
       source: fields.BLANK_STRING
-    }
+    };
   }
 }
 
@@ -43,7 +43,7 @@ export class DescriptionData extends DocumentData {
       value: fields.BLANK_STRING,
       chat: fields.BLANK_STRING,
       unidentified: fields.BLANK_STRING
-    }
+    };
   }
 }
 
@@ -77,7 +77,7 @@ export class PhysicalItemData extends DocumentData {
       equipped: fields.BOOLEAN_FIELD,
       rarity: fields.BLANK_STRING,
       identified: fields.field(fields.BOOLEAN_FIELD, { default: true })
-    }
+    };
   }
 }
 
@@ -135,7 +135,7 @@ export class ActivatedEffectData extends DocumentData {
         nullable: false,
         default: defaultData("templates.activatedEffect.consume")
       }
-    }
+    };
   }
 }
 
@@ -154,7 +154,7 @@ export class ActivationData extends DocumentData {
       type: fields.BLANK_STRING,
       cost: fields.REQUIRED_NUMBER,
       condition: fields.BLANK_STRING
-    }
+    };
   }
 }
 
@@ -171,7 +171,7 @@ export class DurationData extends DocumentData {
     return {
       value: fields.field(NONNEGATIVE_NUMBER_FIELD, { default: null }),
       units: fields.BLANK_STRING
-    }
+    };
   }
 }
 
@@ -192,7 +192,7 @@ export class TargetData extends DocumentData {
       width: fields.field(NONNEGATIVE_NUMBER_FIELD, { default: null }),
       units: fields.BLANK_STRING,
       type: fields.BLANK_STRING
-    }
+    };
   }
 }
 
@@ -211,7 +211,7 @@ export class RangeData extends DocumentData {
       value: fields.field(NONNEGATIVE_NUMBER_FIELD, { default: null }),
       long: fields.field(NONNEGATIVE_NUMBER_FIELD, { default: null }),
       units: fields.BLANK_STRING
-    }
+    };
   }
 }
 
@@ -230,7 +230,7 @@ export class UsesData extends DocumentData {
       value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
       max: DETERMINISTIC_FORMULA_FIELD,
       per: NULLABLE_STRING
-    }
+    };
   }
 }
 
@@ -249,7 +249,7 @@ export class ConsumeData extends DocumentData {
       type: fields.BLANK_STRING,
       target: NULLABLE_STRING,
       amount: fields.field(fields.NUMERIC_FIELD, { default: null })
-    }
+    };
   }
 }
 
@@ -296,7 +296,7 @@ export class ActionData extends DocumentData {
         nullable: false,
         default: defaultData("templates.action.save")
       }
-    }
+    };
   }
 }
 
@@ -313,7 +313,7 @@ export class CriticalData extends DocumentData {
     return {
       threshold: fields.field(fields.POSITIVE_INTEGER_FIELD, { default: null }),
       damage: NULLABLE_STRING
-    }
+    };
   }
 }
 
@@ -322,21 +322,20 @@ export class CriticalData extends DocumentData {
  * @extends DocumentData
  * @see ActionData
  *
- * @property {Array<Array<String>>} parts  Array of damage formula and types.
- * @property {string} versatile            Special versatile damage formula.
+ * @property {string[][]} parts  Array of damage formula and types.
+ * @property {string} versatile  Special versatile damage formula.
  */
 export class DamageData extends DocumentData {
   static defineSchema() {
     return {
       parts: {
-        // type: [[String]],
-        type: Array, // TODO: Figure out if there is any way to validate this properly
+        type: Array, // TODO: Figure out if there is any way to validate this properly (should be [[String]])
         required: true,
         nullable: false,
         default: []
       },
       versatile: FORMULA_FIELD
-    }
+    };
   }
 }
 
@@ -355,7 +354,7 @@ export class SaveData extends DocumentData {
       ability: fields.BLANK_STRING,
       dc: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
       scaling: fields.field(fields.REQUIRED_STRING, { default: defaultData("templates.action.save.scaling") })
-    }
+    };
   }
 }
 
@@ -385,7 +384,7 @@ export class MountableData extends DocumentData {
         nullable: false,
         default: defaultData("templates.mountable.hp")
       }
-    }
+    };
   }
 }
 
@@ -400,7 +399,7 @@ export class ArmorData extends DocumentData {
   static defineSchema() {
     return {
       value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: defaultData("templates.mountable.armor.value") })
-    }
+    };
   }
 }
 
@@ -421,6 +420,6 @@ export class HPData extends DocumentData {
       max: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
       dt: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
       conditions: fields.BLANK_STRING
-    }
+    };
   }
 }

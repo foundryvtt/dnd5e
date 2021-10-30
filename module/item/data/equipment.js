@@ -5,6 +5,22 @@ import { defaultData, mergeObjects } from "./base.js";
 import * as common from "./common.js";
 
 
+/**
+ * Data definition for Equipment items.
+ * @extends DocumentData
+ * @see common.ItemDescriptionData
+ * @see common.PhysicalItemData
+ * @see common.ActivatedEffectData
+ * @see common.ActionData
+ * @see common.MountableData
+ *
+ * @property {ArmorData} armor     Armor details and equipment type information.
+ * @property {string} baseItem     Base armor as defined in `DND5E.armorIds` for determining proficiency.
+ * @property {SpeedData} speed     Speed granted by a piece of vehicle equipment.
+ * @property {number} strength     Minimum strength required to use a piece of armor.
+ * @property {boolean} stealth     Does this equipment grant disadvantage on stealth checks when used?
+ * @property {boolean} proficient  Does the owner have proficiency in this piece of equipment?
+ */
 export class ItemEquipmentData extends DocumentData {
   static defineSchema() {
     return mergeObjects(
@@ -59,7 +75,8 @@ class ArmorData extends DocumentData {
  * @extends DocumentData
  * @see ItemEquipmentData
  *
- * @property {number} value       Speed granted by this piece of equipment in feet or meters depending on system setting.
+ * @property {number} value       Speed granted by this piece of equipment measured in feet or meters
+ *                                depending on system setting.
  * @property {string} conditions  Conditions that may affect item's speed.
  */
 class SpeedData extends DocumentData {
