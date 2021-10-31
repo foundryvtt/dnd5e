@@ -2,9 +2,9 @@ import ProficiencySelector from "./proficiency-selector.js";
 
 
 /**
- * Configuration for a specific trait grant.
+ * Configuration for a specific trait choice.
  *
- * @typedef {object} TraitGrant
+ * @typedef {object} TraitChoice
  * @property {number} count        How many traits can be selected.
  * @property {string[]} [choices]  List of trait or category keys that can be chosen. If no choices
  *                                 are provided, any trait of the specified type can be selected.
@@ -22,16 +22,35 @@ export default class TraitConfiguration extends DocumentSheet {
     super(object, options);
 
     /**
-     * Internal version of the grants array.
-     * @type {Array<string | TraitGrant>}
+     * Path to the `grants` array within the traits data.
+     * @type {string}
      */
-    this.grants = foundry.utils.getProperty(this.object.data, `${options.name}.grants`);
+    this.grantsKeyPath = options.grantsKeyPath ?? 'grants';
 
     /**
-     * Index of the selected grant configuration.
-     * @type {number|null}
+     * Path to the `choices` array within the traits data.
+     * @type {string}
      */
-    this.selectedIndex = this.grants.length > 0 ? 0 : null;
+    this.choicesKeyPath = options.choicesKeyPath ?? 'choices';
+
+    /**
+     * Internal version of the grants array.
+     * @type {string[]}
+     */
+    this.grants = foundry.utils.getProperty(this.object.data, `${options.name}.${this.grantsKeyPath}`);
+
+    /**
+     * Internal version of the choices array.
+     * @type {TraitChoice[]}
+     */
+    this.choices = foundry.utils.getProperty(this.object.data, `${options.name}.${this.choicesKeyPath}`);
+
+    /**
+     * Index of the selected configuration, `0` means grants configuration, any other number
+     * is equal to an index in `choices` + 1.
+     * @type {number}
+     */
+    this.selectedIndex = 0;
   }
 
   /* -------------------------------------------- */
@@ -62,27 +81,24 @@ export default class TraitConfiguration extends DocumentSheet {
 
   /** @override */
   async getData() {
-    let grants = this.grants.map((grant, index) => {
+    const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction" });
+    const configurations = [{
+      label: listFormatter.format(this.grants.map(g => TraitConfiguration.keyLabel(this.options.type, g))) || "—",
+      data: this.grants,
+      selected: this.selectedIndex === 0
+    }, ...this.choices.map((choice, index) => {
       return {
-        label: TraitConfiguration.grantLabel(this.options.type, grant) || "—",
-        data: grant,
-        selected: index === this.selectedIndex
-      };
-    });
-    const allowChoices = typeof grants[this.selectedIndex]?.data === "object";
+        label: TraitConfiguration.choiceLabel(this.options.type, choice) || "—",
+        data: choice,
+        selected: this.selectedIndex === (index + 1)
+      }
+    })];
 
-    const selectedData = grants[this.selectedIndex]?.data;
-    const chosen = (typeof selectedData === "string") ? [selectedData] : selectedData?.choices ?? [];
+    const selectedData = configurations[this.selectedIndex]?.data;
+    const chosen = Array.isArray(selectedData) ? selectedData : selectedData.choices ?? [];
     const choices = await TraitConfiguration.getTraitChoices(this.options.type, chosen);
 
-    // Don't allow the selection of tool categories if not in "Allow Choices" mode
-    if ( !allowChoices && (this.options.type === "tool") ) {
-      Object.values(choices).forEach(v => {
-        if ( v.children ) v.disabled = true;
-      });
-    }
-
-    return { grants, allowChoices, count: this.grants[this.selectedIndex]?.count ?? 1, choices };
+    return { configurations, showCount: this.selectedIndex !== 0, count: selectedData?.count, choices };
   }
 
   /* -------------------------------------------- */
@@ -110,17 +126,12 @@ export default class TraitConfiguration extends DocumentSheet {
   /* -------------------------------------------- */
 
   /**
-   * Create a human readable description of the provided grant.
-   * @param {string} type             Trait name.
-   * @param {string|TraitGrant} data  Data for a specific grant.
-   * @returns {string}                Formatted and localized name.
+   * Create a human readable description of the provided choice.
+   * @param {string} type       Trait name.
+   * @param {TraitChoice} data  Data for a specific grant.
+   * @returns {string}          Formatted and localized name.
    */
-  static grantLabel(type, data) {
-    // Single trait
-    if ( typeof data === "string" ) {
-      return TraitConfiguration.keyLabel(type, data);
-    }
-
+  static choiceLabel(type, data) {
     // Select from all options
     if ( !data.choices ) {
       return game.i18n.format("DND5E.TraitConfigChooseAny", {
@@ -185,7 +196,8 @@ export default class TraitConfiguration extends DocumentSheet {
   /** @override */
   async _updateObject(event, formData) {
     const updateData = {};
-    updateData[`${this.options.name}.grants`] = this.grants.filter(grant => grant !== "");
+    updateData[`${this.options.name}.${this.grantsKeyPath}`] = this.grants;
+    updateData[`${this.options.name}.${this.choicesKeyPath}`] = this.choices.filter(grant => grant !== "");
     return this.object.update(updateData);
   }
 
@@ -197,10 +209,8 @@ export default class TraitConfiguration extends DocumentSheet {
 
     this.form.addEventListener("click", this._onListButtonClick.bind(this));
 
-    if ( this.selectedIndex === null ) {
-      this._disableFields(this.form);
-      this.form.querySelector("button[name='add']").removeAttribute("disabled");
-      return;
+    if ( this.selectedIndex === 0 ) {
+      this.form.querySelector("button[name='remove']").setAttribute("disabled", true);
     }
 
     for ( const checkbox of html[0].querySelectorAll(".trait-selector input[type='checkbox']") ) {
@@ -219,16 +229,16 @@ export default class TraitConfiguration extends DocumentSheet {
 
     switch (event.target.name) {
       case "add":
-        this.grants.push("");
-        this.selectedIndex = this.grants.length - 1;
+        this.choices.push({ count: 1 });
+        this.selectedIndex = this.choices.length;
         break;
 
       case "remove":
-        if ( this.selectedIndex === null ) break;
+        if ( this.selectedIndex === 0 ) break;
 
-        this.grants.splice(this.selectedIndex, 1);
+        this.choices.splice(this.selectedIndex - 1, 1);
 
-        if ( this.grants.length === 0 ) this.selectedIndex = null;
+        if ( this.choices.length === 0 ) this.selectedIndex = 0;
         else if ( this.selectedIndex !== 0 ) this.selectedIndex -= 1;
         break;
 
@@ -252,36 +262,35 @@ export default class TraitConfiguration extends DocumentSheet {
       return this.render();
     }
 
-    const current = this.grants[this.selectedIndex];
-    if ( current === undefined ) return;
-
-    if ( t.name === "allowChoices" ) {
-      if ( t.checked ) {
-        this.grants[this.selectedIndex] = { count: 1 };
-        if ( current ) this.grants[this.selectedIndex].choices = [current];
-      } else {
-        this.grants[this.selectedIndex] = current.choices ? current.choices[0] ?? "" : "";
+    if ( this.selectedIndex === 0 ) {
+      if ( !t.closest(".trait-selector") ) return;
+      const index = this.grants.indexOf(t.name);
+      if ( !t.checked && (index >= 0) ) {
+        this.grants.splice(index, 1);
+      } else if ( index === -1 ) {
+        this.grants.push(t.name);
       }
+      return this.render();
     }
 
-    else if ( t.name === "count" ) {
+    const idx = this.selectedIndex - 1;
+    const current = this.choices[idx];
+    if ( current === undefined ) return;
+
+    if ( t.name === "count" ) {
       let count = Number.parseInt(t.value);
       if ( (count < 1) || Number.isNaN(count) ) count = 1;
-      this.grants[this.selectedIndex].count = count;
+      this.choices[idx].count = count;
     }
 
     else if ( t.closest(".trait-selector") ) {
-      if ( typeof current === "string" ) {
-        this.grants[this.selectedIndex] = t.checked ? t.name : "";
-      } else {
-        let choiceSet = new Set(current.choices ?? []);
-        if ( t.checked ) choiceSet.add(t.name);
-        else choiceSet.delete(t.name);
-        if ( choiceSet.size > 0 ) {
-          this.grants[this.selectedIndex].choices = Array.from(choiceSet);
-        } else if ( current.choices ) {
-          delete this.grants[this.selectedIndex].choices;
-        }
+      let choiceSet = new Set(current.choices ?? []);
+      if ( t.checked ) choiceSet.add(t.name);
+      else choiceSet.delete(t.name);
+      if ( choiceSet.size > 0 ) {
+        this.choices[idx].choices = Array.from(choiceSet);
+      } else if ( current.choices ) {
+        delete this.choices[idx].choices;
       }
     }
 

@@ -303,7 +303,10 @@ export default class ItemSheet5e extends ItemSheet {
       if ( this.object.isEmbedded ) {
         // To be filled in :)
       } else {
-        data.labels.grants[type] = listFormatter.format(grants.map(g => TraitConfiguration.grantLabel(type, g)));
+        data.labels.grants[type] = listFormatter.format([
+          ...config.grants.map(g => TraitConfiguration.keyLabel(type, g)),
+          ...config.choices.map(c => TraitConfiguration.choiceLabel(type, c))
+        ]);
       }
     }
   }
