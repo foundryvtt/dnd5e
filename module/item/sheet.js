@@ -326,9 +326,9 @@ export default class ItemSheet5e extends ItemSheet {
     data.labels.grants = {};
     for ( const [type, config] of Object.entries(data.data.data.traits) ) {
       if ( this.object.isEmbedded ) {
-        const allowReplacements = ["skills", "tool"].includes(type);
         const choices = await ItemSheet5e._prepareTraitOptions(
-          type, config.grants, this.object.actor.getSelectedTraits(type), config.value, allowReplacements
+          type, config.grants, config.choices, this.object.actor.getSelectedTraits(type),
+          config.value, config.allowReplacements
         );
         config.available = choices;
         if ( choices ) {
@@ -350,20 +350,21 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Create a list of selectable options for the provided trait as well as how many still need to be fulfilled.
-   * @param {string} type                      Trait affected by these grants.
-   * @param {Array<string|TraitGrant>} grants  Grants that should be fulfilled.
-   * @param {Array<string>} actorSelected      Values that have already been selected on the actor.
-   * @param {Array<string>} itemSelected       Values that have already been selected on this item.
-   * @param {boolean} allowReplacements        If a grant with limited choices has no available options,
-   *                                           allow player to select from full list of options.
+   * @param {string} type                        Trait affected by these grants.
+   * @param {string[]} grants                    Grants that should be fulfilled.
+   * @param {TraitChoices[]} choices             Choices that should be offered. 
+   * @param {string[]} actorSelected             Values that have already been selected on the actor.
+   * @param {string[]} itemSelected              Values that have already been selected on this item.
+   * @param {boolean} [allowReplacements=false]  If a grant with limited choices has no available options,
+   *                                             allow player to select from full list of options.
    * @returns {{
    *   choices: object,
    *   remaining: number
    * }|null}  Choices available for most permissive unfulfilled grant & number of remaining traits to select.
    */
-  static async _prepareTraitOptions(type, grants, actorSelected, itemSelected, allowReplacements) {
+  static async _prepareTraitOptions(type, grants, choices, actorSelected, itemSelected, allowReplacements=false) {
     let { available, allChoices } = await ItemSheet5e._prepareUnfulfilledGrants(
-      type, grants, actorSelected, itemSelected);
+      type, grants, choices, actorSelected, itemSelected);
 
     // Remove any grants that have no choices remaining
     let unfilteredLength = available.length;
@@ -397,30 +398,27 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Determine which of the provided grants, if any, still needs to be fulfilled.
    * @param {string} type                      Trait affected by these grants.
-   * @param {Array<string|TraitGrant>} grants  Grants that should be fulfilled.
-   * @param {Array<string>} actorSelected      Values that have already been selected on the actor.
-   * @param {Array<string>} itemSelected       Values that have already been selected on this item.
+   * @param {string[]} grants                    Grants that should be fulfilled.
+   * @param {TraitChoices[]} choices             Choices that should be offered. 
+   * @param {string[]} actorSelected             Values that have already been selected on the actor.
+   * @param {string[]} itemSelected              Values that have already been selected on this item.
    * @returns {{
    *   available: object[],
    *   allChoices: SelectChoices
    * }}  List of grants to be fulfilled and available choices.
    */
-  static async _prepareUnfulfilledGrants(type, grants, actorSelected, itemSelected) {
-    const expandedGrants = grants.reduce((arr, grant) => {
-      if ( typeof grant === "string" ) {
-        arr.push([grant]);
-        return arr;
-      }
-      arr.push(grant.choices ?? []);
-      if ( (typeof grant === "object") && (grant.count > 1) ) {
-        let count = grant.count - 1;
+  static async _prepareUnfulfilledGrants(type, grants, choices, actorSelected, itemSelected) {
+    const expandedGrants = [
+      ...grants.map(g => [g]),
+      ...choices.reduce((arr, choice) => {
+        let count = choice.count;
         while ( count > 0 ) {
-          arr.push(grant.choices ?? []);
+          arr.push(choice.choices ?? []);
           count -= 1;
         }
-      }
-      return arr;
-    }, []);
+        return arr;
+      }, [])
+    ];
 
     // If all of the grants have been selected, no need to go further
     if ( expandedGrants.length <= itemSelected.length ) return { available: [], allChoices: {} };

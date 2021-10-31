@@ -1573,7 +1573,7 @@ export default class Item5e extends Item {
     const updates = {};
     for ( const [type, config] of Object.entries(itemData.data.traits) ) {
       const { available } = await ItemSheet5e._prepareUnfulfilledGrants(
-        type, config.grants, actor.getSelectedTraits(type), config.value
+        type, config.grants, config.choices, actor.getSelectedTraits(type), config.value
       );
       let newValues = [];
       for ( const { set } of available ) {
