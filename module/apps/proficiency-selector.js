@@ -33,6 +33,11 @@ export default class ProficiencySelector extends TraitSelector {
 
     const data = super.getData();
     data.choices = await this.constructor.getChoices(this.options.type, chosen, this.options.sortCategories);
+
+    const source = foundry.utils.getProperty(this.object.data._source, this.attribute);
+    const sourceValue = this.options.valueKey ? foundry.utils.getProperty(source, this.options.valueKey) ?? [] : source;
+    this._disableAssignedTraits(data.choices, sourceValue, chosen);
+
     return data;
   }
 
@@ -97,10 +102,6 @@ export default class ProficiencySelector extends TraitSelector {
       if ( !category.children ) continue;
       category.children = this._sortObject(category.children);
     }
-
-    const source = foundry.utils.getProperty(this.object.data._source, this.attribute);
-    const sourceValue = this.options.valueKey ? foundry.utils.getProperty(source, this.options.valueKey) ?? [] : source;
-    this._disableAssignedTraits(data.choices, sourceValue, value);
 
     return data;
   }
@@ -202,6 +203,7 @@ export default class ProficiencySelector extends TraitSelector {
     if ( !children ) return;
 
     for ( const child of children.querySelectorAll("input[type='checkbox']") ) {
+      if ( child.dataset.disabled === "true" ) continue;
       child.checked = child.disabled = checkbox.checked;
     }
   }
