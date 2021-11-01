@@ -11,7 +11,6 @@ export default class ActorTypeConfig extends FormApplication {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "actor-type", "trait-selector"],
       template: "systems/dnd5e/templates/apps/actor-type.html",
-      title: "DND5E.CreatureTypeTitle",
       width: 280,
       height: "auto",
       choices: {},
@@ -19,6 +18,13 @@ export default class ActorTypeConfig extends FormApplication {
       minimum: 0,
       maximum: null
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get title() {
+    return `${game.i18n.localize("DND5E.CreatureTypeTitle")}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
