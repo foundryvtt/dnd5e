@@ -352,7 +352,7 @@ export default class ItemSheet5e extends ItemSheet {
    * Create a list of selectable options for the provided trait as well as how many still need to be fulfilled.
    * @param {string} type                        Trait affected by these grants.
    * @param {string[]} grants                    Grants that should be fulfilled.
-   * @param {TraitChoices[]} choices             Choices that should be offered. 
+   * @param {TraitChoices[]} choices             Choices that should be offered.
    * @param {string[]} actorSelected             Values that have already been selected on the actor.
    * @param {string[]} itemSelected              Values that have already been selected on this item.
    * @param {boolean} [allowReplacements=false]  If a grant with limited choices has no available options,
@@ -384,7 +384,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Create a choices object featuring a union of choices from all remaining grants
     const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
-    this._filterTraitObject(allChoices, Array.from(remainingSet), true);
+    this._filterTraitObject(allChoices, Array.from(remainingSet));
 
     if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
     return {
@@ -397,35 +397,35 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Determine which of the provided grants, if any, still needs to be fulfilled.
-   * @param {string} type                      Trait affected by these grants.
-   * @param {string[]} grants                    Grants that should be fulfilled.
-   * @param {TraitChoices[]} choices             Choices that should be offered. 
-   * @param {string[]} actorSelected             Values that have already been selected on the actor.
-   * @param {string[]} itemSelected              Values that have already been selected on this item.
+   * @param {string} type             Trait affected by these grants.
+   * @param {string[]} grants         Grants that should be fulfilled.
+   * @param {TraitChoices[]} choices  Choices that should be offered.
+   * @param {string[]} actorSelected  Values that have already been selected on the actor.
+   * @param {string[]} itemSelected   Values that have already been selected on this item.
    * @returns {{
    *   available: object[],
    *   allChoices: SelectChoices
    * }}  List of grants to be fulfilled and available choices.
    */
   static async _prepareUnfulfilledGrants(type, grants, choices, actorSelected, itemSelected) {
-    const expandedGrants = [
-      ...grants.map(g => [g]),
-      ...choices.reduce((arr, choice) => {
-        let count = choice.count;
-        while ( count > 0 ) {
-          arr.push(choice.choices ?? []);
-          count -= 1;
-        }
-        return arr;
-      }, [])
-    ];
+    const expandedChoices = choices.reduce((arr, choice) => {
+      let count = choice.count;
+      while ( count > 0 ) {
+        arr.push(choice.choices ?? []);
+        count -= 1;
+      }
+      return arr;
+    }, []);
 
     // If all of the grants have been selected, no need to go further
-    if ( expandedGrants.length <= itemSelected.length ) return { available: [], allChoices: {} };
+    if ( (grants.length + expandedChoices.length) <= itemSelected.length ) return { available: [], allChoices: {} };
 
     // Figure out how many choices each grant and sort by most restrictive first
     const allChoices = await TraitConfiguration.getTraitChoices(type);
-    let available = expandedGrants.map(grant => ItemSheet5e._filterGrantChoices(allChoices, grant));
+    let available = [
+      ...grants.map(g => ItemSheet5e._filterGrantChoices(allChoices, g, { includeChildren: false })),
+      ...expandedChoices.map(c => ItemSheet5e._filterGrantChoices(allChoices, c))
+    ];
     const setSort = (lhs, rhs) => lhs.set.size - rhs.set.size;
     available.sort(setSort);
 
@@ -440,8 +440,10 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Filter out any traits that have already been selected
-    this._filterTraitObject(allChoices, actorSelected, false);
-    available = available.map(a => this._filterGrantChoices(allChoices, Array.from(a.set)));
+    this._filterTraitObject(allChoices, actorSelected, { union: false });
+    available = available.map(a => {
+      return this._filterGrantChoices(allChoices, Array.from(a.set), { includeChildren: a.includeChildren });
+    });
 
     return { available, allChoices };
   }
@@ -452,35 +454,40 @@ export default class ItemSheet5e extends ItemSheet {
    * Turn a grant into a set of possible choices it provides.
    * @param {object} traits     Object containing all potential traits grouped into categories.
    * @param {string[]} choices  Choices to use when building trait list. Empty array means all traits passed through.
+   * @param {object} [options={}]
+   * @param {boolean} [options.includeChildren=true]  When a category is included, also add all of its children.
    * @returns {{
    *   choices: object,
-   *   set: Set<string>
+   *   set: Set<string>,
+   *   includeChildren: boolean
    * }}  Filtered object of nested choices and set of available choices.
    * @private
    */
-  static _filterGrantChoices(traits, choices) {
+  static _filterGrantChoices(traits, choices, { includeChildren=true }={}) {
     const choiceSet = choices => Object.entries(choices).reduce((set, [key, choice]) => {
-      if ( choice.children ) choiceSet(choice.children).forEach(c => set.add(c));
+      if ( choice.children && includeChildren ) choiceSet(choice.children).forEach(c => set.add(c));
       else set.add(key);
       return set;
     }, new Set());
 
     let traitsSet = foundry.utils.duplicate(traits);
-    if ( choices.length > 0 ) ItemSheet5e._filterTraitObject(traitsSet, choices, true);
-    return { choices: traitsSet, set: choiceSet(traitsSet) };
+    if ( choices.length > 0 ) ItemSheet5e._filterTraitObject(traitsSet, choices, { includeChildren });
+    return { choices: traitsSet, set: choiceSet(traitsSet), includeChildren };
   }
 
   /* -------------------------------------------- */
 
   /**
    * Filters the provided trait object.
-   * @param {object} traits    Object of traits to filter.
-   * @param {string[]} filter  Array of keys to use when applying the filter.
-   * @param {boolean} union    If true, only items in filter array will be included.
-   *                           If false, only items not in the filter array will be included.
+   * @param {object} traits                 Object of traits to filter.
+   * @param {string[]} filter               Array of keys to use when applying the filter.
+   * @param {object} [options={}]
+   * @param {boolean} [options.union=true]  If true, only items in filter array will be included.
+   *                                        If false, only items not in the filter array will be included.
+   * @param {boolean} [options.includeChildren=true]  Include all of a categories's children.
    * @private
    */
-  static _filterTraitObject(traits, filter, union) {
+  static _filterTraitObject(traits, filter, { union=true, includeChildren=true }={}) {
     for ( const [key, trait] of Object.entries(traits) ) {
       if ( filter.includes(key) ) {
         if ( !union ) delete traits[key];
@@ -489,8 +496,12 @@ export default class ItemSheet5e extends ItemSheet {
 
       let selectedChildren = false;
       if ( trait.children ) {
-        this._filterTraitObject(trait.children, filter, union);
-        if ( !foundry.utils.isObjectEmpty(trait.children) ) selectedChildren = true;
+        if ( includeChildren ) {
+          this._filterTraitObject(trait.children, filter, { union, includeChildren });
+          if ( !foundry.utils.isObjectEmpty(trait.children) ) selectedChildren = true;
+        } else {
+          delete trait.children;
+        }
       }
 
       if ( union && !selectedChildren ) delete traits[key];
