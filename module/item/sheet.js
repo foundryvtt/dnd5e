@@ -384,7 +384,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Create a choices object featuring a union of choices from all remaining grants
     const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
-    this._filterTraitObject(allChoices, Array.from(remainingSet));
+    this._filterTraitObject(allChoices, Array.from(remainingSet), { allowCategories: true });
 
     if ( foundry.utils.isObjectEmpty(allChoices) ) return null;
     return {
@@ -423,7 +423,7 @@ export default class ItemSheet5e extends ItemSheet {
     // Figure out how many choices each grant and sort by most restrictive first
     const allChoices = await TraitConfiguration.getTraitChoices(type);
     let available = [
-      ...grants.map(g => ItemSheet5e._filterGrantChoices(allChoices, g, { includeChildren: false })),
+      ...grants.map(g => ItemSheet5e._filterGrantChoices(allChoices, [g], { allowCategories: true })),
       ...expandedChoices.map(c => ItemSheet5e._filterGrantChoices(allChoices, c))
     ];
     const setSort = (lhs, rhs) => lhs.set.size - rhs.set.size;
@@ -440,9 +440,9 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Filter out any traits that have already been selected
-    this._filterTraitObject(allChoices, actorSelected, { union: false });
+    ItemSheet5e._traitObjectDisunion(allChoices, [...actorSelected, ...itemSelected]);
     available = available.map(a => {
-      return this._filterGrantChoices(allChoices, Array.from(a.set), { includeChildren: a.includeChildren });
+      return ItemSheet5e._filterGrantChoices(allChoices, Array.from(a.set), { allowCategories: a.allowCategories });
     });
 
     return { available, allChoices };
@@ -455,56 +455,74 @@ export default class ItemSheet5e extends ItemSheet {
    * @param {object} traits     Object containing all potential traits grouped into categories.
    * @param {string[]} choices  Choices to use when building trait list. Empty array means all traits passed through.
    * @param {object} [options={}]
-   * @param {boolean} [options.includeChildren=true]  When a category is included, also add all of its children.
+   * @param {boolean} [options.allowCategories=false]  Allow categories to be selected, rather than just children.
    * @returns {{
    *   choices: object,
    *   set: Set<string>,
-   *   includeChildren: boolean
+   *   allowCategories: boolean
    * }}  Filtered object of nested choices and set of available choices.
    * @private
    */
-  static _filterGrantChoices(traits, choices, { includeChildren=true }={}) {
-    const choiceSet = choices => Object.entries(choices).reduce((set, [key, choice]) => {
-      if ( choice.children && includeChildren ) choiceSet(choice.children).forEach(c => set.add(c));
-      else set.add(key);
+  static _filterGrantChoices(traits, choices, { allowCategories=false }={}) {
+    const choiceSet = c => Object.entries(c).reduce((set, [key, choice]) => {
+      if ( !choice.children || (allowCategories && choices.includes(key)) ) {
+        set.add(key);
+      } else if ( choice.children ) {
+        choiceSet(choice.children).forEach(c => set.add(c));
+      }
       return set;
     }, new Set());
 
     let traitsSet = foundry.utils.duplicate(traits);
-    if ( choices.length > 0 ) ItemSheet5e._filterTraitObject(traitsSet, choices, { includeChildren });
-    return { choices: traitsSet, set: choiceSet(traitsSet), includeChildren };
+    if ( choices.length > 0 ) ItemSheet5e._filterTraitObject(traitsSet, choices, { allowCategories });
+    return { choices: traitsSet, set: choiceSet(traitsSet), allowCategories };
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Filters the provided trait object.
-   * @param {object} traits                 Object of traits to filter.
-   * @param {string[]} filter               Array of keys to use when applying the filter.
+   * Filters the provided trait object to only include provided keys.
+   * @param {object} traits                            Object of traits to filter.
+   * @param {string[]} filter                          Trait keys to retain.
    * @param {object} [options={}]
-   * @param {boolean} [options.union=true]  If true, only items in filter array will be included.
-   *                                        If false, only items not in the filter array will be included.
-   * @param {boolean} [options.includeChildren=true]  Include all of a categories's children.
+   * @param {boolean} [options.allowCategories=false]  Only include category children if their specifically
+   *                                                   included in the filter list.
    * @private
    */
-  static _filterTraitObject(traits, filter, { union=true, includeChildren=true }={}) {
+  static _filterTraitObject(traits, filter, { allowCategories=false }={}) {
     for ( const [key, trait] of Object.entries(traits) ) {
       if ( filter.includes(key) ) {
-        if ( !union ) delete traits[key];
+        if ( trait.children && allowCategories ) {
+          this._filterTraitObject(trait.children, filter, { allowCategories });
+          if ( foundry.utils.isObjectEmpty(trait.children) ) delete trait.children;
+        }
         continue;
       }
 
       let selectedChildren = false;
       if ( trait.children ) {
-        if ( includeChildren ) {
-          this._filterTraitObject(trait.children, filter, { union, includeChildren });
+        if ( !allowCategories || !filter.includes(key) ) {
+          this._filterTraitObject(trait.children, filter, { allowCategories });
           if ( !foundry.utils.isObjectEmpty(trait.children) ) selectedChildren = true;
         } else {
           delete trait.children;
         }
       }
 
-      if ( union && !selectedChildren ) delete traits[key];
+      if ( !selectedChildren ) delete traits[key];
+    }
+  }
+
+  /**
+   * Removes any traits with keys included in filter from the provided traits object.
+   * @param {object} traits    Object of traits to filter. *Will be mutated.*
+   * @param {string[]} filter  Trait keys to remove.
+   * @private
+   */
+  static _traitObjectDisunion(traits, filter) {
+    for ( const [key, trait] of Object.entries(traits) ) {
+      if ( filter.includes(key) ) delete traits[key];
+      else if ( trait.children ) this._traitObjectDisunion(trait.children, filter);
     }
   }
 
