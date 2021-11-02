@@ -37,7 +37,7 @@ export class TraitData extends foundry.abstract.DocumentData {
         nullable: false,
         default: []
       }
-    }
+    };
   }
 }
 
