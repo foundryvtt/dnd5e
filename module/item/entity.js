@@ -1049,11 +1049,11 @@ export default class Item5e extends Item {
       parts: parts,
       title: title,
       flavor: this.labels.damageTypes.length ? `${title} (${this.labels.damageTypes})` : title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       dialogOptions: {
         width: 400,
         top: event ? event.clientY - 80 : null,
-        left: window.innerWidth - 710
+        left: window.innerWidth - 710,
+        speaker: ChatMessage.getSpeaker({actor: this.actor})
       },
       messageData: messageData
     };
