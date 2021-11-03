@@ -89,8 +89,10 @@
 }
 .dnd5e input[type="text"]:hover,
 .dnd5e input[type="number"]:hover,
+.dnd5e input[type="checkbox"]:hover,
 .dnd5e input[type="text"]:focus,
-.dnd5e input[type="number"]:focus {
+.dnd5e input[type="number"]:focus,
+.dnd5e input[type="checkbox"]:focus {
   border: 1px solid #111;
   box-shadow: 0 0 8px red;
 }
@@ -1632,6 +1634,7 @@
   align-items: center;
 }
 .dnd5e.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {
+  flex-basis: 14px;
   height: 14px;
   width: 14px;
   margin: 0;
