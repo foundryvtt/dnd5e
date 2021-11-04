@@ -267,7 +267,7 @@ export default class Item5e extends Item {
    */
   prepareFinalAttributes() {
     // Proficiency
-    this.data.data.prof = new Proficiency(this.actor?.data.data.prof, this.data.data.proficient);
+    this.data.data.prof = new Proficiency(this.actor?.data.data.attributes.prof, this.data.data.proficient);
 
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Ability checks
