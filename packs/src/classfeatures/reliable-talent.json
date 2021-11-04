@@ -64,5 +64,26 @@
   },
   "flags": {},
   "img": "icons/skills/ranged/target-bullseye-arrow-glowing.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "vMMZHZQ0qT7MT4I4",
+      "changes": [
+        {
+          "key": "flags.dnd5e.reliableTalent",
+          "mode": 5,
+          "value": "true"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/skills/ranged/target-bullseye-arrow-glowing.webp",
+      "label": "Reliable Talent",
+      "origin": "Item.YN9xm6MCvse4Y60u",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

@@ -65,5 +65,31 @@
   },
   "flags": {},
   "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "JjH64T4YkNP1VTt4",
+      "changes": [
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "diseased"
+        },
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "poisoned"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/control/encase-creature-humanoid-hold.webp",
+      "label": "Purity of Body",
+      "origin": "Item.dvtlIzR4gvdfb7Od",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

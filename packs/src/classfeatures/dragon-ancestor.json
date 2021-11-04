@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "xI5jjbA2Dlj7L0cd",
+      "changes": [
+        {
+          "key": "data.traits.languages.value",
+          "mode": 2,
+          "value": "draconic"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
+      "label": "Dragon Ancestor",
+      "origin": "Item.EZsonMThTNLZq35j",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

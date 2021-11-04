@@ -1,5 +1,5 @@
 {
-  "_id": "dY9yrqkyEDuF0CG2",
+  "_id": "t7aBljEnopZu6VSR",
   "name": "Divine Health",
   "permission": {
     "default": 0
@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/magic/life/cross-worn-green.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "RjX1etQhr8M2TBgv",
+      "changes": [
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "diseased"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/life/cross-worn-green.webp",
+      "label": "Divine Health",
+      "origin": "Item.t7aBljEnopZu6VSR",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "3JYlSTG0olbm1FQC",
+      "changes": [
+        {
+          "key": "data.attributes.senses.darkvision",
+          "mode": 4,
+          "value": "120"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
+      "label": "Devil's Sight",
+      "origin": "Item.3sN91lT1R3oxcDKd",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

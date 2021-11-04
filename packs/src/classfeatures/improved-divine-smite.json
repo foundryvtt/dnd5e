@@ -69,5 +69,26 @@
   },
   "flags": {},
   "img": "icons/magic/symbols/cog-shield-white-blue.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "yvLL91omI6kHMHau",
+      "changes": [
+        {
+          "key": "data.bonuses.mwak.damage",
+          "mode": 2,
+          "value": "+1d8[Radiant]"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/symbols/cog-shield-white-blue.webp",
+      "label": "Improved Divine Smite",
+      "origin": "Item.FAk41RPCTcvCk6KI",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

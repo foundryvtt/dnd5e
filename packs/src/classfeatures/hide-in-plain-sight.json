@@ -64,5 +64,26 @@
   },
   "flags": {},
   "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "7if4vIkT84Sw2zFm",
+      "changes": [
+        {
+          "key": "data.skills.ste.bonuses.check",
+          "mode": 2,
+          "value": "+10"
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/nature/stealth-hide-eyes-green.webp",
+      "label": "Hide in Plain Sight",
+      "origin": "Item.r0unvWK0lPsDthDx",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

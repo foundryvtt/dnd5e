@@ -65,5 +65,31 @@
   },
   "flags": {},
   "img": "icons/commodities/flowers/lotus-pink.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "Jxpz4MZmgTy7z7cm",
+      "changes": [
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "diseased"
+        },
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "poisoned"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/commodities/flowers/lotus-pink.webp",
+      "label": "Nature's Ward",
+      "origin": "Item.OTvrJSJSUgAwXrWX",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

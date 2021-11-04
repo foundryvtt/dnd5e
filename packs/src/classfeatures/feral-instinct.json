@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "q7TkJQX7PeVOzTQH",
+      "changes": [
+        {
+          "key": "flags.dnd5e.initiativeAdv",
+          "mode": 5,
+          "value": "true"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
+      "label": "Feral Instinct",
+      "origin": "Item.o1i0LwvZQPm0Bxpa",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

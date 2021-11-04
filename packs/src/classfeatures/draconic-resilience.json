@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/creatures/claws/claw-scaled-red.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "Pu89Tsgy2FJjYPQi",
+      "changes": [
+        {
+          "key": "data.attributes.ac.calc",
+          "mode": 5,
+          "value": "draconic"
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/creatures/claws/claw-scaled-red.webp",
+      "label": "Draconic Resilience",
+      "origin": "Item.MW1ExvBLm8Hg82aA",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

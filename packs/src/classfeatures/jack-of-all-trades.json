@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/commodities/tech/cog-steel.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "K4xQzXl1Z4zMnyOa",
+      "changes": [
+        {
+          "key": "flags.dnd5e.jackOfAllTrades",
+          "mode": 5,
+          "value": "true"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/commodities/tech/cog-steel.webp",
+      "label": "Jack of All Trades",
+      "origin": "Item.LaQuQ37mInXH6TiR",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

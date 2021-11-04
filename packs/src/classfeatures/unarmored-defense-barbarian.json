@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "hEgUnQNVxtBo2zkK",
+      "changes": [
+        {
+          "key": "data.attributes.ac.calc",
+          "mode": 5,
+          "value": "unarmoredBarb"
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "label": "Unarmored Defense",
+      "origin": "Item.aIMXb43ACIxMItbh",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

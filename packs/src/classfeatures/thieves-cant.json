@@ -64,5 +64,26 @@
   },
   "flags": {},
   "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "VN7GnGzVwmBM7YCU",
+      "changes": [
+        {
+          "key": "data.traits.languages.value",
+          "mode": 2,
+          "value": "cant"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
+      "label": "Thieves' Cant",
+      "origin": "Item.ohwfuwnvuoBWlSQr",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

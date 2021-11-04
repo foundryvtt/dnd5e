@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/magic/water/projectile-icecicle.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "v6jhyPoAYRIIXBG1",
+      "changes": [
+        {
+          "key": "flags.dnd5e.diamondSoul",
+          "mode": 5,
+          "value": "true"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/water/projectile-icecicle.webp",
+      "label": "Diamond Soul",
+      "origin": "Item.PRME1bZBvnc2E0iH",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

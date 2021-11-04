@@ -65,5 +65,26 @@
   },
   "flags": {},
   "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "hNWumbfvMxXQI21x",
+      "changes": [
+        {
+          "key": "data.abilities.wis.proficient",
+          "mode": 5,
+          "value": "1"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+      "label": "Slippery Mind",
+      "origin": "Item.V4pwFxlwHtNeB4w9",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }
