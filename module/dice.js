@@ -333,7 +333,7 @@ export async function damageRoll({
   const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
   const roll = new CONFIG.Dice.DamageRoll(formula, data, {
     flavor: flavor || title,
-    critical: isCritical,
+    critical: isFF ? isCritical : false,
     criticalBonusDice,
     criticalMultiplier,
     criticalBonusDamage,
