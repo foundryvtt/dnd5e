@@ -1,4 +1,3 @@
-import ItemSheet5e from "./sheet.js";
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import Proficiency from "../actor/proficiency.js";
@@ -1572,7 +1571,7 @@ export default class Item5e extends Item {
   async _assignOwnedItemTraits(itemData, actor) {
     const updates = {};
     for ( const [type, config] of Object.entries(itemData.data.traits) ) {
-      const { available } = await ItemSheet5e._prepareUnfulfilledGrants(
+      const { available } = await game.dnd5e.applications.ItemSheet5e._prepareUnfulfilledGrants(
         type, config.grants, config.choices, actor.getSelectedTraits(type), config.value
       );
       let newValues = [];

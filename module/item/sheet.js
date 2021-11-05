@@ -1,4 +1,3 @@
-import Actor5e from "../actor/entity.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitConfig from "../apps/trait-config.js";
 import TraitSelector from "../apps/trait-selector.js";
@@ -275,7 +274,7 @@ export default class ItemSheet5e extends ItemSheet {
     for ( const [type, data] of Object.entries(itemData.data.traits) ) {
       if ( !data ) continue;
       if ( ["armor", "weapon", "tool"].includes(type) ) {
-        Actor5e.prepareProficiencies(data, type);
+        game.dnd5e.entities.Actor5e.prepareProficiencies(data, type);
       } else {
         const choices = CONFIG.DND5E[type];
         if ( !choices || !data ) continue;
@@ -326,7 +325,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.labels.grants = {};
     for ( const [type, config] of Object.entries(data.data.data.traits) ) {
       if ( this.object.isEmbedded ) {
-        const choices = await ItemSheet5e._prepareTraitOptions(
+        const choices = await this.constructor._prepareTraitOptions(
           type, config.grants, config.choices, this.object.actor.getSelectedTraits(type),
           config.value, config.allowReplacements
         );
@@ -334,7 +333,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( choices ) {
           data.labels.grants[type] = game.i18n.format("DND5E.TraitConfigurationChoicesRemaining", {
             count: choices.remaining,
-            type: TraitConfiguration.typeLabel(type, choices.remaining)
+            type: TraitConfig.typeLabel(type, choices.remaining)
           });
         }
       } else {
@@ -363,7 +362,7 @@ export default class ItemSheet5e extends ItemSheet {
    * }|null}  Choices available for most permissive unfulfilled grant & number of remaining traits to select.
    */
   static async _prepareTraitOptions(type, grants, choices, actorSelected, itemSelected, allowReplacements=false) {
-    let { available, allChoices } = await ItemSheet5e._prepareUnfulfilledGrants(
+    let { available, allChoices } = await this._prepareUnfulfilledGrants(
       type, grants, choices, actorSelected, itemSelected);
 
     // Remove any grants that have no choices remaining
@@ -421,10 +420,10 @@ export default class ItemSheet5e extends ItemSheet {
     if ( (grants.length + expandedChoices.length) <= itemSelected.length ) return { available: [], allChoices: {} };
 
     // Figure out how many choices each grant and sort by most restrictive first
-    const allChoices = await TraitConfiguration.getTraitChoices(type);
+    const allChoices = await TraitConfig.getTraitChoices(type);
     let available = [
-      ...grants.map(g => ItemSheet5e._filterGrantChoices(allChoices, [g], { allowCategories: true })),
-      ...expandedChoices.map(c => ItemSheet5e._filterGrantChoices(allChoices, c))
+      ...grants.map(g => this._filterGrantChoices(allChoices, [g], { allowCategories: true })),
+      ...expandedChoices.map(c => this._filterGrantChoices(allChoices, c))
     ];
     const setSort = (lhs, rhs) => lhs.set.size - rhs.set.size;
     available.sort(setSort);
@@ -440,10 +439,9 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Filter out any traits that have already been selected
-    ItemSheet5e._traitObjectDisunion(allChoices, [...actorSelected, ...itemSelected]);
-    available = available.map(a => {
-      return ItemSheet5e._filterGrantChoices(allChoices, Array.from(a.set), { allowCategories: a.allowCategories });
-    });
+    this._traitObjectDisunion(allChoices, [...actorSelected, ...itemSelected]);
+    available = available.map(a => this._filterGrantChoices(
+      allChoices, Array.from(a.set), { allowCategories: a.allowCategories }));
 
     return { available, allChoices };
   }
@@ -474,7 +472,7 @@ export default class ItemSheet5e extends ItemSheet {
     }, new Set());
 
     let traitsSet = foundry.utils.duplicate(traits);
-    if ( choices.length > 0 ) ItemSheet5e._filterTraitObject(traitsSet, choices, { allowCategories });
+    if ( choices.length > 0 ) this._filterTraitObject(traitsSet, choices, { allowCategories });
     return { choices: traitsSet, set: choiceSet(traitsSet), allowCategories };
   }
 
