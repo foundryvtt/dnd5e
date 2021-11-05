@@ -97,6 +97,9 @@
       border: 1px solid @colorTan;
       background: rgba(0, 0, 0, 0.05);
     }
+    h2 {
+      margin-top: 0.5em;
+    }
 
     .form-group {
       span {
@@ -114,6 +117,30 @@
     .form-group.input-select-select {
       select {
         flex: 1.5;
+      }
+    }
+
+    .form-group.selectable-trait {
+      ul.traits-list {
+        padding-left: 0;
+        .tag {
+          border-radius: 6px;
+          padding: 2px 6px;
+          font-size: 12px;
+
+          .delete-tag {
+            display: none;
+            position: relative;
+            top: 1px;
+            opacity: 0.6;
+          }
+          &:hover .delete-tag {
+            display: inherit;
+          }
+        }
+      }
+      select {
+        flex-basis: 100%;
       }
     }
 
