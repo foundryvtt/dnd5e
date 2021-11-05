@@ -30,7 +30,7 @@ import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
 import ItemSheet5e from "./module/item/sheet.js";
 import ShortRestDialog from "./module/apps/short-rest.js";
 import ProficiencySelector from "./module/apps/proficiency-selector.js";
-import TraitConfiguration from "./module/apps/trait-configuration.js";
+import TraitConfig from "./module/apps/trait-config.js";
 import TraitSelector from "./module/apps/trait-selector.js";
 import ActorMovementConfig from "./module/apps/movement-config.js";
 import ActorSensesConfig from "./module/apps/senses-config.js";
@@ -62,7 +62,7 @@ Hooks.once("init", function() {
       ItemSheet5e,
       ShortRestDialog,
       ProficiencySelector,
-      TraitConfiguration,
+      TraitConfig,
       TraitSelector,
       ActorMovementConfig,
       ActorSensesConfig,

@@ -13,7 +13,7 @@
  * on Background and Class items.
  * @extends {DocumentSheet}
  */
-export default class TraitConfiguration extends DocumentSheet {
+export default class TraitConfig extends DocumentSheet {
 
   constructor(object={}, options={}) {
     super(object, options);

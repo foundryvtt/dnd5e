@@ -303,8 +303,8 @@ export default class ItemSheet5e extends ItemSheet {
         // To be filled in :)
       } else {
         data.labels.grants[type] = listFormatter.format([
-          ...config.grants.map(g => game.dnd5e.applications.TraitConfiguration.keyLabel(type, g)),
-          ...config.choices.map(c => game.dnd5e.applications.TraitConfiguration.choiceLabel(type, c))
+          ...config.grants.map(g => game.dnd5e.applications.TraitConfig.keyLabel(type, g)),
+          ...config.choices.map(c => game.dnd5e.applications.TraitConfig.choiceLabel(type, c))
         ]);
       }
     }
@@ -415,7 +415,7 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle spawning the TraitConfiguration application for configuring which traits
+   * Handle spawning the TraitConfig application for configuring which traits
    * can be chosen by the player.
    * @param {Event} event  The click event which originated the configuration.
    * @private
@@ -428,7 +428,7 @@ export default class ItemSheet5e extends ItemSheet {
       title: a.parentElement.innerText,
       type: a.dataset.type
     };
-    new game.dnd5e.applications.TraitConfiguration(this.item, options).render(true);
+    new game.dnd5e.applications.TraitConfig(this.item, options).render(true);
   }
 
   /* -------------------------------------------- */
