@@ -1,5 +1,4 @@
 import ProficiencySelector from "../apps/proficiency-selector.js";
-import TraitConfiguration from "../apps/trait-configuration.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
 
@@ -304,8 +303,8 @@ export default class ItemSheet5e extends ItemSheet {
         // To be filled in :)
       } else {
         data.labels.grants[type] = listFormatter.format([
-          ...config.grants.map(g => TraitConfiguration.keyLabel(type, g)),
-          ...config.choices.map(c => TraitConfiguration.choiceLabel(type, c))
+          ...config.grants.map(g => game.dnd5e.applications.TraitConfiguration.keyLabel(type, g)),
+          ...config.choices.map(c => game.dnd5e.applications.TraitConfiguration.choiceLabel(type, c))
         ]);
       }
     }
@@ -429,7 +428,7 @@ export default class ItemSheet5e extends ItemSheet {
       title: a.parentElement.innerText,
       type: a.dataset.type
     };
-    new TraitConfiguration(this.item, options).render(true);
+    new game.dnd5e.applications.TraitConfiguration(this.item, options).render(true);
   }
 
   /* -------------------------------------------- */

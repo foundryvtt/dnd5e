@@ -1,6 +1,3 @@
-import ProficiencySelector from "./proficiency-selector.js";
-
-
 /**
  * Configuration for a specific trait choice.
  *
@@ -73,7 +70,7 @@ export default class TraitConfiguration extends DocumentSheet {
   /** @inheritdoc */
   get title() {
     return game.i18n.format("DND5E.TraitConfigTitle", {
-      type: TraitConfiguration.typeLabel(this.options.type, 1)
+      type: this.constructor.typeLabel(this.options.type, 1)
     });
   }
 
@@ -83,12 +80,12 @@ export default class TraitConfiguration extends DocumentSheet {
   async getData() {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction" });
     const configurations = [{
-      label: listFormatter.format(this.grants.map(g => TraitConfiguration.keyLabel(this.options.type, g))) || "—",
+      label: listFormatter.format(this.grants.map(g => this.constructor.keyLabel(this.options.type, g))) || "—",
       data: this.grants,
       selected: this.selectedIndex === 0
     }, ...this.choices.map((choice, index) => {
       return {
-        label: TraitConfiguration.choiceLabel(this.options.type, choice) || "—",
+        label: this.constructor.choiceLabel(this.options.type, choice) || "—",
         data: choice,
         selected: this.selectedIndex === (index + 1)
       }
@@ -96,7 +93,7 @@ export default class TraitConfiguration extends DocumentSheet {
 
     const selectedData = configurations[this.selectedIndex]?.data;
     const chosen = Array.isArray(selectedData) ? selectedData : selectedData.choices ?? [];
-    const choices = await TraitConfiguration.getTraitChoices(this.options.type, chosen);
+    const choices = await this.constructor.getTraitChoices(this.options.type, chosen);
 
     return { configurations, showCount: this.selectedIndex !== 0, count: selectedData?.count, choices };
   }
@@ -111,7 +108,7 @@ export default class TraitConfiguration extends DocumentSheet {
    */
   static async getTraitChoices(type, chosen) {
     if ( ["armor", "tool", "weapon"].includes(type) ) {
-      return ProficiencySelector.getChoices(type, chosen);
+      return game.dnd5e.applications.ProficiencySelector.getChoices(type, chosen);
     }
 
     return Object.entries(CONFIG.DND5E[type] ?? {}).reduce((obj, [key, label]) => {
@@ -136,11 +133,11 @@ export default class TraitConfiguration extends DocumentSheet {
     if ( !data.choices ) {
       return game.i18n.format("DND5E.TraitConfigChooseAny", {
         count: data.count,
-        type: TraitConfiguration.typeLabel(type, data.count).toLowerCase()
+        type: this.typeLabel(type, data.count).toLowerCase()
       });
     }
 
-    const choices = data.choices.map(key => TraitConfiguration.keyLabel(type, key));
+    const choices = data.choices.map(key => this.keyLabel(type, key));
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
     return game.i18n.format("DND5E.TraitConfigChooseList", {
       count: data.count,
@@ -183,7 +180,8 @@ export default class TraitConfiguration extends DocumentSheet {
         return CONFIG.DND5E.vehicleTypes[key];
       }
 
-      const item = ProficiencySelector.getBaseItem(CONFIG.DND5E[`${type}Ids`][key], { indexOnly: true });
+      const item = game.dnd5e.applications.ProficiencySelector.getBaseItem(
+        CONFIG.DND5E[`${type}Ids`][key], { indexOnly: true });
       return item?.name ?? "";
     } else {
       const source = CONFIG.DND5E[type];
@@ -214,7 +212,7 @@ export default class TraitConfiguration extends DocumentSheet {
     }
 
     for ( const checkbox of html[0].querySelectorAll(".trait-selector input[type='checkbox']") ) {
-      if ( checkbox.checked ) ProficiencySelector._onToggleCategory(checkbox);
+      if ( checkbox.checked ) game.dnd5e.applications.ProficiencySelector._onToggleCategory(checkbox);
     }
   }
 

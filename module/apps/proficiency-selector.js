@@ -32,7 +32,7 @@ export default class ProficiencySelector extends TraitSelector {
     const chosen = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
 
     const data = super.getData();
-    data.choices = await ProficiencySelector.getChoices(this.options.type, chosen, this.options.sortCategories);
+    data.choices = await this.constructor.getChoices(this.options.type, chosen, this.options.sortCategories);
     return data;
   }
 
@@ -65,7 +65,7 @@ export default class ProficiencySelector extends TraitSelector {
     if ( ids !== undefined ) {
       const typeProperty = (type !== "armor") ? `${type}Type` : "armor.type";
       for ( const [key, id] of Object.entries(ids) ) {
-        const item = await ProficiencySelector.getBaseItem(id);
+        const item = await this.getBaseItem(id);
         if ( !item ) continue;
 
         let type = foundry.utils.getProperty(item.data, typeProperty);
@@ -95,7 +95,7 @@ export default class ProficiencySelector extends TraitSelector {
 
     for ( const category of Object.values(data) ) {
       if ( !category.children ) continue;
-      category.children = ProficiencySelector._sortObject(category.children);
+      category.children = this._sortObject(category.children);
     }
 
     return data;
@@ -125,7 +125,7 @@ export default class ProficiencySelector extends TraitSelector {
 
     // Return extended index if cached, otherwise normal index, guaranteed to never be async.
     if ( indexOnly ) {
-      return ProficiencySelector._cachedIndices[pack]?.get(id) ?? game.packs.get(pack)?.index.get(id);
+      return this._cachedIndices[pack]?.get(id) ?? game.packs.get(pack)?.index.get(id);
     }
 
     // Full Item5e document required, always async.
@@ -134,8 +134,8 @@ export default class ProficiencySelector extends TraitSelector {
     }
 
     // Returned cached version of extended index if available.
-    if ( ProficiencySelector._cachedIndices[pack] ) {
-      return ProficiencySelector._cachedIndices[pack].get(id);
+    if ( this._cachedIndices[pack] ) {
+      return this._cachedIndices[pack].get(id);
     }
 
     // Build the extended index and return a promise for the data
@@ -145,7 +145,7 @@ export default class ProficiencySelector extends TraitSelector {
     return game.packs.get(pack)?.getIndex({
       fields: ["data.armor.type", "data.toolType", "data.weaponType"]
     }).then(index => {
-      ProficiencySelector._cachedIndices[pack] = index;
+      this._cachedIndices[pack] = index;
       return index.get(id);
     });
   }
@@ -172,7 +172,7 @@ export default class ProficiencySelector extends TraitSelector {
     super.activateListeners(html);
 
     for ( const checkbox of html[0].querySelectorAll("input[type='checkbox']") ) {
-      if ( checkbox.checked ) ProficiencySelector._onToggleCategory(checkbox);
+      if ( checkbox.checked ) this.constructor._onToggleCategory(checkbox);
     }
   }
 
@@ -182,7 +182,7 @@ export default class ProficiencySelector extends TraitSelector {
   async _onChangeInput(event) {
     super._onChangeInput(event);
 
-    if ( event.target.tagName === "INPUT" ) ProficiencySelector._onToggleCategory(event.target);
+    if ( event.target.tagName === "INPUT" ) this.constructor._onToggleCategory(event.target);
   }
 
   /* -------------------------------------------- */
