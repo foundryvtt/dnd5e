@@ -308,6 +308,17 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
 
+    // Check class identity
+    if ( this.object.type === "class" && data.data.identity !== "" ) {
+      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
+      const match = data.data.identity.match(dataRgx);
+      if ( !match ) {
+        data.data.identity = this.object.data._source.data.identity;
+        this.form.querySelector("input[name='data.identity']").value = data.data.identity;
+        ui.notifications.error(game.i18n.localize("DND5E.ClassIdentityWarn"));
+      }
+    }
+
     // Return the flattened submission data
     return flattenObject(data);
   }
