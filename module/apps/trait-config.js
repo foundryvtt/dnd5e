@@ -22,13 +22,13 @@ export default class TraitConfig extends DocumentSheet {
      * Path to the `grants` array within the traits data.
      * @type {string}
      */
-    this.grantsKeyPath = options.grantsKeyPath ?? 'grants';
+    this.grantsKeyPath = options.grantsKeyPath ?? "grants";
 
     /**
      * Path to the `choices` array within the traits data.
      * @type {string}
      */
-    this.choicesKeyPath = options.choicesKeyPath ?? 'choices';
+    this.choicesKeyPath = options.choicesKeyPath ?? "choices";
 
     /**
      * Internal version of the grants array.
@@ -88,7 +88,7 @@ export default class TraitConfig extends DocumentSheet {
         label: this.constructor.choiceLabel(this.options.type, choice) || "—",
         data: choice,
         selected: this.selectedIndex === (index + 1)
-      }
+      };
     })];
 
     const selectedData = configurations[this.selectedIndex]?.data;
