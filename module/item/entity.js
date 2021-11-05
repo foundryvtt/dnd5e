@@ -163,6 +163,24 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Should this item's active effects be suppressed.
+   * @type {boolean}
+   */
+  get areEffectsSuppressed() {
+    // All types but consumables require being equipped
+    if ( (this.data.type !== "consumable") && (this.data.data.equipped === false) ) return true;
+
+    // Equipment & Weapons that require attunement must be attuned
+    if ( ["equipment", "weapon"].includes(this.data.type) ) {
+      return this.data.data.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
+    }
+
+    return false;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
