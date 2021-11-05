@@ -55,12 +55,32 @@ export default class TraitSelector extends DocumentSheet {
       return obj;
     }, {});
 
+    const source = foundry.utils.getProperty(this.object.data._source, this.attribute);
+    const sourceValue = this.options.valueKey ? foundry.utils.getProperty(source, this.options.valueKey) ?? [] : source;
+    this._disableAssignedTraits(choices, sourceValue, value);
+
     // Return data
     return {
       allowCustom: o.allowCustom,
       choices: choices,
       custom: custom
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Disable any proficiencies that have been assigned by an embedded object.
+   * @param {object} choices  Object containing the choices to check.
+   * @param {string[]} sourceValue   Array of traits in the source data.
+   * @param {string[]} derivedValue  Array of traits in the derived data.
+   * @protected
+   */
+  _disableAssignedTraits(choices, sourceValue, derivedValue) {
+    for ( const [key, choice] of Object.entries(choices) ) {
+      if ( derivedValue.includes(key) && !sourceValue.includes(key) ) choice.disabled = true;
+      if ( choice.children ) this._disableAssignedTraits(choice.children, sourceValue, derivedValue);
+    }
   }
 
   /* -------------------------------------------- */

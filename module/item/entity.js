@@ -163,6 +163,24 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Retrieve the changes this item causes on its owning actor.
+   * @returns {object<string, string[]>}  Changes to apply grouped by trait type.
+   */
+  get actorTraitChanges() {
+    switch (this.type) {
+      case "background":
+        return Object.entries(this.data.data.traits).reduce((obj, [type, data]) => {
+          obj[type] = data.value;
+          return obj;
+        }, {});
+      default:
+        return {};
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -1480,6 +1498,9 @@ export default class Item5e extends Item {
     const isNPC = this.parent.type === "npc";
     let updates;
     switch (data.type) {
+      case "background":
+        updates = await this._assignOwnedItemTraits(data, this.parent);
+        break;
       case "equipment":
         updates = this._onCreateOwnedEquipment(data, actorData, isNPC);
         break;
@@ -1556,6 +1577,31 @@ export default class Item5e extends Item {
       if ( this.id !== this.parent.data.data.details.originalClass ) return;
       this.parent._assignPrimaryClass();
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Pre-creation logic for automatically assigning traits to an item based on actor traits if possible.
+   * @param {object} itemData  Item data being prepared.
+   * @param {Actor5e} actor    Actor object to check against.
+   * @returns {object}         Object containing updates to apply to the item data.
+   * @private
+   */
+  async _assignOwnedItemTraits(itemData, actor) {
+    const updates = {};
+    for ( const [type, config] of Object.entries(itemData.data.traits) ) {
+      const { available } = await game.dnd5e.applications.ItemSheet5e._prepareUnfulfilledGrants(
+        type, config.grants, config.choices, actor.getSelectedTraits(type), config.value
+      );
+      let newValues = [];
+      for ( const { set } of available ) {
+        if ( set.size !== 1 ) continue;
+        newValues.push(set.values().next().value);
+      }
+      if ( newValues.length > 0 ) updates[`data.traits.${type}.value`] = newValues;
+    }
+    return updates;
   }
 
   /* -------------------------------------------- */
