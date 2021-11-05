@@ -50,15 +50,23 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" data-dtype="Number"/>
+                        <input name="data.attributes.hp.value" type="text"
+                               value="{{data.attributes.hp.value}}" placeholder="10"
+                               data-dtype="Number" title="{{localize 'DND5E.HitPointsCurrent'}}">
                         <span class="sep"> / </span>
-                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" data-dtype="Number"/>
+                        <input name="data.attributes.hp.max" type="text"
+                               value="{{data.attributes.hp.max}}" placeholder="10" 
+                               data-dtype="Number" title="{{localize 'DND5E.HitPointsMax'}}">
                     </div>
                     <footer class="attribute-footer">
-                        <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+{{ localize 'DND5E.Temp' }}"
-                               value="{{data.attributes.hp.temp}}" data-dtype="Number"/>
-                        <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+{{ localize 'DND5E.Max' }}"
-                               value="{{data.attributes.hp.tempmax}}" data-dtype="Number"/>
+                        <input name="data.attributes.hp.temp" type="text" class="temphp"
+                               placeholder="+{{ localize 'DND5E.Temp' }}"
+                               value="{{data.attributes.hp.temp}}" data-dtype="Number"
+                               title="{{localize 'DND5E.HitPointsTemp'}}">
+                        <input name="data.attributes.hp.tempmax" type="text" class="temphp"
+                               placeholder="+{{ localize 'DND5E.Max' }}"
+                               value="{{data.attributes.hp.tempmax}}" data-dtype="Number"
+                               title="{{localize 'DND5E.HitPointsTempMax'}}">
                     </footer>
                 </li>
 
@@ -68,11 +76,15 @@
                         <a class="config-button" data-action="hit-dice" title="{{localize 'DND5E.HitDiceConfig'}}"><i class="fas fa-cog"></i></a>
                     </h4>
                     <div class="attribute-value multiple">
-                        <label class="hit-dice">{{data.attributes.hd}} <span class="sep"> / </span> {{data.details.level}}</label>
+                        <label class="hit-dice">
+                            <span title="{{localize 'DND5E.HitDiceRemaining'}}">{{data.attributes.hd}}</span>
+                            <span class="sep"> / </span>
+                            <span title="{{localize 'DND5E.HitDiceMax'}}">{{data.details.level}}</span>
+                        </label>
                     </div>
                     <footer class="attribute-footer">
-                        <a class="rest short-rest">{{ localize "DND5E.RestS" }}</a>
-                        <a class="rest long-rest">{{ localize "DND5E.RestL" }}</a>
+                        <a class="rest short-rest" title="{{localize 'DND5E.ShortRest'}}">{{ localize "DND5E.RestS" }}</a>
+                        <a class="rest long-rest" title="{{localize 'DND5E.LongRest'}}">{{ localize "DND5E.RestL" }}</a>
                     </footer>
                 </li>
 
@@ -161,8 +173,8 @@
                       <a class="config-button" data-action="skill" title="{{localize 'DND5E.SkillConfigure'}}"><i class="fas fa-cog"></i></a>
                     </div>
                     <span class="skill-ability">{{skill.ability}}</span>
-                    <span class="skill-mod">{{numberFormat skill.total decimals=0 sign=true}}</span>
-                    <span class="skill-passive">({{skill.passive}})</span>
+                    <span class="skill-mod" title="{{ localize 'DND5E.SkillModifierHint' skill=label }}">{{numberFormat skill.total decimals=0 sign=true}}</span>
+                    <span class="skill-passive" title="{{ localize 'DND5E.SkillPassiveHint' skill=label }}">({{skill.passive}})</span>
                 </li>
             {{/with}}
             {{/each}}
@@ -202,10 +214,10 @@
                         <div class="counter-value">
                             <i class="fas fa-check"></i>
                             <input name="data.attributes.death.success" type="number" placeholder="0"
-                                   value="{{data.attributes.death.success}}"/>
+                                   value="{{data.attributes.death.success}}">
                             <i class="fas fa-times"></i>
                             <input name="data.attributes.death.failure" type="number" placeholder="0"
-                                   value="{{data.attributes.death.failure}}"/>
+                                   value="{{data.attributes.death.failure}}">
                         </div>
                     </div>
                     <div class="counter flexrow exhaustion">
