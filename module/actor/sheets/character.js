@@ -78,7 +78,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
+    let {items, spells, feats, backgrounds, classes} = data.items.reduce((obj, item) => {
 
       // Item details
       item.img = item.img || CONST.DEFAULT_TOKEN;
@@ -109,12 +109,13 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( item.type === "class" ) item.isOriginalClass = ( item._id === this.actor.data.data.details.originalClass );
 
       // Classify items into types
-      if ( item.type === "spell" ) arr[1].push(item);
-      else if ( item.type === "feat" ) arr[2].push(item);
-      else if ( item.type === "class" ) arr[3].push(item);
-      else if ( Object.keys(inventory).includes(item.type ) ) arr[0].push(item);
-      return arr;
-    }, [[], [], [], []]);
+      if ( item.type === "spell" ) obj.spells.push(item);
+      else if ( item.type === "feat" ) obj.feats.push(item);
+      else if ( item.type === "class" ) obj.classes.push(item);
+      else if ( item.type === "background" ) obj.backgrounds.push(item);
+      else if ( Object.keys(inventory).includes(item.type) ) obj.items.push(item);
+      return obj;
+    }, {items: [], spells: [], feats: [], backgrounds: [], classes: []});
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
@@ -137,6 +138,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Features
     const features = {
+      background: { label: "DND5E.ItemTypeBackground", items: backgrounds, hasActions: false, dataset: {type: "background"} },
       classes: { label: "DND5E.ItemTypeClassPl", items: [], hasActions: false, dataset: {type: "class"}, isClass: true },
       active: { label: "DND5E.FeatureActive", items: [], hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
       passive: { label: "DND5E.FeaturePassive", items: [], hasActions: false, dataset: {type: "feat"} }
@@ -148,11 +150,17 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     classes.sort((a, b) => b.data.levels - a.data.levels);
     features.classes.items = classes;
 
+    // Warnings
+    if ( backgrounds.length > 1 ) this.actor._preparationWarnings.push("DND5E.WarnMultipleBackgrounds");
+
     // Assign and return
     data.inventory = Object.values(inventory);
     data.spellbook = spellbook;
     data.preparedSpells = nPrepared;
     data.features = Object.values(features);
+
+    // Labels
+    data.labels.background = backgrounds[0]?.name ?? "";
   }
 
   /* -------------------------------------------- */

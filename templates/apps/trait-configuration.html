@@ -1,0 +1,31 @@
+<form autocomplete="off">
+
+  <div class="grant-selector">
+    <div class="form-group">
+      <button type="button" name="add"><i class="fas fa-plus"></i> {{localize "DND5E.Add"}}</button>
+      <button type="button" name="remove"><i class="fas fa-minus"></i> {{localize "DND5E.Remove"}}</button>
+    </div>
+
+    <div class="form-group">
+      <select name="selectedIndex" size=5>
+        {{#each configurations}}
+          <option value="{{@index}}"{{#if this.selected}} selected{{/if}}>{{this.label}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    {{#if showCount}}
+      <div class="form-group">
+        <label>{{localize "DND5E.TraitConfigCount"}}</label>
+        <input name="count" type="number" step="1" value="{{count}}"/>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="trait-selector">
+    {{> "systems/dnd5e/templates/apps/parts/trait-list.html"}}
+  </div>
+
+  <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{ localize "DND5E.TraitSave"}}</button>
+
+</form>
