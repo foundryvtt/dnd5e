@@ -1,0 +1,13 @@
+<ol class="trait-list">
+  {{#each choices as |choice key|}}
+  <li>
+      <label class="checkbox">
+          <input type="checkbox" name="{{key}}" data-dtype="Boolean" data-disabled="{{choice.disabled}}" {{checked choice.chosen}} {{disabled choice.disabled}}>
+          {{choice.label}}
+      </label>
+      {{#if choice.children}}
+        {{> "systems/dnd5e/templates/apps/parts/trait-list.html" choices=choice.children}}
+      {{/if}}
+  </li>
+  {{/each}}
+</ol>
