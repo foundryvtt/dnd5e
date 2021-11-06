@@ -20,6 +20,30 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/dnd5e/templates/items/parts/item-action.html",
     "systems/dnd5e/templates/items/parts/item-activation.html",
     "systems/dnd5e/templates/items/parts/item-description.html",
-    "systems/dnd5e/templates/items/parts/item-mountable.html"
+    "systems/dnd5e/templates/items/parts/item-mountable.html",
+    "systems/dnd5e/templates/items/parts/item-selectable-trait.html",
+
+    // App Partials
+    "systems/dnd5e/templates/apps/parts/trait-list.html"
   ]);
+};
+
+/**
+ * For inputs, if the value is true, add the "disabled" property, otherwise add nothing.
+ * @param {boolean} value  To disable, or not to disable?
+ * @returns {string}       String to add to <input> element.
+ */
+function disabled(value) {
+  return value ? "disabled" : "";
+}
+
+
+/**
+ * Register custom Handlebars helpers used by 5e.
+ */
+export const registerHandlebarsHelpers = function() {
+  Handlebars.registerHelper({
+    disabled: disabled,
+    getProperty: foundry.utils.getProperty
+  });
 };
