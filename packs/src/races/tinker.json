@@ -87,5 +87,26 @@
   },
   "flags": {},
   "img": "icons/commodities/tech/cog-steel.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "CkQlNsLyTZGVbnKM",
+      "changes": [
+        {
+          "key": "data.traits.toolProf.value",
+          "mode": 2,
+          "value": "tinker"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/commodities/tech/cog-steel.webp",
+      "label": "Tinker",
+      "origin": "Item.koRPOLtj8XAFMwnW",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

@@ -87,5 +87,26 @@
   },
   "flags": {},
   "img": "icons/creatures/abilities/stinger-poison-green.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "hIaIpLxcMZSY3qXi",
+      "changes": [
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "poison"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
+      "label": "Dwarven Resilience",
+      "origin": "Item.ufysTkqet2Ctmtyi",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

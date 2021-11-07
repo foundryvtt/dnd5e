@@ -67,5 +67,26 @@
   },
   "flags": {},
   "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
-  "effects": []
+  "effects": [
+    {
+      "_id": "0rAhv7npcNmDcQ3B",
+      "changes": [
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "fire"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
+      "label": "Hellish Resistance",
+      "origin": "Item.q71Pe1F8RRtEJt8Q",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }
