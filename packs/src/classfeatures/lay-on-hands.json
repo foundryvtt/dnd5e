@@ -34,8 +34,12 @@
     "uses": {
       "value": 5,
       "max": "5 * @classes.paladin.levels",
-      "per": "lr",
-      "type": "lr"
+      "per": "lr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "heal",
@@ -53,7 +57,6 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Paladin 1",

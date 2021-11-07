@@ -33,8 +33,7 @@
     "uses": {
       "value": 2,
       "max": "@classes.barbarian.levels > 19 ? 99 : @classes.barbarian.levels > 16 ? 6 : @classes.barbarian.levels > 11 ? 5 : @classes.barbarian.levels > 5 ? 4 : @classes.barbarian.levels > 2 ? 3 : 2",
-      "per": "lr",
-      "type": "lr"
+      "per": "lr"
     },
     "consume": {
       "type": "",
@@ -51,45 +50,18 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Barbarian 1",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "armor": {
-      "value": 10
-    },
-    "hp": {
-      "value": 0,
-      "max": 0,
-      "dt": null,
-      "conditions": ""
-    },
-    "properties": {
-      "amm": false,
-      "fin": false,
-      "fir": false,
-      "foc": false,
-      "hvy": false,
-      "lgt": false,
-      "lod": false,
-      "rch": false,
-      "rel": false,
-      "ret": false,
-      "spc": false,
-      "thr": false,
-      "two": false,
-      "ver": false
     }
   },
   "effects": [

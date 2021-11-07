@@ -34,8 +34,12 @@
     "uses": {
       "value": 2,
       "max": "@classes.druid.levels > 19 ? 99 : 2",
-      "per": "sr",
-      "type": "sr"
+      "per": "sr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Druid 2",
