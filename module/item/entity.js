@@ -163,6 +163,20 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Should this item's active effects be suppressed.
+   * @type {boolean}
+   */
+  get areEffectsSuppressed() {
+    const requireEquipped = (this.data.type !== "consumable") || ["rod", "trinket", "wand"].includes(
+      this.data.data.consumableType);
+    if ( requireEquipped && (this.data.data.equipped === false) ) return true;
+
+    return this.data.data.attunement === CONFIG.DND5E.attunementTypes.REQUIRED;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
