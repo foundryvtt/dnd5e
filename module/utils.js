@@ -59,7 +59,7 @@ export function performPreLocalization(config) {
 
 /**
  * Localize the values of a configuration object by translating them in-place.
- * @param {object} obj                The configuration object to localize
+ * @param {object} obj       The configuration object to localize.
  * @param {string[]} [keys]  List of inner keys that should be localized if this is an object.
  * @private
  */

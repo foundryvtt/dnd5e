@@ -1166,6 +1166,7 @@ DND5E.classFeatures = ClassFeatures;
  *   name: string,
  *   hint: string,
  *   [abilities]: string[],
+ *   [choices]: object<string, string>,
  *   [skills]: string[],
  *   section: string,
  *   type: any,

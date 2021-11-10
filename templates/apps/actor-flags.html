@@ -23,11 +23,7 @@
 
             {{else if flag.isSelect}}
             <select name="{{key}}" data-dtype="{{flag.type}}">
-                {{#select flag.value}}
-                {{#each flag.choices as |v k|}}
-                <option value="{{k}}">{{v}}</option>
-                {{/each}}
-                {{/select}}
+                {{selectOptions flag.choices selected=flag.value localize=true}}
             </select>
 
             {{else}}
