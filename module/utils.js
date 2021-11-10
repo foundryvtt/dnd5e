@@ -1,4 +1,22 @@
 /* -------------------------------------------- */
+/*  Object Helpers                              */
+/* -------------------------------------------- */
+
+/**
+ * Sort the provided object by its values or by an inner sortKey.
+ * @param {object} obj        The object to sort.
+ * @param {string} [sortKey]  An inner key upon which to sort.
+ * @returns {object}          A copy of the original object that has been sorted.
+ * @private
+ */
+export function sortObject(obj, sortKey) {
+  let sorted = Object.entries(obj);
+  if ( sortKey ) sorted = sorted.sort((a, b) => a[1][sortKey].localeCompare(b[1][sortKey]));
+  else sorted = sorted.sort((a, b) => a[1].localeCompare(b[1]));
+  return Object.fromEntries(sorted);
+}
+
+/* -------------------------------------------- */
 /*  Config Pre-Localization                     */
 /* -------------------------------------------- */
 
@@ -15,14 +33,13 @@ const _preLocalizationRegistrations = {};
  * @param {object} [options={}]
  * @param {string} [options.key]          If each entry in the config enum is an object,
  *                                        localize and sort using this property.
- * @param {string[]} [options.keys]       Array of localization keys. First key listed will be used for sorting
+ * @param {string[]} [options.keys=[]]    Array of localization keys. First key listed will be used for sorting
  *                                        if multiple are provided.
  * @param {boolean} [options.sort=false]  Sort this config enum, using the key if set.
  */
 export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
-  const allKeys = keys;
-  if ( key ) allKeys.splice(0, 0, key);
-  _preLocalizationRegistrations[configKey] = { keys: allKeys, sort };
+  if ( key ) keys.splice(0, 0, key);
+  _preLocalizationRegistrations[configKey] = { keys, sort };
 }
 
 /* -------------------------------------------- */
@@ -34,7 +51,7 @@ export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
 export function performPreLocalization(config) {
   for ( const [key, settings] of Object.entries(_preLocalizationRegistrations) ) {
     _localizeObject(config[key], settings.keys);
-    if ( settings.sort ) config[key] = _sortObject(config[key], settings.keys[0]);
+    if ( settings.sort ) config[key] = sortObject(config[key], settings.keys[0]);
   }
 }
 
@@ -72,19 +89,4 @@ function _localizeObject(obj, keys) {
       v[key] = game.i18n.localize(v[key]);
     }
   }
-}
-
-/* -------------------------------------------- */
-
-/**
- * Sort a configuration object by its values or by an inner sortKey.
- * @param {object} obj                The configuration object to sort
- * @param {string} [sortKey]          An inner key upon which to sort
- * @returns {{[p: string]: any}}      The sorted configuration object
- */
-function _sortObject(obj, sortKey) {
-  let sorted = Object.entries(obj);
-  if ( sortKey ) sorted = sorted.sort((a, b) => a[1][sortKey].localeCompare(b[1][sortKey]));
-  else sorted = sorted.sort((a, b) => a[1].localeCompare(b[1]));
-  return Object.fromEntries(sorted);
 }

@@ -1,3 +1,4 @@
+import { sortObject } from "../utils.js";
 import TraitSelector from "./trait-selector.js";
 
 /**
@@ -90,12 +91,12 @@ export default class ProficiencySelector extends TraitSelector {
         obj[key] = { label: label, chosen: chosen.includes(key) };
         return obj;
       }, {});
-      data = ProficiencySelector._sortObject(data);
+      data = sortObject(data, "label");
     }
 
     for ( const category of Object.values(data) ) {
       if ( !category.children ) continue;
-      category.children = ProficiencySelector._sortObject(category.children);
+      category.children = sortObject(category.children, "label");
     }
 
     return data;
@@ -148,21 +149,6 @@ export default class ProficiencySelector extends TraitSelector {
       ProficiencySelector._cachedIndices[pack] = index;
       return index.get(id);
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Take the provided object and sort by the "label" property.
-   *
-   * @param {object} object  Object to be sorted.
-   * @returns {object}        Sorted object.
-   * @private
-   */
-  static _sortObject(object) {
-    return Object.fromEntries(Object.entries(object).sort((lhs, rhs) =>
-      lhs[1].label.localeCompare(rhs[1].label)
-    ));
   }
 
   /* -------------------------------------------- */
