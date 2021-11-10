@@ -615,6 +615,56 @@ preLocalize("consumableTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for an item with the "feature" type.
+ *
+ * @typedef {object} FeatureTypeConfiguration
+ * @property {string} label                       Localized label for this type.
+ * @property {Object<string, string>} [subtypes]  Enum containing localized labels for subtypes.
+ */
+
+/**
+ * Types of "features" items.
+ * @enum {FeatureTypeConfiguration}
+ */
+DND5E.featureTypes = {
+  background: {
+    label: "DND5E.Feature.Background"
+  },
+  class: {
+    label: "DND5E.Feature.Class",
+    subtypes: {
+      artificerInfusion: "DND5E.ClassFeature.ArtificerInfusion",
+      channelDivinity: "DND5E.ClassFeature.ChannelDivinity",
+      defensiveTactic: "DND5E.ClassFeature.DefensiveTactic",
+      eldritchInvocation: "DND5E.ClassFeature.EldritchInvocation",
+      elementalDiscipline: "DND5E.ClassFeature.ElementalDiscipline",
+      fightingStyle: "DND5E.ClassFeature.FightingStyle",
+      huntersPrey: "DND5E.ClassFeature.HuntersPrey",
+      ki: "DND5E.ClassFeature.Ki",
+      maneuver: "DND5E.ClassFeature.Maneuver",
+      metamagic: "DND5E.ClassFeature.Metamagic",
+      multiattack: "DND5E.ClassFeature.Multiattack",
+      psionicPower: "DND5E.ClassFeature.PsionicPower",
+      rune: "DND5E.ClassFeature.Rune",
+      superiorHuntersDefense: "DND5E.ClassFeature.SuperiorHuntersDefense"
+    }
+  },
+  monster: {
+    label: "DND5E.Feature.Monster"
+  },
+  species: {
+    label: "DND5E.Feature.Species"
+  },
+  feat: {
+    label: "DND5E.Feature.Feat"
+  }
+};
+preLocalize("featureTypes", { key: "label" });
+preLocalize("featureTypes.class.subtypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {object} CurrencyConfiguration
  * @property {string} label         Localized label for the currency.
  * @property {string} abbreviation  Localized abbreviation for the currency.

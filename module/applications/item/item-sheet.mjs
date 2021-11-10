@@ -69,7 +69,7 @@ export default class ItemSheet5e extends ItemSheet {
       advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
 
       // Item Type, Status, and Details
-      itemType: game.i18n.localize(`ITEM.Type${item.type.titleCase()}`),
+      itemType: this._getItemType(),
       itemStatus: this._getItemStatus(),
       itemProperties: this._getItemProperties(),
       baseItems: await this._getItemBaseTypes(),
@@ -119,6 +119,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Set up config with proper spell components
     context.config = foundry.utils.mergeObject(CONFIG.DND5E, {
+      featureSubtypes: CONFIG.DND5E.featureTypes[item.system.type?.value]?.subtypes,
       spellComponents: {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags}
     }, {inplace: false});
 
@@ -173,6 +174,19 @@ export default class ItemSheet5e extends ItemSheet {
       };
     }
     return advancement;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the item type label which is shown next to the name on the top-right corner of the sheet.
+   * @returns {string}  Localized item type.
+   * @protected
+   */
+  _getItemType() {
+    const featureType = CONFIG.DND5E.featureTypes[this.item.system.type?.value];
+    if ( featureType ) return featureType.label;
+    return game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
   }
 
   /* -------------------------------------------- */
@@ -277,7 +291,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet.
    * @returns {string|null}  Item status string if applicable to item's type.
-   * @private
+   * @protected
    */
   _getItemStatus() {
     switch ( this.item.type ) {
@@ -286,11 +300,16 @@ export default class ItemSheet5e extends ItemSheet {
       case "equipment":
       case "weapon":
         return game.i18n.localize(this.item.system.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
+      case "feat":
+        const typeConfig = CONFIG.DND5E.featureTypes[this.item.system.type.value];
+        if ( typeConfig?.subtypes ) return typeConfig.subtypes[this.item.system.type.subtype] ?? null;
+        break;
       case "spell":
         return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation];
       case "tool":
         return game.i18n.localize(this.item.system.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
     }
+    return null;
   }
 
   /* -------------------------------------------- */

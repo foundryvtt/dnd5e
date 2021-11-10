@@ -9,6 +9,9 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @mixes ActivatedEffectTemplate
  * @mixes ActionTemplate
  *
+ * @property {object} type
+ * @property {string} type.value         Category to which this feature belongs.
+ * @property {string} type.subtype       Feature subtype according to its category.
  * @property {string} requirements       Actor details required to use this feature.
  * @property {object} recharge           Details on how a feature can roll for recharges.
  * @property {number} recharge.value     Minimum number needed to roll on a d6 to recharge this feature.
@@ -20,6 +23,10 @@ export default class FeatData extends SystemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      type: new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.StringField({required: true}),
+        subtype: new foundry.data.fields.StringField({required: true})
+      }, {label: "DND5E.ItemFeatureType"}),
       requirements: new foundry.data.fields.StringField({required: true, label: "DND5E.Requirements"}),
       recharge: new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
