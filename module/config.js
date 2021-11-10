@@ -1,4 +1,5 @@
-import {ClassFeatures} from "./classFeatures.js";
+import { ClassFeatures } from "./classFeatures.js";
+import { preLocalize } from "./utils.js";
 
 // Namespace Configuration Values
 export const DND5E = {};
@@ -26,6 +27,7 @@ DND5E.abilities = {
   wis: "DND5E.AbilityWis",
   cha: "DND5E.AbilityCha"
 };
+preLocalize("abilities");
 
 /**
  * Localized abbreviations for Ability Scores.
@@ -39,6 +41,7 @@ DND5E.abilityAbbreviations = {
   wis: "DND5E.AbilityWisAbbr",
   cha: "DND5E.AbilityChaAbbr"
 };
+preLocalize("abilityAbbreviations", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -57,6 +60,7 @@ DND5E.alignments = {
   ne: "DND5E.AlignmentNE",
   ce: "DND5E.AlignmentCE"
 };
+preLocalize("alignments");
 
 /* -------------------------------------------- */
 
@@ -90,6 +94,7 @@ DND5E.weaponProficiencies = {
   sim: "DND5E.WeaponSimpleProficiency",
   mar: "DND5E.WeaponMartialProficiency"
 };
+preLocalize("weaponProficiencies");
 
 /**
  * A mapping between `DND5E.weaponTypes` and `DND5E.weaponProficiencies` that
@@ -161,6 +166,7 @@ DND5E.toolTypes = {
   game: "DND5E.ToolGamingSet",
   music: "DND5E.ToolMusicalInstrument"
 };
+preLocalize("toolTypes", { sort: true });
 
 /**
  * The categories of tool proficiencies that a character can gain.
@@ -171,6 +177,7 @@ DND5E.toolProficiencies = {
   ...DND5E.toolTypes,
   vehicle: "DND5E.ToolVehicle"
 };
+preLocalize("toolProficiencies", { sort: true });
 
 /**
  * The basic tool types in 5e. This enables specific tool proficiencies or
@@ -234,6 +241,7 @@ DND5E.timePeriods = {
   perm: "DND5E.TimePerm",
   spec: "DND5E.Special"
 };
+preLocalize("timePeriods");
 
 /* -------------------------------------------- */
 
@@ -254,6 +262,7 @@ DND5E.abilityActivationTypes = {
   lair: "DND5E.LairActionLabel",
   crew: "DND5E.VehicleCrewAction"
 };
+preLocalize("abilityActivationTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -267,6 +276,7 @@ DND5E.abilityConsumptionTypes = {
   material: "DND5E.ConsumeMaterial",
   charges: "DND5E.ConsumeCharges"
 };
+preLocalize("abilityConsumptionTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -282,6 +292,7 @@ DND5E.actorSizes = {
   huge: "DND5E.SizeHuge",
   grg: "DND5E.SizeGargantuan"
 };
+preLocalize("actorSizes", { sort: true });
 
 /**
  * Default token image size for the values of `DND5E.actorSizes`.
@@ -348,6 +359,7 @@ DND5E.itemActionTypes = {
   util: "DND5E.ActionUtil",
   other: "DND5E.ActionOther"
 };
+preLocalize("itemActionTypes");
 
 /* -------------------------------------------- */
 
@@ -374,6 +386,7 @@ DND5E.itemRarity = {
   legendary: "DND5E.ItemRarityLegendary",
   artifact: "DND5E.ItemRarityArtifact"
 };
+preLocalize("itemRarity");
 
 /* -------------------------------------------- */
 
@@ -387,6 +400,7 @@ DND5E.limitedUsePeriods = {
   day: "DND5E.Day",
   charges: "DND5E.Charges"
 };
+preLocalize("limitedUsePeriods");
 
 /* -------------------------------------------- */
 
@@ -401,6 +415,7 @@ DND5E.armorTypes = {
   natural: "DND5E.EquipmentNatural",
   shield: "DND5E.EquipmentShield"
 };
+preLocalize("armorTypes");
 
 /* -------------------------------------------- */
 
@@ -413,6 +428,7 @@ DND5E.miscEquipmentTypes = {
   trinket: "DND5E.EquipmentTrinket",
   vehicle: "DND5E.EquipmentVehicle"
 };
+preLocalize("miscEquipmentTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -424,6 +440,7 @@ DND5E.equipmentTypes = {
   ...DND5E.miscEquipmentTypes,
   ...DND5E.armorTypes
 };
+preLocalize("equipmentTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -436,6 +453,7 @@ DND5E.vehicleTypes = {
   land: "DND5E.VehicleTypeLand",
   water: "DND5E.VehicleTypeWater"
 };
+preLocalize("vehicleTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -449,6 +467,7 @@ DND5E.armorProficiencies = {
   hvy: DND5E.equipmentTypes.heavy,
   shl: "DND5E.EquipmentShieldProficiency"
 };
+preLocalize("armorProficiencies");
 
 /**
  * A mapping between `DND5E.equipmentTypes` and `DND5E.armorProficiencies` that
@@ -529,6 +548,7 @@ DND5E.armorClasses = {
     label: "DND5E.ArmorClassCustom"
   }
 };
+preLocalize("armorClasses", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -546,6 +566,7 @@ DND5E.consumableTypes = {
   rod: "DND5E.ConsumableRod",
   trinket: "DND5E.ConsumableTrinket"
 };
+preLocalize("consumableTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -583,6 +604,7 @@ DND5E.currencies = {
     conversion: {into: "sp", each: 10}
   }
 };
+preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
 
@@ -605,6 +627,7 @@ DND5E.damageTypes = {
   slashing: "DND5E.DamageSlashing",
   thunder: "DND5E.DamageThunder"
 };
+preLocalize("damageTypes", { sort: true });
 
 /**
  * Types of damage to which an actor can possess resistance, immunity, or vulnerability.
@@ -614,6 +637,7 @@ DND5E.damageResistanceTypes = {
   ...DND5E.damageTypes,
   physical: "DND5E.DamagePhysical"
 };
+preLocalize("damageResistanceTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -629,6 +653,7 @@ DND5E.movementTypes = {
   swim: "DND5E.MovementSwim",
   walk: "DND5E.MovementWalk"
 };
+preLocalize("movementTypes", { sort: true });
 
 /**
  * The valid units of measure for movement distances in the game system.
@@ -641,6 +666,7 @@ DND5E.movementUnits = {
   m: "DND5E.DistM",
   km: "DND5E.DistKm"
 };
+preLocalize("movementUnits");
 
 /**
  * The valid units of measure for the range of an action or effect.
@@ -655,6 +681,7 @@ DND5E.distanceUnits = {
   any: "DND5E.DistAny",
   ...DND5E.movementUnits
 };
+preLocalize("distanceUnits");
 
 /* -------------------------------------------- */
 
@@ -700,6 +727,7 @@ DND5E.targetTypes = {
   line: "DND5E.TargetLine",
   wall: "DND5E.TargetWall"
 };
+preLocalize("targetTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -729,6 +757,7 @@ DND5E.healingTypes = {
   healing: "DND5E.Healing",
   temphp: "DND5E.HealingTemp"
 };
+preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
@@ -750,6 +779,7 @@ DND5E.senses = {
   tremorsense: "DND5E.SenseTremorsense",
   truesight: "DND5E.SenseTruesight"
 };
+preLocalize("senses", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -777,6 +807,7 @@ DND5E.skills = {
   ste: "DND5E.SkillSte",
   sur: "DND5E.SkillSur"
 };
+preLocalize("skills", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -790,6 +821,7 @@ DND5E.spellPreparationModes = {
   atwill: "DND5E.SpellPrepAtWill",
   innate: "DND5E.SpellPrepInnate"
 };
+preLocalize("spellPreparationModes");
 
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
@@ -821,6 +853,7 @@ DND5E.spellScalingModes = {
   cantrip: "DND5E.SpellCantrip",
   level: "DND5E.SpellLevel"
 };
+preLocalize("spellScalingModes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -837,6 +870,7 @@ DND5E.weaponTypes = {
   improv: "DND5E.WeaponImprov",
   siege: "DND5E.WeaponSiege"
 };
+preLocalize("weaponTypes");
 
 /* -------------------------------------------- */
 
@@ -863,6 +897,7 @@ DND5E.weaponProperties = {
   two: "DND5E.WeaponPropertiesTwo",
   ver: "DND5E.WeaponPropertiesVer"
 };
+preLocalize("weaponProperties", { sort: true });
 
 /**
  * Types of components that can be required when casting a spell.
@@ -873,6 +908,7 @@ DND5E.spellComponents = {
   S: "DND5E.ComponentSomatic",
   M: "DND5E.ComponentMaterial"
 };
+preLocalize("spellComponents");
 
 /**
  * Schools to which a spell can belong.
@@ -888,6 +924,7 @@ DND5E.spellSchools = {
   nec: "DND5E.SchoolNec",
   trs: "DND5E.SchoolTrs"
 };
+preLocalize("spellSchools", { sort: true });
 
 /**
  * Valid spell levels.
@@ -905,6 +942,7 @@ DND5E.spellLevels = {
   8: "DND5E.SpellLevel8",
   9: "DND5E.SpellLevel9"
 };
+preLocalize("spellLevels");
 
 /**
  * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
@@ -979,6 +1017,7 @@ DND5E.polymorphSettings = {
   keepBio: "DND5E.PolymorphKeepBio",
   keepVision: "DND5E.PolymorphKeepVision"
 };
+preLocalize("polymorphSettings", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -993,6 +1032,7 @@ DND5E.proficiencyLevels = {
   0.5: "DND5E.HalfProficient",
   2: "DND5E.Expertise"
 };
+preLocalize("proficiencyLevels");
 
 /* -------------------------------------------- */
 
@@ -1007,6 +1047,7 @@ DND5E.cover = {
   .75: "DND5E.CoverThreeQuarters",
   1: "DND5E.CoverTotal"
 };
+preLocalize("cover", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -1056,6 +1097,7 @@ DND5E.conditionTypes = {
   stunned: "DND5E.ConStunned",
   unconscious: "DND5E.ConUnconscious"
 };
+preLocalize("conditionTypes", { sort: true });
 
 /**
  * Languages a character can learn.
@@ -1088,6 +1130,7 @@ DND5E.languages = {
   cant: "DND5E.LanguagesThievesCant",
   undercommon: "DND5E.LanguagesUndercommon"
 };
+preLocalize("languages", { sort: true });
 
 /**
  * XP required to achieve each character level.
