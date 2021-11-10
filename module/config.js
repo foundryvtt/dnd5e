@@ -1257,6 +1257,7 @@ DND5E.characterFlags = {
     placeholder: 0
   }
 };
+preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
 
 /**
  * Flags allowed on actors. Any flags not in the list may be deleted during a migration.
