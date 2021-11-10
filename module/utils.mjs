@@ -231,6 +231,9 @@ function _localizeObject(obj, keys) {
   }
 }
 
+/* -------------------------------------------- */
+/*  Migration                                   */
+/* -------------------------------------------- */
 
 /**
  * Synchronize the spells for all Actors in some collection with source data from an Item compendium pack.
@@ -265,6 +268,8 @@ export async function synchronizeActorSpells(actorPack, spellsPack) {
   await actorPack.configure({locked: true});
   SceneNavigation.displayProgressBar({label: "Synchronizing Spell Data", pct: 100});
 }
+
+/* -------------------------------------------- */
 
 /**
  * A helper function to synchronize spell data for a specific Actor.
