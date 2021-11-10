@@ -34,7 +34,7 @@ export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
 export function performPreLocalization(config) {
   for ( const [key, settings] of Object.entries(_preLocalizationRegistrations) ) {
     _localizeObject(config[key], settings.keys);
-    if ( settings.sort ) _sortObject(config[key], settings.keys[0]);
+    if ( settings.sort ) config[key] = _sortObject(config[key], settings.keys[0]);
   }
 }
 

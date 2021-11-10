@@ -41,7 +41,7 @@ DND5E.abilityAbbreviations = {
   wis: "DND5E.AbilityWisAbbr",
   cha: "DND5E.AbilityChaAbbr"
 };
-preLocalize("abilityAbbreviations", { sort: true });
+preLocalize("abilityAbbreviations");
 
 /* -------------------------------------------- */
 
@@ -83,6 +83,7 @@ DND5E.attunements = {
   1: "DND5E.AttunementRequired",
   2: "DND5E.AttunementAttuned"
 };
+preLocalize("attunements");
 
 /* -------------------------------------------- */
 
@@ -292,7 +293,7 @@ DND5E.actorSizes = {
   huge: "DND5E.SizeHuge",
   grg: "DND5E.SizeGargantuan"
 };
-preLocalize("actorSizes", { sort: true });
+preLocalize("actorSizes");
 
 /**
  * Default token image size for the values of `DND5E.actorSizes`.
@@ -323,6 +324,7 @@ DND5E.tokenHPColors = {
 
 /**
  * Default types of creatures.
+ * *Note: Not pre-localized to allow for easy fetching of pluralized forms.*
  * @enum {string}
  */
 DND5E.creatureTypes = {
@@ -371,6 +373,7 @@ DND5E.itemCapacityTypes = {
   items: "DND5E.ItemContainerCapacityItems",
   weight: "DND5E.ItemContainerCapacityWeight"
 };
+preLocalize("itemCapacityTypes", { sort: true });
 
 /* -------------------------------------------- */
 
@@ -841,6 +844,7 @@ DND5E.spellProgression = {
   pact: "DND5E.SpellProgPact",
   artificer: "DND5E.SpellProgArt"
 };
+preLocalize("spellProgression");
 
 /* -------------------------------------------- */
 
@@ -1047,7 +1051,7 @@ DND5E.cover = {
   .75: "DND5E.CoverThreeQuarters",
   1: "DND5E.CoverTotal"
 };
-preLocalize("cover", { sort: true });
+preLocalize("cover");
 
 /* -------------------------------------------- */
 
