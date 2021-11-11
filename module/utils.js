@@ -7,7 +7,6 @@
  * @param {object} obj        The object to sort.
  * @param {string} [sortKey]  An inner key upon which to sort.
  * @returns {object}          A copy of the original object that has been sorted.
- * @private
  */
 export function sortObject(obj, sortKey) {
   let sorted = Object.entries(obj);
