@@ -633,7 +633,7 @@
       "_id": "Z3lehnNeZEWivGFk",
       "name": "Detect Magic",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
+      "img": "icons/magic/light/explosion-star-blue.webp",
       "data": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
@@ -729,7 +729,7 @@
       "_id": "45L0BCYOXLgO7jsh",
       "name": "Enlarge/Reduce",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/link-blue-2.jpg",
+      "img": "icons/magic/control/energy-stream-link-large-blue.webp",
       "data": {
         "description": {
           "value": "<p>You cause a creature or an object you can see within range to grow larger or smaller for the Duration. Choose either a creature or an object that is neither worn nor carried. If the target is unwilling, it can make a <strong>Constitution</strong> saving throw. On a success, the spell has no effect.</p>\n<p>If the target is a creature, everything it is wearing and carrying changes size with it. Any item dropped by an affected creature returns to normal size at once.</p>\n<p><strong>Enlarge</strong>. The target's size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category—from Medium to Large, for example. If there isn't enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. Until the spell ends, the target also has advantage on Strength Checks and Strength Saving Throws. The target's Weapons also grow to match its new size. While these Weapons are enlarged, the target's attacks with them deal 1d4 extra damage.</p>\n<p><strong>Reduce</strong>. The target's size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category—from Medium to Small, for example. Until the spell ends, the target also has disadvantage on Strength Checks and Strength Saving Throws. The target's Weapons also shrink to match its new size. While these Weapons are reduced, the target's attacks with them deal 1d4 less damage (this can't reduce the damage below 1).</p>",
@@ -920,7 +920,7 @@
       "_id": "gWEMjYhRVIEnKbZH",
       "name": "Conjure Elemental (fire elemental only)",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/runes-orange-3.jpg",
+      "img": "icons/magic/symbols/runes-star-pentagon-orange.webp",
       "data": {
         "description": {
           "value": "<p>You call forth an elemental servant. Choose an area of air, earth, fire, or water that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a fire elemental emerges from a bonfire, and an earth elemental rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends.</p>\n<p>The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions.</p>\n<p>If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.</p>",
@@ -1016,7 +1016,7 @@
       "_id": "twlhthYQ2LFEFrZL",
       "name": "Gaseous Form",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/fog-acid-2.jpg",
+      "img": "icons/magic/air/fog-gas-smoke-dense-green.webp",
       "data": {
         "description": {
           "value": "<p>You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected.</p>\n<p>While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to nonmagical damage, and it has advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated.</p>\n<p>While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.</p>",
@@ -1112,7 +1112,7 @@
       "_id": "oHfYhvrstVQaIp0L",
       "name": "Invisibility",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/fog-sky-2.jpg",
+      "img": "icons/magic/air/fog-gas-smoke-blue-dense-white.webp",
       "data": {
         "description": {
           "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
@@ -1208,7 +1208,7 @@
       "_id": "XxDBVMHqMcyi1Mmy",
       "name": "Major Image",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg",
+      "img": "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
       "data": {
         "description": {
           "value": "<p>You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 20-foot cube. The image appears at a spot that you can see within range and lasts for the duration. It seems completely real, including sounds, smells, and temperature appropriate to the thing depicted. You can't create sufficient heat or cold to cause damage, a sound loud enough to deal thunder damage or deafen a creature, or a smell that might sicken a creature (like a troglodyte's stench).</p><p>As long as you are within range of the illusion, you can use your action to cause the image to move to any other spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Similarly, you can cause the illusion to make different sounds at different times, even making it carry on a conversation, for example.</p><p>Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and its other sensory qualities become faint to the creature.</p>",
@@ -1304,7 +1304,7 @@
       "_id": "WDV3q3WwtulRdlVs",
       "name": "Plane Shift",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/runes-royal-3.jpg",
+      "img": "icons/magic/symbols/runes-star-pentagon-orange-purple.webp",
       "data": {
         "description": {
           "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the DM's discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a <strong>Charisma</strong> saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
@@ -1399,7 +1399,7 @@
       "_id": "cPcHBmgT0kqNEOdR",
       "name": "Wall of Fire",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
+      "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
       "data": {
         "description": {
           "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p>\n<p>When the wall appears, each creature within its area must make a <strong>Dexterity</strong> saving throw. On a failed save, a creature takes 5d8 <em>fire damage</em>, or half as much damage on a successful save.</p>\n<p>One side of the wall, selected by you when you cast this spell, deals 5d8 <em>fire damage</em> to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",

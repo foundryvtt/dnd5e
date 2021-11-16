@@ -559,7 +559,7 @@
       "_id": "gdpkOBvo0Jxb3OVR",
       "name": "Druidcraft",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/vines-jade-1.jpg",
+      "img": "icons/magic/nature/vines-thorned-glow-teal.webp",
       "data": {
         "description": {
           "value": "<p>Whispering to the spirits of Nature, you create one of the following Effects within range:</p>\n<ul>\n<li>You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, Falling snowflakes for snow, and so on. This effect persists for 1 round.</li>\n<li>You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</li>\n<li>You create an Instantaneous, harmless sensory effect, such as Falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.</li>\n<li>You instantly light or snuff out a Candle, a torch, or a small campfire.</li>\n</ul>",
@@ -654,7 +654,7 @@
       "_id": "QwPEzLNW8iVCL7cR",
       "name": "Produce Flame",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/explosion-orange-2.jpg",
+      "img": "icons/magic/fire/explosion-fireball-medium-orange.webp",
       "data": {
         "description": {
           "value": "<p>A flickering flame appears in your hand. The flame remains there for the Duration and harms neither you nor your Equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.</p>\n<p>You can also Attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell Attack. On a hit, the target takes 1d8 <em>fire damage</em>.</p>\n<p>This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
@@ -753,7 +753,7 @@
       "_id": "326YyjtlKmYZh3T3",
       "name": "Entangle",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/vines-acid-2.jpg",
+      "img": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
       "data": {
         "description": {
           "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p>\n<p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p>\n<p>When the spell ends, the conjured Plants wilt away.</p>",
@@ -847,7 +847,7 @@
       "_id": "BdApmAz4M3id4rnL",
       "name": "Longstrider",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wind-sky-1.jpg",
+      "img": "icons/magic/air/wind-stream-blue-gray.webp",
       "data": {
         "description": {
           "value": "<p>You touch a creature. The target's speed increases by 10 feet until the spell ends.</p>",
@@ -942,7 +942,7 @@
       "_id": "lXZnkgspOXxSoLPF",
       "name": "Speak with Animals",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wild-jade-1.jpg",
+      "img": "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
       "data": {
         "description": {
           "value": "<p>You gain the ability to comprehend and verbally communicate with beasts for the duration. The knowledge and awareness of many beasts is limited by their intelligence, but at minimum, beasts can give you information about nearby locations and monsters, including whatever they can perceive or have perceived within the past day. You might be able to persuade a beast to perform a small favor for you, at the DM's discretion.</p>",
@@ -1037,7 +1037,7 @@
       "_id": "2ZxbeICwcq94lFTU",
       "name": "Thunderwave",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
+      "img": "icons/magic/lightning/bolt-forked-teal.webp",
       "data": {
         "description": {
           "value": "<p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a <strong>Constitution</strong> saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.</p>\n<p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</p>",
@@ -1135,7 +1135,7 @@
       "_id": "6DpP5JZ3gznrULif",
       "name": "Animal Messenger",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/wild-jade-1.jpg",
+      "img": "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
       "data": {
         "description": {
           "value": "<p>By means of this spell, you use an animal to deliver a message. Choose a Tiny beast you can see within range, such as a squirrel, a blue jay, or a bat. You specify a location, which you must have visited, and a recipient who matches a general description, such as \"a man or woman dressed in the uniform of the town guard\" or \"a red-haired dwarf wearing a pointed hat.\" You also speak a message of up to twenty-five words. The target beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger, or 25 miles for other animals.</p>\n<p>When the messenger arrives, it delivers your message to the creature that you described, replicating the sound of your voice. The messenger speaks only to a creature matching the description you gave. If the messenger doesn't reach its destination before the spell ends, the message is lost, and the beast makes its way back to where you cast this spell.</p>\n<p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 3rd level or higher, the duration of the spell increases by 48 hours for each slot level above 2nd.</p>",
@@ -1230,7 +1230,7 @@
       "_id": "PHcdIFirPgGkjSV7",
       "name": "Shillelagh",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/enchant-jade-1.jpg",
+      "img": "icons/magic/fire/dagger-rune-enchant-teal.webp",
       "data": {
         "description": {
           "value": "<p>The wood of a club or quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon.</p>",
@@ -1334,7 +1334,7 @@
       "_id": "xf9PRKOZJ3jjwouV",
       "name": "Barkskin",
       "type": "spell",
-      "img": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
       "data": {
         "description": {
           "value": "<p>You touch a willing creature. Until the spell ends, the target's skin has a rough, bark-like appearance, and the target's AC can't be less than 16, regardless of what kind of armor it is wearing.</p>",
