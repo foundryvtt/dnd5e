@@ -62,8 +62,7 @@
                 </div>
             </div>
 
-            {{#if data.subclass}}
-            {{else}}
+            {{#unless data.subclass}}
             <div class="form-group">
                 <input type="text" name="data.subclassOther" value="{{data.subclassOther}}"/>
             </div>
