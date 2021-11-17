@@ -85,7 +85,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.data = itemData.data;
 
     // if item is a class, get the Subclass data
-    if(data.itemType === "Class" && data.config.classFeatures[itemData.name.toLowerCase()]) {
+    if(data.itemType === "Class" && data.config.classFeatures[itemData.name.slugify()]) {
       data.subclass = this._getSubclasses(itemData);
     }
 
@@ -102,7 +102,7 @@ export default class ItemSheet5e extends ItemSheet {
    * @protected
    */
   _getSubclasses(item){
-    const configSubclasses = CONFIG.DND5E.classFeatures[item.name.toLowerCase()].subclasses
+    const configSubclasses = CONFIG.DND5E.classFeatures[item.name.slugify()].subclasses
     const subclasses = [];
     for (const property in configSubclasses){
       subclasses.push({
