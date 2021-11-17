@@ -51,9 +51,23 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.SubclassName" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.subclass" value="{{data.subclass}}"/>
+                    <select name="data.subclass">
+                        {{#select data.subclass}}
+                        {{#each subclass}}
+                        <option value="{{this.id}}">{{this.label}}</option>
+                        {{/each}}
+                        <option value="">{{localize "DND5E.ActionOther"}}</option>
+                        {{/select}}
+                    </select>
                 </div>
             </div>
+
+            {{#if data.subclass}}
+            {{else}}
+            <div class="form-group">
+                <input type="text" name="data.subclassOther" value="{{data.subclassOther}}"/>
+            </div>
+            {{/if}}
 
             {{!-- Class Hit Dice --}}
             <div class="form-group">

@@ -181,6 +181,9 @@ export default class Item5e extends Item {
     // Classes
     if ( itemData.type === "class" ) {
       data.levels = Math.clamped(data.levels, 1, 20);
+
+      // Sets the label for the subclass
+      this.data.data.subclassName = this.data.data.subclass ? CONFIG.DND5E.classFeatures[itemData.name.toLowerCase()]?.subclasses[this.data.data.subclass]?.label : this.data.data.subclassOther;
     }
 
     // Spell Level,  School, and Components
