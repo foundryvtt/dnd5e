@@ -66,8 +66,9 @@ export default class Actor5e extends Actor {
   prepareBaseData() {
     const updates = {};
     this._prepareBaseAbilities(this.data, updates);
-    this._prepareBaseArmorClass(this.data);
     if ( !foundry.utils.isObjectEmpty(updates) ) this.data.update(updates);
+
+    this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
       case "character":
         return this._prepareCharacterData(this.data);
@@ -310,15 +311,6 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Default ability score entry as defined in template.json.
-   * @type {object}
-   * @private
-   */
-  static get _emptyAbility() {
-    return foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
-  }
-
-  /**
    * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
    * @param {ActorData} actorData  Data being prepared.
    * @param {object} updates       Updates to be applied to the actor. *Will be mutated*.
@@ -326,9 +318,10 @@ export default class Actor5e extends Actor {
    */
   _prepareBaseAbilities(actorData, updates) {
     const abilities = {};
+    const emptyAbility = game.system.template.Actor.templates.common.abilities.cha;
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = actorData.data.abilities[key];
-      if ( !abilities[key] ) updates[`data.abilities.${key}`] = Actor5e._emptyAbility;
+      if ( !abilities[key] ) updates[`data.abilities.${key}`] = foundry.utils.deepClone(emptyAbility);
     }
     actorData.data.abilities = abilities;
   }
