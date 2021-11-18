@@ -23,6 +23,7 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": "self"
     },
@@ -33,13 +34,12 @@
     },
     "uses": {
       "value": 1,
-      "max": 1,
-      "per": "lr",
-      "type": ""
+      "max": "1",
+      "per": "lr"
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
@@ -57,37 +57,18 @@
           "healing"
         ]
       ],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Half-Orc",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "featType": {
-      "value": "ability",
-      "_deprecated": true,
-      "type": "String",
-      "label": "Feat Type"
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
-    },
-    "attributes": {
-      "spelldc": 10
     }
   },
   "flags": {},

@@ -23,6 +23,7 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
@@ -32,14 +33,13 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": "",
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
@@ -52,40 +52,42 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Rock Gnome",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "featType": {
-      "value": "passive",
-      "_deprecated": true,
-      "type": "String",
-      "label": "Feat Type"
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
-    },
-    "attributes": {
-      "spelldc": 10
     }
   },
   "flags": {},
   "img": "icons/commodities/tech/cog-steel.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "CkQlNsLyTZGVbnKM",
+      "changes": [
+        {
+          "key": "data.traits.toolProf.value",
+          "mode": 2,
+          "value": "tinker"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/commodities/tech/cog-steel.webp",
+      "label": "Tinker",
+      "origin": "Item.koRPOLtj8XAFMwnW",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }
