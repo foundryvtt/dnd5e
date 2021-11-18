@@ -686,12 +686,9 @@ export default class Item5e extends Item {
         quantity = resource ? resource.data.data.quantity : 0;
         break;
       case "hitDice":
-        let denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
-        resource = Object.values(actor.classes).filter(item => !denom || (item.data.data.hitDice === denom));
-        quantity = resource.reduce((count, cls) => {
-          count += cls.data.data.levels - cls.data.data.hitDiceUsed;
-          return count;
-        }, 0);
+        const denom = !["smallest", "largest"].includes(consume.target) ? consume.target : false;
+        resource = Object.values(actor.classes).filter(cls => !denom || (cls.data.data.hitDice === denom));
+        quantity = resource.reduce((count, cls) => count + cls.data.data.levels - cls.data.data.hitDiceUsed, 0);
         break;
       case "charges":
         resource = actor.items.get(consume.target);
@@ -729,15 +726,15 @@ export default class Item5e extends Item {
         break;
       case "hitDice":
         if ( ["smallest", "largest"].includes(consume.target) ) resource = resource.sort((lhs, rhs) => {
-          let sort = lhs.data.data.hitDice.localeCompare(rhs.data.data.hitDice, undefined, {numeric: true});
-          if ( consume.target === "largest" ) sort = sort * -1;
+          let sort = lhs.data.data.hitDice.localeCompare(rhs.data.data.hitDice, "en", {numeric: true});
+          if ( consume.target === "largest" ) sort *= -1;
           return sort;
         });
         let toConsume = consume.amount;
         for ( const cls of resource ) {
           const d = cls.data.data;
-          const space = (toConsume > 0 ? d.levels : 0) - d.hitDiceUsed;
-          const delta = toConsume > 0 ? Math.min(toConsume, space) : Math.max(toConsume, space);
+          const available = (toConsume > 0 ? d.levels : 0) - d.hitDiceUsed;
+          const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
           if ( delta !== 0 ) {
             resourceUpdates.push({_id: cls.id, "data.hitDiceUsed": d.hitDiceUsed + delta});
             toConsume -= delta;
@@ -748,7 +745,7 @@ export default class Item5e extends Item {
       case "charges":
         const uses = resource.data.data.uses || {};
         const recharge = resource.data.data.recharge || {};
-        let data = {_id: consume.target};
+        const data = {_id: consume.target};
         if ( uses.per && uses.max ) data["data.uses.value"] = remaining;
         else if ( recharge.value ) data["data.recharge.charged"] = false;
         resourceUpdates.push(data);
