@@ -321,7 +321,19 @@ export default class Actor5e extends Actor {
     const emptyAbility = game.system.template.Actor.templates.common.abilities.cha;
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = actorData.data.abilities[key];
-      if ( !abilities[key] ) updates[`data.abilities.${key}`] = foundry.utils.deepClone(emptyAbility);
+      if ( !abilities[key] ) {
+        const newAbility = foundry.utils.deepClone(emptyAbility);
+
+        // Honor & Sanity default to Charisma & Wisdom for NPCs and 0 for vehicles
+        if ( actorData.type === "npc" ) {
+          if ( key === "hon" ) newAbility.value = actorData.data.abilities.cha?.value ?? 10;
+          else if ( key === "san" ) newAbility.value = actorData.data.abilities.wis?.value ?? 10;
+        } else if ( actorData.type === "vehicle" && ["hon", "san"].includes(key) ) {
+          newAbility.value = 0;
+        }
+
+        updates[`data.abilities.${key}`] = newAbility;
+      }
     }
     actorData.data.abilities = abilities;
   }
