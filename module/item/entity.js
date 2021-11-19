@@ -550,7 +550,7 @@ export default class Item5e extends Item {
     if ( !foundry.utils.isObjectEmpty(itemUpdates) ) await item.update(itemUpdates);
     if ( consumeQuantity && (item.data.data.quantity === 0) ) await item.delete();
     if ( !foundry.utils.isObjectEmpty(actorUpdates) ) await actor.update(actorUpdates);
-    if ( resourceUpdates.length > 0 ) await actor.updateEmbeddedDocuments("Item", resourceUpdates);
+    if ( resourceUpdates.length ) await actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Initiate measured template creation
     if ( createMeasuredTemplate ) {
@@ -1045,7 +1045,7 @@ export default class Item5e extends Item {
     if ( roll === false ) return null;
 
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammo && ammoUpdate.length > 0 ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
+    if ( ammo && ammoUpdate.length ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
     return roll;
   }
 
