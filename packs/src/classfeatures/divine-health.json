@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Paladin 3",
@@ -65,5 +67,26 @@
   },
   "flags": {},
   "img": "icons/magic/life/cross-worn-green.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "RjX1etQhr8M2TBgv",
+      "changes": [
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "diseased"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/life/cross-worn-green.webp",
+      "label": "Divine Health",
+      "origin": "Item.dY9yrqkyEDuF0CG2",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

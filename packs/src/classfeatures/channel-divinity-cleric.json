@@ -34,8 +34,12 @@
     "uses": {
       "value": 1,
       "max": "@classes.cleric.levels > 17 ? 3 : @classes.cleric.levels > 5 ? 2 : 1",
-      "per": "sr",
-      "type": ""
+      "per": "sr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,15 +51,13 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Cleric 2",
     "recharge": {
