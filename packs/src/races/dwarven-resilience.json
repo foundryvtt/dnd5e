@@ -18,24 +18,24 @@
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
     },
     "consume": {
       "type": "",
@@ -52,40 +52,42 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Dwarf",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "featType": {
-      "value": "passive",
-      "_deprecated": true,
-      "type": "String",
-      "label": "Feat Type"
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
-    },
-    "attributes": {
-      "spelldc": 10
     }
   },
   "flags": {},
   "img": "icons/creatures/abilities/stinger-poison-green.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "hIaIpLxcMZSY3qXi",
+      "changes": [
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "poison"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/creatures/abilities/stinger-poison-green.webp",
+      "label": "Dwarven Resilience",
+      "origin": "Item.ufysTkqet2Ctmtyi",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

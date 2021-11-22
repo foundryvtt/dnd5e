@@ -18,22 +18,23 @@
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": "",
       "per": null
     },
     "consume": {
@@ -51,37 +52,18 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Dwarf",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "featType": {
-      "value": "passive",
-      "_deprecated": true,
-      "type": "String",
-      "label": "Feat Type"
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
-    },
-    "attributes": {
-      "spelldc": 10
     }
   },
   "flags": {},
