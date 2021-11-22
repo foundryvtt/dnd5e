@@ -2,7 +2,7 @@
   <p class="notes">{{localize "DND5E.SkillConfigurationHint"}}</p>
   <div class="form-group">
     <label>{{ localize "DND5E.ProficiencyLevel" }}</label>
-    <select name="system.skills.{{skillId}}.value">
+    <select name="system.skills.{{skillId}}.value" data-dtype="Number">
       {{selectOptions proficiencyLevels selected=skill.value}}
     </select>
   </div>
