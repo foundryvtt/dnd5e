@@ -1525,15 +1525,16 @@ export default class Item5e extends Item {
 
     // Check to make sure the updated class level doesn't exceed either cap
     if ( (this.type === "class") && changed.data?.levels ) {
-      if ( changed.data.levels > CONFIG.DND5E.maxClassLevel ) {
-        ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxClassLevel}));
-        changed.data.levels = CONFIG.DND5E.maxClassLevel;
+      if ( changed.data.levels > CONFIG.DND5E.maxLevel ) {
+        ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
+        changed.data.levels = CONFIG.DND5E.maxLevel;
       }
       if ( !this.isEmbedded || (this.parent.type !== "character") ) return;
       const newCharacterLevel = this.actor.data.data.details.level + (changed.data.levels - this.data.data.levels);
-      if ( newCharacterLevel > CONFIG.DND5E.maxCharacterLevel ) {
-        ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxCharacterLevel}));
-        changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.maxCharacterLevel);
+      if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
+        ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
+          {max: CONFIG.DND5E.maxLevel}));
+        changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.maxLevel);
       }
     }
   }
