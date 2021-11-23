@@ -1523,7 +1523,7 @@ export default class Item5e extends Item {
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
 
-    // Check to make sure the updated class level doesn't exceed either cap
+    // Check to make sure the updated class level doesn't exceed level cap
     if ( (this.type === "class") && changed.data?.levels ) {
       if ( changed.data.levels > CONFIG.DND5E.maxLevel ) {
         ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));

@@ -278,16 +278,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
-      if ( this.actor.data.data.details.level + 1 > CONFIG.DND5E.maxLevel ) {
-        return ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
-          {max: CONFIG.DND5E.maxLevel}));
-      }
+      itemData.data.levels = Math.min(itemData.data.levels,
+        CONFIG.DND5E.maxLevel - this.actor.data.data.details.level);
+      if ( itemData.data.levels <= 0 ) return ui.notifications.warn(
+        game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel})
+      );
+
       const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
       let priorLevel = cls?.data.data.levels ?? 0;
-      if ( cls ) {
-        itemData.levels = priorLevel + 1;
-        return cls.update({"data.levels": itemData.levels});
-      }
+      if ( cls ) return cls.update({"data.levels": priorLevel + itemData.data.levels});
     }
 
     // Default drop handling if levels were not added
