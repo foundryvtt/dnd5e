@@ -32,14 +32,18 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
     },
     "consume": {
       "type": "",
       "target": null,
+      "amount": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
       "amount": null
     },
     "ability": "",
@@ -52,15 +56,13 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "The Fiend 1",
     "recharge": {

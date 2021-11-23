@@ -32,9 +32,14 @@
       "units": "self"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "dex",
     "actionType": "",
@@ -46,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Ranger 10",
@@ -64,5 +67,26 @@
   },
   "flags": {},
   "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "7if4vIkT84Sw2zFm",
+      "changes": [
+        {
+          "key": "data.skills.ste.bonuses.check",
+          "mode": 2,
+          "value": "+10"
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/nature/stealth-hide-eyes-green.webp",
+      "label": "Hide in Plain Sight",
+      "origin": "Item.r0unvWK0lPsDthDx",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

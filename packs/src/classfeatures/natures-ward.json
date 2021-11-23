@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Circle of the Land 10",
@@ -65,5 +67,31 @@
   },
   "flags": {},
   "img": "icons/commodities/flowers/lotus-pink.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "Jxpz4MZmgTy7z7cm",
+      "changes": [
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "diseased"
+        },
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "poisoned"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/commodities/flowers/lotus-pink.webp",
+      "label": "Nature's Ward",
+      "origin": "Item.OTvrJSJSUgAwXrWX",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

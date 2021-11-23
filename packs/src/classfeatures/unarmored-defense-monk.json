@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Monk 1",
@@ -65,5 +67,26 @@
   },
   "flags": {},
   "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "R5ro4AuNjcdWD56O",
+      "changes": [
+        {
+          "key": "data.attributes.ac.calc",
+          "mode": 5,
+          "value": "unarmoredMonk"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "label": "Unarmored Defense",
+      "origin": "Item.cOdcNWy4hII029DT",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }
