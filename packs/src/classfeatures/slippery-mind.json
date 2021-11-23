@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Rogue 15",
@@ -65,5 +67,26 @@
   },
   "flags": {},
   "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "hNWumbfvMxXQI21x",
+      "changes": [
+        {
+          "key": "data.abilities.wis.proficient",
+          "mode": 5,
+          "value": "1"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+      "label": "Slippery Mind",
+      "origin": "Item.V4pwFxlwHtNeB4w9",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }
