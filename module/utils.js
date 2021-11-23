@@ -37,7 +37,7 @@ const _preLocalizationRegistrations = {};
  * @param {boolean} [options.sort=false]  Sort this config enum, using the key if set.
  */
 export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
-  if ( key ) keys.splice(0, 0, key);
+  if ( key ) keys.unshift(key);
   _preLocalizationRegistrations[configKey] = { keys, sort };
 }
 
@@ -76,7 +76,7 @@ function _localizeObject(obj, keys) {
       ));
       continue;
     }
-    if ( !keys || (keys.length === 0) ) {
+    if ( !keys?.length ) {
       console.error(new Error(
         "Localization keys must be provided for pre-localizing when target is an object."
       ));
