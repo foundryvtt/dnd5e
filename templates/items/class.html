@@ -47,11 +47,14 @@
                 </div>
             </div>
 
-            {{!-- Subclass Name --}}
+            {{!-- Subclass --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.SubclassName" }}</label>
+                <label>
+                    {{#if data.subclass.label}}{{data.subclass.label}}
+                    {{else}}{{ localize "DND5E.SubclassName" }}{{/if}}
+                </label>
                 <div class="form-fields">
-                    <input type="text" name="data.subclass" value="{{data.subclass}}"/>
+                    <input type="text" name="data.subclass.selected" value="{{data.subclass.selected}}"/>
                 </div>
             </div>
 
