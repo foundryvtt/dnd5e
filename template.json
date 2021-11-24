@@ -500,7 +500,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -584,6 +584,29 @@
       }
     },
     "htmlFields": ["description.value", "description.chat", "description.unidentified"],
+    "background": {
+      "templates": ["itemDescription"],
+      "feature": null,
+      "traits": {
+        "languages": {
+          "grants": [],
+          "choices": [],
+          "value": []
+        },
+        "skills": {
+          "grants": [],
+          "choices": [],
+          "allowReplacements": true,
+          "value": []
+        },
+        "tool": {
+          "grants": [],
+          "choices": [],
+          "allowReplacements": true,
+          "value": []
+        }
+      }
+    },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
