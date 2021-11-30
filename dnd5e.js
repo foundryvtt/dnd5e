@@ -16,7 +16,6 @@ import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances } from "./module/canvas.js";
 
 // Import Data Definitions
-import * as ActorData5e from "./module/actor/data.js";
 import * as ItemData5e from "./module/item/data.js";
 
 // Import Documents
@@ -89,7 +88,6 @@ Hooks.once("init", function() {
     },
     config: DND5E,
     data: {
-      ...ActorData5e,
       ...ItemData5e
     },
     dice,

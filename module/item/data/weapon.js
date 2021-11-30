@@ -1,6 +1,6 @@
 import { DocumentData } from "/common/abstract/module.mjs";
 import * as fields from "/common/data/fields.mjs";
-import { defaultData, mergeObjects } from "./base.js";
+import { defaultData, mergeObjects } from "./common.js";
 import * as common from "./common.js";
 
 
