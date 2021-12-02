@@ -1,4 +1,3 @@
-import { sortObject } from "../utils.js";
 import TraitSelector from "./trait-selector.js";
 
 /**
@@ -91,12 +90,12 @@ export default class ProficiencySelector extends TraitSelector {
         obj[key] = { label: label, chosen: chosen.includes(key) };
         return obj;
       }, {});
-      data = sortObject(data, "label");
+      data = game.dnd5e.utils.sortObjectEntries(data, "label");
     }
 
     for ( const category of Object.values(data) ) {
       if ( !category.children ) continue;
-      category.children = sortObject(category.children, "label");
+      category.children = game.dnd5e.utils.sortObjectEntries(category.children, "label");
     }
 
     return data;

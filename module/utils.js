@@ -8,7 +8,7 @@
  * @param {string} [sortKey]  An inner key upon which to sort.
  * @returns {object}          A copy of the original object that has been sorted.
  */
-export function sortObject(obj, sortKey) {
+export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
   if ( sortKey ) sorted = sorted.sort((a, b) => a[1][sortKey].localeCompare(b[1][sortKey]));
   else sorted = sorted.sort((a, b) => a[1].localeCompare(b[1]));
@@ -50,7 +50,7 @@ export function preLocalize(configKey, { key, keys=[], sort=false }={}) {
 export function performPreLocalization(config) {
   for ( const [key, settings] of Object.entries(_preLocalizationRegistrations) ) {
     _localizeObject(config[key], settings.keys);
-    if ( settings.sort ) config[key] = sortObject(config[key], settings.keys[0]);
+    if ( settings.sort ) config[key] = sortObjectEntries(config[key], settings.keys[0]);
   }
 }
 

@@ -19,7 +19,7 @@
             <label>{{flag.name}}</label>
 
             {{#if flag.isCheckbox}}
-            <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked flag.value}}/>
+            <input type="checkbox" name="{{key}}" {{checked flag.value}}/>
 
             {{else if flag.isSelect}}
             <select name="{{key}}" data-dtype="{{flag.type}}">

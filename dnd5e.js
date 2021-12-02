@@ -23,15 +23,23 @@ import { TokenDocument5e, Token5e } from "./module/token.js";
 // Import Applications
 import AbilityTemplate from "./module/pixi/ability-template.js";
 import AbilityUseDialog from "./module/apps/ability-use-dialog.js";
+import ActorAbilityConfig from "./module/apps/ability-config.js";
+import ActorArmorConfig from "./module/apps/actor-armor.js";
+import ActorHitDiceConfig from "./module/apps/hit-dice-config.js";
+import ActorMovementConfig from "./module/apps/movement-config.js";
+import ActorSensesConfig from "./module/apps/senses-config.js";
 import ActorSheetFlags from "./module/apps/actor-flags.js";
 import ActorSheet5eCharacter from "./module/actor/sheets/character.js";
 import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
 import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
+import ActorSkillConfig from "./module/apps/skill-config.js";
+import ActorTypeConfig from "./module/apps/actor-type.js";
 import ItemSheet5e from "./module/item/sheet.js";
+import LongRestDialog from "./module/apps/long-rest.js";
+import ProficiencySelector from "./module/apps/proficiency-selector.js";
+import SelectItemsPrompt from "./module/apps/select-items-prompt.js";
 import ShortRestDialog from "./module/apps/short-rest.js";
 import TraitSelector from "./module/apps/trait-selector.js";
-import ActorMovementConfig from "./module/apps/movement-config.js";
-import ActorSensesConfig from "./module/apps/senses-config.js";
 
 // Import Helpers
 import * as chat from "./module/chat.js";
@@ -40,8 +48,6 @@ import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
 import * as utils from "./module/utils.js";
 import ActiveEffect5e from "./module/active-effect.js";
-import ActorAbilityConfig from "./module/apps/ability-config.js";
-import ActorSkillConfig from "./module/apps/skill-config.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -54,33 +60,39 @@ Hooks.once("init", function() {
   game.dnd5e = {
     applications: {
       AbilityUseDialog,
+      ActorAbilityConfig,
+      ActorArmorConfig,
+      ActorHitDiceConfig,
+      ActorMovementConfig,
+      ActorSensesConfig,
       ActorSheetFlags,
       ActorSheet5eCharacter,
       ActorSheet5eNPC,
       ActorSheet5eVehicle,
+      ActorSkillConfig,
+      ActorTypeConfig,
       ItemSheet5e,
+      LongRestDialog,
+      ProficiencySelector,
+      SelectItemsPrompt,
       ShortRestDialog,
-      TraitSelector,
-      ActorMovementConfig,
-      ActorSensesConfig,
-      ActorAbilityConfig,
-      ActorSkillConfig
+      TraitSelector
     },
     canvas: {
       AbilityTemplate
     },
     config: DND5E,
-    dice: dice,
+    dice,
     entities: {
       Actor5e,
       Item5e,
       TokenDocument5e,
       Token5e
     },
-    macros: macros,
-    migrations: migrations,
+    macros,
+    migrations,
     rollItemMacro: macros.rollItemMacro,
-    utils: utils,
+    utils,
     isV9: !foundry.utils.isNewerVersion("9.224", game.version ?? game.data.version)
   };
 
