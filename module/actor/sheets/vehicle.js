@@ -9,9 +9,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /** @inheritdoc */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "vehicle"],
-      width: 720,
-      height: Math.max(680, 237 + (Object.keys(CONFIG.DND5E.abilities).length * 70))
+      classes: ["dnd5e", "sheet", "actor", "vehicle"]
     });
   }
 

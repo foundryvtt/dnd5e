@@ -46,7 +46,9 @@ export default class ActorSheet5e extends ActorSheet {
         ".spellbook .inventory-list",
         ".effects .inventory-list"
       ],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
+      width: 720,
+      height: Math.max(680, 237 + (Object.keys(CONFIG.DND5E.abilities).length * 70))
     });
   }
 
