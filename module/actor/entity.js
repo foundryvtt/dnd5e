@@ -32,7 +32,7 @@ export default class Actor5e extends Actor {
     if ( this._classes !== undefined ) return this._classes;
     if ( !["character", "npc"].includes(this.data.type) ) return this._classes = {};
     return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
-      obj[cls.identity] = cls;
+      obj[cls.identifier] = cls;
       return obj;
     }, {});
   }
@@ -242,14 +242,14 @@ export default class Actor5e extends Actor {
    * Get a list of features to add to the Actor when a class item is updated.
    * Optionally prompt the user for which they would like to add.
    * @param {object} [options]
-   * @param {string} [options.classIdentity] Identity slug of the class if it has been changed.
-   * @param {string} [options.subclassName]  Name of the selected subclass if it has been changed.
-   * @param {number} [options.level]         New class level if it has been changed.
-   * @returns {Promise<Item5e[]>}            Any new items that should be added to the actor.
+   * @param {string} [options.classIdentifier] Identifier slug of the class if it has been changed.
+   * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
+   * @param {number} [options.level]           New class level if it has been changed.
+   * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
    */
-  async getClassFeatures({classIdentity, subclassName, level}={}) {
+  async getClassFeatures({classIdentifier, subclassName, level}={}) {
     const existing = new Set(this.items.map(i => i.name));
-    const features = await Actor5e.loadClassFeatures({classIdentity, subclassName, level});
+    const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
     return features.filter(f => !existing.has(f.name)) || [];
   }
 
@@ -258,17 +258,17 @@ export default class Actor5e extends Actor {
   /**
    * Return the features which a character is awarded for each class level.
    * @param {object} [options]
-   * @param {string} [options.classIdentity] Identity slug of the class being added or updated.
-   * @param {string} [options.subclassName]  Name of the subclass of the class being added, if any.
-   * @param {number} [options.level]         The number of levels in the added class.
-   * @param {number} [options.priorLevel]    The previous level of the added class.
-   * @returns {Promise<Item5e[]>}            Items that should be added based on the changes made.
+   * @param {string} [options.classIdentifier] Identifier slug of the class being added or updated.
+   * @param {string} [options.subclassName]    Name of the subclass of the class being added, if any.
+   * @param {number} [options.level]           The number of levels in the added class.
+   * @param {number} [options.priorLevel]      The previous level of the added class.
+   * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
    */
-  static async loadClassFeatures({classIdentity="", subclassName="", level=1, priorLevel=0}={}) {
+  static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
-    const clsConfig = CONFIG.DND5E.classFeatures[classIdentity];
+    const clsConfig = CONFIG.DND5E.classFeatures[classIdentifier];
     if (!clsConfig) return [];
 
     // Acquire class features

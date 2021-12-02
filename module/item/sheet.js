@@ -302,20 +302,20 @@ export default class ItemSheet5e extends ItemSheet {
       if ( !maxRoll.isDeterministic ) {
         data.data.uses.max = this.object.data._source.data.uses.max;
         this.form.querySelector("input[name='data.uses.max']").value = data.data.uses.max;
-        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
+        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
         }));
       }
     }
 
-    // Check class identity
-    if ( this.object.type === "class" && data.data.identity !== "" ) {
+    // Check class identifier
+    if ( this.object.type === "class" && data.data.identifier !== "" ) {
       const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
-      const match = data.data.identity.match(dataRgx);
+      const match = data.data.identifier.match(dataRgx);
       if ( !match ) {
-        data.data.identity = this.object.data._source.data.identity;
-        this.form.querySelector("input[name='data.identity']").value = data.data.identity;
-        ui.notifications.error(game.i18n.localize("DND5E.ClassIdentityWarn"));
+        data.data.identifier = this.object.data._source.data.identifier;
+        this.form.querySelector("input[name='data.identifier']").value = data.data.identifier;
+        return ui.notifications.error(game.i18n.localize("DND5E.ClassIdentifierError"));
       }
     }
 
