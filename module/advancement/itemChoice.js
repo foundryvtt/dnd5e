@@ -14,7 +14,7 @@ export class ItemChoiceAdvancement extends Advancement {
 
   /** @inheritdoc */
   static order = 20;
-  
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */
