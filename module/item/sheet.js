@@ -89,7 +89,9 @@ export default class ItemSheet5e extends ItemSheet {
         }
         data.advancement[level].items.push({
           title: advancement.titleForLevel(level),
-          icon: advancement.icon
+          icon: advancement.icon,
+          invertIcon: advancement.icon.startsWith("icons/svg/"),
+          summary: advancement.summaryForLevel(level)
         });
       }
     }

@@ -15,7 +15,7 @@ export class ScaleValueAdvancement extends Advancement {
   static order = 30;
 
   /* -------------------------------------------- */
-  
+
   /** @inheritdoc */
   static defaultTitle = "DND5E.AdvancementScaleValueTitle";
 

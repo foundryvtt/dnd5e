@@ -86,10 +86,19 @@ export class Advancement {
   /**
    * Title displayed in advancement list for a specific level.
    * @param {number} level  Level for which to generate a title.
-   * @returns {string}      Title with any level-specific information.
+   * @returns {string}      HTML title with any level-specific information.
    */
   titleForLevel(level) {
     return this.title;
+  }
+
+  /**
+   * Summary content displayed beneath the title in the advancement list.
+   * @param {number} level  Level for which to generate the summary.
+   * @returns {string}      HTML content of the summary.
+   */
+  summaryForLevel(level) {
+    return "";
   }
 
 }

@@ -12,9 +12,14 @@
         {{#each data.items}}
           <li class="item flexrow">
             <div class="item-name flexrow">
-              <div class="item-image" style="background-image: url('{{this.icon}}')"></div>
+              <div class="item-image{{#if this.invertIcon}} inverted{{/if}}" style="background-image: url('{{this.icon}}')"></div>
               <h4>{{{this.title}}}</h4>
             </div>
+            {{#if this.summary}}
+              <div class="item-summary">
+                {{{this.summary}}}
+              </div>
+            {{/if}}
           </li>
         {{/each}}
       </ol>
