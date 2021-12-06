@@ -40,10 +40,39 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  titleAtLevel(level) {
+  titleForLevel(level) {
+    const hp = this.valueForLevel(level);
+    if ( !hp ) return this.title;
+    return `${this.title}: <strong>${hp}</strong>`;
+  }
+
+  /**
+   * Hit points given at the provided level.
+   * @param {number} level   Level for which to get hit points.
+   * @returns {number|null}  Hit points for level or null if none have been taken.
+   */
+  valueForLevel(level) {
     const values = this.data.value;
-    if ( !values || !values[level] ) return this.title;
-    return `${this.title}: <strong>${this.data.value[level]}</strong>`;
+    if ( !values || !values[level] ) return null;
+    const value = values[level];
+
+    if ( value !== true ) return value;
+
+    // Fixed value chosen
+    const hitDiceDenomination = Number((this.item.data.data.hitDice ?? "d6").replace("d", ""));
+    if ( level === 1 ) return hitDiceDenomination;
+    return (hitDiceDenomination / 2) + 1;
+  }
+
+  /**
+   * Total hit points provided by this advancement.
+   * @returns {number}  Hit points currently selected.
+   */
+  total() {
+    return Object.keys(this.data.value).reduce((total, level) => {
+      total += this.valueForLevel(level);
+      return total;
+    }, 0);
   }
 
 }

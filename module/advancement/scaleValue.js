@@ -24,4 +24,25 @@ export class ScaleValueAdvancement extends Advancement {
   /** @inheritdoc */
   static defaultIcon = "icons/svg/dice-target.svg";
 
+  /* -------------------------------------------- */
+  /*  Display Methods                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  titleForLevel(level) {
+    const value = this.valueForLevel(level);
+    if ( !value ) return this.title;
+    return `${this.title}: <strong>${value}</strong>`;
+  }
+
+  /**
+   * Scale value for the given level.
+   * @param {number} level  Level for which to get the scale value.
+   * @returns {string}      Scale value at the given level or an empty string. 
+   */
+  valueForLevel(level) {
+    const key = Object.keys(this.data.configuration.scale).reverse().find(l => l <= level);
+    return this.data.configuration.scale[key] ?? "";
+  }
+
 }
