@@ -1,11 +1,18 @@
 /**
  * Abstract base class which various advancement types can subclass.
  *
+ * @property {Item5e} item    Item to which this advancement belongs.
  * @property {object} [data]  Raw data stored in the advancement object.
  */
 export class Advancement {
 
-  constructor(data={}) {
+  constructor(item, data={}) {
+    /**
+     * Item to which this advancement belongs.
+     * @type {Item5e}
+     */
+    this.item = item;
+
     /**
      * Configuration data for this advancement.
      * @type {object}
@@ -69,7 +76,7 @@ export class Advancement {
    * @returns {number[]}
    */
   get levels() {
-    return this.data.levels ?? [];
+    return this.data.levels ?? (this.data.level ? [this.data.level] : []);
   }
 
   /* -------------------------------------------- */
@@ -81,7 +88,7 @@ export class Advancement {
    * @param {number} level  Level for which to generate a title.
    * @returns {string}      Title with any level-specific information.
    */
-  titleAtLevel(level) {
+  titleForLevel(level) {
     return this.title;
   }
 

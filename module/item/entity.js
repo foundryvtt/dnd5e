@@ -285,6 +285,17 @@ export default class Item5e extends Item {
    * will be called at the end of `Item5e#prepareDerivedData`.
    */
   prepareFinalAttributes() {
+    // Advancement
+    if ( this.data.data.advancement ) {
+      this.advancement = this.data.data.advancement.reduce((arr, data) => {
+        const Advancement = game.dnd5e.advancement[`${data.type}Advancement`];
+        if ( Advancement ) arr.push(new Advancement(this, data));
+        return arr;
+      }, []);
+    } else {
+      this.advancement = [];
+    }
+
     // Proficiency
     this.data.data.prof = new Proficiency(this.actor?.data.data.attributes.prof, this.data.data.proficient);
 

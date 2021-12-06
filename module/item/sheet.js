@@ -77,6 +77,23 @@ export default class ItemSheet5e extends ItemSheet {
     data.hasAC = data.isArmor || data.isMountable;
     data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
 
+    // Advancement
+    data.advancement = {};
+    for ( const advancement of this.item.advancement ) {
+      for ( const level of advancement.levels ) {
+        if ( !data.advancement[level] ) {
+          data.advancement[level] = {
+            configured: false, // Figure out based on class or character level
+            items: []
+          }
+        }
+        data.advancement[level].items.push({
+          title: advancement.titleForLevel(level),
+          icon: advancement.icon
+        });
+      }
+    }
+
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 

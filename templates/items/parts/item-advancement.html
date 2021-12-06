@@ -1,0 +1,24 @@
+<div class="tab details advancement" data-group="primary" data-tab="advancement">
+  <ol class="items-list">
+
+    {{#each advancement as |data level|}}
+      <li class="items-header flexrow">
+        <h3 class="item-name" flexrow">Level {{level}}</h3>
+        {{#if data.configured}}
+          <div class="item-checkmark"><i class="fas fa-check-circle"></i></div>
+        {{/if}}
+      </li>
+      <ol class="item-list">
+        {{#each data.items}}
+          <li class="item flexrow">
+            <div class="item-name flexrow">
+              <div class="item-image" style="background-image: url('{{this.icon}}')"></div>
+              <h4>{{{this.title}}}</h4>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    {{/each}}
+
+  </ol>
+</div>
