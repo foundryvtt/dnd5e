@@ -28,7 +28,7 @@ export class ItemChoiceAdvancement extends Advancement {
   /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
-  
+
   /** @inheritdoc */
   titleForLevel(level) {
     return `${this.title} <em>(${game.i18n.localize("DND5E.AdvancementChoices")})</em>`;
