@@ -25,4 +25,13 @@ export class ItemChoiceAdvancement extends Advancement {
   /** @inheritdoc */
   static defaultIcon = "icons/svg/stone-path.svg";
 
+  /* -------------------------------------------- */
+  /*  Display Methods                             */
+  /* -------------------------------------------- */
+  
+  /** @inheritdoc */
+  titleForLevel(level) {
+    return `${this.title} <em>(${game.i18n.localize("DND5E.AdvancementChoices")})</em>`;
+  }
+
 }
