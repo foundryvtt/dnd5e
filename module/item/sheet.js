@@ -104,7 +104,7 @@ export default class ItemSheet5e extends ItemSheet {
           data[level] = {
             configured: false, // TODO: Figure out based on class or character level
             items: []
-          }
+          };
         }
         data[level].items.push({
           order: advancement.sortingValueForLevel(level),

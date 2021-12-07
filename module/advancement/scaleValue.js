@@ -38,7 +38,7 @@ export class ScaleValueAdvancement extends Advancement {
   /**
    * Scale value for the given level.
    * @param {number} level  Level for which to get the scale value.
-   * @returns {string}      Scale value at the given level or an empty string. 
+   * @returns {string}      Scale value at the given level or an empty string.
    */
   valueForLevel(level) {
     const key = Object.keys(this.data.configuration.scale).reverse().find(l => l <= level);
