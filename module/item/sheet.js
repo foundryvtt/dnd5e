@@ -78,23 +78,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
 
     // Advancement
-    data.advancement = {};
-    for ( const advancement of this.item.advancement ) {
-      for ( const level of advancement.levels ) {
-        if ( !data.advancement[level] ) {
-          data.advancement[level] = {
-            configured: false, // Figure out based on class or character level
-            items: []
-          }
-        }
-        data.advancement[level].items.push({
-          title: advancement.titleForLevel(level),
-          icon: advancement.icon,
-          invertIcon: advancement.icon.startsWith("icons/svg/"),
-          summary: advancement.summaryForLevel(level)
-        });
-      }
-    }
+    data.advancement = this._getItemAdvancement(this.item);
 
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
@@ -102,6 +86,34 @@ export default class ItemSheet5e extends ItemSheet {
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
     data.data = itemData.data;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the display object used to show the advancement tab.
+   * @param {Item5e} item  The item for which the advancement is being prepared.
+   * @returns {object}     Object with advancement data grouped by levels.
+   */
+  _getItemAdvancement(item) {
+    const data = {};
+    for ( const advancement of item.advancement ) {
+      for ( const level of advancement.levels ) {
+        if ( !data[level] ) {
+          data[level] = {
+            configured: false, // TODO: Figure out based on class or character level
+            items: []
+          }
+        }
+        data[level].items.push({
+          title: advancement.titleForLevel(level),
+          icon: advancement.icon,
+          invertIcon: advancement.icon.startsWith("icons/svg/"),
+          summary: advancement.summaryForLevel(level)
+        });
+      }
+    }
     return data;
   }
 
