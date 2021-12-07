@@ -84,6 +84,17 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
+   * Value used for sorting this advancement at a certain level.
+   * @param {number} level  Level for which this entry is being sorted.
+   * @param {string}        String that can be used for sorting.
+   */
+  sortingValueForLevel(level) {
+    return `${this.constructor.order.paddedString(4)} ${this.titleForLevel(level)}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Title displayed in advancement list for a specific level.
    * @param {number} level  Level for which to generate a title.
    * @returns {string}      HTML title with any level-specific information.

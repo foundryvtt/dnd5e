@@ -107,6 +107,7 @@ export default class ItemSheet5e extends ItemSheet {
           }
         }
         data[level].items.push({
+          order: advancement.sortingValueForLevel(level),
           title: advancement.titleForLevel(level),
           icon: advancement.icon,
           invertIcon: advancement.icon.startsWith("icons/svg/"),
@@ -114,6 +115,7 @@ export default class ItemSheet5e extends ItemSheet {
         });
       }
     }
+    Object.values(data).forEach(obj => obj.items.sort((a, b) => a.order.localeCompare(b.order)));
     return data;
   }
 
