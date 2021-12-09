@@ -81,7 +81,7 @@
     },
     "scaling": {
       "mode": "level",
-      "formula": "5"
+      "formula": "(@item.level - 2) * 5"
     }
   },
   "sort": 100001,
