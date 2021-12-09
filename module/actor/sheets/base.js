@@ -744,7 +744,7 @@ export default class ActorSheet5e extends ActorSheet {
     let sourceActor = null;
     if (data.pack) {
       const pack = game.packs.find(p => p.collection === data.pack);
-      sourceActor = await pack.getEntity(data.id);
+      sourceActor = await pack.getDocument(data.id);
     } else {
       sourceActor = game.actors.get(data.id);
     }

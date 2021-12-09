@@ -8,7 +8,7 @@ export default class AbilityUseDialog extends Dialog {
     this.options.classes = ["dnd5e", "dialog"];
 
     /**
-     * Store a reference to the Item entity being used
+     * Store a reference to the Item document being used
      * @type {Item5e}
      */
     this.item = item;

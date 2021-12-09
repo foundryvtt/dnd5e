@@ -358,7 +358,7 @@ export default class Item5e extends Item {
   /**
    * Update a label to the Item detailing its total to hit bonus.
    * Sources:
-   * - item entity's innate attack bonus
+   * - item document's innate attack bonus
    * - item's actor's proficiency bonus if applicable
    * - item's actor's global bonuses to the given item type
    * - item's ammunition if applicable
@@ -427,8 +427,8 @@ export default class Item5e extends Item {
   /**
    * Retrieve an item's critical hit threshold. Uses the smallest value from among the
    * following sources:
-   * - item entity
-   * - item entity's actor (if it has one)
+   * - item document
+   * - item document's actor (if it has one)
    * - the constant '20'
    *
    * @returns {number|null}  The minimum value that must be rolled to be considered a critical hit.
@@ -737,7 +737,7 @@ export default class Item5e extends Item {
    * Display the chat card for an Item as a Chat Message
    * @param {object} [options]                Options which configure the display of the item chat card
    * @param {string} [options.rollMode]       The message visibility mode to apply to the created card
-   * @param {boolean} [options.createMessage] Whether to automatically create a ChatMessage entity (if true), or only
+   * @param {boolean} [options.createMessage] Whether to automatically create a ChatMessage document (if true), or only
    *                                          return the prepared message data (if false)
    * @returns {ChatMessage|object} Chat message if `createMessage` is true, otherwise an object containing message data.
    */
@@ -1450,7 +1450,7 @@ export default class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @returns {Actor|null}         The Actor entity or null
+   * @returns {Actor|null}        The Actor document or null
    * @private
    */
   static async _getChatCardActor(card) {
@@ -1472,7 +1472,7 @@ export default class Item5e extends Item {
   /**
    * Get the Actor which is the author of a chat card
    * @param {HTMLElement} card    The chat card being used
-   * @returns {Actor[]}            An Array of Actor entities, if any
+   * @returns {Actor[]}            An Array of Actor documents, if any
    * @private
    */
   static _getChatCardTargets(card) {
