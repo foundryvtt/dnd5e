@@ -1214,7 +1214,7 @@ export default class Item5e extends Item {
     const title = `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`;
 
     // Invoke the roll and submit it to chat
-    const roll = new Roll(rollData.item.formula, rollData).roll();
+    const roll = await new Roll(rollData.item.formula, rollData).roll({async: true});
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: title,
@@ -1235,7 +1235,7 @@ export default class Item5e extends Item {
     if ( !data.recharge.value ) return;
 
     // Roll the check
-    const roll = new Roll("1d6").roll();
+    const roll = await new Roll("1d6").roll({async: true});
     const success = roll.total >= parseInt(data.recharge.value);
 
     // Display a Chat Message
