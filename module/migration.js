@@ -342,12 +342,14 @@ export const getMigrationData = async function() {
   try {
     let res = await fetch("systems/dnd5e/json/icon-migration.json");
     data.iconMap = await res.json();
-    res = await fetch("systems/dnd5e/json/undo-icons.json");
-    data.undoMap = await res.json();
+    if ( game.dnd5e.isV9 ) {
+      res = await fetch("systems/dnd5e/json/spell-icon-migration.json");
+      const spellIcons = await res.json();
+      data.iconMap = {...data.iconMap, ...spellIcons};
+    }
   } catch(err) {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
   }
-
   return data;
 };
 
@@ -679,14 +681,9 @@ function _migrateItemCriticalData(item, updateData) {
  * @returns {object}                                        The updateData to apply
  * @private
  */
-function _migrateItemIcon(item, updateData, {iconMap, undoMap}={}) {
+function _migrateItemIcon(item, updateData, {iconMap}={}) {
   if ( iconMap && item.img?.startsWith("systems/dnd5e/icons/") ) {
     const rename = iconMap[item.img];
-    if ( rename ) updateData.img = rename;
-  }
-
-  if ( undoMap ) {
-    const rename = undoMap[item.img];
     if ( rename ) updateData.img = rename;
   }
   return updateData;
