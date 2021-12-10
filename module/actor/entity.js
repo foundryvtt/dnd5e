@@ -222,7 +222,8 @@ export default class Actor5e extends Actor {
    * @returns {string[]}   Array of formatted trait labels.
    */
   getSelectedTraits(type) {
-    if ( ["armor", "tool", "weapon"].includes(type) ) {
+    const traitConfig = CONFIG.DND5E.traits[type];
+    if ( traitConfig.proficiency ) {
       return this.data.data.traits[`${type}Prof`].value;
     } else if ( type === "skills" ) {
       return Object.keys(CONFIG.DND5E.skills).filter(key => this.data.data.skills[key].value >= 1);
@@ -241,8 +242,9 @@ export default class Actor5e extends Actor {
    * @param {string[]} keys  What proficiencies should be granted.
    */
   assignTraitProficiencies(type, keys) {
+    const traitConfig = CONFIG.DND5E.traits[type];
     for ( const key of keys ) {
-      if ( ["armor", "tool", "weapon"].includes(type) ) {
+      if ( traitConfig.proficiency ) {
         if ( !this.data.data.traits[type]?.value?.includes(key) ) this.data.data.traits[`${type}Prof`]?.value?.push(key);
       } else if ( type === "skills" ) {
         if ( this.data.data.skills[key]?.value < 1 ) this.data.data.skills[key].value = 1;
@@ -1880,7 +1882,7 @@ export default class Actor5e extends Actor {
    * @param {object} data          Object containing proficiency data.
    * @param {string[]} data.value  Array of standard proficiency keys.
    * @param {string} data.custom   Semicolon-separated string of custom proficiencies.
-   * @param {string} type          "armor", "weapon", or "tool"
+   * @param {string} type          Key of `DND5E.traits` where `proficiency` is true.
    */
   static prepareProficiencies(data, type) {
     const profs = CONFIG.DND5E[`${type}Proficiencies`];

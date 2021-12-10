@@ -275,10 +275,11 @@ export default class ItemSheet5e extends ItemSheet {
   _prepareTraits(itemData) {
     for ( const [type, data] of Object.entries(itemData.data.traits) ) {
       if ( !data ) continue;
-      if ( ["armor", "weapon", "tool"].includes(type) ) {
+      const traitConfig = CONFIG.DND5E.traits[type];
+      if ( traitConfig.proficiency ) {
         game.dnd5e.entities.Actor5e.prepareProficiencies(data, type);
       } else {
-        const choices = CONFIG.DND5E[type];
+        const choices = CONFIG.DND5E[traitConfig.configKey ?? type];
         if ( !choices || !data ) continue;
         data.selected = data.value.reduce((obj, t) => {
           obj[t] = choices[t];

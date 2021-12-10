@@ -1114,6 +1114,55 @@ DND5E.CR_EXP_LEVELS = [
 DND5E.classFeatures = ClassFeatures;
 
 /**
+ * Configurable traits on actors.
+ * @enum {{
+ *   label: string,
+ *   [proficiency]: boolean,
+ *   [configKey]: string
+ * }}
+ */
+DND5E.traits = {
+  armor: {
+    label: "DND5E.TraitArmorProf",
+    proficiency: true
+  },
+  ci: {
+    label: "DND5E.ConImm",
+    configKey: "conditionTypes"
+  },
+  di: {
+    label: "DND5E.DamImm",
+    configKey: "damageResistanceTypes"
+  },
+  dr: {
+    label: "DND5E.DamRes",
+    configKey: "damageResistanceTypes"
+  },
+  dv: {
+    label: "DND5E.DamVuln",
+    configKey: "damageResistanceTypes"
+  },
+  languages: {
+    label: "DND5E.Languages"
+  },
+  saves: {
+    label: "DND5E.ClassSaves",
+    configKey: "abilities"
+  },
+  skills: {
+    label: "DND5E.TraitSkillProf"
+  },
+  tool: {
+    label: "DND5E.TraitToolProf",
+    proficiency: true
+  },
+  weapon: {
+    label: "DND5E.TraitWeaponProf",
+    proficiency: true
+  },
+};
+
+/**
  * Special character flags.
  * @enum {{
  *   name: string,

@@ -107,11 +107,13 @@ export default class TraitConfig extends DocumentSheet {
    * @returns {SelectChoices}  Object of choices ready to be displayed in a TraitSelector list.
    */
   static async getTraitChoices(type, chosen) {
-    if ( ["armor", "tool", "weapon"].includes(type) ) {
+    const traitConfig = CONFIG.DND5E.traits[type];
+
+    if ( traitConfig.proficiency ) {
       return game.dnd5e.applications.ProficiencySelector.getChoices(type, chosen);
     }
 
-    return Object.entries(CONFIG.DND5E[type] ?? {}).reduce((obj, [key, label]) => {
+    return Object.entries(CONFIG.DND5E[traitConfig.configKey ?? type] ?? {}).reduce((obj, [key, label]) => {
       obj[key] = {
         label,
         chosen: chosen?.includes(key) ?? false
@@ -155,8 +157,9 @@ export default class TraitConfig extends DocumentSheet {
    * @returns {string}        Localized label.
    */
   static typeLabel(type, count) {
+    const traitConfig = CONFIG.DND5E.traits[type];
     let typeCap = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
-    if ( ["armor", "tool", "weapon"].includes(type) ) typeCap = `${typeCap}Prof`;
+    if ( traitConfig.proficiency ) typeCap = `${typeCap}Prof`;
 
     const pluralRule = ( count !== undefined ) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
 
@@ -172,7 +175,9 @@ export default class TraitConfig extends DocumentSheet {
    * @returns {string}     Localized name.
    */
   static keyLabel(type, key) {
-    if ( ["armor", "tool", "weapon"].includes(type) ) {
+    const traitConfig = CONFIG.DND5E.traits[type];
+
+    if ( traitConfig.proficiency ) {
       const categories = CONFIG.DND5E[`${type}Proficiencies`];
       if ( categories[key] ) return categories[key];
 
@@ -184,7 +189,7 @@ export default class TraitConfig extends DocumentSheet {
         CONFIG.DND5E[`${type}Ids`][key], { indexOnly: true });
       return item?.name ?? "";
     } else {
-      const source = CONFIG.DND5E[type];
+      const source = CONFIG.DND5E[traitConfig.configKey ?? type];
       return source[key] ?? "";
     }
   }
