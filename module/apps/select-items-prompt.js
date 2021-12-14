@@ -8,7 +8,7 @@ export default class SelectItemsPrompt extends Dialog {
     this.options.classes = ["dnd5e", "dialog", "select-items-prompt", "sheet"];
 
     /**
-     * Store a reference to the Item entities being used
+     * Store a reference to the Item documents being used
      * @type {Array<Item5e>}
      */
     this.items = items;

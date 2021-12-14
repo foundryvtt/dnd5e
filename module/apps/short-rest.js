@@ -9,7 +9,7 @@ export default class ShortRestDialog extends Dialog {
     super(dialogData, options);
 
     /**
-     * Store a reference to the Actor entity which is resting
+     * Store a reference to the Actor document which is resting
      * @type {Actor}
      */
     this.actor = actor;
