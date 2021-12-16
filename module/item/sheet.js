@@ -98,11 +98,16 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _getItemAdvancement(item) {
     const data = {};
+    let maxLevel = 0;
+    if ( item.parent ) {
+      if ( item.type === "class" ) maxLevel = item.data.data.levels;
+      else maxLevel = item.parent.data.data.details.level;
+    }
     for ( const advancement of item.advancement ) {
       for ( const level of advancement.levels ) {
         if ( !data[level] ) {
           data[level] = {
-            configured: false, // TODO: Figure out based on class or character level
+            configured: (level <= maxLevel) ? "full" : false,
             items: []
           };
         }
@@ -113,6 +118,9 @@ export default class ItemSheet5e extends ItemSheet {
           invertIcon: advancement.icon.startsWith("icons/svg/"),
           summary: advancement.summaryForLevel(level)
         });
+        if ( (data[level].configured === "full") && !advancement.configuredForLevel(level) ) {
+          data[level].configured = "partial";
+        }
       }
     }
     Object.values(data).forEach(obj => obj.items.sort((a, b) => a.order.localeCompare(b.order)));

@@ -84,6 +84,17 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
+   * Has the player made choices for this advancement at the specified level?
+   * @param {number} level  Level for which to check configuration.
+   * @returns {boolean}     Have any available choices been made?
+   */
+  configuredForLevel(level) {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Value used for sorting this advancement at a certain level.
    * @param {number} level  Level for which this entry is being sorted.
    * @returns {string}      String that can be used for sorting.
