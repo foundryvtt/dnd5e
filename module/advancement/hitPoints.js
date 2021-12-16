@@ -14,7 +14,7 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static order = 1;
+  static order = 10;
 
   /* -------------------------------------------- */
 
@@ -59,7 +59,7 @@ export class HitPointsAdvancement extends Advancement {
     if ( value !== true ) return value;
 
     // Fixed value chosen
-    const hitDiceDenomination = Number((this.item.data.data.hitDice ?? "d6").replace("d", ""));
+    const hitDiceDenomination = Number((this.parent.data.data.hitDice ?? "d6").replace("d", ""));
     if ( level === 1 ) return hitDiceDenomination;
     return (hitDiceDenomination / 2) + 1;
   }
@@ -69,10 +69,7 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {number}  Hit points currently selected.
    */
   total() {
-    return Object.keys(this.data.value).reduce((total, level) => {
-      total += this.valueForLevel(level);
-      return total;
-    }, 0);
+    return Object.keys(this.data.value).reduce((total, level) => total + this.valueForLevel(parseInt(level)), 0);
   }
 
 }

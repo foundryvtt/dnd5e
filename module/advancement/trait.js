@@ -13,7 +13,7 @@ export class TraitAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static order = 5;
+  static order = 30;
 
   /* -------------------------------------------- */
 

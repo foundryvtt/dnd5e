@@ -13,7 +13,7 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static order = 10;
+  static order = 40;
 
   /* -------------------------------------------- */
 

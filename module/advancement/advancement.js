@@ -6,12 +6,12 @@
  */
 export class Advancement {
 
-  constructor(item, data={}) {
+  constructor(parent, data={}) {
     /**
      * Item to which this advancement belongs.
      * @type {Item5e}
      */
-    this.item = item;
+    this.parent = parent;
 
     /**
      * Configuration data for this advancement.

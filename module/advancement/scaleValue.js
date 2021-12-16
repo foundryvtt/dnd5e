@@ -12,7 +12,7 @@ export class ScaleValueAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static order = 30;
+  static order = 60;
 
   /* -------------------------------------------- */
 
