@@ -12,7 +12,7 @@ export class AbilityScoreImprovementAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static order = 1;
+  static order = 20;
 
   /* -------------------------------------------- */
 
