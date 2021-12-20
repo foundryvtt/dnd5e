@@ -37,7 +37,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Manage Active Effect instances through the Actor Sheet via effect control buttons.
    * @param {MouseEvent} event      The left-click event on the effect control
-   * @param {Actor|Item} owner      The owning entity which manages this effect
+   * @param {Actor|Item} owner      The owning document which manages this effect
    * @returns {Promise|null}        Promise that resolves when the changes are complete.
    */
   static onManageActiveEffect(event, owner) {
