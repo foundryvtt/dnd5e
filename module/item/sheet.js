@@ -7,6 +7,13 @@ import ActiveEffect5e from "../active-effect.js";
  * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
+
+  /**
+   * Cached version of the base items compendia indices with the needed subtype fields.
+   * @type {object}
+   */
+  static _baseTypesCache = {};
+
   constructor(...args) {
     super(...args);
 
@@ -101,6 +108,11 @@ export default class ItemSheet5e extends ItemSheet {
     if ( ids === undefined ) return {};
 
     const typeProperty = type === "armor" ? "armor.type" : `${type}Type`;
+
+    if (ItemSheet5e._baseTypesCache[typeProperty]) {
+      return ItemSheet5e._baseTypesCache[typeProperty];
+    }
+
     const baseType = foundry.utils.getProperty(item.data, typeProperty);
 
     const items = await Object.entries(ids).reduce(async (acc, [name, id]) => {
@@ -110,6 +122,8 @@ export default class ItemSheet5e extends ItemSheet {
       obj[name] = baseItem.name;
       return obj;
     }, {});
+
+    ItemSheet5e._baseTypesCache[typeProperty] = items;
 
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1])));
   }
