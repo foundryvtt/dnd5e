@@ -125,7 +125,7 @@ export default class ProficiencySelector extends TraitSelector {
 
     // Return extended index if cached, otherwise normal index, guaranteed to never be async.
     if ( indexOnly ) {
-      return ProficiencySelector._cachedIndices[pack]?.get(id) ?? game.packs.get(pack)?.index.get(id);
+      return this._cachedIndices[pack]?.[id] ?? game.packs.get(pack)?.index.get(id);
     }
 
     // Full Item5e document required, always async.
@@ -134,20 +134,32 @@ export default class ProficiencySelector extends TraitSelector {
     }
 
     // Returned cached version of extended index if available.
-    if ( ProficiencySelector._cachedIndices[pack] ) {
-      return ProficiencySelector._cachedIndices[pack].get(id);
+    if ( this._cachedIndices[pack] ) {
+      return this._cachedIndices[pack][id];
     }
 
     // Build the extended index and return a promise for the data
     const packObject = game.packs.get(pack);
     if ( !packObject ) return;
 
-    return game.packs.get(pack)?.getIndex({
+    // Check to see if a indexing operation is already in progress to avoid multiple indexes
+    if ( this._cachedIndices[`loading-${pack}`] ) {
+      return this._cachedIndices[`loading-${pack}`].then(() => this._cachedIndices[pack][id]);
+    }
+
+    const promise = packObject.getIndex({
       fields: ["data.armor.type", "data.toolType", "data.weaponType"]
     }).then(index => {
-      ProficiencySelector._cachedIndices[pack] = index;
-      return index.get(id);
+      const store = index.reduce((obj, entry) => {
+        obj[entry._id] = entry;
+        return obj;
+      }, {});
+      this._cachedIndices[pack] = store;
+      delete this._cachedIndices[`loading-${pack}`];
+      return this._cachedIndices[pack][id];
     });
+    this._cachedIndices[`loading-${pack}`] = promise;
+    return promise;
   }
 
   /* -------------------------------------------- */
