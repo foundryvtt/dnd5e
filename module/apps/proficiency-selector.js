@@ -122,14 +122,15 @@ export default class ProficiencySelector extends TraitSelector {
     let [scope, collection, id] = identifier.split(".");
     if ( scope && collection ) pack = `${scope}.${collection}`;
     if ( !id ) id = identifier;
+  
+    const packObject = game.packs.get(pack);
 
     // Full Item5e document required, always async.
     if ( fullItem && !indexOnly ) {
-      return packObject.getDocument(id);
+      return packObject?.getDocument(id);
     }
 
     const cache = this._cachedIndices[pack];
-    const packObject = game.packs.get(pack);
     const loading = cache instanceof Promise;
 
     // Return extended index if cached, otherwise normal index, guaranteed to never be async.
