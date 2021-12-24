@@ -30,6 +30,13 @@ export class TraitAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  configuredForLevel(level) {
+    return !foundry.utils.isObjectEmpty(this.data.value);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   summaryForLevel(level) {
     if ( !this.data.value.chosen ) return "";
     return this.data.value.chosen.reduce((html, key) => {

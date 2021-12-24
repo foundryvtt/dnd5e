@@ -40,6 +40,13 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  configuredForLevel(level) {
+    return this.data.value[level] !== undefined;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   titleForLevel(level) {
     const hp = this.valueForLevel(level);
     if ( !hp ) return this.title;
