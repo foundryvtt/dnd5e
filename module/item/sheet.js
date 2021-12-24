@@ -99,11 +99,19 @@ export default class ItemSheet5e extends ItemSheet {
   _getItemAdvancement(item) {
     const data = {};
     let maxLevel = 0;
+    let originalClass;
     if ( item.parent ) {
-      if ( item.type === "class" ) maxLevel = item.data.data.levels;
-      else maxLevel = item.parent.data.data.details.level;
+      if ( item.type === "class" ) {
+        maxLevel = item.data.data.levels;
+        originalClass = item.id === item.parent.data.data.details.originalClass;
+      } else {
+        maxLevel = item.parent.data.data.details.level;
+      }
     }
     for ( const advancement of item.advancement ) {
+      if ( (originalClass !== undefined)
+           && ((advancement.data.classRestriction === "primary" && !originalClass)
+           || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
       for ( const level of advancement.levels ) {
         if ( !data[level] ) {
           data[level] = {
