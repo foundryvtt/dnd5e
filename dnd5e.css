@@ -1478,6 +1478,9 @@
 .dnd5e.sheet.item .advancement .items-list .item-image.inverted {
   mix-blend-mode: difference;
 }
+.dnd5e.sheet.item .advancement .items-list .item-controls {
+  border-left: 1px solid #c9c7b8;
+}
 .dnd5e.sheet.item .advancement .items-list .item-summary {
   flex: 0 0 100%;
   font-size: 12px;

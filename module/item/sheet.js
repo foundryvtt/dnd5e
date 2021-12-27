@@ -48,6 +48,8 @@ export default class ItemSheet5e extends ItemSheet {
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
     data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
+    data.embedded = this.object.isEmbedded;
+    data.editablePrototype = data.editable && !data.embedded;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -98,7 +100,6 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
-    const data = {};
     let maxLevel = 0;
     let originalClass;
     if ( item.parent ) {
@@ -109,6 +110,8 @@ export default class ItemSheet5e extends ItemSheet {
         maxLevel = item.parent.data.data.details.level;
       }
     }
+
+    const data = {};
     for ( const advancement of item.advancement ) {
       if ( (originalClass !== undefined)
            && ((advancement.data.classRestriction === "primary" && !originalClass)
