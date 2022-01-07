@@ -328,7 +328,7 @@ export default class Actor5e extends Actor {
         if ( actorData.type === "npc" ) {
           if ( key === "hon" ) newAbility.value = actorData.data.abilities.cha?.value ?? 10;
           else if ( key === "san" ) newAbility.value = actorData.data.abilities.wis?.value ?? 10;
-        } else if ( actorData.type === "vehicle" && ["hon", "san"].includes(key) ) {
+        } else if ( (actorData.type === "vehicle") && ["hon", "san"].includes(key) ) {
           newAbility.value = 0;
         }
 
