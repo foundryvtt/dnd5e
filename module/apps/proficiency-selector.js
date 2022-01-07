@@ -135,7 +135,7 @@ export default class ProficiencySelector extends TraitSelector {
 
     // Return extended index if cached, otherwise normal index, guaranteed to never be async.
     if ( indexOnly ) {
-      const index = packsObject?.index.get(id);
+      const index = packObject?.index.get(id);
       return loading ? index : cache?.[id] ?? index;
     }
 
