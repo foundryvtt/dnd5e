@@ -158,10 +158,9 @@ Hooks.once("init", function() {
 /* -------------------------------------------- */
 
 /**
- * Perform one-time pre-localization and sorting of some configuration objects
+ * Prepare attribute lists.
  */
 Hooks.once("setup", function() {
-  utils.performPreLocalization(CONFIG.DND5E);
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
 });
@@ -179,6 +178,13 @@ function expandAttributeList(attributes) {
     return obj;
   }, {});
 }
+
+/* --------------------------------------------- */
+
+/**
+ * Perform one-time pre-localization and sorting of some configuration objects
+ */
+Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
 
 /* -------------------------------------------- */
 /*  Foundry VTT Ready                           */
