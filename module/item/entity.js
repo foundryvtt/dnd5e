@@ -192,11 +192,6 @@ export default class Item5e extends Item {
     const C = CONFIG.DND5E;
     const labels = this.labels = {};
 
-    // Classes
-    if ( itemData.type === "class" ) {
-      data.levels = Math.clamped(data.levels, 1, 20);
-    }
-
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
       data.preparation.mode = data.preparation.mode || "prepared";
@@ -1534,6 +1529,28 @@ export default class Item5e extends Item {
     }).then(features => {
       return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+
+    // Check to make sure the updated class level doesn't exceed level cap
+    if ( (this.type === "class") && changed.data?.levels ) {
+      if ( changed.data.levels > CONFIG.DND5E.maxLevel ) {
+        ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
+        changed.data.levels = CONFIG.DND5E.maxLevel;
+      }
+      if ( !this.isEmbedded || (this.parent.type !== "character") ) return;
+      const newCharacterLevel = this.actor.data.data.details.level + (changed.data.levels - this.data.data.levels);
+      if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
+        ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
+          {max: CONFIG.DND5E.maxLevel}));
+        changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.maxLevel);
+      }
+    }
   }
 
   /* -------------------------------------------- */
