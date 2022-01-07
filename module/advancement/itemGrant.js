@@ -43,7 +43,7 @@ export class ItemGrantAdvancement extends Advancement {
       const pack = game.packs.get(`${scope}.${collection}`);
       const name = pack?.index.get(id)?.name;
       if ( !name ) return html;
-      html += `<a class="entity-link" data-pack="${scope}.${collection}" data-id="${id}">${name}</a>\n`;
+      html += `<a class="entity-link content-link" data-pack="${scope}.${collection}" data-id="${id}">${name}</a>\n`;
       return html;
     }, "");
   }
