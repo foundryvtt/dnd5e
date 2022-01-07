@@ -264,6 +264,7 @@ DND5E.abilityActivationTypes = {
 DND5E.abilityConsumptionTypes = {
   ammo: "DND5E.ConsumeAmmunition",
   attribute: "DND5E.ConsumeAttribute",
+  hitDice: "DND5E.ConsumeHitDice",
   material: "DND5E.ConsumeMaterial",
   charges: "DND5E.ConsumeCharges"
 };
