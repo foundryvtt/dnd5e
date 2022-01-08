@@ -74,8 +74,11 @@ export default class D20Roll extends Roll {
     // Halfling Lucky
     if ( this.options.halflingLucky ) d20.modifiers.push("r1=1");
 
+    // Roll Minimum
+    if ( this.options.minimum ) d20.modifiers.push(`min${this.options.minimum}`);
+
     // Reliable Talent
-    if ( this.options.reliableTalent ) d20.modifiers.push("min10");
+    if ( this.options.reliableTalent && !(this.options.minimum && this.options.minimum > 10) ) d20.modifiers.push("min10");
 
     // Handle Advantage or Disadvantage
     if ( this.hasAdvantage ) {

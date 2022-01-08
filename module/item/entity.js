@@ -454,6 +454,22 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve an item's minimum attack roll.
+   *
+   * @returns {number|null}  The minimum roll value that should be added to the attack roll formula.
+   */
+  getMinimumRoll() {
+    const itemData = this.data.data;
+    const actorFlags = this.actor.data.flags.dnd5e || {};
+    if ( !this.hasAttack || !itemData ) return;
+
+    // Return the minimum from the flag
+    return actorFlags?.minimumAttackRoll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Populates the max uses of an item. If the item is an owned item and the `max`
    * is not numeric, calculate based on actor data.
    */
@@ -1015,6 +1031,9 @@ export default class Item5e extends Item {
     // Apply Halfling Lucky
     if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
 
+    // Apply Minimum Roll
+    rollConfig.minimum = this.getMinimumRoll();
+
     // Compose calculated roll options with passed-in roll options
     rollConfig = mergeObject(rollConfig, options);
 
@@ -1292,6 +1311,9 @@ export default class Item5e extends Item {
       rollData.checkBonus = Roll.replaceFormulaData(bonuses.check, rollData);
     }
 
+    // Add minimum roll
+    const minimum = getProperty(rollData, `abilities.${abl}.bonuses.checkMinimum`);
+
     // Compose the roll data
     const rollConfig = mergeObject({
       parts: parts,
@@ -1307,6 +1329,7 @@ export default class Item5e extends Item {
       chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
       reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
+      minimum: minimum,
       messageData: {"flags.dnd5e.roll": {type: "tool", itemId: this.id }}
     }, options);
     rollConfig.event = options.event;
