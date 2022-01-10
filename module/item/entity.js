@@ -60,6 +60,16 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Return an item's identifier.
+   * @type {string}
+   */
+  get identifier() {
+    return this.data.data.identifier || this.name.slugify({strict: true});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
    */
@@ -1489,6 +1499,12 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
+
+    // Create class identifier based on name
+    if ( (this.type === "class") && !this.data.data.identifier ) {
+      return this.data.update({ "data.identifier": data.name.slugify({strict: true}) });
+    }
+
     if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
@@ -1528,7 +1544,7 @@ export default class Item5e extends Item {
     // Prompt to add new class features
     if (options.addFeatures === false) return;
     this.parent.getClassFeatures({
-      className: this.name,
+      classIdentifier: this.identifier,
       subclassName: this.data.data.subclass,
       level: this.data.data.levels
     }).then(features => {
