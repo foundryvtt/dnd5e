@@ -355,6 +355,9 @@
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
+        "attunement": {
+          "max": 3
+        },
         "death": {
           "success": 0,
           "failure": 0
