@@ -67,7 +67,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     this.layer.preview.addChild(this);
 
     // Hide the sheet that originated the preview
-    if ( this.actorSheet ) this.actorSheet.minimize();
+    this.actorSheet?.minimize();
 
     // Activate interactivity
     this.activatePreviewListeners(initialLayer);
@@ -103,7 +103,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       canvas.app.view.oncontextmenu = null;
       canvas.app.view.onwheel = null;
       initialLayer.activate();
-      this.actorSheet.maximize();
+      this.actorSheet?.maximize();
     };
 
     // Confirm the workflow (left-click)
