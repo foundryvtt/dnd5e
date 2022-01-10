@@ -13,70 +13,80 @@
       "label": "Starter Heroes",
       "system": "dnd5e",
       "path": "./packs/heroes.db",
-      "entity": "Actor"
+      "entity": "Actor",
+      "type": "Actor"
     },
     {
       "name": "monsters",
       "label": "Monsters (SRD)",
       "system": "dnd5e",
       "path": "./packs/monsters.db",
-      "entity": "Actor"
+      "entity": "Actor",
+      "type": "Actor"
     },
     {
       "name": "items",
       "label": "Items (SRD)",
       "system": "dnd5e",
       "path": "./packs/items.db",
-      "entity": "Item"
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "tradegoods",
       "label": "Trade Goods (SRD)",
       "system": "dnd5e",
       "path": "./packs/tradegoods.db",
-      "entity": "Item"
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "spells",
       "label": "Spells (SRD)",
       "system": "dnd5e",
       "path": "./packs/spells.db",
-      "entity": "Item"
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "classes",
       "label": "Classes (SRD)",
       "system": "dnd5e",
       "path": "./packs/classes.db",
-      "entity": "Item"
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "classfeatures",
       "label": "Class Features (SRD)",
       "system": "dnd5e",
       "path": "./packs/classfeatures.db",
-      "entity": "Item"
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "races",
       "label": "Racial Features (SRD)",
       "system": "dnd5e",
       "path": "./packs/races.db",
-      "entity": "Item"
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "monsterfeatures",
       "label": "Monster Features (SRD)",
       "system": "dnd5e",
       "path": "./packs/monsterfeatures.db",
-      "entity": "Item"
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "rules",
       "label": "Rules (SRD)",
       "system": "dnd5e",
       "path": "./packs/rules.db",
-      "entity": "JournalEntry"
+      "entity": "JournalEntry",
+      "type": "JournalEntry"
     }
   ],
   "languages": [

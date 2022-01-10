@@ -52,7 +52,7 @@
     "damage": {
       "parts": [
         [
-          "@mod + @classes.warlock.levels",
+          "max(1, @mod + @classes.warlock.levels)",
           "temphp"
         ]
       ],
