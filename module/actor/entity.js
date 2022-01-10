@@ -913,7 +913,7 @@ export default class Actor5e extends Actor {
       parts.push("@skillBonus");
       data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);
     }
-    const skillMinimum = Math.max(skl.bonuses?.minimum, abl?.bonuses?.checkMinimum) || false;
+    const skillMinimum = Math.max(skl.bonuses?.minimum ?? 0, abl?.bonuses?.checkMinimum ?? 0) || false;
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
     if (options.parts?.length > 0) {
