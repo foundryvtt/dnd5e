@@ -734,6 +734,30 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Handle actions required when consuming ammunition during an attack or healing action.
+   * @returns {boolean|{item: Item5e, update: object}}  False if there is not enough ammunition, otherwise an object
+   *                                                    containing the ammo item to consume, and the update delta.
+   * @private
+   */
+  _handleConsumeAmmunition() {
+    let item = null;
+    let update = null;
+    const consume = this.data.data.consume;
+    if ( consume?.type === "ammo" ) {
+      item = this.actor.items.get(consume.target);
+
+      // Get pending ammunition update.
+      const usage = this._getUsageUpdates({consumeResource: true});
+      if ( usage === false ) return false;
+      update = usage.resourceUpdates || {};
+    }
+
+    return {item, update};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Display the chat card for an Item as a Chat Message
    * @param {object} [options]                Options which configure the display of the item chat card
    * @param {string} [options.rollMode]       The message visibility mode to apply to the created card
@@ -954,7 +978,6 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollAttack(options={}) {
-    const itemData = this.data.data;
     const flags = this.actor.data.flags.dnd5e || {};
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
@@ -966,24 +989,11 @@ export default class Item5e extends Item {
 
     // Handle ammunition consumption
     delete this._ammo;
-    let ammo = null;
-    let ammoUpdate = null;
-    const consume = itemData.consume;
-    if ( consume?.type === "ammo" ) {
-      ammo = this.actor.items.get(consume.target);
-      if (ammo?.data) {
-        const q = ammo.data.data.quantity;
-        const consumeAmount = consume.amount ?? 0;
-        if ( q && (q - consumeAmount >= 0) ) {
-          this._ammo = ammo;
-          title += ` [${ammo.name}]`;
-        }
-      }
-
-      // Get pending ammunition update
-      const usage = this._getUsageUpdates({consumeResource: true});
-      if ( usage === false ) return null;
-      ammoUpdate = usage.resourceUpdates || {};
+    const ammo = this._handleConsumeAmmunition();
+    if ( ammo === false ) return null; // Not enough ammunition to perform the attack.
+    else if ( ammo.item ) {
+      this._ammo = ammo.item;
+      title += ` [${ammo.item.name}]`;
     }
 
     // Compose roll options
@@ -1020,10 +1030,10 @@ export default class Item5e extends Item {
 
     // Invoke the d20 roll helper
     const roll = await d20Roll(rollConfig);
-    if ( roll === false ) return null;
+    if ( roll === null ) return null;
 
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammo && !isObjectEmpty(ammoUpdate) ) await ammo.update(ammoUpdate);
+    if ( ammo.item && !foundry.utils.isObjectEmpty(ammo.update) ) await ammo.item.update(ammo.update);
     return roll;
   }
 
@@ -1038,13 +1048,17 @@ export default class Item5e extends Item {
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
    * @param {object} [config.options]      Additional options passed to the damageRoll function
-   * @returns {Promise<Roll>}        A Promise which resolves to the created Roll instance
+   * @returns {Promise<Roll|null>}         A Promise which resolves to the created Roll instance, or null if the action
+   *                                       cannot be performed.
    */
-  rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
+  async rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
-    const messageData = {"flags.dnd5e.roll": {type: "damage", itemId: this.id }};
+    const messageData = {
+      "flags.dnd5e.roll": {type: "damage", itemId: this.id},
+      speaker: ChatMessage.getSpeaker({actor: this.actor})
+    };
 
     // Get roll data
     const parts = itemData.damage.parts.map(d => d[0]);
@@ -1066,10 +1080,9 @@ export default class Item5e extends Item {
       dialogOptions: {
         width: 400,
         top: event ? event.clientY - 80 : null,
-        left: window.innerWidth - 710,
-        speaker: ChatMessage.getSpeaker({actor: this.actor})
+        left: window.innerWidth - 710
       },
-      messageData: messageData
+      messageData
     };
 
     // Adjust damage from versatile usage
@@ -1100,6 +1113,13 @@ export default class Item5e extends Item {
     }
 
     // Handle ammunition damage
+    let ammo;
+    if ( itemData.actionType === "heal" ) {
+      ammo = this._handleConsumeAmmunition();
+      if ( ammo === false ) return null; // Not enough ammunition to perform the action.
+    }
+
+    if ( ammo?.item ) this._ammo = ammo.item;
     const ammoData = this._ammo?.data;
 
     // Only add the ammunition damage if the ammution is a consumable with type 'ammo'
@@ -1121,7 +1141,12 @@ export default class Item5e extends Item {
     }
 
     // Call the roll helper utility
-    return damageRoll(mergeObject(rollConfig, options));
+    const roll = await damageRoll(foundry.utils.mergeObject(rollConfig, options));
+    if ( roll === null ) return null;
+
+    // Commit ammunition consumption if the healing action was completed.
+    if ( ammo?.item && !foundry.utils.isObjectEmpty(ammo.update) ) await ammo.item.update(ammo.update);
+    return roll;
   }
 
   /* -------------------------------------------- */
