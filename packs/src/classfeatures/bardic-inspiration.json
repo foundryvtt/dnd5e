@@ -33,7 +33,7 @@
     },
     "uses": {
       "value": 1,
-      "max": "max(1, @abilities.cha.mod)",
+      "max": "@abilities.cha.mod",
       "per": "lr",
       "type": "lr"
     },
