@@ -39,6 +39,17 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            {{!-- Identifier --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.ClassIdentifier" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.identifier" value="{{data.identifier}}">
+                </div>
+                <p class="hint">
+                    {{{localize "DND5E.ClassIdentifierHint" identifier=data.identifier}}}
+                </p>
+            </div>
+
             {{!-- Class Levels --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ClassLevels" }}</label>
