@@ -1299,7 +1299,7 @@ export default class Item5e extends Item {
     // Prepare roll data
     const rollData = this.getRollData();
     const abl = this.data.data.ability;
-    const parts = ["@mod"];
+    const parts = ["@mod", "@abilityCheckBonus"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
 
     // Add proficiency
@@ -1316,11 +1316,9 @@ export default class Item5e extends Item {
 
     // Add ability-specific check bonus
     if ( getProperty(rollData, `abilities.${abl}.bonuses.check`) ) {
-      const checkBonusKey = `${abl}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
       const checkBonus = getProperty(rollData, `abilities.${abl}.bonuses.check`);
-      rollData[checkBonusKey] = Roll.replaceFormulaData(checkBonus, rollData);
-    }
+      rollData.abilityCheckBonus = Roll.replaceFormulaData(checkBonus, rollData);
+    } else rollData.abilityCheckBonus = 0;
 
     // Add global actor bonus
     const bonuses = getProperty(this.actor.data.data, "bonuses.abilities") || {};
@@ -1334,7 +1332,6 @@ export default class Item5e extends Item {
       parts: parts,
       data: rollData,
       title: title,
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: title,
       dialogOptions: {
         width: 400,
@@ -1344,7 +1341,10 @@ export default class Item5e extends Item {
       chooseModifier: true,
       halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
       reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
-      messageData: {"flags.dnd5e.roll": {type: "tool", itemId: this.id }}
+      messageData: {
+        speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
+        "flags.dnd5e.roll": {type: "tool", itemId: this.id }
+      }
     }, options);
     rollConfig.event = options.event;
 
