@@ -1,5 +1,7 @@
 export const registerSystemSettings = function() {
 
+  const reload = foundry.utils.debounce(() => window.location.reload(), 250);
+
   // Internal System Migration Version
   game.settings.register("dnd5e", "systemMigrationVersion", {
     name: "System Migration Version",
@@ -61,7 +63,8 @@ export const registerSystemSettings = function() {
     scope: "world",
     config: true,
     default: false,
-    type: Boolean
+    type: Boolean,
+    onChange: reload
   });
 
   // Use Sanity ability score
@@ -71,7 +74,8 @@ export const registerSystemSettings = function() {
     scope: "world",
     config: true,
     default: false,
-    type: Boolean
+    type: Boolean,
+    onChange: reload
   });
 
   // Apply Dexterity as Initiative Tiebreaker
