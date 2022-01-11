@@ -220,7 +220,10 @@ export async function d20Roll({
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
-  if ( chooseModifier && !isFF ) data.mod = "@mod";
+  if ( chooseModifier && !isFF ) {
+    data.mod = "@mod";
+    if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
+  }
 
   // Construct the D20Roll instance
   const roll = new CONFIG.Dice.D20Roll(formula, data, {
