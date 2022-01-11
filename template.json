@@ -115,6 +115,9 @@
       },
       "creature": {
         "attributes": {
+          "attunement": {
+            "max": 3
+          },
           "senses": {
             "darkvision": 0,
             "blindsight": 0,
@@ -355,9 +358,6 @@
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
-        "attunement": {
-          "max": 3
-        },
         "death": {
           "success": 0,
           "failure": 0
