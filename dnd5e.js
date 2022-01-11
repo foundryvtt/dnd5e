@@ -42,6 +42,7 @@ import ShortRestDialog from "./module/apps/short-rest.js";
 import TraitSelector from "./module/apps/trait-selector.js";
 
 // Import Helpers
+import * as advancement from "./module/advancement.js";
 import * as chat from "./module/chat.js";
 import * as dice from "./module/dice.js";
 import * as macros from "./module/macros.js";
@@ -58,6 +59,7 @@ Hooks.once("init", function() {
 
   // Create a namespace within the game global
   game.dnd5e = {
+    advancement,
     applications: {
       AbilityUseDialog,
       ActorAbilityConfig,
