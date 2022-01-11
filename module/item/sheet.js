@@ -77,12 +77,61 @@ export default class ItemSheet5e extends ItemSheet {
     data.hasAC = data.isArmor || data.isMountable;
     data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
 
+    // Advancement
+    data.advancement = this._getItemAdvancement(this.item);
+
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
     data.data = itemData.data;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the display object used to show the advancement tab.
+   * @param {Item5e} item  The item for which the advancement is being prepared.
+   * @returns {object}     Object with advancement data grouped by levels.
+   */
+  _getItemAdvancement(item) {
+    const data = {};
+    let maxLevel = 0;
+    let originalClass;
+    if ( item.parent ) {
+      if ( item.type === "class" ) {
+        maxLevel = item.data.data.levels;
+        originalClass = item.id === item.parent.data.data.details.originalClass;
+      } else {
+        maxLevel = item.parent.data.data.details.level;
+      }
+    }
+    for ( const advancement of item.advancement ) {
+      if ( (originalClass !== undefined)
+           && ((advancement.data.classRestriction === "primary" && !originalClass)
+           || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
+      for ( const level of advancement.levels ) {
+        if ( !data[level] ) {
+          data[level] = {
+            configured: (level <= maxLevel) ? "full" : false,
+            items: []
+          };
+        }
+        data[level].items.push({
+          order: advancement.sortingValueForLevel(level),
+          title: advancement.titleForLevel(level),
+          icon: advancement.icon,
+          invertIcon: advancement.icon.startsWith("icons/svg/"),
+          summary: advancement.summaryForLevel(level)
+        });
+        if ( (data[level].configured === "full") && !advancement.configuredForLevel(level) ) {
+          data[level].configured = "partial";
+        }
+      }
+    }
+    Object.values(data).forEach(obj => obj.items.sort((a, b) => a.order.localeCompare(b.order)));
     return data;
   }
 
