@@ -72,21 +72,12 @@
             {{!-- Spell Components --}}
             <div class="spell-components form-group stacked">
                 <label>{{ localize "DND5E.SpellComponents" }}</label>
+                {{#each config.spellComponents as |component key|}}
                 <label class="checkbox">
-                    <input type="checkbox" name="data.components.vocal" {{checked data.components.vocal}}/> {{ localize "DND5E.ComponentVerbal" }}
+                    <input type="checkbox" name="data.components.{{key}}" {{checked (lookup ../data.components key)}}>
+                    {{component.label}}
                 </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.components.somatic" {{checked data.components.somatic}}/> {{ localize "DND5E.ComponentSomatic" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.components.material" {{checked data.components.material}}/> {{ localize "DND5E.ComponentMaterial" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.components.concentration" {{checked data.components.concentration}}/> {{ localize "DND5E.Concentration" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.components.ritual" {{checked data.components.ritual}}/> {{ localize "DND5E.Ritual" }}
-                </label>
+                {{/each}}
             </div>
 
             {{!-- Material Components --}}

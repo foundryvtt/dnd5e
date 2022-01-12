@@ -920,19 +920,25 @@ DND5E.spellComponents = {
   material: {
     label: "DND5E.ComponentMaterial",
     abbr: "DND5E.ComponentMaterialAbbr"
-  },
-  concentration: {
-    label: "DND5E.Concentration",
-    abbr: "DND5E.ConcentrationAbbr",
-    tag: true
-  },
-  ritual: {
-    label: "DND5E.Ritual",
-    abbr: "DND5E.RitualAbbr",
-    tag: true
   }
 };
 preLocalize("spellComponents", {keys: ["label", "abbr"]});
+
+/**
+ * Supplementary rules keywords that inform a spell's use.
+ * @enum {object}
+ */
+DND5E.spellTags = {
+  concentration: {
+    label: "DND5E.Concentration",
+    abbr: "DND5E.ConcentrationAbbr"
+  },
+  ritual: {
+    label: "DND5E.Ritual",
+    abbr: "DND5E.RitualAbbr"
+  }
+};
+preLocalize("spellTags", {keys: ["label", "abbr"]});
 
 /**
  * Schools to which a spell can belong.

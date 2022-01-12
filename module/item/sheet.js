@@ -47,6 +47,7 @@ export default class ItemSheet5e extends ItemSheet {
     const itemData = data.data;
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
+    data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -282,8 +283,7 @@ export default class ItemSheet5e extends ItemSheet {
       props.push(
         labels.components.vsm,
         labels.materials,
-        item.data.components.concentration ? game.i18n.localize("DND5E.Concentration") : null,
-        item.data.components.ritual ? game.i18n.localize("DND5E.Ritual") : null
+        ...labels.components.tags
       );
     }
 

@@ -77,7 +77,7 @@
                 {{/if}}
                 <div class="spell-comps">
                     {{#each labels.components.all}}
-                    <span class="spell-component {{component}}">{{abbr}}</span>
+                    <span class="spell-component{{#if tag}} tag{{/if}}">{{abbr}}</span>
                     {{/each}}
                 </div>
             </div>

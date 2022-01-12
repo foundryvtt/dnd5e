@@ -211,13 +211,20 @@ export default class Item5e extends Item {
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
+      const attributes = {
+        ...C.spellComponents,
+        ...Object.fromEntries(Object.entries(C.spellTags).map(([k, v]) => {
+          v.tag = true;
+          return [k, v];
+        }))
+      };
       data.preparation.mode = data.preparation.mode || "prepared";
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
       labels.components = Object.entries(data.components).reduce((obj, [c, active]) => {
-        const config = C.spellComponents[c];
+        const config = attributes[c];
         if ( !config || (active !== true) ) return obj;
-        obj.all.push({component: c, abbr: config.abbr});
+        obj.all.push({abbr: config.abbr, tag: config.tag});
         if ( config.tag ) obj.tags.push(config.label);
         else obj.vsm.push(config.abbr);
         return obj;
