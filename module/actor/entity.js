@@ -72,7 +72,10 @@ export default class Actor5e extends Actor {
     const updates = {};
     this._prepareBaseAbilities(this.data, updates);
     this._prepareBaseSkills(this.data, updates);
-    if ( !foundry.utils.isObjectEmpty(updates) ) this.data.update(updates);
+    if ( !foundry.utils.isObjectEmpty(updates) ) {
+      if ( !this.id ) this.data.update(updates);
+      else this.update(updates);
+    }
 
     this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
