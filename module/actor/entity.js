@@ -349,17 +349,17 @@ export default class Actor5e extends Actor {
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = actorData.data.abilities[key];
       if ( !abilities[key] ) {
-        const newAbility = foundry.utils.deepClone(emptyAbility);
+        abilities[key] = foundry.utils.deepClone(emptyAbility);
 
         // Honor & Sanity default to Charisma & Wisdom for NPCs and 0 for vehicles
         if ( actorData.type === "npc" ) {
-          if ( key === "hon" ) newAbility.value = actorData.data.abilities.cha?.value ?? 10;
-          else if ( key === "san" ) newAbility.value = actorData.data.abilities.wis?.value ?? 10;
+          if ( key === "hon" ) abilities[key].value = actorData.data.abilities.cha?.value ?? 10;
+          else if ( key === "san" ) abilities[key].value = actorData.data.abilities.wis?.value ?? 10;
         } else if ( (actorData.type === "vehicle") && ["hon", "san"].includes(key) ) {
-          newAbility.value = 0;
+          abilities[key].value = 0;
         }
 
-        updates[`data.abilities.${key}`] = newAbility;
+        updates[`data.abilities.${key}`] = foundry.utils.deepClone(abilities[key]);
       }
     }
     actorData.data.abilities = abilities;
@@ -380,7 +380,7 @@ export default class Actor5e extends Actor {
       if ( !skills[key] ) {
         skills[key] = foundry.utils.deepClone(emptySkill);
         skills[key].ability = skill.ability;
-        updates[`data.skills.${key}`] = skills[key];
+        updates[`data.skills.${key}`] = foundry.utils.deepClone(skills[key]);
       }
     }
     actorData.data.skills = skills;
