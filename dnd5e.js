@@ -119,6 +119,16 @@ Hooks.once("init", function() {
   // Register System Settings
   registerSystemSettings();
 
+  // Remove honor & sanity from configuration if they aren't enabled
+  if ( !game.settings.get("dnd5e", "honorScore") ) {
+    delete DND5E.abilities.hon;
+    delete DND5E.abilityAbbreviations.hon;
+  }
+  if ( !game.settings.get("dnd5e", "sanityScore") ) {
+    delete DND5E.abilities.san;
+    delete DND5E.abilityAbbreviations.san;
+  }
+
   // Patch Core Functions
   CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus + @abilities.dex.bonuses.check + @bonuses.abilities.check";
   Combatant.prototype._getInitiativeFormula = _getInitiativeFormula;

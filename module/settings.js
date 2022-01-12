@@ -1,5 +1,7 @@
 export const registerSystemSettings = function() {
 
+  const reload = foundry.utils.debounce(() => window.location.reload(), 250);
+
   // Internal System Migration Version
   game.settings.register("dnd5e", "systemMigrationVersion", {
     name: "System Migration Version",
@@ -52,6 +54,28 @@ export const registerSystemSettings = function() {
       bonus: "SETTINGS.5eProfBonus",
       dice: "SETTINGS.5eProfDice"
     }
+  });
+
+  // Use Honor ability score
+  game.settings.register("dnd5e", "honorScore", {
+    name: "SETTINGS.5eHonorN",
+    hint: "SETTINGS.5eHonorL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: reload
+  });
+
+  // Use Sanity ability score
+  game.settings.register("dnd5e", "sanityScore", {
+    name: "SETTINGS.5eSanityN",
+    hint: "SETTINGS.5eSanityL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    onChange: reload
   });
 
   // Apply Dexterity as Initiative Tiebreaker

@@ -781,6 +781,7 @@
 }
 .dnd5e.sheet.actor .tab.attributes {
   overflow: hidden;
+  align-items: flex-start;
 }
 .dnd5e.sheet.actor ul.attributes {
   flex: 0 0 60px;
@@ -832,7 +833,7 @@
 }
 .dnd5e.sheet.actor .ability-scores {
   flex: 0 0 100px;
-  height: 440px;
+  align-content: flex-start;
   list-style: none;
   margin: 0;
   padding: 0;
