@@ -25,7 +25,9 @@ DND5E.abilities = {
   con: "DND5E.AbilityCon",
   int: "DND5E.AbilityInt",
   wis: "DND5E.AbilityWis",
-  cha: "DND5E.AbilityCha"
+  cha: "DND5E.AbilityCha",
+  hon: "DND5E.AbilityHon",
+  san: "DND5E.AbilitySan"
 };
 preLocalize("abilities");
 
@@ -39,7 +41,9 @@ DND5E.abilityAbbreviations = {
   con: "DND5E.AbilityConAbbr",
   int: "DND5E.AbilityIntAbbr",
   wis: "DND5E.AbilityWisAbbr",
-  cha: "DND5E.AbilityChaAbbr"
+  cha: "DND5E.AbilityChaAbbr",
+  hon: "DND5E.AbilityHonAbbr",
+  san: "DND5E.AbilitySanAbbr"
 };
 preLocalize("abilityAbbreviations");
 
