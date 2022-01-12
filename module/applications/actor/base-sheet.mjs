@@ -49,8 +49,7 @@ export default class ActorSheet5e extends ActorSheet {
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       width: 720,
-      height: Math.max(
-        680, Math.max(
+      height: Math.max(680, Math.max(
         237 + (Object.keys(CONFIG.DND5E.abilities).length * 70),
         240 + (Object.keys(CONFIG.DND5E.skills).length * 24)
       ))
