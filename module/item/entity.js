@@ -211,14 +211,26 @@ export default class Item5e extends Item {
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
+      const attributes = {
+        ...C.spellComponents,
+        ...Object.fromEntries(Object.entries(C.spellTags).map(([k, v]) => {
+          v.tag = true;
+          return [k, v];
+        }))
+      };
       data.preparation.mode = data.preparation.mode || "prepared";
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
-      labels.components = Object.entries(data.components).reduce((arr, c) => {
-        if ( c[1] !== true ) return arr;
-        arr.push(c[0].titleCase().slice(0, 1));
-        return arr;
-      }, []);
+      labels.components = Object.entries(data.components).reduce((obj, [c, active]) => {
+        const config = attributes[c];
+        if ( !config || (active !== true) ) return obj;
+        obj.all.push({abbr: config.abbr, tag: config.tag});
+        if ( config.tag ) obj.tags.push(config.label);
+        else obj.vsm.push(config.abbr);
+        return obj;
+      }, {all: [], vsm: [], tags: []});
+      labels.components.vsm =
+        new Intl.ListFormat(game.i18n.lang, { style: "narrow", type: "conjunction" }).format(labels.components.vsm);
       labels.materials = data?.materials?.value ?? null;
     }
 
@@ -959,7 +971,8 @@ export default class Item5e extends Item {
   _spellChatData(data, labels, props) {
     props.push(
       labels.level,
-      labels.components + (labels.materials ? ` (${labels.materials})` : "")
+      labels.components.vsm + (labels.materials ? ` (${labels.materials})` : ""),
+      ...labels.components.tags
     );
   }
 

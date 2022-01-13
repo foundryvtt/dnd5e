@@ -910,14 +910,39 @@ preLocalize("weaponProperties", { sort: true });
 
 /**
  * Types of components that can be required when casting a spell.
- * @enum {string}
+ * @enum {object}
  */
 DND5E.spellComponents = {
-  V: "DND5E.ComponentVerbal",
-  S: "DND5E.ComponentSomatic",
-  M: "DND5E.ComponentMaterial"
+  vocal: {
+    label: "DND5E.ComponentVerbal",
+    abbr: "DND5E.ComponentVerbalAbbr"
+  },
+  somatic: {
+    label: "DND5E.ComponentSomatic",
+    abbr: "DND5E.ComponentSomaticAbbr"
+  },
+  material: {
+    label: "DND5E.ComponentMaterial",
+    abbr: "DND5E.ComponentMaterialAbbr"
+  }
 };
-preLocalize("spellComponents");
+preLocalize("spellComponents", {keys: ["label", "abbr"]});
+
+/**
+ * Supplementary rules keywords that inform a spell's use.
+ * @enum {object}
+ */
+DND5E.spellTags = {
+  concentration: {
+    label: "DND5E.Concentration",
+    abbr: "DND5E.ConcentrationAbbr"
+  },
+  ritual: {
+    label: "DND5E.Ritual",
+    abbr: "DND5E.RitualAbbr"
+  }
+};
+preLocalize("spellTags", {keys: ["label", "abbr"]});
 
 /**
  * Schools to which a spell can belong.

@@ -76,8 +76,8 @@
                 <div class="item-detail spell-uses">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
                 {{/if}}
                 <div class="spell-comps">
-                    {{#each labels.components}}
-                    <span class="spell-component {{this}}">{{this}}</span>
+                    {{#each labels.components.all}}
+                    <span class="spell-component{{#if tag}} tag{{/if}}">{{abbr}}</span>
                     {{/each}}
                 </div>
             </div>
