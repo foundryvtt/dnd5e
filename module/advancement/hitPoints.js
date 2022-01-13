@@ -27,6 +27,11 @@ export class HitPointsAdvancement extends Advancement {
   static defaultIcon = "icons/svg/regen.svg";
 
   /* -------------------------------------------- */
+  
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementHitPointsHint";
+
+  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 

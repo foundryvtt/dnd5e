@@ -23,6 +23,11 @@ export class AbilityScoreImprovementAdvancement extends Advancement {
 
   /** @inheritdoc */
   static defaultIcon = "icons/svg/upgrade.svg";
+  
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementAbilityScoreImprovementHint";
 
   /* -------------------------------------------- */
   /*  Display Methods                             */

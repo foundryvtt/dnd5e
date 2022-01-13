@@ -26,6 +26,11 @@ export class ItemGrantAdvancement extends Advancement {
   static defaultIcon = "icons/svg/book.svg";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementItemGrantHint";
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 

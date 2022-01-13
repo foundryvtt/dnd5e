@@ -47,6 +47,14 @@ export class Advancement {
   static defaultIcon = "icons/svg/upgrade.svg";
 
   /* -------------------------------------------- */
+
+  /**
+   * Localization key for a description of this advancement type shown in the advancement selection interface.
+   * @type {string}
+   */
+  static hint = "";
+
+  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 

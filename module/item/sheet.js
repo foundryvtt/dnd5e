@@ -397,6 +397,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
+      html.find(".advancement .item-add").click(this._onCreateAdvancement.bind(this));
     }
   }
 
@@ -463,6 +464,13 @@ export default class ItemSheet5e extends ItemSheet {
         break;
     }
     new TraitSelector(this.item, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  _onCreateAdvancement(event) {
+    const selection = new game.dnd5e.advancement.AdvancementSelection;
+    return selection.render(true);
   }
 
   /* -------------------------------------------- */

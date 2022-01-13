@@ -26,6 +26,11 @@ export class TraitAdvancement extends Advancement {
   static defaultIcon = "icons/svg/sun.svg";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementTraitHint";
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 

@@ -26,6 +26,11 @@ export class ItemChoiceAdvancement extends Advancement {
   static defaultIcon = "icons/svg/stone-path.svg";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementItemChoiceHint";
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 

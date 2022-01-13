@@ -1,0 +1,22 @@
+<form>
+  <ol class="items-list">
+  {{#each types as |advancement name|}}
+    <li class="item flexrow">
+      <label class="item-name flexrow" for="radio-{{name}}">
+        <div class="item-image inverted" style="background-image: url('{{advancement.icon}}')"></div>
+        <h3>{{advancement.label}}</h3>
+      </div>
+      <div class="item-controls flexrow">
+        <input name="advancement-type" type="radio" id="radio-{{name}}" value="{{name}}">
+      </div>
+      <div class="item-hint">
+        {{advancement.hint}}
+      </div>
+    </li>
+  {{/each}}
+  </ol>
+
+  <button type="submit" name="submit" value="1" disabled>
+    <i class="far fa-save"></i> {{localize "DND5E.AdvancementSelectionCreateButton"}}
+  </button>
+</form>

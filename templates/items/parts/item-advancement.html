@@ -1,5 +1,12 @@
 <div class="tab details advancement" data-group="primary" data-tab="advancement">
   <ol class="items-list">
+    {{#if editablePrototype}}
+      <li class="items-header flexrow">
+        <div class="item-controls flexrow">
+          <a class="item-control item-add" title="{{localize "DND5E.ItemCreate"}}"><i class="fas fa-plus"></i></a>
+        </div>
+      </li>
+    {{/if}}
 
     {{#each advancement as |data level|}}
       <li class="items-header flexrow">

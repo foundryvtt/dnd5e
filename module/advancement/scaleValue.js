@@ -25,6 +25,11 @@ export class ScaleValueAdvancement extends Advancement {
   static defaultIcon = "icons/svg/dice-target.svg";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementScaleValueHint";
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
