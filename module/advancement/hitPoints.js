@@ -1,4 +1,4 @@
-import { Advancement } from "./advancement.js";
+import { BaseAdvancement } from "./baseAdvancement.js";
 
 /**
  * Advancement that presents the player with the option to roll hit points at each level or select the average value.
@@ -7,7 +7,7 @@ import { Advancement } from "./advancement.js";
  *
  * @extends {Advancement}
  */
-export class HitPointsAdvancement extends Advancement {
+export class HitPointsAdvancement extends BaseAdvancement {
 
   /* -------------------------------------------- */
   /*  Static Properties                           */
@@ -82,6 +82,16 @@ export class HitPointsAdvancement extends Advancement {
    */
   total() {
     return Object.keys(this.data.value).reduce((total, level) => total + this.valueForLevel(parseInt(level)), 0);
+  }
+
+  /* -------------------------------------------- */
+  /*  Editing Methods                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static availableForItem(item) {
+    if ( item.type !== "class" ) return false;
+    return !item.data.data.advancement.find(a => a.type === "HitPoints");
   }
 
 }

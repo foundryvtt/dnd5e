@@ -1,10 +1,12 @@
+import { BaseConfig } from "./baseConfig.js";
+
 /**
  * Abstract base class which various advancement types can subclass.
  *
- * @property {Item5e} item    Item to which this advancement belongs.
+ * @property {Item5e} parent  Item to which this advancement belongs.
  * @property {object} [data]  Raw data stored in the advancement object.
  */
-export class Advancement {
+export class BaseAdvancement {
 
   constructor(parent, data={}) {
     /**
@@ -53,6 +55,13 @@ export class Advancement {
    * @type {string}
    */
   static hint = "";
+
+  /* -------------------------------------------- */
+
+  /**
+   * Subclass of BaseConfig that allows for editing of this advancement type.
+   */
+  static configApp = BaseConfig;
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -129,6 +138,19 @@ export class Advancement {
    */
   summaryForLevel(level) {
     return "";
+  }
+
+  /* -------------------------------------------- */
+  /*  Editing Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Can an advancement of this type be added to the provided item.
+   * @param {Item5e} item  Item to check against.
+   * @returns {boolean}    Can this be added?
+   */
+  static availableForItem(item) {
+    return true;
   }
 
 }

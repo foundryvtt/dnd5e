@@ -1,4 +1,4 @@
-import { Advancement } from "./advancement.js";
+import { BaseAdvancement } from "./baseAdvancement.js";
 
 /**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
@@ -6,7 +6,7 @@ import { Advancement } from "./advancement.js";
  *
  * @extends {Advancement}
  */
-export class ItemGrantAdvancement extends Advancement {
+export class ItemGrantAdvancement extends BaseAdvancement {
 
   /* -------------------------------------------- */
   /*  Static Properties                           */

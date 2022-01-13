@@ -7,7 +7,7 @@
         <h3>{{advancement.label}}</h3>
       </div>
       <div class="item-controls flexrow">
-        <input name="advancement-type" type="radio" id="radio-{{name}}" value="{{name}}">
+        <input name="type" type="radio" id="radio-{{name}}" value="{{name}}" {{disabled advancement.disabled}}>
       </div>
       <div class="item-hint">
         {{advancement.hint}}
@@ -16,7 +16,7 @@
   {{/each}}
   </ol>
 
-  <button type="submit" name="submit" value="1" disabled>
+  <button type="submit" name="submit" disabled>
     <i class="far fa-save"></i> {{localize "DND5E.AdvancementSelectionCreateButton"}}
   </button>
 </form>

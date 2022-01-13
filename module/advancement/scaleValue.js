@@ -1,11 +1,11 @@
-import { Advancement } from "./advancement.js";
+import { BaseAdvancement } from "./baseAdvancement.js";
 
 /**
  * Advancement that represents a value that scales with class level. **Can only be added to classes or subclasses.**
  *
  * @extends {Advancement}
  */
-export class ScaleValueAdvancement extends Advancement {
+export class ScaleValueAdvancement extends BaseAdvancement {
 
   /* -------------------------------------------- */
   /*  Static Properties                           */
@@ -48,6 +48,15 @@ export class ScaleValueAdvancement extends Advancement {
   valueForLevel(level) {
     const key = Object.keys(this.data.configuration.scale).reverse().find(l => l <= level);
     return this.data.configuration.scale[key] ?? "";
+  }
+
+  /* -------------------------------------------- */
+  /*  Editing Methods                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static availableForItem(item) {
+    return item.type === "class";
   }
 
 }

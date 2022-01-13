@@ -1,11 +1,11 @@
-import { Advancement } from "./advancement.js";
+import { BaseAdvancement } from "./baseAdvancement.js";
 
 /**
  * Advancement that presents the player with the option of improving their ability scores or selecting a feat.
  *
  * @extends {Advancement}
  */
-export class AbilityScoreImprovementAdvancement extends Advancement {
+export class AbilityScoreImprovementAdvancement extends BaseAdvancement {
 
   /* -------------------------------------------- */
   /*  Static Properties                           */
@@ -59,6 +59,15 @@ export class AbilityScoreImprovementAdvancement extends Advancement {
 
     }
     return "";
+  }
+
+  /* -------------------------------------------- */
+  /*  Editing Methods                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static availableForItem(item) {
+    return item.type === "class";
   }
 
 }

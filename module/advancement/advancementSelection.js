@@ -26,11 +26,23 @@ export class AdvancementSelection extends FormApplication {
       data.types[advancement.name] = {
         label: game.i18n.localize(advancement.defaultTitle),
         icon: advancement.defaultIcon,
-        hint: game.i18n.localize(advancement.hint)
+        hint: game.i18n.localize(advancement.hint),
+        disabled: !advancement.availableForItem(this.object)
       };
     }
+    // TODO: Sort by label
 
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _updateObject(event, formData) {
+    const advancement = game.dnd5e.advancement.types[formData.type];
+    const config = new advancement.configApp({}, advancement, this.object)
+    config.render(true);
+    this.close();
   }
 
   /* -------------------------------------------- */
@@ -39,8 +51,7 @@ export class AdvancementSelection extends FormApplication {
   _onChangeInput(event) {
     super._onChangeInput(event);
 
-    const disabled = !this.form.querySelector("input[name='advancement-type']:checked");
-    this.form.querySelector("button[type='submit']").disabled = disabled;
+    this.form.querySelector("button[type='submit']").disabled = !this.form.querySelector("input[name='type']:checked");
   }
 
 }

@@ -1,0 +1,21 @@
+<form autocomplete="off">
+  <div class="form-group">
+    <label>Custom Title</label>
+    <input type="text" name="data.title" value="{{data.title}}" placeholder="{{default.title}}">
+  </div>
+
+  <div class="form-group">
+    <label>Custom Icon</label>
+    <input type="text" name="data.icon" value="{{data.icon}}" placeholder="{{default.icon}}">
+    {{filePicker type="image" target="data.icon"}}
+  </div>
+
+  <div class="form-group">
+    <label>Class Restriction</label>
+    Primary or Secondary or All classes
+  </div>
+
+  <div class="form-group">
+    <label>Level</label>
+  </div>
+</form>

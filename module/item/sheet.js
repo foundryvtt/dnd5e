@@ -469,7 +469,7 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   _onCreateAdvancement(event) {
-    const selection = new game.dnd5e.advancement.AdvancementSelection;
+    const selection = new game.dnd5e.advancement.AdvancementSelection(this.item);
     return selection.render(true);
   }
 

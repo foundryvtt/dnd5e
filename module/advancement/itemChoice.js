@@ -1,4 +1,4 @@
-import { Advancement } from "./advancement.js";
+import { BaseAdvancement } from "./baseAdvancement.js";
 
 /**
  * Advancement that presents the player with a choice of multiple items that they can take. Keeps track of which
@@ -6,7 +6,7 @@ import { Advancement } from "./advancement.js";
  *
  * @extends {Advancement}
  */
-export class ItemChoiceAdvancement extends Advancement {
+export class ItemChoiceAdvancement extends BaseAdvancement {
 
   /* -------------------------------------------- */
   /*  Static Properties                           */

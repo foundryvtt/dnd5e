@@ -1,4 +1,4 @@
-import { Advancement } from "./advancement.js";
+import { BaseAdvancement } from "./baseAdvancement.js";
 
 /**
  * Advancement that grants the player with certain traits or presents them with a list of traits from which
@@ -6,7 +6,7 @@ import { Advancement } from "./advancement.js";
  *
  * @extends {Advancement}
  */
-export class TraitAdvancement extends Advancement {
+export class TraitAdvancement extends BaseAdvancement {
 
   /* -------------------------------------------- */
   /*  Static Properties                           */
