@@ -112,7 +112,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     const data = {};
-    for ( const advancement of item.advancement ) {
+    for ( const [idx, advancement] of Object.entries(item.advancement) ) {
       if ( (originalClass !== undefined)
            && ((advancement.data.classRestriction === "primary" && !originalClass)
            || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
@@ -124,6 +124,7 @@ export default class ItemSheet5e extends ItemSheet {
           };
         }
         data[level].items.push({
+          index: idx,
           order: advancement.sortingValueForLevel(level),
           title: advancement.titleForLevel(level),
           icon: advancement.icon,
@@ -397,7 +398,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
-      html.find(".advancement .item-add").click(this._onCreateAdvancement.bind(this));
+      html.find(".advancement").click(this._onAdvancementAction.bind(this));
     }
   }
 
@@ -468,9 +469,33 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  _onCreateAdvancement(event) {
-    const selection = new game.dnd5e.advancement.AdvancementSelection(this.item);
-    return selection.render(true);
+  /**
+   * Handle creating the advancement selection window when the add button is pressed.
+   * @param {Event} event  The click event which originated the creation.
+   */
+  _onAdvancementAction(event) {
+    const target = event.target.tagName !== "A" ? event.target.closest("a") : event.target;
+    if ( !target ) return;
+
+    const cl = target.classList;
+    if ( cl.contains("item-add") ) {
+      const selection = new game.dnd5e.advancement.AdvancementSelection(this.item);
+      return selection.render(true);
+    }
+
+    const item = event.target.closest("li.item");
+    const idx = item?.dataset.index;
+    const advancement = this.item.advancement[idx];
+    if ( !advancement ) return;
+
+    if ( cl.contains("item-edit") ) {
+      const config = new advancement.constructor.configApp(advancement, Number(idx));
+      return config.render(true);
+    } else if ( cl.contains("item-delete") ) {
+      const advancement = foundry.utils.deepClone(this.item.data.data.advancement);
+      advancement.splice(Number(idx), 1);
+      return this.item.update({"data.advancement": advancement});
+    }
   }
 
   /* -------------------------------------------- */

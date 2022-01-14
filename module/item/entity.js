@@ -203,11 +203,11 @@ export default class Item5e extends Item {
     const labels = this.labels = {};
 
     // Advancement
-    this.advancement = (itemData.data.advancement ?? []).reduce((arr, data) => {
+    this.advancement = Array.from((itemData.data.advancement ?? []).entries()).reduce((obj, [idx, data]) => {
       const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
-      if ( Advancement ) arr.push(new Advancement(this, data));
-      return arr;
-    }, []);
+      if ( Advancement ) obj[idx] = new Advancement(this, data, idx);
+      return obj;
+    }, {});
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {

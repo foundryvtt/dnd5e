@@ -39,8 +39,9 @@ export class AdvancementSelection extends FormApplication {
 
   /** @inheritdoc */
   _updateObject(event, formData) {
-    const advancement = game.dnd5e.advancement.types[formData.type];
-    const config = new advancement.configApp({}, advancement, this.object)
+    const Advancement = game.dnd5e.advancement.types[formData.type];
+    const advancement = new Advancement(this.object);
+    const config = new Advancement.configApp(advancement)
     config.render(true);
     this.close();
   }

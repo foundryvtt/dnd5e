@@ -10,12 +10,26 @@
     {{filePicker type="image" target="data.icon"}}
   </div>
 
-  <div class="form-group">
-    <label>Class Restriction</label>
-    Primary or Secondary or All classes
-  </div>
+  {{#if showClassRestrictions}}
+    <div class="form-group">
+      <label>Class Restriction</label>
+      <select name="data.classRestriction">
+        {{#select data.classRestriction}}
+          <option value="">{{localize "DND5E.AdvancementClassRestrictionNone"}}</option>
+          <option value="primary">{{localize "DND5E.AdvancementClassRestrictionPrimary"}}</option>
+          <option value="secondary">{{localize "DND5E.AdvancementClassRestrictionSecondary"}}</option>
+        {{/select}}
+      </select>
+    </div>
+  {{/if}}
 
-  <div class="form-group">
-    <label>Level</label>
-  </div>
+  {{#if showLevelSelector}}
+    <div class="form-group">
+      <label>Level</label>
+    </div>
+  {{/if}}
+
+  <button type="submit" name="submit">
+    <i class="far fa-save"></i> {{localize "DND5E.AdvancementSaveButton"}}
+  </button>
 </form>

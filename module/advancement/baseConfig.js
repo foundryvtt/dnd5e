@@ -4,12 +4,12 @@
  */
 export class BaseConfig extends FormApplication {
 
-  constructor(object, advancement, parent, options={}) {
-    super(object, options);
+  constructor(advancement, index=null, options={}) {
+    super(advancement, options);
 
     /**
-     * The class of the advancement being created or edited.
-     * @type {Class}
+     * The advancement being created or edited.
+     * @type {BaseAdvancement}
      */
     this.advancement = advancement;
 
@@ -17,7 +17,13 @@ export class BaseConfig extends FormApplication {
      * Parent item to which this advancement belongs.
      * @type {Item5e}
      */
-    this.parent = parent;
+    this.parent = advancement.parent;
+
+    /**
+     * Index in the original advancement array.
+     * @type {number|null}
+     */
+    this.index = index;
   }
 
   /* -------------------------------------------- */
@@ -34,16 +40,44 @@ export class BaseConfig extends FormApplication {
   }
 
   /* -------------------------------------------- */
-  
+
+  /**
+   * Should the level selection dropdown be displayed?
+   * @type {boolean}
+   */
+  static showLevelSelector = true;
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   getData() {
     return {
-      data: this.object.data,
+      data: this.advancement.data,
       default: {
-        title: game.i18n.localize(this.advancement.defaultTitle),
-        icon: this.advancement.defaultIcon
-      }
+        title: game.i18n.localize(this.advancement.constructor.defaultTitle),
+        icon: this.advancement.constructor.defaultIcon
+      },
+      showClassRestrictions: this.parent.type === "class",
+      showLevelSelector: this.constructor.showLevelSelector
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _updateObject(event, formData) {
+    const deletions = [];
+    let updates = foundry.utils.expandObject(formData).data;
+    updates = Object.fromEntries(Object.entries(updates).reduce((arr, [key, value]) => {
+      if ( value ) arr.push([key, value]);
+      else arr.push([`-=${key}`, null]);
+      return arr;
+    }, []));
+
+    const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
+    advancement[this.index] = foundry.utils.mergeObject(this.advancement.data, updates, { inplace: false });
+
+    return this.parent.update({"data.advancement": advancement});
   }
 
 }
