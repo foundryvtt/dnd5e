@@ -30,7 +30,7 @@ export class AdvancementSelection extends FormApplication {
         disabled: !advancement.availableForItem(this.object)
       };
     }
-    // TODO: Sort by label
+    data.types = game.dnd5e.utils.sortObjectEntries(data.types, "label");
 
     return data;
   }
