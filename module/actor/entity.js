@@ -143,6 +143,11 @@ export default class Actor5e extends Actor {
       }
     }
 
+    // Attuned items
+    if ( this.type !== "vehicle" ) data.attributes.attunement.value = this.items.filter(i => {
+      return i.data.data.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+    }).length;
+
     // Inventory encumbrance
     data.attributes.encumbrance = this._computeEncumbrance(actorData);
 
