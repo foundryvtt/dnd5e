@@ -13,6 +13,15 @@ export class ItemChoiceAdvancement extends BaseAdvancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static defaultConfiguration = {
+    choices: {},
+    allowDrops: true,
+    pool: null
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static order = 50;
 
   /* -------------------------------------------- */
@@ -41,7 +50,6 @@ export class ItemChoiceAdvancement extends BaseAdvancement {
 
   /** @inheritdoc */
   get levels() {
-    if ( !this.data.configuration.choices ) return [];
     return Array.from(Object.keys(this.data.configuration.choices));
   }
 

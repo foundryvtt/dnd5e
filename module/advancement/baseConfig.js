@@ -31,10 +31,10 @@ export class BaseConfig extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement"],
+      classes: ["advancement"],
       template: "systems/dnd5e/templates/advancement/base-config.html",
       title: "DND5E.AdvancementTitle",
-      width: 320,
+      width: 400,
       height: "auto"
     });
   }

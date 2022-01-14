@@ -13,6 +13,13 @@ export class ItemGrantAdvancement extends BaseAdvancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static defaultConfiguration = {
+    items: []
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static order = 40;
 
   /* -------------------------------------------- */

@@ -12,6 +12,14 @@ export class ScaleValueAdvancement extends BaseAdvancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static defaultConfiguration = {
+    identifier: "",
+    scale: {}
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static order = 60;
 
   /* -------------------------------------------- */
@@ -40,7 +48,6 @@ export class ScaleValueAdvancement extends BaseAdvancement {
 
   /** @inheritdoc */
   get levels() {
-    if ( !this.data.configuration.scale ) return [];
     return Array.from(Object.keys(this.data.configuration.scale));
   }
 

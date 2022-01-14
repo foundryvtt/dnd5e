@@ -27,6 +27,48 @@ export class BaseAdvancement {
   /* -------------------------------------------- */
 
   /**
+   * Name of this advancement type that will be stored in config and used for lookups.
+   * @type {string}
+   * @protected
+   */
+  static get typeName() {
+    return this.name.replace(/Advancement$/, "");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Data structure for a newly created advancement of this type.
+   * @type {object}
+   * @protected
+   */
+  static get defaultData() {
+    return {
+      type: this.typeName,
+      configuration: foundry.utils.deepClone(this.defaultConfiguration),
+      value: foundry.utils.deepClone(this.defaultValue)
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default contents of the configuration object for an advancement of this type.
+   * @type {object}
+   */
+  static defaultConfiguration = {};
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default contents of the actor value object for an advancement of this type.
+   * @type {object}
+   */
+  static defaultValue = {};
+
+  /* -------------------------------------------- */
+
+  /**
    * Number used to determine default sorting order of advancement items.
    * @type {number}
    */

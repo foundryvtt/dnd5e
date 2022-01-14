@@ -13,6 +13,16 @@ export class TraitAdvancement extends BaseAdvancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static defaultConfiguration = {
+    type: "",
+    allowReplacements: false,
+    grants: [],
+    choices: []
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static order = 30;
 
   /* -------------------------------------------- */
