@@ -333,12 +333,15 @@ export default class Item5e extends Item {
   /**
    * Populate a label with the compiled and simplified damage formula based on owned item
    * actor data. This is only used for display purposes and is not related to `Item5e#rollDamage`.
-   * @returns {{damageType: number, formula: string}[]}
+   * @returns {{damageType: string, formula: string, label: string}[]}
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
+
     if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
+
     const rollData = this.getRollData();
+
     const derivedDamage = itemData.damage?.parts?.map(damagePart => {
       let formula;
       try {
@@ -346,9 +349,12 @@ export default class Item5e extends Item {
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
-      return { formula, damageType: damagePart[1] };
+      const damageType = damagePart[1];
+      return { formula, damageType, label: `${formula} ${CONFIG.DND5E.damageTypes[damageType]}` };
     });
+
     this.labels.derivedDamage = derivedDamage;
+
     return derivedDamage;
   }
 
