@@ -169,6 +169,9 @@ export default class Actor5e extends Actor {
     // Prepare spell-casting data
     this._computeSpellcastingProgression(this.data);
 
+    // Store the post-AE AC values to calculate previews correctly.
+    data.attributes.ac._preview = {...data.attributes.ac};
+
     // Prepare armor class data
     const ac = this._computeArmorClass(data);
     this.armor = ac.equippedArmor || null;
@@ -625,7 +628,9 @@ export default class Actor5e extends Actor {
 
   /**
    * Determine a character's AC value from their equipped armor and shield.
-   * @param {object} data  Copy of the data for the actor being prepared. *Will be mutated.*
+   * @param {object} data                      Copy of the data for the actor being prepared. *Will be mutated.*
+   * @param {object} [options]
+   * @param {boolean} [options.preview=false]  Are we generating an AC preview rather than the real thing?
    * @returns {{
    *   calc: string,
    *   value: number,
@@ -640,7 +645,7 @@ export default class Actor5e extends Actor {
    * }}
    * @private
    */
-  _computeArmorClass(data) {
+  _computeArmorClass(data, {preview=false}={}) {
 
     // Get AC configuration and apply automatic migrations for older data structures
     const ac = data.attributes.ac;
@@ -694,6 +699,7 @@ export default class Actor5e extends Actor {
       default:
         let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         const rollData = this.getRollData();
+        if ( preview && data.attributes.ac._preview ) rollData.attributes.ac = data.attributes.ac._preview;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
           ac.base = Roll.safeEval(replaced);
