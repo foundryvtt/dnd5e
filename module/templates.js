@@ -21,7 +21,10 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/dnd5e/templates/items/parts/item-activation.html",
     "systems/dnd5e/templates/items/parts/item-advancement.html",
     "systems/dnd5e/templates/items/parts/item-description.html",
-    "systems/dnd5e/templates/items/parts/item-mountable.html"
+    "systems/dnd5e/templates/items/parts/item-mountable.html",
+
+    // Advancement Partials
+    "systems/dnd5e/templates/advancement/parts/advancement-controls.html"
   ]);
 };
 
