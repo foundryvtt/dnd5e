@@ -56,14 +56,13 @@ export class BaseConfig extends FormApplication {
       levels,
       showClassRestrictions: this.parent.type === "class",
       showLevelSelector: !this.advancement.constructor.multiLevel
-    }
+    };
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   _updateObject(event, formData) {
-    const deletions = [];
     let updates = foundry.utils.expandObject(formData).data;
     updates = Object.fromEntries(Object.entries(updates).reduce((arr, [key, value]) => {
       if ( value ) arr.push([key, value]);
