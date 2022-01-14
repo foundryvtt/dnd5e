@@ -135,6 +135,16 @@ export default class ItemSheet5e extends ItemSheet {
           data[level].configured = "partial";
         }
       }
+      if ( !advancement.levels.length ) {
+        if ( !data[0] ) data[0] = { configured: "partial", items: [] };
+        data[0].items.push({
+          index: idx,
+          order: advancement.constructor.order,
+          title: advancement.title,
+          icon: advancement.icon,
+          invertIcon: advancement.icon.startsWith("icons/svg/")
+        });
+      }
     }
     Object.values(data).forEach(obj => obj.items.sort((a, b) => a.order.localeCompare(b.order)));
     return data;

@@ -1,13 +1,13 @@
 <form autocomplete="off">
   <div class="form-group">
-    <label>Custom Title</label>
+    <label>{{localize "DND5E.AdvancementCustomTitle"}}</label>
     <div class="form-fields">
       <input type="text" name="data.title" value="{{data.title}}" placeholder="{{default.title}}">
     </div>
   </div>
 
   <div class="form-group">
-    <label>Custom Icon</label>
+    <label>{{localize "DND5E.AdvancementCustomIcon"}}</label>
     <div class="form-fields">
       {{filePicker type="image" target="data.icon"}}
       <input type="text" name="data.icon" value="{{data.icon}}" placeholder="{{default.icon}}">
@@ -16,7 +16,7 @@
 
   {{#if showClassRestrictions}}
     <div class="form-group">
-      <label>Class Restriction</label>
+      <label>{{localize "DND5E.AdvancementClassRestriction"}}</label>
       <div class="form-fields">
         <select name="data.classRestriction">
           {{#select data.classRestriction}}
@@ -31,7 +31,7 @@
 
   {{#if showLevelSelector}}
     <div class="form-group">
-      <label>Level</label>
+      <label>{{localize "DND5E.Level"}}</label>
       <div class="form-fields">
         <select name="data.level">
           {{selectOptions levels selected=data.level}}

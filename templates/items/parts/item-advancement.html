@@ -1,7 +1,7 @@
 <div class="tab details advancement" data-group="primary" data-tab="advancement">
   <ol class="items-list">
     {{#if editablePrototype}}
-      <li class="items-header flexrow">
+      <li class="items-header flexrow main-controls">
         <div class="item-controls flexrow">
           <a class="item-control item-add" title="{{localize "DND5E.ItemCreate"}}"><i class="fas fa-plus"></i></a>
         </div>
@@ -10,8 +10,14 @@
 
     {{#each advancement as |data level|}}
       <li class="items-header flexrow">
-        <h3 class="item-name flexrow">Level {{level}}</h3>
-      
+        <h3 class="item-name flexrow">
+          {{#if (ne level "0")}}
+            {{localize "DND5E.AdvancementLevelHeader" number=level}}
+          {{else}}
+            {{localize "DND5E.AdvancementLevelNoneHeader"}}
+          {{/if}}
+        </h3>
+
         {{#if (eq data.configured "full")}}
           <div class="item-checkmark"><i class="fas fa-check-circle"></i></div>
         {{else if (eq data.configured "partial")}}

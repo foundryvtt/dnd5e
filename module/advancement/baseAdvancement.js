@@ -43,11 +43,13 @@ export class BaseAdvancement {
    * @protected
    */
   static get defaultData() {
-    return {
+    const data = {
       type: this.typeName,
       configuration: foundry.utils.deepClone(this.defaultConfiguration),
       value: foundry.utils.deepClone(this.defaultValue)
     };
+    if ( !this.multiLevel ) data.level = 1;
+    return data;
   }
 
   /* -------------------------------------------- */

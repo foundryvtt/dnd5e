@@ -1481,6 +1481,12 @@
 .dnd5e.sheet.item .weapon-properties label.checkbox {
   flex: 0 0 98px;
 }
+.dnd5e.sheet.item .advancement .items-list .main-controls {
+  flex-direction: row-reverse;
+}
+.dnd5e.sheet.item .advancement .items-list .main-controls .item-add {
+  padding-top: 0.2em;
+}
 .dnd5e.sheet.item .advancement .items-list .items-header .item-checkmark {
   flex: 0 0 44px;
   color: #119111;
