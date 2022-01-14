@@ -93,7 +93,7 @@ export default class PropertyAttribution extends Application {
   getPropertyLabel(property) {
     const parts = property.split(".");
     if ( parts[0] === "abilities" && parts[1] ) {
-      return CONFIG.DND5E.abilities[parts[1]];
+      return CONFIG.DND5E.abilities[parts[1]] ?? property;
     }
     return property;
   }

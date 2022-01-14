@@ -127,6 +127,9 @@
       },
       "creature": {
         "attributes": {
+          "attunement": {
+            "max": 3
+          },
           "senses": {
             "darkvision": 0,
             "blindsight": 0,
@@ -631,10 +634,12 @@
     },
     "class": {
       "templates": ["itemDescription"],
+      "identifier": "",
       "levels": 1,
       "subclass": "",
       "hitDice": "d6",
       "hitDiceUsed": 0,
+      "advancement": [],
       "saves": [],
       "skills": {
         "number": 2,

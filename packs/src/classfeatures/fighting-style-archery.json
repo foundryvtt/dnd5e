@@ -31,10 +31,9 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
     },
     "consume": {
       "type": "",
@@ -51,45 +50,18 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Fighter 1, Champion 10, Ranger 2",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "armor": {
-      "value": 10
-    },
-    "hp": {
-      "value": 0,
-      "max": 0,
-      "dt": null,
-      "conditions": ""
-    },
-    "properties": {
-      "amm": false,
-      "fin": false,
-      "fir": false,
-      "foc": false,
-      "hvy": false,
-      "lgt": false,
-      "lod": false,
-      "rch": false,
-      "rel": false,
-      "ret": false,
-      "spc": false,
-      "thr": false,
-      "two": false,
-      "ver": false
     }
   },
   "effects": [
@@ -105,7 +77,7 @@
       ],
       "disabled": false,
       "duration": {
-        "startTime": 1620159562067
+        "startTime": null
       },
       "icon": "icons/weapons/bows/shortbow-recurve-yellow.webp",
       "label": "Fighting Style: Archery",

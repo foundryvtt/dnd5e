@@ -7,7 +7,7 @@
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p>Beginning at 14th level, you can use your action to end one spell on yourself or on one willing creature that you touch.</p><p>You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain expended uses when you finish a long rest.</p><p><em>**Foundry note: Note the limited uses is set to the base default of 1 per long rest. Please manually adjust as required.</em></p>",
+      "value": "<p>Beginning at 14th level, you can use your action to end one spell on yourself or on one willing creature that you touch.</p><p>You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain expended uses when you finish a long rest.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -33,9 +33,13 @@
     },
     "uses": {
       "value": 1,
-      "max": "@abilities.cha.mod",
-      "per": "lr",
-      "type": ""
+      "max": "max(1, @abilities.cha.mod)",
+      "per": "lr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Paladin 14",

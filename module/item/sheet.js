@@ -47,6 +47,7 @@ export default class ItemSheet5e extends ItemSheet {
     const itemData = data.data;
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
+    data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -77,12 +78,61 @@ export default class ItemSheet5e extends ItemSheet {
     data.hasAC = data.isArmor || data.isMountable;
     data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
 
+    // Advancement
+    data.advancement = this._getItemAdvancement(this.item);
+
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
     data.data = itemData.data;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the display object used to show the advancement tab.
+   * @param {Item5e} item  The item for which the advancement is being prepared.
+   * @returns {object}     Object with advancement data grouped by levels.
+   */
+  _getItemAdvancement(item) {
+    const data = {};
+    let maxLevel = 0;
+    let originalClass;
+    if ( item.parent ) {
+      if ( item.type === "class" ) {
+        maxLevel = item.data.data.levels;
+        originalClass = item.id === item.parent.data.data.details.originalClass;
+      } else {
+        maxLevel = item.parent.data.data.details.level;
+      }
+    }
+    for ( const advancement of item.advancement ) {
+      if ( (originalClass !== undefined)
+           && ((advancement.data.classRestriction === "primary" && !originalClass)
+           || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
+      for ( const level of advancement.levels ) {
+        if ( !data[level] ) {
+          data[level] = {
+            configured: (level <= maxLevel) ? "full" : false,
+            items: []
+          };
+        }
+        data[level].items.push({
+          order: advancement.sortingValueForLevel(level),
+          title: advancement.titleForLevel(level),
+          icon: advancement.icon,
+          invertIcon: advancement.icon.startsWith("icons/svg/"),
+          summary: advancement.summaryForLevel(level)
+        });
+        if ( (data[level].configured === "full") && !advancement.configuredForLevel(level) ) {
+          data[level].configured = "partial";
+        }
+      }
+    }
+    Object.values(data).forEach(obj => obj.items.sort((a, b) => a.order.localeCompare(b.order)));
     return data;
   }
 
@@ -149,6 +199,15 @@ export default class ItemSheet5e extends ItemSheet {
       }, {});
     }
 
+    // Hit Dice
+    else if ( consume.type === "hitDice" ) {
+      return {
+        smallest: game.i18n.localize("DND5E.ConsumeHitDiceSmallest"),
+        ...CONFIG.DND5E.hitDieTypes.reduce((obj, hd) => { obj[hd] = hd; return obj; }, {}),
+        largest: game.i18n.localize("DND5E.ConsumeHitDiceLargest")
+      };
+    }
+
     // Materials
     else if ( consume.type === "material" ) {
       return actor.items.reduce((obj, i) => {
@@ -178,6 +237,7 @@ export default class ItemSheet5e extends ItemSheet {
         return obj;
       }, {});
     }
+
     else return {};
   }
 
@@ -221,10 +281,9 @@ export default class ItemSheet5e extends ItemSheet {
 
     else if ( item.type === "spell" ) {
       props.push(
-        labels.components,
+        labels.components.vsm,
         labels.materials,
-        item.data.components.concentration ? game.i18n.localize("DND5E.Concentration") : null,
-        item.data.components.ritual ? game.i18n.localize("DND5E.Ritual") : null
+        ...labels.components.tags
       );
     }
 
@@ -302,9 +361,20 @@ export default class ItemSheet5e extends ItemSheet {
       if ( !maxRoll.isDeterministic ) {
         data.data.uses.max = this.object.data._source.data.uses.max;
         this.form.querySelector("input[name='data.uses.max']").value = data.data.uses.max;
-        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
+        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
         }));
+      }
+    }
+
+    // Check class identifier
+    if ( this.object.type === "class" && data.data.identifier !== "" ) {
+      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
+      const match = data.data.identifier.match(dataRgx);
+      if ( !match ) {
+        data.data.identifier = this.object.data._source.data.identifier;
+        this.form.querySelector("input[name='data.identifier']").value = data.data.identifier;
+        return ui.notifications.error(game.i18n.localize("DND5E.ClassIdentifierError"));
       }
     }
 

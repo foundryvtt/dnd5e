@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": "",
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Barbarian 1",
@@ -65,5 +67,26 @@
   },
   "flags": {},
   "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "hEgUnQNVxtBo2zkK",
+      "changes": [
+        {
+          "key": "data.attributes.ac.calc",
+          "mode": 5,
+          "value": "unarmoredBarb"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "label": "Unarmored Defense",
+      "origin": "Item.aIMXb43ACIxMItbh",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

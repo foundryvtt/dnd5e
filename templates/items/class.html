@@ -26,6 +26,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+        <a class="item" data-tab="advancement">{{ localize "DND5E.AdvancementTitle" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -38,6 +39,17 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Identifier --}}
+            <div class="form-group">
+                <label>{{ localize "DND5E.ClassIdentifier" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="data.identifier" value="{{data.identifier}}">
+                </div>
+                <p class="hint">
+                    {{{localize "DND5E.ClassIdentifierHint" identifier=data.identifier}}}
+                </p>
+            </div>
 
             {{!-- Class Levels --}}
             <div class="form-group">
@@ -81,7 +93,7 @@
                 <label>{{localize 'DND5E.SpellProgression'}}</label>
                 <div class="form-fields">
                     <select name="data.spellcasting.progression">
-                        {{selectOptions config.spellProgression selected=data.spellcasting.progression localize=true}}
+                        {{selectOptions config.spellProgression selected=data.spellcasting.progression}}
                     </select>
                 </div>
             </div>
@@ -158,5 +170,9 @@
                 </div>
             </div>
         </div>
+
+        {{!-- Advancement Tab --}}
+        {{> "systems/dnd5e/templates/items/parts/item-advancement.html"}}
+
     </section>
 </form>

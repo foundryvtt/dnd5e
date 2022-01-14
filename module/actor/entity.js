@@ -32,7 +32,7 @@ export default class Actor5e extends Actor {
     if ( this._classes !== undefined ) return this._classes;
     if ( !["character", "npc"].includes(this.data.type) ) return this._classes = {};
     return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
-      obj[cls.name.slugify({strict: true})] = cls;
+      obj[cls.identifier] = cls;
       return obj;
     }, {});
   }
@@ -64,6 +64,10 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
+    const updates = {};
+    this._prepareBaseAbilities(this.data, updates);
+    if ( !foundry.utils.isObjectEmpty(updates) ) this.data.update(updates);
+
     this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
       case "character":
@@ -242,14 +246,14 @@ export default class Actor5e extends Actor {
    * Get a list of features to add to the Actor when a class item is updated.
    * Optionally prompt the user for which they would like to add.
    * @param {object} [options]
-   * @param {string} [options.className]     Name of the class if it has been changed.
-   * @param {string} [options.subclassName]  Name of the selected subclass if it has been changed.
-   * @param {number} [options.level]         New class level if it has been changed.
-   * @returns {Promise<Item5e[]>}            Any new items that should be added to the actor.
+   * @param {string} [options.classIdentifier] Identifier slug of the class if it has been changed.
+   * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
+   * @param {number} [options.level]           New class level if it has been changed.
+   * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
    */
-  async getClassFeatures({className, subclassName, level}={}) {
+  async getClassFeatures({classIdentifier, subclassName, level}={}) {
     const existing = new Set(this.items.map(i => i.name));
-    const features = await Actor5e.loadClassFeatures({className, subclassName, level});
+    const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
     return features.filter(f => !existing.has(f.name)) || [];
   }
 
@@ -258,18 +262,17 @@ export default class Actor5e extends Actor {
   /**
    * Return the features which a character is awarded for each class level.
    * @param {object} [options]
-   * @param {string} [options.className]     Name of the class being added or updated.
-   * @param {string} [options.subclassName]  Name of the subclass of the class being added, if any.
-   * @param {number} [options.level]         The number of levels in the added class.
-   * @param {number} [options.priorLevel]    The previous level of the added class.
-   * @returns {Promise<Item5e[]>}            Items that should be added based on the changes made.
+   * @param {string} [options.classIdentifier] Identifier slug of the class being added or updated.
+   * @param {string} [options.subclassName]    Name of the subclass of the class being added, if any.
+   * @param {number} [options.level]           The number of levels in the added class.
+   * @param {number} [options.priorLevel]      The previous level of the added class.
+   * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
    */
-  static async loadClassFeatures({className="", subclassName="", level=1, priorLevel=0}={}) {
-    className = className.toLowerCase();
+  static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
-    const clsConfig = CONFIG.DND5E.classFeatures[className];
+    const clsConfig = CONFIG.DND5E.classFeatures[classIdentifier];
     if (!clsConfig) return [];
 
     // Acquire class features
@@ -306,6 +309,34 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
   /*  Data Preparation Helpers                    */
   /* -------------------------------------------- */
+
+  /**
+   * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
+   * @param {ActorData} actorData  Data being prepared.
+   * @param {object} updates       Updates to be applied to the actor. *Will be mutated*.
+   * @private
+   */
+  _prepareBaseAbilities(actorData, updates) {
+    const abilities = {};
+    const emptyAbility = game.system.template.Actor.templates.common.abilities.cha;
+    for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
+      abilities[key] = actorData.data.abilities[key];
+      if ( !abilities[key] ) {
+        const newAbility = foundry.utils.deepClone(emptyAbility);
+
+        // Honor & Sanity default to Charisma & Wisdom for NPCs and 0 for vehicles
+        if ( actorData.type === "npc" ) {
+          if ( key === "hon" ) newAbility.value = actorData.data.abilities.cha?.value ?? 10;
+          else if ( key === "san" ) newAbility.value = actorData.data.abilities.wis?.value ?? 10;
+        } else if ( (actorData.type === "vehicle") && ["hon", "san"].includes(key) ) {
+          newAbility.value = 0;
+        }
+
+        updates[`data.abilities.${key}`] = newAbility;
+      }
+    }
+    actorData.data.abilities = abilities;
+  }
 
   /**
    * Perform any Character specific preparation.
@@ -419,7 +450,7 @@ export default class Actor5e extends Actor {
       // Compute modifier
       const checkBonusAbl = this._simplifyBonus(data.abilities[skl.ability]?.bonuses?.check, bonusData);
       skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
-      skl.mod = data.abilities[skl.ability].mod;
+      skl.mod = data.abilities[skl.ability]?.mod ?? 0;
       skl.prof = new Proficiency(data.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
@@ -487,10 +518,10 @@ export default class Actor5e extends Actor {
     // Initiative modifiers
     const joat = flags.jackOfAllTrades;
     const athlete = flags.remarkableAthlete;
-    const dexCheckBonus = this._simplifyBonus(data.abilities.dex.bonuses?.check, bonusData);
+    const dexCheckBonus = this._simplifyBonus(data.abilities.dex?.bonuses?.check, bonusData);
 
     // Compute initiative modifier
-    init.mod = data.abilities.dex.mod;
+    init.mod = data.abilities.dex?.mod ?? 0;
     init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
     init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
@@ -558,8 +589,8 @@ export default class Actor5e extends Actor {
     }
 
     // Look up the number of slots per level from the progression table
-    const levels = Math.clamped(progression.slot, 0, 20);
-    const slots = DND5E.SPELL_SLOT_TABLE[levels - 1] || [];
+    const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
+    const slots = DND5E.SPELL_SLOT_TABLE[Math.min(levels, DND5E.SPELL_SLOT_TABLE.length) - 1] || [];
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
       if ( Number.isNaN(i) ) continue;
@@ -569,7 +600,7 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the Actor's pact magic level (if any)
-    let pl = Math.clamped(progression.pact, 0, 20);
+    let pl = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
     spells.pact = spells.pact || {};
     if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = actorData.data.details.spellLevel;
 
@@ -649,7 +680,7 @@ export default class Actor5e extends Actor {
           ac.base = (armorData.value ?? 0) + ac.dex;
           ac.equippedArmor = armors[0];
         } else {
-          ac.dex = data.abilities.dex.mod;
+          ac.dex = data.abilities.dex?.mod ?? 0;
           ac.base = 10 + ac.dex;
         }
         break;
@@ -875,12 +906,12 @@ export default class Actor5e extends Actor {
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
-    const parts = [];
+    const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
 
     // Add ability modifier
-    parts.push("@mod");
     data.mod = skl.mod;
+    data.defaultAbility = skl.ability;
 
     // Include proficiency bonus
     if ( skl.prof.hasProficiency ) {
@@ -895,11 +926,8 @@ export default class Actor5e extends Actor {
     }
 
     // Ability-specific check bonus
-    if ( abl?.bonuses?.check ) {
-      const checkBonusKey = `${skl.ability}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
-    }
+    if ( abl?.bonuses?.check ) data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
+    else data.abilityCheckBonus = 0;
 
     // Skill-specific skill bonus
     if ( skl.bonuses?.check ) {
@@ -928,6 +956,7 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: `${game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]})}: ${this.name}`,
+      chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: reliableTalent,
       minimum: skillMinimum,
@@ -948,7 +977,7 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId];
+    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     new Dialog({
       title: `${game.i18n.format("DND5E.AbilityPromptTitle", {ability: label})}: ${this.name}`,
       content: `<p>${game.i18n.format("DND5E.AbilityPromptText", {ability: label})}</p>`,
@@ -975,7 +1004,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId];
+    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.data.data.abilities[abilityId];
 
     const parts = [];
@@ -983,16 +1012,16 @@ export default class Actor5e extends Actor {
 
     // Add ability modifier
     parts.push("@mod");
-    data.mod = abl.mod;
+    data.mod = abl?.mod ?? 0;
 
     // Include proficiency bonus
-    if ( abl.checkProf.hasProficiency ) {
+    if ( abl?.checkProf.hasProficiency ) {
       parts.push("@prof");
       data.prof = abl.checkProf.term;
     }
 
     // Add ability-specific check bonus
-    if ( abl.bonuses?.check ) {
+    if ( abl?.bonuses?.check ) {
       const checkBonusKey = `${abilityId}CheckBonus`;
       parts.push(`@${checkBonusKey}`);
       data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
@@ -1038,7 +1067,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId];
+    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.data.data.abilities[abilityId];
 
     const parts = [];
@@ -1046,16 +1075,16 @@ export default class Actor5e extends Actor {
 
     // Add ability modifier
     parts.push("@mod");
-    data.mod = abl.mod;
+    data.mod = abl?.mod ?? 0;
 
     // Include proficiency bonus
-    if ( abl.saveProf.hasProficiency ) {
+    if ( abl?.saveProf.hasProficiency ) {
       parts.push("@prof");
       data.prof = abl.saveProf.term;
     }
 
     // Include ability-specific saving throw bonus
-    if ( abl.bonuses?.save ) {
+    if ( abl?.bonuses?.save ) {
       const saveBonusKey = `${abilityId}SaveBonus`;
       parts.push(`@${saveBonusKey}`);
       data[saveBonusKey] = Roll.replaceFormulaData(abl.bonuses.save, data);

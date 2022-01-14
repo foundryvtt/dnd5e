@@ -32,8 +32,8 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": "",
       "per": null
     },
     "consume": {
@@ -67,5 +67,26 @@
   },
   "flags": {},
   "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "iIQXR8VezkvbkFoS",
+      "changes": [
+        {
+          "key": "data.traits.languages.value",
+          "mode": 2,
+          "value": "druidic"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/sundries/documents/document-torn-diagram-tan.webp",
+      "label": "Druidic",
+      "origin": "Item.LzJ5ayHt0OlSVGxi",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

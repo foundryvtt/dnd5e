@@ -29,13 +29,13 @@ export const _getInitiativeFormula = function() {
   ];
 
   // Ability Check Bonuses
-  const dexCheckBonus = actorData.abilities.dex.bonuses?.check;
+  const dexCheckBonus = actorData.abilities.dex?.bonuses?.check;
   const globalCheckBonus = actorData.bonuses?.abilities?.check;
   if ( dexCheckBonus ) parts.push(Roll.replaceFormulaData(dexCheckBonus, rollData));
   if ( globalCheckBonus ) parts.push(Roll.replaceFormulaData(globalCheckBonus, rollData));
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
-  if ( tiebreaker ) parts.push(actor.data.data.abilities.dex.value / 100);
+  if ( tiebreaker ) parts.push(actor.data.data.abilities.dex?.value ?? 0 / 100);
   return parts.filter(p => p !== null).join(" + ");
 };

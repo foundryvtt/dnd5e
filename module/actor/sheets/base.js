@@ -46,7 +46,9 @@ export default class ActorSheet5e extends ActorSheet {
         ".spellbook .inventory-list",
         ".effects .inventory-list"
       ],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
+      width: 720,
+      height: Math.max(680, 237 + (Object.keys(CONFIG.DND5E.abilities).length * 70))
     });
   }
 
@@ -122,7 +124,7 @@ export default class ActorSheet5e extends ActorSheet {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
-      abl.baseProf = source.abilities[a].proficient;
+      abl.baseProf = source.abilities[a]?.proficient ?? 0;
     }
 
     // Skills
@@ -963,6 +965,13 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
+
+    // Check to make sure the newly created class doesn't take player over level cap
+    if ( type === "class" && (this.actor.data.data.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
+      return ui.notifications.error(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
+        {max: CONFIG.DND5E.maxLevel}));
+    }
+
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`DND5E.ItemType${type.capitalize()}`)}),
       type: type,

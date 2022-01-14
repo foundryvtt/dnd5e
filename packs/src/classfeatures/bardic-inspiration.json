@@ -33,9 +33,8 @@
     },
     "uses": {
       "value": 1,
-      "max": "@abilities.cha.mod",
-      "per": "lr",
-      "type": "lr"
+      "max": "max(1, @abilities.cha.mod)",
+      "per": "lr"
     },
     "consume": {
       "type": "",
@@ -52,34 +51,18 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "1d6",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Bard 1",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "featType": {
-      "value": "ability",
-      "_deprecated": true,
-      "type": "String",
-      "label": "Feat Type"
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
     }
   },
   "flags": {},

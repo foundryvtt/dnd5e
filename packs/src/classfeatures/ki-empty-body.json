@@ -38,6 +38,11 @@
       "per": "",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
     "attackBonus": 0,
@@ -48,50 +53,18 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Monk 18",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
-    "armor": {
-      "value": 10
-    },
-    "hp": {
-      "value": 0,
-      "max": 0,
-      "dt": null,
-      "conditions": ""
-    },
-    "properties": {
-      "amm": false,
-      "fin": false,
-      "fir": false,
-      "foc": false,
-      "hvy": false,
-      "lgt": false,
-      "lod": false,
-      "rch": false,
-      "rel": false,
-      "ret": false,
-      "spc": false,
-      "thr": false,
-      "two": false,
-      "ver": false
     }
   },
   "flags": {},
