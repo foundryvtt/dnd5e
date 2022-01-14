@@ -83,7 +83,34 @@ export default class ItemSheet5e extends ItemSheet {
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
     data.data = itemData.data;
+
+    // if item is a class, get the Subclass data
+    if(data.itemType === "Class" && data.config.classFeatures[itemData.name.slugify()]) {
+      data.subclass = this._getSubclasses(itemData);
+    }
+
     return data;
+  }
+
+  /* -------------------------------------------- */
+  
+  /**
+   * Gets all the subclasses from the current class and gives it to the sheet so that the user can select it from a drop down menu
+   *
+   * @param {object} item  Item data for the item being displayed
+   * @returns {object[]}   Array with each of the subclasses ID and lable stored inside
+   * @protected
+   */
+  _getSubclasses(item){
+    const configSubclasses = CONFIG.DND5E.classFeatures[item.name.slugify()].subclasses
+    const subclasses = [];
+    for (const property in configSubclasses){
+      subclasses.push({
+        id:property,
+        label:configSubclasses[property].label
+      });
+    }
+    return subclasses;
   }
 
   /* -------------------------------------------- */
