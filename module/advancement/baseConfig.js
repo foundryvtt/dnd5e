@@ -41,24 +41,21 @@ export class BaseConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /**
-   * Should the level selection dropdown be displayed?
-   * @type {boolean}
-   */
-  static showLevelSelector = true;
-
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
   getData() {
+    const levels = {};
+    for ( let level = 1; level <= CONFIG.DND5E.maxLevel; level++ ) {
+      levels[level] = level;
+    }
     return {
       data: this.advancement.data,
       default: {
         title: game.i18n.localize(this.advancement.constructor.defaultTitle),
         icon: this.advancement.constructor.defaultIcon
       },
+      levels,
       showClassRestrictions: this.parent.type === "class",
-      showLevelSelector: this.constructor.showLevelSelector
+      showLevelSelector: !this.advancement.constructor.multiLevel
     }
   }
 

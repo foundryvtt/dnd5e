@@ -64,6 +64,16 @@ export class BaseAdvancement {
   static configApp = BaseConfig;
 
   /* -------------------------------------------- */
+
+  /**
+   * Can this advancement affect more than one level. If this is set to true, the level selection control
+   * in the configuration window is hidden and the advancement should provide its own implementation of
+   * `Advancement#levels` and potentially its own level configuration interface.
+   * @type {boolean}
+   */
+  static multiLevel = false;
+
+  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
@@ -93,7 +103,7 @@ export class BaseAdvancement {
    * @returns {number[]}
    */
   get levels() {
-    return this.data.levels ?? (this.data.level ? [this.data.level] : []);
+    return this.data.level ? [this.data.level] : [];
   }
 
   /* -------------------------------------------- */

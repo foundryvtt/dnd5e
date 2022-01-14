@@ -31,6 +31,21 @@ export class ItemChoiceAdvancement extends BaseAdvancement {
   static hint = "DND5E.AdvancementItemChoiceHint";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static multiLevel = true;
+
+  /* -------------------------------------------- */
+  /*  Instance Properties                         */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get levels() {
+    if ( !this.data.configuration.choices ) return [];
+    return Array.from(Object.keys(this.data.configuration.choices));
+  }
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 

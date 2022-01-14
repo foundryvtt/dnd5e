@@ -23,7 +23,7 @@ export class AbilityScoreImprovementAdvancement extends BaseAdvancement {
 
   /** @inheritdoc */
   static defaultIcon = "icons/svg/upgrade.svg";
-  
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */

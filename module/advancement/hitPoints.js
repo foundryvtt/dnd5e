@@ -32,12 +32,17 @@ export class HitPointsAdvancement extends BaseAdvancement {
   static hint = "DND5E.AdvancementHitPointsHint";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static multiLevel = true;
+
+  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   get levels() {
-    return Array.from({length: 20}, (v, i) => i + 1);
+    return Array.from({length: CONFIG.DND5E.maxLevel}, (v, i) => i + 1);
   }
 
   /* -------------------------------------------- */

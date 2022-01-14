@@ -26,6 +26,9 @@
   {{#if showLevelSelector}}
     <div class="form-group">
       <label>Level</label>
+      <select name="data.level">
+        {{selectOptions levels selected=data.level}}
+      </select>
     </div>
   {{/if}}
 

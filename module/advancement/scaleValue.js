@@ -30,6 +30,21 @@ export class ScaleValueAdvancement extends BaseAdvancement {
   static hint = "DND5E.AdvancementScaleValueHint";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static multiLevel = true;
+
+  /* -------------------------------------------- */
+  /*  Instance Properties                         */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get levels() {
+    if ( !this.data.configuration.scale ) return [];
+    return Array.from(Object.keys(this.data.configuration.scale));
+  }
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
