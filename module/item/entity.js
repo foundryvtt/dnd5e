@@ -407,7 +407,7 @@ export default class Item5e extends Item {
     // Include the item's innate attack bonus as the initial value and label
     if ( itemData.attackBonus ) {
       parts.push(itemData.attackBonus);
-      this.labels.toHit = itemData.attackBonus;
+      this.labels.toHit = !/^[+-]/.test(itemData.attackBonus) ? `+ ${itemData.attackBonus}` : itemData.attackBonus;
     }
 
     // Take no further action for un-owned items
@@ -446,7 +446,7 @@ export default class Item5e extends Item {
 
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
-    const formula = simplifyRollFormula(roll.formula);
+    const formula = simplifyRollFormula(roll.formula) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
 
     // Update labels and return the prepared roll data
