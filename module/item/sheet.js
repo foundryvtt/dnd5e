@@ -378,7 +378,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Check class identifier
-    if ( this.object.type === "class" && data.data.identifier !== "" ) {
+    if ( data.data.identifier ) {
       const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
       const match = data.data.identifier.match(dataRgx);
       if ( !match ) {

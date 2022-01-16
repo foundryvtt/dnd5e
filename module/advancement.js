@@ -7,6 +7,7 @@ import { DeleteConfirmationDialog } from "./advancement/delete-confirmation-dial
 import * as steps from "./advancement/advancement-step.js";
 import { HitPointsAdvancement } from "./advancement/hit-points.js";
 import { ItemGrantAdvancement } from "./advancement/item-grant.js";
+import { SubclassAdvancement } from "./advancement/subclass.js";
 
 const advancement = {
   Advancement,
@@ -19,7 +20,8 @@ const advancement = {
   steps,
   types: {
     HitPointsAdvancement,
-    ItemGrantAdvancement
+    ItemGrantAdvancement,
+    SubclassAdvancement
   }
 };
 

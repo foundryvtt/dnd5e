@@ -1633,7 +1633,7 @@ export default class Item5e extends Item {
     await super._preCreate(data, options, user);
 
     // Create class identifier based on name
-    if ( (this.type === "class") && !this.data.data.identifier ) {
+    if ( ["class", "subclass"].includes(this.type) && !this.data.data.identifier ) {
       await this.data.update({ "data.identifier": data.name.slugify({strict: true}) });
     }
 
