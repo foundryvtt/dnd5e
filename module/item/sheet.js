@@ -48,8 +48,6 @@ export default class ItemSheet5e extends ItemSheet {
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
     data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
-    data.embedded = this.object.isEmbedded;
-    data.editablePrototype = data.editable && !data.embedded;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
