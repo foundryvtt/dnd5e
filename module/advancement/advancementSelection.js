@@ -1,7 +1,8 @@
 /**
  * Presents a list of advancement types to create when clicking the new advancement button.
  * One a type is selected, this hands the process over to the advancement's individual editing interface.
- * @extends {Application}
+ *
+ * @extends {FormApplication}
  */
 export class AdvancementSelection extends FormApplication {
 

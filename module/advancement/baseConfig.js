@@ -1,6 +1,11 @@
 /**
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
+ *
+ * @property {BaseAdvancement} advancement  The advancement item being edited.
+ * @property {number} index                 Location of the original advancement data in the item.
+ * @property {object} options               Additional options passed to FormApplication.
+ * @extends {FormApplication}
  */
 export class BaseConfig extends FormApplication {
 

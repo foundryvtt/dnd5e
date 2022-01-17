@@ -5,7 +5,7 @@ import { BaseAdvancement } from "./baseAdvancement.js";
  * Keeps track of player hit point rolls or selection for each class level. **Can only be added to classes and each
  * class can only have one.**
  *
- * @extends {Advancement}
+ * @extends {BaseAdvancement}
  */
 export class HitPointsAdvancement extends BaseAdvancement {
 
