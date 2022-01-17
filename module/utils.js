@@ -18,29 +18,26 @@ export function sortObjectEntries(obj, sortKey) {
 /* -------------------------------------------- */
 
 /**
- * Retrieve the indexed data for a Document using its UUID.
+ * Retrieve the indexed data for a Document using its UUID. Will never return a result for embedded documents.
  * @param {string} uuid  The UUID of the Document index to retrieve.
- * @returns {object}
+ * @returns {object}     Document's index if one could be found.
  */
 export function indexFromUuid(uuid) {
-  let parts = uuid.split(".");
+  const parts = uuid.split(".");
   let index;
 
   // Compendium Documents
   if ( parts[0] === "Compendium" ) {
-    parts.shift();
-    const [scope, packName, id] = parts.slice(0, 3);
-    parts = parts.slice(3);
+    const [, scope, packName, id] = parts;
     const pack = game.packs.get(`${scope}.${packName}`);
     index = pack.index.get(id);
   }
 
   // World Documents
-  else {
-    const [docName, id] = parts.slice(0, 2);
-    parts = parts.slice[2];
+  else if ( parts.length < 3 ) {
+    const [docName, id] = parts;
     const collection = CONFIG[docName].collection.instance;
-    index = collection.index.get(id);
+    index = collection.get(id);
   }
 
   return index || null;
@@ -59,17 +56,15 @@ export function _linkForUuid(uuid) {
   const index = game.dnd5e.utils.indexFromUuid(uuid);
   if ( !index ) return "";
 
-  let type;
-  let target;
+  let link;
   if ( uuid.startsWith("Compendium.") ) {
-    type = "Compendium";
-    target = uuid.replace("Compendium.", "");
+    link = `@Compendium[${uuid.substr(11)}]{${index.name}}`;
   } else {
-    type = "Item";
-    target = uuid;
+    const [type, id] = uuid.split(".");
+    link = `@${type}[${id}]{${index.name}}`;
   }
 
-  return TextEditor._createContentLink(`@${type}[${target}]{${index.name}}`, type, target, index.name).outerHTML;
+  return TextEditor.enrichHTML(link);
 }
 
 /* -------------------------------------------- */
