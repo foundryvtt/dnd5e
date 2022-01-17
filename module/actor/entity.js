@@ -173,8 +173,8 @@ export default class Actor5e extends Actor {
     // Prepare skills
     this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
 
-    // Reset class store to ensure it is updated with any changes
-    this._classes = undefined;
+    // Reset class store and associate classes with their subclasses
+    this._prepareClassesAndSubclasses();
 
     // Determine Initiative Modifier
     this._computeInitiativeModifier(actorData, checkBonus, bonusData);
@@ -228,6 +228,7 @@ export default class Actor5e extends Actor {
     data.classes = Object.entries(this.classes).reduce((obj, e) => {
       const [slug, cls] = e;
       obj[slug] = cls.data.data;
+      if ( cls.subclass ) obj[slug].subclass = cls.subclass.data.data;
       return obj;
     }, {});
     return data;
@@ -528,6 +529,34 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Prepare class and subclass objects.
+   * @private
+   */
+  _prepareClassesAndSubclasses() {
+    this._classes = {};
+    const subclasses = {};
+    for ( const item of this.items ) {
+      if ( item.type === "class" ) {
+
+        this._classes[item.identifier] = item;
+        const subclass = subclasses[item.identifier];
+        if ( subclass ) subclass.class = item;
+        item.subclass = subclass;
+
+      } else if ( item.type === "subclass" ) {
+
+        subclasses[item.data.data.classIdentifier] = item;
+        const cls = this._classes[item.identifier];
+        if ( cls ) cls.subclass = item;
+        item.class = cls;
+
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Calculate the initiative bonus to display on a character sheet
    *
    * @param {object} actorData         The actor data being prepared.
@@ -579,12 +608,13 @@ export default class Actor5e extends Actor {
     let caster = null;
 
     // Tabulate the total spell-casting progression
-    const classes = this.data.items.filter(i => i.type === "class");
-    for ( let cls of classes ) {
+    for ( let cls of Object.values(this._classes) ) {
       const d = cls.data.data;
-      if ( d.spellcasting.progression === "none" ) continue;
+      const sd = cls.subclass?.data.data;
+      let prog = d.spellcasting.progression;
+      if ( sd && sd.spellcasting.progression !== "none" ) prog = sd.spellcasting.progression;
+      if ( prog === "none" ) continue;
       const levels = d.levels;
-      const prog = d.spellcasting.progression;
 
       // Accumulate levels
       if ( prog !== "pact" ) {

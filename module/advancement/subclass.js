@@ -4,7 +4,7 @@ import { Advancement } from "./advancement.js";
 /**
  * Advancement for class items that allows a subclass to be selected.
  *
- * @extends {ItemChoiceAdvancement}
+ * @extends {Advancement}
  */
 export class SubclassAdvancement extends Advancement {
 
