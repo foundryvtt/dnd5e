@@ -2,19 +2,19 @@
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
  *
- * @property {BaseAdvancement} advancement  The advancement item being edited.
- * @property {number} index                 Location of the original advancement data in the item.
- * @property {object} options               Additional options passed to FormApplication.
+ * @property {Advancement} advancement  The advancement item being edited.
+ * @property {number} index             Location of the original advancement data in the item.
+ * @property {object} options           Additional options passed to FormApplication.
  * @extends {FormApplication}
  */
-export class BaseConfig extends FormApplication {
+export class AdvancementConfig extends FormApplication {
 
   constructor(advancement, index=null, options={}) {
     super(advancement, options);
 
     /**
      * The advancement being created or edited.
-     * @type {BaseAdvancement}
+     * @type {Advancement}
      */
     this.advancement = advancement;
 
@@ -37,7 +37,7 @@ export class BaseConfig extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["advancement"],
-      template: "systems/dnd5e/templates/advancement/base-config.html",
+      template: "systems/dnd5e/templates/advancement/advancement-config.html",
       title: "DND5E.AdvancementTitle",
       width: 400,
       height: "auto"

@@ -408,7 +408,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
-      html.find(".advancement").click(this._onAdvancementAction.bind(this));
+      html.find(".advancement .item-control").click(this._onAdvancementAction.bind(this));
     }
   }
 
@@ -484,16 +484,13 @@ export default class ItemSheet5e extends ItemSheet {
    * @param {Event} event  The click event which originated the creation.
    */
   _onAdvancementAction(event) {
-    const target = event.target.tagName !== "A" ? event.target.closest("a") : event.target;
-    if ( !target ) return;
-
-    const cl = target.classList;
+    const cl = event.currentTarget.classList;
     if ( cl.contains("item-add") ) {
       const selection = new game.dnd5e.advancement.AdvancementSelection(this.item);
       return selection.render(true);
     }
 
-    const item = event.target.closest("li.item");
+    const item = event.currentTarget.closest("li.item");
     const idx = item?.dataset.index;
     const advancement = this.item.advancement[idx];
     if ( !advancement ) return;

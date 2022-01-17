@@ -1,6 +1,6 @@
 /**
  * Presents a list of advancement types to create when clicking the new advancement button.
- * One a type is selected, this hands the process over to the advancement's individual editing interface.
+ * Once a type is selected, this hands the process over to the advancement's individual editing interface.
  *
  * @extends {FormApplication}
  */

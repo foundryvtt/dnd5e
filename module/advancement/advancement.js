@@ -1,4 +1,4 @@
-import { BaseConfig } from "./baseConfig.js";
+import { AdvancementConfig } from "./advancementConfig.js";
 
 /**
  * Abstract base class which various advancement types can subclass.
@@ -6,7 +6,7 @@ import { BaseConfig } from "./baseConfig.js";
  * @property {Item5e} parent  Item to which this advancement belongs.
  * @property {object} [data]  Raw data stored in the advancement object.
  */
-export class BaseAdvancement {
+export class Advancement {
 
   constructor(parent, data={}) {
     /**
@@ -105,7 +105,7 @@ export class BaseAdvancement {
   /**
    * Subclass of BaseConfig that allows for editing of this advancement type.
    */
-  static configApp = BaseConfig;
+  static configApp = AdvancementConfig;
 
   /* -------------------------------------------- */
 

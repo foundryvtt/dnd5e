@@ -1,13 +1,13 @@
+import { Advancement } from "./advancement/advancement.js";
+import { AdvancementConfig } from "./advancement/advancementConfig.js";
 import { AdvancementSelection } from "./advancement/advancementSelection.js";
-import { BaseAdvancement } from "./advancement/baseAdvancement.js";
-import { BaseConfig } from "./advancement/baseConfig.js";
 import { HitPointsAdvancement } from "./advancement/hitPoints.js";
 import { ItemGrantAdvancement } from "./advancement/itemGrant.js";
 
 const advancement = {
+  Advancement,
+  AdvancementConfig,
   AdvancementSelection,
-  BaseAdvancement,
-  BaseConfig,
   types: {
     HitPointsAdvancement,
     ItemGrantAdvancement
