@@ -489,17 +489,15 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     const item = event.currentTarget.closest("li.item");
-    const idx = item?.dataset.index;
+    const idx = Number(item?.dataset.index);
     const advancement = this.item.advancement[idx];
     if ( !advancement ) return;
 
     if ( cl.contains("item-edit") ) {
-      const config = new advancement.constructor.configApp(advancement, Number(idx));
+      const config = new advancement.constructor.configApp(advancement, idx);
       return config.render(true);
     } else if ( cl.contains("item-delete") ) {
-      const advancement = foundry.utils.deepClone(this.item.data.data.advancement);
-      advancement.splice(Number(idx), 1);
-      return this.item.update({"data.advancement": advancement});
+      return this.item.update({"data.advancement": this.item.data.data.advancement.filter((a, i) => i !== idx)});
     }
   }
 

@@ -19,9 +19,13 @@
         </h3>
 
         {{#if (eq data.configured "full")}}
-          <div class="item-checkmark"><i class="fas fa-check-circle"></i></div>
+          <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
+            <i class="fas fa-check-circle"></i>
+          </div>
         {{else if (eq data.configured "partial")}}
-          <div class="item-warning"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="item-warning" title="{{localize "DND5E.AdvancementConfiguredIncomplete"}}">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
         {{/if}}
       </li>
       <ol class="item-list">
