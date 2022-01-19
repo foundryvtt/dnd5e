@@ -48,17 +48,13 @@ export class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   getData() {
-    const levels = {};
-    for ( let level = 1; level <= CONFIG.DND5E.maxLevel; level++ ) {
-      levels[level] = level;
-    }
     return {
       data: this.advancement.data,
       default: {
         title: game.i18n.localize(this.advancement.constructor.defaultTitle),
         icon: this.advancement.constructor.defaultIcon
       },
-      levels,
+      levels: Object.fromEntries(this.advancement.constructor.allLevels.map(l => [l, l])),
       showClassRestrictions: this.parent.type === "class",
       showLevelSelector: !this.advancement.constructor.multiLevel
     };
@@ -69,11 +65,11 @@ export class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData).data;
-    updates = Object.fromEntries(Object.entries(updates).reduce((arr, [key, value]) => {
-      if ( value ) arr.push([key, value]);
-      else arr.push([`-=${key}`, null]);
-      return arr;
-    }, []));
+    updates = Object.entries(updates).reduce((obj, [key, value]) => {
+      if ( value ) obj[key] = value;
+      else obj[`-=${key}`] = null;
+      return obj;
+    }, {});
 
     const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
     advancement[this.index] = foundry.utils.mergeObject(this.advancement.data, updates, { inplace: false });

@@ -31,7 +31,7 @@
               <div class="item-image{{#if this.invertIcon}} inverted{{/if}}" style="background-image: url('{{this.icon}}')"></div>
               <h4>{{{this.title}}}</h4>
             </div>
-            {{#if ../../editable}}
+            {{#if @root.editable}}
               <div class="item-controls flexrow">
                   <a class="item-control item-edit" title="{{localize "DND5E.ItemEdit"}}"><i class="fas fa-edit"></i></a>
                   <a class="item-control item-delete" title="{{localize "DND5E.ItemDelete"}}"><i class="fas fa-trash"></i></a>

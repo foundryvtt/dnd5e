@@ -205,7 +205,7 @@ export default class Item5e extends Item {
     // Advancement
     this.advancement = Array.from((itemData.data.advancement ?? []).entries()).reduce((obj, [idx, data]) => {
       const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
-      if ( Advancement ) obj[idx] = new Advancement(this, data, idx);
+      if ( Advancement ) obj[idx] = new Advancement(this, data);
       return obj;
     }, {});
 

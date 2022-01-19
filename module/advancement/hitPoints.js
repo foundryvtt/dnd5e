@@ -42,7 +42,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.from({length: CONFIG.DND5E.maxLevel}, (v, i) => i + 1);
+    return this.constructor.allLevels;
   }
 
   /* -------------------------------------------- */
@@ -51,7 +51,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   configuredForLevel(level) {
-    return this.data.value[level] !== undefined;
+    return this.valueForLevel(level) !== null;
   }
 
   /* -------------------------------------------- */
@@ -69,9 +69,8 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {number|null}  Hit points for level or null if none have been taken.
    */
   valueForLevel(level) {
-    const values = this.data.value;
-    if ( !values || !values[level] ) return null;
-    const value = values[level];
+    const value = this.data.value[level];
+    if ( !value ) return null;
 
     if ( value !== true ) return value;
 

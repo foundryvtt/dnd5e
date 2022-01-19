@@ -103,7 +103,7 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
-   * Subclass of BaseConfig that allows for editing of this advancement type.
+   * Subclass of AdvancementConfig that allows for editing of this advancement type.
    */
   static configApp = AdvancementConfig;
 
@@ -116,6 +116,16 @@ export class Advancement {
    * @type {boolean}
    */
   static multiLevel = false;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create an array of levels between 1 and the maximum allowed level.
+   * @type {number[]}
+   */
+  static get allLevels() {
+    return Array.from({length: CONFIG.DND5E.maxLevel}, (v, i) => i + 1);
+  }
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
