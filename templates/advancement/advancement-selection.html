@@ -1,4 +1,4 @@
-<form autocomplete="off">
+<form autocomplete="off" onsubmit="event.preventDefault();">
   <ol class="items-list">
   {{#each types as |advancement name|}}
     <li class="item flexrow">
@@ -16,7 +16,7 @@
   {{/each}}
   </ol>
 
-  <button type="submit" name="submit" disabled>
+  <button class="dialog-button" data-button="submit" disabled>
     <i class="far fa-save"></i> {{localize "DND5E.AdvancementSelectionCreateButton"}}
   </button>
 </form>
