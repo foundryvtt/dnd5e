@@ -40,15 +40,7 @@ export class AdvancementSelection extends FormApplication {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    const Advancement = game.dnd5e.advancement.types[formData.type];
-    const defaultData = Advancement.defaultData;
-
-    const advancement = foundry.utils.deepClone(this.object.data.data.advancement);
-    const idx = advancement.push(defaultData) - 1;
-    await this.object.update({"data.advancement": advancement});
-
-    const config = new Advancement.configApp(this.object.advancement[idx], idx);
-    config.render(true);
+    this.object.createAdvancement(formData.type);
     this.close();
   }
 

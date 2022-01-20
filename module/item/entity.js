@@ -1534,6 +1534,45 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+  /*  Advancements                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Create a new advancement of the specified type.
+   * @param {string} type                Type of advancement to create.
+   * @param {object} [data]              Data to use when creating the advancement.
+   * @param {object} [options]
+   * @param {boolean} [showConfig=true]  Should the new advancement's configuration application be shown?
+   * @returns {Promise}
+   */
+  async createAdvancement(type, data={}, { showConfig=true }={}) {
+    if ( !this.data.data.advancement ) return;
+
+    const Advancement = game.dnd5e.advancement.types[type];
+    data = foundry.utils.mergeObject(Advancement.defaultData, data);
+
+    const advancement = foundry.utils.deepClone(this.data.data.advancement);
+    const idx = advancement.push(data) - 1;
+    await this.update({"data.advancement": advancement});
+
+    if ( !showConfig ) return;
+    const config = new Advancement.configApp(this.advancement[idx], idx);
+    return config.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove an advancement from this item.
+   * @param {number} idx  Index of the advancement to remove.
+   * @returns {Promise}
+   */
+  async deleteAdvancement(idx) {
+    if ( !this.data.data.advancement ) return;
+    return this.update({"data.advancement": this.data.data.advancement.filter((a, i) => i !== idx)});
+  }
+
+  /* -------------------------------------------- */
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 

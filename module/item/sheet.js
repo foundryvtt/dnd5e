@@ -480,6 +480,7 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Handle creating the advancement selection window when the add button is pressed.
    * @param {Event} event  The click event which originated the creation.
+   * @returns {Promise}
    */
   _onAdvancementAction(event) {
     const cl = event.currentTarget.classList;
@@ -497,7 +498,7 @@ export default class ItemSheet5e extends ItemSheet {
       const config = new advancement.constructor.configApp(advancement, idx);
       return config.render(true);
     } else if ( cl.contains("item-delete") ) {
-      return this.item.update({"data.advancement": this.item.data.data.advancement.filter((a, i) => i !== idx)});
+      return this.item.deleteAdvancement(idx);
     }
   }
 
