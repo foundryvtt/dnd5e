@@ -66,14 +66,17 @@ export class AdvancementSelection extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * A helper constructor function which displays the selection dialog and returns a Promise once it's workflow has
+   * A helper constructor function which displays the selection dialog and returns a Promise once its workflow has
    * been resolved.
-   * @param {Item5e} item
-   * @returns {Promise}
+   * @param {Item5e} item                         Item to which the advancement should be added.
+   * @param {object} [config={}]
+   * @param {boolean} [config.rejectClose=false]  Trigger a rejection if the window was closed without a choice.
+   * @param {object} [config.options={}]          Additional rendering options passed to the Dialog.
+   * @returns {Promise<AdvancementConfig|null>}   Result of `Item5e#createAdvancement`.
    */
-  static async createDialog(item) {
+  static async createDialog(item, { rejectClose=false, options={} }={}) {
     return new Promise((resolve, reject) => {
-      const dlg = new this(item, {
+      const dialog = new this(item, {
         title: `${game.i18n.localize("DND5E.AdvancementSelectionTitle")}: ${item.name}`,
         buttons: {
           submit: {
@@ -84,9 +87,12 @@ export class AdvancementSelection extends Dialog {
             }
           }
         },
-        close: reject
-      });
-      dlg.render(true);
+        close: () => {
+          if ( rejectClose ) reject("No advancement type was selected");
+          else resolve(null);
+        }
+      }, options);
+      dialog.render(true);
     });
   }
 

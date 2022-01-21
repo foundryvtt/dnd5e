@@ -1543,7 +1543,7 @@ export default class Item5e extends Item {
    * @param {object} [data]              Data to use when creating the advancement.
    * @param {object} [options]
    * @param {boolean} [showConfig=true]  Should the new advancement's configuration application be shown?
-   * @returns {Promise}
+   * @returns {Promise<AdvancementConfig|undefined>}
    */
   async createAdvancement(type, data={}, { showConfig=true }={}) {
     if ( !this.data.data.advancement ) return;
