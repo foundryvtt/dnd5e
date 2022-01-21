@@ -1539,10 +1539,10 @@ export default class Item5e extends Item {
 
   /**
    * Create a new advancement of the specified type.
-   * @param {string} type                Type of advancement to create.
-   * @param {object} [data]              Data to use when creating the advancement.
+   * @param {string} type                        Type of advancement to create.
+   * @param {object} [data]                      Data to use when creating the advancement.
    * @param {object} [options]
-   * @param {boolean} [showConfig=true]  Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
    * @returns {Promise<AdvancementConfig|undefined>}
    */
   async createAdvancement(type, data={}, { showConfig=true }={}) {
@@ -1564,8 +1564,8 @@ export default class Item5e extends Item {
 
   /**
    * Remove an advancement from this item.
-   * @param {number} idx  Index of the advancement to remove.
-   * @returns {Promise}
+   * @param {number} idx         Index of the advancement to remove.
+   * @returns {Promise<Item5e>}  This item with the changes applied.
    */
   async deleteAdvancement(idx) {
     if ( !this.data.data.advancement ) return;
