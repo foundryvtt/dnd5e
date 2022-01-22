@@ -32,7 +32,7 @@ export class AdvancementSelection extends Dialog {
 
   /** @inheritdoc */
   getData() {
-    const data = { types: {} };
+    const data = { types: {}, appID: this.id };
 
     for ( const advancement of Object.values(game.dnd5e.advancement.types) ) {
       data.types[advancement.name] = {
