@@ -6,6 +6,7 @@ import { AdvancementSelection } from "./advancement/advancement-selection.js";
 import { DeleteConfirmationDialog } from "./advancement/delete-confirmation-dialog.js";
 import { HitPointsAdvancement } from "./advancement/hit-points.js";
 import { ItemGrantAdvancement } from "./advancement/item-grant.js";
+import { ScaleValueAdvancement } from "./advancement/scaleValue.js";
 
 const advancement = {
   Advancement,
@@ -17,7 +18,8 @@ const advancement = {
   DeleteConfirmationDialog,
   types: {
     HitPointsAdvancement,
-    ItemGrantAdvancement
+    ItemGrantAdvancement,
+    ScaleValueAdvancement
   }
 };
 
