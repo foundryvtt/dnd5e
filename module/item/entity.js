@@ -352,9 +352,7 @@ export default class Item5e extends Item {
       const damageType = damagePart[1];
       return { formula, damageType, label: `${formula} ${CONFIG.DND5E.damageTypes[damageType]}` };
     });
-
     this.labels.derivedDamage = derivedDamage;
-
     return derivedDamage;
   }
 
