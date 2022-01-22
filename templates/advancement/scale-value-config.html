@@ -1,0 +1,32 @@
+<form autocomplete="off">
+  <div class="left-column">
+    {{> "systems/dnd5e/templates/advancement/parts/advancement-controls.html"}}
+  
+    <hr>
+  
+    <div class="form-group">
+      <label for="{{appID}}-identifier">{{localize "DND5E.Identifier"}}</label>
+      <div class="form-fields">
+        <input name="data.configuration.identifier" type="text" value="{{data.configuration.identifier}}" id="{{appID}}-identifier">
+      </div>
+      <p class="hint">
+        {{{localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier identifier=data.configuration.identifier}}}
+      </p>
+    </div>
+  </div>
+
+  <div class="right-column">
+    {{#each levels as |data level|}}
+      <div class="form-group">
+        <label for="{{appID}}-level-{{level}}">{{level}}</label>
+        <div class="form-fields">
+          <input name="{{level}}" type="text" value="{{data.value}}" placeholder="{{data.placeholder}}" id="{{appID}}-level-{{level}}">
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+  <button type="submit" name="submit">
+    <i class="far fa-save"></i> {{localize "DND5E.AdvancementSaveButton"}}
+  </button>
+</form>

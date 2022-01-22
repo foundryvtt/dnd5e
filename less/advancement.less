@@ -111,4 +111,38 @@
       max-width: 50%;
     }
   }
+
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+  &.two-column {
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      button[type="submit"] {
+        flex-basis: 100%;
+      }
+    }
+    .left-column {
+      flex: 3;
+    }
+    .right-column {
+      flex: 2;
+      margin-left: 6px;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Scale Value                              */
+  /* ----------------------------------------- */
+  &.scale-value {
+    .right-column label {
+      flex: 0.5;
+      padding-right: 0.5rem;
+      text-align: right;
+    }
+    input[type="text"]::placeholder {
+      opacity: 0.5;
+    }
+  }
 }

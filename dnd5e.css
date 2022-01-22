@@ -1316,6 +1316,14 @@
 /* ----------------------------------------- */
 /*  Advancement Flow                         */
 /* ----------------------------------------- */
+.dnd5e.advancement.flow {
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Scale Value                              */
+  /* ----------------------------------------- */
+}
 .dnd5e.advancement.flow .step {
   display: flex;
   flex-wrap: wrap;
@@ -1383,6 +1391,28 @@
 }
 .dnd5e.advancement.flow nav button {
   max-width: 50%;
+}
+.dnd5e.advancement.flow.two-column form {
+  display: flex;
+  flex-wrap: wrap;
+}
+.dnd5e.advancement.flow.two-column form button[type="submit"] {
+  flex-basis: 100%;
+}
+.dnd5e.advancement.flow.two-column .left-column {
+  flex: 3;
+}
+.dnd5e.advancement.flow.two-column .right-column {
+  flex: 2;
+  margin-left: 6px;
+}
+.dnd5e.advancement.flow.scale-value .right-column label {
+  flex: 0.5;
+  padding-right: 0.5rem;
+  text-align: right;
+}
+.dnd5e.advancement.flow.scale-value input[type="text"]::placeholder {
+  opacity: 0.5;
 }
 .dnd5e.sheet.item {
   min-height: 400px;
