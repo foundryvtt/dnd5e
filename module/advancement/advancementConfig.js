@@ -63,19 +63,44 @@ export class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /**
+   * Perform any changes to configuration data before it is saved to the advancement.
+   * @param {object} configuration  Configuration object.
+   * @returns {object}              Modified configuration.
+   */
+  prepareConfigurationUpdate(configuration) {
+    return configuration;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData).data;
-    updates = Object.entries(updates).reduce((obj, [key, value]) => {
-      if ( value ) obj[key] = value;
-      else obj[`-=${key}`] = null;
-      return obj;
-    }, {});
+    updates = this.constructor._cleanedObject(updates);
+    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
     const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
     advancement[this.index] = foundry.utils.mergeObject(this.advancement.data, updates, { inplace: false });
 
     return this.parent.update({"data.advancement": advancement});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Helper method to take an object and apply updates that remove any empty keys.
+   * @param {object} object  Object to be cleaned.
+   * @returns {object}       Copy of object with only non false-ish values included and others marked
+   *                         using `-=` syntax to be removed by update process.
+   * @protected
+   */
+  static _cleanedObject(object) {
+    return Object.entries(object).reduce((obj, [key, value]) => {
+      if ( value ) obj[key] = value;
+      else obj[`-=${key}`] = null;
+      return obj;
+    }, {});
   }
 
 }
