@@ -645,23 +645,6 @@
   max-height: 90vh;
   overflow-y: auto;
 }
-/* ----------------------------------------- */
-/*  Item Advancement                         */
-/* ----------------------------------------- */
-.dnd5e.advancement .items-list {
-  margin-bottom: 1em;
-}
-.dnd5e.advancement .items-list li.item {
-  padding-top: 0.25em;
-}
-.dnd5e.advancement .items-list .item-image {
-  mix-blend-mode: difference;
-}
-.dnd5e.advancement .items-list .item-hint {
-  flex: 0 1 100%;
-  margin-left: 35px;
-  margin-bottom: 0.5em;
-}
 .dnd5e.sheet.actor {
   /* ----------------------------------------- */
   /*  Shared Styles                            */
@@ -1289,6 +1272,33 @@
   margin-bottom: 4px;
   overflow-y: auto;
   scrollbar-width: thin;
+}
+.dnd5e.advancement {
+  /* ----------------------------------------- */
+  /*  Advancement Selection                    */
+  /* ----------------------------------------- */
+}
+.dnd5e.advancement input[type="text"],
+.dnd5e.advancement input[type="number"],
+.dnd5e.advancement select {
+  height: var(--form-field-height);
+}
+.dnd5e.advancement .form-group .form-fields button {
+  flex: 0;
+}
+.dnd5e.advancement .items-list {
+  margin-bottom: 1em;
+}
+.dnd5e.advancement .items-list li.item {
+  padding-top: 0.25em;
+}
+.dnd5e.advancement .items-list .item-image {
+  mix-blend-mode: difference;
+}
+.dnd5e.advancement .items-list .item-hint {
+  flex: 0 1 100%;
+  margin-left: 35px;
+  margin-bottom: 0.5em;
 }
 .dnd5e.sheet.item {
   min-height: 400px;

@@ -36,7 +36,7 @@ export class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["advancement"],
+      classes: ["dnd5e", "advancement"],
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
       title: "DND5E.AdvancementTitle",
       width: 400,
