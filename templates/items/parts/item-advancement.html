@@ -35,6 +35,15 @@
               <div class="item-image{{#if this.invertIcon}} inverted{{/if}}" style="background-image: url('{{this.icon}}')"></div>
               <h4>{{{this.title}}}</h4>
             </div>
+            {{#unless @root.isEmbedded}}
+            <div class="flexrow">
+              {{#if (eq this.classRestriction "primary")}}
+                {{localize "DND5E.AdvancementClassRestrictionPrimary"}}
+              {{else if (eq this.classRestriction "secondary")}}
+                {{localize "DND5E.AdvancementClassRestrictionSecondary"}}
+              {{/if}}
+            </div>
+            {{/unless}}
             {{#if @root.editable}}
               <div class="item-controls flexrow">
                   <a class="item-control item-edit" title="{{localize "DND5E.ItemEdit"}}"><i class="fas fa-edit"></i></a>

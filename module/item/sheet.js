@@ -48,6 +48,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
     data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
+    data.isEmbedded = this.item.isEmbedded;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -127,6 +128,7 @@ export default class ItemSheet5e extends ItemSheet {
           title: advancement.titleForLevel(level),
           icon: advancement.icon,
           invertIcon: advancement.icon.startsWith("icons/svg/"),
+          classRestriction: advancement.data.classRestriction,
           summary: advancement.summaryForLevel(level)
         });
         if ( (data[level].configured === "full") && !advancement.configuredForLevel(level) ) {
@@ -140,7 +142,8 @@ export default class ItemSheet5e extends ItemSheet {
           order: advancement.constructor.order,
           title: advancement.title,
           icon: advancement.icon,
-          invertIcon: advancement.icon.startsWith("icons/svg/")
+          invertIcon: advancement.icon.startsWith("icons/svg/"),
+          classRestriction: advancement.data.classRestriction
         });
       }
     }
