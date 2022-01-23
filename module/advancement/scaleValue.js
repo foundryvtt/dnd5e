@@ -40,6 +40,14 @@ export class ScaleValueConfig extends AdvancementConfig {
     return data;
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  prepareConfigurationUpdate(configuration) {
+    configuration.scale = this.constructor._cleanedObject(configuration.scale);
+    return configuration;
+  }
+
 }
 
 
