@@ -35,7 +35,7 @@ export class AdvancementSelection extends Dialog {
     const data = { types: {}, appID: this.id };
 
     for ( const advancement of Object.values(game.dnd5e.advancement.types) ) {
-      data.types[advancement.name] = {
+      data.types[advancement.typeName] = {
         label: game.i18n.localize(advancement.defaultTitle),
         icon: advancement.defaultIcon,
         hint: game.i18n.localize(advancement.hint),

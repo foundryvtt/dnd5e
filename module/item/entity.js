@@ -1548,8 +1548,8 @@ export default class Item5e extends Item {
   async createAdvancement(type, data={}, { showConfig=true }={}) {
     if ( !this.data.data.advancement ) return;
 
-    const Advancement = game.dnd5e.advancement.types[type];
-    if ( !Advancement ) throw new Error(`${type} not found in game.dnd5e.advancement.types`);
+    const Advancement = game.dnd5e.advancement.types[`${type}Advancement`];
+    if ( !Advancement ) throw new Error(`${type}Advancement not found in game.dnd5e.advancement.types`);
     data = foundry.utils.mergeObject(Advancement.defaultData, data);
 
     const advancement = foundry.utils.deepClone(this.data.data.advancement);
