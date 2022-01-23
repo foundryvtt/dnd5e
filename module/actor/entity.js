@@ -206,12 +206,13 @@ export default class Actor5e extends Actor {
   getRollData() {
     const data = super.getRollData();
     data.prof = new Proficiency(this.data.data.attributes.prof, 1);
-    data.classes = Object.entries(this.classes).reduce((obj, e) => {
-      const [slug, cls] = e;
-      obj[slug] = cls.data.data;
-      if ( cls.subclass ) obj[slug].subclass = cls.subclass.data.data;
-      return obj;
-    }, {});
+    data.classes = {};
+    data.scale = {};
+    for ( const [identifier, cls] of Object.entries(this.classes) ) {
+      data.classes[identifier] = cls.data.data;
+      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.data.data;
+      data.scale[identifier] = cls.scaleValues;
+    }
     return data;
   }
 

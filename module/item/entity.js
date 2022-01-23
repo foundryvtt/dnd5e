@@ -232,6 +232,21 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve scale values for current level from advancement data.
+   * @type {object}
+   */
+  get scaleValues() {
+    if ( this.data.type !== "class" ) return {};
+    return Object.values(this.advancement).reduce((obj, advancement) => {
+      if ( (advancement.data.type !== "ScaleValue") || !advancement.data.configuration.identifier ) return obj;
+      obj[advancement.data.configuration.identifier] = advancement.valueForLevel(this.data.data.levels);
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Should this item's active effects be suppressed.
    * @type {boolean}
    */
