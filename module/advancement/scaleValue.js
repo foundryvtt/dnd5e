@@ -9,6 +9,19 @@ import { AdvancementConfig } from "./advancementConfig.js";
  */
 export class ScaleValueConfig extends AdvancementConfig {
 
+  constructor(...args) {
+    super(...args);
+
+    /**
+     * Internal copy of the scale values used for the dynamic interface.
+     * @type {object}
+     * @private
+     */
+    this._scale = foundry.utils.deepClone(this.advancement.data.configuration.scale);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -29,7 +42,7 @@ export class ScaleValueConfig extends AdvancementConfig {
     let lastValue = "";
     data.levels = this.advancement.constructor.allLevels.reduce((obj, level) => {
       obj[level] = { placeholder: lastValue, value: "" };
-      const value = data.data.configuration.scale[level];
+      const value = this._scale[level];
       if ( value && (value !== lastValue) ) {
         obj[level].value = value;
         lastValue = value;
@@ -46,6 +59,29 @@ export class ScaleValueConfig extends AdvancementConfig {
   prepareConfigurationUpdate(configuration) {
     configuration.scale = this.constructor._cleanedObject(configuration.scale);
     return configuration;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onChangeInput(event) {
+    super._onChangeInput(event);
+    const t = event.target;
+
+    if ( t.name === "data.configuration.identifier" ) {
+      const hint = this.form.querySelector(".identifier-hint");
+      hint.innerHTML = game.i18n.format("DND5E.AdvancementScaleValueIdentifierHint", {
+        class: this.parent.identifier, identifier: t.value
+      });
+    }
+
+    else if ( t.closest(".scale-values") ) {
+      if ( t.value !== "" ) this._scale[t.dataset.level] = t.value;
+      else delete this._scale[t.dataset.level];
+
+      // Use timeout to prevent focus from being lost when app is re-rendered
+      return setTimeout(this.render.bind(this), 10);
+    }
   }
 
 }

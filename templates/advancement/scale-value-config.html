@@ -9,18 +9,18 @@
       <div class="form-fields">
         <input name="data.configuration.identifier" type="text" value="{{data.configuration.identifier}}" id="{{appID}}-identifier">
       </div>
-      <p class="hint">
+      <p class="hint identifier-hint">
         {{{localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier identifier=data.configuration.identifier}}}
       </p>
     </div>
   </div>
 
-  <div class="right-column">
+  <div class="right-column scale-values">
     {{#each levels as |data level|}}
       <div class="form-group">
-        <label for="{{appID}}-level-{{level}}">{{level}}</label>
+        <label for="{{@root.appID}}-level-{{level}}">{{level}}</label>
         <div class="form-fields">
-          <input name="data.configuration.scale.{{level}}" type="text" value="{{data.value}}" placeholder="{{data.placeholder}}" id="{{appID}}-level-{{level}}">
+          <input name="data.configuration.scale.{{level}}" type="text" value="{{data.value}}" placeholder="{{data.placeholder}}" id="{{@root.appID}}-level-{{level}}" data-level="{{level}}">
         </div>
       </div>
     {{/each}}
