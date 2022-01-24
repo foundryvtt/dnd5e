@@ -195,6 +195,36 @@
       }
     }
   }
+
+  /* ----------------------------------------- */
+  /*  Traits                                   */
+  /* ----------------------------------------- */
+  &.traits {
+    --grid-two-column-right-size: 0.6fr;
+
+    .selected-trait {
+      h4 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        li {
+          display: flex;
+          gap: 0.5em;
+          &:not(:first-of-type) {
+            padding-block-start: 0.5em;
+          }
+        }
+        label {
+          flex-grow: 1;
+          display: flex;
+          gap: 1em;
+          align-items: baseline;
+        }
+      }
+    }
+  }
 }
 
 .dnd5e.advancement-migration {
@@ -288,6 +318,36 @@
       font-size: var(--font-size-18);
     }
     span.none { font-style: italic; }
+  }
+  
+  form[data-type="Trait"] {
+    select {
+      min-width: min(20em, 100%);
+      margin-block-end: 0.25em;
+    }
+    .trait-slots {
+      counter-reset: trait-list;
+      list-style: none;
+      padding: 0;
+    }
+    .trait-slot {
+      min-height: 30px;
+      align-items: center;
+      font-size: var(--font-size-14);
+
+      &::before {
+        counter-increment: trait-list;
+        content: counter(trait-list);
+        width: 2em;
+        text-align: center;
+        font-size: var(--font-size-16);
+      }
+
+      a {
+        flex: 0;
+        padding-inline-end: 0.5em;
+      }
+    }
   }
 
   nav {

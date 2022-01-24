@@ -1614,51 +1614,61 @@ DND5E.CR_EXP_LEVELS = [
 DND5E.traits = {
   saves: {
     label: "DND5E.ClassSaves",
+    icon: "systems/dnd5e/icons/svg/trait-saves.svg",
     configKey: "abilities",
     labelKey: "label"
   },
   skills: {
-    label: "DND5E.TraitSkillProf",
+    label: "DND5E.TraitSkillsPlural.other",
+    icon: "systems/dnd5e/icons/svg/trait-skills.svg",
     labelKey: "label"
   },
   languages: {
-    label: "DND5E.Languages"
-  },
-  di: {
-    label: "DND5E.DamImm",
-    configKey: "damageTypes"
-  },
-  dr: {
-    label: "DND5E.DamRes",
-    configKey: "damageTypes"
-  },
-  dv: {
-    label: "DND5E.DamVuln",
-    configKey: "damageTypes"
-  },
-  ci: {
-    label: "DND5E.ConImm",
-    configKey: "conditionTypes"
-  },
-  weapon: {
-    label: "DND5E.TraitWeaponProf",
-    actorKeyPath: "traits.weaponProf",
-    configKey: "weaponProficiencies",
-    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
+    label: "DND5E.Languages",
+    icon: "systems/dnd5e/icons/svg/trait-languages.svg"
   },
   armor: {
     label: "DND5E.TraitArmorProf",
+    icon: "systems/dnd5e/icons/svg/trait-armor-proficiencies.svg",
     actorKeyPath: "traits.armorProf",
     configKey: "armorProficiencies",
     subtypes: { keyPath: "armor.type", ids: ["armorIds", "shieldIds"] }
   },
+  weapon: {
+    label: "DND5E.TraitWeaponProf",
+    icon: "systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg",
+    actorKeyPath: "traits.weaponProf",
+    configKey: "weaponProficiencies",
+    subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
+  },
   tool: {
     label: "DND5E.TraitToolProf",
+    icon: "systems/dnd5e/icons/svg/trait-tool-proficiencies.svg",
     actorKeyPath: "tools",
     configKey: "toolProficiencies",
     subtypes: { keyPath: "toolType", ids: ["toolIds"] },
     children: { vehicle: "vehicleTypes" },
     sortCategories: true
+  },
+  di: {
+    label: "DND5E.DamImm",
+    icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
+    configKey: "damageTypes"
+  },
+  dr: {
+    label: "DND5E.DamRes",
+    icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
+    configKey: "damageTypes"
+  },
+  dv: {
+    label: "DND5E.DamVuln",
+    icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
+    configKey: "damageTypes"
+  },
+  ci: {
+    label: "DND5E.ConImm",
+    icon: "systems/dnd5e/icons/svg/trait-condition-immunities.svg",
+    configKey: "conditionTypes"
   }
 };
 preLocalize("traits", { key: "label" });
@@ -1774,7 +1784,8 @@ DND5E.advancementTypes = {
   HitPoints: advancement.HitPointsAdvancement,
   ItemChoice: advancement.ItemChoiceAdvancement,
   ItemGrant: advancement.ItemGrantAdvancement,
-  ScaleValue: advancement.ScaleValueAdvancement
+  ScaleValue: advancement.ScaleValueAdvancement,
+  Trait: advancement.TraitAdvancement
 };
 
 /* -------------------------------------------- */

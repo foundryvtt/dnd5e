@@ -1,3 +1,5 @@
+import SelectChoices from "./select-choices.mjs";
+
 /**
  * Cached version of the base items compendia indices with the needed subtype fields.
  * @type {object}
@@ -38,13 +40,14 @@ export function categories(trait) {
  * Get a list of choices for a specific trait.
  * @param {string} trait             Trait as defined in `CONFIG.DND5E.traits`.
  * @param {Set<string>} [chosen=[]]  Optional list of keys to be marked as chosen.
- * @returns {object}                 Object mapping proficiency ids to choice objects.
+ * @returns {SelectChoices}          Object mapping proficiency ids to choice objects.
  */
 export async function choices(trait, chosen=new Set()) {
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
 
-  let data = Object.entries(categories(trait)).reduce((obj, [key, label]) => {
+  let data = Object.entries(categories(trait)).reduce((obj, [key, data]) => {
+    const label = traitConfig.labelKey ? foundry.utils.getProperty(data, traitConfig.labelKey) : data;
     obj[key] = { label, chosen: chosen.has(key) };
     return obj;
   }, {});
@@ -106,7 +109,7 @@ export async function choices(trait, chosen=new Set()) {
     category.children = dnd5e.utils.sortObjectEntries(category.children, "label");
   }
 
-  return data;
+  return new SelectChoices(data);
 }
 
 /* -------------------------------------------- */
@@ -238,7 +241,7 @@ export function keyLabel(trait, key) {
  */
 export function choiceLabel(trait, choice) {
   // Select from any trait values
-  if ( !choice.pool ) {
+  if ( !choice.pool?.size ) {
     return game.i18n.format("DND5E.TraitConfigChooseAny", {
       count: choice.count,
       type: traitLabel(trait, choice.count).toLowerCase()

@@ -147,6 +147,58 @@ export async function preloadHandlebarsTemplates() {
 /* -------------------------------------------- */
 
 /**
+ * A helper to create a set of <option> elements in a <select> block grouped together
+ * in <optgroup> based on the provided categories.
+ *
+ * @param {SelectChoices} choices          Choices to format.
+ * @param {object} [options]
+ * @param {boolean} [options.localize]     Should the label be localized?
+ * @param {string} [options.blank]         Name for the empty option, if one should be added.
+ * @param {string} [options.labelAttr]     Attribute pointing to label string.
+ * @param {string} [options.chosenAttr]    Attribute pointing to chosen boolean.
+ * @param {string} [options.childrenAttr]  Attribute pointing to array of children.
+ * @returns {Handlebars.SafeString}        Formatted option list.
+ */
+function groupedSelectOptions(choices, options) {
+  const localize = options.hash.localize ?? false;
+  const blank = options.hash.blank ?? null;
+  const labelAttr = options.hash.labelAttr ?? "label";
+  const chosenAttr = options.hash.chosenAttr ?? "chosen";
+  const childrenAttr = options.hash.childrenAttr ?? "children";
+
+  // Create an option
+  const option = (name, label, chosen) => {
+    if ( localize ) label = game.i18n.localize(label);
+    html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
+  };
+
+  // Create an group
+  const group = category => {
+    let label = category[labelAttr];
+    if ( localize ) game.i18n.localize(label);
+    html += `<optgroup label="${label}">`;
+    children(category[childrenAttr]);
+    html += "</optgroup>";
+  };
+
+  // Add children
+  const children = children => {
+    for ( let [name, child] of Object.entries(children) ) {
+      if ( child[childrenAttr] ) group(child);
+      else option(name, child[labelAttr], child[chosenAttr] ?? false);
+    }
+  };
+
+  // Create the options
+  let html = "";
+  if ( blank !== null ) option("", blank);
+  children(choices);
+  return new Handlebars.SafeString(html);
+}
+
+/* -------------------------------------------- */
+
+/**
  * A helper that fetch the appropriate item context from root and adds it to the first block parameter.
  * @param {object} context  Current evaluation context.
  * @param {object} options  Handlebars options.
@@ -173,6 +225,7 @@ function itemContext(context, options) {
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
+    "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-linkForUuid": linkForUuid,
     "dnd5e-itemContext": itemContext
   });

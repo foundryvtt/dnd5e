@@ -2,7 +2,8 @@
   {{#each choices as |choice key|}}
     <li>
       <label class="checkbox">
-        <input type="checkbox" name="{{#if ../prefix}}{{../prefix}}.{{/if}}{{key}}" {{checked choice.chosen}}>
+        <input type="checkbox" name="{{#if ../prefix}}{{../prefix}}.{{/if}}{{key}}"
+               {{checked choice.chosen}} {{disabled choice.disabled}}>
         {{choice.label}}
       </label>
       {{#if choice.children}}

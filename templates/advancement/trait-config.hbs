@@ -1,0 +1,73 @@
+<form autocomplete="off">
+  <div class="left-column">
+    <div class="form-group">
+      <label>{{localize "DND5E.AdvancementTraitType"}}</label>
+      <div class="form-fields">
+        <select name="configuration.type" id="trait">
+          {{selectOptions CONFIG.traits labelAttr="label" selected=configuration.type}}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "DND5E.AdvancementTraitAllowReplacements"}}</label>
+      <div class="form-fields">
+        <input name="configuration.allowReplacements" id="allowReplacements"
+          type="checkbox" {{checked configuration.allowReplacements}}>
+      </div>
+      <p class="hint">{{localize "DND5E.AdvancementTraitAllowReplacementsHint"}}</p>
+    </div>
+
+    <div class="selected-trait">
+      <h4>{{localize "DND5E.AdvancementTraitGrants"}}</h4>
+      <p class="hint">{{localize "DND5E.AdvancementTraitGrantsHint"}}</p>
+      <ul>
+        <li><label>
+          <input type="radio" name="selectedIndex" value="-1" {{checked (eq selectedIndex -1)}}>
+          <span>{{grants.label}}</span>
+        </label></li>
+      </ul>
+      <h4>
+        {{localize "DND5E.AdvancementTraitChoices"}}
+        <a data-action="add-choice" data-tooltip="DND5E.AdvancementTraitActionAddChoice">
+          <i class="fas fa-plus"></i>
+        </a>
+      </h4>
+      <p class="hint">{{localize "DND5E.AdvancementTraitChoicesHint"}}</p>
+      <ul>
+        {{#each choices}}
+          <li>
+            <label>
+              <input type="radio" name="selectedIndex" value="{{@index}}" {{~checked (eq @root.selectedIndex @index)}}>
+              <span>{{this.label}}</span>
+            </label>
+            <a data-action="remove-choice" data-tooltip="DND5E.AdvancementTraitActionRemoveChoice">
+              <i class="fas fa-minus"></i>
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    {{#if showCount}}
+      <div class="form-group">
+        <label>{{localize "DND5E.AdvancementTraitCount"}}</label>
+        <div class="form-fields">
+          <input name="count" id="count" type="number" step="1" value="{{count}}">
+        </div>
+      </div>
+    {{/if}}
+
+    <hr>
+
+    {{> "dnd5e.advancement-controls"}}
+  </div>
+
+  {{#if choiceOptions}}
+    <div class="right-column trait-selector">
+      <h2>{{localize "DND5E.AdvancementTraitTitle"}}</h2>
+
+      {{> "dnd5e.trait-list" choices=choiceOptions prefix="choices"}}
+    </div>
+  {{/if}}
+</form>
