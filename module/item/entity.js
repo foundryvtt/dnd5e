@@ -333,7 +333,7 @@ export default class Item5e extends Item {
   /**
    * Populate a label with the compiled and simplified damage formula based on owned item
    * actor data. This is only used for display purposes and is not related to `Item5e#rollDamage`.
-   * @returns {{damageType: number, formula: string}[]}
+   * @returns {{damageType: string, formula: string, label: string}[]}
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
@@ -346,7 +346,8 @@ export default class Item5e extends Item {
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       }
       catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
-      return { formula, damageType: damagePart[1] };
+      const damageType = damagePart[1];
+      return { formula, damageType, label: `${formula} ${CONFIG.DND5E.damageTypes[damageType]}` };
     });
     this.labels.derivedDamage = derivedDamage;
     return derivedDamage;
@@ -401,7 +402,7 @@ export default class Item5e extends Item {
     // Include the item's innate attack bonus as the initial value and label
     if ( itemData.attackBonus ) {
       parts.push(itemData.attackBonus);
-      this.labels.toHit = itemData.attackBonus;
+      this.labels.toHit = !/^[+-]/.test(itemData.attackBonus) ? `+ ${itemData.attackBonus}` : itemData.attackBonus;
     }
 
     // Take no further action for un-owned items
@@ -440,7 +441,7 @@ export default class Item5e extends Item {
 
     // Condense the resulting attack bonus formula into a simplified label
     const roll = new Roll(parts.join("+"), rollData);
-    const formula = simplifyRollFormula(roll.formula);
+    const formula = simplifyRollFormula(roll.formula) || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+ ${formula}` : formula;
 
     // Update labels and return the prepared roll data

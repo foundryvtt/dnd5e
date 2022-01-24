@@ -1363,6 +1363,12 @@
   font-size: 12px;
   line-height: 18px;
 }
+.dnd5e.sheet.item .sheet-body .item-properties .properties-header {
+  font-weight: bold;
+  color: #4b4a44;
+  margin: 0.5em 0 0 0;
+  font-size: 1em;
+}
 .dnd5e.sheet.item .details input[type="text"],
 .dnd5e.sheet.item .details input[type="number"],
 .dnd5e.sheet.item .details select {
