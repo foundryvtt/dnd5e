@@ -337,11 +337,8 @@ export default class Item5e extends Item {
    */
   getDerivedDamageLabel() {
     const itemData = this.data.data;
-
     if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
-
     const rollData = this.getRollData();
-
     const derivedDamage = itemData.damage?.parts?.map(damagePart => {
       let formula;
       try {
