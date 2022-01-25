@@ -1737,6 +1737,8 @@ export default class Actor5e extends Actor {
           const rechargeAmount = Math.min(d.uses.value + roll.total, d.uses.max);
           updates.push({_id: item.id, "data.uses.value": rechargeAmount});
           await roll.toMessage({
+            user: game.user.id,
+            speaker: { actor: this, alias: this.name },
             flavor: game.i18n.format("DND5E.ItemRechargeRoll", {name: item.name})
           });
         }
