@@ -1712,20 +1712,21 @@ export default class Actor5e extends Actor {
 
       // Items that roll to gain charges on a new day
       if ( recoverDailyUses && d.uses && (d.uses.per === "charges") &&
-           (d.uses.rechargeFormula !== "") && (d.uses.value !== d.uses.max) ) {
-        const roll = new CONFIG.Dice.DamageRoll(d.uses.rechargeFormula, this.getRollData());
+           (d.uses.recoveryFormula !== "") && (d.uses.value !== d.uses.max) ) {
+        const roll = new CONFIG.Dice.DamageRoll(d.uses.recoveryFormula, this.getRollData());
 
         if ( recoverLongRestUses && (game.settings.get("dnd5e", "restVariant") === "gritty") )
           roll.alter(7, 0, {multiplyNumeric: true});
 
         await roll.evaluate({async: true});
         if ( roll ) {
-          const rechargeAmount = Math.min(d.uses.value + roll.total, d.uses.max);
-          updates.push({_id: item.id, "data.uses.value": rechargeAmount});
+          const count = Math.min(d.uses.max - d.uses.value, roll.total);
+          const locKey = `DND5E.ItemRecoveryRoll${( (d.uses.value + count) === d.uses.max ) ? "Max" : ""}`;
+          updates.push({_id: item.id, "data.uses.value": d.uses.value + count});
           await roll.toMessage({
             user: game.user.id,
             speaker: { actor: this, alias: this.name },
-            flavor: game.i18n.format("DND5E.ItemRechargeRoll", {name: item.name})
+            flavor: game.i18n.format(locKey, { name: item.name, count })
           });
         }
       }
