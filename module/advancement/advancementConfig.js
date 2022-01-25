@@ -38,10 +38,17 @@ export class AdvancementConfig extends FormApplication {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement"],
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
-      title: "DND5E.AdvancementTitle",
       width: 400,
       height: "auto"
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get title() {
+    const type = game.i18n.localize(this.advancement.constructor.defaultTitle);
+    return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { type })}: ${this.parent.name}`;
   }
 
   /* -------------------------------------------- */
