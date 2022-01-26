@@ -13,7 +13,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   static fromItem(item) {
     const target = getProperty(item.data, "data.target") || {};
-    const templateShape = DND5E.areaTargetTypes[target.type];
+    const templateShape = DND5E.areaTargetTypes[target.type]?.template;
     if ( !templateShape ) return null;
 
     // Prepare template data
