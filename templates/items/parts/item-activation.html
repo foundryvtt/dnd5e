@@ -2,7 +2,7 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="—">
+        <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="&mdash;">
         <select name="data.activation.type" title="{{ localize "DND5E.ItemActivationType" }}">
             {{selectOptions config.abilityActivationTypes selected=data.activation.type blank=""}}
         </select>
@@ -33,7 +33,7 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="—">
+        <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="&mdash;">
         <select name="data.target.units" title="{{localize "DND5E.TargetUnits" }}">
             {{selectOptions config.movementUnits selected=data.target.units blank=""}}
         </select>
@@ -57,7 +57,7 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.TargetWidth" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.target.width" value="{{data.target.width}}" data-dtype="Number" placeholder="—">
+        <input type="text" name="data.target.width" value="{{data.target.width}}" data-dtype="Number" placeholder="&mdash;">
     </div>
 </div>
 {{/if}}
@@ -79,7 +79,7 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="—" title="{{ localize "DND5E.DurationValue" }}">
+        <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="&mdash;" title="{{ localize "DND5E.DurationValue" }}">
         <select name="data.duration.units" title="{{ localize "DND5E.DurationType" }}">
             {{selectOptions config.timePeriods selected=data.duration.units blank=""}}
         </select>
