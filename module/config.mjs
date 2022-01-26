@@ -743,7 +743,6 @@ preLocalize("movementUnits");
  * @enum {string}
  */
 DND5E.rangeTypes = {
-  none: "DND5E.None",
   self: "DND5E.DistSelf",
   touch: "DND5E.DistTouch",
   spec: "DND5E.Special",
@@ -759,6 +758,7 @@ preLocalize("rangeTypes");
  * @enum {string}
  */
 DND5E.distanceUnits = {
+  none: "DND5E.None",
   ...DND5E.movementUnits,
   ...DND5E.rangeTypes
 };
