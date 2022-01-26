@@ -38,7 +38,16 @@
             {{selectOptions config.movementUnits selected=data.target.units blank=""}}
         </select>
         <select name="data.target.type" title="{{localize "DND5E.TargetType" }}">
-            {{selectOptions config.targetTypes selected=data.target.type blank=""}}
+            {{#select data.target.type}}
+                <option value=""></option>
+                <option value="none">{{ localize "DND5E.None" }}</option>
+                <optgroup label="{{ localize "DND5E.TargetTypeIndividual" }}">
+                    {{selectOptions config.individualTargetTypes}}
+                </optgroup>
+                <optgroup label="{{ localize "DND5E.TargetTypeArea" }}">
+                    {{selectOptions config.areaTargetTypes labelAttr="label"}}
+                </optgroup>
+            {{/select}}
         </select>
     </div>
 </div>
