@@ -33,8 +33,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
    * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
    */
   static fromItem(item) {
-    const target = item.system.target || {};
-    const templateShape = dnd5e.config.areaTargetTypes[target.type];
+    const target = item.system.target ?? {};
+    const templateShape = dnd5e.config.areaTargetTypes[target.type]?.template;
     if ( !templateShape ) return null;
 
     // Prepare template data
