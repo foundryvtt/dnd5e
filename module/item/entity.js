@@ -110,6 +110,17 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Is this class item the original class for the containing actor?
+   * @type {boolean}
+   */
+  get isOriginalClass() {
+    if ( this.type !== "class" || !this.isEmbedded ) return;
+    return this.id === this.parent.data.data.details.originalClass;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
    */
@@ -307,6 +318,8 @@ export default class Item5e extends Item {
     // Proficiency
     const isProficient = (this.type === "spell") || this.data.data.proficient; // Always proficient in spell attacks.
     this.data.data.prof = new Proficiency(this.actor?.data.data.attributes.prof, isProficient);
+
+    if ( this.type === "class" ) this.data.data.isOriginalClass = this.isOriginalClass;
 
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Ability checks

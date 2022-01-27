@@ -99,16 +99,11 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
+    const actor = item.parent;
+    const originalClass = item.isOriginalClass;
     let maxLevel = 0;
-    let originalClass;
-    if ( item.parent ) {
-      if ( item.type === "class" ) {
-        maxLevel = item.data.data.levels;
-        originalClass = item.id === item.parent.data.data.details.originalClass;
-      } else {
-        maxLevel = item.parent.data.data.details.level;
-      }
-    }
+    if ( actor && (item.type === "class") ) maxLevel = item.data.data.levels;
+    else if ( actor ) maxLevel = actor.data.data.details.level;
 
     const data = {};
     for ( const [idx, advancement] of Object.entries(item.advancement) ) {
