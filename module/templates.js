@@ -28,23 +28,13 @@ export const preloadHandlebarsTemplates = async function() {
   ]);
 };
 
-
-/**
- * For inputs, if the value is true, add the "disabled" property, otherwise add nothing.
- * @param {boolean} value  To disable, or not to disable?
- * @returns {string}       String to add to <input> element.
- */
-function disabled(value) {
-  return value ? "disabled" : "";
-}
-
+/* -------------------------------------------- */
 
 /**
  * Register custom Handlebars helpers used by 5e.
  */
 export const registerHandlebarsHelpers = function() {
   Handlebars.registerHelper({
-    disabled: disabled,
     getProperty: foundry.utils.getProperty
   });
 };

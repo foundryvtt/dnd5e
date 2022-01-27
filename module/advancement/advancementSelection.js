@@ -32,7 +32,7 @@ export class AdvancementSelection extends Dialog {
 
   /** @inheritdoc */
   getData() {
-    const data = { types: {}, appID: this.id };
+    const data = { types: {} };
 
     for ( const advancement of Object.values(game.dnd5e.advancement.types) ) {
       data.types[advancement.typeName] = {
@@ -81,7 +81,7 @@ export class AdvancementSelection extends Dialog {
         buttons: {
           submit: {
             callback: html => {
-              const formData = new FormDataExtended(html[0].querySelector("form"));
+              const formData = new FormDataExtended(html.querySelector("form"));
               const type = formData.get("type");
               resolve(item.createAdvancement(type));
             }
@@ -91,7 +91,7 @@ export class AdvancementSelection extends Dialog {
           if ( rejectClose ) reject("No advancement type was selected");
           else resolve(null);
         }
-      }, options);
+      }, foundry.utils.mergeObject(options, { jQuery: false }));
       dialog.render(true);
     });
   }

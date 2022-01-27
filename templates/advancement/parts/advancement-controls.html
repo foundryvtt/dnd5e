@@ -1,23 +1,23 @@
 <div class="form-group">
-  <label for="{{appID}}-title">{{localize "DND5E.AdvancementCustomTitle"}}</label>
+  <label>{{localize "DND5E.AdvancementCustomTitle"}}</label>
   <div class="form-fields">
-    <input type="text" name="data.title" value="{{data.title}}" placeholder="{{default.title}}" id="{{appID}}-title">
+    <input type="text" name="data.title" value="{{data.title}}" placeholder="{{default.title}}">
   </div>
 </div>
 
 <div class="form-group">
-  <label for="{{appID}}-icon">{{localize "DND5E.AdvancementCustomIcon"}}</label>
+  <label>{{localize "DND5E.AdvancementCustomIcon"}}</label>
   <div class="form-fields">
     {{filePicker type="image" target="data.icon"}}
-    <input type="text" name="data.icon" value="{{data.icon}}" placeholder="{{default.icon}}" id="{{appID}}-icon">
+    <input type="text" name="data.icon" value="{{data.icon}}" placeholder="{{default.icon}}">
   </div>
 </div>
 
 {{#if showClassRestrictions}}
   <div class="form-group">
-    <label for="{{appID}}-classRestriction">{{localize "DND5E.AdvancementClassRestriction"}}</label>
+    <label>{{localize "DND5E.AdvancementClassRestriction"}}</label>
     <div class="form-fields">
-      <select name="data.classRestriction" id="{{appID}}-classRestriction">
+      <select name="data.classRestriction">
         {{#select data.classRestriction}}
           <option value="">{{localize "DND5E.AdvancementClassRestrictionNone"}}</option>
           <option value="primary">{{localize "DND5E.AdvancementClassRestrictionPrimary"}}</option>
@@ -30,9 +30,9 @@
 
 {{#if showLevelSelector}}
   <div class="form-group">
-    <label for="{{appID}}-level">{{localize "DND5E.Level"}}</label>
+    <label>{{localize "DND5E.Level"}}</label>
     <div class="form-fields">
-      <select name="data.level" id="{{appID}}-level">
+      <select name="data.level">
         {{selectOptions levels selected=data.level}}
       </select>
     </div>

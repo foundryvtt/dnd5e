@@ -56,7 +56,6 @@ export class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   getData() {
     return {
-      appID: this.id,
       data: this.advancement.data,
       default: {
         title: game.i18n.localize(this.advancement.constructor.defaultTitle),

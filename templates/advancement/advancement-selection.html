@@ -2,12 +2,12 @@
   <ol class="items-list">
   {{#each types as |advancement name|}}
     <li class="item flexrow">
-      <label class="item-name flexrow" for="{{@root.appID}}-radio-{{name}}">
+      <label class="item-name flexrow">
         <div class="item-image inverted" style="background-image: url('{{advancement.icon}}')"></div>
         <h3>{{advancement.label}}</h3>
       </div>
       <div class="item-controls flexrow">
-        <input name="type" type="radio" id="{{@root.appID}}-radio-{{name}}" value="{{name}}" {{disabled advancement.disabled}}>
+        <input name="type" type="radio" value="{{name}}" {{disabled advancement.disabled}}>
       </div>
       <div class="item-hint notes">
         {{advancement.hint}}
