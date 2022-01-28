@@ -979,6 +979,7 @@ DND5E.polymorphSettings = {
   keepBio: "DND5E.PolymorphKeepBio",
   keepVision: "DND5E.PolymorphKeepVision",
   keepSelf: "DND5E.PolymorphKeepSelf",
+  notKeepAE: "DND5E.PolymorphNotKeepAE",
   keepAEOnlyOriginNotEquipment: "DND5E.PolymorphKeepAEOnlyOriginNotEquipment"
 };
 

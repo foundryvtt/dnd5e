@@ -1630,6 +1630,7 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.keepBio]         Keep biography
    * @param {boolean} [options.keepVision]      Keep vision
    * @param {boolean} [options.keepSelf]        Keep self
+   * @param {boolean} [options.notKeepAE]       Not keep active effects
    * @param {boolean} [options.keepAEOnlyOriginNotEquipment] Keep only active effects which origin is not equipment
    * @param {boolean} [options.transformTokens] Transform linked tokens too
    * @returns {Promise<Array<Token>>|null}      Updated token if the transformation was performed.
@@ -1637,7 +1638,7 @@ export default class Actor5e extends Actor {
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
     keepItems=false, keepBio=false, keepVision=false,
-    keepSelf=false, keepAEOnlyOriginNotEquipment=false,
+    keepSelf=false, notKeepAE=false, keepAEOnlyOriginNotEquipment=false,
     transformTokens=true}={}) {
 
     // Ensure the player is allowed to polymorph
@@ -1743,6 +1744,9 @@ export default class Actor5e extends Actor {
     // Keep senses
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
+    // Not keep active effects
+    if(notKeepAE) d.effects = [];
+
     // Keep active effects only origin not equipment
     if(keepAEOnlyOriginNotEquipment){
       const tokenEffects = foundry.utils.deepClone(d.effects) || [];
@@ -1775,11 +1779,11 @@ export default class Actor5e extends Actor {
     await this.sheet.close();
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, keepAEOnlyOriginNotEquipment, transformTokens
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, notKeepAE, keepAEOnlyOriginNotEquipment, transformTokens
     });
 
-    // TODO To analize strange bug... some info like height and weight of the token are reset to default
-    // TODO after the constructor of the actor is invoked solved with a backup of the info of the token
+    // To analize strange bug... some info like height and weight of the token are reset to default
+    // after the constructor of the actor is invoked solved with a backup of the info of the token
     const tokenBackup = duplicate(d.token);
     const newActor = await this.constructor.create(d, {renderSheet: true});
     mergeObject(d.token, tokenBackup);
