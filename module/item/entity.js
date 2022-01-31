@@ -114,7 +114,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get isOriginalClass() {
-    if ( this.type !== "class" || !this.isEmbedded ) return;
+    if ( this.type !== "class" || !this.isEmbedded ) return false;
     return this.id === this.parent.data.data.details.originalClass;
   }
 
