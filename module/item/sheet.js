@@ -48,6 +48,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
     data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
+    data.isEmbedded = this.item.isEmbedded;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -98,19 +99,15 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
-    const data = {};
+    const actor = item.parent;
+    const originalClass = item.isOriginalClass;
     let maxLevel = 0;
-    let originalClass;
-    if ( item.parent ) {
-      if ( item.type === "class" ) {
-        maxLevel = item.data.data.levels;
-        originalClass = item.id === item.parent.data.data.details.originalClass;
-      } else {
-        maxLevel = item.parent.data.data.details.level;
-      }
-    }
-    for ( const advancement of item.advancement ) {
-      if ( (originalClass !== undefined)
+    if ( actor && (item.type === "class") ) maxLevel = item.data.data.levels;
+    else if ( actor ) maxLevel = actor.data.data.details.level;
+
+    const data = {};
+    for ( const [idx, advancement] of Object.entries(item.advancement) ) {
+      if ( (originalClass !== null)
            && ((advancement.data.classRestriction === "primary" && !originalClass)
            || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
       for ( const level of advancement.levels ) {
@@ -121,15 +118,28 @@ export default class ItemSheet5e extends ItemSheet {
           };
         }
         data[level].items.push({
+          index: idx,
           order: advancement.sortingValueForLevel(level),
           title: advancement.titleForLevel(level),
           icon: advancement.icon,
           invertIcon: advancement.icon.startsWith("icons/svg/"),
+          classRestriction: advancement.data.classRestriction,
           summary: advancement.summaryForLevel(level)
         });
         if ( (data[level].configured === "full") && !advancement.configuredForLevel(level) ) {
           data[level].configured = "partial";
         }
+      }
+      if ( !advancement.levels.length ) {
+        if ( !data[0] ) data[0] = { configured: "partial", items: [] };
+        data[0].items.push({
+          index: idx,
+          order: advancement.constructor.order,
+          title: advancement.title,
+          icon: advancement.icon,
+          invertIcon: advancement.icon.startsWith("icons/svg/"),
+          classRestriction: advancement.data.classRestriction
+        });
       }
     }
     Object.values(data).forEach(obj => obj.items.sort((a, b) => a.order.localeCompare(b.order)));
@@ -394,6 +404,7 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
+      html.find(".advancement .item-control").click(this._onAdvancementAction.bind(this));
     }
   }
 
@@ -460,6 +471,30 @@ export default class ItemSheet5e extends ItemSheet {
         break;
     }
     new TraitSelector(this.item, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating the advancement selection window when the add button is pressed.
+   * @param {Event} event  The click event which originated the creation.
+   * @returns {Promise}
+   */
+  _onAdvancementAction(event) {
+    const cl = event.currentTarget.classList;
+    if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
+
+    const item = event.currentTarget.closest("li.item");
+    const idx = Number(item?.dataset.index);
+    const advancement = this.item.advancement[idx];
+    if ( !advancement ) return;
+
+    if ( cl.contains("item-edit") ) {
+      const config = new advancement.constructor.configApp(advancement, idx);
+      return config.render(true);
+    } else if ( cl.contains("item-delete") ) {
+      return this.item.deleteAdvancement(idx);
+    }
   }
 
   /* -------------------------------------------- */

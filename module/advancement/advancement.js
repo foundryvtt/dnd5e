@@ -1,7 +1,9 @@
+import { AdvancementConfig } from "./advancementConfig.js";
+
 /**
  * Abstract base class which various advancement types can subclass.
  *
- * @property {Item5e} item    Item to which this advancement belongs.
+ * @property {Item5e} parent  Item to which this advancement belongs.
  * @property {object} [data]  Raw data stored in the advancement object.
  */
 export class Advancement {
@@ -22,6 +24,50 @@ export class Advancement {
 
   /* -------------------------------------------- */
   /*  Static Properties                           */
+  /* -------------------------------------------- */
+
+  /**
+   * Name of this advancement type that will be stored in config and used for lookups.
+   * @type {string}
+   * @protected
+   */
+  static get typeName() {
+    return this.name.replace(/Advancement$/, "");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Data structure for a newly created advancement of this type.
+   * @type {object}
+   * @protected
+   */
+  static get defaultData() {
+    const data = {
+      type: this.typeName,
+      configuration: foundry.utils.deepClone(this.defaultConfiguration),
+      value: foundry.utils.deepClone(this.defaultValue)
+    };
+    if ( !this.multiLevel ) data.level = 1;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default contents of the configuration object for an advancement of this type.
+   * @type {object}
+   */
+  static defaultConfiguration = {};
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default contents of the actor value object for an advancement of this type.
+   * @type {object}
+   */
+  static defaultValue = {};
+
   /* -------------------------------------------- */
 
   /**
@@ -47,6 +93,41 @@ export class Advancement {
   static defaultIcon = "icons/svg/upgrade.svg";
 
   /* -------------------------------------------- */
+
+  /**
+   * Localization key for a description of this advancement type shown in the advancement selection interface.
+   * @type {string}
+   */
+  static hint = "";
+
+  /* -------------------------------------------- */
+
+  /**
+   * Subclass of AdvancementConfig that allows for editing of this advancement type.
+   */
+  static configApp = AdvancementConfig;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Can this advancement affect more than one level. If this is set to true, the level selection control
+   * in the configuration window is hidden and the advancement should provide its own implementation of
+   * `Advancement#levels` and potentially its own level configuration interface.
+   * @type {boolean}
+   */
+  static multiLevel = false;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create an array of levels between 1 and the maximum allowed level.
+   * @type {number[]}
+   */
+  static get allLevels() {
+    return Array.from({length: CONFIG.DND5E.maxLevel}, (v, i) => i + 1);
+  }
+
+  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
@@ -55,7 +136,7 @@ export class Advancement {
    * @type {string}
    */
   get title() {
-    return this.data.title ?? game.i18n.localize(this.constructor.defaultTitle);
+    return this.data.title || game.i18n.localize(this.constructor.defaultTitle);
   }
 
   /* -------------------------------------------- */
@@ -65,7 +146,7 @@ export class Advancement {
    * @type {string}
    */
   get icon() {
-    return this.data.icon ?? this.constructor.defaultIcon;
+    return this.data.icon || this.constructor.defaultIcon;
   }
 
   /* -------------------------------------------- */
@@ -76,7 +157,7 @@ export class Advancement {
    * @returns {number[]}
    */
   get levels() {
-    return this.data.levels ?? (this.data.level ? [this.data.level] : []);
+    return this.data.level ? [this.data.level] : [];
   }
 
   /* -------------------------------------------- */
@@ -121,6 +202,19 @@ export class Advancement {
    */
   summaryForLevel(level) {
     return "";
+  }
+
+  /* -------------------------------------------- */
+  /*  Editing Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Can an advancement of this type be added to the provided item.
+   * @param {Item5e} item  Item to check against.
+   * @returns {boolean}    Can this be added?
+   */
+  static availableForItem(item) {
+    return true;
   }
 
 }

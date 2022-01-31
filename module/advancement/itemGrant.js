@@ -13,6 +13,13 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static defaultConfiguration = {
+    items: []
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static order = 40;
 
   /* -------------------------------------------- */
@@ -26,9 +33,14 @@ export class ItemGrantAdvancement extends Advancement {
   static defaultIcon = "icons/svg/book.svg";
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementItemGrantHint";
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
-  
+
   /** @inheritdoc */
   configuredForLevel(level) {
     return !foundry.utils.isObjectEmpty(this.data.value);
@@ -38,14 +50,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   summaryForLevel(level) {
-    return this.data.configuration.items.reduce((html, uuid) => {
-      const [scope, collection, id] = uuid.split(".");
-      const pack = game.packs.get(`${scope}.${collection}`);
-      const name = pack?.index.get(id)?.name;
-      if ( !name ) return html;
-      html += `<a class="entity-link content-link" data-pack="${scope}.${collection}" data-id="${id}">${name}</a>\n`;
-      return html;
-    }, "");
+    return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
   }
 
 }
