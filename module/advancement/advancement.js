@@ -136,7 +136,7 @@ export class Advancement {
    * @type {string}
    */
   get title() {
-    return this.data.title ?? game.i18n.localize(this.constructor.defaultTitle);
+    return this.data.title || game.i18n.localize(this.constructor.defaultTitle);
   }
 
   /* -------------------------------------------- */
@@ -146,7 +146,7 @@ export class Advancement {
    * @type {string}
    */
   get icon() {
-    return this.data.icon ?? this.constructor.defaultIcon;
+    return this.data.icon || this.constructor.defaultIcon;
   }
 
   /* -------------------------------------------- */

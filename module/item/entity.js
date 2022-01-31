@@ -110,11 +110,12 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Is this class item the original class for the containing actor?
-   * @type {boolean}
+   * Is this class item the original class for the containing actor? If the item is not a class or it is not
+   * embedded in an actor then this will return `null`.
+   * @type {boolean|null}
    */
   get isOriginalClass() {
-    if ( this.type !== "class" || !this.isEmbedded ) return false;
+    if ( this.type !== "class" || !this.isEmbedded ) return null;
     return this.id === this.parent.data.data.details.originalClass;
   }
 

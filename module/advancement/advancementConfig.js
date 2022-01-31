@@ -83,7 +83,6 @@ export class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData).data;
-    updates = this.constructor._cleanedObject(updates);
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
     const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
