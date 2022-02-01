@@ -2,8 +2,9 @@
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
  *
- * @property {Advancement} advancement  The advancement item being edited.
- * @property {object} options           Additional options passed to FormApplication.
+ * @property {Advancement} advancement             The advancement item being edited.
+ * @property {object} [options={}]                 Additional options passed to FormApplication.
+ * @property {boolean} [options.dynamicInterface]  Re-render the UI after any changes to form data.
  * @extends {FormApplication}
  */
 export class AdvancementConfig extends FormApplication {
@@ -16,6 +17,11 @@ export class AdvancementConfig extends FormApplication {
      * @type {Advancement}
      */
     this.advancement = advancement;
+
+    /**
+     * Copy of the advancement data used for the dynamic interface.
+     */
+    this.data = foundry.utils.deepClone(this.advancement.data);
 
     /**
      * Parent item to which this advancement belongs.
@@ -32,7 +38,8 @@ export class AdvancementConfig extends FormApplication {
       classes: ["dnd5e", "advancement", "dialog"],
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
       width: 400,
-      height: "auto"
+      height: "auto",
+      dynamicInterface: false
     });
   }
 
@@ -53,7 +60,7 @@ export class AdvancementConfig extends FormApplication {
     else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
 
     return {
-      data: this.advancement.data,
+      data: this.data,
       default: {
         title: this.advancement.constructor.metadata.title,
         icon: this.advancement.constructor.metadata.icon
@@ -67,12 +74,36 @@ export class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /**
+   * Re-render the page after a very brief delay to prevent focus from being lost.
+   * @param {number} [delay=10]  How many milliseconds to wait before calling render.
+   * @returns {Promise}          Promise that will be resolved once render is called.
+   */
+  async delayedRender(delay=10, ...args) {
+    return new Promise((resolve, reject) => setTimeout(resolve, delay)).then(() => this.render(...args));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Perform any changes to configuration data before it is saved to the advancement.
    * @param {object} configuration  Configuration object.
    * @returns {object}              Modified configuration.
    */
   prepareConfigurationUpdate(configuration) {
     return configuration;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Helper method used to update the internal data object when `options.dynamicInterface` is true.
+   * @params {object} [updateData={}]  Additional object updates applied to the data.
+   */
+  _updateInternalData(updateData={}) {
+    const formData = this._getSubmitData(updateData);
+    const updates = foundry.utils.expandObject(formData).data;
+    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
+    foundry.utils.mergeObject(this.data, updates);
   }
 
   /* -------------------------------------------- */
@@ -115,6 +146,18 @@ export class AdvancementConfig extends FormApplication {
       else obj[`-=${key}`] = null;
       return obj;
     }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _onChangeInput(event) {
+    super._onChangeInput(event);
+
+    if ( this.options.dynamicInterface ) {
+      this._updateInternalData();
+      this.delayedRender();
+    }
   }
 
 }
