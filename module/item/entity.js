@@ -245,8 +245,16 @@ export default class Item5e extends Item {
       if ( ["none", "touch", "self"].includes(rng.units) ) {
         rng.value = null;
         rng.long = null;
+        rng.reach = null;
       }
-      labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
+
+      if (rng.value || rng.long) {
+        labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units], `${game.i18n.localize("DND5E.Range")}`].filterJoin(" ");
+      }
+
+      if (rng.reach) {
+        labels.reach = [rng.reach, C.distanceUnits[rng.units], `${game.i18n.localize("DND5E.Reach")}`].filterJoin(" ");
+      }
 
       // Duration Label
       let dur = data.duration || {};
@@ -823,6 +831,7 @@ export default class Item5e extends Item {
       props.push(
         labels.activation + (data.activation?.condition ? ` (${data.activation.condition})` : ""),
         labels.target,
+        labels.reach,
         labels.range,
         labels.duration
       );

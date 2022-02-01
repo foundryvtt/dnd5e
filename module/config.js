@@ -686,6 +686,7 @@ DND5E.encumbrance = {
 DND5E.targetTypes = {
   none: "DND5E.None",
   self: "DND5E.TargetSelf",
+  target: "DND5E.TargetTarget",
   creature: "DND5E.TargetCreature",
   ally: "DND5E.TargetAlly",
   enemy: "DND5E.TargetEnemy",
