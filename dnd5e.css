@@ -1273,6 +1273,33 @@
   overflow-y: auto;
   scrollbar-width: thin;
 }
+.dnd5e.advancement {
+  /* ----------------------------------------- */
+  /*  Advancement Selection                    */
+  /* ----------------------------------------- */
+}
+.dnd5e.advancement input[type="text"],
+.dnd5e.advancement input[type="number"],
+.dnd5e.advancement select {
+  height: var(--form-field-height);
+}
+.dnd5e.advancement .form-group .form-fields button {
+  flex: 0;
+}
+.dnd5e.advancement .items-list {
+  margin-bottom: 1em;
+}
+.dnd5e.advancement .items-list li.item {
+  padding-top: 0.25em;
+}
+.dnd5e.advancement .items-list .item-image {
+  mix-blend-mode: difference;
+}
+.dnd5e.advancement .items-list .item-hint {
+  flex: 0 1 100%;
+  margin-left: 35px;
+  margin-bottom: 0.5em;
+}
 .dnd5e.sheet.item {
   min-height: 400px;
   max-height: 95%;
@@ -1470,6 +1497,12 @@
 .dnd5e.sheet.item .weapon-properties label.checkbox {
   flex: 0 0 98px;
 }
+.dnd5e.sheet.item .advancement .items-list .main-controls {
+  flex-direction: row-reverse;
+}
+.dnd5e.sheet.item .advancement .items-list .main-controls .item-add {
+  padding-top: 0.2em;
+}
 .dnd5e.sheet.item .advancement .items-list .items-header .item-checkmark {
   flex: 0 0 44px;
   color: #119111;
@@ -1483,6 +1516,9 @@
 }
 .dnd5e.sheet.item .advancement .items-list .item-image.inverted {
   mix-blend-mode: difference;
+}
+.dnd5e.sheet.item .advancement .items-list .item-controls {
+  border-left: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.item .advancement .items-list .item-summary {
   flex: 0 0 100%;

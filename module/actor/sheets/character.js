@@ -103,9 +103,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       // Item toggle state
       this._prepareItemToggleState(item);
 
-      // Primary Class
-      if ( item.type === "class" ) item.isOriginalClass = ( item._id === this.actor.data.data.details.originalClass );
-
       // Classify items into types
       if ( item.type === "spell" ) arr[1].push(item);
       else if ( item.type === "feat" ) arr[2].push(item);

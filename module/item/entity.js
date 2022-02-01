@@ -110,6 +110,18 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Is this class item the original class for the containing actor? If the item is not a class or it is not
+   * embedded in an actor then this will return `null`.
+   * @type {boolean|null}
+   */
+  get isOriginalClass() {
+    if ( this.type !== "class" || !this.isEmbedded ) return null;
+    return this.id === this.parent.data.data.details.originalClass;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
    */
@@ -203,11 +215,11 @@ export default class Item5e extends Item {
     const labels = this.labels = {};
 
     // Advancement
-    this.advancement = (itemData.data.advancement ?? []).reduce((arr, data) => {
-      const Advancement = game.dnd5e.advancement[`${data.type}Advancement`];
-      if ( Advancement ) arr.push(new Advancement(this, data));
-      return arr;
-    }, []);
+    this.advancement = Array.from((itemData.data.advancement ?? []).entries()).reduce((obj, [idx, data]) => {
+      const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
+      if ( Advancement ) obj[idx] = new Advancement(this, data);
+      return obj;
+    }, {});
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
@@ -307,6 +319,8 @@ export default class Item5e extends Item {
     // Proficiency
     const isProficient = (this.type === "spell") || this.data.data.proficient; // Always proficient in spell attacks.
     this.data.data.prof = new Proficiency(this.actor?.data.data.attributes.prof, isProficient);
+
+    if ( this.type === "class" ) this.data.data.isOriginalClass = this.isOriginalClass;
 
     if ( this.data.data.hasOwnProperty("actionType") ) {
       // Ability checks
@@ -1532,6 +1546,46 @@ export default class Item5e extends Item {
     if ( !targets.length && game.user.character ) targets = targets.concat(game.user.character.getActiveTokens());
     if ( !targets.length ) ui.notifications.warn(game.i18n.localize("DND5E.ActionWarningNoToken"));
     return targets;
+  }
+
+  /* -------------------------------------------- */
+  /*  Advancements                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Create a new advancement of the specified type.
+   * @param {string} type                        Type of advancement to create.
+   * @param {object} [data]                      Data to use when creating the advancement.
+   * @param {object} [options]
+   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
+   * @returns {Promise<AdvancementConfig>}
+   */
+  async createAdvancement(type, data={}, { showConfig=true }={}) {
+    if ( !this.data.data.advancement ) return;
+
+    const Advancement = game.dnd5e.advancement.types[`${type}Advancement`];
+    if ( !Advancement ) throw new Error(`${type}Advancement not found in game.dnd5e.advancement.types`);
+    data = foundry.utils.mergeObject(Advancement.defaultData, data);
+
+    const advancement = foundry.utils.deepClone(this.data.data.advancement);
+    const idx = advancement.push(data) - 1;
+    await this.update({"data.advancement": advancement});
+
+    if ( !showConfig ) return;
+    const config = new Advancement.configApp(this.advancement[idx], idx);
+    return config.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove an advancement from this item.
+   * @param {number} idx         Index of the advancement to remove.
+   * @returns {Promise<Item5e>}  This item with the changes applied.
+   */
+  async deleteAdvancement(idx) {
+    if ( !this.data.data.advancement ) return;
+    return this.update({"data.advancement": this.data.data.advancement.filter((a, i) => i !== idx)});
   }
 
   /* -------------------------------------------- */

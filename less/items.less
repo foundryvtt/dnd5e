@@ -245,6 +245,12 @@
   
   .advancement {
     .items-list {
+      .main-controls {
+        flex-direction: row-reverse;
+        .item-add {
+          padding-top: 0.2em;
+        }
+      }
       .items-header {
         .item-checkmark {
           flex: 0 0 44px;
@@ -260,6 +266,9 @@
       }
       .item-image.inverted {
         mix-blend-mode: difference;
+      }
+      .item-controls {
+        border-left: 1px solid @colorFaint;
       }
       .item-summary {
         flex: 0 0 100%;
