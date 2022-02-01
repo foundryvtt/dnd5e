@@ -215,9 +215,9 @@ export default class Item5e extends Item {
     const labels = this.labels = {};
 
     // Advancement
-    this.advancement = Array.from((itemData.data.advancement ?? []).entries()).reduce((obj, [idx, data]) => {
+    this.advancement = Object.entries(itemData.data.advancement ?? {}).reduce((obj, [id, data]) => {
       const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
-      if ( Advancement ) obj[idx] = new Advancement(this, data);
+      if ( Advancement ) obj[id] = new Advancement(this, data);
       return obj;
     }, {});
 
@@ -1567,12 +1567,12 @@ export default class Item5e extends Item {
     if ( !Advancement ) throw new Error(`${type}Advancement not found in game.dnd5e.advancement.types`);
     data = foundry.utils.mergeObject(Advancement.defaultData, data);
 
-    const advancement = foundry.utils.deepClone(this.data.data.advancement);
-    const idx = advancement.push(data) - 1;
-    await this.update({"data.advancement": advancement});
+    let id = foundry.utils.randomID();
+    while ( this.data.data.advancement[id] ) id = foundry.utils.randomID();
+    await this.update({[`data.advancement.${id}`]: data});
 
     if ( !showConfig ) return;
-    const config = new Advancement.configApp(this.advancement[idx], idx);
+    const config = new Advancement.configApp(this.advancement[id], id);
     return config.render(true);
   }
 
@@ -1580,12 +1580,12 @@ export default class Item5e extends Item {
 
   /**
    * Remove an advancement from this item.
-   * @param {number} idx         Index of the advancement to remove.
+   * @param {number} id          ID of the advancement to remove.
    * @returns {Promise<Item5e>}  This item with the changes applied.
    */
-  async deleteAdvancement(idx) {
+  async deleteAdvancement(id) {
     if ( !this.data.data.advancement ) return;
-    return this.update({"data.advancement": this.data.data.advancement.filter((a, i) => i !== idx)});
+    return await this.update({[`data.advancement.-=${id}`]: null});
   }
 
   /* -------------------------------------------- */

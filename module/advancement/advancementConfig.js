@@ -3,13 +3,13 @@
  * editing interfaces.
  *
  * @property {Advancement} advancement  The advancement item being edited.
- * @property {number} index             Location of the original advancement data in the item.
+ * @property {number} originId          ID of the original advancement data in the item.
  * @property {object} options           Additional options passed to FormApplication.
  * @extends {FormApplication}
  */
 export class AdvancementConfig extends FormApplication {
 
-  constructor(advancement, index=null, options={}) {
+  constructor(advancement, originId, options={}) {
     super(advancement, options);
 
     /**
@@ -25,10 +25,10 @@ export class AdvancementConfig extends FormApplication {
     this.parent = advancement.parent;
 
     /**
-     * Index in the original advancement array.
-     * @type {number|null}
+     * ID in the original advancement object on the item.
+     * @type {string}
      */
-    this.index = index;
+    this.originId = originId;
   }
 
   /* -------------------------------------------- */
@@ -85,10 +85,7 @@ export class AdvancementConfig extends FormApplication {
     let updates = foundry.utils.expandObject(formData).data;
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
-    const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
-    advancement[this.index] = foundry.utils.mergeObject(this.advancement.data, updates, { inplace: false });
-
-    return this.parent.update({"data.advancement": advancement});
+    return this.parent.update({[`data.advancement.${this.originId}`]: updates});
   }
 
   /* -------------------------------------------- */

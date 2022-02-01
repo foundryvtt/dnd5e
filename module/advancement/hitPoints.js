@@ -95,7 +95,7 @@ export class HitPointsAdvancement extends Advancement {
   /** @inheritdoc */
   static availableForItem(item) {
     if ( item.type !== "class" ) return false;
-    return !item.data.data.advancement.find(a => a.type === "HitPoints");
+    return !Object.values(item.data.data.advancement).find(a => a.type === "HitPoints");
   }
 
 }
