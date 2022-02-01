@@ -1,10 +1,8 @@
 {
   "_id": "B2kZOyrB7poB4liR",
   "name": "Blood Frenzy",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on melee attack rolls against any creature that doesn't have all its<strong> hit points</strong>.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

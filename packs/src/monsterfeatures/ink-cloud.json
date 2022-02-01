@@ -1,10 +1,8 @@
 {
   "_id": "bojUXmNOZ2rJVujD",
   "name": "Ink Cloud",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/unholy/orb-swirling-teal.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>A 20-foot-radius cloud of ink extends all around the {creature} if it is underwater. The area is heavily obscured for 1 minute, although a significant current can disperse the ink. After releasing the ink, the {creature} can use the Dash action as a bonus action. Recharges after a Short or Long Rest.</p>\n</section>\n<p>A 20-foot-radius cloud of ink extends all around the {creature} if it is underwater.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 20,
+      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "type": "sr"
     },
@@ -67,6 +67,10 @@
       "value": null,
       "charged": true
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -76,7 +80,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/unholy/orb-swirling-teal.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

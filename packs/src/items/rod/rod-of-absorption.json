@@ -23,7 +23,7 @@
       "condition": "Spell slots created can be no higher than 5th level."
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
@@ -35,6 +35,7 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
@@ -51,7 +52,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

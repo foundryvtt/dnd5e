@@ -1,10 +1,8 @@
 {
   "_id": "of2dTSnPwmhR52O7",
   "name": "Reaping Scythe",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/melee/strike-scythe-fire-green.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} sweeps its spectral scythe through a creature within 5 feet of it, dealing <strong>7 (1d8 + 3) <em>slashing damage</em></strong> plus <strong>4 (1d8) <em>necrotic damage</em></strong>.</p>\n</section>\n<p>The {creature} sweeps its spectral scythe through a creature within 5 feet of it.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
-      "value": 5,
+      "value": null,
       "long": null,
+      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,7 +50,16 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "1d8 + 3",
+          "slashing"
+        ],
+        [
+          "1d8",
+          "necrotic"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -63,9 +72,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/skills/melee/strike-scythe-fire-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

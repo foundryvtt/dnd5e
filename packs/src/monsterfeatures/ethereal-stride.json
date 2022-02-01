@@ -1,10 +1,8 @@
 {
   "_id": "NfTCXq8eRrqjhvAo",
   "name": "Ethereal Stride",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/lightning/orb-ball-purple.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa.</p>",
@@ -22,18 +20,20 @@
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 3,
+      "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/lightning/orb-ball-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

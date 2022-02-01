@@ -1,10 +1,8 @@
 {
   "_id": "3Nc6u9pyStByuJsm",
   "name": "Fighting Style: Great Weapon Fighting",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
   "data": {
     "description": {
       "value": "<p>When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.</p>",
@@ -14,32 +12,39 @@
     "source": "PHB pg. 72; 73; 84",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null,
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Fighter 1, Champion 10, Paladin 2",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

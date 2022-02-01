@@ -622,11 +622,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -636,7 +637,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -657,7 +658,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "effects": [],
       "folder": null,
@@ -697,11 +701,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -711,7 +716,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -732,7 +737,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "effects": [],
       "folder": null,
@@ -772,11 +780,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -786,7 +795,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -807,7 +816,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "effects": [],
       "folder": null,
@@ -830,8 +842,8 @@
         },
         "source": "",
         "quantity": 1,
-        "weight": 0,
-        "price": 0,
+        "weight": null,
+        "price": null,
         "attunement": 0,
         "equipped": true,
         "rarity": "",
@@ -846,19 +858,20 @@
           "units": ""
         },
         "target": {
-          "value": null,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "target"
         },
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
+          "reach": 5,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": ""
         },
         "consume": {
@@ -868,7 +881,7 @@
         },
         "ability": "str",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -940,8 +953,8 @@
         },
         "source": "",
         "quantity": 1,
-        "weight": 0,
-        "price": 0,
+        "weight": null,
+        "price": null,
         "attunement": 0,
         "equipped": true,
         "rarity": "",
@@ -956,19 +969,20 @@
           "units": ""
         },
         "target": {
-          "value": null,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "target"
         },
         "range": {
-          "value": 50,
+          "value": null,
           "long": null,
+          "reach": 50,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": ""
         },
         "consume": {
@@ -978,7 +992,7 @@
         },
         "ability": "str",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1062,11 +1076,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": ""
         },
         "consume": {
@@ -1076,7 +1091,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1097,7 +1112,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "effects": [],
       "folder": null,
@@ -1137,11 +1155,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": ""
         },
         "consume": {
@@ -1151,7 +1170,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1172,7 +1191,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "effects": [],
       "folder": null,

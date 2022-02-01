@@ -23,11 +23,11 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
@@ -35,23 +35,24 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "touch"
     },
     "uses": {
       "value": 4,
-      "max": 4,
+      "max": "4",
       "per": "charges",
       "autoDestroy": false,
       "autoUse": true
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

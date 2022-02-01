@@ -23,33 +23,34 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
       "value": null,
       "width": null,
-      "units": null,
+      "units": "",
       "type": "self"
     },
     "range": {
       "value": 30,
       "long": 60,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "charges"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -76,6 +77,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

@@ -27,19 +27,20 @@
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
-      "value": 5,
+      "value": null,
       "long": null,
+      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -58,7 +59,7 @@
     "damage": {
       "parts": [
         [
-          "1d4 + @mod +2",
+          "1d4 + @mod + 2",
           "bludgeoning"
         ]
       ],

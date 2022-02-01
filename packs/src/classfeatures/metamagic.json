@@ -1,45 +1,50 @@
 {
   "_id": "9Uh7uTDNZ04oTJsL",
   "name": "Metamagic",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/unholy/orb-colllecting-energy-green.webp",
   "data": {
     "description": {
-      "value": "<p>At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level.&nbsp;You can use only one Metamagic option on a spell when you cast it, unless otherwise noted.</p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"zElYrOcCFFMhB6Xl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Careful Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"DZpAa3LzMNBexbmX\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Distant Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"IWpe0Y9uAStHGiH1\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Empowered Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"tQxlKyAx9sgPrbgj\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Extended Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"tNG2qi9zhmXEkecA\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Heightened Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"nViGf6bZ6DQAJhkw\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Quickened Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"fXa0DMhoVLtbBu9l\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Subtle Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"Qb391hakCfmH4w8p\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Twinned Spell</a></p>\n        <p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>",
+      "value": "<p>At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice. You gain another one at 10th and 17th level. You can use only one Metamagic option on a spell when you cast it, unless otherwise noted.</p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"zElYrOcCFFMhB6Xl\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Careful Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"DZpAa3LzMNBexbmX\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Distant Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"IWpe0Y9uAStHGiH1\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Empowered Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"tQxlKyAx9sgPrbgj\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Extended Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"tNG2qi9zhmXEkecA\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Heightened Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"nViGf6bZ6DQAJhkw\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Quickened Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"fXa0DMhoVLtbBu9l\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Subtle Spell</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"Qb391hakCfmH4w8p\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Twinned Spell</a></p>\n        <p>You can drag your choices from the above onto your character sheet and it will automatically update.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "PHB pg. 101",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null,
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,18 +59,13 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Sorcerer 3",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
     },
     "featType": {
       "value": "passive",
@@ -80,11 +80,16 @@
     "damageType": {
       "value": "",
       "_deprecated": true
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
+  "effects": [],
   "folder": "tFOfAj4cr2LN77j7",
   "sort": 700001,
-  "flags": {},
-  "img": "icons/magic/unholy/orb-colllecting-energy-green.webp",
-  "effects": []
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

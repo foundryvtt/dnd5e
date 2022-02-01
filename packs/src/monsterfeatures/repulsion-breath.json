@@ -1,10 +1,8 @@
 {
   "_id": "zRDERBe0lMbwyGwN",
   "name": "Repulsion Breath",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/air/air-wave-gust-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>**Repulsion Breath.** The {type} exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 19 Strength</strong> saving throw. On a failed save, the creature is pushed 60 feet away from the {type}.</p>\n</section>\n<p>The {type} exhales repulsion energy in a 30-foot cone. Each creature in that area must make a <strong>Strength</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 30,
+      "width": null,
       "units": "ft",
       "type": "cone"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -65,7 +65,11 @@
       "charged": false
     }
   },
-  "flags": {},
-  "img": "icons/magic/air/air-wave-gust-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

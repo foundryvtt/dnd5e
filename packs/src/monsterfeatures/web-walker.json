@@ -1,10 +1,8 @@
 {
   "_id": "zITrVwmnPpLoBZI1",
   "name": "Web Walker",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/nature/tree-bare-glow-yellow.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} ignores movement restrictions caused by webbing.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/nature/tree-bare-glow-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -23,23 +23,24 @@
       "condition": "Command word."
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 1,
-      "long": 0,
+      "long": null,
+      "reach": null,
       "units": "mi"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": "",
       "autoDestroy": false,
       "autoUse": false
@@ -51,7 +52,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

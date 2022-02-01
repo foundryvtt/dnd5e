@@ -1,10 +1,8 @@
 {
   "_id": "WdpSeGqhZpptz37y",
   "name": "Bite",
-  "permission": {
-    "default": 0
-  },
   "type": "weapon",
+  "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 17 (2d10 + 6) piercing damage.</p>\n</section>\n<p>The {creature} attacks with its Bite.</p>",
@@ -15,7 +13,7 @@
     "quantity": 1,
     "weight": 0,
     "price": 0,
-    "attuned": false,
+    "attunement": 0,
     "equipped": true,
     "rarity": "",
     "identified": true,
@@ -30,17 +28,19 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
-      "value": 10,
+      "value": null,
       "long": null,
+      "reach": 10,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,14 +50,19 @@
     },
     "ability": "str",
     "actionType": "mwak",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "2d10 + 6",
+          "piercing"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -76,6 +81,7 @@
       "conditions": ""
     },
     "weaponType": "natural",
+    "baseItem": "",
     "properties": {
       "amm": false,
       "fin": false,
@@ -90,11 +96,23 @@
       "spc": false,
       "thr": false,
       "two": false,
-      "ver": false
+      "ver": false,
+      "ada": false,
+      "mgc": false,
+      "sil": false
     },
-    "proficient": true
+    "proficient": true,
+    "reach": {
+      "value": null,
+      "units": ""
+    },
+    "attuned": false
   },
-  "flags": {},
-  "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

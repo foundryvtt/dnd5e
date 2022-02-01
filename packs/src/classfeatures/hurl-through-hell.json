@@ -1,10 +1,8 @@
 {
   "_id": "aCUmlnHlUPHS0rdu",
   "name": "Hurl Through Hell",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/abilities/mouth-teeth-fire-orange.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 14th level, when you hit a creature with an attack, you can use this feature to instantly transport the target through the lower planes. The creature disappears and hurtles through a nightmare landscape.</p><p>At the end of your next turn, the target returns to the space it previously occupied, or the nearest unoccupied space. If the target is not a fiend, it takes 10d10 psychic damage as it reels from its horrific experience.</p><p>Once you use this feature, you can't use it again until you finish a long rest.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -37,9 +37,14 @@
       "per": "lr",
       "type": "lr"
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "other",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,16 +63,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "The Fiend 14",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/creatures/abilities/mouth-teeth-fire-orange.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -1,10 +1,8 @@
 {
   "_id": "wKdRtFsvGfMKQHLY",
   "name": "Natural Recovery",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/control/sihouette-hold-beam-green.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 2nd level, you can regain some of your magical energy by sitting in meditation and communing with nature.</p><p>During a short rest, you choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your druid level (rounded up), and none of the slots can be 6th level or higher. You can't use this feature again until you finish a long rest.</p><p>For example, when you are a 4th-level druid, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level slot or two 1st-level slots.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
@@ -37,9 +37,14 @@
       "per": "lr",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "The druid can recover this number worth of spell slots (of 5th level or lower):",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Circle of the Land 2",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/control/sihouette-hold-beam-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -23,18 +23,19 @@
       "condition": "Critical hit on a creature of 100 hit points or less. Undead and constructs are immune."
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
-      "value": 5,
-      "long": 0,
+      "value": null,
+      "long": null,
+      "reach": 5,
       "units": "ft"
     },
     "uses": {
@@ -58,11 +59,11 @@
     "damage": {
       "parts": [
         [
-          "1d8 +@mod +2",
+          "1d8 + @mod + 2",
           "slashing"
         ]
       ],
-      "versatile": "1d10 +@mod +2"
+      "versatile": "1d10 + @mod + 2"
     },
     "formula": "",
     "save": {

@@ -1,10 +1,8 @@
 {
   "_id": "Ozz1xvw2ydiw4IJP",
   "name": "Running Leap",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/movement/feet-winged-boots-brown.webp",
   "data": {
     "description": {
       "value": "<p>With a 10-foot running start, the {creature} can long jump up to <strong>25 ft</strong>.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/skills/movement/feet-winged-boots-brown.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

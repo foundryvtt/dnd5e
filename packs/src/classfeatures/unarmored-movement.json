@@ -1,10 +1,8 @@
 {
   "_id": "7vSrGc0MP5Vzm9Ac",
   "name": "Unarmored Movement",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a shield. This bonus increases when you reach certain monk levels, as shown in the table below.</p><p>At 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Monk Level</strong></td>\n<td><strong>Unarmored Movement</strong></td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+10 ft.</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+10 ft.</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+10 ft.</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+10 ft.</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+15 ft.</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+15 ft.</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+15 ft.</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+15 ft.</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+20 ft.</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+20 ft.</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+20 ft.</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+20 ft.</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+25 ft.</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+25 ft.</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+25 ft.</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+25 ft.</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+30 ft.</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+30 ft.</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+30 ft.</td>\n</tr>\n</tbody>\n</table>\n<p></p>",
@@ -14,32 +12,39 @@
     "source": "PHB pg. 77-78",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null,
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Monk 2 ",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

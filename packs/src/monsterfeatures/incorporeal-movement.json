@@ -1,10 +1,8 @@
 {
   "_id": "LUHmtIDD1VTreFqI",
   "name": "Incorporeal Movement",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/air/air-wave-gust-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} can move through other creatures and objects as if they were difficult terrain.</p><p>It takes <strong><strong>5 (1d10) <em>force damage</em></strong></strong> if it ends its turn inside an object.</p>\n</section>\n<p>The {creature} can move through other creatures and objects as if they were difficult terrain.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "1d10",
+          "force"
+        ]
+      ],
       "versatile": "",
       "value": ""
     },
@@ -65,9 +70,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/air/air-wave-gust-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

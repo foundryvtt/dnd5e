@@ -1,10 +1,8 @@
 {
   "_id": "zSBlyP5Vm1CAV5VO",
   "name": "Two-Headed",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

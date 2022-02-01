@@ -1,10 +1,8 @@
 {
   "_id": "OsPhT7jA5LlvUA6e",
   "name": "Stench",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/commodities/tech/smoke-bomb-purple.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>Any creature that starts its turn within <strong>5 ft.</strong> of the {creature} must succeed on a <strong>DC 10 Constitution saving throw</strong> or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the {creature}'s Stench for 24 hours.</p></section><p>Any creature that starts its turn within <strong>5 ft.</strong> of the {creature} must succeed on a Constitution saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 5,
+      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/commodities/tech/smoke-bomb-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

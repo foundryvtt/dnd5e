@@ -1,10 +1,8 @@
 {
   "_id": "6ej6jlwh8ryDEzlB",
   "name": "Animate Chains",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/equipment/neck/choker-chain-thin-gold.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>Up to four chains the {type} can see within 60 feet of it magically sprout razor-edged barbs and animate under the {type}'s control, provided that the chains aren't being worn or carried.</p><p>Each animated chain is an object with AC 20, 20 hit points, resistance to <em>piercing damage</em>, and immunity to psychic and thunder damage. When the {type} uses Multiattack on its turn, it can use each animated chain to make one additional chain attack. An animated chain can grapple one creature of its own but can't make attacks while grappling. An animated chain reverts to its inanimate state if reduced to 0 hit points or if the {type} is incapacitated or dies.</p>\n</section>\n<p>Up to four chains the {type} can see within 60 feet of it magically sprout razor-edged barbs and animate under the {type}'s control, provided that the chains aren't being worn or carried.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 4,
+      "width": null,
       "units": "",
       "type": "object"
     },
     "range": {
       "value": 60,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "type": "sr"
     },
@@ -67,6 +67,10 @@
       "value": null,
       "charged": true
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -76,7 +80,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/equipment/neck/choker-chain-thin-gold.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

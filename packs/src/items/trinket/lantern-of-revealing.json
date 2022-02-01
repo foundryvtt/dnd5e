@@ -27,7 +27,7 @@
       "units": "hour"
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
@@ -35,6 +35,7 @@
     "range": {
       "value": 30,
       "long": 60,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -51,7 +52,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

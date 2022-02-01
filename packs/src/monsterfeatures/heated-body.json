@@ -1,10 +1,8 @@
 {
   "_id": "iFNpsEMJT66eLoat",
   "name": "Heated Body",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/earth/volcano-explosion-lava-yellow.webp",
   "data": {
     "description": {
       "value": "<p>A creature that touches the {creature} or hits it with a melee attack while within 5 feet of it takes <strong>5 (1d10) <em>fire damage</em></strong>.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "any",
       "type": "creature"
     },
     "range": {
       "value": 5,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": "",
       "type": ""
     },
@@ -51,7 +51,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "1d10",
+          "fire"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -66,6 +71,10 @@
       "value": null,
       "charged": false
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -75,7 +84,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/earth/volcano-explosion-lava-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

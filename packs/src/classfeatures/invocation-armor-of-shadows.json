@@ -1,10 +1,8 @@
 {
   "_id": "alUqO6c6OEKFQJdb",
   "name": "Invocation: Armor of Shadows",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/control/control-influence-rally-purple.webp",
   "data": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.CKZTpZlxj7hjjo2H]{Mage Armor} on yourself at will, without expending a spell slot or material components.</p>",
@@ -23,23 +21,30 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": "",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Warlock 2",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/control/control-influence-rally-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

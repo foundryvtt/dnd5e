@@ -1,10 +1,8 @@
 {
   "_id": "5V7SCABXvIbnk2Zn",
   "name": "Water Susceptibility",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/water/pseudopod-swirl-blue.webp",
   "data": {
     "description": {
       "value": "<p>For every <strong>5 ft.</strong> the {type} moves in water, or for every gallon of water splashed on it, it takes<strong> 1 <em>cold damage</em>.</strong></p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,7 +65,11 @@
       "charged": false
     }
   },
-  "flags": {},
-  "img": "icons/magic/water/pseudopod-swirl-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

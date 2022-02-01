@@ -1,10 +1,8 @@
 {
   "_id": "dA5X2eQuOtHywpQF",
   "name": "Invisibility",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/webs/webthin-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} magically turns invisible until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell).</p>\n</section>\n<p>The {creature} magically turns invisible. Any equipment the {creature} wears or carries is invisible with it.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "type": "sr"
     },
@@ -67,6 +67,10 @@
       "value": null,
       "charged": false
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -76,7 +80,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/creatures/webs/webthin-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

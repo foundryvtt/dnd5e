@@ -27,29 +27,30 @@
       "units": "inst"
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 120,
-      "long": 0,
+      "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "day"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
     "actionType": "rsak",
-    "attackBonus": 5,
+    "attackBonus": "5",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -81,6 +82,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

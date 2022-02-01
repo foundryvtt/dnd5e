@@ -23,18 +23,19 @@
       "condition": "The sound must reach the target."
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 120,
-      "long": 0,
+      "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -51,7 +52,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

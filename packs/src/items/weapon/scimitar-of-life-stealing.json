@@ -27,19 +27,20 @@
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
-      "value": 5,
+      "value": null,
       "long": null,
+      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -49,7 +50,7 @@
     },
     "ability": null,
     "actionType": "mwak",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,7 +59,7 @@
     "damage": {
       "parts": [
         [
-          "1d6 +@mod",
+          "1d6 + @mod",
           "slashing"
         ]
       ],

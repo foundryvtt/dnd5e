@@ -1,10 +1,8 @@
 {
   "_id": "nUVFUgyKK7fmQaFh",
   "name": "Shadow Stealth",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/mammals/humanoid-cat-skulking-teal.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>While in dim light or darkness, the {creature} can take the Hide action as a bonus action.</p></section><p>The {creature} can take the Hide action as a bonus action.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/creatures/mammals/humanoid-cat-skulking-teal.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -19,15 +19,15 @@
     "identified": true,
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
@@ -35,11 +35,12 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -49,7 +50,7 @@
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -76,6 +77,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

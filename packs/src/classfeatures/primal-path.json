@@ -1,10 +1,8 @@
 {
   "_id": "TH1QAf6YNGSeBVjT",
   "name": "Primal Path",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/fire/projectile-wave-arrow.webp",
   "data": {
     "description": {
       "value": "<p>At 3rd level, you choose a path that shapes the nature of your rage, such as the Path of the Berserker. Your choice grants you features at 3rd level and again at 6th, 10th, and 14th levels.</p>",
@@ -14,7 +12,7 @@
     "source": "PHB pg. 48",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
@@ -23,22 +21,29 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,9 +63,16 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/fire/projectile-wave-arrow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 167",
     "quantity": 1,
-    "weight": 0,
+    "weight": null,
     "price": 960,
     "attunement": 0,
     "equipped": false,
@@ -23,7 +23,7 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
@@ -34,7 +34,8 @@
     },
     "range": {
       "value": 90,
-      "long": 0,
+      "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -51,7 +52,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

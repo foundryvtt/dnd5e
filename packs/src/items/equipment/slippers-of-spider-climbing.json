@@ -18,9 +18,9 @@
     "rarity": "uncommon",
     "identified": true,
     "activation": {
-      "type": "none",
-      "cost": 0,
-      "condition": "Surface cannot be slippery."
+      "type": "",
+      "cost": null,
+      "condition": ""
     },
     "duration": {
       "value": null,
@@ -29,12 +29,13 @@
     "target": {
       "value": null,
       "width": null,
-      "units": null,
+      "units": "",
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
@@ -44,12 +45,12 @@
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -76,6 +77,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

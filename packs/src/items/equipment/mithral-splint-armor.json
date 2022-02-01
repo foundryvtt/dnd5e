@@ -21,7 +21,7 @@
     "identified": true,
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
@@ -37,11 +37,12 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": null
     },
     "consume": {
@@ -51,7 +52,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -84,7 +85,7 @@
       "value": null,
       "conditions": ""
     },
-    "strength": 0,
+    "strength": null,
     "stealth": false,
     "proficient": false,
     "attributes": {

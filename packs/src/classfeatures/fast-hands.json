@@ -1,10 +1,8 @@
 {
   "_id": "ga3dt2zrCn2MHK8R",
   "name": "Fast Hands",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/social/theft-pickpocket-bribery-brown.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 3rd level, you can use the bonus action granted by your @Compendium[dnd5e.classfeatures.01pcLg6PRu5zGrsb]{Cunning Action} to make a Dexterity (Sleight of Hand) check, use your thieves' tools to disarm a trap or open a lock, or take the Use an Object action.</p>",
@@ -23,23 +21,30 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "touch"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": "",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Thief 3",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/skills/social/theft-pickpocket-bribery-brown.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

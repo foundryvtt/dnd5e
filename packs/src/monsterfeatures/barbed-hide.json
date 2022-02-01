@@ -1,10 +1,8 @@
 {
   "_id": "QMGBV7OSnXqWLdhr",
   "name": "Barbed Hide",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
   "data": {
     "description": {
       "value": "<p>At the start of each of its turns, the {creature} deals <strong>5 (1d10) <em>piercing damage</em></strong> to any creature grappling it.</p>",
@@ -15,7 +13,7 @@
     "activation": {
       "type": "special",
       "cost": null,
-      "condition": ""
+      "condition": "at the start of each of its turns"
     },
     "duration": {
       "value": null,
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": "",
       "per": "",
       "type": ""
     },
@@ -51,7 +51,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "1d10",
+          "piercing"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -66,6 +71,10 @@
       "value": null,
       "charged": false
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -75,7 +84,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

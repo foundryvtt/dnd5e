@@ -1,10 +1,8 @@
 {
   "_id": "SlAF2AE4ZKoUvQql",
   "name": "Create Specter",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/abilities/dragon-breath-purple.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature} targets a humanoid within 10 feet of it that has been dead for no longer than 1 minute and died violently. </p><p>The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. The specter is under the {creature}'s control. The {creature} can have no more than seven specters under its control at one time.</p></section><p>The target's spirit rises as a specter in the space of its corpse or in the nearest unoccupied space. </p>",
@@ -15,7 +13,7 @@
     "activation": {
       "type": "action",
       "cost": 1,
-      "condition": ""
+      "condition": "one humanoid that died within the last minute"
     },
     "duration": {
       "value": null,
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": 10,
       "long": null,
-      "units": ""
+      "reach": null,
+      "units": "ft"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": "",
       "per": ""
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/creatures/abilities/dragon-breath-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

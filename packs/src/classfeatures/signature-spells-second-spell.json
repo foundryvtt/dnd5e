@@ -1,10 +1,8 @@
 {
   "_id": "31bKbWe9ZGVLEns6",
   "name": "Signature Spells (Second Spell)",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/fire/projectile-wave-arrow.webp",
   "data": {
     "description": {
       "value": "<p>When you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells. You always have these spells prepared, they don't count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can't do so again until you finish a short or long rest.</p><p>If you want to cast either spell at a higher level, you must expend a spell slot as normal.</p><p>If you wish, manually edit this entry and make a note of your second choice here:</p>\n<ul>\n<li><em>Second spell choice</em></li>\n</ul>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -37,9 +37,14 @@
       "per": "sr",
       "type": "sr"
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -61,9 +66,16 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/fire/projectile-wave-arrow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

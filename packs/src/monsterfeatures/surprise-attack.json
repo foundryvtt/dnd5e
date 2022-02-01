@@ -1,13 +1,11 @@
 {
   "_id": "5DJYFjGQCz5aSl5e",
   "name": "Surprise Attack",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/water/elemental-water.webp",
   "data": {
     "description": {
-      "value": "<p>If the {creature} surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.</p>",
+      "value": "<p>If the {creature} surprises a creature and hits it with an attack during the first round of combat, the target takes an extra <strong>7 (2d6) damage</strong> from the attack.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": "",
       "type": ""
     },
@@ -54,7 +54,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "",
+    "formula": "2d6",
     "save": {
       "ability": "",
       "dc": null,
@@ -75,7 +75,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/water/elemental-water.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

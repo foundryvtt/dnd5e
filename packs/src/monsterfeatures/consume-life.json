@@ -1,10 +1,8 @@
 {
   "_id": "r2nM5I77LnSvkLvD",
   "name": "Consume Life",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/life/heart-glowing-red.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>As a bonus action, the {creature} can target one creature it can see within <strong>5 ft.</strong> of it that has <strong>0 hit points</strong> and is still alive. </p><p>The target must succeed on a <strong>DC 10 Constitution saving throw</strong> against this magic or die. If the target dies, the {creature} regains 10 (3d6)<strong> hit points</strong>.</p></section><p>The {creature} can target one creature it can see within <strong>5 ft.</strong> The target must succeed on a Constitution saving throw.</p>",
@@ -22,18 +20,20 @@
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 1,
+      "width": null,
       "units": "",
-      "type": ""
+      "type": "cone"
     },
     "range": {
       "value": 5,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/life/heart-glowing-red.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

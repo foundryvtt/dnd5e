@@ -12,27 +12,28 @@
     "source": "PHB pg. 72; 73; 91",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null,
       "type": ""
     },
@@ -43,7 +44,7 @@
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -90,7 +91,10 @@
       "thr": false,
       "two": false,
       "ver": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
   "effects": [
     {
@@ -110,7 +114,7 @@
       "icon": "icons/weapons/bows/shortbow-recurve-yellow.webp",
       "label": "Fighting Style: Archery",
       "origin": "Item.SDsWYh0xtS6nWuH8",
-      "tint": "",
+      "tint": null,
       "transfer": true
     }
   ],

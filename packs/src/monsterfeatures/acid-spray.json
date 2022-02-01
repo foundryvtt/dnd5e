@@ -1,10 +1,8 @@
 {
   "_id": "kZpl32DBmqxlRegX",
   "name": "Acid Spray",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} spits acid in a line that is 30 ft. long and 5 ft. wide, provided that it has no creature grappled.</p><p>Each creature in that line must make a  <strong>DC 13 Dexterity</strong> saving throw, taking <strong>10 (3d6) <em>acid damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The {creature} spits acid in a line that is 30 ft. long and 5 ft. wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 30,
+      "width": 5,
       "units": "ft",
       "type": "line"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": "",
       "type": "sr"
     },
@@ -51,7 +51,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "3d6",
+          "acid"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -66,6 +71,10 @@
       "value": 6,
       "charged": true
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -75,7 +84,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

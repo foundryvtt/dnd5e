@@ -1,10 +1,8 @@
 {
   "_id": "eL3OJmc4FuetizKO",
   "name": "Swarm",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/mammals/bats-movement-flying-purple.webp",
   "data": {
     "description": {
       "value": "<p>The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny {creature}. The swarm can't regain<strong> hit points</strong> or gain temporary<strong> hit points</strong>.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/creatures/mammals/bats-movement-flying-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

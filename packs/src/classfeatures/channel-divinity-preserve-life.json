@@ -1,10 +1,8 @@
 {
   "_id": "hEymt45rICi4f9eL",
   "name": "Channel Divinity: Preserve Life",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 2nd level, you can use your Channel Divinity to heal the badly injured.</p><p>As an action, you present your holy symbol and evoke healing energy that can restore a number of hit points equal to five times your cleric level.</p><p>Choose any creatures within 30 feet of you, and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. You can't use this feature on an undead or a construct.</p>",
@@ -23,23 +21,30 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 30,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": "",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "heal",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -48,7 +53,7 @@
     "damage": {
       "parts": [
         [
-          "5* @classes.cleric.levels",
+          "5*@classes.cleric.levels",
           "healing"
         ]
       ],
@@ -59,16 +64,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Life Domain 2",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

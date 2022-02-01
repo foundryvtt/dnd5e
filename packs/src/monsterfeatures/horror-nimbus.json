@@ -1,10 +1,8 @@
 {
   "_id": "hu2pgYS1RD7hglvg",
   "name": "Horror Nimbus",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature} magically emits scintillating, multicolored light. Each creature within 15 feet of the {creature} that can see the light must succeed on a  <strong>DC 15 Wisdom</strong> saving throw or be frightened for 1 minute. </p><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the {creature}'s Horror Nimbus for the next 24 hours.</p></section><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the {creature}'s Horror Nimbus for the next 24 hours.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 15,
+      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": 5,
       "charged": true
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

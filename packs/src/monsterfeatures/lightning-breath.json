@@ -1,10 +1,8 @@
 {
   "_id": "LVnd9fq9cQj7rR0Q",
   "name": "Lightning Breath",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/lightning/bolt-strike-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {type} exhales lightning in a 90-foot line that is 5 ft. wide. Each creature in that line must make a  <strong>DC 19 Dexterity</strong> saving throw, taking <strong>66 (12d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The {type} exhales lightning in a 90-foot line that is 5 ft. wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 90,
+      "width": 5,
       "units": "ft",
       "type": "line"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "12d10",
+          "lightning"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -63,9 +68,17 @@
     "recharge": {
       "value": 5,
       "charged": true
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/lightning/bolt-strike-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

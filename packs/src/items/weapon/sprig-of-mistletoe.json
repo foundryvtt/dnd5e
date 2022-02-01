@@ -11,7 +11,7 @@
     },
     "source": "PHB pg. 151",
     "quantity": 1,
-    "weight": 0,
+    "weight": null,
     "price": 1,
     "attunement": 0,
     "equipped": false,
@@ -27,19 +27,20 @@
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -49,7 +50,7 @@
     },
     "ability": null,
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -75,6 +76,7 @@
       "conditions": ""
     },
     "weaponType": "natural",
+    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,

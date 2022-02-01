@@ -1,10 +1,8 @@
 {
   "_id": "QCNJD2GuOZSTT4Wt",
   "name": "Roar",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different, as detailed below. Each creature within 500 feet of the {creature} and able to hear the roar must make a saving throw.</p><p>**First Roar.** Each creature that fails a <strong>DC 18 Wisdom</strong> saving throw is frightened for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p><p>**Second Roar.** Each creature that fails a <strong>DC 18 Wisdom</strong> saving throw is deafened and frightened for 1 minute. A frightened creature is paralyzed and can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p><p>**Third Roar.** Each creature makes a <strong>DC 18 Constitution</strong> saving throw. On a failed save, a creature takes 44 (8d10) thunder damage and is knocked prone. On a successful save, the creature takes half as much damage and isn't knocked prone.</p>\n</section>\n<p>The {creature} emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different. Each creature within 500 feet of the {creature} and able to hear the roar must make a saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "any",
       "type": "creature"
     },
     "range": {
       "value": 500,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "day"
     },
     "consume": {
@@ -41,8 +41,8 @@
       "target": "",
       "amount": null
     },
-    "ability": null,
-    "actionType": "",
+    "ability": "",
+    "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -55,17 +55,25 @@
     },
     "formula": "",
     "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
+      "ability": "con",
+      "dc": 18,
+      "scaling": "flat"
     },
     "requirements": "",
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

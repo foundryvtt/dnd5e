@@ -35,11 +35,12 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "touch"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": "",
       "autoDestroy": false,
       "autoUse": false
@@ -51,7 +52,7 @@
     },
     "ability": "str",
     "actionType": "abil",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -60,7 +61,7 @@
     "damage": {
       "parts": [
         [
-          "d20 + @abilities.str.mod +4",
+          "d20 + @abilities.str.mod + 4",
           ""
         ]
       ],

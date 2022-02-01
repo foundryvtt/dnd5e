@@ -1,10 +1,8 @@
 {
   "_id": "Jv0zu4BtUi8bFCqJ",
   "name": "Dark One's Blessing",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/wounds/blood-cells-disease-green.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 1st level, when you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your Charisma modifier + your warlock level (minimum of 1).</p>",
@@ -14,7 +12,7 @@
     "source": "PHB pg. 109",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
@@ -23,23 +21,30 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": "",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "cha",
     "actionType": "heal",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -48,7 +53,7 @@
     "damage": {
       "parts": [
         [
-          "max(1, @mod + @classes.warlock.levels)",
+          "max(1,@mod + @classes.warlock.levels)",
           "temphp"
         ]
       ],
@@ -59,16 +64,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "The Fiend 1",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/skills/wounds/blood-cells-disease-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

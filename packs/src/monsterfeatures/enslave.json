@@ -1,10 +1,8 @@
 {
   "_id": "gbcy9MyUF06iUC88",
   "name": "Enslave",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} targets one creature it can see within 30 ft. of it. The target must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed by the {creature} until the {creature} dies or until it is on a different plane of existence from the target.</p><p>The charmed target is under the {creature}'s control and can't take reactions, and the {creature} and the target can communicate telepathically with each other over any distance.Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the {creature}.</p>\n</section>\n<p>The target must make a <strong>Wisdom</strong> saving throw. Whenever the target takes damage, the target can repeat the saving throw. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the {creature}.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 30,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "day"
     },
     "consume": {
@@ -56,13 +56,17 @@
     "formula": "",
     "save": {
       "ability": "wis",
-      "dc": null,
-      "scaling": "wis"
+      "dc": 14,
+      "scaling": "flat"
     },
     "requirements": "",
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     },
     "featType": {
       "value": "",
@@ -77,7 +81,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

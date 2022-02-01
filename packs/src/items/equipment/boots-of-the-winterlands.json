@@ -5,7 +5,7 @@
   "img": "icons/equipment/feet/boots-leather-banded-furred.webp",
   "data": {
     "description": {
-      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>These furred boots are snug and feel quite warm. While you wear them, you gain the following benefits:</p>\n<ul>\n<li>You have resistance to cold damage.</li>\n<li>You ignore difficult terrain created by ice or snow. You can tolerate temperatures as low as &minus;50 degrees Fahrenheit without any additional protection. If you wear heavy clothes, you can tolerate temperatures as low as &minus;100 degrees Fahrenheit.</li>\n</ul>",
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>These furred boots are snug and feel quite warm. While you wear them, you gain the following benefits:</p>\n<ul>\n<li>You have resistance to cold damage.</li>\n<li>You ignore difficult terrain created by ice or snow. You can tolerate temperatures as low as −50 degrees Fahrenheit without any additional protection. If you wear heavy clothes, you can tolerate temperatures as low as −100 degrees Fahrenheit.</li>\n</ul>",
       "chat": "",
       "unidentified": ""
     },
@@ -19,15 +19,15 @@
     "identified": true,
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
@@ -35,11 +35,12 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -49,7 +50,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -76,6 +77,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

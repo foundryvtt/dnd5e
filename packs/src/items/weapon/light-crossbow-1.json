@@ -23,23 +23,24 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
       "value": 80,
       "long": 320,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -58,7 +59,7 @@
     "damage": {
       "parts": [
         [
-          "1d8 + @mod +1",
+          "1d8 + @mod + 1",
           "piercing"
         ]
       ],

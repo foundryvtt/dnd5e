@@ -27,7 +27,7 @@
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": null,
       "type": "self"
@@ -35,6 +35,7 @@
     "range": {
       "value": 60,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -49,7 +50,7 @@
     },
     "ability": null,
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -75,6 +76,7 @@
       "conditions": ""
     },
     "weaponType": "simpleM",
+    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,

@@ -8,6 +8,10 @@
       "str": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 0,
         "save": 0,
         "prof": 0,
@@ -18,6 +22,10 @@
       "dex": {
         "value": 15,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 4,
         "prof": 2,
@@ -28,6 +36,10 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 3,
         "save": 3,
         "prof": 0,
@@ -38,6 +50,10 @@
       "int": {
         "value": 12,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 3,
         "prof": 2,
@@ -48,6 +64,10 @@
       "wis": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 2,
         "prof": 0,
@@ -58,6 +78,10 @@
       "cha": {
         "value": 8,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": -1,
         "save": -1,
         "prof": 0,
@@ -209,6 +233,10 @@
       "acr": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 14,
@@ -218,6 +246,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -227,6 +259,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -236,6 +272,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -245,6 +285,10 @@
       "dec": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 11,
@@ -254,6 +298,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -263,6 +311,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 14,
@@ -272,6 +324,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -281,6 +337,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -290,6 +350,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -299,6 +363,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -308,6 +376,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -317,6 +389,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -326,6 +402,10 @@
       "per": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 11,
@@ -335,6 +415,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -344,6 +428,10 @@
       "slt": {
         "value": 2,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 16,
@@ -353,6 +441,10 @@
       "ste": {
         "value": 2,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 16,
@@ -362,6 +454,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -514,7 +610,28 @@
       "attribute": "attributes.ac.value"
     },
     "randomImg": false,
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -530,27 +647,28 @@
         "source": "",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
-          "value": "",
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": "",
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null,
           "type": ""
         },
@@ -561,7 +679,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -601,7 +719,10 @@
         "attributes": {
           "spelldc": 10
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 4500001,
       "flags": {},
@@ -628,11 +749,11 @@
         "price": 15,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "",
         "identified": true,
         "activation": {
-          "type": "none",
-          "cost": 0,
+          "type": "",
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -648,21 +769,22 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": "",
           "per": ""
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -689,6 +811,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -727,27 +850,28 @@
         "source": "PHB pg. 96",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
-          "value": "",
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": "",
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -757,7 +881,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -780,7 +904,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 4400001,
       "flags": {},
@@ -804,7 +931,7 @@
         "source": "PHB pg. 96",
         "activation": {
           "type": "special",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -820,11 +947,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": "",
           "type": ""
         },
@@ -835,7 +963,7 @@
         },
         "ability": "",
         "actionType": "other",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -844,7 +972,7 @@
         "damage": {
           "parts": [
             [
-              "(ceil(@classes.rogue.levels /2))d6",
+              "(ceil(@classes.rogue.levels/2))d6",
               ""
             ]
           ],
@@ -862,7 +990,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 4100001,
       "flags": {},
@@ -886,27 +1017,28 @@
         "source": "PHB pg. 96",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
-          "value": "",
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": "",
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -916,7 +1048,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -939,7 +1071,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 4450001,
       "flags": {},
@@ -978,19 +1113,20 @@
           "units": ""
         },
         "target": {
-          "value": null,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "target"
         },
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
+          "reach": 5,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": ""
         },
         "consume": {
@@ -1000,7 +1136,7 @@
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1031,6 +1167,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "amm": false,
@@ -1095,6 +1232,7 @@
         "range": {
           "value": 5,
           "long": null,
+          "reach": null,
           "units": "ft"
         },
         "uses": {
@@ -1110,7 +1248,7 @@
         },
         "ability": "",
         "actionType": "rwak",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1171,23 +1309,24 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "target"
         },
         "range": {
           "value": 80,
           "long": 320,
+          "reach": null,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": ""
         },
         "consume": {
@@ -1197,7 +1336,7 @@
         },
         "ability": "",
         "actionType": "rwak",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1228,6 +1367,7 @@
           "conditions": ""
         },
         "weaponType": "simpleR",
+        "baseItem": "",
         "properties": {
           "two": true,
           "amm": true,
@@ -1272,7 +1412,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -1280,23 +1420,24 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "target"
         },
         "range": {
           "value": 20,
           "long": 60,
+          "reach": 5,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": "",
           "per": ""
         },
         "consume": {
@@ -1306,7 +1447,7 @@
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1337,6 +1478,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "lgt": true,
@@ -1351,7 +1493,10 @@
           "ret": false,
           "spc": false,
           "two": false,
-          "ver": false
+          "ver": false,
+          "ada": false,
+          "mgc": false,
+          "sil": false
         },
         "proficient": true,
         "attuned": false
@@ -1381,11 +1526,11 @@
         "price": 10,
         "attunement": 0,
         "equipped": true,
-        "rarity": "Common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -1401,11 +1546,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -1415,7 +1561,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1442,6 +1588,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1476,15 +1623,35 @@
         "price": 25,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "",
         "identified": true,
         "toolType": "",
+        "baseItem": "thief",
         "ability": "dex",
         "chatFlavor": "",
         "proficient": 1,
+        "bonus": "",
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 2700000,
@@ -1529,6 +1696,24 @@
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 300001,
@@ -1573,6 +1758,24 @@
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 2300001,
@@ -1617,6 +1820,24 @@
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 2400001,
@@ -1649,6 +1870,24 @@
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 3600000,
@@ -1696,6 +1935,7 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
@@ -1712,7 +1952,7 @@
         },
         "ability": "",
         "actionType": "abil",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1776,6 +2016,7 @@
         "range": {
           "value": 5,
           "long": null,
+          "reach": null,
           "units": "ft"
         },
         "uses": {
@@ -1792,7 +2033,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1844,7 +2085,7 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": null,
           "units": ""
         },
         "target": {
@@ -1856,6 +2097,7 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": "touch"
         },
         "uses": {
@@ -1872,7 +2114,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1921,6 +2163,24 @@
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 4800000,
@@ -1968,6 +2228,7 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
@@ -1984,7 +2245,7 @@
         },
         "ability": "str",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2041,11 +2302,11 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
@@ -2053,6 +2314,7 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": "touch"
         },
         "uses": {
@@ -2069,7 +2331,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2118,6 +2380,24 @@
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 3600000,
@@ -2150,6 +2430,24 @@
         "attuned": false,
         "damage": {
           "parts": []
+        },
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
         }
       },
       "sort": 3600000,
@@ -2204,7 +2502,28 @@
         "damage": {
           "parts": []
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null,
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
+        }
       },
       "sort": 0,
       "flags": {
@@ -2235,7 +2554,7 @@
         "price": 2,
         "attunement": 0,
         "equipped": false,
-        "rarity": "Common",
+        "rarity": "",
         "identified": true,
         "activation": {
           "type": "action",
@@ -2243,23 +2562,24 @@
           "condition": ""
         },
         "duration": {
-          "value": 0,
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "target"
         },
         "range": {
           "value": 20,
           "long": 60,
+          "reach": 5,
           "units": "ft"
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": "",
           "per": ""
         },
         "consume": {
@@ -2269,7 +2589,7 @@
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2300,6 +2620,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "lgt": true,
@@ -2314,7 +2635,10 @@
           "ret": false,
           "spc": false,
           "two": false,
-          "ver": false
+          "ver": false,
+          "ada": false,
+          "mgc": false,
+          "sil": false
         },
         "proficient": true,
         "attuned": false
@@ -2346,7 +2670,25 @@
         "equipped": false,
         "rarity": "Common",
         "identified": true,
-        "attuned": false
+        "attuned": false,
+        "target": {
+          "value": null
+        },
+        "duration": {
+          "value": null
+        },
+        "activation": {
+          "cost": null
+        },
+        "uses": {
+          "value": null,
+          "max": null
+        },
+        "attackBonus": null,
+        "range": {
+          "value": null,
+          "long": null
+        }
       },
       "sort": 100001,
       "flags": {},
@@ -2370,27 +2712,28 @@
         "source": "PHB pg. 20",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
-          "value": "",
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": "",
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null,
           "type": ""
         },
@@ -2401,7 +2744,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2441,7 +2784,10 @@
         "attributes": {
           "spelldc": 10
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 5200000,
       "flags": {},
@@ -2465,27 +2811,28 @@
         "source": "PHB pg. 20",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
-          "value": "",
+          "value": null,
           "units": ""
         },
         "target": {
-          "value": "",
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
-          "value": "",
+          "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -2495,7 +2842,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2535,7 +2882,10 @@
         "attributes": {
           "spelldc": 10
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 5300000,
       "flags": {},
@@ -2559,7 +2909,7 @@
         "source": "",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -2575,11 +2925,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -2589,7 +2940,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2610,7 +2961,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 5025001,
       "flags": {},
@@ -2634,7 +2988,7 @@
         "source": "PHB pg. 20",
         "activation": {
           "type": "",
-          "cost": 0,
+          "cost": null,
           "condition": ""
         },
         "duration": {
@@ -2650,11 +3004,12 @@
         "range": {
           "value": null,
           "long": null,
+          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "consume": {
@@ -2664,7 +3019,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": 0,
+        "attackBonus": null,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2685,7 +3040,10 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0
+        "attunement": 0,
+        "quanitiy": null,
+        "weight": null,
+        "price": null
       },
       "sort": 4850001,
       "flags": {},

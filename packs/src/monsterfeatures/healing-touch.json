@@ -1,13 +1,11 @@
 {
   "_id": "r3Ugp8f5Ckw2EUHL",
   "name": "Healing Touch",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
   "data": {
     "description": {
-      "value": "<p>The {creature} touches another creature. The target magically regains 20 (4d8 + 2) hit points and is freed from any curse, disease, poison, blindness, or deafness.</p>",
+      "value": "<p>The {creature} touches another creature. The target magically regains <strong>20 (4d8 + 2)</strong> hit points and is freed from any curse, disease, poison, blindness, or deafness.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
       "long": null,
-      "units": ""
+      "reach": null,
+      "units": "touch"
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "day"
     },
     "consume": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "4d8 + 2",
+          "healing"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -63,9 +68,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -1,10 +1,8 @@
 {
   "_id": "Xa2MLUJGCReJ28B7",
   "name": "Invocation: Sculptor of Flesh",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
   "data": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.04nMsTWkIFvkbXlY]{Polymorph} once using a warlock spell slot. You can't do so again until you finish a long rest.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": 1,
+      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 60,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -37,9 +37,14 @@
       "per": "lr",
       "type": "lr"
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "wis",
       "dc": null,
-      "value": "",
-      "scaling": "cha"
+      "scaling": "cha",
+      "value": ""
     },
     "requirements": "Warlock 7",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

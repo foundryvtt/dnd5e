@@ -1,10 +1,8 @@
 {
   "_id": "pJADgAxxefgcATWr",
   "name": "Invocation: Thirsting Blade",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
   "data": {
     "description": {
       "value": "<p>You can attack with your pact weapon twice, instead of once, whenever you take the Attack action on your turn.</p>",
@@ -23,23 +21,30 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": "",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Warlock 5, Pact of the Blade",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

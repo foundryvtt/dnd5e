@@ -1,10 +1,8 @@
 {
   "_id": "vMxJQEKeK6WwZFaF",
   "name": "Mystic Arcanum (9th-Level Spell)",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/sundries/books/book-black-grey.webp",
   "data": {
     "description": {
       "value": "<p>Choose one 9th-level spell from the warlock spell list as an additional arcanum.</p><p>You can cast your arcanum spell once without expending a spell slot. You must finish a long rest before you can do so again.</p><p>You regain all uses of your Mystic Arcanum when you finish a long rest.</p><p>If you wish, manually edit this entry and make a note of your choice here:</p>\n<ul>\n<li><em>9th-level spell</em></li>\n</ul>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
@@ -37,9 +37,14 @@
       "per": "lr",
       "type": "lr"
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -61,9 +66,16 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/sundries/books/book-black-grey.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

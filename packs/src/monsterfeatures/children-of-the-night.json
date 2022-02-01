@@ -1,13 +1,11 @@
 {
   "_id": "dm2G9HupHZbZRvNm",
   "name": "Children of the Night",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/death/skull-trio-badge-purple.webp",
   "data": {
     "description": {
-      "value": "<section class=\"secret\"><p>The {creature} magically calls 2d4 swarms of bats or rats, provided that the sun isn't up. While outdoors, the {creature} can call 3d6 wolves instead. </p><p>The called creatures arrive in 1d4 rounds, acting as allies of the {creature} and obeying its spoken commands. The beasts remain for 1 hour, until the {creature} dies, or until the {creature} dismisses them as a bonus action.</p></section><p>The {creature} magically calls swarms of bats or rats. While outdoors, the {creature} can call wolves instead. </p>",
+      "value": "<section class=\"secret\">\n<p>The {creature} magically calls<strong> 2d4</strong> swarms of bats or rats, provided that the sun isn't up. While outdoors, the {creature} can call <strong>3d6</strong> wolves instead.</p>\n<p>The called creatures arrive in <strong>1d4</strong> rounds, acting as allies of the {creature} and obeying its spoken commands. The beasts remain for 1 hour, until the {creature} dies, or until the {creature} dismisses them as a bonus action.</p>\n</section>\n<p>The {creature} magically calls swarms of bats or rats. While outdoors, the {creature} can call wolves instead.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "day"
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/death/skull-trio-badge-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

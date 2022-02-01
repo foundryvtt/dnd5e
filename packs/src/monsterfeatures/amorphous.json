@@ -1,13 +1,11 @@
 {
   "_id": "3lDp8DtWwNDHSvxX",
   "name": "Amorphous",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/slimes/slime-movement-dripping-purple.webp",
   "data": {
     "description": {
-      "value": "<p>The&nbsp;{creature}&nbsp;can move through a space as narrow as 1 inch wide without squeezing.</p>",
+      "value": "<p>The {creature} can move through a space as narrow as 1 inch wide without squeezing.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/creatures/slimes/slime-movement-dripping-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

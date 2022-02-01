@@ -35,23 +35,24 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "autoDestroy": false,
       "autoUse": true
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "str",
     "actionType": "mwak",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,

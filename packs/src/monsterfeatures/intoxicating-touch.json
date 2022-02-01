@@ -1,13 +1,11 @@
 {
   "_id": "qfWKOH5AawhmNSwl",
   "name": "Intoxicating Touch",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/nature/beam-hand-leaves-green.webp",
   "data": {
     "description": {
-      "value": "<section class=\"secret\">\n<p><em>Melee Spell Attack:</em><strong>+5 to hit, reach</strong>&nbsp;<strong>5 ft.,</strong> one creature. Hit: The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks.</p><p></p>\n</section>\n<p>The target has disadvantage on Wisdom saving throws and all ability checks.</p>",
+      "value": "<section class=\"secret\">\n<p><em>Melee Spell Attack:</em><strong>+5 to hit, reach</strong> <strong>5 ft.,</strong> one creature. Hit: The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks.</p><p></p>\n</section>\n<p>The target has disadvantage on Wisdom saving throws and all ability checks.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -18,22 +16,24 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
-      "units": ""
+      "value": 1,
+      "units": "hour"
     },
     "target": {
-      "value": null,
+      "value": 1,
+      "width": null,
       "units": "",
-      "type": ""
+      "type": "cone"
     },
     "range": {
-      "value": 5,
+      "value": null,
       "long": null,
+      "reach": 5,
       "units": "ft"
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": "",
       "per": ""
     },
     "consume": {
@@ -43,7 +43,7 @@
     },
     "ability": "str",
     "actionType": "msak",
-    "attackBonus": 0,
+    "attackBonus": "",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/nature/beam-hand-leaves-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

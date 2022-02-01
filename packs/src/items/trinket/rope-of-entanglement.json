@@ -23,7 +23,7 @@
       "condition": "Command word."
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
@@ -34,12 +34,13 @@
     },
     "range": {
       "value": 20,
-      "long": 0,
+      "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": "",
       "autoDestroy": false,
       "autoUse": false
@@ -51,7 +52,7 @@
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

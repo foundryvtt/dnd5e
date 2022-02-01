@@ -23,23 +23,24 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": 0,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
-      "value": 5,
-      "long": 0,
+      "value": null,
+      "long": null,
+      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -58,11 +59,11 @@
     "damage": {
       "parts": [
         [
-          "1d8 + @mod +3",
+          "1d8 + @mod + 3",
           "slashing"
         ]
       ],
-      "versatile": "1d10 + @mod +3"
+      "versatile": "1d10 + @mod + 3"
     },
     "formula": "",
     "save": {

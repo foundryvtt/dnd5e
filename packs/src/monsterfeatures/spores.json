@@ -1,10 +1,8 @@
 {
   "_id": "ihWvcWsnfqW2HFlA",
   "name": "Spores",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>A 15-foot-radius cloud of toxic spores extends out from the {creature}. The spores spread around corners. Each creature in that area must succeed on a  <strong>DC 14 Constitution</strong> saving throw or become poisoned. </p><p>While poisoned in this way, a target takes <strong>5 (1d10) <em>poison damage</em></strong> at the start of each of its turns. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Emptying a vial of holy water on the target also ends the effect on it.</p></section><p>A 15-foot-radius cloud of toxic spores extends out from the {creature}. The spores spread around corners. Each creature in that area must make a <strong>Constitution</strong> saving throw. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 15,
+      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "1d10",
+          "poison"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -63,9 +68,17 @@
     "recharge": {
       "value": 6,
       "charged": true
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

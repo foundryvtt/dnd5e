@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 171",
     "quantity": 1,
-    "weight": 0,
+    "weight": null,
     "price": 5000,
     "attunement": 1,
     "equipped": false,
@@ -27,14 +27,15 @@
       "units": "minute"
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 120,
-      "long": 0,
+      "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -51,7 +52,7 @@
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

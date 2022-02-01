@@ -1,10 +1,8 @@
 {
   "_id": "lVrnjqBrv90VH96d",
   "name": "Divine Eminence",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/symbols/cog-shield-white-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>As a bonus action, the {creature} can expend a spell slot to cause its melee weapon attacks to magically deal an extra <strong>10 (3d6) <em>radiant damage</em></strong> to a target on a hit. </p><p>This benefit lasts until the end of the turn. If the {creature} expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st.</p></section><p>As a bonus action, the {creature} can expend a spell slot to cause its melee weapon attacks to magically deal an extra <em>radiant damage</em> to a target on a hit.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "3d6",
+          "radiant"
+        ]
+      ],
       "versatile": "1d6"
     },
     "formula": "",
@@ -63,9 +68,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/symbols/cog-shield-white-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

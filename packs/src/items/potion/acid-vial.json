@@ -23,7 +23,7 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
@@ -34,12 +34,13 @@
     },
     "range": {
       "value": 20,
-      "long": 0,
+      "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": "",
       "autoDestroy": true,
       "autoUse": true
@@ -51,7 +52,7 @@
     },
     "ability": "dex",
     "actionType": "rwak",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "improvised weapon",
     "critical": {
       "threshold": null,
@@ -60,7 +61,7 @@
     "damage": {
       "parts": [
         [
-          "2d6+@mod",
+          "2d6 + @mod",
           "acid"
         ]
       ],

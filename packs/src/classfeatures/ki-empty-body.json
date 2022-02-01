@@ -1,10 +1,8 @@
 {
   "_id": "3jwFt3hSqDswBlOH",
   "name": "Ki: Empty Body",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
   "data": {
     "description": {
       "value": "<p>Beginning at 18th level, you can use your action to spend 4 ki points to become invisible for 1 minute. During that time, you also have resistance to all damage but force damage.</p>\n<p>Additionally, you can spend 8 ki points to cast the @Compendium[dnd5e.spells.TIoadMIsUKD4edXi]{Astral Projection} spell, without needing material components. When you do so, you can't take any other creatures with you.</p>",
@@ -23,24 +21,30 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
-      "type": "self",
-      "width": null
+      "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
-      "value": 0,
-      "max": "0",
+      "value": null,
+      "max": null,
       "per": "",
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -55,18 +59,13 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Monk 18",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
     },
     "armor": {
       "value": 10
@@ -92,10 +91,11 @@
       "thr": false,
       "two": false,
       "ver": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
   "effects": [
     {
       "_id": "4dvYtqvbQGDsVi51",
@@ -166,16 +166,19 @@
       "duration": {
         "startTime": null,
         "seconds": 60,
-        "rounds": 10,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "rounds": 10
       },
       "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
       "label": "Ki: Empty Body",
       "origin": "Item.xqRleciuHDZlYCl6",
-      "tint": "",
+      "tint": null,
       "transfer": true
     }
-  ]
+  ],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

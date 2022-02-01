@@ -1,10 +1,8 @@
 {
   "_id": "zjcGly9P3Gn9MXt7",
   "name": "Acid Breath",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {type} exhales acid in a 60-foot line that is 5 feet wide. </p><p>Each creature in that line must make a  <strong>DC 18 Dexterity</strong> saving throw, taking <strong>54 (12d8) <em>acid damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The {type} exhales acid in a 60-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 60,
+      "width": 5,
       "units": "ft",
       "type": "line"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,13 +50,18 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "12d8",
+          "acid"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "dex",
-      "dc": null,
+      "dc": 18,
       "scaling": "flat"
     },
     "requirements": "",
@@ -65,7 +70,11 @@
       "charged": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

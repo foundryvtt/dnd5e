@@ -1,10 +1,8 @@
 {
   "_id": "aD3HKoBnJtZL6cDj",
   "name": "Stunning Screech",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a {type} must succeed on a <strong>DC 14 Constitution</strong> saving throw or be stunned until the end of the {creature}'s next turn .</p>\n</section>\n<p>The {creature} emits a horrific screech. Each creature within 20 feet of it that can hear it and that isn't a {type} must make a <strong>Constitution</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "any",
       "type": "creature"
     },
     "range": {
       "value": 20,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "day"
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

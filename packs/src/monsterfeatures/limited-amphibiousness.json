@@ -1,10 +1,8 @@
 {
   "_id": "boO7LJ0RRinoWHyT",
   "name": "Limited Amphibiousness",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/environment/creatures/frog-spotted-green.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature} can breathe air and water, but it needs to be submerged at least once every 4 hours to avoid suffocating.</p></section><p>The {creature} can breathe air and water.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,7 +65,11 @@
       "charged": false
     }
   },
-  "flags": {},
-  "img": "icons/environment/creatures/frog-spotted-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

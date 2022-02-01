@@ -1,10 +1,8 @@
 {
   "_id": "7WfeHV27l7DMcuTG",
   "name": "Flyby",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/mammals/bats-movement-flying-purple.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} doesn't provoke opportunity attacks when it flies out of an enemy's reach.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/creatures/mammals/bats-movement-flying-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

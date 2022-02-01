@@ -1,10 +1,8 @@
 {
   "_id": "rdBPd6CwqXT64iJM",
   "name": "Invocation: Repelling Blast",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/fire/explosion-embers-evade-silhouette.webp",
   "data": {
     "description": {
       "value": "<p>When you hit a creature with @Compendium[dnd5e.spells.Z9p1vezIn95jw1Yw]{Eldritch Blast}, you can push the creature up to 10 feet away from you in a straight line.</p>",
@@ -14,32 +12,39 @@
     "source": "PHB pg. 111",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null,
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Warlock 2, Eldritch Blast",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/magic/fire/explosion-embers-evade-silhouette.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -1,10 +1,8 @@
 {
   "_id": "xvgPu1O57DgXCM86",
   "name": "Beast Spells",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/abilities/stinger-poison-green.webp",
   "data": {
     "description": {
       "value": "<p>Beginning at 18th level, you can cast many of your druid spells in any shape you assume using @Compendium[dnd5e.classfeatures.swK0r5TOIxredxWS]{Wild Shape}. You can perform the somatic and verbal components of a druid spell while in a beast shape, but you aren't able to provide material components.</p>",
@@ -14,32 +12,39 @@
     "source": "PHB pg. 67",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null,
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Druid 18",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/creatures/abilities/stinger-poison-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -24,32 +24,33 @@
     },
     "duration": {
       "value": null,
-      "units": "inst"
+      "units": ""
     },
     "target": {
-      "value": 0,
+      "value": null,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": ""
     },
     "range": {
-      "value": 10,
-      "long": 0,
-      "units": "ft"
+      "value": null,
+      "long": null,
+      "reach": null,
+      "units": ""
     },
     "uses": {
       "value": 3,
-      "max": 3,
+      "max": "3",
       "per": "charges"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
-    "actionType": "util",
-    "attackBonus": 0,
+    "actionType": "",
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -66,7 +67,7 @@
       "scaling": "spell"
     },
     "armor": {
-      "value": 0,
+      "value": null,
       "type": "light",
       "dex": null
     },
@@ -76,6 +77,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

@@ -1,10 +1,8 @@
 {
   "_id": "JAEclghgOT24pQD9",
   "name": "Poison Breath",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {type} exhales poisonous gas in a 60-foot cone. Each creature in that area must make a  <strong>DC 18 Constitution</strong> saving throw, taking <strong>56 (16d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The {type} exhales poisonous gas in a 60-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 60,
+      "width": null,
       "units": "ft",
       "type": "cone"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "16d6",
+          "poison"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -63,9 +68,17 @@
     "recharge": {
       "value": 5,
       "charged": true
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/acid/projectile-smoke-glowing.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

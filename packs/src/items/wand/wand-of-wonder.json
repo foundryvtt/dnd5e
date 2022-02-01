@@ -35,23 +35,24 @@
     "range": {
       "value": 120,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 7,
-      "max": 7,
+      "max": "7",
       "per": "charges",
       "autoDestroy": false,
       "autoUse": true
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,9 +60,9 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "1d4 +1"
+      "versatile": "1d4 + 1"
     },
-    "formula": "1d6 +1",
+    "formula": "1d6 + 1",
     "save": {
       "ability": "dex",
       "dc": 15,

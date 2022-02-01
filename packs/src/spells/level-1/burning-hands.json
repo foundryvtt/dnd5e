@@ -1,10 +1,8 @@
 {
   "_id": "5SuJewoa1CRWaj1F",
   "name": "Burning Hands",
-  "permission": {
-    "default": 0
-  },
   "type": "spell",
+  "img": "systems/dnd5e/icons/spells/fog-orange-2.jpg",
   "data": {
     "description": {
       "value": "<p>As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire ignites any flammable objects in the area that aren't being worn or carried.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
@@ -23,18 +21,29 @@
     },
     "target": {
       "value": 15,
+      "width": null,
       "units": "ft",
       "type": "cone"
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "save",
@@ -84,8 +93,11 @@
       "formula": "1d6"
     }
   },
+  "effects": [],
+  "folder": null,
   "sort": 100001,
-  "flags": {},
-  "img": "systems/dnd5e/icons/spells/fog-orange-2.jpg",
-  "effects": []
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

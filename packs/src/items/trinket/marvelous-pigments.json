@@ -1,4 +1,5 @@
 {
+  "_id": "e3XQygrXkzNvkDGF",
   "name": "Marvelous Pigments",
   "type": "consumable",
   "img": "icons/commodities/materials/powder-red-green-yellow.webp",
@@ -18,7 +19,7 @@
     "identified": true,
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
@@ -34,11 +35,12 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": null,
       "autoDestroy": false
     },
@@ -49,7 +51,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -68,6 +70,10 @@
     "consumableType": "trinket"
   },
   "effects": [],
-  "flags": {},
-  "_id": "e3XQygrXkzNvkDGF"
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

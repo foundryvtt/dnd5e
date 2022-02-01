@@ -1,10 +1,8 @@
 {
   "_id": "Av7H0ymGdPeTsnwV",
   "name": "Regeneration",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature} regains <strong>10 hit points</strong> at the start of its turn if it has at least <strong>1 hit point</strong>.</p></section><p>The {creature} regains <strong>10 hit points</strong> at the start of its turn.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "",
+          ""
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -63,9 +68,17 @@
     "recharge": {
       "value": null,
       "charged": false
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -1,10 +1,8 @@
 {
   "_id": "ZHJyYrqMYSLub4RY",
   "name": "Purity of Spirit",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/toxins/poison-bottle-corked-fire-green.webp",
   "data": {
     "description": {
       "value": "<p>Beginning at 15th level, you are always under the effects of a @Compendium[dnd5e.spells.xmDBqZhRVrtLP8h2]{Protection from Evil and Good} spell.</p>",
@@ -14,32 +12,39 @@
     "source": "PHB pg. 86",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null,
       "type": ""
     },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
     "ability": "",
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -54,16 +59,23 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
-      "scaling": "spell"
+      "scaling": "spell",
+      "value": ""
     },
     "requirements": "Oath of Devotion 15",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/skills/toxins/poison-bottle-corked-fire-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

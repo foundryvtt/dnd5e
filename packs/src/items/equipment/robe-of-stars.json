@@ -27,7 +27,7 @@
       "units": "inst"
     },
     "target": {
-      "value": "",
+      "value": null,
       "width": null,
       "units": "",
       "type": ""
@@ -35,21 +35,22 @@
     "range": {
       "value": 120,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 6,
-      "max": 6,
+      "max": "6",
       "per": "charges"
     },
     "consume": {
       "type": "",
-      "target": null,
+      "target": "",
       "amount": null
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -85,6 +86,7 @@
       "dt": null,
       "conditions": ""
     },
+    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

@@ -1,10 +1,8 @@
 {
   "_id": "xOgrn5QXzSP4QN6V",
   "name": "Evasion",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/water/pseudopod-teal.webp",
   "data": {
     "description": {
       "value": "<p>If the {creature} is subjected to an effect that allows it to make a <strong>Dexterity</strong> saving throw to take only half damage, the {creature} instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/water/pseudopod-teal.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

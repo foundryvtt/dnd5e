@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 188",
     "quantity": 1,
-    "weight": 0,
+    "weight": null,
     "price": 250,
     "attunement": 0,
     "equipped": false,
@@ -23,7 +23,7 @@
       "condition": ""
     },
     "duration": {
-      "value": 0,
+      "value": null,
       "units": ""
     },
     "target": {
@@ -35,6 +35,7 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "touch"
     },
     "uses": {
@@ -51,7 +52,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

@@ -27,14 +27,15 @@
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": ""
+      "type": "target"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -49,7 +50,7 @@
     },
     "ability": null,
     "actionType": "save",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,7 +60,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "1d6 +4",
+    "formula": "1d6 + 4",
     "save": {
       "ability": "",
       "dc": null,
@@ -75,6 +76,7 @@
       "conditions": ""
     },
     "weaponType": "simpleM",
+    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,

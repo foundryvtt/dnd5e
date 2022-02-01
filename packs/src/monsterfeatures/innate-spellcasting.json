@@ -1,13 +1,11 @@
 {
   "_id": "hkmTEk6klT6QL4K4",
   "name": "Innate Spellcasting",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/light/projectiles-star-purple.webp",
   "data": {
     "description": {
-      "value": "<p>The {type}'s innate spellcasting ability is Charisma. It can innately cast the following spells, requiring no material components:</p><p>At will: detect magic, fog cloud, light</p><p>3/day each: feather fall, fly, misty step, telekinesis</p><p>1/day each: control weather, gaseous form</p>",
+      "value": "<p>The {type}'s innate spellcasting ability is Charisma. It can innately cast the following spells, requiring no material components:</p>\n<p>At will: @Compendium[dnd5e.spells.ghXTfe7sgCbgf1Q8]{detect magic}, @Compendium[dnd5e.spells.IBJmWjzbQGu7M4UX]{fog cloud}, @Compendium[dnd5e.spells.Bnn9Nzajixvow9xi]{light}</p>\n<p>3/day each: @Compendium[dnd5e.spells.pub0OWVEB71XQx1n]{feather fall}, @Compendium[dnd5e.spells.yfbK8gZqESlaoY5t]{fly}, @Compendium[dnd5e.spells.wqfAVANuQonNBgnL]{misty step}, @Compendium[dnd5e.spells.HQfd7jJyULIoGxrZ]{telekinesis}</p>\n<p>1/day each: @Compendium[dnd5e.spells.ZPd73HtKF3At11jh]{control weather}, @Compendium[dnd5e.spells.2IWiZAJtOGDoKjiz]{gaseous form}</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -79,7 +79,11 @@
       "spelldc": 10
     }
   },
-  "flags": {},
-  "img": "icons/magic/light/projectiles-star-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

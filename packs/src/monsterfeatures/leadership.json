@@ -1,10 +1,8 @@
 {
   "_id": "cl5sUkAIeJoAG4gh",
   "name": "Leadership",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/sundries/documents/document-sealed-red-yellow.webp",
   "data": {
     "description": {
       "value": "<p>For 1 minute, the {creature} can utter a special command or warning whenever a nonhostile creature that it can see within 30 ft. of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the {creature}. A creature can benefit from only one Leadership die at a time. This effect ends if the {creature} is incapacitated.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 30,
       "long": null,
+      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 1,
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "type": "sr"
     },
@@ -67,6 +67,10 @@
       "value": null,
       "charged": true
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -76,7 +80,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/sundries/documents/document-sealed-red-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

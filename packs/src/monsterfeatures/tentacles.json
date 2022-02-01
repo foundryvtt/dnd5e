@@ -1,10 +1,8 @@
 {
   "_id": "nKpLMXS9E10TSGhU",
   "name": "Tentacles",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>One creature grappled by the {creature} must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 1 minute.</p><p>Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>One creature grappled by the {creature} must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
@@ -22,18 +20,20 @@
       "units": "minute"
     },
     "target": {
-      "value": null,
+      "value": 1,
+      "width": null,
       "units": "",
-      "type": ""
+      "type": "creature"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": "",
       "type": ""
     },
@@ -67,6 +67,10 @@
       "value": null,
       "charged": false
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -76,7 +80,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

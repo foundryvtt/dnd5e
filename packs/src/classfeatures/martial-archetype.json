@@ -1,10 +1,8 @@
 {
   "_id": "ax8M0X0q1GGWM26j",
   "name": "Martial Archetype",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
   "data": {
     "description": {
       "value": "<p>At 3rd level, you choose an archetype that you strive to emulate in your combat styles and techniques, such as Champion. The archetype you choose grants you features at 3rd level and again at 7th, 10th, 15th, and 18th level.</p>",
@@ -14,7 +12,7 @@
     "source": "PHB pg. 72",
     "activation": {
       "type": "",
-      "cost": 0,
+      "cost": null,
       "condition": ""
     },
     "duration": {
@@ -23,22 +21,29 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": null,
       "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,9 +63,16 @@
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "quanitiy": null,
+    "weight": null,
+    "price": null
   },
-  "flags": {},
-  "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

@@ -1,10 +1,8 @@
 {
   "_id": "c4Q6NDCLJSNcNc9T",
   "name": "Water Breathing",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/water/projectile-water-ice-orb.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} can breathe only underwater.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,7 +76,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/water/projectile-water-ice-orb.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

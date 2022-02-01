@@ -1,10 +1,8 @@
 {
   "_id": "kjF0btAMYHUAQgOt",
   "name": "Web Sense",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "systems/dnd5e/icons/spells/shielding-spirit-3.jpg",
   "data": {
     "description": {
       "value": "<p>While in contact with a web, the {creature} knows the exact location of any other creature in contact with the same web.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,7 +65,11 @@
       "charged": false
     }
   },
-  "flags": {},
-  "img": "systems/dnd5e/icons/spells/shielding-spirit-3.jpg",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

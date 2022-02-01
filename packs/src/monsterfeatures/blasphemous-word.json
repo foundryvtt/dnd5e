@@ -1,10 +1,8 @@
 {
   "_id": "Xwj2GPqTxngS0j2L",
   "name": "Blasphemous Word",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} utters a blasphemous word. Each non-{type} creature within 10 feet of the {creature} that can hear the magical utterance must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be stunned until the end of the {creature}'s next turn.</p>\n</section>\n<p>The {creature} utters a blasphemous word. Each non-{type} creature within 10 feet of the {creature} that can hear the magical utterance must make a <strong>Constitution</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 10,
+      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": "",
       "type": ""
     },
@@ -67,6 +67,10 @@
       "value": null,
       "charged": false
     },
+    "reach": {
+      "value": null,
+      "units": ""
+    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -76,7 +80,11 @@
       "_deprecated": true
     }
   },
-  "flags": {},
-  "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

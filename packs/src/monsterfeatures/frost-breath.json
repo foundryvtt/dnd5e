@@ -1,10 +1,8 @@
 {
   "_id": "Z7U6z4HD1ORlkTIJ",
   "name": "Frost Breath",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/magic/air/wind-tornado-wall-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} exhales a 15-foot cone of cold air. Each creature in that area must succeed on a <strong>DC 10 Dexterity</strong> saving throw, taking <strong>5 (2d4) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p>\n</section>\n<p>The {creature} exhales a 15-foot cone of cold air. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 15,
+      "width": null,
       "units": "ft",
       "type": "cone"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -50,7 +50,12 @@
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "2d4",
+          "cold"
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
@@ -63,9 +68,17 @@
     "recharge": {
       "value": 6,
       "charged": true
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "icons/magic/air/wind-tornado-wall-blue.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

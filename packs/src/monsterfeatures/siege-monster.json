@@ -1,10 +1,8 @@
 {
   "_id": "cSA0EbjlxCbst4gJ",
   "name": "Siege Monster",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
   "data": {
     "description": {
       "value": "<p>The {type} deals double damage to objects and structures.</p>",
@@ -23,12 +21,14 @@
     },
     "target": {
       "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,7 +65,11 @@
       "charged": false
     }
   },
-  "flags": {},
-  "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

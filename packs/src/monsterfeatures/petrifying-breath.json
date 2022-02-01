@@ -1,10 +1,8 @@
 {
   "_id": "xmXYBevj0kuPa3Fo",
   "name": "Petrifying Breath",
-  "permission": {
-    "default": 0
-  },
   "type": "feat",
+  "img": "systems/dnd5e/icons/spells/fog-orange-1.jpg",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature} exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 13 Constitution</strong> saving throw. </p><p>On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the end of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic.</p></section><p>The {creature} exhales petrifying gas in a 30-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw. </p>",
@@ -23,17 +21,19 @@
     },
     "target": {
       "value": 30,
+      "width": null,
       "units": "ft",
       "type": "cone"
     },
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": 0,
+      "max": "0",
       "per": ""
     },
     "consume": {
@@ -63,9 +63,17 @@
     "recharge": {
       "value": 5,
       "charged": true
+    },
+    "reach": {
+      "value": null,
+      "units": ""
     }
   },
-  "flags": {},
-  "img": "systems/dnd5e/icons/spells/fog-orange-1.jpg",
-  "effects": []
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
 }

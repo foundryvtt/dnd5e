@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 185",
     "quantity": 1,
-    "weight": 0,
+    "weight": null,
     "price": 8000,
     "attunement": 0,
     "equipped": false,
@@ -35,11 +35,12 @@
     "range": {
       "value": null,
       "long": null,
+      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": "",
       "autoDestroy": false,
       "autoUse": false
@@ -51,7 +52,7 @@
     },
     "ability": "",
     "actionType": "abil",
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
