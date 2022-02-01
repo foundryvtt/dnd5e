@@ -16,6 +16,58 @@ export function sortObjectEntries(obj, sortKey) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Retrieve the indexed data for a Document using its UUID. Will never return a result for embedded documents.
+ * @param {string} uuid  The UUID of the Document index to retrieve.
+ * @returns {object}     Document's index if one could be found.
+ */
+export function indexFromUuid(uuid) {
+  const parts = uuid.split(".");
+  let index;
+
+  // Compendium Documents
+  if ( parts[0] === "Compendium" ) {
+    const [, scope, packName, id] = parts;
+    const pack = game.packs.get(`${scope}.${packName}`);
+    index = pack.index.get(id);
+  }
+
+  // World Documents
+  else if ( parts.length < 3 ) {
+    const [docName, id] = parts;
+    const collection = CONFIG[docName].collection.instance;
+    index = collection.get(id);
+  }
+
+  return index || null;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Creates an HTML document link for the provided UUID. This should be replaced by the core feature once
+ * foundryvtt#6166 is implemented.
+ * @param {string} uuid  UUID for which to produce the link.
+ * @returns {string}     Link to the item or empty string if item wasn't found.
+ * @private
+ */
+export function _linkForUuid(uuid) {
+  const index = game.dnd5e.utils.indexFromUuid(uuid);
+  if ( !index ) return "";
+
+  let link;
+  if ( uuid.startsWith("Compendium.") ) {
+    link = `@Compendium[${uuid.substr(11)}]{${index.name}}`;
+  } else {
+    const [type, id] = uuid.split(".");
+    link = `@${type}[${id}]{${index.name}}`;
+  }
+
+  return TextEditor.enrichHTML(link);
+}
+
+/* -------------------------------------------- */
 /*  Config Pre-Localization                     */
 /* -------------------------------------------- */
 
