@@ -16,7 +16,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.toolTypes data.toolType }}
+                    {{#if data.toolType}}{{lookup config.toolTypes data.toolType}}{{else}}{{ localize 'DND5E.ItemTypeTool'}}{{/if}}
                 </li>
                 <li>
                     <select name="data.rarity">
