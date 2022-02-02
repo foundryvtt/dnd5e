@@ -1,8 +1,10 @@
 {
   "_id": "kaHcUGiwi8AtfZIm",
   "name": "Primeval Awareness",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/perception/eye-slit-pink.webp",
   "data": {
     "description": {
       "value": "<p>Beginning at 3rd level, you can use your action and expend one ranger spell slot to focus your awareness on the region around you. For 1 minute per level of the spell slot you expend, you can sense whether the following types of creatures are present within 1 mile of you (or within up to 6 miles if you are in your favored terrain): aberrations, celestials, dragons, elementals, fey, fiends, and undead. This feature doesn't reveal the creatures' location or number.</p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": 1,
       "long": 6,
-      "reach": null,
       "units": "mi"
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Ranger 3",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/perception/eye-slit-pink.webp",
+  "effects": []
 }

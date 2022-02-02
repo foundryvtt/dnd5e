@@ -1,8 +1,10 @@
 {
   "_id": "X96xsQjIolyHtV91",
   "name": "Whirlwind of Sand",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/fire/explosion-mushroom-nuke-orange.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} magically transforms into a whirlwind of sand, moves up to 60 feet, and reverts to its normal form. While in whirlwind form, the {creature} is immune to all damage, and it can't be grappled, petrified, knocked prone, restrained, or stunned. Equipment worn or carried by the {creature} remain in its possession.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 60,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/fire/explosion-mushroom-nuke-orange.webp",
+  "effects": []
 }

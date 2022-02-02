@@ -1,8 +1,10 @@
 {
   "_id": "LJTY3nl1cp9go4eT",
   "name": "Fire Aura",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>At the start of each of the {creature}'s turns, each creature within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>, and flammable objects in the aura that aren't being worn or carried ignite.</p><p>A creature that touches the {creature} or hits it with a melee attack while within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>.</p>\n</section>\n<p>At the start of each of the {creature}'s turns, each creature within 5 feet of it takes <em>fire damage</em>, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches the {creature} or hits it with a melee attack while within 5 feet of it takes <em>fire damage</em>.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 5,
-      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -50,12 +50,7 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "3d6",
-          "fire"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
@@ -68,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
+  "effects": []
 }

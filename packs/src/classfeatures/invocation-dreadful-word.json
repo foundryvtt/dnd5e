@@ -1,8 +1,10 @@
 {
   "_id": "QBk1RsuTIEF4GEBC",
   "name": "Invocation: Dreadful Word",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/air/wind-vortex-swirl-blue.webp",
   "data": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.9hQXdMSmerkTsHDe]{Confusion} once using a warlock spell slot. You can't do so again until you finish a long rest.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": 10,
-      "width": null,
       "units": "ft",
       "type": "sphere"
     },
     "range": {
       "value": 90,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -37,14 +37,9 @@
       "per": "lr",
       "type": "lr"
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "wis",
       "dc": null,
-      "scaling": "cha",
-      "value": ""
+      "value": "",
+      "scaling": "cha"
     },
     "requirements": "Warlock 7",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/air/wind-vortex-swirl-blue.webp",
+  "effects": []
 }

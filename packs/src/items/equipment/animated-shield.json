@@ -31,13 +31,12 @@
     "target": {
       "value": null,
       "width": null,
-      "units": "",
+      "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -47,12 +46,12 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -80,7 +79,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

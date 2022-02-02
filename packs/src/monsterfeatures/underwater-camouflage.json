@@ -1,8 +1,10 @@
 {
   "_id": "M9XqZZGoTKawAsCl",
   "name": "Underwater Camouflage",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/water/orb-ice-web.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on Dexterity (Stealth) checks made while underwater.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/water/orb-ice-web.webp",
+  "effects": []
 }

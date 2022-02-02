@@ -23,34 +23,33 @@
       "condition": "Must have eye contact with the target humanoid."
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 0,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 30,
-      "long": null,
-      "reach": null,
+      "long": 0,
       "units": "ft"
     },
     "uses": {
       "value": 3,
-      "max": "3",
+      "max": 3,
       "per": "day"
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,7 +76,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

@@ -1,8 +1,10 @@
 {
   "_id": "h1gM8SH3BNRtFevE",
   "name": "Ki: Quivering Palm",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/symbols/rune-sigil-black-pink.webp",
   "data": {
     "description": {
       "value": "<p>At 17th level, you gain the ability to set up lethal vibrations in someone's body. When you hit a creature with an unarmed strike, you can spend 3 ki points to start these imperceptible vibrations, which last for a number of days equal to your monk level. The vibrations are harmless unless you use your action to end them. To do so, you and the target must be on the same plane of existence. When you use this action, the creature must make a Constitution saving throw. If it fails, it is reduced to 0 hit points. If it succeeds, it takes 10d10 necrotic damage.</p><p>You can have only one creature under the effect of this feature at a time. You can choose to end the vibrations harmlessly without using an action.</p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,23 +58,16 @@
     "save": {
       "ability": "con",
       "dc": null,
-      "scaling": "wis",
-      "value": "con"
+      "value": "con",
+      "scaling": "wis"
     },
     "requirements": "Way of the Open Hand 17",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/symbols/rune-sigil-black-pink.webp",
+  "effects": []
 }

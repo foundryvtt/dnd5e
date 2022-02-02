@@ -1,8 +1,10 @@
 {
   "_id": "L7myj23X3PFPUNh6",
   "name": "Regional Effects",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
   "data": {
     "description": {
       "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
+  "effects": []
 }

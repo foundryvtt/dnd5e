@@ -1,8 +1,10 @@
 {
   "_id": "yrpqazOHqI4BrYW4",
   "name": "Earth Glide",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
   "data": {
     "description": {
       "value": "<p>The {type} can burrow through nonmagical, unworked earth and stone. While doing so, the {type} doesn't disturb the material it moves through.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
+  "effects": []
 }

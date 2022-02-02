@@ -1,8 +1,10 @@
 {
   "_id": "nahSkBO6LH4HkpaT",
   "name": "Aura of Courage",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 10th level, you and friendly creatures within 10 feet of you can't be frightened while you are conscious.</p><p>At 18th level, the range of this aura increases to 30 feet.</p>",
@@ -12,7 +14,7 @@
     "source": "PHB pg. 85",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": 10,
       "long": 30,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Paladin 10",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
+  "effects": []
 }

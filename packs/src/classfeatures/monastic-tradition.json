@@ -1,8 +1,10 @@
 {
   "_id": "rtpQdX77dYWbDIOH",
   "name": "Monastic Tradition",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/nature/tree-roots-glow-yellow.webp",
   "data": {
     "description": {
       "value": "<p>When you reach 3rd level, you commit yourself to a monastic tradition, such as the Way of the Open Hand. Your tradition grants you features at 3rd level and again at 6th, 11th, and 17th level.</p>",
@@ -12,39 +14,32 @@
     "source": "PHB pg. 78",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null,
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Monk 3",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/nature/tree-roots-glow-yellow.webp",
+  "effects": []
 }

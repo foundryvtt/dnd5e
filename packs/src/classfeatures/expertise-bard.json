@@ -1,8 +1,10 @@
 {
   "_id": "aQLg7BWdRnm4Hr9S",
   "name": "Expertise (Bard)",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/commodities/tech/cog-bronze.webp",
   "data": {
     "description": {
       "value": "<p>At 3rd level, choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies. At 10th level, you can choose another two skill proficiencies to gain this benefit.</p>",
@@ -12,38 +14,31 @@
     "source": "PHB pg. 54",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,23 +53,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Bard 3",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/commodities/tech/cog-bronze.webp",
+  "effects": []
 }

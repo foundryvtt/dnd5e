@@ -23,11 +23,11 @@
       "condition": "Hood must be up."
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 0,
       "width": null,
       "units": "",
       "type": ""
@@ -35,7 +35,6 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -45,7 +44,7 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
@@ -77,7 +76,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

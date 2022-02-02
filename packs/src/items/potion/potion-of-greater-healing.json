@@ -5,7 +5,7 @@
   "img": "icons/consumables/potions/bottle-bulb-corked-glowing-red.webp",
   "data": {
     "description": {
-      "value": "<p><em>The potion's red liquid glimmers when agitated.</em></p>\n<p>You regain 4d4+4 hit points when you drink this potion.</p>\n<p> </p>\n<p> </p>",
+      "value": "<p><em>The potion's red liquid glimmers when agitated.</em></p>\n<p>You regain 4d4+4 hit points when you drink this potion.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -35,7 +35,6 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "touch"
     },
     "uses": {
@@ -54,7 +53,7 @@
     },
     "ability": "",
     "actionType": "heal",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

@@ -1,8 +1,10 @@
 {
   "_id": "LO4nrudXAKJ4DbQI",
   "name": "Channel Negative Energy",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/unholy/beam-impact-purple.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} magically unleashes negative energy. Creatures within 60 feet of the {creature}, including ones behind barriers and around corners, can't regain hit points until the end of the {creature}'s next turn.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 60,
-      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": "",
       "type": ""
     },
@@ -67,10 +67,6 @@
       "value": null,
       "charged": false
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -80,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/unholy/beam-impact-purple.webp",
+  "effects": []
 }

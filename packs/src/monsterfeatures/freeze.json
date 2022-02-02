@@ -1,8 +1,10 @@
 {
   "_id": "m0FA3UM62hlTPVSA",
   "name": "Freeze",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/water/ice-crystal-white.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>If the {type} takes <strong><em>cold damage</em></strong>, it partially freezes; its speed is reduced by <strong>20 ft.</strong> until the end of its next turn.</p></section><p>If the {type} takes <strong><em>cold damage</em></strong>, it partially freezes.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/water/ice-crystal-white.webp",
+  "effects": []
 }

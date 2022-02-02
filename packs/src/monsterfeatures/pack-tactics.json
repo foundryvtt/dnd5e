@@ -1,8 +1,10 @@
 {
   "_id": "V1lW1vnrTpVTDr6o",
   "name": "Pack Tactics",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/abilities/paw-print-orange.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on an attack roll against a creature if at least one of the {creature}'s allies is within <strong>5 ft.</strong> of the creature and the ally isn't incapacitated.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -75,11 +75,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/abilities/paw-print-orange.webp",
+  "effects": []
 }

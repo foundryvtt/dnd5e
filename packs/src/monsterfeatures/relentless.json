@@ -1,8 +1,10 @@
 {
   "_id": "8FX2KlWyBAKEYGzs",
   "name": "Relentless",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/water/heart-ice-freeze.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>If the {creature} takes <strong>7 damage</strong> or less that would reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1 hit point</strong> instead. Recharges on a short or long rest.</p>\n</section>\n<p>If the {creature} takes damage that would reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1 hit point</strong> instead.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 1,
-      "max": "1",
+      "max": 1,
       "per": "sr"
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/water/heart-ice-freeze.webp",
+  "effects": []
 }

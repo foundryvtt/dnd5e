@@ -1,8 +1,10 @@
 {
   "_id": "WHnLJRaXfIW7Z28t",
   "name": "Duergar Resilience",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/control/control-influence-rally-purple.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/control/control-influence-rally-purple.webp",
+  "effects": []
 }

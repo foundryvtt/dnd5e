@@ -1,8 +1,10 @@
 {
   "_id": "0npeEcwmiVMdwGMV",
   "name": "Damage Transfer",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/water/strike-ice-blades.webp",
   "data": {
     "description": {
       "value": "<p>While attached to a creature, the {creature} takes only half the damage dealt to it (rounded down) and that creature takes the other half.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/water/strike-ice-blades.webp",
+  "effects": []
 }

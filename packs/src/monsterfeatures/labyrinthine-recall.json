@@ -1,8 +1,10 @@
 {
   "_id": "1w6k5iHV8QSz5w46",
   "name": "Labyrinthine Recall",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/air/wind-vortex-swirl-blue.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} can perfectly recall any path it has traveled.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/air/wind-vortex-swirl-blue.webp",
+  "effects": []
 }

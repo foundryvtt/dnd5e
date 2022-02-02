@@ -1,8 +1,10 @@
 {
   "_id": "Q7mOdk4b1lgjcptF",
   "name": "Wholeness of Body",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/life/heart-glowing-red.webp",
   "data": {
     "description": {
       "value": "<p>At 6th level, you gain the ability to heal yourself. As an action, you can regain hit points equal to three times your monk level. You must finish a long rest before you can use this feature again.</p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
-      "units": "",
+      "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 1,
-      "max": "1",
+      "max": 1,
       "per": "lr",
       "type": "lr"
     },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
     "ability": "",
     "actionType": "heal",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -53,7 +48,7 @@
     "damage": {
       "parts": [
         [
-          "3*@classes.monk.levels",
+          "3* @classes.monk.levels",
           "healing"
         ]
       ],
@@ -63,23 +58,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Way of the Open Hand 6",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/life/heart-glowing-red.webp",
+  "effects": []
 }

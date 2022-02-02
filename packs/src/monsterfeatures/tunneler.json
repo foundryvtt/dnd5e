@@ -1,8 +1,10 @@
 {
   "_id": "3mrPXaxalJxpxVrv",
   "name": "Tunneler",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} can burrow through solid rock at half its burrow speed and leaves a 10-foot-diameter tunnel in its wake.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/unholy/orb-glowing-yellow-purple.webp",
+  "effects": []
 }

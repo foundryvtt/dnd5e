@@ -1,8 +1,10 @@
 {
   "_id": "1XeF2VMMPw7QYffo",
   "name": "Create Whirlwind",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the {creature} can see within 120 feet of it. The whirlwind lasts as long as the {creature} maintains concentration (as if concentrating on a spell).</p><p>Any creature but the {creature} that enters the whirlwind must succeed on a  <strong>DC 18 Strength</strong> saving throw or be restrained by it. The {creature} can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. The whirlwind ends if the {creature} loses sight of it.</p><p>A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a DC 18 Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>\n</section>\n<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the {creature} can see within 120 feet of it. Any creature but the {creature} that enters the whirlwind must make a <strong>Strength</strong> saving throw or be restrained by it. The {creature} can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 5,
-      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": 120,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": "",
+      "value": 0,
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
+  "effects": []
 }

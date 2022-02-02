@@ -1,8 +1,10 @@
 {
   "_id": "rDoNJnKdY47x8MD4",
   "name": "Etherealness",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/unholy/barrier-shield-glowing-pink.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} enters the Ethereal Plane from the Material Plane, or vice versa. It is visible on the Material Plane while it is in the Border Ethereal, and vice versa, yet it can't affect or be affected by anything on the other plane.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/unholy/barrier-shield-glowing-pink.webp",
+  "effects": []
 }

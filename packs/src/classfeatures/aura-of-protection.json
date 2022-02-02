@@ -1,18 +1,20 @@
 {
   "_id": "carGDhkIdoduTC0I",
   "name": "Aura of Protection",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/air/wind-tornado-wall-blue.webp",
   "data": {
     "description": {
-      "value": "<p>Starting at 6th level, whenever you or a friendly creature within 10 feet of you must make a saving throw, the creature gains a bonus to the saving throw equal to your Charisma modifier (with a minimum bonus of +1). You must be conscious to grant this bonus.</p><p> At 18th level, the range of this aura increases to 30 feet.</p>",
+      "value": "<p>Starting at 6th level, whenever you or a friendly creature within 10 feet of you must make a saving throw, the creature gains a bonus to the saving throw equal to your Charisma modifier (with a minimum bonus of +1). You must be conscious to grant this bonus.</p><p>&nbsp;At 18th level, the range of this aura increases to 30 feet.</p>",
       "chat": "",
       "unidentified": ""
     },
     "source": "PHB pg. 85",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": 10,
       "long": 30,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Paladin 6",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/air/wind-tornado-wall-blue.webp",
+  "effects": []
 }

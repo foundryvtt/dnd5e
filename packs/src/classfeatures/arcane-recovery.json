@@ -1,8 +1,10 @@
 {
   "_id": "e0uTcFPpgxjIyUW9",
   "name": "Arcane Recovery",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/earth/explosion-lava-stone-green.webp",
   "data": {
     "description": {
       "value": "<p>You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p><p>For example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
@@ -37,14 +37,9 @@
       "per": "lr",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "util",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "The wizard can recover this number worth of spells slots (of 5th-level or lower):",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Wizard 1",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/earth/explosion-lava-stone-green.webp",
+  "effects": []
 }

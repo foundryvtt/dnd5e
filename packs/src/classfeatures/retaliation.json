@@ -1,8 +1,10 @@
 {
   "_id": "xzD9zlRP6dUxCtCl",
   "name": "Retaliation",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 14th level, when you take damage from a creature that is within 5 feet of you, you can use your reaction to make a melee weapon attack against that creature.</p>",
@@ -21,29 +23,22 @@
     },
     "target": {
       "value": 1,
-      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 5,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,16 +58,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+  "effects": []
 }

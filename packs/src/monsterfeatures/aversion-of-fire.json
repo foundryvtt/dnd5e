@@ -1,8 +1,10 @@
 {
   "_id": "uxFQ3TxO3isW5WKK",
   "name": "Aversion of Fire",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/fire/projectile-wave-arrow.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>If the {creature} takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on attack rolls and ability checks until the end of its next turn.</p>\n</section>\n<p>If the {creature} takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on some rolls.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/fire/projectile-wave-arrow.webp",
+  "effects": []
 }

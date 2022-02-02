@@ -1,11 +1,13 @@
 {
   "_id": "fdmzHw875EzpXM2a",
   "name": "Spellcasting",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/light/projectiles-star-purple.webp",
   "data": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The {creature} has following cleric spells prepared:</p>\n<p>Cantrips (at will): @Compendium[dnd5e.spells.Bnn9Nzajixvow9xi]{light}, @Compendium[dnd5e.spells.n9pJzTDsAwQxJVRl]{sacred flame}, @Compendium[dnd5e.spells.MUO1uYN7JR1hm4dR]{thaumaturgy}</p>\n<p>1st level (3 slots): @Compendium[dnd5e.spells.8dzaICjGy6mTUaUr]{bless}, @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{cure wounds}, @Compendium[dnd5e.spells.gvdA9nPuWLck4tBl]{sanctuary}</p>\n</section>\n<p>The {creature} is a spellcaster. Its spellcasting ability is Wisdom.</p>",
+      "value": "<section class=\"secret\">\n<p>The {creature} is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The {creature} has following cleric spells prepared:</p><p>Cantrips (at will): light, sacred flame, thaumaturgy</p><p>1st level (3 slots): bless, cure wounds, sanctuary</p>\n</section>\n<p>The {creature} is a spellcaster. Its spellcasting ability is Wisdom.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/light/projectiles-star-purple.webp",
+  "effects": []
 }

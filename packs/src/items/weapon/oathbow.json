@@ -23,19 +23,18 @@
       "condition": "Command phrase."
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": 0,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
       "value": 150,
       "long": 600,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -50,7 +49,7 @@
     },
     "ability": null,
     "actionType": "rwak",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

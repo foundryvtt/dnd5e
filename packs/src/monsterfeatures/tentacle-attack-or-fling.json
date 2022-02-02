@@ -1,8 +1,10 @@
 {
   "_id": "czKwBo1qw5O2gCNy",
   "name": "Tentacle Attack or Fling",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} makes one tentacle attack or uses its Fling.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
+  "effects": []
 }

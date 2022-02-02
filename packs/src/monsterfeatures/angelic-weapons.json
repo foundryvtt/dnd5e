@@ -1,8 +1,10 @@
 {
   "_id": "cz1LUaiXG8GshgU9",
   "name": "Angelic Weapons",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "systems/dnd5e/icons/spells/enchant-sky-3.jpg",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature}'s weapon attacks are magical. When the {creature} hits with any weapon, the weapon deals an <strong>extra 4d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The {creature}'s weapon attacks are magical. When the {creature} hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/enchant-sky-3.jpg",
+  "effects": []
 }

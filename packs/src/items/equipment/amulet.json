@@ -19,7 +19,7 @@
     "identified": true,
     "activation": {
       "type": "special",
-      "cost": null,
+      "cost": 0,
       "condition": "Holy symbol must be clearly visible."
     },
     "duration": {
@@ -35,7 +35,6 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -45,12 +44,12 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,7 +76,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

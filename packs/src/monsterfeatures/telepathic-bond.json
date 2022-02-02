@@ -1,8 +1,10 @@
 {
   "_id": "eVKgO2130oiJqsjY",
   "name": "Telepathic Bond",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
   "data": {
     "description": {
       "value": "<p>While the {creature} is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+  "effects": []
 }

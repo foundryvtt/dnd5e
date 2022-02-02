@@ -1,8 +1,10 @@
 {
   "_id": "VhByyxHJN7MNQJRd",
   "name": "Shapechanger",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/control/silhouette-hold-change-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature} can use its action to <strong>polymorph</strong> into a Small or Medium humanoid it has seen, or back into its true form.</p><p>Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p></section><p>The {creature} can use its action to <strong>polymorph</strong> into a Small or Medium humanoid it has seen, or back into its true form.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+  "effects": []
 }

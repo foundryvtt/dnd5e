@@ -23,7 +23,7 @@
       "condition": "Command word. Target must be able to see its reflection."
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
@@ -34,8 +34,7 @@
     },
     "range": {
       "value": 30,
-      "long": null,
-      "reach": null,
+      "long": 0,
       "units": "ft"
     },
     "uses": {
@@ -52,7 +51,7 @@
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

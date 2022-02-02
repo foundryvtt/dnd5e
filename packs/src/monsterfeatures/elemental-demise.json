@@ -1,8 +1,10 @@
 {
   "_id": "WbaKH3NLA3mvylfM",
   "name": "Elemental Demise",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/air/air-wave-gust-smoke-yellow.webp",
   "data": {
     "description": {
       "value": "<p>If the {creature} dies, its body disintegrates into a warm breeze, leaving behind only equipment the {creature} was wearing or carrying.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/air/air-wave-gust-smoke-yellow.webp",
+  "effects": []
 }

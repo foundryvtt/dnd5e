@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 209",
     "quantity": 1,
-    "weight": null,
+    "weight": 0,
     "price": 350,
     "attunement": 0,
     "equipped": false,
@@ -27,15 +27,14 @@
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
       "value": 30,
       "long": 120,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -45,12 +44,12 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
-    "ability": "",
+    "ability": null,
     "actionType": "rwak",
-    "attackBonus": "",
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -97,9 +96,7 @@
       "thr": false,
       "two": false,
       "ver": false,
-      "mgc": true,
-      "ada": false,
-      "sil": false
+      "mgc": true
     },
     "proficient": false,
     "attributes": {

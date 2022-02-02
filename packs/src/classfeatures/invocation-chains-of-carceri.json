@@ -1,8 +1,10 @@
 {
   "_id": "Phy02H5x0TKHd7T3",
   "name": "Invocation: Chains of Carceri",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/melee/strike-flail-spiked-pink.webp",
   "data": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.l9Ju5KE7bbn3WpTm]{Hold Monster} at will - targeting a celestial, fiend, or elemental - without expending a spell slot or material components. You must finish a long rest before you can use this invocation on the same creature again.</p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": 1,
-      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 90,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "wis",
       "dc": null,
-      "scaling": "cha",
-      "value": ""
+      "value": "",
+      "scaling": "cha"
     },
     "requirements": "Warlock 15, Pact of the Chain",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/melee/strike-flail-spiked-pink.webp",
+  "effects": []
 }

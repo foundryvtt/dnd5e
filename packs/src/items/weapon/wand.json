@@ -18,8 +18,8 @@
     "rarity": "common",
     "identified": true,
     "activation": {
-      "type": "",
-      "cost": null,
+      "type": "action",
+      "cost": 1,
       "condition": ""
     },
     "duration": {
@@ -35,7 +35,6 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -45,12 +44,12 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": null,
+    "ability": null,
+    "actionType": "util",
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,7 +76,6 @@
       "conditions": ""
     },
     "weaponType": "simpleM",
-    "baseItem": "",
     "properties": {
       "value": "",
       "foc": true,
@@ -94,9 +92,7 @@
       "thr": false,
       "two": false,
       "ver": false,
-      "mgc": true,
-      "ada": false,
-      "sil": false
+      "mgc": true
     },
     "proficient": false,
     "attributes": {

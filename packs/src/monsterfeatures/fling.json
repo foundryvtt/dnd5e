@@ -1,8 +1,10 @@
 {
   "_id": "hxXzd3KCfnqnT89w",
   "name": "Fling",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/webs/webthin-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>One Large or smaller object held or creature grappled by the {creature} is thrown up to 60 feet in a random direction and knocked prone. </p><p>If a thrown target strikes a solid surface, the target takes <strong>3 (1d6) <em>bludgeoning damage</em></strong> for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a  <strong>DC 18 Dexterity</strong> saving throw or take the same damage and be knocked prone.</p></section><p>One Large or smaller object held or creature grappled by the {creature} is thrown up to 60 feet in a random direction and knocked prone. If the target is thrown at another creature, that creature must make a <strong>Dexterity</strong> saving throw or take the same damage and be knocked prone.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 1,
-      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 60,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -50,35 +50,22 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "1d6",
-          "bludgeoning"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
     "save": {
-      "ability": "dex",
-      "dc": 18,
-      "scaling": "flat"
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
     },
     "requirements": "",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/webs/webthin-blue.webp",
+  "effects": []
 }

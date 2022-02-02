@@ -1,11 +1,13 @@
 {
   "_id": "KoBGbIkb2tMZv0ch",
   "name": "Aberrant Ground",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/air/wind-tornado-funnel-damage-blue.webp",
   "data": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The ground in a <strong>10-foot radius</strong> around the {creature} is doughlike difficult terrain.</p><p>Each creature that starts its turn in that area must succeed on a <strong>DC 10 Strength saving throw</strong> or have its speed reduced to 0 until the start of its next turn.</p>\n</section>\n<p>The ground in a <strong>10-foot radius</strong> around the {creature} is doughlike difficult terrain. make a <strong>Strength</strong> saving throw.</p>",
+      "value": "<section class=\"secret\">\n<p>The ground in a <strong>10-foot radius</strong> around the&nbsp;{creature}&nbsp;is doughlike difficult terrain.</p><p>Each creature that starts its turn in that area must succeed on a <strong>DC 10 Strength saving throw</strong> or have its speed reduced to 0 until the start of its next turn.</p>\n</section>\n<p>The ground in a <strong>10-foot radius</strong> around the&nbsp;{creature}&nbsp;is doughlike difficult terrain. make a <strong>Strength</strong> saving throw.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 10,
-      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/air/wind-tornado-funnel-damage-blue.webp",
+  "effects": []
 }

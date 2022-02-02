@@ -12,14 +12,14 @@
     "source": "PHB pg. 144",
     "quantity": 1,
     "weight": 6,
-    "price": 10,
+    "price": "10",
     "attunement": 0,
     "equipped": false,
     "rarity": "common",
     "identified": true,
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -35,12 +35,11 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": null
     },
     "consume": {
@@ -49,8 +48,8 @@
       "amount": null
     },
     "ability": null,
-    "actionType": "",
-    "attackBonus": null,
+    "actionType": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,12 +76,11 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
     },
-    "strength": null,
+    "strength": "",
     "stealth": false,
     "proficient": false
   },

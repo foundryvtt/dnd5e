@@ -23,7 +23,7 @@
       "condition": "Target must be a fiend or undead."
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
@@ -35,7 +35,6 @@
     "range": {
       "value": 5,
       "long": 20,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -52,7 +51,7 @@
     },
     "ability": "dex",
     "actionType": "rwak",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

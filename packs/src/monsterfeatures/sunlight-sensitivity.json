@@ -1,8 +1,10 @@
 {
   "_id": "F14aW2Ke3I5ZtSg4",
   "name": "Sunlight Sensitivity",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
   "data": {
     "description": {
       "value": "<p>While in sunlight, the {creature} has<strong> disadvantage </strong>on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
+  "effects": []
 }

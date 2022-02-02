@@ -35,24 +35,23 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "touch"
     },
     "uses": {
       "value": 1,
-      "max": "1",
+      "max": 1,
       "per": "charges",
       "autoDestroy": true,
       "autoUse": true
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

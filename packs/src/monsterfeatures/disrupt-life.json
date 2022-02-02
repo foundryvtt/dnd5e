@@ -1,8 +1,10 @@
 {
   "_id": "EguIm3u5kkopYwEM",
   "name": "Disrupt Life",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/death/projectile-skull-fire-purple.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>Each non-{type} creature within 20 feet of the {creature} must make a  <strong>DC 18 Constitution</strong> saving throw against this magic, taking <strong>21 (6d6) <em>necrotic damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>Each non-{type} creature within 20 feet of the {creature} must make a <strong>Constitution</strong> saving throw against this magic.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 20,
-      "width": null,
       "units": "ft",
       "type": "radius"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": "",
       "type": ""
     },
@@ -51,12 +51,7 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "6d6",
-          "necrotic"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
@@ -71,10 +66,6 @@
       "value": null,
       "charged": false
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -84,11 +75,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/death/projectile-skull-fire-purple.webp",
+  "effects": []
 }

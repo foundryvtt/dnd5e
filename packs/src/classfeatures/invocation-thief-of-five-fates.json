@@ -1,8 +1,10 @@
 {
   "_id": "rhbwDZ9XNTmdkX2u",
   "name": "Invocation: Thief of Five Fates",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
   "data": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.95K2aUhAGV9qXjnf]{Bane} once using a warlock spell slot. You can't do so again until you finish a long rest.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": 3,
-      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 30,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -37,14 +37,9 @@
       "per": "lr",
       "type": "lr"
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "cha",
       "dc": null,
-      "scaling": "cha",
-      "value": ""
+      "value": "",
+      "scaling": "cha"
     },
     "requirements": "Warlock 2",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
+  "effects": []
 }

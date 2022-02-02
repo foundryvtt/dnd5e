@@ -12,28 +12,27 @@
     "source": "PHB pg. 72; 73; 84; 91",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": "",
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null,
       "type": ""
     },
@@ -44,7 +43,7 @@
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -91,10 +90,7 @@
       "thr": false,
       "two": false,
       "ver": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
   "effects": [
     {
@@ -114,7 +110,7 @@
       "icon": "icons/skills/melee/hand-grip-sword-orange.webp",
       "label": "Fighting Style: Dueling",
       "origin": "Item.UOgk9fNed1qugAqH",
-      "tint": null,
+      "tint": "",
       "transfer": true
     }
   ],

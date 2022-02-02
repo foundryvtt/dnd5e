@@ -1,8 +1,10 @@
 {
   "_id": "ipG5yx1tRNmeJfSH",
   "name": "Survivor",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/life/heart-glowing-red.webp",
   "data": {
     "description": {
       "value": "<p>You attain the pinnacle of resilience in battle.</p><p>At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left.</p><p>You don't gain this benefit if you have 0 hit points.</p>",
@@ -12,39 +14,32 @@
     "source": "PHB pg. 73",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null,
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "con",
     "actionType": "heal",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,23 +58,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Champion 18",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/life/heart-glowing-red.webp",
+  "effects": []
 }

@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 189",
     "quantity": 1,
-    "weight": null,
+    "weight": 0,
     "price": 4000,
     "attunement": 0,
     "equipped": false,
@@ -23,7 +23,7 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
@@ -34,23 +34,22 @@
     },
     "range": {
       "value": 30,
-      "long": null,
-      "reach": null,
+      "long": 0,
       "units": "ft"
     },
     "uses": {
       "value": 3,
-      "max": "3",
+      "max": 3,
       "per": "charges"
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,7 +76,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

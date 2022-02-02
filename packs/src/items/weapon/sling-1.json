@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 213",
     "quantity": 1,
-    "weight": null,
+    "weight": 0,
     "price": 1000,
     "attunement": 0,
     "equipped": false,
@@ -27,20 +27,19 @@
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
       "value": 30,
       "long": 120,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": ""
     },
     "consume": {
@@ -59,7 +58,7 @@
     "damage": {
       "parts": [
         [
-          "1d4 + @mod + 1",
+          "1d4 + @mod +1",
           "bludgeoning"
         ]
       ],

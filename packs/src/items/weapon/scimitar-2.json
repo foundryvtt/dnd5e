@@ -27,20 +27,19 @@
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
-      "value": null,
+      "value": 5,
       "long": null,
-      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": ""
     },
     "consume": {
@@ -59,7 +58,7 @@
     "damage": {
       "parts": [
         [
-          "1d6 + @mod + 2",
+          "1d6 + @mod +2",
           "slashing"
         ]
       ],

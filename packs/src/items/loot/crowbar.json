@@ -19,7 +19,7 @@
     "identified": true,
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -38,7 +38,7 @@
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": null,
       "autoUse": false,
       "autoDestroy": false
@@ -81,8 +81,7 @@
       "thr": false,
       "two": false,
       "ver": false
-    },
-    "attackBonus": null
+    }
   },
   "effects": [],
   "folder": null,

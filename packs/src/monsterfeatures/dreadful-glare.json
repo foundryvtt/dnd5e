@@ -1,8 +1,10 @@
 {
   "_id": "H306eluIH47Wfr0U",
   "name": "Dreadful Glare",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/perception/hand-eye-pink.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} targets one creature it can see within 60 ft. of it. If the target can see the {creature}, it must succeed on a <strong>DC 11 Wisdom</strong> saving throw against this magic or become frightened until the end of the {creature}'s next turn.</p><p>If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies (but not mummy lords) for the next 24 hours.</p>\n</section>\n<p>The {creature} targets one creature it can see within 60 ft. of it. If the target can see the {creature}, it must make a <strong>Wisdom</strong> saving throw against this magic.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 1,
-      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 60,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/perception/hand-eye-pink.webp",
+  "effects": []
 }

@@ -1,8 +1,10 @@
 {
   "_id": "VvXrTnB2FscxqbG3",
   "name": "Moan",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/death/projectile-skull-flaming-green.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>Each creature within 60 feet of the {creature} that can hear its moan and that isn't an {type} must succeed on a  <strong>DC 13 Wisdom</strong> saving throw or become frightened until the end of the {creature}'s next turn. </p><p>If a creature's saving throw is successful, the creature is immune to the {creature}'s moan for the next 24 hours.</p></section><p>Each creature within 60 feet of the {creature} that can hear its moan and that isn't an {type} must make a <strong>Wisdom</strong> saving throw.</p>",
@@ -20,20 +22,18 @@
       "units": ""
     },
     "target": {
-      "value": 60,
-      "width": null,
-      "units": "ft",
+      "value": null,
+      "units": "",
       "type": "radius"
     },
     "range": {
-      "value": null,
+      "value": 60,
       "long": null,
-      "reach": null,
-      "units": ""
+      "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/death/projectile-skull-flaming-green.webp",
+  "effects": []
 }

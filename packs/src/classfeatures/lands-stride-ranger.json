@@ -1,8 +1,10 @@
 {
   "_id": "C5fzaOBc6HxyOWRn",
   "name": "Land's Stride (Ranger)",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 8th level, moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed by them and without taking damage from them if they have thorns, spines, or a similar hazard.</p><p>In addition, you have advantage on saving throws against plants that are magically created or manipulated to impede movement, such those created by the @Compendium[dnd5e.spells.gMrWeG8fMDPRFiVe]{Entangle} spell.</p>",
@@ -12,38 +14,31 @@
     "source": "PHB pg. 92",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,23 +53,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Ranger 8",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
+  "effects": []
 }

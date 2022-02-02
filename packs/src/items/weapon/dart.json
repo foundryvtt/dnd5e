@@ -23,24 +23,23 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": 0,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
       "value": 20,
       "long": 60,
-      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": ""
     },
     "consume": {
@@ -50,7 +49,7 @@
     },
     "ability": null,
     "actionType": "rwak",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

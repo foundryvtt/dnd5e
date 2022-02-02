@@ -1,8 +1,10 @@
 {
   "_id": "iHOaiOqwUWIfCljJ",
   "name": "Cold Breath",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>**Cold Breath.** The {type} exhales an icy blast in a 60-foot cone. Each creature in that area must make a  <strong>DC 20 Constitution</strong> saving throw, taking <strong>58 (13d8) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The {type} exhales an icy blast in a 60-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 60,
-      "width": null,
       "units": "ft",
       "type": "cone"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -50,12 +50,7 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "13d8",
-          "cold"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
@@ -68,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
+  "effects": []
 }

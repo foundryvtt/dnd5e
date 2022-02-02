@@ -1,8 +1,10 @@
 {
   "_id": "Qb391hakCfmH4w8p",
   "name": "Metamagic: Twinned Spell",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/lightning/bolt-strike-blue.webp",
   "data": {
     "description": {
       "value": "<p>When you cast a spell that targets only one creature and doesn't have a range of self, you can spend a number of sorcery points equal to the spell's level to target a second creature in range with the same spell (1 sorcery point if the spell is a cantrip).</p><p>To be eligible, a spell must be incapable of targeting more than one creature at the spell's current level. For example, @Compendium[dnd5e.spells.41JIhpDyM9Anm7cs]{Magic Missile} and @Compendium[dnd5e.spells.7u2obDvuvtZBkTfq]{Scorching Ray} aren't eligible, but @Compendium[dnd5e.spells.ctW81uiX56xZR2c5]{Ray of Frost} is.</p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Sorcerer 3",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/lightning/bolt-strike-blue.webp",
+  "effects": []
 }

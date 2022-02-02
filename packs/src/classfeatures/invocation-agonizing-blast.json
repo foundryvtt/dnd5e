@@ -1,8 +1,10 @@
 {
   "_id": "2fyuw7MiCnocDeAU",
   "name": "Invocation: Agonizing Blast",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/acid/projectile-stream-bubbles.webp",
   "data": {
     "description": {
       "value": "<p>When you cast @Compendium[dnd5e.spells.Z9p1vezIn95jw1Yw]{Eldritch Blast}, add your Charisma modifier to the damage it deals on a hit.</p>",
@@ -12,39 +14,32 @@
     "source": "PHB pg. 110",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null,
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Warlock 2, Eldritch Blast",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/acid/projectile-stream-bubbles.webp",
+  "effects": []
 }

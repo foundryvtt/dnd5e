@@ -1,8 +1,10 @@
 {
   "_id": "eNvpIaSnJUdF8fHl",
   "name": "Invocation: Beguiling Influence",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/commodities/currency/coin-engraved-sun-smile-copper.webp",
   "data": {
     "description": {
       "value": "<p>You gain proficiency in the Deception and Persuasion skills.</p>",
@@ -12,39 +14,32 @@
     "source": "PHB pg. 110",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null,
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Warlock 2",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/commodities/currency/coin-engraved-sun-smile-copper.webp",
+  "effects": []
 }

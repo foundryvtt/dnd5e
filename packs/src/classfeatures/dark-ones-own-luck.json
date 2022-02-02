@@ -1,8 +1,10 @@
 {
   "_id": "OQSb0bO1yDI4aiMx",
   "name": "Dark One's Own Luck",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/unholy/demon-fanged-horned-yellow.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 6th level, you can call on your patron to alter fate in your favor. When you make an ability check or a saving throw, you can use this feature to add a d10 to your roll. You can do so after seeing the initial roll but before any of the roll's effects occur.</p><p>Once you use this feature, you can't use it again until you finish a short or long rest.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
@@ -37,14 +37,9 @@
       "per": "sr",
       "type": "sr"
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "other",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,23 +53,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "The Fiend 6",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/unholy/demon-fanged-horned-yellow.webp",
+  "effects": []
 }

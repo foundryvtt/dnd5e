@@ -12,7 +12,7 @@
     "source": "DMG pg. 182",
     "quantity": 1,
     "weight": 0.01,
-    "price": null,
+    "price": 0,
     "attunement": 1,
     "equipped": false,
     "rarity": "rare",
@@ -23,11 +23,11 @@
       "condition": "The necklace must be currently worn."
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
-      "value": null,
+      "value": 0,
       "width": null,
       "units": "",
       "type": ""
@@ -35,22 +35,21 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 6,
-      "max": "6",
+      "max": 6,
       "per": "day"
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
-    "actionType": "",
-    "attackBonus": null,
+    "actionType": "util",
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,7 +76,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

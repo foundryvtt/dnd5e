@@ -1,8 +1,10 @@
 {
   "_id": "tHvaJB8tXSriVXRm",
   "name": "Blinding Breath",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} exhales a 15-foot cone of blinding dust.</p><p>Each creature in that area must succeed on a <strong>DC 10 Dexterity</strong> saving throw or be blinded for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>The {creature} exhales a 15-foot cone of blinding dust. Each creature in that area must make a <strong>Dexterity</strong> saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 15,
-      "width": null,
       "units": "ft",
       "type": "cone"
     },
     "range": {
       "value": 15,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 1,
-      "max": "1",
+      "max": 1,
       "per": "",
       "type": "sr"
     },
@@ -67,10 +67,6 @@
       "value": 6,
       "charged": true
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -80,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
+  "effects": []
 }

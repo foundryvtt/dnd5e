@@ -1,8 +1,10 @@
 {
   "_id": "QnRKYXb2bXpnNd2k",
   "name": "Invocation: Minions of Chaos",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/magical/humanoid-giant-forest-blue.webp",
   "data": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.1LkZvINag7KqBmDR]{Conjure Elemental} once using a warlock spell slot. You can't do so again until you finish a long rest.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": 10,
-      "width": null,
       "units": "ft",
       "type": "space"
     },
     "range": {
       "value": 90,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -37,14 +37,9 @@
       "per": "lr",
       "type": "lr"
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Warlock 9",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/magical/humanoid-giant-forest-blue.webp",
+  "effects": []
 }

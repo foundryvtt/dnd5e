@@ -27,20 +27,19 @@
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
       "value": 20,
       "long": 60,
-      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": ""
     },
     "consume": {
@@ -59,11 +58,11 @@
     "damage": {
       "parts": [
         [
-          "1d6 + @mod + 3",
+          "1d6 + @mod +3",
           "piercing"
         ]
       ],
-      "versatile": "1d8 + @mod + 3"
+      "versatile": "1d8 + @mod +3"
     },
     "formula": "",
     "save": {

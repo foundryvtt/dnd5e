@@ -1,8 +1,10 @@
 {
   "_id": "JnLN0Rz60WHXk2Fr",
   "name": "Keen Senses",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "systems/dnd5e/icons/spells/evil-eye-eerie-3.jpg",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on Wisdom (Perception) checks that rely on sight, hearing, or smell.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/evil-eye-eerie-3.jpg",
+  "effects": []
 }

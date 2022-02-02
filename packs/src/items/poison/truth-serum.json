@@ -1,5 +1,4 @@
 {
-  "_id": "a86F565Pjdzym1jH",
   "name": "Truth Serum",
   "type": "consumable",
   "img": "icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp",
@@ -11,7 +10,7 @@
     },
     "source": "DMG pg. 258",
     "quantity": 1,
-    "weight": null,
+    "weight": 0,
     "price": 150,
     "attunement": 0,
     "equipped": false,
@@ -35,7 +34,6 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -81,10 +79,7 @@
     }
   },
   "effects": [],
-  "folder": null,
   "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "_id": "a86F565Pjdzym1jH"
 }

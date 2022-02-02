@@ -1,8 +1,10 @@
 {
   "_id": "gM767AhU36B6LUGU",
   "name": "Lightning Storm",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "systems/dnd5e/icons/spells/lighting-sky-3.jpg",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>The {creature} magically creates three bolts of lightning, each of which can strike a target the {creature} can see within 120 feet of it. </p><p>A target must make a  <strong>DC 23 Dexterity</strong> saving throw, taking <strong>22 (4d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The {creature} magically creates three bolts of lightning, each of which can strike a target the {creature} can see within 120 feet of it. A target must make a <strong>Dexterity</strong> saving throw.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 3,
-      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": 120,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -50,12 +50,7 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "4d10",
-          "lightning"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
@@ -68,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/lighting-sky-3.jpg",
+  "effects": []
 }

@@ -23,34 +23,33 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
       "value": null,
       "width": null,
-      "units": "",
+      "units": null,
       "type": "self"
     },
     "range": {
       "value": 60,
-      "long": null,
-      "reach": null,
+      "long": 0,
       "units": "ft"
     },
     "uses": {
       "value": 3,
-      "max": "3",
+      "max": 3,
       "per": "charges"
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "rsak",
-    "attackBonus": "7",
+    "attackBonus": 7,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -65,7 +64,7 @@
       ],
       "versatile": ""
     },
-    "formula": "1d20 + 5",
+    "formula": "1d20 +5",
     "save": {
       "ability": "",
       "dc": null,
@@ -82,7 +81,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

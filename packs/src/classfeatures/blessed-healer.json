@@ -1,8 +1,10 @@
 {
   "_id": "yv49QN6Bzqs0ecCs",
   "name": "Blessed Healer",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/light/orbs-hand-gray.webp",
   "data": {
     "description": {
       "value": "<p>Beginning at 6th level, the healing spells you cast on others heal you as well.</p><p>When you cast a spell of 1st level or higher that restores hit points to a creature other than you, you regain hit points equal to 2 + the spell's level.</p><p><em>**Foundry note: The healing formula is set to 2. Please add the additional from the spell level manually.</em></p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
-      "units": "",
+      "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
-      "value": null,
-      "max": "",
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
     "ability": "",
     "actionType": "heal",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -64,23 +59,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Life Domain 6",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/light/orbs-hand-gray.webp",
+  "effects": []
 }

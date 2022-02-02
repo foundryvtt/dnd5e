@@ -1,8 +1,10 @@
 {
   "_id": "BnuDkgCOeGvAoYhy",
   "name": "Rampage",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/melee/strike-axe-blood-red.webp",
   "data": {
     "description": {
       "value": "<p>When the {creature} reduces a creature to <strong>0 hit points</strong> with a melee attack on its turn, the {creature} can take a bonus action to move up to half its speed and make a bite attack.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": "",
       "type": ""
     },
@@ -67,10 +67,6 @@
       "value": null,
       "charged": false
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -80,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/melee/strike-axe-blood-red.webp",
+  "effects": []
 }

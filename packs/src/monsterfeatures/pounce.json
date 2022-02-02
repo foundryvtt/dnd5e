@@ -1,8 +1,10 @@
 {
   "_id": "MqAVplIArAKzpnXB",
   "name": "Pounce",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/claws/claw-talons-glowing-orange.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>If the {creature} moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a <strong>DC 13 Strength saving throw</strong> or be knocked prone.</p><p>If the target is prone, the {creature} can make one bite attack against it as a bonus action.</p>\n</section>\n<p>If the {creature} moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must make a <strong>Strength</strong> saving throw.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 20,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/claws/claw-talons-glowing-orange.webp",
+  "effects": []
 }

@@ -28,12 +28,11 @@
     "range": {
       "value": 5,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": "0",
       "per": "",
       "type": ""
     },
@@ -44,7 +43,7 @@
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -66,10 +65,7 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
   "effects": [],
   "folder": null,

@@ -1,8 +1,10 @@
 {
   "_id": "iQxLNydNLlCHNKbp",
   "name": "Open Hand Technique",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
   "data": {
     "description": {
       "value": "<p>Starting when you choose this tradition at 3rd level, you can manipulate your enemy's ki when you harness your own.</p><p>Whenever you hit a creature with one of the attacks granted by your @Compendium[world.class-features-srd-v2.5MwNlVZK7m6VolOH]{Ki: Flurry of Blows}, you can impose one of the following effects on that target:</p>\n<ul>\n<li>It must succeed on a Dexterity saving throw or be knocked prone.</li>\n<li>It must make a Strength saving throw. If it fails, you can push it up to 15 feet away from you.</li>\n<li>It can't take reactions until the end of your next turn.</li>\n</ul>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": 1,
-      "width": null,
       "units": "",
       "type": "creature"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Way of the Open Hand 3",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
+  "effects": []
 }

@@ -1,8 +1,10 @@
 {
   "_id": "J1NxNTJ2qi05iAFF",
   "name": "Legendary Resistance",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/equipment/shield/kite-wooden-oak-glow.webp",
   "data": {
     "description": {
       "value": "<p>If the {type} fails a saving throw, it can choose to succeed instead.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/equipment/shield/kite-wooden-oak-glow.webp",
+  "effects": []
 }

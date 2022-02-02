@@ -1,8 +1,10 @@
 {
   "_id": "QwgfIpCN8VWfoUtX",
   "name": "Pact Boon",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
   "data": {
     "description": {
       "value": "<p>At 3rd level, your otherworldly patron bestows a gift upon you for your loyal service. You gain one of the following features of your choice.</p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"9dSSa68mIPoX2ezA\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Pact of the Blade</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"Ic1CSjvbWKudVUv9\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Pact of the Chain</a></p>\n        <p><a class=\"entity-link\" data-pack=\"dnd5e.classfeatures\" data-id=\"MYM908WLZ1lVvA1u\" draggable=\"true\"><i class=\"fas fa-suitcase\"></i> Pact of the Tome</a></p>\n        <p>You can drag your choice from the above onto your character sheet and it will automatically update.</p>",
@@ -12,7 +14,7 @@
     "source": "PHB pg. 107",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null
     },
     "consume": {
@@ -43,7 +43,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,16 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
+  "effects": []
 }

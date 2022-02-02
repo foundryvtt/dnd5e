@@ -1,8 +1,10 @@
 {
   "_id": "4N7S29kDROQ932pG",
   "name": "Steadfast",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} can't be frightened while it can see an allied creature <strong>within 30 feet</strong> of it.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+  "effects": []
 }

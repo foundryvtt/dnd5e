@@ -27,15 +27,14 @@
       "units": "hour"
     },
     "target": {
-      "value": null,
+      "value": 0,
       "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 60,
-      "long": null,
-      "reach": null,
+      "long": 0,
       "units": "ft"
     },
     "uses": {
@@ -52,7 +51,7 @@
     },
     "ability": "",
     "actionType": "util",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -61,7 +60,7 @@
     "damage": {
       "parts": [
         [
-          "3d4 + 3",
+          "3d4 +3",
           ""
         ]
       ],

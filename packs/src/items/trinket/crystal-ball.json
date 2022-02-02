@@ -27,7 +27,7 @@
       "units": "minute"
     },
     "target": {
-      "value": null,
+      "value": 0,
       "width": null,
       "units": "",
       "type": ""
@@ -35,12 +35,11 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": "",
       "autoDestroy": false,
       "autoUse": false
@@ -52,7 +51,7 @@
     },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,

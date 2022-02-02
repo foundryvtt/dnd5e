@@ -1,8 +1,10 @@
 {
   "_id": "iQGaWIinmYFPRF94",
   "name": "Variable Illumination",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} sheds bright light in a 5- to <strong>20-foot radius</strong> and dim light for an additional number of<strong> ft.</strong> equal to the chosen radius. The {creature} can alter the radius as a bonus action.</p>",
@@ -11,7 +13,7 @@
     },
     "source": "",
     "activation": {
-      "type": "none",
+      "type": "",
       "cost": null,
       "condition": ""
     },
@@ -21,24 +23,22 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": 20,
+      "value": null,
       "long": null,
-      "reach": null,
-      "units": "ft"
+      "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
-      "per": ""
+      "max": 0,
+      "per": null
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": null,
@@ -63,17 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
+  "effects": []
 }

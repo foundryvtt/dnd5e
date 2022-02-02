@@ -35,7 +35,6 @@
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "touch"
     },
     "uses": {
@@ -52,7 +51,7 @@
     },
     "ability": "",
     "actionType": "heal",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -61,7 +60,7 @@
     "damage": {
       "parts": [
         [
-          "2d8 + 2",
+          "2d8 +2",
           "healing"
         ]
       ],

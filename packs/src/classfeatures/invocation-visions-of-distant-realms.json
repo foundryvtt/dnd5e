@@ -1,8 +1,10 @@
 {
   "_id": "zYIdNAjqRyhS6qWs",
   "name": "Invocation: Visions of Distant Realms",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
   "data": {
     "description": {
       "value": "<p>You can cast @Compendium[dnd5e.spells.ImlCJQwR1VL40Qem]{Arcane Eye} at will, without expending a spell slot.</p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 30,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": "",
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Warlock 15",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
+  "effects": []
 }

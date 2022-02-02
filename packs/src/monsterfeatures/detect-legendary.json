@@ -1,8 +1,10 @@
 {
   "_id": "NmWSgqxpYfhrvQKq",
   "name": "Detect (Legendary)",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} makes a Wisdom (Perception) check.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -64,10 +64,6 @@
       "value": null,
       "charged": false
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "featType": {
       "value": "",
       "_deprecated": true
@@ -81,11 +77,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
+  "effects": []
 }

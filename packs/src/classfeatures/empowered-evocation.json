@@ -1,8 +1,10 @@
 {
   "_id": "7O85kj6uDEG5NzUE",
   "name": "Empowered Evocation",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/fire/explosion-mushroom-nuke-orange.webp",
   "data": {
     "description": {
       "value": "<p>Beginning at 10th level, you can add your Intelligence modifier to one damage roll of any wizard evocation spell you cast.</p><blockquote></blockquote>",
@@ -12,7 +14,7 @@
     "source": "PHB pg. 117",
     "activation": {
       "type": "special",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "int",
     "actionType": "other",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "The bonus to one damage roll:",
     "critical": {
       "threshold": null,
@@ -64,23 +59,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "School of Evocation 10",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/fire/explosion-mushroom-nuke-orange.webp",
+  "effects": []
 }

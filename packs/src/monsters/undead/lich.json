@@ -630,20 +630,19 @@
           "units": "minute"
         },
         "target": {
-          "value": null,
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
           "value": 30,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -653,7 +652,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -695,10 +694,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -730,20 +726,19 @@
           "units": "hour"
         },
         "target": {
-          "value": null,
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
           "value": 10,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -753,7 +748,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -795,10 +790,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -837,13 +829,12 @@
         },
         "range": {
           "value": 60,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -853,7 +844,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -899,10 +890,7 @@
           "mode": "cantrip",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -942,12 +930,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "self"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -957,7 +944,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -999,10 +986,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1041,13 +1025,12 @@
         },
         "range": {
           "value": 120,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1057,7 +1040,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1107,10 +1090,7 @@
           "mode": "level",
           "formula": "1d4+1"
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1142,7 +1122,7 @@
           "units": "round"
         },
         "target": {
-          "value": null,
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
@@ -1150,12 +1130,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "self"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1165,7 +1144,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1207,10 +1186,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1250,12 +1226,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "self"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1265,7 +1240,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1310,10 +1285,7 @@
           "mode": "level",
           "formula": "1d8"
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1345,20 +1317,19 @@
           "units": "inst"
         },
         "target": {
-          "value": null,
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
           "value": 90,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1368,7 +1339,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1414,10 +1385,7 @@
           "mode": "level",
           "formula": "1d4"
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1456,13 +1424,12 @@
         },
         "range": {
           "value": 30,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1472,7 +1439,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1513,10 +1480,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1556,12 +1520,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "touch"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1571,7 +1534,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1613,10 +1576,7 @@
           "mode": "level",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1648,7 +1608,7 @@
           "units": "minute"
         },
         "target": {
-          "value": null,
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
@@ -1656,12 +1616,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "self"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1671,7 +1630,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1713,10 +1672,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1755,13 +1711,12 @@
         },
         "range": {
           "value": 10,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1771,7 +1726,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1813,10 +1768,7 @@
           "mode": "level",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1855,13 +1807,12 @@
         },
         "range": {
           "value": 60,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1871,7 +1822,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1913,10 +1864,7 @@
           "mode": "level",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -1955,13 +1903,12 @@
         },
         "range": {
           "value": 120,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -1971,7 +1918,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2013,10 +1960,7 @@
           "mode": "level",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2055,13 +1999,12 @@
         },
         "range": {
           "value": 150,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2071,7 +2014,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2116,10 +2059,7 @@
           "mode": "level",
           "formula": "1d6"
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2158,13 +2098,12 @@
         },
         "range": {
           "value": 30,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2174,7 +2113,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2219,10 +2158,7 @@
           "mode": "level",
           "formula": "1d8"
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2261,13 +2197,12 @@
         },
         "range": {
           "value": 500,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2277,7 +2212,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2324,10 +2259,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2366,13 +2298,12 @@
         },
         "range": {
           "value": 120,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2382,7 +2313,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2427,10 +2358,7 @@
           "mode": "level",
           "formula": "1d8"
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2454,7 +2382,7 @@
         "source": "PHB pg. 273",
         "activation": {
           "type": "none",
-          "cost": null,
+          "cost": 0,
           "condition": ""
         },
         "duration": {
@@ -2470,12 +2398,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "self"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2485,7 +2412,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2526,10 +2453,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2568,13 +2492,12 @@
         },
         "range": {
           "value": 60,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2584,7 +2507,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2633,10 +2556,7 @@
           "mode": "level",
           "formula": "3d6"
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2668,20 +2588,19 @@
           "units": "inst"
         },
         "target": {
-          "value": null,
+          "value": 0,
           "width": null,
           "units": "",
           "type": ""
         },
         "range": {
           "value": 60,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2691,7 +2610,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2740,10 +2659,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2783,12 +2699,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "touch"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2798,7 +2713,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2839,10 +2754,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2881,13 +2793,12 @@
         },
         "range": {
           "value": 60,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2897,7 +2808,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -2938,10 +2849,7 @@
           "mode": "level",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -2980,13 +2888,12 @@
         },
         "range": {
           "value": 60,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -2996,7 +2903,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3038,10 +2945,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3080,13 +2984,12 @@
         },
         "range": {
           "value": 60,
-          "long": null,
-          "reach": null,
+          "long": 0,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -3096,7 +2999,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3137,10 +3040,7 @@
           "mode": "none",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3180,12 +3080,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": "",
           "type": ""
         },
@@ -3196,7 +3095,7 @@
         },
         "ability": "",
         "actionType": "",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3219,10 +3118,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3262,12 +3158,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": "",
           "type": ""
         },
@@ -3278,7 +3173,7 @@
         },
         "ability": "",
         "actionType": "mwak",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3301,10 +3196,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3344,12 +3236,11 @@
         "range": {
           "value": 10,
           "long": null,
-          "reach": null,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": "",
           "type": ""
         },
@@ -3360,7 +3251,7 @@
         },
         "ability": "",
         "actionType": "save",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3383,10 +3274,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3426,12 +3314,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": "",
           "type": ""
         },
@@ -3442,7 +3329,7 @@
         },
         "ability": "",
         "actionType": "save",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3469,10 +3356,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3512,12 +3396,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -3527,7 +3410,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3548,10 +3431,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3591,12 +3471,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": null
         },
         "consume": {
@@ -3606,7 +3485,7 @@
         },
         "ability": "",
         "actionType": "other",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3627,10 +3506,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3670,12 +3546,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": null
         },
         "consume": {
@@ -3685,7 +3560,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3706,10 +3581,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3749,12 +3621,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": "self"
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -3764,7 +3635,7 @@
         },
         "ability": "",
         "actionType": "util",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3806,10 +3677,7 @@
           "mode": "level",
           "formula": ""
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -3832,8 +3700,8 @@
         },
         "source": "",
         "quantity": 1,
-        "weight": null,
-        "price": null,
+        "weight": 0,
+        "price": 0,
         "attunement": 0,
         "equipped": true,
         "rarity": "",
@@ -3848,20 +3716,19 @@
           "units": ""
         },
         "target": {
-          "value": 1,
+          "value": null,
           "width": null,
           "units": "",
-          "type": "creature"
+          "type": ""
         },
         "range": {
           "value": 5,
           "long": null,
-          "reach": null,
           "units": "ft"
         },
         "uses": {
-          "value": null,
-          "max": "",
+          "value": 0,
+          "max": 0,
           "per": ""
         },
         "consume": {
@@ -3871,7 +3738,7 @@
         },
         "ability": "int",
         "actionType": "msak",
-        "attackBonus": "",
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3917,10 +3784,7 @@
           "spc": false,
           "thr": false,
           "two": false,
-          "ver": false,
-          "ada": false,
-          "mgc": false,
-          "sil": false
+          "ver": false
         },
         "proficient": true,
         "attuned": false
@@ -3963,12 +3827,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": null
         },
         "consume": {
@@ -3978,7 +3841,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -3999,10 +3862,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -4026,7 +3886,7 @@
         "source": "",
         "activation": {
           "type": "",
-          "cost": null,
+          "cost": 0,
           "condition": ""
         },
         "duration": {
@@ -4042,12 +3902,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": null
         },
         "consume": {
@@ -4057,7 +3916,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4078,10 +3937,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -4105,7 +3961,7 @@
         "source": "",
         "activation": {
           "type": "",
-          "cost": null,
+          "cost": 0,
           "condition": ""
         },
         "duration": {
@@ -4121,12 +3977,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": null
         },
         "consume": {
@@ -4136,7 +3991,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4157,10 +4012,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,
@@ -4184,7 +4036,7 @@
         "source": "",
         "activation": {
           "type": "",
-          "cost": null,
+          "cost": 0,
           "condition": ""
         },
         "duration": {
@@ -4200,12 +4052,11 @@
         "range": {
           "value": null,
           "long": null,
-          "reach": null,
           "units": ""
         },
         "uses": {
-          "value": null,
-          "max": null,
+          "value": 0,
+          "max": 0,
           "per": null
         },
         "consume": {
@@ -4215,7 +4066,7 @@
         },
         "ability": null,
         "actionType": "",
-        "attackBonus": null,
+        "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -4236,10 +4087,7 @@
           "value": null,
           "charged": false
         },
-        "attunement": 0,
-        "quanitiy": null,
-        "weight": null,
-        "price": null
+        "attunement": 0
       },
       "effects": [],
       "folder": null,

@@ -1,11 +1,13 @@
 {
   "_id": "CvtGj6YimGuZdrhB",
   "name": "Ooze Cube",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/water/barrier-ice-water-cube.webp",
   "data": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>The {creature} takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to the {creature}'s Engulf and has<strong> disadvantage </strong>on the saving throw. Creatures inside the {creature} can be seen but have total cover.</p>\n<p>A creature <strong>within 5 feet</strong> of the {creature} can take an action to pull a creature or object out of the {creature}. Doing so requires a successful <strong>DC 12 Strength check</strong>, and the creature making the attempt takes <strong><strong>10 (3d6) <em>acid damage</em></strong></strong><strong>.</strong> The {creature} can hold only one Large creature or up to four Medium or smaller creatures inside it at a time.</p>\n</section>\n<p>The {creature} takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to the {creature}'s Engulf and has<strong> disadvantage </strong>on the saving throw<strong>. </strong>Creatures inside the cube can be seen but have total cover. A creature <strong>within 5 feet</strong> of the {creature} can take an action to pull a creature or object out of the {creature}. Doing so requires a successful Strength check.</p>",
+      "value": "<section class=\"secret\">\n<p>The {creature} takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to the {creature}'s Engulf and has<strong> disadvantage </strong>on the saving throw<strong>. C</strong>reatures inside the {creature} can be seen but have total cover.</p><p>A creature <strong>within 5 feet</strong> of the {creature} can take an action to pull a creature or object out of the {creature}. Doing so requires a successful <strong>DC 12 Strength check</strong>, and the creature making the attempt takes <strong><strong>10 (3d6) <em>acid damage</em></strong></strong><strong>.</strong> The {creature} can hold only one Large creature or up to four Medium or smaller creatures inside it at a time.</p>\n</section>\n<p>The {creature} takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to the {creature}'s Engulf and has<strong> disadvantage </strong>on the saving throw<strong>. </strong>Creatures inside the cube can be seen but have total cover<strong>. A</strong> creature <strong>within 5 feet</strong> of the {creature} can take an action to pull a creature or object out of the {creature}. Doing so requires a successful Strength check.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -41,8 +41,8 @@
       "target": null,
       "amount": null
     },
-    "ability": "",
-    "actionType": "abil",
+    "ability": null,
+    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -50,19 +50,14 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "3d6",
-          "acid"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
     "save": {
-      "ability": "str",
-      "dc": 12,
-      "scaling": "flat"
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
     },
     "requirements": "",
     "recharge": {
@@ -70,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/water/barrier-ice-water-cube.webp",
+  "effects": []
 }

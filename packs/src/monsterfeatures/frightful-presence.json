@@ -1,8 +1,10 @@
 {
   "_id": "nb6zOmwIIJBLz4iT",
   "name": "Frightful Presence",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\"><p>Each creature of the {type}'s choice that is <strong>within 120 feet</strong> of the {type} and aware of it must succeed on a <strong>DC 16 Wisdom saving throw</strong> or become frightened for <strong>1 minute</strong>. </p><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the {type}'s Frightful Presence for the next 24 hours.</p></section><p>Each creature of the {type}'s choice that is <strong>within 120 feet</strong> of the {type} and aware of it must succeed on a Wisdom saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "any",
       "type": "creature"
     },
     "range": {
       "value": 120,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -56,24 +56,16 @@
     "formula": "",
     "save": {
       "ability": "wis",
-      "dc": 16,
+      "dc": null,
       "scaling": "flat"
     },
     "requirements": "",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "reach": {
-      "value": null,
-      "units": ""
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
+  "effects": []
 }

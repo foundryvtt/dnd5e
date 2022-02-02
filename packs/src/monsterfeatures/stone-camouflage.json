@@ -1,8 +1,10 @@
 {
   "_id": "j1cPfWFNvxGoex9Z",
   "name": "Stone Camouflage",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/environment/settlement/stone-stairs.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on Dexterity (Stealth) checks made to hide in rocky terrain.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/environment/settlement/stone-stairs.webp",
+  "effects": []
 }

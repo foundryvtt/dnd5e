@@ -1,8 +1,10 @@
 {
   "_id": "nahRRxck9R5GVVFS",
   "name": "Magic Weapons",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/weapons/swords/sword-runed-glowing.webp",
   "data": {
     "description": {
       "value": "<p>The {creature}'s weapon attacks are magical.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": "",
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -67,11 +67,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/weapons/swords/sword-runed-glowing.webp",
+  "effects": []
 }

@@ -1,8 +1,10 @@
 {
   "_id": "cZm13DxOe9lZyGFT",
   "name": "Corrosive Form",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>A creature that touches the {creature} or hits it with a melee attack while within 5 feet of it takes <strong>4 (1d8) <em>acid damage</em></strong>. Any nonmagical weapon made of metal or wood that hits the {creature} corrodes.</p><p>After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits the {creature} is destroyed after dealing damage. The {creature} can eat through 2-inch-thick, nonmagical wood or metal in 1 round.</p>\n</section>\n<p>A creature that touches the {creature} or hits it with a melee attack while within 5 feet of it takes <em>acid damage</em>. Any nonmagical weapon made of metal or wood that hits the pudding corrodes.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": 5,
+      "value": null,
       "long": null,
-      "reach": null,
-      "units": "ft"
+      "units": ""
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": "",
       "type": ""
     },
@@ -51,12 +51,7 @@
       "damage": ""
     },
     "damage": {
-      "parts": [
-        [
-          "1d8",
-          "acid"
-        ]
-      ],
+      "parts": [],
       "versatile": ""
     },
     "formula": "",
@@ -71,10 +66,6 @@
       "value": null,
       "charged": false
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -84,11 +75,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
+  "effects": []
 }

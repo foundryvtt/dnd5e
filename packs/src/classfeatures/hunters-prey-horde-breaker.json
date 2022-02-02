@@ -1,8 +1,10 @@
 {
   "_id": "C6sHdDGmCMo0cYHd",
   "name": "Hunter's Prey: Horde Breaker",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/fire/explosion-embers-evade-silhouette.webp",
   "data": {
     "description": {
       "value": "<p>Once on each of your turns when you make a weapon attack, you can make another attack with the same weapon against a different creature that is within 5 feet of the original target and within range of your weapon.</p>",
@@ -21,29 +23,22 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -58,23 +53,16 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Hunter 3",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/fire/explosion-embers-evade-silhouette.webp",
+  "effects": []
 }

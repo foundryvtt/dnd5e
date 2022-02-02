@@ -1,8 +1,10 @@
 {
   "_id": "e9ytGikyLFgwZ5wi",
   "name": "Bonus Proficiencies (College of Lore)",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/trades/academics-investigation-puzzles.webp",
   "data": {
     "description": {
       "value": "<p>When you join the College of Lore at 3rd level, you gain proficiency with three skills of your choice.</p>",
@@ -12,7 +14,7 @@
     "source": "",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": ""
     },
     "consume": {
@@ -43,7 +43,7 @@
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,16 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/trades/academics-investigation-puzzles.webp",
+  "effects": []
 }

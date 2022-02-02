@@ -1,8 +1,10 @@
 {
   "_id": "u1Tt4l4Mczgt3wOS",
   "name": "Sunlight Weakness",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/time/day-night-sunset-sunrise.webp",
   "data": {
     "description": {
       "value": "<p>While in sunlight, the {creature} has<strong> disadvantage </strong>on attack rolls, ability checks, and saving throws.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/time/day-night-sunset-sunrise.webp",
+  "effects": []
 }

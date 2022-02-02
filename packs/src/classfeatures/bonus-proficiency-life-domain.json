@@ -1,8 +1,10 @@
 {
   "_id": "68bYIOvx6rIqnlOW",
   "name": "Bonus Proficiency (Life Domain)",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/equipment/chest/breastplate-layered-steel.webp",
   "data": {
     "description": {
       "value": "<p>When you choose this domain at 1st level, you gain proficiency with heavy armor.</p>",
@@ -12,7 +14,7 @@
     "source": "",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null
     },
     "consume": {
@@ -43,7 +43,7 @@
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,16 +63,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/equipment/chest/breastplate-layered-steel.webp",
+  "effects": []
 }

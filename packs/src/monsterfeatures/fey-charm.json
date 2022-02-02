@@ -1,8 +1,10 @@
 {
   "_id": "SGgVxdZbmsStfeGB",
   "name": "Fey Charm",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/consumables/plants/leaf-veins-glowing-green.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} targets one humanoid or beast that she can see within 30 feet of her. If the target can see the {creature}, it must succeed on a <strong>DC 14 Wisdom</strong> saving throw or be magically charmed.</p><p>The charmed creature regards the {creature} as a trusted friend to be heeded and protected. Although the target isn't under the {creature}'s control, it takes the {creature}'s requests or actions in the most favorable way it can.Each time the {creature} or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the {creature} dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the {creature}'s Fey Charm for the next 24 hours. The {creature} can have no more than one humanoid and up to three beasts charmed at a time.</p>\n</section>\n<p>The {creature} targets one humanoid or beast that she can see within 30 feet of her. If the target can see the {creature}, it must make a <strong>Wisdom</strong> saving throw. Each time the {creature} or its allies do anything harmful to the target, it can repeat the saving throw.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": 1,
-      "width": null,
       "units": "spec",
       "type": ""
     },
     "range": {
       "value": 30,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
       "value": 0,
-      "max": "0",
+      "max": 0,
       "per": "",
       "type": ""
     },
@@ -67,10 +67,6 @@
       "value": null,
       "charged": false
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -80,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/consumables/plants/leaf-veins-glowing-green.webp",
+  "effects": []
 }

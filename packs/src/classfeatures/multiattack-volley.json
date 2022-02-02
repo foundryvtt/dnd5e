@@ -1,8 +1,10 @@
 {
   "_id": "l7W6JB9yWLLLtQKP",
   "name": "Multiattack: Volley",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/ranged/target-bullseye-arrow-white.webp",
   "data": {
     "description": {
       "value": "<p>You can use your action to make a ranged attack against any number of creatures within 10 feet of a point you can see within your weapon's range. You must have ammunition for each target, as normal, and you make a separate attack roll for each target.</p>",
@@ -21,29 +23,22 @@
     },
     "target": {
       "value": 20,
-      "width": null,
       "units": "ft",
       "type": "square"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": ""
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -63,16 +58,9 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/ranged/target-bullseye-arrow-white.webp",
+  "effects": []
 }

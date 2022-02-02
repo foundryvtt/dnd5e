@@ -1,8 +1,10 @@
 {
   "_id": "xF1VTcJ3AdkbTsdQ",
   "name": "Action Surge",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/social/intimidation-impressing.webp",
   "data": {
     "description": {
       "value": "<p>Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible Bonus Action.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.</p><p><em>**Foundry note: Note the limited uses is set to the base default of 1 per short or long rest. Please manually adjust as required.</em></p>",
@@ -16,19 +18,17 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
       "value": null,
-      "width": null,
       "units": null,
       "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": "self"
     },
     "uses": {
@@ -37,14 +37,9 @@
       "per": "sr",
       "type": "sr"
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,18 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Fighter 2",
     "recharge": {
       "value": 0,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
   "folder": null,
   "sort": 100000,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/social/intimidation-impressing.webp",
+  "effects": []
 }

@@ -1,8 +1,10 @@
 {
   "_id": "MBOiQSnMr02wUpEN",
   "name": "Limited Magic Immunity",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} can't be affected or detected by spells of 6th level or lower unless it wishes to be. It has<strong> advantage </strong>on saving throws against all other spells and magical effects.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+  "effects": []
 }

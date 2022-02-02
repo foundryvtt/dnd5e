@@ -1,8 +1,10 @@
 {
   "_id": "jTXHaK0vvT5DV3uO",
   "name": "Otherworldly Patron",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/sundries/lights/candles-lit-red-evil.webp",
   "data": {
     "description": {
       "value": "<p>At 1st level, you have struck a bargain with an otherworldly being, such as the Fiend. Your choice grants you features at 1st level and again at 6th, 10th, and 14th level.</p>",
@@ -12,39 +14,32 @@
     "source": "PHB pg. 107, 109",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null,
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,22 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "value": "",
+      "scaling": "spell"
     },
     "requirements": "Warlock 1",
     "recharge": {
       "value": null,
       "charged": false
     },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    }
   },
-  "effects": [],
-  "folder": null,
   "sort": 600001,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/sundries/lights/candles-lit-red-evil.webp",
+  "effects": []
 }

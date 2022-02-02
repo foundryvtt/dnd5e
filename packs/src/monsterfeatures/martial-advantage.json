@@ -1,11 +1,13 @@
 {
   "_id": "zg0RZmAncKJqIpax",
   "name": "Martial Advantage",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
   "data": {
     "description": {
-      "value": "<section class=\"secret\">\n<p>Once per turn, the {creature} can deal an extra <strong>7 (2d6) damage</strong> to a creature it hits with a weapon attack if that creature is within 5 ft. of an ally of the {creature} that isn't incapacitated.</p>\n<p> </p>\n</section>\n<p>Once per turn, the {creature} can deal extra damage to a creature it hits with a weapon attack if that creature is within 5 ft. of an ally of the {creature} that isn't incapacitated.</p>",
+      "value": "<section class=\"secret\"><p>Once per turn, the {creature} can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 ft. of an ally of the {creature} that isn't incapacitated.</p><p></p></section><p>Once per turn, the {creature} can deal extra damage to a creature it hits with a weapon attack if that creature is within 5 ft. of an ally of the {creature} that isn't incapacitated.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -53,7 +53,7 @@
       "parts": [],
       "versatile": ""
     },
-    "formula": "2d6",
+    "formula": "",
     "save": {
       "ability": "",
       "dc": null,
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
+  "effects": []
 }

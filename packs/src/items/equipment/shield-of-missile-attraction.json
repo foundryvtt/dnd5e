@@ -19,7 +19,7 @@
     "identified": true,
     "activation": {
       "type": "none",
-      "cost": null,
+      "cost": 0,
       "condition": "Any ranged attack within 10 ft. of you causes you to be the target."
     },
     "duration": {
@@ -29,13 +29,12 @@
     "target": {
       "value": null,
       "width": null,
-      "units": "",
+      "units": null,
       "type": "self"
     },
     "range": {
       "value": 10,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
@@ -45,12 +44,12 @@
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": null,
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,7 +76,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""

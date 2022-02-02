@@ -1,8 +1,10 @@
 {
   "_id": "80USV8ZFPIahpLd0",
   "name": "Roguish Archetype",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
   "data": {
     "description": {
       "value": "<p>At 3rd level, you choose an archetype that you emulate in the exercise of your rogue abilities, such as Thief. Your archetype choice grants you features at 3rd level and then again at 9th, 13th, and 17th level.</p>",
@@ -12,28 +14,26 @@
     "source": "PHB pg. 96",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": "",
       "units": ""
     },
     "target": {
-      "value": null,
-      "width": null,
+      "value": "",
       "units": "",
       "type": ""
     },
     "range": {
-      "value": null,
+      "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": null
     },
     "consume": {
@@ -43,7 +43,7 @@
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -79,16 +79,9 @@
     "damageType": {
       "value": "",
       "_deprecated": true
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
+  "effects": []
 }

@@ -23,19 +23,18 @@
       "condition": ""
     },
     "duration": {
-      "value": null,
+      "value": 0,
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": 0,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
-      "value": null,
+      "value": 20,
       "long": 60,
-      "reach": 20,
       "units": "ft"
     },
     "uses": {
@@ -59,7 +58,7 @@
     "damage": {
       "parts": [
         [
-          "2d6 + @mod + 1",
+          "2d6 +@mod +1",
           "bludgeoning"
         ]
       ],

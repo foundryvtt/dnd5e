@@ -1,8 +1,10 @@
 {
   "_id": "jZgeHxCR8pF6FOmQ",
   "name": "Enlarge",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "systems/dnd5e/icons/spells/link-blue-2.jpg",
   "data": {
     "description": {
       "value": "<p>For 1 minute, the {creature} magically increases in size, along with anything it is wearing or carrying. While enlarged, the {creature} is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the {creature} lacks the room to become Large, it attains the maximum size possible in the space available.</p>",
@@ -21,19 +23,17 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
       "value": 1,
-      "max": "1",
+      "max": 1,
       "per": "sr",
       "type": "sr"
     },
@@ -67,10 +67,6 @@
       "value": null,
       "charged": true
     },
-    "reach": {
-      "value": null,
-      "units": ""
-    },
     "time": {
       "value": "",
       "_deprecated": true
@@ -80,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/link-blue-2.jpg",
+  "effects": []
 }

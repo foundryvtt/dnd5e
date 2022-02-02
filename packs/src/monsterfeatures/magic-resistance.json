@@ -1,8 +1,10 @@
 {
   "_id": "Hc6MqLQhPTI1KOvm",
   "name": "Magic Resistance",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": "",
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": "",
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -67,11 +67,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+  "effects": []
 }

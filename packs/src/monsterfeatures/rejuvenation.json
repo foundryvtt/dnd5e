@@ -1,8 +1,10 @@
 {
   "_id": "JcfHlAcfwSWnt7Ud",
   "name": "Rejuvenation",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "systems/dnd5e/icons/spells/wind-grasp-acid-3.jpg",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>If it dies, the {creature} returns to life in 1d6 days and regains all its<strong> hit points</strong>.</p><p>Only a wish spell can prevent this trait from functioning.</p>\n</section>\n<p>If it dies, the {creature} returns to life in 1d6 days and regains all its<strong> hit points</strong>.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/wind-grasp-acid-3.jpg",
+  "effects": []
 }

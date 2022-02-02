@@ -1,8 +1,10 @@
 {
   "_id": "r91UIgwFdHwkXdia",
   "name": "Channel Divinity: Turn Undead",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
   "data": {
     "description": {
       "value": "<p>As an action, you present your holy symbol and speak a prayer censuring the undead.</p><p>Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.</p><p>A turned creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions.</p><p>For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there's nowhere to move, the creature can use the Dodge action.</p>",
@@ -21,30 +23,23 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": 30,
       "long": null,
-      "reach": null,
       "units": "ft"
     },
     "uses": {
-      "value": null,
-      "max": null,
+      "value": 0,
+      "max": 0,
       "per": "",
       "type": ""
     },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
     "ability": "",
     "actionType": "save",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -59,23 +54,16 @@
     "save": {
       "ability": "wis",
       "dc": null,
-      "scaling": "wis",
-      "value": "wis"
+      "value": "wis",
+      "scaling": "wis"
     },
     "requirements": "Cleric 2",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "quanitiy": null,
-    "weight": null,
-    "price": null
+    }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
+  "effects": []
 }

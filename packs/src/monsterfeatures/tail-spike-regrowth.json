@@ -1,8 +1,10 @@
 {
   "_id": "iVOxckt9448v7Ho5",
   "name": "Tail Spike Regrowth",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/mammals/wolf-shadow-black.webp",
   "data": {
     "description": {
       "value": "<p>The {creature} has twenty-four tail spikes. Used spikes regrow when the {creature} finishes a long rest.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/mammals/wolf-shadow-black.webp",
+  "effects": []
 }

@@ -1,8 +1,10 @@
 {
   "_id": "i3viKtKcSVeWLJFJ",
   "name": "Heated Weapons",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/skills/melee/strike-sword-blood-red.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>When the {creature} hits with a metal melee weapon, it deals an extra <strong><strong>3 (1d6) <em>fire damage</em></strong></strong> (included in the attack).</p>\n</section>\n<p>When the {creature} hits with a metal melee weapon, it deals extra <em>fire damage</em> (included in the attack).</p>",
@@ -12,7 +14,7 @@
     "source": "",
     "activation": {
       "type": "",
-      "cost": null,
+      "cost": 0,
       "condition": ""
     },
     "duration": {
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -76,11 +76,7 @@
       "_deprecated": true
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/skills/melee/strike-sword-blood-red.webp",
+  "effects": []
 }

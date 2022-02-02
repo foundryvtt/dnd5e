@@ -11,8 +11,8 @@
     },
     "source": "PHB pg. 195",
     "quantity": 1,
-    "weight": null,
-    "price": null,
+    "weight": 0,
+    "price": 0,
     "attunement": 0,
     "equipped": false,
     "rarity": "common",
@@ -27,20 +27,19 @@
       "units": ""
     },
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
       "units": "",
-      "type": "target"
+      "type": ""
     },
     "range": {
-      "value": null,
+      "value": 5,
       "long": null,
-      "reach": 5,
       "units": "ft"
     },
     "uses": {
       "value": null,
-      "max": null,
+      "max": "",
       "per": ""
     },
     "consume": {
@@ -50,7 +49,7 @@
     },
     "ability": "str",
     "actionType": "mwak",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -81,7 +80,6 @@
       "conditions": ""
     },
     "weaponType": "simpleM",
-    "baseItem": "",
     "properties": {
       "amm": false,
       "hvy": false,

@@ -1,8 +1,10 @@
 {
   "_id": "zZkNtL97hn1P6OJC",
   "name": "Mimicry",
+  "permission": {
+    "default": 0
+  },
   "type": "feat",
-  "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
   "data": {
     "description": {
       "value": "<section class=\"secret\">\n<p>The {creature} can mimic animal sounds and humanoid voices. A creature that hears the sounds can tell they are imitations with a successful <strong>DC 14 Wisdom (Insight) check</strong>.</p>\n</section>\n<p>The {creature} can mimic animal sounds and humanoid voices. A creature that hears the sounds can tell they are imitations with a successful Wisdom (Insight) check.</p>",
@@ -21,14 +23,12 @@
     },
     "target": {
       "value": null,
-      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
       "value": null,
       "long": null,
-      "reach": null,
       "units": ""
     },
     "uses": {
@@ -65,11 +65,7 @@
       "charged": false
     }
   },
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "permission": {
-    "default": 0
-  },
-  "flags": {}
+  "flags": {},
+  "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
+  "effects": []
 }

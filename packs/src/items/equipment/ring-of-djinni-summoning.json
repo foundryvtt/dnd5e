@@ -11,7 +11,7 @@
     },
     "source": "DMG pg. 190",
     "quantity": 1,
-    "weight": null,
+    "weight": 0,
     "price": 45000,
     "attunement": 1,
     "equipped": false,
@@ -34,23 +34,22 @@
     },
     "range": {
       "value": 120,
-      "long": null,
-      "reach": null,
+      "long": 0,
       "units": "ft"
     },
     "uses": {
       "value": 1,
-      "max": "1",
+      "max": 1,
       "per": "day"
     },
     "consume": {
       "type": "",
-      "target": "",
+      "target": null,
       "amount": null
     },
     "ability": "",
     "actionType": "",
-    "attackBonus": null,
+    "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
       "threshold": null,
@@ -77,7 +76,6 @@
       "dt": null,
       "conditions": ""
     },
-    "baseItem": "",
     "speed": {
       "value": null,
       "conditions": ""
