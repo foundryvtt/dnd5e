@@ -248,13 +248,8 @@ export default class Item5e extends Item {
         rng.reach = null;
       }
 
-      if (rng.value || rng.long) {
-        labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units], `${game.i18n.localize("DND5E.Range")}`].filterJoin(" ");
-      }
-
-      if (rng.reach) {
-        labels.reach = [rng.reach, C.distanceUnits[rng.units], `${game.i18n.localize("DND5E.Reach")}`].filterJoin(" ");
-      }
+      labels.range = rng?.value ? rng?.long ? game.i18n.format("DND5E.RangeItemMinMaxLabel", {value: rng.value, long: rng.long, units: C.distanceUnits[rng.units]}) : game.i18n.format("DND5E.RangeItemLabel", {value: rng.value, units: C.distanceUnits[rng.units]}) : null;
+      labels.reach = rng?.reach ? game.i18n.format("DND5E.ReachItemLabel", {reach: rng.reach, units: C.distanceUnits[rng.units]}) : null;
 
       // Duration Label
       let dur = data.duration || {};
