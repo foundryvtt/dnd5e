@@ -1582,13 +1582,32 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Update an advancement belonging to this item.
+   * @param {string} id          ID of the advancement to update.
+   * @param {object} updates     Updates to apply to this advancement, using the same format as `Document#update`.
+   * @returns {Promise<Item5e>}  This item with the changes applied.
+   */
+  async updateAdvancement(id, updates) {
+    if ( !this.data.data.advancement ) return;
+
+    const idx = this.data.data.advancement.findIndex(a => a._id === id);
+    if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
+
+    const advancement = foundry.utils.deepClone(this.data.data.advancement);
+    foundry.utils.mergeObject(advancement[idx], updates);
+    return this.update({"data.advancement": advancement});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Remove an advancement from this item.
    * @param {number} id          ID of the advancement to remove.
    * @returns {Promise<Item5e>}  This item with the changes applied.
    */
   async deleteAdvancement(id) {
     if ( !this.data.data.advancement ) return;
-    return await this.update({"data.advancement": this.data.data.advancement.filter(a => a._id !== id)});
+    return this.update({"data.advancement": this.data.data.advancement.filter(a => a._id !== id)});
   }
 
   /* -------------------------------------------- */

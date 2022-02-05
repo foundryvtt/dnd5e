@@ -206,6 +206,8 @@ export class Advancement {
     return this.title;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Summary content displayed beneath the title in the advancement list.
    * @param {number} level  Level for which to generate the summary.
@@ -217,6 +219,18 @@ export class Advancement {
 
   /* -------------------------------------------- */
   /*  Editing Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Update this advancement.
+   * @param {object} updates          Updates to apply to this advancement, using the same format as `Document#update`.
+   * @returns {Promise<Advancement>}  This advancement after updates have been applied.
+   */
+  async update(updates) {
+    await this.parent.updateAdvancement(this.id, updates);
+    return this.parent.advancement[this.id];
+  }
+
   /* -------------------------------------------- */
 
   /**
