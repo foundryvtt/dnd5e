@@ -489,7 +489,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( !advancement ) return;
 
     if ( cl.contains("item-edit") ) {
-      const config = new advancement.constructor.configApp(advancement, id);
+      const config = new advancement.constructor.configApp(advancement);
       return config.render(true);
     } else if ( cl.contains("item-delete") ) {
       return this.item.deleteAdvancement(id);

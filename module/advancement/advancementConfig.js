@@ -9,7 +9,7 @@
  */
 export class AdvancementConfig extends FormApplication {
 
-  constructor(advancement, originId, options={}) {
+  constructor(advancement, options={}) {
     super(advancement, options);
 
     /**
@@ -23,12 +23,6 @@ export class AdvancementConfig extends FormApplication {
      * @type {Item5e}
      */
     this.parent = advancement.parent;
-
-    /**
-     * ID in the original advancement object on the item.
-     * @type {string}
-     */
-    this.originId = originId;
   }
 
   /* -------------------------------------------- */
@@ -85,7 +79,11 @@ export class AdvancementConfig extends FormApplication {
     let updates = foundry.utils.expandObject(formData).data;
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
-    return this.parent.update({[`data.advancement.${this.originId}`]: updates});
+    const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
+    const idx = advancement.findIndex(a => a._id === this.advancement.id);
+    advancement[idx] = foundry.utils.mergeObject(this.advancement.data, updates, { inplace: false });
+
+    return this.parent.update({"data.advancement": advancement});
   }
 
   /* -------------------------------------------- */

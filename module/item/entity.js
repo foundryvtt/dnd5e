@@ -215,9 +215,9 @@ export default class Item5e extends Item {
     const labels = this.labels = {};
 
     // Advancement
-    this.advancement = Object.entries(itemData.data.advancement ?? {}).reduce((obj, [id, data]) => {
+    this.advancement = (itemData.data.advancement ?? []).reduce((obj, data) => {
       const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
-      if ( Advancement ) obj[id] = new Advancement(this, data);
+      if ( Advancement ) obj[data._id] = new Advancement(this, data);
       return obj;
     }, {});
 
@@ -1567,12 +1567,15 @@ export default class Item5e extends Item {
     if ( !Advancement ) throw new Error(`${type}Advancement not found in game.dnd5e.advancement.types`);
     data = foundry.utils.mergeObject(Advancement.defaultData, data);
 
+    const advancement = foundry.utils.deepClone(this.data.data.advancement);
     let id = foundry.utils.randomID();
-    while ( this.data.data.advancement[id] ) id = foundry.utils.randomID();
-    await this.update({[`data.advancement.${id}`]: data});
+    while ( advancement.find(a => a._id === id) ) id = foundry.utils.randomID();
+    data._id = id;
+    advancement.push(data);
+    await this.update({"data.advancement": advancement});
 
     if ( !showConfig ) return;
-    const config = new Advancement.configApp(this.advancement[id], id);
+    const config = new Advancement.configApp(this.advancement[id]);
     return config.render(true);
   }
 
@@ -1585,7 +1588,7 @@ export default class Item5e extends Item {
    */
   async deleteAdvancement(id) {
     if ( !this.data.data.advancement ) return;
-    return await this.update({[`data.advancement.-=${id}`]: null});
+    return await this.update({"data.advancement": this.data.data.advancement.filter(a => a._id !== id)});
   }
 
   /* -------------------------------------------- */

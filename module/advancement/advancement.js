@@ -44,6 +44,7 @@ export class Advancement {
    */
   static get defaultData() {
     const data = {
+      _id: null,
       type: this.typeName,
       configuration: foundry.utils.deepClone(this.defaultConfiguration),
       value: foundry.utils.deepClone(this.defaultValue)
@@ -129,6 +130,16 @@ export class Advancement {
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Unique identifier for this advancement.
+   * @type {string}
+   */
+  get id() {
+    return this.data._id;
+  }
+
   /* -------------------------------------------- */
 
   /**
