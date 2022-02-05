@@ -15,7 +15,7 @@ export class HitPointsAdvancement extends Advancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       order: 10,
-      icon: "icons/svg/regen.svg",
+      icon: "systems/dnd5e/icons/advancement/hit-points.svg",
       title: game.i18n.localize("DND5E.AdvancementHitPointsTitle"),
       hint: game.i18n.localize("DND5E.AdvancementHitPointsHint"),
       multiLevel: true,
