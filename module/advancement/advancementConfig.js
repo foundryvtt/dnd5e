@@ -47,6 +47,25 @@ export class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    // Remove an item from the list
+    html.on("click", ".item-delete", event => {
+      const parentElement = $(event.currentTarget).parents("[data-item-uuid]");
+      const uuidToDelete = parentElement.data("itemUuid");
+
+      const updates = {
+        configuration: this.prepareConfigurationUpdate({
+          items: this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete)
+        })
+      };
+
+      return this._updateAdvancement(updates);
+    });
+  }
+
+
   /** @inheritdoc */
   getData() {
     return {
@@ -140,6 +159,14 @@ export class AdvancementConfig extends FormApplication {
     return this._updateAdvancement(updates);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * A helper to update the advancement and re-render this application with the adjusted advancement displayed.
+   * @param {*} advancementUpdate  The update to the advancement data
+   * @returns {Promise<Item5e>}    The promise for the updated Item which resolves after the application re-renders
+   * @private
+   */
   async _updateAdvancement(advancementUpdate) {
     const update = await this.advancement.update(advancementUpdate);
 
