@@ -1,0 +1,20 @@
+<li data-score="{{key}}">
+  <label>{{label}}</label>
+  <a class="adjustment-button" {{#if canDecrease}}data-action="decrease"{{else}}aria-disabled="true"{{/if}}>
+    <i class="fas fa-minus"></i>
+  </a>
+  <input name="{{name}}" type="number" min="{{min}}" max="{{max}}"
+         step="1" value="{{value}}" data-initial="{{initial}}"
+         {{#if isFixed}}readonly aria-readonly="true"{{/if}} {{disabled isDisabled}}>
+  <a class="adjustment-button" {{~#if canIncrease}}data-action="increase"{{else}}aria-disabled="true"{{/if}}>
+    <i class="fas fa-plus"></i>
+  </a>
+  {{#if showDelta}}
+    <div class="delta">
+      {{#if delta}}{{delta}}{{else}}&nbsp;{{/if}}
+      {{#if isFixed}}
+        <i class="fa-solid fa-lock" data-tooltip="DND5E.AdvancementAbilityScoreImprovementFixed"></i>
+      {{/if}}
+    </div>
+  {{/if}}
+</li>

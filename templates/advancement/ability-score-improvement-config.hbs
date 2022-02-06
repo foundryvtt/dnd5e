@@ -1,0 +1,13 @@
+<form autocomplete="off" data-id="{{_id}}" data-type="{{type}}">
+  {{> "dnd5e.advancement-controls"}}
+
+  <ul class="ability-scores">
+    {{> "dnd5e.advancement-ability-score-control" points}}
+    <li class="hint">
+      {{localize "DND5E.AdvancementAbilityScoreImprovementPointsHint"}}
+    </li>
+    {{#each abilities}}
+      {{> "dnd5e.advancement-ability-score-control" this}}
+    {{/each}}
+  </ul>
+</form>
