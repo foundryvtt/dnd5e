@@ -52,5 +52,4 @@ export class ItemGrantAdvancement extends Advancement {
   summaryForLevel(level) {
     return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
   }
-
 }

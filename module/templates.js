@@ -1,3 +1,5 @@
+import { _linkForUuid } from "./utils.js";
+
 /**
  * Define a set of template paths to pre-load
  * Pre-loaded templates are compiled and cached for fast access when rendering
@@ -24,7 +26,8 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/dnd5e/templates/items/parts/item-mountable.html",
 
     // Advancement Partials
-    "systems/dnd5e/templates/advancement/parts/advancement-controls.html"
+    "systems/dnd5e/templates/advancement/parts/advancement-controls.html",
+    "systems/dnd5e/templates/advancement/parts/advancement-item-grant.html"
   ]);
 };
 
@@ -35,6 +38,7 @@ export const preloadHandlebarsTemplates = async function() {
  */
 export const registerHandlebarsHelpers = function() {
   Handlebars.registerHelper({
-    getProperty: foundry.utils.getProperty
+    getProperty: foundry.utils.getProperty,
+    linkForUuid: _linkForUuid
   });
 };
