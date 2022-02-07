@@ -94,6 +94,10 @@ export default class PropertyAttribution extends Application {
     const parts = property.split(".");
     if ( parts[0] === "abilities" && parts[1] ) {
       return CONFIG.DND5E.abilities[parts[1]] ?? property;
+    } else if ( (property === "attributes.ac.dex") && CONFIG.DND5E.abilities.dex ) {
+      return CONFIG.DND5E.abilities.dex;
+    } else if ( (parts[0] === "prof") || (property === "attributes.prof") ) {
+      return game.i18n.localize("DND5E.Proficiency");
     }
     return property;
   }
