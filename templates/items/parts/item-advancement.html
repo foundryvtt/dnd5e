@@ -30,7 +30,7 @@
       </li>
       <ol class="item-list">
         {{#each data.items}}
-          <li class="item flexrow" data-index="{{this.index}}">
+          <li class="item flexrow" data-id="{{this.id}}">
             <div class="item-name flexrow">
               <div class="item-image{{#if this.invertIcon}} inverted{{/if}}" style="background-image: url('{{this.icon}}')"></div>
               <h4>{{{this.title}}}</h4>
