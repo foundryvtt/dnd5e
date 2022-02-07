@@ -1568,14 +1568,12 @@ export default class Item5e extends Item {
     data = foundry.utils.mergeObject(Advancement.defaultData, data);
 
     const advancement = foundry.utils.deepClone(this.data.data.advancement);
-    let id = foundry.utils.randomID();
-    while ( advancement.find(a => a._id === id) ) id = foundry.utils.randomID();
-    data._id = id;
+    data._id = foundry.utils.randomID();
     advancement.push(data);
     await this.update({"data.advancement": advancement});
 
     if ( !showConfig ) return;
-    const config = new Advancement.configApp(this.advancement[id]);
+    const config = new Advancement.configApp(this.advancement[data._id]);
     return config.render(true);
   }
 
