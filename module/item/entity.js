@@ -215,9 +215,9 @@ export default class Item5e extends Item {
     const labels = this.labels = {};
 
     // Advancement
-    this.advancement = Array.from((itemData.data.advancement ?? []).entries()).reduce((obj, [idx, data]) => {
+    this.advancement = (itemData.data.advancement ?? []).reduce((obj, data) => {
       const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
-      if ( Advancement ) obj[idx] = new Advancement(this, data);
+      if ( Advancement ) obj[data._id] = new Advancement(this, data);
       return obj;
     }, {});
 
@@ -1568,24 +1568,44 @@ export default class Item5e extends Item {
     data = foundry.utils.mergeObject(Advancement.defaultData, data);
 
     const advancement = foundry.utils.deepClone(this.data.data.advancement);
-    const idx = advancement.push(data) - 1;
+    if ( !data._id ) data._id = foundry.utils.randomID();
+    advancement.push(data);
     await this.update({"data.advancement": advancement});
 
     if ( !showConfig ) return;
-    const config = new Advancement.configApp(this.advancement[idx], idx);
+    const config = new Advancement.configApp(this.advancement[data._id]);
     return config.render(true);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Remove an advancement from this item.
-   * @param {number} idx         Index of the advancement to remove.
+   * Update an advancement belonging to this item.
+   * @param {string} id          ID of the advancement to update.
+   * @param {object} updates     Updates to apply to this advancement, using the same format as `Document#update`.
    * @returns {Promise<Item5e>}  This item with the changes applied.
    */
-  async deleteAdvancement(idx) {
+  async updateAdvancement(id, updates) {
     if ( !this.data.data.advancement ) return;
-    return this.update({"data.advancement": this.data.data.advancement.filter((a, i) => i !== idx)});
+
+    const idx = this.data.data.advancement.findIndex(a => a._id === id);
+    if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
+
+    const advancement = foundry.utils.deepClone(this.data.data.advancement);
+    foundry.utils.mergeObject(advancement[idx], updates);
+    return this.update({"data.advancement": advancement});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove an advancement from this item.
+   * @param {number} id          ID of the advancement to remove.
+   * @returns {Promise<Item5e>}  This item with the changes applied.
+   */
+  async deleteAdvancement(id) {
+    if ( !this.data.data.advancement ) return;
+    return this.update({"data.advancement": this.data.data.advancement.filter(a => a._id !== id)});
   }
 
   /* -------------------------------------------- */

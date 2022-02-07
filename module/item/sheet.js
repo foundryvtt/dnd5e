@@ -106,7 +106,7 @@ export default class ItemSheet5e extends ItemSheet {
     else if ( actor ) maxLevel = actor.data.data.details.level;
 
     const data = {};
-    for ( const [idx, advancement] of Object.entries(item.advancement) ) {
+    for ( const [id, advancement] of Object.entries(item.advancement) ) {
       if ( (originalClass !== null)
            && ((advancement.data.classRestriction === "primary" && !originalClass)
            || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
@@ -118,7 +118,7 @@ export default class ItemSheet5e extends ItemSheet {
           };
         }
         data[level].items.push({
-          index: idx,
+          id,
           order: advancement.sortingValueForLevel(level),
           title: advancement.titleForLevel(level),
           icon: advancement.icon,
@@ -133,7 +133,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( !advancement.levels.length ) {
         if ( !data[0] ) data[0] = { configured: "partial", items: [] };
         data[0].items.push({
-          index: idx,
+          id,
           order: advancement.constructor.order,
           title: advancement.title,
           icon: advancement.icon,
@@ -484,16 +484,15 @@ export default class ItemSheet5e extends ItemSheet {
     const cl = event.currentTarget.classList;
     if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
 
-    const item = event.currentTarget.closest("li.item");
-    const idx = Number(item?.dataset.index);
-    const advancement = this.item.advancement[idx];
+    const id = event.currentTarget.closest("li.item")?.dataset.id;
+    const advancement = this.item.advancement[id];
     if ( !advancement ) return;
 
     if ( cl.contains("item-edit") ) {
-      const config = new advancement.constructor.configApp(advancement, idx);
+      const config = new advancement.constructor.configApp(advancement);
       return config.render(true);
     } else if ( cl.contains("item-delete") ) {
-      return this.item.deleteAdvancement(idx);
+      return this.item.deleteAdvancement(id);
     }
   }
 
