@@ -283,8 +283,6 @@ export default class ActorSheet5e extends ActorSheet {
 
       default:
         const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        const armorInFormula = formula.includes("@attributes.ac.base");
-        const hasArmor = !!this.actor.armor;
         let base = ac.base;
         const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
         for ( const [match, term] of formula.matchAll(dataRgx) ) {
@@ -297,12 +295,15 @@ export default class ActorSheet5e extends ActorSheet {
             value
           });
         }
+        const armorInFormula = formula.includes("@attributes.ac.base");
+        const hasArmor = !!this.actor.armor;
         attribution.unshift({
           label: !armorInFormula ? game.i18n.localize("DND5E.PropertyBase")
             : (hasArmor ? this.actor.armor.name : game.i18n.localize("DND5E.ArmorClassUnarmored")),
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: base
         });
+        break;
     }
 
     // Shield
