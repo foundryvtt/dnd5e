@@ -230,6 +230,7 @@ export async function d20Roll({
     flavor: flavor || title,
     advantageMode,
     defaultRollMode,
+    rollMode,
     critical,
     fumble,
     targetValue,
@@ -336,6 +337,7 @@ export async function damageRoll({
   const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
   const roll = new CONFIG.Dice.DamageRoll(formula, data, {
     flavor: flavor || title,
+    rollMode,
     critical: isFF ? isCritical : false,
     criticalBonusDice,
     criticalMultiplier,
