@@ -42,7 +42,7 @@ export default class ActorArmorConfig extends DocumentSheet {
     return {
       ac: ac,
       calculations: CONFIG.DND5E.armorClasses,
-      value: this.object._computeArmorClass(actorData).value,
+      value: this.object._computeArmorClass(actorData, {preview: true}).value,
       valueDisabled: !["flat", "natural"].includes(ac.calc),
       formula: ac.calc === "custom" ? ac.formula : cfg.formula,
       formulaDisabled: ac.calc !== "custom"
@@ -85,7 +85,7 @@ export default class ActorArmorConfig extends DocumentSheet {
     // Recompute effective AC
     actorData = foundry.utils.mergeObject(actorData, {"data.attributes.ac": {calc, formula}});
     if ( enableFlat ) actorData.data.attributes.ac.flat = flat;
-    ac = this.object._computeArmorClass(actorData.data);
+    ac = this.object._computeArmorClass(actorData.data, {preview: true});
 
     // Update fields
     this.form["ac.formula"].value = ac.formula;
