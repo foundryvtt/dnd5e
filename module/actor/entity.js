@@ -662,7 +662,7 @@ export default class Actor5e extends Actor {
       return obj;
     }, {armors: [], shields: []});
 
-    // Determine base AC
+    // Determine AC formula result
     switch ( ac.calc ) {
 
       // Flat AC (no additional bonuses)
@@ -672,7 +672,7 @@ export default class Actor5e extends Actor {
 
       // Natural AC (includes bonuses)
       case "natural":
-        ac.base = Number(ac.flat);
+        ac.result = Number(ac.flat);
         break;
 
       default:
@@ -683,7 +683,7 @@ export default class Actor5e extends Actor {
           const armorData = armors[0].data.data.armor;
           const isHeavy = armorData.type === "heavy";
           ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex?.mod ?? 0);
-          rollData.attributes.ac.base = armorData.value ?? 0;
+          rollData.attributes.ac.base = armorData.value ?? ac.base;
           ac.equippedArmor = armors[0];
         } else {
           ac.dex = data.abilities.dex?.mod ?? 0;
@@ -691,11 +691,11 @@ export default class Actor5e extends Actor {
         rollData.attributes.ac.dex = ac.dex;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          ac.result = Roll.safeEval(replaced);
         } catch(err) {
           ac.warnings.push("DND5E.WarnBadACFormula");
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = Roll.safeEval(replaced);
+          ac.result = Roll.safeEval(replaced);
         }
         break;
     }
@@ -708,7 +708,7 @@ export default class Actor5e extends Actor {
     }
 
     // Compute total AC and return
-    ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
+    ac.value = ac.result + ac.shield + ac.bonus + ac.cover;
     return ac;
   }
 
