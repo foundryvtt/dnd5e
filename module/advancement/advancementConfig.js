@@ -30,7 +30,6 @@ export class AdvancementConfig extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "dialog"],
-      dragDrop: [{ dropSelector: ".drop-target" }],
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
       width: 400,
       height: "auto"
@@ -47,25 +46,6 @@ export class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Remove an item from the list
-    html.on("click", ".item-delete", event => {
-      const parentElement = $(event.currentTarget).parents("[data-item-uuid]");
-      const uuidToDelete = parentElement.data("itemUuid");
-
-      const updates = {
-        configuration: this.prepareConfigurationUpdate({
-          items: this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete)
-        })
-      };
-
-      return this._updateAdvancement(updates);
-    });
-  }
-
-
   /** @inheritdoc */
   getData() {
     return {
@@ -78,64 +58,6 @@ export class AdvancementConfig extends FormApplication {
       showClassRestrictions: this.parent.type === "class",
       showLevelSelector: !this.advancement.constructor.multiLevel
     };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  _canDragDrop() {
-    return this.isEditable;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _onDrop(event) {
-    // Try to extract the data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
-      return false;
-    }
-
-    if (this.advancement.data.type === "ItemGrant") {
-      return this._onDropItemGrantItem(event, data);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle dropping of an item reference or item data onto the Advancement Config for ItemGrant
-   * @param {DragEvent} event     The concluding DragEvent which contains drop data
-   * @param {object} data         The data transfer extracted from the event
-   * @returns {Promise<object>}    A data object which describes the result of the drop
-   * @private
-   */
-  async _onDropItemGrantItem(event, data) {
-    if (data.type !== "Item") return false;
-    const item = await Item.implementation.fromDropData(data);
-
-    const existingItems = this.advancement.data.configuration.items;
-
-    // Abort if this uuid exists already
-    if (existingItems.includes(item.uuid)) {
-      ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
-
-      return false;
-    }
-
-    const updates = {
-      configuration: this.prepareConfigurationUpdate({
-        items: [
-          ...existingItems,
-          item.uuid
-        ]
-      })
-    };
-
-    return this._updateAdvancement(updates);
   }
 
   /* -------------------------------------------- */
