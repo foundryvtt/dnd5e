@@ -1,5 +1,6 @@
 import { Advancement } from "./advancement/advancement.js";
 import { AdvancementConfig } from "./advancement/advancementConfig.js";
+import { AdvancementFlow } from "./advancement/advancementFlow.js";
 import { AdvancementSelection } from "./advancement/advancementSelection.js";
 import { HitPointsAdvancement } from "./advancement/hitPoints.js";
 import { ItemGrantAdvancement } from "./advancement/itemGrant.js";
@@ -7,6 +8,7 @@ import { ItemGrantAdvancement } from "./advancement/itemGrant.js";
 const advancement = {
   Advancement,
   AdvancementConfig,
+  AdvancementFlow,
   AdvancementSelection,
   types: {
     HitPointsAdvancement,
