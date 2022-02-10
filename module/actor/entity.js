@@ -500,7 +500,7 @@ export default class Actor5e extends Actor {
    */
   _prepareBaseArmorClass(actorData) {
     const ac = actorData.data.attributes.ac;
-    ac.base = 10;
+    ac.armor = 10;
     ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
     this.shield = null;
@@ -662,7 +662,7 @@ export default class Actor5e extends Actor {
       return obj;
     }, {armors: [], shields: []});
 
-    // Determine AC formula result
+    // Determine base AC
     switch ( ac.calc ) {
 
       // Flat AC (no additional bonuses)
@@ -672,7 +672,7 @@ export default class Actor5e extends Actor {
 
       // Natural AC (includes bonuses)
       case "natural":
-        ac.result = Number(ac.flat);
+        ac.base = Number(ac.flat);
         break;
 
       default:
@@ -682,20 +682,20 @@ export default class Actor5e extends Actor {
           if ( armors.length > 1 ) ac.warnings.push("DND5E.WarnMultipleArmor");
           const armorData = armors[0].data.data.armor;
           const isHeavy = armorData.type === "heavy";
+          ac.armor = armorData.value ?? ac.armor;
           ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex?.mod ?? 0);
-          rollData.attributes.ac.base = armorData.value ?? ac.base;
           ac.equippedArmor = armors[0];
         } else {
           ac.dex = data.abilities.dex?.mod ?? 0;
         }
-        rollData.attributes.ac.dex = ac.dex;
+        rollData.attributes.ac = ac;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.result = Roll.safeEval(replaced);
+          ac.base = Roll.safeEval(replaced);
         } catch(err) {
           ac.warnings.push("DND5E.WarnBadACFormula");
           const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.result = Roll.safeEval(replaced);
+          ac.base = Roll.safeEval(replaced);
         }
         break;
     }
@@ -708,7 +708,7 @@ export default class Actor5e extends Actor {
     }
 
     // Compute total AC and return
-    ac.value = ac.result + ac.shield + ac.bonus + ac.cover;
+    ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
     return ac;
   }
 

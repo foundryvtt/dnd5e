@@ -283,25 +283,25 @@ export default class ActorSheet5e extends ActorSheet {
 
       default:
         const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        let result = ac.result;
+        let base = ac.base;
         const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
         for ( const [match, term] of formula.matchAll(dataRgx) ) {
           const value = String(foundry.utils.getProperty(data, term));
-          if ( (term === "attributes.ac.base") || (value === "0") ) continue;
-          if ( Number.isNumeric(value) ) result -= Number(value);
+          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
+          if ( Number.isNumeric(value) ) base -= Number(value);
           attribution.push({
             label: match,
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value
           });
         }
-        const armorInFormula = formula.includes("@attributes.ac.base");
+        const armorInFormula = formula.includes("@attributes.ac.armor");
         let label = game.i18n.localize("DND5E.PropertyBase");
         if ( armorInFormula ) label = this.actor.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
         attribution.unshift({
           label,
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: result
+          value: base
         });
         break;
     }
