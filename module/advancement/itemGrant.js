@@ -41,27 +41,6 @@ export class ItemGrantConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  getData() {
-    const data = super.getData();
-    data.classIdentifier = this.parent.identifier;
-
-    let lastValue = "";
-    data.levels = this.advancement.constructor.allLevels.reduce((obj, level) => {
-      obj[level] = { placeholder: lastValue, value: "" };
-      const value = this.data.configuration.scale[level];
-      if ( value && (value !== lastValue) ) {
-        obj[level].value = value;
-        lastValue = value;
-      }
-      return obj;
-    }, {});
-
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
   _canDragDrop() {
     return this.isEditable;
   }
@@ -100,14 +79,6 @@ export class ItemGrantConfig extends AdvancementConfig {
     };
 
     return this._updateAdvancement(updates);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  prepareConfigurationUpdate(configuration) {
-    configuration.scale = this.constructor._cleanedObject(configuration.scale);
-    return configuration;
   }
 
 }

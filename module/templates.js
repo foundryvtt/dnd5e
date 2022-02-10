@@ -27,7 +27,7 @@ export const preloadHandlebarsTemplates = async function() {
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-controls.html",
-    "systems/dnd5e/templates/advancement/parts/advancement-item-grant.html"
+    "systems/dnd5e/templates/advancement/item-grant-config.html"
   ]);
 };
 
