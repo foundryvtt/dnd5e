@@ -211,15 +211,12 @@ Hooks.once("ready", function() {
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "1.6.0";
-  const COMPATIBLE_MIGRATION_VERSION = 0.80;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !currentVersion && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.data.version);
-  const needsMigration = !currentVersion || isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
-  if ( !needsMigration ) return;
+  if ( currentVersion && !isNewerVersion(game.system.data.flags.needsMigrationVersion, currentVersion) ) return;
 
   // Perform the migration
-  if ( currentVersion && isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion) ) {
+  if ( currentVersion && isNewerVersion(game.system.data.flags.compatibleMigrationVersion, currentVersion) ) {
     ui.notifications.error(game.i18n.localize("MIGRATION.5eVersionTooOldWarning"), {permanent: true});
   }
   migrations.migrateWorld();
