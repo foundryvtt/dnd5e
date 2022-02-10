@@ -1,17 +1,17 @@
 {
-  "name": "dnd5e",
-  "title": "DnD5e - Fifth Edition System",
-  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "1.5.7",
-  "author": "Atropos",
+  "name": "gun5e",
+  "title": "Gundam Fifth Edition System",
+  "description": "Fuck you Cara.",
+  "version": "0.0.1",
+  "author": "WarpedTech, Atropos",
   "scripts": [],
-  "esmodules": ["dnd5e.js"],
-  "styles": ["dnd5e.css"],
+  "esmodules": ["gun5e.js"],
+  "styles": ["gun5e.css"],
   "packs": [
     {
       "name": "heroes",
       "label": "Starter Heroes",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/heroes.db",
       "entity": "Actor",
       "type": "Actor"
@@ -19,7 +19,7 @@
     {
       "name": "monsters",
       "label": "Monsters (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/monsters.db",
       "entity": "Actor",
       "type": "Actor"
@@ -27,7 +27,7 @@
     {
       "name": "items",
       "label": "Items (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/items.db",
       "entity": "Item",
       "type": "Item"
@@ -35,7 +35,7 @@
     {
       "name": "tradegoods",
       "label": "Trade Goods (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/tradegoods.db",
       "entity": "Item",
       "type": "Item"
@@ -43,7 +43,7 @@
     {
       "name": "spells",
       "label": "Spells (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/spells.db",
       "entity": "Item",
       "type": "Item"
@@ -51,7 +51,7 @@
     {
       "name": "classes",
       "label": "Classes (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/classes.db",
       "entity": "Item",
       "type": "Item"
@@ -59,7 +59,7 @@
     {
       "name": "classfeatures",
       "label": "Class Features (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/classfeatures.db",
       "entity": "Item",
       "type": "Item"
@@ -67,7 +67,7 @@
     {
       "name": "races",
       "label": "Racial Features (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/races.db",
       "entity": "Item",
       "type": "Item"
@@ -75,7 +75,7 @@
     {
       "name": "monsterfeatures",
       "label": "Monster Features (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/monsterfeatures.db",
       "entity": "Item",
       "type": "Item"
@@ -83,7 +83,7 @@
     {
       "name": "rules",
       "label": "Rules (SRD)",
-      "system": "dnd5e",
+      "system": "gun5e",
       "path": "./packs/rules.db",
       "entity": "JournalEntry",
       "type": "JournalEntry"
