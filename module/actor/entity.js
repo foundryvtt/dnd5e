@@ -368,6 +368,8 @@ export default class Actor5e extends Actor {
     actorData.data.abilities = abilities;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Update the actor's skill list to match the skills configured in `DND5E.skills`.
    * @param {ActorData} actorData  Data being prepared.
@@ -388,6 +390,8 @@ export default class Actor5e extends Actor {
     }
     actorData.data.skills = skills;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Perform any Character specific preparation.
