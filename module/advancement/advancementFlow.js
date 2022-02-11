@@ -22,10 +22,11 @@ export class AdvancementFlow extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement"],
+      classes: ["dnd5e", "advancement", "flow"],
       template: "systems/dnd5e/templates/advancement/advancement-flow.html",
       width: 520,
-      height: "auto"
+      height: "auto",
+      title: "Advance"
     });
   }
 

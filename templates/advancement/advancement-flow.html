@@ -1,3 +1,111 @@
 <form autocomplete="off">
-  You be advancing!
+
+  <h1>Bard <em>(Primary Class)</em></h1>
+
+  <section data-type="HitPoints">
+    <h3>
+      Hit Points
+      <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
+        <i class="fas fa-check-circle"></i>
+      </div></h3>
+    <div>
+      Max at 1st Level: 8
+    </div>
+  </section>
+
+  <section data-type="Trait">
+    <h3>
+      Armor Proficiencies
+      <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
+        <i class="fas fa-check-circle"></i>
+      </div>
+    </h3>
+    <div class="tag-list">
+      <span class="tag">Light Armor</span>
+    </div>
+  </section>
+
+  <section data-type="Trait">
+    <h3>
+      Saving Throw Proficiencies
+      <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
+        <i class="fas fa-check-circle"></i>
+      </div>
+    </h3>
+    <div class="tag-list">
+      <span class="tag">Dexterity</span>
+      <span class="tag">Charisma</span>
+    </div>
+  </section>
+
+  <section data-type="Trait">
+    <h3>Skill Proficiencies</h3>
+    <select>
+      <option>Select 2 more skills</option>
+      <option>Athletics</option>
+    </select>
+    <div class="tag-list">
+      <span class="tag">Acrobatics</span>
+    </div>
+  </section>
+
+  <section data-type="Trait">
+    <h3>Tool Proficiencies</h3>
+    <select>
+      <option>Select 3 more tools</option>
+      <option>Hammered Dulcimer</option>
+    </select>
+  </section>
+
+  <section data-type="Trait">
+    <h3>
+      Weapon Proficiencies
+      <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
+        <i class="fas fa-check-circle"></i>
+      </div>
+    </h3>
+    <div class="tag-list">
+      <span class="tag">Simple Weapons</span>
+      <span class="tag">Hand Crossbow</span>
+      <span class="tag">Longsword</span>
+      <span class="tag">Rapier</span>
+      <span class="tag">Shortsword</span>
+    </div>
+  </section>
+
+  <section data-type="ItemGrant">
+    <h3>
+      Features
+      <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
+        <i class="fas fa-check-circle"></i>
+      </div>
+    </h3>
+    <div class="item-name flexrow">
+      <div class="item-image" style="background-image:url(icons/skills/melee/unarmed-punch-fist.webp)"></div>
+      <label class="flexrow">
+        <h4>Bardic Inspiration</h4>
+        <input type="checkbox" checked>
+      </label>
+    </div>
+    <div class="item-name flexrow">
+      <div class="item-image" style="background-image:url(icons/magic/symbols/runes-carved-stone-yellow.webp)"></div>
+      <label class="flexrow">
+        <h4>Spellcasting (Bard)</h4>
+        <input type="checkbox" checked>
+      </label>
+    </div>
+  </section>
+
+  <section data-type="ScaleValue">
+    <h3>
+      Bardic Inspiration Die
+      <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
+        <i class="fas fa-check-circle"></i>
+      </div>
+    </h3>
+    <p>
+      <span class="initial-scale-value none">None</span> &#x27A1; <span class="new-scale-value">d6</span>
+    </p>
+  </section>
+
 </form>
