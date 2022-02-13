@@ -1781,7 +1781,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "int",
@@ -1831,7 +1831,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
       "effects": [],
       "folder": null,

@@ -613,7 +613,7 @@
       "img": "systems/dnd5e/icons/spells/fog-water-air-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You create a 20-foot-radius Sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the Duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.</p>",
+          "value": "<p>You create a 20-foot-radius Sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the Duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -631,7 +631,7 @@
           "value": 20,
           "width": null,
           "units": "ft",
-          "type": "radius"
+          "type": "sphere"
         },
         "range": {
           "value": 120,
@@ -645,7 +645,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -700,7 +700,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX"
+        }
+      }
     },
     {
       "_id": "D4cqlN9pDyQwRvWP",

@@ -621,9 +621,9 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
-          "units": "",
+          "units": "any",
           "type": "space"
         },
         "range": {
@@ -638,7 +638,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -693,7 +693,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CAxSzHWizrafT033"
+        }
+      }
     },
     {
       "_id": "bnn5FtL0QXRDJHeV",
@@ -734,7 +738,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -752,7 +756,7 @@
         },
         "formula": "",
         "save": {
-          "ability": "int",
+          "ability": "",
           "dc": 12,
           "scaling": "spell"
         },
@@ -788,7 +792,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.oIzA2MEHwxhtQneU"
+        }
+      }
     },
     {
       "_id": "qBxbNPknOe4m9XVe",
@@ -797,7 +805,7 @@
       "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
       "data": {
         "description": {
-          "value": "<p>You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 <em>psychic damage</em> and have disadvantage on the next attack roll it makes before the end of its next turn.</p>\n<p>This spell's damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).</p>",
+          "value": "<p>You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn.</p><p>This spell's damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -829,11 +837,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -887,7 +895,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.cdrYKaFi98YWaBMw"
+        }
+      }
     },
     {
       "_id": "TwdKEVj1NjVefyq9",

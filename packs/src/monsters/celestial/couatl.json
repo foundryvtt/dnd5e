@@ -622,10 +622,10 @@
           "units": "minute"
         },
         "target": {
-          "value": null,
+          "value": 30,
           "width": null,
-          "units": null,
-          "type": "self"
+          "units": "ft",
+          "type": "radius"
         },
         "range": {
           "value": null,
@@ -639,7 +639,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -694,7 +694,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        }
+      }
     },
     {
       "_id": "dxe0S2Q3d9tYzE7d",
@@ -735,7 +739,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -790,7 +794,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "LVKrEidPWuCPkMiw",
@@ -799,7 +807,7 @@
       "img": "systems/dnd5e/icons/spells/light-eerie-2.jpg",
       "data": {
         "description": {
-          "value": "<p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an Intelligence of 3 or lower or doesn't speak any language, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature—what is most on its mind in that moment. As an action, you can either shift your attention to another creature's thoughts or attempt to probe deeper into the same creature's mind. If you probe deeper, the target must make a <strong>Wisdom</strong> saving throw. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature's thoughts, the creature can use its action on its turn to make an Intelligence check contested by your Intelligence check; if it succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can't see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can't detect a creature with an Intelligence of 3 or lower or one that doesn't speak any language.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can't see it, but it must still be within range.</p>",
+          "value": "<p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an Intelligence of 3 or lower or doesn't speak any language, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature—what is most on its mind in that moment. As an action, you can either shift your attention to another creature's thoughts or attempt to probe deeper into the same creature's mind. If you probe deeper, the target must make a Wisdom saving throw. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature's thoughts, the creature can use its action on its turn to make an Intelligence check contested by your Intelligence check; if it succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can't see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can't detect a creature with an Intelligence of 3 or lower or one that doesn't speak any language.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can't see it, but it must still be within range.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -831,11 +839,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -885,7 +893,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ppWAAEul0QHtm4er"
+        }
+      }
     },
     {
       "_id": "bNE25ZvSvdKsegoR",
@@ -942,7 +954,7 @@
           "versatile": "",
           "value": ""
         },
-        "formula": "",
+        "formula": "1d4",
         "save": {
           "ability": "",
           "dc": null,
@@ -975,13 +987,60 @@
         },
         "attunement": 0
       },
-      "effects": [],
+      "effects": [
+        {
+          "_id": "8rP3gwmXVTgZqYZE",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.bonuses.abilities.save",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.mwak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.msak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.rsak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.rwak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 60,
+            "rounds": 10
+          },
+          "icon": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
+          "label": "Bless",
+          "origin": "Item.kZZAZ6kp9YzgPQEe",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
+        }
+      }
     },
     {
       "_id": "2Q0o3SZILV6VWXlZ",
@@ -1005,9 +1064,9 @@
           "units": "inst"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
-          "units": "",
+          "units": "any",
           "type": "space"
         },
         "range": {
@@ -1022,7 +1081,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1077,7 +1136,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.BV0mpbHh29IbbIj5"
+        }
+      }
     },
     {
       "_id": "dSWyDoj8EPXyFJuz",
@@ -1086,7 +1149,7 @@
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
       "data": {
         "description": {
-          "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
+          "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1118,11 +1181,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "heal",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1132,11 +1195,7 @@
         "damage": {
           "parts": [
             [
-              "1d8",
-              "healing"
-            ],
-            [
-              "@mod",
+              "1d8 + @mod",
               "healing"
             ]
           ],
@@ -1171,7 +1230,7 @@
         },
         "scaling": {
           "mode": "level",
-          "formula": ""
+          "formula": "1d8"
         },
         "attunement": 0
       },
@@ -1181,7 +1240,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+        }
+      }
     },
     {
       "_id": "eCVIFct4fCtwSX2w",
@@ -1208,7 +1271,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1222,7 +1285,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1277,7 +1340,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV"
+        }
+      }
     },
     {
       "_id": "q4kiZAkIoF8osKbO",
@@ -1286,7 +1353,7 @@
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a <strong>Wisdom</strong> saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p>\n<p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
+          "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1318,11 +1385,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1372,7 +1439,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+        }
+      }
     },
     {
       "_id": "JjughFfXQTXFezgU",
@@ -1396,10 +1467,10 @@
           "units": "round"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "self"
         },
         "range": {
           "value": null,
@@ -1462,13 +1533,39 @@
         },
         "attunement": 0
       },
-      "effects": [],
+      "effects": [
+        {
+          "_id": "6pbotGIvqQkraPva",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.attributes.ac.bonus",
+              "value": "5",
+              "mode": 2
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 1
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
+          "label": "Shield",
+          "origin": "Item.FlLKKv7bQBlIAs11",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+        }
+      }
     },
     {
       "_id": "CAe84N2xiYrbWJtr",
@@ -1477,7 +1574,7 @@
       "img": "systems/dnd5e/icons/spells/fog-magenta-3.jpg",
       "data": {
         "description": {
-          "value": "<p>This spell shapes a creature&rsquo;s dreams. Choose a creature known to you as the target of this spell. The target must be on the same plane of existence as you. Creatures that don&rsquo;t sleep, such as elves, can&rsquo;t be contacted by this spell. You, or a willing creature you touch, enters a trance state, acting as a messenger. While in the trance, the messenger is aware of his or her surroundings, but can&rsquo;t take Actions or move.</p>\n<p>If the target is asleep, the messenger appears in the target&rsquo;s dreams and can converse with the target as long as it remains asleep, through the Duration of the spell. The messenger can also shape The Environment of the dream, creating landscapes, Objects, and other images. The messenger can emerge from the trance at any time, ending the effect of the spell early. The target recalls the dream perfectly upon waking. If the target is awake when you cast the spell, the messenger knows it, and can either end the trance (and the spell) or wait for the target to fall asleep, at which point the messenger appears in the target&rsquo;s dreams.</p>\n<p>You can make the messenger appear monstrous and terrifying to the target. If you do, the messenger can deliver a message of no more than ten words and then the target must make a <strong>Wisdom</strong> saving throw. On a failed save, echoes of the phantasmal monstrosity spawn a nightmare that lasts the Duration of the target&rsquo;s sleep and prevents the target from gaining any benefit from that rest. In addition, when the target wakes up, it takes 3d6 <em>psychic damage</em>.</p>\n<p>If you have a body part, lock of hair, clipping from a nail, or similar portion of the target&rsquo;s body, the target makes its saving throw with disadvantage.</p>",
+          "value": "<p>This spell shapes a creature&rsquo;s dreams. Choose a creature known to you as the target of this spell. The target must be on the same plane of existence as you. Creatures that don&rsquo;t sleep, such as elves, can&rsquo;t be contacted by this spell. You, or a willing creature you touch, enters a trance state, acting as a messenger. While in the trance, the messenger is aware of his or her surroundings, but can&rsquo;t take Actions or move.</p><p>If the target is asleep, the messenger appears in the target&rsquo;s dreams and can converse with the target as long as it remains asleep, through the Duration of the spell. The messenger can also shape The Environment of the dream, creating landscapes, Objects, and other images. The messenger can emerge from the trance at any time, ending the effect of the spell early. The target recalls the dream perfectly upon waking. If the target is awake when you cast the spell, the messenger knows it, and can either end the trance (and the spell) or wait for the target to fall asleep, at which point the messenger appears in the target&rsquo;s dreams.</p><p>You can make the messenger appear monstrous and terrifying to the target. If you do, the messenger can deliver a message of no more than ten words and then the target must make a Wisdom saving throw. On a failed save, echoes of the phantasmal monstrosity spawn a nightmare that lasts the Duration of the target&rsquo;s sleep and prevents the target from gaining any benefit from that rest. In addition, when the target wakes up, it takes 3d6 psychic damage.</p><p>If you have a body part, lock of hair, clipping from a nail, or similar portion of the target&rsquo;s body, the target makes its saving throw with disadvantage.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1500,7 +1597,7 @@
         "range": {
           "value": null,
           "long": null,
-          "units": "spec"
+          "units": "self"
         },
         "uses": {
           "value": 1,
@@ -1509,11 +1606,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1569,7 +1666,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.kSPRpeIx3w3nihrF"
+        }
+      }
     },
     {
       "_id": "f3VEj8uY8hu6O9Zp",
@@ -1593,10 +1694,10 @@
           "units": "inst"
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1610,7 +1711,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1665,7 +1766,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk"
+        }
+      }
     },
     {
       "_id": "ybFJbGjord15IwoC",
@@ -1674,14 +1779,14 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-eerie-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a <strong>Wisdom</strong> saving throw, which is modified by how well you know the target and the sort of physical connection you have to it. If a target knows you're casting this spell, it can fail the saving throw voluntarily if it wants to be observed.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Knowledge</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Secondhand (you have heard of the target)</td>\n<td>+5</td>\n</tr>\n<tr>\n<td>Firsthand (you have met the target)</td>\n<td>+0</td>\n</tr>\n<tr>\n<td>Familiar (you know the target well)</td>\n<td>-5</td>\n</tr>\n</tbody>\n</table><table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Connection</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Likeness or picture</td>\n<td>-2</td>\n</tr>\n<tr>\n<td>Possession or garment</td>\n<td>-4</td>\n</tr>\n<tr>\n<td>Body part, lock of hair, bit of nail, or the like</td>\n<td>-10</td>\n</tr>\n</tbody>\n</table>\n<p>On a successful save, the target isn't affected, and you can't use this spell against it again for 24 hours.</p>\n<p>On a failed save, the spell creates an Invisible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the Duration. A creature that can see Invisile Objects sees the sensor as a luminous orb about the size of your fist.</p>\n<p>Instead of targeting a creature, you can choose a location you have seen before as the target of this spell. When you do, the sensor appears at that location and doesn't move.</p>",
+          "value": "<p>You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a Wisdom saving throw, which is modified by how well you know the target and the sort of physical connection you have to it. If a target knows you're casting this spell, it can fail the saving throw voluntarily if it wants to be observed.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Knowledge</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Secondhand (you have heard of the target)</td>\n<td>+5</td>\n</tr>\n<tr>\n<td>Firsthand (you have met the target)</td>\n<td>+0</td>\n</tr>\n<tr>\n<td>Familiar (you know the target well)</td>\n<td>-5</td>\n</tr>\n</tbody>\n</table>\n\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Connection</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Likeness or picture</td>\n<td>-2</td>\n</tr>\n<tr>\n<td>Possession or garment</td>\n<td>-4</td>\n</tr>\n<tr>\n<td>Body part, lock of hair, bit of nail, or the like</td>\n<td>-10</td>\n</tr>\n</tbody>\n</table>\n<p>On a successful save, the target isn't affected, and you can't use this spell against it again for 24 hours.</p><p>On a failed save, the spell creates an Invisible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the Duration. A creature that can see Invisile Objects sees the sensor as a luminous orb about the size of your fist.</p><p>Instead of targeting a creature, you can choose a location you have seen before as the target of this spell. When you do, the sensor appears at that location and doesn't move.</p>",
           "chat": "",
           "unidentified": ""
         },
         "source": "PHB pg. 273",
         "activation": {
-          "type": "none",
-          "cost": 0,
+          "type": "minute",
+          "cost": 10,
           "condition": ""
         },
         "duration": {
@@ -1692,7 +1797,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1706,11 +1811,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1760,7 +1865,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.fVbCxFRaORalHB20"
+        }
+      }
     },
     {
       "_id": "7M1OrMoMMTCEKxta",
@@ -2292,7 +2401,7 @@
       "img": "systems/dnd5e/icons/spells/protect-acid-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You touch a creature. If it is poisoned, you neutralize the poison. If more than one poison afflicts the target, you neutralize one poison that you know is present, or you neutralize one at random.</p>\n<p>For the duration, the target has advantage on saving throws against being poisoned, and it has resistance to <em>poison damage</em>.</p>",
+          "value": "<p>You touch a creature. If it is poisoned, you neutralize the poison. If more than one poison afflicts the target, you neutralize one poison that you know is present, or you neutralize one at random.</p><p>For the duration, the target has advantage on saving throws against being poisoned, and it has resistance to poison damage.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2324,7 +2433,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -2379,7 +2488,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ"
+        }
+      }
     }
   ],
   "effects": [],

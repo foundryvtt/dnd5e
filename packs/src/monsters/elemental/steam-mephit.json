@@ -643,7 +643,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -698,7 +698,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
+        }
+      }
     },
     {
       "_id": "QrN7UxINx4UCaPIC",
