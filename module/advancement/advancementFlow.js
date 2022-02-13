@@ -9,6 +9,8 @@
 export class AdvancementFlow extends FormApplication {
 
   constructor(actor, stages, options={}) {
+    if ( actor === 2 ) options.template = "systems/dnd5e/templates/advancement/advancement-flow-2.html";
+    
     super(actor, options);
 
     /**

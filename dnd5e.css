@@ -1312,6 +1312,11 @@
 /* ----------------------------------------- */
 /*  Advancement Flow                         */
 /* ----------------------------------------- */
+.dnd5e.advancement.flow h1 .level {
+  float: right;
+  font-size: 0.8em;
+  line-height: 1.8em;
+}
 .dnd5e.advancement.flow h3 {
   font-size: 1.25rem;
 }
@@ -1319,6 +1324,9 @@
   float: inline-end;
   color: #119111;
   font-size: 1rem;
+}
+.dnd5e.advancement.flow .advancement-controls {
+  margin-block-end: 1em;
 }
 .dnd5e.advancement.flow .item-name .item-image {
   flex: 0 0 30px;
@@ -1339,7 +1347,26 @@
   padding-block-end: 1em;
 }
 .dnd5e.advancement.flow section[data-type="HitPoints"] div {
-  font-size: 1rem;
+  font-size: 0.8rem;
+}
+.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls {
+  display: flex;
+  align-items: center;
+}
+.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls input[name="result"] {
+  flex: 0 1 5em;
+  text-align: center;
+}
+.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls button[name="roll"] {
+  flex: 0 1 8em;
+  height: calc(var(--form-field-height) + 5px);
+  margin-left: 4px;
+  line-height: 1.5em;
+}
+.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls label {
+  flex: 1 1 10em;
+  text-align: end;
+  font-size: 0.9rem;
 }
 .dnd5e.advancement.flow section[data-type="ScaleValue"] p {
   margin-block-end: 0;
@@ -1355,6 +1382,13 @@
 .dnd5e.advancement.flow section[data-type="Trait"] .tag-list .tag {
   font-size: 0.8rem;
   line-height: 1.6em;
+}
+.dnd5e.advancement.flow nav {
+  display: flex;
+  justify-content: flex-end;
+}
+.dnd5e.advancement.flow nav button {
+  flex-basis: 15em;
 }
 .dnd5e.sheet.item {
   min-height: 400px;

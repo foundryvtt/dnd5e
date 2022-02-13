@@ -39,6 +39,14 @@
 /*  Advancement Flow                         */
 /* ----------------------------------------- */
 .dnd5e.advancement.flow {
+  h1 {
+    .level {
+      float: right;
+      font-size: 0.8em;
+      line-height: 1.8em;
+    }
+  }
+
   h3 {
     // font-weight: bold;
     font-size: 1.25rem;
@@ -48,6 +56,10 @@
       color: rgb(17 145 17);
       font-size: 1rem;
     }
+  }
+
+  .advancement-controls {
+    margin-block-end: 1em;
   }
 
   .item-name {
@@ -74,7 +86,27 @@
 
   section[data-type="HitPoints"] {
     div {
-      font-size: 1rem;
+      font-size: 0.8rem;
+    }
+    .rolls {
+      display: flex;
+      align-items: center;
+
+      input[name="result"] {
+        flex: 0 1 5em;
+        text-align: center;
+      }
+      button[name="roll"] {
+        flex: 0 1 8em;
+        height: calc(var(--form-field-height) + 5px);
+        margin-left: 4px;
+        line-height: 1.5em;
+      }
+      label {
+        flex: 1 1 10em;
+        text-align: end;
+        font-size: 0.9rem;
+      }
     }
   }
 
@@ -94,6 +126,14 @@
     .tag-list .tag {
       font-size: 0.8rem;
       line-height: 1.6em;
+    }
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      flex-basis: 15em;
     }
   }
 }
