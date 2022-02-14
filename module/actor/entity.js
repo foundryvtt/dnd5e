@@ -500,7 +500,7 @@ export default class Actor5e extends Actor {
    */
   _prepareBaseArmorClass(actorData) {
     const ac = actorData.data.attributes.ac;
-    ac.base = 10;
+    ac.armor = 10;
     ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
     this.shield = null;
@@ -675,25 +675,20 @@ export default class Actor5e extends Actor {
         ac.base = Number(ac.flat);
         break;
 
-      // Equipment-based AC
-      case "default":
+      default:
+        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+        const rollData = foundry.utils.deepClone(this.getRollData());
         if ( armors.length ) {
           if ( armors.length > 1 ) ac.warnings.push("DND5E.WarnMultipleArmor");
           const armorData = armors[0].data.data.armor;
           const isHeavy = armorData.type === "heavy";
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex.mod);
-          ac.base = (armorData.value ?? 0) + ac.dex;
+          ac.armor = armorData.value ?? ac.armor;
+          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
         } else {
           ac.dex = data.abilities.dex?.mod ?? 0;
-          ac.base = 10 + ac.dex;
         }
-        break;
-
-      // Formula-based AC
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        const rollData = this.getRollData();
+        rollData.attributes.ac = ac;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
           ac.base = Roll.safeEval(replaced);
