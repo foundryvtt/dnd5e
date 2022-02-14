@@ -281,40 +281,25 @@ export default class ActorSheet5e extends ActorSheet {
         });
         break;
 
-      // Equipment-based AC
-      case "default":
-        const hasArmor = !!this.actor.armor;
-        attribution.push({
-          label: hasArmor ? this.actor.armor.name : game.i18n.localize("DND5E.ArmorClassUnarmored"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: hasArmor ? this.actor.armor.data.data.armor.value : 10
-        });
-        if ( ac.dex !== 0 ) {
-          attribution.push({
-            label: game.i18n.localize("DND5E.AbilityDex"),
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value: ac.dex
-          });
-        }
-        break;
-
-      // Other AC formula
       default:
         const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         let base = ac.base;
         const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
         for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = foundry.utils.getProperty(data, term);
-          if ( (term === "attributes.ac.base") || (value === 0) ) continue;
+          const value = String(foundry.utils.getProperty(data, term));
+          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
           if ( Number.isNumeric(value) ) base -= Number(value);
           attribution.push({
             label: match,
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value: foundry.utils.getProperty(data, term)
+            value
           });
         }
+        const armorInFormula = formula.includes("@attributes.ac.armor");
+        let label = game.i18n.localize("DND5E.PropertyBase");
+        if ( armorInFormula ) label = this.actor.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
         attribution.unshift({
-          label: game.i18n.localize("DND5E.PropertyBase"),
+          label,
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: base
         });
