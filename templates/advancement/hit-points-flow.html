@@ -1,0 +1,17 @@
+{{#if (eq level 1)}}
+
+  <div>
+    Max at 1st Level: <strong>{{ dieValue }}</strong>
+  </div>
+
+{{else}}
+
+  <div class="rolls">
+    <label>Take Average</label>
+    <input type="checkbox" name="{{advancement.id}}.useAverage" {{checked data.useAverage}}>
+    <div class="spacer"></div>
+    <input type="number" name="{{advancement.id}}.value" value="{{data.value}}">
+    <button type="button" name="roll"><i class="fas fa-dice-d20"></i> Roll {{hitDie}}</button>
+  </div>
+
+{{/if}}

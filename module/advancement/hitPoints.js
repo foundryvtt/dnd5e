@@ -1,4 +1,36 @@
 import { Advancement } from "./advancement.js";
+import { AdvancementFlow } from "./advancementFlow.js";
+
+
+/**
+ * Inline application that presents hit points selection upon level up.
+ */
+export class HitPointsFlow extends AdvancementFlow {
+  
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/hit-points-flow.html"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getData() {
+    const thisLevel = this.advancement.data.value[this.options.level];
+    return foundry.utils.mergeObject(super.getData(), {
+      hitDie: this.advancement.parent.data.data.hitDice,
+      dieValue: this.advancement.parent.data.data.hitDice.substring(1),
+      data: {
+        value: Number.isInteger(thisLevel) ? thisLevel : "",
+        useAverage: thisLevel === true
+      }
+    });
+  }
+
+}
+
 
 /**
  * Advancement that presents the player with the option to roll hit points at each level or select the average value.
@@ -30,6 +62,11 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   static hint = "DND5E.AdvancementHitPointsHint";
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static flowApp = HitPointsFlow;
 
   /* -------------------------------------------- */
 

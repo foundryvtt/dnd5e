@@ -1,4 +1,5 @@
 import { AdvancementConfig } from "./advancementConfig.js";
+import { AdvancementFlow } from "./advancementFlow.js";
 
 /**
  * Abstract base class which various advancement types can subclass.
@@ -107,6 +108,13 @@ export class Advancement {
    * Subclass of AdvancementConfig that allows for editing of this advancement type.
    */
   static configApp = AdvancementConfig;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
+   */
+  static flowApp = AdvancementFlow;
 
   /* -------------------------------------------- */
 
