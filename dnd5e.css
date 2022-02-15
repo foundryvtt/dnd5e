@@ -1357,6 +1357,9 @@
   flex: 0 1 5em;
   text-align: center;
 }
+.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls .spacer {
+  flex: 1 0 0;
+}
 .dnd5e.advancement.flow section[data-type="HitPoints"] .rolls button[name="roll"] {
   flex: 0 1 8em;
   height: calc(var(--form-field-height) + 5px);
@@ -1364,8 +1367,6 @@
   line-height: 1.5em;
 }
 .dnd5e.advancement.flow section[data-type="HitPoints"] .rolls label {
-  flex: 1 1 10em;
-  text-align: end;
   font-size: 0.9rem;
 }
 .dnd5e.advancement.flow section[data-type="ScaleValue"] p {
