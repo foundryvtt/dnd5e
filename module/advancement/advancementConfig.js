@@ -85,7 +85,7 @@ export class AdvancementConfig extends FormApplication {
 
   /**
    * A helper to update the advancement and re-render this application with the adjusted advancement displayed.
-   * @param {*} advancementUpdate  The update to the advancement data
+   * @param {object} advancementUpdate  The update to the advancement data
    * @returns {Promise<Item5e>}    The promise for the updated Item which resolves after the application re-renders
    * @private
    */

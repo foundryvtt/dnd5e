@@ -7,7 +7,6 @@ import { AdvancementConfig } from "./advancementConfig.js";
  * @extends {AdvancementConfig}
  */
 export class ItemGrantConfig extends AdvancementConfig {
-  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static get defaultOptions() {
@@ -62,11 +61,14 @@ export class ItemGrantConfig extends AdvancementConfig {
 
     const existingItems = this.advancement.data.configuration.items;
 
+    // Abort if this uuid is the parent item
+    if ( item.uuid === this.parent.uuid ) {
+      return ui.notifications.warn("DND5E.AdvancementItemGrantRecursiveWarning");
+    }
+
     // Abort if this uuid exists already
     if ( existingItems.includes(item.uuid) ) {
-      ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
-
-      return false;
+      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
     }
 
     const updates = {
