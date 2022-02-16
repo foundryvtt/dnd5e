@@ -63,7 +63,7 @@ export class ItemGrantConfig extends AdvancementConfig {
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.parent.uuid ) {
-      return ui.notifications.warn("DND5E.AdvancementItemGrantRecursiveWarning");
+      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
     }
 
     // Abort if this uuid exists already

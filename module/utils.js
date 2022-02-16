@@ -40,7 +40,7 @@ export function indexFromUuid(uuid) {
     index = collection.get(id);
   }
 
-  return index || null;
+  return index || {name: "Unknown"};
 }
 
 /* -------------------------------------------- */
@@ -54,7 +54,6 @@ export function indexFromUuid(uuid) {
  */
 export function _linkForUuid(uuid) {
   const index = game.dnd5e.utils.indexFromUuid(uuid);
-  if ( !index ) return "";
 
   let link;
   if ( uuid.startsWith("Compendium.") ) {
