@@ -17,9 +17,11 @@ export class AdvancementFlow extends Application {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  get defaultOptions() {
+  static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "flow"],
+      width: 460,
+      height: "auto",
       level: null
     });
   }

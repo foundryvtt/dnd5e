@@ -1,5 +1,6 @@
 import { Advancement } from "./advancement.js";
 import { AdvancementConfig } from "./advancementConfig.js";
+import { AdvancementFlow } from "./advancementFlow.js";
 
 /**
  * Configuration application for item grants.
@@ -93,6 +94,38 @@ export class ItemGrantConfig extends AdvancementConfig {
 
 
 /**
+ * Inline application that presents the player with a list of items to be added.
+ */
+export class ItemGrantFlow extends AdvancementFlow {
+
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/item-grant-flow.html"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async getData() {
+    const config = this.advancement.data.configuration.items;
+    const value = this.advancement.data.value.added;
+    const checked = value ? new Set(Object.values(value)) : undefined;
+
+    return foundry.utils.mergeObject(super.getData(), {
+      items: await Promise.all(config.map(async (uuid) => {
+        const item = await fromUuid(uuid);
+        item.checked = checked.has(uuid);
+        return item;
+      }))
+    });
+  }
+
+}
+
+
+/**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
  * skipping any or all of the items.
  *
@@ -134,6 +167,11 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   static configApp = ItemGrantConfig;
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static flowApp = ItemGrantFlow;
 
   /* -------------------------------------------- */
   /*  Display Methods                             */

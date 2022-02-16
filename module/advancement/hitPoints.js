@@ -18,13 +18,13 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   getData() {
-    const thisLevel = this.advancement.data.value[this.options.level];
+    const value = this.advancement.data.value[this.options.level];
     return foundry.utils.mergeObject(super.getData(), {
       hitDie: this.advancement.parent.data.data.hitDice,
       dieValue: this.advancement.parent.data.data.hitDice.substring(1),
       data: {
-        value: Number.isInteger(thisLevel) ? thisLevel : "",
-        useAverage: thisLevel === true
+        value: Number.isInteger(value) ? value : "",
+        useAverage: value === true
       }
     });
   }
