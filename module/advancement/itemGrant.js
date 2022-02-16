@@ -57,13 +57,13 @@ export class ItemGrantConfig extends AdvancementConfig {
       return false;
     }
 
-    if (data.type !== "Item") return false;
+    if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
     const existingItems = this.advancement.data.configuration.items;
 
     // Abort if this uuid exists already
-    if (existingItems.includes(item.uuid)) {
+    if ( existingItems.includes(item.uuid) ) {
       ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
 
       return false;
@@ -124,9 +124,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /**
-   * Subclass of AdvancementConfig that allows for editing of this advancement type.
-   */
+  /** @inheritdoc */
   static configApp = ItemGrantConfig;
 
   /* -------------------------------------------- */
