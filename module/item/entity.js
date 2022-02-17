@@ -354,7 +354,7 @@ export default class Item5e extends Item {
       }
 
       if (rng.reach) {
-        game.i18n.format("DND5E.ReachItemLabel", {reach: rng.reach, units: C.distanceUnits[rng.units]});
+        labels.reach = game.i18n.format("DND5E.ReachItemLabel", {reach: rng.reach, units: C.distanceUnits[rng.units]});
       }
 
       // Duration Label
