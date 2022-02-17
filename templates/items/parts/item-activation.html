@@ -77,9 +77,11 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
+        <input type="text" name="data.range.reach" value="{{data.range.reach}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Reach' }}"/>
+        <span class="sep">|</span>
         <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Normal' }}"/>
         <span class="sep">/</span>
-        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
+        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Long' }}"/>
         <select name="data.range.units">
             {{#select data.range.units}}
             <option value=""></option>

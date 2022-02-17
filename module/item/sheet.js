@@ -325,6 +325,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( (item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation) ) {
       props.push(
         labels.activation,
+        labels.reach,
         labels.range,
         labels.target,
         labels.duration
