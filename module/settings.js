@@ -124,6 +124,7 @@ export const registerSystemSettings = function() {
       keepBio: false,
       keepVision: true,
       keepSelf: false,
+      notKeepAE: false,
       keepAEOnlyOriginNotEquipment: false,
       transformTokens: true
     }
