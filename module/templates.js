@@ -38,6 +38,6 @@ export const preloadHandlebarsTemplates = async function() {
 export const registerHandlebarsHelpers = function() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
-    linkForUuid: _linkForUuid
+    "dnd5e-linkForUuid": _linkForUuid
   });
 };
