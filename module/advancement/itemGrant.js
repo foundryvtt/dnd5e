@@ -23,18 +23,24 @@ export class ItemGrantConfig extends AdvancementConfig {
     super.activateListeners(html);
 
     // Remove an item from the list
-    html.on("click", ".item-delete", event => {
-      const parentElement = $(event.currentTarget).parents("[data-item-uuid]");
-      const uuidToDelete = parentElement.data("itemUuid");
+    html.on("click", ".item-delete", this._onItemDelete.bind(this));
+  }
 
-      const updates = {
-        configuration: this.prepareConfigurationUpdate({
-          items: this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete)
-        })
-      };
+  /* -------------------------------------------- */
 
-      return this._updateAdvancement(updates);
-    });
+  /**
+   * Handle deleting an existing Item entry from the Advancement.
+   * @param {Event} event  The originating click event.
+   * @returns {Promise<Item5e>|undefined}  The promise for the updated parent Item which resolves after the application re-renders
+   * @private
+   */
+  async _onItemDelete(event) {
+    event.preventDefault();
+    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
+    if ( !uuidToDelete ) return;
+    const items = this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete);
+    const updates = { configuration: this.prepareConfigurationUpdate({ items }) };
+    return this._updateAdvancement(updates);
   }
 
   /* -------------------------------------------- */
