@@ -613,7 +613,7 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p>\n<p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p>\n<p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
+          "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -645,7 +645,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -700,7 +700,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+        }
+      }
     },
     {
       "_id": "vu2mWlani0t9sJpB",
@@ -741,7 +745,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -796,7 +800,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "FhtMJRVrup9K4POO",
@@ -805,7 +813,7 @@
       "img": "systems/dnd5e/icons/spells/slice-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
+          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -837,7 +845,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -892,7 +900,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+        }
+      }
     },
     {
       "_id": "o3MdwgbPSlPlcSB2",
@@ -901,7 +913,7 @@
       "img": "systems/dnd5e/icons/spells/wind-magenta-3.jpg",
       "data": {
         "description": {
-          "value": "<p>This spell assails and distorts the minds of creatures, generating illusions and causing uncontrolled actions. Each creature in a sphere of 10-foot-radius centered on a point chosen in the range of the spell must make a <strong>Wisdom</strong> saving throw otherwise it will be affected by the spell.</p>\n<p>An affected target can react and it must start at the beginning of 1d10 each of his game rounds to determine its behavior for that round.</p>\n<p>At the end of each turn, an affected creature can make a saving throw of Wisdom. If successful, the effect of the spell ends for this target.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a level spell slot 5 or more, the radius of the sphere increases by 5 feet for each level of higher spell slot to 4.</p>",
+          "value": "<p>This spell assaults and twists creatures' minds, spawning delusions and provoking uncontrolled action. Each creature in a 10-foot-radius sphere centered on a point you choose within range must succeed on a Wisdom saving throw when you cast this spell or be affected by it.</p>\n<p>An affected target can't take reactions and must roll [[/r 1d10]] at the start of each of its turns to determine its behavior for that turn.</p>\n<table style=\"height:80px;width:98.835%\">\n<thead>\n<tr style=\"height:16px;text-align:center\">\n<td style=\"width:10.1923%;height:16px\">d10</td>\n<td style=\"width:88.8254%;height:16px\">Behaviour</td>\n</tr>\n</thead>\n<tbody>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">1</td>\n<td style=\"width:88.8254%;height:16px\">The creature uses all its movement to move in a random direction. To determine the direction, roll [[/r 1d8]] and assign a direction to each die face. The creature doesn't take an action this turn.</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">2-6</td>\n<td style=\"width:88.8254%;height:16px\">The creature doesn't move or take actions this turn.</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">7-8</td>\n<td style=\"width:88.8254%;height:16px\">The creature uses its action to make a melee attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:10.1923%;height:16px;text-align:center\">9-10</td>\n<td style=\"width:88.8254%;height:16px\">The creature can act and move normally. </td>\n</tr>\n</tbody>\n</table>\n<p><em><strong>At Higher Levels.</strong></em> When you cast this spell using a spell slot of 5th level or higher, the radius of the sphere increases by 5 feet for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -937,7 +949,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -987,7 +999,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.9hQXdMSmerkTsHDe"
+        }
+      }
     },
     {
       "_id": "obLPeFwtVAi6y5Ho",
@@ -996,7 +1012,7 @@
       "img": "systems/dnd5e/icons/spells/link-spirit-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
+          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1028,7 +1044,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1083,7 +1099,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.yfbK8gZqESlaoY5t"
+        }
+      }
     },
     {
       "_id": "NPnyIfzy6LL20PX5",
@@ -1092,7 +1112,7 @@
       "img": "systems/dnd5e/icons/spells/shielding-fire-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 Hit Points or fewer, it is Stunned. Otherwise, the spell has no effect.</p>\n<p>The stunned target must make a <strong>Constitution</strong> saving throw at the end of each of its turns. On a successful save, this stunning effect ends.</p>",
+          "value": "<p>You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 Hit Points or fewer, it is Stunned. Otherwise, the spell has no effect.</p><p>The stunned target must make a Constitution saving throw at the end of each of its turns. On a successful save, this stunning effect ends.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1124,11 +1144,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1178,7 +1198,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.35j2QIMmIk6aEdxj"
+        }
+      }
     },
     {
       "_id": "9kqiKxbLXk7Ved3q",

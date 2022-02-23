@@ -2166,8 +2166,12 @@
         },
         "attunement": 0
       },
-      "sort": 100000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.P7mF2MxSuVJwHRRY"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
       "effects": [],
       "folder": null,
@@ -2265,8 +2269,12 @@
         },
         "attunement": 0
       },
-      "sort": 200000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "effects": [],
       "folder": null,
@@ -2361,8 +2369,12 @@
         },
         "attunement": 0
       },
-      "sort": 300000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
       "effects": [],
       "folder": null,
@@ -2376,7 +2388,7 @@
       "type": "spell",
       "data": {
         "description": {
-          "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+          "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2457,10 +2469,57 @@
         },
         "attunement": 0
       },
-      "sort": 500000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.8dzaICjGy6mTUaUr"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
-      "effects": [],
+      "effects": [
+        {
+          "_id": "8rP3gwmXVTgZqYZE",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.bonuses.abilities.save",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.mwak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.msak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.rsak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            },
+            {
+              "key": "data.bonuses.rwak.attack",
+              "mode": 2,
+              "value": "+1d4"
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 60,
+            "rounds": 10
+          },
+          "icon": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
+          "label": "Bless",
+          "origin": "Item.kZZAZ6kp9YzgPQEe",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "permission": {
         "default": 0
@@ -2504,7 +2563,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -2557,8 +2616,12 @@
         },
         "attunement": 0
       },
-      "sort": 600000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
       "effects": [],
       "folder": null,
@@ -2652,8 +2715,12 @@
         },
         "attunement": 0
       },
-      "sort": 1750000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "effects": [],
       "folder": null,
@@ -2667,7 +2734,7 @@
       "type": "spell",
       "data": {
         "description": {
-          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2747,8 +2814,12 @@
         },
         "attunement": 0
       },
-      "sort": 550000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
       "effects": [],
       "folder": null,
@@ -2762,7 +2833,7 @@
       "type": "spell",
       "data": {
         "description": {
-          "value": "<p>You either create or destroy water.</p><p><strong>Create Water.</strong> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range.</p><p><strong>Destroy Water.</strong> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.</p>",
+          "value": "<p>You either create or destroy water.</p><p><strong>Create Water.</strong> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range.</p><p><strong>Destroy Water.</strong> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2843,8 +2914,12 @@
         },
         "attunement": 0
       },
-      "sort": 575000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.a3XtAO5n2GrqiAh5"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/wind-blue-2.jpg",
       "effects": [],
       "folder": null,
@@ -2858,7 +2933,7 @@
       "type": "spell",
       "data": {
         "description": {
-          "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+          "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2890,7 +2965,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -2938,10 +3013,57 @@
         },
         "attunement": 0
       },
-      "sort": 400000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.95K2aUhAGV9qXjnf"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
-      "effects": [],
+      "effects": [
+        {
+          "_id": "potjmpJPeUA1U4oe",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.bonuses.abilities.save",
+              "value": "-1d4",
+              "mode": 2
+            },
+            {
+              "key": "data.bonuses.mwak.attack",
+              "value": "-1d4",
+              "mode": 2
+            },
+            {
+              "key": "data.bonuses.msak.attack",
+              "value": "-1d4",
+              "mode": 2
+            },
+            {
+              "key": "data.bonuses.rsak.attack",
+              "value": "-1d4",
+              "mode": 2
+            },
+            {
+              "key": "data.bonuses.rwak.attack",
+              "value": "-1d4",
+              "mode": 2
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 60,
+            "rounds": 10
+          },
+          "icon": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
+          "label": "Bane",
+          "origin": "Item.KkaQm4OQJxc6z3to",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "permission": {
         "default": 0
@@ -3034,8 +3156,12 @@
         },
         "attunement": 0
       },
-      "sort": 1000000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
       "effects": [],
       "folder": null,
@@ -3130,8 +3256,12 @@
         },
         "attunement": 0
       },
-      "sort": 1100000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
       "effects": [],
       "folder": null,
@@ -3226,8 +3356,12 @@
         },
         "attunement": 0
       },
-      "sort": 1200000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.2skfDtglk1mGrb3l"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/air-burst-jade-2.jpg",
       "effects": [],
       "folder": null,
@@ -3326,8 +3460,12 @@
         },
         "attunement": 0
       },
-      "sort": 1300000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/fireball-sky-2.jpg",
       "effects": [],
       "folder": null,
@@ -3373,7 +3511,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -3426,8 +3564,12 @@
         },
         "attunement": 0
       },
-      "sort": 1400000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.o8Dh7fblk1d16tnO"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
       "effects": [],
       "folder": null,
@@ -3526,8 +3668,12 @@
         },
         "attunement": 0
       },
-      "sort": 1500000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ksaaTxIbKx2sJfia"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/rip-jade-2.jpg",
       "effects": [],
       "folder": null,
@@ -3622,8 +3768,12 @@
         },
         "attunement": 0
       },
-      "sort": 1600000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.xmDBqZhRVrtLP8h2"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "effects": [],
       "folder": null,
@@ -3718,8 +3868,12 @@
         },
         "attunement": 0
       },
-      "sort": 1700000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Kn7K5PtYUJAKZTTp"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/light-jade-1.jpg",
       "effects": [],
       "folder": null,
@@ -3765,7 +3919,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -3814,8 +3968,12 @@
         },
         "attunement": 0
       },
-      "sort": 1800000,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "effects": [],
       "folder": null,

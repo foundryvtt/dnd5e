@@ -918,7 +918,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.EOmsUcFQJTfG2oio"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/fireball-red-1.jpg",
       "effects": [],
       "folder": null,
@@ -1013,7 +1017,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
       "effects": [],
       "folder": null,
@@ -1109,7 +1117,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        }
+      },
       "img": "icons/magic/water/water-hand.webp",
       "effects": [],
       "folder": null,
@@ -1205,7 +1217,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.7p9IuWrSWFgfyQo2"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/runes-royal-1.jpg",
       "effects": [],
       "folder": null,
@@ -1236,7 +1252,7 @@
         "target": {
           "value": null,
           "width": null,
-          "units": null,
+          "units": "",
           "type": "self"
         },
         "range": {
@@ -1251,7 +1267,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -1300,12 +1316,37 @@
         },
         "attunement": 0
       },
-      "sort": 200001,
+      "sort": 100001,
       "flags": {
-        "_sheetTab": "description"
+        "_sheetTab": "description",
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+        }
       },
       "img": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
-      "effects": [],
+      "effects": [
+        {
+          "_id": "6pbotGIvqQkraPva",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.attributes.ac.bonus",
+              "value": "5",
+              "mode": 2
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 1
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
+          "label": "Shield",
+          "origin": "Item.FlLKKv7bQBlIAs11",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "permission": {
         "default": 0
@@ -1399,7 +1440,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JGT5bNqu9REL7Fuz"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/wild-eerie-2.jpg",
       "effects": [],
       "folder": null,
@@ -1496,10 +1541,33 @@
       },
       "sort": 100001,
       "flags": {
-        "_sheetTab": "details"
+        "_sheetTab": "details",
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H"
+        }
       },
       "img": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
-      "effects": [],
+      "effects": [
+        {
+          "_id": "cfwMU7LuOJ619Lny",
+          "changes": [
+            {
+              "key": "data.attributes.ac.calc",
+              "value": "mage",
+              "mode": 5
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
+          "label": "Mage Armor",
+          "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
+          "transfer": true,
+          "flags": {}
+        }
+      ],
       "folder": null,
       "permission": {
         "default": 0
@@ -1543,12 +1611,12 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
-        "actionType": "rsak",
-        "attackBonus": 0,
+        "actionType": "other",
+        "attackBonus": "0",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1597,8 +1665,12 @@
         },
         "attunement": 0
       },
-      "sort": 300001,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/light-magenta-1.jpg",
       "effects": [],
       "folder": null,
@@ -1612,7 +1684,7 @@
       "type": "spell",
       "data": {
         "description": {
-          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
+          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1698,7 +1770,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/fire-arrows-magenta-1.jpg",
       "effects": [],
       "folder": null,

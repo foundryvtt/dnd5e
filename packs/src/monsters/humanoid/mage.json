@@ -604,7 +604,7 @@
       "img": "systems/dnd5e/icons/spells/fireball-red-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 <em>fire damage</em>. A flammable object hit by this spell ignites if it isn't being worn or carried.</p>\n<p>This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).</p>",
+          "value": "<p>You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.</p><p>This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -636,11 +636,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "rsak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -695,7 +695,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.EOmsUcFQJTfG2oio"
+        }
+      }
     },
     {
       "_id": "sO0y8sl6BUc4uLpQ",
@@ -722,7 +726,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "object"
         },
         "range": {
           "value": null,
@@ -740,7 +744,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -790,7 +794,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      }
     },
     {
       "_id": "8AsyxkwMW77n8TMn",
@@ -799,7 +807,7 @@
       "img": "icons/magic/water/water-hand.webp",
       "data": {
         "description": {
-          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p>\n<p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p>\n<p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
+          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -814,10 +822,10 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "space"
         },
         "range": {
           "value": 30,
@@ -886,7 +894,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        }
+      }
     },
     {
       "_id": "WeHvVHmMqyM36Hyu",
@@ -910,7 +922,7 @@
           "units": "hour"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
           "type": ""
@@ -982,7 +994,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+        }
+      }
     },
     {
       "_id": "rHoCNImtmMQr8TMB",
@@ -1078,7 +1094,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "ubZj9XlltjcTAzja",
@@ -1168,13 +1188,37 @@
         },
         "attunement": 0
       },
-      "effects": [],
+      "effects": [
+        {
+          "_id": "cfwMU7LuOJ619Lny",
+          "changes": [
+            {
+              "key": "data.attributes.ac.calc",
+              "value": "mage",
+              "mode": 5
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
+          "label": "Mage Armor",
+          "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
+          "transfer": true,
+          "flags": {}
+        }
+      ],
       "folder": null,
       "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H"
+        }
+      }
     },
     {
       "_id": "gKRi9Yu14HeACqSq",
@@ -1183,7 +1227,7 @@
       "img": "systems/dnd5e/icons/spells/fire-arrows-magenta-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 +<strong> 1 <em>force damage</em> </strong>to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
+          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1201,7 +1245,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 120,
@@ -1219,7 +1263,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "other",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1229,11 +1273,7 @@
         "damage": {
           "parts": [
             [
-              "3d4",
-              "force"
-            ],
-            [
-              "3",
+              "1d4 + 1",
               "force"
             ]
           ],
@@ -1268,7 +1308,7 @@
         },
         "scaling": {
           "mode": "level",
-          "formula": "1d4+1"
+          "formula": ""
         },
         "attunement": 0
       },
@@ -1278,7 +1318,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+        }
+      }
     },
     {
       "_id": "JZqZeMR3KcCL7opH",
@@ -1302,10 +1346,10 @@
           "units": "round"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "self"
         },
         "range": {
           "value": null,
@@ -1319,7 +1363,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -1368,13 +1412,39 @@
         },
         "attunement": 0
       },
-      "effects": [],
+      "effects": [
+        {
+          "_id": "6pbotGIvqQkraPva",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.attributes.ac.bonus",
+              "value": "5",
+              "mode": 2
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 1
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
+          "label": "Shield",
+          "origin": "Item.FlLKKv7bQBlIAs11",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+        }
+      }
     },
     {
       "_id": "kZEpBou0dxWj6Xum",
@@ -1470,7 +1540,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.wqfAVANuQonNBgnL"
+        }
+      }
     },
     {
       "_id": "QREOzX3l871IOD4Z",
@@ -1479,7 +1553,7 @@
       "img": "systems/dnd5e/icons/spells/air-burst-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can't be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.</p>\n<p>The target must make a <strong>Wisdom</strong> saving throw. On a failed save, it pursues the course of action you described to the best of its ability. The suggested course of action can continue for the entire duration. If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.</p>\n<p>You can also specify conditions that will trigger a special activity during the duration. For example, you might suggest that a knight give her warhorse to the first beggar she meets. If the condition isn't met before the spell expires, the activity isn't performed.</p>\n<p>If you or any of your companions damage the target, the spell ends.</p>",
+          "value": "<p>You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can't be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.</p><p>The target must make a Wisdom saving throw. On a failed save, it pursues the course of action you described to the best of its ability. The suggested course of action can continue for the entire duration. If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.</p><p>You can also specify conditions that will trigger a special activity during the duration. For example, you might suggest that a knight give her warhorse to the first beggar she meets. If the condition isn't met before the spell expires, the activity isn't performed.</p><p>If you or any of your companions damage the target, the spell ends.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1497,7 +1571,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 30,
@@ -1515,7 +1589,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1565,7 +1639,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.zMAWdyc8UVb37BK4"
+        }
+      }
     },
     {
       "_id": "JiDcPQSp4omiK3AZ",
@@ -1574,7 +1652,7 @@
       "img": "systems/dnd5e/icons/spells/slice-orange-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.</p>",
+          "value": "<p>You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1661,7 +1739,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Ek45cBpVXvJdv1Qy"
+        }
+      }
     },
     {
       "_id": "oT4dQG28IiZwRPtZ",
@@ -1670,7 +1752,7 @@
       "img": "systems/dnd5e/icons/spells/fireball-red-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a <strong>Dexterity</strong> saving throw. A target takes 8d6 <em>fire damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p>The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
+          "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1706,7 +1788,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1760,7 +1842,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ztgcdrWPshKRpFd0"
+        }
+      }
     },
     {
       "_id": "CIztTr0GrIAh4mAg",
@@ -1769,7 +1855,7 @@
       "img": "systems/dnd5e/icons/spells/link-spirit-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
+          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1856,7 +1942,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.yfbK8gZqESlaoY5t"
+        }
+      }
     },
     {
       "_id": "3wGcLaOj0ucT34UU",
@@ -1880,10 +1970,10 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1952,7 +2042,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.tEpDmYZNGc9f5OhJ"
+        }
+      }
     },
     {
       "_id": "6zDAFf7Lb0w56TxT",
@@ -1961,7 +2055,7 @@
       "img": "systems/dnd5e/icons/spells/ice-blue-3.jpg",
       "data": {
         "description": {
-          "value": "<p>A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Each creature in the cylinder must make a <strong>Dexterity</strong> saving throw. A creature takes 2d8 <em>bludgeoning damage</em> and 4d6 <em>cold damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p>Hailstones turn the storm's area of effect into difficult terrain until the end of your next turn.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the <em>bludgeoning damage</em> increases by 1d8 for each slot level above 4th.</p>",
+          "value": "<p>A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Each creature in the cylinder must make a Dexterity saving throw. A creature takes 2d8 bludgeoning damage and 4d6 cold damage on a failed save, or half as much damage on a successful one.</p><p>Hailstones turn the storm's area of effect into difficult terrain until the end of your next turn.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the bludgeoning damage increases by 1d8 for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1997,7 +2091,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -2055,7 +2149,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WN2LWEljYU6QqnRH"
+        }
+      }
     },
     {
       "_id": "mIgDmXFkJaMEvtVt",
@@ -2064,7 +2162,7 @@
       "img": "systems/dnd5e/icons/spells/ice-blue-3.jpg",
       "data": {
         "description": {
-          "value": "<p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a <strong>Constitution</strong> saving throw. A creature takes 8d8 <em>cold damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p>A creature killed by this spell becomes a frozen statue until it thaws.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>",
+          "value": "<p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a Constitution saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2100,7 +2198,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -2154,7 +2252,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.RpKjTlYASrfqUPVA"
+        }
+      }
     },
     {
       "_id": "tbKbwgcprUBciliF",
