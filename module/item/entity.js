@@ -70,6 +70,16 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Does this item support advancement and have advancements defined?
+   * @type {boolean}
+   */
+  get hasAdvancement() {
+    return this.data.data.advancement && (this.data.data.advancement.length > 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
    */
@@ -1676,7 +1686,7 @@ export default class Item5e extends Item {
     if ( options.levelChangeData ) {
       options.levelChangeData.item = this;
       this.parent.advancementLevelChanged(options.levelChangeData);
-    } else if ( this.data.data.advancement && (this.data.data.advancement.length > 0) ) {
+    } else if ( this.hasAdvancement ) {
       this.parent.advancementItemAdded(this);
     }
   }
@@ -1729,7 +1739,7 @@ export default class Item5e extends Item {
       this.parent.advancementLevelChanged(options.levelChangeData);
     }
   }
-  
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -1753,17 +1763,22 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if ( (userId !== game.user.id) || !this.parent || (this.type !== "class") ) return;
+    if ( (userId !== game.user.id) || !this.parent ) return;
 
     // Assign a new primary class
-    if ( this.id === this.parent.data.data.details.originalClass ) this.parent._assignPrimaryClass();
+    if ( (this.type === "class") && (this.id === this.parent.data.data.details.originalClass) ) {
+      this.parent._assignPrimaryClass();
+    }
 
     // Trigger advancement
     if ( "addFeatures" in options ) {
       console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
     }
-    if ( options.levelChangeData && !options.skipAdvancement && (options.addFeatures !== false) ) {
+    if ( options.skipAdvancement || (options.addFeatures === false) ) return;
+    if ( options.levelChangeData ) {
       this.parent.advancementLevelChanged(options.levelChangeData);
+    } else if ( this.hasAdvancement ) {
+      this.parent.advancementItemRemoved(this);
     }
   }
 

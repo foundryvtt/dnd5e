@@ -1676,6 +1676,17 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Trigger any advancement reversals required when an item is removed.
+   * @param {Item5e} item  Item with the advancement removed.
+   */
+  advancementItemRemoved(item) {
+    console.log("Advancement - Item Remvoed!");
+    console.log(item);
+  }
+
+  /* -------------------------------------------- */
   /*  Conversion & Transformation                 */
   /* -------------------------------------------- */
 
