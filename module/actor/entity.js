@@ -1629,6 +1629,55 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Advancement                                 */
+  /* -------------------------------------------- */
+
+  /**
+   * Represents data about a change is character and class level for an actor.
+   *
+   * @typedef {object} LevelChangeData
+   * @property {Item5e|null} item  Class item that was added or changed (null if class was removed).
+   * @property {{ initial: number, final: number }} character  Overall character level changes.
+   * @property {{ initial: number, final: number }} class      Changes to the class's level.
+   */
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger advancement flow when a class is added or level is changed.
+   * @param {LevelChangeData} change  Information on the level changes that occurred.
+   */
+  advancementLevelChanged(change) {
+    // Send hook
+
+    // Check to see if an advancement operation is already in progress
+    // Yes: Append to existing advancement app
+    // No: Create new advancement app and render it
+
+    console.log("Advancement - Level Changed!");
+    console.log(change);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger advancement flow when a non-class item with advancement is added to this actor.
+   * @param {Item5e} item  Item with advancement added.
+   */
+  advancementItemAdded(item) {
+    // Send hook
+
+    // Check to see if an advancement operation is already in progress
+    // Yes: Append to existing advancement app
+    // No: Create new advancement app and render it
+
+    console.log("Advancement - Item Added!");
+    console.log(item);
+  }
+
+  /* -------------------------------------------- */
+  /*  Conversion & Transformation                 */
+  /* -------------------------------------------- */
 
   /**
    * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being
