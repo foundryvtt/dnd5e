@@ -1,3 +1,4 @@
+import { StupidClassForDoingAdvancement } from "./advancement/stupidClassForDoingAdvancement.js";
 import { Advancement } from "./advancement/advancement.js";
 import { AdvancementConfig } from "./advancement/advancementConfig.js";
 import { AdvancementFlow } from "./advancement/advancementFlow.js";
@@ -10,6 +11,7 @@ const advancement = {
   AdvancementConfig,
   AdvancementFlow,
   AdvancementSelection,
+  StupidClassForDoingAdvancement,
   types: {
     HitPointsAdvancement,
     ItemGrantAdvancement

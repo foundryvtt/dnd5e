@@ -1685,9 +1685,9 @@ export default class Item5e extends Item {
     if ( (options.addFeatures === false) || options.skipAdvancement ) return;
     if ( options.levelChangeData ) {
       options.levelChangeData.item = this;
-      this.parent.advancementLevelChanged(options.levelChangeData);
+      this.parent.advancement.levelChanged(options.levelChangeData);
     } else if ( this.hasAdvancement ) {
-      this.parent.advancementItemAdded(this);
+      this.parent.advancement.itemAdded(this);
     }
   }
 
@@ -1736,7 +1736,7 @@ export default class Item5e extends Item {
     }
     if ( options.levelChangeData && !options.skipAdvancement && (options.addFeatures !== false) ) {
       options.levelChangeData.item = this;
-      this.parent.advancementLevelChanged(options.levelChangeData);
+      this.parent.advancement.levelChanged(options.levelChangeData);
     }
   }
 
@@ -1776,9 +1776,9 @@ export default class Item5e extends Item {
     }
     if ( options.skipAdvancement || (options.addFeatures === false) ) return;
     if ( options.levelChangeData ) {
-      this.parent.advancementLevelChanged(options.levelChangeData);
+      this.parent.advancement.levelChanged(options.levelChangeData);
     } else if ( this.hasAdvancement ) {
-      this.parent.advancementItemRemoved(this);
+      this.parent.advancement.itemRemoved(this);
     }
   }
 

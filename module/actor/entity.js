@@ -14,6 +14,14 @@ import Item5e from "../item/entity.js";
 export default class Actor5e extends Actor {
 
   /**
+   * Cached version of the current advancement window.
+   * @type {StupidClassForDoingAdvancement}
+   */
+  _advancement = undefined;
+
+  /* -------------------------------------------- */
+
+  /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
    * @type {object<string, Item5e>}
    * @private
@@ -22,6 +30,17 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Lazily obtain an advancement application for this Actor or create one if it doesn't exist yet.
+   * @type {StupidClassForDoingAdvancement}
+   */
+  get advancement() {
+    if ( !this._advancement ) this._advancement = new game.dnd5e.advancement.StupidClassForDoingAdvancement(this);
+    return this._advancement;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -1626,64 +1645,6 @@ export default class Actor5e extends Actor {
     }
 
     return updates;
-  }
-
-  /* -------------------------------------------- */
-  /*  Advancement                                 */
-  /* -------------------------------------------- */
-
-  /**
-   * Represents data about a change is character and class level for an actor.
-   *
-   * @typedef {object} LevelChangeData
-   * @property {Item5e|null} item  Class item that was added or changed (null if class was removed).
-   * @property {{ initial: number, final: number }} character  Overall character level changes.
-   * @property {{ initial: number, final: number }} class      Changes to the class's level.
-   */
-
-  /* -------------------------------------------- */
-
-  /**
-   * Trigger advancement flow when a class is added or level is changed.
-   * @param {LevelChangeData} change  Information on the level changes that occurred.
-   */
-  advancementLevelChanged(change) {
-    // Send hook
-
-    // Check to see if an advancement operation is already in progress
-    // Yes: Append to existing advancement app
-    // No: Create new advancement app and render it
-
-    console.log("Advancement - Level Changed!");
-    console.log(change);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Trigger advancement flow when a non-class item with advancement is added to this actor.
-   * @param {Item5e} item  Item with advancement added.
-   */
-  advancementItemAdded(item) {
-    // Send hook
-
-    // Check to see if an advancement operation is already in progress
-    // Yes: Append to existing advancement app
-    // No: Create new advancement app and render it
-
-    console.log("Advancement - Item Added!");
-    console.log(item);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Trigger any advancement reversals required when an item is removed.
-   * @param {Item5e} item  Item with the advancement removed.
-   */
-  advancementItemRemoved(item) {
-    console.log("Advancement - Item Remvoed!");
-    console.log(item);
   }
 
   /* -------------------------------------------- */
