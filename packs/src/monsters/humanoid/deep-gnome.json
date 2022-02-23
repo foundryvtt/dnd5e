@@ -1063,10 +1063,10 @@
           "units": "hour"
         },
         "target": {
-          "value": null,
+          "value": 1,
           "width": null,
-          "units": null,
-          "type": "self"
+          "units": "",
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1080,7 +1080,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1135,7 +1135,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.aU62xVUBYkAQWIHv"
+        }
+      }
     },
     {
       "_id": "Bq1CUSerPuxoAObn",
@@ -1144,7 +1148,7 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a <strong>Constitution</strong> saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a <strong>Constitution</strong> saving throw. On a success, the spell ends.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+          "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1176,11 +1180,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1230,7 +1234,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.zwGsAv6kmwzYGhh3"
+        }
+      }
     },
     {
       "_id": "oGw5u15d1SZaw3o0",
@@ -1262,7 +1270,7 @@
         "range": {
           "value": null,
           "long": null,
-          "units": ""
+          "units": "self"
         },
         "uses": {
           "value": 1,
@@ -1271,7 +1279,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1326,7 +1334,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
+        }
+      }
     },
     {
       "_id": "4ParUzoYd3cJTzLr",
@@ -1367,7 +1379,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1385,7 +1397,7 @@
         },
         "formula": "",
         "save": {
-          "ability": "int",
+          "ability": "",
           "dc": 11,
           "scaling": "spell",
           "value": ""
@@ -1422,7 +1434,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
+        }
+      }
     },
     {
       "_id": "YuhirWYJsQfL6zo5",
