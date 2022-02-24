@@ -1,9 +1,18 @@
 <form autocomplete="off">
 
-  <h1>Header</h1>
+  <h1>{{header}}</h1>
+  {{#if subheader}}
+    <h2>{{subheader}}</h2>
+  {{/if}}
 
   <div class="advancement-controls">
-    Body
+    {{#each advancements}}
+      {{log this}}
+      <section data-type="{{this.type}}">
+        <h3>{{{this.title}}}</h3>
+        {{> (lookup this 'template') (lookup this 'data')}}
+      </section>
+    {{/each}}
   </div>
 
   <nav>

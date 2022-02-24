@@ -36,14 +36,14 @@ export class StupidClassForDoingAdvancement extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement"],
+      classes: ["dnd5e", "advancement", "flow"],
       template: "systems/dnd5e/templates/advancement/stupid-advancement-template.html",
       width: 460,
       height: "auto",
       title: "I Have No Idea What To Name This Class"
     });
   }
-  
+
   /* -------------------------------------------- */
 
   /**
@@ -63,7 +63,7 @@ export class StupidClassForDoingAdvancement extends FormApplication {
    * @param {LevelChangeData} data  Information on the class and level changes.
    */
   levelChanged(data) {
-    this._addStep({ type: "levelIncreased", data });
+    this._addStep({ type: "levelChanged", data });
   }
 
   /* -------------------------------------------- */
@@ -94,21 +94,74 @@ export class StupidClassForDoingAdvancement extends FormApplication {
    * @private
    */
   _addStep(step) {
-    console.log(step);
-    console.log(`Steps: ${this.steps.length}`);
-    const newIndex = this.steps.push(step);
+    const newIndex = this.steps.push(step) - 1;
     if ( this.stepIndex === null ) this.stepIndex = newIndex;
     this.render(true);
+    console.log(this.steps.length);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
   }
-  
+
   /* -------------------------------------------- */
   /*  Form Rendering                              */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  getData() {
-    return {};
+  async getData() {
+    // Only level changed now
+    // And only support one level
+    const data = {};
+
+    const step = this.steps[this.stepIndex];
+    if ( !step ) return data;
+
+    if ( (step.type === "levelChanged") && step.data.item ) {
+
+      const cls = step.data.item;
+      const level = step.data.class.final;
+      data.header = cls.name;
+      data.subheader = `Level ${level}`; // TODO: Localize
+      data.advancements = await Promise.all(this._advancementsForLevel(cls, level).map(async (a) => {
+        const flow = new a.constructor.flowApp(a, { level });
+        const value = {
+          type: a.constructor.typeName,
+          data: await flow.getData(),
+          template: flow.options.template,
+          title: flow.title,
+          order: a.sortingValueForLevel(level)
+        };
+        return value;
+      }));
+      data.advancements.sort((a, b) => a.order.localeCompare(b.order));
+
+    } else if ( step.type === "itemAdded" ) {
+      console.log("Not yet supported");
+    }
+
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Returns all advancements on an item for a specific level.
+   * @param {Item5e} item      Item that has advancement.
+   * @param {number} level     Level in question.
+   * @returns {Advancement[]}  Relevant advancement objects.
+   */
+  _advancementsForLevel(item, level) {
+    return Object.values(item.advancement).filter(a => {
+      const levels = a.levels;
+      return levels.includes(level);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async close(options={}) {
+    // TODO: Add confirmation dialog
+    this.actor._advancement = null;
+    await super.close(options);
   }
 
 }

@@ -25,6 +25,12 @@ export class AdvancementFlow extends Application {
       level: null
     });
   }
+  
+  /* -------------------------------------------- */
+
+  get title() {
+    return this.advancement.title;
+  }
 
   /* -------------------------------------------- */
 
@@ -45,7 +51,6 @@ export class AdvancementFlow extends Application {
     foundry.utils.mergeObject(this.options, options, { insertKeys: false });
     const data = await this.getData(this.options);
     const html = await this._renderInner(data);
-    this._activateCoreListeners(html);
     this.activateListeners(html);
     return html;
   }

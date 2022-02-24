@@ -26,7 +26,9 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/dnd5e/templates/items/parts/item-mountable.html",
 
     // Advancement Partials
-    "systems/dnd5e/templates/advancement/parts/advancement-controls.html"
+    "systems/dnd5e/templates/advancement/parts/advancement-controls.html",
+    ...Object.values(game.dnd5e.advancement.types).map(a => a.flowApp.defaultOptions.template)
+
   ]);
 };
 
