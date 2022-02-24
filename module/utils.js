@@ -57,19 +57,13 @@ export function _linkForUuid(uuid) {
 
   let link;
 
-  switch (true) {
-    case !index: {
-      link = `@Item[${uuid}]{${game.i18n.localize("DND5E.Unknown")}}`;
-      break;
-    }
-    case uuid.startsWith("Compendium."): {
-      link = `@Compendium[${uuid.substr(11)}]{${index.name}}`;
-      break;
-    }
-    default: {
-      const [type, id] = uuid.split(".");
-      link = `@${type}[${id}]{${index.name}}`;
-    }
+  if ( !index ) {
+    link = `@Item[${uuid}]{${game.i18n.localize("DND5E.Unknown")}}`;
+  } else if ( uuid.startsWith("Compendium.") ) {
+    link = `@Compendium[${uuid.substr(11)}]{${index.name}}`;
+  } else {
+    const [type, id] = uuid.split(".");
+    link = `@${type}[${id}]{${index.name}}`;
   }
 
   return TextEditor.enrichHTML(link);
