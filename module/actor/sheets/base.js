@@ -112,6 +112,11 @@ export default class ActorSheet5e extends ActorSheet {
       return obj;
     }, {});
 
+    // Temporary HP
+    let hp = data.data.attributes.hp;
+    if (hp.temp === 0) delete hp.temp;
+    if (hp.tempmax === 0) delete hp.tempmax;
+
     // Proficiency
     if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
       data.labels.proficiency = `d${data.data.attributes.prof * 2}`;
