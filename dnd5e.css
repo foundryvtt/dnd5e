@@ -225,12 +225,6 @@
   /* ----------------------------------------- */
   /*  Trait Lists                              */
   /* ----------------------------------------- */
-  /* ----------------------------------------- */
-  /*  Items Lists                              */
-  /* ----------------------------------------- */
-  /* ----------------------------------------- */
-  /*  Active Effects                           */
-  /* ----------------------------------------- */
 }
 .dnd5e.sheet .window-content {
   overflow-y: hidden;
@@ -435,7 +429,15 @@
   margin: 0;
   padding: 0;
 }
-.dnd5e.sheet .items-list {
+/* ----------------------------------------- */
+/*  Items Lists                              */
+/* ----------------------------------------- */
+.dnd5e {
+  /* ----------------------------------------- */
+  /*  Active Effects                           */
+  /* ----------------------------------------- */
+}
+.dnd5e .items-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -443,12 +445,12 @@
   scrollbar-width: thin;
   color: #7a7971;
 }
-.dnd5e.sheet .items-list .item-list {
+.dnd5e .items-list .item-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.dnd5e.sheet .items-list .item-name {
+.dnd5e .items-list .item-name {
   flex: 2;
   margin: 0;
   overflow: hidden;
@@ -456,39 +458,39 @@
   text-align: left;
   align-items: center;
 }
-.dnd5e.sheet .items-list .item-name h3,
-.dnd5e.sheet .items-list .item-name h4 {
+.dnd5e .items-list .item-name h3,
+.dnd5e .items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
 }
-.dnd5e.sheet .items-list .item-controls {
+.dnd5e .items-list .item-controls {
   flex: 0 0 60px;
   justify-content: space-between;
 }
-.dnd5e.sheet .items-list .item-controls a {
+.dnd5e .items-list .item-controls a {
   font-size: 12px;
   text-align: center;
 }
-.dnd5e.sheet .items-list .item {
+.dnd5e .items-list .item {
   align-items: center;
   padding: 0 2px;
   border-bottom: 1px solid #c9c7b8;
 }
-.dnd5e.sheet .items-list .item:last-child {
+.dnd5e .items-list .item:last-child {
   border-bottom: none;
 }
-.dnd5e.sheet .items-list .item .item-name {
+.dnd5e .items-list .item .item-name {
   color: #191813;
 }
-.dnd5e.sheet .items-list .item .item-name .item-image {
+.dnd5e .items-list .item .item-name .item-image {
   flex: 0 0 30px;
   height: 30px;
   background-size: 30px;
   border: none;
   margin-right: 5px;
 }
-.dnd5e.sheet .items-list .items-header {
+.dnd5e .items-list .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
@@ -497,11 +499,11 @@
   border: 2px groove #eeede0;
   font-weight: bold;
 }
-.dnd5e.sheet .items-list .items-header > * {
+.dnd5e .items-list .items-header > * {
   font-size: 12px;
   text-align: center;
 }
-.dnd5e.sheet .items-list .items-header h3 {
+.dnd5e .items-list .items-header h3 {
   padding-left: 5px;
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
@@ -509,15 +511,15 @@
   text-align: left;
   font-size: 16px;
 }
-.dnd5e.sheet .effects .item .effect-source,
-.dnd5e.sheet .effects .item .effect-duration,
-.dnd5e.sheet .effects .item .effect-controls {
+.dnd5e .effects .item .effect-source,
+.dnd5e .effects .item .effect-duration,
+.dnd5e .effects .item .effect-controls {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
-.dnd5e.sheet .effects .item .effect-controls {
+.dnd5e .effects .item .effect-controls {
   border: none;
 }
 /* ----------------------------------------- */
@@ -1288,6 +1290,7 @@
 }
 .dnd5e.advancement .items-list {
   margin-bottom: 1em;
+  /* Solves the borders being cut off */
 }
 .dnd5e.advancement .items-list li.item {
   padding-top: 0.25em;
@@ -1299,6 +1302,12 @@
   flex: 0 1 100%;
   margin-left: 35px;
   margin-bottom: 0.5em;
+}
+.dnd5e.advancement .items-list .entity-link {
+  display: inline-block;
+}
+.dnd5e.advancement .centered {
+  text-align: center;
 }
 .dnd5e.sheet.item {
   min-height: 400px;
