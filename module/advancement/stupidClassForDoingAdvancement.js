@@ -29,6 +29,12 @@ export class StupidClassForDoingAdvancement extends FormApplication {
      * @type {number|null}
      */
     this.stepIndex = steps.length ? 0 : null;
+
+    /**
+     * Cache of advancement flows.
+     * @type {object}
+     */
+    this.flows = {};
   }
 
   /* -------------------------------------------- */
@@ -63,6 +69,7 @@ export class StupidClassForDoingAdvancement extends FormApplication {
    * @param {LevelChangeData} data  Information on the class and level changes.
    */
   levelChanged(data) {
+    if ( data.character.final < data.character.initial ) return; // TODO: Add support for leveling down?
     this._addStep({ type: "levelChanged", data });
   }
 
@@ -97,7 +104,6 @@ export class StupidClassForDoingAdvancement extends FormApplication {
     const newIndex = this.steps.push(step) - 1;
     if ( this.stepIndex === null ) this.stepIndex = newIndex;
     this.render(true);
-    console.log(this.steps.length);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
   }
 
@@ -121,12 +127,13 @@ export class StupidClassForDoingAdvancement extends FormApplication {
       data.header = cls.name;
       data.subheader = `Level ${level}`; // TODO: Localize
       data.advancements = await Promise.all(this._advancementsForLevel(cls, level).map(async (a) => {
-        const flow = new a.constructor.flowApp(a, { level });
+        this.flows[a.id] ??= new a.constructor.flowApp(a, { level });
         const value = {
+          id: a.id,
           type: a.constructor.typeName,
-          data: await flow.getData(),
-          template: flow.options.template,
-          title: flow.title,
+          data: await this.flows[a.id].getData(),
+          template: this.flows[a.id].options.template,
+          title: this.flows[a.id].title,
           order: a.sortingValueForLevel(level)
         };
         return value;
@@ -152,6 +159,16 @@ export class StupidClassForDoingAdvancement extends FormApplication {
     return Object.values(item.advancement).filter(a => {
       const levels = a.levels;
       return levels.includes(level);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html[0].querySelectorAll("section[data-id]").forEach(section => {
+      this.flows[section.dataset.id]?.activateListeners(section);
     });
   }
 

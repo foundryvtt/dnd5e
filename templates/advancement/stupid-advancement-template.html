@@ -7,8 +7,7 @@
 
   <div class="advancement-controls">
     {{#each advancements}}
-      {{log this}}
-      <section data-type="{{this.type}}">
+      <section data-id="{{this.id}}" data-type="{{this.type}}">
         <h3>{{{this.title}}}</h3>
         {{> (lookup this 'template') (lookup this 'data')}}
       </section>
