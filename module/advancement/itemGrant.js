@@ -116,7 +116,7 @@ export class ItemGrantFlow extends AdvancementFlow {
     return foundry.utils.mergeObject(super.getData(), {
       items: await Promise.all(config.map(async (uuid) => {
         const item = await fromUuid(uuid);
-        item.checked = checked.has(uuid);
+        item.checked = checked?.has(uuid) ?? true;
         return item;
       }))
     });

@@ -168,7 +168,7 @@ export class StupidClassForDoingAdvancement extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
     html[0].querySelectorAll("section[data-id]").forEach(section => {
-      this.flows[section.dataset.id]?.activateListeners(section);
+      this.flows[section.dataset.id]?.activateListeners($(section));
     });
   }
 
