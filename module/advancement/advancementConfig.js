@@ -29,7 +29,7 @@ export class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement"],
+      classes: ["dnd5e", "advancement", "dialog"],
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
       width: 400,
       height: "auto"
@@ -78,7 +78,22 @@ export class AdvancementConfig extends FormApplication {
     let updates = foundry.utils.expandObject(formData).data;
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
-    return this.advancement.update(updates);
+    return this._updateAdvancement(updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A helper to update the advancement and re-render this application with the adjusted advancement displayed.
+   * @param {object} advancementUpdate  The update to the advancement data
+   * @returns {Promise<Item5e>}    The promise for the updated Item which resolves after the application re-renders
+   * @private
+   */
+  async _updateAdvancement(advancementUpdate) {
+    const update = await this.advancement.update(advancementUpdate);
+
+    this.render();
+    return update;
   }
 
   /* -------------------------------------------- */

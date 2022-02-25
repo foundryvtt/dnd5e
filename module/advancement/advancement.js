@@ -228,6 +228,7 @@ export class Advancement {
    */
   async update(updates) {
     await this.parent.updateAdvancement(this.id, updates);
+    this.data = this.parent.advancement[this.id].data;
     return this.parent.advancement[this.id];
   }
 
