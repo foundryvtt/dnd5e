@@ -60,7 +60,7 @@ export function _linkForUuid(uuid) {
   if ( !index ) {
     link = `@Item[${uuid}]{${game.i18n.localize("DND5E.Unknown")}}`;
   } else if ( uuid.startsWith("Compendium.") ) {
-    link = `@Compendium[${uuid.substr(11)}]{${index.name}}`;
+    link = `@Compendium[${uuid.slice(11)}]{${index.name}}`;
   } else {
     const [type, id] = uuid.split(".");
     link = `@${type}[${id}]{${index.name}}`;
