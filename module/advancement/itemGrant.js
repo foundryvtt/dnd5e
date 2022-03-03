@@ -122,6 +122,18 @@ export class ItemGrantFlow extends AdvancementFlow {
     });
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  finalizeUpdate(update, itemsAdded) {
+    // TODO: Check to see if any old items should be removed from value data
+    const uuids = new Set(Object.keys(update));
+    return itemsAdded.reduce((obj, item) => {
+      if ( uuids.has(item.data.flags.dnd5e?.sourceId) ) obj[item.id] = item.data.flags.dnd5e.sourceId;
+      return obj;
+    }, {});
+  }
+
 }
 
 
@@ -188,4 +200,21 @@ export class ItemGrantAdvancement extends Advancement {
   summaryForLevel(level) {
     return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
   }
+
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /*--------------------------------------------- */
+
+  /** @inheritdoc */
+  itemUpdates(level, updates) {
+    if ( !updates ) return { add: Array.from(Object.values(this.data.value)), remove: [] };
+
+    const existing = new Set(Object.values(this.data.value ?? {}));
+    return Object.entries(updates).reduce((obj, [uuid, selected]) => {
+      if ( selected && !existing.has(uuid) ) obj.add.push(uuid);
+      else if ( !selected && existing.has(uuid) ) obj.remove.push(uuid);
+      return obj;
+    }, { add: [], remove: [] });
+  }
+
 }

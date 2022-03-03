@@ -18,6 +18,7 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   getData() {
+    // TODO: If value is empty, `useAverage` should default to the value selected at the previous level
     const value = this.advancement.data.value[this.options.level];
     return foundry.utils.mergeObject(super.getData(), {
       hitDie: this.advancement.hitDie,
@@ -33,6 +34,7 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   activateListeners(html) {
+    // TODO: Disabled/enable fields with average checkbox is changed
     const form = html[0];
     form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
   }
@@ -43,6 +45,7 @@ export class HitPointsFlow extends AdvancementFlow {
    * Trigger a hit dice roll and add the result to the field.
    */
   async _onRollDice(event) {
+    // TODO: Maybe this should be `Actor#rollHitPoints`?
     const actor = this.advancement.parent.parent;
     const roll = await game.dnd5e.dice.damageRoll({
       event,
@@ -56,7 +59,17 @@ export class HitPointsFlow extends AdvancementFlow {
         "flags.dnd5e.roll": { type: "hitPoints" }
       }
     });
-    event.target.parentElement.querySelector(".rollResult").value = roll.total;
+    event.target.closest(".rolls").querySelector(".rollResult").value = roll.total;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  prepareUpdate(formData) {
+    if ( formData.useAverage ) return { [this.options.level]: true };
+    else if ( Number.isInteger(formData.value) ) return { [this.options.level]: formData.value };
+    return { [this.options.level]: true }; // TODO: Fix for empty data at first level
+    // TODO: Add error handling if no hit points are entered or an invalid number is entered
   }
 
 }
@@ -158,14 +171,27 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {number|null}  Hit points for level or null if none have been taken.
    */
   valueForLevel(level) {
-    const value = this.data.value[level];
+    return this.constructor.valueForLevel(this.data.value, this.hitDieValue, level);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Hit points given at the provided level.
+   * @param {object} data         Contents of `data.value` used to determine this value.
+   * @param {number} hitDieValue  Face value of the hit die used by this advancement.
+   * @param {number} level        Level for which to get hit points.
+   * @returns {number|null}       Hit points for level or null if none have been taken.
+   */
+  static valueForLevel(data, hitDieValue, level) {
+    const value = data[level];
     if ( !value ) return null;
 
     if ( value !== true ) return value;
 
     // Fixed value chosen
-    if ( level === 1 ) return this.hitDieValue;
-    return (this.hitDieValue / 2) + 1;
+    if ( level === 1 ) return hitDieValue;
+    return (hitDieValue / 2) + 1;
   }
 
   /* -------------------------------------------- */
@@ -186,6 +212,25 @@ export class HitPointsAdvancement extends Advancement {
   static availableForItem(item) {
     if ( item.type !== "class" ) return false;
     return !item.data.data.advancement.find(a => a.type === "HitPoints");
+  }
+
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /*--------------------------------------------- */
+
+  /** @inheritdoc */
+  propertyUpdates(level, updates) {
+    // No way to safely apply changes to max hit points without difference data
+    if ( !updates || !updates[level] ) return {};
+
+    const original = this.valueForLevel(level) ?? 0;
+    const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
+    const hpChange = modified - original + this.actor.data.data.abilities.con?.mod ?? 0;
+
+    return {
+      "data.attributes.hp.max": this.actor.data.data.attributes.hp.max + hpChange,
+      "data.attributes.hp.value": this.actor.data.data.attributes.hp.value + hpChange
+    };
   }
 
 }

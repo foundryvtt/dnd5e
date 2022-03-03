@@ -176,9 +176,66 @@ export class StupidClassForDoingAdvancement extends FormApplication {
 
   /** @inheritdoc */
   async close(options={}) {
-    // TODO: Add confirmation dialog
+    // TODO: Add confirmation dialog informing players that no changes have been made
     this.actor._advancement = null;
     await super.close(options);
+  }
+
+  /* -------------------------------------------- */
+
+  async _updateObject(event, formData) {
+    const data = foundry.utils.expandObject(formData);
+    const actorUpdates = {};
+    const itemUpdates = { add: [], remove: [] };
+
+    const step = this.steps[this.stepIndex];
+    const level = step.data.class.final;
+
+    // Loop through each advancement gathering their actor changes and items to add
+    for ( const [id, flow] of Object.entries(this.flows) ) {
+      flow.initialUpdate = flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {}));
+      Object.assign(actorUpdates, flow.advancement.propertyUpdates(level, flow.initialUpdate));
+      const { add, remove } = flow.advancement.itemUpdates(level, flow.initialUpdate);
+      itemUpdates.add.push(...add);
+      itemUpdates.remove.push(...remove);
+    }
+
+    // Begin fetching data for new items
+    let newItems = Promise.all(itemUpdates.add.map(fromUuid));
+
+    // Apply property changes to actor
+    await this.actor.update(actorUpdates);
+
+    // Add new items to actor
+    newItems = (await newItems).map(item => {
+      const data = item.toObject();
+      foundry.utils.mergeObject(data, {
+        "flags.dnd5e.sourceId": item.uuid,
+        // "flags.dnd5e.advancementOrigin": `${originalItem.id}.${advancement.id}` // TODO: Make this work
+      });
+      return data;
+    });
+    const itemsAdded = await this.actor.createEmbeddedDocuments("Item", newItems);
+
+    // Finalize value updates to advancement with IDs of added items
+    let embeddedUpdates = {};
+    for ( const [id, flow] of Object.entries(this.flows) ) {
+      const update = flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
+      if ( foundry.utils.isObjectEmpty(update) ) continue;
+      const itemId = flow.advancement.parent.id;
+      if ( !embeddedUpdates[itemId] ) {
+        embeddedUpdates[itemId] = foundry.utils.deepClone(flow.advancement.parent.data.data.advancement);
+      }
+      const idx = embeddedUpdates[itemId].findIndex(a => a._id === id);
+      if ( idx === -1 ) continue;
+      foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
+    }
+
+    // Update all advancements with new values
+    embeddedUpdates = Object.entries(embeddedUpdates).map(([id, updates]) => {
+      return { _id: id, "data.advancement": updates };
+    });
+    await this.actor.updateEmbeddedDocuments("Item", embeddedUpdates);
   }
 
 }

@@ -65,5 +65,17 @@ export class AdvancementFlow extends Application {
   prepareUpdate(formData) {
     return formData;
   }
+  
+  /* -------------------------------------------- */
+
+  /**
+   * Perform any final transformation necessary on the value updates after items have been added.
+   * @param {object} update        Value update data provided by `AdvancementFlow#prepareUpdate`.
+   * @param {Item5e[]} itemsAdded  Any items added to the actor.
+   * @returns {object}             Final value updates to apply to the advancement.
+   */
+  finalizeUpdate(update, itemsAdded) {
+    return update;
+  }
 
 }

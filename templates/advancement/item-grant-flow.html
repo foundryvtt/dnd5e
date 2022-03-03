@@ -1,12 +1,10 @@
 <div>
-  
-  {{log this}}
   {{#each items}}
     <div class="item-name flexrow">
       <div class="item-image" style="background-image: url({{this.img}});"></div>
       <label class="flexrow">
         <h4>{{this.name}}</h4>
-        <input type="checkbox" name="{{advancement.id}}.{{this._id}}" {{checked this.checked}}>
+        <input type="checkbox" name="{{../advancement.id}}.{{this.uuid}}" {{checked this.checked}}>
       </label>
     </div>
   {{/each}}

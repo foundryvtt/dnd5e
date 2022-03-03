@@ -17,6 +17,12 @@ export class Advancement {
     this.parent = parent;
 
     /**
+     * Actor to which this advancement's item belongs, if the item is embedded.
+     * @type {Actor5e}
+     */
+    this.actor = parent.parent;
+
+    /**
      * Configuration data for this advancement.
      * @type {object}
      */
@@ -131,6 +137,7 @@ export class Advancement {
   /**
    * Create an array of levels between 1 and the maximum allowed level.
    * @type {number[]}
+   * @protected
    */
   static get allLevels() {
     return Array.from({length: CONFIG.DND5E.maxLevel}, (v, i) => i + 1);
@@ -249,6 +256,38 @@ export class Advancement {
    */
   static availableForItem(item) {
     return true;
+  }
+
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Add any properties that should be changed on the actor to an update object.
+   * @param {number} level      Level for which to gather updates.
+   * @param {object} [updates]  Updates to this advancement's `value`. If this is provided, only the difference between
+   *                            this object and the existing value should be applied.
+   * @returns {object}          The actor updates object.
+   */
+  propertyUpdates(level, updates) {
+    return {};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get a list UUIDs for new items that should be added to the actor.
+   * @param {number} level      Level for which to add items.
+   * @param {object} [updates]  Updates to this advancement's `value`. If this is provided, only the difference between
+   *                            this object and the existing value should be applied.
+   * @returns {{
+   *   add: string[],
+   *   remove: string[]
+   * }}  UUIDs of items to add and remove from the actor.
+   */
+  itemUpdates(level, updates) {
+    // TODO: This should probably be able to list items removed as well as added
+    return { add: [], remove: [] };
   }
 
 }
