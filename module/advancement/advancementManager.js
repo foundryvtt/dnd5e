@@ -14,7 +14,7 @@
  * @property {{ initial: number, final: number }} class      Changes to the class's level.
  */
 
-export class StupidClassForDoingAdvancement extends FormApplication {
+export class AdvancementManager extends FormApplication {
 
   constructor(actor, steps=[], options={}) {
     super(actor, options);

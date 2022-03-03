@@ -15,7 +15,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Cached version of the current advancement window.
-   * @type {StupidClassForDoingAdvancement}
+   * @type {AdvancementManager}
    */
   _advancement = undefined;
 
@@ -34,10 +34,10 @@ export default class Actor5e extends Actor {
 
   /**
    * Lazily obtain an advancement application for this Actor or create one if it doesn't exist yet.
-   * @type {StupidClassForDoingAdvancement}
+   * @type {AdvancementManager}
    */
   get advancement() {
-    if ( !this._advancement ) this._advancement = new game.dnd5e.advancement.StupidClassForDoingAdvancement(this);
+    if ( !this._advancement ) this._advancement = new game.dnd5e.advancement.AdvancementManager(this);
     return this._advancement;
   }
 
