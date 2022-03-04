@@ -225,7 +225,11 @@ export class HitPointsAdvancement extends Advancement {
 
     const original = this.valueForLevel(level) ?? 0;
     const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
-    const hpChange = modified - original + this.actor.data.data.abilities.con?.mod ?? 0;
+    let hpChange = modified - original
+    if ( hpChange === 0 ) return {};
+
+    // Avoid adding the constitution modifier more than once
+    if ( original === 0 ) hpChange += this.actor.data.data.abilities.con?.mod ?? 0
 
     return {
       "data.attributes.hp.max": this.actor.data.data.attributes.hp.max + hpChange,

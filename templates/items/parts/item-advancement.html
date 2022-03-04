@@ -9,7 +9,7 @@
     {{/if}}
 
     {{#each advancement as |data level|}}
-      <li class="items-header flexrow">
+      <li class="items-header flexrow" data-level="{{level}}">
         <h3 class="item-name flexrow">
           {{#if (ne level "0")}}
             {{localize "DND5E.AdvancementLevelHeader" number=level}}
@@ -17,6 +17,12 @@
             {{localize "DND5E.AdvancementLevelNoneHeader"}}
           {{/if}}
         </h3>
+
+        {{#if (and @root.editable data.configured)}}
+          <div>
+            <a class="item-control modify-choices">Modify Choices</a>
+          </div>
+        {{/if}}
 
         {{#if (eq data.configured "full")}}
           <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">

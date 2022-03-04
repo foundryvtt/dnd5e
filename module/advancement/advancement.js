@@ -283,7 +283,7 @@ export class Advancement {
    * @returns {{
    *   add: string[],
    *   remove: string[]
-   * }}  UUIDs of items to add and remove from the actor.
+   * }}  UUIDs of items to add to the actor and IDs of items to remove.
    */
   itemUpdates(level, updates) {
     // TODO: This should probably be able to list items removed as well as added

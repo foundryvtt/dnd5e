@@ -126,12 +126,21 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   finalizeUpdate(update, itemsAdded) {
-    // TODO: Check to see if any old items should be removed from value data
+    // Add any added items to the advancement's value
     const uuids = new Set(Object.keys(update));
-    return itemsAdded.reduce((obj, item) => {
+    const added = itemsAdded.reduce((obj, item) => {
       if ( uuids.has(item.data.flags.dnd5e?.sourceId) ) obj[item.id] = item.data.flags.dnd5e.sourceId;
       return obj;
     }, {});
+
+    // Remove any deleted items from advancement value
+    const reverseLookup = Object.fromEntries(Object.entries(this.advancement.data.value.added ?? {}).map(a => [a[1], a[0]]));
+    for ( const [uuid, selected] of Object.entries(update) ) {
+      if ( selected || !reverseLookup[uuid] ) continue;
+      added[`-=${reverseLookup[uuid]}`] = null;
+    }
+
+    return { added };
   }
 
 }
@@ -209,12 +218,15 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   itemUpdates(level, updates) {
-    if ( !updates ) return { add: Array.from(Object.values(this.data.value)), remove: [] };
+    if ( !updates ) return { add: Array.from(Object.values(this.data.value?.added ?? {})), remove: [] };
 
-    const existing = new Set(Object.values(this.data.value ?? {}));
+    const existing = new Set(Object.values(this.data.value?.added ?? {}));
     return Object.entries(updates).reduce((obj, [uuid, selected]) => {
       if ( selected && !existing.has(uuid) ) obj.add.push(uuid);
-      else if ( !selected && existing.has(uuid) ) obj.remove.push(uuid);
+      else if ( !selected && existing.has(uuid) ) {
+        const id = Object.entries(this.data.value?.added ?? {}).find(o => o[1] === uuid);
+        obj.remove.push(id[0]);
+      }
       return obj;
     }, { add: [], remove: [] });
   }
