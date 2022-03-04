@@ -1,13 +1,3 @@
-/*
-
-{ type: "levelIncreased", item: Item5e, level: number, classLevel: number }
-{ type: "levelDecreased", item: Item5e, level: number, classLevel: number }
-{ type: "itemAdded", item: Item5e }
-{ type: "itemRemoved", item: Item5e }
-{ type: "modifyChoices", item: Item5e, level: number }
-
-*/
-
 /**
  * Represents data about a change is character and class level for an actor.
  *
@@ -17,27 +7,33 @@
  * @property {{ initial: number, final: number }} class      Changes to the class's level.
  */
 
+/**
+ * Application for controlling the advancement workflow and displaying the interface.
+ * @extends FormApplication
+ */
 export class AdvancementManager extends FormApplication {
 
   constructor(actor, steps=[], options={}) {
     super(actor, options);
 
     /**
-     * 
+     * A clone of the original actor to which the changes can be applied during the advancement process.
+     * @type {Actor5e}
+     */
+    this.clone = actor.clone();
+
+    /**
+     * Individual steps that will be applied in order.
+     * @type {AdvancementStep}
      */
     this.steps = steps;
 
     /**
      * Step being currently displayed.
      * @type {number|null}
+     * @private
      */
-    this.stepIndex = steps.length ? 0 : null;
-
-    /**
-     * Cache of advancement flows.
-     * @type {object}
-     */
-    this.flows = {};
+    this._stepIndex = steps.length ? 0 : null;
   }
 
   /* -------------------------------------------- */
@@ -76,8 +72,8 @@ export class AdvancementManager extends FormApplication {
    * @type {AdvancementStep}
    */
   get step() {
-    if ( this.stepIndex === null ) return;
-    return this.steps[this.stepIndex];
+    if ( this._stepIndex === null ) return;
+    return this.steps[this._stepIndex];
   }
 
   /* -------------------------------------------- */
@@ -165,7 +161,7 @@ export class AdvancementManager extends FormApplication {
    */
   _addStep(step) {
     const newIndex = this.steps.push(step) - 1;
-    if ( this.stepIndex === null ) this.stepIndex = newIndex;
+    if ( this._stepIndex === null ) this._stepIndex = newIndex;
     this.render(true);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
   }
@@ -223,6 +219,49 @@ export class AdvancementManager extends FormApplication {
     const data = foundry.utils.expandObject(formData);
     this.step.prepareUpdates(data);
     await this.step.applyUpdates(this.actor);
+  }
+
+  /* -------------------------------------------- */
+  /*  Process                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Advance to the next step in the workflow.
+   * @returns {Promise}
+   */
+  async nextStep() {
+    // Prepare changes from current step
+    // Apply changes to actor clone
+    // Check to see if this is the final step, if so, head over to complete
+    // Increase step number
+    // Render
+
+    // If you had previously selected choices at this step, and then went back, ensure the form reflects your previous choices
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return to a previous step in the workflow.
+   * @returns {Promise}
+   */
+  async previousStep() {
+    // Save choices on current form?
+    // Revert actor clone to earlier state
+    // Decrease step number
+    // Render
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply changes to actual actor after all choices have been made.
+   * @returns {Promise}
+   */
+  async complete() {
+    // Iterate over each step apply changes to actual actor
+    // Close AdvancementManager
+    // Remove this AdvancementManager from actor
   }
 
 }
