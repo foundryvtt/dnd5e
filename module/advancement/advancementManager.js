@@ -48,9 +48,15 @@ export class AdvancementManager extends FormApplication {
       classes: ["dnd5e", "advancement", "flow"],
       template: "systems/dnd5e/templates/advancement/advancement-manager.html",
       width: 460,
-      height: "auto",
-      title: "Advancement Manager" // TODO: This should be responsive, aka "Level Up Character", "Add Item", "Edit Advancement"
+      height: "auto"
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get title() {
+    return this.step?.title ?? "Advancement Manager"; // TODO: Localize
   }
 
   /* -------------------------------------------- */
@@ -90,11 +96,11 @@ export class AdvancementManager extends FormApplication {
     // Level increased
     if ( levelDelta > 0 ) {
       while ( levelDelta > 0 ) {
-        this._addStep({
-          type: "levelIncreased", item: data.item,
+        this._addStep(new LevelIncreasedStep(this.actor, {
+          item: data.item,
           level: data.character.initial + offset,
           classLevel: data.class.initial + offset
-        });
+        }));
         offset += 1;
         levelDelta -= 1;
       }
@@ -103,11 +109,11 @@ export class AdvancementManager extends FormApplication {
     // Level decreased
     else if ( levelDelta < 0 ) {
       while ( levelDelta < 0 ) {
-        this._addStep({
-          type: "levelDecreased", item: data.item,
+        this._addStep(new LevelDecreasedStep(this.actor, {
+          item: data.item,
           level: data.character.initial - offset,
           classLevel: data.class.initial - offset
-        });
+        }));
         offset += 1;
         levelDelta += 1;
       }
@@ -126,7 +132,7 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was added.
    */
   itemAdded(item) {
-    this._addStep({ type: "itemAdded", item });
+    this._addStep(new ItemAddedStep(this.actor, { item }));
   }
 
   /* -------------------------------------------- */
@@ -136,7 +142,7 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was removed.
    */
   itemRemoved(item) {
-    this._addStep({ type: "itemRemoved", item });
+    this._addStep(new ItemRemovedStep(this.actor, { item }));
   }
 
   /* -------------------------------------------- */
@@ -147,7 +153,7 @@ export class AdvancementManager extends FormApplication {
    * @param {number} level  Level at which the changes should be made.
    */
   modifyChoices(item, level) {
-    this._addStep({ type: "modifyChoices", item, level });
+    this._addStep(new ModifyChoicesStep(this.actor, { item, level }));
   }
 
   /* -------------------------------------------- */
@@ -158,7 +164,7 @@ export class AdvancementManager extends FormApplication {
    * @private
    */
   _addStep(step) {
-    const newIndex = this.steps.push(new AdvancementStep(this.actor, step)) - 1;
+    const newIndex = this.steps.push(step) - 1;
     if ( this.stepIndex === null ) this.stepIndex = newIndex;
     this.render(true);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
@@ -222,34 +228,49 @@ export class AdvancementManager extends FormApplication {
 }
 
 
+/**
+ *
+ */
 class AdvancementStep {
 
   constructor(actor, config) {
     /**
-     *
+     * Actor that will be used when calculating changes.
+     * @type {Actor5e}
      */
     this.actor = actor;
 
     /**
-     * Step configuration
+     * Step configuration information.
+     * @type {object}
      */
     this.config = config;
 
     /**
-     *
+     * Advancement flows that make up this step.
+     * @type {AdvancementFlow[]}
      */
     this.flows = [];
 
     /**
-     * 
+     * Updates that will be applied to the actor's properties. Will be provided to `Actor#update`.
+     * @type {object}
      */
     this.actorUpdates = {};
 
     /**
-     *
+     * Items that will be added or removed from the actor.
      */
     this.itemUpdates = { add: [], remove: [] };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Title to be displayed for this step.
+   * @type {string}
+   */
+  get title() { }
 
   /* -------------------------------------------- */
 
@@ -301,6 +322,9 @@ class AdvancementStep {
 
   /* -------------------------------------------- */
 
+  /**
+   *
+   */
   activateListeners(html) {
     html[0].querySelectorAll("section[data-id]").forEach(section => {
       this.flows[section.dataset.id]?.activateListeners($(section));
@@ -373,6 +397,65 @@ class AdvancementStep {
       return { _id: id, "data.advancement": updates };
     });
     await actor.updateEmbeddedDocuments("Item", embeddedUpdates);
+  }
+
+}
+
+
+/**
+ *
+ * @extends AdvancementStep
+ */
+class LevelIncreasedStep extends AdvancementStep {
+
+  get title() {
+    return "Level Up Character"; // TODO: Localize
+  }
+
+}
+
+
+/**
+ *
+ * @extends AdvancementStep
+ */
+class LevelDecreasedStep extends AdvancementStep {
+
+  /** @inheritdoc */
+  static shouldRender = false;
+
+}
+
+
+/**
+ *
+ * @extends AdvancementStep
+ */
+class ItemAddedStep extends AdvancementStep {
+  // TODO: Implement later
+}
+
+
+/**
+ *
+ * @extends AdvancementStep
+ */
+class ItemRemovedStep extends AdvancementStep {
+
+    /** @inheritdoc */
+    static shouldRender = false;
+
+}
+
+
+/**
+ *
+ * @extends AdvancementStep
+ */
+class ModifyChoicesStep extends AdvancementStep {
+  
+  get title() {
+    return "Modify Choices"; // TODO: Localize
   }
 
 }
