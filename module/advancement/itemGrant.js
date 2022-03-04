@@ -198,6 +198,8 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   summaryForLevel(level) {
+    // TODO: For levels that a character has already gained, these links should point to the item on the character
+    // and any items that were skipped shouldn't be listed
     return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
   }
 

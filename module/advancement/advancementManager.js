@@ -2,6 +2,8 @@
 
 { type: "levelIncreased", data: LevelChangeData }
 { type: "itemAdded", item: Item5e }
+{ type: "itemRemoved", item: Item5e }
+{ type: "editItem", item: Item5e, level: number }
 
 */
 
@@ -43,10 +45,10 @@ export class AdvancementManager extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "flow"],
-      template: "systems/dnd5e/templates/advancement/stupid-advancement-template.html",
+      template: "systems/dnd5e/templates/advancement/advancement-manager.html",
       width: 460,
       height: "auto",
-      title: "I Have No Idea What To Name This Class"
+      title: "Advancement Manager" // TODO: This should be responsive, aka "Level Up Character", "Add Item", "Edit Advancement"
     });
   }
 
