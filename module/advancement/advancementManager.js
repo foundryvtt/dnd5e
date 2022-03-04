@@ -1,7 +1,7 @@
 /*
 
-{ type: "levelIncreased", item: Item5e, level: number }
-{ type: "levelDecreased", item: Item5e, level: number }
+{ type: "levelIncreased", item: Item5e, level: number, classLevel: number }
+{ type: "levelDecreased", item: Item5e, level: number, classLevel: number }
 { type: "itemAdded", item: Item5e }
 { type: "itemRemoved", item: Item5e }
 { type: "modifyChoices", item: Item5e, level: number }
@@ -12,7 +12,7 @@
  * Represents data about a change is character and class level for an actor.
  *
  * @typedef {object} LevelChangeData
- * @property {Item5e|null} item  Class item that was added or changed (null if class was removed).
+ * @property {Item5e|null} item  Class item that was added or changed.
  * @property {{ initial: number, final: number }} character  Overall character level changes.
  * @property {{ initial: number, final: number }} class      Changes to the class's level.
  */
@@ -64,6 +64,17 @@ export class AdvancementManager extends FormApplication {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Get the step that is currently in progress. Will be undefined if no step is in progress.
+   * @type {AdvancementStep}
+   */
+  get step() {
+    if ( this.stepIndex === null ) return;
+    return this.steps[this.stepIndex];
+  }
+
+  /* -------------------------------------------- */
   /*  Advancement Actions                         */
   /* -------------------------------------------- */
 
@@ -72,8 +83,40 @@ export class AdvancementManager extends FormApplication {
    * @param {LevelChangeData} data  Information on the class and level changes.
    */
   levelChanged(data) {
-    if ( data.character.final < data.character.initial ) return; // TODO: Add support for leveling down?
-    this._addStep({ type: "levelChanged", data });
+    let levelDelta = data.character.final - data.character.initial;
+    let offset = 1;
+
+    // TODO: Simplify all this
+    // Level increased
+    if ( levelDelta > 0 ) {
+      while ( levelDelta > 0 ) {
+        this._addStep({
+          type: "levelIncreased", item: data.item,
+          level: data.character.initial + offset,
+          classLevel: data.class.initial + offset
+        });
+        offset += 1;
+        levelDelta -= 1;
+      }
+    }
+
+    // Level decreased
+    else if ( levelDelta < 0 ) {
+      while ( levelDelta < 0 ) {
+        this._addStep({
+          type: "levelDecreased", item: data.item,
+          level: data.character.initial - offset,
+          classLevel: data.class.initial - offset
+        });
+        offset += 1;
+        levelDelta += 1;
+      }
+    }
+
+    // Level didn't change
+    else {
+      throw new Error("Level did not change within level change advancement.")
+    }
   }
 
   /* -------------------------------------------- */
@@ -115,7 +158,7 @@ export class AdvancementManager extends FormApplication {
    * @private
    */
   _addStep(step) {
-    const newIndex = this.steps.push(step) - 1;
+    const newIndex = this.steps.push(new AdvancementStep(this.actor, step)) - 1;
     if ( this.stepIndex === null ) this.stepIndex = newIndex;
     this.render(true);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
@@ -127,53 +170,10 @@ export class AdvancementManager extends FormApplication {
 
   /** @inheritdoc */
   async getData() {
-    // Only level changed now
-    // And only support one level
     const data = {};
 
-    const step = this.steps[this.stepIndex];
-    if ( !step ) return data;
-
-    if ( (step.type === "levelChanged") && step.data.item ) {
-
-      const cls = step.data.item;
-      const level = step.data.class.final;
-      data.header = cls.name;
-      data.subheader = `Level ${level}`; // TODO: Localize
-      data.advancements = await Promise.all(this._advancementsForLevel(cls, level).map(async (a) => {
-        this.flows[a.id] ??= new a.constructor.flowApp(a, { level });
-        const value = {
-          id: a.id,
-          type: a.constructor.typeName,
-          data: await this.flows[a.id].getData(),
-          template: this.flows[a.id].options.template,
-          title: this.flows[a.id].title,
-          order: a.sortingValueForLevel(level)
-        };
-        return value;
-      }));
-      data.advancements.sort((a, b) => a.order.localeCompare(b.order));
-
-    } else if ( step.type === "modifyChoices" ) {
-
-      const level = step.level;
-      data.header = step.item.name;
-      data.subheader = `Level ${level}`; // TODO: Localize
-      data.advancements = await Promise.all(this._advancementsForLevel(step.item, level).map(async (a) => {
-        this.flows[a.id] ??= new a.constructor.flowApp(a, { level });
-        const value = {
-          id: a.id,
-          type: a.constructor.typeName,
-          data: await this.flows[a.id].getData(),
-          template: this.flows[a.id].options.template,
-          title: this.flows[a.id].title,
-          order: a.sortingValueForLevel(level)
-        };
-        return value;
-      }));
-      data.advancements.sort((a, b) => a.order.localeCompare(b.order));
-
-    }
+    if ( !this.step ) return data;
+    await this.step.getData(data);
 
     return data;
   }
@@ -198,9 +198,7 @@ export class AdvancementManager extends FormApplication {
   /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
-    html[0].querySelectorAll("section[data-id]").forEach(section => {
-      this.flows[section.dataset.id]?.activateListeners($(section));
-    });
+    this.step?.activateListeners(html);
   }
 
   /* -------------------------------------------- */
@@ -215,27 +213,132 @@ export class AdvancementManager extends FormApplication {
   /* -------------------------------------------- */
 
   async _updateObject(event, formData) {
+    if ( !this.step ) return;
     const data = foundry.utils.expandObject(formData);
-    const actorUpdates = {};
-    const itemUpdates = { add: [], remove: [] };
+    this.step.prepareUpdates(data);
+    await this.step.applyUpdates(this.actor);
+  }
 
-    const step = this.steps[this.stepIndex];
-    const level = step.level ?? step.data.class?.final ?? this.actor.data.data.details.level;
+}
 
+
+class AdvancementStep {
+
+  constructor(actor, config) {
+    /**
+     *
+     */
+    this.actor = actor;
+
+    /**
+     * Step configuration
+     */
+    this.config = config;
+
+    /**
+     *
+     */
+    this.flows = [];
+
+    /**
+     * 
+     */
+    this.actorUpdates = {};
+
+    /**
+     *
+     */
+    this.itemUpdates = { add: [], remove: [] };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Should this step be rendered or applied automatically?
+   * @type {boolean}
+   */
+  static shouldRender = true;
+
+  /* -------------------------------------------- */
+
+  /**
+   *
+   */
+  async getData(data) {
+    const level = this.config.classLevel ?? this.config.level ?? this.actor.data.data.details.level;
+    data.header = this.config.item.name;
+    data.subheader = `Level ${level}`; // TODO: Localize
+
+    // TODO: Handle other items with advancements during level change steps
+    data.advancements = await Promise.all(this._advancementsForLevel(this.config.item, level).map(async (a) => {
+      this.flows[a.id] ??= new a.constructor.flowApp(a, { level });
+      return {
+        id: a.id,
+        type: a.constructor.typeName,
+        data: await this.flows[a.id].getData(),
+        template: this.flows[a.id].options.template,
+        title: this.flows[a.id].title,
+        order: a.sortingValueForLevel(level)
+      };
+    }));
+    data.advancements.sort((a, b) => a.order.localeCompare(b.order));
+  }
+  
+  /* -------------------------------------------- */
+
+  /**
+   * Returns all advancements on an item for a specific level.
+   * @param {Item5e} item      Item that has advancement.
+   * @param {number} level     Level in question.
+   * @returns {Advancement[]}  Relevant advancement objects.
+   */
+  _advancementsForLevel(item, level) {
+    return Object.values(item.advancement).filter(a => {
+      const levels = a.levels;
+      return levels.includes(level);
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  activateListeners(html) {
+    html[0].querySelectorAll("section[data-id]").forEach(section => {
+      this.flows[section.dataset.id]?.activateListeners($(section));
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * 
+   */
+  prepareUpdates(data) {
     // Loop through each advancement gathering their actor changes and items to add
     for ( const [id, flow] of Object.entries(this.flows) ) {
+      const level = flow.advancement.parent.type === "class" ? this.config.classLevel : this.config.level;
       flow.initialUpdate = flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {}));
-      Object.assign(actorUpdates, flow.advancement.propertyUpdates(level, flow.initialUpdate));
+      Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(level, flow.initialUpdate));
       const { add, remove } = flow.advancement.itemUpdates(level, flow.initialUpdate);
-      itemUpdates.add.push(...add);
-      itemUpdates.remove.push(...remove);
+      this.itemUpdates.add.push(...add);
+      this.itemUpdates.remove.push(...remove);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply stored updates to an actor, modifying properties and adding or removing items.
+   * @param {Actor5e} [actor]  Actor to perform the updates upon, if not provided the changes will be applied to the actor
+   *                           provided during construction.
+   */
+  async applyUpdates(actor) {
+    if ( !actor ) actor = this.actor;
 
     // Begin fetching data for new items
-    let newItems = Promise.all(itemUpdates.add.map(fromUuid));
+    let newItems = Promise.all(this.itemUpdates.add.map(fromUuid));
 
     // Apply property changes to actor
-    await this.actor.update(actorUpdates);
+    await actor.update(this.actorUpdates);
 
     // Add new items to actor
     newItems = (await newItems).map(item => {
@@ -246,10 +349,10 @@ export class AdvancementManager extends FormApplication {
       });
       return data;
     });
-    const itemsAdded = await this.actor.createEmbeddedDocuments("Item", newItems);
+    const itemsAdded = await actor.createEmbeddedDocuments("Item", newItems);
 
     // Remove items from actor
-    await this.actor.deleteEmbeddedDocuments("Item", itemUpdates.remove.filter(id => this.actor.items.has(id)));
+    await actor.deleteEmbeddedDocuments("Item", this.itemUpdates.remove.filter(id => actor.items.has(id)));
 
     // Finalize value updates to advancement with IDs of added items
     let embeddedUpdates = {};
@@ -264,12 +367,12 @@ export class AdvancementManager extends FormApplication {
       if ( idx === -1 ) continue;
       foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
     }
-
+    
     // Update all advancements with new values
     embeddedUpdates = Object.entries(embeddedUpdates).map(([id, updates]) => {
       return { _id: id, "data.advancement": updates };
     });
-    await this.actor.updateEmbeddedDocuments("Item", embeddedUpdates);
+    await actor.updateEmbeddedDocuments("Item", embeddedUpdates);
   }
 
 }

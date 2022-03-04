@@ -1749,7 +1749,6 @@ export default class Item5e extends Item {
 
     // Prepare data for advancement
     options.levelChangeData = {
-      item: null,
       class: { initial: this.data.data.levels, final: 0 },
       character: {
         initial: this.parent.data.data.details.level,
@@ -1778,6 +1777,7 @@ export default class Item5e extends Item {
     // updated to reflect the item's removal (perhaps this should be entirely handled here rather than in AdvancementManager)
     if ( options.skipAdvancement || (options.addFeatures === false) ) return;
     if ( options.levelChangeData ) {
+      options.levelChangeData.item = this;
       this.parent.advancement.levelChanged(options.levelChangeData);
     } else if ( this.hasAdvancement ) {
       this.parent.advancement.itemRemoved(this);
