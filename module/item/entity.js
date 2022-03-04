@@ -1774,6 +1774,8 @@ export default class Item5e extends Item {
     if ( "addFeatures" in options ) {
       console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
     }
+    // TODO: When an item is deleted with flags.dnd5e.advancementOrigin set, inform that advancement so that it can be
+    // updated to reflect the item's removal (perhaps this should be entirely handled here rather than in AdvancementManager)
     if ( options.skipAdvancement || (options.addFeatures === false) ) return;
     if ( options.levelChangeData ) {
       this.parent.advancement.levelChanged(options.levelChangeData);

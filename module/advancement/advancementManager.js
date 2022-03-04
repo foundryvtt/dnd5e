@@ -1,6 +1,7 @@
 /*
 
-{ type: "levelIncreased", data: LevelChangeData }
+{ type: "levelIncreased", item: Item5e, level: number }
+{ type: "levelDecreased", item: Item5e, level: number }
 { type: "itemAdded", item: Item5e }
 { type: "itemRemoved", item: Item5e }
 { type: "modifyChoices", item: Item5e, level: number }
@@ -248,7 +249,7 @@ export class AdvancementManager extends FormApplication {
     const itemsAdded = await this.actor.createEmbeddedDocuments("Item", newItems);
 
     // Remove items from actor
-    await this.actor.deleteEmbeddedDocuments("Item", itemUpdates.remove);
+    await this.actor.deleteEmbeddedDocuments("Item", itemUpdates.remove.filter(id => this.actor.items.has(id)));
 
     // Finalize value updates to advancement with IDs of added items
     let embeddedUpdates = {};
