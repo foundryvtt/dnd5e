@@ -77,6 +77,28 @@ export class AdvancementManager extends FormApplication {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Get the step before the current one.
+   * @type {AdvancementStep}
+   */
+  get previousStep() {
+    if ( this._stepIndex === null ) return;
+    return this.steps[this._stepIndex - 1];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the step after the current one.
+   * @type {AdvancementStep}
+   */
+  get nextStep() {
+    if ( this._stepIndex === null ) return;
+    return this.steps[this._stepIndex + 1];
+  }
+
+  /* -------------------------------------------- */
   /*  Advancement Actions                         */
   /* -------------------------------------------- */
 
@@ -164,6 +186,7 @@ export class AdvancementManager extends FormApplication {
     if ( this._stepIndex === null ) this._stepIndex = newIndex;
     this.render(true);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
+    // TODO: Skip rendering if AdvancementStep#shouldRender is false
   }
 
   /* -------------------------------------------- */
@@ -173,6 +196,7 @@ export class AdvancementManager extends FormApplication {
   /** @inheritdoc */
   async getData() {
     const data = {};
+    if ( this.previousStep ) data.previousStep = true;
 
     if ( !this.step ) return data;
     await this.step.getData(data);
@@ -182,24 +206,11 @@ export class AdvancementManager extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /**
-   * Returns all advancements on an item for a specific level.
-   * @param {Item5e} item      Item that has advancement.
-   * @param {number} level     Level in question.
-   * @returns {Advancement[]}  Relevant advancement objects.
-   */
-  _advancementsForLevel(item, level) {
-    return Object.values(item.advancement).filter(a => {
-      const levels = a.levels;
-      return levels.includes(level);
-    });
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
+    html.find("button[name='previous']")?.click(this.reverseStep.bind(this));
+    html.find("button[name='next']").click(this.advanceStep.bind(this));
     this.step?.activateListeners(html);
   }
 
@@ -207,7 +218,9 @@ export class AdvancementManager extends FormApplication {
 
   /** @inheritdoc */
   async close(options={}) {
-    // TODO: Add confirmation dialog informing players that no changes have been made
+    if ( !options.skipConfirmation ) {
+      // TODO: Add confirmation dialog informing players that no changes have been made
+    }
     this.actor._advancement = null;
     await super.close(options);
   }
@@ -229,14 +242,24 @@ export class AdvancementManager extends FormApplication {
    * Advance to the next step in the workflow.
    * @returns {Promise}
    */
-  async nextStep() {
-    // Prepare changes from current step
-    // Apply changes to actor clone
-    // Check to see if this is the final step, if so, head over to complete
-    // Increase step number
-    // Render
+  async advanceStep() {
+    // TODO: Add protection from double submission, maybe just use FormApplication#_onSubmit
 
-    // If you had previously selected choices at this step, and then went back, ensure the form reflects your previous choices
+    // Prepare changes from current step
+    const formData = this._getSubmitData();
+    this.step.prepareUpdates(foundry.utils.expandObject(formData), this.clone);
+
+    // Apply changes to actor clone
+    await this.step.applyUpdates(this.clone);
+
+    // Check to see if this is the final step, if so, head over to complete
+    if ( !this.nextStep ) return this.complete();
+
+    // Increase step number and re-render
+    this._stepIndex += 1;
+    this.render();
+    // TODO: If you had previously selected choices at this step, and then went back,
+    //       ensure the form reflects your previous choices
   }
 
   /* -------------------------------------------- */
@@ -245,11 +268,20 @@ export class AdvancementManager extends FormApplication {
    * Return to a previous step in the workflow.
    * @returns {Promise}
    */
-  async previousStep() {
-    // Save choices on current form?
+  async reverseStep() {
+    if ( !this.previousStep ) return;
+
+    // TODO: Save choices on current form?
+
+    // Prepare updates that need to be removed
+    this.previousStep.prepareUpdates({}, this.clone, { reverse: true });
+
     // Revert actor clone to earlier state
-    // Decrease step number
-    // Render
+    await this.previousStep.applyUpdates(this.clone);
+
+    // Decrease step number and re-render
+    this._stepIndex -= 1;
+    this.render();
   }
 
   /* -------------------------------------------- */
@@ -260,8 +292,11 @@ export class AdvancementManager extends FormApplication {
    */
   async complete() {
     // Iterate over each step apply changes to actual actor
-    // Close AdvancementManager
-    // Remove this AdvancementManager from actor
+    this.steps.forEach(s => s.applyUpdates(this.actor));
+    // TODO: This currently shows multiple visible changes, find a way to reduce that (single update or render=false)
+
+    // Close manager & remove from actor
+    await this.close({ skipConfirmation: true });
   }
 
 }
@@ -322,7 +357,8 @@ class AdvancementStep {
   /* -------------------------------------------- */
 
   /**
-   *
+   * Get the data that will be passed to the advancement manager template when rendering this step.
+   * @param {object} data  Existing data from AdvancementManager. *Will be mutated.*
    */
   async getData(data) {
     const level = this.config.classLevel ?? this.config.level ?? this.actor.data.data.details.level;
@@ -343,7 +379,7 @@ class AdvancementStep {
     }));
     data.advancements.sort((a, b) => a.order.localeCompare(b.order));
   }
-  
+
   /* -------------------------------------------- */
 
   /**
@@ -362,7 +398,8 @@ class AdvancementStep {
   /* -------------------------------------------- */
 
   /**
-   *
+   * Activate event listeners on each individual flow within this step.
+   * @param {jQuery} html  HTML of the AdvancementManager application.
    */
   activateListeners(html) {
     html[0].querySelectorAll("section[data-id]").forEach(section => {
@@ -373,15 +410,20 @@ class AdvancementStep {
   /* -------------------------------------------- */
 
   /**
-   * 
+   * Prepare the actor and item updates that all of the advancements within this step should apply.
+   * @param {Actor5e} actor                    Actor to base the changes upon.
+   * @param {object} data                      Object containing form data with individual advancement data grouped by ID.
+   * @param {object} [options={}]              
+   * @param {boolean} [options.reverse=false]  Prepare updates to undo these advancements.
    */
-  prepareUpdates(data) {
+  prepareUpdates(actor, data, { reverse=false }={}) {
     // Loop through each advancement gathering their actor changes and items to add
     for ( const [id, flow] of Object.entries(this.flows) ) {
+      if ( actor ) flow.advancement.actor = actor;
       const level = flow.advancement.parent.type === "class" ? this.config.classLevel : this.config.level;
       flow.initialUpdate = flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {}));
-      Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(level, flow.initialUpdate));
-      const { add, remove } = flow.advancement.itemUpdates(level, flow.initialUpdate);
+      Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(level, flow.initialUpdate, { reverse }));
+      const { add, remove } = flow.advancement.itemUpdates(level, flow.initialUpdate, { reverse });
       this.itemUpdates.add.push(...add);
       this.itemUpdates.remove.push(...remove);
     }
@@ -401,7 +443,7 @@ class AdvancementStep {
     let newItems = Promise.all(this.itemUpdates.add.map(fromUuid));
 
     // Apply property changes to actor
-    await actor.update(this.actorUpdates);
+    await this.constructor._updateActor(actor, foundry.utils.deepClone(this.actorUpdates));
 
     // Add new items to actor
     newItems = (await newItems).map(item => {
@@ -412,10 +454,10 @@ class AdvancementStep {
       });
       return data;
     });
-    const itemsAdded = await actor.createEmbeddedDocuments("Item", newItems);
+    const itemsAdded = await this.constructor._createEmbeddedItems(actor, newItems);
 
     // Remove items from actor
-    await actor.deleteEmbeddedDocuments("Item", this.itemUpdates.remove.filter(id => actor.items.has(id)));
+    await this.constructor._deleteEmbeddedItems(actor, this.itemUpdates.remove.filter(id => actor.items.has(id)));
 
     // Finalize value updates to advancement with IDs of added items
     let embeddedUpdates = {};
@@ -430,12 +472,111 @@ class AdvancementStep {
       if ( idx === -1 ) continue;
       foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
     }
-    
+
     // Update all advancements with new values
     embeddedUpdates = Object.entries(embeddedUpdates).map(([id, updates]) => {
       return { _id: id, "data.advancement": updates };
     });
-    await actor.updateEmbeddedDocuments("Item", embeddedUpdates);
+    await this.constructor._updateEmbeddedItems(actor, embeddedUpdates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Check whether the actor is a normal actor or a clone and apply the updates appropriately.
+   * @param {Actor5e} actor                          Actor to which to apply updates.
+   * @param {object} updates                         Object of updates to apply.
+   * @param {DocumentModificationContext} [context]  Additional context which customizes the update workflow.
+   * @returns {Promise<Actor5e>}                     Actor with updates applied.
+   * @protected
+   */
+  static async _updateActor(actor, updates, context) {
+    // Normal actor, apply updates as normal
+    if ( actor.data._id ) return actor.update(updates, context);
+
+    // Actor clone, apply updates directly to ActorData
+    foundry.utils.mergeObject(actor.data._source, updates);
+
+    actor.prepareData();
+    return actor;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Check whether the actor is a normal actor or a clone and create embedded items appropriately.
+   * @param {Actor5e} actor                          Actor to which to create items.
+   * @param {object[]} items                         An array of data objects used to create multiple documents.
+   * @param {DocumentModificationContext} [context]  Additional context which customizes the creation workflow.
+   * @returns {Promise<Item5e[]>}                    An array of created Item instances.
+   * @protected
+   */
+  static async _createEmbeddedItems(actor, items, context) {
+    if ( actor.id ) return actor.createEmbeddedDocuments("Item", items, context);
+
+    // Create temporary documents
+    const documents = await Promise.all(items.map(i => {
+      return CONFIG.Item.documentClass.create(i, { parent: actor, temporary: true });
+    }));
+
+    // TODO: Trigger any additional advancement steps for added items
+
+    actor.prepareData();
+    return documents;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Check whether the actor is a normal actor or a clone and update embedded items appropriately.
+   * @param {Actor5e} actor                          Actor to which to update items.
+   * @param {object[]} updates                       An array of differential data objects.
+   * @param {DocumentModificationContext} [context]  Additional context which customizes the update workflow.
+   * @returns {Promise<Item5e[]>}                    An array of updated Item instances.
+   * @protected
+   */
+  static async _updateEmbeddedItems(actor, items, context) {
+    if ( actor.id ) return actor.updateEmbeddedDocuments("Item", items, context);
+
+    let documents = [];
+    for ( const data of items ) {
+      const item = actor.items.get(data._id);
+      if ( !item ) continue;
+      documents.push(item);
+
+      const updates = foundry.utils.deepClone(data);
+      delete updates._id;
+      foundry.utils.mergeObject(item.data._source, updates);
+    }
+    // TODO: I'm not sure this entirely works
+
+    actor.prepareData();
+    return documents;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Check whether the actor is a normal actor or a clone and delete embedded items appropriately.
+   * @param {Actor5e} actor                          Actor to which to delete items.
+   * @param {object[]} ids                           An array of string ids for each Document to be deleted.
+   * @param {DocumentModificationContext} [context]  Additional context which customizes the deletion workflow.
+   * @returns {Promise<Item5e[]>}                    An array of deleted Item instances.
+   * @protected
+   */
+  static async _deleteEmbeddedItems(actor, ids, context) {
+    if ( actor.id ) return actor.deleteEmbeddedDocuments("Item", ids, context);
+
+    let documents = [];
+    for ( const id of ids ) {
+      const item = actor.items.get(id);
+      if ( !item ) continue;
+      documents.push(item);
+      actor.items.delete(id);
+    }
+
+    actor.prepareData();
+    return documents;
   }
 
 }
