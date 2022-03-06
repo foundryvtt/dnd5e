@@ -46,7 +46,7 @@ export class HitPointsFlow extends AdvancementFlow {
    */
   async _onRollDice(event) {
     // TODO: Maybe this should be `Actor#rollHitPoints`?
-    const actor = this.advancement.parent.parent;
+    const actor = this.advancement.actor;
     const roll = await game.dnd5e.dice.damageRoll({
       event,
       parts: [`1${this.advancement.hitDie}`],

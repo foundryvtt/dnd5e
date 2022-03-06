@@ -421,8 +421,8 @@ class AdvancementStep {
    */
   prepareUpdates({ actor, data={}, reverse=false }) {
     for ( const [id, flow] of Object.entries(this.flows) ) {
-      // Associate advancement with provided actor so it can fetch the proper values from actor data
-      if ( actor ) flow.advancement.actor = actor;
+      // Swap advancement in flow with version from provided actor so it has access to the proper data
+      if ( actor ) flow.advancement = actor.items.get(flow.advancement.parent.id).advancement[flow.advancement.id];
 
       // Prepare update data from the form
       const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? this.config.level;

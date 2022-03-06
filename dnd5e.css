@@ -1392,7 +1392,7 @@
   justify-content: flex-end;
 }
 .dnd5e.advancement.flow nav button {
-  flex-basis: 15em;
+  max-width: 50%;
 }
 .dnd5e.sheet.item {
   min-height: 400px;
