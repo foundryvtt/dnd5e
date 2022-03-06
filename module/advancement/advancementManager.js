@@ -580,7 +580,7 @@ class AdvancementStep {
     let documents = [];
     for ( const id of ids ) {
       const item = actor.items.get(id);
-      const itemIndex = actor.data._source.items.findIndex(i => i._id === data._id);
+      const itemIndex = actor.data._source.items.findIndex(i => i._id === id);
       if ( !item || (itemIndex === -1) ) continue;
       documents.push(item);
       actor.data._source.items.splice(itemIndex, 1);
