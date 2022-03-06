@@ -219,17 +219,28 @@ export class HitPointsAdvancement extends Advancement {
   /*--------------------------------------------- */
 
   /** @inheritdoc */
-  propertyUpdates(level, updates) {
+  propertyUpdates({ level, updates, reverse=false }) {
+    const actorData = this.actor.data.data;
+    let value = this.valueForLevel(level) ?? 0;
+
+    if ( !updates ) {
+      if ( value === 0 ) return {};
+      if ( reverse ) value *= -1;
+      return {
+        "data.attributes.hp.max": actorData.attributes.hp.max + value,
+        "data.attributes.hp.value": actorData.attributes.hp.value + value
+      };
+    }
+
     // No way to safely apply changes to max hit points without difference data
     if ( !updates || !updates[level] ) return {};
 
-    const original = this.valueForLevel(level) ?? 0;
     const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
-    let hpChange = modified - original
+    let hpChange = modified - value;
     if ( hpChange === 0 ) return {};
 
     // Avoid adding the constitution modifier more than once
-    if ( original === 0 ) hpChange += this.actor.data.data.abilities.con?.mod ?? 0
+    if ( this.data.value[level] === undefined ) hpChange += this.actor.data.data.abilities.con?.mod ?? 0
 
     return {
       "data.attributes.hp.max": this.actor.data.data.attributes.hp.max + hpChange,

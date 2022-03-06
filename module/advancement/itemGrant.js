@@ -217,7 +217,9 @@ export class ItemGrantAdvancement extends Advancement {
   /*--------------------------------------------- */
 
   /** @inheritdoc */
-  itemUpdates(level, updates) {
+  itemUpdates({ level, updates, reverse=false }) {
+    // TODO: Ensure there isn't a situation where reverse is used with updates
+    if ( reverse ) return { add: [], remove: Array.from(Object.keys(this.data.value?.added ?? {})) };
     if ( !updates ) return { add: Array.from(Object.values(this.data.value?.added ?? {})), remove: [] };
 
     const existing = new Set(Object.values(this.data.value?.added ?? {}));

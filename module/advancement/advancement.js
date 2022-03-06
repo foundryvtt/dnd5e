@@ -264,12 +264,14 @@ export class Advancement {
 
   /**
    * Add any properties that should be changed on the actor to an update object.
-   * @param {number} level      Level for which to gather updates.
-   * @param {object} [updates]  Updates to this advancement's `value`. If this is provided, only the difference between
-   *                            this object and the existing value should be applied.
-   * @returns {object}          The actor updates object.
+   * @param {object} config
+   * @param {number} config.level             Level for which to gather updates.
+   * @param {object} [config.updates]         Updates to this advancement's `value`. If this is provided, only the
+   *                                          difference between this object and the existing value should be applied.
+   * @param {boolean} [config.reverse=false]  Whether the reverse changes should be produced.
+   * @returns {object}                        The actor updates object.
    */
-  propertyUpdates(level, updates) {
+  propertyUpdates({ level, updates, reverse=false }) {
     return {};
   }
 
@@ -277,16 +279,17 @@ export class Advancement {
 
   /**
    * Get a list UUIDs for new items that should be added to the actor.
-   * @param {number} level      Level for which to add items.
-   * @param {object} [updates]  Updates to this advancement's `value`. If this is provided, only the difference between
-   *                            this object and the existing value should be applied.
+   * @param {object} config
+   * @param {number} config.level             Level for which to add items.
+   * @param {object} [config.updates]         Updates to this advancement's `value`. If this is provided, only the
+   *                                          difference between this object and the existing value should be applied.
+   * @param {boolean} [config.reverse=false]  Whether the reverse changes should be produced.
    * @returns {{
    *   add: string[],
    *   remove: string[]
    * }}  UUIDs of items to add to the actor and IDs of items to remove.
    */
-  itemUpdates(level, updates) {
-    // TODO: This should probably be able to list items removed as well as added
+  itemUpdates({ level, updates, reverse=false }) {
     return { add: [], remove: [] };
   }
 

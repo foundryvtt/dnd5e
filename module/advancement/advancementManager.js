@@ -230,7 +230,7 @@ export class AdvancementManager extends FormApplication {
   async _updateObject(event, formData) {
     if ( !this.step ) return;
     const data = foundry.utils.expandObject(formData);
-    this.step.prepareUpdates(data);
+    this.step.prepareUpdates({ data });
     await this.step.applyUpdates(this.actor);
   }
 
@@ -247,7 +247,7 @@ export class AdvancementManager extends FormApplication {
 
     // Prepare changes from current step
     const formData = this._getSubmitData();
-    this.step.prepareUpdates(foundry.utils.expandObject(formData), this.clone);
+    this.step.prepareUpdates({ actor: this.clone, data: foundry.utils.expandObject(formData) });
 
     // Apply changes to actor clone
     await this.step.applyUpdates(this.clone);
@@ -274,7 +274,7 @@ export class AdvancementManager extends FormApplication {
     // TODO: Save choices on current form?
 
     // Prepare updates that need to be removed
-    this.previousStep.prepareUpdates({}, this.clone, { reverse: true });
+    this.previousStep.prepareUpdates({ actor: this.clone, reverse: true });
 
     // Revert actor clone to earlier state
     await this.previousStep.applyUpdates(this.clone);
@@ -292,8 +292,11 @@ export class AdvancementManager extends FormApplication {
    */
   async complete() {
     // Iterate over each step apply changes to actual actor
-    this.steps.forEach(s => s.applyUpdates(this.actor));
-    // TODO: This currently shows multiple visible changes, find a way to reduce that (single update or render=false)
+    for ( const step of this.steps ) {
+      await step.applyUpdates(this.actor);
+    }
+    // TODO: This currently shows multiple visible changes and takes awhile
+    //       All changes should be merged down to one
 
     // Close manager & remove from actor
     await this.close({ skipConfirmation: true });
@@ -411,20 +414,27 @@ class AdvancementStep {
 
   /**
    * Prepare the actor and item updates that all of the advancements within this step should apply.
-   * @param {Actor5e} actor                    Actor to base the changes upon.
-   * @param {object} data                      Object containing form data with individual advancement data grouped by ID.
-   * @param {object} [options={}]              
-   * @param {boolean} [options.reverse=false]  Prepare updates to undo these advancements.
+   * @param {object} [config]
+   * @param {Actor5e} config.actor            Actor to base the changes upon.
+   * @param {object} [config.data={}]         Object containing form data with individual advancement data grouped by ID.
+   * @param {boolean} [config.reverse=false]  Prepare updates to undo these advancements.
    */
-  prepareUpdates(actor, data, { reverse=false }={}) {
-    // Loop through each advancement gathering their actor changes and items to add
+  prepareUpdates({ actor, data={}, reverse=false }) {
     for ( const [id, flow] of Object.entries(this.flows) ) {
+      // Associate advancement with provided actor so it can fetch the proper values from actor data
       if ( actor ) flow.advancement.actor = actor;
-      const level = flow.advancement.parent.type === "class" ? this.config.classLevel : this.config.level;
+
+      // Prepare update data from the form
+      const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? this.config.level;
       flow.initialUpdate = flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {}));
-      Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(level, flow.initialUpdate, { reverse }));
-      const { add, remove } = flow.advancement.itemUpdates(level, flow.initialUpdate, { reverse });
-      this.itemUpdates.add.push(...add);
+      const fetchData = { level, updates: flow.initialUpdate, reverse };
+
+      // Prepare property changes
+      Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(fetchData));
+
+      // Prepare added or removed items
+      const { add, remove } = flow.advancement.itemUpdates(fetchData);
+      this.itemUpdates.add.push(...add); // TODO: Keep added items associated with the advancement that provides them
       this.itemUpdates.remove.push(...remove);
     }
   }
@@ -466,7 +476,7 @@ class AdvancementStep {
       if ( foundry.utils.isObjectEmpty(update) ) continue;
       const itemId = flow.advancement.parent.id;
       if ( !embeddedUpdates[itemId] ) {
-        embeddedUpdates[itemId] = foundry.utils.deepClone(flow.advancement.parent.data.data.advancement);
+        embeddedUpdates[itemId] = foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
       }
       const idx = embeddedUpdates[itemId].findIndex(a => a._id === id);
       if ( idx === -1 ) continue;
@@ -541,14 +551,14 @@ class AdvancementStep {
     let documents = [];
     for ( const data of items ) {
       const item = actor.items.get(data._id);
-      if ( !item ) continue;
+      const itemIndex = actor.data._source.items.findIndex(i => i._id === data._id);
+      if ( !item || (itemIndex === -1) ) continue;
       documents.push(item);
 
       const updates = foundry.utils.deepClone(data);
       delete updates._id;
-      foundry.utils.mergeObject(item.data._source, updates);
+      foundry.utils.mergeObject(actor.data._source.items[itemIndex], updates);
     }
-    // TODO: I'm not sure this entirely works
 
     actor.prepareData();
     return documents;
@@ -570,9 +580,10 @@ class AdvancementStep {
     let documents = [];
     for ( const id of ids ) {
       const item = actor.items.get(id);
-      if ( !item ) continue;
+      const itemIndex = actor.data._source.items.findIndex(i => i._id === data._id);
+      if ( !item || (itemIndex === -1) ) continue;
       documents.push(item);
-      actor.items.delete(id);
+      actor.data._source.items.splice(itemIndex, 1);
     }
 
     actor.prepareData();
