@@ -81,8 +81,8 @@
       "prepared": false
     },
     "scaling": {
-      "mode": "none",
-      "formula": ""
+      "mode": "level",
+      "formula": "(@item.level - 1) * 5"
     }
   },
   "sort": 100001,
