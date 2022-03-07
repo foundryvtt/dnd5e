@@ -187,6 +187,7 @@ export class AdvancementManager extends FormApplication {
     this.render(true);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
     // TODO: Skip rendering if AdvancementStep#shouldRender is false
+    // TODO: If no advancements are valid for this level, don't show the dialog
   }
 
   /* -------------------------------------------- */
@@ -324,10 +325,10 @@ class AdvancementStep {
     this.config = config;
 
     /**
-     * Advancement flows that make up this step.
-     * @type {AdvancementFlow[]}
+     * Advancement flows that make up this step grouped by level.
+     * @type {object<number, AdvancementFlow[]>}
      */
-    this.flows = [];
+    this.flows = {};
 
     /**
      * Updates that will be applied to the actor's properties. Will be provided to `Actor#update`.
@@ -364,23 +365,51 @@ class AdvancementStep {
    * @param {object} data  Existing data from AdvancementManager. *Will be mutated.*
    */
   async getData(data) {
-    const level = this.config.classLevel ?? this.config.level ?? this.actor.data.data.details.level;
-    data.header = this.config.item.name;
-    data.subheader = `Level ${level}`; // TODO: Localize
+    // const level = this.config.classLevel ?? this.config.level ?? this.actor.data.data.details.level;
+    // data.header = this.config.item.name;
 
     // TODO: Handle other items with advancements during level change steps
-    data.advancements = await Promise.all(this._advancementsForLevel(this.config.item, level).map(async (a) => {
-      this.flows[a.id] ??= new a.constructor.flowApp(a, { level });
-      return {
-        id: a.id,
-        type: a.constructor.typeName,
-        data: await this.flows[a.id].getData(),
-        template: this.flows[a.id].options.template,
-        title: this.flows[a.id].title,
-        order: a.sortingValueForLevel(level)
-      };
-    }));
-    data.advancements.sort((a, b) => a.order.localeCompare(b.order));
+    // data.sections = [{
+    //   level,
+    //   header: `Level ${level}`, // TODO: Localize
+    //   advancements: await Promise.all(this._advancementsForLevel(this.config.item, level).map(async (a) => {
+    //     return await this.getAdvancementFlowData(this.getFlow(a, level));
+    //   }))
+    // }];
+    // data.sections[0].advancements.sort((a, b) => a.order.localeCompare(b.order));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get a flow object for a specific level.
+   * @param {Advancement} advancement  Advancement from which to create the flow.
+   * @param {number} level             Character level used when creating and referencing the flow.
+   * @param {number} [classLevel]      Class level used when creating the flow.
+   * @returns {AdvancementFlow}        The flow.
+   */
+  getFlow(advancement, level, classLevel) {
+    this.flows[level] ??= {};
+    this.flows[level][advancement.id] ??= new advancement.constructor.flowApp(advancement, { level: classLevel ?? level });
+    return this.flows[level][advancement.id];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get data needed to display an advancement in the step.
+   * @param {AdvancementFlow} flow  Relevant advancement flow object.
+   * @returns {object}              Display data for template rendering.
+   */
+  async getAdvancementFlowData(flow) {
+    return {
+      id: flow.advancement.id,
+      type: flow.advancement.constructor.typeName,
+      data: await flow.getData(),
+      template: flow.options.template,
+      title: flow.title,
+      order: flow.sortingValue
+    };
   }
 
   /* -------------------------------------------- */
@@ -406,7 +435,7 @@ class AdvancementStep {
    */
   activateListeners(html) {
     html[0].querySelectorAll("section[data-id]").forEach(section => {
-      this.flows[section.dataset.id]?.activateListeners($(section));
+      this.flows[section.dataset.level][section.dataset.id]?.activateListeners($(section));
     });
   }
 
@@ -420,22 +449,24 @@ class AdvancementStep {
    * @param {boolean} [config.reverse=false]  Prepare updates to undo these advancements.
    */
   prepareUpdates({ actor, data={}, reverse=false }) {
-    for ( const [id, flow] of Object.entries(this.flows) ) {
-      // Swap advancement in flow with version from provided actor so it has access to the proper data
-      if ( actor ) flow.advancement = actor.items.get(flow.advancement.parent.id).advancement[flow.advancement.id];
+    for ( const [currentLevel, flows] of Object.entries(this.flows) ) {
+      for ( const [id, flow] of Object.entries(flows) ) {
+        // Swap advancement in flow with version from provided actor so it has access to the proper data
+        if ( actor ) flow.advancement = actor.items.get(flow.advancement.parent.id).advancement[flow.advancement.id];
 
-      // Prepare update data from the form
-      const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? this.config.level;
-      flow.initialUpdate = flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {}));
-      const fetchData = { level, updates: flow.initialUpdate, reverse };
+        // Prepare update data from the form
+        const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? Number(currentLevel);
+        flow.initialUpdate = flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {}));
+        const fetchData = { level, updates: flow.initialUpdate, reverse };
 
-      // Prepare property changes
-      Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(fetchData));
+        // Prepare property changes
+        Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(fetchData));
 
-      // Prepare added or removed items
-      const { add, remove } = flow.advancement.itemUpdates(fetchData);
-      this.itemUpdates.add.push(...add); // TODO: Keep added items associated with the advancement that provides them
-      this.itemUpdates.remove.push(...remove);
+        // Prepare added or removed items
+        const { add, remove } = flow.advancement.itemUpdates(fetchData);
+        this.itemUpdates.add.push(...add); // TODO: Keep added items associated with the advancement that provides them
+        this.itemUpdates.remove.push(...remove);
+      }
     }
   }
 
@@ -471,16 +502,18 @@ class AdvancementStep {
 
     // Finalize value updates to advancement with IDs of added items
     let embeddedUpdates = {};
-    for ( const [id, flow] of Object.entries(this.flows) ) {
-      const update = flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
-      if ( foundry.utils.isObjectEmpty(update) ) continue;
-      const itemId = flow.advancement.parent.id;
-      if ( !embeddedUpdates[itemId] ) {
-        embeddedUpdates[itemId] = foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
+    for ( const [level, flows] of Object.entries(this.flows) ) {
+      for ( const [id, flow] of Object.entries(flows) ) {
+        const update = flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
+        if ( foundry.utils.isObjectEmpty(update) ) continue;
+        const itemId = flow.advancement.parent.id;
+        if ( !embeddedUpdates[itemId] ) {
+          embeddedUpdates[itemId] = foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
+        }
+        const idx = embeddedUpdates[itemId].findIndex(a => a._id === id);
+        if ( idx === -1 ) continue;
+        foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
       }
-      const idx = embeddedUpdates[itemId].findIndex(a => a._id === id);
-      if ( idx === -1 ) continue;
-      foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
     }
 
     // Update all advancements with new values
@@ -600,14 +633,52 @@ class AdvancementStep {
 class LevelIncreasedStep extends AdvancementStep {
 
   get title() {
-    return "Level Up Character"; // TODO: Localize
+    return "Level Up Character"; // TODO: Localize, change for first level of class or multiclass
+    // "Add Character Class"
+    // "Multiclass Character"
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async getData(data) {
+    await super.getData(data);
+
+    // const otherItems = this.actor.items.filter(i => {
+    //   return (i.id !== this.config.item.id) && this._advancementsForLevel(i, this.config.level).length;
+    // });
+    // console.log(otherItems);
+
+    data.sections = [{
+      level: this.config.classLevel,
+      header: this.config.item.name,
+      subheader: `Level ${this.config.classLevel}`, // TODO: Localize
+      advancements: await Promise.all(this._advancementsForLevel(this.config.item, this.config.classLevel).map(async (a) => {
+        return await this.getAdvancementFlowData(this.getFlow(a, this.config.level, this.config.classLevel));
+      }))
+    }];
+
+    // TODO: Fix this up for other items with advancements
+    // for ( const item of otherItems ) {
+    //   data.sections.push({
+    //     level: this.config.level,
+    //     header: item.name,
+    //     advancements: await Promise.all(this._advancementsForLevel(item, this.config.level).map(async (a) => {
+    //       return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
+    //     }))
+    //   });
+    // }
+
+    data.sections.forEach(s => s.advancements.sort((a, b) => a.order.localeCompare(b.order)));
+
+    return data;
   }
 
 }
 
 
 /**
- *
+ * Handles unapplying changes for a class and other items when level is decreased.
  * @extends AdvancementStep
  */
 class LevelDecreasedStep extends AdvancementStep {
@@ -619,16 +690,36 @@ class LevelDecreasedStep extends AdvancementStep {
 
 
 /**
- *
+ * Handles adding a new item with advancement at the current character level.
  * @extends AdvancementStep
  */
 class ItemAddedStep extends AdvancementStep {
+
   // TODO: Implement later
+//   async getData(data) {
+//     const currentLevel = this.actor.data.data.details.level;
+//     data.header = this.config.item.name;
+//     data.sections = [];
+// 
+//     // Iterate over each level leading up to current, adding a section for each level
+//     let level = 0;
+//     while ( level <= currentLevel ) {
+//       const advancements = await Promise.all(this._advancementsForLevel(this.config.item, level).map(async (a) => {
+//         return await this.getAdvancementFlowData(this.getFlow(a, level));
+//       }));
+//       if ( advancements.length ) {
+//         advancements.sort((a, b) => a.order.localeCompare(b.order));
+//         data.sections.push({ level, header: `Level ${level}`, advancements });
+//       }
+//       level += 1;
+//     }
+//   }
+
 }
 
 
 /**
- *
+ * Handles unapplying any advancement changes when a non-class item with advancement is removed.
  * @extends AdvancementStep
  */
 class ItemRemovedStep extends AdvancementStep {
@@ -640,13 +731,27 @@ class ItemRemovedStep extends AdvancementStep {
 
 
 /**
- *
+ * Handles changing advancement choices for a single item at a specific level.
  * @extends AdvancementStep
  */
 class ModifyChoicesStep extends AdvancementStep {
   
   get title() {
     return "Modify Choices"; // TODO: Localize
+  }
+
+  /* -------------------------------------------- */
+
+  async getData(data) {
+    data.sections = [{
+      level: this.config.level,
+      header: this.config.item.name,
+      subheader: `Level ${this.config.level}`, // TODO: Localize
+      advancements: await Promise.all(this._advancementsForLevel(this.config.item, this.config.level).map(async (a) => {
+        return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
+      }))
+    }];
+    data.sections[0].advancements.sort((a, b) => a.order.localeCompare(b.order));
   }
 
 }

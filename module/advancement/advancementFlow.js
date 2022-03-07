@@ -28,8 +28,22 @@ export class AdvancementFlow extends Application {
   
   /* -------------------------------------------- */
 
+  /**
+   * 
+   * @type {string}
+   */
   get title() {
     return this.advancement.title;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * 
+   * @type {string}
+   */
+  get sortingValue() {
+    return this.advancement.sortingValueForLevel(this.options.level);
   }
 
   /* -------------------------------------------- */

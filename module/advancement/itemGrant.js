@@ -87,6 +87,7 @@ export class ItemGrantConfig extends AdvancementConfig {
       })
     };
 
+    // TODO: Bug when items are dropped, any other changes are reset
     return this._updateAdvancement(updates);
   }
 
