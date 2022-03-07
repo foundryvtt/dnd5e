@@ -4,9 +4,11 @@ import { AdvancementFlow } from "./advancementFlow.js";
 
 /**
  * Inline application that presents hit points selection upon level up.
+ *
+ * @extends {AdvancementFlow}
  */
 export class HitPointsFlow extends AdvancementFlow {
-  
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -19,7 +21,7 @@ export class HitPointsFlow extends AdvancementFlow {
   /** @inheritdoc */
   getData() {
     // TODO: If value is empty, `useAverage` should default to the value selected at the previous level
-    const value = this.advancement.data.value[this.options.level];
+    const value = this.advancement.data.value[this.level];
     return foundry.utils.mergeObject(super.getData(), {
       hitDie: this.advancement.hitDie,
       dieValue: this.advancement.hitDieValue,
@@ -43,6 +45,7 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /**
    * Trigger a hit dice roll and add the result to the field.
+   * @param {Event} event  Click that triggered the roll.
    */
   async _onRollDice(event) {
     // TODO: Maybe this should be `Actor#rollHitPoints`?
@@ -67,9 +70,9 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   prepareUpdate(formData) {
-    if ( formData.useAverage ) return { [this.options.level]: true };
-    else if ( Number.isInteger(formData.value) ) return { [this.options.level]: formData.value };
-    return { [this.options.level]: true }; // TODO: Fix for empty data at first level
+    if ( formData.useAverage ) return { [this.level]: true };
+    else if ( Number.isInteger(formData.value) ) return { [this.level]: formData.value };
+    return { [this.level]: true }; // TODO: Fix for empty data at first level
     // TODO: Add error handling if no hit points are entered or an invalid number is entered
   }
 
