@@ -1,5 +1,9 @@
 /**
  * Application for controlling the advancement workflow and displaying the interface.
+ *
+ * @property {Actor5e} actor                 Actor up which this advancement is being performed.
+ * @property {AdvancementStep[]} [steps=[]]  Any initial steps that should be displayed.
+ * @property {object} [options={}]           Additional application options.
  * @extends FormApplication
  */
 export class AdvancementManager extends FormApplication {
@@ -59,7 +63,7 @@ export class AdvancementManager extends FormApplication {
   /* -------------------------------------------- */
 
   /**
-   * Get the step that is currently in progress. Will be undefined if no step is in progress.
+   * Get the step that is currently in progress.
    * @type {AdvancementStep}
    */
   get step() {
@@ -150,6 +154,7 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was added.
    */
   itemAdded(item) {
+    return console.warn("Advancements on non-class items not currently supported");
     this._addStep(new ItemAddedStep(this.actor, { item }));
   }
 
@@ -160,6 +165,7 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was removed.
    */
   itemRemoved(item) {
+    return console.warn("Advancements on non-class items not currently supported");
     this._addStep(new ItemRemovedStep(this.actor, { item }));
   }
 
@@ -199,7 +205,7 @@ export class AdvancementManager extends FormApplication {
     const data = {};
     if ( this.previousStep ) data.previousStep = true;
 
-    if ( !this.step ) return data;
+    if ( !this.step ) return data; // TODO: If no step available, just close the window I suppose
     await this.step.getData(data);
 
     return data;
@@ -250,8 +256,6 @@ export class AdvancementManager extends FormApplication {
     // Increase step number and re-render
     this._stepIndex += 1;
     this.render();
-    // TODO: If you had previously selected choices at this step, and then went back,
-    //       ensure the form reflects your previous choices
   }
 
   /* -------------------------------------------- */
@@ -262,8 +266,6 @@ export class AdvancementManager extends FormApplication {
    */
   async reverseStep() {
     if ( !this.previousStep ) return;
-
-    // TODO: Save choices on current form?
 
     // Prepare updates that need to be removed
     this.previousStep.prepareUpdates({ actor: this.clone, reverse: true });
@@ -287,8 +289,8 @@ export class AdvancementManager extends FormApplication {
     for ( const step of this.steps ) {
       await step.applyUpdates(this.actor);
     }
-    // TODO: This currently shows multiple visible changes and takes awhile
-    //       All changes should be merged down to one
+    // TODO: This currently shows multiple visible changes and takes awhile, rework how changes are applied to merge
+    //       multiple steps into a single change object
 
     // Close manager & remove from actor
     await this.close({ skipConfirmation: true });
@@ -298,7 +300,10 @@ export class AdvancementManager extends FormApplication {
 
 
 /**
+ * Step in the advancement process that will be displayed on its individual page.
  *
+ * @property {Actor5e} actor  Actor to which this step's changes will be applied.
+ * @property {object} config  Configuration information specific to each step type.
  */
 class AdvancementStep {
 
@@ -355,20 +360,7 @@ class AdvancementStep {
    * Get the data that will be passed to the advancement manager template when rendering this step.
    * @param {object} data  Existing data from AdvancementManager. *Will be mutated.*
    */
-  async getData(data) {
-    // const level = this.config.classLevel ?? this.config.level ?? this.actor.data.data.details.level;
-    // data.header = this.config.item.name;
-
-    // TODO: Handle other items with advancements during level change steps
-    // data.sections = [{
-    //   level,
-    //   header: game.i18n.format("DND5E.AdvancementLevelHeader", { number: level }),
-    //   advancements: await Promise.all(this._advancementsForLevel(this.config.item, level).map(async (a) => {
-    //     return await this.getAdvancementFlowData(this.getFlow(a, level));
-    //   }))
-    // }];
-    // data.sections[0].advancements.sort((a, b) => a.order.localeCompare(b.order));
-  }
+  async getData(data) { }
 
   /* -------------------------------------------- */
 
@@ -378,6 +370,7 @@ class AdvancementStep {
    * @param {number} level             Character level used when creating and referencing the flow.
    * @param {number} [classLevel]      Class level used when creating the flow.
    * @returns {AdvancementFlow}        The flow.
+   * @protected
    */
   getFlow(advancement, level, classLevel) {
     this.flows[level] ??= {};
@@ -391,6 +384,7 @@ class AdvancementStep {
    * Get data needed to display an advancement in the step.
    * @param {AdvancementFlow} flow  Relevant advancement flow object.
    * @returns {object}              Display data for template rendering.
+   * @protected
    */
   async getAdvancementFlowData(flow) {
     return {
@@ -410,8 +404,9 @@ class AdvancementStep {
    * @param {Item5e} item      Item that has advancement.
    * @param {number} level     Level in question.
    * @returns {Advancement[]}  Relevant advancement objects.
+   * @protected
    */
-  _advancementsForLevel(item, level) {
+  advancementsForLevel(item, level) {
     return Object.values(item.advancement).filter(a => {
       const levels = a.levels;
       return levels.includes(level);
@@ -619,7 +614,7 @@ class AdvancementStep {
 
 /**
  * Handles presenting changes for a class and other items when level is increased by one.
- * @extends AdvancementStep
+ * @extends {AdvancementStep}
  */
 class LevelIncreasedStep extends AdvancementStep {
 
@@ -636,7 +631,7 @@ class LevelIncreasedStep extends AdvancementStep {
     await super.getData(data);
 
     // const otherItems = this.actor.items.filter(i => {
-    //   return (i.id !== this.config.item.id) && this._advancementsForLevel(i, this.config.level).length;
+    //   return (i.id !== this.config.item.id) && this.advancementsForLevel(i, this.config.level).length;
     // });
     // console.log(otherItems);
 
@@ -644,7 +639,7 @@ class LevelIncreasedStep extends AdvancementStep {
       level: this.config.level,
       header: this.config.item.name,
       subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.classLevel }),
-      advancements: await Promise.all(this._advancementsForLevel(this.config.item, this.config.classLevel).map(async (a) => {
+      advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.classLevel).map(async (a) => {
         return await this.getAdvancementFlowData(this.getFlow(a, this.config.level, this.config.classLevel));
       }))
     }];
@@ -654,7 +649,7 @@ class LevelIncreasedStep extends AdvancementStep {
     //   data.sections.push({
     //     level: this.config.level,
     //     header: item.name,
-    //     advancements: await Promise.all(this._advancementsForLevel(item, this.config.level).map(async (a) => {
+    //     advancements: await Promise.all(this.advancementsForLevel(item, this.config.level).map(async (a) => {
     //       return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
     //     }))
     //   });
@@ -696,7 +691,7 @@ class ItemAddedStep extends AdvancementStep {
 //     // Iterate over each level leading up to current, adding a section for each level
 //     let level = 0;
 //     while ( level <= currentLevel ) {
-//       const advancements = await Promise.all(this._advancementsForLevel(this.config.item, level).map(async (a) => {
+//       const advancements = await Promise.all(this.advancementsForLevel(this.config.item, level).map(async (a) => {
 //         return await this.getAdvancementFlowData(this.getFlow(a, level));
 //       }));
 //       if ( advancements.length ) {
@@ -741,7 +736,7 @@ class ModifyChoicesStep extends AdvancementStep {
       level: this.config.level,
       header: this.config.item.name,
       subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.level }),
-      advancements: await Promise.all(this._advancementsForLevel(this.config.item, this.config.level).map(async (a) => {
+      advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.level).map(async (a) => {
         return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
       }))
     }];
