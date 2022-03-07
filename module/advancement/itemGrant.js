@@ -95,15 +95,13 @@ export class ItemGrantConfig extends AdvancementConfig {
 
 /**
  * Inline application that presents the player with a list of items to be added.
+ *
+ * @extends {AdvancementFlow}
  */
 export class ItemGrantFlow extends AdvancementFlow {
 
   /** @inheritdoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/item-grant-flow.html"
-    });
-  }
+  static template = "systems/dnd5e/templates/advancement/item-grant-flow.html";
 
   /* -------------------------------------------- */
 

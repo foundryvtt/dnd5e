@@ -1,13 +1,4 @@
 /**
- * Represents data about a change is character and class level for an actor.
- *
- * @typedef {object} LevelChangeData
- * @property {Item5e|null} item  Class item that was added or changed.
- * @property {{ initial: number, final: number }} character  Overall character level changes.
- * @property {{ initial: number, final: number }} class      Changes to the class's level.
- */
-
-/**
  * Application for controlling the advancement workflow and displaying the interface.
  * @extends FormApplication
  */
@@ -101,6 +92,15 @@ export class AdvancementManager extends FormApplication {
   /* -------------------------------------------- */
   /*  Advancement Actions                         */
   /* -------------------------------------------- */
+
+  /**
+   * Represents data about a change is character and class level for an actor.
+   *
+   * @typedef {object} LevelChangeData
+   * @property {Item5e|null} item  Class item that was added or changed.
+   * @property {{ initial: number, final: number }} character  Overall character level changes.
+   * @property {{ initial: number, final: number }} class      Changes to the class's level.
+   */
 
   /**
    * Add a step to this advancement process when a class is added or level is changed.
@@ -224,15 +224,6 @@ export class AdvancementManager extends FormApplication {
     }
     this.actor._advancement = null;
     await super.close(options);
-  }
-
-  /* -------------------------------------------- */
-
-  async _updateObject(event, formData) {
-    if ( !this.step ) return;
-    const data = foundry.utils.expandObject(formData);
-    this.step.prepareUpdates({ data });
-    await this.step.applyUpdates(this.actor);
   }
 
   /* -------------------------------------------- */
@@ -390,7 +381,7 @@ class AdvancementStep {
    */
   getFlow(advancement, level, classLevel) {
     this.flows[level] ??= {};
-    this.flows[level][advancement.id] ??= new advancement.constructor.flowApp(advancement, { level: classLevel ?? level });
+    this.flows[level][advancement.id] ??= new advancement.constructor.flowApp(advancement, classLevel ?? level);
     return this.flows[level][advancement.id];
   }
 
@@ -406,7 +397,7 @@ class AdvancementStep {
       id: flow.advancement.id,
       type: flow.advancement.constructor.typeName,
       data: await flow.getData(),
-      template: flow.options.template,
+      template: flow.constructor.template,
       title: flow.title,
       order: flow.sortingValue
     };
@@ -435,7 +426,7 @@ class AdvancementStep {
    */
   activateListeners(html) {
     html[0].querySelectorAll("section[data-id]").forEach(section => {
-      this.flows[section.dataset.level][section.dataset.id]?.activateListeners($(section));
+      this.flows[section.dataset.level]?.[section.dataset.id]?.activateListeners($(section));
     });
   }
 
@@ -627,11 +618,12 @@ class AdvancementStep {
 
 
 /**
- *
+ * Handles presenting changes for a class and other items when level is increased by one.
  * @extends AdvancementStep
  */
 class LevelIncreasedStep extends AdvancementStep {
 
+  /** @inheritdoc */
   get title() {
     if ( this.config.classLevel > 1 ) return game.i18n.localize("DND5E.AdvancementManagerLevelIncreasedTitle");
     return game.i18n.localize("DND5E.AdvancementManagerLevelNewClassTitle");
@@ -677,8 +669,8 @@ class LevelIncreasedStep extends AdvancementStep {
 
 
 /**
- * Handles unapplying changes for a class and other items when level is decreased.
- * @extends AdvancementStep
+ * Handles unapplying changes for a class and other items when level is decreased by one.
+ * @extends {AdvancementStep}
  */
 class LevelDecreasedStep extends AdvancementStep {
 
@@ -690,11 +682,12 @@ class LevelDecreasedStep extends AdvancementStep {
 
 /**
  * Handles adding a new item with advancement at the current character level.
- * @extends AdvancementStep
+ * @extends {AdvancementStep}
  */
 class ItemAddedStep extends AdvancementStep {
 
   // TODO: Implement later
+//   /** @inheritdoc */
 //   async getData(data) {
 //     const currentLevel = this.actor.data.data.details.level;
 //     data.header = this.config.item.name;
@@ -719,7 +712,7 @@ class ItemAddedStep extends AdvancementStep {
 
 /**
  * Handles unapplying any advancement changes when a non-class item with advancement is removed.
- * @extends AdvancementStep
+ * @extends {AdvancementStep}
  */
 class ItemRemovedStep extends AdvancementStep {
 
@@ -731,16 +724,18 @@ class ItemRemovedStep extends AdvancementStep {
 
 /**
  * Handles changing advancement choices for a single item at a specific level.
- * @extends AdvancementStep
+ * @extends {AdvancementStep}
  */
 class ModifyChoicesStep extends AdvancementStep {
-  
+
+  /** @inheritdoc */
   get title() {
     return game.i18n.localize("DND5E.AdvancementManagerModifyChoicesTitle");
   }
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   async getData(data) {
     data.sections = [{
       level: this.config.level,

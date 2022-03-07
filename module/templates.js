@@ -27,7 +27,7 @@ export const preloadHandlebarsTemplates = async function() {
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-controls.html",
-    ...Object.values(game.dnd5e.advancement.types).map(a => a.flowApp.defaultOptions.template)
+    ...Object.values(game.dnd5e.advancement.types).map(a => a.flowApp.template)
 
   ]);
 };
