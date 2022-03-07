@@ -17,7 +17,6 @@ export class ItemGrantConfig extends AdvancementConfig {
     });
   }
 
-
   /* -------------------------------------------- */
 
   activateListeners(html) {

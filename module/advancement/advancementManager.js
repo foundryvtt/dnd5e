@@ -52,7 +52,7 @@ export class AdvancementManager extends FormApplication {
 
   /** @inheritdoc */
   get title() {
-    return this.step?.title ?? "Advancement Manager"; // TODO: Localize
+    return this.step?.title ?? game.i18n.localize("DND5E.AdvancementManagerTitle");
   }
 
   /* -------------------------------------------- */
@@ -371,7 +371,7 @@ class AdvancementStep {
     // TODO: Handle other items with advancements during level change steps
     // data.sections = [{
     //   level,
-    //   header: `Level ${level}`, // TODO: Localize
+    //   header: game.i18n.format("DND5E.AdvancementLevelHeader", { number: level }),
     //   advancements: await Promise.all(this._advancementsForLevel(this.config.item, level).map(async (a) => {
     //     return await this.getAdvancementFlowData(this.getFlow(a, level));
     //   }))
@@ -633,9 +633,8 @@ class AdvancementStep {
 class LevelIncreasedStep extends AdvancementStep {
 
   get title() {
-    return "Level Up Character"; // TODO: Localize, change for first level of class or multiclass
-    // "Add Character Class"
-    // "Multiclass Character"
+    if ( this.config.classLevel > 1 ) return game.i18n.localize("DND5E.AdvancementManagerLevelIncreasedTitle");
+    return game.i18n.localize("DND5E.AdvancementManagerLevelNewClassTitle");
   }
 
   /* -------------------------------------------- */
@@ -650,9 +649,9 @@ class LevelIncreasedStep extends AdvancementStep {
     // console.log(otherItems);
 
     data.sections = [{
-      level: this.config.classLevel,
+      level: this.config.level,
       header: this.config.item.name,
-      subheader: `Level ${this.config.classLevel}`, // TODO: Localize
+      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.classLevel }),
       advancements: await Promise.all(this._advancementsForLevel(this.config.item, this.config.classLevel).map(async (a) => {
         return await this.getAdvancementFlowData(this.getFlow(a, this.config.level, this.config.classLevel));
       }))
@@ -737,7 +736,7 @@ class ItemRemovedStep extends AdvancementStep {
 class ModifyChoicesStep extends AdvancementStep {
   
   get title() {
-    return "Modify Choices"; // TODO: Localize
+    return game.i18n.localize("DND5E.AdvancementManagerModifyChoicesTitle");
   }
 
   /* -------------------------------------------- */
@@ -746,7 +745,7 @@ class ModifyChoicesStep extends AdvancementStep {
     data.sections = [{
       level: this.config.level,
       header: this.config.item.name,
-      subheader: `Level ${this.config.level}`, // TODO: Localize
+      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.level }),
       advancements: await Promise.all(this._advancementsForLevel(this.config.item, this.config.level).map(async (a) => {
         return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
       }))

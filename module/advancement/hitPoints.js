@@ -47,11 +47,12 @@ export class HitPointsFlow extends AdvancementFlow {
   async _onRollDice(event) {
     // TODO: Maybe this should be `Actor#rollHitPoints`?
     const actor = this.advancement.actor;
+    const flavor = game.i18n.localize("DND5E.AdvancementHitPointsRollMessage");
     const roll = await game.dnd5e.dice.damageRoll({
       event,
       parts: [`1${this.advancement.hitDie}`],
-      title: `Roll Hit Points: ${actor}`,
-      flavor: "Roll Hit Points",
+      title: `${flavor}: ${actor}`,
+      flavor,
       allowCritical: false,
       fastForward: true,
       messageData: {

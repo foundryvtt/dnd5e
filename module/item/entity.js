@@ -1672,7 +1672,7 @@ export default class Item5e extends Item {
     super._onCreate(data, options, userId);
     if ( (userId !== game.user.id) || !this.parent ) return;
 
-    // Assign a new primary class
+    // Assign a new original class
     if ( (this.parent.type === "character") && (this.type === "class") ) {
       const pc = this.parent.items.get(this.parent.data.data.details.origialClass);
       if ( !pc ) this.parent._assignPrimaryClass();
@@ -1764,7 +1764,7 @@ export default class Item5e extends Item {
     super._onDelete(options, userId);
     if ( (userId !== game.user.id) || !this.parent ) return;
 
-    // Assign a new primary class
+    // Assign a new original class
     if ( (this.type === "class") && (this.id === this.parent.data.data.details.originalClass) ) {
       this.parent._assignPrimaryClass();
     }
