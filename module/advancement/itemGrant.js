@@ -112,7 +112,7 @@ export class ItemGrantFlow extends AdvancementFlow {
     const checked = value ? new Set(Object.values(value)) : undefined;
 
     return foundry.utils.mergeObject(super.getData(), {
-      items: await Promise.all(config.map(async (uuid) => {
+      items: await Promise.all(config.map(async uuid => {
         const item = await fromUuid(uuid);
         item.checked = checked?.has(uuid) ?? true;
         return item;
@@ -132,10 +132,10 @@ export class ItemGrantFlow extends AdvancementFlow {
     }, {});
 
     // Remove any deleted items from advancement value
-    const reverseLookup = Object.fromEntries(Object.entries(this.advancement.data.value.added ?? {}).map(a => [a[1], a[0]]));
     for ( const [uuid, selected] of Object.entries(update) ) {
-      if ( selected || !reverseLookup[uuid] ) continue;
-      added[`-=${reverseLookup[uuid]}`] = null;
+      const id = Object.entries(this.advancement.data.value.added ?? {}).find(a => a[1] === uuid);
+      if ( selected || !id ) continue;
+      added[`-=${id[0]}`] = null;
     }
 
     return { added };
@@ -212,7 +212,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
   /*  Application Methods                         */
-  /*--------------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   itemUpdates({ level, updates, reverse=false }) {

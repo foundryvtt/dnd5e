@@ -66,10 +66,10 @@ export class AdvancementManager extends FormApplication {
 
   /**
    * Get the step that is currently in progress.
-   * @type {AdvancementStep}
+   * @type {AdvancementStep|null}
    */
   get step() {
-    if ( this._stepIndex === null ) return;
+    if ( this._stepIndex === null ) return null;
     return this.steps[this._stepIndex];
   }
 
@@ -77,10 +77,10 @@ export class AdvancementManager extends FormApplication {
 
   /**
    * Get the step before the current one.
-   * @type {AdvancementStep}
+   * @type {AdvancementStep|null}
    */
   get previousStep() {
-    if ( this._stepIndex === null ) return;
+    if ( this._stepIndex === null ) return null;
     return this.steps[this._stepIndex - 1];
   }
 
@@ -88,10 +88,10 @@ export class AdvancementManager extends FormApplication {
 
   /**
    * Get the step after the current one.
-   * @type {AdvancementStep}
+   * @type {AdvancementStep|null}
    */
   get nextStep() {
-    if ( this._stepIndex === null ) return;
+    if ( this._stepIndex === null ) return null;
     return this.steps[this._stepIndex + 1];
   }
 
@@ -145,7 +145,7 @@ export class AdvancementManager extends FormApplication {
 
     // Level didn't change
     else {
-      throw new Error("Level did not change within level change advancement.")
+      throw new Error("Level did not change within level change advancement.");
     }
   }
 
@@ -156,8 +156,8 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was added.
    */
   itemAdded(item) {
-    return console.warn("Advancements on non-class items not currently supported");
-    this._addStep(new stepTypes.ItemAddedStep(this.actor, { item }));
+    console.warn("Advancements on non-class items not currently supported");
+    // this._addStep(new stepTypes.ItemAddedStep(this.actor, { item }));
   }
 
   /* -------------------------------------------- */
@@ -167,8 +167,8 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was removed.
    */
   itemRemoved(item) {
-    return console.warn("Advancements on non-class items not currently supported");
-    this._addStep(new stepTypes.ItemRemovedStep(this.actor, { item }));
+    console.warn("Advancements on non-class items not currently supported");
+    // this._addStep(new stepTypes.ItemRemovedStep(this.actor, { item }));
   }
 
   /* -------------------------------------------- */

@@ -43,7 +43,7 @@ class AdvancementStep {
    * Title to be displayed for this step.
    * @type {string}
    */
-  get title() { }
+  get title() { return null; }
 
   /* -------------------------------------------- */
 
@@ -130,7 +130,7 @@ class AdvancementStep {
    * Prepare the actor and item updates that all of the advancements within this step should apply.
    * @param {object} [config]
    * @param {Actor5e} config.actor            Actor to base the changes upon.
-   * @param {object} [config.data={}]         Object containing form data with individual advancement data grouped by ID.
+   * @param {object} [config.data={}]         Form data with individual advancement data grouped by ID.
    * @param {boolean} [config.reverse=false]  Prepare updates to undo these advancements.
    */
   prepareUpdates({ actor, data={}, reverse=false }) {
@@ -159,8 +159,8 @@ class AdvancementStep {
 
   /**
    * Apply stored updates to an actor, modifying properties and adding or removing items.
-   * @param {Actor5e} [actor]  Actor to perform the updates upon, if not provided the changes will be applied to the actor
-   *                           provided during construction.
+   * @param {Actor5e} [actor]  Actor to perform the updates upon. If empty then the changes will be applied to the
+   *                           actor provided during construction.
    */
   async applyUpdates(actor) {
     if ( !actor ) actor = this.actor;
@@ -175,7 +175,7 @@ class AdvancementStep {
     newItems = (await newItems).map(item => {
       const data = item.toObject();
       foundry.utils.mergeObject(data, {
-        "flags.dnd5e.sourceId": item.uuid,
+        "flags.dnd5e.sourceId": item.uuid
         // "flags.dnd5e.advancementOrigin": `${originalItem.id}.${advancement.id}` // TODO: Make this work
       });
       return data;
@@ -187,7 +187,7 @@ class AdvancementStep {
 
     // Finalize value updates to advancement with IDs of added items
     let embeddedUpdates = {};
-    for ( const [level, flows] of Object.entries(this.flows) ) {
+    for ( const [, flows] of Object.entries(this.flows) ) {
       for ( const [id, flow] of Object.entries(flows) ) {
         const update = flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
         if ( foundry.utils.isObjectEmpty(update) ) continue;
@@ -263,19 +263,19 @@ class AdvancementStep {
    * @returns {Promise<Item5e[]>}                    An array of updated Item instances.
    * @protected
    */
-  static async _updateEmbeddedItems(actor, items, context) {
-    if ( actor.id ) return actor.updateEmbeddedDocuments("Item", items, context);
+  static async _updateEmbeddedItems(actor, updates, context) {
+    if ( actor.id ) return actor.updateEmbeddedDocuments("Item", updates, context);
 
     let documents = [];
-    for ( const data of items ) {
+    for ( const data of updates ) {
       const item = actor.items.get(data._id);
       const itemIndex = actor.data._source.items.findIndex(i => i._id === data._id);
       if ( !item || (itemIndex === -1) ) continue;
       documents.push(item);
 
-      const updates = foundry.utils.deepClone(data);
-      delete updates._id;
-      foundry.utils.mergeObject(actor.data._source.items[itemIndex], updates);
+      const update = foundry.utils.deepClone(data);
+      delete update._id;
+      foundry.utils.mergeObject(actor.data._source.items[itemIndex], update);
     }
 
     actor.prepareData();
@@ -328,28 +328,30 @@ export class LevelIncreasedStep extends AdvancementStep {
   /** @inheritdoc */
   async getData(data) {
     await super.getData(data);
+    const level = this.config.level;
+    const classLevel = this.config.classLevel;
 
     // const otherItems = this.actor.items.filter(i => {
-    //   return (i.id !== this.config.item.id) && this.advancementsForLevel(i, this.config.level).length;
+    //   return (i.id !== this.config.item.id) && this.advancementsForLevel(i, level).length;
     // });
     // console.log(otherItems);
 
     data.sections = [{
-      level: this.config.level,
+      level,
       header: this.config.item.name,
-      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.classLevel }),
-      advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.classLevel).map(async (a) => {
-        return await this.getAdvancementFlowData(this.getFlow(a, this.config.level, this.config.classLevel));
+      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: classLevel }),
+      advancements: await Promise.all(this.advancementsForLevel(this.config.item, classLevel).map(async a => {
+        return await this.getAdvancementFlowData(this.getFlow(a, level, classLevel));
       }))
     }];
 
     // TODO: Fix this up for other items with advancements
     // for ( const item of otherItems ) {
     //   data.sections.push({
-    //     level: this.config.level,
+    //     level: level,
     //     header: item.name,
-    //     advancements: await Promise.all(this.advancementsForLevel(item, this.config.level).map(async (a) => {
-    //       return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
+    //     advancements: await Promise.all(this.advancementsForLevel(item, level).map(async (a) => {
+    //       return await this.getAdvancementFlowData(this.getFlow(a, level));
     //     }))
     //   });
     // }
@@ -381,25 +383,25 @@ export class LevelDecreasedStep extends AdvancementStep {
 export class ItemAddedStep extends AdvancementStep {
 
   // TODO: Implement later
-//   /** @inheritdoc */
-//   async getData(data) {
-//     const currentLevel = this.actor.data.data.details.level;
-//     data.header = this.config.item.name;
-//     data.sections = [];
-// 
-//     // Iterate over each level leading up to current, adding a section for each level
-//     let level = 0;
-//     while ( level <= currentLevel ) {
-//       const advancements = await Promise.all(this.advancementsForLevel(this.config.item, level).map(async (a) => {
-//         return await this.getAdvancementFlowData(this.getFlow(a, level));
-//       }));
-//       if ( advancements.length ) {
-//         advancements.sort((a, b) => a.order.localeCompare(b.order));
-//         data.sections.push({ level, header: `Level ${level}`, advancements });
-//       }
-//       level += 1;
-//     }
-//   }
+  //   /** @inheritdoc */
+  //   async getData(data) {
+  //     const currentLevel = this.actor.data.data.details.level;
+  //     data.header = this.config.item.name;
+  //     data.sections = [];
+  //
+  //     // Iterate over each level leading up to current, adding a section for each level
+  //     let level = 0;
+  //     while ( level <= currentLevel ) {
+  //       const advancements = await Promise.all(this.advancementsForLevel(this.config.item, level).map(async (a) => {
+  //         return await this.getAdvancementFlowData(this.getFlow(a, level));
+  //       }));
+  //       if ( advancements.length ) {
+  //         advancements.sort((a, b) => a.order.localeCompare(b.order));
+  //         data.sections.push({ level, header: `Level ${level}`, advancements });
+  //       }
+  //       level += 1;
+  //     }
+  //   }
 
 }
 
@@ -435,7 +437,7 @@ export class ModifyChoicesStep extends AdvancementStep {
       level: this.config.level,
       header: this.config.item.name,
       subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.level }),
-      advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.level).map(async (a) => {
+      advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.level).map(async a => {
         return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
       }))
     }];

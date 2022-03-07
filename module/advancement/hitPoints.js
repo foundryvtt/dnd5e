@@ -216,7 +216,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /* -------------------------------------------- */
   /*  Application Methods                         */
-  /*--------------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   propertyUpdates({ level, updates, reverse=false }) {
@@ -240,7 +240,7 @@ export class HitPointsAdvancement extends Advancement {
     if ( hpChange === 0 ) return {};
 
     // Avoid adding the constitution modifier more than once
-    if ( this.data.value[level] === undefined ) hpChange += this.actor.data.data.abilities.con?.mod ?? 0
+    if ( this.data.value[level] === undefined ) hpChange += this.actor.data.data.abilities.con?.mod ?? 0;
 
     return {
       "data.attributes.hp.max": this.actor.data.data.attributes.hp.max + hpChange,

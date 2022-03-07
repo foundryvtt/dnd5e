@@ -41,7 +41,7 @@ export const preloadAdvancementTemplates = async function() {
   return loadTemplates(
     Object.values(game.dnd5e.advancement.types).map(a => a.flowApp.template).filter(a => a !== "")
   );
-}
+};
 
 /* -------------------------------------------- */
 
