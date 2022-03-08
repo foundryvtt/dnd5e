@@ -1315,7 +1315,7 @@
 .dnd5e.advancement.flow h2 {
   text-align: right;
 }
-.dnd5e.advancement.flow h1 ~ h2 {
+.dnd5e.advancement.flow h1 + h2 {
   float: right;
   margin-top: -1.8em;
   border: none;
@@ -1371,21 +1371,6 @@
   height: calc(var(--form-field-height) + 5px);
   margin-left: 4px;
   line-height: 1.5em;
-}
-.dnd5e.advancement.flow section[data-type="ScaleValue"] p {
-  margin-block-end: 0;
-  font-size: 1.25rem;
-}
-.dnd5e.advancement.flow section[data-type="ScaleValue"] span.none {
-  font-style: italic;
-}
-.dnd5e.advancement.flow section[data-type="Trait"] select {
-  min-width: min(20em, 100%);
-  margin-block-end: 0.25em;
-}
-.dnd5e.advancement.flow section[data-type="Trait"] .tag-list .tag {
-  font-size: 0.8rem;
-  line-height: 1.6em;
 }
 .dnd5e.advancement.flow nav {
   display: flex;

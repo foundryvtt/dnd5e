@@ -75,7 +75,6 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   itemUpdates({ level, updates, reverse=false }) {
-    // TODO: Ensure there isn't a situation where reverse is used with updates
     if ( reverse ) return { add: [], remove: Array.from(Object.keys(this.data.value?.added ?? {})) };
     if ( !updates ) return { add: Array.from(Object.values(this.data.value?.added ?? {})), remove: [] };
 
@@ -177,7 +176,7 @@ export class ItemGrantConfig extends AdvancementConfig {
       })
     };
 
-    // TODO: Bug when items are dropped, any other changes are reset
+    // BUG: When items are dropped, any other changes are reset
     return this._updateAdvancement(updates);
   }
 
