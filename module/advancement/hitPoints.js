@@ -3,79 +3,6 @@ import { AdvancementFlow } from "./advancementFlow.js";
 
 
 /**
- * Inline application that presents hit points selection upon level up.
- *
- * @extends {AdvancementFlow}
- */
-export class HitPointsFlow extends AdvancementFlow {
-
-  /** @inheritdoc */
-  static template = "systems/dnd5e/templates/advancement/hit-points-flow.html";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  getData() {
-    // TODO: If value is empty, `useAverage` should default to the value selected at the previous level
-    const value = this.advancement.data.value[this.level];
-    return foundry.utils.mergeObject(super.getData(), {
-      hitDie: this.advancement.hitDie,
-      dieValue: this.advancement.hitDieValue,
-      data: {
-        value: Number.isInteger(value) ? value : "",
-        useAverage: value === true
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  activateListeners(html) {
-    // TODO: Disabled/enable fields with average checkbox is changed
-    const form = html[0];
-    form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Trigger a hit dice roll and add the result to the field.
-   * @param {Event} event  Click that triggered the roll.
-   */
-  async _onRollDice(event) {
-    // TODO: Maybe this should be `Actor#rollHitPoints`?
-    const actor = this.advancement.actor;
-    const flavor = game.i18n.localize("DND5E.AdvancementHitPointsRollMessage");
-    const roll = await game.dnd5e.dice.damageRoll({
-      event,
-      parts: [`1${this.advancement.hitDie}`],
-      title: `${flavor}: ${actor}`,
-      flavor,
-      allowCritical: false,
-      fastForward: true,
-      messageData: {
-        speaker: ChatMessage.getSpeaker({ actor }),
-        "flags.dnd5e.roll": { type: "hitPoints" }
-      }
-    });
-    event.target.closest(".rolls").querySelector(".rollResult").value = roll.total;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  prepareUpdate(formData) {
-    if ( formData.useAverage ) return { [this.level]: true };
-    else if ( Number.isInteger(formData.value) ) return { [this.level]: formData.value };
-    return { [this.level]: true }; // TODO: Fix for empty data at first level
-    // TODO: Add error handling if no hit points are entered or an invalid number is entered
-  }
-
-}
-
-
-/**
  * Advancement that presents the player with the option to roll hit points at each level or select the average value.
  * Keeps track of player hit point rolls or selection for each class level. **Can only be added to classes and each
  * class can only have one.**
@@ -109,7 +36,7 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static flowApp = HitPointsFlow;
+  static get flowApp() { return HitPointsFlow; };
 
   /* -------------------------------------------- */
 
@@ -246,6 +173,79 @@ export class HitPointsAdvancement extends Advancement {
       "data.attributes.hp.max": this.actor.data.data.attributes.hp.max + hpChange,
       "data.attributes.hp.value": this.actor.data.data.attributes.hp.value + hpChange
     };
+  }
+
+}
+
+
+/**
+ * Inline application that presents hit points selection upon level up.
+ *
+ * @extends {AdvancementFlow}
+ */
+export class HitPointsFlow extends AdvancementFlow {
+
+  /** @inheritdoc */
+  static template = "systems/dnd5e/templates/advancement/hit-points-flow.html";
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getData() {
+    // TODO: If value is empty, `useAverage` should default to the value selected at the previous level
+    const value = this.advancement.data.value[this.level];
+    return foundry.utils.mergeObject(super.getData(), {
+      hitDie: this.advancement.hitDie,
+      dieValue: this.advancement.hitDieValue,
+      data: {
+        value: Number.isInteger(value) ? value : "",
+        useAverage: value === true
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  activateListeners(html) {
+    // TODO: Disabled/enable fields with average checkbox is changed
+    const form = html[0];
+    form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger a hit dice roll and add the result to the field.
+   * @param {Event} event  Click that triggered the roll.
+   */
+  async _onRollDice(event) {
+    // TODO: Maybe this should be `Actor#rollHitPoints`?
+    const actor = this.advancement.actor;
+    const flavor = game.i18n.localize("DND5E.AdvancementHitPointsRollMessage");
+    const roll = await game.dnd5e.dice.damageRoll({
+      event,
+      parts: [`1${this.advancement.hitDie}`],
+      title: `${flavor}: ${actor}`,
+      flavor,
+      allowCritical: false,
+      fastForward: true,
+      messageData: {
+        speaker: ChatMessage.getSpeaker({ actor }),
+        "flags.dnd5e.roll": { type: "hitPoints" }
+      }
+    });
+    event.target.closest(".rolls").querySelector(".rollResult").value = roll.total;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  prepareUpdate(formData) {
+    if ( formData.useAverage ) return { [this.level]: true };
+    else if ( Number.isInteger(formData.value) ) return { [this.level]: formData.value };
+    return { [this.level]: true }; // TODO: Fix for empty data at first level
+    // TODO: Add error handling if no hit points are entered or an invalid number is entered
   }
 
 }

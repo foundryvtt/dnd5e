@@ -37,7 +37,7 @@ export default class Actor5e extends Actor {
    * @type {AdvancementManager}
    */
   get advancement() {
-    if ( !this._advancement ) this._advancement = new game.dnd5e.advancement.AdvancementManager(this);
+    this._advancement ??= new game.dnd5e.advancement.AdvancementManager(this);
     return this._advancement;
   }
 

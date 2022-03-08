@@ -131,6 +131,7 @@ export class AdvancementManager extends FormApplication {
 
     // Level decreased
     else if ( levelDelta < 0 ) {
+      this.actor._advancement = null;
       console.warn("Unapplying advancements from leveling not currently supported");
     }
 
@@ -147,6 +148,7 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was added.
    */
   itemAdded(item) {
+    this.actor._advancement = null;
     console.warn("Advancements on non-class items not currently supported");
   }
 
@@ -157,6 +159,7 @@ export class AdvancementManager extends FormApplication {
    * @param {Item5e} item    Item that was removed.
    */
   itemRemoved(item) {
+    this.actor._advancement = null;
     console.warn("Advancements on non-class items not currently supported");
   }
 

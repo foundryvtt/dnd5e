@@ -2,6 +2,97 @@ import { Advancement } from "./advancement.js";
 import { AdvancementConfig } from "./advancementConfig.js";
 import { AdvancementFlow } from "./advancementFlow.js";
 
+
+/**
+ * Advancement that automatically grants one or more items to the player. Presents the player with the option of
+ * skipping any or all of the items.
+ *
+ * @extends {Advancement}
+ */
+export class ItemGrantAdvancement extends Advancement {
+
+  /* -------------------------------------------- */
+  /*  Static Properties                           */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static defaultConfiguration = {
+    items: []
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static order = 40;
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static defaultTitle = "DND5E.AdvancementItemGrantTitle";
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static defaultIcon = "icons/svg/book.svg";
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static hint = "DND5E.AdvancementItemGrantHint";
+
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static get configApp() { return ItemGrantConfig; };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static get flowApp() { return ItemGrantFlow; };
+
+  /* -------------------------------------------- */
+  /*  Display Methods                             */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  configuredForLevel(level) {
+    return !foundry.utils.isObjectEmpty(this.data.value);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  summaryForLevel(level) {
+    // TODO: For levels that a character has already gained, these links should point to the item on the character
+    // and any items that were skipped shouldn't be listed
+    return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
+  }
+
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  itemUpdates({ level, updates, reverse=false }) {
+    // TODO: Ensure there isn't a situation where reverse is used with updates
+    if ( reverse ) return { add: [], remove: Array.from(Object.keys(this.data.value?.added ?? {})) };
+    if ( !updates ) return { add: Array.from(Object.values(this.data.value?.added ?? {})), remove: [] };
+
+    const existing = new Set(Object.values(this.data.value?.added ?? {}));
+    return Object.entries(updates).reduce((obj, [uuid, selected]) => {
+      if ( selected && !existing.has(uuid) ) obj.add.push(uuid);
+      else if ( !selected && existing.has(uuid) ) {
+        const id = Object.entries(this.data.value?.added ?? {}).find(o => o[1] === uuid);
+        obj.remove.push(id[0]);
+      }
+      return obj;
+    }, { add: [], remove: [] });
+  }
+
+}
+
+
 /**
  * Configuration application for item grants.
  *
@@ -139,96 +230,6 @@ export class ItemGrantFlow extends AdvancementFlow {
     }
 
     return { added };
-  }
-
-}
-
-
-/**
- * Advancement that automatically grants one or more items to the player. Presents the player with the option of
- * skipping any or all of the items.
- *
- * @extends {Advancement}
- */
-export class ItemGrantAdvancement extends Advancement {
-
-  /* -------------------------------------------- */
-  /*  Static Properties                           */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultConfiguration = {
-    items: []
-  };
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static order = 40;
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultTitle = "DND5E.AdvancementItemGrantTitle";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultIcon = "icons/svg/book.svg";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static hint = "DND5E.AdvancementItemGrantHint";
-
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static configApp = ItemGrantConfig;
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static flowApp = ItemGrantFlow;
-
-  /* -------------------------------------------- */
-  /*  Display Methods                             */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  configuredForLevel(level) {
-    return !foundry.utils.isObjectEmpty(this.data.value);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  summaryForLevel(level) {
-    // TODO: For levels that a character has already gained, these links should point to the item on the character
-    // and any items that were skipped shouldn't be listed
-    return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
-  }
-
-  /* -------------------------------------------- */
-  /*  Application Methods                         */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  itemUpdates({ level, updates, reverse=false }) {
-    // TODO: Ensure there isn't a situation where reverse is used with updates
-    if ( reverse ) return { add: [], remove: Array.from(Object.keys(this.data.value?.added ?? {})) };
-    if ( !updates ) return { add: Array.from(Object.values(this.data.value?.added ?? {})), remove: [] };
-
-    const existing = new Set(Object.values(this.data.value?.added ?? {}));
-    return Object.entries(updates).reduce((obj, [uuid, selected]) => {
-      if ( selected && !existing.has(uuid) ) obj.add.push(uuid);
-      else if ( !selected && existing.has(uuid) ) {
-        const id = Object.entries(this.data.value?.added ?? {}).find(o => o[1] === uuid);
-        obj.remove.push(id[0]);
-      }
-      return obj;
-    }, { add: [], remove: [] });
   }
 
 }
