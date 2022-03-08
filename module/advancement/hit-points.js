@@ -193,6 +193,7 @@ export class HitPointsFlow extends AdvancementFlow {
   /** @inheritdoc */
   getData() {
     // TODO: If value is empty, `useAverage` should default to the value selected at the previous level
+    // TODO: Pass in whether this is the original class at level 1 to display interface more intelligently
     const value = this.advancement.data.value[this.level];
     return foundry.utils.mergeObject(super.getData(), {
       hitDie: this.advancement.hitDie,

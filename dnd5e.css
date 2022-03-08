@@ -1349,6 +1349,26 @@
   border-block-end: 2px groove var(--color-border-light-1);
   padding-block-end: 1em;
 }
+.dnd5e.advancement.flow form[data-type="HitPoints"] div {
+  font-size: var(--font-size-14);
+}
+.dnd5e.advancement.flow form[data-type="HitPoints"] .rolls {
+  display: grid;
+  grid-template-columns: 50% 1fr 1fr;
+  align-items: center;
+  gap: 2px;
+}
+.dnd5e.advancement.flow form[data-type="HitPoints"] .rolls .averageLabel span,
+.dnd5e.advancement.flow form[data-type="HitPoints"] .rolls .averageLabel input {
+  vertical-align: middle;
+}
+.dnd5e.advancement.flow form[data-type="HitPoints"] .rolls .rollResult {
+  text-align: center;
+}
+.dnd5e.advancement.flow form[data-type="HitPoints"] .rolls .rollButton {
+  height: calc(var(--form-field-height) + 5px);
+  line-height: 1.5em;
+}
 .dnd5e.advancement.flow input.error {
   outline: 2px solid red;
 }
