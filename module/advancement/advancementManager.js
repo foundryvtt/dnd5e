@@ -116,7 +116,6 @@ export class AdvancementManager extends FormApplication {
     let levelDelta = data.character.final - data.character.initial;
     let offset = 1;
 
-    // TODO: Simplify all this
     // Level increased
     if ( levelDelta > 0 ) {
       while ( levelDelta > 0 ) {
@@ -132,15 +131,7 @@ export class AdvancementManager extends FormApplication {
 
     // Level decreased
     else if ( levelDelta < 0 ) {
-      while ( levelDelta < 0 ) {
-        this._addStep(new stepTypes.LevelDecreasedStep(this.actor, {
-          item: data.item,
-          level: data.character.initial - offset,
-          classLevel: data.class.initial - offset
-        }));
-        offset += 1;
-        levelDelta += 1;
-      }
+      console.warn("Unapplying advancements from leveling not currently supported");
     }
 
     // Level didn't change
@@ -157,7 +148,6 @@ export class AdvancementManager extends FormApplication {
    */
   itemAdded(item) {
     console.warn("Advancements on non-class items not currently supported");
-    // this._addStep(new stepTypes.ItemAddedStep(this.actor, { item }));
   }
 
   /* -------------------------------------------- */
@@ -168,7 +158,6 @@ export class AdvancementManager extends FormApplication {
    */
   itemRemoved(item) {
     console.warn("Advancements on non-class items not currently supported");
-    // this._addStep(new stepTypes.ItemRemovedStep(this.actor, { item }));
   }
 
   /* -------------------------------------------- */
@@ -194,8 +183,6 @@ export class AdvancementManager extends FormApplication {
     if ( this._stepIndex === null ) this._stepIndex = newIndex;
     this.render(true);
     // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
-    // TODO: Skip rendering if AdvancementStep#shouldRender is false
-    // TODO: If no advancements are valid for this level, don't show the dialog
   }
 
   /* -------------------------------------------- */
@@ -207,7 +194,8 @@ export class AdvancementManager extends FormApplication {
     const data = {};
     if ( this.previousStep ) data.previousStep = true;
 
-    if ( !this.step ) return data; // TODO: If no step available, just close the window I suppose
+    // TODO: If step is empty or doesn't want to be rendered, move to next step automatically
+    if ( !this.step ) return data;
     await this.step.getData(data);
 
     return data;

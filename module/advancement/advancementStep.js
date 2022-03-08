@@ -48,14 +48,6 @@ class AdvancementStep {
   /* -------------------------------------------- */
 
   /**
-   * Should this step be rendered or applied automatically?
-   * @type {boolean}
-   */
-  static shouldRender = true;
-
-  /* -------------------------------------------- */
-
-  /**
    * Get the data that will be passed to the advancement manager template when rendering this step.
    * @param {object} data  Existing data from AdvancementManager. *Will be mutated.*
    */
@@ -176,7 +168,8 @@ class AdvancementStep {
       const data = item.toObject();
       foundry.utils.mergeObject(data, {
         "flags.dnd5e.sourceId": item.uuid
-        // "flags.dnd5e.advancementOrigin": `${originalItem.id}.${advancement.id}` // TODO: Make this work
+        // TODO: Store ID of originating item and advancement for later reference
+        // "flags.dnd5e.advancementOrigin": `${originalItem.id}.${advancement.id}`
       });
       return data;
     });
@@ -331,11 +324,6 @@ export class LevelIncreasedStep extends AdvancementStep {
     const level = this.config.level;
     const classLevel = this.config.classLevel;
 
-    // const otherItems = this.actor.items.filter(i => {
-    //   return (i.id !== this.config.item.id) && this.advancementsForLevel(i, level).length;
-    // });
-    // console.log(otherItems);
-
     data.sections = [{
       level,
       header: this.config.item.name,
@@ -344,17 +332,6 @@ export class LevelIncreasedStep extends AdvancementStep {
         return await this.getAdvancementFlowData(this.getFlow(a, level, classLevel));
       }))
     }];
-
-    // TODO: Fix this up for other items with advancements
-    // for ( const item of otherItems ) {
-    //   data.sections.push({
-    //     level: level,
-    //     header: item.name,
-    //     advancements: await Promise.all(this.advancementsForLevel(item, level).map(async (a) => {
-    //       return await this.getAdvancementFlowData(this.getFlow(a, level));
-    //     }))
-    //   });
-    // }
 
     data.sections.forEach(s => s.advancements.sort((a, b) => a.order.localeCompare(b.order)));
 
@@ -368,54 +345,21 @@ export class LevelIncreasedStep extends AdvancementStep {
  * Handles unapplying changes for a class and other items when level is decreased by one.
  * @extends {AdvancementStep}
  */
-export class LevelDecreasedStep extends AdvancementStep {
-
-  /** @inheritdoc */
-  static shouldRender = false;
-
-}
+export class LevelDecreasedStep extends AdvancementStep { }
 
 
 /**
  * Handles adding a new item with advancement at the current character level.
  * @extends {AdvancementStep}
  */
-export class ItemAddedStep extends AdvancementStep {
-
-  // TODO: Implement later
-  //   /** @inheritdoc */
-  //   async getData(data) {
-  //     const currentLevel = this.actor.data.data.details.level;
-  //     data.header = this.config.item.name;
-  //     data.sections = [];
-  //
-  //     // Iterate over each level leading up to current, adding a section for each level
-  //     let level = 0;
-  //     while ( level <= currentLevel ) {
-  //       const advancements = await Promise.all(this.advancementsForLevel(this.config.item, level).map(async (a) => {
-  //         return await this.getAdvancementFlowData(this.getFlow(a, level));
-  //       }));
-  //       if ( advancements.length ) {
-  //         advancements.sort((a, b) => a.order.localeCompare(b.order));
-  //         data.sections.push({ level, header: `Level ${level}`, advancements });
-  //       }
-  //       level += 1;
-  //     }
-  //   }
-
-}
+export class ItemAddedStep extends AdvancementStep { }
 
 
 /**
  * Handles unapplying any advancement changes when a non-class item with advancement is removed.
  * @extends {AdvancementStep}
  */
-export class ItemRemovedStep extends AdvancementStep {
-
-    /** @inheritdoc */
-    static shouldRender = false;
-
-}
+export class ItemRemovedStep extends AdvancementStep { }
 
 
 /**
