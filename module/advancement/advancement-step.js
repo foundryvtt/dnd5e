@@ -32,7 +32,8 @@ export class AdvancementStep extends Application {
       template: "systems/dnd5e/templates/advancement/advancement-step.html",
       title: null,
       popOut: false,
-      confirmClose: true
+      confirmClose: true,
+      reverse: false
     });
   }
 
@@ -310,7 +311,35 @@ export class LevelIncreasedStep extends AdvancementStep {
  * Handles unapplying changes for a class and other items when level is decreased by one.
  * @extends {AdvancementStep}
  */
-export class LevelDecreasedStep extends AdvancementStep { }
+export class LevelDecreasedStep extends AdvancementStep {
+
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      reverse: true
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get flows() {
+    this._flows ??= this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
+      return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
+    });
+    return this._flows;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getData(data) {
+    super.getData(data);
+    data.shouldRender = false;
+    return data;
+  }
+
+}
 
 
 /**

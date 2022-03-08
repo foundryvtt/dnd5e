@@ -1,5 +1,5 @@
 import { AdvancementError } from "./advancement-flow.js";
-import { LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
+import { LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
 
 
 /**
@@ -134,8 +134,11 @@ export class AdvancementPrompt extends Application {
 
     // Level decreased
     for ( let offset = 0; offset > levelDelta; offset-- ) {
-      this.actor._advancement = null;
-      console.warn("Unapplying advancements from leveling not currently supported");
+      this._addStep(new LevelDecreasedStep(this.clone, {
+        item: item.id,
+        level: character.initial + offset,
+        classLevel: cls.initial + offset
+      }));
     }
   }
 
