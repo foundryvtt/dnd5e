@@ -1,7 +1,8 @@
-{{#if (eq level 1)}}
+{{#if isFirstClassLevel}}
 
   <div>
     {{{localize "DND5E.AdvancementHitPointsMaxAtFirstLevel" max=dieValue}}}
+    <input type="hidden" name="{{advancement.id}}.useMax" value="true" data-dtype="Boolean">
   </div>
 
 {{else}}
@@ -10,8 +11,8 @@
     <label class="averageLabel">{{localize "DND5E.AdvancementHitPointsAverage"}}</label>
     <input class="averageCheckbox" type="checkbox" name="{{advancement.id}}.useAverage" {{checked data.useAverage}}>
     <div class="spacer"></div>
-    <input class="rollResult" type="number" name="{{advancement.id}}.value" value="{{data.value}}">
-    <button class="rollButton" type="button" name="roll">
+    <input class="rollResult" type="number" name="{{advancement.id}}.value" value="{{data.value}}" {{disabled data.useAverage}}>
+    <button class="rollButton" type="button" name="roll" {{disabled data.useAverage}}>
       <i class="fas fa-dice-d20"></i> {{localize "DND5E.AdvancementHitPointsRollButton" die=hitDie}}
     </button>
   </div>
