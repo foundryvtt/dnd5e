@@ -1,6 +1,9 @@
 /**
  * Base class for the advancement interface displayed by the advancement manager that should be subclassed by
  * individual advancement types.
+ *
+ * @property {Advancement} advancement  Advancement to which this flow belongs.
+ * @property {number} level             Level for which to configure this flow.
  */
 export class AdvancementFlow {
 
@@ -16,6 +19,12 @@ export class AdvancementFlow {
      * @type {number}
      */
     this.level = level;
+    
+    /**
+     * Section of this advancement within the UI.
+     * @type {Element|null}
+     */
+    this.form = null;
   }
 
   /* -------------------------------------------- */

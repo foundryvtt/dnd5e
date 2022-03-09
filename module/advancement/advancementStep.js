@@ -112,7 +112,10 @@ class AdvancementStep {
    */
   activateListeners(html) {
     html[0].querySelectorAll("section[data-id]").forEach(section => {
-      this.flows[section.dataset.level]?.[section.dataset.id]?.activateListeners($(section));
+      const flow = this.flows[section.dataset.level]?.[section.dataset.id];
+      if ( !flow ) return;
+      flow.form = section;
+      flow.activateListeners($(section));
     });
   }
 

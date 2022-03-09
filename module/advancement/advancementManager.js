@@ -238,7 +238,12 @@ export class AdvancementManager extends FormApplication {
 
     // Prepare changes from current step
     const formData = this._getSubmitData();
-    this.step.prepareUpdates({ actor: this.clone, data: foundry.utils.expandObject(formData) });
+    try {
+      this.step.prepareUpdates({ actor: this.clone, data: foundry.utils.expandObject(formData) });
+    } catch(error) {
+      ui.notifications.error(error);
+      return;
+    }
 
     // Apply changes to actor clone
     await this.step.applyUpdates(this.clone);
