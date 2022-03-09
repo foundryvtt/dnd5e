@@ -1349,6 +1349,9 @@
   border-block-end: 2px groove var(--color-border-light-1);
   padding-block-end: 1em;
 }
+.dnd5e.advancement.flow input.error {
+  outline: 2px solid red;
+}
 .dnd5e.advancement.flow form[data-type="HitPoints"] div {
   font-size: var(--font-size-14);
 }

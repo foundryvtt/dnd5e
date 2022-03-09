@@ -219,9 +219,8 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   activateListeners(html) {
-    const form = html[0];
-    form.querySelector(".averageCheckbox")?.addEventListener("change", this._onAverageChanged.bind(this));
-    form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
+    this.form.querySelector(".averageCheckbox")?.addEventListener("change", this._onAverageChanged.bind(this));
+    this.form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -271,7 +270,9 @@ export class HitPointsFlow extends AdvancementFlow {
 
     if ( value !== undefined ) return { [this.level]: value };
 
-    // TODO: Add error handling if no hit points are entered or an invalid number is entered
+    this.form.querySelector(".rollResult").classList.add("error");
+    let errorType = !formData.value ? "Empty" : "Invalid";
+    throw new Error(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
   }
 
 }
