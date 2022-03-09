@@ -114,11 +114,9 @@ export class HitPointsAdvancement extends Advancement {
     const value = data[level];
     if ( !value ) return null;
 
-    if ( value !== true ) return value;
-
-    // Fixed value chosen
-    if ( level === 1 ) return hitDieValue;
-    return (hitDieValue / 2) + 1;
+    if ( value === "max" ) return hitDieValue;
+    if ( value === "avg" ) return (hitDieValue / 2) + 1;
+    return value;
   }
 
   /* -------------------------------------------- */
@@ -192,15 +190,27 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   getData() {
-    // TODO: If value is empty, `useAverage` should default to the value selected at the previous level
-    // TODO: Pass in whether this is the original class at level 1 to display interface more intelligently
     const value = this.advancement.data.value[this.level];
+
+    // If value is empty, `useAverage` should default to the value selected at the previous level
+    let useAverage = value === "avg";
+    if ( !value ) {
+      const lastValue = this.advancement.data.value[this.level - 1];
+      if ( lastValue === "avg" ) useAverage = true;
+    }
+
+    // Determine whether this is the first level of the original class on the character
+    // The additional check here is needed because the actor's original class value isn't set before advancement
+    const isFirstClassLevel = (this.advancement.parent.data.data.levels === 1)
+      && (this.advancement.parent.isOriginalClass || this.advancement.actor.data.data.details.originalClass === "");
+
     return foundry.utils.mergeObject(super.getData(), {
+      isFirstClassLevel,
       hitDie: this.advancement.hitDie,
       dieValue: this.advancement.hitDieValue,
       data: {
         value: Number.isInteger(value) ? value : "",
-        useAverage: value === true
+        useAverage
       }
     });
   }
@@ -209,9 +219,20 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   activateListeners(html) {
-    // TODO: Disabled/enable fields with average checkbox is changed
     const form = html[0];
+    form.querySelector(".averageCheckbox")?.addEventListener("change", this._onAverageChanged.bind(this));
     form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Toggle status of hit points field and roll button based on whether use average checkbox is checked.
+   * @param {Event} event  Change to checkbox that triggers this update.
+   */
+  _onAverageChanged(event) {
+    event.target.parentElement.querySelector(".rollResult").disabled = event.target.checked;
+    event.target.parentElement.querySelector(".rollButton").disabled = event.target.checked;
   }
 
   /* -------------------------------------------- */
@@ -243,9 +264,13 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   prepareUpdate(formData) {
-    if ( formData.useAverage ) return { [this.level]: true };
-    else if ( Number.isInteger(formData.value) ) return { [this.level]: formData.value };
-    return { [this.level]: true }; // TODO: Fix for empty data at first level
+    let value;
+    if ( formData.useMax ) value = "max";
+    else if ( formData.useAverage ) value = "avg";
+    else if ( Number.isInteger(formData.value) ) value = parseInt(formData.value);
+
+    if ( value !== undefined ) return { [this.level]: value };
+
     // TODO: Add error handling if no hit points are entered or an invalid number is entered
   }
 
