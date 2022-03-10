@@ -1,5 +1,3 @@
-import * as stepTypes from "./advancementStep.js";
-
 /**
  * Application for controlling the advancement workflow and displaying the interface.
  *
@@ -119,7 +117,7 @@ export class AdvancementManager extends FormApplication {
     // Level increased
     if ( levelDelta > 0 ) {
       while ( levelDelta > 0 ) {
-        this._addStep(new stepTypes.LevelIncreasedStep(this.actor, {
+        this._addStep(new game.dnd5e.advancement.steps.LevelIncreasedStep(this.actor, {
           item: data.item,
           level: data.character.initial + offset,
           classLevel: data.class.initial + offset
@@ -235,6 +233,9 @@ export class AdvancementManager extends FormApplication {
    */
   async advanceStep() {
     // TODO: Add protection from double submission, maybe just use FormApplication#_onSubmit
+
+    // Clear visible errors
+    this.form.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
 
     // Prepare changes from current step
     const formData = this._getSubmitData();
