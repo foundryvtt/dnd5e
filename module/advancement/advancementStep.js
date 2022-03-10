@@ -137,7 +137,7 @@ class AdvancementStep {
 
         // Prepare update data from the form
         const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? Number(currentLevel);
-        flow.initialUpdate = flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {}));
+        flow.initialUpdate = !reverse ? flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {})) : {};
         const fetchData = { level, updates: flow.initialUpdate, reverse };
 
         // Prepare property changes
@@ -220,9 +220,9 @@ class AdvancementStep {
     if ( actor.data._id ) return actor.update(updates, context);
 
     // Actor clone, apply updates directly to ActorData
-    foundry.utils.mergeObject(actor.data._source, updates);
-
+    actor.data.update(updates);
     actor.prepareData();
+
     return actor;
   }
 
@@ -243,10 +243,10 @@ class AdvancementStep {
     const documents = await Promise.all(items.map(i => {
       return CONFIG.Item.documentClass.create(i, { parent: actor, temporary: true });
     }));
+    actor.prepareData();
 
     // TODO: Trigger any additional advancement steps for added items
 
-    actor.prepareData();
     return documents;
   }
 
@@ -263,20 +263,11 @@ class AdvancementStep {
   static async _updateEmbeddedItems(actor, updates, context) {
     if ( actor.id ) return actor.updateEmbeddedDocuments("Item", updates, context);
 
-    let documents = [];
-    for ( const data of updates ) {
-      const item = actor.items.get(data._id);
-      const itemIndex = actor.data._source.items.findIndex(i => i._id === data._id);
-      if ( !item || (itemIndex === -1) ) continue;
-      documents.push(item);
-
-      const update = foundry.utils.deepClone(data);
-      delete update._id;
-      foundry.utils.mergeObject(actor.data._source.items[itemIndex], update);
-    }
-
+    actor.data.update({"items": updates});
     actor.prepareData();
-    return documents;
+
+    const ids = new Set(updates.map(u => u._id));
+    return actor.items.filter(i => ids.has(i.id));
   }
 
   /* -------------------------------------------- */
@@ -295,13 +286,12 @@ class AdvancementStep {
     let documents = [];
     for ( const id of ids ) {
       const item = actor.items.get(id);
-      const itemIndex = actor.data._source.items.findIndex(i => i._id === id);
-      if ( !item || (itemIndex === -1) ) continue;
+      if ( !item ) continue;
       documents.push(item);
-      actor.data._source.items.splice(itemIndex, 1);
+      actor.items.delete(id);
     }
-
     actor.prepareData();
+
     return documents;
   }
 

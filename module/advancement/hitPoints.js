@@ -202,7 +202,7 @@ export class HitPointsFlow extends AdvancementFlow {
 
     // Determine whether this is the first level of the original class on the character
     // The additional check here is needed because the actor's original class value isn't set before advancement
-    const isFirstClassLevel = (this.advancement.parent.data.data.levels === 1)
+    const isFirstClassLevel = (this.level === 1)
       && (this.advancement.parent.isOriginalClass || this.advancement.actor.data.data.details.originalClass === "");
 
     return foundry.utils.mergeObject(super.getData(), {

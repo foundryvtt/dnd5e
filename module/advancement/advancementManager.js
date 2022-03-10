@@ -169,7 +169,7 @@ export class AdvancementManager extends FormApplication {
    * @param {number} level  Level at which the changes should be made.
    */
   modifyChoices(item, level) {
-    this._addStep(new stepTypes.ModifyChoicesStep(this.actor, { item, level }));
+    this._addStep(new game.dnd5e.advancement.steps.ModifyChoicesStep(this.actor, { item, level }));
   }
 
   /* -------------------------------------------- */
