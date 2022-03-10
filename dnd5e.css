@@ -1404,6 +1404,13 @@
 .dnd5e.advancement.flow input.error {
   outline: 2px solid red;
 }
+.dnd5e.advancement.flow section[data-type="ScaleValue"] p {
+  margin-block-end: 0;
+  font-size: 1.25rem;
+}
+.dnd5e.advancement.flow section[data-type="ScaleValue"] span.none {
+  font-style: italic;
+}
 .dnd5e.advancement.flow nav {
   display: flex;
   justify-content: flex-end;

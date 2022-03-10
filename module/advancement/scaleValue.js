@@ -1,5 +1,6 @@
 import { Advancement } from "./advancement.js";
 import { AdvancementConfig } from "./advancementConfig.js";
+import { AdvancementFlow } from "./advancementFlow.js";
 
 
 /**
@@ -47,6 +48,11 @@ export class ScaleValueAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static get flowApp() { return ScaleValueFlow };
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static multiLevel = true;
 
   /* -------------------------------------------- */
@@ -55,7 +61,7 @@ export class ScaleValueAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.from(Object.keys(this.data.configuration.scale));
+    return Array.from(Object.keys(this.data.configuration.scale).map(l => Number(l)));
   }
 
   /* -------------------------------------------- */
@@ -136,6 +142,29 @@ export class ScaleValueConfig extends AdvancementConfig {
   prepareConfigurationUpdate(configuration) {
     configuration.scale = this.constructor._cleanedObject(configuration.scale);
     return configuration;
+  }
+
+}
+
+
+/**
+ * Inline application that displays any changes to a scale value.
+ *
+ * @extends {AdvancementFlow}
+ */
+export class ScaleValueFlow extends AdvancementFlow {
+
+  /** @inheritdoc */
+  static template = "systems/dnd5e/templates/advancement/scale-value-flow.html";
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getData() {
+    return {
+      initial: this.advancement.valueForLevel(this.level - 1),
+      final: this.advancement.valueForLevel(this.level)
+    };
   }
 
 }
