@@ -231,8 +231,8 @@ export class HitPointsFlow extends AdvancementFlow {
    * @param {Event} event  Change to checkbox that triggers this update.
    */
   _onAverageChanged(event) {
-    event.target.parentElement.querySelector(".rollResult").disabled = event.target.checked;
-    event.target.parentElement.querySelector(".rollButton").disabled = event.target.checked;
+    this.form.querySelector(".rollResult").disabled = event.target.checked;
+    this.form.querySelector(".rollButton").disabled = event.target.checked;
   }
 
   /* -------------------------------------------- */

@@ -1316,17 +1316,17 @@
   text-align: right;
 }
 .dnd5e.advancement.flow h1 + h2 {
-  float: right;
-  margin-top: -1.8em;
+  float: inline-end;
+  margin-block-start: -1.8em;
   border: none;
 }
 .dnd5e.advancement.flow h3 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-20);
 }
 .dnd5e.advancement.flow h3 .item-checkmark {
   float: inline-end;
   color: #119111;
-  font-size: 1rem;
+  font-size: var(--font-size-16);
 }
 .dnd5e.advancement.flow .advancement-controls {
   margin-block-end: 1em;
@@ -1353,26 +1353,23 @@
   outline: 2px solid red;
 }
 .dnd5e.advancement.flow section[data-type="HitPoints"] div {
-  font-size: 0.8rem;
+  font-size: var(--font-size-14);
 }
 .dnd5e.advancement.flow section[data-type="HitPoints"] .rolls {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 1fr 1fr;
   align-items: center;
+  gap: 2px;
 }
-.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls .averageLabel {
-  font-size: 0.9rem;
-}
-.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls .spacer {
-  flex: 1 0 0;
+.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls .averageLabel span,
+.dnd5e.advancement.flow section[data-type="HitPoints"] .rolls .averageLabel input {
+  vertical-align: middle;
 }
 .dnd5e.advancement.flow section[data-type="HitPoints"] .rolls .rollResult {
-  flex: 0 1 5em;
   text-align: center;
 }
 .dnd5e.advancement.flow section[data-type="HitPoints"] .rolls .rollButton {
-  flex: 0 1 8em;
   height: calc(var(--form-field-height) + 5px);
-  margin-left: 4px;
   line-height: 1.5em;
 }
 .dnd5e.advancement.flow nav {

@@ -18,9 +18,9 @@ export class Advancement {
 
     /**
      * Actor to which this advancement's item belongs, if the item is embedded.
-     * @type {Actor5e}
+     * @type {Actor5e|null}
      */
-    this.actor = parent.parent;
+    this.actor = parent.parent ?? null;
 
     /**
      * Configuration data for this advancement.

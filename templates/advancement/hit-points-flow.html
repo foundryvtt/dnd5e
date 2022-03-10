@@ -8,9 +8,10 @@
 {{else}}
 
   <div class="rolls">
-    <label class="averageLabel">{{localize "DND5E.AdvancementHitPointsAverage"}}</label>
-    <input class="averageCheckbox" type="checkbox" name="{{advancement.id}}.useAverage" {{checked data.useAverage}}>
-    <div class="spacer"></div>
+    <label class="averageLabel">
+      <span>{{localize "DND5E.AdvancementHitPointsAverage"}}</span>
+      <input class="averageCheckbox" type="checkbox" name="{{advancement.id}}.useAverage" {{checked data.useAverage}}>
+    </label>
     <input class="rollResult" type="number" name="{{advancement.id}}.value" value="{{data.value}}" {{disabled data.useAverage}}>
     <button class="rollButton" type="button" name="roll" {{disabled data.useAverage}}>
       <i class="fas fa-dice-d20"></i> {{localize "DND5E.AdvancementHitPointsRollButton" die=hitDie}}
