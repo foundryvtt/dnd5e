@@ -4,27 +4,33 @@ import { DND5E } from "./config.js";
  * Some Conditions that are missing from the Foundry Core token status effects but are useful for playing 5e.
  */
 const conditionStatusEffects = [
-  { id: "charmed",
+  {
+    id: "charmed",
     icon: "systems/dnd5e/icons/svg/charmed.svg",
     label: DND5E.conditionTypes.charmed
   },
-  { id: "concentrating",
+  {
+    id: "concentrating",
     icon: "systems/dnd5e/icons/svg/concentrating.svg",
     label: "DND5E.Concentrating"
   },
-  { id: "grappled",
+  {
+    id: "grappled",
     icon: "systems/dnd5e/icons/svg/grappled.svg",
     label: DND5E.conditionTypes.grappled
   },
-  { id: "incapacitated",
+  {
+    id: "incapacitated",
     icon: "systems/dnd5e/icons/svg/incapacitated.svg",
     label: DND5E.conditionTypes.incapacitated
   },
-  { id: "invisible",
+  {
+    id: "invisible",
     icon: "systems/dnd5e/icons/svg/invisible.svg",
     label: DND5E.conditionTypes.invisible
   },
-  { id: "petrified",
+  {
+    id: "petrified",
     icon: "systems/dnd5e/icons/svg/petrified.svg",
     label: DND5E.conditionTypes.petrified
   }
