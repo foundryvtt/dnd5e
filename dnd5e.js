@@ -49,6 +49,7 @@ import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
 import * as utils from "./module/utils.js";
 import ActiveEffect5e from "./module/active-effect.js";
+import { configureStatusEffects } from "./module/status-effect.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -115,6 +116,9 @@ Hooks.once("init", function() {
 
   // 5e cone RAW should be 53.13 degrees
   CONFIG.MeasuredTemplate.defaults.angle = 53.13;
+
+  // Add status effects
+  configureStatusEffects();
 
   // Register System Settings
   registerSystemSettings();
