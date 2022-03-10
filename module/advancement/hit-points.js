@@ -197,6 +197,7 @@ export class HitPointsFlow extends AdvancementFlow {
     if ( !value ) {
       const lastValue = this.advancement.data.value[this.level - 1];
       if ( lastValue === "avg" ) useAverage = true;
+      // TODO: Fix this to work when leveling up multiple times
     }
 
     // Determine whether this is the first level of the original class on the character
