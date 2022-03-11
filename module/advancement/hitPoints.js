@@ -149,31 +149,23 @@ export class HitPointsAdvancement extends Advancement {
     const conMod = actorData.abilities.con?.mod ?? 0;
     let value = this.valueForLevel(level) ?? 0;
 
-    if ( reverse ) {
-      if ( (value + conMod) === 0 ) return {};
-      return {
-        "data.attributes.hp.max": actorData.attributes.hp.max - value - conMod,
-        "data.attributes.hp.value": actorData.attributes.hp.value - value - conMod
-      };
-    }
-    if ( !updates ) {
-      if ( (value + conMod) === 0 ) return {};
-      return {
-        "data.attributes.hp.max": actorData.attributes.hp.max + value + conMod,
-        "data.attributes.hp.value": actorData.attributes.hp.value + value + conMod
-      };
+    // When reversing, remove both value and constitution modifier
+    if ( reverse ) value = (value + conMod) * -1;
+
+    // If no update data is available, apply full value and constitution modifier
+    else if ( !updates ) value += conMod;
+
+    // Check for difference between stored value and updated, and apply con modifier if it hasn't been applied before
+    else {
+      const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
+      value = modified - value;
+      if ( this.data.value[level] === undefined ) value += conMod;
     }
 
-    const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
-    let hpChange = modified - value;
-    if ( hpChange === 0 ) return {};
-
-    // Avoid adding the constitution modifier more than once
-    if ( this.data.value[level] === undefined ) hpChange += conMod;
-
+    if ( value === 0 ) return {};
     return {
-      "data.attributes.hp.max": actorData.attributes.hp.max + hpChange,
-      "data.attributes.hp.value": actorData.attributes.hp.value + hpChange
+      "data.attributes.hp.max": actorData.attributes.hp.max + value,
+      "data.attributes.hp.value": actorData.attributes.hp.value + value
     };
   }
 
