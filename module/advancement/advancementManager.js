@@ -197,6 +197,7 @@ export class AdvancementManager extends FormApplication {
 
     // TODO: If step is empty or doesn't want to be rendered, move to next step automatically
     if ( !this.step ) return data;
+    this.step.actor = this.clone;
     await this.step.getData(data);
 
     return data;
@@ -240,15 +241,18 @@ export class AdvancementManager extends FormApplication {
     // Prepare changes from current step
     const formData = this._getSubmitData();
     try {
-      this.step.prepareUpdates({ actor: this.clone, data: foundry.utils.expandObject(formData) });
+      this.step.prepareUpdates({ data: foundry.utils.expandObject(formData) });
     } catch(error) {
       ui.notifications.error(error);
       return;
     }
 
     // Apply changes to actor clone
-    await this.applyUpdates(this.clone, this.step.actorUpdates, this.step.itemUpdates);
-    // TODO: Update clone actor advancement choices and ensure advancement flows have access to that data
+    const itemsAdded = await this.applyUpdates(this.clone, this.step.actorUpdates, this.step.itemUpdates);
+
+    // Update clone actor advancement choices and ensure advancement flows have access to that data
+    const flows = Object.values(this.step.flows).flatMap(f => Object.values(f));
+    await this.updateAdvancementData({ actor: this.clone, flows, itemsAdded });
 
     // Check to see if this is the final step, if so, head over to complete
     if ( !this.nextStep ) return this.complete();
@@ -268,11 +272,15 @@ export class AdvancementManager extends FormApplication {
     if ( !this.previousStep ) return;
 
     // Prepare updates that need to be removed
-    this.previousStep.prepareUpdates({ actor: this.clone, reverse: true });
+    this.step.prepareUpdates({ reverse: true });
 
     // Revert actor clone to earlier state
-    await this.applyUpdates(this.clone, this.previousStep.actorUpdates, this.previousStep.itemUpdates);
-    // TODO: Revert changes to clone's advancement choices
+    await this.applyUpdates(this.clone, this.step.actorUpdates, this.step.itemUpdates);
+
+    // Revert changes to clone's advancement choices
+    const flows = Object.values(this.step.flows).flatMap(f => Object.values(f));
+    flows.reverse();
+    await this.updateAdvancementData({ actor: this.clone, flows, reverse: true });
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
@@ -292,7 +300,7 @@ export class AdvancementManager extends FormApplication {
 
     // Update advancement values to reflect player choices
     const flows = this.steps.flatMap(s => Object.values(s.flows).flatMap(f => Object.values(f)));
-    await this.updateAdvancementData(this.actor, flows, itemsAdded);
+    await this.updateAdvancementData({ actor: this.actor, flows, itemsAdded });
 
     // Close manager & remove from actor
     await this.close({ skipConfirmation: true });
@@ -362,20 +370,20 @@ export class AdvancementManager extends FormApplication {
 
   /**
    * Update stored advancement data for the provided flows.
-   * @param {Actor5e} actor            Actor's whose advancements should be updated.
-   * @param {AdvancementFlow[]} flows  Flows to update.
-   * @param {Item5e[]} itemsAdded      New items that have been created.
-   * @returns {Promise<Item5e[]>}      Items that have had their advancement data updated.
+   * @param {object} config
+   * @param {Actor5e} config.actor             Actor's whose advancements should be updated.
+   * @param {AdvancementFlow[]} config.flows   Flows to update.
+   * @param {Item5e[]} [config.itemsAdded=[]]  New items that have been created.
+   * @param {boolean} [config.reverse=false]   Whether the advancement value changes should be undone.
+   * @returns {Promise<Item5e[]>}              Items that have had their advancement data updated.
    */
-  async updateAdvancementData(actor, flows, itemsAdded) {
+  async updateAdvancementData({ actor, flows, itemsAdded=[], reverse=false }) {
     let embeddedUpdates = {};
     for ( const flow of flows ) {
-      const update = flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
+      const update = !reverse ? flow.finalizeUpdate(flow.initialUpdate, itemsAdded) : flow.reverseUpdate();
       if ( foundry.utils.isObjectEmpty(update) ) continue;
       const itemId = flow.advancement.parent.id;
-      if ( !embeddedUpdates[itemId] ) {
-        embeddedUpdates[itemId] = foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
-      }
+      embeddedUpdates[itemId] ??= foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
       const idx = embeddedUpdates[itemId].findIndex(a => a._id === flow.advancement.id);
       if ( idx === -1 ) continue;
       foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
@@ -385,7 +393,6 @@ export class AdvancementManager extends FormApplication {
     embeddedUpdates = Object.entries(embeddedUpdates).map(([id, updates]) => {
       return { _id: id, "data.advancement": updates };
     });
-    console.log(embeddedUpdates);
     return await this.constructor._updateEmbeddedItems(actor, embeddedUpdates);
   }
 

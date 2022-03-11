@@ -231,4 +231,11 @@ export class ItemGrantFlow extends AdvancementFlow {
     return { added };
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverseUpdate() {
+    return { "-=added": null };
+  }
+
 }

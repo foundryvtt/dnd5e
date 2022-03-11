@@ -146,30 +146,34 @@ export class HitPointsAdvancement extends Advancement {
   /** @inheritdoc */
   propertyUpdates({ level, updates, reverse=false }) {
     const actorData = this.actor.data.data;
+    const conMod = actorData.abilities.con?.mod ?? 0;
     let value = this.valueForLevel(level) ?? 0;
 
-    if ( !updates ) {
-      if ( value === 0 ) return {};
-      if ( reverse ) value *= -1;
+    if ( reverse ) {
+      if ( (value + conMod) === 0 ) return {};
       return {
-        "data.attributes.hp.max": actorData.attributes.hp.max + value,
-        "data.attributes.hp.value": actorData.attributes.hp.value + value
+        "data.attributes.hp.max": actorData.attributes.hp.max - value - conMod,
+        "data.attributes.hp.value": actorData.attributes.hp.value - value - conMod
       };
     }
-
-    // No way to safely apply changes to max hit points without difference data
-    if ( !updates || !updates[level] ) return {};
+    if ( !updates ) {
+      if ( (value + conMod) === 0 ) return {};
+      return {
+        "data.attributes.hp.max": actorData.attributes.hp.max + value + conMod,
+        "data.attributes.hp.value": actorData.attributes.hp.value + value + conMod
+      };
+    }
 
     const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
     let hpChange = modified - value;
     if ( hpChange === 0 ) return {};
 
     // Avoid adding the constitution modifier more than once
-    if ( this.data.value[level] === undefined ) hpChange += this.actor.data.data.abilities.con?.mod ?? 0;
+    if ( this.data.value[level] === undefined ) hpChange += conMod;
 
     return {
-      "data.attributes.hp.max": this.actor.data.data.attributes.hp.max + hpChange,
-      "data.attributes.hp.value": this.actor.data.data.attributes.hp.value + hpChange
+      "data.attributes.hp.max": actorData.attributes.hp.max + hpChange,
+      "data.attributes.hp.value": actorData.attributes.hp.value + hpChange
     };
   }
 
@@ -197,7 +201,6 @@ export class HitPointsFlow extends AdvancementFlow {
     if ( !value ) {
       const lastValue = this.advancement.data.value[this.level - 1];
       if ( lastValue === "avg" ) useAverage = true;
-      // TODO: Fix this to work when leveling up multiple times
     }
 
     // Determine whether this is the first level of the original class on the character
@@ -274,6 +277,13 @@ export class HitPointsFlow extends AdvancementFlow {
     this.form.querySelector(".rollResult").classList.add("error");
     let errorType = !formData.value ? "Empty" : "Invalid";
     throw new Error(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverseUpdate() {
+    return { [`-=${this.level}`]: null };
   }
 
 }

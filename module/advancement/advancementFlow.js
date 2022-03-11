@@ -97,4 +97,14 @@ export class AdvancementFlow {
     return update;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Provide the update data needed to remove stored value data for this level.
+   * @returns {object}  Update object to remove any stored value.
+   */
+  reverseUpdate() {
+    return {};
+  }
+
 }

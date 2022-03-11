@@ -67,6 +67,8 @@ class AdvancementStep {
   getFlow(advancement, level, classLevel) {
     this.flows[level] ??= {};
     this.flows[level][advancement.id] ??= new advancement.constructor.flowApp(advancement, classLevel ?? level);
+    const cloneAdvancement = this.actor.items.get(advancement.parent.id).advancement[advancement.id];
+    this.flows[level][advancement.id].advancement = cloneAdvancement;
     return this.flows[level][advancement.id];
   }
 
@@ -124,18 +126,13 @@ class AdvancementStep {
 
   /**
    * Prepare the actor and item updates that all of the advancements within this step should apply.
-   * @param {object} [config]
-   * @param {Actor5e} config.actor            Actor to base the changes upon.
+   * @param {object} [config={}]
    * @param {object} [config.data={}]         Form data with individual advancement data grouped by ID.
    * @param {boolean} [config.reverse=false]  Prepare updates to undo these advancements.
    */
-  prepareUpdates({ actor, data={}, reverse=false }) {
+  prepareUpdates({ data={}, reverse=false }={}) {
     for ( const [currentLevel, flows] of Object.entries(this.flows) ) {
       for ( const [id, flow] of Object.entries(flows) ) {
-        // Swap advancement in flow with version from provided actor so it has access to the proper data
-        const item = actor?.items.get(flow.advancement.parent.id);
-        if ( item ) flow.advancement = item.advancement[flow.advancement.id];
-
         // Prepare update data from the form
         const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? Number(currentLevel);
         flow.initialUpdate = !reverse ? flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {})) : {};
