@@ -1390,8 +1390,13 @@ export default class Item5e extends Item {
    */
   getRollData() {
     if ( !this.actor ) return null;
-    const rollData = this.actor.getRollData();
-    rollData.item = foundry.utils.deepClone(this.data.data);
+
+    const actorRollData = this.actor.getRollData();
+
+    const rollData = {
+      ...actorRollData,
+      item: foundry.utils.deepClone(this.data.data)
+    };
 
     // Include an ability score modifier if one exists
     const abl = this.abilityMod;
