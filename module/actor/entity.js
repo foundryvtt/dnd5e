@@ -1221,6 +1221,9 @@ export default class Actor5e extends Actor {
     const title = `${game.i18n.localize("DND5E.HitDiceRoll")}: ${this.name}`;
     const rollData = foundry.utils.deepClone(this.data.data);
 
+    const result = Hooks.call("preRollHitDie", this, parts, title);
+    if(!result) return;
+
     // Call the roll helper utility
     const roll = await damageRoll({
       event: new Event("hitDie"),
@@ -1242,6 +1245,9 @@ export default class Actor5e extends Actor {
     const hp = this.data.data.attributes.hp;
     const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
     await this.update({"data.attributes.hp.value": hp.value + dhp});
+
+    Hooks.callAll("rollHitDie", this, roll);
+
     return roll;
   }
 
