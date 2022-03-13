@@ -2,9 +2,14 @@ import { AdvancementError } from "./advancement-flow.js";
 import { LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
 
 
-const states = {
+/**
+ * Additional rendering state to ensure auto-stepping doesn't result in applying the same step twice.
+ * @enum {number}
+ */
+const RENDERING_STATES = {
   ADVANCING: 8
 };
+
 
 /**
  * Application for controlling the advancement workflow and displaying the interface.
@@ -212,9 +217,9 @@ export class AdvancementPrompt extends Application {
   /** @inheritdoc */
   render(...args) {
     if ( !this.step?.shouldRender ) {
-      if ( this._state === states.ADVANCING ) return this;
+      if ( this._state === RENDERING_STATES.ADVANCING ) return this;
       this._priorState = this._state;
-      this._state = states.ADVANCING;
+      this._state = RENDERING_STATES.ADVANCING;
       this.advanceStep();
       return this;
     }
@@ -307,7 +312,7 @@ export class AdvancementPrompt extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
-      if ( this._state === states.ADVANCING ) this._state = this._priorState;
+      if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
       return;
     }
 
@@ -316,7 +321,7 @@ export class AdvancementPrompt extends Application {
 
     // Increase step number and re-render
     this._stepIndex += 1;
-    if ( this._state === states.ADVANCING ) this._state = this._priorState;
+    if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
     this.render(true);
   }
 
@@ -337,12 +342,13 @@ export class AdvancementPrompt extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
+      if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
       return;
     }
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
-    if ( this._state === states.ADVANCING ) this._state = this._priorState;
+    if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
     this.render(true);
   }
 
