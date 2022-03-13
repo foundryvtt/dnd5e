@@ -2,6 +2,10 @@ import { AdvancementError } from "./advancement-flow.js";
 import { LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
 
 
+const states = {
+  ADVANCING: 8
+};
+
 /**
  * Application for controlling the advancement workflow and displaying the interface.
  *
@@ -197,11 +201,25 @@ export class AdvancementPrompt extends Application {
     const data = {};
     if ( this.previousStep ) data.previousStep = true;
 
-    // TODO: If step is empty or doesn't want to be rendered, move to next step automatically
     if ( !this.step ) return data;
     data.stepId = this.step.id;
 
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  render(...args) {
+    if ( !this.step?.shouldRender ) {
+      if ( this._state === states.ADVANCING ) return this;
+      this._priorState = this._state;
+      this._state = states.ADVANCING;
+      this.advanceStep();
+      return this;
+    }
+
+    return super.render(...args);
   }
 
   /* -------------------------------------------- */
@@ -289,6 +307,7 @@ export class AdvancementPrompt extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
+      if ( this._state === states.ADVANCING ) this._state = this._priorState;
       return;
     }
 
@@ -297,6 +316,7 @@ export class AdvancementPrompt extends Application {
 
     // Increase step number and re-render
     this._stepIndex += 1;
+    if ( this._state === states.ADVANCING ) this._state = this._priorState;
     this.render(true);
   }
 
@@ -322,6 +342,7 @@ export class AdvancementPrompt extends Application {
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
+    if ( this._state === states.ADVANCING ) this._state = this._priorState;
     this.render(true);
   }
 

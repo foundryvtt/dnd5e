@@ -33,7 +33,8 @@ export class AdvancementStep extends Application {
       title: null,
       popOut: false,
       confirmClose: true,
-      reverse: false
+      reverse: false,
+      shouldRender: true
     });
   }
 
@@ -317,7 +318,8 @@ export class LevelDecreasedStep extends AdvancementStep {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      reverse: true
+      reverse: true,
+      shouldRender: false
     });
   }
 
@@ -329,15 +331,6 @@ export class LevelDecreasedStep extends AdvancementStep {
       return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
     });
     return this._flows;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  getData(data) {
-    super.getData(data);
-    data.shouldRender = false;
-    return data;
   }
 
 }
