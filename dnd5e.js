@@ -11,7 +11,7 @@
 // Import Modules
 import { DND5E } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
-import * as templates from "./module/templates.js";
+import { preloadHandlebarsTemplates, registerHandlebarsHelpers } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances } from "./module/canvas.js";
 
@@ -161,8 +161,8 @@ Hooks.once("init", function() {
   });
 
   // Preload Handlebars helpers & partials
-  templates.registerHandlebarsHelpers();
-  templates.preloadHandlebarsTemplates();
+  registerHandlebarsHelpers();
+  preloadHandlebarsTemplates();
 });
 
 
@@ -171,13 +171,11 @@ Hooks.once("init", function() {
 /* -------------------------------------------- */
 
 /**
- * Prepare attribute lists & pre-load advancement templates.
+ * Prepare attribute lists.
  */
 Hooks.once("setup", function() {
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   CONFIG.DND5E.consumableResources = expandAttributeList(CONFIG.DND5E.consumableResources);
-
-  templates.preloadAdvancementTemplates();
 });
 
 /* --------------------------------------------- */

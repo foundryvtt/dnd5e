@@ -25,7 +25,7 @@ export class AdvancementFlow extends Application {
     
     /**
      * Section of this advancement within the UI.
-     * @type {Element|null}
+     * @type {HTMLElement}
      */
     this.form = null;
   }
@@ -41,10 +41,14 @@ export class AdvancementFlow extends Application {
 
   /* -------------------------------------------- */
 
-  /**
-   * Title that will be displayed in the advancement manager.
-   * @type {string}
-   */
+  /** @inheritdoc */
+  get id() {
+    return `actor-${this.advancement.parent.id}-advancement-${this.advancement.id}-${this.level}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   get title() {
     return this.advancement.title;
   }
@@ -61,21 +65,27 @@ export class AdvancementFlow extends Application {
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare the data that will be passed to this flow's template.
-   * @returns {object}  Data object for the template.
-   */
+  /** @inheritdoc */
   getData() {
     return { advancement: this.advancement, title: this.title, level: this.level };
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Add event listeners to the flow's html for dynamic interfaces.
-   * @param {jQuery} html  HTML of the flow's section.
-   */
-  activateListeners(html) { }
+  /** @inheritdoc */
+  async _renderInner(...args) {
+    const html = await super._renderInner(...args);
+    this.form = html[0];
+    return html;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _replaceHTML(element, html) {
+    Object.entries(element[0].dataset).forEach(([k, v]) => html[0].dataset[k] = v);
+    super._replaceHTML(element, html);
+  }
 
   /* -------------------------------------------- */
 

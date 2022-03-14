@@ -27,20 +27,7 @@ export const preloadHandlebarsTemplates = async function() {
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-controls.html"
-
   ]);
-};
-
-/* -------------------------------------------- */
-
-/**
- * Pre-load advancement flow templates later in the process to ensure modules have had time to introduce custom types.
- * @returns {Promise}
- */
-export const preloadAdvancementTemplates = async function() {
-  return loadTemplates(
-    Object.values(game.dnd5e.advancement.types).map(a => a.flowApp.defaultOptions.template).filter(a => a !== "")
-  );
 };
 
 /* -------------------------------------------- */

@@ -1328,9 +1328,6 @@
   color: #119111;
   font-size: var(--font-size-16);
 }
-.dnd5e.advancement.flow .advancement-controls {
-  margin-block-end: 1em;
-}
 .dnd5e.advancement.flow .item-name .item-image {
   flex: 0 0 30px;
   height: 30px;
@@ -1375,6 +1372,7 @@
 .dnd5e.advancement.flow nav {
   display: flex;
   justify-content: flex-end;
+  margin-block-start: 1em;
 }
 .dnd5e.advancement.flow nav button {
   max-width: 50%;

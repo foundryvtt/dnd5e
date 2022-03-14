@@ -20,10 +20,11 @@ class AdvancementStep {
     this.config = config;
 
     /**
-     * Advancement flows that make up this step grouped by level.
-     * @type {object<number, AdvancementFlow[]>}
+     * Data for each section displayed. Only required property is `flows` containing an array of AdvancementFlows.
+     * @type {object[]}
      */
-    this.flows = {};
+    this.sections = this.prepareSections();
+    this.sections.forEach(s => s.flows.sort((a, b) => a.sortingValue.localeCompare(b.sortingValue)));
 
     /**
      * Updates that will be applied to the actor's properties. Will be provided to `Actor#update`.
@@ -49,28 +50,28 @@ class AdvancementStep {
   /* -------------------------------------------- */
 
   /**
-   * Get the data that will be passed to the advancement manager template when rendering this step.
-   * @returns {object}  Final data passed to the template.
+   * Advancement flows in this step in the order they should be applied.
+   * @type {AdvancementFlow[]}
    */
-  async getData() { }
+  get flows() {
+    return this.sections.flatMap(s => s.flows);
+  }
 
   /* -------------------------------------------- */
 
   /**
-   * Get a flow object for a specific level.
-   * @param {Advancement} advancement  Advancement from which to create the flow.
-   * @param {number} level             Character level used when creating and referencing the flow.
-   * @param {number} [classLevel]      Class level used when creating the flow.
-   * @returns {AdvancementFlow}        The flow.
-   * @protected
+   * Build up the sections list on initial creation of this step.
    */
-  getFlow(advancement, level, classLevel) {
-    this.flows[level] ??= {};
-    this.flows[level][advancement.id] ??= new advancement.constructor.flowApp(advancement, classLevel ?? level);
-    const cloneAdvancement = this.actor.items.get(advancement.parent.id).advancement[advancement.id];
-    this.flows[level][advancement.id].advancement = cloneAdvancement;
-    return this.flows[level][advancement.id];
-  }
+  prepareSections() { }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the data that will be passed to the advancement manager template for rendering the provided section.
+   * @params {object} section  Data on section to be rendered.
+   * @returns {object}         Final data for rendering the section.
+   */
+  getSectionData(section) { }
 
   /* -------------------------------------------- */
 
@@ -80,13 +81,12 @@ class AdvancementStep {
    * @returns {object}              Display data for template rendering.
    * @protected
    */
-  async getAdvancementFlowData(flow) {
+  getAdvancementFlowData(flow) {
     return {
+      flow,
+      appId: flow.id,
       id: flow.advancement.id,
       type: flow.advancement.constructor.typeName,
-      data: await flow.getData(),
-      template: flow.constructor.defaultOptions.template,
-      title: flow.title,
       order: flow.sortingValue
     };
   }
@@ -110,16 +110,17 @@ class AdvancementStep {
   /* -------------------------------------------- */
 
   /**
-   * Activate event listeners on each individual flow within this step.
-   * @param {jQuery} html  HTML of the AdvancementManager application.
+   * Replace the stored actor with the one provided and update all flows accordingly.
+   * @param {Actor5e} actor  Actor to set.
    */
-  activateListeners(html) {
-    html[0].querySelectorAll("section[data-id]").forEach(section => {
-      const flow = this.flows[section.dataset.level]?.[section.dataset.id];
-      if ( !flow ) return;
-      flow.form = section;
-      flow.activateListeners($(section));
-    });
+  swapActor(actor) {
+    this.actor = actor;
+
+    for ( const flow of this.flows ) {
+      const advancement = actor.items.get(flow.advancement.parent.id)?.advancement[flow.advancement.id];
+      if ( advancement ) flow.advancement = advancement;
+      else flow.advancement.actor = actor;
+    }
   }
 
   /* -------------------------------------------- */
@@ -131,11 +132,11 @@ class AdvancementStep {
    * @param {boolean} [config.reverse=false]  Prepare updates to undo these advancements.
    */
   prepareUpdates({ data={}, reverse=false }={}) {
-    for ( const [currentLevel, flows] of Object.entries(this.flows) ) {
-      for ( const [id, flow] of Object.entries(flows) ) {
+    for ( const section of this.sections ) {
+      for ( const flow of section.flows ) {
         // Prepare update data from the form
-        const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? Number(currentLevel);
-        flow.initialUpdate = !reverse ? flow.prepareUpdate(foundry.utils.flattenObject(data[id] ?? {})) : {};
+        const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? section.level;
+        flow.initialUpdate = !reverse ? flow.prepareUpdate(foundry.utils.flattenObject(data[flow.advancement.id] ?? {})) : {};
         const fetchData = { level, updates: flow.initialUpdate, reverse };
 
         // Prepare property changes
@@ -167,23 +168,28 @@ export class LevelIncreasedStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async getData() {
-    const level = this.config.level;
-    const classLevel = this.config.classLevel;
+  prepareSections() {
+    const sections = [{
+      level: this.config.level,
+      classLevel: this.config.classLevel,
+      item: this.config.item,
+      flows: this.advancementsForLevel(this.config.item, this.config.classLevel).map(a => {
+        return new a.constructor.flowApp(a, this.config.classLevel);
+      })
+    }];
+    return sections;
+  }
 
-    const data = {
-      sections: [{
-        level,
-        header: this.config.item.name,
-        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: classLevel }),
-        advancements: await Promise.all(this.advancementsForLevel(this.config.item, classLevel).map(async a => {
-          return await this.getAdvancementFlowData(this.getFlow(a, level, classLevel));
-        }))
-      }]
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getSectionData(section) {
+    return {
+      level: section.level,
+      header: section.item.name,
+      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.classLevel }),
+      advancements: section.flows.map(f => this.getAdvancementFlowData(f))
     };
-    data.sections.forEach(s => s.advancements.sort((a, b) => a.order.localeCompare(b.order)));
-
-    return data;
   }
 
 }
@@ -224,19 +230,27 @@ export class ModifyChoicesStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async getData() {
-    const data = {
-      sections: [{
-        level: this.config.level,
-        header: this.config.item.name,
-        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.level }),
-        advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.level).map(async a => {
-          return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
-        }))
-      }]
-    }
-    data.sections[0].advancements.sort((a, b) => a.order.localeCompare(b.order));
-    return data;
+  prepareSections() {
+    const sections = [{
+      level: this.config.level,
+      item: this.config.item,
+      flows: this.advancementsForLevel(this.config.item, this.config.level).map(a => {
+        return new a.constructor.flowApp(a, this.config.level);
+      })
+    }];
+    return sections;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getSectionData(section) {
+    return {
+      level: section.level,
+      header: section.item.name,
+      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.level }),
+      advancements: section.flows.map(f => this.getAdvancementFlowData(f))
+    };
   }
 
 }

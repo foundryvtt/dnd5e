@@ -52,6 +52,13 @@ export class AdvancementManager extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  get id() {
+    return `actor-${this.actor.id}-advancement`;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Actor upon which this advancement is being performed.
    * @type {Actor5e}
@@ -117,7 +124,7 @@ export class AdvancementManager extends FormApplication {
     // Level increased
     if ( levelDelta > 0 ) {
       while ( levelDelta > 0 ) {
-        this._addStep(new game.dnd5e.advancement.steps.LevelIncreasedStep(this.actor, {
+        this._addStep(new game.dnd5e.advancement.steps.LevelIncreasedStep(this.clone, {
           item: data.item,
           level: data.character.initial + offset,
           classLevel: data.class.initial + offset
@@ -169,7 +176,7 @@ export class AdvancementManager extends FormApplication {
    * @param {number} level  Level at which the changes should be made.
    */
   modifyChoices(item, level) {
-    this._addStep(new game.dnd5e.advancement.steps.ModifyChoicesStep(this.actor, { item, level }));
+    this._addStep(new game.dnd5e.advancement.steps.ModifyChoicesStep(this.clone, { item, level }));
   }
 
   /* -------------------------------------------- */
@@ -183,7 +190,6 @@ export class AdvancementManager extends FormApplication {
     const newIndex = this.steps.push(step) - 1;
     if ( this._stepIndex === null ) this._stepIndex = newIndex;
     this.render(true);
-    // TODO: Re-render using a debounce to avoid multiple renders if several steps are added in a row.
   }
 
   /* -------------------------------------------- */
@@ -197,10 +203,20 @@ export class AdvancementManager extends FormApplication {
 
     // TODO: If step is empty or doesn't want to be rendered, move to next step automatically
     if ( !this.step ) return data;
-    this.step.actor = this.clone;
-    foundry.utils.mergeObject(data, await this.step.getData());
+    data.sections = this.step.sections.map(s => this.step.getSectionData(s));
 
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _render(force, options) {
+    await super._render(force, options);
+    if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
+
+    await Promise.all(this.step.flows.map(f => f._render(true, options)));
+    this.setPosition();
   }
 
   /* -------------------------------------------- */
@@ -210,7 +226,6 @@ export class AdvancementManager extends FormApplication {
     super.activateListeners(html);
     html.find("button[name='previous']")?.click(this.reverseStep.bind(this));
     html.find("button[name='next']").click(this.advanceStep.bind(this));
-    this.step?.activateListeners(html);
   }
 
   /* -------------------------------------------- */
@@ -251,14 +266,14 @@ export class AdvancementManager extends FormApplication {
     const itemsAdded = await this.applyUpdates(this.clone, this.step.actorUpdates, this.step.itemUpdates);
 
     // Update clone actor advancement choices and ensure advancement flows have access to that data
-    const flows = Object.values(this.step.flows).flatMap(f => Object.values(f));
-    await this.updateAdvancementData({ actor: this.clone, flows, itemsAdded });
+    await this.updateAdvancementData({ actor: this.clone, flows: this.step.flows, itemsAdded });
 
     // Check to see if this is the final step, if so, head over to complete
     if ( !this.nextStep ) return this.complete();
 
     // Increase step number and re-render
     this._stepIndex += 1;
+    this.step.swapActor(this.clone);
     this.render();
   }
 
@@ -278,12 +293,11 @@ export class AdvancementManager extends FormApplication {
     await this.applyUpdates(this.clone, this.step.actorUpdates, this.step.itemUpdates);
 
     // Revert changes to clone's advancement choices
-    const flows = Object.values(this.step.flows).flatMap(f => Object.values(f));
-    flows.reverse();
-    await this.updateAdvancementData({ actor: this.clone, flows, reverse: true });
+    await this.updateAdvancementData({ actor: this.clone, flows: this.step.flows.reverse(), reverse: true });
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
+    this.step.swapActor(this.clone);
     this.render();
   }
 
@@ -299,8 +313,7 @@ export class AdvancementManager extends FormApplication {
     const itemsAdded = await this.applyUpdates(this.actor, actorUpdates, itemUpdates);
 
     // Update advancement values to reflect player choices
-    const flows = this.steps.flatMap(s => Object.values(s.flows).flatMap(f => Object.values(f)));
-    await this.updateAdvancementData({ actor: this.actor, flows, itemsAdded });
+    await this.updateAdvancementData({ actor: this.actor, flows: this.steps.flatMap(s => s.flows), itemsAdded });
 
     // Close manager & remove from actor
     await this.close({ skipConfirmation: true });
