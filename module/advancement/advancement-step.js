@@ -27,16 +27,14 @@ class AdvancementStep {
     this.sections.forEach(s => s.flows.sort((a, b) => a.sortingValue.localeCompare(b.sortingValue)));
 
     /**
-     * Updates that will be applied to the actor's properties. Will be provided to `Actor#update`.
+     * All of the stored update data. `actor` is changes to actor properties passed to `Actor#update`.
+     * `item` contains `add` which lists UUID of items to add and `remove` which contains IDs of items to remove.
      * @type {object}
      */
-    this.actorUpdates = {};
-
-    /**
-     * Items that will be added or removed from the actor.
-     * @type {object}
-     */
-    this.itemUpdates = { add: [], remove: [] };
+    this.updates = {
+      actor: {},
+      item: { add: [], remove: [] }
+    };
   }
 
   /* -------------------------------------------- */
@@ -140,12 +138,12 @@ class AdvancementStep {
         const fetchData = { level, updates: flow.initialUpdate, reverse };
 
         // Prepare property changes
-        Object.assign(this.actorUpdates, flow.advancement.propertyUpdates(fetchData));
+        Object.assign(this.updates.actor, flow.advancement.propertyUpdates(fetchData));
 
         // Prepare added or removed items
         const { add, remove } = flow.advancement.itemUpdates(fetchData);
-        this.itemUpdates.add.push(...add); // TODO: Keep added items associated with the advancement that provides them
-        this.itemUpdates.remove.push(...remove);
+        this.updates.item.add.push(...add); // TODO: Keep added items associated with the advancement that provides them
+        this.updates.item.remove.push(...remove);
       }
     }
   }

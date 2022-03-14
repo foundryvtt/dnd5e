@@ -263,7 +263,7 @@ export class AdvancementManager extends FormApplication {
     }
 
     // Apply changes to actor clone
-    const itemsAdded = await this.applyUpdates(this.clone, this.step.actorUpdates, this.step.itemUpdates);
+    const itemsAdded = await this.applyUpdates(this.clone, this.step.updates);
 
     // Update clone actor advancement choices and ensure advancement flows have access to that data
     await this.updateAdvancementData({ actor: this.clone, flows: this.step.flows, itemsAdded });
@@ -290,7 +290,7 @@ export class AdvancementManager extends FormApplication {
     this.step.prepareUpdates({ reverse: true });
 
     // Revert actor clone to earlier state
-    await this.applyUpdates(this.clone, this.step.actorUpdates, this.step.itemUpdates);
+    await this.applyUpdates(this.clone, this.step.updates);
 
     // Revert changes to clone's advancement choices
     await this.updateAdvancementData({ actor: this.clone, flows: this.step.flows.reverse(), reverse: true });
@@ -309,8 +309,7 @@ export class AdvancementManager extends FormApplication {
    */
   async complete() {
     // Apply changes from each step to actual actor
-    const { actorUpdates, itemUpdates } = this.collectUpdates(this.steps);
-    const itemsAdded = await this.applyUpdates(this.actor, actorUpdates, itemUpdates);
+    const itemsAdded = await this.applyUpdates(this.actor, this.collectUpdates(this.steps));
 
     // Update advancement values to reflect player choices
     await this.updateAdvancementData({ actor: this.actor, flows: this.steps.flatMap(s => s.flows), itemsAdded });
@@ -323,26 +322,26 @@ export class AdvancementManager extends FormApplication {
 
   /**
    * Gather actor and item updates for the provided steps and merge in order.
-   * @param {AdvancementStep[]} steps                          Steps to merge.
-   * @returns {{ actorUpdates: object, itemUpdates: object }}  Updates.
+   * @param {AdvancementStep[]} steps            Steps to merge.
+   * @returns {{ actor: object, item: object }}  Merged updates.
    */
   collectUpdates(steps) {
-    const actorUpdates = {};
-    const itemUpdates = { add: new Set(), remove: new Set() };
+    const actor = {};
+    const item = { add: new Set(), remove: new Set() };
     for ( const step of steps ) {
-      foundry.utils.mergeObject(actorUpdates, step.actorUpdates);
-      for ( const uuid of step.itemUpdates.add ) {
-        if ( itemUpdates.remove.has(uuid) ) itemUpdates.remove.delete(uuid);
-        else itemUpdates.add.add(uuid);
+      foundry.utils.mergeObject(actor, step.updates.actor);
+      for ( const uuid of step.updates.item.add ) {
+        if ( item.remove.has(uuid) ) item.remove.delete(uuid);
+        else item.add.add(uuid);
       }
-      for ( const uuid of step.itemUpdates.remove ) {
-        if ( itemUpdates.add.has(uuid) ) itemUpdates.add.delete(uuid);
-        else itemUpdates.remove.add(uuid);
+      for ( const uuid of step.updates.item.remove ) {
+        if ( item.add.has(uuid) ) item.add.delete(uuid);
+        else item.remove.add(uuid);
       }
     }
-    itemUpdates.add = Array.from(itemUpdates.add);
-    itemUpdates.remove = Array.from(itemUpdates.remove);
-    return { actorUpdates, itemUpdates };
+    item.add = Array.from(item.add);
+    item.remove = Array.from(item.remove);
+    return { actor, item };
   }
 
   /* -------------------------------------------- */
@@ -350,16 +349,15 @@ export class AdvancementManager extends FormApplication {
   /**
    * Apply stored updates to an actor, modifying properties and adding or removing items.
    * @param {Actor5e} actor        Actor upon which to perform the updates.
-   * @param {object} actorUpdates  Updates that will be applied to the actor's properties.
-   * @param {object} itemUpdates   Items that will be added or removed from the actor.
+   * @param {object} updates       Updates to apply to actor and items.
    * @returns {Promise<Item5e[]>}  New items that have been created.
    */
-  async applyUpdates(actor, actorUpdates, itemUpdates) {
+  async applyUpdates(actor, updates) {
     // Begin fetching data for new items
-    let newItems = Promise.all(itemUpdates.add.map(fromUuid));
+    let newItems = Promise.all(updates.item.add.map(fromUuid));
 
     // Apply property changes to actor
-    await this.constructor._updateActor(actor, foundry.utils.deepClone(actorUpdates));
+    await this.constructor._updateActor(actor, foundry.utils.deepClone(updates.actor));
 
     // Add new items to actor
     newItems = (await newItems).map(item => {
@@ -374,7 +372,7 @@ export class AdvancementManager extends FormApplication {
     const itemsAdded = await this.constructor._createEmbeddedItems(actor, newItems);
 
     // Remove items from actor
-    await this.constructor._deleteEmbeddedItems(actor, itemUpdates.remove.filter(id => actor.items.has(id)));
+    await this.constructor._deleteEmbeddedItems(actor, updates.item.remove.filter(id => actor.items.has(id)));
 
     return itemsAdded;
   }
