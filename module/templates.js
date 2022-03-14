@@ -39,7 +39,7 @@ export const preloadHandlebarsTemplates = async function() {
  */
 export const preloadAdvancementTemplates = async function() {
   return loadTemplates(
-    Object.values(game.dnd5e.advancement.types).map(a => a.flowApp.template).filter(a => a !== "")
+    Object.values(game.dnd5e.advancement.types).map(a => a.flowApp.defaultOptions.template).filter(a => a !== "")
   );
 };
 

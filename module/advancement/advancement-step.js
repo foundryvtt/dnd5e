@@ -85,7 +85,7 @@ class AdvancementStep {
       id: flow.advancement.id,
       type: flow.advancement.constructor.typeName,
       data: await flow.getData(),
-      template: flow.constructor.template,
+      template: flow.constructor.defaultOptions.template,
       title: flow.title,
       order: flow.sortingValue
     };

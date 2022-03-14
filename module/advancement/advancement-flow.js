@@ -4,10 +4,13 @@
  *
  * @property {Advancement} advancement  Advancement to which this flow belongs.
  * @property {number} level             Level for which to configure this flow.
+ * @extends {Application}
  */
-export class AdvancementFlow {
+export class AdvancementFlow extends Application {
 
-  constructor(advancement, level) {
+  constructor(advancement, level, options={}) {
+    super(options);
+
     /**
      * Advancement to which this flow belongs.
      * @type {Advancement}
@@ -29,12 +32,12 @@ export class AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /**
-   * Template partial used for displaying this component within advancement manager. If left blank then no interface
-   * will be displayed for this flow.
-   * @type {string}
-   */
-  static template = "";
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      popOut: false
+    });
+  }
 
   /* -------------------------------------------- */
 
@@ -63,7 +66,7 @@ export class AdvancementFlow {
    * @returns {object}  Data object for the template.
    */
   getData() {
-    return { advancement: this.advancement, level: this.level };
+    return { advancement: this.advancement, title: this.title, level: this.level };
   }
 
   /* -------------------------------------------- */

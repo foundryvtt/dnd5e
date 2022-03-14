@@ -7,7 +7,6 @@
       {{#each this.advancements}}
         {{#if this.template}}
           <section data-level="{{../level}}" data-id="{{this.id}}" data-type="{{this.type}}">
-            <h3>{{{this.title}}}</h3>
             {{> (lookup this 'template') (lookup this 'data')}}
           </section>
         {{/if}}

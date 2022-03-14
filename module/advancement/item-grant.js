@@ -191,7 +191,11 @@ export class ItemGrantConfig extends AdvancementConfig {
 export class ItemGrantFlow extends AdvancementFlow {
 
   /** @inheritdoc */
-  static template = "systems/dnd5e/templates/advancement/item-grant-flow.html";
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/item-grant-flow.html"
+    });
+  }
 
   /* -------------------------------------------- */
 

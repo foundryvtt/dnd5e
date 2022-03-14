@@ -180,7 +180,11 @@ export class HitPointsAdvancement extends Advancement {
 export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
-  static template = "systems/dnd5e/templates/advancement/hit-points-flow.html";
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/hit-points-flow.html"
+    });
+  }
 
   /* -------------------------------------------- */
 
