@@ -215,7 +215,10 @@ export class AdvancementManager extends FormApplication {
     await super._render(force, options);
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
 
-    await Promise.all(this.step.flows.map(f => f._render(true, options)));
+    await Promise.all(this.step.flows.map(f => {
+      f._element = null;
+      return f._render(true, options);
+    }));
     this.setPosition();
   }
 
