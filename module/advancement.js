@@ -1,11 +1,11 @@
 import { Advancement } from "./advancement/advancement.js";
-import { AdvancementConfig } from "./advancement/advancementConfig.js";
-import { AdvancementFlow } from "./advancement/advancementFlow.js";
-import { AdvancementManager } from "./advancement/advancementManager.js";
-import { AdvancementSelection } from "./advancement/advancementSelection.js";
-import * as steps from "./advancement/advancementStep.js";
-import { HitPointsAdvancement } from "./advancement/hitPoints.js";
-import { ItemGrantAdvancement } from "./advancement/itemGrant.js";
+import { AdvancementConfig } from "./advancement/advancement-config.js";
+import { AdvancementFlow } from "./advancement/advancement-flow.js";
+import { AdvancementManager } from "./advancement/advancement-manager.js";
+import { AdvancementSelection } from "./advancement/advancement-selection.js";
+import * as steps from "./advancement/advancement-step.js";
+import { HitPointsAdvancement } from "./advancement/hit-points.js";
+import { ItemGrantAdvancement } from "./advancement/item-grant.js";
 
 const advancement = {
   Advancement,

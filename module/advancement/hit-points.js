@@ -1,5 +1,5 @@
 import { Advancement } from "./advancement.js";
-import { AdvancementFlow } from "./advancementFlow.js";
+import { AdvancementFlow } from "./advancement-flow.js";
 
 
 /**

@@ -1,5 +1,5 @@
-import { AdvancementConfig } from "./advancementConfig.js";
-import { AdvancementFlow } from "./advancementFlow.js";
+import { AdvancementConfig } from "./advancement-config.js";
+import { AdvancementFlow } from "./advancement-flow.js";
 
 /**
  * Abstract base class which various advancement types can subclass.
