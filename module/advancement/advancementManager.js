@@ -198,7 +198,7 @@ export class AdvancementManager extends FormApplication {
     // TODO: If step is empty or doesn't want to be rendered, move to next step automatically
     if ( !this.step ) return data;
     this.step.actor = this.clone;
-    await this.step.getData(data);
+    foundry.utils.mergeObject(data, await this.step.getData());
 
     return data;
   }

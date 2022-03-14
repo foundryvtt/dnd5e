@@ -50,9 +50,9 @@ class AdvancementStep {
 
   /**
    * Get the data that will be passed to the advancement manager template when rendering this step.
-   * @param {object} data  Existing data from AdvancementManager. *Will be mutated.*
+   * @returns {object}  Final data passed to the template.
    */
-  async getData(data) { }
+  async getData() { }
 
   /* -------------------------------------------- */
 
@@ -167,20 +167,20 @@ export class LevelIncreasedStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async getData(data) {
-    await super.getData(data);
+  async getData() {
     const level = this.config.level;
     const classLevel = this.config.classLevel;
 
-    data.sections = [{
-      level,
-      header: this.config.item.name,
-      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: classLevel }),
-      advancements: await Promise.all(this.advancementsForLevel(this.config.item, classLevel).map(async a => {
-        return await this.getAdvancementFlowData(this.getFlow(a, level, classLevel));
-      }))
-    }];
-
+    const data = {
+      sections: [{
+        level,
+        header: this.config.item.name,
+        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: classLevel }),
+        advancements: await Promise.all(this.advancementsForLevel(this.config.item, classLevel).map(async a => {
+          return await this.getAdvancementFlowData(this.getFlow(a, level, classLevel));
+        }))
+      }]
+    };
     data.sections.forEach(s => s.advancements.sort((a, b) => a.order.localeCompare(b.order)));
 
     return data;
@@ -224,16 +224,19 @@ export class ModifyChoicesStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async getData(data) {
-    data.sections = [{
-      level: this.config.level,
-      header: this.config.item.name,
-      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.level }),
-      advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.level).map(async a => {
-        return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
-      }))
-    }];
+  async getData() {
+    const data = {
+      sections: [{
+        level: this.config.level,
+        header: this.config.item.name,
+        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.level }),
+        advancements: await Promise.all(this.advancementsForLevel(this.config.item, this.config.level).map(async a => {
+          return await this.getAdvancementFlowData(this.getFlow(a, this.config.level));
+        }))
+      }]
+    }
     data.sections[0].advancements.sort((a, b) => a.order.localeCompare(b.order));
+    return data;
   }
 
 }
