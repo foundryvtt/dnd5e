@@ -330,19 +330,18 @@ export class AdvancementManager extends FormApplication {
    */
   collectUpdates(steps) {
     const actor = {};
-    const item = { add: new Set(), remove: new Set() };
+    const item = { add: {}, remove: new Set() };
     for ( const step of steps ) {
       foundry.utils.mergeObject(actor, step.updates.actor);
-      for ( const uuid of step.updates.item.add ) {
+      for ( const [uuid, origin] of Object.entries(step.updates.item.add) ) {
         if ( item.remove.has(uuid) ) item.remove.delete(uuid);
-        else item.add.add(uuid);
+        else item.add[uuid] = origin;
       }
       for ( const uuid of step.updates.item.remove ) {
-        if ( item.add.has(uuid) ) item.add.delete(uuid);
+        if ( item.add[uuid] ) delete item.add[uuid];
         else item.remove.add(uuid);
       }
     }
-    item.add = Array.from(item.add);
     item.remove = Array.from(item.remove);
     return { actor, item };
   }
@@ -357,7 +356,7 @@ export class AdvancementManager extends FormApplication {
    */
   async applyUpdates(actor, updates) {
     // Begin fetching data for new items
-    let newItems = Promise.all(updates.item.add.map(fromUuid));
+    let newItems = Promise.all(Object.keys(updates.item.add).map(fromUuid));
 
     // Apply property changes to actor
     await this.constructor._updateActor(actor, foundry.utils.deepClone(updates.actor));
@@ -366,9 +365,8 @@ export class AdvancementManager extends FormApplication {
     newItems = (await newItems).map(item => {
       const data = item.toObject();
       foundry.utils.mergeObject(data, {
-        "flags.dnd5e.sourceId": item.uuid
-        // TODO: Store ID of originating item and advancement for later reference
-        // "flags.dnd5e.advancementOrigin": `${originalItem.id}.${advancement.id}`
+        "flags.dnd5e.sourceId": item.uuid,
+        "flags.dnd5e.advancementOrigin": updates.item.add[item.uuid]
       });
       return data;
     });

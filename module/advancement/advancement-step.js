@@ -28,8 +28,15 @@ class AdvancementStep {
 
     /**
      * All of the stored update data. `actor` is changes to actor properties passed to `Actor#update`.
-     * `item` contains `add` which lists UUID of items to add and `remove` which contains IDs of items to remove.
-     * @type {object}
+     * `item` contains `add` which is a mapping between UUID of items to add and the advancement origin.
+     * and `remove` which contains IDs of items to remove.
+     * @type {{
+     *   actor: object,
+     *   item: {
+     *     add: object,
+     *     remove: string[]
+     *   }
+     * }}
      */
     this.updates = {
       actor: {},
@@ -142,7 +149,7 @@ class AdvancementStep {
 
         // Prepare added or removed items
         const { add, remove } = flow.advancement.itemUpdates(fetchData);
-        this.updates.item.add.push(...add); // TODO: Keep added items associated with the advancement that provides them
+        add.forEach(uuid => this.updates.item.add[uuid] = `${flow.advancement.parent.id}.${flow.advancement.id}`);
         this.updates.item.remove.push(...remove);
       }
     }
