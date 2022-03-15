@@ -1,5 +1,5 @@
 import { Advancement } from "./advancement.js";
-import { AdvancementFlow } from "./advancementFlow.js";
+import { AdvancementError, AdvancementFlow } from "./advancement-flow.js";
 
 
 /**
@@ -268,7 +268,7 @@ export class HitPointsFlow extends AdvancementFlow {
 
     this.form.querySelector(".rollResult").classList.add("error");
     let errorType = !formData.value ? "Empty" : "Invalid";
-    throw new Error(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
+    throw new AdvancementError(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
   }
 
 }
