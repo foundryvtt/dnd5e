@@ -1,6 +1,6 @@
 import { Advancement } from "./advancement.js";
-import { AdvancementConfig } from "./advancementConfig.js";
-import { AdvancementFlow } from "./advancementFlow.js";
+import { AdvancementConfig } from "./advancement-config.js";
+import { AdvancementFlow } from "./advancement-flow.js";
 
 
 /**
