@@ -233,6 +233,19 @@ export class AdvancementManager extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /**
+   * Control whether the next/previous buttons are enabled or disabled.
+   * @param {boolean} disabled  Should they be disabled?
+   */
+  setControlsDisabled(disabled) {
+    const nextButton = this.form?.querySelector("button[name='next']");
+    if ( nextButton ) nextButton.disabled = disabled;
+    const previousButton = this.form?.querySelector("button[name='previous']");
+    if ( previousButton ) previousButton.disabled = disabled;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async close(options={}) {
     if ( !options.skipConfirmation ) {
@@ -251,7 +264,7 @@ export class AdvancementManager extends FormApplication {
    * @returns {Promise}
    */
   async advanceStep() {
-    // TODO: Add protection from double submission, maybe just use FormApplication#_onSubmit
+    this.setControlsDisabled(true);
 
     // Clear visible errors
     this.form.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
@@ -261,7 +274,9 @@ export class AdvancementManager extends FormApplication {
     try {
       this.step.prepareUpdates({ data: foundry.utils.expandObject(formData) });
     } catch(error) {
+      // TODO: Add AdvancementError type so only advancement-specific errors are caught here
       ui.notifications.error(error);
+      this.setControlsDisabled(false);
       return;
     }
 
@@ -288,9 +303,16 @@ export class AdvancementManager extends FormApplication {
    */
   async reverseStep() {
     if ( !this.previousStep ) return;
+    this.setControlsDisabled(true);
 
     // Prepare updates that need to be removed
-    this.step.prepareUpdates({ reverse: true });
+    try {
+      this.step.prepareUpdates({ reverse: true });
+    } catch(error) {
+      ui.notifications.error(error);
+      this.setControlsDisabled(false);
+      return;
+    }
 
     // Revert actor clone to earlier state
     await this.applyUpdates(this.clone, this.step.updates);
