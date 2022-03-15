@@ -1,10 +1,10 @@
-<form autocomplete="off">
+<div>
   {{#each sections}}
     {{#if this.header}}<h1>{{this.header}}</h1>{{/if}}
     {{#if this.subheader}}<h2>{{this.subheader}}</h2>{{/if}}
 
     {{#each this.advancements}}
-      <section id="{{this.appId}}" data-level="{{../level}}" data-id="{{this.id}}" data-type="{{this.type}}"></section>
+      <form id="{{this.appId}}" data-level="{{../level}}" data-id="{{this.id}}" data-type="{{this.type}}"></form>
     {{/each}}
   {{/each}}
 
@@ -18,4 +18,4 @@
       <i class="fas fa-angle-double-right"></i> {{localize "DND5E.AdvancementManagerNextStep"}}
     </button>
   </nav>
-</form>
+</div>

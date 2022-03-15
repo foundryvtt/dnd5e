@@ -1,11 +1,11 @@
-<section>
+<form>
   <h3>{{{this.title}}}</h3>
 
   {{#if isFirstClassLevel}}
 
     <div>
       {{{localize "DND5E.AdvancementHitPointsMaxAtFirstLevel" max=dieValue}}}
-      <input type="hidden" name="{{advancement.id}}.useMax" value="true" data-dtype="Boolean">
+      <input type="hidden" name="useMax" value="true" data-dtype="Boolean">
     </div>
 
   {{else}}
@@ -13,13 +13,13 @@
     <div class="rolls">
       <label class="averageLabel">
         <span>{{localize "DND5E.AdvancementHitPointsAverage"}}</span>
-        <input class="averageCheckbox" type="checkbox" name="{{advancement.id}}.useAverage" {{checked data.useAverage}}>
+        <input class="averageCheckbox" type="checkbox" name="useAverage" {{checked data.useAverage}}>
       </label>
-      <input class="rollResult" type="number" name="{{advancement.id}}.value" value="{{data.value}}" {{disabled data.useAverage}}>
+      <input class="rollResult" type="number" name="value" value="{{data.value}}" {{disabled data.useAverage}}>
       <button class="rollButton" type="button" name="roll" {{disabled data.useAverage}}>
         <i class="fas fa-dice-d20"></i> {{localize "DND5E.AdvancementHitPointsRollButton" die=hitDie}}
       </button>
     </div>
 
   {{/if}}
-</section>
+</form>

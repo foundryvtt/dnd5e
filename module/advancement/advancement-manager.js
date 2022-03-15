@@ -4,12 +4,18 @@
  * @property {Actor5e} actor                 Actor up which this advancement is being performed.
  * @property {AdvancementStep[]} [steps=[]]  Any initial steps that should be displayed.
  * @property {object} [options={}]           Additional application options.
- * @extends FormApplication
+ * @extends {Application}
  */
-export class AdvancementManager extends FormApplication {
+export class AdvancementManager extends Application {
 
   constructor(actor, steps=[], options={}) {
-    super(actor, options);
+    super(options);
+
+    /**
+     * The original actor to which changes will be applied when the process is complete.
+     * @type {Actor5e}
+     */
+    this.actor = actor;
 
     /**
      * A clone of the original actor to which the changes can be applied during the advancement process.
@@ -55,16 +61,6 @@ export class AdvancementManager extends FormApplication {
   /** @inheritdoc */
   get id() {
     return `actor-${this.actor.id}-advancement`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Actor upon which this advancement is being performed.
-   * @type {Actor5e}
-   */
-  get actor() {
-    return this.object;
   }
 
   /* -------------------------------------------- */
@@ -238,9 +234,9 @@ export class AdvancementManager extends FormApplication {
    * @param {boolean} disabled  Should they be disabled?
    */
   setControlsDisabled(disabled) {
-    const nextButton = this.form?.querySelector("button[name='next']");
+    const nextButton = this.element[0]?.querySelector("button[name='next']");
     if ( nextButton ) nextButton.disabled = disabled;
-    const previousButton = this.form?.querySelector("button[name='previous']");
+    const previousButton = this.element[0]?.querySelector("button[name='previous']");
     if ( previousButton ) previousButton.disabled = disabled;
   }
 
@@ -267,12 +263,11 @@ export class AdvancementManager extends FormApplication {
     this.setControlsDisabled(true);
 
     // Clear visible errors
-    this.form.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
+    this.element[0]?.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
 
     // Prepare changes from current step
-    const formData = this._getSubmitData();
     try {
-      this.step.prepareUpdates({ data: foundry.utils.expandObject(formData) });
+      this.step.prepareUpdates();
     } catch(error) {
       if ( !(error instanceof game.dnd5e.advancement.AdvancementError) ) throw error;
       ui.notifications.error(error.message);

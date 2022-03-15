@@ -4,9 +4,9 @@
  *
  * @property {Advancement} advancement  Advancement to which this flow belongs.
  * @property {number} level             Level for which to configure this flow.
- * @extends {Application}
+ * @extends {FormApplication}
  */
-export class AdvancementFlow extends Application {
+export class AdvancementFlow extends FormApplication {
 
   constructor(advancement, level, options={}) {
     super(options);
@@ -22,12 +22,6 @@ export class AdvancementFlow extends Application {
      * @type {number}
      */
     this.level = level;
-
-    /**
-     * Section of this advancement within the UI.
-     * @type {HTMLElement}
-     */
-    this.form = null;
   }
 
   /* -------------------------------------------- */
@@ -68,15 +62,6 @@ export class AdvancementFlow extends Application {
   /** @inheritdoc */
   getData() {
     return { advancement: this.advancement, title: this.title, level: this.level };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _renderInner(...args) {
-    const html = await super._renderInner(...args);
-    this.form = html[0];
-    return html;
   }
 
   /* -------------------------------------------- */

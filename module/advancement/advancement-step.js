@@ -135,16 +135,14 @@ class AdvancementStep {
   /**
    * Prepare the actor and item updates that all of the advancements within this step should apply.
    * @param {object} [config={}]
-   * @param {object} [config.data={}]         Form data with individual advancement data grouped by ID.
    * @param {boolean} [config.reverse=false]  Prepare updates to undo these advancements.
    */
-  prepareUpdates({ data={}, reverse=false }={}) {
+  prepareUpdates({ reverse=false }={}) {
     for ( const section of this.sections ) {
       for ( const flow of section.flows ) {
         // Prepare update data from the form
         const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? section.level;
-        const preparationData = foundry.utils.flattenObject(data[flow.advancement.id] ?? {});
-        flow.initialUpdate = !reverse ? flow.prepareUpdate(preparationData) : {};
+        flow.initialUpdate = !reverse ? flow.prepareUpdate(flow.form ? flow._getSubmitData() : {}) : {};
         const fetchData = { level, updates: flow.initialUpdate, reverse };
 
         // Prepare property changes
