@@ -1406,7 +1406,7 @@
 }
 .dnd5e.advancement.flow section[data-type="ScaleValue"] p {
   margin-block-end: 0;
-  font-size: 1.25rem;
+  font-size: var(--font-size-18);
 }
 .dnd5e.advancement.flow section[data-type="ScaleValue"] span.none {
   font-style: italic;

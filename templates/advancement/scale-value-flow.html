@@ -1,9 +1,11 @@
-<p>
-  <span class="initial-scale-value {{#unless initial}}none{{/unless}}">
-    {{#if initial}}{{initial}}{{else}}{{localize "DND5E.None"}}{{/if}}
-  </span>
-  &#x27A1;
-  <span class="new-scale-value {{#unless final}}none{{/unless}}">
-    {{#if final}}{{final}}{{else}}{{localize "DND5E.None"}}{{/if}}
-  </span>
-</p>
+<section>
+  <h3>{{{this.title}}}</h3>
+
+  <p>
+    <span class="initial-scale-value {{#unless initial}}none{{/unless}}">
+      {{#if initial}}{{initial}}{{else}}{{localize "DND5E.None"}}{{/if}}
+    </span>
+    &#x27A1;
+    <span class="new-scale-value">{{final}}</span>
+  </p>
+</section>
