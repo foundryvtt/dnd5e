@@ -274,8 +274,8 @@ export class AdvancementManager extends FormApplication {
     try {
       this.step.prepareUpdates({ data: foundry.utils.expandObject(formData) });
     } catch(error) {
-      // TODO: Add AdvancementError type so only advancement-specific errors are caught here
-      ui.notifications.error(error);
+      if ( !(error instanceof game.dnd5e.advancement.AdvancementError) ) throw error;
+      ui.notifications.error(error.message);
       this.setControlsDisabled(false);
       return;
     }
@@ -309,7 +309,8 @@ export class AdvancementManager extends FormApplication {
     try {
       this.step.prepareUpdates({ reverse: true });
     } catch(error) {
-      ui.notifications.error(error);
+      if ( !(error instanceof game.dnd5e.advancement.AdvancementError) ) throw error;
+      ui.notifications.error(error.message);
       this.setControlsDisabled(false);
       return;
     }

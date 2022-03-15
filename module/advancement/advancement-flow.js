@@ -121,3 +121,19 @@ export class AdvancementFlow extends Application {
   }
 
 }
+
+
+/**
+ * Error that can be thrown during the advancement update preparation process.
+ *
+ * @extends {Error}
+ */
+export class AdvancementError extends Error {
+
+  constructor(...args) {
+    super(...args);
+
+    this.name = "AdvancementError";
+  }
+
+}
