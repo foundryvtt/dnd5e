@@ -73,10 +73,12 @@ class AdvancementStep {
 
   /**
    * Get the data that will be passed to the advancement manager template for rendering the provided section.
-   * @params {object} section  Data on section to be rendered.
-   * @returns {object}         Final data for rendering the section.
+   * @param {object} section  Data on section to be rendered.
+   * @returns {object}        Final data for rendering the section.
    */
-  getSectionData(section) { }
+  getSectionData(section) {
+    return {};
+  }
 
   /* -------------------------------------------- */
 
@@ -141,7 +143,8 @@ class AdvancementStep {
       for ( const flow of section.flows ) {
         // Prepare update data from the form
         const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? section.level;
-        flow.initialUpdate = !reverse ? flow.prepareUpdate(foundry.utils.flattenObject(data[flow.advancement.id] ?? {})) : {};
+        const preparationData = foundry.utils.flattenObject(data[flow.advancement.id] ?? {});
+        flow.initialUpdate = !reverse ? flow.prepareUpdate(preparationData) : {};
         const fetchData = { level, updates: flow.initialUpdate, reverse };
 
         // Prepare property changes

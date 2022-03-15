@@ -489,7 +489,7 @@ export class AdvancementManager extends FormApplication {
   static async _updateEmbeddedItems(actor, updates, context) {
     if ( actor.id ) return actor.updateEmbeddedDocuments("Item", updates, context);
 
-    actor.data.update({"items": updates});
+    actor.data.update({items: updates});
     actor.prepareData();
 
     const ids = new Set(updates.map(u => u._id));

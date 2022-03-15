@@ -22,7 +22,7 @@ export class AdvancementFlow extends Application {
      * @type {number}
      */
     this.level = level;
-    
+
     /**
      * Section of this advancement within the UI.
      * @type {HTMLElement}

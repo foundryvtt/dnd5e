@@ -36,7 +36,7 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static get flowApp() { return HitPointsFlow; };
+  static get flowApp() { return HitPointsFlow; }
 
   /* -------------------------------------------- */
 

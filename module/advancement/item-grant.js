@@ -44,12 +44,12 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static get configApp() { return ItemGrantConfig; };
+  static get configApp() { return ItemGrantConfig; }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static get flowApp() { return ItemGrantFlow; };
+  static get flowApp() { return ItemGrantFlow; }
 
   /* -------------------------------------------- */
   /*  Display Methods                             */
