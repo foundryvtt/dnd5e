@@ -9,7 +9,7 @@
 export class AdvancementFlow extends FormApplication {
 
   constructor(advancement, level, options={}) {
-    super(options);
+    super({}, options);
 
     /**
      * Advancement to which this flow belongs.
@@ -55,6 +55,21 @@ export class AdvancementFlow extends FormApplication {
    */
   get sortingValue() {
     return this.advancement.sortingValueForLevel(this.level);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a data object used to create the placeholder form within an advancement step.
+   * @returns {object}
+   */
+  getPlaceholderData() {
+    return {
+      appId: this.id,
+      id: this.advancement.id,
+      type: this.advancement.constructor.typeName,
+      order: this.sortingValue
+    };
   }
 
   /* -------------------------------------------- */

@@ -1,3 +1,6 @@
+import { AdvancementError } from "./advancement-flow.js";
+
+
 /**
  * Application for controlling the advancement workflow and displaying the interface.
  *
@@ -113,32 +116,25 @@ export class AdvancementManager extends Application {
    * Add a step to this advancement process when a class is added or level is changed.
    * @param {LevelChangeData} data  Information on the class and level changes.
    */
-  levelChanged(data) {
-    let levelDelta = data.character.final - data.character.initial;
-    let offset = 1;
+  levelChanged({ item, character, class: cls }) {
+    let levelDelta = character.final - character.initial;
+
+    // Level didn't change
+    if ( levelDelta === 0 ) throw new Error("Level did not change within level change advancement.");
 
     // Level increased
-    if ( levelDelta > 0 ) {
-      while ( levelDelta > 0 ) {
-        this._addStep(new game.dnd5e.advancement.steps.LevelIncreasedStep(this.clone, {
-          item: data.item,
-          level: data.character.initial + offset,
-          classLevel: data.class.initial + offset
-        }));
-        offset += 1;
-        levelDelta -= 1;
-      }
+    for ( let offset = 1; offset <= levelDelta; offset++ ) {
+      this._addStep(new game.dnd5e.advancement.steps.LevelIncreasedStep(this.clone, {
+        item: item,
+        level: character.initial + offset,
+        classLevel: cls.initial + offset
+      }));
     }
 
     // Level decreased
-    else if ( levelDelta < 0 ) {
+    for ( let offset = 0; offset > levelDelta; offset-- ) {
       this.actor._advancement = null;
       console.warn("Unapplying advancements from leveling not currently supported");
-    }
-
-    // Level didn't change
-    else {
-      throw new Error("Level did not change within level change advancement.");
     }
   }
 
@@ -178,7 +174,7 @@ export class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Add an advancement step and re-render the app using debounce.
+   * Add an advancement step and re-render the app.
    * @param {AdvancementStep} step  Step to add.
    * @private
    */
@@ -269,7 +265,7 @@ export class AdvancementManager extends Application {
     try {
       this.step.prepareUpdates();
     } catch(error) {
-      if ( !(error instanceof game.dnd5e.advancement.AdvancementError) ) throw error;
+      if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
       return;
@@ -410,12 +406,12 @@ export class AdvancementManager extends Application {
   async updateAdvancementData({ actor, flows, itemsAdded=[], reverse=false }) {
     let embeddedUpdates = {};
     for ( const flow of flows ) {
-      const update = !reverse ? flow.finalizeUpdate(flow.initialUpdate, itemsAdded) : flow.reverseUpdate();
+      const update = reverse ? flow.reverseUpdate() : flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
       if ( foundry.utils.isObjectEmpty(update) ) continue;
       const itemId = flow.advancement.parent.id;
       embeddedUpdates[itemId] ??= foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
       const idx = embeddedUpdates[itemId].findIndex(a => a._id === flow.advancement.id);
-      if ( idx === -1 ) continue;
+      if ( idx < 0 ) continue;
       foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
     }
 
@@ -461,9 +457,7 @@ export class AdvancementManager extends Application {
     if ( actor.id ) return actor.createEmbeddedDocuments("Item", items, context);
 
     // Create temporary documents
-    const documents = await Promise.all(items.map(i => {
-      return CONFIG.Item.documentClass.create(i, { parent: actor, temporary: true });
-    }));
+    const documents = await Promise.all(items.map(i => new Item.implementation(i, { parent: actor })));
     actor.prepareData();
 
     // TODO: Trigger any additional advancement steps for added items

@@ -40,7 +40,7 @@ class AdvancementStep {
      */
     this.updates = {
       actor: {},
-      item: { add: [], remove: [] }
+      item: { add: {}, remove: [] }
     };
   }
 
@@ -66,8 +66,9 @@ class AdvancementStep {
 
   /**
    * Build up the sections list on initial creation of this step.
+   * @returns {object[]}
    */
-  prepareSections() { }
+  prepareSections() { return []; }
 
   /* -------------------------------------------- */
 
@@ -76,27 +77,7 @@ class AdvancementStep {
    * @param {object} section  Data on section to be rendered.
    * @returns {object}        Final data for rendering the section.
    */
-  getSectionData(section) {
-    return {};
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get data needed to display an advancement in the step.
-   * @param {AdvancementFlow} flow  Relevant advancement flow object.
-   * @returns {object}              Display data for template rendering.
-   * @protected
-   */
-  getAdvancementFlowData(flow) {
-    return {
-      flow,
-      appId: flow.id,
-      id: flow.advancement.id,
-      type: flow.advancement.constructor.typeName,
-      order: flow.sortingValue
-    };
-  }
+  getSectionData(section) { return {}; }
 
   /* -------------------------------------------- */
 
@@ -108,10 +89,7 @@ class AdvancementStep {
    * @protected
    */
   advancementsForLevel(item, level) {
-    return Object.values(item.advancement).filter(a => {
-      const levels = a.levels;
-      return levels.includes(level);
-    });
+    return Object.values(item.advancement).filter(a => a.levels.includes(level));
   }
 
   /* -------------------------------------------- */
@@ -142,7 +120,7 @@ class AdvancementStep {
       for ( const flow of section.flows ) {
         // Prepare update data from the form
         const level = (flow.advancement.parent.type === "class" ? this.config.classLevel : null) ?? section.level;
-        flow.initialUpdate = !reverse ? flow.prepareUpdate(flow.form ? flow._getSubmitData() : {}) : {};
+        flow.initialUpdate = reverse ? {} : flow.prepareUpdate(flow.form ? flow._getSubmitData() : {});
         const fetchData = { level, updates: flow.initialUpdate, reverse };
 
         // Prepare property changes
@@ -194,7 +172,7 @@ export class LevelIncreasedStep extends AdvancementStep {
       level: section.level,
       header: section.item.name,
       subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.classLevel }),
-      advancements: section.flows.map(f => this.getAdvancementFlowData(f))
+      advancements: section.flows.map(f => f.getPlaceholderData())
     };
   }
 
@@ -255,7 +233,7 @@ export class ModifyChoicesStep extends AdvancementStep {
       level: section.level,
       header: section.item.name,
       subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.level }),
-      advancements: section.flows.map(f => this.getAdvancementFlowData(f))
+      advancements: section.flows.map(f => f.getPlaceholderData())
     };
   }
 

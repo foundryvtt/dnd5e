@@ -75,15 +75,16 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   itemUpdates({ level, updates, reverse=false }) {
-    if ( reverse ) return { add: [], remove: Array.from(Object.keys(this.data.value?.added ?? {})) };
-    if ( !updates ) return { add: Array.from(Object.values(this.data.value?.added ?? {})), remove: [] };
+    const added = this.data.value.added;
+    if ( reverse ) return { add: [], remove: Object.keys(added ?? {}) };
+    if ( !updates ) return { add: Object.values(added ?? {}), remove: [] };
 
-    const existing = new Set(Object.values(this.data.value?.added ?? {}));
+    const existing = new Set(Object.values(added ?? {}));
     return Object.entries(updates).reduce((obj, [uuid, selected]) => {
       if ( selected && !existing.has(uuid) ) obj.add.push(uuid);
       else if ( !selected && existing.has(uuid) ) {
-        const id = Object.entries(this.data.value?.added ?? {}).find(o => o[1] === uuid);
-        obj.remove.push(id[0]);
+        const [id] = Object.entries(added ?? {}).find(([, added]) => added === uuid);
+        obj.remove.push(id);
       }
       return obj;
     }, { add: [], remove: [] });
@@ -203,12 +204,12 @@ export class ItemGrantFlow extends AdvancementFlow {
   async getData() {
     const config = this.advancement.data.configuration.items;
     const value = this.advancement.data.value.added;
-    const checked = value ? new Set(Object.values(value)) : undefined;
+    const checked = new Set(Object.values(value ?? {}));
 
     return foundry.utils.mergeObject(super.getData(), {
       items: await Promise.all(config.map(async uuid => {
         const item = await fromUuid(uuid);
-        item.checked = checked?.has(uuid) ?? true;
+        item.checked = value ? checked.has(uuid) : true;
         return item;
       }))
     });
@@ -227,7 +228,7 @@ export class ItemGrantFlow extends AdvancementFlow {
 
     // Remove any deleted items from advancement value
     for ( const [uuid, selected] of Object.entries(update) ) {
-      const id = Object.entries(this.advancement.data.value.added ?? {}).find(a => a[1] === uuid);
+      const id = Object.entries(this.advancement.data.value.added ?? {}).find(([, added]) => added === uuid);
       if ( selected || !id ) continue;
       added[`-=${id[0]}`] = null;
     }

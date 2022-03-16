@@ -14,14 +14,6 @@ import Item5e from "../item/entity.js";
 export default class Actor5e extends Actor {
 
   /**
-   * Cached version of the current advancement window.
-   * @type {AdvancementManager}
-   */
-  _advancement = undefined;
-
-  /* -------------------------------------------- */
-
-  /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
    * @type {object<string, Item5e>}
    * @private
