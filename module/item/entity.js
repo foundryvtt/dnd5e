@@ -1635,11 +1635,12 @@ export default class Item5e extends Item {
 
     // Prepare data for advancement
     if ( this.type === "class" ) {
+      const classLevel = data.data.levels ?? 1;
       options.levelChangeData = {
-        class: { initial: 0, final: data.data.levels },
+        class: { initial: 0, final: classLevel },
         character: {
           initial: this.parent.data.data.details.level,
-          final: this.parent.data.data.details.level + data.data.levels
+          final: this.parent.data.data.details.level + classLevel
         }
       };
     }
@@ -1698,6 +1699,12 @@ export default class Item5e extends Item {
     await super._preUpdate(changed, options, user);
     if ( (this.type !== "class") || !changed.data || !("levels" in changed.data) ) return;
 
+    // Check to make sure the updated class level isn't below zero
+    if ( changed.data.levels <= 0 ) {
+      ui.notifications.warn(game.i18n.localize("DND5E.MaxClassLevelMinimumWarn"));
+      changed.data.levels = 1;
+    }
+
     // Check to make sure the updated class level doesn't exceed level cap
     if ( changed.data.levels > CONFIG.DND5E.maxLevel ) {
       ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
@@ -1710,7 +1717,7 @@ export default class Item5e extends Item {
     if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
       ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
         {max: CONFIG.DND5E.maxLevel}));
-      changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.maxLevel);
+      changed.data.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
     }
 
     // Prepare data for advancement

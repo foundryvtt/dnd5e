@@ -120,7 +120,7 @@ export class AdvancementManager extends Application {
     let levelDelta = character.final - character.initial;
 
     // Level didn't change
-    if ( levelDelta === 0 ) throw new Error("Level did not change within level change advancement.");
+    if ( levelDelta === 0 ) return;
 
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
