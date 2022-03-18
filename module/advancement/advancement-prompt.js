@@ -216,7 +216,7 @@ export class AdvancementPrompt extends Application {
 
   /** @inheritdoc */
   render(...args) {
-    if ( !this.step?.shouldRender ) {
+    if ( !this.step?.options.shouldRender ) {
       if ( this._state === RENDERING_STATES.ADVANCING ) return this;
       this._priorState = this._state;
       this._state = RENDERING_STATES.ADVANCING;
