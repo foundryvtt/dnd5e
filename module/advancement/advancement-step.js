@@ -1,12 +1,16 @@
 /**
  * Step in the advancement process that will be displayed on its individual page.
  *
- * @property {Actor5e} actor  Actor to which this step's changes will be applied.
- * @property {object} config  Configuration information specific to each step type.
+ * @property {Actor5e} actor   Actor to which this step's changes will be applied.
+ * @property {object} config   Configuration information specific to each step type.
+ * @property {object} options  Options passed through to Application.
+ * @xtends {Application}
  */
-class AdvancementStep {
+class AdvancementStep extends Application {
 
-  constructor(actor, config) {
+  constructor(actor, config, options) {
+    super(options);
+
     /**
      * Actor that will be used when calculating changes.
      * @type {Actor5e}
@@ -46,10 +50,24 @@ class AdvancementStep {
 
   /* -------------------------------------------- */
 
-  /**
-   * Title to be displayed for this step.
-   * @type {string}
-   */
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/advancement-step.html",
+      popOut: false
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get id() {
+    return `actor-${this.actor.id}-advancement-step`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   get title() { return null; }
 
   /* -------------------------------------------- */
@@ -72,12 +90,16 @@ class AdvancementStep {
 
   /* -------------------------------------------- */
 
-  /**
-   * Get the data that will be passed to the advancement manager template for rendering the provided section.
-   * @param {object} section  Data on section to be rendered.
-   * @returns {object}        Final data for rendering the section.
-   */
-  getSectionData(section) { return {}; }
+  /** @inheritdoc */
+  async _render(force, options) {
+    await super._render(force, options);
+
+    // Render flows within the step
+    return Promise.all(this.flows.map(f => {
+      f._element = null;
+      return f._render(true, options);
+    }));
+  }
 
   /* -------------------------------------------- */
 
@@ -167,13 +189,17 @@ export class LevelIncreasedStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  getSectionData(section) {
-    return {
-      level: section.level,
-      header: section.item.name,
-      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.classLevel }),
-      advancements: section.flows.map(f => f.getPlaceholderData())
-    };
+  getData() {
+    return foundry.utils.mergeObject(super.getData(), {
+      sections: this.sections.map(section => {
+        return {
+          level: section.level,
+          header: section.item.name,
+          subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.classLevel }),
+          advancements: section.flows.map(f => f.getPlaceholderData())
+        };
+      })
+    });
   }
 
 }
@@ -228,13 +254,17 @@ export class ModifyChoicesStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  getSectionData(section) {
-    return {
-      level: section.level,
-      header: section.item.name,
-      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.level }),
-      advancements: section.flows.map(f => f.getPlaceholderData())
-    };
+  getData() {
+    return foundry.utils.mergeObject(super.getData(), {
+      sections: this.sections.map(section => {
+        return {
+          level: section.level,
+          header: section.item.name,
+          subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.level }),
+          advancements: section.flows.map(f => f.getPlaceholderData())
+        };
+      })
+    });
   }
 
 }

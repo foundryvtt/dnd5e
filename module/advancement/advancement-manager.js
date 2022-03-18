@@ -195,7 +195,7 @@ export class AdvancementManager extends Application {
 
     // TODO: If step is empty or doesn't want to be rendered, move to next step automatically
     if ( !this.step ) return data;
-    data.sections = this.step.sections.map(s => this.step.getSectionData(s));
+    data.stepId = this.step.id;
 
     return data;
   }
@@ -207,10 +207,9 @@ export class AdvancementManager extends Application {
     await super._render(force, options);
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
 
-    await Promise.all(this.step.flows.map(f => {
-      f._element = null;
-      return f._render(true, options);
-    }));
+    // Render the step
+    this.step._element = null;
+    await this.step._render(true, options);
     this.setPosition();
   }
 
