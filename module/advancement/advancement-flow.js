@@ -29,6 +29,7 @@ export class AdvancementFlow extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/advancement-flow.html",
       popOut: false
     });
   }
@@ -76,7 +77,12 @@ export class AdvancementFlow extends FormApplication {
 
   /** @inheritdoc */
   getData() {
-    return { advancement: this.advancement, title: this.title, level: this.level };
+    return {
+      advancement: this.advancement,
+      title: this.title,
+      summary: this.advancement.summaryForLevel(this.level),
+      level: this.level
+    };
   }
 
   /* -------------------------------------------- */
