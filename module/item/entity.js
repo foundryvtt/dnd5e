@@ -74,7 +74,7 @@ export default class Item5e extends Item {
    * @type {boolean}
    */
   get hasAdvancement() {
-    return this.data.data.advancement && (this.data.data.advancement.length > 0);
+    return !!this.data.data.advancement?.length;
   }
 
   /* -------------------------------------------- */

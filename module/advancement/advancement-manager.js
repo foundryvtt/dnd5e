@@ -281,7 +281,7 @@ export class AdvancementManager extends Application {
 
     // Increase step number and re-render
     this._stepIndex += 1;
-    this.step.swapActor(this.clone);
+    this.step.actor = this.clone;
     this.render();
   }
 
@@ -313,7 +313,7 @@ export class AdvancementManager extends Application {
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
-    this.step.swapActor(this.clone);
+    this.step.actor = this.clone;
     this.render();
   }
 

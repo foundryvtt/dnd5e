@@ -15,7 +15,7 @@ class AdvancementStep extends Application {
      * Actor that will be used when calculating changes.
      * @type {Actor5e}
      */
-    this.actor = actor;
+    this._actor = actor;
 
     /**
      * Step configuration information.
@@ -62,13 +62,38 @@ class AdvancementStep extends Application {
 
   /** @inheritdoc */
   get id() {
-    return `actor-${this.actor.id}-advancement-step`;
+    return `actor-advancement-step-${this.appId}`;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   get title() { return null; }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Actor used by this advancement step.
+   */
+  get actor() {
+    return this._actor;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Replace the stored actor with the one provided and update all flows accordingly.
+   * @param {Actor5e} actor  Actor to set.
+   */
+  set actor(actor) {
+    this._actor = actor;
+    
+    for ( const flow of this.flows ) {
+      const advancement = actor.items.get(flow.advancement.parent.id)?.advancement[flow.advancement.id];
+      if ( advancement ) flow.advancement = advancement;
+      else flow.advancement.actor = actor;
+    }
+  }
 
   /* -------------------------------------------- */
 
@@ -112,22 +137,6 @@ class AdvancementStep extends Application {
    */
   advancementsForLevel(item, level) {
     return Object.values(item.advancement).filter(a => a.levels.includes(level));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Replace the stored actor with the one provided and update all flows accordingly.
-   * @param {Actor5e} actor  Actor to set.
-   */
-  swapActor(actor) {
-    this.actor = actor;
-
-    for ( const flow of this.flows ) {
-      const advancement = actor.items.get(flow.advancement.parent.id)?.advancement[flow.advancement.id];
-      if ( advancement ) flow.advancement = advancement;
-      else flow.advancement.actor = actor;
-    }
   }
 
   /* -------------------------------------------- */
