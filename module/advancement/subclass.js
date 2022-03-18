@@ -39,11 +39,6 @@ export class SubclassAdvancement extends Advancement {
   static hint = "DND5E.AdvancementSubclassHint";
 
   /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static multiLevel = false;
-
-  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
