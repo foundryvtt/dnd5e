@@ -4,9 +4,9 @@
  * @property {Actor5e} actor   Actor to which this step's changes will be applied.
  * @property {object} config   Configuration information specific to each step type.
  * @property {object} options  Options passed through to Application.
- * @xtends {Application}
+ * @extends {Application}
  */
-class AdvancementStep extends Application {
+export class AdvancementStep extends Application {
 
   constructor(actor, config, options) {
     super(options);
