@@ -93,7 +93,7 @@ Hooks.once("init", function() {
     },
     macros,
     migrations,
-    rollItemMacro: macros.rollItemMacro,
+    rollItemMacro: macros.rollItem,
     utils,
     isV9: !foundry.utils.isNewerVersion("9.224", game.version ?? game.data.version)
   };
