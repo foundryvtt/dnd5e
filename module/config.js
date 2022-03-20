@@ -615,31 +615,47 @@ DND5E.currencies = {
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
+/*  Damage Types                                */
+/* -------------------------------------------- */
+
+/**
+ * Types of damage that are considered physical.
+ * @enum {string}
+ */
+DND5E.physicalDamageTypes = {
+  bludgeoning: "DND5E.DamageBludgeoning",
+  piercing: "DND5E.DamagePiercing",
+  slashing: "DND5E.DamageSlashing"
+};
+preLocalize("physicalDamageTypes", { sort: true });
+
+/* -------------------------------------------- */
 
 /**
  * Types of damage the can be caused by abilities.
  * @enum {string}
  */
 DND5E.damageTypes = {
+  ...DND5E.physicalDamageTypes,
   acid: "DND5E.DamageAcid",
-  bludgeoning: "DND5E.DamageBludgeoning",
   cold: "DND5E.DamageCold",
   fire: "DND5E.DamageFire",
   force: "DND5E.DamageForce",
   lightning: "DND5E.DamageLightning",
   necrotic: "DND5E.DamageNecrotic",
-  piercing: "DND5E.DamagePiercing",
   poison: "DND5E.DamagePoison",
   psychic: "DND5E.DamagePsychic",
   radiant: "DND5E.DamageRadiant",
-  slashing: "DND5E.DamageSlashing",
   thunder: "DND5E.DamageThunder"
 };
 preLocalize("damageTypes", { sort: true });
 
+/* -------------------------------------------- */
+
 /**
  * Types of damage to which an actor can possess resistance, immunity, or vulnerability.
  * @enum {string}
+ * @deprecated
  */
 DND5E.damageResistanceTypes = {
   ...DND5E.damageTypes,
@@ -647,6 +663,8 @@ DND5E.damageResistanceTypes = {
 };
 preLocalize("damageResistanceTypes", { sort: true });
 
+/* -------------------------------------------- */
+/*  Movement                                    */
 /* -------------------------------------------- */
 
 /**
@@ -865,6 +883,8 @@ DND5E.spellScalingModes = {
 preLocalize("spellScalingModes", { sort: true });
 
 /* -------------------------------------------- */
+/*  Weapon Details                              */
+/* -------------------------------------------- */
 
 /**
  * The set of types which a weapon item can take.
@@ -884,11 +904,25 @@ preLocalize("weaponTypes");
 /* -------------------------------------------- */
 
 /**
+ * A subset of weapon properties that determine the physical characteristics of the weapon.
+ * These properties are used for determining physical resistance bypasses.
+ * @enum {string}
+ */
+DND5E.physicalWeaponProperties = {
+  ada: "DND5E.WeaponPropertiesAda",
+  mgc: "DND5E.WeaponPropertiesMgc",
+  sil: "DND5E.WeaponPropertiesSil"
+};
+preLocalize("physicalWeaponProperties", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
  * The set of weapon property flags which can exist on a weapon.
  * @enum {string}
  */
 DND5E.weaponProperties = {
-  ada: "DND5E.WeaponPropertiesAda",
+  ...DND5E.physicalWeaponProperties,
   amm: "DND5E.WeaponPropertiesAmm",
   fin: "DND5E.WeaponPropertiesFin",
   fir: "DND5E.WeaponPropertiesFir",
@@ -896,17 +930,19 @@ DND5E.weaponProperties = {
   hvy: "DND5E.WeaponPropertiesHvy",
   lgt: "DND5E.WeaponPropertiesLgt",
   lod: "DND5E.WeaponPropertiesLod",
-  mgc: "DND5E.WeaponPropertiesMgc",
   rch: "DND5E.WeaponPropertiesRch",
   rel: "DND5E.WeaponPropertiesRel",
   ret: "DND5E.WeaponPropertiesRet",
-  sil: "DND5E.WeaponPropertiesSil",
   spc: "DND5E.WeaponPropertiesSpc",
   thr: "DND5E.WeaponPropertiesThr",
   two: "DND5E.WeaponPropertiesTwo",
   ver: "DND5E.WeaponPropertiesVer"
 };
 preLocalize("weaponProperties", { sort: true });
+
+/* -------------------------------------------- */
+/*  Spell Details                               */
+/* -------------------------------------------- */
 
 /**
  * Types of components that can be required when casting a spell.

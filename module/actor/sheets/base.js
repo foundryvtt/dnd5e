@@ -4,6 +4,7 @@ import { AdvancementConfirmationDialog } from "../../advancement/advancement-con
 import { AdvancementManager } from "../../advancement/advancement-manager.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
+import DamageTraitSelector from "../../apps/damage-trait-selector.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorArmorConfig from "../../apps/actor-armor.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
@@ -1188,7 +1189,12 @@ export default class ActorSheet5e extends ActorSheet {
     const label = a.parentElement.querySelector("label");
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: `${label.innerText}: ${this.actor.name}`, choices };
-    return new TraitSelector(this.actor, options).render(true);
+    if ( ["di", "dr", "dv"].find(t => a.dataset.target.endsWith(`.${t}`)) ) {
+      options.bypasses = CONFIG.DND5E.physicalWeaponProperties;
+      return new DamageTraitSelector(this.actor, options).render(true);
+    } else {
+      return new TraitSelector(this.actor, options).render(true);
+    }
   }
 
   /* -------------------------------------------- */
