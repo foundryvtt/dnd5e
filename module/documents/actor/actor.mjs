@@ -621,16 +621,20 @@ export default class Actor5e extends Actor {
 
     // NPCs don't get spell levels from classes
     if ( this.type === "npc" ) {
-      // TODO: Add better support for half, third, or pact caster NPCs
       progression.slot = this.system.details.spellLevel ?? 0;
     }
 
     else {
+      const typeCounts = {};
       // Grab all classes with spellcasting
       const classes = this.items.filter(c => {
-        return (c.type === "class") && (c.system.spellcasting.progression !== "none");
+        if ( c.type !== "class" ) return false;
+        const prog = CONFIG.DND5E.spellProgression[c.system.spellcasting.progression];
+        if ( !prog.type ) return false;
+        typeCounts[prog.type] ??= 0;
+        typeCounts[prog.type] += 1;
+        return true;
       });
-      const isSoleLeveledClass = classes.filter(c => c.system.spellcasting.progression !== "pact").length === 1;
 
       for ( const cls of classes ) {
         if ( cls.system.spellcasting.progression === "pact" ) {
@@ -638,7 +642,7 @@ export default class Actor5e extends Actor {
         } else {
           progression.caster = cls;
           progression.total++;
-          this.constructor._computeLeveledProgression(this, cls, progression, isSoleLeveledClass);
+          this.constructor._computeLeveledProgression(this, cls, progression, typeCounts.leveled === 1);
         }
       }
     }
@@ -658,16 +662,11 @@ export default class Actor5e extends Actor {
    */
   static _computeLeveledProgression(actor, classItem, progression, isSoleLeveledClass) {
     const levels = classItem.system.levels;
+    const prog = CONFIG.DND5E.spellProgression[cls.system.spellcasting.progression];
+    if ( !prog ) return;
 
-    // Sole fractional leveled spellcasting classes round up instead of down
-    const fractionalRounder = isSoleLeveledClass ? Math.ceil : Math.floor;
-
-    switch (classItem.system.spellcasting.progression) {
-      case "full": progression.slot += levels; break;
-      case "half": progression.slot += fractionalRounder(levels / 2); break;
-      case "third": progression.slot += fractionalRounder(levels / 3); break;
-      case "artificer": progression.slot += Math.ceil(levels / 2); break;
-    }
+    const rounder = (isSoleLeveledClass || prog.roundUp) ? Math.ceil : Math.floor;
+    progression.slot += rounder(levels / prog.divisor ?? 1);
   }
 
   /* -------------------------------------------- */

@@ -903,6 +903,38 @@ DND5E.senses = {
 preLocalize("senses", { sort: true });
 
 /* -------------------------------------------- */
+/*  Spellcasting                                */
+/* -------------------------------------------- */
+
+/**
+ * Define the standard slot progression by character level.
+ * The entries of this array represent the spell slot progression for a full spell-caster.
+ * @type {number[][]}
+ */
+DND5E.SPELL_SLOT_TABLE = [
+  [2],
+  [3],
+  [4, 2],
+  [4, 3],
+  [4, 3, 2],
+  [4, 3, 3],
+  [4, 3, 3, 1],
+  [4, 3, 3, 2],
+  [4, 3, 3, 3, 1],
+  [4, 3, 3, 3, 2],
+  [4, 3, 3, 3, 2, 1],
+  [4, 3, 3, 3, 2, 1],
+  [4, 3, 3, 3, 2, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 2, 1, 1, 1, 1],
+  [4, 3, 3, 3, 3, 1, 1, 1, 1],
+  [4, 3, 3, 3, 3, 2, 1, 1, 1],
+  [4, 3, 3, 3, 3, 2, 2, 1, 1]
+];
+
+/* -------------------------------------------- */
 
 /**
  * Various different ways a spell can be prepared.
@@ -916,25 +948,61 @@ DND5E.spellPreparationModes = {
 };
 preLocalize("spellPreparationModes");
 
+/* -------------------------------------------- */
+
 /**
  * Subset of `DND5E.spellPreparationModes` that consume spell slots.
  * @type {boolean[]}
  */
 DND5E.spellUpcastModes = ["always", "pact", "prepared"];
 
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for different types of spellcasting progression.
+ *
+ * @typedef {object} SpellProgressionConfiguration
+ * @property {string} label       Localized label.
+ * @property {string} type        How progression is calculated, currently supports "leveled" or "pact".
+ * @property {number} [divisor]   Amount class level is divided by for leveled progression.
+ * @property {boolean} [roundUp]  Should fractional values should be rounded up by default?
+ */
+
 /**
  * Ways in which a class can contribute to spellcasting levels.
- * @enum {string}
+ * @enum {SpellProgressionConfiguration}
  */
 DND5E.spellProgression = {
-  none: "DND5E.SpellNone",
-  full: "DND5E.SpellProgFull",
-  half: "DND5E.SpellProgHalf",
-  third: "DND5E.SpellProgThird",
-  pact: "DND5E.SpellProgPact",
-  artificer: "DND5E.SpellProgArt"
+  none: {
+    label: "DND5E.SpellNone"
+  },
+  full: {
+    label: "DND5E.SpellProgFull",
+    type: "leveled",
+    divisor: 1
+  },
+  half: {
+    label: "DND5E.SpellProgHalf",
+    type: "leveled",
+    divisor: 2
+  },
+  third: {
+    label: "DND5E.SpellProgThird",
+    type: "leveled",
+    divisor: 3
+  },
+  pact: {
+    label: "DND5E.SpellProgPact",
+    type: "pact"
+  },
+  artificer: {
+    label: "DND5E.SpellProgArt",
+    type: "leveled",
+    divisor: 2,
+    roundUp: true
+  }
 };
-preLocalize("spellProgression");
+preLocalize("spellProgression", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -1105,34 +1173,6 @@ DND5E.spellScrollIds = {
 DND5E.sourcePacks = {
   ITEMS: "dnd5e.items"
 };
-
-/**
- * Define the standard slot progression by character level.
- * The entries of this array represent the spell slot progression for a full spell-caster.
- * @type {number[][]}
- */
-DND5E.SPELL_SLOT_TABLE = [
-  [2],
-  [3],
-  [4, 2],
-  [4, 3],
-  [4, 3, 2],
-  [4, 3, 3],
-  [4, 3, 3, 1],
-  [4, 3, 3, 2],
-  [4, 3, 3, 3, 1],
-  [4, 3, 3, 3, 2],
-  [4, 3, 3, 3, 2, 1],
-  [4, 3, 3, 3, 2, 1],
-  [4, 3, 3, 3, 2, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 2, 1, 1, 1, 1],
-  [4, 3, 3, 3, 3, 1, 1, 1, 1],
-  [4, 3, 3, 3, 3, 2, 1, 1, 1],
-  [4, 3, 3, 3, 3, 2, 2, 1, 1]
-];
 
 /* -------------------------------------------- */
 
