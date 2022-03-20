@@ -66,15 +66,16 @@ export default class TraitSelector extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async _updateObject(event, formData) {
+  /**
+   * Prepare the update data to include choices in the provided object.
+   * @param {object} formData  Form data to search for choices.
+   * @returns {object}         Updates to apply to target.
+   */
+  _prepareUpdateData(formData) {
     const o = this.options;
 
     // Obtain choices
-    const chosen = [];
-    for ( let [k, v] of Object.entries(formData) ) {
-      if ( (k !== "custom") && v ) chosen.push(k);
-    }
+    const chosen = Object.entries(formData).filter(([k, v]) => (k !== "custom") && v).map(([k]) => k);
 
     // Object including custom data
     const updateData = {};
@@ -90,7 +91,14 @@ export default class TraitSelector extends DocumentSheet {
       return ui.notifications.error(`You may choose no more than ${o.maximum} options`);
     }
 
-    // Update the object
-    this.object.update(updateData);
+    return updateData;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _updateObject(event, formData) {
+    const updateData = this._prepareUpdateData(formData);
+    if ( updateData ) this.object.update(updateData);
   }
 }
