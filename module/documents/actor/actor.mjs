@@ -597,6 +597,8 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Spellcasting Preparation                    */
+  /* -------------------------------------------- */
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
@@ -612,12 +614,7 @@ export default class Actor5e extends Actor {
     this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
 
     // Translate the list of classes into spell-casting progression
-    const progression = {
-      caster: null,
-      total: 0,
-      slot: 0,
-      pact: 0
-    };
+    const progression = { slot: 0, pact: 0 };
 
     // NPCs don't get spell levels from classes
     if ( this.type === "npc" ) {
@@ -637,12 +634,11 @@ export default class Actor5e extends Actor {
       });
 
       for ( const cls of classes ) {
-        if ( cls.system.spellcasting.progression === "pact" ) {
-          this.constructor._computePactProgression(this, cls, progression);
+        const prog = cls.system.spellcasting.progression;
+        if ( prog === "pact" ) {
+          this.constructor._computePactProgression(this, cls, progression, typeCounts.pact);
         } else {
-          progression.caster = cls;
-          progression.total++;
-          this.constructor._computeLeveledProgression(this, cls, progression, typeCounts.leveled === 1);
+          this.constructor._computeLeveledProgression(this, cls, progression, typeCounts.leveled);
         }
       }
     }
@@ -655,18 +651,19 @@ export default class Actor5e extends Actor {
 
   /**
    * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
-   * @param {Actor5e} actor               Actor for whom the data is being prepared.
-   * @param {Item5e} classItem            Class for whom this progression is being calculated.
-   * @param {object} progression          Spellcasting progression data. *Will be mutated.*
-   * @param {boolean} isSoleLeveledClass  Is this the only leveled spellcasting class on the actor?
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Item5e} cls           Class for whom this progression is being calculated.
+   * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+   * @param {number} count         Number of classes with this type of spellcasting.
    */
-  static _computeLeveledProgression(actor, classItem, progression, isSoleLeveledClass) {
-    const levels = classItem.system.levels;
+  static _computeLeveledProgression(actor, cls, progression, count) {
+    const levels = cls.system.levels;
     const prog = CONFIG.DND5E.spellProgression[cls.system.spellcasting.progression];
     if ( !prog ) return;
 
-    const rounder = (isSoleLeveledClass || prog.roundUp) ? Math.ceil : Math.floor;
+    const rounder = ( (count === 1) || prog.roundUp) ? Math.ceil : Math.floor;
     progression.slot += rounder(levels / prog.divisor ?? 1);
+    // TODO: This doesn't work properly with two half-casters
   }
 
   /* -------------------------------------------- */
@@ -674,11 +671,12 @@ export default class Actor5e extends Actor {
   /**
    * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {Item5e} classItem     Class for whom this progression is being calculated.
+   * @param {Item5e} cls           Class for whom this progression is being calculated.
    * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+   * @param {number} count         Number of classes with this type of spellcasting.
    */
-  static _computePactProgression(actor, classItem, progression) {
-    progression.pact += classItem.system.levels;
+  static _computePactProgression(actor, cls, progression, count) {
+    progression.pact += cls.system.levels;
   }
 
   /* -------------------------------------------- */
