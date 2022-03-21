@@ -607,7 +607,7 @@ export default class Actor5e extends Actor {
    */
   _prepareSpellcasting() {
     if ( this.type === "vehicle" ) return;
-    const spells = this.system.spells;
+    const config = CONFIG.DND5E.spellProgression;
 
     // Spellcasting DC
     const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
@@ -615,6 +615,7 @@ export default class Actor5e extends Actor {
 
     // Translate the list of classes into spell-casting progression
     const progression = { slot: 0, pact: 0 };
+    const types = {};
 
     // NPCs don't get spell levels from classes
     if ( this.type === "npc" ) {
@@ -622,60 +623,84 @@ export default class Actor5e extends Actor {
     }
 
     else {
-      const typeCounts = {};
       // Grab all classes with spellcasting
       const classes = this.items.filter(c => {
         if ( c.type !== "class" ) return false;
-        const prog = CONFIG.DND5E.spellProgression[c.system.spellcasting.progression];
+        const prog = config[c.system.spellcasting.progression];
         if ( !prog.type ) return false;
-        typeCounts[prog.type] ??= 0;
-        typeCounts[prog.type] += 1;
+        types[prog.type] ??= 0;
+        types[prog.type] += 1;
         return true;
       });
 
       for ( const cls of classes ) {
-        const prog = cls.system.spellcasting.progression;
-        if ( prog === "pact" ) {
-          this.constructor._computePactProgression(this, cls, progression, typeCounts.pact);
-        } else {
-          this.constructor._computeLeveledProgression(this, cls, progression, typeCounts.leveled);
+        const type = config[cls.system.spellcasting.progression].type;
+
+        /**
+         * A hook event that fires while computing the spellcasting progression for each class on each actor.
+         * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+         * @param {Actor5e} actor        Actor for whom the data is being prepared.
+         * @param {Item5e} cls           Class for whom this progression is being computed.
+         * @param {number} count         Number of classes with this type of spellcasting.
+         * @function dnd5e.computeSpellcastingProgression
+         * @memberof hookEvents
+         */
+        const allowed = Hooks.call("dnd5e.computeSpellcastingProgression", progression, this, cls, types[type] ?? 0);
+
+        if ( allowed && (type === "pact") ) {
+          this.constructor._computePactProgression(progression, this, cls, types.pact);
+        } else if ( allowed && (type === "leveled") ) {
+          this.constructor._computeLeveledProgression(progression, this, cls, types.leveled);
         }
       }
     }
 
-    this.constructor._prepareLeveledSlots(this, progression, spells);
-    this.constructor._preparePactSlots(this, progression, spells);
+    const spells = this.system.spells;
+    for ( const type of CONFIG.DND5E.spellProgressionTypes ) {
+      /**
+       * A hook event that fires to convert the provided spellcasting progression into spell slots.
+       * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+       * @param {Actor5e} actor        Actor for whom the data is being prepared.
+       * @param {object} progression   Spellcasting progression data.
+       * @param {string} type          Progression type as defined in `CONFIG.DND5E.spellProgressionTypes`.
+       * @function dnd5e.prepareSpellcastingSlots
+       * @memberof hookEvents
+       */
+      const allowed = Hooks.call("dnd5e.prepareSpellcastingSlots", spells, this, progression, type);
+
+      if ( allowed && (type === "pact") ) this.constructor._preparePactSlots(spells, this, progression);
+      else if ( allowed && (type === "leveled") ) this.constructor._prepareLeveledSlots(spells, this, progression);
+    }
   }
 
   /* -------------------------------------------- */
 
   /**
    * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {Item5e} cls           Class for whom this progression is being calculated.
    * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Item5e} cls           Class for whom this progression is being computed.
    * @param {number} count         Number of classes with this type of spellcasting.
    */
-  static _computeLeveledProgression(actor, cls, progression, count) {
+  static _computeLeveledProgression(progression, actor, cls, count) {
     const levels = cls.system.levels;
     const prog = CONFIG.DND5E.spellProgression[cls.system.spellcasting.progression];
     if ( !prog ) return;
 
     const rounder = ( (count === 1) || prog.roundUp) ? Math.ceil : Math.floor;
     progression.slot += rounder(levels / prog.divisor ?? 1);
-    // TODO: This doesn't work properly with two half-casters
   }
 
   /* -------------------------------------------- */
 
   /**
    * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {Item5e} cls           Class for whom this progression is being calculated.
    * @param {object} progression   Spellcasting progression data. *Will be mutated.*
+   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Item5e} cls           Class for whom this progression is being computed.
    * @param {number} count         Number of classes with this type of spellcasting.
    */
-  static _computePactProgression(actor, cls, progression, count) {
+  static _computePactProgression(progression, actor, cls, count) {
     progression.pact += cls.system.levels;
   }
 
@@ -683,11 +708,11 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare leveled spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
    */
-  static _prepareLeveledSlots(actor, progression, spells) {
+  static _prepareLeveledSlots(spells, actor, progression) {
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
     const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
     for ( const [n, slot] of Object.entries(spells) ) {
@@ -702,11 +727,11 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare pact spell slots using progression data.
+   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
    */
-  static _preparePactSlots(actor, progression, spells) {
+  static _preparePactSlots(spells, actor, progression) {
     // Pact spell data:
     // - pact.level: Slot level for pact casting
     // - pact.max: Total number of pact slots

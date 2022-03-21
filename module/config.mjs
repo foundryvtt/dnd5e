@@ -963,7 +963,7 @@ DND5E.spellUpcastModes = ["always", "pact", "prepared"];
  *
  * @typedef {object} SpellProgressionConfiguration
  * @property {string} label       Localized label.
- * @property {string} type        How progression is calculated, currently supports "leveled" or "pact".
+ * @property {string} [type]      How progression is calculated as defined in `DND5E.spellProgressionTypes`.
  * @property {number} [divisor]   Amount class level is divided by for leveled progression.
  * @property {boolean} [roundUp]  Should fractional values should be rounded up by default?
  */
@@ -1003,6 +1003,14 @@ DND5E.spellProgression = {
   }
 };
 preLocalize("spellProgression", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * Spell progression categories that can be used within `DND5E.spellProgression`.
+ * @type {string[]}
+ */
+DND5E.spellProgressionTypes = ["leveled", "pact"];
 
 /* -------------------------------------------- */
 
