@@ -9,7 +9,7 @@ import { AdvancementError } from "./advancement-flow.js";
  * @property {object} [options={}]           Additional application options.
  * @extends {Application}
  */
-export class AdvancementManager extends Application {
+export class AdvancementPrompt extends Application {
 
   constructor(actor, steps=[], options={}) {
     super(options);
@@ -46,7 +46,7 @@ export class AdvancementManager extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "flow"],
-      template: "systems/dnd5e/templates/advancement/advancement-manager.html",
+      template: "systems/dnd5e/templates/advancement/advancement-prompt.html",
       width: 460,
       height: "auto"
     });
@@ -56,7 +56,7 @@ export class AdvancementManager extends Application {
 
   /** @inheritdoc */
   get title() {
-    return this.step?.title ?? game.i18n.localize("DND5E.AdvancementManagerTitle");
+    return this.step?.title ?? game.i18n.localize("DND5E.AdvancementPromptTitle");
   }
 
   /* -------------------------------------------- */
@@ -330,7 +330,7 @@ export class AdvancementManager extends Application {
     // Update advancement values to reflect player choices
     await this.updateAdvancementData({ actor: this.actor, flows: this.steps.flatMap(s => s.flows), itemsAdded });
 
-    // Close manager & remove from actor
+    // Close prompt & remove from actor
     await this.close({ skipConfirmation: true });
   }
 

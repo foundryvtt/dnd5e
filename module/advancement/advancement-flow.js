@@ -1,5 +1,5 @@
 /**
- * Base class for the advancement interface displayed by the advancement manager that should be subclassed by
+ * Base class for the advancement interface displayed by the advancement prompt that should be subclassed by
  * individual advancement types.
  *
  * @property {Advancement} advancement  Advancement to which this flow belongs.
@@ -51,7 +51,7 @@ export class AdvancementFlow extends FormApplication {
   /* -------------------------------------------- */
 
   /**
-   * Sorting value used for ordering this flow within the advancement manager.
+   * Sorting value used for ordering this flow within the advancement prompt.
    * @type {string}
    */
   get sortingValue() {

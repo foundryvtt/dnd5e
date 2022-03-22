@@ -176,8 +176,8 @@ export class LevelIncreasedStep extends AdvancementStep {
 
   /** @inheritdoc */
   get title() {
-    if ( this.config.classLevel > 1 ) return game.i18n.localize("DND5E.AdvancementManagerLevelIncreasedTitle");
-    return game.i18n.localize("DND5E.AdvancementManagerLevelNewClassTitle");
+    if ( this.config.classLevel > 1 ) return game.i18n.localize("DND5E.AdvancementPromptLevelIncreasedTitle");
+    return game.i18n.localize("DND5E.AdvancementPromptLevelNewClassTitle");
   }
 
   /* -------------------------------------------- */
@@ -243,7 +243,7 @@ export class ModifyChoicesStep extends AdvancementStep {
 
   /** @inheritdoc */
   get title() {
-    return game.i18n.localize("DND5E.AdvancementManagerModifyChoicesTitle");
+    return game.i18n.localize("DND5E.AdvancementPromptModifyChoicesTitle");
   }
 
   /* -------------------------------------------- */
