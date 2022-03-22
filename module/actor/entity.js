@@ -1633,13 +1633,14 @@ export default class Actor5e extends Actor {
    * @param {boolean} [options.notKeepAE]       Not keep active effects
    * @param {boolean} [options.keepAEOnlyOriginNotEquipment] Keep only active effects which origin is not equipment
    * @param {boolean} [options.transformTokens] Transform linked tokens too
+   * @param {boolean} [renderSheet]             Render Sheet after tranformation
    * @returns {Promise<Array<Token>>|null}      Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
     keepItems=false, keepBio=false, keepVision=false,
     keepSelf=false, notKeepAE=false, keepAEOnlyOriginNotEquipment=false,
-    transformTokens=true}={}) {
+    transformTokens=true}={}, renderSheet = true) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1785,7 +1786,7 @@ export default class Actor5e extends Actor {
     // To analize strange bug... some info like height and weight of the token are reset to default
     // after the constructor of the actor is invoked solved with a backup of the info of the token
     const tokenBackup = duplicate(d.token);
-    const newActor = await this.constructor.create(d, {renderSheet: true});
+    const newActor = await this.constructor.create(d, {renderSheet: renderSheet});
     mergeObject(d.token, tokenBackup);
 
     // Update placed Token instances
@@ -1807,9 +1808,10 @@ export default class Actor5e extends Actor {
    * If this actor was transformed with transformTokens enabled, then its
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
+   * @param {boolean} [renderSheet] Render Sheet after revert the tranformation
    * @returns {Promise<Actor>|null}  Original actor if it was reverted.
    */
-  async revertOriginalForm() {
+  async revertOriginalForm(renderSheet = true) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
@@ -1852,7 +1854,11 @@ export default class Actor5e extends Actor {
     const isRendered = this.sheet.rendered;
     if ( game.user.isGM ) await this.delete();
     else if ( isRendered ) this.sheet.close();
-    if ( isRendered ) original.sheet.render(isRendered);
+    if ( isRendered ) {
+      if(renderSheet){
+        original.sheet.render(isRendered);
+      }
+    }
     return original;
   }
 
