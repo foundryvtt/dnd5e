@@ -324,11 +324,8 @@ export class AdvancementPrompt extends Application {
    * @returns {Promise}
    */
   async complete() {
-    // Apply changes from each step to actual actor
-    const itemsAdded = await this.applyUpdates(this.actor, this.collectUpdates(this.steps));
-
-    // Update advancement values to reflect player choices
-    await this.updateAdvancementData({ actor: this.actor, flows: this.steps.flatMap(s => s.flows), itemsAdded });
+    // Apply changes from clone to original actor
+    await this.commitUpdates(this.actor, this.clone);
 
     // Close prompt & remove from actor
     await this.close({ skipConfirmation: true });
@@ -389,6 +386,38 @@ export class AdvancementPrompt extends Application {
     await this.constructor._deleteEmbeddedItems(actor, updates.item.remove.filter(id => actor.items.has(id)));
 
     return itemsAdded;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply changes from the clone actor back to the original actor.
+   * @param {Actor5e} actor       Original actor to be updated based on changes to clone.
+   * @param {Actor5e} clone       Clone actor to which advancement changes have been applied.
+   * @returns {Promise<Actor5e>}  The original actor with the updates applied.
+   */
+  async commitUpdates(actor, clone) {
+    const updates = this.clone.toObject();
+    const items = updates.items;
+    delete updates.items;
+
+    const { toCreate, toUpdate, toDelete } = items.reduce((obj, item) => {
+      if ( !actor.items.get(item._id) ) {
+        obj.toCreate.push(item);
+      } else {
+        obj.toUpdate.push(item);
+        obj.toDelete.findSplice(id => id === item._id);
+      }
+      return obj;
+    }, { toCreate: [], toUpdate: [], toDelete: actor.items.map(i => i.id) });
+
+    return Promise.all([
+      this.actor.update(updates),
+      this.actor.createEmbeddedDocuments("Item", toCreate, { skipAdvancement: true, keepId: true }),
+      this.actor.updateEmbeddedDocuments("Item", toUpdate, { skipAdvancement: true }),
+      // Might need diff: false here, check on reverse branch
+      this.actor.deleteEmbeddedDocuments("Item", toDelete, { skipAdvancement: true })
+    ]);
   }
 
   /* -------------------------------------------- */
@@ -457,6 +486,8 @@ export class AdvancementPrompt extends Application {
 
     // Create temporary documents
     const documents = await Promise.all(items.map(i => new Item.implementation(i, { parent: actor })));
+    actor.data.items = actor.data._source.items;
+    documents.forEach(d => actor.data._source.items.push(d.toObject()));
     actor.prepareData();
 
     // TODO: Trigger any additional advancement steps for added items
