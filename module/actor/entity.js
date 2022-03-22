@@ -1780,7 +1780,7 @@ export default class Actor5e extends Actor {
     await this.sheet.close();
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, notKeepAE, keepAEOnlyOriginNotEquipment, transformTokens
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, notKeepAE, keepAEOnlyOriginNotEquipment, transformTokens, renderSheet
     });
 
     // To analize strange bug... some info like height and weight of the token are reset to default
