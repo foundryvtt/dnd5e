@@ -260,21 +260,15 @@ export class AdvancementPrompt extends Application {
     // Clear visible errors
     this.element[0]?.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
 
-    // Prepare changes from current step
+    // Apply changes from current step
     try {
-      this.step.prepareUpdates();
+      await this.step.applyChanges();
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
       return;
     }
-
-    // Apply changes to actor clone
-    const itemsAdded = await this.applyUpdates(this.clone, this.step.updates);
-
-    // Update clone actor advancement choices and ensure advancement flows have access to that data
-    await this.updateAdvancementData({ actor: this.clone, flows: this.step.flows, itemsAdded });
 
     // Check to see if this is the final step, if so, head over to complete
     if ( !this.nextStep ) return this.complete();
@@ -295,21 +289,16 @@ export class AdvancementPrompt extends Application {
     if ( !this.previousStep ) return;
     this.setControlsDisabled(true);
 
-    // Prepare updates that need to be removed
+    // Undo changes from previous step
     try {
-      this.step.prepareUpdates({ reverse: true });
+      this.previousStep.actor = this.clone;
+      await this.previousStep.undoChanges();
     } catch(error) {
-      if ( !(error instanceof game.dnd5e.advancement.AdvancementError) ) throw error;
+      if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
       return;
     }
-
-    // Revert actor clone to earlier state
-    await this.applyUpdates(this.clone, this.step.updates);
-
-    // Revert changes to clone's advancement choices
-    await this.updateAdvancementData({ actor: this.clone, flows: this.step.flows.reverse(), reverse: true });
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
@@ -329,63 +318,6 @@ export class AdvancementPrompt extends Application {
 
     // Close prompt & remove from actor
     await this.close({ skipConfirmation: true });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Gather actor and item updates for the provided steps and merge in order.
-   * @param {AdvancementStep[]} steps            Steps to merge.
-   * @returns {{ actor: object, item: object }}  Merged updates.
-   */
-  collectUpdates(steps) {
-    const actor = {};
-    const item = { add: {}, remove: new Set() };
-    for ( const step of steps ) {
-      foundry.utils.mergeObject(actor, step.updates.actor);
-      for ( const [uuid, origin] of Object.entries(step.updates.item.add) ) {
-        if ( item.remove.has(uuid) ) item.remove.delete(uuid);
-        else item.add[uuid] = origin;
-      }
-      for ( const uuid of step.updates.item.remove ) {
-        if ( item.add[uuid] ) delete item.add[uuid];
-        else item.remove.add(uuid);
-      }
-    }
-    item.remove = Array.from(item.remove);
-    return { actor, item };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Apply stored updates to an actor, modifying properties and adding or removing items.
-   * @param {Actor5e} actor        Actor upon which to perform the updates.
-   * @param {object} updates       Updates to apply to actor and items.
-   * @returns {Promise<Item5e[]>}  New items that have been created.
-   */
-  async applyUpdates(actor, updates) {
-    // Begin fetching data for new items
-    let newItems = Promise.all(Object.keys(updates.item.add).map(fromUuid));
-
-    // Apply property changes to actor
-    await this.constructor._updateActor(actor, foundry.utils.deepClone(updates.actor));
-
-    // Add new items to actor
-    newItems = (await newItems).map(item => {
-      const data = item.toObject();
-      foundry.utils.mergeObject(data, {
-        "flags.dnd5e.sourceId": item.uuid,
-        "flags.dnd5e.advancementOrigin": updates.item.add[item.uuid]
-      });
-      return data;
-    });
-    const itemsAdded = await this.constructor._createEmbeddedItems(actor, newItems);
-
-    // Remove items from actor
-    await this.constructor._deleteEmbeddedItems(actor, updates.item.remove.filter(id => actor.items.has(id)));
-
-    return itemsAdded;
   }
 
   /* -------------------------------------------- */
@@ -415,129 +347,9 @@ export class AdvancementPrompt extends Application {
       this.actor.update(updates),
       this.actor.createEmbeddedDocuments("Item", toCreate, { skipAdvancement: true, keepId: true }),
       this.actor.updateEmbeddedDocuments("Item", toUpdate, { skipAdvancement: true }),
-      // Might need diff: false here, check on reverse branch
+      // TODO: Might need diff: false here, check on reverse branch
       this.actor.deleteEmbeddedDocuments("Item", toDelete, { skipAdvancement: true })
     ]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update stored advancement data for the provided flows.
-   * @param {object} config
-   * @param {Actor5e} config.actor             Actor's whose advancements should be updated.
-   * @param {AdvancementFlow[]} config.flows   Flows to update.
-   * @param {Item5e[]} [config.itemsAdded=[]]  New items that have been created.
-   * @param {boolean} [config.reverse=false]   Whether the advancement value changes should be undone.
-   * @returns {Promise<Item5e[]>}              Items that have had their advancement data updated.
-   */
-  async updateAdvancementData({ actor, flows, itemsAdded=[], reverse=false }) {
-    let embeddedUpdates = {};
-    for ( const flow of flows ) {
-      const update = reverse ? flow.reverseUpdate() : flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
-      if ( foundry.utils.isObjectEmpty(update) ) continue;
-      const itemId = flow.advancement.parent.id;
-      embeddedUpdates[itemId] ??= foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
-      const idx = embeddedUpdates[itemId].findIndex(a => a._id === flow.advancement.id);
-      if ( idx < 0 ) continue;
-      foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
-    }
-
-    // Update all advancements with new values
-    embeddedUpdates = Object.entries(embeddedUpdates).map(([id, updates]) => {
-      return { _id: id, "data.advancement": updates };
-    });
-    return await this.constructor._updateEmbeddedItems(actor, embeddedUpdates);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Check whether the actor is a normal actor or a clone and apply the updates appropriately.
-   * @param {Actor5e} actor                          Actor to which to apply updates.
-   * @param {object} updates                         Object of updates to apply.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the update workflow.
-   * @returns {Promise<Actor5e>}                     Actor with updates applied.
-   * @protected
-   */
-  static async _updateActor(actor, updates, context) {
-    // Normal actor, apply updates as normal
-    if ( actor.data._id ) return actor.update(updates, context);
-
-    // Actor clone, apply updates directly to ActorData
-    actor.data.update(updates);
-    actor.prepareData();
-
-    return actor;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Check whether the actor is a normal actor or a clone and create embedded items appropriately.
-   * @param {Actor5e} actor                          Actor to which to create items.
-   * @param {object[]} items                         An array of data objects used to create multiple documents.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the creation workflow.
-   * @returns {Promise<Item5e[]>}                    An array of created Item instances.
-   * @protected
-   */
-  static async _createEmbeddedItems(actor, items, context) {
-    if ( actor.id ) return actor.createEmbeddedDocuments("Item", items, context);
-
-    // Create temporary documents
-    const documents = await Promise.all(items.map(i => new Item.implementation(i, { parent: actor })));
-    actor.data.items = actor.data._source.items;
-    documents.forEach(d => actor.data._source.items.push(d.toObject()));
-    actor.prepareData();
-
-    // TODO: Trigger any additional advancement steps for added items
-
-    return documents;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Check whether the actor is a normal actor or a clone and update embedded items appropriately.
-   * @param {Actor5e} actor                          Actor to which to update items.
-   * @param {object[]} updates                       An array of differential data objects.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the update workflow.
-   * @returns {Promise<Item5e[]>}                    An array of updated Item instances.
-   * @protected
-   */
-  static async _updateEmbeddedItems(actor, updates, context) {
-    if ( actor.id ) return actor.updateEmbeddedDocuments("Item", updates, context);
-
-    actor.data.update({items: updates});
-    actor.prepareData();
-
-    const ids = new Set(updates.map(u => u._id));
-    return actor.items.filter(i => ids.has(i.id));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Check whether the actor is a normal actor or a clone and delete embedded items appropriately.
-   * @param {Actor5e} actor                          Actor to which to delete items.
-   * @param {object[]} ids                           An array of string ids for each Document to be deleted.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the deletion workflow.
-   * @returns {Promise<Item5e[]>}                    An array of deleted Item instances.
-   * @protected
-   */
-  static async _deleteEmbeddedItems(actor, ids, context) {
-    if ( actor.id ) return actor.deleteEmbeddedDocuments("Item", ids, context);
-
-    let documents = [];
-    for ( const id of ids ) {
-      const item = actor.items.get(id);
-      if ( !item ) continue;
-      documents.push(item);
-      actor.items.delete(id);
-    }
-    actor.prepareData();
-
-    return documents;
   }
 
 }
