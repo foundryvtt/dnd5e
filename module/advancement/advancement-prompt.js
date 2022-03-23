@@ -347,7 +347,6 @@ export class AdvancementPrompt extends Application {
       this.actor.update(updates),
       this.actor.createEmbeddedDocuments("Item", toCreate, { skipAdvancement: true, keepId: true }),
       this.actor.updateEmbeddedDocuments("Item", toUpdate, { skipAdvancement: true }),
-      // TODO: Might need diff: false here, check on reverse branch
       this.actor.deleteEmbeddedDocuments("Item", toDelete, { skipAdvancement: true })
     ]);
   }

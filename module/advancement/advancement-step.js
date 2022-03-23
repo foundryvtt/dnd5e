@@ -58,6 +58,7 @@ export class AdvancementStep extends Application {
 
   /**
    * Actor used by this advancement step.
+   * @type {Actor5e}
    */
   get actor() {
     return this._actor;
@@ -71,7 +72,7 @@ export class AdvancementStep extends Application {
    */
   set actor(actor) {
     this._actor = actor;
-    
+
     for ( const flow of this.flows ) {
       const advancement = actor.items.get(flow.advancement.parent.id)?.advancement[flow.advancement.id];
       if ( advancement ) flow.advancement = advancement;
@@ -211,7 +212,7 @@ export class AdvancementStep extends Application {
 
     // Remove items from actor
     await this._deleteEmbeddedItems(actor, updates.item.remove.filter(id => actor.items.has(id)));
-  
+
     return itemsAdded;
   }
 
@@ -230,12 +231,14 @@ export class AdvancementStep extends Application {
     let embeddedUpdates = {};
     for ( const flow of flows ) {
       const update = reverse ? flow.reverseUpdate() : flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
-      if ( foundry.utils.isObjectEmpty(update) ) continue;
-      const itemId = flow.advancement.parent.id;
-      embeddedUpdates[itemId] ??= foundry.utils.deepClone(actor.items.get(itemId).data.data.advancement);
-      const idx = embeddedUpdates[itemId].findIndex(a => a._id === flow.advancement.id);
+      const item = actor.items.get(flow.advancement.parent.id);
+      if ( foundry.utils.isObjectEmpty(update) || !item ) continue;
+
+      embeddedUpdates[item.id] ??= foundry.utils.deepClone(item.data.data.advancement);
+      const idx = embeddedUpdates[item.id].findIndex(a => a._id === flow.advancement.id);
       if ( idx < 0 ) continue;
-      foundry.utils.mergeObject(embeddedUpdates[itemId][idx], { value: update });
+
+      foundry.utils.mergeObject(embeddedUpdates[item.id][idx], { value: update });
     }
 
     // Update all advancements with new values
