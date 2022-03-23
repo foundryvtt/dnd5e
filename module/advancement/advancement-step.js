@@ -38,6 +38,7 @@ export class AdvancementStep extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/advancement-step.html",
+      title: null,
       popOut: false
     });
   }
@@ -48,11 +49,6 @@ export class AdvancementStep extends Application {
   get id() {
     return `actor-advancement-step-${this.appId}`;
   }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get title() { return null; }
 
   /* -------------------------------------------- */
 
@@ -251,38 +247,28 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Check whether the actor is a normal actor or a clone and apply the updates appropriately.
-   * @param {Actor5e} actor                          Actor to which to apply updates.
-   * @param {object} updates                         Object of updates to apply.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the update workflow.
-   * @returns {Promise<Actor5e>}                     Actor with updates applied.
+   * Apply data updates to the actor clone. **Does not perform database changes.**
+   * @param {Actor5e} actor       Clone to which to apply updates.
+   * @param {object} updates      Object of updates to apply.
+   * @returns {Promise<Actor5e>}  Actor with updates applied.
    * @protected
    */
-  static async _updateActor(actor, updates, context) {
-    // Normal actor, apply updates as normal
-    if ( actor.data._id ) return actor.update(updates, context);
-
-    // Actor clone, apply updates directly to ActorData
+  static async _updateActor(actor, updates) {
     actor.data.update(updates);
     actor.prepareData();
-
     return actor;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Check whether the actor is a normal actor or a clone and create embedded items appropriately.
-   * @param {Actor5e} actor                          Actor to which to create items.
-   * @param {object[]} items                         An array of data objects used to create multiple documents.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the creation workflow.
-   * @returns {Promise<Item5e[]>}                    An array of created Item instances.
+   * Create embedded items on the actor clone. **Does not perform database changes.**
+   * @param {Actor5e} actor        Clone on which to create items.
+   * @param {object[]} items       An array of data objects used to create multiple documents.
+   * @returns {Promise<Item5e[]>}  An array of created Item instances.
    * @protected
    */
-  static async _createEmbeddedItems(actor, items, context) {
-    if ( actor.id ) return actor.createEmbeddedDocuments("Item", items, context);
-
-    // Create temporary documents
+  static async _createEmbeddedItems(actor, items) {
     const documents = await Promise.all(items.map(i => new Item.implementation(i, { parent: actor })));
     actor.data.items = actor.data._source.items;
     documents.forEach(d => actor.data._source.items.push(d.toObject()));
@@ -296,19 +282,14 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Check whether the actor is a normal actor or a clone and update embedded items appropriately.
-   * @param {Actor5e} actor                          Actor to which to update items.
-   * @param {object[]} updates                       An array of differential data objects.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the update workflow.
-   * @returns {Promise<Item5e[]>}                    An array of updated Item instances.
+   * Updated embedded items on the actor clone. **Does not perform database changes.**
+   * @param {Actor5e} actor        Clone on which to update items.
+   * @param {object[]} updates     An array of differential data objects.
+   * @returns {Promise<Item5e[]>}  An array of updated Item instances.
    * @protected
    */
-  static async _updateEmbeddedItems(actor, updates, context) {
-    if ( actor.id ) return actor.updateEmbeddedDocuments("Item", updates, context);
-
-    actor.data.update({items: updates});
-    actor.prepareData();
-
+  static async _updateEmbeddedItems(actor, updates) {
+    this._updateActor(actor, {items: updates});
     const ids = new Set(updates.map(u => u._id));
     return actor.items.filter(i => ids.has(i.id));
   }
@@ -316,17 +297,14 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Check whether the actor is a normal actor or a clone and delete embedded items appropriately.
-   * @param {Actor5e} actor                          Actor to which to delete items.
-   * @param {object[]} ids                           An array of string ids for each Document to be deleted.
-   * @param {DocumentModificationContext} [context]  Additional context which customizes the deletion workflow.
-   * @returns {Promise<Item5e[]>}                    An array of deleted Item instances.
+   * Delete embedded items on the actor clone. **Does not perform database changes.**
+   * @param {Actor5e} actor        Clone from which to delete items.
+   * @param {object[]} ids         An array of string ids for each Document to be deleted.
+   * @returns {Promise<Item5e[]>}  An array of deleted Item instances.
    * @protected
    */
-  static async _deleteEmbeddedItems(actor, ids, context) {
-    if ( actor.id ) return actor.deleteEmbeddedDocuments("Item", ids, context);
-
-    let documents = [];
+  static async _deleteEmbeddedItems(actor, ids) {
+    const documents = [];
     for ( const id of ids ) {
       const item = actor.items.get(id);
       if ( !item ) continue;

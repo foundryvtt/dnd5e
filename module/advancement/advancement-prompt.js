@@ -1,10 +1,11 @@
 import { AdvancementError } from "./advancement-flow.js";
+import { LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
 
 
 /**
  * Application for controlling the advancement workflow and displaying the interface.
  *
- * @property {Actor5e} actor                 Actor up which this advancement is being performed.
+ * @property {Actor5e} actor                 Actor on which this advancement is being performed.
  * @property {AdvancementStep[]} [steps=[]]  Any initial steps that should be displayed.
  * @property {object} [options={}]           Additional application options.
  * @extends {Application}
@@ -104,7 +105,7 @@ export class AdvancementPrompt extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Represents data about a change is character and class level for an actor.
+   * Represents data about a change in character and class level for an actor.
    *
    * @typedef {object} LevelChangeData
    * @property {Item5e|null} item  Class item that was added or changed.
@@ -124,7 +125,7 @@ export class AdvancementPrompt extends Application {
 
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
-      this._addStep(new game.dnd5e.advancement.steps.LevelIncreasedStep(this.clone, {
+      this._addStep(new LevelIncreasedStep(this.clone, {
         item: item,
         level: character.initial + offset,
         classLevel: cls.initial + offset
@@ -168,7 +169,7 @@ export class AdvancementPrompt extends Application {
    * @param {number} level  Level at which the changes should be made.
    */
   modifyChoices(item, level) {
-    this._addStep(new game.dnd5e.advancement.steps.ModifyChoicesStep(this.clone, { item, level }));
+    this._addStep(new ModifyChoicesStep(this.clone, { item, level }));
   }
 
   /* -------------------------------------------- */
