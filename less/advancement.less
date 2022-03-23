@@ -39,21 +39,22 @@
 /*  Advancement Flow                         */
 /* ----------------------------------------- */
 .dnd5e.advancement.flow {
-  h2 { text-align: right; }
-  h1 + h2 {
-    float: inline-end;
-    margin-block-start: -1.8em;
-    border: none;
+  .step {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    h1 { flex-grow: 1; }
+    h2 {
+      text-align: right;
+      line-height: 1.8em;
+      border-bottom: 2px solid var(--color-underline-header);
+    }
+    form { flex-basis: 100%; }
   }
 
   h3 {
     font-size: var(--font-size-20);
-
-    .item-checkmark {
-      float: inline-end;
-      color: rgb(17 145 17);
-      font-size: var(--font-size-16);
-    }
   }
 
   .item-name {
