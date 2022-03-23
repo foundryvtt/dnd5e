@@ -231,24 +231,12 @@ export class AdvancementStep extends Application {
    * @returns {Promise<Item5e[]>}              Items that have had their advancement data updated.
    */
   static async updateAdvancementData({ actor, flows, itemsAdded=[], reverse=false }) {
-    let embeddedUpdates = {};
     for ( const flow of flows ) {
       const update = reverse ? flow.reverseUpdate() : flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
-      const item = actor.items.get(flow.advancement.parent.id);
-      if ( foundry.utils.isObjectEmpty(update) || !item ) continue;
-
-      embeddedUpdates[item.id] ??= foundry.utils.deepClone(item.data.data.advancement);
-      const idx = embeddedUpdates[item.id].findIndex(a => a._id === flow.advancement.id);
-      if ( idx < 0 ) continue;
-
-      foundry.utils.mergeObject(embeddedUpdates[item.id][idx], { value: update });
+      if ( foundry.utils.isObjectEmpty(update) ) continue;
+      flow.advancement.actor = actor;
+      flow.advancement.updateSource({ value: update });
     }
-
-    // Update all advancements with new values
-    embeddedUpdates = Object.entries(embeddedUpdates).map(([id, updates]) => {
-      return { _id: id, "data.advancement": updates };
-    });
-    return await this._updateEmbeddedItems(actor, embeddedUpdates);
   }
 
   /* -------------------------------------------- */
@@ -289,21 +277,6 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Updated embedded items on the actor clone. **Does not perform database changes.**
-   * @param {Actor5e} actor        Clone on which to update items.
-   * @param {object[]} updates     An array of differential data objects.
-   * @returns {Promise<Item5e[]>}  An array of updated Item instances.
-   * @protected
-   */
-  static async _updateEmbeddedItems(actor, updates) {
-    this._updateActor(actor, {items: updates});
-    const ids = new Set(updates.map(u => u._id));
-    return actor.items.filter(i => ids.has(i.id));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Delete embedded items on the actor clone. **Does not perform database changes.**
    * @param {Actor5e} actor        Clone from which to delete items.
    * @param {object[]} ids         An array of string ids for each Document to be deleted.
@@ -319,6 +292,8 @@ export class AdvancementStep extends Application {
       actor.items.delete(id);
     }
     actor.prepareData();
+
+    // TODO: Trigger any additional advancement steps for deleted items
 
     return documents;
   }

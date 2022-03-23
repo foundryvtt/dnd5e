@@ -1,6 +1,7 @@
 import { AdvancementConfig } from "./advancement-config.js";
 import { AdvancementFlow } from "./advancement-flow.js";
 
+
 /**
  * Abstract base class which various advancement types can subclass.
  *
@@ -245,6 +246,26 @@ export class Advancement {
     await this.parent.updateAdvancement(this.id, updates);
     this.data = this.parent.advancement[this.id].data;
     return this.parent.advancement[this.id];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update this advancement's data on the item without performing a database commit.
+   * @param {object} updates  Updates to apply to this advancement, using the same format as `Document#update`.
+   * @returns {Advancement}   This advancement after updates have been applied.
+   */
+  updateSource(updates) {
+    const item = this.actor.items.get(this.parent.id);
+    const idx = item.data.data.advancement.findIndex(a => a._id === this.id);
+    if ( idx === -1 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
+
+    const advancement = foundry.utils.deepClone(item.data.data.advancement);
+    foundry.utils.mergeObject(this.data, updates);
+    foundry.utils.mergeObject(advancement[idx], updates);
+    item.data.update({"data.advancement": advancement});
+
+    return this;
   }
 
   /* -------------------------------------------- */
