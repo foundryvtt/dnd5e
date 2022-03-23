@@ -113,7 +113,7 @@ export class AdvancementStep extends Application {
     const itemsAdded = await this.constructor.applyUpdates(this.actor, updates);
 
     // Update clone actor advancement choices and ensure advancement flows have access to that data
-    this.constructor.updateAdvancementData({ flows: this.flows, itemsAdded });
+    this.constructor.updateAdvancementData({ flows: this.flows, itemsAdded, reverse: this.options.reverse });
     return this.actor.prepareData();
   }
 
