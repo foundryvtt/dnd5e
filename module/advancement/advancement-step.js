@@ -108,7 +108,10 @@ export class AdvancementStep extends Application {
     await super._render(force, options);
 
     // Render flows within the step
-    return Promise.all(this.flows.map(f => f._render(true, options)));
+    return Promise.all(this.flows.map(f => {
+      f._element = null;
+      return f._render(force, options);
+    }));
   }
 
   /* -------------------------------------------- */

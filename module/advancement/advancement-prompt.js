@@ -209,6 +209,7 @@ export class AdvancementPrompt extends Application {
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
 
     // Render the step
+    this.step._element = null;
     await this.step._render(force, options);
     this.setPosition();
   }
@@ -276,7 +277,7 @@ export class AdvancementPrompt extends Application {
     // Increase step number and re-render
     this._stepIndex += 1;
     this.step.actor = this.clone;
-    this.render();
+    this.render(true);
   }
 
   /* -------------------------------------------- */
@@ -303,7 +304,7 @@ export class AdvancementPrompt extends Application {
     // Decrease step number and re-render
     this._stepIndex -= 1;
     this.step.actor = this.clone;
-    this.render();
+    this.render(true);
   }
 
   /* -------------------------------------------- */
