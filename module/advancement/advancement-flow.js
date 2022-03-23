@@ -60,37 +60,16 @@ export class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /**
-   * Create a data object used to create the placeholder form within an advancement step.
-   * @returns {object}
-   */
-  getPlaceholderData() {
-    return {
-      appId: this.id,
-      id: this.advancement.id,
-      type: this.advancement.constructor.typeName,
-      order: this.sortingValue
-    };
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
   getData() {
     return {
+      appId: this.id,
       advancement: this.advancement,
+      type: this.advancement.constructor.typeName,
       title: this.title,
       summary: this.advancement.summaryForLevel(this.level),
       level: this.level
     };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  _replaceHTML(element, html) {
-    Object.entries(element[0].dataset).forEach(([k, v]) => html[0].dataset[k] = v);
-    super._replaceHTML(element, html);
   }
 
   /* -------------------------------------------- */

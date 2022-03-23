@@ -209,8 +209,7 @@ export class AdvancementPrompt extends Application {
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
 
     // Render the step
-    this.step._element = null;
-    await this.step._render(true, options);
+    await this.step._render(force, options);
     this.setPosition();
   }
 

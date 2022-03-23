@@ -97,14 +97,18 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  getData() {
+    return foundry.utils.mergeObject(super.getData(), { appId: this.id });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _render(force, options) {
     await super._render(force, options);
 
     // Render flows within the step
-    return Promise.all(this.flows.map(f => {
-      f._element = null;
-      return f._render(true, options);
-    }));
+    return Promise.all(this.flows.map(f => f._render(true, options)));
   }
 
   /* -------------------------------------------- */
@@ -356,7 +360,7 @@ export class LevelIncreasedStep extends AdvancementStep {
           level: section.level,
           header: section.item.name,
           subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.classLevel }),
-          advancements: section.flows.map(f => f.getPlaceholderData())
+          advancements: section.flows.map(f => f.id)
         };
       })
     });
@@ -421,7 +425,7 @@ export class ModifyChoicesStep extends AdvancementStep {
           level: section.level,
           header: section.item.name,
           subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.level }),
-          advancements: section.flows.map(f => f.getPlaceholderData())
+          advancements: section.flows.map(f => f.id)
         };
       })
     });
