@@ -2,20 +2,28 @@
  * Base class for the advancement interface displayed by the advancement prompt that should be subclassed by
  * individual advancement types.
  *
- * @property {Advancement} advancement  Advancement to which this flow belongs.
- * @property {number} level             Level for which to configure this flow.
+ * @property {Item5e} item           Item to which the advancement belongs.
+ * @property {string} advancementId  ID of the advancement this flow modifies.
+ * @property {number} level          Level for which to configure this flow.
  * @extends {FormApplication}
  */
 export class AdvancementFlow extends FormApplication {
 
-  constructor(advancement, level, options={}) {
+  constructor(item, advancementId, level, options={}) {
     super({}, options);
 
     /**
-     * Advancement to which this flow belongs.
-     * @type {Advancement}
+     * The item that houses the Advancement.
+     * @type {Item5e}
      */
-    this.advancement = advancement;
+    this.item = item;
+
+    /**
+     * ID of the advancement this flow modifies.
+     * @type {string}
+     * @private
+     */
+    this._advancementId = advancementId;
 
     /**
      * Level for which to configure this flow.
@@ -51,11 +59,11 @@ export class AdvancementFlow extends FormApplication {
   /* -------------------------------------------- */
 
   /**
-   * Sorting value used for ordering this flow within the advancement prompt.
-   * @type {string}
+   * The Advancement object this flow modifies.
+   * @type {Advancement|null}
    */
-  get sortingValue() {
-    return this.advancement.sortingValueForLevel(this.level);
+  get advancement() {
+    return this.item.advancement?.[this._advancementId] ?? null;
   }
 
   /* -------------------------------------------- */

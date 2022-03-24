@@ -126,7 +126,7 @@ export class AdvancementPrompt extends Application {
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
       this._addStep(new LevelIncreasedStep(this.clone, {
-        item: item,
+        item: item.id,
         level: character.initial + offset,
         classLevel: cls.initial + offset
       }));
@@ -169,7 +169,7 @@ export class AdvancementPrompt extends Application {
    * @param {number} level  Level at which the changes should be made.
    */
   modifyChoices(item, level) {
-    this._addStep(new ModifyChoicesStep(this.clone, { item, level }));
+    this._addStep(new ModifyChoicesStep(this.clone, { item: item.id, level }));
   }
 
   /* -------------------------------------------- */
@@ -294,7 +294,6 @@ export class AdvancementPrompt extends Application {
 
     // Increase step number and re-render
     this._stepIndex += 1;
-    this.step.actor = this.clone;
     this.render(true);
   }
 
@@ -310,7 +309,6 @@ export class AdvancementPrompt extends Application {
 
     // Undo changes from previous step
     try {
-      this.previousStep.actor = this.clone;
       await this.previousStep.undoChanges();
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
@@ -321,7 +319,6 @@ export class AdvancementPrompt extends Application {
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
-    this.step.actor = this.clone;
     this.render(true);
   }
 

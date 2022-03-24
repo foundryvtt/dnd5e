@@ -14,22 +14,14 @@ export class AdvancementStep extends Application {
     /**
      * Actor that will be used when calculating changes.
      * @type {Actor5e}
-     * @private
      */
-    this._actor = actor;
+    this.actor = actor;
 
     /**
      * Step configuration information.
      * @type {object}
      */
     this.config = config;
-
-    /**
-     * Data for each section displayed. Only required property is `flows` containing an array of AdvancementFlows.
-     * @type {object[]}
-     */
-    this.sections = this.prepareSections();
-    this.sections.forEach(s => s.flows.sort((a, b) => a.sortingValue.localeCompare(b.sortingValue)));
   }
 
   /* -------------------------------------------- */
@@ -54,27 +46,11 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Actor used by this advancement step.
-   * @type {Actor5e}
+   * The main item associated with this step if available.
+   * @type {Item5e|null}
    */
-  get actor() {
-    return this._actor;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Replace the stored actor with the one provided and update all flows accordingly.
-   * @param {Actor5e} actor  Actor to set.
-   */
-  set actor(actor) {
-    this._actor = actor;
-
-    for ( const flow of this.flows ) {
-      const advancement = actor.items.get(flow.advancement.parent.id)?.advancement[flow.advancement.id];
-      if ( advancement ) flow.advancement = advancement;
-      else flow.advancement.actor = actor;
-    }
+  get item() {
+    return this.actor.items.get(this.config.item) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -84,16 +60,8 @@ export class AdvancementStep extends Application {
    * @type {AdvancementFlow[]}
    */
   get flows() {
-    return this.sections.flatMap(s => s.flows);
+    return [];
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Build up the sections list on initial creation of this step.
-   * @returns {object[]}
-   */
-  prepareSections() { return []; }
 
   /* -------------------------------------------- */
 
@@ -118,14 +86,15 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Returns all advancements on an item for a specific level.
+   * Returns all advancements on an item for a specific level in the proper order.
    * @param {Item5e} item      Item that has advancement.
    * @param {number} level     Level in question.
    * @returns {Advancement[]}  Relevant advancement objects.
    * @protected
    */
   advancementsForLevel(item, level) {
-    return Object.values(item.advancement).filter(a => a.levels.includes(level));
+    const advancements = Object.values(item.advancement).filter(a => a.levels.includes(level));
+    return advancements.sort((a, b) => a.sortingValueForLevel(level).localeCompare(b.sortingValueForLevel(level)));
   }
 
   /* -------------------------------------------- */
@@ -142,7 +111,8 @@ export class AdvancementStep extends Application {
     const itemsAdded = await this.constructor.applyUpdates(this.actor, updates);
 
     // Update clone actor advancement choices and ensure advancement flows have access to that data
-    return this.constructor.updateAdvancementData({ actor: this.actor, flows: this.flows, itemsAdded });
+    this.constructor.updateAdvancementData({ flows: this.flows, itemsAdded });
+    return this.actor.prepareData();
   }
 
   /* -------------------------------------------- */
@@ -156,10 +126,7 @@ export class AdvancementStep extends Application {
     const updates = this.prepareUpdates({ reverse: true });
 
     // Revert actor clone to earlier state
-    await this.constructor.applyUpdates(this.actor, updates);
-
-    // Revert changes to clone's advancement choices
-    await this.constructor.updateAdvancementData({ actor: this.actor, flows: this.flows.reverse(), reverse: true });
+    return this.constructor.applyUpdates(this.actor, updates);
   }
 
   /* -------------------------------------------- */
@@ -225,17 +192,15 @@ export class AdvancementStep extends Application {
   /**
    * Update stored advancement data for the provided flows.
    * @param {object} config
-   * @param {Actor5e} config.actor             Actor's whose advancements should be updated.
    * @param {AdvancementFlow[]} config.flows   Flows to update.
    * @param {Item5e[]} [config.itemsAdded=[]]  New items that have been created.
    * @param {boolean} [config.reverse=false]   Whether the advancement value changes should be undone.
    * @returns {Promise<Item5e[]>}              Items that have had their advancement data updated.
    */
-  static async updateAdvancementData({ actor, flows, itemsAdded=[], reverse=false }) {
+  static updateAdvancementData({ flows, itemsAdded=[], reverse=false }) {
     for ( const flow of flows ) {
       const update = reverse ? flow.reverseUpdate() : flow.finalizeUpdate(flow.initialUpdate, itemsAdded);
       if ( foundry.utils.isObjectEmpty(update) ) continue;
-      flow.advancement.actor = actor;
       flow.advancement.updateSource({ value: update });
     }
   }
@@ -317,16 +282,11 @@ export class LevelIncreasedStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  prepareSections() {
-    const sections = [{
-      level: this.config.level,
-      classLevel: this.config.classLevel,
-      item: this.config.item,
-      flows: this.advancementsForLevel(this.config.item, this.config.classLevel).map(a => {
-        return new a.constructor.flowApp(a, this.config.classLevel);
-      })
-    }];
-    return sections;
+  get flows() {
+    this._flows ??= this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
+      return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
+    });
+    return this._flows;
   }
 
   /* -------------------------------------------- */
@@ -334,14 +294,12 @@ export class LevelIncreasedStep extends AdvancementStep {
   /** @inheritdoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
-      sections: this.sections.map(section => {
-        return {
-          level: section.level,
-          header: section.item.name,
-          subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.classLevel }),
-          advancements: section.flows.map(f => f.id)
-        };
-      })
+      sections: [{
+        level: this.config.level,
+        header: this.item.name,
+        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.classLevel }),
+        advancements: this.flows.map(f => f.id)
+      }]
     });
   }
 
@@ -386,15 +344,11 @@ export class ModifyChoicesStep extends AdvancementStep {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  prepareSections() {
-    const sections = [{
-      level: this.config.level,
-      item: this.config.item,
-      flows: this.advancementsForLevel(this.config.item, this.config.level).map(a => {
-        return new a.constructor.flowApp(a, this.config.level);
-      })
-    }];
-    return sections;
+  get flows() {
+    this._flows ??= this.advancementsForLevel(this.item, this.config.level).map(a => {
+      return new a.constructor.flowApp(this.item, a.id, this.config.level);
+    });
+    return this._flows;
   }
 
   /* -------------------------------------------- */
@@ -402,14 +356,12 @@ export class ModifyChoicesStep extends AdvancementStep {
   /** @inheritdoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
-      sections: this.sections.map(section => {
-        return {
-          level: section.level,
-          header: section.item.name,
-          subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: section.level }),
-          advancements: section.flows.map(f => f.id)
-        };
-      })
+      sections: [{
+        level: this.config.level,
+        header: this.item.name,
+        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.level }),
+        advancements: this.flows.map(f => f.id)
+      }]
     });
   }
 

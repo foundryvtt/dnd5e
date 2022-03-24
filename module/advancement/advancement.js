@@ -256,14 +256,13 @@ export class Advancement {
    * @returns {Advancement}   This advancement after updates have been applied.
    */
   updateSource(updates) {
-    const item = this.actor.items.get(this.parent.id);
-    const idx = item.data.data.advancement.findIndex(a => a._id === this.id);
-    if ( idx === -1 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
+    const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
+    const idx = advancement.findIndex(a => a._id === this.id);
+    if ( idx < 0 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
 
-    const advancement = foundry.utils.deepClone(item.data.data.advancement);
     foundry.utils.mergeObject(this.data, updates);
     foundry.utils.mergeObject(advancement[idx], updates);
-    item.data.update({"data.advancement": advancement});
+    this.parent.data.update({"data.advancement": advancement});
 
     return this;
   }
