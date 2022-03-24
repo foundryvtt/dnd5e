@@ -240,8 +240,26 @@ export class AdvancementPrompt extends Application {
 
   /** @inheritdoc */
   async close(options={}) {
-    if ( !options.skipConfirmation ) {
-      // TODO: Add confirmation dialog informing players that no changes have been made
+    if ( !options.skipConfirmation && this.step?.options.confirmClose ) {
+      return new Dialog({
+        title: `${game.i18n.localize("DND5E.AdvancementPromptCloseTitle")}: ${this.actor.name}`,
+        content: game.i18n.localize("DND5E.AdvancementPromptCloseMessage"),
+        buttons: {
+          close: {
+            icon: '<i class="fas fa-times"></i>',
+            label: game.i18n.localize("DND5E.AdvancementPromptCloseButtonStop"),
+            callback: () => {
+              this.actor._advancement = null;
+              super.close(options);
+            }
+          },
+          continue: {
+            icon: '<i class="fas fa-chevron-right"></i>',
+            label: game.i18n.localize("DND5E.AdvancementPromptCloseButtonContinue")
+          }
+        },
+        default: "close"
+      }).render(true);
     }
     this.actor._advancement = null;
     await super.close(options);

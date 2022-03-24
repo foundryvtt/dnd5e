@@ -39,7 +39,8 @@ export class AdvancementStep extends Application {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/advancement-step.html",
       title: null,
-      popOut: false
+      popOut: false,
+      confirmClose: true
     });
   }
 
@@ -375,8 +376,11 @@ export class ItemRemovedStep extends AdvancementStep { }
 export class ModifyChoicesStep extends AdvancementStep {
 
   /** @inheritdoc */
-  get title() {
-    return game.i18n.localize("DND5E.AdvancementPromptModifyChoicesTitle");
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      title: game.i18n.localize("DND5E.AdvancementPromptModifyChoicesTitle"),
+      confirmClose: false
+    });
   }
 
   /* -------------------------------------------- */
