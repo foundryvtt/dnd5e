@@ -36,7 +36,7 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static get flowApp() { return HitPointsFlow; };
+  static get flowApp() { return HitPointsFlow; }
 
   /* -------------------------------------------- */
 
@@ -146,6 +146,7 @@ export class HitPointsAdvancement extends Advancement {
   /** @inheritdoc */
   propertyUpdates({ level, updates, reverse=false }) {
     const actorData = this.actor.data.data;
+    const conMod = actorData.abilities.con?.mod ?? 0;
     let value = this.valueForLevel(level) ?? 0;
 
     // When reversing, remove both value and constitution modifier
@@ -179,7 +180,11 @@ export class HitPointsAdvancement extends Advancement {
 export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
-  static template = "systems/dnd5e/templates/advancement/hit-points-flow.html";
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/hit-points-flow.html"
+    });
+  }
 
   /* -------------------------------------------- */
 
@@ -192,12 +197,11 @@ export class HitPointsFlow extends AdvancementFlow {
     if ( !value ) {
       const lastValue = this.advancement.data.value[this.level - 1];
       if ( lastValue === "avg" ) useAverage = true;
-      // TODO: Fix this to work when leveling up multiple times
     }
 
     // Determine whether this is the first level of the original class on the character
     // The additional check here is needed because the actor's original class value isn't set before advancement
-    const isFirstClassLevel = (this.advancement.parent.data.data.levels === 1)
+    const isFirstClassLevel = (this.level === 1)
       && (this.advancement.parent.isOriginalClass || this.advancement.actor.data.data.details.originalClass === "");
 
     return foundry.utils.mergeObject(super.getData(), {
@@ -226,8 +230,8 @@ export class HitPointsFlow extends AdvancementFlow {
    * @param {Event} event  Change to checkbox that triggers this update.
    */
   _onAverageChanged(event) {
-    event.target.parentElement.querySelector(".rollResult").disabled = event.target.checked;
-    event.target.parentElement.querySelector(".rollButton").disabled = event.target.checked;
+    this.form.querySelector(".rollResult").disabled = event.target.checked;
+    this.form.querySelector(".rollButton").disabled = event.target.checked;
   }
 
   /* -------------------------------------------- */
@@ -269,6 +273,13 @@ export class HitPointsFlow extends AdvancementFlow {
     this.form.querySelector(".rollResult").classList.add("error");
     let errorType = !formData.value ? "Empty" : "Invalid";
     throw new AdvancementError(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverseUpdate() {
+    return { [`-=${this.level}`]: null };
   }
 
 }
