@@ -4,7 +4,6 @@ import { AdvancementError, AdvancementFlow } from "./advancement/advancement-flo
 import { AdvancementPrompt } from "./advancement/advancement-prompt.js";
 import { AdvancementSelection } from "./advancement/advancement-selection.js";
 import * as steps from "./advancement/advancement-step.js";
-import { HitPointsAdvancement } from "./advancement/hit-points.js";
 import { ItemGrantAdvancement } from "./advancement/item-grant.js";
 
 const advancement = {
@@ -16,7 +15,6 @@ const advancement = {
   AdvancementSelection,
   steps,
   types: {
-    HitPointsAdvancement,
     ItemGrantAdvancement
   }
 };
