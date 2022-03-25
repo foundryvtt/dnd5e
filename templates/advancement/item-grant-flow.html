@@ -1,0 +1,13 @@
+<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
+  <h3>{{{title}}}</h3>
+
+  {{#each items}}
+    <div class="item-name flexrow">
+      <div class="item-image" style="background-image: url({{this.img}});"></div>
+      <label class="flexrow">
+        <h4>{{this.name}}</h4>
+        <input type="checkbox" name="{{this.uuid}}" {{checked this.checked}}>
+      </label>
+    </div>
+  {{/each}}
+</form>

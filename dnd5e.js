@@ -160,10 +160,9 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassItem"
   });
 
+  // Preload Handlebars helpers & partials
   registerHandlebarsHelpers();
-
-  // Preload Handlebars Templates
-  return preloadHandlebarsTemplates();
+  preloadHandlebarsTemplates();
 });
 
 

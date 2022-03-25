@@ -14,6 +14,14 @@ import Item5e from "../item/entity.js";
 export default class Actor5e extends Actor {
 
   /**
+   * Cached version of the current advancement window.
+   * @type {AdvancementPrompt}
+   */
+  _advancement;
+
+  /* -------------------------------------------- */
+
+  /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
    * @type {object<string, Item5e>}
    * @private
@@ -22,6 +30,17 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Lazily obtain an advancement application for this Actor or create one if it doesn't exist yet.
+   * @type {AdvancementPrompt}
+   */
+  get advancement() {
+    this._advancement ??= new game.dnd5e.advancement.AdvancementPrompt(this);
+    return this._advancement;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -1628,6 +1647,8 @@ export default class Actor5e extends Actor {
     return updates;
   }
 
+  /* -------------------------------------------- */
+  /*  Conversion & Transformation                 */
   /* -------------------------------------------- */
 
   /**
