@@ -7,7 +7,7 @@
 export async function create5eMacro(data, slot) {
   if ( !("data" in data) ) return ui.notifications.warn("You can only create macro buttons for owned Items");
 
-  const macroData = { type: "script", };
+  const macroData = { type: "script", scope: "actor" };
   switch ( data.type ) {
     case "Item":
       foundry.utils.mergeObject(macroData, {
@@ -29,7 +29,8 @@ export async function create5eMacro(data, slot) {
       return;
   }
 
-  let macro = game.macros.find(m => (m.name === macroData.name) && (m.data.command === macroData.command));
+  let macro = game.macros.find(m => (m.data.name === macroData.name)
+    && (m.data.command === macroData.command) && (m.data.author === game.userId));
   if ( !macro ) macro = await Macro.create(macroData);
   game.user.assignHotbarMacro(macro, slot);
   return false;
