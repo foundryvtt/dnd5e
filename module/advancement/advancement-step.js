@@ -52,7 +52,7 @@ export class AdvancementStep extends Application {
    * @type {Item5e|null}
    */
   get item() {
-    return this.actor.items.get(this.config.item.id) ?? this.config.item ?? null;
+    return this.actor.items.get(this.config.item.id) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -134,6 +134,13 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Perform any cleanup operations necessary before the advancement prompt completes.
+   */
+  async cleanup() { }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare the actor and item updates that all of the advancements within this step should apply.
    * @param {object} [config={}]
    * @param {boolean} [config.reverse=false]  Prepare updates to undo these advancements.
@@ -171,21 +178,22 @@ export class AdvancementStep extends Application {
     let newItems = Promise.all(Object.keys(updates.item.add).map(fromUuid));
 
     // Apply property changes to actor
-    await this._updateActor(actor, foundry.utils.deepClone(updates.actor));
+    this._updateActor(actor, foundry.utils.deepClone(updates.actor));
 
     // Add new items to actor
     newItems = (await newItems).map(item => {
       const data = item.toObject();
       foundry.utils.mergeObject(data, {
+        _id: foundry.utils.randomID(),
         "flags.dnd5e.sourceId": item.uuid,
         "flags.dnd5e.advancementOrigin": updates.item.add[item.uuid]
       });
       return data;
     });
-    const itemsAdded = await this._createEmbeddedItems(actor, newItems);
+    const itemsAdded = this._createEmbeddedItems(actor, newItems);
 
     // Remove items from actor
-    await this._deleteEmbeddedItems(actor, updates.item.remove.filter(id => actor.items.has(id)));
+    this._deleteEmbeddedItems(actor, updates.item.remove.filter(id => actor.items.has(id)));
 
     return itemsAdded;
   }
@@ -217,7 +225,7 @@ export class AdvancementStep extends Application {
    * @returns {Promise<Actor5e>}  Actor with updates applied.
    * @protected
    */
-  static async _updateActor(actor, updates) {
+  static _updateActor(actor, updates) {
     actor.data.update(updates);
     actor.prepareData();
     return actor;
@@ -229,16 +237,20 @@ export class AdvancementStep extends Application {
    * Create embedded items on the actor clone. **Does not perform database changes.**
    * @param {Actor5e} actor        Clone on which to create items.
    * @param {object[]} items       An array of data objects used to create multiple documents.
+   * @param {object} [options={}]
+   * @param {boolean} [skipAdvancement=false]  Do not create new advancements steps for the created items.
    * @returns {Promise<Item5e[]>}  An array of created Item instances.
    * @protected
    */
-  static async _createEmbeddedItems(actor, items) {
-    const documents = await Promise.all(items.map(i => new Item.implementation(i, { parent: actor })));
+  static _createEmbeddedItems(actor, items, { skipAdvancement=false }={}) {
+    const documents = items.map(i => new Item.implementation(i, { parent: actor }));
     actor.data.items = actor.data._source.items;
     documents.forEach(d => actor.data._source.items.push(d.toObject()));
     actor.prepareData();
 
-    // TODO: Trigger any additional advancement steps for added items
+    if ( !skipAdvancement ) {
+      // TODO: Trigger any additional advancement steps for added items
+    }
 
     return documents;
   }
@@ -249,10 +261,12 @@ export class AdvancementStep extends Application {
    * Delete embedded items on the actor clone. **Does not perform database changes.**
    * @param {Actor5e} actor        Clone from which to delete items.
    * @param {object[]} ids         An array of string ids for each Document to be deleted.
+   * @param {object} [options={}]
+   * @param {boolean} [skipAdvancement=false]  Do not create new advancements steps for the deleted items.
    * @returns {Promise<Item5e[]>}  An array of deleted Item instances.
    * @protected
    */
-  static async _deleteEmbeddedItems(actor, ids) {
+  static _deleteEmbeddedItems(actor, ids, { skipAdvancement=false }={}) {
     const documents = [];
     for ( const id of ids ) {
       const item = actor.items.get(id);
@@ -262,7 +276,9 @@ export class AdvancementStep extends Application {
     }
     actor.prepareData();
 
-    // TODO: Trigger any additional advancement steps for deleted items
+    if ( !skipAdvancement ) {
+      // TODO: Trigger any additional advancement steps for deleted items
+    }
 
     return documents;
   }
@@ -315,6 +331,17 @@ export class LevelIncreasedStep extends AdvancementStep {
  */
 export class LevelDecreasedStep extends AdvancementStep {
 
+  constructor(...args) {
+    super(...args);
+
+    // If class item has already been deleted on actor, add it back temporarily
+    if ( !this.actor.items.get(this.config.item.id) ) {
+      this.constructor._createEmbeddedItems(this.actor, [this.config.item.toObject()], { skipAdvancement: true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -331,6 +358,15 @@ export class LevelDecreasedStep extends AdvancementStep {
       return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
     });
     return this._flows;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove the class item from the actor.
+   */
+  cleanup() {
+    this.constructor._deleteEmbeddedItems(this.actor, [this.config.item.id], { skipAdvancement: true });
   }
 
 }

@@ -356,6 +356,9 @@ export class AdvancementPrompt extends Application {
    * @returns {Promise}
    */
   async complete() {
+    // Run any cleanup needed by steps
+    await Promise.all(this.steps.map(async (s) => await s.cleanup()));
+
     // Apply changes from clone to original actor
     await this.commitUpdates(this.actor, this.clone);
 
