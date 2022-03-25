@@ -144,7 +144,7 @@ export class AdvancementPrompt extends Application {
     // Level decreased
     for ( let offset = 0; offset > levelDelta; offset-- ) {
       this._addStep(new LevelDecreasedStep(this.clone, {
-        item: item.id,
+        item,
         level: character.initial + offset,
         classLevel: cls.initial + offset
       }));

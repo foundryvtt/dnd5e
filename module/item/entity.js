@@ -1755,6 +1755,19 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  async delete(context={}) {
+    if ( (this.type === "class") && !context.skipConfirmation ) {
+      game.dnd5e.advancement.DeleteConfirmationDialog.createDialog(this, context)
+        .then(context => super.delete(context))
+        .catch(() => {});
+    } else {
+      return super.delete(context);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _preDelete(options, userId) {
     await super._preDelete(options, userId);
     if ( (this.type !== "class") || !this.isEmbedded ) return;
