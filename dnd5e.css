@@ -1309,6 +1309,57 @@
 .dnd5e.advancement .centered {
   text-align: center;
 }
+/* ----------------------------------------- */
+/*  Advancement Flow                         */
+/* ----------------------------------------- */
+.dnd5e.advancement.flow .step {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.dnd5e.advancement.flow .step h1 {
+  flex-grow: 1;
+}
+.dnd5e.advancement.flow .step h2 {
+  text-align: right;
+  line-height: 1.8em;
+  border-bottom: 2px solid var(--color-underline-header);
+}
+.dnd5e.advancement.flow .step form {
+  flex-basis: 100%;
+}
+.dnd5e.advancement.flow h3 {
+  font-size: var(--font-size-20);
+}
+.dnd5e.advancement.flow .item-name .item-image {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
+  margin-inline-end: 5px;
+}
+.dnd5e.advancement.flow .item-name label {
+  align-items: center;
+}
+.dnd5e.advancement.flow .item-name label h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.dnd5e.advancement.flow form:not(:last-of-type) {
+  margin-block-end: 0.5em;
+  border-block-end: 2px groove var(--color-border-light-1);
+  padding-block-end: 1em;
+}
+.dnd5e.advancement.flow input.error {
+  outline: 2px solid red;
+}
+.dnd5e.advancement.flow nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: 1em;
+}
+.dnd5e.advancement.flow nav button {
+  max-width: 50%;
+}
 .dnd5e.sheet.item {
   min-height: 400px;
   max-height: 95%;

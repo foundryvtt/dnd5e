@@ -1,4 +1,6 @@
-import { AdvancementConfig } from "./advancementConfig.js";
+import { AdvancementConfig } from "./advancement-config.js";
+import { AdvancementFlow } from "./advancement-flow.js";
+
 
 /**
  * Abstract base class which various advancement types can subclass.
@@ -14,6 +16,12 @@ export class Advancement {
      * @type {Item5e}
      */
     this.parent = parent;
+
+    /**
+     * Actor to which this advancement's item belongs, if the item is embedded.
+     * @type {Actor5e|null}
+     */
+    this.actor = parent.parent ?? null;
 
     /**
      * Configuration data for this advancement.
@@ -111,6 +119,13 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
+   * Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
+   */
+  static flowApp = AdvancementFlow;
+
+  /* -------------------------------------------- */
+
+  /**
    * Can this advancement affect more than one level. If this is set to true, the level selection control
    * in the configuration window is hidden and the advancement should provide its own implementation of
    * `Advancement#levels` and potentially its own level configuration interface.
@@ -123,6 +138,7 @@ export class Advancement {
   /**
    * Create an array of levels between 1 and the maximum allowed level.
    * @type {number[]}
+   * @protected
    */
   static get allLevels() {
     return Array.from({length: CONFIG.DND5E.maxLevel}, (v, i) => i + 1);
@@ -235,12 +251,66 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
+   * Update this advancement's data on the item without performing a database commit.
+   * @param {object} updates  Updates to apply to this advancement, using the same format as `Document#update`.
+   * @returns {Advancement}   This advancement after updates have been applied.
+   */
+  updateSource(updates) {
+    const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
+    const idx = advancement.findIndex(a => a._id === this.id);
+    if ( idx < 0 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
+
+    foundry.utils.mergeObject(this.data, updates);
+    foundry.utils.mergeObject(advancement[idx], updates);
+    this.parent.data.update({"data.advancement": advancement});
+
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Can an advancement of this type be added to the provided item.
    * @param {Item5e} item  Item to check against.
    * @returns {boolean}    Can this be added?
    */
   static availableForItem(item) {
     return true;
+  }
+
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Add any properties that should be changed on the actor to an update object.
+   * @param {object} config
+   * @param {number} config.level             Level for which to gather updates.
+   * @param {object} [config.updates]         Updates to this advancement's `value`. If this is provided, only the
+   *                                          difference between this object and the existing value should be applied.
+   * @param {boolean} [config.reverse=false]  Whether the reverse changes should be produced.
+   * @returns {object}                        The actor updates object.
+   */
+  propertyUpdates({ level, updates, reverse=false }) {
+    return {};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get a list UUIDs for new items that should be added to the actor.
+   * @param {object} config
+   * @param {number} config.level             Level for which to add items.
+   * @param {object} [config.updates]         Updates to this advancement's `value`. If this is provided, only the
+   *                                          difference between this object and the existing value should be applied.
+   * @param {boolean} [config.reverse=false]  Whether the reverse changes should be produced.
+   * @returns {{
+   *   add: string[],
+   *   remove: string[]
+   * }}  UUIDs of items to add to the actor and IDs of items to remove.
+   */
+  itemUpdates({ level, updates, reverse=false }) {
+    return { add: [], remove: [] };
   }
 
 }

@@ -70,6 +70,16 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Does this item support advancement and have advancements defined?
+   * @type {boolean}
+   */
+  get hasAdvancement() {
+    return !!this.data.data.advancement?.length;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
    */
@@ -1623,10 +1633,24 @@ export default class Item5e extends Item {
 
     // Create class identifier based on name
     if ( (this.type === "class") && !this.data.data.identifier ) {
-      return this.data.update({ "data.identifier": data.name.slugify({strict: true}) });
+      await this.data.update({ "data.identifier": data.name.slugify({strict: true}) });
     }
 
-    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
+    if ( !this.isEmbedded ) return;
+
+    // Prepare data for advancement
+    if ( this.type === "class" ) {
+      const classLevel = data.data.levels ?? 1;
+      options.levelChangeData = {
+        class: { initial: 0, final: classLevel },
+        character: {
+          initial: this.parent.data.data.details.level,
+          final: this.parent.data.data.details.level + classLevel
+        }
+      };
+    }
+
+    if ( this.parent.type === "vehicle" ) return;
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
     let updates;
@@ -1644,7 +1668,7 @@ export default class Item5e extends Item {
         updates = this._onCreateOwnedWeapon(data, actorData, isNPC);
         break;
     }
-    if (updates) return this.data.update(updates);
+    if ( updates ) return this.data.update(updates);
   }
 
   /* -------------------------------------------- */
@@ -1652,25 +1676,25 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
+    if ( (userId !== game.user.id) || !this.parent ) return;
 
-    // The below options are only needed for character classes
-    if ( userId !== game.user.id ) return;
-    const isCharacterClass = this.parent && (this.parent.type !== "vehicle") && (this.type === "class");
-    if ( !isCharacterClass ) return;
+    // Assign a new original class
+    if ( (this.parent.type === "character") && (this.type === "class") ) {
+      const pc = this.parent.items.get(this.parent.data.data.details.origialClass);
+      if ( !pc ) this.parent._assignPrimaryClass();
+    }
 
-    // Assign a new primary class
-    const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
-    if ( !pc ) this.parent._assignPrimaryClass();
-
-    // Prompt to add new class features
-    if (options.addFeatures === false) return;
-    this.parent.getClassFeatures({
-      classIdentifier: this.identifier,
-      subclassName: this.data.data.subclass,
-      level: this.data.data.levels
-    }).then(features => {
-      return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
-    });
+    // Trigger advancement
+    if ( "addFeatures" in options ) {
+      console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
+    }
+    if ( (options.addFeatures === false) || options.skipAdvancement ) return;
+    if ( options.levelChangeData ) {
+      options.levelChangeData.item = this;
+      this.parent.advancement.levelChanged(options.levelChangeData);
+    } else if ( this.hasAdvancement ) {
+      this.parent.advancement.itemAdded(this);
+    }
   }
 
   /* -------------------------------------------- */
@@ -1678,21 +1702,37 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
+    if ( (this.type !== "class") || !changed.data || !("levels" in changed.data) ) return;
+
+    // Check to make sure the updated class level isn't below zero
+    if ( changed.data.levels <= 0 ) {
+      ui.notifications.warn(game.i18n.localize("DND5E.MaxClassLevelMinimumWarn"));
+      changed.data.levels = 1;
+    }
 
     // Check to make sure the updated class level doesn't exceed level cap
-    if ( (this.type === "class") && changed.data?.levels ) {
-      if ( changed.data.levels > CONFIG.DND5E.maxLevel ) {
-        ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
-        changed.data.levels = CONFIG.DND5E.maxLevel;
-      }
-      if ( !this.isEmbedded || (this.parent.type !== "character") ) return;
-      const newCharacterLevel = this.actor.data.data.details.level + (changed.data.levels - this.data.data.levels);
-      if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
-        ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
-          {max: CONFIG.DND5E.maxLevel}));
-        changed.data.levels = changed.data.levels - (newCharacterLevel - CONFIG.DND5E.maxLevel);
-      }
+    if ( changed.data.levels > CONFIG.DND5E.maxLevel ) {
+      ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", {max: CONFIG.DND5E.maxLevel}));
+      changed.data.levels = CONFIG.DND5E.maxLevel;
     }
+    if ( !this.isEmbedded || (this.parent.type !== "character") ) return;
+
+    // Check to ensure the updated character doesn't exceed level cap
+    const newCharacterLevel = this.actor.data.data.details.level + (changed.data.levels - this.data.data.levels);
+    if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
+      ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
+        {max: CONFIG.DND5E.maxLevel}));
+      changed.data.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
+    }
+
+    // Prepare data for advancement
+    options.levelChangeData = {
+      class: { initial: this.data.data.levels, final: changed.data.levels },
+      character: {
+        initial: this.parent.data.data.details.level,
+        final: this.parent.data.data.details.level - this.data.data.levels + changed.data.levels
+      }
+    };
   }
 
   /* -------------------------------------------- */
@@ -1700,22 +1740,33 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
+    if ( (userId !== game.user.id) ) return;
 
-    // The below options are only needed for character classes
-    if ( userId !== game.user.id ) return;
-    const isCharacterClass = this.parent && (this.parent.type !== "vehicle") && (this.type === "class");
-    if ( !isCharacterClass ) return;
+    // Trigger advancement
+    if ( "addFeatures" in options ) {
+      console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
+    }
+    if ( options.levelChangeData && !options.skipAdvancement && (options.addFeatures !== false) ) {
+      options.levelChangeData.item = this;
+      this.parent.advancement.levelChanged(options.levelChangeData);
+    }
+  }
 
-    // Prompt to add new class features
-    const addFeatures = changed.name || (changed.data && ["subclass", "levels"].some(k => k in changed.data));
-    if ( !addFeatures || (options.addFeatures === false) ) return;
-    this.parent.getClassFeatures({
-      className: changed.name || this.name,
-      subclassName: changed.data?.subclass || this.data.data.subclass,
-      level: changed.data?.levels || this.data.data.levels
-    }).then(features => {
-      return this.parent.addEmbeddedItems(features, options.promptAddFeatures);
-    });
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _preDelete(options, userId) {
+    await super._preDelete(options, userId);
+    if ( (this.type !== "class") || !this.isEmbedded ) return;
+
+    // Prepare data for advancement
+    options.levelChangeData = {
+      class: { initial: this.data.data.levels, final: 0 },
+      character: {
+        initial: this.parent.data.data.details.level,
+        final: this.parent.data.data.details.level - this.data.data.levels
+      }
+    };
   }
 
   /* -------------------------------------------- */
@@ -1723,11 +1774,26 @@ export default class Item5e extends Item {
   /** @inheritdoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
+    if ( (userId !== game.user.id) || !this.parent ) return;
 
-    // Assign a new primary class
-    if ( this.parent && (this.type === "class") && (userId === game.user.id) ) {
-      if ( this.id !== this.parent.data.data.details.originalClass ) return;
+    // Assign a new original class
+    if ( (this.type === "class") && (this.id === this.parent.data.data.details.originalClass) ) {
       this.parent._assignPrimaryClass();
+    }
+
+    // Trigger advancement
+    if ( "addFeatures" in options ) {
+      console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
+    }
+    // TODO: When an item is deleted with flags.dnd5e.advancementOrigin set, inform that advancement so that
+    // it can be updated to reflect the item's removal (perhaps this should be entirely handled here rather
+    // than in AdvancementPrompt)
+    if ( options.skipAdvancement || (options.addFeatures === false) ) return;
+    if ( options.levelChangeData ) {
+      options.levelChangeData.item = this;
+      this.parent.advancement.levelChanged(options.levelChangeData);
+    } else if ( this.hasAdvancement ) {
+      this.parent.advancement.itemRemoved(this);
     }
   }
 
