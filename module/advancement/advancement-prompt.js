@@ -3,15 +3,6 @@ import { LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep } from "./adv
 
 
 /**
- * Additional rendering state to ensure auto-stepping doesn't result in applying the same step twice.
- * @enum {number}
- */
-const RENDERING_STATES = {
-  ADVANCING: 8
-};
-
-
-/**
  * Application for controlling the advancement workflow and displaying the interface.
  *
  * @property {Actor5e} actor                 Actor on which this advancement is being performed.
@@ -48,6 +39,13 @@ export class AdvancementPrompt extends Application {
      * @private
      */
     this._stepIndex = steps.length ? 0 : null;
+
+    /**
+     * Is the prompt currently advancing through un-rendered steps?
+     * @type {boolean}
+     * @private
+     */
+    this._advancing = false;
   }
 
   /* -------------------------------------------- */
@@ -217,9 +215,8 @@ export class AdvancementPrompt extends Application {
   /** @inheritdoc */
   render(...args) {
     if ( !this.step?.options.shouldRender ) {
-      if ( this._state === RENDERING_STATES.ADVANCING ) return this;
-      this._priorState = this._state;
-      this._state = RENDERING_STATES.ADVANCING;
+      if ( this._advancing ) return this;
+      this._advancing = true;
       this.advanceStep();
       return this;
     }
@@ -312,7 +309,7 @@ export class AdvancementPrompt extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
-      if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
+      this._advancing = false;
       return;
     }
 
@@ -321,7 +318,7 @@ export class AdvancementPrompt extends Application {
 
     // Increase step number and re-render
     this._stepIndex += 1;
-    if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
+    this._advancing = false;
     this.render(true);
   }
 
@@ -342,13 +339,13 @@ export class AdvancementPrompt extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
-      if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
+      this._advancing = false;
       return;
     }
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
-    if ( this._state === RENDERING_STATES.ADVANCING ) this._state = this._priorState;
+    this._advancing = false;
     this.render(true);
   }
 
