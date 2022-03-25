@@ -50,7 +50,7 @@ export class AdvancementStep extends Application {
    * @type {Item5e|null}
    */
   get item() {
-    return this.actor.items.get(this.config.item) ?? null;
+    return this.actor.items.get(this.config.item.id) ?? this.config.item ?? null;
   }
 
   /* -------------------------------------------- */

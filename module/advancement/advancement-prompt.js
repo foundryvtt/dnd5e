@@ -126,7 +126,7 @@ export class AdvancementPrompt extends Application {
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
       this._addStep(new LevelIncreasedStep(this.clone, {
-        item: item.id,
+        item,
         level: character.initial + offset,
         classLevel: cls.initial + offset
       }));
@@ -169,7 +169,7 @@ export class AdvancementPrompt extends Application {
    * @param {number} level  Level at which the changes should be made.
    */
   modifyChoices(item, level) {
-    this._addStep(new ModifyChoicesStep(this.clone, { item: item.id, level }));
+    this._addStep(new ModifyChoicesStep(this.clone, { item, level }));
   }
 
   /* -------------------------------------------- */
