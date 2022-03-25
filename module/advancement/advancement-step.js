@@ -58,6 +58,16 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Should this step be rendered or applied automatically?
+   * @type {boolean}
+   */
+  get shouldRender() {
+    return this.options.shouldRender;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Advancement flows in this step in the order they should be applied.
    * @type {AdvancementFlow[]}
    */
@@ -296,6 +306,12 @@ export class LevelIncreasedStep extends AdvancementStep {
   get title() {
     if ( this.config.classLevel > 1 ) return game.i18n.localize("DND5E.AdvancementPromptLevelIncreasedTitle");
     return game.i18n.localize("DND5E.AdvancementPromptLevelNewClassTitle");
+  }
+
+  /* -------------------------------------------- */
+
+  get shouldRender() {
+    return this.flows.length > 0;
   }
 
   /* -------------------------------------------- */

@@ -214,7 +214,7 @@ export class AdvancementPrompt extends Application {
 
   /** @inheritdoc */
   render(...args) {
-    if ( !this.step?.options.shouldRender ) {
+    if ( !this.step?.shouldRender ) {
       if ( this._advancing ) return this;
       this._advancing = true;
       this.advanceStep();
