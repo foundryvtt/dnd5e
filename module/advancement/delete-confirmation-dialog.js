@@ -1,5 +1,10 @@
+/**
+ * Dialog to confirm the deletion of an embedded item with advancement.
+ * @extends {Dialog}
+ */
 export class DeleteConfirmationDialog extends Dialog {
 
+  /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/delete-confirmation-dialog.html",
@@ -9,6 +14,12 @@ export class DeleteConfirmationDialog extends Dialog {
 
   /* -------------------------------------------- */
 
+  /**
+   * A helper constructor function which displays the delete confirmation dialog.
+   * @param {Item5e} item                                 Item to be deleted.
+   * @param {DocumentModificationContext} context         Context of the delete operation.
+   * @returns {Promise<DocumentModificationContext|null>  Resolves with updated context or rejects with null.
+   */
   static createDialog(item, context={}) {
     return new Promise((resolve, reject) => {
       const dialog = new this({
