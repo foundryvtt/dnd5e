@@ -318,9 +318,18 @@ export class LevelIncreasedStep extends AdvancementStep {
 
   /** @inheritdoc */
   get flows() {
-    this._flows ??= this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
-      return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
-    });
+    this._flows ??= [
+      ...this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
+        return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
+      }),
+      ...this.actor.items.contents.flatMap(i => {
+        if ( i.type === "class" ) return [];
+        // TODO: Special case here for subclasses here when they are added (using class level)
+        return this.advancementsForLevel(i, this.config.level).map(a => {
+          return new a.constructor.flowApp(i, a.id, this.config.level);
+        });
+      })
+    ];
     return this._flows;
   }
 
@@ -328,14 +337,20 @@ export class LevelIncreasedStep extends AdvancementStep {
 
   /** @inheritdoc */
   getData() {
-    return foundry.utils.mergeObject(super.getData(), {
-      sections: [{
-        level: this.config.level,
-        header: this.item.name,
-        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.classLevel }),
-        advancements: this.flows.map(f => f.id)
-      }]
+    const items = this.flows.reduce((obj, flow) => {
+      obj[flow.item.id] ??= [];
+      obj[flow.item.id].push(flow);
+      return obj;
+    }, {});
+    const sections = Object.entries(items).map(([item, flows]) => {
+      return {
+        level: flows[0].level,
+        header: flows[0].item.name,
+        advancements: flows.map(f => f.id)
+      }
     });
+    sections[0].subheader = game.i18n.format("DND5E.AdvancementLevelHeader", { number: this.config.classLevel });
+    return foundry.utils.mergeObject(super.getData(), { sections });
   }
 
 }
@@ -371,9 +386,18 @@ export class LevelDecreasedStep extends AdvancementStep {
 
   /** @inheritdoc */
   get flows() {
-    this._flows ??= this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
-      return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
-    });
+    this._flows ??= [
+      ...this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
+        return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
+      }),
+      ...this.actor.items.contents.flatMap(i => {
+        if ( i.type === "class" ) return [];
+        // TODO: Special case here for subclasses here when they are added (using class level)
+        return this.advancementsForLevel(i, this.config.level).map(a => {
+          return new a.constructor.flowApp(i, a.id, this.config.level);
+        });
+      })
+    ];
     return this._flows;
   }
 
@@ -437,7 +461,7 @@ export class ItemAddedStep extends AdvancementStep {
       };
     });
     sections[0].header = this.item.name;
-    return foundry.utils.mergeObject(super.getData(), { sections });;
+    return foundry.utils.mergeObject(super.getData(), { sections });
   }
 
 }
