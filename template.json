@@ -503,7 +503,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -587,6 +587,10 @@
       }
     },
     "htmlFields": ["description.value", "description.chat", "description.unidentified"],
+    "background": {
+      "templates": ["itemDescription"],
+      "advancement": []
+    },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {

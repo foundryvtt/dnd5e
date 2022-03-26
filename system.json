@@ -49,6 +49,14 @@
       "type": "Item"
     },
     {
+      "name": "backgrounds",
+      "label": "Backgrounds (SRD)",
+      "system": "dnd5e",
+      "path": "./packs/backgrounds.db",
+      "entity": "Item",
+      "type": "Item"
+    },
+    {
       "name": "classes",
       "label": "Classes (SRD)",
       "system": "dnd5e",
@@ -87,6 +95,14 @@
       "path": "./packs/rules.db",
       "entity": "JournalEntry",
       "type": "JournalEntry"
+    },
+    {
+      "name": "background-characteristics",
+      "label": "Background Characteristics (SRD)",
+      "system": "dnd5e",
+      "path": "./packs/background-characteristics.db",
+      "entity": "RollTable",
+      "type": "RollTable"
     }
   ],
   "languages": [
