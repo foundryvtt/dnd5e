@@ -111,6 +111,7 @@ export class AdvancementConfig extends FormApplication {
   /** @inheritdoc */
   _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData).data;
+    if ( this.options.dynamicInterface ) foundry.utils.mergeObject(updates, this.data);
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
     return this._updateAdvancement(updates);

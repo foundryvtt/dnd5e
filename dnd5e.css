@@ -1404,11 +1404,11 @@
 .dnd5e.advancement.flow input.error {
   outline: 2px solid red;
 }
-.dnd5e.advancement.flow section[data-type="ScaleValue"] p {
+.dnd5e.advancement.flow form[data-type="ScaleValue"] p {
   margin-block-end: 0;
   font-size: var(--font-size-18);
 }
-.dnd5e.advancement.flow section[data-type="ScaleValue"] span.none {
+.dnd5e.advancement.flow form[data-type="ScaleValue"] span.none {
   font-style: italic;
 }
 .dnd5e.advancement.flow nav {
