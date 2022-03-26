@@ -352,6 +352,7 @@ export class LevelDecreasedStep extends AdvancementStep {
 
     // If class item has already been deleted on actor, add it back temporarily
     if ( !this.actor.items.get(this.config.item.id) ) {
+      this._tempClass = true;
       this.constructor._createEmbeddedItems(this.actor, [this.config.item.toObject()], { skipAdvancement: true });
     }
   }
@@ -382,7 +383,9 @@ export class LevelDecreasedStep extends AdvancementStep {
    * Remove the class item from the actor.
    */
   cleanup() {
-    this.constructor._deleteEmbeddedItems(this.actor, [this.config.item.id], { skipAdvancement: true });
+    if ( this._tempClass ) {
+      this.constructor._deleteEmbeddedItems(this.actor, [this.config.item.id], { skipAdvancement: true });
+    }
   }
 
 }

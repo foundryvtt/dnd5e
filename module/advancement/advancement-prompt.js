@@ -128,7 +128,10 @@ export class AdvancementPrompt extends Application {
     let levelDelta = character.final - character.initial;
 
     // Level didn't change
-    if ( levelDelta === 0 ) return;
+    if ( levelDelta === 0 ) {
+      if ( this.steps.length === 0 ) this.actor._advancement = null;
+      return;
+    };
 
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
