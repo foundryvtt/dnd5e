@@ -1680,7 +1680,7 @@ export default class Item5e extends Item {
 
     // Assign a new original class
     if ( (this.parent.type === "character") && (this.type === "class") ) {
-      const pc = this.parent.items.get(this.parent.data.data.details.origialClass);
+      const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
       if ( !pc ) await this.parent._assignPrimaryClass();
     }
 
