@@ -46,11 +46,20 @@
 
     h1 { flex-grow: 1; }
     h2 {
+      flex-grow: 1;
       text-align: right;
       line-height: 1.8em;
       border-bottom: 2px solid var(--color-underline-header);
     }
     form { flex-basis: 100%; }
+    form + form {
+      margin-block-start: 1em;
+      border-block-start: 2px groove var(--color-border-light-1);
+      padding-block-start: 0.5em;
+    }
+    form + h2 {
+      margin-block-start: 0.5em;
+    }
   }
 
   h3 {
@@ -71,12 +80,6 @@
         font-size: 0.9rem;
       }
     }
-  }
-
-  form:not(:last-of-type) {
-    margin-block-end: 0.5em;
-    border-block-end: 2px groove var(--color-border-light-1);
-    padding-block-end: 1em;
   }
 
   form[data-type="HitPoints"] {

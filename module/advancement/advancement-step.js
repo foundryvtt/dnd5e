@@ -395,14 +395,97 @@ export class LevelDecreasedStep extends AdvancementStep {
  * Handles adding a new item with advancement at the current character level.
  * @extends {AdvancementStep}
  */
-export class ItemAddedStep extends AdvancementStep { }
+export class ItemAddedStep extends AdvancementStep {
+
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      title: game.i18n.localize("DND5E.AdvancementPromptItemAddedTitle")
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  get shouldRender() {
+    return this.flows.length > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get flows() {
+    this._flows ??= Array.from({length: this.actor.data.data.details.level}, (v, i) => i + 1).flatMap(l => {
+      return this.advancementsForLevel(this.item, l).map(a => new a.constructor.flowApp(this.item, a.id, l));
+    });
+    return this._flows;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getData() {
+    const levels = this.flows.reduce((obj, flow) => {
+      obj[flow.level] ??= [];
+      obj[flow.level].push(flow);
+      return obj;
+    }, {});
+    const sections = Object.entries(levels).map(([level, flows]) => {
+      return {
+        level: Number(level),
+        subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { number: level }),
+        advancements: flows.map(f => f.id)
+      };
+    });
+    sections[0].header = this.item.name;
+    return foundry.utils.mergeObject(super.getData(), { sections });;
+  }
+
+}
 
 
 /**
  * Handles unapplying any advancement changes when a non-class item with advancement is removed.
  * @extends {AdvancementStep}
  */
-export class ItemRemovedStep extends AdvancementStep { }
+export class ItemRemovedStep extends AdvancementStep {
+
+  constructor(...args) {
+    super(...args);
+
+    // Add item back temporarily so advancements have access to the correct data
+    this.constructor._createEmbeddedItems(this.actor, [this.config.item.toObject()], { skipAdvancement: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      reverse: true,
+      shouldRender: false
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get flows() {
+    this._flows ??= Array.from({length: this.actor.data.data.details.level}, (v, i) => i + 1).flatMap(l => {
+      return this.advancementsForLevel(this.item, l).map(a => new a.constructor.flowApp(this.item, a.id, l));
+    });
+    return this._flows;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove the item from the actor before saving.
+   */
+  cleanup() {
+    this.constructor._deleteEmbeddedItems(this.actor, [this.config.item.id], { skipAdvancement: true });
+  }
+
+}
 
 
 /**
