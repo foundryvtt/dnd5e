@@ -438,7 +438,8 @@ export class ItemAddedStep extends AdvancementStep {
 
   /** @inheritdoc */
   get flows() {
-    this._flows ??= Array.from({length: this.actor.data.data.details.level}, (v, i) => i + 1).flatMap(l => {
+    const level = this.actor.data.data.details?.level ?? CONFIG.DND5E.maxLevel;
+    this._flows ??= Array.from({length: level}, (v, i) => i + 1).flatMap(l => {
       return this.advancementsForLevel(this.item, l).map(a => new a.constructor.flowApp(this.item, a.id, l));
     });
     return this._flows;
@@ -494,7 +495,8 @@ export class ItemRemovedStep extends AdvancementStep {
 
   /** @inheritdoc */
   get flows() {
-    this._flows ??= Array.from({length: this.actor.data.data.details.level}, (v, i) => i + 1).flatMap(l => {
+    const level = this.actor.data.data.details?.level ?? CONFIG.DND5E.maxLevel;
+    this._flows ??= Array.from({length: level}, (v, i) => i + 1).flatMap(l => {
       return this.advancementsForLevel(this.item, l).map(a => new a.constructor.flowApp(this.item, a.id, l));
     });
     return this._flows;
