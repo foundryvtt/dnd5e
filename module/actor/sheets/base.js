@@ -350,15 +350,35 @@ export default class ActorSheet5e extends ActorSheet {
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
-      if ( !trait ) continue;
-      let values = [];
-      if ( trait.value ) {
-        values = trait.value instanceof Array ? trait.value : [trait.value];
+      let values = (trait.value ?? []) instanceof Array ? trait.value : [trait.value];
+
+      // Split physical damage types from others if bypasses is set
+      const physical = [];
+      if ( trait.bypasses?.length ) {
+        values = values.filter(t => {
+          if ( Object.keys(CONFIG.DND5E.physicalDamageTypes).includes(t) ) {
+            physical.push(t);
+            return false;
+          }
+          return true;
+        });
       }
+
+      // Fill out trait values
       trait.selected = values.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
       }, {});
+
+      // Display bypassed damage types
+      if ( physical.length ) {
+        const damageTypesFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+        const bypassFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
+        trait.selected.physical = game.i18n.format("DND5E.DamagePhysicalBypasses", {
+          damageTypes: damageTypesFormatter.format(physical.map(t => choices[t])),
+          bypassTypes: bypassFormatter.format(trait.bypasses.map(t => CONFIG.DND5E.physicalWeaponProperties[t]))
+        });
+      }
 
       // Add custom entry
       if ( trait.custom ) {
@@ -366,6 +386,8 @@ export default class ActorSheet5e extends ActorSheet {
       }
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
+    // If trait has a "bypasses" value that is not empty, split off physical damage types and handle them separately
+    // "Bludgeoning, Piercing, and Slashing from weapons that are not Magical or Silvered"
 
     // Populate and localize proficiencies
     for ( const t of ["armor", "weapon", "tool"] ) {
