@@ -15,6 +15,66 @@
     "subclass": "",
     "hitDice": "d8",
     "hitDiceUsed": 0,
+    "advancement": [
+      {
+        "_id": "x1zumbrnbhqlrrs6",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7",
+            "Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB"
+          ]
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "3f8dslbuft75khej",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ",
+            "Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia"
+          ]
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "6hhfay73h7bk90kx",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE"
+          ]
+        },
+        "value": {},
+        "level": 5,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "isb9tz3m2pku3v5k",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU"
+          ]
+        },
+        "value": {},
+        "level": 10,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      }
+    ],
     "saves": [
       "wis",
       "cha"
