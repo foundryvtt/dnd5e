@@ -350,6 +350,7 @@ export default class ActorSheet5e extends ActorSheet {
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
+      if ( !trait ) continue;
       let values = (trait.value ?? []) instanceof Array ? trait.value : [trait.value];
 
       // Split physical damage types from others if bypasses is set
@@ -386,8 +387,6 @@ export default class ActorSheet5e extends ActorSheet {
       }
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
-    // If trait has a "bypasses" value that is not empty, split off physical damage types and handle them separately
-    // "Bludgeoning, Piercing, and Slashing from weapons that are not Magical or Silvered"
 
     // Populate and localize proficiencies
     for ( const t of ["armor", "weapon", "tool"] ) {
