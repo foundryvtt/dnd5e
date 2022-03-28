@@ -123,9 +123,13 @@ export class AdvancementPrompt extends Application {
   /**
    * Add a step to this advancement process when a class is added or level is changed.
    * @param {LevelChangeData} data  Information on the class and level changes.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  levelChanged({ item, character, class: cls }) {
+  levelChanged({ item, character, class: cls }, options={}) {
     let levelDelta = character.final - character.initial;
+    const render = options.render ?? true;
+    options.render = false;
 
     // Level didn't change
     if ( levelDelta === 0 ) {
@@ -139,7 +143,7 @@ export class AdvancementPrompt extends Application {
         item,
         level: character.initial + offset,
         classLevel: cls.initial + offset
-      }));
+      }), options);
     }
 
     // Level decreased
@@ -148,8 +152,10 @@ export class AdvancementPrompt extends Application {
         item,
         level: character.initial + offset,
         classLevel: cls.initial + offset
-      }));
+      }), options);
     }
+
+    if ( render ) this.render(true);
   }
 
   /* -------------------------------------------- */
@@ -157,8 +163,10 @@ export class AdvancementPrompt extends Application {
   /**
    * Add a step to this advancement process when a non-class item is added.
    * @param {Item5e} item    Item that was added.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  itemAdded(item) {
+  itemAdded(item, options) {
     this.actor._advancement = null;
     console.warn("Advancements on non-class items not currently supported");
   }
@@ -168,8 +176,10 @@ export class AdvancementPrompt extends Application {
   /**
    * Add a step to this advancement process when a non-class item is removed.
    * @param {Item5e} item    Item that was removed.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  itemRemoved(item) {
+  itemRemoved(item, options) {
     this.actor._advancement = null;
     console.warn("Advancements on non-class items not currently supported");
   }
@@ -180,22 +190,26 @@ export class AdvancementPrompt extends Application {
    * Modify the choices made on an item at the specified level.
    * @param {Item5e} item   Item to modify.
    * @param {number} level  Level at which the changes should be made.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  modifyChoices(item, level) {
-    this._addStep(new ModifyChoicesStep(this.clone, { item, level }));
+  modifyChoices(item, level, options) {
+    this._addStep(new ModifyChoicesStep(this.clone, { item, level }), options);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Add an advancement step and re-render the app.
-   * @param {AdvancementStep} step  Step to add.
+   * @param {AdvancementStep} step           Step to add.
+   * @param {object} [options={}]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    * @private
    */
-  _addStep(step) {
+  _addStep(step, { render=true }={}) {
     const newIndex = this.steps.push(step) - 1;
     if ( this._stepIndex === null ) this._stepIndex = newIndex;
-    this.render(true);
+    if ( render ) this.render(true);
   }
 
   /* -------------------------------------------- */
