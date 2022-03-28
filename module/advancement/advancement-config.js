@@ -114,22 +114,7 @@ export class AdvancementConfig extends FormApplication {
     if ( this.options.dynamicInterface ) foundry.utils.mergeObject(updates, this.data);
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
-    return this._updateAdvancement(updates);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * A helper to update the advancement and re-render this application with the adjusted advancement displayed.
-   * @param {object} advancementUpdate  The update to the advancement data
-   * @returns {Promise<Item5e>}    The promise for the updated Item which resolves after the application re-renders
-   * @private
-   */
-  async _updateAdvancement(advancementUpdate) {
-    const update = await this.advancement.update(advancementUpdate);
-
-    this.render();
-    return update;
+    return this.advancement.update(updates);
   }
 
   /* -------------------------------------------- */
