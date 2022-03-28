@@ -140,11 +140,11 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Class associated with this subclass. Always returns undefined on non-subclass or non-embedded items.
-   * @type {Item5e}
+   * Class associated with this subclass. Always returns null on non-subclass or non-embedded items.
+   * @type {Item5e|null}
    */
   get class() {
-    if ( !this.isEmbedded || (this.type !== "subclass") ) return;
+    if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
     this._linkedItem ??= this.parent.items.find(i => (i.type === "class")
       && (i.data.data.identifier === this.data.data.classIdentifier));
     return this._linkedItem;
@@ -153,11 +153,11 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Subclass associated with this class. Always returns undefined on non-class or non-embedded items.
-   * @type {Item5e}
+   * Subclass associated with this class. Always returns null on non-class or non-embedded items.
+   * @type {Item5e|null}
    */
   get subclass() {
-    if ( !this.isEmbedded || (this.type !== "class") ) return;
+    if ( !this.isEmbedded || (this.type !== "class") ) return null;
     this._linkedItem ??= this.parent.items.find(i => (i.type === "subclass")
       && (i.data.data.classIdentifier === this.data.data.identifier));
     return this._linkedItem;

@@ -135,7 +135,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( subclass ) arr.push(subclass);
       return arr;
     }, []);
-    feats.push(...subclasses);
+    for ( const subclass of subclasses ) {
+      feats.push(subclass);
+      this.actor._preparationWarnings.push(game.i18n.format("DND5E.SubclassMismatchWarn", {
+        name: subclass.name, class: subclass.data.classIdentifier }));
+    }
 
     // Organize Features
     const features = {
