@@ -79,6 +79,29 @@
     padding-block-end: 1em;
   }
 
+  form[data-type="HitPoints"] {
+    div {
+      font-size: var(--font-size-14);
+    }
+    .rolls {
+      display: grid;
+      grid-template-columns: 50% 1fr 1fr;
+      align-items: center;
+      gap: 2px;
+
+      .averageLabel {
+        span, input { vertical-align: middle; }
+      }
+      .rollResult {
+        text-align: center;
+      }
+      .rollButton {
+        height: calc(var(--form-field-height) + 5px);
+        line-height: 1.5em;
+      }
+    }
+  }
+
   input.error {
     outline: 2px solid red;
   }
