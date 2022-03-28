@@ -1769,7 +1769,7 @@ export default class Actor5e extends Actor {
 
     // Keep specific items from the original data
     d.items = d.items.concat(o.items.filter(i => {
-      if ( i.type === "class" ) return keepClass;
+      if ( ["class", "subclass"].includes(i.type) ) return keepClass;
       else if ( i.type === "feat" ) return keepFeats;
       else if ( i.type === "spell" ) return keepSpells;
       else return keepItems;

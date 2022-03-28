@@ -104,8 +104,11 @@ export default class ItemSheet5e extends ItemSheet {
     const actor = item.parent;
     const originalClass = item.isOriginalClass;
     let maxLevel = 0;
-    if ( actor && (item.type === "class") ) maxLevel = item.data.data.levels;
-    else if ( actor ) maxLevel = actor.data.data.details.level;
+    if ( actor ) {
+      if ( item.type === "class" ) maxLevel = item.data.data.levels;
+      else if ( (item.type === "subclass") && item.class ) maxLevel = item.class.data.data.levels;
+      else maxLevel = actor.data.data.details.level;
+    }
 
     const data = {};
     for ( const [id, advancement] of Object.entries(item.advancement) ) {
