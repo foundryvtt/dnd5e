@@ -117,7 +117,7 @@ export class AdvancementStep extends Application {
    */
   async applyChanges() {
     // Prepare updates to apply
-    const updates = this.prepareUpdates();
+    const updates = this.prepareUpdates({ reverse: this.options.reverse });
 
     // Apply changes to actor clone
     const itemsAdded = await this.constructor.applyUpdates(this.actor, updates);
@@ -135,7 +135,7 @@ export class AdvancementStep extends Application {
    */
   async undoChanges() {
     // Prepare updates that need to be removed
-    const updates = this.prepareUpdates({ reverse: true });
+    const updates = this.prepareUpdates({ reverse: !this.options.reverse });
 
     // Revert actor clone to earlier state
     return this.constructor.applyUpdates(this.actor, updates);
@@ -157,7 +157,6 @@ export class AdvancementStep extends Application {
    * @returns {object}                        Updates that will be applied from all the flows.
    */
   prepareUpdates({ reverse=false }={}) {
-    if ( this.options.reverse ) reverse = !reverse;
     return this.flows.reduce((updates, flow) => {
       // Prepare update data from the form
       flow.initialUpdate = reverse ? {} : flow.prepareUpdate(flow.form ? flow._getSubmitData() : {});
