@@ -389,7 +389,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( !match ) {
         data.data.identifier = this.object.data._source.data.identifier;
         this.form.querySelector("input[name='data.identifier']").value = data.data.identifier;
-        return ui.notifications.error(game.i18n.localize("DND5E.ClassIdentifierError"));
+        return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
       }
     }
 

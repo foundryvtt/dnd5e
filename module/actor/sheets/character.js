@@ -127,16 +127,24 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
 
+    // Sort classes and interleave matching subclasses, put unmatched subclasses into features so they don't disappear
+    classes.sort((a, b) => b.data.levels - a.data.levels);
+    classes = classes.reduce((arr, cls) => {
+      arr.push(cls);
+      const subclass = subclasses.findSplice(s => s.data.classIdentifier === cls.data.identifier);
+      if ( subclass ) arr.push(subclass);
+      return arr;
+    }, []);
+    feats.push(...subclasses);
+
     // Organize Features
     const features = {
       background: {
         label: "DND5E.ItemTypeBackground", items: backgrounds,
         hasActions: false, dataset: {type: "background"} },
       classes: {
-        label: "DND5E.ItemTypeClassPl", items: classes.sort((a, b) => b.data.levels - a.data.levels),
+        label: "DND5E.ItemTypeClassPl", items: classes,
         hasActions: false, dataset: {type: "class"}, isClass: true },
-      subclasses: { label: "DND5E.ItemTypeSubclassPl", items: subclasses,
-        hasActions: false, dataset: {type: "subclass"} },
       active: {
         label: "DND5E.FeatureActive", items: [],
         hasActions: true, dataset: {type: "feat", "activation.type": "action"} },
@@ -145,7 +153,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( let f of feats ) {
-      if ( f.data.activation.type ) features.active.items.push(f);
+      if ( f.data.activation?.type ) features.active.items.push(f);
       else features.passive.items.push(f);
     }
 
