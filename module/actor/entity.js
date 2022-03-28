@@ -173,7 +173,7 @@ export default class Actor5e extends Actor {
     // Prepare skills
     this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
 
-    // Reset class store and associate classes with their subclasses
+    // Reset class store to ensure it is updated with any changes
     this._classes = undefined;
 
     // Determine Initiative Modifier
@@ -580,17 +580,16 @@ export default class Actor5e extends Actor {
     let caster = null;
 
     // Tabulate the total spell-casting progression
-    for ( let cls of Object.values(this._classes) ) {
-      const d = cls.data.data;
-      const sd = cls.subclass?.data.data;
-      let prog = d.spellcasting.progression;
-      if ( sd && sd.spellcasting.progression !== "none" ) prog = sd.spellcasting.progression;
+    for ( let cls of Object.values(this.classes) ) {
+      const classData = cls.data.data;
+      const subclassProg = cls.subclass?.data.data.spellcasting.progression;
+      const prog = ( subclassProg && (subclassProg !== "none") ) ? subclassProg : classData.spellcasting.progression;
       if ( prog === "none" ) continue;
-      const levels = d.levels;
+      const levels = classData.levels;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
-        caster = d;
+        caster = classData;
         progression.total++;
       }
       switch (prog) {

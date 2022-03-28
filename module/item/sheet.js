@@ -14,6 +14,8 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.object.data.type === "class" ) {
       this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
+    } else if ( this.object.data.type === "subclass" ) {
+      this.options.height = this.position.height = 540;
     }
   }
 

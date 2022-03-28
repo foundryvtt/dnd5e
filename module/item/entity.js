@@ -258,6 +258,9 @@ export default class Item5e extends Item {
     const C = CONFIG.DND5E;
     const labels = this.labels = {};
 
+    // Clear out linked item cache
+    this._linkedItem = undefined;
+
     // Advancement
     this.advancement = (itemData.data.advancement ?? []).reduce((obj, data) => {
       const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
