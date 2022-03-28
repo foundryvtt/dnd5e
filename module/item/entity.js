@@ -8,6 +8,13 @@ import Proficiency from "../actor/proficiency.js";
  */
 export default class Item5e extends Item {
 
+  /**
+   * Caches an item linked to this one, such as a subclass associated with a class.
+   * @type {Item5e}
+   * @private
+   */
+  _linkedItem;
+
   /* -------------------------------------------- */
   /*  Item Properties                             */
   /* -------------------------------------------- */
@@ -128,6 +135,32 @@ export default class Item5e extends Item {
   get isOriginalClass() {
     if ( this.type !== "class" || !this.isEmbedded ) return null;
     return this.id === this.parent.data.data.details.originalClass;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Class associated with this subclass. Always returns undefined on non-subclass or non-embedded items.
+   * @type {Item5e}
+   */
+  get class() {
+    if ( !this.isEmbedded || (this.type !== "subclass") ) return;
+    this._linkedItem ??= this.parent.items.find(i => (i.type === "class")
+      && (i.data.data.identifier === this.data.data.classIdentifier));
+    return this._linkedItem;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Subclass associated with this class. Always returns undefined on non-class or non-embedded items.
+   * @type {Item5e}
+   */
+  get subclass() {
+    if ( !this.isEmbedded || (this.type !== "class") ) return;
+    this._linkedItem ??= this.parent.items.find(i => (i.type === "subclass")
+      && (i.data.data.classIdentifier === this.data.data.identifier));
+    return this._linkedItem;
   }
 
   /* -------------------------------------------- */

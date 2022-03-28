@@ -26,7 +26,7 @@ export default class Actor5e extends Actor {
    * @type {object<string, Item5e>}
    * @private
    */
-  _classes = undefined;
+  _classes;
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -174,7 +174,7 @@ export default class Actor5e extends Actor {
     this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
 
     // Reset class store and associate classes with their subclasses
-    this._prepareClassesAndSubclasses();
+    this._classes = undefined;
 
     // Determine Initiative Modifier
     this._computeInitiativeModifier(actorData, checkBonus, bonusData);
@@ -524,34 +524,6 @@ export default class Actor5e extends Actor {
     ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
     this.shield = null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare class and subclass objects.
-   * @private
-   */
-  _prepareClassesAndSubclasses() {
-    this._classes = {};
-    const subclasses = {};
-    for ( const item of this.items ) {
-      if ( item.type === "class" ) {
-
-        this._classes[item.identifier] = item;
-        const subclass = subclasses[item.identifier];
-        if ( subclass ) subclass.class = item;
-        item.subclass = subclass;
-
-      } else if ( item.type === "subclass" ) {
-
-        subclasses[item.data.data.classIdentifier] = item;
-        const cls = this._classes[item.identifier];
-        if ( cls ) cls.subclass = item;
-        item.class = cls;
-
-      }
-    }
   }
 
   /* -------------------------------------------- */
