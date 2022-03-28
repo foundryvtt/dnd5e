@@ -35,19 +35,24 @@
   /*  Two Column Configurations                */
   /* ----------------------------------------- */
   &.two-column {
+    --grid-two-column-left-size: 1fr;
+    --grid-two-column-right-size: 1fr;
+
     form {
-      display: flex;
-      flex-wrap: wrap;
-      button[type="submit"] {
-        flex-basis: 100%;
+      display: grid;
+      grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
+      grid-template-areas: "left right";
+      grid-gap: 0.4em;
+
+      .left-column {
+        grid-area: left;
       }
-    }
-    .left-column {
-      flex: 3;
-    }
-    .right-column {
-      flex: 2;
-      margin-left: 6px;
+      .right-column {
+        grid-area: right;
+      }
+      button[type="submit"] {
+        grid-column-end: span 2;
+      }
     }
   }
 
@@ -55,6 +60,8 @@
   /*  Scale Value                              */
   /* ----------------------------------------- */
   &.scale-value {
+    --grid-two-column-right-size: 0.6fr;
+
     .right-column label {
       flex: 0.5;
       padding-right: 0.5rem;
