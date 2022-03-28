@@ -199,13 +199,8 @@ export class HitPointsFlow extends AdvancementFlow {
       if ( lastValue === "avg" ) useAverage = true;
     }
 
-    // Determine whether this is the first level of the original class on the character
-    // The additional check here is needed because the actor's original class value isn't set before advancement
-    const isFirstClassLevel = (this.level === 1)
-      && (this.advancement.parent.isOriginalClass || this.advancement.actor.data.data.details.originalClass === "");
-
     return foundry.utils.mergeObject(super.getData(), {
-      isFirstClassLevel,
+      isFirstClassLevel: (this.level === 1) && this.advancement.parent.isOriginalClass,
       hitDie: this.advancement.hitDie,
       dieValue: this.advancement.hitDieValue,
       data: {
@@ -271,7 +266,7 @@ export class HitPointsFlow extends AdvancementFlow {
     if ( value !== undefined ) return { [this.level]: value };
 
     this.form.querySelector(".rollResult").classList.add("error");
-    let errorType = !formData.value ? "Empty" : "Invalid";
+    const errorType = formData.value ? "Invalid" : "Empty";
     throw new AdvancementError(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
   }
 

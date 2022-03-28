@@ -1674,14 +1674,14 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _onCreate(data, options, userId) {
+  async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if ( (userId !== game.user.id) || !this.parent ) return;
 
     // Assign a new original class
     if ( (this.parent.type === "character") && (this.type === "class") ) {
       const pc = this.parent.items.get(this.parent.data.data.details.origialClass);
-      if ( !pc ) this.parent._assignPrimaryClass();
+      if ( !pc ) await this.parent._assignPrimaryClass();
     }
 
     // Trigger advancement
