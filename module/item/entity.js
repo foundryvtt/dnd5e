@@ -13,44 +13,43 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
-   * Which ability score modifier is used by this item.
+   * Which ability score modifier is used by this item?
    * @type {string|null}
    */
   get abilityMod() {
     const itemData = this.data.data;
-    if (!("ability" in itemData)) return null;
+    if ( !("ability" in itemData) ) return null;
 
     // Case 1 - defined directly by the item
-    if (itemData.ability) return itemData.ability;
+    if ( itemData.ability ) return itemData.ability;
 
     // Case 2 - inferred from a parent actor
-    else if (this.actor) {
+    else if ( this.actor ) {
       const actorData = this.actor.data.data;
 
       // Spells - Use Actor spellcasting modifier
-      if (this.data.type === "spell") return actorData.attributes.spellcasting || "int";
+      if ( (this.data.type === "spell") || ["msak", "rsak"].includes(itemData.actionType) ) {
+        return actorData.attributes.spellcasting ?? "int";
+      }
 
       // Tools - default to Intelligence
-      else if (this.data.type === "tool") return "int";
+      else if ( this.data.type === "tool" ) return "int";
 
       // Weapons
-      else if (this.data.type === "weapon") {
+      else if ( this.data.type === "weapon" ) {
         const wt = itemData.weaponType;
 
-        // Weapons using the spellcasting modifier
-        if (["msak", "rsak"].includes(itemData.actionType)) {
-          return actorData.attributes.spellcasting || "int";
-        }
-
         // Finesse weapons - Str or Dex (PHB pg. 147)
-        else if (itemData.properties.fin === true) {
+        if ( itemData.properties.fin === true ) {
           return (actorData.abilities.dex.mod >= actorData.abilities.str.mod) ? "dex" : "str";
         }
 
         // Ranged weapons - Dex (PH p.194)
         else if ( ["simpleR", "martialR"].includes(wt) ) return "dex";
       }
-      return "str";
+
+      // Dex for ranged weapon attacks, otherwise default to strength
+      return itemData.actionType === "rwak" ? "dex" : "str";
     }
 
     // Case 3 - unknown
