@@ -95,7 +95,7 @@ Hooks.once("init", function() {
     migrations,
     rollItemMacro: macros.rollItemMacro,
     utils,
-    isV9: !foundry.utils.isNewerVersion("9.224", game.version ?? game.data.version)
+    isV9: !foundry.utils.isNewerVersion("9.224", game.version)
   };
 
   // Record Configuration Values
