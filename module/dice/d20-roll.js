@@ -20,7 +20,7 @@ export default class D20Roll extends Roll {
     if ( !((this.terms[0] instanceof Die) && (this.terms[0].faces === 20)) ) {
       throw new Error(`Invalid D20Roll formula provided ${this._formula}`);
     }
-    this.configureModifiers();
+    if ( !this.options.configured ) this.configureModifiers();
   }
 
   /* -------------------------------------------- */
@@ -97,6 +97,9 @@ export default class D20Roll extends Roll {
 
     // Re-compile the underlying formula
     this._formula = this.constructor.getFormula(this.terms);
+
+    // Mark configuration as complete
+    this.options.configured = true;
   }
 
   /* -------------------------------------------- */
