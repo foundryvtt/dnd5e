@@ -98,9 +98,6 @@ Hooks.once("init", function() {
     isV9: !foundry.utils.isNewerVersion("9.224", game.version ?? game.data.version)
   };
 
-  // This will be removed when dnd5e minimum core version is updated to v9.
-  if ( !game.dnd5e.isV9 ) dice.shimIsDeterministic();
-
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = ActiveEffect5e;
