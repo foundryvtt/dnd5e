@@ -17,6 +17,7 @@ export default class Item5e extends Item {
    * @type {string|null}
    */
   get abilityMod() {
+    const type = this.data.type;
     const itemData = this.data.data;
     if ( !("ability" in itemData) ) return null;
 
@@ -28,15 +29,16 @@ export default class Item5e extends Item {
       const actorData = this.actor.data.data;
 
       // Spells - Use Actor spellcasting modifier
-      if ( (this.data.type === "spell") || ["msak", "rsak"].includes(itemData.actionType) ) {
+      const isScroll = (type === "consumable") && (itemData.consumableType === "scroll");
+      if ( (type === "spell") || isScroll || ["msak", "rsak"].includes(itemData.actionType) ) {
         return actorData.attributes.spellcasting ?? "int";
       }
 
       // Tools - default to Intelligence
-      else if ( this.data.type === "tool" ) return "int";
+      else if ( type === "tool" ) return "int";
 
       // Weapons
-      else if ( this.data.type === "weapon" ) {
+      else if ( type === "weapon" ) {
         const wt = itemData.weaponType;
 
         // Finesse weapons - Str or Dex (PHB pg. 147)
