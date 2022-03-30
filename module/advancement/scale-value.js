@@ -65,6 +65,16 @@ export class ScaleValueAdvancement extends Advancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Identifier for this scale value, either manual value or the slugified title.
+   * @type {string}
+   */
+  get identifier() {
+    return this.data.configuration.identifier || this.title.slugify();
+  }
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
@@ -74,6 +84,8 @@ export class ScaleValueAdvancement extends Advancement {
     if ( !value ) return this.title;
     return `${this.title}: <strong>${value}</strong>`;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Scale value for the given level.
@@ -109,7 +121,6 @@ export class ScaleValueConfig extends AdvancementConfig {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "scale-value", "two-column"],
       template: "systems/dnd5e/templates/advancement/scale-value-config.html",
-      title: "DND5E.AdvancementTitle",
       width: 540,
       submitOnChange: true
     });
@@ -121,6 +132,8 @@ export class ScaleValueConfig extends AdvancementConfig {
   getData() {
     const data = super.getData();
     data.classIdentifier = this.parent.identifier;
+    data.previewIdentifier = this.data.configuration.identifier || this.data.title.slugify()
+      || game.i18n.localize(this.advancement.constructor.defaultTitle).slugify();
 
     let lastValue = "";
     data.levels = this.advancement.constructor.allLevels.reduce((obj, level) => {
@@ -150,6 +163,25 @@ export class ScaleValueConfig extends AdvancementConfig {
     }
     configuration.scale = this.constructor._cleanedObject(configuration.scale);
     return configuration;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    this.form.querySelector("input[name='data.title']").addEventListener("input", this._onChangeTitle.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * If no identifier is manually entered, slugify the custom title and display as placeholder.
+   * @param {Event} event  Change event to the title input.
+   */
+  _onChangeTitle(event) {
+    const slug = (event.target.value || game.i18n.localize(this.advancement.constructor.defaultTitle)).slugify();
+    this.form.querySelector("input[name='data.configuration.identifier']").placeholder = slug;
   }
 
 }

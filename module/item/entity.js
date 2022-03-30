@@ -238,8 +238,8 @@ export default class Item5e extends Item {
   get scaleValues() {
     if ( this.data.type !== "class" ) return {};
     return Object.values(this.advancement).reduce((obj, advancement) => {
-      if ( (advancement.data.type !== "ScaleValue") || !advancement.data.configuration.identifier ) return obj;
-      obj[advancement.data.configuration.identifier] = advancement.valueForLevel(this.data.data.levels);
+      if ( (advancement.data.type !== "ScaleValue") ) return obj;
+      obj[advancement.identifier] = advancement.valueForLevel(this.data.data.levels);
       return obj;
     }, {});
   }
