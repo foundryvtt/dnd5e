@@ -122,7 +122,7 @@ export class ItemGrantConfig extends AdvancementConfig {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
       template: "systems/dnd5e/templates/advancement/item-grant-config.html",
-      dynamicInterface: true
+      submitOnChange: true
     });
   }
 

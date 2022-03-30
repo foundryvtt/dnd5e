@@ -39,7 +39,7 @@ export class AdvancementConfig extends FormApplication {
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
       width: 400,
       height: "auto",
-      dynamicInterface: false
+      closeOnSubmit: false
     });
   }
 
@@ -96,25 +96,20 @@ export class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _updateObject(event, formData) {
+  async _updateObject(event, formData) {
+    const saveClicked = event.type === "submit";
+
     let updates = foundry.utils.expandObject(formData).data;
-    if ( this.options.dynamicInterface ) foundry.utils.mergeObject(updates, this.data);
+    if ( saveClicked ) foundry.utils.mergeObject(updates, this.data);
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
-    return this.advancement.update(updates);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Helper method used to update the internal data object when `options.dynamicInterface` is true.
-   * @params {object} [updateData={}]  Additional object updates applied to the data.
-   */
-  _updateInternalData(updateData={}) {
-    const formData = this._getSubmitData(updateData);
-    const updates = foundry.utils.expandObject(formData).data;
-    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
-    foundry.utils.mergeObject(this.data, updates);
+    if ( saveClicked || !this.options.submitOnChange ) {
+      await this.advancement.update(updates);
+      this.close({submit: false, force: true});
+    } else {
+      foundry.utils.mergeObject(this.data, updates);
+      this.delayedRender();
+    }
   }
 
   /* -------------------------------------------- */
@@ -132,18 +127,6 @@ export class AdvancementConfig extends FormApplication {
       else obj[`-=${key}`] = null;
       return obj;
     }, {});
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _onChangeInput(event) {
-    super._onChangeInput(event);
-
-    if ( this.options.dynamicInterface ) {
-      this._updateInternalData();
-      this.delayedRender();
-    }
   }
 
 }

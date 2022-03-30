@@ -111,7 +111,7 @@ export class ScaleValueConfig extends AdvancementConfig {
       template: "systems/dnd5e/templates/advancement/scale-value-config.html",
       title: "DND5E.AdvancementTitle",
       width: 540,
-      dynamicInterface: true
+      submitOnChange: true
     });
   }
 
