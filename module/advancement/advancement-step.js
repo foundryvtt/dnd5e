@@ -247,7 +247,7 @@ export class AdvancementStep extends Application {
    * @param {Actor5e} actor        Clone on which to create items.
    * @param {object[]} items       An array of data objects used to create multiple documents.
    * @param {object} [options={}]
-   * @param {boolean} [skipAdvancement=false]  Do not create new advancements steps for the created items.
+   * @param {boolean} [options.skipAdvancement=false]  Do not create new advancements steps for the created items.
    * @returns {Promise<Item5e[]>}  An array of created Item instances.
    * @protected
    */
@@ -271,7 +271,7 @@ export class AdvancementStep extends Application {
    * @param {Actor5e} actor        Clone from which to delete items.
    * @param {object[]} ids         An array of string ids for each Document to be deleted.
    * @param {object} [options={}]
-   * @param {boolean} [skipAdvancement=false]  Do not create new advancements steps for the deleted items.
+   * @param {boolean} [options.skipAdvancement=false]  Do not create new advancements steps for the deleted items.
    * @returns {Promise<Item5e[]>}  An array of deleted Item instances.
    * @protected
    */
