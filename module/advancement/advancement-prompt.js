@@ -1,5 +1,5 @@
 import { AdvancementError } from "./advancement-flow.js";
-import { LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
+import { LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
 
 
 /**
@@ -39,6 +39,13 @@ export class AdvancementPrompt extends Application {
      * @private
      */
     this._stepIndex = steps.length ? 0 : null;
+
+    /**
+     * Is the prompt currently advancing through un-rendered steps?
+     * @type {boolean}
+     * @private
+     */
+    this._advancing = false;
   }
 
   /* -------------------------------------------- */
@@ -116,12 +123,19 @@ export class AdvancementPrompt extends Application {
   /**
    * Add a step to this advancement process when a class is added or level is changed.
    * @param {LevelChangeData} data  Information on the class and level changes.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  levelChanged({ item, character, class: cls }) {
+  levelChanged({ item, character, class: cls }, options={}) {
     let levelDelta = character.final - character.initial;
+    const render = options.render ?? true;
+    options.render = false;
 
     // Level didn't change
-    if ( levelDelta === 0 ) return;
+    if ( levelDelta === 0 ) {
+      if ( this.steps.length === 0 ) this.actor._advancement = null;
+      return;
+    };
 
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
@@ -129,14 +143,19 @@ export class AdvancementPrompt extends Application {
         item,
         level: character.initial + offset,
         classLevel: cls.initial + offset
-      }));
+      }), options);
     }
 
     // Level decreased
     for ( let offset = 0; offset > levelDelta; offset-- ) {
-      this.actor._advancement = null;
-      console.warn("Unapplying advancements from leveling not currently supported");
+      this._addStep(new LevelDecreasedStep(this.clone, {
+        item,
+        level: character.initial + offset,
+        classLevel: cls.initial + offset
+      }), options);
     }
+
+    if ( render ) this.render(true);
   }
 
   /* -------------------------------------------- */
@@ -144,8 +163,10 @@ export class AdvancementPrompt extends Application {
   /**
    * Add a step to this advancement process when a non-class item is added.
    * @param {Item5e} item    Item that was added.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  itemAdded(item) {
+  itemAdded(item, options) {
     this.actor._advancement = null;
     console.warn("Advancements on non-class items not currently supported");
   }
@@ -155,8 +176,10 @@ export class AdvancementPrompt extends Application {
   /**
    * Add a step to this advancement process when a non-class item is removed.
    * @param {Item5e} item    Item that was removed.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  itemRemoved(item) {
+  itemRemoved(item, options) {
     this.actor._advancement = null;
     console.warn("Advancements on non-class items not currently supported");
   }
@@ -167,22 +190,26 @@ export class AdvancementPrompt extends Application {
    * Modify the choices made on an item at the specified level.
    * @param {Item5e} item   Item to modify.
    * @param {number} level  Level at which the changes should be made.
+   * @param {object} [options]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  modifyChoices(item, level) {
-    this._addStep(new ModifyChoicesStep(this.clone, { item, level }));
+  modifyChoices(item, level, options) {
+    this._addStep(new ModifyChoicesStep(this.clone, { item, level }), options);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Add an advancement step and re-render the app.
-   * @param {AdvancementStep} step  Step to add.
+   * @param {AdvancementStep} step           Step to add.
+   * @param {object} [options={}]
+   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    * @private
    */
-  _addStep(step) {
+  _addStep(step, { render=true }={}) {
     const newIndex = this.steps.push(step) - 1;
     if ( this._stepIndex === null ) this._stepIndex = newIndex;
-    this.render(true);
+    if ( render ) this.render(true);
   }
 
   /* -------------------------------------------- */
@@ -194,11 +221,24 @@ export class AdvancementPrompt extends Application {
     const data = {};
     if ( this.previousStep ) data.previousStep = true;
 
-    // TODO: If step is empty or doesn't want to be rendered, move to next step automatically
     if ( !this.step ) return data;
     data.stepId = this.step.id;
 
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  render(...args) {
+    if ( !this.step?.shouldRender ) {
+      if ( this._advancing ) return this;
+      this._advancing = true;
+      this.advanceStep();
+      return this;
+    }
+
+    return super.render(...args);
   }
 
   /* -------------------------------------------- */
@@ -286,6 +326,7 @@ export class AdvancementPrompt extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
+      this._advancing = false;
       return;
     }
 
@@ -294,6 +335,7 @@ export class AdvancementPrompt extends Application {
 
     // Increase step number and re-render
     this._stepIndex += 1;
+    this._advancing = false;
     this.render(true);
   }
 
@@ -314,11 +356,13 @@ export class AdvancementPrompt extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.setControlsDisabled(false);
+      this._advancing = false;
       return;
     }
 
     // Decrease step number and re-render
     this._stepIndex -= 1;
+    this._advancing = false;
     this.render(true);
   }
 
@@ -329,6 +373,9 @@ export class AdvancementPrompt extends Application {
    * @returns {Promise}
    */
   async complete() {
+    // Run any cleanup needed by steps
+    await Promise.all(this.steps.map(async (s) => await s.cleanup()));
+
     // Apply changes from clone to original actor
     await this.commitUpdates(this.actor, this.clone);
 
