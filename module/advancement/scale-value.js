@@ -126,7 +126,7 @@ export class ScaleValueConfig extends AdvancementConfig {
     data.levels = this.advancement.constructor.allLevels.reduce((obj, level) => {
       obj[level] = { placeholder: lastValue, value: "" };
       const value = this.data.configuration.scale[level];
-      if ( value && (value !== lastValue) ) {
+      if ( value ) {
         obj[level].value = value;
         lastValue = value;
       }
@@ -139,7 +139,15 @@ export class ScaleValueConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  prepareConfigurationUpdate(configuration) {
+  prepareConfigurationUpdate(event, configuration) {
+    // Ensure multiple values in a row are not the same
+    if ( event.type === "submit" ) {
+      let lastValue = "";
+      for ( const [lvl, value] of Object.entries(configuration.scale) ) {
+        if ( value === lastValue ) configuration.scale[lvl] = "";
+        else if ( value ) lastValue = value;
+      }
+    }
     configuration.scale = this.constructor._cleanedObject(configuration.scale);
     return configuration;
   }

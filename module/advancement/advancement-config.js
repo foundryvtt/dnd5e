@@ -86,10 +86,11 @@ export class AdvancementConfig extends FormApplication {
 
   /**
    * Perform any changes to configuration data before it is saved to the advancement.
+   * @param {Event} event           Triggering event that is causing this update.
    * @param {object} configuration  Configuration object.
    * @returns {object}              Modified configuration.
    */
-  prepareConfigurationUpdate(configuration) {
+  prepareConfigurationUpdate(event, configuration) {
     return configuration;
   }
 
@@ -101,7 +102,7 @@ export class AdvancementConfig extends FormApplication {
 
     let updates = foundry.utils.expandObject(formData).data;
     if ( saveClicked ) foundry.utils.mergeObject(updates, this.data);
-    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
+    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(event, updates.configuration);
 
     if ( saveClicked || !this.options.submitOnChange ) {
       await this.advancement.update(updates);
