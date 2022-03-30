@@ -1885,19 +1885,17 @@ export default class Actor5e extends Actor {
    * @param {Array} entryOptions  The default array of context menu options
    */
   static addDirectoryContextOptions(html, entryOptions) {
-    const useEntity = foundry.utils.isNewerVersion("9", game.version ?? game.data.version);
-    const idAttr = useEntity ? "entityId" : "documentId";
     entryOptions.push({
       name: "DND5E.PolymorphRestoreTransformation",
       icon: '<i class="fas fa-backward"></i>',
       callback: li => {
-        const actor = game.actors.get(li.data(idAttr));
+        const actor = game.actors.get(li.data("documentId"));
         return actor.revertOriginalForm();
       },
       condition: li => {
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
-        const actor = game.actors.get(li.data(idAttr));
+        const actor = game.actors.get(li.data("documentId"));
         return actor && actor.isPolymorphed;
       }
     });
@@ -1991,7 +1989,6 @@ export default class Actor5e extends Actor {
     dhp = Number(dhp);
     const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
     for ( let t of tokens ) {
-      if ( !t?.hud?.createScrollingText ) continue;  // This is undefined prior to v9-p2
       const pct = Math.clamped(Math.abs(dhp) / this.data.data.attributes.hp.max, 0, 1);
       t.hud.createScrollingText(dhp.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,

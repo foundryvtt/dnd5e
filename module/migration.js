@@ -389,13 +389,9 @@ export const migrateSceneData = function(scene, migrationData) {
 export const getMigrationData = async function() {
   const data = {};
   try {
-    let res = await fetch("systems/dnd5e/json/icon-migration.json");
-    data.iconMap = await res.json();
-    if ( game.dnd5e.isV9 ) {
-      res = await fetch("systems/dnd5e/json/spell-icon-migration.json");
-      const spellIcons = await res.json();
-      data.iconMap = {...data.iconMap, ...spellIcons};
-    }
+    const icons = await fetch("systems/dnd5e/json/icon-migration.json");
+    const spellIcons = await fetch("systems/dnd5e/json/spell-icon-migration.json");
+    data.iconMap = {...await icons.json(), ...await spellIcons.json()};
   } catch(err) {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
   }
