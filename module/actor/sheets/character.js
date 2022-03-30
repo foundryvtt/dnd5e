@@ -153,7 +153,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     data.features = Object.values(features);
 
     // Labels
-    data.labels.background = backgrounds[0]?.name ?? data.data.details.background;
+    data.labels.background = backgrounds[0]?.name;
   }
 
   /* -------------------------------------------- */

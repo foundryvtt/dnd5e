@@ -726,6 +726,10 @@
   height: 24px;
   line-height: 24px;
 }
+.dnd5e.sheet.actor .sheet-header .summary span {
+  margin-inline-start: 4px;
+  border-block-start: 1px solid transparent;
+}
 .dnd5e.sheet.actor .sheet-header .summary select {
   position: relative;
   top: -4px;
