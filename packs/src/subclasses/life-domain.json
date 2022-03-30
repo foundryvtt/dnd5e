@@ -1,0 +1,95 @@
+{
+  "_id": "H3RYLGqCiqm8BP3q",
+  "name": "Life Domain",
+  "type": "subclass",
+  "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
+  "data": {
+    "description": {
+      "value": "<p>The Life domain focuses on the vibrant positive energy—one of the fundamental forces of the universe—that sustains all life. The gods of life promote vitality and health through healing the sick and wounded, caring for those in need, and driving away the forces of death and undeath. Almost any non-­evil deity can claim influence over this domain, particularly agricultural deities (such as Chauntea, Arawai, and Demeter), sun gods (such as Lathander, Pelor, and Re-­Horakhty), gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of home and community (such as Hestia, Hathor, and Boldrei).</p>\n<h2>Life Domain Spells</h2>\n<table border=\"1\">\n<thead>\n<tr>\n<td>Cleric Level</td>\n<td>Spells</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>@Compendium[dnd5e.spells.8dzaICjGy6mTUaUr]{Bless}, @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>@Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}, @Compendium[dnd5e.spells.JbxsYXxSOTZbf9I0]{Spiritual Weapon}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>@Compendium[dnd5e.spells.ZU9d6woBdUP8pIPt]{Beacon of Hope}, @Compendium[dnd5e.spells.LmRHHMtplpxr9fX6]{Revivify}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>@Compendium[dnd5e.spells.VtCXMdyM6mAdIJZb]{Death Ward}, @Compendium[dnd5e.spells.TgHsuhNasPbhu8MO]{Guardian of Faith}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>@Compendium[dnd5e.spells.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds}, @Compendium[dnd5e.spells.AGFMPAmuzwWO6Dfz]{Raise Dead}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 60",
+    "identifier": "life-domain",
+    "classIdentifier": "cleric",
+    "advancement": [
+      {
+        "_id": "9fyr5t01nhdg0u8n",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
+            "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR"
+          ]
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "4qh4ejxpwugva6ma",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL"
+          ]
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "ihquu4r80mxr07qt",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs"
+          ]
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "ayh4gqp9vxjo9yd3",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE"
+          ]
+        },
+        "value": {},
+        "level": 8,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "m4m8xp6cabt71mdq",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash"
+          ]
+        },
+        "value": {},
+        "level": 17,
+        "title": "Features",
+        "icon": ""
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}
