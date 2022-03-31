@@ -322,10 +322,10 @@ export class LevelIncreasedStep extends AdvancementStep {
         return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
       }),
       ...this.actor.items.contents.flatMap(i => {
-        if ( i.type === "class" ) return [];
-        // TODO: Special case here for subclasses here when they are added (using class level)
-        return this.advancementsForLevel(i, this.config.level).map(a => {
-          return new a.constructor.flowApp(i, a.id, this.config.level);
+        if ( i.type === "class" || ((i.type === "subclass") && (i.class.id !== this.item.id)) ) return [];
+        let level = ( i.type === "subclass" ) ? this.config.classLevel : this.config.level;
+        return this.advancementsForLevel(i, level).map(a => {
+          return new a.constructor.flowApp(i, a.id, level);
         });
       })
     ];
@@ -401,10 +401,10 @@ export class LevelDecreasedStep extends AdvancementStep {
         return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
       }),
       ...this.actor.items.contents.flatMap(i => {
-        if ( i.type === "class" ) return [];
-        // TODO: Special case here for subclasses here when they are added (using class level)
-        return this.advancementsForLevel(i, this.config.level).map(a => {
-          return new a.constructor.flowApp(i, a.id, this.config.level);
+        if ( i.type === "class" || ((i.type === "subclass") && (i.class.id !== this.item.id)) ) return [];
+        let level = ( i.type === "subclass" ) ? this.config.classLevel : this.config.level;
+        return this.advancementsForLevel(i, level).map(a => {
+          return new a.constructor.flowApp(i, a.id, level);
         });
       })
     ];
