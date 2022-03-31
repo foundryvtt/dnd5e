@@ -98,7 +98,13 @@
       "label": "Background Characteristics (SRD)",
       "system": "dnd5e",
       "path": "./packs/background-characteristics.db",
-      "entity": "RollTable",
+      "type": "RollTable"
+    },
+    {
+      "name": "madness",
+      "label": "Madness (SRD)",
+      "system": "dnd5e",
+      "path": "./packs/madness.db",
       "type": "RollTable"
     }
   ],
