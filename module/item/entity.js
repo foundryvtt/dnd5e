@@ -1681,7 +1681,7 @@ export default class Item5e extends Item {
 
     // Assign a new original class
     if ( (this.parent.type === "character") && (this.type === "class") ) {
-      const pc = this.parent.items.get(this.parent.data.data.details.origialClass);
+      const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
       if ( !pc ) await this.parent._assignPrimaryClass();
     }
 
@@ -1750,6 +1750,19 @@ export default class Item5e extends Item {
     if ( options.levelChangeData && !options.skipAdvancement && (options.addFeatures !== false) ) {
       options.levelChangeData.item = this;
       this.parent.advancement.levelChanged(options.levelChangeData);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async delete(context={}) {
+    if ( (this.type === "class") && !context.skipConfirmation ) {
+      game.dnd5e.advancement.DeleteConfirmationDialog.createDialog(this, context)
+        .then(context => super.delete(context))
+        .catch(() => {});
+    } else {
+      return super.delete(context);
     }
   }
 

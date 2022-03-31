@@ -18,12 +18,6 @@ export class Advancement {
     this.parent = parent;
 
     /**
-     * Actor to which this advancement's item belongs, if the item is embedded.
-     * @type {Actor5e|null}
-     */
-    this.actor = parent.parent ?? null;
-
-    /**
      * Configuration data for this advancement.
      * @type {object}
      */
@@ -154,6 +148,16 @@ export class Advancement {
    */
   get id() {
     return this.data._id;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Actor to which this advancement's item belongs, if the item is embedded.
+   * @type {Actor5e|null}
+   */
+  get actor() {
+    return this.parent.parent ?? null;
   }
 
   /* -------------------------------------------- */
