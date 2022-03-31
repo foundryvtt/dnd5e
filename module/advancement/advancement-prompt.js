@@ -140,7 +140,7 @@ export class AdvancementPrompt extends Application {
     if ( levelDelta === 0 ) {
       if ( this.steps.length === 0 ) this.actor._advancement = null;
       return;
-    };
+    }
 
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
@@ -379,7 +379,7 @@ export class AdvancementPrompt extends Application {
    */
   async complete() {
     // Run any cleanup needed by steps
-    await Promise.all(this.steps.map(async (s) => await s.cleanup()));
+    await Promise.all(this.steps.map(async s => await s.cleanup()));
 
     // Apply changes from clone to original actor
     await this.commitUpdates(this.actor, this.clone);
@@ -411,7 +411,7 @@ export class AdvancementPrompt extends Application {
       return obj;
     }, { toCreate: [], toUpdate: [], toDelete: actor.items.map(i => i.id) });
 
-    const allowed = Hooks.call("dnd5e.preAdvancementCommitUpdates", updates, itemUpdates);
+    const allowed = Hooks.call("dnd5e.preAdvancementCommitUpdates", updates, itemUpdates, this);
 
     if (allowed === false) return Promise.resolve(this.actor);
 
@@ -424,7 +424,7 @@ export class AdvancementPrompt extends Application {
       this.actor.deleteEmbeddedDocuments("Item", toDelete, { skipAdvancement: true })
     ]);
 
-    Hooks.callAll("dnd5e.advancementCommitUpdates", actorWithUpdates);
+    Hooks.callAll("dnd5e.advancementCommitUpdates", actorWithUpdates, this);
     return actorWithUpdates;
   }
 

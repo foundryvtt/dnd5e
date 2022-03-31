@@ -168,7 +168,7 @@ export class AdvancementStep extends Application {
         item: flow.advancement.itemUpdates(fetchData)
       };
 
-      Hooks.callAll(`dnd5e.prepare${flow.constructor.name}Updates`, flowUpdates, flow, { reverse });
+      Hooks.callAll(`dnd5e.prepare${flow.constructor.name}Updates`, flowUpdates, flow, this, { reverse });
 
       // Merge updates
       // Prepare property changes
