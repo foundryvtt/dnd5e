@@ -157,7 +157,6 @@ export class AdvancementStep extends Application {
    * @returns {object}                        Updates that will be applied from all the flows.
    */
   prepareUpdates({ reverse=false }={}) {
-    if ( this.options.reverse ) reverse = !reverse;
     return this.flows.reduce((updates, flow) => {
       // Prepare update data from the form
       flow.initialUpdate = reverse ? {} : flow.prepareUpdate(flow.form ? flow._getSubmitData() : {});
