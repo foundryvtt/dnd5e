@@ -140,7 +140,7 @@ export class AdvancementPrompt extends Application {
     if ( levelDelta === 0 ) {
       if ( this.steps.length === 0 ) this.actor._advancement = null;
       return;
-    }
+    };
 
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
@@ -379,7 +379,7 @@ export class AdvancementPrompt extends Application {
    */
   async complete() {
     // Run any cleanup needed by steps
-    await Promise.all(this.steps.map(async s => await s.cleanup()));
+    await Promise.all(this.steps.map(async (s) => await s.cleanup()));
 
     // Apply changes from clone to original actor
     await this.commitUpdates(this.actor, this.clone);
