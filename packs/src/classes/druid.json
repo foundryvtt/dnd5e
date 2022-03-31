@@ -15,6 +15,76 @@
     "subclass": "",
     "hitDice": "d8",
     "hitDiceUsed": 0,
+    "advancement": [
+      {
+        "_id": "6pdotglp4hy4zlvb",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.LzJ5ayHt0OlSVGxi",
+            "Compendium.dnd5e.classfeatures.i6tPm3FNK13Ftc9v"
+          ]
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "qnfy6m18u4cfdqwm",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.swK0r5TOIxredxWS",
+            "Compendium.dnd5e.classfeatures.u6Du2P9s81SWuGbi"
+          ]
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "r3xhzsz7noff50w3",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.cVDEQo0ow1WJT7Wl",
+            "Compendium.dnd5e.classfeatures.xvgPu1O57DgXCM86"
+          ]
+        },
+        "value": {},
+        "level": 18,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "pkfb1a2u37665epq",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.ip4bvmGoz3qkoqes"
+          ]
+        },
+        "value": {},
+        "level": 20,
+        "title": "Features",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "qv0gbr1rb5889ubd",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      }
+    ],
     "saves": [
       "int",
       "wis"
