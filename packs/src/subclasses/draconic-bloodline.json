@@ -1,0 +1,82 @@
+{
+  "name": "Draconic Bloodline",
+  "type": "subclass",
+  "img": "icons/creatures/reptiles/dragon-horned-blue.webp",
+  "data": {
+    "description": {
+      "value": "<p>Your innate magic comes from draconic magic that was mingled with your blood or that of your ancestors. Most often, sorcerers with this origin trace their descent back to a mighty sorcerer of ancient times who made a bargain with a dragon or who might even have claimed a dragon parent. Some of these bloodlines are well established in the world, but most are obscure. Any given sorcerer could be the first of a new bloodline, as a result of a pact or some other exceptional circumstance.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 102",
+    "identifier": "draconic-bloodline",
+    "classIdentifier": "sorcerer",
+    "advancement": [
+      {
+        "_id": "bjbipb2oydq3zsuy",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j",
+            "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA"
+          ]
+        },
+        "value": {},
+        "level": 1,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "cq0cwgss39pkvjox",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.x6eEZ9GUsuOcEa3G"
+          ]
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "rfd6o6858pl8k7fl",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.3647zjKSE9zFwOXc"
+          ]
+        },
+        "value": {},
+        "level": 14,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "4xrl7vjblpn8zl5t",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.Gsha4bl0apxqspFy"
+          ]
+        },
+        "value": {},
+        "level": 18,
+        "title": "Features",
+        "icon": ""
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "2nadB2MBSHTQ0kcl"
+}

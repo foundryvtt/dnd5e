@@ -39,6 +39,7 @@
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
+                    {{#if (eq item.type "subclass")}}&rdsh;{{/if}}
                     {{item.name}}
                     {{#if item.data.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'DND5E.ClassOriginal'}}"></i>{{/if}}
                 </h4>
@@ -47,24 +48,20 @@
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
                 {{#if item.isOnCooldown}}
-                <a class="item-recharge rollable">{{item.labels.recharge}}</a>
+                    <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                 {{else if item.data.recharge.value}}
-                {{localize "DND5E.Charged"}}
-
+                    {{localize "DND5E.Charged"}}
                 {{else if item.hasUses}}
-                <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
+                    <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.labels.activation}}
+                {{#if item.data.activation.type}}
+                    {{item.labels.activation}}
                 {{/if}}
             </div>
 
-            {{else if section.isClass}}
-            <div class="item-detail player-class">
-                {{item.data.subclass}}
-            </div>
+            {{else if (eq item.type "class")}}
             <div class="item-detail item-action">
                 {{localize "DND5E.Level"}} {{item.data.levels}}
             </div>

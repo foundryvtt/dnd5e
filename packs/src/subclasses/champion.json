@@ -1,0 +1,94 @@
+{
+  "name": "Champion",
+  "type": "subclass",
+  "img": "icons/skills/melee/maneuver-sword-katana-yellow.webp",
+  "data": {
+    "description": {
+      "value": "<p>The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 72",
+    "identifier": "champion",
+    "classIdentifier": "fighter",
+    "advancement": [
+      {
+        "_id": "bsdg4f5me0klskxn",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.YgLQV1O849wE5TgM"
+          ]
+        },
+        "value": {},
+        "level": 3,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "22ktkhqczogk0jcg",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.dHu1yzIjD38BvGGd"
+          ]
+        },
+        "value": {},
+        "level": 7,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "r84l4q20d5aduwlw",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.kYJsED0rqqqUcgKz"
+          ]
+        },
+        "value": {},
+        "level": 10,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "p4pxgvxtf206xc35",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.aVKH6TLn1AG9hPSA"
+          ]
+        },
+        "value": {},
+        "level": 15,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "y6rlhwedv35dcrsq",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.ipG5yx1tRNmeJfSH"
+          ]
+        },
+        "value": {},
+        "level": 18,
+        "title": "Features",
+        "icon": ""
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "sprHbe7cRg9osTzf"
+}

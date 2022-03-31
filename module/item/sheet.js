@@ -14,6 +14,8 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.object.data.type === "class" ) {
       this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
+    } else if ( this.object.data.type === "subclass" ) {
+      this.options.height = this.position.height = 540;
     }
   }
 
@@ -102,8 +104,11 @@ export default class ItemSheet5e extends ItemSheet {
     const actor = item.parent;
     const originalClass = item.isOriginalClass;
     let maxLevel = 0;
-    if ( actor && (item.type === "class") ) maxLevel = item.data.data.levels;
-    else if ( actor ) maxLevel = actor.data.data.details.level;
+    if ( actor ) {
+      if ( item.type === "class" ) maxLevel = item.data.data.levels;
+      else if ( (item.type === "subclass") && item.class ) maxLevel = item.class.data.data.levels;
+      else maxLevel = actor.data.data.details.level;
+    }
 
     const data = {};
     for ( const [id, advancement] of Object.entries(item.advancement) ) {
@@ -378,13 +383,13 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Check class identifier
-    if ( this.object.type === "class" && data.data.identifier !== "" ) {
+    if ( data.data.identifier ) {
       const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
       const match = data.data.identifier.match(dataRgx);
       if ( !match ) {
         data.data.identifier = this.object.data._source.data.identifier;
         this.form.querySelector("input[name='data.identifier']").value = data.data.identifier;
-        return ui.notifications.error(game.i18n.localize("DND5E.ClassIdentifierError"));
+        return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
       }
     }
 
