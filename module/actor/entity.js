@@ -26,7 +26,7 @@ export default class Actor5e extends Actor {
    * @type {object<string, Item5e>}
    * @private
    */
-  _classes = undefined;
+  _classes;
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -228,6 +228,7 @@ export default class Actor5e extends Actor {
     data.classes = Object.entries(this.classes).reduce((obj, e) => {
       const [slug, cls] = e;
       obj[slug] = cls.data.data;
+      if ( cls.subclass ) obj[slug].subclass = cls.subclass.data.data;
       return obj;
     }, {});
     return data;
@@ -579,16 +580,16 @@ export default class Actor5e extends Actor {
     let caster = null;
 
     // Tabulate the total spell-casting progression
-    const classes = this.data.items.filter(i => i.type === "class");
-    for ( let cls of classes ) {
-      const d = cls.data.data;
-      if ( d.spellcasting.progression === "none" ) continue;
-      const levels = d.levels;
-      const prog = d.spellcasting.progression;
+    for ( let cls of Object.values(this.classes) ) {
+      const classData = cls.data.data;
+      const subclassProg = cls.subclass?.data.data.spellcasting.progression;
+      const prog = ( subclassProg && (subclassProg !== "none") ) ? subclassProg : classData.spellcasting.progression;
+      if ( prog === "none" ) continue;
+      const levels = classData.levels;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
-        caster = d;
+        caster = classData;
         progression.total++;
       }
       switch (prog) {
@@ -1768,7 +1769,7 @@ export default class Actor5e extends Actor {
 
     // Keep specific items from the original data
     d.items = d.items.concat(o.items.filter(i => {
-      if ( i.type === "class" ) return keepClass;
+      if ( ["class", "subclass"].includes(i.type) ) return keepClass;
       else if ( i.type === "feat" ) return keepFeats;
       else if ( i.type === "spell" ) return keepSpells;
       else return keepItems;

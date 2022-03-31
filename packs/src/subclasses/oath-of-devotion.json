@@ -1,0 +1,82 @@
+{
+  "name": "Oath of Devotion",
+  "type": "subclass",
+  "img": "icons/magic/holy/saint-glass-portrait-halo.webp",
+  "data": {
+    "description": {
+      "value": "<p>The Oath of Devotion binds a paladin to the loftiest ideals of justice, virtue, and order. Sometimes called cavaliers, white knights, or holy warriors, these paladins meet the ideal of the knight in shining armor, acting with honor in pursuit of justice and the greater good. They hold themselves to the highest standards of conduct, and some, for better or worse, hold the rest of the world to the same standards. Many who swear this oath are devoted to gods of law and good and use their gods' tenets as the measure of their devotion. They hold angels—the perfect servants of good—as their ideals, and incorporate images of angelic wings into their helmets or coats of arms. </p>\n<h2>Tenets of Devotion</h2>\n<p>Though the exact words and strictures of the Oath of Devotion vary, paladins of this oath share these tenets.</p>\n<p><strong>Honesty.</strong> Don't lie or cheat. Let your word be your promise.</p>\n<p><strong>Courage.</strong> Never fear to act, though caution is wise.</p>\n<p><strong>Compassion.</strong> Aid others, protect the weak, and punish those who threaten them. Show mercy to your foes, but temper it with wisdom.</p>\n<p><strong>Honor.</strong> Treat others with fairness, and let your honorable deeds be an example to them. Do as much good as possible while causing the least amount of harm.</p>\n<p><strong>Duty.</strong> Be responsible for your actions and their consequences, protect those entrusted to your care, and obey those who have just authority over you.</p>\n<h2>Oath Spells</h2>\n<p>You gain oath spells at the paladin levels listed.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td>Paladin Level</td>\n<td>Spells</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>3rd</td>\n<td>@Compendium[dnd5e.spells.xmDBqZhRVrtLP8h2]{Protection from Evil and Good}, @Compendium[dnd5e.spells.gvdA9nPuWLck4tBl]{Sanctuary}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>@Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}, @Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>@Compendium[dnd5e.spells.ZU9d6woBdUP8pIPt]{Beacon of Hope}, @Compendium[dnd5e.spells.15Fa6q1nH27XfbR8]{Dispel Magic}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>@Compendium[dnd5e.spells.da0a1t2FqaTjRZGT]{Freedom of Movement}, @Compendium[dnd5e.spells.TgHsuhNasPbhu8MO]{Guardian of Faith}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>@Compendium[dnd5e.spells.d54VDyFulD9xxY7J]{Commune}, @Compendium[dnd5e.spells.5e1xTohkzqFqbYH4]{Flame Strike}</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 85",
+    "identifier": "oath-of-devotion",
+    "classIdentifier": "paladin",
+    "advancement": [
+      {
+        "_id": "x139gm4ohldqu68j",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.xNN0JMKqlG4hKVYu",
+            "Compendium.dnd5e.classfeatures.ZdwGlsJNtc7pGFCd"
+          ]
+        },
+        "value": {},
+        "level": 3,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "enzzft6q7timpcg1",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.M2DxVsgLeZgXOznT"
+          ]
+        },
+        "value": {},
+        "level": 7,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "lnfks5j00ywstged",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.ZHJyYrqMYSLub4RY"
+          ]
+        },
+        "value": {},
+        "level": 15,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "5a99kkfabklcl06a",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.ANE5gjojvhNEagzz"
+          ]
+        },
+        "value": {},
+        "level": 20,
+        "title": "Features",
+        "icon": ""
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "sZ86mbX8D5PfYuhl"
+}

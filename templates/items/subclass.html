@@ -1,0 +1,71 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+  {{!-- Item Sheet Header --}}
+  <header class="sheet-header flexrow">
+    <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+    <div class="header-details flexrow">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.SubclassName' }}"/>
+      </h1>
+
+      <div class="item-subtitle">
+        <h4 class="item-type">{{itemType}}</h4>
+        <span class="item-status">{{itemStatus}}</span>
+      </div>
+
+      <ul class="summary flexrow">
+        <li>
+          <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  {{!-- Item Sheet Navigation --}}
+  <nav class="sheet-navigation tabs" data-group="primary">
+    <a class="item active" data-tab="description">{{localize "DND5E.Description"}}</a>
+    <a class="item" data-tab="details">{{localize "DND5E.Details"}}</a>
+    <a class="item" data-tab="advancement">{{localize "DND5E.AdvancementTitle"}}</a>
+  </nav>
+
+  {{!-- Item Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab flexrow active" data-group="primary" data-tab="description">
+      {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Details Tab --}}
+    <div class="tab details" data-group="primary" data-tab="details">
+
+      {{!-- Identifier --}}
+      <div class="form-group">
+        <label>{{localize "DND5E.Identifier"}}</label>
+        <div class="form-fields">
+          <input type="text" name="data.identifier" value="{{data.identifier}}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "DND5E.ClassIdentifier"}}</label>
+        <div class="form-fields">
+          <input type="text" name="data.classIdentifier" value="{{data.classIdentifier}}">
+        </div>
+        <p class="hint">
+            {{localize "DND5E.SubclassIdentifierHint"}}
+        </p>
+      </div>
+
+      {{!-- Spellcasting --}}
+      <h3 class="form-header">{{localize "DND5E.Spellcasting"}}</h3>
+      {{> "systems/dnd5e/templates/items/parts/item-spellcasting.html"}}
+
+    </div>
+
+    {{!-- Advancement Tab --}}
+    {{> "systems/dnd5e/templates/items/parts/item-advancement.html"}}
+
+  </section>
+</form>

@@ -8,6 +8,13 @@ import Proficiency from "../actor/proficiency.js";
  */
 export default class Item5e extends Item {
 
+  /**
+   * Caches an item linked to this one, such as a subclass associated with a class.
+   * @type {Item5e}
+   * @private
+   */
+  _classLink;
+
   /* -------------------------------------------- */
   /*  Item Properties                             */
   /* -------------------------------------------- */
@@ -133,6 +140,32 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Class associated with this subclass. Always returns null on non-subclass or non-embedded items.
+   * @type {Item5e|null}
+   */
+  get class() {
+    if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
+    this._classLink ??= this.parent.items.find(i => (i.type === "class")
+      && (i.data.data.identifier === this.data.data.classIdentifier));
+    return this._classLink;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Subclass associated with this class. Always returns null on non-class or non-embedded items.
+   * @type {Item5e|null}
+   */
+  get subclass() {
+    if ( !this.isEmbedded || (this.type !== "class") ) return null;
+    this._classLink ??= this.parent.items.find(i => (i.type === "subclass")
+      && (i.data.data.classIdentifier === this.data.data.identifier));
+    return this._classLink;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
    */
@@ -224,6 +257,9 @@ export default class Item5e extends Item {
     const data = itemData.data;
     const C = CONFIG.DND5E;
     const labels = this.labels = {};
+
+    // Clear out linked item cache
+    this._linkedItem = undefined;
 
     // Advancement
     this.advancement = (itemData.data.advancement ?? []).reduce((obj, data) => {
@@ -1633,7 +1669,7 @@ export default class Item5e extends Item {
     await super._preCreate(data, options, user);
 
     // Create class identifier based on name
-    if ( (this.type === "class") && !this.data.data.identifier ) {
+    if ( ["class", "subclass"].includes(this.type) && !this.data.data.identifier ) {
       await this.data.update({ "data.identifier": data.name.slugify({strict: true}) });
     }
 
