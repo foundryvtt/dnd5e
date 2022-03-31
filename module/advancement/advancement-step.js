@@ -352,6 +352,17 @@ export class LevelIncreasedStep extends AdvancementStep {
     return foundry.utils.mergeObject(super.getData(), { sections });
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  cleanup() {
+    // Fix issue with class level not being accurate if modified after advancement process is started
+    const cls = this.actor.items.get(this.config.item.id);
+    if ( cls.data.data.levels !== this.config.item.data.data.levels ) {
+      cls.data.update({"data.levels": this.config.item.data.data.levels});
+    }
+  }
+
 }
 
 
