@@ -147,10 +147,14 @@ export class HitPointsAdvancement extends Advancement {
   propertyUpdates({ level, updates, reverse=false }) {
     const actorData = this.actor.data.data;
     const conMod = actorData.abilities.con?.mod ?? 0;
+    const noStoredValue = this.data.value[level] === undefined;
     let value = this.valueForLevel(level) ?? 0;
 
-    // When reversing, remove both value and constitution modifier
-    if ( reverse ) value = (value + conMod) * -1;
+    // When reversing, remove both value and constitution modifier unless no advancement data is stored
+    if ( reverse ) {
+      if ( noStoredValue ) return {};
+      value = (value + conMod) * -1;
+    }
 
     // If no update data is available, apply full value and constitution modifier
     else if ( !updates ) value += conMod;
@@ -159,7 +163,7 @@ export class HitPointsAdvancement extends Advancement {
     else {
       const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
       value = modified - value;
-      if ( this.data.value[level] === undefined ) value += conMod;
+      if ( noStoredValue ) value += conMod;
     }
 
     if ( value === 0 ) return {};
