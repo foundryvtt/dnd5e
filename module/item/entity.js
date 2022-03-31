@@ -13,7 +13,7 @@ export default class Item5e extends Item {
    * @type {Item5e}
    * @private
    */
-  _linkedItem;
+  _classLink;
 
   /* -------------------------------------------- */
   /*  Item Properties                             */
@@ -145,9 +145,9 @@ export default class Item5e extends Item {
    */
   get class() {
     if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
-    this._linkedItem ??= this.parent.items.find(i => (i.type === "class")
+    this._classLink ??= this.parent.items.find(i => (i.type === "class")
       && (i.data.data.identifier === this.data.data.classIdentifier));
-    return this._linkedItem;
+    return this._classLink;
   }
 
   /* -------------------------------------------- */
@@ -158,9 +158,9 @@ export default class Item5e extends Item {
    */
   get subclass() {
     if ( !this.isEmbedded || (this.type !== "class") ) return null;
-    this._linkedItem ??= this.parent.items.find(i => (i.type === "subclass")
+    this._classLink ??= this.parent.items.find(i => (i.type === "subclass")
       && (i.data.data.classIdentifier === this.data.data.identifier));
-    return this._linkedItem;
+    return this._classLink;
   }
 
   /* -------------------------------------------- */
