@@ -507,7 +507,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "subclass", "spell", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -614,7 +614,6 @@
       "templates": ["itemDescription"],
       "identifier": "",
       "levels": 1,
-      "subclass": "",
       "hitDice": "d6",
       "hitDiceUsed": 0,
       "advancement": [],
@@ -697,6 +696,16 @@
       "scaling": {
         "mode": "none",
         "formula": null
+      }
+    },
+    "subclass": {
+      "templates": ["itemDescription"],
+      "identifier": "",
+      "classIdentifier": "",
+      "advancement": [],
+      "spellcasting": {
+        "progression": "none",
+        "ability": ""
       }
     },
     "weapon": {

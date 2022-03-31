@@ -71,7 +71,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let {items, spells, feats, backgrounds, classes} = data.items.reduce((obj, item) => {
+    let {items, spells, feats, backgrounds, classes, subclasses} = data.items.reduce((obj, item) => {
 
       // Item details
       item.img = item.img || CONST.DEFAULT_TOKEN;
@@ -103,9 +103,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       else if ( item.type === "feat" ) obj.feats.push(item);
       else if ( item.type === "background" ) obj.backgrounds.push(item);
       else if ( item.type === "class" ) obj.classes.push(item);
+      else if ( item.type === "subclass" ) obj.subclasses.push(item);
       else if ( Object.keys(inventory).includes(item.type) ) obj.items.push(item);
       return obj;
-    }, { items: [], spells: [], feats: [], backgrounds: [], classes: [] });
+    }, { items: [], spells: [], feats: [], backgrounds: [], classes: [], subclasses: [] });
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
@@ -126,13 +127,27 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
 
+    // Sort classes and interleave matching subclasses, put unmatched subclasses into features so they don't disappear
+    classes.sort((a, b) => b.data.levels - a.data.levels);
+    classes = classes.reduce((arr, cls) => {
+      arr.push(cls);
+      const subclass = subclasses.findSplice(s => s.data.classIdentifier === cls.data.identifier);
+      if ( subclass ) arr.push(subclass);
+      return arr;
+    }, []);
+    for ( const subclass of subclasses ) {
+      feats.push(subclass);
+      this.actor._preparationWarnings.push(game.i18n.format("DND5E.SubclassMismatchWarn", {
+        name: subclass.name, class: subclass.data.classIdentifier }));
+    }
+
     // Organize Features
     const features = {
       background: {
         label: "DND5E.ItemTypeBackground", items: backgrounds,
         hasActions: false, dataset: {type: "background"} },
       classes: {
-        label: "DND5E.ItemTypeClassPl", items: classes.sort((a, b) => b.data.levels - a.data.levels),
+        label: "DND5E.ItemTypeClassPl", items: classes,
         hasActions: false, dataset: {type: "class"}, isClass: true },
       active: {
         label: "DND5E.FeatureActive", items: [],
@@ -142,7 +157,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         hasActions: false, dataset: {type: "feat"} }
     };
     for ( let f of feats ) {
-      if ( f.data.activation.type ) features.active.items.push(f);
+      if ( f.data.activation?.type ) features.active.items.push(f);
       else features.passive.items.push(f);
     }
 
