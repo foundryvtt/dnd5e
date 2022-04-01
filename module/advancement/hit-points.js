@@ -49,7 +49,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return this.constructor.allLevels;
+    return Array.numbersBetween(1, CONFIG.DND5E.maxLevel);
   }
 
   /* -------------------------------------------- */

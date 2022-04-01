@@ -98,15 +98,15 @@ export class AdvancementStep extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Returns all advancements on an item for a specific level in the proper order.
+   * Creates advancement flows for all advancements at a specific level.
    * @param {Item5e} item      Item that has advancement.
    * @param {number} level     Level in question.
-   * @returns {Advancement[]}  Relevant advancement objects.
-   * @protected
+   * @returns {Advancement[]}  Created flow applications.
    */
-  advancementsForLevel(item, level) {
-    const advancements = Object.values(item.advancement).filter(a => a.levels.includes(level));
-    return advancements.sort((a, b) => a.sortingValueForLevel(level).localeCompare(b.sortingValueForLevel(level)));
+  static flowsForLevel(item, level) {
+    const advancements = Object.values(item?.advancement ?? {}).filter(a => a.levels.includes(level));
+    advancements.sort((a, b) => a.sortingValueForLevel(level).localeCompare(b.sortingValueForLevel(level)));
+    return advancements.map(a => new a.constructor.flowApp(item, a.id, level));
   }
 
   /* -------------------------------------------- */
@@ -296,10 +296,35 @@ export class AdvancementStep extends Application {
 
 
 /**
- * Handles presenting changes for a class and other items when level is increased by one.
+ * Abstract class to handle some shared logic between LevelIncreasedStep & LevelDecreasedStep types.
  * @extends {AdvancementStep}
  */
-export class LevelIncreasedStep extends AdvancementStep {
+class LevelChangedStep extends AdvancementStep {
+
+  /** @inheritdoc */
+  get flows() {
+    this._flows ??= [
+      // The class that has had its level updated
+      ...this.constructor.flowsForLevel(this.item, this.config.classLevel),
+      // The subclass for this class, if any
+      ...this.constructor.flowsForLevel(this.item.subclass, this.config.classLevel),
+      // All other items with advancements based on new character level
+      ...this.actor.items.contents.flatMap(i => {
+        if ( ["class", "subclass"].includes(i.type) ) return [];
+        return this.constructor.flowsForLevel(i, this.config.level);
+      })
+    ];
+    return this._flows;
+  }
+
+}
+
+
+/**
+ * Handles presenting changes for a class and other items when level is increased by one.
+ * @extends {LevelChangedStep}
+ */
+export class LevelIncreasedStep extends LevelChangedStep {
 
   /** @inheritdoc */
   get title() {
@@ -311,25 +336,6 @@ export class LevelIncreasedStep extends AdvancementStep {
 
   get shouldRender() {
     return this.flows.length > 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get flows() {
-    this._flows ??= [
-      ...this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
-        return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
-      }),
-      ...this.actor.items.contents.flatMap(i => {
-        if ( i.type === "class" || ((i.type === "subclass") && (i.class.id !== this.item.id)) ) return [];
-        let level = ( i.type === "subclass" ) ? this.config.classLevel : this.config.level;
-        return this.advancementsForLevel(i, level).map(a => {
-          return new a.constructor.flowApp(i, a.id, level);
-        });
-      })
-    ];
-    return this._flows;
   }
 
   /* -------------------------------------------- */
@@ -368,9 +374,9 @@ export class LevelIncreasedStep extends AdvancementStep {
 
 /**
  * Handles unapplying changes for a class and other items when level is decreased by one.
- * @extends {AdvancementStep}
+ * @extends {LevelChangedStep}
  */
-export class LevelDecreasedStep extends AdvancementStep {
+export class LevelDecreasedStep extends LevelChangedStep {
 
   constructor(...args) {
     super(...args);
@@ -390,25 +396,6 @@ export class LevelDecreasedStep extends AdvancementStep {
       reverse: true,
       shouldRender: false
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  get flows() {
-    this._flows ??= [
-      ...this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
-        return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
-      }),
-      ...this.actor.items.contents.flatMap(i => {
-        if ( i.type === "class" || ((i.type === "subclass") && (i.class.id !== this.item.id)) ) return [];
-        let level = ( i.type === "subclass" ) ? this.config.classLevel : this.config.level;
-        return this.advancementsForLevel(i, level).map(a => {
-          return new a.constructor.flowApp(i, a.id, level);
-        });
-      })
-    ];
-    return this._flows;
   }
 
   /* -------------------------------------------- */
@@ -449,9 +436,7 @@ export class ItemAddedStep extends AdvancementStep {
   /** @inheritdoc */
   get flows() {
     const level = this.actor.data.data.details?.level ?? CONFIG.DND5E.maxLevel;
-    this._flows ??= Array.from({length: level}, (v, i) => i + 1).flatMap(l => {
-      return this.advancementsForLevel(this.item, l).map(a => new a.constructor.flowApp(this.item, a.id, l));
-    });
+    this._flows ??= Array.numbersBetween(1, level).flatMap(l => this.constructor.flowsForLevel(this.item, l));
     return this._flows;
   }
 
@@ -506,9 +491,7 @@ export class ItemRemovedStep extends AdvancementStep {
   /** @inheritdoc */
   get flows() {
     const level = this.actor.data.data.details?.level ?? CONFIG.DND5E.maxLevel;
-    this._flows ??= Array.from({length: level}, (v, i) => i + 1).flatMap(l => {
-      return this.advancementsForLevel(this.item, l).map(a => new a.constructor.flowApp(this.item, a.id, l));
-    });
+    this._flows ??= Array.numbersBetween(1, level).flatMap(l => this.constructor.flowsForLevel(this.item, l));
     return this._flows;
   }
 
@@ -542,9 +525,7 @@ export class ModifyChoicesStep extends AdvancementStep {
 
   /** @inheritdoc */
   get flows() {
-    this._flows ??= this.advancementsForLevel(this.item, this.config.level).map(a => {
-      return new a.constructor.flowApp(this.item, a.id, this.config.level);
-    });
+    this._flows ??= this.flowsForLevel(this.item, this.config.level);
     return this._flows;
   }
 
