@@ -259,7 +259,7 @@ export default class Item5e extends Item {
     const labels = this.labels = {};
 
     // Clear out linked item cache
-    this._linkedItem = undefined;
+    this._classLink = undefined;
 
     // Advancement
     this.advancement = (itemData.data.advancement ?? []).reduce((obj, data) => {
