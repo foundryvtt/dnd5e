@@ -102,8 +102,8 @@ export class ScaleValueAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static availableForItem(item) {
-    return item.type === "class";
+  static availableForType(type) {
+    return ["class", "subclass"].includes(type);
   }
 
 }
@@ -132,7 +132,7 @@ export class ScaleValueConfig extends AdvancementConfig {
   getData() {
     const data = super.getData();
     data.classIdentifier = this.parent.identifier;
-    data.previewIdentifier = this.data.configuration.identifier || this.data.title.slugify()
+    data.previewIdentifier = this.data.configuration.identifier || this.data.title?.slugify()
       || game.i18n.localize(this.advancement.constructor.defaultTitle).slugify();
 
     let lastValue = "";
