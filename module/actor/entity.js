@@ -210,8 +210,11 @@ export default class Actor5e extends Actor {
     data.scale = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
       data.classes[identifier] = cls.data.data;
-      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.data.data;
       data.scale[identifier] = cls.scaleValues;
+      if ( cls.subclass ) {
+        data.classes[identifier].subclass = cls.subclass.data.data;
+        data.scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+      }
     }
     return data;
   }
