@@ -129,7 +129,7 @@ export class AdvancementPrompt extends Application {
   levelChanged(data, options={}) {
     const allowed = Hooks.call("dnd5e.preLevelChanged", this, data, options);
 
-    if (allowed === false) return;
+    if ( allowed === false ) return;
 
     const {item, character, class: cls} = data;
     let levelDelta = character.final - character.initial;
@@ -412,11 +412,8 @@ export class AdvancementPrompt extends Application {
     }, { toCreate: [], toUpdate: [], toDelete: actor.items.map(i => i.id) });
 
     const allowed = Hooks.call("dnd5e.preAdvancementCommitUpdates", updates, itemUpdates, this);
-
-    if (allowed === false) return Promise.resolve(this.actor);
-
+    if ( allowed === false ) return Promise.resolve(this.actor);
     const { toCreate, toUpdate, toDelete } = itemUpdates;
-
     const actorWithUpdates = await Promise.all([
       this.actor.update(updates),
       this.actor.createEmbeddedDocuments("Item", toCreate, { skipAdvancement: true, keepId: true }),
