@@ -213,6 +213,41 @@
         "title": "",
         "icon": "",
         "classRestriction": ""
+      },
+      {
+        "_id": "zmu0w24zpmg5hahq",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "die",
+          "scale": {
+            "1": "d4",
+            "5": "d6",
+            "11": "d8",
+            "17": "d10"
+          }
+        },
+        "value": {},
+        "title": "Martial Arts Die",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "ng597k2bjuwpfys8",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "",
+          "scale": {
+            "2": "+10 ft.",
+            "6": "+15 ft.",
+            "10": "+20 ft.",
+            "14": "+25 ft.",
+            "18": "+30 ft."
+          }
+        },
+        "value": {},
+        "title": "Unarmored Movement",
+        "icon": "",
+        "classRestriction": ""
       }
     ],
     "saves": [
