@@ -317,4 +317,59 @@ export class Advancement {
     return { add: [], remove: [] };
   }
 
+  /* -------------------------------------------- */
+  /*  Test Methods                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Construct an Advancement instance of an appropriate type for an object of advancement data.
+   * @param {Item5e} item       The Item providing advancement progression
+   * @param {object} data       Configured advancement data
+   * @returns {Advancement}     The constructed Advancement subclass instance
+   * @interface
+   */
+  static fromData(item, data) {
+    const cls = game.dnd5e.advancement.types[`${data.type}Advancement`];
+    return cls ? new cls(item, data) : null;
+  }
+
+  /**
+   * Render the inner HTML for an advancement step.
+   * @param {Actor5e} actor         The Actor who is advancing
+   * @param {AdvancementStep} step  The advancement step being performed
+   * @returns {string}              The HTML to render
+   * @interface
+   */
+  async render(actor, step) {
+    throw new Error("Each subclass of Advancement must implement the render method");
+  }
+
+  /**
+   * Attach interactivity to the advancement form.
+   * @param {Actor5e} actor         The Actor who is advancing
+   * @param {HTMLFormElement} html  The advancement form
+   */
+  activateListeners(actor, html) {}
+
+  /**
+   * Locally apply the result of an advancement choice to the designated Actor.
+   * @param {Actor5e} actor         The Actor who is advancing
+   * @param {AdvancementStep} step  The advancement step being performed
+   * @param {object} formData       Extracted data from the advancement form
+   * @interface
+   */
+  async apply(actor, step, formData) {
+    throw new Error("Each subclass of Advancement must implement the apply method");
+  }
+
+  /**
+   * Locally reverse an advancement choice, removing it from the designated Actor.
+   * @param {Actor5e} actor         The Actor who is advancing
+   * @param {AdvancementStep} step  The advancement step being performed
+   * @param {object} formData       Extracted data from the advancement form
+   * @interface
+   */
+  async reverse(actor, step, formData) {
+    throw new Error("Each subclass of Advancement must implement the reverse method");
+  }
 }

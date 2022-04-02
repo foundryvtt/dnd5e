@@ -1,6 +1,6 @@
 import { Advancement } from "./advancement.js";
 import { AdvancementConfig } from "./advancement-config.js";
-import { AdvancementFlow } from "./advancement-flow.js";
+import {AdvancementError, AdvancementFlow} from "./advancement-flow.js";
 
 
 /**
@@ -90,6 +90,24 @@ export class ItemGrantAdvancement extends Advancement {
     }, { add: [], remove: [] });
   }
 
+  /* -------------------------------------------- */
+  /*  Proof-of-Concept Methods                    */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async render(actor, step) {
+    const items = await Promise.all(this.data.configuration.items.map(async uuid => fromUuid(uuid)));
+    return renderTemplate("systems/dnd5e/templates/advancement/item-grant-flow.html", {items});
+  }
+
+  /** @inheritdoc */
+  async apply(actor, step, formData) {
+    const itemData = await Promise.all(this.data.configuration.items.map(async uuid => {
+      const item = await fromUuid(uuid);
+      return item.toObject();
+    }));
+    actor.data.update({items: itemData});
+  }
 }
 
 

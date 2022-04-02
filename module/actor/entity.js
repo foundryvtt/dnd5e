@@ -1307,6 +1307,24 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Roll hit points for a specific class as part of a level-up workflow.
+   * @param {Item5e} classItem      The class item being advanced
+   * @returns {Promise<Roll>}       The created Roll object
+   */
+  async rollHitPoints(classItem) {
+    const denom = classItem.data.data.hitDice;
+    const roll = new Roll(`1${denom}`);
+    await roll.toMessage({
+      flavor: `${game.i18n.localize("DND5E.AdvancementHitPointsRollMessage")}: ${classItem.name} ${denom}`,
+      speaker: ChatMessage.getSpeaker({actor: this}),
+      "flags.dnd5e.roll": { type: "hitPoints" }
+    });
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Results from a rest operation.
    *
    * @typedef {object} RestResult

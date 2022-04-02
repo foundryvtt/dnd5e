@@ -8,11 +8,14 @@ import * as steps from "./advancement/advancement-step.js";
 import { HitPointsAdvancement } from "./advancement/hit-points.js";
 import { ItemGrantAdvancement } from "./advancement/item-grant.js";
 
+import AdvancementManager from "./advancement/advancement-manager.mjs";
+
 const advancement = {
   Advancement,
   AdvancementConfig,
   AdvancementError,
   AdvancementFlow,
+  AdvancementManager,
   AdvancementPrompt,
   AdvancementSelection,
   DeleteConfirmationDialog,

@@ -2,6 +2,8 @@ import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import Proficiency from "../actor/proficiency.js";
 
+import AdvancementManager from "../advancement/advancement-manager.mjs"; // TODO
+
 /**
  * Override and extend the basic Item implementation.
  * @extends {Item}
@@ -1672,19 +1674,19 @@ export default class Item5e extends Item {
     if ( ["class", "subclass"].includes(this.type) && !this.data.data.identifier ) {
       await this.data.update({ "data.identifier": data.name.slugify({strict: true}) });
     }
-
     if ( !this.isEmbedded ) return;
 
-    // Prepare data for advancement
+    // Class Advancement
     if ( this.type === "class" ) {
       const classLevel = data.data.levels ?? 1;
       options.levelChangeData = {
-        class: { initial: 0, final: classLevel },
+        classLevel: { initial: 0, final: classLevel },
         character: {
           initial: this.parent.data.data.details.level,
           final: this.parent.data.data.details.level + classLevel
         }
       };
+      throw new Error("Item creation prevented");
     }
 
     if ( this.parent.type === "vehicle" ) return;
@@ -1727,8 +1729,11 @@ export default class Item5e extends Item {
     }
     if ( (options.addFeatures === false) || options.skipAdvancement ) return;
     if ( options.levelChangeData ) {
-      options.levelChangeData.item = this;
-      this.parent.advancement.levelChanged(options.levelChangeData);
+      const advMgr = AdvancementManager.fromLevelChange(this.parent, this, {
+        characterLevel: options.levelChangeData.character,
+        classLevel: options.levelChangeData.class
+      });
+      return advMgr.render(true);
     } else if ( this.hasAdvancement ) {
       this.parent.advancement.itemAdded(this);
     }
