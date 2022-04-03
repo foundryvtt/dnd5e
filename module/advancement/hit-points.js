@@ -49,7 +49,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return this.constructor.allLevels;
+    return Array.numbersBetween(1, CONFIG.DND5E.maxLevel);
   }
 
   /* -------------------------------------------- */
@@ -134,8 +134,14 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  static availableForType(type) {
+    return type === "class";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   static availableForItem(item) {
-    if ( item.type !== "class" ) return false;
     return !item.data.data.advancement.find(a => a.type === "HitPoints");
   }
 

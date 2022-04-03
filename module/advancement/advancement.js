@@ -128,17 +128,6 @@ export class Advancement {
   static multiLevel = false;
 
   /* -------------------------------------------- */
-
-  /**
-   * Create an array of levels between 1 and the maximum allowed level.
-   * @type {number[]}
-   * @protected
-   */
-  static get allLevels() {
-    return Array.from({length: CONFIG.DND5E.maxLevel}, (v, i) => i + 1);
-  }
-
-  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
@@ -274,9 +263,20 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
-   * Can an advancement of this type be added to the provided item.
+   * Can an advancement of this type be added to an item of the provided type?
+   * @param {string} type  Type of the item.
+   * @returns {boolean}    Should this be displayed as an option on the `AdvancementSelection` dialog?
+   */
+  static availableForType(type) {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Can an advancement of this type be added to the provided item?
    * @param {Item5e} item  Item to check against.
-   * @returns {boolean}    Can this be added?
+   * @returns {boolean}    Should this be enabled as an option on the `AdvancementSelection` dialog?
    */
   static availableForItem(item) {
     return true;

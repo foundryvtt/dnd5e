@@ -1,4 +1,16 @@
 /* -------------------------------------------- */
+/*  Primitives                                  */
+/* -------------------------------------------- */
+
+/**
+ * Create an array containing an inclusive range of numbers between the minimum and maximum.
+ * @returns {Number[]}
+ */
+Array.numbersBetween = function(min, max) {
+  return Array.from({length: max - min + 1}, (v, i) => i + min);
+};
+
+/* -------------------------------------------- */
 /*  Object Helpers                              */
 /* -------------------------------------------- */
 
