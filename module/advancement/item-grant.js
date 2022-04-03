@@ -11,45 +11,23 @@ import { AdvancementFlow } from "./advancement-flow.js";
  */
 export class ItemGrantAdvancement extends Advancement {
 
-  /* -------------------------------------------- */
-  /*  Static Properties                           */
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
-  static defaultConfiguration = {
-    items: []
-  };
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static order = 40;
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultTitle = "DND5E.AdvancementItemGrantTitle";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultIcon = "icons/svg/book.svg";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static hint = "DND5E.AdvancementItemGrantHint";
-
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get configApp() { return ItemGrantConfig; }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get flowApp() { return ItemGrantFlow; }
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      data: {
+        configuration: { items: [] }
+      },
+      order: 40,
+      icon: "icons/svg/book.svg",
+      title: game.i18n.localize("DND5E.AdvancementItemGrantTitle"),
+      hint: game.i18n.localize("DND5E.AdvancementItemGrantHint"),
+      multiLevel: true,
+      apps: {
+        config: ItemGrantConfig,
+        flow: ItemGrantFlow
+      }
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Display Methods                             */

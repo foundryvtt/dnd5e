@@ -318,7 +318,7 @@ export class LevelIncreasedStep extends AdvancementStep {
   /** @inheritdoc */
   get flows() {
     this._flows ??= this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
-      return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
+      return new a.constructor.metadata.apps.flow(this.item, a.id, this.config.classLevel);
     });
     return this._flows;
   }
@@ -371,7 +371,7 @@ export class LevelDecreasedStep extends AdvancementStep {
   /** @inheritdoc */
   get flows() {
     this._flows ??= this.advancementsForLevel(this.item, this.config.classLevel).map(a => {
-      return new a.constructor.flowApp(this.item, a.id, this.config.classLevel);
+      return new a.constructor.metadata.apps.flow(this.item, a.id, this.config.classLevel);
     });
     return this._flows;
   }
@@ -423,7 +423,7 @@ export class ModifyChoicesStep extends AdvancementStep {
   /** @inheritdoc */
   get flows() {
     this._flows ??= this.advancementsForLevel(this.item, this.config.level).map(a => {
-      return new a.constructor.flowApp(this.item, a.id, this.config.level);
+      return new a.constructor.metadata.apps.flow(this.item, a.id, this.config.level);
     });
     return this._flows;
   }

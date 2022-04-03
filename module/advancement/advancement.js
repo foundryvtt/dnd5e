@@ -25,6 +25,50 @@ export class Advancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Information on how an advancement type is configured.
+   *
+   * @typedef {object} AdvancementMetadata
+   * @property {object} data
+   * @property {object} data.configuration  Default contents of the configuration object for this advancement type.
+   * @property {object} data.value          Default contents of the actor value object for this advancement type.
+   * @property {number} order          Number used to determine default sorting order of advancement items.
+   * @property {string} icon           Icon used for this advancement type if no user icon is specified.
+   * @property {string} title          Title to be displayed if no user title is specified.
+   * @property {string} hint           Description of this type shown in the advancement selection dialog.
+   * @property {boolean} multiLevel    Can this advancement affect more than one level? If this is set to true,
+   *                                   the level selection control in the configuration window is hidden and the
+   *                                   advancement should provide its own implementation of `Advancement#levels`
+   *                                   and potentially its own level configuration interface.
+   * @property {object} apps
+   * @property {*} apps.config         Subclass of AdvancementConfig that allows for editing of this advancement type.
+   * @proeprty {*} apps.flow           Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
+   */
+
+  /**
+   * Configuration information for this advancement type.
+   * @type {AdvancementMetadata}
+   */
+  static get metadata() {
+    return {
+      data: {
+        configuration: {},
+        value: {}
+      },
+      order: 100,
+      icon: "icons/svg/upgrade.svg",
+      title: game.i18n.localize("DND5E.AdvancementTitle"),
+      hint: "",
+      multiLevel: false,
+      apps: {
+        config: AdvancementConfig,
+        flow: AdvancementFlow
+      }
+    };
+  }
+
+  /* -------------------------------------------- */
   /*  Static Properties                           */
   /* -------------------------------------------- */
 
@@ -48,84 +92,12 @@ export class Advancement {
     const data = {
       _id: null,
       type: this.typeName,
-      configuration: foundry.utils.deepClone(this.defaultConfiguration),
-      value: foundry.utils.deepClone(this.defaultValue)
+      configuration: foundry.utils.deepClone(this.metadata.data.configuration),
+      value: foundry.utils.deepClone(this.metadata.data.value)
     };
-    if ( !this.multiLevel ) data.level = 1;
+    if ( !this.metadata.multiLevel ) data.level = 1;
     return data;
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Default contents of the configuration object for an advancement of this type.
-   * @type {object}
-   */
-  static defaultConfiguration = {};
-
-  /* -------------------------------------------- */
-
-  /**
-   * Default contents of the actor value object for an advancement of this type.
-   * @type {object}
-   */
-  static defaultValue = {};
-
-  /* -------------------------------------------- */
-
-  /**
-   * Number used to determine default sorting order of advancement items.
-   * @type {number}
-   */
-  static order = 100;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Localization key for the title to be displayed if no user title is specified.
-   * @type {string}
-   */
-  static defaultTitle = "DND5E.AdvancementTitle";
-
-  /* -------------------------------------------- */
-
-  /**
-   * Icon used for this advancement type if no user icon is specified.
-   * @type {string}
-   */
-  static defaultIcon = "icons/svg/upgrade.svg";
-
-  /* -------------------------------------------- */
-
-  /**
-   * Localization key for a description of this advancement type shown in the advancement selection interface.
-   * @type {string}
-   */
-  static hint = "";
-
-  /* -------------------------------------------- */
-
-  /**
-   * Subclass of AdvancementConfig that allows for editing of this advancement type.
-   */
-  static configApp = AdvancementConfig;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
-   */
-  static flowApp = AdvancementFlow;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Can this advancement affect more than one level. If this is set to true, the level selection control
-   * in the configuration window is hidden and the advancement should provide its own implementation of
-   * `Advancement#levels` and potentially its own level configuration interface.
-   * @type {boolean}
-   */
-  static multiLevel = false;
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -156,7 +128,7 @@ export class Advancement {
    * @type {string}
    */
   get title() {
-    return this.data.title || game.i18n.localize(this.constructor.defaultTitle);
+    return this.data.title || this.constructor.metadata.title;
   }
 
   /* -------------------------------------------- */
@@ -166,7 +138,7 @@ export class Advancement {
    * @type {string}
    */
   get icon() {
-    return this.data.icon || this.constructor.defaultIcon;
+    return this.data.icon || this.constructor.metadata.icon;
   }
 
   /* -------------------------------------------- */
@@ -201,7 +173,7 @@ export class Advancement {
    * @returns {string}      String that can be used for sorting.
    */
   sortingValueForLevel(level) {
-    return `${this.constructor.order.paddedString(4)} ${this.titleForLevel(level)}`;
+    return `${this.constructor.metadata.order.paddedString(4)} ${this.titleForLevel(level)}`;
   }
 
   /* -------------------------------------------- */

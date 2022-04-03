@@ -11,37 +11,19 @@ import { AdvancementError, AdvancementFlow } from "./advancement-flow.js";
  */
 export class HitPointsAdvancement extends Advancement {
 
-  /* -------------------------------------------- */
-  /*  Static Properties                           */
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
-  static order = 10;
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultTitle = "DND5E.AdvancementHitPointsTitle";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultIcon = "icons/svg/regen.svg";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static hint = "DND5E.AdvancementHitPointsHint";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get flowApp() { return HitPointsFlow; }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static multiLevel = true;
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      order: 10,
+      icon: "icons/svg/regen.svg",
+      title: game.i18n.localize("DND5E.AdvancementHitPointsTitle"),
+      hint: game.i18n.localize("DND5E.AdvancementHitPointsHint"),
+      multiLevel: true,
+      apps: {
+        flow: HitPointsFlow
+      }
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */

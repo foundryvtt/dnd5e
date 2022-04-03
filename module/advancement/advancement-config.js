@@ -40,7 +40,7 @@ export class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   get title() {
-    const type = game.i18n.localize(this.advancement.constructor.defaultTitle);
+    const type = this.advancement.constructor.metadata.title;
     return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { type })}: ${this.parent.name}`;
   }
 
@@ -51,12 +51,12 @@ export class AdvancementConfig extends FormApplication {
     return {
       data: this.advancement.data,
       default: {
-        title: game.i18n.localize(this.advancement.constructor.defaultTitle),
-        icon: this.advancement.constructor.defaultIcon
+        title: this.advancement.constructor.metadata.title,
+        icon: this.advancement.constructor.metadata.icon
       },
       levels: Object.fromEntries(Array.numbersBetween(1, CONFIG.DND5E.maxLevel).map(l => [l, l])),
       showClassRestrictions: this.parent.type === "class",
-      showLevelSelector: !this.advancement.constructor.multiLevel
+      showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };
   }
 

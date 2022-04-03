@@ -37,9 +37,9 @@ export class AdvancementSelection extends Dialog {
     for ( const advancement of Object.values(game.dnd5e.advancement.types) ) {
       if ( !advancement.availableForType(this.item.type) ) continue;
       data.types[advancement.typeName] = {
-        label: game.i18n.localize(advancement.defaultTitle),
-        icon: advancement.defaultIcon,
-        hint: game.i18n.localize(advancement.hint),
+        label: advancement.metadata.title,
+        icon: advancement.metadata.icon,
+        hint: advancement.metadata.hint,
         disabled: !advancement.availableForItem(this.item)
       };
     }
