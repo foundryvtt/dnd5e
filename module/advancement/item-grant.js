@@ -65,7 +65,7 @@ export class ItemGrantAdvancement extends Advancement {
         item.data.update({
           _id: foundry.utils.randomID(),
           "flags.dnd5e.sourceId": uuid,
-          "flags.dnd5e.advancementOrigin": `${this.parent.id}.${this.id}`
+          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
         });
         this.actor.items.set(item.id, item);
         // TODO: Trigger any additional advancement steps for added items
@@ -164,7 +164,7 @@ export class ItemGrantConfig extends AdvancementConfig {
     const existingItems = this.advancement.data.configuration.items;
 
     // Abort if this uuid is the parent item
-    if ( item.uuid === this.parent.uuid ) {
+    if ( item.uuid === this.item.uuid ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
     }
 

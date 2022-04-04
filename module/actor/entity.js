@@ -1311,7 +1311,8 @@ export default class Actor5e extends Actor {
    * @param {Item5e} item      The class item whose hit dice to roll.
    * @returns {Promise<Roll>}  The completed roll.
    */
-  async rollHitPoints(item) {
+  async rollClassHitPoints(item) {
+    if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
     const denom = item.data.data.hitDice;
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
     const roll = new Roll(`1${denom}`);

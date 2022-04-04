@@ -5,17 +5,17 @@ import { AdvancementFlow } from "./advancement-flow.js";
 /**
  * Abstract base class which various advancement types can subclass.
  *
- * @property {Item5e} parent  Item to which this advancement belongs.
+ * @property {Item5e} item    Item to which this advancement belongs.
  * @property {object} [data]  Raw data stored in the advancement object.
  */
 export class Advancement {
 
-  constructor(parent, data={}) {
+  constructor(item, data={}) {
     /**
      * Item to which this advancement belongs.
      * @type {Item5e}
      */
-    this.parent = parent;
+    this.item = item;
 
     /**
      * Configuration data for this advancement.
@@ -118,7 +118,7 @@ export class Advancement {
    * @type {Actor5e|null}
    */
   get actor() {
-    return this.parent.parent ?? null;
+    return this.item.parent ?? null;
   }
 
   /* -------------------------------------------- */
@@ -208,9 +208,9 @@ export class Advancement {
    * @returns {Promise<Advancement>}  This advancement after updates have been applied.
    */
   async update(updates) {
-    await this.parent.updateAdvancement(this.id, updates);
-    this.data = this.parent.advancement[this.id].data;
-    return this.parent.advancement[this.id];
+    await this.item.updateAdvancement(this.id, updates);
+    this.data = this.item.advancement[this.id].data;
+    return this.item.advancement[this.id];
   }
 
   /* -------------------------------------------- */
@@ -221,13 +221,13 @@ export class Advancement {
    * @returns {Advancement}   This advancement after updates have been applied.
    */
   updateSource(updates) {
-    const advancement = foundry.utils.deepClone(this.parent.data.data.advancement);
+    const advancement = foundry.utils.deepClone(this.item.data.data.advancement);
     const idx = advancement.findIndex(a => a._id === this.id);
     if ( idx < 0 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
 
     foundry.utils.mergeObject(this.data, updates);
     foundry.utils.mergeObject(advancement[idx], updates);
-    this.parent.data.update({"data.advancement": advancement});
+    this.item.data.update({"data.advancement": advancement});
 
     return this;
   }

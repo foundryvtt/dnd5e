@@ -41,7 +41,7 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {string}
    */
   get hitDie() {
-    return this.parent.data.data.hitDice;
+    return this.item.data.data.hitDice;
   }
 
   /* -------------------------------------------- */
@@ -196,7 +196,7 @@ export class HitPointsFlow extends AdvancementFlow {
     }
 
     return foundry.utils.mergeObject(super.getData(), {
-      isFirstClassLevel: (this.level === 1) && this.advancement.parent.isOriginalClass,
+      isFirstClassLevel: (this.level === 1) && this.advancement.item.isOriginalClass,
       hitDie: this.advancement.hitDie,
       dieValue: this.advancement.hitDieValue,
       data: {
@@ -215,7 +215,7 @@ export class HitPointsFlow extends AdvancementFlow {
       this.form.querySelector(".rollButton").disabled = event.target.checked;
     });
     this.form.querySelector(".rollButton")?.addEventListener("click", async event => {
-      const roll = await this.advancement.actor.rollHitPoints(this.advancement.parent);
+      const roll = await this.advancement.actor.rollClassHitPoints(this.advancement.item);
       this.form.querySelector(".rollResult").value = roll.total;
     });
   }

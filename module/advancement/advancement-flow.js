@@ -46,7 +46,7 @@ export class AdvancementFlow extends FormApplication {
 
   /** @inheritdoc */
   get id() {
-    return `actor-${this.advancement.parent.id}-advancement-${this.advancement.id}-${this.level}`;
+    return `actor-${this.advancement.item.id}-advancement-${this.advancement.id}-${this.level}`;
   }
 
   /* -------------------------------------------- */
@@ -82,6 +82,7 @@ export class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     await this.advancement.apply(this.level, formData);
   }
