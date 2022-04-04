@@ -259,26 +259,23 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
-   * Locally apply this advancement to the provided actor.
-   * @param {Actor5e} actor  Clone of the actor to which the advancement should be applied.
+   * Locally apply this advancement to the actor.
    * @param {number} level   Level being advanced.
    * @param {object} data    Data from the advancement form.
    * @abstract
    */
-  async apply(actor, level, data) {
+  async apply(level, data) {
     throw new Error("Each subclass of Advancement must implement the apply method");
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Locally remove this advancement's changes from the provided actor.
-   * @param {Actor5e} actor  Clone of the actor to which the advancement changes should be removed.
+   * Locally remove this advancement's changes from the actor.
    * @param {number} level   Level being removed.
-   * @param {object} data    Data from the advancement form.
    * @abstract
    */
-  async reverse(actor, level) {
+  async reverse(level) {
     throw new Error("Each subclass of Advancement must implement the reverse method");
   }
 
