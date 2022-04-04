@@ -155,8 +155,8 @@ export class LevelIncreasedStep extends AdvancementStep {
 
   /** @inheritdoc */
   get title() {
-    if ( this.config.classLevel > 1 ) return game.i18n.localize("DND5E.AdvancementPromptLevelIncreasedTitle");
-    return game.i18n.localize("DND5E.AdvancementPromptLevelNewClassTitle");
+    if ( this.config.classLevel > 1 ) return game.i18n.localize("DND5E.AdvancementManagerLevelIncreasedTitle");
+    return game.i18n.localize("DND5E.AdvancementManagerLevelNewClassTitle");
   }
 
   /* -------------------------------------------- */
@@ -268,7 +268,7 @@ export class ModifyChoicesStep extends AdvancementStep {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      title: game.i18n.localize("DND5E.AdvancementPromptModifyChoicesTitle"),
+      title: game.i18n.localize("DND5E.AdvancementManagerModifyChoicesTitle"),
       confirmClose: false
     });
   }

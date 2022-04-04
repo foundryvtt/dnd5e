@@ -1837,7 +1837,7 @@ export default class Item5e extends Item {
     }
     // TODO: When an item is deleted with flags.dnd5e.advancementOrigin set, inform that advancement so that
     // it can be updated to reflect the item's removal (perhaps this should be entirely handled here rather
-    // than in AdvancementPrompt)
+    // than in AdvancementManager)
     if ( options.skipAdvancement || (options.addFeatures === false) ) return;
     if ( options.levelChangeData ) {
       options.levelChangeData.item = this;

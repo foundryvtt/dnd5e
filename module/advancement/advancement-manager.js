@@ -10,7 +10,7 @@ import { LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep } from "./adv
  * @property {object} [options={}]           Additional application options.
  * @extends {Application}
  */
-export class AdvancementPrompt extends Application {
+export class AdvancementManager extends Application {
 
   constructor(actor, steps=[], options={}) {
     super(options);
@@ -54,7 +54,7 @@ export class AdvancementPrompt extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "flow"],
-      template: "systems/dnd5e/templates/advancement/advancement-prompt.html",
+      template: "systems/dnd5e/templates/advancement/advancement-manager.html",
       width: 460,
       height: "auto"
     });
@@ -64,7 +64,7 @@ export class AdvancementPrompt extends Application {
 
   /** @inheritdoc */
   get title() {
-    return this.step?.title ?? game.i18n.localize("DND5E.AdvancementPromptTitle");
+    return this.step?.title ?? game.i18n.localize("DND5E.AdvancementManagerTitle");
   }
 
   /* -------------------------------------------- */
@@ -282,12 +282,12 @@ export class AdvancementPrompt extends Application {
   async close(options={}) {
     if ( !options.skipConfirmation && this.step?.options.confirmClose ) {
       return new Dialog({
-        title: `${game.i18n.localize("DND5E.AdvancementPromptCloseTitle")}: ${this.actor.name}`,
-        content: game.i18n.localize("DND5E.AdvancementPromptCloseMessage"),
+        title: `${game.i18n.localize("DND5E.AdvancementManagerCloseTitle")}: ${this.actor.name}`,
+        content: game.i18n.localize("DND5E.AdvancementManagerCloseMessage"),
         buttons: {
           close: {
             icon: '<i class="fas fa-times"></i>',
-            label: game.i18n.localize("DND5E.AdvancementPromptCloseButtonStop"),
+            label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonStop"),
             callback: () => {
               this.actor._advancement = null;
               super.close(options);
@@ -295,7 +295,7 @@ export class AdvancementPrompt extends Application {
           },
           continue: {
             icon: '<i class="fas fa-chevron-right"></i>',
-            label: game.i18n.localize("DND5E.AdvancementPromptCloseButtonContinue")
+            label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonContinue")
           }
         },
         default: "close"

@@ -15,7 +15,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Cached version of the current advancement window.
-   * @type {AdvancementPrompt}
+   * @type {AdvancementManager}
    */
   _advancement;
 
@@ -34,10 +34,10 @@ export default class Actor5e extends Actor {
 
   /**
    * Lazily obtain an advancement application for this Actor or create one if it doesn't exist yet.
-   * @type {AdvancementPrompt}
+   * @type {AdvancementManager}
    */
   get advancement() {
-    this._advancement ??= new game.dnd5e.advancement.AdvancementPrompt(this);
+    this._advancement ??= new game.dnd5e.advancement.AdvancementManager(this);
     return this._advancement;
   }
 
