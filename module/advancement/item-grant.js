@@ -51,13 +51,12 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async apply(actor, level, data) {
-    data = foundry.utils.flattenObject(data);
+  async apply(level, data) {
     const added = this.data.value.added ?? {};
     const existing = new Set(Object.values(added));
     const updates = {};
 
-    actor.data.items = actor.data._source.items;
+    this.actor.data.items = this.actor.data._source.items;
     // Figure out which items to add and which to remove
     for ( const [uuid, selected] of Object.entries(data) ) {
       // Item not on actor but needs to be added
@@ -69,7 +68,7 @@ export class ItemGrantAdvancement extends Advancement {
           "flags.dnd5e.sourceId": uuid,
           "flags.dnd5e.advancementOrigin": `${this.parent.id}.${this.id}`
         });
-        actor.data._source.items.push(data);
+        this.actor.data._source.items.push(data);
         // TODO: Trigger any additional advancement steps for added items
         updates[data._id] = uuid;
       }
@@ -77,7 +76,7 @@ export class ItemGrantAdvancement extends Advancement {
       // Item on actor but needs to be removed
       else if ( !selected && existing.has(uuid) ) {
         const [id] = Object.entries(added).find(([, added]) => added == uuid);
-        actor.data._source.items.findSplice(d => d._id === id);
+        this.actor.data._source.items.findSplice(d => d._id === id);
         // TODO: Trigger any additional advancement steps for removed items
         updates[`-=${id}`] = null;
       }
@@ -89,9 +88,9 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  reverse(actor, level) {
+  reverse(level) {
     for ( const id of Object.keys(this.data.value.added ?? {}) ) {
-      actor.items.delete(id);
+      this.actor.items.delete(id);
       // TODO: Ensure any advancement data attached to these items is properly reversed
     }
     this.updateSource({ "-=added": null });

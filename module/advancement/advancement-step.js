@@ -119,7 +119,7 @@ export class AdvancementStep extends Application {
     if ( this.options.reverse ) return this.undoChanges();
     for ( const flow of this.flows ) {
       const formData = flow._getSubmitData();
-      await flow.apply(undefined, this.actor, formData);
+      await flow._updateObject(undefined, formData);
       this.actor.prepareData();
     }
   }
@@ -132,7 +132,7 @@ export class AdvancementStep extends Application {
    */
   async undoChanges() {
     for ( const flow of this.flows ) {
-      await flow.advancement.reverse(this.actor, flow.level);
+      await flow.advancement.reverse(flow.level);
       this.actor.prepareData(undefined, this.actor);
     }
   }

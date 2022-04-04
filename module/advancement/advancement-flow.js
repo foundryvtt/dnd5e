@@ -82,8 +82,8 @@ export class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  async apply(event, actor, formData) {
-    await this.advancement.apply(actor, this.level, foundry.utils.expandObject(formData));
+  async _updateObject(event, formData) {
+    await this.advancement.apply(this.level, formData);
   }
 
 }

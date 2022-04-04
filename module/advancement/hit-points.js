@@ -132,8 +132,8 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  apply(actor, level, data) {
-    const actorData = actor.data.data;
+  apply(level, data) {
+    const actorData = this.actor.data.data;
     let value = this.valueForLevel(level);
 
     // Check for difference between stored value and updated
@@ -142,7 +142,7 @@ export class HitPointsAdvancement extends Advancement {
     // Add con modifier if the level has never been applied before
     if ( this.data.value[level] === undefined ) value += actorData.abilities.con?.mod ?? 0;
 
-    actor.data.update({
+    this.actor.data.update({
       "data.attributes.hp.max": actorData.attributes.hp.max + value,
       "data.attributes.hp.value": actorData.attributes.hp.value + value
     });
@@ -152,13 +152,13 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  reverse(actor, level) {
-    const actorData = actor.data.data;
+  reverse(level) {
+    const actorData = this.actor.data.data;
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
 
     value += actorData.abilities.con?.mod ?? 0;
-    actor.data.update({
+    this.actor.data.update({
       "data.attributes.hp.max": actorData.attributes.hp.max - value,
       "data.attributes.hp.value": actorData.attributes.hp.value - value
     });
@@ -252,13 +252,14 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  apply(event, actor, formData) {
+  /** @inheritdoc */
+  _updateObject(event, formData) {
     let value;
     if ( formData.useMax ) value = "max";
     else if ( formData.useAverage ) value = "avg";
     else if ( Number.isInteger(formData.value) ) value = parseInt(formData.value);
 
-    if ( value !== undefined ) return super.apply(event, actor, { [this.level]: value });
+    if ( value !== undefined ) return this.advancement.apply(this.level, { [this.level]: value });
 
     this.form.querySelector(".rollResult")?.classList.add("error");
     const errorType = formData.value ? "Invalid" : "Empty";
