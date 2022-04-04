@@ -179,7 +179,7 @@ Hooks.once("ready", function() {
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
-  const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
+  const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.data.systemVersion;
   const NEEDS_MIGRATION_VERSION = "1.3.4";
   const COMPATIBLE_MIGRATION_VERSION = 0.80;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
