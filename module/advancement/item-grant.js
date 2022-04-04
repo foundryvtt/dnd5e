@@ -21,7 +21,6 @@ export class ItemGrantAdvancement extends Advancement {
       icon: "icons/svg/book.svg",
       title: game.i18n.localize("DND5E.AdvancementItemGrantTitle"),
       hint: game.i18n.localize("DND5E.AdvancementItemGrantHint"),
-      multiLevel: true,
       apps: {
         config: ItemGrantConfig,
         flow: ItemGrantFlow
@@ -52,20 +51,50 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  itemUpdates({ level, updates, reverse=false }) {
-    const added = this.data.value.added;
-    if ( reverse ) return { add: [], remove: Object.keys(added ?? {}) };
-    if ( !updates ) return { add: Object.values(added ?? {}), remove: [] };
+  async apply(actor, level, data) {
+    data = foundry.utils.flattenObject(data);
+    const added = this.data.value.added ?? {};
+    const existing = new Set(Object.values(added));
+    const updates = {};
 
-    const existing = new Set(Object.values(added ?? {}));
-    return Object.entries(updates).reduce((obj, [uuid, selected]) => {
-      if ( selected && !existing.has(uuid) ) obj.add.push(uuid);
-      else if ( !selected && existing.has(uuid) ) {
-        const [id] = Object.entries(added ?? {}).find(([, added]) => added === uuid);
-        obj.remove.push(id);
+    actor.data.items = actor.data._source.items;
+    // Figure out which items to add and which to remove
+    for ( const [uuid, selected] of Object.entries(data) ) {
+      // Item not on actor but needs to be added
+      if ( selected && !existing.has(uuid) ) {
+        const item = await fromUuid(uuid);
+        if ( !item ) continue;
+        const data = foundry.utils.mergeObject(item.toObject(), {
+          _id: foundry.utils.randomID(),
+          "flags.dnd5e.sourceId": uuid,
+          "flags.dnd5e.advancementOrigin": `${this.parent.id}.${this.id}`
+        });
+        actor.data._source.items.push(data);
+        // TODO: Trigger any additional advancement steps for added items
+        updates[data._id] = uuid;
       }
-      return obj;
-    }, { add: [], remove: [] });
+
+      // Item on actor but needs to be removed
+      else if ( !selected && existing.has(uuid) ) {
+        const [id] = Object.entries(added).find(([, added]) => added == uuid);
+        actor.data._source.items.findSplice(d => d._id === id);
+        // TODO: Trigger any additional advancement steps for removed items
+        updates[`-=${id}`] = null;
+      }
+    }
+
+    this.updateSource({"value.added": updates});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverse(actor, level) {
+    for ( const id of Object.keys(this.data.value.added ?? {}) ) {
+      actor.items.delete(id);
+      // TODO: Ensure any advancement data attached to these items is properly reversed
+    }
+    this.updateSource({ "-=added": null });
   }
 
 }
@@ -191,34 +220,6 @@ export class ItemGrantFlow extends AdvancementFlow {
         return item;
       }))
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  finalizeUpdate(update, itemsAdded) {
-    // Add any added items to the advancement's value
-    const uuids = new Set(Object.keys(update));
-    const added = itemsAdded.reduce((obj, item) => {
-      if ( uuids.has(item.data.flags.dnd5e?.sourceId) ) obj[item.id] = item.data.flags.dnd5e.sourceId;
-      return obj;
-    }, {});
-
-    // Remove any deleted items from advancement value
-    for ( const [uuid, selected] of Object.entries(update) ) {
-      const id = Object.entries(this.advancement.data.value.added ?? {}).find(([, added]) => added === uuid);
-      if ( selected || !id ) continue;
-      added[`-=${id[0]}`] = null;
-    }
-
-    return { added };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  reverseUpdate() {
-    return { "-=added": null };
   }
 
 }

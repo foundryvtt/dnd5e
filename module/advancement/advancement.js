@@ -259,34 +259,27 @@ export class Advancement {
   /* -------------------------------------------- */
 
   /**
-   * Add any properties that should be changed on the actor to an update object.
-   * @param {object} config
-   * @param {number} config.level             Level for which to gather updates.
-   * @param {object} [config.updates]         Updates to this advancement's `value`. If this is provided, only the
-   *                                          difference between this object and the existing value should be applied.
-   * @param {boolean} [config.reverse=false]  Whether the reverse changes should be produced.
-   * @returns {object}                        The actor updates object.
+   * Locally apply this advancement to the provided actor.
+   * @param {Actor5e} actor  Clone of the actor to which the advancement should be applied.
+   * @param {number} level   Level being advanced.
+   * @param {object} data    Data from the advancement form.
+   * @abstract
    */
-  propertyUpdates({ level, updates, reverse=false }) {
-    return {};
+  async apply(actor, level, data) {
+    throw new Error("Each subclass of Advancement must implement the apply method");
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Get a list UUIDs for new items that should be added to the actor.
-   * @param {object} config
-   * @param {number} config.level             Level for which to add items.
-   * @param {object} [config.updates]         Updates to this advancement's `value`. If this is provided, only the
-   *                                          difference between this object and the existing value should be applied.
-   * @param {boolean} [config.reverse=false]  Whether the reverse changes should be produced.
-   * @returns {{
-   *   add: string[],
-   *   remove: string[]
-   * }}  UUIDs of items to add to the actor and IDs of items to remove.
+   * Locally remove this advancement's changes from the provided actor.
+   * @param {Actor5e} actor  Clone of the actor to which the advancement changes should be removed.
+   * @param {number} level   Level being removed.
+   * @param {object} data    Data from the advancement form.
+   * @abstract
    */
-  itemUpdates({ level, updates, reverse=false }) {
-    return { add: [], remove: [] };
+  async reverse(actor, level) {
+    throw new Error("Each subclass of Advancement must implement the reverse method");
   }
 
 }

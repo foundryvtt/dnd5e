@@ -132,29 +132,37 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  propertyUpdates({ level, updates, reverse=false }) {
-    const actorData = this.actor.data.data;
-    const conMod = actorData.abilities.con?.mod ?? 0;
-    let value = this.valueForLevel(level) ?? 0;
+  apply(actor, level, data) {
+    const actorData = actor.data.data;
+    let value = this.valueForLevel(level);
 
-    // When reversing, remove both value and constitution modifier
-    if ( reverse ) value = (value + conMod) * -1;
+    // Check for difference between stored value and updated
+    value = this.constructor.valueForLevel(data, this.hitDieValue, level) - value;
 
-    // If no update data is available, apply full value and constitution modifier
-    else if ( !updates ) value += conMod;
+    // Add con modifier if the level has never been applied before
+    if ( this.data.value[level] === undefined ) value += actorData.abilities.con?.mod ?? 0;
 
-    // Check for difference between stored value and updated, and apply con modifier if it hasn't been applied before
-    else {
-      const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
-      value = modified - value;
-      if ( this.data.value[level] === undefined ) value += conMod;
-    }
-
-    if ( value === 0 ) return {};
-    return {
+    actor.data.update({
       "data.attributes.hp.max": actorData.attributes.hp.max + value,
       "data.attributes.hp.value": actorData.attributes.hp.value + value
-    };
+    });
+    this.updateSource({ value: data });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverse(actor, level) {
+    const actorData = actor.data.data;
+    let value = this.valueForLevel(level);
+    if ( value === undefined ) return;
+
+    value += actorData.abilities.con?.mod ?? 0;
+    actor.data.update({
+      "data.attributes.hp.max": actorData.attributes.hp.max - value,
+      "data.attributes.hp.value": actorData.attributes.hp.value - value
+    });
+    this.updateSource({ [`value.-=${level}`]: null });
   }
 
 }
@@ -244,25 +252,17 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  prepareUpdate(formData) {
+  apply(event, actor, formData) {
     let value;
     if ( formData.useMax ) value = "max";
     else if ( formData.useAverage ) value = "avg";
     else if ( Number.isInteger(formData.value) ) value = parseInt(formData.value);
 
-    if ( value !== undefined ) return { [this.level]: value };
+    if ( value !== undefined ) return super.apply(event, actor, { [this.level]: value });
 
-    this.form.querySelector(".rollResult").classList.add("error");
+    this.form.querySelector(".rollResult")?.classList.add("error");
     const errorType = formData.value ? "Invalid" : "Empty";
     throw new AdvancementError(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  reverseUpdate() {
-    return { [`-=${this.level}`]: null };
   }
 
 }

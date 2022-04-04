@@ -82,35 +82,8 @@ export class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /**
-   * Perform any steps to prepare the form data to be saved within advancement values.
-   * @param {object} formData  Data object taken from the form.
-   * @returns {object}         Data formatted to be applied as an update to `Advancement#data.value`.
-   */
-  prepareUpdate(formData) {
-    return formData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform any final transformation necessary on the value updates after items have been added.
-   * @param {object} update        Value update data provided by `AdvancementFlow#prepareUpdate`.
-   * @param {Item5e[]} itemsAdded  Any items added to the actor.
-   * @returns {object}             Final value updates to apply to the advancement.
-   */
-  finalizeUpdate(update, itemsAdded) {
-    return update;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Provide the update data needed to remove stored value data for this level.
-   * @returns {object}  Update object to remove any stored value.
-   */
-  reverseUpdate() {
-    return {};
+  async apply(event, actor, formData) {
+    await this.advancement.apply(actor, this.level, foundry.utils.expandObject(formData));
   }
 
 }
