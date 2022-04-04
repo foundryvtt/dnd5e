@@ -56,27 +56,26 @@ export class ItemGrantAdvancement extends Advancement {
     const existing = new Set(Object.values(added));
     const updates = {};
 
-    this.actor.data.items = this.actor.data._source.items;
     // Figure out which items to add and which to remove
     for ( const [uuid, selected] of Object.entries(data) ) {
       // Item not on actor but needs to be added
       if ( selected && !existing.has(uuid) ) {
-        const item = await fromUuid(uuid);
+        const item = (await fromUuid(uuid))?.clone();
         if ( !item ) continue;
-        const data = foundry.utils.mergeObject(item.toObject(), {
+        item.data.update({
           _id: foundry.utils.randomID(),
           "flags.dnd5e.sourceId": uuid,
           "flags.dnd5e.advancementOrigin": `${this.parent.id}.${this.id}`
         });
-        this.actor.data._source.items.push(data);
+        this.actor.items.set(item.id, item);
         // TODO: Trigger any additional advancement steps for added items
-        updates[data._id] = uuid;
+        updates[item.id] = uuid;
       }
 
       // Item on actor but needs to be removed
       else if ( !selected && existing.has(uuid) ) {
         const [id] = Object.entries(added).find(([, added]) => added == uuid);
-        this.actor.data._source.items.findSplice(d => d._id === id);
+        this.actor.items.delete(id);
         // TODO: Trigger any additional advancement steps for removed items
         updates[`-=${id}`] = null;
       }
