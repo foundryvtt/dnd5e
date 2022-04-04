@@ -14,7 +14,7 @@ export class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      data: {
+      defaults: {
         configuration: { items: [] }
       },
       order: 40,

@@ -30,9 +30,9 @@ export class Advancement {
    * Information on how an advancement type is configured.
    *
    * @typedef {object} AdvancementMetadata
-   * @property {object} data
-   * @property {object} data.configuration  Default contents of the configuration object for this advancement type.
-   * @property {object} data.value          Default contents of the actor value object for this advancement type.
+   * @property {object} defaults
+   * @property {object} defaults.configuration  Default contents of the configuration object for this advancement type.
+   * @property {object} defaults.value          Default contents of the actor value object for this advancement type.
    * @property {number} order          Number used to determine default sorting order of advancement items.
    * @property {string} icon           Icon used for this advancement type if no user icon is specified.
    * @property {string} title          Title to be displayed if no user title is specified.
@@ -52,7 +52,7 @@ export class Advancement {
    */
   static get metadata() {
     return {
-      data: {
+      defaults: {
         configuration: {},
         value: {}
       },
@@ -92,8 +92,8 @@ export class Advancement {
     const data = {
       _id: null,
       type: this.typeName,
-      configuration: foundry.utils.deepClone(this.metadata.data.configuration),
-      value: foundry.utils.deepClone(this.metadata.data.value)
+      configuration: foundry.utils.deepClone(this.metadata.defaults.configuration),
+      value: foundry.utils.deepClone(this.metadata.defaults.value)
     };
     if ( !this.metadata.multiLevel ) data.level = 1;
     return data;

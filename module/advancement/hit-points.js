@@ -31,7 +31,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.numbersBetween(1, CONFIG.DND5E.maxLevel);
+    return Array.fromRange(CONFIG.DND5E.maxLevel + 1).splice(1);
   }
 
   /* -------------------------------------------- */
