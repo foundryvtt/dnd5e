@@ -169,11 +169,54 @@ export class HitPointsAdvancement extends Advancement {
     };
   }
 
+  /* -------------------------------------------- */
+  /*  Proof-of-Concept Methods                    */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async render(actor, step) {
+    return renderTemplate("systems/dnd5e/templates/advancement/hit-points-flow.html", {
+      isL1: step.characterLevel === 1,
+      hitDie: this.hitDie,
+      dieValue: this.hitDieValue
+    });
+  }
+
+  /** @inheritdoc */
+  async apply(actor, step, formData) {
+    const result = formData.rollResult;
+    const actorData = actor.data.data;
+    if ( !Number.isInteger(result) ) {
+      throw new AdvancementError(game.i18n.localize("DND5E.AdvancementHitPointsInvalidError"));
+    }
+    const delta = result + (actorData.abilities.con?.mod ?? 0);
+    actor.data.update({
+      "data.attributes.hp.max": actorData.attributes.hp.max + delta,
+      "data.attributes.hp.value": actorData.attributes.hp.value + delta
+    });
+  }
+
+  /** @inheritdoc */
+  activateListeners(actor, html) {
+
+    // Change disabled state
+    html.querySelector(".averageCheckbox")?.addEventListener("change", event => {
+      html.querySelector(".rollResult").disabled = event.target.checked;
+      html.querySelector(".rollButton").disabled = event.target.checked;
+    });
+
+    // Roll Hit Points
+    html.querySelector(".rollButton")?.addEventListener("click", async event => {
+      const roll = await actor.rollHitPoints(this.parent);
+      html.querySelector(".rollResult").value = roll.total;
+    });
+  }
 }
 
 
 /**
  * Inline application that presents hit points selection upon level up.
+ * @deprecated
  *
  * @extends {AdvancementFlow}
  */

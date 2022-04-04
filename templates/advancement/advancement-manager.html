@@ -1,0 +1,25 @@
+<form class="advancement-form flow">
+    <div class="advancement-step" data-step-id="{{step.id}}">
+        <h3 class="step-title">
+            {{item.name}} {{step.classLevel}}: {{stepTitle}}
+            <span class="step-count">{{localize "DND5E.AdvancementStepCount" number=stepNumber total=stepsTotal}}</span>
+        </h3>
+        {{{stepHTML}}}
+    </div>
+    <nav class="advancement-buttons flexrow">
+        {{#if hasPrevious}}
+        <button type="button" data-action="previous">
+            <i class="fas fa-angle-double-left"></i> {{localize "DND5E.AdvancementPreviousStep"}}
+        </button>
+        {{/if}}
+        {{#if hasNext}}
+        <button type="button" data-action="next">
+            <i class="fas fa-angle-double-right"></i> {{localize "DND5E.AdvancementNextStep"}}
+        </button>
+        {{else}}
+        <button type="button" data-action="complete">
+            <i class="fas fa-check"></i> {{localize "DND5E.AdvancementComplete"}}
+        </button>
+        {{/if}}
+    </nav>
+</form>
