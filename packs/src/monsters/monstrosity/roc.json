@@ -2,7 +2,7 @@
   "_id": "p980augbCIdpK9ZX",
   "name": "Roc",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/monstrosity/Roc.webp",
   "data": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -537,12 +537,12 @@
   },
   "token": {
     "name": "Roc",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 4,
     "height": 4,
-    "scale": 1,
+    "scale": 2,
     "mirrorX": false,
     "mirrorY": false,
     "lockRotation": false,
@@ -560,7 +560,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -569,7 +569,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/monstrosity/Roc.webp",
     "actorId": "p980augbCIdpK9ZX",
     "alpha": 1,
     "light": {

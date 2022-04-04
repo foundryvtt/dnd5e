@@ -2,7 +2,7 @@
   "_id": "uZ8NrRenwYZ4qNf6",
   "name": "Balor",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/fiend/Balor.webp",
   "data": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Chaotic Evil",
@@ -545,7 +545,7 @@
   },
   "token": {
     "name": "Balor",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 3,
@@ -568,7 +568,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -577,7 +577,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/fiend/Balor.webp",
     "actorId": "uZ8NrRenwYZ4qNf6",
     "alpha": 1,
     "light": {

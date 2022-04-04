@@ -2,7 +2,7 @@
   "_id": "rUg5JMnKNnZNBAq9",
   "name": "Nalfeshnee",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/fiend/Nalfeshnee.webp",
   "data": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Chaotic Evil",
@@ -547,7 +547,7 @@
   },
   "token": {
     "name": "Nalfeshnee",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 2,
@@ -570,7 +570,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -579,7 +579,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/fiend/Nalfeshnee.webp",
     "actorId": "rUg5JMnKNnZNBAq9",
     "alpha": 1,
     "light": {
