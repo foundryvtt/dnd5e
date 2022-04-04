@@ -1,0 +1,88 @@
+{
+  "_id": "OejKD6LitlURecxp",
+  "name": "Psychic Drain",
+  "permission": {
+    "default": 0
+  },
+  "type": "feat",
+  "data": {
+    "description": {
+      "value": "<p>One creature charmed by the {creature} takes <strong>10 (3d6)</strong> <strong>psychic </strong>damage, and the {creature} regains hit points equal to the damage the creature takes.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "MM pg. 13",
+    "activation": {
+      "type": "legendary",
+      "cost": 2,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": null,
+      "per": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "resources.legact.value",
+      "amount": 2
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "3d6",
+          "psychic"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "featType": {
+      "value": "",
+      "_deprecated": true
+    },
+    "time": {
+      "value": "",
+      "_deprecated": true
+    },
+    "damageType": {
+      "value": "",
+      "_deprecated": true
+    }
+  },
+  "flags": {},
+  "img": "icons/magic/death/projectile-skull-flaming-green.webp",
+  "effects": []
+}

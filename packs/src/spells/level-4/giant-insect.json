@@ -1,0 +1,88 @@
+{
+  "_id": "czXrVRx6XYRWsHAi",
+  "name": "Giant Insect",
+  "permission": {
+    "default": 0
+  },
+  "type": "spell",
+  "data": {
+    "description": {
+      "value": "<p>You transform up to ten centipedes, three spiders, five wasps, or one Scorpion within range into giant versions of their natural forms for the Duration. A centipede becomes a Giant Centipede, a Spider becomes a Giant Spider, a wasp becomes a Giant Wasp, and a Scorpion becomes a Giant Scorpion.</p><p>Each creature obeys your verbal commands, and in Combat, they act on Your Turn each round. The DM has the Statistics for these creatures and resolves their Actions and Movement.</p><p>A creature remains in its giant size for the Duration, until it drops to 0 Hit Points, or until you use an action to dismiss the effect on it.</p><p>The DM might allow you to choose different Targets. For example, if you transform a bee, its giant version might have the same Statistics as a Giant Wasp.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 245",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 10,
+      "units": "minute"
+    },
+    "target": {
+      "value": 10,
+      "units": "spec",
+      "type": "creature"
+    },
+    "range": {
+      "value": 30,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": ""
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "level": 4,
+    "school": "trs",
+    "components": {
+      "value": "",
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 100001,
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/leaf-orange-2.jpg",
+  "effects": []
+}

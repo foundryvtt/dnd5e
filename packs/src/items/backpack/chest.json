@@ -1,0 +1,43 @@
+{
+  "_id": "2YbuclKfhDL0bU4u",
+  "name": "Chest",
+  "type": "backpack",
+  "img": "icons/containers/chest/chest-reinforced-steel-walnut-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p>A chest holds 12 cubic feet or 300 pounds of gear.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 153",
+    "quantity": 1,
+    "weight": 25,
+    "price": 5,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "common",
+    "identified": true,
+    "capacity": {
+      "type": "weight",
+      "value": 300,
+      "weightless": false
+    },
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "damage": {
+      "parts": []
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900001,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

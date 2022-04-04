@@ -3,7 +3,9 @@
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" alt="{{actor.name}}"
              data-edit="img">
         <section class="header-details flexrow">
-            <h1 class="charnam">
+            {{> "systems/dnd5e/templates/actors/parts/actor-warnings.html"}}
+
+            <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}"
                        placeholder="{{localize 'DND5E.Name'}}">
             </h1>
@@ -12,7 +14,9 @@
                     <span>{{lookup config.actorSizes data.traits.size}}</span>
                 </li>
                 <li>
-                    <span>{{localize 'DND5E.Vehicle'}}</span>
+                    <select name="data.vehicleType">
+                      {{selectOptions config.vehicleTypes selected=data.vehicleType}}
+                    </select>
                 </li>
                 <li>
                     <input type="text" name="data.traits.dimensions"
@@ -30,29 +34,34 @@
                     <h4 class="attribute-name box-title">{{localize 'DND5E.HitPoints'}}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" placeholder="&mdash;"
-                               value="{{data.attributes.hp.value}}" data-dtype="Number">
+                               value="{{data.attributes.hp.value}}" data-dtype="Number"
+                               title="{{localize 'DND5E.HitPointsCurrent'}}">
                         <span class="sep"> &sol; </span>
                         <input name="data.attributes.hp.max" type="text" placeholder="&mdash;"
-                               value="{{data.attributes.hp.max}}" data-dtype="Number">
+                               value="{{data.attributes.hp.max}}" data-dtype="Number"
+                               title="{{localize 'DND5E.HitPointsMax'}}">
                     </div>
                     <footer class="attribute-footer">
                         <input name="data.attributes.hp.dt" type="text" class="temphp"
                                placeholder="{{localize 'DND5E.Threshold'}}"
-                               value="{{data.attributes.hp.dt}}" data-dtype="Number">
+                               value="{{data.attributes.hp.dt}}" data-dtype="Number"
+                               title="{{localize 'DND5E.DamageThreshold'}}">
                         <input name="data.attributes.hp.mt" type="text" class="temphp"
                                placeholder="{{localize 'DND5E.VehicleMishap'}}"
-                               value="{{data.attributes.hp.mt}}" data-dtype="Number">
+                               value="{{data.attributes.hp.mt}}" data-dtype="Number"
+                               title="{{localize 'DND5E.VehicleMishapThreshold'}}">
                     </footer>
                 </li>
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{localize 'DND5E.ArmorClass'}}</h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.ac.value" type="text" placeholder="&mdash;"
-                               value="{{data.attributes.ac.value}}" data-dtype="Number">
+                        <input name="data.attributes.ac.flat" type="text" placeholder="&mdash;"
+                               value="{{data.attributes.ac.flat}}" data-dtype="Number">
                     </div>
                     <footer class="attribute-footer">
                         <input type="text" name="data.attributes.ac.motionless"
-                               placeholder="&mdash;" value="{{data.attributes.ac.motionless}}">
+                               placeholder="&mdash;" value="{{data.attributes.ac.motionless}}"
+                               title="{{localize 'DND5E.ArmorClassMotionless'}}">
                     </footer>
                 </li>
                 <li class="attribute movement">
@@ -75,6 +84,7 @@
         <a class="item active" data-tab="attributes">{{localize 'DND5E.Attributes'}}</a>
         <a class="item" data-tab="features">{{localize 'DND5E.Features'}}</a>
         <a class="item" data-tab="cargo">{{localize 'DND5E.VehicleCargoCrew'}}</a>
+        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
         <a class="item" data-tab="biography">{{localize 'DND5E.Description'}}</a>
     </nav>
 
@@ -123,7 +133,8 @@
                         <h4>{{localize 'DND5E.ActionPl'}}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.attributes.actions.value" placeholder="0"
-                                   data-dtype="Number" value="{{data.attributes.actions.value}}">
+                                   data-dtype="Number" value="{{data.attributes.actions.value}}"
+                                   title="{{localize 'DND5E.VehicleActionsHint'}}">
                         </div>
                     </div>
                     <div class="counter flexrow action-thresholds">
@@ -132,15 +143,18 @@
                             <span class="sep">&lt;</span>
                             <input type="text" placeholder="&mdash;" data-dtype="Number"
                                    value="{{data.attributes.actions.thresholds.[2]}}"
-                                   name="data.attributes.actions.thresholds.2">
+                                   name="data.attributes.actions.thresholds.2"
+                                   title="{{localize 'DND5E.VehicleActionThresholdsFull'}}">
                             <span class="sep">&lt;</span>
                             <input type="text" placeholder="&mdash;" data-dtype="Number"
                                    value="{{data.attributes.actions.thresholds.[1]}}"
-                                   name="data.attributes.actions.thresholds.1">
+                                   name="data.attributes.actions.thresholds.1"
+                                   title="{{localize 'DND5E.VehicleActionThresholdsMid'}}">
                             <span class="sep">&lt;</span>
                             <input type="text" placeholder="&mdash;" data-dtype="Number"
                                    value="{{data.attributes.actions.thresholds.[0]}}"
-                                   name="data.attributes.actions.thresholds.0">
+                                   name="data.attributes.actions.thresholds.0"
+                                   title="{{localize 'DND5E.VehicleActionThresholdsMin'}}">
                         </div>
                     </div>
                 </div>
@@ -155,7 +169,9 @@
         <div class="tab cargo flexcol" data-group="primary" data-tab="cargo">
             {{> 'systems/dnd5e/templates/actors/parts/actor-inventory.html' sections=cargo}}
         </div>
-
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/dnd5e/templates/actors/parts/active-effects.html"}}
+        </div>
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
             {{editor content=data.details.biography.value target='data.details.biography.value'
                      button=true owner=owner editable=editable rollData=rollData}}

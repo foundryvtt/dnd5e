@@ -1,0 +1,114 @@
+{
+  "_id": "DSHi7yT6OUyDoCcu",
+  "name": "Bracers of Defense",
+  "type": "equipment",
+  "img": "icons/equipment/wrist/bracer-segmented-leather.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing these bracers, you gain a +2 bonus to AC if you are wearing no armor and using no shield.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 156",
+    "quantity": 1,
+    "weight": 1,
+    "price": 6000,
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 0,
+      "type": "clothing",
+      "dex": 0
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": 0,
+    "stealth": false,
+    "proficient": false
+  },
+  "effects": [
+    {
+      "_id": "ul7rjl68p1kyv4z2",
+      "changes": [
+        {
+          "key": "data.attributes.ac.bonus",
+          "mode": 2,
+          "value": "2"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/equipment/wrist/bracer-segmented-leather.webp",
+      "label": "+2 to AC",
+      "origin": "Compendium.dnd5e.items.DSHi7yT6OUyDoCcu",
+      "transfer": true,
+      "flags": {}
+    }
+  ],
+  "folder": null,
+  "sort": 2400000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

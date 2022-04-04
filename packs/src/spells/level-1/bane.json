@@ -1,0 +1,139 @@
+{
+  "_id": "95K2aUhAGV9qXjnf",
+  "name": "Bane",
+  "permission": {
+    "default": 0
+  },
+  "type": "spell",
+  "data": {
+    "description": {
+      "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 216",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 1,
+      "units": "minute"
+    },
+    "target": {
+      "value": 3,
+      "units": "",
+      "type": "creature",
+      "width": null
+    },
+    "range": {
+      "value": 30,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 0,
+      "max": "0",
+      "per": ""
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "cha",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "level": 1,
+    "school": "enc",
+    "components": {
+      "value": "",
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "A drop of blood",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    }
+  },
+  "sort": 100001,
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
+  "effects": [
+    {
+      "_id": "potjmpJPeUA1U4oe",
+      "flags": {},
+      "changes": [
+        {
+          "key": "data.bonuses.abilities.save",
+          "value": "-1d4",
+          "mode": 2
+        },
+        {
+          "key": "data.bonuses.mwak.attack",
+          "value": "-1d4",
+          "mode": 2
+        },
+        {
+          "key": "data.bonuses.msak.attack",
+          "value": "-1d4",
+          "mode": 2
+        },
+        {
+          "key": "data.bonuses.rsak.attack",
+          "value": "-1d4",
+          "mode": 2
+        },
+        {
+          "key": "data.bonuses.rwak.attack",
+          "value": "-1d4",
+          "mode": 2
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": 60,
+        "rounds": 10,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "icon": "systems/dnd5e/icons/spells/rip-magenta-2.jpg",
+      "label": "Bane",
+      "origin": "Item.KkaQm4OQJxc6z3to",
+      "tint": "",
+      "transfer": true
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "_id": "oN4Glcmi4BhdAI3k",
+  "name": "Tome of Leadership and Influence",
+  "type": "consumable",
+  "img": "icons/sundries/books/book-embossed-clasp-gold-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>This book contains guidelines for influencing and charming others, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents and practicing its guidelines, your Charisma score increases by 2, as does your maximum for that score. The manual then loses its magic, but regains it in a century.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 208",
+    "quantity": 1,
+    "weight": 1,
+    "price": 100000,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "hour",
+      "cost": 48,
+      "condition": "The book must be completed in 6 days or less."
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": null,
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": false
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1700000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

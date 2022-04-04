@@ -1,0 +1,87 @@
+{
+  "_id": "ATo0Eb63TDtnu6iA",
+  "name": "Animate Objects",
+  "permission": {
+    "default": 0
+  },
+  "type": "spell",
+  "data": {
+    "description": {
+      "value": "<p>Objects come to life at your command. Choose up to ten nonmagical objects within range that are not being worn or carried. Medium targets count as two objects, Large targets count as four objects, Huge targets count as eight objects. You can't animate any object larger than Huge. Each target animates and becomes a creature under your control until the spell ends or until reduced to 0 hit points.</p><p>As a bonus action, you can mentally command any creature you made with this spell if the creature is within 500 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p><p><strong>Animated Object Statistics</strong></p><p>Size&nbsp; &nbsp; &nbsp; &nbsp; HP&nbsp; &nbsp;AC&nbsp; &nbsp;Attack&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Str Dex</p><p>Tiny&nbsp; &nbsp; &nbsp; &nbsp; 20&nbsp; &nbsp;18&nbsp; &nbsp;+8 to hit, 1d4 + 4 damage&nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp;18</p><p>Small&nbsp; &nbsp; &nbsp;25&nbsp; &nbsp;16&nbsp; &nbsp;+6 to hit, 1d8 + 2 damage&nbsp; &nbsp; 6&nbsp; &nbsp; &nbsp;14</p><p>Medium 40&nbsp; &nbsp;13&nbsp; +5 to hit, 2d6 + 1 damage&nbsp; &nbsp; 10&nbsp; &nbsp;12</p><p>Large&nbsp; &nbsp; &nbsp; 50&nbsp; &nbsp;10&nbsp; +6 to hit, 2d10 + 2 damage&nbsp; 14&nbsp; &nbsp;10</p><p>Huge&nbsp; &nbsp; &nbsp; &nbsp;80&nbsp; &nbsp;10&nbsp; +8 to hit, 2d12 + 4 damage&nbsp; 18&nbsp; &nbsp;6</p><p>An animated object is a construct with AC, hit points, attacks, Strength, and Dexterity determined by its size. Its Constitution is 10 and its Intelligence and Wisdom are 3, and its Charisma is 1. Its speed is 30 feet; if the object lacks legs or other appendages it can use for locomotion, it instead has a flying speed of 30 feet and can hover. If the object is securely attached to a surface or a larger object, such as a chain bolted to a wall, its speed is 0. It has blindsight with a radius of 30 feet and is blind beyond that distance. When the animated object drops to 0 hit points, it reverts to its original object form, and any remaining damage carries over to its original object form.</p><p>If you command an object to attack, it can make a single melee attack against a creature within 5 feet of it. It makes a slam attack with an attack bonus and bludgeoning damage determined by its size. The DM might rule that a specific object inflicts slashing or piercing damage based on its form.</p><p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 6th level or higher, you can animate two additional objects for each slot level above 5th.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 213",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 1,
+      "units": "minute"
+    },
+    "target": {
+      "value": 10,
+      "units": "",
+      "type": "object"
+    },
+    "range": {
+      "value": 120,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": ""
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": ""
+    },
+    "level": 5,
+    "school": "trs",
+    "components": {
+      "value": "",
+      "vocal": true,
+      "somatic": true,
+      "material": false,
+      "ritual": false,
+      "concentration": true
+    },
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "level",
+      "formula": ""
+    }
+  },
+  "sort": 100001,
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/rock-royal-2.jpg",
+  "effects": []
+}

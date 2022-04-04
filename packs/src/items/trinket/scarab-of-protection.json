@@ -1,0 +1,87 @@
+{
+  "_id": "xjRSY2ECcc9viSz3",
+  "name": "Scarab of Protection",
+  "type": "consumable",
+  "img": "icons/environment/creatures/bug-larva-orange.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>If you hold this beetle-shaped medallion in your hand for 1 round, an inscription appears on its surface revealing its magical nature. It provides two benefits while it is on your person:</p>\n<ul>\n<li>You have advantage on saving throws against spells.</li>\n<li>The scarab has 12 charges. If you fail a saving throw against a necromancy spell or a harmful effect originating from an undead creature, you can use your reaction to expend 1 charge and turn the failed save into a successful one. The scarab crumbles into powder and is destroyed when its last charge is expended.</li>\n</ul>",
+      "chat": "",
+      "unidentified": "",
+      "type": "String",
+      "label": "Description"
+    },
+    "source": "DMG pg. 199",
+    "quantity": 1,
+    "weight": 1,
+    "price": 36000,
+    "attunement": 1,
+    "equipped": {
+      "type": "Boolean",
+      "label": "Equipped"
+    },
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "reaction",
+      "cost": 1,
+      "condition": "Charges are consumed by necromancy spells or an undead caster."
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": null,
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 12,
+      "max": 12,
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

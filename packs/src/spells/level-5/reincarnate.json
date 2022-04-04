@@ -1,0 +1,88 @@
+{
+  "_id": "zMEo5DKK8uxsuWnq",
+  "name": "Reincarnate",
+  "permission": {
+    "default": 0
+  },
+  "type": "spell",
+  "data": {
+    "description": {
+      "value": "<p>You touch a dead humanoid or a piece of a dead humanoid. Provided that the creature has been dead no longer than 10 days, the spell forms a new adult body for it and then calls the soul to enter that body. If the target's soul isn't free or willing to do so, the spell fails.</p><p>The magic fashions a new body for the creature to inhabit, which likely causes the creature's race to change. The DM rolls a d100 and consults the following table to determine what form the creature takes when restored to life, or the DM chooses a form.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>d100</strong></td>\n<td><strong>Race</strong></td>\n</tr>\n<tr>\n<td>01-04</td>\n<td>Dragonborn</td>\n</tr>\n<tr>\n<td>05-13</td>\n<td>Dwarf, hill</td>\n</tr>\n<tr>\n<td>14-21</td>\n<td>Dwarf, mountain</td>\n</tr>\n<tr>\n<td>22-25</td>\n<td>Elf, dark</td>\n</tr>\n<tr>\n<td>26-34</td>\n<td>Elf, high</td>\n</tr>\n<tr>\n<td>35-42</td>\n<td>Elf, wood</td>\n</tr>\n<tr>\n<td>43-46</td>\n<td>Gnome, forest</td>\n</tr>\n<tr>\n<td>47-52</td>\n<td>Gnome, rock</td>\n</tr>\n<tr>\n<td>53-56</td>\n<td>Half-elf</td>\n</tr>\n<tr>\n<td>57-60</td>\n<td>Half-orc</td>\n</tr>\n<tr>\n<td>61-68</td>\n<td>Halfling, lightfoot</td>\n</tr>\n<tr>\n<td>69-79</td>\n<td>Halfling, stout</td>\n</tr>\n<tr>\n<td>77-96</td>\n<td>Human</td>\n</tr>\n<tr>\n<td>97-00</td>\n<td>Tiefling</td>\n</tr>\n</tbody>\n</table>\n<p>The reincarnated creature recalls its former life and experiences. It retains the capabilities it had in its original form, except it exchanges its original race for the new one and changes its Racial Traits accordingly.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 271",
+    "activation": {
+      "type": "hour",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": 1,
+      "units": "spec",
+      "type": "creature"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "touch"
+    },
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "per": ""
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "1d100",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "value": "",
+      "scaling": "spell"
+    },
+    "level": 5,
+    "school": "trs",
+    "components": {
+      "value": "",
+      "vocal": true,
+      "somatic": true,
+      "material": true,
+      "ritual": false,
+      "concentration": false
+    },
+    "materials": {
+      "value": "Rare oils and unguents worth at least 1,000 gp, which the spell consumes",
+      "consumed": true,
+      "cost": 1000,
+      "supply": 0
+    },
+    "preparation": {
+      "mode": "prepared",
+      "prepared": false
+    },
+    "scaling": {
+      "mode": "none",
+      "formula": ""
+    }
+  },
+  "sort": 100001,
+  "flags": {},
+  "img": "systems/dnd5e/icons/spells/heal-sky-3.jpg",
+  "effects": []
+}

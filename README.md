@@ -10,7 +10,11 @@ This system provides character sheet support for Actors and Items, mechanical su
 play games of 5th Edition, and compendium content for Monsters, Heroes, Items, Spells, Class Features, Monster 
 Features, and more!
 
-The software component of this system is distributed under the GNUv3 license.
+Data present under the `packs/` directory is taken from the [Systems Reference Document 5.1 (SRD5)](http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf) and used under the terms of the OGL v1.0a, see OGL.txt.
+
+Images present under the `icons/` directory are distributed under various terms, please see the `icons/LICENSE` file for full details.
+
+The software component of this system is distributed under the MIT license.
 
 ## Installation Instructions
 
@@ -25,6 +29,4 @@ may do this by cloning the repository or downloading a zip archive from the
 
 ## Community Contribution
 
-Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge
-requests for code changes. Approval for such requests involves code and (if necessary) design review by Atropos. Please
-reach out on the Foundry Community Discord with any questions.
+See the [CONTRIBUTING](/CONTRIBUTING.md) file for information about how you can help this project.

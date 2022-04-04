@@ -1,0 +1,82 @@
+{
+  "_id": "TjWk2mpNXjDdfIDM",
+  "name": "Carpet of Flying",
+  "type": "consumable",
+  "img": "icons/equipment/back/cloak-hooded-pink.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>You can speak the carpet's command word as an action to make the carpet hover and fly. It moves according to your spoken directions, provided that you are within 30 feet of it.</p>\n<p>Four sizes of carpet of flying exist. The GM chooses the size of a given carpet or determines it randomly.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>d100</strong></td>\n<td><strong>Size</strong></td>\n<td><strong>Capacity</strong></td>\n<td><strong>Flying</strong> <strong>Speed</strong></td>\n</tr>\n<tr>\n<td>01-20</td>\n<td>3 ft. x 5 ft.</td>\n<td>200 lb.</td>\n<td>80 feet</td>\n</tr>\n<tr>\n<td>21-55</td>\n<td>4 ft. x 6 ft.</td>\n<td>400 lb.</td>\n<td>60 feet</td>\n</tr>\n<tr>\n<td>56-80</td>\n<td>5 ft. x 7 ft.</td>\n<td>600 lb.</td>\n<td>40 feet</td>\n</tr>\n<tr>\n<td>81-100</td>\n<td>6 ft. x 9 ft.</td>\n<td>800 lb.</td>\n<td>30 feet</td>\n</tr>\n</tbody>\n</table>\n<p>A carpet can carry up to twice the weight shown on the table, but it flies at half speed if it carries more than its normal capacity.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 157",
+    "quantity": 1,
+    "weight": 10,
+    "price": 12000,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "veryRare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": "Command word."
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": 0,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "autoDestroy": false,
+      "autoUse": false
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1800000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

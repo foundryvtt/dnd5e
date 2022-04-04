@@ -1,0 +1,87 @@
+{
+  "_id": "qVuZznv0MnIjDU70",
+  "name": "Iron Horn of Valhalla",
+  "type": "consumable",
+  "img": "icons/tools/instruments/flute-simple-wood.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>You can use an action to blow this horn. In response, warrior spirits from the Valhalla appear within 60 feet of you. They use the statistics of a @Compendium[dnd5e.monsters.kz1t6xeXVwODpYb2]{Berserker}. They return to Valhalla after 1 hour or when they drop to 0 hit points. Once you use the horn, it can't be used again until 7 days have passed.</p>\n<p>Four types of Horn of Valhalla are known to exist, each made of a different metal. The horn's type determines how many berserkers answer its summons, as well as the requirement for its use. The GM chooses the horn's type or determines it randomly.</p>\n<table>\n<thead>\n<tr>\n<th>d100</th>\n<th>Horn Type</th>\n<th>Berserkers Summoned</th>\n<th>Requirement</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>01-40</td>\n<td>Silver</td>\n<td>2d4 + 2</td>\n<td>None</td>\n</tr>\n<tr>\n<td>41-75</td>\n<td>Brass</td>\n<td>3d4 + 3</td>\n<td>Proficiency with all simple weapons</td>\n</tr>\n<tr>\n<td>76-90</td>\n<td>Bronze</td>\n<td>4d4 + 4</td>\n<td>Proficiency with all medium armor</td>\n</tr>\n<tr>\n<td><strong>91-00</strong></td>\n<td><strong>Iron</strong></td>\n<td><strong>5d4 + 5</strong></td>\n<td><strong>Proficiency with all martial weapons</strong></td>\n</tr>\n</tbody>\n</table>\n<p>If you blow the horn without meeting its requirement, the summoned berserkers attack you. If you meet the requirement, they are friendly to you and your companions and follow your commands.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 175",
+    "quantity": 1,
+    "weight": 3,
+    "price": 14000,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 1,
+      "units": "hour"
+    },
+    "target": {
+      "value": 0,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": 60,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "charges",
+      "autoDestroy": false,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "5d4 +5",
+          ""
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

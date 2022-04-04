@@ -1,0 +1,100 @@
+{
+  "_id": "2ksm2KXCY3vBHTAx",
+  "name": "Robe of Useful Items",
+  "type": "equipment",
+  "img": "systems/dnd5e/icons/items/armor/robe.jpg",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>This robe has cloth patches of various shapes and colors covering it. While wearing the robe, you can use an action to detach one of the patches, causing it to become the object or creature it represents. Once the last patch is removed, the robe becomes an ordinary garment.</p>\n<p>The robe has the following patches:</p>\n<ul>\n<li>x2 Dagger patches</li>\n<li>x2 Bullseye lantern (filled and lit) patches</li>\n<li>x2 Steel mirror patches</li>\n<li>x2 10-foot pole patches</li>\n<li>x2 Hempen rope (50 feet, coiled) patches</li>\n<li>x2 Sack patches</li>\n</ul>\n<p>In addition, the robe has 4d4 other patches. The GM chooses the patches or determines them randomly.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>d100</strong></td>\n<td><strong>Patch</strong></td>\n</tr>\n<tr>\n<td>01-08</td>\n<td>Bag of 100 gp</td>\n</tr>\n<tr>\n<td>09-15</td>\n<td>Silver coffer (1 foot long, 6 inches wide and deep) worth 500 gp</td>\n</tr>\n<tr>\n<td>16-22</td>\n<td>Iron door (up to 10 feet wide and high, barred on one side of your choice), which you can place in an opening you can reach; it conforms to fit the opening, attaching and hinging itself.</td>\n</tr>\n<tr>\n<td>23-30</td>\n<td>10 gems worth 100 gp each</td>\n</tr>\n<tr>\n<td>31-44</td>\n<td>Wooden ladder (24 feet long)</td>\n</tr>\n<tr>\n<td>45-51</td>\n<td>A riding horse with saddle bags</td>\n</tr>\n<tr>\n<td>52-59</td>\n<td>Pit (a cube 10 feet on a side), which you can place on the ground within 10 feet of you</td>\n</tr>\n<tr>\n<td>60-68</td>\n<td>4 potions of healing</td>\n</tr>\n<tr>\n<td>69-75</td>\n<td>Rowboat (12 feet long)</td>\n</tr>\n<tr>\n<td>76-83</td>\n<td>Spell scroll containing one spell of 1st to 3rd level</td>\n</tr>\n<tr>\n<td>84-90</td>\n<td>2 @Compendium[dnd5e.monsters.YTpL2c3NO4sOn2UA]{Mastiff}s</td>\n</tr>\n<tr>\n<td>91-96</td>\n<td>Window (2 feet by 4 feet, up to 2 feet deep) which you can place on a vertical surface you can reach</td>\n</tr>\n<tr>\n<td>97-00</td>\n<td>Portable ram</td>\n</tr>\n</tbody>\n</table>\n<p><em>Foundry note: the Other Formula has been set to calculate the 4d4 patches if required.</em></p>\n<p><em>Additionally, it is recommended to delete items here as necessary to track patches left.</em></p>\n<p><em>The price guide has been calculated at 5*item for the maximum number of items possible.  Please adjust as necessary to reflect the number of patches and the DM's world economy.</em></p>\n<p> </p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 195",
+    "quantity": 1,
+    "weight": 1,
+    "price": 140,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "uncommon",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "4d4",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 0,
+      "type": "clothing",
+      "dex": 0
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": 0,
+    "stealth": false,
+    "proficient": false,
+    "attributes": {
+      "spelldc": 10
+    },
+    "details": {
+      "description": "<p><em>Wondrous item</em></p>\n<p>This robe has cloth patches of various shapes and colors covering it. While wearing the robe, you can use an action to detach one of the patches, causing it to become the object or creature it represents. Once the last patch is removed, the robe becomes an ordinary garment.</p>\n<p>The robe has the following patches:</p>\n<ul>\n<li>x2 @Compendium[dnd5e.items.0E565kQUBmndJ1a2]{Dagger} patches</li>\n<li>x2 @Compendium[dnd5e.items.UkWdyJYQTfVX2cJW]{Bullseye Lantern} (filled and lit) patches</li>\n<li>x2 @Compendium[dnd5e.items.HZsvDPmvysQKGzGy]{Steel Mirror} patches</li>\n<li>x2 10-foot @Compendium[dnd5e.items.tut1jbW3UCsrUjCG]{Pole} patches</li>\n<li>x2 @Compendium[dnd5e.items.QXmaarJ4X8P0C1HV]{Hempen Rope} (50 feet, coiled) patches</li>\n<li>x2 @Compendium[dnd5e.items.CNdDj8dsXVpRVpXt]{Sack} patches</li>\n</ul>\n<p>In addition, the robe has 4d4 other patches. The GM chooses the patches or determines them randomly.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>d100</strong></td>\n<td><strong>Patch</strong></td>\n</tr>\n<tr>\n<td>01-08</td>\n<td>Bag of 100 gp</td>\n</tr>\n<tr>\n<td>09-15</td>\n<td>Silver coffer (1 foot long, 6 inches wide and deep) worth 500 gp</td>\n</tr>\n<tr>\n<td>16-22</td>\n<td>Iron door (up to 10 feet wide and high, barred on one side of your choice), which you can place in an opening you can reach; it conforms to fit the opening, attaching and hinging itself.</td>\n</tr>\n<tr>\n<td>23-30</td>\n<td>10 gems worth 100 gp each</td>\n</tr>\n<tr>\n<td>31-44</td>\n<td>Wooden ladder (24 feet long)</td>\n</tr>\n<tr>\n<td>45-51</td>\n<td>A @Compendium[dnd5e.monsters.rz8UTUnFT87BsAFR]{Riding Horse} with saddle bags</td>\n</tr>\n<tr>\n<td>52-59</td>\n<td>Pit (a cube 10 feet on a side), which you can place on the ground within 10 feet of you</td>\n</tr>\n<tr>\n<td>60-68</td>\n<td>4 @Compendium[dnd5e.items.ytlsBjYsZ7OBSEBs]{Potions of Healing}</td>\n</tr>\n<tr>\n<td>69-75</td>\n<td>Rowboat (12 feet long)</td>\n</tr>\n<tr>\n<td>76-83</td>\n<td>Spell scroll containing one spell of 1st to 3rd level</td>\n</tr>\n<tr>\n<td>84-90</td>\n<td>2 @Compendium[dnd5e.monsters.YTpL2c3NO4sOn2UA]{Mastiffs}</td>\n</tr>\n<tr>\n<td>91-96</td>\n<td>Window (2 feet by 4 feet, up to 2 feet deep) which you can place on a vertical surface you can reach</td>\n</tr>\n<tr>\n<td>97-00</td>\n<td>Portable ram</td>\n</tr>\n</tbody>\n</table>\n<p><em>Foundry note: the Other Formula has been set to calculate the 4d4 patches if required.</em></p>\n<p><em>Additionally, it is recommended to delete items here as necessary to track patches left.</em></p>\n<p><em>The price guide has been calculated at 5*item for the maximum number of items possible.  Please adjust as necessary to reflect the number of patches and the DM's world economy.</em></p>\n<p> </p>"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 800000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

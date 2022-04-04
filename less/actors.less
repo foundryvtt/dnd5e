@@ -5,6 +5,19 @@
 .dnd5e.sheet.actor {
 
   /* ----------------------------------------- */
+  /*  Shared Styles                            */
+  /* ----------------------------------------- */
+
+  // Attribute Configuration
+  .config-button {
+    color: @colorOlive;
+    right: -6px;
+    top: -3px;
+    font-size: 10px;
+    font-weight: normal;
+  }
+
+  /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   .sheet-header {
@@ -46,6 +59,10 @@
         height: 24px;
         line-height: 24px;
       }
+      select {
+        position: relative;
+        top: -4px;
+      }
     }
 
     // Primary Attributes
@@ -64,33 +81,38 @@
           border-right: none;
         }
 
+        .attribute-name {
+          position: relative;
+        }
+
         .attribute-value {
           height: 30px;
           line-height: 30px;
         }
-      }
 
-      // Movement Configuration
-      .movement, .hit-dice {
-        h4.attribute-name {
-          position: relative;
-        }
         .config-button {
           position: absolute;
           display: none;
-          right: 0;
-          top: 1px;
-          font-size: 12px;
-          font-weight: normal;
         }
+
         &:hover .config-button {
           display: block;
         }
-      }
 
-      // Temporary HP
-      input.temphp {
-        width: 48%;
+        // Temporary HP
+        input.temphp {
+          width: 48%;
+        }
+
+        // Attribution Tooltip
+        .property-attribution {
+          min-width: 150px;
+          top: 50px;
+          font-family: Signika, sans-serif;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 1rem;
+        }
       }
     }
   }
@@ -166,6 +188,14 @@
     }
   }
 
+  .attributable {
+    position: relative;
+
+    &:hover .tooltip {
+      display: block;
+    }
+  }
+
   /* ----------------------------------------- */
   /*  Ability Scores                           */
   /* ----------------------------------------- */
@@ -184,6 +214,7 @@
       height: 70px;
       text-align: center;
       border-bottom: @borderGroove;
+      position: relative;
 
       &:last-child {
         border-bottom: none;
@@ -196,6 +227,17 @@
         margin: 0 auto;
         line-height: 32px;
         font-size: 24px;
+      }
+
+      .config-button {
+        right: 2px;
+        top: 3px;
+        position: absolute;
+        display: none;
+      }
+
+      &:hover .config-button {
+        display: block;
       }
 
       .ability-modifiers {
@@ -272,6 +314,21 @@
       .skill-proficiency {
         flex: 0 0 16px;
         line-height: 18px;
+      }
+
+      .skill-name-controls {
+        position: relative;
+
+        .config-button {
+          right: 3px;
+          top: 4px;
+          position: absolute;
+          display: none;
+        }
+
+        &:hover .config-button {
+          display: block;
+        }
       }
 
       .skill-ability {

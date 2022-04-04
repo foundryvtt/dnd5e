@@ -1,0 +1,43 @@
+{
+  "_id": "9bWTRRDym06PzSAf",
+  "name": "Pouch",
+  "type": "backpack",
+  "img": "icons/containers/bags/coinpouch-simple-tan.webp",
+  "data": {
+    "description": {
+      "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 153",
+    "quantity": 1,
+    "weight": 1,
+    "price": 0.5,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "common",
+    "identified": true,
+    "capacity": {
+      "type": "weight",
+      "value": 6,
+      "weightless": false
+    },
+    "currency": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 0,
+      "pp": 0
+    },
+    "damage": {
+      "parts": []
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2300001,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

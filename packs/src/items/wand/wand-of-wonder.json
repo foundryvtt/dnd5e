@@ -1,0 +1,82 @@
+{
+  "_id": "lPsueMv4ZoXqCYf9",
+  "name": "Wand of Wonder",
+  "type": "consumable",
+  "img": "icons/weapons/staves/staff-skull-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>(Requires attunement by a spellcaster)</em></p>\n<p>This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges and choose a target within 120 feet of you. The target can be a creature, an object, or a point in space. Roll d100 and consult the following table to discover what happens.</p>\n<p>If the effect causes you to cast a spell from the wand, the spell's save DC is 15. If the spell normally has a range expressed in feet, its range becomes 120 feet if it isn't already. If an effect covers an area, you must center the spell on and include the target. If an effect has multiple possible subjects, the GM randomly determines which ones are affected.</p>\n<p>The wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into dust and is destroyed.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>d100</strong></td>\n<td><strong>Effect</strong></td>\n</tr>\n<tr>\n<td>01-05</td>\n<td>You cast @Compendium[dnd5e.spells.yqUDoxk4x0NWG5Bz]{Slow}.</td>\n</tr>\n<tr>\n<td>06-10</td>\n<td>You cast @Compendium[dnd5e.spells.nqBDWkVOfcGZt4YU]{Faerie Fire}.</td>\n</tr>\n<tr>\n<td>11-15</td>\n<td>You are stunned until the start of your next turn, believing something awesome just happened.</td>\n</tr>\n<tr>\n<td>16-20</td>\n<td>You cast @Compendium[dnd5e.spells.FSMy6VAjDnXY9vWz]{Gust of Wind}.</td>\n</tr>\n<tr>\n<td>21-25</td>\n<td>You cast @Compendium[dnd5e.spells.ppWAAEul0QHtm4er]{Detect Thoughts} on the target you chose. If you didn't target a creature, you instead take 1d6 psychic damage.</td>\n</tr>\n<tr>\n<td>26-30</td>\n<td>You cast @Compendium[dnd5e.spells.TwlD4PLcltv7Xh7j]{Stinking Cloud}.</td>\n</tr>\n<tr>\n<td>31-33</td>\n<td>Heavy rain falls in a 60-foot radius centered on the target. The area becomes lightly obscured. The rain falls until the start of your next turn.</td>\n</tr>\n<tr>\n<td>34-36</td>\n<td>An animal appears in the unoccupied space nearest the target. The animal isn't under your control and acts as it normally would. Roll a d100 to determine which animal appears. On a 01–25, a @Compendium[dnd5e.monsters.SBCe2BSa6opTS5M4]{Rhinoceros} appears; on a 26–50, an @Compendium[dnd5e.monsters.jLPhaBnMtAbB5dp1]{Elephant} appears; and on a 51–100, a @Compendium[dnd5e.monsters.pozQUPTnLZW8epox]{Rat} appears.</td>\n</tr>\n<tr>\n<td>37-46</td>\n<td>You cast @Compendium[dnd5e.spells.IyikgTEOTv701jgQ]{Lightning Bolt}.</td>\n</tr>\n<tr>\n<td>47-49</td>\n<td>A cloud of 600 oversized butterflies fills a 30‐foot radius centered on the target. The area becomes heavily obscured. The butterflies remain for 10 minutes.</td>\n</tr>\n<tr>\n<td>50-53</td>\n<td>You enlarge the target as if you had cast @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce}. If the target can't be affected by that spell, or if you didn't target a creature, you become the target.</td>\n</tr>\n<tr>\n<td>54-58</td>\n<td>You cast @Compendium[dnd5e.spells.S7VbUetIfVT7B6Eq]{Darkness}.</td>\n</tr>\n<tr>\n<td>59-62</td>\n<td>Grass grows on the ground in a 60‐foot radius centered on the target. If grass is already there, it grows to ten times its normal size and remains overgrown for 1 minute.</td>\n</tr>\n<tr>\n<td>63-65</td>\n<td>An object of the GM's choice disappears into the Ethereal Plane. The object must be neither worn nor carried, within 120 feet of the target, and no larger than 10 feet in any dimension.</td>\n</tr>\n<tr>\n<td>66-69</td>\n<td>You shrink yourself as if you had cast @Compendium[dnd5e.spells.WahI41a3goVUg0x1]{Enlarge/Reduce} on yourself.</td>\n</tr>\n<tr>\n<td>70-79</td>\n<td>You cast @Compendium[dnd5e.spells.ztgcdrWPshKRpFd0]{Fireball}.</td>\n</tr>\n<tr>\n<td>80-84</td>\n<td>You cast @Compendium[dnd5e.spells.1N8dDMMgZ1h1YJ3B]{Invisibility} on yourself.</td>\n</tr>\n<tr>\n<td>85-87</td>\n<td>Leaves grow from the target. If you chose a point in space as the target, leaves sprout from the creature nearest to that point. Unless they are picked off, the leaves turn brown and fall off after 24 hours.</td>\n</tr>\n<tr>\n<td>88-90</td>\n<td>A stream of 1d4 × 10 gems, each worth 1 gp, shoots from the wand's tip in a line 30 feet long and 5 feet wide. Each gem deals 1 bludgeoning damage, and the total damage of the gems is divided equally among all creatures in the line.</td>\n</tr>\n<tr>\n<td>91-95</td>\n<td>A burst of colorful shimmering light extends from you in a 30‐foot radius. You and each creature in the area that can see must succeed on a DC 15 Constitution saving throw or become blinded for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</td>\n</tr>\n<tr>\n<td>96-97</td>\n<td>The target's skin turns bright blue for 1d10 days. If you chose a point in space, the creature nearest to that point is affected.</td>\n</tr>\n<tr>\n<td>98-00</td>\n<td>If you targeted a creature, it must make a DC 15 Constitution saving throw. If you didn't target a creature, you become the target and must make the saving throw. If the saving throw fails by 5 or more, the target is instantly petrified. On any other failed save, the target is restrained and begins to turn to stone. While restrained in this way, the target must repeat the saving throw at the end of its next turn, becoming petrified on a failure or ending the effect on a success. The petrification lasts until the target is freed by the greater restoration spell or similar magic.</td>\n</tr>\n</tbody>\n</table>\n<p> </p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 212",
+    "quantity": 1,
+    "weight": 1,
+    "price": 24000,
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": 120,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 7,
+      "max": 7,
+      "per": "charges",
+      "autoDestroy": false,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": "1d4 +1"
+    },
+    "formula": "1d6 +1",
+    "save": {
+      "ability": "dex",
+      "dc": 15,
+      "scaling": "flat"
+    },
+    "consumableType": "wand",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

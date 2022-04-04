@@ -89,8 +89,10 @@
 }
 .dnd5e input[type="text"]:hover,
 .dnd5e input[type="number"]:hover,
+.dnd5e input[type="checkbox"]:hover,
 .dnd5e input[type="text"]:focus,
-.dnd5e input[type="number"]:focus {
+.dnd5e input[type="number"]:focus,
+.dnd5e input[type="checkbox"]:focus {
   border: 1px solid #111;
   box-shadow: 0 0 8px red;
 }
@@ -206,6 +208,9 @@
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Notifications                            */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -283,6 +288,22 @@
 .dnd5e.sheet .editor .tox-toolbar__primary {
   background: none;
 }
+.dnd5e.sheet .warnings,
+.dnd5e.sheet .info {
+  flex: 0 0 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dnd5e.sheet .warnings .notification,
+.dnd5e.sheet .info .notification {
+  font-family: 'Signika', sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  box-shadow: none;
+  padding: 2px 8px;
+  margin-bottom: 2px;
+}
 .dnd5e.sheet .sheet-header {
   flex: 0 0 100px;
   border-bottom: 2px groove #eeede0;
@@ -294,6 +315,16 @@
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-size: 20px;
   font-weight: 700;
+}
+.dnd5e.sheet .sheet-header .header-details .summary select {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-weight: 100;
 }
 .dnd5e.sheet .sheet-header h1 {
   flex: 1;
@@ -390,7 +421,8 @@
 .dnd5e.sheet .traits {
   margin: 5px 0 0;
 }
-.dnd5e.sheet .traits .trait-selector {
+.dnd5e.sheet .traits .trait-selector,
+.dnd5e.sheet .traits .proficiency-selector {
   flex: 0 0 16px;
   padding: 2px 0;
   color: #999;
@@ -496,9 +528,67 @@
   margin: 0;
   padding: 0;
 }
+.trait-selector .trait-list li ol.trait-list {
+  margin-left: 1.5em;
+}
 .trait-selector input[type="text"] {
   height: 24px;
   margin: 2px;
+}
+/* ----------------------------------------- */
+/*  Property Attribution                     */
+/* ----------------------------------------- */
+.property-attribution {
+  display: none;
+  position: absolute;
+  padding: 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  color: #c9c7b8;
+  text-align: left;
+  z-index: 1;
+}
+.property-attribution table {
+  margin: 0;
+  border: 0;
+}
+.property-attribution table tr {
+  background-color: inherit;
+}
+.property-attribution table td {
+  padding: 3px;
+}
+.property-attribution table tr.total > td {
+  font-weight: 600;
+  padding-top: 5px;
+  border-top: 1px solid #7a7971;
+}
+.property-attribution table td.attribution-value {
+  width: 20%;
+  padding-right: 5px;
+  text-align: right;
+  font-weight: 600;
+}
+.property-attribution table td::before {
+  opacity: 0.6;
+}
+.property-attribution table td.mode-1::before {
+  content: "×";
+}
+.property-attribution table td.mode-2::before {
+  content: "+";
+}
+.property-attribution table td.mode-2.negative::before {
+  content: "−";
+  margin-right: -1px;
+}
+.property-attribution table td.mode-3::before {
+  content: "↓";
+}
+.property-attribution table td.mode-4::before {
+  content: "↑";
 }
 /* ----------------------------------------- */
 /*  Actor Type Config Sheet Specifically     */
@@ -528,6 +618,13 @@
   display: none;
 }
 /* ----------------------------------------- */
+/*  Armor Config Sheet Specifically          */
+/* ----------------------------------------- */
+.dnd5e.actor-armor-config .ac-field input {
+  font-size: 3em;
+  text-align: center;
+}
+/* ----------------------------------------- */
 /*  Add Feature Prompt Specifically          */
 /* ----------------------------------------- */
 .dnd5e.select-items-prompt .dialog-content {
@@ -544,7 +641,14 @@
 .dnd5e.select-items-prompt .item-name > label {
   align-items: center;
 }
+.dnd5e.select-items-prompt .window-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
 .dnd5e.sheet.actor {
+  /* ----------------------------------------- */
+  /*  Shared Styles                            */
+  /* ----------------------------------------- */
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
@@ -581,6 +685,13 @@
   /*  TinyMCE                                  */
   /* ----------------------------------------- */
 }
+.dnd5e.sheet.actor .config-button {
+  color: #4b4a44;
+  right: -6px;
+  top: -3px;
+  font-size: 10px;
+  font-weight: normal;
+}
 .dnd5e.sheet.actor .sheet-header img.profile {
   flex: 0 0 160px;
   max-width: 160px;
@@ -613,6 +724,10 @@
   height: 24px;
   line-height: 24px;
 }
+.dnd5e.sheet.actor .sheet-header .summary select {
+  position: relative;
+  top: -4px;
+}
 .dnd5e.sheet.actor .sheet-header .attributes {
   flex: 0 0 100%;
   margin: 0;
@@ -627,29 +742,30 @@
 .dnd5e.sheet.actor .sheet-header .attributes .attribute:last-child {
   border-right: none;
 }
+.dnd5e.sheet.actor .sheet-header .attributes .attribute .attribute-name {
+  position: relative;
+}
 .dnd5e.sheet.actor .sheet-header .attributes .attribute .attribute-value {
   height: 30px;
   line-height: 30px;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement h4.attribute-name,
-.dnd5e.sheet.actor .sheet-header .attributes .hit-dice h4.attribute-name {
-  position: relative;
-}
-.dnd5e.sheet.actor .sheet-header .attributes .movement .config-button,
-.dnd5e.sheet.actor .sheet-header .attributes .hit-dice .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .attribute .config-button {
   position: absolute;
   display: none;
-  right: 0;
-  top: 1px;
-  font-size: 12px;
-  font-weight: normal;
 }
-.dnd5e.sheet.actor .sheet-header .attributes .movement:hover .config-button,
-.dnd5e.sheet.actor .sheet-header .attributes .hit-dice:hover .config-button {
+.dnd5e.sheet.actor .sheet-header .attributes .attribute:hover .config-button {
   display: block;
 }
-.dnd5e.sheet.actor .sheet-header .attributes input.temphp {
+.dnd5e.sheet.actor .sheet-header .attributes .attribute input.temphp {
   width: 48%;
+}
+.dnd5e.sheet.actor .sheet-header .attributes .attribute .property-attribution {
+  min-width: 150px;
+  top: 50px;
+  font-family: Signika, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1rem;
 }
 .dnd5e.sheet.actor h4.box-title {
   height: 18px;
@@ -708,6 +824,12 @@
   font-weight: 400;
   white-space: nowrap;
 }
+.dnd5e.sheet.actor .attributable {
+  position: relative;
+}
+.dnd5e.sheet.actor .attributable:hover .tooltip {
+  display: block;
+}
 .dnd5e.sheet.actor .ability-scores {
   flex: 0 0 100px;
   height: 440px;
@@ -724,6 +846,7 @@
   height: 70px;
   text-align: center;
   border-bottom: 2px groove #eeede0;
+  position: relative;
 }
 .dnd5e.sheet.actor .ability-scores .ability:last-child {
   border-bottom: none;
@@ -735,6 +858,15 @@
   margin: 0 auto;
   line-height: 32px;
   font-size: 24px;
+}
+.dnd5e.sheet.actor .ability-scores .ability .config-button {
+  right: 2px;
+  top: 3px;
+  position: absolute;
+  display: none;
+}
+.dnd5e.sheet.actor .ability-scores .ability:hover .config-button {
+  display: block;
 }
 .dnd5e.sheet.actor .ability-scores .ability .ability-modifiers {
   height: 24px;
@@ -794,6 +926,18 @@
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-proficiency {
   flex: 0 0 16px;
   line-height: 18px;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill .skill-name-controls {
+  position: relative;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill .skill-name-controls .config-button {
+  right: 3px;
+  top: 4px;
+  position: absolute;
+  display: none;
+}
+.dnd5e.sheet.actor ul.skills-list li.skill .skill-name-controls:hover .config-button {
+  display: block;
 }
 .dnd5e.sheet.actor ul.skills-list li.skill .skill-ability {
   flex: 0 0 26px;
@@ -1490,6 +1634,7 @@
   align-items: center;
 }
 .dnd5e.sheet.actor.character .resource .attribute-value label.recharge input[type="checkbox"] {
+  flex-basis: 14px;
   height: 14px;
   width: 14px;
   margin: 0;
@@ -1577,10 +1722,14 @@
   padding: 0;
   text-align: center;
 }
-.dnd5e.sheet.actor.npc .header-exp .experience {
+.dnd5e.sheet.actor.npc .header-exp .experience,
+.dnd5e.sheet.actor.npc .header-exp .proficiency {
   flex: 0 0 18px;
   color: #7a7971;
   font-size: 16px;
+}
+.dnd5e.sheet.actor.npc .header-exp .proficiency {
+  margin-top: -0.3em;
 }
 .dnd5e.sheet.actor.npc .summary {
   font-size: 18px;
@@ -1604,6 +1753,10 @@
 }
 .dnd5e.sheet.actor.npc .summary .creature-type:hover .config-button {
   display: block;
+}
+.dnd5e.sheet.actor.vehicle {
+  min-width: 720px;
+  min-height: 680px;
 }
 .dnd5e.sheet.actor.vehicle .features .item-controls {
   flex: 0 0 68px;

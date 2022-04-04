@@ -1,32 +1,20 @@
 const gulp = require('gulp');
-const less = require('gulp-less');
 
-/* ----------------------------------------- */
-/*  Compile LESS
-/* ----------------------------------------- */
+const css = require('./utils/css.js');
+const linting = require("./utils/lint.js");
+const packs = require('./utils/packs.js');
 
-const DND5E_LESS = ["less/*.less"];
-function compileLESS() {
-  return gulp.src("less/dnd5e.less")
-    .pipe(less())
-    .pipe(gulp.dest("./"))
-}
-const css = gulp.series(compileLESS);
-
-/* ----------------------------------------- */
-/*  Watch Updates
-/* ----------------------------------------- */
-
-function watchUpdates() {
-  gulp.watch(DND5E_LESS, css);
-}
-
-/* ----------------------------------------- */
-/*  Export Tasks
-/* ----------------------------------------- */
 
 exports.default = gulp.series(
-  gulp.parallel(css),
-  watchUpdates
+  gulp.parallel(css.compile),
+  css.watchUpdates
 );
-exports.css = css;
+exports.css = css.compile;
+exports.cleanPacks = gulp.series(packs.clean);
+exports.compilePacks = gulp.series(packs.compile);
+exports.extractPacks = gulp.series(packs.extract);
+exports.lint = gulp.series(linting.lint);
+exports.buildAll = gulp.parallel(
+  css.compile,
+  packs.compile
+);

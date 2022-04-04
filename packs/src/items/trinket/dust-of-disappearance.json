@@ -1,0 +1,82 @@
+{
+  "_id": "cGUPm15mLfhGDz2b",
+  "name": "Dust of Disappearance",
+  "type": "consumable",
+  "img": "icons/magic/water/bubbles-air-water-light.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>Found in a small packet, this powder resembles very fine sand. There is enough of it for one use.</p>\n<p>When you use an action to throw the dust into the air, you and each creature and object within 10 feet of you become invisible for 2d4 minutes. The duration is the same for all subjects, and the dust is consumed when its magic takes effect.</p>\n<p>If a creature affected by the dust attacks or casts a spell, the invisibility ends for that creature.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 166",
+    "quantity": 1,
+    "weight": 0,
+    "price": 300,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "uncommon",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 0,
+      "units": "minute"
+    },
+    "target": {
+      "value": 10,
+      "width": null,
+      "units": "ft",
+      "type": "radius"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1900000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

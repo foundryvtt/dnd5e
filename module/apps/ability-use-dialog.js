@@ -1,6 +1,6 @@
 /**
- * A specialized Dialog subclass for ability usage
- * @type {Dialog}
+ * A specialized Dialog subclass for ability usage.
+ * @extends {Dialog}
  */
 export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
@@ -8,7 +8,7 @@ export default class AbilityUseDialog extends Dialog {
     this.options.classes = ["dnd5e", "dialog"];
 
     /**
-     * Store a reference to the Item entity being used
+     * Store a reference to the Item document being used
      * @type {Item5e}
      */
     this.item = item;
@@ -21,8 +21,8 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Item5e} item
-   * @return {Promise}
+   * @param {Item5e} item  Item being used.
+   * @returns {Promise}    Promise that is resolved when the use dialog is acted upon.
    */
   static async create(item) {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
@@ -34,7 +34,7 @@ export default class AbilityUseDialog extends Dialog {
     const quantity = itemData.quantity || 0;
     const recharge = itemData.recharge || {};
     const recharges = !!recharge.value;
-    const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0; 
+    const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0;
 
     // Prepare dialog form data
     const data = {
@@ -56,8 +56,8 @@ export default class AbilityUseDialog extends Dialog {
 
     // Create the Dialog and return data as a Promise
     const icon = data.isSpell ? "fa-magic" : "fa-fist-raised";
-    const label = game.i18n.localize("DND5E.AbilityUse" + (data.isSpell ? "Cast" : "Use"));
-    return new Promise((resolve) => {
+    const label = game.i18n.localize(`DND5E.AbilityUse${data.isSpell ? "Cast" : "Use"}`);
+    return new Promise(resolve => {
       const dlg = new this(item, {
         title: `${item.name}: ${game.i18n.localize("DND5E.AbilityUseConfig")}`,
         content: html,
@@ -83,7 +83,11 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Get dialog data related to limited spell slots
+   * Get dialog data related to limited spell slots.
+   * @param {object} actorData  Data from the actor using the spell.
+   * @param {object} itemData   Data from the spell being used.
+   * @param {object} data       Data for the dialog being presented.
+   * @returns {object}          Modified dialog data.
    * @private
    */
   static _getSpellData(actorData, itemData, data) {
@@ -94,8 +98,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!consumeSpellSlot) {
-      mergeObject(data, { isSpell: true, consumeSpellSlot });
-      return;
+      return foundry.utils.mergeObject(data, { isSpell: true, consumeSpellSlot });
     }
 
     // Determine the levels which are feasible
@@ -103,13 +106,13 @@ export default class AbilityUseDialog extends Dialog {
     const spellLevels = Array.fromRange(10).reduce((arr, i) => {
       if ( i < lvl ) return arr;
       const label = CONFIG.DND5E.spellLevels[i];
-      const l = actorData.spells["spell"+i] || {max: 0, override: null};
+      const l = actorData.spells[`spell${i}`] || {max: 0, override: null};
       let max = parseInt(l.override || l.max || 0);
       let slots = Math.clamped(parseInt(l.value || 0), 0, max);
       if ( max > 0 ) lmax = i;
       arr.push({
         level: i,
-        label: i > 0 ? game.i18n.format('DND5E.SpellLevelSlot', {level: label, n: slots}) : label,
+        label: i > 0 ? game.i18n.format("DND5E.SpellLevelSlot", {level: label, n: slots}) : label,
         canCast: max > 0,
         hasSlots: slots > 0
       });
@@ -120,8 +123,8 @@ export default class AbilityUseDialog extends Dialog {
     const pact = actorData.spells.pact;
     if (pact.level >= lvl) {
       spellLevels.push({
-        level: 'pact',
-        label: `${game.i18n.format('DND5E.SpellLevelPact', {level: pact.level, n: pact.value})}`,
+        level: "pact",
+        label: `${game.i18n.format("DND5E.SpellLevelPact", {level: pact.level, n: pact.value})}`,
         canCast: true,
         hasSlots: pact.value > 0
       });
@@ -139,7 +142,11 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Get the ability usage note that is displayed
+   * Get the ability usage note that is displayed.
+   * @param {object} item                                     Data for the item being used.
+   * @param {{value: number, max: number, per: string}} uses  Object uses and recovery configuration.
+   * @param {{charged: boolean, value: string}} recharge      Object recharge configuration.
+   * @returns {string}                                        Localized string indicating available uses.
    * @private
    */
   static _getAbilityUseNote(item, uses, recharge) {
@@ -149,10 +156,10 @@ export default class AbilityUseDialog extends Dialog {
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
-    if ( !!recharge.value ) {
+    if ( recharge.value ) {
       return game.i18n.format(recharge.charged ? "DND5E.AbilityUseChargedHint" : "DND5E.AbilityUseRechargeHint", {
-        type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`),
-      })
+        type: game.i18n.localize(`DND5E.ItemType${item.type.capitalize()}`)
+      });
     }
 
     // Does not use any resource

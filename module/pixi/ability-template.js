@@ -9,7 +9,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
   /**
    * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
    * @param {Item5e} item               The Item object for which to construct the template
-   * @return {AbilityTemplate|null}     The template object, or null if the item does not produce a template
+   * @returns {AbilityTemplate|null}     The template object, or null if the item does not produce a template
    */
   static fromItem(item) {
     const target = getProperty(item.data, "data.target") || {};
@@ -19,7 +19,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Prepare template data
     const templateData = {
       t: templateShape,
-      user: game.user._id,
+      user: game.user.id,
       distance: target.value,
       direction: 0,
       x: 0,
@@ -67,7 +67,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     this.layer.preview.addChild(this);
 
     // Hide the sheet that originated the preview
-    if ( this.actorSheet ) this.actorSheet.minimize();
+    this.actorSheet?.minimize();
 
     // Activate interactivity
     this.activatePreviewListeners(initialLayer);
@@ -97,13 +97,13 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
     // Cancel the workflow (right-click)
     handlers.rc = event => {
-      this.layer.preview.removeChildren();
+      this.layer._onDragLeftCancel(event);
       canvas.stage.off("mousemove", handlers.mm);
       canvas.stage.off("mousedown", handlers.lc);
       canvas.app.view.oncontextmenu = null;
       canvas.app.view.onwheel = null;
       initialLayer.activate();
-      this.actorSheet.maximize();
+      this.actorSheet?.maximize();
     };
 
     // Confirm the workflow (left-click)

@@ -1,0 +1,97 @@
+{
+  "_id": "M5APnDW8bKQb7fHI",
+  "name": "Shield of Missile Attraction",
+  "type": "equipment",
+  "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>(Requires attunement)</em></p>\n<p>While holding this shield, you have resistance to damage from ranged weapon attacks.</p>\n<p><strong>Curse</strong>. This shield is cursed. Attuning to it curses you until you are targeted by the @Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse} spell or similar magic. Removing the shield fails to end the curse on you. Whenever a ranged weapon attack is made against a target within 10 feet of you, the curse causes you to become the target instead.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 200",
+    "quantity": 1,
+    "weight": 6,
+    "price": 6000,
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "none",
+      "cost": 0,
+      "condition": "Any ranged attack within 10 ft. of you causes you to be the target."
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": null,
+      "type": "self"
+    },
+    "range": {
+      "value": 10,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "armor": {
+      "value": 2,
+      "type": "shield",
+      "dex": null
+    },
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    },
+    "strength": 0,
+    "stealth": false,
+    "proficient": false,
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2600000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

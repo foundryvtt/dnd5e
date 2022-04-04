@@ -1,0 +1,87 @@
+{
+  "_id": "3ALOhh6JNInIK4o7",
+  "name": "Necklace of Fireballs",
+  "type": "consumable",
+  "img": "icons/equipment/neck/pendant-faceted-red.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>This necklace has 1d6 + 3 beads hanging from it. You can use an action to detach a bead and throw it up to 60 feet away. When it reaches the end of its trajectory, the bead detonates as a 3rd-level <a class=\"entity-link\" draggable=\"true\" data-pack=\"dnd5e.spells\" data-id=\"ztgcdrWPshKRpFd0\"> Fireball</a> spell (save DC 15).</p>\n<p>You can hurl multiple beads, or even the whole necklace, as one action. When you do so, increase the level of the fireball by 1 for each bead beyond the first.</p>\n<p><em>**Foundry note: the 9 charges represent the maximum number of beads possible to find; please adjust as required. The Other Formula button can be used to roll the additional damage for extra beads thrown.</em></p>\n<p><em>Additionally, here is a price guide depending on the number of beads still remaining. These prices are a guide only and should be adjusted accordingly to reflect the Dungeon Master's world:</em></p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>\n<p><strong>Number of </strong><strong>Beads</strong></p>\n</td>\n<td><strong>Price (gp)</strong></td>\n</tr>\n<tr>\n<td>8</td>\n<td>30,720</td>\n</tr>\n<tr>\n<td>7</td>\n<td>15,360</td>\n</tr>\n<tr>\n<td>6</td>\n<td>7680</td>\n</tr>\n<tr>\n<td>5</td>\n<td>3840</td>\n</tr>\n<tr>\n<td>4</td>\n<td>1600</td>\n</tr>\n<tr>\n<td>3</td>\n<td>960</td>\n</tr>\n<tr>\n<td>2</td>\n<td>480</td>\n</tr>\n<tr>\n<td>1</td>\n<td>300</td>\n</tr>\n</tbody>\n</table>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 182",
+    "quantity": 1,
+    "weight": 0.01,
+    "price": 61440,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": 20,
+      "width": null,
+      "units": "ft",
+      "type": "radius"
+    },
+    "range": {
+      "value": 60,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 9,
+      "max": 9,
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "8d6",
+          "fire"
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "1d6",
+    "save": {
+      "ability": "dex",
+      "dc": 15,
+      "scaling": "flat"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1300000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

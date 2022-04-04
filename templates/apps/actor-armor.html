@@ -1,0 +1,21 @@
+<form>
+    <div class="ac-field form-group">
+        <input type="number" name="ac.flat" value="{{value}}" {{#if valueDisabled}}disabled{{/if}}>
+    </div>
+
+    <div class="form-group select">
+        <label>{{localize "DND5E.ArmorClassCalculation"}}</label>
+        <select name="ac.calc">
+            {{selectOptions calculations selected=ac.calc labelAttr="label"}}
+        </select>
+    </div>
+
+    <div class="form-group stacked">
+        <label>{{localize "DND5E.ArmorClassFormula"}}</label>
+        <input type="text" name="ac.formula" value="{{formula}}" {{#if formulaDisabled}}disabled{{/if}}>
+    </div>
+
+    <button type="submit" name="submit" value="1">
+        <i class="far fa-save"></i> {{ localize "DND5E.TraitSave" }}
+    </button>
+</form>

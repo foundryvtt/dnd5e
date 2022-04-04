@@ -1,0 +1,85 @@
+{
+  "_id": "9eyZY9tL3fXD1Mbm",
+  "name": "Dust of Sneezing and Choking",
+  "type": "consumable",
+  "img": "icons/magic/water/bubbles-air-water-light.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>Found in a small container, this powder resembles very fine sand. It appears to be dust of disappearance, and an <em>@Compendium[dnd5e.spells.3OZnNhunvRtPOQmH]{Identify} </em>spell reveals it to be such. There is enough of it for one use.</p>\n<p>When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} spell can also end the effect on a creature.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 166",
+    "quantity": 1,
+    "weight": 0,
+    "price": 480,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "uncommon",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": 30,
+      "width": null,
+      "units": "ft",
+      "type": "radius"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "con",
+      "dc": 15,
+      "scaling": "flat"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    },
+    "details": {
+      "description": "<p><em>Wondrous item</em></p>\n<p>Found in a small container, this powder resembles very fine sand. It appears to be @Compendium[dnd5e.items.cGUPm15mLfhGDz2b]{Dust of Disappearance}, and an <em>@Compendium[dnd5e.spells.3OZnNhunvRtPOQmH]{Identify} </em>spell reveals it to be such. There is enough of it for one use.</p>\n<p>When you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The @Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration} spell can also end the effect on a creature.</p>"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2100000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

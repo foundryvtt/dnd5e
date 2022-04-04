@@ -1,0 +1,82 @@
+{
+  "_id": "hWqImieUaLo08l9l",
+  "name": "Feather Token Bird",
+  "type": "consumable",
+  "img": "icons/commodities/materials/feather-yellow.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>This tiny object looks like a feather. Different types of feather tokens exist, each with a different single-use effect. The GM chooses the kind of token or determines it randomly.</p>\n<table>\n<thead>\n<tr>\n<th>d100</th>\n<th>Feather Token</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>01-20</td>\n<td>Anchor</td>\n</tr>\n<tr>\n<td>21-35</td>\n<td>Bird</td>\n</tr>\n<tr>\n<td>36-50</td>\n<td>Fan</td>\n</tr>\n<tr>\n<td>51-65</td>\n<td>Swan boat</td>\n</tr>\n<tr>\n<td>66-90</td>\n<td>Tree</td>\n</tr>\n<tr>\n<td>91-00</td>\n<td>Whip</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Bird.</strong> You can use an action to toss the token 5 feet into the air. The token disappears and an enormous, multicolored bird takes its place. The bird has the statistics of a @Compendium[dnd5e.monsters.p980augbCIdpK9ZX]{Roc}, but it obeys your simple commands and can't attack. It can carry up to 500 pounds while flying at its maximum speed (16 miles an hour for a maximum of 144 miles per day, with a one-hour rest for every 3 hours of flying), or 1,000 pounds at half that speed. The bird disappears after flying its maximum distance for a day or if it drops to 0 hit points. You can dismiss the bird as an action.</p>\n<p><em>Foundry note: the 144 charges represent the 144 miles the bird can travel when being able to travel at maximum speed to enable accurate distance-tracking as required.</em></p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 188",
+    "quantity": 1,
+    "weight": 0,
+    "price": 3000,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": 0,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": 5,
+      "long": 0,
+      "units": "ft"
+    },
+    "uses": {
+      "value": 144,
+      "max": 144,
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1800000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

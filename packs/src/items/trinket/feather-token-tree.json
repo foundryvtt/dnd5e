@@ -1,0 +1,82 @@
+{
+  "_id": "NjTgPn2o0M1TGk93",
+  "name": "Feather Token Tree",
+  "type": "consumable",
+  "img": "icons/commodities/materials/feather-colored-green.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item</em></p>\n<p>This tiny object looks like a feather. Different types of feather tokens exist, each with a different single-use effect. The GM chooses the kind of token or determines it randomly.</p>\n<table>\n<thead>\n<tr>\n<th>d100</th>\n<th>Feather Token</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>01-20</td>\n<td>Anchor</td>\n</tr>\n<tr>\n<td>21-35</td>\n<td>Bird</td>\n</tr>\n<tr>\n<td>36-50</td>\n<td>Fan</td>\n</tr>\n<tr>\n<td>51-65</td>\n<td>Swan boat</td>\n</tr>\n<tr>\n<td>66-90</td>\n<td>Tree</td>\n</tr>\n<tr>\n<td>91-00</td>\n<td>Whip</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Tree.</strong> You must be outdoors to use this token. You can use an action to touch it to an unoccupied space on the ground. The token disappears, and in its place a nonmagical oak tree springs into existence. The tree is 60 feet tall and has a 5-foot-diameter trunk, and its branches at the top spread out in a 20-foot radius.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 188",
+    "quantity": 1,
+    "weight": 0,
+    "price": 250,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "rare",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 0,
+      "units": ""
+    },
+    "target": {
+      "value": 5,
+      "width": null,
+      "units": "ft",
+      "type": "space"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "touch"
+    },
+    "uses": {
+      "value": 1,
+      "max": 1,
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1800000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}

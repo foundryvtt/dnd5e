@@ -1,0 +1,90 @@
+{
+  "_id": "46ikeR4RrSim6DsN",
+  "name": "Talisman of the Sphere",
+  "type": "consumable",
+  "img": "icons/magic/unholy/orb-beam-pink.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>When you make an Intelligence (Arcana) check to control a Sphere of Annihilation while you are holding this talisman, you double your proficiency bonus on the check. In addition, when you start your turn with control over a Sphere of Annihilation, you can use an action to levitate it 10 feet plus a number of additional feet equal to 10 × your Intelligence modifier.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 207",
+    "quantity": 1,
+    "weight": 0.1,
+    "price": 20000,
+    "attunement": 1,
+    "equipped": false,
+    "rarity": "legendary",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "object"
+    },
+    "range": {
+      "value": 60,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "autoDestroy": false,
+      "autoUse": false
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": "int",
+    "actionType": "abil",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "1d20 + @mod + @attributes.prof + @attributes.prof",
+          ""
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "trinket",
+    "attributes": {
+      "spelldc": 10
+    },
+    "details": {
+      "description": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>When you make an Intelligence (Arcana) check to control a Sphere of Annihilation while you are holding this talisman, you double your proficiency bonus on the check. In addition, when you start your turn with control over a @Compendium[dnd5e.items.2YNqk5zm9jDTvd7q]{Sphere of Annihilation}, you can use an action to levitate it 10 feet plus a number of additional feet equal to 10 ﾃ・your Intelligence modifier.</p>"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500000,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}
