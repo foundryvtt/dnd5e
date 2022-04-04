@@ -210,44 +210,14 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   activateListeners(html) {
-    this.form.querySelector(".averageCheckbox")?.addEventListener("change", this._onAverageChanged.bind(this));
-    this.form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Toggle status of hit points field and roll button based on whether use average checkbox is checked.
-   * @param {Event} event  Change to checkbox that triggers this update.
-   */
-  _onAverageChanged(event) {
-    this.form.querySelector(".rollResult").disabled = event.target.checked;
-    this.form.querySelector(".rollButton").disabled = event.target.checked;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Trigger a hit dice roll and add the result to the field.
-   * @param {Event} event  Click that triggered the roll.
-   */
-  async _onRollDice(event) {
-    // TODO: Maybe this should be `Actor#rollHitPoints`?
-    const actor = this.advancement.actor;
-    const flavor = game.i18n.localize("DND5E.AdvancementHitPointsRollMessage");
-    const roll = await game.dnd5e.dice.damageRoll({
-      event,
-      parts: [`1${this.advancement.hitDie}`],
-      title: `${flavor}: ${actor}`,
-      flavor,
-      allowCritical: false,
-      fastForward: true,
-      messageData: {
-        speaker: ChatMessage.getSpeaker({ actor }),
-        "flags.dnd5e.roll": { type: "hitPoints" }
-      }
+    this.form.querySelector(".averageCheckbox")?.addEventListener("change", event => {
+      this.form.querySelector(".rollResult").disabled = event.target.checked;
+      this.form.querySelector(".rollButton").disabled = event.target.checked;
     });
-    event.target.closest(".rolls").querySelector(".rollResult").value = roll.total;
+    this.form.querySelector(".rollButton")?.addEventListener("click", async event => {
+      const roll = await this.advancement.actor.rollHitPoints(this.advancement.parent);
+      this.form.querySelector(".rollResult").value = roll.total;
+    });
   }
 
   /* -------------------------------------------- */
