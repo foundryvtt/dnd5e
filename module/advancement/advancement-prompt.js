@@ -126,7 +126,12 @@ export class AdvancementPrompt extends Application {
    * @param {object} [options]
    * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
-  levelChanged({ item, character, class: cls }, options={}) {
+  levelChanged(data, options={}) {
+    const allowed = Hooks.call("dnd5e.preLevelChanged", this, data, options);
+
+    if ( allowed === false ) return;
+
+    const {item, character, class: cls} = data;
     let levelDelta = character.final - character.initial;
     const render = options.render ?? true;
     options.render = false;
@@ -396,7 +401,7 @@ export class AdvancementPrompt extends Application {
     const items = updates.items;
     delete updates.items;
 
-    const { toCreate, toUpdate, toDelete } = items.reduce((obj, item) => {
+    const itemUpdates = items.reduce((obj, item) => {
       if ( !actor.items.get(item._id) ) {
         obj.toCreate.push(item);
       } else {
@@ -406,12 +411,18 @@ export class AdvancementPrompt extends Application {
       return obj;
     }, { toCreate: [], toUpdate: [], toDelete: actor.items.map(i => i.id) });
 
-    return Promise.all([
+    const allowed = Hooks.call("dnd5e.preAdvancementCommitUpdates", updates, itemUpdates, this);
+    if ( allowed === false ) return Promise.resolve(this.actor);
+    const { toCreate, toUpdate, toDelete } = itemUpdates;
+    const actorWithUpdates = await Promise.all([
       this.actor.update(updates),
       this.actor.createEmbeddedDocuments("Item", toCreate, { skipAdvancement: true, keepId: true }),
       this.actor.updateEmbeddedDocuments("Item", toUpdate, { skipAdvancement: true }),
       this.actor.deleteEmbeddedDocuments("Item", toDelete, { skipAdvancement: true })
     ]);
+
+    Hooks.callAll("dnd5e.advancementCommitUpdates", actorWithUpdates, this);
+    return actorWithUpdates;
   }
 
 }

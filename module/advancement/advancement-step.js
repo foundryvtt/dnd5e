@@ -162,11 +162,20 @@ export class AdvancementStep extends Application {
       flow.initialUpdate = reverse ? {} : flow.prepareUpdate(flow.form ? flow._getSubmitData() : {});
       const fetchData = { level: flow.level, updates: flow.initialUpdate, reverse };
 
+      // Prepare updates
+      const flowUpdates = {
+        actor: flow.advancement.propertyUpdates(fetchData),
+        item: flow.advancement.itemUpdates(fetchData)
+      };
+
+      Hooks.callAll(`dnd5e.prepare${flow.constructor.name}Updates`, flowUpdates, flow, this, { reverse });
+
+      // Merge updates
       // Prepare property changes
-      Object.assign(updates.actor, flow.advancement.propertyUpdates(fetchData));
+      Object.assign(updates.actor, flowUpdates.actor);
 
       // Prepare added or removed items
-      const { add, remove } = flow.advancement.itemUpdates(fetchData);
+      const { add, remove } = flowUpdates.item;
       add.forEach(uuid => updates.item.add[uuid] = `${flow.advancement.parent.id}.${flow.advancement.id}`);
       updates.item.remove.push(...remove);
 
