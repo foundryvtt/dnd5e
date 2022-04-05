@@ -1,5 +1,6 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
+import { AdvancementManager } from "../../advancement/advancement-manager.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
@@ -11,8 +12,8 @@ import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorSkillConfig from "../../apps/skill-config.js";
 import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
-import {DND5E} from "../../config.js";
 import ActiveEffect5e from "../../active-effect.js";
+
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -758,7 +759,7 @@ export default class ActorSheet5e extends ActorSheet {
       title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
       content: {
         options: game.settings.get("dnd5e", "polymorphSettings"),
-        i18n: DND5E.polymorphSettings,
+        i18n: CONFIG.DND5E.polymorphSettings,
         isToken: this.actor.isToken
       },
       default: "accept",
@@ -838,6 +839,12 @@ export default class ActorSheet5e extends ActorSheet {
           "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
         });
       }
+    }
+  
+    // Bypass normal creation flow for any items with advancement
+    if ( itemData.data.advancement?.length ) {
+      const manager = AdvancementManager.forNewItem(this.actor, itemData);
+      if ( manager ) return manager.render(true);
     }
 
     // Create the owned item as normal

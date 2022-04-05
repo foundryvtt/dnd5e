@@ -11,7 +11,7 @@ import { AdvancementError } from "./advancement-flow.js";
  */
 export class AdvancementManager extends Application {
 
-  constructor(actor, steps=[], options={}) {
+  constructor(actor, options={}) {
     super(options);
 
     /**
@@ -30,14 +30,14 @@ export class AdvancementManager extends Application {
      * Individual steps that will be applied in order.
      * @type {object}
      */
-    this.steps = steps;
+    this.steps = [];
 
     /**
      * Step being currently displayed.
      * @type {number|null}
      * @private
      */
-    this._stepIndex = steps.length ? 0 : null;
+    this._stepIndex = null;
 
     /**
      * Is the prompt currently advancing through un-rendered steps?
@@ -109,40 +109,90 @@ export class AdvancementManager extends Application {
   }
 
   /* -------------------------------------------- */
-  /*  Advancement Actions                         */
+  /*  Factory Methods                             */
   /* -------------------------------------------- */
 
   /**
-   * Represents data about a change in character and class level for an actor.
-   *
-   * @typedef {object} LevelChangeData
-   * @property {Item5e|null} item  Class item that was added or changed.
-   * @property {{ initial: number, final: number }} character  Overall character level changes.
-   * @property {{ initial: number, final: number }} class      Changes to the class's level.
+   * Construct a manager for a newly added item.
+   * @param {Actor5e} actor              Actor whose level has changed.
+   * @param {object} itemData            Data for the item being added.
+   * @param {object} options             Rendering options passed to the application.
+   * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.
    */
+  static forNewItem(actor, itemData, options={}) {
+    const manager = new this(actor, options);
+
+    // Add item to clone
+    const dataClone = foundry.utils.deepClone(itemData);
+    dataClone._id = foundry.utils.randomID();
+    if ( itemData.type === "class" ) dataClone.data.levels = 0;
+    manager.clone.data.update({items: [dataClone]});
+    manager.clone.prepareData();
+
+    const clonedItem = manager.clone.items.get(dataClone._id);
+
+    // For class items, prepare level change data
+    if ( itemData.type === "class" ) {
+      manager._createLevelChangeSteps(clonedItem, itemData.data?.levels ?? 1);
+    }
+
+    // All other items, just create some flows up to current character level
+    else {
+      const characterLevel = manager.clone.data.data.details.level;
+      const flows = Array.fromRange(characterLevel + 1).slice(1).flatMap(l => this.flowsForLevel(clonedItem, l));
+      flows.forEach(flow => manager.steps.push({ type: "item", flow }));
+      manager._stepIndex = 0;
+    }
+
+    return manager.steps.length ? manager : null;
+  }
+
+  /* -------------------------------------------- */
 
   /**
-   * Add a step to this advancement process when a class is added or level is changed.
-   * @param {LevelChangeData} data  Information on the class and level changes.
-   * @param {object} [options]
-   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
+   * Construct a manager for an item that needs to be deleted.
+   * @param {Actor5e} actor              Actor from which the item should be deleted.
+   * @param {object} item                Item to be deleted.
+   * @param {object} options             Rendering options passed to the application.
+   * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.
    */
-  levelChanged({ item, character, class: cls }, options={}) {
-    let levelDelta = character.final - character.initial;
-    const render = options.render ?? true;
-    options.render = false;
+  static forDeletedItem(actor, item, options) {
+    console.warn("Advancements on item delete not yet implemented");
+    return null;
+  }
 
-    // Level didn't change
-    if ( levelDelta === 0 ) {
-      if ( this.steps.length === 0 ) this.actor._advancement = null;
-      return;
-    }
-    const classItem = this.clone.items.find(i => i.id === item.id);
+  /* -------------------------------------------- */
 
+  /**
+   * Construct a manager for a change in a class level.
+   * @param {Actor5e} actor              Actor whose level has changed.
+   * @param {string} classId             ID of the class being changed.
+   * @param {number} levelDelta          Levels by which to increase or decrease the class.
+   * @param {object} options             Rendering options passed to the application.
+   * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.
+   */
+  static forLevelChange(actor, classId, levelDelta, options={}) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(classId);
+    if ( !clonedItem ) return null;
+    manager._createLevelChangeSteps(clonedItem, levelDelta);
+
+    return manager.steps.length ? manager : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create steps based on the provided level change data.
+   * @param {Item5e} classItem     Class being changed from the clone actor.
+   * @param {number} levelDelta    Levels by which to increase or decrease the class.
+   * @private
+   */
+  _createLevelChangeSteps(classItem, levelDelta) {
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
-      const classLevel = cls.initial + offset;
-      const characterLevel = character.initial + offset;
+      const classLevel = classItem.data.data.levels + offset;
+      const characterLevel = this.actor.data.data.details.level + offset;
       const flows = [
         ...this.constructor.flowsForLevel(classItem, classLevel),
         ...this.constructor.flowsForLevel(classItem.subclass, classLevel),
@@ -156,59 +206,11 @@ export class AdvancementManager extends Application {
 
     // Level decreased
     for ( let offset = 0; offset > levelDelta; offset-- ) {
-      this.actor._advancement = null;
       console.warn("Level decrease advancement disabled for the moment");
       return;
     }
 
-    this._stepIndex = 0;
-    if ( render ) this.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Add a step to this advancement process when a non-class item is added.
-   * @param {Item5e} item    Item that was added.
-   * @param {object} [options]
-   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
-   */
-  itemAdded(item, options) {
-    item = this.clone.items.find(i => i.id === item.id);
-    if ( !item ) return;
-    const characterLevel = this.clone.data.data.details.level;
-    const flows = Array.fromRange(characterLevel + 1).slice(1).flatMap(l => this.constructor.flowsForLevel(item, l));
-    flows.forEach(flow => this.steps.push({ type: "item", flow }));
-    this._stepIndex = 0;
-    this.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Add a step to this advancement process when a non-class item is removed.
-   * @param {Item5e} item    Item that was removed.
-   * @param {object} [options]
-   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
-   */
-  itemRemoved(item, options) {
-    this.actor._advancement = null;
-    console.warn("Advancements on non-class items not currently supported");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Modify the choices made on an item at the specified level.
-   * @param {Item5e} item   Item to modify.
-   * @param {number} level  Level at which the changes should be made.
-   * @param {object} [options]
-   * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
-   */
-  modifyChoices(item, level, options) {
-    this.actor._advancement = null;
-    console.warn("Modifying choices has been disabled for the moment");
-    // this._addStep(new ModifyChoicesStep(this.clone, { item, level }), options);
+    if ( this.steps.length ) this._stepIndex = 0;
   }
 
   /* -------------------------------------------- */
@@ -233,9 +235,18 @@ export class AdvancementManager extends Application {
   /** @inheritdoc */
   getData() {
     if ( !this.step ) return {};
+
+    // Ensure the level on the class item matches the specified level
+    if ( this.step.type === "level" ) {
+      this.step.classItem.data.update({"data.levels": this.step.classLevel});
+      this.clone.prepareData();
+    }
+
+    // Prepare information for subheading
     const item = this.step.flow.item;
     let level = this.step.flow.level;
     if ( (this.step.type === "level") && ["class", "subclass"].includes(item.type) ) level = this.step.classLevel;
+
     return {
       actor: this.clone,
       flowId: this.step.flow.id,
