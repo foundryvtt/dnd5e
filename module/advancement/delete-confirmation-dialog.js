@@ -16,11 +16,10 @@ export class DeleteConfirmationDialog extends Dialog {
 
   /**
    * A helper constructor function which displays the delete confirmation dialog.
-   * @param {Item5e} item                                  Item to be deleted.
-   * @param {DocumentModificationContext} context          Context of the delete operation.
-   * @returns {Promise<DocumentModificationContext|null>}  Resolves with updated context or rejects with null.
+   * @param {Item5e} item              Item to be deleted.
+   * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
-  static createDialog(item, context={}) {
+  static createDialog(item) {
     return new Promise((resolve, reject) => {
       const dialog = new this({
         title: `${game.i18n.localize("DND5E.AdvancementDeleteConfirmationTitle")}: ${item.name}`,
@@ -30,8 +29,7 @@ export class DeleteConfirmationDialog extends Dialog {
             label: game.i18n.localize("Delete"),
             callback: html => {
               const checkbox = html.querySelector('input[name="apply-advancement"]');
-              context.skipAdvancement = !checkbox.checked;
-              resolve(context);
+              resolve(checkbox.checked);
             }
           },
           cancel: {

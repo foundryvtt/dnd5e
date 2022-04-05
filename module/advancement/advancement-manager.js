@@ -144,9 +144,9 @@ export class AdvancementManager extends Application {
 
     // All other items, just create some flows up to current character level
     else {
-      const characterLevel = manager.clone.data.data.details.level;
-      const flows = Array.fromRange(characterLevel + 1).slice(1).flatMap(l => this.flowsForLevel(clonedItem, l));
-      flows.forEach(flow => manager.steps.push({ type: "item", flow }));
+      Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
+        .flatMap(l => this.flowsForLevel(clonedItem, l))
+        .forEach(flow => manager.steps.push({ type: "item", flow }));
       manager._stepIndex = 0;
     }
 
@@ -163,8 +163,28 @@ export class AdvancementManager extends Application {
    * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.
    */
   static forDeletedItem(actor, item, options) {
-    console.warn("Advancements on item delete not yet implemented");
-    return null;
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(item.id);
+
+    // For class items, prepare level change data
+    if ( clonedItem.type === "class" ) {
+      manager._createLevelChangeSteps(clonedItem, clonedItem.data.data.levels * -1);
+    }
+
+    // All other items, just create some flows down from current character level
+    else {
+      Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
+        .flatMap(l => this.flowsForLevel(clonedItem, l))
+        .reverse()
+        .forEach(flow => manager.steps.push({ type: "item", flow, automatic: true, reverse: true }));
+      manager._stepIndex = 0;
+    }
+
+    if ( !manager.steps.length ) return null;
+
+    // Add a final step to remove the item
+    manager.steps.push({ type: "delete", item: clonedItem, automatic: true, reverse: true });
+    return manager;
   }
 
   /* -------------------------------------------- */
@@ -195,25 +215,32 @@ export class AdvancementManager extends Application {
    * @private
    */
   _createLevelChangeSteps(classItem, levelDelta) {
+    const createFlows = (classLevel, characterLevel) => [
+      ...this.constructor.flowsForLevel(classItem, classLevel),
+      ...this.constructor.flowsForLevel(classItem.subclass, classLevel),
+      ...this.clone.items.contents.flatMap(i => {
+        if ( ["class", "subclass"].includes(i.type) ) return [];
+        return this.constructor.flowsForLevel(i, characterLevel);
+      })
+    ];
+
     // Level increased
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
       const classLevel = classItem.data.data.levels + offset;
       const characterLevel = this.actor.data.data.details.level + offset;
-      const flows = [
-        ...this.constructor.flowsForLevel(classItem, classLevel),
-        ...this.constructor.flowsForLevel(classItem.subclass, classLevel),
-        ...this.clone.items.contents.flatMap(i => {
-          if ( ["class", "subclass"].includes(i.type) ) return [];
-          return this.constructor.flowsForLevel(i, characterLevel);
-        })
-      ];
-      flows.forEach(flow => this.steps.push({ type: "level", flow, classItem, classLevel }));
+      createFlows(classLevel, characterLevel).forEach(flow => this.steps.push({
+        type: "level", flow, classItem, classLevel
+      }));
     }
 
     // Level decreased
     for ( let offset = 0; offset > levelDelta; offset-- ) {
-      console.warn("Level decrease advancement disabled for the moment");
-      return;
+      const classLevel = classItem.data.data.levels + offset;
+      const characterLevel = this.actor.data.data.details.level + offset;
+      createFlows(classLevel, characterLevel).forEach(flow => this.steps.push({
+        type: "level", flow, classItem, classLevel,
+        automatic: true, reverse: true
+      }));
     }
 
     if ( this.steps.length ) this._stepIndex = 0;
@@ -329,10 +356,7 @@ export class AdvancementManager extends Application {
           close: {
             icon: '<i class="fas fa-times"></i>',
             label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonStop"),
-            callback: () => {
-              this.actor._advancement = null;
-              super.close(options);
-            }
+            callback: () => super.close(options)
           },
           continue: {
             icon: '<i class="fas fa-chevron-right"></i>',
@@ -342,7 +366,6 @@ export class AdvancementManager extends Application {
         default: "close"
       }).render(true);
     }
-    this.actor._advancement = null;
     await super.close(options);
   }
 
@@ -361,23 +384,28 @@ export class AdvancementManager extends Application {
     // Clear visible errors
     this.element[0]?.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
 
-    // Apply changes from current step
-    try {
-      const flow = this.step.flow;
-      if ( this.step.reverse ) {
-        await flow.advancement.reverse(flow.level);
-      } else {
-        const formData = flow._getSubmitData();
-        await flow._updateObject(event, formData);
+    // Delete item
+    if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
+
+    // Apply changes for the current step's flow
+    else {
+      try {
+        const flow = this.step.flow;
+        if ( this.step.reverse ) {
+          await flow.advancement.reverse(flow.level);
+        } else {
+          const formData = flow._getSubmitData();
+          await flow._updateObject(event, formData);
+        }
+      } catch(error) {
+        this.setControlsDisabled(false);
+        if ( !(error instanceof AdvancementError) ) throw error;
+        ui.notifications.error(error.message);
+        this._advancing = false;
+        return;
       }
-      this.actor.prepareData();
-    } catch(error) {
-      this.setControlsDisabled(false);
-      if ( !(error instanceof AdvancementError) ) throw error;
-      ui.notifications.error(error.message);
-      this._advancing = false;
-      return;
     }
+    this.clone.prepareData();
 
     // Check to see if this is the final step, if so, head over to complete
     if ( !this.nextStep ) return this.complete(event);
@@ -402,7 +430,7 @@ export class AdvancementManager extends Application {
     // Undo changes from previous step
     try {
       await this.step.flow.advancement.reverse(this.step.flow.level);
-      this.actor.prepareData();
+      this.clone.prepareData();
     } catch(error) {
       this.setControlsDisabled(false);
       if ( !(error instanceof AdvancementError) ) throw error;

@@ -1,6 +1,7 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
 import { AdvancementManager } from "../../advancement/advancement-manager.js";
+import { DeleteConfirmationDialog } from "../../advancement/delete-confirmation-dialog.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
@@ -998,14 +999,34 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted.
+   * @returns {Promise<Item5e|AdvancementManager>|undefined}  The deleted item if something was deleted or the
+   *                                                          advancement manager if advancements need removing.
    * @private
    */
-  _onItemDelete(event) {
+  async _onItemDelete(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
-    if ( item ) return item.delete();
+    if ( !item ) return;
+
+    // If item has advancement, handle it separately
+    if ( item.data.data.advancement?.length ) {
+      const manager = AdvancementManager.forDeletedItem(this.actor, item);
+      if ( manager ) {
+        if ( item.type === "class" ) {
+          try {
+            const shouldRemoveAdvancements = await DeleteConfirmationDialog.createDialog(item);
+            if ( shouldRemoveAdvancements ) return manager.render(true);
+          } catch {
+            return;
+          }
+        } else {
+          return manager.render(true);
+        }
+      }
+    }
+
+    return item.delete();
   }
 
   /* -------------------------------------------- */
