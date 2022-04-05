@@ -122,13 +122,19 @@ export class AdvancementManager extends Application {
   static forNewItem(actor, itemData, options={}) {
     const manager = new this(actor, options);
 
-    // Add item to clone
+    // Prepare data for adding to clone
     const dataClone = foundry.utils.deepClone(itemData);
     dataClone._id = foundry.utils.randomID();
-    if ( itemData.type === "class" ) dataClone.data.levels = 0;
+    if ( itemData.type === "class" ) {
+      dataClone.data.levels = 0;
+      if ( !manager.clone.data.data.details.originalClass ) {
+        manager.clone.data.update({"data.details.originalClass": dataClone._id});
+      }
+    }
+
+    // Add item to clone & get new instance from clone
     manager.clone.data.update({items: [dataClone]});
     manager.clone.prepareData();
-
     const clonedItem = manager.clone.items.get(dataClone._id);
 
     // For class items, prepare level change data
@@ -223,9 +229,10 @@ export class AdvancementManager extends Application {
    * @protected
    */
   static flowsForLevel(item, level) {
-    const advancements = Object.values(item?.advancement ?? {}).filter(a => a.levels.includes(level));
-    advancements.sort((a, b) => a.sortingValueForLevel(level).localeCompare(b.sortingValueForLevel(level)));
-    return advancements.map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+    return Object.values(item?.advancement ?? {})
+      .filter(a => a.levels.includes(level) && a.appliesToClass)
+      .sort((a, b) => a.sortingValueForLevel(level).localeCompare(b.sortingValueForLevel(level)))
+      .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
   }
 
   /* -------------------------------------------- */

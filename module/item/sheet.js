@@ -112,9 +112,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     const data = {};
     for ( const [id, advancement] of Object.entries(item.advancement) ) {
-      if ( (originalClass !== null)
-           && ((advancement.data.classRestriction === "primary" && !originalClass)
-           || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
+      if ( !advancement.appliesToClass ) continue;
       for ( const level of advancement.levels ) {
         if ( !data[level] ) {
           data[level] = {
