@@ -41,9 +41,11 @@ export class Advancement {
    *                                   the level selection control in the configuration window is hidden and the
    *                                   advancement should provide its own implementation of `Advancement#levels`
    *                                   and potentially its own level configuration interface.
+   * @property {Set<string>|null} validItemTypes  Set of types to which this advancement can be added. If null, then
+   *                                              this will be available for all types.
    * @property {object} apps
    * @property {*} apps.config         Subclass of AdvancementConfig that allows for editing of this advancement type.
-   * @proeprty {*} apps.flow           Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
+   * @property {*} apps.flow           Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
    */
 
   /**
@@ -61,6 +63,7 @@ export class Advancement {
       title: game.i18n.localize("DND5E.AdvancementTitle"),
       hint: "",
       multiLevel: false,
+      validItemTypes: null,
       apps: {
         config: AdvancementConfig,
         flow: AdvancementFlow
@@ -230,17 +233,6 @@ export class Advancement {
     this.item.data.update({"data.advancement": advancement});
 
     return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Can an advancement of this type be added to an item of the provided type?
-   * @param {string} type  Type of the item.
-   * @returns {boolean}    Should this be displayed as an option on the `AdvancementSelection` dialog?
-   */
-  static availableForType(type) {
-    return true;
   }
 
   /* -------------------------------------------- */

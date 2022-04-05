@@ -19,6 +19,7 @@ export class HitPointsAdvancement extends Advancement {
       title: game.i18n.localize("DND5E.AdvancementHitPointsTitle"),
       hint: game.i18n.localize("DND5E.AdvancementHitPointsHint"),
       multiLevel: true,
+      validItemTypes: new Set(["class"]),
       apps: {
         flow: HitPointsFlow
       }
@@ -31,7 +32,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return Array.fromRange(CONFIG.DND5E.maxLevel + 1).splice(1);
+    return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1);
   }
 
   /* -------------------------------------------- */
@@ -113,13 +114,6 @@ export class HitPointsAdvancement extends Advancement {
 
   /* -------------------------------------------- */
   /*  Editing Methods                             */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static availableForType(type) {
-    return type === "class";
-  }
-
   /* -------------------------------------------- */
 
   /** @inheritdoc */

@@ -74,7 +74,7 @@ export class ItemGrantAdvancement extends Advancement {
 
       // Item on actor but needs to be removed
       else if ( !selected && existing.has(uuid) ) {
-        const [id] = Object.entries(added).find(([, added]) => added == uuid);
+        const [id] = Object.entries(added).find(([, added]) => added === uuid);
         this.actor.items.delete(id);
         // TODO: Trigger any additional advancement steps for removed items
         updates[`-=${id}`] = null;

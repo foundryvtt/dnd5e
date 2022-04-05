@@ -54,7 +54,7 @@ export class AdvancementConfig extends FormApplication {
         title: this.advancement.constructor.metadata.title,
         icon: this.advancement.constructor.metadata.icon
       },
-      levels: Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).splice(1).map(l => [l, l])),
+      levels: Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(l => [l, l])),
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };
