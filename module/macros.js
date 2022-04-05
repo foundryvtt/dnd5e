@@ -5,7 +5,7 @@
  * @returns {Promise<boolean>}
  */
 export async function create5eMacro(data, slot) {
-  if ( !("data" in data) ) return ui.notifications.warn("You can only create macro buttons for owned Items");
+  if ( !("data" in data) ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
 
   const macroData = { type: "script", scope: "actor" };
   switch ( data.type ) {
