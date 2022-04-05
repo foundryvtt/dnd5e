@@ -1,5 +1,7 @@
 import { AdvancementError } from "./advancement-flow.js";
-import { LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep } from "./advancement-step.js";
+import {
+  ItemAddedStep, ItemRemovedStep, LevelDecreasedStep, LevelIncreasedStep, ModifyChoicesStep
+} from "./advancement-step.js";
 
 
 /**
@@ -167,8 +169,7 @@ export class AdvancementPrompt extends Application {
    * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
   itemAdded(item, options) {
-    this.actor._advancement = null;
-    console.warn("Advancements on non-class items not currently supported");
+    this._addStep(new ItemAddedStep(this.clone, { item }), options);
   }
 
   /* -------------------------------------------- */
@@ -180,8 +181,7 @@ export class AdvancementPrompt extends Application {
    * @param {boolean} [options.render=true]  Should this prompt be rendered after the step is added?
    */
   itemRemoved(item, options) {
-    this.actor._advancement = null;
-    console.warn("Advancements on non-class items not currently supported");
+    this._addStep(new ItemRemovedStep(this.clone, { item }), options);
   }
 
   /* -------------------------------------------- */

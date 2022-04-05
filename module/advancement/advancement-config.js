@@ -54,7 +54,7 @@ export class AdvancementConfig extends FormApplication {
         title: game.i18n.localize(this.advancement.constructor.defaultTitle),
         icon: this.advancement.constructor.defaultIcon
       },
-      levels: Object.fromEntries(this.advancement.constructor.allLevels.map(l => [l, l])),
+      levels: Object.fromEntries(Array.numbersBetween(1, CONFIG.DND5E.maxLevel).map(l => [l, l])),
       showClassRestrictions: this.parent.type === "class",
       showLevelSelector: !this.advancement.constructor.multiLevel
     };
