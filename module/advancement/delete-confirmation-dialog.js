@@ -16,9 +16,9 @@ export class DeleteConfirmationDialog extends Dialog {
 
   /**
    * A helper constructor function which displays the delete confirmation dialog.
-   * @param {Item5e} item                                 Item to be deleted.
-   * @param {DocumentModificationContext} context         Context of the delete operation.
-   * @returns {Promise<DocumentModificationContext|null>  Resolves with updated context or rejects with null.
+   * @param {Item5e} item                                  Item to be deleted.
+   * @param {DocumentModificationContext} context          Context of the delete operation.
+   * @returns {Promise<DocumentModificationContext|null>}  Resolves with updated context or rejects with null.
    */
   static createDialog(item, context={}) {
     return new Promise((resolve, reject) => {

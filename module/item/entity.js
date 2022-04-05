@@ -1625,7 +1625,7 @@ export default class Item5e extends Item {
     await this.update({"data.advancement": advancement});
 
     if ( !showConfig ) return;
-    const config = new Advancement.configApp(this.advancement[data._id]);
+    const config = new Advancement.metadata.apps.config(this.advancement[data._id]);
     return config.render(true);
   }
 
