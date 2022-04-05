@@ -102,7 +102,6 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _getItemAdvancement(item) {
     const actor = item.parent;
-    const originalClass = item.isOriginalClass;
     let maxLevel = 0;
     if ( actor ) {
       if ( item.type === "class" ) maxLevel = item.data.data.levels;
@@ -488,6 +487,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
 
     if ( cl.contains("modify-choices") ) {
+      // TODO: Reimplement modify choices somehow
       // const level = event.currentTarget.closest("li")?.dataset.level;
       // if ( level ) this.actor.advancement.modifyChoices(this.item, Number(level));
       return;

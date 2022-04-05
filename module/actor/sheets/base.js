@@ -841,7 +841,7 @@ export default class ActorSheet5e extends ActorSheet {
         });
       }
     }
-  
+
     // Bypass normal creation flow for any items with advancement
     if ( itemData.data.advancement?.length ) {
       const manager = AdvancementManager.forNewItem(this.actor, itemData);
@@ -1017,7 +1017,7 @@ export default class ActorSheet5e extends ActorSheet {
           try {
             const shouldRemoveAdvancements = await DeleteConfirmationDialog.createDialog(item);
             if ( shouldRemoveAdvancements ) return manager.render(true);
-          } catch {
+          } catch(err) {
             return;
           }
         } else {
