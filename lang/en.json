@@ -906,6 +906,11 @@
 "DND5E.per": "per",
 "DND5E.spell": "spell",
 
+"MACRO.5eMissingTargetWarn": "Your controlled actor '{actor}' does not have an {type} with name '{name}'.",
+"MACRO.5eMultipleTargetsWarn": "Your controlled actor '{actor}' has more than one {type} with name '{name}'. The first match will be chosen.",
+"MACRO.5eNoActorSelected": "No selected or assigned actor could be found to target with macro.",
+"MACRO.5eUnownedWarn": "You can only create macro buttons for owned Items",
+
 "SETTINGS.5eAllowPolymorphingL": "Allow players to polymorph their own actors.",
 "SETTINGS.5eAllowPolymorphingN": "Allow Polymorphing",
 "SETTINGS.5eAutoCollapseCardL": "Automatically collapse Item Card descriptions in the Chat Log",
