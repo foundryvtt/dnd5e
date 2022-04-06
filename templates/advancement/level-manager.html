@@ -1,0 +1,29 @@
+<form>
+  <ol class="items-list">
+    <li class="items-header flexrow">
+      <h3 class="item-name flexrow">{{localize "DND5E.LevelManagerClasses"}}</h3>
+      <div class="item-controls flexrow">{{localize "DND5E.LevelPl"}}</div>
+    </li>
+    {{#each classes}}
+      <li class="item flexrow">
+        <div class="item-name flexrow">
+          <div class="item-image" aria-label="{{this.name}}" style="background-image: url({{this.img}})"></div>
+          <div>
+            <h3>{{this.name}}</h3>
+            {{#if this.subclass}}<h4>{{this.subclass.name}}</h4>{{/if}}
+          </div>
+        </div>
+
+        <div class="item-controls flexrow">
+          <button class="subtract" title="{{localize 'DND5E.LevelManagerDecreaseLevel'}}"><i class="fas fa-minus"></i></button>
+          <input type="number" class="levels" value="{{this.data.data.levels}}">
+          <button class="add" title="{{localize 'DND5E.LevelManagerIncreaseLevel'}}"><i class="fas fa-plus"></i></button>
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+
+  <nav>
+    <button type="submit"><i class="far fa-save"></i> {{ localize "SETTINGS.Save"}}</button>
+  </nav>
+</form>

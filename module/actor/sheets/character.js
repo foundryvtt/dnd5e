@@ -209,6 +209,9 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
 
+    // Manage Class Levels
+    html.find(".manage-levels").click(() => (new game.dnd5e.advancement.LevelManager(this.actor)).render(true));
+
     // Item State Toggling
     html.find(".item-toggle").click(this._onToggleItem.bind(this));
 

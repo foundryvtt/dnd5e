@@ -24,6 +24,12 @@
             {{/each}}
         {{/if}}
 
+        {{#if (and isClass @root.editable)}}
+          <div>
+            <a class="item-control manage-levels"><i class="fas fa-clipboard-list"></i> {{localize "DND5E.LevelManagerButton"}}</a>
+          </div>
+        {{/if}}
+
         {{#if ../owner}}
         <div class="item-controls flexrow">
             <a class="item-control item-create" title="{{localize 'DND5E.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
