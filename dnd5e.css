@@ -1399,6 +1399,8 @@
 .dnd5e.level-manager .items-list .item .item-controls button {
   flex: 0 0 1rem;
   line-height: 1rem;
+  padding-block-start: 3px;
+  padding-inline-end: 4px;
 }
 .dnd5e.level-manager .items-list .item .item-controls input {
   flex: 0 0 3rem;

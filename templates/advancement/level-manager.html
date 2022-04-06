@@ -1,4 +1,4 @@
-<form>
+<form data-character-level="{{characterLevel}}">
   <ol class="items-list">
     <li class="items-header flexrow">
       <h3 class="item-name flexrow">{{localize "DND5E.LevelManagerClasses"}}</h3>
@@ -16,7 +16,7 @@
 
         <div class="item-controls flexrow">
           <button class="subtract" title="{{localize 'DND5E.LevelManagerDecreaseLevel'}}"><i class="fas fa-minus"></i></button>
-          <input type="number" class="levels" value="{{this.data.data.levels}}">
+          <input type="number" class="levels" name="{{this.identifier}}" value="{{this.data.data.levels}}">
           <button class="add" title="{{localize 'DND5E.LevelManagerIncreaseLevel'}}"><i class="fas fa-plus"></i></button>
         </div>
       </li>
