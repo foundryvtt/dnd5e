@@ -10,50 +10,27 @@ import { AdvancementFlow } from "./advancement-flow.js";
  */
 export class ScaleValueAdvancement extends Advancement {
 
-  /* -------------------------------------------- */
-  /*  Static Properties                           */
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
-  static defaultConfiguration = {
-    identifier: "",
-    scale: {}
-  };
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static order = 60;
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultTitle = "DND5E.AdvancementScaleValueTitle";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultIcon = "icons/svg/dice-target.svg";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static hint = "DND5E.AdvancementScaleValueHint";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get configApp() { return ScaleValueConfig };
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get flowApp() { return ScaleValueFlow };
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static multiLevel = true;
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      defaults: {
+        configuration: {
+          identifier: "",
+          scale: {}
+        }
+      },
+      order: 60,
+      icon: "icons/svg/dice-target.svg",
+      title: game.i18n.localize("DND5E.AdvancementScaleValueTitle"),
+      hint: game.i18n.localize("DND5E.AdvancementScaleValueHint"),
+      multiLevel: true,
+      validItemTypes: new Set(["class", "sublass"]),
+      apps: {
+        config: ScaleValueConfig,
+        flow: ScaleValueFlow
+      }
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -97,15 +74,6 @@ export class ScaleValueAdvancement extends Advancement {
     return this.data.configuration.scale[key] ?? "";
   }
 
-  /* -------------------------------------------- */
-  /*  Editing Methods                             */
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static availableForType(type) {
-    return ["class", "subclass"].includes(type);
-  }
-
 }
 
 
@@ -131,12 +99,12 @@ export class ScaleValueConfig extends AdvancementConfig {
   /** @inheritdoc */
   getData() {
     const data = super.getData();
-    data.classIdentifier = this.parent.identifier;
+    data.classIdentifier = this.item.identifier;
     data.previewIdentifier = this.data.configuration.identifier || this.data.title?.slugify()
       || game.i18n.localize(this.advancement.constructor.defaultTitle).slugify();
 
     let lastValue = "";
-    data.levels = this.advancement.constructor.allLevels.reduce((obj, level) => {
+    data.levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
       obj[level] = { placeholder: lastValue, value: "" };
       const value = this.data.configuration.scale[level];
       if ( value ) {

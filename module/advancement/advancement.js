@@ -270,9 +270,7 @@ export class Advancement {
    * @param {object} data    Data from the advancement form.
    * @abstract
    */
-  async apply(level, data) {
-    throw new Error("Each subclass of Advancement must implement the apply method");
-  }
+  async apply(level, data) { }
 
   /* -------------------------------------------- */
 
@@ -294,8 +292,6 @@ export class Advancement {
    * @returns {object}      Data that can be passed to the `Advancement#restore` method to restore this reversal.
    * @abstract
    */
-  async reverse(level) {
-    throw new Error("Each subclass of Advancement must implement the reverse method");
-  }
+  async reverse(level) { }
 
 }
