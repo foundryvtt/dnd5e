@@ -11,37 +11,20 @@ import { AdvancementError, AdvancementFlow } from "./advancement-flow.js";
  */
 export class HitPointsAdvancement extends Advancement {
 
-  /* -------------------------------------------- */
-  /*  Static Properties                           */
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
-  static order = 10;
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultTitle = "DND5E.AdvancementHitPointsTitle";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultIcon = "icons/svg/regen.svg";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static hint = "DND5E.AdvancementHitPointsHint";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get flowApp() { return HitPointsFlow; }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static multiLevel = true;
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      order: 10,
+      icon: "icons/svg/regen.svg",
+      title: game.i18n.localize("DND5E.AdvancementHitPointsTitle"),
+      hint: game.i18n.localize("DND5E.AdvancementHitPointsHint"),
+      multiLevel: true,
+      validItemTypes: new Set(["class"]),
+      apps: {
+        flow: HitPointsFlow
+      }
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -49,7 +32,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   get levels() {
-    return this.constructor.allLevels;
+    return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1);
   }
 
   /* -------------------------------------------- */
@@ -59,7 +42,7 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {string}
    */
   get hitDie() {
-    return this.parent.data.data.hitDice;
+    return this.item.data.data.hitDice;
   }
 
   /* -------------------------------------------- */
@@ -135,7 +118,6 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   static availableForItem(item) {
-    if ( item.type !== "class" ) return false;
     return !item.data.data.advancement.find(a => a.type === "HitPoints");
   }
 
@@ -144,29 +126,37 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  propertyUpdates({ level, updates, reverse=false }) {
+  apply(level, data) {
     const actorData = this.actor.data.data;
-    const conMod = actorData.abilities.con?.mod ?? 0;
-    let value = this.valueForLevel(level) ?? 0;
+    let value = this.valueForLevel(level);
 
-    // When reversing, remove both value and constitution modifier
-    if ( reverse ) value = (value + conMod) * -1;
+    // Check for difference between stored value and updated
+    value = this.constructor.valueForLevel(data, this.hitDieValue, level) - value;
 
-    // If no update data is available, apply full value and constitution modifier
-    else if ( !updates ) value += conMod;
+    // Add con modifier if the level has never been applied before
+    if ( this.data.value[level] === undefined ) value += actorData.abilities.con?.mod ?? 0;
 
-    // Check for difference between stored value and updated, and apply con modifier if it hasn't been applied before
-    else {
-      const modified = this.constructor.valueForLevel(updates, this.hitDieValue, level);
-      value = modified - value;
-      if ( this.data.value[level] === undefined ) value += conMod;
-    }
-
-    if ( value === 0 ) return {};
-    return {
+    this.actor.data.update({
       "data.attributes.hp.max": actorData.attributes.hp.max + value,
       "data.attributes.hp.value": actorData.attributes.hp.value + value
-    };
+    });
+    this.updateSource({ value: data });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverse(level) {
+    const actorData = this.actor.data.data;
+    let value = this.valueForLevel(level);
+    if ( value === undefined ) return;
+
+    value += actorData.abilities.con?.mod ?? 0;
+    this.actor.data.update({
+      "data.attributes.hp.max": actorData.attributes.hp.max - value,
+      "data.attributes.hp.value": actorData.attributes.hp.value - value
+    });
+    this.updateSource({ [`value.-=${level}`]: null });
   }
 
 }
@@ -200,7 +190,7 @@ export class HitPointsFlow extends AdvancementFlow {
     }
 
     return foundry.utils.mergeObject(super.getData(), {
-      isFirstClassLevel: (this.level === 1) && this.advancement.parent.isOriginalClass,
+      isFirstClassLevel: (this.level === 1) && this.advancement.item.isOriginalClass,
       hitDie: this.advancement.hitDie,
       dieValue: this.advancement.hitDieValue,
       data: {
@@ -214,67 +204,30 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   activateListeners(html) {
-    this.form.querySelector(".averageCheckbox")?.addEventListener("change", this._onAverageChanged.bind(this));
-    this.form.querySelector(".rollButton")?.addEventListener("click", this._onRollDice.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Toggle status of hit points field and roll button based on whether use average checkbox is checked.
-   * @param {Event} event  Change to checkbox that triggers this update.
-   */
-  _onAverageChanged(event) {
-    this.form.querySelector(".rollResult").disabled = event.target.checked;
-    this.form.querySelector(".rollButton").disabled = event.target.checked;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Trigger a hit dice roll and add the result to the field.
-   * @param {Event} event  Click that triggered the roll.
-   */
-  async _onRollDice(event) {
-    // TODO: Maybe this should be `Actor#rollHitPoints`?
-    const actor = this.advancement.actor;
-    const flavor = game.i18n.localize("DND5E.AdvancementHitPointsRollMessage");
-    const roll = await game.dnd5e.dice.damageRoll({
-      event,
-      parts: [`1${this.advancement.hitDie}`],
-      title: `${flavor}: ${actor}`,
-      flavor,
-      allowCritical: false,
-      fastForward: true,
-      messageData: {
-        speaker: ChatMessage.getSpeaker({ actor }),
-        "flags.dnd5e.roll": { type: "hitPoints" }
-      }
+    this.form.querySelector(".averageCheckbox")?.addEventListener("change", event => {
+      this.form.querySelector(".rollResult").disabled = event.target.checked;
+      this.form.querySelector(".rollButton").disabled = event.target.checked;
     });
-    event.target.closest(".rolls").querySelector(".rollResult").value = roll.total;
+    this.form.querySelector(".rollButton")?.addEventListener("click", async event => {
+      const roll = await this.advancement.actor.rollClassHitPoints(this.advancement.item);
+      this.form.querySelector(".rollResult").value = roll.total;
+    });
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  prepareUpdate(formData) {
+  _updateObject(event, formData) {
     let value;
     if ( formData.useMax ) value = "max";
     else if ( formData.useAverage ) value = "avg";
     else if ( Number.isInteger(formData.value) ) value = parseInt(formData.value);
 
-    if ( value !== undefined ) return { [this.level]: value };
+    if ( value !== undefined ) return this.advancement.apply(this.level, { [this.level]: value });
 
-    this.form.querySelector(".rollResult").classList.add("error");
+    this.form.querySelector(".rollResult")?.classList.add("error");
     const errorType = formData.value ? "Invalid" : "Empty";
     throw new AdvancementError(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  reverseUpdate() {
-    return { [`-=${this.level}`]: null };
   }
 
 }
