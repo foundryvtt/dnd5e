@@ -11,45 +11,22 @@ import { AdvancementFlow } from "./advancement-flow.js";
  */
 export class ItemGrantAdvancement extends Advancement {
 
-  /* -------------------------------------------- */
-  /*  Static Properties                           */
-  /* -------------------------------------------- */
-
   /** @inheritdoc */
-  static defaultConfiguration = {
-    items: []
-  };
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static order = 40;
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultTitle = "DND5E.AdvancementItemGrantTitle";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static defaultIcon = "icons/svg/book.svg";
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static hint = "DND5E.AdvancementItemGrantHint";
-
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get configApp() { return ItemGrantConfig; }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  static get flowApp() { return ItemGrantFlow; }
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      defaults: {
+        configuration: { items: [] }
+      },
+      order: 40,
+      icon: "icons/svg/book.svg",
+      title: game.i18n.localize("DND5E.AdvancementItemGrantTitle"),
+      hint: game.i18n.localize("DND5E.AdvancementItemGrantHint"),
+      apps: {
+        config: ItemGrantConfig,
+        flow: ItemGrantFlow
+      }
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Display Methods                             */
@@ -74,20 +51,48 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  itemUpdates({ level, updates, reverse=false }) {
-    const added = this.data.value.added;
-    if ( reverse ) return { add: [], remove: Object.keys(added ?? {}) };
-    if ( !updates ) return { add: Object.values(added ?? {}), remove: [] };
+  async apply(level, data) {
+    const added = this.data.value.added ?? {};
+    const existing = new Set(Object.values(added));
+    const updates = {};
 
-    const existing = new Set(Object.values(added ?? {}));
-    return Object.entries(updates).reduce((obj, [uuid, selected]) => {
-      if ( selected && !existing.has(uuid) ) obj.add.push(uuid);
-      else if ( !selected && existing.has(uuid) ) {
-        const [id] = Object.entries(added ?? {}).find(([, added]) => added === uuid);
-        obj.remove.push(id);
+    // Figure out which items to add and which to remove
+    for ( const [uuid, selected] of Object.entries(data) ) {
+      // Item not on actor but needs to be added
+      if ( selected && !existing.has(uuid) ) {
+        const item = (await fromUuid(uuid))?.clone();
+        if ( !item ) continue;
+        item.data.update({
+          _id: foundry.utils.randomID(),
+          "flags.dnd5e.sourceId": uuid,
+          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+        });
+        this.actor.items.set(item.id, item);
+        // TODO: Trigger any additional advancement steps for added items
+        updates[item.id] = uuid;
       }
-      return obj;
-    }, { add: [], remove: [] });
+
+      // Item on actor but needs to be removed
+      else if ( !selected && existing.has(uuid) ) {
+        const [id] = Object.entries(added).find(([, added]) => added === uuid);
+        this.actor.items.delete(id);
+        // TODO: Trigger any additional advancement steps for removed items
+        updates[`-=${id}`] = null;
+      }
+    }
+
+    this.updateSource({"value.added": updates});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverse(level) {
+    for ( const id of Object.keys(this.data.value.added ?? {}) ) {
+      this.actor.items.delete(id);
+      // TODO: Ensure any advancement data attached to these items is properly reversed
+    }
+    this.updateSource({ "-=added": null });
   }
 
 }
@@ -159,7 +164,7 @@ export class ItemGrantConfig extends AdvancementConfig {
     const existingItems = this.advancement.data.configuration.items;
 
     // Abort if this uuid is the parent item
-    if ( item.uuid === this.parent.uuid ) {
+    if ( item.uuid === this.item.uuid ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
     }
 
@@ -213,34 +218,6 @@ export class ItemGrantFlow extends AdvancementFlow {
         return item;
       }))
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  finalizeUpdate(update, itemsAdded) {
-    // Add any added items to the advancement's value
-    const uuids = new Set(Object.keys(update));
-    const added = itemsAdded.reduce((obj, item) => {
-      if ( uuids.has(item.data.flags.dnd5e?.sourceId) ) obj[item.id] = item.data.flags.dnd5e.sourceId;
-      return obj;
-    }, {});
-
-    // Remove any deleted items from advancement value
-    for ( const [uuid, selected] of Object.entries(update) ) {
-      const id = Object.entries(this.advancement.data.value.added ?? {}).find(([, added]) => added === uuid);
-      if ( selected || !id ) continue;
-      added[`-=${id[0]}`] = null;
-    }
-
-    return { added };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  reverseUpdate() {
-    return { "-=added": null };
   }
 
 }

@@ -21,7 +21,7 @@ export class AdvancementConfig extends FormApplication {
      * Parent item to which this advancement belongs.
      * @type {Item5e}
      */
-    this.parent = advancement.parent;
+    this.item = advancement.item;
   }
 
   /* -------------------------------------------- */
@@ -40,8 +40,8 @@ export class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   get title() {
-    const type = game.i18n.localize(this.advancement.constructor.defaultTitle);
-    return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { type })}: ${this.parent.name}`;
+    const type = this.advancement.constructor.metadata.title;
+    return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { type })}: ${this.item.name}`;
   }
 
   /* -------------------------------------------- */
@@ -51,12 +51,12 @@ export class AdvancementConfig extends FormApplication {
     return {
       data: this.advancement.data,
       default: {
-        title: game.i18n.localize(this.advancement.constructor.defaultTitle),
-        icon: this.advancement.constructor.defaultIcon
+        title: this.advancement.constructor.metadata.title,
+        icon: this.advancement.constructor.metadata.icon
       },
-      levels: Object.fromEntries(this.advancement.constructor.allLevels.map(l => [l, l])),
-      showClassRestrictions: this.parent.type === "class",
-      showLevelSelector: !this.advancement.constructor.multiLevel
+      levels: Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(l => [l, l])),
+      showClassRestrictions: this.item.type === "class",
+      showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };
   }
 
