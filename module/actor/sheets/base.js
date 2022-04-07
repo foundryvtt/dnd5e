@@ -820,27 +820,12 @@ export default class ActorSheet5e extends ActorSheet {
       itemData = scroll.data;
     }
 
-    if ( itemData.data ) {
-      // Ignore certain statuses
-      ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
-
-      // Downgrade ATTUNED to REQUIRED
-      itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
-    }
+    // Clean up data
+    this._onDropResetData(itemData);
 
     // Stack identical consumables
-    if ( itemData.type === "consumable" && itemData.flags.core?.sourceId ) {
-      const similarItem = this.actor.items.find(i => {
-        const sourceId = i.getFlag("core", "sourceId");
-        return sourceId && (sourceId === itemData.flags.core?.sourceId)
-               && (i.type === "consumable") && (i.name === itemData.name);
-      });
-      if ( similarItem ) {
-        return similarItem.update({
-          "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
-        });
-      }
-    }
+    const stacked = this._onDropStackConsumables(itemData);
+    if ( stacked ) return stacked;
 
     // Bypass normal creation flow for any items with advancement
     if ( itemData.data.advancement?.length ) {
@@ -850,6 +835,44 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Create the owned item as normal
     return super._onDropItemCreate(itemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset certain pieces of data stored on items when they are dropped onto the actor.
+   * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   */
+  _onDropResetData(itemData) {
+    if ( !itemData.data ) return;
+
+    // Ignore certain statuses
+    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+
+    // Downgrade ATTUNED to REQUIRED
+    itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stack identical consumables when a new one is dropped rather than creating a duplicate item.
+   * @param {object} itemData         The item data requested for creation.
+   * @returns {Promise<Item5e>|null}  If a duplicate was found, returns the adjusted item stack.
+   */
+  _onDropStackConsumables(itemData) {
+    const droppedSourceId = itemData.flags.core?.sourceId;
+    if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
+
+    const similarItem = this.actor.items.find(i => {
+      const sourceId = i.getFlag("core", "sourceId");
+      return sourceId && (sourceId === droppedSourceId) && (i.type === "consumable") && (i.name === itemData.name);
+    });
+    if ( !similarItem ) return null;
+
+    return similarItem.update({
+      "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+    });
   }
 
   /* -------------------------------------------- */
