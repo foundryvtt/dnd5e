@@ -306,7 +306,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( cls ) {
         const priorLevel = cls?.data.data.levels ?? 0;
         const manager = AdvancementManager.forLevelChange(this.actor, cls.id, itemData.data.levels);
-        if ( manager ) return manager.render(true);
+        if ( manager.steps.length ) return manager.render(true);
         return cls.update({"data.levels": priorLevel + itemData.data.levels});
       }
     }

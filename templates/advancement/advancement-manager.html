@@ -7,16 +7,18 @@
   </div>
   <nav>
     {{#if steps.hasPrevious}}
-      <button type="button" name="previous">
+      <button type="button" data-action="previous">
         <i class="fas fa-angle-double-left"></i> {{localize "DND5E.AdvancementManagerPreviousStep"}}
       </button>
     {{/if}}
-    <button type="button" name="next">
-      {{#if steps.hasNext}}
-        <i class="fas fa-angle-double-right"></i> {{localize "DND5E.AdvancementManagerNextStep"}}
-      {{else}}
-        <i class="fas fa-check"></i> {{localize "DND5E.AdvancementManagerComplete"}}
-      {{/if}}
-    </button>
+    {{#if steps.hasNext}}
+      <button type="button" data-action="next">
+          <i class="fas fa-angle-double-right"></i> {{localize "DND5E.AdvancementManagerNextStep"}}
+      </button>
+    {{else}}
+      <button type="button" data-action="complete">
+          <i class="fas fa-check"></i> {{localize "DND5E.AdvancementManagerComplete"}}
+      </button>
+    {{/if}}
   </nav>
 </div>

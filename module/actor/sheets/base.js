@@ -845,7 +845,7 @@ export default class ActorSheet5e extends ActorSheet {
     // Bypass normal creation flow for any items with advancement
     if ( itemData.data.advancement?.length ) {
       const manager = AdvancementManager.forNewItem(this.actor, itemData);
-      if ( manager ) return manager.render(true);
+      if ( manager.steps.length ) return manager.render(true);
     }
 
     // Create the owned item as normal
@@ -1012,7 +1012,7 @@ export default class ActorSheet5e extends ActorSheet {
     // If item has advancement, handle it separately
     if ( item.hasAdvancement ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, item);
-      if ( manager ) {
+      if ( manager.steps.length ) {
         if ( item.type === "class" ) {
           try {
             const shouldRemoveAdvancements = await DeleteConfirmationDialog.createDialog(item);

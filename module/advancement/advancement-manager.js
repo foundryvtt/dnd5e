@@ -114,10 +114,10 @@ export class AdvancementManager extends Application {
 
   /**
    * Construct a manager for a newly added item.
-   * @param {Actor5e} actor              Actor to which the item is being added.
-   * @param {object} itemData            Data for the item being added.
-   * @param {object} options             Rendering options passed to the application.
-   * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.
+   * @param {Actor5e} actor         Actor to which the item is being added.
+   * @param {object} itemData       Data for the item being added.
+   * @param {object} options        Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
   static forNewItem(actor, itemData, options={}) {
     const manager = new this(actor, options);
@@ -150,17 +150,17 @@ export class AdvancementManager extends Application {
       manager._stepIndex = 0;
     }
 
-    return manager.steps.length ? manager : null;
+    return manager;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Construct a manager for an item that needs to be deleted.
-   * @param {Actor5e} actor              Actor from which the item should be deleted.
-   * @param {object} item                Item to be deleted.
-   * @param {object} options             Rendering options passed to the application.
-   * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.
+   * @param {Actor5e} actor         Actor from which the item should be deleted.
+   * @param {object} item           Item to be deleted.
+   * @param {object} options        Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
   static forDeletedItem(actor, item, options) {
     const manager = new this(actor, options);
@@ -180,10 +180,8 @@ export class AdvancementManager extends Application {
       manager._stepIndex = 0;
     }
 
-    if ( !manager.steps.length ) return null;
-
     // Add a final step to remove the item
-    manager.steps.push({ type: "delete", item: clonedItem, automatic: true, reverse: true });
+    if ( manager.steps.length ) manager.steps.push({type: "delete", item: clonedItem, automatic: true, reverse: true});
     return manager;
   }
 
@@ -191,11 +189,11 @@ export class AdvancementManager extends Application {
 
   /**
    * Construct a manager for a change in a class level.
-   * @param {Actor5e} actor              Actor whose level has changed.
-   * @param {string} classId             ID of the class being changed.
-   * @param {number} levelDelta          Levels by which to increase or decrease the class.
-   * @param {object} options             Rendering options passed to the application.
-   * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.
+   * @param {Actor5e} actor         Actor whose level has changed.
+   * @param {string} classId        ID of the class being changed.
+   * @param {number} levelDelta     Levels by which to increase or decrease the class.
+   * @param {object} options        Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
   static forLevelChange(actor, classId, levelDelta, options={}) {
     const manager = new this(actor, options);
@@ -203,7 +201,7 @@ export class AdvancementManager extends Application {
     if ( !clonedItem ) return null;
     manager._createLevelChangeSteps(clonedItem, levelDelta);
 
-    return manager.steps.length ? manager : null;
+    return manager;
   }
 
   /* -------------------------------------------- */
@@ -327,8 +325,15 @@ export class AdvancementManager extends Application {
   /** @inheritdoc */
   activateListeners(html) {
     super.activateListeners(html);
-    html.find("button[name='previous']")?.click(this.reverseStep.bind(this));
-    html.find("button[name='next']")?.click(this.advanceStep.bind(this));
+    html.find("button[data-action]").click(event => {
+      switch ( event.currentTarget.dataset.action ) {
+        case "previous":
+          return this.reverseStep();
+        case "next":
+        case "complete":
+          return this.advanceStep();
+      }
+    });
   }
 
   /* -------------------------------------------- */
