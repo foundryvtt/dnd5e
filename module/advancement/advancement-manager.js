@@ -114,7 +114,7 @@ export class AdvancementManager extends Application {
 
   /**
    * Construct a manager for a newly added item.
-   * @param {Actor5e} actor              Actor whose level has changed.
+   * @param {Actor5e} actor              Actor to which the item is being added.
    * @param {object} itemData            Data for the item being added.
    * @param {object} options             Rendering options passed to the application.
    * @returns {AdvancementManager|null}  Prepared manager, or null if there was nothing to advance.

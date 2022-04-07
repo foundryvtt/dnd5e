@@ -262,14 +262,16 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemStatus(item) {
-    if ( item.type === "spell" ) {
-      return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
-    }
-    else if ( ["weapon", "equipment"].includes(item.type) ) {
-      return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
-    }
-    else if ( item.type === "tool" ) {
-      return game.i18n.localize(item.data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
+    switch ( item.type ) {
+      case "class":
+        return game.i18n.format("DND5E.LevelCount", {ordinal: item.data.levels.ordinalString()});
+      case "equipment":
+      case "weapon":
+        return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
+      case "spell":
+        return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
+      case "tool":
+        return game.i18n.localize(item.data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
     }
   }
 

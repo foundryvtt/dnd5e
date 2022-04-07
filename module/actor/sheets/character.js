@@ -315,8 +315,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     else if ( itemData.type === "subclass" ) {
       const other = this.actor.itemTypes.subclass.find(i => i.identifier === itemData.data.identifier);
       if ( other ) {
-        ui.notifications.warn(game.i18n.format("DND5E.SubclassDuplicateError", {identifier: other.identifier}));
-        return;
+        return ui.notifications.error(game.i18n.format("DND5E.SubclassDuplicateError", {
+          identifier: other.identifier
+        }));
+      }
+      const cls = this.actor.itemTypes.class.find(i => i.identifier === itemData.data.classIdentifier);
+      if ( cls && cls.subclass ) {
+        return ui.notifications.error(game.i18n.format("DND5E.SubclassAssignmentError", {
+          class: cls.name, subclass: cls.subclass.name
+        }));
       }
     }
 

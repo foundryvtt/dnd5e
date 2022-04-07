@@ -1010,7 +1010,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !item ) return;
 
     // If item has advancement, handle it separately
-    if ( item.data.data.advancement?.length ) {
+    if ( item.hasAdvancement ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, item);
       if ( manager ) {
         if ( item.type === "class" ) {
