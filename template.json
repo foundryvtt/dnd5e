@@ -367,7 +367,7 @@
           "failure": 0
         },
         "exhaustion": 0,
-        "inspiration": 0
+        "inspiration": false
       },
       "details": {
         "background": "",
@@ -387,20 +387,23 @@
         "primary": {
           "value": 0,
           "max": 0,
-          "sr": 0,
-          "lr": 0
+          "sr": false,
+          "lr": false,
+          "label": ""
         },
         "secondary": {
           "value": 0,
           "max": 0,
-          "sr": 0,
-          "lr": 0
+          "sr": false,
+          "lr": false,
+          "label": ""
         },
         "tertiary": {
           "value": 0,
           "max": 0,
-          "sr": 0,
-          "lr": 0
+          "sr": false,
+          "lr": false,
+          "label": ""
         }
       },
       "traits": {
@@ -430,9 +433,6 @@
         "environment": "",
         "cr": 1,
         "spellLevel": 0,
-        "xp": {
-          "value": 10
-        },
         "source": ""
       },
       "resources": {
@@ -445,7 +445,7 @@
           "max": 0
         },
         "lair": {
-          "value": 0,
+          "value": false,
           "initiative": 0
         }
       }
@@ -466,7 +466,7 @@
       },
       "attributes": {
         "ac": {
-          "value": null,
+          "calc": "flat",
           "motionless": ""
         },
         "actions": {
@@ -561,7 +561,7 @@
       "action": {
         "ability": null,
         "actionType": null,
-        "attackBonus": 0,
+        "attackBonus": "",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -676,7 +676,6 @@
       "level": 1,
       "school": "",
       "components": {
-        "value": "",
         "vocal": false,
         "somatic": false,
         "material": false,
