@@ -142,6 +142,13 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  restore(level, data) {
+    this.apply(level, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   reverse(level) {
     const actorData = this.actor.data.data;
     let value = this.valueForLevel(level);
@@ -152,7 +159,9 @@ export class HitPointsAdvancement extends Advancement {
       "data.attributes.hp.max": actorData.attributes.hp.max - value,
       "data.attributes.hp.value": actorData.attributes.hp.value - value
     });
+    const source = foundry.utils.deepClone(this.data.value);
     this.updateSource({ [`value.-=${level}`]: null });
+    return source;
   }
 
 }
