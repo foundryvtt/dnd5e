@@ -1746,7 +1746,7 @@ export default class Actor5e extends Actor {
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
     // Not keep active effects
-    if(notKeepAE) d.effects = [];
+    if(notKeepAE && !keepAEOnlyOriginNotEquipment) d.effects = [];
 
     // Keep active effects only origin not equipment
     if(keepAEOnlyOriginNotEquipment){
