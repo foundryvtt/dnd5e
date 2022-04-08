@@ -1,5 +1,9 @@
+import { AdvancementManager } from "./advancement-manager.js";
+
+
 /**
- *
+ * Application for increasing or decreasing the levels on one or more classes.
+ * @extends {FormApplication}
  */
 export class LevelManager extends FormApplication {
 
@@ -70,14 +74,18 @@ export class LevelManager extends FormApplication {
   /** @inheritdoc */
   async _updateObject(event, formData) {
     // Figure out level deltas for all classes
-    const levelDeltas = Object.entries(formData).map(([identifier, level]) => {
+    const levelDeltas = Object.fromEntries(Object.entries(formData).map(([identifier, level]) => {
       const cls = this.object.classes[identifier];
       const delta = level - cls.data.data.levels;
-      return [cls, delta];
-    }).filter(([, delta]) => delta !== 0).sort((a, b) => a[1] - b[1]);
+      return [cls.id, delta];
+    }));
 
     // Create advancement manager and trigger changes
-    console.log(levelDeltas);
+    const manager = AdvancementManager.forLevelChange(this.object, levelDeltas);
+    if ( manager.steps.length ) manager.render(true);
+    else {
+      // TODO: Update levels without using advancement manager
+    }
   }
 
 }

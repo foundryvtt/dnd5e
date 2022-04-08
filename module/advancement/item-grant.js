@@ -56,6 +56,7 @@ export class ItemGrantAdvancement extends Advancement {
     const existing = new Set(Object.values(added));
     const updates = {};
 
+    // TODO: Simplify this because items no longer need to be removed
     // Figure out which items to add and which to remove
     for ( const [uuid, selected] of Object.entries(data) ) {
       // Item not on actor but needs to be added
@@ -87,12 +88,30 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  restore(level, data) {
+    const updates = {};
+    for ( const item of data.items ) {
+      this.actor.data.update({items: [item]});
+      // TODO: Restore any additional advancement data here
+      updates[item._id] = item.flags.dnd5e.sourceId;
+    }
+    this.updateSource({"value.added": updates});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   reverse(level) {
+    const items = [];
     for ( const id of Object.keys(this.data.value.added ?? {}) ) {
+      const item = this.actor.items.get(id);
+      if ( item ) items.push(item.toObject());
       this.actor.items.delete(id);
       // TODO: Ensure any advancement data attached to these items is properly reversed
+      // and store any advancement data for these items in case they need to be reapplied
     }
-    this.updateSource({ "-=added": null });
+    this.updateSource({ "value.-=added": null });
+    return { items };
   }
 
 }
