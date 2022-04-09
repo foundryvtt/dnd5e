@@ -47,8 +47,8 @@ export class AdvancementManager extends Application {
     this._advancing = false;
 
     /**
-     * Data stored from retain steps for later restoration.
-     * @type {object}
+     * Data retained from reversed steps in case it needs to be restored later.
+     * @type {object<string, object>}
      * @private
      */
     this._retainedData = {};
@@ -263,16 +263,13 @@ export class AdvancementManager extends Application {
         const stepData = { type: "level", classLevel, classItem, automatic: true, reverse: true };
         const itemFlows = getItemFlows(characterLevel + 1).reverse();
 
-        // If character level will need to be restored later, add retain steps & prepare restore steps
+        // If character level will need to be restored later, prepare restore steps
         if ( characterLevel < finalCharacterLevel ) {
-          restores[characterLevel] = itemFlows.map(flow => {return { type: "restore", flow, automatic: true }});
-          pushSteps(itemFlows, { type: "level", classLevel, classItem, automatic: true, retain: true });
+          restores[characterLevel] = itemFlows.map(flow => ({ type: "restore", flow, automatic: true }));
         }
 
-        // Otherwise add item reverse steps
-        else pushSteps(itemFlows, stepData);
-
-        // Add subclass & class reverse steps
+        // Add item, subclass, & class reverse steps
+        pushSteps(itemFlows, stepData);
         pushSteps(this.flowsForLevel(classItem.subclass, classLevel).reverse(), stepData);
         pushSteps(this.flowsForLevel(classItem, classLevel).reverse(), stepData);
 
@@ -334,7 +331,7 @@ export class AdvancementManager extends Application {
     // Ensure the level on the class item matches the specified level
     if ( this.step?.type === "level" ) {
       let level = this.step.classLevel;
-      if ( this.step.reverse || this.step.retain ) level -= 1;
+      if ( this.step.reverse ) level -= 1;
       this.step.classItem.data.update({"data.levels": level});
       this.clone.prepareData();
     }
@@ -429,7 +426,7 @@ export class AdvancementManager extends Application {
 
         // Restore retained data
         else if ( this.step.type === "restore" ) {
-          const data = this._retainedData[this.step.flow] ?? {};
+          const data = this._retainedData[this.step.flow.id] ?? {};
           await this.step.flow.advancement.restore(this.step.flow.level, data);
         }
 
@@ -437,8 +434,7 @@ export class AdvancementManager extends Application {
         else {
           const flow = this.step.flow;
           if ( this.step.reverse ) {
-            const data = await flow.advancement.reverse(flow.level);
-            if ( this.step.retain ) this._retainedData[flow] = data;
+            this._retainedData[flow.id] = await flow.advancement.reverse(flow.level);
           } else {
             const formData = flow._getSubmitData();
             await flow._updateObject(event, formData);
@@ -472,7 +468,7 @@ export class AdvancementManager extends Application {
     try {
       do {
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
-        else await this.step.flow.advancement.reverse(this.step.flow.level);
+        else this._retainedData[this.step.flow.id] = await this.step.flow.advancement.reverse(flow.level);
         this.clone.prepareData();
         this._stepIndex--;
       } while ( this.step?.automatic );
