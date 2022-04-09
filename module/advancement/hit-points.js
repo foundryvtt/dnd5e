@@ -128,14 +128,10 @@ export class HitPointsAdvancement extends Advancement {
   /** @inheritdoc */
   apply(level, data) {
     const actorData = this.actor.data.data;
-    let value = this.valueForLevel(level);
+    let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
+    if ( value === undefined ) return;
 
-    // Check for difference between stored value and updated
-    value = this.constructor.valueForLevel(data, this.hitDieValue, level) - value;
-
-    // Add con modifier if the level has never been applied before
-    if ( this.data.value[level] === undefined ) value += actorData.abilities.con?.mod ?? 0;
-
+    value += actorData.abilities.con?.mod ?? 0;
     this.actor.data.update({
       "data.attributes.hp.max": actorData.attributes.hp.max + value,
       "data.attributes.hp.value": actorData.attributes.hp.value + value
