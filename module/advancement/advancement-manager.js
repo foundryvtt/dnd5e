@@ -444,7 +444,7 @@ export class AdvancementManager extends Application {
 
         // Reverse step based on step type
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
-        else await flow.advancement.reverse(flow.level);
+        else flow.retainedData = await flow.advancement.reverse(flow.level);
 
         this.clone.prepareData();
       } while ( this.step?.automatic );
