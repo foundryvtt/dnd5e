@@ -1,93 +1,75 @@
-import { DocumentData } from "/common/abstract/module.mjs";
-import * as fields from "/common/data/fields.mjs";
-import { mergeObject } from "/common/utils/helpers.mjs";
-import { defaultData } from "./base.mjs";
-import { SimpleTraitData } from "./common.mjs";
 import * as creature from "./creature.mjs";
-
 
 /**
  * Data definition for Player Characters.
- * @extends creature.CreatureData
  *
- * @property {AttributesData} attributes  Extended attributes with death saves, exhaustion, and inspiration.
- * @property {DetailsData} details        Extended details with additional character biography.
- * @property {ResourcesData} resources    Actor's three resources.
- * @property {TraitsData} traits          Extended traits with character's proficiencies.
+ * @property {AttributesData} attributes         Extended attributes with death saves, exhaustion, and inspiration.
+ * @property {DetailsData} details               Extended details with additional character biography.
+ * @property {object} resources                  Actor's three resources.
+ * @property {ResourceData} resources.primary    Resource number one.
+ * @property {ResourceData} resources.secondary  Resource number two.
+ * @property {ResourceData} resources.tertiary   Resource number three.
+ * @property {TraitsData} traits                 Extended traits with character's proficiencies.
  */
-export class ActorCharacterData extends creature.CreatureData {
-  static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      attributes: { type: AttributeData, default: defaultData("character.attributes") },
-      details: { type: DetailsData, default: defaultData("character.details") },
-      resources: {
-        type: ResourcesData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.resources")
-      },
-      traits: { type: TraitsData, default: defaultData("character.traits") }
-    });
-  }
-}
-
-/* -------------------------------------------- */
-/*  Attributes                                  */
-/* -------------------------------------------- */
-
-/**
- * An embedded data structure for extra attribute data used by characters.
- * @extends creature.AttributeData
- * @see ActorCharacterData
- *
- * @property {DeathData} death     Information on death saving throws.
- * @property {number} exhaustion   Number of levels of exhaustion.
- * @property {number} inspiration  Does this character have inspiration?
- */
-class AttributeData extends creature.AttributeData {
-  static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      death: {
-        type: DeathData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.attributes.death")
-      },
-      exhaustion: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      inspiration: fields.BOOLEAN_FIELD
-    });
-  }
-}
-
-/**
- * An embedded data structure for tracking character death saves.
- * @extends DocumentData
- * @see AttributeData
- *
- * @property {number} success  Number of successful death saves.
- * @property {number} failure  Number of failed death saves.
- */
-class DeathData extends DocumentData {
+export default class ActorCharacterData extends creature.CreatureData {
   static defineSchema() {
     return {
-      success: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      failure: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER)
+      ...super.defineSchema(),
+      attributes: new foundry.data.fields.EmbeddedDataField(AttributeData, {label: "DND5E.Attributes"}),
+      details: new foundry.data.fields.EmbeddedDataField(DetailsData, {label: "DND5E.Details"}),
+      resources: new foundry.data.fields.SchemaField({
+        primary: new foundry.data.fields.EmbeddedDataField(ResourceData, {label: "DND5E.ResourcePrimary"}),
+        secondary: new foundry.data.fields.EmbeddedDataField(ResourceData, {label: "DND5E.ResourceSecondary"}),
+        tertiary: new foundry.data.fields.EmbeddedDataField(ResourceData, {label: "DND5E.ResourceTertiary"})
+      }, {label: "DND5E.Resources"}),
+      traits: new foundry.data.fields.EmbeddedDataField(TraitsData, {label: "DND5E.Traits"})
     };
   }
 }
 
-/* -------------------------------------------- */
-/*  Details                                     */
-/* -------------------------------------------- */
+/**
+ * An embedded data structure for extra attribute data used by characters.
+ * @see ActorCharacterData
+ *
+ * @property {DeathData} death       Information on death saving throws.
+ * @property {number} death.success  Number of successful death saves.
+ * @property {number} death.failure  Number of failed death saves.
+ * @property {number} exhaustion   Number of levels of exhaustion.
+ * @property {number} inspiration  Does this character have inspiration?
+ */
+export class AttributeData extends creature.AttributeData {
+  static defineSchema() {
+    const schema = super.defineSchema();
+    schema.hp.fields.value.initial = 0;
+    schema.hp.fields.max.initial = 0;
+    return {
+      ...schema,
+      death: new foundry.data.fields.SchemaField({
+        success: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
+        }),
+        failure: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
+        })
+      }, {label: "DND5E.DeathSave"}),
+      exhaustion: new foundry.data.fields.NumberField({
+        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
+      }),
+      inspiration: new foundry.data.fields.BooleanField({required: true, label: "DND5E.Inspiration"})
+    };
+  }
+}
 
 /**
  * An embedded data structure for extra details data used by characters.
- * @extends creature.DetailsData
  * @see ActorCharacterData
  *
  * @property {string} background     Name of character's background.
  * @property {string} originalClass  ID of first class taken by character.
  * @property {XPData} xp             Experience points gained.
+ * @property {number} xp.value       Total experience points earned.
+ * @property {number} xp.min         Minimum experience points for current level.
+ * @property {number} xp.max         Maximum experience points for current level.
  * @property {string} appearance     Description of character's appearance.
  * @property {string} trait          Character's personality traits.
  * @property {string} ideal          Character's ideals.
@@ -96,94 +78,35 @@ class DeathData extends DocumentData {
  */
 export class DetailsData extends creature.DetailsData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      background: fields.BLANK_STRING,
-      originalClass: {
-        type: String,
-        required: true,
-        nullable: false,
-        default: "",
-        validate: fields._validateId
-      },
-      xp: {
-        type: XPData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.details.xp")
-      },
-      appearance: fields.BLANK_STRING,
-      trait: fields.BLANK_STRING,
-      ideal: fields.BLANK_STRING,
-      bond: fields.BLANK_STRING,
-      flaw: fields.BLANK_STRING
-    });
-  }
-}
-
-/**
- * An embedded data structure for character experience points.
- * @extends DocumentData
- * @see DetailsData
- *
- * @property {number} value  Total experience points earned.
- * @property {number} min    Minimum experience points for current level.
- * @property {number} max    Maximum experience points for current level.
- */
-class XPData extends DocumentData {
-  static defineSchema() {
     return {
-      value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      min: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      max: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, {
-        required: true,
-        nullable: false,
-        default: 300
-      })
-    };
-  }
-}
-
-/* -------------------------------------------- */
-/*  Resources                                   */
-/* -------------------------------------------- */
-
-/**
- * An embedded data structure for character resources.
- * @extends DocumentData
- * @see ActorCharacterData
- *
- * @property {ResourceData} primary    Resource number one.
- * @property {ResourceData} secondary  Resource number two.
- * @property {ResourceData} tertiary   Resource number three.
- */
-class ResourcesData extends DocumentData {
-  static defineSchema() {
-    return {
-      primary: {
-        type: ResourceData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.resources.primary")
-      },
-      secondary: {
-        type: ResourceData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.resources.secondary")
-      },
-      tertiary: {
-        type: ResourceData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.resources.tertiary")
-      }
+      ...super.defineSchema(),
+      background: new foundry.data.fields.StringField({required: true, label: "DND5E.Background"}),
+      originalClass: new foundry.data.fields.StringField({required: true, label: "DND5E.ClassOriginal"}),
+      xp: new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsCurrent"
+        }),
+        min: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsMin"
+        }),
+        max: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 300, label: "DND5E.ExperiencePointsMax"
+        })
+      }, {
+        label: "DND5E.ExperiencePoints", validate: d => d.min <= d.max,
+        validationError: "XP minimum must be less than XP maximum"
+      }),
+      appearance: new foundry.data.fields.StringField({required: true, label: "DND5E.Appearance"}),
+      trait: new foundry.data.fields.StringField({required: true, label: "DND5E.PersonalityTraits"}),
+      ideal: new foundry.data.fields.StringField({required: true, label: "DND5E.Ideals"}),
+      bond: new foundry.data.fields.StringField({required: true, label: "DND5E.Bonds"}),
+      flaw: new foundry.data.fields.StringField({required: true, label: "DND5E.Flaws"})
     };
   }
 }
 
 /**
  * An embedded data structure for individual resource properties.
- * @extends DocumentData
  * @see DetailsData
  *
  * @property {number} value  Available uses of this resource.
@@ -192,52 +115,58 @@ class ResourcesData extends DocumentData {
  * @property {boolean} lr    Does this resource recover on a long rest?
  * @property {string} label  Displayed name.
  */
-class ResourceData extends DocumentData {
+export class ResourceData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { nullable: true, default: 0 }),
-      max: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { nullable: true, default: 0 }),
-      sr: fields.BOOLEAN_FIELD,
-      lr: fields.BOOLEAN_FIELD,
-      label: fields.BLANK_STRING
+      value: new foundry.data.fields.NumberField({
+        required: true, integer: true, initial: 0, labels: "DND5E.ResourceValue"
+      }),
+      max: new foundry.data.fields.NumberField({
+        required: true, integer: true, initial: 0, labels: "DND5E.ResourceMax"
+      }),
+      sr: new foundry.data.fields.BooleanField({required: true, labels: "DND5E.ShortRestRecovery"}),
+      lr: new foundry.data.fields.BooleanField({required: true, labels: "DND5E.LongRestRecovery"}),
+      label: new foundry.data.fields.StringField({required: true, labels: "DND5E.ResourceLabel"})
     };
   }
 }
 
-/* -------------------------------------------- */
-/*  Traits                                      */
-/* -------------------------------------------- */
-
 /**
  * An embedded data structure for extra trait data used by characters.
- * @extends creature.TraitsData
  * @see ActorCharacterData
  *
- * @property {SimpleTraitData} weaponProf  Character's weapon proficiencies.
- * @property {SimpleTraitData} armorProf   Character's armor proficiencies.
- * @property {SimpleTraitData} toolProf    Character's tool proficiencies.
+ * @property {object} weaponProf             Character's weapon proficiencies.
+ * @property {Set<string>} weaponProf.value  Currently selected weapon proficiencies.
+ * @property {string} weaponProf.custom      Semicolon-separated list of custom weapon proficiencies.
+ * @property {object} armorProf              Character's armor proficiencies.
+ * @property {Set<string>} armorProf.value   Currently selected armor proficiencies.
+ * @property {string} armorProf.custom       Semicolon-separated list of custom armor proficiencies.
+ * @property {object} toolProf               Character's tool proficiencies.
+ * @property {Set<string>} toolProf.value    Currently selected tool proficiencies.
+ * @property {string} toolProf.custom        Semicolon-separated list of custom tool proficiencies.
  */
-class TraitsData extends creature.TraitsData {
+export class TraitsData extends creature.TraitsData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      weaponProf: {
-        type: SimpleTraitData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.traits.weaponProf")
-      },
-      armorProf: {
-        type: SimpleTraitData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.traits.armorProf")
-      },
-      toolProf: {
-        type: SimpleTraitData,
-        required: true,
-        nullable: false,
-        default: defaultData("character.traits.toolProf")
-      }
-    });
+    return {
+      ...super.defineSchema(),
+      weaponProf: new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.SetField(new foundry.data.fields.StringField({blank: false}), {
+          label: "DND5E.TraitsChosen"
+        }),
+        custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
+      }, {label: "DND5E.TraitWeaponProf"}),
+      armorProf: new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.SetField(new foundry.data.fields.StringField({blank: false}), {
+          label: "DND5E.TraitsChosen"
+        }),
+        custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
+      }, {label: "DND5E.TraitArmorProf"}),
+      toolProf: new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.SetField(new foundry.data.fields.StringField({blank: false}), {
+          label: "DND5E.TraitsChosen"
+        }),
+        custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
+      }, {label: "DND5E.TraitToolProf"})
+    };
   }
 }

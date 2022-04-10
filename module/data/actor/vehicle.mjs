@@ -1,232 +1,159 @@
-import { DocumentData } from "/common/abstract/module.mjs";
-import * as fields from "/common/data/fields.mjs";
-import { mergeObject } from "/common/utils/helpers.mjs";
-import { defaultData } from "./base.mjs";
+import { FormulaField } from "../fields.mjs";
 import * as common from "./common.mjs";
-
 
 /**
  * Data definition for Vehicles.
- * @extends creature.CommonData
  *
- * @property {string} vehicleType        Type of vehicle as defined in `DND5E.vehicleTypes`.
- * @property {AttributeData} attributes  Extended attributes with additional vehicle information.
- * @property {TraitsData} traits         Extended traits with vehicle dimensions.
- * @property {CargoData} cargo           Details on this vehicle's crew and cargo capacities.
+ * @property {string} vehicleType                Type of vehicle as defined in `DND5E.vehicleTypes`.
+ * @property {AttributeData} attributes          Extended attributes with additional vehicle information.
+ * @property {TraitsData} traits                 Extended traits with vehicle dimensions.
+ * @property {object} cargo                      Details on this vehicle's crew and cargo capacities.
+ * @property {PassengerData[]} cargo.crew        Creatures responsible for operating the vehicle.
+ * @property {PassengerData[]} cargo.passengers  Creatures just takin' a ride.
  */
-export class ActorVehicleData extends common.CommonData {
+export default class ActorVehicleData extends common.CommonData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      vehicleType: fields.field(fields.REQUIRED_STRING, { default: defaultData("vehicle.vehicleType") }),
-      abilities: { default: defaultData("vehicle.abilities") },
-      attributes: { type: AttributeData, default: defaultData("vehicle.attributes") },
-      traits: { type: TraitsData, default: defaultData("vehicle.traits") },
-      cargo: {
-        type: CargoData,
-        required: true,
-        nullable: false,
-        default: defaultData("vehicle.cargo")
-      }
-    });
+    return {
+      ...super.defineSchema(),
+      vehicleType: new foundry.data.fields.StringField({required: true, initial: "water", label: "DND5E.VehicleType"}),
+      // TODO: Mental abilities should default to zero
+      attributes: new foundry.data.fields.EmbeddedDataField(AttributeData, {label: "DND5E.Attributes"}),
+      traits: new foundry.data.fields.EmbeddedDataField(TraitsData, {label: "DND5E.Traits"}),
+      cargo: new foundry.data.fields.SchemaField({
+        crew: new foundry.data.fields.ArrayField(
+          new foundry.data.fields.EmbeddedDataField(PassengerData), {label: "DND5E.VehicleCrew"}
+        ),
+        passengers: new foundry.data.fields.ArrayField(
+          new foundry.data.fields.EmbeddedDataField(PassengerData), {label: "DND5E.VehiclePassengers"}
+        )
+      }, {label: "DND5E.VehicleCrewPassengers"})
+    };
   }
 }
-
-/* -------------------------------------------- */
-/*  Attributes                                  */
-/* -------------------------------------------- */
 
 /**
  * An embedded data structure for extra attribute data used by vehicles.
- * @extends common.AttributeData
  * @see ActorVehicleData
  *
- * @property {ACData} ac              Vehicle's armor class with extra properties.
- * @property {ActionData} actions     Information on how the vehicle performs actions.
- * @property {HPData} hp              Vehicle's hit points with extra properties.
- * @property {CapacityData} capacity  Information on the vehicle's carrying capacity.
+ * @property {object} ac                    Data used to calculate vehicle's armor class.
+ * @property {number} ac.flat               Flat value used for flat or natural armor calculation.
+ * @property {string} ac.calc               Name of one of the built-in formulas to use.
+ * @property {string} ac.formula            Custom formula to use.
+ * @property {string} ac.motionless         Changes to vehicle AC when not moving.
+ * @property {object} actions               Information on how the vehicle performs actions.
+ * @property {boolean} actions.stations     Does this vehicle rely on action stations that required individual
+ *                                          crewing rather than general crew thresholds?
+ * @property {number} actions.value         Maximum number of actions available with full crewing.
+ * @property {object} actions.thresholds    Crew thresholds needed to perform various actions.
+ * @property {number} actions.thresholds.2  Minimum crew needed to take full action complement.
+ * @property {number} actions.thresholds.1  Minimum crew needed to take reduced action complement.
+ * @property {number} actions.thresholds.0  Minimum crew needed to perform any actions.
+ * @property {object} hp                    Vehicle's hit point data.
+ * @property {number} hp.value              Current hit points.
+ * @property {number} hp.min                Minimum allowed HP value.
+ * @property {number} hp.max                Maximum allowed HP value.
+ * @property {number} hp.temp               Temporary HP applied on top of value.
+ * @property {number} hp.tempmax            Temporary change to the maximum HP.
+ * @property {number} hp.dt                 Damage threshold.
+ * @property {number} hp.mt                 Mishap threshold.
+ * @property {object} capacity              Information on the vehicle's carrying capacity.
+ * @property {string} capacity.creature     Description of the number of creatures the vehicle can carry.
+ * @property {number} capacity.cargo        Cargo carrying capacity measured in tons.
  */
-class AttributeData extends common.AttributeData {
+export class AttributeData extends common.AttributeData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      ac: { type: ACData, default: defaultData("vehicle.attributes.ac") },
-      actions: {
-        type: ActionData,
-        required: true,
-        nullable: false,
-        default: defaultData("vehicle.attributes.actions")
-      },
-      hp: { type: HPData, default: defaultData("vehicle.attributes.hp") },
-      capacity: {
-        type: CapacityData,
-        required: true,
-        nullable: false,
-        default: defaultData("vehicle.attributes.capacity")
-      }
-    });
-  }
-}
-
-/**
- * An embedded data structure for vehicle's armor class.
- * @extends common.ACData
- * @see AttributeData
- *
- * @property {number} [value]     Vehicle's armor class.
- * @property {string} motionless  Changes to vehicle AC when not moving.
- */
-class ACData extends common.ACData {
-  static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      motionless: fields.BLANK_STRING
-    });
-  }
-}
-
-/**
- * An embedded data structure that details how the vehicle performs actions.
- * @extends DocumentData
- * @see AttributeData
- *
- * @property {boolean} stations                   Does this vehicle rely on action stations that required individual
- *                                                crewing rather than general crew thresholds?
- * @property {number} value                       Maximum number of actions available with full crewing.
- * @property {object<string, number>} thresholds  Crew thresholds needed to perform various actions.
- */
-class ActionData extends DocumentData {
-  static defineSchema() {
+    const schema = super.defineSchema();
+    const hpFields = foundry.utils.deepClone(schema.hp.fields);
+    Object.values(hpFields).forEach(v => v.parent = undefined);
+    hpFields.value.nullable = true;
+    hpFields.value.initial = null;
+    hpFields.max.nullable = true;
+    hpFields.max.initial = null;
+    hpFields.temp.initial = null;
+    hpFields.tempmax.initial = null;
     return {
-      stations: fields.BOOLEAN_FIELD,
-      value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      thresholds: {
-        type: ThresholdData,
-        required: true,
-        nullable: false,
-        default: defaultData("vehicle.attributes.actions.thresholds")
-      }
+      ...schema,
+      ac: new foundry.data.fields.SchemaField({
+        flat: new foundry.data.fields.NumberField({
+          required: true, integer: true, min: 0, label: "DND5E.ArmorClassFlat"
+        }),
+        calc: new foundry.data.fields.StringField({
+          required: true, initial: "flat", label: "DND5E.ArmorClassCalculation"
+        }),
+        formula: new FormulaField({required: true, deterministic: true, label: "DND5E.ArmorClassFormula"}),
+        motionless: new foundry.data.fields.StringField({required: true, label: "DND5E.ArmorClassMotionless"})
+      }, { label: "DND5E.ArmorClass" }),
+      action: new foundry.data.fields.SchemaField({
+        stations: new foundry.data.fields.BooleanField({required: true, label: "DND5E.VehicleActionStations"}),
+        value: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleActionMax"
+        }),
+        thresholds: new foundry.data.fields.SchemaField({
+          2: new foundry.data.fields.NumberField({
+            required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsFull"
+          }),
+          1: new foundry.data.fields.NumberField({
+            required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsMid"
+          }),
+          0: new foundry.data.fields.NumberField({
+            required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsMin"
+          })
+        }, {label: "DND5E.VehicleActionThresholds"})
+      }, {label: "DND5E.VehicleActions"}),
+      hp: new foundry.data.fields.SchemaField({
+        ...hpFields,
+        dt: new foundry.data.fields.NumberField({
+          required: true, integer: true, min: 0, label: "DND5E.DamageThreshold"
+        }),
+        mt: new foundry.data.fields.NumberField({
+          required: true, integer: true, min: 0, label: "DND5E.VehicleMishapThreshold"
+        })
+      }, schema.hp.options),
+      capacity: new foundry.data.fields.SchemaField({
+        creature: new foundry.data.fields.StringField({required: true, label: "DND5E.VehicleCreatureCapacity"}),
+        cargo: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleCargoCapacity"
+        })
+      }, {label: "DND5E.VehicleCargoCrew"})
     };
   }
 }
-
-/**
- * An embedded data structure defining vehicle crew action thresholds.
- * @extends DocumentData
- * @see ActionData
- *
- * @property {number} 2  Minimum crew needed to take full action complement.
- * @property {number} 1  Minimum crew needed to take reduced action complement.
- * @property {number} 0  Minimum crew needed to perform any actions.
- */
-class ThresholdData extends DocumentData {
-  static defineSchema() {
-    return {
-      2: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
-      1: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
-      0: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null })
-    };
-  }
-}
-
-/**
- * An embedded data structure for vehicle's hit points.
- * @extends common.HPData
- * @see AttributeData
- *
- * @property {number} [value]  Current hit points.
- * @property {number} [max]    Maximum allowed HP value.
- * @property {number} [dt]     Damage threshold.
- * @property {number} [mt]     Mishap threshold.
- */
-class HPData extends common.HPData {
-  static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      value: { nullable: true, default: null },
-      max: { nullable: true, default: null },
-      dt: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null }),
-      mt: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null })
-    });
-  }
-}
-
-/**
- * An embedded data structure that defines the vehicle's carrying capacity.
- * @extends DocumentData
- * @see AttributeData
- *
- * @property {string} creature  Description of the number of creatures the vehicle can carry.
- * @property {number} cargo     Cargo carrying capacity measured in tons.
- */
-class CapacityData extends DocumentData {
-  static defineSchema() {
-    return {
-      creature: fields.BLANK_STRING,
-      cargo: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER)
-    };
-  }
-}
-
-/* -------------------------------------------- */
-/*  Traits                                      */
-/* -------------------------------------------- */
 
 /**
  * An embedded data structure for extra trait data used by vehicles.
- * @extends common.TraitsData
  * @see ActorVehicleData
  *
  * @property {string} dimensions  Description of the vehicle's size.
  */
-class TraitsData extends common.TraitsData {
+export class TraitsData extends common.TraitsData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      dimensions: fields.BLANK_STRING
-    });
-  }
-}
-
-/* -------------------------------------------- */
-/*  Cargo                                       */
-/* -------------------------------------------- */
-
-/**
- * An embedded data structure for vehicle crew and passengers.
- * @extends DocumentData
- * @see ActorVehicleData
- *
- * @property {PassengerData[]} crew        Creatures responsible for operating the vehicle.
- * @property {PassengerData[]} passengers  Creatures just takin' a ride.
- */
-class CargoData extends DocumentData {
-  static defineSchema() {
+    const schema = super.defineSchema();
+    schema.size.initial = "lg";
+    schema.di.fields.value.initial = ["poison", "psychic"];
+    schema.ci.fields.value.initial = [
+      "blinded", "charmed", "deafened", "frightened", "paralyzed", "petrified", "poisoned", "stunned", "unconscious"
+    ];
     return {
-      crew: {
-        type: [PassengerData],
-        required: true,
-        nullable: false,
-        default: []
-      },
-      passengers: {
-        type: [PassengerData], // TODO: Figure out why this is being turned into a PassengerData object rather than raw object
-        required: true,
-        nullable: false,
-        default: []
-      }
+      ...schema,
+      dimensions: new foundry.data.fields.StringField({required: true, label: "DND5E.Dimensions"})
     };
   }
 }
 
 /**
  * An embedded data structure representing an entry in the crew or passenger lists.
- * @extends DocumentData
  * @see CargoData
  *
  * @property {string} name      Name of individual or type of creature.
  * @property {number} quantity  How many of this creature are onboard?
  */
-class PassengerData extends DocumentData {
+export class PassengerData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      name: fields.BLANK_STRING,
-      quantity: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER)
+      name: new foundry.data.fields.StringField({required: true, label: "DND5E.VehiclePassengerName"}),
+      quantity: new foundry.data.fields.NumberField({
+        required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehiclePassengerQuantity"
+      })
     };
   }
 }

@@ -1,108 +1,93 @@
-import { DocumentData } from "/common/abstract/module.mjs";
-import * as fields from "/common/data/fields.mjs";
-import { mergeObject } from "/common/utils/helpers.mjs";
-import { DETERMINISTIC_FORMULA_FIELD, FORMULA_FIELD, mappingField } from "../fields.mjs";
-import { defaultData } from "./base.mjs";
+import { FormulaField, MappingField } from "../fields.mjs";
 import * as common from "./common.mjs";
-
 
 /**
  * Data definition for creature data template used by Characters & NPCs.
- * @extends common.CommonData
  *
  * @property {AttributeData} attributes          Extended attributes with senses and spellcasting.
  * @property {DetailsData} details               Extended details with race and alignment.
- * @property {object<string, SkillData>} skills  Creature's skills.
+ * @property {Object<string, SkillData>} skills  Creature's skills.
  * @property {TraitsData} traits                 Extended traits with languages.
- * @property {object<string, SpellData>} spells  Creature's spell levels with slots.
+ * @property {Object<string, SpellData>} spells  Creature's spell levels with slots.
  * @property {BonusesData} bonuses               Global bonuses to various rolls.
  */
 export class CreatureData extends common.CommonData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      attributes: { type: AttributeData, default: defaultData("templates.creature.attributes") },
-      details: { type: DetailsData, default: defaultData("templates.creature.details") },
-      skills: mappingField({
-        type: SkillData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.creature.skills")
+    return {
+      ...super.defineSchema(),
+      attributes: new foundry.data.fields.EmbeddedDataField(AttributeData, {label: "DND5E.Attributes"}),
+      details: new foundry.data.fields.EmbeddedDataField(DetailsData, {label: "DND5E.Details"}),
+      skills: new MappingField(new foundry.data.fields.EmbeddedDataField(SkillData), {
+        initialKeys: CONFIG.DND5E.skills, label: "DND5E.Skills"
       }),
-      traits: { type: TraitsData, default: defaultData("templates.creature.traits") },
-      spells: mappingField({
-        type: SpellData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.creature.spells")
+      traits: new foundry.data.fields.EmbeddedDataField(TraitsData, {label: "DND5E.Traits"}),
+      spells: new MappingField(new foundry.data.fields.EmbeddedDataField(SpellData), {
+        initialKeys: this._spellLevels, label: "DND5E.SpellLevels"
       }),
-      bonuses: {
-        type: BonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.creature.bonuses")
-      }
-    });
+      bonuses: new foundry.data.fields.EmbeddedDataField(BonusesData, {label: "DND5E.Bonuses"})
+    };
+  }
+
+  /**
+   * Helper for building the default list of spell levels.
+   * @type {string[]}
+   * @private
+   */
+  static get _spellLevels() {
+    const levels = Object.keys(CONFIG.DND5E.spellLevels).filter(a => a !== "0").map(l => `spell${l}`);
+    return [...levels, "pact"];
   }
 }
-
-/* -------------------------------------------- */
-/*  Attributes                                  */
-/* -------------------------------------------- */
 
 /**
  * An embedded data structure for extra attribute data used by creatures.
- * @extends common.AttributeData
  * @see CreatureData
  *
- * @property {SensesData} senses    Creature's senses.
- * @property {string} spellcasting  Primary spellcasting ability.
+ * @property {object} attunement          Attunement data.
+ * @property {number} attunement.max      Maximum number of attuned items.
+ * @property {object} senses              Creature's senses.
+ * @property {number} senses.darkvision   Creature's darkvision range.
+ * @property {number} senses.blindsight   Creature's blindsight range.
+ * @property {number} senses.tremorsense  Creature's tremorsense range.
+ * @property {number} senses.truesight    Creature's truesight range.
+ * @property {string} senses.units        Distance units used to measure senses.
+ * @property {string} senses.special      Description of any special senses or restrictions.
+ * @property {string} spellcasting        Primary spellcasting ability.
  */
 export class AttributeData extends common.AttributeData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      senses: {
-        type: SensesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.creature.attributes.senses")
-      },
-      spellcasting: fields.field(fields.BLANK_STRING, { default: "int" })
-    });
-  }
-}
-
-/**
- * An embedded data structure for representing a creature's senses.
- * @extends DocumentData
- * @see AttributeData
- *
- * @property {number} darkvision   Creature's darkvision range.
- * @property {number} blindsight   Creature's blindsight range.
- * @property {number} tremorsense  Creature's tremorsense range.
- * @property {number} truesight    Creature's truesight range.
- * @property {string} units        Distance units used to measure senses.
- * @property {string} special      Description of any special senses or restrictions.
- */
-export class SensesData extends DocumentData {
-  static defineSchema() {
     return {
-      darkvision: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      blindsight: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      tremorsense: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      truesight: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      units: fields.field(fields.REQUIRED_STRING, { default: "ft" }),
-      special: fields.BLANK_STRING
+      ...super.defineSchema(),
+      attunement: new foundry.data.fields.SchemaField({
+        max: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5E.AttunementMax"
+        })
+      }, {label: "DND5E.Attunement"}),
+      senses: new foundry.data.fields.SchemaField({
+        darkvision: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseDarkvision"
+        }),
+        blindsight: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseBlindsight"
+        }),
+        tremorsense: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseTremorsense"
+        }),
+        truesight: new foundry.data.fields.NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SenseTruesight"
+        }),
+        units: new foundry.data.fields.StringField({required: true, initial: "ft", label: "DND5E.SenseUnits"}),
+        special: new foundry.data.fields.StringField({required: true, label: "DND5E.SenseSpecial"})
+      }, {label: "DND5E.Senses"}),
+      spellcasting: new foundry.data.fields.StringField({
+        required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
+      })
     };
   }
 }
 
-/* -------------------------------------------- */
-/*  Details                                     */
-/* -------------------------------------------- */
-
 /**
  * An embedded data structure for extra details data used by creatures.
- * @extends common.DetailsData
  * @see CreatureData
  *
  * @property {string} alignment  Creature's alignment.
@@ -110,209 +95,124 @@ export class SensesData extends DocumentData {
  */
 export class DetailsData extends common.DetailsData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      alignment: fields.BLANK_STRING,
-      race: fields.BLANK_STRING
-    });
+    return {
+      ...super.defineSchema(),
+      alignment: new foundry.data.fields.StringField({required: true, label: "DND5E.Alignment"}),
+      race: new foundry.data.fields.StringField({required: true, label: "DND5E.Race"})
+    };
   }
 }
-
-/* -------------------------------------------- */
-/*  Skills                                      */
-/* -------------------------------------------- */
 
 /**
  * An embedded data structure for individual skill data.
- * @extends DocumentData
  * @see CreatureData
  *
- * @property {number} value              Proficiency level creature has in this skill.
- * @property {string} ability            Default ability used for this skill.
- * @property {SkillBonusesData} bonuses  Bonuses for this skill.
+ * @property {number} value            Proficiency level creature has in this skill.
+ * @property {string} ability          Default ability used for this skill.
+ * @property {object} bonuses          Bonuses for this skill.
+ * @property {string} bonuses.check    Numeric or dice bonus to skill's check.
+ * @property {string} bonuses.passive  Numeric bonus to skill's passive check.
  */
-export class SkillData extends DocumentData {
+export class SkillData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      value: fields.field(fields.NUMERIC_FIELD, fields.REQUIRED_NUMBER),
-      ability: fields.field(fields.REQUIRED_STRING, { default: "dex" }),
-      bonuses: {
-        type: SkillBonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.creature.skills.acr.bonuses")
-      }
+      value: new foundry.data.fields.NumberField({required: true, initial: 0, label: "DND5E.ProficiencyLevel"}),
+      // TODO: Default abilities for skills are not filled properly
+      ability: new foundry.data.fields.StringField({required: true, initial: "dex", label: "DND5E.Ability"}),
+      bonuses: new foundry.data.fields.SchemaField({
+        check: new FormulaField({required: true, label: "DND5E.SkillBonusCheck"}),
+        passive: new FormulaField({required: true, label: "DND5E.SkillBonusPassive"})
+      }, {label: "DND5E.SkillBonuses"})
     };
   }
 }
-
-/**
- * An embedded data structure for bonuses granted to individual skills.
- * @extends DocumentData
- * @see SkillData
- *
- * @property {string} check    Numeric or dice bonus to skill's check.
- * @property {string} passive  Numeric bonus to skill's passive check.
- */
-export class SkillBonusesData extends DocumentData {
-  static defineSchema() {
-    return {
-      check: FORMULA_FIELD,
-      passive: DETERMINISTIC_FORMULA_FIELD
-    };
-  }
-}
-
-/* -------------------------------------------- */
-/*  Traits                                      */
-/* -------------------------------------------- */
 
 /**
  * An embedded data structure for extra traits data used by creatures.
- * @extends common.TraitsData
  * @see CreatureData
  *
- * @property {common.SimpleTraitData} languages  Languages known by this creature.
+ * @property {object} languages          Languages known by this creature.
+ * @property {string[]} languages.value  Currently selected languages.
+ * @property {string} languages.custom   Semicolon-separated list of custom languages.
  */
 export class TraitsData extends common.TraitsData {
   static defineSchema() {
-    return mergeObject(super.defineSchema(), {
-      languages: {
-        type: common.SimpleTraitData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.creature.traits.languages")
-      }
-    });
+    return {
+      ...super.defineSchema(),
+      languages: new foundry.data.fields.SchemaField({
+        value: new foundry.data.fields.SetField(
+          new foundry.data.fields.StringField({blank: false}), {label: "DND5E.TraitsChosen"}
+        ),
+        custom: new foundry.data.fields.StringField({required: true, label: "DND5E.Special"})
+      }, {label: "DND5E.Languages"})
+    };
   }
 }
 
-/* -------------------------------------------- */
-/*  Spells                                      */
-/* -------------------------------------------- */
-
 /**
  * An embedded data structure for individual spell levels.
- * @extends DocumentData
  * @see CreatureData
  *
  * @property {number} value     Number of unused spell slots at this level.
  * @property {number} override  Manual override of total spell slot count for this level.
  */
-export class SpellData extends DocumentData {
+export class SpellData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      value: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, fields.REQUIRED_NUMBER),
-      override: fields.field(fields.NONNEGATIVE_INTEGER_FIELD, { default: null })
+      value: new foundry.data.fields.NumberField({
+        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
+      }),
+      override: new foundry.data.fields.NumberField({required: true, integer: true, min: 0, label: "DND5E.SpellProgOverride"})
     };
   }
 }
 
-/* -------------------------------------------- */
-/*  Bonuses                                     */
-/* -------------------------------------------- */
-
 /**
  * An embedded data structure for global creature bonuses.
- * @extends DocumentData
  * @see CreatureData
  *
- * @property {AttackBonusesData} mwak        Bonuses to melee weapon attacks.
- * @property {AttackBonusesData} rwak        Bonuses to ranged weapon attacks.
- * @property {AttackBonusesData} msak        Bonuses to melee spell attacks.
- * @property {AttackBonusesData} rsak        Bonuses to ranged spell attacks.
- * @property {AbilityBonusesData} abilities  Bonuses to ability scores.
- * @property {SpellBonusesData} spell        Bonuses to spells.
+ * @property {AttackBonusesData} mwak  Bonuses to melee weapon attacks.
+ * @property {AttackBonusesData} rwak  Bonuses to ranged weapon attacks.
+ * @property {AttackBonusesData} msak  Bonuses to melee spell attacks.
+ * @property {AttackBonusesData} rsak  Bonuses to ranged spell attacks.
+ * @property {object} abilities        Bonuses to ability scores.
+ * @property {string} abilities.check  Numeric or dice bonus to ability checks.
+ * @property {string} abilities.save   Numeric or dice bonus to ability saves.
+ * @property {string} abilities.skill  Numeric or dice bonus to skill checks.
+ * @property {object} spell            Bonuses to spells.
+ * @property {string} spell.dc         Numeric bonus to spellcasting DC.
  */
-export class BonusesData extends DocumentData {
+export class BonusesData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      mwak: {
-        type: AttackBonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.common.bonuses.mwak")
-      },
-      rwak: {
-        type: AttackBonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.common.bonuses.rwak")
-      },
-      msak: {
-        type: AttackBonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.common.bonuses.msak")
-      },
-      rsak: {
-        type: AttackBonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.common.bonuses.rsak")
-      },
-      abilities: {
-        type: AbilityBonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.common.bonuses.abilities")
-      },
-      spell: {
-        type: SpellBonusesData,
-        required: true,
-        nullable: false,
-        default: defaultData("templates.common.bonuses.spell")
-      }
+      mwak: new foundry.data.fields.EmbeddedDataField(AttackBonusesData, {label: "DND5E.BonusMWAttack"}),
+      rwak: new foundry.data.fields.EmbeddedDataField(AttackBonusesData, {label: "DND5E.BonusRWAttack"}),
+      msak: new foundry.data.fields.EmbeddedDataField(AttackBonusesData, {label: "DND5E.BonusMSAttack"}),
+      rsak: new foundry.data.fields.EmbeddedDataField(AttackBonusesData, {label: "DND5E.BonusRSAttack"}),
+      abilities: new foundry.data.fields.SchemaField({
+        check: new FormulaField({required: true, label: "DND5E.BonusAbilityCheck"}),
+        save: new FormulaField({required: true, label: "DND5E.BonusAbilitySave"}),
+        skill: new FormulaField({required: true, label: "DND5E.BonusAbilitySkill"})
+      }, {label: "DND5E.BonusAbility"}),
+      spell: new foundry.data.fields.SchemaField({
+        dc: new FormulaField({required: true, deterministic: true, label: "DND5E.BonusSpellDC"})
+      }, {label: "DND5E.BonusSpell"})
     };
   }
 }
 
 /**
  * An embedded data structure for global attack bonuses.
- * @extends DocumentData
  * @see BonusesData
  *
  * @property {string} attack  Numeric or dice bonus to attack rolls.
  * @property {string} damage  Numeric or dice bonus to damage rolls.
  */
-export class AttackBonusesData extends DocumentData {
+export class AttackBonusesData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      attack: FORMULA_FIELD,
-      damage: FORMULA_FIELD
-    };
-  }
-}
-
-/**
- * An embedded data structure for global ability bonuses.
- * @extends DocumentData
- * @see BonusesData
- *
- * @property {string} check  Numeric or dice bonus to ability checks.
- * @property {string} save   Numeric or dice bonus to ability saves.
- * @property {string} skill  Numeric or dice bonus to skill checks.
- */
-export class AbilityBonusesData extends DocumentData {
-  static defineSchema() {
-    return {
-      check: FORMULA_FIELD,
-      save: FORMULA_FIELD,
-      skill: FORMULA_FIELD
-    };
-  }
-}
-
-/**
- * An embedded data structure for global spell bonuses.
- * @extends DocumentData
- * @see BonusesData
- *
- * @property {string} dc  Numeric bonus to spellcasting DC.
- */
-export class SpellBonusesData extends DocumentData {
-  static defineSchema() {
-    return {
-      dc: DETERMINISTIC_FORMULA_FIELD
+      attack: new FormulaField({required: true, label: "DND5E.BonusAttack"}),
+      damage: new FormulaField({required: true, label: "DND5E.BonusDamage"})
     };
   }
 }
