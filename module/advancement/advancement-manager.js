@@ -325,12 +325,58 @@ export class AdvancementManager extends Application {
     html.find("button[data-action]").click(event => {
       switch ( event.currentTarget.dataset.action ) {
         case "previous":
-          return this.reverseStep();
+          return this._onClickPreviousStep(event);
         case "next":
         case "complete":
-          return this.advanceStep();
+          return this._onClickNextStep(event);
       }
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicks on next or complete buttons.
+   * @param {Event} event  Click event.
+   */
+  async _onClickNextStep(event) {
+    this.setControlsDisabled(true);
+
+    // Clear visible errors
+    this.element[0]?.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
+
+    try {
+      await this.advanceStep(event);
+    } catch(error) {
+      if ( !(error instanceof AdvancementError) ) throw error;
+      return ui.notifications.error(error.message);
+    } finally {
+      this.setControlsDisabled(false);
+    }
+
+    if ( this.step ) this.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicks on previous button.
+   * @param {Event} event  Click event.
+   */
+  async _onClickPreviousStep(event) {
+    if ( !this.previousStep ) return;
+    this.setControlsDisabled(true);
+
+    try {
+      await this.reverseStep(event);
+    } catch(error) {
+      if ( !(error instanceof AdvancementError) ) throw error;
+      return ui.notifications.error(error.message);
+    } finally {
+      this.setControlsDisabled(false);
+    }
+
+    this.render(true);
   }
 
   /* -------------------------------------------- */
@@ -340,10 +386,7 @@ export class AdvancementManager extends Application {
    * @param {boolean} disabled  Should they be disabled?
    */
   setControlsDisabled(disabled) {
-    const nextButton = this.element[0]?.querySelector("button[name='next']");
-    if ( nextButton ) nextButton.disabled = disabled;
-    const previousButton = this.element[0]?.querySelector("button[name='previous']");
-    if ( previousButton ) previousButton.disabled = disabled;
+    this.element[0]?.querySelectorAll("button").forEach(b => b.disabled = disabled);
   }
 
   /* -------------------------------------------- */
@@ -377,21 +420,16 @@ export class AdvancementManager extends Application {
 
   /**
    * Advance to the next step in the workflow.
-   * @param {Event} event  Button click that triggered the change.
+   * @param {Event} event  Button click that triggered the change, if it was triggered by a click.
    * @returns {Promise}
    */
   async advanceStep(event) {
-    this.setControlsDisabled(true);
-
-    // Clear visible errors
-    this.element[0]?.querySelectorAll(".error").forEach(f => f.classList.remove("error"));
-
-    // Delete item
-    if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
-
-    // Apply changes for the current step's flow
-    else {
-      try {
+    try {
+      // Delete item
+      if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
+      
+      // Apply changes for the current step's flow
+      else {
         const flow = this.step.flow;
         if ( this.step.reverse ) {
           await flow.advancement.reverse(flow.level);
@@ -399,52 +437,42 @@ export class AdvancementManager extends Application {
           const formData = flow._getSubmitData();
           await flow._updateObject(event, formData);
         }
-      } catch(error) {
-        this.setControlsDisabled(false);
-        if ( !(error instanceof AdvancementError) ) throw error;
-        ui.notifications.error(error.message);
-        this._advancing = false;
-        return;
       }
+    } catch(error) {
+      throw error;
+    } finally {
+      this._advancing = false;
     }
+
+    // Increase step number and re-render if advancing
     this.clone.prepareData();
-
-    // Check to see if this is the final step, if so, head over to complete
-    if ( !this.nextStep ) return this.complete(event);
-
-    // Increase step number and re-render
     this._stepIndex += 1;
-    this._advancing = false;
-    this.render(true);
+    if ( !this.step ) return this.complete(event);
+    else if ( !event ) this.render(true);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Return to a previous step in the workflow.
-   * @param {Event} event  Button click that triggered the change.
+   * @param {Event} event  Button click that triggered the change, if it was triggered by a click.
    * @returns {Promise}
    */
   async reverseStep(event) {
     if ( !this.previousStep ) return;
-    this.setControlsDisabled(true);
 
-    // Undo changes from previous step
     try {
       await this.step.flow.advancement.reverse(this.step.flow.level);
       this.clone.prepareData();
     } catch(error) {
-      this.setControlsDisabled(false);
-      if ( !(error instanceof AdvancementError) ) throw error;
-      ui.notifications.error(error.message);
+      throw error;
+    } finally {
       this._advancing = false;
-      return;
     }
 
-    // Decrease step number and re-render
+    // Decrease step number and re-render if advancing
     this._stepIndex -= 1;
-    this._advancing = false;
-    this.render(true);
+    if ( !event ) this.render(true);
   }
 
   /* -------------------------------------------- */
