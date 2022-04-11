@@ -296,7 +296,7 @@ export class AdvancementManager extends Application {
   render(...args) {
     if ( this.step?.automatic ) {
       if ( this._advancing ) return this;
-      this.forward();
+      this._forward();
       return this;
     }
 
@@ -329,10 +329,10 @@ export class AdvancementManager extends Application {
         switch ( event.currentTarget.dataset.action ) {
           case "previous":
             if ( !this.previousStep ) return;
-            return this.backward(event);
+            return this._backward(event);
           case "next":
           case "complete":
-            return this.forward(event);
+            return this._forward(event);
         }
       } finally {
         buttons.forEach(b => b.disabled = false);
@@ -373,8 +373,9 @@ export class AdvancementManager extends Application {
    * Advance through the steps until one requiring user interaction is encountered.
    * @param {Event} [event]  Triggering click event if one occurred.
    * @returns {Promise}
+   * @private
    */
-  async forward(event) {
+  async _forward(event) {
     this._advancing = true;
     try {
       do {
@@ -403,7 +404,7 @@ export class AdvancementManager extends Application {
     }
 
     if ( this.step ) this.render(true);
-    else this.complete();
+    else this._complete();
   }
 
   /* -------------------------------------------- */
@@ -412,8 +413,9 @@ export class AdvancementManager extends Application {
    * Reverse through the steps until one requiring user interaction is encountered.
    * @param {Event} [event]  Triggering click event if one occurred.
    * @returns {Promise}
+   * @private
    */
-  async backward(event) {
+  async _backward(event) {
     this._advancing = true;
     try {
       do {
@@ -439,10 +441,11 @@ export class AdvancementManager extends Application {
    * Apply changes to actual actor after all choices have been made.
    * @param {Event} event  Button click that triggered the change.
    * @returns {Promise}
+   * @private
    */
-  async complete(event) {
+  async _complete(event) {
     // Apply changes from clone to original actor
-    await this.commitUpdates(this.actor, this.clone);
+    await this._commitUpdates(this.actor, this.clone);
 
     // Close prompt & remove from actor
     await this.close({ skipConfirmation: true });
@@ -455,8 +458,9 @@ export class AdvancementManager extends Application {
    * @param {Actor5e} actor       Original actor to be updated based on changes to clone.
    * @param {Actor5e} clone       Clone actor to which advancement changes have been applied.
    * @returns {Promise<Actor5e>}  The original actor with the updates applied.
+   * @private
    */
-  async commitUpdates(actor, clone) {
+  async _commitUpdates(actor, clone) {
     const updates = this.clone.toObject();
     const items = updates.items;
     delete updates.items;
