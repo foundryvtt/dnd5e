@@ -45,6 +45,13 @@ export class AdvancementManager extends Application {
      * @private
      */
     this._advancing = false;
+
+    /**
+     * Cache of advancements for each item pre-organized by level.
+     * @type {object}
+     * @private
+     */
+    this._advancementCache = {};
   }
 
   /* -------------------------------------------- */
@@ -145,7 +152,7 @@ export class AdvancementManager extends Application {
     // All other items, just create some flows up to current character level
     else {
       Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
-        .flatMap(l => this.flowsForLevel(clonedItem, l))
+        .flatMap(l => manager.flowsForLevel(clonedItem, l))
         .forEach(flow => manager.steps.push({ type: "item", flow }));
       manager._stepIndex = 0;
     }
@@ -174,7 +181,7 @@ export class AdvancementManager extends Application {
     // All other items, just create some flows down from current character level
     else {
       Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
-        .flatMap(l => this.flowsForLevel(clonedItem, l))
+        .flatMap(l => manager.flowsForLevel(clonedItem, l))
         .reverse()
         .forEach(flow => manager.steps.push({ type: "item", flow, automatic: true, reverse: true }));
       manager._stepIndex = 0;
@@ -214,11 +221,11 @@ export class AdvancementManager extends Application {
    */
   _createLevelChangeSteps(classItem, levelDelta) {
     const createFlows = (classLevel, characterLevel) => [
-      ...this.constructor.flowsForLevel(classItem, classLevel),
-      ...this.constructor.flowsForLevel(classItem.subclass, classLevel),
+      ...this.flowsForLevel(classItem, classLevel),
+      ...this.flowsForLevel(classItem.subclass, classLevel),
       ...this.clone.items.contents.flatMap(i => {
         if ( ["class", "subclass"].includes(i.type) ) return [];
-        return this.constructor.flowsForLevel(i, characterLevel);
+        return this.flowsForLevel(i, characterLevel);
       })
     ];
 
@@ -253,10 +260,24 @@ export class AdvancementManager extends Application {
    * @returns {AdvancementFlow[]}  Created flow applications.
    * @protected
    */
-  static flowsForLevel(item, level) {
-    return Object.values(item?.advancement ?? {})
-      .filter(a => a.levels.includes(level) && a.appliesToClass)
-      .sort((a, b) => a.sortingValueForLevel(level).localeCompare(b.sortingValueForLevel(level)))
+  flowsForLevel(item, level) {
+    if ( !item ) return [];
+    if ( !this._advancementCache[item.id] ) {
+      const cache = Object.values(item?.advancement ?? {}).reduce((obj, a) => {
+        if ( a.appliesToClass ) {
+          for ( const lvl of a.levels ) {
+            obj[lvl] ??= [];
+            obj[lvl].push(a);
+          }
+        }
+        return obj;
+      }, {});
+      Object.entries(cache).map(([lvl, entries]) => {
+        return entries.sort((a, b) => a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl)));
+      });
+      this._advancementCache[item.id] = cache;
+    }
+    return (this._advancementCache[item.id][level] ?? [])
       .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
   }
 
