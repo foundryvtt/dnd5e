@@ -46,6 +46,7 @@ export class LevelManager extends FormApplication {
     html[0].querySelectorAll("button:is(.add, .subtract)").forEach(e => {
       e.addEventListener("click", this._onClickAddSubtractButton.bind(this));
     });
+    // TODO: Enforce level caps when manually editing level inputs
   }
 
   /* -------------------------------------------- */

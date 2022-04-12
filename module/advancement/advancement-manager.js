@@ -188,7 +188,7 @@ export class AdvancementManager extends Application {
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .reverse()
       .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
-  
+
     // Add a final step to remove the item only if there are advancements to apply
     if ( manager.steps.length ) {
       manager._stepIndex = 0;
@@ -237,8 +237,8 @@ export class AdvancementManager extends Application {
     const finalCharacterLevel = characterLevel + Object.values(changes).reduce((delta, value) => delta + value, 0);
     const classLevels = {};
 
-    const pushSteps = (flows, data) => manager.steps.push(...flows.map(flow => { return { flow, ...data } }));
-    const getItemFlows = (characterLevel) => manager.clone.items.contents.flatMap(i => {
+    const pushSteps = (flows, data) => manager.steps.push(...flows.map(flow => ({ flow, ...data })));
+    const getItemFlows = characterLevel => manager.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass"].includes(i.type) ) return [];
       return this.flowsForLevel(i, characterLevel);
     });
@@ -258,7 +258,7 @@ export class AdvancementManager extends Application {
 
         // If restore steps for this character level, pop them off and append them
         if ( restores[characterLevel - 1] ) manager.steps.push(...restores[characterLevel - 1]);
-  
+
         // Otherwise, add normal item advancements
         else pushSteps(getItemFlows(characterLevel), stepData);
       }
@@ -467,7 +467,7 @@ export class AdvancementManager extends Application {
         // Reverse step based on step type
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
         else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else flow.retainedData = await this.step.flow.advancement.reverse(flow.level);
+        else flow.retainedData = await flow.advancement.reverse(flow.level);
 
         this.clone.prepareData();
         this._stepIndex--;
