@@ -2,6 +2,18 @@ import { AdvancementError } from "./advancement-flow.js";
 
 
 /**
+ * @typedef {object} AdvancementStep
+ * @property {string} type                Step type from "forward", "backward", "delete", or "restore".
+ * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step.
+ * @property {Item5e} [item]              For "delete" steps only, the item to be removed.
+ * @property {object} [class]             Contains data on class if step was triggered by class level change.
+ * @property {Item5e} [class.item]        Class item that caused this advancement step.
+ * @property {number} [class.level]       Level the class should be during this step.
+ * @property {boolean} [automatic=false]  Should the manager attempt to apply this step without user interaction?
+ */
+
+
+/**
  * Application for controlling the advancement workflow and displaying the interface.
  *
  * @property {Actor5e} actor        Actor on which this advancement is being performed.
@@ -148,7 +160,7 @@ export class AdvancementManager extends Application {
     else {
       Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
         .flatMap(l => this.flowsForLevel(clonedItem, l))
-        .forEach(flow => manager.steps.push({ type: "item", flow }));
+        .forEach(flow => manager.steps.push({ type: "forward", flow }));
       manager._stepIndex = 0;
     }
 
@@ -175,7 +187,7 @@ export class AdvancementManager extends Application {
     Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .reverse()
-      .forEach(flow => manager.steps.push({ type: "item", flow, automatic: true, reverse: true }));
+      .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
   
     // Add a final step to remove the item only if there are advancements to apply
     if ( manager.steps.length ) {
@@ -238,7 +250,7 @@ export class AdvancementManager extends Application {
       characterLevel += delta;
 
       if ( delta > 0 ) {
-        const stepData = { type: "level", classLevel, classItem };
+        const stepData = { type: "forward", class: {item: classItem, level: classLevel} };
 
         // Add class & subclass advancements
         pushSteps(this.flowsForLevel(classItem, classLevel), stepData);
@@ -253,7 +265,7 @@ export class AdvancementManager extends Application {
 
       else {
         classLevel += 1;
-        const stepData = { type: "level", classLevel, classItem, automatic: true, reverse: true };
+        const stepData = { type: "reverse", class: {item: classItem, level: classLevel}, automatic: true };
         const itemFlows = getItemFlows(characterLevel + 1).reverse();
 
         // If character level will need to be restored later, prepare restore steps
@@ -298,7 +310,7 @@ export class AdvancementManager extends Application {
     // Prepare information for subheading
     const item = this.step.flow.item;
     let level = this.step.flow.level;
-    if ( (this.step.type === "level") && ["class", "subclass"].includes(item.type) ) level = this.step.classLevel;
+    if ( (this.step.class) && ["class", "subclass"].includes(item.type) ) level = this.step.class.level;
 
     const visibleSteps = this.steps.filter(s => !s.automatic);
     const visibleIndex = visibleSteps.indexOf(this.step);
@@ -322,10 +334,10 @@ export class AdvancementManager extends Application {
   /** @inheritdoc */
   render(...args) {
     // Ensure the level on the class item matches the specified level
-    if ( this.step?.type === "level" ) {
-      let level = this.step.classLevel;
-      if ( this.step.reverse ) level -= 1;
-      this.step.classItem.data.update({"data.levels": level});
+    if ( this.step?.class ) {
+      let level = this.step.class.level;
+      if ( this.step.type === "reverse" ) level -= 1;
+      this.step.class.item.data.update({"data.levels": level});
       this.clone.prepareData();
     }
 
@@ -419,7 +431,7 @@ export class AdvancementManager extends Application {
         // Apply changes based on step type
         if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
         else if ( this.step.type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else if ( this.step.reverse ) flow.retainedData = await flow.advancement.reverse(flow.level);
+        else if ( this.step.type === "reverse" ) flow.retainedData = await flow.advancement.reverse(flow.level);
         else await flow._updateObject(event, flow._getSubmitData());
 
         this.clone.prepareData();
@@ -452,7 +464,7 @@ export class AdvancementManager extends Application {
 
         // Reverse step based on step type
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
-        else if ( this.step.reverse ) await flow.advancement.restore(flow.level, flow.retainedData);
+        else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else flow.retainedData = await this.step.flow.advancement.reverse(flow.level);
 
         this.clone.prepareData();
