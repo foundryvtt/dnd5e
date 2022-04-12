@@ -4,22 +4,14 @@ import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
-import {DND5E} from "../config.js";
 import Item5e from "../item/entity.js";
+
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  * @extends {Actor}
  */
 export default class Actor5e extends Actor {
-
-  /**
-   * Cached version of the current advancement window.
-   * @type {AdvancementPrompt}
-   */
-  _advancement;
-
-  /* -------------------------------------------- */
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
@@ -30,17 +22,6 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Lazily obtain an advancement application for this Actor or create one if it doesn't exist yet.
-   * @type {AdvancementPrompt}
-   */
-  get advancement() {
-    this._advancement ??= new game.dnd5e.advancement.AdvancementPrompt(this);
-    return this._advancement;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -447,7 +428,7 @@ export default class Actor5e extends Actor {
     const flags = actorData.flags.dnd5e || {};
 
     // Skill modifiers
-    const feats = DND5E.characterFlags;
+    const feats = CONFIG.DND5E.characterFlags;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
     const skillBonus = this._simplifyBonus(bonuses.skill, bonusData);
@@ -615,7 +596,7 @@ export default class Actor5e extends Actor {
 
     // Look up the number of slots per level from the progression table
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
-    const slots = DND5E.SPELL_SLOT_TABLE[Math.min(levels, DND5E.SPELL_SLOT_TABLE.length) - 1] || [];
+    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] || [];
     for ( let [n, lvl] of Object.entries(spells) ) {
       let i = parseInt(n.slice(-1));
       if ( Number.isNaN(i) ) continue;
@@ -903,13 +884,13 @@ export default class Actor5e extends Actor {
 
   /**
    * Determine whether the provided ability is usable for remarkable athlete.
-   *
    * @param {string} ability  Ability type to check.
    * @returns {boolean}       Whether the actor has the remarkable athlete flag and the ability is physical.
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return this.getFlag("dnd5e", "remarkableAthlete") && DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
+    return this.getFlag("dnd5e", "remarkableAthlete")
+      && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
   /* -------------------------------------------- */

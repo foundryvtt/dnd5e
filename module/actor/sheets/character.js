@@ -1,4 +1,6 @@
 import ActorSheet5e from "./base.js";
+import { AdvancementManager } from "../../advancement/advancement-manager.js";
+
 
 /**
  * An Actor sheet for player character type actors.
@@ -300,9 +302,29 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel})
       );
 
-      const cls = this.actor.itemTypes.class.find(c => c.name === itemData.name);
-      let priorLevel = cls?.data.data.levels ?? 0;
-      if ( cls ) return cls.update({"data.levels": priorLevel + itemData.data.levels});
+      const cls = this.actor.itemTypes.class.find(c => c.identifier === itemData.data.identifier);
+      if ( cls ) {
+        const priorLevel = cls?.data.data.levels ?? 0;
+        const manager = AdvancementManager.forLevelChange(this.actor, cls.id, itemData.data.levels);
+        if ( manager.steps.length ) return manager.render(true);
+        return cls.update({"data.levels": priorLevel + itemData.data.levels});
+      }
+    }
+
+    // If a subclass is dropped, ensure it doesn't match another subclass with the same identifier
+    else if ( itemData.type === "subclass" ) {
+      const other = this.actor.itemTypes.subclass.find(i => i.identifier === itemData.data.identifier);
+      if ( other ) {
+        return ui.notifications.error(game.i18n.format("DND5E.SubclassDuplicateError", {
+          identifier: other.identifier
+        }));
+      }
+      const cls = this.actor.itemTypes.class.find(i => i.identifier === itemData.data.classIdentifier);
+      if ( cls && cls.subclass ) {
+        return ui.notifications.error(game.i18n.format("DND5E.SubclassAssignmentError", {
+          class: cls.name, subclass: cls.subclass.name
+        }));
+      }
     }
 
     // Default drop handling if levels were not added

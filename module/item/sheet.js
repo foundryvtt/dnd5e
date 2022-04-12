@@ -102,7 +102,6 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _getItemAdvancement(item) {
     const actor = item.parent;
-    const originalClass = item.isOriginalClass;
     let maxLevel = 0;
     if ( actor ) {
       if ( item.type === "class" ) maxLevel = item.data.data.levels;
@@ -112,9 +111,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     const data = {};
     for ( const [id, advancement] of Object.entries(item.advancement) ) {
-      if ( (originalClass !== null)
-           && ((advancement.data.classRestriction === "primary" && !originalClass)
-           || (advancement.data.classRestriction === "secondary" && originalClass)) ) continue;
+      if ( !advancement.appliesToClass ) continue;
       for ( const level of advancement.levels ) {
         if ( !data[level] ) {
           data[level] = {
@@ -265,14 +262,16 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemStatus(item) {
-    if ( item.type === "spell" ) {
-      return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
-    }
-    else if ( ["weapon", "equipment"].includes(item.type) ) {
-      return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
-    }
-    else if ( item.type === "tool" ) {
-      return game.i18n.localize(item.data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
+    switch ( item.type ) {
+      case "class":
+        return game.i18n.format("DND5E.LevelCount", {ordinal: item.data.levels.ordinalString()});
+      case "equipment":
+      case "weapon":
+        return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
+      case "spell":
+        return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
+      case "tool":
+        return game.i18n.localize(item.data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
     }
   }
 
@@ -490,8 +489,9 @@ export default class ItemSheet5e extends ItemSheet {
     if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
 
     if ( cl.contains("modify-choices") ) {
-      const level = event.currentTarget.closest("li")?.dataset.level;
-      if ( level ) this.actor.advancement.modifyChoices(this.item, Number(level));
+      // TODO: Reimplement modify choices somehow
+      // const level = event.currentTarget.closest("li")?.dataset.level;
+      // if ( level ) this.actor.advancement.modifyChoices(this.item, Number(level));
       return;
     }
 

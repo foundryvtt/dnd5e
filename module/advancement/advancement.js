@@ -155,6 +155,21 @@ export class Advancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Should this advancement be applied to a class based on its class restriction setting? This will always return
+   * true for advancements that are not within an embedded class item.
+   * @type {boolean}
+   * @protected
+   */
+  get appliesToClass() {
+    const originalClass = this.item.isOriginalClass;
+    return (originalClass === null) || !this.data.classRestriction
+      || (this.data.classRestriction === "primary" && originalClass)
+      || (this.data.classRestriction === "secondary" && !originalClass);
+  }
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
