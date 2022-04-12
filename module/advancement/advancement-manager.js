@@ -45,13 +45,6 @@ export class AdvancementManager extends Application {
      * @private
      */
     this._advancing = false;
-
-    /**
-     * Data retained from reversed steps in case it needs to be restored later.
-     * @type {object<string, object>}
-     * @private
-     */
-    this._retainedData = {};
   }
 
   /* -------------------------------------------- */
@@ -421,25 +414,13 @@ export class AdvancementManager extends Application {
     this._advancing = true;
     try {
       do {
-        // Delete item
+        const flow = this.step.flow;
+
+        // Apply changes based on step type
         if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
-
-        // Restore retained data
-        else if ( this.step.type === "restore" ) {
-          const data = this._retainedData[this.step.flow.id] ?? {};
-          await this.step.flow.advancement.restore(this.step.flow.level, data);
-        }
-
-        // Apply changes for the current step's flow
-        else {
-          const flow = this.step.flow;
-          if ( this.step.reverse ) {
-            this._retainedData[flow.id] = await flow.advancement.reverse(flow.level);
-          } else {
-            const formData = flow._getSubmitData();
-            await flow._updateObject(event, formData);
-          }
-        }
+        else if ( this.step.type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
+        else if ( this.step.reverse ) flow.retainedData = await flow.advancement.reverse(flow.level);
+        else await flow._updateObject(event, flow._getSubmitData());
 
         this.clone.prepareData();
         this._stepIndex++;
@@ -467,8 +448,13 @@ export class AdvancementManager extends Application {
     this._advancing = true;
     try {
       do {
+        const flow = this.step.flow;
+
+        // Reverse step based on step type
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
-        else this._retainedData[this.step.flow.id] = await this.step.flow.advancement.reverse(flow.level);
+        else if ( this.step.reverse ) await flow.advancement.restore(flow.level, flow.retainedData);
+        else flow.retainedData = await this.step.flow.advancement.reverse(flow.level);
+
         this.clone.prepareData();
         this._stepIndex--;
       } while ( this.step?.automatic );
@@ -492,43 +478,31 @@ export class AdvancementManager extends Application {
    * @private
    */
   async _complete(event) {
-    // Apply changes from clone to original actor
-    await this._commitUpdates(this.actor, this.clone);
-
-    // Close prompt & remove from actor
-    await this.close({ skipConfirmation: true });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Apply changes from the clone actor back to the original actor.
-   * @param {Actor5e} actor       Original actor to be updated based on changes to clone.
-   * @param {Actor5e} clone       Clone actor to which advancement changes have been applied.
-   * @returns {Promise<Actor5e>}  The original actor with the updates applied.
-   * @private
-   */
-  async _commitUpdates(actor, clone) {
     const updates = this.clone.toObject();
     const items = updates.items;
     delete updates.items;
 
+    // Gather changes to embedded items
     const { toCreate, toUpdate, toDelete } = items.reduce((obj, item) => {
-      if ( !actor.items.get(item._id) ) {
+      if ( !this.actor.items.get(item._id) ) {
         obj.toCreate.push(item);
       } else {
         obj.toUpdate.push(item);
         obj.toDelete.findSplice(id => id === item._id);
       }
       return obj;
-    }, { toCreate: [], toUpdate: [], toDelete: actor.items.map(i => i.id) });
+    }, { toCreate: [], toUpdate: [], toDelete: this.actor.items.map(i => i.id) });
 
-    return Promise.all([
+    // Apply changes from clone to original actor
+    await Promise.all([
       this.actor.update(updates),
-      this.actor.createEmbeddedDocuments("Item", toCreate, { skipAdvancement: true, keepId: true }),
-      this.actor.updateEmbeddedDocuments("Item", toUpdate, { skipAdvancement: true }),
-      this.actor.deleteEmbeddedDocuments("Item", toDelete, { skipAdvancement: true })
+      this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true }),
+      this.actor.updateEmbeddedDocuments("Item", toUpdate),
+      this.actor.deleteEmbeddedDocuments("Item", toDelete)
     ]);
+
+    // Close prompt
+    return this.close({ skipConfirmation: true });
   }
 
 }
