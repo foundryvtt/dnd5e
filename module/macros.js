@@ -88,5 +88,5 @@ export function rollItem(itemName) {
 export function toggleEffect(effectLabel) {
   const effect = getMacroTarget(effectLabel, "ActiveEffect");
   if ( !effect ) return;
-  return effect.update({"disabled": !effect.data.disabled});
+  return effect.update({disabled: !effect.data.disabled});
 }

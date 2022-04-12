@@ -1,5 +1,7 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
+import { AdvancementManager } from "../../advancement/advancement-manager.js";
+import { DeleteConfirmationDialog } from "../../advancement/delete-confirmation-dialog.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
@@ -11,8 +13,8 @@ import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorSkillConfig from "../../apps/skill-config.js";
 import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
-import {DND5E} from "../../config.js";
 import ActiveEffect5e from "../../active-effect.js";
+
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -758,7 +760,7 @@ export default class ActorSheet5e extends ActorSheet {
       title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
       content: {
         options: game.settings.get("dnd5e", "polymorphSettings"),
-        i18n: DND5E.polymorphSettings,
+        i18n: CONFIG.DND5E.polymorphSettings,
         isToken: this.actor.isToken
       },
       default: "accept",
@@ -818,30 +820,59 @@ export default class ActorSheet5e extends ActorSheet {
       itemData = scroll.data;
     }
 
-    if ( itemData.data ) {
-      // Ignore certain statuses
-      ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
-
-      // Downgrade ATTUNED to REQUIRED
-      itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
-    }
+    // Clean up data
+    this._onDropResetData(itemData);
 
     // Stack identical consumables
-    if ( itemData.type === "consumable" && itemData.flags.core?.sourceId ) {
-      const similarItem = this.actor.items.find(i => {
-        const sourceId = i.getFlag("core", "sourceId");
-        return sourceId && (sourceId === itemData.flags.core?.sourceId)
-               && (i.type === "consumable") && (i.name === itemData.name);
-      });
-      if ( similarItem ) {
-        return similarItem.update({
-          "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
-        });
-      }
+    const stacked = this._onDropStackConsumables(itemData);
+    if ( stacked ) return stacked;
+
+    // Bypass normal creation flow for any items with advancement
+    if ( itemData.data.advancement?.length ) {
+      const manager = AdvancementManager.forNewItem(this.actor, itemData);
+      if ( manager.steps.length ) return manager.render(true);
     }
 
     // Create the owned item as normal
     return super._onDropItemCreate(itemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset certain pieces of data stored on items when they are dropped onto the actor.
+   * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   */
+  _onDropResetData(itemData) {
+    if ( !itemData.data ) return;
+
+    // Ignore certain statuses
+    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+
+    // Downgrade ATTUNED to REQUIRED
+    itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stack identical consumables when a new one is dropped rather than creating a duplicate item.
+   * @param {object} itemData         The item data requested for creation.
+   * @returns {Promise<Item5e>|null}  If a duplicate was found, returns the adjusted item stack.
+   */
+  _onDropStackConsumables(itemData) {
+    const droppedSourceId = itemData.flags.core?.sourceId;
+    if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
+
+    const similarItem = this.actor.items.find(i => {
+      const sourceId = i.getFlag("core", "sourceId");
+      return sourceId && (sourceId === droppedSourceId) && (i.type === "consumable") && (i.name === itemData.name);
+    });
+    if ( !similarItem ) return null;
+
+    return similarItem.update({
+      "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+    });
   }
 
   /* -------------------------------------------- */
@@ -991,14 +1022,34 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted.
+   * @returns {Promise<Item5e|AdvancementManager>|undefined}  The deleted item if something was deleted or the
+   *                                                          advancement manager if advancements need removing.
    * @private
    */
-  _onItemDelete(event) {
+  async _onItemDelete(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
-    if ( item ) return item.delete();
+    if ( !item ) return;
+
+    // If item has advancement, handle it separately
+    if ( item.hasAdvancement ) {
+      const manager = AdvancementManager.forDeletedItem(this.actor, item);
+      if ( manager.steps.length ) {
+        if ( item.type === "class" ) {
+          try {
+            const shouldRemoveAdvancements = await DeleteConfirmationDialog.createDialog(item);
+            if ( shouldRemoveAdvancements ) return manager.render(true);
+          } catch(err) {
+            return;
+          }
+        } else {
+          return manager.render(true);
+        }
+      }
+    }
+
+    return item.delete();
   }
 
   /* -------------------------------------------- */
