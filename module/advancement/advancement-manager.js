@@ -322,9 +322,9 @@ export class AdvancementManager extends Application {
   activateListeners(html) {
     super.activateListeners(html);
     html.find("button[data-action]").click(event => {
-      const buttons = this.element[0].querySelectorAll("button");
-      buttons.forEach(b => b.disabled = true);
-      this.element[0].querySelectorAll(".error").forEach(f => f.classList.remove("error"));
+      const buttons = html.find("button");
+      buttons.attr("disabled", true);
+      html.find(".error").removeClass("error");
       try {
         switch ( event.currentTarget.dataset.action ) {
           case "previous":
@@ -335,7 +335,7 @@ export class AdvancementManager extends Application {
             return this._forward(event);
         }
       } finally {
-        buttons.forEach(b => b.disabled = false);
+        buttons.attr("disabled", false);
       }
     });
   }
@@ -381,7 +381,7 @@ export class AdvancementManager extends Application {
       do {
         // Delete item
         if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
-        
+
         // Apply changes for the current step's flow
         else {
           const flow = this.step.flow;
@@ -395,7 +395,7 @@ export class AdvancementManager extends Application {
 
         this.clone.prepareData();
         this._stepIndex++;
-      } while ( this.step && this.step.automatic );
+      } while ( this.step?.automatic );
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
       return ui.notifications.error(error.message);
@@ -423,7 +423,7 @@ export class AdvancementManager extends Application {
         else await this.step.flow.advancement.reverse(this.step.flow.level);
         this.clone.prepareData();
         this._stepIndex--;
-      } while ( this.step && this.step.automatic );
+      } while ( this.step?.automatic );
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
       return ui.notifications.error(error.message);

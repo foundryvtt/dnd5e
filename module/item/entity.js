@@ -275,7 +275,7 @@ export default class Item5e extends Item {
       return obj;
     }, {});
     Object.entries(this.advancementByLevel).forEach(([lvl, data]) => data.sort((a, b) => {
-      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl))
+      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl));
     }));
 
     // Spell Level,  School, and Components
