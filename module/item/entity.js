@@ -348,11 +348,6 @@ export default class Item5e extends Item {
       }
       labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
 
-      // Duration Label
-      let dur = data.duration || {};
-      if (["inst", "perm"].includes(dur.units)) dur.value = null;
-      labels.duration = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
-
       // Recharge Label
       let chg = data.recharge || {};
       labels.recharge = `${game.i18n.localize("DND5E.Recharge")} [${chg.value}${parseInt(chg.value) < 6 ? "+" : ""}]`;
@@ -638,6 +633,11 @@ export default class Item5e extends Item {
       }
     }
     data.duration.value = Number(value);
+
+    // Now that duration value is a number, set the label
+    let dur = data.duration || {};
+    if (["inst", "perm"].includes(dur.units)) dur.value = null;
+    this.labels.duration = [dur.value, CONFIG.DND5E.timePeriods[dur.units]].filterJoin(" ");
   }
 
   /* -------------------------------------------- */
