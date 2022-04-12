@@ -211,7 +211,8 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   async getData() {
     const config = this.advancement.data.configuration.items;
-    const added = this.advancement.data.value.added;
+    const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
+      ?? this.advancement.data.value.added;
     const checked = new Set(Object.values(added ?? {}));
 
     return foundry.utils.mergeObject(super.getData(), {

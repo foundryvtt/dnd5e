@@ -185,12 +185,13 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   getData() {
-    const value = this.advancement.data.value[this.level];
+    const source = this.retainedData ?? this.advancement.data.value;
+    const value = source[this.level];
 
     // If value is empty, `useAverage` should default to the value selected at the previous level
     let useAverage = value === "avg";
     if ( !value ) {
-      const lastValue = this.advancement.data.value[this.level - 1];
+      const lastValue = source[this.level - 1];
       if ( lastValue === "avg" ) useAverage = true;
     }
 

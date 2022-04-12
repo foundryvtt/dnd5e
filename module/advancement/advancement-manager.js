@@ -418,6 +418,7 @@ export class AdvancementManager extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
+      if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
       this._advancing = false;
     }
