@@ -668,6 +668,11 @@ export default class Item5e extends Item {
       }
     }
     data.duration.value = Number(value);
+
+    // Now that duration value is a number, set the label
+    let dur = data.duration || {};
+    if (["inst", "perm"].includes(dur.units)) dur.value = null;
+    this.labels.duration = [dur.value, CONFIG.DND5E.timePeriods[dur.units]].filterJoin(" ");
   }
 
   /* -------------------------------------------- */
