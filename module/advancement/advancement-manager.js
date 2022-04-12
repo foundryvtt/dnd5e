@@ -439,7 +439,9 @@ export class AdvancementManager extends Application {
       } while ( this.step?.automatic );
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
-      return ui.notifications.error(error.message);
+      ui.notifications.error(error.message);
+      this.step.automatic = false;
+      if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
       this._advancing = false;
     }
@@ -472,7 +474,8 @@ export class AdvancementManager extends Application {
       } while ( this.step?.automatic );
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
-      return ui.notifications.error(error.message);
+      ui.notifications.error(error.message);
+      this.step.automatic = false;
     } finally {
       this._advancing = false;
     }

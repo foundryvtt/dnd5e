@@ -214,13 +214,14 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   async getData() {
     const config = this.advancement.data.configuration.items;
-    const value = this.advancement.data.value.added;
-    const checked = new Set(Object.values(value ?? {}));
+    const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
+      ?? this.advancement.data.value.added;
+    const checked = new Set(Object.values(added ?? {}));
 
     return foundry.utils.mergeObject(super.getData(), {
       items: await Promise.all(config.map(async uuid => {
         const item = await fromUuid(uuid);
-        item.checked = value ? checked.has(uuid) : true;
+        item.checked = added ? checked.has(uuid) : true;
         return item;
       }))
     });
