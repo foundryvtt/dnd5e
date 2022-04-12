@@ -86,11 +86,15 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="system.duration.value"
-            value="{{system.duration.value}}" placeholder="&mdash;"
-            title="{{localize 'DND5E.DurationValue'}}">
+        <input type="text" name="system.duration.value" value="{{system.duration.value}}"
+               placeholder="&mdash;" title="{{localize 'DND5E.DurationValue'}}">
         <select name="system.duration.units" title="{{localize 'DND5E.DurationType'}}">
-            {{selectOptions config.timePeriods selected=system.duration.units blank=""}}
+            {{#select system.duration.units}}
+                <option value=""></option>
+                {{#each config.timePeriods as |name key|}}
+                <option value="{{key}}">{{name}}</option>
+                {{/each}}
+            {{/select}}
         </select>
     </div>
 </div>
