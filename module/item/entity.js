@@ -2,6 +2,7 @@ import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import Proficiency from "../actor/proficiency.js";
 
+
 /**
  * Override and extend the basic Item implementation.
  * @extends {Item}
@@ -262,11 +263,20 @@ export default class Item5e extends Item {
     this._classLink = undefined;
 
     // Advancement
+    this.advancementByLevel = Object.fromEntries(
+      Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(l => [l, []])
+    );
     this.advancement = (itemData.data.advancement ?? []).reduce((obj, data) => {
       const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
-      if ( Advancement ) obj[data._id] = new Advancement(this, data);
+      if ( Advancement ) {
+        obj[data._id] = new Advancement(this, data);
+        obj[data._id].levels.forEach(l => this.advancementByLevel[l].push(obj[data._id]));
+      }
       return obj;
     }, {});
+    Object.entries(this.advancementByLevel).forEach(([lvl, data]) => data.sort((a, b) => {
+      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl));
+    }));
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
@@ -1673,21 +1683,7 @@ export default class Item5e extends Item {
       await this.data.update({ "data.identifier": data.name.slugify({strict: true}) });
     }
 
-    if ( !this.isEmbedded ) return;
-
-    // Prepare data for advancement
-    if ( this.type === "class" ) {
-      const classLevel = data.data.levels ?? 1;
-      options.levelChangeData = {
-        class: { initial: 0, final: classLevel },
-        character: {
-          initial: this.parent.data.data.details.level,
-          final: this.parent.data.data.details.level + classLevel
-        }
-      };
-    }
-
-    if ( this.parent.type === "vehicle" ) return;
+    if ( !this.isEmbedded || (this.parent.type === "vehicle") ) return;
     const actorData = this.parent.data;
     const isNPC = this.parent.type === "npc";
     let updates;
@@ -1720,18 +1716,6 @@ export default class Item5e extends Item {
       const pc = this.parent.items.get(this.parent.data.data.details.originalClass);
       if ( !pc ) await this.parent._assignPrimaryClass();
     }
-
-    // Trigger advancement
-    if ( "addFeatures" in options ) {
-      console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
-    }
-    if ( (options.addFeatures === false) || options.skipAdvancement ) return;
-    if ( options.levelChangeData ) {
-      options.levelChangeData.item = this;
-      this.parent.advancement.levelChanged(options.levelChangeData);
-    } else if ( this.hasAdvancement ) {
-      this.parent.advancement.itemAdded(this);
-    }
   }
 
   /* -------------------------------------------- */
@@ -1761,62 +1745,6 @@ export default class Item5e extends Item {
         {max: CONFIG.DND5E.maxLevel}));
       changed.data.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
     }
-
-    // Prepare data for advancement
-    options.levelChangeData = {
-      class: { initial: this.data.data.levels, final: changed.data.levels },
-      character: {
-        initial: this.parent.data.data.details.level,
-        final: this.parent.data.data.details.level - this.data.data.levels + changed.data.levels
-      }
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    if ( (userId !== game.user.id) ) return;
-
-    // Trigger advancement
-    if ( "addFeatures" in options ) {
-      console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
-    }
-    if ( options.levelChangeData && !options.skipAdvancement && (options.addFeatures !== false) ) {
-      options.levelChangeData.item = this;
-      this.parent.advancement.levelChanged(options.levelChangeData);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async delete(context={}) {
-    if ( (this.type === "class") && !context.skipConfirmation ) {
-      game.dnd5e.advancement.DeleteConfirmationDialog.createDialog(this, context)
-        .then(context => super.delete(context))
-        .catch(() => {});
-    } else {
-      return super.delete(context);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _preDelete(options, userId) {
-    await super._preDelete(options, userId);
-    if ( (this.type !== "class") || !this.isEmbedded ) return;
-
-    // Prepare data for advancement
-    options.levelChangeData = {
-      class: { initial: this.data.data.levels, final: 0 },
-      character: {
-        initial: this.parent.data.data.details.level,
-        final: this.parent.data.data.details.level - this.data.data.levels
-      }
-    };
   }
 
   /* -------------------------------------------- */
@@ -1829,21 +1757,6 @@ export default class Item5e extends Item {
     // Assign a new original class
     if ( (this.type === "class") && (this.id === this.parent.data.data.details.originalClass) ) {
       this.parent._assignPrimaryClass();
-    }
-
-    // Trigger advancement
-    if ( "addFeatures" in options ) {
-      console.warn("The options.addFeatures property has been deprecated in favor of options.skipAdvancement.");
-    }
-    // TODO: When an item is deleted with flags.dnd5e.advancementOrigin set, inform that advancement so that
-    // it can be updated to reflect the item's removal (perhaps this should be entirely handled here rather
-    // than in AdvancementPrompt)
-    if ( options.skipAdvancement || (options.addFeatures === false) ) return;
-    if ( options.levelChangeData ) {
-      options.levelChangeData.item = this;
-      this.parent.advancement.levelChanged(options.levelChangeData);
-    } else if ( this.hasAdvancement ) {
-      this.parent.advancement.itemRemoved(this);
     }
   }
 
