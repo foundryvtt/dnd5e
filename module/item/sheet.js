@@ -83,6 +83,10 @@ export default class ItemSheet5e extends ItemSheet {
     const sourceMax = foundry.utils.getProperty(this.item.data._source, "data.uses.max");
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
 
+    // Original duration value formula
+    const sourceDur = foundry.utils.getProperty(this.item.data._source, "data.duration.value");
+    if (sourceDur) itemData.data.duration.value = sourceDur;
+
     // Vehicles
     data.isCrewed = itemData.data.activation?.type === "crew";
     data.isMountable = this._isItemMountable(itemData);
@@ -395,6 +399,18 @@ export default class ItemSheet5e extends ItemSheet {
         data.data.identifier = this.object.data._source.data.identifier;
         this.form.querySelector("input[name='data.identifier']").value = data.data.identifier;
         return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
+      }
+    }
+
+    // Check duration value formula
+    if (data.data?.duration?.value) {
+      const valueRoll = new Roll(data.data.duration.value);
+      if (!valueRoll.isDeterministic) {
+        data.data.duration.value = this.object.data._source.data.duration.value;
+        this.form.querySelector("input[name='data.duration.value']").value = data.data.duration.value;
+        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
+          name: game.i18n.localize("DND5E.Duration")
+        }));
       }
     }
 

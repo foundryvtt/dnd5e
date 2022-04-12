@@ -432,6 +432,9 @@ export default class Item5e extends Item {
       // Limited Uses
       this.prepareMaxUses();
 
+      // Duration
+      this.prepareDurationValue();
+
       // Damage Label
       this.getDerivedDamageLabel();
     }
@@ -610,6 +613,31 @@ export default class Item5e extends Item {
       }
     }
     data.uses.max = Number(max);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Populate the duration value of an item. If the item is an owned item and the
+   * duration value is not numeric, calculate based on actor data.
+   */
+  prepareDurationValue() {
+    const data = this.data.data;
+    if (!data.duration?.value) return;
+    let value = data.duration.value;
+
+    // If this is an owned item and the value is not numeric, we need to calculate it
+    if (this.isOwned && !Number.isNumeric(value)) {
+      if (this.actor.data === undefined) return;
+      try {
+        value = Roll.replaceFormulaData(value, this.actor.getRollData(), {missing: 0, warn: true});
+        value = Roll.safeEval(value);
+      } catch(e) {
+        console.error("Problem preparing duration value for", this.data.name, e);
+        return;
+      }
+    }
+    data.duration.value = Number(value);
   }
 
   /* -------------------------------------------- */
