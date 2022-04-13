@@ -618,14 +618,14 @@ export default class Item5e extends Item {
    */
   prepareDurationValue() {
     const data = this.data.data;
-    if (!data.duration?.value) return;
+    if ( !data.duration?.value ) return;
     let value = data.duration.value;
 
     // If this is an owned item and the value is not numeric, we need to calculate it
-    if (this.isOwned && !Number.isNumeric(value)) {
-      if (this.actor.data === undefined) return;
+    if ( this.isOwned && !Number.isNumeric(value) ) {
+      if ( this.actor.data === undefined ) return;
       try {
-        value = Roll.replaceFormulaData(value, this.actor.getRollData(), {missing: 0, warn: true});
+        value = Roll.replaceFormulaData(value, this.getRollData(), {missing: 0, warn: true});
         value = Roll.safeEval(value);
       } catch(e) {
         console.error("Problem preparing duration value for", this.data.name, e);
@@ -636,7 +636,7 @@ export default class Item5e extends Item {
 
     // Now that duration value is a number, set the label
     let dur = data.duration || {};
-    if (["inst", "perm"].includes(dur.units)) dur.value = null;
+    if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
     this.labels.duration = [dur.value, CONFIG.DND5E.timePeriods[dur.units]].filterJoin(" ");
   }
 

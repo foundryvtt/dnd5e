@@ -18,7 +18,7 @@
       "condition": ""
     },
     "duration": {
-      "value": "@classes.druid.levels / 2",
+      "value": "floor(@classes.druid.levels / 2)",
       "units": "hour"
     },
     "target": {

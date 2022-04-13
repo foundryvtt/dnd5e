@@ -85,7 +85,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Original duration value formula
     const sourceDur = foundry.utils.getProperty(this.item.data._source, "data.duration.value");
-    if (sourceDur) itemData.data.duration.value = sourceDur;
+    if ( sourceDur ) itemData.data.duration.value = sourceDur;
 
     // Vehicles
     data.isCrewed = itemData.data.activation?.type === "crew";
@@ -403,9 +403,9 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Check duration value formula
-    if (data.data?.duration?.value) {
+    if ( data.data?.duration?.value ) {
       const valueRoll = new Roll(data.data.duration.value);
-      if (!valueRoll.isDeterministic) {
+      if ( !valueRoll.isDeterministic ) {
         data.data.duration.value = this.object.data._source.data.duration.value;
         this.form.querySelector("input[name='data.duration.value']").value = data.data.duration.value;
         ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
