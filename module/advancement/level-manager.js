@@ -12,7 +12,7 @@ export class LevelManager extends FormApplication {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "level-manager"],
       template: "systems/dnd5e/templates/advancement/level-manager.html",
-      title: "Level Manager",
+      title: game.i18n.localize("DND5E.LevelManagerTitle"),
       width: 400,
       height: "auto"
     });
