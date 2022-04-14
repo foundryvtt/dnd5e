@@ -159,7 +159,7 @@ export class HitPointsAdvancement extends Advancement {
       "data.attributes.hp.max": actorData.attributes.hp.max - value,
       "data.attributes.hp.value": actorData.attributes.hp.value - value
     });
-    const source = foundry.utils.deepClone(this.data.value);
+    const source = { [level]: this.data.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
     return source;
   }

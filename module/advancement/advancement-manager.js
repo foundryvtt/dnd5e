@@ -169,6 +169,38 @@ export class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Construct a manager for modifying choices on an item at a specific level.
+   * @param {Actor5e} actor         Actor from which the choices should be modified.
+   * @param {object} item           Item whose choices are to be changed.
+   * @param {number} level          Level at which the choices are being changed.
+   * @param {object} options        Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
+   */
+  static forModifyChoices(actor, item, level, options) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(item.id);
+
+    // TODO: Implement this for classes
+    if ( item.type === "class" ) return manager;
+
+    const flows = Array.fromRange(manager.clone.data.data.details.level + 1).slice(level)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Revert advancements through changed level
+    flows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
+
+    // Create forward advancements for level being changed
+    flows.reverse().filter(f => f.level === level).forEach(flow => manager.steps.push({ type: "forward", flow }));
+
+    // Create restore advancements for other levels
+    flows.filter(f => f.level > level).forEach(flow => manager.steps.push({ type: "restore", flow, automatic: true }));
+
+    return manager;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Construct a manager for an item that needs to be deleted.
    * @param {Actor5e} actor         Actor from which the item should be deleted.
    * @param {object} itemId         ID of the item to be deleted.

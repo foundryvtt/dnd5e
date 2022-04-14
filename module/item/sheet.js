@@ -1,3 +1,4 @@
+import { AdvancementManager } from "../advancement/advancement-manager.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
@@ -482,6 +483,13 @@ export default class ItemSheet5e extends ItemSheet {
   _onAdvancementAction(event) {
     const cl = event.currentTarget.classList;
     if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
+
+    if ( cl.contains("modify-choices") ) {
+      const level = event.currentTarget.closest("li")?.dataset.level;
+      const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item, Number(level));
+      if ( manager.steps.length ) manager.render(true);
+      return;
+    }
 
     const id = event.currentTarget.closest("li.item")?.dataset.id;
     const advancement = this.item.advancement.byId[id];
