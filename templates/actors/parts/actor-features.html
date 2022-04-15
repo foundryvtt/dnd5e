@@ -24,12 +24,6 @@
             {{/each}}
         {{/if}}
 
-        {{#if (and isClass @root.editable)}}
-          <div>
-            <a class="item-control manage-levels"><i class="fas fa-clipboard-list"></i> {{localize "DND5E.LevelManagerButton"}}</a>
-          </div>
-        {{/if}}
-
         {{#if ../owner}}
         <div class="item-controls flexrow">
             <a class="item-control item-create" title="{{localize 'DND5E.FeatureAdd'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
@@ -69,7 +63,16 @@
 
             {{else if (eq item.type "class")}}
             <div class="item-detail item-action">
-                {{localize "DND5E.Level"}} {{item.data.levels}}
+                <select class="level-selector">
+                    {{#select 0}}
+                    {{#each item.availableLevels}}
+                        <option value="{{this.delta}}" {{disabled this.disabled}}>
+                            {{localize "DND5E.LevelNumber" number=this.level}}
+                            {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
+                        </option>
+                    {{/each}}
+                    {{/select}}
+                </select>
             </div>
             {{/if}}
 

@@ -131,7 +131,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Sort classes and interleave matching subclasses, put unmatched subclasses into features so they don't disappear
     classes.sort((a, b) => b.data.levels - a.data.levels);
+    const maxLevelDelta = CONFIG.DND5E.maxLevel - this.actor.data.data.details.level;
     classes = classes.reduce((arr, cls) => {
+      cls.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(level => {
+        const delta = level - cls.data.levels;
+        return { level, delta, disabled: delta > maxLevelDelta };
+      });
       arr.push(cls);
       const subclass = subclasses.findSplice(s => s.data.classIdentifier === cls.data.identifier);
       if ( subclass ) arr.push(subclass);
@@ -210,7 +215,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     if ( !this.isEditable ) return;
 
     // Manage Class Levels
-    html.find(".manage-levels").click(() => (new game.dnd5e.advancement.LevelManager(this.actor)).render(true));
+    html.find(".level-selector").change(this._onLevelChange.bind(this));
 
     // Item State Toggling
     html.find(".item-toggle").click(this._onToggleItem.bind(this));
@@ -246,6 +251,26 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       case "rollInitiative":
         return this.actor.rollInitiative({createCombatants: true});
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Respond to a new level being selected from the level selector.
+   * @params {Event} event                          The originating change.
+   * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
+   * @private
+   */
+  _onLevelChange(event) {
+    event.preventDefault();
+    const delta = Number(event.target.value);
+    const classId = event.target.closest(".item")?.dataset.itemId;
+    if ( !delta || !classId ) return;
+
+    const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
+    if ( manager.steps.length ) return manager.render(true);
+    const classItem = this.actor.items.get(classId);
+    return classItem.update({"data.levels": classItem.data.data.levels + delta});
   }
 
   /* -------------------------------------------- */

@@ -4,7 +4,6 @@ import { AdvancementError, AdvancementFlow } from "./advancement/advancement-flo
 import { AdvancementManager } from "./advancement/advancement-manager.js";
 import { AdvancementSelection } from "./advancement/advancement-selection.js";
 import { DeleteConfirmationDialog } from "./advancement/delete-confirmation-dialog.js";
-import { LevelManager } from "./advancement/level-manager.js";
 import { HitPointsAdvancement } from "./advancement/hit-points.js";
 import { ItemGrantAdvancement } from "./advancement/item-grant.js";
 
@@ -16,7 +15,6 @@ const advancement = {
   AdvancementManager,
   AdvancementSelection,
   DeleteConfirmationDialog,
-  LevelManager,
   types: {
     HitPointsAdvancement,
     ItemGrantAdvancement
