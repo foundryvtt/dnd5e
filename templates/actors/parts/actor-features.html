@@ -67,7 +67,7 @@
                     {{#select 0}}
                     {{#each item.availableLevels}}
                         <option value="{{this.delta}}" {{disabled this.disabled}}>
-                            {{localize "DND5E.LevelNumber" number=this.level}}
+                            {{localize "DND5E.LevelNumber" level=this.level}}
                             {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
                         </option>
                     {{/each}}

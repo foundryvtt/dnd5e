@@ -257,7 +257,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Respond to a new level being selected from the level selector.
-   * @params {Event} event                          The originating change.
+   * @param {Event} event                           The originating change.
    * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
    * @private
    */

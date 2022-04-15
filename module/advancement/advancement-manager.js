@@ -197,7 +197,7 @@ export class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
-   * Construct a manager for a change in one or more class levels.
+   * Construct a manager for a change in a class's levels.
    * @param {Actor5e} actor         Actor whose level has changed.
    * @param {string} classId        ID of the class being changed.
    * @param {number} levelDelta     Levels by which to increase or decrease the class.
