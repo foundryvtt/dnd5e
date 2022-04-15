@@ -80,9 +80,10 @@ export class LevelManager extends FormApplication {
       const delta = level - cls.data.data.levels;
       return [cls.id, delta];
     }));
+    const first = Object.entries(levelDeltas).filter(([, delta]) => delta !== 0)[0];
 
     // Create advancement manager and trigger changes
-    const manager = AdvancementManager.forLevelChange(this.object, levelDeltas);
+    const manager = AdvancementManager.forLevelChange(this.object, first[0], first[1]);
     if ( manager.steps.length ) manager.render(true);
     else {
       // TODO: Update levels without using advancement manager

@@ -153,7 +153,7 @@ export class AdvancementManager extends Application {
 
     // For class items, prepare level change data
     if ( itemData.type === "class" ) {
-      return manager.createLevelChangeSteps({[clonedItem.id]: itemData.data?.levels ?? 1});
+      return manager.createLevelChangeSteps(clonedItem, itemData.data?.levels ?? 1);
     }
 
     // All other items, just create some flows up to current character level
@@ -169,18 +169,21 @@ export class AdvancementManager extends Application {
   /**
    * Construct a manager for an item that needs to be deleted.
    * @param {Actor5e} actor         Actor from which the item should be deleted.
-   * @param {object} item           Item to be deleted.
+   * @param {object} itemId         ID of the item to be deleted.
    * @param {object} options        Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
-  static forDeletedItem(actor, item, options) {
+  static forDeletedItem(actor, itemId, options) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(itemId);
+    if ( !clonedItem ) return manager;
+
     // For class items, prepare level change data
-    if ( item.type === "class" ) return this.forLevelChange(actor, {[item.id]: item.data.data.levels * -1});
+    if ( clonedItem.type === "class" ) {
+      return manager.createLevelChangeSteps(clonedItem, clonedItem.data.data.levels * -1);
+    }
 
     // All other items, just create some flows down from current character level
-    const manager = new this(actor, options);
-    const clonedItem = manager.clone.items.get(item.id);
-
     Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .reverse()
@@ -195,83 +198,54 @@ export class AdvancementManager extends Application {
 
   /**
    * Construct a manager for a change in one or more class levels.
-   * @param {Actor5e} actor                   Actor whose level has changed.
-   * @param {object<string, number>} changes  A mapping of class IDs to their level deltas.
-   * @param {object} options                  Rendering options passed to the application.
-   * @returns {AdvancementManager}            Prepared manager. Steps count can be used to determine if
-   *                                          advancements are needed.
+   * @param {Actor5e} actor         Actor whose level has changed.
+   * @param {string} classId        ID of the class being changed.
+   * @param {number} levelDelta     Levels by which to increase or decrease the class.
+   * @param {object} options        Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
-  static forLevelChange(actor, changes, options={}) {
+  static forLevelChange(actor, classId, levelDelta, options={}) {
     const manager = new this(actor, options);
-    return manager.createLevelChangeSteps(changes);
+    const clonedItem = manager.clone.items.get(classId);
+    if ( !clonedItem ) return manager;
+    return manager.createLevelChangeSteps(clonedItem, levelDelta);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Create steps based on the provided level change data.
-   * @param {object<string, number>} changes  A mapping of class IDs to their level deltas.
-   * @returns {AdvancementManager}            Manager with new steps.
+   * @param {string} classItem      Class being changed.
+   * @param {number} levelDelta     Levels by which to increase or decrease the class.
+   * @returns {AdvancementManager}  Manager with new steps.
    * @private
    */
-  createLevelChangeSteps(changes) {
-    // Transform deltas into list of single level change steps
-    const deltas = Object.entries(changes).sort((a, b) => a[1] - b[1]).reduce((arr, [id, delta]) => {
-      const item = this.clone.items.get(id);
-      if ( !item || (delta === 0) ) return arr;
-      arr.push(...Array.fromRange(Math.abs(delta)).map(() => [item, Math.sign(delta)]));
-      return arr;
-    }, []);
-
-    const restores = {};
-    let characterLevel = this.clone.data.data.details.level;
-    const finalCharacterLevel = characterLevel + Object.values(changes).reduce((delta, value) => delta + value, 0);
-    const classLevels = {};
-
+  createLevelChangeSteps(classItem, levelDelta) {
     const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
     const getItemFlows = characterLevel => this.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass"].includes(i.type) ) return [];
       return this.constructor.flowsForLevel(i, characterLevel);
     });
 
-    for ( const [classItem, delta] of deltas ) {
-      classLevels[classItem.id] ??= classItem.data.data.levels;
-      classLevels[classItem.id] += delta;
-      let classLevel = classLevels[classItem.id];
-      characterLevel += delta;
+    // Level increased
+    for ( let offset = 1; offset <= levelDelta; offset++ ) {
+      const classLevel = classItem.data.data.levels + offset;
+      const characterLevel = this.actor.data.data.details.level + offset;
+      const stepData = { type: "forward", class: {item: classItem, level: classLevel} };
+      pushSteps(this.constructor.flowsForLevel(classItem, classLevel), stepData);
+      pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel), stepData);
+      pushSteps(getItemFlows(characterLevel), stepData);
+    }
 
-      if ( delta > 0 ) {
-        const stepData = { type: "forward", class: {item: classItem, level: classLevel} };
-
-        // Add class & subclass advancements
-        pushSteps(this.constructor.flowsForLevel(classItem, classLevel), stepData);
-        pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel), stepData);
-
-        // If restore steps for this character level, pop them off and append them
-        if ( restores[characterLevel - 1] ) this.steps.push(...restores[characterLevel - 1]);
-
-        // Otherwise, add normal item advancements
-        else pushSteps(getItemFlows(characterLevel), stepData);
-      }
-
-      else {
-        classLevel += 1;
-        const stepData = { type: "reverse", class: {item: classItem, level: classLevel}, automatic: true };
-        const itemFlows = getItemFlows(characterLevel + 1).reverse();
-
-        // If character level will need to be restored later, prepare restore steps
-        if ( characterLevel < finalCharacterLevel ) {
-          restores[characterLevel] = itemFlows.map(flow => ({ type: "restore", flow, automatic: true }));
-        }
-
-        // Add item, subclass, & class reverse steps
-        pushSteps(itemFlows, stepData);
-        pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel).reverse(), stepData);
-        pushSteps(this.constructor.flowsForLevel(classItem, classLevel).reverse(), stepData);
-
-        // If level one advancements being removed, delete the class
-        if ( classLevel === 1 ) this.steps.push({ type: "delete", item: classItem, automatic: true });
-      }
+    // Level decreased
+    for ( let offset = 0; offset > levelDelta; offset-- ) {
+      const classLevel = classItem.data.data.levels + offset;
+      const characterLevel = this.actor.data.data.details.level + offset;
+      const stepData = { type: "reverse", class: {item: classItem, level: classLevel}, automatic: true };
+      pushSteps(getItemFlows(characterLevel).reverse(), stepData);
+      pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel).reverse(), stepData);
+      pushSteps(this.constructor.flowsForLevel(classItem, classLevel).reverse(), stepData);
+      if ( classLevel === 1 ) this.steps.push({ type: "delete", item: classItem, automatic: true });
     }
 
     return this;
