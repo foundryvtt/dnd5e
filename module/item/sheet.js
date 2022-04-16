@@ -486,7 +486,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     if ( cl.contains("modify-choices") ) {
       const level = event.currentTarget.closest("li")?.dataset.level;
-      const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item, Number(level));
+      const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
       if ( manager.steps.length ) manager.render(true);
       return;
     }

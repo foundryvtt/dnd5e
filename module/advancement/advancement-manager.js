@@ -171,19 +171,20 @@ export class AdvancementManager extends Application {
   /**
    * Construct a manager for modifying choices on an item at a specific level.
    * @param {Actor5e} actor         Actor from which the choices should be modified.
-   * @param {object} item           Item whose choices are to be changed.
+   * @param {object} itemId         ID of the item whose choices are to be changed.
    * @param {number} level          Level at which the choices are being changed.
    * @param {object} options        Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
-  static forModifyChoices(actor, item, level, options) {
+  static forModifyChoices(actor, itemId, level, options) {
     const manager = new this(actor, options);
-    const clonedItem = manager.clone.items.get(item.id);
+    const clonedItem = manager.clone.items.get(itemId);
+    if ( !clonedItem ) return manager;
 
-    // TODO: Implement this for classes
-    if ( item.type === "class" ) return manager;
+    const currentLevel = ( clonedItem.type === "class" )
+      ? clonedItem.data.data.levels : manager.clone.data.data.details.level;
 
-    const flows = Array.fromRange(manager.clone.data.data.details.level + 1).slice(level)
+    const flows = Array.fromRange(currentLevel + 1).slice(level)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
 
     // Revert advancements through changed level
