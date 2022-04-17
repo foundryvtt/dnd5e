@@ -30,13 +30,6 @@ export class AdvancementFlow extends FormApplication {
      * @type {number}
      */
     this.level = level;
-
-    /**
-     * Data retained by the advancement manager during a reverse step. If restoring data using Advancement#restore,
-     * this data should be used when displaying the flow's form.
-     * @type {object|null}
-     */
-    this.retainedData = null;
   }
 
   /* -------------------------------------------- */

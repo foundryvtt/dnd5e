@@ -18,12 +18,6 @@
           {{/if}}
         </h3>
 
-        {{#if (and @root.editable data.configured)}}
-          <div>
-            <a class="item-control modify-choices">{{localize "DND5E.AdvancementModifyChoices"}}</a>
-          </div>
-        {{/if}}
-
         {{#if (eq data.configured "full")}}
           <div class="item-checkmark" title="{{localize "DND5E.AdvancementConfiguredComplete"}}">
             <i class="fas fa-check-circle"></i>

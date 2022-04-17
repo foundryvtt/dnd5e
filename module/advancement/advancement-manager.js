@@ -3,7 +3,7 @@ import { AdvancementError } from "./advancement-flow.js";
 
 /**
  * @typedef {object} AdvancementStep
- * @property {string} type                Step type from "forward", "reverse", "delete", or "restore".
+ * @property {string} type                Step type from "forward", "reverse", or "delete".
  * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step.
  * @property {Item5e} [item]              For "delete" steps only, the item to be removed.
  * @property {object} [class]             Contains data on class if step was triggered by class level change.
@@ -397,8 +397,7 @@ export class AdvancementManager extends Application {
 
         // Apply changes based on step type
         if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
-        else if ( this.step.type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else if ( this.step.type === "reverse" ) flow.retainedData = await flow.advancement.reverse(flow.level);
+        else if ( this.step.type === "reverse" ) await flow.advancement.reverse(flow.level);
         else await flow._updateObject(event, flow._getSubmitData());
 
         this._stepIndex++;
@@ -416,7 +415,6 @@ export class AdvancementManager extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
-      if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
       this._advancing = false;
     }
@@ -437,15 +435,15 @@ export class AdvancementManager extends Application {
     this._advancing = true;
     try {
       do {
+        this._stepIndex--;
+        if ( !this.step ) break;
         const flow = this.step.flow;
 
         // Reverse step based on step type
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
-        else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else flow.retainedData = await flow.advancement.reverse(flow.level);
+        else await flow.advancement.reverse(flow.level);
 
         this.clone.prepareData();
-        this._stepIndex--;
       } while ( this.step?.automatic );
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;

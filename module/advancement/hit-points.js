@@ -142,13 +142,6 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  restore(level, data) {
-    this.apply(level, data);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
   reverse(level) {
     const actorData = this.actor.data.data;
     let value = this.valueForLevel(level);
@@ -159,9 +152,7 @@ export class HitPointsAdvancement extends Advancement {
       "data.attributes.hp.max": actorData.attributes.hp.max - value,
       "data.attributes.hp.value": actorData.attributes.hp.value - value
     });
-    const source = foundry.utils.deepClone(this.data.value);
     this.updateSource({ [`value.-=${level}`]: null });
-    return source;
   }
 
 }
@@ -185,13 +176,12 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   getData() {
-    const source = this.retainedData ?? this.advancement.data.value;
-    const value = source[this.level];
+    const value = this.advancement.data.value[this.level];
 
     // If value is empty, `useAverage` should default to the value selected at the previous level
     let useAverage = value === "avg";
     if ( !value ) {
-      const lastValue = source[this.level - 1];
+      const lastValue = this.advancement.data.value[this.level - 1];
       if ( lastValue === "avg" ) useAverage = true;
     }
 

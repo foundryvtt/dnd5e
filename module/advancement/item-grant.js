@@ -75,30 +75,12 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  restore(level, data) {
-    const updates = {};
-    for ( const item of data.items ) {
-      this.actor.data.update({items: [item]});
-      // TODO: Restore any additional advancement data here
-      updates[item._id] = item.flags.dnd5e.sourceId;
-    }
-    this.updateSource({"value.added": updates});
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
   reverse(level) {
-    const items = [];
     for ( const id of Object.keys(this.data.value.added ?? {}) ) {
-      const item = this.actor.items.get(id);
-      if ( item ) items.push(item.toObject());
       this.actor.items.delete(id);
       // TODO: Ensure any advancement data attached to these items is properly reversed
-      // and store any advancement data for these items in case they need to be restored
     }
-    this.updateSource({ "value.-=added": null });
-    return { items };
+    this.updateSource({"value.-=added": null});
   }
 
 }
@@ -214,8 +196,7 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   async getData() {
     const config = this.advancement.data.configuration.items;
-    const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
-      ?? this.advancement.data.value.added;
+    const added = this.advancement.data.value.added;
     const checked = new Set(Object.values(added ?? {}));
 
     return foundry.utils.mergeObject(super.getData(), {
