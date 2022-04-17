@@ -488,13 +488,6 @@ export default class ItemSheet5e extends ItemSheet {
     const cl = event.currentTarget.classList;
     if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
 
-    if ( cl.contains("modify-choices") ) {
-      // TODO: Reimplement modify choices somehow
-      // const level = event.currentTarget.closest("li")?.dataset.level;
-      // if ( level ) this.actor.advancement.modifyChoices(this.item, Number(level));
-      return;
-    }
-
     const id = event.currentTarget.closest("li.item")?.dataset.id;
     const advancement = this.item.advancement[id];
     if ( !advancement ) return;
