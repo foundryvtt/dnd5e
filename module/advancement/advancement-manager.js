@@ -261,7 +261,7 @@ export class AdvancementManager extends Application {
    * @protected
    */
   static flowsForLevel(item, level) {
-    return (item?.advancementByLevel[level] ?? []).map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+    return (item?.advancement.byLevel[level] ?? []).map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
   }
 
   /* -------------------------------------------- */
