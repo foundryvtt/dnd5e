@@ -156,8 +156,10 @@ export class AdvancementManager extends Application {
       return manager.createLevelChangeSteps(clonedItem, itemData.data?.levels ?? 1);
     }
 
-    // All other items, just create some flows up to current character level
-    Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
+    // All other items, just create some flows up to current character level (or class level for subclasses)
+    let targetLevel = manager.clone.data.data.details.level;
+    if ( clonedItem.type === "subclass" ) targetLevel = clonedItem.class?.data.data.levels ?? 0;
+    Array.fromRange(targetLevel + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .forEach(flow => manager.steps.push({ type: "forward", flow }));
 
@@ -184,7 +186,7 @@ export class AdvancementManager extends Application {
     }
 
     // All other items, just create some flows down from current character level
-    Array.fromRange(manager.clone.data.data.details.level + 1).slice(1)
+    Array.fromRange(manager.clone.data.data.details.level + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .reverse()
       .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
@@ -284,7 +286,7 @@ export class AdvancementManager extends Application {
       actor: this.clone,
       flowId: this.step.flow.id,
       header: item.name,
-      subheader: game.i18n.format("DND5E.AdvancementLevelHeader", { level }),
+      subheader: level ? game.i18n.format("DND5E.AdvancementLevelHeader", { level }) : "",
       steps: {
         current: visibleIndex + 1,
         total: visibleSteps.length,
