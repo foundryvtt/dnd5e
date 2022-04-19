@@ -42,7 +42,8 @@ export class ItemGrantAdvancement extends Advancement {
   /** @inheritdoc */
   summaryForLevel(level) {
     // TODO: For levels that a character has already gained, these links should point to the item on the character
-    // and any items that were skipped shouldn't be listed
+    // and any items that were skipped shouldn't be listed. This needs the ability to create links to items that are
+    // embedded inside an actor.
     return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
   }
 
@@ -52,35 +53,22 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   async apply(level, data) {
-    const added = this.data.value.added ?? {};
-    const existing = new Set(Object.values(added));
+    const items = [];
     const updates = {};
-
-    // Figure out which items to add and which to remove
     for ( const [uuid, selected] of Object.entries(data) ) {
-      // Item not on actor but needs to be added
-      if ( selected && !existing.has(uuid) ) {
-        const item = (await fromUuid(uuid))?.clone();
-        if ( !item ) continue;
-        item.data.update({
-          _id: foundry.utils.randomID(),
-          "flags.dnd5e.sourceId": uuid,
-          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-        });
-        this.actor.items.set(item.id, item);
-        // TODO: Trigger any additional advancement steps for added items
-        updates[item.id] = uuid;
-      }
-
-      // Item on actor but needs to be removed
-      else if ( !selected && existing.has(uuid) ) {
-        const [id] = Object.entries(added).find(([, added]) => added === uuid);
-        this.actor.items.delete(id);
-        // TODO: Trigger any additional advancement steps for removed items
-        updates[`-=${id}`] = null;
-      }
+      if ( !selected ) continue;
+      const item = (await fromUuid(uuid))?.clone();
+      if ( !item ) continue;
+      item.data.update({
+        _id: foundry.utils.randomID(),
+        "flags.dnd5e.sourceId": uuid,
+        "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+      });
+      items.push(item.toObject());
+      // TODO: Trigger any additional advancement steps for added items
+      updates[item.id] = uuid;
     }
-
+    this.actor.data.update({items});
     this.updateSource({"value.added": updates});
   }
 
@@ -92,7 +80,7 @@ export class ItemGrantAdvancement extends Advancement {
       this.actor.items.delete(id);
       // TODO: Ensure any advancement data attached to these items is properly reversed
     }
-    this.updateSource({ "-=added": null });
+    this.updateSource({"value.-=added": null});
   }
 
 }
@@ -208,13 +196,13 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   async getData() {
     const config = this.advancement.data.configuration.items;
-    const value = this.advancement.data.value.added;
-    const checked = new Set(Object.values(value ?? {}));
+    const added = this.advancement.data.value.added;
+    const checked = new Set(Object.values(added ?? {}));
 
     return foundry.utils.mergeObject(super.getData(), {
       items: await Promise.all(config.map(async uuid => {
         const item = await fromUuid(uuid);
-        item.checked = value ? checked.has(uuid) : true;
+        item.checked = added ? checked.has(uuid) : true;
         return item;
       }))
     });
