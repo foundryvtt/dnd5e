@@ -278,7 +278,7 @@ export class Advancement {
 
   /**
    * Locally remove this advancement's changes from the actor.
-   * @param {number} level   Level being removed.
+   * @param {number} level  Level being removed.
    * @abstract
    */
   async reverse(level) {
