@@ -101,50 +101,45 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
-    const actor = item.parent;
-    let maxLevel = 0;
-    if ( actor ) {
-      if ( item.type === "class" ) maxLevel = item.data.data.levels;
-      else if ( (item.type === "subclass") && item.class ) maxLevel = item.class.data.data.levels;
-      else maxLevel = actor.data.data.details.level;
-    }
-
+    const maxLevel = item.parent ? item.data.data.levels ?? item.class?.data.data.levels
+      ?? item.parent.data.data.details.level : null;
     const data = {};
-    for ( const [id, advancement] of Object.entries(item.advancement) ) {
-      if ( !advancement.appliesToClass ) continue;
-      for ( const level of advancement.levels ) {
-        if ( !data[level] ) {
-          data[level] = {
-            configured: (level <= maxLevel) ? "full" : false,
-            items: []
-          };
-        }
-        data[level].items.push({
-          id,
-          order: advancement.sortingValueForLevel(level),
-          title: advancement.titleForLevel(level),
-          icon: advancement.icon,
-          invertIcon: advancement.icon.startsWith("icons/svg/"),
-          classRestriction: advancement.data.classRestriction,
-          summary: advancement.summaryForLevel(level)
-        });
-        if ( (data[level].configured === "full") && !advancement.configuredForLevel(level) ) {
-          data[level].configured = "partial";
-        }
-      }
-      if ( !advancement.levels.length ) {
-        if ( !data[0] ) data[0] = { configured: "partial", items: [] };
-        data[0].items.push({
-          id,
+
+    // Improperly configured advancements
+    if ( item.advancement.needingConfiguration.length ) {
+      data["unconfigured"] = {
+        items: item.advancement.needingConfiguration.map(advancement => ({
+          id: advancement.id,
           order: advancement.constructor.order,
           title: advancement.title,
           icon: advancement.icon,
           invertIcon: advancement.icon.startsWith("icons/svg/"),
-          classRestriction: advancement.data.classRestriction
-        });
+          classRestriction: advancement.data.classRestriction,
+          configured: false
+        })),
+        configured: "partial"
       }
     }
-    Object.values(data).forEach(obj => obj.items.sort((a, b) => a.order.localeCompare(b.order)));
+
+    // All other advancements by level
+    for ( const [level, advancements] of Object.entries(item.advancement.byLevel) ) {
+      if ( !advancements.length ) continue;
+      const items = advancements.map(advancement => ({
+        id: advancement.id,
+        order: advancement.sortingValueForLevel(level),
+        title: advancement.titleForLevel(level),
+        icon: advancement.icon,
+        invertIcon: advancement.icon.startsWith("icons/svg/"),
+        classRestriction: advancement.data.classRestriction,
+        summary: advancement.summaryForLevel(level),
+        configured: advancement.configuredForLevel(level)
+      }));
+      data[level] = {
+        items: items.sort((a, b) => a.order.localeCompare(b.order)),
+        configured: (maxLevel === null) ? false : items.some(a => !a.configured) ? "partial" : "full"
+      };
+    }
+
     return data;
   }
 
@@ -489,7 +484,7 @@ export default class ItemSheet5e extends ItemSheet {
     if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
 
     const id = event.currentTarget.closest("li.item")?.dataset.id;
-    const advancement = this.item.advancement[id];
+    const advancement = this.item.advancement.byId[id];
     if ( !advancement ) return;
 
     if ( cl.contains("item-edit") ) {

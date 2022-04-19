@@ -48,13 +48,17 @@ export class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   getData() {
+    const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
+    if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
+    else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
+
     return {
       data: this.advancement.data,
       default: {
         title: this.advancement.constructor.metadata.title,
         icon: this.advancement.constructor.metadata.icon
       },
-      levels: Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(l => [l, l])),
+      levels,
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };
