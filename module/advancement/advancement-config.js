@@ -2,9 +2,8 @@
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
  *
- * @property {Advancement} advancement             The advancement item being edited.
- * @property {object} [options={}]                 Additional options passed to FormApplication.
- * @property {boolean} [options.dynamicInterface]  Re-render the UI after any changes to form data.
+ * @property {Advancement} advancement  The advancement item being edited.
+ * @property {object} [options={}]      Additional options passed to FormApplication.
  * @extends {FormApplication}
  */
 export class AdvancementConfig extends FormApplication {
@@ -82,10 +81,7 @@ export class AdvancementConfig extends FormApplication {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    const saveClicked = event.type === "submit";
-
     let updates = foundry.utils.expandObject(formData).data;
-    if ( saveClicked ) foundry.utils.mergeObject(updates, this.data);
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
     await this.advancement.update(updates);
