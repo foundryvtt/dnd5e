@@ -166,6 +166,41 @@
         "title": "",
         "icon": "",
         "classRestriction": ""
+      },
+      {
+        "_id": "62svnflxsuad7oar",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "rages",
+          "scale": {
+            "1": "2",
+            "3": "3",
+            "6": "4",
+            "12": "5",
+            "17": "6",
+            "20": "999"
+          }
+        },
+        "value": {},
+        "title": "Rages",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "t42incolsbuqn2ec",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "rage-damage",
+          "scale": {
+            "1": "+2",
+            "9": "+3",
+            "16": "+4"
+          }
+        },
+        "value": {},
+        "title": "Rage Damage",
+        "icon": "",
+        "classRestriction": ""
       }
     ],
     "saves": [

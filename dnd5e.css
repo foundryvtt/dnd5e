@@ -1286,6 +1286,12 @@
   /* ----------------------------------------- */
   /*  Advancement Selection                    */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Scale Value                              */
+  /* ----------------------------------------- */
 }
 .dnd5e.advancement input[type="text"],
 .dnd5e.advancement input[type="number"],
@@ -1312,6 +1318,36 @@
 }
 .dnd5e.advancement .centered {
   text-align: center;
+}
+.dnd5e.advancement.two-column {
+  --grid-two-column-left-size: 1fr;
+  --grid-two-column-right-size: 1fr;
+}
+.dnd5e.advancement.two-column form {
+  display: grid;
+  grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
+  grid-template-areas: "left right";
+  grid-gap: 0.4em;
+}
+.dnd5e.advancement.two-column form .left-column {
+  grid-area: left;
+}
+.dnd5e.advancement.two-column form .right-column {
+  grid-area: right;
+}
+.dnd5e.advancement.two-column form button[type="submit"] {
+  grid-column-end: span 2;
+}
+.dnd5e.advancement.scale-value {
+  --grid-two-column-right-size: 0.6fr;
+}
+.dnd5e.advancement.scale-value .right-column label {
+  flex: 0.5;
+  padding-right: 0.5rem;
+  text-align: right;
+}
+.dnd5e.advancement.scale-value input[type="text"]::placeholder {
+  opacity: 0.5;
 }
 /* ----------------------------------------- */
 /*  Advancement Flow                         */
@@ -1375,6 +1411,13 @@
 }
 .dnd5e.advancement.flow input.error {
   outline: 2px solid red;
+}
+.dnd5e.advancement.flow form[data-type="ScaleValue"] p {
+  margin-block-end: 0;
+  font-size: var(--font-size-18);
+}
+.dnd5e.advancement.flow form[data-type="ScaleValue"] span.none {
+  font-style: italic;
 }
 .dnd5e.advancement.flow nav {
   display: flex;

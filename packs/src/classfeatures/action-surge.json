@@ -33,7 +33,7 @@
     },
     "uses": {
       "value": 1,
-      "max": "@classes.fighter.levels > 16 ? 2 : 1",
+      "max": "@scale.fighter.action-surge",
       "per": "sr"
     },
     "consume": {

@@ -148,7 +148,8 @@ export class ItemGrantConfig extends AdvancementConfig {
     if ( !uuidToDelete ) return;
     const items = this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete);
     const updates = { configuration: this.prepareConfigurationUpdate({ items }) };
-    return this._updateAdvancement(updates);
+    await this.advancement.update(updates);
+    this.render();
   }
 
   /* -------------------------------------------- */
@@ -185,17 +186,8 @@ export class ItemGrantConfig extends AdvancementConfig {
       return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
     }
 
-    const updates = {
-      configuration: this.prepareConfigurationUpdate({
-        items: [
-          ...existingItems,
-          item.uuid
-        ]
-      })
-    };
-
-    // BUG: When items are dropped, any other changes are reset
-    return this._updateAdvancement(updates);
+    await this.advancement.update({"configuration.items": [...existingItems, item.uuid]});
+    this.render();
   }
 
 }
