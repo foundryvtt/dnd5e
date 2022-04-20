@@ -3,7 +3,7 @@ import { AdvancementError } from "./advancement-flow.js";
 
 /**
  * @typedef {object} AdvancementStep
- * @property {string} type                Step type from "forward", "reverse", or "delete".
+ * @property {string} type                Step type from "forward", "reverse", "restore", or "delete".
  * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step.
  * @property {Item5e} [item]              For "delete" steps only, the item to be removed.
  * @property {object} [class]             Contains data on class if step was triggered by class level change.
@@ -169,6 +169,39 @@ export class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Construct a manager for modifying choices on an item at a specific level.
+   * @param {Actor5e} actor         Actor from which the choices should be modified.
+   * @param {object} itemId         ID of the item whose choices are to be changed.
+   * @param {number} level          Level at which the choices are being changed.
+   * @param {object} options        Rendering options passed to the application.
+   * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
+   */
+  static forModifyChoices(actor, itemId, level, options) {
+    const manager = new this(actor, options);
+    const clonedItem = manager.clone.items.get(itemId);
+    if ( !clonedItem ) return manager;
+
+    const currentLevel = clonedItem.data.data.levels ?? clonedItem.class?.data.data.levels ??
+      manager.clone.data.data.details.level;
+
+    const flows = Array.fromRange(currentLevel + 1).slice(level)
+      .flatMap(l => this.flowsForLevel(clonedItem, l));
+
+    // Revert advancements through changed level
+    flows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
+
+    // Create forward advancements for level being changed
+    flows.reverse().filter(f => f.level === level).forEach(flow => manager.steps.push({ type: "forward", flow }));
+
+    // Create restore advancements for other levels
+    flows.filter(f => f.level > level).forEach(flow => manager.steps.push({ type: "restore", flow, automatic: true }));
+
+    return manager;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Construct a manager for an item that needs to be deleted.
    * @param {Actor5e} actor         Actor from which the item should be deleted.
    * @param {object} itemId         ID of the item to be deleted.
@@ -263,7 +296,9 @@ export class AdvancementManager extends Application {
    * @protected
    */
   static flowsForLevel(item, level) {
-    return (item?.advancement.byLevel[level] ?? []).map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+    return (item?.advancement.byLevel[level] ?? [])
+      .filter(a => a.appliesToClass)
+      .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
   }
 
   /* -------------------------------------------- */
@@ -399,7 +434,8 @@ export class AdvancementManager extends Application {
 
         // Apply changes based on step type
         if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
-        else if ( this.step.type === "reverse" ) await flow.advancement.reverse(flow.level);
+        else if ( this.step.type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
+        else if ( this.step.type === "reverse" ) flow.retainedData = await flow.advancement.reverse(flow.level);
         else await flow._updateObject(event, flow._getSubmitData());
 
         this._stepIndex++;
@@ -417,6 +453,7 @@ export class AdvancementManager extends Application {
       if ( !(error instanceof AdvancementError) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
+      if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
       this._advancing = false;
     }
@@ -443,7 +480,8 @@ export class AdvancementManager extends Application {
 
         // Reverse step based on step type
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
-        else await flow.advancement.reverse(flow.level);
+        else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
+        else flow.retainedData = await flow.advancement.reverse(flow.level);
 
         this.clone.prepareData();
       } while ( this.step?.automatic );
