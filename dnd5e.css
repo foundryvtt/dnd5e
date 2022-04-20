@@ -1302,9 +1302,6 @@
 .dnd5e.advancement .items-list li.item {
   padding-top: 0.25em;
 }
-.dnd5e.advancement .items-list .item-image {
-  mix-blend-mode: difference;
-}
 .dnd5e.advancement .items-list .item-hint {
   flex: 0 1 100%;
   margin-left: 35px;
@@ -1600,9 +1597,6 @@
 }
 .dnd5e.sheet.item .advancement .items-list .item-name {
   flex: 1 0 10em;
-}
-.dnd5e.sheet.item .advancement .items-list .item-image.inverted {
-  mix-blend-mode: difference;
 }
 .dnd5e.sheet.item .advancement .items-list .item-controls {
   border-left: 1px solid #c9c7b8;
