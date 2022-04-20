@@ -181,8 +181,8 @@ export class AdvancementManager extends Application {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
 
-    const currentLevel = ( clonedItem.type === "class" )
-      ? clonedItem.data.data.levels : manager.clone.data.data.details.level;
+    const currentLevel = clonedItem.data.data.levels ?? clonedItem.class?.data.data.levels ??
+      manager.clone.data.data.details.level;
 
     const flows = Array.fromRange(currentLevel + 1).slice(level)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
@@ -296,7 +296,9 @@ export class AdvancementManager extends Application {
    * @protected
    */
   static flowsForLevel(item, level) {
-    return (item?.advancement.byLevel[level] ?? []).map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+    return (item?.advancement.byLevel[level] ?? [])
+      .filter(a => a.appliesToClass)
+      .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
   }
 
   /* -------------------------------------------- */

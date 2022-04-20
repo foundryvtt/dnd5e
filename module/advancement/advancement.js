@@ -280,7 +280,7 @@ export class Advancement {
    * Locally apply this advancement from stored data, if possible. If stored data can not be restored for any reason,
    * throw an AdvancementError to display the advancement flow UI.
    * @param {number} level  Level being advanced.
-   * @param {object} data   Data from `Advancement#reverse` need to restore this advancement.
+   * @param {object} data   Data from `Advancement#reverse` needed to restore this advancement.
    */
   async restore(level, data) {
     throw new Error("Each subclass of Advancement must implement the restore method");
