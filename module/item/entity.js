@@ -263,20 +263,7 @@ export default class Item5e extends Item {
     this._classLink = undefined;
 
     // Advancement
-    this.advancementByLevel = Object.fromEntries(
-      Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).map(l => [l, []])
-    );
-    this.advancement = (itemData.data.advancement ?? []).reduce((obj, data) => {
-      const Advancement = game.dnd5e.advancement.types[`${data.type}Advancement`];
-      if ( Advancement ) {
-        obj[data._id] = new Advancement(this, data);
-        obj[data._id].levels.forEach(l => this.advancementByLevel[l].push(obj[data._id]));
-      }
-      return obj;
-    }, {});
-    Object.entries(this.advancementByLevel).forEach(([lvl, data]) => data.sort((a, b) => {
-      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl));
-    }));
+    this._prepareAdvancement();
 
     // Spell Level,  School, and Components
     if ( itemData.type === "spell" ) {
@@ -363,6 +350,34 @@ export default class Item5e extends Item {
 
     // If this item is owned, we prepareFinalAttributes() at the end of actor init
     if (!this.isOwned) this.prepareFinalAttributes();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare advancement objects from stored advancement data.
+   * @protected
+   */
+  _prepareAdvancement() {
+    const minAdvancementLevel = ["class", "subclass"].includes(this.type) ? 1 : 0;
+    this.advancement = {
+      byId: {},
+      byLevel: Object.fromEntries(
+        Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
+      ),
+      needingConfiguration: []
+    };
+    for ( const advancementData of this.data.data.advancement ?? [] ) {
+      const Advancement = game.dnd5e.advancement.types[`${advancementData.type}Advancement`];
+      if ( !Advancement ) continue;
+      const advancement = new Advancement(this, advancementData);
+      this.advancement.byId[advancement.id] = advancement;
+      advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
+      if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
+    }
+    Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
+      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl));
+    }));
   }
 
   /* -------------------------------------------- */
@@ -1635,7 +1650,7 @@ export default class Item5e extends Item {
     await this.update({"data.advancement": advancement});
 
     if ( !showConfig ) return;
-    const config = new Advancement.metadata.apps.config(this.advancement[data._id]);
+    const config = new Advancement.metadata.apps.config(this.advancement.byId[data._id]);
     return config.render(true);
   }
 

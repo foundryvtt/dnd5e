@@ -31,6 +31,13 @@ export class AdvancementSelection extends Dialog {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  get id() {
+    return `item-${this.item.id}-advancement-selection`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   getData() {
     const data = { types: {} };
 

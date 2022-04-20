@@ -11,10 +11,12 @@
     {{#each advancement as |data level|}}
       <li class="items-header flexrow" data-level="{{level}}">
         <h3 class="item-name flexrow">
-          {{#if (ne level "0")}}
-            {{localize "DND5E.AdvancementLevelHeader" level=level}}
-          {{else}}
+          {{#if (eq level "0")}}
+            {{localize "DND5E.AdvancementLevelAnyHeader"}}
+          {{else if (eq level "unconfigured")}}
             {{localize "DND5E.AdvancementLevelNoneHeader"}}
+          {{else}}
+            {{localize "DND5E.AdvancementLevelHeader" level=level}}
           {{/if}}
         </h3>
 
