@@ -101,7 +101,7 @@ export class ScaleValueConfig extends AdvancementConfig {
     const data = super.getData();
     data.classIdentifier = this.item.identifier;
     data.previewIdentifier = this.data.configuration.identifier || this.data.title?.slugify()
-      || game.i18n.localize(this.advancement.constructor.defaultTitle).slugify();
+      || this.advancement.constructor.metadata.title.slugify();
 
     let lastValue = "";
     data.levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
