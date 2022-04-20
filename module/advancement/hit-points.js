@@ -142,6 +142,13 @@ export class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  restore(level, data) {
+    this.apply(level, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   reverse(level) {
     const actorData = this.actor.data.data;
     let value = this.valueForLevel(level);
@@ -152,7 +159,9 @@ export class HitPointsAdvancement extends Advancement {
       "data.attributes.hp.max": actorData.attributes.hp.max - value,
       "data.attributes.hp.value": actorData.attributes.hp.value - value
     });
+    const source = { [level]: this.data.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
+    return source;
   }
 
 }
@@ -176,12 +185,13 @@ export class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   getData() {
-    const value = this.advancement.data.value[this.level];
+    const source = this.retainedData ?? this.advancement.data.value;
+    const value = source[this.level];
 
     // If value is empty, `useAverage` should default to the value selected at the previous level
     let useAverage = value === "avg";
     if ( !value ) {
-      const lastValue = this.advancement.data.value[this.level - 1];
+      const lastValue = source[this.level - 1];
       if ( lastValue === "avg" ) useAverage = true;
     }
 
