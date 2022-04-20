@@ -53,20 +53,20 @@ export class ItemGrantAdvancement extends Advancement {
 
   /**
    * Locally apply this advancement to the actor.
-   * @param {number} level            Level being advanced.
-   * @param {object} data             Data from the advancement form.
-   * @param {object} [prefetched={}]  Item data grouped by UUID. If present, this data will be used rather than
-   *                                  fetching new data from the source.
+   * @param {number} level              Level being advanced.
+   * @param {object} data               Data from the advancement form.
+   * @param {object} [retainedData={}]  Item data grouped by UUID. If present, this data will be used rather than
+   *                                    fetching new data from the source.
    */
-  async apply(level, data, prefetched={}) {
+  async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
-      const item = prefetched[uuid] ? new Item.implementation(prefetched[uuid]) : (await fromUuid(uuid))?.clone();
+      const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
       if ( !item ) continue;
       item.data.update({
-        _id: prefetched[uuid]?._id ?? foundry.utils.randomID(),
+        _id: retainedData[uuid]?._id ?? foundry.utils.randomID(),
         "flags.dnd5e.sourceId": uuid,
         "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
       });
@@ -237,11 +237,11 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
-    const prefetched = this.retainedData?.items.reduce((obj, i) => {
+    const retainedData = this.retainedData?.items.reduce((obj, i) => {
       obj[foundry.utils.getProperty(i, "flags.dnd5e.sourceId")] = i;
       return obj;
     }, {});
-    await this.advancement.apply(this.level, formData, prefetched);
+    await this.advancement.apply(this.level, formData, retainedData);
   }
 
 }
