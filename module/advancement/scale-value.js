@@ -20,7 +20,7 @@ export class ScaleValueAdvancement extends Advancement {
         }
       },
       order: 60,
-      icon: "icons/svg/dice-target.svg",
+      icon: "systems/dnd5e/icons/svg/scale-value.svg",
       title: game.i18n.localize("DND5E.AdvancementScaleValueTitle"),
       hint: game.i18n.localize("DND5E.AdvancementScaleValueHint"),
       multiLevel: true,
