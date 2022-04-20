@@ -63,7 +63,7 @@ export class AdvancementFlow extends FormApplication {
    * @type {Advancement|null}
    */
   get advancement() {
-    return this.item.advancement?.[this._advancementId] ?? null;
+    return this.item.advancement?.byId[this._advancementId] ?? null;
   }
 
   /* -------------------------------------------- */

@@ -151,7 +151,7 @@ export class Advancement {
    * @returns {number[]}
    */
   get levels() {
-    return this.data.level ? [this.data.level] : [];
+    return this.data.level !== undefined ? [this.data.level] : [];
   }
 
   /* -------------------------------------------- */
@@ -226,8 +226,8 @@ export class Advancement {
    */
   async update(updates) {
     await this.item.updateAdvancement(this.id, updates);
-    this.data = this.item.advancement[this.id].data;
-    return this.item.advancement[this.id];
+    this.data = this.item.advancement.byId[this.id].data;
+    return this.item.advancement.byId[this.id];
   }
 
   /* -------------------------------------------- */
