@@ -279,10 +279,9 @@ export class Advancement {
    * throw an AdvancementError to display the advancement flow UI.
    * @param {number} level  Level being advanced.
    * @param {object} data   Data from `Advancement#reverse` needed to restore this advancement.
+   * @abstract
    */
-  async restore(level, data) {
-    throw new Error("Each subclass of Advancement must implement the restore method");
-  }
+  async restore(level, data) { }
 
   /* -------------------------------------------- */
 

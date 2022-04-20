@@ -181,8 +181,8 @@ export class AdvancementManager extends Application {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
 
-    const currentLevel = clonedItem.data.data.levels ?? clonedItem.class?.data.data.levels ??
-      manager.clone.data.data.details.level;
+    const currentLevel = clonedItem.data.data.levels ?? clonedItem.class?.data.data.levels
+      ?? manager.clone.data.data.details.level;
 
     const flows = Array.fromRange(currentLevel + 1).slice(level)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
