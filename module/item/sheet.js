@@ -1,3 +1,4 @@
+import { AdvancementManager } from "../advancement/advancement-manager.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
@@ -102,7 +103,7 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _getItemAdvancement(item) {
     const maxLevel = item.parent ? item.data.data.levels ?? item.class?.data.data.levels
-      ?? item.parent.data.data.details.level : null;
+      ?? item.parent.data.data.details.level : -1;
     const data = {};
 
     // Improperly configured advancements
@@ -118,13 +119,12 @@ export default class ItemSheet5e extends ItemSheet {
           configured: false
         })),
         configured: "partial"
-      }
+      };
     }
 
     // All other advancements by level
     for ( const [level, advancements] of Object.entries(item.advancement.byLevel) ) {
-      if ( !advancements.length ) continue;
-      const items = advancements.map(advancement => ({
+      const items = advancements.filter(a => a.appliesToClass).map(advancement => ({
         id: advancement.id,
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level),
@@ -134,9 +134,10 @@ export default class ItemSheet5e extends ItemSheet {
         summary: advancement.summaryForLevel(level),
         configured: advancement.configuredForLevel(level)
       }));
+      if ( !items.length ) continue;
       data[level] = {
         items: items.sort((a, b) => a.order.localeCompare(b.order)),
-        configured: (maxLevel === null) ? false : items.some(a => !a.configured) ? "partial" : "full"
+        configured: (level > maxLevel) ? false : items.some(a => !a.configured) ? "partial" : "full"
       };
     }
 
@@ -482,6 +483,13 @@ export default class ItemSheet5e extends ItemSheet {
   _onAdvancementAction(event) {
     const cl = event.currentTarget.classList;
     if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
+
+    if ( cl.contains("modify-choices") ) {
+      const level = event.currentTarget.closest("li")?.dataset.level;
+      const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
+      if ( manager.steps.length ) manager.render(true);
+      return;
+    }
 
     const id = event.currentTarget.closest("li.item")?.dataset.id;
     const advancement = this.item.advancement.byId[id];
