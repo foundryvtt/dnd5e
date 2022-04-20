@@ -89,8 +89,7 @@ export class ScaleValueConfig extends AdvancementConfig {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "scale-value", "two-column"],
       template: "systems/dnd5e/templates/advancement/scale-value-config.html",
-      width: 540,
-      submitOnChange: true
+      width: 540
     });
   }
 
@@ -100,13 +99,13 @@ export class ScaleValueConfig extends AdvancementConfig {
   getData() {
     const data = super.getData();
     data.classIdentifier = this.item.identifier;
-    data.previewIdentifier = this.data.configuration.identifier || this.data.title?.slugify()
+    data.previewIdentifier = this.advancement.data.configuration.identifier || this.advancement.data.title?.slugify()
       || this.advancement.constructor.metadata.title.slugify();
 
     let lastValue = "";
     data.levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
       obj[level] = { placeholder: lastValue, value: "" };
-      const value = this.data.configuration.scale[level];
+      const value = this.advancement.data.configuration.scale[level];
       if ( value ) {
         obj[level].value = value;
         lastValue = value;
@@ -120,14 +119,12 @@ export class ScaleValueConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  prepareConfigurationUpdate(event, configuration) {
+  prepareConfigurationUpdate(configuration) {
     // Ensure multiple values in a row are not the same
-    if ( event.type === "submit" ) {
-      let lastValue = "";
-      for ( const [lvl, value] of Object.entries(configuration.scale) ) {
-        if ( value === lastValue ) configuration.scale[lvl] = "";
-        else if ( value ) lastValue = value;
-      }
+    let lastValue = "";
+    for ( const [lvl, value] of Object.entries(configuration.scale) ) {
+      if ( value === lastValue ) configuration.scale[lvl] = "";
+      else if ( value ) lastValue = value;
     }
     configuration.scale = this.constructor._cleanedObject(configuration.scale);
     return configuration;

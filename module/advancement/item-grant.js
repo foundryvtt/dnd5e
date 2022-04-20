@@ -121,8 +121,7 @@ export class ItemGrantConfig extends AdvancementConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
-      template: "systems/dnd5e/templates/advancement/item-grant-config.html",
-      submitOnChange: true
+      template: "systems/dnd5e/templates/advancement/item-grant-config.html"
     });
   }
 
@@ -147,7 +146,9 @@ export class ItemGrantConfig extends AdvancementConfig {
     event.preventDefault();
     const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
-    this.data.configuration.items.findSplice(uuid => uuid === uuidToDelete);
+    const items = this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete);
+    const updates = { configuration: this.prepareConfigurationUpdate({ items }) };
+    await this.advancement.update(updates);
     this.render();
   }
 
@@ -173,7 +174,7 @@ export class ItemGrantConfig extends AdvancementConfig {
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
-    const existingItems = this.data.configuration.items;
+    const existingItems = this.advancement.data.configuration.items;
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {
@@ -185,7 +186,7 @@ export class ItemGrantConfig extends AdvancementConfig {
       return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
     }
 
-    this.data.configuration.items.push(item.uuid);
+    await this.advancement.update({"configuration.items": [...existingItems, item.uuid]});
     this.render();
   }
 

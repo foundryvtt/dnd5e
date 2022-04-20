@@ -19,11 +19,6 @@ export class AdvancementConfig extends FormApplication {
     this.advancement = advancement;
 
     /**
-     * Copy of the advancement data used for the dynamic interface.
-     */
-    this.data = foundry.utils.deepClone(this.advancement.data);
-
-    /**
      * Parent item to which this advancement belongs.
      * @type {Item5e}
      */
@@ -39,6 +34,7 @@ export class AdvancementConfig extends FormApplication {
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
       width: 400,
       height: "auto",
+      submitOnChange: true,
       closeOnSubmit: false
     });
   }
@@ -60,7 +56,7 @@ export class AdvancementConfig extends FormApplication {
     else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
 
     return {
-      data: this.data,
+      data: this.advancement.data,
       default: {
         title: this.advancement.constructor.metadata.title,
         icon: this.advancement.constructor.metadata.icon
@@ -74,24 +70,11 @@ export class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /**
-   * Re-render the page after a very brief delay to prevent focus from being lost.
-   * @param {number} [delay=10]  How many milliseconds to wait before calling render.
-   * @param {...*} [args]        Arguments passed to render method.
-   * @returns {Promise}          Promise that will be resolved once render is called.
-   */
-  async delayedRender(delay=10, ...args) {
-    return new Promise((resolve, reject) => { setTimeout(resolve, delay); }).then(() => this.render(...args));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Perform any changes to configuration data before it is saved to the advancement.
-   * @param {Event} event           Triggering event that is causing this update.
    * @param {object} configuration  Configuration object.
    * @returns {object}              Modified configuration.
    */
-  prepareConfigurationUpdate(event, configuration) {
+  prepareConfigurationUpdate(configuration) {
     return configuration;
   }
 
@@ -103,15 +86,10 @@ export class AdvancementConfig extends FormApplication {
 
     let updates = foundry.utils.expandObject(formData).data;
     if ( saveClicked ) foundry.utils.mergeObject(updates, this.data);
-    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(event, updates.configuration);
+    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
-    if ( saveClicked || !this.options.submitOnChange ) {
-      await this.advancement.update(updates);
-      this.close({submit: false, force: true});
-    } else {
-      foundry.utils.mergeObject(this.data, updates);
-      this.delayedRender();
-    }
+    await this.advancement.update(updates);
+    this.render();
   }
 
   /* -------------------------------------------- */
