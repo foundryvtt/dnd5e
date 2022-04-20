@@ -34,7 +34,7 @@
         {{#each data.items}}
           <li class="item flexrow" data-id="{{this.id}}">
             <div class="item-name flexrow">
-              <div class="item-image{{#if this.invertIcon}} inverted{{/if}}" style="background-image: url('{{this.icon}}')"></div>
+              <div class="item-image" style="background-image: url('{{this.icon}}')"></div>
               <h4>{{{this.title}}}</h4>
             </div>
             {{#unless @root.isEmbedded}}
