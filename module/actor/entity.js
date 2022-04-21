@@ -277,7 +277,7 @@ export default class Actor5e extends Actor {
    * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
-    console.warn("Actor5e#getClassFeatures and Actor5e#loadClassFeatures have been deprecated and will be removed in 1.8. These methods have been replaced by the Advancement system.");
+    console.warn("Actor5e#getClassFeatures and Actor5e#loadClassFeatures have been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
