@@ -160,6 +160,9 @@ export default class Actor5e extends Actor {
     // Determine Initiative Modifier
     this._computeInitiativeModifier(actorData, checkBonus, bonusData);
 
+    // Determine Scale Values
+    this._computeScaleValues(data);
+
     // Cache labels
     this.labels = {};
     if ( this.type === "npc" ) {
@@ -207,14 +210,9 @@ export default class Actor5e extends Actor {
     const data = super.getRollData();
     data.prof = new Proficiency(this.data.data.attributes.prof, 1);
     data.classes = {};
-    data.scale = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
       data.classes[identifier] = cls.data.data;
-      data.scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) {
-        data.classes[identifier].subclass = cls.subclass.data.data;
-        data.scale[cls.subclass.identifier] = cls.subclass.scaleValues;
-      }
+      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.data.data;
     }
     return data;
   }
@@ -538,6 +536,23 @@ export default class Actor5e extends Actor {
     init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
     if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Derive any values that have been scaled by the Advancement system.
+   * @param {object} data  The actor's system data being prepared.
+   * @private
+   */
+  _computeScaleValues(data) {
+    const scale = data.scale = {};
+    for ( const [identifier, cls] of Object.entries(this.classes) ) {
+      scale[identifier] = cls.scaleValues;
+      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+    }
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.

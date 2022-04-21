@@ -228,6 +228,28 @@ export class ItemGrantFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find("a[data-uuid]").click(this._onClickFeature.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicking on a feature during item grant to preview the feature.
+   * @param {MouseEvent} event  The triggering event.
+   * @protected
+   */
+  async _onClickFeature(event) {
+    event.preventDefault();
+    const uuid = event.currentTarget.dataset.uuid;
+    const item = await fromUuid(uuid);
+    item?.sheet.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     const retainedData = this.retainedData?.items.reduce((obj, i) => {
       obj[foundry.utils.getProperty(i, "flags.dnd5e.sourceId")] = i;
