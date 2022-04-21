@@ -1,0 +1,28 @@
+<form autocomplete="off">
+  <div class="left-column">
+    {{> "systems/dnd5e/templates/advancement/parts/advancement-controls.html"}}
+
+    <hr>
+
+    <div class="form-group">
+      <label>{{localize "DND5E.Identifier"}}</label>
+      <div class="form-fields">
+        <input name="data.configuration.identifier" type="text" value="{{data.configuration.identifier}}" placeholder="{{previewIdentifier}}">
+      </div>
+      <p class="hint identifier-hint">
+        {{{localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier identifier=previewIdentifier}}}
+      </p>
+    </div>
+  </div>
+
+  <div class="right-column scale-values">
+    {{#each levels as |data level|}}
+      <div class="form-group">
+        <label>{{level}}</label>
+        <div class="form-fields">
+          <input name="data.configuration.scale.{{level}}" type="text" value="{{data.value}}" placeholder="{{data.placeholder}}" data-level="{{level}}">
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</form>

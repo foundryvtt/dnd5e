@@ -108,7 +108,7 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Improperly configured advancements
     if ( item.advancement.needingConfiguration.length ) {
-      data["unconfigured"] = {
+      data.unconfigured = {
         items: item.advancement.needingConfiguration.map(advancement => ({
           id: advancement.id,
           order: advancement.constructor.order,

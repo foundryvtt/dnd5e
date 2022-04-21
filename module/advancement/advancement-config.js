@@ -3,7 +3,7 @@
  * editing interfaces.
  *
  * @property {Advancement} advancement  The advancement item being edited.
- * @property {object} options           Additional options passed to FormApplication.
+ * @property {object} [options={}]      Additional options passed to FormApplication.
  * @extends {FormApplication}
  */
 export class AdvancementConfig extends FormApplication {
@@ -32,7 +32,9 @@ export class AdvancementConfig extends FormApplication {
       classes: ["dnd5e", "advancement", "dialog"],
       template: "systems/dnd5e/templates/advancement/advancement-config.html",
       width: 400,
-      height: "auto"
+      height: "auto",
+      submitOnChange: true,
+      closeOnSubmit: false
     });
   }
 
@@ -78,26 +80,12 @@ export class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _updateObject(event, formData) {
+  async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData).data;
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
 
-    return this._updateAdvancement(updates);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * A helper to update the advancement and re-render this application with the adjusted advancement displayed.
-   * @param {object} advancementUpdate  The update to the advancement data
-   * @returns {Promise<Item5e>}    The promise for the updated Item which resolves after the application re-renders
-   * @private
-   */
-  async _updateAdvancement(advancementUpdate) {
-    const update = await this.advancement.update(advancementUpdate);
-
+    await this.advancement.update(updates);
     this.render();
-    return update;
   }
 
   /* -------------------------------------------- */

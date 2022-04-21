@@ -33,7 +33,7 @@
     },
     "uses": {
       "value": 1,
-      "max": "@classes.fighter.levels > 16 ? 3 : @classes.fighter.levels > 12 ? 2 : 1",
+      "max": "@scale.fighter.indomitable",
       "per": "lr"
     },
     "consume": {
