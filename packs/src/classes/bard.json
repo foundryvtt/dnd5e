@@ -124,6 +124,40 @@
         "title": "",
         "icon": "",
         "classRestriction": ""
+      },
+      {
+        "_id": "vc31v6423jmiex1p",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "inspiration",
+          "scale": {
+            "1": "d6",
+            "5": "d8",
+            "10": "d10",
+            "15": "d12"
+          }
+        },
+        "value": {},
+        "title": "Bardic Inspiration Die",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
+        "_id": "kf9gpqhy2mdx6hes",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "song-of-rest",
+          "scale": {
+            "2": "d6",
+            "9": "d8",
+            "13": "d10",
+            "17": "d12"
+          }
+        },
+        "value": {},
+        "title": "Song of Rest Die",
+        "icon": "",
+        "classRestriction": ""
       }
     ],
     "saves": [

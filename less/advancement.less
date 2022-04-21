@@ -30,6 +30,47 @@
   .centered {
     text-align: center;
   }
+
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+  &.two-column {
+    --grid-two-column-left-size: 1fr;
+    --grid-two-column-right-size: 1fr;
+
+    form {
+      display: grid;
+      grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
+      grid-template-areas: "left right";
+      grid-gap: 0.4em;
+
+      .left-column {
+        grid-area: left;
+      }
+      .right-column {
+        grid-area: right;
+      }
+      button[type="submit"] {
+        grid-column-end: span 2;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Scale Value                              */
+  /* ----------------------------------------- */
+  &.scale-value {
+    --grid-two-column-right-size: 0.6fr;
+
+    .right-column label {
+      flex: 0.5;
+      padding-right: 0.5rem;
+      text-align: right;
+    }
+    input[type="text"]::placeholder {
+      opacity: 0.5;
+    }
+  }
 }
 
 /* ----------------------------------------- */
@@ -101,6 +142,14 @@
 
   input.error {
     outline: 2px solid red;
+  }
+
+  form[data-type="ScaleValue"] {
+    p {
+      margin-block-end: 0;
+      font-size: var(--font-size-18);
+    }
+    span.none { font-style: italic; }
   }
 
   nav {

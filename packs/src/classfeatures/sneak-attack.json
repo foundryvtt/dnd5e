@@ -52,7 +52,7 @@
     "damage": {
       "parts": [
         [
-          "(ceil(@classes.rogue.levels /2))d6",
+          "@scale.rogue.sneak-attack",
           ""
         ]
       ],
