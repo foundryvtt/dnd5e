@@ -259,6 +259,7 @@ export default class Actor5e extends Actor {
    * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   async getClassFeatures({classIdentifier, subclassName, level}={}) {
+    console.warn("Actor5e#getClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
     const existing = new Set(this.items.map(i => i.name));
     const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
     return features.filter(f => !existing.has(f.name)) || [];
@@ -277,7 +278,7 @@ export default class Actor5e extends Actor {
    * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
-    console.warn("Actor5e#getClassFeatures and Actor5e#loadClassFeatures have been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
+    console.warn("Actor5e#loadClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
