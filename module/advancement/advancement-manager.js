@@ -378,6 +378,9 @@ export class AdvancementManager extends Application {
       html.find(".error").removeClass("error");
       try {
         switch ( event.currentTarget.dataset.action ) {
+          case "restart":
+            if ( !this.previousStep ) return;
+            return this._restart(event);
           case "previous":
             if ( !this.previousStep ) return;
             return this._backward(event);
@@ -466,11 +469,14 @@ export class AdvancementManager extends Application {
 
   /**
    * Reverse through the steps until one requiring user interaction is encountered.
-   * @param {Event} [event]  Triggering click event if one occurred.
+   * @param {Event} [event]                  Triggering click event if one occurred.
+   * @param {object} [options]               Additional options to configure behaviour.
+   * @param {boolean} [options.render=true]  Whether to render the Application after the step has been reversed. Used
+   *                                         by the restart workflow.
    * @returns {Promise}
    * @private
    */
-  async _backward(event) {
+  async _backward(event, { render=true }={}) {
     this._advancing = true;
     try {
       do {
@@ -493,8 +499,30 @@ export class AdvancementManager extends Application {
       this._advancing = false;
     }
 
+    if ( !render ) return;
     if ( this.step ) this.render(true);
     else this.close({ skipConfirmation: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset back to the manager's initial state.
+   * @param {MouseEvent} [event]  The triggering click event if one occurred.
+   * @returns {Promise}
+   * @private
+   */
+  async _restart(event) {
+    const restart = await Dialog.confirm({
+      title: game.i18n.localize("DND5E.AdvancementManagerRestartConfirmTitle"),
+      content: game.i18n.localize("DND5E.AdvancementManagerRestartConfirm")
+    });
+    if ( !restart ) return;
+    // While there is still a renderable step.
+    while ( this.steps.slice(0, this._stepIndex).some(s => !s.automatic) ) {
+      await this._backward(event, {render: false});
+    }
+    this.render(true);
   }
 
   /* -------------------------------------------- */
