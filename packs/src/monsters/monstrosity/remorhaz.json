@@ -2,7 +2,7 @@
   "_id": "VBzqw2rOUvTuNOPI",
   "name": "Remorhaz",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/monstrosity/Remorhaz.webp",
   "data": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -540,7 +540,7 @@
   },
   "token": {
     "name": "Remorhaz",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 3,
@@ -563,7 +563,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -572,7 +572,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/monstrosity/Remorhaz.webp",
     "actorId": "VBzqw2rOUvTuNOPI",
     "alpha": 1,
     "light": {
