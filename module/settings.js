@@ -108,6 +108,16 @@ export const registerSystemSettings = function() {
     type: Boolean
   });
 
+  // Disable Advancements
+  game.settings.register("dnd5e", "disableAdvancements", {
+    name: "SETTINGS.5eNoAdvancementsN",
+    hint: "SETTINGS.5eNoAdvancementsL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",

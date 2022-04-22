@@ -828,7 +828,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( stacked ) return stacked;
 
     // Bypass normal creation flow for any items with advancement
-    if ( itemData.data.advancement?.length ) {
+    if ( itemData.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forNewItem(this.actor, itemData);
       if ( manager.steps.length ) return manager.render(true);
     }
@@ -1033,7 +1033,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !item ) return;
 
     // If item has advancement, handle it separately
-    if ( item.hasAdvancement ) {
+    if ( item.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
       if ( manager.steps.length ) {
         if ( ["class", "subclass"].includes(item.type) ) {
