@@ -529,6 +529,14 @@ export class AdvancementManager extends Application {
       this.actor.deleteEmbeddedDocuments("Item", toDelete)
     ]);
 
+    /**
+     * A hook event that fires when an AdvancementManager is done modifying an actor.
+     * @function dnd5e.advancementManagerComplete
+     * @memberof hookEvents
+     * @param {AdvancementManager} advancementManager The advancement manager that just completed
+     */
+    Hooks.callAll("dnd5e.advancementManagerComplete", this);
+
     // Close prompt
     return this.close({ skipConfirmation: true });
   }
