@@ -260,8 +260,10 @@ export default class Actor5e extends Actor {
    * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
    * @param {number} [options.level]           New class level if it has been changed.
    * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
+   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   async getClassFeatures({classIdentifier, subclassName, level}={}) {
+    console.warn("Actor5e#getClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
     const existing = new Set(this.items.map(i => i.name));
     const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
     return features.filter(f => !existing.has(f.name)) || [];
@@ -277,8 +279,10 @@ export default class Actor5e extends Actor {
    * @param {number} [options.level]           The number of levels in the added class.
    * @param {number} [options.priorLevel]      The previous level of the added class.
    * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
+   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
+    console.warn("Actor5e#loadClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
     subclassName = subclassName.slugify();
 
     // Get the configuration of features which may be added
