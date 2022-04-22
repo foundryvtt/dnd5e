@@ -61,8 +61,7 @@ export class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    for ( const [uuid, selected] of Object.entries(data) ) {
-      if ( !selected ) continue;
+    for ( const uuid of Object.keys(data) ) {
       const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
       if ( !item ) continue;
       item.data.update({
