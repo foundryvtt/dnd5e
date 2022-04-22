@@ -41,10 +41,16 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   summaryForLevel(level, { configMode=false }={}) {
-    // TODO: For levels that a character has already gained, these links should point to the item on the character
-    // and any items that were skipped shouldn't be listed. This needs the ability to create links to items that are
-    // embedded inside an actor.
-    return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
+    if ( !this.data.value.added || configMode ) {
+      return this.data.configuration.items.reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
+    } else {
+      return Object.keys(this.data.value.added).map(id => {
+        const item = this.actor.items.get(id);
+        if ( !item ) return "";
+        return `<a class="content-link actor-item-link" data-actor="${this.actor.id}" data-id="${id}">` +
+          `<i class="fas fa-suitcase"></i> ${item.name}</a>`;
+      }).join("");
+    }
   }
 
   /* -------------------------------------------- */

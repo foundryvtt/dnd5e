@@ -415,6 +415,7 @@ export default class ItemSheet5e extends ItemSheet {
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
       html.find(".advancement .item-control").click(this._onAdvancementAction.bind(this));
+      html.find(".actor-item-link").click(this._onClickContentLink.bind(this));
     }
   }
 
@@ -516,6 +517,20 @@ export default class ItemSheet5e extends ItemSheet {
     } else if ( cl.contains("item-delete") ) {
       return this.item.deleteAdvancement(id);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicking on "actor-item-link" content links.
+   * @parqam {Event} event  Triggering click event.
+   * @private
+   */
+  _onClickContentLink(event) {
+    event.stopPropagation();
+    const actor = game.actors.get(event.target.dataset.actor);
+    const item = actor?.items.get(event.target.dataset.id);
+    item?.sheet.render(true);
   }
 
   /* -------------------------------------------- */
