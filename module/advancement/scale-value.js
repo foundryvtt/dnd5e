@@ -16,6 +16,7 @@ export class ScaleValueAdvancement extends Advancement {
       defaults: {
         configuration: {
           identifier: "",
+          type: "string",
           scale: {}
         }
       },
@@ -31,6 +32,18 @@ export class ScaleValueAdvancement extends Advancement {
       }
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The available types of scaling value.
+   * @enum {object}
+   */
+  static TYPES = {
+    string: "DND5E.AdvancementScaleValueTypeString",
+    number: "DND5E.AdvancementScaleValueTypeNumber",
+    dice: "DND5E.AdvancementScaleValueTypeDice"
+  };
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -59,7 +72,7 @@ export class ScaleValueAdvancement extends Advancement {
   titleForLevel(level, { configMode=false }={}) {
     const value = this.valueForLevel(level);
     if ( !value ) return this.title;
-    return `${this.title}: <strong>${value}</strong>`;
+    return `${this.title}: <strong>${this.formatValue(value)}</strong>`;
   }
 
   /* -------------------------------------------- */
@@ -67,11 +80,41 @@ export class ScaleValueAdvancement extends Advancement {
   /**
    * Scale value for the given level.
    * @param {number} level  Level for which to get the scale value.
-   * @returns {string}      Scale value at the given level or an empty string.
+   * @returns {*}           Scale value at the given level or null if none exists.
    */
   valueForLevel(level) {
     const key = Object.keys(this.data.configuration.scale).reverse().find(l => Number(l) <= level);
-    return this.data.configuration.scale[key] ?? "";
+    return this.data.configuration.scale[key] ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compare two scaling values and determine if they are equal.
+   * @param {*} a
+   * @param {*} b
+   * @returns {boolean}
+   */
+  testEquality(a, b) {
+    const keys = Object.keys(a ?? {});
+    if ( keys.length !== Object.keys(b ?? {}).length ) return false;
+    for ( const k of keys ) {
+      if ( a[k] !== b[k] ) return false;
+    }
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Format a scale value for display.
+   * @param {*} value
+   * @returns {string|null}
+   */
+  formatValue(value) {
+    if ( value == null ) return null;
+    if ( this.data.configuration.type === "dice" ) return `${value.n ?? ""}d${value.die}`;
+    return `${value.value}`;
   }
 
 }
@@ -101,19 +144,75 @@ export class ScaleValueConfig extends AdvancementConfig {
     data.classIdentifier = this.item.identifier;
     data.previewIdentifier = this.advancement.data.configuration.identifier || this.advancement.data.title?.slugify()
       || this.advancement.constructor.metadata.title.slugify();
+    data.typeHint = game.i18n.localize(
+      `DND5E.AdvancementScaleValueTypeHint${this.advancement.data.configuration.type.capitalize()}`);
+    data.types =
+      Object.fromEntries(
+        Object.entries(ScaleValueAdvancement.TYPES).map(([key, label]) => [key, game.i18n.localize(label)]));
+    data.faces = Object.fromEntries([2, 3, 4, 6, 8, 10, 12, 20].map(die => [die, `d${die}`]));
+    data.levels = this._prepareLevelData();
+    return data;
+  }
 
-    let lastValue = "";
-    data.levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
-      obj[level] = { placeholder: lastValue, value: "" };
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the data to display at each of the scale levels.
+   * @returns {object}
+   * @protected
+   */
+  _prepareLevelData() {
+    let lastValue = null;
+    return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).reduce((obj, level) => {
+      obj[level] = { placeholder: this._formatPlaceholder(lastValue), value: null };
       const value = this.advancement.data.configuration.scale[level];
       if ( value ) {
+        this._mergeScaleValues(value, lastValue);
+        obj[level].className = "new-scale-value";
         obj[level].value = value;
         lastValue = value;
       }
       return obj;
     }, {});
+  }
 
-    return data;
+  /* -------------------------------------------- */
+
+  /**
+   * Formats the placeholder for this scale value.
+   * @param {*} placeholder
+   * @returns {object}
+   * @protected
+   */
+  _formatPlaceholder(placeholder) {
+    if ( this.advancement.data.configuration.type === "dice" ) {
+      return { n: placeholder?.n ?? "", die: placeholder?.die ? `d${placeholder.die}` : "" };
+    }
+    return { value: placeholder?.value ?? "" };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * For scale values with multiple properties, have missing properties inherit from earlier filled-in values.
+   * @param {*} value      The primary value.
+   * @param {*} lastValue  The previous value.
+   */
+  _mergeScaleValues(value, lastValue) {
+    for ( const k of Object.keys(lastValue ?? {}) ) {
+      if ( value[k] == null ) value[k] = lastValue[k];
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static _cleanedObject(object) {
+    return Object.entries(object).reduce((obj, [key, value]) => {
+      if ( Object.keys(value ?? {}).some(k => value[k]) ) obj[key] = value;
+      else obj[`-=${key}`] = null;
+      return obj;
+    }, {});
   }
 
   /* -------------------------------------------- */
@@ -121,10 +220,13 @@ export class ScaleValueConfig extends AdvancementConfig {
   /** @inheritdoc */
   prepareConfigurationUpdate(configuration) {
     // Ensure multiple values in a row are not the same
-    let lastValue = "";
+    let lastValue = null;
     for ( const [lvl, value] of Object.entries(configuration.scale) ) {
-      if ( value === lastValue ) configuration.scale[lvl] = "";
-      else if ( value ) lastValue = value;
+      if ( this.advancement.testEquality(lastValue, value) ) configuration.scale[lvl] = null;
+      else if ( Object.keys(value ?? {}).some(k => value[k]) ) {
+        this._mergeScaleValues(value, lastValue);
+        lastValue = value;
+      }
     }
     configuration.scale = this.constructor._cleanedObject(configuration.scale);
     return configuration;
@@ -149,6 +251,22 @@ export class ScaleValueConfig extends AdvancementConfig {
     this.form.querySelector("input[name='data.configuration.identifier']").placeholder = slug;
   }
 
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async _updateObject(event, formData) {
+    const typeChange = "data.configuration.type" in formData;
+    if ( typeChange && (formData["data.configuration.type"] !== this.advancement.data.configuration.type) ) {
+      // Clear scale values if we're changing type.
+      for ( const key in formData ) {
+        if ( key.startsWith("data.configuration.scale.") ) delete formData[key];
+      }
+      Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).forEach(l =>
+        formData[`data.configuration.scale.${l}`] = null);
+    }
+    return super._updateObject(event, formData);
+  }
+
 }
 
 
@@ -171,8 +289,8 @@ export class ScaleValueFlow extends AdvancementFlow {
   /** @inheritdoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
-      initial: this.advancement.valueForLevel(this.level - 1),
-      final: this.advancement.valueForLevel(this.level)
+      initial: this.advancement.formatValue(this.advancement.valueForLevel(this.level - 1)),
+      final: this.advancement.formatValue(this.advancement.valueForLevel(this.level))
     });
   }
 

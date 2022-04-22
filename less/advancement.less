@@ -73,6 +73,18 @@
     input[type="text"]::placeholder {
       opacity: 0.5;
     }
+
+    select {
+
+
+      &.new-scale-value {
+        font-weight: bold;
+      }
+
+      option[value=""] {
+        color: var(--color-text-light-6);
+      }
+    }
   }
 }
 
