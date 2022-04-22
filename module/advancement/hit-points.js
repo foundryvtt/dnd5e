@@ -1,5 +1,6 @@
 import { Advancement } from "./advancement.js";
 import { AdvancementError, AdvancementFlow } from "./advancement-flow.js";
+import { AdvancementConfig } from "./advancement-config.js";
 
 
 /**
@@ -21,6 +22,7 @@ export class HitPointsAdvancement extends Advancement {
       multiLevel: true,
       validItemTypes: new Set(["class"]),
       apps: {
+        config: HitPointsConfig,
         flow: HitPointsFlow
       }
     });
@@ -168,6 +170,29 @@ export class HitPointsAdvancement extends Advancement {
 
 
 /**
+ * Configuration application for hit points.
+ * @extends {AdvancementConfig}
+ */
+export class HitPointsConfig extends AdvancementConfig {
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      template: "systems/dnd5e/templates/advancement/hit-points-config.html"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getData() {
+    return foundry.utils.mergeObject(super.getData(), {
+      hitDie: this.advancement.hitDie
+    });
+  }
+}
+
+
+/**
  * Inline application that presents hit points selection upon level up.
  *
  * @extends {AdvancementFlow}
@@ -213,11 +238,24 @@ export class HitPointsFlow extends AdvancementFlow {
     this.form.querySelector(".averageCheckbox")?.addEventListener("change", event => {
       this.form.querySelector(".rollResult").disabled = event.target.checked;
       this.form.querySelector(".rollButton").disabled = event.target.checked;
+      this._updateRollResult();
     });
-    this.form.querySelector(".rollButton")?.addEventListener("click", async event => {
+    this.form.querySelector(".rollButton")?.addEventListener("click", async () => {
       const roll = await this.advancement.actor.rollClassHitPoints(this.advancement.item);
       this.form.querySelector(".rollResult").value = roll.total;
     });
+    this._updateRollResult();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the roll result display when the average result is taken.
+   * @protected
+   */
+  _updateRollResult() {
+    if ( !this.form.elements.useAverage?.checked ) return;
+    this.form.elements.value.value = (this.advancement.hitDieValue / 2) + 1;
   }
 
   /* -------------------------------------------- */

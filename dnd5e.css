@@ -415,19 +415,19 @@
 .dnd5e.sheet .traits {
   margin: 5px 0 0;
 }
-.dnd5e.sheet .traits .trait-selector,
-.dnd5e.sheet .traits .proficiency-selector {
-  flex: 0 0 16px;
-  padding: 2px 0;
-  color: #999;
-  font-size: 10px;
-}
 .dnd5e.sheet .traits .traits-list {
   flex: 0 0 100%;
   line-height: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.dnd5e.sheet .trait-selector,
+.dnd5e.sheet .proficiency-selector {
+  flex: 0 0 16px;
+  padding: 2px 0;
+  color: #999;
+  font-size: 10px;
 }
 /* ----------------------------------------- */
 /*  Items Lists                              */
@@ -1301,6 +1301,9 @@
 .dnd5e.advancement .form-group .form-fields button {
   flex: 0;
 }
+.dnd5e.advancement .form-group .form-field-readonly {
+  color: #999;
+}
 .dnd5e.advancement .items-list {
   margin-bottom: 1em;
   /* Solves the borders being cut off */
@@ -1643,14 +1646,15 @@
 }
 .dnd5e.sheet.item .advancement .items-list .item-controls {
   border-left: 1px solid #c9c7b8;
+  flex: 0 0 44px;
 }
 .dnd5e.sheet.item .advancement .items-list .item-summary {
   flex: 0 0 100%;
   font-size: 12px;
   line-height: 16px;
-  padding: 0.25em 0.5em 0.25em 2.7em;
+  padding: 0 0.5em 0.5em 34px;
+  margin-top: -4px;
   color: #191813;
-  border-top: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.item .advancement .items-list .item-summary .item-list .item-name {
   display: flex;

@@ -114,7 +114,6 @@ export default class ItemSheet5e extends ItemSheet {
           order: advancement.constructor.order,
           title: advancement.title,
           icon: advancement.icon,
-          invertIcon: advancement.icon.startsWith("icons/svg/"),
           classRestriction: advancement.data.classRestriction,
           configured: false
         })),
@@ -129,7 +128,6 @@ export default class ItemSheet5e extends ItemSheet {
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level),
         icon: advancement.icon,
-        invertIcon: advancement.icon.startsWith("icons/svg/"),
         classRestriction: advancement.data.classRestriction,
         summary: advancement.summaryForLevel(level),
         configured: advancement.configuredForLevel(level)
