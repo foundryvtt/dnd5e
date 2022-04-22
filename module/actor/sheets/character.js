@@ -267,9 +267,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const classId = event.target.closest(".item")?.dataset.itemId;
     if ( !delta || !classId ) return;
 
-    const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
-    if ( manager.steps.length ) return manager.render(true);
     const classItem = this.actor.items.get(classId);
+    if ( classItem.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
+      if ( manager.steps.length ) return manager.render(true);
+    }
     return classItem.update({"data.levels": classItem.data.data.levels + delta});
   }
 
@@ -333,8 +335,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       const cls = this.actor.itemTypes.class.find(c => c.identifier === itemData.data.identifier);
       if ( cls ) {
         const priorLevel = cls.data.data.levels;
-        const manager = AdvancementManager.forLevelChange(this.actor, cls.id, itemData.data.levels);
-        if ( manager.steps.length ) return manager.render(true);
+        if ( cls.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
+          const manager = AdvancementManager.forLevelChange(this.actor, cls.id, itemData.data.levels);
+          if ( manager.steps.length ) return manager.render(true);
+        }
         return cls.update({"data.levels": priorLevel + itemData.data.levels});
       }
     }
