@@ -1436,8 +1436,8 @@ export default class Actor5e extends Actor {
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
     if ( Hooks._hooks.restCompleted?.length ) console.warn(
-      `The restCompleted hook has been deprecated in favor of dnd5e.restCompleted. ` +
-      `The original hook will be removed in dnd5e 1.8.`
+      "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted. "
+      + "The original hook will be removed in dnd5e 1.8."
     );
     /**
      * A hook event that fires when the rest process is completed for an actor.
@@ -1445,7 +1445,7 @@ export default class Actor5e extends Actor {
      * @memberof hookEvents
      * @param {Actor5e} actor      The actor that just completed resting.
      * @param {RestResult} result  Details on the rest completed.
-     * @deprected since 1.6, targeted for removal in 1.8
+     * @deprecated since 1.6, targeted for removal in 1.8
      */
     Hooks.callAll("restCompleted", this, result);
 
@@ -1704,27 +1704,27 @@ export default class Actor5e extends Actor {
    * the target actor.
    *
    * @typedef {object} TransformationOptions
-   * @param {boolean} [keepPhysical=false]    Keep physical abilities (str, dex, con)
-   * @param {boolean} [keepMental=false]      Keep mental abilities (int, wis, cha)
-   * @param {boolean} [keepSaves=false]       Keep saving throw proficiencies
-   * @param {boolean} [keepSkills=false]      Keep skill proficiencies
-   * @param {boolean} [mergeSaves=false]      Take the maximum of the save proficiencies
-   * @param {boolean} [mergeSkills=false]     Take the maximum of the skill proficiencies
-   * @param {boolean} [keepClass=false]       Keep proficiency bonus
-   * @param {boolean} [keepFeats=false]       Keep features
-   * @param {boolean} [keepSpells=false]      Keep spells
-   * @param {boolean} [keepItems=false]       Keep items
-   * @param {boolean} [keepBio=false]         Keep biography
-   * @param {boolean} [keepVision=false]      Keep vision
-   * @param {boolean} [transformTokens=true]  Transform linked tokens too
+   * @property {boolean} [keepPhysical=false]    Keep physical abilities (str, dex, con)
+   * @property {boolean} [keepMental=false]      Keep mental abilities (int, wis, cha)
+   * @property {boolean} [keepSaves=false]       Keep saving throw proficiencies
+   * @property {boolean} [keepSkills=false]      Keep skill proficiencies
+   * @property {boolean} [mergeSaves=false]      Take the maximum of the save proficiencies
+   * @property {boolean} [mergeSkills=false]     Take the maximum of the skill proficiencies
+   * @property {boolean} [keepClass=false]       Keep proficiency bonus
+   * @property {boolean} [keepFeats=false]       Keep features
+   * @property {boolean} [keepSpells=false]      Keep spells
+   * @property {boolean} [keepItems=false]       Keep items
+   * @property {boolean} [keepBio=false]         Keep biography
+   * @property {boolean} [keepVision=false]      Keep vision
+   * @property {boolean} [transformTokens=true]  Transform linked tokens too
    */
 
   /**
    * Transform this Actor into another one.
    *
-   * @param {Actor5e} target                     The target Actor.
-   * @param {object} [TransformationOptions={}]  Options that determine how the transformation is performed.
-   * @returns {Promise<Array<Token>>|null}       Updated token if the transformation was performed.
+   * @param {Actor5e} target                      The target Actor.
+   * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
+   * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
@@ -1835,11 +1835,11 @@ export default class Actor5e extends Actor {
       return this.token.update(tokenData);
     }
 
-    // Update regular Actors by creating a new Actor with the Polymorphed data
+    // Close sheet for non-transformed Actor
     await this.sheet.close();
 
     /**
-     * A hook event that fires just before the actor is transformed 
+     * A hook event that fires just before the actor is transformed.
      * @function dnd5e.transformActor
      * @memberof hookEvents
      * @param {Actor5e} actor                  The original actor before transformation.
@@ -1852,6 +1852,7 @@ export default class Actor5e extends Actor {
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
     });
 
+    // Create new synthetic Actor with transformed data
     const newActor = await this.constructor.create(d, {renderSheet: true});
 
     // Update placed Token instances
