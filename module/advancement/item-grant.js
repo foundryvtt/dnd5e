@@ -40,7 +40,7 @@ export class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  summaryForLevel(level) {
+  summaryForLevel(level, { configMode=false }={}) {
     // TODO: For levels that a character has already gained, these links should point to the item on the character
     // and any items that were skipped shouldn't be listed. This needs the ability to create links to items that are
     // embedded inside an actor.

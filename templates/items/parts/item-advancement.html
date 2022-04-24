@@ -37,7 +37,7 @@
           {{/if}}
         </h3>
 
-        {{#if (and @root.editable data.configured)}}
+        {{#if (and @root.editable data.configured (ne level "unconfigured"))}}
           <div>
             <a class="item-control modify-choices">{{localize "DND5E.AdvancementModifyChoices"}}</a>
           </div>
@@ -60,7 +60,7 @@
               <div class="item-image" style="background-image: url('{{this.icon}}')"></div>
               <h4>{{{this.title}}}</h4>
             </div>
-            {{#unless @root.isEmbedded}}
+            {{#if (or @root.advancementEditable (not @root.isEmbedded))}}
               <div class="flexrow">
                 {{#if (eq this.classRestriction "primary")}}
                   {{localize "DND5E.AdvancementClassRestrictionPrimary"}}
@@ -68,7 +68,7 @@
                   {{localize "DND5E.AdvancementClassRestrictionSecondary"}}
                 {{/if}}
               </div>
-            {{/unless}}
+            {{/if}}
             {{#if @root.advancementEditable}}
               <div class="item-controls flexrow">
                   <a class="item-control item-edit" title="{{localize 'DND5E.ItemEdit'}}"><i class="fas fa-edit"></i></a>
