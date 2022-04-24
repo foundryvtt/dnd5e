@@ -8,6 +8,15 @@ import ActiveEffect5e from "../active-effect.js";
  * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
+
+  /**
+   * Whether advancements on embedded items should be editable.
+   * @type {boolean}
+   */
+  advancementEditingMode = false;
+
+  /* -------------------------------------------- */
+
   constructor(...args) {
     super(...args);
 
@@ -52,6 +61,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.config = CONFIG.DND5E;
     data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
     data.isEmbedded = this.item.isEmbedded;
+    data.advancementEditable = (this.advancementEditingMode || !data.isEmbedded) && data.editable;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -487,6 +497,11 @@ export default class ItemSheet5e extends ItemSheet {
       const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
       if ( manager.steps.length ) manager.render(true);
       return;
+    }
+
+    if ( cl.contains("toggle-configuration") ) {
+      this.advancementEditingMode = !this.advancementEditingMode;
+      return this.render();
     }
 
     const id = event.currentTarget.closest("li.item")?.dataset.id;
