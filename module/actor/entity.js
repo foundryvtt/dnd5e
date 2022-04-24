@@ -1435,6 +1435,10 @@ export default class Actor5e extends Actor {
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
+    if ( Hooks._hooks.restCompleted?.length ) console.warn(
+      `The restCompleted hook has been deprecated in favor of dnd5e.restCompleted. ` +
+      `The original hook will be removed in dnd5e 1.8.`
+    );
     /**
      * A hook event that fires when the rest process is completed for an actor.
      * @function dnd5e.restCompleted
