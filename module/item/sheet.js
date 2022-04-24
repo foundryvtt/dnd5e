@@ -112,8 +112,9 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
-    const maxLevel = (item.parent && !this.advancementConfigurationMode) ? item.data.data.levels
-      ?? item.class?.data.data.levels ?? item.parent.data.data.details.level : -1;
+    const configMode = !item.parent || this.advancementConfigurationMode;
+    const maxLevel = !configMode ? item.data.data.levels ?? item.class?.data.data.levels
+      ?? item.parent.data.data.details.level : -1;
     const data = {};
 
     // Improperly configured advancements
@@ -133,14 +134,14 @@ export default class ItemSheet5e extends ItemSheet {
 
     // All other advancements by level
     for ( let [level, advancements] of Object.entries(item.advancement.byLevel) ) {
-      if ( !this.advancementConfigurationMode ) advancements = advancements.filter(a => a.appliesToClass);
+      if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
       const items = advancements.map(advancement => ({
         id: advancement.id,
         order: advancement.sortingValueForLevel(level),
-        title: advancement.titleForLevel(level, { configMode: this.advancementConfigurationMode }),
+        title: advancement.titleForLevel(level, { configMode }),
         icon: advancement.icon,
         classRestriction: advancement.data.classRestriction,
-        summary: advancement.summaryForLevel(level, { configMode: this.advancementConfigurationMode }),
+        summary: advancement.summaryForLevel(level, { configMode }),
         configured: advancement.configuredForLevel(level)
       }));
       if ( !items.length ) continue;
