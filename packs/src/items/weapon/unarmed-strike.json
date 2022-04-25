@@ -51,7 +51,10 @@
     "actionType": "mwak",
     "attackBonus": 0,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [
         [
@@ -92,7 +95,7 @@
       "thr": false,
       "two": false,
       "ver": false,
-      "mgc": true
+      "mgc": false
     },
     "proficient": true,
     "bonus": {

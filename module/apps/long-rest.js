@@ -40,7 +40,7 @@ export default class LongRestDialog extends Dialog {
   static async longRestDialog({ actor } = {}) {
     return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
-        title: game.i18n.localize("DND5E.LongRest"),
+        title: `${game.i18n.localize("DND5E.LongRest")}: ${actor.name}`,
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',

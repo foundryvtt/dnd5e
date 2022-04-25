@@ -34,35 +34,35 @@
     "uses": {
       "value": 2,
       "max": "@classes.monk.levels",
-      "per": "sr",
-      "type": "sr"
+      "per": "sr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Monk 2",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
     }
   },
   "sort": 100001,

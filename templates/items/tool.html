@@ -31,6 +31,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -54,6 +55,13 @@
                 <label>{{ localize "DND5E.ItemToolBase" }}</label>
                 <select name="data.baseItem">
                     {{selectOptions baseItems selected=data.baseItem blank=""}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>{{localize "DND5E.Attunement"}}</label>
+                <select name="data.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=data.attunement}}
                 </select>
             </div>
 
@@ -84,6 +92,11 @@
                 <label>{{ localize "DND5E.ChatFlavor" }}</label>
                 <input type="text" name="data.chatFlavor" value="{{data.chatFlavor}}"/>
             </div>
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/dnd5e/templates/actors/parts/active-effects.html"}}
         </div>
     </section>
 </form>

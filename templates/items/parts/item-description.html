@@ -18,11 +18,37 @@
         </div>
         {{/if}}
 
+        {{#if (or labels.toHit labels.derivedDamage)}}
+        <h4 class="properties-header">{{localize "DND5E.Attack"}}/{{localize "DND5E.Damage"}}</h4>
+        <ol class="properties-list">
+            {{#if labels.save}}
+            <li>
+                {{labels.save}}
+            </li>
+            {{/if}}
+
+            {{#if labels.toHit}}
+            <li>
+                {{labels.toHit}} {{localize "DND5E.ToHit"}}
+            </li>
+            {{/if}}
+
+            {{#each labels.derivedDamage}}
+            <li>
+                {{label}}
+            </li>
+            {{/each}}
+        </ol>
+        {{/if}}
+
+        {{#if itemProperties.length}}
+        <h4 class="properties-header">{{localize "DND5E.Properties"}}</h4>
         <ol class="properties-list">
             {{#each itemProperties}}
             <li>{{this}}</li>
             {{/each}}
         </ol>
+        {{/if}}
     </div>
 
     {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}

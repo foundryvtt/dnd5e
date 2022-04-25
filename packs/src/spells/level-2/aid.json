@@ -40,7 +40,10 @@
     "actionType": "heal",
     "attackBonus": 0,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [
         [
@@ -78,7 +81,7 @@
     },
     "scaling": {
       "mode": "level",
-      "formula": "5"
+      "formula": "(@item.level - 2) * 5"
     }
   },
   "sort": 100001,

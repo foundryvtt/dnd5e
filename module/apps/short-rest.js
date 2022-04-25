@@ -9,7 +9,7 @@ export default class ShortRestDialog extends Dialog {
     super(dialogData, options);
 
     /**
-     * Store a reference to the Actor entity which is resting
+     * Store a reference to the Actor document which is resting
      * @type {Actor}
      */
     this.actor = actor;
@@ -90,10 +90,10 @@ export default class ShortRestDialog extends Dialog {
    * @param {Actor5e} actor
    * @returns {Promise}
    */
-  static async shortRestDialog({actor}={}) {
+  static async shortRestDialog({ actor }={}) {
     return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
-        title: game.i18n.localize("DND5E.ShortRest"),
+        title: `${game.i18n.localize("DND5E.ShortRest")}: ${actor.name}`,
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
@@ -127,7 +127,7 @@ export default class ShortRestDialog extends Dialog {
    * @param {Actor5e} actor
    * @returns {Promise}
    */
-  static async longRestDialog({actor}={}) {
+  static async longRestDialog({ actor }={}) {
     console.warn("WARNING! ShortRestDialog.longRestDialog has been deprecated, use LongRestDialog.longRestDialog instead.");
     return LongRestDialog.longRestDialog(...arguments);
   }

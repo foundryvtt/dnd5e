@@ -68,4 +68,13 @@ export default class Proficiency {
   get hasProficiency() {
     return (this._baseProficiency > 0) && (this.multiplier > 0);
   }
+
+  /**
+   * Override the default `toString` method to return flat proficiency for backwards compatibility in formula.
+   *
+   * @returns {string}  Flat proficiency value.
+   */
+  toString() {
+    return this.flat;
+  }
 }

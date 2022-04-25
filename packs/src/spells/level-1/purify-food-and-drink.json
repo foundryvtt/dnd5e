@@ -40,7 +40,10 @@
     "actionType": "util",
     "attackBonus": 0,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [],
       "versatile": "",
@@ -59,7 +62,7 @@
       "vocal": true,
       "somatic": true,
       "material": false,
-      "ritual": false,
+      "ritual": true,
       "concentration": false
     },
     "materials": {

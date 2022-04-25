@@ -2,7 +2,7 @@
   "name": "dnd5e",
   "title": "DnD5e - Fifth Edition System",
   "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "1.5.2",
+  "version": "1.5.7",
   "author": "Atropos",
   "scripts": [],
   "esmodules": ["dnd5e.js"],
@@ -13,70 +13,92 @@
       "label": "Starter Heroes",
       "system": "dnd5e",
       "path": "./packs/heroes.db",
-      "entity": "Actor"
+      "type": "Actor"
     },
     {
       "name": "monsters",
       "label": "Monsters (SRD)",
       "system": "dnd5e",
       "path": "./packs/monsters.db",
-      "entity": "Actor"
+      "type": "Actor"
     },
     {
       "name": "items",
       "label": "Items (SRD)",
       "system": "dnd5e",
       "path": "./packs/items.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "tradegoods",
       "label": "Trade Goods (SRD)",
       "system": "dnd5e",
       "path": "./packs/tradegoods.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "spells",
       "label": "Spells (SRD)",
       "system": "dnd5e",
       "path": "./packs/spells.db",
-      "entity": "Item"
+      "type": "Item"
+    },
+    {
+      "name": "backgrounds",
+      "label": "Backgrounds (SRD)",
+      "system": "dnd5e",
+      "path": "./packs/backgrounds.db",
+      "entity": "Item",
+      "type": "Item"
     },
     {
       "name": "classes",
       "label": "Classes (SRD)",
       "system": "dnd5e",
       "path": "./packs/classes.db",
-      "entity": "Item"
+      "type": "Item"
+    },
+    {
+      "name": "subclasses",
+      "label": "Subclasses (SRD)",
+      "system": "dnd5e",
+      "path": "./packs/subclasses.db",
+      "type": "Item"
     },
     {
       "name": "classfeatures",
       "label": "Class Features (SRD)",
       "system": "dnd5e",
       "path": "./packs/classfeatures.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "races",
       "label": "Racial Features (SRD)",
       "system": "dnd5e",
       "path": "./packs/races.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "monsterfeatures",
       "label": "Monster Features (SRD)",
       "system": "dnd5e",
       "path": "./packs/monsterfeatures.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "rules",
       "label": "Rules (SRD)",
       "system": "dnd5e",
       "path": "./packs/rules.db",
-      "entity": "JournalEntry"
+      "type": "JournalEntry"
+    },
+    {
+      "name": "tables",
+      "label": "Tables (SRD)",
+      "system": "dnd5e",
+      "path": "./packs/tables.db",
+      "type": "RollTable"
     }
   ],
   "languages": [
@@ -91,9 +113,9 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
   "secondaryTokenAttribute": null,
-  "minimumCoreVersion": "0.8.2",
-  "compatibleCoreVersion": "0.8.9",
+  "minimumCoreVersion": "9.245",
+  "compatibleCoreVersion": "9",
   "url": "https://gitlab.com/foundrynet/dnd5e",
   "manifest": "https://gitlab.com/api/v4/projects/foundrynet%2Fdnd5e/packages/generic/dnd5e/latest/system.json",
-  "download": "https://gitlab.com/foundrynet/dnd5e/-/releases/release-1.5.2/downloads/dnd5e-release-1.5.2.zip"
+  "download": "https://gitlab.com/foundrynet/dnd5e/-/releases/release-1.5.7/downloads/dnd5e-release-1.5.7.zip"
 }

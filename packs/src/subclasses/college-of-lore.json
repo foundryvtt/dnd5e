@@ -1,0 +1,68 @@
+{
+  "name": "College of Lore",
+  "type": "subclass",
+  "img": "icons/sundries/books/book-open-brown-black.webp",
+  "data": {
+    "description": {
+      "value": "<p>Bards of the College of Lore know something about most things, collecting bits of knowledge from sources as diverse as scholarly tomes and peasant tales. Whether singing folk ballads in taverns or elaborate compositions in royal courts, these bards use their gifts to hold audiences spellbound. When the applause dies down, the audience members might find themselves questioning everything they held to be true, from their faith in the priesthood of the local temple to their loyalty to the king.</p>\n<p>The loyalty of these bards lies in the pursuit of beauty and truth, not in fealty to a monarch or following the tenets of a deity. A noble who keeps such a bard as a herald or advisor knows that the bard would rather be honest than politic.</p>\n<p>The college's members gather in libraries and sometimes in actual colleges, complete with classrooms and dormitories, to share their lore with one another. They also meet at festivals or affairs of state, where they can expose corruption, unravel lies, and poke fun at self-important figures of authority.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 54",
+    "identifier": "college-of-lore",
+    "classIdentifier": "bard",
+    "advancement": [
+      {
+        "_id": "pxolz5oyrvbez6aj",
+        "type": "ItemGrant",
+        "level": 3,
+        "title": "Features",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.e9ytGikyLFgwZ5wi",
+            "Compendium.dnd5e.classfeatures.5zPmHPQUne7RDfaU"
+          ]
+        },
+        "value": {},
+        "icon": ""
+      },
+      {
+        "_id": "pfjv7s5yjgoi3i1w",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.myBu3zi5eYvQIcuy"
+          ]
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "6seg1bfvuexp0gh9",
+        "type": "ItemGrant",
+        "level": 14,
+        "title": "Features",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.pquwueEMweRhiWaq"
+          ]
+        },
+        "value": {}
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "MNvsEc4D2ccX7dQT"
+}
