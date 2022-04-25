@@ -415,6 +415,7 @@ export default class ItemSheet5e extends ItemSheet {
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
       html.find(".advancement .item-control").click(this._onAdvancementAction.bind(this));
+      // TODO: Remove this when UUID links are supported in v10
       html.find(".actor-item-link").click(this._onClickContentLink.bind(this));
     }
   }
@@ -522,8 +523,9 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle clicking on "actor-item-link" content links.
-   * @parqam {Event} event  Triggering click event.
+   * Handle clicking on "actor-item-link" content links. Note: This method will be removed in 1.7 when it can
+   * be replaced by UUID links in core.
+   * @param {Event} event  Triggering click event.
    * @private
    */
   _onClickContentLink(event) {
