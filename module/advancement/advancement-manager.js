@@ -345,6 +345,17 @@ export class AdvancementManager extends Application {
       this.clone.prepareData();
     }
 
+    /**
+     * A hook event that fires when an AdvancementManager is about to be processed.
+     * @function dnd5e.preAdvancementManagerRender
+     * @memberof hookEvents
+     * @param {AdvancementManager} advancementManager The advancement manager about to be rendered
+     */
+    const allowed = Hooks.call("dnd5e.preAdvancementManagerRender", this);
+
+    // Abort if not allowed
+    if ( allowed === false ) return this;
+
     if ( this.step?.automatic ) {
       if ( this._advancing ) return this;
       this._forward();
