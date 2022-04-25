@@ -8,6 +8,15 @@ import ActiveEffect5e from "../active-effect.js";
  * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
+
+  /**
+   * Whether advancements on embedded items should be configurable.
+   * @type {boolean}
+   */
+  advancementConfigurationMode = false;
+
+  /* -------------------------------------------- */
+
   constructor(...args) {
     super(...args);
 
@@ -52,6 +61,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.config = CONFIG.DND5E;
     data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
     data.isEmbedded = this.item.isEmbedded;
+    data.advancementEditable = (this.advancementConfigurationMode || !data.isEmbedded) && data.editable;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -102,7 +112,8 @@ export default class ItemSheet5e extends ItemSheet {
    * @returns {object}     Object with advancement data grouped by levels.
    */
   _getItemAdvancement(item) {
-    const maxLevel = item.parent ? item.data.data.levels ?? item.class?.data.data.levels
+    const configMode = !item.parent || this.advancementConfigurationMode;
+    const maxLevel = !configMode ? item.data.data.levels ?? item.class?.data.data.levels
       ?? item.parent.data.data.details.level : -1;
     const data = {};
 
@@ -122,14 +133,15 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // All other advancements by level
-    for ( const [level, advancements] of Object.entries(item.advancement.byLevel) ) {
-      const items = advancements.filter(a => a.appliesToClass).map(advancement => ({
+    for ( let [level, advancements] of Object.entries(item.advancement.byLevel) ) {
+      if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
+      const items = advancements.map(advancement => ({
         id: advancement.id,
         order: advancement.sortingValueForLevel(level),
-        title: advancement.titleForLevel(level),
+        title: advancement.titleForLevel(level, { configMode }),
         icon: advancement.icon,
         classRestriction: advancement.data.classRestriction,
-        summary: advancement.summaryForLevel(level),
+        summary: advancement.summaryForLevel(level, { configMode }),
         configured: advancement.configuredForLevel(level)
       }));
       if ( !items.length ) continue;
@@ -487,6 +499,11 @@ export default class ItemSheet5e extends ItemSheet {
       const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
       if ( manager.steps.length ) manager.render(true);
       return;
+    }
+
+    if ( cl.contains("toggle-configuration") ) {
+      this.advancementConfigurationMode = !this.advancementConfigurationMode;
+      return this.render();
     }
 
     const id = event.currentTarget.closest("li.item")?.dataset.id;

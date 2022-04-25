@@ -56,7 +56,7 @@ export class ScaleValueAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  titleForLevel(level) {
+  titleForLevel(level, { configMode=false }={}) {
     const value = this.valueForLevel(level);
     if ( !value ) return this.title;
     return `${this.title}: <strong>${value}</strong>`;

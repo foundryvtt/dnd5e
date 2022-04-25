@@ -246,9 +246,13 @@
   .advancement {
     .items-list {
       .main-controls {
-        flex-direction: row-reverse;
+        .configuration-mode-control {
+          flex: 1 0;
+          margin-inline-start: 0.5em;
+          a { text-align: inline-start; }
+        }
         .item-add {
-          padding-top: 0.2em;
+          padding-block-start: 0.2em;
         }
       }
       .items-header {
