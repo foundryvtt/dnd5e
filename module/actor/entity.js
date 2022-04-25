@@ -1439,14 +1439,7 @@ export default class Actor5e extends Actor {
       "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted. "
       + "The original hook will be removed in dnd5e 1.8."
     );
-    /**
-     * A hook event that fires when the rest process is completed for an actor.
-     * @function dnd5e.restCompleted
-     * @memberof hookEvents
-     * @param {Actor5e} actor      The actor that just completed resting.
-     * @param {RestResult} result  Details on the rest completed.
-     * @deprecated since 1.6, targeted for removal in 1.8
-     */
+    /** @deprecated since 1.6, targeted for removal in 1.8 */
     Hooks.callAll("restCompleted", this, result);
 
     /**
@@ -1843,8 +1836,8 @@ export default class Actor5e extends Actor {
      * @function dnd5e.transformActor
      * @memberof hookEvents
      * @param {Actor5e} actor                  The original actor before transformation.
-     * @param {Actor5e} target                 The target actor used to drive the transformation.
-     * @param {object} data                    The data that will be used to create the new synthetic actor.
+     * @param {Actor5e} target                 The target actor into which to transform.
+     * @param {object} data                    The data that will be used to create the new transformed actor.
      * @param {TransformationOptions} options  Options that determine how the transformation is performed.
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
@@ -1852,7 +1845,7 @@ export default class Actor5e extends Actor {
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
     });
 
-    // Create new synthetic Actor with transformed data
+    // Create new Actor with transformed data
     const newActor = await this.constructor.create(d, {renderSheet: true});
 
     // Update placed Token instances
