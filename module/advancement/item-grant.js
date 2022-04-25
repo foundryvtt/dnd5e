@@ -15,7 +15,7 @@ export class ItemGrantAdvancement extends Advancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       defaults: {
-        configuration: { items: [] }
+        configuration: { items: [], optional: false }
       },
       order: 40,
       icon: "systems/dnd5e/icons/svg/item-grant.svg",
@@ -61,7 +61,8 @@ export class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
-    for ( const uuid of Object.keys(data) ) {
+    for ( const [uuid, selected] of Object.entries(data) ) {
+      if ( !selected ) continue;
       const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
       if ( !item ) continue;
       item.data.update({
@@ -216,6 +217,7 @@ export class ItemGrantFlow extends AdvancementFlow {
     const checked = new Set(Object.values(added ?? {}));
 
     return foundry.utils.mergeObject(super.getData(), {
+      optional: this.advancement.data.configuration.optional,
       items: await Promise.all(config.map(async uuid => {
         const item = await fromUuid(uuid);
         item.checked = added ? checked.has(uuid) : true;
