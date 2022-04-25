@@ -1454,8 +1454,21 @@ export default class Actor5e extends Actor {
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
-    // Call restCompleted hook so that modules can easily perform actions when actors finish a rest
+    if ( Hooks._hooks.restCompleted?.length ) console.warn(
+      "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted. "
+      + "The original hook will be removed in dnd5e 1.8."
+    );
+    /** @deprecated since 1.6, targeted for removal in 1.8 */
     Hooks.callAll("restCompleted", this, result);
+
+    /**
+     * A hook event that fires when the rest process is completed for an actor.
+     * @function dnd5e.restCompleted
+     * @memberof hookEvents
+     * @param {Actor5e} actor      The actor that just completed resting.
+     * @param {RestResult} result  Details on the rest completed.
+     */
+    Hooks.callAll("dnd5e.restCompleted", this, result);
 
     // Return data summarizing the rest effects
     return result;
@@ -1699,28 +1712,35 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Options that determine what properties of the original actor are kept and which are replaced with
+   * the target actor.
+   *
+   * @typedef {object} TransformationOptions
+   * @property {boolean} [keepPhysical=false]    Keep physical abilities (str, dex, con)
+   * @property {boolean} [keepMental=false]      Keep mental abilities (int, wis, cha)
+   * @property {boolean} [keepSaves=false]       Keep saving throw proficiencies
+   * @property {boolean} [keepSkills=false]      Keep skill proficiencies
+   * @property {boolean} [mergeSaves=false]      Take the maximum of the save proficiencies
+   * @property {boolean} [mergeSkills=false]     Take the maximum of the skill proficiencies
+   * @property {boolean} [keepClass=false]       Keep proficiency bonus
+   * @property {boolean} [keepFeats=false]       Keep features
+   * @property {boolean} [keepSpells=false]      Keep spells
+   * @property {boolean} [keepItems=false]       Keep items
+   * @property {boolean} [keepBio=false]         Keep biography
+   * @property {boolean} [keepVision=false]      Keep vision
+   * @property {boolean} [transformTokens=true]  Transform linked tokens too
+   */
+
+  /**
    * Transform this Actor into another one.
    *
-   * @param {Actor5e} target            The target Actor.
-   * @param {object} [options]
-   * @param {boolean} [options.keepPhysical]    Keep physical abilities (str, dex, con)
-   * @param {boolean} [options.keepMental]      Keep mental abilities (int, wis, cha)
-   * @param {boolean} [options.keepSaves]       Keep saving throw proficiencies
-   * @param {boolean} [options.keepSkills]      Keep skill proficiencies
-   * @param {boolean} [options.mergeSaves]      Take the maximum of the save proficiencies
-   * @param {boolean} [options.mergeSkills]     Take the maximum of the skill proficiencies
-   * @param {boolean} [options.keepClass]       Keep proficiency bonus
-   * @param {boolean} [options.keepFeats]       Keep features
-   * @param {boolean} [options.keepSpells]      Keep spells
-   * @param {boolean} [options.keepItems]       Keep items
-   * @param {boolean} [options.keepBio]         Keep biography
-   * @param {boolean} [options.keepVision]      Keep vision
-   * @param {boolean} [options.transformTokens] Transform linked tokens too
-   * @returns {Promise<Array<Token>>|null}      Updated token if the transformation was performed.
+   * @param {Actor5e} target                      The target Actor.
+   * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
+   * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
-    keepItems=false, keepBio=false, keepVision=false, transformTokens=true}={}) {
+    keepItems=false, keepBio=false, keepVision=false, transformTokens=true }={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1801,7 +1821,7 @@ export default class Actor5e extends Actor {
     }));
 
     // Transfer classes for NPCs
-    if (!keepClass && d.data.details.cr) {
+    if ( !keepClass && d.data.details.cr ) {
       d.items.push({
         type: "class",
         name: game.i18n.localize("DND5E.PolymorphTmpClass"),
@@ -1820,19 +1840,31 @@ export default class Actor5e extends Actor {
     d.flags.dnd5e.isPolymorphed = true;
 
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
-    if (this.isToken) {
+    if ( this.isToken ) {
       const tokenData = d.token;
       tokenData.actorData = d;
       delete tokenData.actorData.token;
       return this.token.update(tokenData);
     }
 
-    // Update regular Actors by creating a new Actor with the Polymorphed data
+    // Close sheet for non-transformed Actor
     await this.sheet.close();
+
+    /**
+     * A hook event that fires just before the actor is transformed.
+     * @function dnd5e.transformActor
+     * @memberof hookEvents
+     * @param {Actor5e} actor                  The original actor before transformation.
+     * @param {Actor5e} target                 The target actor into which to transform.
+     * @param {object} data                    The data that will be used to create the new transformed actor.
+     * @param {TransformationOptions} options  Options that determine how the transformation is performed.
+     */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
     });
+
+    // Create new Actor with transformed data
     const newActor = await this.constructor.create(d, {renderSheet: true});
 
     // Update placed Token instances
