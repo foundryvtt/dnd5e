@@ -17,6 +17,7 @@ export class ScaleValueAdvancement extends Advancement {
         configuration: {
           identifier: "",
           type: "string",
+          distance: {units: ""},
           scale: {}
         }
       },
@@ -42,7 +43,8 @@ export class ScaleValueAdvancement extends Advancement {
   static TYPES = {
     string: "DND5E.AdvancementScaleValueTypeString",
     number: "DND5E.AdvancementScaleValueTypeNumber",
-    dice: "DND5E.AdvancementScaleValueTypeDice"
+    dice: "DND5E.AdvancementScaleValueTypeDice",
+    distance: "DND5E.AdvancementScaleValueTypeDistance"
   };
 
   /* -------------------------------------------- */
@@ -141,16 +143,17 @@ export class ScaleValueConfig extends AdvancementConfig {
   /** @inheritdoc */
   getData() {
     const data = super.getData();
+    const config = this.advancement.data.configuration;
     data.classIdentifier = this.item.identifier;
-    data.previewIdentifier = this.advancement.data.configuration.identifier || this.advancement.data.title?.slugify()
+    data.previewIdentifier = config.identifier || this.advancement.data.title?.slugify()
       || this.advancement.constructor.metadata.title.slugify();
-    data.typeHint = game.i18n.localize(
-      `DND5E.AdvancementScaleValueTypeHint${this.advancement.data.configuration.type.capitalize()}`);
+    data.typeHint = game.i18n.localize(`DND5E.AdvancementScaleValueTypeHint${config.type.capitalize()}`);
     data.types =
       Object.fromEntries(
         Object.entries(ScaleValueAdvancement.TYPES).map(([key, label]) => [key, game.i18n.localize(label)]));
     data.faces = Object.fromEntries([2, 3, 4, 6, 8, 10, 12, 20].map(die => [die, `d${die}`]));
     data.levels = this._prepareLevelData();
+    data.isNumeric = ["number", "distance"].includes(config.type);
     return data;
   }
 
