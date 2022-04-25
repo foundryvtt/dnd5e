@@ -1,5 +1,12 @@
 <form autocomplete="off">
   {{> "systems/dnd5e/templates/advancement/parts/advancement-controls.html"}}
+  <div class="form-group">
+    <label>{{localize "DND5E.AdvancementItemGrantOptional"}}</label>
+    <div class="form-fields">
+      <input type="checkbox" name="data.configuration.optional" {{checked data.configuration.optional}}>
+    </div>
+    <p class="hint">{{localize "DND5E.AdvancementItemGrantOptionalHint"}}</p>
+  </div>
 
   <div class="drop-target">
     <ol class="items-list">
@@ -15,7 +22,7 @@
       {{/each}}
       </ol>
     </ol>
-  
+
     <p class="hint centered">{{localize "DND5E.AdvancementItemGrantDropHint"}}</p>
   </div>
 </form>
