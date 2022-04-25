@@ -8,8 +8,9 @@
           {{selectOptions types selected=data.configuration.type}}
         </select>
         {{#if (eq data.configuration.type "distance")}}
-          <input type="text" name="data.configuration.distance.units" value="{{data.configuration.distance.units}}"
-                 placeholder="{{localize "SCENES.Units"}}">
+          <select name="data.configuration.distance.units">
+            {{selectOptions movementUnits selected=data.configuration.distance.units}}
+          </select>
         {{/if}}
       </div>
       <p class="hint type-hint">

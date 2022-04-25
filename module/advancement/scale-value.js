@@ -72,9 +72,9 @@ export class ScaleValueAdvancement extends Advancement {
 
   /** @inheritdoc */
   titleForLevel(level, { configMode=false }={}) {
-    const value = this.valueForLevel(level);
+    const value = this.formatValue(level);
     if ( !value ) return this.title;
-    return `${this.title}: <strong>${this.formatValue(value)}</strong>`;
+    return `${this.title}: <strong>${value}</strong>`;
   }
 
   /* -------------------------------------------- */
@@ -109,14 +109,29 @@ export class ScaleValueAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /**
-   * Format a scale value for display.
-   * @param {*} value
+   * Prepare a scale value for use in actor data.
+   * @param {number} level  Level for which to get the scale value.
    * @returns {string|null}
    */
-  formatValue(value) {
+  prepareValue(level) {
+    const value = this.valueForLevel(level);
     if ( value == null ) return null;
     if ( this.data.configuration.type === "dice" ) return `${value.n ?? ""}d${value.die}`;
     return `${value.value}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Format a scale value for display.
+   * @param {number} level  Level for which to get the scale value.
+   * @returns {string|null}
+   */
+  formatValue(level) {
+    if ( this.data.configuration.type !== "distance" ) return this.prepareValue(level);
+    const value = this.valueForLevel(level);
+    if ( value == null ) return null;
+    return `${value.value} ${CONFIG.DND5E.movementUnits[this.data.configuration.distance.units]}`;
   }
 
 }
@@ -154,6 +169,7 @@ export class ScaleValueConfig extends AdvancementConfig {
     data.faces = Object.fromEntries([2, 3, 4, 6, 8, 10, 12, 20].map(die => [die, `d${die}`]));
     data.levels = this._prepareLevelData();
     data.isNumeric = ["number", "distance"].includes(config.type);
+    data.movementUnits = CONFIG.DND5E.movementUnits;
     return data;
   }
 
@@ -292,8 +308,8 @@ export class ScaleValueFlow extends AdvancementFlow {
   /** @inheritdoc */
   getData() {
     return foundry.utils.mergeObject(super.getData(), {
-      initial: this.advancement.formatValue(this.advancement.valueForLevel(this.level - 1)),
-      final: this.advancement.formatValue(this.advancement.valueForLevel(this.level))
+      initial: this.advancement.formatValue(this.level - 1),
+      final: this.advancement.formatValue(this.level)
     });
   }
 

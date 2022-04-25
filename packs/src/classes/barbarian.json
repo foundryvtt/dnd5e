@@ -172,13 +172,26 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "rages",
+          "type": "number",
           "scale": {
-            "1": "2",
-            "3": "3",
-            "6": "4",
-            "12": "5",
-            "17": "6",
-            "20": "999"
+            "1": {
+              "value": 2
+            },
+            "3": {
+              "value": 3
+            },
+            "6": {
+              "value": 4
+            },
+            "12": {
+              "value": 5
+            },
+            "17": {
+              "value": 6
+            },
+            "20": {
+              "value": 999
+            }
           }
         },
         "value": {},
@@ -191,10 +204,17 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "rage-damage",
+          "type": "number",
           "scale": {
-            "1": "+2",
-            "9": "+3",
-            "16": "+4"
+            "1": {
+              "value": 2
+            },
+            "9": {
+              "value": 3
+            },
+            "16": {
+              "value": 4
+            }
           }
         },
         "value": {},
