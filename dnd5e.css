@@ -1627,11 +1627,15 @@
 .dnd5e.sheet.item .weapon-properties label.checkbox {
   flex: 0 0 98px;
 }
-.dnd5e.sheet.item .advancement .items-list .main-controls {
-  flex-direction: row-reverse;
+.dnd5e.sheet.item .advancement .items-list .main-controls .configuration-mode-control {
+  flex: 1 0;
+  margin-inline-start: 0.5em;
+}
+.dnd5e.sheet.item .advancement .items-list .main-controls .configuration-mode-control a {
+  text-align: inline-start;
 }
 .dnd5e.sheet.item .advancement .items-list .main-controls .item-add {
-  padding-top: 0.2em;
+  padding-block-start: 0.2em;
 }
 .dnd5e.sheet.item .advancement .items-list .items-header .item-checkmark {
   flex: 0 0 44px;

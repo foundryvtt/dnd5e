@@ -197,10 +197,14 @@ export class Advancement {
 
   /**
    * Title displayed in advancement list for a specific level.
-   * @param {number} level  Level for which to generate a title.
-   * @returns {string}      HTML title with any level-specific information.
+   * @param {number} level                       Level for which to generate a title.
+   * @param {object} [options={}]
+   * @param {object} [options.configMode=false]  Is the advancement's item sheet in configuration mode? When in
+   *                                             config mode, the choices already made on this actor should not
+   *                                             be displayed.
+   * @returns {string}                           HTML title with any level-specific information.
    */
-  titleForLevel(level) {
+  titleForLevel(level, { configMode=false }={}) {
     return this.title;
   }
 
@@ -208,10 +212,14 @@ export class Advancement {
 
   /**
    * Summary content displayed beneath the title in the advancement list.
-   * @param {number} level  Level for which to generate the summary.
-   * @returns {string}      HTML content of the summary.
+   * @param {number} level                       Level for which to generate the summary.
+   * @param {object} [options={}]
+   * @param {object} [options.configMode=false]  Is the advancement's item sheet in configuration mode? When in
+   *                                             config mode, the choices already made on this actor should not
+   *                                             be displayed.
+   * @returns {string}                           HTML content of the summary.
    */
-  summaryForLevel(level) {
+  summaryForLevel(level, { configMode=false }={}) {
     return "";
   }
 
