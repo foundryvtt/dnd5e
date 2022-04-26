@@ -1038,7 +1038,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( manager.steps.length ) {
         if ( ["class", "subclass"].includes(item.type) ) {
           try {
-            const shouldRemoveAdvancements = await DeleteConfirmationDialog.createDialog(item);
+            const shouldRemoveAdvancements = await DeleteConfirmationDialog.forDelete(item);
             if ( shouldRemoveAdvancements ) return manager.render(true);
           } catch(err) {
             return;
