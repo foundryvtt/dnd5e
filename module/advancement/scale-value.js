@@ -145,7 +145,7 @@ export class ScaleValueConfig extends AdvancementConfig {
    * @param {Event} event  Change event to the title input.
    */
   _onChangeTitle(event) {
-    const slug = (event.target.value || game.i18n.localize(this.advancement.constructor.defaultTitle)).slugify();
+    const slug = (event.target.value || this.advancement.constructor.metadata.title).slugify();
     this.form.querySelector("input[name='data.configuration.identifier']").placeholder = slug;
   }
 
