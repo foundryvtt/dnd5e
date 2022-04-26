@@ -562,10 +562,10 @@ export class AdvancementManager extends Application {
 
     // Apply changes from clone to original actor
     await Promise.all([
-      this.actor.update(updates, { partOfAdvancement: true }),
-      this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, partOfAdvancement: true }),
-      this.actor.updateEmbeddedDocuments("Item", toUpdate, { partOfAdvancement: true }),
-      this.actor.deleteEmbeddedDocuments("Item", toDelete, { partOfAdvancement: true })
+      this.actor.update(updates, { isAdvancement: true }),
+      this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, isAdvancement: true }),
+      this.actor.updateEmbeddedDocuments("Item", toUpdate, { isAdvancement: true }),
+      this.actor.deleteEmbeddedDocuments("Item", toDelete, { isAdvancement: true })
     ]);
 
     /**
