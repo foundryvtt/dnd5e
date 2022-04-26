@@ -1,7 +1,7 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
+import { AdvancementConfirmationDialog } from "../../advancement/advancement-confirmation-dialog.js";
 import { AdvancementManager } from "../../advancement/advancement-manager.js";
-import { DeleteConfirmationDialog } from "../../advancement/delete-confirmation-dialog.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
@@ -1038,7 +1038,7 @@ export default class ActorSheet5e extends ActorSheet {
       if ( manager.steps.length ) {
         if ( ["class", "subclass"].includes(item.type) ) {
           try {
-            const shouldRemoveAdvancements = await DeleteConfirmationDialog.forDelete(item);
+            const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
             if ( shouldRemoveAdvancements ) return manager.render(true);
           } catch(err) {
             return;

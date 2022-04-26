@@ -1,6 +1,6 @@
 import ActorSheet5e from "./base.js";
+import { AdvancementConfirmationDialog } from "../../advancement/advancement-confirmation-dialog.js";
 import { AdvancementManager } from "../../advancement/advancement-manager.js";
-import { DeleteConfirmationDialog } from "../../advancement/delete-confirmation-dialog.js";
 
 
 /**
@@ -274,7 +274,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       if ( manager.steps.length ) {
         if ( delta > 0 ) return manager.render(true);
         try {
-          const shouldRemoveAdvancements = await DeleteConfirmationDialog.forLevelDown(classItem);
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
           if ( shouldRemoveAdvancements ) return manager.render(true);
         } catch(err) {
           return;
