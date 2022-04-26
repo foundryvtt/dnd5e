@@ -100,10 +100,17 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "indomitable",
+          "type": "number",
           "scale": {
-            "9": "1",
-            "13": "2",
-            "17": "3"
+            "9": {
+              "value": 1
+            },
+            "13": {
+              "value": 2
+            },
+            "17": {
+              "value": 3
+            }
           }
         },
         "value": {},
@@ -116,9 +123,14 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "action-surge",
+          "type": "number",
           "scale": {
-            "2": "1",
-            "17": "2"
+            "2": {
+              "value": 1
+            },
+            "17": {
+              "value": 2
+            }
           }
         },
         "value": {},
