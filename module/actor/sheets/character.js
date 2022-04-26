@@ -1,4 +1,5 @@
 import ActorSheet5e from "./base.js";
+import { AdvancementConfirmationDialog } from "../../advancement/advancement-confirmation-dialog.js";
 import { AdvancementManager } from "../../advancement/advancement-manager.js";
 
 
@@ -261,7 +262,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @returns {Promise<AdvancementManager|Item5e>}  Manager if advancements needed, otherwise updated class item.
    * @private
    */
-  _onLevelChange(event) {
+  async _onLevelChange(event) {
     event.preventDefault();
     const delta = Number(event.target.value);
     const classId = event.target.closest(".item")?.dataset.itemId;
@@ -270,7 +271,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const classItem = this.actor.items.get(classId);
     if ( classItem.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
-      if ( manager.steps.length ) return manager.render(true);
+      if ( manager.steps.length ) {
+        if ( delta > 0 ) return manager.render(true);
+        try {
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
+          if ( shouldRemoveAdvancements ) return manager.render(true);
+        } catch(err) {
+          return;
+        }
+      }
     }
     return classItem.update({"data.levels": classItem.data.data.levels + delta});
   }
