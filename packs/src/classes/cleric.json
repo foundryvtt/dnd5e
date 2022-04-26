@@ -87,10 +87,17 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "channel-divinity",
+          "type": "number",
           "scale": {
-            "2": "1",
-            "6": "2",
-            "18": "3"
+            "2": {
+              "value": 1
+            },
+            "6": {
+              "value": 2
+            },
+            "18": {
+              "value": 3
+            }
           }
         },
         "value": {},
@@ -103,16 +110,27 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "destroy-undead",
+          "type": "number",
           "scale": {
-            "5": "CR ½",
-            "8": "CR 1",
-            "11": "CR 2",
-            "14": "CR 3",
-            "17": "CR 4"
+            "5": {
+              "value": 0.5
+            },
+            "8": {
+              "value": 1
+            },
+            "11": {
+              "value": 2
+            },
+            "14": {
+              "value": 3
+            },
+            "17": {
+              "value": 4
+            }
           }
         },
         "value": {},
-        "title": "Destroy Undead",
+        "title": "Destroy Undead CR",
         "icon": "",
         "classRestriction": ""
       }

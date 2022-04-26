@@ -1352,6 +1352,12 @@
 .dnd5e.advancement.scale-value input[type="text"]::placeholder {
   opacity: 0.5;
 }
+.dnd5e.advancement.scale-value select.new-scale-value {
+  font-weight: bold;
+}
+.dnd5e.advancement.scale-value select option[value=""] {
+  color: var(--color-text-light-6);
+}
 /* ----------------------------------------- */
 /*  Advancement Flow                         */
 /* ----------------------------------------- */
