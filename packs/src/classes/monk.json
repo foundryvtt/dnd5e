@@ -220,11 +220,24 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "die",
+          "type": "dice",
           "scale": {
-            "1": "d4",
-            "5": "d6",
-            "11": "d8",
-            "17": "d10"
+            "1": {
+              "n": null,
+              "die": 4
+            },
+            "5": {
+              "n": null,
+              "die": 6
+            },
+            "11": {
+              "n": null,
+              "die": 8
+            },
+            "17": {
+              "n": null,
+              "die": 10
+            }
           }
         },
         "value": {},
@@ -237,12 +250,26 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "unarmored-movement",
+          "type": "distance",
+          "distance": {
+            "units": "ft"
+          },
           "scale": {
-            "2": "+10 ft.",
-            "6": "+15 ft.",
-            "10": "+20 ft.",
-            "14": "+25 ft.",
-            "18": "+30 ft."
+            "2": {
+              "value": 10
+            },
+            "6": {
+              "value": 15
+            },
+            "10": {
+              "value": 20
+            },
+            "14": {
+              "value": 25
+            },
+            "18": {
+              "value": 30
+            }
           }
         },
         "value": {},

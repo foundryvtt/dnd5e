@@ -82,6 +82,29 @@
         "title": "",
         "icon": "",
         "classRestriction": ""
+      },
+      {
+        "_id": "6vytnom37pkazgld",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "wild-shape",
+          "type": "number",
+          "scale": {
+            "2": {
+              "value": 0.25
+            },
+            "4": {
+              "value": 0.5
+            },
+            "8": {
+              "value": 1
+            }
+          }
+        },
+        "value": {},
+        "title": "Wild Shape CR",
+        "icon": "",
+        "classRestriction": ""
       }
     ],
     "saves": [

@@ -130,11 +130,24 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "inspiration",
+          "type": "dice",
           "scale": {
-            "1": "d6",
-            "5": "d8",
-            "10": "d10",
-            "15": "d12"
+            "1": {
+              "n": null,
+              "die": 6
+            },
+            "5": {
+              "n": null,
+              "die": 8
+            },
+            "10": {
+              "n": null,
+              "die": 10
+            },
+            "15": {
+              "n": null,
+              "die": 12
+            }
           }
         },
         "value": {},
@@ -147,11 +160,24 @@
         "type": "ScaleValue",
         "configuration": {
           "identifier": "song-of-rest",
+          "type": "dice",
           "scale": {
-            "2": "d6",
-            "9": "d8",
-            "13": "d10",
-            "17": "d12"
+            "2": {
+              "n": null,
+              "die": 6
+            },
+            "9": {
+              "n": null,
+              "die": 8
+            },
+            "13": {
+              "n": null,
+              "die": 10
+            },
+            "17": {
+              "n": null,
+              "die": 12
+            }
           }
         },
         "value": {},
