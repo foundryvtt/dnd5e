@@ -201,6 +201,22 @@
         "title": "Rage Damage",
         "icon": "",
         "classRestriction": ""
+      },
+      {
+        "_id": "y0kr48pnq5doebeb",
+        "type": "ScaleValue",
+        "configuration": {
+          "identifier": "brutal-critical",
+          "scale": {
+            "9": "1",
+            "13": "2",
+            "17": "3"
+          }
+        },
+        "value": {},
+        "title": "Brutal Critical Dice",
+        "icon": "",
+        "classRestriction": ""
       }
     ],
     "saves": [
