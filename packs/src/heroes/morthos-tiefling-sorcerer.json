@@ -1,4 +1,5 @@
 {
+  "_id": "xT2C2Itv2XambDYp",
   "name": "Morthos (Tiefling Sorcerer)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/SorcererTiefling.webp",
@@ -628,84 +629,6 @@
     }
   },
   "items": [
-    {
-      "_id": "Bxx0wU1vKktvottW",
-      "name": "Dragon Ancestor",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>At 1st level, you choose one type of dragon as your ancestor. The damage type associated with each dragon is used by features you gain later.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Dragon</strong></td>\n<td><strong>Damage Type</strong></td>\n</tr>\n<tr>\n<td>Black</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Brass</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Bronze</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Copper</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Gold</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>Poison</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Silver</td>\n<td>Cold</td>\n</tr>\n<tr>\n<td>White</td>\n<td>Cold</td>\n</tr>\n</tbody>\n</table>\n<p>You can speak, read, and write Draconic. Additionally, whenever you make a Charisma check when interacting with dragons, your proficiency bonus is doubled if it applies to the check.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 102",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": "",
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null,
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Draconic Bloodline 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 1837500,
-      "flags": {},
-      "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
     {
       "_id": "YXRnHS46shcsNZn2",
       "name": "Background: Scholar",
@@ -2684,84 +2607,6 @@
       }
     },
     {
-      "_id": "YYBeZLStzIZe92GP",
-      "name": "Draconic Resilience",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>As magic flows through your body, it causes physical traits of your dragon ancestors to emerge. At 1st level, your hit point maximum increases by 1 and increases by 1 again whenever you gain a level in this class. </p><p>Additionally, parts of your skin are covered by a thin sheen of dragon-like scales. When you aren't wearing armor, your AC equals 13 + your Dexterity modifier.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 102",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": "",
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null,
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Draconic Bloodline 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 2825000,
-      "flags": {},
-      "img": "icons/creatures/claws/claw-scaled-red.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
       "_id": "Xfag5A38nhLBUfkr",
       "name": "Hellish Resistance",
       "type": "feat",
@@ -3290,14 +3135,350 @@
           "advancementOrigin": "blu8155lcbwm8o1s.uuxthec7dohzb4wn"
         }
       }
+    },
+    {
+      "_id": "f3p50jjvtk2ao61n",
+      "name": "Draconic Bloodline",
+      "type": "subclass",
+      "img": "icons/creatures/reptiles/dragon-horned-blue.webp",
+      "data": {
+        "description": {
+          "value": "<p>Your innate magic comes from draconic magic that was mingled with your blood or that of your ancestors. Most often, sorcerers with this origin trace their descent back to a mighty sorcerer of ancient times who made a bargain with a dragon or who might even have claimed a dragon parent. Some of these bloodlines are well established in the world, but most are obscure. Any given sorcerer could be the first of a new bloodline, as a result of a pact or some other exceptional circumstance.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 102",
+        "identifier": "draconic-bloodline",
+        "classIdentifier": "sorcerer",
+        "advancement": [
+          {
+            "_id": "bjbipb2oydq3zsuy",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j",
+                "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA"
+              ]
+            },
+            "value": {
+              "added": {
+                "hb79jvadlbp5y3yf": "Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j",
+                "2imt4re4r61bps2e": "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": ""
+          },
+          {
+            "_id": "cq0cwgss39pkvjox",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.x6eEZ9GUsuOcEa3G"
+              ]
+            },
+            "value": {},
+            "level": 6,
+            "title": "Features",
+            "icon": ""
+          },
+          {
+            "_id": "rfd6o6858pl8k7fl",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.3647zjKSE9zFwOXc"
+              ]
+            },
+            "value": {},
+            "level": 14,
+            "title": "Features",
+            "icon": ""
+          },
+          {
+            "_id": "4xrl7vjblpn8zl5t",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.Gsha4bl0apxqspFy"
+              ]
+            },
+            "value": {},
+            "level": 18,
+            "title": "Features",
+            "icon": ""
+          }
+        ],
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
+        "attunement": null
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.subclasses.2nadB2MBSHTQ0kcl"
+        }
+      }
+    },
+    {
+      "_id": "hb79jvadlbp5y3yf",
+      "name": "Dragon Ancestor",
+      "type": "feat",
+      "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
+      "data": {
+        "description": {
+          "value": "<p>At 1st level, you choose one type of dragon as your ancestor. The damage type associated with each dragon is used by features you gain later.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Dragon</strong></td>\n<td><strong>Damage Type</strong></td>\n</tr>\n<tr>\n<td>Black</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Brass</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Bronze</td>\n<td>Lightning</td>\n</tr>\n<tr>\n<td>Copper</td>\n<td>Acid</td>\n</tr>\n<tr>\n<td>Gold</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>Poison</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>Fire</td>\n</tr>\n<tr>\n<td>Silver</td>\n<td>Cold</td>\n</tr>\n<tr>\n<td>White</td>\n<td>Cold</td>\n</tr>\n</tbody>\n</table>\n<p>You can speak, read, and write Draconic. Additionally, whenever you make a Charisma check when interacting with dragons, your proficiency bonus is doubled if it applies to the check.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 102",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Draconic Bloodline 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [
+        {
+          "_id": "xI5jjbA2Dlj7L0cd",
+          "changes": [
+            {
+              "key": "data.traits.languages.value",
+              "mode": 2,
+              "value": "draconic"
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
+          "label": "Dragon Ancestor",
+          "origin": "Item.EZsonMThTNLZq35j",
+          "transfer": true,
+          "flags": {},
+          "tint": null
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j",
+          "advancementOrigin": "f3p50jjvtk2ao61n.bjbipb2oydq3zsuy"
+        }
+      }
+    },
+    {
+      "_id": "2imt4re4r61bps2e",
+      "name": "Draconic Resilience",
+      "type": "feat",
+      "img": "icons/creatures/claws/claw-scaled-red.webp",
+      "data": {
+        "description": {
+          "value": "<p>As magic flows through your body, it causes physical traits of your dragon ancestors to emerge. At 1st level, your hit point maximum increases by 1 and increases by 1 again whenever you gain a level in this class.</p><p>Additionally, parts of your skin are covered by a thin sheen of dragon-like scales. When you aren't wearing armor, your AC equals 13 + your Dexterity modifier.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 102",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Draconic Bloodline 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [
+        {
+          "_id": "Pu89Tsgy2FJjYPQi",
+          "changes": [
+            {
+              "key": "data.attributes.ac.calc",
+              "mode": 5,
+              "value": "draconic"
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "icons/creatures/claws/claw-scaled-red.webp",
+          "label": "Draconic Resilience",
+          "origin": "Item.MW1ExvBLm8Hg82aA",
+          "transfer": true,
+          "flags": {},
+          "tint": null
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA",
+          "advancementOrigin": "f3p50jjvtk2ao61n.bjbipb2oydq3zsuy"
+        }
+      }
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "xI5jjbA2Dlj7L0cd",
+      "changes": [
+        {
+          "key": "data.traits.languages.value",
+          "mode": 2,
+          "value": "draconic"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "startRound": 0,
+        "startTurn": 1
+      },
+      "icon": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
+      "label": "Dragon Ancestor",
+      "origin": "Compendium.dnd5e.heroes.xT2C2Itv2XambDYp.Item.hb79jvadlbp5y3yf",
+      "tint": null,
+      "transfer": false,
+      "flags": {}
+    },
+    {
+      "_id": "Pu89Tsgy2FJjYPQi",
+      "changes": [
+        {
+          "key": "data.attributes.ac.calc",
+          "mode": 5,
+          "value": "draconic"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "startRound": 0,
+        "startTurn": 1
+      },
+      "icon": "icons/creatures/claws/claw-scaled-red.webp",
+      "label": "Draconic Resilience",
+      "origin": "Compendium.dnd5e.heroes.xT2C2Itv2XambDYp.Item.2imt4re4r61bps2e",
+      "tint": null,
+      "transfer": false,
+      "flags": {}
+    }
+  ],
   "folder": null,
   "sort": 0,
   "permission": {
     "default": 0
   },
-  "flags": {},
-  "_id": "xT2C2Itv2XambDYp"
+  "flags": {}
 }

@@ -1,4 +1,5 @@
 {
+  "_id": "kfzBL0q1Y7LgGs2x",
   "name": "Akra (Dragonborn Cleric)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp",
@@ -636,105 +637,6 @@
     }
   },
   "items": [
-    {
-      "_id": "iyeUGBbSts0ij92X",
-      "name": "Disciple of Life",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>Also starting at 1st level, your healing spells are more effective.</p><p>Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell's level.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": null,
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": "",
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null,
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": null,
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Life Domain 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "featType": {
-          "value": "passive",
-          "_deprecated": true,
-          "type": "String",
-          "label": "Feat Type"
-        },
-        "time": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damageType": {
-          "value": "",
-          "_deprecated": true
-        },
-        "attributes": {
-          "spelldc": 10
-        },
-        "attunement": 0
-      },
-      "sort": 300000,
-      "flags": {
-        "entityorder": {
-          "order": 130
-        }
-      },
-      "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
     {
       "_id": "Ie7NoXMja9wI6xya",
       "name": "Background: Priest",
@@ -4684,14 +4586,320 @@
           "advancementOrigin": "nol9m3zejhgkpted.x1zumbrnbhqlrrs6"
         }
       }
+    },
+    {
+      "_id": "6srkb2hvbgbrjzi3",
+      "name": "Life Domain",
+      "type": "subclass",
+      "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
+      "data": {
+        "description": {
+          "value": "<p>The Life domain focuses on the vibrant positive energy—one of the fundamental forces of the universe—that sustains all life. The gods of life promote vitality and health through healing the sick and wounded, caring for those in need, and driving away the forces of death and undeath. Almost any non-­evil deity can claim influence over this domain, particularly agricultural deities (such as Chauntea, Arawai, and Demeter), sun gods (such as Lathander, Pelor, and Re-­Horakhty), gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of home and community (such as Hestia, Hathor, and Boldrei).</p>\n<h2>Life Domain Spells</h2>\n<table border=\"1\">\n<thead>\n<tr>\n<td>Cleric Level</td>\n<td>Spells</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>@Compendium[dnd5e.spells.8dzaICjGy6mTUaUr]{Bless}, @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>@Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}, @Compendium[dnd5e.spells.JbxsYXxSOTZbf9I0]{Spiritual Weapon}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>@Compendium[dnd5e.spells.ZU9d6woBdUP8pIPt]{Beacon of Hope}, @Compendium[dnd5e.spells.LmRHHMtplpxr9fX6]{Revivify}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>@Compendium[dnd5e.spells.VtCXMdyM6mAdIJZb]{Death Ward}, @Compendium[dnd5e.spells.TgHsuhNasPbhu8MO]{Guardian of Faith}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>@Compendium[dnd5e.spells.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds}, @Compendium[dnd5e.spells.AGFMPAmuzwWO6Dfz]{Raise Dead}</td>\n</tr>\n</tbody>\n</table>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 60",
+        "identifier": "life-domain",
+        "classIdentifier": "cleric",
+        "advancement": [
+          {
+            "_id": "9fyr5t01nhdg0u8n",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
+                "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR"
+              ]
+            },
+            "value": {
+              "added": {
+                "ltip3ihxod0ml7jf": "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
+                "ghn7abrr8g8hvspi": "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": ""
+          },
+          {
+            "_id": "4qh4ejxpwugva6ma",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL"
+              ]
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": ""
+          },
+          {
+            "_id": "ihquu4r80mxr07qt",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs"
+              ]
+            },
+            "value": {},
+            "level": 6,
+            "title": "Features",
+            "icon": ""
+          },
+          {
+            "_id": "ayh4gqp9vxjo9yd3",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE"
+              ]
+            },
+            "value": {},
+            "level": 8,
+            "title": "Features",
+            "icon": ""
+          },
+          {
+            "_id": "m4m8xp6cabt71mdq",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash"
+              ]
+            },
+            "value": {},
+            "level": 17,
+            "title": "Features",
+            "icon": ""
+          }
+        ],
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
+        "attunement": null
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.subclasses.H3RYLGqCiqm8BP3q"
+        }
+      }
+    },
+    {
+      "_id": "ltip3ihxod0ml7jf",
+      "name": "Bonus Proficiency (Life Domain)",
+      "type": "feat",
+      "img": "icons/equipment/chest/breastplate-layered-steel.webp",
+      "data": {
+        "description": {
+          "value": "<p>When you choose this domain at 1st level, you gain proficiency with heavy armor.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Life Domain 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [
+        {
+          "_id": "Dk95lqbXXCUlefZW",
+          "changes": [
+            {
+              "key": "data.traits.armorProf.value",
+              "mode": 2,
+              "value": "hvy"
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "icons/equipment/chest/breastplate-layered-steel.webp",
+          "label": "Heavy Armor Proficiency",
+          "origin": "Item.68bYIOvx6rIqnlOW",
+          "transfer": true,
+          "flags": {},
+          "tint": null
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW",
+          "advancementOrigin": "6srkb2hvbgbrjzi3.9fyr5t01nhdg0u8n"
+        }
+      }
+    },
+    {
+      "_id": "ghn7abrr8g8hvspi",
+      "name": "Disciple of Life",
+      "type": "feat",
+      "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
+      "data": {
+        "description": {
+          "value": "<p>Starting at 1st level, your healing spells are more effective.</p><p>Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell's level.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 60",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Life Domain 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR",
+          "advancementOrigin": "6srkb2hvbgbrjzi3.9fyr5t01nhdg0u8n"
+        }
+      }
     }
   ],
-  "effects": [],
+  "effects": [
+    {
+      "_id": "Dk95lqbXXCUlefZW",
+      "changes": [
+        {
+          "key": "data.traits.armorProf.value",
+          "mode": 2,
+          "value": "hvy"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "startRound": 0,
+        "startTurn": 1
+      },
+      "icon": "icons/equipment/chest/breastplate-layered-steel.webp",
+      "label": "Heavy Armor Proficiency",
+      "origin": "Compendium.dnd5e.heroes.kfzBL0q1Y7LgGs2x.Item.ltip3ihxod0ml7jf",
+      "tint": null,
+      "transfer": false,
+      "flags": {}
+    }
+  ],
   "folder": null,
   "sort": 0,
   "permission": {
     "default": 0
   },
-  "flags": {},
-  "_id": "kfzBL0q1Y7LgGs2x"
+  "flags": {}
 }
