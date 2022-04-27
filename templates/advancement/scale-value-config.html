@@ -44,7 +44,7 @@
           {{else}}
             <input name="data.configuration.scale.{{level}}.value" type="text" value="{{data.value.value}}"
                    data-level="{{level}}" placeholder="{{data.placeholder.value}}"
-                   {{#if (eq @root.isNumeric)}}data-dtype="Number"{{/if}}>
+                   {{#if @root.isNumeric}}data-dtype="Number"{{/if}}>
           {{/if}}
         </div>
       </div>
