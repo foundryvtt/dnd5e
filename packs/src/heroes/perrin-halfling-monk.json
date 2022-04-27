@@ -1,5 +1,4 @@
 {
-  "_id": "9ICdqUHFaeTzuIr8",
   "name": "Perrin (Halfling Monk)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/MonkStaff.webp",
@@ -8,6 +7,10 @@
       "str": {
         "value": 8,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": -1,
         "save": 1,
         "prof": 2,
@@ -18,6 +21,10 @@
       "dex": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 3,
         "save": 5,
         "prof": 2,
@@ -28,6 +35,10 @@
       "con": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 1,
         "prof": 0,
@@ -38,6 +49,10 @@
       "int": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 1,
         "prof": 0,
@@ -48,6 +63,10 @@
       "wis": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 2,
         "prof": 0,
@@ -58,6 +77,10 @@
       "cha": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 0,
         "save": 0,
         "prof": 0,
@@ -96,6 +119,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 0,
         "blindsight": 0,
@@ -129,7 +155,7 @@
       "alignment": "True Neutral",
       "race": "Lightfoot Halfling",
       "background": "Priest",
-      "originalClass": "",
+      "originalClass": "nkdcq1w0tirh8oq1",
       "xp": {
         "value": 0,
         "min": 0,
@@ -204,6 +230,10 @@
       "acr": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 15,
@@ -213,6 +243,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -222,6 +256,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -231,6 +269,10 @@
       "ath": {
         "value": 1,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 11,
@@ -240,6 +282,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -249,6 +295,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -258,6 +308,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 14,
@@ -267,6 +321,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -276,6 +334,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -285,6 +347,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -294,6 +360,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -303,6 +373,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -312,6 +386,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -321,6 +399,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -330,6 +412,10 @@
       "rel": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 13,
@@ -339,6 +425,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -348,6 +438,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -357,6 +451,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -509,217 +607,30 @@
       "attribute": "attributes.ac.value"
     },
     "randomImg": false,
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
-    {
-      "_id": "VRfLlwRpZfniHSka",
-      "name": "Monk",
-      "type": "class",
-      "data": {
-        "description": {
-          "value": "<p>As a monk, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per monk level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per monk level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> None<br /><strong>Weapons:</strong> Simple weapons, shortswords<br /><strong>Tools:</strong> Choose one type of artisan's tools or one musical instrument<br /><strong>Saving Throws:</strong> Strength, Dexterity<br /><strong>Skills:</strong> Choose two from Acrobatics, Athletics, History, Insight, Religion, and Stealth</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a shortsword or (b) any simple weapon</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n<li>10 darts</li>\n</ul>\n<h1>Monk Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Martial Arts</td>\n<td>Ki Points</td>\n<td>Unarmored Movement</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>1d4</td>\n<td>—</td>\n<td>—</td>\n<td>@Compendium[dnd5e.classfeatures.UAvV7N7T4zJhxdfI]{Unarmored Defense}, @Compendium[dnd5e.classfeatures.l50hjTxO2r0iecKw]{Martial Arts}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>1d4</td>\n<td>2</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.10b6z2W1txNkrGP7]{Ki}, @Compendium[dnd5e.classfeatures.7vSrGc0MP5Vzm9Ac]{Unarmored Movement}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>1d4</td>\n<td>3</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.rtpQdX77dYWbDIOH]{Monastic Tradition}, @Compendium[dnd5e.classfeatures.mzweVbnsJPQiVkAe]{Deflect Missiles}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>1d4</td>\n<td>4</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, @Compendium[dnd5e.classfeatures.KQz9bqxVkXjDl8gK]{Slow Fall}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>5</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.pvRc6GAu1ok6zihC]{Stunning Strike}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>6</td>\n<td>+15 ft.</td>\n<td>\n<p>@Compendium[dnd5e.classfeatures.7flZKruSSu6dHg6D]{Ki-Empowered Strikes},</p>\n<p>Monastic Tradition feature</p>\n</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>7</td>\n<td>+15 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.a4P4DNMmH8CqSNkC]{Evasion}, @Compendium[dnd5e.classfeatures.ZmC31XKS4YNENnoc]{Stillness of Mind}</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>8</td>\n<td>+15 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>1d6</td>\n<td>9</td>\n<td>+15 ft.</td>\n<td>Unarmored Movement improvement</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>1d6</td>\n<td>10</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.bqWA7t9pDELbNRkp]{Purity of Body}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>1d8</td>\n<td>11</td>\n<td>+20 ft.</td>\n<td>Monastic Tradition feature</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>1d8</td>\n<td>12</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>13</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.XjuGBeB8Y0C3A5D4]{Tongue of the Sun and Moon}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>14</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.7D2EkLdISwShEDlN]{Diamond Soul}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>15</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.gDH8PMrKvLHaNmEI]{Timeless Body}</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>16</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>17</td>\n<td>+25 ft.</td>\n<td>Monastic Tradition feature</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>18</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.3jwFt3hSqDswBlOH]{Empty Body}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>19</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>20</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.mQNPg89YIs7g5tG4]{Perfect Self}</td>\n</tr>\n</tbody>\n</table>\n<h1>Monastic Traditions</h1>\n<p>Three traditions of monastic pursuit are common in the monasteries scattered across the multiverse. Most monasteries practice one tradition exclusively, but a few honor the three traditions and instruct each monk according to his or her aptitude and interest. All three traditions rely on the same basic techniques, diverging as the student grows more adept. Thus, a monk need choose a tradition only upon reaching 3rd level.</p>\n<h2>Way of the Open Hand</h2>\n<p>Monks of the Way of the Open Hand are the ultimate masters of martial arts combat, whether armed or unarmed. They learn techniques to push and trip their opponents, manipulate ki to heal damage to their bodies, and practice advanced meditation that can protect them from harm.</p>\n<h3>Way of the Open Hand Features</h3>\n<p>3rd Level: @Compendium[dnd5e.classfeatures.iQxLNydNLlCHNKbp]{Open Hand Technique}</p>\n<p>6th Level: @Compendium[dnd5e.classfeatures.Q7mOdk4b1lgjcptF]{Wholeness of Body}</p>\n<p>11th Level: @Compendium[dnd5e.classfeatures.rBDZLatuoolT2FUW]{Tranquility}</p>\n<p>17th Level: @Compendium[dnd5e.classfeatures.h1gM8SH3BNRtFevE]{Quivering Palm}</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "levels": 1,
-        "subclass": "",
-        "hitDice": "d8",
-        "hitDiceUsed": 0,
-        "saves": [
-          "str",
-          "dex"
-        ],
-        "skills": {
-          "number": 2,
-          "choices": [
-            "acr",
-            "ath",
-            "his",
-            "ins",
-            "rel",
-            "ste"
-          ],
-          "value": []
-        },
-        "spellcasting": {
-          "progression": "none",
-          "ability": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "attunement": 0
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.classes.6VoZrWxhOEKGYhnq"
-        }
-      },
-      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "6qLW8jyjlflW0aMJ",
-      "name": "Unarmored Defense (Monk)",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>Beginning at 1st Level, while you are wearing no armor and not wielding a Shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 78",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": "",
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null,
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Monk 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 4500000,
-      "flags": {},
-      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "VoUsoKV2AjJqbQsL",
-      "name": "Martial Arts",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>At 1st level, your practice of martial arts gives you mastery of combat styles that use and monk weapons, which are shortswords and any simple melee weapons that don't have the two-handed or heavy property. You gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a shield:</p>\n<ul>\n<li>\n<p>You can use Dexterity instead of Strength for the attack and damage rolls of your unarmed strikes and monk weapons.</p>\n</li>\n<li>\n<p>You can roll a d4 in place of the normal damage of your unarmed strike or monk weapon. This die changes as you gain monk levels, as shown in the Martial Arts column of the Monk table.</p>\n</li>\n<li>\n<p>When you use the Attack action with an unarmed strike or a monk weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, assuming you haven't already taken a bonus action this turn.</p>\n</li>\n</ul>\n<p>Certain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 78",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": 5,
-          "width": null,
-          "units": "ft",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": "",
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "dex",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Monk 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 4600000,
-      "flags": {},
-      "img": "icons/skills/melee/unarmed-punch-fist.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
     {
       "_id": "iTaTqbag5cbbIV89",
       "name": "Background: Priest",
@@ -895,6 +806,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "lgt": true,
@@ -1004,6 +916,7 @@
           "conditions": ""
         },
         "weaponType": "simpleR",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "thr": true,
@@ -1188,6 +1101,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1283,6 +1197,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1378,6 +1293,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -1702,131 +1618,6 @@
       "sort": 4300000,
       "flags": {},
       "img": "icons/commodities/wood/bamboo-brown.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "dzXbdZiOtwvswSBp",
-      "name": "Unarmed Strike (Monk)",
-      "type": "weapon",
-      "data": {
-        "description": {
-          "value": "<p>At 1st level, your practice of martial arts gives you mastery of combat styles that use unarmed strikes.</p><p>You gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a shield:</p><p>• You can use Dexterity instead of Strength for the attack and damage rolls of your unarmed strikes</p><p>• You can roll a d4 in place of the normal damage of your unarmed strike. This die changes as you gain monk levels, as shown in the Martial Arts column in the table below.</p><p>• When you use the Attack action with an unarmed strike on your turn, you can make one unarmed strike as a bonus action, assuming you haven't already taken a bonus action this turn.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Monk Level</strong></td>\n<td><strong>Martial Arts</strong></td>\n</tr>\n<tr>\n<td>1st - 4th</td>\n<td>1d4</td>\n</tr>\n<tr>\n<td>5th - 10th</td>\n<td>1d6</td>\n</tr>\n<tr>\n<td>11th - 16th</td>\n<td>1d8</td>\n</tr>\n<tr>\n<td>17th - 20th</td>\n<td>1d10</td>\n</tr>\n</tbody>\n</table>\n<p><em>**Foundry note: Note the damage die is set to the base default of 1d4. Please manually adjust as required.</em></p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 77-78",
-        "quantity": 1,
-        "weight": 0,
-        "price": 0,
-        "attunement": 0,
-        "equipped": true,
-        "rarity": "Uncommon",
-        "identified": true,
-        "activation": {
-          "type": "action",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": 5,
-          "long": null,
-          "units": "ft"
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": ""
-        },
-        "consume": {
-          "type": "",
-          "target": "",
-          "amount": null
-        },
-        "ability": "dex",
-        "actionType": "mwak",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [
-            [
-              "1d4 + @mod",
-              "bludgeoning"
-            ]
-          ],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "armor": {
-          "value": 10
-        },
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "dt": null,
-          "conditions": ""
-        },
-        "weaponType": "simpleM",
-        "properties": {
-          "amm": false,
-          "hvy": false,
-          "fin": true,
-          "fir": false,
-          "foc": false,
-          "lgt": false,
-          "lod": false,
-          "rch": false,
-          "rel": false,
-          "ret": false,
-          "spc": false,
-          "thr": false,
-          "two": false,
-          "ver": false
-        },
-        "proficient": true,
-        "attuned": false,
-        "bonus": {
-          "value": 0,
-          "_deprecated": true
-        },
-        "damageType": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damage2": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damage2Type": {
-          "value": "",
-          "_deprecated": true
-        }
-      },
-      "sort": 900001,
-      "flags": {},
-      "img": "icons/skills/melee/unarmed-punch-fist-blue.webp",
       "effects": [],
       "folder": null,
       "permission": {
@@ -2679,11 +2470,653 @@
       "permission": {
         "default": 0
       }
+    },
+    {
+      "_id": "nkdcq1w0tirh8oq1",
+      "name": "Monk",
+      "type": "class",
+      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "data": {
+        "description": {
+          "value": "<p>As a monk, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per monk level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per monk level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> None<br /><strong>Weapons:</strong> Simple weapons, shortswords<br /><strong>Tools:</strong> Choose one type of artisan's tools or one musical instrument<br /><strong>Saving Throws:</strong> Strength, Dexterity<br /><strong>Skills:</strong> Choose two from Acrobatics, Athletics, History, Insight, Religion, and Stealth</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a shortsword or (b) any simple weapon</li>\n<li>(a) a dungeoneer's pack or (b) an explorer's pack</li>\n<li>10 darts</li>\n</ul>\n<h1>Monk Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Martial Arts</td>\n<td>Ki Points</td>\n<td>Unarmored Movement</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>1d4</td>\n<td>—</td>\n<td>—</td>\n<td>@Compendium[dnd5e.classfeatures.UAvV7N7T4zJhxdfI]{Unarmored Defense}, @Compendium[dnd5e.classfeatures.l50hjTxO2r0iecKw]{Martial Arts}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>1d4</td>\n<td>2</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.10b6z2W1txNkrGP7]{Ki}, @Compendium[dnd5e.classfeatures.7vSrGc0MP5Vzm9Ac]{Unarmored Movement}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>1d4</td>\n<td>3</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.rtpQdX77dYWbDIOH]{Monastic Tradition}, @Compendium[dnd5e.classfeatures.mzweVbnsJPQiVkAe]{Deflect Missiles}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>1d4</td>\n<td>4</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}, @Compendium[dnd5e.classfeatures.KQz9bqxVkXjDl8gK]{Slow Fall}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>5</td>\n<td>+10 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.pvRc6GAu1ok6zihC]{Stunning Strike}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>6</td>\n<td>+15 ft.</td>\n<td>\n<p>@Compendium[dnd5e.classfeatures.7flZKruSSu6dHg6D]{Ki-Empowered Strikes},</p>\n<p>Monastic Tradition feature</p>\n</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>7</td>\n<td>+15 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.a4P4DNMmH8CqSNkC]{Evasion}, @Compendium[dnd5e.classfeatures.ZmC31XKS4YNENnoc]{Stillness of Mind}</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>1d6</td>\n<td>8</td>\n<td>+15 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>1d6</td>\n<td>9</td>\n<td>+15 ft.</td>\n<td>Unarmored Movement improvement</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>1d6</td>\n<td>10</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.bqWA7t9pDELbNRkp]{Purity of Body}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>1d8</td>\n<td>11</td>\n<td>+20 ft.</td>\n<td>Monastic Tradition feature</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>1d8</td>\n<td>12</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>13</td>\n<td>+20 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.XjuGBeB8Y0C3A5D4]{Tongue of the Sun and Moon}</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>14</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.7D2EkLdISwShEDlN]{Diamond Soul}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>15</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.gDH8PMrKvLHaNmEI]{Timeless Body}</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>1d8</td>\n<td>16</td>\n<td>+25 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>17</td>\n<td>+25 ft.</td>\n<td>Monastic Tradition feature</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>18</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.3jwFt3hSqDswBlOH]{Empty Body}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>19</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>1d10</td>\n<td>20</td>\n<td>+30 ft.</td>\n<td>@Compendium[dnd5e.classfeatures.mQNPg89YIs7g5tG4]{Perfect Self}</td>\n</tr>\n</tbody>\n</table>\n<h1>Monastic Traditions</h1>\n<p>Three traditions of monastic pursuit are common in the monasteries scattered across the multiverse. Most monasteries practice one tradition exclusively, but a few honor the three traditions and instruct each monk according to his or her aptitude and interest. All three traditions rely on the same basic techniques, diverging as the student grows more adept. Thus, a monk need choose a tradition only upon reaching 3rd level.</p>\n<p>@Compendium[dnd5e.subclasses.IvlpKMXX3PmW1NY2]{Way of the Open Hand}</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "identifier": "monk",
+        "levels": 1,
+        "hitDice": "d8",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "_id": "lyabhwu4tbop4wh7",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI",
+                "Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw",
+                "Compendium.dnd5e.classfeatures.eGxoNmSMWKNzChCO"
+              ]
+            },
+            "value": {
+              "added": {
+                "1uoxnd96wfene89v": "Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI",
+                "u0xyqtglymya4tgv": "Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw",
+                "vgs7m7ktru46706k": "Compendium.dnd5e.classfeatures.eGxoNmSMWKNzChCO"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "0jhxxq8sokrn2uoy",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.10b6z2W1txNkrGP7",
+                "Compendium.dnd5e.classfeatures.5MwNlVZK7m6VolOH",
+                "Compendium.dnd5e.classfeatures.TDglPcxIVEzvVSgK",
+                "Compendium.dnd5e.classfeatures.yrSFIGTaQOH2PFRI",
+                "Compendium.dnd5e.classfeatures.zCeqyQ8uIPNdYJSW"
+              ]
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "lgtwzb9nxqdj4uud",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.rtpQdX77dYWbDIOH",
+                "Compendium.dnd5e.classfeatures.mzweVbnsJPQiVkAe"
+              ]
+            },
+            "value": {},
+            "level": 3,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "fgex8ruk2bbusv6y",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.KQz9bqxVkXjDl8gK"
+              ]
+            },
+            "value": {},
+            "level": 4,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "99fb6zom437e552i",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
+                "Compendium.dnd5e.classfeatures.pvRc6GAu1ok6zihC"
+              ]
+            },
+            "value": {},
+            "level": 5,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "qohloyrkiyvd1od4",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.7flZKruSSu6dHg6D"
+              ]
+            },
+            "value": {},
+            "level": 6,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "kjmk4d5ipbhn7exj",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.a4P4DNMmH8CqSNkC",
+                "Compendium.dnd5e.classfeatures.ZmC31XKS4YNENnoc"
+              ]
+            },
+            "value": {},
+            "level": 7,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "2hpxkrrfgbdk7vpe",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.bqWA7t9pDELbNRkp"
+              ]
+            },
+            "value": {},
+            "level": 10,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "o31qfhyatmdgndfz",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.XjuGBeB8Y0C3A5D4"
+              ]
+            },
+            "value": {},
+            "level": 13,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "j1j6j76lll66biji",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.7D2EkLdISwShEDlN"
+              ]
+            },
+            "value": {},
+            "level": 14,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "9r7q5vetyek8sm9y",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.gDH8PMrKvLHaNmEI"
+              ]
+            },
+            "value": {},
+            "level": 15,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "ceq3wlkr6txik3az",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.3jwFt3hSqDswBlOH"
+              ]
+            },
+            "value": {},
+            "level": 18,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "yewie41jrdc452qp",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.mQNPg89YIs7g5tG4"
+              ]
+            },
+            "value": {},
+            "level": 20,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "81ogni84p49yv859",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "zmu0w24zpmg5hahq",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "die",
+              "type": "dice",
+              "scale": {
+                "1": {
+                  "n": null,
+                  "die": 4
+                },
+                "5": {
+                  "n": null,
+                  "die": 6
+                },
+                "11": {
+                  "n": null,
+                  "die": 8
+                },
+                "17": {
+                  "n": null,
+                  "die": 10
+                }
+              }
+            },
+            "value": {},
+            "title": "Martial Arts Die",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "ng597k2bjuwpfys8",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "unarmored-movement",
+              "type": "distance",
+              "distance": {
+                "units": "ft"
+              },
+              "scale": {
+                "2": {
+                  "value": 10
+                },
+                "6": {
+                  "value": 15
+                },
+                "10": {
+                  "value": 20
+                },
+                "14": {
+                  "value": 25
+                },
+                "18": {
+                  "value": 30
+                }
+              }
+            },
+            "value": {},
+            "title": "Unarmored Movement",
+            "icon": "",
+            "classRestriction": ""
+          }
+        ],
+        "saves": [
+          "str",
+          "dex"
+        ],
+        "skills": {
+          "number": 2,
+          "choices": [
+            "acr",
+            "ath",
+            "his",
+            "ins",
+            "rel",
+            "ste"
+          ],
+          "value": []
+        },
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "attunement": null
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.6VoZrWxhOEKGYhnq"
+        }
+      }
+    },
+    {
+      "_id": "1uoxnd96wfene89v",
+      "name": "Unarmored Defense (Monk)",
+      "type": "feat",
+      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "data": {
+        "description": {
+          "value": "<p>Beginning at 1st Level, while you are wearing no armor and not wielding a Shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 78",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": "",
+          "units": ""
+        },
+        "target": {
+          "value": "",
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": "",
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Monk 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [
+        {
+          "_id": "R5ro4AuNjcdWD56O",
+          "changes": [
+            {
+              "key": "data.attributes.ac.calc",
+              "mode": 5,
+              "value": "unarmoredMonk"
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+          "label": "Unarmored Defense",
+          "origin": "Item.cOdcNWy4hII029DT",
+          "transfer": true,
+          "flags": {},
+          "tint": null
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI",
+          "advancementOrigin": "nkdcq1w0tirh8oq1.lyabhwu4tbop4wh7"
+        }
+      }
+    },
+    {
+      "_id": "u0xyqtglymya4tgv",
+      "name": "Martial Arts",
+      "type": "feat",
+      "img": "icons/skills/melee/unarmed-punch-fist.webp",
+      "data": {
+        "description": {
+          "value": "<p>At 1st level, your practice of martial arts gives you mastery of combat styles that use and monk weapons, which are shortswords and any simple melee weapons that don't have the two-handed or heavy property. You gain the following benefits while you are unarmed or wielding only monk weapons and you aren't wearing armor or wielding a shield:</p>\n<ul>\n<li>\n<p>You can use Dexterity instead of Strength for the attack and damage rolls of your unarmed strikes and monk weapons.</p>\n</li>\n<li>\n<p>You can roll a d4 in place of the normal damage of your unarmed strike or monk weapon. This die changes as you gain monk levels, as shown in the Martial Arts column of the Monk table.</p>\n</li>\n<li>\n<p>When you use the Attack action with an unarmed strike or a monk weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, assuming you haven't already taken a bonus action this turn.</p>\n</li>\n</ul>\n<p>Certain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 78",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": 5,
+          "width": null,
+          "units": "ft",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "dex",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Monk 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw",
+          "advancementOrigin": "nkdcq1w0tirh8oq1.lyabhwu4tbop4wh7"
+        }
+      }
+    },
+    {
+      "_id": "vgs7m7ktru46706k",
+      "name": "Unarmed Strike (Monk)",
+      "type": "weapon",
+      "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
+      "data": {
+        "description": {
+          "value": "",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "quantity": 1,
+        "weight": 0,
+        "price": 0,
+        "attunement": 0,
+        "equipped": true,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+          "type": "",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": ""
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "mwak",
+        "attackBonus": "0",
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [
+            [
+              "1@scale.monk.die + @mod",
+              "bludgeoning"
+            ]
+          ],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "weaponType": "natural",
+        "baseItem": "",
+        "properties": {
+          "ada": false,
+          "amm": false,
+          "fin": true,
+          "fir": false,
+          "foc": false,
+          "hvy": false,
+          "lgt": false,
+          "lod": false,
+          "mgc": false,
+          "rch": false,
+          "rel": false,
+          "ret": false,
+          "sil": false,
+          "spc": false,
+          "thr": false,
+          "two": false,
+          "ver": false
+        },
+        "proficient": true
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.eGxoNmSMWKNzChCO",
+          "advancementOrigin": "nkdcq1w0tirh8oq1.lyabhwu4tbop4wh7"
+        }
+      }
     }
   ],
-  "effects": [],
-  "folder": "pK61u9wafV1nLfmS",
-  "sort": 198438,
+  "effects": [
+    {
+      "_id": "R5ro4AuNjcdWD56O",
+      "changes": [
+        {
+          "key": "data.attributes.ac.calc",
+          "mode": 5,
+          "value": "unarmoredMonk"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0
+      },
+      "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "label": "Unarmored Defense",
+      "origin": "Actor.NrhB8Eq0pB4AoWbY.Item.1uoxnd96wfene89v",
+      "tint": null,
+      "transfer": false,
+      "flags": {}
+    }
+  ],
+  "folder": null,
+  "sort": 0,
   "permission": {
     "default": 0
   },
@@ -2691,5 +3124,6 @@
     "dnd5e": {
       "halflingLucky": true
     }
-  }
+  },
+  "_id": "125qFnXvT9z0iOic"
 }

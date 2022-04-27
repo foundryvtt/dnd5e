@@ -8,6 +8,10 @@
       "str": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -41,6 +53,10 @@
       "int": {
         "value": 20,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 5,
         "save": 9,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 15,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 6,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -178,6 +205,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -187,6 +218,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -196,6 +231,10 @@
       "arc": {
         "value": 2,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 5,
         "passive": 23,
@@ -205,6 +244,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -214,6 +257,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -223,6 +270,10 @@
       "his": {
         "value": 2,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 5,
         "passive": 23,
@@ -232,6 +283,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -241,6 +296,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -250,6 +309,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 5,
         "passive": 15,
@@ -259,6 +322,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -268,6 +335,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 5,
         "passive": 15,
@@ -277,6 +348,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -286,6 +361,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -295,6 +374,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -304,6 +387,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 5,
         "passive": 15,
@@ -313,6 +400,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -322,6 +413,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -331,6 +426,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -472,7 +571,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "B7lBOr1AahNZs4a6",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -636,7 +756,7 @@
       "img": "systems/dnd5e/icons/spells/fireball-red-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 <em>fire damage</em>. A flammable object hit by this spell ignites if it isn't being worn or carried.</p>\n<p>This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).</p>",
+          "value": "<p>You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.</p><p>This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -668,7 +788,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -727,7 +847,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.EOmsUcFQJTfG2oio"
+        }
+      }
     },
     {
       "_id": "nXCPUmc30JcTIawZ",
@@ -822,7 +946,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      }
     },
     {
       "_id": "g80EdYzWB7lToiWJ",
@@ -831,7 +959,7 @@
       "img": "icons/magic/water/water-hand.webp",
       "data": {
         "description": {
-          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p>\n<p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p>\n<p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
+          "value": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -918,7 +1046,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        }
+      }
     },
     {
       "_id": "tJI3qIZnHkzxxY3g",
@@ -927,7 +1059,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
       "data": {
         "description": {
-          "value": "<p>This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p>\n<ul>\n<li>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</li>\n<li>You instantaneously light or snuff out a candle, a torch, or a small campfire.</li>\n<li>You instantaneously clean or soil an object no larger than 1 cubic foot.</li>\n<li>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</li>\n<li>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</li>\n<li>You create a non-magical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
+          "value": "<p>This spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p>\n<ul>\n<li>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</li>\n<li>You instantaneously light or snuff out a candle, a torch, or a small campfire.</li>\n<li>You instantaneously clean or soil an object no larger than 1 cubic foot.</li>\n<li>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</li>\n<li>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</li>\n<li>You create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1014,7 +1146,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.udsLtG0BugXHR2JQ"
+        }
+      }
     },
     {
       "_id": "KDOdp9EN4ibQJxSs",
@@ -1023,7 +1159,7 @@
       "img": "systems/dnd5e/icons/spells/lightning-blue-1.jpg",
       "data": {
         "description": {
-          "value": "<p>Lightning springs from your hand to deliver a shock to a creature you try to touch. Make a melee spell attack against the target. You have advantage on the attack roll if the target is wearing armor made of metal. On a hit, the target takes 1d8 <em>lightning damage</em>, and it can't take reactions until the start of its next turn.</p>\n<p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "value": "<p>Lightning springs from your hand to deliver a shock to a creature you try to touch. Make a melee spell attack against the target. You have advantage on the attack roll if the target is wearing armor made of metal. On a hit, the target takes 1d8 lightning damage, and it can't take reactions until the start of its next turn.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1114,7 +1250,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.XvbiNhNqXXIFisIy"
+        }
+      }
     },
     {
       "_id": "VOR462tHlkC4LLRI",
@@ -1210,7 +1350,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "a7BHSOHkqsz5Tdx8",
@@ -1306,7 +1450,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.3OZnNhunvRtPOQmH"
+        }
+      }
     },
     {
       "_id": "oUzi30RNMpsJikkQ",
@@ -1347,7 +1495,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1396,13 +1544,37 @@
         },
         "attunement": 0
       },
-      "effects": [],
+      "effects": [
+        {
+          "_id": "cfwMU7LuOJ619Lny",
+          "changes": [
+            {
+              "key": "data.attributes.ac.calc",
+              "value": "mage",
+              "mode": 5
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
+          "label": "Mage Armor",
+          "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
+          "transfer": true,
+          "flags": {}
+        }
+      ],
       "folder": null,
       "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H"
+        }
+      }
     },
     {
       "_id": "xEgoTqszEKcynu21",
@@ -1411,7 +1583,7 @@
       "img": "systems/dnd5e/icons/spells/fire-arrows-magenta-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 +<strong> 1 <em>force damage</em> </strong>to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
+          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1502,7 +1674,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+        }
+      }
     },
     {
       "_id": "EQFMidKf7ieiCyTD",
@@ -1511,7 +1687,7 @@
       "img": "systems/dnd5e/icons/spells/light-eerie-2.jpg",
       "data": {
         "description": {
-          "value": "<p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an Intelligence of 3 or lower or doesn't speak any language, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature—what is most on its mind in that moment. As an action, you can either shift your attention to another creature's thoughts or attempt to probe deeper into the same creature's mind. If you probe deeper, the target must make a <strong>Wisdom</strong> saving throw. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature's thoughts, the creature can use its action on its turn to make an Intelligence check contested by your Intelligence check; if it succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can't see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can't detect a creature with an Intelligence of 3 or lower or one that doesn't speak any language.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can't see it, but it must still be within range.</p>",
+          "value": "<p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an Intelligence of 3 or lower or doesn't speak any language, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature—what is most on its mind in that moment. As an action, you can either shift your attention to another creature's thoughts or attempt to probe deeper into the same creature's mind. If you probe deeper, the target must make a Wisdom saving throw. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature's thoughts, the creature can use its action on its turn to make an Intelligence check contested by your Intelligence check; if it succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can't see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can't detect a creature with an Intelligence of 3 or lower or one that doesn't speak any language.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can't see it, but it must still be within range.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1597,7 +1773,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ppWAAEul0QHtm4er"
+        }
+      }
     },
     {
       "_id": "Pt0vjftn8ucxOWOX",
@@ -1606,7 +1786,7 @@
       "img": "systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Three illusionary duplicates of yourself appear in your space. Until the end of the spell, duplicates move with you and imitate your actions, swapping their position so that it is impossible to determine which image is real. You can use your action to dispel the illusory duplicates.</p>\n<p>Whenever a creature is targeting you with an attack during the duration of the spell, roll 1d20 to determine if the attack does not target rather one of your duplicates.</p>\n<p>If you have three duplicates, you need 6 or more on your throw to lead the target of the attack to a duplicate. With two duplicates, you need 8 or more. With one duplicate, you need 11 or more.</p>\n<p>The AC of a duplicate is 10 + your Dexterity modifier. If an attack hits a duplicate, it is destroyed. A duplicate may be destroyed not just an attack on key. It ignores other damage and effects. The spell ends if the three duplicates are destroyed.</p>\n<p>A creature is unaffected by this fate if she can not see if it relies on a different meaning as vision, such as blind vision, or if it can perceive illusions as false, as with clear vision.</p>",
+          "value": "<p>Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it's impossible to track which image is real. You can use your action to dismiss the illusory duplicates.</p>\n<p>Each time a creature targets you with an attack during the spell's duration, roll a [[/r 1d20 # Mirror Image Check]] to determine whether the attack instead targets one of your duplicates.</p>\n<p>If you have three duplicates, you must roll a 6 or higher to change the attack's target to a duplicate. With two duplicates, you must roll an 8 or higher. With one duplicate, you must roll an 11 or higher.</p>\n<p>A duplicate's AC equals 10 + your Dexterity modifier. If an attack hits a duplicate, the duplicate is destroyed. A duplicate can be destroyed only by an attack that hits it. It ignores all other damage and effects. The spell ends when all three duplicates are destroyed.</p>\n<p>A creature is unaffected by this spell if it can't see, if it relies on senses other than sight, such as blindsight, or if it can perceive illusions as false, as with truesight.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1623,7 +1803,7 @@
         "target": {
           "value": null,
           "width": null,
-          "units": null,
+          "units": "",
           "type": "self"
         },
         "range": {
@@ -1638,7 +1818,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -1693,7 +1873,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.X4c8xCkmF8U9HUMz"
+        }
+      }
     },
     {
       "_id": "HTU1mynIEmrJvxA8",
@@ -1789,7 +1973,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.wqfAVANuQonNBgnL"
+        }
+      }
     },
     {
       "_id": "FmgcWUhTwPlvquR6",
@@ -1798,7 +1986,7 @@
       "img": "systems/dnd5e/icons/spells/slice-orange-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.</p>",
+          "value": "<p>You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 4th level or higher, the interrupted spell has no effect if its level is less than or equal to the level of the spell slot you used.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1885,7 +2073,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Ek45cBpVXvJdv1Qy"
+        }
+      }
     },
     {
       "_id": "aqanmKIBJ0uLpLsj",
@@ -1894,7 +2086,7 @@
       "img": "systems/dnd5e/icons/spells/link-spirit-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
+          "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the Duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1981,7 +2173,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.yfbK8gZqESlaoY5t"
+        }
+      }
     },
     {
       "_id": "JqOO8BxHqesSS0eT",
@@ -1990,7 +2186,7 @@
       "img": "systems/dnd5e/icons/spells/lightning-blue-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a <strong>Dexterity</strong> saving throw. A creature takes 8d6 <em>lightning damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p>The lightning ignites flammable objects in the area that aren't being worn or carried.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
+          "value": "<p>A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a Dexterity saving throw. A creature takes 8d6 lightning damage on a failed save, or half as much damage on a successful one.</p><p>The lightning ignites flammable objects in the area that aren't being worn or carried.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2080,7 +2276,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.IyikgTEOTv701jgQ"
+        }
+      }
     },
     {
       "_id": "FjPsBXzcEt6ogvve",
@@ -2089,7 +2289,7 @@
       "img": "systems/dnd5e/icons/spells/link-eerie-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished.</p>\n<p>If the target is native to the plane of existence you're on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p>\n<p>If the target is native to a different plane of existence than the one you're on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn't return.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th.</p>",
+          "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished.</p><p>If the target is native to the plane of existence you're on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p><p>If the target is native to a different plane of existence than the one you're on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn't return.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2176,7 +2376,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.pxpb2eOB6bv4phAf"
+        }
+      }
     },
     {
       "_id": "126EQl9NJWsnl8Hz",
@@ -2185,7 +2389,7 @@
       "img": "systems/dnd5e/icons/spells/protect-red-3.jpg",
       "data": {
         "description": {
-          "value": "<p>Thin and wispy flames wreathe your body for the Duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet. You can end the spell early by using an action to dismiss it.</p>\n<p>The flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you Resistance to <em>cold damage</em>, and the chill shield grants you resistance to <em>fire damage</em>.</p>\n<p>In addition, whenever a creature within 5 feet of you hits you with a melee Attack, the shield erupts with flame. The attacker takes 2d8 <em>fire damage</em> from a warm shield, or 2d8 <em>cold damage</em> from a cold shield.</p>",
+          "value": "<p>Thin and wispy flames wreathe your body for the Duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet. You can end the spell early by using an action to dismiss it.</p>\n<p>The flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you Resistance to cold damage, and the chill shield grants you resistance to fire damage.</p>\n<p>In addition, whenever a creature within 5 feet of you hits you with a melee Attack, the shield erupts with flame. The attacker takes 2d8 fire damage from a warm shield, or 2d8 cold damage from a cold shield.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2217,7 +2421,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -2235,7 +2439,8 @@
               "fire"
             ]
           ],
-          "versatile": ""
+          "versatile": "",
+          "value": ""
         },
         "formula": "",
         "save": {
@@ -2270,13 +2475,60 @@
         },
         "attunement": 0
       },
-      "effects": [],
+      "effects": [
+        {
+          "_id": "lVKx8swB08jm6IFE",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.traits.dr.value",
+              "value": "cold",
+              "mode": 2
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 600
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-red-3.jpg",
+          "label": "Warm Shield",
+          "origin": "Item.OtcTsffCQaOFkr9K",
+          "tint": null,
+          "transfer": true
+        },
+        {
+          "_id": "UUXwEKSPX4nYfDzo",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.traits.dr.value",
+              "value": "fire",
+              "mode": 2
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 600
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-blue-3.jpg",
+          "label": "Chill Shield",
+          "origin": "Item.OtcTsffCQaOFkr9K",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.avD5XUtkBPQQR97c"
+        }
+      }
     },
     {
       "_id": "D9NB8NWPDI0TZHIo",
@@ -2285,7 +2537,7 @@
       "img": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>This spell turns the flesh of a willing creature you touch as hard as stone. Until the spell ends, the target has resistance to non-magical bludgeoning, piercing, and <em>slashing damage</em>.</p>",
+          "value": "<p>This spell turns the flesh of a willing creature you touch as hard as stone. Until the spell ends, the target has resistance to nonmagical bludgeoning, piercing, and slashing damage.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2372,7 +2624,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ReMbjfeOKoSj3O79"
+        }
+      }
     },
     {
       "_id": "EtzKTmWR9LFrp96t",
@@ -2381,7 +2637,7 @@
       "img": "systems/dnd5e/icons/spells/ice-blue-3.jpg",
       "data": {
         "description": {
-          "value": "<p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a <strong>Constitution</strong> saving throw. A creature takes 8d8 <em>cold damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p>A creature killed by this spell becomes a frozen statue until it thaws.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>",
+          "value": "<p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a Constitution saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2471,7 +2727,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.RpKjTlYASrfqUPVA"
+        }
+      }
     },
     {
       "_id": "us3Zly6GB7D5qn31",
@@ -2480,7 +2740,7 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-eerie-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a <strong>Wisdom</strong> saving throw, which is modified by how well you know the target and the sort of physical connection you have to it. If a target knows you're casting this spell, it can fail the saving throw voluntarily if it wants to be observed.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Knowledge</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Secondhand (you have heard of the target)</td>\n<td>+5</td>\n</tr>\n<tr>\n<td>Firsthand (you have met the target)</td>\n<td>+0</td>\n</tr>\n<tr>\n<td>Familiar (you know the target well)</td>\n<td>-5</td>\n</tr>\n</tbody>\n</table><table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Connection</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Likeness or picture</td>\n<td>-2</td>\n</tr>\n<tr>\n<td>Possession or garment</td>\n<td>-4</td>\n</tr>\n<tr>\n<td>Body part, lock of hair, bit of nail, or the like</td>\n<td>-10</td>\n</tr>\n</tbody>\n</table>\n<p>On a successful save, the target isn't affected, and you can't use this spell against it again for 24 hours.</p>\n<p>On a failed save, the spell creates an Invisible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the Duration. A creature that can see Invisile Objects sees the sensor as a luminous orb about the size of your fist.</p>\n<p>Instead of targeting a creature, you can choose a location you have seen before as the target of this spell. When you do, the sensor appears at that location and doesn't move.</p>",
+          "value": "<p>You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a Wisdom saving throw, which is modified by how well you know the target and the sort of physical connection you have to it. If a target knows you're casting this spell, it can fail the saving throw voluntarily if it wants to be observed.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Knowledge</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Secondhand (you have heard of the target)</td>\n<td>+5</td>\n</tr>\n<tr>\n<td>Firsthand (you have met the target)</td>\n<td>+0</td>\n</tr>\n<tr>\n<td>Familiar (you know the target well)</td>\n<td>-5</td>\n</tr>\n</tbody>\n</table>\n\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Connection</strong></td>\n<td><strong>Save Modifier</strong></td>\n</tr>\n<tr>\n<td>Likeness or picture</td>\n<td>-2</td>\n</tr>\n<tr>\n<td>Possession or garment</td>\n<td>-4</td>\n</tr>\n<tr>\n<td>Body part, lock of hair, bit of nail, or the like</td>\n<td>-10</td>\n</tr>\n</tbody>\n</table>\n<p>On a successful save, the target isn't affected, and you can't use this spell against it again for 24 hours.</p><p>On a failed save, the spell creates an Invisible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the Duration. A creature that can see Invisile Objects sees the sensor as a luminous orb about the size of your fist.</p><p>Instead of targeting a creature, you can choose a location you have seen before as the target of this spell. When you do, the sensor appears at that location and doesn't move.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2566,7 +2826,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.fVbCxFRaORalHB20"
+        }
+      }
     },
     {
       "_id": "6SLy3dJdASjuoYnm",
@@ -2575,7 +2839,7 @@
       "img": "systems/dnd5e/icons/spells/beam-magenta-3.jpg",
       "data": {
         "description": {
-          "value": "<p>An invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick. It lasts for the Duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (your choice which side).</p>\n<p>Nothing can physically pass through the wall. It is immune to all damage and can't be dispelled by Dispel Magic. A Disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall.</p>",
+          "value": "<p>An invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick. It lasts for the Duration. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (your choice which side).</p><p>Nothing can physically pass through the wall. It is immune to all damage and can't be dispelled by Dispel Magic. A Disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2607,7 +2871,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -2662,7 +2926,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.o9ZCvuD2B1OTcubb"
+        }
+      }
     },
     {
       "_id": "VLinN8yXghlevpcI",
@@ -2671,7 +2939,7 @@
       "img": "systems/dnd5e/icons/spells/protect-blue-3.jpg",
       "data": {
         "description": {
-          "value": "<p>An immobile, faintly shimmering barrier springs into existence in a 10-foot radius around you and remains for the Duration.</p>\n<p>Any spell of 5th level or lower cast from outside the barrier can't affect creatures or Objects within it, even if the spell is cast using a higher level spell slot. Such a spell can target creatures and Objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from the areas affected by such Spells.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th level or higher, the barrier blocks Spells of one level higher for each slot level above 6th.</p>",
+          "value": "<p>An immobile, faintly shimmering barrier springs into existence in a 10-foot radius around you and remains for the Duration.</p><p>Any spell of 5th level or lower cast from outside the barrier can't affect creatures or Objects within it, even if the spell is cast using a higher level spell slot. Such a spell can target creatures and Objects within the barrier, but the spell has no effect on them. Similarly, the area within the barrier is excluded from the areas affected by such Spells.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th level or higher, the barrier blocks Spells of one level higher for each slot level above 6th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2758,7 +3026,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WmQpxfjZwF3MGUby"
+        }
+      }
     },
     {
       "_id": "U8qWWRmgxVBEZ7ha",
@@ -2767,7 +3039,7 @@
       "img": "systems/dnd5e/icons/spells/runes-magenta-3.jpg",
       "data": {
         "description": {
-          "value": "<p>This spell instantly transports you and up to eight willing creatures of your choice that you can see within range, or a single object that you can see within range, to a destination you select. If you target an object, it must be able to fit entirely inside a 10-foot cube, and it can't be held or carried by an unwilling creature.</p>\n<p>The destination you choose must be known to you, and it must be on the same plane of existence as you. Your familiarity with the destination determines whether you arrive there successfully. The DM rolls d100 and consults the table.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Familiarity</strong></td>\n<td><strong>Mishap</strong></td>\n<td><strong>Similar Area</strong></td>\n<td><strong>Off Target</strong></td>\n<td><strong>On Target</strong></td>\n</tr>\n<tr>\n<td>Permanent circle</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>01-100</td>\n</tr>\n<tr>\n<td>Associated object</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>01-100</td>\n</tr>\n<tr>\n<td>Very familiar</td>\n<td>01-05</td>\n<td>06-13</td>\n<td>14-24</td>\n<td>25-100</td>\n</tr>\n<tr>\n<td>Seen casually</td>\n<td>01-33</td>\n<td>34-43</td>\n<td>44-53</td>\n<td>54-100</td>\n</tr>\n<tr>\n<td>Viewed once</td>\n<td>01-43</td>\n<td>44-53</td>\n<td>54-73</td>\n<td>74-100</td>\n</tr>\n<tr>\n<td>Description</td>\n<td>01-43</td>\n<td>44-53</td>\n<td>54-73</td>\n<td>74-100</td>\n</tr>\n<tr>\n<td>False destination</td>\n<td>01-50</td>\n<td>51-100</td>\n<td>-</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Familiarity</strong>. \"Permanent circle\" means a permanent Teleportation Circle whose sigil sequence you know. \"Associated object\" means that you possess an object taken from the desired destination within the last six months, such as a book from a wizard's library, bed linen from a royal suite, or a chunk of marble from a lich's Secret tomb.</p>\n<p>\"Very familiar\" is a place you have been very often, a place you have carefully studied, or a place you can see when you cast the spell. \"Seen casually\" is someplace you have seen more than once but with which you aren't very familiar. \"Viewed once\" is a place you have seen once, possibly using magic. \"Description\" is a place whose location and appearance you know through someone else's description, perhaps from a map.</p>\n<p>\"False destination\" is a place that doesn't exist. Perhaps you tried to scry an enemy's sanctum but instead viewed an illusion, or you are attempting to teleport to a familiar location that no longer exists.</p>\n<p><strong>On Target</strong>. You and your group (or the target object) appear where you want to.</p>\n<p><strong>Off Target</strong>. You and your group (or the target object) appear a random distance away from the destination in a random direction. Distance off target is 1d10 × 1d10 percent of the distance that was to be traveled. For example, if you tried to travel 120 miles, landed off target, and rolled a 5 and 3 on the two d10s, then you would be off target by 15 percent, or 18 miles. The DM determines the direction off target randomly by rolling a d8 and designating 1 as north, 2 as northeast, 3 as east, and so on around the points of the compass. If you were teleporting to a coastal city and wound up 18 miles out at sea, you could be in trouble.</p>\n<p><strong>Similar Area</strong>. You and your group (or the target object) wind up in a different area that's visually or thematically similar to the target area. If you are heading for your home laboratory, for example, you might wind up in another wizard's laboratory or in an alchemical supply shop that has many of the same tools and implements as your laboratory. Generally, you appear in the closest similar place, but since the spell has no range limit, you could conceivably wind up anywhere on the plane.</p>\n<p><strong>Mishap</strong>. The spell's unpredictable magic results in a difficult journey. Each teleporting creature (or the target object) takes 3d10 <em>force damage</em>, and the DM rerolls on the table to see where you wind up (multiple mishaps can occur, dealing damage each time).</p>",
+          "value": "<p>This spell instantly transports you and up to eight willing creatures of your choice that you can see within range, or a single object that you can see within range, to a destination you select. If you target an object, it must be able to fit entirely inside a 10-foot cube, and it can't be held or carried by an unwilling creature.</p><p>The destination you choose must be known to you, and it must be on the same plane of existence as you. Your familiarity with the destination determines whether you arrive there successfully. The DM rolls d100 and consults the table.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Familiarity</strong></td>\n<td><strong>Mishap</strong></td>\n<td><strong>Similar Area</strong></td>\n<td><strong>Off Target</strong></td>\n<td><strong>On Target</strong></td>\n</tr>\n<tr>\n<td>Permanent circle</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>01-100</td>\n</tr>\n<tr>\n<td>Associated object</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>01-100</td>\n</tr>\n<tr>\n<td>Very familiar</td>\n<td>01-05</td>\n<td>06-13</td>\n<td>14-24</td>\n<td>25-100</td>\n</tr>\n<tr>\n<td>Seen casually</td>\n<td>01-33</td>\n<td>34-43</td>\n<td>44-53</td>\n<td>54-100</td>\n</tr>\n<tr>\n<td>Viewed once</td>\n<td>01-43</td>\n<td>44-53</td>\n<td>54-73</td>\n<td>74-100</td>\n</tr>\n<tr>\n<td>Description</td>\n<td>01-43</td>\n<td>44-53</td>\n<td>54-73</td>\n<td>74-100</td>\n</tr>\n<tr>\n<td>False destination</td>\n<td>01-50</td>\n<td>51-100</td>\n<td>-</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Familiarity</strong>. \"Permanent circle\" means a permanent Teleportation Circle whose sigil sequence you know. \"Associated object\" means that you possess an object taken from the desired destination within the last six months, such as a book from a wizard's library, bed linen from a royal suite, or a chunk of marble from a lich's Secret tomb.</p><p>\"Very familiar\" is a place you have been very often, a place you have carefully studied, or a place you can see when you cast the spell. \"Seen casually\" is someplace you have seen more than once but with which you aren't very familiar. \"Viewed once\" is a place you have seen once, possibly using magic. \"Description\" is a place whose location and appearance you know through someone else's description, perhaps from a map.</p><p>\"False destination\" is a place that doesn't exist. Perhaps you tried to scry an enemy's sanctum but instead viewed an illusion, or you are attempting to teleport to a familiar location that no longer exists.</p><p><strong>On Target</strong>. You and your group (or the target object) appear where you want to.</p><p><strong>Off Target</strong>. You and your group (or the target object) appear a random distance away from the destination in a random direction. Distance off target is 1d10 × 1d10 percent of the distance that was to be traveled. For example, if you tried to travel 120 miles, landed off target, and rolled a 5 and 3 on the two d10s, then you would be off target by 15 percent, or 18 miles. The DM determines the direction off target randomly by rolling a d8 and designating 1 as north, 2 as northeast, 3 as east, and so on around the points of the compass. If you were teleporting to a coastal city and wound up 18 miles out at sea, you could be in trouble.</p><p><strong>Similar Area</strong>. You and your group (or the target object) wind up in a different area that's visually or thematically similar to the target area. If you are heading for your home laboratory, for example, you might wind up in another wizard's laboratory or in an alchemical supply shop that has many of the same tools and implements as your laboratory. Generally, you appear in the closest similar place, but since the spell has no range limit, you could conceivably wind up anywhere on the plane.</p><p><strong>Mishap</strong>. The spell's unpredictable magic results in a difficult journey. Each teleporting creature (or the target object) takes 3d10 force damage, and the DM rerolls on the table to see where you wind up (multiple mishaps can occur, dealing damage each time).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2799,7 +3071,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -2854,7 +3126,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.L4J89JXqbKs6puEV"
+        }
+      }
     },
     {
       "_id": "S5AeLTegixmkt9DE",
@@ -2863,7 +3139,7 @@
       "img": "systems/dnd5e/icons/spells/air-burst-sky-3.jpg",
       "data": {
         "description": {
-          "value": "<p>Until the spell ends, one willing creature you touch is immune to <em>psychic damage</em>, any effect that would sense its emotions or read its thoughts, Divination Spells, and the Charmed condition. The spell even foils Wish spells and Spells or Effects of similar power used to affect the target's mind or to gain information about the target.</p>",
+          "value": "<p>Until the spell ends, one willing creature you touch is immune to psychic damage, any effect that would sense its emotions or read its thoughts, Divination Spells, and the Charmed condition. The spell even foils Wish spells and Spells or Effects of similar power used to affect the target's mind or to gain information about the target.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2950,7 +3226,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.bllEWfm9xfEKynhv"
+        }
+      }
     },
     {
       "_id": "5k3VPs3wr3MMI2I4",
@@ -2959,7 +3239,7 @@
       "img": "icons/magic/time/clock-stopwatch-white-blue.webp",
       "data": {
         "description": {
-          "value": "<p>You briefly stop the flow of time for everyone but yourself. No time passes for other creatures, while you take 1d4 + 1 turns in a row, during which you can use Actions and move as normal.</p>\n<p>This spell ends if one of the Actions you use during this period, or any Effects that you create during this period, affects a creature other than you or an object being worn or carried by someone other than you. In addition, the spell ends if you move to a place more than 1,000 feet from the location where you cast it.</p>",
+          "value": "<p>You briefly stop the flow of time for everyone but yourself. No time passes for other creatures, while you take 1d4 + 1 turns in a row, during which you can use Actions and move as normal.</p><p>This spell ends if one of the Actions you use during this period, or any Effects that you create during this period, affects a creature other than you or an object being worn or carried by someone other than you. In addition, the spell ends if you move to a place more than 1,000 feet from the location where you cast it.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2974,9 +3254,9 @@
           "units": "inst"
         },
         "target": {
-          "value": null,
+          "value": 0,
           "width": null,
-          "units": null,
+          "units": "",
           "type": "self"
         },
         "range": {
@@ -3045,7 +3325,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JYuRBwxpoFhXduvD"
+        }
+      }
     },
     {
       "_id": "vgTunE3gLps5Q595",
@@ -3129,6 +3413,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "lgt": true,
@@ -3163,7 +3448,7 @@
       "img": "systems/dnd5e/icons/spells/fog-sky-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -3195,7 +3480,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -3250,7 +3535,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
+        }
+      }
     },
     {
       "_id": "DzwOzkBn2JWUA8DH",
@@ -3291,7 +3580,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -3346,7 +3635,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
+        }
+      }
     }
   ],
   "effects": [],

@@ -2,12 +2,16 @@
   "_id": "NwQpeeaMxAC3fRft",
   "name": "Black Pudding",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/ooze/BlackPudding.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 5,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -3,
         "save": -3,
@@ -30,6 +38,10 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -41,6 +53,10 @@
       "int": {
         "value": 1,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -5,
         "save": -5,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 6,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 1,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -5,
         "save": -5,
@@ -103,6 +127,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 0,
         "blindsight": 60,
@@ -124,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -190,6 +217,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -199,6 +230,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -208,6 +243,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -217,6 +256,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -226,6 +269,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -235,6 +282,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -244,6 +295,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -253,6 +308,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -262,6 +321,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -271,6 +334,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -280,6 +347,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -289,6 +360,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -298,6 +373,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -307,6 +386,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -316,6 +399,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -5,
         "bonus": 0,
         "passive": 5,
@@ -325,6 +412,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -334,6 +425,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -3,
         "bonus": 0,
         "passive": 7,
@@ -343,6 +438,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -482,9 +581,30 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/ooze/BlackPudding.webp",
     "actorId": "NwQpeeaMxAC3fRft",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -811,6 +931,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,

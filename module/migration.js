@@ -3,7 +3,8 @@
  * @returns {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
-  ui.notifications.info(`Applying DnD5E System Migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
+  const version = game.system.data.version;
+  ui.notifications.info(game.i18n.format("MIGRATION.5eBegin", {version}), {permanent: true});
 
   const migrationData = await getMigrationData();
 
@@ -75,7 +76,7 @@ export const migrateWorld = async function() {
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.data.version);
-  ui.notifications.info(`DnD5E System Migration to version ${game.system.data.version} completed!`, {permanent: true});
+  ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
 };
 
 /* -------------------------------------------- */
@@ -200,6 +201,12 @@ export const migrateActorData = function(actor, migrationData) {
     _migrateActorAC(actor, updateData);
   }
 
+  // Migrate embedded effects
+  if ( actor.effects ) {
+    const effects = migrateEffects(actor, migrationData);
+    if ( effects.length > 0 ) updateData.effects = effects;
+  }
+
   // Migrate Owned Items
   if ( !actor.items ) return updateData;
   const items = actor.items.reduce((arr, i) => {
@@ -223,6 +230,7 @@ export const migrateActorData = function(actor, migrationData) {
     return arr;
   }, []);
   if ( items.length > 0 ) updateData.items = items;
+
   return updateData;
 };
 
@@ -271,6 +279,48 @@ export const migrateItemData = function(item, migrationData) {
   _migrateArmorType(item, updateData);
   _migrateItemCriticalData(item, updateData);
   _migrateItemIcon(item, updateData, migrationData);
+
+  // Migrate embedded effects
+  if ( item.effects ) {
+    const effects = migrateEffects(item, migrationData);
+    if ( effects.length > 0 ) updateData.effects = effects;
+  }
+
+  return updateData;
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate any active effects attached to the provided parent.
+ * @param {object} parent           Data of the parent being migrated.
+ * @param {object} [migrationData]  Additional data to perform the migration.
+ * @returns {object[]}              Updates to apply on the embedded effects.
+ */
+export const migrateEffects = function(parent, migrationData) {
+  if ( !parent.effects ) return {};
+  return parent.effects.reduce((arr, e) => {
+    const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
+    let effectUpdate = migrateEffectData(effectData, migrationData);
+    if ( !foundry.utils.isObjectEmpty(effectUpdate) ) {
+      effectUpdate._id = effectData._id;
+      arr.push(foundry.utils.expandObject(effectUpdate));
+    }
+    return arr;
+  }, []);
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate the provided active effect data.
+ * @param {object} effect           Effect data to migrate.
+ * @param {object} [migrationData]  Additional data to perform the migration.
+ * @returns {object}                The updateData to apply.
+ */
+export const migrateEffectData = function(effect, migrationData) {
+  const updateData = {};
+  _migrateEffectArmorClass(effect, updateData);
   return updateData;
 };
 
@@ -340,13 +390,9 @@ export const migrateSceneData = function(scene, migrationData) {
 export const getMigrationData = async function() {
   const data = {};
   try {
-    let res = await fetch("systems/dnd5e/json/icon-migration.json");
-    data.iconMap = await res.json();
-    if ( game.dnd5e.isV9 ) {
-      res = await fetch("systems/dnd5e/json/spell-icon-migration.json");
-      const spellIcons = await res.json();
-      data.iconMap = {...data.iconMap, ...spellIcons};
-    }
+    const icons = await fetch("systems/dnd5e/json/icon-migration.json");
+    const spellIcons = await fetch("systems/dnd5e/json/spell-icon-migration.json");
+    data.iconMap = {...await icons.json(), ...await spellIcons.json()};
   } catch(err) {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
   }
@@ -509,6 +555,12 @@ function _migrateActorAC(actorData, updateData) {
     return updateData;
   }
 
+  // Migrate ac.base in custom formulas to ac.armor
+  if ( ac?.formula.includes("@attributes.ac.base") ) {
+    updateData["data.attributes.ac.formula"] = ac.formula.replaceAll("@attributes.ac.base", "@attributes.ac.armor");
+  }
+
+  // Protect against string values created by character sheets or importers that don't enforce data types
   if ( typeof ac?.flat === "string" && Number.isNumeric(ac.flat) ) {
     updateData["data.attributes.ac.flat"] = parseInt(ac.flat);
   }
@@ -686,6 +738,26 @@ function _migrateItemIcon(item, updateData, {iconMap}={}) {
     const rename = iconMap[item.img];
     if ( rename ) updateData.img = rename;
   }
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Change active effects that target AC.
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectArmorClass(effect, updateData) {
+  let containsUpdates = false;
+  const changes = effect.changes.map(c => {
+    if ( c.key !== "data.attributes.ac.base" ) return c;
+    c.key = "data.attributes.ac.armor";
+    containsUpdates = true;
+    return c;
+  });
+  if ( containsUpdates ) updateData.changes = changes;
   return updateData;
 }
 

@@ -8,6 +8,10 @@
       "str": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -41,6 +53,10 @@
       "int": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 9,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -102,6 +126,9 @@
         "walk": 20,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 120,
@@ -182,6 +209,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -191,6 +222,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -200,6 +235,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -209,6 +248,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -218,6 +261,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -227,6 +274,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -236,6 +287,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -245,6 +300,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -254,6 +313,10 @@
       "inv": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 13,
@@ -263,6 +326,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -272,6 +339,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -281,6 +352,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 12,
@@ -290,6 +365,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -299,6 +378,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -308,6 +391,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -317,6 +404,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -326,6 +417,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -335,6 +430,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -477,7 +576,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/humanoid/DeepGnome.webp",
     "actorId": "ZM1P6LoYSwMiIJN9",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -558,6 +678,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -813,6 +934,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "value": "",
           "amm": false,
@@ -941,10 +1063,10 @@
           "units": "hour"
         },
         "target": {
-          "value": null,
+          "value": 1,
           "width": null,
-          "units": null,
-          "type": "self"
+          "units": "",
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -958,7 +1080,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1013,7 +1135,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.aU62xVUBYkAQWIHv"
+        }
+      }
     },
     {
       "_id": "Bq1CUSerPuxoAObn",
@@ -1022,7 +1148,7 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a <strong>Constitution</strong> saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a <strong>Constitution</strong> saving throw. On a success, the spell ends.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+          "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1054,11 +1180,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1108,7 +1234,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.zwGsAv6kmwzYGhh3"
+        }
+      }
     },
     {
       "_id": "oGw5u15d1SZaw3o0",
@@ -1140,7 +1270,7 @@
         "range": {
           "value": null,
           "long": null,
-          "units": ""
+          "units": "self"
         },
         "uses": {
           "value": 1,
@@ -1149,7 +1279,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1204,7 +1334,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE"
+        }
+      }
     },
     {
       "_id": "4ParUzoYd3cJTzLr",
@@ -1245,7 +1379,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1263,7 +1397,7 @@
         },
         "formula": "",
         "save": {
-          "ability": "int",
+          "ability": "",
           "dc": 11,
           "scaling": "spell",
           "value": ""
@@ -1300,7 +1434,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv"
+        }
+      }
     },
     {
       "_id": "YuhirWYJsQfL6zo5",
@@ -1384,6 +1522,7 @@
           "conditions": ""
         },
         "weaponType": "simpleR",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "thr": true,

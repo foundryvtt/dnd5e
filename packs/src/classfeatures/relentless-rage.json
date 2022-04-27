@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "other",
@@ -47,8 +51,7 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {

@@ -1,5 +1,7 @@
 import Actor5e from "../entity.js";
 import Item5e from "../../item/entity.js";
+import { AdvancementConfirmationDialog } from "../../advancement/advancement-confirmation-dialog.js";
+import { AdvancementManager } from "../../advancement/advancement-manager.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
@@ -11,8 +13,8 @@ import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorSkillConfig from "../../apps/skill-config.js";
 import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
-import {DND5E} from "../../config.js";
 import ActiveEffect5e from "../../active-effect.js";
+
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -46,7 +48,9 @@ export default class ActorSheet5e extends ActorSheet {
         ".spellbook .inventory-list",
         ".effects .inventory-list"
       ],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
+      width: 720,
+      height: Math.max(680, 237 + (Object.keys(CONFIG.DND5E.abilities).length * 70))
     });
   }
 
@@ -110,6 +114,11 @@ export default class ActorSheet5e extends ActorSheet {
       return obj;
     }, {});
 
+    // Temporary HP
+    const hp = data.data.attributes.hp;
+    if ( hp.temp === 0 ) delete hp.temp;
+    if ( hp.tempmax === 0 ) delete hp.tempmax;
+
     // Proficiency
     if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
       data.labels.proficiency = `d${data.data.attributes.prof * 2}`;
@@ -122,7 +131,7 @@ export default class ActorSheet5e extends ActorSheet {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
-      abl.baseProf = source.abilities[a].proficient;
+      abl.baseProf = source.abilities[a]?.proficient ?? 0;
     }
 
     // Skills
@@ -279,40 +288,25 @@ export default class ActorSheet5e extends ActorSheet {
         });
         break;
 
-      // Equipment-based AC
-      case "default":
-        const hasArmor = !!this.actor.armor;
-        attribution.push({
-          label: hasArmor ? this.actor.armor.name : game.i18n.localize("DND5E.ArmorClassUnarmored"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: hasArmor ? this.actor.armor.data.data.armor.value : 10
-        });
-        if ( ac.dex !== 0 ) {
-          attribution.push({
-            label: game.i18n.localize("DND5E.AbilityDex"),
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value: ac.dex
-          });
-        }
-        break;
-
-      // Other AC formula
       default:
         const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         let base = ac.base;
         const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
         for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = foundry.utils.getProperty(data, term);
-          if ( (term === "attributes.ac.base") || (value === 0) ) continue;
+          const value = String(foundry.utils.getProperty(data, term));
+          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
           if ( Number.isNumeric(value) ) base -= Number(value);
           attribution.push({
             label: match,
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value: foundry.utils.getProperty(data, term)
+            value
           });
         }
+        const armorInFormula = formula.includes("@attributes.ac.armor");
+        let label = game.i18n.localize("DND5E.PropertyBase");
+        if ( armorInFormula ) label = this.actor.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
         attribution.unshift({
-          label: game.i18n.localize("DND5E.PropertyBase"),
+          label,
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: base
         });
@@ -766,7 +760,7 @@ export default class ActorSheet5e extends ActorSheet {
       title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
       content: {
         options: game.settings.get("dnd5e", "polymorphSettings"),
-        i18n: DND5E.polymorphSettings,
+        i18n: CONFIG.DND5E.polymorphSettings,
         isToken: this.actor.isToken
       },
       default: "accept",
@@ -826,30 +820,59 @@ export default class ActorSheet5e extends ActorSheet {
       itemData = scroll.data;
     }
 
-    if ( itemData.data ) {
-      // Ignore certain statuses
-      ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
-
-      // Downgrade ATTUNED to REQUIRED
-      itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
-    }
+    // Clean up data
+    this._onDropResetData(itemData);
 
     // Stack identical consumables
-    if ( itemData.type === "consumable" && itemData.flags.core?.sourceId ) {
-      const similarItem = this.actor.items.find(i => {
-        const sourceId = i.getFlag("core", "sourceId");
-        return sourceId && (sourceId === itemData.flags.core?.sourceId)
-               && (i.type === "consumable") && (i.name === itemData.name);
-      });
-      if ( similarItem ) {
-        return similarItem.update({
-          "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
-        });
-      }
+    const stacked = this._onDropStackConsumables(itemData);
+    if ( stacked ) return stacked;
+
+    // Bypass normal creation flow for any items with advancement
+    if ( itemData.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forNewItem(this.actor, itemData);
+      if ( manager.steps.length ) return manager.render(true);
     }
 
     // Create the owned item as normal
     return super._onDropItemCreate(itemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset certain pieces of data stored on items when they are dropped onto the actor.
+   * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   */
+  _onDropResetData(itemData) {
+    if ( !itemData.data ) return;
+
+    // Ignore certain statuses
+    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
+
+    // Downgrade ATTUNED to REQUIRED
+    itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stack identical consumables when a new one is dropped rather than creating a duplicate item.
+   * @param {object} itemData         The item data requested for creation.
+   * @returns {Promise<Item5e>|null}  If a duplicate was found, returns the adjusted item stack.
+   */
+  _onDropStackConsumables(itemData) {
+    const droppedSourceId = itemData.flags.core?.sourceId;
+    if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
+
+    const similarItem = this.actor.items.find(i => {
+      const sourceId = i.getFlag("core", "sourceId");
+      return sourceId && (sourceId === droppedSourceId) && (i.type === "consumable") && (i.name === itemData.name);
+    });
+    if ( !similarItem ) return null;
+
+    return similarItem.update({
+      "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+    });
   }
 
   /* -------------------------------------------- */
@@ -963,6 +986,13 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
+
+    // Check to make sure the newly created class doesn't take player over level cap
+    if ( type === "class" && (this.actor.data.data.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
+      return ui.notifications.error(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
+        {max: CONFIG.DND5E.maxLevel}));
+    }
+
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`DND5E.ItemType${type.capitalize()}`)}),
       type: type,
@@ -992,14 +1022,34 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Handle deleting an existing Owned Item for the Actor.
    * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e>|undefined}  The deleted item if something was deleted.
+   * @returns {Promise<Item5e|AdvancementManager>|undefined}  The deleted item if something was deleted or the
+   *                                                          advancement manager if advancements need removing.
    * @private
    */
-  _onItemDelete(event) {
+  async _onItemDelete(event) {
     event.preventDefault();
     const li = event.currentTarget.closest(".item");
     const item = this.actor.items.get(li.dataset.itemId);
-    if ( item ) return item.delete();
+    if ( !item ) return;
+
+    // If item has advancement, handle it separately
+    if ( item.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forDeletedItem(this.actor, item.id);
+      if ( manager.steps.length ) {
+        if ( ["class", "subclass"].includes(item.type) ) {
+          try {
+            const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(item);
+            if ( shouldRemoveAdvancements ) return manager.render(true);
+          } catch(err) {
+            return;
+          }
+        } else {
+          return manager.render(true);
+        }
+      }
+    }
+
+    return item.delete();
   }
 
   /* -------------------------------------------- */

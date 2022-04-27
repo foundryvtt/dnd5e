@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Monk 10",
@@ -65,5 +67,31 @@
   },
   "flags": {},
   "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
-  "effects": []
+  "effects": [
+    {
+      "_id": "JjH64T4YkNP1VTt4",
+      "changes": [
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "diseased"
+        },
+        {
+          "key": "data.traits.ci.value",
+          "mode": 2,
+          "value": "poisoned"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/magic/control/encase-creature-humanoid-hold.webp",
+      "label": "Purity of Body",
+      "origin": "Item.dvtlIzR4gvdfb7Od",
+      "transfer": true,
+      "flags": {},
+      "tint": ""
+    }
+  ]
 }

@@ -1,5 +1,4 @@
 {
-  "_id": "p6FusMkGMOMBTDkt",
   "name": "Zanna (Gnome Wizard)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/WizardTome.webp",
@@ -8,6 +7,10 @@
       "str": {
         "value": 8,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": -1,
         "save": -1,
         "prof": 0,
@@ -18,6 +21,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 1,
         "prof": 0,
@@ -28,6 +35,10 @@
       "con": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 2,
         "prof": 0,
@@ -38,6 +49,10 @@
       "int": {
         "value": 17,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 3,
         "save": 5,
         "prof": 2,
@@ -48,6 +63,10 @@
       "wis": {
         "value": 13,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 1,
         "save": 3,
         "prof": 2,
@@ -58,6 +77,10 @@
       "cha": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 0,
         "save": 0,
         "prof": 0,
@@ -81,7 +104,7 @@
         "tempmax": null
       },
       "init": {
-        "value": null,
+        "value": 0,
         "bonus": "0",
         "mod": 1,
         "prof": 0,
@@ -95,6 +118,9 @@
         "walk": 25,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -129,7 +155,7 @@
       "alignment": "Chaotic Good",
       "race": "Rock Gnome",
       "background": "Scholar",
-      "originalClass": "",
+      "originalClass": "sqcr639qfksmr1hc",
       "xp": {
         "value": 0,
         "min": 0,
@@ -200,6 +226,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -209,6 +239,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -218,6 +252,10 @@
       "arc": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 15,
@@ -227,6 +265,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -236,6 +278,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -245,6 +291,10 @@
       "his": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 15,
@@ -254,6 +304,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -263,6 +317,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -272,6 +330,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -281,6 +343,10 @@
       "med": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 13,
@@ -290,6 +356,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -299,6 +369,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -308,6 +382,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -317,6 +395,10 @@
       "per": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 12,
@@ -326,6 +408,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -335,6 +421,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -344,6 +434,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -353,6 +447,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -505,108 +603,30 @@
       "attribute": "attributes.ac.value"
     },
     "randomImg": false,
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
-    {
-      "_id": "C4l8C6wVfQABKmv3",
-      "name": "Arcane Recovery",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p><p>For example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": null,
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": "",
-          "units": ""
-        },
-        "target": {
-          "value": "",
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": "",
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null,
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": null,
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Wizard 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "featType": {
-          "value": "passive",
-          "_deprecated": true,
-          "type": "String",
-          "label": "Feat Type"
-        },
-        "time": {
-          "value": "",
-          "_deprecated": true
-        },
-        "damageType": {
-          "value": "",
-          "_deprecated": true
-        },
-        "attributes": {
-          "spelldc": 10
-        },
-        "attunement": 0
-      },
-      "sort": 4700000,
-      "flags": {
-        "entityorder": {
-          "order": 45
-        }
-      },
-      "img": "icons/magic/earth/explosion-lava-stone-green.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
     {
       "_id": "8cNEEgRY0og0XzQ2",
       "name": "Background: Scholar",
@@ -798,7 +818,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.EOmsUcFQJTfG2oio"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/fireball-red-1.jpg",
       "effects": [],
       "folder": null,
@@ -893,7 +917,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
       "effects": [],
       "folder": null,
@@ -989,7 +1017,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3"
+        }
+      },
       "img": "icons/magic/water/water-hand.webp",
       "effects": [],
       "folder": null,
@@ -1085,7 +1117,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.7p9IuWrSWFgfyQo2"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/runes-royal-1.jpg",
       "effects": [],
       "folder": null,
@@ -1116,7 +1152,7 @@
         "target": {
           "value": null,
           "width": null,
-          "units": null,
+          "units": "",
           "type": "self"
         },
         "range": {
@@ -1131,7 +1167,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -1180,12 +1216,37 @@
         },
         "attunement": 0
       },
-      "sort": 200001,
+      "sort": 100001,
       "flags": {
-        "_sheetTab": "description"
+        "_sheetTab": "description",
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.z1mx84ONwkXKUZd7"
+        }
       },
       "img": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
-      "effects": [],
+      "effects": [
+        {
+          "_id": "6pbotGIvqQkraPva",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.attributes.ac.bonus",
+              "value": "5",
+              "mode": 2
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 1
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
+          "label": "Shield",
+          "origin": "Item.FlLKKv7bQBlIAs11",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "permission": {
         "default": 0
@@ -1279,7 +1340,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JGT5bNqu9REL7Fuz"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/wild-eerie-2.jpg",
       "effects": [],
       "folder": null,
@@ -1376,10 +1441,33 @@
       },
       "sort": 100001,
       "flags": {
-        "_sheetTab": "details"
+        "_sheetTab": "details",
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H"
+        }
       },
       "img": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
-      "effects": [],
+      "effects": [
+        {
+          "_id": "cfwMU7LuOJ619Lny",
+          "changes": [
+            {
+              "key": "data.attributes.ac.calc",
+              "value": "mage",
+              "mode": 5
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-blue-1.jpg",
+          "label": "Mage Armor",
+          "origin": "Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H",
+          "transfer": true,
+          "flags": {}
+        }
+      ],
       "folder": null,
       "permission": {
         "default": 0
@@ -1423,12 +1511,12 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
-        "actionType": "rsak",
-        "attackBonus": 0,
+        "actionType": "other",
+        "attackBonus": "0",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1477,8 +1565,12 @@
         },
         "attunement": 0
       },
-      "sort": 300001,
-      "flags": {},
+      "sort": 100001,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.KhwiSi9fwVfUPtku"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/light-magenta-1.jpg",
       "effects": [],
       "folder": null,
@@ -1492,7 +1584,7 @@
       "type": "spell",
       "data": {
         "description": {
-          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels. </strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
+          "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1578,7 +1670,11 @@
         "attunement": 0
       },
       "sort": 100001,
-      "flags": {},
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.41JIhpDyM9Anm7cs"
+        }
+      },
       "img": "systems/dnd5e/icons/spells/fire-arrows-magenta-1.jpg",
       "effects": [],
       "folder": null,
@@ -1746,6 +1842,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "ver": true,
           "amm": false,
@@ -1854,6 +1951,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -2605,134 +2703,6 @@
       }
     },
     {
-      "_id": "XvD7omvVaqEaaW5p",
-      "name": "Wizard",
-      "type": "class",
-      "data": {
-        "description": {
-          "value": "<p>As a wizard, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d6 per wizard level<br /><strong>Hit Points at 1st Level:</strong> 6 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d6 (or 4) + your Constitution modifier per wizard level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> None<br /><strong>Weapons:</strong> Daggers, darts, slings, quarterstaffs, light crossbows<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Intelligence, Wisdom<br /><strong>Skills:</strong> Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a quarterstaff or (b) a dagger</li>\n<li>(a) a component pouch or (b) an arcane focus</li>\n<li>(a) a scholar's pack or (b) an explorer's pack</li>\n<li>A spellbook</li>\n</ul>\n<h1>Wizard Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.gbNo5eVPaqr8IVKL]{Spellcasting}, @Compendium[dnd5e.classfeatures.e0uTcFPpgxjIyUW9]{Arcane Recovery}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.AEWr9EMxy5gj4ZFT]{Arcane Tradition}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>2nd Level Spell Slot</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Arcane Tradition feature</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Arcane Tradition feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>6 Level Spell Slot</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>7th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Arcane Tradition feature</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>8th Level Spell Slot</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>9 Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.JfFfHTeIszx1hNRx]{Spell Mastery}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>\n<p>@Compendium[dnd5e.classfeatures.nUrZDi6QN1YjwAr6]{Signature Spells (First Spell)}</p>\n<p>@Compendium[dnd5e.classfeatures.31bKbWe9ZGVLEns6]{Signature Spells (Second Spell)}</p>\n</td>\n</tr>\n</tbody>\n</table>\n<h3>Your Spellbook</h3>\n<p>The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.</p>\n<p><em><strong>Copying a Spell into the Book.</strong></em> When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.</p>\n<p>Copying that spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation.</p>\n<p>For each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.</p>\n<p><em><strong>Replacing the Book.</strong></em> You can copy a spell from your own spellbook into another book—for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell.</p>\n<p>If you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place.</p>\n<p><em><strong>The Book's Appearance.</strong></em> Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library, or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap.</p>\n<h1>Arcane Traditions</h1>\n<p>The study of wizardry is ancient, stretching back to the earliest mortal discoveries of magic. It is firmly established in fantasy gaming worlds, with various traditions dedicated to its complex study.</p>\n<p>The most common arcane traditions in the multiverse revolve around the schools of magic. Wizards through the ages have cataloged thousands of spells, grouping them into eight categories called schools. In some places, these traditions are literally schools. In other institutions, the schools are more like academic departments, with rival faculties competing for students and funding. Even wizards who train apprentices in the solitude of their own towers use the division of magic into schools as a learning device, since the spells of each school require mastery of different techniques.</p>\n<h2>School of Evocation</h2>\n<p>You focus your study on magic that creates powerful elemental effects such as bitter cold, searing flame, rolling thunder, crackling lightning, and burning acid. Some evokers find employment in military forces, serving as artillery to blast enemy armies from afar. Others use their spectacular power to protect the weak, while some seek their own gain as bandits, adventurers, or aspiring tyrants.</p>\n<h3>School of Evocation Features</h3>\n<p>2nd Level: @Compendium[dnd5e.classfeatures.7uzJ2JkmsdRGLra3]{Evocation Savant} @Compendium[dnd5e.classfeatures.6VBXkjjBgjSpNElh]{Sculpt Spells}</p>\n<p>6th Level: @Compendium[dnd5e.classfeatures.evEWCpE5MYgr5RRW]{Potent Cantrip}</p>\n<p>10th Level: @Compendium[dnd5e.classfeatures.7O85kj6uDEG5NzUE]{Empowered Evocation}</p>\n<p>14th Level: @Compendium[dnd5e.classfeatures.VUtSLeCzFubGXmGx]{Overchannel}</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "levels": 1,
-        "subclass": "",
-        "hitDice": "d6",
-        "hitDiceUsed": 0,
-        "saves": [
-          "int",
-          "wis"
-        ],
-        "skills": {
-          "number": 2,
-          "choices": [
-            "arc",
-            "his",
-            "ins",
-            "inv",
-            "med",
-            "rel"
-          ],
-          "value": []
-        },
-        "spellcasting": {
-          "progression": "full",
-          "ability": "int"
-        },
-        "damage": {
-          "parts": []
-        },
-        "attunement": 0
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.classes.wZK2Q0rXB0AQo8h3"
-        }
-      },
-      "img": "icons/magic/air/wind-tornado-wall-blue.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "xRQDu0GrQB9EpCYM",
-      "name": "Spellcasting (Wizard)",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>As a student of arcane magic, you have a spellbook containing spells that show the first glimmerings of your true power.</p>\n<h3>Cantrips</h3>\n<p>At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.</p>\n<h3>Spellbook</h3>\n<p>At 1st level, you have a spellbook containing six 1stlevel wizard spells of your choice. Your spellbook is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.</p>\n<h3>Preparing and Casting Spells</h3>\n<p>The Wizard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your spellbook equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you're a 3rd-level wizard, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination, chosen from your spellbook. If you prepare the 1st-level spell magic missile, you can cast it using a 1st-level or a 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p><p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your spellbook and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.</p>\n<table border=\"0\" cellspacing=\"0\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td colspan=\"9\">—Spell Slots per Spell Level—</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>3</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Intelligence modifier</p><p><strong>Spell attack modifier </strong>= your proficiency bonus + your Intelligence modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your spellbook. You don't need to have the spell prepared.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use an arcane focus as a spellcasting focus for your wizard spells.</p>\n<h3>Learning Spells of 1st Level and Higher</h3>\n<p>Each time you gain a wizard level, you can add two wizard spells of your choice to your spellbook for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your spellbook (see the \"Your Spellbook\" sidebar).</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": null
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": null,
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell"
-        },
-        "requirements": "Wizard 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 0,
-      "flags": {},
-      "img": "icons/magic/fire/explosion-embers-orange.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
       "_id": "hAOdlcKJP3W7zD0p",
       "name": "Artificer's Lore",
       "type": "feat",
@@ -3180,13 +3150,301 @@
       "permission": {
         "default": 0
       }
+    },
+    {
+      "_id": "sqcr639qfksmr1hc",
+      "name": "Wizard",
+      "type": "class",
+      "img": "icons/magic/air/wind-tornado-wall-blue.webp",
+      "data": {
+        "description": {
+          "value": "<p>As a wizard, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d6 per wizard level<br /><strong>Hit Points at 1st Level:</strong> 6 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d6 (or 4) + your Constitution modifier per wizard level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> None<br /><strong>Weapons:</strong> Daggers, darts, slings, quarterstaffs, light crossbows<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Intelligence, Wisdom<br /><strong>Skills:</strong> Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a quarterstaff or (b) a dagger</li>\n<li>(a) a component pouch or (b) an arcane focus</li>\n<li>(a) a scholar's pack or (b) an explorer's pack</li>\n<li>A spellbook</li>\n</ul>\n<h1>Wizard Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.gbNo5eVPaqr8IVKL]{Spellcasting}, @Compendium[dnd5e.classfeatures.e0uTcFPpgxjIyUW9]{Arcane Recovery}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.AEWr9EMxy5gj4ZFT]{Arcane Tradition}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>2nd Level Spell Slot</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>3rd Level Spell Slot</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Arcane Tradition feature</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Arcane Tradition feature</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>6 Level Spell Slot</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>7th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Arcane Tradition feature</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>8th Level Spell Slot</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>9 Level Spell Slot</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.JfFfHTeIszx1hNRx]{Spell Mastery}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>\n<p>@Compendium[dnd5e.classfeatures.nUrZDi6QN1YjwAr6]{Signature Spells (First Spell)}</p>\n<p>@Compendium[dnd5e.classfeatures.31bKbWe9ZGVLEns6]{Signature Spells (Second Spell)}</p>\n</td>\n</tr>\n</tbody>\n</table>\n<h3>Your Spellbook</h3>\n<p>The spells that you add to your spellbook as you gain levels reflect the arcane research you conduct on your own, as well as intellectual breakthroughs you have had about the nature of the multiverse. You might find other spells during your adventures. You could discover a spell recorded on a scroll in an evil wizard's chest, for example, or in a dusty tome in an ancient library.</p>\n<p><em><strong>Copying a Spell into the Book.</strong></em> When you find a wizard spell of 1st level or higher, you can add it to your spellbook if it is of a spell level you can prepare and if you can spare the time to decipher and copy it.</p>\n<p>Copying that spell into your spellbook involves reproducing the basic form of the spell, then deciphering the unique system of notation used by the wizard who wrote it. You must practice the spell until you understand the sounds or gestures required, then transcribe it into your spellbook using your own notation.</p>\n<p>For each level of the spell, the process takes 2 hours and costs 50 gp. The cost represents material components you expend as you experiment with the spell to master it, as well as the fine inks you need to record it. Once you have spent this time and money, you can prepare the spell just like your other spells.</p>\n<p><em><strong>Replacing the Book.</strong></em> You can copy a spell from your own spellbook into another book—for example, if you want to make a backup copy of your spellbook. This is just like copying a new spell into your spellbook, but faster and easier, since you understand your own notation and already know how to cast the spell. You need spend only 1 hour and 10 gp for each level of the copied spell.</p>\n<p>If you lose your spellbook, you can use the same procedure to transcribe the spells that you have prepared into a new spellbook. Filling out the remainder of your spellbook requires you to find new spells to do so, as normal. For this reason, many wizards keep backup spellbooks in a safe place.</p>\n<p><em><strong>The Book's Appearance.</strong></em> Your spellbook is a unique compilation of spells, with its own decorative flourishes and margin notes. It might be a plain, functional leather volume that you received as a gift from your master, a finely bound gilt-edged tome you found in an ancient library, or even a loose collection of notes scrounged together after you lost your previous spellbook in a mishap.</p>\n<h1>Arcane Traditions</h1>\n<p>The study of wizardry is ancient, stretching back to the earliest mortal discoveries of magic. It is firmly established in fantasy gaming worlds, with various traditions dedicated to its complex study.</p>\n<p>The most common arcane traditions in the multiverse revolve around the schools of magic. Wizards through the ages have cataloged thousands of spells, grouping them into eight categories called schools. In some places, these traditions are literally schools. In other institutions, the schools are more like academic departments, with rival faculties competing for students and funding. Even wizards who train apprentices in the solitude of their own towers use the division of magic into schools as a learning device, since the spells of each school require mastery of different techniques.</p>\n<p>@Compendium[dnd5e.subclasses.Ye5f3FReEnuXfi0y]{School of Evocation}</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "identifier": "wizard",
+        "levels": 1,
+        "hitDice": "d6",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "_id": "9ojqd2dejdsffabi",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL",
+                "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9"
+              ]
+            },
+            "value": {
+              "added": {
+                "0rezvlf2ul1kjm7d": "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL",
+                "mb3aiiyoga49hld8": "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "o0xix805mucymjbt",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.AEWr9EMxy5gj4ZFT"
+              ]
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "sg6rj5gth6ljcbkg",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.JfFfHTeIszx1hNRx"
+              ]
+            },
+            "value": {},
+            "level": 18,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "hoi88xqc3e5je60f",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.nUrZDi6QN1YjwAr6",
+                "Compendium.dnd5e.classfeatures.31bKbWe9ZGVLEns6"
+              ]
+            },
+            "value": {},
+            "level": 20,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "6x1gwvf02qraedhe",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "",
+            "icon": "",
+            "classRestriction": ""
+          }
+        ],
+        "saves": [
+          "int",
+          "wis"
+        ],
+        "skills": {
+          "number": 2,
+          "choices": [
+            "arc",
+            "his",
+            "ins",
+            "inv",
+            "med",
+            "rel"
+          ],
+          "value": []
+        },
+        "spellcasting": {
+          "progression": "full",
+          "ability": "int"
+        },
+        "damage": {
+          "parts": []
+        },
+        "attunement": null
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.wZK2Q0rXB0AQo8h3"
+        }
+      }
+    },
+    {
+      "_id": "0rezvlf2ul1kjm7d",
+      "name": "Spellcasting (Wizard)",
+      "type": "feat",
+      "img": "icons/magic/fire/explosion-embers-orange.webp",
+      "data": {
+        "description": {
+          "value": "<p>As a student of arcane magic, you have a spellbook containing spells that show the first glimmerings of your true power.</p>\n<h3>Cantrips</h3>\n<p>At 1st level, you know three cantrips of your choice from the wizard spell list. You learn additional wizard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Wizard table.</p>\n<h3>Spellbook</h3>\n<p>At 1st level, you have a spellbook containing six 1stlevel wizard spells of your choice. Your spellbook is the repository of the wizard spells you know, except your cantrips, which are fixed in your mind.</p>\n<h3>Preparing and Casting Spells</h3>\n<p>The Wizard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of wizard spells that are available for you to cast. To do so, choose a number of wizard spells from your spellbook equal to your Intelligence modifier + your wizard level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you're a 3rd-level wizard, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination, chosen from your spellbook. If you prepare the 1st-level spell magic missile, you can cast it using a 1st-level or a 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p><p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of wizard spells requires time spent studying your spellbook and memorizing the incantations and gestures you must make to cast the spell: at least 1 minute per spell level for each spell on your list.</p>\n<table border=\"0\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td colspan=\"9\">—Spell Slots per Spell Level—</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>3</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Intelligence is your spellcasting ability for your wizard spells, since you learn your spells through dedicated study and memorization. You use your Intelligence whenever a spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for a wizard spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your Intelligence modifier</p><p><strong>Spell attack modifier </strong>= your proficiency bonus + your Intelligence modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast a wizard spell as a ritual if that spell has the ritual tag and you have the spell in your spellbook. You don't need to have the spell prepared.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use an arcane focus as a spellcasting focus for your wizard spells.</p>\n<h3>Learning Spells of 1st Level and Higher</h3>\n<p>Each time you gain a wizard level, you can add two wizard spells of your choice to your spellbook for free. Each of these spells must be of a level for which you have spell slots, as shown on the Wizard table. On your adventures, you might find other spells that you can add to your spellbook (see the \"Your Spellbook\" sidebar).</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
+        },
+        "ability": null,
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Wizard 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL",
+          "advancementOrigin": "sqcr639qfksmr1hc.9ojqd2dejdsffabi"
+        }
+      }
+    },
+    {
+      "_id": "mb3aiiyoga49hld8",
+      "name": "Arcane Recovery",
+      "type": "feat",
+      "img": "icons/magic/earth/explosion-lava-stone-green.webp",
+      "data": {
+        "description": {
+          "value": "<p>You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p><p>For example, if you're a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 115",
+        "activation": {
+          "type": "special",
+          "cost": null,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": null,
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "lr"
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "util",
+        "attackBonus": 0,
+        "chatFlavor": "The wizard can recover this number worth of spells slots (of 5th-level or lower):",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "ceil(@classes.wizard.levels/2)",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Wizard 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9",
+          "advancementOrigin": "sqcr639qfksmr1hc.9ojqd2dejdsffabi"
+        }
+      }
     }
   ],
   "effects": [],
-  "folder": "pK61u9wafV1nLfmS",
-  "sort": 700000,
+  "folder": null,
+  "sort": 0,
   "permission": {
     "default": 0
   },
-  "flags": {}
+  "flags": {},
+  "_id": "4Jsv5vYaJ1atUEDV"
 }

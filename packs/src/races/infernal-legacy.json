@@ -18,24 +18,24 @@
       "condition": ""
     },
     "duration": {
-      "value": "",
+      "value": null,
       "units": ""
     },
     "target": {
-      "value": "",
+      "value": null,
+      "width": null,
       "units": "",
       "type": ""
     },
     "range": {
-      "value": "",
+      "value": null,
       "long": null,
       "units": ""
     },
     "uses": {
-      "value": 1,
-      "max": 1,
-      "per": null,
-      "type": "sr"
+      "value": null,
+      "max": "",
+      "per": null
     },
     "consume": {
       "type": "",
@@ -58,30 +58,12 @@
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell",
-      "value": ""
+      "scaling": "spell"
     },
     "requirements": "Tiefling",
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "featType": {
-      "value": "ability",
-      "_deprecated": true,
-      "type": "String",
-      "label": "Feat Type"
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
-    },
-    "attributes": {
-      "spelldc": 10
     }
   },
   "flags": {},

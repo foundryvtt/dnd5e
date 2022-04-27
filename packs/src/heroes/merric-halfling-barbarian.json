@@ -1,5 +1,4 @@
 {
-  "_id": "1tAXamEdCqcLQwpM",
   "name": "Merric (Halfling Barbarian)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp",
@@ -8,6 +7,10 @@
       "str": {
         "value": 14,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 4,
         "prof": 2,
@@ -18,6 +21,10 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 2,
         "prof": 0,
@@ -28,6 +35,10 @@
       "con": {
         "value": 15,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 4,
         "prof": 2,
@@ -38,6 +49,10 @@
       "int": {
         "value": 8,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": -1,
         "save": -1,
         "prof": 0,
@@ -48,6 +63,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 0,
         "save": 0,
         "prof": 0,
@@ -58,6 +77,10 @@
       "cha": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "mod": 2,
         "save": 2,
         "prof": 0,
@@ -96,6 +119,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 0,
         "blindsight": 0,
@@ -129,7 +155,7 @@
       "alignment": "Chaotic Good",
       "race": "Lightfoot Halfling",
       "background": "Vigilante",
-      "originalClass": "",
+      "originalClass": "2wfeg14piijtgdr1",
       "xp": {
         "value": 0,
         "min": 0,
@@ -205,6 +231,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -214,6 +244,10 @@
       "ani": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 12,
@@ -223,6 +257,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -232,6 +270,10 @@
       "ath": {
         "value": 1,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 14,
@@ -241,6 +283,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -250,6 +296,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -259,6 +309,10 @@
       "ins": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 12,
@@ -268,6 +322,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -277,6 +335,10 @@
       "inv": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 11,
@@ -286,6 +348,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -295,6 +361,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -304,6 +374,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 12,
@@ -313,6 +387,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -322,6 +400,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -331,6 +413,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": -1,
         "passive": 9,
@@ -340,6 +426,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -349,6 +439,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -358,6 +452,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -510,7 +608,28 @@
       "attribute": "attributes.ac.value"
     },
     "randomImg": false,
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -609,162 +728,6 @@
       }
     },
     {
-      "_id": "PRWrxqFZEBsYGcMt",
-      "name": "Rage",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor:</p>\n<ul>\n<li>\n<p>You have advantage on Strength checks and Strength saving throws.</p>\n</li>\n<li>\n<p>When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.</p>\n</li>\n<li>\n<p>You have resistance to bludgeoning, piercing, and slashing damage.</p>\n</li>\n</ul>\n<p>If you are able to cast spells, you can't cast them or concentrate on them while raging. </p><p>Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action. </p><p>Once you have raged the number of times shown for your barbarian level in the Rages column in the table below, you must finish a long rest before you can rage again.</p><p><em>**Foundry note: Note the limited uses is set to the base default of 2. Please manually adjust as required.</em></p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td><strong>Barbarian Level</strong></td>\n<td><strong>Rages</strong></td>\n<td><strong>Rage Damage</strong></td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>5</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>Unlimited</td>\n<td>+4</td>\n</tr>\n</tbody>\n</table>\n",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 48",
-        "activation": {
-          "type": "bonus",
-          "cost": 1,
-          "condition": ""
-        },
-        "duration": {
-          "value": 1,
-          "units": "minute"
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": null,
-          "type": "self"
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "self"
-        },
-        "uses": {
-          "value": 2,
-          "max": 2,
-          "per": "lr",
-          "type": "lr"
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Barbarian 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 4400000,
-      "flags": {},
-      "img": "icons/creatures/abilities/mouth-teeth-human.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "6S2Nwqwk9GQCcfmg",
-      "name": "Unarmored Defense (Barbarian)",
-      "type": "feat",
-      "data": {
-        "description": {
-          "value": "<p>While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "PHB pg. 48",
-        "activation": {
-          "type": "",
-          "cost": 0,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": ""
-        },
-        "target": {
-          "value": null,
-          "width": null,
-          "units": "",
-          "type": ""
-        },
-        "range": {
-          "value": null,
-          "long": null,
-          "units": ""
-        },
-        "uses": {
-          "value": 0,
-          "max": 0,
-          "per": "",
-          "type": ""
-        },
-        "consume": {
-          "type": "",
-          "target": null,
-          "amount": null
-        },
-        "ability": "",
-        "actionType": "",
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "threshold": null,
-          "damage": ""
-        },
-        "damage": {
-          "parts": [],
-          "versatile": "",
-          "value": ""
-        },
-        "formula": "",
-        "save": {
-          "ability": "",
-          "dc": null,
-          "scaling": "spell",
-          "value": ""
-        },
-        "requirements": "Barbarian 1",
-        "recharge": {
-          "value": null,
-          "charged": false
-        },
-        "attunement": 0
-      },
-      "sort": 4550000,
-      "flags": {},
-      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
       "_id": "l87HKTUcZRp0PohR",
       "name": "Javelin (melee)",
       "type": "weapon",
@@ -845,6 +808,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "thr": true,
           "amm": false,
@@ -957,6 +921,7 @@
           "conditions": ""
         },
         "weaponType": "simpleR",
+        "baseItem": "",
         "properties": {
           "thr": true,
           "amm": false,
@@ -1148,6 +1113,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "hvy": true,
           "two": true,
@@ -1725,6 +1691,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "lgt": true,
           "thr": true,
@@ -1837,6 +1804,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "lgt": true,
           "thr": true,
@@ -1862,59 +1830,6 @@
       "sort": 325000,
       "flags": {},
       "img": "icons/weapons/axes/axe-broad-black.webp",
-      "effects": [],
-      "folder": null,
-      "permission": {
-        "default": 0
-      }
-    },
-    {
-      "_id": "CgqeiBQNhmG1B1MW",
-      "name": "Barbarian",
-      "type": "class",
-      "data": {
-        "description": {
-          "value": "<p>As a barbarian, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d12 per barbarian level<br /><strong>Hit Points at 1st Level:</strong> 12 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d12 (or 7) + your Constitution modifier per barbarian level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a greataxe or (b) any martial melee weapon</li>\n<li>(a) two handaxes or (b) any simple weapon</li>\n<li>An explorer's pack and four javelins</li>\n</ul>\n<h1>Barbarian Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n<td>Rages</td>\n<td>Rage Damage</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.VoR0SUrNX5EJVPIO]{Rage}, @Compendium[dnd5e.classfeatures.SZbsNbaxFFGwBpNK]{Unarmored Defense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.SCVjqRdlZ9cvHVSR]{Reckless Attack}, @Compendium[dnd5e.classfeatures.vt31lWAULygEl7yk]{Danger Sense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.TH1QAf6YNGSeBVjT]{Primal Path}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.Kl6zifJ5OmdHlOi2]{Fast Movement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.NlXslw4yAqmKZWtN]{Feral Instinct}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (1 die)}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.FqfmbPgxiyrWzhYk]{Relentless Rage}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (2 dice)}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Path feature</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.l8tUhZ5Pecm9wz7I]{Persistent Rage}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (3 dice)}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.Q1exex5ALteprrPo]{Indomitable Might}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.jVU4AgqfrFaqgXns]{Primal Champion}</td>\n<td>Unlimited</td>\n<td>+4</td>\n</tr>\n</tbody>\n</table>\n<h1>Primal Paths</h1>\n<h2>Path of the Berserker</h2>\n<p>For some barbarians, rage is a means to an end— that end being violence. The Path of the Berserker is a path of untrammeled fury, slick with blood. As you enter the berserker's rage, you thrill in the chaos of battle, heedless of your own health or well-being.</p>\n<h3>Path of the Berserker Features</h3>\n<p>3rd Level: @Compendium[dnd5e.classfeatures.CkbbAckeCtyHXEnL]{Frenzy}</p>\n<p>6th Level: @Compendium[dnd5e.classfeatures.0Jgf8fYY2ExwgQpN]{Mindless Rage}</p>\n<p>10th Level: @Compendium[dnd5e.classfeatures.M6VSMzVtKPhh8B0i]{Intimidating Presence}</p>\n<p>14th Level: @Compendium[dnd5e.classfeatures.xzD9zlRP6dUxCtCl]{Retaliation}</p>",
-          "chat": "",
-          "unidentified": ""
-        },
-        "source": "",
-        "levels": 1,
-        "subclass": "",
-        "hitDice": "d12",
-        "hitDiceUsed": 0,
-        "saves": [
-          "str",
-          "con"
-        ],
-        "skills": {
-          "number": 2,
-          "choices": [
-            "ani",
-            "ath",
-            "itm",
-            "nat",
-            "prc",
-            "sur"
-          ],
-          "value": []
-        },
-        "spellcasting": {
-          "progression": "none",
-          "ability": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "attunement": 0
-      },
-      "sort": 0,
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.classes.pvEzGSv71zBhaolc"
-        }
-      },
-      "img": "icons/skills/melee/hand-grip-sword-orange.webp",
       "effects": [],
       "folder": null,
       "permission": {
@@ -2429,11 +2344,576 @@
       "permission": {
         "default": 0
       }
+    },
+    {
+      "_id": "2wfeg14piijtgdr1",
+      "name": "Barbarian",
+      "type": "class",
+      "img": "icons/skills/melee/hand-grip-sword-orange.webp",
+      "data": {
+        "description": {
+          "value": "<p>As a barbarian, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d12 per barbarian level<br /><strong>Hit Points at 1st Level:</strong> 12 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d12 (or 7) + your Constitution modifier per barbarian level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong> Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, and Survival</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a greataxe or (b) any martial melee weapon</li>\n<li>(a) two handaxes or (b) any simple weapon</li>\n<li>An explorer's pack and four javelins</li>\n</ul>\n<h1>Barbarian Advancement</h1>\n<table border=\"0\">\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n<td>Rages</td>\n<td>Rage Damage</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.VoR0SUrNX5EJVPIO]{Rage}, @Compendium[dnd5e.classfeatures.SZbsNbaxFFGwBpNK]{Unarmored Defense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.SCVjqRdlZ9cvHVSR]{Reckless Attack}, @Compendium[dnd5e.classfeatures.vt31lWAULygEl7yk]{Danger Sense}</td>\n<td>2</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.TH1QAf6YNGSeBVjT]{Primal Path}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.XogoBnFWmCAHXppo]{Extra Attack}, @Compendium[dnd5e.classfeatures.Kl6zifJ5OmdHlOi2]{Fast Movement}</td>\n<td>3</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.NlXslw4yAqmKZWtN]{Feral Instinct}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>4</td>\n<td>+2</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (1 die)}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>Path feature</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.FqfmbPgxiyrWzhYk]{Relentless Rage}</td>\n<td>4</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (2 dice)}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>Path feature</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.l8tUhZ5Pecm9wz7I]{Persistent Rage}</td>\n<td>5</td>\n<td>+3</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>5</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.L94gyvNpUhUe0rwh]{Brutal Critical (3 dice)}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.Q1exex5ALteprrPo]{Indomitable Might}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n<td>6</td>\n<td>+4</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.jVU4AgqfrFaqgXns]{Primal Champion}</td>\n<td>Unlimited</td>\n<td>+4</td>\n</tr>\n</tbody>\n</table>\n<h1>Primal Paths</h1>\n<p>@Compendium[dnd5e.subclasses.uGuDQX9Mz3oHNHkU]{Path of the Berserker}</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "",
+        "identifier": "barbarian",
+        "levels": 1,
+        "hitDice": "d12",
+        "hitDiceUsed": 0,
+        "advancement": [
+          {
+            "_id": "amez6rlose3eoigo",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+                "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
+              ]
+            },
+            "value": {
+              "added": {
+                "ntkxu3ypcgozbl37": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+                "kk4n0n0k7lke3dn1": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK"
+              }
+            },
+            "level": 1,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "udl318k61boq0rnn",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.SCVjqRdlZ9cvHVSR",
+                "Compendium.dnd5e.classfeatures.vt31lWAULygEl7yk"
+              ]
+            },
+            "value": {},
+            "level": 2,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "8y2ey740kizr4jb6",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.TH1QAf6YNGSeBVjT"
+              ]
+            },
+            "value": {},
+            "level": 3,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "uoexdq8totskritb",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo",
+                "Compendium.dnd5e.classfeatures.Kl6zifJ5OmdHlOi2"
+              ]
+            },
+            "value": {},
+            "level": 5,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "w6ceiqibcmzpcuy8",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.NlXslw4yAqmKZWtN"
+              ]
+            },
+            "value": {},
+            "level": 7,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "ty9si22p6pfwb3ow",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.L94gyvNpUhUe0rwh"
+              ]
+            },
+            "value": {},
+            "level": 9,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "802xi5l50le3ntk8",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.FqfmbPgxiyrWzhYk"
+              ]
+            },
+            "value": {},
+            "level": 11,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "g9ut0x1ugm31gbhk",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.l8tUhZ5Pecm9wz7I"
+              ]
+            },
+            "value": {},
+            "level": 15,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "so18afasiyobkpxy",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.Q1exex5ALteprrPo"
+              ]
+            },
+            "value": {},
+            "level": 18,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "9hvtrqbg7d7zwg07",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": [
+                "Compendium.dnd5e.classfeatures.jVU4AgqfrFaqgXns"
+              ]
+            },
+            "value": {},
+            "level": 20,
+            "title": "Features",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "5jn0ekktgccyvvpw",
+            "type": "HitPoints",
+            "configuration": {},
+            "value": {
+              "1": "max"
+            },
+            "title": "",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "62svnflxsuad7oar",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "rages",
+              "type": "number",
+              "scale": {
+                "1": {
+                  "value": 2
+                },
+                "3": {
+                  "value": 3
+                },
+                "6": {
+                  "value": 4
+                },
+                "12": {
+                  "value": 5
+                },
+                "17": {
+                  "value": 6
+                },
+                "20": {
+                  "value": 999
+                }
+              }
+            },
+            "value": {},
+            "title": "Rages",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "t42incolsbuqn2ec",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "rage-damage",
+              "type": "number",
+              "scale": {
+                "1": {
+                  "value": 2
+                },
+                "9": {
+                  "value": 3
+                },
+                "16": {
+                  "value": 4
+                }
+              }
+            },
+            "value": {},
+            "title": "Rage Damage",
+            "icon": "",
+            "classRestriction": ""
+          },
+          {
+            "_id": "y0kr48pnq5doebeb",
+            "type": "ScaleValue",
+            "configuration": {
+              "identifier": "brutal-critical",
+              "type": "number",
+              "scale": {
+                "9": {
+                  "value": 1
+                },
+                "13": {
+                  "value": 2
+                },
+                "17": {
+                  "value": 3
+                }
+              }
+            },
+            "value": {},
+            "title": "Brutal Critical Dice",
+            "icon": "",
+            "classRestriction": ""
+          }
+        ],
+        "saves": [
+          "str",
+          "con"
+        ],
+        "skills": {
+          "number": 2,
+          "choices": [
+            "ani",
+            "ath",
+            "itm",
+            "nat",
+            "prc",
+            "sur"
+          ],
+          "value": []
+        },
+        "spellcasting": {
+          "progression": "none",
+          "ability": ""
+        },
+        "damage": {
+          "parts": []
+        },
+        "attunement": null
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.classes.pvEzGSv71zBhaolc"
+        }
+      }
+    },
+    {
+      "_id": "ntkxu3ypcgozbl37",
+      "name": "Rage",
+      "type": "feat",
+      "img": "icons/creatures/abilities/mouth-teeth-human.webp",
+      "data": {
+        "description": {
+          "value": "<p>In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor:</p>\n<ul>\n<li>\n<p>You have advantage on Strength checks and Strength saving throws.</p>\n</li>\n<li>\n<p>When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.</p>\n</li>\n<li>\n<p>You have resistance to bludgeoning, piercing, and slashing damage.</p>\n</li>\n</ul>\n<p>If you are able to cast spells, you can't cast them or concentrate on them while raging. </p>\n<p>Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action. </p>\n<p>Once you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 48",
+        "activation": {
+          "type": "bonus",
+          "cost": 1,
+          "condition": ""
+        },
+        "duration": {
+          "value": 1,
+          "units": "minute"
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": "self"
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "self"
+        },
+        "uses": {
+          "value": 2,
+          "max": "@scale.barbarian.rages",
+          "per": "lr"
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Barbarian 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [
+        {
+          "_id": "eWhL8hUr0c2ujDUm",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.bonuses.mwak.damage",
+              "mode": 2,
+              "value": "+@scale.barbarian.rage-damage"
+            },
+            {
+              "key": "data.traits.dr.value",
+              "mode": 2,
+              "value": "slashing"
+            },
+            {
+              "key": "data.traits.dr.value",
+              "mode": 2,
+              "value": "piercing"
+            },
+            {
+              "key": "data.traits.dr.value",
+              "mode": 2,
+              "value": "bludgeoning"
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "rounds": 10
+          },
+          "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
+          "label": "Rage",
+          "origin": "Item.bdfYHJstcltQC7SZ",
+          "tint": null,
+          "transfer": true
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO",
+          "advancementOrigin": "2wfeg14piijtgdr1.amez6rlose3eoigo"
+        }
+      }
+    },
+    {
+      "_id": "kk4n0n0k7lke3dn1",
+      "name": "Unarmored Defense (Barbarian)",
+      "type": "feat",
+      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "data": {
+        "description": {
+          "value": "<p>While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.</p>",
+          "chat": "",
+          "unidentified": ""
+        },
+        "source": "PHB pg. 48",
+        "activation": {
+          "type": "",
+          "cost": 0,
+          "condition": ""
+        },
+        "duration": {
+          "value": null,
+          "units": ""
+        },
+        "target": {
+          "value": null,
+          "width": null,
+          "units": "",
+          "type": ""
+        },
+        "range": {
+          "value": null,
+          "long": null,
+          "units": ""
+        },
+        "uses": {
+          "value": null,
+          "max": "",
+          "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": "",
+          "amount": null
+        },
+        "ability": "",
+        "actionType": "",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "threshold": null,
+          "damage": ""
+        },
+        "damage": {
+          "parts": [],
+          "versatile": ""
+        },
+        "formula": "",
+        "save": {
+          "ability": "",
+          "dc": null,
+          "scaling": "spell"
+        },
+        "requirements": "Barbarian 1",
+        "recharge": {
+          "value": null,
+          "charged": false
+        }
+      },
+      "effects": [
+        {
+          "_id": "hEgUnQNVxtBo2zkK",
+          "changes": [
+            {
+              "key": "data.attributes.ac.calc",
+              "mode": 5,
+              "value": "unarmoredBarb"
+            }
+          ],
+          "disabled": false,
+          "duration": {
+            "startTime": null
+          },
+          "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+          "label": "Unarmored Defense",
+          "origin": "Item.aIMXb43ACIxMItbh",
+          "transfer": true,
+          "flags": {},
+          "tint": null
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "permission": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceId": "Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK",
+          "advancementOrigin": "2wfeg14piijtgdr1.amez6rlose3eoigo"
+        }
+      }
     }
   ],
-  "effects": [],
-  "folder": "pK61u9wafV1nLfmS",
-  "sort": 193750,
+  "effects": [
+    {
+      "_id": "eWhL8hUr0c2ujDUm",
+      "changes": [
+        {
+          "key": "data.bonuses.mwak.damage",
+          "mode": 2,
+          "value": "+@scale.barbarian.rage-damage"
+        },
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "slashing"
+        },
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "piercing"
+        },
+        {
+          "key": "data.traits.dr.value",
+          "mode": 2,
+          "value": "bludgeoning"
+        }
+      ],
+      "disabled": true,
+      "duration": {
+        "startTime": 0,
+        "rounds": 10
+      },
+      "icon": "icons/creatures/abilities/mouth-teeth-human.webp",
+      "label": "Rage",
+      "origin": "Actor.jPzWH8sy3PbuB5OV.Item.ntkxu3ypcgozbl37",
+      "tint": null,
+      "transfer": false,
+      "flags": {}
+    },
+    {
+      "_id": "hEgUnQNVxtBo2zkK",
+      "changes": [
+        {
+          "key": "data.attributes.ac.calc",
+          "mode": 5,
+          "value": "unarmoredBarb"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": 0
+      },
+      "icon": "icons/magic/control/silhouette-hold-change-blue.webp",
+      "label": "Unarmored Defense",
+      "origin": "Actor.jPzWH8sy3PbuB5OV.Item.kk4n0n0k7lke3dn1",
+      "tint": null,
+      "transfer": false,
+      "flags": {}
+    }
+  ],
+  "folder": null,
+  "sort": 0,
   "permission": {
     "default": 0
   },
@@ -2441,5 +2921,6 @@
     "dnd5e": {
       "halflingLucky": true
     }
-  }
+  },
+  "_id": "irWonyO6ZLh47sN7"
 }

@@ -8,6 +8,10 @@
       "str": {
         "value": 3,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -4,
         "save": -4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 8,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -41,6 +53,10 @@
       "int": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 6,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -103,6 +127,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 0,
         "blindsight": 0,
@@ -124,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>The rhythmic rustle of leaves, knotted roots dragging through the undergrowth, and vacant holes left in the earth are all signs of this fascinating little creature. These formerly average forest plants are gifted with mild sentience by the natural spellwork of a most-powerful druid who has cast the Awaken spell to birth an Awakened Shrub.</p>\n<p>The shrub itself, having negligible will of its own, then remains @JournalEntry[Charmed] to the spellcaster for thirty days, during which, the Awakened Shrub serves at the whim of the druid. The leafy automaton is also given the ability to move independently by the spellwork cast upon it. Using their roots and branches to propel themselves across the forest floor, the shrubs are left to roam clumsily throughout the druid's selected domain.</p>\n<p><strong>Druid's Little Helper. </strong>While any mage proficient enough in the arcane to produce an Awaken spell may pull these shrubs into sudden life, it is the druids of the woods who most commonly utilize the ability. A unique feature of the Awakened Shrub is its indistinguishability between itself and an average shrub when it stands completely still. The ability to camouflage themselves so thoroughly allows the Awakened Shrubs to act as sentires for a more secretive druid's hideaway.</p>\n<p>As recommended to me by a friend of the forest: be advised to utilize the shrubs in small groups as to simply overwhelm any nosey intruders. Strength in numbers is key for these simplistic shrubs as they may be easily dispatched if singled out. As the magic within the shrub allows the shrubs to speak a language known to their creator, Awakened Shrubs may also be programmed with a warning message and avoid conflict altogether. The shrubs, however, are quite inept when it comes to the completion of even the most simplistic tasks, so utilizing them in a “living alarm” capacity may be the wisest choice.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
+        "value": "<p>The rhythmic rustle of leaves, knotted roots dragging through the undergrowth, and vacant holes left in the earth are all signs of this fascinating little creature. These formerly average forest plants are gifted with mild sentience by the natural spellwork of a most-powerful druid who has cast the Awaken spell to birth an Awakened Shrub.</p>\n<p>The shrub itself, having negligible will of its own, then remains @Compendium[dnd5e.rules.H8aTFVG3YFAkQ3TK]{Charmed} by the spellcaster for thirty days, during which, the Awakened Shrub serves at the whim of the druid. The leafy automaton is also given the ability to move independently by the spellwork cast upon it. Using their roots and branches to propel themselves across the forest floor, the shrubs are left to roam clumsily throughout the druid's selected domain.</p>\n<p><strong>Druid's Little Helper. </strong>While any mage proficient enough in the arcane to produce an Awaken spell may pull these shrubs into sudden life, it is the druids of the woods who most commonly utilize the ability. A unique feature of the Awakened Shrub is its indistinguishability between itself and an average shrub when it stands completely still. The ability to camouflage themselves so thoroughly allows the Awakened Shrubs to act as sentires for a more secretive druid's hideaway.</p>\n<p>As recommended to me by a friend of the forest: be advised to utilize the shrubs in small groups as to simply overwhelm any nosey intruders. Strength in numbers is key for these simplistic shrubs as they may be easily dispatched if singled out. As the magic within the shrub allows the shrubs to speak a language known to their creator, Awakened Shrubs may also be programmed with a warning message and avoid conflict altogether. The shrubs, however, are quite inept when it comes to the completion of even the most simplistic tasks, so utilizing them in a “living alarm” capacity may be the wisest choice.</p>\n<ul>\n<li><em>Token artwork by Forgotten Adventures.</em></li>\n<li><em>Bestiary entry by Penelope (Vyrnali).</em></li>\n</ul>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -184,6 +211,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -193,6 +224,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -202,6 +237,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -211,6 +250,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -4,
         "bonus": 0,
         "passive": 6,
@@ -220,6 +263,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -229,6 +276,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -238,6 +289,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -247,6 +302,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -256,6 +315,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -265,6 +328,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -274,6 +341,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -283,6 +354,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -292,6 +367,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -301,6 +380,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -310,6 +393,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -319,6 +406,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -328,6 +419,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -337,6 +432,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -478,7 +577,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/plant/AwakenedShrub.webp",
     "actorId": "gaSTr7DFZJLmgI2J",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -563,6 +683,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "value": "",
           "amm": false,

@@ -220,13 +220,17 @@ export async function d20Roll({
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
-  if ( chooseModifier && !isFF ) data.mod = "@mod";
+  if ( chooseModifier && !isFF ) {
+    data.mod = "@mod";
+    if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
+  }
 
   // Construct the D20Roll instance
   const roll = new CONFIG.Dice.D20Roll(formula, data, {
     flavor: flavor || title,
     advantageMode,
     defaultRollMode,
+    rollMode,
     critical,
     fumble,
     targetValue,
@@ -242,7 +246,7 @@ export async function d20Roll({
       chooseModifier,
       defaultRollMode: defaultRollMode,
       defaultAction: advantageMode,
-      defaultAbility: data?.item?.ability,
+      defaultAbility: data?.item?.ability || data?.defaultAbility,
       template
     }, dialogOptions);
     if ( configured === null ) return null;
@@ -333,6 +337,7 @@ export async function damageRoll({
   const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
   const roll = new CONFIG.Dice.DamageRoll(formula, data, {
     flavor: flavor || title,
+    rollMode,
     critical: isFF ? isCritical : false,
     criticalBonusDice,
     criticalMultiplier,
@@ -379,53 +384,4 @@ function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
   const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
   if ( event?.altKey ) critical = true;
   return {isFF, isCritical: critical};
-}
-
-/**
- * Backport Roll#isDeterministic functionality from later foundry versions.
- */
-export function shimIsDeterministic() {
-  Object.defineProperty(Roll.prototype, "isDeterministic", {
-    get() {
-      return this.terms.every(t => t.isDeterministic);
-    }
-  });
-
-  Object.defineProperty(RollTerm.prototype, "isDeterministic", {
-    get() {
-      return true;
-    }
-  });
-
-  Object.defineProperty(DiceTerm.prototype, "isDeterministic", {
-    get() {
-      return false;
-    }
-  });
-
-  Object.defineProperty(MathTerm.prototype, "isDeterministic", {
-    get() {
-      return this.terms.every(t => new Roll(t).isDeterministic);
-    }
-  });
-
-  Object.defineProperty(ParentheticalTerm.prototype, "isDeterministic", {
-    get() {
-      return new Roll(this.term).isDeterministic;
-    }
-  });
-
-  Object.defineProperty(PoolTerm.prototype, "isDeterministic", {
-    get() {
-      return this.terms.every(t => new Roll(t).isDeterministic);
-    }
-  });
-
-  Object.defineProperty(StringTerm.prototype, "isDeterministic", {
-    get() {
-      const classified = Roll._classifyStringTerm(this.term, {intermediate: false});
-      if ( classified instanceof StringTerm ) return true;
-      return classified.isDeterministic;
-    }
-  });
 }

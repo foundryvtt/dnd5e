@@ -1,3 +1,4 @@
+import { AdvancementManager } from "../advancement/advancement-manager.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
@@ -7,6 +8,15 @@ import ActiveEffect5e from "../active-effect.js";
  * @extends {ItemSheet}
  */
 export default class ItemSheet5e extends ItemSheet {
+
+  /**
+   * Whether advancements on embedded items should be configurable.
+   * @type {boolean}
+   */
+  advancementConfigurationMode = false;
+
+  /* -------------------------------------------- */
+
   constructor(...args) {
     super(...args);
 
@@ -14,6 +24,8 @@ export default class ItemSheet5e extends ItemSheet {
     if ( this.object.data.type === "class" ) {
       this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
+    } else if ( this.object.data.type === "subclass" ) {
+      this.options.height = this.position.height = 540;
     }
   }
 
@@ -47,6 +59,9 @@ export default class ItemSheet5e extends ItemSheet {
     const itemData = data.data;
     data.labels = this.item.labels;
     data.config = CONFIG.DND5E;
+    data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
+    data.isEmbedded = this.item.isEmbedded;
+    data.advancementEditable = (this.advancementConfigurationMode || !data.isEmbedded) && data.editable;
 
     // Item Type, Status, and Details
     data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
@@ -77,12 +92,65 @@ export default class ItemSheet5e extends ItemSheet {
     data.hasAC = data.isArmor || data.isMountable;
     data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
 
+    // Advancement
+    data.advancement = this._getItemAdvancement(this.item);
+
     // Prepare Active Effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     // Re-define the template data references (backwards compatible)
     data.item = itemData;
     data.data = itemData.data;
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the display object used to show the advancement tab.
+   * @param {Item5e} item  The item for which the advancement is being prepared.
+   * @returns {object}     Object with advancement data grouped by levels.
+   */
+  _getItemAdvancement(item) {
+    const configMode = !item.parent || this.advancementConfigurationMode;
+    const maxLevel = !configMode ? item.data.data.levels ?? item.class?.data.data.levels
+      ?? item.parent.data.data.details.level : -1;
+    const data = {};
+
+    // Improperly configured advancements
+    if ( item.advancement.needingConfiguration.length ) {
+      data.unconfigured = {
+        items: item.advancement.needingConfiguration.map(advancement => ({
+          id: advancement.id,
+          order: advancement.constructor.order,
+          title: advancement.title,
+          icon: advancement.icon,
+          classRestriction: advancement.data.classRestriction,
+          configured: false
+        })),
+        configured: "partial"
+      };
+    }
+
+    // All other advancements by level
+    for ( let [level, advancements] of Object.entries(item.advancement.byLevel) ) {
+      if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
+      const items = advancements.map(advancement => ({
+        id: advancement.id,
+        order: advancement.sortingValueForLevel(level),
+        title: advancement.titleForLevel(level, { configMode }),
+        icon: advancement.icon,
+        classRestriction: advancement.data.classRestriction,
+        summary: advancement.summaryForLevel(level, { configMode }),
+        configured: advancement.configuredForLevel(level)
+      }));
+      if ( !items.length ) continue;
+      data[level] = {
+        items: items.sort((a, b) => a.order.localeCompare(b.order)),
+        configured: (level > maxLevel) ? false : items.some(a => !a.configured) ? "partial" : "full"
+      };
+    }
+
     return data;
   }
 
@@ -149,6 +217,15 @@ export default class ItemSheet5e extends ItemSheet {
       }, {});
     }
 
+    // Hit Dice
+    else if ( consume.type === "hitDice" ) {
+      return {
+        smallest: game.i18n.localize("DND5E.ConsumeHitDiceSmallest"),
+        ...CONFIG.DND5E.hitDieTypes.reduce((obj, hd) => { obj[hd] = hd; return obj; }, {}),
+        largest: game.i18n.localize("DND5E.ConsumeHitDiceLargest")
+      };
+    }
+
     // Materials
     else if ( consume.type === "material" ) {
       return actor.items.reduce((obj, i) => {
@@ -178,6 +255,7 @@ export default class ItemSheet5e extends ItemSheet {
         return obj;
       }, {});
     }
+
     else return {};
   }
 
@@ -190,14 +268,16 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemStatus(item) {
-    if ( item.type === "spell" ) {
-      return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
-    }
-    else if ( ["weapon", "equipment"].includes(item.type) ) {
-      return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
-    }
-    else if ( item.type === "tool" ) {
-      return game.i18n.localize(item.data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
+    switch ( item.type ) {
+      case "class":
+        return game.i18n.format("DND5E.LevelCount", {ordinal: item.data.levels.ordinalString()});
+      case "equipment":
+      case "weapon":
+        return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
+      case "spell":
+        return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
+      case "tool":
+        return game.i18n.localize(item.data.proficient ? "DND5E.Proficient" : "DND5E.NotProficient");
     }
   }
 
@@ -221,10 +301,9 @@ export default class ItemSheet5e extends ItemSheet {
 
     else if ( item.type === "spell" ) {
       props.push(
-        labels.components,
+        labels.components.vsm,
         labels.materials,
-        item.data.components.concentration ? game.i18n.localize("DND5E.Concentration") : null,
-        item.data.components.ritual ? game.i18n.localize("DND5E.Ritual") : null
+        ...labels.components.tags
       );
     }
 
@@ -302,9 +381,20 @@ export default class ItemSheet5e extends ItemSheet {
       if ( !maxRoll.isDeterministic ) {
         data.data.uses.max = this.object.data._source.data.uses.max;
         this.form.querySelector("input[name='data.uses.max']").value = data.data.uses.max;
-        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceWarn", {
+        return ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
         }));
+      }
+    }
+
+    // Check class identifier
+    if ( data.data.identifier ) {
+      const dataRgx = new RegExp(/^([a-z0-9_-]+)$/i);
+      const match = data.data.identifier.match(dataRgx);
+      if ( !match ) {
+        data.data.identifier = this.object.data._source.data.identifier;
+        this.form.querySelector("input[name='data.identifier']").value = data.data.identifier;
+        return ui.notifications.error(game.i18n.localize("DND5E.IdentifierError"));
       }
     }
 
@@ -324,6 +414,9 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
+      html.find(".advancement .item-control").click(this._onAdvancementAction.bind(this));
+      // TODO: Remove this when UUID links are supported in v10
+      html.find(".actor-item-link").click(this._onClickContentLink.bind(this));
     }
   }
 
@@ -390,6 +483,56 @@ export default class ItemSheet5e extends ItemSheet {
         break;
     }
     new TraitSelector(this.item, options).render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating the advancement selection window when the add button is pressed.
+   * @param {Event} event  The click event which originated the creation.
+   * @returns {Promise}
+   */
+  _onAdvancementAction(event) {
+    const cl = event.currentTarget.classList;
+    if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
+
+    if ( cl.contains("modify-choices") ) {
+      const level = event.currentTarget.closest("li")?.dataset.level;
+      const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
+      if ( manager.steps.length ) manager.render(true);
+      return;
+    }
+
+    if ( cl.contains("toggle-configuration") ) {
+      this.advancementConfigurationMode = !this.advancementConfigurationMode;
+      return this.render();
+    }
+
+    const id = event.currentTarget.closest("li.item")?.dataset.id;
+    const advancement = this.item.advancement.byId[id];
+    if ( !advancement ) return;
+
+    if ( cl.contains("item-edit") ) {
+      const config = new advancement.constructor.metadata.apps.config(advancement);
+      return config.render(true);
+    } else if ( cl.contains("item-delete") ) {
+      return this.item.deleteAdvancement(id);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicking on "actor-item-link" content links. Note: This method will be removed in 1.7 when it can
+   * be replaced by UUID links in core.
+   * @param {Event} event  Triggering click event.
+   * @private
+   */
+  _onClickContentLink(event) {
+    event.stopPropagation();
+    const actor = game.actors.get(event.target.dataset.actor);
+    const item = actor?.items.get(event.target.dataset.id);
+    item?.sheet.render(true);
   }
 
   /* -------------------------------------------- */

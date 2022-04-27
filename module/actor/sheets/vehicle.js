@@ -9,16 +9,14 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /** @inheritdoc */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "vehicle"],
-      width: 720,
-      height: 680
+      classes: ["dnd5e", "sheet", "actor", "vehicle"]
     });
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  static unsupportedItemTypes = new Set(["class"]);
+  static unsupportedItemTypes = new Set(["background", "class", "subclass"]);
 
   /* -------------------------------------------- */
 
@@ -280,7 +278,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       .click(evt => evt.target.select())
       .change(this._onCargoRowChange.bind(this));
 
-    html.find(".item-qty:not(.cargo) input")
+    html.find(".item:not(.cargo-row) .item-qty input")
       .click(evt => evt.target.select())
       .change(this._onQtyChange.bind(this));
 
@@ -293,7 +291,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /**
    * Handle saving a cargo row (i.e. crew or passenger) in-sheet.
-   * @param {Event} event  Triggering event.
+   * @param {Event} event              Triggering event.
    * @returns {Promise<Actor5e>|null}  Actor after update if any changes were made.
    * @private
    */
@@ -301,16 +299,16 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     event.preventDefault();
     const target = event.currentTarget;
     const row = target.closest(".item");
-    const idx = Number(row.dataset.itemId);
+    const idx = Number(row.dataset.itemIndex);
     const property = row.classList.contains("crew") ? "crew" : "passengers";
 
     // Get the cargo entry
     const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[property]);
     const entry = cargo[idx];
-    if (!entry) return null;
+    if ( !entry ) return null;
 
     // Update the cargo value
-    const key = target.dataset.property || "name";
+    const key = target.dataset.property ?? "name";
     const type = target.dataset.dtype;
     let value = target.value;
     if (type === "Number") value = Number(value);

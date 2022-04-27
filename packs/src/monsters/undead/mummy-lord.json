@@ -127,6 +127,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 60,
         "blindsight": 0,
@@ -613,7 +616,7 @@
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 <em>radiant damage</em>. The target gains no benefit from cover for this saving throw.</p>\n<p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -649,7 +652,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -703,7 +706,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        }
+      }
     },
     {
       "_id": "AW5LdjlVjV1cRaOy",
@@ -799,7 +806,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        }
+      }
     },
     {
       "_id": "QgwOynbi1sYRiWVL",
@@ -808,7 +819,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p>\n<p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p>\n<p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p>\n<p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p>\n<p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p>\n<p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p>\n<p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -819,8 +830,8 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
-          "units": "inst"
+          "value": 1,
+          "units": "round"
         },
         "target": {
           "value": 1,
@@ -840,11 +851,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -894,7 +905,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+        }
+      }
     },
     {
       "_id": "5FOjIEpgif56pCaS",
@@ -903,7 +918,7 @@
       "img": "systems/dnd5e/icons/spells/fireball-sky-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 <em>radiant damage</em>, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
+          "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -921,7 +936,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 120,
@@ -939,7 +954,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "rsak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -994,7 +1009,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
+        }
+      }
     },
     {
       "_id": "Ly9NpLnNDMXv6EiS",
@@ -1090,7 +1109,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
+        }
+      }
     },
     {
       "_id": "M8U9Hy7axIAZY9Hu",
@@ -1099,7 +1122,7 @@
       "img": "systems/dnd5e/icons/spells/shielding-eerie-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1117,7 +1140,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 60,
@@ -1135,7 +1158,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1185,7 +1208,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4"
+        }
+      }
     },
     {
       "_id": "7K61kAUHxj3STLNR",
@@ -1226,7 +1253,7 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
@@ -1281,7 +1308,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.5VhqFROQYjr1P9lp"
+        }
+      }
     },
     {
       "_id": "fI46NAQa0o0Zg6qV",
@@ -1290,7 +1321,7 @@
       "img": "systems/dnd5e/icons/spells/enchant-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes <em>force damage</em> equal to 1d8 + your spellcasting ability modifier.</p>\n<p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p>\n<p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
+          "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1308,7 +1339,7 @@
           "value": 5,
           "width": null,
           "units": "ft",
-          "type": ""
+          "type": "square"
         },
         "range": {
           "value": 60,
@@ -1322,12 +1353,12 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
+        "actionType": "msak",
+        "attackBonus": "0",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1336,11 +1367,7 @@
         "damage": {
           "parts": [
             [
-              "1d8",
-              "force"
-            ],
-            [
-              "@mod",
+              "floor(@item.level / 2)d8 + @mod",
               "force"
             ]
           ],
@@ -1374,7 +1401,7 @@
           "prepared": true
         },
         "scaling": {
-          "mode": "level",
+          "mode": "none",
           "formula": ""
         },
         "attunement": 0
@@ -1385,7 +1412,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0"
+        }
+      }
     },
     {
       "_id": "8N1nF4IWIfuFvPtW",
@@ -1394,7 +1425,7 @@
       "img": "systems/dnd5e/icons/spells/horror-red-2.jpg",
       "data": {
         "description": {
-          "value": "<p>This spell creates an undead servant. Choose a pile of bones or a corpse of a Medium or Small humanoid within range. Your spell imbues the target with a foul mimicry of life, raising it as an undead creature. The target becomes a skeleton if you chose bones or a zombie if you chose a corpse (the DM has the creature's game statistics).</p>\n<p>On each of your turns, you can use a bonus action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p>\n<p>The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell, rather than animating a new one.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you animate or reassert control over two additional undead creatures for each slot level above 3rd. Each of the creatures must come from a different corpse or pile of bones.</p>",
+          "value": "<p>This spell creates an undead servant. Choose a pile of bones or a corpse of a Medium or Small humanoid within range. Your spell imbues the target with a foul mimicry of life, raising it as an undead creature. The target becomes a skeleton if you chose bones or a zombie if you chose a corpse (the DM has the creature's game statistics).</p><p>On each of your turns, you can use a bonus action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p><p>The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell, rather than animating a new one.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you animate or reassert control over two additional undead creatures for each slot level above 3rd. Each of the creatures must come from a different corpse or pile of bones.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1405,8 +1436,8 @@
           "condition": ""
         },
         "duration": {
-          "value": 24,
-          "units": "hour"
+          "value": null,
+          "units": "inst"
         },
         "target": {
           "value": 1,
@@ -1481,7 +1512,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.oyE5nVppa5mde5gT"
+        }
+      }
     },
     {
       "_id": "NNKQuZzTjMoTHhTa",
@@ -1490,7 +1525,7 @@
       "img": "systems/dnd5e/icons/spells/slice-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
+          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1577,7 +1612,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+        }
+      }
     },
     {
       "_id": "llf7Y7s3ODcBJ6FD",
@@ -1601,10 +1640,10 @@
           "units": "inst"
         },
         "target": {
-          "value": 1,
+          "value": null,
           "width": null,
-          "units": "",
-          "type": "creature"
+          "units": null,
+          "type": "self"
         },
         "range": {
           "value": null,
@@ -1673,7 +1712,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.XqzXSKNR75ZdYTA9"
+        }
+      }
     },
     {
       "_id": "h13yvCayYwAIiYoP",
@@ -1682,7 +1725,7 @@
       "img": "systems/dnd5e/icons/spells/haste-sky-3.jpg",
       "data": {
         "description": {
-          "value": "<p>A Large Spectral Guardian appears and hovers for the Duration in an unoccupied space of your choice that you can see within range. The guardian occupies that space and is indistinct except for a gleaming sword and shield emblazoned with the symbol of your deity.</p>\n<p>Any creature hostile to you that moves to a space within 10 feet of the guardian for the first time on a turn must succeed on a Dexterity saving throw. The creature takes 20 <em>radiant damage</em> on a failed save, or half as much damage on a successful one. The guardian vanishes when it has dealt a total of 60 damage.</p>",
+          "value": "<p>A Large Spectral Guardian appears and hovers for the Duration in an unoccupied space of your choice that you can see within range. The guardian occupies that space and is indistinct except for a gleaming sword and shield emblazoned with the symbol of your deity.</p><p>Any creature hostile to you that moves to a space within 10 feet of the guardian for the first time on a turn must succeed on a Dexterity saving throw. The creature takes 20 radiant damage on a failed save, or half as much damage on a successful one. The guardian vanishes when it has dealt a total of 60 damage.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1697,10 +1740,10 @@
           "units": "hour"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
-          "units": "",
-          "type": ""
+          "units": "any",
+          "type": "space"
         },
         "range": {
           "value": 30,
@@ -1718,7 +1761,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1726,13 +1769,18 @@
           "damage": ""
         },
         "damage": {
-          "parts": [],
+          "parts": [
+            [
+              "20",
+              "radiant"
+            ]
+          ],
           "versatile": "",
           "value": ""
         },
         "formula": "",
         "save": {
-          "ability": "",
+          "ability": "dex",
           "dc": null,
           "scaling": "spell",
           "value": ""
@@ -1769,7 +1817,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.TgHsuhNasPbhu8MO"
+        }
+      }
     },
     {
       "_id": "CVK9JHYEvTdfpsm9",
@@ -1778,7 +1830,7 @@
       "img": "systems/dnd5e/icons/spells/rip-magenta-3.jpg",
       "data": {
         "description": {
-          "value": "<p>Your touch inflicts disease. Make a melee spell attack against a creature within your reach. On a hit, you afflict the creature with a disease of your choice from any of the ones described below.</p>\n<p>At the end of each of the target's turns, it must make a <strong>Constitution</strong> saving throw. After failing three of these saving throws, the disease's effects last for the duration, and the creature stops making these saves. After succeeding on three of these saving throws, the creature recovers from the disease, and the spell ends.</p>\n<p>Since this spell induces a natural disease in its target, any effect that removes a disease or otherwise ameliorates a disease's effects apply to it.</p>\n<p><strong>Blinding Sickness.&nbsp;</strong>Pain grips the creature's mind, and its eyes turn milky white. The creature has disadvantage on Wisdom checks and Wisdom saving throws and is blinded.</p>\n<p><strong>Filth Fever.</strong>&nbsp;A raging fever sweeps through the creature's body. The creature has disadvantage on Strength checks, Strength saving throws, and attack rolls that use Strength.</p>\n<p><strong>Flesh Rot.&nbsp;</strong>The creature's flesh decays. The creature has disadvantage on Charisma checks and vulnerability to all damage.</p>\n<p><strong>Mindfire.</strong>&nbsp;The creature's mind becomes feverish. The creature has disadvantage on Intelligence checks and Intelligence saving throws, and the creature behaves as if under the effects of the confusion spell during combat.</p>\n<p><strong>Seizure.&nbsp;</strong>The creature is overcome with shaking. The creature has disadvantage on Dexterity checks, Dexterity saving throws, and attack rolls that use Dexterity.</p>\n<p><strong>Slimy Doom.</strong>&nbsp;The creature begins to bleed uncontrollably. The creature has disadvantage on Constitution checks and Constitution saving throws. In addition, whenever the creature takes damage, it is stunned until the end of its next turn.</p>",
+          "value": "<p>Your touch inflicts disease. Make a melee spell attack against a creature within your reach. On a hit, you afflict the creature with a disease of your choice from any of the ones described below.</p><p>At the end of each of the target's turns, it must make a Constitution saving throw. After failing three of these saving throws, the disease's effects last for the duration, and the creature stops making these saves. After succeeding on three of these saving throws, the creature recovers from the disease, and the spell ends.</p><p>Since this spell induces a natural disease in its target, any effect that removes a disease or otherwise ameliorates a disease's effects apply to it.</p><p><strong>Blinding Sickness.&nbsp;</strong>Pain grips the creature's mind, and its eyes turn milky white. The creature has disadvantage on Wisdom checks and Wisdom saving throws and is blinded.</p><p><strong>Filth Fever.</strong>&nbsp;A raging fever sweeps through the creature's body. The creature has disadvantage on Strength checks, Strength saving throws, and attack rolls that use Strength.</p><p><strong>Flesh Rot.&nbsp;</strong>The creature's flesh decays. The creature has disadvantage on Charisma checks and vulnerability to all damage.</p><p><strong>Mindfire.</strong>&nbsp;The creature's mind becomes feverish. The creature has disadvantage on Intelligence checks and Intelligence saving throws, and the creature behaves as if under the effects of the confusion spell during combat.</p><p><strong>Seizure.&nbsp;</strong>The creature is overcome with shaking. The creature has disadvantage on Dexterity checks, Dexterity saving throws, and attack rolls that use Dexterity.</p><p><strong>Slimy Doom.</strong>&nbsp;The creature begins to bleed uncontrollably. The creature has disadvantage on Constitution checks and Constitution saving throws. In addition, whenever the creature takes damage, it is stunned until the end of its next turn.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1814,7 +1866,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "msak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1864,7 +1916,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CjIq8Ed7bu3vVwT1"
+        }
+      }
     },
     {
       "_id": "7UVJZmojKddOIVzm",
@@ -1873,7 +1929,7 @@
       "img": "systems/dnd5e/icons/spells/leaf-jade-3.jpg",
       "data": {
         "description": {
-          "value": "<p>Swarming, biting locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the Duration, and its area is lightly obscured. The sphere's area is difficult terrain.</p>\n<p>When the area appears, each creature in it must make a <strong>Constitution</strong> saving throw. A creature takes 4d10 <em>piercing damage</em> on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.</p>",
+          "value": "<p>Swarming, biting locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the Duration, and its area is lightly obscured. The sphere's area is difficult terrain.</p><p>When the area appears, each creature in it must make a Constitution saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1909,7 +1965,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1963,7 +2019,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.OVikYmSdHliAG2YD"
+        }
+      }
     },
     {
       "_id": "8Lxmaq0rmhrOEj8c",
@@ -1972,7 +2032,7 @@
       "img": "systems/dnd5e/icons/spells/rip-magenta-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You unleash a virulent disease on a creature that you can see within range. The target must make a <strong>Constitution</strong> saving throw. On a failed save, it takes 14d6 <em>necrotic damage</em>, or half as much damage on a successful save. The damage can't reduce the target's Hit Points below 1. If the target fails the saving throw, its hit point maximum is reduced for 1 Hour by an amount equal to the <em>necrotic damage</em> it took. Any effect that removes a disease allows a creature's hit point maximum to return to normal before that time passes.</p>",
+          "value": "<p>You unleash a virulent disease on a creature that you can see within range. The target must make a Constitution saving throw. On a failed save, it takes 14d6 necrotic damage, or half as much damage on a successful save. The damage can't reduce the target's Hit Points below 1. If the target fails the saving throw, its hit point maximum is reduced for 1 Hour by an amount equal to the necrotic damage it took. Any effect that removes a disease allows a creature's hit point maximum to return to normal before that time passes.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1987,10 +2047,10 @@
           "units": "inst"
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 60,
@@ -2004,11 +2064,11 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -2062,7 +2122,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.tMH6Ivn4GmE1naMj"
+        }
+      }
     },
     {
       "_id": "Os0eEymWpLTVR2Xv",
