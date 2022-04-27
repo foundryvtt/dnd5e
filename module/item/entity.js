@@ -441,6 +441,7 @@ export default class Item5e extends Item {
     const itemData = this.data.data;
     if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
     const rollData = this.getRollData();
+    const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
     const derivedDamage = itemData.damage?.parts?.map(damagePart => {
       let formula;
       try {
@@ -449,7 +450,7 @@ export default class Item5e extends Item {
       }
       catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
       const damageType = damagePart[1];
-      return { formula, damageType, label: `${formula} ${CONFIG.DND5E.damageTypes[damageType]}` };
+      return { formula, damageType, label: `${formula} ${damageLabels[damageType] ?? ""}` };
     });
     this.labels.derivedDamage = derivedDamage;
     return derivedDamage;
