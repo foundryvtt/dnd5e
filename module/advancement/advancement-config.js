@@ -80,6 +80,15 @@ export class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
+  _onSelectFile(selection, filePicker) {
+    super._onSelectFile(selection, filePicker);
+    // TODO: Remove when fixed in core: https://gitlab.com/foundrynet/foundryvtt/-/issues/7012
+    if ( this.options.submitOnChange ) return this._onSubmit(new Event("FilePickedEvent"));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
   async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData).data;
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
