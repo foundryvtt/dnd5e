@@ -30,7 +30,7 @@ export function indexFromUuid(uuid) {
   if ( parts[0] === "Compendium" ) {
     const [, scope, packName, id] = parts;
     const pack = game.packs.get(`${scope}.${packName}`);
-    index = pack.index.get(id);
+    index = pack?.index.get(id);
   }
 
   // World Documents
