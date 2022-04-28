@@ -1314,12 +1314,25 @@ export default class Actor5e extends Actor {
    * Roll hit points for a specific class as part of a level-up workflow.
    * @param {Item5e} item      The class item whose hit dice to roll.
    * @returns {Promise<Roll>}  The completed roll.
+   * @see {@link dnd5e.rollClassHitPoints}
    */
   async rollClassHitPoints(item) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
     const denom = item.data.data.hitDice;
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
     const roll = new Roll(`1${denom}`);
+
+    /**
+     * A hook event that fires before hit points are rolled for a character's class.
+     * @function dnd5e.rollClassHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor  Actor for which the hit points are being rolled.
+     * @param {Item5e} item    The class item whose hit dice will be rolled.
+     * @param {Roll} roll      The roll being prepared.
+     */
+    const allowed = Hooks.call("dnd5e.rollClassHitPoints", this, item, roll);
+    if ( allowed === false ) return roll;
+
     await roll.toMessage({
       title: `${flavor}: ${this.name}`,
       flavor,
