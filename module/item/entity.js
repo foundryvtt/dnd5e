@@ -236,10 +236,9 @@ export default class Item5e extends Item {
    * @type {object}
    */
   get scaleValues() {
-    if ( !["class", "subclass"].includes(this.type) ) return {};
+    if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
     const level = this.type === "class" ? this.data.data.levels : this.class?.data.data.levels ?? 0;
-    return Object.values(this.advancement.byId).reduce((obj, advancement) => {
-      if ( (advancement.data.type !== "ScaleValue") ) return obj;
+    return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.prepareValue(level);
       return obj;
     }, {});
@@ -381,6 +380,7 @@ export default class Item5e extends Item {
       byLevel: Object.fromEntries(
         Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
       ),
+      byType: {},
       needingConfiguration: []
     };
     for ( const advancementData of this.data.data.advancement ?? [] ) {
@@ -388,6 +388,8 @@ export default class Item5e extends Item {
       if ( !Advancement ) continue;
       const advancement = new Advancement(this, advancementData);
       this.advancement.byId[advancement.id] = advancement;
+      this.advancement.byType[advancementData.type] ??= [];
+      this.advancement.byType[advancementData.type].push(advancement);
       advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
