@@ -1193,7 +1193,7 @@ DND5E.CR_EXP_LEVELS = [
 /**
  * Character features automatically granted by classes & subclasses at certain levels.
  * @type {object}
- * @deprecated since 1.6.0
+ * @deprecated since 1.6.0, targeted for removal in 1.8
  */
 DND5E.classFeatures = ClassFeatures;
 
