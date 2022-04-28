@@ -1193,16 +1193,9 @@ DND5E.CR_EXP_LEVELS = [
 /**
  * Character features automatically granted by classes & subclasses at certain levels.
  * @type {object}
+ * @deprecated since 1.6.0
  */
-Object.defineProperty(DND5E, "classFeatures", {
-  get() {
-    console.warn(
-      "The classFeatures object is deprecated. Please use the new Advancement API to configure class features.");
-    return ClassFeatures;
-  },
-  configurable: true,
-  enumerable: true
-});
+DND5E.classFeatures = ClassFeatures;
 
 /**
  * Special character flags.
