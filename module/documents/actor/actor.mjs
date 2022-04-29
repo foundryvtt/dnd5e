@@ -165,6 +165,7 @@ export default class Actor5e extends Actor {
     this._prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills);
     this._prepareArmorClass();
     this._prepareEncumbrance();
+    this._prepareHitPoints(bonusData);
     this._prepareInitiative(bonusData, checkBonus);
     this._prepareScaleValues();
     this._prepareSpellcasting();
@@ -576,6 +577,31 @@ export default class Actor5e extends Actor {
     encumbrance.max = ((this.system.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
     encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
     encumbrance.encumbered = encumbrance.pct > (200 / 3);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare hit points for characters.
+   * @param {object} bonusData  Data produced by `getRollData` to be applied to bonus formulas.
+   * @protected
+   */
+  _prepareHitPoints(bonusData) {
+    if ( this.type !== "character" ) return;
+    const hp = this.system.attributes.hp;
+    if ( hp.override !== null ) {
+      hp.max = hp.override;
+      return;
+    }
+
+    const base = Object.values(this.classes).reduce((total, item) => {
+      const advancement = item.advancement.byType.HitPoints?.[0];
+      return total + (advancement?.total() ?? 0);
+    }, 0);
+    const levelBonus = simplifyBonus(hp.bonuses.level, bonusData) * this.system.details.level;
+    const overallBonus = simplifyBonus(hp.bonuses.overall, bonusData);
+
+    hp.max = base + levelBonus + overallBonus;
   }
 
   /* -------------------------------------------- */

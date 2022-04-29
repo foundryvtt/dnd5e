@@ -1,6 +1,7 @@
 import Advancement from "./advancement.mjs";
 import HitPointsConfig from "../../applications/advancement/hit-points-config.mjs";
 import HitPointsFlow from "../../applications/advancement/hit-points-flow.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 
 /**
  * Advancement that presents the player with the option to roll hit points at each level or select the average value.
@@ -128,13 +129,10 @@ export default class HitPointsAdvancement extends Advancement {
   apply(level, data) {
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
     if ( value === undefined ) return;
-    const con = this.actor.system.abilities.con;
-    const hp = this.actor.system.attributes.hp;
-    value += con?.mod ?? 0;
-    this.actor.updateSource({
-      "system.attributes.hp.max": hp.max + value,
-      "system.attributes.hp.value": hp.value + value
-    });
+
+    value += this.actor.system.abilities.con?.mod ?? 0;
+    value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
+    this.actor.updateSource({"system.attributes.hp.value": this.actor.system.attributes.hp.value + value});
     this.updateSource({ value: data });
   }
 
@@ -151,13 +149,10 @@ export default class HitPointsAdvancement extends Advancement {
   reverse(level) {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
-    const con = this.actor.system.abilities.con;
-    const hp = this.actor.system.attributes.hp;
-    value += con?.mod ?? 0;
-    this.actor.updateSource({
-      "system.attributes.hp.max": hp.max - value,
-      "system.attributes.hp.value": hp.value - value
-    });
+
+    value += this.actor.system.abilities.con?.mod ?? 0;
+    value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
+    this.actor.updateSource({"system.attributes.hp.value": this.actor.system.attributes.hp.value - value});
     const source = { [level]: this.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
     return source;
