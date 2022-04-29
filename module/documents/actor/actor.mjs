@@ -598,10 +598,11 @@ export default class Actor5e extends Actor {
       const advancement = item.advancement.byType.HitPoints?.[0];
       return total + (advancement?.total() ?? 0);
     }, 0);
+    const constitution = (this.system.abilities.con?.mod ?? 0) * this.system.details.level;
     const levelBonus = simplifyBonus(hp.bonuses.level, bonusData) * this.system.details.level;
     const overallBonus = simplifyBonus(hp.bonuses.overall, bonusData);
 
-    hp.max = base + levelBonus + overallBonus;
+    hp.max = base + constitution + levelBonus + overallBonus;
   }
 
   /* -------------------------------------------- */
