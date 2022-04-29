@@ -1,0 +1,35 @@
+<form>
+  <div class="hp-field form-group">
+    {{#if isCharacter}}
+      <input type="number" name="data.attributes.hp.override" value="{{data.override}}" placeholder="{{preview}}">
+    {{else}}
+      <input type="number" name="data.attributes.hp.max" value="{{data.max}}">
+    {{/if}}
+  </div>
+
+  {{#if isCharacter}}
+
+    <h3 class="form-header">Bonuses</h3>
+    <div class="form-group">
+      <label>{{localize "DND5E.HitPointsBonusLevel"}}</label>
+      <input type="text" name="data.attributes.hp.bonuses.level" value="{{data.bonuses.level}}">
+    </div>
+    <div class="form-group">
+      <label>{{localize "DND5E.HitPointsBonusOverall"}}</label>
+      <input type="text" name="data.attributes.hp.bonuses.overall" value="{{data.bonuses.overall}}">
+    </div>
+
+  {{else}}
+
+    <div class="form-group">
+      <label>{{localize "DND5E.HPFormula"}}</label>
+      <input type="text" name="data.attributes.hp.formula" value="{{data.formula}}">
+      <p class="hint">HP Range: (min)–(max), Average: (avg)</p>
+    </div>
+
+  {{/if}}
+
+  <button type="submit">
+    <i class="far fa-save"></i> {{localize "DND5E.TraitSave"}}
+  </button>
+</form>

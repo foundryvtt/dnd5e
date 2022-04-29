@@ -163,7 +163,7 @@ export default class Actor5e extends Actor {
     this._classes = undefined;
 
     // Prepare Hit Points
-    this._computeHitPoints(bonusData);
+    this.data.data.attributes.hp.max = this._computeHitPoints(this, this.data.data.attributes.hp, bonusData);
 
     // Determine Initiative Modifier
     this._computeInitiativeModifier(actorData, checkBonus, bonusData);
@@ -534,24 +534,24 @@ export default class Actor5e extends Actor {
 
   /**
    * Compute hit points for characters.
+   * @param {Actor5e} actor     Actor for whom the HP should be calculated.
+   * @param {object} hp         HP data to drive the calculation.
    * @param {object} bonusData  Data produced by `getRollData` to be applied to bonus formulas.
+   * @returns {number}          Computed HP max.
    */
-  _computeHitPoints(bonusData) {
-    if ( this.type !== "character" ) return;
-    const hp = this.data.data.attributes.hp;
-    if ( hp.override !== null ) {
-      hp.max = hp.override;
-      return;
-    }
+  _computeHitPoints(actor, hp, bonusData) {
+    if ( this.type !== "character" ) return hp.max;
+    if ( hp.override !== null ) return hp.override;
 
-    const base = Object.values(this.classes).reduce((total, item) => {
+    const base = Object.values(actor.classes).reduce((total, item) => {
       const advancement = item.advancement.byLevel[1].find(a => a.data.type === "HitPoints");
       return total + (advancement?.total() ?? 0);
     }, 0);
-    const levelBonus = this._simplifyBonus(hp.bonuses.level, bonusData) * this.data.data.details.level;
+    const constitution = actor.data.data.abilities.con?.mod * actor.data.data.details.level;
+    const levelBonus = this._simplifyBonus(hp.bonuses.level, bonusData) * actor.data.data.details.level;
     const overallBonus = this._simplifyBonus(hp.bonuses.overall, bonusData);
 
-    hp.max = base + levelBonus + overallBonus;
+    return base + constitution + levelBonus + overallBonus;
   }
 
   /* -------------------------------------------- */

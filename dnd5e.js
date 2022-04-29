@@ -26,6 +26,7 @@ import AbilityUseDialog from "./module/apps/ability-use-dialog.js";
 import ActorAbilityConfig from "./module/apps/ability-config.js";
 import ActorArmorConfig from "./module/apps/actor-armor.js";
 import ActorHitDiceConfig from "./module/apps/hit-dice-config.js";
+import ActorHitPointsConfig from "./module/apps/hit-points-config.js";
 import ActorMovementConfig from "./module/apps/movement-config.js";
 import ActorSensesConfig from "./module/apps/senses-config.js";
 import ActorSheetFlags from "./module/apps/actor-flags.js";
@@ -65,6 +66,7 @@ Hooks.once("init", function() {
       ActorAbilityConfig,
       ActorArmorConfig,
       ActorHitDiceConfig,
+      ActorHitPointsConfig,
       ActorMovementConfig,
       ActorSensesConfig,
       ActorSheetFlags,
