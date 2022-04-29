@@ -102,6 +102,7 @@ export default class Actor5e extends Actor {
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
     const bonuses = getProperty(data, "bonuses.abilities") || {};
+    const bonusData = this.getRollData();
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
@@ -120,7 +121,6 @@ export default class Actor5e extends Actor {
     }
 
     // Ability modifiers and saves
-    const bonusData = this.getRollData();
     const joat = flags.jackOfAllTrades;
     const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, bonusData);
     const saveBonus = this._simplifyBonus(bonuses.save, bonusData);
@@ -161,6 +161,9 @@ export default class Actor5e extends Actor {
 
     // Reset class store to ensure it is updated with any changes
     this._classes = undefined;
+
+    // Prepare Hit Points
+    this._computeHitPoints(bonusData);
 
     // Determine Initiative Modifier
     this._computeInitiativeModifier(actorData, checkBonus, bonusData);
@@ -525,6 +528,30 @@ export default class Actor5e extends Actor {
     ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
     this.shield = null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute hit points for characters.
+   * @param {object} bonusData  Data produced by `getRollData` to be applied to bonus formulas.
+   */
+  _computeHitPoints(bonusData) {
+    if ( this.type !== "character" ) return;
+    const hp = this.data.data.attributes.hp;
+    if ( hp.override !== null ) {
+      hp.max = hp.override;
+      return;
+    }
+
+    const base = Object.values(this.classes).reduce((total, item) => {
+      const advancement = item.advancement.byLevel[1].find(a => a.data.type === "HitPoints");
+      return total + (advancement?.total() ?? 0);
+    }, 0);
+    const levelBonus = this._simplifyBonus(hp.bonuses.level, bonusData) * this.data.data.details.level;
+    const overallBonus = this._simplifyBonus(hp.bonuses.overall, bonusData);
+
+    hp.max = base + levelBonus + overallBonus;
   }
 
   /* -------------------------------------------- */
