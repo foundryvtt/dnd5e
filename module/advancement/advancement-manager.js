@@ -140,9 +140,14 @@ export class AdvancementManager extends Application {
     const dataClone = foundry.utils.deepClone(itemData);
     dataClone._id = foundry.utils.randomID();
     if ( itemData.type === "class" ) {
-      dataClone.data.levels = 0;
+      if ( game.release.generation === 10 ) dataClone.system.levels = 0
+      else dataClone.data.levels = 0;
       if ( !manager.clone.data.data.details.originalClass ) {
-        manager.clone.data.update({"data.details.originalClass": dataClone._id});
+        if ( game.release.generation === 10 ) {
+          manager.clone.updateSource({"system.details.originalClass": dataClone._id});
+        } else {
+          manager.clone.data.update({"data.details.originalClass": dataClone._id});
+        }
       }
     }
 
@@ -341,7 +346,8 @@ export class AdvancementManager extends Application {
     if ( this.step?.class ) {
       let level = this.step.class.level;
       if ( this.step.type === "reverse" ) level -= 1;
-      this.step.class.item.data.update({"data.levels": level});
+      if ( game.release.generation === 10 ) this.step.class.item.updateSource({"system.levels": level});
+      else this.step.class.item.data.update({"data.levels": level});
       this.clone.prepareData();
     }
 
@@ -458,7 +464,8 @@ export class AdvancementManager extends Application {
         if ( this.step?.class ) {
           let level = this.step.class.level;
           if ( this.step.type === "reverse" ) level -= 1;
-          this.step.class.item.data.update({"data.levels": level});
+          if ( game.release.generation === 10 ) this.step.class.item.updateSource({"system.levels": level});
+          else this.step.class.item.data.update({"data.levels": level});
         }
 
         this.clone.prepareData();
