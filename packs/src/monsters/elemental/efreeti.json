@@ -8,6 +8,10 @@
       "str": {
         "value": 22,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 6,
         "save": 6,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 24,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 7,
         "save": 7,
@@ -41,6 +53,10 @@
       "int": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 7,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 15,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 6,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 7,
@@ -102,6 +126,9 @@
         "walk": 40,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 120,
@@ -182,6 +209,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -191,6 +222,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -200,6 +235,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -209,6 +248,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -218,6 +261,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -227,6 +274,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -236,6 +287,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -245,6 +300,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -254,6 +313,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -263,6 +326,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -272,6 +339,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -281,6 +352,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -290,6 +365,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -299,6 +378,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -308,6 +391,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -317,6 +404,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -326,6 +417,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 1,
         "passive": 11,
@@ -335,6 +430,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -476,7 +575,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "LTomFUTBrkRi0Pj5",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -668,7 +788,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -723,7 +843,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "45L0BCYOXLgO7jsh",
@@ -732,7 +856,7 @@
       "img": "systems/dnd5e/icons/spells/link-blue-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You cause a creature or an object you can see within range to grow larger or smaller for the Duration. Choose either a creature or an object that is neither worn nor carried. If the target is unwilling, it can make a <strong>Constitution</strong> saving throw. On a success, the spell has no effect.</p>\n<p>If the target is a creature, everything it is wearing and carrying changes size with it. Any item dropped by an affected creature returns to normal size at once.</p>\n<p><strong>Enlarge</strong>. The target's size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category—from Medium to Large, for example. If there isn't enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. Until the spell ends, the target also has advantage on Strength Checks and Strength Saving Throws. The target's Weapons also grow to match its new size. While these Weapons are enlarged, the target's attacks with them deal 1d4 extra damage.</p>\n<p><strong>Reduce</strong>. The target's size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category—from Medium to Small, for example. Until the spell ends, the target also has disadvantage on Strength Checks and Strength Saving Throws. The target's Weapons also shrink to match its new size. While these Weapons are reduced, the target's attacks with them deal 1d4 less damage (this can't reduce the damage below 1).</p>",
+          "value": "<p>You cause a creature or an object you can see within range to grow larger or smaller for the Duration. Choose either a creature or an object that is neither worn nor carried. If the target is unwilling, it can make a Constitution saving throw. On a success, the spell has no effect.</p><p>If the target is a creature, everything it is wearing and carrying changes size with it. Any item dropped by an affected creature returns to normal size at once.</p><p><strong>Enlarge</strong>. The target's size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category—from Medium to Large, for example. If there isn't enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. Until the spell ends, the target also has advantage on Strength Checks and Strength Saving Throws. The target's Weapons also grow to match its new size. While these Weapons are enlarged, the target's attacks with them deal 1d4 extra damage.</p><p><strong>Reduce</strong>. The target's size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category—from Medium to Small, for example. Until the spell ends, the target also has disadvantage on Strength Checks and Strength Saving Throws. The target's Weapons also shrink to match its new size. While these Weapons are reduced, the target's attacks with them deal 1d4 less damage (this can't reduce the damage below 1).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -764,7 +888,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -818,7 +942,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WahI41a3goVUg0x1"
+        }
+      }
     },
     {
       "_id": "1FhySmgXlZvUghTb",
@@ -859,7 +987,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -914,7 +1042,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gopnZvS0c2jD5FP8"
+        }
+      }
     },
     {
       "_id": "gWEMjYhRVIEnKbZH",
@@ -923,7 +1055,7 @@
       "img": "systems/dnd5e/icons/spells/runes-orange-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You call forth an elemental servant. Choose an area of air, earth, fire, or water that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a fire elemental emerges from a bonfire, and an earth elemental rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends.</p>\n<p>The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions.</p>\n<p>If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.</p>",
+          "value": "<p>You call forth an elemental servant. Choose an area of air, earth, fire, or water that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a fire elemental emerges from a bonfire, and an earth elemental rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends.</p><p>The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions.</p><p>If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -955,7 +1087,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1010,7 +1142,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.1LkZvINag7KqBmDR"
+        }
+      }
     },
     {
       "_id": "twlhthYQ2LFEFrZL",
@@ -1019,7 +1155,7 @@
       "img": "systems/dnd5e/icons/spells/fog-acid-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected.</p>\n<p>While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to nonmagical damage, and it has advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated.</p>\n<p>While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.</p>",
+          "value": "<p>You transform a willing creature you touch, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends if the creature drops to 0 hit points. An incorporeal creature isn't affected.</p><p>While in this form, the target's only method of movement is a flying speed of 10 feet. The target can enter and occupy the space of another creature. The target has resistance to nonmagical damage, and it has advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through small holes, narrow openings, and even mere cracks, though it treats liquids as though they were solid surfaces. The target can't fall and remains hovering in the air even when stunned or otherwise incapacitated.</p><p>While in the form of a misty cloud, the target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. The target can't attack or cast spells.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1051,7 +1187,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1106,7 +1242,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz"
+        }
+      }
     },
     {
       "_id": "oHfYhvrstVQaIp0L",
@@ -1115,7 +1255,7 @@
       "img": "systems/dnd5e/icons/spells/fog-sky-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
+          "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1147,7 +1287,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1202,7 +1342,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B"
+        }
+      }
     },
     {
       "_id": "XxDBVMHqMcyi1Mmy",
@@ -1211,7 +1355,7 @@
       "img": "systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 20-foot cube. The image appears at a spot that you can see within range and lasts for the duration. It seems completely real, including sounds, smells, and temperature appropriate to the thing depicted. You can't create sufficient heat or cold to cause damage, a sound loud enough to deal thunder damage or deafen a creature, or a smell that might sicken a creature (like a troglodyte's stench).</p><p>As long as you are within range of the illusion, you can use your action to cause the image to move to any other spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Similarly, you can cause the illusion to make different sounds at different times, even making it carry on a conversation, for example.</p><p>Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and its other sensory qualities become faint to the creature.</p>",
+          "value": "<p>You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 20-foot cube. The image appears at a spot that you can see within range and lasts for the duration. It seems completely real, including sounds, smells, and temperature appropriate to the thing depicted. You can't create sufficient heat or cold to cause damage, a sound loud enough to deal thunder damage or deafen a creature, or a smell that might sicken a creature (like a troglodyte's stench).</p><p>As long as you are within range of the illusion, you can use your action to cause the image to move to any other spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Similarly, you can cause the illusion to make different sounds at different times, even making it carry on a conversation, for example.</p><p>Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and its other sensory qualities become faint to the creature.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the spell lasts until dispelled, without requiring your concentration.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1243,7 +1387,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1298,7 +1442,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.nslx2nT3p4lNkmdp"
+        }
+      }
     },
     {
       "_id": "WDV3q3WwtulRdlVs",
@@ -1307,7 +1455,7 @@
       "img": "systems/dnd5e/icons/spells/runes-royal-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the DM's discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a <strong>Charisma</strong> saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
+          "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the DM's discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a Charisma saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1393,7 +1541,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz"
+        }
+      }
     },
     {
       "_id": "cPcHBmgT0kqNEOdR",
@@ -1402,7 +1554,7 @@
       "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p>\n<p>When the wall appears, each creature within its area must make a <strong>Dexterity</strong> saving throw. On a failed save, a creature takes 5d8 <em>fire damage</em>, or half as much damage on a successful save.</p>\n<p>One side of the wall, selected by you when you cast this spell, deals 5d8 <em>fire damage</em> to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
+          "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p><p>When the wall appears, each creature within its area must make a Dexterity saving throw. On a failed save, a creature takes 5d8 fire damage, or half as much damage on a successful save.</p><p>One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1434,7 +1586,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1492,7 +1644,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.X3DrXgxjwI2dvkD6"
+        }
+      }
     },
     {
       "_id": "2NzoIyouATBfPgdc",
@@ -1655,6 +1811,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": true,
@@ -1764,6 +1921,7 @@
           "conditions": ""
         },
         "weaponType": "simpleR",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,

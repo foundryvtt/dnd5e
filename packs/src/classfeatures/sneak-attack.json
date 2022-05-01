@@ -32,10 +32,14 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
-      "per": null,
-      "type": ""
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "other",
@@ -48,7 +52,7 @@
     "damage": {
       "parts": [
         [
-          "(ceil(@classes.rogue.levels /2))d6",
+          "@scale.rogue.sneak-attack",
           ""
         ]
       ],
@@ -58,7 +62,6 @@
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Rogue 1",

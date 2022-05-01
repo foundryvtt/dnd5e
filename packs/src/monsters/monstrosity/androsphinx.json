@@ -8,6 +8,10 @@
       "str": {
         "value": 22,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 6,
         "save": 6,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 10,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 6,
@@ -30,6 +38,10 @@
       "con": {
         "value": 20,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 5,
         "save": 11,
@@ -41,6 +53,10 @@
       "int": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 9,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 18,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 10,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 23,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 6,
         "save": 6,
@@ -102,6 +126,9 @@
         "walk": 40,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -185,6 +212,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -194,6 +225,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -203,6 +238,10 @@
       "arc": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 19,
@@ -212,6 +251,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -221,6 +264,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -230,6 +277,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -239,6 +290,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -248,6 +303,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -257,6 +316,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -266,6 +329,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -275,6 +342,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -284,6 +355,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 20,
@@ -293,6 +368,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -302,6 +381,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -311,6 +394,10 @@
       "rel": {
         "value": 2,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 25,
@@ -320,6 +407,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -329,6 +420,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 0,
         "passive": 10,
@@ -338,6 +433,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -479,7 +578,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "nEC1BRwM8Lx9hLXW",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -718,7 +838,7 @@
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 <em>radiant damage</em>. The target gains no benefit from cover for this saving throw.</p>\n<p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -808,7 +928,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        }
+      }
     },
     {
       "_id": "cPhzBNIMMjYjc8sU",
@@ -904,7 +1028,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.8zT7njvqbpXs4Cel"
+        }
+      }
     },
     {
       "_id": "gj1jJcjAgCrXmlbX",
@@ -1000,7 +1128,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        }
+      }
     },
     {
       "_id": "12A64lMgR6Z13Xms",
@@ -1009,7 +1141,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p>\n<p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p>\n<p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p>\n<p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p>\n<p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p>\n<p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p>\n<p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1095,7 +1227,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+        }
+      }
     },
     {
       "_id": "I9VYl7m6OgtKXpiI",
@@ -1191,7 +1327,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Mzh95utKDPIrjiH8"
+        }
+      }
     },
     {
       "_id": "sRyc27ppME4WhfuB",
@@ -1287,7 +1427,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "83YVr08H8yrAXe3r",
@@ -1383,7 +1527,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV"
+        }
+      }
     },
     {
       "_id": "J3HDssTo0AEI2csX",
@@ -1392,7 +1540,7 @@
       "img": "systems/dnd5e/icons/spells/runes-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You create a magical zone that guards against deception in a 15-foot-radius sphere centered on a point of your choice within range. Until the spell ends, a creature that enters the spell's area for the first time on a turn or starts its turn there must make a <strong>Charisma</strong> saving throw. On a failed save, a creature can't speak a deliberate lie while in the radius. You know whether each creature succeeds or fails on its saving throw.</p>\n        <p>An affected creature is aware of the spell and can thus avoid answering questions to which it would normally respond with a lie. Such a creature can be evasive in its answers as long as it remains within the boundaries of the truth.</p>",
+          "value": "<p>You create a magical zone that guards against deception in a 15-foot-radius sphere centered on a point of your choice within range. Until the spell ends, a creature that enters the spell's area for the first time on a turn or starts its turn there must make a Charisma saving throw. On a failed save, a creature can't speak a deliberate lie while in the radius. You know whether each creature succeeds or fails on its saving throw.</p>\n        <p>An affected creature is aware of the spell and can thus avoid answering questions to which it would normally respond with a lie. Such a creature can be evasive in its answers as long as it remains within the boundaries of the truth.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1478,7 +1626,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CylBa7jR8DSbo8Z3"
+        }
+      }
     },
     {
       "_id": "skW50FeLzUoYbOUQ",
@@ -1487,7 +1639,7 @@
       "img": "systems/dnd5e/icons/spells/slice-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
+          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1574,7 +1726,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+        }
+      }
     },
     {
       "_id": "2zlPvHp9vj9anzAw",
@@ -1670,7 +1826,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gopnZvS0c2jD5FP8"
+        }
+      }
     },
     {
       "_id": "LrzoZ9UuXWl8PFuu",
@@ -1679,7 +1839,7 @@
       "img": "systems/dnd5e/icons/spells/link-eerie-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished.</p>\n<p>If the target is native to the plane of existence you're on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p>\n<p>If the target is native to a different plane of existence than the one you're on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn't return.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th.</p>",
+          "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished.</p><p>If the target is native to the plane of existence you're on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p><p>If the target is native to a different plane of existence than the one you're on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn't return.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1766,7 +1926,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.pxpb2eOB6bv4phAf"
+        }
+      }
     },
     {
       "_id": "NrQpb7X1Y1pjEb7I",
@@ -1775,7 +1939,7 @@
       "img": "systems/dnd5e/icons/spells/slice-spirit-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You touch a willing creature. For the Duration, the target's Movement is unaffected by difficult terrain, and Spells and other magical Effects can neither reduce the target's speed nor cause the target to be Paralyzed or Restrained.</p>\n<p>The target can also spend 5 feet of Movement to automatically escape from non-magical restraints, such as Manacles or a creature that has it Grappled. Finally, being Underwater imposes no penalties on the target's movement or attacks.</p>",
+          "value": "<p>You touch a willing creature. For the Duration, the target's Movement is unaffected by difficult terrain, and Spells and other magical Effects can neither reduce the target's speed nor cause the target to be Paralyzed or Restrained.</p><p>The target can also spend 5 feet of Movement to automatically escape from nonmagical restraints, such as Manacles or a creature that has it Grappled. Finally, being Underwater imposes no penalties on the target's movement or attacks.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1862,7 +2026,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.da0a1t2FqaTjRZGT"
+        }
+      }
     },
     {
       "_id": "YL0i8XfFrHNqUNPg",
@@ -1871,7 +2039,7 @@
       "img": "systems/dnd5e/icons/spells/beam-red-3.jpg",
       "data": {
         "description": {
-          "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range must make a <strong>Dexterity</strong> saving throw. A creature takes 4d6 <em>fire damage</em> and 4d6 <em>radiant damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the <em>fire damage</em> or the <em>radiant damage</em> (your choice) increases by 1d6 for each slot level above 5th.</p>",
+          "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range must make a Dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot level above 5th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1965,7 +2133,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.5e1xTohkzqFqbYH4"
+        }
+      }
     },
     {
       "_id": "Q7h1DJfK5qjRlHyK",
@@ -2061,7 +2233,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk"
+        }
+      }
     },
     {
       "_id": "VqizLDE4WlQvHUus",
@@ -2070,7 +2246,7 @@
       "img": "systems/dnd5e/icons/spells/heal-royal-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You bring forth a great feast, including magnificent food and drink. The feast takes 1 Hour to consume and disappears at the end of that time, and the beneficial Effects don't set in until this hour is over. Up to twelve creatures can partake of the feast.</p>\n<p>A creature that partakes of the feast gains several benefits. The creature is cured of all Diseases and poison, becomes immune to poison and being Frightened, and makes all Wisdom Saving Throws with advantage. Its hit point maximum also increases by 2d10, and it gains the same number of Hit Points. These benefits last for 24 hours.</p>",
+          "value": "<p>You bring forth a great feast, including magnificent food and drink. The feast takes 1 Hour to consume and disappears at the end of that time, and the beneficial Effects don't set in until this hour is over. Up to twelve creatures can partake of the feast.</p><p>A creature that partakes of the feast gains several benefits. The creature is cured of all Diseases and poison, becomes immune to poison and being Frightened, and makes all Wisdom Saving Throws with advantage. Its hit point maximum also increases by 2d10, and it gains the same number of Hit Points. These benefits last for 24 hours.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -2157,7 +2333,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.mgFqi0ev8f7Ut19y"
+        }
+      }
     },
     {
       "_id": "yotsIj19d5spOVGb",
@@ -2241,6 +2421,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "value": "",
           "amm": false,

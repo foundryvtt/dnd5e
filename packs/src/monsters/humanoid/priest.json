@@ -8,6 +8,10 @@
       "str": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -30,6 +38,10 @@
       "con": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -41,6 +53,10 @@
       "int": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -102,6 +126,9 @@
         "walk": 25,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -180,6 +207,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -189,6 +220,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -198,6 +233,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -207,6 +246,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -216,6 +259,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -225,6 +272,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -234,6 +285,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -243,6 +298,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -252,6 +311,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -261,6 +324,10 @@
       "med": {
         "value": 2,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 17,
@@ -270,6 +337,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -279,6 +350,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -288,6 +363,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -297,6 +376,10 @@
       "per": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 13,
@@ -306,6 +389,10 @@
       "rel": {
         "value": 2,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 15,
@@ -315,6 +402,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -324,6 +415,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -333,6 +428,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -474,7 +573,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/humanoid/Priest.webp",
     "actorId": "PVD5wRdyO7iCJPs1",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -555,6 +675,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -656,7 +777,7 @@
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 <em>radiant damage</em>. The target gains no benefit from cover for this saving throw.</p>\n<p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -692,7 +813,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -745,7 +866,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        }
+      }
     },
     {
       "_id": "tH6t3jEFN0mV3rkr",
@@ -840,7 +965,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        }
+      }
     },
     {
       "_id": "IuZhkaFDV6WSInX2",
@@ -849,7 +978,7 @@
       "img": "systems/dnd5e/icons/spells/fireball-sky-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 <em>radiant damage</em>, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
+          "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -867,7 +996,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": 120,
@@ -881,11 +1010,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "rsak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -939,7 +1068,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.7buEm5KhI5lP8m1z"
+        }
+      }
     },
     {
       "_id": "v6PLMmOtGJLqMa0M",
@@ -948,7 +1081,7 @@
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a <strong>Wisdom</strong> saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p>\n<p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
+          "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -984,7 +1117,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1033,7 +1166,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gvdA9nPuWLck4tBl"
+        }
+      }
     },
     {
       "_id": "6feFqORsAsNUdDcU",
@@ -1060,7 +1197,7 @@
           "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -1128,7 +1265,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.F0GsG0SJzsIOacwV"
+        }
+      }
     },
     {
       "_id": "Rj6fh9Sg59QTCHkm",
@@ -1137,7 +1278,7 @@
       "img": "systems/dnd5e/icons/spells/enchant-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes <em>force damage</em> equal to 1d8 + your spellcasting ability modifier.</p>\n<p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p>\n<p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
+          "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1155,7 +1296,7 @@
           "value": 5,
           "width": null,
           "units": "ft",
-          "type": ""
+          "type": "square"
         },
         "range": {
           "value": 60,
@@ -1169,12 +1310,12 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
+        "actionType": "msak",
+        "attackBonus": "0",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1183,11 +1324,7 @@
         "damage": {
           "parts": [
             [
-              "1d8",
-              "force"
-            ],
-            [
-              "@mod",
+              "floor(@item.level / 2)d8 + @mod",
               "force"
             ]
           ],
@@ -1221,7 +1358,7 @@
           "prepared": true
         },
         "scaling": {
-          "mode": "level",
+          "mode": "none",
           "formula": ""
         }
       },
@@ -1231,7 +1368,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0"
+        }
+      }
     },
     {
       "_id": "B7ua27ZJHMU3u4s8",
@@ -1240,7 +1381,7 @@
       "img": "systems/dnd5e/icons/spells/slice-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
+          "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1326,7 +1467,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.15Fa6q1nH27XfbR8"
+        }
+      }
     },
     {
       "_id": "YTklaGLgraq2WiH0",
@@ -1335,7 +1480,7 @@
       "img": "systems/dnd5e/icons/spells/needles-sky-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.</p>\n<p>When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature's speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a <strong>Wisdom</strong> saving throw. On a failed save, the creature takes 3d8 <em>radiant damage</em> (if you are good or neutral) or 3d8 <em>necrotic damage</em> (if you are evil). On a successful save, the creature takes half as much damage.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.</p>",
+          "value": "<p>You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.</p><p>When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature's speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a Wisdom saving throw. On a failed save, the creature takes 3d8 radiant damage (if you are good or neutral) or 3d8 necrotic damage (if you are evil). On a successful save, the creature takes half as much damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1371,7 +1516,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1424,7 +1569,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.uCud2s4TjMfjiXUb"
+        }
+      }
     },
     {
       "_id": "9LzZrzdWIZpjFIGV",
@@ -1587,6 +1736,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1653,7 +1803,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1702,11 +1852,15 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 1,
+      "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      }
     },
     {
       "_id": "izr8tkLxScri1fXe",

@@ -8,6 +8,10 @@
       "str": {
         "value": 8,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -1,
         "save": -1,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -41,6 +53,10 @@
       "int": {
         "value": 7,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": -2,
         "save": -2,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -188,6 +215,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -197,6 +228,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -206,6 +241,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -215,6 +254,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -1,
         "bonus": 0,
         "passive": 9,
@@ -224,6 +267,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -233,6 +280,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -242,6 +293,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -251,6 +306,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -260,6 +319,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -269,6 +332,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -278,6 +345,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -287,6 +358,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -296,6 +371,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -305,6 +384,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -314,6 +397,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": -2,
         "bonus": 0,
         "passive": 8,
@@ -323,6 +410,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -332,6 +423,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 13,
@@ -341,6 +436,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -478,7 +577,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/elemental/MagmaMephit.webp",
     "actorId": "oJCOB9X2BPsBkWW5",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -566,7 +686,7 @@
       "img": "systems/dnd5e/icons/spells/light-air-fire-3.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose a manufactured metal object, such as a metal weapon or a suit of heavy or medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 <em>fire damage</em> when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again.</p>\n<p>If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn't drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.</p>",
+          "value": "<p>Choose a manufactured metal object, such as a metal weapon or a suit of heavy or medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 fire damage when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again.</p><p>If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn't drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -598,11 +718,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -656,7 +776,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.2yHXEcrRbadZDr5M"
+        }
+      }
     },
     {
       "_id": "LpYrQPxHA10HPnkl",
@@ -899,6 +1023,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,

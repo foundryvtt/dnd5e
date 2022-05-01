@@ -8,6 +8,10 @@
       "str": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -41,6 +53,10 @@
       "int": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -180,6 +207,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -189,6 +220,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -198,6 +233,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -207,6 +246,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -216,6 +259,10 @@
       "dec": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -225,6 +272,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -234,6 +285,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -243,6 +298,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -252,6 +311,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -261,6 +324,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -270,6 +337,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -279,6 +350,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -288,6 +363,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -297,6 +376,10 @@
       "per": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -306,6 +389,10 @@
       "rel": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 12,
@@ -315,6 +402,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -324,6 +415,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -333,6 +428,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -474,7 +573,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/humanoid/CultFanatic.webp",
     "actorId": "tYfQIxCJT0WaaKmc",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -555,6 +675,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -769,7 +890,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -818,7 +939,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      }
     },
     {
       "_id": "cyAPTNFAfJZRMsSG",
@@ -827,7 +952,7 @@
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 <em>radiant damage</em>. The target gains no benefit from cover for this saving throw.</p>\n<p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -916,7 +1041,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        }
+      }
     },
     {
       "_id": "6gdrsDerIEH5YGOT",
@@ -1011,7 +1140,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        }
+      }
     },
     {
       "_id": "OEwZcZzFfpuTr7Gn",
@@ -1020,7 +1153,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p>\n<p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p>\n<p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p>\n<p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p>\n<p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p>\n<p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p>\n<p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1031,8 +1164,8 @@
           "condition": ""
         },
         "duration": {
-          "value": null,
-          "units": "inst"
+          "value": 1,
+          "units": "round"
         },
         "target": {
           "value": 1,
@@ -1105,7 +1238,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+        }
+      }
     },
     {
       "_id": "Y2uSsWTMZZX7aayl",
@@ -1114,7 +1251,7 @@
       "img": "systems/dnd5e/icons/spells/rip-jade-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Make a melee spell Attack against a creature you can reach. On a hit, the target takes 3d10 <em>necrotic damage</em>.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.</p>",
+          "value": "<p>Make a melee spell Attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1204,7 +1341,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ksaaTxIbKx2sJfia"
+        }
+      }
     },
     {
       "_id": "P9bW3ppbPsr3onud",
@@ -1299,7 +1440,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
+        }
+      }
     },
     {
       "_id": "AxwuA8ugipee5vnW",
@@ -1308,7 +1453,7 @@
       "img": "systems/dnd5e/icons/spells/shielding-eerie-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1393,7 +1538,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4"
+        }
+      }
     },
     {
       "_id": "u09yA9jnMJR6HLuu",
@@ -1402,7 +1551,7 @@
       "img": "systems/dnd5e/icons/spells/enchant-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes <em>force damage</em> equal to 1d8 + your spellcasting ability modifier.</p>\n<p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p>\n<p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
+          "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1420,7 +1569,7 @@
           "value": 5,
           "width": null,
           "units": "ft",
-          "type": ""
+          "type": "square"
         },
         "range": {
           "value": 60,
@@ -1434,12 +1583,12 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
-        "attackBonus": 0,
+        "actionType": "msak",
+        "attackBonus": "0",
         "chatFlavor": "",
         "critical": {
           "threshold": null,
@@ -1448,11 +1597,7 @@
         "damage": {
           "parts": [
             [
-              "1d8",
-              "force"
-            ],
-            [
-              "@mod",
+              "floor(@item.level / 2)d8 + @mod",
               "force"
             ]
           ],
@@ -1486,17 +1631,21 @@
           "prepared": true
         },
         "scaling": {
-          "mode": "level",
+          "mode": "none",
           "formula": ""
         }
       },
       "effects": [],
       "folder": null,
-      "sort": 200001,
+      "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0"
+        }
+      }
     },
     {
       "_id": "WfqCnxOUS8aXxd7O",
@@ -1657,6 +1806,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "fin": true,
           "lgt": true,

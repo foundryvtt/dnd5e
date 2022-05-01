@@ -8,6 +8,10 @@
       "str": {
         "value": 10,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -41,6 +53,10 @@
       "int": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 15,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 11,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 0,
         "save": 0,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -181,6 +208,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -190,6 +221,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -199,6 +234,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -208,6 +247,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -217,6 +260,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -226,6 +273,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -235,6 +286,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -244,6 +299,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -253,6 +312,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -262,6 +325,10 @@
       "med": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -271,6 +338,10 @@
       "nat": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 13,
@@ -280,6 +351,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -289,6 +364,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -298,6 +377,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 0,
         "bonus": 0,
         "passive": 10,
@@ -307,6 +390,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -316,6 +403,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -325,6 +416,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -334,6 +429,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -475,7 +574,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/humanoid/Druid.webp",
     "actorId": "K15Yl8JmB5iPircc",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -648,7 +768,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.SbSvZKkJASyk8jKo"
+        }
+      }
     },
     {
       "_id": "QwPEzLNW8iVCL7cR",
@@ -657,7 +781,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A flickering flame appears in your hand. The flame remains there for the Duration and harms neither you nor your Equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.</p>\n<p>You can also Attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell Attack. On a hit, the target takes 1d8 <em>fire damage</em>.</p>\n<p>This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "value": "<p>A flickering flame appears in your hand. The flame remains there for the Duration and harms neither you nor your Equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.</p><p>You can also Attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell Attack. On a hit, the target takes 1d8 fire damage.</p><p>This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -675,7 +799,7 @@
           "value": 0,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "self"
         },
         "range": {
           "value": 30,
@@ -693,7 +817,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "rsak",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -747,7 +871,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.eCPQuQkIabFKTl9u"
+        }
+      }
     },
     {
       "_id": "326YyjtlKmYZh3T3",
@@ -756,7 +884,7 @@
       "img": "systems/dnd5e/icons/spells/vines-acid-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p>\n<p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p>\n<p>When the spell ends, the conjured Plants wilt away.</p>",
+          "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -771,10 +899,10 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": 20,
           "width": null,
-          "units": "",
-          "type": ""
+          "units": "ft",
+          "type": "square"
         },
         "range": {
           "value": 90,
@@ -788,11 +916,11 @@
         },
         "consume": {
           "type": "",
-          "target": null,
+          "target": "",
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -833,15 +961,20 @@
         "scaling": {
           "mode": "none",
           "formula": ""
-        }
+        },
+        "attunement": null
       },
       "effects": [],
       "folder": null,
-      "sort": 100001,
+      "sort": 0,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe"
+        }
+      }
     },
     {
       "_id": "BdApmAz4M3id4rnL",
@@ -865,10 +998,10 @@
           "units": "hour"
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
           "units": "",
-          "type": ""
+          "type": "creature"
         },
         "range": {
           "value": null,
@@ -936,7 +1069,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.B0pnIcc52O6G8hi8"
+        }
+      }
     },
     {
       "_id": "lXZnkgspOXxSoLPF",
@@ -960,10 +1097,10 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
-          "units": "",
-          "type": ""
+          "units": null,
+          "type": "self"
         },
         "range": {
           "value": null,
@@ -1031,7 +1168,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu"
+        }
+      }
     },
     {
       "_id": "2ZxbeICwcq94lFTU",
@@ -1040,7 +1181,7 @@
       "img": "systems/dnd5e/icons/spells/lightning-jade-1.jpg",
       "data": {
         "description": {
-          "value": "<p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a <strong>Constitution</strong> saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.</p>\n<p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</p>",
+          "value": "<p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.</p><p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1076,7 +1217,7 @@
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -1129,7 +1270,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ"
+        }
+      }
     },
     {
       "_id": "6DpP5JZ3gznrULif",
@@ -1138,7 +1283,7 @@
       "img": "systems/dnd5e/icons/spells/wild-jade-1.jpg",
       "data": {
         "description": {
-          "value": "<p>By means of this spell, you use an animal to deliver a message. Choose a Tiny beast you can see within range, such as a squirrel, a blue jay, or a bat. You specify a location, which you must have visited, and a recipient who matches a general description, such as \"a man or woman dressed in the uniform of the town guard\" or \"a red-haired dwarf wearing a pointed hat.\" You also speak a message of up to twenty-five words. The target beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger, or 25 miles for other animals.</p>\n<p>When the messenger arrives, it delivers your message to the creature that you described, replicating the sound of your voice. The messenger speaks only to a creature matching the description you gave. If the messenger doesn't reach its destination before the spell ends, the message is lost, and the beast makes its way back to where you cast this spell.</p>\n<p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 3rd level or higher, the duration of the spell increases by 48 hours for each slot level above 2nd.</p>",
+          "value": "<p>By means of this spell, you use an animal to deliver a message. Choose a Tiny beast you can see within range, such as a squirrel, a blue jay, or a bat. You specify a location, which you must have visited, and a recipient who matches a general description, such as \"a man or woman dressed in the uniform of the town guard\" or \"a red-haired dwarf wearing a pointed hat.\" You also speak a message of up to twenty-five words. The target beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger, or 25 miles for other animals.</p><p>When the messenger arrives, it delivers your message to the creature that you described, replicating the sound of your voice. The messenger speaks only to a creature matching the description you gave. If the messenger doesn't reach its destination before the spell ends, the message is lost, and the beast makes its way back to where you cast this spell.</p><p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 3rd level or higher, the duration of the spell increases by 48 hours for each slot level above 2nd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1224,7 +1369,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.X8w9EzYLGc4vQ1H2"
+        }
+      }
     },
     {
       "_id": "PHcdIFirPgGkjSV7",
@@ -1248,10 +1397,10 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": 1,
           "width": null,
-          "units": "",
-          "type": ""
+          "units": "spec",
+          "type": "object"
         },
         "range": {
           "value": null,
@@ -1279,11 +1428,7 @@
         "damage": {
           "parts": [
             [
-              "1d8",
-              "bludgeoning"
-            ],
-            [
-              "@mod",
+              "1d8 + @mod",
               "bludgeoning"
             ]
           ],
@@ -1328,7 +1473,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.VzgFzcmocr1X1cp4"
+        }
+      }
     },
     {
       "_id": "xf9PRKOZJ3jjwouV",
@@ -1417,13 +1566,44 @@
           "formula": ""
         }
       },
-      "effects": [],
+      "effects": [
+        {
+          "_id": "uM6rgctYpcbCVSkn",
+          "flags": {},
+          "changes": [
+            {
+              "key": "data.attributes.ac.formula",
+              "value": "16",
+              "mode": 5
+            },
+            {
+              "key": "data.attributes.ac.calc",
+              "value": "custom",
+              "mode": 5
+            }
+          ],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": 3600
+          },
+          "icon": "systems/dnd5e/icons/spells/protect-orange-2.jpg",
+          "label": "Barkskin",
+          "origin": "Item.VQMKMnQDw5rzL0zp",
+          "tint": null,
+          "transfer": true
+        }
+      ],
       "folder": null,
       "sort": 100001,
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JPwIEfgUPVebr5AH"
+        }
+      }
     },
     {
       "_id": "KUP8WEfLxlcY7K2x",
@@ -1507,6 +1687,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "ver": true,
           "amm": false,

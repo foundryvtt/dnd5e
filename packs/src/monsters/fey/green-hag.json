@@ -8,6 +8,10 @@
       "str": {
         "value": 18,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -30,6 +38,10 @@
       "con": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -41,6 +53,10 @@
       "int": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -182,6 +209,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -191,6 +222,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -200,6 +235,10 @@
       "arc": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 13,
@@ -209,6 +248,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 4,
         "bonus": 0,
         "passive": 14,
@@ -218,6 +261,10 @@
       "dec": {
         "value": 1,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -227,6 +274,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -236,6 +287,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -245,6 +300,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -254,6 +313,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -263,6 +326,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -272,6 +339,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -281,6 +352,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 14,
@@ -290,6 +365,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -299,6 +378,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -308,6 +391,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -317,6 +404,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -326,6 +417,10 @@
       "ste": {
         "value": 1,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 13,
@@ -335,6 +430,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -476,7 +575,28 @@
     "randomImg": false,
     "img": "systems/dnd5e/tokens/fey/GreenHag.webp",
     "actorId": "saq6WM959pKHuaqP",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -501,9 +621,9 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
-          "units": "",
+          "units": "any",
           "type": "space"
         },
         "range": {
@@ -518,7 +638,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -573,7 +693,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CAxSzHWizrafT033"
+        }
+      }
     },
     {
       "_id": "bnn5FtL0QXRDJHeV",
@@ -614,7 +738,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -632,7 +756,7 @@
         },
         "formula": "",
         "save": {
-          "ability": "int",
+          "ability": "",
           "dc": 12,
           "scaling": "spell"
         },
@@ -668,7 +792,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.oIzA2MEHwxhtQneU"
+        }
+      }
     },
     {
       "_id": "qBxbNPknOe4m9XVe",
@@ -677,7 +805,7 @@
       "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
       "data": {
         "description": {
-          "value": "<p>You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 <em>psychic damage</em> and have disadvantage on the next attack roll it makes before the end of its next turn.</p>\n<p>This spell's damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).</p>",
+          "value": "<p>You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn.</p><p>This spell's damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -709,11 +837,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -767,7 +895,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.cdrYKaFi98YWaBMw"
+        }
+      }
     },
     {
       "_id": "TwdKEVj1NjVefyq9",
@@ -1076,6 +1208,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,

@@ -35,7 +35,11 @@
                     <input type="text" name="data.details.race" value="{{data.details.race}}" placeholder="{{ localize 'DND5E.Race' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
+                    {{#if labels.background}}
+                        <span title="{{localize 'DND5E.Background'}}">{{labels.background}}</span>
+                    {{else}}
+                        <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
+                    {{/if}}
                 </li>
                 <li>
                     <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>

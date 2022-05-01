@@ -6,9 +6,11 @@
         <div class="effect-source">{{localize "DND5E.Source"}}</div>
         <div class="effect-source">{{localize "DND5E.Duration"}}</div>
         <div class="item-controls effect-controls flexrow">
+            {{#if @root.editable}}
             <a class="effect-control" data-action="create" title="{{localize 'DND5E.EffectCreate'}}">
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
+            {{/if}}
         </div>
     </li>
 
@@ -30,6 +32,7 @@
             <div class="effect-source">{{effect.sourceName}}</div>
             <div class="effect-duration">{{effect.duration.label}}</div>
             <div class="item-controls effect-controls flexrow">
+                {{#if @root.editable}}
                 <a class="effect-control" data-action="toggle"
                    title="{{#if effect.data.disabled}}{{localize 'DND5E.EffectEnable'}}{{else}}{{localize 'DND5E.EffectDisable'}}{{/if}}">
                     <i class="fas {{#if effect.data.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
@@ -40,6 +43,7 @@
                 <a class="effect-control" data-action="delete" title="{{localize 'DND5E.EffectDelete'}}">
                     <i class="fas fa-trash"></i>
                 </a>
+                {{/if}}
             </div>
         </li>
     {{/each}}

@@ -1,0 +1,167 @@
+{
+  "name": "Short-Term Madness",
+  "img": "icons/creatures/abilities/mouth-teeth-human.webp",
+  "description": "The character is afflicted with short-­term madness for [[1d10]] minutes.",
+  "results": [
+    {
+      "_id": "11gmKaEIaMzlQbPJ",
+      "type": 0,
+      "text": "The character retreats into his or her mind and becomes paralyzed. The effect ends if the character takes any damage.",
+      "weight": 1,
+      "range": [
+        1,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 1,
+      "rangeH": 20
+    },
+    {
+      "_id": "bqGX8s0fTVko5baU",
+      "type": 0,
+      "text": "The character becomes incapacitated and spends the duration screaming, laughing, or weeping.",
+      "weight": 1,
+      "range": [
+        21,
+        30
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 21,
+      "rangeH": 30
+    },
+    {
+      "_id": "U0Qg1YLAKphU5kth",
+      "type": 0,
+      "text": "The character becomes frightened and must use his or her action and movement each round to flee from the source of the fear.",
+      "weight": 1,
+      "range": [
+        31,
+        40
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 31,
+      "rangeH": 40
+    },
+    {
+      "_id": "KehWVyHOeh1U5wNW",
+      "type": 0,
+      "text": "The character begins babbling and is incapable of normal speech or spellcasting.",
+      "weight": 1,
+      "range": [
+        41,
+        50
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 41,
+      "rangeH": 50
+    },
+    {
+      "_id": "a3yyT0t1NsMgejTu",
+      "type": 0,
+      "text": "The character must use his or her action each round to attack the nearest creature.",
+      "weight": 1,
+      "range": [
+        51,
+        60
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 51,
+      "rangeH": 60
+    },
+    {
+      "_id": "hanppRWYEVb64iUt",
+      "type": 0,
+      "text": "The character experiences vivid hallucinations and has disadvantage on ability checks.",
+      "weight": 1,
+      "range": [
+        61,
+        70
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 61,
+      "rangeH": 70
+    },
+    {
+      "_id": "FnkRWI5RiPmRoxQs",
+      "type": 0,
+      "text": "The character does whatever anyone tells him or her to do that isn’t obviously self- destructive.",
+      "weight": 1,
+      "range": [
+        71,
+        75
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 71,
+      "rangeH": 75
+    },
+    {
+      "_id": "dswa3ZDK4ZIhw98a",
+      "type": 0,
+      "text": "The character experiences an overpowering urge to eat something strange such as dirt, slime, or offal.",
+      "weight": 1,
+      "range": [
+        76,
+        80
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 76,
+      "rangeH": 80
+    },
+    {
+      "_id": "zW1HUUNLqwmOfFgg",
+      "type": 0,
+      "text": "The character is stunned.",
+      "weight": 1,
+      "range": [
+        81,
+        90
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 81,
+      "rangeH": 90
+    },
+    {
+      "_id": "0FNn7OzOX4DtlC4x",
+      "type": 0,
+      "text": "The character falls unconscious.",
+      "weight": 1,
+      "range": [
+        91,
+        100
+      ],
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "rangeL": 91,
+      "rangeH": 100
+    }
+  ],
+  "formula": "d100",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "ypk2L9feVwTx0QVj"
+}

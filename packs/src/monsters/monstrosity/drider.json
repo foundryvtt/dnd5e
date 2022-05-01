@@ -2,12 +2,16 @@
   "_id": "1OQbxoZI5BtlB2ME",
   "name": "Drider",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/monstrosity/Drider.webp",
   "data": {
     "abilities": {
       "str": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -30,6 +38,10 @@
       "con": {
         "value": 18,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -41,6 +53,10 @@
       "int": {
         "value": 13,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 12,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 1,
         "save": 1,
@@ -103,6 +127,9 @@
         "units": "ft",
         "hover": false
       },
+      "attunement": {
+        "max": 3
+      },
       "senses": {
         "darkvision": 120,
         "blindsight": 0,
@@ -124,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Chaotic Evil",
@@ -181,6 +208,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -190,6 +221,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -199,6 +234,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -208,6 +247,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -217,6 +260,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -226,6 +273,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -235,6 +286,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -244,6 +299,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -253,6 +312,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -262,6 +325,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -271,6 +338,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -280,6 +351,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 15,
@@ -289,6 +364,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -298,6 +377,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -307,6 +390,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 1,
         "bonus": 0,
         "passive": 11,
@@ -316,6 +403,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 13,
@@ -325,6 +416,10 @@
       "ste": {
         "value": 2,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 3,
         "bonus": 0,
         "passive": 19,
@@ -334,6 +429,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "mod": 2,
         "bonus": 0,
         "passive": 12,
@@ -473,9 +572,30 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/monstrosity/Drider.webp",
     "actorId": "1OQbxoZI5BtlB2ME",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -656,9 +776,9 @@
           "units": "minute"
         },
         "target": {
-          "value": 0,
+          "value": null,
           "width": null,
-          "units": "",
+          "units": "any",
           "type": "space"
         },
         "range": {
@@ -673,7 +793,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -728,7 +848,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.CAxSzHWizrafT033"
+        }
+      }
     },
     {
       "_id": "g4MjsuQ8f9zZR7MT",
@@ -737,7 +861,7 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p>\n<p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p>\n<p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
+          "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -769,7 +893,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -824,7 +948,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq"
+        }
+      }
     },
     {
       "_id": "ir6vLPUFmpLnVGSt",
@@ -833,7 +961,7 @@
       "img": "systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.</p>\n<p>Any attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can't benefit from being invisible.</p>",
+          "value": "<p>Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.</p><p>Any attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can't benefit from being invisible.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -865,11 +993,11 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
-        "actionType": "util",
+        "actionType": "save",
         "attackBonus": 0,
         "chatFlavor": "",
         "critical": {
@@ -919,7 +1047,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU"
+        }
+      }
     },
     {
       "_id": "3wBoA7GvO2fw1Qnu",
@@ -1319,6 +1451,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1428,6 +1561,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "ver": true,
           "amm": false,
@@ -1541,6 +1675,7 @@
           "conditions": ""
         },
         "weaponType": "martialR",
+        "baseItem": "",
         "properties": {
           "amm": true,
           "hvy": true,

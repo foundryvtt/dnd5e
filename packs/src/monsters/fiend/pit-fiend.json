@@ -8,6 +8,10 @@
       "str": {
         "value": 26,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 8,
         "save": 8,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 8,
@@ -30,6 +38,10 @@
       "con": {
         "value": 24,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 7,
         "save": 13,
@@ -41,6 +53,10 @@
       "int": {
         "value": 22,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 6,
         "save": 6,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 18,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 10,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 24,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 7,
         "save": 7,
@@ -102,6 +126,9 @@
         "walk": 30,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -187,6 +214,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -196,6 +227,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -205,6 +240,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -214,6 +253,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 8,
         "passive": 18,
@@ -223,6 +266,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -232,6 +279,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -241,6 +292,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -250,6 +305,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -259,6 +318,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -268,6 +331,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -277,6 +344,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -286,6 +357,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -295,6 +370,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -304,6 +383,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 7,
         "passive": 17,
@@ -313,6 +396,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 6,
         "passive": 16,
@@ -322,6 +409,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -331,6 +422,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -340,6 +435,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -481,7 +580,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "RCv5y7iWlfNxkinx",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -823,7 +943,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -878,7 +998,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "QVk9OnE12POjdMsJ",
@@ -887,7 +1011,7 @@
       "img": "systems/dnd5e/icons/spells/fireball-red-2.jpg",
       "data": {
         "description": {
-          "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a <strong>Dexterity</strong> saving throw. A target takes 8d6 <em>fire damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p>The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
+          "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -919,7 +1043,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -977,7 +1101,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ztgcdrWPshKRpFd0"
+        }
+      }
     },
     {
       "_id": "BBnzGcwmnfSDn802",
@@ -986,7 +1114,7 @@
       "img": "systems/dnd5e/icons/spells/shielding-fire-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or be Paralyzed for the Duration. This spell has no effect on Undead. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, you can target one additional creature for each slot level above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or be Paralyzed for the Duration. This spell has no effect on Undead. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, you can target one additional creature for each slot level above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1018,7 +1146,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1072,7 +1200,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.l9Ju5KE7bbn3WpTm"
+        }
+      }
     },
     {
       "_id": "dhizvzmzYyUa0moh",
@@ -1081,7 +1213,7 @@
       "img": "systems/dnd5e/icons/spells/fog-orange-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p>\n<p>When the wall appears, each creature within its area must make a <strong>Dexterity</strong> saving throw. On a failed save, a creature takes 5d8 <em>fire damage</em>, or half as much damage on a successful save.</p>\n<p>One side of the wall, selected by you when you cast this spell, deals 5d8 <em>fire damage</em> to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
+          "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p><p>When the wall appears, each creature within its area must make a Dexterity saving throw. On a failed save, a creature takes 5d8 fire damage, or half as much damage on a successful save.</p><p>One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1113,7 +1245,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1171,7 +1303,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.X3DrXgxjwI2dvkD6"
+        }
+      }
     },
     {
       "_id": "BFv56pkQ54pdTkYM",
@@ -1330,6 +1466,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1439,6 +1576,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1552,6 +1690,7 @@
           "conditions": ""
         },
         "weaponType": "simpleM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1661,6 +1800,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,

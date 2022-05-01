@@ -8,6 +8,10 @@
       "str": {
         "value": 19,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 4,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 18,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 8,
@@ -30,6 +38,10 @@
       "con": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 7,
@@ -41,6 +53,10 @@
       "int": {
         "value": 16,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 7,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 19,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 8,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 18,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 8,
@@ -102,6 +126,9 @@
         "walk": 40,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 60,
@@ -186,6 +213,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -195,6 +226,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -204,6 +239,10 @@
       "arc": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -213,6 +252,10 @@
       "ath": {
         "value": 0,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -222,6 +265,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -231,6 +278,10 @@
       "his": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -240,6 +291,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -249,6 +304,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -258,6 +317,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -267,6 +330,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -276,6 +343,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -285,6 +356,10 @@
       "prc": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -294,6 +369,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -303,6 +382,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -312,6 +395,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -321,6 +408,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -330,6 +421,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -339,6 +434,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -480,7 +579,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "8ExSFCar5Lbhdo7u",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -640,7 +760,7 @@
       "img": "systems/dnd5e/icons/spells/wind-blue-1.jpg",
       "data": {
         "description": {
-          "value": "<p>This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage.</p>\n<p>This spell can physically repair a magic item or construct, but the spell can't restore magic to such an object.</p>",
+          "value": "<p>This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage.</p><p>This spell can physically repair a magic item or construct, but the spell can't restore magic to such an object.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -672,7 +792,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -727,7 +847,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.kjmjY0zlE6IEiQVL"
+        }
+      }
     },
     {
       "_id": "bN1hdXURtFx2Llkh",
@@ -736,7 +860,7 @@
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 <em>radiant damage</em>. The target gains no benefit from cover for this saving throw.</p>\n<p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+          "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -768,7 +892,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -826,7 +950,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl"
+        }
+      }
     },
     {
       "_id": "1WiX6ITVYkmRLv3P",
@@ -867,7 +995,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -922,7 +1050,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR"
+        }
+      }
     },
     {
       "_id": "wnWw7tNerCDiHqmN",
@@ -931,7 +1063,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
       "data": {
         "description": {
-          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p>\n<p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p>\n<p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p>\n<p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p>\n<p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p>\n<p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p>\n<p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -963,7 +1095,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1017,7 +1149,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.arzCrMRgcNiQuh43"
+        }
+      }
     },
     {
       "_id": "wpPIZMOm0J6kD8sq",
@@ -1026,7 +1162,7 @@
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
       "data": {
         "description": {
-          "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
+          "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1058,7 +1194,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1117,7 +1253,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.uUWb1wZgtMou0TVP"
+        }
+      }
     },
     {
       "_id": "IPnZEYclIAEPlgqb",
@@ -1158,7 +1298,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1213,7 +1353,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo"
+        }
+      }
     },
     {
       "_id": "zHxWO8E66kjiqo5O",
@@ -1222,7 +1366,7 @@
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You attempt to suppress strong emotions in a group of people. Each humanoid in a 20-foot-radius sphere centered on a point you choose within range must make a <strong>Charisma</strong> saving throw; a creature can choose to fail this saving throw if it wishes. If a creature fails its saving throw, choose one of the following two effects. You can suppress any effect causing a target to be charmed or frightened. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime.</p>\n<p>Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the DM rules otherwise.</p>",
+          "value": "<p>You attempt to suppress strong emotions in a group of people. Each humanoid in a 20-foot-radius sphere centered on a point you choose within range must make a Charisma saving throw; a creature can choose to fail this saving throw if it wishes. If a creature fails its saving throw, choose one of the following two effects. You can suppress any effect causing a target to be charmed or frightened. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime.</p><p>Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the DM rules otherwise.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1254,7 +1398,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1308,7 +1452,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.3MYDjS6k9IYL0aTj"
+        }
+      }
     },
     {
       "_id": "o7lz3skpEHpeeDzg",
@@ -1317,7 +1465,7 @@
       "img": "systems/dnd5e/icons/spells/shielding-eerie-2.jpg",
       "data": {
         "description": {
-          "value": "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p>\n<p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>",
+          "value": "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1349,7 +1497,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1403,7 +1551,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4"
+        }
+      }
     },
     {
       "_id": "RouhnStYISEcKfGa",
@@ -1412,7 +1564,7 @@
       "img": "systems/dnd5e/icons/spells/haste-fire-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You touch a creature, and that creature must succeed on a Wisdom saving throw or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:</p>\n<ul>\n<li>Choose one ability score. While cursed, the target has disadvantage on ability checks and saving throws made with that ability score.</li>\n<li>While cursed, the target has disadvantage on attack rolls against you.</li>\n<li>While cursed, the target must make a <strong>Wisdom</strong> saving throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing.</li>\n<li>While the target is cursed, your attacks and spells deal an extra 1d8 <em>necrotic damage</em> to the target.</li>\n</ul>\n<p>A remove curse spell ends this effect. At the DM's option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The DM has final say on such a curse's effect.</p>\n<p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 4th level or higher, the duration is concentration, up to 10 minutes. If you use a spell slot of 5th level or higher, the duration is 8 hours. If you use a spell slot of 7th level or higher, the duration is 24 hours. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn't require concentration.</p>",
+          "value": "<p>You touch a creature, and that creature must succeed on a Wisdom saving throw or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:</p>\n<ul>\n<li>Choose one ability score. While cursed, the target has disadvantage on ability checks and saving throws made with that ability score.</li>\n<li>While cursed, the target has disadvantage on attack rolls against you.</li>\n<li>While cursed, the target must make a Wisdom saving throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing.</li>\n<li>While the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target.</li>\n</ul>\n<p>A remove curse spell ends this effect. At the DM's option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The DM has final say on such a curse's effect.</p><p><strong>At Higher Levels.</strong> If you cast this spell using a spell slot of 4th level or higher, the duration is concentration, up to 10 minutes. If you use a spell slot of 5th level or higher, the duration is 8 hours. If you use a spell slot of 7th level or higher, the duration is 24 hours. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn't require concentration.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1444,7 +1596,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1499,7 +1651,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.pO4zGe5LmFIYqJiL"
+        }
+      }
     },
     {
       "_id": "duSrWmDg9v2aX7Hl",
@@ -1508,7 +1664,7 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-eerie-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You create an invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The sensor remains in place for the duration, and it can't be attacked or otherwise interacted with.</p>\n<p>When you cast the spell, you choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As your action, you can switch between seeing and hearing.</p>\n<p>A creature that can see the sensor (such as a creature benefiting from see invisibility or truesight) sees a luminous, intangible orb about the size of your fist.</p>",
+          "value": "<p>You create an invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The sensor remains in place for the duration, and it can't be attacked or otherwise interacted with.</p><p>When you cast the spell, you choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As your action, you can switch between seeing and hearing.</p><p>A creature that can see the sensor (such as a creature benefiting from see invisibility or truesight) sees a luminous, intangible orb about the size of your fist.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1540,7 +1696,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1595,7 +1751,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.cg50KpBkBdPK6vPL"
+        }
+      }
     },
     {
       "_id": "fu22aAThlCPKAZds",
@@ -1604,7 +1764,7 @@
       "img": "systems/dnd5e/icons/spells/link-eerie-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished.</p>\n<p>If the target is native to the plane of existence you're on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p>\n<p>If the target is native to a different plane of existence than the one you're on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn't return.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th.</p>",
+          "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished.</p><p>If the target is native to the plane of existence you're on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p><p>If the target is native to a different plane of existence than the one you're on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn't return.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1636,7 +1796,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1691,7 +1851,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.pxpb2eOB6bv4phAf"
+        }
+      }
     },
     {
       "_id": "d9T6lky4fWodU1fI",
@@ -1700,7 +1864,7 @@
       "img": "systems/dnd5e/icons/spells/slice-spirit-2.jpg",
       "data": {
         "description": {
-          "value": "<p>You touch a willing creature. For the Duration, the target's Movement is unaffected by difficult terrain, and Spells and other magical Effects can neither reduce the target's speed nor cause the target to be Paralyzed or Restrained.</p>\n<p>The target can also spend 5 feet of Movement to automatically escape from nonmagical restraints, such as Manacles or a creature that has it Grappled. Finally, being Underwater imposes no penalties on the target's movement or attacks.</p>",
+          "value": "<p>You touch a willing creature. For the Duration, the target's Movement is unaffected by difficult terrain, and Spells and other magical Effects can neither reduce the target's speed nor cause the target to be Paralyzed or Restrained.</p><p>The target can also spend 5 feet of Movement to automatically escape from nonmagical restraints, such as Manacles or a creature that has it Grappled. Finally, being Underwater imposes no penalties on the target's movement or attacks.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1732,7 +1896,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1787,7 +1951,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.da0a1t2FqaTjRZGT"
+        }
+      }
     },
     {
       "_id": "fyC4eX5J7LMOyG4S",
@@ -1796,7 +1964,7 @@
       "img": "systems/dnd5e/icons/spells/beam-red-3.jpg",
       "data": {
         "description": {
-          "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range must make a <strong>Dexterity</strong> saving throw. A creature takes 4d6 <em>fire damage</em> and 4d6 <em>radiant damage</em> on a failed save, or half as much damage on a successful one.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the <em>fire damage</em> or the <em>radiant damage</em> (your choice) increases by 1d6 for each slot level above 5th.</p>",
+          "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range must make a Dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot level above 5th.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1828,7 +1996,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1890,7 +2058,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.5e1xTohkzqFqbYH4"
+        }
+      }
     },
     {
       "_id": "Dn3JFhBW60yaZXgV",
@@ -1899,7 +2071,7 @@
       "img": "systems/dnd5e/icons/spells/air-burst-air-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some action or course of activity as you decide. If the creature can understand you, it must succeed on a Wisdom saving throw or become Charmed by you for the Duration. While the creature is charmed by you, it takes 5d10 <em>psychic damage</em> each time it acts in a manner directly counter to your instructions, but no more than once each day. A creature that can't understand you is unaffected by the spell.</p>\n<p>You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends.</p>\n<p>You can end the spell early by using an action to dismiss it. A Remove Curse, Greater Restoration, or wish spell also ends it.</p>\n<p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th or 8th level, the Duration is 1 year. When you cast this spell using a spell slot of 9th level, the spell lasts until it is ended by one of the Spells mentioned above.</p>",
+          "value": "<p>You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some action or course of activity as you decide. If the creature can understand you, it must succeed on a Wisdom saving throw or become Charmed by you for the Duration. While the creature is charmed by you, it takes 5d10 psychic damage each time it acts in a manner directly counter to your instructions, but no more than once each day. A creature that can't understand you is unaffected by the spell.</p><p>You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends.</p><p>You can end the spell early by using an action to dismiss it. A Remove Curse, Greater Restoration, or wish spell also ends it.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 7th or 8th level, the Duration is 1 year. When you cast this spell using a spell slot of 9th level, the spell lasts until it is ended by one of the Spells mentioned above.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1931,7 +2103,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1990,7 +2162,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.JQyigMNPiDnGI18b"
+        }
+      }
     },
     {
       "_id": "cDBI3UvPxyqQDgT1",
@@ -2031,7 +2207,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -2086,7 +2262,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.XzkJpE6XpZfKjODD"
+        }
+      }
     },
     {
       "_id": "hQFQz2LiNGpxcRvw",
@@ -2170,6 +2350,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -2279,6 +2460,7 @@
           "conditions": ""
         },
         "weaponType": "simpleR",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,

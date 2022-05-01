@@ -20,7 +20,7 @@ export default class D20Roll extends Roll {
     if ( !((this.terms[0] instanceof Die) && (this.terms[0].faces === 20)) ) {
       throw new Error(`Invalid D20Roll formula provided ${this._formula}`);
     }
-    this.configureModifiers();
+    if ( !this.options.configured ) this.configureModifiers();
   }
 
   /* -------------------------------------------- */
@@ -97,6 +97,9 @@ export default class D20Roll extends Roll {
 
     // Re-compile the underlying formula
     this._formula = this.constructor.getFormula(this.terms);
+
+    // Mark configuration as complete
+    this.options.configured = true;
   }
 
   /* -------------------------------------------- */
@@ -208,7 +211,15 @@ export default class D20Roll extends Roll {
     // Customize the modifier
     if ( form.ability?.value ) {
       const abl = this.data.abilities[form.ability.value];
-      this.terms.findSplice(t => t.term === "@mod", new NumericTerm({number: abl.mod}));
+      this.terms = this.terms.flatMap(t => {
+        if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
+        if ( t.term === "@abilityCheckBonus" ) {
+          const bonus = abl.bonuses?.check;
+          if ( bonus ) return new Roll(bonus, this.data).terms;
+          return new NumericTerm({number: 0});
+        }
+        return t;
+      });
       this.options.flavor += ` (${CONFIG.DND5E.abilities[form.ability.value]})`;
     }
 

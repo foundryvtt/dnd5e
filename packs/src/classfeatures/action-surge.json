@@ -7,7 +7,7 @@
   "type": "feat",
   "data": {
     "description": {
-      "value": "<p>Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible Bonus Action.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.</p><p><em>**Foundry note: Note the limited uses is set to the base default of 1 per short or long rest. Please manually adjust as required.</em></p>",
+      "value": "<p>Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible Bonus Action.</p><p>Once you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.</p>",
       "chat": "",
       "unidentified": ""
     },
@@ -33,9 +33,13 @@
     },
     "uses": {
       "value": 1,
-      "max": "@classes.fighter.levels > 16 ? 2 : 1",
-      "per": "sr",
-      "type": "sr"
+      "max": "@scale.fighter.action-surge",
+      "per": "sr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Fighter 2",

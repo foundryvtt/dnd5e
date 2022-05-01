@@ -10,15 +10,14 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "npc"],
-      width: 600,
-      height: 680
+      width: 600
     });
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  static unsupportedItemTypes = new Set(["class"]);
+  static unsupportedItemTypes = new Set(["background", "class", "subclass"]);
 
   /* -------------------------------------------- */
 

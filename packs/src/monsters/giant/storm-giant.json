@@ -8,6 +8,10 @@
       "str": {
         "value": 29,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 9,
         "save": 14,
@@ -19,6 +23,10 @@
       "dex": {
         "value": 14,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 2,
         "save": 2,
@@ -30,6 +38,10 @@
       "con": {
         "value": 20,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 5,
         "save": 10,
@@ -41,6 +53,10 @@
       "int": {
         "value": 16,
         "proficient": 0,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 3,
         "save": 3,
@@ -52,6 +68,10 @@
       "wis": {
         "value": 18,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 9,
@@ -63,6 +83,10 @@
       "cha": {
         "value": 18,
         "proficient": 1,
+        "bonuses": {
+          "check": "",
+          "save": ""
+        },
         "min": 3,
         "mod": 4,
         "save": 9,
@@ -102,6 +126,9 @@
         "walk": 50,
         "units": "ft",
         "hover": false
+      },
+      "attunement": {
+        "max": 3
       },
       "senses": {
         "darkvision": 0,
@@ -186,6 +213,10 @@
       "acr": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -195,6 +226,10 @@
       "ani": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -204,6 +239,10 @@
       "arc": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 18,
@@ -213,6 +252,10 @@
       "ath": {
         "value": 1,
         "ability": "str",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 9,
         "passive": 24,
@@ -222,6 +265,10 @@
       "dec": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -231,6 +278,10 @@
       "his": {
         "value": 1,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 18,
@@ -240,6 +291,10 @@
       "ins": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -249,6 +304,10 @@
       "itm": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -258,6 +317,10 @@
       "inv": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -267,6 +330,10 @@
       "med": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -276,6 +343,10 @@
       "nat": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -285,6 +356,10 @@
       "prc": {
         "value": 1,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 19,
@@ -294,6 +369,10 @@
       "prf": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -303,6 +382,10 @@
       "per": {
         "value": 0,
         "ability": "cha",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -312,6 +395,10 @@
       "rel": {
         "value": 0,
         "ability": "int",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 3,
         "passive": 13,
@@ -321,6 +408,10 @@
       "slt": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -330,6 +421,10 @@
       "ste": {
         "value": 0,
         "ability": "dex",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 2,
         "passive": 12,
@@ -339,6 +434,10 @@
       "sur": {
         "value": 0,
         "ability": "wis",
+        "bonuses": {
+          "check": "",
+          "passive": ""
+        },
         "bonus": 0,
         "mod": 4,
         "passive": 14,
@@ -480,7 +579,28 @@
     "randomImg": false,
     "img": "icons/svg/mystery-man.svg",
     "actorId": "68bAMIpe4jvDeR9G",
-    "alpha": 1
+    "alpha": 1,
+    "light": {
+      "alpha": 0.5,
+      "angle": 0,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "gradual": true,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    }
   },
   "items": [
     {
@@ -561,6 +681,7 @@
           "dt": null,
           "conditions": ""
         },
+        "baseItem": "",
         "speed": {
           "value": null,
           "conditions": ""
@@ -735,6 +856,7 @@
           "conditions": ""
         },
         "weaponType": "martialM",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -919,6 +1041,7 @@
           "conditions": ""
         },
         "weaponType": "natural",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1103,6 +1226,7 @@
           "conditions": ""
         },
         "weaponType": "simpleR",
+        "baseItem": "",
         "properties": {
           "amm": false,
           "fin": false,
@@ -1169,7 +1293,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1224,7 +1348,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8"
+        }
+      }
     },
     {
       "_id": "ZfZdDUx9GGlzMcca",
@@ -1265,7 +1393,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1320,7 +1448,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.pub0OWVEB71XQx1n"
+        }
+      }
     },
     {
       "_id": "OCIEixWf3lLWbhuc",
@@ -1329,7 +1461,7 @@
       "img": "systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg",
       "data": {
         "description": {
-          "value": "<p>One creature or object of your choice that you can see within range rises vertically, up to 20 feet, and remains suspended there for the duration. The spell can levitate a target that weighs up to 500 pounds. An unwilling creature that succeeds on a Constitution saving throw is unaffected.</p>\n<p>The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target's altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can use your action to move the target, which must remain within the spell's range.</p>\n<p>When the spell ends, the target floats gently to the ground if it is still aloft.</p>",
+          "value": "<p>One creature or object of your choice that you can see within range rises vertically, up to 20 feet, and remains suspended there for the duration. The spell can levitate a target that weighs up to 500 pounds. An unwilling creature that succeeds on a Constitution saving throw is unaffected.</p><p>The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target's altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can use your action to move the target, which must remain within the spell's range.</p><p>When the spell ends, the target floats gently to the ground if it is still aloft.</p>",
           "chat": "",
           "unidentified": ""
         },
@@ -1361,7 +1493,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1415,7 +1547,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.MRxldJd6C4bsBo3O"
+        }
+      }
     },
     {
       "_id": "GVaSh0u1KG9HicPi",
@@ -1456,7 +1592,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1510,7 +1646,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.Bnn9Nzajixvow9xi"
+        }
+      }
     },
     {
       "_id": "LxGeVE7eSCdx3hyd",
@@ -1519,7 +1659,7 @@
       "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
       "data": {
         "description": {
-          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p>\n<p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p>\n<p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p>\n<p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
+          "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
           "chat": "",
           "unidentified": ""
         },
@@ -1551,7 +1691,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1606,7 +1746,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.ZPd73HtKF3At11jh"
+        }
+      }
     },
     {
       "_id": "3s14wZ9s9GSJTx5A",
@@ -1647,7 +1791,7 @@
         },
         "consume": {
           "type": "",
-          "target": "",
+          "target": null,
           "amount": null
         },
         "ability": "",
@@ -1702,7 +1846,11 @@
       "permission": {
         "default": 0
       },
-      "flags": {}
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.dnd5e.spells.13uVuBQP6VaiSPvC"
+        }
+      }
     }
   ],
   "effects": [],

@@ -34,8 +34,12 @@
     "uses": {
       "value": 1,
       "max": 1,
-      "per": "lr",
-      "type": "lr"
+      "per": "lr"
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -47,14 +51,12 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "value": "",
       "scaling": "spell"
     },
     "requirements": "Warlock 11",
