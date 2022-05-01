@@ -334,19 +334,19 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   async _onDropItemCreate(itemData) {
     let itemDataArray = itemData instanceof Array ? itemData : [itemData];
     
-    for (const item of itemDataArray) {
+    for ( const item of itemDataArray ) {
       // Increment the number of class levels a character instead of creating a new item
-      if (item.type === "class") {
+      if ( item.type === "class" ) {
         item.data.levels = Math.min(item.data.levels,
           CONFIG.DND5E.maxLevel - this.actor.data.data.details.level);
-        if (item.data.levels <= 0) return ui.notifications.error(
+        if ( item.data.levels <= 0 ) return ui.notifications.error(
           game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel })
         );
 
         const cls = this.actor.itemTypes.class.find(c => c.identifier === item.data.identifier);
-        if (cls) {
+        if ( cls ) {
           const priorLevel = cls.data.data.levels;
-          if (cls.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements")) {
+          if ( cls.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
             const manager = AdvancementManager.forLevelChange(this.actor, cls.id, item.data.levels);
             if (manager.steps.length) return manager.render(true);
           }
@@ -355,15 +355,15 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }
 
       // If a subclass is dropped, ensure it doesn't match another subclass with the same identifier
-      else if (item.type === "subclass") {
+      else if ( item.type === "subclass" ) {
         const other = this.actor.itemTypes.subclass.find(i => i.identifier === item.data.identifier);
-        if (other) {
+        if ( other ) {
           return ui.notifications.error(game.i18n.format("DND5E.SubclassDuplicateError", {
             identifier: other.identifier
           }));
         }
         const cls = this.actor.itemTypes.class.find(i => i.identifier === item.data.classIdentifier);
-        if (cls && cls.subclass) {
+        if ( cls && cls.subclass ) {
           return ui.notifications.error(game.i18n.format("DND5E.SubclassAssignmentError", {
             class: cls.name, subclass: cls.subclass.name
           }));

@@ -807,9 +807,9 @@ export default class ActorSheet5e extends ActorSheet {
   async _onDropItemCreate(itemData) {
     let itemDataArray = itemData instanceof Array ? itemData : [itemData];
 
-    for (const item of itemDataArray) {
+    for ( const item of itemDataArray ) {
       // Check to make sure items of this type are allowed on this actor
-      if (this.constructor.unsupportedItemTypes.has(item.type)) {
+      if ( this.constructor.unsupportedItemTypes.has(item.type) ) {
         return ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
           itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
           actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
@@ -817,7 +817,7 @@ export default class ActorSheet5e extends ActorSheet {
       }
 
       // Create a Consumable spell scroll on the Inventory tab
-      if ((item.type === "spell") && (this._tabs[0].active === "inventory")) {
+      if ( (item.type === "spell") && (this._tabs[0].active === "inventory") ) {
         const scroll = await Item5e.createScrollFromSpell(item);
         item = scroll.data;
       }
@@ -827,12 +827,12 @@ export default class ActorSheet5e extends ActorSheet {
 
       // Stack identical consumables
       const stacked = this._onDropStackConsumables(item);
-      if (stacked) return stacked;
+      if ( stacked ) return stacked;
 
       // Bypass normal creation flow for any items with advancement
-      if (item.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements")) {
+      if ( item.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
         const manager = AdvancementManager.forNewItem(this.actor, item);
-        if (manager.steps.length) return manager.render(true);
+        if ( manager.steps.length ) return manager.render(true);
       }
     }
 
