@@ -4,24 +4,12 @@
  */
 export default class ActorHitPointsConfig extends FormApplication {
 
-  constructor(object, options) {
-    super(object, options);
-
-    /**
-     * Copy of the HP data for display.
-     * @type {object}
-     */
-    this.hpData = foundry.utils.deepClone(object.data.data.attributes.hp);
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "hp-config", "dialog"],
       template: "systems/dnd5e/templates/apps/hit-points-config.html",
-      width: 360,
+      width: 320,
       height: "auto"
     });
   }
@@ -45,10 +33,18 @@ export default class ActorHitPointsConfig extends FormApplication {
   /** @inheritdoc */
   getData(options) {
     return {
-      data: this.hpData,
+      data: this.object.data.data.attributes.hp,
       isCharacter: this.object.type === "character",
-      preview: this.object._computeHitPoints(this.object, this.hpData, this.object.getRollData())
+      preview: this.object._computeHitPoints(this.object)
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find(".roll-hit-points").click(this._onRollHPFormula.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -57,9 +53,13 @@ export default class ActorHitPointsConfig extends FormApplication {
   _onChangeInput(event) {
     super._onChangeInput(event);
 
-    const formData = foundry.utils.expandObject(this._getSubmitData());
-    foundry.utils.mergeObject(this.hpData, formData.data.attributes.hp);
-    this.render();
+    if ( this.object.type === "character" ) {
+      const formData = foundry.utils.expandObject(this._getSubmitData());
+      const preview = this.object._computeHitPoints(this.object, foundry.utils.mergeObject(
+        this.object.data.data.attributes.hp, formData.data.attributes.hp, {inplace: false}
+      ));
+      this.form.querySelector("input[name='data.attributes.hp.override']").placeholder = preview;
+    }
   }
 
   /* -------------------------------------------- */
@@ -67,6 +67,27 @@ export default class ActorHitPointsConfig extends FormApplication {
   /** @inheritdoc */
   async _updateObject(event, formData) {
     this.object.update(formData);
+    // TODO: Update HP value using HP max delta
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling NPC health values using the provided formula.
+   * @param {Event} event  The original click event.
+   * @private
+   */
+  async _onRollHPFormula(event) {
+    event.preventDefault();
+    const formula = this.form.querySelector("input[name='data.attributes.hp.formula']").value;
+    if ( !formula ) return;
+    try {
+      const roll = await this.object.rollNPCHitPoints(formula);
+      this.form.querySelector("input[name='data.attributes.hp.max']").value = roll.total;
+    } catch(error) {
+      ui.notifications.error(game.i18n.localize("DND5E.HPFormulaError"));
+      throw error;
+    }
   }
 
 }

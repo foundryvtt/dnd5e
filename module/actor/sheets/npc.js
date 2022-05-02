@@ -124,29 +124,4 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     return super._updateObject(event, formData);
   }
 
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /** @override */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find(".health .rollable").click(this._onRollHPFormula.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle rolling NPC health values using the provided formula.
-   * @param {Event} event  The original click event.
-   * @private
-   */
-  _onRollHPFormula(event) {
-    event.preventDefault();
-    const formula = this.actor.data.data.attributes.hp.formula;
-    if ( !formula ) return;
-    const hp = new Roll(formula).roll({async: false}).total;
-    AudioHelper.play({src: CONFIG.sounds.dice});
-    this.actor.update({"data.attributes.hp.value": hp, "data.attributes.hp.max": hp});
-  }
 }

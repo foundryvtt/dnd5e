@@ -58,14 +58,14 @@
                                data-dtype="Number" title="{{localize 'DND5E.HitPointsMax'}}" />
                     </div>
                     <footer class="attribute-footer flexrow">
-                        <input name="data.attributes.hp.formula" class="hpformula" type="text"
-                               placeholder="{{ localize 'DND5E.HPFormula' }}"
-                               value="{{data.attributes.hp.formula}}"
-                               title="{{ localize 'DND5E.HPFormula' }}">
                         <input name="data.attributes.hp.temp" type="text" class="temphp"
                                placeholder="+{{ localize 'DND5E.Temp' }}"
                                value="{{data.attributes.hp.temp}}" data-dtype="Number"
                                title="{{localize 'DND5E.HitPointsTemp'}}">
+                        <input name="data.attributes.hp.tempmax" type="text" class="temphp"
+                               placeholder="+{{ localize 'DND5E.Max' }}"
+                               value="{{data.attributes.hp.tempmax}}" data-dtype="Number"
+                               title="{{localize 'DND5E.HitPointsTempMax'}}">
                     </footer>
                 </li>
 

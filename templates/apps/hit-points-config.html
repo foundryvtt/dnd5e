@@ -1,13 +1,9 @@
 <form>
-  <div class="hp-field form-group">
-    {{#if isCharacter}}
-      <input type="number" name="data.attributes.hp.override" value="{{data.override}}" placeholder="{{preview}}">
-    {{else}}
-      <input type="number" name="data.attributes.hp.max" value="{{data.max}}">
-    {{/if}}
-  </div>
-
   {{#if isCharacter}}
+
+    <div class="hp-field form-group">
+      <input type="number" name="data.attributes.hp.override" value="{{data.override}}" placeholder="{{preview}}">
+    </div>
 
     <h3 class="form-header">Bonuses</h3>
     <div class="form-group">
@@ -21,10 +17,16 @@
 
   {{else}}
 
+    <div class="hp-field form-group">
+      <input type="number" name="data.attributes.hp.max" value="{{data.max}}">
+    </div>
+
     <div class="form-group">
       <label>{{localize "DND5E.HPFormula"}}</label>
-      <input type="text" name="data.attributes.hp.formula" value="{{data.formula}}">
-      <p class="hint">HP Range: (min)–(max), Average: (avg)</p>
+      <div class="form-fields">
+        <input type="text" name="data.attributes.hp.formula" value="{{data.formula}}">
+        <button class="roll-hit-points"><i class="fas fa-dice"></i> {{localize "DND5E.Roll"}}</button>
+      </div>
     </div>
 
   {{/if}}

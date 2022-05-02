@@ -534,14 +534,16 @@ export default class Actor5e extends Actor {
 
   /**
    * Compute hit points for characters.
-   * @param {Actor5e} actor     Actor for whom the HP should be calculated.
-   * @param {object} hp         HP data to drive the calculation.
-   * @param {object} bonusData  Data produced by `getRollData` to be applied to bonus formulas.
-   * @returns {number}          Computed HP max.
+   * @param {Actor5e} actor       Actor for whom the HP should be calculated.
+   * @param {object} [hp]         HP data to drive the calculation.
+   * @param {object} [bonusData]  Data produced by `getRollData` to be applied to bonus formulas.
+   * @returns {number}            Computed HP max.
    */
   _computeHitPoints(actor, hp, bonusData) {
+    if ( !hp ) hp = this.data.data.attributes.hp;
     if ( this.type !== "character" ) return hp.max;
     if ( hp.override !== null ) return hp.override;
+    if ( !bonusData ) bonusData = this.getRollData();
 
     const base = Object.values(actor.classes).reduce((total, item) => {
       const advancement = item.advancement.byLevel[1].find(a => a.data.type === "HitPoints");
@@ -955,6 +957,8 @@ export default class Actor5e extends Actor {
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
+  /* -------------------------------------------- */
+  /*  Rolling                                     */
   /* -------------------------------------------- */
 
   /**
@@ -1384,6 +1388,43 @@ export default class Actor5e extends Actor {
     return roll;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Roll hit points for an NPC based on the HP formula.
+   * @param {string} [formula]  Hit points formula to roll. If not provided, the one in the actor will be used.
+   * @returns {Promise<Roll>}   The completed roll.
+   */
+  async rollNPCHitPoints(formula) {
+    if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
+    const rollData = { formula: formula ?? this.data.data.attributes.hp.formula, data: this.getRollData() };
+    const flavor = game.i18n.format("DND5E.NPCHitPointsRollMessage");
+    const messageData = {
+      title: `${flavor}: ${this.name}`,
+      flavor,
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      "flags.dnd5e.roll": { type: "hitPoints" }
+    };
+
+    /**
+     * A hook event that fires before hit points are rolled for an NPC.
+     * @function dnd5e.preRollNPCHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
+     * @param {object} rollData
+     * @param {string} rollData.formula  The string formula to parse.
+     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} messageData       The data object to use when creating the message.
+     */
+    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
+
+    const roll = new Roll(rollData.formula, rollData.data);
+    await roll.toMessage(messageData);
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+  /*  Resting                                     */
   /* -------------------------------------------- */
 
   /**
