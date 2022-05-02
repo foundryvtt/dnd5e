@@ -1314,31 +1314,34 @@ export default class Actor5e extends Actor {
    * Roll hit points for a specific class as part of a level-up workflow.
    * @param {Item5e} item      The class item whose hit dice to roll.
    * @returns {Promise<Roll>}  The completed roll.
-   * @see {@link dnd5e.rollClassHitPoints}
+   * @see {@link dnd5e.preRollClassHitPoints}
    */
   async rollClassHitPoints(item) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const denom = item.data.data.hitDice;
+    const rollData = { formula: `1${item.data.data.hitDice}`, data: item.getRollData() };
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
-    const roll = new Roll(`1${denom}`);
-
-    /**
-     * A hook event that fires before hit points are rolled for a character's class.
-     * @function dnd5e.rollClassHitPoints
-     * @memberof hookEvents
-     * @param {Actor5e} actor  Actor for which the hit points are being rolled.
-     * @param {Item5e} item    The class item whose hit dice will be rolled.
-     * @param {Roll} roll      The roll being prepared.
-     */
-    const allowed = Hooks.call("dnd5e.rollClassHitPoints", this, item, roll);
-    if ( allowed === false ) return roll;
-
-    await roll.toMessage({
+    const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
       speaker: ChatMessage.getSpeaker({ actor: this }),
       "flags.dnd5e.roll": { type: "hitPoints" }
-    });
+    };
+
+    /**
+     * A hook event that fires before hit points are rolled for a character's class.
+     * @function dnd5e.preRollClassHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
+     * @param {Item5e} item              The class item whose hit dice will be rolled.
+     * @param {object} rollData
+     * @param {string} rollData.formula  The string formula to parse.
+     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} messageData       The data object to use when creating the message.
+     */
+    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
+
+    const roll = new Roll(rollData.formula, rollData.data);
+    await roll.toMessage(messageData);
     return roll;
   }
 
