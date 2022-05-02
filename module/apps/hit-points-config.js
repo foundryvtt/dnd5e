@@ -66,8 +66,14 @@ export default class ActorHitPointsConfig extends FormApplication {
 
   /** @inheritdoc */
   async _updateObject(event, formData) {
+    // Update HP value using HP max delta
+    const hpData = this.object.data.data.attributes.hp;
+    const updatedMax = this.object._computeHitPoints(this.object, foundry.utils.mergeObject(
+      hpData, foundry.utils.expandObject(formData).data.attributes.hp, {inplace: false}
+    ));
+    formData["data.attributes.hp.value"] = Math.max(hpData.value + (updatedMax - hpData.max), 0);
+
     this.object.update(formData);
-    // TODO: Update HP value using HP max delta
   }
 
   /* -------------------------------------------- */
