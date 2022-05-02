@@ -54,6 +54,14 @@ export default class ActorHitPointsConfig extends DocumentSheet {
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.find(".roll-hit-points").click(this._onRollHPFormula.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   async _onChangeInput(event) {
     await super._onChangeInput(event);
@@ -61,7 +69,25 @@ export default class ActorHitPointsConfig extends DocumentSheet {
 
     // Update clone with new data & re-render
     this.clone.updateSource({ [`system.attributes.${t.name}`]: t.value || null });
-    this.render();
+    if ( t.name !== "hp.formula" ) this.render();
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Handle rolling NPC health values using the provided formula.
+   * @param {Event} event  The original click event.
+   * @protected
+   */
+  async _onRollHPFormula(event) {
+    event.preventDefault();
+    try {
+      const roll = await this.clone.rollNPCHitPoints();
+      this.clone.updateSource({"system.attributes.hp.max": roll.total});
+      this.render();
+    } catch(error) {
+      ui.notifications.error(game.i18n.localize("DND5E.HPFormulaError"));
+      throw error;
+    }
+  }
 }
