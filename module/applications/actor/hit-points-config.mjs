@@ -47,6 +47,12 @@ export default class ActorHitPointsConfig extends DocumentSheet {
   /** @inheritdoc */
   async _updateObject(event, formData) {
     const hp = foundry.utils.expandObject(formData).hp;
+
+    // Update HP value using HP max delta
+    this.clone.updateSource({"system.attributes.hp": hp});
+    const maxDelta = this.clone.system.attributes.hp.max - this.document.system.attributes.hp.max;
+    hp.value = Math.max(this.document.system.attributes.hp.value + maxDelta, 0);
+
     return this.document.update({"system.attributes.hp": hp});
   }
 

@@ -1680,7 +1680,7 @@ export default class Actor5e extends Actor {
   async rollNPCHitPoints() {
     if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
     const rollData = { formula: this.system.attributes.hp.formula, data: this.getRollData() };
-    const flavor = game.i18n.format("DND5E.NPCHitPointsRollMessage");
+    const flavor = game.i18n.format("DND5E.HPFormulaRollMessage");
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
