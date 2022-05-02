@@ -1015,6 +1015,8 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Rolling                                     */
+  /* -------------------------------------------- */
 
   /**
    * Roll a Skill Check
@@ -1670,6 +1672,42 @@ export default class Actor5e extends Actor {
    * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
    *                                       automatically spent during a short rest.
    */
+
+  /**
+   * Roll hit points for an NPC based on the HP formula.
+   * @returns {Promise<Roll>}  The completed roll.
+   */
+  async rollNPCHitPoints() {
+    if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
+    const rollData = { formula: this.system.attributes.hp.formula, data: this.getRollData() };
+    const flavor = game.i18n.format("DND5E.NPCHitPointsRollMessage");
+    const messageData = {
+      title: `${flavor}: ${this.name}`,
+      flavor,
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      "flags.dnd5e.roll": { type: "hitPoints" }
+    };
+
+    /**
+     * A hook event that fires before hit points are rolled for an NPC.
+     * @function dnd5e.preRollNPCHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
+     * @param {object} rollData
+     * @param {string} rollData.formula  The string formula to parse.
+     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} messageData       The data object to use when creating the message.
+     */
+    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
+
+    const roll = new Roll(rollData.formula, rollData.data);
+    await roll.toMessage(messageData);
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+  /*  Resting                                     */
+  /* -------------------------------------------- */
 
   /**
    * Results from a rest operation.
