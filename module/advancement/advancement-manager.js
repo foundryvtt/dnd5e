@@ -560,6 +560,22 @@ export class AdvancementManager extends Application {
       return obj;
     }, { toCreate: [], toUpdate: [], toDelete: this.actor.items.map(i => i.id) });
 
+    /**
+     * A hook event that fires at the final stage of a character's advancement process, before actor and item updates
+     * are applied.
+     * @function dnd5e.preAdvancementManagerComplete
+     * @memberof hookEvents
+     * @param {AdvancementManager} advancementManager  The advancement manager.
+     * @param {object} actorUpdates                    Updates to the actor.
+     * @param {object[]} toCreate                      Items that will be created on the actor.
+     * @param {object[]} toUpdate                      Items that will be updated on the actor.
+     * @param {string[]} toDelete                      IDs of items that will be deleted on the actor.
+     */
+    if ( Hooks.call("dnd5e.preAdvancementManagerComplete", this, updates, toCreate, toUpdate, toDelete) === false ) {
+      console.log("AdvancementManager completion was prevented by the 'preAdvancementManagerComplete' hook.");
+      return this.close({ skipConfirmation: true });
+    }
+
     // Apply changes from clone to original actor
     await Promise.all([
       this.actor.update(updates, { isAdvancement: true }),
