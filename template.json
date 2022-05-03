@@ -420,6 +420,11 @@
     },
     "npc": {
       "templates": ["common", "creature"],
+      "attributes": {
+        "hp": {
+          "formula": ""
+        }
+      },
       "details": {
         "type": {
           "value": "",

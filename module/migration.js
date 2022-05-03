@@ -556,12 +556,12 @@ function _migrateActorAC(actorData, updateData) {
   }
 
   // Migrate ac.base in custom formulas to ac.armor
-  if ( ac?.formula.includes("@attributes.ac.base") ) {
+  if ( (typeof ac?.formula === "string") && ac?.formula.includes("@attributes.ac.base") ) {
     updateData["data.attributes.ac.formula"] = ac.formula.replaceAll("@attributes.ac.base", "@attributes.ac.armor");
   }
 
   // Protect against string values created by character sheets or importers that don't enforce data types
-  if ( typeof ac?.flat === "string" && Number.isNumeric(ac.flat) ) {
+  if ( (typeof ac?.flat === "string") && Number.isNumeric(ac.flat) ) {
     updateData["data.attributes.ac.flat"] = parseInt(ac.flat);
   }
 
