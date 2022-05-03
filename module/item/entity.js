@@ -662,9 +662,8 @@ export default class Item5e extends Item {
         consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
         if ( consumeSpellSlot === false ) consumeSpellLevel = null;
         const upcastLevel = configuration.level === "pact" ? ad.spells.pact.level : parseInt(configuration.level);
-        if (upcastLevel !== id.level) {
+        if ( !Number.isNaN(upcastLevel) && (upcastLevel !== id.level) ) {
           item = this.clone({"data.level": upcastLevel}, {keepId: true});
-          item.data.update({_id: this.id}); // Retain the original ID (needed until 0.8.2+)
           item.prepareFinalAttributes(); // Spell save DC, etc...
         }
       }
