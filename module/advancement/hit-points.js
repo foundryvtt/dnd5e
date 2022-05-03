@@ -120,7 +120,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   static availableForItem(item) {
-    return !item.data.data.advancement.find(a => a.type === "HitPoints");
+    return !item.advancement.byType.HitPoints?.length;
   }
 
   /* -------------------------------------------- */
