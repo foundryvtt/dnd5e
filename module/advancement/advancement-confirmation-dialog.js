@@ -17,6 +17,7 @@ export class AdvancementConfirmationDialog extends Dialog {
   /**
    * A helper function that displays the dialog prompting for an item deletion.
    * @param {Item5e} item  Item to be deleted.
+   * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
   static forDelete(item) {
     return this.createDialog(
@@ -35,6 +36,7 @@ export class AdvancementConfirmationDialog extends Dialog {
   /**
    * A helper function that displays the dialog prompting for leveling down.
    * @param {Item5e} item  The class whose level is being changed.
+   * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
   static forLevelDown(item) {
     return this.createDialog(
