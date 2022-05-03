@@ -90,7 +90,7 @@ export class AdvancementSelection extends Dialog {
           submit: {
             callback: html => {
               const formData = new FormDataExtended(html.querySelector("form"));
-              const type = game.release.generation === 10 ? formData.object.type : formData.get("type");
+              const type = formData.get("type");
               resolve(item.createAdvancement(type));
             }
           }
