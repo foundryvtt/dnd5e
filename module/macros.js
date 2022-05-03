@@ -5,11 +5,10 @@
  * @returns {Promise<boolean>}
  */
 export async function create5eMacro(data, slot) {
-  if ( !("data" in data) ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
-
   const macroData = { type: "script", scope: "actor" };
   switch ( data.type ) {
     case "Item":
+      if ( !("data" in data) ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
       foundry.utils.mergeObject(macroData, {
         name: data.data.name,
         img: data.data.img,
@@ -18,6 +17,7 @@ export async function create5eMacro(data, slot) {
       });
       break;
     case "ActiveEffect":
+      if ( !("data" in data) ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
       foundry.utils.mergeObject(macroData, {
         name: data.data.label,
         img: data.data.icon,
