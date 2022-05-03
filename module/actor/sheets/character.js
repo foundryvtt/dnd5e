@@ -332,10 +332,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /** @override */
   async _onDropItemCreate(itemData) {
-    let itemDataArray = itemData instanceof Array ? itemData : [itemData];
+    itemData = itemData instanceof Array ? itemData : [itemData];
 
     const created = [];
-    for ( const item of itemDataArray ) {
+    for ( const item of itemData ) {
       // Increment the number of class levels a character instead of creating a new item
       if ( item.type === "class" ) {
         item.data.levels = Math.min(item.data.levels,
