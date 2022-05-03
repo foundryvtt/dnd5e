@@ -252,7 +252,8 @@ export class Advancement {
 
     foundry.utils.mergeObject(this.data, updates);
     foundry.utils.mergeObject(advancement[idx], updates);
-    this.item.data.update({"data.advancement": advancement});
+    if ( game.release.generation === 10 ) this.item.updateSource({"system.advancement": advancement});
+    else this.item.data.update({"data.advancement": advancement});
 
     return this;
   }
