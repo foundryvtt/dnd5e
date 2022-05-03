@@ -146,7 +146,9 @@ export default class ProficiencySelector extends TraitSelector {
 
     // Build the extended index and return a promise for the data
     const promise = packObject.getIndex({
-      fields: ["data.armor.type", "data.toolType", "data.weaponType"]
+      // TODO: Remove "img" from this index when v10 is required
+      // see https://gitlab.com/foundrynet/foundryvtt/-/issues/6152
+      fields: ["data.armor.type", "data.toolType", "data.weaponType", "img"]
     }).then(index => {
       const store = index.reduce((obj, entry) => {
         obj[entry._id] = entry;
