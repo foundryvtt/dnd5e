@@ -332,24 +332,30 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData) {
-
+  async _onDropSingleItem(itemData) {
     // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
       itemData.data.levels = Math.min(itemData.data.levels,
         CONFIG.DND5E.maxLevel - this.actor.data.data.details.level);
-      if ( itemData.data.levels <= 0 ) return ui.notifications.error(
-        game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel})
-      );
+      if ( itemData.data.levels <= 0 ) {
+        ui.notifications.error(
+          game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel })
+        );
+        return false;
+      }
 
       const cls = this.actor.itemTypes.class.find(c => c.identifier === itemData.data.identifier);
       if ( cls ) {
         const priorLevel = cls.data.data.levels;
         if ( cls.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
           const manager = AdvancementManager.forLevelChange(this.actor, cls.id, itemData.data.levels);
-          if ( manager.steps.length ) return manager.render(true);
+          if ( manager.steps.length ) {
+            manager.render(true);
+            return false;
+          }
         }
-        return cls.update({"data.levels": priorLevel + itemData.data.levels});
+        cls.update({ "data.levels": priorLevel + itemData.data.levels });
+        return false;
       }
     }
 
@@ -357,19 +363,20 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     else if ( itemData.type === "subclass" ) {
       const other = this.actor.itemTypes.subclass.find(i => i.identifier === itemData.data.identifier);
       if ( other ) {
-        return ui.notifications.error(game.i18n.format("DND5E.SubclassDuplicateError", {
+        ui.notifications.error(game.i18n.format("DND5E.SubclassDuplicateError", {
           identifier: other.identifier
         }));
+        return false;
       }
       const cls = this.actor.itemTypes.class.find(i => i.identifier === itemData.data.classIdentifier);
       if ( cls && cls.subclass ) {
-        return ui.notifications.error(game.i18n.format("DND5E.SubclassAssignmentError", {
+        ui.notifications.error(game.i18n.format("DND5E.SubclassAssignmentError", {
           class: cls.name, subclass: cls.subclass.name
         }));
+        return false;
       }
     }
 
-    // Default drop handling if levels were not added
-    return super._onDropItemCreate(itemData);
+    return super._onDropSingleItem(itemData);
   }
 }
