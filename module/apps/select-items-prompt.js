@@ -1,11 +1,13 @@
 /**
  * A Dialog to prompt the user to select from a list of items.
  * @type {Dialog}
+ * @deprecated since dnd5e 1.6, targeted for removal in 1.8
  */
 export default class SelectItemsPrompt extends Dialog {
   constructor(items, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog", "select-items-prompt", "sheet"];
+    console.warn("SelectItemsPrompt has been deprecated and will be removed in 1.8.");
 
     /**
      * Store a reference to the Item documents being used

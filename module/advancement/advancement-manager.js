@@ -140,9 +140,14 @@ export class AdvancementManager extends Application {
     const dataClone = foundry.utils.deepClone(itemData);
     dataClone._id = foundry.utils.randomID();
     if ( itemData.type === "class" ) {
-      dataClone.data.levels = 0;
+      if ( game.release.generation === 10 ) dataClone.system.levels = 0
+      else dataClone.data.levels = 0;
       if ( !manager.clone.data.data.details.originalClass ) {
-        manager.clone.data.update({"data.details.originalClass": dataClone._id});
+        if ( game.release.generation === 10 ) {
+          manager.clone.updateSource({"system.details.originalClass": dataClone._id});
+        } else {
+          manager.clone.data.update({"data.details.originalClass": dataClone._id});
+        }
       }
     }
 
@@ -341,7 +346,8 @@ export class AdvancementManager extends Application {
     if ( this.step?.class ) {
       let level = this.step.class.level;
       if ( this.step.type === "reverse" ) level -= 1;
-      this.step.class.item.data.update({"data.levels": level});
+      if ( game.release.generation === 10 ) this.step.class.item.updateSource({"system.levels": level});
+      else this.step.class.item.data.update({"data.levels": level});
       this.clone.prepareData();
     }
 
@@ -458,7 +464,8 @@ export class AdvancementManager extends Application {
         if ( this.step?.class ) {
           let level = this.step.class.level;
           if ( this.step.type === "reverse" ) level -= 1;
-          this.step.class.item.data.update({"data.levels": level});
+          if ( game.release.generation === 10 ) this.step.class.item.updateSource({"system.levels": level});
+          else this.step.class.item.data.update({"data.levels": level});
         }
 
         this.clone.prepareData();
@@ -559,6 +566,22 @@ export class AdvancementManager extends Application {
       }
       return obj;
     }, { toCreate: [], toUpdate: [], toDelete: this.actor.items.map(i => i.id) });
+
+    /**
+     * A hook event that fires at the final stage of a character's advancement process, before actor and item updates
+     * are applied.
+     * @function dnd5e.preAdvancementManagerComplete
+     * @memberof hookEvents
+     * @param {AdvancementManager} advancementManager  The advancement manager.
+     * @param {object} actorUpdates                    Updates to the actor.
+     * @param {object[]} toCreate                      Items that will be created on the actor.
+     * @param {object[]} toUpdate                      Items that will be updated on the actor.
+     * @param {string[]} toDelete                      IDs of items that will be deleted on the actor.
+     */
+    if ( Hooks.call("dnd5e.preAdvancementManagerComplete", this, updates, toCreate, toUpdate, toDelete) === false ) {
+      console.log("AdvancementManager completion was prevented by the 'preAdvancementManagerComplete' hook.");
+      return this.close({ skipConfirmation: true });
+    }
 
     // Apply changes from clone to original actor
     await Promise.all([
