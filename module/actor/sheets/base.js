@@ -805,42 +805,35 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropItemCreate(itemData) {
-    itemData = itemData instanceof Array ? itemData : [itemData];
-
-    const itemsWithoutAdvancement = itemData.filter(i => !i.data.advancement?.length);
-    const multipleAdvancements = (itemData.length - itemsWithoutAdvancement.length) > 1;
+    let items = itemData instanceof Array ? itemData : [itemData];
+    const itemsWithoutAdvancement = items.filter(i => !i.data.advancement?.length);
+    const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
 
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
       ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
-      itemData = itemsWithoutAdvancement;
+      items = itemsWithoutAdvancement;
     }
 
-    const skipped = [];
-    const created = [];
-    for ( let item of itemData ) {
-      const result = await this._onDropSingleItemCreate(item);
-      if ( result === null ) {
-        skipped.push(item);
-      }
-      else if ( result ) {
-        created.push(result);
-      }
+    const toCreate = [];
+    for ( const item of items ) {
+      const result = await this._onDropSingleItem(item);
+      if ( result ) toCreate.push(result);
     }
 
-    // Create the owned item as normal
-    return created + await super._onDropItemCreate(skipped);
+    // Create the owned items as normal
+    return this.actor.createEmbeddedDocuments("Item", toCreate);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Handles dropping of a single item onto this character sheet.
-   * @param {object} itemData
-   * @returns {object} the resultant item object, or false if adding the item was prevented,
-   * or null if no item was created.
+   * @param {object} itemData            The item data to create.
+   * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
+   *                                     created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItemCreate(itemData) {
+  async _onDropSingleItem(itemData) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -853,7 +846,7 @@ export default class ActorSheet5e extends ActorSheet {
     // Create a Consumable spell scroll on the Inventory tab
     if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
-      return this.actor.createEmbeddedDocuments("Item", [scroll.data]);
+      return scroll.toObject();
     }
 
     // Clean up data
@@ -861,17 +854,18 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Stack identical consumables
     const stacked = this._onDropStackConsumables(itemData);
-    if ( stacked ) return stacked;
+    if ( stacked ) return false;
 
     // Bypass normal creation flow for any items with advancement
     if ( itemData.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forNewItem(this.actor, itemData);
       if ( manager.steps.length ) {
-        return manager.render(true);
+        manager.render(true);
+        return false;
       }
     }
 
-    return null;
+    return itemData;
   }
 
   /* -------------------------------------------- */

@@ -331,7 +331,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropSingleItemCreate(itemData) {
+  async _onDropSingleItem(itemData) {
     // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
       itemData.data.levels = Math.min(itemData.data.levels,
@@ -349,10 +349,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         if ( cls.hasAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
           const manager = AdvancementManager.forLevelChange(this.actor, cls.id, itemData.data.levels);
           if ( manager.steps.length ) {
-            return manager.render(true);
+            manager.render(true);
+            return false;
           }
         }
-        return cls.update({ "data.levels": priorLevel + itemData.data.levels });
+        cls.update({ "data.levels": priorLevel + itemData.data.levels });
+        return false;
       }
     }
 
@@ -374,6 +376,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       }
     }
 
-    return super._onDropSingleItemCreate(itemData);
+    return super._onDropSingleItem(itemData);
   }
 }
