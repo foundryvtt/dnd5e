@@ -230,8 +230,10 @@ export default class Actor5e extends Actor {
    * @param {Item5e[]} items         The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
+   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   async addEmbeddedItems(items, prompt=true) {
+    console.warn("Actor5e#addEmbeddedItems has been deprecated and will be removed in 1.8.");
     let itemsToAdd = items;
     if ( !items.length ) return [];
 
