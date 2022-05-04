@@ -9,6 +9,11 @@ import Proficiency from "../actor/proficiency.js";
  */
 export default class Item5e extends Item {
 
+  /** @inheritdoc */
+  static LOG_V10_COMPATIBILITY_WARNINGS = false;
+
+  /* -------------------------------------------- */
+
   /**
    * Caches an item linked to this one, such as a subclass associated with a class.
    * @type {Item5e}
@@ -236,10 +241,9 @@ export default class Item5e extends Item {
    * @type {object}
    */
   get scaleValues() {
-    if ( !["class", "subclass"].includes(this.type) ) return {};
+    if ( !["class", "subclass"].includes(this.type) || !this.advancement.byType.ScaleValue ) return {};
     const level = this.type === "class" ? this.data.data.levels : this.class?.data.data.levels ?? 0;
-    return Object.values(this.advancement.byId).reduce((obj, advancement) => {
-      if ( (advancement.data.type !== "ScaleValue") ) return obj;
+    return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.prepareValue(level);
       return obj;
     }, {});
@@ -381,6 +385,7 @@ export default class Item5e extends Item {
       byLevel: Object.fromEntries(
         Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
       ),
+      byType: {},
       needingConfiguration: []
     };
     for ( const advancementData of this.data.data.advancement ?? [] ) {
@@ -388,6 +393,8 @@ export default class Item5e extends Item {
       if ( !Advancement ) continue;
       const advancement = new Advancement(this, advancementData);
       this.advancement.byId[advancement.id] = advancement;
+      this.advancement.byType[advancementData.type] ??= [];
+      this.advancement.byType[advancementData.type].push(advancement);
       advancement.levels.forEach(l => this.advancement.byLevel[l].push(advancement));
       if ( !advancement.levels.length ) this.advancement.needingConfiguration.push(advancement);
     }
@@ -441,6 +448,7 @@ export default class Item5e extends Item {
     const itemData = this.data.data;
     if ( !this.hasDamage || !itemData || !this.isOwned ) return [];
     const rollData = this.getRollData();
+    const damageLabels = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
     const derivedDamage = itemData.damage?.parts?.map(damagePart => {
       let formula;
       try {
@@ -449,7 +457,7 @@ export default class Item5e extends Item {
       }
       catch(err) { console.warn(`Unable to simplify formula for ${this.name}: ${err}`); }
       const damageType = damagePart[1];
-      return { formula, damageType, label: `${formula} ${CONFIG.DND5E.damageTypes[damageType]}` };
+      return { formula, damageType, label: `${formula} ${damageLabels[damageType] ?? ""}` };
     });
     this.labels.derivedDamage = derivedDamage;
     return derivedDamage;
@@ -659,9 +667,8 @@ export default class Item5e extends Item {
         consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
         if ( consumeSpellSlot === false ) consumeSpellLevel = null;
         const upcastLevel = configuration.level === "pact" ? ad.spells.pact.level : parseInt(configuration.level);
-        if (upcastLevel !== id.level) {
+        if ( !Number.isNaN(upcastLevel) && (upcastLevel !== id.level) ) {
           item = this.clone({"data.level": upcastLevel}, {keepId: true});
-          item.data.update({_id: this.id}); // Retain the original ID (needed until 0.8.2+)
           item.prepareFinalAttributes(); // Spell save DC, etc...
         }
       }

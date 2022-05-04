@@ -120,7 +120,7 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   static availableForItem(item) {
-    return !item.data.data.advancement.find(a => a.type === "HitPoints");
+    return !item.advancement.byType.HitPoints?.length;
   }
 
   /* -------------------------------------------- */
@@ -134,7 +134,11 @@ export class HitPointsAdvancement extends Advancement {
     if ( value === undefined ) return;
 
     value += actorData.abilities.con?.mod ?? 0;
-    this.actor.data.update({
+    if ( game.release.generation === 10 ) this.actor.updateSource({
+      "system.attributes.hp.max": actorData.attributes.hp.max + value,
+      "system.attributes.hp.value": actorData.attributes.hp.value + value
+    });
+    else this.actor.data.update({
       "data.attributes.hp.max": actorData.attributes.hp.max + value,
       "data.attributes.hp.value": actorData.attributes.hp.value + value
     });
@@ -157,7 +161,11 @@ export class HitPointsAdvancement extends Advancement {
     if ( value === undefined ) return;
 
     value += actorData.abilities.con?.mod ?? 0;
-    this.actor.data.update({
+    if ( game.release.generation === 10 ) this.actor.updateSource({
+      "system.attributes.hp.max": actorData.attributes.hp.max - value,
+      "system.attributes.hp.value": actorData.attributes.hp.value - value
+    });
+    else this.actor.data.update({
       "data.attributes.hp.max": actorData.attributes.hp.max - value,
       "data.attributes.hp.value": actorData.attributes.hp.value - value
     });
