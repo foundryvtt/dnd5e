@@ -383,11 +383,11 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData) {
+  async _onDropSingleItemCreate(itemData) {
     const cargoTypes = ["weapon", "equipment", "consumable", "tool", "loot", "backpack"];
     const isCargo = cargoTypes.includes(itemData.type) && (this._tabs[0].active === "cargo");
     foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", isCargo);
-    return super._onDropItemCreate(itemData);
+    return super._onDropSingleItemCreate(itemData);
   }
 
   /* -------------------------------------------- */

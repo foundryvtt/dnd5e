@@ -806,45 +806,72 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   async _onDropItemCreate(itemData) {
     itemData = itemData instanceof Array ? itemData : [itemData];
+
+    const itemsWithoutAdvancement = itemData.filter(i => !i.data.advancement?.length);
+    const multipleAdvancements = (itemData.length - itemsWithoutAdvancement.length) > 1;
+
+    if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
+      itemData = itemsWithoutAdvancement;
+    }
+
+    const skipped = [];
     const created = [];
-
     for ( let item of itemData ) {
-      // Check to make sure items of this type are allowed on this actor
-      if ( this.constructor.unsupportedItemTypes.has(item.type) ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-        }));
-        continue;
+      const result = await this._onDropSingleItemCreate(item);
+      if ( result === null ) {
+        skipped.push(item);
       }
-
-      // Create a Consumable spell scroll on the Inventory tab
-      if ( (item.type === "spell") && (this._tabs[0].active === "inventory") ) {
-        const scroll = await Item5e.createScrollFromSpell(item);
-        item = scroll.data;
+      else if ( result ) {
+        created.push(result);
       }
-
-      // Clean up data
-      this._onDropResetData(item);
-
-      // Stack identical consumables
-      const stacked = this._onDropStackConsumables(item);
-      if ( stacked ) continue;
-
-      // Bypass normal creation flow for any items with advancement
-      if ( item.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
-        const manager = AdvancementManager.forNewItem(this.actor, item);
-        if ( manager.steps.length ) {
-          manager.render(true);
-          continue;
-        }
-      }
-
-      created.push(item);
     }
 
     // Create the owned item as normal
-    return super._onDropItemCreate(created);
+    return created + await super._onDropItemCreate(skipped);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handles dropping of a single item onto this character sheet.
+   * @param {object} itemData
+   * @returns {object} the resultant item object, or false if adding the item was prevented,
+   * or null if no item was created.
+   * @protected
+   */
+  async _onDropSingleItemCreate(itemData) {
+    // Check to make sure items of this type are allowed on this actor
+    if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
+      ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
+        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+      }));
+      return false;
+    }
+
+    // Create a Consumable spell scroll on the Inventory tab
+    if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
+      const scroll = await Item5e.createScrollFromSpell(itemData);
+      return this.actor.createEmbeddedDocuments("Item", [scroll.data]);
+    }
+
+    // Clean up data
+    this._onDropResetData(itemData);
+
+    // Stack identical consumables
+    const stacked = this._onDropStackConsumables(itemData);
+    if ( stacked ) return stacked;
+
+    // Bypass normal creation flow for any items with advancement
+    if ( itemData.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = AdvancementManager.forNewItem(this.actor, itemData);
+      if ( manager.steps.length ) {
+        return manager.render(true);
+      }
+    }
+
+    return null;
   }
 
   /* -------------------------------------------- */
