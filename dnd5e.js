@@ -267,7 +267,7 @@ Hooks.on("getActorDirectoryEntryContext", Actor5e.addDirectoryContextOptions);
  * Patch v9 instances of Document types with `system` object linking to `data.data`.
  */
 function _patchSystemData() {
-  for ( const Type of [ActiveEffect5e, Actor5e, Item5e] ) {
+  for ( const Type of [ActiveEffect5e, Actor5e, Item5e, TokenDocument5e] ) {
     Object.defineProperty(Type.prototype, "system", {
       get() { return this.data.data; },
       configurable: true,
