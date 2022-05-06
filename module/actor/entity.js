@@ -546,7 +546,7 @@ export default class Actor5e extends Actor {
     if ( !bonusData ) bonusData = this.getRollData();
 
     const base = Object.values(actor.classes).reduce((total, item) => {
-      const advancement = item.advancement.byLevel[1].find(a => a.data.type === "HitPoints");
+      const advancement = item.advancement.byType.HitPoints?.[0];
       return total + (advancement?.total() ?? 0);
     }, 0);
     const constitution = actor.data.data.abilities.con?.mod * actor.data.data.details.level;
