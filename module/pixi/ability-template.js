@@ -90,7 +90,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
       if ( now - moveTime <= 20 ) return;
       const center = event.data.getLocalPosition(this.layer);
       const snapped = canvas.grid.getSnappedPosition(center.x, center.y, 2);
-      this.data.update({x: snapped.x, y: snapped.y});
+      if ( game.release.generation < 10 ) this.data.update({x: snapped.x, y: snapped.y});
+      else this.document.updateSource({x: snapped.x, y: snapped.y});
       this.refresh();
       moveTime = now;
     };
@@ -109,9 +110,11 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Confirm the workflow (left-click)
     handlers.lc = event => {
       handlers.rc(event);
-      const destination = canvas.grid.getSnappedPosition(this.data.x, this.data.y, 2);
-      this.data.update(destination);
-      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.data]);
+      const data = game.release.generation < 10 ? this.data : this.document;
+      const destination = canvas.grid.getSnappedPosition(data.x, data.y, 2);
+      if ( game.release.generation < 10 ) this.data.update(destination);
+      else this.document.updateSource(destination);
+      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [data]);
     };
 
     // Rotate the template by 3 degree increments (mouse-wheel)
@@ -120,7 +123,10 @@ export default class AbilityTemplate extends MeasuredTemplate {
       event.stopPropagation();
       let delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
       let snap = event.shiftKey ? delta : 5;
-      this.data.update({direction: this.data.direction + (snap * Math.sign(event.deltaY))});
+      const data = game.release.generation < 10 ? this.data : this.document;
+      const update = {direction: data.direction + (snap * Math.sign(event.deltaY))};
+      if ( game.release.generation < 10 ) this.data.update(update);
+      else this.document.updateSource(update);
       this.refresh();
     };
 
