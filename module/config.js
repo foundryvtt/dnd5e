@@ -1049,7 +1049,10 @@ DND5E.polymorphSettings = {
   keepSpells: "DND5E.PolymorphKeepSpells",
   keepItems: "DND5E.PolymorphKeepItems",
   keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision"
+  keepVision: "DND5E.PolymorphKeepVision",
+  keepSelf: "DND5E.PolymorphKeepSelf",
+  notKeepAE: "DND5E.PolymorphNotKeepAE",
+  keepAEOnlyOriginNotEquipment: "DND5E.PolymorphKeepAEOnlyOriginNotEquipment"
 };
 preLocalize("polymorphSettings", { sort: true });
 
