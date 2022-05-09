@@ -13,11 +13,6 @@ import Item5e from "../item/entity.js";
  */
 export default class Actor5e extends Actor {
 
-  /** @inheritdoc */
-  static LOG_V10_COMPATIBILITY_WARNINGS = false;
-
-  /* -------------------------------------------- */
-
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
    * @type {object<string, Item5e>}
@@ -230,10 +225,8 @@ export default class Actor5e extends Actor {
    * @param {Item5e[]} items         The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   async addEmbeddedItems(items, prompt=true) {
-    console.warn("Actor5e#addEmbeddedItems has been deprecated and will be removed in 1.8.");
     let itemsToAdd = items;
     if ( !items.length ) return [];
 
@@ -1321,34 +1314,18 @@ export default class Actor5e extends Actor {
    * Roll hit points for a specific class as part of a level-up workflow.
    * @param {Item5e} item      The class item whose hit dice to roll.
    * @returns {Promise<Roll>}  The completed roll.
-   * @see {@link dnd5e.preRollClassHitPoints}
    */
   async rollClassHitPoints(item) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const rollData = { formula: `1${item.data.data.hitDice}`, data: item.getRollData() };
+    const denom = item.data.data.hitDice;
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
-    const messageData = {
+    const roll = new Roll(`1${denom}`);
+    await roll.toMessage({
       title: `${flavor}: ${this.name}`,
       flavor,
       speaker: ChatMessage.getSpeaker({ actor: this }),
       "flags.dnd5e.roll": { type: "hitPoints" }
-    };
-
-    /**
-     * A hook event that fires before hit points are rolled for a character's class.
-     * @function dnd5e.preRollClassHitPoints
-     * @memberof hookEvents
-     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
-     * @param {Item5e} item              The class item whose hit dice will be rolled.
-     * @param {object} rollData
-     * @param {string} rollData.formula  The string formula to parse.
-     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
-     * @param {object} messageData       The data object to use when creating the message.
-     */
-    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
-
-    const roll = new Roll(rollData.formula, rollData.data);
-    await roll.toMessage(messageData);
+    });
     return roll;
   }
 
@@ -1751,6 +1728,10 @@ export default class Actor5e extends Actor {
    * @property {boolean} [keepItems=false]       Keep items
    * @property {boolean} [keepBio=false]         Keep biography
    * @property {boolean} [keepVision=false]      Keep vision
+   * @property {boolean} [keepSelf=false]        Keep self
+   * @property {boolean} [notKeepAE=false]       Not keep active effects
+   * @property {boolean} [keepAEOnlyOriginNotEquipment=false] Keep only active effects which origin is not equipment
+   * @property {boolean} [transformTokens=false] Transform linked tokens too
    * @property {boolean} [transformTokens=true]  Transform linked tokens too
    */
 
@@ -1759,11 +1740,14 @@ export default class Actor5e extends Actor {
    *
    * @param {Actor5e} target                      The target Actor.
    * @param {TransformationOptions} [options={}]  Options that determine how the transformation is performed.
+   * @param {boolean} [renderSheet]             Render Sheet after tranformation
    * @returns {Promise<Array<Token>>|null}        Updated token if the transformation was performed.
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
-    keepItems=false, keepBio=false, keepVision=false, transformTokens=true }={}) {
+    keepItems=false, keepBio=false, keepVision=false,
+    keepSelf=false, notKeepAE=false, keepAEOnlyOriginNotEquipment=false,
+    transformTokens=true}={}, renderSheet = true) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1777,8 +1761,14 @@ export default class Actor5e extends Actor {
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
     const source = target.toJSON();
 
+    let d = new Object();
+    if(keepSelf){
+      // Keep Self
+      mergeObject(d,o);
+    }
+
     // Prepare new data to merge from the source
-    const d = {
+    d = {
       type: o.type, // Remain the same actor type
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
       data: source.data, // Get the data model of your new form
@@ -1807,13 +1797,17 @@ export default class Actor5e extends Actor {
     for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
       d.token[k] = source.token[k];
     }
-    const vision = keepVision ? o.token : source.token;
-    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
-      d.token[k] = vision[k];
-    }
+
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
       d.token.img = images[Math.floor(Math.random() * images.length)];
+    }
+
+    if(!keepSelf){
+
+    const vision = keepVision ? o.token : source.token;
+    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
+      d.token[k] = vision[k];
     }
 
     // Transfer ability scores
@@ -1858,6 +1852,25 @@ export default class Actor5e extends Actor {
     // Keep senses
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
+    // Not keep active effects
+    if(notKeepAE && !keepAEOnlyOriginNotEquipment) d.effects = [];
+
+    // Keep active effects only origin not equipment
+    if(keepAEOnlyOriginNotEquipment){
+      const tokenEffects = foundry.utils.deepClone(d.effects) || [];
+      let nonEquipItems = ["feat", "spell", "class"];
+      const tokenEffectsNotEquipment = [];
+      tokenEffects.forEach((effect) => {
+        if(!effect.origin.toLowerCase().startsWith("item")){
+          tokenEffectsNotEquipment.push(effect);
+        }
+      });
+      d.effects = tokenEffectsNotEquipment;
+    }
+
+    }
+
+
     // Set new data flags
     if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
     d.flags.dnd5e.isPolymorphed = true;
@@ -1884,11 +1897,15 @@ export default class Actor5e extends Actor {
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, notKeepAE, keepAEOnlyOriginNotEquipment, transformTokens, renderSheet
     });
 
+    // Some info like height and weight of the token are reset to default
+    // after the constructor of the actor is invoked solved with a backup of the info of the token
+    const tokenBackup = duplicate(d.token);
     // Create new Actor with transformed data
-    const newActor = await this.constructor.create(d, {renderSheet: true});
+    const newActor = await this.constructor.create(d, {renderSheet: renderSheet});
+    mergeObject(d.token, tokenBackup);
 
     // Update placed Token instances
     if ( !transformTokens ) return;
@@ -1909,9 +1926,10 @@ export default class Actor5e extends Actor {
    * If this actor was transformed with transformTokens enabled, then its
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
+   * @param {boolean} [renderSheet] Render Sheet after revert the tranformation
    * @returns {Promise<Actor>|null}  Original actor if it was reverted.
    */
-  async revertOriginalForm() {
+  async revertOriginalForm(renderSheet = true) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
@@ -1954,7 +1972,11 @@ export default class Actor5e extends Actor {
     const isRendered = this.sheet.rendered;
     if ( game.user.isGM ) await this.delete();
     else if ( isRendered ) this.sheet.close();
-    if ( isRendered ) original.sheet.render(isRendered);
+    if ( isRendered ) {
+      if(renderSheet){
+        original.sheet.render(isRendered);
+      }
+    }
     return original;
   }
 
