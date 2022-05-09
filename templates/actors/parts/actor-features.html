@@ -39,48 +39,52 @@
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
+                    {{#if (eq item.type "subclass")}}&rdsh;{{/if}}
                     {{item.name}}
-                    {{#if item.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'DND5E.ClassOriginal'}}"></i>{{/if}}
+                    {{#if item.data.isOriginalClass}} <i class="original-class fas fa-sun" title="{{localize 'DND5E.ClassOriginal'}}"></i>{{/if}}
                 </h4>
             </div>
 
             {{#if section.hasActions}}
             <div class="item-detail item-uses">
                 {{#if item.isOnCooldown}}
-                <a class="item-recharge rollable">{{item.labels.recharge}}</a>
+                    <a class="item-recharge rollable">{{item.labels.recharge}}</a>
                 {{else if item.data.recharge.value}}
-                {{localize "DND5E.Charged"}}
-
+                    {{localize "DND5E.Charged"}}
                 {{else if item.hasUses}}
-                <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
+                    <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>/ {{item.data.uses.max}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">
-                {{#if item.data.activation.type }}
-                {{item.labels.activation}}
+                {{#if item.data.activation.type}}
+                    {{item.labels.activation}}
                 {{/if}}
             </div>
 
-            {{else if section.isClass}}
-            <div class="item-detail player-class">
-                {{item.data.subclass}}
-            </div>
+            {{else if (eq item.type "class")}}
             <div class="item-detail item-action">
-                {{localize "DND5E.Level"}} {{item.data.levels}}
+                <select class="level-selector">
+                    {{#select 0}}
+                    {{#each item.availableLevels}}
+                        <option value="{{this.delta}}" {{disabled this.disabled}}>
+                            {{localize "DND5E.LevelNumber" level=this.level}}
+                            {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
+                        </option>
+                    {{/each}}
+                    {{/select}}
+                </select>
             </div>
             {{/if}}
 
             {{#if section.columns}}
                 {{#each section.columns}}
                     <div class="item-detail {{css}}">
-                        {{#with (getProperty item property)}}
-                            {{#if ../editable}}
-                                <input type="text" value="{{this}}" placeholder="&mdash;"
-                                       data-dtype="{{../editable}}">
-                            {{else}}
-                                {{this}}
-                            {{/if}}
-                        {{/with}}
+                        {{#if editable}}
+                            <input type="text" value="{{getProperty item property}}" placeholder="&mdash;"
+                                   data-dtype="{{editable}}">
+                        {{else}}
+                            {{getProperty item property}}
+                        {{/if}}
                     </div>
                 {{/each}}
             {{/if}}

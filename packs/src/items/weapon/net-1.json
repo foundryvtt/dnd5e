@@ -51,7 +51,10 @@
     "actionType": "rwak",
     "attackBonus": 1,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [],
       "versatile": "",

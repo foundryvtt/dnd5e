@@ -1,0 +1,85 @@
+{
+  "name": "Truth Serum",
+  "type": "consumable",
+  "img": "icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>(ingested)</em></p>\n<p>A creature subjected to this poison must succeed on a <strong>DC 11 Constitution saving throw</strong> or become @Compendium[dnd5e.rules.prcOUhkWEVppFVbg]{Poisoned} for <strong>1 hour</strong>. The @Compendium[dnd5e.rules.prcOUhkWEVppFVbg]{Poisoned} creature can't knowingly speak a lie, as if under the effect of a @Compendium[dnd5e.spells.CylBa7jR8DSbo8Z3]{Zone of Truth} spell.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "DMG pg. 258",
+    "quantity": 1,
+    "weight": 0,
+    "price": 150,
+    "attunement": 0,
+    "equipped": false,
+    "rarity": "",
+    "identified": true,
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": 1,
+      "units": "hour"
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 1,
+      "max": "1",
+      "per": "charges",
+      "autoDestroy": true,
+      "autoUse": true
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": null,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "consumableType": "poison",
+    "hp": {
+      "value": 0,
+      "max": 0,
+      "dt": null,
+      "conditions": ""
+    },
+    "speed": {
+      "value": null,
+      "conditions": ""
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "flags": {},
+  "_id": "a86F565Pjdzym1jH"
+}

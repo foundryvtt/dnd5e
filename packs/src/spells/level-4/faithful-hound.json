@@ -40,7 +40,10 @@
     "actionType": "rsak",
     "attackBonus": null,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [
         [

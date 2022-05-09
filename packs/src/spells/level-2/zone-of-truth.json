@@ -40,7 +40,10 @@
     "actionType": "save",
     "attackBonus": 0,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [],
       "versatile": "",
@@ -60,7 +63,7 @@
       "somatic": true,
       "material": false,
       "ritual": false,
-      "concentration": true
+      "concentration": false
     },
     "materials": {
       "value": "",

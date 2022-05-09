@@ -1,0 +1,53 @@
+<form autocomplete="off">
+  <div class="left-column">
+    {{> "systems/dnd5e/templates/advancement/parts/advancement-controls.html"}}
+    <div class="form-group">
+      <label>{{localize "DND5E.AdvancementScaleValueTypeLabel"}}</label>
+      <div class="form-fields">
+        <select name="data.configuration.type">
+          {{selectOptions types selected=data.configuration.type}}
+        </select>
+        {{#if (eq data.configuration.type "distance")}}
+          <select name="data.configuration.distance.units">
+            {{selectOptions movementUnits selected=data.configuration.distance.units}}
+          </select>
+        {{/if}}
+      </div>
+      <p class="hint type-hint">
+        {{typeHint}}
+      </p>
+    </div>
+    <hr>
+
+    <div class="form-group">
+      <label>{{localize "DND5E.Identifier"}}</label>
+      <div class="form-fields">
+        <input name="data.configuration.identifier" type="text" value="{{data.configuration.identifier}}" placeholder="{{previewIdentifier}}">
+      </div>
+      <p class="hint identifier-hint">
+        {{{localize "DND5E.AdvancementScaleValueIdentifierHint" class=classIdentifier identifier=previewIdentifier}}}
+      </p>
+    </div>
+  </div>
+
+  <div class="right-column scale-values">
+    {{#each levels as |data level|}}
+      <div class="form-group">
+        <label>{{level}}</label>
+        <div class="form-fields">
+          {{#if (eq @root.data.configuration.type "dice")}}
+            {{numberInput data.value.n name=(concat "data.configuration.scale." level ".n") min=1 step=1
+                          placeholder=data.placeholder.n}}
+            <select name="data.configuration.scale.{{level}}.die" data-dtype="Number" class="{{data.className}}">
+              {{selectOptions @root.faces selected=data.value.die blank=data.placeholder.die}}
+            </select>
+          {{else}}
+            <input name="data.configuration.scale.{{level}}.value" type="text" value="{{data.value.value}}"
+                   data-level="{{level}}" placeholder="{{data.placeholder.value}}"
+                   {{#if @root.isNumeric}}data-dtype="Number"{{/if}}>
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</form>

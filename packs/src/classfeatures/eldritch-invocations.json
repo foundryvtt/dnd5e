@@ -32,15 +32,23 @@
       "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": 0,
+      "value": null,
+      "max": "",
       "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
     },
     "ability": null,
     "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
-    "critical": null,
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
     "damage": {
       "parts": [],
       "versatile": ""
@@ -55,23 +63,6 @@
     "recharge": {
       "value": null,
       "charged": false
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "featType": {
-      "value": "",
-      "_deprecated": true
-    },
-    "time": {
-      "value": "",
-      "_deprecated": true
-    },
-    "damageType": {
-      "value": "",
-      "_deprecated": true
     }
   },
   "folder": "tFOfAj4cr2LN77j7",

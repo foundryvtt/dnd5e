@@ -1,0 +1,82 @@
+{
+  "name": "School of Evocation",
+  "type": "subclass",
+  "img": "icons/magic/fire/beam-strike-whip-red.webp",
+  "data": {
+    "description": {
+      "value": "<p>You focus your study on magic that creates powerful elemental effects such as bitter cold, searing flame, rolling thunder, crackling lightning, and burning acid. Some evokers find employment in military forces, serving as artillery to blast enemy armies from afar. Others use their spectacular power to protect the weak, while some seek their own gain as bandits, adventurers, or aspiring tyrants.</p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB pg. 117",
+    "identifier": "school-of-evocation",
+    "classIdentifier": "wizard",
+    "advancement": [
+      {
+        "_id": "qgi9q6koa7jabbc5",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.7uzJ2JkmsdRGLra3",
+            "Compendium.dnd5e.classfeatures.6VBXkjjBgjSpNElh"
+          ]
+        },
+        "value": {},
+        "level": 2,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "j1twu5y6jafoeupk",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.evEWCpE5MYgr5RRW"
+          ]
+        },
+        "value": {},
+        "level": 6,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "vlybc408acscngpd",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.7O85kj6uDEG5NzUE"
+          ]
+        },
+        "value": {},
+        "level": 10,
+        "title": "Features",
+        "icon": ""
+      },
+      {
+        "_id": "s82u4bepkgu04upt",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            "Compendium.dnd5e.classfeatures.VUtSLeCzFubGXmGx"
+          ]
+        },
+        "value": {},
+        "level": 14,
+        "title": "Features",
+        "icon": ""
+      }
+    ],
+    "spellcasting": {
+      "progression": "none",
+      "ability": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {},
+  "_id": "Ye5f3FReEnuXfi0y"
+}

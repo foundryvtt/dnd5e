@@ -32,7 +32,7 @@ export default class ProficiencySelector extends TraitSelector {
     const chosen = (this.options.valueKey) ? foundry.utils.getProperty(attr, this.options.valueKey) ?? [] : attr;
 
     const data = super.getData();
-    data.choices = await ProficiencySelector.getChoices(this.options.type, chosen, this.options.sortCategories);
+    data.choices = await this.constructor.getChoices(this.options.type, chosen, this.options.sortCategories);
     return data;
   }
 
@@ -65,7 +65,7 @@ export default class ProficiencySelector extends TraitSelector {
     if ( ids !== undefined ) {
       const typeProperty = (type !== "armor") ? `${type}Type` : "armor.type";
       for ( const [key, id] of Object.entries(ids) ) {
-        const item = await ProficiencySelector.getBaseItem(id);
+        const item = await this.getBaseItem(id);
         if ( !item ) continue;
 
         let type = foundry.utils.getProperty(item.data, typeProperty);
@@ -90,12 +90,12 @@ export default class ProficiencySelector extends TraitSelector {
         obj[key] = { label: label, chosen: chosen.includes(key) };
         return obj;
       }, {});
-      data = ProficiencySelector._sortObject(data);
+      data = game.dnd5e.utils.sortObjectEntries(data, "label");
     }
 
     for ( const category of Object.values(data) ) {
       if ( !category.children ) continue;
-      category.children = ProficiencySelector._sortObject(category.children);
+      category.children = game.dnd5e.utils.sortObjectEntries(category.children, "label");
     }
 
     return data;
@@ -123,46 +123,42 @@ export default class ProficiencySelector extends TraitSelector {
     if ( scope && collection ) pack = `${scope}.${collection}`;
     if ( !id ) id = identifier;
 
-    // Return extended index if cached, otherwise normal index, guaranteed to never be async.
-    if ( indexOnly ) {
-      return ProficiencySelector._cachedIndices[pack]?.get(id) ?? game.packs.get(pack)?.index.get(id);
-    }
+    const packObject = game.packs.get(pack);
 
     // Full Item5e document required, always async.
-    if ( fullItem ) {
-      return game.packs.get(pack)?.getDocument(id);
+    if ( fullItem && !indexOnly ) {
+      return packObject?.getDocument(id);
+    }
+
+    const cache = this._cachedIndices[pack];
+    const loading = cache instanceof Promise;
+
+    // Return extended index if cached, otherwise normal index, guaranteed to never be async.
+    if ( indexOnly ) {
+      const index = packObject?.index.get(id);
+      return loading ? index : cache?.[id] ?? index;
     }
 
     // Returned cached version of extended index if available.
-    if ( ProficiencySelector._cachedIndices[pack] ) {
-      return ProficiencySelector._cachedIndices[pack].get(id);
-    }
-
-    // Build the extended index and return a promise for the data
-    const packObject = game.packs.get(pack);
+    if ( loading ) return cache.then(() => this._cachedIndices[pack][id]);
+    else if ( cache ) return cache[id];
     if ( !packObject ) return;
 
-    return game.packs.get(pack)?.getIndex({
-      fields: ["data.armor.type", "data.toolType", "data.weaponType"]
+    // Build the extended index and return a promise for the data
+    const promise = packObject.getIndex({
+      // TODO: Remove "img" from this index when v10 is required
+      // see https://gitlab.com/foundrynet/foundryvtt/-/issues/6152
+      fields: ["data.armor.type", "data.toolType", "data.weaponType", "img"]
     }).then(index => {
-      ProficiencySelector._cachedIndices[pack] = index;
-      return index.get(id);
+      const store = index.reduce((obj, entry) => {
+        obj[entry._id] = entry;
+        return obj;
+      }, {});
+      this._cachedIndices[pack] = store;
+      return store[id];
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Take the provided object and sort by the "label" property.
-   *
-   * @param {object} object  Object to be sorted.
-   * @returns {object}        Sorted object.
-   * @private
-   */
-  static _sortObject(object) {
-    return Object.fromEntries(Object.entries(object).sort((lhs, rhs) =>
-      lhs[1].label.localeCompare(rhs[1].label)
-    ));
+    this._cachedIndices[pack] = promise;
+    return promise;
   }
 
   /* -------------------------------------------- */

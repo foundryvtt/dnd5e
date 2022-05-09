@@ -26,6 +26,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+        <a class="item" data-tab="advancement">{{ localize "DND5E.AdvancementTitle" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -39,20 +40,15 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            {{!-- Class Levels --}}
+            {{!-- Identifier --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.ClassLevels" }}</label>
+                <label>{{ localize "DND5E.Identifier" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.levels" value="{{data.levels}}" data-dtype="Number"/>
+                    <input type="text" name="data.identifier" value="{{data.identifier}}">
                 </div>
-            </div>
-
-            {{!-- Subclass Name --}}
-            <div class="form-group">
-                <label>{{ localize "DND5E.SubclassName" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="data.subclass" value="{{data.subclass}}"/>
-                </div>
+                <p class="hint">
+                    {{{localize "DND5E.ClassIdentifierHint" identifier=data.identifier}}}
+                </p>
             </div>
 
             {{!-- Class Hit Dice --}}
@@ -77,25 +73,11 @@
             </div>
 
             {{!-- Spellcasting --}}
-            <div class="form-group">
-                <label>{{localize 'DND5E.SpellProgression'}}</label>
-                <div class="form-fields">
-                    <select name="data.spellcasting.progression">
-                        {{selectOptions config.spellProgression selected=data.spellcasting.progression localize=true}}
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>{{localize "DND5E.SpellAbility"}}</label>
-                <div class="form-fields">
-                    <select name="data.spellcasting.ability">
-                        {{selectOptions config.abilities selected=data.spellcasting.ability blank=""}}
-                    </select>
-                </div>
-            </div>
+            <h3 class="form-header">{{localize "DND5E.Spellcasting"}}</h3>
+            {{> "systems/dnd5e/templates/items/parts/item-spellcasting.html"}}
 
             {{!-- Proficiencies --}}
+            <h3 class="form-header">{{localize "DND5E.Proficiency"}}</h3>
             <div class="form-group">
                 <label>
                     {{ localize "DND5E.ClassSaves" }}
@@ -158,5 +140,9 @@
                 </div>
             </div>
         </div>
+
+        {{!-- Advancement Tab --}}
+        {{> "systems/dnd5e/templates/items/parts/item-advancement.html"}}
+
     </section>
 </form>

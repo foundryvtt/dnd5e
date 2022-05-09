@@ -1,32 +1,37 @@
-
-/* -------------------------------------------- */
-/*  Hotbar Macros                               */
-/* -------------------------------------------- */
-
 /**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {object} data     The dropped data
- * @param {number} slot     The hotbar slot to use
- * @returns {Promise}
+ * Attempt to create a macro from the dropped data. Will use an existing macro if one exists.
+ * @param {object} data         The dropped data
+ * @param {number} slot         The hotbar slot to use
+ * @returns {Promise<boolean>}
  */
 export async function create5eMacro(data, slot) {
-  if ( data.type !== "Item" ) return;
-  if (!( "data" in data ) ) return ui.notifications.warn("You can only create macro buttons for owned Items");
-  const item = data.data;
-
-  // Create the macro command
-  const command = `game.dnd5e.rollItemMacro("${item.name}");`;
-  let macro = game.macros.find(m => (m.name === item.name) && (m.data.command === command));
-  if ( !macro ) {
-    macro = await Macro.create({
-      name: item.name,
-      type: "script",
-      img: item.img,
-      command: command,
-      flags: {"dnd5e.itemMacro": true}
-    });
+  const macroData = { type: "script", scope: "actor" };
+  switch ( data.type ) {
+    case "Item":
+      if ( !("data" in data) ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
+      foundry.utils.mergeObject(macroData, {
+        name: data.data.name,
+        img: data.data.img,
+        command: `game.dnd5e.macros.rollItem("${data.data.name}")`,
+        flags: {"dnd5e.itemMacro": true}
+      });
+      break;
+    case "ActiveEffect":
+      if ( !("data" in data) ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
+      foundry.utils.mergeObject(macroData, {
+        name: data.data.label,
+        img: data.data.icon,
+        command: `game.dnd5e.macros.toggleEffect("${data.data.label}")`,
+        flags: {"dnd5e.effectMacro": true}
+      });
+      break;
+    default:
+      return;
   }
+
+  let macro = game.macros.find(m => (m.data.name === macroData.name)
+    && (m.data.command === macroData.command) && (m.data.author === game.userId));
+  if ( !macro ) macro = await Macro.create(macroData);
   game.user.assignHotbarMacro(macro, slot);
   return false;
 }
@@ -34,26 +39,54 @@ export async function create5eMacro(data, slot) {
 /* -------------------------------------------- */
 
 /**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {string} itemName
- * @returns {Promise}
+ * Find a document of the specified name and type on an assigned or selected actor.
+ * @param {string} name          Document name to locate.
+ * @param {string} documentType  Type of embedded document (e.g. "Item" or "ActiveEffect").
+ * @returns {Document}           Document if found, otherwise nothing.
  */
-export function rollItemMacro(itemName) {
-  const speaker = ChatMessage.getSpeaker();
+function getMacroTarget(name, documentType) {
   let actor;
+  const speaker = ChatMessage.getSpeaker();
   if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-  if ( !actor ) actor = game.actors.get(speaker.actor);
+  actor ??= game.actors.get(speaker.actor);
+  if ( !actor ) return ui.notifications.warn(game.i18n.localize("MACRO.5eNoActorSelected"));
 
-  // Get matching items
-  const items = actor ? actor.items.filter(i => i.name === itemName) : [];
-  if ( items.length > 1 ) {
-    ui.notifications.warn(`Your controlled Actor ${actor.name} has more than one Item with name ${itemName}. The first matched item will be chosen.`);
-  } else if ( items.length === 0 ) {
-    return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+  const collection = (documentType === "Item") ? actor.items : actor.effects;
+  const nameKeyPath = (documentType === "Item") ? "name" : "data.label";
+
+  // Find item in collection
+  const documents = collection.filter(i => foundry.utils.getProperty(i, nameKeyPath) === name);
+  const type = game.i18n.localize(`DOCUMENT.${documentType}`);
+  if ( documents.length === 0 ) {
+    return ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
   }
-  const item = items[0];
+  if ( documents.length > 1 ) {
+    ui.notifications.warn(game.i18n.format("MACRO.5eMultipleTargetsWarn", { actor: actor.name, type, name }));
+  }
 
-  // Trigger the item roll
-  return item.roll();
+  return documents[0];
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Trigger an item to roll when a macro is clicked.
+ * @param {string} itemName                Name of the item on the selected actor to trigger.
+ * @returns {Promise<ChatMessage|object>}  Roll result.
+ */
+export function rollItem(itemName) {
+  return getMacroTarget(itemName, "Item")?.roll();
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Toggle an effect on and off when a macro is clicked.
+ * @param {string} effectLabel       Label for the effect to be toggled.
+ * @returns {Promise<ActiveEffect>}  The effect after it has been toggled.
+ */
+export function toggleEffect(effectLabel) {
+  const effect = getMacroTarget(effectLabel, "ActiveEffect");
+  if ( !effect ) return;
+  return effect.update({disabled: !effect.data.disabled});
 }

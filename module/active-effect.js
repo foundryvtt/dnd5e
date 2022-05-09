@@ -3,6 +3,12 @@
  * @extends {ActiveEffect}
  */
 export default class ActiveEffect5e extends ActiveEffect {
+
+  /** @inheritdoc */
+  static LOG_V10_COMPATIBILITY_WARNINGS = false;
+
+  /* -------------------------------------------- */
+
   /**
    * Is this active effect currently suppressed?
    * @type {boolean}
@@ -14,7 +20,42 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritdoc */
   apply(actor, change) {
     if ( this.isSuppressed ) return null;
+
+    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
+
     return super.apply(actor, change);
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Transform the data type of the change to match the type expected for flags.
+   * @param {Actor} actor              The Actor to whom this effect should be applied.
+   * @param {EffectChangeData} change  The change being applied.
+   * @returns {EffectChangeData}       The change with altered types if necessary.
+   */
+  _prepareFlagChange(actor, change) {
+    const { key, value } = change;
+    const data = CONFIG.DND5E.characterFlags[key.replace("flags.dnd5e.", "")];
+    if ( !data ) return change;
+
+    // Set flag to initial value if it isn't present
+    const current = foundry.utils.getProperty(actor.data, key) ?? null;
+    if ( current === null ) {
+      let initialValue = null;
+      if ( data.placeholder ) initialValue = data.placeholder;
+      else if ( data.type === Boolean ) initialValue = false;
+      else if ( data.type === Number ) initialValue = 0;
+      foundry.utils.setProperty(actor.data, key, initialValue);
+    }
+
+    // Coerce change data into the correct type
+    if ( data.type === Boolean ) {
+      if ( value === "false" ) change.value = false;
+      else change.value = Boolean(value);
+    }
+
+    return change;
   }
 
   /* --------------------------------------------- */
@@ -29,10 +70,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( (parentType !== "Actor") || (parentId !== this.parent.id) || (documentType !== "Item") ) return;
     const item = this.parent.items.get(documentId);
     if ( !item ) return;
-    const itemData = item.data.data;
-    // If an item is not equipped, or it is equipped but it requires attunement and is not attuned, then disable any
-    // Active Effects that might have originated from it.
-    this.isSuppressed = itemData.equipped === false || (itemData.attunement === CONFIG.DND5E.attunementTypes.REQUIRED);
+    this.isSuppressed = item.areEffectsSuppressed;
   }
 
   /* --------------------------------------------- */
@@ -40,7 +78,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Manage Active Effect instances through the Actor Sheet via effect control buttons.
    * @param {MouseEvent} event      The left-click event on the effect control
-   * @param {Actor|Item} owner      The owning entity which manages this effect
+   * @param {Actor|Item} owner      The owning document which manages this effect
    * @returns {Promise|null}        Promise that resolves when the changes are complete.
    */
   static onManageActiveEffect(event, owner) {

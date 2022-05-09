@@ -59,6 +59,10 @@
         height: 24px;
         line-height: 24px;
       }
+      span {
+        margin-inline-start: 4px;
+        border-block-start: 1px solid transparent;
+      }
       select {
         position: relative;
         top: -4px;
@@ -139,6 +143,7 @@
 
   .tab.attributes {
     overflow: hidden;
+    align-items: flex-start;
   }
 
   ul.attributes {
@@ -202,7 +207,7 @@
 
   .ability-scores {
     flex: 0 0 100px;
-    height: 440px;
+    align-content: flex-start;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -688,7 +693,7 @@
 
   .spell-component {
     line-height: 14px;
-    &.C, &.R {
+    &.tag {
       display: inline-block;
       text-align: center;
       padding-top: 1px;
@@ -710,6 +715,9 @@
   // Original class icon
   .features i.original-class {
     color: #4b4a44
+  }
+  .features .item-detail select {
+    max-width: 90%;
   }
 
   /* ----------------------------------------- */

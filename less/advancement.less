@@ -1,0 +1,176 @@
+.dnd5e.advancement {
+  input[type="text"], input[type="number"], select {
+    height: var(--form-field-height);
+  }
+  .form-group .form-fields button {
+    flex: 0;
+  }
+  .form-group .form-field-readonly {
+    color: #999;
+  }
+
+  /* ----------------------------------------- */
+  /*  Advancement Selection                    */
+  /* ----------------------------------------- */
+  .items-list {
+    margin-bottom: 1em;
+
+    li.item {
+      padding-top: 0.25em;
+    }
+    .item-hint {
+      flex: 0 1 100%;
+      margin-left: 35px;
+      margin-bottom: 0.5em;
+    }
+
+    /* Solves the borders being cut off */
+    .entity-link {
+      display: inline-block;
+    }
+  }
+
+  .centered {
+    text-align: center;
+  }
+
+  /* ----------------------------------------- */
+  /*  Two Column Configurations                */
+  /* ----------------------------------------- */
+  &.two-column {
+    --grid-two-column-left-size: 1fr;
+    --grid-two-column-right-size: 1fr;
+
+    form {
+      display: grid;
+      grid-template-columns: var(--grid-two-column-left-size) var(--grid-two-column-right-size);
+      grid-template-areas: "left right";
+      grid-gap: 0.4em;
+
+      .left-column {
+        grid-area: left;
+      }
+      .right-column {
+        grid-area: right;
+      }
+      button[type="submit"] {
+        grid-column-end: span 2;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Scale Value                              */
+  /* ----------------------------------------- */
+  &.scale-value {
+    --grid-two-column-right-size: 0.6fr;
+
+    .right-column label {
+      flex: 0.5;
+      padding-right: 0.5rem;
+      text-align: right;
+    }
+    input[type="text"]::placeholder {
+      opacity: 0.5;
+    }
+
+    select {
+      &.new-scale-value {
+        font-weight: bold;
+      }
+
+      option[value=""] {
+        color: var(--color-text-light-6);
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Advancement Flow                         */
+/* ----------------------------------------- */
+.dnd5e.advancement.flow {
+  .step {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    h1 { flex-grow: 1; }
+    h2 {
+      text-align: right;
+      line-height: 1.8em;
+      border-bottom: 2px solid var(--color-underline-header);
+    }
+    form { flex-basis: 100%; }
+  }
+
+  h3 {
+    font-size: var(--font-size-20);
+  }
+
+  .item-name {
+    .item-image {
+      flex: 0 0 30px;
+      height: 30px;
+      background-size: 30px;
+      margin-inline-end: 5px;
+    }
+    label {
+      align-items: center;
+      h4 {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  form:not(:last-of-type) {
+    margin-block-end: 0.5em;
+    border-block-end: 2px groove var(--color-border-light-1);
+    padding-block-end: 1em;
+  }
+
+  form[data-type="HitPoints"] {
+    div {
+      font-size: var(--font-size-14);
+    }
+    .rolls {
+      display: grid;
+      grid-template-columns: 50% 1fr 1fr;
+      align-items: center;
+      gap: 2px;
+
+      .averageLabel {
+        span, input { vertical-align: middle; }
+      }
+      .rollResult {
+        text-align: center;
+      }
+      .rollButton {
+        height: calc(var(--form-field-height) + 5px);
+        line-height: 1.5em;
+      }
+    }
+  }
+
+  input.error {
+    outline: 2px solid red;
+  }
+
+  form[data-type="ScaleValue"] {
+    p {
+      margin-block-end: 0;
+      font-size: var(--font-size-18);
+    }
+    span.none { font-style: italic; }
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-block-start: 1em;
+    button {
+      max-width: 50%;
+    }
+  }
+}
