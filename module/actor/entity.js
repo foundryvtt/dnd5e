@@ -13,6 +13,12 @@ import Item5e from "../item/entity.js";
  */
 export default class Actor5e extends Actor {
 
+  /** @inheritdoc */
+  static LOG_V10_COMPATIBILITY_WARNINGS = false;
+
+  /* -------------------------------------------- */
+
+
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
    * @type {object<string, Item5e>}
@@ -225,8 +231,10 @@ export default class Actor5e extends Actor {
    * @param {Item5e[]} items         The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
+   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
   async addEmbeddedItems(items, prompt=true) {
+    console.warn("Actor5e#addEmbeddedItems has been deprecated and will be removed in 1.8.");
     let itemsToAdd = items;
     if ( !items.length ) return [];
 
@@ -1314,18 +1322,36 @@ export default class Actor5e extends Actor {
    * Roll hit points for a specific class as part of a level-up workflow.
    * @param {Item5e} item      The class item whose hit dice to roll.
    * @returns {Promise<Roll>}  The completed roll.
+   * @see {@link dnd5e.preRollClassHitPoints}
    */
   async rollClassHitPoints(item) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const denom = item.data.data.hitDice;
+    const rollData = { formula: `1${item.data.data.hitDice}`, data: item.getRollData() };
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
-    const roll = new Roll(`1${denom}`);
-    await roll.toMessage({
+    const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
       speaker: ChatMessage.getSpeaker({ actor: this }),
       "flags.dnd5e.roll": { type: "hitPoints" }
-    });
+
+    };
+
+    /**
+     * A hook event that fires before hit points are rolled for a character's class.
+     * @function dnd5e.preRollClassHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
+     * @param {Item5e} item              The class item whose hit dice will be rolled.
+     * @param {object} rollData
+     * @param {string} rollData.formula  The string formula to parse.
+     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} messageData       The data object to use when creating the message.
+     */
+    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
+
+    const roll = new Roll(rollData.formula, rollData.data);
+    await roll.toMessage(messageData);
+
     return roll;
   }
 
