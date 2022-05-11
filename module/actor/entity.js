@@ -1754,7 +1754,6 @@ export default class Actor5e extends Actor {
    * @property {boolean} [keepSelf=false]        Keep self
    * @property {boolean} [removeAE=false]        Remove active effects
    * @property {boolean} [keepAEOnlyOriginNotEquipment=false] Keep only active effects which origin is not equipment
-   * @property {boolean} [transformTokens=false] Transform linked tokens too
    * @property {boolean} [transformTokens=true]  Transform linked tokens too
    */
 
