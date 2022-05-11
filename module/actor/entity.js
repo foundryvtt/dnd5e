@@ -18,7 +18,6 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
    * @type {object<string, Item5e>}
@@ -1333,7 +1332,6 @@ export default class Actor5e extends Actor {
       flavor,
       speaker: ChatMessage.getSpeaker({ actor: this }),
       "flags.dnd5e.roll": { type: "hitPoints" }
-
     };
 
     /**
@@ -1351,7 +1349,6 @@ export default class Actor5e extends Actor {
 
     const roll = new Roll(rollData.formula, rollData.data);
     await roll.toMessage(messageData);
-
     return roll;
   }
 
@@ -1755,7 +1752,7 @@ export default class Actor5e extends Actor {
    * @property {boolean} [keepBio=false]         Keep biography
    * @property {boolean} [keepVision=false]      Keep vision
    * @property {boolean} [keepSelf=false]        Keep self
-   * @property {boolean} [notKeepAE=false]       Not keep active effects
+   * @property {boolean} [removeAE=false]        Remove active effects
    * @property {boolean} [keepAEOnlyOriginNotEquipment=false] Keep only active effects which origin is not equipment
    * @property {boolean} [transformTokens=false] Transform linked tokens too
    * @property {boolean} [transformTokens=true]  Transform linked tokens too
@@ -1772,8 +1769,8 @@ export default class Actor5e extends Actor {
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
     keepItems=false, keepBio=false, keepVision=false,
-    keepSelf=false, notKeepAE=false, keepAEOnlyOriginNotEquipment=false,
-    transformTokens=true}={}, renderSheet = true) {
+    keepSelf=false, removeAE=false, keepAEOnlyOriginNotEquipment=false,
+    transformTokens=true}={}, renderSheet=true) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1879,7 +1876,7 @@ export default class Actor5e extends Actor {
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
     // Not keep active effects
-    if(notKeepAE && !keepAEOnlyOriginNotEquipment) d.effects = [];
+    if(removeAE && !keepAEOnlyOriginNotEquipment) d.effects = [];
 
     // Keep active effects only origin not equipment
     if(keepAEOnlyOriginNotEquipment){
@@ -1923,7 +1920,7 @@ export default class Actor5e extends Actor {
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, notKeepAE, keepAEOnlyOriginNotEquipment, transformTokens, renderSheet
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, removeAE, keepAEOnlyOriginNotEquipment, transformTokens, renderSheet
     });
 
     // Some info like height and weight of the token are reset to default
@@ -1952,10 +1949,10 @@ export default class Actor5e extends Actor {
    * If this actor was transformed with transformTokens enabled, then its
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
-   * @param {boolean} [renderSheet] Render Sheet after revert the tranformation
+   * @param {boolean} [renderSheet] Render Sheet after revert the transformation.
    * @returns {Promise<Actor>|null}  Original actor if it was reverted.
    */
-  async revertOriginalForm(renderSheet = true) {
+  async revertOriginalForm(renderSheet=true) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
@@ -1998,8 +1995,7 @@ export default class Actor5e extends Actor {
     const isRendered = this.sheet.rendered;
     if ( game.user.isGM ) await this.delete();
     else if ( isRendered ) this.sheet.close();
-    if ( isRendered ) {
-      if(renderSheet){
+    if ( isRendered && renderSheet ) {
         original.sheet.render(isRendered);
       }
     }
