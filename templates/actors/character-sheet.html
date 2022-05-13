@@ -19,7 +19,8 @@
 
                 {{#unless disableExperience}}
                 <div class="experience flexrow">
-                    <input name="system.details.xp.value" type="text" value="{{system.details.xp.value}}" placeholder="0" data-dtype="Number"/>
+                    <input type="number" name="system.details.xp.value"
+                        value="{{system.details.xp.value}}" placeholder="0">
                     <span class="sep">/</span>
                     <span class="max">{{system.details.xp.max}}</span>
                 </div>
@@ -54,22 +55,22 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="system.attributes.hp.value" type="text"
+                        <input name="system.attributes.hp.value" type="number"
                                value="{{system.attributes.hp.value}}" placeholder="10"
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsCurrent'}}">
+                               title="{{localize 'DND5E.HitPointsCurrent'}}">
                         <span class="sep"> / </span>
-                        <input name="system.attributes.hp.max" type="text"
-                               value="{{system.attributes.hp.max}}" placeholder="10"
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsMax'}}">
+                        <input name="system.attributes.hp.max" type="number"
+                               value="{{system.attributes.hp.max}}" placeholder="10" 
+                               title="{{localize 'DND5E.HitPointsMax'}}">
                     </div>
                     <footer class="attribute-footer">
-                        <input name="system.attributes.hp.temp" type="text" class="temphp"
+                        <input name="system.attributes.hp.temp" type="number" class="temphp"
                                placeholder="+{{ localize 'DND5E.Temp' }}"
-                               value="{{system.attributes.hp.temp}}" data-dtype="Number"
+                               value="{{system.attributes.hp.temp}}"
                                title="{{localize 'DND5E.HitPointsTemp'}}">
-                        <input name="system.attributes.hp.tempmax" type="text" class="temphp"
+                        <input name="system.attributes.hp.tempmax" type="number" class="temphp"
                                placeholder="+{{ localize 'DND5E.Max' }}"
-                               value="{{system.attributes.hp.tempmax}}" data-dtype="Number"
+                               value="{{system.attributes.hp.tempmax}}"
                                title="{{localize 'DND5E.HitPointsTempMax'}}">
                     </footer>
                 </li>

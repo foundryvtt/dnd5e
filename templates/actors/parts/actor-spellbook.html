@@ -4,8 +4,8 @@
         <label>{{localize "DND5E.Spellcasting"}}</label>
         {{else}}
         <label>{{localize "DND5E.Level"}}</label>
-        <input class="spellcasting-level" type="text" name="system.details.spellLevel"
-               value="{{system.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
+        <input class="spellcasting-level" type="number" name="system.details.spellLevel"
+               value="{{system.details.spellLevel}}" placeholder="0"/>
         {{/unless}}
         <select name="system.attributes.spellcasting" data-type="String">
             {{#select system.attributes.spellcasting}}
@@ -35,8 +35,8 @@
             <h3>{{section.label}}</h3>
             <div class="spell-slots">
                 {{#if section.usesSlots}}
-                <input type="text" name="system.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
-                       data-dtype="Number"/>
+                <input type="number" name="system.spells.{{section.prop}}.value"
+                    value="{{section.uses}}" placeholder="0">
                 <span class="sep"> / </span>
                 <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
                     {{{section.slots}}}

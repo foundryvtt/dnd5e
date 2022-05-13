@@ -48,20 +48,20 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title rollable">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}" placeholder="10"
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsCurrent'}}" />
+                        <input name="system.attributes.hp.value" type="number" value="{{system.attributes.hp.value}}" 
+                               placeholder="10" title="{{localize 'DND5E.HitPointsCurrent'}}" />
                         <span class="sep"> / </span>
-                        <input name="system.attributes.hp.max" type="text" value="{{system.attributes.hp.max}}" placeholder="10"
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsMax'}}" />
+                        <input name="system.attributes.hp.max" type="number" value="{{system.attributes.hp.max}}" 
+                               placeholder="10" title="{{localize 'DND5E.HitPointsMax'}}" />
                     </div>
                     <footer class="attribute-footer flexrow">
                         <input name="system.attributes.hp.formula" class="hpformula" type="text"
                                placeholder="{{ localize 'DND5E.HPFormula' }}"
                                value="{{system.attributes.hp.formula}}"
                                title="{{ localize 'DND5E.HPFormula' }}">
-                        <input name="system.attributes.hp.temp" type="text" class="temphp"
+                        <input name="system.attributes.hp.temp" type="number" class="temphp"
                                placeholder="+{{ localize 'DND5E.Temp' }}"
-                               value="{{system.attributes.hp.temp}}" data-dtype="Number"
+                               value="{{system.attributes.hp.temp}}"
                                title="{{localize 'DND5E.HitPointsTemp'}}">
                     </footer>
                 </li>

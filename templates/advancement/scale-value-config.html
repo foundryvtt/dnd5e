@@ -42,9 +42,9 @@
               {{selectOptions @root.faces selected=data.value.die blank=data.placeholder.die}}
             </select>
           {{else}}
-            <input name="data.configuration.scale.{{level}}.value" type="text" value="{{data.value.value}}"
-                   data-level="{{level}}" placeholder="{{data.placeholder.value}}"
-                   {{#if @root.isNumeric}}data-dtype="Number"{{/if}}>
+            <input type="{{#if @root.isNumeric}}number{{else}}text{{/if}}"
+                   name="data.configuration.scale.{{level}}.value" value="{{data.value.value}}"
+                   data-level="{{level}}" placeholder="{{data.placeholder.value}}">
           {{/if}}
         </div>
       </div>

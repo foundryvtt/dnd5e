@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ArmorClass" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="system.armor.value" value="{{system.armor.value}}" data-dtype="Number"/>
+                    <input type="number" name="system.armor.value" value="{{system.armor.value}}">
                 </div>
             </div>
             {{/if}}
@@ -104,7 +104,8 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="system.armor.dex" value="{{system.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Unlimited' }}"/>
+                    <input type="number" name="system.armor.dex" value="{{system.armor.dex}}"
+                        placeholder="{{ localize 'DND5E.Unlimited' }}">
                 </div>
             </div>
             {{/if}}
@@ -114,7 +115,8 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemRequiredStr" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="system.strength" value="{{system.strength}}" data-dtype="Number" placeholder="{{ localize 'DND5E.None' }}"/>
+                    <input type="number" name="system.strength" value="{{system.strength}}"
+                        placeholder="{{ localize 'DND5E.None' }}">
                 </div>
             </div>
 
@@ -130,8 +132,7 @@
             <div class="form-group">
                 <label>{{localize 'DND5E.Speed'}}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.speed.value" value="{{system.speed.value}}"
-                           placeholder="0" data-dtype="Number">
+                    <input type="number" name="system.speed.value" value="{{system.speed.value}}" placeholder="0">
                     <span class="sep">{{localize 'DND5E.FeetAbbr'}}</span>
                     <input type="text" name="system.speed.conditions"
                            value="{{system.speed.conditions}}">

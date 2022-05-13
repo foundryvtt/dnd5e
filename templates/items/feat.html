@@ -55,8 +55,8 @@
                 <label>{{ localize "DND5E.FeatureActionRecharge" }}</label>
                 <div class="form-fields">
                     <span>{{ localize "DND5E.FeatureRechargeOn" }}</span>
-                    <input type="text" name="system.recharge.value" value="{{system.recharge.value}}"
-                           data-dtype="Number" placeholder="{{ localize 'DND5E.FeatureRechargeResult' }}"/>
+                    <input type="number" name="system.recharge.value" value="{{system.recharge.value}}"
+                        placeholder="{{ localize 'DND5E.FeatureRechargeResult' }}">
                     <label class="checkbox">
                         {{ localize "DND5E.Charged" }}
                         <input type="checkbox" name="system.recharge.charged" {{checked system.recharge.charged}}/>
