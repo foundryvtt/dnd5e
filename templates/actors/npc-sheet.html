@@ -48,20 +48,20 @@
                 <li class="attribute health">
                     <h4 class="attribute-name box-title rollable">{{ localize "DND5E.HitPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" 
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsCurrent'}}" />
+                        <input name="data.attributes.hp.value" type="number" value="{{data.attributes.hp.value}}" 
+                               placeholder="10" title="{{localize 'DND5E.HitPointsCurrent'}}" />
                         <span class="sep"> / </span>
-                        <input name="data.attributes.hp.max" type="text" value="{{data.attributes.hp.max}}" placeholder="10" 
-                               data-dtype="Number" title="{{localize 'DND5E.HitPointsMax'}}" />
+                        <input name="data.attributes.hp.max" type="number" value="{{data.attributes.hp.max}}" 
+                               placeholder="10" title="{{localize 'DND5E.HitPointsMax'}}" />
                     </div>
                     <footer class="attribute-footer flexrow">
                         <input name="data.attributes.hp.formula" class="hpformula" type="text"
                                placeholder="{{ localize 'DND5E.HPFormula' }}"
                                value="{{data.attributes.hp.formula}}"
                                title="{{ localize 'DND5E.HPFormula' }}">
-                        <input name="data.attributes.hp.temp" type="text" class="temphp"
+                        <input name="data.attributes.hp.temp" type="number" class="temphp"
                                placeholder="+{{ localize 'DND5E.Temp' }}"
-                               value="{{data.attributes.hp.temp}}" data-dtype="Number"
+                               value="{{data.attributes.hp.temp}}"
                                title="{{localize 'DND5E.HitPointsTemp'}}">
                     </footer>
                 </li>

@@ -111,7 +111,7 @@
             {{/select}}
         </select>
         <span>{{ localize "DND5E.VsDC" }}</span>
-        <input type="text" name="data.save.dc" value="{{#if data.save.dc}}{{data.save.dc}}{{/if}}" data-dtype="Number" placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}/>
+        <input type="number" name="data.save.dc" value="{{#if data.save.dc}}{{data.save.dc}}{{/if}}" placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}>
         <select name="data.save.scaling">
             {{#select data.save.scaling}}
             <option value="spell">{{ localize "DND5E.Spellcasting" }}</option>
