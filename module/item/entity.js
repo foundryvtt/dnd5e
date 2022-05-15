@@ -351,8 +351,8 @@ export default class Item5e extends Item {
 
       // Target Label
       let tgt = data.target || {};
-      if (["none", "touch", "self"].includes(tgt.units)) tgt.value = null;
-      if (["none", "self"].includes(tgt.type)) {
+      if ( ["none", "touch", "self"].includes(tgt.units) ) tgt.value = null;
+      if ( ["none", "self"].includes(tgt.type) ) {
         tgt.value = null;
         tgt.units = null;
       }
@@ -387,7 +387,7 @@ export default class Item5e extends Item {
     }
 
     // If this item is owned, we prepareFinalAttributes() at the end of actor init
-    if (!this.isOwned) this.prepareFinalAttributes();
+    if ( !this.isOwned ) this.prepareFinalAttributes();
   }
 
   /* -------------------------------------------- */
@@ -555,7 +555,7 @@ export default class Item5e extends Item {
     if ( (itemData.consume?.type === "ammo") && this.actor.items ) {
       const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
 
-      if (ammoItemData) {
+      if ( ammoItemData ) {
         const ammoItemQuantity = ammoItemData.data.quantity;
         const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
         const ammoItemAttackBonus = ammoItemData.data.attackBonus;
@@ -613,12 +613,12 @@ export default class Item5e extends Item {
    */
   prepareMaxUses() {
     const data = this.data.data;
-    if (!data.uses?.max) return;
+    if ( !data.uses?.max ) return;
     let max = data.uses.max;
 
     // If this is an owned item and the max is not numeric, we need to calculate it
-    if (this.isOwned && !Number.isNumeric(max)) {
-      if (this.actor.data === undefined) return;
+    if ( this.isOwned && !Number.isNumeric(max) ) {
+      if ( this.actor.data === undefined ) return;
       try {
         const rollData = this.actor.getRollData({ deterministic: true });
         max = Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true});
@@ -670,9 +670,9 @@ export default class Item5e extends Item {
     // Display a configuration dialog to customize the usage
     const needsConfiguration =
       createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
-    if (configureDialog && needsConfiguration) {
+    if ( configureDialog && needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(this);
-      if (!configuration) return;
+      if ( !configuration ) return;
 
       // Determine consumption preferences
       createMeasuredTemplate = Boolean(configuration.placeTemplate);
@@ -1132,7 +1132,6 @@ export default class Item5e extends Item {
    */
   async rollAttack(options={}) {
     const itemData = this.data.data;
-    const flags = this.actor.data.flags.dnd5e || {};
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
@@ -1185,12 +1184,13 @@ export default class Item5e extends Item {
     rollConfig.critical = this.getCriticalThreshold();
 
     // Elven Accuracy
-    if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
+    if ( this.actor.getFlag("dnd5e", "elvenAccuracy")
+      && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities(this.abilityMod) ) {
       rollConfig.elvenAccuracy = true;
     }
 
     // Apply Halfling Lucky
-    if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
+    if ( this.actor.getFlag("dnd5e", "halflingLucky") ) rollConfig.halflingLucky = true;
 
     // Compose calculated roll options with passed-in roll options
     rollConfig = mergeObject(rollConfig, options);
@@ -1282,7 +1282,7 @@ export default class Item5e extends Item {
     // Handle ammunition damage
     const ammoData = this._ammo?.data;
 
-    // Only add the ammunition damage if the ammution is a consumable with type 'ammo'
+    // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
     if ( this._ammo && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
       parts.push("@ammo");
       rollData.ammo = ammoData.data.damage.parts.map(p => p[0]).join("+");
@@ -1519,7 +1519,7 @@ export default class Item5e extends Item {
       if ( !ability ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);
       }
-      rollData.mod = ability?.mod || 0;
+      rollData.mod = ability?.mod ?? 0;
     }
 
     return rollData;

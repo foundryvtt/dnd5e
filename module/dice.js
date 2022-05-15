@@ -232,7 +232,7 @@ export async function d20Roll({
   // Handle input arguments
   const formula = ["1d20"].concat(parts).join(" + ");
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
-  const defaultRollMode = rollMode ?? game.settings.get("core", "rollMode");
+  const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
   if ( chooseModifier && !isFF ) {
     data.mod = "@mod";
     if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
@@ -343,7 +343,7 @@ export async function damageRoll({
 }={}) {
 
   // Handle input arguments
-  const defaultRollMode = rollMode ?? game.settings.get("core", "rollMode");
+  const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
 
   // Construct the DamageRoll instance
   const formula = parts.join(" + ");

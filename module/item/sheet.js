@@ -55,53 +55,53 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   async getData(options) {
-    const data = super.getData(options);
-    const itemData = data.data;
-    data.labels = this.item.labels;
-    data.config = CONFIG.DND5E;
-    data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
-    data.isEmbedded = this.item.isEmbedded;
-    data.advancementEditable = (this.advancementConfigurationMode || !data.isEmbedded) && data.editable;
+    const sheetData = super.getData(options);
+    const itemData = sheetData.data;
+    sheetData.labels = this.item.labels;
+    sheetData.config = CONFIG.DND5E;
+    sheetData.config.spellComponents = {...sheetData.config.spellComponents, ...sheetData.config.spellTags};
+    sheetData.isEmbedded = this.item.isEmbedded;
+    sheetData.advancementEditable = (this.advancementConfigurationMode || !sheetData.isEmbedded) && sheetData.editable;
 
     // Item Type, Status, and Details
-    data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
-    data.itemStatus = this._getItemStatus(itemData);
-    data.itemProperties = this._getItemProperties(itemData);
-    data.baseItems = await this._getItemBaseTypes(itemData);
-    data.isPhysical = itemData.data.hasOwnProperty("quantity");
+    sheetData.itemType = game.i18n.localize(`ITEM.Type${sheetData.item.type.titleCase()}`);
+    sheetData.itemStatus = this._getItemStatus(itemData);
+    sheetData.itemProperties = this._getItemProperties(itemData);
+    sheetData.baseItems = await this._getItemBaseTypes(itemData);
+    sheetData.isPhysical = itemData.data.hasOwnProperty("quantity");
 
     // Potential consumption targets
-    data.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
+    sheetData.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
 
     // Action Details
-    data.hasAttackRoll = this.item.hasAttack;
-    data.isHealing = itemData.data.actionType === "heal";
-    data.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
-    data.isLine = ["line", "wall"].includes(itemData.data.target?.type);
+    sheetData.hasAttackRoll = this.item.hasAttack;
+    sheetData.isHealing = itemData.data.actionType === "heal";
+    sheetData.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
+    sheetData.isLine = ["line", "wall"].includes(itemData.data.target?.type);
 
     // Original maximum uses formula
     const sourceMax = foundry.utils.getProperty(this.item.data._source, "data.uses.max");
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
 
     // Vehicles
-    data.isCrewed = itemData.data.activation?.type === "crew";
-    data.isMountable = this._isItemMountable(itemData);
+    sheetData.isCrewed = itemData.data.activation?.type === "crew";
+    sheetData.isMountable = this._isItemMountable(itemData);
 
     // Armor Class
-    data.isArmor = this.item.isArmor;
-    data.hasAC = data.isArmor || data.isMountable;
-    data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
+    sheetData.isArmor = this.item.isArmor;
+    sheetData.hasAC = sheetData.isArmor || sheetData.isMountable;
+    sheetData.hasDexModifier = sheetData.isArmor && (itemData.data.armor?.type !== "shield");
 
     // Advancement
-    data.advancement = this._getItemAdvancement(this.item);
+    sheetData.advancement = this._getItemAdvancement(this.item);
 
     // Prepare Active Effects
-    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
+    sheetData.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     // Re-define the template data references (backwards compatible)
-    data.item = itemData;
-    data.data = itemData.data;
-    return data;
+    sheetData.item = itemData;
+    sheetData.data = itemData.data;
+    return sheetData;
   }
 
   /* -------------------------------------------- */
@@ -368,8 +368,8 @@ export default class ItemSheet5e extends ItemSheet {
     // Create the expanded update data object
     const fd = new FormDataExtended(this.form, {editors: this.editors});
     let data = fd.toObject();
-    if ( updateData ) data = mergeObject(data, updateData);
-    else data = expandObject(data);
+    if ( updateData ) data = foundry.utils.mergeObject(data, updateData);
+    else data = foundry.utils.expandObject(data);
 
     // Handle Damage array
     const damage = data.data?.damage;
@@ -399,7 +399,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Return the flattened submission data
-    return flattenObject(data);
+    return foundry.utils.flattenObject(data);
   }
 
   /* -------------------------------------------- */
@@ -523,7 +523,7 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle clicking on "actor-item-link" content links. Note: This method will be removed in 1.7 when it can
+   * Handle clicking on "actor-item-link" content links. Note: This method will be removed when it can
    * be replaced by UUID links in core.
    * @param {Event} event  Triggering click event.
    * @private
