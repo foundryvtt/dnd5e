@@ -58,10 +58,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
   /**
    * Organize and classify Owned Items for Character sheets
-   * @param {object} data  Copy of the actor data being prepared for display. *Will be mutated.*
+   * @param {object} sheetData  Sheet data being prepared for display. *Will be mutated.*
    * @private
    */
-  _prepareItems(data) {
+  _prepareItems(sheetData) {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
@@ -74,7 +74,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let {items, spells, feats, backgrounds, classes, subclasses} = data.items.reduce((obj, item) => {
+    let {items, spells, feats, backgrounds, classes, subclasses} = sheetData.items.reduce((obj, item) => {
 
       // Item details
       item.img = item.img || CONST.DEFAULT_TOKEN;
@@ -125,7 +125,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
-    const spellbook = this._prepareSpellbook(data, spells);
+    const spellbook = this._prepareSpellbook(sheetData, spells);
     const nPrepared = spells.filter(s => {
       return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
@@ -171,13 +171,13 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Assign and return
-    data.inventory = Object.values(inventory);
-    data.spellbook = spellbook;
-    data.preparedSpells = nPrepared;
-    data.features = Object.values(features);
+    sheetData.inventory = Object.values(inventory);
+    sheetData.spellbook = spellbook;
+    sheetData.preparedSpells = nPrepared;
+    sheetData.features = Object.values(features);
 
     // Labels
-    data.labels.background = backgrounds[0]?.name;
+    sheetData.labels.background = backgrounds[0]?.name;
   }
 
   /* -------------------------------------------- */

@@ -1,11 +1,13 @@
 import ActorSheet5e from "./base.js";
 
+
 /**
  * An Actor sheet for Vehicle type actors.
  * Extends the base ActorSheet5e class.
  * @type {ActorSheet5e}
  */
 export default class ActorSheet5eVehicle extends ActorSheet5e {
+
   /** @inheritdoc */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -36,14 +38,14 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /**
    * Compute the total weight of the vehicle's cargo.
    * @param {number} totalWeight    The cumulative item weight from inventory items
-   * @param {object} actorData      The data object for the Actor being rendered
+   * @param {object} sheetData      Sheet data being prepared for display. *Will be mutated.*
    * @returns {{max: number, value: number, pct: number}}
    * @private
    */
-  _computeEncumbrance(totalWeight, actorData) {
+  _computeEncumbrance(totalWeight, sheetData) {
 
     // Compute currency weight
-    const totalCoins = Object.values(actorData.data.currency).reduce((acc, denom) => acc + denom, 0);
+    const totalCoins = Object.values(sheetData.data.currency).reduce((acc, denom) => acc + denom, 0);
 
     const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
       ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
@@ -57,7 +59,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       : CONFIG.DND5E.encumbrance.vehicleWeightMultiplier.imperial;
 
     // Compute overall encumbrance
-    const max = actorData.data.attributes.capacity.cargo;
+    const max = sheetData.data.attributes.capacity.cargo;
     const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
     return {value: totalWeight.toNearest(0.1), max, pct};
   }
@@ -102,10 +104,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /**
    * Organize Owned Items for rendering the Vehicle sheet.
-   * @param {object} data  Copy of the actor data being prepared for display. *Will be mutated.*
+   * @param {object} sheetData  Sheet data being prepared for display. *Will be mutated.*
    * @private
    */
-  _prepareItems(data) {
+  _prepareItems(sheetData) {
     const cargoColumns = [{
       label: game.i18n.localize("DND5E.Quantity"),
       css: "item-qty",
@@ -172,7 +174,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       }
     };
 
-    data.items.forEach(item => {
+    sheetData.items.forEach(item => {
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
@@ -181,7 +183,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const cargo = {
       crew: {
         label: game.i18n.localize("DND5E.VehicleCrew"),
-        items: data.data.cargo.crew,
+        items: sheetData.data.cargo.crew,
         css: "cargo-row crew",
         editableName: true,
         dataset: {type: "crew"},
@@ -189,7 +191,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       },
       passengers: {
         label: game.i18n.localize("DND5E.VehiclePassengers"),
-        items: data.data.cargo.passengers,
+        items: sheetData.data.cargo.passengers,
         css: "cargo-row passengers",
         editableName: true,
         dataset: {type: "passengers"},
@@ -220,7 +222,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     // Classify items owned by the vehicle and compute total cargo weight
     let totalWeight = 0;
-    for (const item of data.items) {
+    for ( const item of sheetData.items ) {
       this._prepareCrewedItem(item);
 
       // Handle cargo explicitly
@@ -240,7 +242,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           features.equipment.items.push(item);
           break;
         case "feat":
-          if ( !item.data.activation.type || (item.data.activation.type === "none") ) features.passive.items.push(item);
+          if ( !item.data.activation.type
+            || (item.data.activation.type === "none") ) features.passive.items.push(item);
           else if (item.data.activation.type === "reaction") features.reactions.items.push(item);
           else features.actions.items.push(item);
           break;
@@ -251,9 +254,9 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     }
 
     // Update the rendering context data
-    data.features = Object.values(features);
-    data.cargo = Object.values(cargo);
-    data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+    sheetData.features = Object.values(features);
+    sheetData.cargo = Object.values(cargo);
+    sheetData.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, sheetData);
   }
 
   /* -------------------------------------------- */

@@ -23,10 +23,10 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /**
    * Organize Owned Items for rendering the NPC sheet.
-   * @param {object} data  Copy of the actor data being prepared for displayed. *Will be mutated.*
+   * @param {object} sheetData  Sheet data being prepared for displayed. *Will be mutated.*
    * @private
    */
-  _prepareItems(data) {
+  _prepareItems(sheetData) {
 
     // Categorize Items as Features and Spells
     const features = {
@@ -37,7 +37,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     };
 
     // Start by classifying items into groups for rendering
-    let [spells, other] = data.items.reduce((arr, item) => {
+    let [spells, other] = sheetData.items.reduce((arr, item) => {
       item.img = item.img || CONST.DEFAULT_TOKEN;
       item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
@@ -54,7 +54,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     other = this._filterItems(other, this._filters.features);
 
     // Organize Spellbook
-    const spellbook = this._prepareSpellbook(data, spells);
+    const spellbook = this._prepareSpellbook(sheetData, spells);
 
     // Organize Features
     for ( let item of other ) {
@@ -67,28 +67,28 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     }
 
     // Assign and return
-    data.features = Object.values(features);
-    data.spellbook = spellbook;
+    sheetData.features = Object.values(features);
+    sheetData.spellbook = spellbook;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   getData(options) {
-    const data = super.getData(options);
+    const sheetData = super.getData(options);
 
     // Challenge Rating
-    const cr = parseFloat(data.data.details.cr || 0);
+    const cr = parseFloat(sheetData.data.details.cr || 0);
     const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    data.labels.cr = cr >= 1 ? String(cr) : crLabels[cr] || 1;
+    sheetData.labels.cr = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Creature Type
-    data.labels.type = this.actor.labels.creatureType;
+    sheetData.labels.type = this.actor.labels.creatureType;
 
     // Armor Type
-    data.labels.armorType = this.getArmorLabel();
+    sheetData.labels.armorType = this.getArmorLabel();
 
-    return data;
+    return sheetData;
   }
 
   /* -------------------------------------------- */
