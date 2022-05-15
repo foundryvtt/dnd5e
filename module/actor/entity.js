@@ -116,14 +116,12 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Prepare abilities & skills
+    // Prepare abilities, skills, & spellcasting
     const bonusData = this.getRollData();
     const bonuses = actorData.data.bonuses?.abilities ?? {};
     const checkBonus = this._simplifyBonus(bonuses.check, bonusData);
     this._prepareAbilities(actorData, bonusData, bonuses, checkBonus, originalSaves);
     this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
-
-    // Prepare spell-casting data
     this._prepareSpellcasting(this.data);
 
     // Attuned items
@@ -131,15 +129,22 @@ export default class Actor5e extends Actor {
       return i.data.data.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
     }).length;
 
-    // Inventory encumbrance
+    // Compute armor class
+    const acRollData = this.getRollData({ deterministic: true });
+    data.attributes.ac = this.constructor._computeArmorClass(this.data.data, this.itemTypes.equipment, acRollData);
+    this.armor = data.attributes.ac.equippedArmor ?? null;
+    this.shield = data.attributes.ac.equippedShield ?? null;
+    if ( data.attributes.ac.warnings ) this._preparationWarnings.push(...data.attributes.ac.warnings);
+
+    // Compute inventory encumbrance
     data.attributes.encumbrance = this.constructor._computeEncumbrance(
       this.data.data, this.items, actorData.flags.dnd5e ?? {}
     );
 
-    // Determine Initiative Modifier
+    // Compute initiative modifier
     data.attributes.init = this.constructor._computeInitiative(this.data.data, bonusData, actorData.flags.dnd5e ?? {});
 
-    // Determine Scale Values
+    // Compute Scale Values
     data.scale = this.constructor._computeScaleValues(this.classes);
 
     // Cache labels
@@ -147,13 +152,6 @@ export default class Actor5e extends Actor {
     if ( this.type === "npc" ) {
       this.labels.creatureType = this.constructor.formatCreatureType(data.details.type);
     }
-
-    // Prepare armor class data
-    const acRollData = this.getRollData({ deterministic: true });
-    const ac = this.constructor._computeArmorClass(this.data.data, this.itemTypes.equipment, acRollData);
-    this.armor = ac.equippedArmor ?? null;
-    this.shield = ac.equippedShield ?? null;
-    if ( ac.warnings ) this._preparationWarnings.push(...ac.warnings);
   }
 
   /* -------------------------------------------- */
@@ -681,12 +679,14 @@ export default class Actor5e extends Actor {
       "Instance version of Actor5e#_computeArmorClass has been deprecated "
       + "in favor of its static counterpart and will be removed in 1.9."
     );
-    return this.constructor._computeArmorClass(data, this.items, this.getRollData({ deterministic: true }));
+    data.attributes.ac = this.constructor._computeArmorClass(
+      data, this.items, this.getRollData({ deterministic: true }));
+    return data.attributes.ac;
   }
 
   /**
    * Determine a character's AC value from their equipped armor and shield.
-   * @param {object} data         Copy of the system data for the actor being prepared. *Will be mutated.*
+   * @param {object} data         Actor system data to use when calculating armor class.
    * @param {Item5e[]} equipment  Array of equipment items on actor containing armor & shields.
    * @param {object} rollData     Roll data to use when resolving the AC formula.
    * @returns {ArmorClassResult}
@@ -694,7 +694,7 @@ export default class Actor5e extends Actor {
    */
   static _computeArmorClass(systemData, equipment, rollData) {
     // Get AC configuration and apply automatic migrations for older data structures
-    const ac = systemData.attributes.ac;
+    const ac = foundry.utils.deepClone(systemData.attributes.ac);
     ac.warnings = [];
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
     if ( !cfg ) {
