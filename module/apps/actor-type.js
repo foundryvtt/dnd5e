@@ -1,5 +1,6 @@
 import Actor5e from "../actor/entity.js";
 
+
 /**
  * A specialized form used to select from a checklist of attributes, traits, or properties
  * @extends {FormApplication}

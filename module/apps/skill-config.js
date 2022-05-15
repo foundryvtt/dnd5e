@@ -12,6 +12,8 @@ export default class ActorSkillConfig extends DocumentSheet {
     this._skillId = skillId;
   }
 
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {

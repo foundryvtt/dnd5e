@@ -1,9 +1,9 @@
 /**
  * A simple form to set save throw configuration for a given ability score.
- * @extends {DocumentSheet}
  * @param {Actor} actor                   The Actor instance being displayed within the sheet.
  * @param {ApplicationOptions} options    Additional application configuration options.
  * @param {string} abilityId              The ability ID (e.g. "str")
+ * @extends {DocumentSheet}
  */
 export default class ActorAbilityConfig extends DocumentSheet {
 
@@ -11,6 +11,8 @@ export default class ActorAbilityConfig extends DocumentSheet {
     super(actor, opts);
     this._abilityId = abilityId;
   }
+
+  /* -------------------------------------------- */
 
   /** @override */
   static get defaultOptions() {

@@ -14,6 +14,8 @@ export class TokenDocument5e extends TokenDocument {
     return data;
   }
 
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static getTrackedAttributes(data, _path=[]) {
     const attributes = super.getTrackedAttributes(data, _path);
@@ -22,6 +24,8 @@ export class TokenDocument5e extends TokenDocument {
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
     return attributes;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Get an Array of attribute choices which are suitable for being consumed by an item usage.
@@ -34,6 +38,8 @@ export class TokenDocument5e extends TokenDocument {
     attributes.value = attributes.value.filter(attrs => this._isAllowedAttribute(allowed, attrs));
     return attributes;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Traverse the configured allowed attributes to see if the provided one matches.

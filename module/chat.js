@@ -1,4 +1,3 @@
-
 /**
  * Highlight critical success or failure on d20 rolls.
  * @param {ChatMessage} message  Message being prepared.
@@ -121,5 +120,3 @@ function applyChatCardDamage(li, multiplier) {
     return a.applyDamage(roll.total, multiplier);
   }));
 }
-
-/* -------------------------------------------- */

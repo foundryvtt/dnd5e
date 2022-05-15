@@ -3,6 +3,7 @@
  * @extends {Dialog}
  */
 export default class AbilityUseDialog extends Dialog {
+
   constructor(item, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog"];
@@ -30,9 +31,9 @@ export default class AbilityUseDialog extends Dialog {
     // Prepare data
     const actorData = item.actor.data.data;
     const itemData = item.data.data;
-    const uses = itemData.uses || {};
-    const quantity = itemData.quantity || 0;
-    const recharge = itemData.recharge || {};
+    const uses = itemData.uses ?? {};
+    const quantity = itemData.quantity ?? 0;
+    const recharge = itemData.recharge ?? {};
     const recharges = !!recharge.value;
     const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0;
 

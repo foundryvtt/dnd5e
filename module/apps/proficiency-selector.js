@@ -1,5 +1,6 @@
 import TraitSelector from "./trait-selector.js";
 
+
 /**
  * An application for selecting proficiencies with categories that can contain children.
  *

@@ -15,6 +15,7 @@
  * @extends {Roll}
  */
 export default class D20Roll extends Roll {
+
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !((this.terms[0] instanceof Die) && (this.terms[0].faces === 20)) ) {
@@ -159,7 +160,7 @@ export default class D20Roll extends Roll {
     });
 
     let defaultButton = "normal";
-    switch (defaultAction) {
+    switch ( defaultAction ) {
       case D20Roll.ADV_MODE.ADVANTAGE: defaultButton = "advantage"; break;
       case D20Roll.ADV_MODE.DISADVANTAGE: defaultButton = "disadvantage"; break;
     }

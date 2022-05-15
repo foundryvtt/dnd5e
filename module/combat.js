@@ -7,17 +7,16 @@
  * @returns {string}  Final initiative formula for the actor.
  */
 export const _getInitiativeFormula = function() {
-  const actor = this.actor;
-  if ( !actor ) return "1d20";
-  const actorData = actor.data.data;
+  if ( !this.actor ) return "1d20";
+  const actorData = this.actor.data.data;
   const init = actorData.attributes.init;
-  const rollData = actor.getRollData();
+  const rollData = this.actor.getRollData();
 
   // Construct initiative formula parts
   let nd = 1;
   let mods = "";
-  if (actor.getFlag("dnd5e", "halflingLucky")) mods += "r1=1";
-  if (actor.getFlag("dnd5e", "initiativeAdv")) {
+  if ( this.actor.getFlag("dnd5e", "halflingLucky") ) mods += "r1=1";
+  if ( this.actor.getFlag("dnd5e", "initiativeAdv") ) {
     nd = 2;
     mods += "kh";
   }
@@ -36,6 +35,6 @@ export const _getInitiativeFormula = function() {
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
-  if ( tiebreaker ) parts.push((actor.data.data.abilities.dex?.value ?? 0) / 100);
+  if ( tiebreaker ) parts.push((this.actor.data.data.abilities.dex?.value ?? 0) / 100);
   return parts.filter(p => p !== null).join(" + ");
 };

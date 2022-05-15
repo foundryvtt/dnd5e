@@ -1,4 +1,3 @@
-
 /**
  * Description for a single part of a property attribution.
  *

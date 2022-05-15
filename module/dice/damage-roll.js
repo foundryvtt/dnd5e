@@ -11,11 +11,14 @@
  * @extends {Roll}
  */
 export default class DamageRoll extends Roll {
+
   constructor(formula, data, options) {
     super(formula, data, options);
     // For backwards compatibility, skip rolls which do not have the "critical" option defined
     if ( (this.options.critical !== undefined) && !this.options.configured ) this.configureDamage();
   }
+
+  /* -------------------------------------------- */
 
   /**
    * The HTML template path used to configure evaluation of this Roll
