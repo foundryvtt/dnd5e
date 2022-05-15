@@ -871,7 +871,9 @@ export default class Actor5e extends Actor {
 
   /**
    * Derive any values that have been scaled by the Advancement system.
-   * @param {object} data  The actor's system data being prepared.
+   * @param {object} data       The actor's system data being prepared.
+   * @param {Item5e[]} classes  Classes for which to gather scale value data.
+   * @returns {object}          Scale value data for each class & subclass grouped by identifier.
    * @private
    */
   static _computeScaleValues(data, classes) {
