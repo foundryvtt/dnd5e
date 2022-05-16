@@ -8,7 +8,7 @@ import { HitPointsAdvancement } from "./advancement/hit-points.js";
 import { ItemGrantAdvancement } from "./advancement/item-grant.js";
 import { ScaleValueAdvancement } from "./advancement/scale-value.js";
 
-export default  {
+export default {
   Advancement,
   AdvancementConfig,
   AdvancementConfirmationDialog,
