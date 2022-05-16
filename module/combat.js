@@ -1,4 +1,3 @@
-
 /**
  * Override the default Initiative formula to customize special behaviors of the system.
  * Apply advantage, proficiency, or bonuses where appropriate

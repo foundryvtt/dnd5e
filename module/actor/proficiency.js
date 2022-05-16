@@ -6,7 +6,6 @@
  * @param {boolean} [roundDown]  Should half-values be rounded up or down?
  */
 export default class Proficiency {
-
   constructor(proficiency, multiplier, roundDown=true) {
 
     /**

@@ -15,7 +15,6 @@
  * @extends {Roll}
  */
 export default class D20Roll extends Roll {
-
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !((this.terms[0] instanceof Die) && (this.terms[0].faces === 20)) ) {

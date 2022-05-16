@@ -6,7 +6,6 @@
  * @extends {DocumentSheet}
  */
 export default class ActorAbilityConfig extends DocumentSheet {
-
   constructor(actor, opts, abilityId) {
     super(actor, opts);
     this._abilityId = abilityId;

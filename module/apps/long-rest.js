@@ -3,7 +3,6 @@
  * @extends {Dialog}
  */
 export default class LongRestDialog extends Dialog {
-
   constructor(actor, dialogData={}, options={}) {
     super(dialogData, options);
     this.actor = actor;

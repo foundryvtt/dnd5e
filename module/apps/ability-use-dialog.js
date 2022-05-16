@@ -3,7 +3,6 @@
  * @extends {Dialog}
  */
 export default class AbilityUseDialog extends Dialog {
-
   constructor(item, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog"];

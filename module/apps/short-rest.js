@@ -6,7 +6,6 @@ import LongRestDialog from "./long-rest.js";
  * @extends {Dialog}
  */
 export default class ShortRestDialog extends Dialog {
-
   constructor(actor, dialogData={}, options={}) {
     super(dialogData, options);
 
