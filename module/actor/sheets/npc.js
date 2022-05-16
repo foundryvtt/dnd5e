@@ -1,4 +1,5 @@
-import ActorSheet5e from "../sheets/base.js";
+import ActorSheet5e from "./base.js";
+
 
 /**
  * An Actor sheet for NPC type characters.

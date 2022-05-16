@@ -8,7 +8,7 @@ import { HitPointsAdvancement } from "./advancement/hit-points.js";
 import { ItemGrantAdvancement } from "./advancement/item-grant.js";
 import { ScaleValueAdvancement } from "./advancement/scale-value.js";
 
-const advancement = {
+export default  {
   Advancement,
   AdvancementConfig,
   AdvancementConfirmationDialog,
@@ -23,4 +23,13 @@ const advancement = {
   }
 };
 
-export default advancement;
+export { Advancement };
+export { AdvancementConfig };
+export { AdvancementConfirmationDialog };
+export { AdvancementError };
+export { AdvancementFlow };
+export { AdvancementManager };
+export { AdvancementSelection };
+export { HitPointsAdvancement };
+export { ItemGrantAdvancement };
+export { ScaleValueAdvancement };

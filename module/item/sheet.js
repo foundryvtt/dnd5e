@@ -1,7 +1,7 @@
-import { AdvancementManager } from "../advancement/advancement-manager.js";
+import ActiveEffect5e from "../active-effect.js";
+import { AdvancementManager } from "../advancement.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
-import ActiveEffect5e from "../active-effect.js";
 
 
 /**

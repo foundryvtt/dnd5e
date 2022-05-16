@@ -1,11 +1,11 @@
 import Proficiency from "./proficiency.js";
 import { d20Roll, damageRoll } from "../dice.js";
+import { Item5e } from "../item.js";
 import { simplifyBonus } from "../utils.js";
 import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
-import Item5e from "../item/entity.js";
 
 
 /**

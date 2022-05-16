@@ -1,6 +1,6 @@
+import { Proficiency } from "../actor.js";
 import { simplifyRollFormula, d20Roll, damageRoll } from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
-import Proficiency from "../actor/proficiency.js";
 
 
 /**

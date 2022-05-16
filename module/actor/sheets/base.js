@@ -1,7 +1,7 @@
 import Actor5e from "../entity.js";
-import Item5e from "../../item/entity.js";
-import { AdvancementConfirmationDialog } from "../../advancement/advancement-confirmation-dialog.js";
-import { AdvancementManager } from "../../advancement/advancement-manager.js";
+import ActiveEffect5e from "../../active-effect.js";
+import { AdvancementConfirmationDialog, AdvancementManager } from "../../advancement.js";
+import Item5e from "../../item.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
@@ -13,7 +13,6 @@ import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorSkillConfig from "../../apps/skill-config.js";
 import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
-import ActiveEffect5e from "../../active-effect.js";
 
 
 /**
