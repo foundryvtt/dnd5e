@@ -21,6 +21,22 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  getData(options) {
+    const context = super.getData(options);
+    const cr = parseFloat(context.data.details.cr ?? 0);
+    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
+    return foundry.utils.mergeObject(context, {
+      labels: {
+        cr: cr >= 1 ? `${cr}` : crLabels[cr] ?? "1",
+        type: this.actor.labels.creatureType,
+        armorType: this.getArmorLabel()
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Organize Owned Items for rendering the NPC sheet.
    * @param {object} context  Rendering context for the sheet being prepared for display. *Will be mutated.*
@@ -69,26 +85,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Assign and return
     context.features = Object.values(features);
     context.spellbook = spellbook;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  getData(options) {
-    const context = super.getData(options);
-
-    // Challenge Rating
-    const cr = parseFloat(context.data.details.cr || 0);
-    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    context.labels.cr = cr >= 1 ? String(cr) : crLabels[cr] || 1;
-
-    // Creature Type
-    context.labels.type = this.actor.labels.creatureType;
-
-    // Armor Type
-    context.labels.armorType = this.getArmorLabel();
-
-    return context;
   }
 
   /* -------------------------------------------- */
