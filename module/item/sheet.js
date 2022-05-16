@@ -57,50 +57,60 @@ export default class ItemSheet5e extends ItemSheet {
   async getData(options) {
     const context = super.getData(options);
     const itemData = context.data;
-    context.labels = this.item.labels;
-    context.config = CONFIG.DND5E;
-    context.config.spellComponents = {...context.config.spellComponents, ...context.config.spellTags};
-    context.isEmbedded = this.item.isEmbedded;
-    context.advancementEditable = (this.advancementConfigurationMode || !context.isEmbedded) && context.editable;
-
-    // Item Type, Status, and Details
-    context.itemType = game.i18n.localize(`ITEM.Type${context.item.type.titleCase()}`);
-    context.itemStatus = this._getItemStatus(itemData);
-    context.itemProperties = this._getItemProperties(itemData);
-    context.baseItems = await this._getItemBaseTypes(itemData);
-    context.isPhysical = itemData.data.hasOwnProperty("quantity");
-
-    // Potential consumption targets
-    context.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
-
-    // Action Details
-    context.hasAttackRoll = this.item.hasAttack;
-    context.isHealing = itemData.data.actionType === "heal";
-    context.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
-    context.isLine = ["line", "wall"].includes(itemData.data.target?.type);
 
     // Original maximum uses formula
     const sourceMax = foundry.utils.getProperty(this.item.data._source, "data.uses.max");
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
+    const isMountable = this._isItemMountable(itemData);
 
-    // Vehicles
-    context.isCrewed = itemData.data.activation?.type === "crew";
-    context.isMountable = this._isItemMountable(itemData);
+    const data = {
+      labels: this.item.labels,
+      isEmbedded: this.item.isEmbedded,
+      advancementEditable: (this.advancementConfigurationMode || !this.item.isEmbedded) && context.editable,
+    
+      // Item Type, Status, and Details
+      itemType: game.i18n.localize(`ITEM.Type${context.item.type.titleCase()}`),
+      itemStatus: this._getItemStatus(itemData),
+      itemProperties: this._getItemProperties(itemData),
+      baseItems: await this._getItemBaseTypes(itemData),
+      isPhysical: itemData.data.hasOwnProperty("quantity"),
+    
+      // Potential consumption targets
+      abilityConsumptionTargets: this._getItemConsumptionTargets(itemData),
+    
+      // Action Details
+      hasAttackRoll: this.item.hasAttack,
+      isHealing: itemData.data.actionType === "heal",
+      isFlatDC: getProperty(itemData, "data.save.scaling") === "flat",
+      isLine: ["line", "wall"].includes(itemData.data.target?.type),
+    
+      // Vehicles
+      isCrewed: itemData.data.activation?.type === "crew",
+      isMountable,
+    
+      // Armor Class
+      isArmor: this.item.isArmor,
+      hasAC: this.item.isArmor || isMountable,
+      hasDexModifier: this.item.isArmor && (itemData.data.armor?.type !== "shield"),
+    
+      // Advancement
+      advancement: this._getItemAdvancement(this.item),
+    
+      // Prepare Active Effects
+      effects: ActiveEffect5e.prepareActiveEffectCategories(this.item.effects),
+    
+      // Re-define the template data references (backwards compatible)
+      item: itemData,
+      data: itemData.data
+    };
 
-    // Armor Class
-    context.isArmor = this.item.isArmor;
-    context.hasAC = context.isArmor || context.isMountable;
-    context.hasDexModifier = context.isArmor && (itemData.data.armor?.type !== "shield");
+    delete context.item;
+    delete context.data;
+    foundry.utils.mergeObject(context, data);
+    context.config = foundry.utils.mergeObject(CONFIG.DND5E, {
+      spellComponents: { ...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags }
+    }, {inplace: false});
 
-    // Advancement
-    context.advancement = this._getItemAdvancement(this.item);
-
-    // Prepare Active Effects
-    context.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
-
-    // Re-define the template data references (backwards compatible)
-    context.item = itemData;
-    context.data = itemData.data;
     return context;
   }
 

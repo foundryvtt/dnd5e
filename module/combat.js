@@ -34,6 +34,6 @@ export const _getInitiativeFormula = function() {
 
   // Optionally apply Dexterity tiebreaker
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
-  if ( tiebreaker ) parts.push((this.actor.data.data.abilities.dex?.value ?? 0) / 100);
+  if ( tiebreaker ) parts.push((actorData.abilities.dex?.value ?? 0) / 100);
   return parts.filter(p => p !== null).join(" + ");
 };
