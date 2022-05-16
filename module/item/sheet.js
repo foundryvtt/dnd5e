@@ -55,53 +55,53 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   async getData(options) {
-    const sheetData = super.getData(options);
-    const itemData = sheetData.data;
-    sheetData.labels = this.item.labels;
-    sheetData.config = CONFIG.DND5E;
-    sheetData.config.spellComponents = {...sheetData.config.spellComponents, ...sheetData.config.spellTags};
-    sheetData.isEmbedded = this.item.isEmbedded;
-    sheetData.advancementEditable = (this.advancementConfigurationMode || !sheetData.isEmbedded) && sheetData.editable;
+    const context = super.getData(options);
+    const itemData = context.data;
+    context.labels = this.item.labels;
+    context.config = CONFIG.DND5E;
+    context.config.spellComponents = {...context.config.spellComponents, ...context.config.spellTags};
+    context.isEmbedded = this.item.isEmbedded;
+    context.advancementEditable = (this.advancementConfigurationMode || !context.isEmbedded) && context.editable;
 
     // Item Type, Status, and Details
-    sheetData.itemType = game.i18n.localize(`ITEM.Type${sheetData.item.type.titleCase()}`);
-    sheetData.itemStatus = this._getItemStatus(itemData);
-    sheetData.itemProperties = this._getItemProperties(itemData);
-    sheetData.baseItems = await this._getItemBaseTypes(itemData);
-    sheetData.isPhysical = itemData.data.hasOwnProperty("quantity");
+    context.itemType = game.i18n.localize(`ITEM.Type${context.item.type.titleCase()}`);
+    context.itemStatus = this._getItemStatus(itemData);
+    context.itemProperties = this._getItemProperties(itemData);
+    context.baseItems = await this._getItemBaseTypes(itemData);
+    context.isPhysical = itemData.data.hasOwnProperty("quantity");
 
     // Potential consumption targets
-    sheetData.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
+    context.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
 
     // Action Details
-    sheetData.hasAttackRoll = this.item.hasAttack;
-    sheetData.isHealing = itemData.data.actionType === "heal";
-    sheetData.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
-    sheetData.isLine = ["line", "wall"].includes(itemData.data.target?.type);
+    context.hasAttackRoll = this.item.hasAttack;
+    context.isHealing = itemData.data.actionType === "heal";
+    context.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
+    context.isLine = ["line", "wall"].includes(itemData.data.target?.type);
 
     // Original maximum uses formula
     const sourceMax = foundry.utils.getProperty(this.item.data._source, "data.uses.max");
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
 
     // Vehicles
-    sheetData.isCrewed = itemData.data.activation?.type === "crew";
-    sheetData.isMountable = this._isItemMountable(itemData);
+    context.isCrewed = itemData.data.activation?.type === "crew";
+    context.isMountable = this._isItemMountable(itemData);
 
     // Armor Class
-    sheetData.isArmor = this.item.isArmor;
-    sheetData.hasAC = sheetData.isArmor || sheetData.isMountable;
-    sheetData.hasDexModifier = sheetData.isArmor && (itemData.data.armor?.type !== "shield");
+    context.isArmor = this.item.isArmor;
+    context.hasAC = context.isArmor || context.isMountable;
+    context.hasDexModifier = context.isArmor && (itemData.data.armor?.type !== "shield");
 
     // Advancement
-    sheetData.advancement = this._getItemAdvancement(this.item);
+    context.advancement = this._getItemAdvancement(this.item);
 
     // Prepare Active Effects
-    sheetData.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
+    context.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
 
     // Re-define the template data references (backwards compatible)
-    sheetData.item = itemData;
-    sheetData.data = itemData.data;
-    return sheetData;
+    context.item = itemData;
+    context.data = itemData.data;
+    return context;
   }
 
   /* -------------------------------------------- */

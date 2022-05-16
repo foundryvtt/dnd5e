@@ -37,15 +37,15 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /**
    * Compute the total weight of the vehicle's cargo.
-   * @param {number} totalWeight    The cumulative item weight from inventory items
-   * @param {object} sheetData      Sheet data being prepared for display. *Will be mutated.*
+   * @param {number} totalWeight  The cumulative item weight from inventory items.
+   * @param {object} context      Rendering context for the sheet being prepared for display. *Will be mutated.*
    * @returns {{max: number, value: number, pct: number}}
    * @private
    */
-  _computeEncumbrance(totalWeight, sheetData) {
+  _computeEncumbrance(totalWeight, context) {
 
     // Compute currency weight
-    const totalCoins = Object.values(sheetData.data.currency).reduce((acc, denom) => acc + denom, 0);
+    const totalCoins = Object.values(context.data.currency).reduce((acc, denom) => acc + denom, 0);
 
     const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
       ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
@@ -59,7 +59,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       : CONFIG.DND5E.encumbrance.vehicleWeightMultiplier.imperial;
 
     // Compute overall encumbrance
-    const max = sheetData.data.attributes.capacity.cargo;
+    const max = context.data.attributes.capacity.cargo;
     const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
     return {value: totalWeight.toNearest(0.1), max, pct};
   }
@@ -104,10 +104,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /**
    * Organize Owned Items for rendering the Vehicle sheet.
-   * @param {object} sheetData  Sheet data being prepared for display. *Will be mutated.*
+   * @param {object} context  Rendering context for the sheet being prepared for display. *Will be mutated.*
    * @private
    */
-  _prepareItems(sheetData) {
+  _prepareItems(context) {
     const cargoColumns = [{
       label: game.i18n.localize("DND5E.Quantity"),
       css: "item-qty",
@@ -174,7 +174,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       }
     };
 
-    sheetData.items.forEach(item => {
+    context.items.forEach(item => {
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
       item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
@@ -183,7 +183,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const cargo = {
       crew: {
         label: game.i18n.localize("DND5E.VehicleCrew"),
-        items: sheetData.data.cargo.crew,
+        items: context.data.cargo.crew,
         css: "cargo-row crew",
         editableName: true,
         dataset: {type: "crew"},
@@ -191,7 +191,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       },
       passengers: {
         label: game.i18n.localize("DND5E.VehiclePassengers"),
-        items: sheetData.data.cargo.passengers,
+        items: context.data.cargo.passengers,
         css: "cargo-row passengers",
         editableName: true,
         dataset: {type: "passengers"},
@@ -222,7 +222,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     // Classify items owned by the vehicle and compute total cargo weight
     let totalWeight = 0;
-    for ( const item of sheetData.items ) {
+    for ( const item of context.items ) {
       this._prepareCrewedItem(item);
 
       // Handle cargo explicitly
@@ -254,9 +254,9 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     }
 
     // Update the rendering context data
-    sheetData.features = Object.values(features);
-    sheetData.cargo = Object.values(cargo);
-    sheetData.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, sheetData);
+    context.features = Object.values(features);
+    context.cargo = Object.values(cargo);
+    context.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, context);
   }
 
   /* -------------------------------------------- */

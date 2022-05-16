@@ -23,20 +23,16 @@ import ActiveEffect5e from "../../active-effect.js";
  */
 export default class ActorSheet5e extends ActorSheet {
 
-  constructor(...args) {
-    super(...args);
-
-    /**
-     * Track the set of item filters which are applied
-     * @type {Set}
-     */
-    this._filters = {
-      inventory: new Set(),
-      spellbook: new Set(),
-      features: new Set(),
-      effects: new Set()
-    };
-  }
+  /**
+   * Track the set of item filters which are applied on this sheet.
+   * @type {object<string, Set>}
+   */
+  _filters = {
+    inventory: new Set(),
+    spellbook: new Set(),
+    features: new Set(),
+    effects: new Set()
+  };
 
   /* -------------------------------------------- */
 
@@ -78,7 +74,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Basic data
     let isOwner = this.actor.isOwner;
-    const sheetData = {
+    const context = {
       owner: isOwner,
       limited: this.actor.limited,
       options: this.options,
@@ -94,37 +90,37 @@ export default class ActorSheet5e extends ActorSheet {
     // The Actor's data
     const actorData = this.actor.data.toObject(false);
     const source = this.actor.data._source.data;
-    sheetData.actor = actorData;
-    sheetData.data = actorData.data;
+    context.actor = actorData;
+    context.data = actorData.data;
 
     // Owned Items
-    sheetData.items = actorData.items;
-    for ( let i of sheetData.items ) {
+    context.items = actorData.items;
+    for ( let i of context.items ) {
       const item = this.actor.items.get(i._id);
       i.labels = item.labels;
     }
-    sheetData.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Labels and filters
-    sheetData.labels = this.actor.labels || {};
-    sheetData.filters = this._filters;
+    context.labels = this.actor.labels || {};
+    context.filters = this._filters;
 
     // Currency Labels
-    sheetData.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+    context.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
       obj[k] = c.label;
       return obj;
     }, {});
 
     // Temporary HP
-    const hp = sheetData.data.attributes.hp;
+    const hp = context.data.attributes.hp;
     if ( hp.temp === 0 ) delete hp.temp;
     if ( hp.tempmax === 0 ) delete hp.tempmax;
 
     // Proficiency
     if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
-      sheetData.labels.proficiency = `d${sheetData.data.attributes.prof * 2}`;
+      context.labels.proficiency = `d${context.data.attributes.prof * 2}`;
     } else {
-      sheetData.labels.proficiency = `+${sheetData.data.attributes.prof}`;
+      context.labels.proficiency = `+${context.data.attributes.prof}`;
     }
 
     // Ability Scores
@@ -147,25 +143,25 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Movement speeds
-    sheetData.movement = this._getMovementSpeed(actorData);
+    context.movement = this._getMovementSpeed(actorData);
 
     // Senses
-    sheetData.senses = this._getSenses(actorData);
+    context.senses = this._getSenses(actorData);
 
     // Update traits
     this._prepareTraits(actorData.data.traits);
 
     // Prepare owned items
-    this._prepareItems(sheetData);
+    this._prepareItems(context);
 
     // Prepare active effects
-    sheetData.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
+    context.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
 
     // Prepare warnings
-    sheetData.warnings = this.actor._preparationWarnings;
+    context.warnings = this.actor._preparationWarnings;
 
     // Return data to the sheet
-    return sheetData;
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -380,14 +376,14 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Insert a spell into the spellbook object when rendering the character sheet.
-   * @param {object} sheetData  Copy of the Actor data being prepared for display.
+   * @param {object} context    Rendering context for the sheet being prepared for display.
    * @param {object[]} spells   Spells to be included in the spellbook.
    * @returns {object[]}        Spellbook sections in the proper order.
    * @private
    */
-  _prepareSpellbook(sheetData, spells) {
+  _prepareSpellbook(context, spells) {
     const owner = this.actor.isOwner;
-    const levels = sheetData.data.spells;
+    const levels = context.data.spells;
     const spellbook = {};
 
     // Define some mappings
@@ -411,7 +407,7 @@ export default class ActorSheet5e extends ActorSheet {
         label: label,
         usesSlots: i > 0,
         canCreate: owner,
-        canPrepare: (sheetData.actor.type === "character") && (i >= 1),
+        canPrepare: (context.actor.type === "character") && (i >= 1),
         spells: [],
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
