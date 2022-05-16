@@ -5,7 +5,7 @@
  * See Combat._getInitiativeFormula for more detail.
  * @returns {string}  Final initiative formula for the actor.
  */
-export const _getInitiativeFormula = function() {
+export function _getInitiativeFormula() {
   if ( !this.actor ) return "1d20";
   const actorData = this.actor.data.data;
   const init = actorData.attributes.init;
@@ -36,4 +36,4 @@ export const _getInitiativeFormula = function() {
   const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
   if ( tiebreaker ) parts.push((actorData.abilities.dex?.value ?? 0) / 100);
   return parts.filter(p => p !== null).join(" + ");
-};
+}

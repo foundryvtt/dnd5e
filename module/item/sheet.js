@@ -3,6 +3,7 @@ import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
 import ActiveEffect5e from "../active-effect.js";
 
+
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
  * @extends {ItemSheet}

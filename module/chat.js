@@ -4,7 +4,7 @@
  * @param {HTMLElement} html     Rendered contents of the message.
  * @param {object} data          Configuration data passed to the message.
  */
-export const highlightCriticalSuccessFailure = function(message, html, data) {
+export function highlightCriticalSuccessFailure(message, html, data) {
   if ( !message.isRoll || !message.isContentVisible ) return;
 
   // Highlight rolls where the first part is a d20 roll
@@ -27,7 +27,7 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
     if ( roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
     else html.find(".dice-total").addClass("failure");
   }
-};
+}
 
 /* -------------------------------------------- */
 
@@ -37,7 +37,7 @@ export const highlightCriticalSuccessFailure = function(message, html, data) {
  * @param {HTMLElement} html     Rendered contents of the message.
  * @param {object} data          Configuration data passed to the message.
  */
-export const displayChatActionButtons = function(message, html, data) {
+export function displayChatActionButtons(message, html, data) {
   const chatCard = html.find(".dnd5e.chat-card");
   if ( chatCard.length > 0 ) {
     const flavor = html.find(".flavor-text");
@@ -68,7 +68,7 @@ export const displayChatActionButtons = function(message, html, data) {
  *
  * @returns {object[]}          The extended options Array including new context choices
  */
-export const addChatMessageContextOptions = function(html, options) {
+export function addChatMessageContextOptions(html, options) {
   let canApply = li => {
     const message = game.messages.get(li.data("messageId"));
     return message?.isRoll && message?.isContentVisible && canvas.tokens?.controlled.length;
@@ -100,7 +100,7 @@ export const addChatMessageContextOptions = function(html, options) {
     }
   );
   return options;
-};
+}
 
 /* -------------------------------------------- */
 
