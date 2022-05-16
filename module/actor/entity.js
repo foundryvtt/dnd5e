@@ -50,7 +50,7 @@ export default class Actor5e extends Actor {
    * @type {boolean}
    */
   get isPolymorphed() {
-    return this.getFlag("dnd5e", "isPolymorphed") || false;
+    return this.getFlag("dnd5e", "isPolymorphed") ?? false;
   }
 
   /* -------------------------------------------- */
@@ -425,8 +425,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareAbilities(actorData, bonusData, bonuses, checkBonus, originalSaves) {
-    const joat = this.getFlag("dnd5e", "jackOfAllTrades");
-    const diamondSoul = this.getFlag("dnd5e", "diamondSoul");
+    const { jackOfAllTrades: joat, diamondSoul } = this.data.flags.dnd5e ?? {};
     const dcBonus = simplifyBonus(actorData.data.bonuses?.spell?.dc, bonusData);
     const saveBonus = simplifyBonus(bonuses.save, bonusData);
     for ( const [id, abl] of Object.entries(actorData.data.abilities) ) {
@@ -463,12 +462,11 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills) {
-    if (actorData.type === "vehicle") return;
+    if ( actorData.type === "vehicle" ) return;
 
     // Skill modifiers
-    const feats = CONFIG.DND5E.characterFlags;
-    const joat = this.getFlag("dnd5e", "jackOfAllTrades");
-    const observant = this.getFlag("dnd5e", "observantFeat");
+    const flagConfig = CONFIG.DND5E.characterFlags;
+    const { jackOfAllTrades: joat, observantFeat: observant } = this.data.flags.dnd5e ?? {};
     const skillBonus = simplifyBonus(bonuses.skill, bonusData);
     for ( const [id, skl] of Object.entries(actorData.data.skills) ) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
@@ -502,7 +500,7 @@ export default class Actor5e extends Actor {
       if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
 
       // Compute passive bonus
-      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
+      const passive = observant && (flagConfig.observantFeat.skills.includes(id)) ? 5 : 0;
       const passiveBonus = simplifyBonus(skl.bonuses?.passive, bonusData);
       skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
     }
@@ -656,7 +654,7 @@ export default class Actor5e extends Actor {
   _computeArmorClass(data) {
     console.warn(
       "Instance version of Actor5e#_computeArmorClass has been deprecated "
-      + "in favor of its static counterpart and will be removed in 1.9."
+      + "in favor of its static counterpart Actor5e#computeArmorClass and will be removed in 1.9."
     );
     data.attributes.ac = this.constructor.computeArmorClass(
       data, this.items, this.getRollData({ deterministic: true }));
@@ -765,7 +763,7 @@ export default class Actor5e extends Actor {
   _computeEncumbrance(actorData) {
     console.warn(
       "Instance version of Actor5e#_computeEncumbrance has been deprecated "
-      + "in favor of its static counterpart and will be removed in 1.9."
+      + "in favor of its static counterpart Actor5e#computeEncumbrance and will be removed in 1.9."
     );
     return this.constructor.computeEncumbrance(actorData.data, this.items, actorData.flags.dnd5e ?? {});
   }
@@ -850,7 +848,7 @@ export default class Actor5e extends Actor {
   _computeInitiativeModifier(actorData, globalCheckBonus, bonusData) {
     console.warn(
       "Instance version of Actor5e#_computeInitiativeModifier has been deprecated "
-      + "in favor of its static counterpart Actor5e#_computeInitiative and will be removed in 1.9."
+      + "in favor of its static counterpart Actor5e#computeInitiative and will be removed in 1.9."
     );
     actorData.data.attributes.init = this.constructor.computeInitiative(
       actorData.data, bonusData, actorData.flags.dnd5e ?? {}
@@ -899,7 +897,7 @@ export default class Actor5e extends Actor {
   _computeScaleValues(data) {
     console.warn(
       "Instance version of Actor5e#_computeScaleValues has been deprecated "
-      + "in favor of its static counterpart and will be removed in 1.9."
+      + "in favor of its static counterpart Actor5e#computeScaleValues and will be removed in 1.9."
     );
     data.scale = this.constructor.computeScaleValues(this.classes);
   }
@@ -1036,7 +1034,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return this.getFlag("dnd5e", "remarkableAthlete")
+    return this.data.flags.dnd5e?.remarkableAthlete
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
@@ -1053,6 +1051,7 @@ export default class Actor5e extends Actor {
     const skl = this.data.data.skills[skillId];
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
@@ -1096,7 +1095,7 @@ export default class Actor5e extends Actor {
     }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1) && flags.reliableTalent;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]});
@@ -1106,7 +1105,7 @@ export default class Actor5e extends Actor {
       title: `${flavor}: ${this.name}`,
       flavor,
       chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       reliableTalent: reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
@@ -1155,6 +1154,7 @@ export default class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.data.data.abilities[abilityId];
     const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     const parts = [];
     const data = this.getRollData();
@@ -1194,7 +1194,7 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "ability", abilityId }
@@ -1216,6 +1216,7 @@ export default class Actor5e extends Actor {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.data.data.abilities[abilityId];
     const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     const parts = [];
     const data = this.getRollData();
@@ -1255,7 +1256,7 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "save", abilityId }
@@ -1274,6 +1275,7 @@ export default class Actor5e extends Actor {
   async rollDeathSave(options={}) {
     const death = this.data.data.attributes.death;
     const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.data.data.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
@@ -1287,7 +1289,7 @@ export default class Actor5e extends Actor {
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
-    if ( this.getFlag("dnd5e", "diamondSoul") ) {
+    if ( flags.diamondSoul ) {
       parts.push("@prof");
       data.prof = new Proficiency(this.data.data.attributes.prof, 1).term;
     }
@@ -1305,7 +1307,7 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       targetValue: 10,
       messageData: {
         speaker: speaker,
