@@ -68,38 +68,38 @@ export default class ItemSheet5e extends ItemSheet {
       labels: this.item.labels,
       isEmbedded: this.item.isEmbedded,
       advancementEditable: (this.advancementConfigurationMode || !this.item.isEmbedded) && context.editable,
-    
+
       // Item Type, Status, and Details
       itemType: game.i18n.localize(`ITEM.Type${context.item.type.titleCase()}`),
       itemStatus: this._getItemStatus(itemData),
       itemProperties: this._getItemProperties(itemData),
       baseItems: await this._getItemBaseTypes(itemData),
       isPhysical: itemData.data.hasOwnProperty("quantity"),
-    
+
       // Potential consumption targets
       abilityConsumptionTargets: this._getItemConsumptionTargets(itemData),
-    
+
       // Action Details
       hasAttackRoll: this.item.hasAttack,
       isHealing: itemData.data.actionType === "heal",
       isFlatDC: getProperty(itemData, "data.save.scaling") === "flat",
       isLine: ["line", "wall"].includes(itemData.data.target?.type),
-    
+
       // Vehicles
       isCrewed: itemData.data.activation?.type === "crew",
       isMountable,
-    
+
       // Armor Class
       isArmor: this.item.isArmor,
       hasAC: this.item.isArmor || isMountable,
       hasDexModifier: this.item.isArmor && (itemData.data.armor?.type !== "shield"),
-    
+
       // Advancement
       advancement: this._getItemAdvancement(this.item),
-    
+
       // Prepare Active Effects
       effects: ActiveEffect5e.prepareActiveEffectCategories(this.item.effects),
-    
+
       // Re-define the template data references (backwards compatible)
       item: itemData,
       data: itemData.data

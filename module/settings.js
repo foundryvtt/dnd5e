@@ -1,3 +1,6 @@
+/**
+ * Set up all of the settings used by the system.
+ */
 export function registerSystemSettings() {
 
   const reload = foundry.utils.debounce(() => window.location.reload(), 250);

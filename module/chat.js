@@ -55,7 +55,7 @@ export function displayChatActionButtons(message, html, data) {
       btn.style.display = "none";
     });
   }
-};
+}
 
 /* -------------------------------------------- */
 

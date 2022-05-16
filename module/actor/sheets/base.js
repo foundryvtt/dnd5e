@@ -143,8 +143,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Prepare labels object for the context.
-   * @params {object} systemData  System data for the actor being displayed.
-   * @returns {object}            Objects containing various labels.
+   * @param {object} systemData  System data for the actor being displayed.
+   * @returns {object}           Objects containing various labels.
    * @private
    */
   _getLabels(systemData) {

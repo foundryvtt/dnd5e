@@ -1,4 +1,29 @@
 /* -------------------------------------------- */
+/*  Formulas                                    */
+/* -------------------------------------------- */
+
+/**
+ * Convert a bonus value to a simple integer for displaying on the sheet.
+ * @param {number|string|null} bonus  Bonus formula.
+ * @param {object} [data={}]          Data to use for replacing @ strings.
+ * @returns {number}                  Simplified bonus as an integer.
+ * @protected
+ */
+export function simplifyBonus(bonus, data={}) {
+  if ( !bonus ) return 0;
+  if ( Number.isNumeric(bonus) ) return Number(bonus);
+  try {
+    const roll = new Roll(bonus, data);
+    if ( !roll.isDeterministic ) return 0;
+    roll.evaluate({ async: false });
+    return roll.total;
+  } catch(error) {
+    console.error(error);
+    return 0;
+  }
+}
+
+/* -------------------------------------------- */
 /*  Object Helpers                              */
 /* -------------------------------------------- */
 
