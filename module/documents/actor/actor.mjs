@@ -626,7 +626,7 @@ export default class Actor5e extends Actor {
       // Grab all classes with spellcasting
       const classes = this.items.filter(c => {
         if ( c.type !== "class" ) return false;
-        const prog = config[c.system.spellcasting.progression];
+        const prog = config[c.spellcasting.progression];
         if ( !prog.type ) return false;
         types[prog.type] ??= 0;
         types[prog.type] += 1;
@@ -634,7 +634,7 @@ export default class Actor5e extends Actor {
       });
 
       for ( const cls of classes ) {
-        const type = config[cls.system.spellcasting.progression].type;
+        const type = config[cls.spellcasting.progression].type;
 
         /**
          * A hook event that fires while computing the spellcasting progression for each class on each actor.
@@ -684,7 +684,7 @@ export default class Actor5e extends Actor {
    */
   static _computeLeveledProgression(progression, actor, cls, count) {
     const levels = cls.system.levels;
-    const prog = CONFIG.DND5E.spellProgression[cls.system.spellcasting.progression];
+    const prog = CONFIG.DND5E.spellProgression[cls.spellcasting.progression];
     if ( !prog ) return;
 
     const rounder = ( (count === 1) || prog.roundUp) ? Math.ceil : Math.floor;
