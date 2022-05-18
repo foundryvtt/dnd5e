@@ -1015,6 +1015,26 @@ DND5E.spellProgressionTypes = ["leveled", "pact"];
 /* -------------------------------------------- */
 
 /**
+ * Valid spell levels.
+ * @enum {string}
+ */
+DND5E.spellLevels = {
+  0: "DND5E.SpellLevel0",
+  1: "DND5E.SpellLevel1",
+  2: "DND5E.SpellLevel2",
+  3: "DND5E.SpellLevel3",
+  4: "DND5E.SpellLevel4",
+  5: "DND5E.SpellLevel5",
+  6: "DND5E.SpellLevel6",
+  7: "DND5E.SpellLevel7",
+  8: "DND5E.SpellLevel8",
+  9: "DND5E.SpellLevel9"
+};
+preLocalize("spellLevels");
+
+/* -------------------------------------------- */
+
+/**
  * The available choices for how spell damage scaling may be computed.
  * @enum {string}
  */
@@ -1024,6 +1044,83 @@ DND5E.spellScalingModes = {
   level: "DND5E.SpellLevel"
 };
 preLocalize("spellScalingModes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Types of components that can be required when casting a spell.
+ * @enum {object}
+ */
+DND5E.spellComponents = {
+  vocal: {
+    label: "DND5E.ComponentVerbal",
+    abbr: "DND5E.ComponentVerbalAbbr"
+  },
+  somatic: {
+    label: "DND5E.ComponentSomatic",
+    abbr: "DND5E.ComponentSomaticAbbr"
+  },
+  material: {
+    label: "DND5E.ComponentMaterial",
+    abbr: "DND5E.ComponentMaterialAbbr"
+  }
+};
+preLocalize("spellComponents", {keys: ["label", "abbr"]});
+
+/* -------------------------------------------- */
+
+/**
+ * Supplementary rules keywords that inform a spell's use.
+ * @enum {object}
+ */
+DND5E.spellTags = {
+  concentration: {
+    label: "DND5E.Concentration",
+    abbr: "DND5E.ConcentrationAbbr"
+  },
+  ritual: {
+    label: "DND5E.Ritual",
+    abbr: "DND5E.RitualAbbr"
+  }
+};
+preLocalize("spellTags", {keys: ["label", "abbr"]});
+
+/* -------------------------------------------- */
+
+/**
+ * Schools to which a spell can belong.
+ * @enum {string}
+ */
+DND5E.spellSchools = {
+  abj: "DND5E.SchoolAbj",
+  con: "DND5E.SchoolCon",
+  div: "DND5E.SchoolDiv",
+  enc: "DND5E.SchoolEnc",
+  evo: "DND5E.SchoolEvo",
+  ill: "DND5E.SchoolIll",
+  nec: "DND5E.SchoolNec",
+  trs: "DND5E.SchoolTrs"
+};
+preLocalize("spellSchools", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
+ * @enum {string}
+ */
+DND5E.spellScrollIds = {
+  0: "rQ6sO7HDWzqMhSI3",
+  1: "9GSfMg0VOA2b4uFN",
+  2: "XdDp6CKh9qEvPTuS",
+  3: "hqVKZie7x9w3Kqds",
+  4: "DM7hzgL836ZyUFB1",
+  5: "wa1VF8TXHmkrrR35",
+  6: "tI3rWx4bxefNCexS",
+  7: "mtyw4NS1s7j2EJaD",
+  8: "aOrinPg7yuDZEuWr",
+  9: "O4YbkJkLlnsgUszZ"
+};
 
 /* -------------------------------------------- */
 /*  Weapon Details                              */
@@ -1084,95 +1181,6 @@ DND5E.weaponProperties = {
 preLocalize("weaponProperties", { sort: true });
 
 /* -------------------------------------------- */
-/*  Spell Details                               */
-/* -------------------------------------------- */
-
-/**
- * Types of components that can be required when casting a spell.
- * @enum {object}
- */
-DND5E.spellComponents = {
-  vocal: {
-    label: "DND5E.ComponentVerbal",
-    abbr: "DND5E.ComponentVerbalAbbr"
-  },
-  somatic: {
-    label: "DND5E.ComponentSomatic",
-    abbr: "DND5E.ComponentSomaticAbbr"
-  },
-  material: {
-    label: "DND5E.ComponentMaterial",
-    abbr: "DND5E.ComponentMaterialAbbr"
-  }
-};
-preLocalize("spellComponents", {keys: ["label", "abbr"]});
-
-/**
- * Supplementary rules keywords that inform a spell's use.
- * @enum {object}
- */
-DND5E.spellTags = {
-  concentration: {
-    label: "DND5E.Concentration",
-    abbr: "DND5E.ConcentrationAbbr"
-  },
-  ritual: {
-    label: "DND5E.Ritual",
-    abbr: "DND5E.RitualAbbr"
-  }
-};
-preLocalize("spellTags", {keys: ["label", "abbr"]});
-
-/**
- * Schools to which a spell can belong.
- * @enum {string}
- */
-DND5E.spellSchools = {
-  abj: "DND5E.SchoolAbj",
-  con: "DND5E.SchoolCon",
-  div: "DND5E.SchoolDiv",
-  enc: "DND5E.SchoolEnc",
-  evo: "DND5E.SchoolEvo",
-  ill: "DND5E.SchoolIll",
-  nec: "DND5E.SchoolNec",
-  trs: "DND5E.SchoolTrs"
-};
-preLocalize("spellSchools", { sort: true });
-
-/**
- * Valid spell levels.
- * @enum {string}
- */
-DND5E.spellLevels = {
-  0: "DND5E.SpellLevel0",
-  1: "DND5E.SpellLevel1",
-  2: "DND5E.SpellLevel2",
-  3: "DND5E.SpellLevel3",
-  4: "DND5E.SpellLevel4",
-  5: "DND5E.SpellLevel5",
-  6: "DND5E.SpellLevel6",
-  7: "DND5E.SpellLevel7",
-  8: "DND5E.SpellLevel8",
-  9: "DND5E.SpellLevel9"
-};
-preLocalize("spellLevels");
-
-/**
- * Spell scroll item ID within the `DND5E.sourcePacks` compendium for each level.
- * @enum {string}
- */
-DND5E.spellScrollIds = {
-  0: "rQ6sO7HDWzqMhSI3",
-  1: "9GSfMg0VOA2b4uFN",
-  2: "XdDp6CKh9qEvPTuS",
-  3: "hqVKZie7x9w3Kqds",
-  4: "DM7hzgL836ZyUFB1",
-  5: "wa1VF8TXHmkrrR35",
-  6: "tI3rWx4bxefNCexS",
-  7: "mtyw4NS1s7j2EJaD",
-  8: "aOrinPg7yuDZEuWr",
-  9: "O4YbkJkLlnsgUszZ"
-};
 
 /**
  * Compendium packs used for localized items.
