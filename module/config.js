@@ -637,6 +637,8 @@ DND5E.damageTypes = {
 };
 preLocalize("damageTypes", { sort: true });
 
+/* -------------------------------------------- */
+
 /**
  * Types of damage to which an actor can possess resistance, immunity, or vulnerability.
  * @enum {string}
@@ -646,6 +648,18 @@ DND5E.damageResistanceTypes = {
   physical: "DND5E.DamagePhysical"
 };
 preLocalize("damageResistanceTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Different types of healing that can be applied using abilities.
+ * @enum {string}
+ */
+DND5E.healingTypes = {
+  healing: "DND5E.Healing",
+  temphp: "DND5E.HealingTemp"
+};
+preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
@@ -796,6 +810,7 @@ DND5E.areaTargetTypes = {
   }
 };
 preLocalize("areaTargetTypes", { key: "label", sort: true });
+patchConfig("areaTargetTypes", "template", { since: 1.7, until: 1.9 });
 
 /* -------------------------------------------- */
 
@@ -809,18 +824,6 @@ DND5E.targetTypes = {
   ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
 preLocalize("targetTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Different types of healing that can be applied using abilities.
- * @enum {string}
- */
-DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
-};
-preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
@@ -1357,3 +1360,34 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
  * @type {string[]}
  */
 DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
+
+/* -------------------------------------------- */
+
+/**
+ * Patch an existing config enum to allow conversion from string values to object values without
+ * breaking existing modules that are expecting strings.
+ * @param {string}
+ * @param {string}
+ * @param {object} [options={}]            Additional options which customize logging.
+ * @param {number} [options.mode]  A logging level in COMPATIBILITY_MODES which overrides the configured default.
+ * @param {number|string} [options.since]  A version identifier since which a change was made.
+ * @param {number|string} [options.until]  A version identifier until which a change remains supported.
+ * @param {string} [options.details]       Additional details to append to the logged message.
+ * @param {boolean} [options.stack=true]   Include the message stack trace.
+ */
+function patchConfig(key, fallbackKey, { mode, since, until, details, stack=true }={}) {
+  function toString() {
+    const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
+      +` The former value can be acccessed from .${fallbackKey}.`;
+    if ( game.release.generation < 10 ) {
+      const alerts = [message];
+      if ( since ) alerts.push(`Deprecated since Version ${since}`);
+      if ( until ) alerts.push(`Backwards-compatible support will be removed in Version ${until}`);
+      const error = new Error(alerts.join("\n"));
+      console.warn(stack ? error : error.message);
+    } else foundry.utils.logCompatibilityWarning(message, { mode, since, until, stack });
+    return this[fallbackKey];
+  }
+
+  Object.values(DND5E[key]).forEach(o => o.toString = toString);
+}
