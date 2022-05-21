@@ -1118,7 +1118,7 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests or saving throws are rolled
    */
   rollAbility(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     new Dialog({
       title: `${game.i18n.format("DND5E.AbilityPromptTitle", {ability: label})}: ${this.name}`,
       content: `<p>${game.i18n.format("DND5E.AbilityPromptText", {ability: label})}</p>`,
@@ -1145,7 +1145,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilityTest(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];
@@ -1224,7 +1224,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   async rollAbilitySave(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId] ?? "";
+    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];

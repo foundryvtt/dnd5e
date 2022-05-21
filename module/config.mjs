@@ -16,35 +16,57 @@ _______________________________`;
 
 /**
  * The set of Ability Scores used within the system.
- * @enum {string}
+ * @enum {{
+ *  label: string,
+ *  abbreviation: string
+ * }}
  */
 DND5E.abilities = {
-  str: "DND5E.AbilityStr",
-  dex: "DND5E.AbilityDex",
-  con: "DND5E.AbilityCon",
-  int: "DND5E.AbilityInt",
-  wis: "DND5E.AbilityWis",
-  cha: "DND5E.AbilityCha",
-  hon: "DND5E.AbilityHon",
-  san: "DND5E.AbilitySan"
+  str: {
+    label: "DND5E.AbilityStr",
+    abbreviation: "DND5E.AbilityStrAbbr"
+  },
+  dex: {
+    label: "DND5E.AbilityDex",
+    abbreviation: "DND5E.AbilityDexAbbr"
+  },
+  con: {
+    label: "DND5E.AbilityCon",
+    abbreviation: "DND5E.AbilityConAbbr"
+  },
+  int: {
+    label: "DND5E.AbilityInt",
+    abbreviation: "DND5E.AbilityIntAbbr"
+  },
+  wis: {
+    label: "DND5E.AbilityWis",
+    abbreviation: "DND5E.AbilityWisAbbr"
+  },
+  cha: {
+    label: "DND5E.AbilityCha",
+    abbreviation: "DND5E.AbilityChaAbbr"
+  },
+  hon: {
+    label: "DND5E.AbilityHon",
+    abbreviation: "DND5E.AbilityHonAbbr"
+  },
+  san: {
+    label: "DND5E.AbilitySan",
+    abbreviation: "DND5E.AbilitySanAbbr"
+  }
 };
-preLocalize("abilities");
+preLocalize("abilities", { keys: ["label", "abbreviation"] });
+patchConfig("abilities", "label", { since: 2.2, until: 2.4 });
 
-/**
- * Localized abbreviations for Ability Scores.
- * @enum {string}
- */
-DND5E.abilityAbbreviations = {
-  str: "DND5E.AbilityStrAbbr",
-  dex: "DND5E.AbilityDexAbbr",
-  con: "DND5E.AbilityConAbbr",
-  int: "DND5E.AbilityIntAbbr",
-  wis: "DND5E.AbilityWisAbbr",
-  cha: "DND5E.AbilityChaAbbr",
-  hon: "DND5E.AbilityHonAbbr",
-  san: "DND5E.AbilitySanAbbr"
-};
-preLocalize("abilityAbbreviations");
+Object.defineProperty(DND5E, "abilityAbbreviations", {
+  get() {
+    foundry.utils.logCompatibilityWarning(
+      "The `abilityAbbreviations` configuration object has been merged with `abilities`.",
+      { since: "DnD5e 2.2", until: "DnD5e 2.4" }
+    );
+    return Object.fromEntries(Object.entries(DND5E.abilities).map(([k, v]) => [k, v.abbreviation]));
+  }
+});
 
 /**
  * Configure which ability score is used as the default modifier for initiative rolls.
