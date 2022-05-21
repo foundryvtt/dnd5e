@@ -637,6 +637,8 @@ DND5E.damageTypes = {
 };
 preLocalize("damageTypes", { sort: true });
 
+/* -------------------------------------------- */
+
 /**
  * Types of damage to which an actor can possess resistance, immunity, or vulnerability.
  * @enum {string}
@@ -646,6 +648,18 @@ DND5E.damageResistanceTypes = {
   physical: "DND5E.DamagePhysical"
 };
 preLocalize("damageResistanceTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Different types of healing that can be applied using abilities.
+ * @enum {string}
+ */
+DND5E.healingTypes = {
+  healing: "DND5E.Healing",
+  temphp: "DND5E.HealingTemp"
+};
+preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
@@ -796,6 +810,7 @@ DND5E.areaTargetTypes = {
   }
 };
 preLocalize("areaTargetTypes", { key: "label", sort: true });
+patchConfig("areaTargetTypes", "template", { since: 2.0, until: 2.2 });
 
 /* -------------------------------------------- */
 
@@ -809,18 +824,6 @@ DND5E.targetTypes = {
   ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
 preLocalize("targetTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Different types of healing that can be applied using abilities.
- * @enum {string}
- */
-DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
-};
-preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
@@ -1358,5 +1361,28 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
  * @type {string[]}
  */
 DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
+
+/* -------------------------------------------- */
+
+/**
+ * Patch an existing config enum to allow conversion from string values to object values without
+ * breaking existing modules that are expecting strings.
+ * @param {string} key          Key within DND5E that has been replaced with an enum of objects.
+ * @param {string} fallbackKey  Key within the new config object from which to get the fallback value.
+ * @param {object} [options]    Additional options passed through to logCompatibilityWarning.
+ */
+function patchConfig(key, fallbackKey, options) {
+  /** @override */
+  function toString() {
+    const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
+      +` The former value can be acccessed from .${fallbackKey}.`;
+    foundry.utils.logCompatibilityWarning(message, options);
+    return this[fallbackKey];
+  }
+
+  Object.values(DND5E[key]).forEach(o => o.toString = toString);
+}
+
+/* -------------------------------------------- */
 
 export default DND5E;
