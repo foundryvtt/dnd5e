@@ -706,6 +706,18 @@ preLocalize("damageResistanceTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Different types of healing that can be applied using abilities.
+ * @enum {string}
+ */
+DND5E.healingTypes = {
+  healing: "DND5E.Healing",
+  temphp: "DND5E.HealingTemp"
+};
+preLocalize("healingTypes");
+
+/* -------------------------------------------- */
+
+/**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
  * @enum {string}
@@ -852,6 +864,7 @@ DND5E.areaTargetTypes = {
   }
 };
 preLocalize("areaTargetTypes", { key: "label", sort: true });
+patchConfig("areaTargetTypes", "template", { since: 2.0, until: 2.2 });
 
 /* -------------------------------------------- */
 
@@ -865,18 +878,6 @@ DND5E.targetTypes = {
   ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
 preLocalize("targetTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * Different types of healing that can be applied using abilities.
- * @enum {string}
- */
-DND5E.healingTypes = {
-  healing: "DND5E.Healing",
-  temphp: "DND5E.HealingTemp"
-};
-preLocalize("healingTypes");
 
 /* -------------------------------------------- */
 
