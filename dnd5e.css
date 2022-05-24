@@ -1635,6 +1635,9 @@
 .dnd5e.sheet.item .weapon-properties label.checkbox {
   flex: 0 0 98px;
 }
+.dnd5e.sheet.item .advancement .items-list {
+  height: 100%;
+}
 .dnd5e.sheet.item .advancement .items-list .main-controls .configuration-mode-control {
   flex: 1 0;
   margin-inline-start: 0.5em;
