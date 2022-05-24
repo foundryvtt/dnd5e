@@ -1,3 +1,5 @@
+import Advancement from "./advancement.mjs";
+
 /**
  * Presents a list of advancement types to create when clicking the new advancement button.
  * Once a type is selected, this hands the process over to the advancement's individual editing interface.
