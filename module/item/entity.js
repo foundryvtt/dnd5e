@@ -1719,12 +1719,30 @@ export default class Item5e extends Item {
 
   /**
    * Remove an advancement from this item.
-   * @param {number} id          ID of the advancement to remove.
+   * @param {string} id          ID of the advancement to remove.
    * @returns {Promise<Item5e>}  This item with the changes applied.
    */
   async deleteAdvancement(id) {
     if ( !this.data.data.advancement ) return;
     return this.update({"data.advancement": this.data.data.advancement.filter(a => a._id !== id)});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Duplicate an advancement, resetting its value to default and giving it a new ID.
+   * @param {string} id                          ID of the advancement to duplicate.
+   * @param {object} [options]
+   * @param {boolean} [options.showConfig=true]  Should the new advancement's configuration application be shown?
+   * @returns {Promise<Item5e>}                  This item with the changes applied.
+   */
+  async duplicateAdvancement(id, options) {
+    const original = this.advancement.byId[id];
+    if ( !original ) return;
+    const duplicate = foundry.utils.deepClone(original.data);
+    delete duplicate._id;
+    duplicate.value = original.constructor.metadata.defaults.value;
+    return this.createAdvancement(original.constructor.typeName, duplicate, options);
   }
 
   /* -------------------------------------------- */
