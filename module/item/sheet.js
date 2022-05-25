@@ -439,7 +439,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the set of ContextMenu options which should be applied for advancement entries.
-   * @return {ContextMenuEntry[]}  Context menu entries.
+   * @returns {ContextMenuEntry[]}  Context menu entries.
    * @private
    */
   _getAdvancementContextMenuOptions() {
@@ -543,7 +543,7 @@ export default class ItemSheet5e extends ItemSheet {
     const id = target.closest(".advancement-item")?.dataset.id;
     const advancement = this.item.advancement.byId[id];
     if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
-    switch(action) {
+    switch (action) {
       case "add": return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
       case "delete": return this.item.deleteAdvancement(id);
