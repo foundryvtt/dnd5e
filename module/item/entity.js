@@ -252,6 +252,26 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the spellcasting for a class or subclass. For classes, this will return the spellcasting
+   * of the subclass if it overrides the class. For subclasses, this will return the class's spellcasting
+   * if no spellcasting is defined on the subclass.
+   * @returns {object}  Spellcasting object containing progression & ability.
+   */
+  get spellcasting() {
+    const spellcasting = this.data.data.spellcasting;
+    if ( !spellcasting ) return {};
+    if ( this.type === "subclass" ) {
+      if ( spellcasting.progression !== "none" ) return spellcasting;
+      return this.class?.data.data.spellcasting;
+    }
+    const scSpellcasting = this.subclass?.spellcasting;
+    if ( scSpellcasting && scSpellcasting.progression !== "none" ) return scSpellcasting;
+    return spellcasting;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Should this item's active effects be suppressed.
    * @type {boolean}
    */
