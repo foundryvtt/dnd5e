@@ -4,17 +4,17 @@
         {{#if isPhysical}}
         <div class="form-group">
             <label>{{ localize "DND5E.Quantity" }}</label>
-            <input type="number" name="data.quantity" value="{{data.quantity}}">
+            {{numberInput data.quantity name="data.quantity"}}
         </div>
 
         <div class="form-group">
             <label>{{ localize "DND5E.Weight" }}</label>
-            <input type="number" name="data.weight" value="{{data.weight}}">
+            {{numberInput data.weight name="data.weight"}}
         </div>
 
         <div class="form-group">
             <label>{{ localize "DND5E.Price" }}</label>
-            <input type="number" name="data.price" value="{{data.price}}">
+            {{numberInput data.price name="data.price"}}
         </div>
         {{/if}}
 

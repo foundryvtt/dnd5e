@@ -2,7 +2,7 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
-        <input type="number" name="data.activation.cost" value="{{data.activation.cost}}" placeholder="-">
+        <input type="number" step="any" name="data.activation.cost" value="{{data.activation.cost}}" placeholder="-">
         <select name="data.activation.type">
             {{#select data.activation.type}}
             <option value=""></option>
@@ -43,7 +43,7 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
-        <input type="number" name="data.target.value" value="{{data.target.value}}" placeholder="-">
+        <input type="number" step="any" name="data.target.value" value="{{data.target.value}}" placeholder="&mdash;">
         <select name="data.target.units">
             {{#select data.target.units}}
             <option value=""></option>
@@ -68,7 +68,7 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.TargetWidth" }}</label>
     <div class="form-fields">
-        <input type="number" name="data.target.width" value="{{data.target.width}}" placeholder="-">
+        <input type="number" step="any" name="data.target.width" value="{{data.target.width}}" placeholder="&mdash;">
     </div>
 </div>
 {{/if}}
@@ -77,9 +77,11 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        <input type="number" name="data.range.value" value="{{data.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
+        <input type="number" step="any" name="data.range.value"
+            value="{{data.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
         <span class="sep">/</span>
-        <input type="number" name="data.range.long" value="{{data.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
+        <input type="number" step="any" name="data.range.long"
+            value="{{data.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
         <select name="data.range.units">
             {{#select data.range.units}}
             <option value=""></option>
@@ -95,7 +97,8 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="number" name="data.duration.value" value="{{data.duration.value}}" placeholder="-">
+        <input type="number" step="any" name="data.duration.value" value="{{data.duration.value}}"
+            placeholder="&mdash;">
         <select name="data.duration.units">
             {{#select data.duration.units}}
             <option value=""></option>
@@ -111,7 +114,7 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="number" name="data.uses.value" value="{{data.uses.value}}">
+        <input type="number" step="any" name="data.uses.value" value="{{data.uses.value}}">
         <span class="sep">{{ localize "DND5E.of" }}</span>
         <input type="text" name="data.uses.max" value="{{data.uses.max}}">
         <span class="sep">{{ localize "DND5E.per" }}</span>
@@ -146,7 +149,7 @@
             {{/each}}
             {{/select}}
         </select>
-        <input type="number" name="data.consume.amount" value="{{data.consume.amount}}">
+        <input type="number" step="any" name="data.consume.amount" value="{{data.consume.amount}}">
     </div>
 </div>
 {{/if}}

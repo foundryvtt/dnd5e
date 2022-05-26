@@ -42,7 +42,7 @@
               {{selectOptions @root.faces selected=data.value.die blank=data.placeholder.die}}
             </select>
           {{else}}
-            <input type="{{#if @root.isNumeric}}number{{else}}text{{/if}}"
+            <input type="{{#if @root.isNumeric}}number{{else}}text{{/if}}" step="any"
                    name="data.configuration.scale.{{level}}.value" value="{{data.value.value}}"
                    data-level="{{level}}" placeholder="{{data.placeholder.value}}">
           {{/if}}
