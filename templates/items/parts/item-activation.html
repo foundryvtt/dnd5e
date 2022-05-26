@@ -2,7 +2,8 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
-        <input type="number" step="any" name="data.activation.cost" value="{{data.activation.cost}}" placeholder="-">
+        <input type="number" step="any" name="data.activation.cost" value="{{data.activation.cost}}"
+            placeholder="&mdash;">
         <select name="data.activation.type">
             {{#select data.activation.type}}
             <option value=""></option>

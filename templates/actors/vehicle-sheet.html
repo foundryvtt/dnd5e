@@ -94,7 +94,7 @@
                 <li class="ability" data-ability="{{id}}">
                     <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
                     {{numberInput ability.value name=(concat "data.abilities." id ".value")
-                        class="ability-score" placeholder="10"}}
+                        class="ability-score" placeholder="0"}}
                     <div class="ability-modifiers flexrow">
                         <span class="ability-mod" title="{{localize 'DND5E.Modifier'}}">
                             {{numberFormat ability.mod decimals=0 sign=true}}
