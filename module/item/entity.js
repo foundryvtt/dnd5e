@@ -1,6 +1,7 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import Proficiency from "../actor/proficiency.js";
+import Actor5e from "../actor/entity.js";
 
 
 /**
@@ -8,6 +9,11 @@ import Proficiency from "../actor/proficiency.js";
  * @extends {Item}
  */
 export default class Item5e extends Item {
+
+  /** @returns {Actor5e|null} */
+  get actor() {
+    return super.actor;
+  }
 
   /** @inheritdoc */
   static LOG_V10_COMPATIBILITY_WARNINGS = false;
@@ -602,7 +608,9 @@ export default class Item5e extends Item {
     if (this.isOwned && !Number.isNumeric(max)) {
       if (this.actor.data === undefined) return;
       try {
-        max = Roll.replaceFormulaData(max, this.actor.getRollData(), {missing: 0, warn: true});
+        const rollData = foundry.utils.deepClone(this.actor.getRollData());
+        Actor5e.sanitizeDataForFlatEval(rollData);
+        max = Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true});
         max = Roll.safeEval(max);
       } catch(e) {
         console.error("Problem preparing Max uses for", this.data.name, e);

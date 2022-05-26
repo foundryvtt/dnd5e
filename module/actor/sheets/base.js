@@ -1063,7 +1063,8 @@ export default class ActorSheet5e extends ActorSheet {
     const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
     if ( existingTooltip || !property ) return;
-    const data = this.actor.data.data;
+    const data = foundry.utils.deepClone(this.actor.data.data);
+    Actor5e.sanitizeDataForFlatEval(data)
     let attributions;
     switch ( property ) {
       case "attributes.ac": attributions = this._prepareArmorClassAttribution(data); break;
