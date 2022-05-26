@@ -111,7 +111,8 @@
             {{/select}}
         </select>
         <span>{{ localize "DND5E.VsDC" }}</span>
-        <input type="number" name="system.save.dc" value="{{#if system.save.dc}}{{system.save.dc}}{{/if}}"
+        <input type="number" step="any" name="system.save.dc"
+            value="{{#if system.save.dc}}{{system.save.dc}}{{/if}}"
             placeholder="{{ localize 'DND5E.AbbreviationDC' }}" {{#unless isFlatDC}}disabled{{/unless}}>
         <select name="system.save.scaling">
             {{#select system.save.scaling}}

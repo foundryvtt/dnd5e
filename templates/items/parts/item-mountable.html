@@ -1,10 +1,10 @@
 <div class="form-group">
     <label>{{localize 'DND5E.HitPoints'}}</label>
     <div class="form-fields">
-        <input type="number" name="system.hp.value" value="{{system.hp.value}}" placeholder="0">
+        {{numberInput system.hp.value name="system.hp.value" placeholder="0"}}
         <span class="sep">&sol;</span>
-        <input type="number" name="system.hp.max" value="{{system.hp.max}}" placeholder="0">
-        <input type="number" name="system.hp.dt" value="{{system.hp.dt}}" placeholder="{{localize 'DND5E.Threshold'}}">
+        {{numberInput system.hp.max name="system.hp.max" placeholder="0"}}
+        {{numberInput system.hp.dt name="system.hp.dt" placeholder=(localize "DND5E.Threshold")}}
     </div>
 </div>
 
