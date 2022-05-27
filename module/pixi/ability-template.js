@@ -110,11 +110,10 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Confirm the workflow (left-click)
     handlers.lc = event => {
       handlers.rc(event);
-      const data = game.release.generation < 10 ? this.data : this.document;
-      const destination = canvas.grid.getSnappedPosition(data.x, data.y, 2);
+      const destination = canvas.grid.getSnappedPosition(this.data.x, this.data.y, 2);
       if ( game.release.generation < 10 ) this.data.update(destination);
       else this.document.updateSource(destination);
-      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [data]);
+      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.data.toObject()]);
     };
 
     // Rotate the template by 3 degree increments (mouse-wheel)
@@ -123,8 +122,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       event.stopPropagation();
       let delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
       let snap = event.shiftKey ? delta : 5;
-      const data = game.release.generation < 10 ? this.data : this.document;
-      const update = {direction: data.direction + (snap * Math.sign(event.deltaY))};
+      const update = {direction: this.data.direction + (snap * Math.sign(event.deltaY))};
       if ( game.release.generation < 10 ) this.data.update(update);
       else this.document.updateSource(update);
       this.refresh();
