@@ -608,8 +608,7 @@ export default class Item5e extends Item {
     if (this.isOwned && !Number.isNumeric(max)) {
       if (this.actor.data === undefined) return;
       try {
-        const rollData = foundry.utils.deepClone(this.actor.getRollData());
-        Actor5e.sanitizeDataForFlatEval(rollData);
+        const rollData = this.actor.getRollData({ safeForFlatEval: true });
         max = Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true});
         max = Roll.safeEval(max);
       } catch(e) {
