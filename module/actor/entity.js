@@ -592,15 +592,13 @@ export default class Actor5e extends Actor {
 
     // Tabulate the total spell-casting progression
     for ( let cls of Object.values(this.classes) ) {
-      const classData = cls.data.data;
-      const subclassProg = cls.subclass?.data.data.spellcasting.progression;
-      const prog = ( subclassProg && (subclassProg !== "none") ) ? subclassProg : classData.spellcasting.progression;
+      const prog = cls.spellcasting.progression;
       if ( prog === "none" ) continue;
-      const levels = classData.levels;
+      const levels = cls.data.data.levels;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
-        caster = classData;
+        caster = cls;
         progression.total++;
       }
       switch (prog) {
@@ -614,13 +612,13 @@ export default class Actor5e extends Actor {
 
     // EXCEPTION: single-classed non-full progression rounds up, rather than down
     const isSingleClass = (progression.total === 1) && (progression.slot > 0);
-    if (!isNPC && isSingleClass && ["half", "third"].includes(caster.spellcasting.progression) ) {
+    if ( !isNPC && isSingleClass && ["half", "third"].includes(caster.spellcasting.progression) ) {
       const denom = caster.spellcasting.progression === "third" ? 3 : 2;
-      progression.slot = Math.ceil(caster.levels / denom);
+      progression.slot = Math.ceil(caster.data.data.levels / denom);
     }
 
     // EXCEPTION: NPC with an explicit spell-caster level
-    if (isNPC && actorData.data.details.spellLevel) {
+    if ( isNPC && actorData.data.details.spellLevel ) {
       progression.slot = actorData.data.details.spellLevel;
     }
 
