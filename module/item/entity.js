@@ -259,7 +259,7 @@ export default class Item5e extends Item {
    */
   get spellcasting() {
     const spellcasting = this.data.data.spellcasting;
-    if ( !spellcasting ) return undefined;
+    if ( !spellcasting ) return spellcasting;
     const isSubclass = this.type === "subclass";
     const classSpellcasting = isSubclass ? this.class?.data.data.spellcasting : spellcasting;
     const subclassSpellcasting = isSubclass ? spellcasting : this.subclass?.data.data.spellcasting;
