@@ -214,9 +214,8 @@ export default class Actor5e extends Actor {
   getRollData({ safeForFlatEval=false }={}) {
     const data = foundry.utils.deepClone(super.getRollData());
     data.prof = new Proficiency(this.data.data.attributes.prof, 1);
-    if (safeForFlatEval) {
-      data.prof = data.prof.flat;
-    }
+    if ( safeForFlatEval ) data.prof = data.prof.flat;
+
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
       data.classes[identifier] = cls.data.data;
