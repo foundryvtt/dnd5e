@@ -10,11 +10,6 @@ import Actor5e from "../actor/entity.js";
  */
 export default class Item5e extends Item {
 
-  /** @returns {Actor5e|null} */
-  get actor() {
-    return super.actor;
-  }
-
   /** @inheritdoc */
   static LOG_V10_COMPATIBILITY_WARNINGS = false;
 
