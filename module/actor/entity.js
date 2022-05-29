@@ -224,21 +224,6 @@ export default class Actor5e extends Actor {
     return data;
   }
 
-  /**
-   * Mutates actor data to potential sources of dice terms,
-   * for cases where dice terms are not allowed in a formula to be evaluated.
-   * @param {object} actorData    actor data, dnd5e system data, or actor roll data
-   * @returns {object}
-   */
-  static sanitizeDataForFlatEval(actorData) {
-    // Handle first level prof (if actorData is actor roll data or system data)
-    if (actorData.prof instanceof Proficiency) actorData.prof = actorData.prof.flat;
-
-    // Handle system-level prof (if actorData is full actor data)
-    if (actorData.data?.prof instanceof Proficiency) actorData.data.prof = actorData.prof.flat;
-    return actorData;
-  }
-
   /* -------------------------------------------- */
 
   /**
