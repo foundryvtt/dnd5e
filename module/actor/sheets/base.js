@@ -1063,7 +1063,7 @@ export default class ActorSheet5e extends ActorSheet {
     const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
     if ( existingTooltip || !property ) return;
-    const data = this.actor.getRollData({ safeForFlatEval: true });
+    const data = this.actor.getRollData({ isDeterministic: true });
     let attributions;
     switch ( property ) {
       case "attributes.ac": attributions = this._prepareArmorClassAttribution(data); break;
