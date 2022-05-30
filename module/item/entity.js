@@ -602,7 +602,7 @@ export default class Item5e extends Item {
     if (this.isOwned && !Number.isNumeric(max)) {
       if (this.actor.data === undefined) return;
       try {
-        const rollData = this.actor.getRollData({ isDeterministic: true });
+        const rollData = this.actor.getRollData({ deterministic: true });
         max = Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true});
         max = Roll.safeEval(max);
       } catch(e) {

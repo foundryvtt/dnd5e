@@ -213,13 +213,13 @@ export default class Actor5e extends Actor {
   /**
    * @inheritdoc
    * @param {object} [options]
-   * @param {boolean} [options.isDeterministic] Whether to force deterministic values for data properties that could be
+   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
    *                                            either a die term or a flat term.
    */
-  getRollData({ isDeterministic=false }={}) {
+  getRollData({ deterministic=false }={}) {
     const data = foundry.utils.deepClone(super.getRollData());
     data.prof = new Proficiency(this.data.data.attributes.prof, 1);
-    if ( isDeterministic ) data.prof = data.prof.flat;
+    if ( deterministic ) data.prof = data.prof.flat;
 
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
@@ -715,7 +715,7 @@ export default class Actor5e extends Actor {
 
       default:
         let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        const rollData = this.getRollData({ isDeterministic: true });
+        const rollData = this.getRollData({ deterministic: true });
         if ( armors.length ) {
           if ( armors.length > 1 ) ac.warnings.push("DND5E.WarnMultipleArmor");
           const armorData = armors[0].data.data.armor;
