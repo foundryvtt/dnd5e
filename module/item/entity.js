@@ -620,7 +620,8 @@ export default class Item5e extends Item {
     if (this.isOwned && !Number.isNumeric(max)) {
       if (this.actor.data === undefined) return;
       try {
-        max = Roll.replaceFormulaData(max, this.actor.getRollData(), {missing: 0, warn: true});
+        const rollData = this.actor.getRollData({ deterministic: true });
+        max = Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true});
         max = Roll.safeEval(max);
       } catch(e) {
         console.error("Problem preparing Max uses for", this.data.name, e);
