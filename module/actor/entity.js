@@ -213,7 +213,7 @@ export default class Actor5e extends Actor {
   /**
    * @inheritdoc
    * @param {object} [options]
-   * @param {boolean} [options.isDeterministic] whether to force deterministic values for data properties that could be
+   * @param {boolean} [options.isDeterministic] Whether to force deterministic values for data properties that could be
    *                                            either a die term or a flat term.
    */
   getRollData({ isDeterministic=false }={}) {
