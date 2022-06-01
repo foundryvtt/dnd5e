@@ -21,6 +21,46 @@ export class CommonData extends foundry.abstract.DataModel {
       currency: new foundry.data.fields.EmbeddedDataField(CurrencyData, {label: "DND5E.Currency"})
     };
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    this.migrateSensesData(source);
+    return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the actor traits.senses string to attributes.senses object.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static migrateSensesData(source) {
+    const original = source.traits?.senses;
+    if ( (original === undefined) || (typeof original !== "string") ) return;
+    source.attributes ??= {};
+    source.attributes.senses ??= {};
+
+    // Try to match old senses with the format like "Darkvision 60 ft, Blindsight 30 ft"
+    const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/;
+    let wasMatched = false;
+
+    // Match each comma-separated term
+    for ( let s of original.split(",") ) {
+      s = s.trim();
+      const match = s.match(pattern);
+      if ( !match ) continue;
+      const type = match[1].toLowerCase();
+      if ( type in CONFIG.DND5E.senses ) {
+        source.attributes.senses[type] = Number(match[2]).toNearest(0.5);
+        wasMatched = true;
+      }
+    }
+
+    // If nothing was matched, but there was an old string - put the whole thing in "special"
+    if ( !wasMatched && original ) source.attributes.senses.special = original;
+  }
 }
 
 /**
@@ -135,6 +175,53 @@ export class AttributeData extends foundry.abstract.DataModel {
       }, {label: "DND5E.Movement"})
     };
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    this.migrateACData(source);
+    this.migrateMovementData(source);
+    return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the actor ac.value to new ac.flat override field.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static migrateACData(source) {
+    if ( !source.ac ) return;
+
+    // If the actor has a numeric ac.value, then their AC has not been migrated to the auto-calculation schema yet.
+    if ( Number.isNumeric(source.ac.value) ) {
+      const isNPC = this.defineSchema().hp.schema.formula !== undefined;
+      source.ac.flat = parseInt(source.ac.value);
+      source.ac.calc = isNPC ? "natural" : "flat";
+      return;
+    }
+
+    // Migrate ac.base in custom formulas to ac.armor
+    if ( (typeof source.ac.formula === "string") && source.ac.formula.includes("@attributes.ac.base") ) {
+      source.ac.formula = source.ac.formula.replaceAll("@attributes.ac.base", "@attributes.ac.armor");
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the actor speed string to movement object.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static migrateMovementData(source) {
+    const original = source.speed?.value ?? source.speed;
+    if ( (typeof original !== "string") || (source.movement?.walk !== undefined) ) return;
+    source.movement ??= {};
+    const s = original.split(" ");
+    if ( s.length > 0 ) source.movement.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
+  }
+
 }
 
 /**

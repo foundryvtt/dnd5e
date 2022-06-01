@@ -28,6 +28,8 @@ export class CreatureData extends common.CommonData {
     };
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Helper for building the default list of spell levels.
    * @type {string[]}

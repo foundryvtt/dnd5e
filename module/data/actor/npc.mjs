@@ -74,6 +74,68 @@ export class DetailsData extends creature.DetailsData {
       source: new foundry.data.fields.StringField({required: true, label: "DND5E.Source"})
     };
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static migrateData(source) {
+    this.migrateTypeData(source);
+    return super.migrateData(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the actor type string to type object.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static migrateTypeData(source) {
+    const original = source.type;
+    if ( typeof original !== "string" ) return;
+
+    source.type = {
+      value: "",
+      subtype: "",
+      swarm: "",
+      custom: ""
+    };
+
+    // Match the existing string
+    const pattern = /^(?:swarm of (?<size>[\w-]+) )?(?<type>[^(]+?)(?:\((?<subtype>[^)]+)\))?$/i;
+    const match = original.trim().match(pattern);
+    if ( match ) {
+
+      // Match a known creature type
+      const typeLc = match.groups.type.trim().toLowerCase();
+      const typeMatch = Object.entries(CONFIG.DND5E.creatureTypes).find(([k, v]) => {
+        return (typeLc === k)
+          || (typeLc === game.i18n.localize(v).toLowerCase())
+          || (typeLc === game.i18n.localize(`${v}Pl`).toLowerCase());
+      });
+      if ( typeMatch ) source.type.value = typeMatch[0];
+      else {
+        source.type.value = "custom";
+        source.type.custom = match.groups.type.trim().titleCase();
+      }
+      source.type.subtype = match.groups.subtype?.trim().titleCase() ?? "";
+
+      // Match a swarm
+      if ( match.groups.size ) {
+        const sizeLc = match.groups.size ? match.groups.size.trim().toLowerCase() : "tiny";
+        const sizeMatch = Object.entries(CONFIG.DND5E.actorSizes).find(([k, v]) => {
+          return (sizeLc === k) || (sizeLc === game.i18n.localize(v).toLowerCase());
+        });
+        source.type.swarm = sizeMatch ? sizeMatch[0] : "tiny";
+      }
+      else source.type.swarm = "";
+    }
+
+    // No match found
+    else {
+      source.type.value = "custom";
+      source.type.custom = original;
+    }
+  }
 }
 
 /**
