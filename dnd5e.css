@@ -486,7 +486,8 @@
 .dnd5e .items-list .item .item-name .item-image {
   flex: 0 0 30px;
   height: 30px;
-  background-size: 30px;
+  background-size: cover;
+  background-position: 50% 0;
   border: none;
   margin-right: 5px;
 }
@@ -1383,7 +1384,8 @@
 .dnd5e.advancement.flow .item-name .item-image {
   flex: 0 0 30px;
   height: 30px;
-  background-size: 30px;
+  background-size: cover;
+  background-position: 50% 0;
   margin-inline-end: 5px;
 }
 .dnd5e.advancement.flow .item-name label {
