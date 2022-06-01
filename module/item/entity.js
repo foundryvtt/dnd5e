@@ -486,10 +486,10 @@ export default class Item5e extends Item {
   getMinimumRoll() {
     const itemData = this.data.data;
     const actorFlags = this.actor.data.flags.dnd5e || {};
-    if ( !this.hasAttack || !itemData ) return;
+    if ( !this.hasAttack || !itemData ) return null;
 
     // Return the minimum from the flag
-    return actorFlags?.minimumAttackRoll;
+    return actorFlags?.minimumAttackRoll ?? null;
   }
 
   /* -------------------------------------------- */
