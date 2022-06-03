@@ -1768,7 +1768,7 @@ export default class Actor5e extends Actor {
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
-    keepItems=false, keepBio=false, keepVision=false, transformTokens=true }={}) {
+    keepItems=false, keepBio=false, keepVision=false, transformTokens=true, openSheet=true }={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1893,7 +1893,7 @@ export default class Actor5e extends Actor {
     });
 
     // Create new Actor with transformed data
-    const newActor = await this.constructor.create(d, {renderSheet: true});
+    const newActor = await this.constructor.create(d, {renderSheet: openSheet});
 
     // Update placed Token instances
     if ( !transformTokens ) return;
