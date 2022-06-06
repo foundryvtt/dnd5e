@@ -57,6 +57,8 @@ import ActiveEffect5e from "./module/active-effect.js";
 Hooks.once("init", function() {
   console.log(`DnD5e | Initializing the DnD5e Game System\n${DND5E.ASCII}`);
 
+  if ( game.release.generation < 10 ) _patchSystemData();
+
   // Create a namespace within the game global
   game.dnd5e = {
     advancement,
@@ -255,3 +257,21 @@ Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("getActorDirectoryEntryContext", Actor5e.addDirectoryContextOptions);
+
+
+/* -------------------------------------------- */
+/*  V9-V10 Cross Compatibility                  */
+/* -------------------------------------------- */
+
+/**
+ * Patch v9 instances of Document types with `system` object linking to `data.data`.
+ */
+function _patchSystemData() {
+  for ( const Type of [ActiveEffect5e, Actor5e, Item5e, TokenDocument5e] ) {
+    Object.defineProperty(Type.prototype, "system", {
+      get() { return this.data.data; },
+      configurable: true,
+      enumerable: true
+    });
+  }
+}
