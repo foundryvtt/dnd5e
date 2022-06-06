@@ -357,6 +357,26 @@
     "htmlFields": ["details.biography.value", "details.biography.public"],
     "character": {
       "templates": ["common", "creature"],
+      "abilities": {
+        "str": {
+          "max": 20
+        },
+        "dex": {
+          "max": 20
+        },
+        "con": {
+          "max": 20
+        },
+        "int": {
+          "max": 20
+        },
+        "wis": {
+          "max": 20
+        },
+        "cha": {
+          "max": 20
+        }
+      },
       "attributes": {
         "hp": {
           "value": 0,
