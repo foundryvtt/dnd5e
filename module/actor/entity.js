@@ -71,7 +71,11 @@ export default class Actor5e extends Actor {
   prepareBaseData() {
     const updates = {};
     this._prepareBaseAbilities(this.data, updates);
-    if ( !foundry.utils.isObjectEmpty(updates) ) this.data.update(updates);
+    this._prepareBaseSkills(this.data, updates);
+    if ( !foundry.utils.isObjectEmpty(updates) ) {
+      if ( !this.id ) this.data.update(updates);
+      else this.update(updates);
+    }
 
     this._prepareBaseArmorClass(this.data);
     switch ( this.data.type ) {
@@ -348,21 +352,46 @@ export default class Actor5e extends Actor {
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
       abilities[key] = actorData.data.abilities[key];
       if ( !abilities[key] ) {
-        const newAbility = foundry.utils.deepClone(emptyAbility);
+        abilities[key] = foundry.utils.deepClone(emptyAbility);
 
         // Honor & Sanity default to Charisma & Wisdom for NPCs and 0 for vehicles
         if ( actorData.type === "npc" ) {
-          if ( key === "hon" ) newAbility.value = actorData.data.abilities.cha?.value ?? 10;
-          else if ( key === "san" ) newAbility.value = actorData.data.abilities.wis?.value ?? 10;
+          if ( key === "hon" ) abilities[key].value = actorData.data.abilities.cha?.value ?? 10;
+          else if ( key === "san" ) abilities[key].value = actorData.data.abilities.wis?.value ?? 10;
         } else if ( (actorData.type === "vehicle") && ["hon", "san"].includes(key) ) {
-          newAbility.value = 0;
+          abilities[key].value = 0;
         }
 
-        updates[`data.abilities.${key}`] = newAbility;
+        updates[`data.abilities.${key}`] = foundry.utils.deepClone(abilities[key]);
       }
     }
     actorData.data.abilities = abilities;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the actor's skill list to match the skills configured in `DND5E.skills`.
+   * @param {ActorData} actorData  Data being prepared.
+   * @param {object} updates       Updates to be applied to the actor. *Will be mutated*.
+   * @private
+   */
+  _prepareBaseSkills(actorData, updates) {
+    if ( this.data.type === "vehicle") return;
+    const skills = {};
+    const emptySkill = game.system.template.Actor.templates.creature.skills.acr;
+    for ( const [key, skill] of Object.entries(CONFIG.DND5E.skills) ) {
+      skills[key] = actorData.data.skills[key];
+      if ( !skills[key] ) {
+        skills[key] = foundry.utils.deepClone(emptySkill);
+        skills[key].ability = skill.ability;
+        updates[`data.skills.${key}`] = foundry.utils.deepClone(skills[key]);
+      }
+    }
+    actorData.data.skills = skills;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Perform any Character specific preparation.
@@ -938,6 +967,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
+    const label = CONFIG.DND5E.skills[skillId]?.label ?? "";
     const skl = this.data.data.skills[skillId];
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
@@ -987,7 +1017,7 @@ export default class Actor5e extends Actor {
     const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
-    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]});
+    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: label});
     const rollData = foundry.utils.mergeObject(options, {
       parts: parts,
       data: data,

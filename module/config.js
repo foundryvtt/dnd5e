@@ -50,6 +50,38 @@ preLocalize("abilityAbbreviations");
 /* -------------------------------------------- */
 
 /**
+ * The set of skill which can be trained with their default ability scores.
+ * @enum {{
+ *   label: string,
+ *   ability: string
+ * }}
+ */
+DND5E.skills = {
+  acr: { label: "DND5E.SkillAcr", ability: "dex" },
+  ani: { label: "DND5E.SkillAni", ability: "wis" },
+  arc: { label: "DND5E.SkillArc", ability: "int" },
+  ath: { label: "DND5E.SkillAth", ability: "str" },
+  dec: { label: "DND5E.SkillDec", ability: "cha" },
+  his: { label: "DND5E.SkillHis", ability: "int" },
+  ins: { label: "DND5E.SkillIns", ability: "wis" },
+  itm: { label: "DND5E.SkillItm", ability: "cha" },
+  inv: { label: "DND5E.SkillInv", ability: "int" },
+  med: { label: "DND5E.SkillMed", ability: "wis" },
+  nat: { label: "DND5E.SkillNat", ability: "int" },
+  prc: { label: "DND5E.SkillPrc", ability: "wis" },
+  prf: { label: "DND5E.SkillPrf", ability: "cha" },
+  per: { label: "DND5E.SkillPer", ability: "cha" },
+  rel: { label: "DND5E.SkillRel", ability: "int" },
+  slt: { label: "DND5E.SkillSlt", ability: "dex" },
+  ste: { label: "DND5E.SkillSte", ability: "dex" },
+  sur: { label: "DND5E.SkillSur", ability: "wis" }
+};
+preLocalize("skills", { key: "label", sort: true });
+patchConfig("skills", "label", { since: 1.7, until: 1.9 });
+
+/* -------------------------------------------- */
+
+/**
  * Character alignment options.
  * @enum {string}
  */
@@ -792,34 +824,6 @@ preLocalize("senses", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * The set of skill which can be trained.
- * @enum {string}
- */
-DND5E.skills = {
-  acr: "DND5E.SkillAcr",
-  ani: "DND5E.SkillAni",
-  arc: "DND5E.SkillArc",
-  ath: "DND5E.SkillAth",
-  dec: "DND5E.SkillDec",
-  his: "DND5E.SkillHis",
-  ins: "DND5E.SkillIns",
-  itm: "DND5E.SkillItm",
-  inv: "DND5E.SkillInv",
-  med: "DND5E.SkillMed",
-  nat: "DND5E.SkillNat",
-  prc: "DND5E.SkillPrc",
-  prf: "DND5E.SkillPrf",
-  per: "DND5E.SkillPer",
-  rel: "DND5E.SkillRel",
-  slt: "DND5E.SkillSlt",
-  ste: "DND5E.SkillSte",
-  sur: "DND5E.SkillSur"
-};
-preLocalize("skills", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * Various different ways a spell can be prepared.
  */
 DND5E.spellPreparationModes = {
@@ -1302,3 +1306,34 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
  * @type {string[]}
  */
 DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
+
+/* -------------------------------------------- */
+
+/**
+ * Patch an existing config enum to allow conversion from string values to object values without
+ * breaking existing modules that are expecting strings.
+ * @param {string}
+ * @param {string}
+ * @param {object} [options={}]            Additional options which customize logging.
+ * @param {number} [options.mode]  A logging level in COMPATIBILITY_MODES which overrides the configured default.
+ * @param {number|string} [options.since]  A version identifier since which a change was made.
+ * @param {number|string} [options.until]  A version identifier until which a change remains supported.
+ * @param {string} [options.details]       Additional details to append to the logged message.
+ * @param {boolean} [options.stack=true]   Include the message stack trace.
+ */
+function patchConfig(key, fallbackKey, { mode, since, until, details, stack=true }={}) {
+  function toString() {
+    const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
+      +` The former value can be acccessed from .${fallbackKey}.`;
+    if ( game.release.generation < 10 ) {
+      const alerts = [message];
+      if ( since ) alerts.push(`Deprecated since Version ${since}`);
+      if ( until ) alerts.push(`Backwards-compatible support will be removed in Version ${until}`);
+      const error = new Error(alerts.join("\n"));
+      console.warn(stack ? error : error.message);
+    } else foundry.utils.logCompatibilityWarning(message, { mode, since, until, stack });
+    return this[fallbackKey];
+  }
+
+  Object.values(DND5E[key]).forEach(o => o.toString = toString);
+}
