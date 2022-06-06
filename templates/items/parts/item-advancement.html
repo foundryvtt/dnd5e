@@ -5,12 +5,12 @@
         <div class="item-controls flexrow configuration-mode-control">
           {{#if isEmbedded}}
             {{#if advancementEditable}}
-              <a class="item-control toggle-configuration"
+              <a class="item-control" data-action="toggle-configuration"
                 title="{{localize 'DND5E.AdvancementConfigurationActionDisable'}}">
                 <i class="fas fa-lock-open"></i> {{localize "DND5E.AdvancementConfigurationModeEnabled"}}
               </a>
             {{else}}
-              <a class="item-control toggle-configuration"
+              <a class="item-control" data-action="toggle-configuration"
                 title="{{localize 'DND5E.AdvancementConfigurationActionEnable'}}">
                 <i class="fas fa-lock"></i> {{localize "DND5E.AdvancementConfigurationModeDisabled"}}
               </a>
@@ -19,7 +19,9 @@
         </div>
         {{#if advancementEditable}}
           <div class="item-controls flexrow add-button">
-            <a class="item-control item-add" title="{{localize 'DND5E.ItemCreate'}}"><i class="fas fa-plus"></i></a>
+            <a class="item-control" data-action="add" title="{{localize 'DND5E.AdvancementControlCreate'}}">
+              <i class="fas fa-plus"></i>
+            </a>
           </div>
         {{/if}}
       </li>
@@ -39,7 +41,7 @@
 
         {{#if (and @root.editable data.configured (ne level "unconfigured"))}}
           <div>
-            <a class="item-control modify-choices">{{localize "DND5E.AdvancementModifyChoices"}}</a>
+            <a class="item-control" data-action="modify-choices">{{localize "DND5E.AdvancementModifyChoices"}}</a>
           </div>
         {{/if}}
 
@@ -55,7 +57,7 @@
       </li>
       <ol class="item-list">
         {{#each data.items}}
-          <li class="item flexrow" data-id="{{this.id}}">
+          <li class="advancement-item item flexrow" data-id="{{this.id}}">
             <div class="item-name flexrow">
               <div class="item-image" style="background-image: url('{{this.icon}}')"></div>
               <h4>{{{this.title}}}</h4>
@@ -71,8 +73,12 @@
             {{/if}}
             {{#if @root.advancementEditable}}
               <div class="item-controls flexrow">
-                  <a class="item-control item-edit" title="{{localize 'DND5E.ItemEdit'}}"><i class="fas fa-edit"></i></a>
-                  <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}"><i class="fas fa-trash"></i></a>
+                  <a class="item-control" data-action="edit" title="{{localize 'DND5E.AdvancementControlEdit'}}">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a class="item-control" data-action="delete" title="{{localize 'DND5E.AdvancementControlDelete'}}">
+                    <i class="fas fa-trash"></i>
+                  </a>
               </div>
             {{/if}}
             {{#if this.summary}}

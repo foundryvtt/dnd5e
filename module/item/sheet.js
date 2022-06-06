@@ -414,10 +414,56 @@ export default class ItemSheet5e extends ItemSheet {
         if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
-      html.find(".advancement .item-control").click(this._onAdvancementAction.bind(this));
+      html.find(".advancement .item-control").click(event => {
+        const t = event.currentTarget;
+        if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
+      });
       // TODO: Remove this when UUID links are supported in v10
       html.find(".actor-item-link").click(this._onClickContentLink.bind(this));
     }
+
+    // Advancement context menu
+    const contextOptions = this._getAdvancementContextMenuOptions();
+    /**
+     * A hook event that fires when the context menu for the advancements list is constructed.
+     * @function dnd5e.getItemAdvancementContext
+     * @memberof hookEvents
+     * @param {jQuery} html                      The HTML element to which the context options are attached.
+     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
+     */
+    Hooks.call("dnd5e.getItemAdvancementContext", html, contextOptions);
+    if ( contextOptions ) new ContextMenu(html, ".advancement-item", contextOptions);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the set of ContextMenu options which should be applied for advancement entries.
+   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * @private
+   */
+  _getAdvancementContextMenuOptions() {
+    const condition = li => (this.advancementConfigurationMode || !this.isEmbedded) && this.isEditable;
+    return [
+      {
+        name: "DND5E.AdvancementControlEdit",
+        icon: "<i class='fas fa-edit fa-fw'></i>",
+        condition,
+        callback: li => this._onAdvancementAction(li[0], "edit")
+      },
+      {
+        name: "DND5E.AdvancementControlDuplicate",
+        icon: "<i class='fas fa-copy fa-fw'></i>",
+        condition,
+        callback: li => this._onAdvancementAction(li[0], "duplicate")
+      },
+      {
+        name: "DND5E.AdvancementControlDelete",
+        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
+        condition,
+        callback: li => this._onAdvancementAction(li[0], "delete")
+      }
+    ];
   }
 
   /* -------------------------------------------- */
@@ -488,35 +534,28 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle creating the advancement selection window when the add button is pressed.
-   * @param {Event} event  The click event which originated the creation.
+   * Handle one of the advancement actions from the buttons or context menu.
+   * @param {Element} target  Button or context menu entry that triggered this action.
+   * @param {string} action   Action being triggered.
    * @returns {Promise}
    */
-  _onAdvancementAction(event) {
-    const cl = event.currentTarget.classList;
-    if ( cl.contains("item-add") ) return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
-
-    if ( cl.contains("modify-choices") ) {
-      const level = event.currentTarget.closest("li")?.dataset.level;
-      const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
-      if ( manager.steps.length ) manager.render(true);
-      return;
-    }
-
-    if ( cl.contains("toggle-configuration") ) {
-      this.advancementConfigurationMode = !this.advancementConfigurationMode;
-      return this.render();
-    }
-
-    const id = event.currentTarget.closest("li.item")?.dataset.id;
+  _onAdvancementAction(target, action) {
+    const id = target.closest(".advancement-item")?.dataset.id;
     const advancement = this.item.advancement.byId[id];
-    if ( !advancement ) return;
-
-    if ( cl.contains("item-edit") ) {
-      const config = new advancement.constructor.metadata.apps.config(advancement);
-      return config.render(true);
-    } else if ( cl.contains("item-delete") ) {
-      return this.item.deleteAdvancement(id);
+    if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
+    switch (action) {
+      case "add": return game.dnd5e.advancement.AdvancementSelection.createDialog(this.item);
+      case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
+      case "delete": return this.item.deleteAdvancement(id);
+      case "duplicate": return this.item.duplicateAdvancement(id);
+      case "modify-choices":
+        const level = target.closest("li")?.dataset.level;
+        const manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
+        if ( manager.steps.length ) manager.render(true);
+        return;
+      case "toggle-configuration":
+        this.advancementConfigurationMode = !this.advancementConfigurationMode;
+        return this.render();
     }
   }
 
