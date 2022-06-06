@@ -1,15 +1,10 @@
 {{!-- Activation Cost --}}
 <div class="form-group input-select">
-    <label>{{ localize "DND5E.ItemActivationCost" }}</label>
+    <label>{{localize "DND5E.ItemActivationCost"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="-"/>
-        <select name="data.activation.type">
-            {{#select data.activation.type}}
-            <option value=""></option>
-            {{#each config.abilityActivationTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+        <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder="&mdash;">
+        <select name="data.activation.type" title="{{localize 'DND5E.ItemActivationType'}}">
+            {{selectOptions config.abilityActivationTypes selected=data.activation.type blank=""}}
         </select>
     </div>
 </div>
@@ -17,23 +12,18 @@
 
 {{!-- Activation Condition --}}
 <div class="form-group">
-    <label>{{ localize "DND5E.ItemActivationCondition" }}</label>
+    <label>{{localize "DND5E.ItemActivationCondition"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.activation.condition" value="{{data.activation.condition}}"/>
+        <input type="text" name="data.activation.condition" value="{{data.activation.condition}}">
     </div>
 </div>
 
 {{#if isCrewed}}
 <div class="form-group">
-    <label>{{localize 'DND5E.Cover'}}</label>
+    <label>{{localize "DND5E.Cover"}}</label>
     <div class="form-fields">
         <select name="data.cover" data-dtype="Number">
-            {{#select data.cover}}
-                <option value="">&mdash;</option>
-                {{#each config.cover as |v k|}}
-                    <option value="{{k}}">{{v}}</option>
-                {{/each}}
-            {{/select}}
+            {{selectOptions config.cover selected=data.cover blank=""}}
         </select>
     </div>
 </div>
@@ -41,23 +31,22 @@
 
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
-    <label>{{ localize "DND5E.Target" }}</label>
+    <label>{{localize "DND5E.Target"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="-"/>
-        <select name="data.target.units">
-            {{#select data.target.units}}
-            <option value=""></option>
-            {{#each config.distanceUnits as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+        <input type="text" name="data.target.value" value="{{data.target.value}}" data-dtype="Number" placeholder="&mdash;">
+        <select name="data.target.units" title="{{localize 'DND5E.TargetUnits'}}">
+            {{selectOptions config.movementUnits selected=data.target.units blank=""}}
         </select>
-        <select name="data.target.type">
+        <select name="data.target.type" title="{{localize 'DND5E.TargetType'}}">
             {{#select data.target.type}}
-            <option value=""></option>
-            {{#each config.targetTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
+                <option value=""></option>
+                <option value="none">{{ localize "DND5E.None" }}</option>
+                <optgroup label="{{localize 'DND5E.TargetTypeIndividual'}}">
+                    {{selectOptions config.individualTargetTypes}}
+                </optgroup>
+                <optgroup label="{{localize 'DND5E.TargetTypeArea'}}">
+                    {{selectOptions config.areaTargetTypes labelAttr="label"}}
+                </optgroup>
             {{/select}}
         </select>
     </div>
@@ -66,87 +55,62 @@
 {{!-- Ability Target Width --}}
 {{#if isLine}}
 <div class="form-group input-select-select">
-    <label>{{ localize "DND5E.TargetWidth" }}</label>
+    <label>{{localize "DND5E.TargetWidth"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.target.width" value="{{data.target.width}}" data-dtype="Number" placeholder="-"/>
+        <input type="text" name="data.target.width" value="{{data.target.width}}" data-dtype="Number" placeholder="&mdash;">
     </div>
 </div>
 {{/if}}
 
 {{!-- Ability Range --}}
 <div class="form-group input-select">
-    <label>{{ localize "DND5E.Range" }}</label>
+    <label>{{localize "DND5E.Range"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Normal' }}"/>
+        <input type="text" name="data.range.value" value="{{data.range.value}}" data-dtype="Number" placeholder="{{localize 'DND5E.Normal'}}" title="{{localize 'DND5E.RangeNormal'}}">
         <span class="sep">/</span>
-        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
-        <select name="data.range.units">
-            {{#select data.range.units}}
-            <option value=""></option>
-            {{#each config.distanceUnits as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+        <input type="text" name="data.range.long" value="{{data.range.long}}" data-dtype="Number" placeholder="{{localize 'DND5E.Max'}}" title="{{localize 'DND5E.RangeMax'}}">
+        <select name="data.range.units" title="{{localize 'DND5E.RangeUnits'}}">
+            {{selectOptions config.distanceUnits selected=data.range.units blank=""}}
         </select>
     </div>
 </div>
 
 {{!-- Effect Duration --}}
 <div class="form-group input-select">
-    <label>{{ localize "DND5E.Duration" }}</label>
+    <label>{{localize "DND5E.Duration"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="-"/>
-        <select name="data.duration.units">
-            {{#select data.duration.units}}
-            <option value=""></option>
-            {{#each config.timePeriods as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+        <input type="text" name="data.duration.value" value="{{data.duration.value}}" data-dtype="Number" placeholder="&mdash;" title="{{localize 'DND5E.DurationValue'}}">
+        <select name="data.duration.units" title="{{localize 'DND5E.DurationType'}}">
+            {{selectOptions config.timePeriods selected=data.duration.units blank=""}}
         </select>
     </div>
 </div>
 
 {{!-- Limited Uses --}}
 <div class="form-group uses-per">
-    <label>{{ localize "DND5E.LimitedUses" }}</label>
+    <label>{{localize "DND5E.LimitedUses"}}</label>
     <div class="form-fields">
-        <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number"/>
-        <span class="sep">{{ localize "DND5E.of" }}</span>
-        <input type="text" name="data.uses.max" value="{{data.uses.max}}"/>
-        <span class="sep">{{ localize "DND5E.per" }}</span>
-        <select name="data.uses.per">
-            {{#select data.uses.per}}
-            <option value=""></option>
-            {{#each config.limitedUsePeriods as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+        <input type="text" name="data.uses.value" value="{{data.uses.value}}" data-dtype="Number" title="{{localize 'DND5E.UsesAvailable'}}">
+        <span class="sep">{{localize "DND5E.of"}}</span>
+        <input type="text" name="data.uses.max" value="{{data.uses.max}}" title="{{localize 'DND5E.UsesMax'}}">
+        <span class="sep">{{localize "DND5E.per"}}</span>
+        <select name="data.uses.per" title="{{localize 'DND5E.UsesPeriod'}}">
+            {{selectOptions config.limitedUsePeriods selected=data.uses.per blank=""}}
         </select>
     </div>
 </div>
 
 {{!-- Consumption --}}
 <div class="form-group uses-per">
-    <label>{{ localize "DND5E.ConsumeTitle" }}</label>
+    <label>{{localize "DND5E.ConsumeTitle"}}</label>
     <div class="form-fields">
-        <select name="data.consume.type">
-            {{#select data.consume.type}}
-            <option value=""></option>
-            {{#each config.abilityConsumptionTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+        <select name="data.consume.type" title="{{localize 'DND5E.ConsumeType'}}">
+            {{selectOptions config.abilityConsumptionTypes selected=data.consume.type blank=""}}
         </select>
-        <select name="data.consume.target">
-            {{#select data.consume.target}}
-            <option value=""></option>
-            {{#each abilityConsumptionTargets as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+        <select name="data.consume.target" title="{{localize 'DND5E.ConsumeTarget'}}">
+            {{selectOptions abilityConsumptionTargets selected=data.consume.target blank=""}}
         </select>
-        <input type="text" name="data.consume.amount" value="{{data.consume.amount}}" data-dtype="Number"/>
+        <input type="text" name="data.consume.amount" value="{{data.consume.amount}}" data-dtype="Number" title="{{localize 'DND5E.ConsumeQuanity'}}">
     </div>
 </div>
 {{/if}}
