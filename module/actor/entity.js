@@ -977,6 +977,7 @@ export default class Actor5e extends Actor {
       parts.push("@skillBonus");
       data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);
     }
+    const skillMinimum = Math.max(skl.bonuses?.minimum ?? 0, abl?.bonuses?.checkMinimum ?? 0) || false;
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
     if (options.parts?.length > 0) {
@@ -996,6 +997,7 @@ export default class Actor5e extends Actor {
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: reliableTalent,
+      minimum: skillMinimum,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "skill", skillId }
@@ -1075,6 +1077,9 @@ export default class Actor5e extends Actor {
       parts.push(...options.parts);
     }
 
+    // Add Check Minimum
+    const abilityCheckMinimum = abl?.bonuses?.checkMinimum || false;
+
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject(options, {
@@ -1083,6 +1088,7 @@ export default class Actor5e extends Actor {
       title: `${flavor}: ${this.name}`,
       flavor,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      minimum: abilityCheckMinimum,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "ability", abilityId }
@@ -1136,6 +1142,8 @@ export default class Actor5e extends Actor {
       parts.push(...options.parts);
     }
 
+    const abilitySaveMinimum = abl?.bonuses?.saveMinimum || false;
+
     // Roll and return
     const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
     const rollData = foundry.utils.mergeObject(options, {
@@ -1144,6 +1152,7 @@ export default class Actor5e extends Actor {
       title: `${flavor}: ${this.name}`,
       flavor,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      minimum: abilitySaveMinimum,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "save", abilityId }

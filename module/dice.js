@@ -193,6 +193,7 @@ function _separateAnnotatedTerms(terms) {
  * @param {boolean} [config.elvenAccuracy]   Allow Elven Accuracy to modify this roll?
  * @param {boolean} [config.halflingLucky]   Allow Halfling Luck to modify this roll?
  * @param {boolean} [config.reliableTalent]  Allow Reliable Talent to modify this roll?
+ * @param {number} [config.minimum]          Apply minimum value to the roll (if specified)
  *
  * @param {boolean} [config.chooseModifier=false] Choose the ability modifier that should be used when the roll is made
  * @param {boolean} [config.fastForward=false] Allow fast-forward advantage selection
@@ -211,7 +212,7 @@ function _separateAnnotatedTerms(terms) {
  */
 export async function d20Roll({
   parts=[], data={}, // Roll creation
-  advantage, disadvantage, fumble=1, critical=20, targetValue, elvenAccuracy, halflingLucky, reliableTalent, // Roll customization
+  advantage, disadvantage, fumble=1, critical=20, targetValue, elvenAccuracy, halflingLucky, reliableTalent, minimum, // Roll customization
   chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
   chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
 }={}) {
@@ -236,7 +237,8 @@ export async function d20Roll({
     targetValue,
     elvenAccuracy,
     halflingLucky,
-    reliableTalent
+    reliableTalent,
+    minimum
   });
 
   // Prompt a Dialog to further configure the D20Roll

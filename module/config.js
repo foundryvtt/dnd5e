@@ -1273,6 +1273,13 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Boolean
   },
+  minimumAttackRoll: {
+    name: "DND5E.FlagsMinimumAttackRoll",
+    hint: "DND5E.FlagsMinimumAttackRollHint",
+    section: "DND5E.Feats",
+    type: Number,
+    placeholder: 0
+  },
   weaponCriticalThreshold: {
     name: "DND5E.FlagsWeaponCritThreshold",
     hint: "DND5E.FlagsWeaponCritThresholdHint",
