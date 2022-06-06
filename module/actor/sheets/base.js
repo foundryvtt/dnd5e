@@ -1,7 +1,7 @@
 import Actor5e from "../entity.js";
-import Item5e from "../../item/entity.js";
-import { AdvancementConfirmationDialog } from "../../advancement/advancement-confirmation-dialog.js";
-import { AdvancementManager } from "../../advancement/advancement-manager.js";
+import ActiveEffect5e from "../../active-effect.js";
+import { AdvancementConfirmationDialog, AdvancementManager } from "../../advancement.js";
+import Item5e from "../../item.js";
 import ProficiencySelector from "../../apps/proficiency-selector.js";
 import PropertyAttribution from "../../apps/property-attribution.js";
 import TraitSelector from "../../apps/trait-selector.js";
@@ -13,7 +13,6 @@ import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorSkillConfig from "../../apps/skill-config.js";
 import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
-import ActiveEffect5e from "../../active-effect.js";
 
 
 /**
@@ -22,20 +21,17 @@ import ActiveEffect5e from "../../active-effect.js";
  * @extends {ActorSheet}
  */
 export default class ActorSheet5e extends ActorSheet {
-  constructor(...args) {
-    super(...args);
 
-    /**
-     * Track the set of item filters which are applied
-     * @type {Set}
-     */
-    this._filters = {
-      inventory: new Set(),
-      spellbook: new Set(),
-      features: new Set(),
-      effects: new Set()
-    };
-  }
+  /**
+   * Track the set of item filters which are applied on this sheet.
+   * @type {object<string, Set>}
+   */
+  _filters = {
+    inventory: new Set(),
+    spellbook: new Set(),
+    features: new Set(),
+    effects: new Set()
+  };
 
   /* -------------------------------------------- */
 
@@ -75,9 +71,22 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   getData(options) {
 
+    // The Actor's data
+    const actorData = this.actor.data.toObject(false);
+    const source = this.actor.data._source.data;
+
     // Basic data
     let isOwner = this.actor.isOwner;
-    const data = {
+    const context = {
+      data: actorData.data,
+      actor: actorData,
+      items: actorData.items,
+      labels: this._getLabels(actorData.data),
+      movement: this._getMovementSpeed(actorData),
+      senses: this._getSenses(actorData),
+      effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
+      warnings: this.actor._preparationWarnings,
+      filters: this._filter,
       owner: isOwner,
       limited: this.actor.limited,
       options: this.options,
@@ -90,44 +99,20 @@ export default class ActorSheet5e extends ActorSheet {
       rollData: this.actor.getRollData.bind(this.actor)
     };
 
-    // The Actor's data
-    const actorData = this.actor.data.toObject(false);
-    const source = this.actor.data._source.data;
-    data.actor = actorData;
-    data.data = actorData.data;
-
     // Owned Items
-    data.items = actorData.items;
-    for ( let i of data.items ) {
+    for ( let i of context.items ) {
       const item = this.actor.items.get(i._id);
       i.labels = item.labels;
     }
-    data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-
-    // Labels and filters
-    data.labels = this.actor.labels || {};
-    data.filters = this._filters;
-
-    // Currency Labels
-    data.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
-      obj[k] = c.label;
-      return obj;
-    }, {});
+    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Temporary HP
-    const hp = data.data.attributes.hp;
+    const hp = context.data.attributes.hp;
     if ( hp.temp === 0 ) delete hp.temp;
     if ( hp.tempmax === 0 ) delete hp.tempmax;
 
-    // Proficiency
-    if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
-      data.labels.proficiency = `d${data.data.attributes.prof * 2}`;
-    } else {
-      data.labels.proficiency = `+${data.data.attributes.prof}`;
-    }
-
     // Ability Scores
-    for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
+    for ( const [a, abl] of Object.entries(actorData.data.abilities) ) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
@@ -135,36 +120,49 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Skills
-    if ( actorData.data.skills ) {
-      for (let [s, skl] of Object.entries(actorData.data.skills)) {
-        skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
-        skl.icon = this._getProficiencyIcon(skl.value);
-        skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
-        skl.label = CONFIG.DND5E.skills[s];
-        skl.baseValue = source.skills[s].value;
-      }
+    for ( const [s, skl] of Object.entries(actorData.data.skills ?? {}) ) {
+      skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
+      skl.icon = this._getProficiencyIcon(skl.value);
+      skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
+      skl.label = CONFIG.DND5E.skills[s];
+      skl.baseValue = source.skills[s].value;
     }
-
-    // Movement speeds
-    data.movement = this._getMovementSpeed(actorData);
-
-    // Senses
-    data.senses = this._getSenses(actorData);
 
     // Update traits
     this._prepareTraits(actorData.data.traits);
 
     // Prepare owned items
-    this._prepareItems(data);
-
-    // Prepare active effects
-    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
-
-    // Prepare warnings
-    data.warnings = this.actor._preparationWarnings;
+    this._prepareItems(context);
 
     // Return data to the sheet
-    return data;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare labels object for the context.
+   * @param {object} systemData  System data for the actor being displayed.
+   * @returns {object}           Objects containing various labels.
+   * @private
+   */
+  _getLabels(systemData) {
+    const labels = this.actor.labels ?? {};
+
+    // Currency Labels
+    labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+      obj[k] = c.label;
+      return obj;
+    }, {});
+
+    // Proficiency
+    if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
+      labels.proficiency = `d${systemData.attributes.prof * 2}`;
+    } else {
+      labels.proficiency = `+${systemData.attributes.prof}`;
+    }
+
+    return labels;
   }
 
   /* -------------------------------------------- */
@@ -379,14 +377,14 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Insert a spell into the spellbook object when rendering the character sheet.
-   * @param {object} data      Copy of the Actor data being prepared for display.
-   * @param {object[]} spells  Spells to be included in the spellbook.
-   * @returns {object[]}       Spellbook sections in the proper order.
+   * @param {object} context    Rendering context for the sheet being prepared for display.
+   * @param {object[]} spells   Spells to be included in the spellbook.
+   * @returns {object[]}        Spellbook sections in the proper order.
    * @private
    */
-  _prepareSpellbook(data, spells) {
+  _prepareSpellbook(context, spells) {
     const owner = this.actor.isOwner;
-    const levels = data.data.spells;
+    const levels = context.data.spells;
     const spellbook = {};
 
     // Define some mappings
@@ -410,7 +408,7 @@ export default class ActorSheet5e extends ActorSheet {
         label: label,
         usesSlots: i > 0,
         canCreate: owner,
-        canPrepare: (data.actor.type === "character") && (i >= 1),
+        canPrepare: (context.actor.type === "character") && (i >= 1),
         spells: [],
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
@@ -652,7 +650,7 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       let delta = parseFloat(value);
-      input.value = getProperty(this.actor.data, input.name) + delta;
+      input.value = foundry.utils.getProperty(this.actor.data, input.name) + delta;
     } else if ( value[0] === "=" ) {
       input.value = value.slice(1);
     }

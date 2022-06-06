@@ -1,4 +1,3 @@
-
 /**
  * Description for a single part of a property attribution.
  *
@@ -21,7 +20,6 @@
  * @extends {Application}
  */
 export default class PropertyAttribution extends Application {
-
   constructor(object, attributions, property, options={}) {
     super(options);
     this.object = object;

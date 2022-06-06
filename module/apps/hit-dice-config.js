@@ -3,6 +3,7 @@
  * @implements {DocumentSheet}
  */
 export default class ActorHitDiceConfig extends DocumentSheet {
+
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {

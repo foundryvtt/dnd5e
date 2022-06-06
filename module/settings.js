@@ -1,4 +1,7 @@
-export const registerSystemSettings = function() {
+/**
+ * Set up all of the settings used by the system.
+ */
+export function registerSystemSettings() {
 
   const reload = foundry.utils.debounce(() => window.location.reload(), 250);
 
@@ -190,4 +193,4 @@ export const registerSystemSettings = function() {
     type: Boolean,
     default: false
   });
-};
+}

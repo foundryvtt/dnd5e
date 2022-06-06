@@ -1,6 +1,5 @@
 import ActorSheet5e from "./base.js";
-import { AdvancementConfirmationDialog } from "../../advancement/advancement-confirmation-dialog.js";
-import { AdvancementManager } from "../../advancement/advancement-manager.js";
+import { AdvancementConfirmationDialog, AdvancementManager } from "../../advancement.js";
 
 
 /**
@@ -26,11 +25,11 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @returns {object}  Prepared copy of the actor data ready to be displayed.
    */
   getData() {
-    const sheetData = super.getData();
+    const context = super.getData();
 
     // Resources
-    sheetData.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
-      const res = sheetData.data.resources[r] || {};
+    context.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {
+      const res = context.data.resources[r] || {};
       res.name = r;
       res.placeholder = game.i18n.localize(`DND5E.Resource${r.titleCase()}`);
       if (res && res.value === 0) delete res.value;
@@ -39,29 +38,29 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }, []);
 
     // Experience Tracking
-    sheetData.disableExperience = game.settings.get("dnd5e", "disableExperienceTracking");
-    sheetData.classLabels = this.actor.itemTypes.class.map(c => c.name).join(", ");
-    sheetData.multiclassLabels = this.actor.itemTypes.class.map(c => {
+    context.disableExperience = game.settings.get("dnd5e", "disableExperienceTracking");
+    context.classLabels = this.actor.itemTypes.class.map(c => c.name).join(", ");
+    context.multiclassLabels = this.actor.itemTypes.class.map(c => {
       return [c.data.data.subclass, c.name, c.data.data.levels].filterJoin(" ");
     }).join(", ");
 
     // Weight unit
-    sheetData.weightUnit = game.settings.get("dnd5e", "metricWeightUnits")
+    context.weightUnit = game.settings.get("dnd5e", "metricWeightUnits")
       ? game.i18n.localize("DND5E.AbbreviationKgs")
       : game.i18n.localize("DND5E.AbbreviationLbs");
 
     // Return data for rendering
-    return sheetData;
+    return context;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Organize and classify Owned Items for Character sheets
-   * @param {object} data  Copy of the actor data being prepared for display. *Will be mutated.*
+   * @param {object} context  Rendering context for the sheet being prepared for display. *Will be mutated.*
    * @private
    */
-  _prepareItems(data) {
+  _prepareItems(context) {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
@@ -74,7 +73,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let {items, spells, feats, backgrounds, classes, subclasses} = data.items.reduce((obj, item) => {
+    let {items, spells, feats, backgrounds, classes, subclasses} = context.items.reduce((obj, item) => {
 
       // Item details
       item.img = item.img || CONST.DEFAULT_TOKEN;
@@ -125,7 +124,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
-    const spellbook = this._prepareSpellbook(data, spells);
+    const spellbook = this._prepareSpellbook(context, spells);
     const nPrepared = spells.filter(s => {
       return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
@@ -171,13 +170,13 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Assign and return
-    data.inventory = Object.values(inventory);
-    data.spellbook = spellbook;
-    data.preparedSpells = nPrepared;
-    data.features = Object.values(features);
+    context.inventory = Object.values(inventory);
+    context.spellbook = spellbook;
+    context.preparedSpells = nPrepared;
+    context.features = Object.values(features);
 
     // Labels
-    data.labels.background = backgrounds[0]?.name;
+    context.labels.background = backgrounds[0]?.name;
   }
 
   /* -------------------------------------------- */

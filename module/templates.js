@@ -1,11 +1,12 @@
 import { _linkForUuid } from "./utils.js";
 
+
 /**
  * Define a set of template paths to pre-load
  * Pre-loaded templates are compiled and cached for fast access when rendering
  * @returns {Promise}
  */
-export const preloadHandlebarsTemplates = async function() {
+export async function preloadHandlebarsTemplates() {
   return loadTemplates([
 
     // Shared Partials
@@ -29,16 +30,16 @@ export const preloadHandlebarsTemplates = async function() {
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-controls.html"
   ]);
-};
+}
 
 /* -------------------------------------------- */
 
 /**
  * Register custom Handlebars helpers used by 5e.
  */
-export const registerHandlebarsHelpers = function() {
+export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
     "dnd5e-linkForUuid": _linkForUuid
   });
-};
+}

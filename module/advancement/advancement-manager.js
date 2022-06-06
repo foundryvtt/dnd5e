@@ -140,7 +140,7 @@ export class AdvancementManager extends Application {
     const dataClone = foundry.utils.deepClone(itemData);
     dataClone._id = foundry.utils.randomID();
     if ( itemData.type === "class" ) {
-      if ( game.release.generation === 10 ) dataClone.system.levels = 0
+      if ( game.release.generation === 10 ) dataClone.system.levels = 0;
       else dataClone.data.levels = 0;
       if ( !manager.clone.data.data.details.originalClass ) {
         if ( game.release.generation === 10 ) {

@@ -1,4 +1,5 @@
-import Actor5e from "../actor/entity.js";
+import { Actor5e } from "../actor.js";
+
 
 /**
  * A specialized form used to select from a checklist of attributes, traits, or properties

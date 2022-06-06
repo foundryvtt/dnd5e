@@ -15,9 +15,13 @@ import { preloadHandlebarsTemplates, registerHandlebarsHelpers } from "./module/
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances } from "./module/canvas.js";
 
+// Import Collections
+import actor from "./module/actor.js";
+import advancement from "./module/advancement.js";
+import item from "./module/item.js";
+
 // Import Documents
-import Actor5e from "./module/actor/entity.js";
-import Item5e from "./module/item/entity.js";
+import ActiveEffect5e from "./module/active-effect.js";
 import { TokenDocument5e, Token5e } from "./module/token.js";
 
 // Import Applications
@@ -29,9 +33,6 @@ import ActorHitDiceConfig from "./module/apps/hit-dice-config.js";
 import ActorMovementConfig from "./module/apps/movement-config.js";
 import ActorSensesConfig from "./module/apps/senses-config.js";
 import ActorSheetFlags from "./module/apps/actor-flags.js";
-import ActorSheet5eCharacter from "./module/actor/sheets/character.js";
-import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
-import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
 import ActorSkillConfig from "./module/apps/skill-config.js";
 import ActorTypeConfig from "./module/apps/actor-type.js";
 import ItemSheet5e from "./module/item/sheet.js";
@@ -42,13 +43,11 @@ import ShortRestDialog from "./module/apps/short-rest.js";
 import TraitSelector from "./module/apps/trait-selector.js";
 
 // Import Helpers
-import advancement from "./module/advancement.js";
 import * as chat from "./module/chat.js";
 import * as dice from "./module/dice.js";
 import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
 import * as utils from "./module/utils.js";
-import ActiveEffect5e from "./module/active-effect.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -59,6 +58,7 @@ Hooks.once("init", function() {
 
   // Create a namespace within the game global
   game.dnd5e = {
+    actor,
     advancement,
     applications: {
       AbilityUseDialog,
@@ -68,12 +68,12 @@ Hooks.once("init", function() {
       ActorMovementConfig,
       ActorSensesConfig,
       ActorSheetFlags,
-      ActorSheet5eCharacter,
-      ActorSheet5eNPC,
-      ActorSheet5eVehicle,
+      ActorSheet5eCharacter: actor.sheets.character,
+      ActorSheet5eNPC: actor.sheets.npc,
+      ActorSheet5eVehicle: actor.sheets.vehicle,
       ActorSkillConfig,
       ActorTypeConfig,
-      ItemSheet5e,
+      ItemSheet5e: item.sheet,
       LongRestDialog,
       ProficiencySelector,
       SelectItemsPrompt,
@@ -86,11 +86,12 @@ Hooks.once("init", function() {
     config: DND5E,
     dice,
     entities: {
-      Actor5e,
-      Item5e,
+      Actor5e: actor.document,
+      Item5e: item.document,
       TokenDocument5e,
       Token5e
     },
+    item,
     macros,
     migrations,
     rollItemMacro: macros.rollItem,
@@ -101,8 +102,8 @@ Hooks.once("init", function() {
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = ActiveEffect5e;
-  CONFIG.Actor.documentClass = Actor5e;
-  CONFIG.Item.documentClass = Item5e;
+  CONFIG.Actor.documentClass = actor.document;
+  CONFIG.Item.documentClass = item.document;
   CONFIG.Token.documentClass = TokenDocument5e;
   CONFIG.Token.objectClass = Token5e;
   CONFIG.time.roundTime = 6;
@@ -136,23 +137,23 @@ Hooks.once("init", function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("dnd5e", ActorSheet5eCharacter, {
+  Actors.registerSheet("dnd5e", actor.sheets.character, {
     types: ["character"],
     makeDefault: true,
     label: "DND5E.SheetClassCharacter"
   });
-  Actors.registerSheet("dnd5e", ActorSheet5eNPC, {
+  Actors.registerSheet("dnd5e", actor.sheets.npc, {
     types: ["npc"],
     makeDefault: true,
     label: "DND5E.SheetClassNPC"
   });
-  Actors.registerSheet("dnd5e", ActorSheet5eVehicle, {
+  Actors.registerSheet("dnd5e", actor.sheets.vehicle, {
     types: ["vehicle"],
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("dnd5e", ItemSheet5e, {
+  Items.registerSheet("dnd5e", item.sheet, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
@@ -252,6 +253,6 @@ Hooks.on("renderChatMessage", (app, html, data) => {
   if (game.settings.get("dnd5e", "autoCollapseItemCards")) html.find(".card-content").hide();
 });
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
-Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
-Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
-Hooks.on("getActorDirectoryEntryContext", Actor5e.addDirectoryContextOptions);
+Hooks.on("renderChatLog", (app, html, data) => item.document.chatListeners(html));
+Hooks.on("renderChatPopout", (app, html, data) => item.document.chatListeners(html));
+Hooks.on("getActorDirectoryEntryContext", actor.document.addDirectoryContextOptions);

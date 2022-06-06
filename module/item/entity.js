@@ -1,6 +1,6 @@
-import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
+import { Proficiency } from "../actor.js";
+import { simplifyRollFormula, d20Roll, damageRoll } from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
-import Proficiency from "../actor/proficiency.js";
 
 
 /**
@@ -351,8 +351,8 @@ export default class Item5e extends Item {
 
       // Target Label
       let tgt = data.target || {};
-      if (["none", "touch", "self"].includes(tgt.units)) tgt.value = null;
-      if (["none", "self"].includes(tgt.type)) {
+      if ( ["none", "touch", "self"].includes(tgt.units) ) tgt.value = null;
+      if ( ["none", "self"].includes(tgt.type) ) {
         tgt.value = null;
         tgt.units = null;
       }
@@ -387,7 +387,7 @@ export default class Item5e extends Item {
     }
 
     // If this item is owned, we prepareFinalAttributes() at the end of actor init
-    if (!this.isOwned) this.prepareFinalAttributes();
+    if ( !this.isOwned ) this.prepareFinalAttributes();
   }
 
   /* -------------------------------------------- */
@@ -555,7 +555,7 @@ export default class Item5e extends Item {
     if ( (itemData.consume?.type === "ammo") && this.actor.items ) {
       const ammoItemData = this.actor.items.get(itemData.consume.target)?.data;
 
-      if (ammoItemData) {
+      if ( ammoItemData ) {
         const ammoItemQuantity = ammoItemData.data.quantity;
         const ammoCanBeConsumed = ammoItemQuantity && (ammoItemQuantity - (itemData.consume.amount ?? 0) >= 0);
         const ammoItemAttackBonus = ammoItemData.data.attackBonus;
@@ -613,12 +613,12 @@ export default class Item5e extends Item {
    */
   prepareMaxUses() {
     const data = this.data.data;
-    if (!data.uses?.max) return;
+    if ( !data.uses?.max ) return;
     let max = data.uses.max;
 
     // If this is an owned item and the max is not numeric, we need to calculate it
-    if (this.isOwned && !Number.isNumeric(max)) {
-      if (this.actor.data === undefined) return;
+    if ( this.isOwned && !Number.isNumeric(max) ) {
+      if ( this.actor.data === undefined ) return;
       try {
         const rollData = this.actor.getRollData({ deterministic: true });
         max = Roll.replaceFormulaData(max, rollData, {missing: 0, warn: true});
@@ -670,9 +670,9 @@ export default class Item5e extends Item {
     // Display a configuration dialog to customize the usage
     const needsConfiguration =
       createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
-    if (configureDialog && needsConfiguration) {
+    if ( configureDialog && needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(this);
-      if (!configuration) return;
+      if ( !configuration ) return;
 
       // Determine consumption preferences
       createMeasuredTemplate = Boolean(configuration.placeTemplate);
@@ -1131,15 +1131,14 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll|null>}   A Promise which resolves to the created Roll instance
    */
   async rollAttack(options={}) {
+    if ( !this.hasAttack ) throw new Error("You may not place an Attack Roll with this Item.");
+
     const itemData = this.data.data;
-    const flags = this.actor.data.flags.dnd5e || {};
-    if ( !this.hasAttack ) {
-      throw new Error("You may not place an Attack Roll with this Item.");
-    }
+    const flags = this.actor.data.flags.dnd5e ?? {};
     let title = `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`;
 
     // Get the parts and rollData for this item's attack
-    const {parts, rollData} = this.getAttackToHit();
+    const { parts, rollData } = this.getAttackToHit();
 
     // Handle ammunition consumption
     delete this._ammo;
@@ -1185,7 +1184,7 @@ export default class Item5e extends Item {
     rollConfig.critical = this.getCriticalThreshold();
 
     // Elven Accuracy
-    if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
+    if ( flags.elvenAccuracy && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities(this.abilityMod) ) {
       rollConfig.elvenAccuracy = true;
     }
 
@@ -1220,8 +1219,10 @@ export default class Item5e extends Item {
    */
   rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
+
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
+    const flags = this.actor.data.flags.dnd5e ?? {};
     const messageData = {
       "flags.dnd5e.roll": {type: "damage", itemId: this.id},
       speaker: ChatMessage.getSpeaker({actor: this.actor})
@@ -1274,7 +1275,7 @@ export default class Item5e extends Item {
     }
 
     // Add damage bonus formula
-    const actorBonus = getProperty(actorData, `bonuses.${itemData.actionType}`) || {};
+    const actorBonus = foundry.utils.getProperty(actorData, `bonuses.${itemData.actionType}`) ?? {};
     if ( actorBonus.damage && (parseInt(actorBonus.damage) !== 0) ) {
       parts.push(actorBonus.damage);
     }
@@ -1282,7 +1283,7 @@ export default class Item5e extends Item {
     // Handle ammunition damage
     const ammoData = this._ammo?.data;
 
-    // Only add the ammunition damage if the ammution is a consumable with type 'ammo'
+    // Only add the ammunition damage if the ammunition is a consumable with type 'ammo'
     if ( this._ammo && (ammoData.type === "consumable") && (ammoData.data.consumableType === "ammo") ) {
       parts.push("@ammo");
       rollData.ammo = ammoData.data.damage.parts.map(p => p[0]).join("+");
@@ -1292,7 +1293,7 @@ export default class Item5e extends Item {
 
     // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
     if ( itemData.actionType === "mwak" ) {
-      rollConfig.criticalBonusDice = this.actor.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
+      rollConfig.criticalBonusDice = flags.meleeCriticalDamageDice ?? 0;
     }
 
     // Factor in extra weapon-specific critical damage
@@ -1384,9 +1385,7 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
    */
   async rollFormula({spellLevel}={}) {
-    if ( !this.data.data.formula ) {
-      throw new Error("This Item does not have a formula to roll!");
-    }
+    if ( !this.data.data.formula ) throw new Error("This Item does not have a formula to roll!");
 
     // Define Roll Data
     const rollData = this.getRollData();
@@ -1441,6 +1440,7 @@ export default class Item5e extends Item {
 
     // Prepare roll data
     const rollData = this.getRollData();
+    const flags = this.actor.data.flags.dnd5e ?? {};
     const abl = this.data.data.ability;
     const parts = ["@mod", "@abilityCheckBonus"];
     const title = `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`;
@@ -1458,13 +1458,13 @@ export default class Item5e extends Item {
     }
 
     // Add ability-specific check bonus
-    if ( getProperty(rollData, `abilities.${abl}.bonuses.check`) ) {
-      const checkBonus = getProperty(rollData, `abilities.${abl}.bonuses.check`);
+    if ( foundry.utils.getProperty(rollData, `abilities.${abl}.bonuses.check`) ) {
+      const checkBonus = foundry.utils.getProperty(rollData, `abilities.${abl}.bonuses.check`);
       rollData.abilityCheckBonus = Roll.replaceFormulaData(checkBonus, rollData);
     } else rollData.abilityCheckBonus = 0;
 
     // Add global actor bonus
-    const bonuses = getProperty(this.actor.data.data, "bonuses.abilities") || {};
+    const bonuses = foundry.utils.getProperty(this.actor.data.data, "bonuses.abilities") ?? {};
     if ( bonuses.check ) {
       parts.push("@checkBonus");
       rollData.checkBonus = Roll.replaceFormulaData(bonuses.check, rollData);
@@ -1482,10 +1482,10 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       chooseModifier: true,
-      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
-      reliableTalent: (this.data.data.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
+      halflingLucky: flags.halflingLucky ?? false,
+      reliableTalent: (this.data.data.proficient >= 1) && flags.reliableTalent,
       messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
+        speaker: options.speaker ?? ChatMessage.getSpeaker({actor: this.actor}),
         "flags.dnd5e.roll": {type: "tool", itemId: this.id }
       }
     }, options);
@@ -1519,7 +1519,7 @@ export default class Item5e extends Item {
       if ( !ability ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);
       }
-      rollData.mod = ability?.mod || 0;
+      rollData.mod = ability?.mod ?? 0;
     }
 
     return rollData;

@@ -6,11 +6,12 @@
  * @param {string} skillId                The skill id (e.g. "ins")
  */
 export default class ActorSkillConfig extends DocumentSheet {
-
   constructor(actor, opts, skillId) {
     super(actor, opts);
     this._skillId = skillId;
   }
+
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static get defaultOptions() {

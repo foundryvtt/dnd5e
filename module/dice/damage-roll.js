@@ -17,6 +17,8 @@ export default class DamageRoll extends Roll {
     if ( (this.options.critical !== undefined) && !this.options.configured ) this.configureDamage();
   }
 
+  /* -------------------------------------------- */
+
   /**
    * The HTML template path used to configure evaluation of this Roll
    * @type {string}

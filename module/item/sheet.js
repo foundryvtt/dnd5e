@@ -1,7 +1,8 @@
-import { AdvancementManager } from "../advancement/advancement-manager.js";
+import ActiveEffect5e from "../active-effect.js";
+import { AdvancementManager } from "../advancement.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
 import TraitSelector from "../apps/trait-selector.js";
-import ActiveEffect5e from "../active-effect.js";
+
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -55,53 +56,63 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   async getData(options) {
-    const data = super.getData(options);
-    const itemData = data.data;
-    data.labels = this.item.labels;
-    data.config = CONFIG.DND5E;
-    data.config.spellComponents = {...data.config.spellComponents, ...data.config.spellTags};
-    data.isEmbedded = this.item.isEmbedded;
-    data.advancementEditable = (this.advancementConfigurationMode || !data.isEmbedded) && data.editable;
-
-    // Item Type, Status, and Details
-    data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
-    data.itemStatus = this._getItemStatus(itemData);
-    data.itemProperties = this._getItemProperties(itemData);
-    data.baseItems = await this._getItemBaseTypes(itemData);
-    data.isPhysical = itemData.data.hasOwnProperty("quantity");
-
-    // Potential consumption targets
-    data.abilityConsumptionTargets = this._getItemConsumptionTargets(itemData);
-
-    // Action Details
-    data.hasAttackRoll = this.item.hasAttack;
-    data.isHealing = itemData.data.actionType === "heal";
-    data.isFlatDC = getProperty(itemData, "data.save.scaling") === "flat";
-    data.isLine = ["line", "wall"].includes(itemData.data.target?.type);
+    const context = super.getData(options);
+    const itemData = context.data;
 
     // Original maximum uses formula
     const sourceMax = foundry.utils.getProperty(this.item.data._source, "data.uses.max");
     if ( sourceMax ) itemData.data.uses.max = sourceMax;
+    const isMountable = this._isItemMountable(itemData);
 
-    // Vehicles
-    data.isCrewed = itemData.data.activation?.type === "crew";
-    data.isMountable = this._isItemMountable(itemData);
+    const data = {
+      labels: this.item.labels,
+      isEmbedded: this.item.isEmbedded,
+      advancementEditable: (this.advancementConfigurationMode || !this.item.isEmbedded) && context.editable,
 
-    // Armor Class
-    data.isArmor = this.item.isArmor;
-    data.hasAC = data.isArmor || data.isMountable;
-    data.hasDexModifier = data.isArmor && (itemData.data.armor?.type !== "shield");
+      // Item Type, Status, and Details
+      itemType: game.i18n.localize(`ITEM.Type${context.item.type.titleCase()}`),
+      itemStatus: this._getItemStatus(itemData),
+      itemProperties: this._getItemProperties(itemData),
+      baseItems: await this._getItemBaseTypes(itemData),
+      isPhysical: itemData.data.hasOwnProperty("quantity"),
 
-    // Advancement
-    data.advancement = this._getItemAdvancement(this.item);
+      // Potential consumption targets
+      abilityConsumptionTargets: this._getItemConsumptionTargets(itemData),
 
-    // Prepare Active Effects
-    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
+      // Action Details
+      hasAttackRoll: this.item.hasAttack,
+      isHealing: itemData.data.actionType === "heal",
+      isFlatDC: getProperty(itemData, "data.save.scaling") === "flat",
+      isLine: ["line", "wall"].includes(itemData.data.target?.type),
 
-    // Re-define the template data references (backwards compatible)
-    data.item = itemData;
-    data.data = itemData.data;
-    return data;
+      // Vehicles
+      isCrewed: itemData.data.activation?.type === "crew",
+      isMountable,
+
+      // Armor Class
+      isArmor: this.item.isArmor,
+      hasAC: this.item.isArmor || isMountable,
+      hasDexModifier: this.item.isArmor && (itemData.data.armor?.type !== "shield"),
+
+      // Advancement
+      advancement: this._getItemAdvancement(this.item),
+
+      // Prepare Active Effects
+      effects: ActiveEffect5e.prepareActiveEffectCategories(this.item.effects),
+
+      // Re-define the template data references (backwards compatible)
+      item: itemData,
+      data: itemData.data
+    };
+
+    delete context.item;
+    delete context.data;
+    foundry.utils.mergeObject(context, data);
+    context.config = foundry.utils.mergeObject(CONFIG.DND5E, {
+      spellComponents: { ...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags }
+    }, {inplace: false});
+
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -368,8 +379,8 @@ export default class ItemSheet5e extends ItemSheet {
     // Create the expanded update data object
     const fd = new FormDataExtended(this.form, {editors: this.editors});
     let data = fd.toObject();
-    if ( updateData ) data = mergeObject(data, updateData);
-    else data = expandObject(data);
+    if ( updateData ) data = foundry.utils.mergeObject(data, updateData);
+    else data = foundry.utils.expandObject(data);
 
     // Handle Damage array
     const damage = data.data?.damage;
@@ -399,7 +410,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Return the flattened submission data
-    return flattenObject(data);
+    return foundry.utils.flattenObject(data);
   }
 
   /* -------------------------------------------- */
@@ -523,7 +534,7 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle clicking on "actor-item-link" content links. Note: This method will be removed in 1.7 when it can
+   * Handle clicking on "actor-item-link" content links. Note: This method will be removed when it can
    * be replaced by UUID links in core.
    * @param {Event} event  Triggering click event.
    * @private

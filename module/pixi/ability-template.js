@@ -1,5 +1,6 @@
 import { DND5E } from "../config.js";
 
+
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
  * @extends {MeasuredTemplate}

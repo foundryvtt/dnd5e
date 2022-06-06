@@ -26,10 +26,9 @@ export default class ActorArmorConfig extends DocumentSheet {
 
   /** @inheritdoc */
   async getData() {
-
     // Get actor AC data
-    const actorData = foundry.utils.deepClone(this.object.data.data);
-    const ac = foundry.utils.getProperty(actorData, "attributes.ac");
+    const actor = this.object;
+    const ac = actor.constructor.computeArmorClass(actor.data.data, actor.itemTypes.equipment, actor.getRollData());
 
     // Get configuration data for the calculation mode
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
@@ -40,9 +39,8 @@ export default class ActorArmorConfig extends DocumentSheet {
 
     // Return context data
     return {
-      ac: ac,
+      ac,
       calculations: CONFIG.DND5E.armorClasses,
-      value: this.object._computeArmorClass(actorData).value,
       valueDisabled: !["flat", "natural"].includes(ac.calc),
       formula: ac.calc === "custom" ? ac.formula : cfg.formula,
       formulaDisabled: ac.calc !== "custom"
@@ -85,7 +83,9 @@ export default class ActorArmorConfig extends DocumentSheet {
     // Recompute effective AC
     actorData = foundry.utils.mergeObject(actorData, {"data.attributes.ac": {calc, formula}});
     if ( enableFlat ) actorData.data.attributes.ac.flat = flat;
-    ac = this.object._computeArmorClass(actorData.data);
+    ac = this.object.constructor.computeArmorClass(
+      actorData.data, this.object.itemTypes.equipment, this.object.getRollData()
+    );
 
     // Update fields
     this.form["ac.formula"].value = ac.formula;

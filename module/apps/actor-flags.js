@@ -1,8 +1,9 @@
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor
- * @implements {DocumentSheet}
+ * @extends {DocumentSheet}
  */
 export default class ActorSheetFlags extends DocumentSheet {
+
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
@@ -93,7 +94,7 @@ export default class ActorSheetFlags extends DocumentSheet {
       {name: "data.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
     ];
     for ( let b of bonuses ) {
-      b.value = getProperty(this.object.data._source, b.name) || "";
+      b.value = foundry.utils.getProperty(this.object.data._source, b.name) || "";
     }
     return bonuses;
   }

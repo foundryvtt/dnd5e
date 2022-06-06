@@ -159,7 +159,7 @@ export default class D20Roll extends Roll {
     });
 
     let defaultButton = "normal";
-    switch (defaultAction) {
+    switch ( defaultAction ) {
       case D20Roll.ADV_MODE.ADVANTAGE: defaultButton = "advantage"; break;
       case D20Roll.ADV_MODE.DISADVANTAGE: defaultButton = "disadvantage"; break;
     }

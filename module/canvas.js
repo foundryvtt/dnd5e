@@ -1,5 +1,5 @@
 /** @override */
-export const measureDistances = function(segments, options={}) {
+export function measureDistances(segments, options={}) {
   if ( !options.gridSpaces ) return BaseGrid.prototype.measureDistances.call(this, segments, options);
 
   // Track the total number of diagonals
@@ -35,4 +35,4 @@ export const measureDistances = function(segments, options={}) {
     // Standard PHB Movement
     else return (ns + nd) * canvas.scene.data.gridDistance;
   });
-};
+}

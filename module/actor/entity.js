@@ -1,10 +1,11 @@
 import Proficiency from "./proficiency.js";
 import { d20Roll, damageRoll } from "../dice.js";
+import { Item5e } from "../item.js";
+import { simplifyBonus } from "../utils.js";
 import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
-import Item5e from "../item/entity.js";
 
 
 /**
@@ -49,7 +50,7 @@ export default class Actor5e extends Actor {
    * @type {boolean}
    */
   get isPolymorphed() {
-    return this.getFlag("dnd5e", "isPolymorphed") || false;
+    return this.getFlag("dnd5e", "isPolymorphed") ?? false;
   }
 
   /* -------------------------------------------- */
@@ -100,88 +101,53 @@ export default class Actor5e extends Actor {
   prepareDerivedData() {
     const actorData = this.data;
     const data = actorData.data;
-    const flags = actorData.flags.dnd5e || {};
-    const bonuses = getProperty(data, "bonuses.abilities") || {};
+    const flags = actorData.flags.dnd5e ?? {};
+
+    // Reset class store to ensure it is updated with any changes
+    this._classes = undefined;
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
     let originalSkills = null;
-    if (this.isPolymorphed) {
-      const transformOptions = this.getFlag("dnd5e", "transformOptions");
-      const original = game.actors?.get(this.getFlag("dnd5e", "originalActor"));
-      if (original) {
-        if (transformOptions.mergeSaves) {
-          originalSaves = original.data.data.abilities;
-        }
-        if (transformOptions.mergeSkills) {
-          originalSkills = original.data.data.skills;
-        }
+    if ( this.isPolymorphed ) {
+      const transformOptions = flags.transformOptions ?? {};
+      const original = game.actors?.get(flags.originalActor);
+      if ( original ) {
+        if ( transformOptions.mergeSaves ) originalSaves = original.data.data.abilities;
+        if ( transformOptions.mergeSkills ) originalSkills = original.data.data.skills;
       }
     }
 
-    // Ability modifiers and saves
+    // Prepare abilities, skills, & spellcasting
     const bonusData = this.getRollData();
-    const joat = flags.jackOfAllTrades;
-    const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, bonusData);
-    const saveBonus = this._simplifyBonus(bonuses.save, bonusData);
-    const checkBonus = this._simplifyBonus(bonuses.check, bonusData);
-    for (let [id, abl] of Object.entries(data.abilities)) {
-      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
-      abl.mod = Math.floor((abl.value - 10) / 2);
-
-      const isRA = this._isRemarkableAthlete(id);
-      abl.checkProf = new Proficiency(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
-      const saveBonusAbl = this._simplifyBonus(abl.bonuses?.save, bonusData);
-      abl.saveBonus = saveBonusAbl + saveBonus;
-
-      abl.saveProf = new Proficiency(data.attributes.prof, abl.proficient);
-      const checkBonusAbl = this._simplifyBonus(abl.bonuses?.check, bonusData);
-      abl.checkBonus = checkBonusAbl + checkBonus;
-
-      abl.save = abl.mod + abl.saveBonus;
-      if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
-      abl.dc = 8 + abl.mod + data.attributes.prof + dcBonus;
-
-      // If we merged saves when transforming, take the highest bonus here.
-      if (originalSaves && abl.proficient) {
-        abl.save = Math.max(abl.save, originalSaves[id].save);
-      }
-    }
+    const bonuses = actorData.data.bonuses?.abilities ?? {};
+    const checkBonus = simplifyBonus(bonuses.check, bonusData);
+    this._prepareAbilities(actorData, bonusData, bonuses, checkBonus, originalSaves);
+    this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
+    this._prepareSpellcasting(this.data);
 
     // Attuned items
     if ( this.type !== "vehicle" ) data.attributes.attunement.value = this.items.filter(i => {
       return i.data.data.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
     }).length;
 
-    // Inventory encumbrance
-    data.attributes.encumbrance = this._computeEncumbrance(actorData);
+    // Compute armor class
+    const acRollData = this.getRollData({ deterministic: true });
+    data.attributes.ac = this.constructor.computeArmorClass(this.data.data, this.itemTypes.equipment, acRollData);
+    this.armor = data.attributes.ac.equippedArmor ?? null;
+    this.shield = data.attributes.ac.equippedShield ?? null;
+    if ( data.attributes.ac.warnings ) this._preparationWarnings.push(...data.attributes.ac.warnings);
 
-    // Prepare skills
-    this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
-
-    // Reset class store to ensure it is updated with any changes
-    this._classes = undefined;
-
-    // Determine Initiative Modifier
-    this._computeInitiativeModifier(actorData, checkBonus, bonusData);
-
-    // Determine Scale Values
-    this._computeScaleValues(data);
+    // Compute encumbrance, initiative, and scale values
+    data.attributes.encumbrance = this.constructor.computeEncumbrance(this.data.data, this.items, flags);
+    data.attributes.init = this.constructor.computeInitiative(this.data.data, bonusData, flags);
+    data.scale = this.constructor.computeScaleValues(this.classes);
 
     // Cache labels
     this.labels = {};
     if ( this.type === "npc" ) {
       this.labels.creatureType = this.constructor.formatCreatureType(data.details.type);
     }
-
-    // Prepare spell-casting data
-    this._computeSpellcastingProgression(this.data);
-
-    // Prepare armor class data
-    const ac = this._computeArmorClass(data);
-    this.armor = ac.equippedArmor || null;
-    this.shield = ac.equippedShield || null;
-    if ( ac.warnings ) this._preparationWarnings.push(...ac.warnings);
   }
 
   /* -------------------------------------------- */
@@ -204,7 +170,7 @@ export default class Actor5e extends Actor {
    * @returns {number}      The amount of experience granted per kill.
    */
   getCRExp(cr) {
-    if (cr < 1.0) return Math.max(200 * cr, 10);
+    if ( cr < 1.0 ) return Math.max(200 * cr, 10);
     return CONFIG.DND5E.CR_EXP_LEVELS[cr];
   }
 
@@ -333,7 +299,7 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation Helpers                    */
+  /*  Base Data Preparation Helpers               */
   /* -------------------------------------------- */
 
   /**
@@ -363,6 +329,23 @@ export default class Actor5e extends Actor {
     }
     actorData.data.abilities = abilities;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initialize derived AC fields for Active Effects to target.
+   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * @private
+   */
+  _prepareBaseArmorClass(actorData) {
+    const ac = actorData.data.attributes.ac;
+    ac.armor = 10;
+    ac.shield = ac.bonus = ac.cover = 0;
+    this.armor = null;
+    this.shield = null;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Perform any Character specific preparation.
@@ -424,10 +407,47 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareVehicleData(actorData) {
-    const data = actorData.data;
-
     // Proficiency
-    data.attributes.prof = 0;
+    actorData.data.attributes.prof = 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Derived Data Preparation Helpers            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare abilities.
+   * @param {object} actorData      Copy of the data for the actor being prepared. *Will be mutated.*
+   * @param {object} bonusData      Data produced by `getRollData` to be applied to bonus formulas.
+   * @param {object} bonuses        Global bonus data.
+   * @param {number} checkBonus     Global ability check bonus.
+   * @param {object} originalSaves  A transformed actor's original actor's abilities.
+   * @private
+   */
+  _prepareAbilities(actorData, bonusData, bonuses, checkBonus, originalSaves) {
+    const { jackOfAllTrades: joat, diamondSoul } = this.data.flags.dnd5e ?? {};
+    const dcBonus = simplifyBonus(actorData.data.bonuses?.spell?.dc, bonusData);
+    const saveBonus = simplifyBonus(bonuses.save, bonusData);
+    for ( const [id, abl] of Object.entries(actorData.data.abilities) ) {
+      if ( diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
+      abl.mod = Math.floor((abl.value - 10) / 2);
+
+      const isRA = this._isRemarkableAthlete(id);
+      abl.checkProf = new Proficiency(actorData.data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
+      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, bonusData);
+      abl.saveBonus = saveBonusAbl + saveBonus;
+
+      abl.saveProf = new Proficiency(actorData.data.attributes.prof, abl.proficient);
+      const checkBonusAbl = simplifyBonus(abl.bonuses?.check, bonusData);
+      abl.checkBonus = checkBonusAbl + checkBonus;
+
+      abl.save = abl.mod + abl.saveBonus;
+      if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
+      abl.dc = 8 + abl.mod + actorData.data.attributes.prof + dcBonus;
+
+      // If we merged saves when transforming, take the highest bonus here.
+      if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
+    }
   }
 
   /* -------------------------------------------- */
@@ -442,19 +462,15 @@ export default class Actor5e extends Actor {
    * @private
    */
   _prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills) {
-    if (actorData.type === "vehicle") return;
-
-    const data = actorData.data;
-    const flags = actorData.flags.dnd5e || {};
+    if ( actorData.type === "vehicle" ) return;
 
     // Skill modifiers
-    const feats = CONFIG.DND5E.characterFlags;
-    const joat = flags.jackOfAllTrades;
-    const observant = flags.observantFeat;
-    const skillBonus = this._simplifyBonus(bonuses.skill, bonusData);
-    for (let [id, skl] of Object.entries(data.skills)) {
+    const flagConfig = CONFIG.DND5E.characterFlags;
+    const { jackOfAllTrades: joat, observantFeat: observant } = this.data.flags.dnd5e ?? {};
+    const skillBonus = simplifyBonus(bonuses.skill, bonusData);
+    for ( const [id, skl] of Object.entries(actorData.data.skills) ) {
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
-      const baseBonus = this._simplifyBonus(skl.bonuses?.check, bonusData);
+      const baseBonus = simplifyBonus(skl.bonuses?.check, bonusData);
       let roundDown = true;
 
       // Remarkable Athlete
@@ -474,99 +490,19 @@ export default class Actor5e extends Actor {
       }
 
       // Compute modifier
-      const checkBonusAbl = this._simplifyBonus(data.abilities[skl.ability]?.bonuses?.check, bonusData);
+      const ability = actorData.data.abilities[skl.ability];
+      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
       skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
-      skl.mod = data.abilities[skl.ability]?.mod ?? 0;
-      skl.prof = new Proficiency(data.attributes.prof, skl.value, roundDown);
+      skl.mod = ability?.mod ?? 0;
+      skl.prof = new Proficiency(actorData.data.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
       if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
 
       // Compute passive bonus
-      const passive = observant && (feats.observantFeat.skills.includes(id)) ? 5 : 0;
-      const passiveBonus = this._simplifyBonus(skl.bonuses?.passive, bonusData);
+      const passive = observant && (flagConfig.observantFeat.skills.includes(id)) ? 5 : 0;
+      const passiveBonus = simplifyBonus(skl.bonuses?.passive, bonusData);
       skl.passive = 10 + skl.mod + skl.bonus + skl.prof.flat + passive + passiveBonus;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Convert a bonus value to a simple integer for displaying on the sheet.
-   * @param {number|string|null} bonus  Actor's bonus value.
-   * @param {object} data               Actor data to use for replacing @ strings.
-   * @returns {number}                  Simplified bonus as an integer.
-   * @protected
-   */
-  _simplifyBonus(bonus, data) {
-    if ( !bonus ) return 0;
-    if ( Number.isNumeric(bonus) ) return Number(bonus);
-    try {
-      const roll = new Roll(bonus, data);
-      if ( !roll.isDeterministic ) return 0;
-      roll.evaluate({ async: false });
-      return roll.total;
-    } catch(error) {
-      console.error(error);
-      return 0;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Initialize derived AC fields for Active Effects to target.
-   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
-   * @private
-   */
-  _prepareBaseArmorClass(actorData) {
-    const ac = actorData.data.attributes.ac;
-    ac.armor = 10;
-    ac.shield = ac.bonus = ac.cover = 0;
-    this.armor = null;
-    this.shield = null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Calculate the initiative bonus to display on a character sheet
-   *
-   * @param {object} actorData         The actor data being prepared.
-   * @param {number} globalCheckBonus  The simplified global ability check bonus for this actor
-   * @param {object} bonusData         Actor data to use for replacing formula variables in bonuses
-   */
-  _computeInitiativeModifier(actorData, globalCheckBonus, bonusData) {
-    const data = actorData.data;
-    const flags = actorData.flags.dnd5e || {};
-    const init = data.attributes.init;
-
-    // Initiative modifiers
-    const joat = flags.jackOfAllTrades;
-    const athlete = flags.remarkableAthlete;
-    const dexCheckBonus = this._simplifyBonus(data.abilities.dex?.bonuses?.check, bonusData);
-
-    // Compute initiative modifier
-    init.mod = data.abilities.dex?.mod ?? 0;
-    init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
-    init.value = init.value ?? 0;
-    init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
-    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
-    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * @param {object} data  The actor's system data being prepared.
-   * @private
-   */
-  _computeScaleValues(data) {
-    const scale = data.scale = {};
-    for ( const [identifier, cls] of Object.entries(this.classes) ) {
-      scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
     }
   }
 
@@ -575,10 +511,24 @@ export default class Actor5e extends Actor {
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
    * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * @deprecated in favor of new name _prepareSpellcasting since dnd5e 1.7, targeted for removal in 1.9
    * @private
    */
   _computeSpellcastingProgression(actorData) {
-    if (actorData.type === "vehicle") return;
+    console.warn(
+      "Actor5e#_computeSpellcastingProgression has been renamed _prepareSpellcasting. "
+      + " The old naming will be removed in 1.9."
+    );
+    this._prepareSpellcasting(actorData);
+  }
+
+  /**
+   * Prepare data related to the spell-casting capabilities of the Actor.
+   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * @private
+   */
+  _prepareSpellcasting(actorData) {
+    if ( actorData.type === "vehicle" ) return;
     const ad = actorData.data;
     const spells = ad.spells;
     const isNPC = actorData.type === "npc";
@@ -646,7 +596,7 @@ export default class Actor5e extends Actor {
     if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = actorData.data.details.spellLevel;
 
     // Determine the number of Warlock pact slots per level
-    if ( pl > 0) {
+    if ( pl > 0 ) {
       spells.pact.level = Math.ceil(Math.min(10, pl) / 2);
       if ( Number.isNumeric(spells.pact.override) ) spells.pact.max = Math.max(parseInt(spells.pact.override), 1);
       else spells.pact.max = Math.max(1, Math.min(pl, 2), Math.min(pl - 8, 3), Math.min(pl - 13, 4));
@@ -658,28 +608,69 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+  /*  Static Data Computation                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Convert a bonus value to a simple integer for displaying on the sheet.
+   * @param {number|string|null} bonus  Actor's bonus value.
+   * @param {object} data               Actor data to use for replacing @ strings.
+   * @returns {number}                  Simplified bonus as an integer.
+   * @protected
+   */
+  _simplifyBonus(bonus, data) {
+    console.warn(
+      "Actor#_simplifyBonus has been made a utility function and can be accessed "
+      + "at game.dnd5e.utils.simplifyBonus. This method will be removed in 1.9."
+    );
+    return game.dnd5e.utils.simplifyBonus(bonus, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Results of a character's armor class calculation.
+   *
+   * @typedef {object} ArmorClassResult
+   * @property {string} calc              Type of calculation used to determine the AC.
+   * @property {number} value             Final result of the AC calculation.
+   * @property {number} base              Result of the AC formula calculation.
+   * @property {number} shield            Any value added by a wielded shield.
+   * @property {number} bonus             Any additional AC bonus considered.
+   * @property {number} cover             Any AC bonus added by cover.
+   * @property {number} flat              Flat value entered in the AC config dialog.
+   * @property {Item5e} [equippedArmor]   The one armor item that is considered to be in use.
+   * @property {Item5e} [equippedShield]  The one shield item that is considered to be in use.
+   * @property {string[]} warnings        Any warnings generated by armor class calculation.
+   */
 
   /**
    * Determine a character's AC value from their equipped armor and shield.
    * @param {object} data  Copy of the data for the actor being prepared. *Will be mutated.*
-   * @returns {{
-   *   calc: string,
-   *   value: number,
-   *   base: number,
-   *   shield: number,
-   *   bonus: number,
-   *   cover: number,
-   *   flat: number,
-   *   equippedArmor: Item5e,
-   *   equippedShield: Item5e,
-   *   warnings: string[]
-   * }}
+   * @returns {ArmorClassResult}
    * @private
+   * @deprecated in favor of static variant since dnd5e 1.7, targeted for removal in 1.9
    */
   _computeArmorClass(data) {
+    console.warn(
+      "Instance version of Actor5e#_computeArmorClass has been deprecated "
+      + "in favor of its static counterpart Actor5e#computeArmorClass and will be removed in 1.9."
+    );
+    data.attributes.ac = this.constructor.computeArmorClass(
+      data, this.items, this.getRollData({ deterministic: true }));
+    return data.attributes.ac;
+  }
 
+  /**
+   * Determine a character's AC value from their equipped armor and shield.
+   * @param {object} systemData   Actor system data to use when calculating armor class.
+   * @param {Item5e[]} equipment  Array of equipment items on actor containing armor & shields.
+   * @param {object} rollData     Roll data to use when resolving the AC formula.
+   * @returns {ArmorClassResult}
+   */
+  static computeArmorClass(systemData, equipment, rollData) {
     // Get AC configuration and apply automatic migrations for older data structures
-    const ac = data.attributes.ac;
+    const ac = foundry.utils.deepClone(systemData.attributes.ac);
     ac.warnings = [];
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
     if ( !cfg ) {
@@ -690,7 +681,7 @@ export default class Actor5e extends Actor {
 
     // Identify Equipped Items
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
-    const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
+    const {armors, shields} = equipment.reduce((obj, equip) => {
       const armor = equip.data.data.armor;
       if ( !equip.data.data.equipped || !armorTypes.has(armor?.type) ) return obj;
       if ( armor.type === "shield" ) obj.shields.push(equip);
@@ -713,16 +704,15 @@ export default class Actor5e extends Actor {
 
       default:
         let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        const rollData = this.getRollData({ deterministic: true });
         if ( armors.length ) {
           if ( armors.length > 1 ) ac.warnings.push("DND5E.WarnMultipleArmor");
           const armorData = armors[0].data.data.armor;
           const isHeavy = armorData.type === "heavy";
           ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex?.mod ?? 0);
+          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, systemData.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
         } else {
-          ac.dex = data.abilities.dex?.mod ?? 0;
+          ac.dex = systemData.abilities.dex?.mod ?? 0;
         }
         rollData.attributes.ac = ac;
         try {
@@ -751,19 +741,48 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Results of a character's encumbrance calculation.
+   *
+   * @typedef {object} EncumbranceResult
+   * @property {number} value        Weight currently being carried by actor.
+   * @property {number} max          Maximum carrying capacity of this actor.
+   * @property {number} pct          Percentage of total capacity being carried.
+   * @property {boolean} encumbered  Is this actor considered encumbered?
+   */
+
+  /**
    * Compute the level and percentage of encumbrance for an Actor.
    *
    * Optionally include the weight of carried currency across all denominations by applying the standard rule
    * from the PHB pg. 143
-   * @param {object} actorData      The data object for the Actor being rendered
-   * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
+   * @param {object} actorData     The data object for the Actor being rendered
+   * @returns {EncumbranceResult}  An object describing the character's encumbrance level
    * @private
+   * @deprecated in favor of static variant since dnd5e 1.7, targeted for removal in 1.9
    */
   _computeEncumbrance(actorData) {
+    console.warn(
+      "Instance version of Actor5e#_computeEncumbrance has been deprecated "
+      + "in favor of its static counterpart Actor5e#computeEncumbrance and will be removed in 1.9."
+    );
+    return this.constructor.computeEncumbrance(actorData.data, this.items, actorData.flags.dnd5e ?? {});
+  }
 
+  /**
+   * Compute the level and percentage of encumbrance for an Actor.
+   *
+   * Optionally include the weight of carried currency across all denominations by applying the standard rule
+   * from the PHB pg. 143.
+   * @param {object} systemData                    Actor system data to use when determining encumbrance.
+   * @param {Item5e[]} items                       All of the items carried by the actor.
+   * @param {object} flags
+   * @param {boolean} [flags.powerfulBuild=false]  Does this actor has the Powerful Build flag?
+   * @returns {EncumbranceResult}                  An object describing the character's encumbrance level.
+   */
+  static computeEncumbrance(systemData, items, { powerfulBuild=false }) {
     // Get the total weight from items
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
-    let weight = actorData.items.reduce((weight, i) => {
+    let weight = items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
       const q = i.data.data.quantity || 0;
       const w = i.data.data.weight || 0;
@@ -771,8 +790,8 @@ export default class Actor5e extends Actor {
     }, 0);
 
     // [Optional] add Currency Weight (for non-transformed actors)
-    if ( game.settings.get("dnd5e", "currencyWeight") && actorData.data.currency ) {
-      const currency = actorData.data.currency;
+    if ( game.settings.get("dnd5e", "currencyWeight") && systemData.currency ) {
+      const currency = systemData.currency;
       const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
 
       const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
@@ -790,8 +809,8 @@ export default class Actor5e extends Actor {
       lg: 2,
       huge: 4,
       grg: 8
-    }[actorData.data.traits.size] || 1;
-    if ( this.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
+    }[systemData.traits.size] || 1;
+    if ( powerfulBuild ) mod = Math.min(mod * 2, 8);
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
@@ -800,9 +819,100 @@ export default class Actor5e extends Actor {
       ? CONFIG.DND5E.encumbrance.strMultiplier.metric
       : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
 
-    const max = (actorData.data.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
+    const max = ((systemData.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (200/3) };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Results of a character's initiative calculation.
+   *
+   * @typedef {object} InitiativeResult
+   * @property {number} mod        Dexterity modifier.
+   * @property {number} value      User supplied initiative modifier.
+   * @property {number} bonus      User supplied modifier with alert feat factored in.
+   * @property {number} total      Total initiative value with all modifiers & bonuses.
+   * @property {Proficiency} prof  Description of the proficiency applied to initiative.
+   */
+
+  /**
+   * Calculate the initiative bonus to display on a character sheet.
+   * @param {object} actorData         The actor data being prepared.
+   * @param {number} globalCheckBonus  The simplified global ability check bonus for this actor.
+   * @param {object} bonusData         Actor data to use for replacing formula variables in bonuses.
+   * @private
+   * @deprecated in favor of static variant since dnd5e 1.7, targeted for removal in 1.9
+   */
+  _computeInitiativeModifier(actorData, globalCheckBonus, bonusData) {
+    console.warn(
+      "Instance version of Actor5e#_computeInitiativeModifier has been deprecated "
+      + "in favor of its static counterpart Actor5e#computeInitiative and will be removed in 1.9."
+    );
+    actorData.data.attributes.init = this.constructor.computeInitiative(
+      actorData.data, bonusData, actorData.flags.dnd5e ?? {}
+    );
+  }
+
+  /**
+   * Calculate the initiative data for an actor.
+   * @param {object} systemData                        Actor system data to use for deriving the final initiative data.
+   * @param {object} bonusData                         Data produced by `getRollData` to be applied to bonus formulas.
+   * @param {object} flags
+   * @param {boolean} [flags.initiativeAlert=false]    Does this actor have the Alert flag?
+   * @param {boolean} [flags.jackOfAllTrades=false]    Does this actor have Jack of All trades flag?
+   * @param {boolean} [flags.remarkableAthlete=false]  Does this actor have the Remarkable Athlete flag?
+   * @returns {InitiativeResult}                       Calculated initiative object.
+   */
+  static computeInitiative(systemData, bonusData,
+    { initiativeAlert=false, jackOfAllTrades=false, remarkableAthlete=false }) {
+    const init = foundry.utils.deepClone(systemData.attributes.init);
+
+    // Initiative modifiers
+    const dexCheckBonus = simplifyBonus(systemData.abilities.dex?.bonuses?.check, bonusData);
+    const globalCheckBonus = simplifyBonus(systemData.bonuses?.abilities.check, bonusData);
+
+    // Compute initiative data
+    init.mod = systemData.abilities.dex?.mod ?? 0;
+    init.prof = new Proficiency(
+      systemData.attributes.prof, (jackOfAllTrades || remarkableAthlete) ? 0.5 : 0, !remarkableAthlete
+    );
+    init.value = init.value ?? 0;
+    init.bonus = init.value + (initiativeAlert ? 5 : 0);
+    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
+    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
+
+    return init;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Derive any values that have been scaled by the Advancement system.
+   * @param {object} data  The actor's system data being prepared.
+   * @private
+   * @deprecated in favor of static variant since dnd5e 1.7, targeted for removal in 1.9
+   */
+  _computeScaleValues(data) {
+    console.warn(
+      "Instance version of Actor5e#_computeScaleValues has been deprecated "
+      + "in favor of its static counterpart Actor5e#computeScaleValues and will be removed in 1.9."
+    );
+    data.scale = this.constructor.computeScaleValues(this.classes);
+  }
+
+  /**
+   * Derive any values that have been scaled by the Advancement system.
+   * @param {Item5e[]} classes  Classes for which to gather scale value data.
+   * @returns {object}          Scale value data for each class & subclass grouped by identifier.
+   */
+  static computeScaleValues(classes) {
+    return Object.entries(classes).reduce((scale, [identifier, cls]) => {
+      scale[identifier] = cls.scaleValues;
+      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+      return scale;
+    }, {});
   }
 
   /* -------------------------------------------- */
@@ -815,7 +925,7 @@ export default class Actor5e extends Actor {
     const sourceId = this.getFlag("core", "sourceId");
     if ( sourceId?.startsWith("Compendium.") ) return;
 
-    // Some sensible defaults for convenience
+    // Some sensible token defaults for convenience
     // Token size category
     const s = CONFIG.DND5E.tokenSizes[this.data.data.traits.size || "med"];
     this.data.token.update({width: s, height: s});
@@ -834,7 +944,7 @@ export default class Actor5e extends Actor {
 
     // Apply changes in Actor size to Token width/height
     const newSize = foundry.utils.getProperty(changed, "data.traits.size");
-    if ( newSize && (newSize !== foundry.utils.getProperty(this.data, "data.traits.size")) ) {
+    if ( newSize && (newSize !== this.data.data.traits.size) ) {
       let size = CONFIG.DND5E.tokenSizes[newSize];
       if ( !foundry.utils.hasProperty(changed, "token.width") ) {
         changed.token = changed.token || {};
@@ -924,7 +1034,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return this.getFlag("dnd5e", "remarkableAthlete")
+    return this.data.flags.dnd5e?.remarkableAthlete
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
@@ -940,7 +1050,8 @@ export default class Actor5e extends Actor {
   rollSkill(skillId, options={}) {
     const skl = this.data.data.skills[skillId];
     const abl = this.data.data.abilities[skl.ability];
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
+    const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
@@ -984,7 +1095,7 @@ export default class Actor5e extends Actor {
     }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1) && flags.reliableTalent;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]});
@@ -994,7 +1105,7 @@ export default class Actor5e extends Actor {
       title: `${flavor}: ${this.name}`,
       flavor,
       chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       reliableTalent: reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
@@ -1042,6 +1153,8 @@ export default class Actor5e extends Actor {
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.data.data.abilities[abilityId];
+    const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     const parts = [];
     const data = this.getRollData();
@@ -1064,7 +1177,6 @@ export default class Actor5e extends Actor {
     }
 
     // Add global actor bonus
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.check ) {
       parts.push("@checkBonus");
       data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
@@ -1082,7 +1194,7 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "ability", abilityId }
@@ -1103,6 +1215,8 @@ export default class Actor5e extends Actor {
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.data.data.abilities[abilityId];
+    const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     const parts = [];
     const data = this.getRollData();
@@ -1125,7 +1239,6 @@ export default class Actor5e extends Actor {
     }
 
     // Include a global actor ability save bonus
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
@@ -1143,7 +1256,7 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "save", abilityId }
@@ -1160,9 +1273,11 @@ export default class Actor5e extends Actor {
    * @returns {Promise<Roll|null>}  A Promise which resolves to the Roll instance
    */
   async rollDeathSave(options={}) {
+    const death = this.data.data.attributes.death;
+    const bonuses = this.data.data.bonuses?.abilities ?? {};
+    const flags = this.data.flags.dnd5e ?? {};
 
     // Display a warning if we are not at zero HP or if we already have reached 3
-    const death = this.data.data.attributes.death;
     if ( (this.data.data.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
       ui.notifications.warn(game.i18n.localize("DND5E.DeathSaveUnnecessary"));
       return null;
@@ -1174,13 +1289,12 @@ export default class Actor5e extends Actor {
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
 
     // Diamond Soul adds proficiency
-    if ( this.getFlag("dnd5e", "diamondSoul") ) {
+    if ( flags.diamondSoul ) {
       parts.push("@prof");
       data.prof = new Proficiency(this.data.data.attributes.prof, 1).term;
     }
 
     // Include a global actor ability save bonus
-    const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
     if ( bonuses.save ) {
       parts.push("@saveBonus");
       data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
@@ -1193,7 +1307,7 @@ export default class Actor5e extends Actor {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      halflingLucky: flags.halflingLucky,
       targetValue: 10,
       messageData: {
         speaker: speaker,
@@ -1290,17 +1404,14 @@ export default class Actor5e extends Actor {
     }
 
     // Prepare roll data
-    const parts = [`1${denomination}`, "@abilities.con.mod"];
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
-    const title = `${flavor}: ${this.name}`;
-    const data = foundry.utils.deepClone(this.data.data);
 
     // Call the roll helper utility
     const roll = await damageRoll({
       event: new Event("hitDie"),
-      parts,
-      data,
-      title,
+      parts: [`1${denomination}`, "@abilities.con.mod"],
+      data: foundry.utils.deepClone(this.data.data),
+      title: `${flavor}: ${this.name}`,
       flavor,
       allowCritical: false,
       fastForward: !dialog,
@@ -1858,10 +1969,10 @@ export default class Actor5e extends Actor {
     }
 
     // Keep biography
-    if (keepBio) d.data.details.biography = o.data.details.biography;
+    if ( keepBio ) d.data.details.biography = o.data.details.biography;
 
     // Keep senses
-    if (keepVision) d.data.traits.senses = o.data.traits.senses;
+    if ( keepVision ) d.data.traits.senses = o.data.traits.senses;
 
     // Set new data flags
     if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
@@ -2095,10 +2206,13 @@ export default class Actor5e extends Actor {
    * Retrieve the spell save DC for the provided ability.
    * @param {string} ability  Ability key as defined in `CONFIG.DND5E.abilities`.
    * @returns {number}        Spell save DC for provided ability.
-   * @deprecated since dnd5e 0.97
+   * @deprecated since dnd5e 0.97, targeted for removal in 1.9
    */
   getSpellDC(ability) {
-    console.warn("The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc");
+    console.warn(
+      "The Actor5e#getSpellDC(ability) method has been deprecated in favor of"
+      + " Actor5e#data.data.abilities[ability].dc and will be removed in 1.9."
+    );
     return this.data.data.abilities[ability]?.dc;
   }
 
@@ -2109,10 +2223,13 @@ export default class Actor5e extends Actor {
    * @param {Item5e} item   The spell being cast by the actor
    * @param {Event} event   The originating user interaction which triggered the cast
    * @returns {Promise<ChatMessage|object|void>}  Dialog if `configureDialog` is true, else prepared dialog data.
-   * @deprecated since dnd5e 1.2.0
+   * @deprecated since dnd5e 1.2.0, targeted for removal in 1.9
    */
   async useSpell(item, {configureDialog=true}={}) {
-    console.warn("The Actor5e#useSpell method has been deprecated in favor of Item5e#roll");
+    console.warn(
+      "The Actor5e#useSpell method has been deprecated in favor of"
+      + " Item5e#roll and will be removed in 1.9."
+    );
     if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
     return item.roll();
   }
