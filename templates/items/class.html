@@ -68,7 +68,7 @@
             <div class="form-group">
                 <label>{{localize "DND5E.HitDiceUsed"}}</label>
                 <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.hitDiceUsed" value="{{data.hitDiceUsed}}" data-dtype="Number"/>
+                    {{numberInput data.hitDiceUsed name="data.hitDiceUsed" placeholder="0"}}
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
             <div class="form-group">
                 <label>{{localize "DND5E.ClassSkillsNumber"}}</label>
                 <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.skills.number" value="{{data.skills.number}}" data-dtype="Number"/>
+                    {{numberInput data.skills.number name="data.skills.number" placeholder="0"}}
                 </div>
             </div>
 

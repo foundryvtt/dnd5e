@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ArmorClass" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                    {{numberInput data.armor.value name="data.armor.value"}}
                 </div>
             </div>
             {{/if}}
@@ -104,7 +104,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Unlimited' }}"/>
+                    {{numberInput data.armor.dex name="data.armor.dex" placeholder=(localize "DND5E.Unlimited")}}
                 </div>
             </div>
             {{/if}}
@@ -114,7 +114,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemRequiredStr" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="{{ localize 'DND5E.None' }}"/>
+                    {{numberInput data.strength name="data.strength" placeholder=(localize "DND5E.None")}}
                 </div>
             </div>
 
@@ -130,8 +130,7 @@
             <div class="form-group">
                 <label>{{localize 'DND5E.Speed'}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.speed.value" value="{{data.speed.value}}"
-                           placeholder="0" data-dtype="Number">
+                    {{numberInput data.speed.value name="data.speed.value" placeholder="0"}}
                     <span class="sep">{{localize 'DND5E.FeetAbbr'}}</span>
                     <input type="text" name="data.speed.conditions"
                            value="{{data.speed.conditions}}">

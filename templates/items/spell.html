@@ -87,9 +87,9 @@
                 {{#if data.materials.value}}
                 <div class="spell-materials flexrow">
                     <label>{{ localize "DND5E.Supply" }}</label>
-                    <input type="text" name="data.materials.supply" value="{{data.materials.supply}}" data-dtype="Number" Placeholder="0"/>
+                    {{numberInput data.materials.supply name="data.materials.supply" placeholder="0"}}
                     <label>{{ localize "DND5E.CostGP" }}</label>
-                    <input type="text" name="data.materials.cost" value="{{data.materials.cost}}" data-dtype="Number" Placeholder="-"/>
+                    {{numberInput data.materials.cost name="data.materials.cost" placeholder="&mdash;"}}
                     <label>{{ localize "DND5E.Consumed" }}</label>
                     <input type="checkbox" name="data.materials.consumed" {{checked data.materials.consumed}}/>
                 </div>
