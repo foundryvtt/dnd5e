@@ -102,6 +102,7 @@ export default class Actor5e extends Actor {
     const data = actorData.data;
     const flags = actorData.flags.dnd5e || {};
     const bonuses = getProperty(data, "bonuses.abilities") || {};
+    const bonusData = this.getRollData();
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
@@ -120,7 +121,6 @@ export default class Actor5e extends Actor {
     }
 
     // Ability modifiers and saves
-    const bonusData = this.getRollData();
     const joat = flags.jackOfAllTrades;
     const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, bonusData);
     const saveBonus = this._simplifyBonus(bonuses.save, bonusData);
@@ -161,6 +161,9 @@ export default class Actor5e extends Actor {
 
     // Reset class store to ensure it is updated with any changes
     this._classes = undefined;
+
+    // Prepare Hit Points
+    this.data.data.attributes.hp.max = this._computeHitPoints(this, this.data.data.attributes.hp, bonusData);
 
     // Determine Initiative Modifier
     this._computeInitiativeModifier(actorData, checkBonus, bonusData);
@@ -525,6 +528,32 @@ export default class Actor5e extends Actor {
     ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
     this.shield = null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute hit points for characters.
+   * @param {Actor5e} actor       Actor for whom the HP should be calculated.
+   * @param {object} [hp]         HP data to drive the calculation.
+   * @param {object} [bonusData]  Data produced by `getRollData` to be applied to bonus formulas.
+   * @returns {number}            Computed HP max.
+   */
+  _computeHitPoints(actor, hp, bonusData) {
+    if ( !hp ) hp = this.data.data.attributes.hp;
+    if ( this.type !== "character" ) return hp.max;
+    if ( hp.override !== null ) return hp.override;
+    if ( !bonusData ) bonusData = this.getRollData();
+
+    const base = Object.values(actor.classes).reduce((total, item) => {
+      const advancement = item.advancement.byType.HitPoints?.[0];
+      return total + (advancement?.total() ?? 0);
+    }, 0);
+    const constitution = actor.data.data.abilities.con?.mod * actor.data.data.details.level;
+    const levelBonus = this._simplifyBonus(hp.bonuses.level, bonusData) * actor.data.data.details.level;
+    const overallBonus = this._simplifyBonus(hp.bonuses.overall, bonusData);
+
+    return base + constitution + levelBonus + overallBonus;
   }
 
   /* -------------------------------------------- */
@@ -928,6 +957,8 @@ export default class Actor5e extends Actor {
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
+  /* -------------------------------------------- */
+  /*  Rolling                                     */
   /* -------------------------------------------- */
 
   /**
@@ -1357,6 +1388,43 @@ export default class Actor5e extends Actor {
     return roll;
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Roll hit points for an NPC based on the HP formula.
+   * @param {string} [formula]  Hit points formula to roll. If not provided, the one in the actor will be used.
+   * @returns {Promise<Roll>}   The completed roll.
+   */
+  async rollNPCHitPoints(formula) {
+    if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
+    const rollData = { formula: formula ?? this.data.data.attributes.hp.formula, data: this.getRollData() };
+    const flavor = game.i18n.format("DND5E.HPFormulaRollMessage");
+    const messageData = {
+      title: `${flavor}: ${this.name}`,
+      flavor,
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      "flags.dnd5e.roll": { type: "hitPoints" }
+    };
+
+    /**
+     * A hook event that fires before hit points are rolled for an NPC.
+     * @function dnd5e.preRollNPCHitPoints
+     * @memberof hookEvents
+     * @param {Actor5e} actor            Actor for which the hit points are being rolled.
+     * @param {object} rollData
+     * @param {string} rollData.formula  The string formula to parse.
+     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} messageData       The data object to use when creating the message.
+     */
+    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
+
+    const roll = new Roll(rollData.formula, rollData.data);
+    await roll.toMessage(messageData);
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+  /*  Resting                                     */
   /* -------------------------------------------- */
 
   /**

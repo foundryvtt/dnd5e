@@ -134,14 +134,8 @@ export class HitPointsAdvancement extends Advancement {
     if ( value === undefined ) return;
 
     value += actorData.abilities.con?.mod ?? 0;
-    if ( game.release.generation === 10 ) this.actor.updateSource({
-      "system.attributes.hp.max": actorData.attributes.hp.max + value,
-      "system.attributes.hp.value": actorData.attributes.hp.value + value
-    });
-    else this.actor.data.update({
-      "data.attributes.hp.max": actorData.attributes.hp.max + value,
-      "data.attributes.hp.value": actorData.attributes.hp.value + value
-    });
+    value += this.actor._simplifyBonus(actorData.attributes.hp.bonuses.level, this.actor.getRollData());
+    this.actor.data.update({"data.attributes.hp.value": actorData.attributes.hp.value + value});
     this.updateSource({ value: data });
   }
 
@@ -161,14 +155,8 @@ export class HitPointsAdvancement extends Advancement {
     if ( value === undefined ) return;
 
     value += actorData.abilities.con?.mod ?? 0;
-    if ( game.release.generation === 10 ) this.actor.updateSource({
-      "system.attributes.hp.max": actorData.attributes.hp.max - value,
-      "system.attributes.hp.value": actorData.attributes.hp.value - value
-    });
-    else this.actor.data.update({
-      "data.attributes.hp.max": actorData.attributes.hp.max - value,
-      "data.attributes.hp.value": actorData.attributes.hp.value - value
-    });
+    value += this.actor._simplifyBonus(actorData.attributes.hp.bonuses.level, this.actor.getRollData());
+    this.actor.data.update({"data.attributes.hp.value": actorData.attributes.hp.value - value});
     const source = { [level]: this.data.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
     return source;
@@ -220,6 +208,7 @@ export class HitPointsFlow extends AdvancementFlow {
   getData() {
     const source = this.retainedData ?? this.advancement.data.value;
     const value = source[this.level];
+    // TODO: Also preview CON mod + per-level bonuses
 
     // If value is empty, `useAverage` should default to the value selected at the previous level
     let useAverage = value === "avg";

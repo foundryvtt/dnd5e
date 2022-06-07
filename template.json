@@ -62,7 +62,6 @@
           "hp": {
             "value": 10,
             "min": 0,
-            "max": 10,
             "temp": 0,
             "tempmax": 0
           },
@@ -360,7 +359,11 @@
       "attributes": {
         "hp": {
           "value": 0,
-          "max": 0
+          "override": null,
+          "bonuses": {
+            "level": "",
+            "overall": ""
+          }
         },
         "death": {
           "success": 0,
@@ -422,6 +425,7 @@
       "templates": ["common", "creature"],
       "attributes": {
         "hp": {
+          "max": 10,
           "formula": ""
         }
       },

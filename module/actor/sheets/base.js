@@ -8,6 +8,7 @@ import TraitSelector from "../../apps/trait-selector.js";
 import ActorArmorConfig from "../../apps/actor-armor.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorHitDiceConfig from "../../apps/hit-dice-config.js";
+import ActorHitPointsConfig from "../../apps/hit-points-config.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
 import ActorSkillConfig from "../../apps/skill-config.js";
@@ -675,6 +676,9 @@ export default class ActorSheet5e extends ActorSheet {
         break;
       case "hit-dice":
         app = new ActorHitDiceConfig(this.object);
+        break;
+      case "hit-points":
+        app = new ActorHitPointsConfig(this.object);
         break;
       case "movement":
         app = new ActorMovementConfig(this.object);
