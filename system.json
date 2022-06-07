@@ -4,6 +4,10 @@
   "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
   "version": "1.6.2",
   "author": "Atropos",
+  "flags": {
+    "needsMigrationVersion": "1.6.0",
+    "compatibleMigrationVersion": "0.8"
+  },
   "scripts": [],
   "esmodules": ["dnd5e.js"],
   "styles": ["dnd5e.css"],
