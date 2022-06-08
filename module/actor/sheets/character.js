@@ -139,7 +139,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
         return { level, delta, disabled: delta > maxLevelDelta };
       });
       arr.push(cls);
-      const subclass = subclasses.findSplice(s => s.data.classIdentifier === cls.data.identifier);
+      const identifier = cls.data.identifier || cls.name.slugify({strict: true});
+      const subclass = subclasses.findSplice(s => s.data.classIdentifier === identifier);
       if ( subclass ) arr.push(subclass);
       return arr;
     }, []);

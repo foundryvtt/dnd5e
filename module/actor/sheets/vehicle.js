@@ -372,7 +372,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     event.preventDefault();
     const row = event.currentTarget.closest(".item");
     if (row.classList.contains("cargo-row")) {
-      const idx = Number(row.dataset.itemId);
+      const idx = Number(row.dataset.itemIndex);
       const type = row.classList.contains("crew") ? "crew" : "passengers";
       const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
       return this.actor.update({[`data.cargo.${type}`]: cargo});

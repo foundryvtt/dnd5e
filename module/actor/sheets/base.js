@@ -735,13 +735,8 @@ export default class ActorSheet5e extends ActorSheet {
     if ( !canPolymorph ) return false;
 
     // Get the target actor
-    let sourceActor = null;
-    if (data.pack) {
-      const pack = game.packs.find(p => p.collection === data.pack);
-      sourceActor = await pack.getDocument(data.id);
-    } else {
-      sourceActor = game.actors.get(data.id);
-    }
+    const cls = getDocumentClass("Actor");
+    const sourceActor = await cls.fromDropData(data);
     if ( !sourceActor ) return;
 
     // Define a function to record polymorph settings for future use
@@ -1094,7 +1089,7 @@ export default class ActorSheet5e extends ActorSheet {
     const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
     if ( existingTooltip || !property ) return;
-    const data = this.actor.data.data;
+    const data = this.actor.getRollData({ deterministic: true });
     let attributions;
     switch ( property ) {
       case "attributes.ac": attributions = this._prepareArmorClassAttribution(data); break;
