@@ -18,7 +18,7 @@
       "condition": ""
     },
     "duration": {
-      "value": "1 + (@item.level - 8) * 7",
+      "value": "@item.level < 9 ? 1 : 8",
       "units": "hour"
     },
     "target": {
