@@ -75,6 +75,6 @@ export default class Proficiency {
    * @returns {string}  Flat proficiency value.
    */
   toString() {
-    return this.flat;
+    return this.term;
   }
 }
