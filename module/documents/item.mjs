@@ -656,41 +656,34 @@ export default class Item5e extends Item {
     const as = this.actor.system;
 
     // Reference aspects of the item data necessary for usage
-    const hasArea = this.hasAreaTarget;       // Is the ability usage an AoE?
     const resource = is.consume || {};        // Resource consumption
-    const recharge = is.recharge || {};       // Recharge mechanic
-    const uses = is.uses ?? {};               // Limited uses
     const isSpell = this.type === "spell";    // Does the item require a spell slot?
     const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
-    let createMeasuredTemplate = hasArea;       // Trigger a template creation
-    let consumeRecharge = !!recharge.value;     // Consume recharge
-    let consumeResource = !!resource.target && (!this.hasAttack || (resource.type !== "ammo")); // Consume a linked (non-ammo) resource
-    let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
-    let consumeUsage = !!uses.per;              // Consume limited uses
-    let consumeQuantity = uses.autoDestroy;     // Consume quantity of the item in lieu of uses
-    let consumeSpellLevel = null;               // Consume a specific category of spell slot
-    if ( requireSpellSlot ) consumeSpellLevel = is.preparation.mode === "pact" ? "pact" : `spell${is.level}`;
+    const config = {
+      createMeasuredTemplate: item.hasAreaTarget,
+      consumeQuantity: is.uses?.autoDestroy ?? false,
+      consumeRecharge: !!is.recharge?.value,
+      consumeResource: !!resource.target && (!item.hasAttack || (resource.type !== "ammo")),
+      consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : `spell${is.level}` : null,
+      consumeSpellSlot: requireSpellSlot,
+      consumeUsage: !!is.uses?.per
+    };
 
     // Display a configuration dialog to customize the usage
-    const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource
-      || consumeSpellSlot || consumeUsage;
-    if (configureDialog && needsConfiguration) {
+    const needsConfiguration = config.createMeasuredTemplate || config.consumeRecharge || config.consumeResource
+      || config.consumeSpellSlot || config.consumeUsage;
+    if ( configureDialog && needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(this);
-      if (!configuration) return;
+      if ( !configuration ) return;
 
-      // Determine consumption preferences
-      createMeasuredTemplate = Boolean(configuration.placeTemplate);
-      consumeUsage = Boolean(configuration.consumeUse);
-      consumeRecharge = Boolean(configuration.consumeRecharge);
-      consumeResource = Boolean(configuration.consumeResource);
-      consumeSpellSlot = Boolean(configuration.consumeSlot);
+      foundry.utils.mergeObject(config, configuration);
 
       // Handle spell upcasting
       if ( requireSpellSlot ) {
-        consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
-        if ( consumeSpellSlot === false ) consumeSpellLevel = null;
+        config.consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
+        if ( config.consumeSpellSlot === false ) config.consumeSpellLevel = null;
         const upcastLevel = configuration.level === "pact" ? as.spells.pact.level : parseInt(configuration.level);
         if ( !Number.isNaN(upcastLevel) && (upcastLevel !== is.level) ) {
           item = this.clone({"system.level": upcastLevel}, {keepId: true});
@@ -700,19 +693,18 @@ export default class Item5e extends Item {
     }
 
     // Determine whether the item can be used by testing for resource consumption
-    const usage = item._getUsageUpdates({consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage,
-      consumeQuantity});
+    const usage = item._getUsageUpdates(config);
     if ( !usage ) return;
-    const {actorUpdates, itemUpdates, resourceUpdates} = usage;
+    const { actorUpdates, itemUpdates, resourceUpdates } = usage;
 
     // Commit pending data updates
     if ( !foundry.utils.isEmpty(itemUpdates) ) await item.update(itemUpdates);
-    if ( consumeQuantity && (item.system.quantity === 0) ) await item.delete();
+    if ( config.consumeQuantity && (item.system.quantity === 0) ) await item.delete();
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
     if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
     // Initiate measured template creation
-    if ( createMeasuredTemplate ) {
+    if ( config.createMeasuredTemplate ) {
       const template = dnd5e.canvas.AbilityTemplate.fromItem(item);
       if ( template ) template.drawPreview();
     }
@@ -725,15 +717,15 @@ export default class Item5e extends Item {
 
   /**
    * Verify that the consumed resources used by an Item are available.
-   * Otherwise, display an error and return false.
-   * @param {object} options
-   * @param {boolean} options.consumeQuantity     Consume quantity of the item if other consumption modes are not
-   *                                              available?
-   * @param {boolean} options.consumeRecharge     Whether the item consumes the recharge mechanic
-   * @param {boolean} options.consumeResource     Whether the item consumes a limited resource
-   * @param {string|null} options.consumeSpellLevel The category of spell slot to consume, or null
-   * @param {boolean} options.consumeUsage        Whether the item consumes a limited usage
-   * @returns {object|boolean}            A set of data changes to apply when the item is used, or false
+   * Otherwise display an error and return false.
+   * @param {object} config
+   * @param {boolean} config.consumeQuantity        Consume quantity of the item if other consumption modes are not
+   *                                                available?
+   * @param {boolean} config.consumeRecharge        Whether the item consumes the recharge mechanic.
+   * @param {boolean} config.consumeResource        Whether the item consumes a limited resource.
+   * @param {string|null} config.consumeSpellLevel  The category of spell slot to consume, or null.
+   * @param {boolean} config.consumeUsage           Whether the item consumes a limited usage.
+   * @returns {object|boolean}                      A set of data changes to apply when the item is used, or false.
    * @private
    */
   _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage}) {
