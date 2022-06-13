@@ -1001,6 +1001,9 @@ export default class Item5e extends Item {
       chatData.flags["dnd5e.itemData"] = templateData.item;
     }
 
+    // Merge in the flags from options
+    chatData.flags = foundry.utils.mergeObject(chatData.flags, options.flags);
+
     /**
      * A hook event that fires before an item chat card is displayed.
      * @function dnd5e.preDisplayCard
@@ -1010,9 +1013,6 @@ export default class Item5e extends Item {
      * @param {ItemRollOptions} options  Options which configure the display of the item chat card.
      */
     Hooks.callAll("dnd5e.preDisplayCard", this, chatData, options);
-
-    // Merge in the flags from options
-    chatData.flags = foundry.utils.mergeObject(chatData.flags, options.flags);
 
     // Apply the roll mode to adjust message visibility
     ChatMessage.applyRollMode(chatData, options.rollMode ?? game.settings.get("core", "rollMode"));
