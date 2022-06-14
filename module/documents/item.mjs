@@ -758,10 +758,13 @@ export default class Item5e extends Item {
     if ( !foundry.utils.isEmpty(actorUpdates) ) await this.actor.update(actorUpdates);
     if ( resourceUpdates.length ) await this.actor.updateEmbeddedDocuments("Item", resourceUpdates);
 
+    // Prepare card data & display it if options.createMessage is true
+    const cardData = item.displayCard(options);
+
     // Initiate measured template creation
     if ( config.createMeasuredTemplate ) {
       const template = dnd5e.canvas.AbilityTemplate.fromItem(item);
-      if ( template ) template.drawPreview();
+      if ( template ) await template.drawPreview();
     }
 
     /**
@@ -774,8 +777,7 @@ export default class Item5e extends Item {
      */
     Hooks.callAll("dnd5e.roll", item, config, options);
 
-    // Create or return the Chat Message data
-    return item.displayCard(options);
+    return cardData;
   }
 
   /* -------------------------------------------- */
