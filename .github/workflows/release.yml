@@ -43,8 +43,8 @@ jobs:
         RELEASE_DOWNLOAD: ${{steps.get_names.outputs.RELEASE_DOWNLOAD_URL}}
         # Extract version and download url from system.json
         # https://docs.github.com/en/actions/learn-github-actions/expressions#fromjson
-        PACKAGE_VERSION: ${{fromJSON(${{steps.get_names.outputs.SYSTEM_JSON}}).version}}
-        PACKAGE_DOWNLOAD: ${{fromJSON(${{steps.get_names.outputs.SYSTEM_JSON}}).download}}
+        PACKAGE_VERSION: ${{fromJSON(steps.get_names.outputs.SYSTEM_JSON).version}}
+        PACKAGE_DOWNLOAD: ${{fromJSON(steps.get_names.outputs.SYSTEM_JSON).download}}
       run: |
         # Validate that the tag being released matches the package version.
         if [[ ! $TAG_NAME == release-$PACKAGE_VERSION ]]; then
