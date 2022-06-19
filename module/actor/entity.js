@@ -1756,7 +1756,11 @@ export default class Actor5e extends Actor {
    * @property {boolean} [keepItems=false]       Keep items
    * @property {boolean} [keepBio=false]         Keep biography
    * @property {boolean} [keepVision=false]      Keep vision
+   * @property {boolean} [keepSelf=false]        Keep self
+   * @property {boolean} [removeAE=false]        Remove active effects
+   * @property {boolean} [keepAEOnlyOriginNotEquipment=false] Keep only active effects which origin is not equipment
    * @property {boolean} [transformTokens=true]  Transform linked tokens too
+   * @property {boolean} [renderSheet=true]  Render the sheet of the transformed actor after the polymorph
    */
 
   /**
@@ -1768,7 +1772,9 @@ export default class Actor5e extends Actor {
    */
   async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false,
-    keepItems=false, keepBio=false, keepVision=false, transformTokens=true }={}) {
+    keepItems=false, keepBio=false, keepVision=false,
+    keepSelf=false, removeAE=false, keepAEOnlyOriginNotEquipment=false,
+    transformTokens=true}={}, renderSheet=true) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -1782,8 +1788,14 @@ export default class Actor5e extends Actor {
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
     const source = target.toJSON();
 
+    let d = new Object();
+    if(keepSelf){
+      // Keep Self
+      mergeObject(d,o);
+    }
+
     // Prepare new data to merge from the source
-    const d = {
+    d = {
       type: o.type, // Remain the same actor type
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
       data: source.data, // Get the data model of your new form
@@ -1812,13 +1824,17 @@ export default class Actor5e extends Actor {
     for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
       d.token[k] = source.token[k];
     }
-    const vision = keepVision ? o.token : source.token;
-    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
-      d.token[k] = vision[k];
-    }
+
     if ( source.token.randomImg ) {
       const images = await target.getTokenImages();
       d.token.img = images[Math.floor(Math.random() * images.length)];
+    }
+
+    if(!keepSelf){
+
+    const vision = keepVision ? o.token : source.token;
+    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
+      d.token[k] = vision[k];
     }
 
     // Transfer ability scores
@@ -1863,6 +1879,25 @@ export default class Actor5e extends Actor {
     // Keep senses
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
+    // Not keep active effects
+    if(removeAE && !keepAEOnlyOriginNotEquipment) d.effects = [];
+
+    // Keep active effects only origin not equipment
+    if(keepAEOnlyOriginNotEquipment){
+      const tokenEffects = foundry.utils.deepClone(d.effects) || [];
+      let notEquipItems = ["feat", "spell", "class"];
+      const tokenEffectsNotEquipment = [];
+      tokenEffects.forEach((effect) => {
+        if(!effect.origin.toLowerCase().startsWith("item")){
+          tokenEffectsNotEquipment.push(effect);
+        }
+      });
+      d.effects = tokenEffectsNotEquipment;
+    }
+
+    }
+
+
     // Set new data flags
     if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
     d.flags.dnd5e.isPolymorphed = true;
@@ -1889,11 +1924,15 @@ export default class Actor5e extends Actor {
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, removeAE, keepAEOnlyOriginNotEquipment, transformTokens, renderSheet
     });
 
+    // Some info like height and weight of the token are reset to default
+    // after the constructor of the actor is invoked solved with a backup of the info of the token
+    const tokenBackup = duplicate(d.token);
     // Create new Actor with transformed data
-    const newActor = await this.constructor.create(d, {renderSheet: true});
+    const newActor = await this.constructor.create(d, {renderSheet: renderSheet});
+    mergeObject(d.token, tokenBackup);
 
     // Update placed Token instances
     if ( !transformTokens ) return;
@@ -1914,9 +1953,10 @@ export default class Actor5e extends Actor {
    * If this actor was transformed with transformTokens enabled, then its
    * active tokens need to be returned to their original state. If not, then
    * we can safely just delete this actor.
+   * @param {boolean} [renderSheet] Render Sheet after revert the transformation.
    * @returns {Promise<Actor>|null}  Original actor if it was reverted.
    */
-  async revertOriginalForm() {
+  async revertOriginalForm(renderSheet=true) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
@@ -1959,7 +1999,9 @@ export default class Actor5e extends Actor {
     const isRendered = this.sheet.rendered;
     if ( game.user.isGM ) await this.delete();
     else if ( isRendered ) this.sheet.close();
-    if ( isRendered ) original.sheet.render(isRendered);
+    if ( isRendered && renderSheet ) {
+      original.sheet.render(isRendered);
+    }
     return original;
   }
 
