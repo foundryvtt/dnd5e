@@ -1924,8 +1924,8 @@ export default class Actor5e extends Actor {
      */
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
-      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, removeAE, keepAEOnlyOriginNotEquipment, transformTokens, renderSheet
-    });
+      keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, keepSelf, removeAE, keepAEOnlyOriginNotEquipment, transformTokens}, renderSheet
+    );
 
     // Some info like height and weight of the token are reset to default
     // after the constructor of the actor is invoked solved with a backup of the info of the token
