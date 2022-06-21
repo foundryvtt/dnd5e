@@ -1885,13 +1885,13 @@ export default class Actor5e extends Actor {
     // Keep active effects only origin not equipment
     if(keepAEOnlyOriginNotEquipment){
       const tokenEffects = foundry.utils.deepClone(d.effects) || [];
-      let notEquipItems = ["feat", "spell", "class"];
+      let notEquipItems = ["feat", "spell", "class", "subclass"];
       const tokenEffectsNotEquipment = [];
-      tokenEffects.forEach((effect) => {
+      for(const effect of tokenEffects) {
         if(!effect.origin.toLowerCase().startsWith("item")){
           tokenEffectsNotEquipment.push(effect);
         }
-      });
+      }
       d.effects = tokenEffectsNotEquipment;
     }
 
