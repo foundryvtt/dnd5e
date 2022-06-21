@@ -1973,7 +1973,9 @@ export default class Actor5e extends Actor {
       await this.token.update(tokenUpdate, {recursive: false});
       await this.sheet.close();
       const actor = this.token.getActor();
-      actor.sheet.render(true);
+      if ( renderSheet ) {
+        actor.sheet.render(true);
+      }
       return actor;
     }
 
