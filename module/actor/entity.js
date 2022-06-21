@@ -1981,8 +1981,10 @@ export default class Actor5e extends Actor {
 
     // Obtain a reference to the original actor
     const original = game.actors.get(this.getFlag("dnd5e", "originalActor"));
-    if ( !original ) return;
-
+    if ( !original ) {
+      ui.notifications.warn(game.i18n.format("DND5E.PolymorphRevertNoOriginalActorWarn", { reference: this.getFlag("dnd5e", "originalActor") }));
+      return;
+    }
     // Get the Tokens which represent this actor
     if ( canvas.ready ) {
       const tokens = this.getActiveTokens(true);
