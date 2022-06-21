@@ -1962,6 +1962,15 @@ export default class Actor5e extends Actor {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphRevertWarn"));
     }
 
+    /**
+     * A hook event that fires just before the actor is reverted to original form.
+     * @function dnd5e.transformActor
+     * @memberof hookEvents
+     * @param {Actor} actorThis                 The original actor before transformation.
+     * @param {boolean} renderSheet             Render Sheet after revert the transformation.
+     */
+    Hooks.callAll(`dnd5e.revertOriginalForm`, this, renderSheet);
+
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
     if ( this.isToken ) {
       const baseActor = game.actors.get(this.token.data.actorId);
