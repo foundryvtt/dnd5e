@@ -2,7 +2,7 @@
   "_id": "68bAMIpe4jvDeR9G",
   "name": "Storm Giant",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/giant/StormGiant.webp",
   "data": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Chaotic Good",
@@ -545,12 +545,12 @@
   },
   "token": {
     "name": "Storm Giant",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 3,
     "height": 3,
-    "scale": 1,
+    "scale": 1.66,
     "mirrorX": false,
     "mirrorY": false,
     "lockRotation": false,
@@ -568,7 +568,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -577,7 +577,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/giant/StormGiant.webp",
     "actorId": "68bAMIpe4jvDeR9G",
     "alpha": 1,
     "light": {
