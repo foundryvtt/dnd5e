@@ -2,7 +2,7 @@
   "_id": "B7lBOr1AahNZs4a6",
   "name": "Archmage",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/humanoid/Archmage.webp",
   "data": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p><strong>Archmages</strong> are powerful (and usually quite old) spellcasters dedicated to the study of the arcane arts. Benevolent ones counsel kings and queens, while evil ones rule as tyrants and pursue lichdom. Those who are neither good nor evil sequester themselves in remote towers to practice their magic without interruption.</p>\n<p>An archmage typically has one or more apprentice mages, and an archmage's abode has numerous magical wards and guardians to discourage interlopers.</p><section class=\"secret\">\n<p>The Archmage casts <strong>mage armor</strong>, <strong>stoneskin </strong>and <strong>mind blank </strong>on itself before combat.</p>\n</section>",
+        "value": "<p><strong>Archmages</strong> are powerful (and usually quite old) spellcasters dedicated to the study of the arcane arts. Benevolent ones counsel kings and queens, while evil ones rule as tyrants and pursue lichdom. Those who are neither good nor evil sequester themselves in remote towers to practice their magic without interruption.</p>\n<p>An archmage typically has one or more apprentice mages, and an archmage's abode has numerous magical wards and guardians to discourage interlopers.</p><section class=\"secret\">\n<p>The Archmage casts <strong>mage armor</strong>, <strong>stoneskin </strong>and <strong>mind blank </strong>on itself before combat.</p>\n</section><p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "",
@@ -537,7 +537,7 @@
   },
   "token": {
     "name": "Archmage",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 1,
@@ -560,7 +560,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -569,7 +569,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/humanoid/Archmage.webp",
     "actorId": "B7lBOr1AahNZs4a6",
     "alpha": 1,
     "light": {
