@@ -1912,8 +1912,13 @@ export default class Actor5e extends Actor {
         setProperty(d.flags, `dnd5e.originalActor`, this.id);
     }
     setProperty(d.flags, `dnd5e.isPolymorphed`, true);
-    const previousTokenData = this.getFlag(`dnd5e`, `previousOriginalActor`) || [];
-    previousTokenData.push(await this.getTokenData());
+    let previousTokenData = this.getFlag(`dnd5e`, `previousOriginalActor`) || [];
+    const currentTokenData = await this.getTokenData();
+    if (currentTokenData._id &&
+        previousTokenData.filter((z) => z._id === currentTokenData._id).length <= 0) {
+        previousTokenData.push(currentTokenData);
+        previousTokenData = previousTokenData.filter((value, index, self) => index === self.findIndex((t) => (t._id === null || t._id === value._id)));
+    }
     setProperty(d.flags, `dnd5e.previousOriginalActor`, previousTokenData);
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if (this.isToken) {
@@ -1930,7 +1935,7 @@ export default class Actor5e extends Actor {
      * A hook event that fires just before the actor is transformed.
      * @function dnd5e.transformActor
      * @memberof hookEvents
-     * @param {Actor5e} actor                  The original actor before transformation.
+     * @param {Actor5e} this                 The original actor before transformation.
      * @param {Actor5e} target                 The target actor into which to transform.
      * @param {object} data                    The data that will be used to create the new transformed actor.
      * @param {TransformationOptions} options  Options that determine how the transformation is performed.
@@ -1976,7 +1981,7 @@ export default class Actor5e extends Actor {
       return;
     }
     if (!this.isOwner) {
-        return ui.notifications.warn(game.i18n.localize('DND5E.PolymorphRevertWarn'));
+      return ui.notifications.warn(game.i18n.localize('DND5E.PolymorphRevertWarn'));
     }
     /**
      * A hook event that fires just before the actor is reverted to original form.
@@ -1986,7 +1991,7 @@ export default class Actor5e extends Actor {
      * @param {boolean} renderSheet             Render Sheet after revert the transformation.
      */
     Hooks.callAll(`dnd5e.revertOriginalForm`, this, renderSheet);
-    const previousOriginalActorTokenData = (this.getFlag(`dnd5`, `previousOriginalActor`));
+    const previousOriginalActorTokenData = (this.getFlag(`dnd5e`, `previousOriginalActor`));
     let isTheOriginalActor = false;
     if (!previousOriginalActorTokenData || previousOriginalActorTokenData.length <= 0) {
         isTheOriginalActor = true;
@@ -1994,14 +1999,14 @@ export default class Actor5e extends Actor {
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
     if (this.isToken) {
         // Obtain a reference to the base actor prototype
-        let baseActor = (game.actors?.get(this.getFlag(`dnd5`, `originalActor`)));
+        let baseActor = (game.actors?.get(this.getFlag(`dnd5e`, `originalActor`)));
         if (!baseActor) {
             baseActor = game.actors?.get(this.token?.data.actorId);
         }
         if (!baseActor) {
             if (!previousOriginalActorTokenData) {
               ui.notifications.warn(game.i18n.format('DND5E.PolymorphRevertNoOriginalActorWarn', {
-                reference: this.getFlag(`dnd5`, `originalActor`),
+                reference: this.getFlag(`dnd5e`, `originalActor`),
               }));
               return;
             }
@@ -2026,8 +2031,8 @@ export default class Actor5e extends Actor {
         await this.sheet?.close();
         const actor = this.token?.getActor();
         if (isTheOriginalActor) {
-            await this.unsetFlag(`dnd5`, `isPolymorphed`);
-            await this.unsetFlag(`dnd5`, `previousOriginalActor`);
+            await this.unsetFlag(`dnd5e`, `isPolymorphed`);
+            await this.unsetFlag(`dnd5e`, `previousOriginalActor`);
         }
         if (renderSheet) {
             actor.sheet?.render(true);
@@ -2035,11 +2040,11 @@ export default class Actor5e extends Actor {
         return actor;
     }
     // Obtain a reference to the original actor
-    const original = (game.actors?.get(this.getFlag(`dnd5`, `originalActor`)));
+    const original = (game.actors?.get(this.getFlag(`dnd5e`, `originalActor`)));
     if (!original) {
         if (!previousOriginalActorTokenData) {
           ui.notifications.warn(game.i18n.format('DND5E.PolymorphRevertNoOriginalActorWarn', {
-            reference: this.getFlag(`dnd5`, `originalActor`),
+              reference: this.getFlag(`dnd5e`, `originalActor`),
           }));
           return;
         }
@@ -2065,14 +2070,32 @@ export default class Actor5e extends Actor {
         await canvas.scene?.updateEmbeddedDocuments('Token', [update]);
     }
     if (isTheOriginalActor) {
-        await this.unsetFlag(`dnd5`, `isPolymorphed`);
-        await this.unsetFlag(`dnd5`, `previousOriginalActor`);
+        await this.unsetFlag(`dnd5e`, `isPolymorphed`);
+        await this.unsetFlag(`dnd5e`, `previousOriginalActor`);
     }
-
     // Delete the polymorphed version of the actor, if possible
     const isRendered = this.sheet?.rendered;
     if (game.user?.isGM) {
-      await this.delete();
+        const idsToDelete = [];
+        idsToDelete.push(this.id);
+        const othersActorsToDelete = this.getFlag(`dnd5e`, `previousOriginalActor`);
+        othersActorsToDelete.reverse();
+        for (const td of othersActorsToDelete) {
+            if (td.actorId &&
+                !idsToDelete.includes(td.actorId) &&
+                td.actorId != original.id &&
+                game.actors?.get(td.actorId)) {
+                idsToDelete.push(td.actorId);
+            }
+        }
+        for (const id of idsToDelete) {
+            const actorToDelete = game.actors?.get(id);
+            if (actorToDelete) {
+                // Delete actor polymorphed ${actorToDelete.name}|${actorToDelete.id}`
+                await actorToDelete.delete();
+            }
+        }
+        // await this.delete();
     }
     else if (isRendered) {
       this.sheet?.close();
