@@ -1786,10 +1786,10 @@ export default class Actor5e extends Actor {
     const o = this.toJSON();
     //o.flags.dnd5e = o.flags.dnd5e || {};
     //o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
-    if (getProperty(o.flags, `dnd5e`)) {
-        setProperty(o.flags, `dnd5e`, {});
+    if (foundry.utils.getProperty(o.flags, `dnd5e`)) {
+      foundry.utils.setProperty(o.flags, `dnd5e`, {});
     }
-    setProperty(o.flags, `dnd5e.transformOptions`, {
+    foundry.utils.setProperty(o.flags, `dnd5e.transformOptions`, {
         mergeSkills,
         mergeSaves,
     });
@@ -1797,7 +1797,7 @@ export default class Actor5e extends Actor {
     let d = new Object();
     if (keepSelf) {
         // Keep Self
-        mergeObject(d, o);
+        foundry.utils.mergeObject(d, o);
     }
     // Prepare new data to merge from the source
     d = {
@@ -1896,7 +1896,7 @@ export default class Actor5e extends Actor {
             const notEquipItems = ['feat', 'spell', 'class', 'subclass'];
             const tokenEffectsNotEquipment = [];
             for (const effect of tokenEffects) {
-                if (!effect.origin.toLowerCase().startsWith('item')) {
+                if (!effect.origin?.toLowerCase().startsWith('item')) {
                     tokenEffectsNotEquipment.push(effect);
                 }
             }
@@ -1906,12 +1906,12 @@ export default class Actor5e extends Actor {
     // Set new data flags
     // if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
     // d.flags.dnd5e.isPolymorphed = true;
-    setProperty(d.flags, `dnd5e`, getProperty(this.data.flags, `dnd5e`));
+    foundry.utils.setProperty(d.flags, `dnd5e`, getProperty(this.data.flags, `dnd5e`));
     if (!this.getFlag(`dnd5e`, `isPolymorphed`) ||
-        !getProperty(d.flags, `dnd5e.originalActor`)) {
-        setProperty(d.flags, `dnd5e.originalActor`, this.id);
+        !foundry.utils.getProperty(d.flags, `dnd5e.originalActor`)) {
+          foundry.utils.setProperty(d.flags, `dnd5e.originalActor`, this.id);
     }
-    setProperty(d.flags, `dnd5e.isPolymorphed`, true);
+    foundry.utils.setProperty(d.flags, `dnd5e.isPolymorphed`, true);
     let previousTokenData = this.getFlag(`dnd5e`, `previousOriginalActor`) || [];
     const currentTokenData = await this.getTokenData();
     if (currentTokenData._id &&
@@ -1919,12 +1919,12 @@ export default class Actor5e extends Actor {
         previousTokenData.push(currentTokenData);
         previousTokenData = previousTokenData.filter((value, index, self) => index === self.findIndex((t) => (t._id === null || t._id === value._id)));
     }
-    setProperty(d.flags, `dnd5e.previousOriginalActor`, previousTokenData);
+    foundry.utils.setProperty(d.flags, `dnd5e.previousOriginalActor`, previousTokenData);
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if (this.isToken) {
         const tokenData = d.token;
         // tokenData.actorData = d;
-        setProperty(tokenData, `actorData`, d);
+        foundry.utils.setProperty(tokenData, `actorData`, d);
         //@ts-ignore
         delete tokenData.actorData.token;
         return this.token?.update(tokenData);
@@ -1943,10 +1943,10 @@ export default class Actor5e extends Actor {
     Hooks.callAll(`dnd5e.transformActor`, this, target, d, renderSheet);
     // Some info like height and weight of the token are reset to default
     // after the constructor of the actor is invoked solved with a backup of the info of the token
-    const tokenBackup = duplicate(d.token);
-    // Create new Actor with transformed data
+    const tokenBackup = foundry.utils.duplicate(d.token);
+    // Create new Actor with transformed data (maybe we can avoid this ? with some workflow like warpgate ?)
     const newActor = await this.constructor.create(d, { renderSheet: renderSheet });
-    mergeObject(d.token, tokenBackup);
+    foundry.utils.mergeObject(d.token, tokenBackup);
     // Update placed Token instances
     if (!transformTokens) {
       return;
@@ -1958,10 +1958,10 @@ export default class Actor5e extends Actor {
         newTokenData.actorId = newActor.id;
         newTokenData.actorLink = true;
         if (!newTokenData.flags) {
-            setProperty(newTokenData, `flags`, {});
+          foundry.utils.setProperty(newTokenData, `flags`, {});
         }
-        setProperty(newTokenData.flags, `dnd5e.originalActor`, getProperty(d.flags, `dnd5e.originalActor`));
-        setProperty(newTokenData.flags, `dnd5e.isPolymorphed`, true);
+        foundry.utils.setProperty(newTokenData.flags, `dnd5e.originalActor`, foundry.utils.getProperty(d.flags, `dnd5e.originalActor`));
+        foundry.utils.setProperty(newTokenData.flags, `dnd5e.isPolymorphed`, true);
         return newTokenData;
     });
     return canvas.scene?.updateEmbeddedDocuments('Token', updates);
@@ -2054,7 +2054,7 @@ export default class Actor5e extends Actor {
         const tokens = this.getActiveTokens(true);
         const tokenData = await original.getTokenData();
         const tokenUpdates = tokens.map((t) => {
-            const update = duplicate(tokenData);
+            const update = foundry.utils.duplicate(tokenData);
             update._id = t.id;
             delete update.x;
             delete update.y;
@@ -2064,7 +2064,7 @@ export default class Actor5e extends Actor {
     }
     else if (previousOriginalActorTokenData) {
         const tokenData = previousOriginalActorTokenData;
-        const update = duplicate(tokenData);
+        const update = foundry.utils.duplicate(tokenData);
         delete update.x;
         delete update.y;
         await canvas.scene?.updateEmbeddedDocuments('Token', [update]);
