@@ -1,9 +1,15 @@
 {
+  "id": "dnd5e",
   "name": "dnd5e",
   "title": "DnD5e - Fifth Edition System",
   "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "1.6.3",
-  "author": "Atropos",
+  "version": "1.7.0-beta",
+  "authors": [
+    {
+      "name": "Atropos",
+      "url": "https://foundryvtt.com"
+    }
+  ],
   "scripts": [],
   "esmodules": ["dnd5e.js"],
   "styles": ["dnd5e.css"],
@@ -113,9 +119,12 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
   "secondaryTokenAttribute": null,
-  "minimumCoreVersion": "9.245",
-  "compatibleCoreVersion": "9",
+  "compatibility": {
+    "minimum": "9.245",
+    "verified": "10",
+    "maximum": "10"
+  },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-1.6.3/dnd5e-1.6.3.zip"
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-1.7.0-beta/dnd5e-1.7.0-beta.zip"
 }
