@@ -157,6 +157,9 @@ export const registerSystemSettings = function() {
       keepItems: false,
       keepBio: false,
       keepVision: true,
+      keepSelf: false,
+      removeAE: false,
+      keepAEOnlyOriginNotEquipment: false,
       transformTokens: true
     }
   });
