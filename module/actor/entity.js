@@ -783,15 +783,9 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the encumbrance size class
-    let mod = {
-      tiny: 0.5,
-      sm: 1,
-      med: 1,
-      lg: 2,
-      huge: 4,
-      grg: 8
-    }[actorData.data.traits.size] || 1;
-    if ( this.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
+    let size = actorData.data.traits.size;
+    if ( this.getFlag("dnd5e", "powerfulBuild") ) size = DND5E.nextSizeUp[size];
+    let sizeMod = DND5E.encumbranceMultiplyer[size];
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
@@ -800,7 +794,7 @@ export default class Actor5e extends Actor {
       ? CONFIG.DND5E.encumbrance.strMultiplier.metric
       : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
 
-    const max = (actorData.data.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
+    const max = (actorData.data.abilities.str.value * strengthMultiplier * sizeMod).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (200/3) };
   }

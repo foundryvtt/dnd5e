@@ -314,6 +314,32 @@ DND5E.tokenSizes = {
 };
 
 /**
+ * Default encumbrance multiplers for `DND5E.actorSizes`.
+ * @enum {number}
+ */
+DND5E.encumbranceMultiplyer = {
+  tiny: 0.5,
+  sm: 1,
+  med: 1,
+  lg: 2,
+  huge: 4,
+  grg: 8
+}
+
+/**
+ * Size progression upware (there is probably a better way)
+ * @enum {@enum}
+ */
+DND5E.nextSizeUp = {
+  tiny: sm,
+  sm: med,
+  med: lg,
+  lg: huge,
+  huge: grg,
+  grg: grg
+}
+
+/**
  * Colors used to visualize temporary and temporary maximum HP in token health bars.
  * @enum {number}
  */
