@@ -4,7 +4,7 @@ import Advancement from "./advancement.mjs";
  * Advancement that presents the player with a choice of multiple items that they can take. Keeps track of which
  * items were selected at which levels.
  */
-export class ItemChoiceAdvancement extends Advancement {
+export default class ItemChoiceAdvancement extends Advancement {
 
   /** @inheritdoc */
   static get metadata() {
@@ -13,14 +13,17 @@ export class ItemChoiceAdvancement extends Advancement {
         configuration: {
           choices: {},
           allowDrops: true,
-          pool: null
+          pool: []
         }
       },
       order: 50,
-      icon: "icons/svg/stone-path.svg",
+      icon: "systems/dnd5e/icons/svg/item-choice.svg",
       title: game.i18n.localize("DND5E.AdvancementItemChoiceTitle"),
       hint: game.i18n.localize("DND5E.AdvancementItemChoiceHint"),
-      multiLevel: true
+      multiLevel: true,
+      apps: {
+        config: ItemChoiceConfig
+      }
     });
   }
 
@@ -57,5 +60,4 @@ export class ItemChoiceAdvancement extends Advancement {
     if ( !items ) return "";
     return Object.values(items).reduce((html, uuid) => html + game.dnd5e.utils.linkForUuid(uuid), "");
   }
-
 }

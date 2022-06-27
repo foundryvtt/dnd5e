@@ -52,6 +52,18 @@
       }
       .right-column {
         grid-area: right;
+
+        &.level-list {
+          label {
+            flex: 0.5;
+            padding-right: 0.5rem;
+            text-align: end;
+          }
+          input[type="text"]::placeholder,
+          input[type="number"]::placeholder {
+            opacity: 0.5;
+          }
+        }
       }
       button[type="submit"] {
         grid-column-end: span 2;
@@ -60,19 +72,21 @@
   }
 
   /* ----------------------------------------- */
+  /*  Item Choice                              */
+  /* ----------------------------------------- */
+  &.item-choice {
+    --grid-two-column-right-size: 0.5fr;
+
+    .level-list .hint {
+      text-align: end;
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Scale Value                              */
   /* ----------------------------------------- */
   &.scale-value {
     --grid-two-column-right-size: 0.6fr;
-
-    .right-column label {
-      flex: 0.5;
-      padding-right: 0.5rem;
-      text-align: right;
-    }
-    :is(input[type="text"], input[type="number"])::placeholder {
-      opacity: 0.5;
-    }
 
     select {
       &.new-scale-value {
