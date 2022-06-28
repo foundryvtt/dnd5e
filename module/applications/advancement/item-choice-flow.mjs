@@ -126,7 +126,6 @@ export default class ItemChoiceFlow extends AdvancementFlow {
 
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
-    item.dropped = true;
 
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
@@ -137,7 +136,10 @@ export default class ItemChoiceFlow extends AdvancementFlow {
     this.selected.add(item.uuid);
 
     // If the item doesn't already exist in the pool, add it
-    if ( !this.pool.find(i => i.uuid === item.uuid) ) this.dropped.push(item);
+    if ( !this.pool.find(i => i.uuid === item.uuid) ) {
+      this.dropped.push(item);
+      item.dropped = true;
+    }
 
     this.render();
   }

@@ -6,9 +6,10 @@
     <p>{{advancement.data.configuration.hint}}</p>
   {{/if}}
 
-  <h4 class="form-header">Chosen: <span class="current">{{choices.current}}</span> of {{choices.max}}</h4>
+  <h4 class="form-header">
+    {{localize "DND5E.AdvancementItemChoiceChosen" current=choices.current max=choices.max}}
+  </h4>
 
-  {{log this}}
   <div class="drop-target">
     {{#each items}}
       <div class="item-name flexrow">
