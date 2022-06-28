@@ -53,13 +53,21 @@ export default class ItemChoiceFlow extends AdvancementFlow {
     // TODO: Make sure selected works properly with retained data
     // TODO: Ensure everything is populated properly when going forward and backward through steps
 
+    const previousLevels = {};
+    const previouslySelected = new Set();
+    for ( const [level, data] of Object.entries(this.advancement.data.value) ) {
+      if ( level > this.level ) continue;
+      previousLevels[level] = await Promise.all(Object.values(data).map(fromUuid));
+      Object.values(data).forEach(uuid => previouslySelected.add(uuid));
+    }
+
     const items = [...this.pool, ...this.dropped];
     items.forEach(i => {
       i.checked = this.selected.has(i.uuid);
-      i.disabled = !i.checked && choices.full;
+      i.disabled = (!i.checked && choices.full) || previouslySelected.has(i.uuid);
     });
 
-    return foundry.utils.mergeObject(super.getData(), { choices, items });
+    return foundry.utils.mergeObject(super.getData(), { choices, items, previousLevels });
   }
 
   /* -------------------------------------------- */
