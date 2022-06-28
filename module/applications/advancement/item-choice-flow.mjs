@@ -4,6 +4,32 @@ import AdvancementFlow from "./advancement-flow.mjs";
  * Inline application that presents the player with a choice of items.
  */
 export default class ItemChoiceFlow extends AdvancementFlow {
+  constructor(...args) {
+    super(...args);
+
+    /**
+     * Set of selected UUIDs.
+     * @type {Set<string>}
+     */
+    this.selected = new Set(
+      this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
+      ?? Object.values(this.advancement.data.value[this.level] ?? {})
+    );
+
+    /**
+     * Cached items from the advancement's pool.
+     * @type {Array<Item5e>}
+     */
+    this.pool = undefined;
+
+    /**
+     * List of dropped items.
+     * @type {Array<Item5e>}
+     */
+    this.dropped = [];
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static get defaultOptions() {
@@ -17,26 +43,23 @@ export default class ItemChoiceFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async getData() {
-    const maxChoices = this.advancement.data.configuration.choices[this.level];
-    const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
-      ?? this.advancement.data.value[this.level];
-    const checked = new Set(Object.values(added ?? {}));
+    this.pool ??= await Promise.all(this.advancement.data.configuration.pool.map(fromUuid));
 
-    const allUuids = new Set([...this.advancement.data.configuration.pool, ...checked]);
-    const items = await Promise.all(Array.from(allUuids).map(async uuid => {
-      const item = await fromUuid(uuid);
-      item.checked = checked.has(uuid);
-      return item;
-    }));
+    const max = this.advancement.data.configuration.choices[this.level];
+    const choices = { max, current: this.selected.size, full: this.selected.size >= max };
 
-    return foundry.utils.mergeObject(super.getData(), {
-      choices: {
-        max: maxChoices,
-        current: checked.size,
-        full: checked.size >= maxChoices
-      },
-      items
+    // TODO: Make any choices made at previous levels unavailable
+    // TODO: Make any items already on actor unavailable?
+    // TODO: Make sure selected works properly with retained data
+    // TODO: Ensure everything is populated properly when going forward and backward through steps
+
+    const items = [...this.pool, ...this.dropped];
+    items.forEach(i => {
+      i.checked = this.selected.has(i.uuid);
+      i.disabled = !i.checked && choices.full;
     });
+
+    return foundry.utils.mergeObject(super.getData(), { choices, items });
   }
 
   /* -------------------------------------------- */
@@ -45,37 +68,16 @@ export default class ItemChoiceFlow extends AdvancementFlow {
   activateListeners(html) {
     super.activateListeners(html);
     html.find("a[data-uuid]").click(this._onClickFeature.bind(this));
+    html.find(".item-delete").click(this._onItemDelete.bind(this));
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   _onChangeInput(event) {
-    this._calculateCurrent();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Adjust the currently selected number to reflect for and enable/disable inputs as necessary.
-   */
-  _calculateCurrent() {
-    // Recalculate the currently selected number
-    const current = Array.from(this.form.querySelectorAll("input")).reduce((current, i) => {
-      return ( (i.type === "hidden") || i.checked ) ? current + 1 : current;
-    }, 0);
-    this.form.dataset.current = current;
-
-    // Enabled/disabled non-selected checkboxes
-    const checkboxes = this.form.querySelectorAll("input[type='checkbox']");
-    if ( current >= parseInt(this.form.dataset.max) ) {
-      checkboxes.forEach(c => c.disabled = !c.checked);
-    } else {
-      checkboxes.forEach(c => c.disabled = false);
-    }
-
-    // Update the current value listed in the UI
-    this.form.querySelector(".current").innerText = current;
+    if ( event.target.checked ) this.selected.add(event.target.name);
+    else this.selected.delete(event.target.name);
+    this.render();
   }
 
   /* -------------------------------------------- */
@@ -95,28 +97,24 @@ export default class ItemChoiceFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /**
-   * Handle deleting an existing Item entry from the Advancement.
-   * @param {Event} event        The originating click event.
-   * @returns {Promise<Item5e>}  The updated parent Item after the application re-renders.
-   * @private
+   * Handle deleting a dropped item.
+   * @param {Event} event  The originating click event.
+   * @protected
    */
   async _onItemDelete(event) {
-    // event.preventDefault();
-    // const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
-    // if ( !uuidToDelete ) return;
-    // const items = foundry.utils.getProperty(this.advancement.data.configuration, this.options.dropKeyPath);
-    // const updates = { configuration: this.prepareConfigurationUpdate({
-    //   [this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
-    // }) };
-    // await this.advancement.update(updates);
-    // this.render();
+    event.preventDefault();
+    const uuidToDelete = event.currentTarget.closest(".item-name")?.querySelector("input")?.name;
+    if ( !uuidToDelete ) return;
+    this.dropped.findSplice(i => i.uuid === uuidToDelete);
+    this.selected.delete(uuidToDelete);
+    this.render();
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   async _onDrop(event) {
-    if ( parseInt(this.form.dataset.current) >= parseInt(this.form.dataset.max) ) return false;
+    if ( this.selected.size >= this.advancement.data.configuration.choices[this.level] ) return false;
 
     // Try to extract the data
     let data;
@@ -128,20 +126,20 @@ export default class ItemChoiceFlow extends AdvancementFlow {
 
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
+    item.dropped = true;
 
-    const existingItems = Array.from(this.form.querySelectorAll("input")).map(i => i.name);
+    // If the item is already been marked as selected, no need to go further
+    if ( this.selected.has(item.uuid) ) return false;
 
-    // Check to ensure the dropped item doesn't already exist on the actor
+    // TODO: Check to ensure the dropped item doesn't already exist on the actor
 
-    // If the item already exists, simply check its checkbox
-    if ( existingItems.includes(item.uuid) ) {
-      const existingInput = this.form.querySelector(`input[name='${item.uuid}']`);
-      existingInput.checked = true;
-      this._calculateCurrent();
-      return false;
-    }
+    // Mark the item as selected
+    this.selected.add(item.uuid);
 
-    // TODO: Add a new input
+    // If the item doesn't already exist in the pool, add it
+    if ( !this.pool.find(i => i.uuid === item.uuid) ) this.dropped.push(item);
+
+    this.render();
   }
 
   /* -------------------------------------------- */

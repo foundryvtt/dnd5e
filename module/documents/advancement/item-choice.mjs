@@ -13,6 +13,7 @@ export default class ItemChoiceAdvancement extends Advancement {
     return foundry.utils.mergeObject(super.metadata, {
       defaults: {
         configuration: {
+          hint: "",
           choices: {},
           allowDrops: true,
           pool: []
