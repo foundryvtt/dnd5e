@@ -1,4 +1,6 @@
 import Advancement from "./advancement.mjs";
+import ItemChoiceConfig from "../../applications/advancement/item-choice-config.mjs";
+import ItemChoiceFlow from "../../applications/advancement/item-choice-flow.mjs";
 
 /**
  * Advancement that presents the player with a choice of multiple items that they can take. Keeps track of which
@@ -22,7 +24,8 @@ export default class ItemChoiceAdvancement extends Advancement {
       hint: game.i18n.localize("DND5E.AdvancementItemChoiceHint"),
       multiLevel: true,
       apps: {
-        config: ItemChoiceConfig
+        config: ItemChoiceConfig,
+        flow: ItemChoiceFlow
       }
     });
   }
