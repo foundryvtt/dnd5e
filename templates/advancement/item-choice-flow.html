@@ -2,8 +2,13 @@
   data-current="{{choices.current}}" data-max="{{choices.max}}">
   <h3>{{{title}}}</h3>
 
-  <p>Chosen: <span class="current">{{choices.current}}</span> of {{choices.max}}</p>
+  {{#if advancement.data.configuration.hint}}
+    <p>{{advancement.data.configuration.hint}}</p>
+  {{/if}}
 
+  <h4 class="form-header">Chosen: <span class="current">{{choices.current}}</span> of {{choices.max}}</h4>
+
+  {{log this}}
   <div class="drop-target">
     {{#each items}}
       <div class="item-name flexrow">
@@ -13,10 +18,12 @@
             <a data-uuid="{{uuid}}">{{this.name}}</a>
           </h4>
           {{#if this.dropped}}
-            <a class="item-control item-delete" title="{{localize DND5E.ItemDelete}}"><i class="fas fa-trash"></i></a>
+            <a class="item-control item-delete" title="{{localize 'DND5E.ItemDelete'}}">
+              <i class="fas fa-trash"></i>
+            </a>
             <input type="hidden" name="{{this.uuid}}" value="true" data-dtype="Boolean">
           {{else}}
-            <input type="checkbox" name="{{this.uuid}}" {{checked this.checked}} {{disabled @root.choices.full}}>
+            <input type="checkbox" name="{{this.uuid}}" {{checked this.checked}} {{disabled this.disabled}}>
           {{/if}}
         </label>
       </div>
