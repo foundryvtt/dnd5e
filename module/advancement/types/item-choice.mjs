@@ -67,6 +67,66 @@ export class ItemChoiceAdvancement extends Advancement {
     return Object.values(items).reduce((html, uuid) => html + game.dnd5e.utils._linkForUuid(uuid), "");
   }
 
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Locally apply this advancement to the actor.
+   * @param {number} level              Level being advanced.
+   * @param {object} data               Data from the advancement form.
+   * @param {object} [retainedData={}]  Item data grouped by UUID. If present, this data will be used rather than
+   *                                    fetching new data from the source.
+   */
+  async apply(level, data, retainedData={}) {
+    const items = [];
+    const updates = {};
+    for ( const [uuid, selected] of Object.entries(data) ) {
+      if ( !selected ) continue;
+      const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
+      if ( !item ) continue;
+      item.data.update({
+        _id: retainedData[uuid]?._id ?? foundry.utils.randomID(),
+        "flags.dnd5e.sourceId": uuid,
+        "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+      });
+      items.push(item.toObject());
+      // TODO: Trigger any additional advancement steps for added items
+      updates[item.id] = uuid;
+    }
+    this.actor.data.update({items});
+    this.updateSource({[`value.${level}`]: updates});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  restore(level, data) {
+    const updates = {};
+    for ( const item of data.items ) {
+      this.actor.data.update({items: [item]});
+      // TODO: Restore any additional advancement data here
+      updates[item._id] = item.flags.dnd5e.sourceId;
+    }
+    this.updateSource({[`value.${level}`]: updates});
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  reverse(level) {
+    const items = [];
+    for ( const id of Object.keys(this.data.value[level] ?? {}) ) {
+      const item = this.actor.items.get(id);
+      if ( item ) items.push(item.toObject());
+      this.actor.items.delete(id);
+      // TODO: Ensure any advancement data attached to these items is properly reversed
+      // and store any advancement data for these items in case they need to be restored
+    }
+    this.updateSource({[`value.-=${level}`]: null });
+    return { items };
+  }
+
 }
 
 
@@ -227,7 +287,6 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
-    item.dropped = true;
 
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
@@ -238,7 +297,10 @@ export class ItemChoiceFlow extends AdvancementFlow {
     this.selected.add(item.uuid);
 
     // If the item doesn't already exist in the pool, add it
-    if ( !this.pool.find(i => i.uuid === item.uuid) ) this.dropped.push(item);
+    if ( !this.pool.find(i => i.uuid === item.uuid) ) {
+      this.dropped.push(item);
+      item.dropped = true;
+    }
 
     this.render();
   }
