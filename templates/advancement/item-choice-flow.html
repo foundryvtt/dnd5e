@@ -1,0 +1,29 @@
+<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}"
+  data-current="{{choices.current}}" data-max="{{choices.max}}">
+  <h3>{{{title}}}</h3>
+
+  <p>Chosen: <span class="current">{{choices.current}}</span> of {{choices.max}}</p>
+
+  <div class="drop-target">
+    {{#each items}}
+      <div class="item-name flexrow">
+        <div class="item-image" style="background-image: url({{this.img}});"></div>
+        <label class="flexrow">
+          <h4>
+            <a data-uuid="{{uuid}}">{{this.name}}</a>
+          </h4>
+          {{#if this.dropped}}
+            <a class="item-control item-delete" title="{{localize DND5E.ItemDelete}}"><i class="fas fa-trash"></i></a>
+            <input type="hidden" name="{{this.uuid}}" value="true" data-dtype="Boolean">
+          {{else}}
+            <input type="checkbox" name="{{this.uuid}}" {{checked this.checked}} {{disabled @root.choices.full}}>
+          {{/if}}
+        </label>
+      </div>
+    {{/each}}
+
+    {{#if advancement.data.configuration.allowDrops}}
+      <p class="hint centered">{{localize "DND5E.AdvancementItemChoiceFlowDropHint"}}</p>
+    {{/if}}
+  </div>
+</form>
