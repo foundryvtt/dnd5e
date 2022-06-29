@@ -162,6 +162,9 @@ export default class AdvancementConfig extends FormApplication {
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
+    const verified = this._verifyDroppedItem(event, item);
+    if ( !verified ) return false;
+
     const existingItems = foundry.utils.getProperty(this.advancement.data.configuration, this.options.dropKeyPath);
 
     // Abort if this uuid is the parent item
@@ -176,6 +179,18 @@ export default class AdvancementConfig extends FormApplication {
 
     await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
     this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Called when an item is dropped to verify the Item before it is saved.
+   * @param {Event} event  Triggering drop event.
+   * @param {Item5e} item  The materialized Item that was dropped.
+   * @returns {boolean}    Is the dropped Item valid?
+   */
+  _verifyDroppedItem(event, item) {
+    return true;
   }
 
 }

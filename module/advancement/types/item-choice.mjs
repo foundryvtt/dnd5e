@@ -18,6 +18,7 @@ export class ItemChoiceAdvancement extends Advancement {
           hint: "",
           choices: {},
           allowDrops: true,
+          type: null,
           pool: []
         }
       },
@@ -32,6 +33,15 @@ export class ItemChoiceAdvancement extends Advancement {
       }
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The item types that are supported in Item Choice. This order will be how they are displayed
+   * in the configuration interface.
+   * @enum {object}
+   */
+  static VALID_TYPES = ["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"];
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -150,10 +160,31 @@ export class ItemChoiceConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
+  getData() {
+    const data = { ...super.getData(), validTypes: {} };
+    for ( const type of this.advancement.constructor.VALID_TYPES ) {
+      data.validTypes[type] = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
+    }
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   prepareConfigurationUpdate(configuration) {
     if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
     return configuration;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _verifyDroppedItem(event, item) {
+    const type = this.advancement.data.configuration.type;
+    if ( !type || (type === item.type) ) return true;
+    const typeName = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
+    ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeName }));
+    return false;
   }
 
 }
@@ -208,6 +239,8 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
     const max = this.advancement.data.configuration.choices[this.level];
     const choices = { max, current: this.selected.size, full: this.selected.size >= max };
+
+    // TODO: Display dropped items in list when returning to option
 
     // TODO: Make any choices made at previous levels unavailable
     // TODO: Make any items already on actor unavailable?
@@ -295,6 +328,13 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
+
+    // If there is a type restriction, verify it against the dropped type
+    const type = this.advancement.data.configuration.type;
+    if ( type && (type !== item.type) ) {
+      const typeName = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
+      return ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeName }));
+    }
 
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
