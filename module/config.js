@@ -327,19 +327,6 @@ DND5E.encumbranceMultiplyer = {
 }
 
 /**
- * Size progression upware (there is probably a better way)
- * @enum {@enum}
- */
-DND5E.nextSizeUp = {
-  tiny: sm,
-  sm: med,
-  med: lg,
-  lg: huge,
-  huge: grg,
-  grg: grg
-}
-
-/**
  * Colors used to visualize temporary and temporary maximum HP in token health bars.
  * @enum {number}
  */
