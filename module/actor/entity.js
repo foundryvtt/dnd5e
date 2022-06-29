@@ -751,29 +751,6 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
- * Size progression upware (there is probably a better way)
- * @param {DND5E.actorSizes}
- */
-_getNextLargerSize(size) {
-  switch(size){
-    case CONFIG.DND5E.actorSizes.tiny: 
-      return CONFIG.DND5E.actorSizes.sm;
-    case CONFIG.DND5E.actorSizes.sm:
-      return CONFIG.DND5E.actorSizes.med;
-    case CONFIG.DND5E.actorSizes.med:
-      return CONFIG.DND5E.actorSizes.lg;
-    case CONFIG.DND5E.actorSizes.lg: 
-      return CONFIG.DND5E.actorSizes.huge;
-    case CONFIG.DND5E.actorSizes.huge:
-      return CONFIG.DND5E.actorSizes.grg;
-    case CONFIG.DND5E.actorSizes.grg:
-      return CONFIG.DND5E.actorSizes.grg;
-    default:
-      return CONFIG.DND5E.actorSizes.med;
-    }
-  }
-
-  /**
    * Compute the level and percentage of encumbrance for an Actor.
    *
    * Optionally include the weight of carried currency across all denominations by applying the standard rule
@@ -807,7 +784,7 @@ _getNextLargerSize(size) {
 
     // Determine the encumbrance size class
     let size = actorData.data.traits.size;
-    if ( this.getFlag("dnd5e", "powerfulBuild") ) size = this._getNextLargerSize(size);
+    if ( this.getFlag("dnd5e", "powerfulBuild") ) size = CONFIG.DND5E.nextSizeUp[size];
     let sizeMod = CONFIG.DND5E.encumbranceMultiplyer[size];
 
     // Compute Encumbrance percentage
