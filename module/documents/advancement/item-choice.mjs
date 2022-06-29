@@ -16,6 +16,7 @@ export default class ItemChoiceAdvancement extends Advancement {
           hint: "",
           choices: {},
           allowDrops: true,
+          type: null,
           pool: []
         }
       },
@@ -30,6 +31,15 @@ export default class ItemChoiceAdvancement extends Advancement {
       }
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The item types that are supported in Item Choice. This order will be how they are displayed
+   * in the configuration interface.
+   * @type {Set<string>}
+   */
+  static VALID_TYPES = new Set(["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"]);
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */

@@ -14,6 +14,17 @@
       <p class="hint">{{localize "DND5E.AdvancementItemChoiceAllowDropsHint"}}</p>
     </div>
 
+    <div class="form-group">
+      <label>{{localize "DND5E.AdvancementItemChoiceType"}}</label>
+      <div class="form-fields">
+        <select name="data.configuration.type">
+          {{selectOptions validTypes selected=data.configuration.type
+            blank=(localize "DND5E.AdvancementItemChoiceTypeAny")}}
+        </select>
+      </div>
+      <p class="hint">{{localize "DND5E.AdvancementItemChoiceTypeHint"}}</p>
+    </div>
+
     <div class="drop-target">
       <ol class="items-list">
         <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>

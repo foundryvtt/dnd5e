@@ -48,6 +48,8 @@ export default class ItemChoiceFlow extends AdvancementFlow {
     const max = this.advancement.data.configuration.choices[this.level];
     const choices = { max, current: this.selected.size, full: this.selected.size >= max };
 
+    // TODO: Display dropped items in list when returning to option
+
     // TODO: Make any choices made at previous levels unavailable
     // TODO: Make any items already on actor unavailable?
     // TODO: Make sure selected works properly with retained data
@@ -134,6 +136,13 @@ export default class ItemChoiceFlow extends AdvancementFlow {
 
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
+
+    // If there is a type restriction, verify it against the dropped type
+    const type = this.advancement.data.configuration.type;
+    if ( type && (type !== item.type) ) {
+      const typeName = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
+      return ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeName }));
+    }
 
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
