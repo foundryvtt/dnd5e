@@ -4,30 +4,24 @@ import AdvancementFlow from "./advancement-flow.mjs";
  * Inline application that presents the player with a choice of items.
  */
 export default class ItemChoiceFlow extends AdvancementFlow {
-  constructor(...args) {
-    super(...args);
 
-    /**
-     * Set of selected UUIDs.
-     * @type {Set<string>}
-     */
-    this.selected = new Set(
-      this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
-      ?? Object.values(this.advancement.data.value[this.level] ?? {})
-    );
+  /**
+   * Set of selected UUIDs.
+   * @type {Set<string>}
+   */
+  selected;
 
-    /**
-     * Cached items from the advancement's pool.
-     * @type {Array<Item5e>}
-     */
-    this.pool = undefined;
+  /**
+   * Cached items from the advancement's pool.
+   * @type {Array<Item5e>}
+   */
+  pool;
 
-    /**
-     * List of dropped items.
-     * @type {Array<Item5e>}
-     */
-    this.dropped = [];
-  }
+  /**
+   * List of dropped items.
+   * @type {Array<Item5e>}
+   */
+  dropped;
 
   /* -------------------------------------------- */
 
@@ -43,17 +37,28 @@ export default class ItemChoiceFlow extends AdvancementFlow {
 
   /** @inheritdoc */
   async getData() {
+    // Prepare initial data
+    this.selected ??= new Set(
+      this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
+        ?? Object.values(this.advancement.data.value[this.level] ?? {})
+    );
     this.pool ??= await Promise.all(this.advancement.data.configuration.pool.map(fromUuid));
+    this.dropped ??= await (this.retainedData?.items ?? []).reduce(async (arrP, data) => {
+      const arr = await arrP;
+      const uuid = foundry.utils.getProperty(data, "flags.dnd5e.sourceId");
+      if ( !this.pool.find(i => uuid === i.uuid) ) {
+        const item = await fromUuid(uuid);
+        item.dropped = true;
+        arr.push(item);
+      }
+      return arr;
+    }, []);
 
     const max = this.advancement.data.configuration.choices[this.level];
     const choices = { max, current: this.selected.size, full: this.selected.size >= max };
 
-    // TODO: Display dropped items in list when returning to option
-
     // TODO: Make any choices made at previous levels unavailable
     // TODO: Make any items already on actor unavailable?
-    // TODO: Make sure selected works properly with retained data
-    // TODO: Ensure everything is populated properly when going forward and backward through steps
 
     const previousLevels = {};
     const previouslySelected = new Set();
