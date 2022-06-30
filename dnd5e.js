@@ -34,6 +34,7 @@ import ActorSheet5eNPC from "./module/actor/sheets/npc.js";
 import ActorSheet5eVehicle from "./module/actor/sheets/vehicle.js";
 import ActorSkillConfig from "./module/apps/skill-config.js";
 import ActorTypeConfig from "./module/apps/actor-type.js";
+import DamageTraitSelector from "./module/apps/damage-trait-selector.js";
 import ItemSheet5e from "./module/item/sheet.js";
 import LongRestDialog from "./module/apps/long-rest.js";
 import ProficiencySelector from "./module/apps/proficiency-selector.js";
@@ -73,6 +74,7 @@ Hooks.once("init", function() {
       ActorSheet5eVehicle,
       ActorSkillConfig,
       ActorTypeConfig,
+      DamageTraitSelector,
       ItemSheet5e,
       LongRestDialog,
       ProficiencySelector,
