@@ -327,7 +327,7 @@ DND5E.encumbranceMultiplyer = {
 };
 
 /**
- * Size progression upward (there is probably a better way)
+ * Size progression upward
  * @enum {@enum}
  */
 DND5E.nextSizeUp = {
