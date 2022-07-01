@@ -794,7 +794,9 @@ export default class Actor5e extends Actor {
       ? CONFIG.DND5E.encumbrance.strMultiplier.metric
       : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
 
-    const max = (actorData.data.abilities.str.value * strengthMultiplier * sizeMod).toNearest(0.1);
+    const max = ((actorData.data.abilities.str.value * strengthMultiplier
+      * sizeMod * actorData.data.attributes.encumbrance.capacityMultiplyer)
+      + actorData.data.attributes.encumbrance.capacityBonus).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (200/3) };
   }
