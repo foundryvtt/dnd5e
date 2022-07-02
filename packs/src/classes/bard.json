@@ -16,6 +16,15 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "9oz3k13fa953sdiq",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": "",
+        "icon": "",
+        "classRestriction": ""
+      },
+      {
         "_id": "rpmaepj0rdbnnrzd",
         "type": "ItemGrant",
         "configuration": {
@@ -117,11 +126,21 @@
         "classRestriction": ""
       },
       {
-        "_id": "9oz3k13fa953sdiq",
-        "type": "HitPoints",
-        "configuration": {},
+        "_id": "4yzoccslp0b2xkvv",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.",
+          "choices": {
+            "10": 2,
+            "14": 2,
+            "18": 2
+          },
+          "allowDrops": true,
+          "type": "spell",
+          "pool": []
+        },
         "value": {},
-        "title": "",
+        "title": "Magical Secrets",
         "icon": "",
         "classRestriction": ""
       },
