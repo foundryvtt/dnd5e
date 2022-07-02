@@ -16,6 +16,13 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "o6jij5xwl7jkaob6",
+        "type": "HitPoints",
+        "configuration": {},
+        "value": {},
+        "title": ""
+      },
+      {
         "_id": "mlcvcu7p2jfwxwa3",
         "type": "ItemGrant",
         "configuration": {
@@ -122,11 +129,26 @@
         "title": "Features"
       },
       {
-        "_id": "o6jij5xwl7jkaob6",
-        "type": "HitPoints",
-        "configuration": {},
+        "_id": "lhdj4m0z61qeoass",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again.",
+          "choices": {
+            "1": 1
+          },
+          "allowDrops": true,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.8YwPFv3UAPjWVDNf",
+            "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
+            "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4",
+            "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm",
+            "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O",
+            "Compendium.dnd5e.classfeatures.mHcSjcHJ8oZu3hkb"
+          ]
+        },
         "value": {},
-        "title": ""
+        "title": "Fighting Style"
       },
       {
         "_id": "sk4yn2giu0mx48u8",

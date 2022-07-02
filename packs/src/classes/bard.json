@@ -173,6 +173,23 @@
         "title": "Features"
       },
       {
+        "_id": "4yzoccslp0b2xkvv",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "Choose two spells from any classes, including this one. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.",
+          "choices": {
+            "10": 2,
+            "14": 2,
+            "18": 2
+          },
+          "allowDrops": true,
+          "type": "spell",
+          "pool": []
+        },
+        "value": {},
+        "title": "Magical Secrets"
+      },
+      {
         "_id": "vc31v6423jmiex1p",
         "type": "ScaleValue",
         "configuration": {
