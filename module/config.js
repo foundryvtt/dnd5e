@@ -287,57 +287,58 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * Creature sizes.
- * @enum {string}
+ * Configuration data for various actor sizes.
+ *
+ * @typedef {object} ActorSizeConfiguration
+ * @property {string} label                  Localized display name.
+ * @property {number} token                  Default token size.
+ * @property {number} encumbranceMultiplier  How much is the actor's encumbrance multiplied compared to the default.
+ * @property {string} nextSizeUp             What the next size category larger is
+ */
+
+/**
+ * Various sizes that an actor can be.
+ * @enum {ActorSizeConfiguration}
  */
 DND5E.actorSizes = {
-  tiny: "DND5E.SizeTiny",
-  sm: "DND5E.SizeSmall",
-  med: "DND5E.SizeMedium",
-  lg: "DND5E.SizeLarge",
-  huge: "DND5E.SizeHuge",
-  grg: "DND5E.SizeGargantuan"
+  tiny: {
+    label:  "DND5E.SizeTiny",
+    tokenSize: 0.5,
+    encumbranceMultiplier: 0.5,
+    nextSizeUp: "sm"
+  },
+  sm: {
+    label: "DND5E.SizeSmall",
+    tokenSize: 1,
+    encumbranceMultiplier: 1,
+    nextSizeUp: "med"
+  },
+  med: {
+    label: "DND5E.SizeMedium",
+    tokenSize: 1,
+    encumbranceMultiplier: 1,
+    nextSizeUp: "lg"
+  },
+  lg: {
+    label: "DND5E.SizeLarge",
+    tokenSize: 2,
+    encumbranceMultiplier: 2,
+    nextSizeUp: "huge"
+  },
+  huge: {
+    label: "DND5E.SizeHuge",
+    tokenSize: 3,
+    encumbranceMultiplier: 4,
+    nextSizeUp: "grg"
+  },
+  grg: {
+    label: "DND5E.SizeGargantuan",
+    tokenSize: 4,
+    encumbranceMultiplier: 8,
+    nextSizeUp: "grg"
+  }
 };
-preLocalize("actorSizes");
-
-/**
- * Default token image size for the values of `DND5E.actorSizes`.
- * @enum {number}
- */
-DND5E.tokenSizes = {
-  tiny: 0.5,
-  sm: 1,
-  med: 1,
-  lg: 2,
-  huge: 3,
-  grg: 4
-};
-
-/**
- * Default encumbrance multiplers for `DND5E.actorSizes`.
- * @enum {number}
- */
-DND5E.encumbranceMultiplyer = {
-  tiny: 0.5,
-  sm: 1,
-  med: 1,
-  lg: 2,
-  huge: 4,
-  grg: 8
-};
-
-/**
- * Size progression upward
- * @enum {@enum}
- */
-DND5E.nextSizeUp = {
-  tiny: "sm",
-  sm: "med",
-  med: "lg",
-  lg: "huge",
-  huge: "grg",
-  grg: "grg"
-};
+preLocalize("actorSizes", { key: "label" });
 
 /**
  * Colors used to visualize temporary and temporary maximum HP in token health bars.

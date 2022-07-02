@@ -813,7 +813,7 @@ export default class Actor5e extends Actor {
 
     // Some sensible defaults for convenience
     // Token size category
-    const s = CONFIG.DND5E.tokenSizes[this.data.data.traits.size || "med"];
+    const s = this.data.data.traits.size.tokenSize || "med";
     this.data.token.update({width: s, height: s});
 
     // Player character configuration
@@ -831,7 +831,7 @@ export default class Actor5e extends Actor {
     // Apply changes in Actor size to Token width/height
     const newSize = foundry.utils.getProperty(changed, "data.traits.size");
     if ( newSize && (newSize !== foundry.utils.getProperty(this.data, "data.traits.size")) ) {
-      let size = CONFIG.DND5E.tokenSizes[newSize];
+      let size = newSize.tokenSize;
       if ( !foundry.utils.hasProperty(changed, "token.width") ) {
         changed.token = changed.token || {};
         changed.token.height = size;
