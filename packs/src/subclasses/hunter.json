@@ -1,4 +1,5 @@
 {
+  "_id": "uqd2q6WjVfcsaaGb",
   "name": "Hunter",
   "type": "subclass",
   "img": "icons/skills/ranged/arrow-flying-spiral-blue.webp",
@@ -95,6 +96,81 @@
         "value": {},
         "level": 15,
         "title": "Features"
+      },
+      {
+        "_id": "8c4rk56z4ynaypc2",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "3": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.5gx1O0sxK08awEO9",
+            "Compendium.dnd5e.classfeatures.StfmqK1twVfukpa0",
+            "Compendium.dnd5e.classfeatures.C6sHdDGmCMo0cYHd"
+          ]
+        },
+        "value": {},
+        "title": "Hunter's Prey"
+      },
+      {
+        "_id": "7t2rkbjc6gpfra5a",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "7": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.pAQMJU5R9SGUmzHU",
+            "Compendium.dnd5e.classfeatures.slelvrm83v9UAKZU",
+            "Compendium.dnd5e.classfeatures.zbHu0NvHuII8lR7W"
+          ]
+        },
+        "value": {},
+        "title": "Defensive Tactics"
+      },
+      {
+        "_id": "opcw7puwazom08vg",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "11": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.l7W6JB9yWLLLtQKP",
+            "Compendium.dnd5e.classfeatures.1DY8w3CXeD7PHDXF"
+          ]
+        },
+        "value": {},
+        "title": "Multiattack"
+      },
+      {
+        "_id": "iioetnpfrvdryvp6",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "",
+          "choices": {
+            "15": 1
+          },
+          "allowDrops": false,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.laVHAIOKIsUeezWd",
+            "Compendium.dnd5e.classfeatures.Xf763cJoDHPPWSGG",
+            "Compendium.dnd5e.classfeatures.7pyZjz5vlUWV01qQ"
+          ]
+        },
+        "value": {},
+        "title": "Superior Hunter's Defense"
       }
     ],
     "spellcasting": {

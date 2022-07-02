@@ -1,4 +1,5 @@
 {
+  "_id": "MNvsEc4D2ccX7dQT",
   "name": "College of Lore",
   "type": "subclass",
   "img": "icons/sundries/books/book-open-brown-black.webp",
@@ -75,6 +76,21 @@
           }
         },
         "value": {}
+      },
+      {
+        "_id": "pu232jo6iy844q72",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "Learn two spells of your choice from any class. A spell you choose must be of a level you can cast, as shown on the Bard table, or a cantrip.",
+          "choices": {
+            "6": 2
+          },
+          "allowDrops": true,
+          "type": "spell",
+          "pool": []
+        },
+        "value": {},
+        "title": "Additional Magical Secrets"
       }
     ],
     "spellcasting": {

@@ -1,4 +1,5 @@
 {
+  "_id": "sprHbe7cRg9osTzf",
   "name": "Champion",
   "type": "subclass",
   "img": "icons/skills/melee/maneuver-sword-katana-yellow.webp",
@@ -116,6 +117,28 @@
         "value": {},
         "level": 18,
         "title": "Features"
+      },
+      {
+        "_id": "6bzie31ksf56vvp3",
+        "type": "ItemChoice",
+        "configuration": {
+          "hint": "Choose a second option from the Fighting Style class feature.",
+          "choices": {
+            "10": 1
+          },
+          "allowDrops": true,
+          "type": "feat",
+          "pool": [
+            "Compendium.dnd5e.classfeatures.8YwPFv3UAPjWVDNf",
+            "Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB",
+            "Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4",
+            "Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm",
+            "Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O",
+            "Compendium.dnd5e.classfeatures.mHcSjcHJ8oZu3hkb"
+          ]
+        },
+        "value": {},
+        "title": "Additional Fighting Style"
       }
     ],
     "spellcasting": {
