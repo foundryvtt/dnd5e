@@ -1,0 +1,38 @@
+{
+  "_id": "",
+  "name": "Life Domain",
+  "type": "spell-list",
+  "img": "",
+  "data": {
+    "type": "subclass",
+    "identifier": "life-domain",
+    "spells": {
+      "1": [
+        "bless",
+        "cure-wounds"
+      ],
+      "2": [
+        "lesser-restoration",
+        "spiritual-weapon"
+      ],
+      "3": [
+        "beacon-of-hope",
+        "revivify"
+      ],
+      "4": [
+        "death-ward",
+        "guardian-of-faith"
+      ],
+      "5": [
+        "mass-cure-wounds",
+        "raise-dead"
+      ]
+    }
+  },
+  "folder": null,
+  "sort": 0,
+  "permission": {
+    "default": 0
+  },
+  "flags": {}
+}
