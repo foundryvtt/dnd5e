@@ -4,9 +4,9 @@ import { AdvancementConfirmationDialog } from "./advancement/advancement-confirm
 import { AdvancementError, AdvancementFlow } from "./advancement/advancement-flow.js";
 import { AdvancementManager } from "./advancement/advancement-manager.js";
 import { AdvancementSelection } from "./advancement/advancement-selection.js";
-import { HitPointsAdvancement } from "./advancement/hit-points.js";
-import { ItemGrantAdvancement } from "./advancement/item-grant.js";
-import { ScaleValueAdvancement } from "./advancement/scale-value.js";
+import { HitPointsAdvancement, HitPointsConfig, HitPointsFlow } from "./advancement/hit-points.js";
+import { ItemGrantAdvancement, ItemGrantConfig, ItemGrantFlow } from "./advancement/item-grant.js";
+import { ScaleValueAdvancement, ScaleValueConfig, ScaleValueFlow } from "./advancement/scale-value.js";
 
 export default {
   Advancement,
@@ -26,10 +26,9 @@ export default {
 export { Advancement };
 export { AdvancementConfig };
 export { AdvancementConfirmationDialog };
-export { AdvancementError };
-export { AdvancementFlow };
+export { AdvancementError, AdvancementFlow };
 export { AdvancementManager };
 export { AdvancementSelection };
-export { HitPointsAdvancement };
-export { ItemGrantAdvancement };
-export { ScaleValueAdvancement };
+export { HitPointsAdvancement, HitPointsConfig, HitPointsFlow };
+export { ItemGrantAdvancement, ItemGrantConfig, ItemGrantFlow };
+export { ScaleValueAdvancement, ScaleValueConfig, ScaleValueFlow };
