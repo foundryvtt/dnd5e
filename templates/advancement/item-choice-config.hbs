@@ -25,6 +25,10 @@
       <p class="hint">{{localize "DND5E.AdvancementItemChoiceTypeHint"}}</p>
     </div>
 
+    {{#if showSpellConfig}}
+      {{> "dnd5e.advancement-spell-config"}}
+    {{/if}}
+
     <div class="drop-target">
       <ol class="items-list">
         <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>

@@ -17,7 +17,8 @@ export default class ItemChoiceAdvancement extends Advancement {
           choices: {},
           allowDrops: true,
           type: null,
-          pool: []
+          pool: [],
+          spell: null
         }
       },
       order: 50,
@@ -89,17 +90,24 @@ export default class ItemChoiceAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
+    const spellChanges = this.data.configuration.spell ? this._prepareSpellChanges(this.data.configuration.spell) : {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
-      const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
-      if ( !item ) continue;
-      item.updateSource({
-        _id: retainedData[uuid]?._id ?? foundry.utils.randomID(),
-        "flags.dnd5e.sourceId": uuid,
-        "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-      });
-      items.push(item.toObject());
-      updates[item.id] = uuid;
+
+      let itemData = retainedData[uuid];
+      if ( !itemData ) {
+        const source = await fromUuid(uuid);
+        if ( !source ) continue;
+        itemData = source.clone({
+          _id: foundry.utils.randomID(),
+          "flags.dnd5e.sourceId": uuid,
+          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+        }, {keepId: true}).toObject();
+      }
+      foundry.utils.mergeObject(itemData, spellChanges);
+
+      items.push(itemData);
+      updates[itemData._id] = uuid;
     }
     this.actor.updateSource({items});
     this.updateSource({[`value.${level}`]: updates});

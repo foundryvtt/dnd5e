@@ -23,6 +23,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     for ( const type of this.advancement.constructor.VALID_TYPES ) {
       data.validTypes[type] = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
     }
+    data.showSpellConfig = this.advancement.data.configuration.type === "spell";
     return data;
   }
 
