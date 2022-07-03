@@ -117,7 +117,15 @@
           },
           "allowDrops": true,
           "type": "spell",
-          "pool": []
+          "pool": [],
+          "spell": {
+            "ability": "",
+            "preparation": "atwill",
+            "uses": {
+              "max": "1",
+              "per": "sr"
+            }
+          }
         },
         "value": {},
         "title": "Signature Spells"
