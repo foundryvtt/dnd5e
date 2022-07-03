@@ -249,9 +249,6 @@ export class ItemChoiceFlow extends AdvancementFlow {
     const max = this.advancement.data.configuration.choices[this.level];
     const choices = { max, current: this.selected.size, full: this.selected.size >= max };
 
-    // TODO: Make any choices made at previous levels unavailable
-    // TODO: Make any items already on actor unavailable?
-
     const previousLevels = {};
     const previouslySelected = new Set();
     for ( const [level, data] of Object.entries(this.advancement.data.value) ) {
@@ -260,11 +257,12 @@ export class ItemChoiceFlow extends AdvancementFlow {
       Object.values(data).forEach(uuid => previouslySelected.add(uuid));
     }
 
-    const items = [...this.pool, ...this.dropped];
-    items.forEach(i => {
+    const items = [...this.pool, ...this.dropped].reduce((items, i) => {
       i.checked = this.selected.has(i.uuid);
-      i.disabled = (!i.checked && choices.full) || previouslySelected.has(i.uuid);
-    });
+      i.disabled = !i.checked && choices.full;
+      if ( !previouslySelected.has(i.uuid) ) items.push(i);
+      return items;
+    }, []);
 
     return foundry.utils.mergeObject(super.getData(), { choices, items, previousLevels });
   }
@@ -344,7 +342,7 @@ export class ItemChoiceFlow extends AdvancementFlow {
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
 
-    // TODO: Check to ensure the dropped item doesn't already exist on the actor
+    // TODO: Check to ensure the dropped item hasn't been selected at a lower level
 
     // Mark the item as selected
     this.selected.add(item.uuid);
