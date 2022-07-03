@@ -8,6 +8,10 @@
     <p class="hint">{{localize "DND5E.AdvancementItemGrantOptionalHint"}}</p>
   </div>
 
+  {{#if showSpellConfig}}
+    {{> "systems/dnd5e/templates/advancement/parts/item-spell-config.html"}}
+  {{/if}}
+
   <div class="drop-target">
     <ol class="items-list">
       <li class="items-header flexrow"><h3 class="item-name">{{localize "DOCUMENT.Items"}}</h3></li>

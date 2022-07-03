@@ -12,7 +12,11 @@ export class ItemGrantAdvancement extends Advancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       defaults: {
-        configuration: { items: [], optional: false }
+        configuration: {
+          items: [],
+          optional: false,
+          spell: null
+        }
       },
       order: 40,
       icon: "systems/dnd5e/icons/svg/item-grant.svg",
@@ -66,6 +70,7 @@ export class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
+    const spellChanges = this.data.configuration.spell ? this._prepareSpellChanges(this.data.configuration.spell) : {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
@@ -79,6 +84,7 @@ export class ItemGrantAdvancement extends Advancement {
           "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
         }, {keepId: true}).toObject();
       }
+      foundry.utils.mergeObject(itemData, spellChanges);
 
       items.push(itemData);
       // TODO: Trigger any additional advancement steps for added items
@@ -132,6 +138,16 @@ export class ItemGrantConfig extends AdvancementConfig {
       dropKeyPath: "items",
       template: "systems/dnd5e/templates/advancement/item-grant-config.html"
     });
+  }
+
+  /* -------------------------------------------- */
+
+  async getData() {
+    const data = super.getData();
+    // TODO: Only need the index here, replace with simplified index fetching in V10
+    data.items = await Promise.all(data.data.configuration.items.map(fromUuid));
+    data.showSpellConfig = data.items.some(i => i.type === "spell");
+    return data;
   }
 
 }

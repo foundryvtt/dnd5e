@@ -19,7 +19,8 @@ export class ItemChoiceAdvancement extends Advancement {
           choices: {},
           allowDrops: true,
           type: null,
-          pool: []
+          pool: [],
+          spell: null
         }
       },
       order: 50,
@@ -91,20 +92,27 @@ export class ItemChoiceAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
+    const spellChanges = this.data.configuration.spell ? this._prepareSpellChanges(this.data.configuration.spell) : {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
-      const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
-      if ( !item ) continue;
-      item.data.update({
-        _id: retainedData[uuid]?._id ?? foundry.utils.randomID(),
-        "flags.dnd5e.sourceId": uuid,
-        "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-      });
-      items.push(item.toObject());
+
+      let itemData = retainedData[uuid];
+      if ( !itemData ) {
+        const source = await fromUuid(uuid);
+        if ( !source ) continue;
+        itemData = source.clone({
+          _id: foundry.utils.randomID(),
+          "flags.dnd5e.sourceId": uuid,
+          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+        }, {keepId: true}).toObject();
+      }
+      foundry.utils.mergeObject(itemData, spellChanges);
+
+      items.push(itemData);
       // TODO: Trigger any additional advancement steps for added items
-      updates[item.id] = uuid;
+      updates[itemData._id] = uuid;
     }
-    this.actor.data.update({items});
+    this.actor.updateSource({items});
     this.updateSource({[`value.${level}`]: updates});
   }
 
@@ -114,7 +122,7 @@ export class ItemChoiceAdvancement extends Advancement {
   restore(level, data) {
     const updates = {};
     for ( const item of data.items ) {
-      this.actor.data.update({items: [item]});
+      this.actor.updateSource({items: [item]});
       // TODO: Restore any additional advancement data here
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
@@ -165,6 +173,7 @@ export class ItemChoiceConfig extends AdvancementConfig {
     for ( const type of this.advancement.constructor.VALID_TYPES ) {
       data.validTypes[type] = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
     }
+    data.showSpellConfig = this.advancement.data.configuration.type === "spell";
     return data;
   }
 
@@ -342,7 +351,26 @@ export class ItemChoiceFlow extends AdvancementFlow {
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
 
-    // TODO: Check to ensure the dropped item hasn't been selected at a lower level
+    // Check to ensure the dropped item hasn't been selected at a lower level
+    for ( const [level, data] of Object.entries(this.advancement.data.value) ) {
+      if ( level >= this.level ) continue;
+      if ( Object.values(data).includes(item.uuid) ) return;
+    }
+
+    // If spell level is restricted, ensure the spell is of the appropriate level
+    const spellLevel = this.advancement.data.configuration.spell?.level;
+    if ( type === "spell" && spellLevel ) {
+      if ( spellLevel === "available") {
+        const maxSlot = this._maxSpellSlotLevel();
+        if ( item.system.level > maxSlot ) return ui.notifications.warn(game.i18n.format(
+          "DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", { level: CONFIG.DND5E.spellLevels[maxSlot] }
+        ));
+      } else if ( item.system.level !== parseInt(spellLevel) ) {
+        return ui.notifications.warn(game.i18n.format(
+          "DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", { level: CONFIG.DND5E.spellLevels[spellLevel] }
+        ));
+      }
+    }
 
     // Mark the item as selected
     this.selected.add(item.uuid);
@@ -354,6 +382,22 @@ export class ItemChoiceFlow extends AdvancementFlow {
     }
 
     this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the maximum spell slot level for the actor to which this advancement is being applied.
+   * @returns {number}
+   */
+  _maxSpellSlotLevel() {
+    const largestSlot = Object.entries(this.advancement.actor.system.spells).reduce((slot, [key, data]) => {
+      if ( data.max === 0 ) return slot;
+      const level = parseInt(key.replace("spell", ""));
+      if ( !Number.isNaN(level) && level > slot ) return level;
+      return slot;
+    }, -1);
+    return Math.max(this.advancement.actor.system.spells.pact.level, largestSlot);
   }
 
   /* -------------------------------------------- */
