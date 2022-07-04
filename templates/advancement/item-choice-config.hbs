@@ -26,6 +26,22 @@
     </div>
 
     {{#if showSpellConfig}}
+      <div class="form-group">
+        <label>{{localize "DND5E.SpellLevel"}}</label>
+        <div class="form-fields">
+          <select name="data.configuration.spell.level">
+            {{#select data.configuration.spell.level}}
+              <option value="">&mdash;</option>
+              {{#each CONFIG.spellLevels as |label key|}}
+                <option value="{{key}}">{{label}}</option>
+              {{/each}}
+              <option value="available">{{localize "DND5E.AdvancementItemChoiceSpellLevelAvailable"}}</option>
+            {{/select}}
+          </select>
+        </div>
+        <p class="hint">{{localize "DND5E.AdvancementItemChoiceSpellLevelHint"}}</p>
+      </div>
+      
       {{> "dnd5e.advancement-spell-config"}}
     {{/if}}
 
