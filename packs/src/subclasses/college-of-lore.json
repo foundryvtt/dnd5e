@@ -87,7 +87,16 @@
           },
           "allowDrops": true,
           "type": "spell",
-          "pool": []
+          "pool": [],
+          "spell": {
+            "level": "available",
+            "ability": "",
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
         },
         "value": {},
         "title": "Additional Magical Secrets"
