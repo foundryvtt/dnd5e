@@ -6,16 +6,14 @@ import LongRestDialog from "../apps/long-rest.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
 import Item5e from "./item.js";
 
-
 /**
  * Extend the base Actor class to implement additional system-specific logic.
- * @extends {Actor}
  */
 export default class Actor5e extends Actor {
 
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {object<string, Item5e>}
+   * @type {Object<Item5e>}
    * @private
    */
   _classes;
@@ -26,11 +24,11 @@ export default class Actor5e extends Actor {
 
   /**
    * A mapping of classes belonging to this Actor.
-   * @type {object<string, Item5e>}
+   * @type {Object<Item5e>}
    */
   get classes() {
     if ( this._classes !== undefined ) return this._classes;
-    if ( !["character", "npc"].includes(this.data.type) ) return this._classes = {};
+    if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
     return this._classes = this.items.filter(item => item.type === "class").reduce((obj, cls) => {
       obj[cls.identifier] = cls;
       return obj;
@@ -64,18 +62,15 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareBaseData() {
-    const updates = {};
-    this._prepareBaseAbilities(this.data, updates);
-    if ( !foundry.utils.isObjectEmpty(updates) ) this.data.update(updates);
-
-    this._prepareBaseArmorClass(this.data);
-    switch ( this.data.type ) {
+    this._prepareBaseAbilities();
+    this._prepareBaseArmorClass();
+    switch ( this.type ) {
       case "character":
-        return this._prepareCharacterData(this.data);
+        return this._prepareCharacterData();
       case "npc":
-        return this._prepareNPCData(this.data);
+        return this._prepareNPCData();
       case "vehicle":
-        return this._prepareVehicleData(this.data);
+        return this._prepareVehicleData();
     }
   }
 
@@ -83,7 +78,7 @@ export default class Actor5e extends Actor {
 
   /** @override */
   applyActiveEffects() {
-    // The Active Effects do not have access to their parent at preparation time so we wait until this stage to
+    // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
     this.effects.forEach(e => e.determineSuppression());
     return super.applyActiveEffects();
@@ -93,49 +88,43 @@ export default class Actor5e extends Actor {
 
   /** @override */
   prepareDerivedData() {
-    const actorData = this.data;
-    const data = actorData.data;
-    const flags = actorData.flags.dnd5e || {};
-    const bonuses = getProperty(data, "bonuses.abilities") || {};
+    const flags = this.flags.dnd5e || {};
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
     let originalSkills = null;
     if (this.isPolymorphed) {
-      const transformOptions = this.getFlag("dnd5e", "transformOptions");
-      const original = game.actors?.get(this.getFlag("dnd5e", "originalActor"));
+      const transformOptions = flags.transformOptions;
+      const original = game.actors?.get(flags.originalActor);
       if (original) {
-        if (transformOptions.mergeSaves) {
-          originalSaves = original.data.data.abilities;
-        }
-        if (transformOptions.mergeSkills) {
-          originalSkills = original.data.data.skills;
-        }
+        if (transformOptions.mergeSaves) originalSaves = original.system.abilities;
+        if (transformOptions.mergeSkills) originalSkills = original.system.skills;
       }
     }
 
     // Ability modifiers and saves
+    const globalBonuses = this.system.bonuses || {};
     const bonusData = this.getRollData();
     const joat = flags.jackOfAllTrades;
-    const dcBonus = this._simplifyBonus(data.bonuses?.spell?.dc, bonusData);
-    const saveBonus = this._simplifyBonus(bonuses.save, bonusData);
-    const checkBonus = this._simplifyBonus(bonuses.check, bonusData);
-    for (let [id, abl] of Object.entries(data.abilities)) {
+    const dcBonus = this._simplifyBonus(globalBonuses.spell?.dc, bonusData);
+    const saveBonus = this._simplifyBonus(globalBonuses.abilities?.save, bonusData);
+    const checkBonus = this._simplifyBonus(globalBonuses.abilities?.check, bonusData);
+    for (let [id, abl] of Object.entries(this.system.abilities)) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.mod = Math.floor((abl.value - 10) / 2);
 
       const isRA = this._isRemarkableAthlete(id);
-      abl.checkProf = new Proficiency(data.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
+      abl.checkProf = new Proficiency(this.system.attributes.prof, (isRA || joat) ? 0.5 : 0, !isRA);
       const saveBonusAbl = this._simplifyBonus(abl.bonuses?.save, bonusData);
       abl.saveBonus = saveBonusAbl + saveBonus;
 
-      abl.saveProf = new Proficiency(data.attributes.prof, abl.proficient);
+      abl.saveProf = new Proficiency(this.system.attributes.prof, abl.proficient);
       const checkBonusAbl = this._simplifyBonus(abl.bonuses?.check, bonusData);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
       abl.save = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
-      abl.dc = 8 + abl.mod + data.attributes.prof + dcBonus;
+      abl.dc = 8 + abl.mod + this.system.attributes.prof + dcBonus;
 
       // If we merged saves when transforming, take the highest bonus here.
       if (originalSaves && abl.proficient) {
@@ -144,36 +133,34 @@ export default class Actor5e extends Actor {
     }
 
     // Attuned items
-    if ( this.type !== "vehicle" ) data.attributes.attunement.value = this.items.filter(i => {
-      return i.data.data.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+    if ( this.type !== "vehicle" ) this.system.attributes.attunement.value = this.items.filter(i => {
+      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
     }).length;
 
     // Inventory encumbrance
-    data.attributes.encumbrance = this._computeEncumbrance(actorData);
+    this.system.attributes.encumbrance = this._computeEncumbrance();
 
     // Prepare skills
-    this._prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills);
-
-    // Reset class store to ensure it is updated with any changes
-    this._classes = undefined;
+    this._prepareSkills(bonusData, checkBonus, originalSkills);
 
     // Determine Initiative Modifier
-    this._computeInitiativeModifier(actorData, checkBonus, bonusData);
+    this._computeInitiativeModifier(checkBonus, bonusData);
 
-    // Determine Scale Values
-    this._computeScaleValues(data);
+    // Reset class scaling and compute scaling values
+    this._classes = undefined;
+    this._computeScaleValues();
 
     // Cache labels
     this.labels = {};
     if ( this.type === "npc" ) {
-      this.labels.creatureType = this.constructor.formatCreatureType(data.details.type);
+      this.labels.creatureType = this.constructor.formatCreatureType(this.system.details.type);
     }
 
     // Prepare spell-casting data
-    this._computeSpellcastingProgression(this.data);
+    this._computeSpellcastingProgression();
 
     // Prepare armor class data
-    const ac = this._computeArmorClass(data);
+    const ac = this._computeArmorClass();
     this.armor = ac.equippedArmor || null;
     this.shield = ac.equippedShield || null;
     if ( ac.warnings ) this._preparationWarnings.push(...ac.warnings);
@@ -213,118 +200,15 @@ export default class Actor5e extends Actor {
    */
   getRollData({ deterministic=false }={}) {
     const data = foundry.utils.deepClone(super.getRollData());
-    data.prof = new Proficiency(this.data.data.attributes.prof, 1);
+    data.prof = new Proficiency(this.system.attributes.prof, 1);
     if ( deterministic ) data.prof = data.prof.flat;
 
     data.classes = {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
-      data.classes[identifier] = cls.data.data;
-      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.data.data;
+      data.classes[identifier] = cls.system;
+      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
     }
     return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Given a list of items to add to the Actor, optionally prompt the
-   * user for which they would like to add.
-   * @param {Item5e[]} items         The items being added to the Actor.
-   * @param {boolean} [prompt=true]  Whether or not to prompt the user.
-   * @returns {Promise<Item5e[]>}
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
-   */
-  async addEmbeddedItems(items, prompt=true) {
-    console.warn("Actor5e#addEmbeddedItems has been deprecated and will be removed in 1.8.");
-    let itemsToAdd = items;
-    if ( !items.length ) return [];
-
-    // Obtain the array of item creation data
-    let toCreate = [];
-    if (prompt) {
-      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
-        hint: game.i18n.localize("DND5E.AddEmbeddedItemPromptHint")
-      });
-      for (let item of items) {
-        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
-      }
-    } else {
-      toCreate = items.map(item => item.toObject());
-    }
-
-    // Create the requested items
-    if (itemsToAdd.length === 0) return [];
-    return Item5e.createDocuments(toCreate, {parent: this});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get a list of features to add to the Actor when a class item is updated.
-   * Optionally prompt the user for which they would like to add.
-   * @param {object} [options]
-   * @param {string} [options.classIdentifier] Identifier slug of the class if it has been changed.
-   * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
-   * @param {number} [options.level]           New class level if it has been changed.
-   * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
-   */
-  async getClassFeatures({classIdentifier, subclassName, level}={}) {
-    console.warn("Actor5e#getClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
-    const existing = new Set(this.items.map(i => i.name));
-    const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
-    return features.filter(f => !existing.has(f.name)) || [];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return the features which a character is awarded for each class level.
-   * @param {object} [options]
-   * @param {string} [options.classIdentifier] Identifier slug of the class being added or updated.
-   * @param {string} [options.subclassName]    Name of the subclass of the class being added, if any.
-   * @param {number} [options.level]           The number of levels in the added class.
-   * @param {number} [options.priorLevel]      The previous level of the added class.
-   * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
-   */
-  static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
-    console.warn("Actor5e#loadClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
-    subclassName = subclassName.slugify();
-
-    // Get the configuration of features which may be added
-    const clsConfig = CONFIG.DND5E.classFeatures[classIdentifier];
-    if (!clsConfig) return [];
-
-    // Acquire class features
-    let ids = [];
-    for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
-
-    // Acquire subclass features
-    const subConfig = clsConfig.subclasses[subclassName] || {};
-    for ( let [l, f] of Object.entries(subConfig.features || {}) ) {
-      l = parseInt(l);
-      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
-    }
-
-    // Load item data for all identified features
-    const features = [];
-    for ( let id of ids ) {
-      features.push(await fromUuid(id));
-    }
-
-    // Class spells should always be prepared
-    for ( const feature of features ) {
-      if ( feature.type === "spell" ) {
-        const preparation = feature.data.data.preparation;
-        preparation.mode = "always";
-        preparation.prepared = true;
-      }
-    }
-    return features;
   }
 
   /* -------------------------------------------- */
@@ -333,56 +217,59 @@ export default class Actor5e extends Actor {
 
   /**
    * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
-   * @param {ActorData} actorData  Data being prepared.
-   * @param {object} updates       Updates to be applied to the actor. *Will be mutated*.
+   * Mutates the system.abilities object.
    * @private
    */
-  _prepareBaseAbilities(actorData, updates) {
-    const abilities = {};
-    const emptyAbility = game.system.template.Actor.templates.common.abilities.cha;
+  _prepareBaseAbilities() {
+    const abilities = this.system.abilities;
+    const updates = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
-      abilities[key] = actorData.data.abilities[key];
-      if ( !abilities[key] ) {
-        const newAbility = foundry.utils.deepClone(emptyAbility);
+      if ( !(key in abilities) ) {
+        const a = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
 
-        // Honor & Sanity default to Charisma & Wisdom for NPCs and 0 for vehicles
-        if ( actorData.type === "npc" ) {
-          if ( key === "hon" ) newAbility.value = actorData.data.abilities.cha?.value ?? 10;
-          else if ( key === "san" ) newAbility.value = actorData.data.abilities.wis?.value ?? 10;
-        } else if ( (actorData.type === "vehicle") && ["hon", "san"].includes(key) ) {
-          newAbility.value = 0;
+        // Honor: Charisma for NPC, 0 for vehicles
+        if ( key === "hon" ) {
+          if ( this.type === "vehicle" ) a.value = 0;
+          else if ( this.type === "npc" ) a.value = abilities.cha?.value ?? 10;
         }
 
-        updates[`data.abilities.${key}`] = newAbility;
+        // Sanity: Wisdom for NPC, 0 for vehicles
+        else if ( key === "san" ) {
+          if ( this.type === "vehicle" ) a.value = 0;
+          else if ( this.type === "npc" ) a.value = a.wis?.value ?? 10;
+        }
+        updates[`system.abilities.${key}`] = a;
       }
     }
-    actorData.data.abilities = abilities;
+    if ( !foundry.utils.isEmpty(updates) ) this.updateSource(updates);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Perform any Character specific preparation.
-   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * Mutates several aspects of the system data object.
+   * @private
    */
-  _prepareCharacterData(actorData) {
-    const data = actorData.data;
+  _prepareCharacterData() {
 
     // Determine character level and available hit dice based on owned Class items
     const [level, hd] = this.items.reduce((arr, item) => {
       if ( item.type === "class" ) {
-        const classLevels = parseInt(item.data.data.levels) || 1;
+        const classLevels = parseInt(item.system.levels) || 1;
         arr[0] += classLevels;
-        arr[1] += classLevels - (parseInt(item.data.data.hitDiceUsed) || 0);
+        arr[1] += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
       }
       return arr;
     }, [0, 0]);
-    data.details.level = level;
-    data.attributes.hd = hd;
+    this.system.details.level = level;
+    this.system.attributes.hd = hd;
 
     // Character proficiency bonus
-    data.attributes.prof = Math.floor((level + 7) / 4);
+    this.system.attributes.prof = Math.floor((level + 7) / 4);
 
     // Experience required for next level
-    const xp = data.details.xp;
+    const xp = this.system.details.xp;
     xp.max = this.getLevelExp(level || 1);
     const prior = this.getLevelExp(level - 1 || 0);
     const required = xp.max - prior;
@@ -394,20 +281,21 @@ export default class Actor5e extends Actor {
 
   /**
    * Perform any NPC specific preparation.
-   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * Mutates several aspects of the system data object.
+   * @private
    */
-  _prepareNPCData(actorData) {
-    const data = actorData.data;
+  _prepareNPCData() {
+    const cr = this.system.details.cr;
 
     // Kill Experience
-    data.details.xp.value = this.getCRExp(data.details.cr);
+    this.system.details.xp.value = this.getCRExp(cr);
 
     // Proficiency
-    data.attributes.prof = Math.floor((Math.max(data.details.cr, 1) + 7) / 4);
+    this.system.attributes.prof = Math.floor((Math.max(cr, 1) + 7) / 4);
 
     // Spellcaster Level
-    if ( data.attributes.spellcasting && !Number.isNumeric(data.details.spellLevel) ) {
-      data.details.spellLevel = Math.max(data.details.cr, 1);
+    if ( this.system.attributes.spellcasting && !Number.isNumeric(this.system.details.spellLevel) ) {
+      this.system.details.spellLevel = Math.max(cr, 1);
     }
   }
 
@@ -415,39 +303,34 @@ export default class Actor5e extends Actor {
 
   /**
    * Perform any Vehicle specific preparation.
-   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * Mutates several aspects of the system data object.
    * @private
    */
-  _prepareVehicleData(actorData) {
-    const data = actorData.data;
-
-    // Proficiency
-    data.attributes.prof = 0;
+  _prepareVehicleData() {
+    this.system.attributes.prof = 0;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Prepare skill checks.
-   * @param {object} actorData       Copy of the data for the actor being prepared. *Will be mutated.*
+   * Prepare skill checks. Mutates the values of system.skills.
    * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} bonuses         Global bonus data.
    * @param {number} checkBonus      Global ability check bonus.
    * @param {object} originalSkills  A transformed actor's original actor's skills.
    * @private
    */
-  _prepareSkills(actorData, bonusData, bonuses, checkBonus, originalSkills) {
-    if (actorData.type === "vehicle") return;
-
-    const data = actorData.data;
-    const flags = actorData.flags.dnd5e || {};
+  _prepareSkills(bonusData, checkBonus, originalSkills) {
+    if (this.type === "vehicle") return;
+    const bonuses = this.system.bonuses?.abilities || {};
+    const flags = this.flags.dnd5e || {};
 
     // Skill modifiers
     const feats = CONFIG.DND5E.characterFlags;
     const joat = flags.jackOfAllTrades;
     const observant = flags.observantFeat;
     const skillBonus = this._simplifyBonus(bonuses.skill, bonusData);
-    for (let [id, skl] of Object.entries(data.skills)) {
+    for (let [id, skl] of Object.entries(this.system.skills)) {
+      const ability = this.system.abilities[skl.ability];
       skl.value = Math.clamped(Number(skl.value).toNearest(0.5), 0, 2) ?? 0;
       const baseBonus = this._simplifyBonus(skl.bonuses?.check, bonusData);
       let roundDown = true;
@@ -469,10 +352,10 @@ export default class Actor5e extends Actor {
       }
 
       // Compute modifier
-      const checkBonusAbl = this._simplifyBonus(data.abilities[skl.ability]?.bonuses?.check, bonusData);
+      const checkBonusAbl = this._simplifyBonus(ability?.bonuses?.check, bonusData);
       skl.bonus = baseBonus + checkBonus + checkBonusAbl + skillBonus;
-      skl.mod = data.abilities[skl.ability]?.mod ?? 0;
-      skl.prof = new Proficiency(data.attributes.prof, skl.value, roundDown);
+      skl.mod = ability?.mod ?? 0;
+      skl.prof = new Proficiency(this.system.attributes.prof, skl.value, roundDown);
       skl.proficient = skl.value;
       skl.total = skl.mod + skl.bonus;
       if ( Number.isNumeric(skl.prof.term) ) skl.total += skl.prof.flat;
@@ -511,11 +394,11 @@ export default class Actor5e extends Actor {
 
   /**
    * Initialize derived AC fields for Active Effects to target.
-   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * Mutates the system.attributes.ac object.
    * @private
    */
-  _prepareBaseArmorClass(actorData) {
-    const ac = actorData.data.attributes.ac;
+  _prepareBaseArmorClass() {
+    const ac = this.system.attributes.ac;
     ac.armor = 10;
     ac.shield = ac.bonus = ac.cover = 0;
     this.armor = null;
@@ -525,25 +408,24 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Calculate the initiative bonus to display on a character sheet
-   *
-   * @param {object} actorData         The actor data being prepared.
+   * Calculate the initiative bonus to display on a character sheet.
+   * Mutates the value of the system.attributes.init object.
    * @param {number} globalCheckBonus  The simplified global ability check bonus for this actor
    * @param {object} bonusData         Actor data to use for replacing formula variables in bonuses
    */
-  _computeInitiativeModifier(actorData, globalCheckBonus, bonusData) {
-    const data = actorData.data;
-    const flags = actorData.flags.dnd5e || {};
-    const init = data.attributes.init;
+  _computeInitiativeModifier(globalCheckBonus, bonusData) {
+    const flags = this.flags.dnd5e || {};
+    const init = this.system.attributes.init;
+    const dex = this.system.abilities.dex;
 
     // Initiative modifiers
     const joat = flags.jackOfAllTrades;
     const athlete = flags.remarkableAthlete;
-    const dexCheckBonus = this._simplifyBonus(data.abilities.dex?.bonuses?.check, bonusData);
+    const dexCheckBonus = this._simplifyBonus(dex?.bonuses?.check, bonusData);
 
     // Compute initiative modifier
-    init.mod = data.abilities.dex?.mod ?? 0;
-    init.prof = new Proficiency(data.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
+    init.mod = dex?.mod ?? 0;
+    init.prof = new Proficiency(this.system.attributes.prof, (joat || athlete) ? 0.5 : 0, !athlete);
     init.value = init.value ?? 0;
     init.bonus = init.value + (flags.initiativeAlert ? 5 : 0);
     init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
@@ -554,11 +436,11 @@ export default class Actor5e extends Actor {
 
   /**
    * Derive any values that have been scaled by the Advancement system.
-   * @param {object} data  The actor's system data being prepared.
+   * Populates the system.scale object.
    * @private
    */
-  _computeScaleValues(data) {
-    const scale = data.scale = {};
+  _computeScaleValues() {
+    const scale = this.system.scale || {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
       scale[identifier] = cls.scaleValues;
       if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
@@ -569,25 +451,20 @@ export default class Actor5e extends Actor {
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
-   * @param {object} actorData  Copy of the data for the actor being prepared. *Will be mutated.*
+   * Mutates the value of the system.spells object.
    * @private
    */
-  _computeSpellcastingProgression(actorData) {
-    if (actorData.type === "vehicle") return;
-    const ad = actorData.data;
-    const spells = ad.spells;
-    const isNPC = actorData.type === "npc";
+  _computeSpellcastingProgression() {
+    if ( this.type === "vehicle" ) return;
+    const isNPC = this.type === "npc";
+    const spells = this.system.spells;
 
     // Spellcasting DC
-    const spellcastingAbility = ad.abilities[ad.attributes.spellcasting];
-    ad.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + ad.attributes.prof;
+    const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
+    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
 
     // Translate the list of classes into spell-casting progression
-    const progression = {
-      total: 0,
-      slot: 0,
-      pact: 0
-    };
+    const progression = {total: 0, slot: 0, pact: 0};
 
     // Keep track of the last seen caster in case we're in a single-caster situation.
     let caster = null;
@@ -596,7 +473,7 @@ export default class Actor5e extends Actor {
     for ( let cls of Object.values(this.classes) ) {
       const prog = cls.spellcasting.progression;
       if ( prog === "none" ) continue;
-      const levels = cls.data.data.levels;
+      const levels = cls.system.levels;
 
       // Accumulate levels
       if ( prog !== "pact" ) {
@@ -616,13 +493,11 @@ export default class Actor5e extends Actor {
     const isSingleClass = (progression.total === 1) && (progression.slot > 0);
     if ( !isNPC && isSingleClass && ["half", "third"].includes(caster.spellcasting.progression) ) {
       const denom = caster.spellcasting.progression === "third" ? 3 : 2;
-      progression.slot = Math.ceil(caster.data.data.levels / denom);
+      progression.slot = Math.ceil(caster.system.levels / denom);
     }
 
     // EXCEPTION: NPC with an explicit spell-caster level
-    if ( isNPC && actorData.data.details.spellLevel ) {
-      progression.slot = actorData.data.details.spellLevel;
-    }
+    if ( isNPC && this.system.details.spellLevel ) progression.slot = this.system.details.spellLevel;
 
     // Look up the number of slots per level from the progression table
     const levels = Math.clamped(progression.slot, 0, CONFIG.DND5E.maxLevel);
@@ -638,7 +513,7 @@ export default class Actor5e extends Actor {
     // Determine the Actor's pact magic level (if any)
     let pl = Math.clamped(progression.pact, 0, CONFIG.DND5E.maxLevel);
     spells.pact = spells.pact || {};
-    if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = actorData.data.details.spellLevel;
+    if ( (pl === 0) && isNPC && Number.isNumeric(spells.pact.override) ) pl = this.system.details.spellLevel;
 
     // Determine the number of Warlock pact slots per level
     if ( pl > 0) {
@@ -656,7 +531,7 @@ export default class Actor5e extends Actor {
 
   /**
    * Determine a character's AC value from their equipped armor and shield.
-   * @param {object} data  Copy of the data for the actor being prepared. *Will be mutated.*
+   * Mutates the value of the system.attributes.ac object.
    * @returns {{
    *   calc: string,
    *   value: number,
@@ -671,10 +546,11 @@ export default class Actor5e extends Actor {
    * }}
    * @private
    */
-  _computeArmorClass(data) {
+  _computeArmorClass() {
+    const ac = this.system.attributes.ac;
+    const dex = this.system.abilities.dex;
 
-    // Get AC configuration and apply automatic migrations for older data structures
-    const ac = data.attributes.ac;
+    // Apply automatic migrations for older data structures
     ac.warnings = [];
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
     if ( !cfg ) {
@@ -686,8 +562,8 @@ export default class Actor5e extends Actor {
     // Identify Equipped Items
     const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
     const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      const armor = equip.data.data.armor;
-      if ( !equip.data.data.equipped || !armorTypes.has(armor?.type) ) return obj;
+      const armor = equip.system.armor;
+      if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
       if ( armor.type === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
       return obj;
@@ -711,14 +587,14 @@ export default class Actor5e extends Actor {
         const rollData = this.getRollData({ deterministic: true });
         if ( armors.length ) {
           if ( armors.length > 1 ) ac.warnings.push("DND5E.WarnMultipleArmor");
-          const armorData = armors[0].data.data.armor;
+          const armorData = armors[0].system.armor;
           const isHeavy = armorData.type === "heavy";
           ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, data.abilities.dex?.mod ?? 0);
+          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
-        } else {
-          ac.dex = data.abilities.dex?.mod ?? 0;
         }
+        else ac.dex = dex?.mod ?? 0;
+
         rollData.attributes.ac = ac;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
@@ -734,7 +610,7 @@ export default class Actor5e extends Actor {
     // Equipped Shield
     if ( shields.length ) {
       if ( shields.length > 1 ) ac.warnings.push("DND5E.WarnMultipleShields");
-      ac.shield = shields[0].data.data.armor.value ?? 0;
+      ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
     }
 
@@ -747,55 +623,42 @@ export default class Actor5e extends Actor {
 
   /**
    * Compute the level and percentage of encumbrance for an Actor.
-   *
-   * Optionally include the weight of carried currency across all denominations by applying the standard rule
-   * from the PHB pg. 143
-   * @param {object} actorData      The data object for the Actor being rendered
+   * Optionally include the weight of carried currency by applying the standard rule from the PHB pg. 143.
    * @returns {{max: number, value: number, pct: number}}  An object describing the character's encumbrance level
    * @private
    */
-  _computeEncumbrance(actorData) {
+  _computeEncumbrance() {
 
     // Get the total weight from items
     const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
-    let weight = actorData.items.reduce((weight, i) => {
+    let weight = this.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.data.data.quantity || 0;
-      const w = i.data.data.weight || 0;
+      const q = i.system.quantity || 0;
+      const w = i.system.weight || 0;
       return weight + (q * w);
     }, 0);
 
     // [Optional] add Currency Weight (for non-transformed actors)
-    if ( game.settings.get("dnd5e", "currencyWeight") && actorData.data.currency ) {
-      const currency = actorData.data.currency;
-      const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
-
+    const currency = this.system.currency;
+    if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
+      const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
       const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
         ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
         : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
-
       weight += numCoins / currencyPerWeight;
     }
 
+
     // Determine the encumbrance size class
-    let mod = {
-      tiny: 0.5,
-      sm: 1,
-      med: 1,
-      lg: 2,
-      huge: 4,
-      grg: 8
-    }[actorData.data.traits.size] || 1;
+    let mod = {tiny: 0.5, sm: 1, med: 1, lg: 2, huge: 4, grg: 8}[this.system.traits.size] || 1;
     if ( this.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
 
     // Compute Encumbrance percentage
-    weight = weight.toNearest(0.1);
-
     const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
       ? CONFIG.DND5E.encumbrance.strMultiplier.metric
       : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
-
-    const max = (actorData.data.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
+    weight = weight.toNearest(0.1);
+    const max = (this.system.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (200/3) };
   }
@@ -810,15 +673,11 @@ export default class Actor5e extends Actor {
     const sourceId = this.getFlag("core", "sourceId");
     if ( sourceId?.startsWith("Compendium.") ) return;
 
-    // Some sensible defaults for convenience
-    // Token size category
-    const s = CONFIG.DND5E.tokenSizes[this.data.data.traits.size || "med"];
-    this.data.token.update({width: s, height: s});
-
-    // Player character configuration
-    if ( this.type === "character" ) {
-      this.data.token.update({vision: true, actorLink: true, disposition: 1});
-    }
+    // Configure prototype token settings
+    const s = CONFIG.DND5E.tokenSizes[this.system.traits.size || "med"];
+    const prototypeToken = {width: s, height: s};
+    if ( this.type === "character" ) Object.assign(prototypeToken, {vision: true, actorLink: true, disposition: 1});
+    this.updateSource({prototypeToken});
   }
 
   /* -------------------------------------------- */
@@ -828,21 +687,21 @@ export default class Actor5e extends Actor {
     await super._preUpdate(changed, options, user);
 
     // Apply changes in Actor size to Token width/height
-    const newSize = foundry.utils.getProperty(changed, "data.traits.size");
-    if ( newSize && (newSize !== foundry.utils.getProperty(this.data, "data.traits.size")) ) {
+    const newSize = foundry.utils.getProperty(changed, "system.traits.size");
+    if ( newSize && (newSize !== this.system.traits?.size) ) {
       let size = CONFIG.DND5E.tokenSizes[newSize];
-      if ( !foundry.utils.hasProperty(changed, "token.width") ) {
-        changed.token = changed.token || {};
-        changed.token.height = size;
-        changed.token.width = size;
+      if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
+        changed.prototypeToken ||= {};
+        changed.prototypeToken.height = size;
+        changed.prototypeToken.width = size;
       }
     }
 
     // Reset death save counters
-    const isDead = this.data.data.attributes.hp.value <= 0;
-    if ( isDead && (foundry.utils.getProperty(changed, "data.attributes.hp.value") > 0) ) {
-      foundry.utils.setProperty(changed, "data.attributes.death.success", 0);
-      foundry.utils.setProperty(changed, "data.attributes.death.failure", 0);
+    const isDead = this.system.attributes.hp.value <= 0;
+    if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
+      foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
+      foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
     }
   }
 
@@ -854,9 +713,9 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _assignPrimaryClass() {
-    const classes = this.itemTypes.class.sort((a, b) => b.data.data.levels - a.data.data.levels);
+    const classes = this.itemTypes.class.sort((a, b) => b.system.levels - a.system.levels);
     const newPC = classes[0]?.id || "";
-    return this.update({"data.details.originalClass": newPC});
+    return this.update({"system.details.originalClass": newPC});
   }
 
   /* -------------------------------------------- */
@@ -866,7 +725,7 @@ export default class Actor5e extends Actor {
   /** @override */
   async modifyTokenAttribute(attribute, value, isDelta, isBar) {
     if ( attribute === "attributes.hp" ) {
-      const hp = getProperty(this.data.data, attribute);
+      const hp = this.system.attributes.hp;
       const delta = isDelta ? (-1 * value) : (hp.value + hp.temp) - value;
       return this.applyDamage(delta);
     }
@@ -883,7 +742,7 @@ export default class Actor5e extends Actor {
    */
   async applyDamage(amount=0, multiplier=1) {
     amount = Math.floor(parseInt(amount) * multiplier);
-    const hp = this.data.data.attributes.hp;
+    const hp = this.system.attributes.hp;
 
     // Deduct damage from temp HP first
     const tmp = parseInt(hp.temp) || 0;
@@ -895,8 +754,8 @@ export default class Actor5e extends Actor {
 
     // Update the Actor
     const updates = {
-      "data.attributes.hp.temp": tmp - dt,
-      "data.attributes.hp.value": dh
+      "system.attributes.hp.temp": tmp - dt,
+      "system.attributes.hp.value": dh
     };
 
     // Delegate damage application to a hook
@@ -930,13 +789,12 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")
    * @param {object} options      Options which configure how the skill check is rolled
-   * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
+   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   rollSkill(skillId, options={}) {
-    const skl = this.data.data.skills[skillId];
-    const abl = this.data.data.abilities[skl.ability];
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
-
+    const skl = this.system.skills[skillId];
+    const abl = this.system.abilities[skl.ability];
+    const globalBonuses = this.system.bonuses?.abilities || {};
     const parts = ["@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
 
@@ -951,9 +809,9 @@ export default class Actor5e extends Actor {
     }
 
     // Global ability check bonus
-    if ( bonuses.check ) {
+    if ( globalBonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
+      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
     }
 
     // Ability-specific check bonus
@@ -968,9 +826,9 @@ export default class Actor5e extends Actor {
     }
 
     // Global skill check bonus
-    if ( bonuses.skill ) {
+    if ( globalBonuses.skill ) {
       parts.push("@skillBonus");
-      data.skillBonus = Roll.replaceFormulaData(bonuses.skill, data);
+      data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -1032,11 +890,12 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
+   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
-    const abl = this.data.data.abilities[abilityId];
+    const abl = this.system.abilities[abilityId];
+    const globalBonuses = this.system.bonuses?.abilities || {};
 
     const parts = [];
     const data = this.getRollData();
@@ -1059,16 +918,13 @@ export default class Actor5e extends Actor {
     }
 
     // Add global actor bonus
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
-    if ( bonuses.check ) {
+    if ( globalBonuses.check ) {
       parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(bonuses.check, data);
+      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
-    if (options.parts?.length > 0) {
-      parts.push(...options.parts);
-    }
+    if (options.parts?.length > 0) parts.push(...options.parts);
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
@@ -1093,12 +949,12 @@ export default class Actor5e extends Actor {
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} abilityId    The ability ID (e.g. "str")
    * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<Roll>}     A Promise which resolves to the created Roll instance
+   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
   rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
-    const abl = this.data.data.abilities[abilityId];
-
+    const abl = this.system.abilities[abilityId];
+    const globalBonuses = this.system.bonuses?.abilities || {};
     const parts = [];
     const data = this.getRollData();
 
@@ -1120,10 +976,9 @@ export default class Actor5e extends Actor {
     }
 
     // Include a global actor ability save bonus
-    const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
-    if ( bonuses.save ) {
+    if ( globalBonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
+      data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
 
     // Add provided extra roll parts now because they will get clobbered by mergeObject below
@@ -1151,14 +1006,14 @@ export default class Actor5e extends Actor {
 
   /**
    * Perform a death saving throw, rolling a d20 plus any global save bonuses
-   * @param {object} options        Additional options which modify the roll
-   * @returns {Promise<Roll|null>}  A Promise which resolves to the Roll instance
+   * @param {object} options          Additional options which modify the roll
+   * @returns {Promise<D20Roll|null>} A Promise which resolves to the Roll instance
    */
   async rollDeathSave(options={}) {
 
     // Display a warning if we are not at zero HP or if we already have reached 3
-    const death = this.data.data.attributes.death;
-    if ( (this.data.data.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
+    const death = this.system.attributes.death;
+    if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
       ui.notifications.warn(game.i18n.localize("DND5E.DeathSaveUnnecessary"));
       return null;
     }
@@ -1167,18 +1022,18 @@ export default class Actor5e extends Actor {
     const parts = [];
     const data = this.getRollData();
     const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
+    const globalBonuses = this.system.bonuses?.abilities || {};
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
       parts.push("@prof");
-      data.prof = new Proficiency(this.data.data.attributes.prof, 1).term;
+      data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
 
     // Include a global actor ability save bonus
-    const bonuses = foundry.utils.getProperty(this.data.data, "bonuses.abilities") || {};
-    if ( bonuses.save ) {
+    if ( globalBonuses.save ) {
       parts.push("@saveBonus");
-      data.saveBonus = Roll.replaceFormulaData(bonuses.save, data);
+      data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
     }
 
     // Evaluate the roll
@@ -1211,9 +1066,9 @@ export default class Actor5e extends Actor {
       // Critical Success = revive with 1hp
       if ( d20 === 20 ) {
         await this.update({
-          "data.attributes.death.success": 0,
-          "data.attributes.death.failure": 0,
-          "data.attributes.hp.value": 1
+          "system.attributes.death.success": 0,
+          "system.attributes.death.failure": 0,
+          "system.attributes.hp.value": 1
         });
         chatString = "DND5E.DeathSaveCriticalSuccess";
       }
@@ -1221,20 +1076,20 @@ export default class Actor5e extends Actor {
       // 3 Successes = survive and reset checks
       else if ( successes === 3 ) {
         await this.update({
-          "data.attributes.death.success": 0,
-          "data.attributes.death.failure": 0
+          "system.attributes.death.success": 0,
+          "system.attributes.death.failure": 0
         });
         chatString = "DND5E.DeathSaveSuccess";
       }
 
       // Increment successes
-      else await this.update({"data.attributes.death.success": Math.clamped(successes, 0, 3)});
+      else await this.update({"system.attributes.death.success": Math.clamped(successes, 0, 3)});
     }
 
     // Save failure
     else {
       let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
-      await this.update({"data.attributes.death.failure": Math.clamped(failures, 0, 3)});
+      await this.update({"system.attributes.death.failure": Math.clamped(failures, 0, 3)});
       if ( failures >= 3 ) {  // 3 Failures = death
         chatString = "DND5E.DeathSaveFailure";
       }
@@ -1255,28 +1110,25 @@ export default class Actor5e extends Actor {
 
   /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
-   * @param {string} [denomination]   The hit denomination of hit die to roll. Example "d8".
-   *                                  If no denomination is provided, the first available HD will be used
-   * @param {boolean} [dialog]        Show a dialog prompt for configuring the hit die roll?
-   * @returns {Promise<Roll|null>}    The created Roll instance, or null if no hit die was rolled
+   * @param {string} [denomination]       The hit denomination of hit die to roll. Example "d8".
+   *                                      If no denomination is provided, the first available HD will be used
+   * @param {boolean} [dialog]            Show a dialog prompt for configuring the hit die roll?
+   * @returns {Promise<DamageRoll|null>}  The created Roll instance, or null if no hit die was rolled
    */
   async rollHitDie(denomination, {dialog=true}={}) {
 
     // If no denomination was provided, choose the first available
     let cls = null;
     if ( !denomination ) {
-      cls = this.itemTypes.class.find(c => c.data.data.hitDiceUsed < c.data.data.levels);
+      cls = this.itemTypes.class.find(c => c.system.hitDiceUsed < c.system.levels);
       if ( !cls ) return null;
-      denomination = cls.data.data.hitDice;
+      denomination = cls.system.hitDice;
     }
 
-    // Otherwise locate a class (if any) which has an available hit die of the requested denomination
-    else {
-      cls = this.items.find(i => {
-        const d = i.data.data;
-        return (d.hitDice === denomination) && ((d.hitDiceUsed || 0) < (d.levels || 1));
-      });
-    }
+    // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
+    else cls = this.items.find(i => {
+      return (i.system.hitDice === denomination) && ((i.system.hitDiceUsed || 0) < (i.system.levels || 1));
+    });
 
     // If no class is available, display an error notification
     if ( !cls ) {
@@ -1288,7 +1140,7 @@ export default class Actor5e extends Actor {
     const parts = [`1${denomination}`, "@abilities.con.mod"];
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
     const title = `${flavor}: ${this.name}`;
-    const data = foundry.utils.deepClone(this.data.data);
+    const data = this.toObject.system();
 
     // Call the roll helper utility
     const roll = await damageRoll({
@@ -1308,10 +1160,10 @@ export default class Actor5e extends Actor {
     if ( !roll ) return null;
 
     // Adjust actor data
-    await cls.update({"data.hitDiceUsed": cls.data.data.hitDiceUsed + 1});
-    const hp = this.data.data.attributes.hp;
+    await cls.update({"system.hitDiceUsed": cls.system.hitDiceUsed + 1});
+    const hp = this.system.attributes.hp;
     const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
-    await this.update({"data.attributes.hp.value": hp.value + dhp});
+    await this.update({"system.attributes.hp.value": hp.value + dhp});
     return roll;
   }
 
@@ -1325,7 +1177,7 @@ export default class Actor5e extends Actor {
    */
   async rollClassHitPoints(item) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const rollData = { formula: `1${item.data.data.hitDice}`, data: item.getRollData() };
+    const rollData = { formula: `1${item.system.hitDice}`, data: item.getRollData() };
     const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
@@ -1382,9 +1234,10 @@ export default class Actor5e extends Actor {
    * @returns {Promise<RestResult>}                 A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest({dialog=true, chat=true, autoHD=false, autoHDThreshold=3}={}) {
+
     // Take note of the initial hit points and number of hit dice the Actor has
-    const hd0 = this.data.data.attributes.hd;
-    const hp0 = this.data.data.attributes.hp.value;
+    const hd0 = this.system.attributes.hd;
+    const hp0 = this.system.attributes.hp.value;
     let newDay = false;
 
     // Display a Dialog for rolling hit dice
@@ -1397,11 +1250,10 @@ export default class Actor5e extends Actor {
     }
 
     // Automatically spend hit dice
-    else if ( autoHD ) {
-      await this.autoSpendHitDice({ threshold: autoHDThreshold });
-    }
-    return this._rest(
-      chat, newDay, false, this.data.data.attributes.hd - hd0, this.data.data.attributes.hp.value - hp0);
+    else if ( autoHD ) await this.autoSpendHitDice({ threshold: autoHDThreshold });
+
+    // Return the rest result
+    return this._rest(chat, newDay, false, this.system.attributes.hd - hd0, this.system.hp.value - hp0);
   }
 
   /* -------------------------------------------- */
@@ -1416,15 +1268,14 @@ export default class Actor5e extends Actor {
    * @returns {Promise<RestResult>}          A Promise which resolves once the long rest workflow has completed.
    */
   async longRest({dialog=true, chat=true, newDay=true}={}) {
-    // Maybe present a confirmation dialog
     if ( dialog ) {
       try {
         newDay = await LongRestDialog.longRestDialog({actor: this});
-      } catch(err) {
+      }
+      catch(err) {
         return;
       }
     }
-
     return this._rest(chat, newDay, true);
   }
 
@@ -1513,10 +1364,8 @@ export default class Actor5e extends Actor {
     const healthRestored = dhp !== 0;
     const length = longRest ? "Long" : "Short";
 
-    let restFlavor;
-    let message;
-
     // Summarize the rest duration
+    let restFlavor;
     switch (game.settings.get("dnd5e", "restVariant")) {
       case "normal": restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`; break;
       case "gritty": restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`; break;
@@ -1524,6 +1373,7 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the chat message to display
+    let message;
     if ( diceRestored && healthRestored ) message = `DND5E.${length}RestResult`;
     else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.LongRestResultHitPoints";
     else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.LongRestResultHitDice";
@@ -1548,21 +1398,19 @@ export default class Actor5e extends Actor {
 
   /**
    * Automatically spend hit dice to recover hit points up to a certain threshold.
-   *
    * @param {object} [options]
    * @param {number} [options.threshold=3]  A number of missing hit points which would trigger an automatic HD roll.
    * @returns {Promise<number>}             Number of hit dice spent.
    */
   async autoSpendHitDice({ threshold=3 }={}) {
-    const max = this.data.data.attributes.hp.max + this.data.data.attributes.hp.tempmax;
-
+    const hp = this.system.attributes.hp;
+    const max = hp.max + hp.tempmax;
     let diceRolled = 0;
-    while ( (this.data.data.attributes.hp.value + threshold) <= max ) {
+    while ( (this.system.attributes.hp.value + threshold) <= max ) {
       const r = await this.rollHitDie(undefined, {dialog: false});
       if ( r === null ) break;
       diceRolled += 1;
     }
-
     return diceRolled;
   }
 
@@ -1570,29 +1418,21 @@ export default class Actor5e extends Actor {
 
   /**
    * Recovers actor hit points and eliminates any temp HP.
-   *
    * @param {object} [options]
    * @param {boolean} [options.recoverTemp=true]     Reset temp HP to zero.
    * @param {boolean} [options.recoverTempMax=true]  Reset temp max HP to zero.
    * @returns {object}                               Updates to the actor and change in hit points.
    * @protected
    */
-  _getRestHitPointRecovery({ recoverTemp=true, recoverTempMax=true }={}) {
-    const data = this.data.data;
+  _getRestHitPointRecovery({recoverTemp=true, recoverTempMax=true}={}) {
+    const hp = this.system.attributes.hp;
+    let max = hp.max;
     let updates = {};
-    let max = data.attributes.hp.max;
-
-    if ( recoverTempMax ) {
-      updates["data.attributes.hp.tempmax"] = 0;
-    } else {
-      max += data.attributes.hp.tempmax;
-    }
-    updates["data.attributes.hp.value"] = max;
-    if ( recoverTemp ) {
-      updates["data.attributes.hp.temp"] = 0;
-    }
-
-    return { updates, hitPointsRecovered: max - data.attributes.hp.value };
+    if ( recoverTempMax ) updates["system.attributes.hp.tempmax"] = 0;
+    else max += hp.tempmax;
+    updates["system.attributes.hp.value"] = max;
+    if ( recoverTemp ) updates["system.attributes.hp.temp"] = 0;
+    return { updates, hitPointsRecovered: max - hp.value };
   }
 
   /* -------------------------------------------- */
@@ -1607,9 +1447,9 @@ export default class Actor5e extends Actor {
    */
   _getRestResourceRecovery({recoverShortRestResources=true, recoverLongRestResources=true}={}) {
     let updates = {};
-    for ( let [k, r] of Object.entries(this.data.data.resources) ) {
+    for ( let [k, r] of Object.entries(this.system.resources) ) {
       if ( Number.isNumeric(r.max) && ((recoverShortRestResources && r.sr) || (recoverLongRestResources && r.lr)) ) {
-        updates[`data.resources.${k}.value`] = Number(r.max);
+        updates[`system.resources.${k}.value`] = Number(r.max);
       }
     }
     return updates;
@@ -1619,7 +1459,6 @@ export default class Actor5e extends Actor {
 
   /**
    * Recovers spell slots and pact slots.
-   *
    * @param {object} [options]
    * @param {boolean} [options.recoverPact=true]     Recover all expended pact slots.
    * @param {boolean} [options.recoverSpells=true]   Recover all expended spell slots.
@@ -1627,18 +1466,17 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _getRestSpellRecovery({ recoverPact=true, recoverSpells=true }={}) {
+    const spells = this.system.spells;
     let updates = {};
     if ( recoverPact ) {
-      const pact = this.data.data.spells.pact;
-      updates["data.spells.pact.value"] = pact.override || pact.max;
+      const pact = spells.pact;
+      updates["system.spells.pact.value"] = pact.override || pact.max;
     }
-
     if ( recoverSpells ) {
-      for ( let [k, v] of Object.entries(this.data.data.spells) ) {
-        updates[`data.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
+      for ( let [k, v] of Object.entries(spells) ) {
+        updates[`system.spells.${k}.value`] = Number.isNumeric(v.override) ? v.override : (v.max ?? 0);
       }
     }
-
     return updates;
   }
 
@@ -1652,28 +1490,27 @@ export default class Actor5e extends Actor {
    * @returns {object}                     Array of item updates and number of hit dice recovered.
    * @protected
    */
-  _getRestHitDiceRecovery({ maxHitDice=undefined }={}) {
+  _getRestHitDiceRecovery({maxHitDice=undefined}={}) {
+
     // Determine the number of hit dice which may be recovered
-    if ( maxHitDice === undefined ) {
-      maxHitDice = Math.max(Math.floor(this.data.data.details.level / 2), 1);
-    }
+    if ( maxHitDice === undefined ) maxHitDice = Math.max(Math.floor(this.system.details.level / 2), 1);
 
     // Sort classes which can recover HD, assuming players prefer recovering larger HD first.
     const sortedClasses = Object.values(this.classes).sort((a, b) => {
-      return (parseInt(b.data.data.hitDice.slice(1)) || 0) - (parseInt(a.data.data.hitDice.slice(1)) || 0);
+      return (parseInt(b.system.hitDice.slice(1)) || 0) - (parseInt(a.system.hitDice.slice(1)) || 0);
     });
 
+    // Update hit dice usage
     let updates = [];
     let hitDiceRecovered = 0;
     for ( let item of sortedClasses ) {
-      const d = item.data.data;
-      if ( (hitDiceRecovered < maxHitDice) && (d.hitDiceUsed > 0) ) {
-        let delta = Math.min(d.hitDiceUsed || 0, maxHitDice - hitDiceRecovered);
+      const hitDiceUsed = item.system.hitDiceUsed;
+      if ( (hitDiceRecovered < maxHitDice) && (hitDiceUsed > 0) ) {
+        let delta = Math.min(hitDiceUsed || 0, maxHitDice - hitDiceRecovered);
         hitDiceRecovered += delta;
-        updates.push({_id: item.id, "data.hitDiceUsed": d.hitDiceUsed - delta});
+        updates.push({_id: item.id, "data.hitDiceUsed": hitDiceUsed - delta});
       }
     }
-
     return { updates, hitDiceRecovered };
   }
 
@@ -1694,18 +1531,15 @@ export default class Actor5e extends Actor {
     if ( recoverShortRestUses ) recovery.push("sr");
     if ( recoverLongRestUses ) recovery.push("lr");
     if ( recoverDailyUses ) recovery.push("day");
-
     let updates = [];
     for ( let item of this.items ) {
-      const d = item.data.data;
-      if ( d.uses && recovery.includes(d.uses.per) ) {
-        updates.push({_id: item.id, "data.uses.value": d.uses.max});
+      if ( recovery.includes(item.system.uses?.per) ) {
+        updates.push({_id: item.id, "system.uses.value": item.system.uses.max});
       }
-      if ( recoverLongRestUses && d.recharge && d.recharge.value ) {
-        updates.push({_id: item.id, "data.recharge.charged": true});
+      if ( recoverLongRestUses && item.system.recharge?.value ) {
+        updates.push({_id: item.id, "system.recharge.charged": true});
       }
     }
-
     return updates;
   }
 
@@ -1719,7 +1553,7 @@ export default class Actor5e extends Actor {
    * @returns {Promise<Actor5e>}
    */
   convertCurrency() {
-    const curr = foundry.utils.deepClone(this.data.data.currency);
+    const curr = foundry.utils.deepClone(this.system.currency);
     const conversion = Object.entries(CONFIG.DND5E.currencies);
     conversion.reverse();
     for ( let [c, data] of conversion ) {
@@ -1729,7 +1563,7 @@ export default class Actor5e extends Actor {
       curr[c] -= (change * t.each);
       curr[t.into] += change;
     }
-    return this.update({"data.currency": curr});
+    return this.update({"system.currency": curr});
   }
 
   /* -------------------------------------------- */
@@ -1772,16 +1606,16 @@ export default class Actor5e extends Actor {
     }
 
     // Get the original Actor data and the new source data
-    const o = this.toJSON();
+    const o = this.toObject();
     o.flags.dnd5e = o.flags.dnd5e || {};
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
-    const source = target.toJSON();
+    const source = target.toObject();
 
     // Prepare new data to merge from the source
     const d = {
       type: o.type, // Remain the same actor type
       name: `${o.name} (${source.name})`, // Append the new shape to your old name
-      data: source.data, // Get the data model of your new form
+      system: source.system, // Get the systemdata model of your new form
       items: source.items, // Get the items of your new form
       effects: o.effects.concat(source.effects), // Combine active effects from both forms
       img: source.img, // New appearance
@@ -1791,16 +1625,16 @@ export default class Actor5e extends Actor {
     };
 
     // Specifically delete some data attributes
-    delete d.data.resources; // Don't change your resource pools
-    delete d.data.currency; // Don't lose currency
-    delete d.data.bonuses; // Don't lose global bonuses
+    delete d.system.resources; // Don't change your resource pools
+    delete d.system.currency; // Don't lose currency
+    delete d.system.bonuses; // Don't lose global bonuses
 
     // Specific additional adjustments
-    d.data.details.alignment = o.data.details.alignment; // Don't change alignment
-    d.data.attributes.exhaustion = o.data.attributes.exhaustion; // Keep your prior exhaustion level
-    d.data.attributes.inspiration = o.data.attributes.inspiration; // Keep inspiration
-    d.data.spells = o.data.spells; // Keep spell slots
-    d.data.attributes.ac.flat = target.data.data.attributes.ac.value; // Override AC
+    d.system.details.alignment = o.system.details.alignment; // Don't change alignment
+    d.system.attributes.exhaustion = o.system.attributes.exhaustion; // Keep your prior exhaustion level
+    d.system.attributes.inspiration = o.system.attributes.inspiration; // Keep inspiration
+    d.system.spells = o.system.spells; // Keep spell slots
+    d.system.attributes.ac.flat = target.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
     d.token = {name: d.name};
@@ -1817,9 +1651,9 @@ export default class Actor5e extends Actor {
     }
 
     // Transfer ability scores
-    const abilities = d.data.abilities;
+    const abilities = d.system.abilities;
     for ( let k of Object.keys(abilities) ) {
-      const oa = o.data.abilities[k];
+      const oa = o.system.abilities[k];
       const prof = abilities[k].proficient;
       if ( keepPhysical && ["str", "dex", "con"].includes(k) ) abilities[k] = oa;
       else if ( keepMental && ["int", "wis", "cha"].includes(k) ) abilities[k] = oa;
@@ -1828,10 +1662,10 @@ export default class Actor5e extends Actor {
     }
 
     // Transfer skills
-    if ( keepSkills ) d.data.skills = o.data.skills;
+    if ( keepSkills ) d.system.skills = o.system.skills;
     else if ( mergeSkills ) {
-      for ( let [k, s] of Object.entries(d.data.skills) ) {
-        s.value = Math.max(s.value, o.data.skills[k].value);
+      for ( let [k, s] of Object.entries(d.system.skills) ) {
+        s.value = Math.max(s.value, o.system.skills[k].value);
       }
     }
 
@@ -1844,19 +1678,19 @@ export default class Actor5e extends Actor {
     }));
 
     // Transfer classes for NPCs
-    if ( !keepClass && d.data.details.cr ) {
+    if ( !keepClass && d.system.details.cr ) {
       d.items.push({
         type: "class",
         name: game.i18n.localize("DND5E.PolymorphTmpClass"),
-        data: { levels: d.data.details.cr }
+        data: { levels: d.system.details.cr }
       });
     }
 
     // Keep biography
-    if (keepBio) d.data.details.biography = o.data.details.biography;
+    if (keepBio) d.system.details.biography = o.system.details.biography;
 
     // Keep senses
-    if (keepVision) d.data.traits.senses = o.data.traits.senses;
+    if (keepVision) d.system.traits.senses = o.system.traits.senses;
 
     // Set new data flags
     if ( !this.isPolymorphed || !d.flags.dnd5e.originalActor ) d.flags.dnd5e.originalActor = this.id;
@@ -1865,8 +1699,8 @@ export default class Actor5e extends Actor {
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if ( this.isToken ) {
       const tokenData = d.token;
+      delete d.prototypeToken;
       tokenData.actorData = d;
-      delete tokenData.actorData.token;
       return this.token.update(tokenData);
     }
 
@@ -1895,7 +1729,7 @@ export default class Actor5e extends Actor {
     const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
       const newTokenData = foundry.utils.deepClone(d.token);
-      newTokenData._id = t.data._id;
+      newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
       return newTokenData;
@@ -1919,7 +1753,7 @@ export default class Actor5e extends Actor {
 
     // If we are reverting an unlinked token, simply replace it with the base actor prototype
     if ( this.isToken ) {
-      const baseActor = game.actors.get(this.token.data.actorId);
+      const baseActor = game.actors.get(this.token.actorId);
       const prototypeTokenData = await baseActor.getTokenData();
       const tokenUpdate = {actorData: {}};
       for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation", "name"] ) {
@@ -2025,9 +1859,7 @@ export default class Actor5e extends Actor {
     const itemTypes = CONFIG.DND5E[`${type}Ids`];
 
     let values = [];
-    if ( data.value ) {
-      values = data.value instanceof Array ? data.value : [data.value];
-    }
+    if ( data.value ) values = data.value instanceof Array ? data.value : [data.value];
 
     data.selected = {};
     for ( const key of values ) {
@@ -2042,9 +1874,7 @@ export default class Actor5e extends Actor {
     }
 
     // Add custom entries
-    if ( data.custom ) {
-      data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
-    }
+    if ( data.custom ) data.custom.split(";").forEach((c, i) => data.selected[`custom${i+1}`] = c.trim());
   }
 
   /* -------------------------------------------- */
@@ -2070,7 +1900,7 @@ export default class Actor5e extends Actor {
     dhp = Number(dhp);
     const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
     for ( let t of tokens ) {
-      const pct = Math.clamped(Math.abs(dhp) / this.data.data.attributes.hp.max, 0, 1);
+      const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
       t.hud.createScrollingText(dhp.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
         fontSize: 16 + (32 * pct), // Range between [16, 48]
@@ -2087,28 +1917,101 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Retrieve the spell save DC for the provided ability.
-   * @param {string} ability  Ability key as defined in `CONFIG.DND5E.abilities`.
-   * @returns {number}        Spell save DC for provided ability.
-   * @deprecated since dnd5e 0.97
+   * Given a list of items to add to the Actor, optionally prompt the user for which they would like to add.
+   * @param {Item5e[]} items         The items being added to the Actor.
+   * @param {boolean} [prompt=true]  Whether or not to prompt the user.
+   * @returns {Promise<Item5e[]>}
+   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
-  getSpellDC(ability) {
-    console.warn("The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc");
-    return this.data.data.abilities[ability]?.dc;
+  async addEmbeddedItems(items, prompt=true) {
+    console.warn("Actor5e#addEmbeddedItems has been deprecated and will be removed in 1.8.");
+    let itemsToAdd = items;
+    if ( !items.length ) return [];
+
+    // Obtain the array of item creation data
+    let toCreate = [];
+    if (prompt) {
+      const itemIdsToAdd = await SelectItemsPrompt.create(items, {
+        hint: game.i18n.localize("DND5E.AddEmbeddedItemPromptHint")
+      });
+      for (let item of items) {
+        if (itemIdsToAdd.includes(item.id)) toCreate.push(item.toObject());
+      }
+    }
+    else toCreate = items.map(item => item.toObject());
+
+    // Create the requested items
+    if (itemsToAdd.length === 0) return [];
+    return Item5e.createDocuments(toCreate, {parent: this});
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Cast a Spell, consuming a spell slot of a certain level
-   * @param {Item5e} item   The spell being cast by the actor
-   * @param {Event} event   The originating user interaction which triggered the cast
-   * @returns {Promise<ChatMessage|object|void>}  Dialog if `configureDialog` is true, else prepared dialog data.
-   * @deprecated since dnd5e 1.2.0
+   * Get a list of features to add to the Actor when a class item is updated.
+   * Optionally prompt the user for which they would like to add.
+   * @param {object} [options]
+   * @param {string} [options.classIdentifier] Identifier slug of the class if it has been changed.
+   * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
+   * @param {number} [options.level]           New class level if it has been changed.
+   * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
+   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
    */
-  async useSpell(item, {configureDialog=true}={}) {
-    console.warn("The Actor5e#useSpell method has been deprecated in favor of Item5e#roll");
-    if ( item.data.type !== "spell" ) throw new Error("Wrong Item type");
-    return item.roll();
+  async getClassFeatures({classIdentifier, subclassName, level}={}) {
+    console.warn("Actor5e#getClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
+    const existing = new Set(this.items.map(i => i.name));
+    const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
+    return features.filter(f => !existing.has(f.name)) || [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return the features which a character is awarded for each class level.
+   * @param {object} [options]
+   * @param {string} [options.classIdentifier] Identifier slug of the class being added or updated.
+   * @param {string} [options.subclassName]    Name of the subclass of the class being added, if any.
+   * @param {number} [options.level]           The number of levels in the added class.
+   * @param {number} [options.priorLevel]      The previous level of the added class.
+   * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
+   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
+   */
+  static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
+    console.warn("Actor5e#loadClassFeatures has been deprecated and will be removed in 1.8. Please refer to the Advancement API for its replacement.");
+    subclassName = subclassName.slugify();
+
+    // Get the configuration of features which may be added
+    const clsConfig = CONFIG.DND5E.classFeatures[classIdentifier];
+    if (!clsConfig) return [];
+
+    // Acquire class features
+    let ids = [];
+    for ( let [l, f] of Object.entries(clsConfig.features || {}) ) {
+      l = parseInt(l);
+      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
+    }
+
+    // Acquire subclass features
+    const subConfig = clsConfig.subclasses[subclassName] || {};
+    for ( let [l, f] of Object.entries(subConfig.features || {}) ) {
+      l = parseInt(l);
+      if ( (l <= level) && (l > priorLevel) ) ids = ids.concat(f);
+    }
+
+    // Load item data for all identified features
+    const features = [];
+    for ( let id of ids ) {
+      features.push(await fromUuid(id));
+    }
+
+    // Class spells should always be prepared
+    for ( const feature of features ) {
+      if ( feature.type === "spell" ) {
+        const preparation = feature.system.preparation;
+        preparation.mode = "always";
+        preparation.prepared = true;
+      }
+    }
+    return features;
   }
 }
