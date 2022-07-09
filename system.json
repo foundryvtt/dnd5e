@@ -126,5 +126,9 @@
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-1.7.0-beta/dnd5e-1.7.0-beta.zip"
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-1.7.0-beta/dnd5e-1.7.0-beta.zip",
+  "flags": {
+    "needsMigrationVersion": "1.6.0",
+    "compatibleMigrationVersion": "0.8"
+  }
 }
