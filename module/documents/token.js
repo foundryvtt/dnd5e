@@ -1,6 +1,5 @@
 /**
  * Extend the base TokenDocument class to implement system-specific HP bar logic.
- * @extends {TokenDocument}
  */
 export class TokenDocument5e extends TokenDocument {
 
@@ -8,8 +7,9 @@ export class TokenDocument5e extends TokenDocument {
   getBarAttribute(...args) {
     const data = super.getBarAttribute(...args);
     if ( data && (data.attribute === "attributes.hp") ) {
-      data.value += parseInt(getProperty(this.actor.data, "data.attributes.hp.temp") || 0);
-      data.max += parseInt(getProperty(this.actor.data, "data.attributes.hp.tempmax") || 0);
+      const hp = this.actor.system.attributes.hp || {};
+      data.value += (hp.temp || 0);
+      data.max += (hp.tempmax || 0);
     }
     return data;
   }
@@ -82,7 +82,7 @@ export class Token5e extends Token {
   _drawHPBar(number, bar, data) {
 
     // Extract health data
-    let {value, max, temp, tempmax} = this.document.actor.data.data.attributes.hp;
+    let {value, max, temp, tempmax} = this.document.actor.system.attributes.hp;
     temp = Number(temp || 0);
     tempmax = Number(tempmax || 0);
 
