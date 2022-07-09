@@ -16,9 +16,9 @@ import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances } from "./module/canvas.js";
 
 // Import Documents
-import Actor5e from "./module/actor/entity.js";
-import Item5e from "./module/item/entity.js";
-import { TokenDocument5e, Token5e } from "./module/token.js";
+import Actor5e from "./module/documents/actor.js";
+import Item5e from "./module/documents/item.js";
+import { TokenDocument5e, Token5e } from "./module/documents/token.js";
 
 // Import Applications
 import AbilityTemplate from "./module/pixi/ability-template.js";
@@ -48,7 +48,7 @@ import * as dice from "./module/dice.js";
 import * as macros from "./module/macros.js";
 import * as migrations from "./module/migration.js";
 import * as utils from "./module/utils.js";
-import ActiveEffect5e from "./module/active-effect.js";
+import ActiveEffect5e from "./module/documents/active-effect.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -85,7 +85,7 @@ Hooks.once("init", function() {
     },
     config: DND5E,
     dice,
-    entities: {
+    documents: {
       Actor5e,
       Item5e,
       TokenDocument5e,
@@ -227,11 +227,9 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("canvasInit", function() {
-  // Extend Diagonal Measurement
   canvas.grid.diagonalRule = game.settings.get("dnd5e", "diagonalMovement");
   SquareGrid.prototype.measureDistances = measureDistances;
 });
-
 
 /* -------------------------------------------- */
 /*  Other Hooks                                 */

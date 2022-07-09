@@ -1,10 +1,10 @@
-import Proficiency from "./proficiency.js";
+import Proficiency from "../actor/proficiency.js";
 import { d20Roll, damageRoll } from "../dice.js";
 import SelectItemsPrompt from "../apps/select-items-prompt.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import ProficiencySelector from "../apps/proficiency-selector.js";
-import Item5e from "../item/entity.js";
+import Item5e from "./item.js";
 
 
 /**
