@@ -13,11 +13,6 @@ import Item5e from "./item.js";
  */
 export default class Actor5e extends Actor {
 
-  /** @inheritdoc */
-  static LOG_V10_COMPATIBILITY_WARNINGS = false;
-
-  /* -------------------------------------------- */
-
   /**
    * The data source for Actor5e.classes allowing it to be lazily computed.
    * @type {object<string, Item5e>}

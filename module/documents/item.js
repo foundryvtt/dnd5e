@@ -9,11 +9,6 @@ import Proficiency from "../actor/proficiency.js";
  */
 export default class Item5e extends Item {
 
-  /** @inheritdoc */
-  static LOG_V10_COMPATIBILITY_WARNINGS = false;
-
-  /* -------------------------------------------- */
-
   /**
    * Caches an item linked to this one, such as a subclass associated with a class.
    * @type {Item5e}

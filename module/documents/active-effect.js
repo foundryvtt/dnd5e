@@ -4,11 +4,6 @@
  */
 export default class ActiveEffect5e extends ActiveEffect {
 
-  /** @inheritdoc */
-  static LOG_V10_COMPATIBILITY_WARNINGS = false;
-
-  /* -------------------------------------------- */
-
   /**
    * Is this active effect currently suppressed?
    * @type {boolean}
