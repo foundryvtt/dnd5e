@@ -305,9 +305,9 @@ DND5E.actorSizes = {
     label:  "DND5E.SizeTiny",
     tokenSize: 0.5,
     encumbranceMultiplier: 0.5,
-    nextSizeUp: "sm"
+    nextSizeUp: "small"
   },
-  sm: {
+  small: {
     label: "DND5E.SizeSmall",
     tokenSize: 1,
     encumbranceMultiplier: 1,

@@ -784,8 +784,8 @@ export default class Actor5e extends Actor {
 
     // Determine the encumbrance size class
     let size = actorData.data.traits.size;
-    if ( this.getFlag("dnd5e", "powerfulBuild") ) size = CONFIG.DND5E.nextSizeUp[size];
-    let sizeMod = CONFIG.DND5E.encumbranceMultiplyer[size];
+    if ( this.getFlag("dnd5e", "powerfulBuild") ) size = CONFIG.DND5E.actorSizes[size["nextSizeUp"]];
+    let sizeMod = size["encumbranceMultiplier"]
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
