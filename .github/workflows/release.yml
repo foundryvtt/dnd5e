@@ -1,0 +1,101 @@
+name: Release Creation
+
+on:
+  push:
+    tags:
+      - 'release-*'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+
+    # Set up our some variables for future use
+    # Adapted from https://github.community/t/how-to-get-just-the-tag-name/16241/7
+    # Tag name: ${{ steps.get_vars.outputs.TAG_NAME }}
+    # Zip name: ${{ steps.get_vars.outputs.ZIP_NAME }}
+    # Expected Release Download URL: ${{ steps.get_vars.outputs.RELEASE_DOWNLOAD_URL }}
+    # Expected Release system.json URL: ${{ steps.get_vars.outputs.RELEASE_INSTALL_URL }}
+    # Stringified system.json contents: ${{ steps.get_vars.outputs.SYSTEM_JSON }}
+    - name: Set up variables
+      id: get_vars
+      run: |
+        TAG=${GITHUB_REF/refs\/tags\//}
+        echo ::set-output name=TAG_NAME::$TAG
+        echo ::set-output name=ZIP_NAME::dnd5e-$TAG.zip
+        echo ::set-output name=RELEASE_DOWNLOAD_URL::https://github.com/${{github.repository}}/releases/download/$TAG/dnd5e-$TAG.zip
+        echo ::set-output name=RELEASE_INSTALL_URL::https://github.com/${{github.repository}}/releases/download/$TAG/system.json
+        JSON=$(cat ./system.json)
+        echo ::set-output name=SYSTEM_JSON::${JSON//'%'/'%25'}
+
+
+    # Run some tests to make sure our `system.json` is correct
+    # Exit before setting up node if not
+    - name: Verify correct naming
+      env:
+        TAG_NAME: ${{ steps.get_vars.outputs.TAG_NAME }}
+        RELEASE_DOWNLOAD: ${{steps.get_vars.outputs.RELEASE_DOWNLOAD_URL}}
+        # Extract version and download url from system.json
+        # https://docs.github.com/en/actions/learn-github-actions/expressions#fromjson
+        PACKAGE_VERSION: ${{fromJSON(steps.get_vars.outputs.SYSTEM_JSON).version}}
+        PACKAGE_DOWNLOAD: ${{fromJSON(steps.get_vars.outputs.SYSTEM_JSON).download}}
+      run: |
+        # Validate that the tag being released matches the package version.
+        if [[ ! $TAG_NAME == release-$PACKAGE_VERSION ]]; then
+          echo "The system.json version does not match tag name."
+          echo "system.json: $PACKAGE_VERSION"
+          echo "tag name: $TAG_NAME"
+          echo "Please fix this and push the tag again."
+          exit 1
+        fi
+
+        # Validate that the package download url matches the release asset that will be created.
+        if [[ ! $RELEASE_DOWNLOAD == $PACKAGE_DOWNLOAD ]]; then
+          echo "The system.json download url does not match the created release asset url."
+          echo "system.json: $PACKAGE_DOWNLOAD"
+          echo "release asset url: $RELEASE_DOWNLOAD"
+          echo "Please fix this and push the tag again."
+          exit 1
+        fi
+
+
+    # Set up Node
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+        cache: 'npm'
+
+
+    # `npm ci` is recommended:
+    # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+    - name: Install Dependencies
+      run: npm ci
+
+
+    # Run our `build` script
+    - name: Build All
+      run: npm run build --if-present
+
+
+    # Create a zip file with all files required by the module to add to the release
+    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r icons lang module json packs/*.db templates tokens ui dnd5e.css dnd5e.js LICENSE.txt OGL.txt README.md system.json template.json
+
+
+    # Create a release for this specific version
+    - name: Update Release with Files
+      id: create_version_release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true # Set this to false if you want to prevent updating existing releases
+        name: ${{steps.get_vars.outputs.TAG_NAME}}
+        draft: false
+        prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: './system.json, ./${{steps.get_vars.outputs.ZIP_NAME}}'
+        tag: ${{steps.get_vars.outputs.TAG_NAME}}
+        body: '**Installation:** To manually install this release, please use the following manifest URL: ${{steps.get_vars.outputs.RELEASE_INSTALL_URL}}'
