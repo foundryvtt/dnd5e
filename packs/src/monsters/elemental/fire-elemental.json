@@ -2,7 +2,7 @@
   "_id": "8SMQl75HLjhuSeau",
   "name": "Fire Elemental",
   "type": "npc",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/dnd5e/tokens/elemental/FireElemental.webp",
   "data": {
     "abilities": {
       "str": {
@@ -151,7 +151,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by Forgotten Adventures.</em></p>",
         "public": ""
       },
       "alignment": "Neutral",
@@ -553,7 +553,7 @@
   },
   "token": {
     "name": "Fire Elemental",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "tint": null,
     "width": 2,
@@ -576,7 +576,7 @@
       "intensity": 5
     },
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 40,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -585,7 +585,7 @@
     },
     "flags": {},
     "randomImg": false,
-    "img": "icons/svg/mystery-man.svg",
+    "img": "systems/dnd5e/tokens/elemental/FireElemental.webp",
     "actorId": "8SMQl75HLjhuSeau",
     "alpha": 1,
     "light": {

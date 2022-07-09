@@ -1,13 +1,15 @@
 {
+  "id": "dnd5e",
   "name": "dnd5e",
   "title": "DnD5e - Fifth Edition System",
   "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "1.6.2",
-  "author": "Atropos",
-  "flags": {
-    "needsMigrationVersion": "1.6.0",
-    "compatibleMigrationVersion": "0.8"
-  },
+  "version": "1.7.0-beta",
+  "authors": [
+    {
+      "name": "Atropos",
+      "url": "https://foundryvtt.com"
+    }
+  ],
   "scripts": [],
   "esmodules": ["dnd5e.js"],
   "styles": ["dnd5e.css"],
@@ -117,9 +119,16 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "attributes.hp",
   "secondaryTokenAttribute": null,
-  "minimumCoreVersion": "9.245",
-  "compatibleCoreVersion": "9",
-  "url": "https://gitlab.com/foundrynet/dnd5e",
-  "manifest": "https://gitlab.com/api/v4/projects/foundrynet%2Fdnd5e/packages/generic/dnd5e/latest/system.json",
-  "download": "https://gitlab.com/foundrynet/dnd5e/-/releases/release-1.6.2/downloads/dnd5e-release-1.6.2.zip"
+  "compatibility": {
+    "minimum": "9.245",
+    "verified": "10",
+    "maximum": "10"
+  },
+  "url": "https://github.com/foundryvtt/dnd5e/",
+  "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-1.7.0-beta/dnd5e-1.7.0-beta.zip",
+  "flags": {
+    "needsMigrationVersion": "1.6.0",
+    "compatibleMigrationVersion": "0.8"
+  }
 }
