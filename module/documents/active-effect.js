@@ -1,6 +1,5 @@
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
- * @extends {ActiveEffect}
  */
 export default class ActiveEffect5e extends ActiveEffect {
 
@@ -15,9 +14,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritdoc */
   apply(actor, change) {
     if ( this.isSuppressed ) return null;
-
     if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
-
     return super.apply(actor, change);
   }
 
@@ -25,7 +22,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Transform the data type of the change to match the type expected for flags.
-   * @param {Actor} actor              The Actor to whom this effect should be applied.
+   * @param {Actor5e} actor            The Actor to whom this effect should be applied.
    * @param {EffectChangeData} change  The change being applied.
    * @returns {EffectChangeData}       The change with altered types if necessary.
    */
@@ -35,13 +32,13 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !data ) return change;
 
     // Set flag to initial value if it isn't present
-    const current = foundry.utils.getProperty(actor.data, key) ?? null;
+    const current = foundry.utils.getProperty(actor, key) ?? null;
     if ( current === null ) {
       let initialValue = null;
       if ( data.placeholder ) initialValue = data.placeholder;
       else if ( data.type === Boolean ) initialValue = false;
       else if ( data.type === Number ) initialValue = 0;
-      foundry.utils.setProperty(actor.data, key, initialValue);
+      foundry.utils.setProperty(actor, key, initialValue);
     }
 
     // Coerce change data into the correct type
@@ -49,7 +46,6 @@ export default class ActiveEffect5e extends ActiveEffect {
       if ( value === "false" ) change.value = false;
       else change.value = Boolean(value);
     }
-
     return change;
   }
 
@@ -60,8 +56,8 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.data.disabled || (this.parent.documentName !== "Actor") ) return;
-    const [parentType, parentId, documentType, documentId] = this.data.origin?.split(".") ?? [];
+    if ( this.disabled || (this.parent.documentName !== "Actor") ) return;
+    const [parentType, parentId, documentType, documentId] = this.origin?.split(".") ?? [];
     if ( (parentType !== "Actor") || (parentId !== this.parent.id) || (documentType !== "Item") ) return;
     const item = this.parent.items.get(documentId);
     if ( !item ) return;
@@ -73,7 +69,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Manage Active Effect instances through the Actor Sheet via effect control buttons.
    * @param {MouseEvent} event      The left-click event on the effect control
-   * @param {Actor|Item} owner      The owning document which manages this effect
+   * @param {Actor5e|Item5e} owner  The owning document which manages this effect
    * @returns {Promise|null}        Promise that resolves when the changes are complete.
    */
   static onManageActiveEffect(event, owner) {
@@ -95,7 +91,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       case "delete":
         return effect.delete();
       case "toggle":
-        return effect.update({disabled: !effect.data.disabled});
+        return effect.update({disabled: !effect.disabled});
     }
   }
 
@@ -103,7 +99,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Prepare the data structure for Active Effects which are currently applied to an Actor or Item.
-   * @param {ActiveEffect[]} effects    The array of Active Effect instances to prepare sheet data for
+   * @param {ActiveEffect5e[]} effects  The array of Active Effect instances to prepare sheet data for
    * @returns {object}                  Data for rendering
    */
   static prepareActiveEffectCategories(effects) {
@@ -136,11 +132,10 @@ export default class ActiveEffect5e extends ActiveEffect {
     for ( let e of effects ) {
       e._getSourceName(); // Trigger a lookup for the source name
       if ( e.isSuppressed ) categories.suppressed.effects.push(e);
-      else if ( e.data.disabled ) categories.inactive.effects.push(e);
+      else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }
-
     categories.suppressed.hidden = !categories.suppressed.effects.length;
     return categories;
   }
