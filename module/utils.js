@@ -53,20 +53,7 @@ export function indexFromUuid(uuid) {
  * @private
  */
 export function _linkForUuid(uuid) {
-  const index = game.dnd5e.utils.indexFromUuid(uuid);
-
-  let link;
-
-  if ( !index ) {
-    link = `@Item[${uuid}]{${game.i18n.localize("DND5E.Unknown")}}`;
-  } else if ( uuid.startsWith("Compendium.") ) {
-    link = `@Compendium[${uuid.slice(11)}]{${index.name}}`;
-  } else {
-    const [type, id] = uuid.split(".");
-    link = `@${type}[${id}]{${index.name}}`;
-  }
-
-  return TextEditor.enrichHTML(link);
+  return TextEditor._createContentLink(["", "UUID", uuid]);
 }
 
 /* -------------------------------------------- */

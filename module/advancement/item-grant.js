@@ -34,7 +34,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /** @inheritdoc */
   configuredForLevel(level) {
-    return !foundry.utils.isObjectEmpty(this.data.value);
+    return !foundry.utils.isEmpty(this.data.value);
   }
 
   /* -------------------------------------------- */

@@ -12,7 +12,7 @@ export const migrateWorld = async function() {
   for ( let a of game.actors ) {
     try {
       const updateData = migrateActorData(a.toObject(), migrationData);
-      if ( !foundry.utils.isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Actor document ${a.name}`);
         await a.update(updateData, {enforceTypes: false});
       }
@@ -26,7 +26,7 @@ export const migrateWorld = async function() {
   for ( let i of game.items ) {
     try {
       const updateData = migrateItemData(i.toObject(), migrationData);
-      if ( !foundry.utils.isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Item document ${i.name}`);
         await i.update(updateData, {enforceTypes: false});
       }
@@ -40,7 +40,7 @@ export const migrateWorld = async function() {
   for ( const m of game.macros ) {
     try {
       const updateData = migrateMacroData(m.toObject(), migrationData);
-      if ( !foundry.utils.isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Macro document ${m.name}`);
         await m.update(updateData, {enforceTypes: false});
       }
@@ -54,7 +54,7 @@ export const migrateWorld = async function() {
   for ( let s of game.scenes ) {
     try {
       const updateData = migrateSceneData(s.data, migrationData);
-      if ( !foundry.utils.isObjectEmpty(updateData) ) {
+      if ( !foundry.utils.isEmpty(updateData) ) {
         console.log(`Migrating Scene document ${s.name}`);
         await s.update(updateData, {enforceTypes: false});
         // If we do not do this, then synthetic token actors remain in cache
@@ -117,7 +117,7 @@ export const migrateCompendium = async function(pack) {
       }
 
       // Save the entry, if data was changed
-      if ( foundry.utils.isObjectEmpty(updateData) ) continue;
+      if ( foundry.utils.isEmpty(updateData) ) continue;
       await doc.update(updateData);
       console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
     }
@@ -302,7 +302,7 @@ export const migrateEffects = function(parent, migrationData) {
   return parent.effects.reduce((arr, e) => {
     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
     let effectUpdate = migrateEffectData(effectData, migrationData);
-    if ( !foundry.utils.isObjectEmpty(effectUpdate) ) {
+    if ( !foundry.utils.isEmpty(effectUpdate) ) {
       effectUpdate._id = effectData._id;
       arr.push(foundry.utils.expandObject(effectUpdate));
     }
