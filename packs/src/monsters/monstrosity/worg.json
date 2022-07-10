@@ -3,7 +3,7 @@
   "name": "Worg",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Worg.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -541,7 +541,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Worg",
     "displayName": 20,
     "actorLink": false,
@@ -607,7 +607,7 @@
       "name": "Keen Hearing and Smell",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The worg has<strong> advantage </strong>on Wisdom (Perception) checks that rely on hearing or smell.</p>",
           "chat": "",
@@ -675,7 +675,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -685,7 +685,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 13 Strength</strong> saving throw or be knocked prone.</p>\n</section>\n<p>The Worg attacks with its Bite. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -785,7 +785,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -794,7 +794,7 @@
   "effects": [],
   "folder": "Q7qeMxX30iDI2Wbs",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

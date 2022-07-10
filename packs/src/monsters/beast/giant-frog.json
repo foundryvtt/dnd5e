@@ -3,7 +3,7 @@
   "name": "Giant Frog",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantFrog.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 12,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Frog",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Amphibious",
       "type": "feat",
       "img": "icons/environment/creatures/frog-spotted-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The frog can breathe air and water.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Standing Leap",
       "type": "feat",
       "img": "icons/environment/creatures/frog-spotted-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The frog's long jump is up to <strong>20 ft.</strong> and its high jump is up to <strong>10 ft.</strong>, with or without a running start.</p>",
           "chat": "",
@@ -747,7 +747,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -757,7 +757,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>piercing damage</em></strong>.</p>\n<p>The target is grappled (escape DC 11). Until this grapple ends, the target is restrained, and the frog can't bite another target.</p>\n</section>\n<p>The Giant Frog attacks with its Bite. If successful, the target is grappled. Until this grapple ends, the target is restrained, and the frog can't bite another target.</p>",
           "chat": "",
@@ -857,7 +857,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -867,7 +867,7 @@
       "name": "Swallow",
       "type": "feat",
       "img": "icons/creatures/abilities/mouth-teeth-tongue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The frog makes one bite attack against a Small or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends.</p>\n<p>The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the frog, and it takes <strong>5 (2d4) <em>acid damage</em></strong> at the start of each of the frog's turns. The frog can have only one target swallowed at a time. If the frog dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone.</p>\n</section>\n<p>The Giant Frog attacks with its Swallow.</p>",
           "chat": "",
@@ -937,7 +937,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -946,7 +946,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

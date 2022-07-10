@@ -3,7 +3,7 @@
   "name": "Giant Toad",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantToad.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -538,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Toad",
     "displayName": 20,
     "actorLink": false,
@@ -604,7 +604,7 @@
       "name": "Amphibious",
       "type": "feat",
       "img": "icons/environment/creatures/frog-spotted-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The toad can breathe air and water.</p>",
           "chat": "",
@@ -672,7 +672,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -682,7 +682,7 @@
       "name": "Standing Leap",
       "type": "feat",
       "img": "icons/environment/creatures/frog-spotted-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The toad's long jump is up to <strong>20 ft.</strong> and its high jump is up to <strong>10 ft.</strong>, with or without a running start.</p>",
           "chat": "",
@@ -750,7 +750,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -760,7 +760,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong> plus <strong>5 (1d10) <em>poison damage</em></strong>.</p>\n<p>The target is grappled (escape DC 13). Until this grapple ends, the target is restrained, and the toad can't bite another target.</p>\n</section>\n<p>The Giant Toad attacks with its Bite. The target is grappled. Until this grapple ends, the target is restrained, and the toad can't bite another target.</p>",
           "chat": "",
@@ -864,7 +864,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -874,7 +874,7 @@
       "name": "Swallow",
       "type": "feat",
       "img": "icons/creatures/abilities/mouth-teeth-tongue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The toad makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends.</p>\n<p>The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the toad, and it takes <strong>10 (3d6) <em>acid damage</em></strong> at the start of each of the toad's turns. The toad can have only one target swallowed at a time. If the toad dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone.</p>\n</section>\n<p>The Giant Toad attacks with its Swallow.</p>",
           "chat": "",
@@ -944,7 +944,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -953,7 +953,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Imp",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fiend/Imp.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 6,
@@ -546,7 +546,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Imp",
     "displayName": 20,
     "actorLink": false,
@@ -611,7 +611,7 @@
       "name": "Shapechanger",
       "type": "feat",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The imp can use its action to polymorph into a beast form that resembles a rat (speed 20 ft.), a raven (20 ft., fly 60 ft.), or a spider (20 ft., climb 20 ft.), or back into its true form. Its statistics are the same in each form, except for the speed changes noted. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p>",
           "chat": "",
@@ -678,7 +678,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -688,7 +688,7 @@
       "name": "Devil's Sight",
       "type": "feat",
       "img": "icons/magic/perception/eye-slit-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Magical darkness doesn't impede the imp's darkvision.</p>",
           "chat": "",
@@ -755,7 +755,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -765,7 +765,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The imp has advantage on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -832,7 +832,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -842,7 +842,7 @@
       "name": "Sting",
       "type": "weapon",
       "img": "icons/creatures/abilities/fang-tooth-venomous.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +5 to hit, reach 5 ft ., one target. Hit: <strong>5 (1d4 + 3) <em>piercing damage</em></strong>.</p>\n<p>The target must make on a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Imp attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -942,7 +942,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -952,7 +952,7 @@
       "name": "Invisibility",
       "type": "feat",
       "img": "icons/creatures/webs/webthin-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The imp magically turns invisible until it attacks, or until its concentration ends (as if concentrating on a spell). Any equipment the imp wears or carries is invisible with it.</p>\n</section>\n<p>The imp magically turns invisible. Any equipment the imp wears or carries is invisible with it.</p>",
           "chat": "",
@@ -1019,7 +1019,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1029,7 +1029,7 @@
       "name": "Bite (beast form only)",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d4 + 3) <em>piercing damage</em></strong>, and the target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Imp attacks with its Bite.</p>",
           "chat": "",
@@ -1129,7 +1129,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1138,7 +1138,7 @@
   "effects": [],
   "folder": "OvwYcGTa27ZerqL7",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

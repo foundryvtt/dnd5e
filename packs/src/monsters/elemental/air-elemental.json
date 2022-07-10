@@ -3,7 +3,7 @@
   "name": "Air Elemental",
   "type": "npc",
   "img": "systems/dnd5e/tokens/elemental/WindElemental.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 14,
@@ -552,7 +552,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Air Elemental",
     "displayName": 20,
     "actorLink": false,
@@ -617,7 +617,7 @@
       "name": "Air Form",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/wind-grasp-air-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing.</p>",
           "chat": "",
@@ -685,7 +685,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -695,7 +695,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The elemental makes two slam attacks.</p>",
           "chat": "",
@@ -763,7 +763,7 @@
       "effects": [],
       "folder": null,
       "sort": 1,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -773,7 +773,7 @@
       "name": "Slam",
       "type": "weapon",
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Air Elemental attacks with its Slam.</p>",
           "chat": "",
@@ -873,7 +873,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -883,7 +883,7 @@
       "name": "Whirlwind",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Each creature in the elemental's space must make a  <strong>DC 13 Strength</strong> saving throw. On a failure, a target takes <strong>15 (3d8 + 2) <em>bludgeoning damage</em></strong> and is flung up 20 feet away from the elemental in a random direction and knocked prone.</p>\n<p>If a thrown target strikes an object, such as a wall or floor, the target takes <strong>3 (1d6) <em>bludgeoning damage</em></strong> for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a  <strong>DC 13 Dexterity</strong> saving throw or take the same damage and be knocked prone. If the saving throw is successful, the target takes half the <em>bludgeoning damage</em> and isn't flung away or knocked prone.</p>\n</section>\n<p>Each creature in the elemental's space must make a <strong>Strength</strong> saving throw. On a failure, a target is flung up 20 feet away from the elemental in a random direction and knocked prone. If the target is thrown at another creature, that creature must make a <strong>Dexterity</strong> saving throw or take the same damage and be knocked prone.</p>",
           "chat": "",
@@ -956,7 +956,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -965,7 +965,7 @@
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

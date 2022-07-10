@@ -3,7 +3,7 @@
   "name": "Centaur",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Centaur.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -538,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Centaur",
     "displayName": 20,
     "actorLink": false,
@@ -603,7 +603,7 @@
       "name": "Pike",
       "type": "weapon",
       "img": "icons/weapons/polearms/halberd-crescent-stone-worn.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>9 (1d10 + 4) <em>piercing damage</em></strong>.</p></section>\n<p>The Centaur attacks with its Pike.</p>",
           "chat": "",
@@ -703,7 +703,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -713,7 +713,7 @@
       "name": "Hooves",
       "type": "weapon",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Centaur attacks with its Hooves.</p>",
           "chat": "",
@@ -813,7 +813,7 @@
       "effects": [],
       "folder": null,
       "sort": 700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -823,7 +823,7 @@
       "name": "Longbow",
       "type": "weapon",
       "img": "icons/weapons/bows/longbow-leather-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Centaur attacks with its Longbow.</p>",
           "chat": "",
@@ -923,7 +923,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -933,7 +933,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The centaur makes two attacks: one with its pike and one with its hooves or two with its longbow.</p>",
           "chat": "",
@@ -1000,7 +1000,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1010,7 +1010,7 @@
       "name": "Charge",
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If the centaur moves at least 30 ft. straight toward a target and then hits it with a pike attack on the same turn, the target takes an extra <strong>10 (3d6) <em>piercing damage</em></strong>.</p></section>\n<p>If the centaur moves at least 30 ft. straight toward a target and then hits it with a pike attack on the same turn, the target takes extra <em>piercing damage</em>.</p>",
           "chat": "",
@@ -1082,7 +1082,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1091,7 +1091,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Hawk",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Hawk.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 5,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Hawk",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Keen Sight",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The eagle has<strong> advantage </strong>on Wisdom (Perception) checks that rely on sight.</p>",
           "chat": "",
@@ -668,7 +668,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -678,7 +678,7 @@
       "name": "Talons",
       "type": "weapon",
       "img": "icons/creatures/claws/claw-talons-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>slashing damage</em>.</strong></p></section>\n<p>The Hawk attacks with its Talons.</p>",
           "chat": "",
@@ -778,7 +778,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -787,7 +787,7 @@
   "effects": [],
   "folder": "DuRKNuzI99G8kWWa",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Shrieker",
   "type": "npc",
   "img": "systems/dnd5e/tokens/plant/Shrieker.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 1,
@@ -539,7 +539,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Shrieker",
     "displayName": 20,
     "actorLink": false,
@@ -604,7 +604,7 @@
       "name": "Shriek",
       "type": "feat",
       "img": "icons/creatures/abilities/mouth-teeth-human.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>When bright light or a creature is within 30 feet of the shrieker, it emits a shriek audible within 300 feet of it. The shrieker continues to shriek until the disturbance moves out of range and for 1d4 of the shrieker's turns afterward</p><p></p></section><p>When bright light or a creature is within 30 feet of the shrieker, it emits a shriek audible within 300 feet of it. </p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "False Appearance",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While the shrieker remains motionless, it is indistinguishable from an ordinary fungus.</p>",
           "chat": "",
@@ -744,7 +744,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -753,7 +753,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

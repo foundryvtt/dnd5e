@@ -3,7 +3,7 @@
   "name": "Azer",
   "type": "npc",
   "img": "systems/dnd5e/tokens/elemental/Azer.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 17,
@@ -542,7 +542,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Azer",
     "displayName": 20,
     "actorLink": false,
@@ -607,7 +607,7 @@
       "name": "Shield",
       "type": "equipment",
       "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
           "chat": "",
@@ -693,7 +693,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -703,7 +703,7 @@
       "name": "Heated Body",
       "type": "feat",
       "img": "icons/magic/earth/volcano-explosion-lava-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A creature that touches the azer or hits it with a melee attack while within 5 feet of it takes <strong>5 (1d10) <em>fire damage</em></strong>.</p>",
           "chat": "",
@@ -775,7 +775,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -785,7 +785,7 @@
       "name": "Heated Weapons",
       "type": "feat",
       "img": "icons/skills/melee/strike-sword-blood-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>When the azer hits with a metal melee weapon, it deals an extra <strong>3 (1d6) <em>fire damage</em></strong> (included in the attack).</p>\n</section>\n<p>When the azer hits with a metal melee weapon, it deals extra <em>fire damage</em> (included in the attack).</p>",
           "chat": "",
@@ -853,7 +853,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -863,7 +863,7 @@
       "name": "Illumination",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The azer sheds bright light in a 10-foot radius and dim light for an additional 10 ft.</p>",
           "chat": "",
@@ -931,7 +931,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -941,7 +941,7 @@
       "name": "Warhammer",
       "type": "weapon",
       "img": "icons/weapons/hammers/hammer-drilling-spiked.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section>\n<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning damage</em></strong>, or <strong>8 (1d10 + 3) <em>bludgeoning damage</em></strong> if used with two hands to make a melee attack, plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>\n</section>\n</section>\n<p>A heavy metal hammer capable of being wielded with a single hand with a shield or in two hands to deliver crushing concussive blows.</p>",
           "chat": "",
@@ -1045,7 +1045,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1054,7 +1054,7 @@
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Cockatrice",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Cockatrice.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 6,
@@ -538,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Cockatrice",
     "displayName": 20,
     "actorLink": false,
@@ -603,7 +603,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>3 (1d4 + 1) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 24 hours.</p></section><p>The Cockatrice attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw. On a failed save, it must repeat the saving throw at the end of its next turn.</p>",
           "chat": "",
@@ -706,7 +706,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -715,7 +715,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

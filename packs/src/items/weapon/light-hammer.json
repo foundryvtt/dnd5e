@@ -3,7 +3,7 @@
   "name": "Light Hammer",
   "type": "weapon",
   "img": "icons/weapons/hammers/hammer-war-spiked.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This sturdy hammer is small enough to be nimbly wielded or used in combination with another weapon.</p>",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 3400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

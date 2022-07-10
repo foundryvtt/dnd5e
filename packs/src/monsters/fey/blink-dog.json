@@ -3,7 +3,7 @@
   "name": "Blink Dog",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fey/BlinkDog.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 12,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Blink Dog",
     "displayName": 0,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Keen Hearing and Smell",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The dog has<strong> advantage </strong>on Wisdom (Perception) checks that rely on hearing or smell.</p>",
           "chat": "",
@@ -668,7 +668,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -678,7 +678,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>piercing damage</em></strong>.</p></section>\n<p>The Blink Dog attacks with its Bite.</p>",
           "chat": "",
@@ -778,7 +778,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -788,7 +788,7 @@
       "name": "Teleport",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/runes-magenta-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 ft. to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.</p>",
           "chat": "",
@@ -856,7 +856,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -865,7 +865,7 @@
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

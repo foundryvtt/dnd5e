@@ -3,7 +3,7 @@
   "name": "Steam Mephit",
   "type": "npc",
   "img": "systems/dnd5e/tokens/elemental/SteamMephit.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 5,
@@ -544,7 +544,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Steam Mephit",
     "displayName": 20,
     "actorLink": false,
@@ -609,7 +609,7 @@
       "name": "Blur",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn't rely on sight, as with blindsight, or can see through illusions, as with truesight.</p>",
           "chat": "",
@@ -695,7 +695,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -709,7 +709,7 @@
       "name": "Claws",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>2 (1d4) <em>slashing damage</em></strong> plus <strong>2 (1d4) <em>fire damage</em></strong>.</p><p></p></section><p>The Steam Mephit attacks with its Claws.</p>",
           "chat": "",
@@ -813,7 +813,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -823,7 +823,7 @@
       "name": "Death Burst",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>When the mephit dies, it explodes in a cloud of steam. </p><p>Each creature within 5 ft. of the mephit must succeed on a  <strong>DC 10 Dexterity</strong> saving throw or take <strong>4 (1d8) <em>fire damage</em></strong>.</p></section><p>When the mephit dies, it explodes in a cloud of steam. Each creature within 5 ft. of the mephit must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -893,7 +893,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -903,7 +903,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mephit can innately cast blur, requiring no material components. Its innate spellcasting ability is Charisma.</p>",
           "chat": "",
@@ -968,7 +968,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -978,7 +978,7 @@
       "name": "Steam Breath",
       "type": "feat",
       "img": "icons/magic/air/wind-tornado-wall-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The mephit exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a  <strong>DC 10 Dexterity</strong> saving throw, taking <strong>4 (1d8) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The mephit exhales a 15-foot cone of scalding steam. Each creature in that area must succeed on a Dexterity saving throw.</p>",
           "chat": "",
@@ -1048,7 +1048,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1057,7 +1057,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

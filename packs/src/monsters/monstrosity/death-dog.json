@@ -3,7 +3,7 @@
   "name": "Death Dog",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/DeathDog.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Death Dog",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the creature must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. This reduction lasts until the disease is cured. The creature dies if the disease reduces its hit point maximum to 0.</p>\n</section>\n<p>The Death Dog attacks with its Bite. If the target is a creature, it must make a <strong>Constitution</strong> saving throw. Every 24 hours that elapse, the creature must repeat the saving throw.</p>",
           "chat": "",
@@ -700,7 +700,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +710,7 @@
       "name": "Two-Headed",
       "type": "feat",
       "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The dog has<strong> advantage </strong>on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious.</p>",
           "chat": "",
@@ -777,7 +777,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -787,7 +787,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The dog makes two bite attacks.</p>",
           "chat": "",
@@ -851,7 +851,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -860,7 +860,7 @@
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

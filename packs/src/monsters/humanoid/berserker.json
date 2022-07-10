@@ -3,7 +3,7 @@
   "name": "Berserker",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Berserker.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -537,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Berserker",
     "displayName": 20,
     "actorLink": false,
@@ -602,7 +602,7 @@
       "name": "Hide Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-scale-leather.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This crude armor consists of thick furs and pelts. It is commonly worn by barbarian tribes, evil humanoids, and other folk who lack access to the tools and materials needed to create better armor.</p>",
           "chat": "",
@@ -688,7 +688,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -698,7 +698,7 @@
       "name": "Reckless",
       "type": "feat",
       "img": "icons/skills/social/intimidation-impressing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn.</p>",
           "chat": "",
@@ -766,7 +766,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -776,7 +776,7 @@
       "name": "Greataxe",
       "type": "weapon",
       "img": "icons/weapons/axes/axe-double.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (1d12 + 3) <em>slashing damage</em></strong>.</p></section>\n<p>The Berserker attacks with their Greataxe.</p>",
           "chat": "",
@@ -876,7 +876,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -885,7 +885,7 @@
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

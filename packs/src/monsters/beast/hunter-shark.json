@@ -3,7 +3,7 @@
   "name": "Hunter Shark",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/HunterShark.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Hunter Shark",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Blood Frenzy",
       "type": "feat",
       "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The shark has<strong> advantage </strong>on melee attack rolls against any creature that doesn't have all its<strong> hit points</strong>.</p>",
           "chat": "",
@@ -667,7 +667,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -677,7 +677,7 @@
       "name": "Water Breathing",
       "type": "feat",
       "img": "icons/magic/water/projectile-water-ice-orb.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The shark can breathe only underwater.</p>",
           "chat": "",
@@ -744,7 +744,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -754,7 +754,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>piercing damage</em></strong>.</p></section>\n<p>The Hunter Shark attacks with its Bite.</p>",
           "chat": "",
@@ -854,7 +854,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -863,7 +863,7 @@
   "effects": [],
   "folder": "DuRKNuzI99G8kWWa",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

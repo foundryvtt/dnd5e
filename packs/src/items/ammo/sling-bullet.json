@@ -3,7 +3,7 @@
   "name": "Sling Bullet",
   "type": "consumable",
   "img": "icons/skills/ranged/bullets-triple-ball-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A hardened pebble of stone, bone, or metal which can be flung at high velocity using a sling.</p>\n<p><em>**Foundry note: It will usually be impossible to buy one sling bullet because they are worth less than a copper piece (5 bullets = 1 cp).</em></p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 4300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

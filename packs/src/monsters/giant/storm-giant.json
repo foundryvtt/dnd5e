@@ -3,7 +3,7 @@
   "name": "Storm Giant",
   "type": "npc",
   "img": "systems/dnd5e/tokens/giant/StormGiant.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 29,
@@ -543,7 +543,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Storm Giant",
     "displayName": 20,
     "actorLink": false,
@@ -608,7 +608,7 @@
       "name": "Scale Mail",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.</p>",
           "chat": "",
@@ -694,7 +694,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -704,7 +704,7 @@
       "name": "Amphibious",
       "type": "feat",
       "img": "icons/environment/creatures/frog-spotted-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The giant can breathe air and water.</p>",
           "chat": "",
@@ -769,7 +769,7 @@
       "effects": [],
       "folder": null,
       "sort": 800000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -779,7 +779,7 @@
       "name": "Greatsword",
       "type": "weapon",
       "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>30 (6d6 + 9) <em>slashing damage</em></strong>.</p><p></p></section><p>The Storm Giant attacks with its Greatsword.</p>",
           "chat": "",
@@ -879,7 +879,7 @@
       "effects": [],
       "folder": null,
       "sort": 900000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -889,7 +889,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The giant's innate spellcasting ability is Charisma (spell save DC 17). It can innately cast the following spells, requiring no material components:</p>\n<p><strong>At will:</strong> detect magic, feather fall, levitate, light</p>\n<p><strong>3/day each</strong>: control weather, water breathing</p>",
           "chat": "",
@@ -954,7 +954,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -964,7 +964,7 @@
       "name": "Lightning Strike",
       "type": "weapon",
       "img": "systems/dnd5e/icons/spells/lighting-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The giant hurls a magical lightning bolt at a point it can see within 500 feet of it. </p><p>Each creature within 10 feet of that point must make a  <strong>DC 17 Dexterity</strong> saving throw, taking <strong>54 (12d8) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section><p>The Storm Giant attacks with its Lightning Strike. Each creature within 10 feet of that point must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -1064,7 +1064,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1074,7 +1074,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The giant makes two greatsword attacks.</p>",
           "chat": "",
@@ -1139,7 +1139,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1149,7 +1149,7 @@
       "name": "Rock",
       "type": "weapon",
       "img": "systems/dnd5e/icons/spells/rock-plain-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +14 to hit, range 60/240 ft., one target. Hit: <strong>35 (4d12 + 9) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Storm Giant attacks with its Rock.</p>",
           "chat": "",
@@ -1249,7 +1249,7 @@
       "effects": [],
       "folder": null,
       "sort": 1300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1259,7 +1259,7 @@
       "name": "Detect Magic",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -1345,7 +1345,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1359,7 +1359,7 @@
       "name": "Feather Fall",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-magenta-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
           "chat": "",
@@ -1445,7 +1445,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1459,7 +1459,7 @@
       "name": "Levitate",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>One creature or object of your choice that you can see within range rises vertically, up to 20 feet, and remains suspended there for the duration. The spell can levitate a target that weighs up to 500 pounds. An unwilling creature that succeeds on a Constitution saving throw is unaffected.</p><p>The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target's altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can use your action to move the target, which must remain within the spell's range.</p><p>When the spell ends, the target floats gently to the ground if it is still aloft.</p>",
           "chat": "",
@@ -1544,7 +1544,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1558,7 +1558,7 @@
       "name": "Light",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
           "chat": "",
@@ -1643,7 +1643,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1657,7 +1657,7 @@
       "name": "Control Weather",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don't have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the DM based on the climate and season. You can change precipitation, temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><p><strong>Conditions</strong></p>\n<ol>\n<li>Clear</li>\n<li>Light clouds</li>\n<li>Overcast or ground fog</li>\n<li>Rain, hail, or snow</li>\n<li>Torrential rain, driving hail, or blizzard</li>\n</ol>\n<p><strong>Temperature</strong></p>\n<ol>\n<li>Unbearable heat</li>\n<li>Hot</li>\n<li>Warm</li>\n<li>Cool</li>\n<li>Cold</li>\n<li>Arctic cold</li>\n</ol>\n<p><strong>Wind</strong></p>\n<ol>\n<li>Calm</li>\n<li>Moderate wind</li>\n<li>Strong wind</li>\n<li>Gale</li>\n<li>Storm</li>\n</ol>",
           "chat": "",
@@ -1743,7 +1743,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1757,7 +1757,7 @@
       "name": "Water Breathing",
       "type": "spell",
       "img": "icons/magic/water/pseudopod-swirl-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This spell grants up to ten willing creatures you can see within range the ability to breathe underwater until the spell ends. Affected creatures also retain their normal mode of respiration.</p>",
           "chat": "",
@@ -1843,7 +1843,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1856,7 +1856,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Ink Bottle",
   "type": "loot",
   "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A small bottle of ink for writing upon parchment.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Giant Sea Horse",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantSeaHorse.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 12,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Sea Horse",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Charge",
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If the sea horse moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra <strong>7 (2d6) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 11 Strength</strong> saving throw or be knocked prone.</p>\n</section>\n<p>If the sea horse moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes extra <em>bludgeoning damage</em>. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -673,7 +673,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -683,7 +683,7 @@
       "name": "Water Breathing",
       "type": "feat",
       "img": "icons/magic/water/bubbles-air-water-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The sea horse can breathe only underwater.</p>",
           "chat": "",
@@ -751,7 +751,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -761,7 +761,7 @@
       "name": "Ram",
       "type": "weapon",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Giant Sea Horse attacks with its Ram.</p>",
           "chat": "",
@@ -861,7 +861,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -870,7 +870,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

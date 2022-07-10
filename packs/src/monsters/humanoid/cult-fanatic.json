@@ -3,7 +3,7 @@
   "name": "Cult Fanatic",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/CultFanatic.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 11,
@@ -537,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Cult Fanatic",
     "displayName": 20,
     "actorLink": false,
@@ -602,7 +602,7 @@
       "name": "Leather Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
           "chat": "",
@@ -688,7 +688,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -698,7 +698,7 @@
       "name": "Dark Devotion",
       "type": "feat",
       "img": "icons/magic/control/control-influence-rally-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The fanatic has<strong> advantage </strong>on saving throws against being charmed or frightened.</p>",
           "chat": "",
@@ -765,7 +765,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -775,7 +775,7 @@
       "name": "Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The fanatic is a 4th-level spellcaster. Its spell casting ability is Wisdom (spell save DC 11, +3 to hit with spell attacks).</p>\n<p>The fanatic has the following cleric spells prepared:</p>\n<p><strong>Cantrips</strong> (at will): light, sacred flame, thaumaturgy</p>\n<p><strong>1st level </strong>(4 slots): command, inflict wounds, shield of faith</p>\n<p><strong> 2nd level </strong>(3 slots): hold person, spiritual weapon</p>\n</section>\n<p>The fanatic is a spellcaster. Its spell casting ability is Wisdom.</p>",
           "chat": "",
@@ -842,7 +842,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -852,7 +852,7 @@
       "name": "Light",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
           "chat": "",
@@ -936,7 +936,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -950,7 +950,7 @@
       "name": "Sacred Flame",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
@@ -1038,7 +1038,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1052,7 +1052,7 @@
       "name": "Thaumaturgy",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
           "chat": "",
@@ -1137,7 +1137,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1151,7 +1151,7 @@
       "name": "Command",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
@@ -1235,7 +1235,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1249,7 +1249,7 @@
       "name": "Inflict Wounds",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/rip-jade-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Make a melee spell Attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.</p>",
           "chat": "",
@@ -1338,7 +1338,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1352,7 +1352,7 @@
       "name": "Shield of Faith",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.</p>",
           "chat": "",
@@ -1437,7 +1437,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1451,7 +1451,7 @@
       "name": "Hold Person",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/shielding-eerie-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>",
           "chat": "",
@@ -1535,7 +1535,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1549,7 +1549,7 @@
       "name": "Spiritual Weapon",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/enchant-magenta-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
           "chat": "",
@@ -1638,7 +1638,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1652,7 +1652,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The fanatic makes two melee attacks.</p>",
           "chat": "",
@@ -1719,7 +1719,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1729,7 +1729,7 @@
       "name": "Dagger",
       "type": "weapon",
       "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one creature. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Cult Fanatic attacks with their Dagger.</p>",
           "chat": "",
@@ -1829,7 +1829,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1838,7 +1838,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

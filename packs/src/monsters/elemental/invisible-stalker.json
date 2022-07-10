@@ -3,7 +3,7 @@
   "name": "Invisible Stalker",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -551,7 +551,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Invisible Stalker",
     "displayName": 20,
     "actorLink": false,
@@ -616,7 +616,7 @@
       "name": "Faultless Tracker",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The stalker is given a quarry by its summoner. The stalker knows the direction and distance to its quarry as long as the two of them are on the same plane of existence. The stalker also knows the location of its summoner.</p></section><p>The stalker knows the direction and distance to its quarry as long as the two of them are on the same plane of existence. </p>",
           "chat": "",
@@ -681,7 +681,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -691,7 +691,7 @@
       "name": "Invisibility",
       "type": "feat",
       "img": "icons/creatures/webs/webthin-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The stalker is invisible.</p>",
           "chat": "",
@@ -756,7 +756,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -766,7 +766,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The stalker makes two slam attacks.</p>",
           "chat": "",
@@ -831,7 +831,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -841,7 +841,7 @@
       "name": "Slam",
       "type": "weapon",
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Invisible Stalker attacks with its Slam.</p>",
           "chat": "",
@@ -941,7 +941,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -950,7 +950,7 @@
   "effects": [],
   "folder": "OvwYcGTa27ZerqL7",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

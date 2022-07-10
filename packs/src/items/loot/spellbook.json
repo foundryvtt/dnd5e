@@ -3,7 +3,7 @@
   "name": "Spellbook",
   "type": "loot",
   "img": "icons/sundries/books/book-embossed-jewel-gold-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p>\n<p> </p>",
       "chat": "",
@@ -27,7 +27,7 @@
   "effects": [],
   "folder": null,
   "sort": 4600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Scout",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Scout.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 11,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Scout",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Leather Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
           "chat": "",
@@ -687,7 +687,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -697,7 +697,7 @@
       "name": "Keen Hearing and Sight",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The scout has advantage on Wisdom (Perception) checks that rely on hearing or sight.</p>",
           "chat": "",
@@ -765,7 +765,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -775,7 +775,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The scout makes two melee attacks or two ranged attacks.</p>",
           "chat": "",
@@ -843,7 +843,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -853,7 +853,7 @@
       "name": "Shortsword",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-guard-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Scout attacks with their Shortsword.</p>",
           "chat": "",
@@ -953,7 +953,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -963,7 +963,7 @@
       "name": "Longbow",
       "type": "weapon",
       "img": "icons/weapons/bows/longbow-leather-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, ranged 150/600 ft., one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Scout attacks with their Longbow.</p>",
           "chat": "",
@@ -1063,7 +1063,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1072,7 +1072,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

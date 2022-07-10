@@ -3,7 +3,7 @@
   "name": "Fighting Style: Archery",
   "type": "feat",
   "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You gain a +2 bonus to attack rolls you make with ranged weapons</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   ],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

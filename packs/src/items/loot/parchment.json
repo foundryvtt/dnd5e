@@ -3,7 +3,7 @@
   "name": "Parchment",
   "type": "loot",
   "img": "icons/sundries/documents/document-symbol-circle-gold-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A single sheet of heavier parchment paper.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

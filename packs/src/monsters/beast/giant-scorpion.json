@@ -3,7 +3,7 @@
   "name": "Giant Scorpion",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantScorpion.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Scorpion",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The scorpion makes three attacks: two with its claws and one with its sting.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Claw",
       "type": "weapon",
       "img": "icons/commodities/claws/claw-pincer-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>bludgeoning damage</em></strong>.</p>\n<p>The target is grappled (escape DC 12). The scorpion has two claws, each of which can grapple only one target.</p>\n</section>\n<p>The Giant Scorpion attacks with its Claw. The target is grappled.</p>",
           "chat": "",
@@ -779,7 +779,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -789,7 +789,7 @@
       "name": "Sting",
       "type": "weapon",
       "img": "icons/creatures/abilities/stinger-poison-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 12 Constitution</strong> saving throw, taking <strong>22 (4d10) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Giant Scorpion attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -889,7 +889,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -898,7 +898,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

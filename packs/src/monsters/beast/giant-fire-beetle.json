@@ -3,7 +3,7 @@
   "name": "Giant Fire Beetle",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantFireBeetle.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 8,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Fire Beetle",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+1 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: 2 (1d6 - 1) <em>slashing damage</em>.</p></section>\n<p>The Giant Fire Beetle attacks with its Bite.</p>",
           "chat": "",
@@ -702,7 +702,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -712,7 +712,7 @@
       "name": "Illumination",
       "type": "feat",
       "img": "icons/magic/light/beam-strike-orange-gold.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The beetle sheds bright light in a <strong>10-foot radius</strong> and dim light for an additional <strong>10 feet</strong>.</p>",
           "chat": "",
@@ -779,7 +779,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -788,7 +788,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

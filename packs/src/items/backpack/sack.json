@@ -3,7 +3,7 @@
   "name": "Sack",
   "type": "backpack",
   "img": "icons/containers/bags/sack-simple-leather-tan.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A sack can hold up to 1 cubic foot or 30 pounds of gear.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 2500001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

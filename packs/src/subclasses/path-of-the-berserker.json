@@ -2,7 +2,7 @@
   "name": "Path of the Berserker",
   "type": "subclass",
   "img": "icons/skills/melee/strike-flail-destructive-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>For some barbarians, rage is a means to an end—that end being violence. The Path of the Berserker is a path of untrammeled fury, slick with blood. As you enter the berserker's rage, you thrill in the chaos of battle, heedless of your own health or well-being.</p>",
       "chat": "",
@@ -73,7 +73,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {},

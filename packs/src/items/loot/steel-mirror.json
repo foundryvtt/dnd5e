@@ -3,7 +3,7 @@
   "name": "Steel Mirror",
   "type": "loot",
   "img": "icons/commodities/currency/coin-engraved-slot-one-copper.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A mirror made of steel.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

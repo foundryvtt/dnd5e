@@ -3,7 +3,7 @@
   "name": "Bag of Sand",
   "type": "loot",
   "img": "icons/containers/bags/coinpouch-simple-tan.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A small bag of sand used by the scholarly to dry freshly inked letters and correspondence quickly and safely for quick dispatch.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

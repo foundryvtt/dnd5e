@@ -3,7 +3,7 @@
   "name": "Priest",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Priest.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 10,
@@ -537,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Priest",
     "displayName": 20,
     "actorLink": false,
@@ -602,7 +602,7 @@
       "name": "Chain Shirt",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Made of interlocking metal rings, a chain shirt is worn between layers of clothing or leather. This armor offers modest protection to the wearer's upper body and allows the sound of the rings rubbing against one another to be muffled by outer layers.</p>",
           "chat": "",
@@ -688,7 +688,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -698,7 +698,7 @@
       "name": "Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The priest is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 13, +5 to hit with spell attacks). The priest has the following cleric spells prepared:</p>\n<p>Cantrips (at will): light, sacred flame, thaumaturgy</p>\n<p>1st level (4 slots): cure wounds, guiding bolt, sanctuary</p>\n<p>2nd level (3 slots): lesser restoration, spiritual weapon</p>\n<p>3rd level (2 slots): dispel magic, spirit guardians</p>",
           "chat": "",
@@ -765,7 +765,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -775,7 +775,7 @@
       "name": "Sacred Flame",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
@@ -863,7 +863,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -877,7 +877,7 @@
       "name": "Thaumaturgy",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
           "chat": "",
@@ -962,7 +962,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -976,7 +976,7 @@
       "name": "Guiding Bolt",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fireball-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
           "chat": "",
@@ -1065,7 +1065,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1079,7 +1079,7 @@
       "name": "Sanctuary",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
           "chat": "",
@@ -1163,7 +1163,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1177,7 +1177,7 @@
       "name": "Lesser Restoration",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/heal-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.</p>",
           "chat": "",
@@ -1262,7 +1262,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1276,7 +1276,7 @@
       "name": "Spiritual Weapon",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/enchant-magenta-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.</p><p>As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.</p><p>The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell's effect resemble that weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for every two slot levels above the 2nd.</p>",
           "chat": "",
@@ -1365,7 +1365,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1379,7 +1379,7 @@
       "name": "Dispel Magic",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/slice-orange-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Choose one creature, object, or magical effect within range. Any spell of 3rd level or lower on the target ends. For each spell of 4th level or higher on the target, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a successful check, the spell ends.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, you automatically end the effects of a spell on the target if the spell's level is equal to or less than the level of the spell slot you used.</p>",
           "chat": "",
@@ -1464,7 +1464,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1478,7 +1478,7 @@
       "name": "Spirit Guardians",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/needles-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.</p><p>When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature's speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a Wisdom saving throw. On a failed save, the creature takes 3d8 radiant damage (if you are good or neutral) or 3d8 necrotic damage (if you are evil). On a successful save, the creature takes half as much damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.</p>",
           "chat": "",
@@ -1566,7 +1566,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1580,7 +1580,7 @@
       "name": "Divine Eminence",
       "type": "feat",
       "img": "icons/magic/symbols/cog-shield-white-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra <strong>10 (3d6) <em>radiant damage</em></strong> to a target on a hit. </p><p>This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st.</p></section><p>As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra <em>radiant damage</em> to a target on a hit.</p>",
           "chat": "",
@@ -1649,7 +1649,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1659,7 +1659,7 @@
       "name": "Mace",
       "type": "weapon",
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>3 (1d6) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Priest attacks with its Mace.</p>",
           "chat": "",
@@ -1759,7 +1759,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1769,7 +1769,7 @@
       "name": "Light",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
           "chat": "",
@@ -1853,7 +1853,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1867,7 +1867,7 @@
       "name": "Cure Wounds",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
           "chat": "",
@@ -1956,7 +1956,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1969,7 +1969,7 @@
   "effects": [],
   "folder": "B3XQZKLaaIqhaEFM",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

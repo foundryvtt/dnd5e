@@ -3,7 +3,7 @@
   "name": "Bandit",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Bandit.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 11,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Bandit",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Scimitar",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-katana.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>slashing damage</em></strong>.</p></section>\n<p>The Bandit attacks with their Scimitar.</p>",
           "chat": "",
@@ -700,7 +700,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +710,7 @@
       "name": "Light Crossbow",
       "type": "weapon",
       "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +3 to hit, range 80 ft./320 ft., one target. Hit: <strong>5 (1d8 + 1) <em>piercing damage</em></strong>.</p></section>\n<p>The Bandit attacks with their Light Crossbow.</p>",
           "chat": "",
@@ -810,7 +810,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -820,7 +820,7 @@
       "name": "Leather Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
           "chat": "",
@@ -906,7 +906,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -915,7 +915,7 @@
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

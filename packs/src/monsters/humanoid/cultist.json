@@ -3,7 +3,7 @@
   "name": "Cultist",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Cultist.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 11,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Cultist",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Leather Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
           "chat": "",
@@ -686,7 +686,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -696,7 +696,7 @@
       "name": "Dark Devotion",
       "type": "feat",
       "img": "icons/magic/control/control-influence-rally-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The cultist has<strong> advantage </strong>on saving throws against being charmed or frightened.</p>",
           "chat": "",
@@ -763,7 +763,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -773,7 +773,7 @@
       "name": "Scimitar",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-katana.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d6 + 1) <em>slashing damage</em></strong>.</p></section>\n<p>The Cultist attacks with their Scimitar.</p>",
           "chat": "",
@@ -873,7 +873,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -882,7 +882,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

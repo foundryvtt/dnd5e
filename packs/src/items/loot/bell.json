@@ -3,7 +3,7 @@
   "name": "Bell",
   "type": "loot",
   "img": "icons/tools/instruments/bell-brass-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A small bell for you to ring.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Assassin",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 11,
@@ -540,7 +540,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Assassin",
     "displayName": 20,
     "actorLink": false,
@@ -605,7 +605,7 @@
       "name": "Studded Leather Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-rivited-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p>",
           "chat": "",
@@ -691,7 +691,7 @@
       "effects": [],
       "folder": null,
       "sort": 4500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -701,7 +701,7 @@
       "name": "Assassinate",
       "type": "feat",
       "img": "icons/weapons/swords/sword-broad-crystal-paired.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>During its first turn, the assassin has advantage on attack rolls against any creature that hasn't taken a turn. Any hit the assassin scores against a surprised creature is a critical hit.</p>",
           "chat": "",
@@ -769,7 +769,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -779,7 +779,7 @@
       "name": "Evasion",
       "type": "feat",
       "img": "icons/magic/water/pseudopod-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>If the assassin is subjected to an effect that allows it to make a <strong>Dexterity</strong> saving throw to take only half damage, the assassin instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.</p>",
           "chat": "",
@@ -847,7 +847,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -857,7 +857,7 @@
       "name": "Sneak Attack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">Once per turn.</section>\n<p>The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.</p>",
           "chat": "",
@@ -929,7 +929,7 @@
       "effects": [],
       "folder": null,
       "sort": -49999,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -939,7 +939,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The assassin makes two shortsword attacks.</p>",
           "chat": "",
@@ -1007,7 +1007,7 @@
       "effects": [],
       "folder": null,
       "sort": -99999,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1017,7 +1017,7 @@
       "name": "Shortsword",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-guard-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Assassin attacks with their Shortsword. The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -1117,7 +1117,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1127,7 +1127,7 @@
       "name": "Light Crossbow",
       "type": "weapon",
       "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +6 to hit, range 80/320 ft., one target. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Assassin attacks with its Light Crossbow. The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -1227,7 +1227,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1236,7 +1236,7 @@
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

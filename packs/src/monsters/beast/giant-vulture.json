@@ -3,7 +3,7 @@
   "name": "Giant Vulture",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantVulture.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Vulture",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Keen Sight and Smell",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The vulture has<strong> advantage </strong>on Wisdom (Perception) checks that rely on sight or smell.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Pack Tactics",
       "type": "feat",
       "img": "icons/creatures/abilities/paw-print-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The vulture has<strong> advantage </strong>on an attack roll against a creature if at least one of the vulture's allies is within <strong>5 ft.</strong> of the creature and the ally isn't incapacitated.</p>",
           "chat": "",
@@ -747,7 +747,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -757,7 +757,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The vulture makes two attacks: one with its beak and one with its talons.</p>",
           "chat": "",
@@ -825,7 +825,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -835,7 +835,7 @@
       "name": "Beak",
       "type": "weapon",
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Giant Vulture attacks with its Beak.</p>",
           "chat": "",
@@ -935,7 +935,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -945,7 +945,7 @@
       "name": "Talons",
       "type": "weapon",
       "img": "icons/creatures/claws/claw-scaled-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>slashing damage</em></strong>.</p></section>\n<p>The Giant Vulture attacks with its Talons.</p>",
           "chat": "",
@@ -1045,7 +1045,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1054,7 +1054,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

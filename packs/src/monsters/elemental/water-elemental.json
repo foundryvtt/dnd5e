@@ -3,7 +3,7 @@
   "name": "Water Elemental",
   "type": "npc",
   "img": "systems/dnd5e/tokens/elemental/WaterElemental.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -551,7 +551,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Water Elemental",
     "displayName": 20,
     "actorLink": false,
@@ -616,7 +616,7 @@
       "name": "Freeze",
       "type": "feat",
       "img": "icons/magic/water/ice-crystal-white.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>If the elemental takes <strong><em>cold damage</em></strong>, it partially freezes; its speed is reduced by <strong>20 ft.</strong> until the end of its next turn.</p></section><p>If the elemental takes <strong><em>cold damage</em></strong>, it partially freezes.</p>",
           "chat": "",
@@ -681,7 +681,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -691,7 +691,7 @@
       "name": "Water Form",
       "type": "feat",
       "img": "icons/magic/water/orb-water-bubbles.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing.</p>",
           "chat": "",
@@ -756,7 +756,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -766,7 +766,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The elemental makes two slam attacks.</p>",
           "chat": "",
@@ -831,7 +831,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -841,7 +841,7 @@
       "name": "Slam",
       "type": "weapon",
       "img": "icons/magic/water/wave-water-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Water Elemental attacks with its Slam.</p>",
           "chat": "",
@@ -941,7 +941,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -951,7 +951,7 @@
       "name": "Whelm",
       "type": "feat",
       "img": "icons/magic/water/vortex-water-whirlpool.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Each creature in the elemental's space must make a  <strong>DC 15 Strength</strong> saving throw. On a failure, a target takes <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>. If it is Large or smaller, it is also grappled (escape DC 14). Until this grapple ends, the target is restrained and unable to breathe unless it can breathe water. </p><p>If the saving throw is successful, the target is pushed out of the elemental's space.The elemental can grapple one Large creature or up to two Medium or smaller creatures at one time. At the start of each of the elemental's turns, each target grappled by it takes <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>. A creature within 5 feet of the elemental can pull a creature or object out of it by taking an action to make a DC 14 Strength check and succeeding.</p></section><p>Each creature in the elemental's space must make a <strong>Strength</strong> saving throw. If it is Large or smaller, it is also grappled. Until this grapple ends, the target is restrained and unable to breathe unless it can breathe water. A creature within 5 feet of the elemental can pull a creature or object out of it by taking an action to make a Strength check and succeeding.</p>",
           "chat": "",
@@ -1021,7 +1021,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1030,7 +1030,7 @@
   "effects": [],
   "folder": "Q7qeMxX30iDI2Wbs",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

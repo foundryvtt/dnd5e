@@ -3,7 +3,7 @@
   "name": "Drider",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Drider.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -538,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Drider",
     "displayName": 20,
     "actorLink": false,
@@ -603,7 +603,7 @@
       "name": "Fey Ancestry",
       "type": "feat",
       "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The drider has<strong> advantage </strong>on saving throws against being charmed, and magic can't put the drider to sleep.</p>",
           "chat": "",
@@ -671,7 +671,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -681,7 +681,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The drider's innate spellcasting ability is Wisdom (spell save DC 13). The drider can innately cast the following spells, requiring no material components:</p>\n<p>At will: dancing lights</p>\n<p>1/day each: darkness, faerie fire</p>",
           "chat": "",
@@ -749,7 +749,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -759,7 +759,7 @@
       "name": "Dancing Lights",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fire-arrows-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius.</p><p>As a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell's range.</p>",
           "chat": "",
@@ -845,7 +845,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -859,7 +859,7 @@
       "name": "Darkness",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/evil-eye-red-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can't see through this darkness, and nonmagical light can't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn't being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.</p>",
           "chat": "",
@@ -945,7 +945,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -959,7 +959,7 @@
       "name": "Faerie Fire",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.</p><p>Any attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can't benefit from being invisible.</p>",
           "chat": "",
@@ -1044,7 +1044,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1058,7 +1058,7 @@
       "name": "Spider Climb",
       "type": "feat",
       "img": "icons/creatures/invertebrates/spider-beetle-runed-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The drider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
           "chat": "",
@@ -1126,7 +1126,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1136,7 +1136,7 @@
       "name": "Sunlight Sensitivity",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While in sunlight, the drider has<strong> disadvantage </strong>on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</p>",
           "chat": "",
@@ -1204,7 +1204,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1214,7 +1214,7 @@
       "name": "Web Walker",
       "type": "feat",
       "img": "icons/magic/nature/tree-bare-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The drider ignores movement restrictions caused by webbing.</p>",
           "chat": "",
@@ -1282,7 +1282,7 @@
       "effects": [],
       "folder": null,
       "sort": 700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1292,7 +1292,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The drider makes three attacks, either with its longsword or its longbow. It can replace one of those attacks with a bite attack.</p>",
           "chat": "",
@@ -1360,7 +1360,7 @@
       "effects": [],
       "folder": null,
       "sort": 800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1370,7 +1370,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>2 (1d4) <em>piercing damage</em></strong> plus <strong>9 (2d8) <em>poison damage</em></strong>.</p></section>\n<p>The Drider attacks with its Bite.</p>",
           "chat": "",
@@ -1474,7 +1474,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1484,7 +1484,7 @@
       "name": "Longsword",
       "type": "weapon",
       "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing damage</em></strong>, or <strong>8 (1d10 + 3) <em>slashing damage</em></strong> if used with two hands.</p></section>\n<p>The Drider attacks with its Longsword.</p>",
           "chat": "",
@@ -1584,7 +1584,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1594,7 +1594,7 @@
       "name": "Longbow",
       "type": "weapon",
       "img": "icons/weapons/bows/longbow-leather-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +6 to hit, range 150/600 ft., one target. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong> plus <strong>4 (1d8) <em>poison damage</em></strong>.</p></section>\n<p>The Drider attacks with its Longbow.</p>",
           "chat": "",
@@ -1698,7 +1698,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1707,7 +1707,7 @@
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

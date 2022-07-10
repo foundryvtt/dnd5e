@@ -3,7 +3,7 @@
   "name": "Silk Rope (50 ft.)",
   "type": "consumable",
   "img": "icons/sundries/survival/rope-wrapped-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

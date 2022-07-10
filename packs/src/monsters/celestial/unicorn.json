@@ -3,7 +3,7 @@
   "name": "Unicorn",
   "type": "npc",
   "img": "systems/dnd5e/tokens/celestial/Unicorn.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -545,7 +545,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Unicorn",
     "displayName": 20,
     "actorLink": false,
@@ -610,7 +610,7 @@
       "name": "Detect Evil and Good",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -695,7 +695,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -709,7 +709,7 @@
       "name": "Druidcraft",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/vines-jade-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Whispering to the spirits of Nature, you create one of the following Effects within range:</p>\n<ul>\n<li>You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, Falling snowflakes for snow, and so on. This effect persists for 1 round.</li>\n<li>You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</li>\n<li>You create an Instantaneous, harmless sensory effect, such as Falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.</li>\n<li>You instantly light or snuff out a Candle, a torch, or a small campfire.</li>\n</ul>",
           "chat": "",
@@ -794,7 +794,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -808,7 +808,7 @@
       "name": "Pass without Trace",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fog-air-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A veil of shadows and Silence radiates from you, masking you and your companions from detection. For the Duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to Dexterity (Stealth) checks and can't be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.</p>",
           "chat": "",
@@ -893,7 +893,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -907,7 +907,7 @@
       "name": "Calm Emotions",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You attempt to suppress strong emotions in a group of people. Each humanoid in a 20-foot-radius sphere centered on a point you choose within range must make a Charisma saving throw; a creature can choose to fail this saving throw if it wishes. If a creature fails its saving throw, choose one of the following two effects. You can suppress any effect causing a target to be charmed or frightened. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime.</p><p>Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the DM rules otherwise.</p>",
           "chat": "",
@@ -991,7 +991,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1005,7 +1005,7 @@
       "name": "Dispel Evil and Good",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/air-burst-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Shimmering energy surrounds and protects you from fey, Undead, and creatures originating from Beyond the Material Plane. For the Duration, Celestials, Elementals, fey, Fiends, and undead have disadvantage on Attack rolls against you.</p><p>You can end the spell early by using either of the following special functions.</p><p><strong>Break Enchantment</strong>. As your action, you touch a creature you can reach that is Charmed, Frightened, or possessed by a Celestial, an elemental, a fey, a fiend, or an Undead. The creature you touch is no longer charmed, frightened, or possessed by such creatures.</p><p><strong>Dismissal</strong>. As your action, make a melee spell Attack against a Celestial, an elemental, a fey, a fiend, or an Undead you can reach. On a hit, you attempt to drive the creature back to its home plane. The creature must succeed on a Charisma saving throw or be sent back to its home plane (if it isn't there already). If they aren't on their home plane, undead are sent to the Shadowfell, and fey are sent to the Feywild.</p>",
           "chat": "",
@@ -1090,7 +1090,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1104,7 +1104,7 @@
       "name": "Entangle",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/vines-acid-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the Duration, these Plants turn the ground in the area into difficult terrain.</p><p>A creature in the area when you cast the spell must succeed on a Strength saving throw or be Restrained by the entangling Plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>",
           "chat": "",
@@ -1189,7 +1189,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1203,7 +1203,7 @@
       "name": "Charge",
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>If the unicorn moves at least 20 ft. straight toward a target and then hits it with a horn attack on the same turn, the target takes an extra <strong>9 (2d8) <em>piercing damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 15 Strength</strong> saving throw or be knocked prone.</p></section><p>If the unicorn moves at least 20 ft. straight toward a target and then hits it with a horn attack on the same turn, the target takes extra <em>piercing damage</em>. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -1272,7 +1272,7 @@
       "effects": [],
       "folder": null,
       "sort": 1400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1282,7 +1282,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The unicorn's innate spellcasting ability is Charisma (spell save DC 14). The unicorn can innately cast the following spells, requiring no components:</p>\n<p>At will: detect evil and good, druidcraft, pass without trace</p>\n<p>1/day each: calm emotions, dispel evil and good, entangle</p>",
           "chat": "",
@@ -1346,7 +1346,7 @@
       "effects": [],
       "folder": null,
       "sort": 1500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1356,7 +1356,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The unicorn has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -1420,7 +1420,7 @@
       "effects": [],
       "folder": null,
       "sort": 1600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1430,7 +1430,7 @@
       "name": "Magic Weapons",
       "type": "feat",
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The unicorn's weapon attacks are magical.</p>",
           "chat": "",
@@ -1494,7 +1494,7 @@
       "effects": [],
       "folder": null,
       "sort": 1700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1504,7 +1504,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The unicorn makes two attacks: one with its hooves and one with its horn.</p>",
           "chat": "",
@@ -1568,7 +1568,7 @@
       "effects": [],
       "folder": null,
       "sort": 1800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1578,7 +1578,7 @@
       "name": "Hooves",
       "type": "weapon",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Melee Weapon Attack: +7 to hit, reach 5 ft ., one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Unicorn attacks with its Hooves.</p>",
           "chat": "",
@@ -1678,7 +1678,7 @@
       "effects": [],
       "folder": null,
       "sort": 1900001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1688,7 +1688,7 @@
       "name": "Horn",
       "type": "weapon",
       "img": "icons/commodities/bones/horn-simple-grey.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Melee Weapon Attack: +7 to hit, reach 5 ft ., one target. Hit: <strong>8 (1d8 + 4) <em>piercing damage</em></strong>.</p><p></p></section><p>The Unicorn attacks with its Horn.</p>",
           "chat": "",
@@ -1788,7 +1788,7 @@
       "effects": [],
       "folder": null,
       "sort": 2000001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1798,7 +1798,7 @@
       "name": "Healing Touch",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p></p><p></p></section><p>The unicorn touches another creature with its horn. The target magically regains 11 (2d8 + 2) hit points. In addition, the touch removes all diseases and neutralizes all poisons afflicting the target.</p>",
           "chat": "",
@@ -1867,7 +1867,7 @@
       "effects": [],
       "folder": null,
       "sort": 2100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1877,7 +1877,7 @@
       "name": "Teleport",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/runes-magenta-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p></p><p></p></section><p>The unicorn magically teleports itself and up to three willing creatures it can see within 5 ft. of it, along with any equipment they are wearing or carrying, to a location the unicorn is familiar with, up to 1 mile away.</p>",
           "chat": "",
@@ -1941,7 +1941,7 @@
       "effects": [],
       "folder": null,
       "sort": 2200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1951,7 +1951,7 @@
       "name": "Legendary Actions",
       "type": "feat",
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The unicorn can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The unicorn regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The unicorn can take 3 legendary actions.</p>",
           "chat": "",
@@ -2015,7 +2015,7 @@
       "effects": [],
       "folder": null,
       "sort": 2300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2025,7 +2025,7 @@
       "name": "Lair Actions",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
           "chat": "",
@@ -2089,7 +2089,7 @@
       "effects": [],
       "folder": null,
       "sort": 2400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2099,7 +2099,7 @@
       "name": "Regional Effects",
       "type": "feat",
       "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
           "chat": "",
@@ -2163,7 +2163,7 @@
       "effects": [],
       "folder": null,
       "sort": 2500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2173,7 +2173,7 @@
       "name": "Hooves",
       "type": "feat",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The unicorn makes one attack with its hooves.</p>",
           "chat": "",
@@ -2237,7 +2237,7 @@
       "effects": [],
       "folder": null,
       "sort": 2600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2247,7 +2247,7 @@
       "name": "Shimmering Shield",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/light-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The unicorn creates a shimmering, magical field around itself or another creature it can see within 60 feet of it. The target gains a +2 bonus to AC until the end of the unicorn's next turn.</p>",
           "chat": "",
@@ -2311,7 +2311,7 @@
       "effects": [],
       "folder": null,
       "sort": 2700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2321,7 +2321,7 @@
       "name": "Heal Self",
       "type": "feat",
       "img": "icons/magic/life/ankh-gold-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The unicorn magically regains 11 (2d8+2) hit points.</p>",
           "chat": "",
@@ -2390,7 +2390,7 @@
       "effects": [],
       "folder": null,
       "sort": 2800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2399,7 +2399,7 @@
   "effects": [],
   "folder": "KNpQcIgF3CofQFNk",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

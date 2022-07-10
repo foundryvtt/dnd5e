@@ -3,7 +3,7 @@
   "name": "Spider",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Spider.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 2,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Spider",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Spider Climb",
       "type": "feat",
       "img": "icons/creatures/invertebrates/spider-beetle-runed-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
           "chat": "",
@@ -665,7 +665,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -675,7 +675,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/fang-tooth-venomous.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must succeed on a  <strong>DC 9 Constitution</strong> saving throw or take <strong>2 (1d4) <em>poison damage</em></strong>.</p></section><p>The Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -779,7 +779,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -789,7 +789,7 @@
       "name": "Web Sense",
       "type": "feat",
       "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While in contact with a web, the spider knows the exact location of any other creature in contact with the same web.</p>",
           "chat": "",
@@ -854,7 +854,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -864,7 +864,7 @@
       "name": "Web Walker",
       "type": "feat",
       "img": "icons/creatures/webs/web-spider-glowing-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The spider ignores movement restrictions caused by webbing.</p>",
           "chat": "",
@@ -929,7 +929,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -938,7 +938,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

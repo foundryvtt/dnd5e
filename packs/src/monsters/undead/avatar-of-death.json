@@ -3,7 +3,7 @@
   "name": "Avatar of Death",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -532,7 +532,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Avatar of Death",
     "displayName": 0,
     "actorLink": false,
@@ -597,7 +597,7 @@
       "name": "Incorporeal Movement",
       "type": "feat",
       "img": "icons/magic/air/air-wave-gust-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p>\n<p>It takes <strong>5 (1d10) <em>force damage</em></strong> if it ends its turn inside an object.</p>\n</section>\n<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Turn Immunity",
       "type": "feat",
       "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The avatar is immune to features that turn undead.</p>",
           "chat": "",
@@ -747,7 +747,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -757,7 +757,7 @@
       "name": "Reaping Scythe",
       "type": "feat",
       "img": "icons/skills/melee/strike-scythe-fire-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it, dealing <strong>7 (1d8 + 3) <em>slashing damage</em></strong> plus <strong>4 (1d8) <em>necrotic damage</em></strong>.</p>\n</section>\n<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it.</p>",
           "chat": "",
@@ -831,7 +831,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -840,7 +840,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

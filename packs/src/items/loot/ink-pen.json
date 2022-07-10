@@ -3,7 +3,7 @@
   "name": "Ink Pen",
   "type": "loot",
   "img": "icons/commodities/materials/feather-red-.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A deviced used in combination with ink to write or draw on a sheet of paper.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

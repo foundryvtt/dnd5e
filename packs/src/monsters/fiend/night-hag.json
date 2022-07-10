@@ -3,7 +3,7 @@
   "name": "Night Hag",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fiend/NightHag.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -546,7 +546,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Night Hag",
     "displayName": 20,
     "actorLink": false,
@@ -611,7 +611,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag's innate spellcasting ability is Charisma (spell save DC 14, +6 to hit with spell attacks). She can innately cast the following spells, requiring no material components:</p>\n<p>At will: detect magic, magic missile</p>\n<p>2/day each: plane shift (self only), ray of enfeeblement, sleep</p>",
           "chat": "",
@@ -679,7 +679,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -689,7 +689,7 @@
       "name": "Detect Magic",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -775,7 +775,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -789,7 +789,7 @@
       "name": "Magic Missile",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fire-arrows-magenta-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>",
           "chat": "",
@@ -879,7 +879,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -893,7 +893,7 @@
       "name": "Plane Shift (self only)",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/runes-royal-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the City of Brass on the Elemental Plane of Fire or the palace of Dispater on the second level of the Nine Hells, and you appear in or near that destination. If you are trying to reach the City of Brass, for example, you might arrive in its Street of Steel, before its Gate of Ashes, or looking at the city from across the Sea of Fire, at the DM's discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a Charisma saving throw. If the creature fails this save, it is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
           "chat": "",
@@ -978,7 +978,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -992,7 +992,7 @@
       "name": "Ray of Enfeeblement",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/beam-jade-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A black beam of enervating energy springs from your finger toward a creature within range. Make a ranged spell attack against the target. On a hit, the target deals only half damage with weapon attacks that use Strength until the spell ends.</p><p>At the end of each of the target's turns, it can make a Constitution saving throw against the spell. On a success, the spell ends.</p>",
           "chat": "",
@@ -1077,7 +1077,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1091,7 +1091,7 @@
       "name": "Sleep",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-magenta-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p>Undead and creatures immune to being charmed aren't affected by this spell.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.</p>",
           "chat": "",
@@ -1182,7 +1182,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1196,7 +1196,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -1261,7 +1261,7 @@
       "effects": [],
       "folder": null,
       "sort": 800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1271,7 +1271,7 @@
       "name": "Claws (Hag Form Only)",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing damage</em></strong>.</p><p></p></section><p>The Night Hag attacks with its Claws.</p>",
           "chat": "",
@@ -1371,7 +1371,7 @@
       "effects": [],
       "folder": null,
       "sort": 900001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1381,7 +1381,7 @@
       "name": "Change Shape",
       "type": "feat",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag magically <strong>polymorphs</strong> into a <strong>Small</strong> or <strong>Medium female humanoid, or back into her true form</strong>. Her statistics are the same in each form. <strong>Any equipment she is wearing or carrying isn't transformed</strong>. She reverts to her true form if she dies.</p>",
           "chat": "",
@@ -1446,7 +1446,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1456,7 +1456,7 @@
       "name": "Etherealness",
       "type": "feat",
       "img": "icons/magic/unholy/barrier-shield-glowing-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p></p><p></p></section><p>The hag magically enters the Ethereal Plane from the Material Plane, or vice versa. To do so, the hag must have a heartstone in her possession.</p>",
           "chat": "",
@@ -1521,7 +1521,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1531,7 +1531,7 @@
       "name": "Nightmare Haunting",
       "type": "feat",
       "img": "icons/commodities/tech/smoke-bomb-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>While on the Ethereal Plane, the hag magically touches a sleeping humanoid on the Material Plane. A protection from evil and good spell cast on the target prevents this contact, as does a magic circle. </p><p>As long as the contact persists, the target has dreadful visions. If these visions last for at least 1 hour, the target gains no benefit from its rest, and its hit point maximum is reduced by 5 (1d10). If this effect reduces the target's hit point maximum to 0, the target dies, and if the target was evil, its soul is trapped in the hag's soul bag. The reduction to the target's hit point maximum lasts until removed by the greater restoration spell or similar magic.</p></section><p>While on the Ethereal Plane, the hag magically touches a sleeping humanoid on the Material Plane. As long as the contact persists, the target has dreadful visions.</p>",
           "chat": "",
@@ -1596,7 +1596,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1605,7 +1605,7 @@
   "effects": [],
   "folder": "8kEIcpvnYCYQJ2sV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

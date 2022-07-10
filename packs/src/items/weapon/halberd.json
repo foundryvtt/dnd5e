@@ -3,7 +3,7 @@
   "name": "Halberd",
   "type": "weapon",
   "img": "icons/weapons/polearms/halberd-crescent-glowing.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A spear-tipped metal shaft accompanied by a crescent blade, the halberd is a strong defensive weapon which allows a warrior to fend off foes using the reach of the shaft to attack from safe distance.</p>",
       "chat": "",
@@ -91,7 +91,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

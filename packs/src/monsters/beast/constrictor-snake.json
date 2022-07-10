@@ -3,7 +3,7 @@
   "name": "Constrictor Snake",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/ConstrictorSnake.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Constrictor Snake",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Constrictor Snake attacks with its Bite.</p>",
           "chat": "",
@@ -700,7 +700,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +710,7 @@
       "name": "Constrict",
       "type": "weapon",
       "img": "icons/creatures/reptiles/serpent-horned-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>6 (1d8 + 2) <em>bludgeoning damage</em></strong>. The target is grappled (escape DC 14). Until this grapple ends, the creature is restrained, and the snake can't constrict another target.</p></section>\n<p>The Constrictor Snake attacks with its Constrict. The target is grappled. Until this grapple ends, the creature is restrained, and the snake can't constrict another target.</p>",
           "chat": "",
@@ -810,7 +810,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -819,7 +819,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Hourglass",
   "type": "loot",
   "img": "icons/tools/navigation/hourglass-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>It is a device used to measure the psaage of time. It comprises two glass bulbs connected vertically by a narrow neck that allows a regulated trickle of sand from the upper bulb to the lower one.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Doppelganger",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Doppelganger.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 11,
@@ -539,7 +539,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Doppelganger",
     "displayName": 20,
     "actorLink": false,
@@ -604,7 +604,7 @@
       "name": "Ambusher",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>In the first round of a combat, the doppelganger has<strong> advantage </strong>on attack rolls against any creature it has surprised.</p>",
           "chat": "",
@@ -672,7 +672,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -682,7 +682,7 @@
       "name": "Surprise Attack",
       "type": "feat",
       "img": "icons/magic/water/elemental-water.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.</p>",
           "chat": "",
@@ -754,7 +754,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -764,7 +764,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The doppelganger makes two melee attacks.</p>",
           "chat": "",
@@ -832,7 +832,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -842,7 +842,7 @@
       "name": "Slam",
       "type": "weapon",
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d6 + 4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Doppelganger attacks with its Slam.</p>",
           "chat": "",
@@ -942,7 +942,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -952,7 +952,7 @@
       "name": "Read Thoughts",
       "type": "feat",
       "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The doppelganger magically reads the surface thoughts of one creature within 60 ft. of it. The effect can penetrate barriers, but 3 ft. of wood or dirt, 2 ft. of stone, 2 inches of metal, or a thin sheet of lead blocks it.</p>\n<p>While the target is in range, the doppelganger can continue reading its thoughts, as long as the doppelganger's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the doppelganger has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target.</p>\n</section>\n<p>The doppelganger magically reads the surface thoughts of one creature within 60 ft. of it.</p>",
           "chat": "",
@@ -1020,7 +1020,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1030,7 +1030,7 @@
       "name": "Shapechanger",
       "type": "feat",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The doppelganger can use its action to <strong>polymorph</strong> into a Small or Medium humanoid it has seen, or back into its true form.</p><p>Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p></section><p>The doppelganger can use its action to <strong>polymorph</strong> into a Small or Medium humanoid it has seen, or back into its true form.</p>",
           "chat": "",
@@ -1095,7 +1095,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1104,7 +1104,7 @@
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

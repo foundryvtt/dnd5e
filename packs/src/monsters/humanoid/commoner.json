@@ -3,7 +3,7 @@
   "name": "Commoner",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Commoner.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 10,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Commoner",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Club",
       "type": "weapon",
       "img": "icons/weapons/clubs/club-simple-barbed.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Commoner attacks with their Club.</p>",
           "chat": "",
@@ -700,7 +700,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -709,7 +709,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

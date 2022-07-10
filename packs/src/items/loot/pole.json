@@ -3,7 +3,7 @@
   "name": "Pole",
   "type": "loot",
   "img": "icons/commodities/wood/wood-pole.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A ten-foot long pole of sturdy wood.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

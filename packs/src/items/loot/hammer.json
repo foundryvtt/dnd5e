@@ -3,7 +3,7 @@
   "name": "Hammer",
   "type": "loot",
   "img": "icons/tools/hand/hammer-cobbler-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A tool with a heavy metal head mounted at the end of its handle, used for jobs such as breaking things and driving in nails. </p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

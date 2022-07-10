@@ -3,7 +3,7 @@
   "name": "Unarmed Strike (Monk)",
   "type": "weapon",
   "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

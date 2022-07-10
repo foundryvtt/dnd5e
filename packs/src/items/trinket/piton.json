@@ -3,7 +3,7 @@
   "name": "Piton",
   "type": "consumable",
   "img": "icons/tools/fasteners/nail-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A metal spike that is drive into a seam in a climbing surface with a climbing hammer. It can also be used like iron spikes to block doors in a pinch.</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 4300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

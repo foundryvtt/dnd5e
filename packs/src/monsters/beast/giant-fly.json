@@ -3,7 +3,7 @@
   "name": "Giant Fly",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 14,
@@ -423,7 +423,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Fly",
     "displayName": 0,
     "actorLink": false,
@@ -465,7 +465,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

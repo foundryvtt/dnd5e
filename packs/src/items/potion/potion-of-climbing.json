@@ -3,7 +3,7 @@
   "name": "Potion of Climbing",
   "type": "consumable",
   "img": "icons/consumables/potions/potion-vial-corked-labeled-purple.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>The potion is separated into brown, silver, and gray layers resembling bands of stone. Shaking the bottle fails to mix the colors.</em></p>\n<p>When you drink this potion, you gain a climbing speed equal to your walking speed for 1 hour. During this time, you have advantage on Strength (Athletics) checks you make to climb. </p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 2800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

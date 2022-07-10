@@ -3,7 +3,7 @@
   "name": "Fishing Tackle",
   "type": "loot",
   "img": "icons/tools/fishing/hook-curved-barbed-steel-white.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

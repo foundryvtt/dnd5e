@@ -3,7 +3,7 @@
   "name": "Arrow +3",
   "type": "consumable",
   "img": "icons/weapons/ammunition/arrow-head-war.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Ammunition used for bows of all varieties.  It has been imbued with magic.</p>\n<p>You have a bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.</p>",
       "chat": "",
@@ -77,7 +77,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

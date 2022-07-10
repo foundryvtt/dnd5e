@@ -3,7 +3,7 @@
   "name": "Greataxe",
   "type": "weapon",
   "img": "icons/weapons/axes/axe-double.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This enormous axe features two twin crescent blades mounted on either side of a tall spiked shaft. Designed to be wielded with two hands and cleave foes in twain.</p>",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 3000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

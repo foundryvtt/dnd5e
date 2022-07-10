@@ -3,7 +3,7 @@
   "name": "Rug of Smothering",
   "type": "npc",
   "img": "systems/dnd5e/tokens/construct/RugOfSmothering.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 17,
@@ -546,7 +546,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Rug of Smothering",
     "displayName": 20,
     "actorLink": false,
@@ -615,7 +615,7 @@
       "name": "Antimagic Susceptibility",
       "type": "feat",
       "img": "icons/magic/lightning/orb-ball-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The rug is incapacitated while in the area of an antimagic field. </p><p>If targeted by dispel magic, the rug must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for <strong>1 minute</strong>.</p></section><p>The rug is incapacitated while in the area of an antimagic field. </p>",
           "chat": "",
@@ -679,7 +679,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -689,7 +689,7 @@
       "name": "Damage Transfer",
       "type": "feat",
       "img": "icons/skills/melee/strike-axe-blood-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While it is grappling a creature, the rug takes only half the damage dealt to it, and the creature grappled by the rug takes the other half.</p>",
           "chat": "",
@@ -753,7 +753,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -763,7 +763,7 @@
       "name": "False Appearance",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While the rug remains motionless, it is indistinguishable from a normal rug.</p>",
           "chat": "",
@@ -827,7 +827,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -837,7 +837,7 @@
       "name": "Smother",
       "type": "weapon",
       "img": "icons/magic/water/wave-water-explosion.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one Medium or smaller creature. Hit:</p>\n<p>The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can't smother another target. In addition, at the start of each of the target's turns, the target takes <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>\n</section>\n<p>The Rug of Smothering makes a smothering attack! The creature is grappled. Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can't smother another target.</p>",
           "chat": "",
@@ -937,7 +937,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -946,7 +946,7 @@
   "effects": [],
   "folder": "RSebJT8R6qUqPs4A",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

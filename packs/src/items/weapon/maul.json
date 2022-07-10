@@ -3,7 +3,7 @@
   "name": "Maul",
   "type": "weapon",
   "img": "icons/weapons/maces/mace-spiked-wood-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This heavy two-handed mace crushes metal and bone with thunderous force.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

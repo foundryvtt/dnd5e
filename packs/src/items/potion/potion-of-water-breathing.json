@@ -3,7 +3,7 @@
   "name": "Potion of Water Breathing",
   "type": "consumable",
   "img": "icons/consumables/potions/potion-bottle-corked-labeled-green.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Its cloudy green fluid smells of the sea and has a jellyfish-like bubble floating in it.</em></p>\n<p>You can breathe underwater for 1 hour after drinking this potion. </p>\n<p> </p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 3300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

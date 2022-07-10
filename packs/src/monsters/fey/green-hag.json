@@ -3,7 +3,7 @@
   "name": "Green Hag",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fey/GreenHag.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -539,7 +539,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Green Hag",
     "displayName": 20,
     "actorLink": false,
@@ -604,7 +604,7 @@
       "name": "Dancing Lights",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/fire-arrows-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius.</p><p>As a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell's range.</p>",
           "chat": "",
@@ -690,7 +690,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -704,7 +704,7 @@
       "name": "Minor Illusion",
       "type": "spell",
       "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create a sound or an image of an object within range that lasts for the duration. The illusion also ends if you dismiss it as an action or cast this spell again.</p><p>If you create a sound, its volume can range from a whisper to a scream. It can be your voice, someone else's voice, a lion's roar, a beating of drums, or any other sound you choose. The sound continues unabated throughout the duration, or you can make discrete sounds at different times before the spell ends.</p><p>If you create an image of an object—such as a chair, muddy footprints, or a small chest—it must be no larger than a 5-foot cube. The image can't create sound, light, smell, or any other sensory effect. Physical interaction with the image reveals it to be an illusion, because things can pass through it.</p><p>If a creature uses its action to examine the sound or image, the creature can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the illusion becomes faint to the creature.</p>",
           "chat": "",
@@ -789,7 +789,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -803,7 +803,7 @@
       "name": "Vicious Mockery",
       "type": "spell",
       "img": "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn.</p><p>This spell's damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).</p>",
           "chat": "",
@@ -892,7 +892,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -906,7 +906,7 @@
       "name": "Amphibious",
       "type": "feat",
       "img": "icons/environment/creatures/frog-spotted-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag can breathe air and water.</p>",
           "chat": "",
@@ -971,7 +971,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -981,7 +981,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag's innate spellcasting ability is Charisma (spell save DC 12). She can innately cast the following spells, requiring no material components:</p>\n<p>At will: dancing lights, minor illusion, vicious mockery</p>",
           "chat": "",
@@ -1046,7 +1046,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1056,7 +1056,7 @@
       "name": "Mimicry",
       "type": "feat",
       "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The hag can mimic animal sounds and humanoid voices. A creature that hears the sounds can tell they are imitations with a successful <strong>DC 14 Wisdom (Insight) check</strong>.</p></section><p>The hag can mimic animal sounds and humanoid voices. A creature that hears the sounds can tell they are imitations with a successful Wisdom (Insight) check.</p>",
           "chat": "",
@@ -1121,7 +1121,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1131,7 +1131,7 @@
       "name": "Claws",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing damage</em></strong>.</p><p></p></section><p>The Green Hag attacks with its Claws.</p>",
           "chat": "",
@@ -1231,7 +1231,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1241,7 +1241,7 @@
       "name": "Illusory Appearance",
       "type": "feat",
       "img": "icons/creatures/mammals/humanoid-cat-skulking-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hag covers herself and anything she is wearing or carrying with a magical illusion that makes her look like another creature of her general size and humanoid shape. The illusion ends if the hag takes a bonus action to end it or if she dies.</p>\n<p>The changes wrought by this effect fail to hold up to physical inspection. For example, the hag could appear to have smooth skin, but someone touching her would feel her rough flesh. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 20 Intelligence (Investigation) check to discern that the hag is disguised.</p>",
           "chat": "",
@@ -1306,7 +1306,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1316,7 +1316,7 @@
       "name": "Invisible Passage",
       "type": "feat",
       "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The hag magically turns invisible until she attacks or casts a spell, or until her concentration ends (as if concentrating on a spell). While invisible, she leaves no physical evidence of her passage, so she can be tracked only by magic. Any equipment she wears or carries is invisible with her.</p><p></p></section><p>The hag magically turns invisible. Any equipment she wears or carries is invisible with her.</p>",
           "chat": "",
@@ -1381,7 +1381,7 @@
       "effects": [],
       "folder": null,
       "sort": 700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1390,7 +1390,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

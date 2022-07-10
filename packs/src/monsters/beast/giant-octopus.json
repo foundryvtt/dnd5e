@@ -3,7 +3,7 @@
   "name": "Giant Octopus",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantOctopus.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 17,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Octopus",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Hold Breath",
       "type": "feat",
       "img": "icons/magic/water/pseudopod-swirl-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While out of water, the octopus can hold its breath for 1 hour.</p>",
           "chat": "",
@@ -667,7 +667,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -677,7 +677,7 @@
       "name": "Underwater Camouflage",
       "type": "feat",
       "img": "icons/magic/water/orb-ice-web.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The octopus has<strong> advantage </strong>on Dexterity (Stealth) checks made while underwater.</p>",
           "chat": "",
@@ -744,7 +744,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -754,7 +754,7 @@
       "name": "Water Breathing",
       "type": "feat",
       "img": "icons/magic/water/projectile-water-ice-orb.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The octopus can breathe only underwater.</p>",
           "chat": "",
@@ -821,7 +821,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -831,7 +831,7 @@
       "name": "Ink Cloud",
       "type": "feat",
       "img": "icons/magic/unholy/orb-swirling-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>A 20-foot-radius cloud of ink extends all around the octopus if it is underwater. The area is heavily obscured for 1 minute, although a significant current can disperse the ink. After releasing the ink, the octopus can use the Dash action as a bonus action. Recharges after a Short or Long Rest.</p></section>\n<p>A 20-foot-radius cloud of ink extends all around the octopus if it is underwater.</p>",
           "chat": "",
@@ -898,7 +898,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -908,7 +908,7 @@
       "name": "Tentacles",
       "type": "weapon",
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the octopus can't use its tentacles on another target.</p>\n</section>\n<p>The Giant Octopus attacks with its Tentacles. If the target is a creature, it is grappled. Until this grapple ends, the target is restrained, and the octopus can't use its tentacles on another target.</p>",
           "chat": "",
@@ -1008,7 +1008,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1017,7 +1017,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

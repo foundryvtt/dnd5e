@@ -3,7 +3,7 @@
   "name": "Acolyte",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Acolyte.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 10,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "_id": "a2J5z9eErgpY3Ezj",
     "name": "Acolyte",
     "displayName": 20,
@@ -601,7 +601,7 @@
       "name": "Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:&bull; Cantrips (at will): light, sacred flame, thaumaturgy&bull; 1st level (3 slots): bless, cure wounds, sanctuary</p>\n</section>\n<p>The acolyte is a spellcaster. Its spellcasting ability is Wisdom.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Light",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/light-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
           "chat": "",
@@ -764,7 +764,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -778,7 +778,7 @@
       "name": "Sacred Flame",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
@@ -867,7 +867,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -881,7 +881,7 @@
       "name": "Thaumaturgy",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
           "chat": "",
@@ -967,7 +967,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -981,7 +981,7 @@
       "name": "Bless",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
           "chat": "",
@@ -1110,7 +1110,7 @@
       ],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1124,7 +1124,7 @@
       "name": "Sanctuary",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
           "chat": "",
@@ -1209,7 +1209,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1223,7 +1223,7 @@
       "name": "Club",
       "type": "weapon",
       "img": "icons/weapons/clubs/club-simple-barbed.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Acolyte attacks with their Club.</p>",
           "chat": "",
@@ -1323,7 +1323,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1333,7 +1333,7 @@
       "name": "Cure Wounds",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
           "chat": "",
@@ -1422,7 +1422,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1435,7 +1435,7 @@
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

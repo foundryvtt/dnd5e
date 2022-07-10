@@ -3,7 +3,7 @@
   "name": "Bugbear",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Bugbear.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -541,7 +541,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Bugbear",
     "displayName": 20,
     "actorLink": false,
@@ -606,7 +606,7 @@
       "name": "Morningstar",
       "type": "weapon",
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d8 + 2) <em>piercing damage</em></strong>.</p>\n<p>NOTE: the stats of this weapon have changed reflecting it being wielded by a creature with the \"Brute\" feature.</p>\n</section>\n<p>The Bugbear attacks with its Morningstar.</p>",
           "chat": "",
@@ -707,7 +707,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -717,7 +717,7 @@
       "name": "Surprise Attack",
       "type": "feat",
       "img": "icons/magic/water/elemental-water.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>If the bugbear surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.</p>",
           "chat": "",
@@ -789,7 +789,7 @@
       "effects": [],
       "folder": null,
       "sort": 800000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -799,7 +799,7 @@
       "name": "Brute",
       "type": "feat",
       "img": "icons/skills/melee/unarmed-punch-fist.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A melee weapon deals one extra die of its damage when the bugbear hits with it (included in the attack).</p>",
           "chat": "",
@@ -864,7 +864,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -874,7 +874,7 @@
       "name": "Hide Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-scale-leather.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This crude armor consists of thick furs and pelts. It is commonly worn by barbarian tribes, evil humanoids, and other folk who lack access to the tools and materials needed to create better armor.</p>",
           "chat": "",
@@ -960,7 +960,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -970,7 +970,7 @@
       "name": "Shield",
       "type": "equipment",
       "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
           "chat": "",
@@ -1056,7 +1056,7 @@
       "effects": [],
       "folder": null,
       "sort": 900000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1066,7 +1066,7 @@
       "name": "Javelin",
       "type": "weapon",
       "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: <strong>9 (2d6 + 2) <em>piercing damage</em></strong> in melee or <strong>5 (1d6 + 2) <em>piercing damage</em></strong> at range.</p><p></p></section><p>The Bugbear attacks with its Javelin.</p>",
           "chat": "",
@@ -1166,7 +1166,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1175,7 +1175,7 @@
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

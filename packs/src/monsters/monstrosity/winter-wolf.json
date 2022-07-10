@@ -3,7 +3,7 @@
   "name": "Winter Wolf",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/WinterWolf.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -542,7 +542,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Winter Wolf",
     "displayName": 20,
     "actorLink": false,
@@ -607,7 +607,7 @@
       "name": "Keen Hearing and Smell",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The wolf has<strong> advantage </strong>on Wisdom (Perception) checks that rely on hearing or smell.</p>",
           "chat": "",
@@ -675,7 +675,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -685,7 +685,7 @@
       "name": "Pack Tactics",
       "type": "feat",
       "img": "icons/creatures/abilities/paw-print-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The wolf has<strong> advantage </strong>on an attack roll against a creature if at least one of the wolf's allies is within <strong>5 ft.</strong> of the creature and the ally isn't incapacitated.</p>",
           "chat": "",
@@ -753,7 +753,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -763,7 +763,7 @@
       "name": "Snow Camouflage",
       "type": "feat",
       "img": "icons/magic/water/barrier-ice-crystal-wall-faceted.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The wolf has<strong> advantage </strong>on Dexterity (Stealth) checks made to hide in snowy terrain.</p>",
           "chat": "",
@@ -831,7 +831,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -841,7 +841,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>piercing damage</em></strong>. If the target is a creature, it must succeed on a <strong>DC 14 Strength saving throw</strong> or be knocked prone.</p>\n</section>\n<p>The Winter Wolf attacks with its Bite. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -941,7 +941,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -951,7 +951,7 @@
       "name": "Cold Breath",
       "type": "feat",
       "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>18 (4d8) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one. Recharge 5-6.</p></section>\n<p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -1023,7 +1023,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1032,7 +1032,7 @@
   "effects": [],
   "folder": "Q7qeMxX30iDI2Wbs",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Adult Brass Dragon",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 23,
@@ -536,7 +536,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Adult Brass Dragon",
     "displayName": 0,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Melee Weapon Attack: +11 to hit, reach,.0 ft., one target. Hit: <strong>17 (2d10 + 6) <em>piercing damage</em></strong>.</p><p></p></section><p>The Adult Brass Dragon attacks with its Bite.</p>",
           "chat": "",
@@ -701,7 +701,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -711,7 +711,7 @@
       "name": "Fire Breath",
       "type": "feat",
       "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>**Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 18 Dexterity</strong> saving throw, taking <strong>45 (13d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -781,7 +781,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -791,7 +791,7 @@
       "name": "Claw",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+11 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d6 + 6) <em>slashing damage</em></strong>.</p><p></p></section><p>The Adult Brass Dragon attacks with its Claw.</p>",
           "chat": "",
@@ -891,7 +891,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -901,7 +901,7 @@
       "name": "Detect",
       "type": "feat",
       "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon makes a Wisdom (Perception) check.</p>\n</section>\n<p>The dragon watches its surrounding...</p>",
           "chat": "",
@@ -966,7 +966,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -976,7 +976,7 @@
       "name": "Frightful Presence",
       "type": "feat",
       "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Each creature of the dragon's choice that is <strong>within 120 feet</strong> of the dragon and aware of it must succeed on a <strong>DC 16 Wisdom saving throw</strong> or become frightened for <strong>1 minute</strong>.</p><p>A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the dragon's Frightful Presence for the next 24 hours.</p></section><p>Each creature of the dragon's choice that is <strong>within 120 feet</strong> of the dragon and aware of it must succeed on a Wisdom saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>",
           "chat": "",
@@ -1041,7 +1041,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1051,7 +1051,7 @@
       "name": "Legendary Actions",
       "type": "feat",
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The dragon regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The dragon can take 3 legendary actions. </p>",
           "chat": "",
@@ -1116,7 +1116,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1126,7 +1126,7 @@
       "name": "Legendary Resistance",
       "type": "feat",
       "img": "icons/equipment/shield/kite-wooden-oak-glow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>If the dragon fails a saving throw, it can choose to succeed instead.</p>",
           "chat": "",
@@ -1191,7 +1191,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1201,7 +1201,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The dragon can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws.</p>",
           "chat": "",
@@ -1266,7 +1266,7 @@
       "effects": [],
       "folder": null,
       "sort": 800000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1276,7 +1276,7 @@
       "name": "Tail",
       "type": "weapon",
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+11 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>15 (2d8 + 6) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Adult Brass Dragon attacks with its Tail.</p>",
           "chat": "",
@@ -1376,7 +1376,7 @@
       "effects": [],
       "folder": null,
       "sort": 900000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1386,7 +1386,7 @@
       "name": "Tail Attack",
       "type": "weapon",
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon makes a tail attack.</p>\n</section>\n<p>The dragon slams its long tail against its foe!</p>",
           "chat": "",
@@ -1486,7 +1486,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1496,7 +1496,7 @@
       "name": "Wing Attack",
       "type": "weapon",
       "img": "icons/creatures/abilities/wing-batlike-white-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section>\n<section class=\"secret\">\n<p>The dragon beats its wings. <strong>Each creature within&nbsp;10 feet of the dragon</strong> must succeed on a&nbsp;<strong>DC 19 Dexterity saving throw</strong>&nbsp;or take&nbsp;<strong>13 (2d6+6) bludgeoning</strong>&nbsp;damage and be <strong>knocked prone</strong>. The dragon can then <strong>fly up to half its flying speed.</strong></p>\n</section>\n</section>\n<p>The dragon beats its wings!</p>",
           "chat": "",
@@ -1596,7 +1596,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1606,7 +1606,7 @@
       "name": "Lair Actions",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
           "chat": "",
@@ -1671,7 +1671,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1681,7 +1681,7 @@
       "name": "Breath Weapons",
       "type": "feat",
       "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The dragon uses one of the following breath weapons.</p>\n<p>**Fire Breath.** The dragon exhales fire in an 60-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 18 Dexterity</strong> saving throw, taking <strong>45 (13d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>**Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a  <strong>DC 18 Constitution</strong> saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.</p>\n</section>\n<p>The dragon breathes in!</p>",
           "chat": "",
@@ -1746,7 +1746,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1756,7 +1756,7 @@
       "name": "Sleep Breath",
       "type": "feat",
       "img": "icons/magic/perception/third-eye-blue-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>**Sleep Breath.** The dragon exhales sleep gas in a 60-foot cone. Each creature in that area must succeed on a  <strong>DC 18 Constitution</strong> saving throw or fall unconscious for 10 minutes. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.</p>\n</section>\n<p>The dragon exhales sleep gas in a 90-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -1821,7 +1821,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1831,7 +1831,7 @@
       "name": "Regional Effects",
       "type": "feat",
       "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
           "chat": "",
@@ -1896,7 +1896,7 @@
       "effects": [],
       "folder": null,
       "sort": 1300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1905,7 +1905,7 @@
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

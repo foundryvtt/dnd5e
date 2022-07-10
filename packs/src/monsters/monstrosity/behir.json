@@ -3,7 +3,7 @@
   "name": "Behir",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Behir.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 23,
@@ -539,7 +539,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Behir",
     "displayName": 20,
     "actorLink": false,
@@ -604,7 +604,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The behir makes two attacks: one with its bite and one to constrict.</p>",
           "chat": "",
@@ -670,7 +670,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -680,7 +680,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>22 (3d10 + 6) <em>piercing damage</em></strong>.</p></section>\n<p>The Behir attacks with its Bite.</p>",
           "chat": "",
@@ -781,7 +781,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -791,7 +791,7 @@
       "name": "Constrict",
       "type": "weapon",
       "img": "icons/creatures/reptiles/serpent-horned-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +10 to hit, reach 5 ft., <strong>one Large or smaller creature</strong>. Hit: <strong>17 (2d10 + 6) <em>bludgeoning damage</em></strong> plus <strong>17 (2d10 + 6) <em>slashing damage</em></strong>.</p>\n<p>The target is grappled (escape DC 16) if the behir isn't already constricting a creature, and the target is restrained until this grapple ends.</p>\n</section>\n<p>The Behir attacks with its Constrict. The target is grappled if the Behir isn't already constricting a creature, and the target is restrained until this grapple ends.</p>",
           "chat": "",
@@ -895,7 +895,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -905,7 +905,7 @@
       "name": "Lightning Breath",
       "type": "feat",
       "img": "icons/magic/lightning/bolt-strike-smoke-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The behir exhales a line of lightning that is 20 ft. long and 5 ft. wide. Each creature in that line must make a  <strong>DC 16 Dexterity</strong> saving throw, taking <strong>66 (12d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p></section>\n<p>The behir exhales a line of lightning that is 20 ft. long and 5 ft. wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
           "chat": "",
@@ -976,7 +976,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -986,7 +986,7 @@
       "name": "Swallow",
       "type": "feat",
       "img": "icons/creatures/abilities/mouth-teeth-tongue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The behir makes one bite attack against a <strong>Medium or smaller target it is grappling</strong>. If the attack hits, the target is also swallowed, and the grapple ends. While swallowed, the target is blinded and restrained, it has total cover against attacks and other effects outside the behir, and it takes <strong>21 (6d6) <em>acid damage</em></strong> at the start of each of the behir's turns. A behir can have only one creature swallowed at a time.</p>\n<p>If the behir takes 30 damage or more on a single turn from the swallowed creature, the behir must succeed on a  <strong>DC 14 Constitution</strong> saving throw at the end of that turn or regurgitate the creature, which falls prone in a space within 10 ft. of the behir. If the behir dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 15 ft. of movement, exiting prone.</p>\n</section>\n<p>The Behir attacks with its Swallow.</p>",
           "chat": "",
@@ -1055,7 +1055,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1064,7 +1064,7 @@
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

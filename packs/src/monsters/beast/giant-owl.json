@@ -3,7 +3,7 @@
   "name": "Giant Owl",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantOwl.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 13,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Owl",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Flyby",
       "type": "feat",
       "img": "icons/creatures/mammals/bats-movement-flying-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The owl doesn't provoke opportunity attacks when it flies out of an enemy's reach.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Keen Hearing and Sight",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The owl has<strong> advantage </strong>on Wisdom (Perception) checks that rely on hearing or sight.</p>",
           "chat": "",
@@ -747,7 +747,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -757,7 +757,7 @@
       "name": "Talons",
       "type": "weapon",
       "img": "icons/creatures/claws/claw-scaled-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (2d6 + 1) <em>slashing damage</em></strong>.</p></section>\n<p>The Giant Owl attacks with its Talons.</p>",
           "chat": "",
@@ -857,7 +857,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -866,7 +866,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Signet Ring",
   "type": "loot",
   "img": "icons/equipment/finger/ring-cabochon-gold-orange.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A ring with specific design to denote membership and rank within a house or organization.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

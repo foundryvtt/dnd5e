@@ -3,7 +3,7 @@
   "name": "Homunculus",
   "type": "npc",
   "img": "systems/dnd5e/tokens/construct/Homonculus.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 4,
@@ -540,7 +540,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Homunculus",
     "displayName": 20,
     "actorLink": false,
@@ -605,7 +605,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must succeed on a  <strong>DC 10 Constitution</strong> saving throw or be poisoned for 1 minute. If the saving throw fails by 5 or more, the target is instead poisoned for 5 (1d10) minutes and unconscious while poisoned in this way.</p></section><p>The Homunculus attacks with its Bite.The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -705,7 +705,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -715,7 +715,7 @@
       "name": "Telepathic Bond",
       "type": "feat",
       "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While the homunculus is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically.</p>",
           "chat": "",
@@ -780,7 +780,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -789,7 +789,7 @@
   "effects": [],
   "folder": "DuRKNuzI99G8kWWa",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

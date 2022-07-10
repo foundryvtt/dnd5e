@@ -3,7 +3,7 @@
   "name": "Tarrasque",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Tarrasque.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 30,
@@ -543,7 +543,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Tarrasque",
     "displayName": 0,
     "actorLink": false,
@@ -608,7 +608,7 @@
       "name": "Legendary Resistance",
       "type": "feat",
       "img": "icons/equipment/shield/kite-wooden-oak-glow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>If the tarrasque fails a saving throw, it can choose to succeed instead.</p>",
           "chat": "",
@@ -673,7 +673,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -683,7 +683,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The tarrasque has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -748,7 +748,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -758,7 +758,7 @@
       "name": "Reflective Carapace",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/protect-royal-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Any time the tarrasque is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, the tarrasque is unaffected.</p><p>On a 6, the tarrasque is unaffected, and the effect is reflected back at the caster as though it originated from the tarrasque, turning the caster into the target.</p></section><p>The tarrasque is unaffected, and the effect is reflected back at the caster as though it originated from the tarrasque, turning the caster into the target.</p>",
           "chat": "",
@@ -823,7 +823,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -833,7 +833,7 @@
       "name": "Siege Monster",
       "type": "feat",
       "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The tarrasque deals double damage to objects and structures.</p>",
           "chat": "",
@@ -898,7 +898,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -908,7 +908,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The tarrasque can use its Frightful Presence. It then makes five attacks: one with its bite, two with its claws, one with its horns, and one with its tail. It can use its Swallow instead of its bite.</p>",
           "chat": "",
@@ -973,7 +973,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -983,7 +983,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>36 (4d12 + 10) <em>piercing damage</em></strong>. </p><p>If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and the tarrasque can't bite another target.</p></section><p>The Tarrasque attacks with its Bite. If the target is a creature, it is grappled. Until this grapple ends, the target is restrained, and the tarrasque can't bite another target.</p>",
           "chat": "",
@@ -1083,7 +1083,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1093,7 +1093,7 @@
       "name": "Claw",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>28 (4d8 + 10) <em>slashing damage</em></strong>.</p><p></p></section><p>The Tarrasque attacks with its Claw.</p>",
           "chat": "",
@@ -1193,7 +1193,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1203,7 +1203,7 @@
       "name": "Horns",
       "type": "weapon",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>32 (4d10 + 10) <em>piercing damage</em></strong>.</p><p></p></section><p>The Tarrasque attacks with its Horns.</p>",
           "chat": "",
@@ -1303,7 +1303,7 @@
       "effects": [],
       "folder": null,
       "sort": 800000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1313,7 +1313,7 @@
       "name": "Tail",
       "type": "weapon",
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>20 ft.,</strong> one target. Hit: <strong>24 (4d6 + 10) <em>bludgeoning damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 20 Strength</strong> saving throw or be knocked prone.</p></section><p>The Tarrasque attacks with its Tail. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -1413,7 +1413,7 @@
       "effects": [],
       "folder": null,
       "sort": 900000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1423,7 +1423,7 @@
       "name": "Frightful Presence",
       "type": "feat",
       "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Each creature of the tarrasque's choice <strong>within 120 feet</strong> of it and aware of it must succeed on a <strong>DC 17 Wisdom saving throw</strong> or become frightened for <strong>1 minute</strong>.</p><p>A creature can repeat the saving throw at the end of each of its turns, with<strong> disadvantage </strong>if the tarrasque is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the tarrasque's Frightful Presence for the next 24 hours.</p></section><p>Each creature of the tarrasque's choice <strong>within 120 feet</strong> of it and aware of it must succeed on a Wisdom saving throw.</p>",
           "chat": "",
@@ -1488,7 +1488,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1498,7 +1498,7 @@
       "name": "Swallow",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The tarrasque makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. </p><p>While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside the tarrasque, and it takes <strong>56 (16d6) <em>acid damage</em></strong> at the start of each of the tarrasque's turns.If the tarrasque takes 60 damage or more on a single turn from a creature inside it, the tarrasque must succeed on a  <strong>DC 20 Constitution</strong> saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the tarrasque. If the tarrasque dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone.</p></section><p>The Tarrasque attacks with its Swallow.</p>",
           "chat": "",
@@ -1598,7 +1598,7 @@
       "effects": [],
       "folder": null,
       "sort": 1100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1608,7 +1608,7 @@
       "name": "Lair Actions",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
           "chat": "",
@@ -1673,7 +1673,7 @@
       "effects": [],
       "folder": null,
       "sort": 1450000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1683,7 +1683,7 @@
       "name": "Legendary Actions",
       "type": "feat",
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The tarrasque can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The tarrasque regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The tarrasque can take 3 legendary actions.</p>",
           "chat": "",
@@ -1748,7 +1748,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1758,7 +1758,7 @@
       "name": "Regional Effects",
       "type": "feat",
       "img": "icons/environment/wilderness/cave-entrance-mountain-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mere presence of a legendary creature can have strange and wondrous effects on its environment. Regional effects end abruptly or dissipate over time when the legendary creature dies.</p>",
           "chat": "",
@@ -1823,7 +1823,7 @@
       "effects": [],
       "folder": null,
       "sort": 1500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1833,7 +1833,7 @@
       "name": "Attack",
       "type": "feat",
       "img": "icons/skills/melee/blood-slash-foam-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The tarrasque makes one claw attack or tail attack.</p>",
           "chat": "",
@@ -1898,7 +1898,7 @@
       "effects": [],
       "folder": null,
       "sort": 1200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1908,7 +1908,7 @@
       "name": "Move",
       "type": "feat",
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The tarrasque moves up to half its speed.</p>",
           "chat": "",
@@ -1973,7 +1973,7 @@
       "effects": [],
       "folder": null,
       "sort": 1300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1983,7 +1983,7 @@
       "name": "Chomp",
       "type": "feat",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The tarrasque makes one bite attack or uses its Swallow.</p>",
           "chat": "",
@@ -2048,7 +2048,7 @@
       "effects": [],
       "folder": null,
       "sort": 1400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -2057,7 +2057,7 @@
   "effects": [],
   "folder": "RcadGAsg9rF7lRq9",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Vicious Maul",
   "type": "weapon",
   "img": "icons/weapons/maces/mace-spiked-wood-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This heavy two-handed mace crushes metal and bone with thunderous force.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 3300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

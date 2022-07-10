@@ -3,7 +3,7 @@
   "name": "Tankard",
   "type": "backpack",
   "img": "icons/containers/kitchenware/mug-steel-wood-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>It is a form of drinkware consisting of a large, roughly cynlindrical, drinking cup with a single handle.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

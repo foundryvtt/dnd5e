@@ -1,11 +1,11 @@
 {
   "_id": "clwv2PWOcT822hlr",
   "name": "Maze",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You banish a creature that you can see within range into a labyrinthine Demiplane. The target remains there for the Duration or until it escapes the maze.</p><p>The target can use its action to attempt to escape. When it does so, it makes a DC 20 Intelligence check. If it succeeds, it escapes, and the spell ends (a Minotaur or Goristro demon automatically succeeds).</p><p>When the spell ends, the target reappears in the space it left or, if that space is occupied, in the nearest unoccupied space.</p>",
       "chat": "",

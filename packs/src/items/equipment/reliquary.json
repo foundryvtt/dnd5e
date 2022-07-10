@@ -3,7 +3,7 @@
   "name": "Reliquary",
   "type": "equipment",
   "img": "icons/containers/chest/chest-reinforced-steel-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A tiny box or other container holding a fragment of a precious relic, saint, or other historical figure that dedicated their life to walk the path of a true believer. A deity imbues the bearer of this artifact with the ability to call forth their power and in doing so spread the faith once more.</p>\n<p><strong>Spellcasting Focus</strong>. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

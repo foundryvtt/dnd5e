@@ -2,7 +2,7 @@
   "name": "Saddlebags",
   "type": "backpack",
   "img": "icons/containers/bags/pack-leather-black-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A set of containers that typically come as a pair, connected by a leather strap and affixed to the saddle of a mount.</p>",
       "chat": "",
@@ -32,7 +32,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {},

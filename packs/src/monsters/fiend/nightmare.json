@@ -3,7 +3,7 @@
   "name": "Nightmare",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fiend/Nightmare.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -537,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Nightmare",
     "displayName": 20,
     "actorLink": false,
@@ -602,7 +602,7 @@
       "name": "Confer Fire Resistance",
       "type": "feat",
       "img": "icons/magic/fire/explosion-mushroom-nuke-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The nightmare can grant resistance to <em>fire damage</em> to anyone riding it.</p>",
           "chat": "",
@@ -666,7 +666,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -676,7 +676,7 @@
       "name": "Illumination",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The nightmare sheds bright light in a <strong>10-foot radius</strong> and dim light for an additional <strong>10 feet.</strong></p>",
           "chat": "",
@@ -740,7 +740,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -750,7 +750,7 @@
       "name": "Hooves",
       "type": "weapon",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong> plus <strong>7 (2d6) <em>fire damage</em></strong>.</p><p></p></section><p>The Nightmare attacks with its Hooves.</p>",
           "chat": "",
@@ -854,7 +854,7 @@
       "effects": [],
       "folder": null,
       "sort": 700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -864,7 +864,7 @@
       "name": "Ethereal Stride",
       "type": "feat",
       "img": "icons/magic/lightning/orb-ball-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p></p><p></p></section><p>The nightmare and up to three willing creatures within 5 feet of it magically enter the Ethereal Plane from the Material Plane, or vice versa.</p>",
           "chat": "",
@@ -928,7 +928,7 @@
       "effects": [],
       "folder": null,
       "sort": 800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -937,7 +937,7 @@
   "effects": [],
   "folder": "8kEIcpvnYCYQJ2sV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

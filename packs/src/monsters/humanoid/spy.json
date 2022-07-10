@@ -3,7 +3,7 @@
   "name": "Spy",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Spy.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 10,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Spy",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Cunning Action",
       "type": "feat",
       "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>On each of its turns, the spy can use a bonus action to take the dash, disengage, or hide action.</p>",
           "chat": "",
@@ -667,7 +667,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -677,7 +677,7 @@
       "name": "Sneak Attack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll.</p>",
           "chat": "",
@@ -748,7 +748,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -758,7 +758,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The spy makes two melee attacks.</p>",
           "chat": "",
@@ -825,7 +825,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -835,7 +835,7 @@
       "name": "Shortsword",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-guard-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Spy attacks with their Shortsword.</p>",
           "chat": "",
@@ -935,7 +935,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -945,7 +945,7 @@
       "name": "Hand Crossbow",
       "type": "weapon",
       "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Spy attacks with their Hand Crossbow.</p>",
           "chat": "",
@@ -1045,7 +1045,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1054,7 +1054,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

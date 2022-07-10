@@ -2,7 +2,7 @@
   "name": "Feed",
   "type": "consumable",
   "img": "icons/consumables/grains/sack-rice-open-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Standard feed suitable for a mount or other animal, often consisting of grains or hay.</p>",
       "chat": "",
@@ -70,7 +70,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {},

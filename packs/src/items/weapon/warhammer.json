@@ -3,7 +3,7 @@
   "name": "Warhammer",
   "type": "weapon",
   "img": "icons/weapons/hammers/hammer-drilling-spiked.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A heavy metal hammer capable of being wielded with a single hand with a shield or in two hands to deliver crushing concussive blows.</p>",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 3800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

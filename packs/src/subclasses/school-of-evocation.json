@@ -2,7 +2,7 @@
   "name": "School of Evocation",
   "type": "subclass",
   "img": "icons/magic/fire/beam-strike-whip-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You focus your study on magic that creates powerful elemental effects such as bitter cold, searing flame, rolling thunder, crackling lightning, and burning acid. Some evokers find employment in military forces, serving as artillery to blast enemy armies from afar. Others use their spectacular power to protect the weak, while some seek their own gain as bandits, adventurers, or aspiring tyrants.</p>",
       "chat": "",
@@ -74,7 +74,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {},

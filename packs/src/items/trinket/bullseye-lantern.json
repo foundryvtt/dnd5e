@@ -3,7 +3,7 @@
   "name": "Bullseye Lantern",
   "type": "consumable",
   "img": "icons/sundries/lights/lantern-iron-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.</p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 2300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

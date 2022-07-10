@@ -3,7 +3,7 @@
   "name": "Killer Whale",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/KillerWhale.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 19,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Killer Whale",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Echolocation",
       "type": "feat",
       "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The whale can't use its blindsight while deafened.</p>",
           "chat": "",
@@ -667,7 +667,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -677,7 +677,7 @@
       "name": "Hold Breath",
       "type": "feat",
       "img": "icons/magic/water/pseudopod-swirl-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The whale can hold its breath for <strong>30 minutes</strong>.</p>",
           "chat": "",
@@ -744,7 +744,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -754,7 +754,7 @@
       "name": "Keen Hearing",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The whale has<strong> advantage </strong>on Wisdom (Perception) checks that rely on hearing.</p>",
           "chat": "",
@@ -821,7 +821,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -831,7 +831,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>21 (5d6 + 4) <em>piercing damage</em></strong>.</p></section>\n<p>The Killer Whale attacks with its Bite.</p>",
           "chat": "",
@@ -931,7 +931,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -940,7 +940,7 @@
   "effects": [],
   "folder": "3IciKJ8pYVvyuEok",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

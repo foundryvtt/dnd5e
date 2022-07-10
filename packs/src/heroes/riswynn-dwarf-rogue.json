@@ -2,7 +2,7 @@
   "name": "Riswynn (Dwarf Rogue)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/RogueHalfling.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 10,
@@ -575,7 +575,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "flags": {},
     "name": "Riswynn",
     "displayName": 30,
@@ -640,7 +640,7 @@
       "_id": "Vl9JqRkn30uzM2hb",
       "name": "Background: Bureaucrat",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<ul>\n<li>Skill Proficiencies: Insight, Persuasion</li>\n<li>Languages: Two of your choice</li>\n<li>Equipment: A set of fine clothes and a pouch containing 5 gp</li>\n</ul>",
           "chat": "",
@@ -727,7 +727,7 @@
       "img": "icons/skills/social/theft-pickpocket-bribery-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -735,7 +735,7 @@
       "_id": "zyNiKfTqZLSjX1Kc",
       "name": "Fine Clothes",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Set of clothes designed specifically to be expensive and show it.</p>",
           "chat": "",
@@ -830,7 +830,7 @@
       "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -838,7 +838,7 @@
       "_id": "6xgRF9EHlkdx74gp",
       "name": "Rapier",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A thin tensile metal blade, light in weight but long in reach designed for quick darting attacks to target weak points in enemy defenses with lightning swiftness.</p>",
           "chat": "",
@@ -943,7 +943,7 @@
       "img": "icons/weapons/swords/sword-guard-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -951,7 +951,7 @@
       "_id": "13NzavzIfxLtAbjF",
       "name": "Arrows",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Standard ammunition used for bows of all varieties. These mundane arrows are made of smooth wooden shafts with goose feather fletching and hammer metal bodkins.</p>",
           "chat": "",
@@ -1031,7 +1031,7 @@
       "img": "icons/containers/ammunition/arrows-quiver-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1039,7 +1039,7 @@
       "_id": "tJDTxUqcvlxbZCdo",
       "name": "Shortbow",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This two handed bow is somewhat smaller than the traditional longbow variant, making it well suited for rapid attacks while on the move or mounted from horseback.</p>",
           "chat": "",
@@ -1141,7 +1141,7 @@
       "img": "icons/weapons/bows/shortbow-recurve.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1149,7 +1149,7 @@
       "_id": "NkdFTTiYWTcQykxt",
       "name": "Dagger",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A short metal blade mounted to a small hilt and crossguard. The dagger makes an effective side armament for hardened warriors or a hidden blade for assassins and thieves.</p>",
           "chat": "",
@@ -1251,7 +1251,7 @@
       "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1259,7 +1259,7 @@
       "_id": "0K1HkL7YtDkM04gh",
       "name": "Leather Armor",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
           "chat": "",
@@ -1347,7 +1347,7 @@
       "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1355,7 +1355,7 @@
       "_id": "qg7r4WqCCRRBoI7k",
       "name": "Thieves' Tools",
       "type": "tool",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers. Proficiency with these tools lets you add your proficiency bonus to any ability checks you make to disarm traps or open locks.</p>",
           "chat": "",
@@ -1385,7 +1385,7 @@
       "img": "icons/tools/hand/lockpicks-steel-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1393,7 +1393,7 @@
       "_id": "EKdk3lhxqgPtqHwu",
       "name": "Backpack",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
           "chat": "",
@@ -1429,7 +1429,7 @@
       "img": "icons/containers/bags/pack-simple-leather.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1437,7 +1437,7 @@
       "_id": "Mf7KLdBXylgqsICW",
       "name": "Pouch",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
           "chat": "",
@@ -1473,7 +1473,7 @@
       "img": "icons/containers/bags/coinpouch-simple-tan.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1481,7 +1481,7 @@
       "_id": "PHLBlkV7IoS51P5v",
       "name": "Quiver",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A quiver can hold up to 20 arrows.</p>",
           "chat": "",
@@ -1517,7 +1517,7 @@
       "img": "icons/containers/ammunition/arrows-quiver-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1525,7 +1525,7 @@
       "_id": "CHrFwjEiZTbIgkvr",
       "name": "Hammer",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A tool with heavy metal head mounted ar the right angles at the end of a handle, used for job such as breaking things and driving in nails. </p>",
           "chat": "",
@@ -1549,7 +1549,7 @@
       "img": "icons/tools/smithing/hammer-sledge-steel-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1557,7 +1557,7 @@
       "_id": "h4ihDUI7MQVznkxm",
       "name": "Hempen Rope (50 ft.)",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
           "chat": "",
@@ -1629,7 +1629,7 @@
       "img": "icons/sundries/survival/rope-wrapped-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1637,7 +1637,7 @@
       "_id": "rpmyWiGevjk354b5",
       "name": "Piton",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A metal spike that is drive into a seam in a climbing surface with a climbing hammer. It can also be used like iron spikes to block doors in a pinch.</p>",
           "chat": "",
@@ -1709,7 +1709,7 @@
       "img": "icons/sundries/survival/stake-rough-simple-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1717,7 +1717,7 @@
       "_id": "kHtYigIcUQ4IL9PR",
       "name": "Rations",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
           "chat": "",
@@ -1789,7 +1789,7 @@
       "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1797,7 +1797,7 @@
       "_id": "SbWMxygkEp4AlSMl",
       "name": "Tinderbox",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
           "chat": "",
@@ -1821,7 +1821,7 @@
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1829,7 +1829,7 @@
       "_id": "8XJJXl8CvQDsNqQo",
       "name": "Torch",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
           "chat": "",
@@ -1906,7 +1906,7 @@
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1914,7 +1914,7 @@
       "_id": "sKonGCDJxc4cwpuS",
       "name": "Waterskin",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
           "chat": "",
@@ -1986,7 +1986,7 @@
       "img": "icons/sundries/survival/wetskin-leather-purple.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1994,7 +1994,7 @@
       "_id": "w1ICCmvrQzvkNA5T",
       "name": "Mess Kit",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
           "chat": "",
@@ -2018,7 +2018,7 @@
       "img": "icons/tools/cooking/fork-steel-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2026,7 +2026,7 @@
       "_id": "OPIqh46EdTrNRiZp",
       "name": "Bedroll",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
           "chat": "",
@@ -2050,7 +2050,7 @@
       "img": "icons/sundries/flags/banner-worn-blue.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2058,7 +2058,7 @@
       "_id": "kRWtiPib9MRx9JmN",
       "name": "Dagger (offhand)",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A short metal blade mounted to a small hilt and crossguard. The dagger makes an effective side armament for hardened warriors or a hidden blade for assassins and thieves.</p>",
           "chat": "",
@@ -2160,7 +2160,7 @@
       "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2168,7 +2168,7 @@
       "_id": "OpfHMuWyqcO7LmSt",
       "name": "Crowbar",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p>",
           "chat": "",
@@ -2189,7 +2189,7 @@
       "img": "icons/tools/hand/pickaxe-steel-white.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2197,7 +2197,7 @@
       "_id": "VlHHit2a50YCKKTm",
       "name": "Dwarven Resilience",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You have advantage on saving throws against poison, and you have resistance against poison damage.</p>",
           "chat": "",
@@ -2284,7 +2284,7 @@
       "img": "icons/creatures/abilities/stinger-poison-green.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2292,7 +2292,7 @@
       "_id": "0Db7KX5wxDYwiem3",
       "name": "Stonecunning",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>",
           "chat": "",
@@ -2378,7 +2378,7 @@
       "img": "icons/commodities/tech/cog-bronze.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2386,7 +2386,7 @@
       "_id": "loauVqu6iAKv70b7",
       "name": "Hill Dwarf",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<div title=\"Page 4\">\n<div>\n<div>\n<p><em>As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience. </em></p><p><em><strong>Ability Score Increase.</strong></em> Your Wisdom score increases by 1.</p><p><em><strong>Dwarven Toughness.</strong></em> Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.</p>\n</div>\n</div>\n</div>",
           "chat": "",
@@ -2453,7 +2453,7 @@
       "img": "systems/dnd5e/icons/spells/protect-magenta-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2461,7 +2461,7 @@
       "_id": "HXOtd9EqzXbB3e2c",
       "name": "Dwarf",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<div title=\"Page 3\">\n<p><em>Your dwarf character has an assortment of inborn abilities, part and parcel of dwarven nature.</em></p><p><em><strong>Ability Score Increase.</strong></em> Your Constitution score increases by 2.</p><p><em><strong>Age.</strong></em> Dwarves mature at the same rate as humans, but they're considered young until they reach the age of 50. On average, they live about 350 years.</p><p><em><strong>Alignment.</strong></em> Most dwarves are lawful, believing firmly in the benefits of a well-­ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.</p><p><em><strong>Size. </strong></em>Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.</p><p><em><strong>Speed. </strong></em>Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.</p><p><em><strong>Darkvision.</strong></em> Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.</p><p><em><strong>Dwarven Resilience.</strong></em> @Compendium[dnd5e.races.ufysTkqet2Ctmtyi]{Dwarven Resilience} You have advantage on saving throws against poison, and you have resistance against poison damage.</p><p><em><strong>Dwarven Combat Training.</strong></em> You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.</p><p><em><strong>Tool Proficiency.</strong></em> You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.</p>\n</div>\n<div>\n<div>\n<p><em><strong>Stonecunning.</strong></em> @Compendium[dnd5e.races.mQPZDRbUhgYTbXKa]{Stonecunning} Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.</p>\n</div>\n</div>\n<div>\n<div>\n<p><em><strong>Languages.</strong></em> You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.</p>\n</div>\n</div>\n<div title=\"Page 3\">\n<div>\n<div>\n<div class=\"page\" title=\"Page 3\"> </div>\n</div>\n</div>\n</div>",
           "chat": "",
@@ -2528,7 +2528,7 @@
       "img": "systems/dnd5e/icons/spells/protect-eerie-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2537,7 +2537,7 @@
       "name": "Rogue",
       "type": "class",
       "img": "icons/skills/melee/strike-sword-stabbed-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>As a rogue, you have the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per rogue level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per rogue level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor<br /><strong>Weapons:</strong> Simple weapons, hand crossbows, longswords, rapiers, shortswords<br /><strong>Tools:</strong> Thieves' tools<br /><strong>Saving Throws:</strong> Dexterity, Intelligence<br /><strong>Skills:</strong> Choose four from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a rapier or (b) a shortsword</li>\n<li>(a) a shortbow and quiver of 20 arrows or (b) a shortsword</li>\n<li>(a) a burglar's pack, (b) a dungeoneer's pack, or (c) an explorer's pack</li>\n<li>(a) Leather armor, two daggers, and thieves' tools</li>\n</ul>\n<h1>Rogue Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Sneak Attack</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>1d6</td>\n<td>@Compendium[dnd5e.classfeatures.3sYPftQKnbbVnHrh]{Expertise}, @Compendium[dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7]{Sneak Attack}, @Compendium[dnd5e.classfeatures.ohwfuwnvuoBWlSQr]{Thieves' Cant}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>1d6</td>\n<td>@Compendium[dnd5e.classfeatures.01pcLg6PRu5zGrsb]{Cunning Action}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>2d6</td>\n<td>@Compendium[dnd5e.classfeatures.80USV8ZFPIahpLd0]{Roguish Archetype}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>2d6</td>\n<td>@Compendium[dnd5e.classfeatures.v7MxFuTAgOsmxZCD]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>3d6</td>\n<td>@Compendium[dnd5e.classfeatures.Mm64SKAHJWYecgXS]{Uncanny Dodge}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>3d6</td>\n<td>@Compendium[dnd5e.classfeatures.3sYPftQKnbbVnHrh]{Expertise improvement}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>4d6</td>\n<td>@Compendium[dnd5e.classfeatures.a4P4DNMmH8CqSNkC]{Evasion}</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>4d6</td>\n<td>@Compendium[dnd5e.classfeatures.v7MxFuTAgOsmxZCD]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>5d6</td>\n<td>Roguish Archetype feature</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>5d6</td>\n<td>@Compendium[dnd5e.classfeatures.v7MxFuTAgOsmxZCD]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>6d6</td>\n<td>@Compendium[dnd5e.classfeatures.YN9xm6MCvse4Y60u]{Reliable Talent}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>6d6</td>\n<td>@Compendium[dnd5e.classfeatures.v7MxFuTAgOsmxZCD]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>7d6</td>\n<td>Roguish Archetype feature</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>7d6</td>\n<td>@Compendium[dnd5e.classfeatures.fjsBk7zxoAbLf8ZI]{Blindsense}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>8d6</td>\n<td>@Compendium[dnd5e.classfeatures.V4pwFxlwHtNeB4w9]{Slippery Mind}</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>8d6</td>\n<td>@Compendium[dnd5e.classfeatures.v7MxFuTAgOsmxZCD]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>9d6</td>\n<td>Roguish Archetype feature</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>9d6</td>\n<td>@Compendium[dnd5e.classfeatures.L7nJSRosos8sHJH9]{Elusive}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>10d6</td>\n<td>@Compendium[dnd5e.classfeatures.v7MxFuTAgOsmxZCD]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>10d6</td>\n<td>@Compendium[dnd5e.classfeatures.rQhWDaMHMn7iU4f2]{Stroke of Luck}</td>\n</tr>\n</tbody>\n</table>\n<h1>Roguish Archetypes</h1>\n<p>Rogues have many features in common, including their emphasis on perfecting their skills, their precise and deadly approach to combat, and their increasingly quick reflexes. But different rogues steer those talents in varying directions, embodied by the rogue archetypes. Your choice of archetype is a reflection of your focus—not necessarily an indication of your chosen profession, but a description of your preferred techniques.</p>\n<p>@Compendium[dnd5e.subclasses.k8iuefRorWOjb9gR]{Thief}</p>",
           "chat": "",
@@ -2796,7 +2796,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -2810,7 +2810,7 @@
       "name": "Expertise (Rogue)",
       "type": "feat",
       "img": "icons/skills/targeting/target-glowing-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.</p><p>At 6th level, you can choose two more of your proficiencies (in skills or with thieves' tools) to gain this benefit.</p>",
           "chat": "",
@@ -2874,7 +2874,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -2889,7 +2889,7 @@
       "name": "Sneak Attack",
       "type": "feat",
       "img": "icons/skills/melee/strike-dagger-arcane-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.</p><p>You don't need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn't incapacitated, and you don't have disadvantage on the attack roll.</p>",
           "chat": "",
@@ -2958,7 +2958,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -2973,7 +2973,7 @@
       "name": "Thieves' Cant",
       "type": "feat",
       "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.</p><p>In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.</p>",
           "chat": "",
@@ -3058,7 +3058,7 @@
       ],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -3093,7 +3093,7 @@
   ],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {},

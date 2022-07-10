@@ -3,7 +3,7 @@
   "name": "Flying Sword",
   "type": "npc",
   "img": "systems/dnd5e/tokens/construct/FlyingSword.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 12,
@@ -546,7 +546,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "_id": "ynek5mjRq1B6rFX3",
     "name": "Flying Sword",
     "displayName": 20,
@@ -612,7 +612,7 @@
       "name": "Antimagic Susceptibility",
       "type": "feat",
       "img": "icons/magic/lightning/orb-ball-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The sword is incapacitated while in the area of an antimagic field. </p><p>If targeted by dispel magic, the sword must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for <strong>1 minute</strong>.</p></section><p>The sword is incapacitated while in the area of an antimagic field.</p>",
           "chat": "",
@@ -677,7 +677,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -687,7 +687,7 @@
       "name": "False Appearance",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While the sword remains motionless and isn't flying, it is indistinguishable from a normal sword.</p>",
           "chat": "",
@@ -752,7 +752,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -762,7 +762,7 @@
       "name": "Longsword",
       "type": "weapon",
       "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d8 + 1) <em>slashing damage</em></strong>.</p></section>\n<p>The Flying Sword attacks!</p>",
           "chat": "",
@@ -862,7 +862,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -871,7 +871,7 @@
   "effects": [],
   "folder": "cYGuEOeNz5ylp2Vs",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

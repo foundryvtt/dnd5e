@@ -3,7 +3,7 @@
   "name": "Chain Devil",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fiend/ChainDevil.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -545,7 +545,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Chain Devil",
     "displayName": 20,
     "actorLink": false,
@@ -610,7 +610,7 @@
       "name": "Chain",
       "type": "weapon",
       "img": "icons/tools/fasteners/chain-steel-grey.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing damage</em></strong>.</p>\n<p>The target is grappled (escape DC 14) if the devil isn't already grappling a creature. Until this grapple ends, the target is restrained and takes <strong>7 (2d6) <em>piercing damage</em></strong> at the start of each of its turns.</p>\n</section>\n<p>The Chain Devil attacks with its Chain. The target is grappled if the devil isn't already grappling a creature. Until this grapple ends, the target is restrained.</p>",
           "chat": "",
@@ -710,7 +710,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -720,7 +720,7 @@
       "name": "Unnerving Mask",
       "type": "feat",
       "img": "icons/magic/life/heart-shadow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>When a creature the devil can see starts its turn within 30 feet of the devil, the devil can create the illusion that it looks like one of the creature's departed loved ones or bitter enemies. If the creature can see the devil, it must succeed on a <strong> DC 14 Wisdom saving throw</strong> or be Frightened until the end of its turn.</p>\n</section>\n<p>The devil can create the illusion that it looks like one of the creature's departed loved ones or bitter enemies. make a <strong>Wisdom</strong> saving throw.</p>",
           "chat": "",
@@ -788,7 +788,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -798,7 +798,7 @@
       "name": "Devil's Sight",
       "type": "feat",
       "img": "icons/magic/perception/eye-slit-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Magical darkness doesn't impede the devil's Darkvision.</p>",
           "chat": "",
@@ -863,7 +863,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -873,7 +873,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The creature has advantage on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -941,7 +941,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -951,7 +951,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The devil makes two attacks with its chains.</p>",
           "chat": "",
@@ -1018,7 +1018,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1028,7 +1028,7 @@
       "name": "Animate Chains",
       "type": "feat",
       "img": "icons/equipment/neck/choker-chain-thin-gold.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Up to four chains the devil can see within 60 feet of it magically sprout razor-edged barbs and animate under the devil's control, provided that the chains aren't being worn or carried.</p>\n<p>Each animated chain is an object with AC 20, 20 hit points, resistance to <em>piercing damage</em>, and immunity to psychic and thunder damage. When the devil uses Multiattack on its turn, it can use each animated chain to make one additional chain attack. An animated chain can grapple one creature of its own but can't make attacks while grappling. An animated chain reverts to its inanimate state if reduced to 0 hit points or if the devil is incapacitated or dies.</p>\n</section>\n<p>Up to four chains the devil can see within 60 feet of it magically sprout razor-edged barbs and animate under the devil's control, provided that the chains aren't being worn or carried.</p>",
           "chat": "",
@@ -1096,7 +1096,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1105,7 +1105,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

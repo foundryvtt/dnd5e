@@ -2,7 +2,7 @@
   "name": "Champion",
   "type": "subclass",
   "img": "icons/skills/melee/maneuver-sword-katana-yellow.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>The archetypal Champion focuses on the development of raw physical power honed to deadly perfection. Those who model themselves on this archetype combine rigorous training with physical excellence to deal devastating blows.</p>",
       "chat": "",
@@ -86,7 +86,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {},

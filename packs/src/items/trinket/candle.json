@@ -3,7 +3,7 @@
   "name": "Candle",
   "type": "consumable",
   "img": "icons/sundries/lights/candle-unlit-white.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 feet.</p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 1400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

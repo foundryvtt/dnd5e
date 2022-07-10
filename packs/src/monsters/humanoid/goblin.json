@@ -3,7 +3,7 @@
   "name": "Goblin",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Goblin.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 8,
@@ -538,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Goblin",
     "displayName": 0,
     "actorLink": false,
@@ -603,7 +603,7 @@
       "name": "Leather Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
           "chat": "",
@@ -689,7 +689,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -699,7 +699,7 @@
       "name": "Shield",
       "type": "equipment",
       "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
           "chat": "",
@@ -785,7 +785,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -795,7 +795,7 @@
       "name": "Nimble Escape",
       "type": "feat",
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The goblin can take the Disengage or Hide action as a bonus action on each of its turns.</p>",
           "chat": "",
@@ -860,7 +860,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -870,7 +870,7 @@
       "name": "Scimitar",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-katana.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>slashing damage</em></strong>.</p></section>\n<p>The Goblin attacks with its Scimitar.</p>",
           "chat": "",
@@ -970,7 +970,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -980,7 +980,7 @@
       "name": "Shortbow",
       "type": "weapon",
       "img": "icons/weapons/bows/shortbow-recurve.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Goblin attacks with its Shortbow.</p>",
           "chat": "",
@@ -1080,7 +1080,7 @@
       "effects": [],
       "folder": null,
       "sort": 2600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1089,7 +1089,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

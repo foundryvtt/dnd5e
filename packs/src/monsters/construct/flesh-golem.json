@@ -3,7 +3,7 @@
   "name": "Flesh Golem",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 19,
@@ -548,7 +548,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Flesh Golem",
     "displayName": 20,
     "actorLink": false,
@@ -613,7 +613,7 @@
       "name": "Berserk",
       "type": "feat",
       "img": "icons/creatures/reptiles/lizard-mouth-glowing-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Whenever the golem starts its turn with <strong>40 hit points</strong> or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. </p><p>If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong><strong>. T</strong>he golem's creator, if <strong>within 60 feet</strong> of the berserk golem, can try to calm it by speaking firmly and persuasively. The golem must be able to hear its creator, who must take an action to make a <strong>DC 15 Charisma (Persuasion) check</strong>. If the check succeeds, the golem ceases being berserk. If it takes damage while still at <strong>40 hit points</strong> or fewer, the golem might go berserk again.</p></section><p>The golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself.</p>",
           "chat": "",
@@ -678,7 +678,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -688,7 +688,7 @@
       "name": "Aversion of Fire",
       "type": "feat",
       "img": "icons/magic/fire/projectile-wave-arrow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>If the golem takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on attack rolls and ability checks until the end of its next turn.</p></section><p>If the golem takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on some rolls.</p>",
           "chat": "",
@@ -753,7 +753,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -763,7 +763,7 @@
       "name": "Immutable Form",
       "type": "feat",
       "img": "icons/magic/unholy/orb-beam-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem is immune to any spell or effect that would alter its form.</p>",
           "chat": "",
@@ -828,7 +828,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -838,7 +838,7 @@
       "name": "Lightning Absorption",
       "type": "feat",
       "img": "icons/magic/lightning/bolt-strike-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Whenever the golem is subjected to <strong><em>lightning damage</em></strong>, it takes no damage and instead regains a number of<strong> hit points</strong> equal to the <strong><em>lightning damage</em> dealt</strong>.</p>",
           "chat": "",
@@ -903,7 +903,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -913,7 +913,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -978,7 +978,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -988,7 +988,7 @@
       "name": "Magic Weapons",
       "type": "feat",
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem's weapon attacks are magical.</p>",
           "chat": "",
@@ -1053,7 +1053,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1063,7 +1063,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem makes two slam attacks.</p>",
           "chat": "",
@@ -1128,7 +1128,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1138,7 +1138,7 @@
       "name": "Slam",
       "type": "weapon",
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Flesh Golem attacks with its Slam.</p>",
           "chat": "",
@@ -1238,7 +1238,7 @@
       "effects": [],
       "folder": null,
       "sort": 800000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1247,7 +1247,7 @@
   "effects": [],
   "folder": "cYGuEOeNz5ylp2Vs",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

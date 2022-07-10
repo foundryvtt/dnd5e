@@ -3,7 +3,7 @@
   "name": "Noble",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Noble.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 11,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Noble",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Breastplate",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-layered-steel-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This armor consists of a fitted metal chest piece worn with supple leather. Although it leaves the legs and arms relatively unprotected, this armor provides good protection for the wearer's vital organs while leaving the wearer relatively unencumbered.</p>",
           "chat": "",
@@ -686,7 +686,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -696,7 +696,7 @@
       "name": "Rapier",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-guard-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d8 + 1) <em>piercing damage</em></strong>.</p><p></p></section><p>The Noble attacks with its Rapier.</p>",
           "chat": "",
@@ -796,7 +796,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -806,7 +806,7 @@
       "name": "Parry",
       "type": "feat",
       "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The noble adds 2 to its <strong>AC</strong> against one melee Attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon.</p></section><p>The noble adds 2 to its <strong>AC</strong> against one melee Attack that would hit it.</p>",
           "chat": "",
@@ -871,7 +871,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -880,7 +880,7 @@
   "effects": [],
   "folder": "8kEIcpvnYCYQJ2sV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

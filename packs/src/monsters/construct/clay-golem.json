@@ -3,7 +3,7 @@
   "name": "Clay Golem",
   "type": "npc",
   "img": "systems/dnd5e/tokens/construct/ClayGolem.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 20,
@@ -546,7 +546,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Clay Golem",
     "displayName": 20,
     "actorLink": false,
@@ -611,7 +611,7 @@
       "name": "Slam",
       "type": "weapon",
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>16 (2d10 + 5) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw or have its hit point maximum reduced by an amount equal to the damage taken. The target dies if this attack reduces its hit point maximum to 0. The reduction lasts until removed by the greater restoration spell or other magic.</p>\n</section>\n<p>The Clay Golem attacks with its Slam. If the target is a creature, it must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -711,7 +711,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -721,7 +721,7 @@
       "name": "Haste",
       "type": "feat",
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Recharge 5-6.</p>\n</section>\n<p>Until the end of its next turn, the golem magically gains a +2 bonus to its AC, has advantage on Dexterity saving throws, and can use its slam attack as a bonus action.</p>",
           "chat": "",
@@ -789,7 +789,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -799,7 +799,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -867,7 +867,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -877,7 +877,7 @@
       "name": "Berserk",
       "type": "feat",
       "img": "icons/creatures/reptiles/lizard-mouth-glowing-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Whenever the golem starts its turn with <strong>60 hit points</strong> or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see.</p>\n<p>If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong>.</p>\n</section>\n<p>The golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself.</p>",
           "chat": "",
@@ -945,7 +945,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -955,7 +955,7 @@
       "name": "Immutable Form",
       "type": "feat",
       "img": "icons/magic/unholy/orb-beam-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem is immune to any spell or effect that would alter its form.</p>",
           "chat": "",
@@ -1023,7 +1023,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1033,7 +1033,7 @@
       "name": "Magic Weapons",
       "type": "feat",
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem's weapon attacks are magical.</p>",
           "chat": "",
@@ -1098,7 +1098,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1108,7 +1108,7 @@
       "name": "Acid Absorption",
       "type": "feat",
       "img": "icons/magic/unholy/orb-smoking-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Whenever the golem is subjected to <strong><em>acid damage</em></strong>, it takes no damage and instead regains a number of<strong> hit points</strong> equal to the <strong><em>acid damage</em> dealt</strong>.</p>",
           "chat": "",
@@ -1176,7 +1176,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1186,7 +1186,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The golem makes two slam attacks.</p>",
           "chat": "",
@@ -1251,7 +1251,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1260,7 +1260,7 @@
   "effects": [],
   "folder": "ZSWBRlk2vsD2qKZC",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

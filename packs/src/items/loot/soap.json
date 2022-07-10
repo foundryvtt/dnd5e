@@ -3,7 +3,7 @@
   "name": "Soap",
   "type": "loot",
   "img": "icons/sundries/survival/soap.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Used to clean and wash.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

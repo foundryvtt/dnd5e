@@ -3,7 +3,7 @@
   "name": "Book of Lore",
   "type": "loot",
   "img": "icons/sundries/books/book-plain-orange.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A book containing historical accounts, information pertaining to a particular field of lore, myth, or legend.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

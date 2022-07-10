@@ -3,7 +3,7 @@
   "name": "Scorpion",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Scorpion.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 2,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Scorpion",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Sting",
       "type": "weapon",
       "img": "icons/creatures/abilities/stinger-poison-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p>\n<p>The target must make a  <strong>DC 9 Constitution</strong> saving throw, taking <strong>4 (1d8) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Scorpion attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -700,7 +700,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -709,7 +709,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

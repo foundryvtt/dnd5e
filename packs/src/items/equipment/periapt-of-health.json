@@ -3,7 +3,7 @@
   "name": "Periapt of Health",
   "type": "equipment",
   "img": "icons/equipment/neck/pendant-faceted-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item</em></p>\n<p>You are immune to contracting any disease while you wear this pendant. If you are already infected with a disease, the effects of the disease are suppressed you while you wear the pendant.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 1200000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

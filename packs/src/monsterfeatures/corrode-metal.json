@@ -1,11 +1,11 @@
 {
   "_id": "0z5v1BfMqQl5Z7UW",
   "name": "Corrode Metal",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "feat",
-  "data": {
+  "system": {
     "description": {
       "value": "<section class=\"secret\">\n<p>Any nonmagical weapon made of metal that hits the {type} corrodes. After <strong>dealing damage</strong>, the weapon takes a permanent and cumulative -1 penalty to damage rolls.</p><p>If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits the {type} is destroyed after dealing damage. The {type} can eat through 2-inch-thick, nonmagical metal in 1 round.</p>\n</section>\n<p>The {type} corrodes metal.</p>",
       "chat": "",

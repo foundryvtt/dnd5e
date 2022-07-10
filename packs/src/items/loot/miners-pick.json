@@ -3,7 +3,7 @@
   "name": "Miner's Pick",
   "type": "loot",
   "img": "icons/tools/hand/pickaxe-steel-white.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>It is a hand tool with a hard head atached perpendiocular to the handle.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4100000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

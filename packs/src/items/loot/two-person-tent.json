@@ -3,7 +3,7 @@
   "name": "Two-Person Tent",
   "type": "loot",
   "img": "icons/sundries/flags/banner-worn-green.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A simple and portable canvas shelter, a tent sleeps two.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

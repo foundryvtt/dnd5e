@@ -3,7 +3,7 @@
   "name": "Quarterstaff",
   "type": "weapon",
   "img": "icons/weapons/staves/staff-simple-gold.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A thick shaft of wood wrapped with a sturdy grip makes a highly functional weapon in addition to a stout walking stick.</p>",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 2500000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Blood Hawk",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/BloodHawk.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 6,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Blood Hawk",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Keen Sight",
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hawk has<strong> advantage </strong>on Wisdom (Perception) checks that rely on sight.</p>",
           "chat": "",
@@ -668,7 +668,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -678,7 +678,7 @@
       "name": "Pack Tactics",
       "type": "feat",
       "img": "icons/creatures/abilities/paw-print-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The hawk has<strong> advantage </strong>on an attack roll against a creature if at least one of the hawk's allies is within <strong>5 ft.</strong> of the creature and the ally isn't incapacitated.</p>",
           "chat": "",
@@ -746,7 +746,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -756,7 +756,7 @@
       "name": "Beak",
       "type": "weapon",
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Blood Hawk attacks with its Beak.</p>",
           "chat": "",
@@ -856,7 +856,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -865,7 +865,7 @@
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

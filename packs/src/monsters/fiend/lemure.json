@@ -3,7 +3,7 @@
   "name": "Lemure",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fiend/Lemure.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 10,
@@ -547,7 +547,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Lemure",
     "displayName": 20,
     "actorLink": false,
@@ -616,7 +616,7 @@
       "name": "Devil's Sight",
       "type": "feat",
       "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Magical darkness doesn't impede the lemure's darkvision.</p>",
           "chat": "",
@@ -684,7 +684,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -694,7 +694,7 @@
       "name": "Hellish Rejuvenation",
       "type": "feat",
       "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>A lemure that dies in the Nine Hells sometimes comes back to comes back to life with all its<strong> hit points</strong> in 1d10 days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water.</p>\n</section>\n<p>A lemure that dies in the Nine Hells sometimes comes back to life.</p>",
           "chat": "",
@@ -762,7 +762,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -772,7 +772,7 @@
       "name": "Fist",
       "type": "weapon",
       "img": "icons/magic/fire/flame-burning-fist-strike.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Lemure attacks with its Fist.</p>",
           "chat": "",
@@ -872,7 +872,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -881,7 +881,7 @@
   "effects": [],
   "folder": "4Ht7EPHtqvVg22L8",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

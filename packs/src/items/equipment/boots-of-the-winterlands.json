@@ -3,7 +3,7 @@
   "name": "Boots of the Winterlands",
   "type": "equipment",
   "img": "icons/equipment/feet/boots-leather-banded-furred.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>These furred boots are snug and feel quite warm. While you wear them, you gain the following benefits:</p>\n<ul>\n<li>You have resistance to cold damage.</li>\n<li>You ignore difficult terrain created by ice or snow. You can tolerate temperatures as low as &minus;50 degrees Fahrenheit without any additional protection. If you wear heavy clothes, you can tolerate temperatures as low as &minus;100 degrees Fahrenheit.</li>\n</ul>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 3400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

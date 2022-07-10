@@ -2,7 +2,7 @@
   "name": "Pack Saddle",
   "type": "equipment",
   "img": "icons/equipment/shoulder/shoulderpad-fur-leather.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A type of seat that is fastened to a mount's back, designed to support the rider and affix part of the mount's tack such as stirrups. This type of saddle is suitable for pack mounts.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {},

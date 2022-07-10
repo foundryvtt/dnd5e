@@ -3,7 +3,7 @@
   "name": "Bedroll",
   "type": "loot",
   "img": "icons/sundries/survival/bedroll-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

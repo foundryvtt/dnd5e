@@ -3,7 +3,7 @@
   "name": "Studded Leather Armor",
   "type": "equipment",
   "img": "icons/equipment/chest/breastplate-rivited-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   "effects": [],
   "folder": null,
   "sort": 300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

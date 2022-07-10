@@ -3,7 +3,7 @@
   "name": "Sea Horse",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/SeaHorse.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 1,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Sea Horse",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Water Breathing",
       "type": "feat",
       "img": "icons/magic/water/bubbles-air-water-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The sea horse can breathe only underwater.</p>",
           "chat": "",
@@ -665,7 +665,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -674,7 +674,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

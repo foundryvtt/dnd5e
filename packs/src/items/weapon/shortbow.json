@@ -3,7 +3,7 @@
   "name": "Shortbow",
   "type": "weapon",
   "img": "icons/weapons/bows/shortbow-recurve.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This two handed bow is somewhat smaller than the traditional longbow variant, making it well suited for rapid attacks while on the move or mounted from horseback.</p>",
       "chat": "",
@@ -102,7 +102,7 @@
   "effects": [],
   "folder": null,
   "sort": 2600001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Awakened Tree",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 19,
@@ -542,7 +542,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Awakened Tree",
     "displayName": 20,
     "actorLink": false,
@@ -607,7 +607,7 @@
       "name": "False Appearance",
       "type": "feat",
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While the tree remains motionless, it is indistinguishable from a normal tree.</p>",
           "chat": "",
@@ -675,7 +675,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -685,7 +685,7 @@
       "name": "Slam",
       "type": "weapon",
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>14 (3d6 + 4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Awakened Tree attacks with its Slam.</p>",
           "chat": "",
@@ -785,7 +785,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -794,7 +794,7 @@
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

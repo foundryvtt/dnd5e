@@ -3,7 +3,7 @@
   "name": "Quipper",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Quipper.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 2,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Quipper",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Blood Frenzy",
       "type": "feat",
       "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The quipper has<strong> advantage </strong>on melee attack rolls against any creature that doesn't have all its<strong> hit points</strong>.</p>",
           "chat": "",
@@ -665,7 +665,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -675,7 +675,7 @@
       "name": "Water Breathing",
       "type": "feat",
       "img": "icons/magic/water/projectile-water-ice-orb.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The quipper can breathe only underwater.</p>",
           "chat": "",
@@ -740,7 +740,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -750,7 +750,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p></p></section><p>The Quipper attacks with its Bite.</p>",
           "chat": "",
@@ -850,7 +850,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -859,7 +859,7 @@
   "effects": [],
   "folder": "y7QQdiwLjfaETzOc",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Trident",
   "type": "weapon",
   "img": "icons/skills/melee/spear-tips-triple-orange.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A multi-pronged spear designed to impale a target in multiple locations, pinning them in place. Often used in combination with a net to entrap and harass foes.</p>",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 3500000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

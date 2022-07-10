@@ -3,7 +3,7 @@
   "name": "Skeleton",
   "type": "npc",
   "img": "systems/dnd5e/tokens/undead/Skeleton.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 10,
@@ -543,7 +543,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Skeleton",
     "displayName": 20,
     "actorLink": false,
@@ -608,7 +608,7 @@
       "name": "Shortbow",
       "type": "weapon",
       "img": "icons/weapons/bows/shortbow-recurve.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Skeleton attacks with its Shortbow.</p>",
           "chat": "",
@@ -708,7 +708,7 @@
       "effects": [],
       "folder": null,
       "sort": 2600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -718,7 +718,7 @@
       "name": "Shortsword",
       "type": "weapon",
       "img": "icons/weapons/swords/sword-guard-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Skeleton attacks with its Shortsword.</p>",
           "chat": "",
@@ -818,7 +818,7 @@
       "effects": [],
       "folder": null,
       "sort": 2700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -827,7 +827,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Lizard",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Lizard.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 2,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Lizard",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+0 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p></section>\n<p>The Lizard attacks with its Bite.</p>",
           "chat": "",
@@ -700,7 +700,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -709,7 +709,7 @@
   "effects": [],
   "folder": "4Ht7EPHtqvVg22L8",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

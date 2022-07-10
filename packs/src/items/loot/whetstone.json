@@ -3,7 +3,7 @@
   "name": "Whetstone",
   "type": "loot",
   "img": "icons/commodities/stone/geode-raw-tan.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Whetstone is a sharpening stone. It is used to sharpen the edges of steel tools and implements through grinding and honing.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Axe Beak",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/AxeBeak.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 14,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "_id": "Ehs4M06qRUjm78J4",
     "name": "Axe Beak",
     "displayName": 20,
@@ -601,7 +601,7 @@
       "name": "Beak",
       "type": "weapon",
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>slashing damage</em></strong>.</p></section>\n<p>The Axe Beak attacks with its Beak.</p>",
           "chat": "",
@@ -701,7 +701,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +710,7 @@
   "effects": [],
   "folder": "6DauPtHPdkuwtDcK",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

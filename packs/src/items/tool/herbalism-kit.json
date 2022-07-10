@@ -3,7 +3,7 @@
   "name": "Herbalism Kit",
   "type": "tool",
   "img": "icons/containers/bags/pouch-leather-green.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This kit contains a variety of instruments such as clippers, mortar and pestle, and pouches and vials used by herbalists to create remedies and potions. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to identify or apply herbs. Also, proficiency with this kit is required to create antitoxin and potions of healing.</p>",
       "chat": "",
@@ -29,7 +29,7 @@
   "effects": [],
   "folder": null,
   "sort": 2200000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

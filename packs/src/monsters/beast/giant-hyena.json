@@ -3,7 +3,7 @@
   "name": "Giant Hyena",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantHyena.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Hyena",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Rampage",
       "type": "feat",
       "img": "icons/skills/melee/strike-axe-blood-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>When the hyena reduces a creature to <strong>0 hit points</strong> with a melee attack on its turn, the hyena can take a bonus action to move up to half its speed and make a bite attack.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing damage</em></strong>.</p></section>\n<p>The Giant Hyena attacks with its Bite.</p>",
           "chat": "",
@@ -779,7 +779,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -788,7 +788,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

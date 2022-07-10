@@ -3,7 +3,7 @@
   "name": "Young White Dragon",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -540,7 +540,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Young White Dragon",
     "displayName": 20,
     "actorLink": false,
@@ -605,7 +605,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d10 + 4) <em>piercing damage</em></strong> plus <strong>4 (1d8) <em>cold damage</em></strong>.</p><p></p></section><p>The Young White Dragon attacks with its Bite.</p>",
           "chat": "",
@@ -709,7 +709,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -719,7 +719,7 @@
       "name": "Claw",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing damage</em></strong>.</p><p></p></section><p>The Young White Dragon attacks with its Claw.</p>",
           "chat": "",
@@ -819,7 +819,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -829,7 +829,7 @@
       "name": "Cold Breath",
       "type": "feat",
       "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The dragon exhales an icy blast in a 30-foot cone. Each creature in that area must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>45 (10d8) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p></p></section><p>The dragon exhales an icy blast in a 30-foot cone. Each creature in that area must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -899,7 +899,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -909,7 +909,7 @@
       "name": "Ice Walk",
       "type": "feat",
       "img": "icons/magic/water/water-iceberg-bubbles.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The dragon can move across and climb icy surfaces without needing to make an ability check. Additionally, difficult terrain composed of ice or snow doesn't cost it extra movement.</p>",
           "chat": "",
@@ -974,7 +974,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -984,7 +984,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The dragon makes three attacks: one with its bite and two with its claws.</p>",
           "chat": "",
@@ -1049,7 +1049,7 @@
       "effects": [],
       "folder": null,
       "sort": 700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1058,7 +1058,7 @@
   "effects": [],
   "folder": "vWsVUKxPYqMq1g09",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

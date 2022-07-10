@@ -3,7 +3,7 @@
   "name": "Deva",
   "type": "npc",
   "img": "systems/dnd5e/tokens/celestial/Deva.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -541,7 +541,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Deva",
     "displayName": 20,
     "actorLink": false,
@@ -606,7 +606,7 @@
       "name": "Angelic Weapons",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/enchant-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals an <strong>extra 4d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
           "chat": "",
@@ -671,7 +671,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -681,7 +681,7 @@
       "name": "Change Shape",
       "type": "feat",
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The deva magically <strong>polymorphs</strong> into a <strong>humanoid</strong> or <strong>beast</strong> that has a challenge rating equal to or less than its own, <strong>or back into its true form.</strong> It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the deva's choice).</p>\n<p>In a new form, the deva retains its game statistics and ability to speak, but <strong>its AC, movement modes, Strength, Dexterity, and special senses are replaced by those of the new form</strong>, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks.</p>",
           "chat": "",
@@ -746,7 +746,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -756,7 +756,7 @@
       "name": "Healing Touch",
       "type": "feat",
       "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The deva touches another creature. The target magically regains 20 (4d8 + 2) hit points and is freed from any curse, disease, poison, blindness, or deafness.</p>",
           "chat": "",
@@ -826,7 +826,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -836,7 +836,7 @@
       "name": "Innate Spellcasting",
       "type": "feat",
       "img": "icons/magic/light/projectiles-star-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The deva's spellcasting ability is Charisma (spell save DC 17). The deva can innately cast the following spells, requiring only verbal components:</p>\n<p><strong>At will:</strong> detect evil and good</p>\n<p><strong>1/day each</strong>: commune, raise dead</p>",
           "chat": "",
@@ -901,7 +901,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -911,7 +911,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The deva has<strong> advantage </strong>on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -976,7 +976,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -986,7 +986,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The deva makes two melee attacks.</p>",
           "chat": "",
@@ -1051,7 +1051,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1061,7 +1061,7 @@
       "name": "Mace",
       "type": "weapon",
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d6 + 4) <em>bludgeoning damage</em></strong> plus <strong>18 (4d8) <em>radiant damage</em></strong>.</p></section>\n<p>The Deva attacks with its Mace.</p>",
           "chat": "",
@@ -1166,7 +1166,7 @@
       "effects": [],
       "folder": null,
       "sort": 1000000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1176,7 +1176,7 @@
       "name": "Detect Evil and Good",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -1262,7 +1262,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1276,7 +1276,7 @@
       "name": "Commune",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/wind-grasp-sky-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You contact your deity or a divine proxy and ask up to three questions that can be answered with a yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.</p><p>Divine beings aren't necessarily omniscient, so you might receive \"unclear\" as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead.</p><p>If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer. The DM makes this roll in secret.</p>",
           "chat": "",
@@ -1362,7 +1362,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1376,7 +1376,7 @@
       "name": "Raise Dead",
       "type": "spell",
       "img": "systems/dnd5e/icons/spells/heal-royal-2.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You return a dead creature you touch to life, provided that it has been dead no longer than 10 days. If the creature's soul is both willing and at liberty to rejoin the body, the creature returns to life with 1 hit point.</p><p>This spell also neutralizes any poisons and cures nonmagical diseases that affected the creature at the time it died. This spell doesn't, however, remove magical diseases, curses, or similar effects; if these aren't first removed prior to casting the spell, they take effect when the creature returns to life. The spell can't return an undead creature to life.</p><p>This spell closes all mortal wounds, but it doesn't restore missing body parts. If the creature is lacking body parts or organs integral for its survival—its head, for instance—the spell automatically fails.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saving throws, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p>",
           "chat": "",
@@ -1467,7 +1467,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -1480,7 +1480,7 @@
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Gladiator",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Gladiator.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -537,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Gladiator",
     "displayName": 20,
     "actorLink": false,
@@ -602,7 +602,7 @@
       "name": "Studded Leather Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-rivited-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p>",
           "chat": "",
@@ -688,7 +688,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -698,7 +698,7 @@
       "name": "Shield",
       "type": "equipment",
       "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
           "chat": "",
@@ -784,7 +784,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -794,7 +794,7 @@
       "name": "Brave",
       "type": "feat",
       "img": "icons/skills/social/intimidation-impressing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The gladiator has advantage on saving throws against being Frightened.</p>",
           "chat": "",
@@ -862,7 +862,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -872,7 +872,7 @@
       "name": "Brute",
       "type": "feat",
       "img": "icons/skills/melee/unarmed-punch-fist.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A melee weapon deals one extra die of its damage when the gladiator hits with it (included in the attack).</p>",
           "chat": "",
@@ -940,7 +940,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -950,7 +950,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The gladiator makes three melee attacks or two ranged attacks.</p>",
           "chat": "",
@@ -1018,7 +1018,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1028,7 +1028,7 @@
       "name": "Spear",
       "type": "weapon",
       "img": "icons/weapons/polearms/spear-flared-worn-grey.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. and range 20/60 ft., one target. Hit: <strong>11 (2d6 + 4) <em>piercing damage</em></strong>, or <strong>13 (2d8 + 4) <em>piercing damage</em></strong> if used with two hands to make a melee attack.</p></section>\n<p>The Gladiator attacks with their Spear.</p>",
           "chat": "",
@@ -1128,7 +1128,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1138,7 +1138,7 @@
       "name": "Shield Bash",
       "type": "weapon",
       "img": "icons/equipment/shield/buckler-wooden-boss-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>9 (2d4 + 4) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a Medium or smaller creature, it must succeed on a  <strong>DC 15 Strength</strong> saving throw or be knocked prone.</p>\n</section>\n<p>The Gladiator attacks with their Shield Bash. If the target is a Medium or smaller creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -1238,7 +1238,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1248,7 +1248,7 @@
       "name": "Parry",
       "type": "feat",
       "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The gladiator adds 3 to its <strong>AC</strong> against one melee Attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.</p>\n</section>\n<p>The gladiator adds 3 to its <strong>AC</strong> against one melee Attack that would hit it.</p>",
           "chat": "",
@@ -1316,7 +1316,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1325,7 +1325,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

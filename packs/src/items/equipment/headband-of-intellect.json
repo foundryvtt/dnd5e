@@ -3,7 +3,7 @@
   "name": "Headband of Intellect",
   "type": "equipment",
   "img": "icons/equipment/finger/ring-cabochon-silver-gold-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>Your Intelligence score is 19 while you wear this headband. It has no effect on you if your Intelligence is already 19 or higher.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 1900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

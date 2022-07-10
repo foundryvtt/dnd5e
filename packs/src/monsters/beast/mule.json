@@ -3,7 +3,7 @@
   "name": "Mule",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Mule.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 14,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Mule",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Beast of Burden",
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mule is considered to be a Large animal for the purpose of determining its carrying capacity.</p>",
           "chat": "",
@@ -668,7 +668,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -678,7 +678,7 @@
       "name": "Sure-Footed",
       "type": "feat",
       "img": "icons/magic/nature/root-vine-entangle-foot-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The mule has<strong> advantage </strong>on Strength and Dexterity saving throws made against effects that would knock it prone.</p>",
           "chat": "",
@@ -746,7 +746,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -756,7 +756,7 @@
       "name": "Hooves",
       "type": "weapon",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Mule attacks with its Hooves.</p>",
           "chat": "",
@@ -856,7 +856,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -865,7 +865,7 @@
   "effects": [],
   "folder": "AljGyVrrsrPBi1QM",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

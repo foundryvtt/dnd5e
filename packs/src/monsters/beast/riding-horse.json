@@ -3,7 +3,7 @@
   "name": "Riding Horse",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/RidingHorse.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "_id": "Bvot05uu8JSqCIlr",
     "name": "Riding Horse",
     "displayName": 20,
@@ -601,7 +601,7 @@
       "name": "Hooves",
       "type": "weapon",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (2d4 + 3) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Riding Horse attacks with its Hooves.</p>",
           "chat": "",
@@ -701,7 +701,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +710,7 @@
   "effects": [],
   "folder": "RSebJT8R6qUqPs4A",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

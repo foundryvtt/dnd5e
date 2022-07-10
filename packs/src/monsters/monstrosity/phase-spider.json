@@ -3,7 +3,7 @@
   "name": "Phase Spider",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/PhaseSpider.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Phase Spider",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Ethereal Jaunt",
       "type": "feat",
       "img": "icons/magic/lightning/orb-ball-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>As a bonus action, the spider can magically shift from the Material Plane to the Ethereal Plane, or vice versa.</p>",
           "chat": "",
@@ -664,7 +664,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -674,7 +674,7 @@
       "name": "Spider Climb",
       "type": "feat",
       "img": "icons/creatures/invertebrates/spider-beetle-runed-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
           "chat": "",
@@ -738,7 +738,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -748,7 +748,7 @@
       "name": "Web Walker",
       "type": "feat",
       "img": "icons/magic/nature/tree-bare-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The spider ignores movement restrictions caused by webbing.</p>",
           "chat": "",
@@ -812,7 +812,7 @@
       "effects": [],
       "folder": null,
       "sort": 700001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -822,7 +822,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>18 (4d8) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p></section><p>The Phase Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
           "chat": "",
@@ -922,7 +922,7 @@
       "effects": [],
       "folder": null,
       "sort": 800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -931,7 +931,7 @@
   "effects": [],
   "folder": "B3XQZKLaaIqhaEFM",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

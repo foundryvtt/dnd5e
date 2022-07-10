@@ -3,7 +3,7 @@
   "name": "Block and Tackle",
   "type": "consumable",
   "img": "icons/weapons/sickles/sickle-hooked-wood.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A set of pulleys with a cable threaded through them and a hook to attach to objects, a block and tackle allows you to hoist up to four times the weight you can normally lift.</p>",
       "chat": "",
@@ -72,7 +72,7 @@
   "effects": [],
   "folder": null,
   "sort": 4000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

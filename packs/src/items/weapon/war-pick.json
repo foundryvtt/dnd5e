@@ -3,7 +3,7 @@
   "name": "War Pick",
   "type": "weapon",
   "img": "icons/weapons/axes/pickaxe-double-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A brutal curved spike mounted on the back of a sturdy haft - designed for puncturing armor with deadly force.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

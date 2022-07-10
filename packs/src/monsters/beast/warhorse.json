@@ -3,7 +3,7 @@
   "name": "Warhorse",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Warhorse.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -538,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Warhorse",
     "displayName": 20,
     "actorLink": false,
@@ -604,7 +604,7 @@
       "name": "Trampling Charge",
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If the horse moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a hooves attack on the same turn, that target must succeed on a <strong>DC 14 Strength saving throw</strong> or be knocked prone. If the target is prone, the horse can make another attack with its hooves against it as a bonus action.</p>\n</section>\n<p>If the horse moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a hooves attack on the same turn, that target must succeed on Strength saving throw.</p>",
           "chat": "",
@@ -672,7 +672,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -682,7 +682,7 @@
       "name": "Hooves",
       "type": "weapon",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Warhorse attacks with its Hooves.</p>",
           "chat": "",
@@ -782,7 +782,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -791,7 +791,7 @@
   "effects": [],
   "folder": "Q7qeMxX30iDI2Wbs",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Akra (Dragonborn Cleric)",
   "type": "character",
   "img": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -576,7 +576,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "flags": {},
     "name": "Akra",
     "displayName": 30,
@@ -641,7 +641,7 @@
       "_id": "Ie7NoXMja9wI6xya",
       "name": "Background: Priest",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<ul>\n<li>Skill Proficiencies: Insight, Religion</li>\n<li>Languages: Two of your choice</li>\n<li>Equipment: A holy symbol, 5 sticks of incense, prayer book, vestments, a set of common clothes, and a pouch containing 15 gp.</li>\n</ul>",
           "chat": "",
@@ -727,7 +727,7 @@
       "img": "icons/sundries/documents/document-torn-diagram-tan.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -735,7 +735,7 @@
       "_id": "Ra2Z1ujre76weR0i",
       "name": "Holy Symbol",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This talisman serves as a spellcasting focus, helping the practitioner to channel arcane, primal, or divine energies.</p><p><strong>Spellcasting Focus. </strong>An arcane focus is a special item designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus, using it in place of any material component which does not list a cost.</p>",
           "chat": "",
@@ -756,7 +756,7 @@
       "img": "icons/commodities/treasure/broach-jewel-gold-blue.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -764,7 +764,7 @@
       "_id": "74K6TAuSg2xzd209",
       "name": "Stick of Incense",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>When blocks of incense cannot be used or a cheaper alternative is required, people often use these to perfume the air, whether for pleasurable or religious purposes.</p>",
           "chat": "",
@@ -788,7 +788,7 @@
       "img": "icons/commodities/wood/bamboo-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -796,7 +796,7 @@
       "_id": "mRxDz7yEtvJgpJsO",
       "name": "Bedroll",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Roll of cloth used by traveller to sleep in.</p>",
           "chat": "",
@@ -827,7 +827,7 @@
       "img": "icons/sundries/flags/banner-worn-blue.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -835,7 +835,7 @@
       "_id": "4FozMXUzyFXaB3Ps",
       "name": "Hempen Rope (50 ft.)",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p>",
           "chat": "",
@@ -914,7 +914,7 @@
       "img": "icons/sundries/survival/rope-wrapped-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -922,7 +922,7 @@
       "_id": "QBmv3SSCaae2xxzT",
       "name": "Tinderbox",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch - or anything else with abundant, exposed fuel - takes an action. Lighting any other fire takes 1 minute.</p>",
           "chat": "",
@@ -946,7 +946,7 @@
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -954,7 +954,7 @@
       "_id": "ehYoem9Oas5sgRUK",
       "name": "Mess Kit",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p>",
           "chat": "",
@@ -985,7 +985,7 @@
       "img": "icons/tools/cooking/fork-steel-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -993,7 +993,7 @@
       "_id": "p9MqgEEsODUHJebP",
       "name": "Waterskin",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A leather hide sewn into an enclosed skin which can contain up to 4 pints of liquid. It weighs 5 pounds when full; a pint of water is approximately 1 pound.</p>",
           "chat": "",
@@ -1065,7 +1065,7 @@
       "img": "icons/sundries/survival/wetskin-leather-purple.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1073,7 +1073,7 @@
       "_id": "3pLaAsrIUSbFeFDh",
       "name": "Backpack",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A backpack can hold one cubic foot or 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
           "chat": "",
@@ -1109,7 +1109,7 @@
       "img": "icons/containers/bags/pack-simple-leather.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1117,7 +1117,7 @@
       "_id": "PzCcpWNIKilXJXMG",
       "name": "Pouch",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch. A pouch can hold up to ⅕ cubic foot or 6 pounds of gear.</p>",
           "chat": "",
@@ -1153,7 +1153,7 @@
       "img": "icons/containers/bags/coinpouch-simple-tan.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1161,7 +1161,7 @@
       "_id": "njMyrs5IpKrRqvI9",
       "name": "Quiver",
       "type": "backpack",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A quiver can hold up to 20 arrows.</p>",
           "chat": "",
@@ -1197,7 +1197,7 @@
       "img": "icons/containers/ammunition/arrows-quiver-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1205,7 +1205,7 @@
       "_id": "l46uaz805Fr9lZvU",
       "name": "Scale Mail",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.</p>",
           "chat": "",
@@ -1293,7 +1293,7 @@
       "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1301,7 +1301,7 @@
       "_id": "k2WyjZI9mN5jclTd",
       "name": "Common Clothes",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Clothes worn by most commoners.</p>",
           "chat": "",
@@ -1389,7 +1389,7 @@
       "img": "icons/equipment/chest/shirt-collared-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1397,7 +1397,7 @@
       "_id": "DNmD3z2JYmCQ203g",
       "name": "Vestments",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Simple or ostentacious wear, often used by priests and other religious figures for use in rituals and ceremonies.</p>",
           "chat": "",
@@ -1485,7 +1485,7 @@
       "img": "systems/dnd5e/icons/items/armor/robe.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1493,7 +1493,7 @@
       "_id": "uuucgo72s3ZdzGqs",
       "name": "Shield",
       "type": "equipment",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p>",
           "chat": "",
@@ -1581,7 +1581,7 @@
       "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1589,7 +1589,7 @@
       "_id": "eT4j7mNbZGHIUOtT",
       "name": "Mace",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A heavy bludgeoning weapon mounted to the end of a metal club. The head features spikes and blades designed to puncture armor and shatter the bones below.</p>",
           "chat": "",
@@ -1692,7 +1692,7 @@
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1700,7 +1700,7 @@
       "_id": "Yb4Gsfcswu3pZnoR",
       "name": "Crossbow Bolt",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>This ammunition is used for all varieties of crossbow and is typically a short metal shaft with a narrow piercing tip.</p>",
           "chat": "",
@@ -1780,7 +1780,7 @@
       "img": "icons/weapons/ammunition/arrows-bodkin-yellow-red.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1788,7 +1788,7 @@
       "_id": "dRVZvSq4EXz8u5sk",
       "name": "Light Crossbow",
       "type": "weapon",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A small crossbow with a wooden haft and a tense cord which is capable of firing a single bolt which can puncture even heavy armor at close range.</p>",
           "chat": "",
@@ -1890,7 +1890,7 @@
       "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1898,7 +1898,7 @@
       "_id": "NnGvgSxLYDmJ2dQg",
       "name": "Guidance",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one ability check of its choice. It can roll the die before or after making the ability check. The spell then ends.</p>",
           "chat": "",
@@ -1990,7 +1990,7 @@
       "img": "systems/dnd5e/icons/spells/haste-sky-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -1998,7 +1998,7 @@
       "_id": "uBh2T53zkVF9TAVK",
       "name": "Sacred Flame",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.</p><p>The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
           "chat": "",
@@ -2093,7 +2093,7 @@
       "img": "systems/dnd5e/icons/spells/beam-orange-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2101,7 +2101,7 @@
       "_id": "s6BnEHmPxHUILOGY",
       "name": "Thaumaturgy",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You create one of the following magical effects within range:</p>\n<ul>\n<li>Your voice booms up to three times as loud as normal for 1 minute.</li>\n<li>You cause flames to flicker, brighten, dim, or change color for 1 minute.</li>\n<li>You cause harmless tremors in the ground for 1 minute.</li>\n<li>You create a sound that originates from a point of your choice within range.</li>\n<li>You cause an unlocked door or window to fly open or slam shut.</li>\n<li>You alter the appearance of your eyes for 1 minute.</li>\n</ul>\n<p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
           "chat": "",
@@ -2193,7 +2193,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-royal-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2201,7 +2201,7 @@
       "_id": "3Y12TEquZ0Vahjp4",
       "name": "Bless",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll 1d4 and add the number rolled to the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
           "chat": "",
@@ -2336,7 +2336,7 @@
         }
       ],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2344,7 +2344,7 @@
       "_id": "zE8iRfvZzzkBRyNq",
       "name": "Cure Wounds",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</p>",
           "chat": "",
@@ -2440,7 +2440,7 @@
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2448,7 +2448,7 @@
       "_id": "0aSxNKhMIZNukfYu",
       "name": "Sanctuary",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a Fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
           "chat": "",
@@ -2539,7 +2539,7 @@
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2547,7 +2547,7 @@
       "_id": "RktqEnEKCfJFX6lb",
       "name": "Command",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
           "chat": "",
@@ -2638,7 +2638,7 @@
       "img": "systems/dnd5e/icons/spells/explosion-magenta-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2646,7 +2646,7 @@
       "_id": "UtOW9aMCSRpBq7bm",
       "name": "Create or Destroy Water",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>You either create or destroy water.</p><p><strong>Create Water.</strong> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range.</p><p><strong>Destroy Water.</strong> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.</p><p><strong>Higher Levels.&nbsp;</strong>When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.</p>",
           "chat": "",
@@ -2738,7 +2738,7 @@
       "img": "systems/dnd5e/icons/spells/wind-blue-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2746,7 +2746,7 @@
       "_id": "sSeKgFZ2Vy04Ylpd",
       "name": "Bane",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.</p>\n<p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</p>",
           "chat": "",
@@ -2880,7 +2880,7 @@
         }
       ],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2888,7 +2888,7 @@
       "_id": "qDRrsexxXkGgrPwk",
       "name": "Detect Evil and Good",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you know if there is an aberration, celestial, elemental, fey, fiend, or undead within 30 feet of you, as well as where the creature is located. Similarly, you know if there is a place or object within 30 feet of you that has been magically consecrated or desecrated.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -2980,7 +2980,7 @@
       "img": "systems/dnd5e/icons/spells/air-burst-sky-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -2988,7 +2988,7 @@
       "_id": "ETkAIY1M1daUtN59",
       "name": "Detect Magic",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -3080,7 +3080,7 @@
       "img": "systems/dnd5e/icons/spells/light-blue-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3088,7 +3088,7 @@
       "_id": "pyo9tvOJwNTB1kxn",
       "name": "Detect Poison and Disease",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you. You also identify the kind of poison, poisonous creature, or disease in each case.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "chat": "",
@@ -3180,7 +3180,7 @@
       "img": "systems/dnd5e/icons/spells/air-burst-jade-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3188,7 +3188,7 @@
       "_id": "1sm00rrZ5bvUhwxG",
       "name": "Guiding Bolt",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</p>",
           "chat": "",
@@ -3284,7 +3284,7 @@
       "img": "systems/dnd5e/icons/spells/fireball-sky-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3292,7 +3292,7 @@
       "_id": "SU3BfRRtmHIiHhbR",
       "name": "Healing Word",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.</p><p><strong>Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d4 for each slot level above 1st.</p>",
           "chat": "",
@@ -3388,7 +3388,7 @@
       "img": "systems/dnd5e/icons/spells/heal-jade-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3396,7 +3396,7 @@
       "_id": "EkWX2kgmkPYtVMyZ",
       "name": "Inflict Wounds",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Make a melee spell Attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.</p>",
           "chat": "",
@@ -3492,7 +3492,7 @@
       "img": "systems/dnd5e/icons/spells/rip-jade-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3500,7 +3500,7 @@
       "_id": "TNxLsKRriJmXKVxa",
       "name": "Protection from Evil and Good",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Until the spell ends, one willing creature you touch is protected against certain types of creatures: aberrations, celestials, elementals, fey, fiends, and undead.</p><p>The protection grants several benefits. Creatures of those types have disadvantage on attack rolls against the target. The target also can't be charmed, frightened, or possessed by them. If the target is already charmed, frightened, or possessed by such a creature, the target has advantage on any new saving throw against the relevant effect.</p>",
           "chat": "",
@@ -3592,7 +3592,7 @@
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3600,7 +3600,7 @@
       "_id": "RP4tFwCKWdxyu6Ir",
       "name": "Purify Food and Drink",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>All nonmagical food and drink within a 5-foot-radius sphere centered on a point of your choice within range is purified and rendered free of poison and disease.</p>",
           "chat": "",
@@ -3692,7 +3692,7 @@
       "img": "systems/dnd5e/icons/spells/light-jade-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3700,7 +3700,7 @@
       "_id": "1qiq0PXvtZ0scBk3",
       "name": "Shield of Faith",
       "type": "spell",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.</p>",
           "chat": "",
@@ -3792,7 +3792,7 @@
       "img": "systems/dnd5e/icons/spells/protect-sky-2.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3800,7 +3800,7 @@
       "_id": "ngTZ5FkHGxsYo2Ie",
       "name": "Rations",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
           "chat": "",
@@ -3872,7 +3872,7 @@
       "img": "icons/consumables/meat/hock-leg-pink-brown.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3880,7 +3880,7 @@
       "_id": "sa2Az2SjUNScdr5T",
       "name": "Torch",
       "type": "consumable",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
           "chat": "",
@@ -3964,7 +3964,7 @@
       "img": "icons/sundries/lights/torch-black.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -3972,7 +3972,7 @@
       "_id": "1qgVPt1uOptTVby1",
       "name": "Prayer Book",
       "type": "loot",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A book containing prayers and incantations dedicated to a specific power for the faithful to follow.</p>",
           "chat": "",
@@ -3996,7 +3996,7 @@
       "img": "icons/sundries/books/book-backed-silver-red.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -4004,7 +4004,7 @@
       "_id": "0geQXeMWTg6cbDvQ",
       "name": "Breath Weapon",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<div title=\"Page 5\">\n<p>You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p>\n<div title=\"Page 6\">\n<div>\n<div>\n<p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><p><em><strong>Foundry Note: </strong>Edit the Details for this feat, so that the damage type, saving throw, and area of effect match those of your Draconic Ancestry.</em></p>\n</div>\n</div>\n</div>\n</div>",
           "chat": "",
@@ -4091,7 +4091,7 @@
       "img": "icons/magic/acid/projectile-smoke-glowing.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -4099,7 +4099,7 @@
       "_id": "DPYl8D5QtcRVH5XX",
       "name": "Damage Resistance",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<div title=\"Page 6\">\n<div>\n<div>\n<p>You have resistance to the damage type associated with your draconic ancestry.</p>\n</div>\n</div>\n</div>",
           "chat": "",
@@ -4166,7 +4166,7 @@
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -4174,7 +4174,7 @@
       "_id": "kJbsSe2Dht2Tc7ux",
       "name": "Dragonborn",
       "type": "feat",
-      "data": {
+      "system": {
         "description": {
           "value": "<div title=\"Page 5\">\n<div>\n<div>\n<p><em>Your draconic heritage manifests in a variety of traits you share with other dragonborn. </em></p><p><em><strong>Ability Score Increase. </strong></em>Your Strength score increases by 2, and your Charisma score increases by 1.</p><p><em><strong>Age.</strong></em> Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-­year-­old human child by the age of 3, and reach adulthood by 15. They live to be around 80.</p><p><em><strong>Alignment.</strong></em> Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil. Most dragonborn are good, but those who side with evil can be terrible villains.</p><p><em><strong>Size.</strong></em> Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p><em><strong>Draconic Ancestry.</strong></em> You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.</p>\n</div>\n</div>\n</div>\n<table>\n<thead>\n<tr>\n<td>Dragon</td>\n<td>Damage Type</td>\n<td>Breath Weapon</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Black</td>\n<td>Acid</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>Lightning</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Brass</td>\n<td>Fire</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Bronze</td>\n<td>Lightning</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Copper</td>\n<td>Acid</td>\n<td>5 by 30 ft. line (Dex. save)</td>\n</tr>\n<tr>\n<td>Gold</td>\n<td>Fire</td>\n<td>15 ft. cone (Dex. save)</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>Poison</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>Fire</td>\n<td>15 ft. cone (Dex. save)</td>\n</tr>\n<tr>\n<td>Silver</td>\n<td>Cold</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n<tr>\n<td>White</td>\n<td>Cold</td>\n<td>15 ft. cone (Con. save)</td>\n</tr>\n</tbody>\n</table>\n\n<div title=\"Page 5\">\n<div>\n<div>\n<p><em><strong>Breath Weapon. </strong></em>@Compendium[dnd5e.races.KL7wx9Q8XNJQir0k]{Breath Weapon} You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation.</p><p>When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level.</p>\n<div title=\"Page 6\">\n<div>\n<div>\n<p>After you use your breath weapon, you can't use it again until you complete a short or long rest.</p><p><em><strong>Damage Resistance.</strong></em> @Compendium[dnd5e.races.XxCuhIk6hAu6rNB0]{Damage Resistance} You have resistance to the damage type associated with your draconic ancestry.</p><p><em><strong>Languages. </strong></em>You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants. </p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div title=\"Page 5\">\n<div>\n<div> </div>\n</div>\n</div>",
           "chat": "",
@@ -4241,7 +4241,7 @@
       "img": "systems/dnd5e/icons/spells/evil-eye-red-1.jpg",
       "effects": [],
       "folder": null,
-      "permission": {
+      "ownership": {
         "default": 0
       }
     },
@@ -4250,7 +4250,7 @@
       "name": "Cleric",
       "type": "class",
       "img": "icons/magic/life/ankh-gold-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>As a cleric, you gain the following class features.</p>\n<h3>Hit Points</h3>\n<p><strong>Hit Dice:</strong> 1d8 per cleric level<br /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) + your Constitution modifier per cleric level after 1st</p>\n<h3>Proficiencies</h3>\n<p><strong>Armor:</strong> Light armor, medium armor, shields<br /><strong>Weapons:</strong> Simple weapons<br /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong> Wisdom, Charisma<br /><strong>Skills:</strong> Choose two from History, Insight, Medicine, Persuasion, and Religion</p>\n<h3>Equipment</h3>\n<p>You start with the following equipment, in addition to the equipment granted by your background:</p>\n<ul>\n<li>(a) a mace or (b) a warhammer (if proficient)</li>\n<li>(a) scale mail, (b) leather armor, or (c) chain mail (if proficient)</li>\n<li>(a) a light crossbow and 20 bolts or (b) any simple weapon</li>\n<li>(a) a priest's pack or (b) an explorer's pack</li>\n<li>A shield and a holy symbol</li>\n</ul>\n<h1>Cleric Advancement</h1>\n<table>\n<thead>\n<tr>\n<td>Level</td>\n<td>Proficiency Bonus</td>\n<td>Features</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.v4gKwLhAq9vuqza7]{Spellcasting} , @Compendium[dnd5e.classfeatures.x637K2Icp2ZFM1TB]{Divine Domain}</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.YpiLQEKGalROn7iJ]{Channel Divinity (1/rest)}, Divine Domain feature</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>+2</td>\n<td>2nd Level Spell Slot</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>+2</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>+3</td>\n<td>3rd Level Spell Slot, @Compendium[dnd5e.classfeatures.NMy4piwXIpLjYbRE]{Destroy Undead (CR 1/2)}</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.YpiLQEKGalROn7iJ]{Channel Divinity (2/rest)}, Divine Domain feature</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>+3</td>\n<td>4th Level Spell Slot</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>+3</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{ASI}, @Compendium[dnd5e.classfeatures.NMy4piwXIpLjYbRE]{Destroy Undead (CR 1)}, Divine Domain feature</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>+4</td>\n<td>5th Level Spell Slot</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.eVXqHn0ojWrEuYGU]{Divine Intervention}</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>+4</td>\n<td>6th Level Spell Slot, @Compendium[dnd5e.classfeatures.NMy4piwXIpLjYbRE]{Destroy Undead (CR 2)}</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>+4</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>+5</td>\n<td>7th Level Spell Slot</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.NMy4piwXIpLjYbRE]{Destroy Undead (CR 3)}</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>+5</td>\n<td>8th Level Spell Slot</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>+5</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>+6</td>\n<td>9th Level Spell Slot, @Compendium[dnd5e.classfeatures.NMy4piwXIpLjYbRE]{Destroy Undead (CR 4)}, Divine Domain feature</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.YpiLQEKGalROn7iJ]{Channel Divinity (3/rest)}</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.s0Cc2zcX0JzIgam5]{Ability Score Improvement}</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>+6</td>\n<td>@Compendium[dnd5e.classfeatures.eVXqHn0ojWrEuYGU]{Divine Intervention (Automatic Success)}</td>\n</tr>\n</tbody>\n</table>\n<h1>Divine Domains</h1>\n<p>@Compendium[dnd5e.subclasses.H3RYLGqCiqm8BP3q]{Life Domain}</p>",
           "chat": "",
@@ -4416,7 +4416,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -4430,7 +4430,7 @@
       "name": "Spellcasting (Cleric)",
       "type": "feat",
       "img": "icons/magic/life/ankh-gold-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>As a conduit for divine power, you can cast cleric spells.</p>\n<h3>Cantrips</h3>\n<p>At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.</p>\n<h3>Preparing and Casting Spells</h3>\n<p>The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p><p>You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots.</p><p>For example, if you are a 3rd-level cleric, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p><p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.</p>\n<table border=\"1\">\n<thead>\n<tr>\n<td rowspan=\"2\">Level</td>\n<td rowspan=\"2\">Cantrips Known</td>\n<td colspan=\"9\">—Spell Slots per Spell Level—</td>\n</tr>\n<tr>\n<td>1st</td>\n<td>2nd</td>\n<td>3rd</td>\n<td>4th</td>\n<td>5th</td>\n<td>6th</td>\n<td>7th</td>\n<td>8th</td>\n<td>9th</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>2nd</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>3</td>\n<td>4</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>6th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>4</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>10th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>11th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>12th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>13th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>14th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n<td>-</td>\n</tr>\n<tr>\n<td>15th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>16th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>-</td>\n</tr>\n<tr>\n<td>17th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>18th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>19th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n<td>1</td>\n</tr>\n<tr>\n<td>20th</td>\n<td>5</td>\n<td>4</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>3</td>\n<td>2</td>\n<td>2</td>\n<td>1</td>\n<td>1</td>\n</tr>\n</tbody>\n</table>\n<h3>Spellcasting Ability</h3>\n<p>Wisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one.</p><p><strong>Spell save DC</strong>= 8 + your proficiency bonus + your Wisdom modifier</p><p><strong>Spell attack modifier</strong> = your proficiency bonus + your Wisdom modifier</p>\n<h3>Ritual Casting</h3>\n<p>You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.</p>\n<h3>Spellcasting Focus</h3>\n<p>You can use a holy symbol (see @Compendium[dnd5e.rules.bogWrnJqoNlBd0O8]{Adventuring Gear}) as a spellcasting focus for your cleric spells.</p>",
           "chat": "",
@@ -4494,7 +4494,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -4509,7 +4509,7 @@
       "name": "Divine Domain",
       "type": "feat",
       "img": "icons/magic/nature/tree-spirit-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Choose one domain related to your deity, such as Life. Your choice grants you domain spells and other features when you choose it at 1st level. It also grants you additional ways to use Channel Divinity when you gain that feature at 2nd level, and additional benefits at 6th, 8th, and 17th levels.</p>\n<h3>Domain Spells</h3>\n<p>Each domain has a list of spells—its domain spells—that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn't count against the number of spells you can prepare each day.</p><p>If you have a domain spell that doesn't appear on the cleric spell list, the spell is nonetheless a cleric spell for you.</p>",
           "chat": "",
@@ -4573,7 +4573,7 @@
       "effects": [],
       "folder": null,
       "sort": 800001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -4588,7 +4588,7 @@
       "name": "Life Domain",
       "type": "subclass",
       "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The Life domain focuses on the vibrant positive energy—one of the fundamental forces of the universe—that sustains all life. The gods of life promote vitality and health through healing the sick and wounded, caring for those in need, and driving away the forces of death and undeath. Almost any non-­evil deity can claim influence over this domain, particularly agricultural deities (such as Chauntea, Arawai, and Demeter), sun gods (such as Lathander, Pelor, and Re-­Horakhty), gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of home and community (such as Hestia, Hathor, and Boldrei).</p>\n<h2>Life Domain Spells</h2>\n<table border=\"1\">\n<thead>\n<tr>\n<td>Cleric Level</td>\n<td>Spells</td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1st</td>\n<td>@Compendium[dnd5e.spells.8dzaICjGy6mTUaUr]{Bless}, @Compendium[dnd5e.spells.uUWb1wZgtMou0TVP]{Cure Wounds}</td>\n</tr>\n<tr>\n<td>3rd</td>\n<td>@Compendium[dnd5e.spells.F0GsG0SJzsIOacwV]{Lesser Restoration}, @Compendium[dnd5e.spells.JbxsYXxSOTZbf9I0]{Spiritual Weapon}</td>\n</tr>\n<tr>\n<td>5th</td>\n<td>@Compendium[dnd5e.spells.ZU9d6woBdUP8pIPt]{Beacon of Hope}, @Compendium[dnd5e.spells.LmRHHMtplpxr9fX6]{Revivify}</td>\n</tr>\n<tr>\n<td>7th</td>\n<td>@Compendium[dnd5e.spells.VtCXMdyM6mAdIJZb]{Death Ward}, @Compendium[dnd5e.spells.TgHsuhNasPbhu8MO]{Guardian of Faith}</td>\n</tr>\n<tr>\n<td>9th</td>\n<td>@Compendium[dnd5e.spells.Pyzmm8R7rVsNAPsd]{Mass Cure Wounds}, @Compendium[dnd5e.spells.AGFMPAmuzwWO6Dfz]{Raise Dead}</td>\n</tr>\n</tbody>\n</table>",
           "chat": "",
@@ -4679,7 +4679,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -4693,7 +4693,7 @@
       "name": "Bonus Proficiency (Life Domain)",
       "type": "feat",
       "img": "icons/equipment/chest/breastplate-layered-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>When you choose this domain at 1st level, you gain proficiency with heavy armor.</p>",
           "chat": "",
@@ -4778,7 +4778,7 @@
       ],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -4793,7 +4793,7 @@
       "name": "Disciple of Life",
       "type": "feat",
       "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Starting at 1st level, your healing spells are more effective.</p><p>Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell's level.</p>",
           "chat": "",
@@ -4857,7 +4857,7 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {
@@ -4894,7 +4894,7 @@
   ],
   "folder": null,
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

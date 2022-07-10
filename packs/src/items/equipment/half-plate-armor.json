@@ -3,7 +3,7 @@
   "name": "Half Plate Armor",
   "type": "equipment",
   "img": "icons/equipment/chest/breastplate-layered-steel-black.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Half plate consists of shaped metal plates that cover most of the wearer's body. It does not include leg protection beyond simple greaves that are attached with leather straps.</p>",
       "chat": "",
@@ -88,7 +88,7 @@
   "effects": [],
   "folder": null,
   "sort": 700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

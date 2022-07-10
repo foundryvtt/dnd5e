@@ -3,7 +3,7 @@
   "name": "Potion of Speed",
   "type": "consumable",
   "img": "icons/consumables/potions/potion-bottle-corked-fancy-orange.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>The potion's yellow fluid is streaked with black and swirls on its own.</em></p>\n<p>When you drink this potion, you gain the effect of the @Compendium[dnd5e.spells.Szvk5FEVQW3uhJi5]{Haste} spell for 1 minute (no concentration required).</p>\n<p> </p>",
       "chat": "",
@@ -75,7 +75,7 @@
   "effects": [],
   "folder": null,
   "sort": 3200000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

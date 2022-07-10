@@ -3,7 +3,7 @@
   "name": "Belt of Stone Giant Strength",
   "type": "equipment",
   "img": "icons/equipment/waist/belt-armored-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing this belt, your Strength score changes to 23. If your Strength is already equal to or greater than the belt's score, the item has no effect on you.</p>\n<p>The Belt of Stone Giant Strength and the Belt of Frost Giant Strength look different, but they have the same effect.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 3200000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Giant Lizard",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantLizard.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 15,
@@ -536,7 +536,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Lizard",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Giant Lizard attacks with its Bite.</p>",
           "chat": "",
@@ -701,7 +701,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +710,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

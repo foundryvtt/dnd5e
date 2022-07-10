@@ -3,7 +3,7 @@
   "name": "Knight",
   "type": "npc",
   "img": "systems/dnd5e/tokens/humanoid/Knight.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -537,7 +537,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Knight",
     "displayName": 20,
     "actorLink": false,
@@ -602,7 +602,7 @@
       "name": "Plate Armor",
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-cuirass-steel-grey.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body.</p>",
           "chat": "",
@@ -688,7 +688,7 @@
       "effects": [],
       "folder": null,
       "sort": 600001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -698,7 +698,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The knight makes two melee attacks.</p>",
           "chat": "",
@@ -766,7 +766,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -776,7 +776,7 @@
       "name": "Greatsword",
       "type": "weapon",
       "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>.</p></section>\n<p>The Knight attacks with its Greatsword.</p>",
           "chat": "",
@@ -876,7 +876,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -886,7 +886,7 @@
       "name": "Heavy Crossbow",
       "type": "weapon",
       "img": "icons/weapons/crossbows/crossbow-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: <strong>5 (1d10) <em>piercing damage</em></strong>.</p></section>\n<p>The Knight attacks with its Heavy Crossbow.</p>",
           "chat": "",
@@ -986,7 +986,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -996,7 +996,7 @@
       "name": "Leadership",
       "type": "feat",
       "img": "icons/sundries/documents/document-sealed-red-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 ft. of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated.</p>",
           "chat": "",
@@ -1064,7 +1064,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1074,7 +1074,7 @@
       "name": "Parry",
       "type": "feat",
       "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>The knight adds 2 to its <strong>AC</strong> against one melee Attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.</p>\n</section>\n<p>The knight adds 2 to its <strong>AC</strong> against one melee Attack that would hit it.</p>",
           "chat": "",
@@ -1142,7 +1142,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1152,7 +1152,7 @@
       "name": "Brave",
       "type": "feat",
       "img": "icons/skills/social/intimidation-impressing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The knight has<strong> advantage </strong>on saving throws against being frightened.</p>",
           "chat": "",
@@ -1217,7 +1217,7 @@
       "effects": [],
       "folder": null,
       "sort": 500001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1226,7 +1226,7 @@
   "effects": [],
   "folder": "3IciKJ8pYVvyuEok",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

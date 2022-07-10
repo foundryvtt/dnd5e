@@ -3,7 +3,7 @@
   "name": "Forgery Kit",
   "type": "tool",
   "img": "icons/sundries/documents/envelope-sealed-red-tan.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>This small box contains a variety of papers and parchments, pens and inks, seals and sealing wax, gold and silver leaf, and other supplies necessary to create convincing forgeries of physical documents. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to create a physical forgery of a document.</p>",
       "chat": "",
@@ -29,7 +29,7 @@
   "effects": [],
   "folder": null,
   "sort": 2900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

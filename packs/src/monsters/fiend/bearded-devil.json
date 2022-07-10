@@ -3,7 +3,7 @@
   "name": "Bearded Devil",
   "type": "npc",
   "img": "systems/dnd5e/tokens/fiend/BeardedDevil.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 16,
@@ -545,7 +545,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Bearded Devil",
     "displayName": 20,
     "actorLink": false,
@@ -610,7 +610,7 @@
       "name": "Devil's Sight",
       "type": "feat",
       "img": "icons/magic/perception/eye-slit-pink.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>Magical darkness doesn't impede the devil's Darkvision.</p>",
           "chat": "",
@@ -678,7 +678,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -688,7 +688,7 @@
       "name": "Magic Resistance",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The devil has advantage on saving throws against spells and other magical effects.</p>",
           "chat": "",
@@ -756,7 +756,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -766,7 +766,7 @@
       "name": "Steadfast",
       "type": "feat",
       "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The devil can't be frightened while it can see an allied creature <strong>within 30 feet</strong> of it.</p>",
           "chat": "",
@@ -834,7 +834,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -844,7 +844,7 @@
       "name": "Beard",
       "type": "weapon",
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>\n<p>The target must succeed on a  <strong>DC 12 Constitution</strong> saving throw or be poisoned for 1 minute. While poisoned in this way, the target can't regain hit points. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>The Bearded Devil attacks with its Beard. The target must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
           "chat": "",
@@ -944,7 +944,7 @@
       "effects": [],
       "folder": null,
       "sort": 200001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -954,7 +954,7 @@
       "name": "Glaive",
       "type": "weapon",
       "img": "icons/weapons/polearms/halberd-crescent-glowing.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>slashing damage</em></strong>.</p>\n<p>If the target is a creature other than an undead or a construct, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw or lose 5 (1d10) hit points at the start of each of its turns due to an infernal wound.</p>\n<p>Each time the devil hits the wounded target with this attack, the damage dealt by the wound increases by 5 (1d10). Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing.</p>\n</section>\n<p>The Bearded Devil attacks with its Glaive. If the target is a creature other than an undead or a construct, it must make a <strong>Constitution</strong> saving throw. Any creature can take an action to stanch the wound with a successful Wisdom (Medicine) check.</p>",
           "chat": "",
@@ -1054,7 +1054,7 @@
       "effects": [],
       "folder": null,
       "sort": 300001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1064,7 +1064,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The devil makes two attacks: one with its beard and one with its glaive.</p>",
           "chat": "",
@@ -1132,7 +1132,7 @@
       "effects": [],
       "folder": null,
       "sort": 400001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1141,7 +1141,7 @@
   "effects": [],
   "folder": "NBkyFFhtTwdmFhsp",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

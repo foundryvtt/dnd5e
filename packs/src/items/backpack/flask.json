@@ -3,7 +3,7 @@
   "name": "Flask",
   "type": "backpack",
   "img": "icons/consumables/drinks/tea-jug-gourd-brown.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A flask holds 1 pint of liquid.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 3900000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

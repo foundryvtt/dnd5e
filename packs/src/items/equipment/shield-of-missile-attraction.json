@@ -3,7 +3,7 @@
   "name": "Shield of Missile Attraction",
   "type": "equipment",
   "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>(Requires attunement)</em></p>\n<p>While holding this shield, you have resistance to damage from ranged weapon attacks.</p>\n<p><strong>Curse</strong>. This shield is cursed. Attuning to it curses you until you are targeted by the @Compendium[dnd5e.spells.XZhdgVK3cLoxNCQl]{Remove Curse} spell or similar magic. Removing the shield fails to end the curse on you. Whenever a ranged weapon attack is made against a target within 10 feet of you, the curse causes you to become the target instead.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 2600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

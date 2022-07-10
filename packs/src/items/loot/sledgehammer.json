@@ -3,7 +3,7 @@
   "name": "Sledgehammer",
   "type": "loot",
   "img": "icons/tools/smithing/hammer-sledge-steel-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A tool with a large, flat, often metal head, attached to a long handle. </p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 3700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

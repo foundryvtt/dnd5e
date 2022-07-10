@@ -3,7 +3,7 @@
   "name": "Shield Guardian",
   "type": "npc",
   "img": "systems/dnd5e/tokens/construct/ShieldGuardian.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -545,7 +545,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Shield Guardian",
     "displayName": 20,
     "actorLink": false,
@@ -610,7 +610,7 @@
       "name": "Bound",
       "type": "feat",
       "img": "icons/equipment/neck/choker-chain-thick-silver.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The shield guardian is magically bound to an amulet. As long as the guardian and its amulet are on the same plane of existence, the amulet's wearer can telepathically call the guardian to travel to it, and the guardian knows the distance and direction to the amulet. </p><p>If the guardian is <strong>within 60 feet</strong> of the amulet's wearer, half of any damage the wearer takes (rounded up) is transferred to the guardian.</p></section><p>The shield guardian is magically bound to an amulet. </p>",
           "chat": "",
@@ -675,7 +675,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -685,7 +685,7 @@
       "name": "Regeneration",
       "type": "feat",
       "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>The shield guardian regains <strong>10 hit points</strong> at the start of its turn if it has at least <strong>1 hit point</strong>.</p></section><p>The shield guardian regains <strong>10 hit points</strong> at the start of its turn.</p>",
           "chat": "",
@@ -755,7 +755,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -765,7 +765,7 @@
       "name": "Spell Storing",
       "type": "feat",
       "img": "icons/magic/defensive/shield-barrier-blades-teal.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>A spellcaster who wears the shield guardian's amulet can cause the guardian to store one spell of 4th level or lower. To do so, the wearer must cast the spell on the guardian. The spell has no effect but is stored within the guardian. When commanded to do so by the wearer or when a situation arises that was predefined by the spellcaster, the guardian casts the stored spell with any parameters set by the original caster, requiring no components. When the spell is cast or a new spell is stored, any previously stored spell is lost.</p>",
           "chat": "",
@@ -830,7 +830,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -840,7 +840,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The guardian makes two fist attacks.</p>",
           "chat": "",
@@ -905,7 +905,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -915,7 +915,7 @@
       "name": "Fist",
       "type": "weapon",
       "img": "icons/magic/fire/flame-burning-fist-strike.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Shield Guardian attacks with its Fist.</p>",
           "chat": "",
@@ -1015,7 +1015,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1025,7 +1025,7 @@
       "name": "Shield",
       "type": "feat",
       "img": "icons/equipment/shield/oval-wooden-boss-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>When a creature makes an Attack against the wearer of the guardian's Amulet, the Guardian grants a +2 bonus to the wearer's AC if the Guardian is within 5 feet of the wearer.</p>",
           "chat": "",
@@ -1090,7 +1090,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1099,7 +1099,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

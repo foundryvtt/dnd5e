@@ -3,7 +3,7 @@
   "name": "Mace",
   "type": "weapon",
   "img": "icons/weapons/maces/mace-round-spiked-black.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A heavy bludgeoning weapon mounted to the end of a metal club. The head features spikes and blades designed to puncture armor and shatter the bones below.</p>",
       "chat": "",
@@ -102,7 +102,7 @@
   "effects": [],
   "folder": null,
   "sort": 1000000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

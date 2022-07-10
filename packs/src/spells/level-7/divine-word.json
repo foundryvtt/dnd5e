@@ -1,11 +1,11 @@
 {
   "_id": "T1vpZLam7LezjToj",
   "name": "Divine Word",
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "type": "spell",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>You utter a divine word, imbued with the power that shaped the world at the dawn of Creation. Choose any number of creatures you can see within range. Each creature that can hear you must make a Charisma saving throw. On a failed save, a creature suffers an effect based on its current hit points:</p>\n<ul>\n<li>50 Hit Points or fewer: Deafened for 1 minute</li>\n<li>40 Hit Points or fewer: Deafened and Blinded for 10 minutes</li>\n<li>30 Hit Points or fewer: Blinded, Deafened, and Stunned for 1 Hour</li>\n<li>20 Hit Points or fewer: killed instantly</li>\n</ul>\n<p>Regardless of its current Hit Points, a Celestial, an elemental, a fey, or a fiend that fails its save is forced back to its plane of Origin (if it isn&rsquo;t there already) and can&rsquo;t return to your current plane for 24 hours by any means short of a wish spell.</p>",
       "chat": "",

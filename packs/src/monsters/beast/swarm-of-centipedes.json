@@ -3,7 +3,7 @@
   "name": "Swarm of Centipedes",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/SwarmCentipedes.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 3,
@@ -548,7 +548,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Swarm of Centipedes",
     "displayName": 20,
     "actorLink": false,
@@ -613,7 +613,7 @@
       "name": "Swarm",
       "type": "feat",
       "img": "icons/creatures/invertebrates/fly-wasp-mosquito-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny insect. The swarm can't regain<strong> hit points</strong> or gain temporary<strong> hit points</strong>.</p>",
           "chat": "",
@@ -681,7 +681,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -691,7 +691,7 @@
       "name": "Bites",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>0 ft.,</strong> one target in the swarm's space. Hit: <strong>10 (4d4) <em>piercing damage</em></strong>, or <strong>5 (2d4) <em>piercing damage</em></strong> if the swarm has half of its hit points or fewer.</p>\n<p>A creature reduced to 0 hit points by a swarm of centipedes is stable but poisoned for 1 hour, even after regaining hit points, and paralyzed while poisoned in this way.</p>\n</section>\n<p>The Swarm of Centipedes attacks with a flurry of Bites.</p>",
           "chat": "",
@@ -791,7 +791,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -800,7 +800,7 @@
   "effects": [],
   "folder": "rjehyX85FDoydEwV",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

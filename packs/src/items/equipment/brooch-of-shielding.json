@@ -3,7 +3,7 @@
   "name": "Brooch of Shielding",
   "type": "equipment",
   "img": "icons/equipment/neck/pendant-bronze-gem-blue.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>Wondrous item, (requires attunement)</em></p>\n<p>While wearing this brooch, you have resistance to force damage, and you have immunity to damage from the <em>@Compendium[dnd5e.spells.41JIhpDyM9Anm7cs]{Magic Missile}</em> spell.</p>",
       "chat": "",
@@ -90,7 +90,7 @@
   "effects": [],
   "folder": null,
   "sort": 2400000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

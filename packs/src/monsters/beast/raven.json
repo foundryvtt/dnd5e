@@ -3,7 +3,7 @@
   "name": "Raven",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Raven.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 2,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Raven",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Mimicry",
       "type": "feat",
       "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The raven can mimic simple sounds it has heard, such as a person whispering, a baby crying, or an animal chittering. A creature that hears the sounds can tell they are imitations with a successful Wisdom (Insight) check.</p>",
           "chat": "",
@@ -668,7 +668,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -678,7 +678,7 @@
       "name": "Beak",
       "type": "weapon",
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p></section>\n<p>The Raven attacks with its Beak.</p>",
           "chat": "",
@@ -778,7 +778,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -787,7 +787,7 @@
   "effects": [],
   "folder": "RSebJT8R6qUqPs4A",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

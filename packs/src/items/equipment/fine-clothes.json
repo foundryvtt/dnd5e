@@ -3,7 +3,7 @@
   "name": "Fine Clothes",
   "type": "equipment",
   "img": "icons/equipment/back/cloak-heavy-fur-blue.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Set of clothes designed specifically to be expensive and show it.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 700000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

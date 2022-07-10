@@ -3,7 +3,7 @@
   "name": "Giant Ape",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/GiantApe.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 23,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Giant Ape",
     "displayName": 20,
     "actorLink": false,
@@ -601,7 +601,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The ape makes two fist attacks.</p>",
           "chat": "",
@@ -669,7 +669,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -679,7 +679,7 @@
       "name": "Fist",
       "type": "weapon",
       "img": "icons/magic/fire/flame-burning-fist-strike.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>22 (3d10 + 6) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Giant Ape attacks with its Fist.</p>",
           "chat": "",
@@ -779,7 +779,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -789,7 +789,7 @@
       "name": "Rock",
       "type": "weapon",
       "img": "systems/dnd5e/icons/spells/rock-plain-1.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +9 to hit, range 50/100 ft., one target. Hit: <strong>30 (7d6 + 6) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Giant Ape attacks with its Rock.</p>",
           "chat": "",
@@ -889,7 +889,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -898,7 +898,7 @@
   "effects": [],
   "folder": "kdTgTyvlimxTW5xZ",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

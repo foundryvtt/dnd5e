@@ -3,7 +3,7 @@
   "name": "Vicious Sling",
   "type": "weapon",
   "img": "icons/weapons/slings/slingshot-wood.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A flexible lash of leather affixed to a wooden handle which is capable of flinging rocks or metal bullets with deadly velocity.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 1600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

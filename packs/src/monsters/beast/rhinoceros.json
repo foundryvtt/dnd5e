@@ -3,7 +3,7 @@
   "name": "Rhinoceros",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/Rhinoceros.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 21,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Rhinoceros",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Charge",
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra <strong>9 (2d8) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 15 Strength</strong> saving throw or be knocked prone.</p>\n</section>\n<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes extra <em>bludgeoning damage</em>. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
           "chat": "",
@@ -671,7 +671,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -681,7 +681,7 @@
       "name": "Gore",
       "type": "weapon",
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Rhinoceros attacks with its Gore.</p>",
           "chat": "",
@@ -781,7 +781,7 @@
       "effects": [],
       "folder": null,
       "sort": 100001,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -790,7 +790,7 @@
   "effects": [],
   "folder": "RSebJT8R6qUqPs4A",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

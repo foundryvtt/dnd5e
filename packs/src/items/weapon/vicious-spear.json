@@ -3,7 +3,7 @@
   "name": "Vicious Spear",
   "type": "weapon",
   "img": "icons/weapons/polearms/spear-flared-worn-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A gleaming steel point mouted atop a stout wooden haft, the spear may be wielded in one hand or two and can puncture through the heaviest armor with deadly force.</p>\n<p>When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type.</p>",
       "chat": "",
@@ -106,7 +106,7 @@
   "effects": [],
   "folder": null,
   "sort": 1300000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

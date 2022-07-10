@@ -3,7 +3,7 @@
   "name": "Glass Bottle",
   "type": "backpack",
   "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A bottle holds 1½ pints of liquid.</p>",
       "chat": "",
@@ -36,7 +36,7 @@
   "effects": [],
   "folder": null,
   "sort": 1200000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

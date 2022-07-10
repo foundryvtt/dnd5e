@@ -3,7 +3,7 @@
   "name": "Sickle",
   "type": "weapon",
   "img": "icons/weapons/sickles/sickle-curved.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A crescent hooked blade mounted atop a short haft, light enough to be wielded in one hand for treshing crops or foes.</p>",
       "chat": "",
@@ -105,7 +105,7 @@
   "effects": [],
   "folder": null,
   "sort": 2600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

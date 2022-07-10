@@ -3,7 +3,7 @@
   "name": "Ettercap",
   "type": "npc",
   "img": "systems/dnd5e/tokens/monstrosity/Ettercap.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 14,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Ettercap",
     "displayName": 20,
     "actorLink": false,
@@ -600,7 +600,7 @@
       "name": "Spider Climb",
       "type": "feat",
       "img": "icons/creatures/invertebrates/spider-beetle-runed-green.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The ettercap can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
           "chat": "",
@@ -665,7 +665,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -675,7 +675,7 @@
       "name": "Web Sense",
       "type": "feat",
       "img": "systems/dnd5e/icons/spells/shielding-spirit-3.jpg",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>While in contact with a web, the ettercap knows the exact location of any other creature in contact with the same web.</p>",
           "chat": "",
@@ -740,7 +740,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -750,7 +750,7 @@
       "name": "Web Walker",
       "type": "feat",
       "img": "icons/magic/nature/tree-bare-glow-yellow.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The ettercap ignores movement restrictions caused by webbing.</p>",
           "chat": "",
@@ -815,7 +815,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -825,7 +825,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The ettercap makes two attacks: one with its bite and one with its claws.</p>",
           "chat": "",
@@ -890,7 +890,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -900,7 +900,7 @@
       "name": "Bite",
       "type": "weapon",
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong> plus <strong>4 (1d8) <em>poison damage</em></strong>. </p><p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw or be poisoned for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The Ettercap attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
           "chat": "",
@@ -1004,7 +1004,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1014,7 +1014,7 @@
       "name": "Claws",
       "type": "weapon",
       "img": "icons/skills/melee/strike-slashes-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>slashing damage</em></strong>.</p><p></p></section><p>The Ettercap attacks with its Claws.</p>",
           "chat": "",
@@ -1114,7 +1114,7 @@
       "effects": [],
       "folder": null,
       "sort": 600000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1124,7 +1124,7 @@
       "name": "Web",
       "type": "feat",
       "img": "icons/creatures/webs/web-spider-glowing-purple.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +4 to hit, range 30/60 ft., one Large or smaller creature. Hit: The creature is restrained by webbing. </p><p>As an action, the restrained creature can make a DC 11 Strength check, escaping from the webbing on a success. The effect ends if the webbing is destroyed. The webbing has AC 10, 5 hit points, is vulnerable to <em>fire damage</em> and immune to <em>bludgeoning damage</em>.</p></section><p>The creature is restrained by webbing. As an action, the restrained creature can make a Strength check, escaping from the webbing on a success. </p>",
           "chat": "",
@@ -1189,7 +1189,7 @@
       "effects": [],
       "folder": null,
       "sort": 700000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1198,7 +1198,7 @@
   "effects": [],
   "folder": "ABTRAPMTNJLwRCe1",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

@@ -3,7 +3,7 @@
   "name": "Shovel",
   "type": "loot",
   "img": "icons/tools/hand/shovel-spade-steel-grey.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>A tool resembling a spade with a broad blade and typically upturned sides, used for moving coals, earth, snow or other material.</p>",
       "chat": "",
@@ -24,7 +24,7 @@
   "effects": [],
   "folder": null,
   "sort": 4600000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

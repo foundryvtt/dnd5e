@@ -3,7 +3,7 @@
   "name": "Ettin",
   "type": "npc",
   "img": "icons/svg/mystery-man.svg",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 21,
@@ -538,7 +538,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "name": "Ettin",
     "displayName": 20,
     "actorLink": false,
@@ -603,7 +603,7 @@
       "name": "Two Heads",
       "type": "feat",
       "img": "icons/magic/death/skull-horned-goat-pentagram-red.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The ettin has<strong> advantage </strong>on Wisdom (Perception) checks and on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong>.</p>",
           "chat": "",
@@ -668,7 +668,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -678,7 +678,7 @@
       "name": "Wakeful",
       "type": "feat",
       "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>When one of the ettin's heads is asleep, its other head is awake.</p>",
           "chat": "",
@@ -743,7 +743,7 @@
       "effects": [],
       "folder": null,
       "sort": 200000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -753,7 +753,7 @@
       "name": "Multiattack",
       "type": "feat",
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<p>The ettin makes two attacks: one with its battleaxe and one with its morningstar.</p>",
           "chat": "",
@@ -818,7 +818,7 @@
       "effects": [],
       "folder": null,
       "sort": 300000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -828,7 +828,7 @@
       "name": "Battleaxe",
       "type": "weapon",
       "img": "icons/weapons/polearms/halberd-crescent-engraved-steel.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>slashing damage</em></strong>.</p><p></p></section><p>The Ettin attacks with its Battleaxe.</p>",
           "chat": "",
@@ -928,7 +928,7 @@
       "effects": [],
       "folder": null,
       "sort": 400000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -938,7 +938,7 @@
       "name": "Morningstar",
       "type": "weapon",
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>piercing damage</em></strong>.</p><p></p></section><p>The Ettin attacks with its Morningstar.</p>",
           "chat": "",
@@ -1038,7 +1038,7 @@
       "effects": [],
       "folder": null,
       "sort": 500000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -1047,7 +1047,7 @@
   "effects": [],
   "folder": "ABTRAPMTNJLwRCe1",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

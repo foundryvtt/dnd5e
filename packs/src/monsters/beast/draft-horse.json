@@ -3,7 +3,7 @@
   "name": "Draft Horse",
   "type": "npc",
   "img": "systems/dnd5e/tokens/beast/DraftHorse.webp",
-  "data": {
+  "system": {
     "abilities": {
       "str": {
         "value": 18,
@@ -535,7 +535,7 @@
       }
     }
   },
-  "token": {
+  "prototypeToken": {
     "_id": "D2cuMTSQSr2VsLHN",
     "name": "Draft Horse",
     "displayName": 20,
@@ -601,7 +601,7 @@
       "name": "Hooves",
       "type": "weapon",
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
-      "data": {
+      "system": {
         "description": {
           "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (2d4 + 4) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Draft Horse attacks with its Hooves.</p>",
           "chat": "",
@@ -701,7 +701,7 @@
       "effects": [],
       "folder": null,
       "sort": 100000,
-      "permission": {
+      "ownership": {
         "default": 0
       },
       "flags": {}
@@ -710,7 +710,7 @@
   "effects": [],
   "folder": "lqq7AC8UiPDuwneP",
   "sort": 0,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

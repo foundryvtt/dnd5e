@@ -3,7 +3,7 @@
   "name": "Robes",
   "type": "equipment",
   "img": "systems/dnd5e/icons/items/armor/robe.jpg",
-  "data": {
+  "system": {
     "description": {
       "value": "<p>Simple or ceremonial wear, often used by priests and other religious figures.</p>",
       "chat": "",
@@ -87,7 +87,7 @@
   "effects": [],
   "folder": null,
   "sort": 3800000,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}

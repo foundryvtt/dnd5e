@@ -3,7 +3,7 @@
   "name": "Wand of the War Mage +2",
   "type": "equipment",
   "img": "icons/weapons/staves/staff-engraved-red.webp",
-  "data": {
+  "system": {
     "description": {
       "value": "<p><em>(Requires attunement by a spellcaster)</em></p>\n<p>While holding this wand, you gain a bonus to spell attack rolls of +2. In addition, you ignore half cover when making a spell attack.</p>",
       "chat": "",
@@ -92,7 +92,7 @@
   "effects": [],
   "folder": "oENpm3Crialw50Y1",
   "sort": 100001,
-  "permission": {
+  "ownership": {
     "default": 0
   },
   "flags": {}
