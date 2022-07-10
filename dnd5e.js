@@ -55,7 +55,7 @@ import ActiveEffect5e from "./module/documents/active-effect.js";
 /* -------------------------------------------- */
 
 Hooks.once("init", function() {
-  console.log(`DnD5e | Initializing the DnD5e Game System\n${DND5E.ASCII}`);
+  console.log(`DnD5e | Initializing the DnD5e Game System - Version ${game.system.version}\n${DND5E.ASCII}`);
 
   // Create a namespace within the game global
   game.dnd5e = {
