@@ -1,12 +1,10 @@
 /**
  * Object describing the proficiency for a specific ability or skill.
- *
  * @param {number} proficiency   Actor's flat proficiency bonus based on their current level.
  * @param {number} multiplier    Value by which to multiply the actor's base proficiency value.
  * @param {boolean} [roundDown]  Should half-values be rounded up or down?
  */
 export default class Proficiency {
-
   constructor(proficiency, multiplier, roundDown=true) {
 
     /**
@@ -27,7 +25,6 @@ export default class Proficiency {
      * @type {string}
      */
     this.rounding = roundDown ? "down" : "up";
-
   }
 
   /**
@@ -71,7 +68,6 @@ export default class Proficiency {
 
   /**
    * Override the default `toString` method to return flat proficiency for backwards compatibility in formula.
-   *
    * @returns {string}  Flat proficiency value.
    */
   toString() {

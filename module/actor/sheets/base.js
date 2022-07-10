@@ -15,33 +15,29 @@ import ActorAbilityConfig from "../../apps/ability-config.js";
 import ActorTypeConfig from "../../apps/actor-type.js";
 import ActiveEffect5e from "../../documents/active-effect.js";
 
-
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
  * @abstract
- * @extends {ActorSheet}
  */
 export default class ActorSheet5e extends ActorSheet {
-  constructor(...args) {
-    super(...args);
 
-    /**
-     * Track the set of item filters which are applied
-     * @type {Set}
-     */
-    this._filters = {
-      inventory: new Set(),
-      spellbook: new Set(),
-      features: new Set(),
-      effects: new Set()
-    };
-  }
+  /**
+   * Track the set of item filters which are applied
+   * @type {Set}
+   * @private
+   */
+  _filters = {
+    inventory: new Set(),
+    spellbook: new Set(),
+    features: new Set(),
+    effects: new Set()
+  };
 
   /* -------------------------------------------- */
 
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       scrollY: [
         ".inventory .inventory-list",
         ".features .inventory-list",
@@ -67,7 +63,7 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   get template() {
     if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
-    return `systems/dnd5e/templates/actors/${this.actor.data.type}-sheet.html`;
+    return `systems/dnd5e/templates/actors/${this.actor.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -89,12 +85,14 @@ export default class ActorSheet5e extends ActorSheet {
       config: CONFIG.DND5E,
       rollData: this.actor.getRollData.bind(this.actor)
     };
+    const labels = data.labels = this.actor.labels || {};
 
     // The Actor's data
-    const actorData = this.actor.data.toObject(false);
-    const source = this.actor.data._source.data;
+    const source = this.actor.toObject();
+    const actorData = this.actor.toObject(false);
     data.actor = actorData;
-    data.data = actorData.data;
+    // TODO - try and remove this
+    data.data = actorData.system;
 
     // Owned Items
     data.items = actorData.items;
@@ -105,44 +103,39 @@ export default class ActorSheet5e extends ActorSheet {
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Labels and filters
-    data.labels = this.actor.labels || {};
     data.filters = this._filters;
 
     // Currency Labels
-    data.labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+    labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
       obj[k] = c.label;
       return obj;
     }, {});
 
     // Temporary HP
-    const hp = data.data.attributes.hp;
+    const hp = actorData.system.attributes.hp;
     if ( hp.temp === 0 ) delete hp.temp;
     if ( hp.tempmax === 0 ) delete hp.tempmax;
 
     // Proficiency
-    if ( game.settings.get("dnd5e", "proficiencyModifier") === "dice" ) {
-      data.labels.proficiency = `d${data.data.attributes.prof * 2}`;
-    } else {
-      data.labels.proficiency = `+${data.data.attributes.prof}`;
-    }
+    labels.proficiency = game.settings.get("dnd5e", "proficiencyModifier") === "dice"
+      ? `d${actorData.system.attributes.prof * 2}`
+      : `+${actorData.system.attributes.prof}`;
 
     // Ability Scores
-    for ( let [a, abl] of Object.entries(actorData.data.abilities)) {
+    for ( let [a, abl] of Object.entries(actorData.system.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
-      abl.baseProf = source.abilities[a]?.proficient ?? 0;
+      abl.baseProf = source.system.abilities[a]?.proficient ?? 0;
     }
 
     // Skills
-    if ( actorData.data.skills ) {
-      for (let [s, skl] of Object.entries(actorData.data.skills)) {
-        skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
-        skl.icon = this._getProficiencyIcon(skl.value);
-        skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
-        skl.label = CONFIG.DND5E.skills[s];
-        skl.baseValue = source.skills[s].value;
-      }
+    for (let [s, skl] of Object.entries(actorData.system.skills || {})) {
+      skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
+      skl.icon = this._getProficiencyIcon(skl.value);
+      skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
+      skl.label = CONFIG.DND5E.skills[s];
+      skl.baseValue = source.system.skills[s].value;
     }
 
     // Movement speeds
@@ -152,7 +145,7 @@ export default class ActorSheet5e extends ActorSheet {
     data.senses = this._getSenses(actorData);
 
     // Update traits
-    this._prepareTraits(actorData.data.traits);
+    this._prepareTraits(actorData.system.traits);
 
     // Prepare owned items
     this._prepareItems(data);
@@ -162,8 +155,6 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare warnings
     data.warnings = this.actor._preparationWarnings;
-
-    // Return data to the sheet
     return data;
   }
 
@@ -177,7 +168,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _getMovementSpeed(actorData, largestPrimary=false) {
-    const movement = actorData.data.attributes.movement || {};
+    const movement = actorData.system.attributes.movement || {};
 
     // Prepare an array of available movement speeds
     let speeds = [
@@ -220,7 +211,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
   _getSenses(actorData) {
-    const senses = actorData.data.attributes.senses || {};
+    const senses = actorData.system.attributes.senses || {};
     const tags = {};
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
@@ -242,9 +233,9 @@ export default class ActorSheet5e extends ActorSheet {
   _prepareActiveEffectAttributions(target) {
     return this.actor.effects.reduce((arr, e) => {
       let source = e.sourceName;
-      if ( e.data.origin === this.actor.uuid ) source = e.data.label;
-      if ( !source || e.data.disabled || e.isSuppressed ) return arr;
-      const value = e.data.changes.reduce((n, change) => {
+      if ( e.origin === this.actor.uuid ) source = e.label;
+      if ( !source || e.disabled || e.isSuppressed ) return arr;
+      const value = e.changes.reduce((n, change) => {
         if ( (change.key !== target) || !Number.isNumeric(change.value) ) return n;
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
         return n + Number(change.value);
@@ -259,12 +250,12 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Produce a list of armor class attribution objects.
-   * @param {object} data                 Actor data to determine the attributions from.
+   * @param {object} rollData             Data provided by Actor5e#getRollData
    * @returns {AttributionDescription[]}  List of attribution descriptions.
    * @protected
    */
-  _prepareArmorClassAttribution(data) {
-    const ac = data.attributes.ac;
+  _prepareArmorClassAttribution(rollData) {
+    const ac = rollData.attributes.ac;
     const cfg = CONFIG.DND5E.armorClasses[ac.calc];
     const attribution = [];
 
@@ -293,7 +284,7 @@ export default class ActorSheet5e extends ActorSheet {
         let base = ac.base;
         const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
         for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = String(foundry.utils.getProperty(data, term));
+          const value = String(foundry.utils.getProperty(rollData, term));
           if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
           if ( Number.isNumeric(value) ) base -= Number(value);
           attribution.push({
@@ -351,19 +342,15 @@ export default class ActorSheet5e extends ActorSheet {
       const trait = traits[t];
       if ( !trait ) continue;
       let values = [];
-      if ( trait.value ) {
-        values = trait.value instanceof Array ? trait.value : [trait.value];
-      }
+      if ( trait.value ) values = trait.value instanceof Array ? trait.value : [trait.value];
       trait.selected = values.reduce((obj, t) => {
         obj[t] = choices[t];
         return obj;
       }, {});
 
       // Add custom entry
-      if ( trait.custom ) {
-        trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
-      }
-      trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
+      if ( trait.custom ) trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
+      trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
     }
 
     // Populate and localize proficiencies
@@ -371,37 +358,36 @@ export default class ActorSheet5e extends ActorSheet {
       const trait = traits[`${t}Prof`];
       if ( !trait ) continue;
       Actor5e.prepareProficiencies(trait, t);
-      trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
+      trait.cssClass = !foundry.utils.isEmpty(trait.selected) ? "" : "inactive";
     }
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Insert a spell into the spellbook object when rendering the character sheet.
-   * @param {object} data      Copy of the Actor data being prepared for display.
-   * @param {object[]} spells  Spells to be included in the spellbook.
-   * @returns {object[]}       Spellbook sections in the proper order.
-   * @private
+   * Prepare the data structure for items which appear on the actor sheet.
+   * Each subclass overrides this method to implement type-specific logic.
+   * @protected
    */
-  _prepareSpellbook(data, spells) {
+  _prepareItems() {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Insert a spell into the spellbook object when rendering the character sheet.
+   * @param {object} context    Sheet rendering context data being prepared for render.
+   * @param {object[]} spells   Spells to be included in the spellbook.
+   * @returns {object[]}        Spellbook sections in the proper order.
+   * @protected
+   */
+  _prepareSpellbook(context, spells) {
     const owner = this.actor.isOwner;
-    const levels = data.data.spells;
+    const levels = context.actor.system.spells;
     const spellbook = {};
 
-    // Define some mappings
-    const sections = {
-      atwill: -20,
-      innate: -10,
-      pact: 0.5
-    };
-
-    // Label spell slot uses headers
-    const useLabels = {
-      "-20": "-",
-      "-10": "-",
-      0: "&infin;"
-    };
+    // Define section and label mappings
+    const sections = {atwill: -20, innate: -10, pact: 0.5 };
+    const useLabels = {"-20": "-", "-10": "-", 0: "&infin;"};
 
     // Format a spellbook entry for a certain indexed level
     const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {
@@ -410,7 +396,7 @@ export default class ActorSheet5e extends ActorSheet {
         label: label,
         usesSlots: i > 0,
         canCreate: owner,
-        canPrepare: (data.actor.type === "character") && (i >= 1),
+        canPrepare: (context.actor.type === "character") && (i >= 1),
         spells: [],
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
@@ -454,8 +440,8 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Iterate over every spell item, adding spells to the spellbook by section
     spells.forEach(spell => {
-      const mode = spell.data.preparation.mode || "prepared";
-      let s = spell.data.level || 0;
+      const mode = spell.system.preparation.mode || "prepared";
+      let s = spell.system.level || 0;
       const sl = `spell${s}`;
 
       // Specialized spellcasting modes (if they exist)
@@ -499,32 +485,23 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _filterItems(items, filters) {
     return items.filter(item => {
-      const data = item.data;
 
       // Action usage
       for ( let f of ["action", "bonus", "reaction"] ) {
-        if ( filters.has(f) ) {
-          if ((data.activation && (data.activation.type !== f))) return false;
-        }
+        if ( filters.has(f) && (item.system.activation?.type !== f) ) return false;
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") ) {
-        if (data.components.ritual !== true) return false;
-      }
-      if ( filters.has("concentration") ) {
-        if (data.components.concentration !== true) return false;
-      }
+      if ( filters.has("ritual") && (item.system.components.ritual !== true) ) return false;
+      if ( filters.has("concentration") && (item.system.components.concentration !== true) ) return false;
       if ( filters.has("prepared") ) {
-        if ( data.level === 0 || ["innate", "always"].includes(data.preparation.mode) ) return true;
-        if ( this.actor.data.type === "npc" ) return true;
-        return data.preparation.prepared;
+        if ( (item.system.level === 0) || ["innate", "always"].includes(item.system.preparation.mode) ) return true;
+        if ( this.actor.type === "npc" ) return true;
+        return item.system.preparation.prepared;
       }
 
       // Equipment-specific filters
-      if ( filters.has("equipped") ) {
-        if ( data.equipped !== true ) return false;
-      }
+      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
       return true;
     });
   }
@@ -548,7 +525,7 @@ export default class ActorSheet5e extends ActorSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners and Handlers
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /** @inheritdoc */
@@ -613,7 +590,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find(".item .item-recharge").click(event => this._onItemRecharge(event));
     }
 
-    // Otherwise remove rollable classes
+    // Otherwise, remove rollable classes
     else {
       html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
     }
@@ -652,10 +629,9 @@ export default class ActorSheet5e extends ActorSheet {
     const value = input.value;
     if ( ["+", "-"].includes(value[0]) ) {
       let delta = parseFloat(value);
-      input.value = getProperty(this.actor.data, input.name) + delta;
-    } else if ( value[0] === "=" ) {
-      input.value = value.slice(1);
+      input.value = foundry.utils.getProperty(this.actor, input.name) + delta;
     }
+    else if ( value[0] === "=" ) input.value = value.slice(1);
   }
 
   /* -------------------------------------------- */
@@ -671,31 +647,31 @@ export default class ActorSheet5e extends ActorSheet {
     let app;
     switch ( button.dataset.action ) {
       case "armor":
-        app = new ActorArmorConfig(this.object);
+        app = new ActorArmorConfig(this.actor);
         break;
       case "hit-dice":
-        app = new ActorHitDiceConfig(this.object);
+        app = new ActorHitDiceConfig(this.actor);
         break;
       case "movement":
-        app = new ActorMovementConfig(this.object);
+        app = new ActorMovementConfig(this.actor);
         break;
       case "flags":
-        app = new ActorSheetFlags(this.object);
+        app = new ActorSheetFlags(this.actor);
         break;
       case "senses":
-        app = new ActorSensesConfig(this.object);
+        app = new ActorSensesConfig(this.actor);
         break;
       case "type":
-        app = new ActorTypeConfig(this.object);
+        app = new ActorTypeConfig(this.actor);
         break;
       case "ability": {
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
-        app = new ActorAbilityConfig(this.object, null, ability);
+        app = new ActorAbilityConfig(this.actor, null, ability);
         break;
       }
       case "skill": {
         const skill = event.currentTarget.closest("[data-skill]").dataset.skill;
-        app = new ActorSkillConfig(this.object, null, skill);
+        app = new ActorSkillConfig(this.actor, null, skill);
         break;
       }
     }
@@ -714,7 +690,7 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
     const skillName = field.parentElement.dataset.skill;
-    const source = this.actor.data._source.data.skills[skillName];
+    const source = this.actor._source.system.skills[skillName];
     if ( !source ) return;
 
     // Cycle to the next or previous skill level
@@ -801,9 +777,8 @@ export default class ActorSheet5e extends ActorSheet {
   /** @override */
   async _onDropItemCreate(itemData) {
     let items = itemData instanceof Array ? itemData : [itemData];
-    const itemsWithoutAdvancement = items.filter(i => !i.data.advancement?.length);
+    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
-
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
       ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
       items = itemsWithoutAdvancement;
@@ -829,6 +804,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @protected
    */
   async _onDropSingleItem(itemData) {
+
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -852,14 +828,13 @@ export default class ActorSheet5e extends ActorSheet {
     if ( stacked ) return false;
 
     // Bypass normal creation flow for any items with advancement
-    if ( itemData.data.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
+    if ( itemData.system.advancement?.length && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forNewItem(this.actor, itemData);
       if ( manager.steps.length ) {
         manager.render(true);
         return false;
       }
     }
-
     return itemData;
   }
 
@@ -870,13 +845,11 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
    */
   _onDropResetData(itemData) {
-    if ( !itemData.data ) return;
-
-    // Ignore certain statuses
-    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.data[k]);
-
-    // Downgrade ATTUNED to REQUIRED
-    itemData.data.attunement = Math.min(itemData.data.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
+    if ( !itemData.system ) return;
+    ["equipped", "proficient", "prepared"].forEach(k => delete itemData.system[k]);
+    if ( "attunement" in itemData.system ) {
+      itemData.system.attunement = Math.min(itemData.system.attunement, CONFIG.DND5E.attunementTypes.REQUIRED);
+    }
   }
 
   /* -------------------------------------------- */
@@ -889,15 +862,13 @@ export default class ActorSheet5e extends ActorSheet {
   _onDropStackConsumables(itemData) {
     const droppedSourceId = itemData.flags.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
-
     const similarItem = this.actor.items.find(i => {
       const sourceId = i.getFlag("core", "sourceId");
       return sourceId && (sourceId === droppedSourceId) && (i.type === "consumable") && (i.name === itemData.name);
     });
     if ( !similarItem ) return null;
-
     return similarItem.update({
-      "data.quantity": similarItem.data.data.quantity + Math.max(itemData.data.quantity, 1)
+      "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)
     });
   }
 
@@ -911,7 +882,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
     const level = span.dataset.level;
-    const override = this.actor.data.data.spells[level].override || span.dataset.slots;
+    const override = this.actor.systema.spells[level].override || span.dataset.slots;
     const input = document.createElement("INPUT");
     input.type = "text";
     input.name = `data.spells.${level}.override`;
@@ -937,9 +908,9 @@ export default class ActorSheet5e extends ActorSheet {
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
-    const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
+    const uses = Math.clamped(0, parseInt(event.target.value), item.system.uses.max);
     event.target.value = uses;
-    return item.update({ "data.uses.value": uses });
+    return item.update({"system.uses.value": uses});
   }
 
   /* -------------------------------------------- */
@@ -1014,17 +985,17 @@ export default class ActorSheet5e extends ActorSheet {
     const type = header.dataset.type;
 
     // Check to make sure the newly created class doesn't take player over level cap
-    if ( type === "class" && (this.actor.data.data.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
-      return ui.notifications.error(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn",
-        {max: CONFIG.DND5E.maxLevel}));
+    if ( type === "class" && (this.actor.system.details.level + 1 > CONFIG.DND5E.maxLevel) ) {
+      const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", {max: CONFIG.DND5E.maxLevel});
+      return ui.notifications.error(err);
     }
 
     const itemData = {
       name: game.i18n.format("DND5E.ItemNew", {type: game.i18n.localize(`DND5E.ItemType${type.capitalize()}`)}),
       type: type,
-      data: foundry.utils.deepClone(header.dataset)
+      system: foundry.utils.deepClone(header.dataset)
     };
-    delete itemData.data.type;
+    delete itemData.system.type;
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
@@ -1089,10 +1060,11 @@ export default class ActorSheet5e extends ActorSheet {
     const existingTooltip = event.currentTarget.querySelector("div.tooltip");
     const property = event.currentTarget.dataset.property;
     if ( existingTooltip || !property ) return;
-    const data = this.actor.getRollData({ deterministic: true });
+    const rollData = this.actor.getRollData({ deterministic: true });
     let attributions;
     switch ( property ) {
-      case "attributes.ac": attributions = this._prepareArmorClassAttribution(data); break;
+      case "attributes.ac":
+        attributions = this._prepareArmorClassAttribution(rollData); break;
     }
     if ( !attributions ) return;
     const html = await new PropertyAttribution(this.actor, attributions, property).renderTooltip();
