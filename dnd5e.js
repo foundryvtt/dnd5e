@@ -210,13 +210,13 @@ Hooks.once("ready", function() {
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
-  const currentVersion = game.settings.get("dnd5e", "systemMigrationVersion");
+  const cv = game.settings.get("dnd5e", "systemMigrationVersion");
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
-  if ( !currentVersion && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.data.version);
-  if ( currentVersion && !isNewerVersion(game.system.data.flags.needsMigrationVersion, currentVersion) ) return;
+  if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
+  if ( cv && !isNewerVersion(game.system.flags.needsMigrationVersion, cv) ) return;
 
   // Perform the migration
-  if ( currentVersion && isNewerVersion(game.system.data.flags.compatibleMigrationVersion, currentVersion) ) {
+  if ( cv && isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
     ui.notifications.error(game.i18n.localize("MIGRATION.5eVersionTooOldWarning"), {permanent: true});
   }
   migrations.migrateWorld();
@@ -246,6 +246,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
   // Optionally collapse the content
   if (game.settings.get("dnd5e", "autoCollapseItemCards")) html.find(".card-content").hide();
 });
+
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
