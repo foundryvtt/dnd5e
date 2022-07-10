@@ -89,6 +89,7 @@ export default class Actor5e extends Actor {
   /** @override */
   prepareDerivedData() {
     const flags = this.flags.dnd5e || {};
+    this.labels = {};
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
@@ -151,7 +152,6 @@ export default class Actor5e extends Actor {
     this._computeScaleValues();
 
     // Cache labels
-    this.labels = {};
     if ( this.type === "npc" ) {
       this.labels.creatureType = this.constructor.formatCreatureType(this.system.details.type);
     }
