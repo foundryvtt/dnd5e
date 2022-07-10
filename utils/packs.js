@@ -39,7 +39,7 @@ const DB_CACHE = {};
  * @param {boolean} [clearSourceId]  Should the core sourceId flag be deleted.
  */
 function cleanPackEntry(data, { clearSourceId=true }={}) {
-  if ( data.permission ) data.permission = { "default": 0 };
+  if ( data.ownership ) data.ownership = {default: 0 };
   if ( clearSourceId ) delete data.flags?.core?.sourceId;
   delete data.flags?.importSource;
   delete data.flags?.exportSource;
@@ -52,7 +52,7 @@ function cleanPackEntry(data, { clearSourceId=true }={}) {
 
   if ( data.effects ) data.effects.forEach((i) => cleanPackEntry(i, { clearSourceId: false }));
   if ( data.items ) data.items.forEach((i) => cleanPackEntry(i, { clearSourceId: false }));
-  if ( data.data?.description?.value ) data.data.description.value = cleanString(data.data.description.value);
+  if ( data.system?.description?.value ) data.data.description.value = cleanString(data.system.description.value);
   if ( data.label ) data.label = cleanString(data.label);
   if ( data.name ) data.name = cleanString(data.name);
 }
@@ -91,7 +91,6 @@ function determineId(data, pack) {
 function cleanString(str) {
   return str.replace(/\u2060/gu, "").replace(/[‘’]/gu, "'").replace(/[“”]/gu, '"');
 }
-
 
 /**
  * Cleans and formats source JSON files, removing unnecessary permissions and flags
@@ -221,19 +220,19 @@ function _getSubfolderName(data, pack) {
   switch (pack) {
     // Items should be grouped by type
     case "items":
-      if ( (data.type === "consumable") && data.data.consumableType ) return data.data.consumableType;
+      if ( (data.type === "consumable") && data.system.consumableType ) return data.system.consumableType;
       return data.type;
 
     // Monsters should be grouped by CR
     case "monsters":
-      if ( !data.data?.details?.type?.value ) return "";
-      return data.data.details.type.value;
+      if ( !data.system?.details?.type?.value ) return "";
+      return data.system.details.type.value;
 
     // Spells should be grouped by level
     case "spells":
-      if ( data.data?.level === undefined ) return "";
-      if ( data.data.level === 0 ) return "cantrip";
-      return `level-${data.data.level}`;
+      if ( data.system?.level === undefined ) return "";
+      if ( data.system.level === 0 ) return "cantrip";
+      return `level-${data.system.level}`;
 
     default: return "";
   }
