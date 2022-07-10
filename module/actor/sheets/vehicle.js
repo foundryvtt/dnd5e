@@ -6,9 +6,10 @@ import ActorSheet5e from "./base.js";
  * @type {ActorSheet5e}
  */
 export default class ActorSheet5eVehicle extends ActorSheet5e {
-  /** @inheritdoc */
+
+  /** @inheritDoc */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "actor", "vehicle"]
     });
   }
@@ -25,10 +26,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
    * @type {object}
    */
   static get newCargo() {
-    return {
-      name: "",
-      quantity: 1
-    };
+    return {name: "", quantity: 1};
   }
 
   /* -------------------------------------------- */
@@ -43,12 +41,11 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   _computeEncumbrance(totalWeight, actorData) {
 
     // Compute currency weight
-    const totalCoins = Object.values(actorData.data.currency).reduce((acc, denom) => acc + denom, 0);
+    const totalCoins = Object.values(actorData.system.currency).reduce((acc, denom) => acc + denom, 0);
 
     const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
       ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
       : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
-
     totalWeight += totalCoins / currencyPerWeight;
 
     // Vehicle weights are an order of magnitude greater.
@@ -57,7 +54,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       : CONFIG.DND5E.encumbrance.vehicleWeightMultiplier.imperial;
 
     // Compute overall encumbrance
-    const max = actorData.data.attributes.capacity.cargo;
+    const max = actorData.system.attributes.capacity.cargo;
     const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
     return {value: totalWeight.toNearest(0.1), max, pct};
   }
@@ -72,40 +69,35 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /**
-   * Prepare items that are mounted to a vehicle and require one or more crew
-   * to operate.
+   * Prepare items that are mounted to a vehicle and require one or more crew to operate.
    * @param {object} item  Copy of the item data being prepared for display. *Will be mutated.*
    * @private
    */
   _prepareCrewedItem(item) {
 
     // Determine crewed status
-    const isCrewed = item.data.crewed;
+    const isCrewed = item.system.crewed;
     item.toggleClass = isCrewed ? "active" : "";
     item.toggleTitle = game.i18n.localize(`DND5E.${isCrewed ? "Crewed" : "Uncrewed"}`);
 
     // Handle crew actions
-    if (item.type === "feat" && item.data.activation.type === "crew") {
-      item.cover = game.i18n.localize(`DND5E.${item.data.cover ? "CoverTotal" : "None"}`);
-      if (item.data.cover === .5) item.cover = "½";
-      else if (item.data.cover === .75) item.cover = "¾";
-      else if (item.data.cover === null) item.cover = "—";
+    if (item.type === "feat" && item.system.activation.type === "crew") {
+      item.cover = game.i18n.localize(`DND5E.${item.system.cover ? "CoverTotal" : "None"}`);
+      if (item.system.cover === .5) item.cover = "½";
+      else if (item.system.cover === .75) item.cover = "¾";
+      else if (item.system.cover === null) item.cover = "—";
     }
 
     // Prepare vehicle weapons
-    if (item.type === "equipment" || item.type === "weapon") {
-      item.threshold = item.data.hp.dt ? item.data.hp.dt : "—";
+    if ( (item.type === "equipment") || (item.type === "weapon") ) {
+      item.threshold = item.system.hp.dt ? item.system.hp.dt : "—";
     }
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Organize Owned Items for rendering the Vehicle sheet.
-   * @param {object} data  Copy of the actor data being prepared for display. *Will be mutated.*
-   * @private
-   */
-  _prepareItems(data) {
+  /** @override */
+  _prepareItems(context) {
     const cargoColumns = [{
       label: game.i18n.localize("DND5E.Quantity"),
       css: "item-qty",
@@ -116,16 +108,16 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const equipmentColumns = [{
       label: game.i18n.localize("DND5E.Quantity"),
       css: "item-qty",
-      property: "data.quantity",
+      property: "system.quantity",
       editable: "Number"
     }, {
       label: game.i18n.localize("DND5E.AC"),
       css: "item-ac",
-      property: "data.armor.value"
+      property: "system.armor.value"
     }, {
       label: game.i18n.localize("DND5E.HP"),
       css: "item-hp",
-      property: "data.hp.value",
+      property: "system.hp.value",
       editable: "Number"
     }, {
       label: game.i18n.localize("DND5E.Threshold"),
@@ -172,16 +164,17 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       }
     };
 
-    data.items.forEach(item => {
-      item.hasUses = item.data.uses && (item.data.uses.max > 0);
-      item.isOnCooldown = item.data.recharge && !!item.data.recharge.value && (item.data.recharge.charged === false);
-      item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
+    context.items.forEach(item => {
+      const {uses, recharge} = item.system;
+      item.hasUses = uses && (uses.max > 0);
+      item.isOnCooldown = recharge && !!recharge.value && (recharge.charged === false);
+      item.isDepleted = item.isOnCooldown && (uses.per && (uses.value > 0));
     });
 
     const cargo = {
       crew: {
         label: game.i18n.localize("DND5E.VehicleCrew"),
-        items: data.data.cargo.crew,
+        items: context.actor.system.cargo.crew,
         css: "cargo-row crew",
         editableName: true,
         dataset: {type: "crew"},
@@ -189,7 +182,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       },
       passengers: {
         label: game.i18n.localize("DND5E.VehiclePassengers"),
-        items: data.data.cargo.passengers,
+        items: context.actor.system.cargo.passengers,
         css: "cargo-row passengers",
         editableName: true,
         dataset: {type: "passengers"},
@@ -202,17 +195,17 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: [{
           label: game.i18n.localize("DND5E.Quantity"),
           css: "item-qty",
-          property: "data.quantity",
+          property: "system.quantity",
           editable: "Number"
         }, {
           label: game.i18n.localize("DND5E.Price"),
           css: "item-price",
-          property: "data.price",
+          property: "system.price",
           editable: "Number"
         }, {
           label: game.i18n.localize("DND5E.Weight"),
           css: "item-weight",
-          property: "data.weight",
+          property: "system.weight",
           editable: "Number"
         }]
       }
@@ -220,13 +213,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     // Classify items owned by the vehicle and compute total cargo weight
     let totalWeight = 0;
-    for (const item of data.items) {
+    for (const item of context.items) {
       this._prepareCrewedItem(item);
 
       // Handle cargo explicitly
       const isCargo = item.flags.dnd5e?.vehicleCargo === true;
       if ( isCargo ) {
-        totalWeight += (item.data.weight || 0) * item.data.quantity;
+        totalWeight += (item.system.weight || 0) * item.system.quantity;
         cargo.cargo.items.push(item);
         continue;
       }
@@ -240,20 +233,21 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           features.equipment.items.push(item);
           break;
         case "feat":
-          if ( !item.data.activation.type || (item.data.activation.type === "none") ) features.passive.items.push(item);
-          else if (item.data.activation.type === "reaction") features.reactions.items.push(item);
+          const act = item.system.activation;
+          if ( !act.type || (act.type === "none") ) features.passive.items.push(item);
+          else if (act.type === "reaction") features.reactions.items.push(item);
           else features.actions.items.push(item);
           break;
         default:
-          totalWeight += (item.data.weight || 0) * item.data.quantity;
+          totalWeight += (item.system.weight || 0) * item.system.quantity;
           cargo.cargo.items.push(item);
       }
     }
 
     // Update the rendering context data
-    data.features = Object.values(features);
-    data.cargo = Object.values(cargo);
-    data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+    context.features = Object.values(features);
+    context.cargo = Object.values(cargo);
+    context.actor.system.attributes.encumbrance = this._computeEncumbrance(totalWeight, context);
   }
 
   /* -------------------------------------------- */
@@ -282,7 +276,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       .click(evt => evt.target.select())
       .change(this._onQtyChange.bind(this));
 
-    if (this.actor.data.data.attributes.actions.stations) {
+    if (this.actor.system.attributes.actions.stations) {
       html.find(".counter.actions, .counter.action-thresholds").hide();
     }
   }
@@ -303,7 +297,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const property = row.classList.contains("crew") ? "crew" : "passengers";
 
     // Get the cargo entry
-    const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[property]);
+    const cargo = foundry.utils.deepClone(this.actor.system.cargo[property]);
     const entry = cargo[idx];
     if ( !entry ) return null;
 
@@ -315,7 +309,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     entry[key] = value;
 
     // Perform the Actor update
-    return this.actor.update({[`data.cargo.${property}`]: cargo});
+    return this.actor.update({[`system.cargo.${property}`]: cargo});
   }
 
   /* -------------------------------------------- */
@@ -342,40 +336,32 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
   /* -------------------------------------------- */
 
-  /**
-   * Handle creating a new crew or passenger row.
-   * @param {Event} event  Triggering event.
-   * @returns {Promise<Actor5e|Item5e>}  Newly created actor or item depending on type created.
-   * @private
-   */
+  /** @inheritDoc */
   _onItemCreate(event) {
     event.preventDefault();
+    // Handle creating a new crew or passenger row.
     const target = event.currentTarget;
     const type = target.dataset.type;
     if (type === "crew" || type === "passengers") {
-      const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]);
+      const cargo = foundry.utils.deepClone(this.actor.system.cargo[type]);
       cargo.push(this.constructor.newCargo);
-      return this.actor.update({[`data.cargo.${type}`]: cargo});
+      return this.actor.update({[`system.cargo.${type}`]: cargo});
     }
     return super._onItemCreate(event);
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Handle deleting a crew or passenger row.
-   * @param {Event} event  Triggering event.
-   * @returns {Promise<Actor5e|Item5e>}  The deleted actor or item.
-   * @private
-   */
+  /** @inheritDoc */
   _onItemDelete(event) {
     event.preventDefault();
+    // Handle deleting a crew or passenger row.
     const row = event.currentTarget.closest(".item");
     if (row.classList.contains("cargo-row")) {
       const idx = Number(row.dataset.itemIndex);
       const type = row.classList.contains("crew") ? "crew" : "passengers";
-      const cargo = foundry.utils.deepClone(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
-      return this.actor.update({[`data.cargo.${type}`]: cargo});
+      const cargo = foundry.utils.deepClone(this.actor.system.cargo[type]).filter((_, i) => i !== idx);
+      return this.actor.update({[`system.cargo.${type}`]: cargo});
     }
     return super._onItemDelete(event);
   }
@@ -402,9 +388,9 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     event.preventDefault();
     const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
-    const hp = Math.clamped(0, parseInt(event.currentTarget.value), item.data.data.hp.max);
+    const hp = Math.clamped(0, parseInt(event.currentTarget.value), item.system.hp.max);
     event.currentTarget.value = hp;
-    return item.update({"data.hp.value": hp});
+    return item.update({"system.hp.value": hp});
   }
 
   /* -------------------------------------------- */
@@ -421,7 +407,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     const item = this.actor.items.get(itemID);
     const qty = parseInt(event.currentTarget.value);
     event.currentTarget.value = qty;
-    return item.update({"data.quantity": qty});
+    return item.update({"system.quantity": qty});
   }
 
   /* -------------------------------------------- */
@@ -436,7 +422,6 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     event.preventDefault();
     const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
-    const crewed = !!item.data.data.crewed;
-    return item.update({"data.crewed": !crewed});
+    return item.update({"system.crewed": !item.system.crewed});
   }
 }
