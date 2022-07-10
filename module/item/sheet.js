@@ -415,8 +415,6 @@ export default class ItemSheet5e extends ItemSheet {
         ActiveEffect5e.onManageActiveEffect(ev, this.item);
       });
       html.find(".advancement .item-control").click(this._onAdvancementAction.bind(this));
-      // TODO: Remove this when UUID links are supported in v10
-      html.find(".actor-item-link").click(this._onClickContentLink.bind(this));
     }
   }
 

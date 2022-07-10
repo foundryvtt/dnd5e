@@ -48,12 +48,9 @@ export class ItemGrantAdvancement extends Advancement {
 
     // Link to items on the actor
     else {
-      // TODO: Replace with UUID links in core once they are added in v10
       return Object.keys(this.data.value.added).map(id => {
         const item = this.actor.items.get(id);
-        if ( !item ) return "";
-        return `<a class="content-link actor-item-link" data-actor="${this.actor.id}" data-id="${id}">`
-          + `<i class="fas fa-suitcase"></i> ${item.name}</a>`;
+        return item?.toAnchor({classes: ["content-link", "actor-item-link"]}) || "";
       }).join("");
     }
   }
