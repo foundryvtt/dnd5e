@@ -54,7 +54,7 @@ export default class ActorArmorConfig extends DocumentSheet {
   /** @inheritdoc */
   async _updateObject(event, formData) {
     const ac = foundry.utils.expandObject(formData).ac;
-    return this.object.update({"data.attributes.ac": ac});
+    return this.object.update({"system.attributes.ac": ac});
   }
 
   /* -------------------------------------------- */
@@ -83,7 +83,7 @@ export default class ActorArmorConfig extends DocumentSheet {
     }
 
     // Recompute effective AC
-    actorData = foundry.utils.mergeObject(actorData, {"data.attributes.ac": {calc, formula}});
+    actorData = foundry.utils.mergeObject(actorData, {"system.attributes.ac": {calc, formula}});
     if ( enableFlat ) actorData.system.attributes.ac.flat = flat;
     ac = this.object._computeArmorClass(actorData.data);
 

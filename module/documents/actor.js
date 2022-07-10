@@ -1508,7 +1508,7 @@ export default class Actor5e extends Actor {
       if ( (hitDiceRecovered < maxHitDice) && (hitDiceUsed > 0) ) {
         let delta = Math.min(hitDiceUsed || 0, maxHitDice - hitDiceRecovered);
         hitDiceRecovered += delta;
-        updates.push({_id: item.id, "data.hitDiceUsed": hitDiceUsed - delta});
+        updates.push({_id: item.id, "system.hitDiceUsed": hitDiceUsed - delta});
       }
     }
     return { updates, hitDiceRecovered };

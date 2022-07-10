@@ -31,7 +31,7 @@ export default class ActorSensesConfig extends DocumentSheet {
       units: source.units, movementUnits: CONFIG.DND5E.movementUnits
     };
     for ( let [name, label] of Object.entries(CONFIG.DND5E.senses) ) {
-      const v = senses[name];
+      const v = source[name];
       data.senses[name] = {
         label: game.i18n.localize(label),
         value: Number.isNumeric(v) ? v.toNearest(0.1) : 0

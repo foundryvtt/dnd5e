@@ -10,7 +10,7 @@
         <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
         <div class="form-fields">
             <select name="level">
-                {{#select item.data.level}}
+                {{#select item.system.level}}
                 {{#each spellLevels as |l|}}
                 <option value="{{l.level}}" {{#unless l.canCast}}disabled{{/unless}}>{{l.label}}</option>
                 {{/each}}
@@ -41,7 +41,7 @@
         <label class="checkbox"><input type="checkbox" name="consumeRecharge" checked/>{{ localize "DND5E.ConsumeRecharge" }}</label>
     </div>
     {{/if}}
-    
+
     {{#if createTemplate}}
     <div class="form-group">
         <label class="checkbox">

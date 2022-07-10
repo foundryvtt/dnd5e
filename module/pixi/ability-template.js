@@ -2,7 +2,6 @@ import { DND5E } from "../config.js";
 
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
- * @extends {MeasuredTemplate}
  */
 export default class AbilityTemplate extends MeasuredTemplate {
 
@@ -12,7 +11,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    * @returns {AbilityTemplate|null}     The template object, or null if the item does not produce a template
    */
   static fromItem(item) {
-    const target = getProperty(item.data, "data.target") || {};
+    const target = item.system.target || {};
     const templateShape = DND5E.areaTargetTypes[target.type];
     if ( !templateShape ) return null;
 
@@ -90,8 +89,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       if ( now - moveTime <= 20 ) return;
       const center = event.data.getLocalPosition(this.layer);
       const snapped = canvas.grid.getSnappedPosition(center.x, center.y, 2);
-      if ( game.release.generation < 10 ) this.data.update({x: snapped.x, y: snapped.y});
-      else this.document.updateSource({x: snapped.x, y: snapped.y});
+      this.document.updateSource({x: snapped.x, y: snapped.y});
       this.refresh();
       moveTime = now;
     };
@@ -110,10 +108,9 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Confirm the workflow (left-click)
     handlers.lc = event => {
       handlers.rc(event);
-      const destination = canvas.grid.getSnappedPosition(this.data.x, this.data.y, 2);
-      if ( game.release.generation < 10 ) this.data.update(destination);
-      else this.document.updateSource(destination);
-      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.data.toObject()]);
+      const destination = canvas.grid.getSnappedPosition(this.document.x, this.document.y, 2);
+      this.document.updateSource(destination);
+      canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject()]);
     };
 
     // Rotate the template by 3 degree increments (mouse-wheel)
@@ -122,9 +119,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
       event.stopPropagation();
       let delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
       let snap = event.shiftKey ? delta : 5;
-      const update = {direction: this.data.direction + (snap * Math.sign(event.deltaY))};
-      if ( game.release.generation < 10 ) this.data.update(update);
-      else this.document.updateSource(update);
+      const update = {direction: this.document.direction + (snap * Math.sign(event.deltaY))};
+      this.document.updateSource(update);
       this.refresh();
     };
 

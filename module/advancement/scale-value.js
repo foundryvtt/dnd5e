@@ -273,12 +273,12 @@ export class ScaleValueConfig extends AdvancementConfig {
   async _updateObject(event, formData) {
     const typeChange = "data.configuration.type" in formData;
     if ( typeChange && (formData["data.configuration.type"] !== this.advancement.data.configuration.type) ) {
-      // Clear scale values if we're changing type.
-      for ( const key in formData ) {
+      for ( const key in formData ) { // Clear scale values if we're changing type.
         if ( key.startsWith("data.configuration.scale.") ) delete formData[key];
       }
-      Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1).forEach(l =>
-        formData[`data.configuration.scale.${l}`] = null);
+      for ( const l of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+        formData[`data.configuration.scale.${l}`] = null;
+      }
     }
     return super._updateObject(event, formData);
   }

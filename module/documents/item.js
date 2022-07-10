@@ -692,7 +692,7 @@ export default class Item5e extends Item {
         if ( consumeSpellSlot === false ) consumeSpellLevel = null;
         const upcastLevel = configuration.level === "pact" ? as.spells.pact.level : parseInt(configuration.level);
         if ( !Number.isNaN(upcastLevel) && (upcastLevel !== is.level) ) {
-          item = this.clone({"data.level": upcastLevel}, {keepId: true});
+          item = this.clone({"system.level": upcastLevel}, {keepId: true});
           item.prepareFinalAttributes(); // Spell save DC, etc...
         }
       }
@@ -747,7 +747,7 @@ export default class Item5e extends Item {
         ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: this.name}));
         return false;
       }
-      itemUpdates["data.recharge.charged"] = false;
+      itemUpdates["system.recharge.charged"] = false;
     }
 
     // Consume Limited Resource
@@ -786,8 +786,8 @@ export default class Item5e extends Item {
         const q = Number(this.system.quantity ?? 1);
         if ( q >= 1 ) {
           used = true;
-          itemUpdates["data.quantity"] = Math.max(q - 1, 0);
-          itemUpdates["data.uses.value"] = uses.max ?? 1;
+          itemUpdates["system.quantity"] = Math.max(q - 1, 0);
+          itemUpdates["system.uses.value"] = uses.max ?? 1;
         }
       }
 
