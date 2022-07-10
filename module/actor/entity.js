@@ -762,7 +762,7 @@ export default class Actor5e extends Actor {
   _computeEncumbrance(actorData) {
 
     // Get the total weight from items
-    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
+    const physicalItems = ["weapon", "equipment", "consumable", "tool", "container", "loot"];
     let weight = actorData.items.reduce((weight, i) => {
       if ( !physicalItems.includes(i.type) ) return weight;
       const q = i.data.data.quantity || 0;

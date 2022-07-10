@@ -69,7 +69,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       equipment: { label: "DND5E.ItemTypeEquipmentPl", items: [], dataset: {type: "equipment"} },
       consumable: { label: "DND5E.ItemTypeConsumablePl", items: [], dataset: {type: "consumable"} },
       tool: { label: "DND5E.ItemTypeToolPl", items: [], dataset: {type: "tool"} },
-      backpack: { label: "DND5E.ItemTypeContainerPl", items: [], dataset: {type: "backpack"} },
+      container: { label: "DND5E.ItemTypeContainerPl", items: [], dataset: {type: "container"} },
       loot: { label: "DND5E.ItemTypeLootPl", items: [], dataset: {type: "loot"} }
     };
 
