@@ -783,15 +783,9 @@ export default class Actor5e extends Actor {
     }
 
     // Determine the encumbrance size class
-    let mod = {
-      tiny: 0.5,
-      sm: 1,
-      med: 1,
-      lg: 2,
-      huge: 4,
-      grg: 8
-    }[actorData.data.traits.size] || 1;
-    if ( this.getFlag("dnd5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
+    let size = actorData.data.traits.size;
+    if ( this.getFlag("dnd5e", "powerfulBuild") ) size = CONFIG.DND5E.actorSizes[size["nextSizeUp"]];
+    let sizeMod = size["encumbranceMultiplier"]
 
     // Compute Encumbrance percentage
     weight = weight.toNearest(0.1);
@@ -800,7 +794,9 @@ export default class Actor5e extends Actor {
       ? CONFIG.DND5E.encumbrance.strMultiplier.metric
       : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
 
-    const max = (actorData.data.abilities.str.value * strengthMultiplier * mod).toNearest(0.1);
+    const max = ((actorData.data.abilities.str.value * strengthMultiplier
+      * sizeMod * actorData.data.attributes.encumbrance.capacityMultiplyer)
+      + actorData.data.attributes.encumbrance.capacityBonus).toNearest(0.1);
     const pct = Math.clamped((weight * 100) / max, 0, 100);
     return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (200/3) };
   }
@@ -817,7 +813,7 @@ export default class Actor5e extends Actor {
 
     // Some sensible defaults for convenience
     // Token size category
-    const s = CONFIG.DND5E.tokenSizes[this.data.data.traits.size || "med"];
+    const s = this.data.data.traits.size.tokenSize || "med";
     this.data.token.update({width: s, height: s});
 
     // Player character configuration
@@ -835,7 +831,7 @@ export default class Actor5e extends Actor {
     // Apply changes in Actor size to Token width/height
     const newSize = foundry.utils.getProperty(changed, "data.traits.size");
     if ( newSize && (newSize !== foundry.utils.getProperty(this.data, "data.traits.size")) ) {
-      let size = CONFIG.DND5E.tokenSizes[newSize];
+      let size = newSize.tokenSize;
       if ( !foundry.utils.hasProperty(changed, "token.width") ) {
         changed.token = changed.token || {};
         changed.token.height = size;

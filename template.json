@@ -78,6 +78,10 @@
             "walk": 30,
             "units": "ft",
             "hover": false
+          },
+          "encumbrance": {
+            "bonus" : "",
+            "multiplier": 1
           }
         },
         "details": {
@@ -87,7 +91,7 @@
           }
         },
         "traits": {
-          "size": "med",
+          "size": "DND5E.actorSizes.med",
           "di": {
             "value": [],
             "custom": ""
@@ -495,7 +499,7 @@
         }
       },
       "traits": {
-        "size": "lg",
+        "size": "DND5E.actorSizes.lg",
         "dimensions": "",
         "di": {
           "value": ["poison", "psychic"]
