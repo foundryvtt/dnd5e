@@ -16,12 +16,12 @@
 
 			<ul class="summary flexrow">
 				<li>
-					<select name="data.rarity">
-							{{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+					<select name="system.rarity">
+						{{selectOptions config.itemRarity selected=system.rarity blank=""}}
 					</select>
 				</li>
 				<li>
-					<input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+					<input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
 				</li>
 			</ul>
 		</div>
@@ -46,22 +46,22 @@
 			<div class="form-group">
 				<label>{{localize 'DND5E.ItemContainerCapacity'}}</label>
 				<div class="form-fields">
-					<input type="text" name="data.capacity.value" value="{{data.capacity.value}}"
+					<input type="text" name="system.capacity.value" value="{{system.capacity.value}}"
 					       data-dtype="Number" placeholder="-">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label>{{localize 'DND5E.ItemContainerCapacityType'}}</label>
-				<select name="data.capacity.type">
-					{{selectOptions config.itemCapacityTypes selected=data.capacity.type}}
+				<select name="system.capacity.type">
+					{{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
 				</select>
 			</div>
 
 			<div class="form-group stacked">
 				<label>{{localize 'DND5E.ItemContainerProperties'}}</label>
 				<label class="checkbox">
-					<input type="checkbox" name="data.capacity.weightless" {{checked data.capacity.weightless}}>
+					<input type="checkbox" name="system.capacity.weightless" {{checked system.capacity.weightless}}>
 					{{localize 'DND5E.ItemContainerWeightless'}}
 				</label>
 			</div>

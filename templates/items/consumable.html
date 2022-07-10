@@ -16,15 +16,15 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.consumableTypes data.consumableType }}
+                    {{lookup config.consumableTypes system.consumableType }}
                 </li>
                 <li>
-                    <select name="data.rarity">
-                        {{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+                    <select name="system.rarity">
+                        {{selectOptions config.itemRarity selected=system.rarity blank="&nbsp;"}}
                     </select>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -50,25 +50,25 @@
             {{!-- Consumable Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemConsumableType" }}</label>
-                <select name="data.consumableType">
-                    {{selectOptions config.consumableTypes selected=data.consumableType}}
+                <select name="system.consumableType">
+                    {{selectOptions config.consumableTypes selected=system.consumableType}}
                 </select>
             </div>
 
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
-                <select name="data.attunement" data-dtype="Number">
-                    {{selectOptions config.attunements selected=data.attunement}}
+                <select name="system.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=system.attunement}}
                 </select>
             </div>
 
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemConsumableStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "DND5E.Equipped" }}
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{ localize "DND5E.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "DND5E.Identified" }}
+                    <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "DND5E.Identified" }}
                 </label>
             </div>
 
@@ -76,10 +76,10 @@
 
             {{!-- Item Activation Template --}}
             {{> "systems/dnd5e/templates/items/parts/item-activation.html"}}
-            {{#if data.activation.type}}
+            {{#if system.activation.type}}
             <div class="form-group">
                 <label class="checkbox">
-                    <input type="checkbox" name="data.uses.autoDestroy" {{checked data.uses.autoDestroy}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
+                    <input type="checkbox" name="system.uses.autoDestroy" {{checked system.uses.autoDestroy}}/> {{ localize "DND5E.ItemDestroyEmpty" }}
                 </label>
             </div>
             {{/if}}

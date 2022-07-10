@@ -11,11 +11,11 @@ export default class ItemSheet5e extends ItemSheet {
     super(...args);
 
     // Expand the default size of the class sheet
-    if ( this.object.data.type === "class" ) {
+    if ( this.object.type === "class" ) {
       this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
     }
-    else if ( this.object.data.type === "subclass" ) {
+    else if ( this.object.type === "subclass" ) {
       this.options.height = this.position.height = 540;
     }
   }
@@ -46,7 +46,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @inheritdoc */
   get template() {
-    return `systems/dnd5e/templates/items/${this.item.data.type}.html`;
+    return `systems/dnd5e/templates/items/${this.item.type}.html`;
   }
 
   /* -------------------------------------------- */
@@ -97,6 +97,12 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Prepare Active Effects
     context.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
+
+    // Enrich HTML description
+    context.descriptionHTML = await TextEditor.enrichHTML(context.system.description.value, {
+      secrets: this.item.isOwner,
+      async: true
+    });
     return context;
   }
 

@@ -16,12 +16,12 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <select name="data.rarity">
-                        {{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+                    <select name="system.rarity">
+                        {{selectOptions config.itemRarity selected=system.rarity blank="&nbsp;"}}
                     </select>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
         </div>

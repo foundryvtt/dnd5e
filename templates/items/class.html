@@ -16,7 +16,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -34,7 +34,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab flexrow active" data-group="primary" data-tab="description">
-            {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+            {{editor descriptionHTML target="system.description.value" button=true editable=editable}}
         </div>
 
         {{!-- Details Tab --}}
@@ -44,10 +44,10 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.Identifier" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.identifier" value="{{data.identifier}}">
+                    <input type="text" name="system.identifier" value="{{system.identifier}}">
                 </div>
                 <p class="hint">
-                    {{{localize "DND5E.ClassIdentifierHint" identifier=data.identifier}}}
+                    {{{localize "DND5E.ClassIdentifierHint" identifier=system.identifier}}}
                 </p>
             </div>
 
@@ -55,8 +55,8 @@
             <div class="form-group">
                 <label>{{localize "DND5E.HitDice"}}</label>
                 <div class="form-fields">
-                    <select name="data.hitDice">
-                        {{#select data.hitDice}}
+                    <select name="system.hitDice">
+                        {{#select system.hitDice}}
                         {{#each config.hitDieTypes}}
                         <option value="{{this}}">{{this}}</option>
                         {{/each}}
@@ -68,7 +68,7 @@
             <div class="form-group">
                 <label>{{localize "DND5E.HitDiceUsed"}}</label>
                 <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.hitDiceUsed" value="{{data.hitDiceUsed}}" data-dtype="Number"/>
+                    <input type="text" placeholder="0" name="system.hitDiceUsed" value="{{system.hitDiceUsed}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -82,14 +82,14 @@
                 <label>
                     {{ localize "DND5E.ClassSaves" }}
                     {{#if editable}}
-                    <a class="trait-selector class-saves" data-target="data.saves" data-options="saves">
+                    <a class="trait-selector class-saves" data-target="system.saves" data-options="saves">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.saves}}
+                        {{#each system.saves}}
                             <li class="tag {{this}}">{{lookup ../config.abilities this}}</li>
                         {{/each}}
                     </ul>
@@ -100,7 +100,7 @@
             <div class="form-group">
                 <label>{{localize "DND5E.ClassSkillsNumber"}}</label>
                 <div class="form-fields">
-                    <input type="text" placeholder="0" name="data.skills.number" value="{{data.skills.number}}" data-dtype="Number"/>
+                    <input type="text" placeholder="0" name="system.skills.number" value="{{system.skills.number}}" data-dtype="Number"/>
                 </div>
             </div>
 
@@ -108,14 +108,14 @@
                 <label>
                     {{localize "DND5E.ClassSkillsEligible"}}
                     {{#if editable }}
-                    <a class="trait-selector class-skills" data-target="data.skills.choices" data-options="skills.choices">
+                    <a class="trait-selector class-skills" data-target="system.skills.choices" data-options="skills.choices">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.skills.choices}}
+                        {{#each system.skills.choices}}
                         <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
                         {{/each}}
                     </ul>
@@ -126,14 +126,14 @@
                 <label>
                     {{localize "DND5E.ClassSkillsChosen"}}
                     {{#if editable }}
-                    <a class="trait-selector class-skills" data-target="data.skills" data-options="skills">
+                    <a class="trait-selector class-skills" data-target="system.skills" data-options="skills">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{/if}}
                 </label>
                 <div class="form-fields">
                     <ul class="traits-list">
-                        {{#each data.skills.value}}
+                        {{#each system.skills.value}}
                             <li class="tag {{this}}">{{lookup ../config.skills this}}</li>
                         {{/each}}
                     </ul>

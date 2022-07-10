@@ -19,10 +19,10 @@
                     {{labels.featType}}
                 </li>
                 <li>
-                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="{{ localize 'DND5E.Requirements' }}"/>
+                    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="{{ localize 'DND5E.Requirements' }}"/>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -50,16 +50,16 @@
             {{> "systems/dnd5e/templates/items/parts/item-activation.html"}}
 
             {{!-- Recharge Requirement --}}
-            {{#if data.activation.type}}
+            {{#if system.activation.type}}
             <div class="form-group recharge">
                 <label>{{ localize "DND5E.FeatureActionRecharge" }}</label>
                 <div class="form-fields">
                     <span>{{ localize "DND5E.FeatureRechargeOn" }}</span>
-                    <input type="text" name="data.recharge.value" value="{{data.recharge.value}}"
+                    <input type="text" name="system.recharge.value" value="{{system.recharge.value}}"
                            data-dtype="Number" placeholder="{{ localize 'DND5E.FeatureRechargeResult' }}"/>
                     <label class="checkbox">
                         {{ localize "DND5E.Charged" }}
-                        <input type="checkbox" name="data.recharge.charged" {{checked data.recharge.charged}}/>
+                        <input type="checkbox" name="system.recharge.charged" {{checked system.recharge.charged}}/>
                     </label>
                 </div>
             </div>

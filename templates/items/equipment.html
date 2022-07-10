@@ -16,15 +16,15 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{lookup config.equipmentTypes data.armor.type }}
+                    {{lookup config.equipmentTypes system.armor.type }}
                 </li>
                 <li>
-                    <select name="data.rarity">
-                        {{selectOptions config.itemRarity selected=data.rarity blank="&nbsp;"}}
+                    <select name="system.rarity">
+                        {{selectOptions config.itemRarity selected=system.rarity blank="&nbsp;"}}
                     </select>
                 </li>
                 <li>
-                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+                    <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
                 </li>
             </ul>
         </div>
@@ -50,27 +50,27 @@
             {{!-- Equipment Type --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentType" }}</label>
-                <select name="data.armor.type">
+                <select name="system.armor.type">
                     <option value=""></option>
                     <optgroup label="{{ localize "DND5E.Armor" }}">
-                        {{selectOptions config.armorTypes selected=data.armor.type}}
+                        {{selectOptions config.armorTypes selected=system.armor.type}}
                     </optgroup>
-                    {{selectOptions config.miscEquipmentTypes selected=data.armor.type}}
+                    {{selectOptions config.miscEquipmentTypes selected=system.armor.type}}
                 </select>
             </div>
 
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentBase" }}</label>
-                <select name="data.baseItem">
-                    {{selectOptions baseItems selected=data.baseItem blank=""}}
+                <select name="system.baseItem">
+                    {{selectOptions baseItems selected=system.baseItem blank=""}}
                 </select>
             </div>
 
             {{#unless isMountable}}
             <div class="form-group">
                 <label>{{localize "DND5E.Attunement"}}</label>
-                <select name="data.attunement" data-dtype="Number">
-                    {{selectOptions config.attunements selected=data.attunement}}
+                <select name="system.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=system.attunement}}
                 </select>
             </div>
 
@@ -78,13 +78,13 @@
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemEquipmentStatus" }}</label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.proficient" {{checked data.proficient}}/> {{ localize "DND5E.Proficient" }}
+                    <input type="checkbox" name="system.proficient" {{checked system.proficient}}/> {{ localize "DND5E.Proficient" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.equipped" {{checked data.equipped}}/> {{ localize "DND5E.Equipped" }}
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{ localize "DND5E.Equipped" }}
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "DND5E.Identified" }}
+                    <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "DND5E.Identified" }}
                 </label>
             </div>
             {{/unless}}
@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ArmorClass" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.armor.value" value="{{data.armor.value}}" data-dtype="Number"/>
+                   <input type="text" name="system.armor.value" value="{{system.armor.value}}" data-dtype="Number"/>
                 </div>
             </div>
             {{/if}}
@@ -104,7 +104,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentDexMod" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.armor.dex" value="{{data.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Unlimited' }}"/>
+                   <input type="text" name="system.armor.dex" value="{{system.armor.dex}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Unlimited' }}"/>
                 </div>
             </div>
             {{/if}}
@@ -114,14 +114,14 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemRequiredStr" }}</label>
                 <div class="form-fields">
-                   <input type="text" name="data.strength" value="{{data.strength}}" data-dtype="Number" placeholder="{{ localize 'DND5E.None' }}"/>
+                   <input type="text" name="system.strength" value="{{system.strength}}" data-dtype="Number" placeholder="{{ localize 'DND5E.None' }}"/>
                 </div>
             </div>
 
             {{!-- Stealth Disadvantage --}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemEquipmentStealthDisav" }}</label>
-                <input type="checkbox" name="data.stealth" value="1" {{checked data.stealth}}/>
+                <input type="checkbox" name="system.stealth" value="1" {{checked system.stealth}}/>
             </div>
             {{/if}}
 
@@ -130,11 +130,11 @@
             <div class="form-group">
                 <label>{{localize 'DND5E.Speed'}}</label>
                 <div class="form-fields">
-                    <input type="text" name="data.speed.value" value="{{data.speed.value}}"
+                    <input type="text" name="system.speed.value" value="{{system.speed.value}}"
                            placeholder="0" data-dtype="Number">
                     <span class="sep">{{localize 'DND5E.FeetAbbr'}}</span>
-                    <input type="text" name="data.speed.conditions"
-                           value="{{data.speed.conditions}}">
+                    <input type="text" name="system.speed.conditions"
+                           value="{{system.speed.conditions}}">
                 </div>
             </div>
             {{/if}}

@@ -37,24 +37,24 @@
           {{/if}}
         </h3>
 
-        {{#if (and @root.editable data.configured (ne level "unconfigured"))}}
+        {{#if (and @root.editable system.configured (ne level "unconfigured"))}}
           <div>
             <a class="item-control modify-choices">{{localize "DND5E.AdvancementModifyChoices"}}</a>
           </div>
         {{/if}}
 
-        {{#if (eq data.configured "full")}}
+        {{#if (eq system.configured "full")}}
           <div class="item-checkmark" title="{{localize 'DND5E.AdvancementConfiguredComplete'}}">
             <i class="fas fa-check-circle"></i>
           </div>
-        {{else if (eq data.configured "partial")}}
+        {{else if (eq system.configured "partial")}}
           <div class="item-warning" title="{{localize 'DND5E.AdvancementConfiguredIncomplete'}}">
             <i class="fas fa-exclamation-triangle"></i>
           </div>
         {{/if}}
       </li>
       <ol class="item-list">
-        {{#each data.items}}
+        {{#each system.items}}
           <li class="item flexrow" data-id="{{this.id}}">
             <div class="item-name flexrow">
               <div class="item-image" style="background-image: url('{{this.icon}}')"></div>

@@ -16,7 +16,7 @@
 
       <ul class="summary flexrow">
         <li>
-          <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
+          <input type="text" name="system.source" value="{{system.source}}" placeholder="{{ localize 'DND5E.Source' }}"/>
         </li>
       </ul>
     </div>
@@ -33,7 +33,7 @@
 
     {{!-- Description Tab --}}
     <div class="tab flexrow active" data-group="primary" data-tab="description">
-      {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+      {{editor descriptionHTML target="system.description.value" button=true editable=editable}}
     </div>
 
     {{!-- Advancement Tab --}}
