@@ -38,16 +38,16 @@ export default class ShortRestDialog extends Dialog {
     const data = super.getData();
 
     // Determine Hit Dice
-    data.availableHD = this.actor.data.items.reduce((hd, item) => {
+    data.availableHD = this.actor.items.reduce((hd, item) => {
       if ( item.type === "class" ) {
-        const d = item.data.data;
-        const denom = d.hitDice || "d6";
-        const available = parseInt(d.levels || 1) - parseInt(d.hitDiceUsed || 0);
+        const {levels, hitDice, hitDiceUsed} = item.system;
+        const denom = hitDice || "d6";
+        const available = parseInt(levels || 1) - parseInt(hitDiceUsed || 0);
         hd[denom] = denom in hd ? hd[denom] + available : available;
       }
       return hd;
     }, {});
-    data.canRoll = this.actor.data.data.attributes.hd > 0;
+    data.canRoll = this.actor.system.attributes.hd > 0;
     data.denomination = this._denom;
 
     // Determine rest type
@@ -116,19 +116,5 @@ export default class ShortRestDialog extends Dialog {
       });
       dlg.render(true);
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
-   * workflow has been resolved.
-   * @deprecated
-   * @param {Actor5e} actor
-   * @returns {Promise}
-   */
-  static async longRestDialog({ actor }={}) {
-    console.warn("WARNING! ShortRestDialog.longRestDialog has been deprecated, use LongRestDialog.longRestDialog instead.");
-    return LongRestDialog.longRestDialog(...arguments);
   }
 }

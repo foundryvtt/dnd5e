@@ -28,11 +28,9 @@ export default class AbilityUseDialog extends Dialog {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
 
     // Prepare data
-    const actorData = item.actor.data.data;
-    const itemData = item.data.data;
-    const uses = itemData.uses || {};
-    const quantity = itemData.quantity || 0;
-    const recharge = itemData.recharge || {};
+    const uses = item.system.uses || {};
+    const quantity = item.system.quantity || 0;
+    const recharge = item.system.recharge || {};
     const recharges = !!recharge.value;
     const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0;
 
@@ -43,13 +41,13 @@ export default class AbilityUseDialog extends Dialog {
       note: this._getAbilityUseNote(item.data, uses, recharge),
       consumeSpellSlot: false,
       consumeRecharge: recharges,
-      consumeResource: !!itemData.consume.target,
+      consumeResource: !!item.system.consume.target,
       consumeUses: uses.per && (uses.max > 0),
       canUse: recharges ? recharge.charged : sufficientUses,
       createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
       errors: []
     };
-    if ( item.data.type === "spell" ) this._getSpellData(actorData, itemData, data);
+    if ( item.data.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
 
     // Render the ability usage template
     const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.html", data);
@@ -84,8 +82,8 @@ export default class AbilityUseDialog extends Dialog {
 
   /**
    * Get dialog data related to limited spell slots.
-   * @param {object} actorData  Data from the actor using the spell.
-   * @param {object} itemData   Data from the spell being used.
+   * @param {object} actorData  System data from the actor using the spell.
+   * @param {object} itemData   System data from the spell being used.
    * @param {object} data       Data for the dialog being presented.
    * @returns {object}          Modified dialog data.
    * @private

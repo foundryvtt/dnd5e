@@ -26,15 +26,14 @@ export default class ActorHitDiceConfig extends DocumentSheet {
   getData(options) {
     return {
       classes: this.object.items.reduce((classes, item) => {
-        if (item.data.type === "class") {
-          // Add the appropriate data only if this item is a "class"
+        if (item.type === "class") {
           classes.push({
-            classItemId: item.data._id,
-            name: item.data.name,
-            diceDenom: item.data.data.hitDice,
-            currentHitDice: item.data.data.levels - item.data.data.hitDiceUsed,
-            maxHitDice: item.data.data.levels,
-            canRoll: (item.data.data.levels - item.data.data.hitDiceUsed) > 0
+            classItemId: item.id,
+            name: item.name,
+            diceDenom: item.system.hitDice,
+            currentHitDice: item.system.levels - item.system.hitDiceUsed,
+            maxHitDice: item.system.levels,
+            canRoll: (item.system.levels - item.system.hitDiceUsed) > 0
           });
         }
         return classes;
@@ -67,7 +66,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
     const actorItems = this.object.items;
     const classUpdates = Object.entries(formData).map(([id, hd]) => ({
       _id: id,
-      "data.hitDiceUsed": actorItems.get(id).data.data.levels - hd
+      "data.hitDiceUsed": actorItems.get(id).system.levels - hd
     }));
     return this.object.updateEmbeddedDocuments("Item", classUpdates);
   }

@@ -161,7 +161,7 @@ export const migrateArmorClass = async function(pack) {
 
       // CASE 1: Armor is equipped
       const hasArmorEquipped = actor.itemTypes.equipment.some(e => {
-        return armor.has(e.data.data.armor?.type) && e.data.data.equipped;
+        return armor.has(e.system.armor?.type) && e.system.equipped;
       });
       if ( hasArmorEquipped ) update["data.attributes.ac.calc"] = "default";
 

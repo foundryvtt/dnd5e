@@ -1462,7 +1462,7 @@ export default class Item5e extends Item {
     else rollData.abilityCheckBonus = 0;
 
     // Add global actor bonus
-    const globalBonus = getProperty(this.actor.data.data, "bonuses.abilities") || {};
+    const globalBonus = this.actor.system.bonuses?.abilities || {};
     if ( globalBonus.check ) {
       parts.push("@checkBonus");
       rollData.checkBonus = Roll.replaceFormulaData(globalBonus.check, rollData);

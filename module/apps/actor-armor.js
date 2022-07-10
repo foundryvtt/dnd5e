@@ -28,8 +28,8 @@ export default class ActorArmorConfig extends DocumentSheet {
   async getData() {
 
     // Get actor AC data
-    const actorData = foundry.utils.deepClone(this.object.data.data);
-    const ac = foundry.utils.getProperty(actorData, "attributes.ac");
+    const actorData = this.object.toObject(false).system;
+    const ac = actorData.attributes.ac;
 
     // Get configuration data for the calculation mode
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
