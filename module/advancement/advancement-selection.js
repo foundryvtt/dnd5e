@@ -17,7 +17,7 @@ export class AdvancementSelection extends Dialog {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "advancement"],
@@ -30,17 +30,16 @@ export class AdvancementSelection extends Dialog {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get id() {
     return `item-${this.item.id}-advancement-selection`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const data = { types: {} };
-
     for ( const advancement of Object.values(game.dnd5e.advancement.types) ) {
       if ( !advancement.metadata.validItemTypes.has(this.item.type) ) continue;
       data.types[advancement.typeName] = {
@@ -51,13 +50,12 @@ export class AdvancementSelection extends Dialog {
       };
     }
     data.types = game.dnd5e.utils.sortObjectEntries(data.types, "label");
-
     return data;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.on("change", "input", this._onChangeInput.bind(this));
@@ -65,7 +63,7 @@ export class AdvancementSelection extends Dialog {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onChangeInput(event) {
     const submit = this.element[0].querySelector("button[data-button='submit']");
     submit.disabled = !this.element[0].querySelector("input[name='type']:checked");

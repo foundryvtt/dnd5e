@@ -73,7 +73,7 @@ export class ItemGrantAdvancement extends Advancement {
       if ( !selected ) continue;
       const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
       if ( !item ) continue;
-      item.data.update({
+      item.updateSource({
         _id: retainedData[uuid]?._id ?? foundry.utils.randomID(),
         "flags.dnd5e.sourceId": uuid,
         "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
@@ -82,7 +82,7 @@ export class ItemGrantAdvancement extends Advancement {
       // TODO: Trigger any additional advancement steps for added items
       updates[item.id] = uuid;
     }
-    this.actor.data.update({items});
+    this.actor.updateSource({items});
     this.updateSource({"value.added": updates});
   }
 
@@ -92,7 +92,7 @@ export class ItemGrantAdvancement extends Advancement {
   restore(level, data) {
     const updates = {};
     for ( const item of data.items ) {
-      this.actor.data.update({items: [item]});
+      this.actor.updateSource({items: [item]});
       // TODO: Restore any additional advancement data here
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
@@ -181,7 +181,6 @@ export class ItemGrantConfig extends AdvancementConfig {
 
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
-
     const existingItems = this.advancement.data.configuration.items;
 
     // Abort if this uuid is the parent item
@@ -197,7 +196,6 @@ export class ItemGrantConfig extends AdvancementConfig {
     await this.advancement.update({"configuration.items": [...existingItems, item.uuid]});
     this.render();
   }
-
 }
 
 

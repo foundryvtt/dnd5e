@@ -5,10 +5,8 @@
  * @property {Item5e} item           Item to which the advancement belongs.
  * @property {string} advancementId  ID of the advancement this flow modifies.
  * @property {number} level          Level for which to configure this flow.
- * @extends {FormApplication}
  */
 export class AdvancementFlow extends FormApplication {
-
   constructor(item, advancementId, level, options={}) {
     super({}, options);
 

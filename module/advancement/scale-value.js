@@ -2,11 +2,8 @@ import { Advancement } from "./advancement.js";
 import { AdvancementConfig } from "./advancement-config.js";
 import { AdvancementFlow } from "./advancement-flow.js";
 
-
 /**
  * Advancement that represents a value that scales with class level. **Can only be added to classes or subclasses.**
- *
- * @extends {Advancement}
  */
 export class ScaleValueAdvancement extends Advancement {
 
@@ -285,7 +282,6 @@ export class ScaleValueConfig extends AdvancementConfig {
     }
     return super._updateObject(event, formData);
   }
-
 }
 
 

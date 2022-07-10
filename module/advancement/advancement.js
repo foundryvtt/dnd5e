@@ -1,15 +1,12 @@
 import { AdvancementConfig } from "./advancement-config.js";
 import { AdvancementFlow } from "./advancement-flow.js";
 
-
 /**
  * Abstract base class which various advancement types can subclass.
- *
  * @property {Item5e} item    Item to which this advancement belongs.
  * @property {object} [data]  Raw data stored in the advancement object.
  */
 export class Advancement {
-
   constructor(item, data={}) {
     /**
      * Item to which this advancement belongs.
@@ -246,15 +243,12 @@ export class Advancement {
    * @returns {Advancement}   This advancement after updates have been applied.
    */
   updateSource(updates) {
-    const advancement = foundry.utils.deepClone(this.item.data.data.advancement);
+    const advancement = foundry.utils.deepClone(this.item.system.advancement);
     const idx = advancement.findIndex(a => a._id === this.id);
     if ( idx < 0 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
-
     foundry.utils.mergeObject(this.data, updates);
     foundry.utils.mergeObject(advancement[idx], updates);
-    if ( game.release.generation === 10 ) this.item.updateSource({"system.advancement": advancement});
-    else this.item.data.update({"data.advancement": advancement});
-
+    this.item.updateSource({"system.advancement": advancement});
     return this;
   }
 

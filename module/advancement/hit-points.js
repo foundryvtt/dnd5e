@@ -44,7 +44,7 @@ export class HitPointsAdvancement extends Advancement {
    * @returns {string}
    */
   get hitDie() {
-    return this.item.data.data.hitDice;
+    return this.item.system.hitDice;
   }
 
   /* -------------------------------------------- */
@@ -129,18 +129,14 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   apply(level, data) {
-    const actorData = this.actor.data.data;
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
     if ( value === undefined ) return;
-
-    value += actorData.abilities.con?.mod ?? 0;
-    if ( game.release.generation === 10 ) this.actor.updateSource({
-      "system.attributes.hp.max": actorData.attributes.hp.max + value,
-      "system.attributes.hp.value": actorData.attributes.hp.value + value
-    });
-    else this.actor.data.update({
-      "data.attributes.hp.max": actorData.attributes.hp.max + value,
-      "data.attributes.hp.value": actorData.attributes.hp.value + value
+    const con = this.actor.system.abilities.con;
+    const hp = this.actor.system.attributes.hp;
+    value += con?.mod ?? 0;
+    this.actor.updateSource({
+      "system.attributes.hp.max": hp.max + value,
+      "system.attributes.hp.value": hp.value + value
     });
     this.updateSource({ value: data });
   }
@@ -156,24 +152,19 @@ export class HitPointsAdvancement extends Advancement {
 
   /** @inheritdoc */
   reverse(level) {
-    const actorData = this.actor.data.data;
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
-
-    value += actorData.abilities.con?.mod ?? 0;
-    if ( game.release.generation === 10 ) this.actor.updateSource({
-      "system.attributes.hp.max": actorData.attributes.hp.max - value,
-      "system.attributes.hp.value": actorData.attributes.hp.value - value
-    });
-    else this.actor.data.update({
-      "data.attributes.hp.max": actorData.attributes.hp.max - value,
-      "data.attributes.hp.value": actorData.attributes.hp.value - value
+    const con = this.actor.system.abilities.con;
+    const hp = this.actor.system.attributes.hp;
+    value += con?.mod ?? 0;
+    this.actor.updateSource({
+      "system.attributes.hp.max": hp.max - value,
+      "system.attributes.hp.value": hp.value - value
     });
     const source = { [level]: this.data.value[level] };
     this.updateSource({ [`value.-=${level}`]: null });
     return source;
   }
-
 }
 
 

@@ -7,7 +7,6 @@
  * @extends {FormApplication}
  */
 export class AdvancementConfig extends FormApplication {
-
   constructor(advancement, options={}) {
     super(advancement, options);
 
@@ -26,7 +25,7 @@ export class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "dialog"],
@@ -40,7 +39,7 @@ export class AdvancementConfig extends FormApplication {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get title() {
     const type = this.advancement.constructor.metadata.title;
     return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { item: this.item.name })}: ${type}`;
@@ -53,7 +52,6 @@ export class AdvancementConfig extends FormApplication {
     const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
     else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
-
     return {
       data: this.advancement.data,
       default: {
@@ -83,7 +81,6 @@ export class AdvancementConfig extends FormApplication {
   async _updateObject(event, formData) {
     let updates = foundry.utils.expandObject(formData).data;
     if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
-
     await this.advancement.update(updates);
     this.render();
   }
