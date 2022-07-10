@@ -7,9 +7,9 @@
                 <i class="fas fa-coins"></i>
             </a>
         </h3>
-        {{#each data.currency as |v k|}}
+        {{#each system.currency as |v k|}}
         <label class="denomination {{k}}">{{ lookup ../labels.currencies k }}</label>
-        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
+        <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
         {{/each}}
     </ol>
     {{/unless}}
@@ -63,7 +63,7 @@
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>
                     {{item.name~}}
-                    {{~#if item.isStack}} ({{item.data.quantity}}){{/if}}
+                    {{~#if item.isStack}} ({{item.system.quantity}}){{/if}}
                 </h4>
                 {{#if item.attunement}}
                 <div class="item-detail attunement">
@@ -97,13 +97,13 @@
 
                 <div class="item-detail item-uses">
                     {{#if item.hasUses }}
-                        <input type="text" value="{{item.data.uses.value}}" placeholder="0"/>
-                        / {{item.data.uses.max}}
+                        <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>
+                        / {{item.system.uses.max}}
                     {{/if}}
                 </div>
 
                 <div class="item-detail item-action">
-                    {{#if item.data.activation.type }}
+                    {{#if item.system.activation.type }}
                         {{item.labels.activation}}
                     {{/if}}
                 </div>
@@ -128,7 +128,7 @@
 
 
 {{#unless isNPC}}
-{{#with data.attributes.encumbrance}}
+{{#with system.attributes.encumbrance}}
 <div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
     <span class="encumbrance-bar" style="width:{{pct}}%"></span>
     <span class="encumbrance-label">{{value}} / {{max}}</span>

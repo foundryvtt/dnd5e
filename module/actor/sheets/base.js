@@ -91,8 +91,7 @@ export default class ActorSheet5e extends ActorSheet {
     const source = this.actor.toObject();
     const actorData = this.actor.toObject(false);
     data.actor = actorData;
-    // TODO - try and remove this
-    data.data = actorData.system;
+    data.system = actorData.system;
 
     // Owned Items
     data.items = actorData.items;

@@ -4,18 +4,18 @@
         <label>{{localize "DND5E.Spellcasting"}}</label>
         {{else}}
         <label>{{localize "DND5E.Level"}}</label>
-        <input class="spellcasting-level" type="text" name="data.details.spellLevel"
-               value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
+        <input class="spellcasting-level" type="text" name="system.details.spellLevel"
+               value="{{system.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
         {{/unless}}
-        <select name="data.attributes.spellcasting" data-type="String">
-            {{#select data.attributes.spellcasting}}
+        <select name="system.attributes.spellcasting" data-type="String">
+            {{#select system.attributes.spellcasting}}
             <option value="">{{localize "DND5E.None"}}</option>
-            {{#each data.abilities as |abl a|}}
+            {{#each system.abilities as |abl a|}}
             <option value="{{a}}">{{abl.label}}</option>
             {{/each}}
             {{/select}}
         </select>
-        <span>{{localize "DND5E.AbbreviationDC"}} {{data.attributes.spelldc}}</span>
+        <span>{{localize "DND5E.AbbreviationDC"}} {{system.attributes.spelldc}}</span>
     </div>
 
     <ul class="filter-list flexrow" data-filter="spellbook">
@@ -35,7 +35,7 @@
             <h3>{{section.label}}</h3>
             <div class="spell-slots">
                 {{#if section.usesSlots}}
-                <input type="text" name="data.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
+                <input type="text" name="system.spells.{{section.prop}}.value" value="{{section.uses}}" placeholder="0"
                        data-dtype="Number"/>
                 <span class="sep"> / </span>
                 <span class="spell-max" data-level="{{section.prop}}" data-slots="{{section.slots}}">
@@ -72,8 +72,8 @@
             <div class="item-name flexrow rollable">
                 <div class="item-image" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
                 <h4>{{item.name}}</h4>
-                {{#if item.data.uses.per }}
-                <div class="item-detail spell-uses">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
+                {{#if item.system.uses.per }}
+                <div class="item-detail spell-uses">Uses {{item.system.uses.value}} / {{item.system.uses.max}}</div>
                 {{/if}}
                 <div class="spell-comps">
                     {{#each labels.components.all}}
