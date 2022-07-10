@@ -512,7 +512,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "subclass", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "background", "class", "subclass", "spell", "feat", "container"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -600,7 +600,7 @@
       "templates": ["itemDescription"],
       "advancement": []
     },
-    "backpack": {
+    "container": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
         "type": "weight",
