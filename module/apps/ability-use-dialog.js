@@ -47,7 +47,7 @@ export default class AbilityUseDialog extends Dialog {
       createTemplate: game.user.can("TEMPLATE_CREATE") && item.hasAreaTarget,
       errors: []
     };
-    if ( item.data.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
+    if ( item.type === "spell" ) this._getSpellData(item.actor.system, item.system, data);
 
     // Render the ability usage template
     const html = await renderTemplate("systems/dnd5e/templates/apps/ability-use.html", data);
@@ -150,7 +150,7 @@ export default class AbilityUseDialog extends Dialog {
   static _getAbilityUseNote(item, uses, recharge) {
 
     // Zero quantity
-    const quantity = item.data.quantity;
+    const quantity = item.system.quantity;
     if ( quantity <= 0 ) return game.i18n.localize("DND5E.AbilityUseUnavailableHint");
 
     // Abilities which use Recharge
@@ -167,12 +167,12 @@ export default class AbilityUseDialog extends Dialog {
     if ( item.type === "consumable" ) {
       let str = "DND5E.AbilityUseNormalHint";
       if ( uses.value > 1 ) str = "DND5E.AbilityUseConsumableChargeHint";
-      else if ( item.data.quantity === 1 && uses.autoDestroy ) str = "DND5E.AbilityUseConsumableDestroyHint";
-      else if ( item.data.quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
+      else if ( item.system.quantity === 1 && uses.autoDestroy ) str = "DND5E.AbilityUseConsumableDestroyHint";
+      else if ( item.system.quantity > 1 ) str = "DND5E.AbilityUseConsumableQuantityHint";
       return game.i18n.format(str, {
-        type: game.i18n.localize(`DND5E.Consumable${item.data.consumableType.capitalize()}`),
+        type: game.i18n.localize(`DND5E.Consumable${item.system.consumableType.capitalize()}`),
         value: uses.value,
-        quantity: item.data.quantity,
+        quantity: item.system.quantity,
         max: uses.max,
         per: CONFIG.DND5E.limitedUsePeriods[uses.per]
       });

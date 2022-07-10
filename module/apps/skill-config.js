@@ -33,11 +33,12 @@ export default class ActorSkillConfig extends DocumentSheet {
 
   /** @inheritdoc */
   getData(options) {
+    const src = this.document.toObject();
     return {
-      skill: foundry.utils.getProperty(this.document.data._source, `data.skills.${this._skillId}`) || {},
+      skill: src.system.skills?.[this._skillId] || {},
       skillId: this._skillId,
       proficiencyLevels: CONFIG.DND5E.proficiencyLevels,
-      bonusGlobal: getProperty(this.object.data._source, "data.bonuses.abilities.skill")
+      bonusGlobal: src.system.bonuses?.skill
     };
   }
 
@@ -45,7 +46,7 @@ export default class ActorSkillConfig extends DocumentSheet {
 
   /** @inheritdoc */
   _updateObject(event, formData) {
-    const passive = formData[`data.skills.${this._skillId}.bonuses.passive`];
+    const passive = formData[`system.skills.${this._skillId}.bonuses.passive`];
     const passiveRoll = new Roll(passive);
     if ( !passiveRoll.isDeterministic ) {
       const message = game.i18n.format("DND5E.FormulaCannotContainDiceError", {
@@ -54,8 +55,6 @@ export default class ActorSkillConfig extends DocumentSheet {
       ui.notifications.error(message);
       throw new Error(message);
     }
-
     super._updateObject(event, formData);
   }
-
 }

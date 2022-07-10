@@ -67,7 +67,7 @@ export default class ActorArmorConfig extends DocumentSheet {
 
     // Reference actor data
     let actorData = this.object.toObject(false);
-    let ac = actorData.data.attributes.ac;
+    let ac = actorData.system.attributes.ac;
 
     // Reference form data
     const calc = this.form["ac.calc"].value;
@@ -84,7 +84,7 @@ export default class ActorArmorConfig extends DocumentSheet {
 
     // Recompute effective AC
     actorData = foundry.utils.mergeObject(actorData, {"data.attributes.ac": {calc, formula}});
-    if ( enableFlat ) actorData.data.attributes.ac.flat = flat;
+    if ( enableFlat ) actorData.system.attributes.ac.flat = flat;
     ac = this.object._computeArmorClass(actorData.data);
 
     // Update fields

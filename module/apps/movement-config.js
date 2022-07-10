@@ -25,9 +25,8 @@ export default class ActorMovementConfig extends DocumentSheet {
 
   /** @override */
   getData(options) {
-    const sourceMovement = foundry.utils.getProperty(this.document.data._source, "data.attributes.movement") || {};
     const data = {
-      movement: foundry.utils.deepClone(sourceMovement),
+      movement: this.document.toObject().system?.attributes?.movement || {},
       units: CONFIG.DND5E.movementUnits
     };
     for ( let [k, v] of Object.entries(data.movement) ) {

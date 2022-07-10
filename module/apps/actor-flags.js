@@ -1,6 +1,5 @@
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor
- * @implements {DocumentSheet}
  */
 export default class ActorSheetFlags extends DocumentSheet {
   static get defaultOptions() {
@@ -78,22 +77,23 @@ export default class ActorSheetFlags extends DocumentSheet {
    * @private
    */
   _getBonuses() {
+    const src = this.object.toObject();
     const bonuses = [
-      {name: "data.bonuses.mwak.attack", label: "DND5E.BonusMWAttack"},
-      {name: "data.bonuses.mwak.damage", label: "DND5E.BonusMWDamage"},
-      {name: "data.bonuses.rwak.attack", label: "DND5E.BonusRWAttack"},
-      {name: "data.bonuses.rwak.damage", label: "DND5E.BonusRWDamage"},
-      {name: "data.bonuses.msak.attack", label: "DND5E.BonusMSAttack"},
-      {name: "data.bonuses.msak.damage", label: "DND5E.BonusMSDamage"},
-      {name: "data.bonuses.rsak.attack", label: "DND5E.BonusRSAttack"},
-      {name: "data.bonuses.rsak.damage", label: "DND5E.BonusRSDamage"},
-      {name: "data.bonuses.abilities.check", label: "DND5E.BonusAbilityCheck"},
-      {name: "data.bonuses.abilities.save", label: "DND5E.BonusAbilitySave"},
-      {name: "data.bonuses.abilities.skill", label: "DND5E.BonusAbilitySkill"},
-      {name: "data.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
+      {name: "system.bonuses.mwak.attack", label: "DND5E.BonusMWAttack"},
+      {name: "system.bonuses.mwak.damage", label: "DND5E.BonusMWDamage"},
+      {name: "system.bonuses.rwak.attack", label: "DND5E.BonusRWAttack"},
+      {name: "system.bonuses.rwak.damage", label: "DND5E.BonusRWDamage"},
+      {name: "system.bonuses.msak.attack", label: "DND5E.BonusMSAttack"},
+      {name: "system.bonuses.msak.damage", label: "DND5E.BonusMSDamage"},
+      {name: "system.bonuses.rsak.attack", label: "DND5E.BonusRSAttack"},
+      {name: "system.bonuses.rsak.damage", label: "DND5E.BonusRSDamage"},
+      {name: "system.bonuses.abilities.check", label: "DND5E.BonusAbilityCheck"},
+      {name: "system.bonuses.abilities.save", label: "DND5E.BonusAbilitySave"},
+      {name: "system.bonuses.abilities.skill", label: "DND5E.BonusAbilitySkill"},
+      {name: "system.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
     ];
     for ( let b of bonuses ) {
-      b.value = getProperty(this.object.data._source, b.name) || "";
+      b.value = foundry.utils.getProperty(src, b.name) || "";
     }
     return bonuses;
   }
@@ -104,20 +104,19 @@ export default class ActorSheetFlags extends DocumentSheet {
   async _updateObject(event, formData) {
     const actor = this.object;
     let updateData = expandObject(formData);
+    const src = actor.toObject();
 
     // Unset any flags which are "false"
     const flags = updateData.flags.dnd5e;
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];
-        if ( hasProperty(actor.data._source.flags, `dnd5e.${k}`) ) {
-          flags[`-=${k}`] = null;
-        }
+        if ( foundry.utils.hasProperty(src.flags, `dnd5e.${k}`) ) flags[`-=${k}`] = null;
       }
     }
 
     // Clear any bonuses which are whitespace only
-    for ( let b of Object.values(updateData.data.bonuses ) ) {
+    for ( let b of Object.values(updateData.system.bonuses ) ) {
       for ( let [k, v] of Object.entries(b) ) {
         b[k] = v.trim();
       }

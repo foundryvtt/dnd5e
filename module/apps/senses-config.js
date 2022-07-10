@@ -1,6 +1,5 @@
 /**
- * A simple form to set Actor movement speeds.
- * @extends {DocumentSheet}
+ * A simple form to configure Actor senses.
  */
 export default class ActorSensesConfig extends DocumentSheet {
 
@@ -25,11 +24,11 @@ export default class ActorSensesConfig extends DocumentSheet {
 
   /** @inheritdoc */
   getData(options) {
-    const senses = foundry.utils.getProperty(this.document.data._source, "data.attributes.senses") || {};
+    const source = this.document.toObject().system.attributes?.senses || {};
     const data = {
       senses: {},
-      special: senses.special ?? "",
-      units: senses.units, movementUnits: CONFIG.DND5E.movementUnits
+      special: source.special ?? "",
+      units: source.units, movementUnits: CONFIG.DND5E.movementUnits
     };
     for ( let [name, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[name];
