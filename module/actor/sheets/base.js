@@ -24,7 +24,7 @@ export default class ActorSheet5e extends ActorSheet {
   /**
    * Track the set of item filters which are applied
    * @type {Set}
-   * @private
+   * @protected
    */
   _filters = {
     inventory: new Set(),
@@ -312,7 +312,7 @@ export default class ActorSheet5e extends ActorSheet {
     });
 
     // Bonus
-    if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("data.attributes.ac.bonus"));
+    if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonus"));
 
     // Cover
     if ( ac.cover !== 0 ) attribution.push({
@@ -481,7 +481,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {object[]} items       Copies of item data to be filtered.
    * @param {Set<string>} filters  Filters applied to the item list.
    * @returns {object[]}           Subset of input items limited by the provided filters.
-   * @private
+   * @protected
    */
   _filterItems(items, filters) {
     return items.filter(item => {
@@ -885,7 +885,7 @@ export default class ActorSheet5e extends ActorSheet {
     const override = this.actor.systema.spells[level].override || span.dataset.slots;
     const input = document.createElement("INPUT");
     input.type = "text";
-    input.name = `data.spells.${level}.override`;
+    input.name = `system.spells.${level}.override`;
     input.value = override;
     input.placeholder = span.dataset.slots;
     input.dataset.dtype = "Number";
