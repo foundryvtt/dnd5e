@@ -17,8 +17,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getData(options={}) {
-    const context = super.getData(options);
+  async getData(options={}) {
+    const context = await super.getData(options);
 
     // Resources
     context.resources = ["primary", "secondary", "tertiary"].reduce((arr, r) => {

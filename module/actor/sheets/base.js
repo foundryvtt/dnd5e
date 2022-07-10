@@ -69,10 +69,11 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData(options) {
+  async getData(options) {
 
     // Basic data
     let isOwner = this.actor.isOwner;
+    const rollData = this.actor.getRollData.bind(this.actor);
     const data = {
       owner: isOwner,
       limited: this.actor.limited,
@@ -83,7 +84,7 @@ export default class ActorSheet5e extends ActorSheet {
       isNPC: this.actor.type === "npc",
       isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
-      rollData: this.actor.getRollData.bind(this.actor)
+      rollData
     };
     const labels = data.labels = this.actor.labels || {};
 
@@ -151,6 +152,13 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare active effects
     data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
+
+    // Biography HTML enrichment
+    data.biographyHTML = await TextEditor.enrichHTML(data.system.details.biography.value, {
+      secrets: this.actor.isOwner,
+      rollData,
+      async: true
+    });
 
     // Prepare warnings
     data.warnings = this.actor._preparationWarnings;

@@ -170,8 +170,7 @@
             {{> "systems/dnd5e/templates/actors/parts/active-effects.html"}}
         </div>
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
-            {{editor content=system.details.biography.value target='system.details.biography.value'
-                     button=true owner=owner editable=editable rollData=rollData}}
+            {{editor biographyHTML target="system.details.biography.value" button=true editable=editable}}
         </div>
     </section>
 </form>
