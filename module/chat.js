@@ -6,16 +6,16 @@
  * @param {object} data          Configuration data passed to the message.
  */
 export const highlightCriticalSuccessFailure = function(message, html, data) {
-  if ( !message.isRoll || !message.isContentVisible ) return;
+  if ( !message.isRoll || !message.isContentVisible || !message.rolls.length ) return;
 
   // Highlight rolls where the first part is a d20 roll
-  const roll = message.roll;
-  if ( !roll.dice.length ) return;
-  const d = roll.dice[0];
+  const d20Roll = message.rolls.find(r => {
+    const d0 = r.dice[0];
+    return (d0.faces === 20) && (d0.values.length === 1);
+  });
+  if ( !d20Roll ) return;
+  const d = d20Roll.dice[0];
 
-  // Ensure it is an un-modified d20 roll
-  const isD20 = (d.faces === 20) && ( d.values.length === 1 );
-  if ( !isD20 ) return;
   const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
   if ( isModifiedRoll ) return;
 

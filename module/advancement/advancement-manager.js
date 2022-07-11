@@ -152,7 +152,7 @@ export class AdvancementManager extends Application {
 
     // For class items, prepare level change data
     if ( itemData.type === "class" ) {
-      return manager.createLevelChangeSteps(clonedItem, itemData.data?.levels ?? 1);
+      return manager.createLevelChangeSteps(clonedItem, itemData.system?.levels ?? 1);
     }
 
     // All other items, just create some flows up to current character level (or class level for subclasses)

@@ -1140,13 +1140,12 @@ export default class Actor5e extends Actor {
     const parts = [`1${denomination}`, "@abilities.con.mod"];
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
     const title = `${flavor}: ${this.name}`;
-    const data = this.toObject.system();
 
     // Call the roll helper utility
     const roll = await damageRoll({
       event: new Event("hitDie"),
       parts,
-      data,
+      data: this.toObject().system,
       title,
       flavor,
       allowCritical: false,
@@ -1253,7 +1252,7 @@ export default class Actor5e extends Actor {
     else if ( autoHD ) await this.autoSpendHitDice({ threshold: autoHDThreshold });
 
     // Return the rest result
-    return this._rest(chat, newDay, false, this.system.attributes.hd - hd0, this.system.hp.value - hp0);
+    return this._rest(chat, newDay, false, this.system.attributes.hd - hd0, this.system.attributes.hp.value - hp0);
   }
 
   /* -------------------------------------------- */
@@ -1328,10 +1327,6 @@ export default class Actor5e extends Actor {
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
-    if ( Hooks._hooks.restCompleted?.length ) console.warn(
-      "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted. "
-      + "The original hook will be removed in dnd5e 1.8."
-    );
     /** @deprecated since 1.6, targeted for removal in 1.8 */
     Hooks.callAll("restCompleted", this, result);
 

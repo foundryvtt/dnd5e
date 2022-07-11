@@ -71,13 +71,17 @@ export class ItemGrantAdvancement extends Advancement {
     const updates = {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
-      const item = retainedData[uuid] ? new Item.implementation(retainedData[uuid]) : (await fromUuid(uuid))?.clone();
+
+      const ri = retainedData[uuid];
+      if ( ri && !ri._id ) ri._id = foundry.utils.randomID();
+      const item = ri ? new Item.implementation(ri) : (await fromUuid(uuid))?.clone();
       if ( !item ) continue;
+
       item.updateSource({
-        _id: retainedData[uuid]?._id ?? foundry.utils.randomID(),
         "flags.dnd5e.sourceId": uuid,
         "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
       });
+
       items.push(item.toObject());
       // TODO: Trigger any additional advancement steps for added items
       updates[item.id] = uuid;
