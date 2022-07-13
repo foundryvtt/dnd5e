@@ -440,7 +440,7 @@ export default class Actor5e extends Actor {
    * @private
    */
   _computeScaleValues() {
-    const scale = this.system.scale || {};
+    const scale = this.system.scale ??= {};
     for ( const [identifier, cls] of Object.entries(this.classes) ) {
       scale[identifier] = cls.scaleValues;
       if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;

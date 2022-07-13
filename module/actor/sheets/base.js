@@ -74,7 +74,7 @@ export default class ActorSheet5e extends ActorSheet {
     // Basic data
     let isOwner = this.actor.isOwner;
     const rollData = this.actor.getRollData.bind(this.actor);
-    const data = {
+    const context = {
       owner: isOwner,
       limited: this.actor.limited,
       options: this.options,
@@ -86,24 +86,34 @@ export default class ActorSheet5e extends ActorSheet {
       config: CONFIG.DND5E,
       rollData
     };
-    const labels = data.labels = this.actor.labels || {};
+    const labels = context.labels = this.actor.labels || {};
 
     // The Actor's data
     const source = this.actor.toObject();
     const actorData = this.actor.toObject(false);
-    data.actor = actorData;
-    data.system = actorData.system;
+    context.actor = actorData;
+    context.system = actorData.system;
+
+    /** @deprecated */
+    Object.defineProperty(context, "data", {
+      get() {
+        const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
+        class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
+        foundry.utils.logCompatibilityWarning(msg, {from: "1.7.x", until: "1.9.x"});
+        return context.system;
+      }
+    });
 
     // Owned Items
-    data.items = actorData.items;
-    for ( let i of data.items ) {
+    context.items = actorData.items;
+    for ( let i of context.items ) {
       const item = this.actor.items.get(i._id);
       i.labels = item.labels;
     }
-    data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Labels and filters
-    data.filters = this._filters;
+    context.filters = this._filters;
 
     // Currency Labels
     labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
@@ -139,30 +149,30 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Movement speeds
-    data.movement = this._getMovementSpeed(actorData);
+    context.movement = this._getMovementSpeed(actorData);
 
     // Senses
-    data.senses = this._getSenses(actorData);
+    context.senses = this._getSenses(actorData);
 
     // Update traits
     this._prepareTraits(actorData.system.traits);
 
     // Prepare owned items
-    this._prepareItems(data);
+    this._prepareItems(context);
 
     // Prepare active effects
-    data.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
+    context.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
 
     // Biography HTML enrichment
-    data.biographyHTML = await TextEditor.enrichHTML(data.system.details.biography.value, {
+    context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
       secrets: this.actor.isOwner,
       rollData,
       async: true
     });
 
     // Prepare warnings
-    data.warnings = this.actor._preparationWarnings;
-    return data;
+    context.warnings = this.actor._preparationWarnings;
+    return context;
   }
 
   /* -------------------------------------------- */

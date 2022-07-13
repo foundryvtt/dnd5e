@@ -98,6 +98,16 @@ Hooks.once("init", function() {
     isV9: !foundry.utils.isNewerVersion("9.224", game.version)
   };
 
+  /** @deprecated */
+  Object.defineProperty(game.dnd5e, "entities", {
+    get() {
+      const msg = `You are referencing the 'game.dnd5e.entities' property which has been deprecated and renamed to 
+      'game.dnd5e.documents'. Support for this old path will be removed in a future version.`;
+      foundry.utils.logCompatibilityWarning(msg, {from: "1.7.x", until: "1.9.x"});
+      return game.dnd5e.documents;
+    }
+  });
+
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = ActiveEffect5e;

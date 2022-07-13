@@ -922,7 +922,7 @@ export default class Item5e extends Item {
       actor: this.actor.toObject(false),
       tokenId: token?.uuid || null,
       item: this.toObject(false),
-      data: this.getChatData(),
+      data: await this.getChatData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
       isHealing: this.isHealing,
@@ -967,12 +967,12 @@ export default class Item5e extends Item {
    * @param {object} htmlOptions    Options used by the TextEditor.enrichHTML function.
    * @returns {object}              An object of chat data to render.
    */
-  getChatData(htmlOptions={}) {
+  async getChatData(htmlOptions={}) {
     const data = this.toObject().system;
     const labels = this.labels;
 
     // Rich text description
-    data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+    data.description.value = await TextEditor.enrichHTML(data.description.value, {async: true, ...htmlOptions});
 
     // Item type specific properties
     const props = [];
