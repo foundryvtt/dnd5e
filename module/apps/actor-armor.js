@@ -26,10 +26,12 @@ export default class ActorArmorConfig extends DocumentSheet {
 
   /** @inheritdoc */
   async getData() {
-
     // Get actor AC data
-    const actorData = this.object.toObject(false).system;
-    const ac = actorData.attributes.ac;
+    const ac = this.object.constructor.computeArmorClass(
+      this.object.system.attributes.ac,
+      this.object.itemTypes.equipment,
+      this.object.getRollData({ deterministic: true })
+    );
 
     // Get configuration data for the calculation mode
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
@@ -40,9 +42,8 @@ export default class ActorArmorConfig extends DocumentSheet {
 
     // Return context data
     return {
-      ac: ac,
+      ac,
       calculations: CONFIG.DND5E.armorClasses,
-      value: this.object._computeArmorClass(actorData).value,
       valueDisabled: !["flat", "natural"].includes(ac.calc),
       formula: ac.calc === "custom" ? ac.formula : cfg.formula,
       formulaDisabled: ac.calc !== "custom"
@@ -65,10 +66,6 @@ export default class ActorArmorConfig extends DocumentSheet {
   async _onChangeInput(event) {
     await super._onChangeInput(event);
 
-    // Reference actor data
-    let actorData = this.object.toObject(false);
-    let ac = actorData.system.attributes.ac;
-
     // Reference form data
     const calc = this.form["ac.calc"].value;
     const cfg = CONFIG.DND5E.armorClasses[calc];
@@ -79,13 +76,15 @@ export default class ActorArmorConfig extends DocumentSheet {
     let flat = this.form["ac.flat"].value;
     if ( event.currentTarget.name === "ac.calc" ) {
       formula = calc === "custom" ? ac.formula : cfg.formula;
-      if ( enableFlat ) flat = ac.flat;
+      if ( enableFlat ) flat = this.object.system.attributes.ac.flat;
     }
 
     // Recompute effective AC
-    actorData = foundry.utils.mergeObject(actorData, {"system.attributes.ac": {calc, formula}});
-    if ( enableFlat ) actorData.system.attributes.ac.flat = flat;
-    ac = this.object._computeArmorClass(actorData.data);
+    const ac = this.object.constructor.computeArmorClass(
+      foundry.utils.mergeObject(this.object.system.attributes.ac, { calc, formula, flat }, { inplace: false }),
+      this.object.itemTypes.equipment,
+      this.object.getRollData({ deterministic: true })
+    );
 
     // Update fields
     this.form["ac.formula"].value = ac.formula;
