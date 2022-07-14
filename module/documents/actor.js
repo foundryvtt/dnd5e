@@ -47,6 +47,26 @@ export default class Actor5e extends Actor {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * The Actor's currently equipped armor, if any.
+   * @type {Item5e|null}
+   */
+  get armor() {
+    return this.system.attributes.ac.equippedArmor ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The Actor's currently equipped shield, if any.
+   * @type {Item5e|null}
+   */
+  get shield() {
+    return this.system.attributes.ac.equippedShield ?? null;
+  }
+
+  /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
 
@@ -113,25 +133,16 @@ export default class Actor5e extends Actor {
     const checkBonus = simplifyBonus(globalBonuses.abilities?.check, bonusData);
     this._prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves);
     this._prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills);
+    this._prepareArmorClass();
+    this._prepareEncumbrance();
+    this._prepareInitiative(bonusData, checkBonus);
+    this._prepareScaleValues();
     this._prepareSpellcasting();
 
     // Attuned items
     if ( this.type !== "vehicle" ) this.system.attributes.attunement.value = this.items.filter(i => {
       return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
     }).length;
-
-    // Prepare armor class data
-    this.system.attributes.ac = this.constructor.computeArmorClass(
-      this.system.attributes.ac, this.itemTypes.equipment, this.getRollData({ deterministic: true })
-    );
-    this.armor = this.system.attributes.ac.equippedArmor ?? null;
-    this.shield = this.system.attributes.ac.equippedShield ?? null;
-    if ( this.system.attributes.ac.warnings ) this._preparationWarnings.push(...this.system.attributes.ac.warnings);
-
-    // Compute encumbrance, initiative, and scale values
-    this.system.attributes.encumbrance = this.constructor.computeEncumbrance(this.system, this.items, flags);
-    this.system.attributes.init = this.constructor.computeInitiative(this.system, bonusData, flags);
-    this.system.scale = this.constructor.computeScaleValues(this.classes);
 
     // Cache labels
     if ( this.type === "npc" ) {
@@ -222,14 +233,12 @@ export default class Actor5e extends Actor {
   /**
    * Initialize derived AC fields for Active Effects to target.
    * Mutates the system.attributes.ac object.
-   * @private
+   * @protected
    */
   _prepareBaseArmorClass() {
     const ac = this.system.attributes.ac;
     ac.armor = 10;
     ac.shield = ac.bonus = ac.cover = 0;
-    this.armor = null;
-    this.shield = null;
   }
 
   /* -------------------------------------------- */
@@ -237,10 +246,9 @@ export default class Actor5e extends Actor {
   /**
    * Perform any Character specific preparation.
    * Mutates several aspects of the system data object.
-   * @private
+   * @protected
    */
   _prepareCharacterData() {
-
     // Determine character level and available hit dice based on owned Class items
     const [level, hd] = this.items.reduce((arr, item) => {
       if ( item.type === "class" ) {
@@ -270,7 +278,7 @@ export default class Actor5e extends Actor {
   /**
    * Perform any NPC specific preparation.
    * Mutates several aspects of the system data object.
-   * @private
+   * @protected
    */
   _prepareNPCData() {
     const cr = this.system.details.cr;
@@ -292,7 +300,7 @@ export default class Actor5e extends Actor {
   /**
    * Perform any Vehicle specific preparation.
    * Mutates several aspects of the system data object.
-   * @private
+   * @protected
    */
   _prepareVehicleData() {
     this.system.attributes.prof = 0;
@@ -308,7 +316,7 @@ export default class Actor5e extends Actor {
    * @param {object} globalBonuses  Global bonus data.
    * @param {number} checkBonus     Global ability check bonus.
    * @param {object} originalSaves  A transformed actor's original actor's abilities.
-   * @private
+   * @protected
    */
   _prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves) {
     const flags = this.flags.dnd5e ?? {};
@@ -344,7 +352,7 @@ export default class Actor5e extends Actor {
    * @param {object} globalBonuses   Global bonus data.
    * @param {number} checkBonus      Global ability check bonus.
    * @param {object} originalSkills  A transformed actor's original actor's skills.
-   * @private
+   * @protected
    */
   _prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills) {
     if ( this.type === "vehicle" ) return;
@@ -394,21 +402,172 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Prepare data related to the spell-casting capabilities of the Actor.
-   * Mutates the value of the system.spells object.
-   * @private
+   * Prepare a character's AC value from their equipped armor and shield.
+   * Mutates the value of the `system.attributes.ac` object.
    */
-  _computeSpellcastingProgression() {
-    foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeSpellcastingProgression has been renamed _prepareSpellcasting.", { since: "1.7", until: "1.9" }
-    );
-    this._prepareSpellcasting();
+  _prepareArmorClass() {
+    const ac = this.system.attributes.ac;
+
+    // Apply automatic migrations for older data structures
+    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
+    if ( !cfg ) {
+      ac.calc = "flat";
+      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
+      cfg = CONFIG.DND5E.armorClasses.flat;
+    }
+
+    // Identify Equipped Items
+    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
+    const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
+      const armor = equip.system.armor;
+      if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
+      if ( armor.type === "shield" ) obj.shields.push(equip);
+      else obj.armors.push(equip);
+      return obj;
+    }, {armors: [], shields: []});
+
+    // Determine base AC
+    switch ( ac.calc ) {
+
+      // Flat AC (no additional bonuses)
+      case "flat":
+        ac.value = Number(ac.flat);
+        return;
+
+      // Natural AC (includes bonuses)
+      case "natural":
+        ac.base = Number(ac.flat);
+        break;
+
+      default:
+        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+        if ( armors.length ) {
+          if ( armors.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleArmor");
+          const armorData = armors[0].system.armor;
+          const isHeavy = armorData.type === "heavy";
+          ac.armor = armorData.value ?? ac.armor;
+          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
+          ac.equippedArmor = armors[0];
+        }
+        else ac.dex = this.system.abilities.dex?.mod ?? 0;
+
+        const rollData = this.getRollData({ deterministic: true });
+        rollData.attributes.ac = ac;
+        try {
+          const replaced = Roll.replaceFormulaData(formula, rollData);
+          ac.base = Roll.safeEval(replaced);
+        } catch(err) {
+          this._preparationWarnings.push("DND5E.WarnBadACFormula");
+          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
+          ac.base = Roll.safeEval(replaced);
+        }
+        break;
+    }
+
+    // Equipped Shield
+    if ( shields.length ) {
+      if ( shields.length > 1 ) this._preparationWarnings.push("DND5E.WarnMultipleShields");
+      ac.shield = shields[0].system.armor.value ?? 0;
+      ac.equippedShield = shields[0];
+    }
+
+    // Compute total AC and return
+    ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the level and percentage of encumbrance for an Actor.
+   * Optionally include the weight of carried currency by applying the standard rule from the PHB pg. 143.
+   * Mutates the value of the `system.attributes.encumbrance` object.
+   * @protected
+   */
+  _prepareEncumbrance() {
+    const encumbrance = this.system.attributes.encumbrance ??= {};
+
+    // Get the total weight from items
+    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
+    let weight = this.items.reduce((weight, i) => {
+      if ( !physicalItems.includes(i.type) ) return weight;
+      const q = i.system.quantity || 0;
+      const w = i.system.weight || 0;
+      return weight + (q * w);
+    }, 0);
+
+    // [Optional] add Currency Weight (for non-transformed actors)
+    const currency = this.system.currency;
+    if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
+      const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
+      const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
+        ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
+        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
+      weight += numCoins / currencyPerWeight;
+    }
+
+    // Determine the Encumbrance size class
+    let mod = {tiny: 0.5, sm: 1, med: 1, lg: 2, huge: 4, grg: 8}[this.system.traits.size] || 1;
+    if ( this.flags.dnd5e?.powerfulBuild ) mod = Math.min(mod * 2, 8);
+
+    const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
+      ? CONFIG.DND5E.encumbrance.strMultiplier.metric
+      : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
+
+    // Populate final Encumbrance values
+    encumbrance.value = weight.toNearest(0.1);
+    encumbrance.max = ((this.system.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
+    encumbrance.pct = Math.clamped((encumbrance.value * 100) / encumbrance.max, 0, 100);
+    encumbrance.encumbered = encumbrance.pct > (200 / 3);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the initiative data for an actor.
+   * Mutates the value of the `system.attributes.init` object.
+   * @param {object} bonusData         Data produced by `getRollData` to be applied to bonus formulas.
+   * @param {number} globalCheckBonus  Global ability check bonus.
+   * @protected
+   */
+  _prepareInitiative(bonusData, globalCheckBonus) {
+    const init = this.system.attributes.init ??= {};
+    const { initiativeAlert, jackOfAllTrades, remarkableAthlete } = this.flags.dnd5e ?? {};
+
+    // Initiative modifiers
+    const dexCheckBonus = simplifyBonus(this.system.abilities.dex?.bonuses?.check, bonusData);
+
+    // Compute initiative modifier
+    init.mod = this.system.abilities.dex?.mod ?? 0;
+    init.prof = new Proficiency(
+      this.system.attributes.prof, (jackOfAllTrades || remarkableAthlete) ? 0.5 : 0, !remarkableAthlete
+    );
+    init.value = init.value ?? 0;
+    init.bonus = init.value + (initiativeAlert ? 5 : 0);
+    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
+    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Derive any values that have been scaled by the Advancement system.
+   * Mutates the value of the `system.scale` object.
+   * @protected
+   */
+  _prepareScaleValues() {
+    this.system.scale = Object.entries(this.classes).reduce((scale, [identifier, cls]) => {
+      scale[identifier] = cls.scaleValues;
+      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
+      return scale;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
    * Mutates the value of the system.spells object.
-   * @private
+   * @protected
    */
   _prepareSpellcasting() {
     if ( this.type === "vehicle" ) return;
@@ -481,292 +640,6 @@ export default class Actor5e extends Actor {
       spells.pact.max = parseInt(spells.pact.override) || 0;
       spells.pact.level = spells.pact.max > 0 ? 1 : 0;
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Static Data Computation                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Convert a bonus value to a simple integer for displaying on the sheet.
-   * @param {number|string|null} bonus  Actor's bonus value.
-   * @param {object} data               Actor data to use for replacing @ strings.
-   * @returns {number}                  Simplified bonus as an integer.
-   * @protected
-   */
-  _simplifyBonus(bonus, data) {
-    foundry.utils.logCompatibilityWarning(
-      "Actor#_simplifyBonus has been made a utility function and can be accessed "
-      + "at game.dnd5e.utils.simplifyBonus.", { since: "1.7", until: "1.9" }
-    );
-    return simplifyBonus(bonus, data);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Results of a character's armor class calculation.
-   *
-   * @typedef {object} ArmorClassResult
-   * @property {string} calc              Type of calculation used to determine the AC.
-   * @property {number} value             Final result of the AC calculation.
-   * @property {number} base              Result of the AC formula calculation.
-   * @property {number} shield            Any value added by a wielded shield.
-   * @property {number} bonus             Any additional AC bonus considered.
-   * @property {number} cover             Any AC bonus added by cover.
-   * @property {number} flat              Flat value entered in the AC config dialog.
-   * @property {string} formula           Custom formula to be used when calc is set to custom.
-   * @property {Item5e} [equippedArmor]   The one armor item that is considered to be in use.
-   * @property {Item5e} [equippedShield]  The one shield item that is considered to be in use.
-   * @property {string[]} warnings        Any warnings generated by armor class calculation.
-   */
-
-  /**
-   * Determine a character's AC value from their equipped armor and shield.
-   * Mutates the value of the system.attributes.ac object.
-   * @param {object} data         System data for the Actor being prepared. *Will be mutated.*
-   * @returns {ArmorClassResult}  Results of the character's armor class calculation.
-   * @deprecated in favor of static variant since dnd5e 1.7, targeted for removal in 1.9
-   */
-  _computeArmorClass(data) {
-    foundry.utils.logCompatibilityWarning(
-      "Instance version of Actor5e#_computeArmorClass has been deprecated "
-      + "in favor of its static counterpart Actor5e#computeArmorClass.", { since: "1.7", until: "1.9" }
-    );
-    data.attributes.ac = this.constructor.computeArmorClass(
-      data.attributes.ac, this.itemTypes.equipment, this.getRollData({ deterministic: true })
-    );
-    return data.attributes.ac;
-  }
-
-  /**
-   * Determine a character's AC value from their equipped armor and shield.
-   * Mutates the value of the system.attributes.ac object.
-   * @param {object} ac           Initial AC configuration.
-   * @param {string} ac.calc      Type of calculation used to determine the AC.
-   * @param {number} ac.flat      Flat value entered in the AC config dialog.
-   * @param {string} ac.formula   Custom formula to be used when calc is set to custom.
-   * @param {Item5e[]} equipment  Array of equipment Items on actor containing armor & shields.
-   * @param {object} rollData     Roll data to use when resolving the AC formula.
-   * @returns {ArmorClassResult}  Results of the character's armor class calculation.
-   */
-  static computeArmorClass(ac, equipment, rollData) {
-    ac = foundry.utils.deepClone(ac);
-
-    // Apply automatic migrations for older data structures
-    ac.warnings = [];
-    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    if ( !cfg ) {
-      ac.calc = "flat";
-      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.DND5E.armorClasses.flat;
-    }
-
-    // Identify Equipped Items
-    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
-    const {armors, shields} = equipment.reduce((obj, equip) => {
-      const armor = equip.system.armor;
-      if ( !equip.system.equipped || !armorTypes.has(armor?.type) ) return obj;
-      if ( armor.type === "shield" ) obj.shields.push(equip);
-      else obj.armors.push(equip);
-      return obj;
-    }, {armors: [], shields: []});
-
-    // Determine base AC
-    switch ( ac.calc ) {
-
-      // Flat AC (no additional bonuses)
-      case "flat":
-        ac.value = Number(ac.flat);
-        return ac;
-
-      // Natural AC (includes bonuses)
-      case "natural":
-        ac.base = Number(ac.flat);
-        break;
-
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        if ( armors.length ) {
-          if ( armors.length > 1 ) ac.warnings.push("DND5E.WarnMultipleArmor");
-          const armorData = armors[0].system.armor;
-          const isHeavy = armorData.type === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, rollData.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
-        }
-        else ac.dex = rollData.abilities.dex?.mod ?? 0;
-
-        rollData.attributes.ac = ac;
-        try {
-          const replaced = Roll.replaceFormulaData(formula, rollData);
-          ac.base = Roll.safeEval(replaced);
-        } catch(err) {
-          ac.warnings.push("DND5E.WarnBadACFormula");
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = Roll.safeEval(replaced);
-        }
-        break;
-    }
-
-    // Equipped Shield
-    if ( shields.length ) {
-      if ( shields.length > 1 ) ac.warnings.push("DND5E.WarnMultipleShields");
-      ac.shield = shields[0].system.armor.value ?? 0;
-      ac.equippedShield = shields[0];
-    }
-
-    // Compute total AC and return
-    ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
-    return ac;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Results of a character's encumbrance calculation.
-   *
-   * @typedef {object} EncumbranceResult
-   * @property {number} value        Weight currently being carried by actor.
-   * @property {number} max          Maximum carrying capacity of this actor.
-   * @property {number} pct          Percentage of total capacity being carried.
-   * @property {boolean} encumbered  Is this actor considered encumbered?
-   */
-
-  /**
-   * Compute the level and percentage of encumbrance for an Actor.
-   * Optionally include the weight of carried currency by applying the standard rule from the PHB pg. 143.
-   * @param {object} data          The data object for the Actor being prepared.
-   * @returns {EncumbranceResult}  An object describing the character's encumbrance level
-   * @private
-   * @deprecated in favor of static variant since dnd5e 1.7, targeted for removal in 1.9
-   */
-  _computeEncumbrance(data) {
-    foundry.utils.logCompatibilityWarning(
-      "Instance version of Actor5e#_computeEncumbrance has been deprecated "
-      + "in favor of its static counterpart Actor5e#computeEncumbrance.", { since: "1.7", until: "1.9" }
-    );
-    return this.constructor.computeEncumbrance(data.system, data.items, this.getFlag("dnd5e", "powerfulBuild"));
-  }
-
-  /**
-   * Compute the level and percentage of encumbrance for an Actor.
-   * Optionally include the weight of carried currency by applying the standard rule from the PHB pg. 143.
-   * @param {object} systemData            The system data for the Actor being calculated.
-   * @param {Item5e[]} items               All of the items carried by the actor.
-   * @param {object} flags
-   * @param {boolean} flags.powerfulBuild  Is the Powerful Build flag set on the Actor?
-   * @returns {EncumbranceResult}          An object describing the character's encumbrance level
-   */
-  static computeEncumbrance(systemData, items, { powerfulBuild=false }) {
-    // Get the total weight from items
-    const physicalItems = ["weapon", "equipment", "consumable", "tool", "backpack", "loot"];
-    let weight = items.reduce((weight, i) => {
-      if ( !physicalItems.includes(i.type) ) return weight;
-      const q = i.system.quantity || 0;
-      const w = i.system.weight || 0;
-      return weight + (q * w);
-    }, 0);
-
-    // [Optional] add Currency Weight (for non-transformed actors)
-    const currency = systemData.currency;
-    if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
-      const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
-      const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
-        ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
-        : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
-      weight += numCoins / currencyPerWeight;
-    }
-
-    // Determine the encumbrance size class
-    let mod = {tiny: 0.5, sm: 1, med: 1, lg: 2, huge: 4, grg: 8}[systemData.traits.size] || 1;
-    if ( powerfulBuild ) mod = Math.min(mod * 2, 8);
-
-    // Compute Encumbrance percentage
-    const strengthMultiplier = game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.strMultiplier.metric
-      : CONFIG.DND5E.encumbrance.strMultiplier.imperial;
-    weight = weight.toNearest(0.1);
-    const max = ((systemData.abilities.str?.value ?? 10) * strengthMultiplier * mod).toNearest(0.1);
-    const pct = Math.clamped((weight * 100) / max, 0, 100);
-    return { value: weight.toNearest(0.1), max, pct, encumbered: pct > (200/3) };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Results of a character's initiative calculation.
-   *
-   * @typedef {object} InitiativeResult
-   * @property {number} mod        Dexterity modifier.
-   * @property {number} value      User supplied initiative modifier.
-   * @property {number} bonus      User supplied modifier with alert feat factored in.
-   * @property {number} total      Total initiative value with all modifiers & bonuses.
-   * @property {Proficiency} prof  Description of the proficiency applied to initiative.
-   */
-
-  /**
-   * Calculate the initiative bonus to display on a character sheet.
-   * @param {object} actorData         The actor data being prepared.
-   * @param {number} globalCheckBonus  The simplified global ability check bonus for this actor.
-   * @param {object} bonusData         Actor data to use for replacing formula variables in bonuses.
-   * @private
-   * @deprecated in favor of static variant since dnd5e 1.7, targeted for removal in 1.9
-   */
-  _computeInitiativeModifier(actorData, globalCheckBonus, bonusData) {
-    foundry.utils.logCompatibilityWarning(
-      "Instance version of Actor5e#_computeInitiativeModifier has been deprecated "
-      + "in favor of its static counterpart Actor5e#computeInitiative.", { since: "1.7", until: "1.9" }
-    );
-    actorData.data.attributes.init = this.constructor.computeInitiative(
-      actorData.data, bonusData, actorData.flags.dnd5e ?? {}
-    );
-  }
-
-  /**
-   * Calculate the initiative data for an actor.
-   * @param {object} systemData                        Actor system data to use for deriving the final initiative data.
-   * @param {object} bonusData                         Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} flags
-   * @param {boolean} [flags.initiativeAlert=false]    Does this actor have the Alert flag?
-   * @param {boolean} [flags.jackOfAllTrades=false]    Does this actor have Jack of All trades flag?
-   * @param {boolean} [flags.remarkableAthlete=false]  Does this actor have the Remarkable Athlete flag?
-   * @returns {InitiativeResult}                       Calculated initiative object.
-   */
-  static computeInitiative(systemData, bonusData,
-    { initiativeAlert=false, jackOfAllTrades=false, remarkableAthlete=false }) {
-    const init = foundry.utils.deepClone(systemData.attributes.init);
-
-    // Initiative modifiers
-    const dexCheckBonus = simplifyBonus(systemData.abilities.dex?.bonuses?.check, bonusData);
-    const globalCheckBonus = simplifyBonus(systemData.bonuses?.abilities.check, bonusData);
-
-    // Compute initiative modifier
-    init.mod = systemData.abilities.dex?.mod ?? 0;
-    init.prof = new Proficiency(
-      systemData.attributes.prof, (jackOfAllTrades || remarkableAthlete) ? 0.5 : 0, !remarkableAthlete
-    );
-    init.value = init.value ?? 0;
-    init.bonus = init.value + (initiativeAlert ? 5 : 0);
-    init.total = init.mod + init.bonus + dexCheckBonus + globalCheckBonus;
-    if ( Number.isNumeric(init.prof.term) ) init.total += init.prof.flat;
-
-    return init;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * @param {object} classes  Classes on the Actor grouped by identifier.
-   * @returns {object}        Scale value data grouped by class & subclass identifiers.
-   */
-  static computeScaleValues(classes) {
-    return Object.entries(classes).reduce((scale, [identifier, cls]) => {
-      scale[identifier] = cls.scaleValues;
-      if ( cls.subclass ) scale[cls.subclass.identifier] = cls.subclass.scaleValues;
-      return scale;
-    }, {});
   }
 
   /* -------------------------------------------- */
@@ -2119,5 +1992,85 @@ export default class Actor5e extends Actor {
       }
     }
     return features;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine a character's AC value from their equipped armor and shield.
+   * @returns {object}
+   * @private
+   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   */
+  _computeArmorClass() {
+    foundry.utils.logCompatibilityWarning(
+      "Actor5e#_computeArmorClass has been renamed Actor5e#_prepareArmorClass.", { since: "1.7", until: "1.9" }
+    );
+    this._prepareArmorClass();
+    return this.system.attributes.ac;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute the level and percentage of encumbrance for an Actor.
+   * @returns {object}  An object describing the character's encumbrance level
+   * @private
+   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   */
+  _computeEncumbrance() {
+    foundry.utils.logCompatibilityWarning(
+      "Actor5e#_computeEncumbrance has been renamed Actor5e#_prepareEncumbrance.", { since: "1.7", until: "1.9" }
+    );
+    this._prepareEncumbrance();
+    return this.system.attributes.encumbrance;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the initiative bonus to display on a character sheet.
+   * @private
+   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   */
+  _computeInitiativeModifier() {
+    foundry.utils.logCompatibilityWarning(
+      "Actor5e#_computeInitiativeModifier has been renamed Actor5e#_prepareInitiative.", { since: "1.7", until: "1.9" }
+    );
+    this._prepareInitiative();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data related to the spell-casting capabilities of the Actor.
+   * Mutates the value of the system.spells object.
+   * @private
+   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   */
+  _computeSpellcastingProgression() {
+    foundry.utils.logCompatibilityWarning(
+      "Actor5e#_computeSpellcastingProgression has been renamed Actor5e#_prepareSpellcasting.",
+      { since: "1.7", until: "1.9" }
+    );
+    this._prepareSpellcasting();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert a bonus value to a simple integer for displaying on the sheet.
+   * @param {number|string|null} bonus  Actor's bonus value.
+   * @param {object} data               Actor data to use for replacing @ strings.
+   * @returns {number}                  Simplified bonus as an integer.
+   * @protected
+   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   */
+  _simplifyBonus(bonus, data) {
+    foundry.utils.logCompatibilityWarning(
+      "Actor#_simplifyBonus has been made a utility function and can be accessed "
+      + "at game.dnd5e.utils.simplifyBonus.", { since: "1.7", until: "1.9" }
+    );
+    return simplifyBonus(bonus, data);
   }
 }

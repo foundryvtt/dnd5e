@@ -26,18 +26,16 @@ export default class ActorArmorConfig extends DocumentSheet {
 
   /** @inheritdoc */
   async getData() {
-    // Get actor AC data
-    const ac = this.object.constructor.computeArmorClass(
-      this.object.system.attributes.ac,
-      this.object.itemTypes.equipment,
-      this.object.getRollData({ deterministic: true })
-    );
+    // Clone actor and get AC data
+    this.clone ??= this.object.clone();
+    const ac = this.clone.system.attributes.ac;
 
     // Get configuration data for the calculation mode
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
     if ( !cfg ) {
       ac.calc = "flat";
       cfg = CONFIG.DND5E.armorClasses.flat;
+      this.clone._prepareArmorClass();
     }
 
     // Return context data
@@ -66,29 +64,28 @@ export default class ActorArmorConfig extends DocumentSheet {
   async _onChangeInput(event) {
     await super._onChangeInput(event);
 
+    const ac = this.clone.system.attributes.ac;
+
     // Reference form data
-    const calc = this.form["ac.calc"].value;
-    const cfg = CONFIG.DND5E.armorClasses[calc];
-    const enableFlat = ["flat", "natural"].includes(calc);
+    ac.calc = this.form["ac.calc"].value;
+    const cfg = CONFIG.DND5E.armorClasses[ac.calc];
+    const enableFlat = ["flat", "natural"].includes(ac.calc);
 
     // Handle changes to the calculation mode specifically
-    let formula = this.form["ac.formula"].value;
+    ac.formula = this.form["ac.formula"].value;
     let flat = this.form["ac.flat"].value;
     if ( event.currentTarget.name === "ac.calc" ) {
-      formula = calc === "custom" ? ac.formula : cfg.formula;
-      if ( enableFlat ) flat = this.object.system.attributes.ac.flat;
+      ac.formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+      if ( enableFlat ) flat = ac.flat;
     }
 
     // Recompute effective AC
-    const ac = this.object.constructor.computeArmorClass(
-      foundry.utils.mergeObject(this.object.system.attributes.ac, { calc, formula, flat }, { inplace: false }),
-      this.object.itemTypes.equipment,
-      this.object.getRollData({ deterministic: true })
-    );
+    if ( enableFlat ) ac.flat = flat;
+    this.clone._prepareArmorClass();
 
     // Update fields
     this.form["ac.formula"].value = ac.formula;
-    this.form["ac.formula"].disabled = calc !== "custom";
+    this.form["ac.formula"].disabled = ac.calc !== "custom";
     this.form["ac.flat"].value = enableFlat ? ac.flat : ac.value;
     this.form["ac.flat"].disabled = !enableFlat;
   }
