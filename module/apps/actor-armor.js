@@ -1,8 +1,18 @@
 /**
  * Interface for managing a character's armor calculation.
- * @extends {DocumentSheet}
  */
 export default class ActorArmorConfig extends DocumentSheet {
+  constructor(...args) {
+    super(...args);
+
+    /**
+     * Cloned copy of the actor for previewing change.s
+     * @type {Actor5e}
+     */
+    this.clone = this.object.clone();
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static get defaultOptions() {
@@ -26,19 +36,16 @@ export default class ActorArmorConfig extends DocumentSheet {
 
   /** @inheritdoc */
   async getData() {
-    // Clone actor and get AC data
-    this.clone ??= this.object.clone();
     const ac = this.clone.system.attributes.ac;
 
-    // Get configuration data for the calculation mode
+    // Get configuration data for the calculation mode, reset to flat if configuration is unavailable
     let cfg = CONFIG.DND5E.armorClasses[ac.calc];
     if ( !cfg ) {
       ac.calc = "flat";
       cfg = CONFIG.DND5E.armorClasses.flat;
-      this.clone._prepareArmorClass();
+      this.clone.updateSource({ "system.attributes.ac.calc": "flat" });
     }
 
-    // Return context data
     return {
       ac,
       calculations: CONFIG.DND5E.armorClasses,
@@ -64,29 +71,8 @@ export default class ActorArmorConfig extends DocumentSheet {
   async _onChangeInput(event) {
     await super._onChangeInput(event);
 
-    const ac = this.clone.system.attributes.ac;
-
-    // Reference form data
-    ac.calc = this.form["ac.calc"].value;
-    const cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    const enableFlat = ["flat", "natural"].includes(ac.calc);
-
-    // Handle changes to the calculation mode specifically
-    ac.formula = this.form["ac.formula"].value;
-    let flat = this.form["ac.flat"].value;
-    if ( event.currentTarget.name === "ac.calc" ) {
-      ac.formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-      if ( enableFlat ) flat = ac.flat;
-    }
-
-    // Recompute effective AC
-    if ( enableFlat ) ac.flat = flat;
-    this.clone._prepareArmorClass();
-
-    // Update fields
-    this.form["ac.formula"].value = ac.formula;
-    this.form["ac.formula"].disabled = ac.calc !== "custom";
-    this.form["ac.flat"].value = enableFlat ? ac.flat : ac.value;
-    this.form["ac.flat"].disabled = !enableFlat;
+    // Update clone with new data & re-render
+    this.clone.updateSource({ [`system.attributes.${event.currentTarget.name}`]: event.currentTarget.value });
+    this.render();
   }
 }
