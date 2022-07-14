@@ -10,7 +10,7 @@
 
 // Import Modules
 import { DND5E } from "./module/config.js";
-import { registerSystemSettings } from "./module/settings.js";
+import { registerSystemKeybindings, registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates, registerHandlebarsHelpers } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
 import { measureDistances } from "./module/canvas.js";
@@ -115,6 +115,7 @@ Hooks.once("init", function() {
 
   // Register System Settings
   registerSystemSettings();
+  registerSystemKeybindings();
 
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) {

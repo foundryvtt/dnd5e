@@ -276,12 +276,15 @@ export async function d20Roll({
  * @returns {{isFF: boolean, advantageMode: number}}  Whether the roll is fast-forward, and its advantage mode.
  */
 function _determineAdvantageMode({event, advantage=false, disadvantage=false, fastForward=false}={}) {
-  const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
+  const keys = {
+    normal: event ? _areKeysPressed(event, "d20RollFastForwardNormal") : false,
+    advantage: event ? _areKeysPressed(event, "d20RollFastForwardAdvantage") : false,
+    disadvantage: event ? _areKeysPressed(event, "d20RollFastForwardDisadvantage") : false
+  };
+  const isFF = fastForward || Object.values(keys).some(k => k);
   let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
-  if ( advantage || event?.altKey ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
-  else if ( disadvantage || event?.ctrlKey || event?.metaKey ) {
-    advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
-  }
+  if ( advantage || keys.advantage ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
+  else if ( disadvantage || keys.disadvantage ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
   return {isFF, advantageMode};
 }
 
@@ -381,7 +384,34 @@ export async function damageRoll({
  * @returns {{isFF: boolean, isCritical: boolean}}  Whether the roll is fast-forward, and whether it is a critical hit
  */
 function _determineCriticalMode({event, critical=false, fastForward=false}={}) {
-  const isFF = fastForward || (event && (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey));
-  if ( event?.altKey ) critical = true;
+  const keys = {
+    normal: event ? _areKeysPressed(event, "damageRollFastForwardNormal") : false,
+    critical: event ? _areKeysPressed(event, "damageRollFastForwardCritical") : false
+  };
+  const isFF = fastForward || Object.values(keys).some(k => k);
+  if ( keys.critical ) critical = true;
   return {isFF, isCritical: critical};
+}
+
+/* -------------------------------------------- */
+/*  Keybindings Helper                          */
+/* -------------------------------------------- */
+
+/**
+ * Based on the provided event, determine if the keys are pressed to fulfill the specified keybinding.
+ * @param {Event} event    Triggering event.
+ * @param {string} action  Keybinding action within the `dnd5e` namespace.
+ * @returns {boolean}      Is the keybinding is triggered?
+ */
+function _areKeysPressed(event, action) {
+  const activeModifiers = {
+    [KeyboardManager.MODIFIER_KEYS.CONTROL]: event.ctrlKey || event.metaKey,
+    [KeyboardManager.MODIFIER_KEYS.SHIFT]: event.shiftKey,
+    [KeyboardManager.MODIFIER_KEYS.ALT]: event.altKey
+  };
+  const binding = game.keybindings.get("dnd5e", action);
+  return binding.some(b => {
+    if ( !game.keyboard.downKeys.has(b.key) ) return false;
+    return b.modifiers.every(m => activeModifiers[m]);
+  });
 }
