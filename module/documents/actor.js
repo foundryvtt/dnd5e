@@ -70,8 +70,9 @@ export default class Actor5e extends Actor {
   /*  Methods                                     */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   prepareData() {
+    this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
 
@@ -81,7 +82,7 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   prepareBaseData() {
     this._prepareBaseAbilities();
     this._prepareBaseArmorClass();
@@ -97,7 +98,7 @@ export default class Actor5e extends Actor {
 
   /* --------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   applyActiveEffects() {
     // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
@@ -107,13 +108,10 @@ export default class Actor5e extends Actor {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   prepareDerivedData() {
     const flags = this.flags.dnd5e || {};
     this.labels = {};
-
-    // Reset class store to ensure it is updated with any changes
-    this._classes = undefined;
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
@@ -127,10 +125,10 @@ export default class Actor5e extends Actor {
       }
     }
 
-    // Prepare abilities, skills, & spellcasting
-    const globalBonuses = this.system.bonuses || {};
+    // Prepare abilities, skills, & everything else
+    const globalBonuses = this.system.bonuses?.abilities ?? {};
     const bonusData = this.getRollData();
-    const checkBonus = simplifyBonus(globalBonuses.abilities?.check, bonusData);
+    const checkBonus = simplifyBonus(globalBonuses?.check, bonusData);
     this._prepareAbilities(bonusData, globalBonuses, checkBonus, originalSaves);
     this._prepareSkills(bonusData, globalBonuses, checkBonus, originalSkills);
     this._prepareArmorClass();
@@ -138,16 +136,6 @@ export default class Actor5e extends Actor {
     this._prepareInitiative(bonusData, checkBonus);
     this._prepareScaleValues();
     this._prepareSpellcasting();
-
-    // Attuned items
-    if ( this.type !== "vehicle" ) this.system.attributes.attunement.value = this.items.filter(i => {
-      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
-    }).length;
-
-    // Cache labels
-    if ( this.type === "npc" ) {
-      this.labels.creatureType = this.constructor.formatCreatureType(this.system.details.type);
-    }
   }
 
   /* -------------------------------------------- */
@@ -249,25 +237,31 @@ export default class Actor5e extends Actor {
    * @protected
    */
   _prepareCharacterData() {
-    // Determine character level and available hit dice based on owned Class items
-    const [level, hd] = this.items.reduce((arr, item) => {
+    this.system.details.level = 0;
+    this.system.attributes.hd = 0;
+    this.system.attributes.attunement.value = 0;
+
+    for ( const item of this.items ) {
+      // Class levels & hit dice
       if ( item.type === "class" ) {
         const classLevels = parseInt(item.system.levels) || 1;
-        arr[0] += classLevels;
-        arr[1] += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
+        this.system.details.level += classLevels;
+        this.system.attributes.hd += classLevels - (parseInt(item.system.hitDiceUsed) || 0);
       }
-      return arr;
-    }, [0, 0]);
-    this.system.details.level = level;
-    this.system.attributes.hd = hd;
+
+      // Attuned items
+      else if ( item.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED ) {
+        this.system.attributes.attunement.value += 1;
+      }
+    }
 
     // Character proficiency bonus
-    this.system.attributes.prof = Math.floor((level + 7) / 4);
+    this.system.attributes.prof = Math.floor((this.system.details.level + 7) / 4);
 
     // Experience required for next level
     const xp = this.system.details.xp;
-    xp.max = this.getLevelExp(level || 1);
-    const prior = this.getLevelExp(level - 1 || 0);
+    xp.max = this.getLevelExp(this.system.details.level || 1);
+    const prior = this.getLevelExp(this.system.details.level - 1 || 0);
     const required = xp.max - prior;
     const pct = Math.round((xp.value - prior) * 100 / required);
     xp.pct = Math.clamped(pct, 0, 100);
@@ -282,6 +276,11 @@ export default class Actor5e extends Actor {
    */
   _prepareNPCData() {
     const cr = this.system.details.cr;
+
+    // Attuned items
+    this.system.attributes.attunement.value = this.items.filter(i => {
+      return i.system.attunement === CONFIG.DND5E.attunementTypes.ATTUNED;
+    }).length;
 
     // Kill Experience
     this.system.details.xp.value = this.getCRExp(cr);
