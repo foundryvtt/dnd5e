@@ -12,12 +12,12 @@ const packs = require("./utils/packs.js");
 
 async function rollupModule() {
   const bundle = await rollup.rollup({
-    input: "./dnd5e.mjs",
+    input: "main.mjs",
     plugins: [nodeResolve.nodeResolve()]
   });
   await bundle.write({
-    file: "dnd5e.js",
-    format: "iife"
+    file: "dnd5e.mjs",
+    format: "es"
   });
 }
 
