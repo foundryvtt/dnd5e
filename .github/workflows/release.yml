@@ -83,7 +83,7 @@ jobs:
 
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r icons lang module json packs/*.db templates tokens ui dnd5e.css dnd5e.js LICENSE.txt OGL.txt README.md system.json template.json
+    - run: zip ${{steps.get_vars.outputs.ZIP_NAME}} -r icons lang json packs/*.db templates tokens ui dnd5e.css dnd5e.mjs LICENSE.txt OGL.txt README.md system.json template.json
 
 
     # Create a release for this specific version
