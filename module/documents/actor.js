@@ -75,8 +75,6 @@ export default class Actor5e extends Actor {
     this._classes = undefined;
     this._preparationWarnings = [];
     super.prepareData();
-
-    // Iterate over owned items and recompute attributes that depend on prepared actor data
     this.items.forEach(item => item.prepareFinalAttributes());
   }
 

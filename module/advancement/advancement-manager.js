@@ -341,7 +341,7 @@ export class AdvancementManager extends Application {
       let level = this.step.class.level;
       if ( this.step.type === "reverse" ) level -= 1;
       this.step.class.item.updateSource({"system.levels": level});
-      this.clone.prepareData();
+      this.clone.reset();
     }
 
     /**
@@ -459,8 +459,7 @@ export class AdvancementManager extends Application {
           if ( this.step.type === "reverse" ) level -= 1;
           this.step.class.item.updateSource({"system.levels": level});
         }
-
-        this.clone.prepareData();
+        this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
@@ -498,8 +497,7 @@ export class AdvancementManager extends Application {
         if ( this.step.type === "delete" ) this.clone.updateSource({items: [this.step.item]});
         else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else flow.retainedData = await flow.advancement.reverse(flow.level);
-
-        this.clone.prepareData();
+        this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {
       if ( !(error instanceof AdvancementError) ) throw error;
