@@ -2,7 +2,7 @@
  * The DnD5e game system for Foundry Virtual Tabletop
  * A system for playing the fifth edition of the worlds most popular roleplaying game.
  * Author: Atropos
- * Software License: GNU GPLv3
+ * Software License: MIT
  * Content License: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
  * Repository: https://gitlab.com/foundrynet/dnd5e
  * Issue Tracker: https://gitlab.com/foundrynet/dnd5e/issues
