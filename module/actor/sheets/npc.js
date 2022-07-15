@@ -81,7 +81,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     context.labels.cr = cr >= 1 ? String(cr) : crLabels[cr] || 1;
 
     // Creature Type
-    context.labels.type = this.actor.labels.creatureType;
+    context.labels.type = this.actor.constructor.formatCreatureType(this.actor.system.details.type);
 
     // Armor Type
     context.labels.armorType = this.getArmorLabel();
