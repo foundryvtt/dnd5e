@@ -1,5 +1,3 @@
-import * as documents from "./_module.mjs";
-
 /**
  * Highlight critical success or failure on d20 rolls.
  * @param {ChatMessage} message  Message being prepared.
@@ -29,7 +27,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
     if ( roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
     else html.find(".dice-total").addClass("failure");
   }
-};
+}
 
 /* -------------------------------------------- */
 
@@ -57,7 +55,7 @@ export function displayChatActionButtons(message, html, data) {
       btn.style.display = "none";
     });
   }
-};
+}
 
 /* -------------------------------------------- */
 
@@ -102,7 +100,7 @@ export function addChatMessageContextOptions(html, options) {
     }
   );
   return options;
-};
+}
 
 /* -------------------------------------------- */
 
@@ -136,5 +134,3 @@ export function onRenderChatMessage(app, html, data) {
   highlightCriticalSuccessFailure(app, html, data);
   if (game.settings.get("dnd5e", "autoCollapseItemCards")) html.find(".card-content").hide();
 }
-
-/* -------------------------------------------- */
