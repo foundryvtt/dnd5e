@@ -41,7 +41,8 @@ export default class AdvancementSelection extends Dialog {
   getData() {
     const data = { types: {} };
     for ( const advancement of Object.values(dnd5e.advancement.types) ) {
-      if ( !advancement.metadata.validItemTypes.has(this.item.type) ) continue;
+      if ( !(advancement.prototype instanceof Advancement)
+        || !advancement.metadata.validItemTypes.has(this.item.type) ) continue;
       data.types[advancement.typeName] = {
         label: advancement.metadata.title,
         icon: advancement.metadata.icon,
