@@ -2,14 +2,14 @@ import ActiveEffect5e from "../../documents/active-effect.mjs";
 import Actor5e from "../../documents/actor/actor.mjs";
 import Item5e from "../../documents/item.mjs";
 
-import ActorArmorConfig from "./actor-armor.mjs";
-import ActorSheetFlags from "./actor-flags.mjs";
+import ActorAbilityConfig from "./ability-config.mjs";
+import ActorArmorConfig from "./armor-config.mjs";
 import ActorHitDiceConfig from "./hit-dice-config.mjs";
 import ActorMovementConfig from "./movement-config.mjs";
 import ActorSensesConfig from "./senses-config.mjs";
+import ActorSheetFlags from "./sheet-flags.mjs";
 import ActorSkillConfig from "./skill-config.mjs";
-import ActorAbilityConfig from "./ability-config.mjs";
-import ActorTypeConfig from "./actor-type.mjs";
+import ActorTypeConfig from "./type-config.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../../advancement/advancement-manager.mjs";

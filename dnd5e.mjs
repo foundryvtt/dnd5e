@@ -3764,7 +3764,7 @@ class ScaleValueFlow extends AdvancementFlow {
 
 }
 
-var _module$1 = /*#__PURE__*/Object.freeze({
+var _module$2 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   HitPointsAdvancement: HitPointsAdvancement,
   HitPointsConfig: HitPointsConfig,
@@ -4568,7 +4568,7 @@ class AdvancementSelection extends Dialog {
 
 var advancement = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  types: _module$1,
+  types: _module$2,
   Advancement: Advancement$1,
   AdvancementConfig: AdvancementConfig,
   AdvancementConfirmationDialog: AdvancementConfirmationDialog,
@@ -9947,6 +9947,55 @@ class Actor5e extends Actor {
 }
 
 /**
+ * A simple form to set save throw configuration for a given ability score.
+ * @param {Actor} actor                   The Actor instance being displayed within the sheet.
+ * @param {ApplicationOptions} options    Additional application configuration options.
+ * @param {string} abilityId              The ability ID (e.g. "str")
+ */
+class ActorAbilityConfig extends DocumentSheet {
+  constructor(actor, opts, abilityId) {
+    super(actor, opts);
+    this._abilityId = abilityId;
+  }
+
+  /** @override */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      classes: ["dnd5e"],
+      template: "systems/dnd5e/templates/apps/ability-config.html",
+      width: 500,
+      height: "auto"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get title() {
+    return `${game.i18n.format("DND5E.AbilityConfigureTitle", {ability: CONFIG.DND5E.abilities[this._abilityId]})}: ${this.document.name}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getData(options) {
+    const src = this.object.toObject();
+    return {
+      ability: src.system.abilities[this._abilityId] || {},
+      labelSaves: game.i18n.format("DND5E.AbilitySaveConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
+      labelChecks: game.i18n.format("DND5E.AbilityCheckConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
+      abilityId: this._abilityId,
+      proficiencyLevels: {
+        0: CONFIG.DND5E.proficiencyLevels[0],
+        1: CONFIG.DND5E.proficiencyLevels[1]
+      },
+      bonusGlobalSave: src.system.bonuses?.abilities?.save,
+      bonusGlobalCheck: src.system.bonuses?.abilities?.check
+    };
+  }
+}
+
+/**
  * Interface for managing a character's armor calculation.
  */
 class ActorArmorConfig extends DocumentSheet {
@@ -10022,135 +10071,6 @@ class ActorArmorConfig extends DocumentSheet {
     // Update clone with new data & re-render
     this.clone.updateSource({ [`system.attributes.${event.currentTarget.name}`]: event.currentTarget.value });
     this.render();
-  }
-}
-
-/**
- * An application class which provides advanced configuration for special character flags which modify an Actor
- */
-class ActorSheetFlags extends DocumentSheet {
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      id: "actor-flags",
-      classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/actor-flags.html",
-      width: 500,
-      closeOnSubmit: true
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get title() {
-    return `${game.i18n.localize("DND5E.FlagsTitle")}: ${this.object.name}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  getData() {
-    const data = {};
-    data.actor = this.object;
-    data.classes = this._getClasses();
-    data.flags = this._getFlags();
-    data.bonuses = this._getBonuses();
-    return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare an object of sorted classes.
-   * @returns {object}
-   * @private
-   */
-  _getClasses() {
-    const classes = this.object.items.filter(i => i.type === "class");
-    return classes.sort((a, b) => a.name.localeCompare(b.name)).reduce((obj, i) => {
-      obj[i.id] = i.name;
-      return obj;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare an object of flags data which groups flags by section
-   * Add some additional data for rendering
-   * @returns {object}
-   * @private
-   */
-  _getFlags() {
-    const flags = {};
-    const baseData = this.document.toJSON();
-    for ( let [k, v] of Object.entries(CONFIG.DND5E.characterFlags) ) {
-      if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
-      let flag = foundry.utils.deepClone(v);
-      flag.type = v.type.name;
-      flag.isCheckbox = v.type === Boolean;
-      flag.isSelect = v.hasOwnProperty("choices");
-      flag.value = getProperty(baseData.flags, `dnd5e.${k}`);
-      flags[v.section][`flags.dnd5e.${k}`] = flag;
-    }
-    return flags;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the bonuses fields and their localization strings
-   * @returns {Array<object>}
-   * @private
-   */
-  _getBonuses() {
-    const src = this.object.toObject();
-    const bonuses = [
-      {name: "system.bonuses.mwak.attack", label: "DND5E.BonusMWAttack"},
-      {name: "system.bonuses.mwak.damage", label: "DND5E.BonusMWDamage"},
-      {name: "system.bonuses.rwak.attack", label: "DND5E.BonusRWAttack"},
-      {name: "system.bonuses.rwak.damage", label: "DND5E.BonusRWDamage"},
-      {name: "system.bonuses.msak.attack", label: "DND5E.BonusMSAttack"},
-      {name: "system.bonuses.msak.damage", label: "DND5E.BonusMSDamage"},
-      {name: "system.bonuses.rsak.attack", label: "DND5E.BonusRSAttack"},
-      {name: "system.bonuses.rsak.damage", label: "DND5E.BonusRSDamage"},
-      {name: "system.bonuses.abilities.check", label: "DND5E.BonusAbilityCheck"},
-      {name: "system.bonuses.abilities.save", label: "DND5E.BonusAbilitySave"},
-      {name: "system.bonuses.abilities.skill", label: "DND5E.BonusAbilitySkill"},
-      {name: "system.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
-    ];
-    for ( let b of bonuses ) {
-      b.value = foundry.utils.getProperty(src, b.name) || "";
-    }
-    return bonuses;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _updateObject(event, formData) {
-    const actor = this.object;
-    let updateData = expandObject(formData);
-    const src = actor.toObject();
-
-    // Unset any flags which are "false"
-    const flags = updateData.flags.dnd5e;
-    for ( let [k, v] of Object.entries(flags) ) {
-      if ( [undefined, null, "", false, 0].includes(v) ) {
-        delete flags[k];
-        if ( foundry.utils.hasProperty(src.flags, `dnd5e.${k}`) ) flags[`-=${k}`] = null;
-      }
-    }
-
-    // Clear any bonuses which are whitespace only
-    for ( let b of Object.values(updateData.system.bonuses ) ) {
-      for ( let [k, v] of Object.entries(b) ) {
-        b[k] = v.trim();
-      }
-    }
-
-    // Diff the data against any applied overrides and apply
-    await actor.update(updateData, {diff: false});
   }
 }
 
@@ -10327,6 +10247,135 @@ class ActorSensesConfig extends DocumentSheet {
 }
 
 /**
+ * An application class which provides advanced configuration for special character flags which modify an Actor
+ */
+class ActorSheetFlags extends DocumentSheet {
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      id: "actor-flags",
+      classes: ["dnd5e"],
+      template: "systems/dnd5e/templates/apps/actor-flags.html",
+      width: 500,
+      closeOnSubmit: true
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get title() {
+    return `${game.i18n.localize("DND5E.FlagsTitle")}: ${this.object.name}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  getData() {
+    const data = {};
+    data.actor = this.object;
+    data.classes = this._getClasses();
+    data.flags = this._getFlags();
+    data.bonuses = this._getBonuses();
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an object of sorted classes.
+   * @returns {object}
+   * @private
+   */
+  _getClasses() {
+    const classes = this.object.items.filter(i => i.type === "class");
+    return classes.sort((a, b) => a.name.localeCompare(b.name)).reduce((obj, i) => {
+      obj[i.id] = i.name;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an object of flags data which groups flags by section
+   * Add some additional data for rendering
+   * @returns {object}
+   * @private
+   */
+  _getFlags() {
+    const flags = {};
+    const baseData = this.document.toJSON();
+    for ( let [k, v] of Object.entries(CONFIG.DND5E.characterFlags) ) {
+      if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
+      let flag = foundry.utils.deepClone(v);
+      flag.type = v.type.name;
+      flag.isCheckbox = v.type === Boolean;
+      flag.isSelect = v.hasOwnProperty("choices");
+      flag.value = getProperty(baseData.flags, `dnd5e.${k}`);
+      flags[v.section][`flags.dnd5e.${k}`] = flag;
+    }
+    return flags;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the bonuses fields and their localization strings
+   * @returns {Array<object>}
+   * @private
+   */
+  _getBonuses() {
+    const src = this.object.toObject();
+    const bonuses = [
+      {name: "system.bonuses.mwak.attack", label: "DND5E.BonusMWAttack"},
+      {name: "system.bonuses.mwak.damage", label: "DND5E.BonusMWDamage"},
+      {name: "system.bonuses.rwak.attack", label: "DND5E.BonusRWAttack"},
+      {name: "system.bonuses.rwak.damage", label: "DND5E.BonusRWDamage"},
+      {name: "system.bonuses.msak.attack", label: "DND5E.BonusMSAttack"},
+      {name: "system.bonuses.msak.damage", label: "DND5E.BonusMSDamage"},
+      {name: "system.bonuses.rsak.attack", label: "DND5E.BonusRSAttack"},
+      {name: "system.bonuses.rsak.damage", label: "DND5E.BonusRSDamage"},
+      {name: "system.bonuses.abilities.check", label: "DND5E.BonusAbilityCheck"},
+      {name: "system.bonuses.abilities.save", label: "DND5E.BonusAbilitySave"},
+      {name: "system.bonuses.abilities.skill", label: "DND5E.BonusAbilitySkill"},
+      {name: "system.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
+    ];
+    for ( let b of bonuses ) {
+      b.value = foundry.utils.getProperty(src, b.name) || "";
+    }
+    return bonuses;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _updateObject(event, formData) {
+    const actor = this.object;
+    let updateData = expandObject(formData);
+    const src = actor.toObject();
+
+    // Unset any flags which are "false"
+    const flags = updateData.flags.dnd5e;
+    for ( let [k, v] of Object.entries(flags) ) {
+      if ( [undefined, null, "", false, 0].includes(v) ) {
+        delete flags[k];
+        if ( foundry.utils.hasProperty(src.flags, `dnd5e.${k}`) ) flags[`-=${k}`] = null;
+      }
+    }
+
+    // Clear any bonuses which are whitespace only
+    for ( let b of Object.values(updateData.system.bonuses ) ) {
+      for ( let [k, v] of Object.entries(b) ) {
+        b[k] = v.trim();
+      }
+    }
+
+    // Diff the data against any applied overrides and apply
+    await actor.update(updateData, {diff: false});
+  }
+}
+
+/**
  * A simple form to set skill configuration for a given skill.
  * @extends {DocumentSheet}
  * @param {Actor} actor                   The Actor instance being displayed within the sheet.
@@ -10384,55 +10433,6 @@ class ActorSkillConfig extends DocumentSheet {
       throw new Error(message);
     }
     super._updateObject(event, formData);
-  }
-}
-
-/**
- * A simple form to set save throw configuration for a given ability score.
- * @param {Actor} actor                   The Actor instance being displayed within the sheet.
- * @param {ApplicationOptions} options    Additional application configuration options.
- * @param {string} abilityId              The ability ID (e.g. "str")
- */
-class ActorAbilityConfig extends DocumentSheet {
-  constructor(actor, opts, abilityId) {
-    super(actor, opts);
-    this._abilityId = abilityId;
-  }
-
-  /** @override */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/ability-config.html",
-      width: 500,
-      height: "auto"
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get title() {
-    return `${game.i18n.format("DND5E.AbilityConfigureTitle", {ability: CONFIG.DND5E.abilities[this._abilityId]})}: ${this.document.name}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  getData(options) {
-    const src = this.object.toObject();
-    return {
-      ability: src.system.abilities[this._abilityId] || {},
-      labelSaves: game.i18n.format("DND5E.AbilitySaveConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
-      labelChecks: game.i18n.format("DND5E.AbilityCheckConfigure", {ability: CONFIG.DND5E.abilities[this._abilityId]}),
-      abilityId: this._abilityId,
-      proficiencyLevels: {
-        0: CONFIG.DND5E.proficiencyLevels[0],
-        1: CONFIG.DND5E.proficiencyLevels[1]
-      },
-      bonusGlobalSave: src.system.bonuses?.abilities?.save,
-      bonusGlobalCheck: src.system.bonuses?.abilities?.check
-    };
   }
 }
 
@@ -12751,23 +12751,22 @@ class ActorSheet5eVehicle extends ActorSheet5e {
   }
 }
 
-var _module = /*#__PURE__*/Object.freeze({
+var _module$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   ActorSheet5e: ActorSheet5e,
   ActorSheet5eCharacter: ActorSheet5eCharacter,
   ActorSheet5eNPC: ActorSheet5eNPC,
   ActorSheet5eVehicle: ActorSheet5eVehicle,
   ActorAbilityConfig: ActorAbilityConfig,
-  AbilityUseDialog: AbilityUseDialog,
   ActorArmorConfig: ActorArmorConfig,
-  ActorSheetFlags: ActorSheetFlags,
-  ActorTypeConfig: ActorTypeConfig,
   ActorHitDiceConfig: ActorHitDiceConfig,
   LongRestDialog: LongRestDialog,
   ActorMovementConfig: ActorMovementConfig,
   ActorSensesConfig: ActorSensesConfig,
+  ActorSheetFlags: ActorSheetFlags,
   ShortRestDialog: ShortRestDialog,
-  ActorSkillConfig: ActorSkillConfig
+  ActorSkillConfig: ActorSkillConfig,
+  ActorTypeConfig: ActorTypeConfig
 });
 
 /**
@@ -13278,10 +13277,16 @@ class ItemSheet5e extends ItemSheet {
   }
 }
 
+var _module = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  ItemSheet5e: ItemSheet5e,
+  AbilityUseDialog: AbilityUseDialog
+});
+
 var applications = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  actor: _module,
-  ItemSheet5e: ItemSheet5e,
+  actor: _module$1,
+  item: _module,
   ProficiencySelector: ProficiencySelector,
   PropertyAttribution: PropertyAttribution,
   TraitSelector: TraitSelector,
