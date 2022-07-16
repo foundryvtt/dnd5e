@@ -106,7 +106,7 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassVehicle"
   });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("dnd5e", applications.ItemSheet5e, {
+  Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });

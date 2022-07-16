@@ -1,5 +1,5 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice/dice.mjs";
-import AbilityUseDialog from "../applications/actor/ability-use-dialog.mjs";
+import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 
 /**
