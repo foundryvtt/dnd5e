@@ -1300,7 +1300,11 @@ export default class Actor5e extends Actor {
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
-    /** @deprecated since 1.6, targeted for removal in 1.8 */
+    if ( Hooks.events.restCompleted?.length ) foundry.utils.logCompatibilityWarning(
+      "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted.",
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+    );
+    /** @deprecated since 1.6, targeted for removal in 2.1 */
     Hooks.callAll("restCompleted", this, result);
 
     /**
@@ -1889,11 +1893,11 @@ export default class Actor5e extends Actor {
    * @param {Item5e[]} items         The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
+   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
    */
   async addEmbeddedItems(items, prompt=true) {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#addEmbeddedItems has been deprecated.", { since: "1.6", until: "1.8" }
+      "Actor5e#addEmbeddedItems has been deprecated.", { since: "DnD5e 1.6", until: "DnD5e 2.1" }
     );
     let itemsToAdd = items;
     if ( !items.length ) return [];
@@ -1925,12 +1929,12 @@ export default class Actor5e extends Actor {
    * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
    * @param {number} [options.level]           New class level if it has been changed.
    * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
+   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
    */
   async getClassFeatures({classIdentifier, subclassName, level}={}) {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#getClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "1.6", until: "1.8" }
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
     );
     const existing = new Set(this.items.map(i => i.name));
     const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
@@ -1947,12 +1951,12 @@ export default class Actor5e extends Actor {
    * @param {number} [options.level]           The number of levels in the added class.
    * @param {number} [options.priorLevel]      The previous level of the added class.
    * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
+   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
    */
   static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#loadClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "1.6", until: "1.8" }
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
     );
     subclassName = subclassName.slugify();
 
@@ -1997,11 +2001,12 @@ export default class Actor5e extends Actor {
    * Determine a character's AC value from their equipped armor and shield.
    * @returns {object}
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeArmorClass() {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeArmorClass has been renamed Actor5e#_prepareArmorClass.", { since: "1.7", until: "1.9" }
+      "Actor5e#_computeArmorClass has been renamed Actor5e#_prepareArmorClass.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareArmorClass();
     return this.system.attributes.ac;
@@ -2013,11 +2018,12 @@ export default class Actor5e extends Actor {
    * Compute the level and percentage of encumbrance for an Actor.
    * @returns {object}  An object describing the character's encumbrance level
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeEncumbrance() {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeEncumbrance has been renamed Actor5e#_prepareEncumbrance.", { since: "1.7", until: "1.9" }
+      "Actor5e#_computeEncumbrance has been renamed Actor5e#_prepareEncumbrance.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareEncumbrance();
     return this.system.attributes.encumbrance;
@@ -2028,11 +2034,12 @@ export default class Actor5e extends Actor {
   /**
    * Calculate the initiative bonus to display on a character sheet.
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeInitiativeModifier() {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeInitiativeModifier has been renamed Actor5e#_prepareInitiative.", { since: "1.7", until: "1.9" }
+      "Actor5e#_computeInitiativeModifier has been renamed Actor5e#_prepareInitiative.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareInitiative();
   }
@@ -2043,12 +2050,12 @@ export default class Actor5e extends Actor {
    * Prepare data related to the spell-casting capabilities of the Actor.
    * Mutates the value of the system.spells object.
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeSpellcastingProgression() {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#_computeSpellcastingProgression has been renamed Actor5e#_prepareSpellcasting.",
-      { since: "1.7", until: "1.9" }
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareSpellcasting();
   }
@@ -2061,12 +2068,12 @@ export default class Actor5e extends Actor {
    * @param {object} data               Actor data to use for replacing @ strings.
    * @returns {number}                  Simplified bonus as an integer.
    * @protected
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _simplifyBonus(bonus, data) {
     foundry.utils.logCompatibilityWarning(
-      "Actor#_simplifyBonus has been made a utility function and can be accessed "
-      + "at dnd5e.utils.simplifyBonus.", { since: "1.7", until: "1.9" }
+      "Actor#_simplifyBonus has been made a utility function and can be accessed at dnd5e.utils.simplifyBonus.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     return simplifyBonus(bonus, data);
   }
