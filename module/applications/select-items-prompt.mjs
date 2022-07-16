@@ -7,7 +7,10 @@ export default class SelectItemsPrompt extends Dialog {
   constructor(items, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog", "select-items-prompt", "sheet"];
-    console.warn("SelectItemsPrompt has been deprecated and will be removed in 1.8.");
+    foundry.utils.logCompatibilityWarning(
+      "SelectItemsPrompt has been deprecated and will be removed.",
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+    );
 
     /**
      * Store a reference to the Item documents being used

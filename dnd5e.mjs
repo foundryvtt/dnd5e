@@ -2099,7 +2099,7 @@ DND5E.CR_EXP_LEVELS = [
 /**
  * Character features automatically granted by classes & subclasses at certain levels.
  * @type {object}
- * @deprecated since 1.6.0, targeted for removal in 1.8
+ * @deprecated since 1.6.0, targeted for removal in 2.1
  */
 DND5E.classFeatures = ClassFeatures;
 
@@ -2620,7 +2620,7 @@ class AdvancementError extends Error {
  * @property {Item5e} item    Item to which this advancement belongs.
  * @property {object} [data]  Raw data stored in the advancement object.
  */
-class Advancement {
+class Advancement$1 {
   constructor(item, data={}) {
     /**
      * Item to which this advancement belongs.
@@ -2920,7 +2920,7 @@ class Advancement {
  *
  * @extends {Advancement}
  */
-class HitPointsAdvancement extends Advancement {
+class HitPointsAdvancement extends Advancement$1 {
 
   /** @inheritdoc */
   static get metadata() {
@@ -3180,7 +3180,7 @@ class HitPointsFlow extends AdvancementFlow {
 
     this.form.querySelector(".rollResult")?.classList.add("error");
     const errorType = formData.value ? "Invalid" : "Empty";
-    throw new Advancement.ERROR(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
+    throw new Advancement$1.ERROR(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
   }
 
 }
@@ -3191,7 +3191,7 @@ class HitPointsFlow extends AdvancementFlow {
  *
  * @extends {Advancement}
  */
-class ItemGrantAdvancement extends Advancement {
+class ItemGrantAdvancement extends Advancement$1 {
 
   /** @inheritdoc */
   static get metadata() {
@@ -3458,7 +3458,7 @@ class ItemGrantFlow extends AdvancementFlow {
 /**
  * Advancement that represents a value that scales with class level. **Can only be added to classes or subclasses.**
  */
-class ScaleValueAdvancement extends Advancement {
+class ScaleValueAdvancement extends Advancement$1 {
 
   /** @inheritdoc */
   static get metadata() {
@@ -4326,7 +4326,7 @@ class AdvancementManager extends Application {
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {
-      if ( !(error instanceof Advancement.ERROR) ) throw error;
+      if ( !(error instanceof Advancement$1.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
       if ( this.step.type === "restore" ) this.step.type = "forward";
@@ -4364,7 +4364,7 @@ class AdvancementManager extends Application {
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {
-      if ( !(error instanceof Advancement.ERROR) ) throw error;
+      if ( !(error instanceof Advancement$1.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
     } finally {
@@ -4502,7 +4502,8 @@ class AdvancementSelection extends Dialog {
   getData() {
     const data = { types: {} };
     for ( const advancement of Object.values(dnd5e.advancement.types) ) {
-      if ( !advancement.metadata.validItemTypes.has(this.item.type) ) continue;
+      if ( !(advancement.prototype instanceof Advancement)
+        || !advancement.metadata.validItemTypes.has(this.item.type) ) continue;
       data.types[advancement.typeName] = {
         label: advancement.metadata.title,
         icon: advancement.metadata.icon,
@@ -4568,7 +4569,7 @@ class AdvancementSelection extends Dialog {
 var advancement = /*#__PURE__*/Object.freeze({
   __proto__: null,
   types: _module$1,
-  Advancement: Advancement,
+  Advancement: Advancement$1,
   AdvancementConfig: AdvancementConfig,
   AdvancementConfirmationDialog: AdvancementConfirmationDialog,
   AdvancementFlow: AdvancementFlow,
@@ -7812,7 +7813,10 @@ class SelectItemsPrompt extends Dialog {
   constructor(items, dialogData={}, options={}) {
     super(dialogData, options);
     this.options.classes = ["dnd5e", "dialog", "select-items-prompt", "sheet"];
-    console.warn("SelectItemsPrompt has been deprecated and will be removed in 1.8.");
+    foundry.utils.logCompatibilityWarning(
+      "SelectItemsPrompt has been deprecated and will be removed.",
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+    );
 
     /**
      * Store a reference to the Item documents being used
@@ -9163,7 +9167,11 @@ class Actor5e extends Actor {
     // Display a Chat Message summarizing the rest effects
     if ( chat ) await this._displayRestResultMessage(result, longRest);
 
-    /** @deprecated since 1.6, targeted for removal in 1.8 */
+    if ( Hooks.events.restCompleted?.length ) foundry.utils.logCompatibilityWarning(
+      "The restCompleted hook has been deprecated in favor of dnd5e.restCompleted.",
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
+    );
+    /** @deprecated since 1.6, targeted for removal in 2.1 */
     Hooks.callAll("restCompleted", this, result);
 
     /**
@@ -9752,11 +9760,11 @@ class Actor5e extends Actor {
    * @param {Item5e[]} items         The items being added to the Actor.
    * @param {boolean} [prompt=true]  Whether or not to prompt the user.
    * @returns {Promise<Item5e[]>}
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
+   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
    */
   async addEmbeddedItems(items, prompt=true) {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#addEmbeddedItems has been deprecated.", { since: "1.6", until: "1.8" }
+      "Actor5e#addEmbeddedItems has been deprecated.", { since: "DnD5e 1.6", until: "DnD5e 2.1" }
     );
     let itemsToAdd = items;
     if ( !items.length ) return [];
@@ -9788,12 +9796,12 @@ class Actor5e extends Actor {
    * @param {string} [options.subclassName]    Name of the selected subclass if it has been changed.
    * @param {number} [options.level]           New class level if it has been changed.
    * @returns {Promise<Item5e[]>}              Any new items that should be added to the actor.
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
+   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
    */
   async getClassFeatures({classIdentifier, subclassName, level}={}) {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#getClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "1.6", until: "1.8" }
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
     );
     const existing = new Set(this.items.map(i => i.name));
     const features = await Actor5e.loadClassFeatures({classIdentifier, subclassName, level});
@@ -9810,12 +9818,12 @@ class Actor5e extends Actor {
    * @param {number} [options.level]           The number of levels in the added class.
    * @param {number} [options.priorLevel]      The previous level of the added class.
    * @returns {Promise<Item5e[]>}              Items that should be added based on the changes made.
-   * @deprecated since dnd5e 1.6, targeted for removal in 1.8
+   * @deprecated since dnd5e 1.6, targeted for removal in 2.1
    */
   static async loadClassFeatures({classIdentifier="", subclassName="", level=1, priorLevel=0}={}) {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#loadClassFeatures has been deprecated. Please refer to the Advancement API for its replacement.",
-      { since: "1.6", until: "1.8" }
+      { since: "DnD5e 1.6", until: "DnD5e 2.1" }
     );
     subclassName = subclassName.slugify();
 
@@ -9860,11 +9868,12 @@ class Actor5e extends Actor {
    * Determine a character's AC value from their equipped armor and shield.
    * @returns {object}
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeArmorClass() {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeArmorClass has been renamed Actor5e#_prepareArmorClass.", { since: "1.7", until: "1.9" }
+      "Actor5e#_computeArmorClass has been renamed Actor5e#_prepareArmorClass.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareArmorClass();
     return this.system.attributes.ac;
@@ -9876,11 +9885,12 @@ class Actor5e extends Actor {
    * Compute the level and percentage of encumbrance for an Actor.
    * @returns {object}  An object describing the character's encumbrance level
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeEncumbrance() {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeEncumbrance has been renamed Actor5e#_prepareEncumbrance.", { since: "1.7", until: "1.9" }
+      "Actor5e#_computeEncumbrance has been renamed Actor5e#_prepareEncumbrance.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareEncumbrance();
     return this.system.attributes.encumbrance;
@@ -9891,11 +9901,12 @@ class Actor5e extends Actor {
   /**
    * Calculate the initiative bonus to display on a character sheet.
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeInitiativeModifier() {
     foundry.utils.logCompatibilityWarning(
-      "Actor5e#_computeInitiativeModifier has been renamed Actor5e#_prepareInitiative.", { since: "1.7", until: "1.9" }
+      "Actor5e#_computeInitiativeModifier has been renamed Actor5e#_prepareInitiative.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareInitiative();
   }
@@ -9906,12 +9917,12 @@ class Actor5e extends Actor {
    * Prepare data related to the spell-casting capabilities of the Actor.
    * Mutates the value of the system.spells object.
    * @private
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _computeSpellcastingProgression() {
     foundry.utils.logCompatibilityWarning(
       "Actor5e#_computeSpellcastingProgression has been renamed Actor5e#_prepareSpellcasting.",
-      { since: "1.7", until: "1.9" }
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     this._prepareSpellcasting();
   }
@@ -9924,12 +9935,12 @@ class Actor5e extends Actor {
    * @param {object} data               Actor data to use for replacing @ strings.
    * @returns {number}                  Simplified bonus as an integer.
    * @protected
-   * @deprecated since dnd5e 1.7, targeted for removal in 1.9
+   * @deprecated since dnd5e 2.0, targeted for removal in 2.2
    */
   _simplifyBonus(bonus, data) {
     foundry.utils.logCompatibilityWarning(
-      "Actor#_simplifyBonus has been made a utility function and can be accessed "
-      + "at dnd5e.utils.simplifyBonus.", { since: "1.7", until: "1.9" }
+      "Actor#_simplifyBonus has been made a utility function and can be accessed at dnd5e.utils.simplifyBonus.",
+      { since: "DnD5e 2.0", until: "DnD5e 2.2" }
     );
     return simplifyBonus(bonus, data);
   }
@@ -10716,7 +10727,7 @@ class ActorSheet5e extends ActorSheet {
       get() {
         const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, {from: "1.7.x", until: "1.9.x"});
+        foundry.utils.logCompatibilityWarning(msg, {from: "DnD5e 2.0", until: "DnD5e 2.2"});
         return context.system;
       }
     });
@@ -12818,7 +12829,7 @@ class ItemSheet5e extends ItemSheet {
       get() {
         const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, {from: "1.7.x", until: "1.9.x"});
+        foundry.utils.logCompatibilityWarning(msg, {from: "DnD5e 2.0", until: "DnD5e 2.2"});
         return context.system;
       }
     });
@@ -15168,7 +15179,7 @@ Hooks.once("init", function() {
     get() {
       const msg = `You are referencing the 'dnd5e.entities' property which has been deprecated and renamed to 
       'dnd5e.documents'. Support for this old path will be removed in a future version.`;
-      foundry.utils.logCompatibilityWarning(msg, {from: "1.7.x", until: "1.9.x"});
+      foundry.utils.logCompatibilityWarning(msg, {from: "DnD5e 2.0", until: "DnD5e 2.2"});
       return dnd5e.documents;
     }
   });
