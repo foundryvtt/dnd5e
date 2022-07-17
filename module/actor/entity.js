@@ -2060,6 +2060,28 @@ export default class Actor5e extends Actor {
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     this._displayScrollingDamage(options.dhp);
+    this._updateOwnedProficiencies(data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * When an update is handled, update the proficiencies of all relevant items
+   * if a proficiency was updated.
+   *
+   * @param {object} updates          Object containing the update data.
+   */
+  _updateOwnedProficiencies(updates) {
+
+    if (updates.data.traits?.weaponProf) {
+      for (const item of this.itemTypes.weapon) item.updateProficiency();
+    }
+    if (updates.data.traits?.armorProf) {
+      for (const item of this.itemTypes.equipment) item.updateProficiency();
+    }
+    if (updates.data.traits?.toolProf) {
+      for (const item of this.itemTypes.tool) item.updateProficiency();
+    }
   }
 
   /* -------------------------------------------- */
