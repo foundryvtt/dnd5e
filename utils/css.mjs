@@ -1,5 +1,5 @@
-const gulp = require("gulp");
-const less = require("gulp-less");
+import gulp from "gulp";
+import less from "gulp-less";
 
 
 const LESS_DEST = "./";
@@ -13,17 +13,14 @@ const LESS_WATCH = ["less/*.less"];
 function compileLESS() {
   return gulp.src(LESS_SRC)
     .pipe(less())
-    .pipe(gulp.dest(LESS_DEST))
+    .pipe(gulp.dest(LESS_DEST));
 }
-const compile = gulp.series(compileLESS);
+export const compile = compileLESS;
 
 
 /**
  * Update the CSS if any of the LESS sources are modified.
  */
-function watchUpdates() {
+export function watchUpdates() {
   gulp.watch(LESS_WATCH, compile);
 }
-
-
-module.exports = { compile, watchUpdates };
