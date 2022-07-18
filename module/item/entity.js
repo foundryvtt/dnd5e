@@ -634,6 +634,38 @@ export default class Item5e extends Item {
   /* -------------------------------------------- */
 
   /**
+   * Updates this item's proficiency based on its owner's proficiencies.
+   */
+  async updateProficiency() {
+    const updates = {};
+    let profType = "";
+    let actorProfs = [];
+    switch ( this.type ) {
+      case "weapon":
+        profType = CONFIG.DND5E.weaponProficienciesMap[this.data.data.weaponType];
+        actorProfs = this.actor.data.data.traits?.weaponProf?.value || [];
+        break;
+      case "equipment":
+        profType = CONFIG.DND5E.armorProficienciesMap[this.data.data.armor?.type];
+        actorProfs = this.actor.data.data.traits?.armorProf?.value || [];
+        break;
+      case "tool": // TODO: When actor's tool proficiencies can include expertise etc., update this calculation.
+        profType = this.data.data.toolType;
+        actorProfs = this.actor.data.data.traits?.toolProf?.value || [];
+        break;
+    }
+    if (profType === true)
+      updates["data.proficient"] = true; // "true" => natural weapons and armor => always proficient
+    else {
+      updates["data.proficient"] =
+          actorProfs.includes(profType) || actorProfs.includes(this.data.data.baseItem);
+    }
+    this.data.update(updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
    * @param {object} [options]
    * @param {boolean} [options.configureDialog]     Display a configuration dialog for the item roll, if applicable?
