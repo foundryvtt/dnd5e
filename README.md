@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/foundryvtt/dnd5e/master/media/repo-dnd5e.jpg)
+![](https://github.com/foundryvtt/dnd5e/blob/v10-dev/media/repo-dnd5e.jpg?raw=true)
 
 # Foundry Virtual Tabletop - DnD5e Game System
 
