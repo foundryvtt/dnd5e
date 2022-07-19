@@ -82,7 +82,13 @@ export default class Actor5e extends Actor {
 
   /** @inheritDoc */
   prepareBaseData() {
-    this._prepareBaseAbilities();
+    const updates = {};
+    this._prepareBaseAbilities(updates);
+    if ( !foundry.utils.isEmpty(updates) ) {
+      if ( !this.id ) this.updateSource(updates);
+      else this.update(updates);
+    }
+
     this._prepareBaseArmorClass();
     switch ( this.type ) {
       case "character":
@@ -188,30 +194,32 @@ export default class Actor5e extends Actor {
   /**
    * Update the actor's abilities list to match the abilities configured in `DND5E.abilities`.
    * Mutates the system.abilities object.
-   * @private
+   * @param {object} updates  Updates to be applied to the actor. *Will be mutated.*
+   * @protected
    */
-  _prepareBaseAbilities() {
-    const abilities = this.system.abilities;
-    const updates = {};
+  _prepareBaseAbilities(updates) {
+    const abilities = {};
     for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
-      if ( !(key in abilities) ) {
-        const a = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
+      abilities[key] = this.system.abilities[key];
+      if ( !abilities[key] ) {
+        abilities[key] = foundry.utils.deepClone(game.system.template.Actor.templates.common.abilities.cha);
 
         // Honor: Charisma for NPC, 0 for vehicles
         if ( key === "hon" ) {
-          if ( this.type === "vehicle" ) a.value = 0;
-          else if ( this.type === "npc" ) a.value = abilities.cha?.value ?? 10;
+          if ( this.type === "vehicle" ) abilities[key].value = 0;
+          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.cha?.value ?? 10;
         }
 
         // Sanity: Wisdom for NPC, 0 for vehicles
         else if ( key === "san" ) {
-          if ( this.type === "vehicle" ) a.value = 0;
-          else if ( this.type === "npc" ) a.value = a.wis?.value ?? 10;
+          if ( this.type === "vehicle" ) abilities[key].value = 0;
+          else if ( this.type === "npc" ) abilities[key].value = this.system.abilities.wis?.value ?? 10;
         }
-        updates[`system.abilities.${key}`] = a;
+
+        updates[`system.abilities.${key}`] = foundry.utils.deepClone(abilities[key]);
       }
     }
-    if ( !foundry.utils.isEmpty(updates) ) this.updateSource(updates);
+    this.system.abilities = abilities;
   }
 
   /* -------------------------------------------- */

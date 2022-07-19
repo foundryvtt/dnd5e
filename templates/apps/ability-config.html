@@ -3,7 +3,7 @@
   <h3 class="form-header">{{labelSaves}}</h3>
   <div class="form-group">
     <label>{{ localize "DND5E.ProficiencyLevel" }}</label>
-    <select name="system.abilities.{{abilityId}}.proficient">
+    <select name="system.abilities.{{abilityId}}.proficient" data-dtype="Number">
       {{selectOptions proficiencyLevels selected=ability.proficient}}
     </select>
   </div>
