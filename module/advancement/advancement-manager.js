@@ -288,6 +288,12 @@ export class AdvancementManager extends Application {
       if ( classLevel === 1 ) this.steps.push({ type: "delete", item: classItem, automatic: true });
     }
 
+    // Ensure the class level ends up at the appropriate point
+    this.steps.push({
+      type: "forward", automatic: true,
+      class: {item: classItem, level: classItem.data.data.levels += levelDelta}
+    });
+
     return this;
   }
 
@@ -456,7 +462,7 @@ export class AdvancementManager extends Application {
         if ( this.step.type === "delete" ) this.clone.items.delete(this.step.item.id);
         else if ( this.step.type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( this.step.type === "reverse" ) flow.retainedData = await flow.advancement.reverse(flow.level);
-        else await flow._updateObject(event, flow._getSubmitData());
+        else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
 
         this._stepIndex++;
 
@@ -505,7 +511,7 @@ export class AdvancementManager extends Application {
         // Reverse step based on step type
         if ( this.step.type === "delete" ) this.clone.data.update({items: [this.step.item]});
         else if ( this.step.type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
-        else flow.retainedData = await flow.advancement.reverse(flow.level);
+        else if ( flow ) flow.retainedData = await flow.advancement.reverse(flow.level);
 
         this.clone.prepareData();
       } while ( this.step?.automatic );
