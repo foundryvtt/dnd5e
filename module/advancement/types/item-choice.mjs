@@ -149,14 +149,18 @@ export class ItemChoiceAdvancement extends Advancement {
 
   /**
    * Verify that the provided item can be used with this advancement based on the configuration.
-   * @param {Item5e} item                  Item that needs to be tested.
-   * @param {object} options
-   * @param {boolean} [options.warn=true]  Display UI notifications with warning messages.
-   * @returns {boolean}                    Can this item be used?
+   * @param {Item5e} item                 Item that needs to be tested.
+   * @param {object} config
+   * @param {string} config.restriction   Type restriction on this advancement.
+   * @param {string} config.spellLevel    Spell level limitation.
+   * @param {boolean} [config.warn=true]  Display UI notifications with warning messages.
+   * @returns {boolean}                   Can this item be used?
    */
-  _validateItemType(item, { warn=true }={}) {
+  _validateItemType(item, { restriction, spellLevel, warn=true }={}) {
+    restriction ??= this.data.configuration.type;
+    spellLevel ??= this.data.configuration.spell?.level;
+
     // Type restriction is set and the item type does not match the selected type
-    const restriction = this.data.configuration.type;
     if ( restriction && (restriction !== item.type) ) {
       const type = game.i18n.localize(`ITEM.Type${restriction.capitalize()}`);
       if ( warn ) ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type }));
@@ -171,7 +175,7 @@ export class ItemChoiceAdvancement extends Advancement {
     }
 
     // If spell level is restricted, ensure the spell is of the appropriate level
-    const l = parseInt(this.data.configuration.spell?.level);
+    const l = parseInt(spellLevel);
     if ( (restriction === "spell") && Number.isNumeric(l) && (item.system.level !== l) ) {
       if ( warn ) ui.notifications.warn(game.i18n.format(
         "DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", { level: CONFIG.DND5E.spellLevels[l] }
@@ -218,8 +222,19 @@ export class ItemChoiceConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  prepareConfigurationUpdate(configuration) {
+  async prepareConfigurationUpdate(configuration) {
     if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
+
+    // Ensure items are still valid if type restriction or spell restriction are changed
+    configuration.pool ??= this.advancement.data.configuration.pool;
+    configuration.pool = await configuration.pool.reduce(async (pool, uuid) => {
+      const item = await fromUuid(uuid);
+      if ( this.advancement._validateItemType(item, {
+        restriction: configuration.type, spellLevel: configuration.spell?.level ?? false, warn: false
+      }) ) return [...await pool, uuid];
+      return pool;
+    }, []);
+
     return configuration;
   }
 
