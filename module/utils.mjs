@@ -78,7 +78,7 @@ export function indexFromUuid(uuid) {
  * @private
  */
 export function _linkForUuid(uuid) {
-  return TextEditor._createContentLink(["", "UUID", uuid]);
+  return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
 }
 
 /* -------------------------------------------- */

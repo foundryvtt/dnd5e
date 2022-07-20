@@ -49,7 +49,7 @@ export class ItemGrantAdvancement extends Advancement {
     else {
       return Object.keys(this.data.value.added).map(id => {
         const item = this.actor.items.get(id);
-        return item?.toAnchor({classes: ["content-link", "actor-item-link"]}) || "";
+        return item?.toAnchor({classes: ["content-link", "actor-item-link"]}).outerHTML || "";
       }).join("");
     }
   }
@@ -71,19 +71,20 @@ export class ItemGrantAdvancement extends Advancement {
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
-      const ri = retainedData[uuid];
-      if ( ri && !ri._id ) ri._id = foundry.utils.randomID();
-      const item = ri ? new Item.implementation(ri) : (await fromUuid(uuid))?.clone();
-      if ( !item ) continue;
+      let itemData = retainedData[uuid];
+      if ( !itemData ) {
+        const source = await fromUuid(uuid);
+        if ( !source ) continue;
+        itemData = source.clone({
+          _id: foundry.utils.randomID(),
+          "flags.dnd5e.sourceId": uuid,
+          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+        }, {keepId: true}).toObject();
+      }
 
-      item.updateSource({
-        "flags.dnd5e.sourceId": uuid,
-        "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-      });
-
-      items.push(item.toObject());
+      items.push(itemData);
       // TODO: Trigger any additional advancement steps for added items
-      updates[item.id] = uuid;
+      updates[itemData._id] = uuid;
     }
     this.actor.updateSource({items});
     this.updateSource({"value.added": updates});

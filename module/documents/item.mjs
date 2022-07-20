@@ -1705,7 +1705,7 @@ export default class Item5e extends Item {
     const idx = this.system.advancement.findIndex(a => a._id === id);
     if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
     const advancement = this.toObject().system.advancement;
-    foundry.utils.mergeObject(advancement[idx], updates);
+    foundry.utils.mergeObject(advancement[idx], updates, { performDeletions: true });
     return this.update({"system.advancement": advancement});
   }
 
