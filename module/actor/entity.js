@@ -942,18 +942,13 @@ export default class Actor5e extends Actor {
     const abl = this.data.data.abilities[skl.ability];
     const bonuses = getProperty(this.data.data, "bonuses.abilities") || {};
 
-    const parts = ["@mod", "@abilityCheckBonus"];
+    const parts = ["@prof", "@mod", "@abilityCheckBonus"];
     const data = this.getRollData();
 
     // Add ability modifier
+    data.prof = data.baseProf = skl.prof;
     data.mod = skl.mod;
     data.defaultAbility = skl.ability;
-
-    // Include proficiency bonus
-    if ( skl.prof.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = skl.prof.term;
-    }
 
     // Global ability check bonus
     if ( bonuses.check ) {
@@ -995,7 +990,9 @@ export default class Actor5e extends Actor {
       flavor,
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      jackOfAllTrades: this.getFlag("dnd5e", "jackOfAllTrades"),
       reliableTalent: reliableTalent,
+      remarkableAthlete: this.getFlag("dnd5e", "remarkableAthlete"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "skill", skillId }
