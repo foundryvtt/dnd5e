@@ -259,8 +259,8 @@ export default class Advancement {
     const advancement = foundry.utils.deepClone(this.item.system.advancement);
     const idx = advancement.findIndex(a => a._id === this.id);
     if ( idx < 0 ) throw new Error(`Advancement of ID ${this.id} could not be found to update`);
-    foundry.utils.mergeObject(this.data, updates);
-    foundry.utils.mergeObject(advancement[idx], updates);
+    foundry.utils.mergeObject(this.data, updates, { performDeletions: true });
+    foundry.utils.mergeObject(advancement[idx], updates, { performDeletions: true });
     this.item.updateSource({"system.advancement": advancement});
     return this;
   }
