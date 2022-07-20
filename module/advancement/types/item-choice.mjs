@@ -10,7 +10,7 @@ import AdvancementFlow from "../advancement-flow.mjs";
  */
 export class ItemChoiceAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       defaults: {
@@ -40,15 +40,15 @@ export class ItemChoiceAdvancement extends Advancement {
   /**
    * The item types that are supported in Item Choice. This order will be how they are displayed
    * in the configuration interface.
-   * @enum {object}
+   * @type {Set<string>}
    */
-  static VALID_TYPES = ["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"];
+  static VALID_TYPES = new Set(["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"]);
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   get levels() {
     return Array.from(Object.keys(this.data.configuration.choices));
   }
@@ -57,21 +57,21 @@ export class ItemChoiceAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return this.data.value[level] !== undefined;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   titleForLevel(level) {
     return `${this.title} <em>(${game.i18n.localize("DND5E.AdvancementChoices")})</em>`;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level) {
     const items = this.data.value[level];
     if ( !items ) return "";
@@ -118,7 +118,7 @@ export class ItemChoiceAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     const updates = {};
     for ( const item of data.items ) {
@@ -131,7 +131,7 @@ export class ItemChoiceAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   reverse(level) {
     const items = [];
     for ( const id of Object.keys(this.data.value[level] ?? {}) ) {
@@ -145,6 +145,44 @@ export class ItemChoiceAdvancement extends Advancement {
     return { items };
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Verify that the provided item can be used with this advancement based on the configuration.
+   * @param {Item5e} item                  Item that needs to be tested.
+   * @param {object} options
+   * @param {boolean} [options.warn=true]  Display UI notifications with warning messages.
+   * @returns {boolean}                    Can this item be used?
+   */
+  _validateItemType(item, { warn=true }={}) {
+    // Type restriction is set and the item type does not match the selected type
+    const restriction = this.data.configuration.type;
+    if ( restriction && (restriction !== item.type) ) {
+      const type = game.i18n.localize(`ITEM.Type${restriction.capitalize()}`);
+      if ( warn ) ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type }));
+      return false;
+    }
+
+    // Item is not one of the valid types
+    if ( !this.constructor.VALID_TYPES.has(item.type) ) {
+      const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
+      if ( warn ) ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
+      return false;
+    }
+
+    // If spell level is restricted, ensure the spell is of the appropriate level
+    const l = parseInt(this.data.configuration.spell?.level);
+    if ( (restriction === "spell") && Number.isNumeric(l) && (item.system.level !== l) ) {
+      if ( warn ) ui.notifications.warn(game.i18n.format(
+        "DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", { level: CONFIG.DND5E.spellLevels[l] }
+      ));
+      return false;
+    }
+
+    // Everything's great!
+    return true;
+  }
+
 }
 
 
@@ -155,7 +193,7 @@ export class ItemChoiceAdvancement extends Advancement {
  */
 export class ItemChoiceConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "item-choice", "two-column"],
@@ -179,7 +217,7 @@ export class ItemChoiceConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   prepareConfigurationUpdate(configuration) {
     if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
     return configuration;
@@ -187,15 +225,10 @@ export class ItemChoiceConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _verifyDroppedItem(event, item) {
-    const type = this.advancement.data.configuration.type;
-    if ( !type || (type === item.type) ) return true;
-    const typeName = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
-    ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeName }));
-    return false;
+    return this.advancement._validateItemType(item);
   }
-
 }
 
 
@@ -226,7 +259,7 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
@@ -236,7 +269,7 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     // Prepare initial data
     this.selected ??= new Set(
@@ -278,7 +311,7 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("a[data-uuid]").click(this._onClickFeature.bind(this));
@@ -287,7 +320,7 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _onChangeInput(event) {
     if ( event.target.checked ) this.selected.add(event.target.name);
     else this.selected.delete(event.target.name);
@@ -326,7 +359,7 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _onDrop(event) {
     if ( this.selected.size >= this.advancement.data.configuration.choices[this.level] ) return false;
 
@@ -341,12 +374,8 @@ export class ItemChoiceFlow extends AdvancementFlow {
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
-    // If there is a type restriction, verify it against the dropped type
-    const type = this.advancement.data.configuration.type;
-    if ( type && (type !== item.type) ) {
-      const typeName = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
-      return ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeName }));
-    }
+    const valid = this.advancement._validateItemType(item);
+    if ( !valid ) return;
 
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
@@ -357,19 +386,13 @@ export class ItemChoiceFlow extends AdvancementFlow {
       if ( Object.values(data).includes(item.uuid) ) return;
     }
 
-    // If spell level is restricted, ensure the spell is of the appropriate level
+    // If spell level is restricted to available levels, ensure the character can cast this level of spell
     const spellLevel = this.advancement.data.configuration.spell?.level;
-    if ( type === "spell" && spellLevel ) {
-      if ( spellLevel === "available") {
-        const maxSlot = this._maxSpellSlotLevel();
-        if ( item.system.level > maxSlot ) return ui.notifications.warn(game.i18n.format(
-          "DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", { level: CONFIG.DND5E.spellLevels[maxSlot] }
-        ));
-      } else if ( item.system.level !== parseInt(spellLevel) ) {
-        return ui.notifications.warn(game.i18n.format(
-          "DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", { level: CONFIG.DND5E.spellLevels[spellLevel] }
-        ));
-      }
+    if ( (this.advancement.data.configuration.type === "spell") && (spellLevel === "available") ) {
+      const maxSlot = this._maxSpellSlotLevel();
+      if ( item.system.level > maxSlot ) return ui.notifications.warn(game.i18n.format(
+        "DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", { level: CONFIG.DND5E.spellLevels[maxSlot] }
+      ));
     }
 
     // Mark the item as selected
@@ -402,7 +425,7 @@ export class ItemChoiceFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const retainedData = this.retainedData?.items.reduce((obj, i) => {
       obj[foundry.utils.getProperty(i, "flags.dnd5e.sourceId")] = i;

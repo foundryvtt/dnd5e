@@ -8,7 +8,7 @@ import AdvancementConfig from "../advancement-config.mjs";
  */
 export class ItemGrantAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       defaults: {
@@ -30,17 +30,25 @@ export class ItemGrantAdvancement extends Advancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * The item types that are supported in Item Grant.
+   * @type {Set<string>}
+   */
+  static VALID_TYPES = new Set(["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"]);
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return !foundry.utils.isEmpty(this.data.value);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
     if ( !this.data.value.added || configMode ) {
@@ -96,7 +104,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     const updates = {};
     for ( const item of data.items ) {
@@ -109,7 +117,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   reverse(level) {
     const items = [];
     for ( const id of Object.keys(this.data.value.added ?? {}) ) {
@@ -131,7 +139,7 @@ export class ItemGrantAdvancement extends Advancement {
  */
 export class ItemGrantConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
@@ -144,10 +152,19 @@ export class ItemGrantConfig extends AdvancementConfig {
 
   async getData() {
     const data = super.getData();
-    // TODO: Only need the index here, replace with simplified index fetching in V10
-    data.items = await Promise.all(data.data.configuration.items.map(fromUuid));
+    data.items = await Promise.all(data.data.configuration.items.map(fromUuidSync));
     data.showSpellConfig = data.items.some(i => i.type === "spell");
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _verifyDroppedItem(event, item) {
+    if ( this.advancement.constructor.VALID_TYPES.has(item.type) ) return true;
+    const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
+    ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
+    return false;
   }
 
 }
@@ -158,7 +175,7 @@ export class ItemGrantConfig extends AdvancementConfig {
  */
 export class ItemGrantFlow extends AdvancementFlow {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/item-grant-flow.html"
@@ -167,7 +184,7 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const config = this.advancement.data.configuration.items;
     const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
@@ -188,7 +205,7 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("a[data-uuid]").click(this._onClickFeature.bind(this));
@@ -210,7 +227,7 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const retainedData = this.retainedData?.items.reduce((obj, i) => {
       obj[foundry.utils.getProperty(i, "flags.dnd5e.sourceId")] = i;
