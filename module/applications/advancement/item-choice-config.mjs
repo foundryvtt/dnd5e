@@ -30,8 +30,19 @@ export default class ItemChoiceConfig extends AdvancementConfig {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  prepareConfigurationUpdate(configuration) {
+  async prepareConfigurationUpdate(configuration) {
     if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
+
+    // Ensure items are still valid if type restriction or spell restriction are changed
+    configuration.pool ??= this.advancement.data.configuration.pool;
+    configuration.pool = await configuration.pool.reduce(async (pool, uuid) => {
+      const item = await fromUuid(uuid);
+      if ( this.advancement._verifyItemType(item, {
+        restriction: configuration.type, spellLevel: configuration.spell?.level ?? false, error: false
+      }) ) return [...await pool, uuid];
+      return pool;
+    }, []);
+
     return configuration;
   }
 

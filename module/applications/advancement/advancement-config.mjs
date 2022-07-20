@@ -87,7 +87,7 @@ export default class AdvancementConfig extends FormApplication {
    * @param {object} configuration  Configuration object.
    * @returns {object}              Modified configuration.
    */
-  prepareConfigurationUpdate(configuration) {
+  async prepareConfigurationUpdate(configuration) {
     return configuration;
   }
 
@@ -116,7 +116,7 @@ export default class AdvancementConfig extends FormApplication {
       delete updates.data;
       updates = { ...updates, ...data };
     }
-    if ( updates.configuration ) updates.configuration = this.prepareConfigurationUpdate(updates.configuration);
+    if ( updates.configuration ) updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
     await this.advancement.update(updates);
     this.render();
   }
