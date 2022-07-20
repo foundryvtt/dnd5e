@@ -102,7 +102,7 @@ export default class ActorSheet5e extends ActorSheet {
       get() {
         const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, {from: "DnD5e 2.0", until: "DnD5e 2.2"});
+        foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
         return context.system;
       }
     });

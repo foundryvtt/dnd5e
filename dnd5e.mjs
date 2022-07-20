@@ -50,7 +50,7 @@ Hooks.once("init", function() {
     get() {
       const msg = `You are referencing the 'dnd5e.entities' property which has been deprecated and renamed to 
       'dnd5e.documents'. Support for this old path will be removed in a future version.`;
-      foundry.utils.logCompatibilityWarning(msg, {from: "DnD5e 2.0", until: "DnD5e 2.2"});
+      foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
       return dnd5e.documents;
     }
   });
