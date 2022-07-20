@@ -21,9 +21,11 @@
  * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
  *
  * ## Flags
- * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
- * @property {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
- * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
+ * @property {boolean} [elvenAccuracy]      Allow Elven Accuracy to modify this roll?
+ * @property {boolean} [halflingLucky]      Allow Halfling Luck to modify this roll?
+ * @property {boolean} [jackOfAllTrades]    Allow Jack of All Trades to modify this roll?
+ * @property {boolean} [reliableTalent]     Allow Reliable Talent to modify this roll?
+ * @property {boolean} [remarkableAthlete]  Allow Remarkable Athlete to modify this roll?
  *
  * ## Roll Configuration Dialog
  * @property {boolean} [fastForward=false]     Should the roll configuration dialog be skipped?
@@ -51,7 +53,7 @@
 export async function d20Roll({
   parts=[], data={}, event,
   advantage, disadvantage, critical=20, fumble=1, targetValue,
-  elvenAccuracy, halflingLucky, reliableTalent,
+  elvenAccuracy, halflingLucky, jackOfAllTrades, reliableTalent, remarkableAthlete,
   fastForward=false, chooseModifier=false, template, title, dialogOptions,
   chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
@@ -61,6 +63,7 @@ export async function d20Roll({
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
   if ( chooseModifier && !isFF ) {
+    data.prof = "@prof";
     data.mod = "@mod";
     if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
   }
@@ -76,7 +79,9 @@ export async function d20Roll({
     targetValue,
     elvenAccuracy,
     halflingLucky,
-    reliableTalent
+    jackOfAllTrades,
+    reliableTalent,
+    remarkableAthlete
   });
 
   // Prompt a Dialog to further configure the D20Roll

@@ -11,7 +11,9 @@
  *                                               compared
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
+ * @param {boolean} [options.jackOfAllTrades=false]    Allow Jack of All Trades to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
+ * @param {boolean} [options.remarkableAthlete=false]  Allow Remarkable Athlete to modify this roll?
  */
 export default class D20Roll extends Roll {
   constructor(formula, data, options) {
@@ -251,7 +253,21 @@ export default class D20Roll extends Roll {
     // Customize the modifier
     if ( form.ability?.value ) {
       const abl = this.data.abilities[form.ability.value];
+      let prof = this.data.baseProf;
+
+      // Make proficiency adjustments based on remarkable athlete
+      if ( this.options.remarkableAthlete ) {
+        const v = CONFIG.DND5E.characterFlags.remarkableAthlete.abilities;
+        if ( !v.includes(form.ability.value) && (prof.multiplier === 0.5) && (prof.rounding === "up") ) {
+          if ( this.options.jackOfAllTrades ) prof = prof.clone({ roundDown: true });
+          else prof = prof.clone({ multiplier: 0 });
+        } else if ( v.includes(form.ability.value) && (prof.multiplier <= 0.5) && (prof.rounding === "down") ) {
+          prof = prof.clone({ multiplier: 0.5, roundDown: false });
+        }
+      }
+
       this.terms = this.terms.flatMap(t => {
+        if ( t.term === "@prof" ) return new Roll(prof.term).terms[0];
         if ( t.term === "@mod" ) return new NumericTerm({number: abl.mod});
         if ( t.term === "@abilityCheckBonus" ) {
           const bonus = abl.bonuses?.check;
