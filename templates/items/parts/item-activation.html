@@ -2,7 +2,8 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.ItemActivationCost" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.activation.cost" value="{{system.activation.cost}}" data-dtype="Number" placeholder="-"/>
+        <input type="number" step="any" name="system.activation.cost"
+            value="{{system.activation.cost}}" placeholder="&mdash;">
         <select name="system.activation.type">
             {{#select system.activation.type}}
             <option value=""></option>
@@ -43,7 +44,8 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.Target" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.target.value" value="{{system.target.value}}" data-dtype="Number" placeholder="-"/>
+        <input type="number" step="any" name="system.target.value"
+            value="{{system.target.value}}" placeholder="&mdash;">
         <select name="system.target.units">
             {{#select system.target.units}}
             <option value=""></option>
@@ -68,7 +70,8 @@
 <div class="form-group input-select-select">
     <label>{{ localize "DND5E.TargetWidth" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.target.width" value="{{system.target.width}}" data-dtype="Number" placeholder="-"/>
+        <input type="number" step="any" name="system.target.width"
+            value="{{system.target.width}}" placeholder="&mdash;">
     </div>
 </div>
 {{/if}}
@@ -77,9 +80,11 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Range" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.range.value" value="{{system.range.value}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Normal' }}"/>
+        <input type="number" step="any" name="system.range.value"
+            value="{{system.range.value}}" placeholder="{{localize 'DND5E.Normal'}}">
         <span class="sep">/</span>
-        <input type="text" name="system.range.long" value="{{system.range.long}}" data-dtype="Number" placeholder="{{ localize 'DND5E.Max' }}"/>
+        <input type="number" step="any" name="system.range.long"
+            value="{{system.range.long}}" placeholder="{{localize 'DND5E.Max'}}">
         <select name="system.range.units">
             {{#select system.range.units}}
             <option value=""></option>
@@ -95,7 +100,8 @@
 <div class="form-group input-select">
     <label>{{ localize "DND5E.Duration" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.duration.value" value="{{system.duration.value}}" data-dtype="Number" placeholder="-"/>
+        <input type="number" step="any" name="system.duration.value" value="{{system.duration.value}}"
+            placeholder="&mdash;">
         <select name="system.duration.units">
             {{#select system.duration.units}}
             <option value=""></option>
@@ -111,9 +117,9 @@
 <div class="form-group uses-per">
     <label>{{ localize "DND5E.LimitedUses" }}</label>
     <div class="form-fields">
-        <input type="text" name="system.uses.value" value="{{system.uses.value}}" data-dtype="Number"/>
+        <input type="number" step="any" name="system.uses.value" value="{{system.uses.value}}">
         <span class="sep">{{ localize "DND5E.of" }}</span>
-        <input type="text" name="system.uses.max" value="{{system.uses.max}}"/>
+        <input type="text" name="system.uses.max" value="{{system.uses.max}}">
         <span class="sep">{{ localize "DND5E.per" }}</span>
         <select name="system.uses.per">
             {{#select system.uses.per}}
@@ -146,7 +152,7 @@
             {{/each}}
             {{/select}}
         </select>
-        <input type="text" name="system.consume.amount" value="{{system.consume.amount}}" data-dtype="Number"/>
+        <input type="number" step="any" name="system.consume.amount" value="{{system.consume.amount}}">
     </div>
 </div>
 {{/if}}
