@@ -138,4 +138,33 @@ export default class ItemChoiceAdvancement extends Advancement {
     this.updateSource({[`value.-=${level}`]: null });
     return { items };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Verify that the provided item can be used with this advancement based on the configuration.
+   * @param {Item5e} item  Item that needs to be tested.
+   * @throws An error if the item is invalid.
+   */
+  _verifyItemType(item) {
+    // Type restriction is set and the item type does not match the selected type
+    const restriction = this.data.configuration.type;
+    if ( restriction && (restriction !== item.type) ) {
+      const type = game.i18n.localize(`ITEM.Type${restriction.capitalize()}`);
+      throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type }));
+    }
+
+    // Item is not one of the valid types
+    if ( !this.constructor.VALID_TYPES.has(item.type) ) {
+      const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
+      throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
+    }
+
+    // If spell level is restricted, ensure the spell is of the appropriate level
+    const l = parseInt(this.data.configuration.spell?.level);
+    if ( (restriction === "spell") && Number.isNumeric(l) && (item.system.level !== l) ) {
+      const level = CONFIG.DND5E.spellLevels[l];
+      throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", { level }));
+    }
+  }
 }

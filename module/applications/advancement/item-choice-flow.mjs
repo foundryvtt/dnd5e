@@ -140,11 +140,10 @@ export default class ItemChoiceFlow extends AdvancementFlow {
     if ( data.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);
 
-    // If there is a type restriction, verify it against the dropped type
-    const type = this.advancement.data.configuration.type;
-    if ( type && (type !== item.type) ) {
-      const typeName = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
-      return ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeName }));
+    try {
+      this.advancement._verifyItemType(item);
+    } catch(err) {
+      return ui.notifications.error(err.message);
     }
 
     // If the item is already been marked as selected, no need to go further
@@ -156,19 +155,13 @@ export default class ItemChoiceFlow extends AdvancementFlow {
       if ( Object.values(data).includes(item.uuid) ) return;
     }
 
-    // If spell level is restricted, ensure the spell is of the appropriate level
+    // If spell level is restricted to available level, ensure the spell is of the appropriate level
     const spellLevel = this.advancement.data.configuration.spell?.level;
-    if ( type === "spell" && spellLevel ) {
-      if ( spellLevel === "available") {
-        const maxSlot = this._maxSpellSlotLevel();
-        if ( item.system.level > maxSlot ) return ui.notifications.warn(game.i18n.format(
-          "DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", { level: CONFIG.DND5E.spellLevels[maxSlot] }
-        ));
-      } else if ( item.system.level !== parseInt(spellLevel) ) {
-        return ui.notifications.warn(game.i18n.format(
-          "DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", { level: CONFIG.DND5E.spellLevels[spellLevel] }
-        ));
-      }
+    if ( (this.advancement.data.configuration.type === "spell") && spellLevel === "available" ) {
+      const maxSlot = this._maxSpellSlotLevel();
+      if ( item.system.level > maxSlot ) return ui.notifications.error(game.i18n.format(
+        "DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", { level: CONFIG.DND5E.spellLevels[maxSlot] }
+      ));
     }
 
     // Mark the item as selected

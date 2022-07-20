@@ -39,9 +39,6 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
   /** @inheritdoc */
   _verifyDroppedItem(event, item) {
-    const type = this.advancement.data.configuration.type;
-    if ( !type || (type === item.type) ) return;
-    const typeName = game.i18n.localize(`ITEM.Type${type.capitalize()}`);
-    throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", { type: typeName }));
+    this.advancement._verifyItemType(item);
   }
 }
