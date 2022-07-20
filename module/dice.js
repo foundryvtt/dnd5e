@@ -190,9 +190,12 @@ function _separateAnnotatedTerms(terms) {
  * @param {number} [config.fumble]           The value of d20 result which represents a critical failure
  * @param {number} [config.targetValue]      Assign a target value against which the result of this roll
  *                                           should be compared
- * @param {boolean} [config.elvenAccuracy]   Allow Elven Accuracy to modify this roll?
- * @param {boolean} [config.halflingLucky]   Allow Halfling Luck to modify this roll?
- * @param {boolean} [config.reliableTalent]  Allow Reliable Talent to modify this roll?
+ *
+ * @param {boolean} [config.elvenAccuracy]      Allow Elven Accuracy to modify this roll?
+ * @param {boolean} [config.halflingLucky]      Allow Halfling Luck to modify this roll?
+ * @param {boolean} [config.jackOfAllTrades]    Allow Jack of All Trades to modify this roll?
+ * @param {boolean} [config.reliableTalent]     Allow Reliable Talent to modify this roll?
+ * @param {boolean} [config.remarkableAthlete]  Allow Remarkable Athlete to modify this roll?
  *
  * @param {boolean} [config.chooseModifier=false] Choose the ability modifier that should be used when the roll is made
  * @param {boolean} [config.fastForward=false] Allow fast-forward advantage selection
@@ -211,7 +214,8 @@ function _separateAnnotatedTerms(terms) {
  */
 export async function d20Roll({
   parts=[], data={}, // Roll creation
-  advantage, disadvantage, fumble=1, critical=20, targetValue, elvenAccuracy, halflingLucky, reliableTalent, // Roll customization
+  advantage, disadvantage, fumble=1, critical=20, targetValue,
+  elvenAccuracy, halflingLucky, jackOfAllTrades, reliableTalent, remarkableAthlete, // Roll customization
   chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
   chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
 }={}) {
@@ -221,6 +225,7 @@ export async function d20Roll({
   const {advantageMode, isFF} = _determineAdvantageMode({advantage, disadvantage, fastForward, event});
   const defaultRollMode = rollMode || game.settings.get("core", "rollMode");
   if ( chooseModifier && !isFF ) {
+    data.prof = "@prof";
     data.mod = "@mod";
     if ( "abilityCheckBonus" in data ) data.abilityCheckBonus = "@abilityCheckBonus";
   }
@@ -236,7 +241,9 @@ export async function d20Roll({
     targetValue,
     elvenAccuracy,
     halflingLucky,
-    reliableTalent
+    jackOfAllTrades,
+    reliableTalent,
+    remarkableAthlete
   });
 
   // Prompt a Dialog to further configure the D20Roll
