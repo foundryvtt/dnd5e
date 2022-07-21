@@ -8,4 +8,4 @@ export {default as TokenDocument5e} from "./token.mjs";
 export {default as Proficiency} from "./actor/proficiency.mjs";
 export * as chat from "./chat-message.mjs";
 export * as combat from "./combat.mjs";
-export * as macros from "./macro.mjs";
+export * as macro from "./macro.mjs";

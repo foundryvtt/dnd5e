@@ -220,9 +220,9 @@ export const migrateActorData = function(actor, migrationData) {
     }
 
     // Update the Owned Item
-    if ( !isObjectEmpty(itemUpdate) ) {
+    if ( !foundry.utils.isEmpty(itemUpdate) ) {
       itemUpdate._id = itemData._id;
-      arr.push(expandObject(itemUpdate));
+      arr.push(foundry.utils.expandObject(itemUpdate));
     }
 
     return arr;
@@ -332,6 +332,7 @@ export const migrateEffectData = function(effect, migrationData) {
 export const migrateMacroData = function(macro, migrationData) {
   const updateData = {};
   _migrateItemIcon(macro, updateData, migrationData);
+  _migrateMacroCommands(macro, updateData);
   return updateData;
 };
 
@@ -567,7 +568,7 @@ function _migrateActorAC(actorData, updateData) {
 
 /**
  * Renamed token images.
- * @type {object<string, string>}
+ * @type {Object<string, string>}
  */
 const TOKEN_IMAGE_RENAME = {
   "systems/dnd5e/tokens/beast/OwlWhite.png": "systems/dnd5e/tokens/beast/Owl.webp",
@@ -586,7 +587,7 @@ const TOKEN_IMAGE_RENAME = {
 
 /**
  * Re-scaled token images.
- * @type {object<string, number>}
+ * @type {Object<string, number>}
  */
 const TOKEN_IMAGE_RESCALE = {
   "systems/dnd5e/tokens/beast/HunterShark.png": 1.5,
@@ -615,19 +616,27 @@ const TOKEN_IMAGE_RESCALE = {
  * @private
  */
 function _migrateTokenImage(actorData, updateData) {
-  ["img", "token.img"].forEach(prop => {
+  ["texture.src", "prototypeToken.texture.src"].forEach(prop => {
     const img = foundry.utils.getProperty(actorData, prop);
+
     // Special fix for a renamed token that we missed the first time.
     if ( img === "systems/dnd5e/tokens/humanoid/HumanBrownM.webp" ) {
       updateData[prop] = "systems/dnd5e/tokens/humanoid/Commoner.webp";
       return updateData;
     }
+
+    // Replace image with WEBP equivalent, renaming if necessary
     if ( !img?.startsWith("systems/dnd5e/tokens/") || img?.endsWith(".webp") ) return;
     updateData[prop] = TOKEN_IMAGE_RENAME[img] ?? img.replace(/\.png$/, ".webp");
-    const scale = `${prop.startsWith("token.") ? "token." : ""}scale`;
-    if ( !foundry.utils.hasProperty(actorData, scale) ) return;
+
+    // Adjust scaling to match new image
+    const scalePrefix = `${prop.startsWith("prototypeToken.") ? "prototypeToken." : ""}texture`;
+    if ( !foundry.utils.hasProperty(actorData, `${scalePrefix}.scaleX`) ) return;
     const rescale = TOKEN_IMAGE_RESCALE[img];
-    if ( rescale ) updateData[scale] = rescale;
+    if ( rescale ) {
+      updateData[`${scalePrefix}.scaleX`] = rescale;
+      updateData[`${scalePrefix}.scaleY`] = rescale;
+    }
   });
   return updateData;
 }
@@ -725,7 +734,7 @@ function _migrateItemCriticalData(item, updateData) {
  * @param {object} item                                     Item data to migrate
  * @param {object} updateData                               Existing update to expand upon
  * @param {object} [migrationData={}]                       Additional data to perform the migration
- * @param {object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
+ * @param {Object<string, string>} [migrationData.iconMap]  A mapping of system icons to core foundry icons
  * @returns {object}                                        The updateData to apply
  * @private
  */
@@ -754,6 +763,23 @@ function _migrateEffectArmorClass(effect, updateData) {
     return c;
   });
   if ( containsUpdates ) updateData.changes = changes;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate macros from the old 'dnd5e.rollItemMacro' and 'dnd5e.macros' commands to the new location.
+ * @param {object} macro       Macro data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateMacroCommands(macro, updateData) {
+  if ( macro.command.includes("game.dnd5e.rollItemMacro") ) {
+    updateData.command = macro.command.replaceAll("game.dnd5e.rollItemMacro", "dnd5e.documents.macro.rollItem");
+  } else if ( macro.command.includes("game.dnd5e.macros.") ) {
+    updateData.command = macro.command.replaceAll("game.dnd5e.macros.", "dnd5e.documents.macro.");
+  }
   return updateData;
 }
 
