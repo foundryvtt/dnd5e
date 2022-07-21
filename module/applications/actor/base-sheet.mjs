@@ -902,7 +902,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
     const level = span.dataset.level;
-    const override = this.actor.systema.spells[level].override || span.dataset.slots;
+    const override = this.actor.system.spells[level].override || span.dataset.slots;
     const input = document.createElement("INPUT");
     input.type = "text";
     input.name = `system.spells.${level}.override`;
