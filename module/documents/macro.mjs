@@ -1,6 +1,6 @@
 /**
  * Attempt to create a macro from the dropped data. Will use an existing macro if one exists.
- * @param {object} dropData         The dropped data
+ * @param {object} dropData     The dropped data
  * @param {number} slot         The hotbar slot to use
  * @returns {Promise<boolean>}
  */
@@ -8,22 +8,22 @@ export async function create5eMacro(dropData, slot) {
   const macroData = { type: "script", scope: "actor" };
   switch ( dropData.type ) {
     case "Item":
-      const itemData = dropData.data;
+      const itemData = await Item.implementation.fromDropData(dropData);
       if ( !itemData ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
       foundry.utils.mergeObject(macroData, {
         name: itemData.name,
         img: itemData.img,
-        command: `dnd5e.macros.rollItem("${itemData.name}")`,
+        command: `dnd5e.documents.macro.rollItem("${itemData.name}")`,
         flags: {"dnd5e.itemMacro": true}
       });
       break;
     case "ActiveEffect":
-      const effectData = dropData.data;
+      const effectData = await ActiveEffect.implementation.fromDropData(dropData);
       if ( !effectData ) return ui.notifications.warn(game.i18n.localize("MACRO.5eUnownedWarn"));
       foundry.utils.mergeObject(macroData, {
         name: effectData.label,
         img: effectData.icon,
-        command: `dnd5e.macros.toggleEffect("${effectData.label}")`,
+        command: `dnd5e.documents.macro.toggleEffect("${effectData.label}")`,
         flags: {"dnd5e.effectMacro": true}
       });
       break;
@@ -54,7 +54,7 @@ function getMacroTarget(name, documentType) {
   if ( !actor ) return ui.notifications.warn(game.i18n.localize("MACRO.5eNoActorSelected"));
 
   const collection = (documentType === "Item") ? actor.items : actor.effects;
-  const nameKeyPath = (documentType === "Item") ? "name" : "data.label";
+  const nameKeyPath = (documentType === "Item") ? "name" : "label";
 
   // Find item in collection
   const documents = collection.filter(i => foundry.utils.getProperty(i, nameKeyPath) === name);

@@ -102,7 +102,7 @@ export default class ActorSheet5e extends ActorSheet {
       get() {
         const msg = `You are accessing the "data" attribute within the rendering context provided by the ItemSheet5e 
         class. This attribute has been deprecated in favor of "system" and will be removed in a future release`;
-        foundry.utils.logCompatibilityWarning(msg, {from: "DnD5e 2.0", until: "DnD5e 2.2"});
+        foundry.utils.logCompatibilityWarning(msg, { since: "DnD5e 2.0", until: "DnD5e 2.2" });
         return context.system;
       }
     });
@@ -902,7 +902,7 @@ export default class ActorSheet5e extends ActorSheet {
   async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
     const level = span.dataset.level;
-    const override = this.actor.systema.spells[level].override || span.dataset.slots;
+    const override = this.actor.system.spells[level].override || span.dataset.slots;
     const input = document.createElement("INPUT");
     input.type = "text";
     input.name = `system.spells.${level}.override`;

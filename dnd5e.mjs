@@ -33,7 +33,6 @@ globalThis.dnd5e = {
   dice,
   documents,
   migrations,
-  rollItemMacro: documents.macros.rollItem,
   utils
 };
 
@@ -48,10 +47,36 @@ Hooks.once("init", function() {
   /** @deprecated */
   Object.defineProperty(dnd5e, "entities", {
     get() {
-      const msg = `You are referencing the 'dnd5e.entities' property which has been deprecated and renamed to 
-      'dnd5e.documents'. Support for this old path will be removed in a future version.`;
-      foundry.utils.logCompatibilityWarning(msg, {from: "DnD5e 2.0", until: "DnD5e 2.2"});
+      foundry.utils.logCompatibilityWarning(
+        "You are referencing the 'dnd5e.entities' property which has been deprecated and renamed to "
+        + "'dnd5e.documents'. Support for this old path will be removed in a future version.",
+        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      );
       return dnd5e.documents;
+    }
+  });
+
+  /** @deprecated */
+  Object.defineProperty(dnd5e, "rollItemMacro", {
+    get() {
+      foundry.utils.logCompatibilityWarning(
+        "You are referencing the 'dnd5e.rollItemMacro' method which has been deprecated and renamed to "
+        + "'dnd5e.documents.macro.rollItem'. Support for this old path will be removed in a future version.",
+        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      );
+      return dnd5e.documents.macro.rollItem;
+    }
+  });
+
+  /** @deprecated */
+  Object.defineProperty(dnd5e, "macros", {
+    get() {
+      foundry.utils.logCompatibilityWarning(
+        "You are referencing the 'dnd5e.macros' property which has been deprecated and renamed to "
+        + "'dnd5e.documents.macro'. Support for this old path will be removed in a future version.",
+        { since: "DnD5e 2.0", until: "DnD5e 2.2" }
+      );
+      return dnd5e.documents.macro;
     }
   });
 
@@ -160,7 +185,7 @@ Hooks.once("i18nInit", () => utils.performPreLocalization(CONFIG.DND5E));
 Hooks.once("ready", function() {
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => documents.macros.create5eMacro(data, slot));
+  Hooks.on("hotbarDrop", (bar, data, slot) => documents.macro.create5eMacro(data, slot));
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
