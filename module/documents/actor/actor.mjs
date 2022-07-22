@@ -1599,7 +1599,7 @@ export default class Actor5e extends Actor {
       items: source.items, // Get the items of your new form
       effects: o.effects.concat(source.effects), // Combine active effects from both forms
       img: source.img, // New appearance
-      permission: o.permission, // Use the original actor permissions
+      ownership: o.ownership, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags // Use the original actor flags
     };
@@ -1617,17 +1617,20 @@ export default class Actor5e extends Actor {
     d.system.attributes.ac.flat = target.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
-    d.token = {name: d.name};
-    for ( let k of ["width", "height", "scale", "img", "mirrorX", "mirrorY", "tint", "alpha", "lockRotation"] ) {
-      d.token[k] = source.token[k];
+    d.prototypeToken = {name: d.name, texture: {}};
+    for ( const k of ["width", "height", "alpha", "lockRotation"] ) {
+      d.prototypeToken[k] = source.prototypeToken[k];
     }
-    const vision = keepVision ? o.token : source.token;
-    for ( let k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
-      d.token[k] = vision[k];
+    for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
+      d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
     }
-    if ( source.token.randomImg ) {
+    const vision = keepVision ? o.prototypeToken : source.prototypeToken;
+    for ( const k of ["dimSight", "brightSight", "dimLight", "brightLight", "vision", "sightAngle"] ) {
+      d.prototypeToken[k] = vision[k];
+    }
+    if ( source.prototypeToken.randomImg ) {
       const images = await target.getTokenImages();
-      d.token.img = images[Math.floor(Math.random() * images.length)];
+      d.prototypeToken.texture.src = images[Math.floor(Math.random() * images.length)];
     }
 
     // Transfer ability scores
@@ -1678,7 +1681,7 @@ export default class Actor5e extends Actor {
 
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if ( this.isToken ) {
-      const tokenData = d.token;
+      const tokenData = d.prototypeToken;
       delete d.prototypeToken;
       tokenData.actorData = d;
       return this.token.update(tokenData);
@@ -1708,7 +1711,7 @@ export default class Actor5e extends Actor {
     if ( !transformTokens ) return;
     const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
-      const newTokenData = foundry.utils.deepClone(d.token);
+      const newTokenData = foundry.utils.deepClone(d.prototypeToken);
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
