@@ -694,7 +694,7 @@ export default class Item5e extends Item {
         const upcastLevel = configuration.level === "pact" ? as.spells.pact.level : parseInt(configuration.level);
         if ( !Number.isNaN(upcastLevel) && (upcastLevel !== is.level) ) {
           item = this.clone({"system.level": upcastLevel}, {keepId: true});
-          item.prepareFinalAttributes(); // Spell save DC, etc...
+          item.prepareData();
         }
       }
     }

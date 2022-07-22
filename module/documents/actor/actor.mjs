@@ -1879,9 +1879,9 @@ export default class Actor5e extends Actor {
     if ( !dhp ) return;
     dhp = Number(dhp);
     const tokens = this.isToken ? [this.token?.object] : this.getActiveTokens(true);
-    for ( let t of tokens ) {
+    for ( const t of tokens ) {
       const pct = Math.clamped(Math.abs(dhp) / this.system.attributes.hp.max, 0, 1);
-      t.hud.createScrollingText(dhp.signedString(), {
+      canvas.interface.createScrollingText(t.center, dhp.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
         fontSize: 16 + (32 * pct), // Range between [16, 48]
         fill: CONFIG.DND5E.tokenHPColors[dhp < 0 ? "damage" : "healing"],
