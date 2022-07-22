@@ -10,7 +10,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
   // Highlight rolls where the first part is a d20 roll
   const d20Roll = message.rolls.find(r => {
     const d0 = r.dice[0];
-    return (d0.faces === 20) && (d0.values.length === 1);
+    return (d0?.faces === 20) && (d0?.values.length === 1);
   });
   if ( !d20Roll ) return;
   const d = d20Roll.dice[0];

@@ -1,4 +1,5 @@
-import {simplifyRollFormula, d20Roll, damageRoll} from "../dice/dice.mjs";
+import {d20Roll, damageRoll} from "../dice/dice.mjs";
+import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 import AbilityUseDialog from "../applications/item/ability-use-dialog.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 
@@ -1938,7 +1939,7 @@ export default class Item5e extends Item {
     // Get spell data
     const itemData = (spell instanceof Item5e) ? spell.toObject() : spell;
     const { actionType, description, source, activation, duration, target,
-      range, damage, formula, save, level} = itemData.data;
+      range, damage, formula, save, level} = itemData.system;
 
     // Get scroll data
     const scrollUuid = `Compendium.${CONFIG.DND5E.sourcePacks.ITEMS}.${CONFIG.DND5E.spellScrollIds[level]}`;
