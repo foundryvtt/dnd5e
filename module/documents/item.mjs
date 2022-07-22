@@ -649,7 +649,7 @@ export default class Item5e extends Item {
    * @property {boolean} consumeQuantity         Should the item's quantity be consumed?
    * @property {boolean} consumeRecharge         Should a recharge be consumed?
    * @property {boolean} consumeResource         Should a linked (non-ammo) resource be consumed?
-   * @property {string|null} consumeSpellLevel   Specific spell slot to consume.
+   * @property {number|string|null} consumeSpellLevel  Specific spell level to consume, or "pact" for pact level.
    * @property {boolean} consumeSpellSlot        Should any spell slot be consumed?
    * @property {boolean} consumeUsage            Should limited uses be consumed?
    * @property {boolean} needsConfiguration      Is user-configuration needed?
@@ -693,7 +693,7 @@ export default class Item5e extends Item {
       consumeQuantity: is.uses?.autoDestroy ?? false,
       consumeRecharge: !!is.recharge?.value,
       consumeResource: !!resource.target && (!item.hasAttack || (resource.type !== "ammo")),
-      consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : `spell${is.level}` : null,
+      consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
       consumeUsage: !!is.uses?.per
     };
@@ -713,21 +713,19 @@ export default class Item5e extends Item {
      */
     if ( Hooks.call("dnd5e.preRoll", item, config, options) === false ) return;
 
+    // Display configuration dialog
     if ( (options.configureDialog !== false) && config.needsConfiguration ) {
       const configuration = await AbilityUseDialog.create(item);
       if ( !configuration ) return;
-
       foundry.utils.mergeObject(config, configuration);
+    }
 
-      // Handle spell upcasting
-      if ( requireSpellSlot ) {
-        config.consumeSpellLevel = configuration.level === "pact" ? "pact" : `spell${configuration.level}`;
-        if ( config.consumeSpellSlot === false ) config.consumeSpellLevel = null;
-        const upcastLevel = configuration.level === "pact" ? as.spells.pact.level : parseInt(configuration.level);
-        if ( !Number.isNaN(upcastLevel) && (upcastLevel !== is.level) ) {
-          item = this.clone({"system.level": upcastLevel}, {keepId: true});
-          item.prepareData();
-        }
+    // Handle spell upcasting
+    if ( isSpell && config.consumeSpellSlot ) {
+      const upcastLevel = config.consumeSpellLevel === "pact" ? as.spells.pact.level : config.consumeSpellLevel;
+      if ( upcastLevel && (upcastLevel !== is.level) ) {
+        item = item.clone({"system.level": upcastLevel}, {keepId: true});
+        item.prepareData();
       }
     }
 
