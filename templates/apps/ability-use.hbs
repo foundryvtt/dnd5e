@@ -9,7 +9,7 @@
     <div class="form-group">
         <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
         <div class="form-fields">
-            <select name="level">
+            <select name="consumeSpellLevel">
                 {{#select item.system.level}}
                 {{#each spellLevels as |l|}}
                 <option value="{{l.level}}" {{disabled (not l.canCast)}}>{{l.label}}</option>
