@@ -58,6 +58,22 @@ export default class DamageRoll extends Roll {
   configureDamage() {
     let flatBonus = 0;
     for ( let [i, term] of this.terms.entries() ) {
+      const followingTerm = this.terms[i + 1];
+
+      // Merge any parenthetical terms followed by dice terms (to allow criticals)
+      if ( (term instanceof ParentheticalTerm) && (followingTerm instanceof StringTerm)
+        && followingTerm.term.match(/^d[0-9]+/)) {
+        if ( term.isDeterministic ) {
+          const newFormula = `${term.evaluate().total}${followingTerm.term}`;
+          const newTerm = (new Roll(newFormula)).terms[0];
+          if ( newTerm instanceof DiceTerm ) {
+            this.terms.splice(i, 2, newTerm);
+            term = newTerm;
+          }
+        } else if ( this.isCritical ) {
+          term.term = `${this.options.criticalMultiplier ?? 2} * (${term.term})`;
+        }
+      }
 
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
