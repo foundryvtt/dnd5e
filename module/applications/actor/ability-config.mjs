@@ -1,14 +1,17 @@
 /**
  * A simple form to set save throw configuration for a given ability score.
- * @param {Actor} actor                   The Actor instance being displayed within the sheet.
- * @param {ApplicationOptions} options    Additional application configuration options.
- * @param {string} abilityId              The ability ID (e.g. "str")
+ *
+ * @param {Actor5e} actor               The Actor instance being displayed within the sheet.
+ * @param {ApplicationOptions} options  Additional application configuration options.
+ * @param {string} abilityId            The ability key as defined in CONFIG.DND5E.abilities.
  */
 export default class ActorAbilityConfig extends DocumentSheet {
-  constructor(actor, opts, abilityId) {
-    super(actor, opts);
+  constructor(actor, options, abilityId) {
+    super(actor, options);
     this._abilityId = abilityId;
   }
+
+  /* -------------------------------------------- */
 
   /** @override */
   static get defaultOptions() {

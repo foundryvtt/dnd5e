@@ -373,20 +373,20 @@ export default class Item5e extends Item {
     const C = CONFIG.DND5E;
 
     // Ability Activation Label
-    const act = this.system.activation || {};
+    const act = this.system.activation ?? {};
     this.labels.activation = [act.cost, C.abilityActivationTypes[act.type]].filterJoin(" ");
 
     // Target Label
-    let tgt = this.system.target || {};
-    if (["none", "touch", "self"].includes(tgt.units)) tgt.value = null;
-    if (["none", "self"].includes(tgt.type)) {
+    let tgt = this.system.target ?? {};
+    if ( ["none", "touch", "self"].includes(tgt.units) ) tgt.value = null;
+    if ( ["none", "self"].includes(tgt.type) ) {
       tgt.value = null;
       tgt.units = null;
     }
     this.labels.target = [tgt.value, C.distanceUnits[tgt.units], C.targetTypes[tgt.type]].filterJoin(" ");
 
     // Range Label
-    let rng = this.system.range || {};
+    let rng = this.system.range ?? {};
     if ( ["none", "touch", "self"].includes(rng.units) ) {
       rng.value = null;
       rng.long = null;
@@ -394,12 +394,12 @@ export default class Item5e extends Item {
     this.labels.range = [rng.value, rng.long ? `/ ${rng.long}` : null, C.distanceUnits[rng.units]].filterJoin(" ");
 
     // Duration Label
-    let dur = this.system.duration || {};
-    if (["inst", "perm"].includes(dur.units)) dur.value = null;
+    let dur = this.system.duration ?? {};
+    if ( ["inst", "perm"].includes(dur.units) ) dur.value = null;
     this.labels.duration = [dur.value, C.timePeriods[dur.units]].filterJoin(" ");
 
     // Recharge Label
-    let chg = this.system.recharge || {};
+    let chg = this.system.recharge ?? {};
     const chgSuffix = `${chg.value}${parseInt(chg.value) < 6 ? "+" : ""}`;
     this.labels.recharge = `${game.i18n.localize("DND5E.Recharge")} [${chgSuffix}]`;
   }
@@ -625,7 +625,7 @@ export default class Item5e extends Item {
    */
   prepareMaxUses() {
     const uses = this.system.uses;
-    if (!uses?.max ) return;
+    if ( !uses?.max ) return;
     let max = uses.max;
     if ( this.isOwned && !Number.isNumeric(max) ) {
       try {
@@ -1516,7 +1516,7 @@ export default class Item5e extends Item {
       if ( !ability ) {
         console.warn(`Item ${this.name} in Actor ${this.actor.name} has an invalid item ability modifier of ${abl} defined`);
       }
-      rollData.mod = ability?.mod || 0;
+      rollData.mod = ability?.mod ?? 0;
     }
     return rollData;
   }

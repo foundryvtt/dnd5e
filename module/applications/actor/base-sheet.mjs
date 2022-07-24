@@ -26,7 +26,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Track the set of item filters which are applied
-   * @type {Set}
+   * @type {Object<string, Set>}
    * @protected
    */
   _filters = {
@@ -741,7 +741,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find("input").each((i, el) => {
         options[el.name] = el.checked;
       });
-      const settings = mergeObject(game.settings.get("dnd5e", "polymorphSettings") || {}, options);
+      const settings = foundry.utils.mergeObject(game.settings.get("dnd5e", "polymorphSettings") ?? {}, options);
       game.settings.set("dnd5e", "polymorphSettings", settings);
       return settings;
     };

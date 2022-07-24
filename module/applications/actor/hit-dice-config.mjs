@@ -1,9 +1,9 @@
 /**
- * A simple form to set actor hit dice amounts
- * @implements {DocumentSheet}
+ * A simple form to set actor hit dice amounts.
  */
 export default class ActorHitDiceConfig extends DocumentSheet {
-  /** @override */
+
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "hd-config", "dialog"],
@@ -15,14 +15,14 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   get title() {
     return `${game.i18n.localize("DND5E.HitDiceConfig")}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   getData(options) {
     return {
       classes: this.object.items.reduce((classes, item) => {
@@ -43,7 +43,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -61,7 +61,7 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const actorItems = this.object.items;
     const classUpdates = Object.entries(formData).map(([id, hd]) => ({
@@ -75,8 +75,8 @@ export default class ActorHitDiceConfig extends DocumentSheet {
 
   /**
    * Rolls the hit die corresponding with the class row containing the event's target button.
-   * @param {MouseEvent} event
-   * @private
+   * @param {MouseEvent} event  Triggering click event.
+   * @protected
    */
   async _onRollHitDie(event) {
     event.preventDefault();

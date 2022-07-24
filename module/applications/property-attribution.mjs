@@ -10,10 +10,11 @@
 
 /**
  * Interface for viewing what factors went into determining a specific property.
- * @param {Document} object  The Document that owns the property being attributed.
+ *
+ * @param {Document} object                        The Document that owns the property being attributed.
  * @param {AttributionDescription[]} attributions  An array of all the attribution data.
- * @param {string} property  Dot separated path to the property.
- * @param {object} [options]  Options passed to the Application initializer.
+ * @param {string} property                        Dot separated path to the property.
+ * @param {object} [options={}]                    Application rendering options.
  */
 export default class PropertyAttribution extends Application {
   constructor(object, attributions, property, options={}) {
@@ -51,7 +52,7 @@ export default class PropertyAttribution extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   getData() {
     const property = foundry.utils.getProperty(this.object.system, this.property);
     let total;

@@ -384,7 +384,7 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Return the flattened submission data
-    return flattenObject(formData);
+    return foundry.utils.flattenObject(formData);
   }
 
   /* -------------------------------------------- */

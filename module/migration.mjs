@@ -367,12 +367,12 @@ export const migrateSceneData = function(scene, migrationData) {
         const updates = new Map(update[embeddedName].map(u => [u._id, u]));
         t.actorData[embeddedName].forEach(original => {
           const update = updates.get(original._id);
-          if (update) mergeObject(original, update);
+          if (update) foundry.utils.mergeObject(original, update);
         });
         delete update[embeddedName];
       });
 
-      mergeObject(t.actorData, update);
+      foundry.utils.mergeObject(t.actorData, update);
     }
     return t;
   });

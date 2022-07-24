@@ -3,7 +3,6 @@ import AdvancementFlow from "./advancement-flow.mjs";
 
 /**
  * Error that can be thrown during the advancement update preparation process.
- * @extends {Error}
  */
 class AdvancementError extends Error {
   constructor(...args) {
@@ -14,8 +13,9 @@ class AdvancementError extends Error {
 
 /**
  * Abstract base class which various advancement types can subclass.
- * @property {Item5e} item    Item to which this advancement belongs.
- * @property {object} [data]  Raw data stored in the advancement object.
+ * @param {Item5e} item       Item to which this advancement belongs.
+ * @param {object} [data={}]  Raw data stored in the advancement object.
+ * @abstract
  */
 export default class Advancement {
   constructor(item, data={}) {

@@ -6,8 +6,6 @@ import AdvancementConfig from "../advancement-config.mjs";
  * Advancement that presents the player with the option to roll hit points at each level or select the average value.
  * Keeps track of player hit point rolls or selection for each class level. **Can only be added to classes and each
  * class can only have one.**
- *
- * @extends {Advancement}
  */
 export class HitPointsAdvancement extends Advancement {
 
@@ -169,7 +167,6 @@ export class HitPointsAdvancement extends Advancement {
 
 /**
  * Configuration application for hit points.
- * @extends {AdvancementConfig}
  */
 export class HitPointsConfig extends AdvancementConfig {
   /** @inheritdoc */
@@ -192,8 +189,6 @@ export class HitPointsConfig extends AdvancementConfig {
 
 /**
  * Inline application that presents hit points selection upon level up.
- *
- * @extends {AdvancementFlow}
  */
 export class HitPointsFlow extends AdvancementFlow {
 

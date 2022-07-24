@@ -136,8 +136,6 @@ export class ScaleValueAdvancement extends Advancement {
 
 /**
  * Configuration application for scale values.
- *
- * @extends {AdvancementConfig}
  */
 export class ScaleValueConfig extends AdvancementConfig {
 
@@ -287,8 +285,6 @@ export class ScaleValueConfig extends AdvancementConfig {
 
 /**
  * Inline application that displays any changes to a scale value.
- *
- * @extends {AdvancementFlow}
  */
 export class ScaleValueFlow extends AdvancementFlow {
 

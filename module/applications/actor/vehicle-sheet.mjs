@@ -2,8 +2,6 @@ import ActorSheet5e from "./base-sheet.mjs";
 
 /**
  * An Actor sheet for Vehicle type actors.
- * Extends the base ActorSheet5e class.
- * @type {ActorSheet5e}
  */
 export default class ActorSheet5eVehicle extends ActorSheet5e {
 

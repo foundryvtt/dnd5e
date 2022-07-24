@@ -1,6 +1,9 @@
 /**
  * A specialized Dialog subclass for ability usage.
- * @extends {Dialog}
+ *
+ * @param {Item5e} item             Item that is being used.
+ * @param {object} [dialogData={}]  An object of dialog data which configures how the modal window is rendered.
+ * @param {object} [options={}]     Dialog rendering options.
  */
 export default class AbilityUseDialog extends Dialog {
   constructor(item, dialogData={}, options={}) {
@@ -28,9 +31,9 @@ export default class AbilityUseDialog extends Dialog {
     if ( !item.isOwned ) throw new Error("You cannot display an ability usage dialog for an unowned item");
 
     // Prepare data
-    const uses = item.system.uses || {};
-    const quantity = item.system.quantity || 0;
-    const recharge = item.system.recharge || {};
+    const uses = item.system.uses ?? {};
+    const quantity = item.system.quantity ?? 0;
+    const recharge = item.system.recharge ?? {};
     const recharges = !!recharge.value;
     const sufficientUses = (quantity > 0 && !uses.value) || uses.value > 0;
 

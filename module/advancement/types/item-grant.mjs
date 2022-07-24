@@ -5,8 +5,6 @@ import AdvancementConfig from "../advancement-config.mjs";
 /**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
  * skipping any or all of the items.
- *
- * @extends {Advancement}
  */
 export class ItemGrantAdvancement extends Advancement {
 
@@ -42,7 +40,7 @@ export class ItemGrantAdvancement extends Advancement {
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
     if ( !this.data.value.added || configMode ) {
-      return this.data.configuration.items.reduce((html, uuid) => html + dnd5e.utils._linkForUuid(uuid), "");
+      return this.data.configuration.items.reduce((html, uuid) => html + dnd5e.utils.linkForUuid(uuid), "");
     }
 
     // Link to items on the actor
@@ -124,8 +122,6 @@ export class ItemGrantAdvancement extends Advancement {
 
 /**
  * Configuration application for item grants.
- *
- * @extends {AdvancementConfig}
  */
 export class ItemGrantConfig extends AdvancementConfig {
 
@@ -205,8 +201,6 @@ export class ItemGrantConfig extends AdvancementConfig {
 
 /**
  * Inline application that presents the player with a list of items to be added.
- *
- * @extends {AdvancementFlow}
  */
 export class ItemGrantFlow extends AdvancementFlow {
 
