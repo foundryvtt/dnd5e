@@ -8,7 +8,6 @@
  * @param {boolean} [options.multiplyNumeric=false]   Multiply numeric terms by the critical multiplier
  * @param {boolean} [options.powerfulCritical=false]  Apply the "powerful criticals" house rule to critical hits
  * @param {string} [options.criticalBonusDamage]      An extra damage term that is applied only on a critical hit
- * @extends {Roll}
  */
 export default class DamageRoll extends Roll {
   constructor(formula, data, options) {
@@ -16,6 +15,8 @@ export default class DamageRoll extends Roll {
     // For backwards compatibility, skip rolls which do not have the "critical" option defined
     if ( (this.options.critical !== undefined) && !this.options.configured ) this.configureDamage();
   }
+
+  /* -------------------------------------------- */
 
   /**
    * The HTML template path used to configure evaluation of this Roll

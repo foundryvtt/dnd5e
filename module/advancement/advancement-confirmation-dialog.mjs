@@ -1,6 +1,5 @@
 /**
  * Dialog to confirm the deletion of an embedded item with advancement or decreasing a class level.
- * @extends {Dialog}
  */
 export default class AdvancementConfirmationDialog extends Dialog {
 

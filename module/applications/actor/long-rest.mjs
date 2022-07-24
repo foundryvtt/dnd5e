@@ -1,18 +1,21 @@
 /**
- * A helper Dialog subclass for completing a long rest
- * @extends {Dialog}
+ * A helper Dialog subclass for completing a long rest.
+ *
+ * @param {Actor5e} actor           Actor that is taking the long rest.
+ * @param {object} [dialogData={}]  An object of dialog data which configures how the modal window is rendered.
+ * @param {object} [options={}]     Dialog rendering options.
  */
 export default class LongRestDialog extends Dialog {
-  constructor(actor, dialogData = {}, options = {}) {
+  constructor(actor, dialogData={}, options={}) {
     super(dialogData, options);
     this.actor = actor;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/apps/long-rest.html",
       classes: ["dnd5e", "dialog"]
     });
@@ -20,7 +23,7 @@ export default class LongRestDialog extends Dialog {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   getData() {
     const data = super.getData();
     const variant = game.settings.get("dnd5e", "restVariant");
@@ -34,8 +37,9 @@ export default class LongRestDialog extends Dialog {
   /**
    * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
    * workflow has been resolved.
-   * @param {Actor5e} actor
-   * @returns {Promise}
+   * @param {object} [options={}]
+   * @param {Actor5e} [options.actor]  Actor that is taking the long rest.
+   * @returns {Promise}                Promise that resolves when the rest is completed or rejects when canceled.
    */
   static async longRestDialog({ actor } = {}) {
     return new Promise((resolve, reject) => {

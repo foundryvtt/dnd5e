@@ -1,4 +1,3 @@
-
 /**
  * Extend the base Token class to implement additional system-specific logic.
  */

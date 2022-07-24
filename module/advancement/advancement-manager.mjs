@@ -1,6 +1,8 @@
 import Advancement from "./advancement.mjs";
 
 /**
+ * Internal type used to manage each step within the advancement process.
+ *
  * @typedef {object} AdvancementStep
  * @property {string} type                Step type from "forward", "reverse", "restore", or "delete".
  * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step.
@@ -14,13 +16,10 @@ import Advancement from "./advancement.mjs";
 /**
  * Application for controlling the advancement workflow and displaying the interface.
  *
- * @property {Actor5e} actor        Actor on which this advancement is being performed.
- * @property {object} [steps=[]]    Any initial steps that should be displayed.
- * @property {object} [options={}]  Additional application options.
- * @extends {Application}
+ * @param {Actor5e} actor        Actor on which this advancement is being performed.
+ * @param {object} [options={}]  Additional application options.
  */
 export default class AdvancementManager extends Application {
-
   constructor(actor, options={}) {
     super(options);
 

@@ -1,7 +1,9 @@
 /**
- * An application class which provides advanced configuration for special character flags which modify an Actor
+ * An application class which provides advanced configuration for special character flags which modify an Actor.
  */
 export default class ActorSheetFlags extends DocumentSheet {
+
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
@@ -14,14 +16,14 @@ export default class ActorSheetFlags extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   get title() {
     return `${game.i18n.localize("DND5E.FlagsTitle")}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   getData() {
     const data = {};
     data.actor = this.object;
@@ -63,7 +65,7 @@ export default class ActorSheetFlags extends DocumentSheet {
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty("choices");
-      flag.value = getProperty(baseData.flags, `dnd5e.${k}`);
+      flag.value = foundry.utils.getProperty(baseData.flags, `dnd5e.${k}`);
       flags[v.section][`flags.dnd5e.${k}`] = flag;
     }
     return flags;
@@ -100,10 +102,10 @@ export default class ActorSheetFlags extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const actor = this.object;
-    let updateData = expandObject(formData);
+    let updateData = foundry.utils.expandObject(formData);
     const src = actor.toObject();
 
     // Unset any flags which are "false"

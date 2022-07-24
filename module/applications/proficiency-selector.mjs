@@ -2,8 +2,6 @@ import TraitSelector from "./trait-selector.mjs";
 
 /**
  * An application for selecting proficiencies with categories that can contain children.
- *
- * @extends {TraitSelector}
  */
 export default class ProficiencySelector extends TraitSelector {
 
@@ -52,7 +50,7 @@ export default class ProficiencySelector extends TraitSelector {
    *
    * @param {string} type               Proficiency type to select, either `armor`, `tool`, or `weapon`.
    * @param {string[]} [chosen]         Optional list of items to be marked as chosen.
-   * @returns {object<string, ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
+   * @returns {Object<string, ProficiencyChoice>}  Object mapping proficiency ids to choice objects.
    */
   static async getChoices(type, chosen=[]) {
     let data = Object.entries(CONFIG.DND5E[`${type}Proficiencies`]).reduce((obj, [key, label]) => {

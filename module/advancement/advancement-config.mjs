@@ -2,9 +2,8 @@
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
  *
- * @property {Advancement} advancement  The advancement item being edited.
- * @property {object} [options={}]      Additional options passed to FormApplication.
- * @extends {FormApplication}
+ * @param {Advancement} advancement  The advancement item being edited.
+ * @param {object} [options={}]      Additional options passed to FormApplication.
  */
 export default class AdvancementConfig extends FormApplication {
   constructor(advancement, options={}) {

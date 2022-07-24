@@ -1,5 +1,6 @@
 /**
  * Object describing the proficiency for a specific ability or skill.
+ *
  * @param {number} proficiency   Actor's flat proficiency bonus based on their current level.
  * @param {number} multiplier    Value by which to multiply the actor's base proficiency value.
  * @param {boolean} [roundDown]  Should half-values be rounded up or down?

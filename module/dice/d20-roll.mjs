@@ -12,7 +12,6 @@
  * @param {boolean} [options.elvenAccuracy=false]      Allow Elven Accuracy to modify this roll?
  * @param {boolean} [options.halflingLucky=false]      Allow Halfling Luck to modify this roll?
  * @param {boolean} [options.reliableTalent=false]     Allow Reliable Talent to modify this roll?
- * @extends {Roll}
  */
 export default class D20Roll extends Roll {
   constructor(formula, data, options) {
@@ -34,6 +33,8 @@ export default class D20Roll extends Roll {
     ADVANTAGE: 1,
     DISADVANTAGE: -1
   }
+
+  /* -------------------------------------------- */
 
   /**
    * The HTML template path used to configure evaluation of this Roll
@@ -159,7 +160,7 @@ export default class D20Roll extends Roll {
     });
 
     let defaultButton = "normal";
-    switch (defaultAction) {
+    switch ( defaultAction ) {
       case D20Roll.ADV_MODE.ADVANTAGE: defaultButton = "advantage"; break;
       case D20Roll.ADV_MODE.DISADVANTAGE: defaultButton = "disadvantage"; break;
     }

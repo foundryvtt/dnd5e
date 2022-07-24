@@ -1,16 +1,17 @@
 /**
  * A simple form to set skill configuration for a given skill.
- * @extends {DocumentSheet}
- * @param {Actor} actor                   The Actor instance being displayed within the sheet.
- * @param {ApplicationOptions} options    Additional application configuration options.
- * @param {string} skillId                The skill id (e.g. "ins")
+ *
+ * @param {Actor} actor                 The Actor instance being displayed within the sheet.
+ * @param {ApplicationOptions} options  Additional application configuration options.
+ * @param {string} skillId              The skill key as defined in CONFIG.DND5E.skills.
  */
 export default class ActorSkillConfig extends DocumentSheet {
-
-  constructor(actor, opts, skillId) {
-    super(actor, opts);
+  constructor(actor, options, skillId) {
+    super(actor, options);
     this._skillId = skillId;
   }
+
+  /* -------------------------------------------- */
 
   /** @inheritdoc */
   static get defaultOptions() {

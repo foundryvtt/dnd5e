@@ -71,13 +71,11 @@ export function indexFromUuid(uuid) {
 /* -------------------------------------------- */
 
 /**
- * Creates an HTML document link for the provided UUID. This should be replaced by the core feature once
- * foundryvtt#6166 is implemented.
+ * Creates an HTML document link for the provided UUID.
  * @param {string} uuid  UUID for which to produce the link.
  * @returns {string}     Link to the item or empty string if item wasn't found.
- * @private
  */
-export function _linkForUuid(uuid) {
+export function linkForUuid(uuid) {
   return TextEditor._createContentLink(["", "UUID", uuid]).outerHTML;
 }
 
@@ -124,7 +122,7 @@ export async function preloadHandlebarsTemplates() {
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
-    "dnd5e-linkForUuid": _linkForUuid
+    "dnd5e-linkForUuid": linkForUuid
   });
 }
 

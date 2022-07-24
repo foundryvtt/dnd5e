@@ -4,7 +4,9 @@ import Advancement from "./advancement.mjs";
  * Presents a list of advancement types to create when clicking the new advancement button.
  * Once a type is selected, this hands the process over to the advancement's individual editing interface.
  *
- * @extends {Dialog}
+ * @param {Item5e} item             Item to which this advancement will be added.
+ * @param {object} [dialogData={}]  An object of dialog data which configures how the modal window is rendered.
+ * @param {object} [options={}]     Dialog rendering options.
  */
 export default class AdvancementSelection extends Dialog {
   constructor(item, dialogData={}, options={}) {
