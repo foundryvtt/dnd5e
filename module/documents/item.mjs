@@ -729,6 +729,17 @@ export default class Item5e extends Item {
       }
     }
 
+    /**
+     * A hook event that fires before an item's resource consumption has been calculated.
+     * @function dnd5e.preRollConsumption
+     * @memberof hookEvents
+     * @param {Item5e} item                     Item being rolled.
+     * @param {ItemRollConfiguration} config    Configuration data for the item roll being prepared.
+     * @param {ItemRollOptions} options         Additional options used for configuring item rolls.
+     * @returns {boolean}                       Explicitly return false to prevent item from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollConsumption", item, config, options) === false ) return;
+
     // Determine whether the item can be used by testing for resource consumption
     const usage = item._getUsageUpdates(config);
     if ( !usage ) return;
@@ -736,7 +747,7 @@ export default class Item5e extends Item {
     /**
      * A hook event that fires after an item's resource consumption has been calculated but before any
      * changes have been made.
-     * @function dnd5e.preRollConsumption
+     * @function dnd5e.rollConsumption
      * @memberof hookEvents
      * @param {Item5e} item                     Item being rolled.
      * @param {ItemRollConfiguration} config    Configuration data for the item roll being prepared.
@@ -747,7 +758,7 @@ export default class Item5e extends Item {
      * @param {object[]} usage.resourceUpdates  Updates that will be applied to other items on the actor.
      * @returns {boolean}                       Explicitly return false to prevent item from being rolled.
      */
-    if ( Hooks.call("dnd5e.preRollConsumption", item, config, options, usage) === false ) return;
+    if ( Hooks.call("dnd5e.rollConsumption", item, config, options, usage) === false ) return;
 
     // Commit pending data updates
     const { actorUpdates, itemUpdates, resourceUpdates } = usage;
@@ -766,7 +777,7 @@ export default class Item5e extends Item {
     }
 
     /**
-     * A hook event that fires when an item is rolled.
+     * A hook event that fires when an item is rolled, after the measured template has been created if one is needed.
      * @function dnd5e.roll
      * @memberof hookEvents
      * @param {Item5e} item                   Item being rolled.
@@ -785,7 +796,7 @@ export default class Item5e extends Item {
    * be performed. If required resources are not available, display an error and return false.
    * @param {ItemRollConfiguration} config  Configuration data for an item roll being prepared.
    * @returns {object|boolean}              A set of data changes to apply when the item is used, or false.
-   * @private
+   * @protected
    */
   _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage}) {
     const actorUpdates = {};
@@ -862,7 +873,7 @@ export default class Item5e extends Item {
    * @param {object} actorUpdates       An object of data updates applied to the item owner (Actor)
    * @param {object[]} resourceUpdates  An array of updates to apply to other items owned by the actor
    * @returns {boolean|void}            Return false to block further progress, or return nothing to continue
-   * @private
+   * @protected
    */
   _handleConsumeResource(itemUpdates, actorUpdates, resourceUpdates) {
     const consume = this.system.consume || {};
@@ -1005,7 +1016,7 @@ export default class Item5e extends Item {
     chatData.flags = foundry.utils.mergeObject(chatData.flags, options.flags);
 
     /**
-     * A hook event that fires before an item chat card is displayed.
+     * A hook event that fires before an item chat card is created.
      * @function dnd5e.preDisplayCard
      * @memberof hookEvents
      * @param {Item5e} item              Item for which the chat card is being displayed.
@@ -1018,7 +1029,19 @@ export default class Item5e extends Item {
     ChatMessage.applyRollMode(chatData, options.rollMode ?? game.settings.get("core", "rollMode"));
 
     // Create the Chat Message or return its data
-    return (options.createMessage !== false) ? ChatMessage.create(chatData) : chatData;
+    const card = (options.createMessage !== false) ? await ChatMessage.create(chatData) : chatData;
+
+    /**
+     * A hook event that fires after an item chat card is created.
+     * @function dnd5e.displayCard
+     * @memberof hookEvents
+     * @param {Item5e} item         Item for which the chat card is being displayed.
+     * @param {ChatMessage|object}  The created ChatMessage instance or ChatMessageData depending on whether
+     *                              options.createMessage was set to true.
+     */
+    Hooks.callAll("dnd5e.displayCard", this, card);
+
+    return card;
   }
 
   /* -------------------------------------------- */
