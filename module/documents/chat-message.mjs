@@ -24,7 +24,7 @@ export function highlightCriticalSuccessFailure(message, html, data) {
   if ( d.total >= critical ) html.find(".dice-total").addClass("critical");
   else if ( d.total <= fumble ) html.find(".dice-total").addClass("fumble");
   else if ( d.options.target ) {
-    if ( roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
+    if ( d20Roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
     else html.find(".dice-total").addClass("failure");
   }
 }
