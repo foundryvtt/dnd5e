@@ -1194,7 +1194,7 @@ export default class Item5e extends Item {
     rollConfig.critical = this.getCriticalThreshold();
 
     // Elven Accuracy
-    if ( flags.elvenAccuracy && ["dex", "int", "wis", "cha"].includes(this.abilityMod) ) {
+    if ( flags.elvenAccuracy && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod) ) {
       rollConfig.elvenAccuracy = true;
     }
 

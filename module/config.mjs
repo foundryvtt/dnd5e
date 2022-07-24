@@ -1221,6 +1221,7 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsElvenAccuracy",
     hint: "DND5E.FlagsElvenAccuracyHint",
     section: "DND5E.RacialTraits",
+    abilities: ["dex", "int", "wis", "cha"],
     type: Boolean
   },
   halflingLucky: {
