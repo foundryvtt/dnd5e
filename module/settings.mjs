@@ -1,6 +1,7 @@
-export default function() {
-  const reload = foundry.utils.debounce(() => window.location.reload(), 250);
-
+/**
+ * Register all of the system's settings.
+ */
+export default function registerSystemSettings() {
   // Internal System Migration Version
   game.settings.register("dnd5e", "systemMigrationVersion", {
     name: "System Migration Version",
@@ -63,7 +64,7 @@ export default function() {
     config: true,
     default: false,
     type: Boolean,
-    onChange: reload
+    requiresReload: true
   });
 
   // Use Sanity ability score
@@ -74,7 +75,7 @@ export default function() {
     config: true,
     default: false,
     type: Boolean,
-    onChange: reload
+    requiresReload: true
   });
 
   // Apply Dexterity as Initiative Tiebreaker
@@ -189,4 +190,4 @@ export default function() {
     type: Boolean,
     default: false
   });
-};
+}
