@@ -49,7 +49,10 @@ export default class ActorSheet5e extends ActorSheet {
       ],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
       width: 720,
-      height: Math.max(680, 237 + (Object.keys(CONFIG.DND5E.abilities).length * 70))
+      height: Math.max(680, Math.max(
+        237 + (Object.keys(CONFIG.DND5E.abilities).length * 70),
+        240 + (Object.keys(CONFIG.DND5E.skills).length * 24)
+      ))
     });
   }
 
@@ -135,7 +138,7 @@ export default class ActorSheet5e extends ActorSheet {
       : `+${actorData.system.attributes.prof}`;
 
     // Ability Scores
-    for ( let [a, abl] of Object.entries(actorData.system.abilities)) {
+    for ( const [a, abl] of Object.entries(actorData.system.abilities) ) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
@@ -143,12 +146,12 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Skills
-    for (let [s, skl] of Object.entries(actorData.system.skills || {})) {
+    for ( const [s, skl] of Object.entries(actorData.system.skills ?? {}) ) {
       skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
-      skl.label = CONFIG.DND5E.skills[s];
-      skl.baseValue = source.system.skills[s].value;
+      skl.label = CONFIG.DND5E.skills[s]?.label;
+      skl.baseValue = source.system.skills[s]?.value ?? 0;
     }
 
     // Movement speeds
