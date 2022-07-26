@@ -83,6 +83,7 @@ export default class ActorSheet5e extends ActorSheet {
     // Basic data
     const context = {
       actor: actorData,
+      source: source.system,
       system: actorData.system,
       items: actorData.items,
       labels: this._getLabels(actorData.system),
