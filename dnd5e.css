@@ -79,6 +79,9 @@
 .dnd5e .window-content {
   font-size: 13px;
 }
+.dnd5e h3 {
+  border-bottom: none;
+}
 .dnd5e input[type="text"],
 .dnd5e input[type="number"],
 .dnd5e select {
@@ -511,7 +514,6 @@
   font-weight: 700;
   text-align: left;
   font-size: 16px;
-  border-bottom: 0;
 }
 .dnd5e .effects .item .effect-source,
 .dnd5e .effects .item .effect-duration,

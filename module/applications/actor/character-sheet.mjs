@@ -15,6 +15,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
+  /*  Context Preparation                         */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   async getData(options={}) {
@@ -30,18 +32,14 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
       return arr.concat([res]);
     }, []);
 
-    // Experience Tracking
-    context.disableExperience = game.settings.get("dnd5e", "disableExperienceTracking");
-    context.classLabels = this.actor.itemTypes.class.map(c => c.name).join(", ");
-    context.multiclassLabels = this.actor.itemTypes.class.map(c => {
-      return [c.system.subclass, c.name, c.system.levels].filterJoin(" ");
-    }).join(", ");
-
-    // Weight unit
-    context.weightUnit = game.settings.get("dnd5e", "metricWeightUnits")
-      ? game.i18n.localize("DND5E.AbbreviationKgs")
-      : game.i18n.localize("DND5E.AbbreviationLbs");
-    return context;
+    const classes = this.actor.itemTypes.class;
+    return foundry.utils.mergeObject(context, {
+      disableExperience: game.settings.get("dnd5e", "disableExperienceTracking"),
+      classLabels: classes.map(c => c.name).join(", "),
+      multiclassLabels: classes.map(c => [c.subclass?.name ?? "", c.name, c.system.levels].filterJoin(" ")).join(", "),
+      weightUnit: game.i18n.localize(`DND5E.Abbreviation${
+        game.settings.get("dnd5e", "metricWeightUnits") ? "Kgs" : "Lbs"}`)
+    });
   }
 
   /* -------------------------------------------- */

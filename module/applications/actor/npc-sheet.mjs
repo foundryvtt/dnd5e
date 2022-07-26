@@ -19,6 +19,27 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   static unsupportedItemTypes = new Set(["background", "class", "subclass"]);
 
   /* -------------------------------------------- */
+  /*  Context Preparation                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getData(options) {
+    const context = await super.getData(options);
+
+    // Challenge Rating
+    const cr = parseFloat(context.system.details.cr ?? 0);
+    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
+
+    return foundry.utils.mergeObject(context, {
+      labels: {
+        cr: cr >= 1 ? String(cr) : crLabels[cr] ?? 1,
+        type: this.actor.constructor.formatCreatureType(context.system.details.type),
+        armorType: this.getArmorLabel()
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
 
   /** @override */
   _prepareItems(context) {
@@ -67,25 +88,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Assign and return
     context.features = Object.values(features);
     context.spellbook = spellbook;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async getData(options) {
-    const context = await super.getData(options);
-
-    // Challenge Rating
-    const cr = parseFloat(context.actor.system.details.cr || 0);
-    const crLabels = {0: "0", 0.125: "1/8", 0.25: "1/4", 0.5: "1/2"};
-    context.labels.cr = cr >= 1 ? String(cr) : crLabels[cr] || 1;
-
-    // Creature Type
-    context.labels.type = this.actor.constructor.formatCreatureType(this.actor.system.details.type);
-
-    // Armor Type
-    context.labels.armorType = this.getArmorLabel();
-    return context;
   }
 
   /* -------------------------------------------- */

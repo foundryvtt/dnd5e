@@ -50,12 +50,60 @@ export default class ItemSheet5e extends ItemSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Context Preparation                         */
+  /* -------------------------------------------- */
 
   /** @override */
   async getData(options) {
     const context = await super.getData(options);
     const item = context.item;
-    context.system = item.system;
+    const source = item.toObject();
+    const isMountable = this._isItemMountable(item);
+
+    foundry.utils.mergeObject(context, {
+      source: source.system,
+      system: item.system,
+      labels: item.labels,
+      isEmbedded: item.isEmbedded,
+      advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
+
+      // Item Type, Status, and Details
+      itemType: game.i18n.localize(`ITEM.Type${item.type.titleCase()}`),
+      itemStatus: this._getItemStatus(),
+      itemProperties: this._getItemProperties(),
+      baseItems: await this._getItemBaseTypes(),
+      isPhysical: item.system.hasOwnProperty("quantity"),
+
+      // Enrich HTML description
+      descriptionHTML: await TextEditor.enrichHTML(item.system.description.value, {
+        secrets: item.isOwner,
+        async: true
+      }),
+
+      // Potential consumption targets
+      abilityConsumptionTargets: this._getItemConsumptionTargets(item),
+
+      // Action Details
+      hasAttackRoll: item.hasAttack,
+      isHealing: item.system.actionType === "heal",
+      isFlatDC: item.system.save?.scaling === "flat",
+      isLine: ["line", "wall"].includes(item.system.target?.type),
+
+      // Vehicles
+      isCrewed: item.system.activation?.type === "crew",
+      isMountable,
+
+      // Armor Class
+      isArmor: item.isArmor,
+      hasAC: item.isArmor || isMountable,
+      hasDexModifier: item.isArmor && (item.system.armor?.type !== "shield"),
+
+      // Advancement
+      advancement: this._getItemAdvancement(item),
+
+      // Prepare Active Effects
+      effects: ActiveEffect5e.prepareActiveEffectCategories(item.effects)
+    });
 
     /** @deprecated */
     Object.defineProperty(context, "data", {
@@ -67,52 +115,11 @@ export default class ItemSheet5e extends ItemSheet {
       }
     });
 
-    context.labels = this.item.labels;
-    context.config = CONFIG.DND5E;
-    context.config.spellComponents = {...context.config.spellComponents, ...context.config.spellTags};
-    context.isEmbedded = this.item.isEmbedded;
-    context.advancementEditable = (this.advancementConfigurationMode || !context.isEmbedded) && context.editable;
+    // Set up config with proper spell components
+    context.config = foundry.utils.mergeObject(CONFIG.DND5E, {
+      spellComponents: {...CONFIG.DND5E.spellComponents, ...CONFIG.DND5E.spellTags}
+    }, {inplace: false});
 
-    // Item Type, Status, and Details
-    context.itemType = game.i18n.localize(`ITEM.Type${context.item.type.titleCase()}`);
-    context.itemStatus = this._getItemStatus();
-    context.itemProperties = this._getItemProperties();
-    context.baseItems = await this._getItemBaseTypes();
-    context.isPhysical = item.system.hasOwnProperty("quantity");
-
-    // Potential consumption targets
-    context.abilityConsumptionTargets = this._getItemConsumptionTargets(this.item);
-
-    // Action Details
-    context.hasAttackRoll = this.item.hasAttack;
-    context.isHealing = item.system.actionType === "heal";
-    context.isFlatDC = item.system.save?.scaling === "flat";
-    context.isLine = ["line", "wall"].includes(item.system.target?.type);
-
-    // Original maximum uses formula
-    const sourceMax = foundry.utils.getProperty(this.item._source, "system.uses.max");
-    if ( sourceMax ) item.system.uses.max = sourceMax;
-
-    // Vehicles
-    context.isCrewed = item.system.activation?.type === "crew";
-    context.isMountable = this._isItemMountable(item);
-
-    // Armor Class
-    context.isArmor = this.item.isArmor;
-    context.hasAC = context.isArmor || context.isMountable;
-    context.hasDexModifier = context.isArmor && (item.system.armor?.type !== "shield");
-
-    // Advancement
-    context.advancement = this._getItemAdvancement(this.item);
-
-    // Prepare Active Effects
-    context.effects = ActiveEffect5e.prepareActiveEffectCategories(this.item.effects);
-
-    // Enrich HTML description
-    context.descriptionHTML = await TextEditor.enrichHTML(context.system.description.value, {
-      secrets: this.item.isOwner,
-      async: true
-    });
     return context;
   }
 
