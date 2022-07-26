@@ -775,7 +775,7 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how the skill check is rolled
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
-  rollSkill(skillId, options={}) {
+  async rollSkill(skillId, options={}) {
     const skl = this.system.skills[skillId];
     const abl = this.system.abilities[skl.ability];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
@@ -819,7 +819,7 @@ export default class Actor5e extends Actor {
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent")) || undefined;
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]});
@@ -830,13 +830,37 @@ export default class Actor5e extends Actor {
       flavor,
       chooseModifier: true,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent: reliableTalent,
+      reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "skill", skillId }
       }
     });
-    return d20Roll(rollData);
+
+    /**
+     * A hook event that fires before a skill check is rolled for an Actor.
+     * @function dnd5e.preRollSkill
+     * @memberof hookEvents
+     * @param {Actor5e} actor                Actor for which the skill check is being rolled.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
+     * @returns {boolean}                    Explicitly return false to prevent skill check from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
+
+    const roll = await d20Roll(rollData);
+
+    /**
+     * A hook event that fires after a skill check has been rolled for an Actor.
+     * @function dnd5e.rollSkill
+     * @memberof hookEvents
+     * @param {Actor5e} actor   Actor for which the skill check has been rolled.
+     * @param {D20Roll} roll    The resulting roll.
+     * @param {string} skillId  ID of the skill that was rolled as defined in `DND5E.skills`.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollSkill", this, roll, skillId);
+
+    return roll;
   }
 
   /* -------------------------------------------- */
@@ -874,7 +898,7 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests are rolled
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
-  rollAbilityTest(abilityId, options={}) {
+  async rollAbilityTest(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
@@ -920,7 +944,31 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "ability", abilityId }
       }
     });
-    return d20Roll(rollData);
+
+    /**
+     * A hook event that fires before an ability test is rolled for an Actor.
+     * @function dnd5e.preRollAbilityTest
+     * @memberof hookEvents
+     * @param {Actor5e} actor                Actor for which the ability test is being rolled.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
+     * @returns {boolean}                    Explicitly return false to prevent ability test from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollAbilityTest", this, rollData, abilityId) === false ) return;
+
+    const roll = await d20Roll(rollData);
+
+    /**
+     * A hook event that fires after an ability test has been rolled for an Actor.
+     * @function dnd5e.rollAbilityTest
+     * @memberof hookEvents
+     * @param {Actor5e} actor     Actor for which the ability test has been rolled.
+     * @param {D20Roll} roll      The resulting roll.
+     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollAbilityTest", this, roll, abilityId);
+
+    return roll;
   }
 
   /* -------------------------------------------- */
@@ -932,7 +980,7 @@ export default class Actor5e extends Actor {
    * @param {object} options      Options which configure how ability tests are rolled
    * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
    */
-  rollAbilitySave(abilityId, options={}) {
+  async rollAbilitySave(abilityId, options={}) {
     const label = CONFIG.DND5E.abilities[abilityId] ?? "";
     const abl = this.system.abilities[abilityId];
     const globalBonuses = this.system.bonuses?.abilities ?? {};
@@ -978,7 +1026,31 @@ export default class Actor5e extends Actor {
         "flags.dnd5e.roll": {type: "save", abilityId }
       }
     });
-    return d20Roll(rollData);
+
+    /**
+     * A hook event that fires before an ability save is rolled for an Actor.
+     * @function dnd5e.preRollAbilitySave
+     * @memberof hookEvents
+     * @param {Actor5e} actor                Actor for which the ability save is being rolled.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
+     * @returns {boolean}                    Explicitly return false to prevent ability save from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollAbilitySave", this, rollData, abilityId) === false ) return;
+
+    const roll = await d20Roll(rollData);
+
+    /**
+     * A hook event that fires after an ability save has been rolled for an Actor.
+     * @function dnd5e.rollAbilitySave
+     * @memberof hookEvents
+     * @param {Actor5e} actor     Actor for which the ability save has been rolled.
+     * @param {D20Roll} roll      The resulting roll.
+     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollAbilitySave", this, roll, abilityId);
+
+    return roll;
   }
 
   /* -------------------------------------------- */
@@ -992,7 +1064,7 @@ export default class Actor5e extends Actor {
     const death = this.system.attributes.death;
 
     // Display a warning if we are not at zero HP or if we already have reached 3
-    if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3)) {
+    if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
       ui.notifications.warn(game.i18n.localize("DND5E.DeathSaveUnnecessary"));
       return null;
     }
@@ -1017,7 +1089,7 @@ export default class Actor5e extends Actor {
 
     // Evaluate the roll
     const flavor = game.i18n.localize("DND5E.DeathSavingThrow");
-    const rollData = foundry.utils.mergeObject(options, {
+    const rollData = foundry.utils.mergeObject({
       parts,
       data,
       title: `${flavor}: ${this.name}`,
@@ -1028,55 +1100,79 @@ export default class Actor5e extends Actor {
         speaker: speaker,
         "flags.dnd5e.roll": {type: "death"}
       }
-    });
+    }, options);
+
+    /**
+     * A hook event that fires before a death saving throw is rolled for an Actor.
+     * @function dnd5e.preRollDeathSave
+     * @memberof hookEvents
+     * @param {Actor5e} actor                Actor for which the death saving throw is being rolled.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @returns {boolean}                    Explicitly return false to prevent death saving throw from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollDeathSave", this, rollData) === false ) return;
+
     const roll = await d20Roll(rollData);
     if ( !roll ) return null;
 
     // Take action depending on the result
-    const success = roll.total >= 10;
     const d20 = roll.dice[0].total;
-
-    let chatString;
+    const details = {};
 
     // Save success
-    if ( success ) {
+    if ( roll.total >= (roll.options.targetValue ?? 10) ) {
       let successes = (death.success || 0) + 1;
 
       // Critical Success = revive with 1hp
-      if ( d20 === 20 ) {
-        await this.update({
+      if ( d20 >= (rollData.critical ?? 20) ) {
+        details.updates = {
           "system.attributes.death.success": 0,
           "system.attributes.death.failure": 0,
           "system.attributes.hp.value": 1
-        });
-        chatString = "DND5E.DeathSaveCriticalSuccess";
+        };
+        details.chatString = "DND5E.DeathSaveCriticalSuccess";
       }
 
       // 3 Successes = survive and reset checks
       else if ( successes === 3 ) {
-        await this.update({
+        details.updates = {
           "system.attributes.death.success": 0,
           "system.attributes.death.failure": 0
-        });
-        chatString = "DND5E.DeathSaveSuccess";
+        };
+        details.chatString = "DND5E.DeathSaveSuccess";
       }
 
       // Increment successes
-      else await this.update({"system.attributes.death.success": Math.clamped(successes, 0, 3)});
+      else details.updates = {"system.attributes.death.success": Math.clamped(successes, 0, 3)};
     }
 
     // Save failure
     else {
-      let failures = (death.failure || 0) + (d20 === 1 ? 2 : 1);
-      await this.update({"system.attributes.death.failure": Math.clamped(failures, 0, 3)});
+      let failures = (death.failure || 0) + (d20 <= (roll.options.fumble ?? 1) ? 2 : 1);
+      details.updates = {"system.attributes.death.failure": Math.clamped(failures, 0, 3)};
       if ( failures >= 3 ) {  // 3 Failures = death
-        chatString = "DND5E.DeathSaveFailure";
+        details.chatString = "DND5E.DeathSaveFailure";
       }
     }
 
+    /**
+     * A hook event that fires after a death saving throw has been rolled for an Actor.
+     * @function dnd5e.rollDeathSave
+     * @memberof hookEvents
+     * @param {Actor5e} actor              Actor for which the death saving throw has been rolled.
+     * @param {D20Roll} roll               The resulting roll.
+     * @param {object} details
+     * @param {object} details.updates     Updates that will be applied to the actor as a result of this save.
+     * @param {string} details.chatString  Localizable string displayed in the create chat message. If not set, then
+     *                                     no chat message will be displayed.
+     */
+    if ( Hooks.call("dnd5e.rollDeathSave", this, roll, details) === false ) return roll;
+
+    if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
+
     // Display success/failure chat message
-    if ( chatString ) {
-      let chatData = { content: game.i18n.format(chatString, {name: this.name}), speaker };
+    if ( details.chatString ) {
+      let chatData = { content: game.i18n.format(details.chatString, {name: this.name}), speaker };
       ChatMessage.applyRollMode(chatData, roll.options.rollMode);
       await ChatMessage.create(chatData);
     }
@@ -1091,10 +1187,10 @@ export default class Actor5e extends Actor {
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier
    * @param {string} [denomination]       The hit denomination of hit die to roll. Example "d8".
    *                                      If no denomination is provided, the first available HD will be used
-   * @param {boolean} [dialog]            Show a dialog prompt for configuring the hit die roll?
+   * @param {object} options              Additional options which modify the roll.
    * @returns {Promise<DamageRoll|null>}  The created Roll instance, or null if no hit die was rolled
    */
-  async rollHitDie(denomination, {dialog=true}={}) {
+  async rollHitDie(denomination, options={}) {
 
     // If no denomination was provided, choose the first available
     let cls = null;
@@ -1117,29 +1213,58 @@ export default class Actor5e extends Actor {
 
     // Prepare roll data
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
-
-    // Call the roll helper utility
-    const roll = await damageRoll({
+    if ( options.fastForward === undefined ) options.fastForward = !options.dialog;
+    const rollData = foundry.utils.mergeObject(options, {
       event: new Event("hitDie"),
       parts: [`1${denomination}`, "@abilities.con.mod"],
       data: this.toObject().system,
       title: `${flavor}: ${this.name}`,
       flavor,
       allowCritical: false,
-      fastForward: !dialog,
       dialogOptions: {width: 350},
       messageData: {
         speaker: ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "hitDie"}
       }
     });
-    if ( !roll ) return null;
 
-    // Adjust actor data
-    await cls.update({"system.hitDiceUsed": cls.system.hitDiceUsed + 1});
+    /**
+     * A hook event that fires before a hit die is rolled for an Actor.
+     * @function dnd5e.preRollHitDie
+     * @memberof hookEvents
+     * @param {Actor5e} actor                Actor for which the hit die is to be rolled.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @param {string} denomination          Size of hit die to be rolled.
+     * @returns {boolean}                    Explicitly return false to prevent hit die from being rolled.
+     */
+    if ( Hooks.call("dnd5e.preRollHitDie", this, rollData, denomination) === false ) return;
+
+    const roll = await damageRoll(rollData);
+    if ( !roll ) return roll;
+
     const hp = this.system.attributes.hp;
     const dhp = Math.min(hp.max + (hp.tempmax ?? 0) - hp.value, roll.total);
-    await this.update({"system.attributes.hp.value": hp.value + dhp});
+    const updates = {
+      actor: {"system.attributes.hp.value": hp.value + dhp},
+      class: {"system.hitDiceUsed": cls.system.hitDiceUsed + 1}
+    };
+
+    /**
+     * A hook event that fires after a hit die has been rolled for an Actor.
+     * @function dnd5e.rollHitDie
+     * @memberof hookEvents
+     * @param {Actor5e} actor        Actor for which the hit die has been rolled.
+     * @param {D20Roll} roll         The resulting roll.
+     * @param {object} updates
+     * @param {object} updates.actor  Updates that will be applied to the actor.
+     * @param {object} updates.class  Updates that will be applied to the class.
+     */
+    if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
+
+    // Perform updates
+    if ( !foundry.utils.isEmpty(updates.actor) ) this.update(updates.actor);
+    if ( !foundry.utils.isEmpty(updates.class) ) cls.update(updates.class);
+
     return roll;
   }
 
@@ -1180,6 +1305,8 @@ export default class Actor5e extends Actor {
     return roll;
   }
 
+  /* -------------------------------------------- */
+  /*  Resting                                     */
   /* -------------------------------------------- */
 
   /**

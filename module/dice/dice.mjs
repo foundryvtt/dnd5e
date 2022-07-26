@@ -3,44 +3,56 @@
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for a D20 roll.
+ *
+ * @typedef {object} D20RollConfiguration
+ *
+ * @property {string[]} [parts=[]]  The dice roll component parts, excluding the initial d20.
+ * @property {object} [data={}]     Data that will be used when parsing this roll.
+ * @property {Event} [event]        The triggering event for this roll.
+ *
+ * ## D20 Properties
+ * @property {boolean} [advantage]     Apply advantage to this roll (unless overridden by modifier keys or dialog)?
+ * @property {boolean} [disadvantage]  Apply disadvantage to this roll (unless overridden by modifier keys or dialog)?
+ * @property {number} [critical=20]    The value of the d20 result which represents a critical success.
+ * @property {number} [fumble=1]       The value of the d20 result which represents a critical failure.
+ * @property {number} [targetValue]    The value of the d20 result which should represent a successful roll.
+ *
+ * ## Flags
+ * @property {boolean} [elvenAccuracy]   Allow Elven Accuracy to modify this roll?
+ * @property {boolean} [halflingLucky]   Allow Halfling Luck to modify this roll?
+ * @property {boolean} [reliableTalent]  Allow Reliable Talent to modify this roll?
+ *
+ * ## Roll Configuration Dialog
+ * @property {boolean} [fastForward=false]     Should the roll configuration dialog be skipped?
+ * @property {boolean} [chooseModifier=false]  If the configuration dialog is shown, should the ability modifier be
+ *                                             configurable within that interface?
+ * @property {string} [template]               The HTML template used to display the roll configuration dialog.
+ * @property {string} [title]                  Title of the roll configuration dialog.
+ * @property {object} [dialogOptions]          Additional options passed to the roll configuration dialog.
+ *
+ * ## Chat Message
+ * @property {boolean} [chatMessage=true]  Should a chat message be created for this roll?
+ * @property {object} [messageData={}]     Additional data which is applied to the created chat message.
+ * @property {string} [rollMode]           Value of `CONST.DICE_ROLL_MODES` to apply as default for the chat message.
+ * @property {object} [flavor]             Flavor text to use in the created chat message.
+ */
+
+/**
  * A standardized helper function for managing core 5e d20 rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
  *
- * @param {object} [config]
- * @param {string[]} [config.parts]          The dice roll component parts, excluding the initial d20
- * @param {object} [config.data]             Actor or item data against which to parse the roll
- *
- * @param {boolean} [config.advantage]       Apply advantage to the roll (unless otherwise specified)
- * @param {boolean} [config.disadvantage]    Apply disadvantage to the roll (unless otherwise specified)
- * @param {number} [config.critical]         The value of d20 result which represents a critical success
- * @param {number} [config.fumble]           The value of d20 result which represents a critical failure
- * @param {number} [config.targetValue]      Assign a target value against which the result of this roll
- *                                           should be compared
- * @param {boolean} [config.elvenAccuracy]   Allow Elven Accuracy to modify this roll?
- * @param {boolean} [config.halflingLucky]   Allow Halfling Luck to modify this roll?
- * @param {boolean} [config.reliableTalent]  Allow Reliable Talent to modify this roll?
- *
- * @param {boolean} [config.chooseModifier=false] Choose the ability modifier that should be used when the roll is made
- * @param {boolean} [config.fastForward=false] Allow fast-forward advantage selection
- * @param {Event} [config.event]             The triggering event which initiated the roll
- * @param {string} [config.template]         The HTML template used to render the roll dialog
- * @param {string} [config.title]            The dialog window title
- * @param {object} [config.dialogOptions]    Modal dialog options
- *
- * @param {boolean} [config.chatMessage=true] Automatically create a Chat Message for the result of this roll
- * @param {object} [config.messageData={}] Additional data which is applied to the created Chat Message, if any
- * @param {string} [config.rollMode]       A specific roll mode to apply as the default for the resulting roll
- * @param {object} [config.speaker]        The ChatMessage speaker to pass when creating the chat
- * @param {string} [config.flavor]         Flavor text to use in the posted chat message
- *
- * @returns {Promise<D20Roll|null>}  The evaluated D20Roll, or null if the workflow was cancelled
+ * @param {D20RollConfiguration} configuration  Configuration data for the D20 roll.
+ * @returns {Promise<D20Roll|null>}             The evaluated D20Roll, or null if the workflow was cancelled.
  */
 export async function d20Roll({
-  parts=[], data={}, // Roll creation
-  advantage, disadvantage, fumble=1, critical=20, targetValue, elvenAccuracy, halflingLucky, reliableTalent, // Roll customization
-  chooseModifier=false, fastForward=false, event, template, title, dialogOptions, // Dialog configuration
-  chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
+  parts=[], data={}, event,
+  advantage, disadvantage, critical=20, fumble=1, targetValue,
+  elvenAccuracy, halflingLucky, reliableTalent,
+  fastForward=false, chooseModifier=false, template, title, dialogOptions,
+  chatMessage=true, messageData={}, rollMode, flavor,
+  speaker // Deprecated
 }={}) {
 
   // Handle input arguments
@@ -117,43 +129,51 @@ function _determineAdvantageMode({event, advantage=false, disadvantage=false, fa
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for a damage roll.
+ *
+ * @typedef {object} DamageRollConfiguration
+ *
+ * @property {string[]} [parts=[]]  The dice roll component parts.
+ * @property {object} [data={}]     Data that will be used when parsing this roll.
+ * @property {Event} [event]        The triggering event for this roll.
+ *
+ * ## Critical Handling
+ * @property {boolean} [allowCritical=true]  Is this damage roll allowed to be rolled as critical?
+ * @property {boolean} [critical=false]      Apply critical to this roll (unless overridden by modifier key or dialog)?
+ * @property {number} [criticalBonusDice]    A number of bonus damage dice that are added for critical hits.
+ * @property {number} [criticalMultiplier]   Multiplier to use when calculating critical damage.
+ * @property {boolean} [multiplyNumeric]     Should numeric terms be multiplied when this roll criticals?
+ * @property {boolean} [powerfulCritical]    Should the critical dice be maximized rather than rolled?
+ * @property {string} [criticalBonusDamage]  An extra damage term that is applied only on a critical hit.
+ *
+ * ## Roll Configuration Dialog
+ * @property {boolean} [fastForward=false]  Should the roll configuration dialog be skipped?
+ * @property {string} [template]            The HTML template used to render the roll configuration dialog.
+ * @property {string} [title]               Title of the roll configuration dialog.
+ * @property {object} [dialogOptions]       Additional options passed to the roll configuration dialog.
+ *
+ * ## Chat Message
+ * @property {boolean} [chatMessage=true]  Should a chat message be created for this roll?
+ * @property {object} [messageData={}]     Additional data which is applied to the created chat message.
+ * @property {string} [rollMode]           Value of `CONST.DICE_ROLL_MODES` to apply as default for the chat message.
+ * @property {string} [flavor]             Flavor text to use in the created chat message.
+ */
+
+/**
  * A standardized helper function for managing core 5e damage rolls.
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
  *
- * @param {object} [config]
- * @param {string[]} [config.parts]        The dice roll component parts, excluding the initial d20
- * @param {object} [config.data]           Actor or item data against which to parse the roll
- *
- * @param {boolean} [config.critical=false] Flag this roll as a critical hit for the purposes of
- *                                          fast-forward or default dialog action
- * @param {number} [config.criticalBonusDice=0] A number of bonus damage dice that are added for critical hits
- * @param {number} [config.criticalMultiplier=2] A critical hit multiplier which is applied to critical hits
- * @param {boolean} [config.multiplyNumeric=false] Multiply numeric terms by the critical multiplier
- * @param {boolean} [config.powerfulCritical=false] Apply the "powerful criticals" house rule to critical hits
- * @param {string} [config.criticalBonusDamage] An extra damage term that is applied only on a critical hit
- *
- * @param {boolean} [config.fastForward=false] Allow fast-forward advantage selection
- * @param {Event}[config.event]            The triggering event which initiated the roll
- * @param {boolean} [config.allowCritical=true] Allow the opportunity for a critical hit to be rolled
- * @param {string} [config.template]       The HTML template used to render the roll dialog
- * @param {string} [config.title]          The dice roll UI window title
- * @param {object} [config.dialogOptions]  Configuration dialog options
- *
- * @param {boolean} [config.chatMessage=true] Automatically create a Chat Message for the result of this roll
- * @param {object} [config.messageData={}] Additional data which is applied to the created Chat Message, if any
- * @param {string} [config.rollMode]       A specific roll mode to apply as the default for the resulting roll
- * @param {object} [config.speaker]        The ChatMessage speaker to pass when creating the chat
- * @param {string} [config.flavor]         Flavor text to use in the posted chat message
- *
- * @returns {Promise<DamageRoll|null>} The evaluated DamageRoll, or null if the workflow was canceled
+ * @param {DamageRollConfiguration} configuration  Configuration data for the Damage roll.
+ * @returns {Promise<DamageRoll|null>}             The evaluated DamageRoll, or null if the workflow was canceled.
  */
 export async function damageRoll({
-  parts=[], data, // Roll creation
-  critical=false, criticalBonusDice, criticalMultiplier, multiplyNumeric, powerfulCritical,
-  criticalBonusDamage, // Damage customization
-  fastForward=false, event, allowCritical=true, template, title, dialogOptions, // Dialog configuration
-  chatMessage=true, messageData={}, rollMode, speaker, flavor // Chat Message customization
+  parts=[], data={}, event,
+  allowCritical=true, critical=false, criticalBonusDice, criticalMultiplier,
+  multiplyNumeric, powerfulCritical, criticalBonusDamage,
+  fastForward=false, template, title, dialogOptions,
+  chatMessage=true, messageData={}, rollMode, flavor,
+  speaker // Deprecated
 }={}) {
 
   // Handle input arguments
