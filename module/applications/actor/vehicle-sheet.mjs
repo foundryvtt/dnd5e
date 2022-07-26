@@ -28,6 +28,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   }
 
   /* -------------------------------------------- */
+  /*  Context Preparation                         */
+  /* -------------------------------------------- */
 
   /**
    * Compute the total weight of the vehicle's cargo.
@@ -245,7 +247,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     // Update the rendering context data
     context.features = Object.values(features);
     context.cargo = Object.values(cargo);
-    context.actor.system.attributes.encumbrance = this._computeEncumbrance(totalWeight, context);
+    context.system.attributes.encumbrance = this._computeEncumbrance(totalWeight, context);
   }
 
   /* -------------------------------------------- */

@@ -70,32 +70,38 @@ export default class ActorSheet5e extends ActorSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Context Preparation                         */
+  /* -------------------------------------------- */
 
   /** @override */
   async getData(options) {
 
+    // The Actor's data
+    const source = this.actor.toObject();
+    const actorData = this.actor.toObject(false);
+
     // Basic data
-    let isOwner = this.actor.isOwner;
-    const rollData = this.actor.getRollData.bind(this.actor);
     const context = {
-      owner: isOwner,
+      actor: actorData,
+      system: actorData.system,
+      items: actorData.items,
+      labels: this._getLabels(actorData.system),
+      movement: this._getMovementSpeed(actorData.system),
+      senses: this._getSenses(actorData.system),
+      effects: ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects),
+      warnings: this.actor._preparationWarnings,
+      filters: this._filters,
+      owner: this.actor.isOwner,
       limited: this.actor.limited,
       options: this.options,
       editable: this.isEditable,
-      cssClass: isOwner ? "editable" : "locked",
+      cssClass: this.actor.isOwner ? "editable" : "locked",
       isCharacter: this.actor.type === "character",
       isNPC: this.actor.type === "npc",
       isVehicle: this.actor.type === "vehicle",
       config: CONFIG.DND5E,
-      rollData
+      rollData: this.actor.getRollData.bind(this.actor)
     };
-    const labels = context.labels = this.actor.labels || {};
-
-    // The Actor's data
-    const source = this.actor.toObject();
-    const actorData = this.actor.toObject(false);
-    context.actor = actorData;
-    context.system = actorData.system;
 
     /** @deprecated */
     Object.defineProperty(context, "data", {
@@ -107,35 +113,20 @@ export default class ActorSheet5e extends ActorSheet {
       }
     });
 
-    // Owned Items
-    context.items = actorData.items;
+    // Sort Owned Items
     for ( let i of context.items ) {
       const item = this.actor.items.get(i._id);
       i.labels = item.labels;
     }
     context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
-    // Labels and filters
-    context.filters = this._filters;
-
-    // Currency Labels
-    labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
-      obj[k] = c.label;
-      return obj;
-    }, {});
-
     // Temporary HP
-    const hp = actorData.system.attributes.hp;
+    const hp = context.system.attributes.hp;
     if ( hp.temp === 0 ) delete hp.temp;
     if ( hp.tempmax === 0 ) delete hp.tempmax;
 
-    // Proficiency
-    labels.proficiency = game.settings.get("dnd5e", "proficiencyModifier") === "dice"
-      ? `d${actorData.system.attributes.prof * 2}`
-      : `+${actorData.system.attributes.prof}`;
-
     // Ability Scores
-    for ( let [a, abl] of Object.entries(actorData.system.abilities)) {
+    for ( const [a, abl] of Object.entries(context.system.abilities) ) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.DND5E.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.DND5E.abilities[a];
@@ -143,7 +134,7 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Skills
-    for (let [s, skl] of Object.entries(actorData.system.skills || {})) {
+    for ( const [s, skl] of Object.entries(context.system.skills ?? {}) ) {
       skl.ability = CONFIG.DND5E.abilityAbbreviations[skl.ability];
       skl.icon = this._getProficiencyIcon(skl.value);
       skl.hover = CONFIG.DND5E.proficiencyLevels[skl.value];
@@ -151,44 +142,58 @@ export default class ActorSheet5e extends ActorSheet {
       skl.baseValue = source.system.skills[s].value;
     }
 
-    // Movement speeds
-    context.movement = this._getMovementSpeed(actorData);
-
-    // Senses
-    context.senses = this._getSenses(actorData);
-
     // Update traits
-    this._prepareTraits(actorData.system.traits);
+    this._prepareTraits(context.system.traits);
 
     // Prepare owned items
     this._prepareItems(context);
 
-    // Prepare active effects
-    context.effects = ActiveEffect5e.prepareActiveEffectCategories(this.actor.effects);
-
     // Biography HTML enrichment
     context.biographyHTML = await TextEditor.enrichHTML(context.system.details.biography.value, {
       secrets: this.actor.isOwner,
-      rollData,
+      rollData: context.rollData,
       async: true
     });
 
-    // Prepare warnings
-    context.warnings = this.actor._preparationWarnings;
     return context;
   }
 
   /* -------------------------------------------- */
 
   /**
+   * Prepare labels object for the context.
+   * @param {object} systemData  System data for the Actor being prepared.
+   * @returns {object}           Object containing various labels.
+   * @protected
+   */
+  _getLabels(systemData) {
+    const labels = this.actor.labels ?? {};
+
+    // Currency Labels
+    labels.currencies = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
+      obj[k] = c.label;
+      return obj;
+    }, {});
+
+    // Proficiency
+    labels.proficiency = game.settings.get("dnd5e", "proficiencyModifier") === "dice"
+      ? `d${systemData.attributes.prof * 2}`
+      : `+${systemData.attributes.prof}`;
+
+    return labels;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare the display of movement speed data for the Actor.
-   * @param {object} actorData                The Actor data being prepared.
+   * @param {object} systemData               System data for the Actor being prepared.
    * @param {boolean} [largestPrimary=false]  Show the largest movement speed as "primary", otherwise show "walk".
    * @returns {{primary: string, special: string}}
    * @private
    */
-  _getMovementSpeed(actorData, largestPrimary=false) {
-    const movement = actorData.system.attributes.movement || {};
+  _getMovementSpeed(systemData, largestPrimary=false) {
+    const movement = systemData.attributes.movement ?? {};
 
     // Prepare an array of available movement speeds
     let speeds = [
@@ -226,12 +231,12 @@ export default class ActorSheet5e extends ActorSheet {
 
   /**
    * Prepare senses object for display.
-   * @param {object} actorData  Copy of actor data being prepared for display.
-   * @returns {object}          Senses grouped by key with localized and formatted string.
+   * @param {object} systemData  System data for the Actor being prepared.
+   * @returns {object}           Senses grouped by key with localized and formatted string.
    * @protected
    */
-  _getSenses(actorData) {
-    const senses = actorData.system.attributes.senses || {};
+  _getSenses(systemData) {
+    const senses = systemData.attributes.senses ?? {};
     const tags = {};
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
@@ -242,6 +247,8 @@ export default class ActorSheet5e extends ActorSheet {
     return tags;
   }
 
+  /* --------------------------------------------- */
+  /*  Property Attribution                         */
   /* --------------------------------------------- */
 
   /**
