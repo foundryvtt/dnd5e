@@ -51,8 +51,7 @@ export async function d20Roll({
   advantage, disadvantage, critical=20, fumble=1, targetValue,
   elvenAccuracy, halflingLucky, reliableTalent,
   fastForward=false, chooseModifier=false, template, title, dialogOptions,
-  chatMessage=true, messageData={}, rollMode, flavor,
-  speaker // Deprecated
+  chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
   // Handle input arguments
@@ -95,10 +94,6 @@ export async function d20Roll({
   await roll.evaluate({async: true});
 
   // Create a Chat Message
-  if ( speaker ) {
-    console.warn("You are passing the speaker argument to the d20Roll function directly which should instead be passed as an internal key of messageData");
-    messageData.speaker = speaker;
-  }
   if ( roll && chatMessage ) await roll.toMessage(messageData);
   return roll;
 }
@@ -172,8 +167,7 @@ export async function damageRoll({
   allowCritical=true, critical=false, criticalBonusDice, criticalMultiplier,
   multiplyNumeric, powerfulCritical, criticalBonusDamage,
   fastForward=false, template, title, dialogOptions,
-  chatMessage=true, messageData={}, rollMode, flavor,
-  speaker // Deprecated
+  chatMessage=true, messageData={}, rollMode, flavor
 }={}) {
 
   // Handle input arguments
@@ -209,10 +203,6 @@ export async function damageRoll({
   await roll.evaluate({async: true});
 
   // Create a Chat Message
-  if ( speaker ) {
-    console.warn("You are passing the speaker argument to the damageRoll function directly which should instead be passed as an internal key of messageData");
-    messageData.speaker = speaker;
-  }
   if ( roll && chatMessage ) await roll.toMessage(messageData);
   return roll;
 }

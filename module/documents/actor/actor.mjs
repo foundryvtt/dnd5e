@@ -819,11 +819,11 @@ export default class Actor5e extends Actor {
     if ( options.parts?.length > 0 ) parts.push(...options.parts);
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent")) || undefined;
+    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]});
-    const rollData = foundry.utils.mergeObject(options, {
+    const rollData = foundry.utils.mergeObject({
       parts: parts,
       data: data,
       title: `${flavor}: ${this.name}`,
@@ -835,7 +835,7 @@ export default class Actor5e extends Actor {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "skill", skillId }
       }
-    });
+    }, options);
 
     /**
      * A hook event that fires before a skill check is rolled for an Actor.
@@ -933,7 +933,7 @@ export default class Actor5e extends Actor {
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
-    const rollData = foundry.utils.mergeObject(options, {
+    const rollData = foundry.utils.mergeObject({
       parts,
       data,
       title: `${flavor}: ${this.name}`,
@@ -943,7 +943,7 @@ export default class Actor5e extends Actor {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "ability", abilityId }
       }
-    });
+    }, options);
 
     /**
      * A hook event that fires before an ability test is rolled for an Actor.
@@ -1015,7 +1015,7 @@ export default class Actor5e extends Actor {
 
     // Roll and return
     const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
-    const rollData = foundry.utils.mergeObject(options, {
+    const rollData = foundry.utils.mergeObject({
       parts,
       data,
       title: `${flavor}: ${this.name}`,
@@ -1025,7 +1025,7 @@ export default class Actor5e extends Actor {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "save", abilityId }
       }
-    });
+    }, options);
 
     /**
      * A hook event that fires before an ability save is rolled for an Actor.
@@ -1214,7 +1214,7 @@ export default class Actor5e extends Actor {
     // Prepare roll data
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
     if ( options.fastForward === undefined ) options.fastForward = !options.dialog;
-    const rollData = foundry.utils.mergeObject(options, {
+    const rollData = foundry.utils.mergeObject({
       event: new Event("hitDie"),
       parts: [`1${denomination}`, "@abilities.con.mod"],
       data: this.toObject().system,
@@ -1226,7 +1226,7 @@ export default class Actor5e extends Actor {
         speaker: ChatMessage.getSpeaker({actor: this}),
         "flags.dnd5e.roll": {type: "hitDie"}
       }
-    });
+    }, options);
 
     /**
      * A hook event that fires before a hit die is rolled for an Actor.
@@ -1262,8 +1262,8 @@ export default class Actor5e extends Actor {
     if ( Hooks.call("dnd5e.rollHitDie", this, roll, updates) === false ) return roll;
 
     // Perform updates
-    if ( !foundry.utils.isEmpty(updates.actor) ) this.update(updates.actor);
-    if ( !foundry.utils.isEmpty(updates.class) ) cls.update(updates.class);
+    if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
+    if ( !foundry.utils.isEmpty(updates.class) ) await cls.update(updates.class);
 
     return roll;
   }
