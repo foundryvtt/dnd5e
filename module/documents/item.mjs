@@ -1157,7 +1157,7 @@ export default class Item5e extends Item {
     const consume = this.system.consume;
     if ( consume?.type === "ammo" ) {
       ammo = this.actor.items.get(consume.target);
-      if (ammo?.data) {
+      if ( ammo?.data ) {
         const q = ammo.system.quantity;
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
@@ -1423,7 +1423,7 @@ export default class Item5e extends Item {
     if ( !this.system.formula ) throw new Error("This Item does not have a formula to roll!");
 
     const rollConfig = {
-      formula: "1d6",
+      formula: this.system.formula,
       data: this.getRollData(),
       chatMessage: true
     };
@@ -1483,7 +1483,7 @@ export default class Item5e extends Item {
     };
 
     /**
-     * A hook event that fires before an attack is rolled for an Item.
+     * A hook event that fires before the Item is rolled to recharge.
      * @function dnd5e.preRollRecharge
      * @memberof hookEvents
      * @param {Item5e} item                 Item for which the roll is being performed.
@@ -1508,8 +1508,8 @@ export default class Item5e extends Item {
     }
 
     /**
-     * A hook event that fires after an attack has been rolled for an Item.
-     * @function dnd5e.rollAttack
+     * A hook event that fires after the Item has rolled to recharge.
+     * @function dnd5e.rollRecharge
      * @memberof hookEvents
      * @param {Item5e} item           Item for which the roll was performed.
      * @param {D20Roll} roll          The resulting roll.
