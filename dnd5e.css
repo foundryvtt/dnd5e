@@ -1294,6 +1294,9 @@
   /*  Two Column Configurations                */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Item Choice                              */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Scale Value                              */
   /* ----------------------------------------- */
 }
@@ -1342,19 +1345,29 @@
 .dnd5e.advancement.two-column form .right-column {
   grid-area: right;
 }
+.dnd5e.advancement.two-column form .right-column.level-list label {
+  flex: 0.5;
+  padding-right: 0.5rem;
+  text-align: end;
+}
+.dnd5e.advancement.two-column form .right-column.level-list input[type="text"]::placeholder,
+.dnd5e.advancement.two-column form .right-column.level-list input[type="number"]::placeholder {
+  opacity: 0.5;
+}
 .dnd5e.advancement.two-column form button[type="submit"] {
   grid-column-end: span 2;
 }
+.dnd5e.advancement.item-choice {
+  --grid-two-column-right-size: 0.5fr;
+}
+.dnd5e.advancement.item-choice .level-list .hint {
+  text-align: end;
+}
+.dnd5e.advancement.item-choice textarea {
+  margin-inline-start: 9px;
+}
 .dnd5e.advancement.scale-value {
   --grid-two-column-right-size: 0.6fr;
-}
-.dnd5e.advancement.scale-value .right-column label {
-  flex: 0.5;
-  padding-right: 0.5rem;
-  text-align: right;
-}
-.dnd5e.advancement.scale-value :is(input[type="text"], input[type="number"])::placeholder {
-  opacity: 0.5;
 }
 .dnd5e.advancement.scale-value select.new-scale-value {
   font-weight: bold;
@@ -1422,6 +1435,10 @@
 .dnd5e.advancement.flow form[data-type="HitPoints"] .rolls .rollButton {
   height: calc(var(--form-field-height) + 5px);
   line-height: 1.5em;
+}
+.dnd5e.advancement.flow form[data-type="ItemChoice"] .item-name .item-delete {
+  flex: 0 0 20px;
+  margin-inline-end: 1px;
 }
 .dnd5e.advancement.flow input.error {
   outline: 2px solid red;
@@ -1646,7 +1663,7 @@
   margin-inline-start: 0.5em;
 }
 .dnd5e.sheet.item .advancement .items-list .main-controls .configuration-mode-control a {
-  text-align: inline-start;
+  text-align: start;
 }
 .dnd5e.sheet.item .advancement .items-list .main-controls .item-add {
   padding-block-start: 0.2em;

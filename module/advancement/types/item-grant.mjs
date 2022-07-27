@@ -8,11 +8,15 @@ import AdvancementConfig from "../advancement-config.mjs";
  */
 export class ItemGrantAdvancement extends Advancement {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       defaults: {
-        configuration: { items: [], optional: false }
+        configuration: {
+          items: [],
+          optional: false,
+          spell: null
+        }
       },
       order: 40,
       icon: "systems/dnd5e/icons/svg/item-grant.svg",
@@ -26,17 +30,25 @@ export class ItemGrantAdvancement extends Advancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * The item types that are supported in Item Grant.
+   * @type {Set<string>}
+   */
+  static VALID_TYPES = new Set(["feat", "spell", "consumable", "backpack", "equipment", "loot", "tool", "weapon"]);
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   configuredForLevel(level) {
     return !foundry.utils.isEmpty(this.data.value);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
     if ( !this.data.value.added || configMode ) {
@@ -66,6 +78,7 @@ export class ItemGrantAdvancement extends Advancement {
   async apply(level, data, retainedData={}) {
     const items = [];
     const updates = {};
+    const spellChanges = this.data.configuration.spell ? this._prepareSpellChanges(this.data.configuration.spell) : {};
     for ( const [uuid, selected] of Object.entries(data) ) {
       if ( !selected ) continue;
 
@@ -79,6 +92,7 @@ export class ItemGrantAdvancement extends Advancement {
           "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
         }, {keepId: true}).toObject();
       }
+      foundry.utils.mergeObject(itemData, spellChanges);
 
       items.push(itemData);
       // TODO: Trigger any additional advancement steps for added items
@@ -90,7 +104,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   restore(level, data) {
     const updates = {};
     for ( const item of data.items ) {
@@ -103,7 +117,7 @@ export class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   reverse(level) {
     const items = [];
     for ( const id of Object.keys(this.data.value.added ?? {}) ) {
@@ -125,77 +139,34 @@ export class ItemGrantAdvancement extends Advancement {
  */
 export class ItemGrantConfig extends AdvancementConfig {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
+      dropKeyPath: "items",
       template: "systems/dnd5e/templates/advancement/item-grant-config.html"
     });
   }
 
   /* -------------------------------------------- */
 
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Remove an item from the list
-    html.on("click", ".item-delete", this._onItemDelete.bind(this));
+  async getData() {
+    const data = super.getData();
+    data.items = await Promise.all(data.data.configuration.items.map(fromUuidSync));
+    data.showSpellConfig = data.items.some(i => i.type === "spell");
+    return data;
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Handle deleting an existing Item entry from the Advancement.
-   * @param {Event} event  The originating click event.
-   * @returns {Promise<Item5e>}  The promise for the updated parent Item which resolves after the application re-renders
-   * @private
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
-    if ( !uuidToDelete ) return;
-    const items = this.advancement.data.configuration.items.filter(uuid => uuid !== uuidToDelete);
-    const updates = { configuration: this.prepareConfigurationUpdate({ items }) };
-    await this.advancement.update(updates);
-    this.render();
+  /** @inheritDoc */
+  _verifyDroppedItem(event, item) {
+    if ( this.advancement.constructor.VALID_TYPES.has(item.type) ) return true;
+    const type = game.i18n.localize(`ITEM.Type${item.type.capitalize()}`);
+    ui.notifications.warn(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", { type }));
+    return false;
   }
 
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  _canDragDrop() {
-    return this.isEditable;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _onDrop(event) {
-    // Try to extract the data
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
-      return false;
-    }
-
-    if ( data.type !== "Item" ) return false;
-    const item = await Item.implementation.fromDropData(data);
-    const existingItems = this.advancement.data.configuration.items;
-
-    // Abort if this uuid is the parent item
-    if ( item.uuid === this.item.uuid ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantRecursiveWarning"));
-    }
-
-    // Abort if this uuid exists already
-    if ( existingItems.includes(item.uuid) ) {
-      return ui.notifications.warn(game.i18n.localize("DND5E.AdvancementItemGrantDuplicateWarning"));
-    }
-
-    await this.advancement.update({"configuration.items": [...existingItems, item.uuid]});
-    this.render();
-  }
 }
 
 
@@ -204,7 +175,7 @@ export class ItemGrantConfig extends AdvancementConfig {
  */
 export class ItemGrantFlow extends AdvancementFlow {
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/dnd5e/templates/advancement/item-grant-flow.html"
@@ -213,7 +184,7 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async getData() {
     const config = this.advancement.data.configuration.items;
     const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
@@ -234,7 +205,7 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
     html.find("a[data-uuid]").click(this._onClickFeature.bind(this));
@@ -256,7 +227,7 @@ export class ItemGrantFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   async _updateObject(event, formData) {
     const retainedData = this.retainedData?.items.reduce((obj, i) => {
       obj[foundry.utils.getProperty(i, "flags.dnd5e.sourceId")] = i;
