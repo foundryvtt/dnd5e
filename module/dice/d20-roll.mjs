@@ -25,6 +25,19 @@ export default class D20Roll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * Create a D20Roll from a standard Roll instance.
+   * @param {Roll} roll
+   * @returns {D20Roll}
+   */
+  static fromRoll(roll) {
+    const newRoll = new this(roll.formula, roll.data, roll.options);
+    Object.assign(newRoll, roll);
+    return newRoll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Advantage mode of a 5e d20 roll
    * @enum {number}
    */
