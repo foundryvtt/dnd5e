@@ -52,12 +52,36 @@ export default class D20Roll extends Roll {
     return this.options.advantageMode === D20Roll.ADV_MODE.ADVANTAGE;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * A convenience reference for whether this D20Roll has disadvantage
    * @type {boolean}
    */
   get hasDisadvantage() {
     return this.options.advantageMode === D20Roll.ADV_MODE.DISADVANTAGE;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this roll a critical success? Returns undefined if roll isn't evaluated.
+   * @type {boolean|void}
+   */
+  get isCritical() {
+    if ( !this._evaluated ) return undefined;
+    return this.dice[0].total >= (this.options.critical ?? 20);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this roll a critical failure? Returns undefined if roll isn't evaluated.
+   * @type {boolean|void}
+   */
+  get isFumble() {
+    if ( !this._evaluated ) return undefined;
+    return this.dice[0].total <= (this.options.fumble ?? 1);
   }
 
   /* -------------------------------------------- */

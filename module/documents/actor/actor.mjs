@@ -1116,7 +1116,6 @@ export default class Actor5e extends Actor {
     if ( !roll ) return null;
 
     // Take action depending on the result
-    const d20 = roll.dice[0].total;
     const details = {};
 
     // Save success
@@ -1124,7 +1123,7 @@ export default class Actor5e extends Actor {
       let successes = (death.success || 0) + 1;
 
       // Critical Success = revive with 1hp
-      if ( d20 >= (rollData.critical ?? 20) ) {
+      if ( roll.isCritical ) {
         details.updates = {
           "system.attributes.death.success": 0,
           "system.attributes.death.failure": 0,
@@ -1148,7 +1147,7 @@ export default class Actor5e extends Actor {
 
     // Save failure
     else {
-      let failures = (death.failure || 0) + (d20 <= (roll.options.fumble ?? 1) ? 2 : 1);
+      let failures = (death.failure || 0) + (roll.isFumble ? 2 : 1);
       details.updates = {"system.attributes.death.failure": Math.clamped(failures, 0, 3)};
       if ( failures >= 3 ) {  // 3 Failures = death
         details.chatString = "DND5E.DeathSaveFailure";
