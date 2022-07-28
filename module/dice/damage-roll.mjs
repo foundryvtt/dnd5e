@@ -19,6 +19,19 @@ export default class DamageRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * Create a DamageRoll from a standard Roll instance.
+   * @param {Roll} roll
+   * @returns {DamageRoll}
+   */
+  static fromRoll(roll) {
+    const newRoll = new this(roll.formula, roll.data, roll.options);
+    Object.assign(newRoll, roll);
+    return newRoll;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The HTML template path used to configure evaluation of this Roll
    * @type {string}
    */

@@ -8,21 +8,20 @@ export function highlightCriticalSuccessFailure(message, html, data) {
   if ( !message.isRoll || !message.isContentVisible || !message.rolls.length ) return;
 
   // Highlight rolls where the first part is a d20 roll
-  const d20Roll = message.rolls.find(r => {
+  let d20Roll = message.rolls.find(r => {
     const d0 = r.dice[0];
     return (d0?.faces === 20) && (d0?.values.length === 1);
   });
   if ( !d20Roll ) return;
+  d20Roll = dnd5e.dice.D20Roll.fromRoll(d20Roll);
   const d = d20Roll.dice[0];
 
   const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
   if ( isModifiedRoll ) return;
 
   // Highlight successes and failures
-  const critical = d.options.critical || 20;
-  const fumble = d.options.fumble || 1;
-  if ( d.total >= critical ) html.find(".dice-total").addClass("critical");
-  else if ( d.total <= fumble ) html.find(".dice-total").addClass("fumble");
+  if ( d20Roll.isCritical ) html.find(".dice-total").addClass("critical");
+  else if ( d20Roll.isFumble ) html.find(".dice-total").addClass("fumble");
   else if ( d.options.target ) {
     if ( d20Roll.total >= d.options.target ) html.find(".dice-total").addClass("success");
     else html.find(".dice-total").addClass("failure");
