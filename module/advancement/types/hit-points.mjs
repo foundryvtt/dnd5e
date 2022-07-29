@@ -172,7 +172,7 @@ export class HitPointsConfig extends AdvancementConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/hit-points-config.html"
+      template: "systems/dnd5e/templates/advancement/hit-points-config.hbs"
     });
   }
 
@@ -195,7 +195,7 @@ export class HitPointsFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/hit-points-flow.html"
+      template: "systems/dnd5e/templates/advancement/hit-points-flow.hbs"
     });
   }
 

@@ -143,7 +143,7 @@ export class ScaleValueConfig extends AdvancementConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "advancement", "scale-value", "two-column"],
-      template: "systems/dnd5e/templates/advancement/scale-value-config.html",
+      template: "systems/dnd5e/templates/advancement/scale-value-config.hbs",
       width: 540
     });
   }
@@ -291,7 +291,7 @@ export class ScaleValueFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/scale-value-flow.html"
+      template: "systems/dnd5e/templates/advancement/scale-value-flow.hbs"
     });
   }
 

@@ -17,7 +17,7 @@ export default class ActorSkillConfig extends DocumentSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/skill-config.html",
+      template: "systems/dnd5e/templates/apps/skill-config.hbs",
       width: 500,
       height: "auto"
     });

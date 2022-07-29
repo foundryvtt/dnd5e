@@ -8,7 +8,7 @@ export default class ActorSheetFlags extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
       classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/actor-flags.html",
+      template: "systems/dnd5e/templates/apps/actor-flags.hbs",
       width: 500,
       closeOnSubmit: true
     });

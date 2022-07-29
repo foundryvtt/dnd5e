@@ -129,7 +129,7 @@ export class ItemGrantConfig extends AdvancementConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
-      template: "systems/dnd5e/templates/advancement/item-grant-config.html"
+      template: "systems/dnd5e/templates/advancement/item-grant-config.hbs"
     });
   }
 
@@ -207,7 +207,7 @@ export class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/item-grant-flow.html"
+      template: "systems/dnd5e/templates/advancement/item-grant-flow.hbs"
     });
   }
 
