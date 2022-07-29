@@ -84,13 +84,13 @@ export function linkForUuid(uuid) {
 /* -------------------------------------------- */
 
 /**
- * Define a set of template paths to pre-load
- * Pre-loaded templates are compiled and cached for fast access when rendering
+ * Define a set of template paths to pre-load. Pre-loaded templates are compiled and cached for fast access when
+ * rendering. These paths will also be available as Handlebars partials by using the file name
+ * (e.g. "dnd5e.actor-traits").
  * @returns {Promise}
  */
 export async function preloadHandlebarsTemplates() {
-  return loadTemplates([
-
+  const partials = [
     // Shared Partials
     "systems/dnd5e/templates/actors/parts/active-effects.hbs",
 
@@ -111,7 +111,15 @@ export async function preloadHandlebarsTemplates() {
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs"
-  ]);
+  ];
+
+  const paths = {};
+  for ( const path of partials ) {
+    paths[path.replace(".hbs", ".html")] = path;
+    paths[`dnd5e.${path.split("/").pop().replace(".hbs", "")}`] = path;
+  }
+
+  return loadTemplates(paths);
 }
 
 /* -------------------------------------------- */
