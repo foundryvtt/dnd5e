@@ -65,8 +65,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.html";
-    return `systems/dnd5e/templates/actors/${this.actor.type}-sheet.html`;
+    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet.hbs";
+    return `systems/dnd5e/templates/actors/${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -796,7 +796,7 @@ export default class ActorSheet5e extends ActorSheet {
     }, {
       classes: ["dialog", "dnd5e"],
       width: 600,
-      template: "systems/dnd5e/templates/apps/polymorph-prompt.html"
+      template: "systems/dnd5e/templates/apps/polymorph-prompt.hbs"
     }).render(true);
   }
 

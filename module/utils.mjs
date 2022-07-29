@@ -92,25 +92,25 @@ export async function preloadHandlebarsTemplates() {
   return loadTemplates([
 
     // Shared Partials
-    "systems/dnd5e/templates/actors/parts/active-effects.html",
+    "systems/dnd5e/templates/actors/parts/active-effects.hbs",
 
     // Actor Sheet Partials
-    "systems/dnd5e/templates/actors/parts/actor-traits.html",
-    "systems/dnd5e/templates/actors/parts/actor-inventory.html",
-    "systems/dnd5e/templates/actors/parts/actor-features.html",
-    "systems/dnd5e/templates/actors/parts/actor-spellbook.html",
-    "systems/dnd5e/templates/actors/parts/actor-warnings.html",
+    "systems/dnd5e/templates/actors/parts/actor-traits.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-features.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
+    "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
 
     // Item Sheet Partials
-    "systems/dnd5e/templates/items/parts/item-action.html",
-    "systems/dnd5e/templates/items/parts/item-activation.html",
-    "systems/dnd5e/templates/items/parts/item-advancement.html",
-    "systems/dnd5e/templates/items/parts/item-description.html",
-    "systems/dnd5e/templates/items/parts/item-mountable.html",
-    "systems/dnd5e/templates/items/parts/item-spellcasting.html",
+    "systems/dnd5e/templates/items/parts/item-action.hbs",
+    "systems/dnd5e/templates/items/parts/item-activation.hbs",
+    "systems/dnd5e/templates/items/parts/item-advancement.hbs",
+    "systems/dnd5e/templates/items/parts/item-description.hbs",
+    "systems/dnd5e/templates/items/parts/item-mountable.hbs",
+    "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
 
     // Advancement Partials
-    "systems/dnd5e/templates/advancement/parts/advancement-controls.html"
+    "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs"
   ]);
 }
 

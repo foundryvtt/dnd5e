@@ -25,7 +25,7 @@ export default class AdvancementSelection extends Dialog {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["dnd5e", "sheet", "advancement"],
-      template: "systems/dnd5e/templates/advancement/advancement-selection.html",
+      template: "systems/dnd5e/templates/advancement/advancement-selection.hbs",
       title: "DND5E.AdvancementSelectionTitle",
       width: 500,
       height: "auto"

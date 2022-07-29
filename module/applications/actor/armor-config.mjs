@@ -19,7 +19,7 @@ export default class ActorArmorConfig extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-armor-config",
       classes: ["dnd5e", "actor-armor-config"],
-      template: "systems/dnd5e/templates/apps/actor-armor.html",
+      template: "systems/dnd5e/templates/apps/actor-armor.hbs",
       width: 320,
       height: "auto"
     });

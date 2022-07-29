@@ -935,7 +935,7 @@ export default class Item5e extends Item {
       isTool: this.type === "tool",
       hasAbilityCheck: this.hasAbilityCheck
     };
-    const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.html", templateData);
+    const html = await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", templateData);
 
     // Create the ChatMessage data object
     const chatData = {

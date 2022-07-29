@@ -38,7 +38,7 @@ export default class SelectItemsPrompt extends Dialog {
    */
   static async create(items, {hint}) {
     // Render the ability usage template
-    const html = await renderTemplate("systems/dnd5e/templates/apps/select-items-prompt.html", {items, hint});
+    const html = await renderTemplate("systems/dnd5e/templates/apps/select-items-prompt.hbs", {items, hint});
     return new Promise(resolve => {
       const dlg = new this(items, {
         title: game.i18n.localize("DND5E.SelectItemsPromptTitle"),

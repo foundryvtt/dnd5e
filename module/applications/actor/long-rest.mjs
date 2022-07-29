@@ -16,7 +16,7 @@ export default class LongRestDialog extends Dialog {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/apps/long-rest.html",
+      template: "systems/dnd5e/templates/apps/long-rest.hbs",
       classes: ["dnd5e", "dialog"]
     });
   }
