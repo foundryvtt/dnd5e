@@ -5,7 +5,7 @@
         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
 
         <section class="header-details flexrow">
-            {{> "systems/dnd5e/templates/actors/parts/actor-warnings.hbs"}}
+            {{> "dnd5e.actor-warnings"}}
 
             <h1 class="charname">
                 <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
@@ -189,23 +189,23 @@
                 </div>
 
                 {{!-- Traits --}}
-                {{> "systems/dnd5e/templates/actors/parts/actor-traits.hbs"}}
+                {{> "dnd5e.actor-traits"}}
             </section>
         </div>
 
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/dnd5e/templates/actors/parts/actor-features.hbs" sections=features}}
+            {{> "dnd5e.actor-features" sections=features}}
         </div>
 
         {{!-- Spellbook Tab --}}
         <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs"}}
+            {{> "dnd5e.actor-spellbook"}}
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/dnd5e/templates/actors/parts/active-effects.hbs"}}
+            {{> "dnd5e.active-effects"}}
         </div>
 
         {{!-- Biography Tab --}}

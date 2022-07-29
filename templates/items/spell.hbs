@@ -39,7 +39,7 @@
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "systems/dnd5e/templates/items/parts/item-description.hbs"}}
+        {{> "dnd5e.item-description"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
@@ -112,12 +112,12 @@
             <h3 class="form-header">{{ localize "DND5E.SpellCastingHeader" }}</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "systems/dnd5e/templates/items/parts/item-activation.hbs"}}
+            {{> "dnd5e.item-activation"}}
 
             <h3 class="form-header">{{ localize "DND5E.SpellEffects" }}</h3>
 
             {{!-- Item Action Template --}}
-            {{> "systems/dnd5e/templates/items/parts/item-action.hbs"}}
+            {{> "dnd5e.item-action"}}
 
             {{!-- Spell Level Scaling --}}
             <div class="form-group">
@@ -137,7 +137,7 @@
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "systems/dnd5e/templates/actors/parts/active-effects.hbs"}}
+            {{> "dnd5e.active-effects"}}
         </div>
     </section>
 </form>
