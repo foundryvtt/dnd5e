@@ -250,4 +250,13 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     };
   }
 
+  /* -------------------------------------------- */
+  /*  Editing                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _updateObject(event, formData) {
+    
+  }
+
 }

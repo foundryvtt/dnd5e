@@ -1766,6 +1766,9 @@
 .dnd5e.sheet.item .loot-header {
   margin-bottom: 10px;
 }
+.classSummary table th[scope="col"] {
+  padding-inline: 0.25em;
+}
 .classSummary table td:is(.level, .prof, .scale) {
   text-align: center;
 }

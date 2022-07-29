@@ -8,14 +8,20 @@
     </div>
   </div>
 
-  <h3>Primary Description</h3>
+  <h3>Description</h3>
+  {{editor enriched.primary target="system.description.primary" button=true editable=true}}
   
-  <h3>Creating Your Class</h3>
+  <h3>Additional Hit Points Description</h3>
+  {{editor enriched.additionalHitPoints target="system.description.additionalHitPoints" button=true editable=true}}
 
-  <h3>Quick Build</h3>
+  <h3>Additional Proficiencies Description</h3>
+  {{editor enriched.additionalTraits target="system.description.additionalTraits" button=true editable=true}}
+
+  <h3>Additional Equipment Description</h3>
+  {{editor enriched.additionalEquipment target="system.description.additionalEquipment" button=true editable=true}}
 
   <h3>Subclass</h3>
-  
+  {{editor enriched.subclass target="system.description.subclass" button=true editable=true}}
 
   <footer class="sheet-footer flexrow">
     <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>

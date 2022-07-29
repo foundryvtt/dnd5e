@@ -8,27 +8,18 @@
   <section>
     {{{enriched.primary}}}
 
-    {{#if enriched.creating}}
-      <h2>{{localize "DND5E.Journal.ClassSummary.CreatingHeading" class=linked.name}}</h2>
-      {{{enriched.creating}}}
-    {{/if}}
-
-    {{#if enriched.quickBuild}}
-      <blockquote class="quick-build">
-        <strong>{{localize "DND5E.Journal.ClassSummary.QuickBuildHeading"}}</strong>
-        {{{enriched.quickBuild}}}
-      </blockquote>
-    {{/if}}
-
     <h2>{{localize "DND5E.Journal.ClassSummary.FeaturesHeader"}}</h2>
-    <p>{{localize "DND5E.Journal.ClassSummary.FeaturesDescription" name=linked.name lowercaseName=linked.lowercaseName}}</p>
+    <p>
+      {{localize "DND5E.Journal.ClassSummary.FeaturesDescription" name=linked.name lowercaseName=linked.lowercaseName}}
+    </p>
 
     {{#if (or advancement.hp enriched.additionalHitPoints)}}
       <h3>{{localize "DND5E.Journal.ClassSummary.HitPointsHeader"}}</h3>
       <p>
-        <strong>Hit Dice:</strong> {{advancement.hp.hitDice}} per {{linked.lowercaseName}} level<br>
-        <strong>Hit Points at 1st Level:</strong> {{advancement.hp.max}} + your Constitution modifier<br>
-        <strong>Hit Points at Higher Levels:</strong> {{advancement.hp.hitDice}} (or {{advancement.hp.average}}) + your Constitution modifier per {{linked.lowercaseName}} level after 1st
+        {{{localize "DND5E.Journal.ClassSummary.HitDice" dice=advancement.hp.hitDice class=linked.lowercaseName}}}<br>
+        {{{localize "DND5E.Journal.ClassSummary.HitPointsLevel1" max=advancement.hp.max}}}<br>
+        {{{localize "DND5E.Journal.ClassSummary.HitPointsLevelX" dice=advancement.hp.hitDice
+          average=advancement.hp.average class=linked.lowercaseName}}}
       </p>
       {{{enriched.additionalHitPoints}}}
     {{/if}}
@@ -60,6 +51,6 @@
 
 {{else}}
   <section>
-    No Valid Class
+    {{localize "DND5E.Journal.ClassSummary.NoValidClass"}}
   </section>
 {{/if}}
