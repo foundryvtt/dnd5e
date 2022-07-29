@@ -87,6 +87,7 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Item.documentClass = documents.Item5e;
+  CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.time.roundTime = 6;
@@ -139,6 +140,10 @@ Hooks.once("init", function() {
   Items.registerSheet("dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
+  });
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassSummary5ePageSheet, {
+    label: "DND5E.SheetClassClassSummary",
+    types: ["classSummary"]
   });
 
   // Preload Handlebars helpers & partials

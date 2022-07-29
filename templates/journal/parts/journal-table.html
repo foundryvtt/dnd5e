@@ -1,0 +1,28 @@
+<table>
+  {{#if caption}}
+    <caption>{{caption}}</caption>
+  {{/if}}
+  {{#if table.cols}}
+    <colgroup>
+      {{#each table.cols}}
+        <col{{#if (gt this.span 1)}} span="{{this.span}}"{{/if}}{{#if this.class}} class="{{this.class}}"{{/if}}>
+      {{/each}}
+    </colgroup>
+  {{/if}}
+  <thead>
+    <tr>
+      {{#each table.headers}}
+        <th scope="col">{{this}}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each table.rows}}
+      <tr>
+        {{#each this}}
+          <td{{#if this.class}} class="{{this.class}}"{{/if}}>{{{this.content}}}</td>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

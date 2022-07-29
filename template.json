@@ -724,5 +724,18 @@
       "properties": {},
       "proficient": true
     }
+  },
+  "JournalEntryPage": {
+    "types": ["classSummary"],
+    "htmlFields": ["description.value", "description.creating", "description.quickBuild", "description.subclass"],
+    "classSummary": {
+      "itemUUID": "",
+      "description": {
+        "primary": "",
+        "creating": "",
+        "quickBuild": "",
+        "subclass": ""
+      }
+    }
   }
 }

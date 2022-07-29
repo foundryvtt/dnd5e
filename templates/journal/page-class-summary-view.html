@@ -1,0 +1,65 @@
+{{#if data.title.show}}
+<header>
+  <h{{data.title.level}}>{{data.name}}</h{{data.title.level}}>
+{{/if}}
+
+{{#if linked.document}}
+
+  <section>
+    {{{enriched.primary}}}
+
+    {{#if enriched.creating}}
+      <h2>{{localize "DND5E.Journal.ClassSummary.CreatingHeading" class=linked.name}}</h2>
+      {{{enriched.creating}}}
+    {{/if}}
+
+    {{#if enriched.quickBuild}}
+      <blockquote class="quick-build">
+        <strong>{{localize "DND5E.Journal.ClassSummary.QuickBuildHeading"}}</strong>
+        {{{enriched.quickBuild}}}
+      </blockquote>
+    {{/if}}
+
+    <h2>{{localize "DND5E.Journal.ClassSummary.FeaturesHeader"}}</h2>
+    <p>{{localize "DND5E.Journal.ClassSummary.FeaturesDescription" name=linked.name lowercaseName=linked.lowercaseName}}</p>
+
+    {{#if (or advancement.hp enriched.additionalHitPoints)}}
+      <h3>{{localize "DND5E.Journal.ClassSummary.HitPointsHeader"}}</h3>
+      <p>
+        <strong>Hit Dice:</strong> {{advancement.hp.hitDice}} per {{linked.lowercaseName}} level<br>
+        <strong>Hit Points at 1st Level:</strong> {{advancement.hp.max}} + your Constitution modifier<br>
+        <strong>Hit Points at Higher Levels:</strong> {{advancement.hp.hitDice}} (or {{advancement.hp.average}}) + your Constitution modifier per {{linked.lowercaseName}} level after 1st
+      </p>
+      {{{enriched.additionalHitPoints}}}
+    {{/if}}
+
+    {{#if (or advancement.traits enriched.additionalTraits)}}
+      <h3>{{localize "DND5E.Journal.ClassSummary.TraitsHeader"}}</h3>
+      {{{enriched.additionalTraits}}}
+    {{/if}}
+
+    {{#if (or advancement.equipment enriched.additionalEquipment)}}
+      <h3>{{localize "DND5E.Journal.ClassSummary.EquipmentHeader"}}</h3>
+      {{{enriched.additionalEquipment}}}
+    {{/if}}
+
+    {{> "systems/dnd5e/templates/journal/parts/journal-table.html" table=table
+      caption=(localize "DND5E.Journal.ClassSummary.TableCaption" class=linked.name)}}
+
+    {{#if advancement.optionalFeatures}}
+      <h2>{{localize "DND5E.Journal.ClassSummary.OptionalFeaturesCaption"}}</h2>
+      Table Here!
+    {{/if}}
+
+    {{#if advancement.subclass}}
+      <h3>{{advancement.subclass.name}}</h3>
+      {{{enriched.subclass}}}
+      List of subclasses here
+    {{/if}}
+  </section>
+
+{{else}}
+  <section>
+    No Valid Class
+  </section>
+{{/if}}
