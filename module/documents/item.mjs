@@ -1909,7 +1909,12 @@ export default class Item5e extends Item {
   _onCreateOwnedWeapon(data, isNPC) {
 
     // NPCs automatically equip items and are proficient with them
-    if ( isNPC ) return {"system.equipped": true, "system.proficient": true};
+    if ( isNPC ) {
+      const updates = {};
+      if ( foundry.utils.getProperty(data, "system.equipped") === undefined ) updates["system.equipped"] = true;
+      if ( foundry.utils.getProperty(data, "system.proficient") === undefined ) updates["system.proficient"] = true;
+      return updates;
+    }
     if ( data.system?.proficient !== undefined ) return {};
 
     // Some weapon types are always proficient
