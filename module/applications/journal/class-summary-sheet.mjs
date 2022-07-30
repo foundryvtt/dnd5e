@@ -10,7 +10,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   /* -------------------------------------------- */
 
   get template() {
-    return `systems/dnd5e/templates/journal/page-class-summary-${this.isEditable ? "edit" : "view"}.html`;
+    return `systems/dnd5e/templates/journal/page-class-summary-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */

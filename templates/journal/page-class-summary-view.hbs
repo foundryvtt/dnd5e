@@ -34,7 +34,7 @@
       {{{enriched.additionalEquipment}}}
     {{/if}}
 
-    {{> "systems/dnd5e/templates/journal/parts/journal-table.html" table=table
+    {{> "dnd5e.journal-table" table=table
       caption=(localize "DND5E.Journal.ClassSummary.TableCaption" class=linked.name)}}
 
     {{#if advancement.optionalFeatures}}
