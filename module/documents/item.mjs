@@ -1139,11 +1139,11 @@ export default class Item5e extends Item {
    * Place an attack roll using an item (weapon, feat, spell, or equipment)
    * Rely upon the d20Roll logic for the core implementation
    *
-   * @param {object} options            Roll options which are configured and provided to the d20Roll function
-   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
+   * @param {D20RollConfiguration} options  Roll options which are configured and provided to the d20Roll function
+   * @returns {Promise<D20Roll|null>}       A Promise which resolves to the created Roll instance
    */
   async rollAttack(options={}) {
-    const flags = this.actor.flags.dnd5e || {};
+    const flags = this.actor.flags.dnd5e ?? {};
     if ( !this.hasAttack ) throw new Error("You may not place an Attack Roll with this Item.");
     let title = `${this.name} - ${game.i18n.localize("DND5E.AttackRoll")}`;
 
@@ -1153,11 +1153,11 @@ export default class Item5e extends Item {
     // Handle ammunition consumption
     delete this._ammo;
     let ammo = null;
-    let ammoUpdate = null;
+    let ammoUpdate = [];
     const consume = this.system.consume;
     if ( consume?.type === "ammo" ) {
       ammo = this.actor.items.get(consume.target);
-      if (ammo?.data) {
+      if ( ammo?.data ) {
         const q = ammo.system.quantity;
         const consumeAmount = consume.amount ?? 0;
         if ( q && (q - consumeAmount >= 0) ) {
@@ -1169,16 +1169,23 @@ export default class Item5e extends Item {
       // Get pending ammunition update
       const usage = this._getUsageUpdates({consumeResource: true});
       if ( usage === false ) return null;
-      ammoUpdate = usage.resourceUpdates || [];
+      ammoUpdate = usage.resourceUpdates ?? [];
     }
 
+    // Flags
+    const elvenAccuracy = (flags.elvenAccuracy
+      && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod)) || undefined;
+
     // Compose roll options
-    let rollConfig = {
-      parts: parts,
+    const rollConfig = foundry.utils.mergeObject({
+      parts,
       actor: this.actor,
       data: rollData,
-      title: title,
+      critical: this.getCriticalThreshold(),
+      title,
       flavor: title,
+      elvenAccuracy,
+      halflingLucky: flags.halflingLucky,
       dialogOptions: {
         width: 400,
         top: options.event ? options.event.clientY - 80 : null,
@@ -1188,28 +1195,33 @@ export default class Item5e extends Item {
         "flags.dnd5e.roll": {type: "attack", itemId: this.id },
         speaker: ChatMessage.getSpeaker({actor: this.actor})
       }
-    };
+    }, options);
 
-    // Critical hit thresholds
-    rollConfig.critical = this.getCriticalThreshold();
+    /**
+     * A hook event that fires before an attack is rolled for an Item.
+     * @function dnd5e.preRollAttack
+     * @memberof hookEvents
+     * @param {Item5e} item                  Item for which the roll is being performed.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollAttack", this, rollConfig) === false ) return;
 
-    // Elven Accuracy
-    if ( flags.elvenAccuracy && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(this.abilityMod) ) {
-      rollConfig.elvenAccuracy = true;
-    }
-
-    // Apply Halfling Lucky
-    if ( flags.halflingLucky ) rollConfig.halflingLucky = true;
-
-    // Compose calculated roll options with passed-in roll options
-    rollConfig = foundry.utils.mergeObject(rollConfig, options);
-
-    // Invoke the d20 roll helper
     const roll = await d20Roll(rollConfig);
     if ( roll === null ) return null;
 
+    /**
+     * A hook event that fires after an attack has been rolled for an Item.
+     * @function dnd5e.rollAttack
+     * @memberof hookEvents
+     * @param {Item5e} item          Item for which the roll was performed.
+     * @param {D20Roll} roll         The resulting roll.
+     * @param {object[]} ammoUpdate  Updates that will be applied to ammo Items as a result of this attack.
+     */
+    Hooks.callAll("dnd5e.rollAttack", this, roll, ammoUpdate);
+
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammo && ammoUpdate.length ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
+    if ( ammoUpdate.length ) await this.actor?.updateEmbeddedDocuments("Item", ammoUpdate);
     return roll;
   }
 
@@ -1223,11 +1235,11 @@ export default class Item5e extends Item {
    * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
    * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
    * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
-   * @param {object} [config.options]      Additional options passed to the damageRoll function
+   * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
    * @returns {Promise<DamageRoll>}        A Promise which resolves to the created Roll instance, or null if the action
    *                                       cannot be performed.
    */
-  rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
+  async rollDamage({critical=false, event=null, spellLevel=null, versatile=false, options={}}={}) {
     if ( !this.hasDamage ) throw new Error("You may not make a Damage Roll with this Item.");
     const messageData = {
       "flags.dnd5e.roll": {type: "damage", itemId: this.id},
@@ -1303,8 +1315,31 @@ export default class Item5e extends Item {
     // Factor in extra weapon-specific critical damage
     if ( this.system.critical?.damage ) rollConfig.criticalBonusDamage = this.system.critical.damage;
 
+    foundry.utils.mergeObject(rollConfig, options);
+
+    /**
+     * A hook event that fires before a damage is rolled for an Item.
+     * @function dnd5e.preRollDamage
+     * @memberof hookEvents
+     * @param {Item5e} item                     Item for which the roll is being performed.
+     * @param {DamageRollConfiguration} config  Configuration data for the pending roll.
+     * @returns {boolean}                       Explicitly return false to prevent the roll from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollDamage", this, rollConfig) === false ) return;
+
+    const roll = await damageRoll(rollConfig);
+
+    /**
+     * A hook event that fires after a damage has been rolled for an Item.
+     * @function dnd5e.rollDamage
+     * @memberof hookEvents
+     * @param {Item5e} item      Item for which the roll was performed.
+     * @param {DamageRoll} roll  The resulting roll.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollDamage", this, roll);
+
     // Call the roll helper utility
-    return damageRoll(foundry.utils.mergeObject(rollConfig, options));
+    return roll;
   }
 
   /* -------------------------------------------- */
@@ -1387,19 +1422,46 @@ export default class Item5e extends Item {
   async rollFormula({spellLevel}={}) {
     if ( !this.system.formula ) throw new Error("This Item does not have a formula to roll!");
 
-    // Define Roll Data
-    const rollData = this.getRollData();
-    if ( spellLevel ) rollData.item.level = spellLevel;
-    const title = `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`;
+    const rollConfig = {
+      formula: this.system.formula,
+      data: this.getRollData(),
+      chatMessage: true
+    };
+    if ( spellLevel ) rollConfig.data.item.level = spellLevel;
 
-    // Invoke the roll and submit it to chat
-    const roll = await new Roll(rollData.item.formula, rollData).roll({async: true});
-    roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: title,
-      rollMode: game.settings.get("core", "rollMode"),
-      messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id }}
-    });
+    /**
+     * A hook event that fires before a formula is rolled for an Item.
+     * @function dnd5e.preRollFormula
+     * @memberof hookEvents
+     * @param {Item5e} item                 Item for which the roll is being performed.
+     * @param {object} config               Configuration data for the pending roll.
+     * @param {string} config.formula       Formula that will be rolled.
+     * @param {object} config.data          Data used when evaluating the roll.
+     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
+     * @returns {boolean}                   Explicitly return false to prevent the roll from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollFormula", this, rollConfig) === false ) return;
+
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+
+    if ( rollConfig.chatMessage ) {
+      roll.toMessage({
+        speaker: ChatMessage.getSpeaker({actor: this.actor}),
+        flavor: `${this.name} - ${game.i18n.localize("DND5E.OtherFormula")}`,
+        rollMode: game.settings.get("core", "rollMode"),
+        messageData: {"flags.dnd5e.roll": {type: "other", itemId: this.id }}
+      });
+    }
+
+    /**
+     * A hook event that fires after a formula has been rolled for an Item.
+     * @function dnd5e.rollFormula
+     * @memberof hookEvents
+     * @param {Item5e} item           Item for which the roll was performed.
+     * @param {D20Roll} roll          The resulting roll.
+     */
+    Hooks.callAll("dnd5e.rollFormula", this, roll);
+
     return roll;
   }
 
@@ -1410,33 +1472,65 @@ export default class Item5e extends Item {
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance
    */
   async rollRecharge() {
-    const recharge = this.system.recharge || {};
+    const recharge = this.system.recharge ?? {};
     if ( !recharge.value ) return;
 
-    // Roll the check
-    const roll = await new Roll("1d6").roll({async: true});
-    const success = roll.total >= parseInt(recharge.value);
+    const rollConfig = {
+      formula: "1d6",
+      data: this.getRollData(),
+      target: parseInt(recharge.value),
+      chatMessage: true
+    };
 
-    // Display a Chat Message
-    const resultKey = success ? "DND5E.ItemRechargeSuccess" : "DND5E.ItemRechargeFailure";
-    const promises = [roll.toMessage({
-      flavor: `${game.i18n.format("DND5E.ItemRechargeCheck", {name: this.name})} - ${game.i18n.localize(resultKey)}`,
-      speaker: ChatMessage.getSpeaker({actor: this.actor, token: this.actor.token})
-    })];
+    /**
+     * A hook event that fires before the Item is rolled to recharge.
+     * @function dnd5e.preRollRecharge
+     * @memberof hookEvents
+     * @param {Item5e} item                 Item for which the roll is being performed.
+     * @param {object} config               Configuration data for the pending roll.
+     * @param {string} config.formula       Formula that will be used to roll the recharge.
+     * @param {object} config.data          Data used when evaluating the roll.
+     * @param {number} config.target        Total required to be considered recharged.
+     * @param {boolean} config.chatMessage  Should a chat message be created for this roll?
+     * @returns {boolean}                   Explicitly return false to prevent the roll from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollRecharge", this, rollConfig) === false ) return;
+
+    const roll = await new Roll(rollConfig.formula, rollConfig.data).roll({async: true});
+    const success = roll.total >= rollConfig.target;
+
+    if ( rollConfig.chatMessage ) {
+      const resultMessage = game.i18n.localize(`DND5E.ItemRecharge${success ? "Success" : "Failure"}`);
+      roll.toMessage({
+        flavor: `${game.i18n.format("DND5E.ItemRechargeCheck", {name: this.name})} - ${resultMessage}`,
+        speaker: ChatMessage.getSpeaker({actor: this.actor, token: this.actor.token})
+      });
+    }
+
+    /**
+     * A hook event that fires after the Item has rolled to recharge.
+     * @function dnd5e.rollRecharge
+     * @memberof hookEvents
+     * @param {Item5e} item           Item for which the roll was performed.
+     * @param {D20Roll} roll          The resulting roll.
+     * @returns {boolean}             Explicitly return false to prevent the item from being recharged.
+     */
+    if ( Hooks.call("dnd5e.rollRecharge", this, roll) === false ) return roll;
 
     // Update the Item data
-    if ( success ) promises.push(this.update({"system.recharge.charged": true}));
-    return Promise.all(promises).then(() => roll);
+    if ( success ) this.update({"system.recharge.charged": true});
+
+    return roll;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Prepare data needed to roll a tool check and then pass it off to `d20Roll`.
-   * @param {object} [options]  Roll configuration options provided to the d20Roll function.
-   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
+   * @param {D20RollConfiguration} [options]  Roll configuration options provided to the d20Roll function.
+   * @returns {Promise<Roll>}                 A Promise which resolves to the created Roll instance.
    */
-  rollToolCheck(options={}) {
+  async rollToolCheck(options={}) {
     if ( this.type !== "tool" ) throw new Error("Wrong item type!");
 
     // Prepare roll data
@@ -1481,17 +1575,36 @@ export default class Item5e extends Item {
         left: window.innerWidth - 710
       },
       chooseModifier: true,
-      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ) || false,
+      halflingLucky: this.actor.getFlag("dnd5e", "halflingLucky" ),
       reliableTalent: (this.system.proficient >= 1) && this.actor.getFlag("dnd5e", "reliableTalent"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this.actor}),
         "flags.dnd5e.roll": {type: "tool", itemId: this.id }
       }
     }, options);
-    rollConfig.event = options.event;
 
-    // Call the roll helper utility
-    return d20Roll(rollConfig);
+    /**
+     * A hook event that fires before a tool check is rolled for an Item.
+     * @function dnd5e.preRollToolCheck
+     * @memberof hookEvents
+     * @param {Item5e} item                  Item for which the roll is being performed.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     * @returns {boolean}                    Explicitly return false to prevent the roll from being performed.
+     */
+    if ( Hooks.call("dnd5e.preRollToolCheck", this, rollConfig) === false ) return;
+
+    const roll = await d20Roll(rollConfig);
+
+    /**
+     * A hook event that fires after a tool check has been rolled for an Item.
+     * @function dnd5e.rollToolCheck
+     * @memberof hookEvents
+     * @param {Item5e} item   Item for which the roll was performed.
+     * @param {D20Roll} roll  The resulting roll.
+     */
+    if ( roll ) Hooks.callAll("dnd5e.rollToolCheck", this, roll);
+
+    return roll;
   }
 
   /* -------------------------------------------- */
