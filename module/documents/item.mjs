@@ -1741,6 +1741,18 @@ export default class Item5e extends Item {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  getEmbeddedDocument(embeddedName, id, options) {
+    if ( embeddedName !== "Advancement" ) return super.getEmbeddedDocument(embeddedName, id, options);
+    const advancement = this.advancement.byId[id];
+    if ( options?.strict && (advancement === undefined) ) {
+      throw new Error(`The key ${id} does not exist in the ${embeddedName} Collection`);
+    }
+    return advancement;
+  }
+
+  /* -------------------------------------------- */
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
