@@ -47,7 +47,7 @@ export class ItemGrantAdvancement extends Advancement {
     else {
       return Object.keys(this.data.value.added).map(id => {
         const item = this.actor.items.get(id);
-        return item?.toAnchor({classes: ["content-link", "actor-item-link"]}).outerHTML || "";
+        return item?.toAnchor({classes: ["content-link"]}).outerHTML ?? "";
       }).join("");
     }
   }
