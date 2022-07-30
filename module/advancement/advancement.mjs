@@ -116,11 +116,21 @@ export default class Advancement {
   /* -------------------------------------------- */
 
   /**
-   * Unique identifier for this advancement.
+   * Unique identifier for this advancement within its item.
    * @type {string}
    */
   get id() {
     return this.data._id;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Globally unique identifier for this advancement.
+   * @type {string}
+   */
+  get uuid() {
+    return `${this.item.uuid}.Advancement.${this.id}`;
   }
 
   /* -------------------------------------------- */
