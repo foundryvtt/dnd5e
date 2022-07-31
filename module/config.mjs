@@ -959,58 +959,71 @@ DND5E.spellUpcastModes = ["always", "pact", "prepared"];
 /* -------------------------------------------- */
 
 /**
- * Configuration data for different types of spellcasting progression.
+ * Configuration data for different types of spellcasting supported.
  *
- * @typedef {object} SpellProgressionConfiguration
- * @property {string} label       Localized label.
- * @property {string} [type]      How progression is calculated as defined in `DND5E.spellProgressionTypes`.
- * @property {number} [divisor]   Amount class level is divided by for leveled progression.
- * @property {boolean} [roundUp]  Should fractional values should be rounded up by default?
+ * @typedef {object} SpellcastingTypeConfiguration
+ * @property {string} label                                                        Localized label.
+ * @property {Object<string, SpellcastingProgressionConfiguration>} [progression]  Any progression modes for this type.
  */
 
 /**
- * Ways in which a class can contribute to spellcasting levels.
- * @enum {SpellProgressionConfiguration}
+ * Configuration data for a spellcasting progression mode.
+ *
+ * @typedef {object} SpellcastingProgressionConfiguration
+ * @property {string} label             Localized label.
+ * @property {number} [divisor=1]       Value by which the class levels are divided to determine spellcasting level.
+ * @property {boolean} [roundUp=false]  Should fractional values should be rounded up by default?
  */
-DND5E.spellProgression = {
-  none: {
-    label: "DND5E.SpellNone"
-  },
-  full: {
-    label: "DND5E.SpellProgFull",
-    type: "leveled",
-    divisor: 1
-  },
-  half: {
-    label: "DND5E.SpellProgHalf",
-    type: "leveled",
-    divisor: 2
-  },
-  third: {
-    label: "DND5E.SpellProgThird",
-    type: "leveled",
-    divisor: 3
+
+/**
+ * Different spellcasting types and their progression.
+ * @type {SpellcastingTypeConfiguration}
+ */
+DND5E.spellcastingTypes = {
+  leveled: {
+    label: "DND5E.SpellProgLeveled",
+    progression: {
+      full: {
+        label: "DND5E.SpellProgFull",
+        divisor: 1
+      },
+      half: {
+        label: "DND5E.SpellProgHalf",
+        divisor: 2
+      },
+      third: {
+        label: "DND5E.SpellProgThird",
+        divisor: 3
+      },
+      artificer: {
+        label: "DND5E.SpellProgArt",
+        divisor: 2,
+        roundUp: true
+      }
+    }
   },
   pact: {
-    label: "DND5E.SpellProgPact",
-    type: "pact"
-  },
-  artificer: {
-    label: "DND5E.SpellProgArt",
-    type: "leveled",
-    divisor: 2,
-    roundUp: true
+    label: "DND5E.SpellProgPact"
   }
 };
-preLocalize("spellProgression", { key: "label" });
+preLocalize("spellcastingTypes", { key: "label", sort: true });
+preLocalize("spellcastingTypes.leveled.progression", { key: "label" });
 
 /* -------------------------------------------- */
 
 /**
- * Spell progression categories that can be used within `DND5E.spellProgression`.
- * @type {string[]}
+ * Ways in which a class can contribute to spellcasting levels.
+ * @enum {string}
  */
-DND5E.spellProgressionTypes = ["leveled", "pact"];
+DND5E.spellProgression = {
+  none: "DND5E.SpellNone",
+  full: "DND5E.SpellProgFull",
+  half: "DND5E.SpellProgHalf",
+  third: "DND5E.SpellProgThird",
+  pact: "DND5E.SpellProgPact",
+  artificer: "DND5E.SpellProgArt"
+};
+preLocalize("spellProgression", { key: "label" });
 
 /* -------------------------------------------- */
 

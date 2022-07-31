@@ -255,10 +255,17 @@ export default class Item5e extends Item {
     const spellcasting = this.system.spellcasting;
     if ( !spellcasting ) return spellcasting;
     const isSubclass = this.type === "subclass";
-    const classSpellcasting = isSubclass ? this.class?.system.spellcasting : spellcasting;
-    const subclassSpellcasting = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
-    if ( subclassSpellcasting && subclassSpellcasting.progression !== "none" ) return subclassSpellcasting;
-    return classSpellcasting;
+    const classSC = isSubclass ? this.class?.system.spellcasting : spellcasting;
+    const subclassSC = isSubclass ? spellcasting : this.subclass?.system.spellcasting;
+    const finalSC = ( subclassSC && (subclassSC.progression !== "none") ) ? subclassSC : classSC;
+
+    // Temp method for determining spellcasting type until this data is available directly using advancement
+    if ( CONFIG.DND5E.spellcastingTypes[finalSC.progression] ) finalSC.type = finalSC.progression;
+    else finalSC.type = Object.entries(CONFIG.DND5E.spellcastingTypes).find(([type, data]) => {
+      return !!data.progression?.[finalSC.progression];
+    })?.[0];
+
+    return finalSC;
   }
 
   /* -------------------------------------------- */
