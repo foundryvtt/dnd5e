@@ -45,6 +45,40 @@ export default class DamageRoll extends Roll {
   configureDamage() {
     let flatBonus = 0;
     for ( let [i, term] of this.terms.entries() ) {
+      const nextTerm = this.terms[i + 1];
+      const prevTerm = this.terms[i - 1];
+
+      // Merge parenthetical terms that follow string terms to build a dice term (to allow criticals)
+      if ( (term instanceof ParentheticalTerm) && (prevTerm instanceof StringTerm)
+        && prevTerm.term.match(/^[0-9]*d$/)) {
+        if ( term.isDeterministic ) {
+          let newFormula = `${prevTerm.term}${term.evaluate().total}`;
+          let deleteCount = 2;
+
+          // Merge in any roll modifiers
+          if ( nextTerm instanceof StringTerm ) {
+            newFormula += nextTerm.term;
+            deleteCount += 1;
+          }
+
+          const newTerm = (new Roll(newFormula)).terms[0];
+          this.terms.splice(i - 1, deleteCount, newTerm);
+          term = newTerm;
+        }
+      }
+
+      // Merge any parenthetical terms followed by string terms
+      else if ( (term instanceof ParentheticalTerm) && (nextTerm instanceof StringTerm)
+        && nextTerm.term.match(/^d[0-9]*$/)) {
+        if ( term.isDeterministic ) {
+          const newFormula = `${term.evaluate().total}${nextTerm.term}`;
+          const newTerm = (new Roll(newFormula)).terms[0];
+          this.terms.splice(i, 2, newTerm);
+          term = newTerm;
+        } else if ( this.isCritical ) {
+          term.term = `${this.options.criticalMultiplier ?? 2} * (${term.term})`;
+        }
+      }
 
       // Multiply dice terms
       if ( term instanceof DiceTerm ) {
