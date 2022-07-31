@@ -721,8 +721,9 @@ export default class Item5e extends Item {
     }
 
     // Handle spell upcasting
-    if ( isSpell && config.consumeSpellSlot ) {
-      const upcastLevel = config.consumeSpellLevel === "pact" ? as.spells.pact.level : config.consumeSpellLevel;
+    if ( isSpell && (config.consumeSpellSlot || config.consumeSpellLevel) ) {
+      const upcastLevel = config.consumeSpellLevel === "pact" ? as.spells.pact.level
+        : parseInt(config.consumeSpellLevel);
       if ( upcastLevel && (upcastLevel !== is.level) ) {
         item = item.clone({"system.level": upcastLevel}, {keepId: true});
         item.prepareData();
@@ -798,7 +799,9 @@ export default class Item5e extends Item {
    * @returns {object|boolean}              A set of data changes to apply when the item is used, or false.
    * @protected
    */
-  _getUsageUpdates({consumeQuantity, consumeRecharge, consumeResource, consumeSpellLevel, consumeUsage}) {
+  _getUsageUpdates({
+    consumeQuantity, consumeRecharge, consumeResource, consumeSpellSlot,
+    consumeSpellLevel, consumeUsage}) {
     const actorUpdates = {};
     const itemUpdates = {};
     const resourceUpdates = [];
@@ -820,7 +823,7 @@ export default class Item5e extends Item {
     }
 
     // Consume Spell Slots
-    if ( consumeSpellLevel ) {
+    if ( consumeSpellSlot && consumeSpellLevel ) {
       if ( Number.isNumeric(consumeSpellLevel) ) consumeSpellLevel = `spell${consumeSpellLevel}`;
       const level = this.actor?.system.spells[consumeSpellLevel];
       const spells = Number(level?.value ?? 0);
