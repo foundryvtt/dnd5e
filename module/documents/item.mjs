@@ -669,18 +669,21 @@ export default class Item5e extends Item {
   /**
    * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
    * @param {ItemRollOptions} [options]           Options used for configuring item rolls.
+   * @param {ItemRollConfiguration} [config]      Initial configuration data for the roll.
    * @returns {Promise<ChatMessage|object|void>}  Chat message if options.createMessage is true, message data if it is
    *                                              false, and nothing if the roll wasn't performed.
    */
-  async roll(options={}) {
+  async roll(options={}, config={}) {
     let item = this;
     const is = item.system;
     const as = item.actor.system;
 
     // Ensure the options object is ready
-    options.configureDialog ??= true;
-    options.createMessage ??= true;
-    options.flags ??= {};
+    options = foundry.utils.mergeObject({
+      configureDialog: true,
+      createMessage: true,
+      flags: {}
+    }, options);
 
     // Reference aspects of the item data necessary for usage
     const resource = is.consume || {};        // Resource consumption
@@ -688,7 +691,7 @@ export default class Item5e extends Item {
     const requireSpellSlot = isSpell && (is.level > 0) && CONFIG.DND5E.spellUpcastModes.includes(is.preparation.mode);
 
     // Define follow-up actions resulting from the item usage
-    const config = {
+    config = foundry.utils.mergeObject({
       createMeasuredTemplate: item.hasAreaTarget,
       consumeQuantity: is.uses?.autoDestroy ?? false,
       consumeRecharge: !!is.recharge?.value,
@@ -696,11 +699,11 @@ export default class Item5e extends Item {
       consumeSpellLevel: requireSpellSlot ? is.preparation.mode === "pact" ? "pact" : is.level : null,
       consumeSpellSlot: requireSpellSlot,
       consumeUsage: !!is.uses?.per
-    };
+    }, config);
 
     // Display a configuration dialog to customize the usage
-    config.needsConfiguration = config.createMeasuredTemplate || config.consumeRecharge
-      || config.consumeResource || config.consumeSpellSlot || config.consumeUsage;
+    if ( config.needsConfiguration === undefined ) config.needsConfiguration = config.createMeasuredTemplate
+      || config.consumeRecharge || config.consumeResource || config.consumeSpellSlot || config.consumeUsage;
 
     /**
      * A hook event that fires before an item roll is configured.
