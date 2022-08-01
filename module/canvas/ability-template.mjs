@@ -6,7 +6,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
   /**
    * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
    * @param {Item5e} item               The Item object for which to construct the template
-   * @returns {AbilityTemplate|null}     The template object, or null if the item does not produce a template
+   * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
    */
   static fromItem(item) {
     const target = item.system.target || {};
@@ -21,7 +21,8 @@ export default class AbilityTemplate extends MeasuredTemplate {
       direction: 0,
       x: 0,
       y: 0,
-      fillColor: game.user.color
+      fillColor: game.user.color,
+      flags: { dnd5e: { origin: item.uuid } }
     };
 
     // Additional type-specific data
