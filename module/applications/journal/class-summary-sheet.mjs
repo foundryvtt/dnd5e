@@ -4,6 +4,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.classes.push("class-summary");
+    options.dragDrop = [{dropSelector: ".item-drop-area"}];
     return options;
   }
 
@@ -242,7 +243,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
    */
   _makeTableNode(table, level) {
     return {
-      text: game.i18n.format("DND5E.Journal.ClassSummary.TableTOC", { caption: table.caption.innerText }),
+      text: game.i18n.format("JOURNALENTRYPAGE.DND5E.TableTOC", { caption: table.caption.innerText }),
       level,
       slug: table.id || JournalEntryPage.implementation.slugifyHeading(table.caption),
       element: table,
@@ -255,8 +256,19 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  _updateObject(event, formData) {
-    
+  async _onDrop(event) {
+    let data;
+    try { data = JSON.parse(event.dataTransfer.getData("text/plain")); }
+    catch(err) { return false; }
+
+    if ( data.type !== "Item" ) return false;
+    const item = await Item.implementation.fromDropData(data);
+    if ( item.type !== "class" ) {
+      return false;
+      // TODO: Display UI warning here
+    }
+
+    this.document.update({"system.itemUUID": item.uuid});
   }
 
 }
