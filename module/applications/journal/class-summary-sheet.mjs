@@ -1,3 +1,8 @@
+import JournalEditor from "./journal-editor.mjs";
+
+/**
+ * Journal entry page that displays an automatically generated summary of a class along with additional description.
+ */
 export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
 
   /** @inheritdoc */
@@ -37,6 +42,12 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     data.enriched = await this._getDescriptions(data.document);
     data.table = await this._getTable(linked);
     data.optionalTable = await this._getOptionalTable(linked);
+
+    data.title = {
+      level1: data.data.title.level,
+      level2: data.data.title.level + 1,
+      level3: data.data.title.level + 2
+    };
 
     return data;
   }
@@ -114,7 +125,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         {
           class: "features",
           content: [...data.items.map(uuid => dnd5e.utils.linkForUuid(uuid)), ...data.text].join(", ")
-        },
+        }
       ];
       scaleValues.forEach(s => cells.push({ class: "scale", content: s.formatValue(level) }));
       rows.push(cells);
@@ -252,7 +263,30 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Editing                                     */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html[0].querySelectorAll(".launch-text-editor").forEach(e => {
+      e.addEventListener("click", this._onLaunchTextEditor.bind(this));
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle launching the individual text editing window.
+   * @param {Event} event  The triggering click event.
+   */
+  _onLaunchTextEditor(event) {
+    event.preventDefault();
+    const textKeyPath = event.target.name;
+    const editor = new JournalEditor(this.document, { textKeyPath });
+    editor.render(true);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritdoc */

@@ -1,6 +1,6 @@
 {{#if data.title.show}}
 <header>
-  <h{{data.title.level}}>{{data.name}}</h{{data.title.level}}>
+  <h{{title.level1}}>{{data.name}}</h{{title.level1}}>
 {{/if}}
 
 {{#if linked.document}}
@@ -8,13 +8,13 @@
   <section>
     {{{enriched.primary}}}
 
-    <h2>{{localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesHeader"}}</h2>
+    <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesHeader"}}</h{{title.level2}}>
     <p>
       {{localize "JOURNALENTRYPAGE.DND5E.Class.FeaturesDescription" name=linked.name lowercaseName=linked.lowercaseName}}
     </p>
 
     {{#if (or advancement.hp enriched.additionalHitPoints)}}
-      <h3>{{localize "JOURNALENTRYPAGE.DND5E.Class.HitPointsHeader"}}</h3>
+      <h{{title.level3}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.HitPointsHeader"}}</h{{title.level3}}>
       <p>
         {{{localize "JOURNALENTRYPAGE.DND5E.Class.HitDice" dice=advancement.hp.hitDice class=linked.lowercaseName}}}<br>
         {{{localize "JOURNALENTRYPAGE.DND5E.Class.HitPointsLevel1" max=advancement.hp.max}}}<br>
@@ -25,12 +25,12 @@
     {{/if}}
 
     {{#if (or advancement.traits enriched.additionalTraits)}}
-      <h3>{{localize "JOURNALENTRYPAGE.DND5E.Class.TraitsHeader"}}</h3>
+      <h{{title.level3}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.TraitsHeader"}}</h{{title.level3}}>
       {{{enriched.additionalTraits}}}
     {{/if}}
 
     {{#if (or advancement.equipment enriched.additionalEquipment)}}
-      <h3>{{localize "JOURNALENTRYPAGE.DND5E.Class.EquipmentHeader"}}</h3>
+      <h{{title.level3}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.EquipmentHeader"}}</h{{title.level3}}>
       {{{enriched.additionalEquipment}}}
     {{/if}}
 
@@ -38,12 +38,12 @@
       caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name)}}
 
     {{#if advancement.optionalFeatures}}
-      <h2>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption"}}</h2>
+      <h{{title.level2}}>{{localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption"}}</h{{title.level2}}>
       Table Here!
     {{/if}}
 
     {{#if advancement.subclass}}
-      <h3>{{advancement.subclass.name}}</h3>
+      <h{{title.level3}}>{{advancement.subclass.name}}</h{{title.level3}}>
       {{{enriched.subclass}}}
       List of subclasses here
     {{/if}}
