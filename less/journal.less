@@ -4,12 +4,19 @@
   }
 }
 
-.classSummary table {
-  th[scope="col"] {
-    padding-inline: 0.25em;
+.classSummary {
+  h4 {
+    border-block-end: 1px solid var(--color-underline-header);
+    font-weight: bold;
   }
 
-  td:is(.level, .prof, .scale) {
-    text-align: center;
+  table {
+    th[scope="col"] {
+      padding-inline: 0.25em;
+    }
+
+    td:is(.level, .prof, .scale) {
+      text-align: center;
+    }
   }
 }

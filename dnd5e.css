@@ -1769,6 +1769,10 @@
 .journal-editor .tox-tinymce {
   height: 100% !important;
 }
+.classSummary h4 {
+  border-block-end: 1px solid var(--color-underline-header);
+  font-weight: bold;
+}
 .classSummary table th[scope="col"] {
   padding-inline: 0.25em;
 }

@@ -42,6 +42,11 @@
       Table Here!
     {{/if}}
 
+    {{#each features}}
+      <h{{../title.level4}}>{{this.name}}</h{{../title.level4}}>
+      {{{this.description}}}
+    {{/each}}
+
     {{#if advancement.subclass}}
       <h{{title.level3}}>{{advancement.subclass.name}}</h{{title.level3}}>
       {{{enriched.subclass}}}

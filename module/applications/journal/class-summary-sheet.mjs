@@ -8,7 +8,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
   /** @inheritdoc */
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes.push("class-summary");
+    options.classes.push("classSummary");
     options.dragDrop = [{dropSelector: ".item-drop-area"}];
     return options;
   }
@@ -42,11 +42,13 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     data.enriched = await this._getDescriptions(data.document);
     data.table = await this._getTable(linked);
     data.optionalTable = await this._getOptionalTable(linked);
+    data.features = await this._getFeatures(linked);
 
     data.title = {
       level1: data.data.title.level,
       level2: data.data.title.level + 1,
-      level3: data.data.title.level + 2
+      level3: data.data.title.level + 2,
+      level4: data.data.title.level + 3
     };
 
     return data;
@@ -114,6 +116,8 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
     ];
     if ( scaleValues.length ) cols.push({ class: "scale", span: scaleValues.length });
 
+    const makeLink = item => TextEditor._createContentLink(["", "UUID", item.uuid]).outerHTML;
+
     const rows = [];
     for ( let [level, data] of Object.entries(this.document.system.primaryTable) ) {
       level = parseInt(level);
@@ -124,7 +128,7 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
         { class: "prof", content: `+${Math.floor((level + 7) / 4)}` },
         {
           class: "features",
-          content: [...data.items.map(uuid => dnd5e.utils.linkForUuid(uuid)), ...data.text].join(", ")
+          content: [...data.items.map(makeLink), ...data.text].join(", ")
         }
       ];
       scaleValues.forEach(s => cells.push({ class: "scale", content: s.formatValue(level) }));
@@ -143,6 +147,27 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
    */
   async _getOptionalTable(item) {
     return {};
+  }
+
+  /* -------------------------------------------- */
+
+  async _getFeatures(item) {
+    const prepareFeature = async document => {
+      return {
+        document,
+        name: document.name,
+        description: await TextEditor.enrichHTML(document.system.description.value, {
+          relativeTo: this.object, secrets: false, async: true
+        })
+      };
+    };
+
+    let features = [];
+    for ( const data of Object.values(this.document.system.primaryTable) ) {
+      features.push(...data.items.map(prepareFeature));
+    }
+    features = await Promise.all(features);
+    return features;
   }
 
   /* -------------------------------------------- */
@@ -254,9 +279,9 @@ export default class JournalClassSummary5ePageSheet extends JournalPageSheet {
    */
   _makeTableNode(table, level) {
     return {
-      text: game.i18n.format("JOURNALENTRYPAGE.DND5E.TableTOC", { caption: table.caption.innerText }),
+      text: game.i18n.format("JOURNALENTRYPAGE.DND5E.TableTOC", { caption: table.caption?.innerText ?? "" }),
       level,
-      slug: table.id || JournalEntryPage.implementation.slugifyHeading(table.caption),
+      slug: table.id || JournalEntryPage.implementation.slugifyHeading(table.caption ?? ""),
       element: table,
       children: []
     };

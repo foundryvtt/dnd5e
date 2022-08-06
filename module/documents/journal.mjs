@@ -10,7 +10,7 @@ export default class JournalEntryPage5e extends JournalEntryPage {
     this.system.linkedItem = await fromUuid(this.system.itemUUID);
     if ( !this.system.linkedItem ) return;
 
-    this._prepareFeatures();
+    await this._prepareFeatures();
   }
 
   /* -------------------------------------------- */
@@ -18,7 +18,7 @@ export default class JournalEntryPage5e extends JournalEntryPage {
   /**
    * Prepare features for the advancement & optional features tables.
    */
-  _prepareFeatures() {
+  async _prepareFeatures() {
     const primary = {};
     const optional = {};
     for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
@@ -30,9 +30,14 @@ export default class JournalEntryPage5e extends JournalEntryPage {
       switch ( advancement.constructor.typeName ) {
         case "ItemGrant":
           const target = advancement.data.configuration.optional ? optional : primary;
-          target[advancement.levels[0]].items.push(...advancement.data.configuration.items);
+          target[advancement.levels[0]].items.push(...advancement.data.configuration.items.map(fromUuid));
           break;
       }
+    }
+
+    for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+      primary[level].items = await Promise.all(primary[level].items);
+      optional[level].items = await Promise.all(optional[level].items);
     }
 
     this.system.primaryTable = primary;
